@@ -69,11 +69,11 @@ function teaInvCBSuccess(invData) {
     nullCaseHelper('Name', '#TITLE');
     nullCaseHelper('State', "#FIELD_2");
     nullCaseHelper('Region', '#FIELD_3');
-    nullCaseHelper('District', 'FIELD_4');
+    nullCaseHelper('District', '#FIELD_4');
     nullCaseHelper('Neighborhood', '#FIELD_5');
-    nullCaseHelper('Date_Opened', 'FIELD_13');
-    nullCaseHelper('Customers', 'FIELD_7');
-    nullCaseHelper('Visits', 'FIELD_18');
+    nullCaseHelper('Date_Opened', '#FIELD_13');
+    nullCaseHelper('Customers', '#FIELD_7');
+    nullCaseHelper('Visits', '#FIELD_18');
     // The latitude and longitude are stored in a single column as GeoPoint.
     // We need to extract the lat/lon from the GeoPoint.
     nullCaseHelper('Location.latitude', '#FIELD_8');

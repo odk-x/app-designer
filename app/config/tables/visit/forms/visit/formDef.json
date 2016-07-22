@@ -36,13 +36,19 @@
         "_row_num": 7
       },
       {
+        "type": "assign",
+        "name": "date",
+        "calculation": "(data('date') !== null && data('date') !== undefined) ? data('date') : new Date()",
+        "_row_num": 8
+      },
+      {
         "type": "datetime",
         "name": "date",
         "display": {
           "text": "Select the date and time of your visit."
         },
         "required": true,
-        "_row_num": 8
+        "_row_num": 9
       },
       {
         "type": "async_assign_max",
@@ -51,29 +57,29 @@
         "display": {
           "debug": false
         },
-        "_row_num": 9
+        "_row_num": 10
       },
       {
         "type": "async_assign_single_string",
         "name": "plant_type_query_text",
         "values_list": "plant_type_query",
-        "_row_num": 10
+        "_row_num": 11
       },
       {
         "clause": "end screen",
-        "_row_num": 11
+        "_row_num": 12
       },
       {
         "type": "assign",
         "name": "max_height_disp",
         "calculation": "data('max_height')*1.2",
-        "_row_num": 12
+        "_row_num": 13
       },
       {
         "type": "assign",
         "name": "plant_type",
         "calculation": "data('plant_type_query_text')",
-        "_row_num": 13
+        "_row_num": 14
       },
       {
         "type": "select_one",
@@ -82,21 +88,22 @@
         "display": {
           "text": "What type of maize is grown at this plot?"
         },
-        "_row_num": 14
+        "_row_num": 15
       },
       {
         "type": "decimal",
         "name": "plant_height",
         "display": {
-          "text": "What is the height of the crop in cm?"
+          "text": "What is the height of the crop in cm?",
+          "image": "media/measure.jpg"
         },
         "required": true,
-        "_row_num": 15
+        "_row_num": 16
       },
       {
         "clause": "if // check_outlier",
         "condition": "! calculates.below_max_height()",
-        "_row_num": 16
+        "_row_num": 17
       },
       {
         "type": "acknowledge",
@@ -106,28 +113,28 @@
           "hint": "The value you entered is outside of the current recorded range 0 thru {{data.max_height_disp}}"
         },
         "constraint": "data('ack_ok') || calculates.below_max_height()",
-        "_row_num": 17
+        "_row_num": 18
       },
       {
         "clause": "if // branch_fail",
         "condition": "! data('ack_ok')",
-        "_row_num": 18
-      },
-      {
-        "clause": "goto survey_screen",
         "_row_num": 19
       },
       {
-        "clause": "end if // branch_fail",
+        "clause": "goto survey_screen",
         "_row_num": 20
       },
       {
-        "clause": "end if // check_outlier",
+        "clause": "end if // branch_fail",
         "_row_num": 21
       },
       {
+        "clause": "end if // check_outlier",
+        "_row_num": 22
+      },
+      {
         "clause": "begin screen",
-        "_row_num": 23
+        "_row_num": 24
       },
       {
         "type": "select_one_grid",
@@ -136,59 +143,59 @@
         "display": {
           "text": "Select the image that best indicates the health of the plants at this plot."
         },
-        "_row_num": 24
+        "_row_num": 25
       },
       {
         "clause": "if",
         "condition": "selected(data('plant_health'), 'bad')",
-        "_row_num": 25
+        "_row_num": 26
       },
       {
         "type": "note",
         "display": {
           "text": "Bad Selected"
         },
-        "_row_num": 26
+        "_row_num": 27
       },
       {
         "clause": "end if",
-        "_row_num": 27
+        "_row_num": 28
       },
       {
         "clause": "if",
         "condition": "selected(data('plant_health'), 'fair')",
-        "_row_num": 28
+        "_row_num": 29
       },
       {
         "type": "note",
         "display": {
           "text": "Fair Selected"
         },
-        "_row_num": 29
+        "_row_num": 30
       },
       {
         "clause": "end if",
-        "_row_num": 30
+        "_row_num": 31
       },
       {
         "clause": "if",
         "condition": "selected(data('plant_health'), 'good')",
-        "_row_num": 31
+        "_row_num": 32
       },
       {
         "type": "note",
         "display": {
           "text": "Good Selected"
         },
-        "_row_num": 32
-      },
-      {
-        "clause": "end if",
         "_row_num": 33
       },
       {
-        "clause": "end screen",
+        "clause": "end if",
         "_row_num": 34
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 35
       },
       {
         "type": "image",
@@ -196,11 +203,11 @@
         "display": {
           "text": "Take a picture of the plant."
         },
-        "_row_num": 35
+        "_row_num": 36
       },
       {
         "clause": "begin screen",
-        "_row_num": 36
+        "_row_num": 37
       },
       {
         "type": "select_multiple_grid",
@@ -209,79 +216,79 @@
         "display": {
           "text": "Which pests have you found at this plot?"
         },
-        "_row_num": 37
+        "_row_num": 38
       },
       {
         "clause": "if",
         "condition": "selected(data('pests'), 'earworm')",
-        "_row_num": 38
+        "_row_num": 39
       },
       {
         "type": "note",
         "display": {
           "text": "Earworm Selected"
         },
-        "_row_num": 39
+        "_row_num": 40
       },
       {
         "clause": "end if",
-        "_row_num": 40
+        "_row_num": 41
       },
       {
         "clause": "if",
         "condition": "selected(data('pests'), 'stink_bug')",
-        "_row_num": 41
+        "_row_num": 42
       },
       {
         "type": "note",
         "display": {
           "text": "Stink Bug Selected"
         },
-        "_row_num": 42
+        "_row_num": 43
       },
       {
         "clause": "end if",
-        "_row_num": 43
+        "_row_num": 44
       },
       {
         "clause": "if",
         "condition": "selected(data('pests'), 'cutworm')",
-        "_row_num": 44
+        "_row_num": 45
       },
       {
         "type": "note",
         "display": {
           "text": "Cutworm Selected"
         },
-        "_row_num": 45
+        "_row_num": 46
       },
       {
         "clause": "end if",
-        "_row_num": 46
+        "_row_num": 47
       },
       {
         "clause": "if",
         "condition": "selected(data('pests'), 'beetle')",
-        "_row_num": 47
+        "_row_num": 48
       },
       {
         "type": "note",
         "display": {
           "text": "Beetle Selected"
         },
-        "_row_num": 48
-      },
-      {
-        "clause": "end if",
         "_row_num": 49
       },
       {
-        "clause": "end screen",
+        "clause": "end if",
         "_row_num": 50
       },
       {
+        "clause": "end screen",
+        "_row_num": 51
+      },
+      {
         "clause": "begin screen",
-        "_row_num": 52
+        "_row_num": 53
       },
       {
         "type": "select_one",
@@ -290,7 +297,7 @@
         "display": {
           "text": "What is the texture of the soil?"
         },
-        "_row_num": 53
+        "_row_num": 54
       },
       {
         "type": "async_assign_max",
@@ -299,17 +306,17 @@
         "display": {
           "debug": false
         },
-        "_row_num": 54
+        "_row_num": 55
       },
       {
         "clause": "end screen",
-        "_row_num": 55
+        "_row_num": 56
       },
       {
         "type": "assign",
         "name": "max_yield_disp",
         "calculation": "data('max_yield')*1.2",
-        "_row_num": 56
+        "_row_num": 57
       },
       {
         "type": "integer",
@@ -317,39 +324,39 @@
         "display": {
           "text": "What is the current crop yield in kg per hectare?"
         },
-        "_row_num": 57
+        "_row_num": 58
       },
       {
         "clause": "if // check_outlier",
         "condition": "! calculates.below_max_yield()",
-        "_row_num": 58
-      },
-      {
-        "type": "acknowledge",
-        "name": "ack_ok",
-        "display": {
-          "text": "The height you have entered is an outlier.  Are you certain of this measurement?",
-          "hint": "The value you entered is outside of the current recorded range 0 thru {{data.max_yield_disp}}"
-        },
-        "constraint": "data('ack_ok') || calculates.below_max_yield()",
         "_row_num": 59
       },
       {
-        "clause": "if // branch_fail",
-        "condition": "! data('ack_ok')",
+        "type": "acknowledge",
+        "name": "ack_ok_2",
+        "display": {
+          "text": "The yield you have entered is an outlier.  Are you certain of this measurement?",
+          "hint": "The value you entered is outside of the current recorded range 0 thru {{data.max_yield_disp}}"
+        },
+        "constraint": "data('ack_ok_2') || calculates.below_max_yield()",
         "_row_num": 60
       },
       {
-        "clause": "goto survey_screen",
+        "clause": "if // branch_fail",
+        "condition": "! data('ack_ok_2')",
         "_row_num": 61
       },
       {
-        "clause": "end if // branch_fail",
+        "clause": "goto survey_screen",
         "_row_num": 62
       },
       {
-        "clause": "end if // check_outlier",
+        "clause": "end if // branch_fail",
         "_row_num": 63
+      },
+      {
+        "clause": "end if // check_outlier",
+        "_row_num": 64
       },
       {
         "type": "text",
@@ -357,7 +364,7 @@
         "display": {
           "text": "Enter in any other observations"
         },
-        "_row_num": 64
+        "_row_num": 65
       }
     ],
     "choices": [
@@ -567,34 +574,40 @@
         "_row_num": 2
       },
       {
-        "name": "max_height_disp",
-        "type": "number",
+        "name": "ack_ok_2",
+        "type": "boolean",
         "isSessionVariable": true,
         "_row_num": 3
       },
       {
-        "name": "max_yield_disp",
+        "name": "max_height_disp",
         "type": "number",
         "isSessionVariable": true,
         "_row_num": 4
       },
       {
-        "name": "max_height",
+        "name": "max_yield_disp",
         "type": "number",
         "isSessionVariable": true,
         "_row_num": 5
       },
       {
-        "name": "max_yield",
+        "name": "max_height",
         "type": "number",
         "isSessionVariable": true,
         "_row_num": 6
       },
       {
+        "name": "max_yield",
+        "type": "number",
+        "isSessionVariable": true,
+        "_row_num": 7
+      },
+      {
         "name": "plant_type_query_text",
         "type": "string",
         "isSessionVariable": true,
-        "_row_num": 7
+        "_row_num": 8
       }
     ],
     "settings": [
@@ -891,11 +904,7 @@
         "type": "boolean",
         "_defn": [
           {
-            "_row_num": 17,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 59,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
@@ -906,15 +915,30 @@
         "isSessionVariable": true,
         "elementKey": "ack_ok"
       },
-      "max_height_disp": {
-        "type": "number",
+      "ack_ok_2": {
+        "type": "boolean",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 60,
             "section_name": "survey"
           },
           {
             "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "ack_ok_2"
+      },
+      "max_height_disp": {
+        "type": "number",
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -925,11 +949,11 @@
         "type": "number",
         "_defn": [
           {
-            "_row_num": 56,
+            "_row_num": 57,
             "section_name": "survey"
           },
           {
-            "_row_num": 4,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -942,7 +966,7 @@
         "valuesList": "min_max_height",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -950,7 +974,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -963,7 +987,7 @@
         "valuesList": "min_max_yield",
         "_defn": [
           {
-            "_row_num": 54,
+            "_row_num": 55,
             "section_name": "survey"
           },
           {
@@ -971,7 +995,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 6,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -984,11 +1008,11 @@
         "valuesList": "plant_type_query",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -1009,7 +1033,7 @@
       "date": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
@@ -1022,11 +1046,11 @@
         "valuesList": "maize",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
-            "_row_num": 13,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -1035,7 +1059,7 @@
       "plant_height": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 16,
             "section_name": "survey"
           }
         ],
@@ -1045,7 +1069,7 @@
       "plant_health": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 25,
             "section_name": "survey"
           }
         ],
@@ -1056,7 +1080,7 @@
       "plant_picture": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -1080,7 +1104,7 @@
       "pests": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -1095,7 +1119,7 @@
       "soil": {
         "_defn": [
           {
-            "_row_num": 53,
+            "_row_num": 54,
             "section_name": "survey"
           }
         ],
@@ -1106,7 +1130,7 @@
       "crop_yield": {
         "_defn": [
           {
-            "_row_num": 57,
+            "_row_num": 58,
             "section_name": "survey"
           }
         ],
@@ -1116,7 +1140,7 @@
       "observations": {
         "_defn": [
           {
-            "_row_num": 64,
+            "_row_num": 65,
             "section_name": "survey"
           }
         ],
@@ -1156,8 +1180,8 @@
               "text": "Select the date and time of your visit."
             },
             "required": true,
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "prompt",
             "_type": "datetime",
             "_branch_label_enclosing_screen": "survey/_screen7",
@@ -1170,8 +1194,8 @@
             "display": {
               "debug": false
             },
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "async_assign_max",
             "_branch_label_enclosing_screen": "survey/_screen7",
@@ -1181,8 +1205,8 @@
             "type": "async_assign_single_string",
             "name": "plant_type_query_text",
             "values_list": "plant_type_query",
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "async_assign_single_string",
             "_branch_label_enclosing_screen": "survey/_screen7",
@@ -1195,25 +1219,26 @@
             "display": {
               "text": "What type of maize is grown at this plot?"
             },
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen14",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 4
           },
           {
             "type": "decimal",
             "name": "plant_height",
             "display": {
-              "text": "What is the height of the crop in cm?"
+              "text": "What is the height of the crop in cm?",
+              "image": "media/measure.jpg"
             },
             "required": true,
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen15",
+            "_branch_label_enclosing_screen": "survey/_screen16",
             "promptIdx": 5
           },
           {
@@ -1224,11 +1249,11 @@
               "hint": "The value you entered is outside of the current recorded range 0 thru {{data.max_height_disp}}"
             },
             "constraint": "data('ack_ok') || calculates.below_max_height()",
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "prompt",
             "_type": "acknowledge",
-            "_branch_label_enclosing_screen": "survey/_screen17",
+            "_branch_label_enclosing_screen": "survey/_screen18",
             "promptIdx": 6
           },
           {
@@ -1238,11 +1263,11 @@
             "display": {
               "text": "Select the image that best indicates the health of the plants at this plot."
             },
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "prompt",
             "_type": "select_one_grid",
-            "_branch_label_enclosing_screen": "survey/_screen23",
+            "_branch_label_enclosing_screen": "survey/_screen24",
             "promptIdx": 7
           },
           {
@@ -1250,11 +1275,11 @@
             "display": {
               "text": "Bad Selected"
             },
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen23",
+            "_branch_label_enclosing_screen": "survey/_screen24",
             "promptIdx": 8
           },
           {
@@ -1262,11 +1287,11 @@
             "display": {
               "text": "Fair Selected"
             },
-            "_row_num": 29,
-            "__rowNum__": 28,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen23",
+            "_branch_label_enclosing_screen": "survey/_screen24",
             "promptIdx": 9
           },
           {
@@ -1274,11 +1299,11 @@
             "display": {
               "text": "Good Selected"
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen23",
+            "_branch_label_enclosing_screen": "survey/_screen24",
             "promptIdx": 10
           },
           {
@@ -1287,11 +1312,11 @@
             "display": {
               "text": "Take a picture of the plant."
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen35",
+            "_branch_label_enclosing_screen": "survey/_screen36",
             "promptIdx": 11
           },
           {
@@ -1301,11 +1326,11 @@
             "display": {
               "text": "Which pests have you found at this plot?"
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "prompt",
             "_type": "select_multiple_grid",
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_branch_label_enclosing_screen": "survey/_screen37",
             "promptIdx": 12
           },
           {
@@ -1313,11 +1338,11 @@
             "display": {
               "text": "Earworm Selected"
             },
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 40,
+            "__rowNum__": 39,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_branch_label_enclosing_screen": "survey/_screen37",
             "promptIdx": 13
           },
           {
@@ -1325,11 +1350,11 @@
             "display": {
               "text": "Stink Bug Selected"
             },
-            "_row_num": 42,
-            "__rowNum__": 41,
+            "_row_num": 43,
+            "__rowNum__": 42,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_branch_label_enclosing_screen": "survey/_screen37",
             "promptIdx": 14
           },
           {
@@ -1337,11 +1362,11 @@
             "display": {
               "text": "Cutworm Selected"
             },
-            "_row_num": 45,
-            "__rowNum__": 44,
+            "_row_num": 46,
+            "__rowNum__": 45,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_branch_label_enclosing_screen": "survey/_screen37",
             "promptIdx": 15
           },
           {
@@ -1349,11 +1374,11 @@
             "display": {
               "text": "Beetle Selected"
             },
-            "_row_num": 48,
-            "__rowNum__": 47,
+            "_row_num": 49,
+            "__rowNum__": 48,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_branch_label_enclosing_screen": "survey/_screen37",
             "promptIdx": 16
           },
           {
@@ -1363,11 +1388,11 @@
             "display": {
               "text": "What is the texture of the soil?"
             },
-            "_row_num": 53,
-            "__rowNum__": 52,
+            "_row_num": 54,
+            "__rowNum__": 53,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen52",
+            "_branch_label_enclosing_screen": "survey/_screen53",
             "promptIdx": 17
           },
           {
@@ -1377,11 +1402,11 @@
             "display": {
               "debug": false
             },
-            "_row_num": 54,
-            "__rowNum__": 53,
+            "_row_num": 55,
+            "__rowNum__": 54,
             "_token_type": "prompt",
             "_type": "async_assign_max",
-            "_branch_label_enclosing_screen": "survey/_screen52",
+            "_branch_label_enclosing_screen": "survey/_screen53",
             "promptIdx": 18
           },
           {
@@ -1390,26 +1415,26 @@
             "display": {
               "text": "What is the current crop yield in kg per hectare?"
             },
-            "_row_num": 57,
-            "__rowNum__": 56,
+            "_row_num": 58,
+            "__rowNum__": 57,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen57",
+            "_branch_label_enclosing_screen": "survey/_screen58",
             "promptIdx": 19
           },
           {
             "type": "acknowledge",
-            "name": "ack_ok",
+            "name": "ack_ok_2",
             "display": {
-              "text": "The height you have entered is an outlier.  Are you certain of this measurement?",
+              "text": "The yield you have entered is an outlier.  Are you certain of this measurement?",
               "hint": "The value you entered is outside of the current recorded range 0 thru {{data.max_yield_disp}}"
             },
-            "constraint": "data('ack_ok') || calculates.below_max_yield()",
-            "_row_num": 59,
-            "__rowNum__": 58,
+            "constraint": "data('ack_ok_2') || calculates.below_max_yield()",
+            "_row_num": 60,
+            "__rowNum__": 59,
             "_token_type": "prompt",
             "_type": "acknowledge",
-            "_branch_label_enclosing_screen": "survey/_screen59",
+            "_branch_label_enclosing_screen": "survey/_screen60",
             "promptIdx": 20
           },
           {
@@ -1418,19 +1443,19 @@
             "display": {
               "text": "Enter in any other observations"
             },
-            "_row_num": 64,
-            "__rowNum__": 63,
+            "_row_num": 65,
+            "__rowNum__": 64,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen64",
+            "_branch_label_enclosing_screen": "survey/_screen65",
             "promptIdx": 21
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 65,
-            "_branch_label_enclosing_screen": "survey/_screen65",
+            "_row_num": 66,
+            "_branch_label_enclosing_screen": "survey/_screen66",
             "promptIdx": 22
           }
         ],
@@ -1483,19 +1508,19 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 11,
-              "__rowNum__": 10,
+              "_row_num": 12,
+              "__rowNum__": 11,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('date', (data('date') !== null && data('date') !== undefined) ? data('date') : new Date());\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
             "type": "assign",
             "name": "max_height_disp",
             "calculation": "data('max_height')*1.2",
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "assign",
             "operationIdx": 5
           },
@@ -1503,19 +1528,19 @@
             "type": "assign",
             "name": "plant_type",
             "calculation": "data('plant_type_query_text')",
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "assign",
             "operationIdx": 6
           },
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
           },
           {
-            "_row_num": 15,
+            "_row_num": 16,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
@@ -1523,22 +1548,22 @@
           {
             "clause": "if // check_outlier",
             "condition": "! calculates.below_max_height()",
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "goto_label",
             "_tag_name": "check_outlier",
-            "_branch_label": "_then16",
+            "_branch_label": "_then17",
             "operationIdx": 9
           },
           {
             "clause": "end if // check_outlier",
             "_token_type": "goto_label",
-            "_branch_label": "_else21",
-            "_row_num": 21,
+            "_branch_label": "_else22",
+            "_row_num": 22,
             "operationIdx": 10
           },
           {
-            "_row_num": 17,
+            "_row_num": 18,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 11
@@ -1546,24 +1571,24 @@
           {
             "clause": "if // branch_fail",
             "condition": "! data('ack_ok')",
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "goto_label",
             "_tag_name": "branch_fail",
-            "_branch_label": "_then18",
+            "_branch_label": "_then19",
             "operationIdx": 12
           },
           {
             "clause": "end if // branch_fail",
             "_token_type": "goto_label",
-            "_branch_label": "_else20",
-            "_row_num": 20,
+            "_branch_label": "_else21",
+            "_row_num": 21,
             "operationIdx": 13
           },
           {
             "clause": "goto survey_screen",
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "goto_label",
             "_branch_label": "survey_screen",
             "operationIdx": 14
@@ -1571,46 +1596,46 @@
           {
             "clause": "end if // branch_fail",
             "_token_type": "goto_label",
-            "_branch_label": "_endif20",
-            "_row_num": 20,
+            "_branch_label": "_endif21",
+            "_row_num": 21,
             "operationIdx": 15
           },
           {
             "clause": "end if // check_outlier",
             "_token_type": "goto_label",
-            "_branch_label": "_endif21",
-            "_row_num": 21,
+            "_branch_label": "_endif22",
+            "_row_num": 22,
             "operationIdx": 16
           },
           {
             "clause": "begin screen",
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 34,
-              "__rowNum__": 33,
+              "_row_num": 35,
+              "__rowNum__": 34,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\nif (selected(data('plant_health'), 'bad')) {\nactivePromptIndicies.push(8);\n}\nif (selected(data('plant_health'), 'fair')) {\nactivePromptIndicies.push(9);\n}\nif (selected(data('plant_health'), 'good')) {\nactivePromptIndicies.push(10);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 17
           },
           {
-            "_row_num": 35,
+            "_row_num": 36,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 18
           },
           {
             "clause": "begin screen",
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 50,
-              "__rowNum__": 49,
+              "_row_num": 51,
+              "__rowNum__": 50,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\nif (selected(data('pests'), 'earworm')) {\nactivePromptIndicies.push(13);\n}\nif (selected(data('pests'), 'stink_bug')) {\nactivePromptIndicies.push(14);\n}\nif (selected(data('pests'), 'cutworm')) {\nactivePromptIndicies.push(15);\n}\nif (selected(data('pests'), 'beetle')) {\nactivePromptIndicies.push(16);\n}\n\nreturn activePromptIndicies;\n}\n",
@@ -1618,13 +1643,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 52,
-            "__rowNum__": 51,
+            "_row_num": 53,
+            "__rowNum__": 52,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 55,
-              "__rowNum__": 54,
+              "_row_num": 56,
+              "__rowNum__": 55,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
@@ -1634,13 +1659,13 @@
             "type": "assign",
             "name": "max_yield_disp",
             "calculation": "data('max_yield')*1.2",
-            "_row_num": 56,
-            "__rowNum__": 55,
+            "_row_num": 57,
+            "__rowNum__": 56,
             "_token_type": "assign",
             "operationIdx": 21
           },
           {
-            "_row_num": 57,
+            "_row_num": 58,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 22
@@ -1648,47 +1673,47 @@
           {
             "clause": "if // check_outlier",
             "condition": "! calculates.below_max_yield()",
-            "_row_num": 58,
-            "__rowNum__": 57,
+            "_row_num": 59,
+            "__rowNum__": 58,
             "_token_type": "goto_label",
             "_tag_name": "check_outlier",
-            "_branch_label": "_then58",
+            "_branch_label": "_then59",
             "operationIdx": 23
           },
           {
             "clause": "end if // check_outlier",
             "_token_type": "goto_label",
-            "_branch_label": "_else63",
-            "_row_num": 63,
+            "_branch_label": "_else64",
+            "_row_num": 64,
             "operationIdx": 24
           },
           {
-            "_row_num": 59,
+            "_row_num": 60,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 25
           },
           {
             "clause": "if // branch_fail",
-            "condition": "! data('ack_ok')",
-            "_row_num": 60,
-            "__rowNum__": 59,
+            "condition": "! data('ack_ok_2')",
+            "_row_num": 61,
+            "__rowNum__": 60,
             "_token_type": "goto_label",
             "_tag_name": "branch_fail",
-            "_branch_label": "_then60",
+            "_branch_label": "_then61",
             "operationIdx": 26
           },
           {
             "clause": "end if // branch_fail",
             "_token_type": "goto_label",
-            "_branch_label": "_else62",
-            "_row_num": 62,
+            "_branch_label": "_else63",
+            "_row_num": 63,
             "operationIdx": 27
           },
           {
             "clause": "goto survey_screen",
-            "_row_num": 61,
-            "__rowNum__": 60,
+            "_row_num": 62,
+            "__rowNum__": 61,
             "_token_type": "goto_label",
             "_branch_label": "survey_screen",
             "operationIdx": 28
@@ -1696,19 +1721,19 @@
           {
             "clause": "end if // branch_fail",
             "_token_type": "goto_label",
-            "_branch_label": "_endif62",
-            "_row_num": 62,
+            "_branch_label": "_endif63",
+            "_row_num": 63,
             "operationIdx": 29
           },
           {
             "clause": "end if // check_outlier",
             "_token_type": "goto_label",
-            "_branch_label": "_endif63",
-            "_row_num": 63,
+            "_branch_label": "_endif64",
+            "_row_num": 64,
             "operationIdx": 30
           },
           {
-            "_row_num": 64,
+            "_row_num": 65,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 31
@@ -1716,11 +1741,11 @@
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 65,
+            "_row_num": 66,
             "operationIdx": 32
           },
           {
-            "_row_num": 65,
+            "_row_num": 66,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
@@ -1731,7 +1756,7 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 65,
+            "_row_num": 66,
             "operationIdx": 34
           }
         ],
@@ -1739,30 +1764,30 @@
           "survey_screen": 3,
           "_screen6": 3,
           "_screen7": 4,
-          "_screen14": 7,
-          "_screen15": 8,
-          "_then16": 11,
-          "_screen17": 11,
-          "_then18": 14,
-          "_else20": 16,
-          "_endif20": 16,
-          "_else21": 17,
-          "_endif21": 17,
-          "_screen23": 17,
-          "_screen35": 18,
-          "_screen36": 19,
-          "_screen52": 20,
-          "_screen57": 22,
-          "_then58": 25,
-          "_screen59": 25,
-          "_then60": 28,
-          "_else62": 30,
-          "_endif62": 30,
-          "_else63": 31,
-          "_endif63": 31,
-          "_screen64": 31,
+          "_screen15": 7,
+          "_screen16": 8,
+          "_then17": 11,
+          "_screen18": 11,
+          "_then19": 14,
+          "_else21": 16,
+          "_endif21": 16,
+          "_else22": 17,
+          "_endif22": 17,
+          "_screen24": 17,
+          "_screen36": 18,
+          "_screen37": 19,
+          "_screen53": 20,
+          "_screen58": 22,
+          "_then59": 25,
+          "_screen60": 25,
+          "_then61": 28,
+          "_else63": 30,
+          "_endif63": 30,
+          "_else64": 31,
+          "_endif64": 31,
+          "_screen65": 31,
           "_contents": 33,
-          "_screen65": 33
+          "_screen66": 33
         }
       },
       "initial": {
@@ -1946,11 +1971,7 @@
         "type": "boolean",
         "_defn": [
           {
-            "_row_num": 17,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 59,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
@@ -1964,15 +1985,33 @@
         "elementSet": "data",
         "elementPath": "ack_ok"
       },
-      "max_height_disp": {
-        "type": "number",
+      "ack_ok_2": {
+        "type": "boolean",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 60,
             "section_name": "survey"
           },
           {
             "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "ack_ok_2",
+        "elementName": "ack_ok_2",
+        "elementSet": "data",
+        "elementPath": "ack_ok_2"
+      },
+      "max_height_disp": {
+        "type": "number",
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -1986,11 +2025,11 @@
         "type": "number",
         "_defn": [
           {
-            "_row_num": 56,
+            "_row_num": 57,
             "section_name": "survey"
           },
           {
-            "_row_num": 4,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -2006,7 +2045,7 @@
         "valuesList": "min_max_height",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -2014,7 +2053,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -2030,7 +2069,7 @@
         "valuesList": "min_max_yield",
         "_defn": [
           {
-            "_row_num": 54,
+            "_row_num": 55,
             "section_name": "survey"
           },
           {
@@ -2038,7 +2077,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 6,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -2054,11 +2093,11 @@
         "valuesList": "plant_type_query",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -2085,7 +2124,7 @@
       "date": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
@@ -2101,11 +2140,11 @@
         "valuesList": "maize",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
-            "_row_num": 13,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -2117,7 +2156,7 @@
       "plant_height": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 16,
             "section_name": "survey"
           }
         ],
@@ -2130,7 +2169,7 @@
       "plant_health": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 25,
             "section_name": "survey"
           }
         ],
@@ -2144,7 +2183,7 @@
       "plant_picture": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -2182,7 +2221,7 @@
       "pests": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -2207,7 +2246,7 @@
       "soil": {
         "_defn": [
           {
-            "_row_num": 53,
+            "_row_num": 54,
             "section_name": "survey"
           }
         ],
@@ -2221,7 +2260,7 @@
       "crop_yield": {
         "_defn": [
           {
-            "_row_num": 57,
+            "_row_num": 58,
             "section_name": "survey"
           }
         ],
@@ -2234,7 +2273,7 @@
       "observations": {
         "_defn": [
           {
-            "_row_num": 64,
+            "_row_num": 65,
             "section_name": "survey"
           }
         ],

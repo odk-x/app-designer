@@ -646,6 +646,92 @@ module.exports = function (grunt) {
 			grunt.task.run('exec:adbpush:' + src + ':' + dest);
 		};
 	};
+
+	var gatesDemoFiles072216 = function(grunt) {
+        // We only want a subset of the app/tables files,
+		// however. So, we are going to get everything except that
+		// directory and then add back in the ones that we want.
+		// The first parameter is an options object where we specify that
+		// we only want files--this is important because otherwise when
+		// we get directory names adb will push everything in the directory
+		// name, effectively pushing everything twice.  We also specify that we 
+		// want everything returned to be relative to 'app' by using 'cwd'. 
+		var dirs = grunt.file.expand(
+			{filter: 'isFile',
+			 cwd: 'app' },
+			'.nomedia',
+			'**',
+			'!system/**',
+			'!data/**',
+			'!output/**',
+			'!config/tables/**',
+			'config/assets/**',
+			'config/tables/child_coverage/**',
+			'config/tables/femaleClients/**',
+            'config/tables/follow/**',
+            'config/tables/follow_arrival/**',
+            'config/tables/follow_map_position/**',
+            'config/tables/follow_map_time/**',
+            'config/tables/food_bout/**',
+            'config/tables/graphExample/**',
+            'config/tables/gridScreen/**',
+            'config/tables/geopoints/**',
+            'config/tables/geotagger/**',
+            'config/tables/groom_bout/**',
+            'config/tables/household/**',
+            'config/tables/household_member/**',
+            'config/tables/maleClients/**',
+            'config/tables/mating_event/**',
+            'config/tables/other_species/**',
+            'config/tables/plot/**',
+            'config/tables/Tea_houses/**',
+            'config/tables/Tea_houses_editable/**',
+            'config/tables/Tea_inventory/**',
+            'config/tables/Tea_types/**',
+            'config/tables/visit/**');
+
+		return dirs;
+	};
+	
+    grunt.registerTask(
+        'adbpush-gatesDemo072216',
+        'Push everything for Gates Demo 07-22-16 to the device',
+        function() {
+            var dirs = gatesDemoFiles072216(grunt);
+
+            // Now push these files to the phone.
+            dirs.forEach(suffixRenameAdbPusher(".gatesDemo072216", tablesConfig.appDir));
+        });
+
+	
+    grunt.registerTask(
+        'create-tables-gatesDemo072216',
+        'Create the Gates Demo 07-22-2016 application designer package under build/gatesDemo072216/',
+        function() {
+            var dirs = gatesDemoFiles072216(grunt);
+			
+			var buildDir = 'build/gatesDemo072216';
+			
+			grunt.file.delete(buildDir + '/');
+			grunt.file.mkdir(buildDir);
+			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
+			
+            // Now push these files to the phone.
+            dirs.forEach(suffixRenameCopier(".gatesDemo072216", tablesConfig.appDir));
+			
+			var dirs = grunt.file.expand(
+				{filter: 'isFile',
+				 cwd: '.' },
+				'**',
+				'!.git/**',
+				'!build/**',
+				'!app/**',
+				'app/system/**',
+				'app/data/tables/geotagger/**',
+				'app/output/**');
+
+            dirs.forEach(suffixRenameCopier(".gatesDemo072216", ""));
+        });
 	
 	var simpleDemoFiles = function(grunt) {
 		// In the alpha demo we want Tables and Survey. For this demo,

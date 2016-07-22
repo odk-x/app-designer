@@ -68,7 +68,7 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Add Client Form"
+          "title": "Add Client Brief"
         },
         "_row_num": 5
       }
@@ -433,7 +433,7 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Add Client Form"
+          "title": "Add Client Brief"
         },
         "_row_num": 5
       },
@@ -457,7 +457,7 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Add Client Form"
+          "title": "Add Client Brief"
         },
         "_row_num": 5
       }
@@ -1312,7 +1312,7 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Add Client Form"
+              "title": "Add Client Brief"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },

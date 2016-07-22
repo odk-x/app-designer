@@ -3895,7 +3895,7 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Female All Fields"
+          "title": "All Female Fields"
         },
         "_row_num": 5
       }
@@ -4260,7 +4260,7 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Female All Fields"
+          "title": "All Female Fields"
         },
         "_row_num": 5
       },
@@ -4284,7 +4284,7 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Female All Fields"
+          "title": "All Female Fields"
         },
         "_row_num": 5
       }
@@ -10860,7 +10860,7 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Female All Fields"
+              "title": "All Female Fields"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
