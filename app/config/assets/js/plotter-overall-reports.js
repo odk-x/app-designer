@@ -280,11 +280,11 @@ function displayMaizeVar() {
             // Switch to a case statement
             // Maybe these colors should be available in a library or something
             if(i === 0) {
-                return "ghostwhite";
+                return "teal";
             } else if(i === 1) {
-                return "yellow";
+                return "lightbluw";
             } else if(i === 2){
-                return "orange";
+                return "steelblue";
             } else if(i === 3){
                 return "lightgray";
             } else if(i === 4){
