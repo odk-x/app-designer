@@ -282,7 +282,7 @@ function displayMaizeVar() {
             if(i === 0) {
                 return "teal";
             } else if(i === 1) {
-                return "lightbluw";
+                return "lightblue";
             } else if(i === 2){
                 return "steelblue";
             } else if(i === 3){
