@@ -1360,7 +1360,7 @@ promptTypes.select_one = promptTypes.select.extend({
                         otherValue = _.find(jsonFormSerialization, function(valueObject) {
                             return ('otherValue' === valueObject.name);
                         });
-                        return (otherValue ? otherValue.value : '');
+                        return (otherValue ? otherValue.value : ' ');
                     }
                 }
                 return selectedValue.value;
@@ -1554,7 +1554,10 @@ promptTypes.select_one_inline = promptTypes.select_one.extend({
     templatePath: "templates/select_inline.handlebars"
 });
 promptTypes.select_one_dropdown = promptTypes.select_one.extend({
-    templatePath: "templates/select_dropdown.handlebars"
+    templatePath: "templates/select_dropdown.handlebars",
+    renderContext: {
+        "selectOneDropDownText": translations.selectDropdownLabel
+    }
 });
 promptTypes.select_multiple_grid = promptTypes.select_multiple.extend({
     templatePath: "templates/select_grid.handlebars",

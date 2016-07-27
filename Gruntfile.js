@@ -395,9 +395,10 @@ module.exports = function (grunt) {
                 '**',
                 '!system/**',
                 'system/tables/js/**',
+                'system/survey/**',
 				'!data/**',
 				'!output/**',
-                '!config/tables/**');
+                '!config/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
