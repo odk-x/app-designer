@@ -9,10 +9,14 @@ function display() {
         currentTab = 0;
         updateForTab(currentTab);
     });
-    $('#hopeTab').on('click', function() {
+    $('#refrigeratorsTab').on('click', function() {
         currentTab = 1;
         updateForTab(currentTab);
     });
+    // $('#hopeTab').on('click', function() {
+    //     currentTab = 1;
+    //     updateForTab(currentTab);
+    // });
     $('#plotterTab').on('click', function() {
         currentTab = 2;
         updateForTab(currentTab);
@@ -32,7 +36,8 @@ function display() {
                 if (currentTab === 0) {
                     odkTables.launchHTML('config/assets/teatime.html');
                 } else if (currentTab === 1) {
-                    odkTables.launchHTML('config/assets/hope.html');
+                    odkTables.launchHTML('config/assets/vaccineRefrigerators.html');
+                    // odkTables.launchHTML('config/assets/hope.html');
                 } else if (currentTab === 2) {
                     odkTables.launchHTML('config/assets/plotter.html');
                 } else if (currentTab === 3) {
@@ -63,11 +68,17 @@ function updateForTab(tab) {
         descriptionDiv.attr('class','description-text-white');
         tabItem = $('#teaTimeTab');
     } else if (tab === 1) {
-        // Hope study
-        fileUri = odkCommon.getFileAsUrl('config/assets/img/hopePic.JPG');
-        descriptionDiv.text('View the app used by healthcare workers for over eight months to track subjects in a study on HIV discordant couples.');
+        // Path 
+        fileUri = odkCommon.getFileAsUrl('config/assets/img/hallway.jpg');
+        descriptionDiv.text('Check out these refrigerators! :)');
         descriptionDiv.attr('class','description-text-white');
-        tabItem = $('#hopeTab');
+        tabItem = $('#refrigeratorsTab');
+
+        // // Hope study
+        // fileUri = odkCommon.getFileAsUrl('config/assets/img/hopePic.JPG');
+        // descriptionDiv.text('View the app used by healthcare workers for over eight months to track subjects in a study on HIV discordant couples.');
+        // descriptionDiv.attr('class','description-text-white');
+        // tabItem = $('#hopeTab');
     } else if (tab === 2) {
         // Plotter
         fileUri = odkCommon.getFileAsUrl(

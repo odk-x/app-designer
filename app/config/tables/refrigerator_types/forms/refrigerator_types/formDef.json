@@ -2,121 +2,145 @@
   "xlsx": {
     "survey": [
       {
-        "type": "note",
+        "type": "text",
+        "name": "model_id",
         "display": {
-          "text": "Refrigerator id: {{data.refrigerator_id}}"
+          "text": "Enter model ID:"
         },
+        "required": true,
         "_row_num": 2
       },
       {
-        "type": "select_one",
-        "values_list": "conditions",
-        "name": "refrigerator_condition",
+        "type": "number",
+        "name": "model_year",
         "display": {
-          "text": "Select refrigerator condition:"
+          "text": "Enter the model year:"
         },
         "_row_num": 3
       },
       {
-        "type": "integer",
-        "name": "refrigerator_stock_level",
+        "type": "text",
+        "name": "manufacturer",
         "display": {
-          "text": "What is the refrigerator's stock level?"
+          "text": "Enter the manufacturer:"
         },
         "_row_num": 4
+      },
+      {
+        "type": "decimal",
+        "name": "capacity",
+        "display": {
+          "text": "Enter the gross capacity:",
+          "hint": "(cubic meters)"
+        },
+        "required": true,
+        "_row_num": 5
+      },
+      {
+        "type": "select_multiple",
+        "values_list": "power_source",
+        "name": "power",
+        "display": {
+          "text": "Choose Power Source Required:"
+        },
+        "_row_num": 6
       }
     ],
     "choices": [
       {
-        "choice_list_name": "conditions",
-        "data_value": "Excellent",
+        "choice_list_name": "power_source",
+        "data_value": "electricity",
         "display": {
-          "text": "Excellent"
+          "text": "Electricity"
         },
         "_row_num": 2
       },
       {
-        "choice_list_name": "conditions",
-        "data_value": "Good",
+        "choice_list_name": "power_source",
+        "data_value": "kerosene",
         "display": {
-          "text": "Good"
+          "text": "Kerosene"
         },
         "_row_num": 3
       },
       {
-        "choice_list_name": "conditions",
-        "data_value": "Fair",
+        "choice_list_name": "power_source",
+        "data_value": "gas",
         "display": {
-          "text": "Fair"
+          "text": "Gas"
         },
         "_row_num": 4
       },
       {
-        "choice_list_name": "conditions",
-        "data_value": "Poor",
+        "choice_list_name": "power_source",
+        "data_value": "solar",
         "display": {
-          "text": "Poor"
+          "text": "Solar"
         },
         "_row_num": 5
       },
       {
-        "choice_list_name": "conditions",
-        "data_value": "Terrible",
+        "choice_list_name": "power_source",
+        "data_value": "unknown",
         "display": {
-          "text": "Terrible"
+          "text": "Unknown"
         },
         "_row_num": 6
       }
     ],
-    "model": [
+    "properties": [
       {
-        "name": "refrigerator_id",
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
         "type": "string",
+        "value": "LIST",
         "_row_num": 2
       },
       {
-        "name": "refrigerator_size",
-        "type": "number",
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "string",
+        "value": "config/tables/refrigerator_types/html/refrigerator_types_detail.html",
         "_row_num": 3
       },
       {
-        "name": "refrigerator_location",
-        "type": "geopoint",
+        "partition": "Table",
+        "aspect": "default",
+        "key": "listViewFileName",
+        "type": "string",
+        "value": "config/tables/refrigerator_types/html/refrigerator_types_list.html",
         "_row_num": 4
-      },
-      {
-        "name": "refrigerator_condition",
-        "type": "select_one",
-        "_row_num": 5
-      },
-      {
-        "name": "refrigerator_stock_level",
-        "type": "integer",
-        "_row_num": 6
       }
     ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "refrigerators_update",
+        "value": "refrigerator_types",
         "_row_num": 2
-      },
-      {
-        "setting_name": "table_id",
-        "value": "refrigerators",
-        "_row_num": 3
-      },
-      {
-        "setting_name": "form_version",
-        "value": 20130408,
-        "_row_num": 4
       },
       {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerator information update form"
+          "title": "Refrigerator Types"
         },
+        "_row_num": 4
+      },
+      {
+        "setting_name": "table_id",
+        "value": "refrigerator_types",
         "_row_num": 5
+      },
+      {
+        "setting_name": "disableSwipeNavigation",
+        "value": true,
+        "_row_num": 6
+      },
+      {
+        "setting_name": "instance_name",
+        "value": "Name",
+        "_row_num": 7
       }
     ]
   },
@@ -141,29 +165,34 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "refrigerators_update",
+        "value": "refrigerator_types",
         "_row_num": 2
-      },
-      "table_id": {
-        "setting_name": "table_id",
-        "value": "refrigerators",
-        "_row_num": 3
-      },
-      "form_version": {
-        "setting_name": "form_version",
-        "value": 20130408,
-        "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerator information update form"
+          "title": "Refrigerator Types"
         },
+        "_row_num": 4
+      },
+      "table_id": {
+        "setting_name": "table_id",
+        "value": "refrigerator_types",
         "_row_num": 5
+      },
+      "disableSwipeNavigation": {
+        "setting_name": "disableSwipeNavigation",
+        "value": true,
+        "_row_num": 6
+      },
+      "instance_name": {
+        "setting_name": "instance_name",
+        "value": "Name",
+        "_row_num": 7
       },
       "_locales": {
         "setting_name": "_locales",
-        "_row_num": 5,
+        "_row_num": 4,
         "value": [
           {
             "display": {
@@ -175,56 +204,56 @@
       },
       "_default_locale": {
         "setting_name": "_default_locale",
-        "_row_num": 5,
+        "_row_num": 4,
         "value": "default"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerator information update form"
+          "title": "Refrigerator Types"
         },
-        "_row_num": 5
+        "_row_num": 4
       }
     },
     "choices": {
-      "conditions": [
+      "power_source": [
         {
-          "choice_list_name": "conditions",
-          "data_value": "Excellent",
+          "choice_list_name": "power_source",
+          "data_value": "electricity",
           "display": {
-            "text": "Excellent"
+            "text": "Electricity"
           },
           "_row_num": 2
         },
         {
-          "choice_list_name": "conditions",
-          "data_value": "Good",
+          "choice_list_name": "power_source",
+          "data_value": "kerosene",
           "display": {
-            "text": "Good"
+            "text": "Kerosene"
           },
           "_row_num": 3
         },
         {
-          "choice_list_name": "conditions",
-          "data_value": "Fair",
+          "choice_list_name": "power_source",
+          "data_value": "gas",
           "display": {
-            "text": "Fair"
+            "text": "Gas"
           },
           "_row_num": 4
         },
         {
-          "choice_list_name": "conditions",
-          "data_value": "Poor",
+          "choice_list_name": "power_source",
+          "data_value": "solar",
           "display": {
-            "text": "Poor"
+            "text": "Solar"
           },
           "_row_num": 5
         },
         {
-          "choice_list_name": "conditions",
-          "data_value": "Terrible",
+          "choice_list_name": "power_source",
+          "data_value": "unknown",
           "display": {
-            "text": "Terrible"
+            "text": "Unknown"
           },
           "_row_num": 6
         }
@@ -233,84 +262,60 @@
     "queries": {},
     "calculates": {},
     "model": {
-      "refrigerator_id": {
-        "type": "string",
+      "model_id": {
         "_defn": [
           {
             "_row_num": 2,
-            "section_name": "model"
+            "section_name": "survey"
           }
         ],
-        "elementKey": "refrigerator_id"
-      },
-      "refrigerator_size": {
-        "type": "number",
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_size"
-      },
-      "refrigerator_location": {
-        "name": "geopoint",
-        "type": "object",
-        "elementType": "geopoint",
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_latitude"
-          },
-          "longitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_longitude"
-          },
-          "altitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_altitude"
-          },
-          "accuracy": {
-            "type": "number",
-            "elementKey": "refrigerator_location_accuracy"
-          }
-        },
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_location"
-      },
-      "refrigerator_condition": {
         "type": "string",
-        "valuesList": "conditions",
+        "elementKey": "model_id"
+      },
+      "model_year": {
         "_defn": [
           {
             "_row_num": 3,
             "section_name": "survey"
-          },
+          }
+        ],
+        "type": "number",
+        "elementKey": "model_year"
+      },
+      "manufacturer": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "manufacturer"
+      },
+      "capacity": {
+        "_defn": [
           {
             "_row_num": 5,
-            "section_name": "model"
+            "section_name": "survey"
           }
         ],
-        "elementKey": "refrigerator_condition"
+        "type": "number",
+        "elementKey": "capacity"
       },
-      "refrigerator_stock_level": {
-        "type": "integer",
+      "power": {
         "_defn": [
           {
-            "_row_num": 4,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 6,
-            "section_name": "model"
+            "section_name": "survey"
           }
         ],
-        "elementKey": "refrigerator_stock_level"
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "power_items"
+        },
+        "valuesList": "power_source",
+        "elementKey": "power"
       }
     },
     "section_names": [
@@ -324,55 +329,88 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "note",
+            "type": "text",
+            "name": "model_id",
             "display": {
-              "text": "Refrigerator id: {{data.refrigerator_id}}"
+              "text": "Enter model ID:"
             },
+            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "note",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
           {
-            "type": "select_one",
-            "values_list": "conditions",
-            "name": "refrigerator_condition",
+            "type": "number",
+            "name": "model_year",
             "display": {
-              "text": "Select refrigerator condition:"
+              "text": "Enter the model year:"
             },
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "number",
             "_branch_label_enclosing_screen": "survey/_screen3",
             "promptIdx": 1
           },
           {
-            "type": "integer",
-            "name": "refrigerator_stock_level",
+            "type": "text",
+            "name": "manufacturer",
             "display": {
-              "text": "What is the refrigerator's stock level?"
+              "text": "Enter the manufacturer:"
             },
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
-            "_type": "integer",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen4",
             "promptIdx": 2
+          },
+          {
+            "type": "decimal",
+            "name": "capacity",
+            "display": {
+              "text": "Enter the gross capacity:",
+              "hint": "(cubic meters)"
+            },
+            "required": true,
+            "_row_num": 5,
+            "__rowNum__": 4,
+            "_token_type": "prompt",
+            "_type": "decimal",
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 3
+          },
+          {
+            "type": "select_multiple",
+            "values_list": "power_source",
+            "name": "power",
+            "display": {
+              "text": "Choose Power Source Required:"
+            },
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 4
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 5,
-            "_branch_label_enclosing_screen": "survey/_screen5",
-            "promptIdx": 3
+            "_row_num": 7,
+            "_branch_label_enclosing_screen": "survey/_screen7",
+            "promptIdx": 5
           }
         ],
         "validation_tag_map": {
-          "finalize": []
+          "finalize": [
+            0,
+            3
+          ]
         },
         "operations": [
           {
@@ -394,33 +432,47 @@
             "operationIdx": 2
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 5,
-            "operationIdx": 3
-          },
-          {
             "_row_num": 5,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 6,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 7,
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 4
+            "operationIdx": 6
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 5,
-            "operationIdx": 5
+            "_row_num": 7,
+            "operationIdx": 7
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen3": 1,
           "_screen4": 2,
-          "_contents": 4,
-          "_screen5": 4
+          "_screen5": 3,
+          "_screen6": 4,
+          "_contents": 6,
+          "_screen7": 6
         }
       },
       "initial": {
@@ -451,7 +503,7 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Refrigerator information update form"
+              "title": "Refrigerator Types"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -600,146 +652,90 @@
       }
     },
     "dataTableModel": {
-      "refrigerator_id": {
-        "type": "string",
+      "model_id": {
         "_defn": [
           {
             "_row_num": 2,
-            "section_name": "model"
+            "section_name": "survey"
           }
         ],
-        "elementKey": "refrigerator_id",
-        "elementName": "refrigerator_id",
-        "elementSet": "data",
-        "elementPath": "refrigerator_id"
-      },
-      "refrigerator_size": {
-        "type": "number",
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_size",
-        "elementName": "refrigerator_size",
-        "elementSet": "data",
-        "elementPath": "refrigerator_size"
-      },
-      "refrigerator_location": {
-        "name": "geopoint",
-        "type": "object",
-        "elementType": "geopoint",
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_latitude",
-            "elementName": "latitude",
-            "elementSet": "data",
-            "elementPath": "refrigerator_location.latitude"
-          },
-          "longitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_longitude",
-            "elementName": "longitude",
-            "elementSet": "data",
-            "elementPath": "refrigerator_location.longitude"
-          },
-          "altitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_altitude",
-            "elementName": "altitude",
-            "elementSet": "data",
-            "elementPath": "refrigerator_location.altitude"
-          },
-          "accuracy": {
-            "type": "number",
-            "elementKey": "refrigerator_location_accuracy",
-            "elementName": "accuracy",
-            "elementSet": "data",
-            "elementPath": "refrigerator_location.accuracy"
-          }
-        },
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_location",
-        "elementName": "refrigerator_location",
-        "elementSet": "data",
-        "elementPath": "refrigerator_location",
-        "listChildElementKeys": [
-          "refrigerator_location_accuracy",
-          "refrigerator_location_altitude",
-          "refrigerator_location_latitude",
-          "refrigerator_location_longitude"
-        ],
-        "notUnitOfRetention": true
-      },
-      "refrigerator_condition": {
         "type": "string",
-        "valuesList": "conditions",
+        "elementKey": "model_id",
+        "elementName": "model_id",
+        "elementSet": "data",
+        "elementPath": "model_id"
+      },
+      "model_year": {
         "_defn": [
           {
             "_row_num": 3,
             "section_name": "survey"
-          },
+          }
+        ],
+        "type": "number",
+        "elementKey": "model_year",
+        "elementName": "model_year",
+        "elementSet": "data",
+        "elementPath": "model_year"
+      },
+      "manufacturer": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "manufacturer",
+        "elementName": "manufacturer",
+        "elementSet": "data",
+        "elementPath": "manufacturer"
+      },
+      "capacity": {
+        "_defn": [
           {
             "_row_num": 5,
-            "section_name": "model"
+            "section_name": "survey"
           }
         ],
-        "elementKey": "refrigerator_condition",
-        "elementName": "refrigerator_condition",
+        "type": "number",
+        "elementKey": "capacity",
+        "elementName": "capacity",
         "elementSet": "data",
-        "elementPath": "refrigerator_condition"
+        "elementPath": "capacity"
       },
-      "refrigerator_stock_level": {
-        "type": "integer",
+      "power": {
         "_defn": [
           {
-            "_row_num": 4,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 6,
-            "section_name": "model"
+            "section_name": "survey"
           }
         ],
-        "elementKey": "refrigerator_stock_level",
-        "elementName": "refrigerator_stock_level",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "power_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "power.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "power_source",
+        "elementKey": "power",
+        "elementName": "power",
         "elementSet": "data",
-        "elementPath": "refrigerator_stock_level"
+        "elementPath": "power",
+        "listChildElementKeys": [
+          "power_items"
+        ]
       },
-      "refrigerator_location_latitude": {
-        "type": "number",
-        "elementKey": "refrigerator_location_latitude",
-        "elementName": "latitude",
+      "power_items": {
+        "type": "string",
+        "elementKey": "power_items",
+        "elementName": "items",
         "elementSet": "data",
-        "elementPath": "refrigerator_location.latitude"
-      },
-      "refrigerator_location_longitude": {
-        "type": "number",
-        "elementKey": "refrigerator_location_longitude",
-        "elementName": "longitude",
-        "elementSet": "data",
-        "elementPath": "refrigerator_location.longitude"
-      },
-      "refrigerator_location_altitude": {
-        "type": "number",
-        "elementKey": "refrigerator_location_altitude",
-        "elementName": "altitude",
-        "elementSet": "data",
-        "elementPath": "refrigerator_location.altitude"
-      },
-      "refrigerator_location_accuracy": {
-        "type": "number",
-        "elementKey": "refrigerator_location_accuracy",
-        "elementName": "accuracy",
-        "elementSet": "data",
-        "elementPath": "refrigerator_location.accuracy"
+        "elementPath": "power.items",
+        "notUnitOfRetention": true
       },
       "_id": {
         "type": "string",
@@ -829,6 +825,57 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_savepoint_creator"
       }
-    }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "power",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"power_source\",\"data_value\":\"electricity\",\"display\":{\"text\":\"Electricity\"},\"_row_num\":2},{\"choice_list_name\":\"power_source\",\"data_value\":\"kerosene\",\"display\":{\"text\":\"Kerosene\"},\"_row_num\":3},{\"choice_list_name\":\"power_source\",\"data_value\":\"gas\",\"display\":{\"text\":\"Gas\"},\"_row_num\":4},{\"choice_list_name\":\"power_source\",\"data_value\":\"solar\",\"display\":{\"text\":\"Solar\"},\"_row_num\":5},{\"choice_list_name\":\"power_source\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":6}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "refrigerator_types"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "LIST"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "detailViewFileName",
+        "_type": "string",
+        "_value": "config/tables/refrigerator_types/html/refrigerator_types_detail.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Refrigerator Types\""
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "listViewFileName",
+        "_type": "string",
+        "_value": "config/tables/refrigerator_types/html/refrigerator_types_list.html"
+      }
+    ]
   }
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- TBL_IV_REF Detailed View -->
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../js/refrigerators_detail.js"></script>
+        <h1><span id="TITLE" class="main-text"></span></h1>
+        <!-- To query and link to the result, replace the placeholders and put the following around the <span></span> tags.
+        <a href="#" onclick="odkTables.openTable('TABLE_NAME', 'COL_NAME:' + data.get('COL_NAME'));"></a>
+        
+        Example:<a href="#" onclick="odkTables.openTable('TABLE_NAME', 'COL_NAME:' + data.get('COL_NAME'));"><span id="FIELD_1"></span></a>
+        -->
+        <p>Healthcare Facility: <span id="FIELD_1"></span></p>
+        <p>Model: <span id="FIELD_2"></span>
+        <br>Year Installed: <span id="FIELD_3"></span>
+        <br>Size (cubic meters): <span id="FIELD_4"></span>
+        <br>Condition: <span id="FIELD_5"></span>
+        <br>Power Source: <span id="FIELD_6"></span></p>
+        <script>
+            $(display);
+        </script>
+    </body>
+</html>
