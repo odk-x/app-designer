@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<!-- beninTeaHouses Detailed View -->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>   
+    </head>
+    <body>
+        <script type="text/javascript" src="../js/health_facility_detail.js"></script>
+        <h1><span id="TITLE" class="main-text"></span></h1>
+        <p>Health Facility ID: <span id="fac_id"></span></p>
+        <p>Facility Type: <span id="fac_type"></span></p>
+        <p>Ownership: <span id="ownership"></span></p>
+        <p>Population: <span id="population"></span></p>
+        <p>Coverage: <span id="coverage"></span></p>
+        <br>
+        <p>Electricity Source: <span id="elec_source"></span></p>
+        <p>Grid Availability: <span id="grid_avail"></span></p>
+        <p>Gas Availability: <span id="gas_avail"></span></p>
+        <p>Kerosene Availability: <span id="ker_avail"></span></p>
+        <p>Solar Suitable Climate? <span id="solar_climate"></span></p>
+        <p>Solar Suitable Site? <span id="solar_site"></span></p>
+        <br>
+        <p>Climate: <span id="climate"></span></p>
+        <p>Latitude (GPS): <span id="lat"></span></p>
+        <p>Longitude(GPS): <span id="lon"></span></p>
+        <br>
+        <p>Distance to Supply Point: <span id="dist_to_supply"></span></p>
+        <br>
+        <h3>Contact Information</h3>
+        <p>Person in Charge: <span id="in_charge"></span></p>
+        <p>Mobile number: <span id="mobile_no"></span></p>
+        <p>Email: <span id="email"></span></p>
+        <p>Last Updated: <span id="updated"></span></p>
+
+        <a href="#" onclick="onLinkClick()">
+          <span id="fridge_list" class="main-text"></span> Refrigerators</a>
+        
+        <script>
+            $(display);  // calls the detail display function when ready
+        </script>
+    </body>
+</html>
