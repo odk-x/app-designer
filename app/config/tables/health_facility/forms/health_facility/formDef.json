@@ -3,7 +3,7 @@
     "survey": [
       {
         "type": "text",
-        "name": "Name",
+        "name": "facility_name",
         "display": {
           "text": "Enter health facility name"
         },
@@ -20,12 +20,21 @@
         "_row_num": 3
       },
       {
+        "type": "select_one",
+        "values_list": "regions",
+        "name": "admin_region",
+        "display": {
+          "text": "Admin Region"
+        },
+        "_row_num": 4
+      },
+      {
         "type": "geopoint",
         "name": "Location",
         "display": {
           "text": "Capture location"
         },
-        "_row_num": 4
+        "_row_num": 5
       },
       {
         "type": "select_one",
@@ -34,98 +43,91 @@
         "display": {
           "text": "Choose the facility type"
         },
-        "_row_num": 5
+        "_row_num": 6
       },
       {
         "type": "select_one",
         "values_list": "ownership_types",
-        "name": "ownership",
+        "name": "facility_ownership",
         "display": {
           "text": "Choose the ownership"
-        },
-        "_row_num": 6
-      },
-      {
-        "type": "text",
-        "name": "person_in_charge",
-        "display": {
-          "text": "Enter name of the person in charge"
         },
         "_row_num": 7
       },
       {
-        "type": "text",
-        "name": "phone_number",
+        "type": "number",
+        "name": "facility_population",
         "display": {
-          "text": "Enter phone number"
+          "text": "Enter the facility population"
         },
         "_row_num": 8
       },
       {
-        "type": "text",
-        "name": "email",
+        "type": "number",
+        "name": "facility_coverage",
         "display": {
-          "text": "Enter email"
+          "text": "Percent coverage?"
         },
         "_row_num": 9
       },
       {
-        "type": "number",
-        "name": "population",
+        "type": "select_one",
+        "values_list": "elec_sources",
+        "name": "electricity_source",
         "display": {
-          "text": "Enter the facility population"
+          "text": "Choose the electricity source"
         },
         "_row_num": 10
       },
       {
         "type": "select_one",
-        "values_list": "elec_sources",
-        "name": "elec_source",
+        "values_list": "grid",
+        "name": "grid_power_availability",
         "display": {
-          "text": "Choose the electricity source"
+          "text": "Choose the grid availability"
         },
         "_row_num": 11
       },
       {
         "type": "select_one",
-        "values_list": "grid_availability",
-        "name": "grid",
+        "values_list": "fuel_availability",
+        "name": "gas_availability",
         "display": {
-          "text": "Choose the grid availability"
+          "text": "Choose the gas availability"
         },
         "_row_num": 12
       },
       {
         "type": "select_one",
         "values_list": "fuel_availability",
-        "name": "gas",
+        "name": "kerosene_availability",
         "display": {
-          "text": "Choose the gas availability"
+          "text": "Choose the kerosene availability"
         },
         "_row_num": 13
       },
       {
         "type": "select_one",
-        "values_list": "fuel_availability",
-        "name": "kerosene",
+        "values_list": "yes_no",
+        "name": "solar_suitable_climate",
         "display": {
-          "text": "Choose the kerosene availability"
+          "text": "Is This a solar suitable climate?"
         },
         "_row_num": 14
       },
       {
         "type": "select_one",
         "values_list": "yes_no",
-        "name": "solar_suitable",
+        "name": "solar_suitable_site",
         "display": {
-          "text": "Is This a solar suitable site?"
+          "text": "Is this a solar suitable site?"
         },
         "_row_num": 15
       },
       {
         "type": "select_one",
         "values_list": "climate_types",
-        "name": "climate",
+        "name": "climate_zone",
         "display": {
           "text": "What is the climate of this location?"
         },
@@ -140,19 +142,61 @@
         "_row_num": 17
       },
       {
-        "type": "date",
-        "name": "date_updated",
+        "type": "select_one",
+        "values_list": "storage_types",
+        "name": "storage_type",
         "display": {
-          "text": "Date Updated"
+          "text": "Storage type?"
         },
-        "required": true,
         "_row_num": 18
+      },
+      {
+        "type": "select_one",
+        "values_list": "delivery_types",
+        "name": "delivery_type",
+        "display": {
+          "text": "Delivery type?"
+        },
+        "_row_num": 19
+      },
+      {
+        "type": "number",
+        "name": "vaccine_supply_interval",
+        "display": {
+          "text": "Vaccine Supply Interval?"
+        },
+        "_row_num": 20
+      },
+      {
+        "type": "number",
+        "name": "vaccine_reserve_stock_requirement",
+        "display": {
+          "text": "Vaccine Reserve Stock Requirement?"
+        },
+        "_row_num": 21
+      },
+      {
+        "type": "select_one",
+        "values_list": "vaccine_modes",
+        "name": "vaccine_supply_mode",
+        "display": {
+          "text": "Vaccine Supply Mode?"
+        },
+        "_row_num": 22
+      },
+      {
+        "type": "text",
+        "name": "contact_name",
+        "display": {
+          "text": "Contact Name?"
+        },
+        "_row_num": 23
       }
     ],
     "choices": [
       {
         "choice_list_name": "yes_no",
-        "data_value": "Yes",
+        "data_value": "yes",
         "display": {
           "text": "Yes"
         },
@@ -160,7 +204,7 @@
       },
       {
         "choice_list_name": "yes_no",
-        "data_value": "No",
+        "data_value": "no",
         "display": {
           "text": "No"
         },
@@ -288,7 +332,7 @@
       },
       {
         "choice_list_name": "ownership_types",
-        "data_value": "faith_based",
+        "data_value": "faithbased",
         "display": {
           "text": "Faithbased"
         },
@@ -335,7 +379,7 @@
         "_row_num": 27
       },
       {
-        "choice_list_name": "grid_availability",
+        "choice_list_name": "grid",
         "data_value": "more_than_16",
         "display": {
           "text": "More than 16"
@@ -343,7 +387,7 @@
         "_row_num": 29
       },
       {
-        "choice_list_name": "grid_availability",
+        "choice_list_name": "grid",
         "data_value": "8_to_16",
         "display": {
           "text": "8 to 16"
@@ -351,7 +395,7 @@
         "_row_num": 30
       },
       {
-        "choice_list_name": "grid_availability",
+        "choice_list_name": "grid",
         "data_value": "4_to_8",
         "display": {
           "text": "4 to 8"
@@ -359,7 +403,7 @@
         "_row_num": 31
       },
       {
-        "choice_list_name": "grid_availability",
+        "choice_list_name": "grid",
         "data_value": "fewer_than_4",
         "display": {
           "text": "Fewer than 4"
@@ -367,7 +411,7 @@
         "_row_num": 32
       },
       {
-        "choice_list_name": "grid_availability",
+        "choice_list_name": "grid",
         "data_value": "none",
         "display": {
           "text": "None"
@@ -437,6 +481,334 @@
           "text": "Hot"
         },
         "_row_num": 43
+      },
+      {
+        "choice_list_name": "storage_types",
+        "data_value": "depot",
+        "display": {
+          "text": "Depot"
+        },
+        "_row_num": 45
+      },
+      {
+        "choice_list_name": "storage_types",
+        "data_value": "delivery",
+        "display": {
+          "text": "Delivery"
+        },
+        "_row_num": 46
+      },
+      {
+        "choice_list_name": "storage_types",
+        "data_value": "both",
+        "display": {
+          "text": "Both Depot and Delivery"
+        },
+        "_row_num": 47
+      },
+      {
+        "choice_list_name": "delivery_types",
+        "data_value": "static",
+        "display": {
+          "text": "Static"
+        },
+        "_row_num": 49
+      },
+      {
+        "choice_list_name": "delivery_types",
+        "data_value": "outreach",
+        "display": {
+          "text": "Outreach"
+        },
+        "_row_num": 50
+      },
+      {
+        "choice_list_name": "delivery_types",
+        "data_value": "both",
+        "display": {
+          "text": "Both Static and Outreach"
+        },
+        "_row_num": 51
+      },
+      {
+        "choice_list_name": "delivery_types",
+        "data_value": "none",
+        "display": {
+          "text": "None"
+        },
+        "_row_num": 52
+      },
+      {
+        "choice_list_name": "vaccine_modes",
+        "data_value": "delivered",
+        "display": {
+          "text": "Delivered"
+        },
+        "_row_num": 54
+      },
+      {
+        "choice_list_name": "vaccine_modes",
+        "data_value": "collected",
+        "display": {
+          "text": "Collected"
+        },
+        "_row_num": 55
+      },
+      {
+        "choice_list_name": "vaccine_modes",
+        "data_value": "both",
+        "display": {
+          "text": "Both Delivered and Collected"
+        },
+        "_row_num": 56
+      },
+      {
+        "choice_list_name": "vaccine_modes",
+        "data_value": "none",
+        "display": {
+          "text": "None"
+        },
+        "_row_num": 57
+      },
+      {
+        "choice_list_name": "vaccine_modes",
+        "data_value": "unknown",
+        "display": {
+          "text": "Unknown"
+        },
+        "_row_num": 58
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "dowa",
+        "display": {
+          "text": "Dowa"
+        },
+        "_row_num": 60
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "kasungu",
+        "display": {
+          "text": "Kasungu"
+        },
+        "_row_num": 61
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "nkhotakota",
+        "display": {
+          "text": "Nkhotakota"
+        },
+        "_row_num": 62
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "ntchisi",
+        "display": {
+          "text": "Ntchisi"
+        },
+        "_row_num": 63
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "salima",
+        "display": {
+          "text": "Salima"
+        },
+        "_row_num": 64
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "dedza",
+        "display": {
+          "text": "Dedza"
+        },
+        "_row_num": 65
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "lilongwe",
+        "display": {
+          "text": "Lilongwe"
+        },
+        "_row_num": 66
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "mchinji",
+        "display": {
+          "text": "Mchinji"
+        },
+        "_row_num": 67
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "ntcheu",
+        "display": {
+          "text": "Ntcheu"
+        },
+        "_row_num": 68
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "chitipa",
+        "display": {
+          "text": "Chitipa"
+        },
+        "_row_num": 69
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "karonga",
+        "display": {
+          "text": "Karonga"
+        },
+        "_row_num": 70
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "likoma",
+        "display": {
+          "text": "Likoma"
+        },
+        "_row_num": 71
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "mzimba north",
+        "display": {
+          "text": "Mzimba North"
+        },
+        "_row_num": 72
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "mzimba south",
+        "display": {
+          "text": "Mzimba South"
+        },
+        "_row_num": 73
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "nkhata bay",
+        "display": {
+          "text": "Nkhata Bay"
+        },
+        "_row_num": 74
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "rumphi",
+        "display": {
+          "text": "Rumphi"
+        },
+        "_row_num": 75
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "balaka",
+        "display": {
+          "text": "Balaka"
+        },
+        "_row_num": 76
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "machinga",
+        "display": {
+          "text": "Machinga"
+        },
+        "_row_num": 77
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "mangochi",
+        "display": {
+          "text": "Mangochi"
+        },
+        "_row_num": 78
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "mulanje",
+        "display": {
+          "text": "Mulanje"
+        },
+        "_row_num": 79
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "phalombe",
+        "display": {
+          "text": "Phalombe"
+        },
+        "_row_num": 80
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "zomba",
+        "display": {
+          "text": "Zomba"
+        },
+        "_row_num": 81
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "blantyre",
+        "display": {
+          "text": "Blantyre"
+        },
+        "_row_num": 82
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "chikwawa",
+        "display": {
+          "text": "Chikwawa"
+        },
+        "_row_num": 83
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "chiladzulu",
+        "display": {
+          "text": "Chiladzulu"
+        },
+        "_row_num": 84
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "mwanza",
+        "display": {
+          "text": "Mwanza"
+        },
+        "_row_num": 85
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "neno",
+        "display": {
+          "text": "Neno"
+        },
+        "_row_num": 86
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "nsanje",
+        "display": {
+          "text": "Nsanje"
+        },
+        "_row_num": 87
+      },
+      {
+        "choice_list_name": "regions",
+        "data_value": "thyolo",
+        "display": {
+          "text": "Thyolo"
+        },
+        "_row_num": 88
       }
     ],
     "queries": [
@@ -614,7 +986,7 @@
       "yes_no": [
         {
           "choice_list_name": "yes_no",
-          "data_value": "Yes",
+          "data_value": "yes",
           "display": {
             "text": "Yes"
           },
@@ -622,7 +994,7 @@
         },
         {
           "choice_list_name": "yes_no",
-          "data_value": "No",
+          "data_value": "no",
           "display": {
             "text": "No"
           },
@@ -754,7 +1126,7 @@
         },
         {
           "choice_list_name": "ownership_types",
-          "data_value": "faith_based",
+          "data_value": "faithbased",
           "display": {
             "text": "Faithbased"
           },
@@ -803,9 +1175,9 @@
           "_row_num": 27
         }
       ],
-      "grid_availability": [
+      "grid": [
         {
-          "choice_list_name": "grid_availability",
+          "choice_list_name": "grid",
           "data_value": "more_than_16",
           "display": {
             "text": "More than 16"
@@ -813,7 +1185,7 @@
           "_row_num": 29
         },
         {
-          "choice_list_name": "grid_availability",
+          "choice_list_name": "grid",
           "data_value": "8_to_16",
           "display": {
             "text": "8 to 16"
@@ -821,7 +1193,7 @@
           "_row_num": 30
         },
         {
-          "choice_list_name": "grid_availability",
+          "choice_list_name": "grid",
           "data_value": "4_to_8",
           "display": {
             "text": "4 to 8"
@@ -829,7 +1201,7 @@
           "_row_num": 31
         },
         {
-          "choice_list_name": "grid_availability",
+          "choice_list_name": "grid",
           "data_value": "fewer_than_4",
           "display": {
             "text": "Fewer than 4"
@@ -837,7 +1209,7 @@
           "_row_num": 32
         },
         {
-          "choice_list_name": "grid_availability",
+          "choice_list_name": "grid",
           "data_value": "none",
           "display": {
             "text": "None"
@@ -912,6 +1284,342 @@
           },
           "_row_num": 43
         }
+      ],
+      "storage_types": [
+        {
+          "choice_list_name": "storage_types",
+          "data_value": "depot",
+          "display": {
+            "text": "Depot"
+          },
+          "_row_num": 45
+        },
+        {
+          "choice_list_name": "storage_types",
+          "data_value": "delivery",
+          "display": {
+            "text": "Delivery"
+          },
+          "_row_num": 46
+        },
+        {
+          "choice_list_name": "storage_types",
+          "data_value": "both",
+          "display": {
+            "text": "Both Depot and Delivery"
+          },
+          "_row_num": 47
+        }
+      ],
+      "delivery_types": [
+        {
+          "choice_list_name": "delivery_types",
+          "data_value": "static",
+          "display": {
+            "text": "Static"
+          },
+          "_row_num": 49
+        },
+        {
+          "choice_list_name": "delivery_types",
+          "data_value": "outreach",
+          "display": {
+            "text": "Outreach"
+          },
+          "_row_num": 50
+        },
+        {
+          "choice_list_name": "delivery_types",
+          "data_value": "both",
+          "display": {
+            "text": "Both Static and Outreach"
+          },
+          "_row_num": 51
+        },
+        {
+          "choice_list_name": "delivery_types",
+          "data_value": "none",
+          "display": {
+            "text": "None"
+          },
+          "_row_num": 52
+        }
+      ],
+      "vaccine_modes": [
+        {
+          "choice_list_name": "vaccine_modes",
+          "data_value": "delivered",
+          "display": {
+            "text": "Delivered"
+          },
+          "_row_num": 54
+        },
+        {
+          "choice_list_name": "vaccine_modes",
+          "data_value": "collected",
+          "display": {
+            "text": "Collected"
+          },
+          "_row_num": 55
+        },
+        {
+          "choice_list_name": "vaccine_modes",
+          "data_value": "both",
+          "display": {
+            "text": "Both Delivered and Collected"
+          },
+          "_row_num": 56
+        },
+        {
+          "choice_list_name": "vaccine_modes",
+          "data_value": "none",
+          "display": {
+            "text": "None"
+          },
+          "_row_num": 57
+        },
+        {
+          "choice_list_name": "vaccine_modes",
+          "data_value": "unknown",
+          "display": {
+            "text": "Unknown"
+          },
+          "_row_num": 58
+        }
+      ],
+      "regions": [
+        {
+          "choice_list_name": "regions",
+          "data_value": "dowa",
+          "display": {
+            "text": "Dowa"
+          },
+          "_row_num": 60
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "kasungu",
+          "display": {
+            "text": "Kasungu"
+          },
+          "_row_num": 61
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "nkhotakota",
+          "display": {
+            "text": "Nkhotakota"
+          },
+          "_row_num": 62
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "ntchisi",
+          "display": {
+            "text": "Ntchisi"
+          },
+          "_row_num": 63
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "salima",
+          "display": {
+            "text": "Salima"
+          },
+          "_row_num": 64
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "dedza",
+          "display": {
+            "text": "Dedza"
+          },
+          "_row_num": 65
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "lilongwe",
+          "display": {
+            "text": "Lilongwe"
+          },
+          "_row_num": 66
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "mchinji",
+          "display": {
+            "text": "Mchinji"
+          },
+          "_row_num": 67
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "ntcheu",
+          "display": {
+            "text": "Ntcheu"
+          },
+          "_row_num": 68
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "chitipa",
+          "display": {
+            "text": "Chitipa"
+          },
+          "_row_num": 69
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "karonga",
+          "display": {
+            "text": "Karonga"
+          },
+          "_row_num": 70
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "likoma",
+          "display": {
+            "text": "Likoma"
+          },
+          "_row_num": 71
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "mzimba north",
+          "display": {
+            "text": "Mzimba North"
+          },
+          "_row_num": 72
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "mzimba south",
+          "display": {
+            "text": "Mzimba South"
+          },
+          "_row_num": 73
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "nkhata bay",
+          "display": {
+            "text": "Nkhata Bay"
+          },
+          "_row_num": 74
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "rumphi",
+          "display": {
+            "text": "Rumphi"
+          },
+          "_row_num": 75
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "balaka",
+          "display": {
+            "text": "Balaka"
+          },
+          "_row_num": 76
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "machinga",
+          "display": {
+            "text": "Machinga"
+          },
+          "_row_num": 77
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "mangochi",
+          "display": {
+            "text": "Mangochi"
+          },
+          "_row_num": 78
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "mulanje",
+          "display": {
+            "text": "Mulanje"
+          },
+          "_row_num": 79
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "phalombe",
+          "display": {
+            "text": "Phalombe"
+          },
+          "_row_num": 80
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "zomba",
+          "display": {
+            "text": "Zomba"
+          },
+          "_row_num": 81
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "blantyre",
+          "display": {
+            "text": "Blantyre"
+          },
+          "_row_num": 82
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "chikwawa",
+          "display": {
+            "text": "Chikwawa"
+          },
+          "_row_num": 83
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "chiladzulu",
+          "display": {
+            "text": "Chiladzulu"
+          },
+          "_row_num": 84
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "mwanza",
+          "display": {
+            "text": "Mwanza"
+          },
+          "_row_num": 85
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "neno",
+          "display": {
+            "text": "Neno"
+          },
+          "_row_num": 86
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "nsanje",
+          "display": {
+            "text": "Nsanje"
+          },
+          "_row_num": 87
+        },
+        {
+          "choice_list_name": "regions",
+          "data_value": "thyolo",
+          "display": {
+            "text": "Thyolo"
+          },
+          "_row_num": 88
+        }
       ]
     },
     "queries": {
@@ -928,7 +1636,7 @@
     },
     "calculates": {},
     "model": {
-      "Name": {
+      "facility_name": {
         "_defn": [
           {
             "_row_num": 2,
@@ -936,7 +1644,7 @@
           }
         ],
         "type": "string",
-        "elementKey": "Name"
+        "elementKey": "facility_name"
       },
       "facility_id": {
         "_defn": [
@@ -948,10 +1656,21 @@
         "type": "string",
         "elementKey": "facility_id"
       },
-      "Location": {
+      "admin_region": {
         "_defn": [
           {
             "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "regions",
+        "elementKey": "admin_region"
+      },
+      "Location": {
+        "_defn": [
+          {
+            "_row_num": 5,
             "section_name": "survey"
           }
         ],
@@ -980,7 +1699,7 @@
       "facility_type": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -988,18 +1707,7 @@
         "valuesList": "facility_types",
         "elementKey": "facility_type"
       },
-      "ownership": {
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "ownership_types",
-        "elementKey": "ownership"
-      },
-      "person_in_charge": {
+      "facility_ownership": {
         "_defn": [
           {
             "_row_num": 7,
@@ -1007,39 +1715,41 @@
           }
         ],
         "type": "string",
-        "elementKey": "person_in_charge"
+        "valuesList": "ownership_types",
+        "elementKey": "facility_ownership"
       },
-      "phone_number": {
+      "facility_population": {
         "_defn": [
           {
             "_row_num": 8,
             "section_name": "survey"
           }
         ],
-        "type": "string",
-        "elementKey": "phone_number"
+        "type": "number",
+        "elementKey": "facility_population"
       },
-      "email": {
+      "facility_coverage": {
         "_defn": [
           {
             "_row_num": 9,
             "section_name": "survey"
           }
         ],
-        "type": "string",
-        "elementKey": "email"
+        "type": "number",
+        "elementKey": "facility_coverage"
       },
-      "population": {
+      "electricity_source": {
         "_defn": [
           {
             "_row_num": 10,
             "section_name": "survey"
           }
         ],
-        "type": "number",
-        "elementKey": "population"
+        "type": "string",
+        "valuesList": "elec_sources",
+        "elementKey": "electricity_source"
       },
-      "elec_source": {
+      "grid_power_availability": {
         "_defn": [
           {
             "_row_num": 11,
@@ -1047,10 +1757,10 @@
           }
         ],
         "type": "string",
-        "valuesList": "elec_sources",
-        "elementKey": "elec_source"
+        "valuesList": "grid",
+        "elementKey": "grid_power_availability"
       },
-      "grid": {
+      "gas_availability": {
         "_defn": [
           {
             "_row_num": 12,
@@ -1058,10 +1768,10 @@
           }
         ],
         "type": "string",
-        "valuesList": "grid_availability",
-        "elementKey": "grid"
+        "valuesList": "fuel_availability",
+        "elementKey": "gas_availability"
       },
-      "gas": {
+      "kerosene_availability": {
         "_defn": [
           {
             "_row_num": 13,
@@ -1070,9 +1780,9 @@
         ],
         "type": "string",
         "valuesList": "fuel_availability",
-        "elementKey": "gas"
+        "elementKey": "kerosene_availability"
       },
-      "kerosene": {
+      "solar_suitable_climate": {
         "_defn": [
           {
             "_row_num": 14,
@@ -1080,10 +1790,10 @@
           }
         ],
         "type": "string",
-        "valuesList": "fuel_availability",
-        "elementKey": "kerosene"
+        "valuesList": "yes_no",
+        "elementKey": "solar_suitable_climate"
       },
-      "solar_suitable": {
+      "solar_suitable_site": {
         "_defn": [
           {
             "_row_num": 15,
@@ -1092,9 +1802,9 @@
         ],
         "type": "string",
         "valuesList": "yes_no",
-        "elementKey": "solar_suitable"
+        "elementKey": "solar_suitable_site"
       },
-      "climate": {
+      "climate_zone": {
         "_defn": [
           {
             "_row_num": 16,
@@ -1103,7 +1813,7 @@
         ],
         "type": "string",
         "valuesList": "climate_types",
-        "elementKey": "climate"
+        "elementKey": "climate_zone"
       },
       "distance_to_supply": {
         "_defn": [
@@ -1115,7 +1825,7 @@
         "type": "number",
         "elementKey": "distance_to_supply"
       },
-      "date_updated": {
+      "storage_type": {
         "_defn": [
           {
             "_row_num": 18,
@@ -1123,8 +1833,60 @@
           }
         ],
         "type": "string",
-        "elementType": "date",
-        "elementKey": "date_updated"
+        "valuesList": "storage_types",
+        "elementKey": "storage_type"
+      },
+      "delivery_type": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "delivery_types",
+        "elementKey": "delivery_type"
+      },
+      "vaccine_supply_interval": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "vaccine_supply_interval"
+      },
+      "vaccine_reserve_stock_requirement": {
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "vaccine_reserve_stock_requirement"
+      },
+      "vaccine_supply_mode": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "vaccine_modes",
+        "elementKey": "vaccine_supply_mode"
+      },
+      "contact_name": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "contact_name"
       }
     },
     "section_names": [
@@ -1139,7 +1901,7 @@
         "prompts": [
           {
             "type": "text",
-            "name": "Name",
+            "name": "facility_name",
             "display": {
               "text": "Enter health facility name"
             },
@@ -1166,17 +1928,31 @@
             "promptIdx": 1
           },
           {
+            "type": "select_one",
+            "values_list": "regions",
+            "name": "admin_region",
+            "display": {
+              "text": "Admin Region"
+            },
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen4",
+            "promptIdx": 2
+          },
+          {
             "type": "geopoint",
             "name": "Location",
             "display": {
               "text": "Capture location"
             },
-            "_row_num": 4,
-            "__rowNum__": 3,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 2
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 3
           },
           {
             "type": "select_one",
@@ -1184,20 +1960,6 @@
             "name": "facility_type",
             "display": {
               "text": "Choose the facility type"
-            },
-            "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen5",
-            "promptIdx": 3
-          },
-          {
-            "type": "select_one",
-            "values_list": "ownership_types",
-            "name": "ownership",
-            "display": {
-              "text": "Choose the ownership"
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -1207,63 +1969,65 @@
             "promptIdx": 4
           },
           {
-            "type": "text",
-            "name": "person_in_charge",
+            "type": "select_one",
+            "values_list": "ownership_types",
+            "name": "facility_ownership",
             "display": {
-              "text": "Enter name of the person in charge"
+              "text": "Choose the ownership"
             },
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 5
           },
           {
-            "type": "text",
-            "name": "phone_number",
+            "type": "number",
+            "name": "facility_population",
             "display": {
-              "text": "Enter phone number"
+              "text": "Enter the facility population"
             },
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "number",
             "_branch_label_enclosing_screen": "survey/_screen8",
             "promptIdx": 6
           },
           {
-            "type": "text",
-            "name": "email",
+            "type": "number",
+            "name": "facility_coverage",
             "display": {
-              "text": "Enter email"
+              "text": "Percent coverage?"
             },
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "number",
             "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 7
           },
           {
-            "type": "number",
-            "name": "population",
+            "type": "select_one",
+            "values_list": "elec_sources",
+            "name": "electricity_source",
             "display": {
-              "text": "Enter the facility population"
+              "text": "Choose the electricity source"
             },
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "prompt",
-            "_type": "number",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 8
           },
           {
             "type": "select_one",
-            "values_list": "elec_sources",
-            "name": "elec_source",
+            "values_list": "grid",
+            "name": "grid_power_availability",
             "display": {
-              "text": "Choose the electricity source"
+              "text": "Choose the grid availability"
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -1274,10 +2038,10 @@
           },
           {
             "type": "select_one",
-            "values_list": "grid_availability",
-            "name": "grid",
+            "values_list": "fuel_availability",
+            "name": "gas_availability",
             "display": {
-              "text": "Choose the grid availability"
+              "text": "Choose the gas availability"
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -1289,9 +2053,9 @@
           {
             "type": "select_one",
             "values_list": "fuel_availability",
-            "name": "gas",
+            "name": "kerosene_availability",
             "display": {
-              "text": "Choose the gas availability"
+              "text": "Choose the kerosene availability"
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -1302,10 +2066,10 @@
           },
           {
             "type": "select_one",
-            "values_list": "fuel_availability",
-            "name": "kerosene",
+            "values_list": "yes_no",
+            "name": "solar_suitable_climate",
             "display": {
-              "text": "Choose the kerosene availability"
+              "text": "Is This a solar suitable climate?"
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -1317,9 +2081,9 @@
           {
             "type": "select_one",
             "values_list": "yes_no",
-            "name": "solar_suitable",
+            "name": "solar_suitable_site",
             "display": {
-              "text": "Is This a solar suitable site?"
+              "text": "Is this a solar suitable site?"
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -1331,7 +2095,7 @@
           {
             "type": "select_one",
             "values_list": "climate_types",
-            "name": "climate",
+            "name": "climate_zone",
             "display": {
               "text": "What is the climate of this location?"
             },
@@ -1356,33 +2120,99 @@
             "promptIdx": 15
           },
           {
-            "type": "date",
-            "name": "date_updated",
+            "type": "select_one",
+            "values_list": "storage_types",
+            "name": "storage_type",
             "display": {
-              "text": "Date Updated"
+              "text": "Storage type?"
             },
-            "required": true,
             "_row_num": 18,
             "__rowNum__": 17,
             "_token_type": "prompt",
-            "_type": "date",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen18",
             "promptIdx": 16
+          },
+          {
+            "type": "select_one",
+            "values_list": "delivery_types",
+            "name": "delivery_type",
+            "display": {
+              "text": "Delivery type?"
+            },
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 17
+          },
+          {
+            "type": "number",
+            "name": "vaccine_supply_interval",
+            "display": {
+              "text": "Vaccine Supply Interval?"
+            },
+            "_row_num": 20,
+            "__rowNum__": 19,
+            "_token_type": "prompt",
+            "_type": "number",
+            "_branch_label_enclosing_screen": "survey/_screen20",
+            "promptIdx": 18
+          },
+          {
+            "type": "number",
+            "name": "vaccine_reserve_stock_requirement",
+            "display": {
+              "text": "Vaccine Reserve Stock Requirement?"
+            },
+            "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "prompt",
+            "_type": "number",
+            "_branch_label_enclosing_screen": "survey/_screen21",
+            "promptIdx": 19
+          },
+          {
+            "type": "select_one",
+            "values_list": "vaccine_modes",
+            "name": "vaccine_supply_mode",
+            "display": {
+              "text": "Vaccine Supply Mode?"
+            },
+            "_row_num": 22,
+            "__rowNum__": 21,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen22",
+            "promptIdx": 20
+          },
+          {
+            "type": "text",
+            "name": "contact_name",
+            "display": {
+              "text": "Contact Name?"
+            },
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 21
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 19,
-            "_branch_label_enclosing_screen": "survey/_screen19",
-            "promptIdx": 17
+            "_row_num": 24,
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 22
           }
         ],
         "validation_tag_map": {
           "finalize": [
             0,
-            1,
-            16
+            1
           ]
         },
         "operations": [
@@ -1489,25 +2319,55 @@
             "operationIdx": 16
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 19,
-            "operationIdx": 17
-          },
-          {
             "_row_num": 19,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 17
+          },
+          {
+            "_row_num": 20,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 18
+          },
+          {
+            "_row_num": 21,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 19
+          },
+          {
+            "_row_num": 22,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 20
+          },
+          {
+            "_row_num": 23,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 21
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 24,
+            "operationIdx": 22
+          },
+          {
+            "_row_num": 24,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 18
+            "operationIdx": 23
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 19,
-            "operationIdx": 19
+            "_row_num": 24,
+            "operationIdx": 24
           }
         ],
         "branch_label_map": {
@@ -1528,8 +2388,13 @@
           "_screen16": 14,
           "_screen17": 15,
           "_screen18": 16,
-          "_contents": 18,
-          "_screen19": 18
+          "_screen19": 17,
+          "_screen20": 18,
+          "_screen21": 19,
+          "_screen22": 20,
+          "_screen23": 21,
+          "_contents": 23,
+          "_screen24": 23
         }
       },
       "initial": {
@@ -1709,7 +2574,7 @@
       }
     },
     "dataTableModel": {
-      "Name": {
+      "facility_name": {
         "_defn": [
           {
             "_row_num": 2,
@@ -1717,10 +2582,10 @@
           }
         ],
         "type": "string",
-        "elementKey": "Name",
-        "elementName": "Name",
+        "elementKey": "facility_name",
+        "elementName": "facility_name",
         "elementSet": "data",
-        "elementPath": "Name"
+        "elementPath": "facility_name"
       },
       "facility_id": {
         "_defn": [
@@ -1735,10 +2600,24 @@
         "elementSet": "data",
         "elementPath": "facility_id"
       },
-      "Location": {
+      "admin_region": {
         "_defn": [
           {
             "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "regions",
+        "elementKey": "admin_region",
+        "elementName": "admin_region",
+        "elementSet": "data",
+        "elementPath": "admin_region"
+      },
+      "Location": {
+        "_defn": [
+          {
+            "_row_num": 5,
             "section_name": "survey"
           }
         ],
@@ -1789,7 +2668,7 @@
       "facility_type": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -1800,21 +2679,7 @@
         "elementSet": "data",
         "elementPath": "facility_type"
       },
-      "ownership": {
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "ownership_types",
-        "elementKey": "ownership",
-        "elementName": "ownership",
-        "elementSet": "data",
-        "elementPath": "ownership"
-      },
-      "person_in_charge": {
+      "facility_ownership": {
         "_defn": [
           {
             "_row_num": 7,
@@ -1822,51 +2687,53 @@
           }
         ],
         "type": "string",
-        "elementKey": "person_in_charge",
-        "elementName": "person_in_charge",
+        "valuesList": "ownership_types",
+        "elementKey": "facility_ownership",
+        "elementName": "facility_ownership",
         "elementSet": "data",
-        "elementPath": "person_in_charge"
+        "elementPath": "facility_ownership"
       },
-      "phone_number": {
+      "facility_population": {
         "_defn": [
           {
             "_row_num": 8,
             "section_name": "survey"
           }
         ],
-        "type": "string",
-        "elementKey": "phone_number",
-        "elementName": "phone_number",
+        "type": "number",
+        "elementKey": "facility_population",
+        "elementName": "facility_population",
         "elementSet": "data",
-        "elementPath": "phone_number"
+        "elementPath": "facility_population"
       },
-      "email": {
+      "facility_coverage": {
         "_defn": [
           {
             "_row_num": 9,
             "section_name": "survey"
           }
         ],
-        "type": "string",
-        "elementKey": "email",
-        "elementName": "email",
+        "type": "number",
+        "elementKey": "facility_coverage",
+        "elementName": "facility_coverage",
         "elementSet": "data",
-        "elementPath": "email"
+        "elementPath": "facility_coverage"
       },
-      "population": {
+      "electricity_source": {
         "_defn": [
           {
             "_row_num": 10,
             "section_name": "survey"
           }
         ],
-        "type": "number",
-        "elementKey": "population",
-        "elementName": "population",
+        "type": "string",
+        "valuesList": "elec_sources",
+        "elementKey": "electricity_source",
+        "elementName": "electricity_source",
         "elementSet": "data",
-        "elementPath": "population"
+        "elementPath": "electricity_source"
       },
-      "elec_source": {
+      "grid_power_availability": {
         "_defn": [
           {
             "_row_num": 11,
@@ -1874,13 +2741,13 @@
           }
         ],
         "type": "string",
-        "valuesList": "elec_sources",
-        "elementKey": "elec_source",
-        "elementName": "elec_source",
+        "valuesList": "grid",
+        "elementKey": "grid_power_availability",
+        "elementName": "grid_power_availability",
         "elementSet": "data",
-        "elementPath": "elec_source"
+        "elementPath": "grid_power_availability"
       },
-      "grid": {
+      "gas_availability": {
         "_defn": [
           {
             "_row_num": 12,
@@ -1888,13 +2755,13 @@
           }
         ],
         "type": "string",
-        "valuesList": "grid_availability",
-        "elementKey": "grid",
-        "elementName": "grid",
+        "valuesList": "fuel_availability",
+        "elementKey": "gas_availability",
+        "elementName": "gas_availability",
         "elementSet": "data",
-        "elementPath": "grid"
+        "elementPath": "gas_availability"
       },
-      "gas": {
+      "kerosene_availability": {
         "_defn": [
           {
             "_row_num": 13,
@@ -1903,12 +2770,12 @@
         ],
         "type": "string",
         "valuesList": "fuel_availability",
-        "elementKey": "gas",
-        "elementName": "gas",
+        "elementKey": "kerosene_availability",
+        "elementName": "kerosene_availability",
         "elementSet": "data",
-        "elementPath": "gas"
+        "elementPath": "kerosene_availability"
       },
-      "kerosene": {
+      "solar_suitable_climate": {
         "_defn": [
           {
             "_row_num": 14,
@@ -1916,13 +2783,13 @@
           }
         ],
         "type": "string",
-        "valuesList": "fuel_availability",
-        "elementKey": "kerosene",
-        "elementName": "kerosene",
+        "valuesList": "yes_no",
+        "elementKey": "solar_suitable_climate",
+        "elementName": "solar_suitable_climate",
         "elementSet": "data",
-        "elementPath": "kerosene"
+        "elementPath": "solar_suitable_climate"
       },
-      "solar_suitable": {
+      "solar_suitable_site": {
         "_defn": [
           {
             "_row_num": 15,
@@ -1931,12 +2798,12 @@
         ],
         "type": "string",
         "valuesList": "yes_no",
-        "elementKey": "solar_suitable",
-        "elementName": "solar_suitable",
+        "elementKey": "solar_suitable_site",
+        "elementName": "solar_suitable_site",
         "elementSet": "data",
-        "elementPath": "solar_suitable"
+        "elementPath": "solar_suitable_site"
       },
-      "climate": {
+      "climate_zone": {
         "_defn": [
           {
             "_row_num": 16,
@@ -1945,10 +2812,10 @@
         ],
         "type": "string",
         "valuesList": "climate_types",
-        "elementKey": "climate",
-        "elementName": "climate",
+        "elementKey": "climate_zone",
+        "elementName": "climate_zone",
         "elementSet": "data",
-        "elementPath": "climate"
+        "elementPath": "climate_zone"
       },
       "distance_to_supply": {
         "_defn": [
@@ -1963,7 +2830,7 @@
         "elementSet": "data",
         "elementPath": "distance_to_supply"
       },
-      "date_updated": {
+      "storage_type": {
         "_defn": [
           {
             "_row_num": 18,
@@ -1971,11 +2838,78 @@
           }
         ],
         "type": "string",
-        "elementType": "date",
-        "elementKey": "date_updated",
-        "elementName": "date_updated",
+        "valuesList": "storage_types",
+        "elementKey": "storage_type",
+        "elementName": "storage_type",
         "elementSet": "data",
-        "elementPath": "date_updated"
+        "elementPath": "storage_type"
+      },
+      "delivery_type": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "delivery_types",
+        "elementKey": "delivery_type",
+        "elementName": "delivery_type",
+        "elementSet": "data",
+        "elementPath": "delivery_type"
+      },
+      "vaccine_supply_interval": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "vaccine_supply_interval",
+        "elementName": "vaccine_supply_interval",
+        "elementSet": "data",
+        "elementPath": "vaccine_supply_interval"
+      },
+      "vaccine_reserve_stock_requirement": {
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "vaccine_reserve_stock_requirement",
+        "elementName": "vaccine_reserve_stock_requirement",
+        "elementSet": "data",
+        "elementPath": "vaccine_reserve_stock_requirement"
+      },
+      "vaccine_supply_mode": {
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "vaccine_modes",
+        "elementKey": "vaccine_supply_mode",
+        "elementName": "vaccine_supply_mode",
+        "elementSet": "data",
+        "elementPath": "vaccine_supply_mode"
+      },
+      "contact_name": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "contact_name",
+        "elementName": "contact_name",
+        "elementSet": "data",
+        "elementPath": "contact_name"
       },
       "Location_latitude": {
         "type": "number",
@@ -2097,17 +3031,38 @@
     "properties": [
       {
         "_partition": "Column",
-        "_aspect": "climate",
+        "_aspect": "admin_region",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"regions\",\"data_value\":\"dowa\",\"display\":{\"text\":\"Dowa\"},\"_row_num\":60},{\"choice_list_name\":\"regions\",\"data_value\":\"kasungu\",\"display\":{\"text\":\"Kasungu\"},\"_row_num\":61},{\"choice_list_name\":\"regions\",\"data_value\":\"nkhotakota\",\"display\":{\"text\":\"Nkhotakota\"},\"_row_num\":62},{\"choice_list_name\":\"regions\",\"data_value\":\"ntchisi\",\"display\":{\"text\":\"Ntchisi\"},\"_row_num\":63},{\"choice_list_name\":\"regions\",\"data_value\":\"salima\",\"display\":{\"text\":\"Salima\"},\"_row_num\":64},{\"choice_list_name\":\"regions\",\"data_value\":\"dedza\",\"display\":{\"text\":\"Dedza\"},\"_row_num\":65},{\"choice_list_name\":\"regions\",\"data_value\":\"lilongwe\",\"display\":{\"text\":\"Lilongwe\"},\"_row_num\":66},{\"choice_list_name\":\"regions\",\"data_value\":\"mchinji\",\"display\":{\"text\":\"Mchinji\"},\"_row_num\":67},{\"choice_list_name\":\"regions\",\"data_value\":\"ntcheu\",\"display\":{\"text\":\"Ntcheu\"},\"_row_num\":68},{\"choice_list_name\":\"regions\",\"data_value\":\"chitipa\",\"display\":{\"text\":\"Chitipa\"},\"_row_num\":69},{\"choice_list_name\":\"regions\",\"data_value\":\"karonga\",\"display\":{\"text\":\"Karonga\"},\"_row_num\":70},{\"choice_list_name\":\"regions\",\"data_value\":\"likoma\",\"display\":{\"text\":\"Likoma\"},\"_row_num\":71},{\"choice_list_name\":\"regions\",\"data_value\":\"mzimba north\",\"display\":{\"text\":\"Mzimba North\"},\"_row_num\":72},{\"choice_list_name\":\"regions\",\"data_value\":\"mzimba south\",\"display\":{\"text\":\"Mzimba South\"},\"_row_num\":73},{\"choice_list_name\":\"regions\",\"data_value\":\"nkhata bay\",\"display\":{\"text\":\"Nkhata Bay\"},\"_row_num\":74},{\"choice_list_name\":\"regions\",\"data_value\":\"rumphi\",\"display\":{\"text\":\"Rumphi\"},\"_row_num\":75},{\"choice_list_name\":\"regions\",\"data_value\":\"balaka\",\"display\":{\"text\":\"Balaka\"},\"_row_num\":76},{\"choice_list_name\":\"regions\",\"data_value\":\"machinga\",\"display\":{\"text\":\"Machinga\"},\"_row_num\":77},{\"choice_list_name\":\"regions\",\"data_value\":\"mangochi\",\"display\":{\"text\":\"Mangochi\"},\"_row_num\":78},{\"choice_list_name\":\"regions\",\"data_value\":\"mulanje\",\"display\":{\"text\":\"Mulanje\"},\"_row_num\":79},{\"choice_list_name\":\"regions\",\"data_value\":\"phalombe\",\"display\":{\"text\":\"Phalombe\"},\"_row_num\":80},{\"choice_list_name\":\"regions\",\"data_value\":\"zomba\",\"display\":{\"text\":\"Zomba\"},\"_row_num\":81},{\"choice_list_name\":\"regions\",\"data_value\":\"blantyre\",\"display\":{\"text\":\"Blantyre\"},\"_row_num\":82},{\"choice_list_name\":\"regions\",\"data_value\":\"chikwawa\",\"display\":{\"text\":\"Chikwawa\"},\"_row_num\":83},{\"choice_list_name\":\"regions\",\"data_value\":\"chiladzulu\",\"display\":{\"text\":\"Chiladzulu\"},\"_row_num\":84},{\"choice_list_name\":\"regions\",\"data_value\":\"mwanza\",\"display\":{\"text\":\"Mwanza\"},\"_row_num\":85},{\"choice_list_name\":\"regions\",\"data_value\":\"neno\",\"display\":{\"text\":\"Neno\"},\"_row_num\":86},{\"choice_list_name\":\"regions\",\"data_value\":\"nsanje\",\"display\":{\"text\":\"Nsanje\"},\"_row_num\":87},{\"choice_list_name\":\"regions\",\"data_value\":\"thyolo\",\"display\":{\"text\":\"Thyolo\"},\"_row_num\":88}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "climate_zone",
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"climate_types\",\"data_value\":\"moderate\",\"display\":{\"text\":\"Moderate\"},\"_row_num\":41},{\"choice_list_name\":\"climate_types\",\"data_value\":\"temperate\",\"display\":{\"text\":\"Temperate\"},\"_row_num\":42},{\"choice_list_name\":\"climate_types\",\"data_value\":\"hot\",\"display\":{\"text\":\"Hot\"},\"_row_num\":43}]"
       },
       {
         "_partition": "Column",
-        "_aspect": "elec_source",
+        "_aspect": "delivery_type",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"delivery_types\",\"data_value\":\"static\",\"display\":{\"text\":\"Static\"},\"_row_num\":49},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"outreach\",\"display\":{\"text\":\"Outreach\"},\"_row_num\":50},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"both\",\"display\":{\"text\":\"Both Static and Outreach\"},\"_row_num\":51},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"none\",\"display\":{\"text\":\"None\"},\"_row_num\":52}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "electricity_source",
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"elec_sources\",\"data_value\":\"grid\",\"display\":{\"text\":\"Grid\"},\"_row_num\":24},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"generator\",\"display\":{\"text\":\"Generator\"},\"_row_num\":25},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both\",\"display\":{\"text\":\"Both Grid and Generator\"},\"_row_num\":26},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"none\",\"display\":{\"text\":\"None\"},\"_row_num\":27}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "facility_ownership",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"ownership_types\",\"data_value\":\"public\",\"display\":{\"text\":\"Public\"},\"_row_num\":18},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"private\",\"display\":{\"text\":\"Private\"},\"_row_num\":19},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"ngo\",\"display\":{\"text\":\"NGO\"},\"_row_num\":20},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"faithbased\",\"display\":{\"text\":\"Faithbased\"},\"_row_num\":21},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"other\",\"display\":{\"text\":\"Other\"},\"_row_num\":22}]"
       },
       {
         "_partition": "Column",
@@ -2118,38 +3073,52 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "gas",
+        "_aspect": "gas_availability",
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"available\",\"display\":{\"text\":\"Available\"},\"_row_num\":35},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"irregular\",\"display\":{\"text\":\"Irregular\"},\"_row_num\":36},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_available\",\"display\":{\"text\":\"Not Available\"},\"_row_num\":37},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":38},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_applicable\",\"display\":{\"text\":\"Not Applicable\"},\"_row_num\":39}]"
       },
       {
         "_partition": "Column",
-        "_aspect": "grid",
+        "_aspect": "grid_power_availability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"grid_availability\",\"data_value\":\"more_than_16\",\"display\":{\"text\":\"More than 16\"},\"_row_num\":29},{\"choice_list_name\":\"grid_availability\",\"data_value\":\"8_to_16\",\"display\":{\"text\":\"8 to 16\"},\"_row_num\":30},{\"choice_list_name\":\"grid_availability\",\"data_value\":\"4_to_8\",\"display\":{\"text\":\"4 to 8\"},\"_row_num\":31},{\"choice_list_name\":\"grid_availability\",\"data_value\":\"fewer_than_4\",\"display\":{\"text\":\"Fewer than 4\"},\"_row_num\":32},{\"choice_list_name\":\"grid_availability\",\"data_value\":\"none\",\"display\":{\"text\":\"None\"},\"_row_num\":33}]"
+        "_value": "[{\"choice_list_name\":\"grid\",\"data_value\":\"more_than_16\",\"display\":{\"text\":\"More than 16\"},\"_row_num\":29},{\"choice_list_name\":\"grid\",\"data_value\":\"8_to_16\",\"display\":{\"text\":\"8 to 16\"},\"_row_num\":30},{\"choice_list_name\":\"grid\",\"data_value\":\"4_to_8\",\"display\":{\"text\":\"4 to 8\"},\"_row_num\":31},{\"choice_list_name\":\"grid\",\"data_value\":\"fewer_than_4\",\"display\":{\"text\":\"Fewer than 4\"},\"_row_num\":32},{\"choice_list_name\":\"grid\",\"data_value\":\"none\",\"display\":{\"text\":\"None\"},\"_row_num\":33}]"
       },
       {
         "_partition": "Column",
-        "_aspect": "kerosene",
+        "_aspect": "kerosene_availability",
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"available\",\"display\":{\"text\":\"Available\"},\"_row_num\":35},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"irregular\",\"display\":{\"text\":\"Irregular\"},\"_row_num\":36},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_available\",\"display\":{\"text\":\"Not Available\"},\"_row_num\":37},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":38},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_applicable\",\"display\":{\"text\":\"Not Applicable\"},\"_row_num\":39}]"
       },
       {
         "_partition": "Column",
-        "_aspect": "ownership",
+        "_aspect": "solar_suitable_climate",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"ownership_types\",\"data_value\":\"public\",\"display\":{\"text\":\"Public\"},\"_row_num\":18},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"private\",\"display\":{\"text\":\"Private\"},\"_row_num\":19},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"ngo\",\"display\":{\"text\":\"NGO\"},\"_row_num\":20},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"faith_based\",\"display\":{\"text\":\"Faithbased\"},\"_row_num\":21},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"other\",\"display\":{\"text\":\"Other\"},\"_row_num\":22}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
-        "_aspect": "solar_suitable",
+        "_aspect": "solar_suitable_site",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "storage_type",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"storage_types\",\"data_value\":\"depot\",\"display\":{\"text\":\"Depot\"},\"_row_num\":45},{\"choice_list_name\":\"storage_types\",\"data_value\":\"delivery\",\"display\":{\"text\":\"Delivery\"},\"_row_num\":46},{\"choice_list_name\":\"storage_types\",\"data_value\":\"both\",\"display\":{\"text\":\"Both Depot and Delivery\"},\"_row_num\":47}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "vaccine_supply_mode",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"delivered\",\"display\":{\"text\":\"Delivered\"},\"_row_num\":54},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"collected\",\"display\":{\"text\":\"Collected\"},\"_row_num\":55},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"both\",\"display\":{\"text\":\"Both Delivered and Collected\"},\"_row_num\":56},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"none\",\"display\":{\"text\":\"None\"},\"_row_num\":57},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":58}]"
       },
       {
         "_partition": "FormType",

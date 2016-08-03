@@ -38,19 +38,19 @@ function refrigeratorTypesCBFailure(error) {
 
 }
 
-function refrigeratorFacilitiesCBSuccess(result) {
+function healthFacilitiesCBSuccess(result) {
 
     facilityData = result;
 
     for (var i = 0; i < facilityData.getCount(); i++) {
         facilityNameMap[facilityData.getData(i, 'facility_id')] =
-            facilityData.getData(i, 'Name');
+            facilityData.getData(i, 'facility_name');
     }
 }
 
-function refrigeratorFacilitiesCBFailure(error) {
+function healthFacilitiesCBFailure(error) {
 
-    console.log('refrigeratorFacilitiesCBFailure: failed with error: ' + error);
+    console.log('healthFacilitiesCBFailure: failed with error: ' + error);
 
 }
 
@@ -59,7 +59,7 @@ function cbSuccess(result) {
     refrigeratorsResultSet = result;
 
     odkData.query('health_facility', null, null, null, null, null, null, true, 
-        refrigeratorFacilitiesCBSuccess, refrigeratorFacilitiesCBFailure);
+        healthFacilitiesCBSuccess, healthFacilitiesCBFailure);
 
     odkData.query('refrigerator_types', null, null, null, null, null, null, true, 
         refrigeratorTypesCBSuccess, refrigeratorTypesCBFailure);
@@ -116,7 +116,7 @@ var displayGroup = function(idxStart) {
         var item = $('<li>');
         item.attr('rowId', refrigeratorsResultSet.getRowId(i));
         item.attr('class', 'item_space');
-        item.text(refrigeratorsResultSet.getData(i, 'refrigerator_id'));
+        item.text('Refrigerator ' + refrigeratorsResultSet.getData(i, 'refrigerator_id'));
                 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
@@ -131,9 +131,8 @@ var displayGroup = function(idxStart) {
         item.append(field1);
 
         var field2 = $('<li>');
-        var typeId = refrigeratorsResultSet.getData(i, 'model_id');
         field2.attr('class', 'detail');
-        field2.text('Model ID: ' + typeId);
+        field2.text('Model ID: ' + refrigeratorsResultSet.getData(i, 'model_id'));
         item.append(field2);
 
         $('#list').append(item);

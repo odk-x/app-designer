@@ -2,7 +2,7 @@
   "xlsx": {
     "survey": [
       {
-        "type": "text",
+        "type": "number",
         "name": "refrigerator_id",
         "display": {
           "text": "Enter refrigerator ID:"
@@ -28,38 +28,20 @@
         "_row_num": 4
       },
       {
-        "type": "select_one",
-        "values_list": "refrigerator_types",
-        "name": "ref_type",
+        "type": "text",
+        "name": "tracking_id",
         "display": {
-          "text": "Choose the refrigerator type:"
+          "text": "Enter the tracking ID:"
         },
         "_row_num": 5
       },
       {
         "type": "number",
-        "name": "tracking_id",
-        "display": {
-          "text": "Enter the tracking ID:"
-        },
-        "_row_num": 6
-      },
-      {
-        "type": "number",
-        "name": "year_installed",
+        "name": "year",
         "display": {
           "text": "Enter the year installed:"
         },
-        "_row_num": 7
-      },
-      {
-        "type": "decimal",
-        "name": "refrigerator_size",
-        "display": {
-          "text": "Enter refrigerator size:",
-          "hint": "cubic meters"
-        },
-        "_row_num": 8
+        "_row_num": 6
       },
       {
         "type": "select_multiple",
@@ -68,16 +50,7 @@
         "display": {
           "text": "Choose the power source:"
         },
-        "_row_num": 9
-      },
-      {
-        "type": "select_one",
-        "values_list": "conditions",
-        "name": "refrigerator_condition",
-        "display": {
-          "text": "Select refrigerator condition:"
-        },
-        "_row_num": 10
+        "_row_num": 7
       },
       {
         "type": "select_one",
@@ -86,26 +59,34 @@
         "display": {
           "text": "Working status:"
         },
-        "_row_num": 11
-      },
-      {
-        "type": "select_multiple",
-        "values_list": "reasons",
-        "name": "reasons_not_working",
-        "display": {
-          "text": "Reasons not working:",
-          "hint": "select all that apply"
-        },
-        "_row_num": 12
+        "_row_num": 8
       },
       {
         "type": "select_one",
-        "values_list": "utilization",
-        "name": "current_use",
+        "values_list": "reasons",
+        "name": "reason_not_working",
+        "display": {
+          "text": "Reason not working:"
+        },
+        "_row_num": 9
+      },
+      {
+        "type": "select_one",
+        "values_list": "current_use",
+        "name": "utilization",
         "display": {
           "text": "Choose the current status:"
         },
-        "_row_num": 13
+        "_row_num": 10
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "voltage_regulator",
+        "display": {
+          "text": "Voltage regulator?"
+        },
+        "_row_num": 11
       }
     ],
     "choices": [
@@ -254,7 +235,7 @@
         "_row_num": 22
       },
       {
-        "choice_list_name": "utilization",
+        "choice_list_name": "current_use",
         "data_value": "in_use",
         "display": {
           "text": "In Use"
@@ -262,7 +243,7 @@
         "_row_num": 24
       },
       {
-        "choice_list_name": "utilization",
+        "choice_list_name": "current_use",
         "data_value": "not_in_use",
         "display": {
           "text": "Not In Use"
@@ -270,7 +251,7 @@
         "_row_num": 25
       },
       {
-        "choice_list_name": "utilization",
+        "choice_list_name": "current_use",
         "data_value": "in_store_for_allocation",
         "display": {
           "text": "In Store For Allocation"
@@ -278,60 +259,20 @@
         "_row_num": 26
       },
       {
-        "choice_list_name": "refrigerator_types",
-        "data_value": "chest_freezer",
+        "choice_list_name": "yes_no",
+        "data_value": "yes",
         "display": {
-          "text": "Chest Freezer"
+          "text": "Yes"
         },
         "_row_num": 28
       },
       {
-        "choice_list_name": "refrigerator_types",
-        "data_value": "ice_pack_freezer",
+        "choice_list_name": "yes_no",
+        "data_value": "no",
         "display": {
-          "text": "Ice Pack Freezer"
+          "text": "No"
         },
         "_row_num": 29
-      },
-      {
-        "choice_list_name": "refrigerator_types",
-        "data_value": "chest_refrigerator",
-        "display": {
-          "text": "Chest Refrigerator"
-        },
-        "_row_num": 30
-      },
-      {
-        "choice_list_name": "refrigerator_types",
-        "data_value": "ice_lined_refrigerator",
-        "display": {
-          "text": "Ice Lined Refrigerator"
-        },
-        "_row_num": 31
-      },
-      {
-        "choice_list_name": "refrigerator_types",
-        "data_value": "upright_refrigerator",
-        "display": {
-          "text": "Upright Refrigerator"
-        },
-        "_row_num": 32
-      },
-      {
-        "choice_list_name": "refrigerator_types",
-        "data_value": "solar_photovoltaic_refrigerator",
-        "display": {
-          "text": "Solar Photovoltaic Refrigerator"
-        },
-        "_row_num": 33
-      },
-      {
-        "choice_list_name": "refrigerator_types",
-        "data_value": "solar_thermal_refrigerator",
-        "display": {
-          "text": "Solar Thermal Refrigerator"
-        },
-        "_row_num": 34
       }
     ],
     "queries": [
@@ -340,7 +281,7 @@
         "query_type": "linked_table",
         "linked_form_id": "refrigerator_types",
         "linked_table_id": "refrigerator_types",
-        "selection": "_id >= ?",
+        "selection": "catalog_id >= ?",
         "selectionArgs": "[ '0' ]",
         "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
         "_row_num": 2
@@ -354,38 +295,6 @@
         "selectionArgs": "[ '0' ]",
         "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
         "_row_num": 3
-      }
-    ],
-    "model": [
-      {
-        "name": "refrigerator_id",
-        "type": "text",
-        "_row_num": 2
-      },
-      {
-        "name": "refrigerator_size",
-        "type": "decimal",
-        "_row_num": 3
-      },
-      {
-        "name": "refrigerator_location",
-        "type": "geopoint",
-        "_row_num": 4
-      },
-      {
-        "name": "refrigerator_condition",
-        "type": "select_one",
-        "_row_num": 5
-      },
-      {
-        "name": "refrigerator_stock_level",
-        "type": "integer",
-        "_row_num": 6
-      },
-      {
-        "name": "refrigerator_text",
-        "type": "text",
-        "_row_num": 7
       }
     ],
     "properties": [
@@ -433,7 +342,7 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Initial refrigerator information"
+          "title": "Refrigerators"
         },
         "_row_num": 5
       }
@@ -476,7 +385,7 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Initial refrigerator information"
+          "title": "Refrigerators"
         },
         "_row_num": 5
       },
@@ -500,7 +409,7 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Initial refrigerator information"
+          "title": "Refrigerators"
         },
         "_row_num": 5
       }
@@ -658,9 +567,9 @@
           "_row_num": 22
         }
       ],
-      "utilization": [
+      "current_use": [
         {
-          "choice_list_name": "utilization",
+          "choice_list_name": "current_use",
           "data_value": "in_use",
           "display": {
             "text": "In Use"
@@ -668,7 +577,7 @@
           "_row_num": 24
         },
         {
-          "choice_list_name": "utilization",
+          "choice_list_name": "current_use",
           "data_value": "not_in_use",
           "display": {
             "text": "Not In Use"
@@ -676,7 +585,7 @@
           "_row_num": 25
         },
         {
-          "choice_list_name": "utilization",
+          "choice_list_name": "current_use",
           "data_value": "in_store_for_allocation",
           "display": {
             "text": "In Store For Allocation"
@@ -684,62 +593,22 @@
           "_row_num": 26
         }
       ],
-      "refrigerator_types": [
+      "yes_no": [
         {
-          "choice_list_name": "refrigerator_types",
-          "data_value": "chest_freezer",
+          "choice_list_name": "yes_no",
+          "data_value": "yes",
           "display": {
-            "text": "Chest Freezer"
+            "text": "Yes"
           },
           "_row_num": 28
         },
         {
-          "choice_list_name": "refrigerator_types",
-          "data_value": "ice_pack_freezer",
+          "choice_list_name": "yes_no",
+          "data_value": "no",
           "display": {
-            "text": "Ice Pack Freezer"
+            "text": "No"
           },
           "_row_num": 29
-        },
-        {
-          "choice_list_name": "refrigerator_types",
-          "data_value": "chest_refrigerator",
-          "display": {
-            "text": "Chest Refrigerator"
-          },
-          "_row_num": 30
-        },
-        {
-          "choice_list_name": "refrigerator_types",
-          "data_value": "ice_lined_refrigerator",
-          "display": {
-            "text": "Ice Lined Refrigerator"
-          },
-          "_row_num": 31
-        },
-        {
-          "choice_list_name": "refrigerator_types",
-          "data_value": "upright_refrigerator",
-          "display": {
-            "text": "Upright Refrigerator"
-          },
-          "_row_num": 32
-        },
-        {
-          "choice_list_name": "refrigerator_types",
-          "data_value": "solar_photovoltaic_refrigerator",
-          "display": {
-            "text": "Solar Photovoltaic Refrigerator"
-          },
-          "_row_num": 33
-        },
-        {
-          "choice_list_name": "refrigerator_types",
-          "data_value": "solar_thermal_refrigerator",
-          "display": {
-            "text": "Solar Thermal Refrigerator"
-          },
-          "_row_num": 34
         }
       ]
     },
@@ -749,7 +618,7 @@
         "query_type": "linked_table",
         "linked_form_id": "refrigerator_types",
         "linked_table_id": "refrigerator_types",
-        "selection": "_id >= ?",
+        "selection": "catalog_id >= ?",
         "selectionArgs": "[ '0' ]",
         "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
         "_row_num": 2
@@ -768,97 +637,14 @@
     "calculates": {},
     "model": {
       "refrigerator_id": {
-        "type": "string",
         "_defn": [
           {
             "_row_num": 2,
             "section_name": "survey"
-          },
-          {
-            "_row_num": 2,
-            "section_name": "model"
           }
         ],
-        "elementKey": "refrigerator_id"
-      },
-      "refrigerator_size": {
         "type": "number",
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_size"
-      },
-      "refrigerator_location": {
-        "name": "geopoint",
-        "type": "object",
-        "elementType": "geopoint",
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_latitude"
-          },
-          "longitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_longitude"
-          },
-          "altitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_altitude"
-          },
-          "accuracy": {
-            "type": "number",
-            "elementKey": "refrigerator_location_accuracy"
-          }
-        },
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_location"
-      },
-      "refrigerator_condition": {
-        "type": "string",
-        "valuesList": "conditions",
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 5,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_condition"
-      },
-      "refrigerator_stock_level": {
-        "type": "integer",
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_stock_level"
-      },
-      "refrigerator_text": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_text"
+        "elementKey": "refrigerator_id"
       },
       "facility_id": {
         "_defn": [
@@ -882,7 +668,7 @@
         "valuesList": "refrigerator_model_list",
         "elementKey": "model_id"
       },
-      "ref_type": {
+      "tracking_id": {
         "_defn": [
           {
             "_row_num": 5,
@@ -890,10 +676,9 @@
           }
         ],
         "type": "string",
-        "valuesList": "refrigerator_types",
-        "elementKey": "ref_type"
+        "elementKey": "tracking_id"
       },
-      "tracking_id": {
+      "year": {
         "_defn": [
           {
             "_row_num": 6,
@@ -901,22 +686,12 @@
           }
         ],
         "type": "number",
-        "elementKey": "tracking_id"
-      },
-      "year_installed": {
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "survey"
-          }
-        ],
-        "type": "number",
-        "elementKey": "year_installed"
+        "elementKey": "year"
       },
       "power_source": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
@@ -931,7 +706,7 @@
       "working_status": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -939,31 +714,38 @@
         "valuesList": "status",
         "elementKey": "working_status"
       },
-      "reasons_not_working": {
+      "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 12,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "reasons_not_working_items"
-        },
-        "valuesList": "reasons",
-        "elementKey": "reasons_not_working"
-      },
-      "current_use": {
-        "_defn": [
-          {
-            "_row_num": 13,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
         "type": "string",
-        "valuesList": "utilization",
-        "elementKey": "current_use"
+        "valuesList": "reasons",
+        "elementKey": "reason_not_working"
+      },
+      "utilization": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "current_use",
+        "elementKey": "utilization"
+      },
+      "voltage_regulator": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "voltage_regulator"
       }
     },
     "section_names": [
@@ -977,7 +759,7 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "text",
+            "type": "number",
             "name": "refrigerator_id",
             "display": {
               "text": "Enter refrigerator ID:"
@@ -985,7 +767,7 @@
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "number",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
@@ -1018,24 +800,23 @@
             "promptIdx": 2
           },
           {
-            "type": "select_one",
-            "values_list": "refrigerator_types",
-            "name": "ref_type",
+            "type": "text",
+            "name": "tracking_id",
             "display": {
-              "text": "Choose the refrigerator type:"
+              "text": "Enter the tracking ID:"
             },
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 3
           },
           {
             "type": "number",
-            "name": "tracking_id",
+            "name": "year",
             "display": {
-              "text": "Enter the tracking ID:"
+              "text": "Enter the year installed:"
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -1045,52 +826,53 @@
             "promptIdx": 4
           },
           {
-            "type": "number",
-            "name": "year_installed",
-            "display": {
-              "text": "Enter the year installed:"
-            },
-            "_row_num": 7,
-            "__rowNum__": 6,
-            "_token_type": "prompt",
-            "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen7",
-            "promptIdx": 5
-          },
-          {
-            "type": "decimal",
-            "name": "refrigerator_size",
-            "display": {
-              "text": "Enter refrigerator size:",
-              "hint": "cubic meters"
-            },
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "prompt",
-            "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen8",
-            "promptIdx": 6
-          },
-          {
             "type": "select_multiple",
             "values_list": "power",
             "name": "power_source",
             "display": {
               "text": "Choose the power source:"
             },
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen7",
+            "promptIdx": 5
+          },
+          {
+            "type": "select_one",
+            "values_list": "status",
+            "name": "working_status",
+            "display": {
+              "text": "Working status:"
+            },
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen8",
+            "promptIdx": 6
+          },
+          {
+            "type": "select_one",
+            "values_list": "reasons",
+            "name": "reason_not_working",
+            "display": {
+              "text": "Reason not working:"
+            },
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
-            "_type": "select_multiple",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 7
           },
           {
             "type": "select_one",
-            "values_list": "conditions",
-            "name": "refrigerator_condition",
+            "values_list": "current_use",
+            "name": "utilization",
             "display": {
-              "text": "Select refrigerator condition:"
+              "text": "Choose the current status:"
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -1101,10 +883,10 @@
           },
           {
             "type": "select_one",
-            "values_list": "status",
-            "name": "working_status",
+            "values_list": "yes_no",
+            "name": "voltage_regulator",
             "display": {
-              "text": "Working status:"
+              "text": "Voltage regulator?"
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -1114,41 +896,12 @@
             "promptIdx": 9
           },
           {
-            "type": "select_multiple",
-            "values_list": "reasons",
-            "name": "reasons_not_working",
-            "display": {
-              "text": "Reasons not working:",
-              "hint": "select all that apply"
-            },
-            "_row_num": 12,
-            "__rowNum__": 11,
-            "_token_type": "prompt",
-            "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 10
-          },
-          {
-            "type": "select_one",
-            "values_list": "utilization",
-            "name": "current_use",
-            "display": {
-              "text": "Choose the current status:"
-            },
-            "_row_num": 13,
-            "__rowNum__": 12,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen13",
-            "promptIdx": 11
-          },
-          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 14,
-            "_branch_label_enclosing_screen": "survey/_screen14",
-            "promptIdx": 12
+            "_row_num": 12,
+            "_branch_label_enclosing_screen": "survey/_screen12",
+            "promptIdx": 10
           }
         ],
         "validation_tag_map": {
@@ -1216,37 +969,25 @@
             "operationIdx": 9
           },
           {
+            "_token_type": "exit_section",
+            "clause": "exit section",
             "_row_num": 12,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 10
           },
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 11
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 14,
-            "operationIdx": 12
-          },
-          {
-            "_row_num": 14,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 13
+            "operationIdx": 11
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 14,
-            "operationIdx": 14
+            "_row_num": 12,
+            "operationIdx": 12
           }
         ],
         "branch_label_map": {
@@ -1260,10 +1001,8 @@
           "_screen9": 7,
           "_screen10": 8,
           "_screen11": 9,
-          "_screen12": 10,
-          "_screen13": 11,
-          "_contents": 13,
-          "_screen14": 13
+          "_contents": 11,
+          "_screen12": 11
         }
       },
       "initial": {
@@ -1294,7 +1033,7 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Initial refrigerator information"
+              "title": "Refrigerators"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1444,134 +1183,17 @@
     },
     "dataTableModel": {
       "refrigerator_id": {
-        "type": "string",
         "_defn": [
           {
             "_row_num": 2,
             "section_name": "survey"
-          },
-          {
-            "_row_num": 2,
-            "section_name": "model"
           }
         ],
+        "type": "number",
         "elementKey": "refrigerator_id",
         "elementName": "refrigerator_id",
         "elementSet": "data",
         "elementPath": "refrigerator_id"
-      },
-      "refrigerator_size": {
-        "type": "number",
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_size",
-        "elementName": "refrigerator_size",
-        "elementSet": "data",
-        "elementPath": "refrigerator_size"
-      },
-      "refrigerator_location": {
-        "name": "geopoint",
-        "type": "object",
-        "elementType": "geopoint",
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_latitude",
-            "elementName": "latitude",
-            "elementSet": "data",
-            "elementPath": "refrigerator_location.latitude"
-          },
-          "longitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_longitude",
-            "elementName": "longitude",
-            "elementSet": "data",
-            "elementPath": "refrigerator_location.longitude"
-          },
-          "altitude": {
-            "type": "number",
-            "elementKey": "refrigerator_location_altitude",
-            "elementName": "altitude",
-            "elementSet": "data",
-            "elementPath": "refrigerator_location.altitude"
-          },
-          "accuracy": {
-            "type": "number",
-            "elementKey": "refrigerator_location_accuracy",
-            "elementName": "accuracy",
-            "elementSet": "data",
-            "elementPath": "refrigerator_location.accuracy"
-          }
-        },
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_location",
-        "elementName": "refrigerator_location",
-        "elementSet": "data",
-        "elementPath": "refrigerator_location",
-        "listChildElementKeys": [
-          "refrigerator_location_accuracy",
-          "refrigerator_location_altitude",
-          "refrigerator_location_latitude",
-          "refrigerator_location_longitude"
-        ],
-        "notUnitOfRetention": true
-      },
-      "refrigerator_condition": {
-        "type": "string",
-        "valuesList": "conditions",
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 5,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_condition",
-        "elementName": "refrigerator_condition",
-        "elementSet": "data",
-        "elementPath": "refrigerator_condition"
-      },
-      "refrigerator_stock_level": {
-        "type": "integer",
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_stock_level",
-        "elementName": "refrigerator_stock_level",
-        "elementSet": "data",
-        "elementPath": "refrigerator_stock_level"
-      },
-      "refrigerator_text": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_text",
-        "elementName": "refrigerator_text",
-        "elementSet": "data",
-        "elementPath": "refrigerator_text"
       },
       "facility_id": {
         "_defn": [
@@ -1601,7 +1223,7 @@
         "elementSet": "data",
         "elementPath": "model_id"
       },
-      "ref_type": {
+      "tracking_id": {
         "_defn": [
           {
             "_row_num": 5,
@@ -1609,13 +1231,12 @@
           }
         ],
         "type": "string",
-        "valuesList": "refrigerator_types",
-        "elementKey": "ref_type",
-        "elementName": "ref_type",
+        "elementKey": "tracking_id",
+        "elementName": "tracking_id",
         "elementSet": "data",
-        "elementPath": "ref_type"
+        "elementPath": "tracking_id"
       },
-      "tracking_id": {
+      "year": {
         "_defn": [
           {
             "_row_num": 6,
@@ -1623,28 +1244,15 @@
           }
         ],
         "type": "number",
-        "elementKey": "tracking_id",
-        "elementName": "tracking_id",
+        "elementKey": "year",
+        "elementName": "year",
         "elementSet": "data",
-        "elementPath": "tracking_id"
-      },
-      "year_installed": {
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "survey"
-          }
-        ],
-        "type": "number",
-        "elementKey": "year_installed",
-        "elementName": "year_installed",
-        "elementSet": "data",
-        "elementPath": "year_installed"
+        "elementPath": "year"
       },
       "power_source": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
@@ -1669,7 +1277,7 @@
       "working_status": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -1680,72 +1288,47 @@
         "elementSet": "data",
         "elementPath": "working_status"
       },
-      "reasons_not_working": {
+      "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 12,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "reasons_not_working_items",
-          "elementName": "items",
-          "elementSet": "data",
-          "elementPath": "reasons_not_working.items",
-          "notUnitOfRetention": true
-        },
-        "valuesList": "reasons",
-        "elementKey": "reasons_not_working",
-        "elementName": "reasons_not_working",
-        "elementSet": "data",
-        "elementPath": "reasons_not_working",
-        "listChildElementKeys": [
-          "reasons_not_working_items"
-        ]
-      },
-      "current_use": {
-        "_defn": [
-          {
-            "_row_num": 13,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
         "type": "string",
-        "valuesList": "utilization",
-        "elementKey": "current_use",
-        "elementName": "current_use",
+        "valuesList": "reasons",
+        "elementKey": "reason_not_working",
+        "elementName": "reason_not_working",
         "elementSet": "data",
-        "elementPath": "current_use"
+        "elementPath": "reason_not_working"
       },
-      "refrigerator_location_latitude": {
-        "type": "number",
-        "elementKey": "refrigerator_location_latitude",
-        "elementName": "latitude",
+      "utilization": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "current_use",
+        "elementKey": "utilization",
+        "elementName": "utilization",
         "elementSet": "data",
-        "elementPath": "refrigerator_location.latitude"
+        "elementPath": "utilization"
       },
-      "refrigerator_location_longitude": {
-        "type": "number",
-        "elementKey": "refrigerator_location_longitude",
-        "elementName": "longitude",
+      "voltage_regulator": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "voltage_regulator",
+        "elementName": "voltage_regulator",
         "elementSet": "data",
-        "elementPath": "refrigerator_location.longitude"
-      },
-      "refrigerator_location_altitude": {
-        "type": "number",
-        "elementKey": "refrigerator_location_altitude",
-        "elementName": "altitude",
-        "elementSet": "data",
-        "elementPath": "refrigerator_location.altitude"
-      },
-      "refrigerator_location_accuracy": {
-        "type": "number",
-        "elementKey": "refrigerator_location_accuracy",
-        "elementName": "accuracy",
-        "elementSet": "data",
-        "elementPath": "refrigerator_location.accuracy"
+        "elementPath": "voltage_regulator"
       },
       "power_source_items": {
         "type": "string",
@@ -1753,14 +1336,6 @@
         "elementName": "items",
         "elementSet": "data",
         "elementPath": "power_source.items",
-        "notUnitOfRetention": true
-      },
-      "reasons_not_working_items": {
-        "type": "string",
-        "elementKey": "reasons_not_working_items",
-        "elementName": "items",
-        "elementSet": "data",
-        "elementPath": "reasons_not_working.items",
         "notUnitOfRetention": true
       },
       "_id": {
@@ -1855,13 +1430,6 @@
     "properties": [
       {
         "_partition": "Column",
-        "_aspect": "current_use",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"utilization\",\"data_value\":\"in_use\",\"display\":{\"text\":\"In Use\"},\"_row_num\":24},{\"choice_list_name\":\"utilization\",\"data_value\":\"not_in_use\",\"display\":{\"text\":\"Not In Use\"},\"_row_num\":25},{\"choice_list_name\":\"utilization\",\"data_value\":\"in_store_for_allocation\",\"display\":{\"text\":\"In Store For Allocation\"},\"_row_num\":26}]"
-      },
-      {
-        "_partition": "Column",
         "_aspect": "power_source",
         "_key": "displayChoicesList",
         "_type": "object",
@@ -1869,24 +1437,24 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "reasons_not_working",
+        "_aspect": "reason_not_working",
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"needs_spare_parts\",\"display\":{\"text\":\"Needs Spare Parts\"},\"_row_num\":18},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_finance\",\"display\":{\"text\":\"No Finance\"},\"_row_num\":19},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_fuel\",\"display\":{\"text\":\"No Fuel\"},\"_row_num\":20},{\"choice_list_name\":\"reasons\",\"data_value\":\"surplus\",\"display\":{\"text\":\"Surplus\"},\"_row_num\":21},{\"choice_list_name\":\"reasons\",\"data_value\":\"dead\",\"display\":{\"text\":\"Dead\"},\"_row_num\":22}]"
       },
       {
         "_partition": "Column",
-        "_aspect": "ref_type",
+        "_aspect": "utilization",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"refrigerator_types\",\"data_value\":\"chest_freezer\",\"display\":{\"text\":\"Chest Freezer\"},\"_row_num\":28},{\"choice_list_name\":\"refrigerator_types\",\"data_value\":\"ice_pack_freezer\",\"display\":{\"text\":\"Ice Pack Freezer\"},\"_row_num\":29},{\"choice_list_name\":\"refrigerator_types\",\"data_value\":\"chest_refrigerator\",\"display\":{\"text\":\"Chest Refrigerator\"},\"_row_num\":30},{\"choice_list_name\":\"refrigerator_types\",\"data_value\":\"ice_lined_refrigerator\",\"display\":{\"text\":\"Ice Lined Refrigerator\"},\"_row_num\":31},{\"choice_list_name\":\"refrigerator_types\",\"data_value\":\"upright_refrigerator\",\"display\":{\"text\":\"Upright Refrigerator\"},\"_row_num\":32},{\"choice_list_name\":\"refrigerator_types\",\"data_value\":\"solar_photovoltaic_refrigerator\",\"display\":{\"text\":\"Solar Photovoltaic Refrigerator\"},\"_row_num\":33},{\"choice_list_name\":\"refrigerator_types\",\"data_value\":\"solar_thermal_refrigerator\",\"display\":{\"text\":\"Solar Thermal Refrigerator\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"current_use\",\"data_value\":\"in_use\",\"display\":{\"text\":\"In Use\"},\"_row_num\":24},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_in_use\",\"display\":{\"text\":\"Not In Use\"},\"_row_num\":25},{\"choice_list_name\":\"current_use\",\"data_value\":\"in_store_for_allocation\",\"display\":{\"text\":\"In Store For Allocation\"},\"_row_num\":26}]"
       },
       {
         "_partition": "Column",
-        "_aspect": "refrigerator_condition",
+        "_aspect": "voltage_regulator",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"conditions\",\"data_value\":\"excellent\",\"display\":{\"text\":\"Excellent\"},\"_row_num\":2},{\"choice_list_name\":\"conditions\",\"data_value\":\"good\",\"display\":{\"text\":\"Good\"},\"_row_num\":3},{\"choice_list_name\":\"conditions\",\"data_value\":\"fair\",\"display\":{\"text\":\"Fair\"},\"_row_num\":4},{\"choice_list_name\":\"conditions\",\"data_value\":\"poor\",\"display\":{\"text\":\"Poor\"},\"_row_num\":5},{\"choice_list_name\":\"conditions\",\"data_value\":\"terrible\",\"display\":{\"text\":\"Terrible\"},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":28},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":29}]"
       },
       {
         "_partition": "Column",
@@ -1928,7 +1496,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Initial refrigerator information\""
+        "_value": "\"Refrigerators\""
       },
       {
         "_partition": "Table",

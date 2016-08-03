@@ -65,26 +65,26 @@ function refrigeratorsCBSuccess(invData) {
 
     $('#TITLE').text(healthFacilityResultSet.get('Name'));
 
-    $('#fac_id').text(healthFacilityResultSet.get('facility_id'));
-    $('#fac_type').text(util.formatDisplayText(
+    $('#facility_id').text(healthFacilityResultSet.get('facility_id'));
+    $('#facility_type').text(util.formatDisplayText(
         healthFacilityResultSet.get('facility_type')));
-    $('#ownership').text(util.formatDisplayText(
-        healthFacilityResultSet.get('ownership')));
-    $('#population').text(healthFacilityResultSet.get('population'));
-    // $('#coverage').text(healthFacilityResultSet.get('coverage'));
-    $('#elec_source').text(util.formatDisplayText(
-        healthFacilityResultSet.get('elec_source')));
-    $('#grid_avail').text(util.formatDisplayText(
-        healthFacilityResultSet.get('grid')));
-    $('#gas_avail').text(util.formatDisplayText(
-        healthFacilityResultSet.get('gas')));
-    $('#ker_avail').text(util.formatDisplayText(
-        healthFacilityResultSet.get('kerosene')));
-    $('#solar_climate').text(util.formatDisplayText(
-        healthFacilityResultSet.get('solar_suitable')));
-    // $('#solar_site').text(healthFacilityResultSet.get('solar_suitable'));
+    $('#facility_ownership').text(util.formatDisplayText(
+        healthFacilityResultSet.get('facility_ownership')));
+    $('#facility_population').text(healthFacilityResultSet.get('facility_population'));
+    $('#facility_coverage').text(healthFacilityResultSet.get('facility_coverage'));
+    $('#electricity_source').text(util.formatDisplayText(
+        healthFacilityResultSet.get('electricity_source')));
+    $('#grid_availability').text(util.formatDisplayText(
+        healthFacilityResultSet.get('grid_power_availability')));
+    $('#gas_availability').text(util.formatDisplayText(
+        healthFacilityResultSet.get('gas_availability')));
+    $('#kerosene_availability').text(util.formatDisplayText(
+        healthFacilityResultSet.get('kerosene_availability')));
+    $('#solar_suitable_climate').text(util.formatDisplayText(
+        healthFacilityResultSet.get('solar_suitable_climate')));
+    $('#solar_suitable_site').text(healthFacilityResultSet.get('solar_suitable_site'));
     $('#climate').text(util.formatDisplayText(
-        healthFacilityResultSet.get('climate')));
+        healthFacilityResultSet.get('climate_zone')));
     $('#dist_to_supply').text(healthFacilityResultSet.get('distance_to_supply'));
 
     // The latitude and longitude are stored in a single column as GeoPoint.
@@ -94,11 +94,6 @@ function refrigeratorsCBSuccess(invData) {
     $('#lat').text(lat);
     $('#lon').text(lon);
 
-    $('#in_charge').text(healthFacilityResultSet.get('person_in_charge'));
-    console.log('Phone number: ' + healthFacilityResultSet.get('phone_number'));
-    $('#mobile_no').text(healthFacilityResultSet.get('phone_number'));
-    $('#email').text(healthFacilityResultSet.get('email'));
-    $('#updated').text(healthFacilityResultSet.get('date_updated'));
 
     $('#fridge_list').text(invData.getCount());
 
