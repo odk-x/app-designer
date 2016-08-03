@@ -90,7 +90,7 @@ var displayGroup = function(idxStart) {
         var item = $('<li>');
         item.attr('rowId', refrigeratorTypeResultSet.getRowId(i));
         item.attr('class', 'item_space');
-        item.text(refrigeratorTypeResultSet.getData(i, 'model_id'));
+        item.text(refrigeratorTypeResultSet.getData(i, 'catalog_id'));
                 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');

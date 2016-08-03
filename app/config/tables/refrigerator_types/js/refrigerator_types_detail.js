@@ -21,7 +21,7 @@ function cbSuccess(result) {
 
     refrigeratorTypeResultSet = result;
 
-    $('#TITLE').text(refrigeratorTypeResultSet.get('model_id'));
+    $('#TITLE').text(refrigeratorTypeResultSet.get('catalog_id'));
     $('#FIELD_2').text('Manufacturer: ' + refrigeratorTypeResultSet.get('manufacturer'));
 
 }

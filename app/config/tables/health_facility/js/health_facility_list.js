@@ -48,8 +48,7 @@ var refrigeratorTypeCBFailure = function(error) {
 var cbSuccess = function(result) {
 
     healthFacilityResultSet = result;
-    // The first time through we're going to make a map of typeId to
-    // typeName so that we can display the name of each shop's specialty.
+
     if (idxStart === 0) {
         odkData.query('refrigerator_types', null, null, 
             null, null, null, null, true, refrigeratorTypeCBSuccess, refrigeratorTypeCBFailure);
@@ -119,6 +118,7 @@ var displayGroup = function(idxStart) {
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
+        console.log('Health Facility Result Count: ' + healthFacilityResultSet.getCount());
         if (i >= healthFacilityResultSet.getCount()) {
             break;
         }
@@ -129,7 +129,7 @@ var displayGroup = function(idxStart) {
         }
 
         addDataForRow(i);
-
+        console.log('Added data for row ' + i);
     }
     if (i < healthFacilityResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
@@ -164,13 +164,6 @@ function addDataForRow(rowNumber) {
     field1.attr('class', 'detail');
     field1.text('Facility ID: ' + healthFacilityResultSet.getData(rowNumber, 'facility_id'));
     item.append(field1);
-
-    var dateUpdated = healthFacilityResultSet.getData(rowNumber, 'date_updated');
-
-    var field2 = $('<li>');
-    field2.attr('class', 'detail');
-    field2.text('Last Updated: ' + dateUpdated.substring(0, dateUpdated.indexOf('T')));
-    item.append(field2);
 
     $('#list').append(item);
 

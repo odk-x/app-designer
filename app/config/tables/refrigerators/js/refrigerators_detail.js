@@ -18,21 +18,18 @@
 
 var refrigeratorsResultSet = {};
 var typeData = {};
+var facilityData = {};
 
 function cbTypeSuccess(result) {
 
     typeData = result;
 
-    $('#TITLE').text('Refrigerator: ' + refrigeratorsResultSet.get('refrigerator_id'));
+    $('#TITLE').text(refrigeratorsResultSet.get('refrigerator_id'));
 
-    $('#FIELD_1').text(refrigeratorsResultSet.get('facility_id'));
-    $('#FIELD_2').text(typeData.getData(0, 'model_id'));
-    $('#FIELD_3').text(refrigeratorsResultSet.get('year_installed'));
-    $('#FIELD_4').text(refrigeratorsResultSet.get('refrigerator_size'));
-    $('#FIELD_5').text(util.formatDisplayText(
-        refrigeratorsResultSet.get('refrigerator_condition')));
-    $('#FIELD_6').text(util.formatDisplayText(
-        refrigeratorsResultSet.get('power_source')));
+    $('#facility_name').text(facilityData.getData(0, 'facility_name'));
+    $('#model_id').text(typeData.getData(0, 'model_id'));
+    $('#tracking_id').text(refrigeratorsResultSet.get('tracking_id'));
+    $('#install_year').text(refrigeratorsResultSet.get('year'));
 }
 
 function cbTypeFailure(error) {
@@ -41,12 +38,22 @@ function cbTypeFailure(error) {
 
 }
 
+function cbFacilitySuccess(result) {
+    facilityData = result;
+}
+
+function cbFacilityFailure(error) {
+    console.log('cbFacilityFailure: query for facility_id failed with message: ' + error);
+}
 
 function cbSuccess(result) {
 
     refrigeratorsResultSet = result;
-    
-    odkData.query('refrigerator_types', 'model_id = ?', [refrigeratorsResultSet.get('model_id')],
+
+    odkData.query('health_facility', 'facility_id = ?', [refrigeratorsResultSet.get('facility_id')], 
+        null, null, null, null, true, cbFacilitySuccess, cbFacilityFailure);
+
+    odkData.query('refrigerator_types', 'catalog_id = ?', [refrigeratorsResultSet.get('model_id')],
         null, null, null, null, true, cbTypeSuccess, cbTypeFailure);
 }
 

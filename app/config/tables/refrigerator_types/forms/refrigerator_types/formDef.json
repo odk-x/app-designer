@@ -3,18 +3,17 @@
     "survey": [
       {
         "type": "text",
-        "name": "model_id",
+        "name": "catalog_id",
         "display": {
-          "text": "Enter model ID:"
+          "text": "Enter catalog ID:"
         },
-        "required": true,
         "_row_num": 2
       },
       {
-        "type": "number",
-        "name": "model_year",
+        "type": "text",
+        "name": "model_id",
         "display": {
-          "text": "Enter the model year:"
+          "text": "Enter the model ID:"
         },
         "_row_num": 3
       },
@@ -28,27 +27,68 @@
       },
       {
         "type": "decimal",
-        "name": "capacity",
+        "name": "refrigerator_gross_volume",
         "display": {
-          "text": "Enter the gross capacity:",
+          "text": "Enter the refrigerator's gross volume:",
           "hint": "(cubic meters)"
         },
-        "required": true,
         "_row_num": 5
       },
       {
+        "type": "decimal",
+        "name": "refrigerator_net_volume",
+        "display": {
+          "text": "Enter the refrigerator's net volume:"
+        },
+        "_row_num": 6
+      },
+      {
+        "type": "decimal",
+        "name": "freezer_gross_volume",
+        "display": {
+          "text": "Enter the freezer's gross volume:"
+        },
+        "_row_num": 7
+      },
+      {
+        "type": "decimal",
+        "name": "freezer_net_volume",
+        "display": {
+          "text": "Enter the freezer's net volume:"
+        },
+        "_row_num": 8
+      },
+      {
         "type": "select_multiple",
-        "values_list": "power_source",
-        "name": "power",
+        "values_list": "power_sources",
+        "name": "power_source",
         "display": {
           "text": "Choose Power Source Required:"
         },
-        "_row_num": 6
+        "_row_num": 9
+      },
+      {
+        "type": "select_one",
+        "values_list": "equipment_types",
+        "name": "equipment_type",
+        "display": {
+          "text": "Select what type of equipment this is"
+        },
+        "_row_num": 10
+      },
+      {
+        "type": "select_one",
+        "values_list": "climate_zones",
+        "name": "climate_zone",
+        "display": {
+          "text": "What climate zone is this equipment best for?"
+        },
+        "_row_num": 11
       }
     ],
     "choices": [
       {
-        "choice_list_name": "power_source",
+        "choice_list_name": "power_sources",
         "data_value": "electricity",
         "display": {
           "text": "Electricity"
@@ -56,7 +96,7 @@
         "_row_num": 2
       },
       {
-        "choice_list_name": "power_source",
+        "choice_list_name": "power_sources",
         "data_value": "kerosene",
         "display": {
           "text": "Kerosene"
@@ -64,7 +104,7 @@
         "_row_num": 3
       },
       {
-        "choice_list_name": "power_source",
+        "choice_list_name": "power_sources",
         "data_value": "gas",
         "display": {
           "text": "Gas"
@@ -72,7 +112,7 @@
         "_row_num": 4
       },
       {
-        "choice_list_name": "power_source",
+        "choice_list_name": "power_sources",
         "data_value": "solar",
         "display": {
           "text": "Solar"
@@ -80,12 +120,92 @@
         "_row_num": 5
       },
       {
-        "choice_list_name": "power_source",
+        "choice_list_name": "power_sources",
         "data_value": "unknown",
         "display": {
           "text": "Unknown"
         },
         "_row_num": 6
+      },
+      {
+        "choice_list_name": "equipment_types",
+        "data_value": "chest_refrigerator",
+        "display": {
+          "text": "Chest Refrigerator"
+        },
+        "_row_num": 8
+      },
+      {
+        "choice_list_name": "equipment_types",
+        "data_value": "chest_freezer",
+        "display": {
+          "text": "Chest Freezer"
+        },
+        "_row_num": 9
+      },
+      {
+        "choice_list_name": "equipment_types",
+        "data_value": "upright_refrigerator",
+        "display": {
+          "text": "Upright Refrigerator"
+        },
+        "_row_num": 10
+      },
+      {
+        "choice_list_name": "equipment_types",
+        "data_value": "ice_pack_freezer",
+        "display": {
+          "text": "Ice Pack Freezer"
+        },
+        "_row_num": 11
+      },
+      {
+        "choice_list_name": "equipment_types",
+        "data_value": "ice_lined_refrigerator",
+        "display": {
+          "text": "Ice Lined Refrigerator"
+        },
+        "_row_num": 12
+      },
+      {
+        "choice_list_name": "equipment_types",
+        "data_value": "solar_photovoltaic_refrigerator",
+        "display": {
+          "text": "Solar Photovoltaic Refrigerator"
+        },
+        "_row_num": 13
+      },
+      {
+        "choice_list_name": "equipment_types",
+        "data_value": "solar_thermal_refrigerator",
+        "display": {
+          "text": "Solar Thermal Refrigerator"
+        },
+        "_row_num": 14
+      },
+      {
+        "choice_list_name": "climate_zones",
+        "data_value": "moderate",
+        "display": {
+          "text": "Moderate"
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "climate_zones",
+        "data_value": "temperate",
+        "display": {
+          "text": "Temperate"
+        },
+        "_row_num": 17
+      },
+      {
+        "choice_list_name": "climate_zones",
+        "data_value": "hot",
+        "display": {
+          "text": "Hot"
+        },
+        "_row_num": 18
       }
     ],
     "properties": [
@@ -216,9 +336,9 @@
       }
     },
     "choices": {
-      "power_source": [
+      "power_sources": [
         {
-          "choice_list_name": "power_source",
+          "choice_list_name": "power_sources",
           "data_value": "electricity",
           "display": {
             "text": "Electricity"
@@ -226,7 +346,7 @@
           "_row_num": 2
         },
         {
-          "choice_list_name": "power_source",
+          "choice_list_name": "power_sources",
           "data_value": "kerosene",
           "display": {
             "text": "Kerosene"
@@ -234,7 +354,7 @@
           "_row_num": 3
         },
         {
-          "choice_list_name": "power_source",
+          "choice_list_name": "power_sources",
           "data_value": "gas",
           "display": {
             "text": "Gas"
@@ -242,7 +362,7 @@
           "_row_num": 4
         },
         {
-          "choice_list_name": "power_source",
+          "choice_list_name": "power_sources",
           "data_value": "solar",
           "display": {
             "text": "Solar"
@@ -250,19 +370,103 @@
           "_row_num": 5
         },
         {
-          "choice_list_name": "power_source",
+          "choice_list_name": "power_sources",
           "data_value": "unknown",
           "display": {
             "text": "Unknown"
           },
           "_row_num": 6
         }
+      ],
+      "equipment_types": [
+        {
+          "choice_list_name": "equipment_types",
+          "data_value": "chest_refrigerator",
+          "display": {
+            "text": "Chest Refrigerator"
+          },
+          "_row_num": 8
+        },
+        {
+          "choice_list_name": "equipment_types",
+          "data_value": "chest_freezer",
+          "display": {
+            "text": "Chest Freezer"
+          },
+          "_row_num": 9
+        },
+        {
+          "choice_list_name": "equipment_types",
+          "data_value": "upright_refrigerator",
+          "display": {
+            "text": "Upright Refrigerator"
+          },
+          "_row_num": 10
+        },
+        {
+          "choice_list_name": "equipment_types",
+          "data_value": "ice_pack_freezer",
+          "display": {
+            "text": "Ice Pack Freezer"
+          },
+          "_row_num": 11
+        },
+        {
+          "choice_list_name": "equipment_types",
+          "data_value": "ice_lined_refrigerator",
+          "display": {
+            "text": "Ice Lined Refrigerator"
+          },
+          "_row_num": 12
+        },
+        {
+          "choice_list_name": "equipment_types",
+          "data_value": "solar_photovoltaic_refrigerator",
+          "display": {
+            "text": "Solar Photovoltaic Refrigerator"
+          },
+          "_row_num": 13
+        },
+        {
+          "choice_list_name": "equipment_types",
+          "data_value": "solar_thermal_refrigerator",
+          "display": {
+            "text": "Solar Thermal Refrigerator"
+          },
+          "_row_num": 14
+        }
+      ],
+      "climate_zones": [
+        {
+          "choice_list_name": "climate_zones",
+          "data_value": "moderate",
+          "display": {
+            "text": "Moderate"
+          },
+          "_row_num": 16
+        },
+        {
+          "choice_list_name": "climate_zones",
+          "data_value": "temperate",
+          "display": {
+            "text": "Temperate"
+          },
+          "_row_num": 17
+        },
+        {
+          "choice_list_name": "climate_zones",
+          "data_value": "hot",
+          "display": {
+            "text": "Hot"
+          },
+          "_row_num": 18
+        }
       ]
     },
     "queries": {},
     "calculates": {},
     "model": {
-      "model_id": {
+      "catalog_id": {
         "_defn": [
           {
             "_row_num": 2,
@@ -270,17 +474,17 @@
           }
         ],
         "type": "string",
-        "elementKey": "model_id"
+        "elementKey": "catalog_id"
       },
-      "model_year": {
+      "model_id": {
         "_defn": [
           {
             "_row_num": 3,
             "section_name": "survey"
           }
         ],
-        "type": "number",
-        "elementKey": "model_year"
+        "type": "string",
+        "elementKey": "model_id"
       },
       "manufacturer": {
         "_defn": [
@@ -292,7 +496,7 @@
         "type": "string",
         "elementKey": "manufacturer"
       },
-      "capacity": {
+      "refrigerator_gross_volume": {
         "_defn": [
           {
             "_row_num": 5,
@@ -300,22 +504,74 @@
           }
         ],
         "type": "number",
-        "elementKey": "capacity"
+        "elementKey": "refrigerator_gross_volume"
       },
-      "power": {
+      "refrigerator_net_volume": {
         "_defn": [
           {
             "_row_num": 6,
             "section_name": "survey"
           }
         ],
+        "type": "number",
+        "elementKey": "refrigerator_net_volume"
+      },
+      "freezer_gross_volume": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "freezer_gross_volume"
+      },
+      "freezer_net_volume": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "freezer_net_volume"
+      },
+      "power_source": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
         "type": "array",
         "items": {
           "type": "string",
-          "elementKey": "power_items"
+          "elementKey": "power_source_items"
         },
-        "valuesList": "power_source",
-        "elementKey": "power"
+        "valuesList": "power_sources",
+        "elementKey": "power_source"
+      },
+      "equipment_type": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "equipment_types",
+        "elementKey": "equipment_type"
+      },
+      "climate_zone": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "climate_zones",
+        "elementKey": "climate_zone"
       }
     },
     "section_names": [
@@ -330,11 +586,10 @@
         "prompts": [
           {
             "type": "text",
-            "name": "model_id",
+            "name": "catalog_id",
             "display": {
-              "text": "Enter model ID:"
+              "text": "Enter catalog ID:"
             },
-            "required": true,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -343,15 +598,15 @@
             "promptIdx": 0
           },
           {
-            "type": "number",
-            "name": "model_year",
+            "type": "text",
+            "name": "model_id",
             "display": {
-              "text": "Enter the model year:"
+              "text": "Enter the model ID:"
             },
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
-            "_type": "number",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen3",
             "promptIdx": 1
           },
@@ -370,12 +625,11 @@
           },
           {
             "type": "decimal",
-            "name": "capacity",
+            "name": "refrigerator_gross_volume",
             "display": {
-              "text": "Enter the gross capacity:",
+              "text": "Enter the refrigerator's gross volume:",
               "hint": "(cubic meters)"
             },
-            "required": true,
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
@@ -384,33 +638,97 @@
             "promptIdx": 3
           },
           {
-            "type": "select_multiple",
-            "values_list": "power_source",
-            "name": "power",
+            "type": "decimal",
+            "name": "refrigerator_net_volume",
             "display": {
-              "text": "Choose Power Source Required:"
+              "text": "Enter the refrigerator's net volume:"
             },
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
-            "_type": "select_multiple",
+            "_type": "decimal",
             "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 4
+          },
+          {
+            "type": "decimal",
+            "name": "freezer_gross_volume",
+            "display": {
+              "text": "Enter the freezer's gross volume:"
+            },
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "decimal",
+            "_branch_label_enclosing_screen": "survey/_screen7",
+            "promptIdx": 5
+          },
+          {
+            "type": "decimal",
+            "name": "freezer_net_volume",
+            "display": {
+              "text": "Enter the freezer's net volume:"
+            },
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "decimal",
+            "_branch_label_enclosing_screen": "survey/_screen8",
+            "promptIdx": 6
+          },
+          {
+            "type": "select_multiple",
+            "values_list": "power_sources",
+            "name": "power_source",
+            "display": {
+              "text": "Choose Power Source Required:"
+            },
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 7
+          },
+          {
+            "type": "select_one",
+            "values_list": "equipment_types",
+            "name": "equipment_type",
+            "display": {
+              "text": "Select what type of equipment this is"
+            },
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 8
+          },
+          {
+            "type": "select_one",
+            "values_list": "climate_zones",
+            "name": "climate_zone",
+            "display": {
+              "text": "What climate zone is this equipment best for?"
+            },
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 9
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 7,
-            "_branch_label_enclosing_screen": "survey/_screen7",
-            "promptIdx": 5
+            "_row_num": 12,
+            "_branch_label_enclosing_screen": "survey/_screen12",
+            "promptIdx": 10
           }
         ],
         "validation_tag_map": {
-          "finalize": [
-            0,
-            3
-          ]
+          "finalize": []
         },
         "operations": [
           {
@@ -444,25 +762,55 @@
             "operationIdx": 4
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 7,
-            "operationIdx": 5
-          },
-          {
             "_row_num": 7,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 8,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 10,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "_row_num": 11,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 9
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 12,
+            "operationIdx": 10
+          },
+          {
+            "_row_num": 12,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 6
+            "operationIdx": 11
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 7,
-            "operationIdx": 7
+            "_row_num": 12,
+            "operationIdx": 12
           }
         ],
         "branch_label_map": {
@@ -471,8 +819,13 @@
           "_screen4": 2,
           "_screen5": 3,
           "_screen6": 4,
-          "_contents": 6,
-          "_screen7": 6
+          "_screen7": 5,
+          "_screen8": 6,
+          "_screen9": 7,
+          "_screen10": 8,
+          "_screen11": 9,
+          "_contents": 11,
+          "_screen12": 11
         }
       },
       "initial": {
@@ -652,10 +1005,23 @@
       }
     },
     "dataTableModel": {
-      "model_id": {
+      "catalog_id": {
         "_defn": [
           {
             "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "catalog_id",
+        "elementName": "catalog_id",
+        "elementSet": "data",
+        "elementPath": "catalog_id"
+      },
+      "model_id": {
+        "_defn": [
+          {
+            "_row_num": 3,
             "section_name": "survey"
           }
         ],
@@ -664,19 +1030,6 @@
         "elementName": "model_id",
         "elementSet": "data",
         "elementPath": "model_id"
-      },
-      "model_year": {
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "survey"
-          }
-        ],
-        "type": "number",
-        "elementKey": "model_year",
-        "elementName": "model_year",
-        "elementSet": "data",
-        "elementPath": "model_year"
       },
       "manufacturer": {
         "_defn": [
@@ -691,7 +1044,7 @@
         "elementSet": "data",
         "elementPath": "manufacturer"
       },
-      "capacity": {
+      "refrigerator_gross_volume": {
         "_defn": [
           {
             "_row_num": 5,
@@ -699,42 +1052,109 @@
           }
         ],
         "type": "number",
-        "elementKey": "capacity",
-        "elementName": "capacity",
+        "elementKey": "refrigerator_gross_volume",
+        "elementName": "refrigerator_gross_volume",
         "elementSet": "data",
-        "elementPath": "capacity"
+        "elementPath": "refrigerator_gross_volume"
       },
-      "power": {
+      "refrigerator_net_volume": {
         "_defn": [
           {
             "_row_num": 6,
             "section_name": "survey"
           }
         ],
+        "type": "number",
+        "elementKey": "refrigerator_net_volume",
+        "elementName": "refrigerator_net_volume",
+        "elementSet": "data",
+        "elementPath": "refrigerator_net_volume"
+      },
+      "freezer_gross_volume": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "freezer_gross_volume",
+        "elementName": "freezer_gross_volume",
+        "elementSet": "data",
+        "elementPath": "freezer_gross_volume"
+      },
+      "freezer_net_volume": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "elementKey": "freezer_net_volume",
+        "elementName": "freezer_net_volume",
+        "elementSet": "data",
+        "elementPath": "freezer_net_volume"
+      },
+      "power_source": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
         "type": "array",
         "items": {
           "type": "string",
-          "elementKey": "power_items",
+          "elementKey": "power_source_items",
           "elementName": "items",
           "elementSet": "data",
-          "elementPath": "power.items",
+          "elementPath": "power_source.items",
           "notUnitOfRetention": true
         },
-        "valuesList": "power_source",
-        "elementKey": "power",
-        "elementName": "power",
+        "valuesList": "power_sources",
+        "elementKey": "power_source",
+        "elementName": "power_source",
         "elementSet": "data",
-        "elementPath": "power",
+        "elementPath": "power_source",
         "listChildElementKeys": [
-          "power_items"
+          "power_source_items"
         ]
       },
-      "power_items": {
+      "equipment_type": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
         "type": "string",
-        "elementKey": "power_items",
+        "valuesList": "equipment_types",
+        "elementKey": "equipment_type",
+        "elementName": "equipment_type",
+        "elementSet": "data",
+        "elementPath": "equipment_type"
+      },
+      "climate_zone": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "climate_zones",
+        "elementKey": "climate_zone",
+        "elementName": "climate_zone",
+        "elementSet": "data",
+        "elementPath": "climate_zone"
+      },
+      "power_source_items": {
+        "type": "string",
+        "elementKey": "power_source_items",
         "elementName": "items",
         "elementSet": "data",
-        "elementPath": "power.items",
+        "elementPath": "power_source.items",
         "notUnitOfRetention": true
       },
       "_id": {
@@ -829,10 +1249,24 @@
     "properties": [
       {
         "_partition": "Column",
-        "_aspect": "power",
+        "_aspect": "climate_zone",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"power_source\",\"data_value\":\"electricity\",\"display\":{\"text\":\"Electricity\"},\"_row_num\":2},{\"choice_list_name\":\"power_source\",\"data_value\":\"kerosene\",\"display\":{\"text\":\"Kerosene\"},\"_row_num\":3},{\"choice_list_name\":\"power_source\",\"data_value\":\"gas\",\"display\":{\"text\":\"Gas\"},\"_row_num\":4},{\"choice_list_name\":\"power_source\",\"data_value\":\"solar\",\"display\":{\"text\":\"Solar\"},\"_row_num\":5},{\"choice_list_name\":\"power_source\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"climate_zones\",\"data_value\":\"moderate\",\"display\":{\"text\":\"Moderate\"},\"_row_num\":16},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"temperate\",\"display\":{\"text\":\"Temperate\"},\"_row_num\":17},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"hot\",\"display\":{\"text\":\"Hot\"},\"_row_num\":18}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "equipment_type",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_refrigerator\",\"display\":{\"text\":\"Chest Refrigerator\"},\"_row_num\":8},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_freezer\",\"display\":{\"text\":\"Chest Freezer\"},\"_row_num\":9},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"upright_refrigerator\",\"display\":{\"text\":\"Upright Refrigerator\"},\"_row_num\":10},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_pack_freezer\",\"display\":{\"text\":\"Ice Pack Freezer\"},\"_row_num\":11},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_lined_refrigerator\",\"display\":{\"text\":\"Ice Lined Refrigerator\"},\"_row_num\":12},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_photovoltaic_refrigerator\",\"display\":{\"text\":\"Solar Photovoltaic Refrigerator\"},\"_row_num\":13},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_thermal_refrigerator\",\"display\":{\"text\":\"Solar Thermal Refrigerator\"},\"_row_num\":14}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "power_source",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"power_sources\",\"data_value\":\"electricity\",\"display\":{\"text\":\"Electricity\"},\"_row_num\":2},{\"choice_list_name\":\"power_sources\",\"data_value\":\"kerosene\",\"display\":{\"text\":\"Kerosene\"},\"_row_num\":3},{\"choice_list_name\":\"power_sources\",\"data_value\":\"gas\",\"display\":{\"text\":\"Gas\"},\"_row_num\":4},{\"choice_list_name\":\"power_sources\",\"data_value\":\"solar\",\"display\":{\"text\":\"Solar\"},\"_row_num\":5},{\"choice_list_name\":\"power_sources\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":6}]"
       },
       {
         "_partition": "FormType",

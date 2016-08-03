@@ -12,18 +12,16 @@
     </head>
     <body>
         <script type="text/javascript" src="../js/refrigerators_detail.js"></script>
-        <h1><span id="TITLE" class="main-text"></span></h1>
+        <h1>Refrigerator: <span id="TITLE" class="main-text"></span></h1>
         <!-- To query and link to the result, replace the placeholders and put the following around the <span></span> tags.
         <a href="#" onclick="odkTables.openTable('TABLE_NAME', 'COL_NAME:' + data.get('COL_NAME'));"></a>
         
         Example:<a href="#" onclick="odkTables.openTable('TABLE_NAME', 'COL_NAME:' + data.get('COL_NAME'));"><span id="FIELD_1"></span></a>
         -->
-        <p>Healthcare Facility: <span id="FIELD_1"></span></p>
-        <p>Model: <span id="FIELD_2"></span>
-        <br>Year Installed: <span id="FIELD_3"></span>
-        <br>Size (cubic meters): <span id="FIELD_4"></span>
-        <br>Condition: <span id="FIELD_5"></span>
-        <br>Power Source: <span id="FIELD_6"></span></p>
+        <p>Healthcare Facility: <span id="facility_name"></span></p>
+        <p>Model ID: <span id="model_id"></span>
+        <br>Tracking ID: <span id="tracking_id"></span>
+        <br>Year Installed: <span id="install_year"></span></p>
         <script>
             $(display);
         </script>
