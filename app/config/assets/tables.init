@@ -1,0 +1,3 @@
+table_keys=beneficiaries,distribution
+beneficiaries.filename=config/assets/csv/beneficiaries.allfields.csv
+distribution.filename=config/assets/csv/distribution.csv

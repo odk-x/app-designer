@@ -1,0 +1,2 @@
+first_name,last_name,first_last_name,address,city,country,state,postcode,telephone,pic_of_card,beneficiary_code,item_code,date_screened,date_distributed,received_card,confirm_distribution,spare_str_1,spare_str_2,spare_str_3,spare_str_4,spare_str_5,spare_str_6,gender,age,flag,distributions,distributions_received,remaining_distributions,scanned_item_code,mobile_provider,hh_size
+tester,one,tester_one,here,ciudad,pais,wershington,78,890,,1,11,2016-07-05T22:53:38.866000000,2017-07-05T23:41:40.754000000,0,,,,,,,,male,23,,5 apples;3 oranges,2 apples;3 oranges,,111,verizon,4

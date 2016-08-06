@@ -58,7 +58,7 @@
       },
       {
         "type": "barcode",
-        "name": "envelope_code",
+        "name": "item_code",
         "_row_num": 13
       },
       {
@@ -110,6 +110,51 @@
         "type": "string",
         "name": "spare_str_6",
         "_row_num": 23
+      },
+      {
+        "type": "string",
+        "name": "gender",
+        "_row_num": 24
+      },
+      {
+        "type": "string",
+        "name": "age",
+        "_row_num": 25
+      },
+      {
+        "type": "string",
+        "name": "flag",
+        "_row_num": 26
+      },
+      {
+        "type": "string",
+        "name": "distributions",
+        "_row_num": 27
+      },
+      {
+        "type": "string",
+        "name": "distributions_received",
+        "_row_num": 28
+      },
+      {
+        "type": "string",
+        "name": "remaining_distributions",
+        "_row_num": 29
+      },
+      {
+        "type": "string",
+        "name": "scanned_item_code",
+        "_row_num": 30
+      },
+      {
+        "type": "string",
+        "name": "mobile_provider",
+        "_row_num": 31
+      },
+      {
+        "type": "string",
+        "name": "hh_size",
+        "_row_num": 32
       }
     ],
     "settings": [
@@ -169,9 +214,9 @@
       },
       {
         "type": "barcode",
-        "name": "envelope_code",
+        "name": "item_code",
         "display": {
-          "text": "Scan the envelope barcode"
+          "text": "Scan the item barcode"
         },
         "_row_num": 5
       }
@@ -380,7 +425,7 @@
         ],
         "elementKey": "beneficiary_code"
       },
-      "envelope_code": {
+      "item_code": {
         "type": "string",
         "_defn": [
           {
@@ -392,7 +437,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "envelope_code"
+        "elementKey": "item_code"
       },
       "date_screened": {
         "type": "string",
@@ -499,6 +544,96 @@
           }
         ],
         "elementKey": "spare_str_6"
+      },
+      "gender": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "gender"
+      },
+      "age": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "age"
+      },
+      "flag": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "flag"
+      },
+      "distributions": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distributions"
+      },
+      "distributions_received": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distributions_received"
+      },
+      "remaining_distributions": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "remaining_distributions"
+      },
+      "scanned_item_code": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 30,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "scanned_item_code"
+      },
+      "mobile_provider": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "mobile_provider"
+      },
+      "hh_size": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "hh_size"
       }
     },
     "section_names": [
@@ -553,9 +688,9 @@
           },
           {
             "type": "barcode",
-            "name": "envelope_code",
+            "name": "item_code",
             "display": {
-              "text": "Scan the envelope barcode"
+              "text": "Scan the item barcode"
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -981,7 +1116,7 @@
         "elementSet": "data",
         "elementPath": "beneficiary_code"
       },
-      "envelope_code": {
+      "item_code": {
         "type": "string",
         "_defn": [
           {
@@ -993,10 +1128,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "envelope_code",
-        "elementName": "envelope_code",
+        "elementKey": "item_code",
+        "elementName": "item_code",
         "elementSet": "data",
-        "elementPath": "envelope_code"
+        "elementPath": "item_code"
       },
       "date_screened": {
         "type": "string",
@@ -1133,6 +1268,123 @@
         "elementName": "spare_str_6",
         "elementSet": "data",
         "elementPath": "spare_str_6"
+      },
+      "gender": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "gender",
+        "elementName": "gender",
+        "elementSet": "data",
+        "elementPath": "gender"
+      },
+      "age": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "age",
+        "elementName": "age",
+        "elementSet": "data",
+        "elementPath": "age"
+      },
+      "flag": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "flag",
+        "elementName": "flag",
+        "elementSet": "data",
+        "elementPath": "flag"
+      },
+      "distributions": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distributions",
+        "elementName": "distributions",
+        "elementSet": "data",
+        "elementPath": "distributions"
+      },
+      "distributions_received": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distributions_received",
+        "elementName": "distributions_received",
+        "elementSet": "data",
+        "elementPath": "distributions_received"
+      },
+      "remaining_distributions": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 29,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "remaining_distributions",
+        "elementName": "remaining_distributions",
+        "elementSet": "data",
+        "elementPath": "remaining_distributions"
+      },
+      "scanned_item_code": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 30,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "scanned_item_code",
+        "elementName": "scanned_item_code",
+        "elementSet": "data",
+        "elementPath": "scanned_item_code"
+      },
+      "mobile_provider": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "mobile_provider",
+        "elementName": "mobile_provider",
+        "elementSet": "data",
+        "elementPath": "mobile_provider"
+      },
+      "hh_size": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "hh_size",
+        "elementName": "hh_size",
+        "elementSet": "data",
+        "elementPath": "hh_size"
       },
       "pic_of_card_uriFragment": {
         "type": "string",

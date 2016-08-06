@@ -1,0 +1,5 @@
+operation,_id,_form_id,_locale,_savepoint_type,_savepoint_timestamp,_savepoint_creator,distribution_id,authorization_id,beneficiary_code,min_range,max_range,authorization_name,item_pack_id,item_pack_name,acknowledge_auth,_row_etag,_filter_type,_filter_value
+DELETE,1,,default,COMPLETE,2014-04-02T04:32:47.070000000,anonymous,10,11,12,0,20,authorization name,item pack id,item pack nam,,,,
+DELETE,2,,default,COMPLETE,2014-05-02T04:32:47.070000001,anonymous,100,110,120,100,200,seconds auth name,second pack id,second pack name,,,,
+NEW,3,,default,COMPLETE,2014-05-02T04:32:47.070000001,anonymous,50,51,52,1000,2000,namey,odddd,fad,,,,
+NEW,4,,default,COMPLETE,2014-05-02T04:32:47.070000001,anonymous,23,34,45,56,67,nombre,identificacion,nobmre doce,,,,

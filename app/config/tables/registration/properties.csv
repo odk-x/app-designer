@@ -1,0 +1,11 @@
+_partition,_aspect,_key,_type,_value
+Column,city,displayChoicesList,object,"[{""choice_list_name"":""cities"",""data_value"":""a0"",""display"":{""text"":""A""},""_row_num"":12}]"
+Column,distribution_site,displayChoicesList,object,"[{""choice_list_name"":""sites"",""data_value"":""a0"",""display"":{""text"":""A""},""_row_num"":4},{""choice_list_name"":""sites"",""data_value"":""a1"",""display"":{""text"":""B""},""_row_num"":5},{""choice_list_name"":""sites"",""data_value"":""a2"",""display"":{""text"":""C""},""_row_num"":6},{""choice_list_name"":""sites"",""data_value"":""a3"",""display"":{""text"":""D""},""_row_num"":7}]"
+Column,district,displayChoicesList,object,"[{""choice_list_name"":""districts"",""data_value"":""a0"",""display"":{""text"":""A""},""_row_num"":8},{""choice_list_name"":""districts"",""data_value"":""a1"",""display"":{""text"":""B""},""_row_num"":9},{""choice_list_name"":""districts"",""data_value"":""a2"",""display"":{""text"":""C""},""_row_num"":10},{""choice_list_name"":""districts"",""data_value"":""a3"",""display"":{""text"":""D""},""_row_num"":11}]"
+Column,gender,displayChoicesList,object,"[{""choice_list_name"":""genders"",""data_value"":""a0"",""display"":{""text"":""Male""},""_row_num"":2},{""choice_list_name"":""genders"",""data_value"":""a1"",""display"":{""text"":""Female""},""_row_num"":3}]"
+Column,sub_village,displayChoicesList,object,"[{""choice_list_name"":""sub-villages"",""data_value"":""a0"",""display"":{""text"":""A""},""_row_num"":14}]"
+Column,village,displayChoicesList,object,"[{""choice_list_name"":""villages"",""data_value"":""a0"",""display"":{""text"":""A""},""_row_num"":13}]"
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,registration
+Table,default,defaultViewType,string,SPREADSHEET
+Table,default,displayName,object,"""Registration"""

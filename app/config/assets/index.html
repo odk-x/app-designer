@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
-        <link href="css/homescreen.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
-        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
-        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
-        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <link href="css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript">
 
         // Displays homescreen
@@ -18,8 +18,8 @@
             newClient.innerHTML = "Registration";
             newClient.onclick = function() {
                 odkTables.addRowWithSurvey(
-                    'beneficiaries',
-                    'screening_form',
+                    'registration',
+                    'registration',
                     null,
                     null);
             }
@@ -32,8 +32,8 @@
             followUp.innerHTML = "Distribution";
             followUp.onclick = function() {
                 odkTables.addRowWithSurvey(
-                    'check_barcode',
-                    'check_barcode_match_barcode',
+                    'deployment',
+                    'deployment',
                     null,
                     null);
             }
@@ -47,7 +47,7 @@
             sendData.onclick = function() {
               // nothing for now
               odkTables.launchHTML(
-                  'config/tables/beneficiaries/html/beneficiaries_list.html');
+                  'config/tables/registration/html/beneficiaries_list.html');
             }
             document.getElementById("wrapper").appendChild(sendData);    
         }

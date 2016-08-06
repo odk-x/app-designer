@@ -1,0 +1,13 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+acknowledge_auth,acknowledge_auth,string,[]
+authorization_id,authorization_id,string,[]
+authorization_name,authorization_name,string,[]
+beneficiary_code,beneficiary_code,string,[]
+distribution_id,distribution_id,string,[]
+is_distributed,is_distributed,string,[]
+item_pack_id,item_pack_id,string,[]
+item_pack_name,item_pack_name,string,[]
+max_range,max_range,number,[]
+min_range,min_range,number,[]
+scanned_item_pack_barcode,scanned_item_pack_barcode,string,[]
+try_again,try_again,string,[]

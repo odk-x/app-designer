@@ -58,7 +58,7 @@
       },
       {
         "type": "barcode",
-        "name": "envelope_code",
+        "name": "item_code",
         "_row_num": 13
       },
       {
@@ -110,6 +110,51 @@
         "type": "string",
         "name": "spare_str_6",
         "_row_num": 23
+      },
+      {
+        "type": "string",
+        "name": "gender",
+        "_row_num": 24
+      },
+      {
+        "type": "string",
+        "name": "age",
+        "_row_num": 25
+      },
+      {
+        "type": "string",
+        "name": "flag",
+        "_row_num": 26
+      },
+      {
+        "type": "string",
+        "name": "distributions",
+        "_row_num": 27
+      },
+      {
+        "type": "string",
+        "name": "distributions_received",
+        "_row_num": 28
+      },
+      {
+        "type": "string",
+        "name": "remaining_distributions",
+        "_row_num": 29
+      },
+      {
+        "type": "string",
+        "name": "scanned_item_code",
+        "_row_num": 30
+      },
+      {
+        "type": "string",
+        "name": "mobile_provider",
+        "_row_num": 31
+      },
+      {
+        "type": "string",
+        "name": "hh_size",
+        "_row_num": 32
       }
     ],
     "settings": [
@@ -174,92 +219,92 @@
         "_row_num": 6
       },
       {
-        "type": "note",
-        "display": {
-          "text": "They should receive envelope {{data.envelope_code}}.",
-          "hint": "If this envelope does not exist or is not found, contact your administrator."
-        },
+        "type": "assign",
+        "name": "remaining_distributions",
+        "calculation": "calculates.remainingDistributions()",
         "_row_num": 7
       },
       {
-        "clause": "end if",
+        "type": "note",
+        "display": {
+          "text": "They should receive {{data.remaining_distributions}}.",
+          "hint": "If this envelope does not exist or is not found, contact your administrator."
+        },
         "_row_num": 8
       },
       {
-        "clause": "if",
-        "condition": "data('received_card') !== 1",
+        "clause": "end if",
         "_row_num": 9
       },
       {
-        "type": "barcode",
-        "name": "scanned_envelope_code",
-        "display": {
-          "text": "Scan the envelope barcode",
-          "hint": "Scanned envelope"
-        },
-        "model": {
-          "isSessionVariable": true
-        },
+        "clause": "if",
+        "condition": "data('received_card') !== 1",
         "_row_num": 10
       },
       {
-        "clause": "end if",
+        "type": "barcode",
+        "name": "scanned_item_code",
+        "display": {
+          "text": "Scan the item barcode",
+          "hint": "Scanned envelope"
+        },
         "_row_num": 11
+      },
+      {
+        "clause": "end if",
+        "_row_num": 12
       },
       {
         "clause": "if",
         "condition": "data('received_card') !== 1",
-        "_row_num": 12
-      },
-      {
-        "type": "string",
-        "name": "scanned_envelope_code",
-        "display": {
-          "text": "Enter or update the envelope barcode",
-          "hint": "Scanned envelope"
-        },
-        "model": {
-          "isSessionVariable": true
-        },
         "_row_num": 13
       },
       {
-        "clause": "end if",
+        "type": "string",
+        "name": "scanned_item_code",
+        "display": {
+          "text": "Enter or update the item barcode",
+          "hint": "Scanned envelope"
+        },
         "_row_num": 14
       },
       {
-        "clause": "if",
-        "condition": "data('scanned_envelope_code') !== data('envelope_code') && data('received_card') !== 1",
+        "clause": "end if",
         "_row_num": 15
+      },
+      {
+        "clause": "if",
+        "condition": "data('scanned_item_code') !== data('item_code') && data('received_card') !== 1",
+        "_row_num": 16
       },
       {
         "type": "note",
         "display": {
-          "text": "Incorrect card! They should receive card {{data.envelope_code}}. You scanned {{data.scanned_envelope_code}}. Please go back and rescan the correct card."
+          "text": "Incorrect item! They should receive card {{data.item_code}}. You scanned {{data.scanned_item_code}}. Please go back and rescan the correct item(s)."
         },
-        "_row_num": 16
+        "_row_num": 17
       },
       {
         "clause": "end if",
-        "_row_num": 17
+        "_row_num": 18
       },
       {
         "clause": "if",
         "condition": "data('received_card') !== 1",
-        "_row_num": 18
+        "_row_num": 19
       },
       {
         "type": "select_one_integer",
         "values_list": "yes_no",
         "name": "received_card",
         "display": {
-          "text": "Did they receive the card?"
+          "text": "Did they receive their item(s)?"
         },
-        "_row_num": 19
+        "_row_num": 20
       },
       {
         "clause": "end if",
-        "_row_num": 20
+        "_row_num": 21
       }
     ],
     "choices": [
@@ -289,6 +334,13 @@
         "clause": "goto _finalize",
         "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
         "_row_num": 3
+      }
+    ],
+    "calculates": [
+      {
+        "calculation_name": "remainingDistributions",
+        "calculation": "(function() {\nif (data('distributions') === null || data('distributions_received') === null) {\n return 'other null data values';\n}\n else { \nvar overallDistributions = data('distributions').split(';');\nvar splitOverallDistributions = new Array(overallDistributions.length);\nfor (var i = 0; i < overallDistributions.length; i++) {\nsplitOverallDistributions[i] = overallDistributions[i].split(' ');\n}\nvar receivedDistributions = data('distributions_received').split(';');\nvar splitReceivedDistributions = new Array(receivedDistributions.length);\nfor (var i = 0; i < receivedDistributions.length; i++) {\nsplitReceivedDistributions[i] = receivedDistributions[i].split(' ');\n}\nvar remainDistributions = [];\nfor (var i = 0; i < receivedDistributions.length; i++) {\nfor (var j = 0; j < overallDistributions.length; j++) {\nif (splitReceivedDistributions[i][1] === splitOverallDistributions[j][1]) {\nvar quantity = parseInt(splitOverallDistributions[j][0]) - parseInt(splitReceivedDistributions[i][0]);\nremainDistributions.push(quantity + ' ' + splitOverallDistributions[i][1]);\n}\n}\n}\nreturn remainDistributions;\n}\n})()",
+        "_row_num": 2
       }
     ]
   },
@@ -384,7 +436,13 @@
       ]
     },
     "queries": {},
-    "calculates": {},
+    "calculates": {
+      "remainingDistributions": {
+        "calculation_name": "remainingDistributions",
+        "calculation": "(function() {\nif (data('distributions') === null || data('distributions_received') === null) {\n return 'other null data values';\n}\n else { \nvar overallDistributions = data('distributions').split(';');\nvar splitOverallDistributions = new Array(overallDistributions.length);\nfor (var i = 0; i < overallDistributions.length; i++) {\nsplitOverallDistributions[i] = overallDistributions[i].split(' ');\n}\nvar receivedDistributions = data('distributions_received').split(';');\nvar splitReceivedDistributions = new Array(receivedDistributions.length);\nfor (var i = 0; i < receivedDistributions.length; i++) {\nsplitReceivedDistributions[i] = receivedDistributions[i].split(' ');\n}\nvar remainDistributions = [];\nfor (var i = 0; i < receivedDistributions.length; i++) {\nfor (var j = 0; j < overallDistributions.length; j++) {\nif (splitReceivedDistributions[i][1] === splitOverallDistributions[j][1]) {\nvar quantity = parseInt(splitOverallDistributions[j][0]) - parseInt(splitReceivedDistributions[i][0]);\nremainDistributions.push(quantity + ' ' + splitOverallDistributions[i][1]);\n}\n}\n}\nreturn remainDistributions;\n}\n})()",
+        "_row_num": 2
+      }
+    },
     "model": {
       "first_name": {
         "type": "string",
@@ -510,7 +568,7 @@
         ],
         "elementKey": "beneficiary_code"
       },
-      "envelope_code": {
+      "item_code": {
         "type": "string",
         "_defn": [
           {
@@ -518,7 +576,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "envelope_code"
+        "elementKey": "item_code"
       },
       "date_screened": {
         "type": "string",
@@ -551,7 +609,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 20,
             "section_name": "survey"
           },
           {
@@ -631,20 +689,107 @@
         ],
         "elementKey": "spare_str_6"
       },
-      "scanned_envelope_code": {
+      "gender": {
         "type": "string",
-        "isSessionVariable": true,
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 24,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "gender"
+      },
+      "age": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "age"
+      },
+      "flag": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "flag"
+      },
+      "distributions": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distributions"
+      },
+      "distributions_received": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distributions_received"
+      },
+      "remaining_distributions": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
             "section_name": "survey"
           },
           {
-            "_row_num": 13,
-            "section_name": "survey"
+            "_row_num": 29,
+            "section_name": "model"
           }
         ],
-        "elementKey": "scanned_envelope_code"
+        "elementKey": "remaining_distributions"
+      },
+      "scanned_item_code": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 30,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "scanned_item_code"
+      },
+      "mobile_provider": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "mobile_provider"
+      },
+      "hh_size": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "hh_size"
       }
     },
     "section_names": [
@@ -672,60 +817,54 @@
           {
             "type": "note",
             "display": {
-              "text": "They should receive envelope {{data.envelope_code}}.",
+              "text": "They should receive {{data.remaining_distributions}}.",
               "hint": "If this envelope does not exist or is not found, contact your administrator."
             },
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen7",
+            "_branch_label_enclosing_screen": "survey/_screen8",
             "promptIdx": 1
           },
           {
             "type": "barcode",
-            "name": "scanned_envelope_code",
+            "name": "scanned_item_code",
             "display": {
-              "text": "Scan the envelope barcode",
+              "text": "Scan the item barcode",
               "hint": "Scanned envelope"
             },
-            "model": {
-              "isSessionVariable": true
-            },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 2
           },
           {
             "type": "string",
-            "name": "scanned_envelope_code",
+            "name": "scanned_item_code",
             "display": {
-              "text": "Enter or update the envelope barcode",
+              "text": "Enter or update the item barcode",
               "hint": "Scanned envelope"
             },
-            "model": {
-              "isSessionVariable": true
-            },
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen13",
+            "_branch_label_enclosing_screen": "survey/_screen14",
             "promptIdx": 3
           },
           {
             "type": "note",
             "display": {
-              "text": "Incorrect card! They should receive card {{data.envelope_code}}. You scanned {{data.scanned_envelope_code}}. Please go back and rescan the correct card."
+              "text": "Incorrect item! They should receive card {{data.item_code}}. You scanned {{data.scanned_item_code}}. Please go back and rescan the correct item(s)."
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen16",
+            "_branch_label_enclosing_screen": "survey/_screen17",
             "promptIdx": 4
           },
           {
@@ -733,21 +872,21 @@
             "values_list": "yes_no",
             "name": "received_card",
             "display": {
-              "text": "Did they receive the card?"
+              "text": "Did they receive their item(s)?"
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "select_one_integer",
-            "_branch_label_enclosing_screen": "survey/_screen19",
+            "_branch_label_enclosing_screen": "survey/_screen20",
             "promptIdx": 5
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 21,
-            "_branch_label_enclosing_screen": "survey/_screen21",
+            "_row_num": 22,
+            "_branch_label_enclosing_screen": "survey/_screen22",
             "promptIdx": 6
           }
         ],
@@ -809,159 +948,168 @@
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else8",
-            "_row_num": 8,
+            "_branch_label": "_else9",
+            "_row_num": 9,
             "operationIdx": 6
           },
           {
+            "type": "assign",
+            "name": "remaining_distributions",
+            "calculation": "calculates.remainingDistributions()",
             "_row_num": 7,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 6,
+            "_token_type": "assign",
             "operationIdx": 7
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif8",
             "_row_num": 8,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
-            "clause": "if",
-            "condition": "data('received_card') !== 1",
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_then9",
+            "_branch_label": "_endif9",
+            "_row_num": 9,
             "operationIdx": 9
           },
           {
-            "clause": "end if",
+            "clause": "if",
+            "condition": "data('received_card') !== 1",
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "goto_label",
-            "_branch_label": "_else11",
-            "_row_num": 11,
+            "_branch_label": "_then10",
             "operationIdx": 10
           },
           {
-            "_row_num": 10,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else12",
+            "_row_num": 12,
             "operationIdx": 11
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif11",
             "_row_num": 11,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 12
           },
           {
-            "clause": "if",
-            "condition": "data('received_card') !== 1",
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_then12",
+            "_branch_label": "_endif12",
+            "_row_num": 12,
             "operationIdx": 13
           },
           {
-            "clause": "end if",
+            "clause": "if",
+            "condition": "data('received_card') !== 1",
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "goto_label",
-            "_branch_label": "_else14",
-            "_row_num": 14,
+            "_branch_label": "_then13",
             "operationIdx": 14
           },
           {
-            "_row_num": 13,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else15",
+            "_row_num": 15,
             "operationIdx": 15
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif14",
             "_row_num": 14,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 16
           },
           {
-            "clause": "if",
-            "condition": "data('scanned_envelope_code') !== data('envelope_code') && data('received_card') !== 1",
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_then15",
+            "_branch_label": "_endif15",
+            "_row_num": 15,
             "operationIdx": 17
           },
           {
-            "clause": "end if",
+            "clause": "if",
+            "condition": "data('scanned_item_code') !== data('item_code') && data('received_card') !== 1",
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "goto_label",
-            "_branch_label": "_else17",
-            "_row_num": 17,
+            "_branch_label": "_then16",
             "operationIdx": 18
           },
           {
-            "_row_num": 16,
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else18",
+            "_row_num": 18,
+            "operationIdx": 19
+          },
+          {
+            "_row_num": 17,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 19
+            "operationIdx": 20
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif17",
-            "_row_num": 17,
-            "operationIdx": 20
+            "_branch_label": "_endif18",
+            "_row_num": 18,
+            "operationIdx": 21
           },
           {
             "clause": "if",
             "condition": "data('received_card') !== 1",
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "goto_label",
-            "_branch_label": "_then18",
-            "operationIdx": 21
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else20",
-            "_row_num": 20,
+            "_branch_label": "_then19",
             "operationIdx": 22
           },
           {
-            "_row_num": 19,
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else21",
+            "_row_num": 21,
+            "operationIdx": 23
+          },
+          {
+            "_row_num": 20,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 23
+            "operationIdx": 24
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif20",
-            "_row_num": 20,
-            "operationIdx": 24
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
+            "_branch_label": "_endif21",
             "_row_num": 21,
             "operationIdx": 25
           },
           {
-            "_row_num": 21,
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 22,
+            "operationIdx": 26
+          },
+          {
+            "_row_num": 22,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 26
+            "operationIdx": 27
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 21,
-            "operationIdx": 27
+            "_row_num": 22,
+            "operationIdx": 28
           }
         ],
         "branch_label_map": {
@@ -970,27 +1118,27 @@
           "_else5": 5,
           "_endif5": 5,
           "_then6": 7,
-          "_screen7": 7,
-          "_else8": 9,
-          "_endif8": 9,
-          "_then9": 11,
-          "_screen10": 11,
-          "_else11": 13,
-          "_endif11": 13,
-          "_then12": 15,
-          "_screen13": 15,
-          "_else14": 17,
-          "_endif14": 17,
-          "_then15": 19,
-          "_screen16": 19,
-          "_else17": 21,
-          "_endif17": 21,
-          "_then18": 23,
-          "_screen19": 23,
-          "_else20": 25,
-          "_endif20": 25,
-          "_contents": 26,
-          "_screen21": 26
+          "_screen8": 8,
+          "_else9": 10,
+          "_endif9": 10,
+          "_then10": 12,
+          "_screen11": 12,
+          "_else12": 14,
+          "_endif12": 14,
+          "_then13": 16,
+          "_screen14": 16,
+          "_else15": 18,
+          "_endif15": 18,
+          "_then16": 20,
+          "_screen17": 20,
+          "_else18": 22,
+          "_endif18": 22,
+          "_then19": 24,
+          "_screen20": 24,
+          "_else21": 26,
+          "_endif21": 26,
+          "_contents": 27,
+          "_screen22": 27
         }
       },
       "initial": {
@@ -1269,7 +1417,7 @@
         "elementSet": "data",
         "elementPath": "beneficiary_code"
       },
-      "envelope_code": {
+      "item_code": {
         "type": "string",
         "_defn": [
           {
@@ -1277,10 +1425,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "envelope_code",
-        "elementName": "envelope_code",
+        "elementKey": "item_code",
+        "elementName": "item_code",
         "elementSet": "data",
-        "elementPath": "envelope_code"
+        "elementPath": "item_code"
       },
       "date_screened": {
         "type": "string",
@@ -1319,7 +1467,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 20,
             "section_name": "survey"
           },
           {
@@ -1423,23 +1571,134 @@
         "elementSet": "data",
         "elementPath": "spare_str_6"
       },
-      "scanned_envelope_code": {
+      "gender": {
         "type": "string",
-        "isSessionVariable": true,
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 24,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "gender",
+        "elementName": "gender",
+        "elementSet": "data",
+        "elementPath": "gender"
+      },
+      "age": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "age",
+        "elementName": "age",
+        "elementSet": "data",
+        "elementPath": "age"
+      },
+      "flag": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "flag",
+        "elementName": "flag",
+        "elementSet": "data",
+        "elementPath": "flag"
+      },
+      "distributions": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distributions",
+        "elementName": "distributions",
+        "elementSet": "data",
+        "elementPath": "distributions"
+      },
+      "distributions_received": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distributions_received",
+        "elementName": "distributions_received",
+        "elementSet": "data",
+        "elementPath": "distributions_received"
+      },
+      "remaining_distributions": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
             "section_name": "survey"
           },
           {
-            "_row_num": 13,
-            "section_name": "survey"
+            "_row_num": 29,
+            "section_name": "model"
           }
         ],
-        "elementKey": "scanned_envelope_code",
-        "elementName": "scanned_envelope_code",
+        "elementKey": "remaining_distributions",
+        "elementName": "remaining_distributions",
         "elementSet": "data",
-        "elementPath": "scanned_envelope_code"
+        "elementPath": "remaining_distributions"
+      },
+      "scanned_item_code": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 30,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "scanned_item_code",
+        "elementName": "scanned_item_code",
+        "elementSet": "data",
+        "elementPath": "scanned_item_code"
+      },
+      "mobile_provider": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 31,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "mobile_provider",
+        "elementName": "mobile_provider",
+        "elementSet": "data",
+        "elementPath": "mobile_provider"
+      },
+      "hh_size": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "hh_size",
+        "elementName": "hh_size",
+        "elementSet": "data",
+        "elementPath": "hh_size"
       },
       "pic_of_card_uriFragment": {
         "type": "string",
