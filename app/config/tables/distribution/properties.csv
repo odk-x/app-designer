@@ -1,7 +1,4 @@
 _partition,_aspect,_key,_type,_value
-Column,acknowledge_auth,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":""no"",""display"":{""text"":""No""},""_row_num"":2},{""choice_list_name"":""yes_no"",""data_value"":""yes"",""display"":{""text"":""Yes""},""_row_num"":3}]"
-Column,is_distributed,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":""no"",""display"":{""text"":""No""},""_row_num"":2},{""choice_list_name"":""yes_no"",""data_value"":""yes"",""display"":{""text"":""Yes""},""_row_num"":3}]"
-Column,try_again,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":""no"",""display"":{""text"":""No""},""_row_num"":2},{""choice_list_name"":""yes_no"",""data_value"":""yes"",""display"":{""text"":""Yes""},""_row_num"":3}]"
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,distribution
 Table,default,defaultViewType,string,SPREADSHEET

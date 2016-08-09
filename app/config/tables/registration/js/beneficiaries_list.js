@@ -126,14 +126,13 @@ var displayGroup = function(idxStart) {
       //field1.text(first_name + ' ' + last_name);
       //item.append(field1);
 
-      /*var field2 = $('<li>');
+      var field2 = $('<li>');
       field2.attr('class', 'detail');
       var beneficiary_code = beneficiariesResultSet.getData(i, 'beneficiary_code');
       field2.text('Beneficiary Code: ' + beneficiary_code);
       item.append(field2);
 
       //var field3 = $('<li>');
-      field2.attr('class', 'detail');
       /*var received_card = beneficiariesResultSet.getData(i, 'received_card');
       if (received_card === '1') {
         field3.text('Received enevelope.');

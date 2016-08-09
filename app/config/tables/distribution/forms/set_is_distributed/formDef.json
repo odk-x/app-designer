@@ -1,13 +1,32 @@
 {
   "xlsx": {
-    "survey": [
+    "settings": [
       {
-        "type": "note",
-        "name": "intro_note",
-        "display": {
-          "text": "The values for this distribution are {{data.authorization_name}} item_pack_id: {{data.item_pack_id}} authorization id: {{data.authorization_id}}"
-        },
+        "setting_name": "form_id",
+        "value": "set_is_distributed",
         "_row_num": 2
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20160805,
+        "_row_num": 3
+      },
+      {
+        "setting_name": "table_id",
+        "value": "distribution",
+        "_row_num": 4
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": "Confirm distribution"
+        },
+        "_row_num": 5
+      },
+      {
+        "setting_name": "instance_name",
+        "value": "authorization_name",
+        "_row_num": 6
       }
     ],
     "model": [
@@ -62,49 +81,31 @@
         "_row_num": 11
       }
     ],
-    "settings": [
+    "survey": [
       {
-        "setting_name": "form_id",
-        "value": "distribution",
-        "_row_num": 2
-      },
-      {
-        "setting_name": "form_version",
-        "value": 20160805,
-        "_row_num": 3
-      },
-      {
-        "setting_name": "table_id",
-        "value": "distribution",
-        "_row_num": 4
-      },
-      {
-        "setting_name": "survey",
+        "type": "select_one",
+        "values_list": "true_false",
+        "name": "is_distributed",
         "display": {
-          "title": "Distribution Authorization"
+          "text": "Has the item pack been successfully distributed?"
         },
-        "_row_num": 5
-      },
-      {
-        "setting_name": "instance_name",
-        "value": "authorization_name",
-        "_row_num": 6
+        "_row_num": 2
       }
     ],
     "choices": [
       {
-        "choice_list_name": "yes_no",
-        "data_value": "false",
+        "choice_list_name": "true_false",
+        "data_value": "true",
         "display": {
-          "text": "No"
+          "text": "Yes"
         },
         "_row_num": 2
       },
       {
-        "choice_list_name": "yes_no",
-        "data_value": "true",
+        "choice_list_name": "true_false",
+        "data_value": "false",
         "display": {
-          "text": "Yes"
+          "text": "No"
         },
         "_row_num": 3
       }
@@ -142,7 +143,7 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "distribution",
+        "value": "set_is_distributed",
         "_row_num": 2
       },
       "form_version": {
@@ -158,7 +159,7 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Distribution Authorization"
+          "title": "Confirm distribution"
         },
         "_row_num": 5
       },
@@ -187,26 +188,26 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Distribution Authorization"
+          "title": "Confirm distribution"
         },
         "_row_num": 5
       }
     },
     "choices": {
-      "yes_no": [
+      "true_false": [
         {
-          "choice_list_name": "yes_no",
-          "data_value": "false",
+          "choice_list_name": "true_false",
+          "data_value": "true",
           "display": {
-            "text": "No"
+            "text": "Yes"
           },
           "_row_num": 2
         },
         {
-          "choice_list_name": "yes_no",
-          "data_value": "true",
+          "choice_list_name": "true_false",
+          "data_value": "false",
           "display": {
-            "text": "Yes"
+            "text": "No"
           },
           "_row_num": 3
         }
@@ -307,7 +308,12 @@
       },
       "is_distributed": {
         "type": "string",
+        "valuesList": "true_false",
         "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
           {
             "_row_num": 11,
             "section_name": "model"
@@ -327,15 +333,16 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "note",
-            "name": "intro_note",
+            "type": "select_one",
+            "values_list": "true_false",
+            "name": "is_distributed",
             "display": {
-              "text": "The values for this distribution are {{data.authorization_name}} item_pack_id: {{data.item_pack_id}} authorization id: {{data.authorization_id}}"
+              "text": "Has the item pack been successfully distributed?"
             },
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "note",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
@@ -404,7 +411,7 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Distribution Authorization"
+              "title": "Confirm distribution"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -613,7 +620,12 @@
       },
       "is_distributed": {
         "type": "string",
+        "valuesList": "true_false",
         "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          },
           {
             "_row_num": 11,
             "section_name": "model"
@@ -712,36 +724,6 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_savepoint_creator"
       }
-    },
-    "properties": [
-      {
-        "_partition": "FormType",
-        "_aspect": "default",
-        "_key": "FormType.formType",
-        "_type": "string",
-        "_value": "SURVEY"
-      },
-      {
-        "_partition": "SurveyUtil",
-        "_aspect": "default",
-        "_key": "SurveyUtil.formId",
-        "_type": "string",
-        "_value": "distribution"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
-        "_key": "defaultViewType",
-        "_type": "string",
-        "_value": "SPREADSHEET"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "\"Distribution Authorization\""
-      }
-    ]
+    }
   }
 }

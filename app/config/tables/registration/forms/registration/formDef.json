@@ -156,7 +156,7 @@
         "_row_num": 19
       },
       {
-        "type": "string",
+        "type": "barcode",
         "name": "beneficiary_code",
         "display": {
           "text": "Scan their barcode.",
@@ -321,7 +321,7 @@
     "choices": [
       {
         "choice_list_name": "genders",
-        "data_value": "a0",
+        "data_value": "Male",
         "display": {
           "text": "Male"
         },
@@ -329,7 +329,7 @@
       },
       {
         "choice_list_name": "genders",
-        "data_value": "a1",
+        "data_value": "Female",
         "display": {
           "text": "Female"
         },
@@ -500,7 +500,7 @@
       "genders": [
         {
           "choice_list_name": "genders",
-          "data_value": "a0",
+          "data_value": "Male",
           "display": {
             "text": "Male"
           },
@@ -508,7 +508,7 @@
         },
         {
           "choice_list_name": "genders",
-          "data_value": "a1",
+          "data_value": "Female",
           "display": {
             "text": "Female"
           },
@@ -1129,7 +1129,7 @@
             "promptIdx": 15
           },
           {
-            "type": "string",
+            "type": "barcode",
             "name": "beneficiary_code",
             "display": {
               "text": "Scan their barcode.",
@@ -1138,7 +1138,7 @@
             "_row_num": 20,
             "__rowNum__": 19,
             "_token_type": "prompt",
-            "_type": "string",
+            "_type": "barcode",
             "_branch_label_enclosing_screen": "survey/_screen20",
             "promptIdx": 16
           },
@@ -1918,7 +1918,7 @@
         "_aspect": "gender",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"genders\",\"data_value\":\"a0\",\"display\":{\"text\":\"Male\"},\"_row_num\":2},{\"choice_list_name\":\"genders\",\"data_value\":\"a1\",\"display\":{\"text\":\"Female\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"genders\",\"data_value\":\"Male\",\"display\":{\"text\":\"Male\"},\"_row_num\":2},{\"choice_list_name\":\"genders\",\"data_value\":\"Female\",\"display\":{\"text\":\"Female\"},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
