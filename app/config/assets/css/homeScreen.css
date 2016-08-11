@@ -46,10 +46,11 @@ div {
    font-size: 16pt;
    color: white;
    margin: 0 auto 35px;
+   background-color: teal;
 }
 
 h1 {
-    border-bottom: 2px solid #38c0f4;
+    border-bottom: 2px solid darkturquoise;
     padding-bottom: 10px;
     color: #FFFFFF;
 }

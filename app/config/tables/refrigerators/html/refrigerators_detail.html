@@ -12,16 +12,36 @@
     </head>
     <body>
         <script type="text/javascript" src="../js/refrigerators_detail.js"></script>
-        <h1>Refrigerator: <span id="TITLE" class="main-text"></span></h1>
-        <!-- To query and link to the result, replace the placeholders and put the following around the <span></span> tags.
-        <a href="#" onclick="odkTables.openTable('TABLE_NAME', 'COL_NAME:' + data.get('COL_NAME'));"></a>
-        
-        Example:<a href="#" onclick="odkTables.openTable('TABLE_NAME', 'COL_NAME:' + data.get('COL_NAME'));"><span id="FIELD_1"></span></a>
-        -->
-        <p>Healthcare Facility: <span id="facility_name"></span></p>
-        <p>Model ID: <span id="model_id"></span>
-        <br>Tracking ID: <span id="tracking_id"></span>
-        <br>Year Installed: <span id="install_year"></span></p>
+
+        <div class="header col-12">
+            <h1>Refrigerator <span id="refrigerator_id" class=""></span></h1>
+        </div>
+
+        <br>
+
+        <div class="detail col-12">
+            <h3>Basic Refrigerator Information</span></h3>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <p>Facility: <span id="facility_name"></span></p>
+                <p>Year Installed: <span id="install_year"></span></p>
+                <p>Status: <span id="working_status"></span></p>
+                <p>Reason Not Working: <span id="reason_not_working"></span></p>
+            </div>
+
+            <div class="col-6">
+                <p>Model ID: <span id="model_id"></span></p>
+                <p>Tracking ID: <span id="tracking_id"></span>
+                <p>Voltage Regulator? <span id="voltage_regulator"></span></p>
+            </div>
+        </div>
+
+        <div class="button">
+            <h3 href="#" onclick="onLinkClick()">View Model Information</h3>
+        </div>
+
         <script>
             $(display);
         </script>

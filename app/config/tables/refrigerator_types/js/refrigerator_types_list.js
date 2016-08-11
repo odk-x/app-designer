@@ -32,6 +32,33 @@ function cbFailure(error) {
 
 }
 
+var cbSearchSuccess = function(searchData) {
+    console.log('cbSearchSuccess data is' + searchData);
+    if(searchData.getCount() > 0) {
+        // open filtered list view if facility found
+        var rowId = searchData.getRowId(0);
+        odkTables.openTableToListView(
+                'refrigerator_types',
+                '_id = ?',
+                [rowId],
+                'config/tables/refrigerator_types/html/refrigerator_types_list.html');
+    } else {
+        document.getElementById("search").value = "";
+        document.getElementsByName("query")[0].placeholder="Model not found";
+    }
+}
+
+var cbSearchFailure = function(error) {
+    console.log('refrigerator_types_list cbSearchFailure: ' + error);
+}
+
+var getSearchResults = function() {
+    var searchText = document.getElementById('search').value;
+
+    odkData.query('refrigerator_types', 'catalog_id = ?', [searchText], 
+        null, null, null, null, true, cbSearchSuccess, cbSearchFailure);
+}
+
 /**
  * Called when page loads to display things (Nothing to edit here)
  */

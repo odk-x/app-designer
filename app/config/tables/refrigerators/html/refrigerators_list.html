@@ -11,6 +11,14 @@
     </head>
     <body>
         <script type="text/javascript" src="../js/refrigerators_list.js"></script>
+
+        <div id="searchBox">
+            <form id="form" action="javascript:getSearchResults();">
+                <input id="search" type="text" name="query" size="10" placeholder="Enter Refrigerator ID..." />
+                <input id="submit" type="submit" value="Search" />
+            </form>
+        </div> 
+
         <div id="wrapper">
             <div id="list"></div>
         </div>

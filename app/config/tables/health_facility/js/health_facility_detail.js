@@ -25,8 +25,8 @@ function onLinkClick() {
     {
         odkTables.openTableToListView(
           'refrigerators',
-          'facility_id = ?',
-          [healthFacilityResultSet.get('facility_id')],
+          'facility_row_id = ?',
+          [healthFacilityResultSet.get('_id')],
           'config/tables/refrigerators/html/refrigerators_list.html');
     }
 }
@@ -35,8 +35,7 @@ function cbSuccess(result) {
 
     healthFacilityResultSet = result;
 
-    // CAL: I'm not positive that this is all we need to change to get this to work!!
-    odkData.query('refrigerators', 'facility_id = ?', [healthFacilityResultSet.get('facility_id')], 
+    odkData.query('refrigerators', 'facility_row_id = ?', [healthFacilityResultSet.get('_id')], 
         null, null, null, null, true, refrigeratorsCBSuccess, refrigeratorsCBFailure);
 }
 
@@ -48,12 +47,14 @@ function cbFailure(error) {
 var display = function() {
 
     odkData.getViewData(cbSuccess, cbFailure);
+
 }
 
 function refrigeratorTypeCBSuccess(result) {
 
     console.log('health_facility_detail refrigerator type query CB success');
     typeData = result;
+
 }
 
 function refrigeratorTypeCBFailure(error) {
@@ -63,7 +64,7 @@ function refrigeratorTypeCBFailure(error) {
 
 function refrigeratorsCBSuccess(invData) {
 
-    $('#TITLE').text(healthFacilityResultSet.get('Name'));
+    $('#TITLE').text(healthFacilityResultSet.get('facility_name'));
 
     $('#facility_id').text(healthFacilityResultSet.get('facility_id'));
     $('#facility_type').text(util.formatDisplayText(
@@ -71,7 +72,8 @@ function refrigeratorsCBSuccess(invData) {
     $('#facility_ownership').text(util.formatDisplayText(
         healthFacilityResultSet.get('facility_ownership')));
     $('#facility_population').text(healthFacilityResultSet.get('facility_population'));
-    $('#facility_coverage').text(healthFacilityResultSet.get('facility_coverage'));
+    $('#facility_coverage').text(healthFacilityResultSet.get('facility_coverage') + '%');
+
     $('#electricity_source').text(util.formatDisplayText(
         healthFacilityResultSet.get('electricity_source')));
     $('#grid_availability').text(util.formatDisplayText(
@@ -82,11 +84,11 @@ function refrigeratorsCBSuccess(invData) {
         healthFacilityResultSet.get('kerosene_availability')));
     $('#solar_suitable_climate').text(util.formatDisplayText(
         healthFacilityResultSet.get('solar_suitable_climate')));
-    $('#solar_suitable_site').text(healthFacilityResultSet.get('solar_suitable_site'));
+    $('#solar_suitable_site').text(util.formatDisplayText(
+        healthFacilityResultSet.get('solar_suitable_site')));
+
     $('#climate').text(util.formatDisplayText(
         healthFacilityResultSet.get('climate_zone')));
-    $('#dist_to_supply').text(healthFacilityResultSet.get('distance_to_supply'));
-
     // The latitude and longitude are stored in a single column as GeoPoint.
     // We need to extract the lat/lon from the GeoPoint.
     var lat = healthFacilityResultSet.get('Location.latitude');
@@ -94,11 +96,20 @@ function refrigeratorsCBSuccess(invData) {
     $('#lat').text(lat);
     $('#lon').text(lon);
 
+    $('#distance_to_supply').text(healthFacilityResultSet.get('distance_to_supply') + ' km');
+    $('#supply_interval').text(healthFacilityResultSet.get('vaccine_supply_interval'));
+    $('#stock_requirement').text(healthFacilityResultSet.get(
+        'vaccine_reserve_stock_requirement'));    
+    $('#supply_mode').text(util.formatDisplayText(
+        healthFacilityResultSet.get('vaccine_supply_mode')));
+
 
     $('#fridge_list').text(invData.getCount());
 
 }
 
 function refrigeratorsCBFailure(error ) {
+
     console.log('health_facility_detail refrigerators query CB error : ' + error);
+
 }

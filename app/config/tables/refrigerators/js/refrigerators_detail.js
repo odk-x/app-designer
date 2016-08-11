@@ -4,18 +4,6 @@
 /* global $, odkTables, data */
 'use strict';
 
-// Handle the case where we are debugging in chrome.
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/refrigerators_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
-
 var refrigeratorsResultSet = {};
 var typeData = {};
 var facilityData = {};
@@ -24,12 +12,18 @@ function cbTypeSuccess(result) {
 
     typeData = result;
 
-    $('#TITLE').text(refrigeratorsResultSet.get('refrigerator_id'));
+    $('#refrigerator_id').text(refrigeratorsResultSet.get('refrigerator_id'));
 
     $('#facility_name').text(facilityData.getData(0, 'facility_name'));
-    $('#model_id').text(typeData.getData(0, 'model_id'));
+    $('#model_id').text(typeData.getData(0, 'catalog_id'));
     $('#tracking_id').text(refrigeratorsResultSet.get('tracking_id'));
     $('#install_year').text(refrigeratorsResultSet.get('year'));
+    $('#working_status').text(util.formatDisplayText(
+        refrigeratorsResultSet.get('working_status')));
+    $('#reason_not_working').text(util.formatDisplayText(
+        refrigeratorsResultSet.get('reason_not_working')));
+    $('#voltage_regulator').text(util.formatDisplayText(
+        refrigeratorsResultSet.get('voltage_regulator')));
 }
 
 function cbTypeFailure(error) {
@@ -39,21 +33,25 @@ function cbTypeFailure(error) {
 }
 
 function cbFacilitySuccess(result) {
+
     facilityData = result;
+
 }
 
 function cbFacilityFailure(error) {
+
     console.log('cbFacilityFailure: query for facility_id failed with message: ' + error);
+
 }
 
 function cbSuccess(result) {
 
     refrigeratorsResultSet = result;
 
-    odkData.query('health_facility', 'facility_id = ?', [refrigeratorsResultSet.get('facility_id')], 
+    odkData.query('health_facility', '_id = ?', [refrigeratorsResultSet.get('facility_row_id')], 
         null, null, null, null, true, cbFacilitySuccess, cbFacilityFailure);
 
-    odkData.query('refrigerator_types', 'catalog_id = ?', [refrigeratorsResultSet.get('model_id')],
+    odkData.query('refrigerator_types', '_id = ?', [refrigeratorsResultSet.get('model_row_id')],
         null, null, null, null, true, cbTypeSuccess, cbTypeFailure);
 }
 
@@ -68,4 +66,34 @@ var display = function() {
     odkData.getViewData(cbSuccess, cbFailure);
 
 }
+
+function onLinkClick() {
+
+    if (!$.isEmptyObject(typeData)) {
+
+        odkTables.openDetailView(
+            'refrigerator_types',
+            typeData.getRowId(0),
+            'config/tables/refrigerator_types/html/refrigerator_types_detail.html');
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

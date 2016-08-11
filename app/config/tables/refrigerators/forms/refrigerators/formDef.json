@@ -2,7 +2,7 @@
   "xlsx": {
     "survey": [
       {
-        "type": "number",
+        "type": "text",
         "name": "refrigerator_id",
         "display": {
           "text": "Enter refrigerator ID:"
@@ -12,7 +12,7 @@
       {
         "type": "select_one",
         "values_list": "health_facility_list",
-        "name": "facility_id",
+        "name": "facility_row_id",
         "display": {
           "text": "Choose the health facility:"
         },
@@ -21,7 +21,7 @@
       {
         "type": "select_one",
         "values_list": "refrigerator_model_list",
-        "name": "model_id",
+        "name": "model_row_id",
         "display": {
           "text": "Choose the refrigerator model:"
         },
@@ -44,7 +44,7 @@
         "_row_num": 6
       },
       {
-        "type": "select_multiple",
+        "type": "select_one",
         "values_list": "power",
         "name": "power_source",
         "display": {
@@ -220,17 +220,17 @@
       },
       {
         "choice_list_name": "reasons",
-        "data_value": "surplus",
+        "data_value": "dead",
         "display": {
-          "text": "Surplus"
+          "text": "Dead"
         },
         "_row_num": 21
       },
       {
         "choice_list_name": "reasons",
-        "data_value": "dead",
+        "data_value": "not_applicable",
         "display": {
-          "text": "Dead"
+          "text": "Not Applicable"
         },
         "_row_num": 22
       },
@@ -273,6 +273,14 @@
           "text": "No"
         },
         "_row_num": 29
+      },
+      {
+        "choice_list_name": "yes_no",
+        "data_value": "unknown",
+        "display": {
+          "text": "Unknown"
+        },
+        "_row_num": 30
       }
     ],
     "queries": [
@@ -282,8 +290,8 @@
         "linked_form_id": "refrigerator_types",
         "linked_table_id": "refrigerator_types",
         "selection": "catalog_id >= ?",
-        "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "selectionArgs": "['0']",
+        "auxillaryHash": "'catalog_id>='+opendatakit.encodeURIValue(0)",
         "_row_num": 2
       },
       {
@@ -291,9 +299,9 @@
         "query_type": "linked_table",
         "linked_form_id": "health_facility",
         "linked_table_id": "health_facility",
-        "selection": "_id >= ?",
-        "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "selection": "facility_id >= ?",
+        "selectionArgs": "['0']",
+        "auxillaryHash": "'facility_id>='+opendatakit.encodeURIValue(0)",
         "_row_num": 3
       }
     ],
@@ -336,7 +344,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20130408,
+        "value": 20160728,
         "_row_num": 4
       },
       {
@@ -379,7 +387,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20130408,
+        "value": 20160728,
         "_row_num": 4
       },
       "survey": {
@@ -552,17 +560,17 @@
         },
         {
           "choice_list_name": "reasons",
-          "data_value": "surplus",
+          "data_value": "dead",
           "display": {
-            "text": "Surplus"
+            "text": "Dead"
           },
           "_row_num": 21
         },
         {
           "choice_list_name": "reasons",
-          "data_value": "dead",
+          "data_value": "not_applicable",
           "display": {
-            "text": "Dead"
+            "text": "Not Applicable"
           },
           "_row_num": 22
         }
@@ -609,6 +617,14 @@
             "text": "No"
           },
           "_row_num": 29
+        },
+        {
+          "choice_list_name": "yes_no",
+          "data_value": "unknown",
+          "display": {
+            "text": "Unknown"
+          },
+          "_row_num": 30
         }
       ]
     },
@@ -619,8 +635,8 @@
         "linked_form_id": "refrigerator_types",
         "linked_table_id": "refrigerator_types",
         "selection": "catalog_id >= ?",
-        "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "selectionArgs": "['0']",
+        "auxillaryHash": "'catalog_id>='+opendatakit.encodeURIValue(0)",
         "_row_num": 2
       },
       "health_facility_list": {
@@ -628,9 +644,9 @@
         "query_type": "linked_table",
         "linked_form_id": "health_facility",
         "linked_table_id": "health_facility",
-        "selection": "_id >= ?",
-        "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "selection": "facility_id >= ?",
+        "selectionArgs": "['0']",
+        "auxillaryHash": "'facility_id>='+opendatakit.encodeURIValue(0)",
         "_row_num": 3
       }
     },
@@ -643,10 +659,10 @@
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "string",
         "elementKey": "refrigerator_id"
       },
-      "facility_id": {
+      "facility_row_id": {
         "_defn": [
           {
             "_row_num": 3,
@@ -655,9 +671,9 @@
         ],
         "type": "string",
         "valuesList": "health_facility_list",
-        "elementKey": "facility_id"
+        "elementKey": "facility_row_id"
       },
-      "model_id": {
+      "model_row_id": {
         "_defn": [
           {
             "_row_num": 4,
@@ -666,7 +682,7 @@
         ],
         "type": "string",
         "valuesList": "refrigerator_model_list",
-        "elementKey": "model_id"
+        "elementKey": "model_row_id"
       },
       "tracking_id": {
         "_defn": [
@@ -695,11 +711,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "power_source_items"
-        },
+        "type": "string",
         "valuesList": "power",
         "elementKey": "power_source"
       },
@@ -759,7 +771,7 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "number",
+            "type": "text",
             "name": "refrigerator_id",
             "display": {
               "text": "Enter refrigerator ID:"
@@ -767,14 +779,14 @@
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "number",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
           {
             "type": "select_one",
             "values_list": "health_facility_list",
-            "name": "facility_id",
+            "name": "facility_row_id",
             "display": {
               "text": "Choose the health facility:"
             },
@@ -788,7 +800,7 @@
           {
             "type": "select_one",
             "values_list": "refrigerator_model_list",
-            "name": "model_id",
+            "name": "model_row_id",
             "display": {
               "text": "Choose the refrigerator model:"
             },
@@ -826,7 +838,7 @@
             "promptIdx": 4
           },
           {
-            "type": "select_multiple",
+            "type": "select_one",
             "values_list": "power",
             "name": "power_source",
             "display": {
@@ -835,7 +847,7 @@
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
-            "_type": "select_multiple",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 5
           },
@@ -1189,13 +1201,13 @@
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "string",
         "elementKey": "refrigerator_id",
         "elementName": "refrigerator_id",
         "elementSet": "data",
         "elementPath": "refrigerator_id"
       },
-      "facility_id": {
+      "facility_row_id": {
         "_defn": [
           {
             "_row_num": 3,
@@ -1204,12 +1216,12 @@
         ],
         "type": "string",
         "valuesList": "health_facility_list",
-        "elementKey": "facility_id",
-        "elementName": "facility_id",
+        "elementKey": "facility_row_id",
+        "elementName": "facility_row_id",
         "elementSet": "data",
-        "elementPath": "facility_id"
+        "elementPath": "facility_row_id"
       },
-      "model_id": {
+      "model_row_id": {
         "_defn": [
           {
             "_row_num": 4,
@@ -1218,10 +1230,10 @@
         ],
         "type": "string",
         "valuesList": "refrigerator_model_list",
-        "elementKey": "model_id",
-        "elementName": "model_id",
+        "elementKey": "model_row_id",
+        "elementName": "model_row_id",
         "elementSet": "data",
-        "elementPath": "model_id"
+        "elementPath": "model_row_id"
       },
       "tracking_id": {
         "_defn": [
@@ -1256,23 +1268,12 @@
             "section_name": "survey"
           }
         ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "power_source_items",
-          "elementName": "items",
-          "elementSet": "data",
-          "elementPath": "power_source.items",
-          "notUnitOfRetention": true
-        },
+        "type": "string",
         "valuesList": "power",
         "elementKey": "power_source",
         "elementName": "power_source",
         "elementSet": "data",
-        "elementPath": "power_source",
-        "listChildElementKeys": [
-          "power_source_items"
-        ]
+        "elementPath": "power_source"
       },
       "working_status": {
         "_defn": [
@@ -1329,14 +1330,6 @@
         "elementName": "voltage_regulator",
         "elementSet": "data",
         "elementPath": "voltage_regulator"
-      },
-      "power_source_items": {
-        "type": "string",
-        "elementKey": "power_source_items",
-        "elementName": "items",
-        "elementSet": "data",
-        "elementPath": "power_source.items",
-        "notUnitOfRetention": true
       },
       "_id": {
         "type": "string",
@@ -1440,7 +1433,7 @@
         "_aspect": "reason_not_working",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"needs_spare_parts\",\"display\":{\"text\":\"Needs Spare Parts\"},\"_row_num\":18},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_finance\",\"display\":{\"text\":\"No Finance\"},\"_row_num\":19},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_fuel\",\"display\":{\"text\":\"No Fuel\"},\"_row_num\":20},{\"choice_list_name\":\"reasons\",\"data_value\":\"surplus\",\"display\":{\"text\":\"Surplus\"},\"_row_num\":21},{\"choice_list_name\":\"reasons\",\"data_value\":\"dead\",\"display\":{\"text\":\"Dead\"},\"_row_num\":22}]"
+        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"needs_spare_parts\",\"display\":{\"text\":\"Needs Spare Parts\"},\"_row_num\":18},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_finance\",\"display\":{\"text\":\"No Finance\"},\"_row_num\":19},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_fuel\",\"display\":{\"text\":\"No Fuel\"},\"_row_num\":20},{\"choice_list_name\":\"reasons\",\"data_value\":\"dead\",\"display\":{\"text\":\"Dead\"},\"_row_num\":21},{\"choice_list_name\":\"reasons\",\"data_value\":\"not_applicable\",\"display\":{\"text\":\"Not Applicable\"},\"_row_num\":22}]"
       },
       {
         "_partition": "Column",
@@ -1454,7 +1447,7 @@
         "_aspect": "voltage_regulator",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":28},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":29}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":28},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":29},{\"choice_list_name\":\"yes_no\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
