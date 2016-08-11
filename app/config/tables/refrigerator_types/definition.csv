@@ -10,3 +10,6 @@ power_source,power_source,array,"[""power_source_items""]"
 power_source_items,items,string,[]
 refrigerator_gross_volume,refrigerator_gross_volume,number,[]
 refrigerator_net_volume,refrigerator_net_volume,number,[]
+refrigerator_picture,refrigerator_picture,mimeUri,"[""refrigerator_picture_contentType"",""refrigerator_picture_uriFragment""]"
+refrigerator_picture_contentType,contentType,mimeType,[]
+refrigerator_picture_uriFragment,uriFragment,rowpath,[]

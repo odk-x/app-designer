@@ -18,12 +18,24 @@
         "_row_num": 3
       },
       {
+        "type": "image",
+        "name": "refrigerator_picture",
+        "display": {
+          "text": "Take a picture of the refrigerator"
+        },
+        "_row_num": 4
+      },
+      {
         "type": "text",
         "name": "manufacturer",
         "display": {
           "text": "Enter the manufacturer:"
         },
-        "_row_num": 4
+        "_row_num": 5
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 6
       },
       {
         "type": "decimal",
@@ -32,40 +44,47 @@
           "text": "Enter the refrigerator's gross volume:",
           "hint": "(cubic meters)"
         },
-        "_row_num": 5
+        "_row_num": 7
       },
       {
         "type": "decimal",
         "name": "refrigerator_net_volume",
         "display": {
-          "text": "Enter the refrigerator's net volume:"
+          "text": "Enter the refrigerator's net volume:",
+          "hint": "(cubic meters)"
         },
-        "_row_num": 6
+        "_row_num": 8
       },
       {
         "type": "decimal",
         "name": "freezer_gross_volume",
         "display": {
-          "text": "Enter the freezer's gross volume:"
+          "text": "Enter the freezer's gross volume:",
+          "hint": "(cubic meters)"
         },
-        "_row_num": 7
+        "_row_num": 9
       },
       {
         "type": "decimal",
         "name": "freezer_net_volume",
         "display": {
-          "text": "Enter the freezer's net volume:"
+          "text": "Enter the freezer's net volume:",
+          "hint": "(cubic meters)"
         },
-        "_row_num": 8
+        "_row_num": 10
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 11
       },
       {
         "type": "select_multiple",
         "values_list": "power_sources",
         "name": "power_source",
         "display": {
-          "text": "Choose Power Source Required:"
+          "text": "Choose power source required:"
         },
-        "_row_num": 9
+        "_row_num": 12
       },
       {
         "type": "select_one",
@@ -74,7 +93,7 @@
         "display": {
           "text": "Select what type of equipment this is"
         },
-        "_row_num": 10
+        "_row_num": 13
       },
       {
         "type": "select_one",
@@ -83,7 +102,7 @@
         "display": {
           "text": "What climate zone is this equipment best for?"
         },
-        "_row_num": 11
+        "_row_num": 14
       }
     ],
     "choices": [
@@ -259,7 +278,7 @@
       },
       {
         "setting_name": "instance_name",
-        "value": "Name",
+        "value": "catalog_id",
         "_row_num": 7
       }
     ]
@@ -307,7 +326,7 @@
       },
       "instance_name": {
         "setting_name": "instance_name",
-        "value": "Name",
+        "value": "catalog_id",
         "_row_num": 7
       },
       "_locales": {
@@ -486,10 +505,34 @@
         "type": "string",
         "elementKey": "model_id"
       },
-      "manufacturer": {
+      "refrigerator_picture": {
         "_defn": [
           {
             "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "refrigerator_picture_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "refrigerator_picture_contentType"
+          }
+        },
+        "elementKey": "refrigerator_picture"
+      },
+      "manufacturer": {
+        "_defn": [
+          {
+            "_row_num": 5,
             "section_name": "survey"
           }
         ],
@@ -499,7 +542,7 @@
       "refrigerator_gross_volume": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
@@ -509,7 +552,7 @@
       "refrigerator_net_volume": {
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -519,7 +562,7 @@
       "freezer_gross_volume": {
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
@@ -529,7 +572,7 @@
       "freezer_net_volume": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -539,7 +582,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 12,
             "section_name": "survey"
           }
         ],
@@ -554,7 +597,7 @@
       "equipment_type": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
@@ -565,7 +608,7 @@
       "climate_zone": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -611,17 +654,30 @@
             "promptIdx": 1
           },
           {
+            "type": "image",
+            "name": "refrigerator_picture",
+            "display": {
+              "text": "Take a picture of the refrigerator"
+            },
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "image",
+            "_branch_label_enclosing_screen": "survey/_screen4",
+            "promptIdx": 2
+          },
+          {
             "type": "text",
             "name": "manufacturer",
             "display": {
               "text": "Enter the manufacturer:"
             },
-            "_row_num": 4,
-            "__rowNum__": 3,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 2
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 3
           },
           {
             "type": "decimal",
@@ -630,21 +686,8 @@
               "text": "Enter the refrigerator's gross volume:",
               "hint": "(cubic meters)"
             },
-            "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "prompt",
-            "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen5",
-            "promptIdx": 3
-          },
-          {
-            "type": "decimal",
-            "name": "refrigerator_net_volume",
-            "display": {
-              "text": "Enter the refrigerator's net volume:"
-            },
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "prompt",
             "_type": "decimal",
             "_branch_label_enclosing_screen": "survey/_screen6",
@@ -652,43 +695,59 @@
           },
           {
             "type": "decimal",
-            "name": "freezer_gross_volume",
+            "name": "refrigerator_net_volume",
             "display": {
-              "text": "Enter the freezer's gross volume:"
-            },
-            "_row_num": 7,
-            "__rowNum__": 6,
-            "_token_type": "prompt",
-            "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen7",
-            "promptIdx": 5
-          },
-          {
-            "type": "decimal",
-            "name": "freezer_net_volume",
-            "display": {
-              "text": "Enter the freezer's net volume:"
+              "text": "Enter the refrigerator's net volume:",
+              "hint": "(cubic meters)"
             },
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 5
+          },
+          {
+            "type": "decimal",
+            "name": "freezer_gross_volume",
+            "display": {
+              "text": "Enter the freezer's gross volume:",
+              "hint": "(cubic meters)"
+            },
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "prompt",
+            "_type": "decimal",
+            "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 6
+          },
+          {
+            "type": "decimal",
+            "name": "freezer_net_volume",
+            "display": {
+              "text": "Enter the freezer's net volume:",
+              "hint": "(cubic meters)"
+            },
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "prompt",
+            "_type": "decimal",
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 7
           },
           {
             "type": "select_multiple",
             "values_list": "power_sources",
             "name": "power_source",
             "display": {
-              "text": "Choose Power Source Required:"
+              "text": "Choose power source required:"
             },
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 7
+            "_branch_label_enclosing_screen": "survey/_screen12",
+            "promptIdx": 8
           },
           {
             "type": "select_one",
@@ -697,12 +756,12 @@
             "display": {
               "text": "Select what type of equipment this is"
             },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 9
           },
           {
             "type": "select_one",
@@ -711,20 +770,20 @@
             "display": {
               "text": "What climate zone is this equipment best for?"
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "survey/_screen14",
+            "promptIdx": 10
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 12,
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 10
+            "_row_num": 15,
+            "_branch_label_enclosing_screen": "survey/_screen15",
+            "promptIdx": 11
           }
         ],
         "validation_tag_map": {
@@ -756,61 +815,57 @@
             "operationIdx": 3
           },
           {
+            "clause": "begin screen",
             "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 11,
+              "__rowNum__": 10,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
-            "_row_num": 7,
+            "_row_num": 12,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
           },
           {
-            "_row_num": 8,
+            "_row_num": 13,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 6
           },
           {
-            "_row_num": 9,
+            "_row_num": 14,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
-          },
-          {
-            "_row_num": 10,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 8
-          },
-          {
-            "_row_num": 11,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 9
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 12,
-            "operationIdx": 10
+            "_row_num": 15,
+            "operationIdx": 8
           },
           {
-            "_row_num": 12,
+            "_row_num": 15,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 11
+            "operationIdx": 9
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 12,
-            "operationIdx": 12
+            "_row_num": 15,
+            "operationIdx": 10
           }
         ],
         "branch_label_map": {
@@ -819,13 +874,11 @@
           "_screen4": 2,
           "_screen5": 3,
           "_screen6": 4,
-          "_screen7": 5,
-          "_screen8": 6,
-          "_screen9": 7,
-          "_screen10": 8,
-          "_screen11": 9,
-          "_contents": 11,
-          "_screen12": 11
+          "_screen12": 5,
+          "_screen13": 6,
+          "_screen14": 7,
+          "_contents": 9,
+          "_screen15": 9
         }
       },
       "initial": {
@@ -1031,10 +1084,48 @@
         "elementSet": "data",
         "elementPath": "model_id"
       },
-      "manufacturer": {
+      "refrigerator_picture": {
         "_defn": [
           {
             "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "refrigerator_picture_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "refrigerator_picture.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "refrigerator_picture_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "refrigerator_picture.contentType"
+          }
+        },
+        "elementKey": "refrigerator_picture",
+        "elementName": "refrigerator_picture",
+        "elementSet": "data",
+        "elementPath": "refrigerator_picture",
+        "listChildElementKeys": [
+          "refrigerator_picture_contentType",
+          "refrigerator_picture_uriFragment"
+        ],
+        "notUnitOfRetention": true
+      },
+      "manufacturer": {
+        "_defn": [
+          {
+            "_row_num": 5,
             "section_name": "survey"
           }
         ],
@@ -1047,7 +1138,7 @@
       "refrigerator_gross_volume": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
@@ -1060,7 +1151,7 @@
       "refrigerator_net_volume": {
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -1073,7 +1164,7 @@
       "freezer_gross_volume": {
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
@@ -1086,7 +1177,7 @@
       "freezer_net_volume": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -1099,7 +1190,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 12,
             "section_name": "survey"
           }
         ],
@@ -1124,7 +1215,7 @@
       "equipment_type": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
@@ -1138,7 +1229,7 @@
       "climate_zone": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -1148,6 +1239,23 @@
         "elementName": "climate_zone",
         "elementSet": "data",
         "elementPath": "climate_zone"
+      },
+      "refrigerator_picture_uriFragment": {
+        "type": "string",
+        "elementType": "rowpath",
+        "elementKey": "refrigerator_picture_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "refrigerator_picture.uriFragment"
+      },
+      "refrigerator_picture_contentType": {
+        "type": "string",
+        "elementType": "mimeType",
+        "default": "image/*",
+        "elementKey": "refrigerator_picture_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "refrigerator_picture.contentType"
       },
       "power_source_items": {
         "type": "string",

@@ -11,7 +11,15 @@
     </head>
     <body>
         <script type="text/javascript" src="../js/health_facility_list.js"></script>
-        <div id="wrapper">
+
+        <div id="searchBox">
+            <form id="form" action="javascript:getSearchResults();">
+                <input id="search" type="text" name="query" size="10" placeholder="Enter Health Facility ID..." />
+                <input id="submit" type="submit" value="Search" />
+            </form>
+        </div> 
+
+        <div id="wrapper">       
             <div id="list"></div>
         </div>
         <script>

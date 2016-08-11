@@ -60,7 +60,35 @@ var cbFailure = function(error) {
     console.log('health_facility_list getViewData CB error : ' + error);
 };
 
+var cbSearchSuccess = function(searchData) {
+    console.log('cbSearchSuccess data is' + searchData);
+    if(searchData.getCount() > 0) {
+        // open filtered list view if facility found
+        var rowId = searchData.getRowId(0);
+        odkTables.openTableToListView(
+                'health_facility',
+                '_id = ?',
+                [rowId],
+                'config/tables/health_facility/html/health_facility_list.html');
+    } else {
+        document.getElementById("search").value = "";
+        document.getElementsByName("query")[0].placeholder="Facility not found";
+    }
+}
+
+var cbSearchFailure = function(error) {
+    console.log('health_facility_list cbSearchFailure: ' + error);
+}
+
+var getSearchResults = function() {
+    var searchText = document.getElementById('search').value;
+
+    odkData.query('health_facility', 'facility_id = ?', [searchText], 
+        null, null, null, null, true, cbSearchSuccess, cbSearchFailure);
+}
+
 var resumeFn = function(fIdxStart) {
+
     odkData.getViewData(cbSuccess, cbFailure);
 
     idxStart = fIdxStart;
@@ -145,21 +173,14 @@ function addDataForRow(rowNumber) {
     item.attr('id', healthFacilityResultSet.getRowId(rowNumber));
     item.attr('rowId', healthFacilityResultSet.getRowId(rowNumber));
     item.attr('class', 'item_space');
-    item.text(healthFacilityResultSet.getData(rowNumber, 'Name'));
+    item.text(healthFacilityResultSet.getData(rowNumber, 'facility_name'));
             
     /* Creates arrow icon (Nothing to edit here) */
     var chevron = $('<img>');
-    chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
+    chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/white_arrow.png'));
     chevron.attr('class', 'chevron');
     item.append(chevron);
-            
-    /**
-     * Adds other data/details in item space.
-     * Replace COLUMN_NAME with the column whose data you want to display
-     * as an extra detail etc. Duplicate the following block of code for
-     * different details you want to add. You may replace occurrences of
-     * 'field1' with new, specific label that are more meaningful to you
-     */
+
     var field1 = $('<li>');
     field1.attr('class', 'detail');
     field1.text('Facility ID: ' + healthFacilityResultSet.getData(rowNumber, 'facility_id'));

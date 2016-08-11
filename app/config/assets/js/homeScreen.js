@@ -8,36 +8,42 @@ function display() {
 
     var body = $('#main');
     // Set the background to be a picture.
-    body.css('background-image', 'url(img/teaBackground.jpg)');
+    body.css('background-image', 'url(img/hallway.jpg)');
 
-    var viewHousesButton = $('<button>');
-    viewHousesButton.text('View Tea Houses');
-    viewHousesButton.on(
+    var viewFacilitiesButton = $('#view-facilities');
+    viewFacilitiesButton.on(
         'click',
         function() {
-            odkTables.openTableToListView('Tea_houses', null, null, null);
+            odkTables.openTableToListView(
+                'health_facility',
+                null,
+                null,
+                'config/tables/health_facility/html/health_facility_list.html');
         }
     );
-    $('#wrapper').append(viewHousesButton);
 
-    var viewTeasButton = $('<button>');
-    viewTeasButton.text('View Teas');
-    viewTeasButton.on(
+    var viewRefrigeratorsButton = $('#view-refrigerators');
+    viewRefrigeratorsButton.on(
         'click',
         function() {
-            odkTables.openTable('Tea_inventory', null, null);
+            odkTables.openTableToListView(
+                'refrigerators',
+                null,
+                null,
+                'config/tables/refrigerators/html/refrigerators_list.html');
         }
     );
-    $('#wrapper').append(viewTeasButton);
 
-    var viewTeaTypesButton = $('<button>');
-    viewTeaTypesButton.text('Tea Types');
-    viewTeaTypesButton.on(
+    var viewRefrigeratorModelsButton = $('#view-models');
+    viewRefrigeratorModelsButton.on(
         'click',
         function() {
-            odkTables.openTable('Tea_types', null, null);
+            odkTables.openTableToListView(
+                'refrigerator_types',
+                null,
+                null,
+                'config/tables/refrigerator_types/html/refrigerator_types_list.html');
         }
     );
-    $('#wrapper').append(viewTeaTypesButton);
 
 }

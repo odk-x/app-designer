@@ -111,7 +111,7 @@
         "values_list": "yes_no",
         "name": "solar_suitable_climate",
         "display": {
-          "text": "Is This a solar suitable climate?"
+          "text": "Is this a solar suitable climate?"
         },
         "_row_num": 14
       },
@@ -848,7 +848,7 @@
       },
       {
         "setting_name": "instance_name",
-        "value": "Name",
+        "value": "facility_name",
         "_row_num": 7
       }
     ],
@@ -954,7 +954,7 @@
       },
       "instance_name": {
         "setting_name": "instance_name",
-        "value": "Name",
+        "value": "facility_name",
         "_row_num": 7
       },
       "_locales": {
@@ -2069,7 +2069,7 @@
             "values_list": "yes_no",
             "name": "solar_suitable_climate",
             "display": {
-              "text": "Is This a solar suitable climate?"
+              "text": "Is this a solar suitable climate?"
             },
             "_row_num": 14,
             "__rowNum__": 13,
