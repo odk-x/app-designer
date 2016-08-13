@@ -28,12 +28,16 @@
         "_row_num": 4
       },
       {
+        "clause": "begin screen",
+        "_row_num": 5
+      },
+      {
         "type": "text",
         "name": "tracking_id",
         "display": {
           "text": "Enter the tracking ID:"
         },
-        "_row_num": 5
+        "_row_num": 6
       },
       {
         "type": "number",
@@ -41,7 +45,7 @@
         "display": {
           "text": "Enter the year installed:"
         },
-        "_row_num": 6
+        "_row_num": 7
       },
       {
         "type": "select_one",
@@ -50,7 +54,24 @@
         "display": {
           "text": "Choose the power source:"
         },
-        "_row_num": 7
+        "_row_num": 8
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 9
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 10
+      },
+      {
+        "type": "select_one",
+        "values_list": "current_use",
+        "name": "utilization",
+        "display": {
+          "text": "Choose the current use status:"
+        },
+        "_row_num": 11
       },
       {
         "type": "select_one",
@@ -59,7 +80,7 @@
         "display": {
           "text": "Working status:"
         },
-        "_row_num": 8
+        "_row_num": 12
       },
       {
         "type": "select_one",
@@ -68,16 +89,7 @@
         "display": {
           "text": "Reason not working:"
         },
-        "_row_num": 9
-      },
-      {
-        "type": "select_one",
-        "values_list": "current_use",
-        "name": "utilization",
-        "display": {
-          "text": "Choose the current status:"
-        },
-        "_row_num": 10
+        "_row_num": 13
       },
       {
         "type": "select_one",
@@ -86,7 +98,11 @@
         "display": {
           "text": "Voltage regulator?"
         },
-        "_row_num": 11
+        "_row_num": 14
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 15
       }
     ],
     "choices": [
@@ -687,7 +703,7 @@
       "tracking_id": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -697,7 +713,7 @@
       "year": {
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
@@ -707,7 +723,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -715,10 +731,21 @@
         "valuesList": "power",
         "elementKey": "power_source"
       },
+      "utilization": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "current_use",
+        "elementKey": "utilization"
+      },
       "working_status": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 12,
             "section_name": "survey"
           }
         ],
@@ -729,7 +756,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
@@ -737,21 +764,10 @@
         "valuesList": "reasons",
         "elementKey": "reason_not_working"
       },
-      "utilization": {
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "current_use",
-        "elementKey": "utilization"
-      },
       "voltage_regulator": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -817,8 +833,8 @@
             "display": {
               "text": "Enter the tracking ID:"
             },
-            "_row_num": 5,
-            "__rowNum__": 4,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen5",
@@ -830,11 +846,11 @@
             "display": {
               "text": "Enter the year installed:"
             },
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "prompt",
             "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen6",
+            "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 4
           },
           {
@@ -844,12 +860,26 @@
             "display": {
               "text": "Choose the power source:"
             },
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen7",
+            "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 5
+          },
+          {
+            "type": "select_one",
+            "values_list": "current_use",
+            "name": "utilization",
+            "display": {
+              "text": "Choose the current use status:"
+            },
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 6
           },
           {
             "type": "select_one",
@@ -858,12 +888,12 @@
             "display": {
               "text": "Working status:"
             },
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen8",
-            "promptIdx": 6
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 7
           },
           {
             "type": "select_one",
@@ -872,22 +902,8 @@
             "display": {
               "text": "Reason not working:"
             },
-            "_row_num": 9,
-            "__rowNum__": 8,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 7
-          },
-          {
-            "type": "select_one",
-            "values_list": "current_use",
-            "name": "utilization",
-            "display": {
-              "text": "Choose the current status:"
-            },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen10",
@@ -900,19 +916,19 @@
             "display": {
               "text": "Voltage regulator?"
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 9
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 12,
-            "_branch_label_enclosing_screen": "survey/_screen12",
+            "_row_num": 16,
+            "_branch_label_enclosing_screen": "survey/_screen16",
             "promptIdx": 10
           }
         ],
@@ -939,67 +955,53 @@
             "operationIdx": 2
           },
           {
+            "clause": "begin screen",
             "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 9,
+              "__rowNum__": 8,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
-            "_row_num": 6,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "_row_num": 7,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 5
-          },
-          {
-            "_row_num": 8,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
-          },
-          {
-            "_row_num": 9,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 7
-          },
-          {
+            "clause": "begin screen",
             "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 8
-          },
-          {
-            "_row_num": 11,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 9
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 15,
+              "__rowNum__": 14,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 12,
-            "operationIdx": 10
+            "_row_num": 16,
+            "operationIdx": 5
           },
           {
-            "_row_num": 12,
+            "_row_num": 16,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 11
+            "operationIdx": 6
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 12,
-            "operationIdx": 12
+            "_row_num": 16,
+            "operationIdx": 7
           }
         ],
         "branch_label_map": {
@@ -1007,14 +1009,9 @@
           "_screen3": 1,
           "_screen4": 2,
           "_screen5": 3,
-          "_screen6": 4,
-          "_screen7": 5,
-          "_screen8": 6,
-          "_screen9": 7,
-          "_screen10": 8,
-          "_screen11": 9,
-          "_contents": 11,
-          "_screen12": 11
+          "_screen10": 4,
+          "_contents": 6,
+          "_screen16": 6
         }
       },
       "initial": {
@@ -1238,7 +1235,7 @@
       "tracking_id": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -1251,7 +1248,7 @@
       "year": {
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
@@ -1264,7 +1261,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -1275,10 +1272,24 @@
         "elementSet": "data",
         "elementPath": "power_source"
       },
+      "utilization": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "current_use",
+        "elementKey": "utilization",
+        "elementName": "utilization",
+        "elementSet": "data",
+        "elementPath": "utilization"
+      },
       "working_status": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 12,
             "section_name": "survey"
           }
         ],
@@ -1292,7 +1303,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
@@ -1303,24 +1314,10 @@
         "elementSet": "data",
         "elementPath": "reason_not_working"
       },
-      "utilization": {
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "current_use",
-        "elementKey": "utilization",
-        "elementName": "utilization",
-        "elementSet": "data",
-        "elementPath": "utilization"
-      },
       "voltage_regulator": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],

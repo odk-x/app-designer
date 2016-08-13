@@ -21,19 +21,34 @@ function cbSuccess(result) {
 
     refrigeratorTypeResultSet = result;
 
+    odkData.query('refrigerators', 'model_row_id = ?', [refrigeratorTypeResultSet.get('_id')],
+        null, null, null, null, true, refrigeratorsCBSuccess, refrigeratorsCBFailure);
+
+}
+
+function cbFailure(error) {
+    
+    console.log('cbFailure: failed with error: ' + error);
+
+}
+
+function refrigeratorsCBSuccess(invData) {
+
     $('#model_name').text(refrigeratorTypeResultSet.get('model_id'));
     $('#catalog_id').text(refrigeratorTypeResultSet.get('catalog_id'));
 
     $('#manufacturer').text(refrigeratorTypeResultSet.get('manufacturer'));
+
     var powerArray = JSON.parse(refrigeratorTypeResultSet.get('power_source'));
-    $('#power_sources').text(util.formatDisplayText(powerArray.toString()));
+    $('#power_sources').text(util.formatDisplayText(powerArray.join(', ')));
+
     $('#r_gross_vol').text(refrigeratorTypeResultSet.get('refrigerator_gross_volume') + ' m');
     $('#f_gross_vol').text(refrigeratorTypeResultSet.get('freezer_gross_volume') + ' m');
 
     $('#equipment_type').text(util.formatDisplayText(
-    	refrigeratorTypeResultSet.get('equipment_type')));
+        refrigeratorTypeResultSet.get('equipment_type')));
     $('#climate_zone').text(util.formatDisplayText(
-    	refrigeratorTypeResultSet.get('climate_zone')));
+        refrigeratorTypeResultSet.get('climate_zone')));
     $('#r_net_vol').text(refrigeratorTypeResultSet.get('refrigerator_net_volume') + ' m');
     $('#f_net_vol').text(refrigeratorTypeResultSet.get('freezer_net_volume') + ' m');
 
@@ -53,11 +68,14 @@ function cbSuccess(result) {
 
     refPic.attr('src', src);
     refPic.attr('class', 'img');
+
+    $('#catalogID').text(refrigeratorTypeResultSet.get('catalog_id'));
+    $('#fridge_list').text(invData.getCount());
 }
 
-function cbFailure(error) {
-    
-    console.log('cbFailure: failed with error: ' + error);
+function refrigeratorsCBFailure(error) {
+
+    console.log('refrigerator_types_detail refrigerators query CB error: ' + error);
 
 }
 
@@ -66,4 +84,16 @@ var display = function() {
     odkData.getViewData(cbSuccess, cbFailure);
 
 };
+
+function onLinkClick() {
+
+    if (!$.isEmptyObject(refrigeratorTypeResultSet))
+    {
+        odkTables.openTableToListView(
+          'refrigerators',
+          'model_row_id = ?',
+          [refrigeratorTypeResultSet.get('_id')],
+          'config/tables/refrigerators/html/refrigerators_list.html');
+    }
+}
 

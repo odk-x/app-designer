@@ -17,7 +17,6 @@
 // }
 
 var healthFacilityResultSet = {}; 
-var typeData = {};
 
 function onLinkClick() {
 
@@ -50,18 +49,6 @@ var display = function() {
 
 }
 
-function refrigeratorTypeCBSuccess(result) {
-
-    console.log('health_facility_detail refrigerator type query CB success');
-    typeData = result;
-
-}
-
-function refrigeratorTypeCBFailure(error) {
-
-    console.log('health_facility_detail refrigerator type query CB error : ' + error);
-}
-
 function refrigeratorsCBSuccess(invData) {
 
     $('#TITLE').text(healthFacilityResultSet.get('facility_name'));
@@ -73,6 +60,7 @@ function refrigeratorsCBSuccess(invData) {
         healthFacilityResultSet.get('facility_ownership')));
     $('#facility_population').text(healthFacilityResultSet.get('facility_population'));
     $('#facility_coverage').text(healthFacilityResultSet.get('facility_coverage') + '%');
+    $('#admin_region').text(healthFacilityResultSet.get('admin_region'));
 
     $('#electricity_source').text(util.formatDisplayText(
         healthFacilityResultSet.get('electricity_source')));
@@ -108,7 +96,7 @@ function refrigeratorsCBSuccess(invData) {
 
 }
 
-function refrigeratorsCBFailure(error ) {
+function refrigeratorsCBFailure(error) {
 
     console.log('health_facility_detail refrigerators query CB error : ' + error);
 

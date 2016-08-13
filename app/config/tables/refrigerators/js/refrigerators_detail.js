@@ -67,7 +67,7 @@ var display = function() {
 
 }
 
-function onLinkClick() {
+function onLinkClickM() {
 
     if (!$.isEmptyObject(typeData)) {
 
@@ -80,20 +80,16 @@ function onLinkClick() {
 
 }
 
+function onLinkClickH() {
 
+    if (!$.isEmptyObject(typeData)) {
 
+        odkTables.openDetailView(
+            'health_facility',
+            facilityData.getRowId(0),
+            'config/tables/health_facility/html/health_facility_detail.html');
 
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
