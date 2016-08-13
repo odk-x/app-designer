@@ -41,6 +41,13 @@ ul {
   padding-bottom: 12px;
 }
 
+.note {
+  font-size: 25pt;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+}
+
 .item_space:active {
   background-color: teal;
 }

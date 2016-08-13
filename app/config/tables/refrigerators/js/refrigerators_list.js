@@ -46,6 +46,7 @@ function healthFacilitiesCBSuccess(result) {
 
         facilityNameMap[facilityData.getRowId(i)] =
             facilityData.getData(i, 'facility_name');
+
     }
 }
 
@@ -59,11 +60,22 @@ function cbSuccess(result) {
 
     refrigeratorsResultSet = result;
 
-    odkData.query('health_facility', null, null, null, null, null, null, true, 
-        healthFacilitiesCBSuccess, healthFacilitiesCBFailure);
+    if (refrigeratorsResultSet.getCount() === 0) {
+        console.log('No Refrigerators Note')
+        var note = $('<li>');
+        note.attr('class', 'note');
+        note.text('No Refrigerators');
+        $('#list').append(note);
 
-    odkData.query('refrigerator_types', null, null, null, null, null, null, true, 
-        refrigeratorTypesCBSuccess, refrigeratorTypesCBFailure);
+    } else {
+
+        odkData.query('health_facility', null, null, null, null, null, null, true, 
+            healthFacilitiesCBSuccess, healthFacilitiesCBFailure);
+
+        odkData.query('refrigerator_types', null, null, null, null, null, null, true, 
+            refrigeratorTypesCBSuccess, refrigeratorTypesCBFailure);
+
+    }
 
 }
 
@@ -106,8 +118,7 @@ var resumeFn = function(fIdxStart) {
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
-    // The first time through we're going to make a map of typeId to
-    // typeName so that we can display the name of each shop's specialty.
+
     if (idxStart === 0) {
 
         // We're also going to add a click listener on the wrapper ul that will
@@ -135,6 +146,7 @@ var resumeFn = function(fIdxStart) {
 
 var displayGroup = function(idxStart) {
     console.log('display group called. idxStart: ' + idxStart);
+
     /* Number of rows displayed per 'chunk' - can modify this value */
     for (var i = 0; i < refrigeratorsResultSet.getCount(); i++) {
 
