@@ -6,8 +6,6 @@
         <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
         <link href="../../../assets/css/plot-graph.css" type="text/css" rel="stylesheet" />
         <link href="../../../assets/css/plot-detail.css" type="text/css" rel="stylesheet" />
-        <link href="../../../ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
-        <link href="../../../ratchet/css/ratchet-theme-android.css" type="text/css" rel="stylesheet" />
         <link href="../../../assets/css/plot-homescreen.css" type="text/css" rel="stylesheet" />
         <link href="../../../assets/css/homeScreen.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
@@ -27,6 +25,9 @@
         <br>
         <p>Crop: <span id="crop"></span></p>
         <br>
+        <br>
+        <p>Scanned BarCode: <span id="scanned-barcode"></span></p>
+        <br>
         <a href="#" onclick="odkTables.openTableToListView(
           'visit',
           'plot_id = ?',
@@ -35,6 +36,7 @@
         <div id="graph-div"></div>
         <button id="new-visit" class="btn btn-launch btn-primary btn-block btn-plotter">New Visit</button>
         <button id="compare-plots" class="btn btn-launch btn-primary btn-block btn-plotter">Compare Plots</button>
+        <button id="launch-barcode" class="btn btn-launch btn-primary btn-block btn-plotter">Launch Barcode</button>
         <script>
             $(setup);  // calls the detail display function when ready
         </script>
