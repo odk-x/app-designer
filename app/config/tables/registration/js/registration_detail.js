@@ -16,42 +16,41 @@
 //   });
 // }
  
-var beneficiaryResultSet = {};
+var registrationResultSet = {};
 
 function cbSuccess(result) {
 
-  beneficiaryResultSet = result;
-  var first_name = beneficiaryResultSet.get('first_name');
-  var last_name = beneficiaryResultSet.get('last_name');
+  registrationResultSet = result;
+  var first_name = registrationResultSet.get('first_name');
+  var last_name = registrationResultSet.get('last_name');
   $('#TITLE').text(first_name + ' ' + last_name);
 
-  $('#FIELD_17').text(beneficiaryResultSet.get('beneficiary_code'));
-  //$('#FIELD_18').text(beneficiaryResultSet.get('envelope_code'));
+  $('#FIELD_17').text(registrationResultSet.get('beneficiary_code'));
+  //$('#FIELD_18').text(registrationResultSet.get('envelope_code'));
 
-  /*var received_card = beneficiaryResultSet.get('received_card');
+  /*var received_card = registrationResultSet.get('received_card');
   var card_label = 'NO';
   if (received_card === '1') {
     card_label = 'YES';
   }*/
 
 
-  $('#FIELD_4').text(beneficiaryResultSet.get('address'));
+  $('#FIELD_4').text(registrationResultSet.get('address'));
 
-  $('#FIELD_5').text(beneficiaryResultSet.get('city'));
+  $('#FIELD_5').text(registrationResultSet.get('city'));
 
-  $('#FIELD_8').text(beneficiaryResultSet.get('telephone'));
+  $('#FIELD_8').text(registrationResultSet.get('telephone'));
 
-  $('#FIELD_9').text(beneficiaryResultSet.get('date_screened'));
+  $('#FIELD_9').text(registrationResultSet.get('date_screened'));
 
-  $('#FIELD_20').text(beneficiaryResultSet.get('village'));
-  $('#FIELD_21').text(beneficiaryResultSet.get('sub_village'));
-  $('#FIELD_22').text(beneficiaryResultSet.get('district'));
-  $('#FIELD_23').text(beneficiaryResultSet.get('distribution_site'));
-  $('#FIELD_24').text(beneficiaryResultSet.get('mobile_provider'));
+  $('#FIELD_20').text(registrationResultSet.get('village'));
+  $('#FIELD_21').text(registrationResultSet.get('sub_village'));
+  $('#FIELD_22').text(registrationResultSet.get('district'));
+  $('#FIELD_24').text(registrationResultSet.get('mobile_provider'));
 
   var jsonMap = {};
     // Prepopulate plot id
-  jsonMap.beneficiary_code = beneficiaryResultSet.get('beneficiary_code');
+  jsonMap.beneficiary_code = registrationResultSet.get('beneficiary_code');
 
   jsonMap = JSON.stringify(jsonMap);
 
@@ -59,7 +58,7 @@ function cbSuccess(result) {
   deliver.on(
       'click',
       function() {
-       // var rowId = beneficiaryResultSet.getRowId(0);
+       // var rowId = registrationResultSet.getRowId(0);
         odkTables.addRowWithSurvey(
           'deployment',
           'deploy_to_beneficiary',

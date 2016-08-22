@@ -13,10 +13,12 @@
 //             window.data.setBackingObject(dataObj);
 //         }
 //     });
+
+
 // }
  
 var idxStart = -1;
-var beneficiariesResultSet = {};
+var registrationResultSet = {};
 
 //var data = control.query('beneficiaries', null, null);
             
@@ -28,25 +30,25 @@ var beneficiariesResultSet = {};
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
-var beneficiariesCBSuccess = function(result) {
-    beneficiariesResultSet = result;
+var registrationCBSuccess = function(result) {
+    registrationResultSet = result;
 
     return (function() {
         displayGroup(idxStart);
     }());
 };
 
-var beneficiariesCBFailure = function(error) {
+var registrationCBFailure = function(error) {
 
-    console.log('beneficiaries_list beneficiariesCBFailure: ' + error);
+    console.log('registration_list registrationCBFailure: ' + error);
 };           
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
 var resumeFn = function(fIdxStart) {  
     odkData.query('registration', null, null, null, null,
-            null, null, true, beneficiariesCBSuccess, 
-            beneficiariesCBFailure); 
+            null, null, true, registrationCBSuccess, 
+            registrationCBFailure); 
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
@@ -56,7 +58,7 @@ var resumeFn = function(fIdxStart) {
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
-            var tableId = beneficiariesResultSet.getTableId();
+            var tableId = registrationResultSet.getTableId();
             // We set the rowId while as the li id. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
@@ -75,7 +77,7 @@ var resumeFn = function(fIdxStart) {
                 odkTables.openDetailView(
                   tableId,
                   rowId,
-                  'config/tables/beneficiaries/html/beneficiaries_detail.html');
+                  'config/tables/registration/html/registration_detail.html');
             }
         });
     }
@@ -93,17 +95,17 @@ var displayGroup = function(idxStart) {
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
-      if (i >= beneficiariesResultSet.getCount()) {
+      if (i >= registrationResultSet.getCount()) {
         break;
       }
       /* Creates the item space */
       // We're going to select the ul and then start adding things to it.
       //var item = $('#list').append('<li>');
       var item = $('<li>');
-      item.attr('rowId', beneficiariesResultSet.getRowId(i));
+      item.attr('rowId', registrationResultSet.getRowId(i));
       item.attr('class', 'item_space');
-      var first_name = beneficiariesResultSet.getData(i, 'first_name');
-      var last_name = beneficiariesResultSet.getData(i, 'last_name');
+      var first_name = registrationResultSet.getData(i, 'first_name');
+      var last_name = registrationResultSet.getData(i, 'last_name');
       item.text(first_name + ' ' + last_name);
               
       /* Creates arrow icon (Nothing to edit here) */
@@ -128,12 +130,12 @@ var displayGroup = function(idxStart) {
 
       var field2 = $('<li>');
       field2.attr('class', 'detail');
-      var beneficiary_code = beneficiariesResultSet.getData(i, 'beneficiary_code');
+      var beneficiary_code = registrationResultSet.getData(i, 'beneficiary_code');
       field2.text('Beneficiary Code: ' + beneficiary_code);
       item.append(field2);
 
       //var field3 = $('<li>');
-      /*var received_card = beneficiariesResultSet.getData(i, 'received_card');
+      /*var received_card = registrationResultSet.getData(i, 'received_card');
       if (received_card === '1') {
         field3.text('Received enevelope.');
       } else {
@@ -149,7 +151,7 @@ var displayGroup = function(idxStart) {
       $('#list').append(borderDiv);
 
     }
-    if (i < beneficiariesResultSet.getCount()) {
+    if (i < registrationResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
 };
