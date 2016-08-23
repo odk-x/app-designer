@@ -26,13 +26,7 @@ function cbSuccess(result) {
   $('#TITLE').text(first_name + ' ' + last_name);
 
   $('#FIELD_17').text(registrationResultSet.get('beneficiary_code'));
-  //$('#FIELD_18').text(registrationResultSet.get('envelope_code'));
 
-  /*var received_card = registrationResultSet.get('received_card');
-  var card_label = 'NO';
-  if (received_card === '1') {
-    card_label = 'YES';
-  }*/
 
 
   $('#FIELD_4').text(registrationResultSet.get('address'));
@@ -41,35 +35,37 @@ function cbSuccess(result) {
 
   $('#FIELD_8').text(registrationResultSet.get('telephone'));
 
-  $('#FIELD_9').text(registrationResultSet.get('date_screened'));
 
   $('#FIELD_20').text(registrationResultSet.get('village'));
   $('#FIELD_21').text(registrationResultSet.get('sub_village'));
   $('#FIELD_22').text(registrationResultSet.get('district'));
   $('#FIELD_24').text(registrationResultSet.get('mobile_provider'));
 
-  var jsonMap = {};
-    // Prepopulate plot id
-  jsonMap.beneficiary_code = registrationResultSet.get('beneficiary_code');
-
-  jsonMap = JSON.stringify(jsonMap);
+  
 
   var deliver = $('#deliver');
   deliver.on(
       'click',
       function() {
+        odkTables.openTableToListView(
+          'distribution',
+          'beneficiary_code = ?',
+          [registrationResultSet.get('beneficiary_code')],
+          'config/tables/distribution/html/auth_ben_list.html'
+          )
        // var rowId = registrationResultSet.getRowId(0);
-        odkTables.addRowWithSurvey(
+        /*odkTables.addRowWithSurvey(
           'deployment',
           'deploy_to_beneficiary',
           null,
-          jsonMap);
+          jsonMap);*/
+
       }
     );
 }
 
 function cbFailure(error) {
-  console.log('beneficiaries_detail cbFailure: getViewData failed with message: ' + error);
+  console.log('registration_detail cbFailure: getViewData failed with message: ' + error);
 }
 
 function display() {

@@ -60,6 +60,16 @@
         "type": "boolean",
         "name": "is_override",
         "_row_num": 13
+      },
+      {
+        "type": "number",
+        "name": "min_range",
+        "_row_num": 14
+      },
+      {
+        "type": "number",
+        "name": "max_range",
+        "_row_num": 15
       }
     ],
     "settings": [
@@ -966,6 +976,40 @@
         ],
         "elementKey": "is_override"
       },
+      "min_range": {
+        "prompt_type_name": "async_assign_single_string",
+        "type": "number",
+        "isSessionVariable": true,
+        "valuesList": "min_range_query",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "min_range"
+      },
+      "max_range": {
+        "prompt_type_name": "async_assign_single_string",
+        "type": "number",
+        "isSessionVariable": true,
+        "valuesList": "max_range_query",
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 15,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "max_range"
+      },
       "distribution_row_id": {
         "_defn": [
           {
@@ -976,32 +1020,6 @@
         "type": "string",
         "valuesList": "distribution_instance_id_query",
         "elementKey": "distribution_row_id"
-      },
-      "min_range": {
-        "_defn": [
-          {
-            "_row_num": 9,
-            "section_name": "survey"
-          }
-        ],
-        "prompt_type_name": "async_assign_single_string",
-        "type": "string",
-        "isSessionVariable": true,
-        "valuesList": "min_range_query",
-        "elementKey": "min_range"
-      },
-      "max_range": {
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          }
-        ],
-        "prompt_type_name": "async_assign_single_string",
-        "type": "string",
-        "isSessionVariable": true,
-        "valuesList": "max_range_query",
-        "elementKey": "max_range"
       },
       "try_again": {
         "type": "string",
@@ -2099,6 +2117,46 @@
         "elementSet": "data",
         "elementPath": "is_override"
       },
+      "min_range": {
+        "prompt_type_name": "async_assign_single_string",
+        "type": "number",
+        "isSessionVariable": true,
+        "valuesList": "min_range_query",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "min_range",
+        "elementName": "min_range",
+        "elementSet": "data",
+        "elementPath": "min_range"
+      },
+      "max_range": {
+        "prompt_type_name": "async_assign_single_string",
+        "type": "number",
+        "isSessionVariable": true,
+        "valuesList": "max_range_query",
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 15,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "max_range",
+        "elementName": "max_range",
+        "elementSet": "data",
+        "elementPath": "max_range"
+      },
       "distribution_row_id": {
         "_defn": [
           {
@@ -2112,38 +2170,6 @@
         "elementName": "distribution_row_id",
         "elementSet": "data",
         "elementPath": "distribution_row_id"
-      },
-      "min_range": {
-        "_defn": [
-          {
-            "_row_num": 9,
-            "section_name": "survey"
-          }
-        ],
-        "prompt_type_name": "async_assign_single_string",
-        "type": "string",
-        "isSessionVariable": true,
-        "valuesList": "min_range_query",
-        "elementKey": "min_range",
-        "elementName": "min_range",
-        "elementSet": "data",
-        "elementPath": "min_range"
-      },
-      "max_range": {
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          }
-        ],
-        "prompt_type_name": "async_assign_single_string",
-        "type": "string",
-        "isSessionVariable": true,
-        "valuesList": "max_range_query",
-        "elementKey": "max_range",
-        "elementName": "max_range",
-        "elementSet": "data",
-        "elementPath": "max_range"
       },
       "try_again": {
         "type": "string",

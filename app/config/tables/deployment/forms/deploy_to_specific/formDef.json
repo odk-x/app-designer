@@ -75,12 +75,12 @@
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "deploy_to_beneficiary",
+        "value": "deploy_to_specific",
         "_row_num": 2
       },
       {
         "setting_name": "form_version",
-        "value": 20150212,
+        "value": 20160822,
         "_row_num": 3
       },
       {
@@ -91,7 +91,7 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Deployment To Beneficiary"
+          "title": "Deployment To Specific"
         },
         "_row_num": 5
       },
@@ -99,411 +99,6 @@
         "setting_name": "instance_name",
         "value": "deployment_id",
         "_row_num": 6
-      }
-    ],
-    "survey": [
-      {
-        "type": "select_one",
-        "values_list": "distribution_instance_id_query",
-        "name": "distribution_row_id",
-        "display": {
-          "text": "Please select the authorized distribution"
-        },
-        "_row_num": 2
-      },
-      {
-        "type": "linked_table",
-        "values_list": "distribution_query",
-        "name": "deployment_info",
-        "display": {
-          "text": "Please select the authorized distribution"
-        },
-        "_row_num": 3
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 4
-      },
-      {
-        "type": "note",
-        "display": {
-          "text": "Please continue to distribute item pack and fill out final distribution report"
-        },
-        "_row_num": 5
-      },
-      {
-        "type": "async_assign_single_string",
-        "values_list": "distribution_id_query",
-        "name": "distribution_id",
-        "_row_num": 6
-      },
-      {
-        "type": "async_assign_single_string",
-        "values_list": "min_range_query",
-        "name": "min_range",
-        "model": {
-          "isSessionVariable": true,
-          "valuesList": "min_range_query"
-        },
-        "_row_num": 7
-      },
-      {
-        "type": "async_assign_single_string",
-        "values_list": "max_range_query",
-        "name": "max_range",
-        "model": {
-          "isSessionVariable": true,
-          "valuesList": "max_range_query"
-        },
-        "_row_num": 8
-      },
-      {
-        "type": "async_assign_single_string",
-        "values_list": "authorization_id_query",
-        "name": "authorization_id",
-        "_row_num": 9
-      },
-      {
-        "type": "async_assign_single_string",
-        "values_list": "authorization_name_query",
-        "name": "authorization_name",
-        "_row_num": 10
-      },
-      {
-        "type": "async_assign_single_string",
-        "values_list": "item_pack_id_query",
-        "name": "item_pack_id",
-        "_row_num": 11
-      },
-      {
-        "type": "async_assign_single_string",
-        "values_list": "item_pack_name_query",
-        "name": "item_pack_name",
-        "_row_num": 12
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 14
-      },
-      {
-        "clause": "if",
-        "condition": "data('distribution_id') != ''",
-        "_row_num": 15
-      },
-      {
-        "type": "note",
-        "name": "pre-deployment",
-        "display": {
-          "text": "We will now distribute the appropriate item pack"
-        },
-        "_row_num": 16
-      },
-      {
-        "type": "barcode",
-        "name": "item_pack_barcode",
-        "display": {
-          "text": "Scan an item pack barcode within the range of {{data.min_range}} to {{data.max_range}}"
-        },
-        "branch_label": "item_scan",
-        "_row_num": 17
-      },
-      {
-        "clause": "if",
-        "condition": "(data('scanned_item_pack_barcode') > data('maxRange')) || (data('scanned_item_pack_barcode') < data('minRange'))",
-        "_row_num": 18
-      },
-      {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "try_again",
-        "display": {
-          "text": "Unauthorized Item Pack! Do not distribute this  item pack. Would you like to scan a different item pack?"
-        },
-        "model": {
-          "isSessionVariable": true,
-          "valuesList": "yes_no"
-        },
-        "_row_num": 19
-      },
-      {
-        "clause": "if",
-        "condition": "selected(data('try_again'),'yes')",
-        "_row_num": 20
-      },
-      {
-        "clause": "goto item_scan",
-        "_row_num": 21
-      },
-      {
-        "clause": "end if",
-        "_row_num": 22
-      },
-      {
-        "clause": "else",
-        "_row_num": 23
-      },
-      {
-        "type": "note",
-        "display": {
-          "text": "This item pack is authorized. Please distribute this item pack."
-        },
-        "_row_num": 24
-      },
-      {
-        "type": "linked_table",
-        "values_list": "is_distributed_query",
-        "display": {
-          "text": "Please click the pencil icon to record distribution"
-        },
-        "_row_num": 25
-      },
-      {
-        "clause": "end if",
-        "_row_num": 26
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 27
-      },
-      {
-        "type": "note",
-        "display": {
-          "text": "Please continue to the next screen if you have clicked the pencil icon to record distribution"
-        },
-        "_row_num": 28
-      },
-      {
-        "type": "async_assign_single_string",
-        "values_list": "is_distributed_value_query",
-        "name": "is_distributed",
-        "_row_num": 29
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 31
-      },
-      {
-        "clause": "if",
-        "condition": "data('is_distributed') == 'true'",
-        "_row_num": 32
-      },
-      {
-        "type": "note",
-        "name": "pre-summary",
-        "display": {
-          "text": "Since the authorized item pack was successfully distributed, we will complete now complete a brief report."
-        },
-        "_row_num": 33
-      },
-      {
-        "type": "assign",
-        "name": "date_time",
-        "calculation": "now()",
-        "_row_num": 34
-      },
-      {
-        "type": "string",
-        "name": "distributor",
-        "display": {
-          "text": "What is the name of the distributor?"
-        },
-        "_row_num": 35
-      },
-      {
-        "type": "string",
-        "name": "distribution_site",
-        "display": {
-          "text": "What is the name of the distribution site?"
-        },
-        "_row_num": 36
-      },
-      {
-        "type": "note",
-        "name": "thanks",
-        "display": {
-          "text": "Thank you for completing the post-distribution survey. Continue to the next screen to finalize."
-        },
-        "_row_num": 37
-      },
-      {
-        "clause": "else",
-        "_row_num": 38
-      },
-      {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "try_again",
-        "display": {
-          "text": "Would you like to scan a different item pack instead?"
-        },
-        "_row_num": 39
-      },
-      {
-        "clause": "if",
-        "condition": "selected(data('try_again'),'yes')",
-        "_row_num": 40
-      },
-      {
-        "clause": "goto item_scan",
-        "_row_num": 41
-      },
-      {
-        "clause": "else",
-        "_row_num": 42
-      },
-      {
-        "type": "note",
-        "name": "no_report_option",
-        "display": {
-          "text": "Since no item pack was successfully distributed, we will not fill out a post-distribution report."
-        },
-        "model": {
-          "isSessionVariable": true
-        },
-        "_row_num": 43
-      },
-      {
-        "clause": "end if",
-        "_row_num": 44
-      },
-      {
-        "clause": "end if",
-        "_row_num": 45
-      },
-      {
-        "clause": "else",
-        "_row_num": 46
-      },
-      {
-        "type": "note",
-        "display": {
-          "text": "No authorized item pack was selected"
-        },
-        "_row_num": 47
-      },
-      {
-        "clause": "end if",
-        "_row_num": 48
-      }
-    ],
-    "queries": [
-      {
-        "query_name": "distribution_instance_id_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and is_distributed = ?",
-        "selectionArgs": "[data('beneficiary_code'), 'false']",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&is_distributed='+opendatakit.encodeURIValue('false')",
-        "_row_num": 2
-      },
-      {
-        "query_name": "distribution_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and  _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 3
-      },
-      {
-        "query_name": "distribution_id_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and  _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "distribution_id",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 4
-      },
-      {
-        "query_name": "is_distributed_query",
-        "query_type": "linked_table",
-        "linked_form_id": "set_is_distributed",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and  _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 5
-      },
-      {
-        "query_name": "min_range_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "min_range",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 6
-      },
-      {
-        "query_name": "max_range_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "max_range",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 7
-      },
-      {
-        "query_name": "is_distributed_value_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "is_distributed",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 8
-      },
-      {
-        "query_name": "authorization_id_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "authorization_id",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 9
-      },
-      {
-        "query_name": "authorization_name_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "authorization_name",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 10
-      },
-      {
-        "query_name": "item_pack_id_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "item_pack_id",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 11
-      },
-      {
-        "query_name": "item_pack_name_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "item_pack_name",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 12
       }
     ],
     "choices": [
@@ -540,6 +135,201 @@
         "_row_num": 5
       }
     ],
+    "survey": [
+      {
+        "type": "note",
+        "name": "pre-deployment",
+        "display": {
+          "text": "We will now distribute the appropriate item pack"
+        },
+        "_row_num": 2
+      },
+      {
+        "type": "barcode",
+        "name": "item_pack_barcode",
+        "display": {
+          "text": "Scan an item pack barcode within the range of {{data.min_range}} to {{data.max_range}}"
+        },
+        "branch_label": "item_scan",
+        "_row_num": 3
+      },
+      {
+        "clause": "if",
+        "condition": "(data('scanned_item_pack_barcode') > data('maxRange')) || (data('scanned_item_pack_barcode') < data('minRange'))",
+        "_row_num": 4
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "try_again",
+        "display": {
+          "text": "Unauthorized Item Pack! Do not distribute this  item pack. Would you like to scan a different item pack?"
+        },
+        "model": {
+          "isSessionVariable": true,
+          "valuesList": "yes_no"
+        },
+        "_row_num": 5
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('try_again'),'yes')",
+        "_row_num": 6
+      },
+      {
+        "clause": "goto item_scan",
+        "_row_num": 7
+      },
+      {
+        "clause": "end if",
+        "_row_num": 8
+      },
+      {
+        "clause": "else",
+        "_row_num": 9
+      },
+      {
+        "type": "note",
+        "display": {
+          "text": "This item pack is authorized. Please distribute this item pack."
+        },
+        "_row_num": 10
+      },
+      {
+        "type": "linked_table",
+        "values_list": "is_distributed_value_query",
+        "display": {
+          "text": "Please click the pencil icon to record distribution"
+        },
+        "_row_num": 11
+      },
+      {
+        "clause": "end if",
+        "_row_num": 12
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 13
+      },
+      {
+        "type": "note",
+        "display": {
+          "text": "Please continue to the next screen if you have clicked the pencil icon to record distribution"
+        },
+        "_row_num": 14
+      },
+      {
+        "type": "async_assign_single_string",
+        "values_list": "is_distributed_value_query",
+        "name": "is_distributed",
+        "_row_num": 15
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 17
+      },
+      {
+        "clause": "if",
+        "condition": "data('is_distributed') == 'true'",
+        "_row_num": 18
+      },
+      {
+        "type": "note",
+        "name": "pre-summary",
+        "display": {
+          "text": "Since the authorized item pack was successfully distributed, we will complete now complete a brief report."
+        },
+        "_row_num": 19
+      },
+      {
+        "type": "assign",
+        "name": "date_time",
+        "calculation": "now()",
+        "_row_num": 20
+      },
+      {
+        "type": "string",
+        "name": "distributor",
+        "display": {
+          "text": "What is the name of the distributor?"
+        },
+        "_row_num": 21
+      },
+      {
+        "type": "string",
+        "name": "distribution_site",
+        "display": {
+          "text": "What is the name of the distribution site?"
+        },
+        "_row_num": 22
+      },
+      {
+        "type": "note",
+        "name": "thanks",
+        "display": {
+          "text": "Thank you for completing the post-distribution survey. Continue to the next screen to finalize."
+        },
+        "_row_num": 23
+      },
+      {
+        "clause": "else",
+        "_row_num": 24
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "try_again",
+        "display": {
+          "text": "Would you like to scan a different item pack instead?"
+        },
+        "_row_num": 25
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('try_again'),'yes')",
+        "_row_num": 26
+      },
+      {
+        "clause": "goto item_scan",
+        "_row_num": 27
+      },
+      {
+        "clause": "else",
+        "_row_num": 28
+      },
+      {
+        "type": "note",
+        "name": "no_report_option",
+        "display": {
+          "text": "Since no item pack was successfully distributed, we will not fill out a post-distribution report."
+        },
+        "model": {
+          "isSessionVariable": true
+        },
+        "_row_num": 29
+      },
+      {
+        "clause": "end if",
+        "_row_num": 30
+      },
+      {
+        "clause": "end if",
+        "_row_num": 31
+      }
+    ],
+    "queries": [
+      {
+        "query_name": "is_distributed_value_query",
+        "query_type": "linked_table",
+        "linked_form_id": "distribution",
+        "linked_table_id": "distribution",
+        "selection": "distribution _id = ?",
+        "selectionArgs": "[data('distribution_id')]",
+        "fieldName": "is_distributed",
+        "auxillaryHash": "'distribution_id='+opendatakit.encodeURIDataElement('distribution_id')",
+        "_row_num": 2
+      }
+    ],
     "prompt_types": [
       {
         "prompt_type_name": "async_assign_single_string",
@@ -569,12 +359,12 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "deploy_to_beneficiary",
+        "value": "deploy_to_specific",
         "_row_num": 2
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20150212,
+        "value": 20160822,
         "_row_num": 3
       },
       "table_id": {
@@ -585,7 +375,7 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Deployment To Beneficiary"
+          "title": "Deployment To Specific"
         },
         "_row_num": 5
       },
@@ -614,7 +404,7 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Deployment To Beneficiary"
+          "title": "Deployment To Specific"
         },
         "_row_num": 5
       }
@@ -658,136 +448,23 @@
       ]
     },
     "queries": {
-      "distribution_instance_id_query": {
-        "query_name": "distribution_instance_id_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and is_distributed = ?",
-        "selectionArgs": "[data('beneficiary_code'), 'false']",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&is_distributed='+opendatakit.encodeURIValue('false')",
-        "_row_num": 2
-      },
-      "distribution_query": {
-        "query_name": "distribution_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and  _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 3
-      },
-      "distribution_id_query": {
-        "query_name": "distribution_id_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and  _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "distribution_id",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 4
-      },
-      "is_distributed_query": {
-        "query_name": "is_distributed_query",
-        "query_type": "linked_table",
-        "linked_form_id": "set_is_distributed",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and  _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 5
-      },
-      "min_range_query": {
-        "query_name": "min_range_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "min_range",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 6
-      },
-      "max_range_query": {
-        "query_name": "max_range_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "max_range",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 7
-      },
       "is_distributed_value_query": {
         "query_name": "is_distributed_value_query",
         "query_type": "linked_table",
         "linked_form_id": "distribution",
         "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
+        "selection": "distribution _id = ?",
+        "selectionArgs": "[data('distribution_id')]",
         "fieldName": "is_distributed",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 8
-      },
-      "authorization_id_query": {
-        "query_name": "authorization_id_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "authorization_id",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 9
-      },
-      "authorization_name_query": {
-        "query_name": "authorization_name_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "authorization_name",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 10
-      },
-      "item_pack_id_query": {
-        "query_name": "item_pack_id_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "item_pack_id",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 11
-      },
-      "item_pack_name_query": {
-        "query_name": "item_pack_name_query",
-        "query_type": "linked_table",
-        "linked_form_id": "distribution",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_row_id')]",
-        "fieldName": "item_pack_name",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_row_id')",
-        "_row_num": 12
+        "auxillaryHash": "'distribution_id='+opendatakit.encodeURIDataElement('distribution_id')",
+        "_row_num": 2
       }
     },
     "calculates": {},
     "model": {
       "distribution_id": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "distribution_id_query",
         "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          },
           {
             "_row_num": 2,
             "section_name": "model"
@@ -800,7 +477,7 @@
         "elementType": "dateTime",
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 20,
             "section_name": "survey"
           },
           {
@@ -814,7 +491,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {
@@ -828,7 +505,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -844,7 +521,7 @@
         "valuesList": "is_distributed_value_query",
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
@@ -858,7 +535,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 3,
             "section_name": "survey"
           },
           {
@@ -879,14 +556,8 @@
         "elementKey": "beneficiary_code"
       },
       "authorization_id": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "authorization_id_query",
         "_defn": [
-          {
-            "_row_num": 9,
-            "section_name": "survey"
-          },
           {
             "_row_num": 9,
             "section_name": "model"
@@ -895,14 +566,8 @@
         "elementKey": "authorization_id"
       },
       "authorization_name": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "authorization_name_query",
         "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          },
           {
             "_row_num": 10,
             "section_name": "model"
@@ -911,14 +576,8 @@
         "elementKey": "authorization_name"
       },
       "item_pack_id": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "item_pack_id_query",
         "_defn": [
-          {
-            "_row_num": 11,
-            "section_name": "survey"
-          },
           {
             "_row_num": 11,
             "section_name": "model"
@@ -927,14 +586,8 @@
         "elementKey": "item_pack_id"
       },
       "item_pack_name": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "item_pack_name_query",
         "_defn": [
-          {
-            "_row_num": 12,
-            "section_name": "survey"
-          },
           {
             "_row_num": 12,
             "section_name": "model"
@@ -953,15 +606,8 @@
         "elementKey": "is_override"
       },
       "min_range": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "number",
-        "isSessionVariable": true,
-        "valuesList": "min_range_query",
         "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "survey"
-          },
           {
             "_row_num": 14,
             "section_name": "model"
@@ -970,15 +616,8 @@
         "elementKey": "min_range"
       },
       "max_range": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "number",
-        "isSessionVariable": true,
-        "valuesList": "max_range_query",
         "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          },
           {
             "_row_num": 15,
             "section_name": "model"
@@ -986,28 +625,17 @@
         ],
         "elementKey": "max_range"
       },
-      "distribution_row_id": {
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "distribution_instance_id_query",
-        "elementKey": "distribution_row_id"
-      },
       "try_again": {
         "type": "string",
         "isSessionVariable": true,
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 5,
             "section_name": "survey"
           },
           {
-            "_row_num": 39,
+            "_row_num": 25,
             "section_name": "survey"
           }
         ],
@@ -1025,142 +653,17 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "select_one",
-            "values_list": "distribution_instance_id_query",
-            "name": "distribution_row_id",
-            "display": {
-              "text": "Please select the authorized distribution"
-            },
-            "_row_num": 2,
-            "__rowNum__": 1,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen2",
-            "promptIdx": 0
-          },
-          {
-            "type": "linked_table",
-            "values_list": "distribution_query",
-            "name": "deployment_info",
-            "display": {
-              "text": "Please select the authorized distribution"
-            },
-            "_row_num": 3,
-            "__rowNum__": 2,
-            "_token_type": "prompt",
-            "_type": "linked_table",
-            "_branch_label_enclosing_screen": "survey/_screen3",
-            "promptIdx": 1
-          },
-          {
-            "type": "note",
-            "display": {
-              "text": "Please continue to distribute item pack and fill out final distribution report"
-            },
-            "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 2
-          },
-          {
-            "type": "async_assign_single_string",
-            "values_list": "distribution_id_query",
-            "name": "distribution_id",
-            "_row_num": 6,
-            "__rowNum__": 5,
-            "_token_type": "prompt",
-            "_type": "async_assign_single_string",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 3
-          },
-          {
-            "type": "async_assign_single_string",
-            "values_list": "min_range_query",
-            "name": "min_range",
-            "model": {
-              "isSessionVariable": true,
-              "valuesList": "min_range_query"
-            },
-            "_row_num": 7,
-            "__rowNum__": 6,
-            "_token_type": "prompt",
-            "_type": "async_assign_single_string",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 4
-          },
-          {
-            "type": "async_assign_single_string",
-            "values_list": "max_range_query",
-            "name": "max_range",
-            "model": {
-              "isSessionVariable": true,
-              "valuesList": "max_range_query"
-            },
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "prompt",
-            "_type": "async_assign_single_string",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 5
-          },
-          {
-            "type": "async_assign_single_string",
-            "values_list": "authorization_id_query",
-            "name": "authorization_id",
-            "_row_num": 9,
-            "__rowNum__": 8,
-            "_token_type": "prompt",
-            "_type": "async_assign_single_string",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 6
-          },
-          {
-            "type": "async_assign_single_string",
-            "values_list": "authorization_name_query",
-            "name": "authorization_name",
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "prompt",
-            "_type": "async_assign_single_string",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 7
-          },
-          {
-            "type": "async_assign_single_string",
-            "values_list": "item_pack_id_query",
-            "name": "item_pack_id",
-            "_row_num": 11,
-            "__rowNum__": 10,
-            "_token_type": "prompt",
-            "_type": "async_assign_single_string",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 8
-          },
-          {
-            "type": "async_assign_single_string",
-            "values_list": "item_pack_name_query",
-            "name": "item_pack_name",
-            "_row_num": 12,
-            "__rowNum__": 11,
-            "_token_type": "prompt",
-            "_type": "async_assign_single_string",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 9
-          },
-          {
             "type": "note",
             "name": "pre-deployment",
             "display": {
               "text": "We will now distribute the appropriate item pack"
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 2,
+            "__rowNum__": 1,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 0
           },
           {
             "type": "barcode",
@@ -1168,12 +671,12 @@
             "display": {
               "text": "Scan an item pack barcode within the range of {{data.min_range}} to {{data.max_range}}"
             },
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen17",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen3",
+            "promptIdx": 1
           },
           {
             "type": "select_one",
@@ -1186,60 +689,60 @@
               "isSessionVariable": true,
               "valuesList": "yes_no"
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen19",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 2
           },
           {
             "type": "note",
             "display": {
               "text": "This item pack is authorized. Please distribute this item pack."
             },
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen24",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 3
           },
           {
             "type": "linked_table",
-            "values_list": "is_distributed_query",
+            "values_list": "is_distributed_value_query",
             "display": {
               "text": "Please click the pencil icon to record distribution"
             },
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "linked_table",
-            "_branch_label_enclosing_screen": "survey/_screen25",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 4
           },
           {
             "type": "note",
             "display": {
               "text": "Please continue to the next screen if you have clicked the pencil icon to record distribution"
             },
-            "_row_num": 28,
-            "__rowNum__": 27,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen27",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 5
           },
           {
             "type": "async_assign_single_string",
             "values_list": "is_distributed_value_query",
             "name": "is_distributed",
-            "_row_num": 29,
-            "__rowNum__": 28,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "async_assign_single_string",
-            "_branch_label_enclosing_screen": "survey/_screen27",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 6
           },
           {
             "type": "note",
@@ -1247,12 +750,12 @@
             "display": {
               "text": "Since the authorized item pack was successfully distributed, we will complete now complete a brief report."
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 7
           },
           {
             "type": "string",
@@ -1260,12 +763,12 @@
             "display": {
               "text": "What is the name of the distributor?"
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen35",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen21",
+            "promptIdx": 8
           },
           {
             "type": "string",
@@ -1273,12 +776,12 @@
             "display": {
               "text": "What is the name of the distribution site?"
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen22",
+            "promptIdx": 9
           },
           {
             "type": "note",
@@ -1286,12 +789,12 @@
             "display": {
               "text": "Thank you for completing the post-distribution survey. Continue to the next screen to finalize."
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen37",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 10
           },
           {
             "type": "select_one",
@@ -1300,12 +803,12 @@
             "display": {
               "text": "Would you like to scan a different item pack instead?"
             },
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen39",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "survey/_screen25",
+            "promptIdx": 11
           },
           {
             "type": "note",
@@ -1316,32 +819,20 @@
             "model": {
               "isSessionVariable": true
             },
-            "_row_num": 43,
-            "__rowNum__": 42,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen43",
-            "promptIdx": 22
-          },
-          {
-            "type": "note",
-            "display": {
-              "text": "No authorized item pack was selected"
-            },
-            "_row_num": 47,
-            "__rowNum__": 46,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen47",
-            "promptIdx": 23
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 12
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 49,
-            "_branch_label_enclosing_screen": "survey/_screen49",
-            "promptIdx": 24
+            "_row_num": 32,
+            "_branch_label_enclosing_screen": "survey/_screen32",
+            "promptIdx": 13
           }
         ],
         "validation_tag_map": {
@@ -1361,302 +852,240 @@
             "operationIdx": 1
           },
           {
-            "clause": "begin screen",
+            "clause": "if",
+            "condition": "(data('scanned_item_pack_barcode') > data('maxRange')) || (data('scanned_item_pack_barcode') < data('minRange'))",
             "_row_num": 4,
             "__rowNum__": 3,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 14,
-              "__rowNum__": 13,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "_token_type": "goto_label",
+            "_branch_label": "_then4",
             "operationIdx": 2
           },
           {
-            "clause": "if",
-            "condition": "data('distribution_id') != ''",
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "clause": "else",
             "_token_type": "goto_label",
-            "_branch_label": "_then15",
+            "_branch_label": "_else9",
+            "_row_num": 9,
             "operationIdx": 3
           },
           {
-            "clause": "else",
-            "_token_type": "goto_label",
-            "_branch_label": "_else46",
-            "_row_num": 46,
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
-          },
-          {
-            "_row_num": 16,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 5
-          },
-          {
-            "_row_num": 17,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
-          },
-          {
-            "clause": "if",
-            "condition": "(data('scanned_item_pack_barcode') > data('maxRange')) || (data('scanned_item_pack_barcode') < data('minRange'))",
-            "_row_num": 18,
-            "__rowNum__": 17,
-            "_token_type": "goto_label",
-            "_branch_label": "_then18",
-            "operationIdx": 7
-          },
-          {
-            "clause": "else",
-            "_token_type": "goto_label",
-            "_branch_label": "_else23",
-            "_row_num": 23,
-            "operationIdx": 8
-          },
-          {
-            "_row_num": 19,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 9
           },
           {
             "clause": "if",
             "condition": "selected(data('try_again'),'yes')",
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "goto_label",
-            "_branch_label": "_then20",
-            "operationIdx": 10
+            "_branch_label": "_then6",
+            "operationIdx": 5
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else22",
-            "_row_num": 22,
-            "operationIdx": 11
+            "_branch_label": "_else8",
+            "_row_num": 8,
+            "operationIdx": 6
           },
           {
             "clause": "goto item_scan",
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "goto_label",
             "_branch_label": "item_scan",
-            "operationIdx": 12
+            "operationIdx": 7
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif22",
-            "_row_num": 22,
-            "operationIdx": 13
+            "_branch_label": "_endif8",
+            "_row_num": 8,
+            "operationIdx": 8
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif26",
-            "_row_num": 26,
-            "operationIdx": 14
+            "_branch_label": "_endif12",
+            "_row_num": 12,
+            "operationIdx": 9
           },
           {
-            "_row_num": 24,
+            "_row_num": 10,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 15
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 10
           },
           {
-            "_row_num": 25,
+            "_row_num": 11,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 16
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 11
           },
           {
             "clause": "begin screen",
-            "_row_num": 27,
-            "__rowNum__": 26,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 31,
-              "__rowNum__": 30,
+              "_row_num": 17,
+              "__rowNum__": 16,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 17
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 12
           },
           {
             "clause": "if",
             "condition": "data('is_distributed') == 'true'",
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "goto_label",
-            "_branch_label": "_then32",
-            "operationIdx": 18
+            "_branch_label": "_then18",
+            "operationIdx": 13
           },
           {
             "clause": "else",
             "_token_type": "goto_label",
-            "_branch_label": "_else38",
-            "_row_num": 38,
-            "operationIdx": 19
+            "_branch_label": "_else24",
+            "_row_num": 24,
+            "operationIdx": 14
           },
           {
-            "_row_num": 33,
+            "_row_num": 19,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 20
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 15
           },
           {
             "type": "assign",
             "name": "date_time",
             "calculation": "now()",
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "assign",
+            "operationIdx": 16
+          },
+          {
+            "_row_num": 21,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 17
+          },
+          {
+            "_row_num": 22,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 18
+          },
+          {
+            "_row_num": 23,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 19
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif31",
+            "_row_num": 31,
+            "operationIdx": 20
+          },
+          {
+            "_row_num": 25,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 21
           },
           {
-            "_row_num": 35,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "if",
+            "condition": "selected(data('try_again'),'yes')",
+            "_row_num": 26,
+            "__rowNum__": 25,
+            "_token_type": "goto_label",
+            "_branch_label": "_then26",
             "operationIdx": 22
           },
           {
-            "_row_num": 36,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "else",
+            "_token_type": "goto_label",
+            "_branch_label": "_else28",
+            "_row_num": 28,
             "operationIdx": 23
           },
           {
-            "_row_num": 37,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "goto item_scan",
+            "_row_num": 27,
+            "__rowNum__": 26,
+            "_token_type": "goto_label",
+            "_branch_label": "item_scan",
             "operationIdx": 24
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif45",
-            "_row_num": 45,
+            "_branch_label": "_endif30",
+            "_row_num": 30,
             "operationIdx": 25
           },
           {
-            "_row_num": 39,
+            "_row_num": 29,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 26
-          },
-          {
-            "clause": "if",
-            "condition": "selected(data('try_again'),'yes')",
-            "_row_num": 40,
-            "__rowNum__": 39,
-            "_token_type": "goto_label",
-            "_branch_label": "_then40",
-            "operationIdx": 27
-          },
-          {
-            "clause": "else",
-            "_token_type": "goto_label",
-            "_branch_label": "_else42",
-            "_row_num": 42,
-            "operationIdx": 28
-          },
-          {
-            "clause": "goto item_scan",
-            "_row_num": 41,
-            "__rowNum__": 40,
-            "_token_type": "goto_label",
-            "_branch_label": "item_scan",
-            "operationIdx": 29
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif44",
-            "_row_num": 44,
-            "operationIdx": 30
-          },
-          {
-            "_row_num": 43,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 31
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif48",
-            "_row_num": 48,
-            "operationIdx": 32
-          },
-          {
-            "_row_num": 47,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 33
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 49,
-            "operationIdx": 34
+            "_row_num": 32,
+            "operationIdx": 27
           },
           {
-            "_row_num": 49,
+            "_row_num": 32,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 35
+            "operationIdx": 28
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 49,
-            "operationIdx": 36
+            "_row_num": 32,
+            "operationIdx": 29
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
+          "item_scan": 1,
           "_screen3": 1,
-          "_screen4": 2,
-          "_then15": 5,
-          "_screen16": 5,
-          "item_scan": 6,
-          "_screen17": 6,
-          "_then18": 9,
-          "_screen19": 9,
-          "_then20": 12,
-          "_else22": 14,
-          "_endif22": 14,
-          "_else23": 15,
-          "_screen24": 15,
-          "_screen25": 16,
-          "_endif26": 17,
-          "_screen27": 17,
-          "_then32": 20,
-          "_screen33": 20,
-          "_screen35": 22,
-          "_screen36": 23,
-          "_screen37": 24,
-          "_else38": 26,
-          "_screen39": 26,
-          "_then40": 29,
-          "_else42": 31,
-          "_screen43": 31,
-          "_endif44": 32,
-          "_endif45": 32,
-          "_else46": 33,
-          "_screen47": 33,
-          "_endif48": 34,
-          "_contents": 35,
-          "_screen49": 35
+          "_then4": 4,
+          "_screen5": 4,
+          "_then6": 7,
+          "_else8": 9,
+          "_endif8": 9,
+          "_else9": 10,
+          "_screen10": 10,
+          "_screen11": 11,
+          "_endif12": 12,
+          "_screen13": 12,
+          "_then18": 15,
+          "_screen19": 15,
+          "_screen21": 17,
+          "_screen22": 18,
+          "_screen23": 19,
+          "_else24": 21,
+          "_screen25": 21,
+          "_then26": 24,
+          "_else28": 26,
+          "_screen29": 26,
+          "_endif30": 27,
+          "_endif31": 27,
+          "_contents": 28,
+          "_screen32": 28
         }
       },
       "initial": {
@@ -1687,7 +1116,7 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Deployment To Beneficiary"
+              "title": "Deployment To Specific"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1837,14 +1266,8 @@
     },
     "dataTableModel": {
       "distribution_id": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "distribution_id_query",
         "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          },
           {
             "_row_num": 2,
             "section_name": "model"
@@ -1860,7 +1283,7 @@
         "elementType": "dateTime",
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 20,
             "section_name": "survey"
           },
           {
@@ -1877,7 +1300,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {
@@ -1894,7 +1317,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -1913,7 +1336,7 @@
         "valuesList": "is_distributed_value_query",
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
@@ -1930,7 +1353,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 3,
             "section_name": "survey"
           },
           {
@@ -1957,14 +1380,8 @@
         "elementPath": "beneficiary_code"
       },
       "authorization_id": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "authorization_id_query",
         "_defn": [
-          {
-            "_row_num": 9,
-            "section_name": "survey"
-          },
           {
             "_row_num": 9,
             "section_name": "model"
@@ -1976,14 +1393,8 @@
         "elementPath": "authorization_id"
       },
       "authorization_name": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "authorization_name_query",
         "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          },
           {
             "_row_num": 10,
             "section_name": "model"
@@ -1995,14 +1406,8 @@
         "elementPath": "authorization_name"
       },
       "item_pack_id": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "item_pack_id_query",
         "_defn": [
-          {
-            "_row_num": 11,
-            "section_name": "survey"
-          },
           {
             "_row_num": 11,
             "section_name": "model"
@@ -2014,14 +1419,8 @@
         "elementPath": "item_pack_id"
       },
       "item_pack_name": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "item_pack_name_query",
         "_defn": [
-          {
-            "_row_num": 12,
-            "section_name": "survey"
-          },
           {
             "_row_num": 12,
             "section_name": "model"
@@ -2046,15 +1445,8 @@
         "elementPath": "is_override"
       },
       "min_range": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "number",
-        "isSessionVariable": true,
-        "valuesList": "min_range_query",
         "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "survey"
-          },
           {
             "_row_num": 14,
             "section_name": "model"
@@ -2066,15 +1458,8 @@
         "elementPath": "min_range"
       },
       "max_range": {
-        "prompt_type_name": "async_assign_single_string",
         "type": "number",
-        "isSessionVariable": true,
-        "valuesList": "max_range_query",
         "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          },
           {
             "_row_num": 15,
             "section_name": "model"
@@ -2085,31 +1470,17 @@
         "elementSet": "data",
         "elementPath": "max_range"
       },
-      "distribution_row_id": {
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "distribution_instance_id_query",
-        "elementKey": "distribution_row_id",
-        "elementName": "distribution_row_id",
-        "elementSet": "data",
-        "elementPath": "distribution_row_id"
-      },
       "try_again": {
         "type": "string",
         "isSessionVariable": true,
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 5,
             "section_name": "survey"
           },
           {
-            "_row_num": 39,
+            "_row_num": 25,
             "section_name": "survey"
           }
         ],
