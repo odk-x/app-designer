@@ -13,7 +13,7 @@ var authorizationsCBSuccess = function(result) {
 
 var authorizationsCBFailure = function(error) {
 
-    console.log('auth_ben_list authorizationsCBFailure: ' + error);
+    console.log('override_start authorizationsCBFailure: ' + error);
 }; 
 
 var resumeFn = function(fIdxStart) {  
@@ -40,14 +40,14 @@ var resumeFn = function(fIdxStart) {
             var rowId = containingDiv.attr('rowId');
             console.log('clicked with rowId: ' + rowId);
             var jsonMap = {};
-            //jsonMap.beneficiary_code = authorizationsResultSet.get('beneficiary_code');
-            //jsonMap.distribution_id = authorizationsResultSet.get('distribution_id');
-            //jsonMap.authorization_id = authorizationsResultSet.get('authorization_id');
-            //jsonMap.authorization_name = authorizationsResultSet.get('authorization_name');
-            //jsonMap.item_pack_id = authorizationsResultSet.get('item_pack_id');
-            //jsonMap.item_pack_name = authorizationsResultSet.get('item_pack_name');
-            //jsonMap.min_range = authorizationsResultSet.get('min_range');
-            //jsonMap.max_range = authorizationsResultSet.get('max_range');
+            jsonMap.beneficiary_code = authorizationsResultSet.get('beneficiary_code');
+            jsonMap.distribution_id = encodeURI(authorizationsResultSet.get('distribution_id'));
+            jsonMap.authorization_id = encodeURI(authorizationsResultSet.get('authorization_id'));
+            jsonMap.authorization_name = authorizationsResultSet.get('authorization_name');
+            jsonMap.item_pack_id = encodeURI(authorizationsResultSet.get('item_pack_id'));
+            jsonMap.item_pack_name = authorizationsResultSet.get('item_pack_name');
+            jsonMap.min_range = authorizationsResultSet.get('min_range');
+            jsonMap.max_range = authorizationsResultSet.get('max_range');
 
 
 

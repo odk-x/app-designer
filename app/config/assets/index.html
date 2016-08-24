@@ -31,11 +31,13 @@
             followUp.setAttribute("id", "button2");
             followUp.innerHTML = "Distribution";
             followUp.onclick = function() {
-                odkTables.addRowWithSurvey(
+                /*odkTables.addRowWithSurvey(
                     'deployment',
                     'deployment',
                     null,
-                    null);
+                    null);*/
+                odkTables.launchHTML(
+                    'config/assets/distribution_start.html');
             }
             document.getElementById("wrapper").appendChild(followUp);    
 
@@ -50,6 +52,16 @@
                   'config/tables/registration/html/registration_list.html');
             }
             document.getElementById("wrapper").appendChild(sendData);    
+
+            // Create a distribution Override
+            var override = document.createElement("button");
+            override.setAttribute("id", "button 4");
+            override.innerHTML = "Set Override Distribution";
+            override.onclick = function() {
+                odkTables.launchHTML(
+                    'config/tables/authorizations/html/authorizations_list.html');
+            }
+            document.getElementById("wrapper").appendChild(override);
         }
         
         </script>
