@@ -37,10 +37,10 @@ function plotCBFailure(error) {
 }
 
 function display() {
-    odkData.query('plot', null, null, null, null, null, null, true, 
+    odkData.query('plot', null, null, null, null, null, null, null, null, true, 
         plotCBSuccess, plotCBFailure);
 
-    odkData.query('visit', null, null, null, null, null, null, true, 
+    odkData.query('visit', null, null, null, null, null, null, null, null, true, 
         visitCBSuccess, visitCBFailure);
 }
 

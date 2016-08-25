@@ -36,11 +36,11 @@ function cbSuccess(result) {
     teaHouseResultSet = result;
 
     odkData.query('Tea_types', '_id = ?', [teaHouseResultSet.get('Specialty_Type_id')], 
-        null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure);
+        null, null, null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure);
 
     // CAL: I'm not positive that this is all we need to change to get this to work!!
     odkData.query('Tea_inventory', 'House_id = ?', [teaHouseResultSet.getRowId(0)], 
-        null, null, null, null, true, teaInvCBSuccess, teaInvCBFailure);
+        null, null, null, null, null, null, true, teaInvCBSuccess, teaInvCBFailure);
 }
 
 function cbFailure(error) {

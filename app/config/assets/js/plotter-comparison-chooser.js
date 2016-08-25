@@ -32,7 +32,7 @@ function cbFailure(error) {
  * displayed at this iteration through the loop.
  */
 var resumeFn = function(fidxStart) {
-    odkData.query('visit', null, null, null, null, null, null, true, 
+    odkData.query('visit', null, null, null, null, null, null, null, null, true, 
         cbSuccess, cbFailure);
 
     idxStart = fidxStart;

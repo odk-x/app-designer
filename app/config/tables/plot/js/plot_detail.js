@@ -44,7 +44,7 @@ function cbSuccess(result) {
     plotId = plotDetailResultSet.getRowId(0); 
 
     odkData.query('visit', 'plot_id = ?', [plotId], null, null,
-        null, null, true, visitCBSuccess, visitCBFailure);
+        null, null, null, null, true, visitCBSuccess, visitCBFailure);
 }
 
 function cbFailure(error) {

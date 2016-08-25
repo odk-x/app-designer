@@ -62,7 +62,7 @@ function getResults() {
 //             [searchText]);
 
     odkData.query('femaleClients', 'client_id = ?', [searchText], 
-        null, null, null, null, true, cbSRSuccess, cbSRFailure);
+        null, null, null, null, null, null, true, cbSRSuccess, cbSRFailure);
 }
 
 // displays list view of clients

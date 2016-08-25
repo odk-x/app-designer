@@ -52,7 +52,7 @@ window.odkData = {
     },
 
     query: function(tableId, whereClause, sqlBindParams, groupBy, having,
-            orderByElementKey, orderByDirection, includeKVS, successCallbackFn, 
+            orderByElementKey, orderByDirection, limit, offset, includeKVS, successCallbackFn, 
             failureCallbackFn) {
         var that = this;
 
@@ -63,17 +63,17 @@ window.odkData = {
 
         // Test always make this false
         that.getOdkDataIf().query(tableId, whereClause, sqlBindParams, groupBy, 
-            having, orderByElementKey, orderByDirection, includeKVS, req._callbackId);
-//             having, orderByElementKey, orderByDirection, false, req._callbackId);
+            having, orderByElementKey, orderByDirection, limit, offset, includeKVS, req._callbackId);
+//             having, orderByElementKey, orderByDirection, limit, offset, false, req._callbackId);
     },
 
-    arbitraryQuery: function(tableId, sqlCommand, sqlBindParams, successCallbackFn, failureCallbackFn) {
+    arbitraryQuery: function(tableId, sqlCommand, sqlBindParams, limit, offset, successCallbackFn, failureCallbackFn) {
         var that = this;
         
         var req = that.queueRequest('arbitraryQuery', successCallbackFn, failureCallbackFn);
         console.log('arbitraryQuery cbId=' + req._callbackId);
 
-        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParams, req._callbackId);
+        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParams, limit, offset, req._callbackId);
     },
 
     getRows: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
