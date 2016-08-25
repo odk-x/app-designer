@@ -207,7 +207,7 @@ function callBackFn () {
     if (insideQueue == true) return;
     insideQueue = true;
     var value = odkCommon.viewFirstQueuedAction();
-    if ( value !== null || value !== undefined ) {
+    if ( value !== null && value !== undefined ) {
         var action = JSON.parse(value);
         var dispatchStr = JSON.parse(action.dispatchString);
 
