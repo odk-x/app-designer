@@ -321,12 +321,12 @@
       {
         "query_name": "is_distributed_value_query",
         "query_type": "linked_table",
-        "linked_form_id": "distribution",
+        "linked_form_id": "set_is_distributed",
         "linked_table_id": "distribution",
-        "selection": "distribution _id = ?",
-        "selectionArgs": "[data('distribution_id')]",
+        "selection": "beneficiary_code = ? and distribution_id = ?",
+        "selectionArgs": "[data('beneficiary_code'), data('distribution_id')]",
         "fieldName": "is_distributed",
-        "auxillaryHash": "'distribution_id='+opendatakit.encodeURIDataElement('distribution_id')",
+        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_id')",
         "_row_num": 2
       }
     ],
@@ -451,12 +451,12 @@
       "is_distributed_value_query": {
         "query_name": "is_distributed_value_query",
         "query_type": "linked_table",
-        "linked_form_id": "distribution",
+        "linked_form_id": "set_is_distributed",
         "linked_table_id": "distribution",
-        "selection": "distribution _id = ?",
-        "selectionArgs": "[data('distribution_id')]",
+        "selection": "beneficiary_code = ? and distribution_id = ?",
+        "selectionArgs": "[data('beneficiary_code'), data('distribution_id')]",
         "fieldName": "is_distributed",
-        "auxillaryHash": "'distribution_id='+opendatakit.encodeURIDataElement('distribution_id')",
+        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_id')",
         "_row_num": 2
       }
     },

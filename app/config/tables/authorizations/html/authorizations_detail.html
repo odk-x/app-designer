@@ -6,7 +6,7 @@
         <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
-        <script type="text/javascript" src="../../../assets/js/util.js"</script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
     </head>
     <body>
         <script type="text/javascript" src="../js/authorizations_detail.js"></script>
@@ -29,8 +29,9 @@
         <p>Address: <span id="FIELD_7"></span></p>
 
         <button id="launch-barcode" class="btn btn-launch btn-primary btn-block btn-plotter">Scan Beneficiary Barcode to Create Override and Deliver Item</button>
-        <p>Scanned BarCode: <span id="scanned-barcode"></span></p>
+        <p>Scanned BarCode: <span id="scanned_barcode"></span></p>
 
+        <span id="rejected"></span>
 
         <script>
             $(display());  // calls the detail display function when ready

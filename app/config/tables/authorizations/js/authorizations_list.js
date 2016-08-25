@@ -14,7 +14,7 @@ var authorizationsCBSuccess = function(result) {
 var authorizationsCBFailure = function(error) {
 
     console.log('authorizations_list authorizationsCBFailure: ' + error);
-}; 
+};
 
 var resumeFn = function(fIdxStart) {  
         odkData.query('authorizations', null, null, null, null,
@@ -41,24 +41,13 @@ var resumeFn = function(fIdxStart) {
             var containingDiv = jqueryObject.closest('.item_space');
             var rowId = containingDiv.attr('rowId');
             console.log('clicked with rowId: ' + rowId);
-            /*var jsonMap = {};
-            jsonMap.authorization_id = encodeURI(authorizationsResultSet.get('authorization_id'));
-            jsonMap.authorization_name = authorizationsResultSet.get('authorization_name');
-            jsonMap.item_pack_id = encodeURI(authorizationsResultSet.get('item_pack_id'));
-            jsonMap.item_pack_name = authorizationsResultSet.get('item_pack_name');
-            jsonMap.min_range = authorizationsResultSet.get('min_range');
-            jsonMap.max_range = authorizationsResultSet.get('max_range');
-
-
-
-            jsonMap = JSON.stringify(jsonMap);*/
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                 odkTables.openDetailView (
                   'authorizations',
                   rowId,
-                  'config/tables/authorizations/html/authorizations_detail.html')
+                  'config/tables/authorizations/html/authorizations_detail.html');
             }
         });
     }

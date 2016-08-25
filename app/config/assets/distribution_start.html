@@ -35,7 +35,7 @@
 		    if (insideQueue == true) return;
 		    insideQueue = true;
 		    var value = odkCommon.viewFirstQueuedAction();
-		    if ( value !== null || value !== undefined ) {
+		    if ( value !== null && value !== undefined ) {
 		        var action = JSON.parse(value);
 		        var dispatchStr = JSON.parse(action.dispatchString);
 
@@ -49,10 +49,10 @@
 		            odkCommon.removeFirstQueuedAction();
 		         	odkTables.openTableToListView(
 			        	'distribution',
-			        	'beneficiary_code = ?',
-			        	[action.jsonValue.result.SCAN_RESULT],
+			        	'beneficiary_code = ? and is_distributed = ?',
+			        	[action.jsonValue.result.SCAN_RESULT, 'false'],
 			        	'config/tables/distribution/html/dist_ben_list.html'
-			       	)
+			       	);
 		        } else {
 		            myTimeoutVal = setTimeout(callBackFn(), 1000);
 		            $('#scanned-barcode').text("No value");

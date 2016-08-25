@@ -51,7 +51,7 @@ function cbSuccess(result) {
           'distribution',
           'beneficiary_code = ?',
           [registrationResultSet.get('beneficiary_code')],
-          'config/tables/distribution/html/auth_ben_list.html'
+          'config/tables/distribution/html/dist_ben_list.html'
           )
        // var rowId = registrationResultSet.getRowId(0);
         /*odkTables.addRowWithSurvey(
