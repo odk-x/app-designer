@@ -24,6 +24,24 @@ window.odkData = {
         that.getOdkDataIf().getViewData(req._callbackId);
     },
 
+    getRoles: function(successCallbackFn, failureCallbackFn) {
+        var that = this;
+        
+        var req = that.queueRequest('getRoles', successCallbackFn, failureCallbackFn);
+        console.log('getRoles cbId=' + req._callbackId);
+
+        that.getOdkDataIf().getRoles(req._callbackId);
+    },
+
+    getUsers: function(successCallbackFn, failureCallbackFn) {
+        var that = this;
+        
+        var req = that.queueRequest('getUsers', successCallbackFn, failureCallbackFn);
+        console.log('getUsers cbId=' + req._callbackId);
+
+        that.getOdkDataIf().getUsers(req._callbackId);
+    },
+
     getAllTableIds: function(successCallbackFn, failureCallbackFn) {
         var that = this;
         

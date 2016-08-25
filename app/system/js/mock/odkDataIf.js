@@ -466,6 +466,22 @@ var odkDataIf = {
         });
     },
 
+    getRoles: function(_callbackId) {
+        var that = this;
+
+        var ctxt = that.newStartContext(_callbackId);
+
+        throw new Error("Not implemented in app-designer");
+    },
+
+    getUsers: function(_callbackId) {
+        var that = this;
+
+        var ctxt = that.newStartContext(_callbackId);
+
+        throw new Error("Not implemented in app-designer");
+    },
+
     getAllTableIds: function(_callbackId) {
         var that = this;
 
