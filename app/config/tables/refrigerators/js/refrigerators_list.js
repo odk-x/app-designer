@@ -25,6 +25,12 @@ var idxStart = -1;
 function refrigeratorTypesCBSuccess(result) {
 
     typeData = result;
+    console.log('refrigeratorTypesCBSuccess');
+    for (var i = 0; i < typeData.getCount(); i++) {
+        console.log('Row ID: ' + typeData.getRowId(i));
+        console.log('Catalog ID: ' + typeData.getData(i, 'catalog_id'));
+        typeIdMap[typeData.getRowId(i)] = typeData.getData(i, 'catalog_id');
+    }
 
     return (function() {
         displayGroup(idxStart);
@@ -61,7 +67,7 @@ function cbSuccess(result) {
     refrigeratorsResultSet = result;
 
     if (refrigeratorsResultSet.getCount() === 0) {
-        console.log('No Refrigerators Note')
+        console.log('No Refrigerators');
         var note = $('<li>');
         note.attr('class', 'note');
         note.text('No Refrigerators');
@@ -154,9 +160,11 @@ var displayGroup = function(idxStart) {
         // We're going to select the ul and then start adding things to it.
         //var item = $('#list').append('<li>');
         var item = $('<li>');
+        var catalogID = typeIdMap[refrigeratorsResultSet.getData(i, 'model_row_id')];
         item.attr('rowId', refrigeratorsResultSet.getRowId(i));
         item.attr('class', 'item_space');
-        item.text('Refrigerator ' + refrigeratorsResultSet.getData(i, 'refrigerator_id'));
+        item.text('Refrigerator ' + refrigeratorsResultSet.getData(i, 'refrigerator_id')
+            + ' | ' + catalogID);
                 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');

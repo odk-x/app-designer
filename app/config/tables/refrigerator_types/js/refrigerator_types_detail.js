@@ -32,6 +32,7 @@ function cbFailure(error) {
 
 }
 
+
 function refrigeratorsCBSuccess(invData) {
 
     $('#model_name').text(refrigeratorTypeResultSet.get('model_id'));
@@ -96,4 +97,3 @@ function onLinkClick() {
           'config/tables/refrigerators/html/refrigerators_list.html');
     }
 }
-
