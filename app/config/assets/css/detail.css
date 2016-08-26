@@ -61,6 +61,10 @@ html {
   box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
+.buttonDelete {
+  background-color: red;
+}
+
 html, body {
   height: 100%;
   width: 100%;

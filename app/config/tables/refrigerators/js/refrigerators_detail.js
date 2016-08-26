@@ -53,11 +53,24 @@ function cbSuccess(result) {
 
     odkData.query('refrigerator_types', '_id = ?', [refrigeratorsResultSet.get('model_row_id')],
         null, null, null, null, true, cbTypeSuccess, cbTypeFailure);
+
 }
 
 function cbFailure(error) {
 
     console.log('cbFailure: getViewData failed with message: ' + error);
+
+}
+
+function cbDeleteSuccess() {
+
+    console.log('cbDeleteSuccess: successfully deleted row');
+
+}
+
+function cbDeleteFailure(error) {
+
+    console.log('cbDeleteFailure: deleteRow failed with message: ' + error);
 
 }
 
@@ -67,7 +80,7 @@ var display = function() {
 
 }
 
-function onLinkClickM() {
+function onLinkClickModel() {
 
     if (!$.isEmptyObject(typeData)) {
 
@@ -80,14 +93,34 @@ function onLinkClickM() {
 
 }
 
-function onLinkClickH() {
+function onLinkClickFacility() {
 
-    if (!$.isEmptyObject(typeData)) {
+    if (!$.isEmptyObject(facilityData)) {
 
         odkTables.openDetailView(
             'health_facility',
             facilityData.getRowId(0),
             'config/tables/health_facility/html/health_facility_detail.html');
+
+    }
+
+}
+
+function onLinkClickDelete() {
+
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+
+        if (confirm('Are you sure you want to delete this refrigerator?')) {
+
+            odkData.deleteRow(
+                'refrigerators',
+                null,
+                // check getRowId parameters
+                refrigeratorsResultSet.getRowId(0),
+                cbDeleteSuccess,
+                cbDeleteFailure);           
+
+        }
 
     }
 
