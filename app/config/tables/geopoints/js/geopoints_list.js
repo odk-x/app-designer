@@ -109,10 +109,18 @@ function render(result) {
 
             var transportation = document.createElement('li');
             transportation.setAttribute('class', 'detail');
-            transportation.innerHTML =
-                'Transportation: ' +
-                result.getData(i, 'transportation_mode');
-            item.appendChild(transportation);
+            if (result.getData(i, 'transportation_mode') != null) {    
+                if (result.getData(i, 'transportation_mode') != 'Other') {
+                    transportation.innerHTML =
+                    'Transportation: ' +
+                    result.getData(i, 'transportation_mode');
+                } else {
+                    transportation.innerHTML =
+                    'Transportation: ' +
+                    result.getData(i, 'transportation_mode_other')
+                }
+                item.appendChild(transportation);
+            }
         }
     }
 }

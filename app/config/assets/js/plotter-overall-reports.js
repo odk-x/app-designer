@@ -36,10 +36,10 @@ function plotCBFailure(error) {
 
 }
 function display() {
-    odkData.query('plot', null, null, null, null, null, null, true, 
+    odkData.query('plot', null, null, null, null, null, null, null, null, true, 
         plotCBSuccess, plotCBFailure);
 
-    odkData.query('visit', null, null, null, null, null, null, true, 
+    odkData.query('visit', null, null, null, null, null, null, null, null, true, 
         visitCBSuccess, visitCBFailure);
 
 
@@ -100,17 +100,17 @@ function displayPlotSize() {
             // Switch to a case statement
             // Maybe these colors should be available in a library or something
             if(i === 0) {
-                return "aqua";
+                return "lightseagreen";
             } else if(i === 1) {
-                return "teal";
+                return "orangered";
             } else if(i === 2){
-                return "orchid";
+                return "mediumslateblue";
             } else if(i === 3){
-                return "lightgray";
+                return "mediumspringgreen";
             } else if(i === 4){
-                return "steelblue";
+                return "gold";
             } else if(i === 5){
-                return "springgreen";
+                return "mediumvioletred";
             } else if(i === 6){
                 return "azure";
             } else if(i === 7){
@@ -119,9 +119,16 @@ function displayPlotSize() {
         });
 
     g.append("text")
-        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .attr("dy", "2em")
+        .attr("transform", function(d) { 
+            var a = arc.centroid(d) + "";
+            var cent = a.split(",");
+            var temp = 0;
+            for (; temp < 2; temp++) {
+                cent[temp] = cent[temp] * 1.3;
+            }
+            return "translate(" + cent[0] + "," + cent[1] + ")"; })
         .style("text-anchor", "middle")
+        .style("alignment-baseline", "middle")
         .text(function(d, i) { return dataJ[i].x; });
 }
 
@@ -187,7 +194,7 @@ function displaySoilType() {
             // Switch to a case statement
             // Maybe these colors should be available in a library or something
             if(i === 0) {
-                return "tan";
+                return "darkseagreen";
             } else if(i === 1) {
                 return "greenyellow";
             } else if(i === 2){
@@ -207,8 +214,8 @@ function displaySoilType() {
 
     g.append("text")
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .attr("dy", "2em")
         .style("text-anchor", "middle")
+        .style("alignment-baseline", "middle")
         .text(function(d, i) { return dataJ[i].x; });
 }
 
@@ -273,11 +280,11 @@ function displayMaizeVar() {
             // Switch to a case statement
             // Maybe these colors should be available in a library or something
             if(i === 0) {
-                return "ghostwhite";
+                return "teal";
             } else if(i === 1) {
-                return "yellow";
+                return "lightblue";
             } else if(i === 2){
-                return "orange";
+                return "steelblue";
             } else if(i === 3){
                 return "lightgray";
             } else if(i === 4){
@@ -291,9 +298,11 @@ function displayMaizeVar() {
             }
         });
 
+
+
     g.append("text")
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .attr("dy", "2em")
         .style("text-anchor", "middle")
+        .style("alignment-baseline", "middle")
         .text(function(d, i) { return dataJ[i].x; });
 }

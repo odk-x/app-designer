@@ -52,7 +52,7 @@ var cbSuccess = function(result) {
     // typeName so that we can display the name of each shop's specialty.
     if (idxStart === 0) {
         odkData.query('Tea_types', null, null, 
-            null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure);
+            null, null, null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure);
     }
 };
 
@@ -145,7 +145,12 @@ function addDataForRow(rowNumber) {
     item.attr('id', teaHouseResultSet.getRowId(rowNumber));
     item.attr('rowId', teaHouseResultSet.getRowId(rowNumber));
     item.attr('class', 'item_space');
-    item.text(teaHouseResultSet.getData(rowNumber, 'Name'));
+    var name = teaHouseResultSet.getData(rowNumber, 'Name');
+    if (name == null) {
+        name = 'unknown name';
+    } 
+    item.text(name);
+     
             
     /* Creates arrow icon (Nothing to edit here) */
     var chevron = $('<img>');
@@ -164,13 +169,23 @@ function addDataForRow(rowNumber) {
     field1.attr('class', 'detail');
     var specialtyId = teaHouseResultSet.getData(rowNumber, 'Specialty_Type_id');
     var typeName = typeNameMap[specialtyId];
+    if (typeName == null) {
+        typeName = 'unknown';
+    }
     field1.text('Specialty: ' + typeName);
     item.append(field1);
 
     var field2 = $('<li>');
     field2.attr('class', 'detail');
-    field2.text(teaHouseResultSet.getData(rowNumber, 'District') + ' ' +
-        teaHouseResultSet.getData(rowNumber, 'Neighborhood'));
+    var district = teaHouseResultSet.getData(rowNumber, 'District');
+    if (district == null) {
+        district = 'unknown district';
+    }
+    var neighborhood = teaHouseResultSet.getData(rowNumber, 'Neighborhood');
+    if (neighborhood == null) {
+        neighborhood = 'unknown neighborhood';
+    }
+    field2.text(district + ', ' + neighborhood);
     item.append(field2);
 
     $('#list').append(item);

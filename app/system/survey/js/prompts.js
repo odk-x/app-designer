@@ -1360,7 +1360,17 @@ promptTypes.select_one = promptTypes.select.extend({
                         otherValue = _.find(jsonFormSerialization, function(valueObject) {
                             return ('otherValue' === valueObject.name);
                         });
-                        return (otherValue ? otherValue.value : '');
+                        if (otherValue !== null && 
+                            otherValue !== undefined &&
+                            otherValue.value !== null &&
+                            otherValue.value !== undefined &&
+                            otherValue.value.length !== 0) {
+                            return otherValue.value;
+                        } else {
+                            // We need to store a space since null values
+                            // are not allowed in the database
+                            return ' ';
+                        }
                     }
                 }
                 return selectedValue.value;
@@ -1542,7 +1552,7 @@ promptTypes.select_one_grid = promptTypes.select_one.extend({
                 return ('otherValue' === valueObject.name);
             });
             that.renderContext.other = {
-                value: otherObject ? otherObject.value : '',
+                value: otherObject ? otherObject.value : ' ',
                 checked: _.any(formValue, function(valueObject) {
                     return ('other' === valueObject.value);
                 })
@@ -1554,7 +1564,10 @@ promptTypes.select_one_inline = promptTypes.select_one.extend({
     templatePath: "templates/select_inline.handlebars"
 });
 promptTypes.select_one_dropdown = promptTypes.select_one.extend({
-    templatePath: "templates/select_dropdown.handlebars"
+    templatePath: "templates/select_dropdown.handlebars",
+    renderContext: {
+        "selectOneDropDownText": translations.selectDropdownLabel
+    }
 });
 promptTypes.select_multiple_grid = promptTypes.select_multiple.extend({
     templatePath: "templates/select_grid.handlebars",

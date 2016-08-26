@@ -404,7 +404,7 @@ return {
     get_linked_instances:function(ctxt, dbTableName, selection, selectionArgs, displayElementName, orderBy) {
         var that = this;
         //
-        // UserTable lt = DataIf.query( dbTableName, selection, selectionArgs, null, null, orderBy, "ASC", false, postprocessorcb
+        // UserTable lt = DataIf.query( dbTableName, selection, selectionArgs, null, null, orderBy, "ASC", null, null, false, postprocessorcb
         //
         // And, on the postprocessorcb success callback:
         //
@@ -429,7 +429,7 @@ return {
         }
 
         var ss = that._selectMostRecentFromDataTableStmt(dbTableName, selection, selectionArgs, orderBy);
-        odkData.arbitraryQuery(dbTableName, ss.stmt, ss.bind,
+        odkData.arbitraryQuery(dbTableName, ss.stmt, ss.bind, null, null,
             function(reqData) {
                 var instanceList = [];
                 for (var rowCntr = 0; rowCntr < reqData.getCount(); rowCntr++) {

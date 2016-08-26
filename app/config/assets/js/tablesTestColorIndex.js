@@ -48,7 +48,7 @@ var resumeFn = function(idxStart) {
 
         // Get the KVS when set to true
         // Original query
-        odkData.query('geotagger', null, null, null, null, null, null, true, cbFn, cbFnFailure);
+        odkData.query('geotagger', null, null, null, null, null, null, null, null, true, cbFn, cbFnFailure);
     }
 };
 

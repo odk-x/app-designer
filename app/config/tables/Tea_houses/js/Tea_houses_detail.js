@@ -36,11 +36,11 @@ function cbSuccess(result) {
     teaHouseResultSet = result;
 
     odkData.query('Tea_types', '_id = ?', [teaHouseResultSet.get('Specialty_Type_id')], 
-        null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure);
+        null, null, null, null, null, null, true, teaTypeCBSuccess, teaTypeCBFailure);
 
     // CAL: I'm not positive that this is all we need to change to get this to work!!
     odkData.query('Tea_inventory', 'House_id = ?', [teaHouseResultSet.getRowId(0)], 
-        null, null, null, null, true, teaInvCBSuccess, teaInvCBFailure);
+        null, null, null, null, null, null, true, teaInvCBSuccess, teaInvCBFailure);
 }
 
 function cbFailure(error) {
@@ -66,26 +66,34 @@ function teaTypeCBFailure(error ) {
 
 function teaInvCBSuccess(invData) {
 
-    $('#TITLE').text(teaHouseResultSet.get('Name'));
-    $('#FIELD_2').text(teaHouseResultSet.get('State'));
-    $('#FIELD_3').text(teaHouseResultSet.get('Region'));
-    $('#FIELD_4').text(teaHouseResultSet.get('District'));
-    $('#FIELD_5').text(teaHouseResultSet.get('Neighborhood'));
-
-    $('#FIELD_6').text(typeData.getData(0, 'Name'));
-
-    $('#FIELD_13').text(teaHouseResultSet.get('Date_Opened'));
-    $('#FIELD_7').text(teaHouseResultSet.get('Customers'));
-    $('#FIELD_18').text(teaHouseResultSet.get('Visits'));
-
+    nullCaseHelper('Name', '#TITLE');
+    nullCaseHelper('State', "#FIELD_2");
+    nullCaseHelper('Region', '#FIELD_3');
+    nullCaseHelper('District', '#FIELD_4');
+    nullCaseHelper('Neighborhood', '#FIELD_5');
+    nullCaseHelper('Date_Opened', '#FIELD_13');
+    nullCaseHelper('Customers', '#FIELD_7');
+    nullCaseHelper('Visits', '#FIELD_18');
     // The latitude and longitude are stored in a single column as GeoPoint.
     // We need to extract the lat/lon from the GeoPoint.
-    var lat = teaHouseResultSet.get('Location.latitude');
-    var lon = teaHouseResultSet.get('Location.longitude');
-    $('#FIELD_8').text(lat);
-    $('#FIELD_9').text(lon);
-    // CAL: This is the same issue maybe ....
-    $('#FIELD_17').text(teaHouseResultSet.getRowId(0));
+    nullCaseHelper('Location.latitude', '#FIELD_8');
+    nullCaseHelper('Location.longitude', '#FIELD_9');
+    
+    nullCaseHelper('Owner', '#FIELD_14');
+    nullCaseHelper('Phone_Number', '#FIELD_15');
+
+    var teaQuantity = invData.getCount();
+    if (teaQuantity == 1) {
+        document.getElementById("tea_button").innerHTML="1 Tea";
+    } else if (teaQuantity > 1) {
+        document.getElementById("tea_button").innerHTML=teaQuantity + " Teas";
+
+    }
+
+    
+    if (typeData.getCount() > 0) {
+        $('#FIELD_6').text(typeData.getData(0, 'Name'));
+    }
 
 
     if(teaHouseResultSet.get('Iced') === 'Yes') {
@@ -100,13 +108,13 @@ function teaInvCBSuccess(invData) {
         $('#FIELD_12').attr('checked', true);
     }
     $('#FIELD_12').attr('disabled', true);
+}
 
-    $('#FIELD_14').text(teaHouseResultSet.get('Owner'));
-    $('#FIELD_15').text(teaHouseResultSet.get('Phone_Number'));
-
-
-    $('#FIELD_16').text(invData.getCount());
-
+function nullCaseHelper(input, output) {
+    var temp = teaHouseResultSet.get(input);
+    if (temp != null) {
+        $(output).text(temp);
+    }
 }
 
 function teaInvCBFailure(error ) {

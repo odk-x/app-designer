@@ -493,7 +493,7 @@ return Backbone.View.extend({
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
             ctxt.log('D','screenManager.setLanguage',
                 ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
-            this.controller.setLocale(ctxt, $(evt.target).attr("id"));
+            that.controller.setLocale(ctxt, $(evt.target).attr("id"));
         }, failure: function(m) {
             ctxt.log('D','screenManager.setLanguage -- prior event terminated with an error -- aborting!',
                 ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
