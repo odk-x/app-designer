@@ -98,12 +98,14 @@ var scanCBSuccess = function (result) {
     struct['authorization_id'] = authorizationsResultSet.get('authorization_id');
     struct['authorization_name'] = authorizationsResultSet.get('authorization_name');
     struct['item_pack_id'] = authorizationsResultSet.get('item_pack_id');
+    struct['item_pack_name'] = authorizationsResultSet.get('item_pack_name');
     struct['distribution_id'] = util.genUUID();
     //struct['item_pack_name'] = authorizationsResultSet.get('item_pack_name');
     struct['min_range'] = authorizationsResultSet.get('min_range');
     struct['max_range'] = authorizationsResultSet.get('max_range');
     struct['beneficiary_code'] = beneficiary_code;
     struct['is_distributed'] = 'false';
+    struct['is_override'] = 'true';
     odkData.addRow(
       'distribution',
       struct,

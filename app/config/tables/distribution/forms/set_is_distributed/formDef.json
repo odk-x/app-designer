@@ -79,6 +79,11 @@
         "type": "string",
         "name": "is_distributed",
         "_row_num": 11
+      },
+      {
+        "type": "string",
+        "name": "is_override",
+        "_row_num": 12
       }
     ],
     "survey": [
@@ -320,6 +325,16 @@
           }
         ],
         "elementKey": "is_distributed"
+      },
+      "is_override": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "is_override"
       }
     },
     "section_names": [
@@ -635,6 +650,19 @@
         "elementName": "is_distributed",
         "elementSet": "data",
         "elementPath": "is_distributed"
+      },
+      "is_override": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "is_override",
+        "elementName": "is_override",
+        "elementSet": "data",
+        "elementPath": "is_override"
       },
       "_id": {
         "type": "string",

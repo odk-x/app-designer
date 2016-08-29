@@ -32,6 +32,7 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'authorization_name', distributionsResultSet.get('authorization_name'));
   setJSONMap(jsonMap, 'item_pack_id', distributionsResultSet.get('item_pack_id'));
   setJSONMap(jsonMap, 'item_pack_name', distributionsResultSet.get('item_pack_name'));
+  setJSONMap(jsonMap, 'is_override', distributionsResultSet.get('is_override'));
     
     // Writing out number values needs more investigation
   setJSONMap(jsonMap, 'min_range', distributionsResultSet.get('min_range'));
@@ -84,11 +85,12 @@ var resumeFn = function(fIdxStart) {
             var jsonMapVals = getJSONMapValues();
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.addRowWithSurvey(
+                /*odkTables.addRowWithSurvey(
                   'deployment',
                   'deploy_to_specific',
                   null,
-                  jsonMapVals);
+                  jsonMapVals);*/
+                  odkTables.openDetailView('distribution', rowId, 'config/tables/distribution/html/dist_ben_detail.html');
             }
         });
     }

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <link href="../../../assets/css/list.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
-        <script type="text/javascript" src="../../../assets/js/util.js"></script>
     </head>
     <body>
-        <script type="text/javascript" src="../js/authorizations_detail.js"></script>
+        <script type="text/javascript" src="../js/dist_ben_detail.js"></script>
         <h1><span id="TITLE" class="main-text"></span></h1>
         <!-- To query and link to the result, replace the placeholders and put the
         following around the <span></span> tags.
@@ -19,21 +18,21 @@
         Example:<a href="#" onclick="control.openTable('TABLE_NAME',
         'COL_NAME:' + data.get('COL_NAME'));"><span id="FIELD_1"></span></a>
         -->
+        <p>Distribution ID: <span id="FIELD_8"></span></p>
         <p>Authorization Name: <span id="FIELD_1"></span></p>
         <p>Authorization ID: <span id="FIELD_2"></span></p>
-
         <p>Item Pack Name: <span id="FIELD_3"></span></p>
         <p>Item Pack ID: <span id="FIELD_4"></span></p>
         <p>Minimum Barcode: <span id="FIELD_5"></span></p>
-        <p>Maximum Barcode: <span id="FIELD_6"></span></p> 
+        <p>Maximum Barcode: <span id="FIELD_6"></span></p>
+        <p>Is an Override: <span id="FIELD_7"></span></p> 
+        <p>Beneficiary Code: <span id="FIELD_9"></span></p>
 
-        <button id="launch-barcode" class="btn btn-launch btn-primary btn-block btn-plotter">Scan Beneficiary Barcode to Create Override</button>
-        <p>Scanned BarCode: <span id="scanned_barcode"></span></p>
 
-        <span id="rejected"></span>
+        <button id="launch">Click to Distribute</button>
 
         <script>
-            $(display());  // calls the detail display function when ready
+            $(display());
         </script>
     </body>
 </html>
