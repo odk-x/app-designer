@@ -444,7 +444,10 @@ return {
                         savepoint_type: reqData.getData(rowCntr, '_savepoint_type'),
                         savepoint_creator: reqData.getData(rowCntr, '_savepoint_creator'),
                         locale: reqData.getData(rowCntr, '_locale'),
-                        form_id: reqData.getData(rowCntr, '_form_id')
+                        form_id: reqData.getData(rowCntr, '_form_id'),
+                        filter_type: reqData.getData(rowCntr, '_filter_type'),
+                        filter_value: reqData.getData(rowCntr, '_filter_value'),
+                        effective_access: reqData.getData(rowCntr, '_effective_access')
                     });
                 }
                 ctxt.log('D','get_linked_instances.inside', dbTableName + " instanceList: " + instanceList.length);

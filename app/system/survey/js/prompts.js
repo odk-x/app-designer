@@ -538,11 +538,21 @@ promptTypes.instances = promptTypes.base.extend({
                     var savepoint_type = term.savepoint_type;
                     if ( savepoint_type === opendatakit.savepoint_type_complete ) {
                         term.savepoint_type_text = that.savepoint_type_finalized_text;
+						term.is_checkpoint = false;
                     } else if ( savepoint_type === opendatakit.savepoint_type_incomplete ) {
                         term.savepoint_type_text = that.savepoint_type_incomplete_text;
+						term.is_checkpoint = false;
                     } else {
                         term.savepoint_type_text = that.savepoint_type_checkpoint_text;
+						term.is_checkpoint = true;
                     }
+					// this field is undefined if rendering through the app designer
+					var effective_access = term.effective_access;
+					if ( effective_access === "rwd" || effective_access === undefined ) {
+						term.show_delete = true;
+					} else {
+						term.show_delete = false;
+					}
                     return term;
                 });
 
@@ -3220,4 +3230,4 @@ promptTypes.acknowledge = promptTypes.select.extend({
 });
 
 return promptTypes;
-});
+});
