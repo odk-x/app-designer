@@ -47,7 +47,7 @@ var registrationCBFailure = function(error) {
  */
 var resumeFn = function(fIdxStart) {  
     odkData.query('registration', null, null, null, null,
-            null, null, true, registrationCBSuccess, 
+            null, null, null, null, true, registrationCBSuccess, 
             registrationCBFailure); 
 
     idxStart = fIdxStart;

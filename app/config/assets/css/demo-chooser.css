@@ -25,7 +25,17 @@ body {
     top: 60px;
 }
 
-.description-text {
+.description-text-black {
+    font-size: 24px;
+    width:100%;
+    max-width: 500px;
+    color: #000;
+    text-align: center;
+    line-height: 40px;
+    text-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+
+.description-text-white {
     font-size: 24px;
     width:100%;
     max-width: 500px;
@@ -38,5 +48,7 @@ body {
 .btn-launch {
    width: 100%;
    max-width: 500px;
+   height: 80px;
+   font-size: 16pt;
    margin: 0 auto 35px;
 }

@@ -18,7 +18,7 @@ var authorizationsCBFailure = function(error) {
 
 var resumeFn = function(fIdxStart) {  
         odkData.query('authorizations', null, null, null, null,
-            null, null, true, authorizationsCBSuccess, 
+            null, null, null, null, true, authorizationsCBSuccess, 
             authorizationsCBFailure); 
 
     idxStart = fIdxStart;
