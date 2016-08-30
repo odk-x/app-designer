@@ -4,5 +4,5 @@ SurveyUtil,default,SurveyUtil.formId,string,geoweather_conditions
 Table,default,defaultViewType,string,SPREADSHEET
 Table,default,displayName,object,"""Weather Conditions for Geo-Weather Survey"""
 Table,security,filterTypeOnCreation,string,READ_ONLY
-Table,security,locked,boolean,false
+Table,security,locked,boolean,true
 Table,security,unverifiedUserCanCreate,boolean,false
