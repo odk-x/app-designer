@@ -745,7 +745,7 @@ return {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    _reconstructElementPath: function(elementPath, jsonType, value, topLevelObject) {
+    _reconstructElementPathValueUpdate: function(elementPath, jsonType, value, topLevelObject) {
         var that = this;
         var path = elementPath.split('.');
         var e = topLevelObject;
@@ -779,12 +779,61 @@ return {
             if (that.isUnitOfRetention(de)) {
                 elementPath = de.elementPath || elementPathValue.elementPath;
                 if ( de.elementSet === 'instanceMetadata' ) {
-                    that._reconstructElementPath(elementPath || dbKey, de, elementPathValue.value, model.instanceMetadata );
+                    that._reconstructElementPathValueUpdate(elementPath || dbKey, de, elementPathValue.value, model.instanceMetadata );
                 } else {
-                    that._reconstructElementPath(elementPath, de, elementPathValue.value, model.data );
+                    that._reconstructElementPathValueUpdate(elementPath, de, elementPathValue.value, model.data );
                 }
             }
         }
+    },
+
+	// similar to above, but do not make the change, just check to see whether a change would be made.
+    _reconstructElementPathDetectValueRequiringUpdate: function(elementPath, jsonType, value, topLevelObject) {
+        var that = this;
+        var path = elementPath.split('.');
+        var e = topLevelObject;
+        var term;
+        var j;
+        for (j = 0 ; j < path.length-1 ; ++j) {
+            term = path[j];
+            if ( term === undefined || term === null || term === "" ) {
+                throw new Error("unexpected empty string in dot-separated variable name");
+            }
+            if ( e[term] === undefined || e[term] === null ) {
+                e[term] = {};
+            }
+            e = e[term];
+        }
+        term = path[path.length-1];
+        if ( term === undefined || term === null || term === "" ) {
+            throw new Error("unexpected empty string in dot-separated variable name");
+        }
+		if ( e[term] === value ) {
+			return false;
+		} else {
+			return true;
+		}
+    },
+    _reconstructModelDataFromElementPathDetectActualValueRequiringUpdate: function(model, dbKey, elementPathValue) {
+        var that = this;
+        var elementPath;
+        var elementPathValue;
+        var de;
+		var hasUpdates = false;
+		de = model.dataTableModel[dbKey];
+		if (that.isUnitOfRetention(de)) {
+			elementPath = de.elementPath || elementPathValue.elementPath;
+			if ( de.elementSet === 'instanceMetadata' ) {
+				if ( that._reconstructElementPathDetectValueRequiringUpdate(elementPath || dbKey, de, elementPathValue.value, model.instanceMetadata ) ) {
+					hasUpdates = true;
+				}
+			} else {
+				if ( that._reconstructElementPathDetectValueRequiringUpdate(elementPath, de, elementPathValue.value, model.data ) ) {
+					hasUpdates = true;
+				}
+			}
+		}
+		return hasUpdates;
     },
     _getElementPathPairFromKvMap: function(kvMap, elementPath) {
         var that = this;
@@ -951,7 +1000,7 @@ return {
      *
      * Requires: No global dependencies
      */
-    _accumulateUnitOfRetentionUpdates:function(model, formId, instanceId, kvMap, accumulatedChanges) {
+    _accumulateUnitOfRetentionUpdates:function(model, formId, instanceId, kvMap, accumulatedChanges, forceUpdate) {
         var that = this;
         var dbTableName = model.table_id;
         var dataTableModel = model.dataTableModel;
@@ -976,7 +1025,6 @@ return {
                 elementPathPair = that._getElementPathPairFromKvMap(kvMap, elementPath);
                 if ( elementPathPair !== null && elementPathPair !== undefined ) {
                     kvElement = elementPathPair.element;
-                    kvElement = elementPathPair.element;
                     // track that we matched the keyname...
                     processSet[elementPathPair.elementPath] = true;
                     // ensure that undefined are treated as null...
@@ -988,7 +1036,11 @@ return {
                     // but session variables need the storage value...
                     if ( !defElement.isSessionVariable ) {
                         if ( instanceId !== null && instanceId !== undefined ) {
-                            accumulatedChanges[f] = changeElement;
+							// force the change or only add it if it would actually change the value
+							if ( forceUpdate || accumulatedChanges[f] !== undefined ||
+							     that._reconstructModelDataFromElementPathDetectActualValueRequiringUpdate(model, f, changeElement) ) {
+								accumulatedChanges[f] = changeElement;
+							}
                         }
                     } else {
                         v = that.toSerializationFromElementType(defElement, kvElement.value, true);
@@ -1013,12 +1065,12 @@ return {
      * updates the model and records the field changes in
      * this.pendingChanges
      */
-    setModelDataValueDeferredChange:function( model, formId, instanceId, name, value, accumulatedChanges ) {
+    setModelDataValueDeferredChange:function( model, formId, instanceId, name, value, accumulatedChanges, forceUpdate ) {
         var that = this;
         var justChange = {};
         justChange[name] = {value: value, isInstanceMetadata: false };
         // apply the change immediately...
-        that._accumulateUnitOfRetentionUpdates(model, formId, instanceId, justChange, accumulatedChanges );
+        that._accumulateUnitOfRetentionUpdates(model, formId, instanceId, justChange, accumulatedChanges, forceUpdate );
     }
 };
 });

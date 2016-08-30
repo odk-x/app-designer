@@ -229,7 +229,7 @@ return {
                 }
             },
             function(errorMsg) {
-                ctxt.failure({message: errorMsg});
+				that._process_odkData_error(ctxt, errorMsg);
             });
     },
 
@@ -267,7 +267,7 @@ return {
                 if ( jsonType['default'] !== undefined && jsonType['default'] !== null ) {
                     // otherwise, use the default for the session variable
                     value = jsonType['default'];
-                    databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
+                    databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
                 }
             }
             // NOTE: setModelDataValueDeferredChange will not accept any data table changes if instanceId is null or undefined
@@ -280,7 +280,7 @@ return {
                     jsonType = model.dataTableModel[elementPath];
                     value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
                 }
-                databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
+                databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
             }
             // and discard the accumulated changes, since those relate to database column values and we don't have an instance.
             // and clear the pending changes set.
@@ -347,7 +347,7 @@ return {
                         jsonType = model.dataTableModel[elementPath];
                         if ( jsonType['default'] !== undefined && jsonType['default'] !== null ) {
                             // otherwise, use the default for the session variable
-                            databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, jsonType['default'], accumulatedChanges);
+                            databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, jsonType['default'], accumulatedChanges, true);
                         }
                     }
                     // and now apply any changes from the instanceMetadataKeyValueMap
@@ -355,7 +355,7 @@ return {
                     for ( elementPath in instanceMetadataKeyValueMap ) {
                         jsonType = model.dataTableModel[elementPath];
                         value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
-                        databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
+                        databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
                     }
 
                     if ( $.isEmptyObject(accumulatedChanges)) {
@@ -383,7 +383,7 @@ return {
                             jsonType = model.dataTableModel[elementPath];
                             value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
                         }
-                        databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges);
+                        databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
                     }
 
                     if ( $.isEmptyObject(accumulatedChanges)) {
@@ -394,7 +394,9 @@ return {
                     }
                 }
             },
-            function(errorMsg) { ctxt.failure({message: errorMsg}); });
+            function(errorMsg) { 
+				ctxt.failure({message: errorMsg}); 
+			});
     },
 
     ///////////////////////////////////////////////////
@@ -447,7 +449,9 @@ return {
                 }
                 ctxt.log('D','get_linked_instances.inside', dbTableName + " instanceList: " + instanceList.length);
                 ctxt.success(instanceList);
-            }, function(errorMsg) { ctxt.failure({message: errorMsg}); });
+            }, function(errorMsg) { 
+				ctxt.failure({message: errorMsg}); 
+			});
     },
 
     save_all_changes:function(ctxt, model, formId, instanceId, asComplete) {
@@ -472,7 +476,9 @@ return {
                         ctxt.success();
                     }
                 },
-                function(errorMsg) { ctxt.failure({message: errorMsg}); });
+                function(errorMsg) { 
+					that._process_odkData_error(ctxt, errorMsg);
+				});
         } else {
             odkData.saveCheckpointAsIncomplete(model.table_id, simpleMap, instanceId,
                 function(reqData) {
@@ -483,7 +489,9 @@ return {
                         ctxt.success();
                     }
                 },
-                function(errorMsg) { ctxt.failure({message: errorMsg}); });
+                function(errorMsg) { 
+					that._process_odkData_error(ctxt, errorMsg);
+				});
         }
     },
 
@@ -508,7 +516,7 @@ return {
                     ctxt.success();
                 },
                 function(errorMsg) {
-                    ctxt.failure({message: errorMsg});
+					that._process_odkData_error(ctxt, errorMsg);
                 });
     },
 
@@ -527,7 +535,9 @@ return {
                                     ctxt.success();
                                 }
                             },
-                            function(errorMsg) { ctxt.failure({message: errorMsg, rolledBack: true }); });
+                            function(errorMsg) {
+								that._process_odkData_error(ctxt, errorMsg);
+							});
 
     },
 
@@ -543,9 +553,36 @@ return {
                     ctxt.success();
                 }
             },
-            function(errorMsg) { ctxt.failure({message: errorMsg}); });
+            function(errorMsg) { 
+				ctxt.failure({message: errorMsg}); 
+			});
     },
 
+	_auth_error: "org.opendatakit.common.android.exception.ActionNotAuthorizedException:",
+	_impl_class_qualifier: " ODKDatabaseImplUtils:",
+	
+	_process_odkData_error: function(ctxt, errorMsg) {
+		var that = this;
+		
+		if ( errorMsg.startsWith(that._auth_error) ) {
+			// we cannot make the changes because of an Authorization violation. Clear them!
+			that.pendingChanges = {};
+		}
+
+		var exception = null;
+		var idxColon = errorMsg.indexOf(':');
+		if ( idxColon !== -1 ) {
+			exception = errorMsg.substring(0,idxColon);
+			errorMsg = errorMsg.substring(idxColon+2);
+			var idxUtils = errorMsg.indexOf(that._impl_class_qualifier);
+			if ( idxUtils !== -1 ) {
+				errorMsg = errorMsg.substring(0, idxUtils) + errorMsg.substring(idxUtils + that._impl_class_qualifier.length);
+			}
+		}
+		
+		ctxt.failure({message: errorMsg, exception: exception, rolledBack: true});
+	},
+	
     /**
      * Not expected to be called expect internally
      *
@@ -564,7 +601,7 @@ return {
                 }
             },
             function(errorMsg) {
-                ctxt.failure({message: errorMsg});
+				that._process_odkData_error(ctxt, errorMsg);
             });
     },
 
@@ -605,7 +642,7 @@ return {
         var formId = opendatakit.getSettingValue('form_id');
         var model = opendatakit.getCurrentModel();
         var instanceId = opendatakit.getCurrentInstanceId();
-        databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, name, value, that.pendingChanges );
+        databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, name, value, that.pendingChanges, false );
 
         that._applyPendingChangesToModelData(model, instanceId, false);
     },
@@ -633,6 +670,11 @@ return {
             ctxt.success();
             return;
         }
+		if ( $.isEmptyObject(that.pendingChanges) ) {
+			ctxt.success();
+			return;
+		}
+		
         that._add_checkpoint($.extend({}, ctxt, {
                 failure:function(m) {
                     // a failure happened during writing -- reload state from db
@@ -685,6 +727,8 @@ return {
                 failure:function(m) {
                     // a failure happened during writing -- reload state from db
                     that.get_all_data($.extend({},ctxt,{success:function() {
+                            ctxt.failure(m);
+                        }, failure:function(m2) {
                             ctxt.failure(m);
                         }}), model, instanceId);
                 }
