@@ -1,138 +1,104 @@
 #!/bin/bash
+TEMP="/formDef.json"
+rm -r tempZipDir
 
-rootDir=$(pwd)
+mkdir tempZipDir
+mkdir tempZipDir/surveyDir
+mkdir tempZipDir/surveyDir/config
+mkdir tempZipDir/surveyDir/config/assets
+mkdir tempZipDir/surveyDir/config/assets/css
+mkdir tempZipDir/surveyDir/config/assets/framework
+mkdir tempZipDir/surveyDir/config/assets/img
 
-# Parse arguments
-while getopts ':s:t:r:' opt; do
-  case $opt in
-    s)
-      surveyCopyPath=${OPTARG}
-      ;;
-    t)
-      tablesCopyPath=${OPTARG}
-      ;;
-    r)
-      rootDir=${OPTARG}
-      ;;
-    \?)
-      echo "Invalid option: -$OPTARG" >&2
-      exit 1
-      ;;
-    :)
-      echo "Option -$OPTARG requires an argument." >&2
-      exit 1
-      ;;
-  esac
-done
-
-# Build temp file structure
-appDir="$rootDir/app"
-appConfig="$appDir/config"
-appSystem="$appDir/system"
-tempZipDir="$rootDir/tempZipDir"
-surveyDir="$tempZipDir/surveyDir"
-surveyConfig="$surveyDir/config"
-surveySystem="$surveyDir/system"
-tablesDir="$tempZipDir/tablesDir"
-tablesConfig="$tablesDir/config"
-tablesSystem="$tablesDir/system"
-
-rm -rf "$tempZipDir"
-
-mkdir "$tempZipDir"
-mkdir "$surveyDir"
-mkdir "$surveyConfig"
-mkdir "$surveyConfig/assets"
-mkdir "$surveyConfig/assets/css"
-mkdir "$surveyConfig/assets/framework"
-mkdir "$surveyConfig/assets/img"
-
-mkdir "$surveySystem"
-mkdir "$surveySystem/js"
-mkdir "$surveySystem/libs"
-mkdir "$surveySystem/survey"
-mkdir "$surveySystem/survey/js"
-mkdir "$surveySystem/survey/templates"
+mkdir tempZipDir/surveyDir/system
+mkdir tempZipDir/surveyDir/system/js
+mkdir tempZipDir/surveyDir/system/survey
+mkdir tempZipDir/surveyDir/system/survey/js
+mkdir tempZipDir/surveyDir/system/survey/templates
 
 
 # Move all the necessary Survey config files over
 # Survey config CSS files
-cp "$appConfig/assets/css/odk-survey.css" "$surveyConfig/assets/css/odk-survey.css"
+cp app/config/assets/css/odk-survey.css tempZipDir/surveyDir/config/assets/css/odk-survey.css
 
 # Survey config frameowrk files
-cp -r "$appConfig/assets/framework"/* "$surveyConfig/assets/framework"
+cp -r app/config/assets/framework/ tempZipDir/surveyDir/config/assets/framework
 
 # Survey config img files
-cp "$appConfig/assets/img/advance.png" "$surveyConfig/assets/img/advance.png"
-cp "$appConfig/assets/img/backup.png" "$surveyConfig/assets/img/backup.png"
-cp "$appConfig/assets/img/form_logo.png" "$surveyConfig/assets/img/form_logo.png"
-cp "$appConfig/assets/img/play.png" "$surveyConfig/assets/img/play.png"
+cp app/config/assets/img/advance.png tempZipDir/surveyDir/config/assets/img/advance.png
+cp app/config/assets/img/backup.png tempZipDir/surveyDir/config/assets/img/backup.png
+cp app/config/assets/img/form_logo.png tempZipDir/surveyDir/config/assets/img/form_logo.png
+cp app/config/assets/img/play.png tempZipDir/surveyDir/config/assets/img/play.png
 
 #Move all the necessary Survey system files over
-cp "$appSystem/index.html" "$surveySystem/index.html"
+cp app/system/index.html tempZipDir/surveyDir/system/index.html
 
 # Survey system js files
-cp -r "$appSystem/js"/* "$surveySystem/js"
+cp -r app/system/js/* tempZipDir/surveyDir/system/js
 
 # Survey system libs files
-cp -r "$appSystem/libs"/* "$surveySystem/libs"
+cp -r app/system/libs/* tempZipDir/surveyDir/system/libs
 
 # Survey system survey files
-cp -r "$appSystem/survey/js"/* "$surveySystem/survey/js"
-cp -r "$appSystem/survey/templates"/* "$surveySystem/survey/templates"
+cp -r app/system/survey/js/* tempZipDir/surveyDir/system/survey/js
+cp -r app/system/survey/templates/* tempZipDir/surveyDir/system/survey/templates
 
-cd $surveyDir
+cd tempZipDir/surveyDir
 zip -r config.zip config
 zip -r system.zip system
-cd -
 
-mv "$surveyDir/config.zip" "$surveyDir/configzip"
-mv "$surveyDir/system.zip" "$surveyDir/systemzip"
+mv config.zip configzip
+mv system.zip systemzip
 
-if [ $surveyCopyPath ]; then
-    cp "$surveyDir/configzip" "$surveyCopyPath"
-    cp "$surveyDir/systemzip" "$surveyCopyPath"
+if [ "$1" ]; then
+    cp configzip "$1"
+    cp systemzip "$1"
 fi
 
-mkdir "$tablesDir"
-mkdir "$tablesConfig"
-mkdir "$tablesConfig/assets"
-mkdir "$tablesConfig/assets/img"
-mkdir "$tablesConfig/assets/libs"
+cd ../..
 
-mkdir "$tablesSystem"
-mkdir "$tablesSystem/js"
-mkdir "$tablesSystem/libs"
-mkdir "$tablesSystem/tables"
+mkdir tempZipDir/tablesDir
+mkdir tempZipDir/tablesDir/config
+mkdir tempZipDir/tablesDir/config/assets
+mkdir tempZipDir/tablesDir/config/assets/img
+mkdir tempZipDir/tablesDir/config/assets/libs
+
+mkdir tempZipDir/tablesDir/system
+mkdir tempZipDir/tablesDir/system/js
+mkdir tempZipDir/tablesDir/system/libs
+mkdir tempZipDir/tablesDir/system/tables
 
 
 # Move all the necessary Tables config files over
 # Tables config img files
-cp "$appConfig/assets/img/little_arrow.png" "$tablesConfig/assets/img/little_arrow.png"
+cp app/config/assets/img/little_arrow.png tempZipDir/tablesDir/config/assets/img/little_arrow.png
 
 # Tables config libs files
-cp -r "$appConfig/assets/libs"/* "$tablesConfig/assets/libs"
+cp -r app/config/assets/libs/* tempZipDir/tablesDir/config/assets/libs
 
 # Move all the necessary Tables system files over
 # Tables system js files
-cp -r "$appSystem/js"/* "$tablesSystem/js"
+cp -r app/system/js/* tempZipDir/tablesDir/system/js
 
 # Tables system libs files
-cp -r "$appSystem/libs"/* "$tablesSystem/libs"
+cp -r app/system/libs/* tempZipDir/tablesDir/system/libs
 
 # Tables system tables files
-cp -r "$appSystem/tables"/* "$tablesSystem/tables"
+cp -r app/system/tables/* tempZipDir/tablesDir/system/tables
 
-cd $tablesDir
+cd tempZipDir/tablesDir
 zip -r config.zip config
 zip -r system.zip system
-cd -
 
-mv "$tablesDir/config.zip" "$tablesDir/configzip"
-mv "$tablesDir/system.zip" "$tablesDir/systemzip"
+mv config.zip configzip
+mv system.zip systemzip
 
-if [ "$tablesCopyPath" ]; then
-    cp "$tablesDir/configzip" "$tablesCopyPath"
-    cp "$tablesDir/systemzip" "$tablesCopyPath"
+if [ "$2" ]; then
+    cp configzip "$2"
+    cp systemzip "$2"
 fi
+
+cd ../..
+
+
 

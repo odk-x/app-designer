@@ -496,14 +496,13 @@ promptTypes.instances = promptTypes.base.extend({
     type:"instances",
     hideInContents: true,
     valid: true,
-    _cachedEvent: null,
     savepoint_type_finalized_text: 'Finalized',
     savepoint_type_incomplete_text: 'Incomplete',
     savepoint_type_checkpoint_text: 'Checkpoint',
     templatePath: "templates/instances.handlebars",
     events: {
         "click .openInstance": "openInstance",
-        "click .deleteInstance": "confirmDeleteInstance",
+        "click .deleteInstance": "deleteInstance",
         "click .createInstance": "createInstance"
     },
     configureRenderContext: function(ctxt) {
@@ -589,24 +588,12 @@ promptTypes.instances = promptTypes.base.extend({
             }}));
         }
     },
-    confirmDeleteInstance: function(evt) {
-        var that  = this;
-        that._cachedEvent = evt;
-        var instanceDisplayValueToDelete = $(evt.currentTarget).attr('display_value');
-        that._screen._screenManager.showConfirmationPopup({message: "Delete " + instanceDisplayValueToDelete + " ?",
-                                                           promptIndex: that.promptIdx});
-    },
-    handleConfirmation: function(){
+    deleteInstance: function(evt){
         var that = this;
-
-        if (that._cachedEvent === null || that._cachedEvent == undefined) {
-            return;
-        }
-
-        var instanceIdToDelete = $(that._cachedEvent.currentTarget).attr('id');
+        var instanceIdToDelete = $(evt.currentTarget).attr('id');
 
         if ( instanceIdToDelete !== null && instanceIdToDelete !== undefined ) {
-            var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".deleteInstance");
+            var ctxt = that.controller.newContext(evt, that.type + ".deleteInstance");
             that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
                 ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
                 var model = opendatakit.getCurrentModel();
@@ -636,7 +623,7 @@ promptTypes.contents = promptTypes.base.extend({
         odkCommon.log('D',"prompts." + that.type + ".selectContentsItem: click detected: " + evt.target);
         var $target = $(evt.target).closest('.select-contents-item');
         $target.attr("label", function(index, oldPropertyValue){
-            odkCommon.log('D',"prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue +
+            ctxt.log('D',"prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue,
                 "px: " + that.promptIdx);
             selectedScreenPath = oldPropertyValue;
         });
@@ -1360,17 +1347,7 @@ promptTypes.select_one = promptTypes.select.extend({
                         otherValue = _.find(jsonFormSerialization, function(valueObject) {
                             return ('otherValue' === valueObject.name);
                         });
-                        if (otherValue !== null && 
-                            otherValue !== undefined &&
-                            otherValue.value !== null &&
-                            otherValue.value !== undefined &&
-                            otherValue.value.length !== 0) {
-                            return otherValue.value;
-                        } else {
-                            // We need to store a space since null values
-                            // are not allowed in the database
-                            return ' ';
-                        }
+                        return (otherValue ? otherValue.value : '');
                     }
                 }
                 return selectedValue.value;
@@ -1552,7 +1529,7 @@ promptTypes.select_one_grid = promptTypes.select_one.extend({
                 return ('otherValue' === valueObject.name);
             });
             that.renderContext.other = {
-                value: otherObject ? otherObject.value : ' ',
+                value: otherObject ? otherObject.value : '',
                 checked: _.any(formValue, function(valueObject) {
                     return ('other' === valueObject.value);
                 })
@@ -1564,10 +1541,7 @@ promptTypes.select_one_inline = promptTypes.select_one.extend({
     templatePath: "templates/select_inline.handlebars"
 });
 promptTypes.select_one_dropdown = promptTypes.select_one.extend({
-    templatePath: "templates/select_dropdown.handlebars",
-    renderContext: {
-        "selectOneDropDownText": translations.selectDropdownLabel
-    }
+    templatePath: "templates/select_dropdown.handlebars"
 });
 promptTypes.select_multiple_grid = promptTypes.select_multiple.extend({
     templatePath: "templates/select_grid.handlebars",

@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <link href="css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript">
+		
+        var insideQueue = false;
+		var htmlFileNameValue = "distribution_start";
+		var userActionValue = "launchBarcode";
+
+
+		function display() {
+			var launchBarcodeButton = $('#launch-barcode');
+    		launchBarcodeButton.on(
+        	'click',
+        	function() {
+            	odkCommon.registerListener(function() {
+                	    callBackFn();
+            	});
+
+            	var dispatchString = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
+            	odkCommon.doAction(dispatchString, 'com.google.zxing.client.android.SCAN', null);
+        	});
+      	    myTimeoutVal = setTimeout(callBackFn(), 1000);
+    	}
+
+    	var myTimeoutVal = null;
+
+
+    	function callBackFn () {
+		    if (insideQueue == true) return;
+		    insideQueue = true;
+		    var value = odkCommon.viewFirstQueuedAction();
+		    if ( value !== null && value !== undefined ) {
+		        var action = JSON.parse(value);
+		        var dispatchStr = JSON.parse(action.dispatchString);
+
+		        console.log("callBackFn: action: " + dispatchStr.userAction + " htmlPath: " + dispatchStr.htmlPath);
+
+		        if (dispatchStr.userAction === userActionValue &&
+		            dispatchStr.htmlPath === htmlFileNameValue &&
+		            action.jsonValue.status === -1) {
+		            $('#scanned-barcode').text(action.jsonValue.result.SCAN_RESULT);
+		            clearTimeout(myTimeoutVal);
+		            odkCommon.removeFirstQueuedAction();
+		         	odkTables.openTableToListView(
+			        	'distribution',
+			        	'beneficiary_code = ? and is_distributed = ?',
+			        	[action.jsonValue.result.SCAN_RESULT, 'false'],
+			        	'config/tables/distribution/html/dist_ben_list.html'
+			       	);
+		        } else {
+		            myTimeoutVal = setTimeout(callBackFn(), 1000);
+		            $('#scanned-barcode').text("No value");
+		        }
+		    }
+    		console.log("callBackFn is called");
+    		insideQueue = false;
+
+		} 
+
+		</script>
+	</head>
+
+
+	
+	<body onload="display();">
+	<h2>Please Scan or Enter The Beneficiary Barcode</h2>
+	<button id="launch-barcode" class="btn btn-launch btn-primary btn-block btn-plotter">Launch Barcode</button>
+	<p>Scanned BarCode: <span id="scanned-barcode"></span></p>
+
+	</body>

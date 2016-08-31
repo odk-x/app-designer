@@ -6,7 +6,7 @@ var fs = require('fs');
 var path = require('path');
 var Buffer = require('buffer').Buffer;
 var constants = require('constants');
-var XLSX = require('./xlsxconverter/js-xlsx');
+var XLSX = require('xlsx');
 var util = require('./devEnv/js/devenv-util.js');
 
 function to_json(workbook) {

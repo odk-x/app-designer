@@ -12,11 +12,9 @@
 <body>
     <div id="mocha"></div>
     <script type="text/javascript">
-        $(function() {
-		  mocha.setup('bdd');
-          window._filesLoaded = 0;
-          window._totalToLoad = 2;
-		  });
+        mocha.setup('bdd');
+        window._filesLoaded = 0;
+        window._totalToLoad = 2;
     </script>
     <script type="text/javascript" src="./tables/js/model/control.js"></script>
     <script type="text/javascript" src="./tables/js/model/data.js"></script>

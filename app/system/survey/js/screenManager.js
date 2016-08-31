@@ -493,7 +493,7 @@ return Backbone.View.extend({
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
             ctxt.log('D','screenManager.setLanguage',
                 ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
-            that.controller.setLocale(ctxt, $(evt.target).attr("id"));
+            this.controller.setLocale(ctxt, $(evt.target).attr("id"));
         }, failure: function(m) {
             ctxt.log('D','screenManager.setLanguage -- prior event terminated with an error -- aborting!',
                 ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
@@ -553,14 +553,14 @@ return Backbone.View.extend({
             // text: msg.text,
             // textVisible: true
         // });
-        $('body').waitMe({
-            effect: 'roundBounce',
-            text: 'Loading ...',
-            bg: 'rgba(255,255,255,0.7)',
-            color:'#000',
-            sizeW:'',
-            sizeH:''
-        });
+//         $('body').waitMe({
+//             effect: 'roundBounce',
+//             text: 'Loading ...',
+//             bg: 'rgba(255,255,255,0.7)',
+//             color:'#000',
+//             sizeW:'',
+//             sizeH:''
+//         });
     },
     hideSpinnerOverlay: function() {
         //window.$.mobile.loading( 'hide' );
