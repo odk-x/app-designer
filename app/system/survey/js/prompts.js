@@ -1194,6 +1194,9 @@ promptTypes.select = promptTypes._linked_type.extend({
                     selectedValues.push(otherObject.value);
                 }
             }
+            if (selectedValues !== null && (selectedValues === undefined || selectedValues.length === 0)) {
+              selectedValues = null;
+            }
             return selectedValues;
         }
         return null;
