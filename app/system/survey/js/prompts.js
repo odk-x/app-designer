@@ -388,7 +388,9 @@ promptTypes.opening = promptTypes.base.extend({
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName !== null && displayElementName !== undefined ) {
             that.renderContext.display_field = database.getDataValue(displayElementName);
-        } else {
+        } else if ( ts === null ) {
+			that.renderContext.display_field = null;
+		} else {
             // Now we are always going to display instance id
             // unless this decision changes ...
             that.renderContext.display_field = ts.toISOString();
