@@ -129,7 +129,46 @@ return Backbone.View.extend({
     },
     refreshScreen: function(ctxt) {
         var that = this;
-        that.commonDrawScreen(ctxt);
+        that.commonDrawScreen($.extend({},ctxt,{
+			failure: function(m) {
+				// add a terminal context to display the pop-up message
+				// If the error caused a rolling-back of data values, as indicated
+				// by m.rolledBack === true, then refresh the screen (to update
+				// values to those from database) before displaying the pop-up message.
+				var opPath = that.controller.getCurrentScreenPath();
+				if ( m !== undefined && m !== null && m.rolledBack ) {
+					// unwind and re-draw the current screen to restore the database values on it; then display error message
+					var refreshCtxt = that.controller.newCallbackContext("screenManager:refreshScreen,rolledBack");
+					ctxt.setTerminalContext($.extend({}, refreshCtxt, {
+						success: function() {
+							that.refreshScreen($.extend({}, refreshCtxt, {
+								success: function() {
+									refreshCtxt.setTerminalContext(that.controller._synthesizePopupContext(opPath, m));
+									refreshCtxt.success();
+								}, 
+								failure: function(m2) {
+									refreshCtxt.setTerminalContext(that.controller._synthesizePopupContext(opPath, m));
+									refreshCtxt.failure(m2);
+							}}));
+						}, 
+						failure: function(m2) {
+							that.refreshScreen($.extend({}, refreshCtxt, {
+								success: function() {
+									refreshCtxt.setTerminalContext(that.controller._synthesizePopupContext(opPath, m));
+									refreshCtxt.failure(m2);
+								}, 
+								failure: function(m3) {
+									refreshCtxt.setTerminalContext(that.controller._synthesizePopupContext(opPath, m));
+									// drop cause of m3
+									refreshCtxt.failure(m2);
+							}}));
+						}}));
+					ctxt.failure(m);
+				} else {
+					ctxt.setTerminalContext(that.controller._synthesizePopupContext(opPath, m));
+					ctxt.failure(m);
+				}
+			}}));
      },
     setScreen: function(ctxt, screen, popScreenOnExit){
         var that = this;
@@ -215,9 +254,9 @@ return Backbone.View.extend({
             }, failure: function(m) {
                 ctxt.log('D', "screenManager.commonDrawScreen.ultimate.failure (via terminalContext)");
                 window.clearTimeout(activateTimeout);
-                that.hideSpinnerOverlay();
-                that.pageChangeActionLockout = false;
-                ctxt.failure(m);
+				that.hideSpinnerOverlay();
+				that.pageChangeActionLockout = false;
+				ctxt.failure(m);
             }});
 
         //A better way to do this might be to pass a controller interface object to

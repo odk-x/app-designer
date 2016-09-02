@@ -388,7 +388,9 @@ promptTypes.opening = promptTypes.base.extend({
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName !== null && displayElementName !== undefined ) {
             that.renderContext.display_field = database.getDataValue(displayElementName);
-        } else {
+        } else if ( ts === null ) {
+			that.renderContext.display_field = null;
+		} else {
             // Now we are always going to display instance id
             // unless this decision changes ...
             that.renderContext.display_field = ts.toISOString();
@@ -538,11 +540,21 @@ promptTypes.instances = promptTypes.base.extend({
                     var savepoint_type = term.savepoint_type;
                     if ( savepoint_type === opendatakit.savepoint_type_complete ) {
                         term.savepoint_type_text = that.savepoint_type_finalized_text;
+						term.is_checkpoint = false;
                     } else if ( savepoint_type === opendatakit.savepoint_type_incomplete ) {
                         term.savepoint_type_text = that.savepoint_type_incomplete_text;
+						term.is_checkpoint = false;
                     } else {
                         term.savepoint_type_text = that.savepoint_type_checkpoint_text;
+						term.is_checkpoint = true;
                     }
+					// this field is undefined if rendering through the app designer
+					var effective_access = term.effective_access;
+					if ( effective_access === "rwd" || effective_access === undefined ) {
+						term.show_delete = true;
+					} else {
+						term.show_delete = false;
+					}
                     return term;
                 });
 
@@ -1183,6 +1195,9 @@ promptTypes.select = promptTypes._linked_type.extend({
                         });
                     selectedValues.push(otherObject.value);
                 }
+            }
+            if (selectedValues !== null && (selectedValues === undefined || selectedValues.length === 0)) {
+              selectedValues = null;
             }
             return selectedValues;
         }
@@ -2129,6 +2144,21 @@ promptTypes.media = promptTypes.base.extend({
                 return '';
             }
         }
+    },
+    getValue: function() {
+        if (!this.name) {
+            console.error("prompts.media.getValue: Cannot get value of prompt with no name. px: "
+                          + this.promptIdx);
+            throw new Error("Cannot get value of prompt with no name.");
+        }
+        var value = database.getDataValue(this.name);
+        if (value === null || value === undefined) {
+          return null;
+        }
+        if (value.uriFragment === null || value.uriFragment === undefined) {
+            return null;
+        }
+        return value;
     }
 });
 promptTypes.read_only_image = promptTypes.media.extend({
@@ -2246,6 +2276,19 @@ promptTypes.barcode = promptTypes.launch_intent.extend({
     intentString: 'com.google.zxing.client.android.SCAN',
      extractDataValue: function(jsonObject) {
         return jsonObject.result.SCAN_RESULT;
+    },
+    getValue: function() {
+        if (!this.name) {
+            console.error("prompts.barcode.getValue: Cannot get value of prompt with no name. px: "
+                          + this.promptIdx);
+            throw new Error("Cannot get value of prompt with no name.");
+        }
+        var value = database.getDataValue(this.name);
+        if (value === null || value === undefined ||
+            value.SCAN_RESULT === null || value.SCAN_RESULT === undefined) {
+            return null;
+        }
+        return value;
     }
 });
 promptTypes.geopoint = promptTypes.launch_intent.extend({
@@ -2277,6 +2320,24 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
                 return null;
             }
         }
+    },
+    getValue: function() {
+        if (!this.name) {
+            console.error("prompts.geopoint.getValue: Cannot get value of prompt with no name. px: "
+                          + this.promptIdx);
+            throw new Error("Cannot get value of prompt with no name.");
+        }
+        var value = database.getDataValue(this.name);
+        if (value === null || value === undefined) {
+          return null;
+        }
+        if ((value.latitude === null || value.latitude === undefined) &&
+            (value.longitude === null || value.longitude === undefined) &&
+            (value.altitude === null || value.altitude === undefined) &&
+            (value.accuracy === null || value.accuracy === undefined)) {
+            return null;
+        }
+        return value;
     }
 });
 promptTypes.geopointmap = promptTypes.launch_intent.extend({
@@ -2306,6 +2367,24 @@ promptTypes.geopointmap = promptTypes.launch_intent.extend({
                 return null;
             }
         }
+    },
+    getValue: function() {
+        if (!this.name) {
+            console.error("prompts.geopointmap.getValue: Cannot get value of prompt with no name. px: "
+                          + this.promptIdx);
+            throw new Error("Cannot get value of prompt with no name.");
+        }
+        var value = database.getDataValue(this.name);
+        if (value === null || value === undefined) {
+          return null;
+        }
+        if ((value.latitude === null || value.latitude === undefined) &&
+            (value.longitude === null || value.longitude === undefined) &&
+            (value.altitude === null || value.altitude === undefined) &&
+            (value.accuracy === null || value.accuracy === undefined)) {
+            return null;
+        }
+        return value;
     }
 });
 promptTypes.note = promptTypes.base.extend({
@@ -3220,4 +3299,4 @@ promptTypes.acknowledge = promptTypes.select.extend({
 });
 
 return promptTypes;
-});
+});

@@ -92,6 +92,14 @@ window.odkData = {
         that.getOdkDataIf().getMostRecentRow(tableId, rowId, req._callbackId);
     },
 
+	changeAccessFilterOfRow: function(tableId, filterType, filterValue, rowId, successCallbackFn, failureCallbackFn) {
+        var that = this;
+
+        var req = that.queueRequest('changeAccessFilterOfRow', successCallbackFn, failureCallbackFn);
+
+    that.getOdkDataIf().changeAccessFilterOfRow(tableId, filterType, filterValue, rowId, req._callbackId);
+    },
+	
     updateRow: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
@@ -299,8 +307,6 @@ window.odkData = {
     //
     __getResultData : function() {
 
-        var resultObj = null;
-
         /**
          * Returns true if str is a string, else false.
          */
@@ -320,419 +326,653 @@ window.odkData = {
         };
 
         // This is the object that will wrap up the result from an async query.
-        var pub = {};
+        var pub = {
+            resultObj : null,
 
-        /**
-         * This function is used to set the 
-         * backing data object that all of the 
-         * member functions operate on
-         *
-         * jsonObj should be a JSON object.
-         */
-        pub.setBackingObject = function(jsonObj) {
-            resultObj = jsonObj;
-        };
+            /**
+             * This function is used to set the 
+             * backing data object that all of the 
+             * member functions operate on
+             *
+             * jsonObj should be a JSON object.
+             */
+            setBackingObject:function(jsonObj) {
+                this.resultObj = jsonObj;
+            },
 
-        pub.getCount = function() {
-            if (resultObj === null || resultObj === undefined) {
-                return 0;
-            }
+            // get the number of rows in the result set
+            getCount:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return 0;
+                }
 
-            if (resultObj.data === null || resultObj.data === undefined) {
-                return 0;
-            }
+                if (that.resultObj.data === null || that.resultObj.data === undefined) {
+                    return 0;
+                }
 
-            return resultObj.data.length;
-        };
+                return that.resultObj.data.length;
+            },
 
-        pub.getColumnData = function(elementKey) {
-            if (resultObj === null || resultObj === undefined) {
-                return null;
-            }
+            // convert the elementPath to a unique elementKey (column name in database)
+            // assumes the elementPath is a unit of retention in the database.
+            getElementKey:function(elementPath) {
+                var that = this;
+                var hackPath = elementPath.replace(/\./g, "_");
+                return hackPath;
+            },
 
-            if (arguments.length !== 1) {
-                throw 'getColumnData()--incorrect number of arguments';
-            }
+            // get a vector of the values for the given elementKey.
+            // useful for generating plots and graphs.
+            // assumes the field is a unit of retention in the database
+            getColumnData:function(elementKeyOrPath) {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
 
-            if (!isString(elementKey)) {
-                throw 'getColumnData()--elementKey not a string';
-            }
+                if (arguments.length !== 1) {
+                    throw 'getColumnData()--incorrect number of arguments';
+                }
 
-            elementKey = elementKey.replace(/\./g,'_');
+                if (!isString(elementKeyOrPath)) {
+                    throw 'getColumnData()--elementKey not a string';
+                }
 
-            var colData = [];
-            for (var i = 0; i < pub.getCount(); i ++) {
-                colData.push(pub.getData(i, elementKey));
-            }
+                var elementKey = that.getElementKey(elementKeyOrPath);
 
-            return colData;
-        };
+                var colData = [];
+                for (var i = 0; i < that.getCount(); i ++) {
+                    colData.push(that.getData(i, elementKey));
+                }
 
-        pub.getTableId = function() {
-            if (resultObj === null || resultObj === undefined) {
-                return null;
-            }
+                return colData;
+            },
 
-            if (resultObj.metadata === null || resultObj.metadata === undefined) {
-                return null;
-            }
+            // get the _id (a.k.a. instance id -- a component of the PK) 
+            // of a row in the result set.
+            getRowId:function(rowNumber) {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
 
-            return resultObj.metadata.tableId;
-        };
+                if (that.resultObj.data === null || that.resultObj.data === undefined) {
+                    return null;
+                }
 
-        pub.getRowId = function(index) {
-            if (resultObj === null || resultObj === undefined) {
-                return null;
-            }
+                if (arguments.length !== 1) {
+                    throw 'getRowId()--incorrect number of arguments';
+                }
 
-            if (resultObj.data === null || resultObj.data === undefined) {
-                return null;
-            }
+                if (!isInteger(rowNumber)) {
+                    throw 'getRowId()--index must be an integer';
+                }
+        
+                return that.getData(rowNumber, '_id');
+            },
 
-            if (arguments.length !== 1) {
-                throw 'getRowId()--incorrect number of arguments';
-            }
+            // get the value for an individual field in a row of the result set
+            // assumes the field is a unit of retention in the database
+            getData:function(rowNumber, elementKeyOrPath) {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
 
-            if (!isInteger(index)) {
-                throw 'getRowId()--index must be an integer';
-            }
-    
-            return pub.getData(index, '_id');
-        };
+                if (that.resultObj.data === null || that.resultObj.data === undefined) {
+                    return null;
+                }
 
-        pub.getColumns = function() {
-            if (resultObj === null || resultObj === undefined) {
-                return null;
-            }
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
 
-            if (resultObj.metadata === null || resultObj.metadata === undefined) {
-                return null;
-            }
+                if (that.resultObj.metadata.elementKeyMap === null || 
+                    that.resultObj.metadata.elementKeyMap === undefined) {
+                    return null;
+                }
 
-            if (resultObj.metadata.orderedColumns === null || resultObj.metadata.orderedColumns === undefined) {
-                return null;
-            }
+                if (arguments.length !== 2) {
+                    throw 'getData()--incorrect number of arguments';
+                }
 
-            return resultObj.metadata.orderedColumns;
-        };
+                if (!isInteger(rowNumber)) {
+                    throw 'getData()--rowNumber must be an integer';
+                }
 
-        pub.getRowForegroundColor = function(rowNumber) {
-            if (resultObj === null || resultObj === undefined) {
-                return null;
-            }
+                if (!isString(elementKeyOrPath)) {
+                    throw 'getData()--elementKey must be a string';
+                }
 
-            if (resultObj.metadata === null || resultObj.metadata === undefined) {
-                return null;
-            }
+                var elementKey = that.getElementKey(elementKeyOrPath);
 
-            if (resultObj.metadata.rowColors === null || resultObj.metadata.rowColors === undefined) {
-                return null;
-            }
+                var colIndex = that.resultObj.metadata.elementKeyMap[elementKey];
+                return that.resultObj.data[rowNumber][colIndex];
+            },
 
-            if (arguments.length !== 1) {
-                throw 'getRowForegroundColor()--incorrect number of arguments';
-            }
+            // for singleton result sets, get the value of the given field.
+            // assumes the field is a unit of retention in the database
+            get:function(elementKeyOrPath) {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
 
-            if (!isInteger(rowNumber)) {
-                throw 'getRowForegroundColor()--rowNumber must be an integer';
-            }
+                if (arguments.length !== 1) {
+                    throw 'get()--incorrect number of arguments';
+                }
+                return that.getData(0, elementKeyOrPath);
+            },
 
-            var colorArray = resultObj.metadata.rowColors;
+            //////////////////////////////////////////////////////////////////////////////
+            // metadata content passed back for use in interpreting the result set
+            
+            getTableId:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
 
-            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
-                for (var i = 0; i < colorArray.length; i++) {
-                    if (colorArray[i].rowIndex === rowNumber) {
-                        return colorArray[i].foregroundColor;
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                return that.resultObj.metadata.tableId;
+            },
+
+            // get the limit setting for the number of rows in the result set
+            getLimit:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                var retval = that.resultObj.metadata.limit;
+                
+                if ( retval === undefined ) {
+                    return null;
+                }
+                return retval;
+            },
+
+            // get the offset setting for the result set
+            getOffset:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                var retval = that.resultObj.metadata.offset;
+                
+                if ( retval === undefined ) {
+                    return null;
+                }
+                return retval;
+            },
+            
+            getColumns:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata.elementKeyMap === null || 
+                    that.resultObj.metadata.elementKeyMap === undefined) {
+                    return null;
+                }
+
+                var elementKeyMap = that.resultObj.metadata.elementKeyMap;
+                
+                var columns = [];
+                var i;
+                var key;
+                for ( key in elementKeyMap ) {
+                    i = elementKeyMap[key];
+                    columns[i] = key;
+                }
+                return columns;
+            },
+
+            getRowForegroundColor:function(rowNumber) {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata.rowColors === null || 
+                    that.resultObj.metadata.rowColors === undefined) {
+                    return null;
+                }
+
+                if (arguments.length !== 1) {
+                    throw 'getRowForegroundColor()--incorrect number of arguments';
+                }
+
+                if (!isInteger(rowNumber)) {
+                    throw 'getRowForegroundColor()--rowNumber must be an integer';
+                }
+
+                var colorArray = that.resultObj.metadata.rowColors;
+
+                if (rowNumber >= 0 && rowNumber < that.getCount()) {
+                    for (var i = 0; i < colorArray.length; i++) {
+                        if (colorArray[i].rowIndex === rowNumber) {
+                            return colorArray[i].foregroundColor;
+                        }
                     }
                 }
-            }
-            return null;
-        };
-
-        pub.getRowBackgroundColor = function(rowNumber) {
-            if (resultObj === null || resultObj === undefined) {
                 return null;
-            }
+            },
 
-            if (resultObj.metadata === null || resultObj.metadata === undefined) {
-                return null;
-            }
+            getRowBackgroundColor:function(rowNumber) {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
 
-            if (resultObj.metadata.rowColors === null || resultObj.metadata.rowColors === undefined) {
-                return null;
-            }
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
 
-            if (arguments.length !== 1) {
-                throw 'getRowBackgroundColor()--incorrect number of arguments';
-            }
+                if (that.resultObj.metadata.rowColors === null || 
+                    that.resultObj.metadata.rowColors === undefined) {
+                    return null;
+                }
 
-            if (!isInteger(rowNumber)) {
-                throw 'getRowBackgroundColor()--rowNumber must be an integer';
-            }
+                if (arguments.length !== 1) {
+                    throw 'getRowBackgroundColor()--incorrect number of arguments';
+                }
 
-            var colorArray = resultObj.metadata.rowColors;
+                if (!isInteger(rowNumber)) {
+                    throw 'getRowBackgroundColor()--rowNumber must be an integer';
+                }
 
-            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
-                for (var i = 0; i < colorArray.length; i++) {
-                    if (colorArray[i].rowIndex === rowNumber) {
-                        return colorArray[i].backgroundColor;
+                var colorArray = that.resultObj.metadata.rowColors;
+
+                if (rowNumber >= 0 && rowNumber < that.getCount()) {
+                    for (var i = 0; i < colorArray.length; i++) {
+                        if (colorArray[i].rowIndex === rowNumber) {
+                            return colorArray[i].backgroundColor;
+                        }
                     }
                 }
-            }
-            return null;
-
-        };
-
-        pub.getStatusForegroundColor = function(rowNumber) {
-            if (resultObj === null || resultObj === undefined) {
                 return null;
-            }
 
-            if (resultObj.metadata === null || resultObj.metadata === undefined) {
-                return null;
-            }
+            },
 
-            if (resultObj.metadata.statusColors === null || resultObj.metadata.statusColors === undefined) {
-                return null;
-            }
+            getStatusForegroundColor:function(rowNumber) {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
 
-            if (arguments.length !== 1) {
-                throw 'getStatusForegroundColor()--incorrect number of arguments';
-            }
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
 
-            if (!isInteger(rowNumber)) {
-                throw 'getStatusForegroundColor()--rowNumber must be an integer';
-            }
+                if (that.resultObj.metadata.statusColors === null || 
+                    that.resultObj.metadata.statusColors === undefined) {
+                    return null;
+                }
 
-            var colorArray = resultObj.metadata.statusColors;
+                if (arguments.length !== 1) {
+                    throw 'getStatusForegroundColor()--incorrect number of arguments';
+                }
 
-            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
-                for (var i = 0; i < colorArray.length; i++) {
-                    if (colorArray[i].rowIndex === rowNumber) {
-                        return colorArray[i].foregroundColor;
+                if (!isInteger(rowNumber)) {
+                    throw 'getStatusForegroundColor()--rowNumber must be an integer';
+                }
+
+                var colorArray = that.resultObj.metadata.statusColors;
+
+                if (rowNumber >= 0 && rowNumber < that.getCount()) {
+                    for (var i = 0; i < colorArray.length; i++) {
+                        if (colorArray[i].rowIndex === rowNumber) {
+                            return colorArray[i].foregroundColor;
+                        }
                     }
                 }
-            }
-            return null;
-        };
-
-        pub.getStatusBackgroundColor = function(rowNumber) {
-            if (resultObj === null || resultObj === undefined) {
                 return null;
-            }
+            },
 
-            if (resultObj.metadata === null || resultObj.metadata === undefined) {
-                return null;
-            }
+            getStatusBackgroundColor:function(rowNumber) {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
 
-            if (resultObj.metadata.statusColors === null || resultObj.metadata.statusColors === undefined) {
-                return null;
-            }
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
 
-            if (arguments.length !== 1) {
-                throw 'getStatusBackgroundColor()--incorrect number of arguments';
-            }
+                if (that.resultObj.metadata.statusColors === null || 
+                    that.resultObj.metadata.statusColors === undefined) {
+                    return null;
+                }
 
-            if (!isInteger(rowNumber)) {
-                throw 'getStatusBackgroundColor()--rowNumber must be an integer';
-            }
+                if (arguments.length !== 1) {
+                    throw 'getStatusBackgroundColor()--incorrect number of arguments';
+                }
 
-            var colorArray = resultObj.metadata.statusColors;
+                if (!isInteger(rowNumber)) {
+                    throw 'getStatusBackgroundColor()--rowNumber must be an integer';
+                }
 
-            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
-                for (var i = 0; i < colorArray.length; i++) {
-                    if (colorArray[i].rowIndex === rowNumber) {
-                        return colorArray[i].backgroundColor;
+                var colorArray = that.resultObj.metadata.statusColors;
+
+                if (rowNumber >= 0 && rowNumber < that.getCount()) {
+                    for (var i = 0; i < colorArray.length; i++) {
+                        if (colorArray[i].rowIndex === rowNumber) {
+                            return colorArray[i].backgroundColor;
+                        }
                     }
                 }
-            }
-            return null;
-
-        };
-
-        pub.getColumnForegroundColor = function(rowNumber, elementKey) {
-            if (resultObj === null || resultObj === undefined) {
                 return null;
-            }
 
-            if (resultObj.metadata === null || resultObj.metadata === undefined) {
-                return null;
-            }
+            },
 
-            if (resultObj.metadata.columnColors === null || resultObj.metadata.columnColors === undefined) {
-                return null;
-            }
+            getColumnForegroundColor:function(rowNumber, elementKey) {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
 
-            if (arguments.length !== 2) {
-                throw 'getColumnForegroundColor()--incorrect number of arguments';
-            }
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
 
-            if (!isInteger(rowNumber)) {
-                throw 'getColumnForegroundColor()--rowNumber must be an integer';
-            }
+                if (that.resultObj.metadata.columnColors === null || 
+                    that.resultObj.metadata.columnColors === undefined) {
+                    return null;
+                }
 
-            if (!isString(elementKey)) {
-                throw 'getColumnForegroundColor()--elementKey must be a string';
-            }
+                if (arguments.length !== 2) {
+                    throw 'getColumnForegroundColor()--incorrect number of arguments';
+                }
 
-            if (resultObj.metadata.columnColors[elementKey] === null || resultObj.metadata.columnColors[elementKey] === undefined) {
-                return null;
-            }
+                if (!isInteger(rowNumber)) {
+                    throw 'getColumnForegroundColor()--rowNumber must be an integer';
+                }
 
-            var colorArray = resultObj.metadata.columnColors[elementKey];
+                if (!isString(elementKey)) {
+                    throw 'getColumnForegroundColor()--elementKey must be a string';
+                }
 
-            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
-                for (var i = 0; i < colorArray.length; i++) {
-                    if (colorArray[i].rowIndex === rowNumber) {
-                        return colorArray[i].foregroundColor;
+                if (that.resultObj.metadata.columnColors[elementKey] === null || 
+                    that.resultObj.metadata.columnColors[elementKey] === undefined) {
+                    return null;
+                }
+
+                var colorArray = that.resultObj.metadata.columnColors[elementKey];
+
+                if (rowNumber >= 0 && rowNumber < that.getCount()) {
+                    for (var i = 0; i < colorArray.length; i++) {
+                        if (colorArray[i].rowIndex === rowNumber) {
+                            return colorArray[i].foregroundColor;
+                        }
                     }
                 }
-            }
-            return null;
-        };
-
-        pub.getColumnBackgroundColor = function(rowNumber, elementKey) {
-            if (resultObj === null || resultObj === undefined) {
                 return null;
-            }
+            },
 
-            if (resultObj.metadata === null || resultObj.metadata === undefined) {
-                return null;
-            }
+            getColumnBackgroundColor:function(rowNumber, elementKey) {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
 
-            if (resultObj.metadata.columnColors === null || resultObj.metadata.columnColors === undefined) {
-                return null;
-            }
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
 
-            if (arguments.length !== 2) {
-                throw 'getColumnBackgroundColor()--incorrect number of arguments';
-            }
+                if (that.resultObj.metadata.columnColors === null || 
+                    that.resultObj.metadata.columnColors === undefined) {
+                    return null;
+                }
 
-            if (!isInteger(rowNumber)) {
-                throw 'getColumnBackgroundColor()--rowNumber must be an integer';
-            }
+                if (arguments.length !== 2) {
+                    throw 'getColumnBackgroundColor()--incorrect number of arguments';
+                }
 
-            if (!isString(elementKey)) {
-                throw 'getColumnBackgroundColor()--elementKey must be a string';
-            }
+                if (!isInteger(rowNumber)) {
+                    throw 'getColumnBackgroundColor()--rowNumber must be an integer';
+                }
 
-            if (resultObj.metadata.columnColors[elementKey] === null || resultObj.metadata.columnColors[elementKey] === undefined) {
-                return null;
-            }
+                if (!isString(elementKey)) {
+                    throw 'getColumnBackgroundColor()--elementKey must be a string';
+                }
 
-            var colorArray = resultObj.metadata.columnColors[elementKey];
+                if (that.resultObj.metadata.columnColors[elementKey] === null ||
+                    that.resultObj.metadata.columnColors[elementKey] === undefined) {
+                    return null;
+                }
 
-            if (rowNumber >= 0 && rowNumber < pub.getCount()) {
-                for (var i = 0; i < colorArray.length; i++) {
-                    if (colorArray[i].rowIndex === rowNumber) {
-                        return colorArray[i].backgroundColor;
+                var colorArray = that.resultObj.metadata.columnColors[elementKey];
+
+                if (rowNumber >= 0 && rowNumber < that.getCount()) {
+                    for (var i = 0; i < colorArray.length; i++) {
+                        if (colorArray[i].rowIndex === rowNumber) {
+                            return colorArray[i].backgroundColor;
+                        }
                     }
                 }
-            }
-        };
+            },
 
-        pub.getMapIndex = function() {
-            if (resultObj === null || resultObj === undefined) {
-                return null;
-            }
-
-            if (resultObj.metadata === null || resultObj.metadata === undefined) {
-                return null;
-            }
-
-            if (resultObj.metadata.mapIndex === null || resultObj.metadata.mapIndex === undefined) {
-                return null;
-            }
-
-            return resultObj.metadata.mapIndex;
-        };
-
-        // This is not available in the current API
-        // pub.isGroupedBy = function() {
-        // 
-        //      return resultObj.isGroupedBy;
-        // };
-
-        pub.getData = function(rowNumber, elementKey) {
-            if (resultObj === null || resultObj === undefined) {
-                return null;
-            }
-
-            if (resultObj.data === null || resultObj.data === undefined) {
-                return null;
-            }
-
-            if (resultObj.metadata === null || resultObj.metadata === undefined) {
-                return null;
-            }
-
-            if (resultObj.metadata.elementKeyMap === null || resultObj.metadata.elementKeyMap === undefined) {
-                return null;
-            }
-
-            if (arguments.length !== 2) {
-                throw 'getData()--incorrect number of arguments';
-            }
-
-            if (!isInteger(rowNumber)) {
-                throw 'getData()--rowNumber must be an integer';
-            }
-
-            if (!isString(elementKey)) {
-                throw 'getData()--elementKey must be a string';
-            }
-
-            elementKey = elementKey.replace(/\./g,'_');
-
-            var colIndex = resultObj.metadata.elementKeyMap[elementKey];
-            return resultObj.data[rowNumber][colIndex];
-        };
-
-        pub.get = function(elementKey) {
-            if (resultObj === null || resultObj === undefined) {
-                return null;
-            }
-
-            if (arguments.length !== 1) {
-                throw 'get()--incorrect number of arguments';
-            }
-            return pub.getData(0, elementKey);
-        };
-
-        pub.getElementKey = function(elementPath) {
-            var hackPath = elementPath.replace(/\./g, "_");
-            return hackPath;
-        };
-
-        pub.getColumnDisplayName = function(elementPath) {
-            var kvsLen = resultObj.metadata.keyValueStoreList.length;
-            var retVal = elementPath;
-
-            for (var i = 0; i < kvsLen; i++) {
-                var kvs = resultObj.metadata.keyValueStoreList[i];
-                if (kvs.aspect === elementPath && kvs.partition === 'column' &&
-                    kvs.key === 'displayName') {
-                    retVal = kvs.value;
+            getMapIndex:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
                 }
-            }
 
-            return retVal;
-        };
-
-        pub.getTableDisplayName = function(tableId) {
-            var kvsLen = resultObj.metadata.keyValueStoreList.length;
-            var retVal = tableId;
-
-            for (var i = 0; i < kvsLen; i++) {
-                var kvs = resultObj.metadata.keyValueStoreList[i];
-                if (kvs.aspect === tableId && kvs.partition === 'table' &&
-                    kvs.key === 'displayName') {
-                    retVal = kvs.value;
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
                 }
-            }
 
-            return retVal;
-    
+                if (that.resultObj.metadata.mapIndex === null || 
+                    that.resultObj.metadata.mapIndex === undefined) {
+                    return null;
+                }
+
+                return that.resultObj.metadata.mapIndex;
+            },
+
+            getColumnDisplayName:function(elementPath) {
+                var that = this;
+                var retVal = elementPath;
+
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return retVal;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return retVal;
+                }
+
+                if (that.resultObj.metadata.keyValueStoreList === null || 
+                    that.resultObj.metadata.keyValueStoreList === undefined) {
+                    return retVal;
+                }
+
+                var kvsLen = that.resultObj.metadata.keyValueStoreList.length;
+
+                for (var i = 0; i < kvsLen; i++) {
+                    var kvs = that.resultObj.metadata.keyValueStoreList[i];
+                    if (kvs.partition === 'Column' &&
+                        kvs.aspect === elementPath && 
+                        kvs.key === 'displayName') {
+                        retVal = kvs.value;
+                    }
+                }
+      
+                return retVal;
+            },
+
+            getTableDisplayName:function(tableId) {
+                var retVal = tableId;
+
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return retVal;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return retVal;
+                }
+
+                if (that.resultObj.metadata.keyValueStoreList === null || 
+                    that.resultObj.metadata.keyValueStoreList === undefined) {
+                    return retVal;
+                }
+
+                var kvsLen = that.resultObj.metadata.keyValueStoreList.length;
+
+                for (var i = 0; i < kvsLen; i++) {
+                    var kvs = that.resultObj.metadata.keyValueStoreList[i];
+                    if (kvs.partition === 'Table' &&
+                        kvs.aspect === 'default' && 
+                        kvs.key === 'displayName') {
+                        retVal = kvs.value;
+                    }
+                }
+
+                return retVal;
+        
+            },
+
+            getIsTableLocked:function(tableId) {
+                var that = this;
+                var retVal = false;
+
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return retVal;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return retVal;
+                }
+
+                if (that.resultObj.metadata.keyValueStoreList === null ||
+                    that.resultObj.metadata.keyValueStoreList === undefined) {
+                    return retVal;
+                }
+
+                var kvsLen = that.resultObj.metadata.keyValueStoreList.length;
+
+                for (var i = 0; i < kvsLen; i++) {
+                    var kvs = that.resultObj.metadata.keyValueStoreList[i];
+                    if (kvs.partition === 'Table' &&
+                        kvs.aspect === 'security' && 
+                        kvs.key === 'locked') {
+                        var v = kvs.value;
+                        if ( v !== null && v !== undefined && (v.toLowerCase() == "true") ) {
+                            retVal = true;
+                        }
+                    }
+                }
+                return retVal;
+            },
+
+            getCanCreateRow:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return retVal;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return retVal;
+                }
+
+                return that.resultObj.metadata.canCreateRow;
+        
+            },
+
+            // may need to get the raw metadata content to get access to some of the content.
+            getMetadata:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                return that.resultObj.metadata;
+            },
+
+            // only valid after call to getAllTableIds()
+            getAllTableIds:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata.tableIds === null || 
+                    that.resultObj.metadata.tableIds === undefined) {
+                    return null;
+                }
+
+                return that.resultObj.metadata.tableIds;
+            },
+
+            // only valid after call to getRoles()
+            getRoles:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata.roles === null || 
+                    that.resultObj.metadata.roles === undefined) {
+                    return null;
+                }
+
+                return that.resultObj.metadata.roles;
+            },
+
+            // only valid after call to getUsers()
+            getUsers:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata.users === null || 
+                    that.resultObj.metadata.users === undefined) {
+                    return null;
+                }
+
+                return that.resultObj.metadata.users;
+            }
+            
         };
 
         return pub;

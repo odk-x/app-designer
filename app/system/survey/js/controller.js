@@ -626,7 +626,7 @@ return {
             success: function() {
                 popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.showScreenPopup", "px: " + opPath);
                 if ( m && m.message ) {
-                    popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.showScreenPopup", "px: " + opPath + " message: " + m.message);
+                    popupbasectxt.log('D',"setScreenWithMessagePopup.popupSuccess.showScreenPopup.m", "px: " + opPath + " message: " + m.message);
                     // schedule a timer to show the message after the page has rendered
                     that.screenManager.showScreenPopup(m);
                     popupbasectxt.failure(m);
@@ -637,12 +637,19 @@ return {
             failure: function(m2) {
                 popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.showScreenPopup", "px: " + opPath);
                 // NOTE: if the setScreen() call failed, we should show the error from that...
-                if ( m2 && m2.message ) {
-                    popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.showScreenPopup", "px: " + opPath + " message: " + m2.message);
+                if ( m && m.message ) {
+                    popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.showScreenPopup.m", "px: " + opPath + " message: " + m.message);
+                    // schedule a timer to show the message after the page has rendered
+                    that.screenManager.showScreenPopup(m);
+                    popupbasectxt.failure(m);
+                } else if ( m2 && m2.message ) {
+                    popupbasectxt.log('D',"setScreenWithMessagePopup.popupFailure.showScreenPopup.m2", "px: " + opPath + " message: " + m2.message);
                     // schedule a timer to show the mesage after the page has rendered
                     that.screenManager.showScreenPopup(m2);
+                    popupbasectxt.failure(m2);
+                } else {
+                    popupbasectxt.success();
                 }
-                popupbasectxt.success();
         }});
         return popupctxt;
     },
@@ -652,23 +659,27 @@ return {
         /**
          * Display the requested screen.
          */
-        that.setScreen( $.extend({}, ctxt, {
-            success: function() {
-                // add a terminal context to display the pop-up message
-                // -- this will be added after the afterRendering
-                // actions have been taken when the screen is rendered (since the
-                // afterRendering step is invoking ctxt when it is complete.
-                ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
-                ctxt.success();
-            },
-            failure: function(m2) {
-                // add a terminal context to display the pop-up message
-                // -- this will be added after the afterRendering
-                // actions have been taken when the screen is rendered (since the
-                // afterRendering step is invoking ctxt when it is complete.
-                ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
-                ctxt.failure(m2);
-        }}), op, options );
+		if ( m === undefined || m === null || m.message === undefined || m.message === null ) {
+			that.setScreen( ctxt, op, options );
+		} else {
+			that.setScreen( $.extend({}, ctxt, {
+				success: function() {
+					// add a terminal context to display the pop-up message
+					// -- this will be added after the afterRendering
+					// actions have been taken when the screen is rendered (since the
+					// afterRendering step is invoking ctxt when it is complete.
+					ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
+					ctxt.success();
+				},
+				failure: function(m2) {
+					// add a terminal context to display the pop-up message
+					// -- this will be added after the afterRendering
+					// actions have been taken when the screen is rendered (since the
+					// afterRendering step is invoking ctxt when it is complete.
+					ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
+					ctxt.failure(m2);
+			}}), op, options );
+		}
     },
     _doActionAt:function(ctxt, op, action, popStateOnFailure) {
         var that = this;
@@ -795,14 +806,26 @@ return {
                 } else {
                     // set the screen back to what it was, then report this failure
                     var op = that.getOperation(oldPath);
-                    if ( op !== null ) {
-                        that.setScreen($.extend({},ctxt,{success:function() {
-                            // report the failure.
-                            ctxt.failure(m);
-                        }, failure: function(m2) {
-                            // report the failure.
-                            ctxt.failure(m);
-                        }}), op);
+					if ( op !== null ) {
+						that._doActionAt($.extend({},ctxt,{
+								success: function() {
+									// add a terminal context to display the pop-up message
+									// -- this will be added after the afterRendering
+									// actions have been taken when the screen is rendered (since the
+									// afterRendering step is invoking ctxt when it is complete.
+									var opPath = that.getCurrentScreenPath();
+									ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
+									ctxt.success();
+								},
+								failure: function(m2) {
+									// add a terminal context to display the pop-up message
+									// -- this will be added after the afterRendering
+									// actions have been taken when the screen is rendered (since the
+									// afterRendering step is invoking ctxt when it is complete.
+									var opPath = that.getCurrentScreenPath();
+									ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
+									ctxt.failure(m2);
+								}}), op, op._token_type, true);
                     } else {
                         ctxt.failure(m);
                     }
