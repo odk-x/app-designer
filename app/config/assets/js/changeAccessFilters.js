@@ -297,6 +297,10 @@ function applyChanges() {
     if ( chosenFilterValue === null || chosenFilterValue === undefined || chosenFilterValue === "not specified" ) {
         return;
     }
+	// handle the null value.
+	if ( chosenFilterValue === "is null" ) {
+		chosenFilterValue = null;
+	}
     
     $('body').waitMe({
         effect: 'roundBounce',
