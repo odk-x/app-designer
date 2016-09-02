@@ -2142,6 +2142,21 @@ promptTypes.media = promptTypes.base.extend({
                 return '';
             }
         }
+    },
+    getValue: function() {
+        if (!this.name) {
+            console.error("prompts.media.getValue: Cannot get value of prompt with no name. px: "
+                          + this.promptIdx);
+            throw new Error("Cannot get value of prompt with no name.");
+        }
+        var value = database.getDataValue(this.name);
+        if (value === null || value === undefined) {
+          return null;
+        }
+        if (value.uriFragment === null || value.uriFragment === undefined) {
+            return null;
+        }
+        return value;
     }
 });
 promptTypes.read_only_image = promptTypes.media.extend({
@@ -2259,6 +2274,19 @@ promptTypes.barcode = promptTypes.launch_intent.extend({
     intentString: 'com.google.zxing.client.android.SCAN',
      extractDataValue: function(jsonObject) {
         return jsonObject.result.SCAN_RESULT;
+    },
+    getValue: function() {
+        if (!this.name) {
+            console.error("prompts.barcode.getValue: Cannot get value of prompt with no name. px: "
+                          + this.promptIdx);
+            throw new Error("Cannot get value of prompt with no name.");
+        }
+        var value = database.getDataValue(this.name);
+        if (value === null || value === undefined ||
+            value.SCAN_RESULT === null || value.SCAN_RESULT === undefined) {
+            return null;
+        }
+        return value;
     }
 });
 promptTypes.geopoint = promptTypes.launch_intent.extend({
@@ -2290,6 +2318,24 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
                 return null;
             }
         }
+    },
+    getValue: function() {
+        if (!this.name) {
+            console.error("prompts.geopoint.getValue: Cannot get value of prompt with no name. px: "
+                          + this.promptIdx);
+            throw new Error("Cannot get value of prompt with no name.");
+        }
+        var value = database.getDataValue(this.name);
+        if (value === null || value === undefined) {
+          return null;
+        }
+        if ((value.latitude === null || value.latitude === undefined) &&
+            (value.longitude === null || value.longitude === undefined) &&
+            (value.altitude === null || value.altitude === undefined) &&
+            (value.accuracy === null || value.accuracy === undefined)) {
+            return null;
+        }
+        return value;
     }
 });
 promptTypes.geopointmap = promptTypes.launch_intent.extend({
@@ -2319,6 +2365,24 @@ promptTypes.geopointmap = promptTypes.launch_intent.extend({
                 return null;
             }
         }
+    },
+    getValue: function() {
+        if (!this.name) {
+            console.error("prompts.geopointmap.getValue: Cannot get value of prompt with no name. px: "
+                          + this.promptIdx);
+            throw new Error("Cannot get value of prompt with no name.");
+        }
+        var value = database.getDataValue(this.name);
+        if (value === null || value === undefined) {
+          return null;
+        }
+        if ((value.latitude === null || value.latitude === undefined) &&
+            (value.longitude === null || value.longitude === undefined) &&
+            (value.altitude === null || value.altitude === undefined) &&
+            (value.accuracy === null || value.accuracy === undefined)) {
+            return null;
+        }
+        return value;
     }
 });
 promptTypes.note = promptTypes.base.extend({
