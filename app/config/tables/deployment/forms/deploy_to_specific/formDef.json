@@ -22,7 +22,7 @@
         "_row_num": 5
       },
       {
-        "type": "string",
+        "type": "boolean",
         "name": "is_distributed",
         "_row_num": 6
       },
@@ -62,14 +62,9 @@
         "_row_num": 13
       },
       {
-        "type": "number",
-        "name": "min_range",
+        "type": "string",
+        "name": "ranges",
         "_row_num": 14
-      },
-      {
-        "type": "number",
-        "name": "max_range",
-        "_row_num": 15
       }
     ],
     "settings": [
@@ -103,28 +98,12 @@
     ],
     "choices": [
       {
-        "choice_list_name": "true_false",
-        "data_value": "true",
-        "display": {
-          "text": "yes"
-        },
-        "_row_num": 2
-      },
-      {
-        "choice_list_name": "true_false",
-        "data_value": "false",
-        "display": {
-          "text": "no"
-        },
-        "_row_num": 3
-      },
-      {
         "choice_list_name": "yes_no",
         "data_value": "yes",
         "display": {
           "text": "Yes"
         },
-        "_row_num": 4
+        "_row_num": 2
       },
       {
         "choice_list_name": "yes_no",
@@ -132,7 +111,7 @@
         "display": {
           "text": "No"
         },
-        "_row_num": 5
+        "_row_num": 3
       }
     ],
     "survey": [
@@ -418,24 +397,6 @@
       }
     },
     "choices": {
-      "true_false": [
-        {
-          "choice_list_name": "true_false",
-          "data_value": "true",
-          "display": {
-            "text": "yes"
-          },
-          "_row_num": 2
-        },
-        {
-          "choice_list_name": "true_false",
-          "data_value": "false",
-          "display": {
-            "text": "no"
-          },
-          "_row_num": 3
-        }
-      ],
       "yes_no": [
         {
           "choice_list_name": "yes_no",
@@ -443,7 +404,7 @@
           "display": {
             "text": "Yes"
           },
-          "_row_num": 4
+          "_row_num": 2
         },
         {
           "choice_list_name": "yes_no",
@@ -451,7 +412,7 @@
           "display": {
             "text": "No"
           },
-          "_row_num": 5
+          "_row_num": 3
         }
       ]
     },
@@ -525,7 +486,7 @@
       },
       "is_distributed": {
         "prompt_type_name": "async_assign_single_string",
-        "type": "string",
+        "type": "boolean",
         "valuesList": "is_distributed_value_query",
         "_defn": [
           {
@@ -617,25 +578,15 @@
         ],
         "elementKey": "is_override"
       },
-      "min_range": {
-        "type": "number",
+      "ranges": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 14,
             "section_name": "model"
           }
         ],
-        "elementKey": "min_range"
-      },
-      "max_range": {
-        "type": "number",
-        "_defn": [
-          {
-            "_row_num": 15,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "max_range"
+        "elementKey": "ranges"
       },
       "try_again": {
         "type": "string",
@@ -1364,7 +1315,7 @@
       },
       "is_distributed": {
         "prompt_type_name": "async_assign_single_string",
-        "type": "string",
+        "type": "boolean",
         "valuesList": "is_distributed_value_query",
         "_defn": [
           {
@@ -1480,31 +1431,18 @@
         "elementSet": "data",
         "elementPath": "is_override"
       },
-      "min_range": {
-        "type": "number",
+      "ranges": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 14,
             "section_name": "model"
           }
         ],
-        "elementKey": "min_range",
-        "elementName": "min_range",
+        "elementKey": "ranges",
+        "elementName": "ranges",
         "elementSet": "data",
-        "elementPath": "min_range"
-      },
-      "max_range": {
-        "type": "number",
-        "_defn": [
-          {
-            "_row_num": 15,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "max_range",
-        "elementName": "max_range",
-        "elementSet": "data",
-        "elementPath": "max_range"
+        "elementPath": "ranges"
       },
       "try_again": {
         "type": "string",

@@ -45,6 +45,11 @@ button:active {
 
 #button3 {
     border-color: #EE3224;
+    margin-bottom: 6vh;
+}
+
+#button4 {
+    border-color: #EE3224;
 }
 
 h1 {

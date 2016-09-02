@@ -14,8 +14,6 @@ var cbSuccess = function (result) {
   $('#FIELD_2').text(authorizationsResultSet.get('authorization_id'));
   $('#FIELD_3').text(authorizationsResultSet.get('item_pack_name'));
   $('#FIELD_4').text(authorizationsResultSet.get('item_pack_id'));
-  $('#FIELD_5').text(authorizationsResultSet.get('min_range'));
-  $('#FIELD_6').text(authorizationsResultSet.get('max_range'));
   $('#FIELD_8').text(authorizationsResultSet.get('distribution_id'));
   $('#FIELD_7').text(authorizationsResultSet.get('is_override'));
   $('#FIELD_9').text(authorizationsResultSet.get('beneficiary_code'));
@@ -47,8 +45,7 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'item_pack_name', authorizationsResultSet.get('item_pack_name'));
   setJSONMap(jsonMap, 'is_override', authorizationsResultSet.get('is_override'));
     // Writing out number values needs more investigation
-  setJSONMap(jsonMap, 'min_range', authorizationsResultSet.get('min_range'));
-  setJSONMap(jsonMap, 'max_range', authorizationsResultSet.get('max_range'));
+  setJSONMap(jsonMap, 'ranges', authorizationsResultSet.get('ranges'));
     jsonMap = JSON.stringify(jsonMap);    
     return jsonMap;
 };

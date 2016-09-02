@@ -27,44 +27,39 @@
         "_row_num": 4
       },
       {
-        "type": "number",
-        "name": "min_range",
+        "type": "string",
+        "name": "ranges",
         "_row_num": 5
-      },
-      {
-        "type": "number",
-        "name": "max_range",
-        "_row_num": 6
       },
       {
         "type": "string",
         "name": "authorization_name",
-        "_row_num": 7
+        "_row_num": 6
       },
       {
         "type": "string",
         "name": "item_pack_id",
-        "_row_num": 8
+        "_row_num": 7
       },
       {
         "type": "string",
         "name": "item_pack_name",
-        "_row_num": 9
+        "_row_num": 8
       },
       {
         "type": "string",
         "name": "acknowledge_auth",
+        "_row_num": 9
+      },
+      {
+        "type": "boolean",
+        "name": "is_distributed",
         "_row_num": 10
       },
       {
-        "type": "string",
-        "name": "is_distributed",
-        "_row_num": 11
-      },
-      {
-        "type": "string",
+        "type": "boolean",
         "name": "is_override",
-        "_row_num": 12
+        "_row_num": 11
       }
     ],
     "settings": [
@@ -250,31 +245,21 @@
         ],
         "elementKey": "beneficiary_code"
       },
-      "min_range": {
-        "type": "number",
+      "ranges": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 5,
             "section_name": "model"
           }
         ],
-        "elementKey": "min_range"
-      },
-      "max_range": {
-        "type": "number",
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "max_range"
+        "elementKey": "ranges"
       },
       "authorization_name": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -284,7 +269,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -294,7 +279,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -304,27 +289,27 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "model"
           }
         ],
         "elementKey": "acknowledge_auth"
       },
       "is_distributed": {
-        "type": "string",
+        "type": "boolean",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
         "elementKey": "is_distributed"
       },
       "is_override": {
-        "type": "string",
+        "type": "boolean",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -548,37 +533,24 @@
         "elementSet": "data",
         "elementPath": "beneficiary_code"
       },
-      "min_range": {
-        "type": "number",
+      "ranges": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 5,
             "section_name": "model"
           }
         ],
-        "elementKey": "min_range",
-        "elementName": "min_range",
+        "elementKey": "ranges",
+        "elementName": "ranges",
         "elementSet": "data",
-        "elementPath": "min_range"
-      },
-      "max_range": {
-        "type": "number",
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "max_range",
-        "elementName": "max_range",
-        "elementSet": "data",
-        "elementPath": "max_range"
+        "elementPath": "ranges"
       },
       "authorization_name": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -591,7 +563,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -604,7 +576,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -617,7 +589,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "model"
           }
         ],
@@ -627,10 +599,10 @@
         "elementPath": "acknowledge_auth"
       },
       "is_distributed": {
-        "type": "string",
+        "type": "boolean",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -640,10 +612,10 @@
         "elementPath": "is_distributed"
       },
       "is_override": {
-        "type": "string",
+        "type": "boolean",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],

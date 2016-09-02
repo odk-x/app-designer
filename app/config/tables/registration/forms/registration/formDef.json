@@ -174,17 +174,23 @@
         "_row_num": 21
       },
       {
-        "type": "assign",
-        "name": "is_active",
-        "calculation": true,
-        "_row_num": 22
-      },
-      {
         "type": "note",
         "display": {
           "text": "Press \"Next\" to finish."
         },
+        "_row_num": 22
+      },
+      {
+        "type": "assign",
+        "name": "is_active",
+        "calculation": 1,
         "_row_num": 23
+      },
+      {
+        "type": "assign",
+        "name": "is_override",
+        "calculation": 0,
+        "_row_num": 24
       }
     ],
     "settings": [
@@ -326,6 +332,11 @@
         "type": "boolean",
         "name": "is_override",
         "_row_num": 23
+      },
+      {
+        "type": "boolean",
+        "name": "ignore_validation",
+        "_row_num": 24
       }
     ],
     "initial": [
@@ -920,7 +931,7 @@
         "type": "boolean",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 23,
             "section_name": "survey"
           },
           {
@@ -944,11 +955,25 @@
         "type": "boolean",
         "_defn": [
           {
+            "_row_num": 24,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 23,
             "section_name": "model"
           }
         ],
         "elementKey": "is_override"
+      },
+      "ignore_validation": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "ignore_validation"
       }
     },
     "section_names": [
@@ -1216,19 +1241,19 @@
             "display": {
               "text": "Press \"Next\" to finish."
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen23",
+            "_branch_label_enclosing_screen": "survey/_screen22",
             "promptIdx": 18
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 24,
-            "_branch_label_enclosing_screen": "survey/_screen24",
+            "_row_num": 25,
+            "_branch_label_enclosing_screen": "survey/_screen25",
             "promptIdx": 19
           }
         ],
@@ -1363,40 +1388,49 @@
             "operationIdx": 19
           },
           {
-            "type": "assign",
-            "name": "is_active",
-            "calculation": true,
             "_row_num": 22,
-            "__rowNum__": 21,
-            "_token_type": "assign",
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 20
           },
           {
+            "type": "assign",
+            "name": "is_active",
+            "calculation": 1,
             "_row_num": 23,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 22,
+            "_token_type": "assign",
             "operationIdx": 21
+          },
+          {
+            "type": "assign",
+            "name": "is_override",
+            "calculation": 0,
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "assign",
+            "operationIdx": 22
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 24,
-            "operationIdx": 22
+            "_row_num": 25,
+            "operationIdx": 23
           },
           {
-            "_row_num": 24,
+            "_row_num": 25,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 23
+            "operationIdx": 24
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 24,
-            "operationIdx": 24
+            "_row_num": 25,
+            "operationIdx": 25
           }
         ],
         "branch_label_map": {
@@ -1418,9 +1452,9 @@
           "_screen19": 17,
           "_screen20": 18,
           "_screen21": 19,
-          "_screen23": 21,
-          "_contents": 23,
-          "_screen24": 23
+          "_screen22": 20,
+          "_contents": 24,
+          "_screen25": 24
         }
       },
       "initial": {
@@ -1870,7 +1904,7 @@
         "type": "boolean",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 23,
             "section_name": "survey"
           },
           {
@@ -1900,6 +1934,10 @@
         "type": "boolean",
         "_defn": [
           {
+            "_row_num": 24,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 23,
             "section_name": "model"
           }
@@ -1908,6 +1946,19 @@
         "elementName": "is_override",
         "elementSet": "data",
         "elementPath": "is_override"
+      },
+      "ignore_validation": {
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "ignore_validation",
+        "elementName": "ignore_validation",
+        "elementSet": "data",
+        "elementPath": "ignore_validation"
       },
       "_id": {
         "type": "string",

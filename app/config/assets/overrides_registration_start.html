@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <link href="css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript">
+
+        // Displays homescreen
+        function display() {
+
+            /*    Screen new client option that launches new client list view */
+            var enable = document.createElement("button");
+            enable.setAttribute("id", "button1");
+            enable.innerHTML = "Enable Beneficiary";
+            enable.onclick = function() {
+                odkTables.launchHTML('config/assets/enable_start.html');
+            }
+            document.getElementById("wrapper").appendChild(enable);    
+
+            // Follow up with existing client option that launches
+            // 'femaleClients' table list view
+            var disable = document.createElement("button");
+            disable.setAttribute("id", "button2");
+            disable.innerHTML = "Disable Beneficiary";
+            disable.onclick = function() {
+                odkTables.launchHTML('config/assets/disable_start.html');
+            }
+            document.getElementById("wrapper").appendChild(disable);    
+        }
+            
+        
+        </script>
+    </head>
+
+    <body onload="display();">
+        <h1>Registration Override</h1>
+        <div id="wrapper"></div>
+        <p> <img src="img/small_2025.jpg"></p>
+    </body>
+</html>

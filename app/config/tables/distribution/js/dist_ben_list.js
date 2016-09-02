@@ -16,35 +16,6 @@ var distributionsCBFailure = function(error) {
     console.log('dist_ben_list distributionsCBFailure: ' + error);
 }; 
 
-var setJSONMap = function(JSONMap, key, value) {
-    if (value !== null && value !== undefined) {
-        distributionsResultSet.get(key);
-        JSONMap[key] = JSON.stringify(value);
-    }
-}
-
-var getJSONMapValues = function() {
-  var jsonMap = {};
-
-  setJSONMap(jsonMap, 'beneficiary_code', distributionsResultSet.get('beneficiary_code'));
-  setJSONMap(jsonMap, 'distribution_id', distributionsResultSet.get('distribution_id'));
-  setJSONMap(jsonMap, 'authorization_id', distributionsResultSet.get('authorization_id'));
-  setJSONMap(jsonMap, 'authorization_name', distributionsResultSet.get('authorization_name'));
-  setJSONMap(jsonMap, 'item_pack_id', distributionsResultSet.get('item_pack_id'));
-  setJSONMap(jsonMap, 'item_pack_name', distributionsResultSet.get('item_pack_name'));
-  setJSONMap(jsonMap, 'is_override', distributionsResultSet.get('is_override'));
-    
-    // Writing out number values needs more investigation
-  setJSONMap(jsonMap, 'min_range', distributionsResultSet.get('min_range'));
- 
-  setJSONMap(jsonMap, 'max_range', distributionsResultSet.get('max_range'));
-
-    jsonMap = JSON.stringify(jsonMap);
-
-    
-    return jsonMap;
-};
-
 var resumeFn = function(fIdxStart) {  
     odkData.getViewData(distributionsCBSuccess, distributionsCBFailure);
 
@@ -82,14 +53,8 @@ var resumeFn = function(fIdxStart) {
 
             jsonMap = JSON.stringify(jsonMap);*/
             // make sure we retrieved the rowId
-            var jsonMapVals = getJSONMapValues();
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                /*odkTables.addRowWithSurvey(
-                  'deployment',
-                  'deploy_to_specific',
-                  null,
-                  jsonMapVals);*/
                   odkTables.openDetailView('distribution', rowId, 'config/tables/distribution/html/dist_ben_detail.html');
             }
         });

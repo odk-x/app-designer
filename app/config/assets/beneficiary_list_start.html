@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <link href="css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript">
+
+        // Displays homescreen
+        function display() {
+
+            /*    Screen new client option that launches new client list view */
+            var active = document.createElement("button");
+            active.setAttribute("id", "button1");
+            active.innerHTML = "Active Beneficiaries";
+            active.onclick = function() {
+              odkTables.openTableToListView(
+                'registration', 'is_active = ?', ['1']
+                , 'config/tables/registration/html/registration_list.html');
+
+            }
+            document.getElementById("wrapper").appendChild(active);    
+
+            // Follow up with existing client option that launches
+            // 'femaleClients' table list view
+            var disabled = document.createElement("button");
+            disabled.setAttribute("id", "button2");
+            disabled.innerHTML = "Disabled Beneficiaries";
+            disabled.onclick = function() {
+              odkTables.openTableToListView(
+                'registration', 'is_active = ?', ['0']
+                , 'config/tables/registration/html/registration_list.html');
+            }
+            document.getElementById("wrapper").appendChild(disabled);    
+        }
+            
+        
+        </script>
+    </head>
+
+    <body onload="display();">
+        <h1>Beneficiary Lists</h1>
+        <div id="wrapper"></div>
+        <p> <img src="img/small_2025.jpg"></p>
+    </body>
+</html>

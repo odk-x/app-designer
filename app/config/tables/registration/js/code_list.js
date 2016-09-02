@@ -4,16 +4,6 @@
 /* global $, control */
 'use strict';
 
-// if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: control.getFileAsUrl('output/debug/beneficiaries_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-
 
 // }
  
@@ -75,7 +65,7 @@ var resumeFn = function(fIdxStart) {
                 odkTables.openDetailView(
                   tableId,
                   rowId,
-                  'config/tables/registration/html/registration_detail.html');
+                  'config/tables/registration/html/code_detail.html');
             }
         });
     }

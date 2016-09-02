@@ -20,9 +20,6 @@ var cbSuccess = function (result) {
   $('#FIELD_2').text(authorizationsResultSet.get('authorization_id'));
   $('#FIELD_3').text(authorizationsResultSet.get('item_pack_name'));
   $('#FIELD_4').text(authorizationsResultSet.get('item_pack_id'));
-  $('#FIELD_5').text(authorizationsResultSet.get('min_range'));
-  $('#FIELD_6').text(authorizationsResultSet.get('max_range'));
-  $('#scanned_barcode').text('reconocado');
 
   var launchBarcodeButton = $('#launch-barcode');
   launchBarcodeButton.on(
@@ -42,6 +39,7 @@ var callBackFn = function () {
   if (insideQueue == true) return;
   insideQueue = true;
   var value = odkCommon.viewFirstQueuedAction();
+  console.log(value);
   if ( value !== null && value !== undefined ) {
     var action = JSON.parse(value);
     var dispatchStr = JSON.parse(action.dispatchString);
@@ -54,10 +52,9 @@ var callBackFn = function () {
       beneficiary_code = action.jsonValue.result.SCAN_RESULT;
       $('#scanned_barcode').text(beneficiary_code);
       clearTimeout(myTimeoutVal);
-      //odkCommon.removeFirstQueuedAction();
       odkData.query('distribution', 'beneficiary_code = ? and authorization_id = ?', 
                     [beneficiary_code,authorizationsResultSet.get('authorization_id')],
-                    null, null, null, null, true, scanCBSuccess, scanCBFailure);
+                    null, null, null, null, null, null, true, scanCBSuccess, scanCBFailure);
      /* var struct = {};
   struct['authorization_id'] = authorizationsResultSet.get('authorization_id');
   struct['authorization_name'] = authorizationsResultSet.get('authorization_name');
@@ -101,11 +98,10 @@ var scanCBSuccess = function (result) {
     struct['item_pack_name'] = authorizationsResultSet.get('item_pack_name');
     struct['distribution_id'] = util.genUUID();
     //struct['item_pack_name'] = authorizationsResultSet.get('item_pack_name');
-    struct['min_range'] = authorizationsResultSet.get('min_range');
-    struct['max_range'] = authorizationsResultSet.get('max_range');
+    struct['ranges'] = authorizationsResultSet.get('ranges');
     struct['beneficiary_code'] = beneficiary_code;
-    struct['is_distributed'] = 'false';
-    struct['is_override'] = 'true';
+    struct['is_distributed'] = '0';
+    struct['is_override'] = '1';
     odkData.addRow(
       'distribution',
       struct,
@@ -113,11 +109,15 @@ var scanCBSuccess = function (result) {
       addDistCBSuccess,
       addDistCBFailure
     );
+    odkCommon.removeFirstQueuedAction();
+
   } else {
     //console.(result.getRowId());
     console.log(result.getCount());
     console.log('distribution already exists!, do not create override');
     $('#rejected').text('Scanned beneficiary already qualifies for this authorization. Override not created.');
+    odkCommon.removeFirstQueuedAction();
+
   }
 
 }

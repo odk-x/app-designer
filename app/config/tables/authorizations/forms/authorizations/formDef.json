@@ -7,29 +7,24 @@
         "_row_num": 2
       },
       {
-        "type": "number",
-        "name": "min_range",
+        "type": "string",
+        "name": "ranges",
         "_row_num": 3
-      },
-      {
-        "type": "number",
-        "name": "max_range",
-        "_row_num": 4
       },
       {
         "type": "string",
         "name": "authorization_name",
-        "_row_num": 5
+        "_row_num": 4
       },
       {
         "type": "string",
         "name": "item_pack_id",
-        "_row_num": 6
+        "_row_num": 5
       },
       {
         "type": "string",
         "name": "item_pack_name",
-        "_row_num": 7
+        "_row_num": 6
       }
     ],
     "settings": [
@@ -68,6 +63,32 @@
           "text": "We are not giving volunteers the ability to create or edit authorizations. This table is here only for the implementation of overriding authorization rules"
         },
         "_row_num": 2
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "unverifiedUserCanCreate",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "filterTypeOnCreation",
+        "type": "string",
+        "value": "READ_ONLY",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "locked",
+        "type": "boolean",
+        "value": "true",
+        "_row_num": 4
       }
     ]
   },
@@ -156,31 +177,21 @@
         ],
         "elementKey": "authorization_id"
       },
-      "min_range": {
-        "type": "number",
+      "ranges": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 3,
             "section_name": "model"
           }
         ],
-        "elementKey": "min_range"
-      },
-      "max_range": {
-        "type": "number",
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "max_range"
+        "elementKey": "ranges"
       },
       "authorization_name": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -190,7 +201,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -200,7 +211,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -466,37 +477,24 @@
         "elementSet": "data",
         "elementPath": "authorization_id"
       },
-      "min_range": {
-        "type": "number",
+      "ranges": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 3,
             "section_name": "model"
           }
         ],
-        "elementKey": "min_range",
-        "elementName": "min_range",
+        "elementKey": "ranges",
+        "elementName": "ranges",
         "elementSet": "data",
-        "elementPath": "min_range"
-      },
-      "max_range": {
-        "type": "number",
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "max_range",
-        "elementName": "max_range",
-        "elementSet": "data",
-        "elementPath": "max_range"
+        "elementPath": "ranges"
       },
       "authorization_name": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -509,7 +507,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -522,7 +520,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -648,6 +646,27 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "\"Authorization\""
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "filterTypeOnCreation",
+        "_type": "string",
+        "_value": "READ_ONLY"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "locked",
+        "_type": "boolean",
+        "_value": "true"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "unverifiedUserCanCreate",
+        "_type": "boolean",
+        "_value": "false"
       }
     ]
   }

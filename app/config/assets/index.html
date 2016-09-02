@@ -49,17 +49,17 @@
             sendData.onclick = function() {
               // nothing for now
               odkTables.launchHTML(
-                  'config/tables/registration/html/registration_list.html');
+                  'config/assets/beneficiary_list_start.html');
             }
             document.getElementById("wrapper").appendChild(sendData);    
 
             // Create a distribution Override
             var override = document.createElement("button");
-            override.setAttribute("id", "button 4");
-            override.innerHTML = "Set Override Distribution";
+            override.setAttribute("id", "button4");
+            override.innerHTML = "Administrator Overrides";
             override.onclick = function() {
                 odkTables.launchHTML(
-                    'config/tables/authorizations/html/authorizations_list.html');
+                    'config/assets/overrides_start.html');
             }
             document.getElementById("wrapper").appendChild(override);
         }
