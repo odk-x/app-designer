@@ -89,6 +89,22 @@
         "type": "boolean",
         "value": "true",
         "_row_num": 4
+      },
+      {
+        "partition": "FormType",
+        "aspect": "default",
+        "key": "FormType.formType",
+        "type": "string",
+        "value": "SURVEY",
+        "_row_num": 5
+      },
+      {
+        "partition": "SurveyUtil",
+        "aspect": "default",
+        "key": "SurveyUtil.formId",
+        "type": "string",
+        "value": "wrong_form",
+        "_row_num": 6
       }
     ]
   },
@@ -631,7 +647,7 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "authorizations"
+        "_value": "wrong_form"
       },
       {
         "_partition": "Table",

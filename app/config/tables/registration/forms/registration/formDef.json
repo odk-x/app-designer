@@ -183,13 +183,13 @@
       {
         "type": "assign",
         "name": "is_active",
-        "calculation": 1,
+        "calculation": true,
         "_row_num": 23
       },
       {
         "type": "assign",
         "name": "is_override",
-        "calculation": 0,
+        "calculation": false,
         "_row_num": 24
       }
     ],
@@ -1396,7 +1396,7 @@
           {
             "type": "assign",
             "name": "is_active",
-            "calculation": 1,
+            "calculation": true,
             "_row_num": 23,
             "__rowNum__": 22,
             "_token_type": "assign",
@@ -1405,7 +1405,7 @@
           {
             "type": "assign",
             "name": "is_override",
-            "calculation": 0,
+            "calculation": false,
             "_row_num": 24,
             "__rowNum__": 23,
             "_token_type": "assign",
