@@ -20,6 +20,7 @@ var cbSuccess = function (result) {
   $('#FIELD_2').text(authorizationsResultSet.get('authorization_id'));
   $('#FIELD_3').text(authorizationsResultSet.get('item_pack_name'));
   $('#FIELD_4').text(authorizationsResultSet.get('item_pack_id'));
+  $('#FIELD_5').text(authorizationsResultSet.get('item_description'));
 
   var launchBarcodeButton = $('#launch-barcode');
   launchBarcodeButton.on(
@@ -96,6 +97,7 @@ var scanCBSuccess = function (result) {
     struct['authorization_name'] = authorizationsResultSet.get('authorization_name');
     struct['item_pack_id'] = authorizationsResultSet.get('item_pack_id');
     struct['item_pack_name'] = authorizationsResultSet.get('item_pack_name');
+    struct'item_description'] = authorizationResultSet.get('item_description');
     struct['distribution_id'] = util.genUUID();
     //struct['item_pack_name'] = authorizationsResultSet.get('item_pack_name');
     struct['ranges'] = authorizationsResultSet.get('ranges');

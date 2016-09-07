@@ -22,7 +22,7 @@
         "_row_num": 5
       },
       {
-        "type": "boolean",
+        "type": "string",
         "name": "is_distributed",
         "_row_num": 6
       },
@@ -57,14 +57,19 @@
         "_row_num": 12
       },
       {
-        "type": "boolean",
-        "name": "is_override",
+        "type": "string",
+        "name": "item_description",
         "_row_num": 13
       },
       {
         "type": "string",
-        "name": "ranges",
+        "name": "is_override",
         "_row_num": 14
+      },
+      {
+        "type": "string",
+        "name": "ranges",
+        "_row_num": 15
       }
     ],
     "settings": [
@@ -543,6 +548,18 @@
         "calculation": "(function(){\nvar json = [{\n 'ranges':[\n  {'min':0,'max':10,'itemPackRangeID':null},\n  {'min':23,'max':45,'itemPackRangeID':null}\n ]\n}];\n\nvar output = '';\nvar data = json[0];\nvar relevant = data.ranges;\nfor (var i = 0; i < relevent.length; i++) {\n var range = relevent[i];\n output += range.min + '-' + range.max + '\\n';\n}\n\nreturn output;\n\n\n})()",
         "_row_num": 2
       }
+    ],
+    "properties": [
+      {
+        "FormType": {
+          "default": "SurveyUtil",
+          "formType": "SurveyUtil.formId"
+        },
+        "default": "default",
+        "string": "string",
+        "SURVEY": "wrong_form",
+        "_row_num": 2
+      }
     ]
   },
   "specification": {
@@ -814,7 +831,7 @@
       },
       "is_distributed": {
         "prompt_type_name": "async_assign_single_string",
-        "type": "boolean",
+        "type": "string",
         "valuesList": "is_distributed_value_query",
         "_defn": [
           {
@@ -928,11 +945,21 @@
         ],
         "elementKey": "item_pack_name"
       },
-      "is_override": {
-        "type": "boolean",
+      "item_description": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_description"
+      },
+      "is_override": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -949,7 +976,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],
@@ -1943,7 +1970,7 @@
       },
       "is_distributed": {
         "prompt_type_name": "async_assign_single_string",
-        "type": "boolean",
+        "type": "string",
         "valuesList": "is_distributed_value_query",
         "_defn": [
           {
@@ -2078,11 +2105,24 @@
         "elementSet": "data",
         "elementPath": "item_pack_name"
       },
-      "is_override": {
-        "type": "boolean",
+      "item_description": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_description",
+        "elementName": "item_description",
+        "elementSet": "data",
+        "elementPath": "item_description"
+      },
+      "is_override": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -2102,7 +2142,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],

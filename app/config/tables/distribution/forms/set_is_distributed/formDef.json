@@ -72,18 +72,23 @@
       },
       {
         "type": "string",
-        "name": "acknowledge_auth",
+        "name": "item_description",
         "_row_num": 10
       },
       {
-        "type": "boolean",
-        "name": "is_distributed",
+        "type": "string",
+        "name": "acknowledge_auth",
         "_row_num": 11
       },
       {
-        "type": "boolean",
-        "name": "is_override",
+        "type": "string",
+        "name": "is_distributed",
         "_row_num": 12
+      },
+      {
+        "type": "string",
+        "name": "is_override",
+        "_row_num": 13
       }
     ],
     "survey": [
@@ -100,7 +105,7 @@
     "choices": [
       {
         "choice_list_name": "true_false",
-        "data_value": 1,
+        "data_value": "true",
         "display": {
           "text": "Yes"
         },
@@ -108,7 +113,7 @@
       },
       {
         "choice_list_name": "true_false",
-        "data_value": 0,
+        "data_value": "false",
         "display": {
           "text": "No"
         },
@@ -202,7 +207,7 @@
       "true_false": [
         {
           "choice_list_name": "true_false",
-          "data_value": 1,
+          "data_value": "true",
           "display": {
             "text": "Yes"
           },
@@ -210,7 +215,7 @@
         },
         {
           "choice_list_name": "true_false",
-          "data_value": 0,
+          "data_value": "false",
           "display": {
             "text": "No"
           },
@@ -301,7 +306,7 @@
         ],
         "elementKey": "item_pack_name"
       },
-      "acknowledge_auth": {
+      "item_description": {
         "type": "string",
         "_defn": [
           {
@@ -309,10 +314,20 @@
             "section_name": "model"
           }
         ],
+        "elementKey": "item_description"
+      },
+      "acknowledge_auth": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
         "elementKey": "acknowledge_auth"
       },
       "is_distributed": {
-        "type": "boolean",
+        "type": "string",
         "valuesList": "true_false",
         "_defn": [
           {
@@ -320,17 +335,17 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 11,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
         "elementKey": "is_distributed"
       },
       "is_override": {
-        "type": "boolean",
+        "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -620,11 +635,24 @@
         "elementSet": "data",
         "elementPath": "item_pack_name"
       },
-      "acknowledge_auth": {
+      "item_description": {
         "type": "string",
         "_defn": [
           {
             "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_description",
+        "elementName": "item_description",
+        "elementSet": "data",
+        "elementPath": "item_description"
+      },
+      "acknowledge_auth": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -634,7 +662,7 @@
         "elementPath": "acknowledge_auth"
       },
       "is_distributed": {
-        "type": "boolean",
+        "type": "string",
         "valuesList": "true_false",
         "_defn": [
           {
@@ -642,7 +670,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 11,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -652,10 +680,10 @@
         "elementPath": "is_distributed"
       },
       "is_override": {
-        "type": "boolean",
+        "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],

@@ -50,7 +50,7 @@
 		         	odkTables.openTableToListView(
 			        	'registration',
 			        	'beneficiary_code = ? and is_active = ?',
-			        	[action.jsonValue.result.SCAN_RESULT, '0'],
+			        	[action.jsonValue.result.SCAN_RESULT, 'false'],
 			        	'config/tables/registration/html/code_list.html'
 			       	);
 		        } else {

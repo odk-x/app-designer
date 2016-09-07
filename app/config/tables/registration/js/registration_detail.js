@@ -47,12 +47,12 @@ function cbSuccess(result) {
   deliver.on(
       'click',
       function() {
-        odkTables.openTableToListView(
-          'distribution',
-          'beneficiary_code = ?',
-          [registrationResultSet.get('beneficiary_code')],
-          'config/tables/distribution/html/dist_ben_list.html'
-          )
+          odkTables.openTableToListView(
+              'distribution',
+              'beneficiary_code = ? and is_distributed = ?',
+              [registrationResultSet.get('beneficiary_code'), 'false'],
+              'config/tables/distribution/html/dist_ben_list.html'
+          );
        // var rowId = registrationResultSet.getRowId(0);
         /*odkTables.addRowWithSurvey(
           'deployment',

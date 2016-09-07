@@ -48,18 +48,23 @@
       },
       {
         "type": "string",
-        "name": "acknowledge_auth",
+        "name": "item_description",
         "_row_num": 9
       },
       {
-        "type": "boolean",
-        "name": "is_distributed",
+        "type": "string",
+        "name": "acknowledge_auth",
         "_row_num": 10
       },
       {
-        "type": "boolean",
-        "name": "is_override",
+        "type": "string",
+        "name": "is_distributed",
         "_row_num": 11
+      },
+      {
+        "type": "string",
+        "name": "is_override",
+        "_row_num": 12
       }
     ],
     "settings": [
@@ -118,6 +123,48 @@
         "clause": "goto _finalize",
         "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
         "_row_num": 3
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "unverifiedUserCanCreate",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "filterTypeOnCreation",
+        "type": "string",
+        "value": "READ_ONLY",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "locked",
+        "type": "boolean",
+        "value": "true",
+        "_row_num": 4
+      },
+      {
+        "partition": "FormType",
+        "aspect": "default",
+        "key": "FormType.formType",
+        "type": "string",
+        "value": "SURVEY",
+        "_row_num": 5
+      },
+      {
+        "partition": "SurveyUtil",
+        "aspect": "default",
+        "key": "SurveyUtil.formId",
+        "type": "string",
+        "value": "wrong_form",
+        "_row_num": 6
       }
     ]
   },
@@ -285,7 +332,7 @@
         ],
         "elementKey": "item_pack_name"
       },
-      "acknowledge_auth": {
+      "item_description": {
         "type": "string",
         "_defn": [
           {
@@ -293,23 +340,33 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "acknowledge_auth"
+        "elementKey": "item_description"
       },
-      "is_distributed": {
-        "type": "boolean",
+      "acknowledge_auth": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 10,
             "section_name": "model"
           }
         ],
-        "elementKey": "is_distributed"
+        "elementKey": "acknowledge_auth"
       },
-      "is_override": {
-        "type": "boolean",
+      "is_distributed": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "is_distributed"
+      },
+      "is_override": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -585,11 +642,24 @@
         "elementSet": "data",
         "elementPath": "item_pack_name"
       },
-      "acknowledge_auth": {
+      "item_description": {
         "type": "string",
         "_defn": [
           {
             "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_description",
+        "elementName": "item_description",
+        "elementSet": "data",
+        "elementPath": "item_description"
+      },
+      "acknowledge_auth": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -599,10 +669,10 @@
         "elementPath": "acknowledge_auth"
       },
       "is_distributed": {
-        "type": "boolean",
+        "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -612,10 +682,10 @@
         "elementPath": "is_distributed"
       },
       "is_override": {
-        "type": "boolean",
+        "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -726,7 +796,7 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "distribution"
+        "_value": "wrong_form"
       },
       {
         "_partition": "Table",
@@ -741,6 +811,27 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "\"Distribution Authorization\""
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "filterTypeOnCreation",
+        "_type": "string",
+        "_value": "READ_ONLY"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "locked",
+        "_type": "boolean",
+        "_value": "true"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "unverifiedUserCanCreate",
+        "_type": "boolean",
+        "_value": "false"
       }
     ]
   }

@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <link href="css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript">
+
+        var sqlWhereClause = null;
+        var sqlSelectionArgs = null;
+        function search() {
+            sqlWhereClause = document.getElementById('field').value +' = ?';
+            sqlSelectionArgs = document.getElementById('value').value;
+            odkData.query('registration', sqlWhereClause, [sqlSelectionArgs],
+            null, null, null, null, null, null, null,
+            successCallbackFn, failureCallbackFn);
+        }
+
+        function successCallbackFn(result) {
+            document.getElementById('search_results').innerHTML = result.getCount() + ' beneficiaries found!';
+            if (result.getCount() > 0) {
+                document.getElementById('launch').style.display='block';
+            } else {
+                document.getElementById('launch').style.display='none';
+            }
+        }
+
+        function failureCallbackFn(error) {
+            document.getElementById('search_results').innerHTML = 'invalid field!';
+            document.getElementById('launch').style.display='none';
+        }
+
+        function launch() {
+            console.log(sqlWhereClause + ' ---- ' + sqlSelectionArgs);
+                odkTables.openTableToListView('registration', sqlWhereClause,
+                    [sqlSelectionArgs], 'config/tables/registration/html/registration_list.html');
+            }
+        
+        </script>
+    </head>
+
+    <body>
+        <h1>Search for Beneficiaries</h1>
+        <form>
+            <input type="text" id="field" placeholder="Enter a field (must match a field in the registration table)">
+        </form>
+        <form>
+            <input type="text" id="value" placeholder="Enter a value for this field">
+        </form>
+        <button type="button" id="search" onclick="search()">Search</button>
+        <br>
+        <p id="search_results"></p>
+        <button id='launch' style='display:none;' onclick='launch()'>View Beneficiaries</button>
+
+        <p> <img src="img/small_2025.jpg"></p>
+    </body>
+</html>

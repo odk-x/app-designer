@@ -11,7 +11,7 @@ var registrationResultSet = {};
 function cbSuccess(result) {
 
   registrationResultSet = result;
-  if (registrationResultSet.get('is_active')) {
+  if (registrationResultSet.get('is_active') === 'true') {
     $('#deliver').text('Disable Beneficiary');
   } else {
     $('#deliver').text('Enable Beneficiary');
@@ -49,9 +49,11 @@ function cbSuccess(result) {
       'click',
       function() {
         var struct = {};
-        struct.is_active = !registrationResultSet.get('is_active');
-        if (!struct.is_active) {
-          struct.ignore_validation = '1';
+        if (registrationResultSet.get('is_active') === 'true') {
+          struct.is_active = 'false';
+        } else {
+          struct.is_active = 'true'
+          struct.ignore_validation = 'true';
         }
         console.log(registrationResultSet.getRowId(0));
         odkData.updateRow(

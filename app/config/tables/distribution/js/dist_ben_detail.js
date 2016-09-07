@@ -9,11 +9,12 @@ var display = function() {
 
 var cbSuccess = function (result) {
   authorizationsResultSet = result;
-
+  console.log(authorizationsResultSet.getColumns());
   $('#FIELD_1').text(authorizationsResultSet.get('authorization_name'));
   $('#FIELD_2').text(authorizationsResultSet.get('authorization_id'));
   $('#FIELD_3').text(authorizationsResultSet.get('item_pack_name'));
   $('#FIELD_4').text(authorizationsResultSet.get('item_pack_id'));
+  $('#FIELD_5').text(authorizationsResultSet.get('item_description'));
   $('#FIELD_8').text(authorizationsResultSet.get('distribution_id'));
   $('#FIELD_7').text(authorizationsResultSet.get('is_override'));
   $('#FIELD_9').text(authorizationsResultSet.get('beneficiary_code'));
@@ -22,11 +23,22 @@ var cbSuccess = function (result) {
   launchButton.on(
     'click',
     function() {
-      var jsonMap = getJSONMapValues();
-      odkTables.addRowWithSurvey('deployment', 'deploy_to_specific', null, jsonMap);
+      odkData.query('distribution', 'distribution_id = ?', [authorizationsResultSet.get('distribution_id')],
+        null, null, null, null, null, null, true, distributionCBSuccess, distributionCBFailure);
     });
     //myTimeoutVal = setTimeout(callBackFn(), 1000);
 };
+
+var distributionCBSuccess = function(result) {
+  if (result.get('is_distributed') == 'false') {
+    var jsonMap = getJSONMapValues();
+    odkTables.addRowWithSurvey('deployment', 'deploy_to_specific', null, jsonMap);
+  } 
+}
+
+var distributionCBFailure = function(result) {
+  console.log('distributionCBFailure with error: ' + error);
+}
 
 var setJSONMap = function(JSONMap, key, value) {
     if (value !== null && value !== undefined) {
@@ -43,6 +55,7 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'authorization_name', authorizationsResultSet.get('authorization_name'));
   setJSONMap(jsonMap, 'item_pack_id', authorizationsResultSet.get('item_pack_id'));
   setJSONMap(jsonMap, 'item_pack_name', authorizationsResultSet.get('item_pack_name'));
+  setJSONMap(jsonMap, 'item_description', authorizationsResultSet.get('item_description'));
   setJSONMap(jsonMap, 'is_override', authorizationsResultSet.get('is_override'));
     // Writing out number values needs more investigation
   setJSONMap(jsonMap, 'ranges', authorizationsResultSet.get('ranges'));

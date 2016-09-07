@@ -22,7 +22,7 @@
         "_row_num": 5
       },
       {
-        "type": "boolean",
+        "type": "string",
         "name": "is_distributed",
         "_row_num": 6
       },
@@ -57,14 +57,19 @@
         "_row_num": 12
       },
       {
-        "type": "boolean",
-        "name": "is_override",
+        "type": "string",
+        "name": "item_description",
         "_row_num": 13
       },
       {
         "type": "string",
-        "name": "ranges",
+        "name": "is_override",
         "_row_num": 14
+      },
+      {
+        "type": "string",
+        "name": "ranges",
+        "_row_num": 15
       }
     ],
     "settings": [
@@ -486,7 +491,7 @@
       },
       "is_distributed": {
         "prompt_type_name": "async_assign_single_string",
-        "type": "boolean",
+        "type": "string",
         "valuesList": "is_distributed_value_query",
         "_defn": [
           {
@@ -568,11 +573,21 @@
         ],
         "elementKey": "item_pack_name"
       },
-      "is_override": {
-        "type": "boolean",
+      "item_description": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_description"
+      },
+      "is_override": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -582,7 +597,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],
@@ -1315,7 +1330,7 @@
       },
       "is_distributed": {
         "prompt_type_name": "async_assign_single_string",
-        "type": "boolean",
+        "type": "string",
         "valuesList": "is_distributed_value_query",
         "_defn": [
           {
@@ -1418,11 +1433,24 @@
         "elementSet": "data",
         "elementPath": "item_pack_name"
       },
-      "is_override": {
-        "type": "boolean",
+      "item_description": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_description",
+        "elementName": "item_description",
+        "elementSet": "data",
+        "elementPath": "item_description"
+      },
+      "is_override": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -1435,7 +1463,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],

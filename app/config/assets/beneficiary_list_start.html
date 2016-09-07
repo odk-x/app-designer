@@ -17,7 +17,7 @@
             active.innerHTML = "Active Beneficiaries";
             active.onclick = function() {
               odkTables.openTableToListView(
-                'registration', 'is_active = ?', ['1']
+                'registration', 'is_active = ?', ['true']
                 , 'config/tables/registration/html/registration_list.html');
 
             }
@@ -30,7 +30,7 @@
             disabled.innerHTML = "Disabled Beneficiaries";
             disabled.onclick = function() {
               odkTables.openTableToListView(
-                'registration', 'is_active = ?', ['0']
+                'registration', 'is_active = ?', ['false']
                 , 'config/tables/registration/html/registration_list.html');
             }
             document.getElementById("wrapper").appendChild(disabled);    
