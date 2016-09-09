@@ -2276,19 +2276,6 @@ promptTypes.barcode = promptTypes.launch_intent.extend({
     intentString: 'com.google.zxing.client.android.SCAN',
      extractDataValue: function(jsonObject) {
         return jsonObject.result.SCAN_RESULT;
-    },
-    getValue: function() {
-        if (!this.name) {
-            console.error("prompts.barcode.getValue: Cannot get value of prompt with no name. px: "
-                          + this.promptIdx);
-            throw new Error("Cannot get value of prompt with no name.");
-        }
-        var value = database.getDataValue(this.name);
-        if (value === null || value === undefined ||
-            value.SCAN_RESULT === null || value.SCAN_RESULT === undefined) {
-            return null;
-        }
-        return value;
     }
 });
 promptTypes.geopoint = promptTypes.launch_intent.extend({
