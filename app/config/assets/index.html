@@ -17,11 +17,8 @@
             newClient.setAttribute("id", "button1");
             newClient.innerHTML = "Registration";
             newClient.onclick = function() {
-                odkTables.addRowWithSurvey(
-                    'registration',
-                    'registration',
-                    null,
-                    null);
+                odkTables.launchHTML(
+                    'config/assets/registration_start.html');
             }
             document.getElementById("wrapper").appendChild(newClient);    
 
@@ -29,22 +26,26 @@
             // 'femaleClients' table list view
             var followUp = document.createElement("button");
             followUp.setAttribute("id", "button2");
-            followUp.innerHTML = "Distribution";
+            followUp.innerHTML = "Distribute to Beneficiary";
             followUp.onclick = function() {
-                /*odkTables.addRowWithSurvey(
-                    'deployment',
-                    'deployment',
-                    null,
-                    null);*/
                 odkTables.launchHTML(
                     'config/assets/distribution_start.html');
             }
-            document.getElementById("wrapper").appendChild(followUp);    
+            document.getElementById("wrapper").appendChild(followUp);
+
+            var voucher = document.createElement("button");
+            voucher.setAttribute("id", "button3");
+            voucher.innerHTML = "Redeem Voucher";
+            voucher.onclick = function() {
+                odkTables.launchHTML(
+                    'config/assets/voucher_start.html');
+            }
+            document.getElementById("wrapper").appendChild(voucher);  
 
             // Send data option that luanches send finalized forms screen in
             // Collect
             var sendData = document.createElement("button");
-            sendData.setAttribute("id", "button3");
+            sendData.setAttribute("id", "button4");
             sendData.innerHTML = "Beneficiary List";
             sendData.onclick = function() {
               odkTables.launchHTML(
@@ -70,7 +71,7 @@
             var roles = result.getRoles();
             if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
                 var override = document.createElement("button");
-                override.setAttribute("id", "button4");
+                override.setAttribute("id", "button5");
                 override.innerHTML = "Administrator Overrides";
                 override.onclick = function() {
                     odkTables.launchHTML(

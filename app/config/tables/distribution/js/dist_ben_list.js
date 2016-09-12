@@ -39,19 +39,6 @@ var resumeFn = function(fIdxStart) {
             var containingDiv = jqueryObject.closest('.item_space');
             var rowId = containingDiv.attr('rowId');
             console.log('clicked with rowId: ' + rowId);
-            /*var jsonMap = {};
-            jsonMap.beneficiary_code = distributionsResultSet.get('beneficiary_code');
-            jsonMap.distribution_id = encodeURI(distributionsResultSet.get('distribution_id'));
-            jsonMap.authorization_id = encodeURI(distributionsResultSet.get('authorization_id'));
-            jsonMap.authorization_name = distributionsResultSet.get('authorization_name');
-            jsonMap.item_pack_id = encodeURI(distributionsResultSet.get('item_pack_id'));
-            jsonMap.item_pack_name = distributionsResultSet.get('item_pack_name');
-            jsonMap.min_range = distributionsResultSet.get('min_range');
-            jsonMap.max_range = distributionsResultSet.get('max_range');
-
-
-
-            jsonMap = JSON.stringify(jsonMap);*/
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file

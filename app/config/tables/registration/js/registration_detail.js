@@ -35,33 +35,26 @@ function cbSuccess(result) {
 
   $('#FIELD_8').text(registrationResultSet.get('telephone'));
 
-
   $('#FIELD_20').text(registrationResultSet.get('village'));
   $('#FIELD_21').text(registrationResultSet.get('sub_village'));
   $('#FIELD_22').text(registrationResultSet.get('district'));
   $('#FIELD_24').text(registrationResultSet.get('mobile_provider'));
 
-  
-
-  var deliver = $('#deliver');
-  deliver.on(
-      'click',
-      function() {
-          odkTables.openTableToListView(
-              'distribution',
-              'beneficiary_code = ? and is_distributed = ?',
-              [registrationResultSet.get('beneficiary_code'), 'false'],
-              'config/tables/distribution/html/dist_ben_list.html'
-          );
-       // var rowId = registrationResultSet.getRowId(0);
-        /*odkTables.addRowWithSurvey(
-          'deployment',
-          'deploy_to_beneficiary',
-          null,
-          jsonMap);*/
-
-      }
-    );
+  if (registrationResultSet.get('is_active') == 'true') {
+    var deliver = $('#deliver');
+    deliver.show();
+    deliver.on(
+        'click',
+        function() {
+            odkTables.openTableToListView(
+                'distribution',
+                'beneficiary_code = ? and is_distributed = ?',
+                [registrationResultSet.get('beneficiary_code'), 'false'],
+                'config/tables/distribution/html/dist_ben_list.html'
+            );
+        }
+      );
+  }
 }
 
 function cbFailure(error) {

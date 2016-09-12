@@ -14,8 +14,6 @@
     	var myTimeoutVal = null;
        	var code = null;
 
-
-
 		function display() {
 			var launchBarcodeButton = $('#launch-barcode');
     		launchBarcodeButton.on(
@@ -30,7 +28,6 @@
         	});
       	    myTimeoutVal = setTimeout(callBackFn(), 1000);
     	}
-
 
     	function callBackFn () {
 		    if (insideQueue == true) return;
@@ -48,15 +45,11 @@
 		            action.jsonValue.status === -1) {
 		        	code = action.jsonValue.result.SCAN_RESULT;
 		        	clearTimeout(myTimeoutVal);
-		            odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'true'], null, null,
-					            null, null, null, null, true, beneficiaryCBSuccess, 
-					            beneficiaryCBFailure);
-
+		            odkData.query('registration', 'beneficiary_code = ?', [code], null, null,
+					            null, null, null, null, true, beneficiaryCBSuccess, beneficiaryCBFailure);
 		        } else {
 		            myTimeoutVal = setTimeout(callBackFn(), 1000);
 		            $('#scanned-barcode').text("No value");
-		            $('#launch').hide();
-					odkCommon.removeFirstQueuedAction();
 		        }
 		    }
     		console.log("callBackFn is called");
@@ -66,29 +59,10 @@
 		function beneficiaryCBSuccess(result) {
 			console.log('beneficiaryCBSuccess called');
 			if (result.getCount() === 0) {
-				odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'false'],
-					null, null, null, null, null, null, true, disabledCBSuccess, disabledCBFailure);
-			} else if (result.getCount() === 1) {
-				$('#scanned-barcode').text(code);
-				$('#launch').show();
-				$('#launch').text('Click to Distribute');
-				$('#launch').click(function() {
-					odkTables.openDetailView(
-                  'registration',
-                  result.getRowId(0),
-                  'config/tables/registration/html/registration_detail.html');
-				});
-				odkCommon.removeFirstQueuedAction();
+				odkData.query('distribution', 'beneficiary_code = ?', [code],
+					null, null, null, null, null, null, true, voucherCBSuccess, voucherCBFailure);
 			} else {
-				$('#scanned-barcode').text(code + ' -- Multiple Active Beneficiaries Detected!');
-				$('#launch').show();
-				$('#launch').text('Choose a specific beneficiary');
-				$('#launch').click(function() {
-					odkTables.openTableToListView(
-                	'registration', 'beneficiary_code = ? and is_active = ?', [code,'true']
-                	, 'config/tables/registration/html/registration_list.html');
-            	});
-				odkCommon.removeFirstQueuedAction();                
+				$('#scanned-barcode').text(code + " -- beneficiary with this code already detected in system: please contact Administrator");
 			}
 		}
 
@@ -96,21 +70,38 @@
 			console.log('beneficiaryCBFailure called with error: ' + error);
 		}
 
-		function disabledCBSuccess(result) {
-			console.log('disabledCB called');
-			if (result.getCount() > 0) {
-				$('#scanned-barcode').text('beneficiary with code ' + ' is disabled');
+		function voucherCBSuccess(result) {
+			console.log('voucherCBSuccess called');
+			if (result.getCount() === 0) {
+				$('#scanned-barcode').text('Scanned voucher code not found in system');
 			} else {
-				$('#scanned-barcode').text('Scanned code not found in system');
-
+				$('#scanned-barcode').text(code + ' -- Voucher Detected!');
+				$('#launch').show();
+				$('#launch').text('Redeem Voucher');
+				$('#launch').click(function() {
+					odkTables.addRowWithSurvey(
+                	'registration', 'registration', null, getJSONMapValues());
+            	});
 			}
-			$('#launch').hide();
 			odkCommon.removeFirstQueuedAction();
 		}
 
-		function disabledCBFailure(error) {
-			console.log('disableCB failed with error: ' + error);
+		function voucherCBFailure(error) {
+			console.log('activeCBFailure called with error: ' + error);
 		}
+
+		var setJSONMap = function(JSONMap, key, value) {
+		    if (value !== null && value !== undefined) {
+		        JSONMap[key] = JSON.stringify(value);
+		    }
+		}
+
+		var getJSONMapValues = function() {
+		    var jsonMap = {};
+		    setJSONMap(jsonMap, 'beneficiary_code', code);
+		    jsonMap = JSON.stringify(jsonMap);    
+	    	return jsonMap;
+		};
 
 		</script>
 	</head>
@@ -118,7 +109,7 @@
 
 	
 	<body onload="display();">
-	<h2>Please Scan or Enter The Beneficiary Barcode</h2>
+	<h2>Please Scan or Enter The Voucher Barcode</h2>
 	<button id="launch-barcode" class="btn btn-launch btn-primary btn-block btn-plotter">Launch Barcode</button>
 	<p>Scanned BarCode: <span id="scanned-barcode"></span></p>
 	<button id="launch" style='display:none'></button>

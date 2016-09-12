@@ -20,19 +20,13 @@
         "_row_num": 4
       },
       {
-        "type": "assign",
-        "name": "ignore_validation",
-        "calculation": false,
-        "_row_num": 5
-      },
-      {
         "type": "string",
         "name": "first_name",
         "display": {
           "text": "What is your first name?",
           "hint": "First name"
         },
-        "_row_num": 6
+        "_row_num": 5
       },
       {
         "type": "string",
@@ -41,13 +35,13 @@
           "text": "What is your last Name?",
           "hint": "Last name"
         },
-        "_row_num": 7
+        "_row_num": 6
       },
       {
         "type": "assign",
         "name": "first_last_name",
         "calculation": "data('first_name') + \" \" + data('last_name')",
-        "_row_num": 8
+        "_row_num": 7
       },
       {
         "type": "date",
@@ -55,13 +49,13 @@
         "display": {
           "text": "What is your date of birth?"
         },
-        "_row_num": 9
+        "_row_num": 8
       },
       {
         "type": "assign",
         "name": "age",
-        "calculation": "(now().getTime() - new Date(data('birth_date')).getTime()) / (1000 * 60 * 60 * 24 * 365)",
-        "_row_num": 10
+        "calculation": "calculates.age()",
+        "_row_num": 9
       },
       {
         "type": "select_one",
@@ -70,7 +64,7 @@
           "text": "What is your gender?"
         },
         "values_list": "genders",
-        "_row_num": 11
+        "_row_num": 10
       },
       {
         "type": "string",
@@ -78,7 +72,7 @@
         "display": {
           "text": "What type of ID do you have?"
         },
-        "_row_num": 12
+        "_row_num": 11
       },
       {
         "type": "string",
@@ -86,7 +80,7 @@
         "display": {
           "text": "What is your ID number?"
         },
-        "_row_num": 13
+        "_row_num": 12
       },
       {
         "type": "select_one",
@@ -95,44 +89,7 @@
           "text": "What is the name of the distribution site?"
         },
         "values_list": "sites",
-        "_row_num": 14
-      },
-      {
-        "type": "select_one",
-        "name": "district",
-        "display": {
-          "text": "What district do you live in?"
-        },
-        "values_list": "districts",
-        "_row_num": 15
-      },
-      {
-        "type": "select_one",
-        "name": "city",
-        "display": {
-          "text": "What city/township do you live in?",
-          "hint": "City"
-        },
-        "values_list": "cities",
-        "_row_num": 16
-      },
-      {
-        "type": "select_one",
-        "name": "village",
-        "display": {
-          "text": "What village/neighborhood do you live in?"
-        },
-        "values_list": "villages",
-        "_row_num": 17
-      },
-      {
-        "type": "select_one",
-        "name": "sub_village",
-        "display": {
-          "text": "What sub-village/sub-neighborhood do you live in?"
-        },
-        "values_list": "sub-villages",
-        "_row_num": 18
+        "_row_num": 13
       },
       {
         "type": "string",
@@ -141,7 +98,7 @@
           "text": "What is your current address?",
           "hint": "Address"
         },
-        "_row_num": 19
+        "_row_num": 14
       },
       {
         "type": "string",
@@ -149,7 +106,7 @@
         "display": {
           "text": "What is your mobile phone service provider?"
         },
-        "_row_num": 20
+        "_row_num": 15
       },
       {
         "type": "string",
@@ -158,7 +115,7 @@
           "text": "What is your mobile phone number?",
           "hint": "Telephone number"
         },
-        "_row_num": 21
+        "_row_num": 16
       },
       {
         "type": "string",
@@ -167,32 +124,22 @@
           "text": "How many people are in your household?",
           "hint": "Including household representative"
         },
-        "_row_num": 22
+        "_row_num": 17
       },
       {
-        "type": "barcode",
-        "name": "beneficiary_code",
+        "type": "geopoint",
+        "name": "location",
         "display": {
-          "text": "Scan their barcode.",
-          "hint": "Beneficiary code"
+          "text": "Capture current location"
         },
-        "_row_num": 23
-      },
-      {
-        "type": "string",
-        "name": "beneficiary_code",
-        "display": {
-          "text": "Enter or update their barcode.",
-          "hint": "Beneficiary code"
-        },
-        "_row_num": 24
+        "_row_num": 18
       },
       {
         "type": "note",
         "display": {
           "text": "Press \"Next\" to finish."
         },
-        "_row_num": 25
+        "_row_num": 19
       }
     ],
     "settings": [
@@ -251,7 +198,7 @@
         "_row_num": 6
       },
       {
-        "type": "number",
+        "type": "string",
         "name": "age",
         "_row_num": 7
       },
@@ -277,68 +224,53 @@
       },
       {
         "type": "string",
-        "name": "district",
+        "name": "address",
         "_row_num": 12
       },
       {
         "type": "string",
-        "name": "city",
+        "name": "mobile_provider",
         "_row_num": 13
       },
       {
         "type": "string",
-        "name": "village",
+        "name": "telephone",
         "_row_num": 14
       },
       {
         "type": "string",
-        "name": "sub_village",
+        "name": "hh_size",
         "_row_num": 15
       },
       {
         "type": "string",
-        "name": "address",
+        "name": "beneficiary_code",
         "_row_num": 16
       },
       {
         "type": "string",
-        "name": "mobile_provider",
+        "name": "is_active",
         "_row_num": 17
       },
       {
         "type": "string",
-        "name": "telephone",
+        "name": "disabled_reason",
         "_row_num": 18
       },
       {
         "type": "string",
-        "name": "hh_size",
+        "name": "is_override",
         "_row_num": 19
       },
       {
         "type": "string",
-        "name": "beneficiary_code",
+        "name": "override_user",
         "_row_num": 20
       },
       {
-        "type": "string",
-        "name": "is_active",
+        "type": "geopoint",
+        "name": "location",
         "_row_num": 21
-      },
-      {
-        "type": "string",
-        "name": "disabled_reason",
-        "_row_num": 22
-      },
-      {
-        "type": "string",
-        "name": "is_override",
-        "_row_num": 23
-      },
-      {
-        "type": "string",
-        "name": "ignore_validation",
-        "_row_num": 24
       }
     ],
     "initial": [
@@ -456,6 +388,13 @@
           "text": "A"
         },
         "_row_num": 14
+      }
+    ],
+    "calculates": [
+      {
+        "calculation_name": "age",
+        "calculation": "(function() { \n    var ageDifMs = Date.now() - data('birth_date').getTime();\n    var ageDate = new Date(ageDifMs); \n    var years = Math.abs(ageDate.getUTCFullYear() - 1970);\n    var months = ageDate.getUTCMonth();\n    var days = ageDate.getUTCDate();\n    var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; \n    var daysInCurrYear = 0;\n    for (var i = 0; i < months; i++) {\n     daysInCurrYear += daysOfMonth[i];\n    }\n    daysInCurrYear += days;\n    var age = years + (daysInCurrYear / 365.0);\n    return age;\n})()",
+        "_row_num": 2
       }
     ]
   },
@@ -649,7 +588,13 @@
       ]
     },
     "queries": {},
-    "calculates": {},
+    "calculates": {
+      "age": {
+        "calculation_name": "age",
+        "calculation": "(function() { \n    var ageDifMs = Date.now() - data('birth_date').getTime();\n    var ageDate = new Date(ageDifMs); \n    var years = Math.abs(ageDate.getUTCFullYear() - 1970);\n    var months = ageDate.getUTCMonth();\n    var days = ageDate.getUTCDate();\n    var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; \n    var daysInCurrYear = 0;\n    for (var i = 0; i < months; i++) {\n     daysInCurrYear += daysOfMonth[i];\n    }\n    daysInCurrYear += days;\n    var age = years + (daysInCurrYear / 365.0);\n    return age;\n})()",
+        "_row_num": 2
+      }
+    },
     "model": {
       "date_screened": {
         "type": "string",
@@ -669,7 +614,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "section_name": "survey"
           },
           {
@@ -683,7 +628,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "survey"
           },
           {
@@ -697,7 +642,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "survey"
           },
           {
@@ -712,7 +657,7 @@
         "elementType": "date",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
@@ -723,10 +668,10 @@
         "elementKey": "birth_date"
       },
       "age": {
-        "type": "number",
+        "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "survey"
           },
           {
@@ -741,7 +686,7 @@
         "valuesList": "genders",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -755,7 +700,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
@@ -769,7 +714,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -784,7 +729,7 @@
         "valuesList": "sites",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 13,
             "section_name": "survey"
           },
           {
@@ -794,75 +739,15 @@
         ],
         "elementKey": "distribution_site"
       },
-      "district": {
-        "type": "string",
-        "valuesList": "districts",
-        "_defn": [
-          {
-            "_row_num": 15,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 12,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "district"
-      },
-      "city": {
-        "type": "string",
-        "valuesList": "cities",
-        "_defn": [
-          {
-            "_row_num": 16,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 13,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "city"
-      },
-      "village": {
-        "type": "string",
-        "valuesList": "villages",
-        "_defn": [
-          {
-            "_row_num": 17,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 14,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "village"
-      },
-      "sub_village": {
-        "type": "string",
-        "valuesList": "sub-villages",
-        "_defn": [
-          {
-            "_row_num": 18,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 15,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "sub_village"
-      },
       "address": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 14,
             "section_name": "survey"
           },
           {
-            "_row_num": 16,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -872,11 +757,11 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
-            "_row_num": 17,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -886,11 +771,11 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 16,
             "section_name": "survey"
           },
           {
-            "_row_num": 18,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -900,11 +785,11 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 17,
             "section_name": "survey"
           },
           {
-            "_row_num": 19,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],
@@ -914,15 +799,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 23,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 24,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 20,
+            "_row_num": 16,
             "section_name": "model"
           }
         ],
@@ -936,7 +813,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 21,
+            "_row_num": 17,
             "section_name": "model"
           }
         ],
@@ -946,7 +823,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 18,
             "section_name": "model"
           }
         ],
@@ -960,25 +837,55 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 23,
+            "_row_num": 19,
             "section_name": "model"
           }
         ],
         "elementKey": "is_override"
       },
-      "ignore_validation": {
+      "override_user": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 24,
+            "_row_num": 20,
             "section_name": "model"
           }
         ],
-        "elementKey": "ignore_validation"
+        "elementKey": "override_user"
+      },
+      "location": {
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "location_latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "location_longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "location_altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "location_accuracy"
+          }
+        },
+        "name": "geopoint",
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 21,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location"
       }
     },
     "section_names": [
@@ -998,11 +905,11 @@
               "text": "What is your first name?",
               "hint": "First name"
             },
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen6",
+            "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 0
           },
           {
@@ -1012,11 +919,11 @@
               "text": "What is your last Name?",
               "hint": "Last name"
             },
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen7",
+            "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 1
           },
           {
@@ -1025,11 +932,11 @@
             "display": {
               "text": "What is your date of birth?"
             },
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen9",
+            "_branch_label_enclosing_screen": "survey/_screen8",
             "promptIdx": 2
           },
           {
@@ -1039,11 +946,11 @@
               "text": "What is your gender?"
             },
             "values_list": "genders",
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 3
           },
           {
@@ -1052,11 +959,11 @@
             "display": {
               "text": "What type of ID do you have?"
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen12",
+            "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 4
           },
           {
@@ -1065,11 +972,11 @@
             "display": {
               "text": "What is your ID number?"
             },
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen13",
+            "_branch_label_enclosing_screen": "survey/_screen12",
             "promptIdx": 5
           },
           {
@@ -1079,69 +986,12 @@
               "text": "What is the name of the distribution site?"
             },
             "values_list": "sites",
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen14",
+            "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 6
-          },
-          {
-            "type": "select_one",
-            "name": "district",
-            "display": {
-              "text": "What district do you live in?"
-            },
-            "values_list": "districts",
-            "_row_num": 15,
-            "__rowNum__": 14,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 7
-          },
-          {
-            "type": "select_one",
-            "name": "city",
-            "display": {
-              "text": "What city/township do you live in?",
-              "hint": "City"
-            },
-            "values_list": "cities",
-            "_row_num": 16,
-            "__rowNum__": 15,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 8
-          },
-          {
-            "type": "select_one",
-            "name": "village",
-            "display": {
-              "text": "What village/neighborhood do you live in?"
-            },
-            "values_list": "villages",
-            "_row_num": 17,
-            "__rowNum__": 16,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen17",
-            "promptIdx": 9
-          },
-          {
-            "type": "select_one",
-            "name": "sub_village",
-            "display": {
-              "text": "What sub-village/sub-neighborhood do you live in?"
-            },
-            "values_list": "sub-villages",
-            "_row_num": 18,
-            "__rowNum__": 17,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen18",
-            "promptIdx": 10
           },
           {
             "type": "string",
@@ -1150,12 +1000,12 @@
               "text": "What is your current address?",
               "hint": "Address"
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen19",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen14",
+            "promptIdx": 7
           },
           {
             "type": "string",
@@ -1163,12 +1013,12 @@
             "display": {
               "text": "What is your mobile phone service provider?"
             },
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen20",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen15",
+            "promptIdx": 8
           },
           {
             "type": "string",
@@ -1177,12 +1027,12 @@
               "text": "What is your mobile phone number?",
               "hint": "Telephone number"
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen21",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 9
           },
           {
             "type": "string",
@@ -1191,60 +1041,45 @@
               "text": "How many people are in your household?",
               "hint": "Including household representative"
             },
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 10
           },
           {
-            "type": "barcode",
-            "name": "beneficiary_code",
+            "type": "geopoint",
+            "name": "location",
             "display": {
-              "text": "Scan their barcode.",
-              "hint": "Beneficiary code"
+              "text": "Capture current location"
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "prompt",
-            "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen23",
-            "promptIdx": 15
-          },
-          {
-            "type": "string",
-            "name": "beneficiary_code",
-            "display": {
-              "text": "Enter or update their barcode.",
-              "hint": "Beneficiary code"
-            },
-            "_row_num": 24,
-            "__rowNum__": 23,
-            "_token_type": "prompt",
-            "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen24",
-            "promptIdx": 16
+            "_type": "geopoint",
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 11
           },
           {
             "type": "note",
             "display": {
               "text": "Press \"Next\" to finish."
             },
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen25",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 12
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 26,
-            "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 18
+            "_row_num": 20,
+            "_branch_label_enclosing_screen": "survey/_screen20",
+            "promptIdx": 13
           }
         ],
         "validation_tag_map": {
@@ -1279,166 +1114,128 @@
             "operationIdx": 2
           },
           {
-            "type": "assign",
-            "name": "ignore_validation",
-            "calculation": false,
             "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "assign",
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
             "_row_num": 6,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "_row_num": 7,
-            "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 5
+            "operationIdx": 4
           },
           {
             "type": "assign",
             "name": "first_last_name",
             "calculation": "data('first_name') + \" \" + data('last_name')",
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "assign",
-            "operationIdx": 6
+            "operationIdx": 5
           },
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 7
+            "operationIdx": 6
           },
           {
             "type": "assign",
             "name": "age",
-            "calculation": "(now().getTime() - new Date(data('birth_date')).getTime()) / (1000 * 60 * 60 * 24 * 365)",
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "calculation": "calculates.age()",
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "assign",
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 10,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
             "_row_num": 11,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 9
           },
           {
             "_row_num": 12,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 10
           },
           {
             "_row_num": 13,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 11
           },
           {
             "_row_num": 14,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 12
           },
           {
             "_row_num": 15,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 13
           },
           {
             "_row_num": 16,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 14
           },
           {
             "_row_num": 17,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 15
           },
           {
             "_row_num": 18,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 16
           },
           {
             "_row_num": 19,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 17
-          },
-          {
-            "_row_num": 20,
-            "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 18
-          },
-          {
-            "_row_num": 21,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 19
-          },
-          {
-            "_row_num": 22,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 20
-          },
-          {
-            "_row_num": 23,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 21
-          },
-          {
-            "_row_num": 24,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 22
-          },
-          {
-            "_row_num": 25,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 23
+            "operationIdx": 17
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 26,
-            "operationIdx": 24
+            "_row_num": 20,
+            "operationIdx": 18
           },
           {
-            "_row_num": 26,
+            "_row_num": 20,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 25
+            "operationIdx": 19
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 26,
-            "operationIdx": 26
+            "_row_num": 20,
+            "operationIdx": 20
           }
         ],
         "branch_label_map": {
+          "_screen5": 3,
           "_screen6": 4,
-          "_screen7": 5,
-          "_screen9": 7,
+          "_screen8": 6,
+          "_screen10": 8,
           "_screen11": 9,
           "_screen12": 10,
           "_screen13": 11,
@@ -1448,14 +1245,8 @@
           "_screen17": 15,
           "_screen18": 16,
           "_screen19": 17,
-          "_screen20": 18,
-          "_screen21": 19,
-          "_screen22": 20,
-          "_screen23": 21,
-          "_screen24": 22,
-          "_screen25": 23,
-          "_contents": 25,
-          "_screen26": 25
+          "_contents": 19,
+          "_screen20": 19
         }
       },
       "initial": {
@@ -1587,7 +1378,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "section_name": "survey"
           },
           {
@@ -1604,7 +1395,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "survey"
           },
           {
@@ -1621,7 +1412,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "survey"
           },
           {
@@ -1639,7 +1430,7 @@
         "elementType": "date",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
@@ -1653,10 +1444,10 @@
         "elementPath": "birth_date"
       },
       "age": {
-        "type": "number",
+        "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "survey"
           },
           {
@@ -1674,7 +1465,7 @@
         "valuesList": "genders",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -1691,7 +1482,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
@@ -1708,7 +1499,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -1726,7 +1517,7 @@
         "valuesList": "sites",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 13,
             "section_name": "survey"
           },
           {
@@ -1739,87 +1530,15 @@
         "elementSet": "data",
         "elementPath": "distribution_site"
       },
-      "district": {
-        "type": "string",
-        "valuesList": "districts",
-        "_defn": [
-          {
-            "_row_num": 15,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 12,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "district",
-        "elementName": "district",
-        "elementSet": "data",
-        "elementPath": "district"
-      },
-      "city": {
-        "type": "string",
-        "valuesList": "cities",
-        "_defn": [
-          {
-            "_row_num": 16,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 13,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "city",
-        "elementName": "city",
-        "elementSet": "data",
-        "elementPath": "city"
-      },
-      "village": {
-        "type": "string",
-        "valuesList": "villages",
-        "_defn": [
-          {
-            "_row_num": 17,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 14,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "village",
-        "elementName": "village",
-        "elementSet": "data",
-        "elementPath": "village"
-      },
-      "sub_village": {
-        "type": "string",
-        "valuesList": "sub-villages",
-        "_defn": [
-          {
-            "_row_num": 18,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 15,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "sub_village",
-        "elementName": "sub_village",
-        "elementSet": "data",
-        "elementPath": "sub_village"
-      },
       "address": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 14,
             "section_name": "survey"
           },
           {
-            "_row_num": 16,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -1832,11 +1551,11 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
-            "_row_num": 17,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -1849,11 +1568,11 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 16,
             "section_name": "survey"
           },
           {
-            "_row_num": 18,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -1866,11 +1585,11 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 17,
             "section_name": "survey"
           },
           {
-            "_row_num": 19,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],
@@ -1883,15 +1602,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 23,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 24,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 20,
+            "_row_num": 16,
             "section_name": "model"
           }
         ],
@@ -1908,7 +1619,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 21,
+            "_row_num": 17,
             "section_name": "model"
           }
         ],
@@ -1921,7 +1632,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 18,
             "section_name": "model"
           }
         ],
@@ -1938,7 +1649,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 23,
+            "_row_num": 19,
             "section_name": "model"
           }
         ],
@@ -1947,22 +1658,102 @@
         "elementSet": "data",
         "elementPath": "is_override"
       },
-      "ignore_validation": {
+      "override_user": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 24,
+            "_row_num": 20,
             "section_name": "model"
           }
         ],
-        "elementKey": "ignore_validation",
-        "elementName": "ignore_validation",
+        "elementKey": "override_user",
+        "elementName": "override_user",
         "elementSet": "data",
-        "elementPath": "ignore_validation"
+        "elementPath": "override_user"
+      },
+      "location": {
+        "type": "object",
+        "elementType": "geopoint",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "elementKey": "location_latitude",
+            "elementName": "latitude",
+            "elementSet": "data",
+            "elementPath": "location.latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "elementKey": "location_longitude",
+            "elementName": "longitude",
+            "elementSet": "data",
+            "elementPath": "location.longitude"
+          },
+          "altitude": {
+            "type": "number",
+            "elementKey": "location_altitude",
+            "elementName": "altitude",
+            "elementSet": "data",
+            "elementPath": "location.altitude"
+          },
+          "accuracy": {
+            "type": "number",
+            "elementKey": "location_accuracy",
+            "elementName": "accuracy",
+            "elementSet": "data",
+            "elementPath": "location.accuracy"
+          }
+        },
+        "name": "geopoint",
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 21,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location",
+        "elementName": "location",
+        "elementSet": "data",
+        "elementPath": "location",
+        "listChildElementKeys": [
+          "location_accuracy",
+          "location_altitude",
+          "location_latitude",
+          "location_longitude"
+        ],
+        "notUnitOfRetention": true
+      },
+      "location_latitude": {
+        "type": "number",
+        "elementKey": "location_latitude",
+        "elementName": "latitude",
+        "elementSet": "data",
+        "elementPath": "location.latitude"
+      },
+      "location_longitude": {
+        "type": "number",
+        "elementKey": "location_longitude",
+        "elementName": "longitude",
+        "elementSet": "data",
+        "elementPath": "location.longitude"
+      },
+      "location_altitude": {
+        "type": "number",
+        "elementKey": "location_altitude",
+        "elementName": "altitude",
+        "elementSet": "data",
+        "elementPath": "location.altitude"
+      },
+      "location_accuracy": {
+        "type": "number",
+        "elementKey": "location_accuracy",
+        "elementName": "accuracy",
+        "elementSet": "data",
+        "elementPath": "location.accuracy"
       },
       "_id": {
         "type": "string",
@@ -2056,13 +1847,6 @@
     "properties": [
       {
         "_partition": "Column",
-        "_aspect": "city",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"cities\",\"data_value\":\"a0\",\"display\":{\"text\":\"A\"},\"_row_num\":12}]"
-      },
-      {
-        "_partition": "Column",
         "_aspect": "distribution_site",
         "_key": "displayChoicesList",
         "_type": "object",
@@ -2070,31 +1854,10 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "district",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"districts\",\"data_value\":\"a0\",\"display\":{\"text\":\"A\"},\"_row_num\":8},{\"choice_list_name\":\"districts\",\"data_value\":\"a1\",\"display\":{\"text\":\"B\"},\"_row_num\":9},{\"choice_list_name\":\"districts\",\"data_value\":\"a2\",\"display\":{\"text\":\"C\"},\"_row_num\":10},{\"choice_list_name\":\"districts\",\"data_value\":\"a3\",\"display\":{\"text\":\"D\"},\"_row_num\":11}]"
-      },
-      {
-        "_partition": "Column",
         "_aspect": "gender",
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"genders\",\"data_value\":\"Male\",\"display\":{\"text\":\"Male\"},\"_row_num\":2},{\"choice_list_name\":\"genders\",\"data_value\":\"Female\",\"display\":{\"text\":\"Female\"},\"_row_num\":3}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "sub_village",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"sub-villages\",\"data_value\":\"a0\",\"display\":{\"text\":\"A\"},\"_row_num\":14}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "village",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"villages\",\"data_value\":\"a0\",\"display\":{\"text\":\"A\"},\"_row_num\":13}]"
       },
       {
         "_partition": "FormType",

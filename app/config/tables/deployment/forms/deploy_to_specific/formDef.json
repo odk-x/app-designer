@@ -70,6 +70,11 @@
         "type": "string",
         "name": "ranges",
         "_row_num": 15
+      },
+      {
+        "type": "string",
+        "name": "scanned_item_pack",
+        "_row_num": 16
       }
     ],
     "settings": [
@@ -129,13 +134,25 @@
         "_row_num": 2
       },
       {
+        "type": "assign",
+        "name": "summary",
+        "calculation": "calculates.parse_ranges()",
+        "model": {
+          "isSessionVariable": true
+        },
+        "_row_num": 3
+      },
+      {
         "type": "barcode",
         "name": "item_pack_barcode",
         "display": {
-          "text": "Scan an item pack barcode within the range of {{data.min_range}} to {{data.max_range}}"
+          "text": "Scan an item pack barcode within the range of {{data.summary}}"
         },
         "branch_label": "item_scan",
-        "_row_num": 3
+        "model": {
+          "isSessionVariable": true
+        },
+        "_row_num": 4
       },
       {
         "type": "string",
@@ -143,12 +160,24 @@
         "display": {
           "text": "Please confirm or update item pack barcode."
         },
-        "_row_num": 4
+        "model": {
+          "isSessionVariable": true
+        },
+        "_row_num": 5
+      },
+      {
+        "type": "assign",
+        "name": "valid",
+        "calculation": "calculates.in_range()",
+        "model": {
+          "isSessionVariable": true
+        },
+        "_row_num": 6
       },
       {
         "clause": "if",
-        "condition": "(data('item_pack_barcode') > data('max_range')) || (data('item_pack_barcode') < data('min_range'))",
-        "_row_num": 5
+        "condition": "data('valid') == 'false'",
+        "_row_num": 7
       },
       {
         "type": "select_one",
@@ -161,31 +190,31 @@
           "isSessionVariable": true,
           "valuesList": "yes_no"
         },
-        "_row_num": 6
+        "_row_num": 8
       },
       {
         "clause": "if",
         "condition": "selected(data('try_again'),'yes')",
-        "_row_num": 7
-      },
-      {
-        "clause": "goto item_scan",
-        "_row_num": 8
-      },
-      {
-        "clause": "end if",
         "_row_num": 9
       },
       {
-        "clause": "else",
+        "clause": "goto item_scan",
         "_row_num": 10
+      },
+      {
+        "clause": "end if",
+        "_row_num": 11
+      },
+      {
+        "clause": "else",
+        "_row_num": 12
       },
       {
         "type": "note",
         "display": {
           "text": "This item pack is authorized. Please distribute this item pack."
         },
-        "_row_num": 11
+        "_row_num": 13
       },
       {
         "type": "linked_table",
@@ -193,37 +222,43 @@
         "display": {
           "text": "Please click the pencil icon to record distribution"
         },
-        "_row_num": 12
+        "_row_num": 14
       },
       {
         "clause": "end if",
-        "_row_num": 13
+        "_row_num": 15
       },
       {
         "clause": "begin screen",
-        "_row_num": 14
+        "_row_num": 16
       },
       {
         "type": "note",
         "display": {
           "text": "Please continue to the next screen if you have clicked the pencil icon to record distribution"
         },
-        "_row_num": 15
+        "_row_num": 17
       },
       {
         "type": "async_assign_single_string",
         "values_list": "is_distributed_value_query",
         "name": "is_distributed",
-        "_row_num": 16
+        "_row_num": 18
       },
       {
         "clause": "end screen",
-        "_row_num": 18
+        "_row_num": 20
       },
       {
         "clause": "if",
         "condition": "data('is_distributed') == 'true'",
-        "_row_num": 19
+        "_row_num": 21
+      },
+      {
+        "type": "assign",
+        "name": "scanned_item_pack",
+        "calculation": "data('item_pack_barcode')",
+        "_row_num": 22
       },
       {
         "type": "note",
@@ -231,13 +266,13 @@
         "display": {
           "text": "Since the authorized item pack was successfully distributed, we will complete now complete a brief report."
         },
-        "_row_num": 20
+        "_row_num": 23
       },
       {
         "type": "assign",
         "name": "date_time",
         "calculation": "now()",
-        "_row_num": 21
+        "_row_num": 24
       },
       {
         "type": "string",
@@ -245,7 +280,7 @@
         "display": {
           "text": "What is the name of the distributor?"
         },
-        "_row_num": 22
+        "_row_num": 25
       },
       {
         "type": "string",
@@ -253,7 +288,7 @@
         "display": {
           "text": "What is the name of the distribution site?"
         },
-        "_row_num": 23
+        "_row_num": 26
       },
       {
         "type": "note",
@@ -261,11 +296,11 @@
         "display": {
           "text": "Thank you for completing the post-distribution survey. Continue to the next screen to finalize."
         },
-        "_row_num": 24
+        "_row_num": 27
       },
       {
         "clause": "else",
-        "_row_num": 25
+        "_row_num": 28
       },
       {
         "type": "select_one",
@@ -274,20 +309,20 @@
         "display": {
           "text": "Would you like to scan a different item pack instead?"
         },
-        "_row_num": 26
+        "_row_num": 29
       },
       {
         "clause": "if",
         "condition": "selected(data('try_again'),'yes')",
-        "_row_num": 27
+        "_row_num": 30
       },
       {
         "clause": "goto item_scan",
-        "_row_num": 28
+        "_row_num": 31
       },
       {
         "clause": "else",
-        "_row_num": 29
+        "_row_num": 32
       },
       {
         "type": "note",
@@ -298,15 +333,15 @@
         "model": {
           "isSessionVariable": true
         },
-        "_row_num": 30
+        "_row_num": 33
       },
       {
         "clause": "end if",
-        "_row_num": 31
+        "_row_num": 34
       },
       {
         "clause": "end if",
-        "_row_num": 32
+        "_row_num": 35
       }
     ],
     "queries": [
@@ -315,7 +350,7 @@
         "query_type": "linked_table",
         "linked_form_id": "set_is_distributed",
         "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and distribution_id = ?",
+        "selection": "beneficiary_code = ? and _id = ?",
         "selectionArgs": "[data('beneficiary_code'), data('distribution_id')]",
         "fieldName": "is_distributed",
         "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_id')",
@@ -327,6 +362,18 @@
         "prompt_type_name": "async_assign_single_string",
         "type": "string",
         "_row_num": 2
+      }
+    ],
+    "calculates": [
+      {
+        "calculation_name": "parse_ranges",
+        "calculation": "(function() {\n var obj = JSON.parse(data('ranges'));\n var str = '';\n for (var i = 0; i < obj.ranges.length - 1; i++) {\n  str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n'\n }\n if (obj.ranges.length > 1) {\n  str += 'or ';\n }\n str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max\n return str;\n})()",
+        "_row_num": 2
+      },
+      {
+        "calculation_name": "in_range",
+        "calculation": "(function() {\n var code = parseInt(data('item_pack_barcode'));\n var json = JSON.parse(data('ranges'));\n var valid = 'false';\n var i = 0;\n while (valid == 'false' && i < json.ranges.length) {\n  if ((json.ranges[i].min <= code) && (json.ranges[i].max >= code)) {\n   valid = 'true';\n  }\n  i++;\n }\n return valid;\n})()",
+        "_row_num": 3
       }
     ]
   },
@@ -427,14 +474,25 @@
         "query_type": "linked_table",
         "linked_form_id": "set_is_distributed",
         "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and distribution_id = ?",
+        "selection": "beneficiary_code = ? and _id = ?",
         "selectionArgs": "[data('beneficiary_code'), data('distribution_id')]",
         "fieldName": "is_distributed",
         "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_id')",
         "_row_num": 2
       }
     },
-    "calculates": {},
+    "calculates": {
+      "parse_ranges": {
+        "calculation_name": "parse_ranges",
+        "calculation": "(function() {\n var obj = JSON.parse(data('ranges'));\n var str = '';\n for (var i = 0; i < obj.ranges.length - 1; i++) {\n  str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n'\n }\n if (obj.ranges.length > 1) {\n  str += 'or ';\n }\n str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max\n return str;\n})()",
+        "_row_num": 2
+      },
+      "in_range": {
+        "calculation_name": "in_range",
+        "calculation": "(function() {\n var code = parseInt(data('item_pack_barcode'));\n var json = JSON.parse(data('ranges'));\n var valid = 'false';\n var i = 0;\n while (valid == 'false' && i < json.ranges.length) {\n  if ((json.ranges[i].min <= code) && (json.ranges[i].max >= code)) {\n   valid = 'true';\n  }\n  i++;\n }\n return valid;\n})()",
+        "_row_num": 3
+      }
+    },
     "model": {
       "distribution_id": {
         "type": "string",
@@ -451,7 +509,7 @@
         "elementType": "dateTime",
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 24,
             "section_name": "survey"
           },
           {
@@ -465,7 +523,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 26,
             "section_name": "survey"
           },
           {
@@ -479,7 +537,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 25,
             "section_name": "survey"
           },
           {
@@ -495,7 +553,7 @@
         "valuesList": "is_distributed_value_query",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
@@ -507,13 +565,14 @@
       },
       "item_pack_barcode": {
         "type": "number",
+        "isSessionVariable": true,
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 4,
             "section_name": "survey"
           },
           {
-            "_row_num": 4,
+            "_row_num": 5,
             "section_name": "survey"
           },
           {
@@ -603,21 +662,55 @@
         ],
         "elementKey": "ranges"
       },
+      "scanned_item_pack": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "scanned_item_pack"
+      },
       "try_again": {
         "type": "string",
         "isSessionVariable": true,
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
-            "_row_num": 26,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
         "elementKey": "try_again"
+      },
+      "summary": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "summary"
+      },
+      "valid": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "valid"
       }
     },
     "section_names": [
@@ -647,13 +740,16 @@
             "type": "barcode",
             "name": "item_pack_barcode",
             "display": {
-              "text": "Scan an item pack barcode within the range of {{data.min_range}} to {{data.max_range}}"
+              "text": "Scan an item pack barcode within the range of {{data.summary}}"
             },
-            "_row_num": 3,
-            "__rowNum__": 2,
+            "model": {
+              "isSessionVariable": true
+            },
+            "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "prompt",
             "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen3",
+            "_branch_label_enclosing_screen": "survey/_screen4",
             "promptIdx": 1
           },
           {
@@ -662,11 +758,14 @@
             "display": {
               "text": "Please confirm or update item pack barcode."
             },
-            "_row_num": 4,
-            "__rowNum__": 3,
+            "model": {
+              "isSessionVariable": true
+            },
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen4",
+            "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 2
           },
           {
@@ -680,11 +779,11 @@
               "isSessionVariable": true,
               "valuesList": "yes_no"
             },
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen6",
+            "_branch_label_enclosing_screen": "survey/_screen8",
             "promptIdx": 3
           },
           {
@@ -692,11 +791,11 @@
             "display": {
               "text": "This item pack is authorized. Please distribute this item pack."
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen13",
             "promptIdx": 4
           },
           {
@@ -705,11 +804,11 @@
             "display": {
               "text": "Please click the pencil icon to record distribution"
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "linked_table",
-            "_branch_label_enclosing_screen": "survey/_screen12",
+            "_branch_label_enclosing_screen": "survey/_screen14",
             "promptIdx": 5
           },
           {
@@ -717,22 +816,22 @@
             "display": {
               "text": "Please continue to the next screen if you have clicked the pencil icon to record distribution"
             },
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen14",
+            "_branch_label_enclosing_screen": "survey/_screen16",
             "promptIdx": 6
           },
           {
             "type": "async_assign_single_string",
             "values_list": "is_distributed_value_query",
             "name": "is_distributed",
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "prompt",
             "_type": "async_assign_single_string",
-            "_branch_label_enclosing_screen": "survey/_screen14",
+            "_branch_label_enclosing_screen": "survey/_screen16",
             "promptIdx": 7
           },
           {
@@ -741,11 +840,11 @@
             "display": {
               "text": "Since the authorized item pack was successfully distributed, we will complete now complete a brief report."
             },
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen20",
+            "_branch_label_enclosing_screen": "survey/_screen23",
             "promptIdx": 8
           },
           {
@@ -754,11 +853,11 @@
             "display": {
               "text": "What is the name of the distributor?"
             },
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen22",
+            "_branch_label_enclosing_screen": "survey/_screen25",
             "promptIdx": 9
           },
           {
@@ -767,11 +866,11 @@
             "display": {
               "text": "What is the name of the distribution site?"
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen23",
+            "_branch_label_enclosing_screen": "survey/_screen26",
             "promptIdx": 10
           },
           {
@@ -780,11 +879,11 @@
             "display": {
               "text": "Thank you for completing the post-distribution survey. Continue to the next screen to finalize."
             },
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen24",
+            "_branch_label_enclosing_screen": "survey/_screen27",
             "promptIdx": 11
           },
           {
@@ -794,11 +893,11 @@
             "display": {
               "text": "Would you like to scan a different item pack instead?"
             },
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen26",
+            "_branch_label_enclosing_screen": "survey/_screen29",
             "promptIdx": 12
           },
           {
@@ -810,19 +909,19 @@
             "model": {
               "isSessionVariable": true
             },
-            "_row_num": 30,
-            "__rowNum__": 29,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen30",
+            "_branch_label_enclosing_screen": "survey/_screen33",
             "promptIdx": 13
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 33,
-            "_branch_label_enclosing_screen": "survey/_screen33",
+            "_row_num": 36,
+            "_branch_label_enclosing_screen": "survey/_screen36",
             "promptIdx": 14
           }
         ],
@@ -837,253 +936,286 @@
             "operationIdx": 0
           },
           {
+            "type": "assign",
+            "name": "summary",
+            "calculation": "calculates.parse_ranges()",
+            "model": {
+              "isSessionVariable": true
+            },
             "_row_num": 3,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 2,
+            "_token_type": "assign",
             "operationIdx": 1
           },
           {
             "_row_num": 4,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
-            "clause": "if",
-            "condition": "(data('item_pack_barcode') > data('max_range')) || (data('item_pack_barcode') < data('min_range'))",
             "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "goto_label",
-            "_branch_label": "_then5",
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
-            "clause": "else",
-            "_token_type": "goto_label",
-            "_branch_label": "_else10",
-            "_row_num": 10,
+            "type": "assign",
+            "name": "valid",
+            "calculation": "calculates.in_range()",
+            "model": {
+              "isSessionVariable": true
+            },
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "assign",
             "operationIdx": 4
           },
           {
-            "_row_num": 6,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 5
-          },
-          {
             "clause": "if",
-            "condition": "selected(data('try_again'),'yes')",
+            "condition": "data('valid') == 'false'",
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "goto_label",
             "_branch_label": "_then7",
+            "operationIdx": 5
+          },
+          {
+            "clause": "else",
+            "_token_type": "goto_label",
+            "_branch_label": "_else12",
+            "_row_num": 12,
             "operationIdx": 6
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else9",
-            "_row_num": 9,
+            "_row_num": 8,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
           },
           {
-            "clause": "goto item_scan",
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "clause": "if",
+            "condition": "selected(data('try_again'),'yes')",
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "goto_label",
-            "_branch_label": "item_scan",
+            "_branch_label": "_then9",
             "operationIdx": 8
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif9",
-            "_row_num": 9,
+            "_branch_label": "_else11",
+            "_row_num": 11,
             "operationIdx": 9
+          },
+          {
+            "clause": "goto item_scan",
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "goto_label",
+            "_branch_label": "item_scan",
+            "operationIdx": 10
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif13",
-            "_row_num": 13,
-            "operationIdx": 10
-          },
-          {
+            "_branch_label": "_endif11",
             "_row_num": 11,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 11
           },
           {
-            "_row_num": 12,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif15",
+            "_row_num": 15,
             "operationIdx": 12
           },
           {
-            "clause": "begin screen",
+            "_row_num": 13,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 13
+          },
+          {
             "_row_num": 14,
-            "__rowNum__": 13,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 14
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 18,
-              "__rowNum__": 17,
+              "_row_num": 20,
+              "__rowNum__": 19,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 13
+            "operationIdx": 15
           },
           {
             "clause": "if",
             "condition": "data('is_distributed') == 'true'",
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "goto_label",
-            "_branch_label": "_then19",
-            "operationIdx": 14
+            "_branch_label": "_then21",
+            "operationIdx": 16
           },
           {
             "clause": "else",
             "_token_type": "goto_label",
-            "_branch_label": "_else25",
-            "_row_num": 25,
-            "operationIdx": 15
-          },
-          {
-            "_row_num": 20,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 16
-          },
-          {
-            "type": "assign",
-            "name": "date_time",
-            "calculation": "now()",
-            "_row_num": 21,
-            "__rowNum__": 20,
-            "_token_type": "assign",
+            "_branch_label": "_else28",
+            "_row_num": 28,
             "operationIdx": 17
           },
           {
+            "type": "assign",
+            "name": "scanned_item_pack",
+            "calculation": "data('item_pack_barcode')",
             "_row_num": 22,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 21,
+            "_token_type": "assign",
             "operationIdx": 18
           },
           {
             "_row_num": 23,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 19
           },
           {
+            "type": "assign",
+            "name": "date_time",
+            "calculation": "now()",
             "_row_num": 24,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 23,
+            "_token_type": "assign",
             "operationIdx": 20
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif32",
-            "_row_num": 32,
+            "_row_num": 25,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 21
           },
           {
             "_row_num": 26,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 22
           },
           {
-            "clause": "if",
-            "condition": "selected(data('try_again'),'yes')",
             "_row_num": 27,
-            "__rowNum__": 26,
-            "_token_type": "goto_label",
-            "_branch_label": "_then27",
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 23
-          },
-          {
-            "clause": "else",
-            "_token_type": "goto_label",
-            "_branch_label": "_else29",
-            "_row_num": 29,
-            "operationIdx": 24
-          },
-          {
-            "clause": "goto item_scan",
-            "_row_num": 28,
-            "__rowNum__": 27,
-            "_token_type": "goto_label",
-            "_branch_label": "item_scan",
-            "operationIdx": 25
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif31",
-            "_row_num": 31,
+            "_branch_label": "_endif35",
+            "_row_num": 35,
+            "operationIdx": 24
+          },
+          {
+            "_row_num": 29,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 25
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('try_again'),'yes')",
+            "_row_num": 30,
+            "__rowNum__": 29,
+            "_token_type": "goto_label",
+            "_branch_label": "_then30",
             "operationIdx": 26
           },
           {
-            "_row_num": 30,
+            "clause": "else",
+            "_token_type": "goto_label",
+            "_branch_label": "_else32",
+            "_row_num": 32,
+            "operationIdx": 27
+          },
+          {
+            "clause": "goto item_scan",
+            "_row_num": 31,
+            "__rowNum__": 30,
+            "_token_type": "goto_label",
+            "_branch_label": "item_scan",
+            "operationIdx": 28
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif34",
+            "_row_num": 34,
+            "operationIdx": 29
+          },
+          {
+            "_row_num": 33,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 27
+            "operationIdx": 30
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 33,
-            "operationIdx": 28
+            "_row_num": 36,
+            "operationIdx": 31
           },
           {
-            "_row_num": 33,
+            "_row_num": 36,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 29
+            "operationIdx": 32
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 33,
-            "operationIdx": 30
+            "_row_num": 36,
+            "operationIdx": 33
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "item_scan": 1,
-          "_screen3": 1,
+          "item_scan": 2,
           "_screen4": 2,
-          "_then5": 5,
-          "_screen6": 5,
-          "_then7": 8,
-          "_else9": 10,
-          "_endif9": 10,
-          "_else10": 11,
-          "_screen11": 11,
-          "_screen12": 12,
-          "_endif13": 13,
-          "_screen14": 13,
-          "_then19": 16,
-          "_screen20": 16,
-          "_screen22": 18,
+          "_screen5": 3,
+          "_then7": 7,
+          "_screen8": 7,
+          "_then9": 10,
+          "_else11": 12,
+          "_endif11": 12,
+          "_else12": 13,
+          "_screen13": 13,
+          "_screen14": 14,
+          "_endif15": 15,
+          "_screen16": 15,
+          "_then21": 18,
           "_screen23": 19,
-          "_screen24": 20,
-          "_else25": 22,
+          "_screen25": 21,
           "_screen26": 22,
-          "_then27": 25,
-          "_else29": 27,
-          "_screen30": 27,
-          "_endif31": 28,
-          "_endif32": 28,
-          "_contents": 29,
-          "_screen33": 29
+          "_screen27": 23,
+          "_else28": 25,
+          "_screen29": 25,
+          "_then30": 28,
+          "_else32": 30,
+          "_screen33": 30,
+          "_endif34": 31,
+          "_endif35": 31,
+          "_contents": 32,
+          "_screen36": 32
         }
       },
       "initial": {
@@ -1281,7 +1413,7 @@
         "elementType": "dateTime",
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 24,
             "section_name": "survey"
           },
           {
@@ -1298,7 +1430,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 26,
             "section_name": "survey"
           },
           {
@@ -1315,7 +1447,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 25,
             "section_name": "survey"
           },
           {
@@ -1334,7 +1466,7 @@
         "valuesList": "is_distributed_value_query",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
@@ -1349,13 +1481,14 @@
       },
       "item_pack_barcode": {
         "type": "number",
+        "isSessionVariable": true,
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 4,
             "section_name": "survey"
           },
           {
-            "_row_num": 4,
+            "_row_num": 5,
             "section_name": "survey"
           },
           {
@@ -1472,17 +1605,34 @@
         "elementSet": "data",
         "elementPath": "ranges"
       },
+      "scanned_item_pack": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "scanned_item_pack",
+        "elementName": "scanned_item_pack",
+        "elementSet": "data",
+        "elementPath": "scanned_item_pack"
+      },
       "try_again": {
         "type": "string",
         "isSessionVariable": true,
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
-            "_row_num": 26,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
@@ -1490,6 +1640,32 @@
         "elementName": "try_again",
         "elementSet": "data",
         "elementPath": "try_again"
+      },
+      "summary": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "summary",
+        "elementName": "summary",
+        "elementSet": "data",
+        "elementPath": "summary"
+      },
+      "valid": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "valid",
+        "elementName": "valid",
+        "elementSet": "data",
+        "elementPath": "valid"
       },
       "_id": {
         "type": "string",

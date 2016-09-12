@@ -1,7 +1,4 @@
-/**
- * The file for displaying detail views of the Tea Houses table.
- */
-/* global $, control, data */
+
 'use strict';
 
  
@@ -51,11 +48,14 @@ function cbSuccess(result) {
         var struct = {};
         if (registrationResultSet.get('is_active') === 'true') {
           struct.is_active = 'false';
+          $('#message').text('Successfully Disabled!')
         } else {
           struct.is_active = 'true'
-          struct.ignore_validation = 'true';
+          $('#message').text('Successfully Enabled!')
         }
-        console.log(registrationResultSet.getRowId(0));
+        struct.is_override = 'true';
+        struct.override_user = 
+
         odkData.updateRow(
           'registration', struct, registrationResultSet.getRowId(0), updateCBSuccess, updateCBFailure
           );

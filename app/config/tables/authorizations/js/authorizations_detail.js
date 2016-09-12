@@ -17,7 +17,7 @@ var cbSuccess = function (result) {
   authorizationsResultSet = result;
 
   $('#FIELD_1').text(authorizationsResultSet.get('authorization_name'));
-  $('#FIELD_2').text(authorizationsResultSet.get('authorization_id'));
+  $('#FIELD_2').text(authorizationsResultSet.get('_id'));
   $('#FIELD_3').text(authorizationsResultSet.get('item_pack_name'));
   $('#FIELD_4').text(authorizationsResultSet.get('item_pack_id'));
   $('#FIELD_5').text(authorizationsResultSet.get('item_description'));
@@ -53,35 +53,36 @@ var callBackFn = function () {
       beneficiary_code = action.jsonValue.result.SCAN_RESULT;
       $('#scanned_barcode').text(beneficiary_code);
       clearTimeout(myTimeoutVal);
-      odkData.query('distribution', 'beneficiary_code = ? and authorization_id = ?', 
-                    [beneficiary_code,authorizationsResultSet.get('authorization_id')],
-                    null, null, null, null, null, null, true, scanCBSuccess, scanCBFailure);
-     /* var struct = {};
-  struct['authorization_id'] = authorizationsResultSet.get('authorization_id');
-  struct['authorization_name'] = authorizationsResultSet.get('authorization_name');
-  struct['item_pack_id'] = authorizationsResultSet.get('item_pack_id');
-  struct['distribution_id'] = util.genUUID();
-  struct['min_range'] = authorizationsResultSet.get('min_range');
-  struct['max_range'] = authorizationsResultSet.get('max_range');
-  struct['beneficiary_code'] = action.jsonValue.result.SCAN_RESULT;
-  odkData.addRow(
-    'distribution',
-    struct,
-    util.genUUID(),
-    addDistCBSuccess,
-    addDistCBFailure
-  );*/
-
-
+      odkData.query('registration', 'beneficiary_code = ?', 
+                    [beneficiary_code],
+                    null, null, null, null, null, null, true, firstCBSuccess, firstCBFailure);
     } else {
         myTimeoutVal = setTimeout(callBackFn(), 1000);
         $('#scanned_barcode').text("No value");
+        odkCommon.removeFirstQueuedAction();
     }
   }
   console.log("callBackFn is called");
   insideQueue = false;
 
 };
+
+
+var firstCBSuccess = function(result) {
+  if (result.getCount() != 0) {
+    odkData.query('distribution', 'beneficiary_code = ? and authorization_id = ?', 
+                    [beneficiary_code,authorizationsResultSet.get('_id')],
+                    null, null, null, null, null, null, true, scanCBSuccess, scanCBFailure);
+  } else {
+    $('#scanned_barcode').text('beneficiary with scanned code (' + beneficiary_code
+                              + ') not found in system.');
+        odkCommon.removeFirstQueuedAction();
+  }
+}
+
+var firstCBFailure = function(error) {
+  console.log('failed with error: ' + error);
+}
 
 var scanCBSuccess = function (result) {
   var isEmpty = true;
@@ -91,19 +92,17 @@ var scanCBSuccess = function (result) {
     }
   }
   if (result.getCount() == 0) {
-    console.log('go ahead and make that override');
     var struct = {};
-    struct['authorization_id'] = authorizationsResultSet.get('authorization_id');
+    struct['authorization_id'] = authorizationsResultSet.get('_id');
     struct['authorization_name'] = authorizationsResultSet.get('authorization_name');
     struct['item_pack_id'] = authorizationsResultSet.get('item_pack_id');
     struct['item_pack_name'] = authorizationsResultSet.get('item_pack_name');
-    struct'item_description'] = authorizationResultSet.get('item_description');
-    struct['distribution_id'] = util.genUUID();
-    //struct['item_pack_name'] = authorizationsResultSet.get('item_pack_name');
+    struct['item_description'] = authorizationsResultSet.get('item_description');
     struct['ranges'] = authorizationsResultSet.get('ranges');
     struct['beneficiary_code'] = beneficiary_code;
-    struct['is_distributed'] = '0';
-    struct['is_override'] = '1';
+    struct['is_distributed'] = 'false';
+    struct['is_override'] = 'true';
+    struct['is_voucher'] = 'false';
     odkData.addRow(
       'distribution',
       struct,
@@ -111,12 +110,11 @@ var scanCBSuccess = function (result) {
       addDistCBSuccess,
       addDistCBFailure
     );
+    $('#rejected').text('Override Successfully Created');
+
     odkCommon.removeFirstQueuedAction();
 
   } else {
-    //console.(result.getRowId());
-    console.log(result.getCount());
-    console.log('distribution already exists!, do not create override');
     $('#rejected').text('Scanned beneficiary already qualifies for this authorization. Override not created.');
     odkCommon.removeFirstQueuedAction();
 
