@@ -101,15 +101,6 @@ var displayGroup = function(idxStart) {
       chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
       chevron.attr('class', 'chevron');
       item.append(chevron);
-              
-      /**
-       * Adds other data/details in item space.
-       * Replace COLUMN_NAME with the column whose data you want to display
-       * as an extra detail etc. Duplicate the following block of code for
-       * different details you want to add. You may replace occurrences of
-       * 'field1' with new, specific label that are more meaningful to you
-       */
-
 
       var field2 = $('<li>');
       field2.attr('class', 'detail');

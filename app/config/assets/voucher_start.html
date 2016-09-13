@@ -9,7 +9,7 @@
         <script type="text/javascript">
 		
         var insideQueue = false;
-		var htmlFileNameValue = "distribution_start";
+		var htmlFileNameValue = "voucher_start";
 		var userActionValue = "launchBarcode";
     	var myTimeoutVal = null;
        	var code = null;
@@ -59,7 +59,7 @@
 		function beneficiaryCBSuccess(result) {
 			console.log('beneficiaryCBSuccess called');
 			if (result.getCount() === 0) {
-				odkData.query('distribution', 'beneficiary_code = ?', [code],
+				odkData.query('entitlements', 'beneficiary_code = ?', [code],
 					null, null, null, null, null, null, true, voucherCBSuccess, voucherCBFailure);
 			} else {
 				$('#scanned-barcode').text(code + " -- beneficiary with this code already detected in system: please contact Administrator");

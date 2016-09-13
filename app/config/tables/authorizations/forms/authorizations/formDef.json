@@ -3,33 +3,28 @@
     "model": [
       {
         "type": "string",
-        "name": "authorization_id",
+        "name": "ranges",
         "_row_num": 2
       },
       {
         "type": "string",
-        "name": "ranges",
+        "name": "authorization_name",
         "_row_num": 3
       },
       {
         "type": "string",
-        "name": "authorization_name",
+        "name": "item_pack_id",
         "_row_num": 4
       },
       {
         "type": "string",
-        "name": "item_pack_id",
+        "name": "item_pack_name",
         "_row_num": 5
       },
       {
         "type": "string",
-        "name": "item_pack_name",
-        "_row_num": 6
-      },
-      {
-        "type": "string",
         "name": "item_description",
-        "_row_num": 7
+        "_row_num": 6
       }
     ],
     "settings": [
@@ -51,7 +46,7 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Authorization"
+          "title": "Authorizations"
         },
         "_row_num": 5
       },
@@ -150,7 +145,7 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Authorization"
+          "title": "Authorizations"
         },
         "_row_num": 5
       },
@@ -179,7 +174,7 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Authorization"
+          "title": "Authorizations"
         },
         "_row_num": 5
       }
@@ -188,21 +183,11 @@
     "queries": {},
     "calculates": {},
     "model": {
-      "authorization_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "authorization_id"
-      },
       "ranges": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 2,
             "section_name": "model"
           }
         ],
@@ -212,7 +197,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 3,
             "section_name": "model"
           }
         ],
@@ -222,7 +207,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -232,7 +217,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -242,7 +227,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -346,7 +331,7 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Authorization"
+              "title": "Authorizations"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -495,24 +480,11 @@
       }
     },
     "dataTableModel": {
-      "authorization_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "authorization_id",
-        "elementName": "authorization_id",
-        "elementSet": "data",
-        "elementPath": "authorization_id"
-      },
       "ranges": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 2,
             "section_name": "model"
           }
         ],
@@ -525,7 +497,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 3,
             "section_name": "model"
           }
         ],
@@ -538,7 +510,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -551,7 +523,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -564,7 +536,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -689,7 +661,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Authorization\""
+        "_value": "\"Authorizations\""
       },
       {
         "_partition": "Table",

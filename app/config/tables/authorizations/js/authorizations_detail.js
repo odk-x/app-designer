@@ -70,7 +70,7 @@ var callBackFn = function () {
 
 var firstCBSuccess = function(result) {
   if (result.getCount() != 0) {
-    odkData.query('distribution', 'beneficiary_code = ? and authorization_id = ?', 
+    odkData.query('entitlements', 'beneficiary_code = ? and authorization_id = ?', 
                     [beneficiary_code,authorizationsResultSet.get('_id')],
                     null, null, null, null, null, null, true, scanCBSuccess, scanCBFailure);
   } else {
@@ -100,11 +100,10 @@ var scanCBSuccess = function (result) {
     struct['item_description'] = authorizationsResultSet.get('item_description');
     struct['ranges'] = authorizationsResultSet.get('ranges');
     struct['beneficiary_code'] = beneficiary_code;
-    struct['is_distributed'] = 'false';
+    struct['is_delivered'] = 'false';
     struct['is_override'] = 'true';
-    struct['is_voucher'] = 'false';
     odkData.addRow(
-      'distribution',
+      'entitlements',
       struct,
       util.genUUID(),
       addDistCBSuccess,

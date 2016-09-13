@@ -1,5 +1,5 @@
 _partition,_aspect,_key,_type,_value
-Column,distribution_site,displayChoicesList,object,"[{""choice_list_name"":""sites"",""data_value"":""a0"",""display"":{""text"":""A""},""_row_num"":4},{""choice_list_name"":""sites"",""data_value"":""a1"",""display"":{""text"":""B""},""_row_num"":5},{""choice_list_name"":""sites"",""data_value"":""a2"",""display"":{""text"":""C""},""_row_num"":6},{""choice_list_name"":""sites"",""data_value"":""a3"",""display"":{""text"":""D""},""_row_num"":7}]"
+Column,delivery_site,displayChoicesList,object,"[{""choice_list_name"":""sites"",""data_value"":""a0"",""display"":{""text"":""A""},""_row_num"":4},{""choice_list_name"":""sites"",""data_value"":""a1"",""display"":{""text"":""B""},""_row_num"":5},{""choice_list_name"":""sites"",""data_value"":""a2"",""display"":{""text"":""C""},""_row_num"":6},{""choice_list_name"":""sites"",""data_value"":""a3"",""display"":{""text"":""D""},""_row_num"":7}]"
 Column,gender,displayChoicesList,object,"[{""choice_list_name"":""genders"",""data_value"":""Male"",""display"":{""text"":""Male""},""_row_num"":2},{""choice_list_name"":""genders"",""data_value"":""Female"",""display"":{""text"":""Female""},""_row_num"":3}]"
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,registration

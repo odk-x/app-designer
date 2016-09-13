@@ -47,10 +47,10 @@ function cbSuccess(result) {
         'click',
         function() {
             odkTables.openTableToListView(
-                'distribution',
-                'beneficiary_code = ? and is_distributed = ?',
+                'entitlements',
+                'beneficiary_code = ? and is_delivered = ?',
                 [registrationResultSet.get('beneficiary_code'), 'false'],
-                'config/tables/distribution/html/dist_ben_list.html'
+                'config/tables/entitlements/html/dist_ben_list.html'
             );
         }
       );

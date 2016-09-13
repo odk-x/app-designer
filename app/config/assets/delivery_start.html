@@ -9,7 +9,7 @@
         <script type="text/javascript">
 		
         var insideQueue = false;
-		var htmlFileNameValue = "distribution_start";
+		var htmlFileNameValue = "delivery_start";
 		var userActionValue = "launchBarcode";
     	var myTimeoutVal = null;
        	var code = null;
@@ -24,7 +24,6 @@
             	odkCommon.registerListener(function() {
                 	    callBackFn();
             	});
-
             	var dispatchString = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
             	odkCommon.doAction(dispatchString, 'com.google.zxing.client.android.SCAN', null);
         	});
@@ -71,7 +70,7 @@
 			} else if (result.getCount() === 1) {
 				$('#scanned-barcode').text(code);
 				$('#launch').show();
-				$('#launch').text('Click to Distribute');
+				$('#launch').text('Click to Deliver');
 				$('#launch').click(function() {
 					odkTables.openDetailView(
                   'registration',

@@ -63,7 +63,7 @@
 		function beneficiaryCBSuccess(result) {
 			console.log('beneficiaryCBSuccess called with value' + result);
 			if (result.getCount() === 0) {
-				odkData.query('distribution', 'beneficiary_code = ?', [code], null, null,
+				odkData.query('entitlements', 'beneficiary_code = ?', [code], null, null,
 					null, null, null, null, true, voucherCBSuccess, voucherCBFailure);
 
 			} else {

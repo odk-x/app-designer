@@ -26,6 +26,7 @@
           "text": "What is your first name?",
           "hint": "First name"
         },
+        "required": true,
         "_row_num": 5
       },
       {
@@ -35,6 +36,7 @@
           "text": "What is your last Name?",
           "hint": "Last name"
         },
+        "required": true,
         "_row_num": 6
       },
       {
@@ -49,6 +51,7 @@
         "display": {
           "text": "What is your date of birth?"
         },
+        "required": true,
         "_row_num": 8
       },
       {
@@ -64,6 +67,7 @@
           "text": "What is your gender?"
         },
         "values_list": "genders",
+        "required": true,
         "_row_num": 10
       },
       {
@@ -80,13 +84,14 @@
         "display": {
           "text": "What is your ID number?"
         },
+        "required": true,
         "_row_num": 12
       },
       {
         "type": "select_one",
-        "name": "distribution_site",
+        "name": "delivery_site",
         "display": {
-          "text": "What is the name of the distribution site?"
+          "text": "What is the name of the intended delivery site?"
         },
         "values_list": "sites",
         "_row_num": 13
@@ -98,6 +103,7 @@
           "text": "What is your current address?",
           "hint": "Address"
         },
+        "required": true,
         "_row_num": 14
       },
       {
@@ -124,6 +130,7 @@
           "text": "How many people are in your household?",
           "hint": "Including household representative"
         },
+        "required": true,
         "_row_num": 17
       },
       {
@@ -132,6 +139,7 @@
         "display": {
           "text": "Capture current location"
         },
+        "required": true,
         "_row_num": 18
       },
       {
@@ -219,7 +227,7 @@
       },
       {
         "type": "string",
-        "name": "distribution_site",
+        "name": "delivery_site",
         "_row_num": 11
       },
       {
@@ -263,14 +271,9 @@
         "_row_num": 19
       },
       {
-        "type": "string",
-        "name": "override_user",
-        "_row_num": 20
-      },
-      {
         "type": "geopoint",
         "name": "location",
-        "_row_num": 21
+        "_row_num": 20
       }
     ],
     "initial": [
@@ -724,7 +727,7 @@
         ],
         "elementKey": "id_number"
       },
-      "distribution_site": {
+      "delivery_site": {
         "type": "string",
         "valuesList": "sites",
         "_defn": [
@@ -737,7 +740,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "distribution_site"
+        "elementKey": "delivery_site"
       },
       "address": {
         "type": "string",
@@ -843,16 +846,6 @@
         ],
         "elementKey": "is_override"
       },
-      "override_user": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 20,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "override_user"
-      },
       "location": {
         "type": "object",
         "elementType": "geopoint",
@@ -881,7 +874,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 21,
+            "_row_num": 20,
             "section_name": "model"
           }
         ],
@@ -905,6 +898,7 @@
               "text": "What is your first name?",
               "hint": "First name"
             },
+            "required": true,
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
@@ -919,6 +913,7 @@
               "text": "What is your last Name?",
               "hint": "Last name"
             },
+            "required": true,
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -932,6 +927,7 @@
             "display": {
               "text": "What is your date of birth?"
             },
+            "required": true,
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
@@ -946,6 +942,7 @@
               "text": "What is your gender?"
             },
             "values_list": "genders",
+            "required": true,
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "prompt",
@@ -972,6 +969,7 @@
             "display": {
               "text": "What is your ID number?"
             },
+            "required": true,
             "_row_num": 12,
             "__rowNum__": 11,
             "_token_type": "prompt",
@@ -981,9 +979,9 @@
           },
           {
             "type": "select_one",
-            "name": "distribution_site",
+            "name": "delivery_site",
             "display": {
-              "text": "What is the name of the distribution site?"
+              "text": "What is the name of the intended delivery site?"
             },
             "values_list": "sites",
             "_row_num": 13,
@@ -1000,6 +998,7 @@
               "text": "What is your current address?",
               "hint": "Address"
             },
+            "required": true,
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
@@ -1041,6 +1040,7 @@
               "text": "How many people are in your household?",
               "hint": "Including household representative"
             },
+            "required": true,
             "_row_num": 17,
             "__rowNum__": 16,
             "_token_type": "prompt",
@@ -1054,6 +1054,7 @@
             "display": {
               "text": "Capture current location"
             },
+            "required": true,
             "_row_num": 18,
             "__rowNum__": 17,
             "_token_type": "prompt",
@@ -1083,7 +1084,16 @@
           }
         ],
         "validation_tag_map": {
-          "finalize": []
+          "finalize": [
+            0,
+            1,
+            2,
+            3,
+            5,
+            7,
+            10,
+            11
+          ]
         },
         "operations": [
           {
@@ -1512,7 +1522,7 @@
         "elementSet": "data",
         "elementPath": "id_number"
       },
-      "distribution_site": {
+      "delivery_site": {
         "type": "string",
         "valuesList": "sites",
         "_defn": [
@@ -1525,10 +1535,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "distribution_site",
-        "elementName": "distribution_site",
+        "elementKey": "delivery_site",
+        "elementName": "delivery_site",
         "elementSet": "data",
-        "elementPath": "distribution_site"
+        "elementPath": "delivery_site"
       },
       "address": {
         "type": "string",
@@ -1658,19 +1668,6 @@
         "elementSet": "data",
         "elementPath": "is_override"
       },
-      "override_user": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 20,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "override_user",
-        "elementName": "override_user",
-        "elementSet": "data",
-        "elementPath": "override_user"
-      },
       "location": {
         "type": "object",
         "elementType": "geopoint",
@@ -1711,7 +1708,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 21,
+            "_row_num": 20,
             "section_name": "model"
           }
         ],
@@ -1847,7 +1844,7 @@
     "properties": [
       {
         "_partition": "Column",
-        "_aspect": "distribution_site",
+        "_aspect": "delivery_site",
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"sites\",\"data_value\":\"a0\",\"display\":{\"text\":\"A\"},\"_row_num\":4},{\"choice_list_name\":\"sites\",\"data_value\":\"a1\",\"display\":{\"text\":\"B\"},\"_row_num\":5},{\"choice_list_name\":\"sites\",\"data_value\":\"a2\",\"display\":{\"text\":\"C\"},\"_row_num\":6},{\"choice_list_name\":\"sites\",\"data_value\":\"a3\",\"display\":{\"text\":\"D\"},\"_row_num\":7}]"

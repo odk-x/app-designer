@@ -3,7 +3,7 @@
     "model": [
       {
         "type": "string",
-        "name": "distribution_id",
+        "name": "entitlement_id",
         "_row_num": 2
       },
       {
@@ -13,7 +13,7 @@
       },
       {
         "type": "string",
-        "name": "distribution_site",
+        "name": "delivery_site",
         "_row_num": 4
       },
       {
@@ -23,7 +23,7 @@
       },
       {
         "type": "string",
-        "name": "is_distributed",
+        "name": "is_delivered",
         "_row_num": 6
       },
       {
@@ -80,7 +80,7 @@
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "deploy_to_specific",
+        "value": "deliveries",
         "_row_num": 2
       },
       {
@@ -90,19 +90,19 @@
       },
       {
         "setting_name": "table_id",
-        "value": "deployment",
+        "value": "deliveries",
         "_row_num": 4
       },
       {
         "setting_name": "survey",
         "display": {
-          "title": "Deployment To Specific"
+          "title": "Deliveries"
         },
         "_row_num": 5
       },
       {
         "setting_name": "instance_name",
-        "value": "deployment_id",
+        "value": "delivery_id",
         "_row_num": 6
       }
     ],
@@ -127,7 +127,7 @@
     "survey": [
       {
         "type": "note",
-        "name": "pre-deployment",
+        "name": "pre-delivery",
         "display": {
           "text": "We will now distribute the appropriate item pack"
         },
@@ -163,6 +163,7 @@
         "model": {
           "isSessionVariable": true
         },
+        "required": true,
         "_row_num": 5
       },
       {
@@ -184,7 +185,7 @@
         "values_list": "yes_no",
         "name": "try_again",
         "display": {
-          "text": "Unauthorized Item Pack! Do not distribute this  item pack. Would you like to scan a different item pack?"
+          "text": "Item Pack out of authorized range! Do not distribute this item pack. Would you like to scan a different item pack?"
         },
         "model": {
           "isSessionVariable": true,
@@ -212,15 +213,15 @@
       {
         "type": "note",
         "display": {
-          "text": "This item pack is authorized. Please distribute this item pack."
+          "text": "This item pack is within authorized range. Please deliver this item pack."
         },
         "_row_num": 13
       },
       {
         "type": "linked_table",
-        "values_list": "is_distributed_value_query",
+        "values_list": "is_delivered_query",
         "display": {
-          "text": "Please click the pencil icon to record distribution"
+          "text": "Please click the pencil icon to record delivery"
         },
         "_row_num": 14
       },
@@ -235,14 +236,14 @@
       {
         "type": "note",
         "display": {
-          "text": "Please continue to the next screen if you have clicked the pencil icon to record distribution"
+          "text": "Please continue to the next screen if you have clicked the pencil icon to record delivery"
         },
         "_row_num": 17
       },
       {
         "type": "async_assign_single_string",
-        "values_list": "is_distributed_value_query",
-        "name": "is_distributed",
+        "values_list": "is_delivered_query",
+        "name": "is_delivered",
         "_row_num": 18
       },
       {
@@ -251,7 +252,7 @@
       },
       {
         "clause": "if",
-        "condition": "data('is_distributed') == 'true'",
+        "condition": "data('is_delivered') == 'true'",
         "_row_num": 21
       },
       {
@@ -264,7 +265,7 @@
         "type": "note",
         "name": "pre-summary",
         "display": {
-          "text": "Since the authorized item pack was successfully distributed, we will complete now complete a brief report."
+          "text": "Since the entitlement was successfully delivered, we will now complete a brief delivery report."
         },
         "_row_num": 23
       },
@@ -280,21 +281,23 @@
         "display": {
           "text": "What is the name of the distributor?"
         },
+        "required": "data('is_delivered')",
         "_row_num": 25
       },
       {
         "type": "string",
-        "name": "distribution_site",
+        "name": "delivery_site",
         "display": {
-          "text": "What is the name of the distribution site?"
+          "text": "What is the name of the delivery site?"
         },
+        "required": "data('is_delivered')",
         "_row_num": 26
       },
       {
         "type": "note",
         "name": "thanks",
         "display": {
-          "text": "Thank you for completing the post-distribution survey. Continue to the next screen to finalize."
+          "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
         },
         "_row_num": 27
       },
@@ -309,6 +312,7 @@
         "display": {
           "text": "Would you like to scan a different item pack instead?"
         },
+        "required": "!data('is_delivered')",
         "_row_num": 29
       },
       {
@@ -328,10 +332,7 @@
         "type": "note",
         "name": "no_report_option",
         "display": {
-          "text": "Since no item pack was successfully distributed, we will not fill out a post-distribution report."
-        },
-        "model": {
-          "isSessionVariable": true
+          "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
         },
         "_row_num": 33
       },
@@ -346,14 +347,14 @@
     ],
     "queries": [
       {
-        "query_name": "is_distributed_value_query",
+        "query_name": "is_delivered_query",
         "query_type": "linked_table",
-        "linked_form_id": "set_is_distributed",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_id')]",
-        "fieldName": "is_distributed",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_id')",
+        "linked_form_id": "entitlements",
+        "linked_table_id": "entitlements",
+        "selection": "_id = ?",
+        "selectionArgs": "[data('delivery_id')]",
+        "fieldName": "is_delivered",
+        "auxillaryHash": "'_id='+opendatakit.encodeURIDataElement('delivery_id')",
         "_row_num": 2
       }
     ],
@@ -398,7 +399,7 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "deploy_to_specific",
+        "value": "deliveries",
         "_row_num": 2
       },
       "form_version": {
@@ -408,19 +409,19 @@
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "deployment",
+        "value": "deliveries",
         "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Deployment To Specific"
+          "title": "Deliveries"
         },
         "_row_num": 5
       },
       "instance_name": {
         "setting_name": "instance_name",
-        "value": "deployment_id",
+        "value": "delivery_id",
         "_row_num": 6
       },
       "_locales": {
@@ -443,7 +444,7 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Deployment To Specific"
+          "title": "Deliveries"
         },
         "_row_num": 5
       }
@@ -469,15 +470,15 @@
       ]
     },
     "queries": {
-      "is_distributed_value_query": {
-        "query_name": "is_distributed_value_query",
+      "is_delivered_query": {
+        "query_name": "is_delivered_query",
         "query_type": "linked_table",
-        "linked_form_id": "set_is_distributed",
-        "linked_table_id": "distribution",
-        "selection": "beneficiary_code = ? and _id = ?",
-        "selectionArgs": "[data('beneficiary_code'), data('distribution_id')]",
-        "fieldName": "is_distributed",
-        "auxillaryHash": "'beneficiary_code='+opendatakit.encodeURIDataElement('beneficiary_code')+ '&_id='+opendatakit.encodeURIDataElement('distribution_id')",
+        "linked_form_id": "entitlements",
+        "linked_table_id": "entitlements",
+        "selection": "_id = ?",
+        "selectionArgs": "[data('delivery_id')]",
+        "fieldName": "is_delivered",
+        "auxillaryHash": "'_id='+opendatakit.encodeURIDataElement('delivery_id')",
         "_row_num": 2
       }
     },
@@ -494,7 +495,7 @@
       }
     },
     "model": {
-      "distribution_id": {
+      "entitlement_id": {
         "type": "string",
         "_defn": [
           {
@@ -502,7 +503,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "distribution_id"
+        "elementKey": "entitlement_id"
       },
       "date_time": {
         "type": "string",
@@ -519,7 +520,7 @@
         ],
         "elementKey": "date_time"
       },
-      "distribution_site": {
+      "delivery_site": {
         "type": "string",
         "_defn": [
           {
@@ -531,7 +532,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "distribution_site"
+        "elementKey": "delivery_site"
       },
       "distributor": {
         "type": "string",
@@ -547,10 +548,10 @@
         ],
         "elementKey": "distributor"
       },
-      "is_distributed": {
+      "is_delivered": {
         "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "is_distributed_value_query",
+        "valuesList": "is_delivered_query",
         "_defn": [
           {
             "_row_num": 18,
@@ -561,7 +562,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "is_distributed"
+        "elementKey": "is_delivered"
       },
       "item_pack_barcode": {
         "type": "number",
@@ -725,7 +726,7 @@
         "prompts": [
           {
             "type": "note",
-            "name": "pre-deployment",
+            "name": "pre-delivery",
             "display": {
               "text": "We will now distribute the appropriate item pack"
             },
@@ -761,6 +762,7 @@
             "model": {
               "isSessionVariable": true
             },
+            "required": true,
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
@@ -773,7 +775,7 @@
             "values_list": "yes_no",
             "name": "try_again",
             "display": {
-              "text": "Unauthorized Item Pack! Do not distribute this  item pack. Would you like to scan a different item pack?"
+              "text": "Item Pack out of authorized range! Do not distribute this item pack. Would you like to scan a different item pack?"
             },
             "model": {
               "isSessionVariable": true,
@@ -789,7 +791,7 @@
           {
             "type": "note",
             "display": {
-              "text": "This item pack is authorized. Please distribute this item pack."
+              "text": "This item pack is within authorized range. Please deliver this item pack."
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -800,9 +802,9 @@
           },
           {
             "type": "linked_table",
-            "values_list": "is_distributed_value_query",
+            "values_list": "is_delivered_query",
             "display": {
-              "text": "Please click the pencil icon to record distribution"
+              "text": "Please click the pencil icon to record delivery"
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -814,7 +816,7 @@
           {
             "type": "note",
             "display": {
-              "text": "Please continue to the next screen if you have clicked the pencil icon to record distribution"
+              "text": "Please continue to the next screen if you have clicked the pencil icon to record delivery"
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -825,8 +827,8 @@
           },
           {
             "type": "async_assign_single_string",
-            "values_list": "is_distributed_value_query",
-            "name": "is_distributed",
+            "values_list": "is_delivered_query",
+            "name": "is_delivered",
             "_row_num": 18,
             "__rowNum__": 17,
             "_token_type": "prompt",
@@ -838,7 +840,7 @@
             "type": "note",
             "name": "pre-summary",
             "display": {
-              "text": "Since the authorized item pack was successfully distributed, we will complete now complete a brief report."
+              "text": "Since the entitlement was successfully delivered, we will now complete a brief delivery report."
             },
             "_row_num": 23,
             "__rowNum__": 22,
@@ -853,6 +855,7 @@
             "display": {
               "text": "What is the name of the distributor?"
             },
+            "required": "data('is_delivered')",
             "_row_num": 25,
             "__rowNum__": 24,
             "_token_type": "prompt",
@@ -862,10 +865,11 @@
           },
           {
             "type": "string",
-            "name": "distribution_site",
+            "name": "delivery_site",
             "display": {
-              "text": "What is the name of the distribution site?"
+              "text": "What is the name of the delivery site?"
             },
+            "required": "data('is_delivered')",
             "_row_num": 26,
             "__rowNum__": 25,
             "_token_type": "prompt",
@@ -877,7 +881,7 @@
             "type": "note",
             "name": "thanks",
             "display": {
-              "text": "Thank you for completing the post-distribution survey. Continue to the next screen to finalize."
+              "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -893,6 +897,7 @@
             "display": {
               "text": "Would you like to scan a different item pack instead?"
             },
+            "required": "!data('is_delivered')",
             "_row_num": 29,
             "__rowNum__": 28,
             "_token_type": "prompt",
@@ -904,10 +909,7 @@
             "type": "note",
             "name": "no_report_option",
             "display": {
-              "text": "Since no item pack was successfully distributed, we will not fill out a post-distribution report."
-            },
-            "model": {
-              "isSessionVariable": true
+              "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
             },
             "_row_num": 33,
             "__rowNum__": 32,
@@ -926,7 +928,12 @@
           }
         ],
         "validation_tag_map": {
-          "finalize": []
+          "finalize": [
+            2,
+            9,
+            10,
+            12
+          ]
         },
         "operations": [
           {
@@ -1059,7 +1066,7 @@
           },
           {
             "clause": "if",
-            "condition": "data('is_distributed') == 'true'",
+            "condition": "data('is_delivered') == 'true'",
             "_row_num": 21,
             "__rowNum__": 20,
             "_token_type": "goto_label",
@@ -1246,7 +1253,7 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Deployment To Specific"
+              "title": "Deliveries"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1395,7 +1402,7 @@
       }
     },
     "dataTableModel": {
-      "distribution_id": {
+      "entitlement_id": {
         "type": "string",
         "_defn": [
           {
@@ -1403,10 +1410,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "distribution_id",
-        "elementName": "distribution_id",
+        "elementKey": "entitlement_id",
+        "elementName": "entitlement_id",
         "elementSet": "data",
-        "elementPath": "distribution_id"
+        "elementPath": "entitlement_id"
       },
       "date_time": {
         "type": "string",
@@ -1426,7 +1433,7 @@
         "elementSet": "data",
         "elementPath": "date_time"
       },
-      "distribution_site": {
+      "delivery_site": {
         "type": "string",
         "_defn": [
           {
@@ -1438,10 +1445,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "distribution_site",
-        "elementName": "distribution_site",
+        "elementKey": "delivery_site",
+        "elementName": "delivery_site",
         "elementSet": "data",
-        "elementPath": "distribution_site"
+        "elementPath": "delivery_site"
       },
       "distributor": {
         "type": "string",
@@ -1460,10 +1467,10 @@
         "elementSet": "data",
         "elementPath": "distributor"
       },
-      "is_distributed": {
+      "is_delivered": {
         "prompt_type_name": "async_assign_single_string",
         "type": "string",
-        "valuesList": "is_distributed_value_query",
+        "valuesList": "is_delivered_query",
         "_defn": [
           {
             "_row_num": 18,
@@ -1474,10 +1481,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "is_distributed",
-        "elementName": "is_distributed",
+        "elementKey": "is_delivered",
+        "elementName": "is_delivered",
         "elementSet": "data",
-        "elementPath": "is_distributed"
+        "elementPath": "is_delivered"
       },
       "item_pack_barcode": {
         "type": "number",
@@ -1755,6 +1762,36 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_savepoint_creator"
       }
-    }
+    },
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "deliveries"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Deliveries\""
+      }
+    ]
   }
 }

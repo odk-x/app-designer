@@ -1,23 +1,23 @@
 'use strict';
 
 var idxStart = -1;
-var distributionsResultSet = {};
+var entitlementsResultSet = {};
 
-var distributionsCBSuccess = function(result) {
-    distributionsResultSet = result;
+var entitlementsCBSuccess = function(result) {
+    entitlementsResultSet = result;
 
     return (function() {
         displayGroup(idxStart);
     }());
 };
 
-var distributionsCBFailure = function(error) {
+var entitlementsCBFailure = function(error) {
 
-    console.log('dist_ben_list distributionsCBFailure: ' + error);
+    console.log('dist_ben_list entitlementsCBFailure: ' + error);
 }; 
 
 var resumeFn = function(fIdxStart) {  
-    odkData.getViewData(distributionsCBSuccess, distributionsCBFailure);
+    odkData.getViewData(entitlementsCBSuccess, entitlementsCBFailure);
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
@@ -42,7 +42,8 @@ var resumeFn = function(fIdxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                  odkTables.openDetailView('distribution', rowId, 'config/tables/distribution/html/dist_ben_detail.html');
+                  odkTables.openDetailView('entitlements', rowId,
+                  'config/tables/entitlements/html/dist_ben_detail.html');
             }
         });
     }
@@ -53,14 +54,14 @@ var displayGroup = function(idxStart) {
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
-      if (i >= distributionsResultSet.getCount()) {
+      if (i >= entitlementsResultSet.getCount()) {
         break;
       }
 
       var item = $('<li>');
-      item.attr('rowId', distributionsResultSet.getRowId(i));
+      item.attr('rowId', entitlementsResultSet.getRowId(i));
       item.attr('class', 'item_space');
-      var auth_name = distributionsResultSet.getData(i, 'authorization_name');
+      var auth_name = entitlementsResultSet.getData(i, 'authorization_name');
       item.text(auth_name);
               
       /* Creates arrow icon (Nothing to edit here) */
@@ -77,7 +78,7 @@ var displayGroup = function(idxStart) {
       $('#list').append(borderDiv);
 
     }
-    if (i < distributionsResultSet.getCount()) {
+    if (i < entitlementsResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
 };

@@ -3,7 +3,7 @@
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "set_is_distributed",
+        "value": "entitlements",
         "_row_num": 2
       },
       {
@@ -13,13 +13,13 @@
       },
       {
         "setting_name": "table_id",
-        "value": "distribution",
+        "value": "entitlements",
         "_row_num": 4
       },
       {
         "setting_name": "survey",
         "display": {
-          "title": "Confirm distribution"
+          "title": "Entitlements"
         },
         "_row_num": 5
       },
@@ -67,7 +67,7 @@
       },
       {
         "type": "string",
-        "name": "is_distributed",
+        "name": "is_delivered",
         "_row_num": 9
       },
       {
@@ -80,9 +80,9 @@
       {
         "type": "select_one",
         "values_list": "true_false",
-        "name": "is_distributed",
+        "name": "is_delivered",
         "display": {
-          "text": "Has the item pack been successfully distributed?"
+          "text": "Has the item pack been successfully delivered?"
         },
         "_row_num": 2
       }
@@ -138,7 +138,7 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "set_is_distributed",
+        "value": "entitlements",
         "_row_num": 2
       },
       "form_version": {
@@ -148,13 +148,13 @@
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "distribution",
+        "value": "entitlements",
         "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Confirm distribution"
+          "title": "Entitlements"
         },
         "_row_num": 5
       },
@@ -183,7 +183,7 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Confirm distribution"
+          "title": "Entitlements"
         },
         "_row_num": 5
       }
@@ -281,7 +281,7 @@
         ],
         "elementKey": "item_description"
       },
-      "is_distributed": {
+      "is_delivered": {
         "type": "string",
         "valuesList": "true_false",
         "_defn": [
@@ -294,7 +294,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "is_distributed"
+        "elementKey": "is_delivered"
       },
       "is_override": {
         "type": "string",
@@ -320,9 +320,9 @@
           {
             "type": "select_one",
             "values_list": "true_false",
-            "name": "is_distributed",
+            "name": "is_delivered",
             "display": {
-              "text": "Has the item pack been successfully distributed?"
+              "text": "Has the item pack been successfully delivered?"
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -396,7 +396,7 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Confirm distribution"
+              "title": "Entitlements"
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -577,7 +577,7 @@
         "elementSet": "data",
         "elementPath": "item_description"
       },
-      "is_distributed": {
+      "is_delivered": {
         "type": "string",
         "valuesList": "true_false",
         "_defn": [
@@ -590,10 +590,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "is_distributed",
-        "elementName": "is_distributed",
+        "elementKey": "is_delivered",
+        "elementName": "is_delivered",
         "elementSet": "data",
-        "elementPath": "is_distributed"
+        "elementPath": "is_delivered"
       },
       "is_override": {
         "type": "string",
@@ -696,6 +696,43 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_savepoint_creator"
       }
-    }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "is_delivered",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"true_false\",\"data_value\":\"true\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"true_false\",\"data_value\":\"false\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "entitlements"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "\"Entitlements\""
+      }
+    ]
   }
 }
