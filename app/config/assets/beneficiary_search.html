@@ -10,6 +10,13 @@
 
         var sqlWhereClause = null;
         var sqlSelectionArgs = null;
+        var windowHeight = $(window).innerHeight();
+        //var search;
+        var search_font;
+        function start() {
+            search_font = $('#search').css('font-size');
+        }
+
         function search() {
             sqlWhereClause = document.getElementById('field').value +' = ?';
             sqlSelectionArgs = document.getElementById('value').value;
@@ -36,13 +43,31 @@
             console.log(sqlWhereClause + ' ---- ' + sqlSelectionArgs);
                 odkTables.openTableToListView('registration', sqlWhereClause,
                     [sqlSelectionArgs], 'config/tables/registration/html/registration_list.html');
+        }
+
+        $(window).resize(function() {
+            helper('search', search_font, 'font-size');
+            windowHeight = $(window).innerHeight(); 
+
+        });
+
+        function helper(name, value, attribute) {
+           var viewportHeight = $(window).innerHeight();
+            if (viewportHeight < windowHeight) {
+                console.log('set ' + name + '\'s ' + attribute + ' to ' + value);
+                if (attribute == 'height') {
+                    $('#' + name).css({'height':value});
+                } else {
+                    $('#' + name).css({'font-size':value});
+                }
             }
+        }
         
         </script>
     </head>
 
-    <body>
-        <h1>Search for Beneficiaries</h1>
+    <body onload="start()">
+        <h1 id="title">Search for Beneficiaries</h1>
         <form>
             <input type="text" id="field" placeholder="Enter a field (must match a field in the registration table)">
         </form>

@@ -352,9 +352,9 @@
         "linked_form_id": "entitlements",
         "linked_table_id": "entitlements",
         "selection": "_id = ?",
-        "selectionArgs": "[data('delivery_id')]",
+        "selectionArgs": "[data('entitlement_id')]",
         "fieldName": "is_delivered",
-        "auxillaryHash": "'_id='+opendatakit.encodeURIDataElement('delivery_id')",
+        "auxillaryHash": "'entitlement_id='+opendatakit.encodeURIDataElement('entitlement_id')",
         "_row_num": 2
       }
     ],
@@ -476,9 +476,9 @@
         "linked_form_id": "entitlements",
         "linked_table_id": "entitlements",
         "selection": "_id = ?",
-        "selectionArgs": "[data('delivery_id')]",
+        "selectionArgs": "[data('entitlement_id')]",
         "fieldName": "is_delivered",
-        "auxillaryHash": "'_id='+opendatakit.encodeURIDataElement('delivery_id')",
+        "auxillaryHash": "'entitlement_id='+opendatakit.encodeURIDataElement('entitlement_id')",
         "_row_num": 2
       }
     },

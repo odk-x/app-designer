@@ -30,14 +30,10 @@ function cbSuccess(result) {
 
 
   $('#FIELD_4').text(registrationResultSet.get('address'));
-
+  $('#FIELD_1').text(registrationResultSet.get('id_number'));
   $('#FIELD_5').text(registrationResultSet.get('city'));
 
   $('#FIELD_8').text(registrationResultSet.get('telephone'));
-
-  $('#FIELD_20').text(registrationResultSet.get('village'));
-  $('#FIELD_21').text(registrationResultSet.get('sub_village'));
-  $('#FIELD_22').text(registrationResultSet.get('district'));
   $('#FIELD_24').text(registrationResultSet.get('mobile_provider'));
 
   if (registrationResultSet.get('is_active') == 'true') {

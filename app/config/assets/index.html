@@ -54,7 +54,7 @@
             document.getElementById("wrapper").appendChild(sendData);
 
             var search = document.createElement('button');
-            search.setAttribute('id', 'search');
+            search.setAttribute('id', 'button5');
             search.innerHTML = 'Beneficiary Search';
             search.onclick = function() {
                 odkTables.launchHTML(
@@ -71,7 +71,7 @@
             var roles = result.getRoles();
             if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
                 var override = document.createElement("button");
-                override.setAttribute("id", "button5");
+                override.setAttribute("id", "button6");
                 override.innerHTML = "Administrator Overrides";
                 override.onclick = function() {
                     odkTables.launchHTML(

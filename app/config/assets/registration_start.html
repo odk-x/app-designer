@@ -55,6 +55,7 @@
 		        } else {
 		            myTimeoutVal = setTimeout(callBackFn(), 1000);
 		            $('#scanned-barcode').text("No value");
+		            odkCommon.removeFirstQueuedAction();
 		        }
 		    }
     		insideQueue = false;
