@@ -304,6 +304,21 @@ var XLSXConverter = {};
         "piechart": null,
         "scatterplot": null,
         "boxplot": null,
+        "signature": {
+            "type": "object",
+            "elementType": "mimeUri",
+            "properties": {
+                "uriFragment": {
+					"type": "string",
+					"elementType": "rowpath"
+                },
+                "contentType": {
+					"type": "string",
+					"elementType": "mimeType",
+                    "default": "image/*"
+                }
+            }
+        },
         "read_only_image": {
             "type": "object",
             "elementType": "mimeUri",

@@ -2030,12 +2030,17 @@ promptTypes.media = promptTypes.base.extend({
         // TODO: is this the right sequence?
         var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'capture'});
 
+        var mediaUri = that.getValue();
+        var uriFragment = (mediaUri !== null && mediaUri !== undefined &&
+                    mediaUri.uriFragment !== null && mediaUri.uriFragment !== undefined) ? mediaUri.uriFragment : null;
+
         odkCommon.log('D',"prompts." + that.type + ".capture -- invoking doAction");
         var outcome = odkCommon.doAction( dispatchString, that.captureAction,
             JSON.stringify({ extras: {
                 appName: opendatakit.getPlatformInfo().appName,
                 tableId: opendatakit.getCurrentTableId(),
                 instanceId: opendatakit.getCurrentInstanceId(),
+                savedUri: uriFragment,
                 uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
 
         odkCommon.log('D',"prompts." + that.type + ".capture - doAction: " +  platInfo.container + " outcome is " + outcome);
@@ -2175,6 +2180,14 @@ promptTypes.image = promptTypes.media.extend({
     templatePath: "templates/image.handlebars",
     captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity',
     chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseImageActivity'
+});
+promptTypes.signature = promptTypes.media.extend({
+    type: "signature",
+    extension: "jpg",
+    contentType: "image/*",
+    buttonLabel: 'Get Signature:',
+    templatePath: "templates/signature.handlebars",
+    captureAction: 'org.opendatakit.survey.android.activities.SignatureActivity'
 });
 promptTypes.video = promptTypes.media.extend({
     type: "video",
@@ -3286,4 +3299,5 @@ promptTypes.acknowledge = promptTypes.select.extend({
 });
 
 return promptTypes;
-});
+});
+
