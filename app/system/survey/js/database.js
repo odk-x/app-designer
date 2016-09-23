@@ -561,7 +561,7 @@ return {
 			});
     },
 
-	_auth_error: "org.opendatakit.common.android.exception.ActionNotAuthorizedException:",
+	_auth_error: "org.opendatakit.exception.ActionNotAuthorizedException:",
 	_impl_class_qualifier: " ODKDatabaseImplUtils:",
 	
 	_process_odkData_error: function(ctxt, errorMsg) {
