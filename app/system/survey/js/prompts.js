@@ -771,7 +771,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
     valid: true,
     _cachedEvent: null,
     templatePath: 'templates/linked_table.handlebars',
-    launchAction: 'org.opendatakit.survey.android.activities.MainMenuActivity',
+    launchAction: 'org.opendatakit.survey.activities.MainMenuActivity',
 
     events: {
         "click .openInstance": "openInstance",
@@ -1008,7 +1008,7 @@ promptTypes.external_link = promptTypes.base.extend({
             fullUrl = opendatakit.convertHashStringToSurveyUri(fullUrl);
             // implicit intents are not working?
             // launchAction = 'android.content.Intent.ACTION_EDIT';
-            launchAction = 'org.opendatakit.survey.android.activities.SplashScreenActivity';
+            launchAction = 'org.opendatakit.survey.activities.SplashScreenActivity';
         }
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
@@ -2178,8 +2178,8 @@ promptTypes.image = promptTypes.media.extend({
     contentType: "image/*",
     buttonLabel: 'Take your photo:',
     templatePath: "templates/image.handlebars",
-    captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity',
-    chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseImageActivity'
+    captureAction: 'org.opendatakit.survey.activities.MediaCaptureImageActivity',
+    chooseAction: 'org.opendatakit.survey.activities.MediaChooseImageActivity'
 });
 promptTypes.signature = promptTypes.media.extend({
     type: "signature",
@@ -2187,23 +2187,23 @@ promptTypes.signature = promptTypes.media.extend({
     contentType: "image/*",
     buttonLabel: 'Get Signature:',
     templatePath: "templates/signature.handlebars",
-    captureAction: 'org.opendatakit.survey.android.activities.SignatureActivity'
+    captureAction: 'org.opendatakit.survey.activities.SignatureActivity'
 });
 promptTypes.video = promptTypes.media.extend({
     type: "video",
     contentType: "video/*",
     buttonLabel: 'Take your video:',
     templatePath: "templates/video.handlebars",
-    captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity',
-    chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity'
+    captureAction: 'org.opendatakit.survey.activities.MediaCaptureVideoActivity',
+    chooseAction: 'org.opendatakit.survey.activities.MediaChooseVideoActivity'
 });
 promptTypes.audio = promptTypes.media.extend({
     type: "audio",
     contentType: "audio/*",
     buttonLabel: 'Take your audio:',
     templatePath: "templates/audio.handlebars",
-    captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity',
-    chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity'
+    captureAction: 'org.opendatakit.survey.activities.MediaCaptureAudioActivity',
+    chooseAction: 'org.opendatakit.survey.activities.MediaChooseAudioActivity'
 });
 /**
  * launch_intent is an abstract prompt type used as a base for single intent launching (e.g. barcodes)
@@ -2295,7 +2295,7 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
     buttonLabel: 'Record Location',
     templatePath: "templates/geopoint.handlebars",
-    intentString: 'org.opendatakit.survey.android.activities.GeoPointActivity',
+    intentString: 'org.opendatakit.survey.activities.GeoPointActivity',
     extractDataValue: function(jsonObject) {
         return {
             latitude: jsonObject.result.latitude,
@@ -2342,7 +2342,7 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
 });
 promptTypes.geopointmap = promptTypes.launch_intent.extend({
     type: "geopointmap",
-    intentString: 'org.opendatakit.survey.android.activities.GeoPointMapActivity',
+    intentString: 'org.opendatakit.survey.activities.GeoPointMapActivity',
     extractDataValue: function(jsonObject) {
         return {
             latitude: jsonObject.result.latitude,
