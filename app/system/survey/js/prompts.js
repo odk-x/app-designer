@@ -2040,7 +2040,7 @@ promptTypes.media = promptTypes.base.extend({
                 appName: opendatakit.getPlatformInfo().appName,
                 tableId: opendatakit.getCurrentTableId(),
                 instanceId: opendatakit.getCurrentInstanceId(),
-                savedUri: uriFragment,
+                currentUriFragment: uriFragment,
                 uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
 
         odkCommon.log('D',"prompts." + that.type + ".capture - doAction: " +  platInfo.container + " outcome is " + outcome);
