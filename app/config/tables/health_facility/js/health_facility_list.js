@@ -51,7 +51,7 @@ var cbSuccess = function(result) {
 
     if (idxStart === 0) {
         odkData.query('refrigerator_types', null, null, 
-            null, null, null, null, true, refrigeratorTypeCBSuccess, refrigeratorTypeCBFailure);
+            null, null, null, null, null, null, true, refrigeratorTypeCBSuccess, refrigeratorTypeCBFailure);
     }
 };
 

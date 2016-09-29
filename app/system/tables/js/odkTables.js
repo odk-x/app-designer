@@ -63,13 +63,19 @@ if (!window.odkTables) {
         if (!isString(tableId)) {
             throw fnName + '--tableId not a string';
         }
-        if (!isString(where) && where !== null && where !== undefined) {
+        if (where !== null &&
+            where !== undefined &&
+			!isString(where)) {
             throw fnName + '--sqlWhereClause not a string';
         }
-        if (!isArray(args) && args !== null && args !== undefined) {
+        if (args !== null &&
+            args !== undefined &&
+			!isArray(args)) {
             throw fnName + '--sqlSelectionArgs not an array';
         }
-        if (!isString(path) && path !== null && path !== undefined) {
+        if (path !== null &&
+            path !== undefined &&
+			!isString(path)) {
             throw fnName + '--relativePath not a string';
         }
     };
@@ -96,14 +102,14 @@ if (!window.odkTables) {
         // We're checking for null and undefined because it isn't specified
         // what the Android WebKit passes in to us in the event of null or
         // overloading objects.
-        if (!isString(sqlWhereClause) &&
-                sqlWhereClause !== null &&
-                sqlWhereClause !== undefined) {
+        if (sqlWhereClause !== null &&
+            sqlWhereClause !== undefined &&
+			!isString(sqlWhereClause)) {
             throw 'openTable()--sqlWhereClause not a string';
         }
-        if (!isArray(sqlSelectionArgs) &&
-                sqlSelectionArgs !== null &&
-                sqlSelectionArgs !== undefined) {
+        if (sqlSelectionArgs !== null &&
+            sqlSelectionArgs !== undefined &&
+			!isArray(sqlSelectionArgs)) {
             throw 'openTable()--sqlSelectionArgs not an array';
         }
         if (arguments.length > 3) {
@@ -178,9 +184,9 @@ if (!window.odkTables) {
         if (!isString(rowId)) {
             throw 'openDetailView()--rowId not a string';
         }
-        if (!isString(relativePath) &&
-                relativePath !== null &&
-                relativePath !== undefined) {
+        if (relativePath !== null &&
+            relativePath !== undefined &&
+			!isString(relativePath)) {
             throw 'openDetailView()--relativePath not a string';
         }
         if (relativePath === null) {

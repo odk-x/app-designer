@@ -466,6 +466,22 @@ var odkDataIf = {
         });
     },
 
+    getRoles: function(_callbackId) {
+        var that = this;
+
+        var ctxt = that.newStartContext(_callbackId);
+
+        throw new Error("Not implemented in app-designer");
+    },
+
+    getUsers: function(_callbackId) {
+        var that = this;
+
+        var ctxt = that.newStartContext(_callbackId);
+
+        throw new Error("Not implemented in app-designer");
+    },
+
     getAllTableIds: function(_callbackId) {
         var that = this;
 
@@ -475,7 +491,7 @@ var odkDataIf = {
     },
 
     query: function(tableId, whereClause, sqlBindParams, groupBy, having,
-            orderByElementKey, orderByDirection, includeKVS, _callbackId) {
+            orderByElementKey, orderByDirection, limit, offset, includeKVS, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -501,14 +517,16 @@ var odkDataIf = {
                 }
                 var sqlStatement = {
                         stmt : sql,
-                        bind : sqlBindParams
+                        bind : sqlBindParams,
+						limit : limit,
+						offset : offset
                     };
                 that._constructResponse(ctxt, tableDef, sqlStatement);
             }
         }), tableId);
     },
 
-    arbitraryQuery: function(tableId, sqlCommand, sqlBindParams, _callbackId) {
+    arbitraryQuery: function(tableId, sqlCommand, sqlBindParams, limit, offset, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -516,7 +534,9 @@ var odkDataIf = {
             success: function(tableDef) {
                 var sqlStatement = {
                         stmt : sqlCommand,
-                        bind : sqlBindParams
+                        bind : sqlBindParams,
+						limit : limit,
+						offset : offset
                     };
                 that._constructResponse(ctxt, tableDef, sqlStatement);
             }

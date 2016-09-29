@@ -19,10 +19,23 @@
               <div class="description-text" id="description">Geoweather</div>
             </td>
           </tr>
+		  <tr>
+		    <td>
+			  <button class="btn btn-primary btn-block btn-launch" id="alter-button">
+			  Change Row-level Access Filters
+			</td>
+		  </tr>
+          <tr>
+            <td valign="bottom">
+              <button class="btn btn-primary btn-block btn-launch" id="launch-conditions-button">
+                Modify list of Weather Conditions
+              </button>
+            </td>
+          </tr>
           <tr>
             <td valign="bottom">
               <button class="btn btn-primary btn-block btn-launch" id="launch-button">
-                Launch Demo
+                Launch Geoweather Survey
               </button>
             </td>
           </tr>

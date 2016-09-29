@@ -15,6 +15,24 @@ function display() {
                     null);
 
             });
+
+    $('#launch-conditions-button').on(
+            'click',
+            function() {
+                // Note we're relying on geotagger's list view to be set.
+                odkTables.openTable(
+                    'geoweather_conditions',
+                    null,
+                    null);
+
+            });
+
+	$('#alter-button').on(
+			'click',
+			function() {
+                odkTables.launchHTML('config/assets/changeAccessFilters.html');
+            });
+    document.getElementById("wrapper").appendChild(followUp);    
 }
 
 function updateForTab() {
