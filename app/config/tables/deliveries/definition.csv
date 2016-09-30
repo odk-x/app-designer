@@ -1,4 +1,6 @@
 _element_key,_element_name,_element_type,_list_child_element_keys
+assign,assign,string,[]
+assigned_code,assigned_code,string,[]
 authorization_id,authorization_id,string,[]
 authorization_name,authorization_name,string,[]
 beneficiary_code,beneficiary_code,string,[]

@@ -37,6 +37,19 @@ function cbSuccess(result) {
   $('#FIELD_24').text(registrationResultSet.get('mobile_provider'));
 
   if (registrationResultSet.get('is_active') == 'true') {
+    odkData.query('entitlements', 'beneficiary_code = ? and is_delivered = ?',
+                  [registrationResultSet.get('beneficiary_code'), 'false'],
+                  null, null, null, null, null, null, null, entCBSuccess, entCBFailure);
+  }
+}
+
+function cbFailure(error) {
+  console.log('registration_detail cbFailure: getViewData failed with message: ' + error);
+}
+
+function entCBSuccess(result) {
+  if (result.getCount() > 0) {
+    console.log(result.getCount());
     var deliver = $('#deliver');
     deliver.show();
     deliver.on(
@@ -49,12 +62,15 @@ function cbSuccess(result) {
                 'config/tables/entitlements/html/dist_ben_list.html'
             );
         }
-      );
+    );
+  } else {
+    console.log('rejected');
+    $('#reject').text('No Authorized Item Packs to Deliver');
   }
 }
 
-function cbFailure(error) {
-  console.log('registration_detail cbFailure: getViewData failed with message: ' + error);
+function entCBFailure(error) {
+  console.log('entCBFailure with error: ' + error);
 }
 
 function display() {

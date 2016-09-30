@@ -62,6 +62,16 @@
             }
             document.getElementById('wrapper').appendChild(search);
 
+            var del = document.createElement('button');
+            del.setAttribute('id', 'button6');
+            del.innerHTML = 'Deliveries';
+            del.onclick = function() {
+                odkTables.openTableToListView(
+                'deliveries', null, null
+                , 'config/tables/deliveries/html/deliveries_list.html');
+            }
+            document.getElementById('wrapper').appendChild(del);
+
             // Create a distribution Override if user is a tables superuser
             
             odkData.getRoles(rolesCBSuccess, rolesCBFailure);
@@ -71,7 +81,7 @@
             var roles = result.getRoles();
             if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
                 var override = document.createElement("button");
-                override.setAttribute("id", "button6");
+                override.setAttribute("id", "button7");
                 override.innerHTML = "Administrator Overrides";
                 override.onclick = function() {
                     odkTables.launchHTML(

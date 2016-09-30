@@ -25,6 +25,11 @@
         "type": "string",
         "name": "item_description",
         "_row_num": 6
+      },
+      {
+        "type": "string",
+        "name": "assigned_code",
+        "_row_num": 7
       }
     ],
     "settings": [
@@ -232,6 +237,16 @@
           }
         ],
         "elementKey": "item_description"
+      },
+      "assigned_code": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "assigned_code"
       }
     },
     "section_names": [
@@ -544,6 +559,19 @@
         "elementName": "item_description",
         "elementSet": "data",
         "elementPath": "item_description"
+      },
+      "assigned_code": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "assigned_code",
+        "elementName": "assigned_code",
+        "elementSet": "data",
+        "elementPath": "assigned_code"
       },
       "_id": {
         "type": "string",

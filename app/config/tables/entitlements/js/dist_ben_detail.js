@@ -48,6 +48,8 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'item_description', entitlementsResultSet.get('item_description'));
   setJSONMap(jsonMap, 'is_override', entitlementsResultSet.get('is_override'));
   setJSONMap(jsonMap, 'ranges', entitlementsResultSet.get('ranges'));
+  setJSONMap(jsonMap, 'assigned_code', entitlementsResultSet.get('assigned_code'));
+
     jsonMap = JSON.stringify(jsonMap);    
     return jsonMap;
 };

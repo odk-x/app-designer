@@ -74,6 +74,11 @@
         "type": "string",
         "name": "is_override",
         "_row_num": 10
+      },
+      {
+        "type": "string",
+        "name": "assigned_code",
+        "_row_num": 11
       }
     ],
     "survey": [
@@ -305,6 +310,16 @@
           }
         ],
         "elementKey": "is_override"
+      },
+      "assigned_code": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "assigned_code"
       }
     },
     "section_names": [
@@ -607,6 +622,19 @@
         "elementName": "is_override",
         "elementSet": "data",
         "elementPath": "is_override"
+      },
+      "assigned_code": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "assigned_code",
+        "elementName": "assigned_code",
+        "elementSet": "data",
+        "elementPath": "assigned_code"
       },
       "_id": {
         "type": "string",
