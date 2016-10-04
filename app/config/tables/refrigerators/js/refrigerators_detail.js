@@ -49,10 +49,10 @@ function cbSuccess(result) {
     refrigeratorsResultSet = result;
 
     odkData.query('health_facility', '_id = ?', [refrigeratorsResultSet.get('facility_row_id')], 
-        null, null, null, null, true, cbFacilitySuccess, cbFacilityFailure);
+        null, null, null, null, null, null, true, cbFacilitySuccess, cbFacilityFailure);
 
     odkData.query('refrigerator_types', '_id = ?', [refrigeratorsResultSet.get('model_row_id')],
-        null, null, null, null, true, cbTypeSuccess, cbTypeFailure);
+        null, null, null, null, null, null, true, cbTypeSuccess, cbTypeFailure);
 
 }
 

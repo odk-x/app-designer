@@ -75,10 +75,10 @@ function cbSuccess(result) {
 
     } else {
 
-        odkData.query('health_facility', null, null, null, null, null, null, true, 
+        odkData.query('health_facility', null, null, null, null, null, 10, null, true, 
             healthFacilitiesCBSuccess, healthFacilitiesCBFailure);
 
-        odkData.query('refrigerator_types', null, null, null, null, null, null, true, 
+        odkData.query('refrigerator_types', null, null, null, null, null, 10, null, true, 
             refrigeratorTypesCBSuccess, refrigeratorTypesCBFailure);
 
     }
@@ -115,7 +115,7 @@ var getSearchResults = function() {
     var searchText = document.getElementById('search').value;
 
     odkData.query('refrigerators', 'refrigerator_id = ?', [searchText], 
-        null, null, null, null, true, cbSearchSuccess, cbSearchFailure);
+        null, null, null, null, null, null, 10, null, true, cbSearchSuccess, cbSearchFailure);
 }
 
 /* Called when page loads to display things (Nothing to edit here) */
