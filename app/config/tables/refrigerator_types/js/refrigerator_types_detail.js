@@ -22,7 +22,7 @@ function cbSuccess(result) {
     refrigeratorTypeResultSet = result;
 
     odkData.query('refrigerators', 'model_row_id = ?', [refrigeratorTypeResultSet.get('_id')],
-        null, null, null, null, true, refrigeratorsCBSuccess, refrigeratorsCBFailure);
+        null, null, null, null, null, null, true, refrigeratorsCBSuccess, refrigeratorsCBFailure);
 
 }
 

@@ -51,7 +51,7 @@ var cbSuccess = function(result) {
 
     if (idxStart === 0) {
         odkData.query('refrigerator_types', null, null, 
-            null, null, null, null, true, refrigeratorTypeCBSuccess, refrigeratorTypeCBFailure);
+            null, null, null, null, 10, null, true, refrigeratorTypeCBSuccess, refrigeratorTypeCBFailure);
     }
 };
 
@@ -84,7 +84,7 @@ var getSearchResults = function() {
     var searchText = document.getElementById('search').value;
 
     odkData.query('health_facility', 'facility_id = ?', [searchText], 
-        null, null, null, null, true, cbSearchSuccess, cbSearchFailure);
+        null, null, null, null, 10, null, true, cbSearchSuccess, cbSearchFailure);
 }
 
 var resumeFn = function(fIdxStart) {
