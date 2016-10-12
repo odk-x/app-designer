@@ -532,7 +532,7 @@ window.odkCommon = {
     * @param dispatchString  Can be anything -- holds reconstructive state for JS
     *
     * @param action    The intent. e.g.,
-    *                   org.opendatakit.survey.android.activities.MediaCaptureImageActivity
+    *                   org.opendatakit.survey.activities.MediaCaptureImageActivity
     *
     * @param jsonMap  JSON.stringify of Map of the following structure:
     *                   {
@@ -610,7 +610,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 version: '31.0.1650.63',
                 appName: 'testing',
                 baseUri: that._computeBaseUri(),
-                formsUri: "content://org.opendatakit.common.android.provider.forms/",
+                formsUri: "content://org.opendatakit.provider.forms/",
                 activeUser: 'username:badger',
                 logLevel: this._logLevel
             };
@@ -768,7 +768,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
 
             var value;
             that.log("D","odkCommon: DO: doAction(" + dispatchString + ", " + action + ", ...)");
-            if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity' ) {
+            if ( action === 'org.opendatakit.survey.activities.MediaCaptureImageActivity' ) {
                 that._queuedActions.push(
                   JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/venice.jpg",
@@ -778,7 +778,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 }, 100);
                 return "OK";
             }
-            if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity' ) {
+            if ( action === 'org.opendatakit.survey.activities.MediaCaptureVideoActivity' ) {
                 that._queuedActions.push(
                   JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/bali.3gp",
@@ -788,7 +788,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 }, 100);
                 return "OK";
             }
-            if ( action === 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity' ) {
+            if ( action === 'org.opendatakit.survey.activities.MediaCaptureAudioActivity' ) {
                 that._queuedActions.push(
                   JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/raven.wav",
@@ -798,7 +798,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 }, 100);
                 return "OK";
             }
-            if ( action === 'org.opendatakit.survey.android.activities.MediaChooseImageActivity' ) {
+            if ( action === 'org.opendatakit.survey.activities.MediaChooseImageActivity' ) {
                 that._queuedActions.push(
                   JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/venice.jpg",
@@ -808,7 +808,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 }, 100);
                 return "OK";
             }
-            if ( action === 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity' ) {
+            if ( action === 'org.opendatakit.survey.activities.MediaChooseVideoActivity' ) {
                 that._queuedActions.push(
                   JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/bali.3gp",
@@ -818,7 +818,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 }, 100);
                 return "OK";
             }
-            if ( action === 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity' ) {
+            if ( action === 'org.opendatakit.survey.activities.MediaChooseAudioActivity' ) {
                 that._queuedActions.push(
                   JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/raven.wav",
@@ -859,7 +859,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 }, 1000);
                 return "OK";
             }
-            if ( action === 'org.opendatakit.survey.android.activities.GeoPointMapActivity' ) {
+            if ( action === 'org.opendatakit.survey.activities.GeoPointMapActivity' ) {
                 lat = prompt("Enter latitude:");
                 lng = prompt("Enter longitude:");
                 alt = prompt("Enter altitude:");
@@ -875,7 +875,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 }, 1000);
                 return "OK";
             }
-            if ( action === 'org.opendatakit.survey.android.activities.GeoPointActivity' ) {
+            if ( action === 'org.opendatakit.survey.activities.GeoPointActivity' ) {
                 lat = prompt("Enter latitude:");
                 lng = prompt("Enter longitude:");
                 alt = prompt("Enter altitude:");
@@ -891,7 +891,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 }, 1000);
                 return "OK";
             }
-            if ( action === 'org.opendatakit.survey.android.activities.MainMenuActivity' ) {
+            if ( action === 'org.opendatakit.survey.activities.MainMenuActivity' ) {
                 that._queuedActions.push(
                   JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1 } }));
@@ -909,7 +909,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 }, 1000);
                 return "OK";
             }
-            if ( action === 'org.opendatakit.survey.android.activities.SplashScreenActivity' ) {
+            if ( action === 'org.opendatakit.survey.activities.SplashScreenActivity' ) {
                 that._queuedActions.push(
                   JSON.stringify({ dispatchString: dispatchString, action: action,
                     jsonValue: { status: -1 } }));
