@@ -19,11 +19,32 @@
 var typeNameMap = {};  
 var idxStart = -1;  
 var healthFacilityResultSet = {};        
+
+// This will manage pagination
+var limit = 10;
+var offset = 0;
 /** 
  * Use chunked list view for larger tables: We want to chunk the displays so
  * that there is less load time.
  */
-            
+
+var prevResults = function() {
+  offset -= limit;
+  if (offset < 0) {
+    offset = 0;
+  }
+
+  clearRows();
+  resumeFn(0);
+}
+
+var nextResults = function() {
+  offset += limit;
+
+  clearRows();
+  resumeFn(0);
+}
+
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
@@ -51,7 +72,7 @@ var cbSuccess = function(result) {
 
     if (idxStart === 0) {
         odkData.query('refrigerator_types', null, null, 
-            null, null, null, null, 10, null, true, refrigeratorTypeCBSuccess, refrigeratorTypeCBFailure);
+            null, null, null, null, limit, offset, true, refrigeratorTypeCBSuccess, refrigeratorTypeCBFailure);
     }
 };
 
@@ -84,12 +105,12 @@ var getSearchResults = function() {
     var searchText = document.getElementById('search').value;
 
     odkData.query('health_facility', 'facility_id = ?', [searchText], 
-        null, null, null, null, 10, null, true, cbSearchSuccess, cbSearchFailure);
+        null, null, null, null, null, null, true, cbSearchSuccess, cbSearchFailure);
 }
 
 var resumeFn = function(fIdxStart) {
 
-    odkData.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure, limit, offset);
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
@@ -194,3 +215,6 @@ function addDataForRow(rowNumber) {
     $('#list').append(borderDiv);
 }
 
+function clearRows() {
+  $('#list').empty();
+}
