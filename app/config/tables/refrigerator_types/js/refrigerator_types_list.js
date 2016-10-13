@@ -56,7 +56,7 @@ var getSearchResults = function() {
     var searchText = document.getElementById('search').value;
 
     odkData.query('refrigerator_types', 'catalog_id = ?', [searchText], 
-        null, null, null, 10, null, true, cbSearchSuccess, cbSearchFailure);
+        null, null, null, null, null, null, true, cbSearchSuccess, cbSearchFailure);
 }
 
 /**
