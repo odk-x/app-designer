@@ -16,12 +16,15 @@ window.odkData = {
         return window.odkDataIf;
     },
 
-    getViewData : function (successCallbackFn, failureCallbackFn) {
+    getViewData : function (successCallbackFn, failureCallbackFn, limit, offset) {
         var that = this;
 
         var req = that.queueRequest('getViewData', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().getViewData(req._callbackId);
+        limit = (limit !== undefined ? limit : null);
+        offset = (offset !== undefined ? offset : null);
+
+        that.getOdkDataIf().getViewData(req._callbackId, limit, offset);
     },
 
     getRoles: function(successCallbackFn, failureCallbackFn) {
