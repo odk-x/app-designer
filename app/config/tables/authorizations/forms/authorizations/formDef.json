@@ -30,6 +30,16 @@
         "type": "string",
         "name": "assigned_code",
         "_row_num": 7
+      },
+      {
+        "type": "string",
+        "name": "is_active",
+        "_row_num": 8
+      },
+      {
+        "type": "string",
+        "name": "is_simple",
+        "_row_num": 9
       }
     ],
     "settings": [
@@ -247,6 +257,26 @@
           }
         ],
         "elementKey": "assigned_code"
+      },
+      "is_active": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "is_active"
+      },
+      "is_simple": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "is_simple"
       }
     },
     "section_names": [
@@ -572,6 +602,32 @@
         "elementName": "assigned_code",
         "elementSet": "data",
         "elementPath": "assigned_code"
+      },
+      "is_active": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "is_active",
+        "elementName": "is_active",
+        "elementSet": "data",
+        "elementPath": "is_active"
+      },
+      "is_simple": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "is_simple",
+        "elementName": "is_simple",
+        "elementSet": "data",
+        "elementPath": "is_simple"
       },
       "_id": {
         "type": "string",

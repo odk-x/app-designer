@@ -54,8 +54,6 @@ function cbSuccess(result) {
           $('#message').text('Successfully Enabled!')
         }
         struct.is_override = 'true';
-        struct.override_user = 
-
         odkData.updateRow(
           'registration', struct, registrationResultSet.getRowId(0), updateCBSuccess, updateCBFailure
           );

@@ -5,3 +5,4 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,registration
 Table,default,defaultViewType,string,SPREADSHEET
 Table,default,displayName,object,"""Registration"""
+Table,security,filterTypeOnCreation,string,READ_ONLY

@@ -120,6 +120,16 @@
         "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
         "_row_num": 3
       }
+    ],
+    "properties": [
+      {
+        "partition": "SurveyUtil",
+        "aspect": "default",
+        "key": "SurveyUtil.formId",
+        "type": "string",
+        "value": "wrong_form",
+        "_row_num": 2
+      }
     ]
   },
   "specification": {
@@ -734,18 +744,11 @@
         "_value": "[{\"choice_list_name\":\"true_false\",\"data_value\":\"true\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"true_false\",\"data_value\":\"false\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
       },
       {
-        "_partition": "FormType",
-        "_aspect": "default",
-        "_key": "FormType.formType",
-        "_type": "string",
-        "_value": "SURVEY"
-      },
-      {
         "_partition": "SurveyUtil",
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "entitlements"
+        "_value": "wrong_form"
       },
       {
         "_partition": "Table",
