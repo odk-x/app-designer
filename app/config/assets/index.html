@@ -18,7 +18,7 @@
             newClient.innerHTML = "Registration";
             newClient.onclick = function() {
                 odkTables.launchHTML(
-                    'config/assets/registration_start.html');
+                    'config/assets/pre_registration.html');
             }
             document.getElementById("wrapper").appendChild(newClient);    
 
@@ -29,18 +29,9 @@
             followUp.innerHTML = "Deliver to Beneficiary";
             followUp.onclick = function() {
                 odkTables.launchHTML(
-                    'config/assets/delivery_start.html');
+                    'config/assets/delivery_options.html');
             }
             document.getElementById("wrapper").appendChild(followUp);
-
-            var voucher = document.createElement("button");
-            voucher.setAttribute("id", "button3");
-            voucher.innerHTML = "Redeem Voucher";
-            voucher.onclick = function() {
-                odkTables.launchHTML(
-                    'config/assets/voucher_start.html');
-            }
-            document.getElementById("wrapper").appendChild(voucher);  
 
             // Send data option that luanches send finalized forms screen in
             // Collect

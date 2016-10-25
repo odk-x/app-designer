@@ -22,7 +22,6 @@
             	odkCommon.registerListener(function() {
                 	    callBackFn();
             	});
-
             	var dispatchString = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
             	odkCommon.doAction(dispatchString, 'com.google.zxing.client.android.SCAN', null);
         	});

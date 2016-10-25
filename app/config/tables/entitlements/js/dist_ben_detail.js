@@ -47,6 +47,7 @@ var queryCBSuccess = function(result) {
     var struct = {};
     struct.is_delivered = result.get('is_delivered');
     odkData.updateRow('entitlements', struct, entitlement_id, updateCBSuccess, updateCBFailure);
+    entitlementsResultSet.is_delivered = result.is_delivered;
   }
 }
 

@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <link href="css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../config/assets/js/util.js"></script>
+        <script type="text/javascript">
+
+        var code = null;
+        var id = null;
+        var finished = false;
+        var activeAuths = null;
+        var authIndex = 1;
+
+
+
+        function display() {
+            var enter = $('#enter');
+            setTimeout(function() {
+                var width = $(window).innerWidth();
+                var height = $(window).innerHeight();
+                document.getElementById("enter").style.width = width * .9 + "px";
+                document.getElementById("enter").style.height = height * .15 + "px";
+                document.getElementById("launch").style.width = width * .9 + "px";
+                document.getElementById("launch").style.height = height * .15 + "px";
+                document.getElementById('code').style.width = width * .6 + "px";
+                document.getElementById('code').style.height = height * .07 + 'px';
+            }, 0);
+            
+            enter.on('click', function() {
+                code = $('#code').val();
+                if (code !== "") {
+                    check();
+                }
+            });
+        }
+
+        function check() {
+            odkData.query('registration', 'beneficiary_code = ?', [code], null, null,
+                                null, null, null, null, true, beneficiaryCBSuccess, beneficiaryCBFailure);
+        }
+
+        function beneficiaryCBSuccess(result) {
+            console.log('beneficiaryCBSuccess called');
+            if (result.getCount() === 0) {
+                odkData.query('entitlements', 'beneficiary_code = ?', [code],
+                    null, null, null, null, null, null, true, voucherCBSuccess, voucherCBFailure);
+            } else {
+                $('#message').text(code + " -- beneficiary with this code already detected in system: please contact Administrator");
+            }
+        }
+
+        function beneficiaryCBFailure(error) {
+            console.log('beneficiaryCBFailure called with error: ' + error);
+        }
+
+        function voucherCBSuccess(result) {
+            console.log('voucherCBSuccess called');
+            if (result.getCount() === 0) {
+                $('#message').text('Scanned voucher code not found in system');
+            } else {
+                $('#message').text(code + ' -- Voucher Detected!');
+                $('#launch').show();
+                $('#launch').text('Redeem Voucher');
+                $('#launch').click(function() {
+                    odkTables.addRowWithSurvey(
+                    'registration', 'registration', null, getJSONMapValues());
+                });
+            }
+            odkCommon.removeFirstQueuedAction();
+        }
+
+        function voucherCBFailure(error) {
+            console.log('activeCBFailure called with error: ' + error);
+        }
+
+        var setJSONMap = function(JSONMap, key, value) {
+            if (value !== null && value !== undefined) {
+                JSONMap[key] = JSON.stringify(value);
+            }
+        }
+
+        var getJSONMapValues = function() {
+            var jsonMap = {};
+            setJSONMap(jsonMap, 'beneficiary_code', code);
+            jsonMap = JSON.stringify(jsonMap);    
+            return jsonMap;
+        };
+        
+
+        </script>
+    </head>
+
+
+    
+    <body onload="display();">
+    <h2>Please Enter Voucher Code</h2>
+    <div style='text-align: center'><input id="code" style='margin: auto' style='font-size: 20px'></input></div>
+    <button id='enter'style='font-size: 25px'>Enter</button>
+    <p><span id="message"></span></p>
+    <button id="launch" style='display:none'style='font-size: 25px'></button>
+
+    </body>

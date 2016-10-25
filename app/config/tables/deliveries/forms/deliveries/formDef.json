@@ -157,7 +157,7 @@
       },
       {
         "clause": "if",
-        "condition": "data('assigned_code') == ''",
+        "condition": "data('assigned_code') === null || data('assigned_code') === undefined",
         "branch_label": "item_scan",
         "_row_num": 5
       },
@@ -1039,7 +1039,7 @@
           },
           {
             "clause": "if",
-            "condition": "data('assigned_code') == ''",
+            "condition": "data('assigned_code') === null || data('assigned_code') === undefined",
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "goto_label",

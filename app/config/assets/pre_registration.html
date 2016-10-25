@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <link href="css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript">
+
+        function display() {
+            $('#regular').on('click', function() {
+                odkTables.launchHTML('config/assets/registration_options.html')
+            });
+
+            $('#voucher').on('click', function() {
+                odkTables.launchHTML('config/assets/voucher_options.html');
+            });
+        }
+
+        </script>
+    </head>
+
+    <body onload="display()">
+        <h1 id="title">Choose Registration Type</h1>
+        <button type="reg" id="regular">Normal Registration</button>
+        <button type ='reg' id='voucher'>Redeem Voucher</button>
+
+        <p> <img src="img/small_2025.jpg"></p>
+    </body>
+</html>
