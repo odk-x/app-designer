@@ -136,8 +136,9 @@ module.exports = function (grunt) {
         outputCsvDir: 'output/csv',
         // The directory where the debug objects are output.
         outputDebugDir: 'output/debug',
-        // The db path on the phone. %APP% should be replaced by app name
-        deviceDbPath: '/sdcard/opendatakit/%APP%/data/webDb/sqlite.db',
+        // The db directory path on the phone. %APP% should be replaced by app name
+		// We use write-ahead-logging, so we need to pull both sqlite.db and sqlite.wal
+        deviceDbDirectoryPath: '/sdcard/opendatakit/%APP%/data/webDb',
         xlsxDir: 'xlsxconverter'
         
     };
@@ -283,7 +284,7 @@ module.exports = function (grunt) {
         'adbpull-db',
         'Pull the db from the device',
         function() {
-            var dbPath = tablesConfig.deviceDbPath;
+            var dbPath = tablesConfig.deviceDbDirectoryPath;
             dbPath = dbPath.replace(tablesConfig.appStr, tablesConfig.appName);
             var src = dbPath;
             var dest = tablesConfig.appDir + '/' + tablesConfig.outputDbDir;
@@ -894,6 +895,90 @@ module.exports = function (grunt) {
 				'app/output/**');
 
             dirs.forEach(suffixRenameCopier(".rowlevelaccessdemo", ""));
+        });
+	
+	var georowlevelaccessdemo = function(grunt) {
+		// The row level access demo is based upon the geoweather and
+		// geoweather_conditions table plus the geotagger demo.
+		var dirs = grunt.file.expand(
+			{filter: 'isFile',
+			 cwd: 'app' },
+			'.nomedia',
+			'**',
+			'!system/**',
+			'!data/**',
+			'!output/**',
+			'!config/assets/**',
+			'!config/tables/**',
+			'config/**/*.georowlevelaccessdemo',
+			'config/assets/changeAccessFilters.html',
+			'config/assets/framework/translations.js',
+			'config/assets/framework/forms/framework/*.georowlevelaccessdemo',
+			'config/assets/css/odk-survey.css',
+			'config/assets/img/advance.png',
+			'config/assets/img/backup.png',
+			'config/assets/img/form_logo.png',
+			'config/assets/img/little_arrow.png',
+			'config/assets/img/play.png',
+			'config/assets/libs/**',
+			'config/assets/ratchet/**',
+			'config/assets/css/demo-chooser.css',
+			'config/assets/css/changeAccessFilters.css',
+			'config/assets/img/noaa_weather_nssl0010.jpg',
+			'config/assets/img/20160902_sky.jpg',
+			'config/assets/js/georowLevelAccessDemo.js',
+			'config/assets/js/changeAccessFilters.js',
+			'config/tables/geoweather_conditions/**',
+			'config/tables/geoweather/**',
+			'config/tables/geotagger/**',
+			'config/assets/csv/geoweather.updated.csv',
+			'config/assets/csv/geoweather_conditions.updated.csv',
+			'config/assets/csv/geotagger.updated.csv',
+			'config/assets/csv/geotagger/**');
+
+		return dirs;
+	};
+	
+    grunt.registerTask(
+        'adbpush-tables-georowlevelaccessdemo',
+        'Push everything for tables opendatakit-georowlevelaccessdemo to the device',
+        function() {
+            var dirs = georowlevelaccessdemo(grunt);
+
+            // Now push these files to the phone.
+            dirs.forEach(suffixRenameAdbPusher(".georowlevelaccessdemo", tablesConfig.appDir));
+        });
+
+	
+    grunt.registerTask(
+        'create-tables-georowlevelaccessdemo',
+        'creat the georowlevelaccessdemo application designer package under build/georowlevelaccessdemo/',
+        function() {
+            var dirs = georowlevelaccessdemo(grunt);
+			
+			var buildDir = 'build/georowlevelaccessdemo';
+			
+			grunt.file.delete(buildDir + '/');
+			grunt.file.mkdir(buildDir);
+			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
+			
+            // Now push these files to the phone.
+            dirs.forEach(suffixRenameCopier(".georowlevelaccessdemo", tablesConfig.appDir));
+			
+			var dirs = grunt.file.expand(
+				{filter: 'isFile',
+				 cwd: '.' },
+				'**',
+				'!.git/**',
+				'!build/**',
+				'!app/**',
+				'app/system/**',
+				'app/data/tables/geotagger/**',
+				'app/data/tables/geoweather/**',
+				'app/data/tables/geoweather_conditions/**',
+				'app/output/**');
+
+            dirs.forEach(suffixRenameCopier(".georowlevelaccessdemo", ""));
         });
 		
 	var tablesDemoFiles = function(grunt) {
