@@ -135,7 +135,7 @@ var odkDataIf = {
         return null;
     },
 
-    getViewData : function (_callbackId) {
+    getViewData : function (_callbackId, limit, offset) {
         var that = this;
         var ctxt = that.newStartContext(_callbackId);
         ctxt.failure({message: "not implemented"});
