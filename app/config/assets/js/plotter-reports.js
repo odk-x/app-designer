@@ -26,4 +26,12 @@ function display() {
         }
     );
 
+    var viewComparisonButton = $('#view-comparison');
+    viewComparisonButton.on(
+        'click',
+        function() {
+            odkTables.launchHTML('config/assets/plotter-compareType-chooser.html');
+        }
+    );
+
 }

@@ -35,7 +35,7 @@
       },
       {
         "type": "select_one_dropdown",
-        "values_list": "conditions",
+        "values_list": "select_geoweather_conditions",
         "name": "Weather",
         "display": {
           "text": "Current Weather",
@@ -72,9 +72,47 @@
         "model": {
           "type": "string"
         },
-        "calculation": "data('Description') + ' @ ' + data('Date_and_Time').toLocaleDateString()",
+        "calculation": "data('Description') + ' @ ' + data('Date_and_Time')",
         "required": true,
         "_row_num": 10
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "unverifiedUserCanCreate",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "filterTypeOnCreation",
+        "type": "string",
+        "value": "READ_ONLY",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "locked",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 4
+      }
+    ],
+    "queries": [
+      {
+        "query_name": "select_geoweather_conditions",
+        "query_type": "linked_table",
+        "linked_form_id": "geoweather_conditions",
+        "linked_table_id": "geoweather_conditions",
+        "selection": "Language = ?",
+        "selectionArgs": "[ 'en' ]",
+        "auxillaryHash": "''",
+        "_row_num": 2
       }
     ],
     "settings": [
@@ -312,7 +350,18 @@
         }
       ]
     },
-    "queries": {},
+    "queries": {
+      "select_geoweather_conditions": {
+        "query_name": "select_geoweather_conditions",
+        "query_type": "linked_table",
+        "linked_form_id": "geoweather_conditions",
+        "linked_table_id": "geoweather_conditions",
+        "selection": "Language = ?",
+        "selectionArgs": "[ 'en' ]",
+        "auxillaryHash": "''",
+        "_row_num": 2
+      }
+    },
     "calculates": {},
     "model": {
       "Description": {
@@ -333,7 +382,7 @@
           }
         ],
         "type": "string",
-        "valuesList": "conditions",
+        "valuesList": "select_geoweather_conditions",
         "elementKey": "Weather"
       },
       "Temperature": {
@@ -437,7 +486,7 @@
           },
           {
             "type": "select_one_dropdown",
-            "values_list": "conditions",
+            "values_list": "select_geoweather_conditions",
             "name": "Weather",
             "display": {
               "text": "Current Weather",
@@ -527,7 +576,7 @@
             "model": {
               "type": "string"
             },
-            "calculation": "data('Description') + ' @ ' + data('Date_and_Time').toLocaleDateString()",
+            "calculation": "data('Description') + ' @ ' + data('Date_and_Time')",
             "required": true,
             "_row_num": 10,
             "__rowNum__": 9,
@@ -760,7 +809,7 @@
           }
         ],
         "type": "string",
-        "valuesList": "conditions",
+        "valuesList": "select_geoweather_conditions",
         "elementKey": "Weather",
         "elementName": "Weather",
         "elementSet": "data",
@@ -977,13 +1026,6 @@
     },
     "properties": [
       {
-        "_partition": "Column",
-        "_aspect": "Weather",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"conditions\",\"data_value\":\"clear\",\"display\":{\"text\":\"Clear skies\"},\"_row_num\":2},{\"choice_list_name\":\"conditions\",\"data_value\":\"partly_clear\",\"display\":{\"text\":\"Partly clear skies\"},\"_row_num\":3},{\"choice_list_name\":\"conditions\",\"data_value\":\"overcast\",\"display\":{\"text\":\"Overcast (cloudy) skies\"},\"_row_num\":4},{\"choice_list_name\":\"conditions\",\"data_value\":\"foggy\",\"display\":{\"text\":\"Foggy\"},\"_row_num\":5},{\"choice_list_name\":\"conditions\",\"data_value\":\"drizzle\",\"display\":{\"text\":\"Light rain\"},\"_row_num\":6},{\"choice_list_name\":\"conditions\",\"data_value\":\"rain\",\"display\":{\"text\":\"Raining\"},\"_row_num\":7},{\"choice_list_name\":\"conditions\",\"data_value\":\"thunderstorm\",\"display\":{\"text\":\"Thunderstorms\"},\"_row_num\":8},{\"choice_list_name\":\"conditions\",\"data_value\":\"snow\",\"display\":{\"text\":\"Snowing\"},\"_row_num\":9}]"
-      },
-      {
         "_partition": "FormType",
         "_aspect": "default",
         "_key": "FormType.formType",
@@ -1010,6 +1052,27 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "\"Simple Weather Survey\""
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "filterTypeOnCreation",
+        "_type": "string",
+        "_value": "READ_ONLY"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "locked",
+        "_type": "boolean",
+        "_value": "false"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "unverifiedUserCanCreate",
+        "_type": "boolean",
+        "_value": "false"
       }
     ]
   }

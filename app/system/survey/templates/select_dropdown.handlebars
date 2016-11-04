@@ -5,7 +5,8 @@
 {{/if}}
 <form action="javascript:void(0);" onsubmit="odkLeaveField(this);">
     {{> labelHint}}
-    <select class="form-control" name="{{name}}" tabindex="0">        
+    <select class="form-control" name="{{name}}" tabindex="0">  
+        <option selected disabled>{{{localize selectOneDropDownText}}}</option>     
         {{#each choices}}
             <option 
                 {{#if checked}}

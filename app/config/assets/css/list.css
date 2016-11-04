@@ -40,12 +40,12 @@ ul {
 }
 
 .item_space:active {
-  background-color: lightskyblue;
+  background-color: lightsteelblue;
 }
 
 .detail {
   font-size: 16pt;
-  color: darkgray;
+  color: #002030;
   font-weight: normal;
 }
  

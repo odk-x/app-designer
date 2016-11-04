@@ -31,7 +31,7 @@
       },
       {
         "clause": "if",
-        "condition": "selected(data('transportation_mode)', 'Other'))",
+        "condition": "selected(data('transportation_mode'), 'Other')",
         "_row_num": 5
       },
       {
@@ -518,7 +518,7 @@
           },
           {
             "clause": "if",
-            "condition": "selected(data('transportation_mode)', 'Other'))",
+            "condition": "selected(data('transportation_mode'), 'Other')",
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "goto_label",

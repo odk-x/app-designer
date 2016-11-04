@@ -36,7 +36,7 @@ p {
 }
 
 span {
-  color: darkgray;
+  color: dimgray;
 }
 
 h3 { 
@@ -46,4 +46,8 @@ h3 {
 
 #picture {
   text-align: center;
+}
+
+a {
+  color: blue;
 }

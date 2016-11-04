@@ -29,7 +29,7 @@ function cbFailure(error) {
  * displayed at this iteration through the loop.
  */
 var resumeFn = function(fidxStart) {
-    odkData.query('plot', null, null, null, null, null, null, true, 
+    odkData.query('plot', null, null, null, null, null, null, null, null, true, 
         cbSuccess, cbFailure);
 
     idxStart = fidxStart;

@@ -14,10 +14,15 @@
          }
 
         #pie1, #pie2 {
-        	width: 70%;
-        	margin-right: auto;
-        	margin-left: auto;
+        	width: 100%;
+        	margin-right: 0;
+        	margin-left: 0;
         	margin-top: 10px;
+        }
+
+        svg {
+        	display: block;
+        	margin: auto;
         }
         h2 {
         	text-align: center;
@@ -80,8 +85,8 @@
 
 				  g.append("text")
 					  .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-					  .attr("dy", "2em")
 					  .style("text-anchor", "middle")
+					  .style("alignment-baseline", "middle")
 					  .text(function(d, i) { return data[i].x; });
 			}
 			draw();

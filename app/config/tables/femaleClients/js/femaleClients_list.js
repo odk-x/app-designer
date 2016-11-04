@@ -36,19 +36,15 @@ function cbSRSuccess(searchData) {
     console.log('cbSRSuccess data is' + searchData);
     if(searchData.getCount() > 0) {
         // open filtered list view if client found
-        var clientId = searchData.get('client_id');
+        var rowId = searchData.getRowId(0);
         odkTables.openTableToListView(
                 'femaleClients',
-                'client_id = ?',
-                [clientId],
+                '_id = ?',
+                [rowId],
                 'config/tables/FemaleClients/html/femaleClients_list.html');
     } else {
-        // open 'client not found' page
-        odkTables.openTableToListView(
-                'femaleClients',
-                null,
-                null,
-                'config/assets/clients_not_found_list.html');
+        document.getElementById("search").value = "";
+        document.getElementsByName("query")[0].placeholder="Client not found";
     }
 }
 
@@ -66,7 +62,7 @@ function getResults() {
 //             [searchText]);
 
     odkData.query('femaleClients', 'client_id = ?', [searchText], 
-        null, null, null, null, true, cbSRSuccess, cbSRFailure);
+        null, null, null, null, null, null, true, cbSRSuccess, cbSRFailure);
 }
 
 // displays list view of clients

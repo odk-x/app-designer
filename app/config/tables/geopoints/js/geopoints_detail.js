@@ -35,8 +35,12 @@ function cbSuccess(result) {
 
     // display location description and geo points
     document.getElementById('description').innerHTML = result.get('description');
-    document.getElementById('coordinates').innerHTML = result.get('coordinates.latitude') + 
-        ' ' + result.get('coordinates.longitude');
+    var latitude = result.get('coordinates.latitude');
+    var longitude = result.get('coordinates.longitude');
+    if (latitude != null || longitude != null) {
+        document.getElementById('coordinates').innerHTML = latitude + 
+        ' ' + longitude;
+    }
 }
 
 function cbFailure(error) {

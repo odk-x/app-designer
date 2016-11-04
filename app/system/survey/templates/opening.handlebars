@@ -18,8 +18,12 @@
     <div class="instanceClearDiv"></div>
 
     <div>
-        <p>You are at the start of Instance: </p>
+	    {{#if display_field}}
+        <p>You are at the start of instance: </p>
         <p>"{{display_field}}"</p> 
+		{{else}}
+        <p>You are at the start of a new instance.</p>
+		{{/if}}
         <hr>
         <!--
         <p>Swipe the screen as shown below to begin.</p>

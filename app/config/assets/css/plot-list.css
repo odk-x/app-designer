@@ -4,7 +4,7 @@
 }
 
 .grid-item {
-  background: beige;
+  background: lightcyan;
 }
 
 .item_space {
@@ -20,5 +20,5 @@ ul {
 }
 
 .content-holder {
-  margin-top: 30px;
+  margin-top: 35px;
 }

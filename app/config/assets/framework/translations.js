@@ -19,6 +19,9 @@ define({
     "next" : {
         "default": "Next"
     },
+    "selectDropdownLabel" : {
+        "default" : "Choose Option"
+    },
     "requiredValueErr" : {
         "default": "Required value was not provided."
     }

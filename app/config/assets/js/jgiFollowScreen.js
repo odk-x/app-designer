@@ -326,7 +326,7 @@ function display() {
         updateUIForFood();
 
         odkData.query('food_bout', null, null, null, null,
-            null, null, true, dbInitCBSuccess, 
+            null, null, null, null, true, dbInitCBSuccess, 
             dbInitCBFail);
     };
 
@@ -738,7 +738,7 @@ function display() {
         // I need a callback function that will tell me once all of 
         // this initialization is done
         odkData.query('food_bout', null, null, null, null,
-            null, null, true, dbInitCBSuccess, 
+            null, null, null, null, true, dbInitCBSuccess, 
             dbInitCBFail);
     };
 
@@ -777,7 +777,7 @@ function display() {
         // I need a callback function that will tell me once 
         // the caches are done
         odkData.query('food_bout', null, null, null, null,
-            null, null, true, cacheInitCBSuccess, 
+            null, null, null, null, true, cacheInitCBSuccess, 
             cacheInitCBFail);
     };
 

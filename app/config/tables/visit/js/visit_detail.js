@@ -87,20 +87,22 @@ function display() {
 
     // Now do the pests.
     var bugs = visitDetailResultSet.get('pests');
-    var bugArray = JSON.parse(bugs);
-    for ( var i = 0 ; i < bugArray.length ; ++i ) {
-        var bug = bugArray[i];
-        if (bug==BUG_EARWORM) {
-            $('#bugs-earworm').attr('checked', true);
-        }
-        if (bug==BUG_STINK) {
-            $('#bugs-stink').attr('checked', true);
-        }
-        if (bug==BUG_BEETLE) {
-            $('#bugs-beetle').attr('checked', true);
-        }
-        if (bug==BUG_CUTWORM) {
-            $('#bugs-cutworm').attr('checked', true);
+    if (bugs !== null && bugs !== undefined) {
+        var bugArray = JSON.parse(bugs);
+        for ( var i = 0 ; i < bugArray.length ; ++i ) {
+            var bug = bugArray[i];
+            if (bug==BUG_EARWORM) {
+                $('#bugs-earworm').attr('checked', true);
+            }
+            if (bug==BUG_STINK) {
+                $('#bugs-stink').attr('checked', true);
+            }
+            if (bug==BUG_BEETLE) {
+                $('#bugs-beetle').attr('checked', true);
+            }
+            if (bug==BUG_CUTWORM) {
+                $('#bugs-cutworm').attr('checked', true);
+            }
         }
     }
 
@@ -129,7 +131,7 @@ function cbSuccess(result) {
     plotId = visitDetailResultSet.get('plot_id');
 
     odkData.query('plot', '_id = ?', [plotId], null, null,
-        null, null, true, cbPlotSuccess, cbPlotFailure);
+        null, null, null, null, true, cbPlotSuccess, cbPlotFailure);
 }
 
 function cbFailure(error) {
