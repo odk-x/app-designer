@@ -35,7 +35,7 @@ var postHandler = function(req, res, next) {
         // we're writing to root, which we don't have permission to. Should
         // really be dealing with the path more gracefully.
         var path = req.url.substring(1);
-        
+
         // First make sure the directory exists, or else the following call to
         // createWriteStream fails. We don't want to include the file name as
         // part of the directory, or else our post will be trying to change the
@@ -64,7 +64,7 @@ var postHandler = function(req, res, next) {
                 res.write('uploaded file!');
                 res.end();
             });
-            
+
         } else {
             file = fs.createWriteStream(path);
             req.pipe(file);
@@ -109,7 +109,7 @@ module.exports = function (grunt) {
     var baseDirForServer = '';
     var tablesConfig = {
         // The base app directory. Note that if you modify this you should
-        // also modify the other properties in this object that refer to 
+        // also modify the other properties in this object that refer to
         // app
         appDir: 'app',
         appName: 'default',
@@ -140,19 +140,19 @@ module.exports = function (grunt) {
 		// We use write-ahead-logging, so we need to pull both sqlite.db and sqlite.wal
         deviceDbDirectoryPath: '/sdcard/opendatakit/%APP%/data/webDb',
         xlsxDir: 'xlsxconverter'
-        
+
     };
 
     var surveyConfig = {
         // The base app directory. Note that if you modify this you should
-        // also modify the other properties in this object that refer to 
+        // also modify the other properties in this object that refer to
         // app
         appDir: 'app',
         appName: 'survey',
         // The mount point of the device. Should allow adb push/pull.
         deviceMount: '/sdcard/opendatakit',
         xlsxDir: 'xlsxconverter'
-        
+
     };
 
     grunt.initConfig({
@@ -254,7 +254,7 @@ module.exports = function (grunt) {
         },
     });
 
-    // We need grunt-exec to run adb commands from within grunt. 
+    // We need grunt-exec to run adb commands from within grunt.
     grunt.loadNpmTasks('grunt-exec');
 
     // Just an alias task--shorthand for doing all the pullings
@@ -312,8 +312,8 @@ module.exports = function (grunt) {
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'.  
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -342,12 +342,12 @@ module.exports = function (grunt) {
         'adbpush-tables',
         'Push everything for tables only to the device',
         function() {
-            // We do not need any system, data or output files. 
+            // We do not need any system, data or output files.
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'.  
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -383,12 +383,12 @@ module.exports = function (grunt) {
         'adbpush-systemjs',
         'Push everything for tables only to the device',
         function() {
-            // We do not need any system, data or output files. 
+            // We do not need any system, data or output files.
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'.  
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -435,8 +435,8 @@ module.exports = function (grunt) {
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'. 
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -488,8 +488,8 @@ module.exports = function (grunt) {
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'. 
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -536,8 +536,8 @@ module.exports = function (grunt) {
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'. 
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -565,7 +565,7 @@ module.exports = function (grunt) {
             });
         });
 
-	// 
+	//
 	// returns a function that will handle the copying of files into the
 	// build/ + suffix.substr(1) folder with any files ending in suffix
 	// stripped of that suffix.
@@ -592,13 +592,13 @@ module.exports = function (grunt) {
 				demoSuffix.substring(1);
 
 			var baseDir = buildDir;
-			
+
 			if ( offsetDir != "" ) {
-				baseDir = baseDir + 
+				baseDir = baseDir +
 					'/' +
 					offsetDir;
 			}
-				
+
 			var dest;
 			if ( isSuffixed ) {
 				// copy the original so that, e.g, grunt adbpush-tables-tablesdemo will work
@@ -608,7 +608,7 @@ module.exports = function (grunt) {
 				grunt.log.writeln('file copy ' + src + ' ' + dest);
 				grunt.file.copy(src, dest);
 			}
-			// and copy the renamed destination file so that 
+			// and copy the renamed destination file so that
 			// grunt adbpush will also work.
 			dest = baseDir +
 				'/' +
@@ -617,8 +617,8 @@ module.exports = function (grunt) {
 			grunt.file.copy(src, dest);
 		};
 	};
-	
-	// 
+
+	//
 	// returns a function that will handle the adb push of files onto the
 	// device with any files ending in suffix stripped of that suffix.
 	//
@@ -628,8 +628,8 @@ module.exports = function (grunt) {
 			//  Have to add app back into the file name for the adb push
 			var src;
 			if ( offsetDir != "" ) {
-				src = offsetDir + 
-				'/' + 
+				src = offsetDir +
+				'/' +
 				fileName;
 			} else {
 				src = fileName;
@@ -649,6 +649,41 @@ module.exports = function (grunt) {
 		};
 	};
 
+		var largeDataSetFiles = function(grunt) {
+        // We only want a subset of the app/tables files,
+		// however. So, we are going to get everything except that
+		// directory and then add back in the ones that we want.
+		// The first parameter is an options object where we specify that
+		// we only want files--this is important because otherwise when
+		// we get directory names adb will push everything in the directory
+		// name, effectively pushing everything twice.  We also specify that we
+		// want everything returned to be relative to 'app' by using 'cwd'.
+		var dirs = grunt.file.expand(
+			{filter: 'isFile',
+			 cwd: 'app' },
+			'.nomedia',
+			'**',
+			'!system/**',
+			'!data/**',
+			'!output/**',
+			'!config/tables/**',
+			'config/assets/**',
+            'config/tables/large_dataset/**');
+
+		return dirs;
+	};
+
+    grunt.registerTask(
+        'adbpush-largeDataSet500',
+        'Push everything for large data set to the device',
+        function() {
+            var dirs = largeDataSetFiles(grunt);
+
+            // Now push these files to the phone.
+            dirs.forEach(suffixRenameAdbPusher(".largeDataSet500", tablesConfig.appDir));
+        }
+    );
+
 	var gatesDemoFiles072216 = function(grunt) {
         // We only want a subset of the app/tables files,
 		// however. So, we are going to get everything except that
@@ -656,8 +691,8 @@ module.exports = function (grunt) {
 		// The first parameter is an options object where we specify that
 		// we only want files--this is important because otherwise when
 		// we get directory names adb will push everything in the directory
-		// name, effectively pushing everything twice.  We also specify that we 
-		// want everything returned to be relative to 'app' by using 'cwd'. 
+		// name, effectively pushing everything twice.  We also specify that we
+		// want everything returned to be relative to 'app' by using 'cwd'.
 		var dirs = grunt.file.expand(
 			{filter: 'isFile',
 			 cwd: 'app' },
@@ -694,7 +729,7 @@ module.exports = function (grunt) {
 
 		return dirs;
 	};
-	
+
     grunt.registerTask(
         'adbpush-gatesDemo072216',
         'Push everything for Gates Demo 07-22-16 to the device',
@@ -705,22 +740,22 @@ module.exports = function (grunt) {
             dirs.forEach(suffixRenameAdbPusher(".gatesDemo072216", tablesConfig.appDir));
         });
 
-	
+
     grunt.registerTask(
         'create-tables-gatesDemo072216',
         'Create the Gates Demo 07-22-2016 application designer package under build/gatesDemo072216/',
         function() {
             var dirs = gatesDemoFiles072216(grunt);
-			
+
 			var buildDir = 'build/gatesDemo072216';
-			
+
 			grunt.file.delete(buildDir + '/');
 			grunt.file.mkdir(buildDir);
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
-			
+
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".gatesDemo072216", tablesConfig.appDir));
-			
+
 			var dirs = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
@@ -734,7 +769,7 @@ module.exports = function (grunt) {
 
             dirs.forEach(suffixRenameCopier(".gatesDemo072216", ""));
         });
-	
+
 	var simpleDemoFiles = function(grunt) {
 		// In the alpha demo we want Tables and Survey. For this demo,
 		// it had needed a push of the system files, but we won't do that
@@ -744,8 +779,8 @@ module.exports = function (grunt) {
 		// The first parameter is an options object where we specify that
 		// we only want files--this is important because otherwise when
 		// we get directory names adb will push everything in the directory
-		// name, effectively pushing everything twice.  We also specify that we 
-		// want everything returned to be relative to 'app' by using 'cwd'. 
+		// name, effectively pushing everything twice.  We also specify that we
+		// want everything returned to be relative to 'app' by using 'cwd'.
 		var dirs = grunt.file.expand(
 			{filter: 'isFile',
 			 cwd: 'app' },
@@ -776,7 +811,7 @@ module.exports = function (grunt) {
 
 		return dirs;
 	};
-	
+
     grunt.registerTask(
         'adbpush-tables-simpledemo',
         'Push everything for tables opendatakit-simpledemo to the device',
@@ -787,22 +822,22 @@ module.exports = function (grunt) {
             dirs.forEach(suffixRenameAdbPusher(".simpledemo", tablesConfig.appDir));
         });
 
-	
+
     grunt.registerTask(
         'create-tables-simpledemo',
         'creat the simpledemo application designer package under build/simpledemo/',
         function() {
             var dirs = simpleDemoFiles(grunt);
-			
+
 			var buildDir = 'build/simpledemo';
-			
+
 			grunt.file.delete(buildDir + '/');
 			grunt.file.mkdir(buildDir);
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
-			
+
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".simpledemo", tablesConfig.appDir));
-			
+
 			var dirs = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
@@ -816,7 +851,7 @@ module.exports = function (grunt) {
 
             dirs.forEach(suffixRenameCopier(".simpledemo", ""));
         });
-	
+
 	var rowLevelAccessDemoFiles = function(grunt) {
 		// The row level access demo is based upon the geoweather and
 		// geoweather_conditions table.
@@ -855,7 +890,7 @@ module.exports = function (grunt) {
 
 		return dirs;
 	};
-	
+
     grunt.registerTask(
         'adbpush-tables-rowlevelaccessdemo',
         'Push everything for tables opendatakit-rowlevelaccessdemo to the device',
@@ -866,22 +901,22 @@ module.exports = function (grunt) {
             dirs.forEach(suffixRenameAdbPusher(".rowlevelaccessdemo", tablesConfig.appDir));
         });
 
-	
+
     grunt.registerTask(
         'create-tables-rowlevelaccessdemo',
         'creat the rowlevelaccessdemo application designer package under build/rowaccessdemo/',
         function() {
             var dirs = rowLevelAccessDemoFiles(grunt);
-			
+
 			var buildDir = 'build/rowlevelaccessdemo';
-			
+
 			grunt.file.delete(buildDir + '/');
 			grunt.file.mkdir(buildDir);
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
-			
+
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".rowlevelaccessdemo", tablesConfig.appDir));
-			
+
 			var dirs = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
@@ -896,7 +931,7 @@ module.exports = function (grunt) {
 
             dirs.forEach(suffixRenameCopier(".rowlevelaccessdemo", ""));
         });
-	
+
 	var georowlevelaccessdemo = function(grunt) {
 		// The row level access demo is based upon the geoweather and
 		// geoweather_conditions table plus the geotagger demo.
@@ -938,7 +973,7 @@ module.exports = function (grunt) {
 
 		return dirs;
 	};
-	
+
     grunt.registerTask(
         'adbpush-tables-georowlevelaccessdemo',
         'Push everything for tables opendatakit-georowlevelaccessdemo to the device',
@@ -949,22 +984,22 @@ module.exports = function (grunt) {
             dirs.forEach(suffixRenameAdbPusher(".georowlevelaccessdemo", tablesConfig.appDir));
         });
 
-	
+
     grunt.registerTask(
         'create-tables-georowlevelaccessdemo',
         'creat the georowlevelaccessdemo application designer package under build/georowlevelaccessdemo/',
         function() {
             var dirs = georowlevelaccessdemo(grunt);
-			
+
 			var buildDir = 'build/georowlevelaccessdemo';
-			
+
 			grunt.file.delete(buildDir + '/');
 			grunt.file.mkdir(buildDir);
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
-			
+
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".georowlevelaccessdemo", tablesConfig.appDir));
-			
+
 			var dirs = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
@@ -980,7 +1015,7 @@ module.exports = function (grunt) {
 
             dirs.forEach(suffixRenameCopier(".georowlevelaccessdemo", ""));
         });
-		
+
 	var tablesDemoFiles = function(grunt) {
 		// In the alpha demo we want Tables and Survey. For this demo,
 		// it had needed a push of the system files, but we won't do that
@@ -990,8 +1025,8 @@ module.exports = function (grunt) {
 		// The first parameter is an options object where we specify that
 		// we only want files--this is important because otherwise when
 		// we get directory names adb will push everything in the directory
-		// name, effectively pushing everything twice.  We also specify that we 
-		// want everything returned to be relative to 'app' by using 'cwd'. 
+		// name, effectively pushing everything twice.  We also specify that we
+		// want everything returned to be relative to 'app' by using 'cwd'.
 		var dirs = grunt.file.expand(
 			{filter: 'isFile',
 			 cwd: 'app' },
@@ -1017,7 +1052,7 @@ module.exports = function (grunt) {
 			'config/assets/css/bootstrap.css',
 			'config/assets/js/bootstrap.js',
 			'config/assets/js/ratchet.js',
-			
+
 			// demo chooser index page...
 			'config/assets/index.html',
 			'config/assets/js/demoChooser.js',
@@ -1028,7 +1063,7 @@ module.exports = function (grunt) {
 			'config/assets/img/spaceNeedle_CCLicense_goCardUSA.jpg',
 			'config/assets/img/chimp.png',
 			'config/assets/tables.init',
-			
+
 			// hope study example
 			'config/assets/css/hope-homescreen.css',
 			'config/assets/hope.html',
@@ -1038,7 +1073,7 @@ module.exports = function (grunt) {
 			'config/assets/img/little_arrow.png',
 			'config/assets/css/geopoints_list.css',
 			'config/assets/css/clients_detail.css',
-			
+
 			'config/assets/csv/femaleClients.allfields.csv',
 			'config/tables/femaleClients/**',
 			'config/assets/csv/maleClients.allfields.csv',
@@ -1114,10 +1149,10 @@ module.exports = function (grunt) {
 			'config/assets/csv/Tea_houses_editable.updated.csv',
 			'config/tables/Tea_houses_editable/**'
 			);
-			
+
 		return dirs;
 	};
-	
+
     grunt.registerTask(
         'adbpush-tables-tablesdemo',
         'Push everything for tables opendatakit-tablesdemo to the device',
@@ -1126,22 +1161,22 @@ module.exports = function (grunt) {
 
 			dirs.forEach(suffixRenameAdbPusher(".tablesdemo", tablesConfig.appDir));
         });
-	
+
     grunt.registerTask(
         'create-tables-tablesdemo',
         'creat the tablesdemo application designer package under build/tablesdemo/',
         function() {
             var dirs = tablesDemoFiles(grunt);
-			
+
 			var buildDir = 'build/tablesdemo';
-			
+
 			grunt.file.delete(buildDir + '/');
 			grunt.file.mkdir(buildDir);
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
-			
+
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".tablesdemo", tablesConfig.appDir));
-			
+
 			var dirs = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
@@ -1183,7 +1218,7 @@ module.exports = function (grunt) {
 			'config/tables/household_member/**',
 			'config/tables/selects/**',
 			'config/tables/gridScreen/**');
-			
+
 		return dirs;
 	};
 
@@ -1195,22 +1230,22 @@ module.exports = function (grunt) {
 
 			dirs.forEach(suffixRenameAdbPusher(".opendatakit-2", tablesConfig.appDir));
         });
-	
+
     grunt.registerTask(
         'create-tables-opendatakit-2',
         'create the opendatakit-2 application designer package under build/opendatakit-2/',
         function() {
             var dirs = opendatakit2DemoFiles(grunt);
-			
+
 			var buildDir = 'build/opendatakit-2';
-			
+
 			grunt.file.delete(buildDir + '/');
 			grunt.file.mkdir(buildDir);
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
-			
+
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".opendatakit-2", tablesConfig.appDir));
-			
+
 			var dirs = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
@@ -1228,12 +1263,12 @@ module.exports = function (grunt) {
         'adbpush-survey',
         'Push everything for survey to the device',
         function() {
-            // We do not need any system or output files. 
+            // We do not need any system or output files.
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'.  
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -1264,14 +1299,14 @@ module.exports = function (grunt) {
         'Push everything for survey to the device',
         function() {
             // In the beta demo we only want Survey; do not push any
-			// system or output files. We only want a subset of the 
+			// system or output files. We only want a subset of the
 			// app/config/tables files. So, we are going to get everything except
             // that directory and then add back in the ones that we want.
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'. 
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -1307,15 +1342,15 @@ module.exports = function (grunt) {
         'adbpush-survey-demo-bmg05152014',
         'Push everything for survey demo to the device',
         function() {
-            // In the demo we only want Survey. Do not push the system or 
+            // In the demo we only want Survey. Do not push the system or
 			// output files.  We only want a subset of the app/config/tables files,
             // however. So, we are going to get everything except that
             // directory and then add back in the ones that we want.
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'. 
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -1350,15 +1385,15 @@ module.exports = function (grunt) {
         'adbpush-survey-demo-bmg10092014',
         'Push everything for survey demo to the device',
         function() {
-            // In the demo we only want Survey. Do not push the system or 
+            // In the demo we only want Survey. Do not push the system or
 			// output files. We only want a subset of the app/config/tables files,
             // however. So, we are going to get everything except that
             // directory and then add back in the ones that we want.
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'. 
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             //
             // For this demo selects had to be modified due to select_one_with_other
             // and the media player not working for video
@@ -1400,15 +1435,15 @@ module.exports = function (grunt) {
         'adbpush-survey-demo-techCon2014',
         'Push everything for survey demo to the device',
         function() {
-            // In the demo we only want Survey. Do not push the system or 
+            // In the demo we only want Survey. Do not push the system or
 			// output files. We only want a subset of the app/config/tables files,
             // however. So, we are going to get everything except that
             // directory and then add back in the ones that we want.
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'. 
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             //
             // For this demo selects had to be modified due to select_one_with_other
             // and the media player not working for video
@@ -1451,15 +1486,15 @@ module.exports = function (grunt) {
         'adbpush-survey-demo-beta3',
         'Push everything for survey to the device',
         function() {
-            // In the beta demo we only want Survey. Do not push the system 
+            // In the beta demo we only want Survey. Do not push the system
 			// or output files. We only want a subset of the app/config/tables files,
             // however. So, we are going to get everything except that
             // directory and then add back in the ones that we want.
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'. 
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -1504,8 +1539,8 @@ module.exports = function (grunt) {
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'. 
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -1556,7 +1591,7 @@ module.exports = function (grunt) {
                     '/' + COLLECT_FORMS + '/*');
                 files.forEach(function(file) {
                     var src = file;
-                    // We basically want to push all the contents under 
+                    // We basically want to push all the contents under
                     // /sdcard/opendatakit/APP/tables/tableId/collect-forms
 					// to /sdcard/odk/forms
 					// I.e., this folder should contain things like:
@@ -1565,7 +1600,7 @@ module.exports = function (grunt) {
 					//  .../formid-media/...
 					//  .../formid2.xml
 					//
-                    // The names of the files will stay the same 
+                    // The names of the files will stay the same
 				    // when we push them
                     var destPos = src.indexOf(COLLECT_FORMS);
                     destPos = destPos + COLLECT_FORMS.length;
@@ -1634,7 +1669,7 @@ module.exports = function (grunt) {
                         grunt.file.copy(srcPath, destPath);
                     }
                 });
-                // Now we will copy the files to which we need to add the 
+                // Now we will copy the files to which we need to add the
                 // table id.
                 var detailHtml = {
                     srcPath: tablesConfig.tableTemplateDir +
@@ -1689,19 +1724,19 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'server'
     ]);
-    
+
     grunt.registerTask(
         'adbpush-system',
         'Push the system directory to the survey appName on the device',
         function() {
             // Useful for testing working system code before constructing
 			// the framework zip file and adding it to the APK res/raw
-			// folder. 
+			// folder.
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'.  
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },

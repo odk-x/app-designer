@@ -35,6 +35,17 @@ util.getQueryParameter = function(key) {
     }
 };
 
+util.verifyIntegerQueryParameterValue = function(valToTest) {
+
+    if (valToTest !== null || valToTest !== undefined || valToTest.length > 0) {
+        valToTest = parseInt(valToTest);
+        if (!_.isNaN(valToTest) && _.isNumber(valToTest)) {
+            return valToTest;
+        }
+    }
+    return 0;
+};
+
 util.formatExistingTimes = function(tableData) {
 
     var times = [];
@@ -58,13 +69,13 @@ util.formatExistingTimes = function(tableData) {
 util.getExistingTimesForDate = function(date, focalChimpId, cbSuccess, cbFailure) {
     // So, we're just going to query for all the rows in follow_arrival
     // matching this date.
-    
+
     // Our where clause is just going to be for this date.
     var whereClause =
         'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ?';
     var selectionArgs = [date, focalChimpId];
 
-    window.odkData.query('follow_arrival', whereClause, selectionArgs, 
+    window.odkData.query('follow_arrival', whereClause, selectionArgs,
         null, null, null, null, null, null, true, cbSuccess, cbFailure);
 };
 
@@ -73,12 +84,12 @@ util.getExistingTimesForDate = function(date, focalChimpId, cbSuccess, cbFailure
  * focal chimp. Together this specifies a unique time point in a follow.
  */
 util.getTableDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbFailure) {
-    
+
     var whereClause =
         'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ? AND FA_time_start = ?';
     var selectionArgs = [date, focalChimpId, time];
 
-    window.odkData.query('follow_arrival', whereClause, selectionArgs, 
+    window.odkData.query('follow_arrival', whereClause, selectionArgs,
         null, null, null, null, null, null, true, cbSuccess, cbFailure);
 };
 
@@ -89,7 +100,7 @@ util.getFoodDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbF
 
     var selectionArgs = [date, focalChimpId, time];
 
-    window.odkData.query('food_bout', whereClause, selectionArgs, 
+    window.odkData.query('food_bout', whereClause, selectionArgs,
         null, null, null, null, null, null, true, cbSuccess, cbFailure);
 
 };
@@ -101,7 +112,7 @@ util.getSpeciesDataForTimePoint = function(date, time, focalChimpId, cbSuccess, 
 
     var selectionArgs = [date, focalChimpId, time];
 
-    window.odkData.query('other_species', whereClause, selectionArgs, 
+    window.odkData.query('other_species', whereClause, selectionArgs,
         null, null, null, null, null, null, true, cbSuccess, cbFailure);
 
 };
@@ -129,7 +140,7 @@ util.getKeysToAppendToURL = function(date, time, focalChimp) {
 
 util.genUUID = function() {
     // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
-    var id = 'uuid:' + 
+    var id = 'uuid:' +
     'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random()*16|0, v = (c === 'x') ? r : (r&0x3|0x8);
         return v.toString(16);

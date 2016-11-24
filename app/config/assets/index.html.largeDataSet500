@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="ratchet/css/ratchet-theme-android.css" type="text/css" rel="stylesheet" />
+        <link href="css/demo-chooser.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../system/libs/underscore.1.4.4.js"></script>
+        <script type="text/javascript" src="js/index_largeDataSet.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
+    </head>
+
+    <body id="main">
+        <h1><span id="TITLE" class="main-text">Large Data Set Test 500</span></h1>
+        <span id="rowCount"></span>
+
+        <form>
+                <legend>TEST PARAMETERS</legend>
+                <br>
+                Offset:
+                <input id="offset" type="text">
+                Limit:
+                <input id="limit" type="text">
+                <br>
+                <input id="submit" type="submit" value="Submit">
+        </form>
+        <script type="text/javascript">
+            $(init);
+        </script>
+    </body>
+</html>
