@@ -668,7 +668,8 @@ module.exports = function (grunt) {
 			'!output/**',
 			'!config/tables/**',
 			'config/assets/**',
-            'config/tables/large_dataset/**');
+            'config/tables/large_dataset/**',
+            'config/tables/testRun/**');
 
 		return dirs;
 	};

@@ -8,6 +8,10 @@ var limit = 10;
 var offset = 0;
 var idxStart = -1;
 var rowCount = 0;
+var testUUID = 0;
+var device = 'Nexus 6 2015';
+var os = '5.1';
+var perfTestName = 'TST001';
 
 var prevResults = function () {
     offset -= limit;
@@ -36,6 +40,12 @@ var nextResults = function () {
 var cbSuccess = function (result) {
     largeDataSetResult = result;
 
+    // Write row to the database
+    var desc = 'Query large_dataset table with limit=' + limit + ' offset=' + offset;
+    var step = 'In cbSuccess for odkData.getViewData()';
+    var numOfResultRows = largeDataSetResult.getCount();
+    addTestDataRow(perfTestName, desc, step, device, os, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
+
     return (function() {
         displayGroup();
     }());
@@ -43,6 +53,14 @@ var cbSuccess = function (result) {
 
 var cbFailure = function (error) {
     console.log('cbFailure: failed with error ' + error);
+}
+
+var cbAddTestRowSuccess = function (result) {
+    console.log('cbAddTestRowSuccess: added test row successful');
+}
+
+var cbAddTestRowFailure = function (error) {
+    console.log('cbAddTestRowFailure: failed with error ' + error);
 }
 
 var render = function(fIdxStart) {
@@ -82,10 +100,18 @@ var render = function(fIdxStart) {
         var tempRowCnt = util.getQueryParameter('count');
         rowCount = util.verifyIntegerQueryParameterValue(tempRowCnt);
 
+        // We reuse the testUUID until render(0) is called
+        testUUID = util.genUUID();
+
         idxStart++;
     }
 
+    // Write row to the database
+    var desc = 'Query large_dataset table with limit=' + limit + ' offset=' + offset;
+    var step = 'Calling odkData.getViewData in render(' + idxStart + ')';
+    addTestDataRow(perfTestName, desc, step, device, os, rowCount, '0', cbAddTestRowSuccess, cbAddTestRowFailure);
     odkData.getViewData(cbSuccess, cbFailure, limit, offset);
+
 }
 
 var displayGroup = function () {
@@ -125,4 +151,28 @@ var displayGroup = function () {
 
         $('#list').append(borderDiv);
     }
+
+    var desc = 'Query large_dataset table with limit=' + limit + ' offset=' + offset;
+    var step = 'Finish displayGroup()';
+    var numOfResultRows = largeDataSetResult.getCount();
+    addTestDataRow(perfTestName, desc, step, device, os, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
+}
+
+var addTestDataRow = function(testName, testDesc, testStep, testDevice, testOS, numOfRowsInTable, resultRows, cbSuccessFn, cbFailureFn) {
+    var struct = {};
+    struct['testId'] = testUUID
+    struct['test'] = testName;
+    struct['description'] = testDesc
+    struct['step'] = testStep;
+    struct['device'] = testDevice;
+    struct['os'] = testOS;
+    struct['rowsInTable'] = numOfRowsInTable;
+    struct['resultRows'] = resultRows;
+
+    // Get the current time 
+    var date = new Date();
+    struct['time'] = odkCommon.toOdkTimeFromDate(date);;
+    
+    var uuidForRow = util.genUUID();
+    odkData.addRow('testRun', struct, uuidForRow, cbSuccessFn, cbFailureFn);
 }
