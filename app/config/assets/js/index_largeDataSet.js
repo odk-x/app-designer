@@ -1,9 +1,16 @@
 "use strict";
 
+// Default values provided is user does
+// not specify values
 var offset = 0;
 var limit = 100;
 var tableId = 'large_dataset';
 var rowCnt = 0;
+var os = 'default';
+var device = 'default';
+var db = 'default'
+var services = 'false';
+var all1 = 'false';
 
 var init = function() {
     $('#submit').on('click', function() {
@@ -38,7 +45,38 @@ function startTest() {
     var tempOffset = $('#offset').val();
     offset = util.verifyIntegerQueryParameterValue(tempOffset);
 
+    var tempOS = $('#os').val();
+    if (tempOS !== null && tempOS !== undefined) {
+        os = tempOS;
+    }
+
+    var tempDev = $('#device').val();
+    if (tempDev !== null && tempDev !== undefined) {
+        device = tempDev;
+    }
+
+    var tempDB = $('input[name=db]').val();
+    if (tempDB !== null && tempDB !== undefined) {
+        db = tempDB;
+    }
+
+    var tempServices = $('input[name=services]').val();
+    if (tempServices !== null && tempServices !== undefined) {
+        services = tempServices;
+    }
+
+    var tempAllInOne = $('input[name=all-in-one]').val();
+    if (tempAllInOne !== null && tempAllInOne !== undefined) {
+        all1 = tempAllInOne;
+    }
+
     odkTables.openTableToListView(tableId, null, null,
-        'config/tables/' + tableId+ '/html/largeDataSet_list.html?offset=' + offset +
-        '&limit=' + limit + '&count=' + rowCnt);
+        'config/tables/' + encodeURIComponent(tableId) + '/html/largeDataSet_list.html?offset=' + encodeURIComponent(offset)
+        + '&limit=' + encodeURIComponent(limit) 
+        + '&count=' + encodeURIComponent(rowCnt)
+        + '&os=' + encodeURIComponent(os)
+        + '&device=' + encodeURIComponent(device)
+        + '&db=' + encodeURIComponent(db)
+        + '&services=' + encodeURIComponent(services)
+        + '&all1=' + encodeURIComponent(all1));
 }

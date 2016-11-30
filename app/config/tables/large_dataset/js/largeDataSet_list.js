@@ -9,9 +9,13 @@ var offset = 0;
 var idxStart = -1;
 var rowCount = 0;
 var testUUID = 0;
-var device = 'Nexus 6 2015';
-var os = '5.1';
+var device = 'default';
+var os = 'default';
+var db = 'default';
+var services = 'false';
+var all1 = 'false';
 var perfTestName = 'TST001';
+var inc = 0;
 
 var prevResults = function () {
     offset -= limit;
@@ -26,6 +30,8 @@ var prevResults = function () {
 }
 
 var nextResults = function () {
+    // Increment the number of times the next button has been hit
+    inc++;
     offset += limit;
 
     if (rowCount > 0 && offset > rowCount) {offset = 0;}
@@ -44,7 +50,7 @@ var cbSuccess = function (result) {
     var desc = 'Query large_dataset table with limit=' + limit + ' offset=' + offset;
     var step = 'In cbSuccess for odkData.getViewData()';
     var numOfResultRows = largeDataSetResult.getCount();
-    addTestDataRow(perfTestName, desc, step, device, os, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
+    addTestDataRow(perfTestName, desc, step, device, os, db, services, all1, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
 
     return (function() {
         displayGroup();
@@ -100,16 +106,30 @@ var render = function(fIdxStart) {
         var tempRowCnt = util.getQueryParameter('count');
         rowCount = util.verifyIntegerQueryParameterValue(tempRowCnt);
 
-        // We reuse the testUUID until render(0) is called
-        testUUID = util.genUUID();
+        var tempOS = util.getQueryParameter('os');
+        os = (tempOS === null || tempOS === undefined) ? os : tempOS;
+
+        var tempDevice = util.getQueryParameter('device');
+        device = (tempDevice === null || tempDevice === undefined) ? device : tempDevice;
+
+        var tempDB = util.getQueryParameter('db');
+        db = (tempDB === null || tempDB === undefined) ? db : tempDB;
+
+        var tempServices= util.getQueryParameter('services');
+        services = tempServices === null || tempServices === undefined ? services : tempServices;
+
+        var tempAll1 = util.getQueryParameter('all1');
+        all1 = (tempAll1 === null || tempAll1 === undefined) ? all1 : tempAll1;
 
         idxStart++;
     }
 
     // Write row to the database
+    // We reuse the testUUID until render is called
+    testUUID = util.genUUID();
     var desc = 'Query large_dataset table with limit=' + limit + ' offset=' + offset;
     var step = 'Calling odkData.getViewData in render(' + idxStart + ')';
-    addTestDataRow(perfTestName, desc, step, device, os, rowCount, '0', cbAddTestRowSuccess, cbAddTestRowFailure);
+    addTestDataRow(perfTestName, desc, step, device, os, db, services, all1, rowCount, '0', cbAddTestRowSuccess, cbAddTestRowFailure);
     odkData.getViewData(cbSuccess, cbFailure, limit, offset);
 
 }
@@ -126,6 +146,7 @@ var displayGroup = function () {
         item.attr('row_id', largeDataSetResult.getRowId(i));
         item.attr('id', largeDataSetResult.getRowId(i));
         item.attr('class', 'item_space');
+        item.attr('inc', inc);
         item.text('Object Name: ' + largeDataSetResult.getData(i, 'obj_name'));
 
         var chevron = $('<img>');
@@ -155,10 +176,11 @@ var displayGroup = function () {
     var desc = 'Query large_dataset table with limit=' + limit + ' offset=' + offset;
     var step = 'Finish displayGroup()';
     var numOfResultRows = largeDataSetResult.getCount();
-    addTestDataRow(perfTestName, desc, step, device, os, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
+    addTestDataRow(perfTestName, desc, step, device, os, db, services, all1, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
+    $('#iter').text(inc);
 }
 
-var addTestDataRow = function(testName, testDesc, testStep, testDevice, testOS, numOfRowsInTable, resultRows, cbSuccessFn, cbFailureFn) {
+var addTestDataRow = function(testName, testDesc, testStep, testDevice, testOS, testDb, testServices, testAll1, numOfRowsInTable, resultRows, cbSuccessFn, cbFailureFn) {
     var struct = {};
     struct['testId'] = testUUID
     struct['test'] = testName;
@@ -168,6 +190,9 @@ var addTestDataRow = function(testName, testDesc, testStep, testDevice, testOS, 
     struct['os'] = testOS;
     struct['rowsInTable'] = numOfRowsInTable;
     struct['resultRows'] = resultRows;
+    struct['db'] = testDb;
+    struct['services'] = testServices;
+    struct['all_in_one'] = testAll1;
 
     // Get the current time 
     var date = new Date();

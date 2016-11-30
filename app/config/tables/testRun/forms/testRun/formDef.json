@@ -66,12 +66,36 @@
         "_row_num": 9
       },
       {
+        "type": "text",
+        "name": "db",
+        "display": {
+          "text": "Database Used"
+        },
+        "_row_num": 10
+      },
+      {
+        "type": "text",
+        "name": "services",
+        "display": {
+          "text": "Services Used"
+        },
+        "_row_num": 11
+      },
+      {
+        "type": "text",
+        "name": "all_in_one",
+        "display": {
+          "text": "All In One APK Used"
+        },
+        "_row_num": 12
+      },
+      {
         "type": "date",
         "name": "time",
         "display": {
           "text": "Time of step"
         },
-        "_row_num": 10
+        "_row_num": 13
       }
     ],
     "settings": [
@@ -259,10 +283,40 @@
         "type": "string",
         "elementKey": "resultRows"
       },
-      "time": {
+      "db": {
         "_defn": [
           {
             "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "db"
+      },
+      "services": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "services"
+      },
+      "all_in_one": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "all_in_one"
+      },
+      "time": {
+        "_defn": [
+          {
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
@@ -386,25 +440,64 @@
             "promptIdx": 7
           },
           {
+            "type": "text",
+            "name": "db",
+            "display": {
+              "text": "Database Used"
+            },
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 8
+          },
+          {
+            "type": "text",
+            "name": "services",
+            "display": {
+              "text": "Services Used"
+            },
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 9
+          },
+          {
+            "type": "text",
+            "name": "all_in_one",
+            "display": {
+              "text": "All In One APK Used"
+            },
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen12",
+            "promptIdx": 10
+          },
+          {
             "type": "date",
             "name": "time",
             "display": {
               "text": "Time of step"
             },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 11
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 11,
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 9
+            "_row_num": 14,
+            "_branch_label_enclosing_screen": "survey/_screen14",
+            "promptIdx": 12
           }
         ],
         "validation_tag_map": {
@@ -466,25 +559,43 @@
             "operationIdx": 8
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 11,
-            "operationIdx": 9
-          },
-          {
             "_row_num": 11,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 9
+          },
+          {
+            "_row_num": 12,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 10
+          },
+          {
+            "_row_num": 13,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 11
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 14,
+            "operationIdx": 12
+          },
+          {
+            "_row_num": 14,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 10
+            "operationIdx": 13
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 11,
-            "operationIdx": 11
+            "_row_num": 14,
+            "operationIdx": 14
           }
         ],
         "branch_label_map": {
@@ -497,8 +608,11 @@
           "_screen8": 6,
           "_screen9": 7,
           "_screen10": 8,
-          "_contents": 10,
-          "_screen11": 10
+          "_screen11": 9,
+          "_screen12": 10,
+          "_screen13": 11,
+          "_contents": 13,
+          "_screen14": 13
         }
       },
       "initial": {
@@ -782,10 +896,49 @@
         "elementSet": "data",
         "elementPath": "resultRows"
       },
-      "time": {
+      "db": {
         "_defn": [
           {
             "_row_num": 10,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "db",
+        "elementName": "db",
+        "elementSet": "data",
+        "elementPath": "db"
+      },
+      "services": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "services",
+        "elementName": "services",
+        "elementSet": "data",
+        "elementPath": "services"
+      },
+      "all_in_one": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "all_in_one",
+        "elementName": "all_in_one",
+        "elementSet": "data",
+        "elementPath": "all_in_one"
+      },
+      "time": {
+        "_defn": [
+          {
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
