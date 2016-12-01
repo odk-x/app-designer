@@ -9,8 +9,8 @@ var rowCnt = 0;
 var os = 'default';
 var device = 'default';
 var db = 'default'
-var services = 'false';
-var all1 = 'false';
+var services = 'default';
+var all1 = 'default';
 
 var init = function() {
     $('#submit').on('click', function() {
@@ -55,17 +55,17 @@ function startTest() {
         device = tempDev;
     }
 
-    var tempDB = $('input[name=db]').val();
+    var tempDB = $('input[name=db]:checked').val();
     if (tempDB !== null && tempDB !== undefined) {
         db = tempDB;
     }
 
-    var tempServices = $('input[name=services]').val();
+    var tempServices = $('input[name=services]:checked').val();
     if (tempServices !== null && tempServices !== undefined) {
         services = tempServices;
     }
 
-    var tempAllInOne = $('input[name=all-in-one]').val();
+    var tempAllInOne = $('input[name=all-in-one]:checked').val();
     if (tempAllInOne !== null && tempAllInOne !== undefined) {
         all1 = tempAllInOne;
     }
