@@ -649,7 +649,7 @@ module.exports = function (grunt) {
 		};
 	};
 
-		var largeDataSetFiles = function(grunt) {
+	var largeDataSetFiles = function(grunt) {
         // We only want a subset of the app/tables files,
 		// however. So, we are going to get everything except that
 		// directory and then add back in the ones that we want.
@@ -682,6 +682,17 @@ module.exports = function (grunt) {
 
             // Now push these files to the phone.
             dirs.forEach(suffixRenameAdbPusher(".largeDataSet500", tablesConfig.appDir));
+        }
+    );
+
+    grunt.registerTask(
+        'adbpush-largeDataSet3000',
+        'Push everything for large data set to the device',
+        function() {
+            var dirs = largeDataSetFiles(grunt);
+
+            // Now push these files to the phone.
+            dirs.forEach(suffixRenameAdbPusher(".largeDataSet3000", tablesConfig.appDir));
         }
     );
 
