@@ -254,7 +254,6 @@
         "elementKey": "refrigerator_size"
       },
       "refrigerator_location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {
@@ -627,7 +626,6 @@
         "elementPath": "refrigerator_size"
       },
       "refrigerator_location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {

@@ -297,7 +297,6 @@
             "elementKey": "refrigerator_location_accuracy"
           }
         },
-        "name": "geopoint",
         "_defn": [
           {
             "_row_num": 5,
@@ -722,7 +721,6 @@
             "elementPath": "refrigerator_location.accuracy"
           }
         },
-        "name": "geopoint",
         "_defn": [
           {
             "_row_num": 5,

@@ -377,7 +377,6 @@
     "calculates": {},
     "model": {
       "Location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {
@@ -1168,7 +1167,6 @@
     },
     "dataTableModel": {
       "Location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {

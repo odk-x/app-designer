@@ -290,7 +290,6 @@
         "elementKey": "farm_city"
       },
       "farm_location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {
@@ -812,7 +811,6 @@
         "elementPath": "farm_city"
       },
       "farm_location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {

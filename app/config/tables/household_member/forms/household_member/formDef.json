@@ -389,7 +389,6 @@
         "elementKey": "water"
       },
       "location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {
@@ -897,7 +896,6 @@
         "elementPath": "water"
       },
       "location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {
