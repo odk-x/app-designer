@@ -15,6 +15,8 @@ var db = 'default';
 var services = 'false';
 var all1 = 'false';
 var perfTestName = 'TST001';
+var initPerfTestName = 'INIT_TST001';
+var isInitPerfTest = true;
 var inc = 0;
 
 var prevResults = function () {
@@ -34,7 +36,7 @@ var nextResults = function () {
     inc++;
     offset += limit;
 
-    if (rowCount > 0 && offset > rowCount) {offset = 0;}
+    if (rowCount > 0 && offset >= rowCount) {offset = 0;}
 
     console.log('nextResults called. limit=' + limit + ' offset=' + offset);
 
@@ -50,7 +52,12 @@ var cbSuccess = function (result) {
     var desc = 'Query large_dataset table with limit=' + limit + ' offset=' + offset;
     var step = 'In cbSuccess for odkData.getViewData()';
     var numOfResultRows = largeDataSetResult.getCount();
-    addTestDataRow(perfTestName, desc, step, device, os, db, services, all1, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
+
+    if (isInitPerfTest === true) {
+        addTestDataRow(initPerfTestName, desc, step, device, os, db, services, all1, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
+    } else {
+        addTestDataRow(perfTestName, desc, step, device, os, db, services, all1, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
+    }
 
     return (function() {
         displayGroup();
@@ -122,6 +129,10 @@ var render = function(fIdxStart) {
         all1 = (tempAll1 === null || tempAll1 === undefined) ? all1 : tempAll1;
 
         idxStart++;
+        isInitPerfTest = true;
+
+    } else {
+        isInitPerfTest = false;
     }
 
     // Write row to the database
@@ -129,7 +140,13 @@ var render = function(fIdxStart) {
     testUUID = util.genUUID();
     var desc = 'Query large_dataset table with limit=' + limit + ' offset=' + offset;
     var step = 'Calling odkData.getViewData in render(' + idxStart + ')';
-    addTestDataRow(perfTestName, desc, step, device, os, db, services, all1, rowCount, '0', cbAddTestRowSuccess, cbAddTestRowFailure);
+
+    if (isInitPerfTest === true) {
+        addTestDataRow(initPerfTestName, desc, step, device, os, db, services, all1, rowCount, '0', cbAddTestRowSuccess, cbAddTestRowFailure);
+    } else {
+        addTestDataRow(perfTestName, desc, step, device, os, db, services, all1, rowCount, '0', cbAddTestRowSuccess, cbAddTestRowFailure);
+    }
+
     odkData.getViewData(cbSuccess, cbFailure, limit, offset);
 
 }
@@ -176,7 +193,13 @@ var displayGroup = function () {
     var desc = 'Query large_dataset table with limit=' + limit + ' offset=' + offset;
     var step = 'Finish displayGroup()';
     var numOfResultRows = largeDataSetResult.getCount();
-    addTestDataRow(perfTestName, desc, step, device, os, db, services, all1, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
+
+    if (isInitPerfTest === true) {
+        addTestDataRow(initPerfTestName, desc, step, device, os, db, services, all1, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
+    } else {
+        addTestDataRow(perfTestName, desc, step, device, os, db, services, all1, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
+    }
+
     $('#iter').text(inc);
 }
 
