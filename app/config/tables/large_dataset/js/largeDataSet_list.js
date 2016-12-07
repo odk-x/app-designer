@@ -59,9 +59,12 @@ var cbSuccess = function (result) {
         addTestDataRow(perfTestName, desc, step, device, os, db, services, all1, rowCount, numOfResultRows, cbAddTestRowSuccess, cbAddTestRowFailure);
     }
 
-    return (function() {
-        displayGroup();
-    }());
+    // Increment the counter
+    $('#iter').text(inc);
+
+//     return (function() {
+//         displayGroup();
+//     }());
 }
 
 var cbFailure = function (error) {
@@ -217,10 +220,10 @@ var addTestDataRow = function(testName, testDesc, testStep, testDevice, testOS, 
     struct['services'] = testServices;
     struct['all_in_one'] = testAll1;
 
-    // Get the current time 
+    // Get the current time
     var date = new Date();
     struct['time'] = odkCommon.toOdkTimeFromDate(date);;
-    
+
     var uuidForRow = util.genUUID();
     odkData.addRow('testRun', struct, uuidForRow, cbSuccessFn, cbFailureFn);
 }
