@@ -20,7 +20,7 @@ var isInitPerfTest = true;
 var inc = 0;
 
 var prevResults = function () {
-    offset -= limit;
+    offset -= 10;
 
     if (offset < 0) {offset = 0;}
 
@@ -34,7 +34,7 @@ var prevResults = function () {
 var nextResults = function () {
     // Increment the number of times the next button has been hit
     inc++;
-    offset += limit;
+    offset += 10;
 
     if (rowCount > 0 && offset >= rowCount) {offset = 0;}
 
