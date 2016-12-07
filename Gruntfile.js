@@ -686,6 +686,47 @@ module.exports = function (grunt) {
     );
 
     grunt.registerTask(
+        'adbpush-testRun',
+        'Push only test run to the device',
+        function() {
+            // In the demo we only want Survey. Do not push the system or
+			// output files.  We only want a subset of the app/config/tables files,
+            // however. So, we are going to get everything except that
+            // directory and then add back in the ones that we want.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+				'.nomedia',
+                '**',
+                '!system/**',
+				'!data/**',
+				'!output/**',
+                '!config/tables/**',
+                '!config/assets/**',
+                'config/tables/testRun/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+
+        })
+
+    grunt.registerTask(
         'adbpush-largeDataSet3000',
         'Push everything for large data set to the device',
         function() {
