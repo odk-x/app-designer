@@ -1,22 +1,34 @@
 /* CSS Stylesheet - Standard User Homescreen*/
 
+
 #wrapper { 
     overflow: auto;
     margin: 0;
     padding: 0;
     text-align: center;
-    /*width: 500px;*/
 }
 
+#logo {
+    position: relative;
+    /*right: 0;
+    bottom: 0;
+    left: 0;*/
+    text-align: center;
+}
+
+
 body {
+    position: relative;
     font-family: helvetica;
+    /*position: relative;*/
     margin: 0;
+    max-height: 100%;
 }
 
 
 button {
     width: 90vw;
-    float: none;
+    /*float: none;*/
     height: 15vh;
     margin: auto;
     border-left: 15px solid;
@@ -28,77 +40,82 @@ button {
     display: block;
     color: #5C5C5C;
     border-color: #EE3224;
-
+    margin-bottom: 6vh;
 }
 
 button:active {
     background-color: #FFC9C9;
 }
 
-#button1 {
-    border-color: #EE3224;
-    margin-bottom: 6vh;
-}
-
-#button2 {
-    border-color: #EE3224;
-    margin-bottom: 6vh;
-}
-
-#button3 {
-    border-color: #EE3224;
-    margin-bottom: 6vh;
-}
-
-#button4 {
-    border-color: #EE3224;
-    margin-bottom: 6vh;
-}
-
-#button5 {
-    border-color: #EE3224;
-    margin-bottom: 6vh;
-}
-
-#button6 {
-    border-color: #EE3224;
-}
-
 #field {
     display: block;
     margin: auto;
-    margin-top: 60px;
     padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    font-size: 18px;
 }
 
 #value {
     display: block;
-    margin: auto;
     padding: 5px;
+    margin: auto;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    text-align: center;
 }
 
 #search {
     height: 75px;
+    font-size: 25px;
+    margin-bottom: 7px;
 }
 
 #search_results {
-    height: 40px;
+    height: 35px;
+    font-size: 18px;
+    margin-bottom: 7px;
 }
 
 #title {
     font-size: 44px;
-    height: 51px;
     margin-top: 20px;
     margin-bottom: 30px;
+    position: relative;
 }
 
+#launch {
+    height: 75px;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+#enter_code {
+    margin-bottom: 20px;
+}
+
+#enter {
+    font-size: 25px;
+}
+
+
 h1 {
-    font-size: 8.5vh;
-    height: 10vh;
+    font-size: 12vmin;
     margin-top: 4vh;
     margin-bottom: 6vh;
     text-align: center;
     color: #5C5C5C;
+    position: relative;
+}
+
+h2 {
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #5C5C5C;
+    position: relative;
 }
 
 p {
@@ -111,14 +128,18 @@ p {
 }
 
 img {
-    max-height: 90%;
-    max-width: 100%;
-    position: absolute;
+    position: relative;
+    display: inline-block;
+    width: 100vmin;
+}
+
+#code {
+     margin: auto;
+     font-size: 20px;
+     height: 35px;
+}
+
+input {
     margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: auto;
-    width: auto;
+    font-size: 20px
 }

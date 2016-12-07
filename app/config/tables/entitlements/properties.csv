@@ -3,3 +3,4 @@ Column,is_delivered,displayChoicesList,object,"[{""choice_list_name"":""true_fal
 SurveyUtil,default,SurveyUtil.formId,string,wrong_form
 Table,default,defaultViewType,string,SPREADSHEET
 Table,default,displayName,object,"""Entitlements"""
+Table,security,locked,boolean,true

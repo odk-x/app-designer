@@ -26,10 +26,10 @@
         <p>Item Pack Description: <span id="FIELD_5"></span></p>
         <p>Item Pack ID: <span id="FIELD_4"></span></p>
 
-        <button id="launch-barcode" class="btn btn-launch btn-primary btn-block btn-plotter">Scan Beneficiary Barcode to Create Override</button>
-        <p>Scanned BarCode: <span id="scanned_barcode"></span></p>
-
-        <span id="rejected"></span>
+        <button id="launch-barcode" class="btn btn-launch btn-primary btn-block btn-plotter">Scan Beneficiary Barcode</button>
+        <input id = "manual" placeholder="Manually Enter Barcode">
+        <button id="launch">Create Override</button>
+        <span id="results"></span>
 
         <script>
             $(display());  // calls the detail display function when ready

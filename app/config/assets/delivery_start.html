@@ -53,7 +53,7 @@
 
 		        } else {
 		            myTimeoutVal = setTimeout(callBackFn(), 1000);
-		            $('#scanned-barcode').text("No value");
+		            $('#search_results').text("No value");
 		            $('#launch').hide();
 					odkCommon.removeFirstQueuedAction();
 		        }
@@ -68,7 +68,7 @@
 				odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'false'],
 					null, null, null, null, null, null, true, disabledCBSuccess, disabledCBFailure);
 			} else if (result.getCount() === 1) {
-				$('#scanned-barcode').text(code);
+				$('#search_results').text('Scanned Barcode:' + code);
 				$('#launch').show();
 				$('#launch').text('Click to Deliver');
 				$('#launch').click(function() {
@@ -79,7 +79,7 @@
 				});
 				odkCommon.removeFirstQueuedAction();
 			} else {
-				$('#scanned-barcode').text(code + ' -- Multiple Active Beneficiaries Detected!');
+				$('#search_results').text(code + ' -- Multiple Active Beneficiaries Detected!');
 				$('#launch').show();
 				$('#launch').text('Choose a specific beneficiary');
 				$('#launch').click(function() {
@@ -98,9 +98,9 @@
 		function disabledCBSuccess(result) {
 			console.log('disabledCB called');
 			if (result.getCount() > 0) {
-				$('#scanned-barcode').text('beneficiary with code ' + ' is disabled');
+				$('#search_results').text('beneficiary with code \'' + code +'\' is disabled');
 			} else {
-				$('#scanned-barcode').text('Scanned code not found in system');
+				$('#search_results').text('Scanned code not found in system');
 
 			}
 			$('#launch').hide();
@@ -117,9 +117,10 @@
 
 	
 	<body onload="display();">
-	<h2>Please Scan or Enter The Beneficiary Barcode</h2>
-	<button id="launch-barcode" class="btn btn-launch btn-primary btn-block btn-plotter">Launch Barcode</button>
-	<p>Scanned BarCode: <span id="scanned-barcode"></span></p>
-	<button id="launch" style='display:none'></button>
-
+        <div id="main">
+			<h2>Please Scan the Beneficiary Barcode</h2>
+			<button id="launch-barcode">Launch Barcode</button>
+			<p id="search_results"></p>
+			<button id="launch" style='display:none'></button>
+		</div>
 	</body>

@@ -1,3 +1,4 @@
+<!--Menu-->
 <html>
     <head>
         <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
@@ -8,33 +9,33 @@
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript">
 
-        // Displays homescreen
         function display() {
-
-            var enable = document.createElement("button");
-            enable.setAttribute("id", "button1");
-            enable.innerHTML = "Enable Beneficiary";
-            enable.onclick = function() {
-                odkTables.launchHTML('config/assets/enable_start.html');
+            var benData = document.createElement("button");
+            benData.setAttribute("id", "button1");
+            benData.innerHTML = "View Beneficiary Data";
+            benData.onclick = function() {
+              odkTables.launchHTML(
+                  'config/assets/beneficiary_data.html');
             }
-            document.getElementById("wrapper").appendChild(enable);    
+            document.getElementById("wrapper").appendChild(benData);
 
-            var disable = document.createElement("button");
-            disable.setAttribute("id", "button2");
-            disable.innerHTML = "Disable Beneficiary";
-            disable.onclick = function() {
-                odkTables.launchHTML('config/assets/disable_start.html');
+            var delData = document.createElement("button");
+            delData.setAttribute("id", "button2");
+            delData.innerHTML = "View Delivery Data";
+            delData.onclick = function() {
+              odkTables.launchHTML(
+                  'config/assets/delivery_data.html');
             }
-            document.getElementById("wrapper").appendChild(disable);    
+            document.getElementById("wrapper").appendChild(delData);
         }
-            
+
         
         </script>
     </head>
 
     <body onload="display();">
         <div id="main">
-            <h1>Registration Override</h1>
+            <h1>Collected Data</h1>
             <div id="wrapper"></div>
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>

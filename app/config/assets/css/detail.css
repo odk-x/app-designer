@@ -47,3 +47,24 @@ h3 {
 #picture {
   text-align: center;
 }
+
+button {
+    width: 80vw;
+    /*float: none;*/
+    height: 10vh;
+    margin: auto;
+    border-left: 15px solid;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1.5px solid;
+    background-color: #F1F1F1;
+    font-size: 7vmin;
+    display: block;
+    color: #5C5C5C;
+    border-color: #EE3224;
+    margin-bottom: 6vh;
+}
+
+button:active {
+    background-color: #FFC9C9;
+}

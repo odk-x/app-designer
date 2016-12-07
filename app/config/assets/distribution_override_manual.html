@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <link href="css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../config/assets/js/util.js"></script>
+        <script type="text/javascript">
+
+        var beneficiary_code = null;
+
+
+        function display() {
+            var enter = $('#search');
+            
+            enter.on('click', function() {
+                beneficiary_code = $('#code').val();
+                if (code !== "") {
+                    odkData.query('registration', 'beneficiary_code = ?', 
+                    [beneficiary_code],
+                    null, null, null, null, null, null, true, firstCBSuccess, firstCBFailure);
+                }
+            });
+        }
+
+        var firstCBSuccess = function(result) {
+          beneficiary_info = result;
+          if (result.getCount() != 0) {
+            /*odkData.query('entitlements', 'beneficiary_code = ? and authorization_id = ?', 
+                            [beneficiary_code,authorizationsResultSet.get('_id')],
+                            null, null, null, null, null, null, true, scanCBSuccess, scanCBFailure);*/
+            $('#search_results').text('Barcode: ' + result.get('beneficiary_code'));
+                $('#launch').show();
+                $('#launch').text('Click to Register Beneficiary');
+                $('#launch').click(function() {
+          } else {
+            $('#search_results').text('beneficiary with scanned code (' + beneficiary_code
+                                      + ') not found in system.');
+          }
+        }
+
+        var firstCBFailure = function(error) {
+          console.log('failed with error: ' + error);
+        }
+
+        var scanCBSuccess = function (result) {
+          var isEmpty = true;
+          for (var key in result) {
+            if (Object.prototype.hasOwnProperty.call(result, key)) {
+              isEmpty = false;
+            }
+          }
+          if (result.getCount() == 0) {
+            var struct = {};
+            struct['authorization_id'] = authorizationsResultSet.get('_id');
+            struct['authorization_name'] = authorizationsResultSet.get('authorization_name');
+            struct['item_pack_id'] = authorizationsResultSet.get('item_pack_id');
+            struct['item_pack_name'] = authorizationsResultSet.get('item_pack_name');
+            struct['item_description'] = authorizationsResultSet.get('item_description');
+            struct['ranges'] = authorizationsResultSet.get('ranges');
+            struct['beneficiary_code'] = beneficiary_code;
+            struct['is_delivered'] = 'false';
+            struct['is_override'] = 'true';
+            struct['sector'] = beneficiary_info.get('sector');
+            struct['_filter_value'] = beneficiary_info.get('_filter_value');
+            odkData.addRow(
+              'entitlements',
+              struct,
+              util.genUUID(),
+              addDistCBSuccess,
+              addDistCBFailure
+            );
+            $('#search_results').text('Override Successfully Created');
+
+
+          } else {
+            $('#search_results').text('Scanned beneficiary already qualifies for this authorization. Override not created.');
+          }
+        }
+        </script>
+    </head>
+
+
+    
+    <body onload="display();">
+        <div id="main">
+            <h2>Please Enter Beneficiary Code</h2>
+            <div id="enter_code" style='text-align: center'><input id="code"></input></div>
+            <button id='search'>Enter</button>
+            <p id="search_results"></p>
+            <button id="launch" style='display:none'style='font-size: 25px'></button>
+        </div>
+    </body>

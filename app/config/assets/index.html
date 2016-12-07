@@ -14,7 +14,6 @@
 
             /*    Screen new client option that launches new client list view */
             var newClient = document.createElement("button");
-            newClient.setAttribute("id", "button1");
             newClient.innerHTML = "Registration";
             newClient.onclick = function() {
                 odkTables.launchHTML(
@@ -25,17 +24,24 @@
             // Follow up with existing client option that launches
             // 'femaleClients' table list view
             var followUp = document.createElement("button");
-            followUp.setAttribute("id", "button2");
-            followUp.innerHTML = "Deliver to Beneficiary";
+            followUp.innerHTML = "Delivery";
             followUp.onclick = function() {
                 odkTables.launchHTML(
                     'config/assets/delivery_options.html');
             }
             document.getElementById("wrapper").appendChild(followUp);
 
+            var viewData = document.createElement("button");
+            viewData.innerHTML = "View Collected Data";
+            viewData.onclick = function() {
+              odkTables.launchHTML(
+                  'config/assets/data_start.html');
+            }
+            document.getElementById("wrapper").appendChild(viewData);
+
             // Send data option that luanches send finalized forms screen in
             // Collect
-            var sendData = document.createElement("button");
+            /*var sendData = document.createElement("button");
             sendData.setAttribute("id", "button4");
             sendData.innerHTML = "Beneficiary List";
             sendData.onclick = function() {
@@ -61,7 +67,7 @@
                 'deliveries', null, null
                 , 'config/tables/deliveries/html/deliveries_list.html');
             }
-            document.getElementById('wrapper').appendChild(del);
+            document.getElementById('wrapper').appendChild(del);*/
 
             // Create a distribution Override if user is a tables superuser
             
@@ -72,14 +78,13 @@
             var roles = result.getRoles();
             if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
                 var override = document.createElement("button");
-                override.setAttribute("id", "button7");
                 override.innerHTML = "Administrator Overrides";
                 override.onclick = function() {
                     odkTables.launchHTML(
                         'config/assets/overrides_start.html');
                 }
                 document.getElementById("wrapper").appendChild(override);
-                }
+            }
         }
 
         function rolesCBFailure(error) {
@@ -90,8 +95,10 @@
     </head>
 
     <body onload="display();">
-        <h1>Disaster Relief</h1>
-        <div id="wrapper"></div>
-        <p> <img src="img/small_2025.jpg"></p>
+        <div id="main">
+            <h1>Disaster Relief</h1>
+            <div id="wrapper"></div>
+        </div>
+        <div id="logo"><img src="img/small_2025.jpg"></div>
     </body>
 </html>

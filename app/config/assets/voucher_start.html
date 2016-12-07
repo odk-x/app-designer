@@ -48,7 +48,7 @@
 					            null, null, null, null, true, beneficiaryCBSuccess, beneficiaryCBFailure);
 		        } else {
 		            myTimeoutVal = setTimeout(callBackFn(), 1000);
-		            $('#scanned-barcode').text("No value");
+		            $('#search_results').text("No value");
 		        }
 		    }
     		console.log("callBackFn is called");
@@ -61,7 +61,7 @@
 				odkData.query('entitlements', 'beneficiary_code = ?', [code],
 					null, null, null, null, null, null, true, voucherCBSuccess, voucherCBFailure);
 			} else {
-				$('#scanned-barcode').text(code + " -- beneficiary with this code already detected in system: please contact Administrator");
+				$('search_results').text(code + " -- beneficiary with this code already detected in system: please contact Administrator");
 			}
 		}
 
@@ -72,9 +72,9 @@
 		function voucherCBSuccess(result) {
 			console.log('voucherCBSuccess called');
 			if (result.getCount() === 0) {
-				$('#scanned-barcode').text('Scanned voucher code not found in system');
+				$('#search_results').text('Scanned voucher code not found in system');
 			} else {
-				$('#scanned-barcode').text(code + ' -- Voucher Detected!');
+				$('#search_results').text(code + ' -- Voucher Detected!');
 				$('#launch').show();
 				$('#launch').text('Redeem Voucher');
 				$('#launch').click(function() {
@@ -108,9 +108,10 @@
 
 	
 	<body onload="display();">
-	<h2>Please Scan or Enter The Voucher Barcode</h2>
-	<button id="launch-barcode" class="btn btn-launch btn-primary btn-block btn-plotter">Launch Barcode</button>
-	<p>Scanned BarCode: <span id="scanned-barcode"></span></p>
-	<button id="launch" style='display:none'></button>
-
+		<div id="main">
+			<h2>Please Scan Voucher Barcode</h2>
+			<button id="launch-barcode" class="btn btn-launch btn-primary btn-block btn-plotter">Launch Barcode</button>
+			<p id="search_results"></p>
+			<button id="launch" style='display:none'></button>
+		</div>
 	</body>

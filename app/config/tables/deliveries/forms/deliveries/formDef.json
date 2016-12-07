@@ -81,6 +81,11 @@
         "name": "valid",
         "isSessionVariable": true,
         "_row_num": 17
+      },
+      {
+        "type": "string",
+        "name": "sector",
+        "_row_num": 18
       }
     ],
     "settings": [
@@ -149,17 +154,10 @@
         "_row_num": 3
       },
       {
-        "type": "note",
-        "display": {
-          "text": "{{data.assigned_code}}"
-        },
-        "_row_num": 4
-      },
-      {
         "clause": "if",
         "condition": "data('assigned_code') === null || data('assigned_code') === undefined",
         "branch_label": "item_scan",
-        "_row_num": 5
+        "_row_num": 4
       },
       {
         "type": "barcode",
@@ -170,7 +168,7 @@
         "model": {
           "isSessionVariable": true
         },
-        "_row_num": 6
+        "_row_num": 5
       },
       {
         "type": "string",
@@ -181,24 +179,24 @@
         "model": {
           "isSessionVariable": true
         },
-        "_row_num": 7
+        "_row_num": 6
       },
       {
         "type": "assign",
         "name": "valid",
         "calculation": "calculates.in_range()",
-        "_row_num": 8
+        "_row_num": 7
       },
       {
         "clause": "else",
-        "_row_num": 9
+        "_row_num": 8
       },
       {
         "type": "note",
         "display": {
           "text": "The authorized item pack for this beneficiary is {{data.assigned_code}}"
         },
-        "_row_num": 10
+        "_row_num": 9
       },
       {
         "type": "barcode",
@@ -209,7 +207,7 @@
         "model": {
           "isSessionVariable": true
         },
-        "_row_num": 11
+        "_row_num": 10
       },
       {
         "type": "string",
@@ -220,22 +218,22 @@
         "model": {
           "isSessionVariable": true
         },
-        "_row_num": 12
+        "_row_num": 11
       },
       {
         "type": "assign",
         "name": "valid",
         "calculation": "data('item_pack_barcode') === data('assigned_code')",
-        "_row_num": 13
+        "_row_num": 12
       },
       {
         "clause": "end if",
-        "_row_num": 14
+        "_row_num": 13
       },
       {
         "clause": "if",
         "condition": "!data('valid')",
-        "_row_num": 15
+        "_row_num": 14
       },
       {
         "type": "select_one",
@@ -248,31 +246,31 @@
           "isSessionVariable": true,
           "valuesList": "yes_no"
         },
-        "_row_num": 16
+        "_row_num": 15
       },
       {
         "clause": "if",
         "condition": "selected(data('try_again'),'true')",
-        "_row_num": 17
+        "_row_num": 16
       },
       {
         "clause": "goto item_scan",
-        "_row_num": 18
+        "_row_num": 17
       },
       {
         "clause": "end if",
-        "_row_num": 19
+        "_row_num": 18
       },
       {
         "clause": "else",
-        "_row_num": 20
+        "_row_num": 19
       },
       {
         "type": "note",
         "display": {
           "text": "This item pack is authorized. Please deliver this item pack."
         },
-        "_row_num": 21
+        "_row_num": 20
       },
       {
         "type": "select_one",
@@ -281,22 +279,22 @@
         "display": {
           "text": "Has the item pack been successfully delivered?"
         },
-        "_row_num": 22
+        "_row_num": 21
       },
       {
         "clause": "end if",
-        "_row_num": 23
+        "_row_num": 22
       },
       {
         "clause": "if",
         "condition": "data('is_delivered') == 'true'",
-        "_row_num": 24
+        "_row_num": 23
       },
       {
         "type": "assign",
         "name": "scanned_item_pack",
         "calculation": "data('item_pack_barcode')",
-        "_row_num": 25
+        "_row_num": 24
       },
       {
         "type": "note",
@@ -304,13 +302,13 @@
         "display": {
           "text": "Since the entitlement was successfully delivered, we will now complete a brief delivery report."
         },
-        "_row_num": 26
+        "_row_num": 25
       },
       {
         "type": "assign",
         "name": "date_time",
         "calculation": "now()",
-        "_row_num": 27
+        "_row_num": 26
       },
       {
         "type": "string",
@@ -318,7 +316,7 @@
         "display": {
           "text": "What is the name of the distributor?"
         },
-        "_row_num": 28
+        "_row_num": 27
       },
       {
         "type": "string",
@@ -326,7 +324,7 @@
         "display": {
           "text": "What is the name of the delivery site?"
         },
-        "_row_num": 29
+        "_row_num": 28
       },
       {
         "type": "note",
@@ -334,11 +332,11 @@
         "display": {
           "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
         },
-        "_row_num": 30
+        "_row_num": 29
       },
       {
         "clause": "else",
-        "_row_num": 31
+        "_row_num": 30
       },
       {
         "type": "select_one",
@@ -347,20 +345,20 @@
         "display": {
           "text": "Would you like to scan a different item pack instead?"
         },
-        "_row_num": 32
+        "_row_num": 31
       },
       {
         "clause": "if",
         "condition": "selected(data('try_again'),'true')",
-        "_row_num": 33
+        "_row_num": 32
       },
       {
         "clause": "goto item_scan",
-        "_row_num": 34
+        "_row_num": 33
       },
       {
         "clause": "else",
-        "_row_num": 35
+        "_row_num": 34
       },
       {
         "type": "note",
@@ -368,22 +366,15 @@
         "display": {
           "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
         },
+        "_row_num": 35
+      },
+      {
+        "clause": "end if",
         "_row_num": 36
       },
       {
         "clause": "end if",
         "_row_num": 37
-      },
-      {
-        "clause": "end if",
-        "_row_num": 38
-      }
-    ],
-    "prompt_types": [
-      {
-        "prompt_type_name": "async_assign_single_string",
-        "type": "string",
-        "_row_num": 2
       }
     ],
     "calculates": [
@@ -540,7 +531,7 @@
         "elementType": "dateTime",
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 26,
             "section_name": "survey"
           },
           {
@@ -554,7 +545,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 28,
             "section_name": "survey"
           },
           {
@@ -568,7 +559,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 28,
+            "_row_num": 27,
             "section_name": "survey"
           },
           {
@@ -583,7 +574,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -677,7 +668,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 24,
             "section_name": "survey"
           },
           {
@@ -701,11 +692,11 @@
         "type": "boolean",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "survey"
           },
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -716,24 +707,34 @@
         "isSessionVariable": true,
         "elementKey": "valid"
       },
+      "sector": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "sector"
+      },
       "item_pack_barcode": {
         "type": "string",
         "isSessionVariable": true,
         "_defn": [
           {
+            "_row_num": 5,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 6,
             "section_name": "survey"
           },
           {
-            "_row_num": 7,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
             "_row_num": 11,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 12,
             "section_name": "survey"
           }
         ],
@@ -745,11 +746,11 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
-            "_row_num": 32,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -790,18 +791,6 @@
             "promptIdx": 0
           },
           {
-            "type": "note",
-            "display": {
-              "text": "{{data.assigned_code}}"
-            },
-            "_row_num": 4,
-            "__rowNum__": 3,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen4",
-            "promptIdx": 1
-          },
-          {
             "type": "barcode",
             "name": "item_pack_barcode",
             "display": {
@@ -810,12 +799,12 @@
             "model": {
               "isSessionVariable": true
             },
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen6",
-            "promptIdx": 2
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 1
           },
           {
             "type": "string",
@@ -826,24 +815,24 @@
             "model": {
               "isSessionVariable": true
             },
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen7",
-            "promptIdx": 3
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 2
           },
           {
             "type": "note",
             "display": {
               "text": "The authorized item pack for this beneficiary is {{data.assigned_code}}"
             },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 4
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 3
           },
           {
             "type": "barcode",
@@ -854,12 +843,12 @@
             "model": {
               "isSessionVariable": true
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 5
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 4
           },
           {
             "type": "string",
@@ -870,12 +859,12 @@
             "model": {
               "isSessionVariable": true
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 6
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 5
           },
           {
             "type": "select_one",
@@ -888,24 +877,24 @@
               "isSessionVariable": true,
               "valuesList": "yes_no"
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 7
+            "_branch_label_enclosing_screen": "survey/_screen15",
+            "promptIdx": 6
           },
           {
             "type": "note",
             "display": {
               "text": "This item pack is authorized. Please deliver this item pack."
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen21",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen20",
+            "promptIdx": 7
           },
           {
             "type": "select_one",
@@ -914,12 +903,12 @@
             "display": {
               "text": "Has the item pack been successfully delivered?"
             },
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "survey/_screen21",
+            "promptIdx": 8
           },
           {
             "type": "note",
@@ -927,18 +916,31 @@
             "display": {
               "text": "Since the entitlement was successfully delivered, we will now complete a brief delivery report."
             },
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen25",
+            "promptIdx": 9
           },
           {
             "type": "string",
             "name": "distributor",
             "display": {
               "text": "What is the name of the distributor?"
+            },
+            "_row_num": 27,
+            "__rowNum__": 26,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen27",
+            "promptIdx": 10
+          },
+          {
+            "type": "string",
+            "name": "delivery_site",
+            "display": {
+              "text": "What is the name of the delivery site?"
             },
             "_row_num": 28,
             "__rowNum__": 27,
@@ -948,30 +950,17 @@
             "promptIdx": 11
           },
           {
-            "type": "string",
-            "name": "delivery_site",
-            "display": {
-              "text": "What is the name of the delivery site?"
-            },
-            "_row_num": 29,
-            "__rowNum__": 28,
-            "_token_type": "prompt",
-            "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen29",
-            "promptIdx": 12
-          },
-          {
             "type": "note",
             "name": "thanks",
             "display": {
               "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
             },
-            "_row_num": 30,
-            "__rowNum__": 29,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 12
           },
           {
             "type": "select_one",
@@ -980,12 +969,12 @@
             "display": {
               "text": "Would you like to scan a different item pack instead?"
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen32",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen31",
+            "promptIdx": 13
           },
           {
             "type": "note",
@@ -993,20 +982,20 @@
             "display": {
               "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen35",
+            "promptIdx": 14
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 39,
-            "_branch_label_enclosing_screen": "survey/_screen39",
-            "promptIdx": 16
+            "_row_num": 38,
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 15
           }
         ],
         "validation_tag_map": {
@@ -1032,25 +1021,25 @@
             "operationIdx": 1
           },
           {
-            "_row_num": 4,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
-          },
-          {
             "clause": "if",
             "condition": "data('assigned_code') === null || data('assigned_code') === undefined",
-            "_row_num": 5,
-            "__rowNum__": 4,
+            "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "goto_label",
-            "_branch_label": "_then5",
-            "operationIdx": 3
+            "_branch_label": "_then4",
+            "operationIdx": 2
           },
           {
             "clause": "else",
             "_token_type": "goto_label",
-            "_branch_label": "_else9",
-            "_row_num": 9,
+            "_branch_label": "_else8",
+            "_row_num": 8,
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
@@ -1060,25 +1049,25 @@
             "operationIdx": 5
           },
           {
-            "_row_num": 7,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
-          },
-          {
             "type": "assign",
             "name": "valid",
             "calculation": "calculates.in_range()",
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "assign",
-            "operationIdx": 7
+            "operationIdx": 6
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif14",
-            "_row_num": 14,
+            "_branch_label": "_endif13",
+            "_row_num": 13,
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
@@ -1094,78 +1083,78 @@
             "operationIdx": 10
           },
           {
-            "_row_num": 12,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 11
-          },
-          {
             "type": "assign",
             "name": "valid",
             "calculation": "data('item_pack_barcode') === data('assigned_code')",
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "assign",
-            "operationIdx": 12
+            "operationIdx": 11
           },
           {
             "clause": "if",
             "condition": "!data('valid')",
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "goto_label",
-            "_branch_label": "_then15",
-            "operationIdx": 13
+            "_branch_label": "_then14",
+            "operationIdx": 12
           },
           {
             "clause": "else",
             "_token_type": "goto_label",
-            "_branch_label": "_else20",
-            "_row_num": 20,
-            "operationIdx": 14
+            "_branch_label": "_else19",
+            "_row_num": 19,
+            "operationIdx": 13
           },
           {
-            "_row_num": 16,
+            "_row_num": 15,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 15
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 14
           },
           {
             "clause": "if",
             "condition": "selected(data('try_again'),'true')",
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "goto_label",
-            "_branch_label": "_then17",
-            "operationIdx": 16
+            "_branch_label": "_then16",
+            "operationIdx": 15
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else19",
-            "_row_num": 19,
-            "operationIdx": 17
+            "_branch_label": "_else18",
+            "_row_num": 18,
+            "operationIdx": 16
           },
           {
             "clause": "goto item_scan",
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "goto_label",
             "_branch_label": "item_scan",
+            "operationIdx": 17
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif18",
+            "_row_num": 18,
             "operationIdx": 18
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif19",
-            "_row_num": 19,
+            "_branch_label": "_endif22",
+            "_row_num": 22,
             "operationIdx": 19
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif23",
-            "_row_num": 23,
+            "_row_num": 20,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 20
           },
           {
@@ -1175,49 +1164,49 @@
             "operationIdx": 21
           },
           {
-            "_row_num": 22,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 22
-          },
-          {
             "clause": "if",
             "condition": "data('is_delivered') == 'true'",
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "goto_label",
-            "_branch_label": "_then24",
-            "operationIdx": 23
+            "_branch_label": "_then23",
+            "operationIdx": 22
           },
           {
             "clause": "else",
             "_token_type": "goto_label",
-            "_branch_label": "_else31",
-            "_row_num": 31,
-            "operationIdx": 24
+            "_branch_label": "_else30",
+            "_row_num": 30,
+            "operationIdx": 23
           },
           {
             "type": "assign",
             "name": "scanned_item_pack",
             "calculation": "data('item_pack_barcode')",
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "assign",
-            "operationIdx": 25
+            "operationIdx": 24
           },
           {
-            "_row_num": 26,
+            "_row_num": 25,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 26
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 25
           },
           {
             "type": "assign",
             "name": "date_time",
             "calculation": "now()",
-            "_row_num": 27,
-            "__rowNum__": 26,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "assign",
+            "operationIdx": 26
+          },
+          {
+            "_row_num": 27,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 27
           },
           {
@@ -1233,118 +1222,111 @@
             "operationIdx": 29
           },
           {
-            "_row_num": 30,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 30
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif38",
-            "_row_num": 38,
-            "operationIdx": 31
-          },
-          {
-            "_row_num": 32,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 32
-          },
-          {
-            "clause": "if",
-            "condition": "selected(data('try_again'),'true')",
-            "_row_num": 33,
-            "__rowNum__": 32,
-            "_token_type": "goto_label",
-            "_branch_label": "_then33",
-            "operationIdx": 33
-          },
-          {
-            "clause": "else",
-            "_token_type": "goto_label",
-            "_branch_label": "_else35",
-            "_row_num": 35,
-            "operationIdx": 34
-          },
-          {
-            "clause": "goto item_scan",
-            "_row_num": 34,
-            "__rowNum__": 33,
-            "_token_type": "goto_label",
-            "_branch_label": "item_scan",
-            "operationIdx": 35
-          },
-          {
             "clause": "end if",
             "_token_type": "goto_label",
             "_branch_label": "_endif37",
             "_row_num": 37,
-            "operationIdx": 36
+            "operationIdx": 30
           },
           {
-            "_row_num": 36,
+            "_row_num": 31,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 37
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 31
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('try_again'),'true')",
+            "_row_num": 32,
+            "__rowNum__": 31,
+            "_token_type": "goto_label",
+            "_branch_label": "_then32",
+            "operationIdx": 32
+          },
+          {
+            "clause": "else",
+            "_token_type": "goto_label",
+            "_branch_label": "_else34",
+            "_row_num": 34,
+            "operationIdx": 33
+          },
+          {
+            "clause": "goto item_scan",
+            "_row_num": 33,
+            "__rowNum__": 32,
+            "_token_type": "goto_label",
+            "_branch_label": "item_scan",
+            "operationIdx": 34
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif36",
+            "_row_num": 36,
+            "operationIdx": 35
+          },
+          {
+            "_row_num": 35,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 36
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 39,
-            "operationIdx": 38
+            "_row_num": 38,
+            "operationIdx": 37
           },
           {
-            "_row_num": 39,
+            "_row_num": 38,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 39
+            "operationIdx": 38
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 39,
-            "operationIdx": 40
+            "_row_num": 38,
+            "operationIdx": 39
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_screen4": 2,
-          "item_scan": 3,
-          "_then5": 5,
+          "item_scan": 2,
+          "_then4": 4,
+          "_screen5": 4,
           "_screen6": 5,
-          "_screen7": 6,
-          "_else9": 9,
+          "_else8": 8,
+          "_screen9": 8,
           "_screen10": 9,
           "_screen11": 10,
-          "_screen12": 11,
-          "_endif14": 13,
-          "_then15": 15,
-          "_screen16": 15,
-          "_then17": 18,
+          "_endif13": 12,
+          "_then14": 14,
+          "_screen15": 14,
+          "_then16": 17,
+          "_else18": 19,
+          "_endif18": 19,
           "_else19": 20,
-          "_endif19": 20,
-          "_else20": 21,
+          "_screen20": 20,
           "_screen21": 21,
-          "_screen22": 22,
-          "_endif23": 23,
-          "_then24": 25,
-          "_screen26": 26,
+          "_endif22": 22,
+          "_then23": 24,
+          "_screen25": 25,
+          "_screen27": 27,
           "_screen28": 28,
           "_screen29": 29,
-          "_screen30": 30,
-          "_else31": 32,
-          "_screen32": 32,
-          "_then33": 35,
-          "_else35": 37,
-          "_screen36": 37,
-          "_endif37": 38,
-          "_endif38": 38,
-          "_contents": 39,
-          "_screen39": 39
+          "_else30": 31,
+          "_screen31": 31,
+          "_then32": 34,
+          "_else34": 36,
+          "_screen35": 36,
+          "_endif36": 37,
+          "_endif37": 37,
+          "_contents": 38,
+          "_screen38": 38
         }
       },
       "initial": {
@@ -1473,7 +1455,7 @@
         "elementType": "dateTime",
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 26,
             "section_name": "survey"
           },
           {
@@ -1490,7 +1472,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 28,
             "section_name": "survey"
           },
           {
@@ -1507,7 +1489,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 28,
+            "_row_num": 27,
             "section_name": "survey"
           },
           {
@@ -1525,7 +1507,7 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -1646,7 +1628,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 24,
             "section_name": "survey"
           },
           {
@@ -1676,11 +1658,11 @@
         "type": "boolean",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "survey"
           },
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -1694,24 +1676,37 @@
         "elementSet": "data",
         "elementPath": "valid"
       },
+      "sector": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "sector",
+        "elementName": "sector",
+        "elementSet": "data",
+        "elementPath": "sector"
+      },
       "item_pack_barcode": {
         "type": "string",
         "isSessionVariable": true,
         "_defn": [
           {
+            "_row_num": 5,
+            "section_name": "survey"
+          },
+          {
             "_row_num": 6,
             "section_name": "survey"
           },
           {
-            "_row_num": 7,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
             "_row_num": 11,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 12,
             "section_name": "survey"
           }
         ],
@@ -1726,11 +1721,11 @@
         "valuesList": "yes_no",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
-            "_row_num": 32,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],

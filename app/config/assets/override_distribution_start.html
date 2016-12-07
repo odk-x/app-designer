@@ -10,11 +10,11 @@
 
         function display() {
             $('#barcode').on('click', function() {
-                odkTables.launchHTML('config/assets/voucher_start.html')
+                odkTables.launchHTML('config/assets/distribution_override_scan.html')
             });
 
             $('#manual').on('click', function() {
-                odkTables.launchHTML('config/assets/manual_voucher_start.html');
+                odkTables.launchHTML('config/assets/distribution_override_manual.html');
             });
         }
 
@@ -23,7 +23,7 @@
 
     <body onload="display()">
         <div id="main">
-            <h1 id="title">Voucher Method</h1>
+            <h1 id="title">Choose Method To Choose Beneficiary</h1>
             <button type="reg" id="barcode">Scan Barcode</button>
             <button type ='reg' id='manual'>Manually Enter</button>
         </div>

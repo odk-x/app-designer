@@ -1,3 +1,4 @@
+<!--Menu-->
 <html>
     <head>
         <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
@@ -11,30 +12,33 @@
         // Displays homescreen
         function display() {
 
-            var enable = document.createElement("button");
-            enable.setAttribute("id", "button1");
-            enable.innerHTML = "Enable Beneficiary";
-            enable.onclick = function() {
-                odkTables.launchHTML('config/assets/enable_start.html');
+            var delList = document.createElement('button');
+            delList.setAttribute('id', 'button1');
+            delList.innerHTML = 'View All Deliveries';
+            delList.onclick = function() {
+                odkTables.openTableToListView(
+                'deliveries', null, null
+                , 'config/tables/deliveries/html/deliveries_list.html');
             }
-            document.getElementById("wrapper").appendChild(enable);    
+            document.getElementById('wrapper').appendChild(delList);   
 
-            var disable = document.createElement("button");
-            disable.setAttribute("id", "button2");
-            disable.innerHTML = "Disable Beneficiary";
-            disable.onclick = function() {
-                odkTables.launchHTML('config/assets/disable_start.html');
+            var search = document.createElement('button');
+            search.setAttribute('id', 'button2');
+            search.innerHTML = 'Advanced Search';
+            search.onclick = function() {
+                odkTables.launchHTML(
+                    'config/assets/delivery_search.html');
             }
-            document.getElementById("wrapper").appendChild(disable);    
+            document.getElementById('wrapper').appendChild(search);         
         }
-            
+
         
         </script>
     </head>
 
     <body onload="display();">
         <div id="main">
-            <h1>Registration Override</h1>
+            <h1>Delivery Data</h1>
             <div id="wrapper"></div>
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>

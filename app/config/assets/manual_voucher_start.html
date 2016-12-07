@@ -18,17 +18,17 @@
 
 
         function display() {
-            var enter = $('#enter');
-            setTimeout(function() {
+            var enter = $('#search');
+            /*setTimeout(function() {
                 var width = $(window).innerWidth();
                 var height = $(window).innerHeight();
-                document.getElementById("enter").style.width = width * .9 + "px";
-                document.getElementById("enter").style.height = height * .15 + "px";
+                document.getElementById("search").style.width = width * .9 + "px";
+                document.getElementById("search").style.height = height * .15 + "px";
                 document.getElementById("launch").style.width = width * .9 + "px";
                 document.getElementById("launch").style.height = height * .15 + "px";
                 document.getElementById('code').style.width = width * .6 + "px";
                 document.getElementById('code').style.height = height * .07 + 'px';
-            }, 0);
+            }, 0);*/
             
             enter.on('click', function() {
                 code = $('#code').val();
@@ -49,7 +49,7 @@
                 odkData.query('entitlements', 'beneficiary_code = ?', [code],
                     null, null, null, null, null, null, true, voucherCBSuccess, voucherCBFailure);
             } else {
-                $('#message').text(code + " -- beneficiary with this code already detected in system: please contact Administrator");
+                $('#search_results').text(code + " -- beneficiary with this code already detected in system: please contact Administrator");
             }
         }
 
@@ -60,9 +60,9 @@
         function voucherCBSuccess(result) {
             console.log('voucherCBSuccess called');
             if (result.getCount() === 0) {
-                $('#message').text('Scanned voucher code not found in system');
+                $('#search_results').text('Scanned voucher code not found in system');
             } else {
-                $('#message').text(code + ' -- Voucher Detected!');
+                $('#search_results').text(code + ' -- Voucher Detected!');
                 $('#launch').show();
                 $('#launch').text('Redeem Voucher');
                 $('#launch').click(function() {
@@ -97,10 +97,11 @@
 
     
     <body onload="display();">
-    <h2>Please Enter Voucher Code</h2>
-    <div style='text-align: center'><input id="code" style='margin: auto' style='font-size: 20px'></input></div>
-    <button id='enter'style='font-size: 25px'>Enter</button>
-    <p><span id="message"></span></p>
-    <button id="launch" style='display:none'style='font-size: 25px'></button>
-
+        <div id="main">
+            <h2>Please Enter Voucher Code</h2>
+            <div id="enter_code" style='text-align: center'><input id="code"></input></div>
+            <button id='search'>Enter</button>
+            <p id="search_results"></p>
+            <button id="launch" style='display:none'style='font-size: 25px'></button>
+        </div>
     </body>

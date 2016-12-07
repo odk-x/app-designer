@@ -11,12 +11,11 @@
         var sqlWhereClause = null;
         var sqlSelectionArgs = null;
         var windowHeight = $(window).innerHeight();
+        //var search;
         var search_font;
-        
         function start() {
-            odkData.query('registration', null, null, null, null, null, null, 
+            odkData.query('deliveries', null, null, null, null, null, null, 
                                     null, null, null, populateSuccess, populateFailure);
-
             search_font = $('#search').css('font-size');
         }
 
@@ -38,13 +37,13 @@
         function search() {
             sqlWhereClause = document.getElementById('field').value +' = ?';
             sqlSelectionArgs = document.getElementById('value').value;
-            odkData.query('registration', sqlWhereClause, [sqlSelectionArgs],
+            odkData.query('deliveries', sqlWhereClause, [sqlSelectionArgs],
             null, null, null, null, null, null, null,
             successCallbackFn, failureCallbackFn);
         }
 
         function successCallbackFn(result) {
-            document.getElementById('search_results').innerHTML = result.getCount() + ' beneficiaries found!';
+            document.getElementById('search_results').innerHTML = result.getCount() + ' deliveries found!';
             if (result.getCount() > 0) {
                 document.getElementById('launch').style.display='block';
             } else {
@@ -59,8 +58,8 @@
 
         function launch() {
             console.log(sqlWhereClause + ' ---- ' + sqlSelectionArgs);
-                odkTables.openTableToListView('registration', sqlWhereClause,
-                    [sqlSelectionArgs], 'config/tables/registration/html/registration_list.html');
+                odkTables.openTableToListView('deliveries', sqlWhereClause,
+                    [sqlSelectionArgs], 'config/tables/deliveries/html/deliveries_list.html');
         }
 
         $(window).resize(function() {
@@ -84,9 +83,9 @@
         </script>
     </head>
 
-<body onload="start()">
+    <body onload="start()">
         <div id="main">
-            <h1 id="title">Search for Beneficiaries</h1>
+            <h1 id="title">Search for Deliveries</h1>
             <form>    
                 <select id="field"></select>
             </form>
@@ -96,7 +95,7 @@
             <button type="reg" id="search" onclick="search()">Search</button>
             <br>
             <p id="search_results"></p>
-            <button type = 'reg' id='launch' style='display:none;' onclick='launch()'>View Matching Beneficiaries</button>
+            <button type = 'reg' id='launch' style='display:none;' onclick='launch()'>View Matching Deliveries</button>
         </div>
     </body>
 </html>

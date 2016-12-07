@@ -1,0 +1,58 @@
+<!--Menu-->
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <link href="css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript">
+
+        // Displays homescreen
+        function display() {
+
+            var sendData = document.createElement("button");
+            sendData.setAttribute("id", "button4");
+            sendData.innerHTML = "Beneficiary Lists";
+            sendData.onclick = function() {
+              odkTables.launchHTML(
+                  'config/assets/beneficiary_list_start.html');
+            }
+            document.getElementById("wrapper").appendChild(sendData);
+
+            var search = document.createElement('button');
+            search.setAttribute('id', 'button5');
+            search.innerHTML = 'Advanced Search';
+            search.onclick = function() {
+                odkTables.launchHTML(
+                    'config/assets/beneficiary_search.html');
+            }
+            document.getElementById('wrapper').appendChild(search);
+
+            /*var del = document.createElement('button');
+            del.setAttribute('id', 'button6');
+            del.innerHTML = 'Deliveries';
+            del.onclick = function() {
+                odkTables.openTableToListView(
+                'deliveries', null, null
+                , 'config/tables/deliveries/html/deliveries_list.html');
+            }
+            document.getElementById('wrapper').appendChild(del);*/
+
+            // Create a distribution Override if user is a tables superuser
+            
+        }
+
+        
+        </script>
+    </head>
+
+    <body onload="display();">
+        <div id="main">
+            <h1>Beneficiary Data</h1>
+            <div id="wrapper"></div>
+        </div>
+        <div id="logo"><img src="img/small_2025.jpg"></div>
+    </body>
+</html>

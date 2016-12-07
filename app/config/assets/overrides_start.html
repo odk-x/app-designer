@@ -18,7 +18,7 @@
             override_registration.onclick = function() {
                 odkTables.launchHTML(
                     'config/assets/overrides_registration_start.html');
-            }
+            };
             document.getElementById("wrapper").appendChild(override_registration);    
 
             // Follow up with existing client option that launches
@@ -38,8 +38,10 @@
     </head>
 
     <body onload="display();">
-        <h1>Override Options</h1>
-        <div id="wrapper"></div>
-        <p> <img src="img/small_2025.jpg"></p>
+        <div id="main">
+            <h1>Override Options</h1>
+            <div id="wrapper"></div>
+        </div>
+        <div id="logo"><img src="img/small_2025.jpg"></div>
     </body>
 </html>

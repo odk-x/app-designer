@@ -1,2 +1,2 @@
-table_keys=beneficiaries
-beneficiaries.filename=config/assets/csv/beneficiaries.allfields.csv
+table_keys=entitlements
+entitlements.filename=config/assets/csv/output_entitlements.csv

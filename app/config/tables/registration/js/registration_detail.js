@@ -27,7 +27,7 @@ function cbSuccess(result) {
 
   $('#FIELD_17').text(registrationResultSet.get('beneficiary_code'));
 
-
+  $('#FIELD_2').text(registrationResultSet.get('sector'));
 
   $('#FIELD_4').text(registrationResultSet.get('address'));
   $('#FIELD_1').text(registrationResultSet.get('id_number'));

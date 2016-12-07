@@ -54,7 +54,7 @@
 					            beneficiaryCBFailure);
 		        } else {
 		            myTimeoutVal = setTimeout(callBackFn(), 1000);
-		            $('#scanned-barcode').text("No value");
+		            $('#search_results').text("No value");
 		            odkCommon.removeFirstQueuedAction();
 		        }
 		    }
@@ -68,8 +68,7 @@
 					null, null, null, null, true, voucherCBSuccess, voucherCBFailure);
 
 			} else {
-				$('#scanned-barcode').text(code);
-				$('#prompt').text('Barcode Unavailable: please scan a different barcode');
+				$('#search_results').text('Barcode \'' + code + '\' Unavailable: please scan a different barcode');
 				$('#launch').hide();
 				odkCommon.removeFirstQueuedAction();
 			}
@@ -82,8 +81,7 @@
 		function voucherCBSuccess(result) {
 			voucherResultSet = result;
 			if (voucherResultSet.getCount() == 0) {
-				$('#scanned-barcode').text(code);
-				$('#prompt').text('Barcode Available');
+				$('#search_results').text('Barcode \'' + code + '\' Available');
 				$('#launch').show();
 				$('#launch').text('Click to Register Beneficiary');
 				$('#launch').click(function() {
@@ -95,8 +93,7 @@
 				});
 				odkCommon.removeFirstQueuedAction();
 			} else {
-				$('#scanned-barcode').text(code);
-				$('#prompt').text('Voucher Detected: Did you mean to redeem voucher?');
+				$('#search_results').text('Voucher Detected for Barcode \'' + code + '\': Did you mean to redeem voucher?');
 				$('#launch').hide();
 				odkCommon.removeFirstQueuedAction();
 			}
@@ -125,10 +122,10 @@
 
 	
 	<body onload="display();">
-	<h2>Please Scan A Barcode in Order to Assign a Beneficiary Code</h2>
-	<button id="launch-barcode" class="btn btn-launch btn-primary btn-block btn-plotter">Launch Barcode</button>
-	<p>Scanned BarCode: <span id="scanned-barcode"></span></p>
-	<p id="prompt"></p>
-	<button id="launch" style='display:none'></button>
-
+        <div id="main">
+			<h2>Please Scan A Barcode in Order to Assign a Beneficiary Code</h2>
+			<button id="launch-barcode">Launch Barcode</button>
+			<p id="search_results"></p>
+			<button id="launch" style='display:none'></button>
+		</div>
 	</body>

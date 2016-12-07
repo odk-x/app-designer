@@ -23,20 +23,27 @@ var cbSuccess = function (result) {
   $('#FIELD_5').text(authorizationsResultSet.get('item_description'));
 
   var launchBarcodeButton = $('#launch-barcode');
+  var launchButton = $('#launch');
   launchBarcodeButton.on(
     'click',
     function() {
         odkCommon.registerListener(function() {
-                callBackFn();
+                callBackFnScan();
         });
-
         var dispatchString = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
         odkCommon.doAction(dispatchString, 'com.google.zxing.client.android.SCAN', null);
     });
-    myTimeoutVal = setTimeout(callBackFn(), 1000);
-};
+    myTimeoutVal = setTimeout(callBackFnScan(), 1000);
 
-var callBackFn = function () {
+  launchButton.on(
+    'click',
+    function() {
+        callBackFn();
+    });
+}
+
+
+var callBackFnScan = function() {
   if (insideQueue == true) return;
   insideQueue = true;
   var value = odkCommon.viewFirstQueuedAction();
@@ -51,30 +58,36 @@ var callBackFn = function () {
       dispatchStr.htmlPath === htmlFileNameValue &&
       action.jsonValue.status === -1) {
       beneficiary_code = action.jsonValue.result.SCAN_RESULT;
-      $('#scanned_barcode').text(beneficiary_code);
+
       clearTimeout(myTimeoutVal);
+      $('#manual').val(beneficiary_code);
+
+
+    }
+  }
+  insideQueue = false;
+}
+
+var callBackFn = function () {
+  console.log($('#manual').val().length);
+  beneficiary_code = $('#manual').val();
+    if (beneficiary_code.length > 0 && beneficiary_code !== "Manually Enter Barcode") {
       odkData.query('registration', 'beneficiary_code = ?', 
                     [beneficiary_code],
                     null, null, null, null, null, null, true, firstCBSuccess, firstCBFailure);
     } else {
-        myTimeoutVal = setTimeout(callBackFn(), 1000);
-        $('#scanned_barcode').text("No value");
-        odkCommon.removeFirstQueuedAction();
+        $('#results').text("Please Enter Beneficiary Code");
     }
-  }
-  console.log("callBackFn is called");
-  insideQueue = false;
-
-};
+}
 
 
 var firstCBSuccess = function(result) {
   if (result.getCount() != 0) {
     odkData.query('entitlements', 'beneficiary_code = ? and authorization_id = ?', 
-                    [beneficiary_code,authorizationsResultSet.get('_id')],
+                    [beneficiary_code, authorizationsResultSet.get('_id')],
                     null, null, null, null, null, null, true, scanCBSuccess, scanCBFailure);
   } else {
-    $('#scanned_barcode').text('beneficiary with scanned code (' + beneficiary_code
+    $('#results').text('beneficiary with scanned code (' + beneficiary_code
                               + ') not found in system.');
         odkCommon.removeFirstQueuedAction();
   }
@@ -109,13 +122,9 @@ var scanCBSuccess = function (result) {
       addDistCBSuccess,
       addDistCBFailure
     );
-    $('#rejected').text('Override Successfully Created');
-
-    odkCommon.removeFirstQueuedAction();
-
+    $('#results').text('Override Successfully Created');
   } else {
-    $('#rejected').text('Scanned beneficiary already qualifies for this authorization. Override not created.');
-    odkCommon.removeFirstQueuedAction();
+    $('#results').text('Scanned beneficiary already qualifies for this authorization. Override not created.');
 
   }
 

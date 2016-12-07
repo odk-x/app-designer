@@ -18,8 +18,8 @@
 
 
         function display() {
-            var enter = $('#enter');
-            setTimeout(function() {
+            var enter = $('#search');
+            /*setTimeout(function() {
                 var width = $(window).innerWidth();
                 var height = $(window).innerHeight();
                 document.getElementById("enter").style.width = width * .9 + "px";
@@ -28,7 +28,7 @@
                 document.getElementById("launch").style.height = height * .15 + "px";
                 document.getElementById('code').style.width = width * .6 + "px";
                 document.getElementById('code').style.height = height * .07 + 'px';
-            }, 0);
+            }, 0);*/
             
             enter.on('click', function() {
                 code = $('#code').val();
@@ -51,7 +51,7 @@
                     null, null, null, null, true, voucherCBSuccess, voucherCBFailure);
 
             } else {
-                $('#message').text('Barcode Unavailable: please scan a different barcode');
+                $('#search_results').text('Barcode Unavailable: please enter a different barcode');
                 $('#launch').hide();
                 odkCommon.removeFirstQueuedAction();
             }
@@ -64,7 +64,7 @@
         function voucherCBSuccess(result) {
             voucherResultSet = result;
             if (voucherResultSet.getCount() == 0) {
-                $('#message').text('Barcode Available');
+                $('#search_results').text('Barcode Available');
                 $('#launch').show();
                 $('#launch').text('Click to Register Beneficiary');
                 $('#launch').click(function() {
@@ -76,7 +76,7 @@
                 });
                 odkCommon.removeFirstQueuedAction();
             } else {
-                $('#message').text('Voucher Detected: Did you mean to redeem voucher?');
+                $('#search_results').text('Voucher Detected: Did you mean to redeem voucher?');
                 $('#launch').hide();
                 odkCommon.removeFirstQueuedAction();
             }
@@ -105,10 +105,11 @@
 
     
     <body onload="display();">
-    <h2>Please Enter a Barcode in Order to Assign a Beneficiary Code</h2>
-    <div style='text-align: center'><input id="code" style='margin: auto' style='font-size: 20px'></input></div>
-    <button id='enter'style='font-size: 25px'>Enter</button>
-    <p><span id="message"></span></p>
-    <button id="launch" style='display:none'style='font-size: 25px'></button>
-
+        <div id="main">
+            <h2>Please Enter a Barcode to Assign a Beneficiary Code</h2>
+            <div id="enter_code" style='text-align: center'><input id="code"></input></div>
+            <button id='search'style='font-size: 25px'>Enter</button>
+            <p><span id="search_results"></span></p>
+            <button id="launch" style='display:none'style='font-size: 25px'></button>
+        </div>
     </body>
