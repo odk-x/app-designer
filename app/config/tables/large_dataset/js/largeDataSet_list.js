@@ -46,6 +46,7 @@ var nextResults = function () {
 }
 
 var cbSuccess = function (result) {
+    odkCommon.log('E',"userTableQuery in javascript PERFTEST: " + Date.now());
     largeDataSetResult = result;
 
     // Write row to the database
