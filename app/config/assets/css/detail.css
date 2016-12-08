@@ -25,6 +25,28 @@ div {
   margin-bottom: 10px;
 }
 
+button {
+    width: 80vw;
+    /*float: none;*/
+    margin: auto;
+    border-left: 15px solid;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1.5px solid;
+    background-color: #F1F1F1;
+    display: block;
+    color: #5C5C5C;
+    border-color: #EE3224;
+    height: 60px;
+    font-size: 21px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+button:active {
+    background-color: #FFC9C9;
+}
+
 p {
   padding: 0px;
   margin: 0px;
@@ -42,29 +64,19 @@ span {
 h3 { 
   font-size: 15pt; 
   margin: 2px;
+  margin-bottom: 10px;
 }
 
 #picture {
   text-align: center;
 }
 
-button {
-    width: 80vw;
-    /*float: none;*/
-    height: 10vh;
-    margin: auto;
-    border-left: 15px solid;
-    border-top: none;
-    border-right: none;
-    border-bottom: 1.5px solid;
-    background-color: #F1F1F1;
-    font-size: 7vmin;
+input {
     display: block;
-    color: #5C5C5C;
-    border-color: #EE3224;
-    margin-bottom: 6vh;
-}
-
-button:active {
-    background-color: #FFC9C9;
+    padding: 5px;
+    margin: auto;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    font-size: 18px;
+    text-align: center;
 }
