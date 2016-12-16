@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="../../../assets/css/list.css" type="text/css" rel="stylesheet" />
+        <link href="../../../assets/css/paginated_list.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
@@ -17,7 +17,11 @@
                 <input id="search" type="text" name="query" size="10" placeholder="Enter Refrigerator ID..." />
                 <input id="submit" type="submit" value="Search" />
             </form>
-        </div> 
+            <div class="btnDiv">
+                <div class="prevBtnDiv"><button class="btn" onclick="prevResults()">Prev</button></div>
+                <div class="nextBtnDiv"><button class="btn" onclick="nextResults()">Next</button></div>
+            </div>
+        </div>
 
         <div id="wrapper">
             <div id="list"></div>

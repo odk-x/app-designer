@@ -16,7 +16,7 @@
 //     });
 // }
 
-var healthFacilityResultSet = {}; 
+var healthFacilityResultSet = {};
 
 function onLinkClick() {
 
@@ -30,11 +30,18 @@ function onLinkClick() {
     }
 }
 
+function onAddFridgeClick() {
+    var jsonMap = {};
+    jsonMap.facility_row_id = JSON.stringify(healthFacilityResultSet.getRowId(0));
+    jsonMap = JSON.stringify(jsonMap);
+    odkTables.addRowWithSurvey('refrigerators', 'refrigerators', null, jsonMap);
+}
+
 function cbSuccess(result) {
 
     healthFacilityResultSet = result;
 
-    odkData.query('refrigerators', 'facility_row_id = ?', [healthFacilityResultSet.get('_id')], 
+    odkData.query('refrigerators', 'facility_row_id = ?', [healthFacilityResultSet.get('_id')],
         null, null, null, null, null, null, true, refrigeratorsCBSuccess, refrigeratorsCBFailure);
 }
 
@@ -87,7 +94,7 @@ function refrigeratorsCBSuccess(invData) {
     $('#distance_to_supply').text(healthFacilityResultSet.get('distance_to_supply') + ' km');
     $('#supply_interval').text(healthFacilityResultSet.get('vaccine_supply_interval'));
     $('#stock_requirement').text(healthFacilityResultSet.get(
-        'vaccine_reserve_stock_requirement'));    
+        'vaccine_reserve_stock_requirement'));
     $('#supply_mode').text(util.formatDisplayText(
         healthFacilityResultSet.get('vaccine_supply_mode')));
 

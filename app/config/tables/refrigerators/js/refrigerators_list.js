@@ -21,6 +21,28 @@ var typeData = {};
 var facilityNameMap = {};
 var typeIdMap = {};
 var idxStart = -1;
+var limit = 10;
+var offset = 0;
+
+/**
+ * Chunk the displays for larger tables
+ */
+var prevResults = function() {
+  offset -= limit;
+  if (offset < 0) {
+    offset = 0;
+  }
+
+  clearRows();
+  resumeFn(0);
+}
+
+var nextResults = function() {
+  offset += limit;
+
+  clearRows();
+  resumeFn(0);
+}
 
 function refrigeratorTypesCBSuccess(result) {
 
@@ -32,9 +54,7 @@ function refrigeratorTypesCBSuccess(result) {
         typeIdMap[typeData.getRowId(i)] = typeData.getData(i, 'catalog_id');
     }
 
-    return (function() {
-        displayGroup(idxStart);
-    }());
+    displayGroupIfNecessary();
 
 }
 
@@ -54,6 +74,8 @@ function healthFacilitiesCBSuccess(result) {
             facilityData.getData(i, 'facility_name');
 
     }
+
+    displayGroupIfNecessary();
 }
 
 function healthFacilitiesCBFailure(error) {
@@ -75,14 +97,18 @@ function cbSuccess(result) {
 
     } else {
 
-        odkData.query('health_facility', null, null, null, null, null, null, null, null, true, 
-            healthFacilitiesCBSuccess, healthFacilitiesCBFailure);
+         displayGroupIfNecessary();
 
-        odkData.query('refrigerator_types', null, null, null, null, null, null, null, null, true, 
-            refrigeratorTypesCBSuccess, refrigeratorTypesCBFailure);
+        if ($.isEmptyObject(facilityData)) {
+            odkData.query('health_facility', null, null, null, null, null, null, null, null, true,
+                healthFacilitiesCBSuccess, healthFacilitiesCBFailure);
+        }
 
+        if ($.isEmptyObject(typeData)) {
+            odkData.query('refrigerator_types', null, null, null, null, null, null, null, null, true,
+                refrigeratorTypesCBSuccess, refrigeratorTypesCBFailure);
+        }
     }
-
 }
 
 function cbFailure(error) {
@@ -114,13 +140,13 @@ var cbSearchFailure = function(error) {
 var getSearchResults = function() {
     var searchText = document.getElementById('search').value;
 
-    odkData.query('refrigerators', 'refrigerator_id = ?', [searchText], 
+    odkData.query('refrigerators', 'refrigerator_id = ?', [searchText],
         null, null, null, null, null, null, true, cbSearchSuccess, cbSearchFailure);
 }
 
 /* Called when page loads to display things (Nothing to edit here) */
 var resumeFn = function(fIdxStart) {
-    odkData.getViewData(cbSuccess, cbFailure);
+    odkData.getViewData(cbSuccess, cbFailure, limit, offset);
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
@@ -165,13 +191,13 @@ var displayGroup = function(idxStart) {
         item.attr('class', 'item_space');
         item.text('Refrigerator ' + refrigeratorsResultSet.getData(i, 'refrigerator_id')
             + ' | ' + catalogID);
-                
+
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
         chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/white_arrow.png'));
         chevron.attr('class', 'chevron');
         item.append(chevron);
-                
+
         var field1 = $('<li>');
         var facilityName = facilityNameMap[refrigeratorsResultSet.getData(i, 'facility_row_id')];
         field1.attr('class', 'detail');
@@ -190,4 +216,14 @@ var displayGroup = function(idxStart) {
         setTimeout(resumeFn, 0, i);
     }
 
+};
+
+function clearRows() {
+  $('#list').empty();
+};
+
+function displayGroupIfNecessary() {
+    if (!$.isEmptyObject(facilityData) && !$.isEmptyObject(typeData)) {
+        displayGroup(idxStart);
+    }
 };

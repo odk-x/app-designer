@@ -20,31 +20,6 @@ var typeNameMap = {};
 var idxStart = -1;
 var healthFacilityResultSet = {};
 
-// This will manage pagination
-var limit = 10;
-var offset = 0;
-/**
- * Use chunked list view for larger tables: We want to chunk the displays so
- * that there is less load time.
- */
-
-var prevResults = function() {
-  offset -= limit;
-  if (offset < 0) {
-    offset = 0;
-  }
-
-  clearRows();
-  resumeFn(0);
-}
-
-var nextResults = function() {
-  offset += limit;
-
-  clearRows();
-  resumeFn(0);
-}
-
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
@@ -81,36 +56,9 @@ var cbFailure = function(error) {
     console.log('health_facility_list getViewData CB error : ' + error);
 };
 
-var cbSearchSuccess = function(searchData) {
-    console.log('cbSearchSuccess data is' + searchData);
-    if(searchData.getCount() > 0) {
-        // open filtered list view if facility found
-        var rowId = searchData.getRowId(0);
-        odkTables.openTableToListView(
-                'health_facility',
-                '_id = ?',
-                [rowId],
-                'config/tables/health_facility/html/health_facility_list.html');
-    } else {
-        document.getElementById("search").value = "";
-        document.getElementsByName("query")[0].placeholder="Facility not found";
-    }
-}
-
-var cbSearchFailure = function(error) {
-    console.log('health_facility_list cbSearchFailure: ' + error);
-}
-
-var getSearchResults = function() {
-    var searchText = document.getElementById('search').value;
-
-    odkData.query('health_facility', 'facility_id = ?', [searchText],
-        null, null, null, null, null, null, true, cbSearchSuccess, cbSearchFailure);
-}
-
 var resumeFn = function(fIdxStart) {
 
-    odkData.getViewData(cbSuccess, cbFailure, limit, offset);
+    odkData.getViewData(cbSuccess, cbFailure);
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
