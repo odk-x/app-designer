@@ -14,11 +14,7 @@ function display() {
     viewFacilitiesButton.on(
         'click',
         function() {
-            odkTables.openTableToListView(
-                'health_facility',
-                null,
-                null,
-                'config/tables/health_facility/html/health_facility_list.html');
+            odkTables.launchHTML('config/assets/filterHealthFacilities.html');
         }
     );
 
@@ -26,11 +22,7 @@ function display() {
     viewRefrigeratorsButton.on(
         'click',
         function() {
-            odkTables.openTableToListView(
-                'refrigerators',
-                null,
-                null,
-                'config/tables/refrigerators/html/refrigerators_list.html');
+            odkTables.launchHTML('config/assets/filterInventory.html');
         }
     );
 

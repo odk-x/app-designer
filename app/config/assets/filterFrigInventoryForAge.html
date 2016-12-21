@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="ratchet/css/ratchet-theme-android.css" type="text/css" rel="stylesheet" /-->
+        <link href="../../system/libs/bootstrap-3.1.1-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+        <link href="css/homeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/filterFacilityScreen.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/libs/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="js/filterFrigInventoryForAge.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
+    </head>
+
+    <body id="main">
+        <div id="wrapper">
+            <h1>Facility Inventory By Grid Power</h1>
+            <br>
+            <div class="container">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label" for="facility_region">Select Region:</label>
+                        <select class="form-control" id="facility_region">
+                            <option selected value="none">No Region Selected</option>
+                            <option value="North">North</option>
+                            <option value="Central West">Central West</option>
+                            <option value="Central East">Central East</option>
+                            <option value="South West">South West</option>
+                            <option value="South East">South East</option>
+                        </select>
+
+                        <label class="form-label" for="facility_type">Select Facility Type:</label>
+                        <select class="form-control" id="facility_type">
+                            <option selected value="none">No Type Selected</option>
+                            <option value="central_hospital">Central Hospital</option>
+                            <option value="community_hospital">Community Hospital</option>
+                            <option value="dispensary">Dispensary</option>
+                            <option value="district_hospital">District Hospital</option>
+                            <option value="district_vaccine_store">District Vaccine Store</option>
+                            <option value="health_center">Health Center</option>
+                            <option value="health_post">Health Post</option>
+                            <option value="hospital">Hospital</option>
+                            <option value="national_vaccine_store">National Vaccine Store</option>
+                            <option value="regional_vaccine_store">Regional Vaccine Store</option>
+                            <option value="rural_hospital">Rural Hospital</option>
+                        </select>
+
+                        <label class="form-label" for="power_source">Select Power Source:</label>
+                        <select class="form-control" id="power_source">
+                            <option selected value="none">No Power Source Selected</option>
+                            <option value="electricity">Electricity</option>
+                            <option value="solar">Solar</option>
+                            <option value="unknown">Unknown</option>
+                        </select>
+
+                        <button id="filter-facilities-by-region-type" type="submit" class="btn btn-launch btn-filter btn-default">Filter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(display);
+        </script>
+    </body>
+</html>

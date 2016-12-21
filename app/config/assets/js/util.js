@@ -10,6 +10,10 @@ util.dateKey = 'follow_date';
 util.timeKey = 'follow_time';
 util.focalChimpKey = 'focal_chimp';
 
+util.facilityType = 'facility_type';
+util.regionLevel2 = 'regionLevel2';
+util.powerSource = 'power_source';
+
 /**
  * Get the query parameter from the url. Note that this is kind of a hacky/lazy
  * implementation that will fail if the key string appears more than once, etc.
@@ -35,6 +39,39 @@ util.getQueryParameter = function(key) {
     }
 };
 
+/**
+ * Get a string to append to a url that will contain information the date and
+ * time. The values can then be retrieved using getQueryParameter.
+ */
+util.getKeysToAppendToColdChainURL = function(
+      facilityType,
+      regionLevel2,
+      powerSource) {
+
+    var that = this;
+    var first = true;
+    var result;
+    var adaptProps = {};
+
+    // Initialize the properties object
+    adaptProps[that.facilityType] = facilityType;
+    adaptProps[that.regionLevel2] = regionLevel2;
+    adaptProps[that.powerSource] = powerSource;
+
+    for (var prop in adaptProps) {
+        if (adaptProps[prop] !== null && adaptProps[prop] !== undefined) {
+            if (first)
+            {
+                result = '?' + prop + '=' + encodeURIComponent(adaptProps[prop]);
+                first = false
+            } else {
+                result += '&' + prop + '=' + encodeURIComponent(adaptProps[prop]);
+            }
+        }
+    }
+    return result;
+};
+
 util.formatExistingTimes = function(tableData) {
 
     var times = [];
@@ -58,13 +95,13 @@ util.formatExistingTimes = function(tableData) {
 util.getExistingTimesForDate = function(date, focalChimpId, cbSuccess, cbFailure) {
     // So, we're just going to query for all the rows in follow_arrival
     // matching this date.
-    
+
     // Our where clause is just going to be for this date.
     var whereClause =
         'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ?';
     var selectionArgs = [date, focalChimpId];
 
-    window.odkData.query('follow_arrival', whereClause, selectionArgs, 
+    window.odkData.query('follow_arrival', whereClause, selectionArgs,
         null, null, null, null, null, null, true, cbSuccess, cbFailure);
 };
 
@@ -73,12 +110,12 @@ util.getExistingTimesForDate = function(date, focalChimpId, cbSuccess, cbFailure
  * focal chimp. Together this specifies a unique time point in a follow.
  */
 util.getTableDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbFailure) {
-    
+
     var whereClause =
         'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ? AND FA_time_start = ?';
     var selectionArgs = [date, focalChimpId, time];
 
-    window.odkData.query('follow_arrival', whereClause, selectionArgs, 
+    window.odkData.query('follow_arrival', whereClause, selectionArgs,
         null, null, null, null, null, null, true, cbSuccess, cbFailure);
 };
 
@@ -89,7 +126,7 @@ util.getFoodDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbF
 
     var selectionArgs = [date, focalChimpId, time];
 
-    window.odkData.query('food_bout', whereClause, selectionArgs, 
+    window.odkData.query('food_bout', whereClause, selectionArgs,
         null, null, null, null, null, null, true, cbSuccess, cbFailure);
 
 };
@@ -101,7 +138,7 @@ util.getSpeciesDataForTimePoint = function(date, time, focalChimpId, cbSuccess, 
 
     var selectionArgs = [date, focalChimpId, time];
 
-    window.odkData.query('other_species', whereClause, selectionArgs, 
+    window.odkData.query('other_species', whereClause, selectionArgs,
         null, null, null, null, null, null, true, cbSuccess, cbFailure);
 
 };
@@ -129,7 +166,7 @@ util.getKeysToAppendToURL = function(date, time, focalChimp) {
 
 util.genUUID = function() {
     // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
-    var id = 'uuid:' + 
+    var id = 'uuid:' +
     'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random()*16|0, v = (c === 'x') ? r : (r&0x3|0x8);
         return v.toString(16);
