@@ -10,19 +10,19 @@ function display() {
     // Set the background to be a picture.
     body.css('background-image', 'url(img/hallway.jpg)');
 
-    var viewFacilitiesButton = $('#filter-facilities-by-geo');
+    var viewFacilitiesButton = $('#filter-facilities-by-reg-type');
     viewFacilitiesButton.on(
         'click',
         function() {
-            odkTables.launchHTML('config/assets/filterHealthFacilitiesByGeo.html');
+            odkTables.launchHTML('config/assets/filterHealthFacilitiesByRegType.html');
         }
     );
 
-    var viewRefrigeratorsButton = $('#filter-facilities-by-type');
+    var viewRefrigeratorsButton = $('#search-facilities-by-name-id');
     viewRefrigeratorsButton.on(
         'click',
         function() {
-            odkTables.launchHTML('config/assets/filterHealthFacilitiesByType.html');
+            odkTables.launchHTML('config/assets/searchHealthFacilitiesByNameId.html');
         }
     );
 

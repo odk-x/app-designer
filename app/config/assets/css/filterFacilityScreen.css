@@ -1,12 +1,12 @@
 /* CSS Stylesheet - Homescreen*/
-body {
-    position: relative;
-    background-color: cadetblue;
-    font-family: arial;
-    margin: 0;
-    text-align: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 100%;
+.form-label {
+    font-size: 20px;
+    color: white;
+}
+
+.btn-filter {
+    font-weight: normal;
+    margin-top: 50px;
+    font-family: Helvetica;
+    border: teal;
 }
