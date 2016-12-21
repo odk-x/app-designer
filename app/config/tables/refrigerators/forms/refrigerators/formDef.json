@@ -10,13 +10,22 @@
         "_row_num": 2
       },
       {
+        "clause": "if",
+        "condition": 0,
+        "_row_num": 3
+      },
+      {
         "type": "select_one",
         "values_list": "health_facility_list",
         "name": "facility_row_id",
         "display": {
           "text": "Choose the health facility:"
         },
-        "_row_num": 3
+        "_row_num": 4
+      },
+      {
+        "clause": "end if",
+        "_row_num": 5
       },
       {
         "type": "select_one",
@@ -25,11 +34,11 @@
         "display": {
           "text": "Choose the refrigerator model:"
         },
-        "_row_num": 4
+        "_row_num": 6
       },
       {
         "clause": "begin screen",
-        "_row_num": 5
+        "_row_num": 7
       },
       {
         "type": "text",
@@ -37,7 +46,7 @@
         "display": {
           "text": "Enter the tracking ID:"
         },
-        "_row_num": 6
+        "_row_num": 8
       },
       {
         "type": "number",
@@ -45,7 +54,7 @@
         "display": {
           "text": "Enter the year installed:"
         },
-        "_row_num": 7
+        "_row_num": 9
       },
       {
         "type": "select_one",
@@ -54,15 +63,15 @@
         "display": {
           "text": "Choose the power source:"
         },
-        "_row_num": 8
+        "_row_num": 10
       },
       {
         "clause": "end screen",
-        "_row_num": 9
+        "_row_num": 11
       },
       {
         "clause": "begin screen",
-        "_row_num": 10
+        "_row_num": 12
       },
       {
         "type": "select_one",
@@ -71,7 +80,7 @@
         "display": {
           "text": "Choose the current use status:"
         },
-        "_row_num": 11
+        "_row_num": 13
       },
       {
         "type": "select_one",
@@ -80,7 +89,7 @@
         "display": {
           "text": "Working status:"
         },
-        "_row_num": 12
+        "_row_num": 14
       },
       {
         "type": "select_one",
@@ -89,7 +98,7 @@
         "display": {
           "text": "Reason not working:"
         },
-        "_row_num": 13
+        "_row_num": 15
       },
       {
         "type": "select_one",
@@ -98,11 +107,11 @@
         "display": {
           "text": "Voltage regulator?"
         },
-        "_row_num": 14
+        "_row_num": 16
       },
       {
         "clause": "end screen",
-        "_row_num": 15
+        "_row_num": 17
       }
     ],
     "choices": [
@@ -681,7 +690,7 @@
       "facility_row_id": {
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 4,
             "section_name": "survey"
           }
         ],
@@ -692,7 +701,7 @@
       "model_row_id": {
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -703,7 +712,7 @@
       "tracking_id": {
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -713,7 +722,7 @@
       "year": {
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
@@ -723,7 +732,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -734,7 +743,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
@@ -745,7 +754,7 @@
       "working_status": {
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -756,7 +765,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 15,
             "section_name": "survey"
           }
         ],
@@ -767,7 +776,7 @@
       "voltage_regulator": {
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 16,
             "section_name": "survey"
           }
         ],
@@ -806,11 +815,11 @@
             "display": {
               "text": "Choose the health facility:"
             },
-            "_row_num": 3,
-            "__rowNum__": 2,
+            "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen3",
+            "_branch_label_enclosing_screen": "survey/_screen4",
             "promptIdx": 1
           },
           {
@@ -820,11 +829,11 @@
             "display": {
               "text": "Choose the refrigerator model:"
             },
-            "_row_num": 4,
-            "__rowNum__": 3,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen4",
+            "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 2
           },
           {
@@ -833,11 +842,11 @@
             "display": {
               "text": "Enter the tracking ID:"
             },
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen5",
+            "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 3
           },
           {
@@ -846,11 +855,11 @@
             "display": {
               "text": "Enter the year installed:"
             },
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "prompt",
             "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen5",
+            "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 4
           },
           {
@@ -860,11 +869,11 @@
             "display": {
               "text": "Choose the power source:"
             },
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen5",
+            "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 5
           },
           {
@@ -874,11 +883,11 @@
             "display": {
               "text": "Choose the current use status:"
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_branch_label_enclosing_screen": "survey/_screen12",
             "promptIdx": 6
           },
           {
@@ -888,11 +897,11 @@
             "display": {
               "text": "Working status:"
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_branch_label_enclosing_screen": "survey/_screen12",
             "promptIdx": 7
           },
           {
@@ -902,11 +911,11 @@
             "display": {
               "text": "Reason not working:"
             },
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_branch_label_enclosing_screen": "survey/_screen12",
             "promptIdx": 8
           },
           {
@@ -916,19 +925,19 @@
             "display": {
               "text": "Voltage regulator?"
             },
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_branch_label_enclosing_screen": "survey/_screen12",
             "promptIdx": 9
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 16,
-            "_branch_label_enclosing_screen": "survey/_screen16",
+            "_row_num": 18,
+            "_branch_label_enclosing_screen": "survey/_screen18",
             "promptIdx": 10
           }
         ],
@@ -943,75 +952,101 @@
             "operationIdx": 0
           },
           {
+            "clause": "if",
+            "condition": 0,
             "_row_num": 3,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 2,
+            "_token_type": "goto_label",
+            "_branch_label": "_then3",
             "operationIdx": 1
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else5",
+            "_row_num": 5,
+            "operationIdx": 2
           },
           {
             "_row_num": 4,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 9,
-              "__rowNum__": 8,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif5",
+            "_row_num": 5,
+            "operationIdx": 4
+          },
+          {
+            "_row_num": 6,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
+          },
+          {
             "clause": "begin screen",
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 15,
-              "__rowNum__": 14,
+              "_row_num": 11,
+              "__rowNum__": 10,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 17,
+              "__rowNum__": 16,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
+            "operationIdx": 7
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 16,
-            "operationIdx": 5
+            "_row_num": 18,
+            "operationIdx": 8
           },
           {
-            "_row_num": 16,
+            "_row_num": 18,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 6
+            "operationIdx": 9
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 16,
-            "operationIdx": 7
+            "_row_num": 18,
+            "operationIdx": 10
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_screen3": 1,
-          "_screen4": 2,
-          "_screen5": 3,
-          "_screen10": 4,
-          "_contents": 6,
-          "_screen16": 6
+          "_then3": 3,
+          "_screen4": 3,
+          "_else5": 5,
+          "_endif5": 5,
+          "_screen6": 5,
+          "_screen7": 6,
+          "_screen12": 7,
+          "_contents": 9,
+          "_screen18": 9
         }
       },
       "initial": {
@@ -1207,7 +1242,7 @@
       "facility_row_id": {
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 4,
             "section_name": "survey"
           }
         ],
@@ -1221,7 +1256,7 @@
       "model_row_id": {
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -1235,7 +1270,7 @@
       "tracking_id": {
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 8,
             "section_name": "survey"
           }
         ],
@@ -1248,7 +1283,7 @@
       "year": {
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
@@ -1261,7 +1296,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -1275,7 +1310,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
@@ -1289,7 +1324,7 @@
       "working_status": {
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -1303,7 +1338,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 15,
             "section_name": "survey"
           }
         ],
@@ -1317,7 +1352,7 @@
       "voltage_regulator": {
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 16,
             "section_name": "survey"
           }
         ],
