@@ -8,10 +8,12 @@ var regionQueryString = 'regionLevel2 = ?';
 var typeQueryString = 'facility_type = ?';
 var powerSourceQueryString = 'power_source = ?';
 
-var bucket0 = '0-1 years';
-var bucket1 = '2-4 years';
-var bucket2 = '5-10 years';
-var bucket3 = '10+ years';
+var bucket0 = 0;
+var bucket1 = 1;
+var bucket2 = 2;
+var bucket3 = 3;
+
+var bucketLabels = ['0-1 years','2-4 years','5-10 years','10+ years'];
 
 var healthFacilityData = {};
 var frigData = {};
@@ -162,6 +164,18 @@ function getDataIndex(dataSet, bucket) {
     return -1;
 }
 
+function getLabelForAgeBucket(bucket) {
+
+    if (Number.isInteger(bucket)) {
+        var intBucket = parseInt(bucket);
+        if (intBucket >= 0 && intBucket < bucketLabels.length) {
+            return bucketLabels[bucket % (bucketLabels.length)];
+        }
+    }
+
+    return -1;
+}
+
 function putFrigInAgeBucket(frigYear) {
     var refYear = 2011;
 
@@ -215,6 +229,7 @@ function frigHistogramByAge(divName, yAxisText) {
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom")
+        .tickFormat(getLabelForAgeBucket);
 
     var yAxis = d3.svg.axis()
         .scale(y)
@@ -234,6 +249,11 @@ function frigHistogramByAge(divName, yAxisText) {
             dataJ[idx].value++;
         }
     }
+
+    // sort by bucket for axis labels
+    dataJ.sort(function (a, b) {
+        return a.bucket - b.bucket;
+    });
 
     x.domain(dataJ.map(function(d) { return d.bucket; }));
     y.domain([0, d3.max(dataJ, function(d) { return d.value; })]);
