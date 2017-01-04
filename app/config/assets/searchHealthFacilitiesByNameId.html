@@ -2,14 +2,13 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!--link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
-        <link href="ratchet/css/ratchet-theme-android.css" type="text/css" rel="stylesheet" /-->
         <link href="../../system/libs/bootstrap-3.1.1-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
         <link href="css/filterFacilityScreen.css" type="text/css" rel="stylesheet" />
         <link href="css/homeScreen.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="libs/jquery.js"></script>
         <script type="text/javascript" src="../../system/libs/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="js/searchHealthFacilitiesByNameId.js"></script>
     </head>
 
@@ -22,14 +21,15 @@
                     <div class="form-group">
                         <label class="form-label" for="search_type">Search By:</label>
                         <select class="form-control" id="search_type">
-                        <option selected value="none">None</option>
+                            <option selected value="none">None</option>
                             <option value="facility_name">Name</option>
                             <option value="facility_id">Id</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div>
                         <label class="form-label" for="search_text">Search Text:</label>
-                        <input type="text" class="form-control" id="search_text">
+                        <input list="facilities" id="search_text" class="selectSearchText">
+                            <datalist id="facilities"></datalist>
                     </div>
                     <button id="search-facilities-by-name-id" type="submit" class="btn btn-launch btn-filter btn-default">Search</button>
                 </form>
