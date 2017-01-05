@@ -73,6 +73,16 @@ function getDataIndex(dataSet, x) {
     return -1;
 }
 
+var getAngle = function (d) {
+    var angle = (180 / Math.PI * (d.startAngle + d.endAngle) / 2 - 90)
+    if (angle > 180 && angle <= 270) {
+        angle = angle - 180;
+    } else if (angle > 90 && angle <= 180) {
+        angle = angle + 180;
+    }
+    return angle;
+};
+
 function displayHealthFacilityGridPower() {
     var paramWidth = 500;
     var paramHeight = 500;
@@ -80,7 +90,7 @@ function displayHealthFacilityGridPower() {
     var margin = {top: 20, right: 20, bottom: 40, left: 80},
         width = paramWidth - margin.left - margin.right,
         height = paramHeight - margin.top - margin.bottom,
-        radius = Math.min(width, height) / 2;
+        radius = Math.min(width, height) / 3;
 
     var dataJ = [];
     for (var i = 0; i < healthFacilityData.getCount(); i++) {
@@ -97,8 +107,10 @@ function displayHealthFacilityGridPower() {
     }
 
     var arc = d3.svg.arc()
-        .outerRadius(radius - 10)
+        .outerRadius(radius + 50)
         .innerRadius(0);
+
+    var pos = d3.svg.arc().innerRadius(radius + 2).outerRadius(radius + 2);
 
     var pie = d3.layout.pie()
         .sort(null)
@@ -143,13 +155,8 @@ function displayHealthFacilityGridPower() {
 
     g.append("text")
         .attr("transform", function(d) {
-            var a = arc.centroid(d) + "";
-            var cent = a.split(",");
-            var temp = 0;
-            for (; temp < 2; temp++) {
-                cent[temp] = cent[temp] * 1.3;
-            }
-            return "translate(" + cent[0] + "," + cent[1] + ")"; })
+            return "translate(" + pos.centroid(d) + ") " +
+                    "rotate(" + getAngle(d) + ")"; })
         .style("text-anchor", "middle")
         .style("alignment-baseline", "middle")
         .text(function(d, i) { return dataJ[i].x; });
