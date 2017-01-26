@@ -11,7 +11,7 @@
 
         function display() {
             var benData = document.createElement("button");
-            benData.setAttribute("id", "button1");
+            benData.setAttribute("id", "beneficiary");
             benData.innerHTML = "View Beneficiary Data";
             benData.onclick = function() {
               odkTables.launchHTML(
@@ -20,7 +20,7 @@
             document.getElementById("wrapper").appendChild(benData);
 
             var delData = document.createElement("button");
-            delData.setAttribute("id", "button2");
+            delData.setAttribute("id", "delivery");
             delData.innerHTML = "View Delivery Data";
             delData.onclick = function() {
               odkTables.launchHTML(
@@ -35,7 +35,7 @@
 
     <body onload="display();">
         <div id="main">
-            <h1>Collected Data</h1>
+            <h1 id="title">Collected Data</h1>
             <div id="wrapper"></div>
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>

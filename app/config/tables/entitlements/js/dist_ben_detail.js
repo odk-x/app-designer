@@ -3,9 +3,11 @@
  
 var entitlementsResultSet = {};
 var compStr = 'COMPLETE';
+var timer;
 
 var display = function() {
   odkData.getViewData(cbSuccess, cbFailure);
+  console.log('displayed');
 };
 
 var cbSuccess = function (result) {
@@ -19,16 +21,16 @@ var cbSuccess = function (result) {
   $('#FIELD_7').text(entitlementsResultSet.get('is_override'));
   $('#FIELD_9').text(entitlementsResultSet.get('beneficiary_code'));
   updateEntitlements();
-  var launchButton = $('#launch');
-  if (entitlementsResultSet.get('is_delivered') == 'true') {
-    launchButton.hide();
-  }
-  launchButton.on(
+  $('#launch').on(
     'click',
     function() {
+      console.log("recognized click");
+      //timer = setInterval(updateEntitlements, 1000);
       if (entitlementsResultSet.get('is_delivered') == 'false') {
         var jsonMap = getJSONMapValues();
+        console.log("will add row");
         odkTables.addRowWithSurvey('deliveries', 'deliveries', null, jsonMap);
+        console.log('timeout should be set');
       }
     });
 };
@@ -46,8 +48,10 @@ var queryCBSuccess = function(result) {
     var entitlement_id = result.get('entitlement_id');
     var struct = {};
     struct.is_delivered = result.get('is_delivered');
+    console.log("huh???");
+    $('#launch').hide();
+    //clearInterval(timer);
     odkData.updateRow('entitlements', struct, entitlement_id, updateCBSuccess, updateCBFailure);
-    entitlementsResultSet.is_delivered = result.is_delivered;
   }
 }
 

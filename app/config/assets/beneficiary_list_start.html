@@ -13,7 +13,7 @@
 
             /*    Screen new client option that launches new client list view */
             var active = document.createElement("button");
-            active.setAttribute("id", "button1");
+            active.setAttribute("id", "active");
             active.innerHTML = "Active Beneficiaries";
             active.onclick = function() {
               odkTables.openTableToListView(
@@ -26,7 +26,7 @@
             // Follow up with existing client option that launches
             // 'femaleClients' table list view
             var disabled = document.createElement("button");
-            disabled.setAttribute("id", "button2");
+            disabled.setAttribute("id", "disabled");
             disabled.innerHTML = "Disabled Beneficiaries";
             disabled.onclick = function() {
               odkTables.openTableToListView(
@@ -42,7 +42,7 @@
 
     <body onload="display();">
         <div id="main">
-            <h1>Beneficiary Lists</h1>
+            <h1 id="title">Beneficiary Lists</h1>
             <div id="wrapper"></div>
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>

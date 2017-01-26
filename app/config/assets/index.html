@@ -12,65 +12,36 @@
         // Displays homescreen
         function display() {
 
-            /*    Screen new client option that launches new client list view */
             var newClient = document.createElement("button");
             newClient.innerHTML = "Registration";
+            newClient.setAttribute("id", "register");
             newClient.onclick = function() {
                 odkTables.launchHTML(
                     'config/assets/pre_registration.html');
             }
             document.getElementById("wrapper").appendChild(newClient);    
 
-            // Follow up with existing client option that launches
-            // 'femaleClients' table list view
+
             var followUp = document.createElement("button");
             followUp.innerHTML = "Delivery";
+            followUp.setAttribute("id", "deliver");
             followUp.onclick = function() {
                 odkTables.launchHTML(
-                    'config/assets/delivery_options.html');
+                    'config/assets/choose_method.html?title=' + encodeURIComponent('Choose Delivery Method') +
+                    '&secondary_manual_title=' + encodeURIComponent('Please Enter Beneficiary Code')+ '&type=delivery');
             }
             document.getElementById("wrapper").appendChild(followUp);
 
             var viewData = document.createElement("button");
             viewData.innerHTML = "View Collected Data";
+            viewData.setAttribute("id", "data");
             viewData.onclick = function() {
               odkTables.launchHTML(
                   'config/assets/data_start.html');
             }
             document.getElementById("wrapper").appendChild(viewData);
 
-            // Send data option that luanches send finalized forms screen in
-            // Collect
-            /*var sendData = document.createElement("button");
-            sendData.setAttribute("id", "button4");
-            sendData.innerHTML = "Beneficiary List";
-            sendData.onclick = function() {
-              odkTables.launchHTML(
-                  'config/assets/beneficiary_list_start.html');
-            }
-            document.getElementById("wrapper").appendChild(sendData);
-
-            var search = document.createElement('button');
-            search.setAttribute('id', 'button5');
-            search.innerHTML = 'Beneficiary Search';
-            search.onclick = function() {
-                odkTables.launchHTML(
-                    'config/assets/beneficiary_search.html');
-            }
-            document.getElementById('wrapper').appendChild(search);
-
-            var del = document.createElement('button');
-            del.setAttribute('id', 'button6');
-            del.innerHTML = 'Deliveries';
-            del.onclick = function() {
-                odkTables.openTableToListView(
-                'deliveries', null, null
-                , 'config/tables/deliveries/html/deliveries_list.html');
-            }
-            document.getElementById('wrapper').appendChild(del);*/
-
-            // Create a distribution Override if user is a tables superuser
-            
+            // Create a distribution Override if user is a tables superuser            
             odkData.getRoles(rolesCBSuccess, rolesCBFailure);
         }
 

@@ -13,7 +13,7 @@
         function display() {
 
             var delList = document.createElement('button');
-            delList.setAttribute('id', 'button1');
+            delList.setAttribute('id', 'all');
             delList.innerHTML = 'View All Deliveries';
             delList.onclick = function() {
                 odkTables.openTableToListView(
@@ -23,7 +23,7 @@
             document.getElementById('wrapper').appendChild(delList);   
 
             var search = document.createElement('button');
-            search.setAttribute('id', 'button2');
+            search.setAttribute('id', 'searcher');
             search.innerHTML = 'Advanced Search';
             search.onclick = function() {
                 odkTables.launchHTML(

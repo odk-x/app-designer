@@ -14,24 +14,31 @@
         var search_font;
         
         function start() {
+            console.log('starting');
             odkData.query('registration', null, null, null, null, null, null, 
                                     null, null, null, populateSuccess, populateFailure);
 
-            search_font = $('#search').css('font-size');
+            //search_font = $('#search').css('font-size');
         }
 
         function populateSuccess(result) {
+            console.log('populateSuccess');
             var columns = result.getColumns();
-            columns.forEach(addField);
+            console.log(columns);
+            $.each(columns, addField);
+            //columns.forEach(addField);
         }
 
         function populateFailure(error) {
             console.log('populateFailure with error: ' + error);
         }
 
-        function addField(item, index) {
+        function addField(index, item) {
+            console.log('adding column: ' + item);
             if (!item.startsWith('_')) {
+                console.log('if statement is fine');
                 $('#field').append($("<option/>").attr("value", item).text(item));
+                console.log('copy pasta is fine');
             } 
         }
 
@@ -63,7 +70,7 @@
                     [sqlSelectionArgs], 'config/tables/registration/html/registration_list.html');
         }
 
-        $(window).resize(function() {
+        /*$(window).resize(function() {
             helper('search', search_font, 'font-size');
             windowHeight = $(window).innerHeight(); 
 
@@ -79,7 +86,7 @@
                     $('#' + name).css({'font-size':value});
                 }
             }
-        }
+        }*/
         
         </script>
     </head>

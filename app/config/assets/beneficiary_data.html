@@ -12,17 +12,17 @@
         // Displays homescreen
         function display() {
 
-            var sendData = document.createElement("button");
-            sendData.setAttribute("id", "button4");
-            sendData.innerHTML = "Beneficiary Lists";
-            sendData.onclick = function() {
+            var list = document.createElement("button");
+            list.setAttribute("id", "lists");
+            list.innerHTML = "Beneficiary Lists";
+            list.onclick = function() {
               odkTables.launchHTML(
                   'config/assets/beneficiary_list_start.html');
             }
-            document.getElementById("wrapper").appendChild(sendData);
+            document.getElementById("wrapper").appendChild(list);
 
             var search = document.createElement('button');
-            search.setAttribute('id', 'button5');
+            search.setAttribute('id', 'searcher');
             search.innerHTML = 'Advanced Search';
             search.onclick = function() {
                 odkTables.launchHTML(
@@ -50,7 +50,7 @@
 
     <body onload="display();">
         <div id="main">
-            <h1>Beneficiary Data</h1>
+            <h1 id="title">Beneficiary Data</h1>
             <div id="wrapper"></div>
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>

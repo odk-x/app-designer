@@ -10,11 +10,13 @@
 
         function display() {
             $('#regular').on('click', function() {
-                odkTables.launchHTML('config/assets/registration_options.html')
+                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent('Registration Methods') 
+                    + '&secondary_manual_title=' + encodeURIComponent('Please Enter Beneficiary Code') + '&type=registration');
             });
 
             $('#voucher').on('click', function() {
-                odkTables.launchHTML('config/assets/voucher_options.html');
+                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent('Voucher Methods') 
+                    + '&secondary_manual_title=' + encodeURIComponent('Please Enter Voucher Code') + '&type=voucher');
             });
         }
 
