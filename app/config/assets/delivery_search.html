@@ -29,7 +29,7 @@
         }
 
         function addField(item, index) {
-            if (!item.startsWith('_')) {
+            if (item.charAt(0) != '_') {
                 $('#field').append($("<option/>").attr("value", item).text(item));
             } 
         }

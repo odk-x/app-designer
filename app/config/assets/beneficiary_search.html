@@ -25,7 +25,9 @@
             console.log('populateSuccess');
             var columns = result.getColumns();
             console.log(columns);
-            $.each(columns, addField);
+            for (var i = 0; i < columns.length; i++) {
+                addField(columns[i]);
+            }
             //columns.forEach(addField);
         }
 
@@ -33,12 +35,11 @@
             console.log('populateFailure with error: ' + error);
         }
 
-        function addField(index, item) {
+        function addField(item) {
             console.log('adding column: ' + item);
-            if (!item.startsWith('_')) {
+            if (item.charAt(0) !=('_')) {
                 console.log('if statement is fine');
                 $('#field').append($("<option/>").attr("value", item).text(item));
-                console.log('copy pasta is fine');
             } 
         }
 

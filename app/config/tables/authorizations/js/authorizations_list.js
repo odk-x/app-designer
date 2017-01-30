@@ -44,10 +44,9 @@ var resumeFn = function(fIdxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.openDetailView (
-                  'authorizations',
-                  rowId,
-                  'config/tables/authorizations/html/authorizations_detail.html');
+                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent('Choose Method')
+                  + '&secondary_manual_title=' + encodeURIComponent('Enter Beneficiary Code')
+                  + '&type=ent_override&authorization_id=' + rowId);
             }
         });
     }

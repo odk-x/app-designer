@@ -6,9 +6,118 @@
         <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
+        <script type="text/javascript">
+
+            'use strict';
+             
+            var registrationResultSet = {};
+            var type = util.getQueryParameter('type');
+
+            function cbSuccess(result) {
+
+              registrationResultSet = result;
+              var first_name = registrationResultSet.get('first_name');
+              var last_name = registrationResultSet.get('last_name');
+              $('#TITLE').text(first_name + ' ' + last_name);
+
+              $('#FIELD_17').text(registrationResultSet.get('beneficiary_code'));
+
+              $('#FIELD_2').text(registrationResultSet.get('sector'));
+
+              $('#FIELD_4').text(registrationResultSet.get('address'));
+              $('#FIELD_1').text(registrationResultSet.get('id_number'));
+              $('#FIELD_5').text(registrationResultSet.get('city'));
+
+              $('#FIELD_8').text(registrationResultSet.get('telephone'));
+              $('#FIELD_24').text(registrationResultSet.get('mobile_provider'));
+
+            if (registrationResultSet.get('is_active') == 'true' && type == 'delivery') {
+                odkData.query('entitlements', 'beneficiary_code = ? and is_delivered = ?',
+                            [registrationResultSet.get('beneficiary_code'), 'false'],
+                            null, null, null, null, null, null, null, entCBSuccess, entCBFailure);
+            }  else if (registrationResultSet.get('is_active') == 'false' && type == 'delivery') {
+                $('#reject').text('Beneficiary is Disabled');
+            } else {
+                var activate = $('#followup');
+                if (type == 'activate') {
+                  activate.text('Enable Beneficiary');
+                } else {
+                  activate.text('Disable Beneficiary');
+                }
+                activate.show();
+                activate.on(
+                  'click',
+                  function() {
+                    var struct = {};
+                    if (type == 'activate') {
+                      struct.is_active = 'true';
+                    } else {
+                      struct.is_active = 'false';
+                    }
+                    struct.is_override = 'true';
+                    odkData.updateRow(
+                      'registration', struct, registrationResultSet.getRowId(0), updateCBSuccess, updateCBFailure);
+                  }
+                );
+              }
+            }
+
+            function cbFailure(error) {
+              console.log('registration_detail cbFailure: getViewData failed with message: ' + error);
+            }
+
+            function updateCBSuccess(result) {
+              console.log('Update is_active callback success');
+              if (type == 'activate') {
+                $('#message').text('Successfully Enabled!');
+              } else {
+                  $('#message').text('Successfully Disabled!');
+              }
+            }
+
+            function updateCBFailure(result) {
+              console.log('Update is_active callback failure');
+            }
+
+            function entCBSuccess(result) {
+              if (result.getCount() > 0) {
+                console.log(result.getCount());
+                var deliver = $('#followup');
+                deliver.text('Choose an Authorized Item Pack To Deliver');
+                deliver.show();
+                deliver.on(
+                    'click',
+                    function() {
+                        odkTables.openTableToListView(
+                            'entitlements',
+                            'beneficiary_code = ? and is_delivered = ?',
+                            [registrationResultSet.get('beneficiary_code'), 'false'],
+                            'config/tables/entitlements/html/dist_ben_list.html'
+                        );
+                    }
+                );
+              } else {
+                console.log('rejected');
+                $('#reject').text('No Authorized Item Packs to Deliver');
+              }
+            }
+
+            function entCBFailure(error) {
+              console.log('entCBFailure with error: ' + error);
+            }
+
+            function display() {
+              odkData.getViewData(cbSuccess, cbFailure);
+            }
+
+
+
+        </script>
+
+
     </head>
-    <body>
-        <script type="text/javascript" src="../js/registration_detail.js"></script>
+    <body onload="display();">
         <h1><span id="TITLE" class="main-text"></span></h1>
         <!-- To query and link to the result, replace the placeholders and put the
         following around the <span></span> tags.
@@ -27,10 +136,7 @@
         <p><span id="reject"></span></p>
         </br>
 
-        <button id="deliver" style="display:none">Choose an Authorized Item Pack To Deliver</button>
-
-        <script>
-            $(display());  // calls the detail display function when ready
-        </script>
+        <button id="followup" style="display:none">Choose an Authorized Item Pack To Deliver</button>
+        <p><span id="message"></span></p>
     </body>
 </html>

@@ -18,7 +18,7 @@
             active.onclick = function() {
               odkTables.openTableToListView(
                 'registration', 'is_active = ?', ['true']
-                , 'config/tables/registration/html/registration_list.html');
+                , 'config/tables/registration/html/registration_list.html?type=delivery');
 
             }
             document.getElementById("wrapper").appendChild(active);    
@@ -31,7 +31,7 @@
             disabled.onclick = function() {
               odkTables.openTableToListView(
                 'registration', 'is_active = ?', ['false']
-                , 'config/tables/registration/html/registration_list.html');
+                , 'config/tables/registration/html/registration_list.html?type=delivery');
             }
             document.getElementById("wrapper").appendChild(disabled);    
         }

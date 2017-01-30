@@ -15,7 +15,8 @@
             enable.setAttribute("id", "button1");
             enable.innerHTML = "Enable Beneficiary";
             enable.onclick = function() {
-                odkTables.launchHTML('config/assets/enable_start.html');
+                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent('Choose Method') +
+                    '&secondary_manual_title=' + encodeURIComponent('Enable Beneficiary') + '&type=activate');
             }
             document.getElementById("wrapper").appendChild(enable);    
 
@@ -23,7 +24,8 @@
             disable.setAttribute("id", "button2");
             disable.innerHTML = "Disable Beneficiary";
             disable.onclick = function() {
-                odkTables.launchHTML('config/assets/disable_start.html');
+                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent('Choose Method') +
+                    '&secondary_manual_title=' + encodeURIComponent('Disable Beneficiary') + '&type=disable');
             }
             document.getElementById("wrapper").appendChild(disable);    
         }

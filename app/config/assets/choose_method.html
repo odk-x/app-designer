@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <link href="css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../config/assets/js/util.js"></script>
+        <script type="text/javascript">
+        var insideQueue = false;
+        var htmlFileNameValue = "delivery_start";
+        var userActionValue = "launchBarcode";
+        var myTimeoutVal = null;
+        var idComponent = "";
+
+
+        function display() {
+            var type = util.getQueryParameter('type');
+            if (type != 'ent_override') {
+                $('#view_details').hide();
+            } else {
+                idComponent = "&authorization_id=" + encodeURIComponent(util.getQueryParameter('authorization_id'));
+                $('#view_details').on('click', function() {
+                   odkTables.openDetailView(
+                  'authorizations',
+                  util.getQueryParameter('authorization_id'),
+                  'config/tables/authorizations/html/authorizations_detail.html');
+                });
+            }
+            $('#title').text(util.getQueryParameter('title'));
+
+            $('#barcode').on('click', function() {
+                odkCommon.registerListener(function() {
+                        callBackFn();
+                });
+                var dispatchString = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
+                odkCommon.doAction(dispatchString, 'com.google.zxing.client.android.SCAN', null);
+            });
+            myTimeoutVal = setTimeout(callBackFn(), 1000);
+
+
+            $('#manual').on('click', function() {
+                odkTables.launchHTML('config/assets/manual.html?title=' + encodeURIComponent(util.getQueryParameter('secondary_manual_title')) + '&type=' + encodeURIComponent(type) + idComponent);
+            });
+
+        }
+
+        function callBackFn () {
+            if (insideQueue == true) return;
+            insideQueue = true;
+            var value = odkCommon.viewFirstQueuedAction();
+            console.log('callback entered with value: ' + value);
+            if ( value !== null && value !== undefined ) {
+                var action = JSON.parse(value);
+                var dispatchStr = JSON.parse(action.dispatchString);
+
+                console.log("callBackFn: action: " + dispatchStr.userAction + " htmlPath: " + dispatchStr.htmlPath);
+
+                if (dispatchStr.userAction === userActionValue &&
+                    dispatchStr.htmlPath === htmlFileNameValue &&
+                    action.jsonValue.status === -1) {
+                    clearTimeout(myTimeoutVal);
+                    odkTables.launchHTML('config/assets/scan.html?code=' + encodeURIComponent(action.jsonValue.result.SCAN_RESULT) +
+                        '&type=' + encodeURIComponent(util.getQueryParameter('type')) + idComponent);
+                    odkCommon.removeFirstQueuedAction();
+
+                }
+            }
+        }
+
+        </script>
+    </head>
+
+    <body onload="display()">
+        <div id="main">
+            <h1 id="title"></h1>
+            <button type="reg" id="barcode">Scan Barcode</button>
+            <button type ='reg' id='manual'>Manually Enter</button>
+            <button type ='reg' id='view_details'>View Authorization Details</button>
+        </div>
+        <div id="logo"><img src="img/small_2025.jpg"></div>
+    </body>
+</html>

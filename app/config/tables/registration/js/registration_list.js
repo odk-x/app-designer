@@ -45,7 +45,10 @@ var registrationCBFailure = function(error) {
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
-var resumeFn = function(fIdxStart) {  
+var resumeFn = function(fIdxStart) { 
+  $.getScript("../../../assets/js/util.js", function(){
+    alert("Script loaded but not necessarily executed.");
+  }); 
     odkData.getViewData(registrationCBSuccess, registrationCBFailure);
 
     idxStart = fIdxStart;
@@ -75,7 +78,8 @@ var resumeFn = function(fIdxStart) {
                 odkTables.openDetailView(
                   tableId,
                   rowId,
-                  'config/tables/registration/html/registration_detail.html');
+                  'config/tables/registration/html/registration_detail.html?type=' 
+                  + encodeURIComponent(util.getQueryParameter('type')));
             }
         });
     }
