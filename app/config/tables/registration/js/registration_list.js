@@ -1,31 +1,9 @@
-/**
- * This is the file that will be creating the list view.
- */
-/* global $, control */
+
 'use strict';
-
-// if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: control.getFileAsUrl('output/debug/beneficiaries_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-
-
-// }
  
 var idxStart = -1;
 var registrationResultSet = {};
 
-//var data = control.query('beneficiaries', null, null);
-            
-/** 
- * Use chunked list view for larger tables: We want to chunk the displays so
- * that there is less load time.
- */
  
 /**
  * Called when page loads to display things (Nothing to edit here)
@@ -46,15 +24,11 @@ var registrationCBFailure = function(error) {
  * Called when page loads to display things (Nothing to edit here)
  */
 var resumeFn = function(fIdxStart) { 
-  $.getScript("../../../assets/js/util.js", function(){
-    alert("Script loaded but not necessarily executed.");
-  }); 
+  $.getScript("../../../assets/js/util.js", function(){}); 
     odkData.getViewData(registrationCBSuccess, registrationCBFailure);
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
-    // The first time through we're going to make a map of typeId to
-    // typeName so that we can display the name of each shop's specialty.
     if (idxStart === 0) {
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
