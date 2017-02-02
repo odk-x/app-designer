@@ -68,7 +68,7 @@
         function launch() {
             console.log(sqlWhereClause + ' ---- ' + sqlSelectionArgs);
                 odkTables.openTableToListView('registration', sqlWhereClause,
-                    [sqlSelectionArgs], 'config/tables/registration/html/registration_list.html');
+                    [sqlSelectionArgs], 'config/tables/registration/html/registration_list.html?type=delivery');
         }
 
         /*$(window).resize(function() {

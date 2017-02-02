@@ -1,2 +1,2 @@
-table_keys=entitlements
-entitlements.filename=config/assets/csv/finalized_entitlements.csv
+table_keys=registration
+registration.filename=config/assets/csv/finalized_registration.csv
