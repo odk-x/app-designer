@@ -1,2 +1,2 @@
 table_keys=registration
-registration.filename=config/assets/csv/finalized_registration.csv
+registration.filename=config/assets/csv/registration.csv
