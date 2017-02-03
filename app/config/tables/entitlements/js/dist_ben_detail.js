@@ -13,11 +13,8 @@ var display = function() {
 var cbSuccess = function (result) {
   entitlementsResultSet = result;
   $('#FIELD_1').text(entitlementsResultSet.get('authorization_name'));
-  $('#FIELD_2').text(entitlementsResultSet.get('authorization_id'));
   $('#FIELD_3').text(entitlementsResultSet.get('item_pack_name'));
-  $('#FIELD_4').text(entitlementsResultSet.get('item_pack_id'));
   $('#FIELD_5').text(entitlementsResultSet.get('item_description'));
-  $('#FIELD_8').text(entitlementsResultSet.get('_id'));
   $('#FIELD_7').text(entitlementsResultSet.get('is_override'));
   $('#FIELD_9').text(entitlementsResultSet.get('beneficiary_code'));
   updateEntitlements();
