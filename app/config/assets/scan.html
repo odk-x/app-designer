@@ -39,9 +39,9 @@
                     odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'false'],
                         null, null, null, null, null, null, true, deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
                 } else if (result.getCount() === 1) {
-                    $('#search_results').text('Scanned Barcode:' + code);
+                    $('#search_results').text("Active Beneficiary Found in System");
                     $('#launch').show();
-                    $('#launch').text('View Entitlements');
+                    $('#launch').text('Verify Beneficiary Information');
                     $('#launch').click(function() {
                         odkTables.openDetailView(
                       'registration',
@@ -69,7 +69,7 @@
             function deliveryDisabledCBSuccess(result) {
                 console.log('disabledCB called');
                 if (result.getCount() > 0) {
-                    $('#search_results').text('beneficiary with code \'' + code +'\' is disabled');
+                    $('#search_results').text('Beneficiary with code \'' + code +'\' is disabled');
                 } else {
                     $('#search_results').text('Scanned code not found in system');
 
@@ -310,6 +310,7 @@
             var addDistCBSuccess = function(result) {
                 console.log('authorizations_detail addDistCBSuccess');
                 $('#search_results').text('Override Successfully Created');
+                $('#launch').prop('disabled', true);
             };
 
             var addDistCBFailure = function(error) {

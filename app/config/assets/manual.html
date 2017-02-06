@@ -72,7 +72,7 @@
                     null, null, null, null, null, null, true, disabledCBSuccess, disabledCBFailure);
             } else if (result.getCount() === 1) {
                 $('#launch').show();
-                $('#launch').text('View Entitlements');
+                $('#launch').text('Verify Beneficiary Information');
                 $('#launch').click(function() {
                     odkTables.openDetailView(
                   'registration',
@@ -100,7 +100,7 @@
         function disabledCBSuccess(result) {
             console.log('disabledCB called');
             if (result.getCount() > 0) {
-                $('#search_results').text('beneficiary with code ' + ' is disabled');
+                $('#search_results').text('This beneficiary is disabled');
             } else {
                 $('#search_results').text('Beneficiary code not found in system');
 
@@ -346,6 +346,7 @@
         var addDistCBSuccess = function(result) {
             console.log('authorizations_detail addDistCBSuccess');
             $('#search_results').text('Override Successfully Created');
+            $('#launch').prop('disabled', true);
         };
 
         var addDistCBFailure = function(error) {
