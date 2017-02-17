@@ -21,16 +21,16 @@
               var last_name = registrationResultSet.get('last_name');
               $('#TITLE').text(first_name + ' ' + last_name);
 
-              $('#FIELD_17').text(registrationResultSet.get('beneficiary_code'));
+              $('#beneficiary_code').text(registrationResultSet.get('beneficiary_code'));
 
-              $('#FIELD_2').text(registrationResultSet.get('sector'));
+              $('#sector').text(registrationResultSet.get('sector'));
 
-              $('#FIELD_4').text(registrationResultSet.get('address'));
-              $('#FIELD_1').text(registrationResultSet.get('id_number'));
-              $('#FIELD_5').text(registrationResultSet.get('city'));
+              $('#address').text(registrationResultSet.get('address'));
+              $('#id_number').text(registrationResultSet.get('id_number'));
+              $('#city').text(registrationResultSet.get('city'));
 
-              $('#FIELD_8').text(registrationResultSet.get('telephone'));
-              $('#FIELD_24').text(registrationResultSet.get('mobile_provider'));
+              $('#telephone').text(registrationResultSet.get('telephone'));
+              $('#mobile_provider').text(registrationResultSet.get('mobile_provider'));
 
             if (registrationResultSet.get('is_active') == 'true' && type == 'delivery') {
                 odkData.query('entitlements', 'beneficiary_code = ? and is_delivered = ?',
@@ -39,14 +39,14 @@
             }  else if (registrationResultSet.get('is_active') == 'false' && type == 'delivery') {
                 $('#reject').text('Beneficiary is Disabled');
             } else {
-                var activate = $('#followup');
+                var action = $('#followup');
                 if (type == 'activate') {
-                  activate.text('Enable Beneficiary');
+                  action.text('Enable Beneficiary');
                 } else {
-                  activate.text('Disable Beneficiary');
+                  action.text('Disable Beneficiary');
                 }
-                activate.show();
-                activate.on(
+                action.show();
+                action.on(
                   'click',
                   function() {
                     var struct = {};
@@ -69,6 +69,7 @@
 
             function updateCBSuccess(result) {
               console.log('Update is_active callback success');
+              $("#followup").prop("disabled",true);
               if (type == 'activate') {
                 $('#message').text('Successfully Enabled!');
               } else {
@@ -127,16 +128,16 @@
         Example:<a href="#" onclick="control.openTable('TABLE_NAME',
         'COL_NAME:' + data.get('COL_NAME'));"><span id="FIELD_1"></span></a>
         -->
-        <p>Beneficiary Code: <span id="FIELD_17"></span></p>
-        <p>Sector: <span id="FIELD_2"></span></p>
-        <p>ID: <span id="FIELD_1"></span></p>
-        <p>Address: <span id="FIELD_4"></span></p>
-        <p>Telephone: <span id="FIELD_8"></span></p>
-        <p>Mobile Provider: <span id="FIELD_24"></span></p>
+        <p>Beneficiary Code: <span id="beneficiary_code"></span></p>
+        <p>Sector: <span id="sector"></span></p>
+        <p>ID: <span id="id_number"></span></p>
+        <p>Address: <span id="address"></span></p>
+        <p>Telephone: <span id="telephone"></span></p>
+        <p>Mobile Provider: <span id="mobile_provider"></span></p>
         <p><span id="reject"></span></p>
         </br>
 
-        <button id="followup" style="display:none">Choose an Authorized Item Pack To Deliver</button>
+        <button id="followup" style="display:none"></button>
         <p><span id="message"></span></p>
     </body>
 </html>

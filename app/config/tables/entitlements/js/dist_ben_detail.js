@@ -12,22 +12,18 @@ var display = function() {
 
 var cbSuccess = function (result) {
   entitlementsResultSet = result;
-  $('#FIELD_1').text(entitlementsResultSet.get('authorization_name'));
-  $('#FIELD_3').text(entitlementsResultSet.get('item_pack_name'));
-  $('#FIELD_5').text(entitlementsResultSet.get('item_description'));
-  $('#FIELD_7').text(entitlementsResultSet.get('is_override'));
-  $('#FIELD_9').text(entitlementsResultSet.get('beneficiary_code'));
+  $('#authorization_name').text(entitlementsResultSet.get('authorization_name'));
+  $('#item_pack_name').text(entitlementsResultSet.get('item_pack_name'));
+  $('#item_description').text(entitlementsResultSet.get('item_description'));
+  $('#is_override').text(entitlementsResultSet.get('is_override'));
+  $('#beneficiary_code').text(entitlementsResultSet.get('beneficiary_code'));
   updateEntitlements();
   $('#launch').on(
     'click',
     function() {
-      console.log("recognized click");
-      //timer = setInterval(updateEntitlements, 1000);
       if (entitlementsResultSet.get('is_delivered') == 'false') {
         var jsonMap = getJSONMapValues();
-        console.log("will add row");
         odkTables.addRowWithSurvey('deliveries', 'deliveries', null, jsonMap);
-        console.log('timeout should be set');
       }
     });
 };
@@ -45,7 +41,6 @@ var queryCBSuccess = function(result) {
     var entitlement_id = result.get('entitlement_id');
     var struct = {};
     struct.is_delivered = result.get('is_delivered');
-    console.log("huh???");
     $('#launch').hide();
     //clearInterval(timer);
     odkData.updateRow('entitlements', struct, entitlement_id, updateCBSuccess, updateCBFailure);

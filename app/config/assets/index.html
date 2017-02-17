@@ -50,6 +50,7 @@
             if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
                 var override = document.createElement("button");
                 override.innerHTML = "Administrator Overrides";
+                override.setAttribute("id", "overrides");
                 override.onclick = function() {
                     odkTables.launchHTML(
                         'config/assets/overrides_start.html');

@@ -10,7 +10,7 @@
     </head>
     <body>
         <script type="text/javascript" src="../js/dist_ben_detail.js"></script>
-        <h1><span id="TITLE" class="main-text"></span></h1>
+        <h1><span id="TITLE" class="main-text">Entitlement Details</span></h1>
         <!-- To query and link to the result, replace the placeholders and put the
         following around the <span></span> tags.
         <a href="#" onclick="control.openTable('TABLE_NAME', 'COL_NAME:' +
@@ -19,12 +19,11 @@
         Example:<a href="#" onclick="control.openTable('TABLE_NAME',
         'COL_NAME:' + data.get('COL_NAME'));"><span id="FIELD_1"></span></a>
         -->
-        <h3>Entitlement Details</h3>
-        <p>Authorization Name: <span id="FIELD_1"></span></p>
-        <p>Item Pack Name: <span id="FIELD_3"></span></p>
-        <p>Item Pack Description: <span id="FIELD_5"></span></p>
-        <p>Is an Override: <span id="FIELD_7"></span></p> 
-        <p>Beneficiary Code: <span id="FIELD_9"></span></p>
+        <p>Authorization Name: <span id="authorization_name"></span></p>
+        <p>Item Pack Name: <span id="item_pack_name"></span></p>
+        <p>Item Pack Description: <span id="item_description"></span></p>
+        <p>Is an Override: <span id="is_override"></span></p> 
+        <p>Beneficiary Code: <span id="beneficiary_code"></span></p>
 	<br>
 
         <button id="launch">Click to Deliver</button>

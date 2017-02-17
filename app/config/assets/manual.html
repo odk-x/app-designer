@@ -22,18 +22,7 @@
 
         function display() {
             $('#header').text(util.getQueryParameter('title'));
-
             var enter = $('#search');
-            /*setTimeout(function() {
-                var width = $(window).innerWidth();
-                var height = $(window).innerHeight();
-                document.getElementById("enter").style.width = width * .9 + "px";
-                document.getElementById("enter").style.height = height * .15 + "px";
-                document.getElementById("launch").style.width = width * .9 + "px";
-                document.getElementById("launch").style.height = height * .15 + "px";
-                document.getElementById('code').style.width = width * .6 + "px";
-                document.getElementById('code').style.height = height * .07 + 'px';
-            }, 0);*/
             var clickFunction;
             if (type == 'delivery') {
                 clickFunction = deliveryFunction;
@@ -100,7 +89,7 @@
         function disabledCBSuccess(result) {
             console.log('disabledCB called');
             if (result.getCount() > 0) {
-                $('#search_results').text('This beneficiary is disabled');
+                $('#search_results').text('This Beneficiary is Disabled');
             } else {
                 $('#search_results').text('Beneficiary code not found in system');
 

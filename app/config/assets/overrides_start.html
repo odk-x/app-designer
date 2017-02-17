@@ -13,7 +13,7 @@
 
             /*    Screen new client option that launches new client list view */
             var override_registration = document.createElement("button");
-            override_registration.setAttribute("id", "button1");
+            override_registration.setAttribute("id", "registration");
             override_registration.innerHTML = "Override Registration";
             override_registration.onclick = function() {
                 odkTables.launchHTML(
@@ -24,7 +24,7 @@
             // Follow up with existing client option that launches
             // 'femaleClients' table list view
             var override_distribution = document.createElement("button");
-            override_distribution.setAttribute("id", "button2");
+            override_distribution.setAttribute("id", "authorization");
             override_distribution.innerHTML = "Override Authorization";
             override_distribution.onclick = function() {
               odkTables.launchHTML(

@@ -1,2 +1,0 @@
-_id,_form_id,_locale,_savepoint_type,_savepoint_timestamp,_savepoint_creator,authorization_name,item_pack_id,item_pack_name,item_description,ranges,assigned_code,is_active,is_simple,_row_etag,_filter_type,_filter_value
-d2140e43-64cc-46a6-b871-0a6094b9a359,authorizations,en_US,COMPLETE,2016-12-12T18:44:45.000000684,username:orilevari,String Equality Test,f63365f1-c732-465a-b7ec-6944d9c79835,equality,test string equality,{ranges:[{min:-1000,max:1000}]},false,true,false,READ_ONLY,finalized_authorizations.csv,

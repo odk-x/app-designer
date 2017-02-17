@@ -61,6 +61,7 @@ var displayGroup = function(idxStart) {
       var item = $('<li>');
       item.attr('rowId', entitlementsResultSet.getRowId(i));
       item.attr('class', 'item_space');
+      item.attr('id', entitlementsResultSet.getRowId(i));
       var auth_name = entitlementsResultSet.getData(i, 'authorization_name');
       item.text(auth_name);
               

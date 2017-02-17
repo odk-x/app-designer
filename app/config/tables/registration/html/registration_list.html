@@ -91,6 +91,7 @@
                   var item = $('<li>');
                   item.attr('rowId', registrationResultSet.getRowId(i));
                   item.attr('class', 'item_space');
+                  item.attr('id', registrationResultSet.getData(i, '_id'));
                   var first_name = registrationResultSet.getData(i, 'first_name');
                   var last_name = registrationResultSet.getData(i, 'last_name');
                   item.text(first_name + ' ' + last_name);

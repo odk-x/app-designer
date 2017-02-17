@@ -12,7 +12,7 @@
         function display() {
 
             var enable = document.createElement("button");
-            enable.setAttribute("id", "button1");
+            enable.setAttribute("id", "enable");
             enable.innerHTML = "Enable Beneficiary";
             enable.onclick = function() {
                 odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent('Choose Method') +
@@ -21,7 +21,7 @@
             document.getElementById("wrapper").appendChild(enable);    
 
             var disable = document.createElement("button");
-            disable.setAttribute("id", "button2");
+            disable.setAttribute("id", "disable");
             disable.innerHTML = "Disable Beneficiary";
             disable.onclick = function() {
                 odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent('Choose Method') +
