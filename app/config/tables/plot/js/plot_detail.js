@@ -22,9 +22,6 @@
 var plotDetailResultSet = {};
 var visitData = {};
 var plotId;
-var insideQueue = false;
-var htmlFileNameValue = "plot_detail";
-var userActionValue = "launchBarcode";
 
 function visitCBSuccess(result) {
     visitData = result;
@@ -65,7 +62,6 @@ function display() {
     $('#lat').text(plotDetailResultSet.get('location.latitude'));
     $('#long').text(plotDetailResultSet.get('location.longitude'));
     $('#crop').text(maizeType);
-    $('#scanned-barcode').text("No value");
 
 // We want to get the count.
 //     var table = odkTables.query(
@@ -116,6 +112,7 @@ function display() {
         data.push(d);
     }
 
+    var data = _.sortBy(data, 'date');
     data.forEach(function(d) {
         d.date = parseDate(d.date);
         d.value = +d.value;
@@ -178,19 +175,6 @@ function display() {
         }
     );
 
-    var launchBarcodeButton = $('#launch-barcode');
-    launchBarcodeButton.on(
-        'click',
-        function() {
-            odkCommon.registerListener(function() {
-                    callBackFn();
-            });
-
-            var dispatchString = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
-            odkCommon.doAction(dispatchString, 'com.google.zxing.client.android.SCAN', null);
-        }
-    );
-
     var comparePlotsButton = $('#compare-plots');
     comparePlotsButton.on(
         'click',
@@ -199,34 +183,6 @@ function display() {
             odkTables.launchHTML('config/assets/plotter-compareType-chooser.html' + plotIdQueryParam);
         }
     );
-
-    myTimeoutVal = setTimeout(callBackFn(), 1000);
-}
-var myTimeoutVal = null;
-function callBackFn () {
-    if (insideQueue == true) return;
-    insideQueue = true;
-    var value = odkCommon.viewFirstQueuedAction();
-    if ( value !== null && value !== undefined ) {
-        var action = JSON.parse(value);
-        var dispatchStr = JSON.parse(action.dispatchString);
-
-        console.log("callBackFn: action: " + dispatchStr.userAction + " htmlPath: " + dispatchStr.htmlPath);
-
-        if (dispatchStr.userAction === userActionValue &&
-            dispatchStr.htmlPath === htmlFileNameValue &&
-            action.jsonValue.status === -1) {
-            $('#scanned-barcode').text(action.jsonValue.result.SCAN_RESULT);
-            clearTimeout(myTimeoutVal);
-            odkCommon.removeFirstQueuedAction();
-        } else {
-            myTimeoutVal = setTimeout(callBackFn(), 1000);
-            $('#scanned-barcode').text("No value");
-        }
-    }
-    console.log("callBackFn is called");
-    insideQueue = false;
-
 }          
 
 function setup() {
