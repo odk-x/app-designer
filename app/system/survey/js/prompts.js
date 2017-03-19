@@ -388,7 +388,9 @@ promptTypes.opening = promptTypes.base.extend({
         var displayElementName = opendatakit.getSettingValue('instance_name');
         if ( displayElementName !== null && displayElementName !== undefined ) {
             that.renderContext.display_field = database.getDataValue(displayElementName);
-        } else {
+        } else if ( ts === null ) {
+			that.renderContext.display_field = null;
+		} else {
             // Now we are always going to display instance id
             // unless this decision changes ...
             that.renderContext.display_field = ts.toISOString();
@@ -496,13 +498,14 @@ promptTypes.instances = promptTypes.base.extend({
     type:"instances",
     hideInContents: true,
     valid: true,
+    _cachedEvent: null,
     savepoint_type_finalized_text: 'Finalized',
     savepoint_type_incomplete_text: 'Incomplete',
     savepoint_type_checkpoint_text: 'Checkpoint',
     templatePath: "templates/instances.handlebars",
     events: {
         "click .openInstance": "openInstance",
-        "click .deleteInstance": "deleteInstance",
+        "click .deleteInstance": "confirmDeleteInstance",
         "click .createInstance": "createInstance"
     },
     configureRenderContext: function(ctxt) {
@@ -537,11 +540,21 @@ promptTypes.instances = promptTypes.base.extend({
                     var savepoint_type = term.savepoint_type;
                     if ( savepoint_type === opendatakit.savepoint_type_complete ) {
                         term.savepoint_type_text = that.savepoint_type_finalized_text;
+						term.is_checkpoint = false;
                     } else if ( savepoint_type === opendatakit.savepoint_type_incomplete ) {
                         term.savepoint_type_text = that.savepoint_type_incomplete_text;
+						term.is_checkpoint = false;
                     } else {
                         term.savepoint_type_text = that.savepoint_type_checkpoint_text;
+						term.is_checkpoint = true;
                     }
+					// this field is undefined if rendering through the app designer
+					var effective_access = term.effective_access;
+					if ( effective_access === "rwd" || effective_access === undefined ) {
+						term.show_delete = true;
+					} else {
+						term.show_delete = false;
+					}
                     return term;
                 });
 
@@ -588,12 +601,24 @@ promptTypes.instances = promptTypes.base.extend({
             }}));
         }
     },
-    deleteInstance: function(evt){
+    confirmDeleteInstance: function(evt) {
+        var that  = this;
+        that._cachedEvent = evt;
+        var instanceDisplayValueToDelete = $(evt.currentTarget).attr('display_value');
+        that._screen._screenManager.showConfirmationPopup({message: "Delete " + instanceDisplayValueToDelete + " ?",
+                                                           promptIndex: that.promptIdx});
+    },
+    handleConfirmation: function(){
         var that = this;
-        var instanceIdToDelete = $(evt.currentTarget).attr('id');
+
+        if (that._cachedEvent === null || that._cachedEvent == undefined) {
+            return;
+        }
+
+        var instanceIdToDelete = $(that._cachedEvent.currentTarget).attr('id');
 
         if ( instanceIdToDelete !== null && instanceIdToDelete !== undefined ) {
-            var ctxt = that.controller.newContext(evt, that.type + ".deleteInstance");
+            var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".deleteInstance");
             that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
                 ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
                 var model = opendatakit.getCurrentModel();
@@ -623,7 +648,7 @@ promptTypes.contents = promptTypes.base.extend({
         odkCommon.log('D',"prompts." + that.type + ".selectContentsItem: click detected: " + evt.target);
         var $target = $(evt.target).closest('.select-contents-item');
         $target.attr("label", function(index, oldPropertyValue){
-            ctxt.log('D',"prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue,
+            odkCommon.log('D',"prompts." + that.type + ".selectContentsItem: click near label: " + oldPropertyValue +
                 "px: " + that.promptIdx);
             selectedScreenPath = oldPropertyValue;
         });
@@ -746,7 +771,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
     valid: true,
     _cachedEvent: null,
     templatePath: 'templates/linked_table.handlebars',
-    launchAction: 'org.opendatakit.survey.android.activities.MainMenuActivity',
+    launchAction: 'org.opendatakit.survey.activities.MainMenuActivity',
 
     events: {
         "click .openInstance": "openInstance",
@@ -983,7 +1008,7 @@ promptTypes.external_link = promptTypes.base.extend({
             fullUrl = opendatakit.convertHashStringToSurveyUri(fullUrl);
             // implicit intents are not working?
             // launchAction = 'android.content.Intent.ACTION_EDIT';
-            launchAction = 'org.opendatakit.survey.android.activities.SplashScreenActivity';
+            launchAction = 'org.opendatakit.survey.activities.SplashScreenActivity';
         }
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
@@ -1171,6 +1196,9 @@ promptTypes.select = promptTypes._linked_type.extend({
                     selectedValues.push(otherObject.value);
                 }
             }
+            if (selectedValues !== null && (selectedValues === undefined || selectedValues.length === 0)) {
+              selectedValues = null;
+            }
             return selectedValues;
         }
         return null;
@@ -1347,7 +1375,17 @@ promptTypes.select_one = promptTypes.select.extend({
                         otherValue = _.find(jsonFormSerialization, function(valueObject) {
                             return ('otherValue' === valueObject.name);
                         });
-                        return (otherValue ? otherValue.value : '');
+                        if (otherValue !== null && 
+                            otherValue !== undefined &&
+                            otherValue.value !== null &&
+                            otherValue.value !== undefined &&
+                            otherValue.value.length !== 0) {
+                            return otherValue.value;
+                        } else {
+                            // We need to store a space since null values
+                            // are not allowed in the database
+                            return ' ';
+                        }
                     }
                 }
                 return selectedValue.value;
@@ -1529,7 +1567,7 @@ promptTypes.select_one_grid = promptTypes.select_one.extend({
                 return ('otherValue' === valueObject.name);
             });
             that.renderContext.other = {
-                value: otherObject ? otherObject.value : '',
+                value: otherObject ? otherObject.value : ' ',
                 checked: _.any(formValue, function(valueObject) {
                     return ('other' === valueObject.value);
                 })
@@ -1541,7 +1579,10 @@ promptTypes.select_one_inline = promptTypes.select_one.extend({
     templatePath: "templates/select_inline.handlebars"
 });
 promptTypes.select_one_dropdown = promptTypes.select_one.extend({
-    templatePath: "templates/select_dropdown.handlebars"
+    templatePath: "templates/select_dropdown.handlebars",
+    renderContext: {
+        "selectOneDropDownText": translations.selectDropdownLabel
+    }
 });
 promptTypes.select_multiple_grid = promptTypes.select_multiple.extend({
     templatePath: "templates/select_grid.handlebars",
@@ -1989,12 +2030,17 @@ promptTypes.media = promptTypes.base.extend({
         // TODO: is this the right sequence?
         var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'capture'});
 
+        var mediaUri = that.getValue();
+        var uriFragment = (mediaUri !== null && mediaUri !== undefined &&
+                    mediaUri.uriFragment !== null && mediaUri.uriFragment !== undefined) ? mediaUri.uriFragment : null;
+
         odkCommon.log('D',"prompts." + that.type + ".capture -- invoking doAction");
         var outcome = odkCommon.doAction( dispatchString, that.captureAction,
             JSON.stringify({ extras: {
                 appName: opendatakit.getPlatformInfo().appName,
                 tableId: opendatakit.getCurrentTableId(),
                 instanceId: opendatakit.getCurrentInstanceId(),
+                currentUriFragment: uriFragment,
                 uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
 
         odkCommon.log('D',"prompts." + that.type + ".capture - doAction: " +  platInfo.container + " outcome is " + outcome);
@@ -2103,6 +2149,21 @@ promptTypes.media = promptTypes.base.extend({
                 return '';
             }
         }
+    },
+    getValue: function() {
+        if (!this.name) {
+            console.error("prompts.media.getValue: Cannot get value of prompt with no name. px: "
+                          + this.promptIdx);
+            throw new Error("Cannot get value of prompt with no name.");
+        }
+        var value = database.getDataValue(this.name);
+        if (value === null || value === undefined) {
+          return null;
+        }
+        if (value.uriFragment === null || value.uriFragment === undefined) {
+            return null;
+        }
+        return value;
     }
 });
 promptTypes.read_only_image = promptTypes.media.extend({
@@ -2117,24 +2178,32 @@ promptTypes.image = promptTypes.media.extend({
     contentType: "image/*",
     buttonLabel: 'Take your photo:',
     templatePath: "templates/image.handlebars",
-    captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureImageActivity',
-    chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseImageActivity'
+    captureAction: 'org.opendatakit.survey.activities.MediaCaptureImageActivity',
+    chooseAction: 'org.opendatakit.survey.activities.MediaChooseImageActivity'
+});
+promptTypes.signature = promptTypes.media.extend({
+    type: "signature",
+    extension: "jpg",
+    contentType: "image/*",
+    buttonLabel: 'Get Signature:',
+    templatePath: "templates/signature.handlebars",
+    captureAction: 'org.opendatakit.survey.activities.SignatureActivity'
 });
 promptTypes.video = promptTypes.media.extend({
     type: "video",
     contentType: "video/*",
     buttonLabel: 'Take your video:',
     templatePath: "templates/video.handlebars",
-    captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureVideoActivity',
-    chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseVideoActivity'
+    captureAction: 'org.opendatakit.survey.activities.MediaCaptureVideoActivity',
+    chooseAction: 'org.opendatakit.survey.activities.MediaChooseVideoActivity'
 });
 promptTypes.audio = promptTypes.media.extend({
     type: "audio",
     contentType: "audio/*",
     buttonLabel: 'Take your audio:',
     templatePath: "templates/audio.handlebars",
-    captureAction: 'org.opendatakit.survey.android.activities.MediaCaptureAudioActivity',
-    chooseAction: 'org.opendatakit.survey.android.activities.MediaChooseAudioActivity'
+    captureAction: 'org.opendatakit.survey.activities.MediaCaptureAudioActivity',
+    chooseAction: 'org.opendatakit.survey.activities.MediaChooseAudioActivity'
 });
 /**
  * launch_intent is an abstract prompt type used as a base for single intent launching (e.g. barcodes)
@@ -2226,7 +2295,7 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
     type: "geopoint",
     buttonLabel: 'Record Location',
     templatePath: "templates/geopoint.handlebars",
-    intentString: 'org.opendatakit.survey.android.activities.GeoPointActivity',
+    intentString: 'org.opendatakit.survey.activities.GeoPointActivity',
     extractDataValue: function(jsonObject) {
         return {
             latitude: jsonObject.result.latitude,
@@ -2251,11 +2320,29 @@ promptTypes.geopoint = promptTypes.launch_intent.extend({
                 return null;
             }
         }
+    },
+    getValue: function() {
+        if (!this.name) {
+            console.error("prompts.geopoint.getValue: Cannot get value of prompt with no name. px: "
+                          + this.promptIdx);
+            throw new Error("Cannot get value of prompt with no name.");
+        }
+        var value = database.getDataValue(this.name);
+        if (value === null || value === undefined) {
+          return null;
+        }
+        if ((value.latitude === null || value.latitude === undefined) &&
+            (value.longitude === null || value.longitude === undefined) &&
+            (value.altitude === null || value.altitude === undefined) &&
+            (value.accuracy === null || value.accuracy === undefined)) {
+            return null;
+        }
+        return value;
     }
 });
 promptTypes.geopointmap = promptTypes.launch_intent.extend({
     type: "geopointmap",
-    intentString: 'org.opendatakit.survey.android.activities.GeoPointMapActivity',
+    intentString: 'org.opendatakit.survey.activities.GeoPointMapActivity',
     extractDataValue: function(jsonObject) {
         return {
             latitude: jsonObject.result.latitude,
@@ -2280,6 +2367,24 @@ promptTypes.geopointmap = promptTypes.launch_intent.extend({
                 return null;
             }
         }
+    },
+    getValue: function() {
+        if (!this.name) {
+            console.error("prompts.geopointmap.getValue: Cannot get value of prompt with no name. px: "
+                          + this.promptIdx);
+            throw new Error("Cannot get value of prompt with no name.");
+        }
+        var value = database.getDataValue(this.name);
+        if (value === null || value === undefined) {
+          return null;
+        }
+        if ((value.latitude === null || value.latitude === undefined) &&
+            (value.longitude === null || value.longitude === undefined) &&
+            (value.altitude === null || value.altitude === undefined) &&
+            (value.accuracy === null || value.accuracy === undefined)) {
+            return null;
+        }
+        return value;
     }
 });
 promptTypes.note = promptTypes.base.extend({
@@ -3195,3 +3300,4 @@ promptTypes.acknowledge = promptTypes.select.extend({
 
 return promptTypes;
 });
+

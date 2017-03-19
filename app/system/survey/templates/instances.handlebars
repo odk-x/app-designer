@@ -47,25 +47,21 @@
                                 <p><strong>{{display_field}}</strong></p>
                                 <p><strong>Last Save Date:</strong></p>
                                 <p>{{savepoint_timestamp}}</p>
-                                {{#if savepoint_type}}
-                                    {{#ifEqual savepoint_type_text "Finalized"}}
-                                        <p><strong>{{savepoint_type_text}}</strong></p>
-                                    {{else}}
-                                        <p><strong>Incomplete</strong></p>
-                                    {{/ifEqual}}
-                                {{else}}
-                                    <p><strong>Incomplete</strong>
-                                    <span class="glyphicon glyphicon-warning-sign"></span></p>
-                                {{/if}}
+								<p><strong>{{savepoint_type_text}}</strong></p>
+								{{#if is_checkpoint}}
+									<span class="glyphicon glyphicon-warning-sign"></span></p>
+								{{/if}}
                             </div>
                             <div class="col-xs-4">
                                 <div class="instanceRowControl btn-group">
                                     <button type="button" id="{{instance_id}}" class="odk openInstance btn btn-default" tabindex="0">
                                         <span class="glyphicon glyphicon-pencil" style="font-size:20px;">
                                     </button>
-                                    <button type="button" id="{{instance_id}}" class="odk deleteInstance btn btn-default" tabindex="0">
-                                        <span class="glyphicon glyphicon-remove-sign" style="font-size:20px;">
-                                    </button>
+									{{#if show_delete}}
+										<button type="button" id="{{instance_id}}" display_value="{{display_field}}" class="odk deleteInstance btn btn-default" tabindex="0">
+											<span class="glyphicon glyphicon-remove-sign" style="font-size:20px;">
+										</button>
+									{{/if}}
                                 </div>
                             </div>
                         </div>

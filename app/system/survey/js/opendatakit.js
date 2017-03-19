@@ -279,7 +279,7 @@ return {
 
         var appName = that.getPlatformInfo().appName;
 
-        var uri = "content://org.opendatakit.common.android.provider.forms/" +
+        var uri = "content://org.opendatakit.provider.forms/" +
             appName + "/" + tableId + "/" + formId + "/#" +
             reconstitutedKeyValues.substring(1);
 

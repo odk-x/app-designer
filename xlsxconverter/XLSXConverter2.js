@@ -272,7 +272,6 @@ var XLSXConverter = {};
             }
         },
         "geopoint" : {
-            "name": "geopoint",
             "type": "object",
             "elementType": "geopoint",
             "properties": {
@@ -305,6 +304,21 @@ var XLSXConverter = {};
         "piechart": null,
         "scatterplot": null,
         "boxplot": null,
+        "signature": {
+            "type": "object",
+            "elementType": "mimeUri",
+            "properties": {
+                "uriFragment": {
+					"type": "string",
+					"elementType": "rowpath"
+                },
+                "contentType": {
+					"type": "string",
+					"elementType": "mimeType",
+                    "default": "image/*"
+                }
+            }
+        },
         "read_only_image": {
             "type": "object",
             "elementType": "mimeUri",
@@ -2270,6 +2284,11 @@ var XLSXConverter = {};
         elementKey = jsonType.elementKey;
 
         if ( elementKey === undefined || elementKey === null ) {
+            elementKey = elementPathPrefix.replace(/\./g,'_');
+            jsonType.elementKey = elementKey;
+        }
+
+        if ( elementKey === undefined || elementKey === null ) {
             throw new Error("elementKey is not defined for '" + jsonType.elementPath + "'.");
         }
 
@@ -2316,6 +2335,26 @@ var XLSXConverter = {};
         return jsonType;
     };
 
+	var getPrimitiveTypeOfElementType = function(elementType) {
+		var idxColon = elementType.indexOf(":");
+		var idxParen = elementType.indexOf("(");
+		if ( idxParen !== -1 && idxColon > idxParen ) {
+			idxColon = -1;
+		}
+		if ( idxColon === -1 ) {
+			if ( idxParen !== -1 ) {
+				return elementType.substring(0,idxParen);
+			} else {
+				return elementType;
+			}
+		} else {
+			if ( idxParen !== -1 ) {
+				return elementType.substring(idxColon+1,idxParen);
+			} else {
+				return elementType.substring(idxColon+1);
+			}
+		}
+	}
     /**
      * Mark the elements of an inverted formDef.json
      * that will be retained in the database for XLSXConverter
@@ -2325,7 +2364,7 @@ var XLSXConverter = {};
         // because they are all folded up into the json representation of the array
         var startKey;
         var jsonDefn;
-        var elementType;
+		var elementTypePrimitive;
         var key;
         var jsonSubDefn;
             
@@ -2335,8 +2374,8 @@ var XLSXConverter = {};
                 // this has already been processed
                 continue;
             }
-            elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
-            if ( elementType === "array" ) {
+            elementTypePrimitive = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : getPrimitiveTypeOfElementType(jsonDefn.elementType));
+            if ( elementTypePrimitive === "array" ) {
                 var descendantsOfArray = ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? [] : jsonDefn.listChildElementKeys);
                 var scratchArray = [];
                 while ( descendantsOfArray.length !== 0 ) {
@@ -2355,6 +2394,7 @@ var XLSXConverter = {};
                         }
                     }
                     descendantsOfArray = scratchArray;
+					scratchArray = [];
                 }
             }
         }
@@ -2365,8 +2405,8 @@ var XLSXConverter = {};
                 // this has already been processed
                 continue;
             }
-            elementType = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType);
-            if ( elementType !== "array" ) {
+            elementTypePrimitive = (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : getPrimitiveTypeOfElementType(jsonDefn.elementType));
+            if ( elementTypePrimitive !== "array" ) {
                 if (jsonDefn.listChildElementKeys !== undefined &&
                     jsonDefn.listChildElementKeys !== null &&
                     jsonDefn.listChildElementKeys.length !== 0 ) {

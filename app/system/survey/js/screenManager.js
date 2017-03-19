@@ -129,7 +129,46 @@ return Backbone.View.extend({
     },
     refreshScreen: function(ctxt) {
         var that = this;
-        that.commonDrawScreen(ctxt);
+        that.commonDrawScreen($.extend({},ctxt,{
+			failure: function(m) {
+				// add a terminal context to display the pop-up message
+				// If the error caused a rolling-back of data values, as indicated
+				// by m.rolledBack === true, then refresh the screen (to update
+				// values to those from database) before displaying the pop-up message.
+				var opPath = that.controller.getCurrentScreenPath();
+				if ( m !== undefined && m !== null && m.rolledBack ) {
+					// unwind and re-draw the current screen to restore the database values on it; then display error message
+					var refreshCtxt = that.controller.newCallbackContext("screenManager:refreshScreen,rolledBack");
+					ctxt.setTerminalContext($.extend({}, refreshCtxt, {
+						success: function() {
+							that.refreshScreen($.extend({}, refreshCtxt, {
+								success: function() {
+									refreshCtxt.setTerminalContext(that.controller._synthesizePopupContext(opPath, m));
+									refreshCtxt.success();
+								}, 
+								failure: function(m2) {
+									refreshCtxt.setTerminalContext(that.controller._synthesizePopupContext(opPath, m));
+									refreshCtxt.failure(m2);
+							}}));
+						}, 
+						failure: function(m2) {
+							that.refreshScreen($.extend({}, refreshCtxt, {
+								success: function() {
+									refreshCtxt.setTerminalContext(that.controller._synthesizePopupContext(opPath, m));
+									refreshCtxt.failure(m2);
+								}, 
+								failure: function(m3) {
+									refreshCtxt.setTerminalContext(that.controller._synthesizePopupContext(opPath, m));
+									// drop cause of m3
+									refreshCtxt.failure(m2);
+							}}));
+						}}));
+					ctxt.failure(m);
+				} else {
+					ctxt.setTerminalContext(that.controller._synthesizePopupContext(opPath, m));
+					ctxt.failure(m);
+				}
+			}}));
      },
     setScreen: function(ctxt, screen, popScreenOnExit){
         var that = this;
@@ -215,9 +254,9 @@ return Backbone.View.extend({
             }, failure: function(m) {
                 ctxt.log('D', "screenManager.commonDrawScreen.ultimate.failure (via terminalContext)");
                 window.clearTimeout(activateTimeout);
-                that.hideSpinnerOverlay();
-                that.pageChangeActionLockout = false;
-                ctxt.failure(m);
+				that.hideSpinnerOverlay();
+				that.pageChangeActionLockout = false;
+				ctxt.failure(m);
             }});
 
         //A better way to do this might be to pass a controller interface object to
@@ -493,7 +532,7 @@ return Backbone.View.extend({
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
             ctxt.log('D','screenManager.setLanguage',
                 ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
-            this.controller.setLocale(ctxt, $(evt.target).attr("id"));
+            that.controller.setLocale(ctxt, $(evt.target).attr("id"));
         }, failure: function(m) {
             ctxt.log('D','screenManager.setLanguage -- prior event terminated with an error -- aborting!',
                 ((that.activeScreen !== null && that.activeScreen !== undefined) ? ("px: " + that.activeScreen.promptIdx) : "no current activeScreen"));
@@ -553,14 +592,14 @@ return Backbone.View.extend({
             // text: msg.text,
             // textVisible: true
         // });
-//         $('body').waitMe({
-//             effect: 'roundBounce',
-//             text: 'Loading ...',
-//             bg: 'rgba(255,255,255,0.7)',
-//             color:'#000',
-//             sizeW:'',
-//             sizeH:''
-//         });
+        $('body').waitMe({
+            effect: 'roundBounce',
+            text: 'Loading ...',
+            bg: 'rgba(255,255,255,0.7)',
+            color:'#000',
+            sizeW:'',
+            sizeH:''
+        });
     },
     hideSpinnerOverlay: function() {
         //window.$.mobile.loading( 'hide' );

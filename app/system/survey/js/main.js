@@ -24,7 +24,7 @@ requirejs.config({
         backbone : 'libs/backbone.1.0.0',
         handlebars : 'libs/handlebars.1.0.0.rc.4',
         underscore : 'libs/underscore.1.4.4',
-        text : 'libs/text.2.0.10',
+        text : 'libs/text.2.0.15',
         //mobiscroll : 'libs/mobiscroll-2.5.4/js/combined.min',
         // directory paths for resources
         img : 'img',

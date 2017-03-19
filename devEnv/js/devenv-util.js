@@ -91,6 +91,25 @@ exports.postFile = function(path, content, callback) {
     }
 };
 
+exports.postBase64File = function(path, content, callback) {
+
+    if (callback === undefined) {
+        callback = exports.defaultResponseFunction;
+    }
+
+    if (request.post !== undefined) {
+        request.post(
+            {
+                uri: exports.rootpath + '/' + path,
+                body: content,
+                headers: { 
+                    'Content-Type': 'application/octet-stream'
+                }
+            },
+            callback);
+    }
+};
+
 var getValueOfSetting = function(formDef, settingName) {
 
     var settings = formDef.specification.settings;

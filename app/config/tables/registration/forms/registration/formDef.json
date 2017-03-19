@@ -388,8 +388,16 @@
         "aspect": "security",
         "key": "filterTypeOnCreation",
         "type": "string",
-        "value": "MODIFY",
+        "value": "HIDDEN",
         "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "locked",
+        "type": "boolean",
+        "value": "true",
+        "_row_num": 3
       }
     ]
   },
@@ -836,7 +844,6 @@
             "elementKey": "location_accuracy"
           }
         },
-        "name": "geopoint",
         "_defn": [
           {
             "_row_num": 19,
@@ -1709,7 +1716,6 @@
             "elementPath": "location.accuracy"
           }
         },
-        "name": "geopoint",
         "_defn": [
           {
             "_row_num": 19,
@@ -1904,7 +1910,14 @@
         "_aspect": "security",
         "_key": "filterTypeOnCreation",
         "_type": "string",
-        "_value": "MODIFY"
+        "_value": "HIDDEN"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "locked",
+        "_type": "boolean",
+        "_value": "true"
       }
     ]
   }

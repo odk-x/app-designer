@@ -46,7 +46,11 @@ button:active {
     background-color: #FFC9C9;
 }
 
-#field {
+.disabled {
+    opacity: 0.5;
+}
+
+.dropdown {
     display: block;
     margin: auto;
     padding: 5px;
