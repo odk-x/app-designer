@@ -21,12 +21,46 @@ var cbSuccess = function (result) {
   $('#launch').on(
     'click',
     function() {
-      if (entitlementsResultSet.get('is_delivered') == 'false') {
+      odkData.getRoles(rolesSuccess, rolesFailure);
+    });
+};
+
+var rolesSuccess = function(result) {
+  var roles = result.getRoles();
+  var superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
+  if (superUser) {
+    odkData.addRow('deliveries', getStructVals(), util.genUUID(), proxyRowSuccess, proxyRowFailure);
+  } else {
+    if (entitlementsResultSet.get('is_delivered') == 'false') {
         var jsonMap = getJSONMapValues();
         odkTables.addRowWithSurvey('deliveries', 'deliveries', null, jsonMap);
       }
-    });
-};
+  }
+}
+
+var rolesFailure = function(error) {
+  console.log('roles failure with error: ' + error);
+}
+
+function proxyRowSuccess(result) {
+    console.log('made it!');
+    odkData.changeAccessFilterOfRow('deliveries', 'HIDDEN', 
+      entitlementsResultSet.get('_filter_value'), 
+      result.getRowId(0), setFilterSuccess, setFilterFailure);
+}
+
+function proxyRowFailure(error) {
+    console.log('proxy set failure with error: ' + error);
+}
+
+function setFilterSuccess(result) {
+    odkTables.editRowWithSurvey('deliveries', result.getRowId(0), 'deliveries', null);
+    console.log('set filter success');
+}
+
+function setFilterFailure(error) {
+    console.log('set filter failure with error: ' + error);
+}
 
 var updateEntitlements = function() {
   console.log('entitlement_id is: ' + entitlementsResultSet.get('_id'));
@@ -59,6 +93,22 @@ var updateCBFailure = function(error) {
   console.log('updateCBFailure called with error: ' + error);
 }
 
+ function getStructVals() {
+  var struct = {};
+  struct['beneficiary_code'] = entitlementsResultSet.get('beneficiary_code');
+  struct['entitlement_id'] = entitlementsResultSet.get('_id');
+  struct['authorization_id'] = entitlementsResultSet.get('authorization_id');
+  struct['authorization_name'] = entitlementsResultSet.get('authorization_name');
+  struct['item_pack_id'] = entitlementsResultSet.get('item_pack_id');
+  struct['item_pack_name'] = entitlementsResultSet.get('item_pack_name');
+  struct['item_description'] = entitlementsResultSet.get('item_description');
+  struct['is_override'] = entitlementsResultSet.get('is_override');
+  struct['ranges'] = entitlementsResultSet.get('ranges');
+  struct['assigned_code'] = entitlementsResultSet.get('assigned_code');
+  console.log(struct);
+  return struct;
+}
+
 var setJSONMap = function(JSONMap, key, value) {
     if (value !== null && value !== undefined) {
         JSONMap[key] = JSON.stringify(value);
@@ -78,7 +128,6 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'is_override', entitlementsResultSet.get('is_override'));
   setJSONMap(jsonMap, 'ranges', entitlementsResultSet.get('ranges'));
   setJSONMap(jsonMap, 'assigned_code', entitlementsResultSet.get('assigned_code'));
-  setJSONMap(jsonMap, 'sector', entitlementsResultSet.get('sector'));
   jsonMap = JSON.stringify(jsonMap);    
   return jsonMap;
 };

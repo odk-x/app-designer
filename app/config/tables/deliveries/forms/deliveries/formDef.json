@@ -81,11 +81,6 @@
         "name": "valid",
         "isSessionVariable": true,
         "_row_num": 17
-      },
-      {
-        "type": "string",
-        "name": "sector",
-        "_row_num": 18
       }
     ],
     "settings": [
@@ -397,6 +392,22 @@
         "type": "string",
         "value": "wrong_form",
         "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "unverifiedUserCanCreate",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "filterTypeOnCreation",
+        "type": "string",
+        "value": "HIDDEN",
+        "_row_num": 4
       }
     ],
     "initial": [
@@ -706,16 +717,6 @@
         ],
         "isSessionVariable": true,
         "elementKey": "valid"
-      },
-      "sector": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 18,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "sector"
       },
       "item_pack_barcode": {
         "type": "string",
@@ -1676,19 +1677,6 @@
         "elementSet": "data",
         "elementPath": "valid"
       },
-      "sector": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 18,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "sector",
-        "elementName": "sector",
-        "elementSet": "data",
-        "elementPath": "sector"
-      },
       "item_pack_barcode": {
         "type": "string",
         "isSessionVariable": true,
@@ -1864,6 +1852,20 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "\"Deliveries\""
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "filterTypeOnCreation",
+        "_type": "string",
+        "_value": "HIDDEN"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "unverifiedUserCanCreate",
+        "_type": "boolean",
+        "_value": "false"
       }
     ]
   }

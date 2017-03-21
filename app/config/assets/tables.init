@@ -1,4 +1,0 @@
-table_keys=registration,entitlements,authorizations
-registration.filename=config/assets/csv/registration.csv
-entitlements.filename=config/assets/csv/entitlements.csv
-authorizations.filename=config/assets/csv/authorizations.csv

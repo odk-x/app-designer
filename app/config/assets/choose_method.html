@@ -51,7 +51,7 @@
         function rolesCBSuccess(result) {
             roles = result.getRoles();
             superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
-            if (superUser && type != 'ent_override' && type != 'activate' && type != 'disable') {
+            if (superUser && type != 'activate' && type != 'disable') {
                 $('#choose_user').show();
                 $('#barcode').prop("disabled", true).addClass('disabled');
                 $('#manual').prop("disabled", true).addClass('disabled');
@@ -60,7 +60,7 @@
                 $('#choose_user').append($("<option/>").attr("value", USER_TAG).attr('selected', true).text(USER_TAG));
                 $('#choose_user').on('change', function() {
                     if ($('#choose_user').val() != USER_TAG) {
-                        //$('#barcode').prop("disabled", false).removeClass('disabled');
+                        $('#barcode').prop("disabled", false).removeClass('disabled');
                         $('#manual').prop("disabled", false).removeClass('disabled');
                     } else {
                         $('#barcode').prop("disabled", true).addClass('disabled');
@@ -73,6 +73,7 @@
             $('#title').text(util.getQueryParameter('title'));
 
             $('#barcode').on('click', function() {
+                window.localStorage.setItem('odk_user', $('#choose_user').val());
                 odkCommon.registerListener(function() {
                         callBackFn();
                 });
@@ -115,11 +116,11 @@
                     url = 'config/assets/scan.html?code=' + encodeURIComponent(action.jsonValue.result.SCAN_RESULT) +
                         '&type=' + encodeURIComponent(util.getQueryParameter('type')) + idComponent;
                     if (superUser) {
-                        url += '&user=' + encodeURIComponent($('#choose_user').val());
+                        url += '&user=' + encodeURIComponent(window.localStorage.getItem('odk_user'));
+                        window.localStorage.setItem('odk_user' ,undefined);
                     }
                     odkTables.launchHTML(url);
                     odkCommon.removeFirstQueuedAction();
-
                 }
             }
         }

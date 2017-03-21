@@ -46,29 +46,19 @@
         "_row_num": 7
       },
       {
-        "type": "select_one",
-        "name": "sector",
-        "display": {
-          "text": "What sector are you located in?"
-        },
-        "values_list": "sectors",
-        "required": true,
-        "_row_num": 8
-      },
-      {
         "type": "date",
         "name": "birth_date",
         "display": {
           "text": "What is your date of birth?"
         },
         "required": true,
-        "_row_num": 9
+        "_row_num": 8
       },
       {
         "type": "assign",
         "name": "age",
         "calculation": "calculates.age()",
-        "_row_num": 10
+        "_row_num": 9
       },
       {
         "type": "select_one",
@@ -78,7 +68,7 @@
         },
         "values_list": "genders",
         "required": true,
-        "_row_num": 11
+        "_row_num": 10
       },
       {
         "type": "string",
@@ -86,7 +76,7 @@
         "display": {
           "text": "What type of ID do you have?"
         },
-        "_row_num": 12
+        "_row_num": 11
       },
       {
         "type": "string",
@@ -95,7 +85,7 @@
           "text": "What is your ID number?"
         },
         "required": true,
-        "_row_num": 13
+        "_row_num": 12
       },
       {
         "type": "select_one",
@@ -104,7 +94,7 @@
           "text": "What is the name of the intended delivery site?"
         },
         "values_list": "sites",
-        "_row_num": 14
+        "_row_num": 13
       },
       {
         "type": "string",
@@ -113,8 +103,7 @@
           "text": "What is your current address?",
           "hint": "Address"
         },
-        "required": true,
-        "_row_num": 15
+        "_row_num": 14
       },
       {
         "type": "string",
@@ -122,7 +111,7 @@
         "display": {
           "text": "What is your mobile phone service provider?"
         },
-        "_row_num": 16
+        "_row_num": 15
       },
       {
         "type": "string",
@@ -131,7 +120,7 @@
           "text": "What is your mobile phone number?",
           "hint": "Telephone number"
         },
-        "_row_num": 17
+        "_row_num": 16
       },
       {
         "type": "string",
@@ -141,7 +130,7 @@
           "hint": "Including household representative"
         },
         "required": true,
-        "_row_num": 18
+        "_row_num": 17
       },
       {
         "type": "geopoint",
@@ -149,14 +138,14 @@
         "display": {
           "text": "Capture current location"
         },
-        "_row_num": 19
+        "_row_num": 18
       },
       {
         "type": "note",
         "display": {
           "text": "Press \"Next\" to finish."
         },
-        "_row_num": 20
+        "_row_num": 19
       }
     ],
     "settings": [
@@ -280,14 +269,9 @@
         "_row_num": 19
       },
       {
-        "type": "string",
-        "name": "sector",
-        "_row_num": 20
-      },
-      {
         "type": "geopoint",
         "name": "location",
-        "_row_num": 21
+        "_row_num": 20
       }
     ],
     "initial": [
@@ -322,7 +306,7 @@
         "choice_list_name": "sites",
         "data_value": "a0",
         "display": {
-          "text": "A"
+          "text": "Site A"
         },
         "_row_num": 4
       },
@@ -330,7 +314,7 @@
         "choice_list_name": "sites",
         "data_value": "a1",
         "display": {
-          "text": "B"
+          "text": "Site B"
         },
         "_row_num": 5
       },
@@ -338,7 +322,7 @@
         "choice_list_name": "sites",
         "data_value": "a2",
         "display": {
-          "text": "C"
+          "text": "Site C"
         },
         "_row_num": 6
       },
@@ -346,33 +330,9 @@
         "choice_list_name": "sites",
         "data_value": "a3",
         "display": {
-          "text": "D"
+          "text": "Site D"
         },
         "_row_num": 7
-      },
-      {
-        "choice_list_name": "sectors",
-        "data_value": "North",
-        "display": {
-          "text": "North"
-        },
-        "_row_num": 8
-      },
-      {
-        "choice_list_name": "sectors",
-        "data_value": "South",
-        "display": {
-          "text": "South"
-        },
-        "_row_num": 9
-      },
-      {
-        "choice_list_name": "sectors",
-        "data_value": "Central",
-        "display": {
-          "text": "Central"
-        },
-        "_row_num": 10
       }
     ],
     "calculates": [
@@ -496,7 +456,7 @@
           "choice_list_name": "sites",
           "data_value": "a0",
           "display": {
-            "text": "A"
+            "text": "Site A"
           },
           "_row_num": 4
         },
@@ -504,7 +464,7 @@
           "choice_list_name": "sites",
           "data_value": "a1",
           "display": {
-            "text": "B"
+            "text": "Site B"
           },
           "_row_num": 5
         },
@@ -512,7 +472,7 @@
           "choice_list_name": "sites",
           "data_value": "a2",
           "display": {
-            "text": "C"
+            "text": "Site C"
           },
           "_row_num": 6
         },
@@ -520,35 +480,9 @@
           "choice_list_name": "sites",
           "data_value": "a3",
           "display": {
-            "text": "D"
+            "text": "Site D"
           },
           "_row_num": 7
-        }
-      ],
-      "sectors": [
-        {
-          "choice_list_name": "sectors",
-          "data_value": "North",
-          "display": {
-            "text": "North"
-          },
-          "_row_num": 8
-        },
-        {
-          "choice_list_name": "sectors",
-          "data_value": "South",
-          "display": {
-            "text": "South"
-          },
-          "_row_num": 9
-        },
-        {
-          "choice_list_name": "sectors",
-          "data_value": "Central",
-          "display": {
-            "text": "Central"
-          },
-          "_row_num": 10
         }
       ]
     },
@@ -622,7 +556,7 @@
         "elementType": "date",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
@@ -636,7 +570,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "survey"
           },
           {
@@ -651,7 +585,7 @@
         "valuesList": "genders",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -665,7 +599,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
@@ -679,7 +613,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -694,7 +628,7 @@
         "valuesList": "sites",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 13,
             "section_name": "survey"
           },
           {
@@ -708,7 +642,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 14,
             "section_name": "survey"
           },
           {
@@ -722,7 +656,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
@@ -736,7 +670,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 16,
             "section_name": "survey"
           },
           {
@@ -750,7 +684,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 17,
             "section_name": "survey"
           },
           {
@@ -808,21 +742,6 @@
         ],
         "elementKey": "is_override"
       },
-      "sector": {
-        "type": "string",
-        "valuesList": "sectors",
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 20,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "sector"
-      },
       "location": {
         "type": "object",
         "elementType": "geopoint",
@@ -846,11 +765,11 @@
         },
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
-            "_row_num": 21,
+            "_row_num": 20,
             "section_name": "model"
           }
         ],
@@ -898,33 +817,18 @@
             "promptIdx": 1
           },
           {
-            "type": "select_one",
-            "name": "sector",
-            "display": {
-              "text": "What sector are you located in?"
-            },
-            "values_list": "sectors",
-            "required": true,
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen8",
-            "promptIdx": 2
-          },
-          {
             "type": "date",
             "name": "birth_date",
             "display": {
               "text": "What is your date of birth?"
             },
             "required": true,
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 3
+            "_branch_label_enclosing_screen": "survey/_screen8",
+            "promptIdx": 2
           },
           {
             "type": "select_one",
@@ -934,12 +838,12 @@
             },
             "values_list": "genders",
             "required": true,
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 4
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 3
           },
           {
             "type": "string",
@@ -947,12 +851,12 @@
             "display": {
               "text": "What type of ID do you have?"
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 5
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 4
           },
           {
             "type": "string",
@@ -961,12 +865,12 @@
               "text": "What is your ID number?"
             },
             "required": true,
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen13",
-            "promptIdx": 6
+            "_branch_label_enclosing_screen": "survey/_screen12",
+            "promptIdx": 5
           },
           {
             "type": "select_one",
@@ -975,12 +879,12 @@
               "text": "What is the name of the intended delivery site?"
             },
             "values_list": "sites",
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen14",
-            "promptIdx": 7
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 6
           },
           {
             "type": "string",
@@ -989,7 +893,19 @@
               "text": "What is your current address?",
               "hint": "Address"
             },
-            "required": true,
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen14",
+            "promptIdx": 7
+          },
+          {
+            "type": "string",
+            "name": "mobile_provider",
+            "display": {
+              "text": "What is your mobile phone service provider?"
+            },
             "_row_num": 15,
             "__rowNum__": 14,
             "_token_type": "prompt",
@@ -999,9 +915,10 @@
           },
           {
             "type": "string",
-            "name": "mobile_provider",
+            "name": "telephone",
             "display": {
-              "text": "What is your mobile phone service provider?"
+              "text": "What is your mobile phone number?",
+              "hint": "Telephone number"
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -1012,11 +929,12 @@
           },
           {
             "type": "string",
-            "name": "telephone",
+            "name": "hh_size",
             "display": {
-              "text": "What is your mobile phone number?",
-              "hint": "Telephone number"
+              "text": "How many people are in your household?",
+              "hint": "Including household representative"
             },
+            "required": true,
             "_row_num": 17,
             "__rowNum__": 16,
             "_token_type": "prompt",
@@ -1025,52 +943,37 @@
             "promptIdx": 10
           },
           {
-            "type": "string",
-            "name": "hh_size",
-            "display": {
-              "text": "How many people are in your household?",
-              "hint": "Including household representative"
-            },
-            "required": true,
-            "_row_num": 18,
-            "__rowNum__": 17,
-            "_token_type": "prompt",
-            "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen18",
-            "promptIdx": 11
-          },
-          {
             "type": "geopoint",
             "name": "location",
             "display": {
               "text": "Capture current location"
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "prompt",
             "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen19",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 11
           },
           {
             "type": "note",
             "display": {
               "text": "Press \"Next\" to finish."
             },
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen20",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 12
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 21,
-            "_branch_label_enclosing_screen": "survey/_screen21",
-            "promptIdx": 14
+            "_row_num": 20,
+            "_branch_label_enclosing_screen": "survey/_screen20",
+            "promptIdx": 13
           }
         ],
         "validation_tag_map": {
@@ -1079,10 +982,8 @@
             1,
             2,
             3,
-            4,
-            6,
-            8,
-            11
+            5,
+            10
           ]
         },
         "operations": [
@@ -1141,18 +1042,18 @@
             "operationIdx": 6
           },
           {
-            "_row_num": 9,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 7
-          },
-          {
             "type": "assign",
             "name": "age",
             "calculation": "calculates.age()",
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "assign",
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 10,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
@@ -1210,38 +1111,32 @@
             "operationIdx": 17
           },
           {
+            "_token_type": "exit_section",
+            "clause": "exit section",
             "_row_num": 20,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 18
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 21,
-            "operationIdx": 19
-          },
-          {
-            "_row_num": 21,
+            "_row_num": 20,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 20
+            "operationIdx": 19
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 21,
-            "operationIdx": 21
+            "_row_num": 20,
+            "operationIdx": 20
           }
         ],
         "branch_label_map": {
           "_screen5": 3,
           "_screen6": 4,
           "_screen8": 6,
-          "_screen9": 7,
+          "_screen10": 8,
           "_screen11": 9,
           "_screen12": 10,
           "_screen13": 11,
@@ -1251,9 +1146,8 @@
           "_screen17": 15,
           "_screen18": 16,
           "_screen19": 17,
-          "_screen20": 18,
-          "_contents": 20,
-          "_screen21": 20
+          "_contents": 19,
+          "_screen20": 19
         }
       },
       "initial": {
@@ -1437,7 +1331,7 @@
         "elementType": "date",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
@@ -1454,7 +1348,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "survey"
           },
           {
@@ -1472,7 +1366,7 @@
         "valuesList": "genders",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -1489,7 +1383,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
@@ -1506,7 +1400,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -1524,7 +1418,7 @@
         "valuesList": "sites",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 13,
             "section_name": "survey"
           },
           {
@@ -1541,7 +1435,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 14,
             "section_name": "survey"
           },
           {
@@ -1558,7 +1452,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
@@ -1575,7 +1469,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 16,
             "section_name": "survey"
           },
           {
@@ -1592,7 +1486,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 17,
             "section_name": "survey"
           },
           {
@@ -1665,24 +1559,6 @@
         "elementSet": "data",
         "elementPath": "is_override"
       },
-      "sector": {
-        "type": "string",
-        "valuesList": "sectors",
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 20,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "sector",
-        "elementName": "sector",
-        "elementSet": "data",
-        "elementPath": "sector"
-      },
       "location": {
         "type": "object",
         "elementType": "geopoint",
@@ -1718,11 +1594,11 @@
         },
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
-            "_row_num": 21,
+            "_row_num": 20,
             "section_name": "model"
           }
         ],
@@ -1861,7 +1737,7 @@
         "_aspect": "delivery_site",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"sites\",\"data_value\":\"a0\",\"display\":{\"text\":\"A\"},\"_row_num\":4},{\"choice_list_name\":\"sites\",\"data_value\":\"a1\",\"display\":{\"text\":\"B\"},\"_row_num\":5},{\"choice_list_name\":\"sites\",\"data_value\":\"a2\",\"display\":{\"text\":\"C\"},\"_row_num\":6},{\"choice_list_name\":\"sites\",\"data_value\":\"a3\",\"display\":{\"text\":\"D\"},\"_row_num\":7}]"
+        "_value": "[{\"choice_list_name\":\"sites\",\"data_value\":\"a0\",\"display\":{\"text\":\"Site A\"},\"_row_num\":4},{\"choice_list_name\":\"sites\",\"data_value\":\"a1\",\"display\":{\"text\":\"Site B\"},\"_row_num\":5},{\"choice_list_name\":\"sites\",\"data_value\":\"a2\",\"display\":{\"text\":\"Site C\"},\"_row_num\":6},{\"choice_list_name\":\"sites\",\"data_value\":\"a3\",\"display\":{\"text\":\"Site D\"},\"_row_num\":7}]"
       },
       {
         "_partition": "Column",
@@ -1869,13 +1745,6 @@
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"genders\",\"data_value\":\"Male\",\"display\":{\"text\":\"Male\"},\"_row_num\":2},{\"choice_list_name\":\"genders\",\"data_value\":\"Female\",\"display\":{\"text\":\"Female\"},\"_row_num\":3}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "sector",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"sectors\",\"data_value\":\"North\",\"display\":{\"text\":\"North\"},\"_row_num\":8},{\"choice_list_name\":\"sectors\",\"data_value\":\"South\",\"display\":{\"text\":\"South\"},\"_row_num\":9},{\"choice_list_name\":\"sectors\",\"data_value\":\"Central\",\"display\":{\"text\":\"Central\"},\"_row_num\":10}]"
       },
       {
         "_partition": "FormType",

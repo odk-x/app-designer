@@ -23,7 +23,6 @@
 
               $('#beneficiary_code').text(registrationResultSet.get('beneficiary_code'));
 
-              $('#sector').text(registrationResultSet.get('sector'));
 
               $('#address').text(registrationResultSet.get('address'));
               $('#id_number').text(registrationResultSet.get('id_number'));
@@ -92,14 +91,12 @@
                     function() {
                         odkTables.openTableToListView(
                             'entitlements',
-                            'beneficiary_code = ? and is_delivered = ?',
-                            [registrationResultSet.get('beneficiary_code'), 'false'],
+                            'beneficiary_code = ? and is_delivered = ?', [registrationResultSet.get('beneficiary_code'), 'false'],
                             'config/tables/entitlements/html/dist_ben_list.html'
                         );
                     }
                 );
               } else {
-                console.log('rejected');
                 $('#reject').text('No Entitlements to Deliver');
               }
             }
@@ -129,7 +126,6 @@
         'COL_NAME:' + data.get('COL_NAME'));"><span id="FIELD_1"></span></a>
         -->
         <p>Beneficiary Code: <span id="beneficiary_code"></span></p>
-        <p>Sector: <span id="sector"></span></p>
         <p>ID: <span id="id_number"></span></p>
         <p>Address: <span id="address"></span></p>
         <p>Telephone: <span id="telephone"></span></p>

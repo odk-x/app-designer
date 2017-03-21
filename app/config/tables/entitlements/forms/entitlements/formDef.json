@@ -83,31 +83,11 @@
     ],
     "survey": [
       {
-        "type": "select_one",
-        "values_list": "true_false",
-        "name": "is_delivered",
+        "type": "note",
         "display": {
-          "text": "Has the item pack been successfully delivered?"
+          "text": "This survey should not be administrated"
         },
         "_row_num": 2
-      }
-    ],
-    "choices": [
-      {
-        "choice_list_name": "true_false",
-        "data_value": "true",
-        "display": {
-          "text": "Yes"
-        },
-        "_row_num": 2
-      },
-      {
-        "choice_list_name": "true_false",
-        "data_value": "false",
-        "display": {
-          "text": "No"
-        },
-        "_row_num": 3
       }
     ],
     "initial": [
@@ -129,6 +109,22 @@
         "type": "string",
         "value": "wrong_form",
         "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "locked",
+        "type": "boolean",
+        "value": "true",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "filterTypeOnCreation",
+        "type": "string",
+        "value": "READ_ONLY",
+        "_row_num": 4
       }
     ]
   },
@@ -203,26 +199,7 @@
         "_row_num": 5
       }
     },
-    "choices": {
-      "true_false": [
-        {
-          "choice_list_name": "true_false",
-          "data_value": "true",
-          "display": {
-            "text": "Yes"
-          },
-          "_row_num": 2
-        },
-        {
-          "choice_list_name": "true_false",
-          "data_value": "false",
-          "display": {
-            "text": "No"
-          },
-          "_row_num": 3
-        }
-      ]
-    },
+    "choices": {},
     "queries": {},
     "calculates": {},
     "model": {
@@ -298,12 +275,7 @@
       },
       "is_delivered": {
         "type": "string",
-        "valuesList": "true_false",
         "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          },
           {
             "_row_num": 9,
             "section_name": "model"
@@ -343,16 +315,14 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "select_one",
-            "values_list": "true_false",
-            "name": "is_delivered",
+            "type": "note",
             "display": {
-              "text": "Has the item pack been successfully delivered?"
+              "text": "This survey should not be administrated"
             },
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "note",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
@@ -604,12 +574,7 @@
       },
       "is_delivered": {
         "type": "string",
-        "valuesList": "true_false",
         "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          },
           {
             "_row_num": 9,
             "section_name": "model"
@@ -737,13 +702,6 @@
     },
     "properties": [
       {
-        "_partition": "Column",
-        "_aspect": "is_delivered",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"true_false\",\"data_value\":\"true\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"true_false\",\"data_value\":\"false\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
-      },
-      {
         "_partition": "SurveyUtil",
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
@@ -763,6 +721,20 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "\"Entitlements\""
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "filterTypeOnCreation",
+        "_type": "string",
+        "_value": "READ_ONLY"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "locked",
+        "_type": "boolean",
+        "_value": "true"
       }
     ]
   }

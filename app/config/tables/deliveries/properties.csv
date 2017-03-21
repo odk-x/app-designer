@@ -3,3 +3,5 @@ Column,is_delivered,displayChoicesList,object,"[{""choice_list_name"":""yes_no""
 SurveyUtil,default,SurveyUtil.formId,string,wrong_form
 Table,default,defaultViewType,string,SPREADSHEET
 Table,default,displayName,object,"""Deliveries"""
+Table,security,filterTypeOnCreation,string,HIDDEN
+Table,security,unverifiedUserCanCreate,boolean,false
