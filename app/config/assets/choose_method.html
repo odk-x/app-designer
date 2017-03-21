@@ -16,48 +16,12 @@
         var roles;
         var users;
         var USER_TAG = 'Please Select User';
+        var superUser;
+        var type = util.getQueryParameter('type');
+
 
         function display() {
             $('#choose_user').hide();
-            odkData.getUsers(userSuccess, userFailure);
-
-        }
-
-        function userSuccess(result) {
-            users = result.getUsers();
-            console.log(users);
-            odkData.getRoles(rolesCBSuccess, rolesCBFailure);
-
-        }
-
-        function userFailure(error) {
-            console.log('userFailure with error: ' + error);
-        }
-
-        function rolesCBFailure(error) {
-            console.log('roles failure with error: ' + error);
-        }
-        function rolesCBSuccess(result) {
-            roles = result.getRoles();
-            var superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
-            if (superUser) {
-                $('#choose_user').show();
-                $('#barcode').prop("disabled", true).addClass('disabled');
-                $('#manual').prop("disabled", true).addClass('disabled');
-                console.log(users);
-                users.forEach(addOption);
-                $('#choose_user').append($("<option/>").attr("value", USER_TAG).attr('selected', true).text(USER_TAG));
-                $('#choose_user').on('change', function() {
-                    if ($('#choose_user').val() != 'Please Select') {
-                        $('#barcode').prop("disabled", false).removeClass('disabled');
-                        $('#manual').prop("disabled", false).removeClass('disabled');
-                    } else {
-                        $('#barcode').prop("disabled", true).addClass('disabled');
-                        $('#manual').prop("disabled", true).addClass('disabled');
-                    }
-                });
-            }
-            var type = util.getQueryParameter('type');
             if (type != 'ent_override') {
                 $('#view_details').hide();
             } else {
@@ -69,6 +33,43 @@
                   'config/tables/authorizations/html/authorizations_detail.html');
                 });
             }
+            odkData.getUsers(userSuccess, userFailure);
+        }
+
+        function userSuccess(result) {
+            users = result.getUsers();
+            odkData.getRoles(rolesCBSuccess, rolesCBFailure);
+        }
+
+        function userFailure(error) {
+            console.log('userFailure with error: ' + error);
+        }
+
+        function rolesCBFailure(error) {
+            console.log('roles failure with error: ' + error);
+        }
+        function rolesCBSuccess(result) {
+            roles = result.getRoles();
+            superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
+            if (superUser && type != 'ent_override' && type != 'activate' && type != 'disable') {
+                $('#choose_user').show();
+                $('#barcode').prop("disabled", true).addClass('disabled');
+                $('#manual').prop("disabled", true).addClass('disabled');
+                console.log(users);
+                users.forEach(addOption);
+                $('#choose_user').append($("<option/>").attr("value", USER_TAG).attr('selected', true).text(USER_TAG));
+                $('#choose_user').on('change', function() {
+                    if ($('#choose_user').val() != USER_TAG) {
+                        //$('#barcode').prop("disabled", false).removeClass('disabled');
+                        $('#manual').prop("disabled", false).removeClass('disabled');
+                    } else {
+                        $('#barcode').prop("disabled", true).addClass('disabled');
+                        $('#manual').prop("disabled", true).addClass('disabled');
+                    }
+                });
+            }
+            
+
             $('#title').text(util.getQueryParameter('title'));
 
             $('#barcode').on('click', function() {

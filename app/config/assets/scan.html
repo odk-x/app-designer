@@ -11,7 +11,12 @@
 
             var code = util.getQueryParameter('code');
             var type = util.getQueryParameter('type');
-
+            var superUser = util.getQueryParameter('user') != null;
+            var user;
+            if (superUser) {
+                console.log('superUser');
+                user = decodeURIComponent(util.getQueryParameter('user'));
+            }
             function display() {
                 $('#header').text('Scanned Barcode: ' + code);
                 if (type == 'delivery') {
@@ -36,8 +41,13 @@
             function deliveryBCheckCBSuccess(result) {
                 console.log('deliveryBCheckCBSuccess called');
                 if (result.getCount() === 0) {
-                    odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'false'],
-                        null, null, null, null, null, null, true, deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
+                    if (superUser) {
+                        console.log(user);
+                        odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _filter_value = ?', [code, 'false', user], null, null, null, null, null, null, true, deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
+                    } else {
+                        odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'false'],
+                            null, null, null, null, null, null, true, deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
+                    }
                 } else if (result.getCount() === 1) {
                     $('#search_results').text("Active Beneficiary Found in System");
                     $('#launch').show();
@@ -84,19 +94,28 @@
 
             function registrationFunction() {
                 console.log('registration function path entered');
-                 odkData.query('registration', 'beneficiary_code = ?', [code], null, null,
+                if (superUser) {
+                    odkData.query('registration', 'beneficiary_code = ? and _filter_value = ?', [code, user], null, null, null, null, null, null, true, registrationBCheckCBSuccess, 
+                                registrationBCheckCBFailure);
+                } else {
+                    odkData.query('registration', 'beneficiary_code = ?', [code], null, null,
                                 null, null, null, null, true, registrationBCheckCBSuccess, 
                                 registrationBCheckCBFailure);
+                }
             }
 
             function registrationBCheckCBSuccess(result) {
                 console.log('registrationBCheckCBSuccess called with value' + result);
                 if (result.getCount() === 0) {
-                    odkData.query('entitlements', 'beneficiary_code = ?', [code], null, null,
-                        null, null, null, null, true, registrationVoucherCBSuccess, registrationVoucherCBFailure);
+                    if (superUser) {
+                        odkData.query('entitlements', 'beneficiary_code = ? and _filter_type = ?', [code, "READ_ONLY"], null, null, null, null, null, null, true, registrationVoucherCBSuccess, registrationVoucherCBFailure);
+                    } else {
+                        odkData.query('entitlements', 'beneficiary_code = ?', [code], null, null,
+                            null, null, null, null, true, registrationVoucherCBSuccess, registrationVoucherCBFailure);
+                    }
 
                 } else {
-                    $('#search_results').text('Barcode \'' + code + '\' Unavailable: please scan a different barcode');
+                    $('#search_results').text('Barcode Unavailable: please scan a different barcode');
                     $('#launch').hide();
                     odkCommon.removeFirstQueuedAction();
                 }
@@ -109,15 +128,21 @@
             function registrationVoucherCBSuccess(result) {
                 voucherResultSet = result;
                 if (voucherResultSet.getCount() == 0) {
-                    $('#search_results').text('Barcode \'' + code + '\' Available');
+                    $('#search_results').text('Barcode Available');
                     $('#launch').show();
                     $('#launch').text('Click to Register Beneficiary');
                     $('#launch').click(function() {
-                        odkTables.addRowWithSurvey(
-                      'registration',
-                      'registration',
-                      null,
-                      getJSONMapValues());
+                        if (superUser) {
+                            var struct = {};
+                            struct['beneficiary_code'] = code;
+                            odkData.addRow('registration', struct, util.genUUID(), proxyRowSuccess, proxyRowFailure); 
+                        } else {
+                            var jsonMap = {};
+                            setJSONMap(jsonMap, 'beneficiary_code', code);
+                            jsonMap = JSON.stringify(jsonMap);
+                            odkTables.addRowWithSurvey('registration', 'registration', null, jsonMap);
+                        }
+                       //odkTables.addRowWithSurvey( 'registration', 'registration', null, getJSONMapValues());
                     });
                     odkCommon.removeFirstQueuedAction();
                 } else {
@@ -129,6 +154,26 @@
 
             function registrationVoucherCBFailure(error) {
                 console.log('registrationVoucherCBFailure called with error: ' + error);
+            }
+
+            function proxyRowSuccess(result) {
+                console.log('made it!');
+                odkData.changeAccessFilterOfRow('registration', 'HIDDEN', decodeURIComponent(util.getQueryParameter('user')), result.getRowId(0), setFilterSuccess, setFilterFailure);
+                //setJSONMap(jsonMap, '_filter_value', decodeURIComponent(util.getQueryParameter('user')));
+
+                //odkData.changeAccessFilterOfRow(tableId, filterType, filterValue, rowId,
+            }
+
+            function proxyRowFailure(error) {
+                console.log('proxy set failure with error: ' + error);
+            }
+
+            function setFilterSuccess(result) {
+                odkTables.editRowWithSurvey('registration', result.getRowId(0), 'registration', null);
+            }
+
+            function setFilterFailure(error) {
+                console.log('set filter failure with error: ' + error);
             }
 
             var setJSONMap = function(JSONMap, key, value) {

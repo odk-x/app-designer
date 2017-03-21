@@ -11,14 +11,12 @@
 
         var code = null;
         var id = null;
-        var finished = false;
-        var activeAuths = null;
-        var authIndex = 1;
         var type = util.getQueryParameter('type');
         var queriedType;
         var superUser = util.getQueryParameter('user') != null;
         var user;
         if (superUser) {
+            console.log('superUser');
             user = decodeURIComponent(util.getQueryParameter('user'));
         }
 
@@ -121,21 +119,31 @@
 
 
         function registrationFunction() {
+            console.log('entered registration path');
             code = $('#code').val();
             if (code !== "") {
-                console.log('entered registration path');
-                odkData.query('registration', 'beneficiary_code = ?', [code], null, null,
+                if (superUser) {
+                    odkData.query('registration', 'beneficiary_code = ? and _filter_value = ?', [code, user], null, null,
                                 null, null, null, null, true, registrationCBSuccess, 
-                                registrationCBFailure);           
+                                registrationCBFailure);
+                } else {
+                    odkData.query('registration', 'beneficiary_code = ?', [code], null, null,
+                                    null, null, null, null, true, registrationCBSuccess, 
+                                    registrationCBFailure);  
+                }         
             }
         }
 
         function registrationCBSuccess(result) {
             console.log('beneficiaryCBSuccess called with value' + result);
             if (result.getCount() === 0) {
-                odkData.query('entitlements', 'beneficiary_code = ?', [code], null, null,
-                    null, null, null, null, true, voucherCheckCBSuccess, voucherCheckCBFailure);
-
+                if (superUser) {
+                    odkData.query('entitlements', 'beneficiary_code = ? and _filter_type = ?', [code, "READ_ONLY"], null, null,
+                        null, null, null, null, true, voucherCheckCBSuccess, voucherCheckCBFailure);
+                } else {
+                    odkData.query('entitlements', 'beneficiary_code = ?', [code], null, null,
+                        null, null, null, null, true, voucherCheckCBSuccess, voucherCheckCBFailure);
+                }
             } else {
                 $('#search_results').text('Barcode Unavailable: please enter a different barcode');
                 $('#launch').hide();
@@ -155,7 +163,7 @@
                    
                 $('#launch').click(function() {
                     
-                    if (util.getQueryParameter('user') != null) {
+                    if (superUser) {
                         var struct = {};
                         struct['beneficiary_code'] = code;
                         odkData.addRow('registration', struct, util.genUUID(), proxyRowSuccess, proxyRowFailure);
@@ -181,7 +189,6 @@
             //setJSONMap(jsonMap, '_filter_value', decodeURIComponent(util.getQueryParameter('user')));
 
             //odkData.changeAccessFilterOfRow(tableId, filterType, filterValue, rowId,
-            //odkTables.editRowWithSurvey('registration', result.getRowId(), 'registration', null);
         }
 
         function proxyRowFailure(error) {
