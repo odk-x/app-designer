@@ -59,6 +59,15 @@ button:active {
     font-size: 18px;
 }
 
+#field {
+    display: block;
+    margin: auto;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
 #value {
     display: block;
     padding: 5px;

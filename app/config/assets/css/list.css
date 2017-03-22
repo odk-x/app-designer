@@ -40,7 +40,7 @@ ul {
 }
 
 .item_space:active {
-  background-color: lightskyblue;
+  background-color: #FFC9C9;
 }
 
 .detail {
@@ -60,7 +60,7 @@ ul {
 .divider {
   margin-left: auto;
   margin-right: auto;
-  background-color: #38c0f4; 
+  background-color: #f47373; 
   width: 95%;
   height: 10px;
 }
