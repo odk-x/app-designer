@@ -95,12 +95,14 @@ window.odkData = {
         that.getOdkDataIf().getMostRecentRow(tableId, rowId, req._callbackId);
     },
 
-	changeAccessFilterOfRow: function(tableId, filterType, filterValue, rowId, successCallbackFn, failureCallbackFn) {
+	changeAccessFilterOfRow: function(tableId, filterType, filterValue, groupType, groupsList, 
+        filterExt, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('changeAccessFilterOfRow', successCallbackFn, failureCallbackFn);
 
-    that.getOdkDataIf().changeAccessFilterOfRow(tableId, filterType, filterValue, rowId, req._callbackId);
+    that.getOdkDataIf().changeAccessFilterOfRow(tableId, filterType, filterValue, groupType, groupsList,
+        filterExt, rowId, req._callbackId);
     },
 	
     updateRow: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
