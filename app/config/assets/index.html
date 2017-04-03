@@ -16,8 +16,7 @@
             newClient.innerHTML = "Registration";
             newClient.setAttribute("id", "register");
             newClient.onclick = function() {
-                odkTables.launchHTML(
-                    'config/assets/pre_registration.html');
+                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent('Register Beneficiary Code') + '&type=registration');
             }
             document.getElementById("wrapper").appendChild(newClient);    
 
@@ -27,13 +26,12 @@
             followUp.setAttribute("id", "deliver");
             followUp.onclick = function() {
                 odkTables.launchHTML(
-                    'config/assets/choose_method.html?title=' + encodeURIComponent('Choose Delivery Method') +
-                    '&secondary_manual_title=' + encodeURIComponent('Please Enter Beneficiary Code')+ '&type=delivery');
+                    'config/assets/choose_method.html?title=' + encodeURIComponent('Verify Beneficiary Code') +'&type=delivery');
             }
             document.getElementById("wrapper").appendChild(followUp);
 
             var viewData = document.createElement("button");
-            viewData.innerHTML = "View Collected Data";
+            viewData.innerHTML = "View Data";
             viewData.setAttribute("id", "data");
             viewData.onclick = function() {
               odkTables.launchHTML(
@@ -41,7 +39,7 @@
             }
             document.getElementById("wrapper").appendChild(viewData);
 
-            // Create a distribution Override if user is a tables superuser            
+            // Create a overrides if user is a tables superuser            
             odkData.getRoles(rolesCBSuccess, rolesCBFailure);
         }
 

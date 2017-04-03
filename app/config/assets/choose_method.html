@@ -13,11 +13,11 @@
         var userActionValue = "launchBarcode";
         var myTimeoutVal = null;
         var idComponent = "";
-        var roles;
-        var users;
+        var user;
         var USER_TAG = 'Please Select User';
         var superUser;
         var type = util.getQueryParameter('type');
+        var code;
 
 
         function display() {
@@ -33,63 +33,60 @@
                   'config/tables/authorizations/html/authorizations_detail.html');
                 });
             }
-            odkData.getUsers(userSuccess, userFailure);
-        }
-
-        function userSuccess(result) {
-            users = result.getUsers();
-            odkData.getRoles(rolesCBSuccess, rolesCBFailure);
-        }
-
-        function userFailure(error) {
-            console.log('userFailure with error: ' + error);
-        }
-
-        function rolesCBFailure(error) {
-            console.log('roles failure with error: ' + error);
-        }
-        function rolesCBSuccess(result) {
-            roles = result.getRoles();
-            superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
-            if (superUser && type != 'activate' && type != 'disable') {
-                $('#choose_user').show();
-                $('#barcode').prop("disabled", true).addClass('disabled');
-                $('#manual').prop("disabled", true).addClass('disabled');
-                console.log(users);
-                users.forEach(addOption);
-                $('#choose_user').append($("<option/>").attr("value", USER_TAG).attr('selected', true).text(USER_TAG));
-                $('#choose_user').on('change', function() {
-                    if ($('#choose_user').val() != USER_TAG) {
-                        $('#barcode').prop("disabled", false).removeClass('disabled');
-                        $('#manual').prop("disabled", false).removeClass('disabled');
-                    } else {
-                        $('#barcode').prop("disabled", true).addClass('disabled');
-                        $('#manual').prop("disabled", true).addClass('disabled');
-                    }
-                });
-            }
-            
-
-            $('#title').text(util.getQueryParameter('title'));
-
-            $('#barcode').on('click', function() {
-                window.localStorage.setItem('odk_user', $('#choose_user').val());
-                odkCommon.registerListener(function() {
-                        callBackFn();
-                });
-                var dispatchString = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
-                odkCommon.doAction(dispatchString, 'com.google.zxing.client.android.SCAN', null);
+            var userPromise = new Promise(function(resolve, reject) {
+                odkData.getUsers(resolve, reject);
             });
-            myTimeoutVal = setTimeout(callBackFn(), 1000);
 
+            var rolesPromise = new Promise(function(resolve, reject) {
+                odkData.getRoles(resolve, reject);
+            });
 
-            $('#manual').on('click', function() {
-                var url = 'config/assets/manual.html?title=' + encodeURIComponent(util.getQueryParameter('secondary_manual_title')) + '&type=' + encodeURIComponent(type) + idComponent;
-                if (superUser) {
-                    url += '&user=' + encodeURIComponent($('#choose_user').val());
+            Promise.all([userPromise, rolesPromise]).then(function(resultArray) {
+                console.log(resultArray.length);
+                var users = resultArray[0].getUsers();
+                var roles = resultArray[1].getRoles();
+                superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
+                console.log(superUser);
+                if (superUser && type != 'activate' && type != 'disable') {
+                    $('#choose_user').show();
+                    $('#barcode').prop("disabled", true).addClass('disabled');
+                    $('#search').prop("disabled", true).addClass('disabled');
+                    console.log(users);
+                    users.forEach(addOption);
+                    $('#choose_user').append($("<option/>").attr("value", USER_TAG).attr('selected', true).text(USER_TAG));
+                    $('#choose_user').on('change', function() {
+                        if ($('#choose_user').val() != USER_TAG) {
+                            $('#barcode').prop("disabled", false).removeClass('disabled');
+                            $('#search').prop("disabled", false).removeClass('disabled');
+                        } else {
+                            $('#barcode').prop("disabled", true).addClass('disabled');
+                            $('#search').prop("disabled", true).addClass('disabled');
+                        }
+                    });
                 }
-                odkTables.launchHTML(url);
+                
+
+                $('#title').text(util.getQueryParameter('title'));
+
+                $('#barcode').on('click', function() {
+                    window.localStorage.setItem('odk_user', $('#choose_user').val());
+                    odkCommon.registerListener(function() {
+                            callBackFn();
+                    });
+                    var dispatchString = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
+                    odkCommon.doAction(dispatchString, 'com.google.zxing.client.android.SCAN', null);
+                });
+                myTimeoutVal = setTimeout(callBackFn(), 1000);
+
+
+                $('#search').on('click', function() {
+                    queryChain($('#code').val());
+                });
+            }, function(err) {
+                console.log('promise failure with error: ' + err);
             });
+
+            //odkData.getUsers(userSuccess, userFailure);
         }
 
         function addOption(item, index) {
@@ -113,16 +110,382 @@
                     dispatchStr.htmlPath === htmlFileNameValue &&
                     action.jsonValue.status === -1) {
                     clearTimeout(myTimeoutVal);
-                    url = 'config/assets/scan.html?code=' + encodeURIComponent(action.jsonValue.result.SCAN_RESULT) +
-                        '&type=' + encodeURIComponent(util.getQueryParameter('type')) + idComponent;
-                    if (superUser) {
-                        url += '&user=' + encodeURIComponent(window.localStorage.getItem('odk_user'));
-                        window.localStorage.setItem('odk_user' ,undefined);
-                    }
-                    odkTables.launchHTML(url);
+                    var scanned = action.jsonValue.result.SCAN_RESULT;
+                    $('#code').val(scanned);
                     odkCommon.removeFirstQueuedAction();
+                    queryChain(action.jsonValue.result.SCAN_RESULT);
                 }
             }
+        }
+
+        function queryChain(passed_code) {
+            code = passed_code;
+            console.log(code);
+            if (type == 'delivery') {
+                deliveryFunction();
+            } else if (type == 'registration') {
+                registrationFunction();
+            } else if (type == 'voucher') {
+                voucherFunction();
+            } else if (type == 'activate' || type == 'disable') {
+                regOverrideFunction();
+            } else if (type == 'ent_override') {
+                entOverrideFunction();
+            }
+
+        }
+        function deliveryFunction() {
+            if (superUser) {
+                odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _filter_value = ?', [code, 'true', user], null, null,
+                            null, null, null, null, true, deliveryBCheckCBSuccess, 
+                            deliveryBCheckCBFailure);   
+            } else {
+                odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'true'], null, null, null, null, null, null, true,deliveryBCheckCBSuccess, deliveryBCheckCBFailure);
+            }
+        }
+
+        function deliveryBCheckCBSuccess(result) {
+            console.log('deliveryBCheckCBSuccess called');
+            if (result.getCount() === 0) {
+                if (superUser) {
+                    console.log(user);
+                    odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _filter_value = ?', [code, 'false', user], null, null, null, null, null, null, true, deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
+                } else {
+                    odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'false'],
+                        null, null, null, null, null, null, true, deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
+                }
+            } else if (result.getCount() === 1) {
+                    odkTables.openDetailView(
+                  'registration',
+                  result.getRowId(0),
+                  'config/tables/registration/html/registration_detail.html?type=' + type);
+                odkCommon.removeFirstQueuedAction();
+            } else {
+                var params;
+                var vals;
+                if (superUser) {
+                    params = 'beneficiary_code = ? and is_active = ? and _filter_value = ?';
+                    vals = [code,'true', user];
+                } else {
+                    params = 'beneficiary_code = ? and is_active = ?';
+                    vals = [code,'true'];
+                }
+                odkTables.openTableToListView(
+                'registration', params, vals
+                , 'config/tables/registration/html/registration_list.html?type=' + type);
+                odkCommon.removeFirstQueuedAction();                
+            }
+        }
+
+        function deliveryBCheckCBFailure(error) {
+            console.log('deliveryBCheckCBFailure called with error: ' + error);
+        }
+
+        function deliveryDisabledCBSuccess(result) {
+            console.log('disabledCB called');
+            if (result.getCount() > 0) {
+                $('#search_results').text('This beneficiary is disabled');
+            } else {
+                $('#search_results').text('Scanned code not found in system');
+
+            }
+            odkCommon.removeFirstQueuedAction();
+        }
+
+        function deliveryDisabledCBFailure(error) {
+            console.log('disableCB failed with error: ' + error);
+        }
+
+        function registrationFunction() {
+            console.log('registration function path entered');
+            if (superUser) {
+                odkData.query('registration', 'beneficiary_code = ? and _filter_value = ?', [code, user], null, null, null, null, null, null, true, registrationBCheckCBSuccess, 
+                            registrationBCheckCBFailure);
+            } else {
+                odkData.query('registration', 'beneficiary_code = ?', [code], null, null,
+                            null, null, null, null, true, registrationBCheckCBSuccess, 
+                            registrationBCheckCBFailure);
+            }
+        }
+
+        function registrationBCheckCBSuccess(result) {
+            console.log('registrationBCheckCBSuccess called with value' + result);
+            if (result.getCount() === 0) {
+                if (superUser) {
+                    odkData.query('entitlements', 'beneficiary_code = ? and _filter_type = ?', [code, "READ_ONLY"], null, null, null, null, null, null, true, registrationVoucherCBSuccess, registrationVoucherCBFailure);
+                } else {
+                    odkData.query('entitlements', 'beneficiary_code = ?', [code], null, null,
+                        null, null, null, null, true, registrationVoucherCBSuccess, registrationVoucherCBFailure);
+                }
+
+            } else {
+                $('#search_results').text('Barcode Unavailable');
+                odkCommon.removeFirstQueuedAction();
+            }
+        }
+
+        function registrationBCheckCBFailure(error) {
+            console.log('registrationBCheckCBFailure called with error: ' + error);
+        }
+
+        function registrationVoucherCBSuccess(result) {
+            voucherResultSet = result;
+            if (voucherResultSet.getCount() == 0) {
+                $('#search_results').text('Barcode Available');
+            } else {
+                $('#search_results').text('Voucher Barcode Detected');
+            }
+            setTimeout(function() {
+                if (superUser) {
+                    var struct = {};
+                    struct['beneficiary_code'] = code;
+                    odkData.addRow('registration', struct, util.genUUID(), proxyRowSuccess, proxyRowFailure); 
+                } else {
+                    var jsonMap = {};
+                    setJSONMap(jsonMap, 'beneficiary_code', code);
+                    jsonMap = JSON.stringify(jsonMap);
+                    odkTables.addRowWithSurvey('registration', 'registration', null, jsonMap);
+                }
+                odkCommon.removeFirstQueuedAction();
+                }, 1000);
+        }
+
+        function registrationVoucherCBFailure(error) {
+            console.log('registrationVoucherCBFailure called with error: ' + error);
+        }
+
+        function proxyRowSuccess(result) {
+            console.log('made it!');
+            odkData.changeAccessFilterOfRow('registration', 'HIDDEN', decodeURIComponent(util.getQueryParameter('user')), result.getRowId(0), setFilterSuccess, setFilterFailure);
+        }
+
+        function proxyRowFailure(error) {
+            console.log('proxy set failure with error: ' + error);
+        }
+
+        function setFilterSuccess(result) {
+            odkTables.editRowWithSurvey('registration', result.getRowId(0), 'registration', null);
+        }
+
+        function setFilterFailure(error) {
+            console.log('set filter failure with error: ' + error);
+        }
+
+        var setJSONMap = function(JSONMap, key, value) {
+            if (value !== null && value !== undefined) {
+                JSONMap[key] = JSON.stringify(value);
+            }
+        }
+
+        var getJSONMapValues = function() {
+            var jsonMap = {};
+            setJSONMap(jsonMap, 'beneficiary_code', code);
+            jsonMap = JSON.stringify(jsonMap);    
+            return jsonMap;
+        };
+
+        function voucherFunction() {
+            odkData.query('registration', 'beneficiary_code = ?', [code], null, null,
+                            null, null, null, null, true, voucherBCheckCBSuccess, voucherBCheckCBFailure);
+        }
+
+        function voucherBCheckCBSuccess(result) {
+            console.log('voucherBCheckCBSuccess called');
+            if (result.getCount() === 0) {
+                console.log("Count = 0");
+                odkData.query('entitlements', 'beneficiary_code = ?', [code],
+                    null, null, null, null, null, null, true, voucherSelfCBSuccess, voucherSelfCBFailure);
+            } else {
+                console.log("count > 0");
+                $('#search_results').text(code + " -- beneficiary with this code already detected in system: please contact Administrator");
+            }
+        }
+
+        function voucherBCheckCBFailure(error) {
+            console.log('voucherBCheckCBFailure called with error: ' + error);
+        }
+
+        function voucherSelfCBSuccess(result) {
+            console.log('voucherSelfCBSuccess called');
+            if (result.getCount() === 0) {
+                $('#search_results').text('Scanned voucher code not found in system');
+            } else {
+                $('#search_results').text(code + ' -- Voucher Detected!');
+                if (superUser) {
+                    var struct = {};
+                    struct['beneficiary_code'] = code;
+                        odkData.addRow('registration', struct, util.genUUID(), proxyVoucherSuccess, proxyVoucherFailure);
+                    
+                } else {
+                        odkTables.addRowWithSurvey(
+                        'registration', 'registration', null, getJSONMapValues());
+                }
+            }
+            odkCommon.removeFirstQueuedAction();
+        }
+
+        function voucherSelfCBFailure(error) {
+            console.log('activeCBFailure called with error: ' + error);
+        }
+
+        function proxyVoucherSuccess(result) {
+            odkData.changeAccessFilterOfRow('registration', 'HIDDEN', user, result.getRowId(0), setVoucherFilterSuccess, setVoucherFilterFailure);
+        }
+
+        function proxyVoucherFailure(error) {
+            console.log('proxy set failure with error: ' + error);
+        }
+
+        function setVoucherFilterSuccess(result) {
+            newVoucherReg = result.getRowId(0);
+            odkData.query('entitlements', 'beneficiary_code = ?', [code], null, null,null, null, null, null, true, entitlementFindSuccess, entitlementFindFailure);
+        }
+
+        function setVoucherFilterFailure(error) {
+            console.log('set filter failure with error: ' + error);
+        }
+
+        function entitlementFindSuccess(result) {
+            for (var i = 0; i < result.getCount() - 1; i++) {
+                odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, result.getRowId(i), voucherEntitlementUpdateSuccess, voucherEntitlementUpdateFailure);
+            }
+            odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, result.getRowId(result.getCount() - 1), finalUpdateSuccess, finalUpdateFailure);
+
+        }
+
+        function entitlementFindFailure(error) {
+            console.log('entitlement find failure with error: ' + error);
+        }
+
+        function voucherEntitlementUpdateSuccess(result) {
+            console.log('update voucher entitlement success');
+        }
+
+        function voucherEntitlementUpdateFailure(error) {
+            console.log('update voucher entitlement failure with error: ' + error);
+        }
+
+        function finalUpdateSuccess(result) {
+            odkTables.editRowWithSurvey('registration', newVoucherReg, 'registration', null)
+        }
+
+        function finalUpdateFailure(error) {
+            console.log('final update failure with error: ' + error);
+        }
+
+        function regOverrideFunction() {
+            console.log('entered regoverride path');
+            if (code !== "") {
+                console.log(code);
+                if (type == 'activate') {
+                    queriedType = 'false';
+                } else {
+                    queriedType = 'true';
+                }
+                odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, queriedType], null, null, null, null, null, null, true, regOverrideBenSuccess, regOverrideBenFailure);
+            }
+        }
+
+        function regOverrideBenSuccess(result) {
+            var descriptor;
+                if (type == 'activate') {
+                    descriptor = "Disabled";
+                } else {
+                    descriptor = "Active";
+                }
+            if (result.getCount() == 1) {
+                odkTables.openDetailView('registration', result.getRowId(0),
+                    'config/tables/registration/html/registration_detail.html?type=' + encodeURIComponent(type));
+            } else if (result.getCount() > 1) {
+                odkTables.openTableToListView(
+                    'registration',
+                    'beneficiary_code = ? and is_active = ?',
+                    [code, queriedType],
+                    'config/tables/registration/html/registration_list.html?type=' + encodeURIComponent(type));
+            } else {
+                $('#search_results').text('No ' + descriptor + ' Beneficiary Detected');
+            }
+        }
+
+        function regOverrideBenFailure(error) {
+            console.log('regOverrideFailure with error : ' + error)
+        }
+
+        function entOverrideFunction() {
+            if (code !== "") {
+                odkData.query('registration', 'beneficiary_code = ? and _filter_value = ?', 
+                    [code, user],
+                    null, null, null, null, null, null, true, benEntOverrideCBSuccess, benEntOverrideCBFailure);
+            } else {
+                $('#search_results').text("Please Enter Beneficiary Code");
+            }
+        }
+
+        function benEntOverrideCBSuccess(result) {
+            if (result.getCount() != 0) {
+                odkData.query('entitlements', 'beneficiary_code = ? and authorization_id = ? and _filter_value = ?', [code, util.getQueryParameter('authorization_id'), user], null, null, null, null, null, null, true, entCheckCBSuccess, entCheckCBFailure);
+            } else {
+                $('#search_results').text('Beneficiary code (' + code
+                                      + ') not found in system.');
+                odkCommon.removeFirstQueuedAction();
+            }
+        }
+
+        function benEntOverrideCBFailure(error) {
+            console.log('failed with error: ' + error);
+        }
+
+        function entCheckCBSuccess(result) {
+            if (result.getCount() == 0) {
+                odkData.query('authorizations', '_id = ?', 
+                            [util.getQueryParameter('authorization_id')],
+                            null, null, null, null, null, null, true, createOverrideCBSuccess, createOverrideCBFailure);
+            } else {
+                $('#search_results').text('Scanned beneficiary already qualifies for this authorization');
+            }
+        }
+
+        function entCheckCBFailure(error) {
+            console.log('scanCBFailure with error:' + error);
+        }
+
+        function createOverrideCBSuccess(result) {
+            $('#search_results').text('Beneficiary Eligible for Entitlement Override');
+
+            var struct = {};
+            struct['authorization_id'] = result.get('_id');
+            struct['authorization_name'] = result.get('authorization_name');
+            struct['item_pack_id'] = result.get('item_pack_id');
+            struct['item_pack_name'] = result.get('item_pack_name');
+            struct['item_description'] = result.get('item_description');
+            struct['ranges'] = result.get('ranges');
+            struct['beneficiary_code'] = code;
+            struct['is_delivered'] = 'false';
+            struct['is_override'] = 'true';
+            odkData.addRow(
+                'entitlements', struct, util.genUUID(), addDistCBSuccess, addDistCBFailure); 
+        }
+
+        function createOverrideCBFailure(error) {
+            console.log('createOverride failed with error: ' + error);
+        }
+
+        var addDistCBSuccess = function(result) {
+            console.log('authorizations_detail addDistCBSuccess');
+            odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, result.getRowId(0), finalFilterSuccess, finalFilterFailure);
+            $('#search_results').text('Override Successfully Created');
+        };
+
+        var addDistCBFailure = function(error) {
+            console.log('authorizations_detail addDistCBFailure: ' + error);
+        };
+
+        function finalFilterSuccess(result) {
+            console.log('final filter success');
+        }
+
+        function finalFilterFailure(error) {
+            console.log('final filter failure with error: ' + error);
         }
 
         </script>
@@ -131,11 +494,13 @@
     <body onload="display()">
         <div id="main">
             <h1 id="title"></h1>
+            <button type ='reg' id='view_details'>View Authorization Details</button>
             <select id="choose_user" class="dropdown" display='none'>
             </select>
             <button type="reg" id='barcode'>Scan Barcode</button>
-            <button type ='reg' id='manual'>Manually Enter</button>
-            <button type ='reg' id='view_details'>View Authorization Details</button>
+            <div id="enter_code" style='text-align: center'><input id="code" style='margin: auto' style='font-size: 20px'></input></div>
+            <button id='search'>Enter</button>
+            <p><span id="search_results"></span></p>
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>
     </body>

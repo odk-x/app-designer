@@ -1,0 +1,56 @@
+<!--Menu-->
+<html>
+    <head>
+        <meta name='viewport' content='width=device-width,height=device-height,initial-scale=1.0'/>
+        <link href='css/index.css' type='text/css' rel='stylesheet' />
+        <script type='text/javascript' src='libs/jquery.js'></script>
+        <script type='text/javascript' src='../../system/js/odkCommon.js'></script>
+        <script type='text/javascript' src='../../system/js/odkData.js'></script>
+        <script type='text/javascript' src='../../system/tables/js/odkTables.js'></script>
+        <script type='text/javascript' src='../../config/assets/js/util.js'></script>
+        <script type='text/javascript'>
+
+        // Displays homescreen
+        function display() {
+            var type = util.getQueryParameter('type');
+            var title = $('#title');
+            var list = document.createElement('button');
+            list.setAttribute('id', 'lists');
+            if (type == 'registration') {
+                title.text('Beneficiary Data');
+                list.innerHTML = 'Beneficiary Lists';
+                list.onclick = function() {
+                  odkTables.launchHTML(
+                      'config/assets/beneficiary_lists.html');
+                }
+            } else {
+                title.text('Delivery Data');
+                list.innerHTML = 'View All Deliveries';
+                list.onclick = function() {
+                    odkTables.launchHTML(
+                        'config/tables/deliveries/html/deliveries_list.html');
+                }
+            }
+            document.getElementById('wrapper').appendChild(list);
+
+            var search = document.createElement('button');
+            search.setAttribute('id', 'searcher');
+            search.innerHTML = 'Advanced Search';
+            search.onclick = function() {
+                odkTables.launchHTML(
+                    'config/assets/search.html?type=' + type);
+            }
+            document.getElementById('wrapper').appendChild(search);
+        }
+        
+        </script>
+    </head>
+
+    <body onload='display();'>
+        <div id='main'>
+            <h1 id='title'></h1>
+            <div id='wrapper'></div>
+        </div>
+        <div id='logo'><img src='img/small_2025.jpg'></div>
+    </body>
+</html>

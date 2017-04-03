@@ -6,16 +6,22 @@
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../config/assets/js/util.js"></script>
         <script type="text/javascript">
 
         var sqlWhereClause = null;
         var sqlSelectionArgs = null;
         var windowHeight = $(window).innerHeight();
-        //var search;
         var search_font;
+        var type = util.getQueryParameter('type');
+
         function start() {
-            odkData.query('deliveries', null, null, null, null, null, null, 
-                                    null, null, null, populateSuccess, populateFailure);
+            if (type == 'registration') {
+                $('#title').text('Search for Beneficiaries');                
+            } else {
+                $('#title').text('Search for Deliveries');
+            }
+            odkData.query(type, null, null, null, null, null, null, null, null, null, populateSuccess, populateFailure);
             search_font = $('#search').css('font-size');
         }
 
@@ -37,29 +43,42 @@
         function search() {
             sqlWhereClause = document.getElementById('field').value +' = ?';
             sqlSelectionArgs = document.getElementById('value').value;
-            odkData.query('deliveries', sqlWhereClause, [sqlSelectionArgs],
+            odkData.query(type, sqlWhereClause, [sqlSelectionArgs],
             null, null, null, null, null, null, null,
             successCallbackFn, failureCallbackFn);
         }
 
         function successCallbackFn(result) {
-            document.getElementById('search_results').innerHTML = result.getCount() + ' deliveries found!';
-            if (result.getCount() > 0) {
-                document.getElementById('launch').style.display='block';
+            var count = result.getCount();
+            var label;
+            if (type = 'registration') {
+                if (count == 1) {
+                    label = 'beneficiary';
+                } else {
+                    label = 'beneficiaries';
+                }
             } else {
-                document.getElementById('launch').style.display='none';
+                if (count == 1) {
+                    label = 'delivery';
+                } else {
+                    label = 'deliveries';
+                }
+            }
+            $('#search_results').text(count + ' ' + label + ' found');
+            if (count > 0) {
+                $('#launch').show();
+            } else {
+                $('#launch').hide();
             }
         }
 
         function failureCallbackFn(error) {
-            document.getElementById('search_results').innerHTML = 'invalid field!';
-            document.getElementById('launch').style.display='none';
+            $('#search_results').text('invalid field');
+            $('#launch').hide();
         }
 
         function launch() {
-            console.log(sqlWhereClause + ' ---- ' + sqlSelectionArgs);
-                odkTables.openTableToListView('deliveries', sqlWhereClause,
-                    [sqlSelectionArgs], 'config/tables/deliveries/html/deliveries_list.html');
+            odkTables.openTableToListView(type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' + type + '/html/' + type + '_list.html');
         }
 
         $(window).resize(function() {
@@ -85,7 +104,7 @@
 
     <body onload="start()">
         <div id="main">
-            <h1 id="title">Search for Deliveries</h1>
+            <h1 id="title"></h1>
             <form>    
                 <select id="field"></select>
             </form>

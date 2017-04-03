@@ -11,7 +11,6 @@
         // Displays homescreen
         function display() {
 
-            /*    Screen new client option that launches new client list view */
             var override_registration = document.createElement("button");
             override_registration.setAttribute("id", "registration");
             override_registration.innerHTML = "Override Registration";
@@ -21,16 +20,14 @@
             };
             document.getElementById("wrapper").appendChild(override_registration);    
 
-            // Follow up with existing client option that launches
-            // 'femaleClients' table list view
-            var override_distribution = document.createElement("button");
-            override_distribution.setAttribute("id", "authorization");
-            override_distribution.innerHTML = "Override Authorization";
-            override_distribution.onclick = function() {
+            var override_entitlement = document.createElement("button");
+            override_entitlement.setAttribute("id", "authorization");
+            override_entitlement.innerHTML = "Override Entitlement";
+            override_entitlement.onclick = function() {
               odkTables.launchHTML(
                   'config/tables/authorizations/html/authorizations_list.html');
             }
-            document.getElementById("wrapper").appendChild(override_distribution);    
+            document.getElementById("wrapper").appendChild(override_entitlement);    
         }
             
         

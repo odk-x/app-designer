@@ -15,7 +15,7 @@
             benData.innerHTML = "View Beneficiary Data";
             benData.onclick = function() {
               odkTables.launchHTML(
-                  'config/assets/beneficiary_data.html');
+                  'config/assets/data_options.html?type=registration');
             }
             document.getElementById("wrapper").appendChild(benData);
 
@@ -24,7 +24,7 @@
             delData.innerHTML = "View Delivery Data";
             delData.onclick = function() {
               odkTables.launchHTML(
-                  'config/assets/delivery_data.html');
+                  'config/assets/data_options.html?type=deliveries');
             }
             document.getElementById("wrapper").appendChild(delData);
         }
@@ -35,7 +35,7 @@
 
     <body onload="display();">
         <div id="main">
-            <h1 id="title">Collected Data</h1>
+            <h1 id="title">Data Categories</h1>
             <div id="wrapper"></div>
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>
