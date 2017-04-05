@@ -19,7 +19,6 @@
         var type = util.getQueryParameter('type');
         var code;
 
-
         function display() {
             $('#choose_user').hide();
             if (type != 'ent_override') {
@@ -85,8 +84,6 @@
             }, function(err) {
                 console.log('promise failure with error: ' + err);
             });
-
-            //odkData.getUsers(userSuccess, userFailure);
         }
 
         function addOption(item, index) {
@@ -132,7 +129,6 @@
             } else if (type == 'ent_override') {
                 entOverrideFunction();
             }
-
         }
         function deliveryFunction() {
             if (superUser) {
@@ -410,6 +406,7 @@
         function regOverrideBenFailure(error) {
             console.log('regOverrideFailure with error : ' + error)
         }
+
 
         function entOverrideFunction() {
             if (code !== "") {
