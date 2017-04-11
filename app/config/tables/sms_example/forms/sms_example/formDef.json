@@ -5,7 +5,9 @@
         "type": "text",
         "name": "name",
         "display": {
-          "text": "Enter a Name"
+          "prompt": {
+            "text": "Enter a Name"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "text",
         "name": "phone_number",
         "display": {
-          "text": "Enter a Phone Number"
+          "prompt": {
+            "text": "Enter a Phone Number"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "send_sms",
         "name": "send_message",
         "display": {
-          "text": "Send an SMS"
+          "prompt": {
+            "text": "Send an SMS"
+          }
         },
         "_row_num": 4
       }
@@ -47,7 +53,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "SMS Example"
+          "title": {
+            "text": "SMS Example"
+          }
         },
         "_row_num": 4
       },
@@ -71,10 +79,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -90,7 +95,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "SMS Example"
+          "title": {
+            "text": "SMS Example"
+          }
         },
         "_row_num": 4
       },
@@ -104,7 +111,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -119,12 +126,34 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "SMS Example"
+          "title": {
+            "text": "SMS Example"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -174,7 +203,9 @@
             "type": "text",
             "name": "name",
             "display": {
-              "text": "Enter a Name"
+              "prompt": {
+                "text": "Enter a Name"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -187,7 +218,9 @@
             "type": "text",
             "name": "phone_number",
             "display": {
-              "text": "Enter a Phone Number"
+              "prompt": {
+                "text": "Enter a Phone Number"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -200,7 +233,9 @@
             "type": "send_sms",
             "name": "send_message",
             "display": {
-              "text": "Send an SMS"
+              "prompt": {
+                "text": "Send an SMS"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -298,7 +333,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "SMS Example"
+              "title": {
+                "text": "SMS Example"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -603,7 +640,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"SMS Example\""
+        "_value": "{\"text\":\"SMS Example\"}"
       }
     ]
   }

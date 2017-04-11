@@ -5,7 +5,9 @@
         "type": "text",
         "name": "plot_name",
         "display": {
-          "text": "Enter the name of the plot:"
+          "prompt": {
+            "text": "Enter the name of the plot:"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "geopoint",
         "name": "location",
         "display": {
-          "text": "Capture location:"
+          "prompt": {
+            "text": "Capture location:"
+          }
         },
         "_row_num": 3
       },
@@ -22,7 +26,9 @@
         "values_list": "plant_type",
         "name": "planting",
         "display": {
-          "text": "What type of maize plant is in this plot?"
+          "prompt": {
+            "text": "What type of maize plant is in this plot?"
+          }
         },
         "_row_num": 4
       },
@@ -30,7 +36,9 @@
         "type": "number",
         "name": "plot_size",
         "display": {
-          "text": "How big is this plot in hectares?"
+          "prompt": {
+            "text": "How big is this plot in hectares?"
+          }
         },
         "_row_num": 5
       }
@@ -75,7 +83,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Plot"
+          "title": {
+            "text": "Plot"
+          }
         },
         "_row_num": 4
       },
@@ -175,10 +185,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -194,7 +201,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Plot"
+          "title": {
+            "text": "Plot"
+          }
         },
         "_row_num": 4
       },
@@ -218,7 +227,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -233,7 +242,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Plot"
+          "title": {
+            "text": "Plot"
+          }
         },
         "_row_num": 4
       }
@@ -265,6 +276,26 @@
           "_row_num": 4
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
     },
     "queries": {},
     "calculates": {},
@@ -344,7 +375,9 @@
             "type": "text",
             "name": "plot_name",
             "display": {
-              "text": "Enter the name of the plot:"
+              "prompt": {
+                "text": "Enter the name of the plot:"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -357,7 +390,9 @@
             "type": "geopoint",
             "name": "location",
             "display": {
-              "text": "Capture location:"
+              "prompt": {
+                "text": "Capture location:"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -371,7 +406,9 @@
             "values_list": "plant_type",
             "name": "planting",
             "display": {
-              "text": "What type of maize plant is in this plot?"
+              "prompt": {
+                "text": "What type of maize plant is in this plot?"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -384,7 +421,9 @@
             "type": "number",
             "name": "plot_size",
             "display": {
-              "text": "How big is this plot in hectares?"
+              "prompt": {
+                "text": "How big is this plot in hectares?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -489,7 +528,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Plot"
+              "title": {
+                "text": "Plot"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -894,7 +935,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Plot\""
+        "_value": "{\"text\":\"Plot\"}"
       },
       {
         "_partition": "Table",

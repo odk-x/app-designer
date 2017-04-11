@@ -1,9 +1,11 @@
-<p>{{localize display.text}}</p>
+<div>
+{{> labelHint}}
 <select class="form-control"  tabindex="0" >
     {{#each choices}}
         <option 
             value="{{value}}">
-            {{localize display.text}}
+            {{localizeText display}}
         </option>
     {{/each}}
 </select>
+</div>

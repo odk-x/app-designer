@@ -4,7 +4,9 @@
       {
         "type": "note",
         "display": {
-          "text": "This form uses the font-size and theme settings. The font-size setting changes the size of all the text in the form. The theme alters the overall look of the form."
+          "prompt": {
+            "text": "This form uses the font-size and theme settings. The font-size setting changes the size of all the text in the form. The theme alters the overall look of the form."
+          }
         },
         "hideInContents": true,
         "_row_num": 2
@@ -17,7 +19,9 @@
         "type": "text",
         "name": "name",
         "display": {
-          "text": "Enter your name"
+          "prompt": {
+            "text": "Enter your name"
+          }
         },
         "_row_num": 4
       },
@@ -26,7 +30,9 @@
         "values_list": "continents",
         "name": "visited_continents",
         "display": {
-          "text": "Which continents have you visited?"
+          "prompt": {
+            "text": "Which continents have you visited?"
+          }
         },
         "_row_num": 5
       },
@@ -44,7 +50,9 @@
         "values_list": "yesno",
         "name": "visited_seattle",
         "display": {
-          "text": "Have you visited Seattle?"
+          "prompt": {
+            "text": "Have you visited Seattle?"
+          }
         },
         "required": true,
         "_row_num": 8
@@ -56,8 +64,10 @@
       {
         "type": "note",
         "display": {
-          "text": "Additionally, there is a customStyles.css file included in the form directory that alters the background and the way images (like the one above) are displayed.",
-          "image": "dolphin.png"
+          "prompt": {
+            "text": "Additionally, there is a customStyles.css file included in the form directory that alters the background and the way images (like the one above) are displayed.",
+            "image": "dolphin.png"
+          }
         },
         "hideInContents": true,
         "_row_num": 10
@@ -72,8 +82,12 @@
         "type": "integer",
         "name": "rating",
         "display": {
-          "text": "How would you rate this survey?",
-          "hint": "1 is very bad. 10 is very good."
+          "prompt": {
+            "text": "How would you rate this survey?"
+          },
+          "hint": {
+            "text": "1 is very bad. 10 is very good."
+          }
         },
         "inputAttributes": {
           "type": "range",
@@ -171,7 +185,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Custom Appearance Form"
+          "title": {
+            "text": "Custom Appearance Form"
+          }
         },
         "_row_num": 4
       },
@@ -200,10 +216,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -219,7 +232,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Custom Appearance Form"
+          "title": {
+            "text": "Custom Appearance Form"
+          }
         },
         "_row_num": 4
       },
@@ -244,7 +259,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -259,7 +274,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Custom Appearance Form"
+          "title": {
+            "text": "Custom Appearance Form"
+          }
         },
         "_row_num": 4
       }
@@ -342,6 +359,26 @@
         }
       ]
     },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -409,7 +446,9 @@
           {
             "type": "note",
             "display": {
-              "text": "This form uses the font-size and theme settings. The font-size setting changes the size of all the text in the form. The theme alters the overall look of the form."
+              "prompt": {
+                "text": "This form uses the font-size and theme settings. The font-size setting changes the size of all the text in the form. The theme alters the overall look of the form."
+              }
             },
             "hideInContents": true,
             "_row_num": 2,
@@ -423,7 +462,9 @@
             "type": "text",
             "name": "name",
             "display": {
-              "text": "Enter your name"
+              "prompt": {
+                "text": "Enter your name"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -437,7 +478,9 @@
             "values_list": "continents",
             "name": "visited_continents",
             "display": {
-              "text": "Which continents have you visited?"
+              "prompt": {
+                "text": "Which continents have you visited?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -451,7 +494,9 @@
             "values_list": "yesno",
             "name": "visited_seattle",
             "display": {
-              "text": "Have you visited Seattle?"
+              "prompt": {
+                "text": "Have you visited Seattle?"
+              }
             },
             "required": true,
             "_row_num": 8,
@@ -464,8 +509,10 @@
           {
             "type": "note",
             "display": {
-              "text": "Additionally, there is a customStyles.css file included in the form directory that alters the background and the way images (like the one above) are displayed.",
-              "image": "dolphin.png"
+              "prompt": {
+                "text": "Additionally, there is a customStyles.css file included in the form directory that alters the background and the way images (like the one above) are displayed.",
+                "image": "dolphin.png"
+              }
             },
             "hideInContents": true,
             "_row_num": 10,
@@ -479,8 +526,12 @@
             "type": "integer",
             "name": "rating",
             "display": {
-              "text": "How would you rate this survey?",
-              "hint": "1 is very bad. 10 is very good."
+              "prompt": {
+                "text": "How would you rate this survey?"
+              },
+              "hint": {
+                "text": "1 is very bad. 10 is very good."
+              }
             },
             "inputAttributes": {
               "type": "range",
@@ -642,7 +693,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Custom Appearance Form"
+              "title": {
+                "text": "Custom Appearance Form"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -998,7 +1051,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Custom Appearance Form\""
+        "_value": "{\"text\":\"Custom Appearance Form\"}"
       }
     ]
   }

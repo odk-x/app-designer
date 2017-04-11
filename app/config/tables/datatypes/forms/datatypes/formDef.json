@@ -4,8 +4,12 @@
       {
         "type": "note",
         "display": {
-          "text": "This form is used for Java validation",
-          "hint": "Do not delete"
+          "prompt": {
+            "text": "This form is used for Java validation"
+          },
+          "hint": {
+            "text": "Do not delete"
+          }
         },
         "_row_num": 2
       }
@@ -114,7 +118,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Datatypes"
+          "title": {
+            "text": "Datatypes"
+          }
         },
         "_row_num": 4
       }
@@ -133,10 +139,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -152,7 +155,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Datatypes"
+          "title": {
+            "text": "Datatypes"
+          }
         },
         "_row_num": 4
       },
@@ -167,7 +172,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -182,12 +187,34 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Datatypes"
+          "title": {
+            "text": "Datatypes"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -388,8 +415,12 @@
           {
             "type": "note",
             "display": {
-              "text": "This form is used for Java validation",
-              "hint": "Do not delete"
+              "prompt": {
+                "text": "This form is used for Java validation"
+              },
+              "hint": {
+                "text": "Do not delete"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -473,7 +504,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Datatypes"
+              "title": {
+                "text": "Datatypes"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1151,7 +1184,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Datatypes\""
+        "_value": "{\"text\":\"Datatypes\"}"
       }
     ]
   }

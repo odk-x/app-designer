@@ -16,7 +16,9 @@
         "values_list": "injuries",
         "name": "injury_faced",
         "display": {
-          "text": "What was the sickness/injury {{data.name}} faced?"
+          "prompt": {
+            "text": "What was the sickness/injury {{data.name}} faced?"
+          }
         },
         "_row_num": 2
       },
@@ -24,8 +26,12 @@
         "type": "integer",
         "name": "days_absent",
         "display": {
-          "text": "For how many days was {{data.name}} absent from usual activity due to the health problem during the last two months?",
-          "hint": "# of days"
+          "prompt": {
+            "text": "For how many days was {{data.name}} absent from usual activity due to the health problem during the last two months?"
+          },
+          "hint": {
+            "text": "# of days"
+          }
         },
         "_row_num": 3
       },
@@ -34,7 +40,9 @@
         "values_list": "no_yes",
         "name": "diagnosis",
         "display": {
-          "text": "Did {{data.name}} receive a diagnosis for this condition?"
+          "prompt": {
+            "text": "Did {{data.name}} receive a diagnosis for this condition?"
+          }
         },
         "_row_num": 4
       },
@@ -48,7 +56,9 @@
         "values_list": "diagnosis_source",
         "name": "diagnosis_by_whom",
         "display": {
-          "text": "By whom?"
+          "prompt": {
+            "text": "By whom?"
+          }
         },
         "_row_num": 6
       },
@@ -254,7 +264,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.1"
+          "title": {
+            "text": "Section 9.1"
+          }
         },
         "_row_num": 5
       },
@@ -612,10 +624,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -636,7 +645,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.1"
+          "title": {
+            "text": "Section 9.1"
+          }
         },
         "_row_num": 5
       },
@@ -650,7 +661,7 @@
         "_row_num": 5,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -665,7 +676,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.1"
+          "title": {
+            "text": "Section 9.1"
+          }
         },
         "_row_num": 5
       }
@@ -1555,7 +1568,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 9.1"
+              "title": {
+                "text": "Section 9.1"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1652,7 +1667,9 @@
             "values_list": "injuries",
             "name": "injury_faced",
             "display": {
-              "text": "What was the sickness/injury {{data.name}} faced?"
+              "prompt": {
+                "text": "What was the sickness/injury {{data.name}} faced?"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -1665,8 +1682,12 @@
             "type": "integer",
             "name": "days_absent",
             "display": {
-              "text": "For how many days was {{data.name}} absent from usual activity due to the health problem during the last two months?",
-              "hint": "# of days"
+              "prompt": {
+                "text": "For how many days was {{data.name}} absent from usual activity due to the health problem during the last two months?"
+              },
+              "hint": {
+                "text": "# of days"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1680,7 +1701,9 @@
             "values_list": "no_yes",
             "name": "diagnosis",
             "display": {
-              "text": "Did {{data.name}} receive a diagnosis for this condition?"
+              "prompt": {
+                "text": "Did {{data.name}} receive a diagnosis for this condition?"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -1694,7 +1717,9 @@
             "values_list": "diagnosis_source",
             "name": "diagnosis_by_whom",
             "display": {
-              "text": "By whom?"
+              "prompt": {
+                "text": "By whom?"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,

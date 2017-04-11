@@ -3,4 +3,4 @@ Column,refrigerator_condition,displayChoicesList,object,"[{""choice_list_name"":
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,refrigerators
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Initial refrigerator information"""
+Table,default,displayName,object,"{""text"":""Initial refrigerator information""}"

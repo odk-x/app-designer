@@ -33,14 +33,14 @@
                             id="{{data_value}}"
                             value="{{data_value}}"
 							tabindex="0"/>
-                        {{#if display.image}}
+                        {{#ifHasImageLocalization display}}
                             <center>
-                                <img src="{{formDirectory}}{{localize display.image}}"></img>
+                                <img src="{{localizeImage display}}"></img>
                             </center>
-                        {{/if}}
-                        {{#if display.text}}
-                            {{{localize display.text}}}
-                        {{/if}}
+                        {{/ifHasImageLocalization}}
+                        {{#ifHasTextLocalization display}}
+                            {{{localizeText display}}}
+                        {{/ifHasTextLocalization}}
                     </td>
             {{#if isLastInRow}}
                 </tr><!-- row -->
@@ -49,10 +49,9 @@
         </tbody>
     </table><!-- container -->
     {{#unless required}}
-        {{#if false}}
         {{#if display.deselect}}
-            <a data-role="button" data-mini="true" class="deselect" tabindex="0">{{localize display.deselect}}</a>
-        {{/if}}
+			<div style="clear:both;"></div>
+            <a data-role="button" data-mini="true" class="deselect" tabindex="0">{{localize display.select_deselect_label}}</a>
         {{/if}}
     {{/unless}}
     <div style="clear:both;"></div>

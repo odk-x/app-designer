@@ -15,7 +15,9 @@
         "type": "text",
         "name": "qrcode",
         "display": {
-          "text": "This text is encoded in the QR code."
+          "prompt": {
+            "text": "This text is encoded in the QR code."
+          }
         },
         "_row_num": 4
       },
@@ -37,7 +39,9 @@
         "type": "integer",
         "name": "stay",
         "display": {
-          "text": "Length of Stay (days):"
+          "prompt": {
+            "text": "Length of Stay (days):"
+          }
         },
         "_row_num": 8
       },
@@ -59,7 +63,9 @@
         "type": "text",
         "name": "name",
         "display": {
-          "text": "Name:"
+          "prompt": {
+            "text": "Name:"
+          }
         },
         "_row_num": 12
       },
@@ -81,7 +87,9 @@
         "type": "integer",
         "name": "roomNum",
         "display": {
-          "text": "Room Number:"
+          "prompt": {
+            "text": "Room Number:"
+          }
         },
         "_row_num": 16
       },
@@ -103,7 +111,9 @@
         "type": "text",
         "name": "address",
         "display": {
-          "text": "Home Address:"
+          "prompt": {
+            "text": "Home Address:"
+          }
         },
         "_row_num": 20
       },
@@ -125,7 +135,9 @@
         "type": "select_one",
         "name": "mon_chores",
         "display": {
-          "text": "Monday Chores"
+          "prompt": {
+            "text": "Monday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 24
@@ -148,7 +160,9 @@
         "type": "select_one",
         "name": "tues_chores",
         "display": {
-          "text": "Tuesday Chores"
+          "prompt": {
+            "text": "Tuesday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 28
@@ -171,7 +185,9 @@
         "type": "select_one",
         "name": "wed_chores",
         "display": {
-          "text": "Wed. Chores"
+          "prompt": {
+            "text": "Wed. Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 32
@@ -194,7 +210,9 @@
         "type": "select_one",
         "name": "thurs_chores",
         "display": {
-          "text": "Thursday Chores"
+          "prompt": {
+            "text": "Thursday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 36
@@ -217,7 +235,9 @@
         "type": "select_one",
         "name": "fri_chores",
         "display": {
-          "text": "Friday Chores"
+          "prompt": {
+            "text": "Friday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 40
@@ -240,7 +260,9 @@
         "type": "select_one",
         "name": "sat_chores",
         "display": {
-          "text": "Saturday Chores"
+          "prompt": {
+            "text": "Saturday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 44
@@ -263,7 +285,9 @@
         "type": "select_one",
         "name": "sun_chores",
         "display": {
-          "text": "Sunday Chores"
+          "prompt": {
+            "text": "Sunday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 48
@@ -286,7 +310,9 @@
         "type": "text",
         "name": "comments",
         "display": {
-          "text": "Comments:"
+          "prompt": {
+            "text": "Comments:"
+          }
         },
         "_row_num": 52
       },
@@ -367,7 +393,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "scan_example"
+          "title": {
+            "text": "scan_example"
+          }
         },
         "_row_num": 4
       }
@@ -420,10 +448,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -439,7 +464,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "scan_example"
+          "title": {
+            "text": "scan_example"
+          }
         },
         "_row_num": 4
       },
@@ -454,7 +481,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -469,7 +496,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "scan_example"
+          "title": {
+            "text": "scan_example"
+          }
         },
         "_row_num": 4
       }
@@ -509,6 +538,26 @@
           "_row_num": 5
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
     },
     "queries": {},
     "calculates": {},
@@ -1022,7 +1071,9 @@
             "type": "text",
             "name": "qrcode",
             "display": {
-              "text": "This text is encoded in the QR code."
+              "prompt": {
+                "text": "This text is encoded in the QR code."
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -1046,7 +1097,9 @@
             "type": "integer",
             "name": "stay",
             "display": {
-              "text": "Length of Stay (days):"
+              "prompt": {
+                "text": "Length of Stay (days):"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -1070,7 +1123,9 @@
             "type": "text",
             "name": "name",
             "display": {
-              "text": "Name:"
+              "prompt": {
+                "text": "Name:"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -1094,7 +1149,9 @@
             "type": "integer",
             "name": "roomNum",
             "display": {
-              "text": "Room Number:"
+              "prompt": {
+                "text": "Room Number:"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -1118,7 +1175,9 @@
             "type": "text",
             "name": "address",
             "display": {
-              "text": "Home Address:"
+              "prompt": {
+                "text": "Home Address:"
+              }
             },
             "_row_num": 20,
             "__rowNum__": 19,
@@ -1142,7 +1201,9 @@
             "type": "select_one",
             "name": "mon_chores",
             "display": {
-              "text": "Monday Chores"
+              "prompt": {
+                "text": "Monday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 24,
@@ -1167,7 +1228,9 @@
             "type": "select_one",
             "name": "tues_chores",
             "display": {
-              "text": "Tuesday Chores"
+              "prompt": {
+                "text": "Tuesday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 28,
@@ -1192,7 +1255,9 @@
             "type": "select_one",
             "name": "wed_chores",
             "display": {
-              "text": "Wed. Chores"
+              "prompt": {
+                "text": "Wed. Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 32,
@@ -1217,7 +1282,9 @@
             "type": "select_one",
             "name": "thurs_chores",
             "display": {
-              "text": "Thursday Chores"
+              "prompt": {
+                "text": "Thursday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 36,
@@ -1242,7 +1309,9 @@
             "type": "select_one",
             "name": "fri_chores",
             "display": {
-              "text": "Friday Chores"
+              "prompt": {
+                "text": "Friday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 40,
@@ -1267,7 +1336,9 @@
             "type": "select_one",
             "name": "sat_chores",
             "display": {
-              "text": "Saturday Chores"
+              "prompt": {
+                "text": "Saturday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 44,
@@ -1292,7 +1363,9 @@
             "type": "select_one",
             "name": "sun_chores",
             "display": {
-              "text": "Sunday Chores"
+              "prompt": {
+                "text": "Sunday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 48,
@@ -1317,7 +1390,9 @@
             "type": "text",
             "name": "comments",
             "display": {
-              "text": "Comments:"
+              "prompt": {
+                "text": "Comments:"
+              }
             },
             "_row_num": 52,
             "__rowNum__": 51,
@@ -1589,7 +1664,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "scan_example"
+              "title": {
+                "text": "scan_example"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -2876,7 +2953,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"scan_example\""
+        "_value": "{\"text\":\"scan_example\"}"
       },
       {
         "_partition": "Table",

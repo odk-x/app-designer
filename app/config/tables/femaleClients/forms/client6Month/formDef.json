@@ -5,7 +5,9 @@
         "type": "text",
         "name": "interviewer_init",
         "display": {
-          "text": "Enter Interviewer Initials"
+          "prompt": {
+            "text": "Enter Interviewer Initials"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "integer",
         "name": "interviewer_id",
         "display": {
-          "text": "Enter Interviewer ID Number"
+          "prompt": {
+            "text": "Enter Interviewer ID Number"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "date",
         "name": "date",
         "display": {
-          "text": "Date of Interview"
+          "prompt": {
+            "text": "Date of Interview"
+          }
         },
         "_row_num": 4
       },
@@ -29,8 +35,12 @@
         "type": "integer",
         "name": "client_id",
         "display": {
-          "text": "Client ID:",
-          "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+          "prompt": {
+            "text": "Client ID:"
+          },
+          "hint": {
+            "text": "5 Digit ID, cannot include 0. \nex: 12345"
+          }
         },
         "required": true,
         "_row_num": 5
@@ -39,7 +49,9 @@
         "type": "note",
         "name": "script1",
         "display": {
-          "text": "Script 1: I am now going to ask questions about your pregnancy. We will do our best to keep your answers confidential. By providing honest answers, you may be able to help us understand the health issues in your community better."
+          "prompt": {
+            "text": "Script 1: I am now going to ask questions about your pregnancy. We will do our best to keep your answers confidential. By providing honest answers, you may be able to help us understand the health issues in your community better."
+          }
         },
         "_row_num": 6
       },
@@ -47,7 +59,9 @@
         "type": "date",
         "name": "delivery_date",
         "display": {
-          "text": "When did you deliver?"
+          "prompt": {
+            "text": "When did you deliver?"
+          }
         },
         "_row_num": 7
       },
@@ -56,7 +70,9 @@
         "values_list": "yes_noanswer",
         "name": "baby_alive",
         "display": {
-          "text": "Was the baby born alive?"
+          "prompt": {
+            "text": "Was the baby born alive?"
+          }
         },
         "_row_num": 8
       },
@@ -69,7 +85,9 @@
         "type": "decimal",
         "name": "baby_weight",
         "display": {
-          "text": "How much did your baby weigh after birth? (Kg)"
+          "prompt": {
+            "text": "How much did your baby weigh after birth? (Kg)"
+          }
         },
         "_row_num": 10
       },
@@ -78,7 +96,9 @@
         "values_list": "yes_noanswer",
         "name": "baby_alive_now",
         "display": {
-          "text": "Is your baby alive now?"
+          "prompt": {
+            "text": "Is your baby alive now?"
+          }
         },
         "_row_num": 11
       },
@@ -91,7 +111,9 @@
         "type": "decimal",
         "name": "baby_weight_now",
         "display": {
-          "text": "How much does your baby weigh now? (Kg)"
+          "prompt": {
+            "text": "How much does your baby weigh now? (Kg)"
+          }
         },
         "_row_num": 13
       },
@@ -107,7 +129,9 @@
         "type": "note",
         "name": "script2",
         "display": {
-          "text": "Script 2: Now I would like to talk to you about your antenatal care for your recent pregnancy."
+          "prompt": {
+            "text": "Script 2: Now I would like to talk to you about your antenatal care for your recent pregnancy."
+          }
         },
         "_row_num": 16
       },
@@ -116,7 +140,9 @@
         "values_list": "birthplace",
         "name": "delivery_location",
         "display": {
-          "text": "Where did you give birth?"
+          "prompt": {
+            "text": "Where did you give birth?"
+          }
         },
         "_row_num": 17
       },
@@ -129,7 +155,9 @@
         "type": "text",
         "name": "delivery_location_other",
         "display": {
-          "text": "Specify the other delivery location"
+          "prompt": {
+            "text": "Specify the other delivery location"
+          }
         },
         "_row_num": 19
       },
@@ -142,7 +170,9 @@
         "values_list": "attendant",
         "name": "delivery_assisted",
         "display": {
-          "text": "Who assisted with the delivery?"
+          "prompt": {
+            "text": "Who assisted with the delivery?"
+          }
         },
         "_row_num": 21
       },
@@ -155,7 +185,9 @@
         "type": "text",
         "name": "delivery_assisted_other",
         "display": {
-          "text": "Specify the other person who assisted in delivering"
+          "prompt": {
+            "text": "Specify the other person who assisted in delivering"
+          }
         },
         "_row_num": 23
       },
@@ -168,7 +200,9 @@
         "values_list": "yes_notsure",
         "name": "induced_labor",
         "display": {
-          "text": "Was your labor induced?"
+          "prompt": {
+            "text": "Was your labor induced?"
+          }
         },
         "_row_num": 25
       },
@@ -177,7 +211,9 @@
         "values_list": "yes_noanswer",
         "name": "c_section",
         "display": {
-          "text": "Did you get a cesarean section?"
+          "prompt": {
+            "text": "Did you get a cesarean section?"
+          }
         },
         "_row_num": 26
       },
@@ -186,8 +222,12 @@
         "values_list": "complication",
         "name": "complications",
         "display": {
-          "text": "Were there any complications during delivery?",
-          "hint": "Explain and review options with client and select all that apply."
+          "prompt": {
+            "text": "Were there any complications during delivery?"
+          },
+          "hint": {
+            "text": "Explain and review options with client and select all that apply."
+          }
         },
         "_row_num": 27
       },
@@ -200,7 +240,9 @@
         "type": "text",
         "name": "complications_other",
         "display": {
-          "text": "Specify other complication"
+          "prompt": {
+            "text": "Specify other complication"
+          }
         },
         "_row_num": 29
       },
@@ -212,7 +254,9 @@
         "type": "note",
         "name": "script3",
         "display": {
-          "text": "Script 3: Now I would like to talk to you about breastfeeding."
+          "prompt": {
+            "text": "Script 3: Now I would like to talk to you about breastfeeding."
+          }
         },
         "_row_num": 31
       },
@@ -221,7 +265,9 @@
         "values_list": "yes_noanswer",
         "name": "bf_after_deliv",
         "display": {
-          "text": "Did you ever breastfeed after this delivery?"
+          "prompt": {
+            "text": "Did you ever breastfeed after this delivery?"
+          }
         },
         "_row_num": 32
       },
@@ -235,7 +281,9 @@
         "values_list": "yes_noanswer",
         "name": "still_bf",
         "display": {
-          "text": "Are you still breastfeeding?"
+          "prompt": {
+            "text": "Are you still breastfeeding?"
+          }
         },
         "_row_num": 34
       },
@@ -243,8 +291,12 @@
         "type": "integer",
         "name": "bf_duration",
         "display": {
-          "text": "For how long has this child been breastfed?",
-          "hint": "Weeks"
+          "prompt": {
+            "text": "For how long has this child been breastfed?"
+          },
+          "hint": {
+            "text": "Weeks"
+          }
         },
         "_row_num": 35
       },
@@ -256,7 +308,9 @@
         "type": "note",
         "name": "script4",
         "display": {
-          "text": "Script 4: Now I would like to talk about your health and your child’s health."
+          "prompt": {
+            "text": "Script 4: Now I would like to talk about your health and your child’s health."
+          }
         },
         "_row_num": 37
       },
@@ -265,8 +319,12 @@
         "values_list": "yes_noanswer",
         "name": "hiv_tested",
         "display": {
-          "text": "Were you tested for HIV between the time you were tested for the study and now?",
-          "hint": "(i.e. after enrolling while at the clinic if you did not receive a home visit,  or after the home visit)"
+          "prompt": {
+            "text": "Were you tested for HIV between the time you were tested for the study and now?"
+          },
+          "hint": {
+            "text": "(i.e. after enrolling while at the clinic if you did not receive a home visit,  or after the home visit)"
+          }
         },
         "_row_num": 38
       },
@@ -280,7 +338,9 @@
         "values_list": "wheretest",
         "name": "test_location",
         "display": {
-          "text": "Where were you tested for HIV?"
+          "prompt": {
+            "text": "Where were you tested for HIV?"
+          }
         },
         "_row_num": 40
       },
@@ -293,7 +353,9 @@
         "type": "text",
         "name": "test_location_other",
         "display": {
-          "text": "Other location"
+          "prompt": {
+            "text": "Other location"
+          }
         },
         "_row_num": 42
       },
@@ -306,7 +368,9 @@
         "values_list": "recentHIV",
         "name": "test_result",
         "display": {
-          "text": "What was the result of your most recent HIV test?"
+          "prompt": {
+            "text": "What was the result of your most recent HIV test?"
+          }
         },
         "_row_num": 44
       },
@@ -319,7 +383,9 @@
         "values_list": "yes_notsure",
         "name": "ccc",
         "display": {
-          "text": "Have you ever enrolled or registered into the HIV comprehensive care clinic (CCC)?"
+          "prompt": {
+            "text": "Have you ever enrolled or registered into the HIV comprehensive care clinic (CCC)?"
+          }
         },
         "_row_num": 46
       },
@@ -328,7 +394,9 @@
         "values_list": "resulttest",
         "name": "cd4_known",
         "display": {
-          "text": "Do you know your CD4 test results?"
+          "prompt": {
+            "text": "Do you know your CD4 test results?"
+          }
         },
         "_row_num": 47
       },
@@ -336,8 +404,12 @@
         "type": "integer",
         "name": "cd4_count",
         "display": {
-          "text": "What was the result of your most recent CD4 test?",
-          "hint": "CD4 = ___ cells/mL"
+          "prompt": {
+            "text": "What was the result of your most recent CD4 test?"
+          },
+          "hint": {
+            "text": "CD4 = ___ cells/mL"
+          }
         },
         "_row_num": 48
       },
@@ -346,7 +418,9 @@
         "values_list": "yes_notsure",
         "name": "prescr_meds",
         "display": {
-          "text": "Were you prescribed medicine to manage your HIV infection or protect your child from HIV?"
+          "prompt": {
+            "text": "Were you prescribed medicine to manage your HIV infection or protect your child from HIV?"
+          }
         },
         "_row_num": 49
       },
@@ -355,7 +429,9 @@
         "values_list": "yes_notsure",
         "name": "art",
         "display": {
-          "text": "Were you prescribed triple ART?"
+          "prompt": {
+            "text": "Were you prescribed triple ART?"
+          }
         },
         "_row_num": 50
       },
@@ -364,7 +440,9 @@
         "values_list": "yes_notsure",
         "name": "azt",
         "display": {
-          "text": "Were you prescribed AZT/ZDV during your pregnancy?"
+          "prompt": {
+            "text": "Were you prescribed AZT/ZDV during your pregnancy?"
+          }
         },
         "_row_num": 51
       },
@@ -378,7 +456,9 @@
         "values_list": "long",
         "name": "art_duration",
         "display": {
-          "text": "For how long were you prescribed ART treatment?"
+          "prompt": {
+            "text": "For how long were you prescribed ART treatment?"
+          }
         },
         "_row_num": 53
       },
@@ -387,7 +467,9 @@
         "values_list": "yes_notsure",
         "name": "art_curr",
         "display": {
-          "text": "Are you currently taking ART treatment you were prescribed?"
+          "prompt": {
+            "text": "Are you currently taking ART treatment you were prescribed?"
+          }
         },
         "_row_num": 54
       },
@@ -400,8 +482,12 @@
         "values_list": "yes_notsure",
         "name": "labor_meds",
         "display": {
-          "text": "Did you receive a single dose of Nevirapine and/or a dose of AZT/ZDV + 3TC during labor?",
-          "hint": "Select yes if any of these were received."
+          "prompt": {
+            "text": "Did you receive a single dose of Nevirapine and/or a dose of AZT/ZDV + 3TC during labor?"
+          },
+          "hint": {
+            "text": "Select yes if any of these were received."
+          }
         },
         "_row_num": 56
       },
@@ -410,7 +496,9 @@
         "values_list": "yes_notsure",
         "name": "meds_after_deliv",
         "display": {
-          "text": "Were you given AZT/ZDV and 3TC to take during the next 7 days after delivery?"
+          "prompt": {
+            "text": "Were you given AZT/ZDV and 3TC to take during the next 7 days after delivery?"
+          }
         },
         "_row_num": 57
       },
@@ -419,7 +507,9 @@
         "values_list": "yes_notsure",
         "name": "child_meds",
         "display": {
-          "text": "Was your child prescribed Nevirapine syrup for 6 weeks after delivery or until after breastfeeding (or in rare circumstances Lamivudine)?"
+          "prompt": {
+            "text": "Was your child prescribed Nevirapine syrup for 6 weeks after delivery or until after breastfeeding (or in rare circumstances Lamivudine)?"
+          }
         },
         "_row_num": 58
       },
@@ -428,7 +518,9 @@
         "values_list": "yes_notsure",
         "name": "child_curr_meds",
         "display": {
-          "text": "Is your child currently taking Nevirapine syrup?"
+          "prompt": {
+            "text": "Is your child currently taking Nevirapine syrup?"
+          }
         },
         "_row_num": 59
       },
@@ -442,7 +534,9 @@
         "values_list": "misschild",
         "name": "child_missed_doses",
         "display": {
-          "text": "Sometimes it is difficult to make infants consume Nevirapine. Has the child missed any doses during the past 7 days?"
+          "prompt": {
+            "text": "Sometimes it is difficult to make infants consume Nevirapine. Has the child missed any doses during the past 7 days?"
+          }
         },
         "_row_num": 61
       },
@@ -454,7 +548,9 @@
         "type": "note",
         "name": "script5",
         "display": {
-          "text": "Script 5: Now, I would like to ask you questions about your relationship"
+          "prompt": {
+            "text": "Script 5: Now, I would like to ask you questions about your relationship"
+          }
         },
         "_row_num": 63
       },
@@ -463,8 +559,12 @@
         "values_list": "changerelat",
         "name": "rel_change",
         "display": {
-          "text": "You reported being in a relationship with a male partner when you enrolled in this study. Has your relationship with this partner changed in any of the following ways since your last study visit?",
-          "hint": "Review all options with client and choose all that apply:"
+          "prompt": {
+            "text": "You reported being in a relationship with a male partner when you enrolled in this study. Has your relationship with this partner changed in any of the following ways since your last study visit?"
+          },
+          "hint": {
+            "text": "Review all options with client and choose all that apply:"
+          }
         },
         "_row_num": 64
       },
@@ -477,7 +577,9 @@
         "type": "text",
         "name": "rel_change_other",
         "display": {
-          "text": "Specify other change."
+          "prompt": {
+            "text": "Specify other change."
+          }
         },
         "_row_num": 66
       },
@@ -495,7 +597,9 @@
         "values_list": "yes_notsure",
         "name": "rel_end_study",
         "display": {
-          "text": "Did your relationship end because of something involving participation in this study?"
+          "prompt": {
+            "text": "Did your relationship end because of something involving participation in this study?"
+          }
         },
         "_row_num": 69
       },
@@ -509,14 +613,20 @@
         "values_list": "relationend",
         "name": "rel_end_reason",
         "display": {
-          "text": "What about the study caused your relationship to end?",
-          "hint": "Anything else?"
+          "prompt": {
+            "text": "What about the study caused your relationship to end?"
+          },
+          "hint": {
+            "text": "Anything else?"
+          }
         },
         "_row_num": 71
       },
       {
         "display": {
-          "hint": "Record all mentioned."
+          "hint": {
+            "text": "Record all mentioned."
+          }
         },
         "_row_num": 72
       },
@@ -529,7 +639,9 @@
         "type": "text",
         "name": "Rel_OtherEnd",
         "display": {
-          "text": "Specify other reason."
+          "prompt": {
+            "text": "Specify other reason."
+          }
         },
         "_row_num": 74
       },
@@ -549,7 +661,9 @@
         "type": "note",
         "name": "interview_end",
         "display": {
-          "text": "Thank you for your time in answering these questions."
+          "prompt": {
+            "text": "Thank you for your time in answering these questions."
+          }
         },
         "_row_num": 78
       },
@@ -557,7 +671,9 @@
         "type": "text",
         "name": "comments",
         "display": {
-          "text": "Interviewer comments"
+          "prompt": {
+            "text": "Interviewer comments"
+          }
         },
         "_row_num": 79
       }
@@ -2474,7 +2590,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Female 6 Month Follow Up"
+          "title": {
+            "text": "Female 6 Month Follow Up"
+          }
         },
         "_row_num": 4
       },
@@ -2820,10 +2938,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -2839,7 +2954,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Female 6 Month Follow Up"
+          "title": {
+            "text": "Female 6 Month Follow Up"
+          }
         },
         "_row_num": 4
       },
@@ -2853,7 +2970,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -2868,7 +2985,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Female 6 Month Follow Up"
+          "title": {
+            "text": "Female 6 Month Follow Up"
+          }
         },
         "_row_num": 4
       }
@@ -5736,7 +5855,9 @@
             "type": "text",
             "name": "interviewer_init",
             "display": {
-              "text": "Enter Interviewer Initials"
+              "prompt": {
+                "text": "Enter Interviewer Initials"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -5749,7 +5870,9 @@
             "type": "integer",
             "name": "interviewer_id",
             "display": {
-              "text": "Enter Interviewer ID Number"
+              "prompt": {
+                "text": "Enter Interviewer ID Number"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -5762,7 +5885,9 @@
             "type": "date",
             "name": "date",
             "display": {
-              "text": "Date of Interview"
+              "prompt": {
+                "text": "Date of Interview"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -5775,8 +5900,12 @@
             "type": "integer",
             "name": "client_id",
             "display": {
-              "text": "Client ID:",
-              "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+              "prompt": {
+                "text": "Client ID:"
+              },
+              "hint": {
+                "text": "5 Digit ID, cannot include 0. \nex: 12345"
+              }
             },
             "required": true,
             "_row_num": 5,
@@ -5790,7 +5919,9 @@
             "type": "note",
             "name": "script1",
             "display": {
-              "text": "Script 1: I am now going to ask questions about your pregnancy. We will do our best to keep your answers confidential. By providing honest answers, you may be able to help us understand the health issues in your community better."
+              "prompt": {
+                "text": "Script 1: I am now going to ask questions about your pregnancy. We will do our best to keep your answers confidential. By providing honest answers, you may be able to help us understand the health issues in your community better."
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -5803,7 +5934,9 @@
             "type": "date",
             "name": "delivery_date",
             "display": {
-              "text": "When did you deliver?"
+              "prompt": {
+                "text": "When did you deliver?"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -5817,7 +5950,9 @@
             "values_list": "yes_noanswer",
             "name": "baby_alive",
             "display": {
-              "text": "Was the baby born alive?"
+              "prompt": {
+                "text": "Was the baby born alive?"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -5830,7 +5965,9 @@
             "type": "decimal",
             "name": "baby_weight",
             "display": {
-              "text": "How much did your baby weigh after birth? (Kg)"
+              "prompt": {
+                "text": "How much did your baby weigh after birth? (Kg)"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -5844,7 +5981,9 @@
             "values_list": "yes_noanswer",
             "name": "baby_alive_now",
             "display": {
-              "text": "Is your baby alive now?"
+              "prompt": {
+                "text": "Is your baby alive now?"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -5857,7 +5996,9 @@
             "type": "decimal",
             "name": "baby_weight_now",
             "display": {
-              "text": "How much does your baby weigh now? (Kg)"
+              "prompt": {
+                "text": "How much does your baby weigh now? (Kg)"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -5870,7 +6011,9 @@
             "type": "note",
             "name": "script2",
             "display": {
-              "text": "Script 2: Now I would like to talk to you about your antenatal care for your recent pregnancy."
+              "prompt": {
+                "text": "Script 2: Now I would like to talk to you about your antenatal care for your recent pregnancy."
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -5884,7 +6027,9 @@
             "values_list": "birthplace",
             "name": "delivery_location",
             "display": {
-              "text": "Where did you give birth?"
+              "prompt": {
+                "text": "Where did you give birth?"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -5897,7 +6042,9 @@
             "type": "text",
             "name": "delivery_location_other",
             "display": {
-              "text": "Specify the other delivery location"
+              "prompt": {
+                "text": "Specify the other delivery location"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -5911,7 +6058,9 @@
             "values_list": "attendant",
             "name": "delivery_assisted",
             "display": {
-              "text": "Who assisted with the delivery?"
+              "prompt": {
+                "text": "Who assisted with the delivery?"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -5924,7 +6073,9 @@
             "type": "text",
             "name": "delivery_assisted_other",
             "display": {
-              "text": "Specify the other person who assisted in delivering"
+              "prompt": {
+                "text": "Specify the other person who assisted in delivering"
+              }
             },
             "_row_num": 23,
             "__rowNum__": 22,
@@ -5938,7 +6089,9 @@
             "values_list": "yes_notsure",
             "name": "induced_labor",
             "display": {
-              "text": "Was your labor induced?"
+              "prompt": {
+                "text": "Was your labor induced?"
+              }
             },
             "_row_num": 25,
             "__rowNum__": 24,
@@ -5952,7 +6105,9 @@
             "values_list": "yes_noanswer",
             "name": "c_section",
             "display": {
-              "text": "Did you get a cesarean section?"
+              "prompt": {
+                "text": "Did you get a cesarean section?"
+              }
             },
             "_row_num": 26,
             "__rowNum__": 25,
@@ -5966,8 +6121,12 @@
             "values_list": "complication",
             "name": "complications",
             "display": {
-              "text": "Were there any complications during delivery?",
-              "hint": "Explain and review options with client and select all that apply."
+              "prompt": {
+                "text": "Were there any complications during delivery?"
+              },
+              "hint": {
+                "text": "Explain and review options with client and select all that apply."
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -5980,7 +6139,9 @@
             "type": "text",
             "name": "complications_other",
             "display": {
-              "text": "Specify other complication"
+              "prompt": {
+                "text": "Specify other complication"
+              }
             },
             "_row_num": 29,
             "__rowNum__": 28,
@@ -5993,7 +6154,9 @@
             "type": "note",
             "name": "script3",
             "display": {
-              "text": "Script 3: Now I would like to talk to you about breastfeeding."
+              "prompt": {
+                "text": "Script 3: Now I would like to talk to you about breastfeeding."
+              }
             },
             "_row_num": 31,
             "__rowNum__": 30,
@@ -6007,7 +6170,9 @@
             "values_list": "yes_noanswer",
             "name": "bf_after_deliv",
             "display": {
-              "text": "Did you ever breastfeed after this delivery?"
+              "prompt": {
+                "text": "Did you ever breastfeed after this delivery?"
+              }
             },
             "_row_num": 32,
             "__rowNum__": 31,
@@ -6021,7 +6186,9 @@
             "values_list": "yes_noanswer",
             "name": "still_bf",
             "display": {
-              "text": "Are you still breastfeeding?"
+              "prompt": {
+                "text": "Are you still breastfeeding?"
+              }
             },
             "_row_num": 34,
             "__rowNum__": 33,
@@ -6034,8 +6201,12 @@
             "type": "integer",
             "name": "bf_duration",
             "display": {
-              "text": "For how long has this child been breastfed?",
-              "hint": "Weeks"
+              "prompt": {
+                "text": "For how long has this child been breastfed?"
+              },
+              "hint": {
+                "text": "Weeks"
+              }
             },
             "_row_num": 35,
             "__rowNum__": 34,
@@ -6048,7 +6219,9 @@
             "type": "note",
             "name": "script4",
             "display": {
-              "text": "Script 4: Now I would like to talk about your health and your child’s health."
+              "prompt": {
+                "text": "Script 4: Now I would like to talk about your health and your child’s health."
+              }
             },
             "_row_num": 37,
             "__rowNum__": 36,
@@ -6062,8 +6235,12 @@
             "values_list": "yes_noanswer",
             "name": "hiv_tested",
             "display": {
-              "text": "Were you tested for HIV between the time you were tested for the study and now?",
-              "hint": "(i.e. after enrolling while at the clinic if you did not receive a home visit,  or after the home visit)"
+              "prompt": {
+                "text": "Were you tested for HIV between the time you were tested for the study and now?"
+              },
+              "hint": {
+                "text": "(i.e. after enrolling while at the clinic if you did not receive a home visit,  or after the home visit)"
+              }
             },
             "_row_num": 38,
             "__rowNum__": 37,
@@ -6077,7 +6254,9 @@
             "values_list": "wheretest",
             "name": "test_location",
             "display": {
-              "text": "Where were you tested for HIV?"
+              "prompt": {
+                "text": "Where were you tested for HIV?"
+              }
             },
             "_row_num": 40,
             "__rowNum__": 39,
@@ -6090,7 +6269,9 @@
             "type": "text",
             "name": "test_location_other",
             "display": {
-              "text": "Other location"
+              "prompt": {
+                "text": "Other location"
+              }
             },
             "_row_num": 42,
             "__rowNum__": 41,
@@ -6104,7 +6285,9 @@
             "values_list": "recentHIV",
             "name": "test_result",
             "display": {
-              "text": "What was the result of your most recent HIV test?"
+              "prompt": {
+                "text": "What was the result of your most recent HIV test?"
+              }
             },
             "_row_num": 44,
             "__rowNum__": 43,
@@ -6118,7 +6301,9 @@
             "values_list": "yes_notsure",
             "name": "ccc",
             "display": {
-              "text": "Have you ever enrolled or registered into the HIV comprehensive care clinic (CCC)?"
+              "prompt": {
+                "text": "Have you ever enrolled or registered into the HIV comprehensive care clinic (CCC)?"
+              }
             },
             "_row_num": 46,
             "__rowNum__": 45,
@@ -6132,7 +6317,9 @@
             "values_list": "resulttest",
             "name": "cd4_known",
             "display": {
-              "text": "Do you know your CD4 test results?"
+              "prompt": {
+                "text": "Do you know your CD4 test results?"
+              }
             },
             "_row_num": 47,
             "__rowNum__": 46,
@@ -6145,8 +6332,12 @@
             "type": "integer",
             "name": "cd4_count",
             "display": {
-              "text": "What was the result of your most recent CD4 test?",
-              "hint": "CD4 = ___ cells/mL"
+              "prompt": {
+                "text": "What was the result of your most recent CD4 test?"
+              },
+              "hint": {
+                "text": "CD4 = ___ cells/mL"
+              }
             },
             "_row_num": 48,
             "__rowNum__": 47,
@@ -6160,7 +6351,9 @@
             "values_list": "yes_notsure",
             "name": "prescr_meds",
             "display": {
-              "text": "Were you prescribed medicine to manage your HIV infection or protect your child from HIV?"
+              "prompt": {
+                "text": "Were you prescribed medicine to manage your HIV infection or protect your child from HIV?"
+              }
             },
             "_row_num": 49,
             "__rowNum__": 48,
@@ -6174,7 +6367,9 @@
             "values_list": "yes_notsure",
             "name": "art",
             "display": {
-              "text": "Were you prescribed triple ART?"
+              "prompt": {
+                "text": "Were you prescribed triple ART?"
+              }
             },
             "_row_num": 50,
             "__rowNum__": 49,
@@ -6188,7 +6383,9 @@
             "values_list": "yes_notsure",
             "name": "azt",
             "display": {
-              "text": "Were you prescribed AZT/ZDV during your pregnancy?"
+              "prompt": {
+                "text": "Were you prescribed AZT/ZDV during your pregnancy?"
+              }
             },
             "_row_num": 51,
             "__rowNum__": 50,
@@ -6202,7 +6399,9 @@
             "values_list": "long",
             "name": "art_duration",
             "display": {
-              "text": "For how long were you prescribed ART treatment?"
+              "prompt": {
+                "text": "For how long were you prescribed ART treatment?"
+              }
             },
             "_row_num": 53,
             "__rowNum__": 52,
@@ -6216,7 +6415,9 @@
             "values_list": "yes_notsure",
             "name": "art_curr",
             "display": {
-              "text": "Are you currently taking ART treatment you were prescribed?"
+              "prompt": {
+                "text": "Are you currently taking ART treatment you were prescribed?"
+              }
             },
             "_row_num": 54,
             "__rowNum__": 53,
@@ -6230,8 +6431,12 @@
             "values_list": "yes_notsure",
             "name": "labor_meds",
             "display": {
-              "text": "Did you receive a single dose of Nevirapine and/or a dose of AZT/ZDV + 3TC during labor?",
-              "hint": "Select yes if any of these were received."
+              "prompt": {
+                "text": "Did you receive a single dose of Nevirapine and/or a dose of AZT/ZDV + 3TC during labor?"
+              },
+              "hint": {
+                "text": "Select yes if any of these were received."
+              }
             },
             "_row_num": 56,
             "__rowNum__": 55,
@@ -6245,7 +6450,9 @@
             "values_list": "yes_notsure",
             "name": "meds_after_deliv",
             "display": {
-              "text": "Were you given AZT/ZDV and 3TC to take during the next 7 days after delivery?"
+              "prompt": {
+                "text": "Were you given AZT/ZDV and 3TC to take during the next 7 days after delivery?"
+              }
             },
             "_row_num": 57,
             "__rowNum__": 56,
@@ -6259,7 +6466,9 @@
             "values_list": "yes_notsure",
             "name": "child_meds",
             "display": {
-              "text": "Was your child prescribed Nevirapine syrup for 6 weeks after delivery or until after breastfeeding (or in rare circumstances Lamivudine)?"
+              "prompt": {
+                "text": "Was your child prescribed Nevirapine syrup for 6 weeks after delivery or until after breastfeeding (or in rare circumstances Lamivudine)?"
+              }
             },
             "_row_num": 58,
             "__rowNum__": 57,
@@ -6273,7 +6482,9 @@
             "values_list": "yes_notsure",
             "name": "child_curr_meds",
             "display": {
-              "text": "Is your child currently taking Nevirapine syrup?"
+              "prompt": {
+                "text": "Is your child currently taking Nevirapine syrup?"
+              }
             },
             "_row_num": 59,
             "__rowNum__": 58,
@@ -6287,7 +6498,9 @@
             "values_list": "misschild",
             "name": "child_missed_doses",
             "display": {
-              "text": "Sometimes it is difficult to make infants consume Nevirapine. Has the child missed any doses during the past 7 days?"
+              "prompt": {
+                "text": "Sometimes it is difficult to make infants consume Nevirapine. Has the child missed any doses during the past 7 days?"
+              }
             },
             "_row_num": 61,
             "__rowNum__": 60,
@@ -6300,7 +6513,9 @@
             "type": "note",
             "name": "script5",
             "display": {
-              "text": "Script 5: Now, I would like to ask you questions about your relationship"
+              "prompt": {
+                "text": "Script 5: Now, I would like to ask you questions about your relationship"
+              }
             },
             "_row_num": 63,
             "__rowNum__": 62,
@@ -6314,8 +6529,12 @@
             "values_list": "changerelat",
             "name": "rel_change",
             "display": {
-              "text": "You reported being in a relationship with a male partner when you enrolled in this study. Has your relationship with this partner changed in any of the following ways since your last study visit?",
-              "hint": "Review all options with client and choose all that apply:"
+              "prompt": {
+                "text": "You reported being in a relationship with a male partner when you enrolled in this study. Has your relationship with this partner changed in any of the following ways since your last study visit?"
+              },
+              "hint": {
+                "text": "Review all options with client and choose all that apply:"
+              }
             },
             "_row_num": 64,
             "__rowNum__": 63,
@@ -6328,7 +6547,9 @@
             "type": "text",
             "name": "rel_change_other",
             "display": {
-              "text": "Specify other change."
+              "prompt": {
+                "text": "Specify other change."
+              }
             },
             "_row_num": 66,
             "__rowNum__": 65,
@@ -6342,7 +6563,9 @@
             "values_list": "yes_notsure",
             "name": "rel_end_study",
             "display": {
-              "text": "Did your relationship end because of something involving participation in this study?"
+              "prompt": {
+                "text": "Did your relationship end because of something involving participation in this study?"
+              }
             },
             "_row_num": 69,
             "__rowNum__": 68,
@@ -6356,8 +6579,12 @@
             "values_list": "relationend",
             "name": "rel_end_reason",
             "display": {
-              "text": "What about the study caused your relationship to end?",
-              "hint": "Anything else?"
+              "prompt": {
+                "text": "What about the study caused your relationship to end?"
+              },
+              "hint": {
+                "text": "Anything else?"
+              }
             },
             "_row_num": 71,
             "__rowNum__": 70,
@@ -6370,7 +6597,9 @@
             "type": "text",
             "name": "Rel_OtherEnd",
             "display": {
-              "text": "Specify other reason."
+              "prompt": {
+                "text": "Specify other reason."
+              }
             },
             "_row_num": 74,
             "__rowNum__": 73,
@@ -6383,7 +6612,9 @@
             "type": "note",
             "name": "interview_end",
             "display": {
-              "text": "Thank you for your time in answering these questions."
+              "prompt": {
+                "text": "Thank you for your time in answering these questions."
+              }
             },
             "_row_num": 78,
             "__rowNum__": 77,
@@ -6396,7 +6627,9 @@
             "type": "text",
             "name": "comments",
             "display": {
-              "text": "Interviewer comments"
+              "prompt": {
+                "text": "Interviewer comments"
+              }
             },
             "_row_num": 79,
             "__rowNum__": 78,
@@ -7182,7 +7415,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Female 6 Month Follow Up"
+              "title": {
+                "text": "Female 6 Month Follow Up"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },

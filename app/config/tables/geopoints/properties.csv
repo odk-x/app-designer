@@ -4,7 +4,7 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,geopoints
 Table,default,colOrder,array,"[""client_id"",""step"",""transportation_mode"",""transportation_mode_other"",""description"",""coordinates_latitude"",""coordinates_longitude"",""coordinates_altitude"",""coordinates_accuracy""]"
 Table,default,defaultViewType,string,MAP
-Table,default,displayName,object,"""Home Locator"""
+Table,default,displayName,object,"{""text"":""Home Locator""}"
 Table,default,mapListViewFileName,configpath,config/tables/geopoints/html/geopoints_map_list.html
 TableMapFragment,default,keyColorRuleType,string,None
 TableMapFragment,default,keyMapLatCol,string,coordinates_latitude

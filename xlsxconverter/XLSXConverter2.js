@@ -22,6 +22,10 @@ var XLSXConverter = {};
     var reservedSheetNames = [
           "settings",
           "properties",
+          "translations", // prohibit this just in case...
+		  "table_specific_translations", // tableId == formId
+          "framework_translations",  // tableId == formId == 'framework'
+          "common_translations",  // tableId == formId == 'framework'
           "choices",
           "queries",
           "calculates",
@@ -227,10 +231,7 @@ var XLSXConverter = {};
             uri: 'formula', // queries
             callback: 'formula(context)', // queries
             choice_filter: 'formula(choice_item)', // expects "choice" context arg.
-            templatePath: 'requirejs_path',
-            image: 'app_path_localized',
-            audio: 'app_path_localized',
-            video: 'app_path_localized'
+            templatePath: 'requirejs_path'
     };
 
     //The prompt type map is not kept in a separate JSON file because
@@ -1636,8 +1637,6 @@ var XLSXConverter = {};
             evalAsFunction('('+field+')', field, worksheet, rowNum, columnPath);
         } else if ( columnType === 'requirejs_path') {
             // nothing to test
-        } else if ( columnType === 'app_path_localized') {
-            // nothing to test
         }
     };
 
@@ -1852,11 +1851,13 @@ var XLSXConverter = {};
         var name = promptOrAction.name;
 
         // if a displayName has not already been defined and if
-        // display.title is present, then it becomes the displayName for the model.
+        // display.title.text is present, then it becomes the displayName for the model.
         // otherwise, use the element name.
         if ( !("displayName" in mdef) ) {
-            if ( "display" in promptOrAction && "title" in promptOrAction.display ) {
-                mdef.displayName = promptOrAction.display.title;
+            if ( "display" in promptOrAction && 
+			     "title" in promptOrAction.display &&
+				 "text" in promptOrAction.display.title	) {
+                mdef.displayName = promptOrAction.display.title.text;
             }
         }
 
@@ -2575,20 +2576,20 @@ var XLSXConverter = {};
         // construct the list of all available form locales and the default locale.
         // Relies upon the title translations of the 'survey' sheet.
         // If
-        //   settings.survey.display.title = { 'en' : 'Joy of life', 'fr' : 'Joi de vivre'}
+        //   settings.survey.display.title.text = { 'en' : 'Joy of life', 'fr' : 'Joi de vivre'}
         // and if
-        //   settings.en.display = { text: {'en' : 'English', 'fr' : 'Anglais'} }
-        //   settings.fr.display = { text: {'en' : 'French', 'fr', 'Francais' } }
+        //   settings.en.display.locale.text = {'en' : 'English', 'fr' : 'Anglais'}
+        //   settings.fr.display.locale.text = {'en' : 'French', 'fr', 'Francais' }
         // then we compose
         //
-        //   settings._locales = [ { name: 'en', display: { text: { 'en' : 'English' , 'fr': 'Anglais' }}},
-        //                         { name: 'fr', display: { text: { 'en' : 'French', 'fr': 'Francais' }}} ]
+        //   settings._locales = [ { name: 'en', locale: { text: { 'en' : 'English' , 'fr': 'Anglais' }}},
+        //                         { name: 'fr', locale: { text: { 'en' : 'French', 'fr': 'Francais' }}} ]
         //
         // If the localizations for the language tags are missing (e.g., no settings.en, settings.fr)
         // then we just use the tag as the display string for that translation:
         //
-        //   settings._locales = [ { name: 'en', display: { text: 'en'} },
-        //                         { name: 'fr', display: { text: 'fr'} } ]
+        //   settings._locales = [ { name: 'en', locale: { text: 'en'} },
+        //                         { name: 'fr', locale: { text: 'fr'} } ]
         //
         // The default locale is the first locale in the settings sheet.
         // i.e., if you have two languages, settings.en and settings.fr,
@@ -2603,23 +2604,27 @@ var XLSXConverter = {};
             var locales = [];
             var defaultLocale = null;
 
-            // assume all the locales are specified by the title...
-            var form_title = processedSettings.survey.display.title;
-            if ( _.isUndefined(form_title) || _.isString(form_title) ) {
+            // assume all the locales are specified by the title text...
+			var form_title_text = undefined;
+			try {
+				form_title_text = processedSettings.survey.display.title.text;
+			} catch (e) {
+			}
+            if ( _.isUndefined(form_title_text) || _.isString(form_title_text) ) {
                 // no internationalization -- just default choice
-                locales.push({display: {text: 'default'}, name: 'default'});
+                locales.push({locale: {text: 'default'}, name: 'default'});
                 defaultLocale = 'default';
             } else {
                 // we have localization -- find all the tags
                 var firstTranslation = null;
 
-                for ( var f in form_title ) {
+                for ( var f in form_title_text ) {
                     // If the tag value is defined in the settings page, use its
                     // display value as the display string for the language.
                     // Otherwise, use the tag itself as the name for that language.
                     var translations = processedSettings[f];
                     if ( translations == null || translations.display == null ) {
-                        locales.push( { display: {text: f},
+                        locales.push( { locale: {text: f},
                                         name: f } );
                         if ( defaultLocale == null ) {
                             defaultLocale = f;
@@ -2685,6 +2690,103 @@ var XLSXConverter = {};
             processedChoices = _.groupBy(cleanSet, 'choice_list_name');
         }
         specification.choices = processedChoices;
+
+        // TRANSLATIONS --
+        // three different possible sheets:
+		//    framework_translations -- only applicable in "framework"
+		//    common_translations -- only applicable in "framework"
+		//    table_specific_translations -- only applicable in tableId = formId forms
+		if ( 'translations' in wbJson ) {
+			throw Error("The sheet name 'translations' is reserved and cannot be used.");
+		}
+		
+		if ( specification.settings.form_id.value !== specification.settings.table_id.value ) {
+			if ( 'framework_translations' in wbJson ) {
+				throw Error("The sheet name 'framework_translations' is only allowed in the framework form.");
+			}
+			if ( 'common_translations' in wbJson ) {
+				throw Error("The sheet name 'common_translations' is only allowed in the framework form.");
+			}
+			if ( 'table_specific_translations' in wbJson ) {
+				throw Error("The sheet name 'table_specific_translations' is only allowed when form_id === table_id.");
+			}
+		} else if ( specification.settings.form_id.value === 'framework' ) {
+			if ( 'table_specific_translations' in wbJson ) {
+				throw Error("The sheet name 'table_specific_translations' is not allowed in the framework form.");
+			}
+			// framework_translations
+			{
+				var processedTranslations = {};
+				if ('framework_translations' in wbJson) {
+					var cleanSet = wbJson['framework_translations'];
+					cleanSet = omitRowsWithMissingField(cleanSet, 'string_token');
+					processedTranslations = _.groupBy(cleanSet, 'string_token');
+					_.each(processedTranslations, function(value, name) {
+						if(_.isArray(value)){
+							if (value.length !== 1) {
+								throw Error("Duplicate definitions of '" + name + "' on 'framework_translations' sheet");
+							}
+							processedTranslations[name] = value[0];
+						} else {
+							throw Error("Unexpected non-array for '" + name + "' on 'framework_translations' sheet");
+						}
+					});
+				}
+				specification.framework_translations = {};
+				specification.framework_translations._tokens = processedTranslations;
+				specification.framework_translations._locales = specification.settings._locales;
+				specification.framework_translations._default_locale = specification.settings._default_locale;
+			}
+			{
+				var processedTranslations = {};
+				if ('common_translations' in wbJson) {
+					var cleanSet = wbJson['common_translations'];
+					cleanSet = omitRowsWithMissingField(cleanSet, 'string_token');
+					processedTranslations = _.groupBy(cleanSet, 'string_token');
+					_.each(processedTranslations, function(value, name) {
+						if(_.isArray(value)){
+							if (value.length !== 1) {
+								throw Error("Duplicate definitions of '" + name + "' on 'common_translations' sheet");
+							}
+							processedTranslations[name] = value[0];
+						} else {
+							throw Error("Unexpected non-array for '" + name + "' on 'common_translations' sheet");
+						}
+					});
+				}
+				specification.common_translations = {};
+				specification.common_translations._tokens = processedTranslations;
+				specification.common_translations._locales = specification.settings._locales;
+				specification.common_translations._default_locale = specification.settings._default_locale;
+			}
+		} else {
+			if ( 'framework_translations' in wbJson ) {
+				throw Error("The sheet name 'framework_translations' is only allowed in the framework form.");
+			}
+			if ( 'common_translations' in wbJson ) {
+				throw Error("The sheet name 'common_translations' is only allowed in the framework form.");
+			}
+			var processedTranslations = {};
+			if ('table_specific_translations' in wbJson) {
+				var cleanSet = wbJson['table_specific_translations'];
+				cleanSet = omitRowsWithMissingField(cleanSet, 'string_token');
+				processedTranslations = _.groupBy(cleanSet, 'string_token');
+				_.each(processedTranslations, function(value, name) {
+					if(_.isArray(value)){
+						if (value.length !== 1) {
+							throw Error("Duplicate definitions of '" + name + "' on 'table_specific_translations' sheet");
+						}
+						processedTranslations[name] = value[0];
+					} else {
+						throw Error("Unexpected non-array for '" + name + "' on 'table_specific_translations' sheet");
+					}
+				});
+			}
+			specification.table_specific_translations = {};
+			specification.table_specific_translations._tokens = processedTranslations;
+			specification.table_specific_translations._locales = specification.settings._locales;
+			specification.table_specific_translations._default_locale = specification.settings._default_locale;
+		}
 
         // QUERIES
         var processedQueries = {};

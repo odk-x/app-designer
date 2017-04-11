@@ -13,7 +13,9 @@
         "type": "note",
         "name": "description",
         "display": {
-          "text": "Adult Coverage"
+          "prompt": {
+            "text": "Adult Coverage"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +23,9 @@
         "type": "integer",
         "name": "Dose1_PregnantWoman_HealthCenter",
         "display": {
-          "title": "Dose1_PregnantWoman_HealthCenter"
+          "title": {
+            "text": "Dose1_PregnantWoman_HealthCenter"
+          }
         },
         "_row_num": 4
       },
@@ -30,7 +34,9 @@
         "values_list": "one_choice",
         "name": "PW1_HC_NR_checkbox",
         "display": {
-          "title": "PW1_HC_NR_checkbox"
+          "title": {
+            "text": "PW1_HC_NR_checkbox"
+          }
         },
         "_row_num": 5
       },
@@ -38,7 +44,9 @@
         "type": "integer",
         "name": "Dose1_PregnantWoman_Outreach",
         "display": {
-          "title": "Dose1_PregnantWoman_Outreach"
+          "title": {
+            "text": "Dose1_PregnantWoman_Outreach"
+          }
         },
         "_row_num": 6
       },
@@ -47,7 +55,9 @@
         "values_list": "one_choice",
         "name": "PW1_O_NR_checkbox",
         "display": {
-          "title": "PW1_O_NR_checkbox"
+          "title": {
+            "text": "PW1_O_NR_checkbox"
+          }
         },
         "_row_num": 7
       },
@@ -55,8 +65,12 @@
         "type": "note",
         "name": "Dose1_PregnantWoman_sum",
         "display": {
-          "text": "{{calculates.Dose1_PregnantWoman_sum}}",
-          "title": "Dose1_PregnantWoman_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_PregnantWoman_sum}}"
+          },
+          "title": {
+            "text": "Dose1_PregnantWoman_sum"
+          }
         },
         "_row_num": 8
       },
@@ -64,7 +78,9 @@
         "type": "integer",
         "name": "Dose2_PregnantWoman_HealthCenter",
         "display": {
-          "title": "Dose2_PregnantWoman_HealthCenter"
+          "title": {
+            "text": "Dose2_PregnantWoman_HealthCenter"
+          }
         },
         "_row_num": 9
       },
@@ -73,7 +89,9 @@
         "values_list": "one_choice",
         "name": "PW2_HC_NR_checkbox",
         "display": {
-          "title": "PW2_HC_NR_checkbox"
+          "title": {
+            "text": "PW2_HC_NR_checkbox"
+          }
         },
         "_row_num": 10
       },
@@ -81,7 +99,9 @@
         "type": "integer",
         "name": "Dose2_PregnantWoman_Outreach",
         "display": {
-          "title": "Dose2_PregnantWoman_Outreach"
+          "title": {
+            "text": "Dose2_PregnantWoman_Outreach"
+          }
         },
         "_row_num": 11
       },
@@ -90,7 +110,9 @@
         "values_list": "one_choice",
         "name": "PW2_O_NR_checkbox",
         "display": {
-          "title": "PW2_O_NR_checkbox"
+          "title": {
+            "text": "PW2_O_NR_checkbox"
+          }
         },
         "_row_num": 12
       },
@@ -98,8 +120,12 @@
         "type": "note",
         "name": "Dose2_PregnantWoman_sum",
         "display": {
-          "text": "{{calculates.Dose2_PregnantWoman_sum}}",
-          "title": "Dose2_PregnantWoman_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_PregnantWoman_sum}}"
+          },
+          "title": {
+            "text": "Dose2_PregnantWoman_sum"
+          }
         },
         "_row_num": 13
       },
@@ -107,8 +133,12 @@
         "type": "note",
         "name": "Total_PregnantWoman",
         "display": {
-          "text": "{{calculates.Total_PregnantWoman}}",
-          "title": "Total_PregnantWoman"
+          "prompt": {
+            "text": "{{calculates.Total_PregnantWoman}}"
+          },
+          "title": {
+            "text": "Total_PregnantWoman"
+          }
         },
         "_row_num": 14
       },
@@ -116,7 +146,9 @@
         "type": "integer",
         "name": "Dose1_MIFComm_HealthCenter",
         "display": {
-          "title": "Dose1_MIFComm_HealthCenter"
+          "title": {
+            "text": "Dose1_MIFComm_HealthCenter"
+          }
         },
         "_row_num": 15
       },
@@ -125,7 +157,9 @@
         "values_list": "one_choice",
         "name": "MIFCOMM1_HC_NR_checkbox",
         "display": {
-          "title": "MIFCOMM1_HC_NR_checkbox"
+          "title": {
+            "text": "MIFCOMM1_HC_NR_checkbox"
+          }
         },
         "_row_num": 16
       },
@@ -133,7 +167,9 @@
         "type": "integer",
         "name": "Dose1_MIFComm_Outreach",
         "display": {
-          "title": "Dose1_MIFComm_Outreach"
+          "title": {
+            "text": "Dose1_MIFComm_Outreach"
+          }
         },
         "_row_num": 17
       },
@@ -142,7 +178,9 @@
         "values_list": "one_choice",
         "name": "MIFCOMM1_O_NR_checkbox",
         "display": {
-          "title": "MIFCOMM1_O_NR_checkbox"
+          "title": {
+            "text": "MIFCOMM1_O_NR_checkbox"
+          }
         },
         "_row_num": 18
       },
@@ -150,8 +188,12 @@
         "type": "note",
         "name": "Dose1_MIFComm_sum",
         "display": {
-          "text": "{{calculates.Dose1_MIFComm_sum}}",
-          "title": "Dose1_MIFComm_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_MIFComm_sum}}"
+          },
+          "title": {
+            "text": "Dose1_MIFComm_sum"
+          }
         },
         "_row_num": 19
       },
@@ -159,7 +201,9 @@
         "type": "integer",
         "name": "Dose2_MIFComm_HealthCenter",
         "display": {
-          "title": "Dose2_MIFComm_HealthCenter"
+          "title": {
+            "text": "Dose2_MIFComm_HealthCenter"
+          }
         },
         "_row_num": 20
       },
@@ -168,7 +212,9 @@
         "values_list": "one_choice",
         "name": "MIFCOMM2_HC_NR_checkbox",
         "display": {
-          "title": "MIFCOMM2_HC_NR_checkbox"
+          "title": {
+            "text": "MIFCOMM2_HC_NR_checkbox"
+          }
         },
         "_row_num": 21
       },
@@ -176,7 +222,9 @@
         "type": "integer",
         "name": "Dose2_MIFComm_Outreach",
         "display": {
-          "title": "Dose2_MIFComm_Outreach"
+          "title": {
+            "text": "Dose2_MIFComm_Outreach"
+          }
         },
         "_row_num": 22
       },
@@ -185,7 +233,9 @@
         "values_list": "one_choice",
         "name": "MIFCOMM2_O_NR_checkbox",
         "display": {
-          "title": "MIFCOMM2_O_NR_checkbox"
+          "title": {
+            "text": "MIFCOMM2_O_NR_checkbox"
+          }
         },
         "_row_num": 23
       },
@@ -193,8 +243,12 @@
         "type": "note",
         "name": "Dose2_MIFComm_sum",
         "display": {
-          "text": "{{calculates.Dose2_MIFComm_sum}}",
-          "title": "Dose2_MIFComm_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_MIFComm_sum}}"
+          },
+          "title": {
+            "text": "Dose2_MIFComm_sum"
+          }
         },
         "_row_num": 24
       },
@@ -202,8 +256,12 @@
         "type": "note",
         "name": "Total_MIFComm",
         "display": {
-          "text": "{{calculates.Total_MIFComm}}",
-          "title": "Total_MIFComm"
+          "prompt": {
+            "text": "{{calculates.Total_MIFComm}}"
+          },
+          "title": {
+            "text": "Total_MIFComm"
+          }
         },
         "_row_num": 25
       },
@@ -211,7 +269,9 @@
         "type": "integer",
         "name": "Dose1_MIFStudents_Outreach",
         "display": {
-          "title": "Dose1_MIFStudents_Outreach"
+          "title": {
+            "text": "Dose1_MIFStudents_Outreach"
+          }
         },
         "_row_num": 26
       },
@@ -220,7 +280,9 @@
         "values_list": "one_choice",
         "name": "MIFS1_O_NR_checkbox",
         "display": {
-          "title": "MIFS1_O_NR_checkbox"
+          "title": {
+            "text": "MIFS1_O_NR_checkbox"
+          }
         },
         "_row_num": 27
       },
@@ -228,8 +290,12 @@
         "type": "note",
         "name": "Dose1_MIFStudents_sum",
         "display": {
-          "text": "{{calculates.Dose1_MIFStudents_sum}}",
-          "title": "Dose1_MIFStudents_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_MIFStudents_sum}}"
+          },
+          "title": {
+            "text": "Dose1_MIFStudents_sum"
+          }
         },
         "_row_num": 28
       },
@@ -237,7 +303,9 @@
         "type": "integer",
         "name": "Dose2_MIFStudents_Outreach",
         "display": {
-          "title": "Dose2_MIFStudents_Outreach"
+          "title": {
+            "text": "Dose2_MIFStudents_Outreach"
+          }
         },
         "_row_num": 29
       },
@@ -246,7 +314,9 @@
         "values_list": "one_choice",
         "name": "MIFS2_O_NR_checkbox",
         "display": {
-          "title": "MIFS2_O_NR_checkbox"
+          "title": {
+            "text": "MIFS2_O_NR_checkbox"
+          }
         },
         "_row_num": 30
       },
@@ -254,8 +324,12 @@
         "type": "note",
         "name": "Dose2_MIFStudents_sum",
         "display": {
-          "text": "{{calculates.Dose2_MIFStudents_sum}}",
-          "title": "Dose2_MIFStudents_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_MIFStudents_sum}}"
+          },
+          "title": {
+            "text": "Dose2_MIFStudents_sum"
+          }
         },
         "_row_num": 31
       },
@@ -263,8 +337,12 @@
         "type": "note",
         "name": "Total_MIFStudents",
         "display": {
-          "text": "{{calculates.Total_MIFStudents}}",
-          "title": "Total_MIFStudents"
+          "prompt": {
+            "text": "{{calculates.Total_MIFStudents}}"
+          },
+          "title": {
+            "text": "Total_MIFStudents"
+          }
         },
         "_row_num": 32
       },
@@ -272,7 +350,9 @@
         "type": "integer",
         "name": "Dose1_MIFWorkers_Outreach",
         "display": {
-          "title": "Dose1_MIFWorkers_Outreach"
+          "title": {
+            "text": "Dose1_MIFWorkers_Outreach"
+          }
         },
         "_row_num": 33
       },
@@ -281,7 +361,9 @@
         "values_list": "one_choice",
         "name": "MIFW1_O_NR_checkbox",
         "display": {
-          "title": "MIFW1_O_NR_checkbox"
+          "title": {
+            "text": "MIFW1_O_NR_checkbox"
+          }
         },
         "_row_num": 34
       },
@@ -289,8 +371,12 @@
         "type": "note",
         "name": "Dose1_MIFWorkers_sum",
         "display": {
-          "text": "{{calculates.Dose1_MIFWorkers_sum}}",
-          "title": "Dose1_MIFWorkers_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_MIFWorkers_sum}}"
+          },
+          "title": {
+            "text": "Dose1_MIFWorkers_sum"
+          }
         },
         "_row_num": 35
       },
@@ -298,7 +384,9 @@
         "type": "integer",
         "name": "Dose2_MIFWorkers_Outreach",
         "display": {
-          "title": "Dose2_MIFWorkers_Outreach"
+          "title": {
+            "text": "Dose2_MIFWorkers_Outreach"
+          }
         },
         "_row_num": 36
       },
@@ -307,7 +395,9 @@
         "values_list": "one_choice",
         "name": "MIFW2_O_NR_checkbox",
         "display": {
-          "title": "MIFW2_O_NR_checkbox"
+          "title": {
+            "text": "MIFW2_O_NR_checkbox"
+          }
         },
         "_row_num": 37
       },
@@ -315,8 +405,12 @@
         "type": "note",
         "name": "Dose2_MIFWorkers_sum",
         "display": {
-          "text": "{{calculates.Dose2_MIFWorkers_sum}}",
-          "title": "Dose2_MIFWorkers_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_MIFWorkers_sum}}"
+          },
+          "title": {
+            "text": "Dose2_MIFWorkers_sum"
+          }
         },
         "_row_num": 38
       },
@@ -324,8 +418,12 @@
         "type": "note",
         "name": "Total_MIFWorkers",
         "display": {
-          "text": "{{calculates.Total_MIFWorkers}}",
-          "title": "Total_MIFWorkers"
+          "prompt": {
+            "text": "{{calculates.Total_MIFWorkers}}"
+          },
+          "title": {
+            "text": "Total_MIFWorkers"
+          }
         },
         "_row_num": 39
       },
@@ -333,7 +431,9 @@
         "type": "integer",
         "name": "OpenedVials",
         "display": {
-          "title": "OpenedVials"
+          "title": {
+            "text": "OpenedVials"
+          }
         },
         "_row_num": 40
       },
@@ -342,7 +442,9 @@
         "values_list": "one_choice",
         "name": "OV_NR_checkbox",
         "display": {
-          "title": "OV_NR_checkbox"
+          "title": {
+            "text": "OV_NR_checkbox"
+          }
         },
         "_row_num": 41
       },
@@ -350,7 +452,9 @@
         "type": "integer",
         "name": "Dose1_Students_notMIF_Outreach",
         "display": {
-          "title": "Dose1_Students_notMIF_Outreach"
+          "title": {
+            "text": "Dose1_Students_notMIF_Outreach"
+          }
         },
         "_row_num": 42
       },
@@ -359,7 +463,9 @@
         "values_list": "one_choice",
         "name": "S1_O_NR_checkbox",
         "display": {
-          "title": "S1_O_NR_checkbox"
+          "title": {
+            "text": "S1_O_NR_checkbox"
+          }
         },
         "_row_num": 43
       },
@@ -367,8 +473,12 @@
         "type": "note",
         "name": "Dose1_Students_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose1_Students_notMIF_sum}}",
-          "title": "Dose1_Students_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_Students_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose1_Students_notMIF_sum"
+          }
         },
         "_row_num": 44
       },
@@ -376,7 +486,9 @@
         "type": "integer",
         "name": "Dose2_Students_notMIF_Outreach",
         "display": {
-          "title": "Dose2_Students_notMIF_Outreach"
+          "title": {
+            "text": "Dose2_Students_notMIF_Outreach"
+          }
         },
         "_row_num": 45
       },
@@ -385,7 +497,9 @@
         "values_list": "one_choice",
         "name": "S2_O_NR_checkbox",
         "display": {
-          "title": "S2_O_NR_checkbox"
+          "title": {
+            "text": "S2_O_NR_checkbox"
+          }
         },
         "_row_num": 46
       },
@@ -393,8 +507,12 @@
         "type": "note",
         "name": "Dose2_Students_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose2_Students_notMIF_sum}}",
-          "title": "Dose2_Students_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_Students_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose2_Students_notMIF_sum"
+          }
         },
         "_row_num": 47
       },
@@ -402,8 +520,12 @@
         "type": "note",
         "name": "Total_Students_notMIF",
         "display": {
-          "text": "{{calculates.Total_Students_notMIF}}",
-          "title": "Total_Students_notMIF"
+          "prompt": {
+            "text": "{{calculates.Total_Students_notMIF}}"
+          },
+          "title": {
+            "text": "Total_Students_notMIF"
+          }
         },
         "_row_num": 48
       },
@@ -411,7 +533,9 @@
         "type": "integer",
         "name": "Dose1_Workers_notMIF_Outreach",
         "display": {
-          "title": "Dose1_Workers_notMIF_Outreach"
+          "title": {
+            "text": "Dose1_Workers_notMIF_Outreach"
+          }
         },
         "_row_num": 49
       },
@@ -420,7 +544,9 @@
         "values_list": "one_choice",
         "name": "W1_O_NR_checkbox",
         "display": {
-          "title": "W1_O_NR_checkbox"
+          "title": {
+            "text": "W1_O_NR_checkbox"
+          }
         },
         "_row_num": 50
       },
@@ -428,8 +554,12 @@
         "type": "note",
         "name": "Dose1_Workers_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose1_Workers_notMIF_sum}}",
-          "title": "Dose1_Workers_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_Workers_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose1_Workers_notMIF_sum"
+          }
         },
         "_row_num": 51
       },
@@ -437,7 +567,9 @@
         "type": "integer",
         "name": "Dose2_Workers_notMIF_Outreach",
         "display": {
-          "title": "Dose2_Workers_notMIF_Outreach"
+          "title": {
+            "text": "Dose2_Workers_notMIF_Outreach"
+          }
         },
         "_row_num": 52
       },
@@ -446,7 +578,9 @@
         "values_list": "one_choice",
         "name": "W2_O_NR_checkbox",
         "display": {
-          "title": "W2_O_NR_checkbox"
+          "title": {
+            "text": "W2_O_NR_checkbox"
+          }
         },
         "_row_num": 53
       },
@@ -454,8 +588,12 @@
         "type": "note",
         "name": "Dose2_Workers_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose2_Workers_notMIF_sum}}",
-          "title": "Dose2_Workers_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_Workers_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose2_Workers_notMIF_sum"
+          }
         },
         "_row_num": 54
       },
@@ -463,8 +601,12 @@
         "type": "note",
         "name": "Total_Workers_notMIF",
         "display": {
-          "text": "{{calculates.Total_Workers_notMIF}}",
-          "title": "Total_Workers_notMIF"
+          "prompt": {
+            "text": "{{calculates.Total_Workers_notMIF}}"
+          },
+          "title": {
+            "text": "Total_Workers_notMIF"
+          }
         },
         "_row_num": 55
       },
@@ -472,7 +614,9 @@
         "type": "integer",
         "name": "Dose1_Other_notMIF_HealthCenter",
         "display": {
-          "title": "Dose1_Other_notMIF_HealthCenter"
+          "title": {
+            "text": "Dose1_Other_notMIF_HealthCenter"
+          }
         },
         "_row_num": 56
       },
@@ -481,7 +625,9 @@
         "values_list": "one_choice",
         "name": "O1_HC_NR_checkbox",
         "display": {
-          "title": "O1_HC_NR_checkbox"
+          "title": {
+            "text": "O1_HC_NR_checkbox"
+          }
         },
         "_row_num": 57
       },
@@ -489,7 +635,9 @@
         "type": "integer",
         "name": "Dose1_Other_notMIF_Outreach",
         "display": {
-          "title": "Dose1_Other_notMIF_Outreach"
+          "title": {
+            "text": "Dose1_Other_notMIF_Outreach"
+          }
         },
         "_row_num": 58
       },
@@ -498,7 +646,9 @@
         "values_list": "one_choice",
         "name": "O1_O_NR_checkbox",
         "display": {
-          "title": "O1_O_NR_checkbox"
+          "title": {
+            "text": "O1_O_NR_checkbox"
+          }
         },
         "_row_num": 59
       },
@@ -506,8 +656,12 @@
         "type": "note",
         "name": "Dose1_Other_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose1_Other_notMIF_sum}}",
-          "title": "Dose1_Other_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_Other_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose1_Other_notMIF_sum"
+          }
         },
         "_row_num": 60
       },
@@ -515,7 +669,9 @@
         "type": "integer",
         "name": "Dose2_Other_notMIF_HealthCenter",
         "display": {
-          "title": "Dose2_Other_notMIF_HealthCenter"
+          "title": {
+            "text": "Dose2_Other_notMIF_HealthCenter"
+          }
         },
         "_row_num": 61
       },
@@ -524,7 +680,9 @@
         "values_list": "one_choice",
         "name": "O2_HC_NR_checkbox",
         "display": {
-          "title": "O2_HC_NR_checkbox"
+          "title": {
+            "text": "O2_HC_NR_checkbox"
+          }
         },
         "_row_num": 62
       },
@@ -532,7 +690,9 @@
         "type": "integer",
         "name": "Dose2_Other_notMIF_Outreach",
         "display": {
-          "title": "Dose2_Other_notMIF_Outreach"
+          "title": {
+            "text": "Dose2_Other_notMIF_Outreach"
+          }
         },
         "_row_num": 63
       },
@@ -541,7 +701,9 @@
         "values_list": "one_choice",
         "name": "O2_O_NR_checkbox",
         "display": {
-          "title": "O2_O_NR_checkbox"
+          "title": {
+            "text": "O2_O_NR_checkbox"
+          }
         },
         "_row_num": 64
       },
@@ -549,8 +711,12 @@
         "type": "note",
         "name": "Dose2_Other_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose2_Other_notMIF_sum}}",
-          "title": "Dose2_Other_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_Other_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose2_Other_notMIF_sum"
+          }
         },
         "_row_num": 65
       },
@@ -558,8 +724,12 @@
         "type": "note",
         "name": "Total_Other_notMIF",
         "display": {
-          "text": "{{calculates.Total_Other_notMIF}}",
-          "title": "Total_Other_notMIF"
+          "prompt": {
+            "text": "{{calculates.Total_Other_notMIF}}"
+          },
+          "title": {
+            "text": "Total_Other_notMIF"
+          }
         },
         "_row_num": 66
       },
@@ -567,8 +737,12 @@
         "type": "note",
         "name": "Total_Dose1_HealthCenter",
         "display": {
-          "text": "{{calculates.Total_Dose1_HealthCenter}}",
-          "title": "Total_Dose1_HealthCenter"
+          "prompt": {
+            "text": "{{calculates.Total_Dose1_HealthCenter}}"
+          },
+          "title": {
+            "text": "Total_Dose1_HealthCenter"
+          }
         },
         "_row_num": 67
       },
@@ -576,8 +750,12 @@
         "type": "note",
         "name": "Total_Dose1_Outreach",
         "display": {
-          "text": "{{calculates.Total_Dose1_Outreach}}",
-          "title": "Total_Dose1_Outreach"
+          "prompt": {
+            "text": "{{calculates.Total_Dose1_Outreach}}"
+          },
+          "title": {
+            "text": "Total_Dose1_Outreach"
+          }
         },
         "_row_num": 68
       },
@@ -585,8 +763,12 @@
         "type": "note",
         "name": "Total_Dose2_HealthCenter",
         "display": {
-          "text": "{{calculates.Total_Dose2_HealthCenter}}",
-          "title": "Total_Dose2_HealthCenter"
+          "prompt": {
+            "text": "{{calculates.Total_Dose2_HealthCenter}}"
+          },
+          "title": {
+            "text": "Total_Dose2_HealthCenter"
+          }
         },
         "_row_num": 69
       },
@@ -594,8 +776,12 @@
         "type": "note",
         "name": "Total_Dose2_Outreach",
         "display": {
-          "text": "{{calculates.Total_Dose2_Outreach}}",
-          "title": "Total_Dose2_Outreach"
+          "prompt": {
+            "text": "{{calculates.Total_Dose2_Outreach}}"
+          },
+          "title": {
+            "text": "Total_Dose2_Outreach"
+          }
         },
         "_row_num": 70
       },
@@ -603,8 +789,12 @@
         "type": "note",
         "name": "Total_Dose1",
         "display": {
-          "text": "{{calculates.Total_Dose1}}",
-          "title": "Total_Dose1"
+          "prompt": {
+            "text": "{{calculates.Total_Dose1}}"
+          },
+          "title": {
+            "text": "Total_Dose1"
+          }
         },
         "_row_num": 71
       },
@@ -612,8 +802,12 @@
         "type": "note",
         "name": "Total_Dose2",
         "display": {
-          "text": "{{calculates.Total_Dose2}}",
-          "title": "Total_Dose2"
+          "prompt": {
+            "text": "{{calculates.Total_Dose2}}"
+          },
+          "title": {
+            "text": "Total_Dose2"
+          }
         },
         "_row_num": 72
       },
@@ -621,8 +815,12 @@
         "type": "note",
         "name": "Total_Tetanus",
         "display": {
-          "text": "{{calculates.Total_Tetanus}}",
-          "title": "Total_Tetanus"
+          "prompt": {
+            "text": "{{calculates.Total_Tetanus}}"
+          },
+          "title": {
+            "text": "Total_Tetanus"
+          }
         },
         "_row_num": 73
       },
@@ -989,7 +1187,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Adult Coverage"
+          "title": {
+            "text": "Adult Coverage"
+          }
         },
         "_row_num": 4
       },
@@ -1013,10 +1213,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -1032,7 +1229,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Adult Coverage"
+          "title": {
+            "text": "Adult Coverage"
+          }
         },
         "_row_num": 4
       },
@@ -1052,7 +1251,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -1067,7 +1266,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Adult Coverage"
+          "title": {
+            "text": "Adult Coverage"
+          }
         },
         "_row_num": 4
       }
@@ -1285,6 +1486,26 @@
           "_row_num": 30
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
     },
     "queries": {},
     "calculates": {
@@ -2012,7 +2233,9 @@
             "type": "note",
             "name": "description",
             "display": {
-              "text": "Adult Coverage"
+              "prompt": {
+                "text": "Adult Coverage"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -2025,7 +2248,9 @@
             "type": "integer",
             "name": "Dose1_PregnantWoman_HealthCenter",
             "display": {
-              "title": "Dose1_PregnantWoman_HealthCenter"
+              "title": {
+                "text": "Dose1_PregnantWoman_HealthCenter"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -2039,7 +2264,9 @@
             "values_list": "one_choice",
             "name": "PW1_HC_NR_checkbox",
             "display": {
-              "title": "PW1_HC_NR_checkbox"
+              "title": {
+                "text": "PW1_HC_NR_checkbox"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -2052,7 +2279,9 @@
             "type": "integer",
             "name": "Dose1_PregnantWoman_Outreach",
             "display": {
-              "title": "Dose1_PregnantWoman_Outreach"
+              "title": {
+                "text": "Dose1_PregnantWoman_Outreach"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -2066,7 +2295,9 @@
             "values_list": "one_choice",
             "name": "PW1_O_NR_checkbox",
             "display": {
-              "title": "PW1_O_NR_checkbox"
+              "title": {
+                "text": "PW1_O_NR_checkbox"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -2079,8 +2310,12 @@
             "type": "note",
             "name": "Dose1_PregnantWoman_sum",
             "display": {
-              "text": "{{calculates.Dose1_PregnantWoman_sum}}",
-              "title": "Dose1_PregnantWoman_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_PregnantWoman_sum}}"
+              },
+              "title": {
+                "text": "Dose1_PregnantWoman_sum"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -2093,7 +2328,9 @@
             "type": "integer",
             "name": "Dose2_PregnantWoman_HealthCenter",
             "display": {
-              "title": "Dose2_PregnantWoman_HealthCenter"
+              "title": {
+                "text": "Dose2_PregnantWoman_HealthCenter"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -2107,7 +2344,9 @@
             "values_list": "one_choice",
             "name": "PW2_HC_NR_checkbox",
             "display": {
-              "title": "PW2_HC_NR_checkbox"
+              "title": {
+                "text": "PW2_HC_NR_checkbox"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -2120,7 +2359,9 @@
             "type": "integer",
             "name": "Dose2_PregnantWoman_Outreach",
             "display": {
-              "title": "Dose2_PregnantWoman_Outreach"
+              "title": {
+                "text": "Dose2_PregnantWoman_Outreach"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -2134,7 +2375,9 @@
             "values_list": "one_choice",
             "name": "PW2_O_NR_checkbox",
             "display": {
-              "title": "PW2_O_NR_checkbox"
+              "title": {
+                "text": "PW2_O_NR_checkbox"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -2147,8 +2390,12 @@
             "type": "note",
             "name": "Dose2_PregnantWoman_sum",
             "display": {
-              "text": "{{calculates.Dose2_PregnantWoman_sum}}",
-              "title": "Dose2_PregnantWoman_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_PregnantWoman_sum}}"
+              },
+              "title": {
+                "text": "Dose2_PregnantWoman_sum"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -2161,8 +2408,12 @@
             "type": "note",
             "name": "Total_PregnantWoman",
             "display": {
-              "text": "{{calculates.Total_PregnantWoman}}",
-              "title": "Total_PregnantWoman"
+              "prompt": {
+                "text": "{{calculates.Total_PregnantWoman}}"
+              },
+              "title": {
+                "text": "Total_PregnantWoman"
+              }
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -2175,7 +2426,9 @@
             "type": "integer",
             "name": "Dose1_MIFComm_HealthCenter",
             "display": {
-              "title": "Dose1_MIFComm_HealthCenter"
+              "title": {
+                "text": "Dose1_MIFComm_HealthCenter"
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -2189,7 +2442,9 @@
             "values_list": "one_choice",
             "name": "MIFCOMM1_HC_NR_checkbox",
             "display": {
-              "title": "MIFCOMM1_HC_NR_checkbox"
+              "title": {
+                "text": "MIFCOMM1_HC_NR_checkbox"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -2202,7 +2457,9 @@
             "type": "integer",
             "name": "Dose1_MIFComm_Outreach",
             "display": {
-              "title": "Dose1_MIFComm_Outreach"
+              "title": {
+                "text": "Dose1_MIFComm_Outreach"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -2216,7 +2473,9 @@
             "values_list": "one_choice",
             "name": "MIFCOMM1_O_NR_checkbox",
             "display": {
-              "title": "MIFCOMM1_O_NR_checkbox"
+              "title": {
+                "text": "MIFCOMM1_O_NR_checkbox"
+              }
             },
             "_row_num": 18,
             "__rowNum__": 17,
@@ -2229,8 +2488,12 @@
             "type": "note",
             "name": "Dose1_MIFComm_sum",
             "display": {
-              "text": "{{calculates.Dose1_MIFComm_sum}}",
-              "title": "Dose1_MIFComm_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_MIFComm_sum}}"
+              },
+              "title": {
+                "text": "Dose1_MIFComm_sum"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -2243,7 +2506,9 @@
             "type": "integer",
             "name": "Dose2_MIFComm_HealthCenter",
             "display": {
-              "title": "Dose2_MIFComm_HealthCenter"
+              "title": {
+                "text": "Dose2_MIFComm_HealthCenter"
+              }
             },
             "_row_num": 20,
             "__rowNum__": 19,
@@ -2257,7 +2522,9 @@
             "values_list": "one_choice",
             "name": "MIFCOMM2_HC_NR_checkbox",
             "display": {
-              "title": "MIFCOMM2_HC_NR_checkbox"
+              "title": {
+                "text": "MIFCOMM2_HC_NR_checkbox"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -2270,7 +2537,9 @@
             "type": "integer",
             "name": "Dose2_MIFComm_Outreach",
             "display": {
-              "title": "Dose2_MIFComm_Outreach"
+              "title": {
+                "text": "Dose2_MIFComm_Outreach"
+              }
             },
             "_row_num": 22,
             "__rowNum__": 21,
@@ -2284,7 +2553,9 @@
             "values_list": "one_choice",
             "name": "MIFCOMM2_O_NR_checkbox",
             "display": {
-              "title": "MIFCOMM2_O_NR_checkbox"
+              "title": {
+                "text": "MIFCOMM2_O_NR_checkbox"
+              }
             },
             "_row_num": 23,
             "__rowNum__": 22,
@@ -2297,8 +2568,12 @@
             "type": "note",
             "name": "Dose2_MIFComm_sum",
             "display": {
-              "text": "{{calculates.Dose2_MIFComm_sum}}",
-              "title": "Dose2_MIFComm_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_MIFComm_sum}}"
+              },
+              "title": {
+                "text": "Dose2_MIFComm_sum"
+              }
             },
             "_row_num": 24,
             "__rowNum__": 23,
@@ -2311,8 +2586,12 @@
             "type": "note",
             "name": "Total_MIFComm",
             "display": {
-              "text": "{{calculates.Total_MIFComm}}",
-              "title": "Total_MIFComm"
+              "prompt": {
+                "text": "{{calculates.Total_MIFComm}}"
+              },
+              "title": {
+                "text": "Total_MIFComm"
+              }
             },
             "_row_num": 25,
             "__rowNum__": 24,
@@ -2325,7 +2604,9 @@
             "type": "integer",
             "name": "Dose1_MIFStudents_Outreach",
             "display": {
-              "title": "Dose1_MIFStudents_Outreach"
+              "title": {
+                "text": "Dose1_MIFStudents_Outreach"
+              }
             },
             "_row_num": 26,
             "__rowNum__": 25,
@@ -2339,7 +2620,9 @@
             "values_list": "one_choice",
             "name": "MIFS1_O_NR_checkbox",
             "display": {
-              "title": "MIFS1_O_NR_checkbox"
+              "title": {
+                "text": "MIFS1_O_NR_checkbox"
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -2352,8 +2635,12 @@
             "type": "note",
             "name": "Dose1_MIFStudents_sum",
             "display": {
-              "text": "{{calculates.Dose1_MIFStudents_sum}}",
-              "title": "Dose1_MIFStudents_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_MIFStudents_sum}}"
+              },
+              "title": {
+                "text": "Dose1_MIFStudents_sum"
+              }
             },
             "_row_num": 28,
             "__rowNum__": 27,
@@ -2366,7 +2653,9 @@
             "type": "integer",
             "name": "Dose2_MIFStudents_Outreach",
             "display": {
-              "title": "Dose2_MIFStudents_Outreach"
+              "title": {
+                "text": "Dose2_MIFStudents_Outreach"
+              }
             },
             "_row_num": 29,
             "__rowNum__": 28,
@@ -2380,7 +2669,9 @@
             "values_list": "one_choice",
             "name": "MIFS2_O_NR_checkbox",
             "display": {
-              "title": "MIFS2_O_NR_checkbox"
+              "title": {
+                "text": "MIFS2_O_NR_checkbox"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -2393,8 +2684,12 @@
             "type": "note",
             "name": "Dose2_MIFStudents_sum",
             "display": {
-              "text": "{{calculates.Dose2_MIFStudents_sum}}",
-              "title": "Dose2_MIFStudents_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_MIFStudents_sum}}"
+              },
+              "title": {
+                "text": "Dose2_MIFStudents_sum"
+              }
             },
             "_row_num": 31,
             "__rowNum__": 30,
@@ -2407,8 +2702,12 @@
             "type": "note",
             "name": "Total_MIFStudents",
             "display": {
-              "text": "{{calculates.Total_MIFStudents}}",
-              "title": "Total_MIFStudents"
+              "prompt": {
+                "text": "{{calculates.Total_MIFStudents}}"
+              },
+              "title": {
+                "text": "Total_MIFStudents"
+              }
             },
             "_row_num": 32,
             "__rowNum__": 31,
@@ -2421,7 +2720,9 @@
             "type": "integer",
             "name": "Dose1_MIFWorkers_Outreach",
             "display": {
-              "title": "Dose1_MIFWorkers_Outreach"
+              "title": {
+                "text": "Dose1_MIFWorkers_Outreach"
+              }
             },
             "_row_num": 33,
             "__rowNum__": 32,
@@ -2435,7 +2736,9 @@
             "values_list": "one_choice",
             "name": "MIFW1_O_NR_checkbox",
             "display": {
-              "title": "MIFW1_O_NR_checkbox"
+              "title": {
+                "text": "MIFW1_O_NR_checkbox"
+              }
             },
             "_row_num": 34,
             "__rowNum__": 33,
@@ -2448,8 +2751,12 @@
             "type": "note",
             "name": "Dose1_MIFWorkers_sum",
             "display": {
-              "text": "{{calculates.Dose1_MIFWorkers_sum}}",
-              "title": "Dose1_MIFWorkers_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_MIFWorkers_sum}}"
+              },
+              "title": {
+                "text": "Dose1_MIFWorkers_sum"
+              }
             },
             "_row_num": 35,
             "__rowNum__": 34,
@@ -2462,7 +2769,9 @@
             "type": "integer",
             "name": "Dose2_MIFWorkers_Outreach",
             "display": {
-              "title": "Dose2_MIFWorkers_Outreach"
+              "title": {
+                "text": "Dose2_MIFWorkers_Outreach"
+              }
             },
             "_row_num": 36,
             "__rowNum__": 35,
@@ -2476,7 +2785,9 @@
             "values_list": "one_choice",
             "name": "MIFW2_O_NR_checkbox",
             "display": {
-              "title": "MIFW2_O_NR_checkbox"
+              "title": {
+                "text": "MIFW2_O_NR_checkbox"
+              }
             },
             "_row_num": 37,
             "__rowNum__": 36,
@@ -2489,8 +2800,12 @@
             "type": "note",
             "name": "Dose2_MIFWorkers_sum",
             "display": {
-              "text": "{{calculates.Dose2_MIFWorkers_sum}}",
-              "title": "Dose2_MIFWorkers_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_MIFWorkers_sum}}"
+              },
+              "title": {
+                "text": "Dose2_MIFWorkers_sum"
+              }
             },
             "_row_num": 38,
             "__rowNum__": 37,
@@ -2503,8 +2818,12 @@
             "type": "note",
             "name": "Total_MIFWorkers",
             "display": {
-              "text": "{{calculates.Total_MIFWorkers}}",
-              "title": "Total_MIFWorkers"
+              "prompt": {
+                "text": "{{calculates.Total_MIFWorkers}}"
+              },
+              "title": {
+                "text": "Total_MIFWorkers"
+              }
             },
             "_row_num": 39,
             "__rowNum__": 38,
@@ -2517,7 +2836,9 @@
             "type": "integer",
             "name": "OpenedVials",
             "display": {
-              "title": "OpenedVials"
+              "title": {
+                "text": "OpenedVials"
+              }
             },
             "_row_num": 40,
             "__rowNum__": 39,
@@ -2531,7 +2852,9 @@
             "values_list": "one_choice",
             "name": "OV_NR_checkbox",
             "display": {
-              "title": "OV_NR_checkbox"
+              "title": {
+                "text": "OV_NR_checkbox"
+              }
             },
             "_row_num": 41,
             "__rowNum__": 40,
@@ -2544,7 +2867,9 @@
             "type": "integer",
             "name": "Dose1_Students_notMIF_Outreach",
             "display": {
-              "title": "Dose1_Students_notMIF_Outreach"
+              "title": {
+                "text": "Dose1_Students_notMIF_Outreach"
+              }
             },
             "_row_num": 42,
             "__rowNum__": 41,
@@ -2558,7 +2883,9 @@
             "values_list": "one_choice",
             "name": "S1_O_NR_checkbox",
             "display": {
-              "title": "S1_O_NR_checkbox"
+              "title": {
+                "text": "S1_O_NR_checkbox"
+              }
             },
             "_row_num": 43,
             "__rowNum__": 42,
@@ -2571,8 +2898,12 @@
             "type": "note",
             "name": "Dose1_Students_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose1_Students_notMIF_sum}}",
-              "title": "Dose1_Students_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_Students_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose1_Students_notMIF_sum"
+              }
             },
             "_row_num": 44,
             "__rowNum__": 43,
@@ -2585,7 +2916,9 @@
             "type": "integer",
             "name": "Dose2_Students_notMIF_Outreach",
             "display": {
-              "title": "Dose2_Students_notMIF_Outreach"
+              "title": {
+                "text": "Dose2_Students_notMIF_Outreach"
+              }
             },
             "_row_num": 45,
             "__rowNum__": 44,
@@ -2599,7 +2932,9 @@
             "values_list": "one_choice",
             "name": "S2_O_NR_checkbox",
             "display": {
-              "title": "S2_O_NR_checkbox"
+              "title": {
+                "text": "S2_O_NR_checkbox"
+              }
             },
             "_row_num": 46,
             "__rowNum__": 45,
@@ -2612,8 +2947,12 @@
             "type": "note",
             "name": "Dose2_Students_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose2_Students_notMIF_sum}}",
-              "title": "Dose2_Students_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_Students_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose2_Students_notMIF_sum"
+              }
             },
             "_row_num": 47,
             "__rowNum__": 46,
@@ -2626,8 +2965,12 @@
             "type": "note",
             "name": "Total_Students_notMIF",
             "display": {
-              "text": "{{calculates.Total_Students_notMIF}}",
-              "title": "Total_Students_notMIF"
+              "prompt": {
+                "text": "{{calculates.Total_Students_notMIF}}"
+              },
+              "title": {
+                "text": "Total_Students_notMIF"
+              }
             },
             "_row_num": 48,
             "__rowNum__": 47,
@@ -2640,7 +2983,9 @@
             "type": "integer",
             "name": "Dose1_Workers_notMIF_Outreach",
             "display": {
-              "title": "Dose1_Workers_notMIF_Outreach"
+              "title": {
+                "text": "Dose1_Workers_notMIF_Outreach"
+              }
             },
             "_row_num": 49,
             "__rowNum__": 48,
@@ -2654,7 +2999,9 @@
             "values_list": "one_choice",
             "name": "W1_O_NR_checkbox",
             "display": {
-              "title": "W1_O_NR_checkbox"
+              "title": {
+                "text": "W1_O_NR_checkbox"
+              }
             },
             "_row_num": 50,
             "__rowNum__": 49,
@@ -2667,8 +3014,12 @@
             "type": "note",
             "name": "Dose1_Workers_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose1_Workers_notMIF_sum}}",
-              "title": "Dose1_Workers_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_Workers_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose1_Workers_notMIF_sum"
+              }
             },
             "_row_num": 51,
             "__rowNum__": 50,
@@ -2681,7 +3032,9 @@
             "type": "integer",
             "name": "Dose2_Workers_notMIF_Outreach",
             "display": {
-              "title": "Dose2_Workers_notMIF_Outreach"
+              "title": {
+                "text": "Dose2_Workers_notMIF_Outreach"
+              }
             },
             "_row_num": 52,
             "__rowNum__": 51,
@@ -2695,7 +3048,9 @@
             "values_list": "one_choice",
             "name": "W2_O_NR_checkbox",
             "display": {
-              "title": "W2_O_NR_checkbox"
+              "title": {
+                "text": "W2_O_NR_checkbox"
+              }
             },
             "_row_num": 53,
             "__rowNum__": 52,
@@ -2708,8 +3063,12 @@
             "type": "note",
             "name": "Dose2_Workers_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose2_Workers_notMIF_sum}}",
-              "title": "Dose2_Workers_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_Workers_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose2_Workers_notMIF_sum"
+              }
             },
             "_row_num": 54,
             "__rowNum__": 53,
@@ -2722,8 +3081,12 @@
             "type": "note",
             "name": "Total_Workers_notMIF",
             "display": {
-              "text": "{{calculates.Total_Workers_notMIF}}",
-              "title": "Total_Workers_notMIF"
+              "prompt": {
+                "text": "{{calculates.Total_Workers_notMIF}}"
+              },
+              "title": {
+                "text": "Total_Workers_notMIF"
+              }
             },
             "_row_num": 55,
             "__rowNum__": 54,
@@ -2736,7 +3099,9 @@
             "type": "integer",
             "name": "Dose1_Other_notMIF_HealthCenter",
             "display": {
-              "title": "Dose1_Other_notMIF_HealthCenter"
+              "title": {
+                "text": "Dose1_Other_notMIF_HealthCenter"
+              }
             },
             "_row_num": 56,
             "__rowNum__": 55,
@@ -2750,7 +3115,9 @@
             "values_list": "one_choice",
             "name": "O1_HC_NR_checkbox",
             "display": {
-              "title": "O1_HC_NR_checkbox"
+              "title": {
+                "text": "O1_HC_NR_checkbox"
+              }
             },
             "_row_num": 57,
             "__rowNum__": 56,
@@ -2763,7 +3130,9 @@
             "type": "integer",
             "name": "Dose1_Other_notMIF_Outreach",
             "display": {
-              "title": "Dose1_Other_notMIF_Outreach"
+              "title": {
+                "text": "Dose1_Other_notMIF_Outreach"
+              }
             },
             "_row_num": 58,
             "__rowNum__": 57,
@@ -2777,7 +3146,9 @@
             "values_list": "one_choice",
             "name": "O1_O_NR_checkbox",
             "display": {
-              "title": "O1_O_NR_checkbox"
+              "title": {
+                "text": "O1_O_NR_checkbox"
+              }
             },
             "_row_num": 59,
             "__rowNum__": 58,
@@ -2790,8 +3161,12 @@
             "type": "note",
             "name": "Dose1_Other_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose1_Other_notMIF_sum}}",
-              "title": "Dose1_Other_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_Other_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose1_Other_notMIF_sum"
+              }
             },
             "_row_num": 60,
             "__rowNum__": 59,
@@ -2804,7 +3179,9 @@
             "type": "integer",
             "name": "Dose2_Other_notMIF_HealthCenter",
             "display": {
-              "title": "Dose2_Other_notMIF_HealthCenter"
+              "title": {
+                "text": "Dose2_Other_notMIF_HealthCenter"
+              }
             },
             "_row_num": 61,
             "__rowNum__": 60,
@@ -2818,7 +3195,9 @@
             "values_list": "one_choice",
             "name": "O2_HC_NR_checkbox",
             "display": {
-              "title": "O2_HC_NR_checkbox"
+              "title": {
+                "text": "O2_HC_NR_checkbox"
+              }
             },
             "_row_num": 62,
             "__rowNum__": 61,
@@ -2831,7 +3210,9 @@
             "type": "integer",
             "name": "Dose2_Other_notMIF_Outreach",
             "display": {
-              "title": "Dose2_Other_notMIF_Outreach"
+              "title": {
+                "text": "Dose2_Other_notMIF_Outreach"
+              }
             },
             "_row_num": 63,
             "__rowNum__": 62,
@@ -2845,7 +3226,9 @@
             "values_list": "one_choice",
             "name": "O2_O_NR_checkbox",
             "display": {
-              "title": "O2_O_NR_checkbox"
+              "title": {
+                "text": "O2_O_NR_checkbox"
+              }
             },
             "_row_num": 64,
             "__rowNum__": 63,
@@ -2858,8 +3241,12 @@
             "type": "note",
             "name": "Dose2_Other_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose2_Other_notMIF_sum}}",
-              "title": "Dose2_Other_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_Other_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose2_Other_notMIF_sum"
+              }
             },
             "_row_num": 65,
             "__rowNum__": 64,
@@ -2872,8 +3259,12 @@
             "type": "note",
             "name": "Total_Other_notMIF",
             "display": {
-              "text": "{{calculates.Total_Other_notMIF}}",
-              "title": "Total_Other_notMIF"
+              "prompt": {
+                "text": "{{calculates.Total_Other_notMIF}}"
+              },
+              "title": {
+                "text": "Total_Other_notMIF"
+              }
             },
             "_row_num": 66,
             "__rowNum__": 65,
@@ -2886,8 +3277,12 @@
             "type": "note",
             "name": "Total_Dose1_HealthCenter",
             "display": {
-              "text": "{{calculates.Total_Dose1_HealthCenter}}",
-              "title": "Total_Dose1_HealthCenter"
+              "prompt": {
+                "text": "{{calculates.Total_Dose1_HealthCenter}}"
+              },
+              "title": {
+                "text": "Total_Dose1_HealthCenter"
+              }
             },
             "_row_num": 67,
             "__rowNum__": 66,
@@ -2900,8 +3295,12 @@
             "type": "note",
             "name": "Total_Dose1_Outreach",
             "display": {
-              "text": "{{calculates.Total_Dose1_Outreach}}",
-              "title": "Total_Dose1_Outreach"
+              "prompt": {
+                "text": "{{calculates.Total_Dose1_Outreach}}"
+              },
+              "title": {
+                "text": "Total_Dose1_Outreach"
+              }
             },
             "_row_num": 68,
             "__rowNum__": 67,
@@ -2914,8 +3313,12 @@
             "type": "note",
             "name": "Total_Dose2_HealthCenter",
             "display": {
-              "text": "{{calculates.Total_Dose2_HealthCenter}}",
-              "title": "Total_Dose2_HealthCenter"
+              "prompt": {
+                "text": "{{calculates.Total_Dose2_HealthCenter}}"
+              },
+              "title": {
+                "text": "Total_Dose2_HealthCenter"
+              }
             },
             "_row_num": 69,
             "__rowNum__": 68,
@@ -2928,8 +3331,12 @@
             "type": "note",
             "name": "Total_Dose2_Outreach",
             "display": {
-              "text": "{{calculates.Total_Dose2_Outreach}}",
-              "title": "Total_Dose2_Outreach"
+              "prompt": {
+                "text": "{{calculates.Total_Dose2_Outreach}}"
+              },
+              "title": {
+                "text": "Total_Dose2_Outreach"
+              }
             },
             "_row_num": 70,
             "__rowNum__": 69,
@@ -2942,8 +3349,12 @@
             "type": "note",
             "name": "Total_Dose1",
             "display": {
-              "text": "{{calculates.Total_Dose1}}",
-              "title": "Total_Dose1"
+              "prompt": {
+                "text": "{{calculates.Total_Dose1}}"
+              },
+              "title": {
+                "text": "Total_Dose1"
+              }
             },
             "_row_num": 71,
             "__rowNum__": 70,
@@ -2956,8 +3367,12 @@
             "type": "note",
             "name": "Total_Dose2",
             "display": {
-              "text": "{{calculates.Total_Dose2}}",
-              "title": "Total_Dose2"
+              "prompt": {
+                "text": "{{calculates.Total_Dose2}}"
+              },
+              "title": {
+                "text": "Total_Dose2"
+              }
             },
             "_row_num": 72,
             "__rowNum__": 71,
@@ -2970,8 +3385,12 @@
             "type": "note",
             "name": "Total_Tetanus",
             "display": {
-              "text": "{{calculates.Total_Tetanus}}",
-              "title": "Total_Tetanus"
+              "prompt": {
+                "text": "{{calculates.Total_Tetanus}}"
+              },
+              "title": {
+                "text": "Total_Tetanus"
+              }
             },
             "_row_num": 73,
             "__rowNum__": 72,
@@ -3067,7 +3486,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Adult Coverage"
+              "title": {
+                "text": "Adult Coverage"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -4781,7 +5202,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Adult Coverage\""
+        "_value": "{\"text\":\"Adult Coverage\"}"
       }
     ]
   }

@@ -9,9 +9,11 @@
         "type": "user_branch",
         "values_list": "my_branch",
         "display": {
-          "text": {
-            "default": "Choose the section to enter",
-            "hindi": "प्रवेश करने के लिए खंड चुनें"
+          "prompt": {
+            "text": {
+              "default": "Choose the section to enter",
+              "hindi": "प्रवेश करने के लिए खंड चुनें"
+            }
           }
         },
         "hideInContents": true,
@@ -28,9 +30,11 @@
       {
         "type": "note",
         "display": {
-          "text": {
-            "default": "Section 1 chosen",
-            "hindi": "धारा 1 चुना"
+          "prompt": {
+            "text": {
+              "default": "Section 1 chosen",
+              "hindi": "धारा 1 चुना"
+            }
           }
         },
         "hideInContents": true,
@@ -43,9 +47,11 @@
       {
         "type": "note",
         "display": {
-          "text": {
-            "default": "Returned from section 1",
-            "hindi": "खंड 1 से लौटे"
+          "prompt": {
+            "text": {
+              "default": "Returned from section 1",
+              "hindi": "खंड 1 से लौटे"
+            }
           }
         },
         "hideInContents": true,
@@ -62,9 +68,11 @@
       {
         "type": "note",
         "display": {
-          "text": {
-            "default": "Section 2 chosen",
-            "hindi": "धारा 2 चुना"
+          "prompt": {
+            "text": {
+              "default": "Section 2 chosen",
+              "hindi": "धारा 2 चुना"
+            }
           }
         },
         "hideInContents": true,
@@ -81,9 +89,11 @@
       {
         "type": "note",
         "display": {
-          "text": {
-            "default": "Returned from section 2",
-            "hindi": "धारा 2 से लौटे"
+          "prompt": {
+            "text": {
+              "default": "Returned from section 2",
+              "hindi": "धारा 2 से लौटे"
+            }
           }
         },
         "hideInContents": true,
@@ -100,9 +110,11 @@
       {
         "type": "note",
         "display": {
-          "text": {
-            "default": "Exiting survey",
-            "hindi": "बाहर निकलने सर्वेक्षण"
+          "prompt": {
+            "text": {
+              "default": "Exiting survey",
+              "hindi": "बाहर निकलने सर्वेक्षण"
+            }
           }
         },
         "hideInContents": true,
@@ -125,9 +137,11 @@
       {
         "type": "note",
         "display": {
-          "text": {
-            "default": "Entered Characteristics",
-            "hindi": "में प्रवेश किया अभिलक्षण"
+          "prompt": {
+            "text": {
+              "default": "Entered Characteristics",
+              "hindi": "में प्रवेश किया अभिलक्षण"
+            }
           }
         },
         "hideInContents": true,
@@ -137,17 +151,21 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": {
-            "default": "What is your age?",
-            "hindi": "आपकी उम्र क्या है?"
+          "prompt": {
+            "text": {
+              "default": "What is your age?",
+              "hindi": "आपकी उम्र क्या है?"
+            }
+          },
+          "constraint_message": {
+            "text": {
+              "default": "Age must be greater than 20",
+              "hindi": "20 साल की उम्र से अधिक होना चाहिए"
+            }
           }
         },
         "required": true,
         "constraint": "data('age') > 20",
-        "constraint_message": {
-          "default": "Age must be greater than 20",
-          "hindi": "20 साल की उम्र से अधिक होना चाहिए"
-        },
         "validation_tags": "user_info finalize",
         "_row_num": 3
       },
@@ -155,17 +173,21 @@
         "type": "string",
         "name": "color",
         "display": {
-          "text": {
-            "default": "What is your favorite color?",
-            "hindi": "अपने पसंदीदा रंग क्या है?"
+          "prompt": {
+            "text": {
+              "default": "What is your favorite color?",
+              "hindi": "अपने पसंदीदा रंग क्या है?"
+            }
+          },
+          "constraint_message": {
+            "text": {
+              "default": "Red is the only correct answer!",
+              "hindi": "लाल ही सही जवाब है!"
+            }
           }
         },
         "required": true,
         "constraint": "data('color') == 'red'",
-        "constraint_message": {
-          "default": "Red is the only correct answer!",
-          "hindi": "लाल ही सही जवाब है!"
-        },
         "validation_tags": "user_info finalize",
         "_row_num": 4
       },
@@ -173,17 +195,21 @@
         "type": "integer",
         "name": "weight",
         "display": {
-          "text": {
-            "default": "How heavy is your favorite book?",
-            "hindi": "अपनी पसंदीदा किताब कैसे भारी है?"
+          "prompt": {
+            "text": {
+              "default": "How heavy is your favorite book?",
+              "hindi": "अपनी पसंदीदा किताब कैसे भारी है?"
+            }
+          },
+          "constraint_message": {
+            "text": {
+              "default": "Nothing can weigh that!",
+              "hindi": "कुछ भी नहीं है कि वजन कर सकते हैं!"
+            }
           }
         },
         "required": true,
         "constraint": "data('weight') > 0",
-        "constraint_message": {
-          "default": "Nothing can weigh that!",
-          "hindi": "कुछ भी नहीं है कि वजन कर सकते हैं!"
-        },
         "validation_tags": "user_info finalize",
         "_row_num": 5
       }
@@ -192,9 +218,11 @@
       {
         "type": "note",
         "display": {
-          "text": {
-            "default": "Entered Section 2",
-            "hindi": "में प्रवेश किया धारा 2"
+          "prompt": {
+            "text": {
+              "default": "Entered Section 2",
+              "hindi": "में प्रवेश किया धारा 2"
+            }
           }
         },
         "hideInContents": true,
@@ -204,9 +232,11 @@
         "type": "acknowledge",
         "name": "confirm_fact",
         "display": {
-          "text": {
-            "default": "Please acknowledge that people have books",
-            "hindi": "Please acknowledge that people have books"
+          "prompt": {
+            "text": {
+              "default": "Please acknowledge that people have books",
+              "hindi": "Please acknowledge that people have books"
+            }
           }
         },
         "required": true,
@@ -264,8 +294,10 @@
         "setting_name": "section2",
         "display": {
           "title": {
-            "default": "Recommendations",
-            "hindi": "अनुशंसाएँ"
+            "text": {
+              "default": "Recommendations",
+              "hindi": "अनुशंसाएँ"
+            }
           }
         },
         "_row_num": 4
@@ -274,8 +306,10 @@
         "setting_name": "section1",
         "display": {
           "title": {
-            "default": "User Info",
-            "hindi": "उपयोगकर्ता जानकारी"
+            "text": {
+              "default": "User Info",
+              "hindi": "उपयोगकर्ता जानकारी"
+            }
           }
         },
         "_row_num": 5
@@ -284,8 +318,10 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "default": "Two Part Validation Test",
-            "hindi": "दो भाग मान्यकरण टेस्ट"
+            "text": {
+              "default": "Two Part Validation Test",
+              "hindi": "दो भाग मान्यकरण टेस्ट"
+            }
           }
         },
         "_row_num": 6
@@ -293,9 +329,11 @@
       {
         "setting_name": "default",
         "display": {
-          "text": {
-            "default": "English",
-            "hindi": "अंग्रेज़ी"
+          "locale": {
+            "text": {
+              "default": "English",
+              "hindi": "अंग्रेज़ी"
+            }
           }
         },
         "_row_num": 7
@@ -303,9 +341,11 @@
       {
         "setting_name": "hindi",
         "display": {
-          "text": {
-            "default": "Hindi",
-            "hindi": "हिंदी"
+          "locale": {
+            "text": {
+              "default": "Hindi",
+              "hindi": "हिंदी"
+            }
           }
         },
         "_row_num": 8
@@ -325,10 +365,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -345,8 +382,10 @@
         "setting_name": "section2",
         "display": {
           "title": {
-            "default": "Recommendations",
-            "hindi": "अनुशंसाएँ"
+            "text": {
+              "default": "Recommendations",
+              "hindi": "अनुशंसाएँ"
+            }
           }
         },
         "_row_num": 4
@@ -355,8 +394,10 @@
         "setting_name": "section1",
         "display": {
           "title": {
-            "default": "User Info",
-            "hindi": "उपयोगकर्ता जानकारी"
+            "text": {
+              "default": "User Info",
+              "hindi": "उपयोगकर्ता जानकारी"
+            }
           }
         },
         "_row_num": 5
@@ -365,8 +406,10 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "default": "Two Part Validation Test",
-            "hindi": "दो भाग मान्यकरण टेस्ट"
+            "text": {
+              "default": "Two Part Validation Test",
+              "hindi": "दो भाग मान्यकरण टेस्ट"
+            }
           }
         },
         "_row_num": 6
@@ -374,9 +417,11 @@
       "default": {
         "setting_name": "default",
         "display": {
-          "text": {
-            "default": "English",
-            "hindi": "अंग्रेज़ी"
+          "locale": {
+            "text": {
+              "default": "English",
+              "hindi": "अंग्रेज़ी"
+            }
           }
         },
         "_row_num": 7
@@ -384,9 +429,11 @@
       "hindi": {
         "setting_name": "hindi",
         "display": {
-          "text": {
-            "default": "Hindi",
-            "hindi": "हिंदी"
+          "locale": {
+            "text": {
+              "default": "Hindi",
+              "hindi": "हिंदी"
+            }
           }
         },
         "_row_num": 8
@@ -403,9 +450,11 @@
         "value": [
           {
             "display": {
-              "text": {
-                "default": "English",
-                "hindi": "अंग्रेज़ी"
+              "locale": {
+                "text": {
+                  "default": "English",
+                  "hindi": "अंग्रेज़ी"
+                }
               }
             },
             "_row_num": 7,
@@ -413,9 +462,11 @@
           },
           {
             "display": {
-              "text": {
-                "default": "Hindi",
-                "hindi": "हिंदी"
+              "locale": {
+                "text": {
+                  "default": "Hindi",
+                  "hindi": "हिंदी"
+                }
               }
             },
             "_row_num": 8,
@@ -432,8 +483,10 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "default": "Two Part Validation Test",
-            "hindi": "दो भाग मान्यकरण टेस्ट"
+            "text": {
+              "default": "Two Part Validation Test",
+              "hindi": "दो भाग मान्यकरण टेस्ट"
+            }
           }
         },
         "_row_num": 6
@@ -475,6 +528,44 @@
           "_row_num": 4
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 6,
+        "value": [
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "default": "English",
+                  "hindi": "अंग्रेज़ी"
+                }
+              }
+            },
+            "_row_num": 7,
+            "name": "default"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "default": "Hindi",
+                  "hindi": "हिंदी"
+                }
+              }
+            },
+            "_row_num": 8,
+            "name": "hindi"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 6,
+        "value": "default"
+      }
     },
     "queries": {},
     "calculates": {},
@@ -542,9 +633,11 @@
             "type": "user_branch",
             "values_list": "my_branch",
             "display": {
-              "text": {
-                "default": "Choose the section to enter",
-                "hindi": "प्रवेश करने के लिए खंड चुनें"
+              "prompt": {
+                "text": {
+                  "default": "Choose the section to enter",
+                  "hindi": "प्रवेश करने के लिए खंड चुनें"
+                }
               }
             },
             "hideInContents": true,
@@ -558,9 +651,11 @@
           {
             "type": "note",
             "display": {
-              "text": {
-                "default": "Section 1 chosen",
-                "hindi": "धारा 1 चुना"
+              "prompt": {
+                "text": {
+                  "default": "Section 1 chosen",
+                  "hindi": "धारा 1 चुना"
+                }
               }
             },
             "hideInContents": true,
@@ -581,8 +676,10 @@
             "promptIdx": 2,
             "display": {
               "title": {
-                "default": "User Info",
-                "hindi": "उपयोगकर्ता जानकारी"
+                "text": {
+                  "default": "User Info",
+                  "hindi": "उपयोगकर्ता जानकारी"
+                }
               }
             },
             "_branch_label_enclosing_screen": "section1/0"
@@ -590,9 +687,11 @@
           {
             "type": "note",
             "display": {
-              "text": {
-                "default": "Returned from section 1",
-                "hindi": "खंड 1 से लौटे"
+              "prompt": {
+                "text": {
+                  "default": "Returned from section 1",
+                  "hindi": "खंड 1 से लौटे"
+                }
               }
             },
             "hideInContents": true,
@@ -606,9 +705,11 @@
           {
             "type": "note",
             "display": {
-              "text": {
-                "default": "Section 2 chosen",
-                "hindi": "धारा 2 चुना"
+              "prompt": {
+                "text": {
+                  "default": "Section 2 chosen",
+                  "hindi": "धारा 2 चुना"
+                }
               }
             },
             "hideInContents": true,
@@ -629,8 +730,10 @@
             "promptIdx": 5,
             "display": {
               "title": {
-                "default": "Recommendations",
-                "hindi": "अनुशंसाएँ"
+                "text": {
+                  "default": "Recommendations",
+                  "hindi": "अनुशंसाएँ"
+                }
               }
             },
             "_branch_label_enclosing_screen": "section2/0"
@@ -638,9 +741,11 @@
           {
             "type": "note",
             "display": {
-              "text": {
-                "default": "Returned from section 2",
-                "hindi": "धारा 2 से लौटे"
+              "prompt": {
+                "text": {
+                  "default": "Returned from section 2",
+                  "hindi": "धारा 2 से लौटे"
+                }
               }
             },
             "hideInContents": true,
@@ -654,9 +759,11 @@
           {
             "type": "note",
             "display": {
-              "text": {
-                "default": "Exiting survey",
-                "hindi": "बाहर निकलने सर्वेक्षण"
+              "prompt": {
+                "text": {
+                  "default": "Exiting survey",
+                  "hindi": "बाहर निकलने सर्वेक्षण"
+                }
               }
             },
             "hideInContents": true,
@@ -830,9 +937,11 @@
           {
             "type": "note",
             "display": {
-              "text": {
-                "default": "Entered Characteristics",
-                "hindi": "में प्रवेश किया अभिलक्षण"
+              "prompt": {
+                "text": {
+                  "default": "Entered Characteristics",
+                  "hindi": "में प्रवेश किया अभिलक्षण"
+                }
               }
             },
             "hideInContents": true,
@@ -847,17 +956,21 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": {
-                "default": "What is your age?",
-                "hindi": "आपकी उम्र क्या है?"
+              "prompt": {
+                "text": {
+                  "default": "What is your age?",
+                  "hindi": "आपकी उम्र क्या है?"
+                }
+              },
+              "constraint_message": {
+                "text": {
+                  "default": "Age must be greater than 20",
+                  "hindi": "20 साल की उम्र से अधिक होना चाहिए"
+                }
               }
             },
             "required": true,
             "constraint": "data('age') > 20",
-            "constraint_message": {
-              "default": "Age must be greater than 20",
-              "hindi": "20 साल की उम्र से अधिक होना चाहिए"
-            },
             "validation_tags": "user_info finalize",
             "_row_num": 3,
             "__rowNum__": 2,
@@ -870,17 +983,21 @@
             "type": "string",
             "name": "color",
             "display": {
-              "text": {
-                "default": "What is your favorite color?",
-                "hindi": "अपने पसंदीदा रंग क्या है?"
+              "prompt": {
+                "text": {
+                  "default": "What is your favorite color?",
+                  "hindi": "अपने पसंदीदा रंग क्या है?"
+                }
+              },
+              "constraint_message": {
+                "text": {
+                  "default": "Red is the only correct answer!",
+                  "hindi": "लाल ही सही जवाब है!"
+                }
               }
             },
             "required": true,
             "constraint": "data('color') == 'red'",
-            "constraint_message": {
-              "default": "Red is the only correct answer!",
-              "hindi": "लाल ही सही जवाब है!"
-            },
             "validation_tags": "user_info finalize",
             "_row_num": 4,
             "__rowNum__": 3,
@@ -893,17 +1010,21 @@
             "type": "integer",
             "name": "weight",
             "display": {
-              "text": {
-                "default": "How heavy is your favorite book?",
-                "hindi": "अपनी पसंदीदा किताब कैसे भारी है?"
+              "prompt": {
+                "text": {
+                  "default": "How heavy is your favorite book?",
+                  "hindi": "अपनी पसंदीदा किताब कैसे भारी है?"
+                }
+              },
+              "constraint_message": {
+                "text": {
+                  "default": "Nothing can weigh that!",
+                  "hindi": "कुछ भी नहीं है कि वजन कर सकते हैं!"
+                }
               }
             },
             "required": true,
             "constraint": "data('weight') > 0",
-            "constraint_message": {
-              "default": "Nothing can weigh that!",
-              "hindi": "कुछ भी नहीं है कि वजन कर सकते हैं!"
-            },
             "validation_tags": "user_info finalize",
             "_row_num": 5,
             "__rowNum__": 4,
@@ -997,9 +1118,11 @@
           {
             "type": "note",
             "display": {
-              "text": {
-                "default": "Entered Section 2",
-                "hindi": "में प्रवेश किया धारा 2"
+              "prompt": {
+                "text": {
+                  "default": "Entered Section 2",
+                  "hindi": "में प्रवेश किया धारा 2"
+                }
               }
             },
             "hideInContents": true,
@@ -1014,9 +1137,11 @@
             "type": "acknowledge",
             "name": "confirm_fact",
             "display": {
-              "text": {
-                "default": "Please acknowledge that people have books",
-                "hindi": "Please acknowledge that people have books"
+              "prompt": {
+                "text": {
+                  "default": "Please acknowledge that people have books",
+                  "hindi": "Please acknowledge that people have books"
+                }
               }
             },
             "required": true,
@@ -1115,8 +1240,10 @@
             "promptIdx": 1,
             "display": {
               "title": {
-                "default": "Two Part Validation Test",
-                "hindi": "दो भाग मान्यकरण टेस्ट"
+                "text": {
+                  "default": "Two Part Validation Test",
+                  "hindi": "दो भाग मान्यकरण टेस्ट"
+                }
               }
             },
             "_branch_label_enclosing_screen": "survey/0"
@@ -1432,7 +1559,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"default\":\"Two Part Validation Test\",\"hindi\":\"दो भाग मान्यकरण टेस्ट\"}"
+        "_value": "{\"text\":{\"default\":\"Two Part Validation Test\",\"hindi\":\"दो भाग मान्यकरण टेस्ट\"}}"
       }
     ]
   }

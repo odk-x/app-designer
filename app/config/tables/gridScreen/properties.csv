@@ -32,4 +32,4 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,gridScreen
 Table,default,colOrder,array,"[""item_1"",""item_2"",""item_3"",""item_4"",""item_5"",""item_6"",""item_7"",""QFC_item_1"",""QFC_item_2"",""QFC_item_3"",""QFC_item_4"",""QFC_item_5"",""QFC_item_6"",""QFC_sum"",""Safeway_item_1"",""Safeway_item_2"",""Safeway_item_3"",""Safeway_item_4"",""Safeway_item_5"",""Safeway_item_6"",""Safeway_sum"",""Target_item_1"",""Target_item_2"",""Target_item_3"",""Target_item_4"",""Target_item_5"",""Target_item_6"",""Target_sum"",""selected_store""]"
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Grid Screen Form"""
+Table,default,displayName,object,"{""text"":""Grid Screen Form""}"

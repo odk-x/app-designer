@@ -5,4 +5,4 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,household
 Table,default,colOrder,object,"[""household_id"",""num_rooms"",""electricity"",""water"",""location_latitude"",""location_longitude"",""location_altitude"",""location_accuracy"",""owner"",""youngest""]"
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Household Survey"""
+Table,default,displayName,object,"{""text"":""Household Survey""}"

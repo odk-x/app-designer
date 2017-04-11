@@ -5,7 +5,9 @@
         "type": "text",
         "name": "refrigerator_id",
         "display": {
-          "text": "Enter refrigerator id:"
+          "prompt": {
+            "text": "Enter refrigerator id:"
+          }
         },
         "_row_num": 2
       },
@@ -13,8 +15,12 @@
         "type": "decimal",
         "name": "refrigerator_size",
         "display": {
-          "text": "Enter refrigerator size:",
-          "hint": "cubic meters"
+          "prompt": {
+            "text": "Enter refrigerator size:"
+          },
+          "hint": {
+            "text": "cubic meters"
+          }
         },
         "_row_num": 3
       },
@@ -23,7 +29,9 @@
         "values_list": "conditions",
         "name": "refrigerator_condition",
         "display": {
-          "text": "Select refrigerator condition:"
+          "prompt": {
+            "text": "Select refrigerator condition:"
+          }
         },
         "_row_num": 4
       },
@@ -31,7 +39,9 @@
         "type": "geopoint",
         "name": "refrigerator_location",
         "display": {
-          "text": "Capture refrigerator coordinates:"
+          "prompt": {
+            "text": "Capture refrigerator coordinates:"
+          }
         },
         "_row_num": 5
       }
@@ -129,7 +139,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Initial refrigerator information"
+          "title": {
+            "text": "Initial refrigerator information"
+          }
         },
         "_row_num": 5
       }
@@ -148,10 +160,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -172,7 +181,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Initial refrigerator information"
+          "title": {
+            "text": "Initial refrigerator information"
+          }
         },
         "_row_num": 5
       },
@@ -181,7 +192,7 @@
         "_row_num": 5,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -196,7 +207,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Initial refrigerator information"
+          "title": {
+            "text": "Initial refrigerator information"
+          }
         },
         "_row_num": 5
       }
@@ -244,6 +257,26 @@
           "_row_num": 6
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 5,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 5,
+        "value": "default"
+      }
     },
     "queries": {},
     "calculates": {},
@@ -359,7 +392,9 @@
             "type": "text",
             "name": "refrigerator_id",
             "display": {
-              "text": "Enter refrigerator id:"
+              "prompt": {
+                "text": "Enter refrigerator id:"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -372,8 +407,12 @@
             "type": "decimal",
             "name": "refrigerator_size",
             "display": {
-              "text": "Enter refrigerator size:",
-              "hint": "cubic meters"
+              "prompt": {
+                "text": "Enter refrigerator size:"
+              },
+              "hint": {
+                "text": "cubic meters"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -387,7 +426,9 @@
             "values_list": "conditions",
             "name": "refrigerator_condition",
             "display": {
-              "text": "Select refrigerator condition:"
+              "prompt": {
+                "text": "Select refrigerator condition:"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -400,7 +441,9 @@
             "type": "geopoint",
             "name": "refrigerator_location",
             "display": {
-              "text": "Capture refrigerator coordinates:"
+              "prompt": {
+                "text": "Capture refrigerator coordinates:"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -505,7 +548,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Initial refrigerator information"
+              "title": {
+                "text": "Initial refrigerator information"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -938,7 +983,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Initial refrigerator information\""
+        "_value": "{\"text\":\"Initial refrigerator information\"}"
       }
     ]
   }

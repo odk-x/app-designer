@@ -3,27 +3,14 @@
         <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
         <hr>
     </div>
-
-    <div>
-        <center><p>ODK SURVEY</center>
-        <hr>
-    </div>
-
-    <div>
-        <p>Form Name: {{localize form_title}}</p>
-        <p>Form Version: {{#if form_version}}{{form_version}}{{/if}}</p>
-        <hr>
-    </div>
+	{{{localizeText display.instances_survey_form_identification}}}
 
     <div class="instanceClearDiv"></div>
     <div>
         <fieldset class="instanceNew">
             <div class="row">
-                <div class="col-xs-8">
-                    Create new instance
-                </div>
                 <div class="col-xs-4">
-                    <button type="button" class="createInstance btn btn-default" tabindex="0">
+                    <button type="button" class="createInstance btn btn-default" tabindex="0">{{localizeText display.new_button_label}}
                         <span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"></span>
                     </button>
                 </div>
@@ -32,7 +19,7 @@
         <hr>
     </div>
 
-    <p>Previously created instances:</p>
+    {{{localizeText display.instances_previously_created_instances_label}}}
     <hr>
     <div class="instanceList">
         <ul class="list-group">
@@ -45,9 +32,9 @@
                         <div class="row">
                             <div class="col-xs-8">
                                 <p><strong>{{display_field}}</strong></p>
-                                <p><strong>Last Save Date:</strong></p>
+								{{{localizeText ../display.instances_last_save_date_label}}}
                                 <p>{{savepoint_timestamp}}</p>
-								<p><strong>{{savepoint_type_text}}</strong></p>
+								<p><strong>{{localizeText savepoint_type_text}}</strong></p>
 								{{#if is_checkpoint}}
 									<span class="glyphicon glyphicon-warning-sign"></span></p>
 								{{/if}}
@@ -68,7 +55,7 @@
                     </fieldset>
                 </li>
             {{else}}
-                <li>No saved instances.</li>
+                <li>{{localizeText display.instances_no_saved_instances_label}}</li>
             {{/each}}
         </ul>
     </div>

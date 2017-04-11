@@ -5,7 +5,9 @@
         "type": "bargraph",
         "values_list": "graph_csv",
         "display": {
-          "text": "Bar Graph"
+          "prompt": {
+            "text": "Bar Graph"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "linegraph",
         "values_list": "linegraph_csv",
         "display": {
-          "text": "Line Graph"
+          "prompt": {
+            "text": "Line Graph"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "piechart",
         "values_list": "piechart_csv",
         "display": {
-          "text": "PieChart"
+          "prompt": {
+            "text": "PieChart"
+          }
         },
         "_row_num": 4
       },
@@ -29,7 +35,9 @@
         "type": "scatterplot",
         "values_list": "scatterplot_csv",
         "display": {
-          "text": "Scatterplot"
+          "prompt": {
+            "text": "Scatterplot"
+          }
         },
         "_row_num": 5
       }
@@ -92,7 +100,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Graph Examples"
+          "title": {
+            "text": "Graph Examples"
+          }
         },
         "_row_num": 4
       },
@@ -116,10 +126,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -135,7 +142,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Graph Examples"
+          "title": {
+            "text": "Graph Examples"
+          }
         },
         "_row_num": 4
       },
@@ -155,7 +164,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -170,12 +179,34 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Graph Examples"
+          "title": {
+            "text": "Graph Examples"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
+    },
     "queries": {
       "regions_csv": {
         "query_name": "regions_csv",
@@ -236,7 +267,9 @@
             "type": "bargraph",
             "values_list": "graph_csv",
             "display": {
-              "text": "Bar Graph"
+              "prompt": {
+                "text": "Bar Graph"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -249,7 +282,9 @@
             "type": "linegraph",
             "values_list": "linegraph_csv",
             "display": {
-              "text": "Line Graph"
+              "prompt": {
+                "text": "Line Graph"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -262,7 +297,9 @@
             "type": "piechart",
             "values_list": "piechart_csv",
             "display": {
-              "text": "PieChart"
+              "prompt": {
+                "text": "PieChart"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -275,7 +312,9 @@
             "type": "scatterplot",
             "values_list": "scatterplot_csv",
             "display": {
-              "text": "Scatterplot"
+              "prompt": {
+                "text": "Scatterplot"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -380,7 +419,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Graph Examples"
+              "title": {
+                "text": "Graph Examples"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -645,7 +686,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Graph Examples\""
+        "_value": "{\"text\":\"Graph Examples\"}"
       }
     ]
   }

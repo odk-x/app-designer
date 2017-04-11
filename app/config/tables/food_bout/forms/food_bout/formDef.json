@@ -5,7 +5,9 @@
         "type": "text",
         "name": "FB_FOL_date",
         "display": {
-          "text": "date of follow"
+          "prompt": {
+            "text": "date of follow"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "text",
         "name": "FB_FOL_B_AnimID",
         "display": {
-          "text": "ID of focal chimp"
+          "prompt": {
+            "text": "ID of focal chimp"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "text",
         "name": "FB_begin_feed_time",
         "display": {
-          "text": "Time chimp began to eat food"
+          "prompt": {
+            "text": "Time chimp began to eat food"
+          }
         },
         "_row_num": 4
       },
@@ -29,7 +35,9 @@
         "type": "text",
         "name": "FB_end_feed_time",
         "display": {
-          "text": "Time chimp stopped eating food"
+          "prompt": {
+            "text": "Time chimp stopped eating food"
+          }
         },
         "_row_num": 5
       },
@@ -37,7 +45,9 @@
         "type": "integer",
         "name": "FB_duration",
         "display": {
-          "text": "Length of feeding bout in minutes"
+          "prompt": {
+            "text": "Length of feeding bout in minutes"
+          }
         },
         "_row_num": 6
       },
@@ -45,7 +55,9 @@
         "type": "text",
         "name": "FB_FPL_local_food_part",
         "display": {
-          "text": "Swahili part of food name"
+          "prompt": {
+            "text": "Swahili part of food name"
+          }
         },
         "_row_num": 7
       },
@@ -53,7 +65,9 @@
         "type": "text",
         "name": "FB_FL_local_food_name",
         "display": {
-          "text": "Swahili local food name"
+          "prompt": {
+            "text": "Swahili local food name"
+          }
         },
         "_row_num": 8
       },
@@ -61,7 +75,9 @@
         "type": "text",
         "name": "FB_FPL_local_food_part2",
         "display": {
-          "text": "Swahili food part of food name for the second food named for that bout"
+          "prompt": {
+            "text": "Swahili food part of food name for the second food named for that bout"
+          }
         },
         "_row_num": 9
       },
@@ -69,7 +85,9 @@
         "type": "text",
         "name": "FB_FL_local_food_name2",
         "display": {
-          "text": "Swahili local food name for the second food named for that bout"
+          "prompt": {
+            "text": "Swahili local food name for the second food named for that bout"
+          }
         },
         "_row_num": 10
       },
@@ -77,7 +95,9 @@
         "type": "text",
         "name": "FB_local_food_part_written",
         "display": {
-          "text": "Local food part"
+          "prompt": {
+            "text": "Local food part"
+          }
         },
         "_row_num": 11
       },
@@ -85,7 +105,9 @@
         "type": "text",
         "name": "FB_local_food_name_written",
         "display": {
-          "text": "Local food name"
+          "prompt": {
+            "text": "Local food name"
+          }
         },
         "_row_num": 12
       }
@@ -104,7 +126,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Food Bout"
+          "title": {
+            "text": "Food Bout"
+          }
         },
         "_row_num": 4
       }
@@ -133,10 +157,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -152,7 +173,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Food Bout"
+          "title": {
+            "text": "Food Bout"
+          }
         },
         "_row_num": 4
       },
@@ -167,7 +190,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -182,12 +205,34 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Food Bout"
+          "title": {
+            "text": "Food Bout"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -316,7 +361,9 @@
             "type": "text",
             "name": "FB_FOL_date",
             "display": {
-              "text": "date of follow"
+              "prompt": {
+                "text": "date of follow"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -329,7 +376,9 @@
             "type": "text",
             "name": "FB_FOL_B_AnimID",
             "display": {
-              "text": "ID of focal chimp"
+              "prompt": {
+                "text": "ID of focal chimp"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -342,7 +391,9 @@
             "type": "text",
             "name": "FB_begin_feed_time",
             "display": {
-              "text": "Time chimp began to eat food"
+              "prompt": {
+                "text": "Time chimp began to eat food"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -355,7 +406,9 @@
             "type": "text",
             "name": "FB_end_feed_time",
             "display": {
-              "text": "Time chimp stopped eating food"
+              "prompt": {
+                "text": "Time chimp stopped eating food"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -368,7 +421,9 @@
             "type": "integer",
             "name": "FB_duration",
             "display": {
-              "text": "Length of feeding bout in minutes"
+              "prompt": {
+                "text": "Length of feeding bout in minutes"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -381,7 +436,9 @@
             "type": "text",
             "name": "FB_FPL_local_food_part",
             "display": {
-              "text": "Swahili part of food name"
+              "prompt": {
+                "text": "Swahili part of food name"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -394,7 +451,9 @@
             "type": "text",
             "name": "FB_FL_local_food_name",
             "display": {
-              "text": "Swahili local food name"
+              "prompt": {
+                "text": "Swahili local food name"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -407,7 +466,9 @@
             "type": "text",
             "name": "FB_FPL_local_food_part2",
             "display": {
-              "text": "Swahili food part of food name for the second food named for that bout"
+              "prompt": {
+                "text": "Swahili food part of food name for the second food named for that bout"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -420,7 +481,9 @@
             "type": "text",
             "name": "FB_FL_local_food_name2",
             "display": {
-              "text": "Swahili local food name for the second food named for that bout"
+              "prompt": {
+                "text": "Swahili local food name for the second food named for that bout"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -433,7 +496,9 @@
             "type": "text",
             "name": "FB_local_food_part_written",
             "display": {
-              "text": "Local food part"
+              "prompt": {
+                "text": "Local food part"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -446,7 +511,9 @@
             "type": "text",
             "name": "FB_local_food_name_written",
             "display": {
-              "text": "Local food name"
+              "prompt": {
+                "text": "Local food name"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -600,7 +667,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Food Bout"
+              "title": {
+                "text": "Food Bout"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1015,7 +1084,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Food Bout\""
+        "_value": "{\"text\":\"Food Bout\"}"
       }
     ]
   }

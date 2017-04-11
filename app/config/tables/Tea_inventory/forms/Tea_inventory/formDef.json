@@ -5,7 +5,9 @@
         "type": "string",
         "name": "Name",
         "display": {
-          "text": "Enter the name of the tea."
+          "prompt": {
+            "text": "Enter the name of the tea."
+          }
         },
         "required": true,
         "_row_num": 2
@@ -15,7 +17,9 @@
         "values_list": "Tea_type_list",
         "name": "Type_id",
         "display": {
-          "text": "Choose the tea type."
+          "prompt": {
+            "text": "Choose the tea type."
+          }
         },
         "required": true,
         "_row_num": 3
@@ -25,7 +29,9 @@
         "values_list": "yes_no",
         "name": "Bags",
         "display": {
-          "text": "Is {{data.Name}} served with bags?"
+          "prompt": {
+            "text": "Is {{data.Name}} served with bags?"
+          }
         },
         "required": true,
         "_row_num": 4
@@ -35,7 +41,9 @@
         "values_list": "yes_no",
         "name": "Cold",
         "display": {
-          "text": "Is {{data.Name}} served cold?"
+          "prompt": {
+            "text": "Is {{data.Name}} served cold?"
+          }
         },
         "required": true,
         "_row_num": 5
@@ -45,7 +53,9 @@
         "values_list": "yes_no",
         "name": "Hot",
         "display": {
-          "text": "Is {{data.Name}} served hot?"
+          "prompt": {
+            "text": "Is {{data.Name}} served hot?"
+          }
         },
         "required": true,
         "_row_num": 6
@@ -55,7 +65,9 @@
         "values_list": "yes_no",
         "name": "Loose_Leaf",
         "display": {
-          "text": "Is {{data.Name}} loose leaf?"
+          "prompt": {
+            "text": "Is {{data.Name}} loose leaf?"
+          }
         },
         "required": true,
         "_row_num": 7
@@ -64,7 +76,9 @@
         "type": "decimal",
         "name": "Price_8oz",
         "display": {
-          "text": "What is the price of an 8 ounce {{data.Name}}?"
+          "prompt": {
+            "text": "What is the price of an 8 ounce {{data.Name}}?"
+          }
         },
         "required": true,
         "_row_num": 8
@@ -73,7 +87,9 @@
         "type": "decimal",
         "name": "Price_12oz",
         "display": {
-          "text": "What is the price of a 12 ounce {{data.Name}}?"
+          "prompt": {
+            "text": "What is the price of a 12 ounce {{data.Name}}?"
+          }
         },
         "required": true,
         "_row_num": 9
@@ -82,7 +98,9 @@
         "type": "decimal",
         "name": "Price_16oz",
         "display": {
-          "text": "What is the price of a 16 ounce {{data.Name}}?"
+          "prompt": {
+            "text": "What is the price of a 16 ounce {{data.Name}}?"
+          }
         },
         "required": true,
         "_row_num": 10
@@ -92,7 +110,9 @@
         "values_list": "Tea_house_list",
         "name": "House_id",
         "display": {
-          "text": "Select the Tea house where this tea is served"
+          "prompt": {
+            "text": "Select the Tea house where this tea is served"
+          }
         },
         "required": true,
         "_row_num": 11
@@ -112,7 +132,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Inventory"
+          "title": {
+            "text": "Tea Inventory"
+          }
         },
         "_row_num": 4
       }
@@ -197,10 +219,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -216,7 +235,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Inventory"
+          "title": {
+            "text": "Tea Inventory"
+          }
         },
         "_row_num": 4
       },
@@ -225,7 +246,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -240,7 +261,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Inventory"
+          "title": {
+            "text": "Tea Inventory"
+          }
         },
         "_row_num": 4
       }
@@ -264,6 +287,26 @@
           "_row_num": 3
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
     },
     "queries": {
       "Tea_type_list": {
@@ -410,7 +453,9 @@
             "type": "string",
             "name": "Name",
             "display": {
-              "text": "Enter the name of the tea."
+              "prompt": {
+                "text": "Enter the name of the tea."
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -425,7 +470,9 @@
             "values_list": "Tea_type_list",
             "name": "Type_id",
             "display": {
-              "text": "Choose the tea type."
+              "prompt": {
+                "text": "Choose the tea type."
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -440,7 +487,9 @@
             "values_list": "yes_no",
             "name": "Bags",
             "display": {
-              "text": "Is {{data.Name}} served with bags?"
+              "prompt": {
+                "text": "Is {{data.Name}} served with bags?"
+              }
             },
             "required": true,
             "_row_num": 4,
@@ -455,7 +504,9 @@
             "values_list": "yes_no",
             "name": "Cold",
             "display": {
-              "text": "Is {{data.Name}} served cold?"
+              "prompt": {
+                "text": "Is {{data.Name}} served cold?"
+              }
             },
             "required": true,
             "_row_num": 5,
@@ -470,7 +521,9 @@
             "values_list": "yes_no",
             "name": "Hot",
             "display": {
-              "text": "Is {{data.Name}} served hot?"
+              "prompt": {
+                "text": "Is {{data.Name}} served hot?"
+              }
             },
             "required": true,
             "_row_num": 6,
@@ -485,7 +538,9 @@
             "values_list": "yes_no",
             "name": "Loose_Leaf",
             "display": {
-              "text": "Is {{data.Name}} loose leaf?"
+              "prompt": {
+                "text": "Is {{data.Name}} loose leaf?"
+              }
             },
             "required": true,
             "_row_num": 7,
@@ -499,7 +554,9 @@
             "type": "decimal",
             "name": "Price_8oz",
             "display": {
-              "text": "What is the price of an 8 ounce {{data.Name}}?"
+              "prompt": {
+                "text": "What is the price of an 8 ounce {{data.Name}}?"
+              }
             },
             "required": true,
             "_row_num": 8,
@@ -513,7 +570,9 @@
             "type": "decimal",
             "name": "Price_12oz",
             "display": {
-              "text": "What is the price of a 12 ounce {{data.Name}}?"
+              "prompt": {
+                "text": "What is the price of a 12 ounce {{data.Name}}?"
+              }
             },
             "required": true,
             "_row_num": 9,
@@ -527,7 +586,9 @@
             "type": "decimal",
             "name": "Price_16oz",
             "display": {
-              "text": "What is the price of a 16 ounce {{data.Name}}?"
+              "prompt": {
+                "text": "What is the price of a 16 ounce {{data.Name}}?"
+              }
             },
             "required": true,
             "_row_num": 10,
@@ -542,7 +603,9 @@
             "values_list": "Tea_house_list",
             "name": "House_id",
             "display": {
-              "text": "Select the Tea house where this tea is served"
+              "prompt": {
+                "text": "Select the Tea house where this tea is served"
+              }
             },
             "required": true,
             "_row_num": 11,
@@ -701,7 +764,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Tea Inventory"
+              "title": {
+                "text": "Tea Inventory"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1137,7 +1202,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Tea Inventory\""
+        "_value": "{\"text\":\"Tea Inventory\"}"
       },
       {
         "_partition": "Table",

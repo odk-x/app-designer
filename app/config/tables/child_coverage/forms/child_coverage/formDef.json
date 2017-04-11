@@ -13,7 +13,9 @@
         "type": "note",
         "name": "description",
         "display": {
-          "text": "Child Coverage"
+          "prompt": {
+            "text": "Child Coverage"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +23,9 @@
         "type": "integer",
         "name": "BCG_0_11_HealthCenter",
         "display": {
-          "title": "BCG_0_11_HealthCenter"
+          "title": {
+            "text": "BCG_0_11_HealthCenter"
+          }
         },
         "_row_num": 4
       },
@@ -30,7 +34,9 @@
         "values_list": "one_choice",
         "name": "BCG_HC_NR_checkbox1",
         "display": {
-          "title": "BCG_HC_NR_checkbox1"
+          "title": {
+            "text": "BCG_HC_NR_checkbox1"
+          }
         },
         "_row_num": 5
       },
@@ -38,7 +44,9 @@
         "type": "integer",
         "name": "BCG_0_11_Outreach",
         "display": {
-          "title": "BCG_0_11_Outreach"
+          "title": {
+            "text": "BCG_0_11_Outreach"
+          }
         },
         "_row_num": 6
       },
@@ -47,7 +55,9 @@
         "values_list": "one_choice",
         "name": "BCG_O_NR_checkbox1",
         "display": {
-          "title": "BCG_O_NR_checkbox1"
+          "title": {
+            "text": "BCG_O_NR_checkbox1"
+          }
         },
         "_row_num": 7
       },
@@ -55,8 +65,12 @@
         "type": "note",
         "name": "BCG_0_11_sum",
         "display": {
-          "text": "{{calculates.BCG_0_11_sum}}",
-          "title": "BCG_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.BCG_0_11_sum}}"
+          },
+          "title": {
+            "text": "BCG_0_11_sum"
+          }
         },
         "_row_num": 8
       },
@@ -64,7 +78,9 @@
         "type": "integer",
         "name": "BCG_12_23_HealthCenter",
         "display": {
-          "title": "BCG_12_23_HealthCenter"
+          "title": {
+            "text": "BCG_12_23_HealthCenter"
+          }
         },
         "_row_num": 9
       },
@@ -73,7 +89,9 @@
         "values_list": "one_choice",
         "name": "BCG_HC_NR_checkbox2",
         "display": {
-          "title": "BCG_HC_NR_checkbox2"
+          "title": {
+            "text": "BCG_HC_NR_checkbox2"
+          }
         },
         "_row_num": 10
       },
@@ -81,7 +99,9 @@
         "type": "integer",
         "name": "BCG_12_23_Outreach",
         "display": {
-          "title": "BCG_12_23_Outreach"
+          "title": {
+            "text": "BCG_12_23_Outreach"
+          }
         },
         "_row_num": 11
       },
@@ -90,7 +110,9 @@
         "values_list": "one_choice",
         "name": "BCG_O_NR_checkbox2",
         "display": {
-          "title": "BCG_O_NR_checkbox2"
+          "title": {
+            "text": "BCG_O_NR_checkbox2"
+          }
         },
         "_row_num": 12
       },
@@ -98,8 +120,12 @@
         "type": "note",
         "name": "BCG_12_23_sum",
         "display": {
-          "text": "{{calculates.BCG_12_23_sum}}",
-          "title": "BCG_12_23_sum"
+          "prompt": {
+            "text": "{{calculates.BCG_12_23_sum}}"
+          },
+          "title": {
+            "text": "BCG_12_23_sum"
+          }
         },
         "_row_num": 13
       },
@@ -107,8 +133,12 @@
         "type": "note",
         "name": "Total_BCG",
         "display": {
-          "text": "{{calculates.Total_BCG}}",
-          "title": "Total_BCG"
+          "prompt": {
+            "text": "{{calculates.Total_BCG}}"
+          },
+          "title": {
+            "text": "Total_BCG"
+          }
         },
         "_row_num": 14
       },
@@ -116,7 +146,9 @@
         "type": "integer",
         "name": "BCG_OpenedVials",
         "display": {
-          "title": "BCG_OpenedVials"
+          "title": {
+            "text": "BCG_OpenedVials"
+          }
         },
         "_row_num": 15
       },
@@ -125,7 +157,9 @@
         "values_list": "one_choice",
         "name": "BCG_OV_NR_checkbox",
         "display": {
-          "title": "BCG_OV_NR_checkbox"
+          "title": {
+            "text": "BCG_OV_NR_checkbox"
+          }
         },
         "_row_num": 16
       },
@@ -133,7 +167,9 @@
         "type": "integer",
         "name": "Polio_Newborn_0_11_HealthCenter",
         "display": {
-          "title": "Polio_Newborn_0_11_HealthCenter"
+          "title": {
+            "text": "Polio_Newborn_0_11_HealthCenter"
+          }
         },
         "_row_num": 17
       },
@@ -142,7 +178,9 @@
         "values_list": "one_choice",
         "name": "PN_HC_NR_checkbox1",
         "display": {
-          "title": "PN_HC_NR_checkbox1"
+          "title": {
+            "text": "PN_HC_NR_checkbox1"
+          }
         },
         "_row_num": 18
       },
@@ -150,7 +188,9 @@
         "type": "integer",
         "name": "Polio_Newborn_0_11_Outreach",
         "display": {
-          "title": "Polio_Newborn_0_11_Outreach"
+          "title": {
+            "text": "Polio_Newborn_0_11_Outreach"
+          }
         },
         "_row_num": 19
       },
@@ -159,7 +199,9 @@
         "values_list": "one_choice",
         "name": "PN_O_NR_checkbox1",
         "display": {
-          "title": "PN_O_NR_checkbox1"
+          "title": {
+            "text": "PN_O_NR_checkbox1"
+          }
         },
         "_row_num": 20
       },
@@ -167,8 +209,12 @@
         "type": "note",
         "name": "Polio_Newborn_0_11_sum",
         "display": {
-          "text": "{{calculates.Polio_Newborn_0_11_sum}}",
-          "title": "Polio_Newborn_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.Polio_Newborn_0_11_sum}}"
+          },
+          "title": {
+            "text": "Polio_Newborn_0_11_sum"
+          }
         },
         "_row_num": 21
       },
@@ -176,8 +222,12 @@
         "type": "note",
         "name": "Total_Polio_Newborn",
         "display": {
-          "text": "{{calculates.Total_Polio_Newborn}}",
-          "title": "Total_Polio_Newborn"
+          "prompt": {
+            "text": "{{calculates.Total_Polio_Newborn}}"
+          },
+          "title": {
+            "text": "Total_Polio_Newborn"
+          }
         },
         "_row_num": 22
       },
@@ -185,7 +235,9 @@
         "type": "integer",
         "name": "Polio_Dose1_0_11_HealthCenter",
         "display": {
-          "title": "Polio_Dose1_0_11_HealthCenter"
+          "title": {
+            "text": "Polio_Dose1_0_11_HealthCenter"
+          }
         },
         "_row_num": 23
       },
@@ -194,7 +246,9 @@
         "values_list": "one_choice",
         "name": "P1_HC_NR_checkbox1",
         "display": {
-          "title": "P1_HC_NR_checkbox1"
+          "title": {
+            "text": "P1_HC_NR_checkbox1"
+          }
         },
         "_row_num": 24
       },
@@ -202,7 +256,9 @@
         "type": "integer",
         "name": "Polio_Dose1_0_11_Outreach",
         "display": {
-          "title": "Polio_Dose1_0_11_Outreach"
+          "title": {
+            "text": "Polio_Dose1_0_11_Outreach"
+          }
         },
         "_row_num": 25
       },
@@ -211,7 +267,9 @@
         "values_list": "one_choice",
         "name": "P1_O_NR_checkbox1",
         "display": {
-          "title": "P1_O_NR_checkbox1"
+          "title": {
+            "text": "P1_O_NR_checkbox1"
+          }
         },
         "_row_num": 26
       },
@@ -219,8 +277,12 @@
         "type": "note",
         "name": "Polio_Dose1_0_11_sum",
         "display": {
-          "text": "{{calculates.Polio_Dose1_0_11_sum}}",
-          "title": "Polio_Dose1_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.Polio_Dose1_0_11_sum}}"
+          },
+          "title": {
+            "text": "Polio_Dose1_0_11_sum"
+          }
         },
         "_row_num": 27
       },
@@ -228,7 +290,9 @@
         "type": "integer",
         "name": "Polio_Dose1_12_23_HealthCenter",
         "display": {
-          "title": "Polio_Dose1_12_23_HealthCenter"
+          "title": {
+            "text": "Polio_Dose1_12_23_HealthCenter"
+          }
         },
         "_row_num": 28
       },
@@ -237,7 +301,9 @@
         "values_list": "one_choice",
         "name": "P1_HC_NR_checkbox2",
         "display": {
-          "title": "P1_HC_NR_checkbox2"
+          "title": {
+            "text": "P1_HC_NR_checkbox2"
+          }
         },
         "_row_num": 29
       },
@@ -245,7 +311,9 @@
         "type": "integer",
         "name": "Polio_Dose1_12_23_Outreach",
         "display": {
-          "title": "Polio_Dose1_12_23_Outreach"
+          "title": {
+            "text": "Polio_Dose1_12_23_Outreach"
+          }
         },
         "_row_num": 30
       },
@@ -254,7 +322,9 @@
         "values_list": "one_choice",
         "name": "P1_O_NR_checkbox2",
         "display": {
-          "title": "P1_O_NR_checkbox2"
+          "title": {
+            "text": "P1_O_NR_checkbox2"
+          }
         },
         "_row_num": 31
       },
@@ -262,8 +332,12 @@
         "type": "note",
         "name": "Polio_Dose1_12_23_sum",
         "display": {
-          "text": "{{calculates.Polio_Dose1_12_23_sum}}",
-          "title": "Polio_Dose1_12_23_sum"
+          "prompt": {
+            "text": "{{calculates.Polio_Dose1_12_23_sum}}"
+          },
+          "title": {
+            "text": "Polio_Dose1_12_23_sum"
+          }
         },
         "_row_num": 32
       },
@@ -271,8 +345,12 @@
         "type": "note",
         "name": "Total_Polio_Dose1",
         "display": {
-          "text": "{{calculates.Total_Polio_Dose1}}",
-          "title": "Total_Polio_Dose1"
+          "prompt": {
+            "text": "{{calculates.Total_Polio_Dose1}}"
+          },
+          "title": {
+            "text": "Total_Polio_Dose1"
+          }
         },
         "_row_num": 33
       },
@@ -280,7 +358,9 @@
         "type": "integer",
         "name": "Polio_Dose2_0_11_HealthCenter",
         "display": {
-          "title": "Polio_Dose2_0_11_HealthCenter"
+          "title": {
+            "text": "Polio_Dose2_0_11_HealthCenter"
+          }
         },
         "_row_num": 34
       },
@@ -289,7 +369,9 @@
         "values_list": "one_choice",
         "name": "P2_HC_NR_checkbox1",
         "display": {
-          "title": "P2_HC_NR_checkbox1"
+          "title": {
+            "text": "P2_HC_NR_checkbox1"
+          }
         },
         "_row_num": 35
       },
@@ -297,7 +379,9 @@
         "type": "integer",
         "name": "Polio_Dose2_0_11_Outreach",
         "display": {
-          "title": "Polio_Dose2_0_11_Outreach"
+          "title": {
+            "text": "Polio_Dose2_0_11_Outreach"
+          }
         },
         "_row_num": 36
       },
@@ -306,7 +390,9 @@
         "values_list": "one_choice",
         "name": "P2_O_NR_checkbox1",
         "display": {
-          "title": "P2_O_NR_checkbox1"
+          "title": {
+            "text": "P2_O_NR_checkbox1"
+          }
         },
         "_row_num": 37
       },
@@ -314,8 +400,12 @@
         "type": "note",
         "name": "Polio_Dose2_0_11_sum",
         "display": {
-          "text": "{{calculates.Polio_Dose2_0_11_sum}}",
-          "title": "Polio_Dose2_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.Polio_Dose2_0_11_sum}}"
+          },
+          "title": {
+            "text": "Polio_Dose2_0_11_sum"
+          }
         },
         "_row_num": 38
       },
@@ -323,7 +413,9 @@
         "type": "integer",
         "name": "Polio_Dose2_12_23_HealthCenter",
         "display": {
-          "title": "Polio_Dose2_12_23_HealthCenter"
+          "title": {
+            "text": "Polio_Dose2_12_23_HealthCenter"
+          }
         },
         "_row_num": 39
       },
@@ -332,7 +424,9 @@
         "values_list": "one_choice",
         "name": "P2_HC_NR_checkbox2",
         "display": {
-          "title": "P2_HC_NR_checkbox2"
+          "title": {
+            "text": "P2_HC_NR_checkbox2"
+          }
         },
         "_row_num": 40
       },
@@ -340,7 +434,9 @@
         "type": "integer",
         "name": "Polio_Dose2_12_23_Outreach",
         "display": {
-          "title": "Polio_Dose2_12_23_Outreach"
+          "title": {
+            "text": "Polio_Dose2_12_23_Outreach"
+          }
         },
         "_row_num": 41
       },
@@ -349,7 +445,9 @@
         "values_list": "one_choice",
         "name": "P2_O_NR_checkbox2",
         "display": {
-          "title": "P2_O_NR_checkbox2"
+          "title": {
+            "text": "P2_O_NR_checkbox2"
+          }
         },
         "_row_num": 42
       },
@@ -357,8 +455,12 @@
         "type": "note",
         "name": "Polio_Dose2_12_23_sum",
         "display": {
-          "text": "{{calculates.Polio_Dose2_12_23_sum}}",
-          "title": "Polio_Dose2_12_23_sum"
+          "prompt": {
+            "text": "{{calculates.Polio_Dose2_12_23_sum}}"
+          },
+          "title": {
+            "text": "Polio_Dose2_12_23_sum"
+          }
         },
         "_row_num": 43
       },
@@ -366,8 +468,12 @@
         "type": "note",
         "name": "Total_Polio_Dose2",
         "display": {
-          "text": "{{calculates.Total_Polio_Dose2}}",
-          "title": "Total_Polio_Dose2"
+          "prompt": {
+            "text": "{{calculates.Total_Polio_Dose2}}"
+          },
+          "title": {
+            "text": "Total_Polio_Dose2"
+          }
         },
         "_row_num": 44
       },
@@ -375,7 +481,9 @@
         "type": "integer",
         "name": "Polio_Dose3_0_11_HealthCenter",
         "display": {
-          "title": "Polio_Dose3_0_11_HealthCenter"
+          "title": {
+            "text": "Polio_Dose3_0_11_HealthCenter"
+          }
         },
         "_row_num": 45
       },
@@ -384,7 +492,9 @@
         "values_list": "one_choice",
         "name": "P3_HC_NR_checkbox1",
         "display": {
-          "title": "P3_HC_NR_checkbox1"
+          "title": {
+            "text": "P3_HC_NR_checkbox1"
+          }
         },
         "_row_num": 46
       },
@@ -392,7 +502,9 @@
         "type": "integer",
         "name": "Polio_Dose3_0_11_Outreach",
         "display": {
-          "title": "Polio_Dose3_0_11_Outreach"
+          "title": {
+            "text": "Polio_Dose3_0_11_Outreach"
+          }
         },
         "_row_num": 47
       },
@@ -401,7 +513,9 @@
         "values_list": "one_choice",
         "name": "P3_O_NR_checkbox1",
         "display": {
-          "title": "P3_O_NR_checkbox1"
+          "title": {
+            "text": "P3_O_NR_checkbox1"
+          }
         },
         "_row_num": 48
       },
@@ -409,8 +523,12 @@
         "type": "note",
         "name": "Polio_Dose3_0_11_sum",
         "display": {
-          "text": "{{calculates.Polio_Dose3_0_11_sum}}",
-          "title": "Polio_Dose3_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.Polio_Dose3_0_11_sum}}"
+          },
+          "title": {
+            "text": "Polio_Dose3_0_11_sum"
+          }
         },
         "_row_num": 49
       },
@@ -418,7 +536,9 @@
         "type": "integer",
         "name": "Polio_Dose3_12_23_HealthCenter",
         "display": {
-          "title": "Polio_Dose3_12_23_HealthCenter"
+          "title": {
+            "text": "Polio_Dose3_12_23_HealthCenter"
+          }
         },
         "_row_num": 50
       },
@@ -427,7 +547,9 @@
         "values_list": "one_choice",
         "name": "P3_HC_NR_checkbox2",
         "display": {
-          "title": "P3_HC_NR_checkbox2"
+          "title": {
+            "text": "P3_HC_NR_checkbox2"
+          }
         },
         "_row_num": 51
       },
@@ -435,7 +557,9 @@
         "type": "integer",
         "name": "Polio_Dose3_12_23_Outreach",
         "display": {
-          "title": "Polio_Dose3_12_23_Outreach"
+          "title": {
+            "text": "Polio_Dose3_12_23_Outreach"
+          }
         },
         "_row_num": 52
       },
@@ -444,7 +568,9 @@
         "values_list": "one_choice",
         "name": "P3_O_NR_checkbox2",
         "display": {
-          "title": "P3_O_NR_checkbox2"
+          "title": {
+            "text": "P3_O_NR_checkbox2"
+          }
         },
         "_row_num": 53
       },
@@ -452,8 +578,12 @@
         "type": "note",
         "name": "Polio_Dose3_12_23_sum",
         "display": {
-          "text": "{{calculates.Polio_Dose3_12_23_sum}}",
-          "title": "Polio_Dose3_12_23_sum"
+          "prompt": {
+            "text": "{{calculates.Polio_Dose3_12_23_sum}}"
+          },
+          "title": {
+            "text": "Polio_Dose3_12_23_sum"
+          }
         },
         "_row_num": 54
       },
@@ -461,8 +591,12 @@
         "type": "note",
         "name": "Total_Polio_Dose3",
         "display": {
-          "text": "{{calculates.Total_Polio_Dose3}}",
-          "title": "Total_Polio_Dose3"
+          "prompt": {
+            "text": "{{calculates.Total_Polio_Dose3}}"
+          },
+          "title": {
+            "text": "Total_Polio_Dose3"
+          }
         },
         "_row_num": 55
       },
@@ -470,7 +604,9 @@
         "type": "integer",
         "name": "Polio10_OpenedVials",
         "display": {
-          "title": "Polio10_OpenedVials"
+          "title": {
+            "text": "Polio10_OpenedVials"
+          }
         },
         "_row_num": 56
       },
@@ -478,7 +614,9 @@
         "type": "integer",
         "name": "Polio20_OpenedVials",
         "display": {
-          "title": "Polio20_OpenedVials"
+          "title": {
+            "text": "Polio20_OpenedVials"
+          }
         },
         "_row_num": 57
       },
@@ -487,7 +625,9 @@
         "values_list": "one_choice",
         "name": "P20_OV_NR_checkbox",
         "display": {
-          "title": "P20_OV_NR_checkbox"
+          "title": {
+            "text": "P20_OV_NR_checkbox"
+          }
         },
         "_row_num": 58
       },
@@ -495,7 +635,9 @@
         "type": "integer",
         "name": "Penta_Dose1_0_11_HealthCenter",
         "display": {
-          "title": "Penta_Dose1_0_11_HealthCenter"
+          "title": {
+            "text": "Penta_Dose1_0_11_HealthCenter"
+          }
         },
         "_row_num": 59
       },
@@ -504,7 +646,9 @@
         "values_list": "one_choice",
         "name": "Pe1_HC_NR_checkbox1",
         "display": {
-          "title": "Pe1_HC_NR_checkbox1"
+          "title": {
+            "text": "Pe1_HC_NR_checkbox1"
+          }
         },
         "_row_num": 60
       },
@@ -512,7 +656,9 @@
         "type": "integer",
         "name": "Penta_Dose1_0_11_Outreach",
         "display": {
-          "title": "Penta_Dose1_0_11_Outreach"
+          "title": {
+            "text": "Penta_Dose1_0_11_Outreach"
+          }
         },
         "_row_num": 61
       },
@@ -521,7 +667,9 @@
         "values_list": "one_choice",
         "name": "Pe1_O_NR_checkbox1",
         "display": {
-          "title": "Pe1_O_NR_checkbox1"
+          "title": {
+            "text": "Pe1_O_NR_checkbox1"
+          }
         },
         "_row_num": 62
       },
@@ -529,8 +677,12 @@
         "type": "note",
         "name": "Penta_Dose1_0_11_sum",
         "display": {
-          "text": "{{calculates.Penta_Dose1_0_11_sum}}",
-          "title": "Penta_Dose1_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.Penta_Dose1_0_11_sum}}"
+          },
+          "title": {
+            "text": "Penta_Dose1_0_11_sum"
+          }
         },
         "_row_num": 63
       },
@@ -538,7 +690,9 @@
         "type": "integer",
         "name": "Penta_Dose1_12_23_HealthCenter",
         "display": {
-          "title": "Penta_Dose1_12_23_HealthCenter"
+          "title": {
+            "text": "Penta_Dose1_12_23_HealthCenter"
+          }
         },
         "_row_num": 64
       },
@@ -547,7 +701,9 @@
         "values_list": "one_choice",
         "name": "Pe1_HC_NR_checkbox2",
         "display": {
-          "title": "Pe1_HC_NR_checkbox2"
+          "title": {
+            "text": "Pe1_HC_NR_checkbox2"
+          }
         },
         "_row_num": 65
       },
@@ -555,7 +711,9 @@
         "type": "integer",
         "name": "Penta_Dose1_12_23_Outreach",
         "display": {
-          "title": "Penta_Dose1_12_23_Outreach"
+          "title": {
+            "text": "Penta_Dose1_12_23_Outreach"
+          }
         },
         "_row_num": 66
       },
@@ -564,7 +722,9 @@
         "values_list": "one_choice",
         "name": "Pe1_O_NR_checkbox2",
         "display": {
-          "title": "Pe1_O_NR_checkbox2"
+          "title": {
+            "text": "Pe1_O_NR_checkbox2"
+          }
         },
         "_row_num": 67
       },
@@ -572,8 +732,12 @@
         "type": "note",
         "name": "Penta_Dose1_12_23_sum",
         "display": {
-          "text": "{{calculates.Penta_Dose1_12_23_sum}}",
-          "title": "Penta_Dose1_12_23_sum"
+          "prompt": {
+            "text": "{{calculates.Penta_Dose1_12_23_sum}}"
+          },
+          "title": {
+            "text": "Penta_Dose1_12_23_sum"
+          }
         },
         "_row_num": 68
       },
@@ -581,8 +745,12 @@
         "type": "note",
         "name": "Total_Penta_Dose1",
         "display": {
-          "text": "{{calculates.Total_Penta_Dose1}}",
-          "title": "Total_Penta_Dose1"
+          "prompt": {
+            "text": "{{calculates.Total_Penta_Dose1}}"
+          },
+          "title": {
+            "text": "Total_Penta_Dose1"
+          }
         },
         "_row_num": 69
       },
@@ -590,7 +758,9 @@
         "type": "integer",
         "name": "Penta_Dose2_0_11_HealthCenter",
         "display": {
-          "title": "Penta_Dose2_0_11_HealthCenter"
+          "title": {
+            "text": "Penta_Dose2_0_11_HealthCenter"
+          }
         },
         "_row_num": 70
       },
@@ -599,7 +769,9 @@
         "values_list": "one_choice",
         "name": "Pe2_HC_NR_checkbox1",
         "display": {
-          "title": "Pe2_HC_NR_checkbox1"
+          "title": {
+            "text": "Pe2_HC_NR_checkbox1"
+          }
         },
         "_row_num": 71
       },
@@ -607,7 +779,9 @@
         "type": "integer",
         "name": "Penta_Dose2_0_11_Outreach",
         "display": {
-          "title": "Penta_Dose2_0_11_Outreach"
+          "title": {
+            "text": "Penta_Dose2_0_11_Outreach"
+          }
         },
         "_row_num": 72
       },
@@ -616,7 +790,9 @@
         "values_list": "one_choice",
         "name": "Pe2_O_NR_checkbox1",
         "display": {
-          "title": "Pe2_O_NR_checkbox1"
+          "title": {
+            "text": "Pe2_O_NR_checkbox1"
+          }
         },
         "_row_num": 73
       },
@@ -624,8 +800,12 @@
         "type": "note",
         "name": "Penta_Dose2_0_11_sum",
         "display": {
-          "text": "{{calculates.Penta_Dose2_0_11_sum}}",
-          "title": "Penta_Dose2_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.Penta_Dose2_0_11_sum}}"
+          },
+          "title": {
+            "text": "Penta_Dose2_0_11_sum"
+          }
         },
         "_row_num": 74
       },
@@ -633,7 +813,9 @@
         "type": "integer",
         "name": "Penta_Dose2_12_23_HealthCenter",
         "display": {
-          "title": "Penta_Dose2_12_23_HealthCenter"
+          "title": {
+            "text": "Penta_Dose2_12_23_HealthCenter"
+          }
         },
         "_row_num": 75
       },
@@ -642,7 +824,9 @@
         "values_list": "one_choice",
         "name": "Pe2_HC_NR_checkbox2",
         "display": {
-          "title": "Pe2_HC_NR_checkbox2"
+          "title": {
+            "text": "Pe2_HC_NR_checkbox2"
+          }
         },
         "_row_num": 76
       },
@@ -650,7 +834,9 @@
         "type": "integer",
         "name": "Penta_Dose2_12_23_Outreach",
         "display": {
-          "title": "Penta_Dose2_12_23_Outreach"
+          "title": {
+            "text": "Penta_Dose2_12_23_Outreach"
+          }
         },
         "_row_num": 77
       },
@@ -659,7 +845,9 @@
         "values_list": "one_choice",
         "name": "Pe2_O_NR_checkbox2",
         "display": {
-          "title": "Pe2_O_NR_checkbox2"
+          "title": {
+            "text": "Pe2_O_NR_checkbox2"
+          }
         },
         "_row_num": 78
       },
@@ -667,8 +855,12 @@
         "type": "note",
         "name": "Penta_Dose2_12_23_sum",
         "display": {
-          "text": "{{calculates.Penta_Dose2_12_23_sum}}",
-          "title": "Penta_Dose2_12_23_sum"
+          "prompt": {
+            "text": "{{calculates.Penta_Dose2_12_23_sum}}"
+          },
+          "title": {
+            "text": "Penta_Dose2_12_23_sum"
+          }
         },
         "_row_num": 79
       },
@@ -676,8 +868,12 @@
         "type": "note",
         "name": "Total_Penta_Dose2",
         "display": {
-          "text": "{{calculates.Total_Penta_Dose2}}",
-          "title": "Total_Penta_Dose2"
+          "prompt": {
+            "text": "{{calculates.Total_Penta_Dose2}}"
+          },
+          "title": {
+            "text": "Total_Penta_Dose2"
+          }
         },
         "_row_num": 80
       },
@@ -685,7 +881,9 @@
         "type": "integer",
         "name": "Penta_Dose3_0_11_HealthCenter",
         "display": {
-          "title": "Penta_Dose3_0_11_HealthCenter"
+          "title": {
+            "text": "Penta_Dose3_0_11_HealthCenter"
+          }
         },
         "_row_num": 81
       },
@@ -694,7 +892,9 @@
         "values_list": "one_choice",
         "name": "Pe3_HC_NR_checkbox1",
         "display": {
-          "title": "Pe3_HC_NR_checkbox1"
+          "title": {
+            "text": "Pe3_HC_NR_checkbox1"
+          }
         },
         "_row_num": 82
       },
@@ -702,7 +902,9 @@
         "type": "integer",
         "name": "Penta_Dose3_0_11_Outreach",
         "display": {
-          "title": "Penta_Dose3_0_11_Outreach"
+          "title": {
+            "text": "Penta_Dose3_0_11_Outreach"
+          }
         },
         "_row_num": 83
       },
@@ -711,7 +913,9 @@
         "values_list": "one_choice",
         "name": "Pe3_O_NR_checkbox1",
         "display": {
-          "title": "Pe3_O_NR_checkbox1"
+          "title": {
+            "text": "Pe3_O_NR_checkbox1"
+          }
         },
         "_row_num": 84
       },
@@ -719,8 +923,12 @@
         "type": "note",
         "name": "Penta_Dose3_0_11_sum",
         "display": {
-          "text": "{{calculates.Penta_Dose3_0_11_sum}}",
-          "title": "Penta_Dose3_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.Penta_Dose3_0_11_sum}}"
+          },
+          "title": {
+            "text": "Penta_Dose3_0_11_sum"
+          }
         },
         "_row_num": 85
       },
@@ -728,7 +936,9 @@
         "type": "integer",
         "name": "Penta_Dose3_12_23_HealthCenter",
         "display": {
-          "title": "Penta_Dose3_12_23_HealthCenter"
+          "title": {
+            "text": "Penta_Dose3_12_23_HealthCenter"
+          }
         },
         "_row_num": 86
       },
@@ -737,7 +947,9 @@
         "values_list": "one_choice",
         "name": "Pe3_HC_NR_checkbox2",
         "display": {
-          "title": "Pe3_HC_NR_checkbox2"
+          "title": {
+            "text": "Pe3_HC_NR_checkbox2"
+          }
         },
         "_row_num": 87
       },
@@ -745,7 +957,9 @@
         "type": "integer",
         "name": "Penta_Dose3_12_23_Outreach",
         "display": {
-          "title": "Penta_Dose3_12_23_Outreach"
+          "title": {
+            "text": "Penta_Dose3_12_23_Outreach"
+          }
         },
         "_row_num": 88
       },
@@ -754,7 +968,9 @@
         "values_list": "one_choice",
         "name": "Pe3_O_NR_checkbox2",
         "display": {
-          "title": "Pe3_O_NR_checkbox2"
+          "title": {
+            "text": "Pe3_O_NR_checkbox2"
+          }
         },
         "_row_num": 89
       },
@@ -762,8 +978,12 @@
         "type": "note",
         "name": "Penta_Dose3_12_23_sum",
         "display": {
-          "text": "{{calculates.Penta_Dose3_12_23_sum}}",
-          "title": "Penta_Dose3_12_23_sum"
+          "prompt": {
+            "text": "{{calculates.Penta_Dose3_12_23_sum}}"
+          },
+          "title": {
+            "text": "Penta_Dose3_12_23_sum"
+          }
         },
         "_row_num": 90
       },
@@ -771,8 +991,12 @@
         "type": "note",
         "name": "Total_Penta_Dose3",
         "display": {
-          "text": "{{calculates.Total_Penta_Dose3}}",
-          "title": "Total_Penta_Dose3"
+          "prompt": {
+            "text": "{{calculates.Total_Penta_Dose3}}"
+          },
+          "title": {
+            "text": "Total_Penta_Dose3"
+          }
         },
         "_row_num": 91
       },
@@ -780,7 +1004,9 @@
         "type": "integer",
         "name": "Penta1_OpenedVials",
         "display": {
-          "title": "Penta1_OpenedVials"
+          "title": {
+            "text": "Penta1_OpenedVials"
+          }
         },
         "_row_num": 92
       },
@@ -788,7 +1014,9 @@
         "type": "integer",
         "name": "Penta10_OpenedVials",
         "display": {
-          "title": "Penta10_OpenedVials"
+          "title": {
+            "text": "Penta10_OpenedVials"
+          }
         },
         "_row_num": 93
       },
@@ -797,7 +1025,9 @@
         "values_list": "one_choice",
         "name": "Penta10_OV_NR_checkbox",
         "display": {
-          "title": "Penta10_OV_NR_checkbox"
+          "title": {
+            "text": "Penta10_OV_NR_checkbox"
+          }
         },
         "_row_num": 94
       },
@@ -805,7 +1035,9 @@
         "type": "integer",
         "name": "PCV10_Dose1_0_11_HealthCenter",
         "display": {
-          "title": "PCV10_Dose1_0_11_HealthCenter"
+          "title": {
+            "text": "PCV10_Dose1_0_11_HealthCenter"
+          }
         },
         "_row_num": 95
       },
@@ -814,7 +1046,9 @@
         "values_list": "one_choice",
         "name": "Pc1_HC_NR_checkbox1",
         "display": {
-          "title": "Pc1_HC_NR_checkbox1"
+          "title": {
+            "text": "Pc1_HC_NR_checkbox1"
+          }
         },
         "_row_num": 96
       },
@@ -822,7 +1056,9 @@
         "type": "integer",
         "name": "PCV10_Dose1_0_11_Outreach",
         "display": {
-          "title": "PCV10_Dose1_0_11_Outreach"
+          "title": {
+            "text": "PCV10_Dose1_0_11_Outreach"
+          }
         },
         "_row_num": 97
       },
@@ -831,7 +1067,9 @@
         "values_list": "one_choice",
         "name": "Pc1_O_NR_checkbox1",
         "display": {
-          "title": "Pc1_O_NR_checkbox1"
+          "title": {
+            "text": "Pc1_O_NR_checkbox1"
+          }
         },
         "_row_num": 98
       },
@@ -839,8 +1077,12 @@
         "type": "note",
         "name": "PCV10_Dose1_0_11_sum",
         "display": {
-          "text": "{{calculates.PCV10_Dose1_0_11_sum}}",
-          "title": "PCV10_Dose1_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.PCV10_Dose1_0_11_sum}}"
+          },
+          "title": {
+            "text": "PCV10_Dose1_0_11_sum"
+          }
         },
         "_row_num": 99
       },
@@ -848,7 +1090,9 @@
         "type": "integer",
         "name": "PCV10_Dose1_12_23_HealthCenter",
         "display": {
-          "title": "PCV10_Dose1_12_23_HealthCenter"
+          "title": {
+            "text": "PCV10_Dose1_12_23_HealthCenter"
+          }
         },
         "_row_num": 100
       },
@@ -857,7 +1101,9 @@
         "values_list": "one_choice",
         "name": "Pc1_HC_NR_checkbox2",
         "display": {
-          "title": "Pc1_HC_NR_checkbox2"
+          "title": {
+            "text": "Pc1_HC_NR_checkbox2"
+          }
         },
         "_row_num": 101
       },
@@ -865,7 +1111,9 @@
         "type": "integer",
         "name": "PCV10_Dose1_12_23_Outreach",
         "display": {
-          "title": "PCV10_Dose1_12_23_Outreach"
+          "title": {
+            "text": "PCV10_Dose1_12_23_Outreach"
+          }
         },
         "_row_num": 102
       },
@@ -874,7 +1122,9 @@
         "values_list": "one_choice",
         "name": "Pc1_O_NR_checkbox2",
         "display": {
-          "title": "Pc1_O_NR_checkbox2"
+          "title": {
+            "text": "Pc1_O_NR_checkbox2"
+          }
         },
         "_row_num": 103
       },
@@ -882,8 +1132,12 @@
         "type": "note",
         "name": "PCV10_Dose1_12_23_sum",
         "display": {
-          "text": "{{calculates.PCV10_Dose1_12_23_sum}}",
-          "title": "PCV10_Dose1_12_23_sum"
+          "prompt": {
+            "text": "{{calculates.PCV10_Dose1_12_23_sum}}"
+          },
+          "title": {
+            "text": "PCV10_Dose1_12_23_sum"
+          }
         },
         "_row_num": 104
       },
@@ -891,8 +1145,12 @@
         "type": "note",
         "name": "Total_PCV10_Dose1",
         "display": {
-          "text": "{{calculates.Total_PCV10_Dose1}}",
-          "title": "Total_PCV10_Dose1"
+          "prompt": {
+            "text": "{{calculates.Total_PCV10_Dose1}}"
+          },
+          "title": {
+            "text": "Total_PCV10_Dose1"
+          }
         },
         "_row_num": 105
       },
@@ -900,7 +1158,9 @@
         "type": "integer",
         "name": "PCV10_Dose2_0_11_HealthCenter",
         "display": {
-          "title": "PCV10_Dose2_0_11_HealthCenter"
+          "title": {
+            "text": "PCV10_Dose2_0_11_HealthCenter"
+          }
         },
         "_row_num": 106
       },
@@ -909,7 +1169,9 @@
         "values_list": "one_choice",
         "name": "Pc2_HC_NR_checkbox1",
         "display": {
-          "title": "Pc2_HC_NR_checkbox1"
+          "title": {
+            "text": "Pc2_HC_NR_checkbox1"
+          }
         },
         "_row_num": 107
       },
@@ -917,7 +1179,9 @@
         "type": "integer",
         "name": "PCV10_Dose2_0_11_Outreach",
         "display": {
-          "title": "PCV10_Dose2_0_11_Outreach"
+          "title": {
+            "text": "PCV10_Dose2_0_11_Outreach"
+          }
         },
         "_row_num": 108
       },
@@ -926,7 +1190,9 @@
         "values_list": "one_choice",
         "name": "Pc2_O_NR_checkbox1",
         "display": {
-          "title": "Pc2_O_NR_checkbox1"
+          "title": {
+            "text": "Pc2_O_NR_checkbox1"
+          }
         },
         "_row_num": 109
       },
@@ -934,8 +1200,12 @@
         "type": "note",
         "name": "PCV10_Dose2_0_11_sum",
         "display": {
-          "text": "{{calculates.PCV10_Dose2_0_11_sum}}",
-          "title": "PCV10_Dose2_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.PCV10_Dose2_0_11_sum}}"
+          },
+          "title": {
+            "text": "PCV10_Dose2_0_11_sum"
+          }
         },
         "_row_num": 110
       },
@@ -943,7 +1213,9 @@
         "type": "integer",
         "name": "PCV10_Dose2_12_23_HealthCenter",
         "display": {
-          "title": "PCV10_Dose2_12_23_HealthCenter"
+          "title": {
+            "text": "PCV10_Dose2_12_23_HealthCenter"
+          }
         },
         "_row_num": 111
       },
@@ -952,7 +1224,9 @@
         "values_list": "one_choice",
         "name": "Pc2_HC_NR_checkbox2",
         "display": {
-          "title": "Pc2_HC_NR_checkbox2"
+          "title": {
+            "text": "Pc2_HC_NR_checkbox2"
+          }
         },
         "_row_num": 112
       },
@@ -960,7 +1234,9 @@
         "type": "integer",
         "name": "PCV10_Dose2_12_23_Outreach",
         "display": {
-          "title": "PCV10_Dose2_12_23_Outreach"
+          "title": {
+            "text": "PCV10_Dose2_12_23_Outreach"
+          }
         },
         "_row_num": 113
       },
@@ -969,7 +1245,9 @@
         "values_list": "one_choice",
         "name": "Pc2_O_NR_checkbox2",
         "display": {
-          "title": "Pc2_O_NR_checkbox2"
+          "title": {
+            "text": "Pc2_O_NR_checkbox2"
+          }
         },
         "_row_num": 114
       },
@@ -977,8 +1255,12 @@
         "type": "note",
         "name": "PCV10_Dose2_12_23_sum",
         "display": {
-          "text": "{{calculates.PCV10_Dose2_12_23_sum}}",
-          "title": "PCV10_Dose2_12_23_sum"
+          "prompt": {
+            "text": "{{calculates.PCV10_Dose2_12_23_sum}}"
+          },
+          "title": {
+            "text": "PCV10_Dose2_12_23_sum"
+          }
         },
         "_row_num": 115
       },
@@ -986,8 +1268,12 @@
         "type": "note",
         "name": "Total_PCV10_Dose2",
         "display": {
-          "text": "{{calculates.Total_PCV10_Dose2}}",
-          "title": "Total_PCV10_Dose2"
+          "prompt": {
+            "text": "{{calculates.Total_PCV10_Dose2}}"
+          },
+          "title": {
+            "text": "Total_PCV10_Dose2"
+          }
         },
         "_row_num": 116
       },
@@ -995,7 +1281,9 @@
         "type": "integer",
         "name": "PCV10_Dose3_0_11_HealthCenter",
         "display": {
-          "title": "PCV10_Dose3_0_11_HealthCenter"
+          "title": {
+            "text": "PCV10_Dose3_0_11_HealthCenter"
+          }
         },
         "_row_num": 117
       },
@@ -1004,7 +1292,9 @@
         "values_list": "one_choice",
         "name": "Pc3_HC_NR_checkbox1",
         "display": {
-          "title": "Pc3_HC_NR_checkbox1"
+          "title": {
+            "text": "Pc3_HC_NR_checkbox1"
+          }
         },
         "_row_num": 118
       },
@@ -1012,7 +1302,9 @@
         "type": "integer",
         "name": "PCV10_Dose3_0_11_Outreach",
         "display": {
-          "title": "PCV10_Dose3_0_11_Outreach"
+          "title": {
+            "text": "PCV10_Dose3_0_11_Outreach"
+          }
         },
         "_row_num": 119
       },
@@ -1021,7 +1313,9 @@
         "values_list": "one_choice",
         "name": "Pc3_O_NR_checkbox1",
         "display": {
-          "title": "Pc3_O_NR_checkbox1"
+          "title": {
+            "text": "Pc3_O_NR_checkbox1"
+          }
         },
         "_row_num": 120
       },
@@ -1029,8 +1323,12 @@
         "type": "note",
         "name": "PCV10_Dose3_0_11_sum",
         "display": {
-          "text": "{{calculates.PCV10_Dose3_0_11_sum}}",
-          "title": "PCV10_Dose3_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.PCV10_Dose3_0_11_sum}}"
+          },
+          "title": {
+            "text": "PCV10_Dose3_0_11_sum"
+          }
         },
         "_row_num": 121
       },
@@ -1038,7 +1336,9 @@
         "type": "integer",
         "name": "PCV10_Dose3_12_23_HealthCenter",
         "display": {
-          "title": "PCV10_Dose3_12_23_HealthCenter"
+          "title": {
+            "text": "PCV10_Dose3_12_23_HealthCenter"
+          }
         },
         "_row_num": 122
       },
@@ -1047,7 +1347,9 @@
         "values_list": "one_choice",
         "name": "Pc3_HC_NR_checkbox2",
         "display": {
-          "title": "Pc3_HC_NR_checkbox2"
+          "title": {
+            "text": "Pc3_HC_NR_checkbox2"
+          }
         },
         "_row_num": 123
       },
@@ -1055,7 +1357,9 @@
         "type": "integer",
         "name": "PCV10_Dose3_12_23_Outreach",
         "display": {
-          "title": "PCV10_Dose3_12_23_Outreach"
+          "title": {
+            "text": "PCV10_Dose3_12_23_Outreach"
+          }
         },
         "_row_num": 124
       },
@@ -1064,7 +1368,9 @@
         "values_list": "one_choice",
         "name": "Pc3_O_NR_checkbox2",
         "display": {
-          "title": "Pc3_O_NR_checkbox2"
+          "title": {
+            "text": "Pc3_O_NR_checkbox2"
+          }
         },
         "_row_num": 125
       },
@@ -1072,8 +1378,12 @@
         "type": "note",
         "name": "PCV10_Dose3_12_23_sum",
         "display": {
-          "text": "{{calculates.PCV10_Dose3_12_23_sum}}",
-          "title": "PCV10_Dose3_12_23_sum"
+          "prompt": {
+            "text": "{{calculates.PCV10_Dose3_12_23_sum}}"
+          },
+          "title": {
+            "text": "PCV10_Dose3_12_23_sum"
+          }
         },
         "_row_num": 126
       },
@@ -1081,8 +1391,12 @@
         "type": "note",
         "name": "Total_PCV10_Dose3",
         "display": {
-          "text": "{{calculates.Total_PCV10_Dose3}}",
-          "title": "Total_PCV10_Dose3"
+          "prompt": {
+            "text": "{{calculates.Total_PCV10_Dose3}}"
+          },
+          "title": {
+            "text": "Total_PCV10_Dose3"
+          }
         },
         "_row_num": 127
       },
@@ -1091,7 +1405,9 @@
         "values_list": "one_choice",
         "name": "PCV_OpenedVials",
         "display": {
-          "title": "PCV_OpenedVials"
+          "title": {
+            "text": "PCV_OpenedVials"
+          }
         },
         "_row_num": 128
       },
@@ -1100,7 +1416,9 @@
         "values_list": "one_choice",
         "name": "PCV_OV_NR_checkbox",
         "display": {
-          "title": "PCV_OV_NR_checkbox"
+          "title": {
+            "text": "PCV_OV_NR_checkbox"
+          }
         },
         "_row_num": 129
       },
@@ -1108,7 +1426,9 @@
         "type": "integer",
         "name": "Measles_0_11_HealthCenter",
         "display": {
-          "title": "Measles_0_11_HealthCenter"
+          "title": {
+            "text": "Measles_0_11_HealthCenter"
+          }
         },
         "_row_num": 130
       },
@@ -1117,7 +1437,9 @@
         "values_list": "one_choice",
         "name": "Measles_HC_NR_checkbox1",
         "display": {
-          "title": "Measles_HC_NR_checkbox1"
+          "title": {
+            "text": "Measles_HC_NR_checkbox1"
+          }
         },
         "_row_num": 131
       },
@@ -1125,7 +1447,9 @@
         "type": "integer",
         "name": "Measles_0_11_Outreach",
         "display": {
-          "title": "Measles_0_11_Outreach"
+          "title": {
+            "text": "Measles_0_11_Outreach"
+          }
         },
         "_row_num": 132
       },
@@ -1134,7 +1458,9 @@
         "values_list": "one_choice",
         "name": "Measles_O_NR_checkbox1",
         "display": {
-          "title": "Measles_O_NR_checkbox1"
+          "title": {
+            "text": "Measles_O_NR_checkbox1"
+          }
         },
         "_row_num": 133
       },
@@ -1142,8 +1468,12 @@
         "type": "note",
         "name": "Measles_0_11_sum",
         "display": {
-          "text": "{{calculates.Measles_0_11_sum}}",
-          "title": "Measles_0_11_sum"
+          "prompt": {
+            "text": "{{calculates.Measles_0_11_sum}}"
+          },
+          "title": {
+            "text": "Measles_0_11_sum"
+          }
         },
         "_row_num": 134
       },
@@ -1151,7 +1481,9 @@
         "type": "integer",
         "name": "Measles_12_23_HealthCenter",
         "display": {
-          "title": "Measles_12_23_HealthCenter"
+          "title": {
+            "text": "Measles_12_23_HealthCenter"
+          }
         },
         "_row_num": 135
       },
@@ -1160,7 +1492,9 @@
         "values_list": "one_choice",
         "name": "Measles_HC_NR_checkbox2",
         "display": {
-          "title": "Measles_HC_NR_checkbox2"
+          "title": {
+            "text": "Measles_HC_NR_checkbox2"
+          }
         },
         "_row_num": 136
       },
@@ -1168,7 +1502,9 @@
         "type": "integer",
         "name": "Measles_12_23_Outreach",
         "display": {
-          "title": "Measles_12_23_Outreach"
+          "title": {
+            "text": "Measles_12_23_Outreach"
+          }
         },
         "_row_num": 137
       },
@@ -1177,7 +1513,9 @@
         "values_list": "one_choice",
         "name": "Measles_O_NR_checkbox2",
         "display": {
-          "title": "Measles_O_NR_checkbox2"
+          "title": {
+            "text": "Measles_O_NR_checkbox2"
+          }
         },
         "_row_num": 138
       },
@@ -1185,8 +1523,12 @@
         "type": "note",
         "name": "Measles_12_23_sum",
         "display": {
-          "text": "{{calculates.Measles_12_23_sum}}",
-          "title": "Measles_12_23_sum"
+          "prompt": {
+            "text": "{{calculates.Measles_12_23_sum}}"
+          },
+          "title": {
+            "text": "Measles_12_23_sum"
+          }
         },
         "_row_num": 139
       },
@@ -1194,8 +1536,12 @@
         "type": "note",
         "name": "Total_Measles",
         "display": {
-          "text": "{{calculates.Total_Measles}}",
-          "title": "Total_Measles"
+          "prompt": {
+            "text": "{{calculates.Total_Measles}}"
+          },
+          "title": {
+            "text": "Total_Measles"
+          }
         },
         "_row_num": 140
       },
@@ -1203,7 +1549,9 @@
         "type": "integer",
         "name": "Measles_OpenedVials",
         "display": {
-          "title": "Measles_OpenedVials"
+          "title": {
+            "text": "Measles_OpenedVials"
+          }
         },
         "_row_num": 141
       },
@@ -1212,7 +1560,9 @@
         "values_list": "one_choice",
         "name": "Measles_OV_NR_checkbox",
         "display": {
-          "title": "Measles_OV_NR_checkbox"
+          "title": {
+            "text": "Measles_OV_NR_checkbox"
+          }
         },
         "_row_num": 142
       },
@@ -1624,7 +1974,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Child Coverage"
+          "title": {
+            "text": "Child Coverage"
+          }
         },
         "_row_num": 4
       },
@@ -1648,10 +2000,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -1667,7 +2016,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Child Coverage"
+          "title": {
+            "text": "Child Coverage"
+          }
         },
         "_row_num": 4
       },
@@ -1687,7 +2038,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -1702,7 +2053,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Child Coverage"
+          "title": {
+            "text": "Child Coverage"
+          }
         },
         "_row_num": 4
       }
@@ -1920,6 +2273,26 @@
           "_row_num": 30
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
     },
     "queries": {},
     "calculates": {
@@ -3515,7 +3888,9 @@
             "type": "note",
             "name": "description",
             "display": {
-              "text": "Child Coverage"
+              "prompt": {
+                "text": "Child Coverage"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -3528,7 +3903,9 @@
             "type": "integer",
             "name": "BCG_0_11_HealthCenter",
             "display": {
-              "title": "BCG_0_11_HealthCenter"
+              "title": {
+                "text": "BCG_0_11_HealthCenter"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -3542,7 +3919,9 @@
             "values_list": "one_choice",
             "name": "BCG_HC_NR_checkbox1",
             "display": {
-              "title": "BCG_HC_NR_checkbox1"
+              "title": {
+                "text": "BCG_HC_NR_checkbox1"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -3555,7 +3934,9 @@
             "type": "integer",
             "name": "BCG_0_11_Outreach",
             "display": {
-              "title": "BCG_0_11_Outreach"
+              "title": {
+                "text": "BCG_0_11_Outreach"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -3569,7 +3950,9 @@
             "values_list": "one_choice",
             "name": "BCG_O_NR_checkbox1",
             "display": {
-              "title": "BCG_O_NR_checkbox1"
+              "title": {
+                "text": "BCG_O_NR_checkbox1"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -3582,8 +3965,12 @@
             "type": "note",
             "name": "BCG_0_11_sum",
             "display": {
-              "text": "{{calculates.BCG_0_11_sum}}",
-              "title": "BCG_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.BCG_0_11_sum}}"
+              },
+              "title": {
+                "text": "BCG_0_11_sum"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -3596,7 +3983,9 @@
             "type": "integer",
             "name": "BCG_12_23_HealthCenter",
             "display": {
-              "title": "BCG_12_23_HealthCenter"
+              "title": {
+                "text": "BCG_12_23_HealthCenter"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -3610,7 +3999,9 @@
             "values_list": "one_choice",
             "name": "BCG_HC_NR_checkbox2",
             "display": {
-              "title": "BCG_HC_NR_checkbox2"
+              "title": {
+                "text": "BCG_HC_NR_checkbox2"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -3623,7 +4014,9 @@
             "type": "integer",
             "name": "BCG_12_23_Outreach",
             "display": {
-              "title": "BCG_12_23_Outreach"
+              "title": {
+                "text": "BCG_12_23_Outreach"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -3637,7 +4030,9 @@
             "values_list": "one_choice",
             "name": "BCG_O_NR_checkbox2",
             "display": {
-              "title": "BCG_O_NR_checkbox2"
+              "title": {
+                "text": "BCG_O_NR_checkbox2"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -3650,8 +4045,12 @@
             "type": "note",
             "name": "BCG_12_23_sum",
             "display": {
-              "text": "{{calculates.BCG_12_23_sum}}",
-              "title": "BCG_12_23_sum"
+              "prompt": {
+                "text": "{{calculates.BCG_12_23_sum}}"
+              },
+              "title": {
+                "text": "BCG_12_23_sum"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -3664,8 +4063,12 @@
             "type": "note",
             "name": "Total_BCG",
             "display": {
-              "text": "{{calculates.Total_BCG}}",
-              "title": "Total_BCG"
+              "prompt": {
+                "text": "{{calculates.Total_BCG}}"
+              },
+              "title": {
+                "text": "Total_BCG"
+              }
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -3678,7 +4081,9 @@
             "type": "integer",
             "name": "BCG_OpenedVials",
             "display": {
-              "title": "BCG_OpenedVials"
+              "title": {
+                "text": "BCG_OpenedVials"
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -3692,7 +4097,9 @@
             "values_list": "one_choice",
             "name": "BCG_OV_NR_checkbox",
             "display": {
-              "title": "BCG_OV_NR_checkbox"
+              "title": {
+                "text": "BCG_OV_NR_checkbox"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -3705,7 +4112,9 @@
             "type": "integer",
             "name": "Polio_Newborn_0_11_HealthCenter",
             "display": {
-              "title": "Polio_Newborn_0_11_HealthCenter"
+              "title": {
+                "text": "Polio_Newborn_0_11_HealthCenter"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -3719,7 +4128,9 @@
             "values_list": "one_choice",
             "name": "PN_HC_NR_checkbox1",
             "display": {
-              "title": "PN_HC_NR_checkbox1"
+              "title": {
+                "text": "PN_HC_NR_checkbox1"
+              }
             },
             "_row_num": 18,
             "__rowNum__": 17,
@@ -3732,7 +4143,9 @@
             "type": "integer",
             "name": "Polio_Newborn_0_11_Outreach",
             "display": {
-              "title": "Polio_Newborn_0_11_Outreach"
+              "title": {
+                "text": "Polio_Newborn_0_11_Outreach"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -3746,7 +4159,9 @@
             "values_list": "one_choice",
             "name": "PN_O_NR_checkbox1",
             "display": {
-              "title": "PN_O_NR_checkbox1"
+              "title": {
+                "text": "PN_O_NR_checkbox1"
+              }
             },
             "_row_num": 20,
             "__rowNum__": 19,
@@ -3759,8 +4174,12 @@
             "type": "note",
             "name": "Polio_Newborn_0_11_sum",
             "display": {
-              "text": "{{calculates.Polio_Newborn_0_11_sum}}",
-              "title": "Polio_Newborn_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.Polio_Newborn_0_11_sum}}"
+              },
+              "title": {
+                "text": "Polio_Newborn_0_11_sum"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -3773,8 +4192,12 @@
             "type": "note",
             "name": "Total_Polio_Newborn",
             "display": {
-              "text": "{{calculates.Total_Polio_Newborn}}",
-              "title": "Total_Polio_Newborn"
+              "prompt": {
+                "text": "{{calculates.Total_Polio_Newborn}}"
+              },
+              "title": {
+                "text": "Total_Polio_Newborn"
+              }
             },
             "_row_num": 22,
             "__rowNum__": 21,
@@ -3787,7 +4210,9 @@
             "type": "integer",
             "name": "Polio_Dose1_0_11_HealthCenter",
             "display": {
-              "title": "Polio_Dose1_0_11_HealthCenter"
+              "title": {
+                "text": "Polio_Dose1_0_11_HealthCenter"
+              }
             },
             "_row_num": 23,
             "__rowNum__": 22,
@@ -3801,7 +4226,9 @@
             "values_list": "one_choice",
             "name": "P1_HC_NR_checkbox1",
             "display": {
-              "title": "P1_HC_NR_checkbox1"
+              "title": {
+                "text": "P1_HC_NR_checkbox1"
+              }
             },
             "_row_num": 24,
             "__rowNum__": 23,
@@ -3814,7 +4241,9 @@
             "type": "integer",
             "name": "Polio_Dose1_0_11_Outreach",
             "display": {
-              "title": "Polio_Dose1_0_11_Outreach"
+              "title": {
+                "text": "Polio_Dose1_0_11_Outreach"
+              }
             },
             "_row_num": 25,
             "__rowNum__": 24,
@@ -3828,7 +4257,9 @@
             "values_list": "one_choice",
             "name": "P1_O_NR_checkbox1",
             "display": {
-              "title": "P1_O_NR_checkbox1"
+              "title": {
+                "text": "P1_O_NR_checkbox1"
+              }
             },
             "_row_num": 26,
             "__rowNum__": 25,
@@ -3841,8 +4272,12 @@
             "type": "note",
             "name": "Polio_Dose1_0_11_sum",
             "display": {
-              "text": "{{calculates.Polio_Dose1_0_11_sum}}",
-              "title": "Polio_Dose1_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.Polio_Dose1_0_11_sum}}"
+              },
+              "title": {
+                "text": "Polio_Dose1_0_11_sum"
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -3855,7 +4290,9 @@
             "type": "integer",
             "name": "Polio_Dose1_12_23_HealthCenter",
             "display": {
-              "title": "Polio_Dose1_12_23_HealthCenter"
+              "title": {
+                "text": "Polio_Dose1_12_23_HealthCenter"
+              }
             },
             "_row_num": 28,
             "__rowNum__": 27,
@@ -3869,7 +4306,9 @@
             "values_list": "one_choice",
             "name": "P1_HC_NR_checkbox2",
             "display": {
-              "title": "P1_HC_NR_checkbox2"
+              "title": {
+                "text": "P1_HC_NR_checkbox2"
+              }
             },
             "_row_num": 29,
             "__rowNum__": 28,
@@ -3882,7 +4321,9 @@
             "type": "integer",
             "name": "Polio_Dose1_12_23_Outreach",
             "display": {
-              "title": "Polio_Dose1_12_23_Outreach"
+              "title": {
+                "text": "Polio_Dose1_12_23_Outreach"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -3896,7 +4337,9 @@
             "values_list": "one_choice",
             "name": "P1_O_NR_checkbox2",
             "display": {
-              "title": "P1_O_NR_checkbox2"
+              "title": {
+                "text": "P1_O_NR_checkbox2"
+              }
             },
             "_row_num": 31,
             "__rowNum__": 30,
@@ -3909,8 +4352,12 @@
             "type": "note",
             "name": "Polio_Dose1_12_23_sum",
             "display": {
-              "text": "{{calculates.Polio_Dose1_12_23_sum}}",
-              "title": "Polio_Dose1_12_23_sum"
+              "prompt": {
+                "text": "{{calculates.Polio_Dose1_12_23_sum}}"
+              },
+              "title": {
+                "text": "Polio_Dose1_12_23_sum"
+              }
             },
             "_row_num": 32,
             "__rowNum__": 31,
@@ -3923,8 +4370,12 @@
             "type": "note",
             "name": "Total_Polio_Dose1",
             "display": {
-              "text": "{{calculates.Total_Polio_Dose1}}",
-              "title": "Total_Polio_Dose1"
+              "prompt": {
+                "text": "{{calculates.Total_Polio_Dose1}}"
+              },
+              "title": {
+                "text": "Total_Polio_Dose1"
+              }
             },
             "_row_num": 33,
             "__rowNum__": 32,
@@ -3937,7 +4388,9 @@
             "type": "integer",
             "name": "Polio_Dose2_0_11_HealthCenter",
             "display": {
-              "title": "Polio_Dose2_0_11_HealthCenter"
+              "title": {
+                "text": "Polio_Dose2_0_11_HealthCenter"
+              }
             },
             "_row_num": 34,
             "__rowNum__": 33,
@@ -3951,7 +4404,9 @@
             "values_list": "one_choice",
             "name": "P2_HC_NR_checkbox1",
             "display": {
-              "title": "P2_HC_NR_checkbox1"
+              "title": {
+                "text": "P2_HC_NR_checkbox1"
+              }
             },
             "_row_num": 35,
             "__rowNum__": 34,
@@ -3964,7 +4419,9 @@
             "type": "integer",
             "name": "Polio_Dose2_0_11_Outreach",
             "display": {
-              "title": "Polio_Dose2_0_11_Outreach"
+              "title": {
+                "text": "Polio_Dose2_0_11_Outreach"
+              }
             },
             "_row_num": 36,
             "__rowNum__": 35,
@@ -3978,7 +4435,9 @@
             "values_list": "one_choice",
             "name": "P2_O_NR_checkbox1",
             "display": {
-              "title": "P2_O_NR_checkbox1"
+              "title": {
+                "text": "P2_O_NR_checkbox1"
+              }
             },
             "_row_num": 37,
             "__rowNum__": 36,
@@ -3991,8 +4450,12 @@
             "type": "note",
             "name": "Polio_Dose2_0_11_sum",
             "display": {
-              "text": "{{calculates.Polio_Dose2_0_11_sum}}",
-              "title": "Polio_Dose2_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.Polio_Dose2_0_11_sum}}"
+              },
+              "title": {
+                "text": "Polio_Dose2_0_11_sum"
+              }
             },
             "_row_num": 38,
             "__rowNum__": 37,
@@ -4005,7 +4468,9 @@
             "type": "integer",
             "name": "Polio_Dose2_12_23_HealthCenter",
             "display": {
-              "title": "Polio_Dose2_12_23_HealthCenter"
+              "title": {
+                "text": "Polio_Dose2_12_23_HealthCenter"
+              }
             },
             "_row_num": 39,
             "__rowNum__": 38,
@@ -4019,7 +4484,9 @@
             "values_list": "one_choice",
             "name": "P2_HC_NR_checkbox2",
             "display": {
-              "title": "P2_HC_NR_checkbox2"
+              "title": {
+                "text": "P2_HC_NR_checkbox2"
+              }
             },
             "_row_num": 40,
             "__rowNum__": 39,
@@ -4032,7 +4499,9 @@
             "type": "integer",
             "name": "Polio_Dose2_12_23_Outreach",
             "display": {
-              "title": "Polio_Dose2_12_23_Outreach"
+              "title": {
+                "text": "Polio_Dose2_12_23_Outreach"
+              }
             },
             "_row_num": 41,
             "__rowNum__": 40,
@@ -4046,7 +4515,9 @@
             "values_list": "one_choice",
             "name": "P2_O_NR_checkbox2",
             "display": {
-              "title": "P2_O_NR_checkbox2"
+              "title": {
+                "text": "P2_O_NR_checkbox2"
+              }
             },
             "_row_num": 42,
             "__rowNum__": 41,
@@ -4059,8 +4530,12 @@
             "type": "note",
             "name": "Polio_Dose2_12_23_sum",
             "display": {
-              "text": "{{calculates.Polio_Dose2_12_23_sum}}",
-              "title": "Polio_Dose2_12_23_sum"
+              "prompt": {
+                "text": "{{calculates.Polio_Dose2_12_23_sum}}"
+              },
+              "title": {
+                "text": "Polio_Dose2_12_23_sum"
+              }
             },
             "_row_num": 43,
             "__rowNum__": 42,
@@ -4073,8 +4548,12 @@
             "type": "note",
             "name": "Total_Polio_Dose2",
             "display": {
-              "text": "{{calculates.Total_Polio_Dose2}}",
-              "title": "Total_Polio_Dose2"
+              "prompt": {
+                "text": "{{calculates.Total_Polio_Dose2}}"
+              },
+              "title": {
+                "text": "Total_Polio_Dose2"
+              }
             },
             "_row_num": 44,
             "__rowNum__": 43,
@@ -4087,7 +4566,9 @@
             "type": "integer",
             "name": "Polio_Dose3_0_11_HealthCenter",
             "display": {
-              "title": "Polio_Dose3_0_11_HealthCenter"
+              "title": {
+                "text": "Polio_Dose3_0_11_HealthCenter"
+              }
             },
             "_row_num": 45,
             "__rowNum__": 44,
@@ -4101,7 +4582,9 @@
             "values_list": "one_choice",
             "name": "P3_HC_NR_checkbox1",
             "display": {
-              "title": "P3_HC_NR_checkbox1"
+              "title": {
+                "text": "P3_HC_NR_checkbox1"
+              }
             },
             "_row_num": 46,
             "__rowNum__": 45,
@@ -4114,7 +4597,9 @@
             "type": "integer",
             "name": "Polio_Dose3_0_11_Outreach",
             "display": {
-              "title": "Polio_Dose3_0_11_Outreach"
+              "title": {
+                "text": "Polio_Dose3_0_11_Outreach"
+              }
             },
             "_row_num": 47,
             "__rowNum__": 46,
@@ -4128,7 +4613,9 @@
             "values_list": "one_choice",
             "name": "P3_O_NR_checkbox1",
             "display": {
-              "title": "P3_O_NR_checkbox1"
+              "title": {
+                "text": "P3_O_NR_checkbox1"
+              }
             },
             "_row_num": 48,
             "__rowNum__": 47,
@@ -4141,8 +4628,12 @@
             "type": "note",
             "name": "Polio_Dose3_0_11_sum",
             "display": {
-              "text": "{{calculates.Polio_Dose3_0_11_sum}}",
-              "title": "Polio_Dose3_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.Polio_Dose3_0_11_sum}}"
+              },
+              "title": {
+                "text": "Polio_Dose3_0_11_sum"
+              }
             },
             "_row_num": 49,
             "__rowNum__": 48,
@@ -4155,7 +4646,9 @@
             "type": "integer",
             "name": "Polio_Dose3_12_23_HealthCenter",
             "display": {
-              "title": "Polio_Dose3_12_23_HealthCenter"
+              "title": {
+                "text": "Polio_Dose3_12_23_HealthCenter"
+              }
             },
             "_row_num": 50,
             "__rowNum__": 49,
@@ -4169,7 +4662,9 @@
             "values_list": "one_choice",
             "name": "P3_HC_NR_checkbox2",
             "display": {
-              "title": "P3_HC_NR_checkbox2"
+              "title": {
+                "text": "P3_HC_NR_checkbox2"
+              }
             },
             "_row_num": 51,
             "__rowNum__": 50,
@@ -4182,7 +4677,9 @@
             "type": "integer",
             "name": "Polio_Dose3_12_23_Outreach",
             "display": {
-              "title": "Polio_Dose3_12_23_Outreach"
+              "title": {
+                "text": "Polio_Dose3_12_23_Outreach"
+              }
             },
             "_row_num": 52,
             "__rowNum__": 51,
@@ -4196,7 +4693,9 @@
             "values_list": "one_choice",
             "name": "P3_O_NR_checkbox2",
             "display": {
-              "title": "P3_O_NR_checkbox2"
+              "title": {
+                "text": "P3_O_NR_checkbox2"
+              }
             },
             "_row_num": 53,
             "__rowNum__": 52,
@@ -4209,8 +4708,12 @@
             "type": "note",
             "name": "Polio_Dose3_12_23_sum",
             "display": {
-              "text": "{{calculates.Polio_Dose3_12_23_sum}}",
-              "title": "Polio_Dose3_12_23_sum"
+              "prompt": {
+                "text": "{{calculates.Polio_Dose3_12_23_sum}}"
+              },
+              "title": {
+                "text": "Polio_Dose3_12_23_sum"
+              }
             },
             "_row_num": 54,
             "__rowNum__": 53,
@@ -4223,8 +4726,12 @@
             "type": "note",
             "name": "Total_Polio_Dose3",
             "display": {
-              "text": "{{calculates.Total_Polio_Dose3}}",
-              "title": "Total_Polio_Dose3"
+              "prompt": {
+                "text": "{{calculates.Total_Polio_Dose3}}"
+              },
+              "title": {
+                "text": "Total_Polio_Dose3"
+              }
             },
             "_row_num": 55,
             "__rowNum__": 54,
@@ -4237,7 +4744,9 @@
             "type": "integer",
             "name": "Polio10_OpenedVials",
             "display": {
-              "title": "Polio10_OpenedVials"
+              "title": {
+                "text": "Polio10_OpenedVials"
+              }
             },
             "_row_num": 56,
             "__rowNum__": 55,
@@ -4250,7 +4759,9 @@
             "type": "integer",
             "name": "Polio20_OpenedVials",
             "display": {
-              "title": "Polio20_OpenedVials"
+              "title": {
+                "text": "Polio20_OpenedVials"
+              }
             },
             "_row_num": 57,
             "__rowNum__": 56,
@@ -4264,7 +4775,9 @@
             "values_list": "one_choice",
             "name": "P20_OV_NR_checkbox",
             "display": {
-              "title": "P20_OV_NR_checkbox"
+              "title": {
+                "text": "P20_OV_NR_checkbox"
+              }
             },
             "_row_num": 58,
             "__rowNum__": 57,
@@ -4277,7 +4790,9 @@
             "type": "integer",
             "name": "Penta_Dose1_0_11_HealthCenter",
             "display": {
-              "title": "Penta_Dose1_0_11_HealthCenter"
+              "title": {
+                "text": "Penta_Dose1_0_11_HealthCenter"
+              }
             },
             "_row_num": 59,
             "__rowNum__": 58,
@@ -4291,7 +4806,9 @@
             "values_list": "one_choice",
             "name": "Pe1_HC_NR_checkbox1",
             "display": {
-              "title": "Pe1_HC_NR_checkbox1"
+              "title": {
+                "text": "Pe1_HC_NR_checkbox1"
+              }
             },
             "_row_num": 60,
             "__rowNum__": 59,
@@ -4304,7 +4821,9 @@
             "type": "integer",
             "name": "Penta_Dose1_0_11_Outreach",
             "display": {
-              "title": "Penta_Dose1_0_11_Outreach"
+              "title": {
+                "text": "Penta_Dose1_0_11_Outreach"
+              }
             },
             "_row_num": 61,
             "__rowNum__": 60,
@@ -4318,7 +4837,9 @@
             "values_list": "one_choice",
             "name": "Pe1_O_NR_checkbox1",
             "display": {
-              "title": "Pe1_O_NR_checkbox1"
+              "title": {
+                "text": "Pe1_O_NR_checkbox1"
+              }
             },
             "_row_num": 62,
             "__rowNum__": 61,
@@ -4331,8 +4852,12 @@
             "type": "note",
             "name": "Penta_Dose1_0_11_sum",
             "display": {
-              "text": "{{calculates.Penta_Dose1_0_11_sum}}",
-              "title": "Penta_Dose1_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.Penta_Dose1_0_11_sum}}"
+              },
+              "title": {
+                "text": "Penta_Dose1_0_11_sum"
+              }
             },
             "_row_num": 63,
             "__rowNum__": 62,
@@ -4345,7 +4870,9 @@
             "type": "integer",
             "name": "Penta_Dose1_12_23_HealthCenter",
             "display": {
-              "title": "Penta_Dose1_12_23_HealthCenter"
+              "title": {
+                "text": "Penta_Dose1_12_23_HealthCenter"
+              }
             },
             "_row_num": 64,
             "__rowNum__": 63,
@@ -4359,7 +4886,9 @@
             "values_list": "one_choice",
             "name": "Pe1_HC_NR_checkbox2",
             "display": {
-              "title": "Pe1_HC_NR_checkbox2"
+              "title": {
+                "text": "Pe1_HC_NR_checkbox2"
+              }
             },
             "_row_num": 65,
             "__rowNum__": 64,
@@ -4372,7 +4901,9 @@
             "type": "integer",
             "name": "Penta_Dose1_12_23_Outreach",
             "display": {
-              "title": "Penta_Dose1_12_23_Outreach"
+              "title": {
+                "text": "Penta_Dose1_12_23_Outreach"
+              }
             },
             "_row_num": 66,
             "__rowNum__": 65,
@@ -4386,7 +4917,9 @@
             "values_list": "one_choice",
             "name": "Pe1_O_NR_checkbox2",
             "display": {
-              "title": "Pe1_O_NR_checkbox2"
+              "title": {
+                "text": "Pe1_O_NR_checkbox2"
+              }
             },
             "_row_num": 67,
             "__rowNum__": 66,
@@ -4399,8 +4932,12 @@
             "type": "note",
             "name": "Penta_Dose1_12_23_sum",
             "display": {
-              "text": "{{calculates.Penta_Dose1_12_23_sum}}",
-              "title": "Penta_Dose1_12_23_sum"
+              "prompt": {
+                "text": "{{calculates.Penta_Dose1_12_23_sum}}"
+              },
+              "title": {
+                "text": "Penta_Dose1_12_23_sum"
+              }
             },
             "_row_num": 68,
             "__rowNum__": 67,
@@ -4413,8 +4950,12 @@
             "type": "note",
             "name": "Total_Penta_Dose1",
             "display": {
-              "text": "{{calculates.Total_Penta_Dose1}}",
-              "title": "Total_Penta_Dose1"
+              "prompt": {
+                "text": "{{calculates.Total_Penta_Dose1}}"
+              },
+              "title": {
+                "text": "Total_Penta_Dose1"
+              }
             },
             "_row_num": 69,
             "__rowNum__": 68,
@@ -4427,7 +4968,9 @@
             "type": "integer",
             "name": "Penta_Dose2_0_11_HealthCenter",
             "display": {
-              "title": "Penta_Dose2_0_11_HealthCenter"
+              "title": {
+                "text": "Penta_Dose2_0_11_HealthCenter"
+              }
             },
             "_row_num": 70,
             "__rowNum__": 69,
@@ -4441,7 +4984,9 @@
             "values_list": "one_choice",
             "name": "Pe2_HC_NR_checkbox1",
             "display": {
-              "title": "Pe2_HC_NR_checkbox1"
+              "title": {
+                "text": "Pe2_HC_NR_checkbox1"
+              }
             },
             "_row_num": 71,
             "__rowNum__": 70,
@@ -4454,7 +4999,9 @@
             "type": "integer",
             "name": "Penta_Dose2_0_11_Outreach",
             "display": {
-              "title": "Penta_Dose2_0_11_Outreach"
+              "title": {
+                "text": "Penta_Dose2_0_11_Outreach"
+              }
             },
             "_row_num": 72,
             "__rowNum__": 71,
@@ -4468,7 +5015,9 @@
             "values_list": "one_choice",
             "name": "Pe2_O_NR_checkbox1",
             "display": {
-              "title": "Pe2_O_NR_checkbox1"
+              "title": {
+                "text": "Pe2_O_NR_checkbox1"
+              }
             },
             "_row_num": 73,
             "__rowNum__": 72,
@@ -4481,8 +5030,12 @@
             "type": "note",
             "name": "Penta_Dose2_0_11_sum",
             "display": {
-              "text": "{{calculates.Penta_Dose2_0_11_sum}}",
-              "title": "Penta_Dose2_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.Penta_Dose2_0_11_sum}}"
+              },
+              "title": {
+                "text": "Penta_Dose2_0_11_sum"
+              }
             },
             "_row_num": 74,
             "__rowNum__": 73,
@@ -4495,7 +5048,9 @@
             "type": "integer",
             "name": "Penta_Dose2_12_23_HealthCenter",
             "display": {
-              "title": "Penta_Dose2_12_23_HealthCenter"
+              "title": {
+                "text": "Penta_Dose2_12_23_HealthCenter"
+              }
             },
             "_row_num": 75,
             "__rowNum__": 74,
@@ -4509,7 +5064,9 @@
             "values_list": "one_choice",
             "name": "Pe2_HC_NR_checkbox2",
             "display": {
-              "title": "Pe2_HC_NR_checkbox2"
+              "title": {
+                "text": "Pe2_HC_NR_checkbox2"
+              }
             },
             "_row_num": 76,
             "__rowNum__": 75,
@@ -4522,7 +5079,9 @@
             "type": "integer",
             "name": "Penta_Dose2_12_23_Outreach",
             "display": {
-              "title": "Penta_Dose2_12_23_Outreach"
+              "title": {
+                "text": "Penta_Dose2_12_23_Outreach"
+              }
             },
             "_row_num": 77,
             "__rowNum__": 76,
@@ -4536,7 +5095,9 @@
             "values_list": "one_choice",
             "name": "Pe2_O_NR_checkbox2",
             "display": {
-              "title": "Pe2_O_NR_checkbox2"
+              "title": {
+                "text": "Pe2_O_NR_checkbox2"
+              }
             },
             "_row_num": 78,
             "__rowNum__": 77,
@@ -4549,8 +5110,12 @@
             "type": "note",
             "name": "Penta_Dose2_12_23_sum",
             "display": {
-              "text": "{{calculates.Penta_Dose2_12_23_sum}}",
-              "title": "Penta_Dose2_12_23_sum"
+              "prompt": {
+                "text": "{{calculates.Penta_Dose2_12_23_sum}}"
+              },
+              "title": {
+                "text": "Penta_Dose2_12_23_sum"
+              }
             },
             "_row_num": 79,
             "__rowNum__": 78,
@@ -4563,8 +5128,12 @@
             "type": "note",
             "name": "Total_Penta_Dose2",
             "display": {
-              "text": "{{calculates.Total_Penta_Dose2}}",
-              "title": "Total_Penta_Dose2"
+              "prompt": {
+                "text": "{{calculates.Total_Penta_Dose2}}"
+              },
+              "title": {
+                "text": "Total_Penta_Dose2"
+              }
             },
             "_row_num": 80,
             "__rowNum__": 79,
@@ -4577,7 +5146,9 @@
             "type": "integer",
             "name": "Penta_Dose3_0_11_HealthCenter",
             "display": {
-              "title": "Penta_Dose3_0_11_HealthCenter"
+              "title": {
+                "text": "Penta_Dose3_0_11_HealthCenter"
+              }
             },
             "_row_num": 81,
             "__rowNum__": 80,
@@ -4591,7 +5162,9 @@
             "values_list": "one_choice",
             "name": "Pe3_HC_NR_checkbox1",
             "display": {
-              "title": "Pe3_HC_NR_checkbox1"
+              "title": {
+                "text": "Pe3_HC_NR_checkbox1"
+              }
             },
             "_row_num": 82,
             "__rowNum__": 81,
@@ -4604,7 +5177,9 @@
             "type": "integer",
             "name": "Penta_Dose3_0_11_Outreach",
             "display": {
-              "title": "Penta_Dose3_0_11_Outreach"
+              "title": {
+                "text": "Penta_Dose3_0_11_Outreach"
+              }
             },
             "_row_num": 83,
             "__rowNum__": 82,
@@ -4618,7 +5193,9 @@
             "values_list": "one_choice",
             "name": "Pe3_O_NR_checkbox1",
             "display": {
-              "title": "Pe3_O_NR_checkbox1"
+              "title": {
+                "text": "Pe3_O_NR_checkbox1"
+              }
             },
             "_row_num": 84,
             "__rowNum__": 83,
@@ -4631,8 +5208,12 @@
             "type": "note",
             "name": "Penta_Dose3_0_11_sum",
             "display": {
-              "text": "{{calculates.Penta_Dose3_0_11_sum}}",
-              "title": "Penta_Dose3_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.Penta_Dose3_0_11_sum}}"
+              },
+              "title": {
+                "text": "Penta_Dose3_0_11_sum"
+              }
             },
             "_row_num": 85,
             "__rowNum__": 84,
@@ -4645,7 +5226,9 @@
             "type": "integer",
             "name": "Penta_Dose3_12_23_HealthCenter",
             "display": {
-              "title": "Penta_Dose3_12_23_HealthCenter"
+              "title": {
+                "text": "Penta_Dose3_12_23_HealthCenter"
+              }
             },
             "_row_num": 86,
             "__rowNum__": 85,
@@ -4659,7 +5242,9 @@
             "values_list": "one_choice",
             "name": "Pe3_HC_NR_checkbox2",
             "display": {
-              "title": "Pe3_HC_NR_checkbox2"
+              "title": {
+                "text": "Pe3_HC_NR_checkbox2"
+              }
             },
             "_row_num": 87,
             "__rowNum__": 86,
@@ -4672,7 +5257,9 @@
             "type": "integer",
             "name": "Penta_Dose3_12_23_Outreach",
             "display": {
-              "title": "Penta_Dose3_12_23_Outreach"
+              "title": {
+                "text": "Penta_Dose3_12_23_Outreach"
+              }
             },
             "_row_num": 88,
             "__rowNum__": 87,
@@ -4686,7 +5273,9 @@
             "values_list": "one_choice",
             "name": "Pe3_O_NR_checkbox2",
             "display": {
-              "title": "Pe3_O_NR_checkbox2"
+              "title": {
+                "text": "Pe3_O_NR_checkbox2"
+              }
             },
             "_row_num": 89,
             "__rowNum__": 88,
@@ -4699,8 +5288,12 @@
             "type": "note",
             "name": "Penta_Dose3_12_23_sum",
             "display": {
-              "text": "{{calculates.Penta_Dose3_12_23_sum}}",
-              "title": "Penta_Dose3_12_23_sum"
+              "prompt": {
+                "text": "{{calculates.Penta_Dose3_12_23_sum}}"
+              },
+              "title": {
+                "text": "Penta_Dose3_12_23_sum"
+              }
             },
             "_row_num": 90,
             "__rowNum__": 89,
@@ -4713,8 +5306,12 @@
             "type": "note",
             "name": "Total_Penta_Dose3",
             "display": {
-              "text": "{{calculates.Total_Penta_Dose3}}",
-              "title": "Total_Penta_Dose3"
+              "prompt": {
+                "text": "{{calculates.Total_Penta_Dose3}}"
+              },
+              "title": {
+                "text": "Total_Penta_Dose3"
+              }
             },
             "_row_num": 91,
             "__rowNum__": 90,
@@ -4727,7 +5324,9 @@
             "type": "integer",
             "name": "Penta1_OpenedVials",
             "display": {
-              "title": "Penta1_OpenedVials"
+              "title": {
+                "text": "Penta1_OpenedVials"
+              }
             },
             "_row_num": 92,
             "__rowNum__": 91,
@@ -4740,7 +5339,9 @@
             "type": "integer",
             "name": "Penta10_OpenedVials",
             "display": {
-              "title": "Penta10_OpenedVials"
+              "title": {
+                "text": "Penta10_OpenedVials"
+              }
             },
             "_row_num": 93,
             "__rowNum__": 92,
@@ -4754,7 +5355,9 @@
             "values_list": "one_choice",
             "name": "Penta10_OV_NR_checkbox",
             "display": {
-              "title": "Penta10_OV_NR_checkbox"
+              "title": {
+                "text": "Penta10_OV_NR_checkbox"
+              }
             },
             "_row_num": 94,
             "__rowNum__": 93,
@@ -4767,7 +5370,9 @@
             "type": "integer",
             "name": "PCV10_Dose1_0_11_HealthCenter",
             "display": {
-              "title": "PCV10_Dose1_0_11_HealthCenter"
+              "title": {
+                "text": "PCV10_Dose1_0_11_HealthCenter"
+              }
             },
             "_row_num": 95,
             "__rowNum__": 94,
@@ -4781,7 +5386,9 @@
             "values_list": "one_choice",
             "name": "Pc1_HC_NR_checkbox1",
             "display": {
-              "title": "Pc1_HC_NR_checkbox1"
+              "title": {
+                "text": "Pc1_HC_NR_checkbox1"
+              }
             },
             "_row_num": 96,
             "__rowNum__": 95,
@@ -4794,7 +5401,9 @@
             "type": "integer",
             "name": "PCV10_Dose1_0_11_Outreach",
             "display": {
-              "title": "PCV10_Dose1_0_11_Outreach"
+              "title": {
+                "text": "PCV10_Dose1_0_11_Outreach"
+              }
             },
             "_row_num": 97,
             "__rowNum__": 96,
@@ -4808,7 +5417,9 @@
             "values_list": "one_choice",
             "name": "Pc1_O_NR_checkbox1",
             "display": {
-              "title": "Pc1_O_NR_checkbox1"
+              "title": {
+                "text": "Pc1_O_NR_checkbox1"
+              }
             },
             "_row_num": 98,
             "__rowNum__": 97,
@@ -4821,8 +5432,12 @@
             "type": "note",
             "name": "PCV10_Dose1_0_11_sum",
             "display": {
-              "text": "{{calculates.PCV10_Dose1_0_11_sum}}",
-              "title": "PCV10_Dose1_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.PCV10_Dose1_0_11_sum}}"
+              },
+              "title": {
+                "text": "PCV10_Dose1_0_11_sum"
+              }
             },
             "_row_num": 99,
             "__rowNum__": 98,
@@ -4835,7 +5450,9 @@
             "type": "integer",
             "name": "PCV10_Dose1_12_23_HealthCenter",
             "display": {
-              "title": "PCV10_Dose1_12_23_HealthCenter"
+              "title": {
+                "text": "PCV10_Dose1_12_23_HealthCenter"
+              }
             },
             "_row_num": 100,
             "__rowNum__": 99,
@@ -4849,7 +5466,9 @@
             "values_list": "one_choice",
             "name": "Pc1_HC_NR_checkbox2",
             "display": {
-              "title": "Pc1_HC_NR_checkbox2"
+              "title": {
+                "text": "Pc1_HC_NR_checkbox2"
+              }
             },
             "_row_num": 101,
             "__rowNum__": 100,
@@ -4862,7 +5481,9 @@
             "type": "integer",
             "name": "PCV10_Dose1_12_23_Outreach",
             "display": {
-              "title": "PCV10_Dose1_12_23_Outreach"
+              "title": {
+                "text": "PCV10_Dose1_12_23_Outreach"
+              }
             },
             "_row_num": 102,
             "__rowNum__": 101,
@@ -4876,7 +5497,9 @@
             "values_list": "one_choice",
             "name": "Pc1_O_NR_checkbox2",
             "display": {
-              "title": "Pc1_O_NR_checkbox2"
+              "title": {
+                "text": "Pc1_O_NR_checkbox2"
+              }
             },
             "_row_num": 103,
             "__rowNum__": 102,
@@ -4889,8 +5512,12 @@
             "type": "note",
             "name": "PCV10_Dose1_12_23_sum",
             "display": {
-              "text": "{{calculates.PCV10_Dose1_12_23_sum}}",
-              "title": "PCV10_Dose1_12_23_sum"
+              "prompt": {
+                "text": "{{calculates.PCV10_Dose1_12_23_sum}}"
+              },
+              "title": {
+                "text": "PCV10_Dose1_12_23_sum"
+              }
             },
             "_row_num": 104,
             "__rowNum__": 103,
@@ -4903,8 +5530,12 @@
             "type": "note",
             "name": "Total_PCV10_Dose1",
             "display": {
-              "text": "{{calculates.Total_PCV10_Dose1}}",
-              "title": "Total_PCV10_Dose1"
+              "prompt": {
+                "text": "{{calculates.Total_PCV10_Dose1}}"
+              },
+              "title": {
+                "text": "Total_PCV10_Dose1"
+              }
             },
             "_row_num": 105,
             "__rowNum__": 104,
@@ -4917,7 +5548,9 @@
             "type": "integer",
             "name": "PCV10_Dose2_0_11_HealthCenter",
             "display": {
-              "title": "PCV10_Dose2_0_11_HealthCenter"
+              "title": {
+                "text": "PCV10_Dose2_0_11_HealthCenter"
+              }
             },
             "_row_num": 106,
             "__rowNum__": 105,
@@ -4931,7 +5564,9 @@
             "values_list": "one_choice",
             "name": "Pc2_HC_NR_checkbox1",
             "display": {
-              "title": "Pc2_HC_NR_checkbox1"
+              "title": {
+                "text": "Pc2_HC_NR_checkbox1"
+              }
             },
             "_row_num": 107,
             "__rowNum__": 106,
@@ -4944,7 +5579,9 @@
             "type": "integer",
             "name": "PCV10_Dose2_0_11_Outreach",
             "display": {
-              "title": "PCV10_Dose2_0_11_Outreach"
+              "title": {
+                "text": "PCV10_Dose2_0_11_Outreach"
+              }
             },
             "_row_num": 108,
             "__rowNum__": 107,
@@ -4958,7 +5595,9 @@
             "values_list": "one_choice",
             "name": "Pc2_O_NR_checkbox1",
             "display": {
-              "title": "Pc2_O_NR_checkbox1"
+              "title": {
+                "text": "Pc2_O_NR_checkbox1"
+              }
             },
             "_row_num": 109,
             "__rowNum__": 108,
@@ -4971,8 +5610,12 @@
             "type": "note",
             "name": "PCV10_Dose2_0_11_sum",
             "display": {
-              "text": "{{calculates.PCV10_Dose2_0_11_sum}}",
-              "title": "PCV10_Dose2_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.PCV10_Dose2_0_11_sum}}"
+              },
+              "title": {
+                "text": "PCV10_Dose2_0_11_sum"
+              }
             },
             "_row_num": 110,
             "__rowNum__": 109,
@@ -4985,7 +5628,9 @@
             "type": "integer",
             "name": "PCV10_Dose2_12_23_HealthCenter",
             "display": {
-              "title": "PCV10_Dose2_12_23_HealthCenter"
+              "title": {
+                "text": "PCV10_Dose2_12_23_HealthCenter"
+              }
             },
             "_row_num": 111,
             "__rowNum__": 110,
@@ -4999,7 +5644,9 @@
             "values_list": "one_choice",
             "name": "Pc2_HC_NR_checkbox2",
             "display": {
-              "title": "Pc2_HC_NR_checkbox2"
+              "title": {
+                "text": "Pc2_HC_NR_checkbox2"
+              }
             },
             "_row_num": 112,
             "__rowNum__": 111,
@@ -5012,7 +5659,9 @@
             "type": "integer",
             "name": "PCV10_Dose2_12_23_Outreach",
             "display": {
-              "title": "PCV10_Dose2_12_23_Outreach"
+              "title": {
+                "text": "PCV10_Dose2_12_23_Outreach"
+              }
             },
             "_row_num": 113,
             "__rowNum__": 112,
@@ -5026,7 +5675,9 @@
             "values_list": "one_choice",
             "name": "Pc2_O_NR_checkbox2",
             "display": {
-              "title": "Pc2_O_NR_checkbox2"
+              "title": {
+                "text": "Pc2_O_NR_checkbox2"
+              }
             },
             "_row_num": 114,
             "__rowNum__": 113,
@@ -5039,8 +5690,12 @@
             "type": "note",
             "name": "PCV10_Dose2_12_23_sum",
             "display": {
-              "text": "{{calculates.PCV10_Dose2_12_23_sum}}",
-              "title": "PCV10_Dose2_12_23_sum"
+              "prompt": {
+                "text": "{{calculates.PCV10_Dose2_12_23_sum}}"
+              },
+              "title": {
+                "text": "PCV10_Dose2_12_23_sum"
+              }
             },
             "_row_num": 115,
             "__rowNum__": 114,
@@ -5053,8 +5708,12 @@
             "type": "note",
             "name": "Total_PCV10_Dose2",
             "display": {
-              "text": "{{calculates.Total_PCV10_Dose2}}",
-              "title": "Total_PCV10_Dose2"
+              "prompt": {
+                "text": "{{calculates.Total_PCV10_Dose2}}"
+              },
+              "title": {
+                "text": "Total_PCV10_Dose2"
+              }
             },
             "_row_num": 116,
             "__rowNum__": 115,
@@ -5067,7 +5726,9 @@
             "type": "integer",
             "name": "PCV10_Dose3_0_11_HealthCenter",
             "display": {
-              "title": "PCV10_Dose3_0_11_HealthCenter"
+              "title": {
+                "text": "PCV10_Dose3_0_11_HealthCenter"
+              }
             },
             "_row_num": 117,
             "__rowNum__": 116,
@@ -5081,7 +5742,9 @@
             "values_list": "one_choice",
             "name": "Pc3_HC_NR_checkbox1",
             "display": {
-              "title": "Pc3_HC_NR_checkbox1"
+              "title": {
+                "text": "Pc3_HC_NR_checkbox1"
+              }
             },
             "_row_num": 118,
             "__rowNum__": 117,
@@ -5094,7 +5757,9 @@
             "type": "integer",
             "name": "PCV10_Dose3_0_11_Outreach",
             "display": {
-              "title": "PCV10_Dose3_0_11_Outreach"
+              "title": {
+                "text": "PCV10_Dose3_0_11_Outreach"
+              }
             },
             "_row_num": 119,
             "__rowNum__": 118,
@@ -5108,7 +5773,9 @@
             "values_list": "one_choice",
             "name": "Pc3_O_NR_checkbox1",
             "display": {
-              "title": "Pc3_O_NR_checkbox1"
+              "title": {
+                "text": "Pc3_O_NR_checkbox1"
+              }
             },
             "_row_num": 120,
             "__rowNum__": 119,
@@ -5121,8 +5788,12 @@
             "type": "note",
             "name": "PCV10_Dose3_0_11_sum",
             "display": {
-              "text": "{{calculates.PCV10_Dose3_0_11_sum}}",
-              "title": "PCV10_Dose3_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.PCV10_Dose3_0_11_sum}}"
+              },
+              "title": {
+                "text": "PCV10_Dose3_0_11_sum"
+              }
             },
             "_row_num": 121,
             "__rowNum__": 120,
@@ -5135,7 +5806,9 @@
             "type": "integer",
             "name": "PCV10_Dose3_12_23_HealthCenter",
             "display": {
-              "title": "PCV10_Dose3_12_23_HealthCenter"
+              "title": {
+                "text": "PCV10_Dose3_12_23_HealthCenter"
+              }
             },
             "_row_num": 122,
             "__rowNum__": 121,
@@ -5149,7 +5822,9 @@
             "values_list": "one_choice",
             "name": "Pc3_HC_NR_checkbox2",
             "display": {
-              "title": "Pc3_HC_NR_checkbox2"
+              "title": {
+                "text": "Pc3_HC_NR_checkbox2"
+              }
             },
             "_row_num": 123,
             "__rowNum__": 122,
@@ -5162,7 +5837,9 @@
             "type": "integer",
             "name": "PCV10_Dose3_12_23_Outreach",
             "display": {
-              "title": "PCV10_Dose3_12_23_Outreach"
+              "title": {
+                "text": "PCV10_Dose3_12_23_Outreach"
+              }
             },
             "_row_num": 124,
             "__rowNum__": 123,
@@ -5176,7 +5853,9 @@
             "values_list": "one_choice",
             "name": "Pc3_O_NR_checkbox2",
             "display": {
-              "title": "Pc3_O_NR_checkbox2"
+              "title": {
+                "text": "Pc3_O_NR_checkbox2"
+              }
             },
             "_row_num": 125,
             "__rowNum__": 124,
@@ -5189,8 +5868,12 @@
             "type": "note",
             "name": "PCV10_Dose3_12_23_sum",
             "display": {
-              "text": "{{calculates.PCV10_Dose3_12_23_sum}}",
-              "title": "PCV10_Dose3_12_23_sum"
+              "prompt": {
+                "text": "{{calculates.PCV10_Dose3_12_23_sum}}"
+              },
+              "title": {
+                "text": "PCV10_Dose3_12_23_sum"
+              }
             },
             "_row_num": 126,
             "__rowNum__": 125,
@@ -5203,8 +5886,12 @@
             "type": "note",
             "name": "Total_PCV10_Dose3",
             "display": {
-              "text": "{{calculates.Total_PCV10_Dose3}}",
-              "title": "Total_PCV10_Dose3"
+              "prompt": {
+                "text": "{{calculates.Total_PCV10_Dose3}}"
+              },
+              "title": {
+                "text": "Total_PCV10_Dose3"
+              }
             },
             "_row_num": 127,
             "__rowNum__": 126,
@@ -5218,7 +5905,9 @@
             "values_list": "one_choice",
             "name": "PCV_OpenedVials",
             "display": {
-              "title": "PCV_OpenedVials"
+              "title": {
+                "text": "PCV_OpenedVials"
+              }
             },
             "_row_num": 128,
             "__rowNum__": 127,
@@ -5232,7 +5921,9 @@
             "values_list": "one_choice",
             "name": "PCV_OV_NR_checkbox",
             "display": {
-              "title": "PCV_OV_NR_checkbox"
+              "title": {
+                "text": "PCV_OV_NR_checkbox"
+              }
             },
             "_row_num": 129,
             "__rowNum__": 128,
@@ -5245,7 +5936,9 @@
             "type": "integer",
             "name": "Measles_0_11_HealthCenter",
             "display": {
-              "title": "Measles_0_11_HealthCenter"
+              "title": {
+                "text": "Measles_0_11_HealthCenter"
+              }
             },
             "_row_num": 130,
             "__rowNum__": 129,
@@ -5259,7 +5952,9 @@
             "values_list": "one_choice",
             "name": "Measles_HC_NR_checkbox1",
             "display": {
-              "title": "Measles_HC_NR_checkbox1"
+              "title": {
+                "text": "Measles_HC_NR_checkbox1"
+              }
             },
             "_row_num": 131,
             "__rowNum__": 130,
@@ -5272,7 +5967,9 @@
             "type": "integer",
             "name": "Measles_0_11_Outreach",
             "display": {
-              "title": "Measles_0_11_Outreach"
+              "title": {
+                "text": "Measles_0_11_Outreach"
+              }
             },
             "_row_num": 132,
             "__rowNum__": 131,
@@ -5286,7 +5983,9 @@
             "values_list": "one_choice",
             "name": "Measles_O_NR_checkbox1",
             "display": {
-              "title": "Measles_O_NR_checkbox1"
+              "title": {
+                "text": "Measles_O_NR_checkbox1"
+              }
             },
             "_row_num": 133,
             "__rowNum__": 132,
@@ -5299,8 +5998,12 @@
             "type": "note",
             "name": "Measles_0_11_sum",
             "display": {
-              "text": "{{calculates.Measles_0_11_sum}}",
-              "title": "Measles_0_11_sum"
+              "prompt": {
+                "text": "{{calculates.Measles_0_11_sum}}"
+              },
+              "title": {
+                "text": "Measles_0_11_sum"
+              }
             },
             "_row_num": 134,
             "__rowNum__": 133,
@@ -5313,7 +6016,9 @@
             "type": "integer",
             "name": "Measles_12_23_HealthCenter",
             "display": {
-              "title": "Measles_12_23_HealthCenter"
+              "title": {
+                "text": "Measles_12_23_HealthCenter"
+              }
             },
             "_row_num": 135,
             "__rowNum__": 134,
@@ -5327,7 +6032,9 @@
             "values_list": "one_choice",
             "name": "Measles_HC_NR_checkbox2",
             "display": {
-              "title": "Measles_HC_NR_checkbox2"
+              "title": {
+                "text": "Measles_HC_NR_checkbox2"
+              }
             },
             "_row_num": 136,
             "__rowNum__": 135,
@@ -5340,7 +6047,9 @@
             "type": "integer",
             "name": "Measles_12_23_Outreach",
             "display": {
-              "title": "Measles_12_23_Outreach"
+              "title": {
+                "text": "Measles_12_23_Outreach"
+              }
             },
             "_row_num": 137,
             "__rowNum__": 136,
@@ -5354,7 +6063,9 @@
             "values_list": "one_choice",
             "name": "Measles_O_NR_checkbox2",
             "display": {
-              "title": "Measles_O_NR_checkbox2"
+              "title": {
+                "text": "Measles_O_NR_checkbox2"
+              }
             },
             "_row_num": 138,
             "__rowNum__": 137,
@@ -5367,8 +6078,12 @@
             "type": "note",
             "name": "Measles_12_23_sum",
             "display": {
-              "text": "{{calculates.Measles_12_23_sum}}",
-              "title": "Measles_12_23_sum"
+              "prompt": {
+                "text": "{{calculates.Measles_12_23_sum}}"
+              },
+              "title": {
+                "text": "Measles_12_23_sum"
+              }
             },
             "_row_num": 139,
             "__rowNum__": 138,
@@ -5381,8 +6096,12 @@
             "type": "note",
             "name": "Total_Measles",
             "display": {
-              "text": "{{calculates.Total_Measles}}",
-              "title": "Total_Measles"
+              "prompt": {
+                "text": "{{calculates.Total_Measles}}"
+              },
+              "title": {
+                "text": "Total_Measles"
+              }
             },
             "_row_num": 140,
             "__rowNum__": 139,
@@ -5395,7 +6114,9 @@
             "type": "integer",
             "name": "Measles_OpenedVials",
             "display": {
-              "title": "Measles_OpenedVials"
+              "title": {
+                "text": "Measles_OpenedVials"
+              }
             },
             "_row_num": 141,
             "__rowNum__": 140,
@@ -5409,7 +6130,9 @@
             "values_list": "one_choice",
             "name": "Measles_OV_NR_checkbox",
             "display": {
-              "title": "Measles_OV_NR_checkbox"
+              "title": {
+                "text": "Measles_OV_NR_checkbox"
+              }
             },
             "_row_num": 142,
             "__rowNum__": 141,
@@ -5505,7 +6228,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Child Coverage"
+              "title": {
+                "text": "Child Coverage"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -9346,7 +10071,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Child Coverage\""
+        "_value": "{\"text\":\"Child Coverage\"}"
       }
     ]
   }

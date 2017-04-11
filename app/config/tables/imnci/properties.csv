@@ -58,4 +58,4 @@ Column,zinc_type,displayChoicesList,object,"[{""choice_list_name"":""tablet_syru
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,imnci
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""default"":""IMNCI"",""hindi"":""IMNCI""}"
+Table,default,displayName,object,"{""text"":{""default"":""IMNCI"",""hindi"":""IMNCI""}}"

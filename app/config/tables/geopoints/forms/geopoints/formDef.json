@@ -5,8 +5,12 @@
         "type": "integer",
         "name": "client_id",
         "display": {
-          "text": "Client ID",
-          "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+          "prompt": {
+            "text": "Client ID"
+          },
+          "hint": {
+            "text": "5 Digit ID, cannot include 0. \nex: 12345"
+          }
         },
         "required": true,
         "_row_num": 2
@@ -15,7 +19,9 @@
         "type": "text",
         "name": "step",
         "display": {
-          "text": "Step:"
+          "prompt": {
+            "text": "Step:"
+          }
         },
         "required": true,
         "_row_num": 3
@@ -25,7 +31,9 @@
         "values_list": "transportation",
         "name": "transportation_mode",
         "display": {
-          "text": "Mode of Transportation"
+          "prompt": {
+            "text": "Mode of Transportation"
+          }
         },
         "_row_num": 4
       },
@@ -38,7 +46,9 @@
         "type": "text",
         "name": "transportation_mode_other",
         "display": {
-          "text": "Specify other mode of transportation."
+          "prompt": {
+            "text": "Specify other mode of transportation."
+          }
         },
         "_row_num": 6
       },
@@ -50,7 +60,9 @@
         "type": "text",
         "name": "description",
         "display": {
-          "text": "Description of waypoint:"
+          "prompt": {
+            "text": "Description of waypoint:"
+          }
         },
         "_row_num": 8
       },
@@ -58,7 +70,9 @@
         "type": "geopoint",
         "name": "coordinates",
         "display": {
-          "text": "Record your location:"
+          "prompt": {
+            "text": "Record your location:"
+          }
         },
         "_row_num": 9
       }
@@ -177,7 +191,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Home Locator"
+          "title": {
+            "text": "Home Locator"
+          }
         },
         "_row_num": 4
       },
@@ -201,10 +217,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -220,7 +233,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Home Locator"
+          "title": {
+            "text": "Home Locator"
+          }
         },
         "_row_num": 4
       },
@@ -234,7 +249,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -249,7 +264,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Home Locator"
+          "title": {
+            "text": "Home Locator"
+          }
         },
         "_row_num": 4
       }
@@ -305,6 +322,26 @@
           "_row_num": 7
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
     },
     "queries": {},
     "calculates": {},
@@ -404,8 +441,12 @@
             "type": "integer",
             "name": "client_id",
             "display": {
-              "text": "Client ID",
-              "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+              "prompt": {
+                "text": "Client ID"
+              },
+              "hint": {
+                "text": "5 Digit ID, cannot include 0. \nex: 12345"
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -419,7 +460,9 @@
             "type": "text",
             "name": "step",
             "display": {
-              "text": "Step:"
+              "prompt": {
+                "text": "Step:"
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -434,7 +477,9 @@
             "values_list": "transportation",
             "name": "transportation_mode",
             "display": {
-              "text": "Mode of Transportation"
+              "prompt": {
+                "text": "Mode of Transportation"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -447,7 +492,9 @@
             "type": "text",
             "name": "transportation_mode_other",
             "display": {
-              "text": "Specify other mode of transportation."
+              "prompt": {
+                "text": "Specify other mode of transportation."
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -460,7 +507,9 @@
             "type": "text",
             "name": "description",
             "display": {
-              "text": "Description of waypoint:"
+              "prompt": {
+                "text": "Description of waypoint:"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -473,7 +522,9 @@
             "type": "geopoint",
             "name": "coordinates",
             "display": {
-              "text": "Record your location:"
+              "prompt": {
+                "text": "Record your location:"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -621,7 +672,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Home Locator"
+              "title": {
+                "text": "Home Locator"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1045,7 +1098,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Home Locator\""
+        "_value": "{\"text\":\"Home Locator\"}"
       },
       {
         "_partition": "Table",

@@ -29,7 +29,6 @@ requirejs.config({
         // directory paths for resources
         img : 'img',
         templates : 'survey/templates',
-        translations : 'js/../../config/assets/framework/translations',
         // top-level objects
         screenTypes : 'survey/js/screenTypes',
         promptTypes : 'survey/js/promptTypes',

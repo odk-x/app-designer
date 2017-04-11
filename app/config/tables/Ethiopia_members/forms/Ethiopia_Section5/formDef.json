@@ -8,7 +8,9 @@
       {
         "type": "finalize",
         "display": {
-          "text": "Save Form"
+          "prompt": {
+            "text": "Save Form"
+          }
         },
         "_row_num": 3
       }
@@ -20,7 +22,9 @@
         "values_list": "smoker_type",
         "name": "is_smoker",
         "display": {
-          "text": "Does {{data.name}} smoke or has {{data.name}} smoked tobacco or other substances?"
+          "prompt": {
+            "text": "Does {{data.name}} smoke or has {{data.name}} smoked tobacco or other substances?"
+          }
         },
         "_row_num": 2
       },
@@ -33,8 +37,12 @@
         "type": "integer",
         "name": "smoked_years_ago",
         "display": {
-          "text": "How long ago did {{data.name}} quit smoking?",
-          "hint": "Year"
+          "prompt": {
+            "text": "How long ago did {{data.name}} quit smoking?"
+          },
+          "hint": {
+            "text": "Year"
+          }
         },
         "_row_num": 4
       },
@@ -42,8 +50,12 @@
         "type": "integer",
         "name": "began_smoke_age",
         "display": {
-          "text": "How old was {{data.name}} when s/he began smoking?",
-          "hint": "Age"
+          "prompt": {
+            "text": "How old was {{data.name}} when s/he began smoking?"
+          },
+          "hint": {
+            "text": "Age"
+          }
         },
         "_row_num": 5
       },
@@ -60,7 +72,9 @@
         "type": "integer",
         "name": "number_cigarettes",
         "display": {
-          "text": "What is the typical number of cigarette {{data.name}} smokes in a day?"
+          "prompt": {
+            "text": "What is the typical number of cigarette {{data.name}} smokes in a day?"
+          }
         },
         "_row_num": 8
       },
@@ -69,7 +83,9 @@
         "values_list": "smokes_frequency",
         "name": "smokes_in_house",
         "display": {
-          "text": "Does {{data.name}} smoke inside the house?"
+          "prompt": {
+            "text": "Does {{data.name}} smoke inside the house?"
+          }
         },
         "_row_num": 9
       },
@@ -155,7 +171,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 5"
+          "title": {
+            "text": "Section 5"
+          }
         },
         "_row_num": 5
       },
@@ -513,10 +531,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -537,7 +552,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 5"
+          "title": {
+            "text": "Section 5"
+          }
         },
         "_row_num": 5
       },
@@ -551,7 +568,7 @@
         "_row_num": 5,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -566,7 +583,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 5"
+          "title": {
+            "text": "Section 5"
+          }
         },
         "_row_num": 5
       }
@@ -1337,14 +1356,18 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 5"
+              "title": {
+                "text": "Section 5"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "type": "finalize",
             "display": {
-              "text": "Save Form"
+              "prompt": {
+                "text": "Save Form"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1446,7 +1469,9 @@
             "values_list": "smoker_type",
             "name": "is_smoker",
             "display": {
-              "text": "Does {{data.name}} smoke or has {{data.name}} smoked tobacco or other substances?"
+              "prompt": {
+                "text": "Does {{data.name}} smoke or has {{data.name}} smoked tobacco or other substances?"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -1459,8 +1484,12 @@
             "type": "integer",
             "name": "smoked_years_ago",
             "display": {
-              "text": "How long ago did {{data.name}} quit smoking?",
-              "hint": "Year"
+              "prompt": {
+                "text": "How long ago did {{data.name}} quit smoking?"
+              },
+              "hint": {
+                "text": "Year"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -1473,8 +1502,12 @@
             "type": "integer",
             "name": "began_smoke_age",
             "display": {
-              "text": "How old was {{data.name}} when s/he began smoking?",
-              "hint": "Age"
+              "prompt": {
+                "text": "How old was {{data.name}} when s/he began smoking?"
+              },
+              "hint": {
+                "text": "Age"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -1487,7 +1520,9 @@
             "type": "integer",
             "name": "number_cigarettes",
             "display": {
-              "text": "What is the typical number of cigarette {{data.name}} smokes in a day?"
+              "prompt": {
+                "text": "What is the typical number of cigarette {{data.name}} smokes in a day?"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -1501,7 +1536,9 @@
             "values_list": "smokes_frequency",
             "name": "smokes_in_house",
             "display": {
-              "text": "Does {{data.name}} smoke inside the house?"
+              "prompt": {
+                "text": "Does {{data.name}} smoke inside the house?"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,

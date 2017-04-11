@@ -5,7 +5,9 @@
         "type": "signature",
         "name": "hancock",
         "display": {
-          "text": "Can I have your autograph?"
+          "prompt": {
+            "text": "Can I have your autograph?"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "image",
         "name": "picture",
         "display": {
-          "text": "Does the image still work?"
+          "prompt": {
+            "text": "Does the image still work?"
+          }
         },
         "_row_num": 3
       }
@@ -32,7 +36,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Sign"
+          "title": {
+            "text": "Sign"
+          }
         },
         "_row_num": 4
       },
@@ -56,10 +62,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -75,7 +78,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Sign"
+          "title": {
+            "text": "Sign"
+          }
         },
         "_row_num": 4
       },
@@ -89,7 +94,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -104,12 +109,34 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Sign"
+          "title": {
+            "text": "Sign"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -176,7 +203,9 @@
             "type": "signature",
             "name": "hancock",
             "display": {
-              "text": "Can I have your autograph?"
+              "prompt": {
+                "text": "Can I have your autograph?"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -189,7 +218,9 @@
             "type": "image",
             "name": "picture",
             "display": {
-              "text": "Does the image still work?"
+              "prompt": {
+                "text": "Does the image still work?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -280,7 +311,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Sign"
+              "title": {
+                "text": "Sign"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -655,7 +688,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Sign\""
+        "_value": "{\"text\":\"Sign\"}"
       }
     ]
   }

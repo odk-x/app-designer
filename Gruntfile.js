@@ -175,7 +175,12 @@ module.exports = function (grunt) {
                 cmd: function(str) {
                     return 'adb shell ' + str;
                 }
-            }
+            },
+			macGenConvert: {
+				cmd: function(str, formDefFile) {
+					return 'node macGenConverter.js ' + str + ' > ' + formDefFile; 
+				}
+			}
         },
 
         tables: tablesConfig,
@@ -302,6 +307,44 @@ module.exports = function (grunt) {
             grunt.log.writeln('adb pull ' + src + ' ' + dest);
             grunt.task.run('exec:adbpull:' + src + ':' + dest);
         });
+
+
+    grunt.registerTask(
+        'xlsx-convert-all',
+        'Run the XLSX converter on all form definitions',
+        function() {
+			var platform = require('os').platform();
+			var isWindows = (platform.search('win') >= 0 &&
+                             platform.search('darwin') < 0);
+							 
+            var dirs = grunt.file.expand(
+                {filter: function(path) {
+ 						if ( !path.endsWith(".xlsx") ) {
+							return false;
+						}
+						var cells = path.split((isWindows ? "\\" : "/"));
+						return (cells.length >= 6) &&
+						  ( cells[cells.length-1] === cells[cells.length-2] + ".xlsx" ); 
+					},
+                 cwd: 'app' },
+				'**/*.xlsx'
+				);
+
+            // Now run these files through macGenConvert.js
+            dirs.forEach(function(fileName) {
+				// fileName uses forward slashes on all platforms
+				var xlsFile;
+				var formDefFile;
+				var cells;
+				xlsFile = 'app/' + fileName;
+				cells = xlsFile.split('/');
+				cells[cells.length-1] = 'formDef.json';
+				formDefFile = cells.join('/');
+                grunt.log.writeln('macGenConvert: ' + xlsFile + ' > ' + formDefFile);
+				grunt.task.run('exec:macGenConvert:' + xlsFile + ':' + formDefFile);
+            });
+        });
+
 
 
     grunt.registerTask(

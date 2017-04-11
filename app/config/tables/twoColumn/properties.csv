@@ -5,4 +5,4 @@ Column,visited_seattle,displayChoicesList,object,"[{""choice_list_name"":""yesno
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,twoColumn
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Two Column Form"""
+Table,default,displayName,object,"{""text"":""Two Column Form""}"

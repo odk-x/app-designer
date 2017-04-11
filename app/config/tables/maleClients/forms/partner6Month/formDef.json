@@ -5,7 +5,9 @@
         "type": "text",
         "name": "interviewerw_init",
         "display": {
-          "text": "Enter Interviewer Initials"
+          "prompt": {
+            "text": "Enter Interviewer Initials"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "integer",
         "name": "interviewer_id",
         "display": {
-          "text": "Enter Interviewer ID Number"
+          "prompt": {
+            "text": "Enter Interviewer ID Number"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "date",
         "name": "date",
         "display": {
-          "text": "Date of Interview"
+          "prompt": {
+            "text": "Date of Interview"
+          }
         },
         "_row_num": 4
       },
@@ -29,8 +35,12 @@
         "type": "integer",
         "name": "client_id",
         "display": {
-          "text": "Enter female partner's Client ID.",
-          "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+          "prompt": {
+            "text": "Enter female partner's Client ID."
+          },
+          "hint": {
+            "text": "5 Digit ID, cannot include 0. \nex: 12345"
+          }
         },
         "required": true,
         "_row_num": 5
@@ -40,8 +50,12 @@
         "values_list": "prev_hiv_status",
         "name": "hiv_status",
         "display": {
-          "text": "What is the client’s HIV status from previous study HIV testing?",
-          "hint": "Refer to patient information"
+          "prompt": {
+            "text": "What is the client’s HIV status from previous study HIV testing?"
+          },
+          "hint": {
+            "text": "Refer to patient information"
+          }
         },
         "_row_num": 6
       },
@@ -50,7 +64,9 @@
         "values_list": "rapid",
         "name": "pretest",
         "display": {
-          "text": "Please do pre-test counseling and draw blood from client for rapid test."
+          "prompt": {
+            "text": "Please do pre-test counseling and draw blood from client for rapid test."
+          }
         },
         "_row_num": 7
       },
@@ -58,7 +74,9 @@
         "type": "note",
         "name": "script1",
         "display": {
-          "text": "Script 1: I will now ask about your current relationship status."
+          "prompt": {
+            "text": "Script 1: I will now ask about your current relationship status."
+          }
         },
         "_row_num": 8
       },
@@ -67,7 +85,9 @@
         "values_list": "yes_no",
         "name": "still_relationship",
         "display": {
-          "text": "Are you still in a relationship with the woman who enrolled in this study during pregnancy?"
+          "prompt": {
+            "text": "Are you still in a relationship with the woman who enrolled in this study during pregnancy?"
+          }
         },
         "_row_num": 9
       },
@@ -75,7 +95,9 @@
         "type": "note",
         "name": "script2",
         "display": {
-          "text": "Script 2 : Now I will ask you questions about the number of children you would like to have."
+          "prompt": {
+            "text": "Script 2 : Now I will ask you questions about the number of children you would like to have."
+          }
         },
         "_row_num": 10
       },
@@ -84,7 +106,9 @@
         "values_list": "wanted_pregnancy_time",
         "name": "preg_want_children",
         "display": {
-          "text": "At the time your wife/partner became pregnant, did you want her to become pregnant, did you want her to wait until later, or did you not want any (more) children at all?"
+          "prompt": {
+            "text": "At the time your wife/partner became pregnant, did you want her to become pregnant, did you want her to wait until later, or did you not want any (more) children at all?"
+          }
         },
         "_row_num": 11
       },
@@ -93,7 +117,9 @@
         "values_list": "want_more_children",
         "name": "more_children",
         "display": {
-          "text": "Would you like to have more children?"
+          "prompt": {
+            "text": "Would you like to have more children?"
+          }
         },
         "_row_num": 12
       },
@@ -102,7 +128,9 @@
         "values_list": "partner_wants_children",
         "name": "partner_want_children",
         "display": {
-          "text": "Do you think that your wife/partner wants the same number of children that you want, or does she want more or fewer than you want?"
+          "prompt": {
+            "text": "Do you think that your wife/partner wants the same number of children that you want, or does she want more or fewer than you want?"
+          }
         },
         "_row_num": 13
       },
@@ -111,8 +139,12 @@
         "values_list": "influences_having_children",
         "name": "influences",
         "display": {
-          "text": "Who has the most influence on decisions about the timing and number of children you will have?",
-          "hint": "Review options with client and choose one."
+          "prompt": {
+            "text": "Who has the most influence on decisions about the timing and number of children you will have?"
+          },
+          "hint": {
+            "text": "Review options with client and choose one."
+          }
         },
         "_row_num": 14
       },
@@ -125,7 +157,9 @@
         "type": "text",
         "name": "influences_other",
         "display": {
-          "text": "Specify other influence."
+          "prompt": {
+            "text": "Specify other influence."
+          }
         },
         "_row_num": 16
       },
@@ -137,7 +171,9 @@
         "type": "note",
         "name": "script3",
         "display": {
-          "text": "Script 3: Now I would like to talk about your HIV test results."
+          "prompt": {
+            "text": "Script 3: Now I would like to talk about your HIV test results."
+          }
         },
         "_row_num": 18
       },
@@ -146,7 +182,9 @@
         "values_list": "hiv_test_results",
         "name": "test_result",
         "display": {
-          "text": "What was the result of your most recent HIV test?"
+          "prompt": {
+            "text": "What was the result of your most recent HIV test?"
+          }
         },
         "_row_num": 19
       },
@@ -155,7 +193,9 @@
         "values_list": "yes_no_ns",
         "name": "ccc",
         "display": {
-          "text": "Have you ever enrolled or registered into a HIV comprehensive care clinic (CCC)?"
+          "prompt": {
+            "text": "Have you ever enrolled or registered into a HIV comprehensive care clinic (CCC)?"
+          }
         },
         "_row_num": 20
       },
@@ -164,7 +204,9 @@
         "values_list": "yes_no_nr",
         "name": "prescr_tmp",
         "display": {
-          "text": "Have you been prescribed TMP-SMX (Cotrimoxazole)?"
+          "prompt": {
+            "text": "Have you been prescribed TMP-SMX (Cotrimoxazole)?"
+          }
         },
         "_row_num": 21
       },
@@ -173,7 +215,9 @@
         "values_list": "yes_no_nr",
         "name": "curr_tmp",
         "display": {
-          "text": "Are you currently taking TMP-SMX?"
+          "prompt": {
+            "text": "Are you currently taking TMP-SMX?"
+          }
         },
         "_row_num": 22
       },
@@ -182,7 +226,9 @@
         "values_list": "yes_no_nr",
         "name": "prescr_art",
         "display": {
-          "text": "Have you been prescribed ART to manage your HIV infection?"
+          "prompt": {
+            "text": "Have you been prescribed ART to manage your HIV infection?"
+          }
         },
         "_row_num": 23
       },
@@ -191,7 +237,9 @@
         "values_list": "yes_no_nr",
         "name": "curr_taking_art",
         "display": {
-          "text": "Are you currently taking the treatment you were prescribed?"
+          "prompt": {
+            "text": "Are you currently taking the treatment you were prescribed?"
+          }
         },
         "_row_num": 24
       },
@@ -199,7 +247,9 @@
         "type": "note",
         "name": "script4",
         "display": {
-          "text": "Script 4: Thank you for your time in answering these questions."
+          "prompt": {
+            "text": "Script 4: Thank you for your time in answering these questions."
+          }
         },
         "_row_num": 25
       },
@@ -207,8 +257,12 @@
         "type": "note",
         "name": "hiv_testing_script",
         "display": {
-          "text": "Now we will do the post-test counseling for the HIV test.",
-          "hint": "The interviewer will record the HIV test results and provide post-test counsel for client concerning the results."
+          "prompt": {
+            "text": "Now we will do the post-test counseling for the HIV test."
+          },
+          "hint": {
+            "text": "The interviewer will record the HIV test results and provide post-test counsel for client concerning the results."
+          }
         },
         "_row_num": 26
       },
@@ -217,7 +271,9 @@
         "values_list": "hiv_status",
         "name": "determine",
         "display": {
-          "text": "HIV – 1st Test Result (Rapid Test—Determine)"
+          "prompt": {
+            "text": "HIV – 1st Test Result (Rapid Test—Determine)"
+          }
         },
         "_row_num": 27
       },
@@ -226,7 +282,9 @@
         "values_list": "pretest",
         "name": "advise_second",
         "display": {
-          "text": "Please advise client a second test is needed."
+          "prompt": {
+            "text": "Please advise client a second test is needed."
+          }
         },
         "required": true,
         "_row_num": 28
@@ -241,7 +299,9 @@
         "values_list": "hiv_status",
         "name": "unigold",
         "display": {
-          "text": "HIV – 2nd Test Result (Rapid Test—Unigold)"
+          "prompt": {
+            "text": "HIV – 2nd Test Result (Rapid Test—Unigold)"
+          }
         },
         "_row_num": 30
       },
@@ -259,7 +319,9 @@
         "type": "note",
         "name": "pos",
         "display": {
-          "text": "Client's HIV status is: HIV positive"
+          "prompt": {
+            "text": "Client's HIV status is: HIV positive"
+          }
         },
         "_row_num": 33
       },
@@ -276,7 +338,9 @@
         "type": "note",
         "name": "neg",
         "display": {
-          "text": "Client's HIV status is: HIV negative"
+          "prompt": {
+            "text": "Client's HIV status is: HIV negative"
+          }
         },
         "_row_num": 36
       },
@@ -292,7 +356,9 @@
         "type": "note",
         "name": "inconclusive",
         "display": {
-          "text": "Client's HIV status is: Inconclusive, requires ELISA testing"
+          "prompt": {
+            "text": "Client's HIV status is: Inconclusive, requires ELISA testing"
+          }
         },
         "_row_num": 39
       },
@@ -301,8 +367,12 @@
         "values_list": "yes_no",
         "name": "elisa_blood_drawn",
         "display": {
-          "text": "Was blood drawn from client for ELISA?",
-          "hint": "If instructed to perform ELISA"
+          "prompt": {
+            "text": "Was blood drawn from client for ELISA?"
+          },
+          "hint": {
+            "text": "If instructed to perform ELISA"
+          }
         },
         "_row_num": 40
       },
@@ -319,7 +389,9 @@
         "values_list": "discordant",
         "name": "discordant",
         "display": {
-          "text": "Is the couple discordant?"
+          "prompt": {
+            "text": "Is the couple discordant?"
+          }
         },
         "_row_num": 43
       },
@@ -328,7 +400,9 @@
         "values_list": "yes_no",
         "name": "return_disc_retest",
         "display": {
-          "text": "Was a return visit scheduled for discordant re-testing?"
+          "prompt": {
+            "text": "Was a return visit scheduled for discordant re-testing?"
+          }
         },
         "_row_num": 44
       },
@@ -336,7 +410,9 @@
         "type": "text",
         "name": "comments",
         "display": {
-          "text": "Interviewer comments:"
+          "prompt": {
+            "text": "Interviewer comments:"
+          }
         },
         "_row_num": 45
       },
@@ -344,7 +420,9 @@
         "type": "note",
         "name": "survey_end",
         "display": {
-          "text": "The screening is now complete, please go to the next page to finalize your responses."
+          "prompt": {
+            "text": "The screening is now complete, please go to the next page to finalize your responses."
+          }
         },
         "_row_num": 46
       }
@@ -4149,7 +4227,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Male 6 Month Form"
+          "title": {
+            "text": "Male 6 Month Form"
+          }
         },
         "_row_num": 4
       },
@@ -4173,10 +4253,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -4192,7 +4269,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Male 6 Month Form"
+          "title": {
+            "text": "Male 6 Month Form"
+          }
         },
         "_row_num": 4
       },
@@ -4206,7 +4285,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -4221,7 +4300,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Male 6 Month Form"
+          "title": {
+            "text": "Male 6 Month Form"
+          }
         },
         "_row_num": 4
       }
@@ -8342,7 +8423,9 @@
             "type": "text",
             "name": "interviewerw_init",
             "display": {
-              "text": "Enter Interviewer Initials"
+              "prompt": {
+                "text": "Enter Interviewer Initials"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -8355,7 +8438,9 @@
             "type": "integer",
             "name": "interviewer_id",
             "display": {
-              "text": "Enter Interviewer ID Number"
+              "prompt": {
+                "text": "Enter Interviewer ID Number"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -8368,7 +8453,9 @@
             "type": "date",
             "name": "date",
             "display": {
-              "text": "Date of Interview"
+              "prompt": {
+                "text": "Date of Interview"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -8381,8 +8468,12 @@
             "type": "integer",
             "name": "client_id",
             "display": {
-              "text": "Enter female partner's Client ID.",
-              "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+              "prompt": {
+                "text": "Enter female partner's Client ID."
+              },
+              "hint": {
+                "text": "5 Digit ID, cannot include 0. \nex: 12345"
+              }
             },
             "required": true,
             "_row_num": 5,
@@ -8397,8 +8488,12 @@
             "values_list": "prev_hiv_status",
             "name": "hiv_status",
             "display": {
-              "text": "What is the client’s HIV status from previous study HIV testing?",
-              "hint": "Refer to patient information"
+              "prompt": {
+                "text": "What is the client’s HIV status from previous study HIV testing?"
+              },
+              "hint": {
+                "text": "Refer to patient information"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -8412,7 +8507,9 @@
             "values_list": "rapid",
             "name": "pretest",
             "display": {
-              "text": "Please do pre-test counseling and draw blood from client for rapid test."
+              "prompt": {
+                "text": "Please do pre-test counseling and draw blood from client for rapid test."
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -8425,7 +8522,9 @@
             "type": "note",
             "name": "script1",
             "display": {
-              "text": "Script 1: I will now ask about your current relationship status."
+              "prompt": {
+                "text": "Script 1: I will now ask about your current relationship status."
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -8439,7 +8538,9 @@
             "values_list": "yes_no",
             "name": "still_relationship",
             "display": {
-              "text": "Are you still in a relationship with the woman who enrolled in this study during pregnancy?"
+              "prompt": {
+                "text": "Are you still in a relationship with the woman who enrolled in this study during pregnancy?"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -8452,7 +8553,9 @@
             "type": "note",
             "name": "script2",
             "display": {
-              "text": "Script 2 : Now I will ask you questions about the number of children you would like to have."
+              "prompt": {
+                "text": "Script 2 : Now I will ask you questions about the number of children you would like to have."
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -8466,7 +8569,9 @@
             "values_list": "wanted_pregnancy_time",
             "name": "preg_want_children",
             "display": {
-              "text": "At the time your wife/partner became pregnant, did you want her to become pregnant, did you want her to wait until later, or did you not want any (more) children at all?"
+              "prompt": {
+                "text": "At the time your wife/partner became pregnant, did you want her to become pregnant, did you want her to wait until later, or did you not want any (more) children at all?"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -8480,7 +8585,9 @@
             "values_list": "want_more_children",
             "name": "more_children",
             "display": {
-              "text": "Would you like to have more children?"
+              "prompt": {
+                "text": "Would you like to have more children?"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -8494,7 +8601,9 @@
             "values_list": "partner_wants_children",
             "name": "partner_want_children",
             "display": {
-              "text": "Do you think that your wife/partner wants the same number of children that you want, or does she want more or fewer than you want?"
+              "prompt": {
+                "text": "Do you think that your wife/partner wants the same number of children that you want, or does she want more or fewer than you want?"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -8508,8 +8617,12 @@
             "values_list": "influences_having_children",
             "name": "influences",
             "display": {
-              "text": "Who has the most influence on decisions about the timing and number of children you will have?",
-              "hint": "Review options with client and choose one."
+              "prompt": {
+                "text": "Who has the most influence on decisions about the timing and number of children you will have?"
+              },
+              "hint": {
+                "text": "Review options with client and choose one."
+              }
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -8522,7 +8635,9 @@
             "type": "text",
             "name": "influences_other",
             "display": {
-              "text": "Specify other influence."
+              "prompt": {
+                "text": "Specify other influence."
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -8535,7 +8650,9 @@
             "type": "note",
             "name": "script3",
             "display": {
-              "text": "Script 3: Now I would like to talk about your HIV test results."
+              "prompt": {
+                "text": "Script 3: Now I would like to talk about your HIV test results."
+              }
             },
             "_row_num": 18,
             "__rowNum__": 17,
@@ -8549,7 +8666,9 @@
             "values_list": "hiv_test_results",
             "name": "test_result",
             "display": {
-              "text": "What was the result of your most recent HIV test?"
+              "prompt": {
+                "text": "What was the result of your most recent HIV test?"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -8563,7 +8682,9 @@
             "values_list": "yes_no_ns",
             "name": "ccc",
             "display": {
-              "text": "Have you ever enrolled or registered into a HIV comprehensive care clinic (CCC)?"
+              "prompt": {
+                "text": "Have you ever enrolled or registered into a HIV comprehensive care clinic (CCC)?"
+              }
             },
             "_row_num": 20,
             "__rowNum__": 19,
@@ -8577,7 +8698,9 @@
             "values_list": "yes_no_nr",
             "name": "prescr_tmp",
             "display": {
-              "text": "Have you been prescribed TMP-SMX (Cotrimoxazole)?"
+              "prompt": {
+                "text": "Have you been prescribed TMP-SMX (Cotrimoxazole)?"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -8591,7 +8714,9 @@
             "values_list": "yes_no_nr",
             "name": "curr_tmp",
             "display": {
-              "text": "Are you currently taking TMP-SMX?"
+              "prompt": {
+                "text": "Are you currently taking TMP-SMX?"
+              }
             },
             "_row_num": 22,
             "__rowNum__": 21,
@@ -8605,7 +8730,9 @@
             "values_list": "yes_no_nr",
             "name": "prescr_art",
             "display": {
-              "text": "Have you been prescribed ART to manage your HIV infection?"
+              "prompt": {
+                "text": "Have you been prescribed ART to manage your HIV infection?"
+              }
             },
             "_row_num": 23,
             "__rowNum__": 22,
@@ -8619,7 +8746,9 @@
             "values_list": "yes_no_nr",
             "name": "curr_taking_art",
             "display": {
-              "text": "Are you currently taking the treatment you were prescribed?"
+              "prompt": {
+                "text": "Are you currently taking the treatment you were prescribed?"
+              }
             },
             "_row_num": 24,
             "__rowNum__": 23,
@@ -8632,7 +8761,9 @@
             "type": "note",
             "name": "script4",
             "display": {
-              "text": "Script 4: Thank you for your time in answering these questions."
+              "prompt": {
+                "text": "Script 4: Thank you for your time in answering these questions."
+              }
             },
             "_row_num": 25,
             "__rowNum__": 24,
@@ -8645,8 +8776,12 @@
             "type": "note",
             "name": "hiv_testing_script",
             "display": {
-              "text": "Now we will do the post-test counseling for the HIV test.",
-              "hint": "The interviewer will record the HIV test results and provide post-test counsel for client concerning the results."
+              "prompt": {
+                "text": "Now we will do the post-test counseling for the HIV test."
+              },
+              "hint": {
+                "text": "The interviewer will record the HIV test results and provide post-test counsel for client concerning the results."
+              }
             },
             "_row_num": 26,
             "__rowNum__": 25,
@@ -8660,7 +8795,9 @@
             "values_list": "hiv_status",
             "name": "determine",
             "display": {
-              "text": "HIV – 1st Test Result (Rapid Test—Determine)"
+              "prompt": {
+                "text": "HIV – 1st Test Result (Rapid Test—Determine)"
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -8674,7 +8811,9 @@
             "values_list": "pretest",
             "name": "advise_second",
             "display": {
-              "text": "Please advise client a second test is needed."
+              "prompt": {
+                "text": "Please advise client a second test is needed."
+              }
             },
             "required": true,
             "_row_num": 28,
@@ -8689,7 +8828,9 @@
             "values_list": "hiv_status",
             "name": "unigold",
             "display": {
-              "text": "HIV – 2nd Test Result (Rapid Test—Unigold)"
+              "prompt": {
+                "text": "HIV – 2nd Test Result (Rapid Test—Unigold)"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -8702,7 +8843,9 @@
             "type": "note",
             "name": "pos",
             "display": {
-              "text": "Client's HIV status is: HIV positive"
+              "prompt": {
+                "text": "Client's HIV status is: HIV positive"
+              }
             },
             "_row_num": 33,
             "__rowNum__": 32,
@@ -8715,7 +8858,9 @@
             "type": "note",
             "name": "neg",
             "display": {
-              "text": "Client's HIV status is: HIV negative"
+              "prompt": {
+                "text": "Client's HIV status is: HIV negative"
+              }
             },
             "_row_num": 36,
             "__rowNum__": 35,
@@ -8728,7 +8873,9 @@
             "type": "note",
             "name": "inconclusive",
             "display": {
-              "text": "Client's HIV status is: Inconclusive, requires ELISA testing"
+              "prompt": {
+                "text": "Client's HIV status is: Inconclusive, requires ELISA testing"
+              }
             },
             "_row_num": 39,
             "__rowNum__": 38,
@@ -8742,8 +8889,12 @@
             "values_list": "yes_no",
             "name": "elisa_blood_drawn",
             "display": {
-              "text": "Was blood drawn from client for ELISA?",
-              "hint": "If instructed to perform ELISA"
+              "prompt": {
+                "text": "Was blood drawn from client for ELISA?"
+              },
+              "hint": {
+                "text": "If instructed to perform ELISA"
+              }
             },
             "_row_num": 40,
             "__rowNum__": 39,
@@ -8757,7 +8908,9 @@
             "values_list": "discordant",
             "name": "discordant",
             "display": {
-              "text": "Is the couple discordant?"
+              "prompt": {
+                "text": "Is the couple discordant?"
+              }
             },
             "_row_num": 43,
             "__rowNum__": 42,
@@ -8771,7 +8924,9 @@
             "values_list": "yes_no",
             "name": "return_disc_retest",
             "display": {
-              "text": "Was a return visit scheduled for discordant re-testing?"
+              "prompt": {
+                "text": "Was a return visit scheduled for discordant re-testing?"
+              }
             },
             "_row_num": 44,
             "__rowNum__": 43,
@@ -8784,7 +8939,9 @@
             "type": "text",
             "name": "comments",
             "display": {
-              "text": "Interviewer comments:"
+              "prompt": {
+                "text": "Interviewer comments:"
+              }
             },
             "_row_num": 45,
             "__rowNum__": 44,
@@ -8797,7 +8954,9 @@
             "type": "note",
             "name": "survey_end",
             "display": {
-              "text": "The screening is now complete, please go to the next page to finalize your responses."
+              "prompt": {
+                "text": "The screening is now complete, please go to the next page to finalize your responses."
+              }
             },
             "_row_num": 46,
             "__rowNum__": 45,
@@ -9245,7 +9404,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Male 6 Month Form"
+              "title": {
+                "text": "Male 6 Month Form"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },

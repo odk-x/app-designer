@@ -8,7 +8,9 @@
       {
         "type": "finalize",
         "display": {
-          "text": "Save Form"
+          "prompt": {
+            "text": "Save Form"
+          }
         },
         "comment": "goes to the finalize screen instead of just automatically finalizing",
         "_row_num": 3
@@ -21,7 +23,9 @@
         "values_list": "relation_to_house_head",
         "name": "relation",
         "display": {
-          "text": "What is {{data.name}}'s relationship to the household head?"
+          "prompt": {
+            "text": "What is {{data.name}}'s relationship to the household head?"
+          }
         },
         "required": true,
         "_row_num": 2
@@ -31,7 +35,9 @@
         "values_list": "gender",
         "name": "gender",
         "display": {
-          "text": "What is {{data.name}}'s sex?"
+          "prompt": {
+            "text": "What is {{data.name}}'s sex?"
+          }
         },
         "required": true,
         "_row_num": 3
@@ -41,12 +47,18 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "What is {{data.name}}'s age?",
-          "hint": "in years"
+          "prompt": {
+            "text": "What is {{data.name}}'s age?"
+          },
+          "hint": {
+            "text": "in years"
+          },
+          "constraint_message": {
+            "text": "Age cannot be negative"
+          }
         },
         "required": true,
         "constraint": "data('age') >= 0",
-        "constraint_message": "Age cannot be negative",
         "_row_num": 4
       },
       {
@@ -60,7 +72,9 @@
         "values_list": "marital_options",
         "name": "marital_status",
         "display": {
-          "text": "Marital status of {{data.name}}."
+          "prompt": {
+            "text": "Marital status of {{data.name}}."
+          }
         },
         "required": "data('age') >= 15",
         "_row_num": 6
@@ -78,11 +92,17 @@
         "type": "integer",
         "name": "months_away",
         "display": {
-          "text": "For how many months during the last 12 months was {{data.name}} away from the household?",
-          "hint": "0 if never away, or less than two weeks."
+          "prompt": {
+            "text": "For how many months during the last 12 months was {{data.name}} away from the household?"
+          },
+          "hint": {
+            "text": "0 if never away, or less than two weeks."
+          },
+          "constraint_message": {
+            "text": "Answer must be between 0 and 12"
+          }
         },
         "constraint": "data('months_away') >= 0 && data('months_away') <= 12",
-        "constraint_message": "Answer must be between 0 and 12",
         "_row_num": 9
       },
       {
@@ -94,7 +114,9 @@
         "values_list": "regions",
         "name": "region_born",
         "display": {
-          "text": "In what region was {{data.name}} born?"
+          "prompt": {
+            "text": "In what region was {{data.name}} born?"
+          }
         },
         "_row_num": 11
       },
@@ -108,7 +130,9 @@
         "values_list": "religions",
         "name": "religion",
         "display": {
-          "text": "What is {{data.name}}'s main religion?"
+          "prompt": {
+            "text": "What is {{data.name}}'s main religion?"
+          }
         },
         "_row_num": 13
       },
@@ -437,7 +461,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 2"
+          "title": {
+            "text": "Section 2"
+          }
         },
         "_row_num": 4
       },
@@ -795,10 +821,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -814,7 +837,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 2"
+          "title": {
+            "text": "Section 2"
+          }
         },
         "_row_num": 4
       },
@@ -828,7 +853,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -843,7 +868,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 2"
+          "title": {
+            "text": "Section 2"
+          }
         },
         "_row_num": 4
       }
@@ -1879,14 +1906,18 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 2"
+              "title": {
+                "text": "Section 2"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "type": "finalize",
             "display": {
-              "text": "Save Form"
+              "prompt": {
+                "text": "Save Form"
+              }
             },
             "comment": "goes to the finalize screen instead of just automatically finalizing",
             "_row_num": 3,
@@ -1989,7 +2020,9 @@
             "values_list": "relation_to_house_head",
             "name": "relation",
             "display": {
-              "text": "What is {{data.name}}'s relationship to the household head?"
+              "prompt": {
+                "text": "What is {{data.name}}'s relationship to the household head?"
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -2004,7 +2037,9 @@
             "values_list": "gender",
             "name": "gender",
             "display": {
-              "text": "What is {{data.name}}'s sex?"
+              "prompt": {
+                "text": "What is {{data.name}}'s sex?"
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -2019,12 +2054,18 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "What is {{data.name}}'s age?",
-              "hint": "in years"
+              "prompt": {
+                "text": "What is {{data.name}}'s age?"
+              },
+              "hint": {
+                "text": "in years"
+              },
+              "constraint_message": {
+                "text": "Age cannot be negative"
+              }
             },
             "required": true,
             "constraint": "data('age') >= 0",
-            "constraint_message": "Age cannot be negative",
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
@@ -2038,7 +2079,9 @@
             "values_list": "marital_options",
             "name": "marital_status",
             "display": {
-              "text": "Marital status of {{data.name}}."
+              "prompt": {
+                "text": "Marital status of {{data.name}}."
+              }
             },
             "required": "data('age') >= 15",
             "_row_num": 6,
@@ -2052,11 +2095,17 @@
             "type": "integer",
             "name": "months_away",
             "display": {
-              "text": "For how many months during the last 12 months was {{data.name}} away from the household?",
-              "hint": "0 if never away, or less than two weeks."
+              "prompt": {
+                "text": "For how many months during the last 12 months was {{data.name}} away from the household?"
+              },
+              "hint": {
+                "text": "0 if never away, or less than two weeks."
+              },
+              "constraint_message": {
+                "text": "Answer must be between 0 and 12"
+              }
             },
             "constraint": "data('months_away') >= 0 && data('months_away') <= 12",
-            "constraint_message": "Answer must be between 0 and 12",
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
@@ -2069,7 +2118,9 @@
             "values_list": "regions",
             "name": "region_born",
             "display": {
-              "text": "In what region was {{data.name}} born?"
+              "prompt": {
+                "text": "In what region was {{data.name}} born?"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -2083,7 +2134,9 @@
             "values_list": "religions",
             "name": "religion",
             "display": {
-              "text": "What is {{data.name}}'s main religion?"
+              "prompt": {
+                "text": "What is {{data.name}}'s main religion?"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,

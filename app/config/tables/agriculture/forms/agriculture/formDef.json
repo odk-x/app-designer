@@ -37,7 +37,9 @@
         "type": "text",
         "name": "plot_name",
         "display": {
-          "text": "Enter the name of the corn plot:"
+          "prompt": {
+            "text": "Enter the name of the corn plot:"
+          }
         },
         "required": true,
         "_row_num": 8
@@ -51,7 +53,9 @@
         "name": "soil_condition",
         "values_list": "soil_type",
         "display": {
-          "text": "Select the condition of the soil"
+          "prompt": {
+            "text": "Select the condition of the soil"
+          }
         },
         "required": true,
         "_row_num": 10
@@ -82,10 +86,16 @@
         "type": "number",
         "name": "Sample",
         "display": {
-          "title": "Sample",
-          "text": "Enter the height of the plant in inches",
-          "hint": "This will be compared against outliers",
-          "image": "img/weedsfig1.jpg"
+          "title": {
+            "text": "Sample"
+          },
+          "prompt": {
+            "text": "Enter the height of the plant in inches",
+            "image": "img/weedsfig1.jpg"
+          },
+          "hint": {
+            "text": "This will be compared against outliers"
+          }
         },
         "required": true,
         "_row_num": 14
@@ -99,8 +109,12 @@
         "type": "acknowledge",
         "name": "ack_ok",
         "display": {
-          "text": "The height you have entered is an outlier.  Are you certain of this measurement?",
-          "hint": "The value you entered is outside of the range {{data.min_sample}} thru {{data.max_sample}}"
+          "prompt": {
+            "text": "The height you have entered is an outlier.  Are you certain of this measurement?"
+          },
+          "hint": {
+            "text": "The value you entered is outside of the range {{data.min_sample}} thru {{data.max_sample}}"
+          }
         },
         "constraint": "data('ack_ok') || calculates.between_min_max()",
         "_row_num": 16
@@ -141,7 +155,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Agriculture"
+          "title": {
+            "text": "Agriculture"
+          }
         },
         "_row_num": 4
       },
@@ -296,10 +312,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -315,7 +328,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Agriculture"
+          "title": {
+            "text": "Agriculture"
+          }
         },
         "_row_num": 4
       },
@@ -339,7 +354,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -354,7 +369,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Agriculture"
+          "title": {
+            "text": "Agriculture"
+          }
         },
         "_row_num": 4
       }
@@ -394,6 +411,26 @@
           "_row_num": 5
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
     },
     "queries": {
       "min_max": {
@@ -539,7 +576,9 @@
             "type": "text",
             "name": "plot_name",
             "display": {
-              "text": "Enter the name of the corn plot:"
+              "prompt": {
+                "text": "Enter the name of the corn plot:"
+              }
             },
             "required": true,
             "_row_num": 8,
@@ -554,7 +593,9 @@
             "name": "soil_condition",
             "values_list": "soil_type",
             "display": {
-              "text": "Select the condition of the soil"
+              "prompt": {
+                "text": "Select the condition of the soil"
+              }
             },
             "required": true,
             "_row_num": 10,
@@ -596,10 +637,16 @@
             "type": "number",
             "name": "Sample",
             "display": {
-              "title": "Sample",
-              "text": "Enter the height of the plant in inches",
-              "hint": "This will be compared against outliers",
-              "image": "img/weedsfig1.jpg"
+              "title": {
+                "text": "Sample"
+              },
+              "prompt": {
+                "text": "Enter the height of the plant in inches",
+                "image": "img/weedsfig1.jpg"
+              },
+              "hint": {
+                "text": "This will be compared against outliers"
+              }
             },
             "required": true,
             "_row_num": 14,
@@ -613,8 +660,12 @@
             "type": "acknowledge",
             "name": "ack_ok",
             "display": {
-              "text": "The height you have entered is an outlier.  Are you certain of this measurement?",
-              "hint": "The value you entered is outside of the range {{data.min_sample}} thru {{data.max_sample}}"
+              "prompt": {
+                "text": "The height you have entered is an outlier.  Are you certain of this measurement?"
+              },
+              "hint": {
+                "text": "The value you entered is outside of the range {{data.min_sample}} thru {{data.max_sample}}"
+              }
             },
             "constraint": "data('ack_ok') || calculates.between_min_max()",
             "_row_num": 16,
@@ -847,7 +898,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Agriculture"
+              "title": {
+                "text": "Agriculture"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1262,7 +1315,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Agriculture\""
+        "_value": "{\"text\":\"Agriculture\"}"
       }
     ]
   }

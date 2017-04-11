@@ -65,4 +65,4 @@ Column,W2_O_NR_checkbox,displayName,object,"""W2_O_NR_checkbox"""
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,adult_coverage
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Adult Coverage"""
+Table,default,displayName,object,"{""text"":""Adult Coverage""}"

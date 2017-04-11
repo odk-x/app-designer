@@ -5,7 +5,9 @@
         "type": "string",
         "name": "Name",
         "display": {
-          "text": "Enter the Tea Type Name"
+          "prompt": {
+            "text": "Enter the Tea Type Name"
+          }
         },
         "required": true,
         "_row_num": 2
@@ -14,7 +16,9 @@
         "type": "string",
         "name": "Origin",
         "display": {
-          "text": "Enter the Origin"
+          "prompt": {
+            "text": "Enter the Origin"
+          }
         },
         "required": true,
         "_row_num": 3
@@ -24,7 +28,9 @@
         "values_list": "yes_no",
         "name": "Caffeinated",
         "display": {
-          "text": "Is the Tea Caffeinated?"
+          "prompt": {
+            "text": "Is the Tea Caffeinated?"
+          }
         },
         "required": true,
         "_row_num": 4
@@ -34,7 +40,9 @@
         "values_list": "yes_no",
         "name": "Fermented",
         "display": {
-          "text": "Is the Tea Fermented?"
+          "prompt": {
+            "text": "Is the Tea Fermented?"
+          }
         },
         "required": true,
         "_row_num": 5
@@ -67,7 +75,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Types"
+          "title": {
+            "text": "Tea Types"
+          }
         },
         "_row_num": 4
       },
@@ -127,10 +137,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -141,7 +148,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Types"
+          "title": {
+            "text": "Tea Types"
+          }
         },
         "_row_num": 4
       },
@@ -165,7 +174,7 @@
         "_row_num": 4,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -180,7 +189,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Types"
+          "title": {
+            "text": "Tea Types"
+          }
         },
         "_row_num": 4
       }
@@ -204,6 +215,26 @@
           "_row_num": 3
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "default"
+      }
     },
     "queries": {},
     "calculates": {},
@@ -265,7 +296,9 @@
             "type": "string",
             "name": "Name",
             "display": {
-              "text": "Enter the Tea Type Name"
+              "prompt": {
+                "text": "Enter the Tea Type Name"
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -279,7 +312,9 @@
             "type": "string",
             "name": "Origin",
             "display": {
-              "text": "Enter the Origin"
+              "prompt": {
+                "text": "Enter the Origin"
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -294,7 +329,9 @@
             "values_list": "yes_no",
             "name": "Caffeinated",
             "display": {
-              "text": "Is the Tea Caffeinated?"
+              "prompt": {
+                "text": "Is the Tea Caffeinated?"
+              }
             },
             "required": true,
             "_row_num": 4,
@@ -309,7 +346,9 @@
             "values_list": "yes_no",
             "name": "Fermented",
             "display": {
-              "text": "Is the Tea Fermented?"
+              "prompt": {
+                "text": "Is the Tea Fermented?"
+              }
             },
             "required": true,
             "_row_num": 5,
@@ -420,7 +459,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Tea Types"
+              "title": {
+                "text": "Tea Types"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -760,7 +801,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Tea Types\""
+        "_value": "{\"text\":\"Tea Types\"}"
       },
       {
         "_partition": "Table",

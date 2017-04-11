@@ -176,8 +176,7 @@ exports.removeEmptyStrings =  function(rObjArr){
  * Determine whether to create defintion.csv and
  * properties.csv for the XLSXConverter
  */
-exports.shouldWriteOutDefinitionAndPropertiesCsv = function(formDefStr) {
-    var formDefJson = JSON.parse(formDefStr);
+exports.shouldWriteOutDefinitionAndPropertiesCsv = function(formDefJson) {
     var tableId = getTableIdFromFormDef(formDefJson);
     var formId = getFormIdFromFormDef(formDefJson);
 
@@ -188,6 +187,25 @@ exports.shouldWriteOutDefinitionAndPropertiesCsv = function(formDefStr) {
     if (formId === getFrameworkFormId()) {
         return false;
     }
+
+    if (tableId !== formId) {
+        return false;
+    }
+    
+    if (tableId === formId) {
+        return true;
+    }
+
+    return false;
+};
+
+exports.shouldWriteOutTranslationsJs = function(formDefJson) {
+    var tableId = getTableIdFromFormDef(formDefJson);
+    var formId = getFormIdFromFormDef(formDefJson);
+
+    if (tableId === null || formId === null) {
+        return false;
+    } 
 
     if (tableId !== formId) {
         return false;
@@ -256,8 +274,8 @@ exports.createDefinitionCsvFromDataTableModel = function(dataTableModel) {
  *  Create properties.csv from inverted the formDef.json 
  * for XLSXConverter processing
  */
-exports.createPropertiesCsvFromDataTableModel = function(dataTableModel, formDef) {
-    var properties = formDef.specification.properties;
+exports.createPropertiesCsvFromDataTableModel = function(dataTableModel, formDefJson) {
+    var properties = formDefJson.specification.properties;
 
     // Now write the properties in CSV format
     var propCsv = "_partition,_aspect,_key,_type,_value\r\n";
@@ -271,6 +289,22 @@ exports.createPropertiesCsvFromDataTableModel = function(dataTableModel, formDef
     });
 
     return propCsv;
+};
+
+/**
+ *  Create translations.js from the formDef.json 
+ * for XLSXConverter processing
+ */
+exports.createTranslationsJsFromDataTableModel = function(tableId, translations) {
+	var defJs;
+	if ( tableId === undefined || tableId === null ) {
+		defJs = "window.odkCommonTranslations = " + JSON.stringify(translations, 2, 2);
+	} else if ( tableId === 'framework' ) {
+		defJs = "window.odkFrameworkTranslations = " + JSON.stringify(translations, 2, 2);
+	} else {
+		defJs = "window.odkTableSpecificTranslations = " + JSON.stringify(translations, 2, 2);
+	}
+	return defJs;
 };
 
 /**

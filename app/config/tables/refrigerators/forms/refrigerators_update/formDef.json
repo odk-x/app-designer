@@ -4,7 +4,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Refrigerator id: {{data.refrigerator_id}}"
+          "prompt": {
+            "text": "Refrigerator id: {{data.refrigerator_id}}"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "values_list": "conditions",
         "name": "refrigerator_condition",
         "display": {
-          "text": "Select refrigerator condition:"
+          "prompt": {
+            "text": "Select refrigerator condition:"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "integer",
         "name": "refrigerator_stock_level",
         "display": {
-          "text": "What is the refrigerator's stock level?"
+          "prompt": {
+            "text": "What is the refrigerator's stock level?"
+          }
         },
         "_row_num": 4
       }
@@ -114,7 +120,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerator information update form"
+          "title": {
+            "text": "Refrigerator information update form"
+          }
         },
         "_row_num": 5
       }
@@ -133,10 +141,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -157,7 +162,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerator information update form"
+          "title": {
+            "text": "Refrigerator information update form"
+          }
         },
         "_row_num": 5
       },
@@ -166,7 +173,7 @@
         "_row_num": 5,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -181,7 +188,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerator information update form"
+          "title": {
+            "text": "Refrigerator information update form"
+          }
         },
         "_row_num": 5
       }
@@ -325,7 +334,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Refrigerator id: {{data.refrigerator_id}}"
+              "prompt": {
+                "text": "Refrigerator id: {{data.refrigerator_id}}"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -339,7 +350,9 @@
             "values_list": "conditions",
             "name": "refrigerator_condition",
             "display": {
-              "text": "Select refrigerator condition:"
+              "prompt": {
+                "text": "Select refrigerator condition:"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -352,7 +365,9 @@
             "type": "integer",
             "name": "refrigerator_stock_level",
             "display": {
-              "text": "What is the refrigerator's stock level?"
+              "prompt": {
+                "text": "What is the refrigerator's stock level?"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -450,7 +465,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Refrigerator information update form"
+              "title": {
+                "text": "Refrigerator information update form"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },

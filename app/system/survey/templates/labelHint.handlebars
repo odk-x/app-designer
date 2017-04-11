@@ -1,9 +1,20 @@
-{{#if display.image}}<div style="text-align: center;">
-        <img class="odk-label-image" src="{{formDirectory}}{{localize display.image}}"></img>
-</div>{{/if}}
-{{#if display.audio}}<div><{{#if pre4Android}}video{{else}}audio{{/if}} src="{{formDirectory}}{{localize display.audio}}" tabindex="0"
-	audio="true"{{#if pre4Android}} onclick="play()"{{/if}} controls="controls">audio control not supported</{{#if pre4Android}}video{{else}}audio{{/if}}></div>{{/if}}
-{{#if display.video}}<div><video src="{{formDirectory}}{{localize display.video}}" tabindex="0"
-	{{#if pre4Android}} onclick="play()"{{/if}} video="true" controls="controls">video control not supported</video></div>{{/if}}
-{{#if display.text}}<p class="odk-label">{{{localize display.text}}}</p>{{/if}}
-{{#if display.hint}}<p class="odk-hint">{{{localize display.hint}}}</p>{{/if}}
+{{#ifHasLocalization display.prompt}}
+   {{#ifHasImageLocalization display.prompt}}<div style="text-align: center;">
+        <img class="odk-label-image" src="{{localizeImage display.prompt}}"></img>
+   </div>{{/ifHasImageLocalization}}
+   {{#ifHasAudioLocalization display.prompt}}<div><audio src="{{localizeAudio display.prompt}}" tabindex="0"
+	  audio="true" controls="controls">{{localizeText 'audio_control_not_supported'}}</audio></div>{{/ifHasAudioLocalization}}
+   {{#ifHasVideoLocalization display.prompt}}<div><video src="{{localizeVideo display.prompt}}" tabindex="0"
+	  video="true" controls="controls">{{localizeText 'video_control_not_supported'}}</video></div>{{/ifHasVideoLocalization}}
+   {{#ifHasTextLocalization display.prompt}}<p class="odk-label">{{{localizeText display.prompt}}}</p>{{/ifHasTextLocalization}}
+{{/ifHasLocalization}}
+{{#ifHasLocalization display.hint}}
+   {{#ifHasImageLocalization display.hint}}<div style="text-align: center;">
+        <img class="odk-hint-image" src="{{localizeImage display.hint}}"></img>
+   </div>{{/ifHasImageLocalization}}
+   {{#ifHasAudioLocalization display.hint}}<div><audio src="{{localizeAudio display.hint}}" tabindex="0"
+	  audio="true" controls="controls">{{localizeText 'audio_control_not_supported'}}</audio></div>{{/ifHasAudioLocalization}}
+   {{#ifHasVideoLocalization display.hint}}<div><video src="{{localizeVideo display.hint}}" tabindex="0"
+	  video="true" controls="controls">{{localizeText 'video_control_not_supported'}}</video></div>{{/ifHasVideoLocalization}}
+   {{#ifHasTextLocalization display.hint}}<p class="odk-hint">{{{localizeText display.hint}}}</p>{{/ifHasTextLocalization}}
+{{/ifHasLocalization}}

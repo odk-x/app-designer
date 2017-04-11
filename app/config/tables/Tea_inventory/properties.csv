@@ -7,5 +7,5 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,Tea_inventory
 Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/tables/Tea_inventory/html/Tea_inventory_detail.html
-Table,default,displayName,object,"""Tea Inventory"""
+Table,default,displayName,object,"{""text"":""Tea Inventory""}"
 Table,default,listViewFileName,string,config/tables/Tea_inventory/html/Tea_inventory_list.html
