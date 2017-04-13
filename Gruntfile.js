@@ -345,11 +345,11 @@ module.exports = function (grunt) {
             });
         });
 
-var zipAllFiles = function( destZipFile, filesList ) {
+var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			// create a file to stream archive data to. 
 			var fs = require('fs');
 			var archiver = require('archiver');
-			
+
 			var output = fs.createWriteStream(destZipFile);
 			var archive = archiver('zip', {
 				store: true // Sets the compression method to STORE. 
@@ -359,6 +359,7 @@ var zipAllFiles = function( destZipFile, filesList ) {
 			output.on('close', function() {
 			  console.log(archive.pointer() + ' total bytes');
 			  console.log('archiver has been finalized and the output file descriptor has closed.');
+			  completionFn(true);
 			});
 			 
 			// good practice to catch this error explicitly 
@@ -373,7 +374,10 @@ var zipAllFiles = function( destZipFile, filesList ) {
                 //  Have to add app back into the file name for the adb push
                 var src = tablesConfig.appDir + '/' + fileName;
                 grunt.log.writeln('archive.file(' + src + ', {name: ' + fileName + '} )');
-                archive.file(src, {name: fileName } );
+                archive.file(src, {name: fileName }, function(err) {
+					  if(err) {
+						grunt.log.writeln('error ' + err + ' adding ' + src + ' to file ' + destZipFile);
+				}} );
 			});
 			// finalize the archive (ie we are done appending files but streams have to finish yet) 
 			archive.finalize();
@@ -383,10 +387,18 @@ var zipAllFiles = function( destZipFile, filesList ) {
         'build-zips',
         'Construct the configzip and systemzip for survey and tables',
         function() {
+			var done = this.async();
+			
 			var buildDir = 'build' +
 				'/zips';
 			 
-            var dirs = grunt.file.expand(
+			grunt.file.delete(buildDir + '/');
+			
+			grunt.file.mkdir(buildDir);
+			grunt.file.mkdir(buildDir + '/survey/');
+			grunt.file.mkdir(buildDir + '/tables/');
+
+            var surveySystemZipFiles = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
 				'system/survey/templates/**',
@@ -396,8 +408,67 @@ var zipAllFiles = function( destZipFile, filesList ) {
                 'system/index.html',
 				'!**/.DS_Store');
 
-			zipAllFiles(buildDir + '/survey/systemzip', dirs);
-			
+            var surveyConfigZipFiles = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+				'config/assets/framework/**',
+                'config/assets/commonTranslations.js',
+                'config/assets/img/play.png',
+                'config/assets/img/form_logo.png',
+                'config/assets/img/backup.png',
+                'config/assets/img/advance.png',
+                'config/assets/css/odk-survey.css',
+				'!**/.DS_Store');
+
+            var tablesSystemZipFiles = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+				'system/tables/test/**',
+                'system/tables/js/**',
+                'system/libs/**',
+                'system/js/**',
+				'!**/.DS_Store');
+
+            var tablesConfigZipFiles = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                'config/assets/libs/jquery*',
+                'config/assets/libs/d3*',
+                'config/assets/libs/d3-amd/**',
+                'config/assets/commonTranslations.js',
+                'config/assets/img/little_arrow.png',
+				'!**/.DS_Store');
+
+			zipAllFiles(buildDir + '/survey/systemzip', surveySystemZipFiles, 
+				function(outcome) {
+					if ( outcome ) {
+						zipAllFiles(buildDir + '/survey/configzip', surveyConfigZipFiles, 
+							function(outcome) {
+								if ( outcome ) {
+									zipAllFiles(buildDir + '/tables/systemzip', tablesSystemZipFiles, 
+										function(outcome) {
+											if ( outcome ) {
+												zipAllFiles(buildDir + '/tables/configzip', tablesConfigZipFiles, 
+													function(outcome) {
+														if ( outcome ) {
+															grunt.log.writeln('success!');
+															done(true);
+														} else {
+															done('failing on /tables/configzip with error: ' + outcome);
+														}
+													});
+											} else {
+												done('failing on /tables/systemzip with error: ' + outcome);
+											}
+										});
+								} else {
+									done('failing on /survey/configzip with error: ' + outcome);
+								}
+							});
+					} else {
+						done('failing on /survey/systemzip with error: ' + outcome);
+					}
+				});
 		});
 
     grunt.registerTask(
