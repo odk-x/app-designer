@@ -823,15 +823,15 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
     },
     disableButtons: function() {
         var that = this;
-        that.$('.openInstance').attr('disabled','true');
-        that.$('.deleteInstance').attr('disabled','true');
-        that.$('.addInstance').attr('disabled','true');
+        that.$('.openInstance').prop('disabled', true);
+        that.$('.deleteInstance').prop('disabled', true);
+        that.$('.addInstance').prop('disabled', true);
     },
     enableButtons: function() {
         var that = this;
-        that.$('.openInstance').removeAttr('disabled');
-        that.$('.deleteInstance').removeAttr('disabled');
-        that.$('.addInstance').removeAttr('disabled');
+        that.$('.openInstance').prop('disabled', false);
+        that.$('.deleteInstance').prop('disabled', false);
+        that.$('.addInstance').prop('disabled', false);
     },
     choice_filter: function(){ return true; },
     configureRenderContext: function(ctxt) {
@@ -1034,11 +1034,11 @@ promptTypes.external_link = promptTypes.base.extend({
     },
     disableButtons: function() {
         var that = this;
-        that.$('.openLink').attr('disabled','true');
+        that.$('.openLink').prop('disabled',true);
     },
     enableButtons: function() {
         var that = this;
-        that.$('.openLink').removeAttr('disabled');
+        that.$('.openLink').prop('disabled',false);
     },
     openLink: function(evt) {
         var that = this;
@@ -2061,13 +2061,13 @@ promptTypes.media = promptTypes.base.extend({
     },
     disableButtons: function() {
         var that = this;
-        that.$('.captureAction').attr('disabled','true');
-        that.$('.chooseAction').attr('disabled','true');
+        that.$('.captureAction').prop('disabled', true);
+        that.$('.chooseAction').prop('disabled', true);
     },
     enableButtons: function() {
         var that = this;
-        that.$('.captureAction').removeAttr('disabled');
-        that.$('.chooseAction').removeAttr('disabled');
+        that.$('.captureAction').prop('disabled', false);
+        that.$('.chooseAction').prop('disabled', false);
     },
     capture: function(evt) {
         var that = this;

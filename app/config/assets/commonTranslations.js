@@ -8,19 +8,19 @@ window.odkCommonTranslations = {
         "display": {
           "locale": {
             "text": {
-              "default": "English",
+              "english": "English",
               "hindi": "English (as hindi name)"
             }
           }
         },
         "_row_num": 7,
-        "name": "default"
+        "name": "english"
       },
       {
         "display": {
           "locale": {
             "text": {
-              "default": "Hindi",
+              "english": "Hindi",
               "hindi": "Hindi (as hindi name)"
             }
           }
@@ -33,6 +33,6 @@ window.odkCommonTranslations = {
   "_default_locale": {
     "setting_name": "_default_locale",
     "_row_num": 5,
-    "value": "default"
+    "value": "english"
   }
 }

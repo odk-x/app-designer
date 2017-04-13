@@ -556,7 +556,7 @@
         "display": {
           "title": {
             "text": {
-              "default": "Common Javascript Framework",
+              "english": "Common Javascript Framework",
               "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
             }
           }
@@ -566,11 +566,11 @@
         "_row_num": 5
       },
       {
-        "setting_name": "default",
+        "setting_name": "english",
         "display": {
           "locale": {
             "text": {
-              "default": "English",
+              "english": "English",
               "hindi": "English (as hindi name)"
             }
           }
@@ -582,7 +582,7 @@
         "display": {
           "locale": {
             "text": {
-              "default": "Hindi",
+              "english": "Hindi",
               "hindi": "Hindi (as hindi name)"
             }
           }
@@ -1225,7 +1225,7 @@
         "display": {
           "title": {
             "text": {
-              "default": "Common Javascript Framework",
+              "english": "Common Javascript Framework",
               "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
             }
           }
@@ -1234,12 +1234,12 @@
         "showContents": false,
         "_row_num": 5
       },
-      "default": {
-        "setting_name": "default",
+      "english": {
+        "setting_name": "english",
         "display": {
           "locale": {
             "text": {
-              "default": "English",
+              "english": "English",
               "hindi": "English (as hindi name)"
             }
           }
@@ -1251,7 +1251,7 @@
         "display": {
           "locale": {
             "text": {
-              "default": "Hindi",
+              "english": "Hindi",
               "hindi": "Hindi (as hindi name)"
             }
           }
@@ -1266,19 +1266,19 @@
             "display": {
               "locale": {
                 "text": {
-                  "default": "English",
+                  "english": "English",
                   "hindi": "English (as hindi name)"
                 }
               }
             },
             "_row_num": 7,
-            "name": "default"
+            "name": "english"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "default": "Hindi",
+                  "english": "Hindi",
                   "hindi": "Hindi (as hindi name)"
                 }
               }
@@ -1291,14 +1291,14 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "default"
+        "value": "english"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
           "title": {
             "text": {
-              "default": "Common Javascript Framework",
+              "english": "Common Javascript Framework",
               "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
             }
           }
@@ -1915,19 +1915,19 @@
             "display": {
               "locale": {
                 "text": {
-                  "default": "English",
+                  "english": "English",
                   "hindi": "English (as hindi name)"
                 }
               }
             },
             "_row_num": 7,
-            "name": "default"
+            "name": "english"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "default": "Hindi",
+                  "english": "Hindi",
                   "hindi": "Hindi (as hindi name)"
                 }
               }
@@ -1940,7 +1940,7 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "default"
+        "value": "english"
       }
     },
     "common_translations": {
@@ -1953,19 +1953,19 @@
             "display": {
               "locale": {
                 "text": {
-                  "default": "English",
+                  "english": "English",
                   "hindi": "English (as hindi name)"
                 }
               }
             },
             "_row_num": 7,
-            "name": "default"
+            "name": "english"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "default": "Hindi",
+                  "english": "Hindi",
                   "hindi": "Hindi (as hindi name)"
                 }
               }
@@ -1978,7 +1978,7 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "default"
+        "value": "english"
       }
     },
     "queries": {},
@@ -2009,7 +2009,7 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Common Javascript Framework",
+                  "english": "Common Javascript Framework",
                   "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
                 }
               }
@@ -3054,7 +3054,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Common Javascript Framework\",\"hindi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\"}}"
+        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"hindi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\"}}"
       }
     ]
   }

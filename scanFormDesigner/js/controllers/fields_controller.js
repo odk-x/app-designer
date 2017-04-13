@@ -2271,7 +2271,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
             survey[0][0] = "clause";
             survey[0][1] = "type";
             survey[0][2] = "name";
-            survey[0][3] = "display.text";
+            survey[0][3] = "display.prompt.text";
 
             // for model sheet
 			// filling out the initial values
@@ -2312,7 +2312,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
             setting[0] = new Array();
             setting[0][0] = "setting_name";
             setting[0][1] = "value";
-            setting[0][2] = "display.title";
+            setting[0][2] = "display.title.text";
             // intiallinzing row 1 to 3 for setting sheet
 
 

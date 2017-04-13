@@ -348,6 +348,55 @@ module.exports = function (grunt) {
 
 
     grunt.registerTask(
+        'build-zips',
+        'Construct the configzip and systemzip for survey and tables',
+        function() {
+			var fs = require('fs');
+			var archiver = require('archiver');
+			
+			var buildDir = 'build' +
+				'/zips';
+
+			// create a file to stream archive data to. 
+			var output = fs.createWriteStream(buildDir + '/example.zip');
+			var archive = archiver('zip', {
+				store: true // Sets the compression method to STORE. 
+			});
+			 
+			// listen for all archive data to be written 
+			output.on('close', function() {
+			  console.log(archive.pointer() + ' total bytes');
+			  console.log('archiver has been finalized and the output file descriptor has closed.');
+			});
+			 
+			// good practice to catch this error explicitly 
+			archive.on('error', function(err) {
+			  throw err;
+			});
+			 
+			// pipe archive data to the file 
+			archive.pipe(output);
+			 
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+				'system/survey/templates/**',
+                'system/survey/js/**',
+                'system/libs/**',
+                'system/js/**',
+                'system/index.html');
+				
+			dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                grunt.log.writeln('archive.file(' + src + ', {name: ' + fileName + '} )');
+                // archive.file(src, {name: filename } );
+			});
+			// finalize the archive (ie we are done appending files but streams have to finish yet) 
+			archive.finalize();
+		});
+
+    grunt.registerTask(
         'adbpush-default-app',
         'Push everything in the app directory (except system) to the device',
         function() {
@@ -1102,11 +1151,7 @@ module.exports = function (grunt) {
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
-			'config/assets/ratchet/**',
 			'config/assets/fonts/**',
-			'config/assets/css/bootstrap.css',
-			'config/assets/js/bootstrap.js',
-			'config/assets/js/ratchet.js',
 
 			// demo chooser index page...
 			'config/assets/index.html',
@@ -1176,9 +1221,6 @@ module.exports = function (grunt) {
 			'config/assets/css/plot-graph.css',
 			'config/assets/css/visit-list.css',
 			'config/assets/css/visit-detail.css',
-			'config/assets/js/jquery-2.1.1.min.js',
-			'config/assets/css/jquery.gridster.min.css',
-			'config/assets/js/jquery.gridster.js',
 			'config/assets/plotter.html',
 			'config/assets/js/plotter-home.js',
 			'config/assets/img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg',

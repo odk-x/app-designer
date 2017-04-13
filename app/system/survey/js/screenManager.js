@@ -45,8 +45,8 @@ return Backbone.View.extend({
         "click #yes-btn": "handleConfirmation",
         "click #no-btn": "closeConfirmationPopup"
     },
-    initialize: function(){
-        this.controller = this.options.controller;
+    initialize: function(options){
+        this.controller = options.controller;
         this.$el = $('body');
     },
     cleanUpScreenManager: function(ctxt){
