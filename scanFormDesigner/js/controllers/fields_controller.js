@@ -71,7 +71,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 		
 		var controller = this;
 		$(document).ready(function() {	
-			$(window).bind('beforeunload', function(){ 
+			$(window).on('beforeunload', function(){ 
 				return 'You are about to leave the ODK Scan application.'
 			});
 		
@@ -1585,11 +1585,11 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 
 			// perform optional callback after user exits the save dialog
 			if (func_callback) {
-				$("#save_dialog").bind("dialogclose", function() {
+				$("#save_dialog").on("dialogclose", function() {
 					func_callback();
 					
 					// remove this binded function
-					$("#save_dialog").unbind("dialogclose");
+					$("#save_dialog").off("dialogclose");
 				});
 			}
 			
