@@ -380,6 +380,21 @@ var XLSXConverter = {};
                 }
             }
         },
+        "json": {
+            "type": "object",
+            "elementType": "mimeUri",
+            "properties": {
+                "uriFragment": {
+					"type": "string",
+					"elementType": "rowpath"
+                },
+                "contentType": {
+					"type": "string",
+					"elementType": "mimeType",
+                    "default": "application/json"
+                }
+            }
+        },
         "date": {
 			// odk time stamp -- UTC timestamp string with 00:00:00.000 time.
             "type": "string",
