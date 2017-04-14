@@ -15,13 +15,6 @@ h1 {
   margin: 0; 
 } 
 
-#title {
-    font-size: 44px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    position: relative;
-}
-
 #wrapper { 
   overflow: auto;
 }
@@ -47,12 +40,12 @@ ul {
 }
 
 .item_space:active {
-  background-color: #FFC9C9;
+  background-color: lightsteelblue;
 }
 
 .detail {
   font-size: 16pt;
-  color: darkgray;
+  color: #002030;
   font-weight: normal;
 }
  
@@ -67,7 +60,7 @@ ul {
 .divider {
   margin-left: auto;
   margin-right: auto;
-  background-color: #f47373; 
+  background-color: #38c0f4; 
   width: 95%;
   height: 10px;
 }

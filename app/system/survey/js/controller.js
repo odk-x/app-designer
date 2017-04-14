@@ -1283,14 +1283,30 @@ return {
     },
     setLocale: function(ctxt, locale) {
         var that = this;
-        database.setInstanceMetaData($.extend({}, ctxt, {success: function() {
-            var op = that.getOperation(that.getCurrentScreenPath());
-            if ( op !== null && op._token_type === 'begin_screen' ) {
-                        that.setScreen(ctxt, op, {changeLocale: true});
-            } else {
-                ctxt.failure(that.moveFailureMessage);
-            }
-        }}), '_locale', locale);
+		var tableId = opendatakit.getCurrentTableId();
+		var instanceId = opendatakit.getCurrentInstanceId();
+		if ( instanceId !== undefined && instanceId !== null && tableId !== "framework" ) {
+			// we have an instance in which we can update the locale field with the change
+			database.setInstanceMetaData($.extend({}, ctxt, {success: function() {
+				opendatakit.setCachedLocale(locale);
+				var op = that.getOperation(that.getCurrentScreenPath());
+				if ( op !== null && op._token_type === 'begin_screen' ) {
+							that.setScreen(ctxt, op, {changeLocale: true});
+				} else {
+					ctxt.failure(that.moveFailureMessage);
+				}
+			}}), '_locale', locale);
+		} else {
+			// no instance so we just store it in the cached locale value.
+			opendatakit.setCachedLocale(locale);
+			var op = that.getOperation(that.getCurrentScreenPath());
+			if ( op !== null && op._token_type === 'begin_screen' ) {
+						that.setScreen(ctxt, op, {changeLocale: true});
+			} else {
+				ctxt.failure(that.moveFailureMessage);
+			}
+		}
+
     },
     ///////////////////////////////////////////////////////
     // Logging context

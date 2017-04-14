@@ -64,24 +64,22 @@
                         id="{{data_value}}"
                         value="{{data_value}}"
 						tabindex="0"/>
-                    {{#if display.image}}
+                    {{#ifHasImageLocalization display}}
                         <div>
-                            <img src="{{formDirectory}}{{localize display.image}}"></img>
+                            <img src="{{localizeImage display}}"></img>
                         </div>
-                    {{/if}}
-                    {{#if display.text}}
-                        {{{localize display.text}}}
-                    {{/if}}
+                    {{/ifHasImageLocalization}}
+                    {{#ifHasTextLocalization display}}
+                        {{{localizeText display}}}
+                    {{/ifHasTextLocalization}}
                 </label>
             {{/each}}
         </div>
     </fieldset>
     {{#unless required}}
-        {{#if false}}
         {{#if display.deselect}}
             <div style="clear:both;"></div>
-            <a data-role="button" data-mini="true" class="deselect inline-deselect" tabindex="0">{{localize display.deselect}}</a>
-        {{/if}}
+            <a data-role="button" data-mini="true" class="deselect inline-deselect" tabindex="0">{{localize display.select_deselect_label}}</a>
     	{{/if}}
     {{/unless}}
     <div style="clear:both;"></div>

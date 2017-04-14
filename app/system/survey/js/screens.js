@@ -8,12 +8,12 @@
 *    Displays pop-up dialogs and toasts.
 *    Displays the options dialog for changing languages and navigations.
 */
-define(['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers', 'translations'],
-function(screenTypes,  opendatakit,  controller,  Backbone,  $,       _,           Handlebars, _hh, translations) {
+define(['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers'],
+function(screenTypes,  opendatakit,  controller,  Backbone,  $,       _,           Handlebars, _hh) {
 'use strict';
 verifyLoad('screens',
-    ['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers', 'translations'],
-    [screenTypes,   opendatakit,  controller,  Backbone,  $,       _,           Handlebars,  _hh, translations]);
+    ['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers'],
+    [screenTypes,   opendatakit,  controller,  Backbone,  $,       _,           Handlebars,  _hh]);
 
 screenTypes.base = Backbone.View.extend({
     /**

@@ -30,31 +30,77 @@ function downloadCsvFile (csvContent, fileName) {
 }
 
 function writeOutDef(formDefStr) {
-    // Write the definition.csv if necessary
+	// Write out the definition.csv if necessary
     var formDefJson = JSON.parse(formDefStr);
     var tableId = util.getTableIdFromFormDef(formDefJson);
+	var defPath = 'app/config/tables/' + tableId + '/definition.csv';
+	try {
+		if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDefJson)) {
+			// Write the definition.csv if necessary
+			var dtm = formDefJson.specification.dataTableModel;
 
-    var dtm = formDefJson.specification.dataTableModel;
+			var defCsv = util.createDefinitionCsvFromDataTableModel(dtm);
+			fs.writeFileSync(defPath, defCsv);
+		}
+	} catch (e) {
+		fs.writeFileSync(defPath, e.stack);
+	}
 
-    if (!fs.existsSync(defPath)) {
-        var defCsv = util.createDefinitionCsvFromDataTableModel(dtm);
-        fs.writeFileSync(defPath, defCsv);
-    }
 }
 
 function writeOutProp(formDefStr) {
-    // Write the properties.csv if necessary
+	var formDefJson = JSON.parse(formDefStr);
+	var tableId = util.getTableIdFromFormDef(formDefJson);
+
+	// Write out the properties.csv if necessary
+	var propPath = 'app/config/tables/' + tableId + '/properties.csv';
+	try {
+		if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDefJson)) {
+			// Write the properties.csv if necessary
+			var dtm = formDefJson.specification.dataTableModel;
+
+			var propCsv = util.createPropertiesCsvFromDataTableModel(dtm, formDefJson);
+			fs.writeFileSync(propPath, propCsv);
+		}
+	} catch (e) {
+		fs.writeFileSync(propPath, e.stack);
+	}
+}
+
+function writeOutTrx(formDefStr) {
+
+    // Write the translations.js if necessary
     var formDefJson = JSON.parse(formDefStr);
-    var tableId = util.getTableIdFromFormDef(formDefJson);
+	var tableId = util.getTableIdFromFormDef(formDefJson);
 
-    var dtm = formDefJson.specification.dataTableModel;
+	try {
+		if (util.shouldWriteOutTranslationsJs(formDefJson)) {
+			if ( tableId === 'framework' ) {
+				// Get framework_translations
+				var trx = formDefJson.specification.framework_translations;
+				var trxPath = 'app/config/assets/framework/frameworkTranslations.js';
 
+				var trxJs = util.createTranslationsJsFromDataTableModel(tableId, trx);
+				fs.writeFileSync(trxPath, trxJs);
 
-    if (!fs.existsSync(propPath)) {
-        var propCsv = util.createPropertiesCsvFromDataTableModel(dtm, formDefJson);
-        fs.writeFileSync(propPath, propCsv);
-    }
-    
+				// Get common_translations
+				var trx = formDefJson.specification.common_translations;
+				var trxPath = 'app/config/assets/commonTranslations.js';
+
+				var trxJs = util.createTranslationsJsFromDataTableModel(null, trx);
+				fs.writeFileSync(trxPath, trxJs);
+			} else {
+				// Get table_specific_translations
+				var trx = formDefJson.specification.table_specific_translations;
+				var trxPath = 'app/config/tables/' + tableId + '/tableSpecificTranslations.js';
+
+				var trxJs = util.createTranslationsJsFromDataTableModel(tableId, trx);
+				fs.writeFileSync(trxPath, trxJs);
+			}
+		}
+	} catch (e) {
+		fs.writeFileSync(trxPath, e.stack);
+	}
 }
 
 var result = "";
@@ -91,26 +137,13 @@ try {
 console.log(result);
 
 // Write out the definition.csv if necessary
-var writeOutDefAndProp = util.shouldWriteOutDefinitionAndPropertiesCsv(result);
-var tableId = util.getTableIdFromFormDef(processedWorkbook);
-var defPath = 'app/config/tables/' + tableId + '/definition.csv';
-try {
-    if (writeOutDefAndProp) {
-        writeOutDef(result);
-    }
-} catch (e) {
-    fs.writeFileSync(defPath, e.stack);
-}
+writeOutDef(result);
 
 // Write out the properties.csv if necessary
-var propPath = 'app/config/tables/' + tableId + '/properties.csv';
-try {
-    if (util.shouldWriteOutDefinitionAndPropertiesCsv(result)) {
-        writeOutProp(result);
-    }
-} catch (e) {
-    fs.writeFileSync(propPath, e.stack);
-}
+writeOutProp(result);
+
+// Write out the translations.js if necessary
+writeOutTrx(result);
 
 
 

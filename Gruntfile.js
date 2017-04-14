@@ -175,7 +175,12 @@ module.exports = function (grunt) {
                 cmd: function(str) {
                     return 'adb shell ' + str;
                 }
-            }
+            },
+			macGenConvert: {
+				cmd: function(str, formDefFile) {
+					return 'node macGenConverter.js ' + str + ' > ' + formDefFile; 
+				}
+			}
         },
 
         tables: tablesConfig,
@@ -303,6 +308,168 @@ module.exports = function (grunt) {
             grunt.task.run('exec:adbpull:' + src + ':' + dest);
         });
 
+
+    grunt.registerTask(
+        'xlsx-convert-all',
+        'Run the XLSX converter on all form definitions',
+        function() {
+			var platform = require('os').platform();
+			var isWindows = (platform.search('win') >= 0 &&
+                             platform.search('darwin') < 0);
+							 
+            var dirs = grunt.file.expand(
+                {filter: function(path) {
+ 						if ( !path.endsWith(".xlsx") ) {
+							return false;
+						}
+						var cells = path.split((isWindows ? "\\" : "/"));
+						return (cells.length >= 6) &&
+						  ( cells[cells.length-1] === cells[cells.length-2] + ".xlsx" ); 
+					},
+                 cwd: 'app' },
+				'**/*.xlsx'
+				);
+
+            // Now run these files through macGenConvert.js
+            dirs.forEach(function(fileName) {
+				// fileName uses forward slashes on all platforms
+				var xlsFile;
+				var formDefFile;
+				var cells;
+				xlsFile = 'app/' + fileName;
+				cells = xlsFile.split('/');
+				cells[cells.length-1] = 'formDef.json';
+				formDefFile = cells.join('/');
+                grunt.log.writeln('macGenConvert: ' + xlsFile + ' > ' + formDefFile);
+				grunt.task.run('exec:macGenConvert:' + xlsFile + ':' + formDefFile);
+            });
+        });
+
+var zipAllFiles = function( destZipFile, filesList, completionFn ) {
+			// create a file to stream archive data to. 
+			var fs = require('fs');
+			var archiver = require('archiver');
+
+			var output = fs.createWriteStream(destZipFile);
+			var archive = archiver('zip', {
+				store: true // Sets the compression method to STORE. 
+			});
+			 
+			// listen for all archive data to be written 
+			output.on('close', function() {
+			  console.log(archive.pointer() + ' total bytes');
+			  console.log('archiver has been finalized and the output file descriptor has closed.');
+			  completionFn(true);
+			});
+			 
+			// good practice to catch this error explicitly 
+			archive.on('error', function(err) {
+			  throw err;
+			});
+			 
+			// pipe archive data to the file 
+			archive.pipe(output);
+				
+			filesList.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appDir + '/' + fileName;
+                grunt.log.writeln('archive.file(' + src + ', {name: ' + fileName + '} )');
+                archive.file(src, {name: fileName }, function(err) {
+					  if(err) {
+						grunt.log.writeln('error ' + err + ' adding ' + src + ' to file ' + destZipFile);
+				}} );
+			});
+			// finalize the archive (ie we are done appending files but streams have to finish yet) 
+			archive.finalize();
+};
+
+    grunt.registerTask(
+        'build-zips',
+        'BROKEN: does not compress and last file is not terminated properly. Construct the configzip and systemzip for survey and tables',
+        function() {
+			var done = this.async();
+			
+			var buildDir = 'build' +
+				'/zips';
+			 
+			grunt.file.delete(buildDir + '/');
+			
+			grunt.file.mkdir(buildDir);
+			grunt.file.mkdir(buildDir + '/survey/');
+			grunt.file.mkdir(buildDir + '/tables/');
+
+            var surveySystemZipFiles = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+				'system/survey/templates/**',
+                'system/survey/js/**',
+                'system/libs/**',
+                'system/js/**',
+                'system/index.html',
+				'!**/.DS_Store');
+
+            var surveyConfigZipFiles = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+				'config/assets/framework/**',
+                'config/assets/commonTranslations.js',
+                'config/assets/img/play.png',
+                'config/assets/img/form_logo.png',
+                'config/assets/img/backup.png',
+                'config/assets/img/advance.png',
+                'config/assets/css/odk-survey.css',
+				'!**/.DS_Store');
+
+            var tablesSystemZipFiles = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+				'system/tables/test/**',
+                'system/tables/js/**',
+                'system/libs/**',
+                'system/js/**',
+				'!**/.DS_Store');
+
+            var tablesConfigZipFiles = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'app' },
+                'config/assets/libs/jquery*',
+                'config/assets/libs/d3*',
+                'config/assets/libs/d3-amd/**',
+                'config/assets/commonTranslations.js',
+                'config/assets/img/little_arrow.png',
+				'!**/.DS_Store');
+
+			zipAllFiles(buildDir + '/survey/systemzip', surveySystemZipFiles, 
+				function(outcome) {
+					if ( outcome ) {
+						zipAllFiles(buildDir + '/survey/configzip', surveyConfigZipFiles, 
+							function(outcome) {
+								if ( outcome ) {
+									zipAllFiles(buildDir + '/tables/systemzip', tablesSystemZipFiles, 
+										function(outcome) {
+											if ( outcome ) {
+												zipAllFiles(buildDir + '/tables/configzip', tablesConfigZipFiles, 
+													function(outcome) {
+														if ( outcome ) {
+															grunt.log.writeln('success!');
+															done(true);
+														} else {
+															done('failing on /tables/configzip with error: ' + outcome);
+														}
+													});
+											} else {
+												done('failing on /tables/systemzip with error: ' + outcome);
+											}
+										});
+								} else {
+									done('failing on /survey/configzip with error: ' + outcome);
+								}
+							});
+					} else {
+						done('failing on /survey/systemzip with error: ' + outcome);
+					}
+				});
+		});
 
     grunt.registerTask(
         'adbpush-default-app',
@@ -574,7 +741,7 @@ module.exports = function (grunt) {
 		return function(fileName) {
 			//  Have to add app back into the file name for the adb push
 			var src;
-			if ( offsetDir != "" ) {
+			if ( offsetDir !== undefined && offsetDir !== null && offsetDir !== "" ) {
 				src = offsetDir +
 					'/' +
 					fileName;
@@ -593,7 +760,7 @@ module.exports = function (grunt) {
 
 			var baseDir = buildDir;
 
-			if ( offsetDir != "" ) {
+			if ( offsetDir !== undefined && offsetDir !== null && offsetDir !== "" ) {
 				baseDir = baseDir +
 					'/' +
 					offsetDir;
@@ -627,7 +794,7 @@ module.exports = function (grunt) {
         return function(fileName) {
 			//  Have to add app back into the file name for the adb push
 			var src;
-			if ( offsetDir != "" ) {
+			if ( offsetDir !== undefined && offsetDir !== null && offsetDir !== "" ) {
 				src = offsetDir +
 				'/' +
 				fileName;
@@ -768,7 +935,7 @@ module.exports = function (grunt) {
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".gatesDemo072216", tablesConfig.appDir));
 
-			var dirs = grunt.file.expand(
+			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
 				'**',
@@ -779,7 +946,7 @@ module.exports = function (grunt) {
 				'app/data/tables/geotagger/**',
 				'app/output/**');
 
-            dirs.forEach(suffixRenameCopier(".gatesDemo072216", ""));
+            otherFiles.forEach(suffixRenameCopier(".gatesDemo072216", ""));
         });
 
 	var simpleDemoFiles = function(grunt) {
@@ -850,7 +1017,7 @@ module.exports = function (grunt) {
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".simpledemo", tablesConfig.appDir));
 
-			var dirs = grunt.file.expand(
+			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
 				'**',
@@ -861,7 +1028,7 @@ module.exports = function (grunt) {
 				'app/data/tables/geotagger/**',
 				'app/output/**');
 
-            dirs.forEach(suffixRenameCopier(".simpledemo", ""));
+            otherFiles.forEach(suffixRenameCopier(".simpledemo", ""));
         });
 
 	var rowLevelAccessDemoFiles = function(grunt) {
@@ -929,7 +1096,7 @@ module.exports = function (grunt) {
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".rowlevelaccessdemo", tablesConfig.appDir));
 
-			var dirs = grunt.file.expand(
+			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
 				'**',
@@ -941,7 +1108,7 @@ module.exports = function (grunt) {
 				'app/data/tables/geoweather_conditions/**',
 				'app/output/**');
 
-            dirs.forEach(suffixRenameCopier(".rowlevelaccessdemo", ""));
+            otherFiles.forEach(suffixRenameCopier(".rowlevelaccessdemo", ""));
         });
 
 	var georowlevelaccessdemo = function(grunt) {
@@ -1012,7 +1179,7 @@ module.exports = function (grunt) {
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".georowlevelaccessdemo", tablesConfig.appDir));
 
-			var dirs = grunt.file.expand(
+			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
 				'**',
@@ -1025,7 +1192,7 @@ module.exports = function (grunt) {
 				'app/data/tables/geoweather_conditions/**',
 				'app/output/**');
 
-            dirs.forEach(suffixRenameCopier(".georowlevelaccessdemo", ""));
+            otherFiles.forEach(suffixRenameCopier(".georowlevelaccessdemo", ""));
         });
 
 	var tablesDemoFiles = function(grunt) {
@@ -1059,11 +1226,7 @@ module.exports = function (grunt) {
 			'config/assets/img/little_arrow.png',
 			'config/assets/img/play.png',
 			'config/assets/libs/**',
-			'config/assets/ratchet/**',
 			'config/assets/fonts/**',
-			'config/assets/css/bootstrap.css',
-			'config/assets/js/bootstrap.js',
-			'config/assets/js/ratchet.js',
 
 			// demo chooser index page...
 			'config/assets/index.html',
@@ -1133,9 +1296,6 @@ module.exports = function (grunt) {
 			'config/assets/css/plot-graph.css',
 			'config/assets/css/visit-list.css',
 			'config/assets/css/visit-detail.css',
-			'config/assets/js/jquery-2.1.1.min.js',
-			'config/assets/css/jquery.gridster.min.css',
-			'config/assets/js/jquery.gridster.js',
 			'config/assets/plotter.html',
 			'config/assets/js/plotter-home.js',
 			'config/assets/img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg',
@@ -1189,7 +1349,7 @@ module.exports = function (grunt) {
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".tablesdemo", tablesConfig.appDir));
 
-			var dirs = grunt.file.expand(
+			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
 				'**',
@@ -1200,7 +1360,7 @@ module.exports = function (grunt) {
 				'app/data/tables/geotagger/**',
 				'app/output/**');
 
-            dirs.forEach(suffixRenameCopier(".tablesdemo", ""));
+            otherFiles.forEach(suffixRenameCopier(".tablesdemo", ""));
         });
 
 	var opendatakit2DemoFiles = function(grunt) {
@@ -1258,7 +1418,7 @@ module.exports = function (grunt) {
             // Now push these files to the phone.
             dirs.forEach(suffixRenameCopier(".opendatakit-2", tablesConfig.appDir));
 
-			var dirs = grunt.file.expand(
+			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
 				 cwd: '.' },
 				'**',
@@ -1268,7 +1428,7 @@ module.exports = function (grunt) {
 				'app/system/**',
 				'app/output/**');
 
-            dirs.forEach(suffixRenameCopier(".opendatakit-2", ""));
+            otherFiles.forEach(suffixRenameCopier(".opendatakit-2", ""));
         });
 
     grunt.registerTask(

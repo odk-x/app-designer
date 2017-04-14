@@ -71,7 +71,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 		
 		var controller = this;
 		$(document).ready(function() {	
-			$(window).bind('beforeunload', function(){ 
+			$(window).on('beforeunload', function(){ 
 				return 'You are about to leave the ODK Scan application.'
 			});
 		
@@ -1585,11 +1585,11 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 
 			// perform optional callback after user exits the save dialog
 			if (func_callback) {
-				$("#save_dialog").bind("dialogclose", function() {
+				$("#save_dialog").on("dialogclose", function() {
 					func_callback();
 					
 					// remove this binded function
-					$("#save_dialog").unbind("dialogclose");
+					$("#save_dialog").off("dialogclose");
 				});
 			}
 			
@@ -2271,7 +2271,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
             survey[0][0] = "clause";
             survey[0][1] = "type";
             survey[0][2] = "name";
-            survey[0][3] = "display.text";
+            survey[0][3] = "display.prompt.text";
 
             // for model sheet
 			// filling out the initial values
@@ -2282,21 +2282,13 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
             // For the model, fill in the column names
             model[0][0] = "name";
             model[0][1] = "type";
-            model[0][2] = "elementType";
-            model[0][3] = "properties.uriFragment.type";
-            model[0][4] = "properties.contentType.type";
-            model[0][5] = "properties.contentType.default";
 
             // Include the model values that will be uploaded to aggregate
             model[1][0] = "scan_output_directory";
             model[1][1] = "string";
 
             model[2][0] = "raw";
-            model[2][1] = "object";
-            model[2][2] = "mimeUri";
-            model[2][3] = "rowpath";
-            model[2][4] = "string";
-            model[2][5] = "applicaton/json";
+            model[2][1] = "json";
 
             // for the choice sheet
             // filling out the initial values
@@ -2312,7 +2304,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
             setting[0] = new Array();
             setting[0][0] = "setting_name";
             setting[0][1] = "value";
-            setting[0][2] = "display.title";
+            setting[0][2] = "display.title.text";
             // intiallinzing row 1 to 3 for setting sheet
 
 

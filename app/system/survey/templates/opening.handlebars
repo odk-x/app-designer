@@ -3,54 +3,15 @@
         <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
         <hr>
     </div>
-
-    <div>
-        <center><p>ODK SURVEY</p></center>
-        <hr>
-    </div>
-
-    <div>
-        <p>Form Name: {{localize form_title}}</p>
-        <p>Form Version: {{#if form_version}}{{form_version}}{{/if}}</p>
-        <hr>
-    </div>
-
+	{{{localizeText display.opening_survey_form_identification}}}
     <div class="instanceClearDiv"></div>
-
     <div>
-	    {{#if display_field}}
-        <p>You are at the start of instance: </p>
-        <p>"{{display_field}}"</p> 
-		{{else}}
-        <p>You are at the start of a new instance.</p>
-		{{/if}}
-        <hr>
-        <!--
-        <p>Swipe the screen as shown below to begin.</p>
-        <div>
-            <span style="width:0;float:left;">
-                <img src="{{ backupImg }}"/>
-                <p style="white-space: nowrap;">Previous prompt</p>
-            </span>
-            <span style="float:right;">
-                <img src="{{ advanceImg }}"/>
-                <p>Next prompt</p>
-            </span>
-        </div>
-        -->
-        {{#if last_save_date}}
-            <p>Last saved:</p> 
-            <p>{{last_save_date}}</p>
-        {{/if}}
-        <hr>
+		{{{localizeText display.opening_survey_instance_detail}}}
         <fieldset class="openingNew">
             <div class="row">
-                <div class="col-xs-8">
-                    Go to next prompt
-                </div>
-                <div class="col-xs-4">
+                <div>
                     <button class="odk-next-btn btn btn-default" type="button" tabindex="0">
-                        <span class="glyphicon glyphicon-chevron-right" style="font-size:20px;"></span>
+					{{localizeText display.opening_survey_next_button_label}} <span class="glyphicon glyphicon-chevron-right" style="font-size:20px;"></span>
                     </button>
                 </div>
             </div>

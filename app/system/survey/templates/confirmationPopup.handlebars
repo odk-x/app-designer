@@ -2,14 +2,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
-                <h3 style="margin:0">{{{localize message}}}</h3>
+                <h3 style="margin:0">{{{localizeText message}}}</h3>
                 <div class="btn-group-vertical" style="width:100%">
                     <button type="button" class="btn btn-default" id="yes-btn"
-                        data-dismiss="modal">YES
-                    </button>
+                        data-dismiss="modal">{{localizeText 'confirm_action_yes_label'}}</button>
                     <button type="button" class="btn btn-default" id="no-btn"
-                        data-dismiss="modal">NO
-                    </button>
+                        data-dismiss="modal">{{localizeText 'confirm_action_no_label'}}</button>
                 </div>
             </div>
         </div><!-- .modal-content -->
