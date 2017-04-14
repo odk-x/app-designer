@@ -10458,7 +10458,9 @@
           "type": "string",
           "elementKey": "basic_q_items"
         },
-        "displayName": "Which symptoms does the child have?",
+        "displayName": {
+          "text": "Which symptoms does the child have?"
+        },
         "valuesList": "basic_four_questions",
         "elementKey": "basic_q"
       },
@@ -10559,7 +10561,9 @@
           }
         ],
         "type": "boolean",
-        "displayName": "Acknowledge that protocol does not support assessing a child under 2 months old.",
+        "displayName": {
+          "text": "Acknowledge that protocol does not support assessing a child under 2 months old."
+        },
         "elementKey": "under_2_months"
       },
       "weight": {
@@ -22214,7 +22218,9 @@
           "elementPath": "basic_q.items",
           "notUnitOfRetention": true
         },
-        "displayName": "Which symptoms does the child have?",
+        "displayName": {
+          "text": "Which symptoms does the child have?"
+        },
         "valuesList": "basic_four_questions",
         "elementKey": "basic_q",
         "elementName": "basic_q",
@@ -22352,7 +22358,9 @@
           }
         ],
         "type": "boolean",
-        "displayName": "Acknowledge that protocol does not support assessing a child under 2 months old.",
+        "displayName": {
+          "text": "Acknowledge that protocol does not support assessing a child under 2 months old."
+        },
         "elementKey": "under_2_months",
         "elementName": "under_2_months",
         "elementSet": "data",
@@ -23714,7 +23722,7 @@
         "_aspect": "basic_q",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Which symptoms does the child have?\""
+        "_value": "{\"text\":\"Which symptoms does the child have?\"}"
       },
       {
         "_partition": "Column",
@@ -24036,7 +24044,7 @@
         "_aspect": "under_2_months",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Acknowledge that protocol does not support assessing a child under 2 months old.\""
+        "_value": "{\"text\":\"Acknowledge that protocol does not support assessing a child under 2 months old.\"}"
       },
       {
         "_partition": "Column",

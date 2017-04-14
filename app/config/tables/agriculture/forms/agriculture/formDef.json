@@ -558,7 +558,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Sample",
+        "displayName": {
+          "text": "Sample"
+        },
         "elementKey": "Sample"
       }
     },
@@ -1172,7 +1174,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Sample",
+        "displayName": {
+          "text": "Sample"
+        },
         "elementKey": "Sample",
         "elementName": "Sample",
         "elementSet": "data",
@@ -1273,7 +1277,7 @@
         "_aspect": "Sample",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Sample\""
+        "_value": "{\"text\":\"Sample\"}"
       },
       {
         "_partition": "Column",

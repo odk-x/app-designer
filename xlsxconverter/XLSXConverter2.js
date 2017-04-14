@@ -1866,13 +1866,13 @@ var XLSXConverter = {};
         var name = promptOrAction.name;
 
         // if a displayName has not already been defined and if
-        // display.title.text is present, then it becomes the displayName for the model.
+        // display.title.text is present, then display.title becomes the displayName for the model.
         // otherwise, use the element name.
         if ( !("displayName" in mdef) ) {
             if ( "display" in promptOrAction && 
 			     "title" in promptOrAction.display &&
 				 "text" in promptOrAction.display.title	) {
-                mdef.displayName = promptOrAction.display.title.text;
+                mdef.displayName = promptOrAction.display.title;
             }
         }
 

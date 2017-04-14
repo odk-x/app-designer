@@ -385,7 +385,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 
     grunt.registerTask(
         'build-zips',
-        'Construct the configzip and systemzip for survey and tables',
+        'BROKEN: does not compress and last file is not terminated properly. Construct the configzip and systemzip for survey and tables',
         function() {
 			var done = this.async();
 			
