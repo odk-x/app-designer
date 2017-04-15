@@ -135,7 +135,9 @@
         "type": "note",
         "name": "pre-delivery",
         "display": {
-          "text": "We will now distribute the appropriate item pack"
+          "prompt": {
+            "text": "We will now distribute the appropriate item pack"
+          }
         },
         "_row_num": 2
       },
@@ -158,7 +160,9 @@
         "type": "barcode",
         "name": "item_pack_barcode",
         "display": {
-          "text": "Scan an item pack of type {{data.item_pack_name}} {{data.summary}}"
+          "prompt": {
+            "text": "Scan an item pack of type {{data.item_pack_name}} {{data.summary}}"
+          }
         },
         "model": {
           "isSessionVariable": true
@@ -169,7 +173,9 @@
         "type": "string",
         "name": "item_pack_barcode",
         "display": {
-          "text": "Please confirm or update item pack barcode."
+          "prompt": {
+            "text": "Please confirm or update item pack barcode."
+          }
         },
         "model": {
           "isSessionVariable": true
@@ -189,7 +195,9 @@
       {
         "type": "note",
         "display": {
-          "text": "The authorized item pack for this beneficiary is {{data.assigned_code}}"
+          "prompt": {
+            "text": "The authorized item pack for this beneficiary is {{data.assigned_code}}"
+          }
         },
         "_row_num": 9
       },
@@ -197,7 +205,9 @@
         "type": "barcode",
         "name": "item_pack_barcode",
         "display": {
-          "text": "Scan an item pack of type {{data.item_pack_name}} with a barcode of {{data.assigned_code}}"
+          "prompt": {
+            "text": "Scan an item pack of type {{data.item_pack_name}} with a barcode of {{data.assigned_code}}"
+          }
         },
         "model": {
           "isSessionVariable": true
@@ -208,7 +218,9 @@
         "type": "string",
         "name": "item_pack_barcode",
         "display": {
-          "text": "Please confirm or update item pack barcode."
+          "prompt": {
+            "text": "Please confirm or update item pack barcode."
+          }
         },
         "model": {
           "isSessionVariable": true
@@ -235,7 +247,9 @@
         "values_list": "yes_no",
         "name": "try_again",
         "display": {
-          "text": "Unauthorized Item Pack! Do not distribute this item pack. Would you like to scan a different item pack?"
+          "prompt": {
+            "text": "Unauthorized Item Pack! Do not distribute this item pack. Would you like to scan a different item pack?"
+          }
         },
         "model": {
           "isSessionVariable": true,
@@ -263,7 +277,9 @@
       {
         "type": "note",
         "display": {
-          "text": "This item pack is authorized. Please deliver this item pack."
+          "prompt": {
+            "text": "This item pack is authorized. Please deliver this item pack."
+          }
         },
         "_row_num": 20
       },
@@ -272,7 +288,9 @@
         "values_list": "yes_no",
         "name": "is_delivered",
         "display": {
-          "text": "Has the item pack been successfully delivered?"
+          "prompt": {
+            "text": "Has the item pack been successfully delivered?"
+          }
         },
         "_row_num": 21
       },
@@ -295,7 +313,9 @@
         "type": "note",
         "name": "pre-summary",
         "display": {
-          "text": "Since the entitlement was successfully delivered, we will now complete a brief delivery report."
+          "prompt": {
+            "text": "Since the entitlement was successfully delivered, we will now complete a brief delivery report."
+          }
         },
         "_row_num": 25
       },
@@ -309,7 +329,9 @@
         "type": "string",
         "name": "distributor",
         "display": {
-          "text": "What is the name of the distributor?"
+          "prompt": {
+            "text": "What is the name of the distributor?"
+          }
         },
         "_row_num": 27
       },
@@ -317,7 +339,9 @@
         "type": "string",
         "name": "delivery_site",
         "display": {
-          "text": "What is the name of the delivery site?"
+          "prompt": {
+            "text": "What is the name of the delivery site?"
+          }
         },
         "_row_num": 28
       },
@@ -325,7 +349,9 @@
         "type": "note",
         "name": "thanks",
         "display": {
-          "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
+          "prompt": {
+            "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
+          }
         },
         "_row_num": 29
       },
@@ -338,7 +364,9 @@
         "values_list": "yes_no",
         "name": "try_again",
         "display": {
-          "text": "Would you like to scan a different item pack instead?"
+          "prompt": {
+            "text": "Would you like to scan a different item pack instead?"
+          }
         },
         "_row_num": 31
       },
@@ -359,7 +387,9 @@
         "type": "note",
         "name": "no_report_option",
         "display": {
-          "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
+          "prompt": {
+            "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
+          }
         },
         "_row_num": 35
       },
@@ -435,10 +465,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -473,7 +500,7 @@
         "_row_num": 5,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -512,6 +539,26 @@
           "_row_num": 3
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 5,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 5,
+        "value": "default"
+      }
     },
     "queries": {},
     "calculates": {
@@ -782,7 +829,9 @@
             "type": "note",
             "name": "pre-delivery",
             "display": {
-              "text": "We will now distribute the appropriate item pack"
+              "prompt": {
+                "text": "We will now distribute the appropriate item pack"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -795,7 +844,9 @@
             "type": "barcode",
             "name": "item_pack_barcode",
             "display": {
-              "text": "Scan an item pack of type {{data.item_pack_name}} {{data.summary}}"
+              "prompt": {
+                "text": "Scan an item pack of type {{data.item_pack_name}} {{data.summary}}"
+              }
             },
             "model": {
               "isSessionVariable": true
@@ -811,7 +862,9 @@
             "type": "string",
             "name": "item_pack_barcode",
             "display": {
-              "text": "Please confirm or update item pack barcode."
+              "prompt": {
+                "text": "Please confirm or update item pack barcode."
+              }
             },
             "model": {
               "isSessionVariable": true
@@ -826,7 +879,9 @@
           {
             "type": "note",
             "display": {
-              "text": "The authorized item pack for this beneficiary is {{data.assigned_code}}"
+              "prompt": {
+                "text": "The authorized item pack for this beneficiary is {{data.assigned_code}}"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -839,7 +894,9 @@
             "type": "barcode",
             "name": "item_pack_barcode",
             "display": {
-              "text": "Scan an item pack of type {{data.item_pack_name}} with a barcode of {{data.assigned_code}}"
+              "prompt": {
+                "text": "Scan an item pack of type {{data.item_pack_name}} with a barcode of {{data.assigned_code}}"
+              }
             },
             "model": {
               "isSessionVariable": true
@@ -855,7 +912,9 @@
             "type": "string",
             "name": "item_pack_barcode",
             "display": {
-              "text": "Please confirm or update item pack barcode."
+              "prompt": {
+                "text": "Please confirm or update item pack barcode."
+              }
             },
             "model": {
               "isSessionVariable": true
@@ -872,7 +931,9 @@
             "values_list": "yes_no",
             "name": "try_again",
             "display": {
-              "text": "Unauthorized Item Pack! Do not distribute this item pack. Would you like to scan a different item pack?"
+              "prompt": {
+                "text": "Unauthorized Item Pack! Do not distribute this item pack. Would you like to scan a different item pack?"
+              }
             },
             "model": {
               "isSessionVariable": true,
@@ -888,7 +949,9 @@
           {
             "type": "note",
             "display": {
-              "text": "This item pack is authorized. Please deliver this item pack."
+              "prompt": {
+                "text": "This item pack is authorized. Please deliver this item pack."
+              }
             },
             "_row_num": 20,
             "__rowNum__": 19,
@@ -902,7 +965,9 @@
             "values_list": "yes_no",
             "name": "is_delivered",
             "display": {
-              "text": "Has the item pack been successfully delivered?"
+              "prompt": {
+                "text": "Has the item pack been successfully delivered?"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -915,7 +980,9 @@
             "type": "note",
             "name": "pre-summary",
             "display": {
-              "text": "Since the entitlement was successfully delivered, we will now complete a brief delivery report."
+              "prompt": {
+                "text": "Since the entitlement was successfully delivered, we will now complete a brief delivery report."
+              }
             },
             "_row_num": 25,
             "__rowNum__": 24,
@@ -928,7 +995,9 @@
             "type": "string",
             "name": "distributor",
             "display": {
-              "text": "What is the name of the distributor?"
+              "prompt": {
+                "text": "What is the name of the distributor?"
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -941,7 +1010,9 @@
             "type": "string",
             "name": "delivery_site",
             "display": {
-              "text": "What is the name of the delivery site?"
+              "prompt": {
+                "text": "What is the name of the delivery site?"
+              }
             },
             "_row_num": 28,
             "__rowNum__": 27,
@@ -954,7 +1025,9 @@
             "type": "note",
             "name": "thanks",
             "display": {
-              "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
+              "prompt": {
+                "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
+              }
             },
             "_row_num": 29,
             "__rowNum__": 28,
@@ -968,7 +1041,9 @@
             "values_list": "yes_no",
             "name": "try_again",
             "display": {
-              "text": "Would you like to scan a different item pack instead?"
+              "prompt": {
+                "text": "Would you like to scan a different item pack instead?"
+              }
             },
             "_row_num": 31,
             "__rowNum__": 30,
@@ -981,7 +1056,9 @@
             "type": "note",
             "name": "no_report_option",
             "display": {
-              "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
+              "prompt": {
+                "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
+              }
             },
             "_row_num": 35,
             "__rowNum__": 34,

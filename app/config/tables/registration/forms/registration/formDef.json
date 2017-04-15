@@ -23,8 +23,12 @@
         "type": "string",
         "name": "first_name",
         "display": {
-          "text": "What is your first name?",
-          "hint": "First name"
+          "prompt": {
+            "text": "What is your first name?"
+          },
+          "hint": {
+            "text": "First name"
+          }
         },
         "required": true,
         "_row_num": 5
@@ -33,8 +37,12 @@
         "type": "string",
         "name": "last_name",
         "display": {
-          "text": "What is your last Name?",
-          "hint": "Last name"
+          "prompt": {
+            "text": "What is your last Name?"
+          },
+          "hint": {
+            "text": "Last name"
+          }
         },
         "required": true,
         "_row_num": 6
@@ -49,7 +57,9 @@
         "type": "date",
         "name": "birth_date",
         "display": {
-          "text": "What is your date of birth?"
+          "prompt": {
+            "text": "What is your date of birth?"
+          }
         },
         "required": true,
         "_row_num": 8
@@ -64,88 +74,130 @@
         "type": "select_one",
         "name": "gender",
         "display": {
-          "text": "What is your gender?"
+          "prompt": {
+            "text": "What is your gender?"
+          }
         },
         "values_list": "genders",
         "required": true,
         "_row_num": 10
       },
       {
+        "clause": "begin screen",
+        "_row_num": 11
+      },
+      {
         "type": "string",
         "name": "id_type",
         "display": {
-          "text": "What type of ID do you have?"
+          "prompt": {
+            "text": "What type of ID do you have?"
+          }
         },
-        "_row_num": 11
+        "_row_num": 12
       },
       {
         "type": "string",
         "name": "id_number",
         "display": {
-          "text": "What is your ID number?"
+          "prompt": {
+            "text": "What is your ID number?"
+          }
         },
         "required": true,
-        "_row_num": 12
+        "_row_num": 13
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 14
       },
       {
         "type": "select_one",
         "name": "delivery_site",
         "display": {
-          "text": "What is the name of the intended delivery site?"
+          "prompt": {
+            "text": "What is the name of the intended delivery site?"
+          }
         },
         "values_list": "sites",
-        "_row_num": 13
+        "_row_num": 15
       },
       {
         "type": "string",
         "name": "address",
         "display": {
-          "text": "What is your current address?",
-          "hint": "Address"
+          "prompt": {
+            "text": "What is your current address?"
+          },
+          "hint": {
+            "text": "Address"
+          }
         },
-        "_row_num": 14
+        "_row_num": 16
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 17
       },
       {
         "type": "string",
         "name": "mobile_provider",
         "display": {
-          "text": "What is your mobile phone service provider?"
+          "prompt": {
+            "text": "What is your mobile phone service provider?"
+          }
         },
-        "_row_num": 15
+        "_row_num": 18
       },
       {
         "type": "string",
         "name": "telephone",
         "display": {
-          "text": "What is your mobile phone number?",
-          "hint": "Telephone number"
+          "prompt": {
+            "text": "What is your mobile phone number?"
+          },
+          "hint": {
+            "text": "Telephone number"
+          }
         },
-        "_row_num": 16
+        "_row_num": 19
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 20
       },
       {
         "type": "string",
         "name": "hh_size",
         "display": {
-          "text": "How many people are in your household?",
-          "hint": "Including household representative"
+          "prompt": {
+            "text": "How many people are in your household?"
+          },
+          "hint": {
+            "text": "Including household representative"
+          }
         },
         "required": true,
-        "_row_num": 17
+        "_row_num": 21
       },
       {
         "type": "geopoint",
         "name": "location",
         "display": {
-          "text": "Capture current location"
+          "prompt": {
+            "text": "Capture current location"
+          }
         },
-        "_row_num": 18
+        "_row_num": 22
       },
       {
         "type": "note",
         "display": {
-          "text": "Press \"Next\" to finish."
+          "prompt": {
+            "text": "Press \"Next\" to finish."
+          }
         },
-        "_row_num": 19
+        "_row_num": 23
       }
     ],
     "settings": [
@@ -374,10 +426,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -412,7 +461,7 @@
         "_row_num": 5,
         "value": [
           {
-            "display": {
+            "locale": {
               "text": "default"
             },
             "name": "default"
@@ -485,6 +534,26 @@
           "_row_num": 7
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 5,
+        "value": [
+          {
+            "locale": {
+              "text": "default"
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 5,
+        "value": "default"
+      }
     },
     "queries": {},
     "calculates": {
@@ -599,7 +668,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -613,7 +682,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 13,
             "section_name": "survey"
           },
           {
@@ -628,7 +697,7 @@
         "valuesList": "sites",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
@@ -642,7 +711,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 16,
             "section_name": "survey"
           },
           {
@@ -656,7 +725,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
@@ -670,7 +739,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 19,
             "section_name": "survey"
           },
           {
@@ -684,7 +753,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -765,7 +834,7 @@
         },
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {
@@ -790,8 +859,12 @@
             "type": "string",
             "name": "first_name",
             "display": {
-              "text": "What is your first name?",
-              "hint": "First name"
+              "prompt": {
+                "text": "What is your first name?"
+              },
+              "hint": {
+                "text": "First name"
+              }
             },
             "required": true,
             "_row_num": 5,
@@ -805,8 +878,12 @@
             "type": "string",
             "name": "last_name",
             "display": {
-              "text": "What is your last Name?",
-              "hint": "Last name"
+              "prompt": {
+                "text": "What is your last Name?"
+              },
+              "hint": {
+                "text": "Last name"
+              }
             },
             "required": true,
             "_row_num": 6,
@@ -820,7 +897,9 @@
             "type": "date",
             "name": "birth_date",
             "display": {
-              "text": "What is your date of birth?"
+              "prompt": {
+                "text": "What is your date of birth?"
+              }
             },
             "required": true,
             "_row_num": 8,
@@ -834,7 +913,9 @@
             "type": "select_one",
             "name": "gender",
             "display": {
-              "text": "What is your gender?"
+              "prompt": {
+                "text": "What is your gender?"
+              }
             },
             "values_list": "genders",
             "required": true,
@@ -849,10 +930,12 @@
             "type": "string",
             "name": "id_type",
             "display": {
-              "text": "What type of ID do you have?"
+              "prompt": {
+                "text": "What type of ID do you have?"
+              }
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "string",
             "_branch_label_enclosing_screen": "survey/_screen11",
@@ -862,117 +945,139 @@
             "type": "string",
             "name": "id_number",
             "display": {
-              "text": "What is your ID number?"
+              "prompt": {
+                "text": "What is your ID number?"
+              }
             },
             "required": true,
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen12",
+            "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 5
           },
           {
             "type": "select_one",
             "name": "delivery_site",
             "display": {
-              "text": "What is the name of the intended delivery site?"
+              "prompt": {
+                "text": "What is the name of the intended delivery site?"
+              }
             },
             "values_list": "sites",
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen13",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 6
           },
           {
             "type": "string",
             "name": "address",
             "display": {
-              "text": "What is your current address?",
-              "hint": "Address"
-            },
-            "_row_num": 14,
-            "__rowNum__": 13,
-            "_token_type": "prompt",
-            "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen14",
-            "promptIdx": 7
-          },
-          {
-            "type": "string",
-            "name": "mobile_provider",
-            "display": {
-              "text": "What is your mobile phone service provider?"
-            },
-            "_row_num": 15,
-            "__rowNum__": 14,
-            "_token_type": "prompt",
-            "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 8
-          },
-          {
-            "type": "string",
-            "name": "telephone",
-            "display": {
-              "text": "What is your mobile phone number?",
-              "hint": "Telephone number"
+              "prompt": {
+                "text": "What is your current address?"
+              },
+              "hint": {
+                "text": "Address"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "string",
             "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 7
+          },
+          {
+            "type": "string",
+            "name": "mobile_provider",
+            "display": {
+              "prompt": {
+                "text": "What is your mobile phone service provider?"
+              }
+            },
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 8
+          },
+          {
+            "type": "string",
+            "name": "telephone",
+            "display": {
+              "prompt": {
+                "text": "What is your mobile phone number?"
+              },
+              "hint": {
+                "text": "Telephone number"
+              }
+            },
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen17",
             "promptIdx": 9
           },
           {
             "type": "string",
             "name": "hh_size",
             "display": {
-              "text": "How many people are in your household?",
-              "hint": "Including household representative"
+              "prompt": {
+                "text": "How many people are in your household?"
+              },
+              "hint": {
+                "text": "Including household representative"
+              }
             },
             "required": true,
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen17",
+            "_branch_label_enclosing_screen": "survey/_screen21",
             "promptIdx": 10
           },
           {
             "type": "geopoint",
             "name": "location",
             "display": {
-              "text": "Capture current location"
+              "prompt": {
+                "text": "Capture current location"
+              }
             },
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen18",
+            "_branch_label_enclosing_screen": "survey/_screen22",
             "promptIdx": 11
           },
           {
             "type": "note",
             "display": {
-              "text": "Press \"Next\" to finish."
+              "prompt": {
+                "text": "Press \"Next\" to finish."
+              }
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen19",
+            "_branch_label_enclosing_screen": "survey/_screen23",
             "promptIdx": 12
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 20,
-            "_branch_label_enclosing_screen": "survey/_screen20",
+            "_row_num": 24,
+            "_branch_label_enclosing_screen": "survey/_screen24",
             "promptIdx": 13
           }
         ],
@@ -1057,79 +1162,83 @@
             "operationIdx": 8
           },
           {
+            "clause": "begin screen",
             "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 14,
+              "__rowNum__": 13,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 9
-          },
-          {
-            "_row_num": 12,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 10
-          },
-          {
-            "_row_num": 13,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 11
-          },
-          {
-            "_row_num": 14,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 12
           },
           {
             "_row_num": 15,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 13
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 10
           },
           {
             "_row_num": 16,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 11
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 17,
+            "__rowNum__": 16,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 20,
+              "__rowNum__": 19,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 12
+          },
+          {
+            "_row_num": 21,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 13
+          },
+          {
+            "_row_num": 22,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 14
           },
           {
-            "_row_num": 17,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 15
-          },
-          {
-            "_row_num": 18,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 16
-          },
-          {
-            "_row_num": 19,
+            "_row_num": 23,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 17
+            "operationIdx": 15
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 20,
-            "operationIdx": 18
+            "_row_num": 24,
+            "operationIdx": 16
           },
           {
-            "_row_num": 20,
+            "_row_num": 24,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 19
+            "operationIdx": 17
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 20,
-            "operationIdx": 20
+            "_row_num": 24,
+            "operationIdx": 18
           }
         ],
         "branch_label_map": {
@@ -1138,16 +1247,14 @@
           "_screen8": 6,
           "_screen10": 8,
           "_screen11": 9,
-          "_screen12": 10,
-          "_screen13": 11,
-          "_screen14": 12,
-          "_screen15": 13,
-          "_screen16": 14,
-          "_screen17": 15,
-          "_screen18": 16,
-          "_screen19": 17,
-          "_contents": 19,
-          "_screen20": 19
+          "_screen15": 10,
+          "_screen16": 11,
+          "_screen17": 12,
+          "_screen21": 13,
+          "_screen22": 14,
+          "_screen23": 15,
+          "_contents": 17,
+          "_screen24": 17
         }
       },
       "initial": {
@@ -1383,7 +1490,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -1400,7 +1507,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 13,
             "section_name": "survey"
           },
           {
@@ -1418,7 +1525,7 @@
         "valuesList": "sites",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
@@ -1435,7 +1542,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 16,
             "section_name": "survey"
           },
           {
@@ -1452,7 +1559,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 18,
             "section_name": "survey"
           },
           {
@@ -1469,7 +1576,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 19,
             "section_name": "survey"
           },
           {
@@ -1486,7 +1593,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -1594,7 +1701,7 @@
         },
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {

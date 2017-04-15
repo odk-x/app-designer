@@ -1,6 +1,0 @@
-_element_key,_element_name,_element_type,_list_child_element_keys
-odk_sms,odk_sms,integer,[]
-odk_sms_automatic,odk_sms_automatic,integer,[]
-phone_number,phone_number,string,[]
-send_sms,send_sms,integer,[]
-subject_name,subject_name,string,[]
