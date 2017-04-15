@@ -5,9 +5,7 @@
         "type": "integer",
         "name": "default_rating",
         "display": {
-          "prompt": {
-            "text": "Enter an initial rating (1-10) for this survey"
-          },
+          "prompt": "first_prompt",
           "hint": {
             "text": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
           }
@@ -474,6 +472,16 @@
         "_row_num": 63
       }
     ],
+    "table_specific_translations": [
+      {
+        "string_token": "first_prompt",
+        "text": {
+          "default": "Enter an initial rating (1-10) for this survey",
+          "hindi": "HINDI Enter an initial rating (1-10) for this survey"
+        },
+        "_row_num": 2
+      }
+    ],
     "calculates": [
       {
         "calculation_name": "ask_about_seattle",
@@ -650,10 +658,37 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Example Form"
+            "text": {
+              "default": "Example Form",
+              "hindi": "hindi exampleform"
+            }
           }
         },
         "_row_num": 4
+      },
+      {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "English",
+              "hindi": "English (as hindi name)"
+            }
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "setting_name": "hindi",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Hindi",
+              "hindi": "Hindi (as hindi name)"
+            }
+          }
+        },
+        "_row_num": 6
       }
     ]
   },
@@ -687,10 +722,37 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Example Form"
+            "text": {
+              "default": "Example Form",
+              "hindi": "hindi exampleform"
+            }
           }
         },
         "_row_num": 4
+      },
+      "english": {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "English",
+              "hindi": "English (as hindi name)"
+            }
+          }
+        },
+        "_row_num": 5
+      },
+      "hindi": {
+        "setting_name": "hindi",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Hindi",
+              "hindi": "Hindi (as hindi name)"
+            }
+          }
+        },
+        "_row_num": 6
       },
       "form_id": {
         "setting_name": "form_id",
@@ -703,6 +765,18 @@
         "_row_num": 4,
         "value": [
           {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Hindi",
+                  "hindi": "Hindi (as hindi name)"
+                }
+              }
+            },
+            "_row_num": 6,
+            "name": "hindi"
+          },
+          {
             "locale": {
               "text": "default"
             },
@@ -713,13 +787,16 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 4,
-        "value": "default"
+        "value": "hindi"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Example Form"
+            "text": {
+              "default": "Example Form",
+              "hindi": "hindi exampleform"
+            }
           }
         },
         "_row_num": 4
@@ -888,11 +965,32 @@
       ]
     },
     "table_specific_translations": {
-      "_tokens": {},
+      "_tokens": {
+        "first_prompt": {
+          "string_token": "first_prompt",
+          "text": {
+            "default": "Enter an initial rating (1-10) for this survey",
+            "hindi": "HINDI Enter an initial rating (1-10) for this survey"
+          },
+          "_row_num": 2
+        }
+      },
       "_locales": {
         "setting_name": "_locales",
         "_row_num": 4,
         "value": [
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Hindi",
+                  "hindi": "Hindi (as hindi name)"
+                }
+              }
+            },
+            "_row_num": 6,
+            "name": "hindi"
+          },
           {
             "locale": {
               "text": "default"
@@ -904,7 +1002,7 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 4,
-        "value": "default"
+        "value": "hindi"
       }
     },
     "queries": {},
@@ -1275,9 +1373,7 @@
             "type": "integer",
             "name": "default_rating",
             "display": {
-              "prompt": {
-                "text": "Enter an initial rating (1-10) for this survey"
-              },
+              "prompt": "first_prompt",
               "hint": {
                 "text": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
               }
@@ -2259,7 +2355,10 @@
             "promptIdx": 1,
             "display": {
               "title": {
-                "text": "Example Form"
+                "text": {
+                  "default": "Example Form",
+                  "hindi": "hindi exampleform"
+                }
               }
             },
             "_branch_label_enclosing_screen": "survey/0"
@@ -3227,7 +3326,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"Example Form\"}"
+        "_value": "{\"text\":{\"default\":\"Example Form\",\"hindi\":\"hindi exampleform\"}}"
       }
     ]
   }
