@@ -361,7 +361,7 @@ verifyLoad('builder',
 			afterTableSpecificTranslationsLoadAttempt();
 		} else {
 			var formPathCells = formPath.split('/');
-			formPathCells = formPathCells.slice(0,formPathCells.length-4);
+			formPathCells = formPathCells.slice(0,formPathCells.length-3);
 			formPathCells.push('tableSpecificTranslations.js');
 			var path = formPathCells.join('/');
 			//This tries to load any user defined screen types provided in customScreenTypes.js.

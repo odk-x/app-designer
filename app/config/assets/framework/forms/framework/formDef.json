@@ -1184,6 +1184,20 @@
           "default": "Scan Barcode"
         },
         "_row_num": 55
+      },
+      {
+        "string_token": "invalid_numeric_message",
+        "text": {
+          "default": "Numeric value expected"
+        },
+        "_row_num": 56
+      },
+      {
+        "string_token": "invalid_integer_message",
+        "text": {
+          "default": "Integer value expected"
+        },
+        "_row_num": 57
       }
     ]
   },
@@ -1905,6 +1919,20 @@
             "default": "Scan Barcode"
           },
           "_row_num": 55
+        },
+        "invalid_numeric_message": {
+          "string_token": "invalid_numeric_message",
+          "text": {
+            "default": "Numeric value expected"
+          },
+          "_row_num": 56
+        },
+        "invalid_integer_message": {
+          "string_token": "invalid_integer_message",
+          "text": {
+            "default": "Integer value expected"
+          },
+          "_row_num": 57
         }
       },
       "_locales": {
