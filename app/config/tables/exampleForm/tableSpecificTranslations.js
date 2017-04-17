@@ -17,6 +17,18 @@ window.odkTableSpecificTranslations = {
         "display": {
           "locale": {
             "text": {
+              "english": "English",
+              "hindi": "English (as hindi name)"
+            }
+          }
+        },
+        "_row_num": 5,
+        "name": "english"
+      },
+      {
+        "display": {
+          "locale": {
+            "text": {
               "english": "Hindi",
               "hindi": "Hindi (as hindi name)"
             }
@@ -24,18 +36,12 @@ window.odkTableSpecificTranslations = {
         },
         "_row_num": 6,
         "name": "hindi"
-      },
-      {
-        "locale": {
-          "text": "default"
-        },
-        "name": "default"
       }
     ]
   },
   "_default_locale": {
     "setting_name": "_default_locale",
     "_row_num": 4,
-    "value": "hindi"
+    "value": "english"
   }
 }

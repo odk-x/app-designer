@@ -2639,7 +2639,9 @@ var XLSXConverter = {};
                     // Otherwise, use the tag itself as the name for that language.
                     var translations = processedSettings[f];
                     if ( translations == null || translations.display == null ) {
-                        locales.push( { locale: {text: f},
+                        locales.push( { display: {
+											locale: {text: f}
+										},
                                         name: f } );
                         if ( defaultLocale == null ) {
                             defaultLocale = f;
