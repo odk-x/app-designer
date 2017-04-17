@@ -2751,8 +2751,6 @@ var XLSXConverter = {};
 				}
 				specification.framework_translations = {};
 				specification.framework_translations._tokens = processedTranslations;
-				specification.framework_translations._locales = specification.settings._locales;
-				specification.framework_translations._default_locale = specification.settings._default_locale;
 			}
 			{
 				var processedTranslations = {};
@@ -2801,8 +2799,6 @@ var XLSXConverter = {};
 			}
 			specification.table_specific_translations = {};
 			specification.table_specific_translations._tokens = processedTranslations;
-			specification.table_specific_translations._locales = specification.settings._locales;
-			specification.table_specific_translations._default_locale = specification.settings._default_locale;
 		}
 
         // QUERIES
