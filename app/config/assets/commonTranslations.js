@@ -9,7 +9,8 @@ window.odkCommonTranslations = {
           "locale": {
             "text": {
               "english": "English",
-              "hindi": "English (as hindi name)"
+              "hindi": "English (as hindi name)",
+              "default": "English"
             }
           }
         },
@@ -21,7 +22,8 @@ window.odkCommonTranslations = {
           "locale": {
             "text": {
               "english": "Hindi",
-              "hindi": "Hindi (as hindi name)"
+              "hindi": "Hindi (as hindi name)",
+              "default": "Hindi"
             }
           }
         },

@@ -284,8 +284,10 @@
         "_row_num": 5,
         "value": [
           {
-            "locale": {
-              "text": "default"
+            "display": {
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }

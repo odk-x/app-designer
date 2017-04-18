@@ -13428,8 +13428,10 @@
         "_row_num": 4,
         "value": [
           {
-            "locale": {
-              "text": "default"
+            "display": {
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }

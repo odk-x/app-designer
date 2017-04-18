@@ -557,7 +557,8 @@
           "title": {
             "text": {
               "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
+              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "default": "Common Javascript Framework"
             }
           }
         },
@@ -571,7 +572,8 @@
           "locale": {
             "text": {
               "english": "English",
-              "hindi": "English (as hindi name)"
+              "hindi": "English (as hindi name)",
+              "default": "English"
             }
           }
         },
@@ -583,7 +585,8 @@
           "locale": {
             "text": {
               "english": "Hindi",
-              "hindi": "Hindi (as hindi name)"
+              "hindi": "Hindi (as hindi name)",
+              "default": "Hindi"
             }
           }
         },
@@ -1240,7 +1243,8 @@
           "title": {
             "text": {
               "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
+              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "default": "Common Javascript Framework"
             }
           }
         },
@@ -1254,7 +1258,8 @@
           "locale": {
             "text": {
               "english": "English",
-              "hindi": "English (as hindi name)"
+              "hindi": "English (as hindi name)",
+              "default": "English"
             }
           }
         },
@@ -1266,7 +1271,8 @@
           "locale": {
             "text": {
               "english": "Hindi",
-              "hindi": "Hindi (as hindi name)"
+              "hindi": "Hindi (as hindi name)",
+              "default": "Hindi"
             }
           }
         },
@@ -1281,7 +1287,8 @@
               "locale": {
                 "text": {
                   "english": "English",
-                  "hindi": "English (as hindi name)"
+                  "hindi": "English (as hindi name)",
+                  "default": "English"
                 }
               }
             },
@@ -1293,7 +1300,8 @@
               "locale": {
                 "text": {
                   "english": "Hindi",
-                  "hindi": "Hindi (as hindi name)"
+                  "hindi": "Hindi (as hindi name)",
+                  "default": "Hindi"
                 }
               }
             },
@@ -1313,7 +1321,8 @@
           "title": {
             "text": {
               "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
+              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "default": "Common Javascript Framework"
             }
           }
         },
@@ -1947,7 +1956,8 @@
               "locale": {
                 "text": {
                   "english": "English",
-                  "hindi": "English (as hindi name)"
+                  "hindi": "English (as hindi name)",
+                  "default": "English"
                 }
               }
             },
@@ -1959,7 +1969,8 @@
               "locale": {
                 "text": {
                   "english": "Hindi",
-                  "hindi": "Hindi (as hindi name)"
+                  "hindi": "Hindi (as hindi name)",
+                  "default": "Hindi"
                 }
               }
             },
@@ -2003,7 +2014,8 @@
               "title": {
                 "text": {
                   "english": "Common Javascript Framework",
-                  "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
+                  "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+                  "default": "Common Javascript Framework"
                 }
               }
             },
@@ -3047,7 +3059,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"hindi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\"}}"
+        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"hindi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\",\"default\":\"Common Javascript Framework\"}}"
       }
     ]
   }
