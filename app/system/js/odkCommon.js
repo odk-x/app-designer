@@ -148,6 +148,17 @@ window.odkCommon = {
    
    i18nFieldNames: [ 'text', 'image', 'audio', 'video' ],
    
+   extractLangOnlyLocale: function(locale) {
+	  // Device locale strings are of the form: language + "_" + country
+	  // Allow for generic language translations and for country-specific langauge 
+	  // translations.
+	  var idxUnderscore = locale.indexOf('_');
+	  if ( idxUnderscore > 0) {
+		  return locale.substring(0,idxUnderscore);
+	  }
+	  return null;
+   },
+   
    /**
     * Return true if there is some type of localization for the given i18nToken and locale
 	* OR if there is a 'default' localization value.
@@ -164,6 +175,11 @@ window.odkCommon = {
           return true;
       }
 	  
+	  // Device locale strings are of the form: language + "_" + country
+	  // Allow for generic language translations and for country-specific langauge 
+	  // translations.
+	  var langOnlyLocale = this.extractLangOnlyLocale(locale);
+	  
 	  // the keys in the textOrLangMap are one of: text, image, audio, video
 	  // see if any of these have a localization.
 	  for ( var i = 0 ; i < this.i18nFieldNames.length ; ++i ) {
@@ -173,6 +189,8 @@ window.odkCommon = {
 		  if(this.isString(textMap)) {
 			  return true;
 		  } else if( locale in textMap ) {
+			  return true;
+		  } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
 			  return true;
 		  } else if ( 'default' in textMap ) {
 			  return true;
@@ -190,12 +208,19 @@ window.odkCommon = {
       if(this.isString(textOrLangMap)) {
           return true;
       }
-	  
+		  
+	  // Device locale strings are of the form: language + "_" + country
+	  // Allow for generic language translations and for country-specific langauge 
+	  // translations.
+	  var langOnlyLocale = this.extractLangOnlyLocale(locale);
+  
 	  if ( fieldName in textOrLangMap ) {
 		  var textMap = textOrLangMap[fieldName];
 		  if(this.isString(textMap)) {
 			  return true;
 		  } else if( locale in textMap ) {
+			  return true;
+		  } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
 			  return true;
 		  } else if ( 'default' in textMap ) {
 			  return true;
@@ -219,9 +244,17 @@ window.odkCommon = {
       if(this.isString(textMap)) {
           return textMap;
       }
+
+	  // Device locale strings are of the form: language + "_" + country
+	  // Allow for generic language translations and for country-specific langauge 
+	  // translations.
+	  var langOnlyLocale = this.extractLangOnlyLocale(locale);
+
       if( locale in textMap ) {
           return textMap[locale];
-      } else if( 'default' in textMap ){
+	  } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
+		  return textMap[langOnlyLocale];
+      } else if( 'default' in textMap ) {
           return textMap['default'];
       } else {
 		  return undefined;
