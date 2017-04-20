@@ -160,6 +160,42 @@ window.odkCommon = {
    },
    
    /**
+    * Return the locale that was configured by the user in the Java-side's Device Settings.
+	*/
+   getPreferredLocale: function() {
+	   var pi = this.getPlatformInfo();
+	   var obj = JSON.parse(pi);
+	   return obj.preferredLocale;
+   },
+   
+   /**
+    * Get details about the preferred locale and the Device's locale setting.
+	* And also whether or not the preferred locale (above) is (just) the Device
+	* locale.
+	* Note that the user may have set the preferred locale to be "en_US" and the
+	* device locale may also happen to be "en_US". In this case, usingDeviceLocale
+	* is false. Only if the user chooses to use the device locale (vs. one of the 
+	* locales defined in the common translations) will this be true.
+	*/
+   getLocaleDetails: function() {
+	   var pi = this.getPlatformInfo();
+	   var obj = JSON.parse(pi);
+	   var info = {
+			preferredLocale: obj.preferredLocale,
+			usingDeviceLocale: obj.usingDeviceLocale,
+			// info about the device locale:
+			isoCountry: obj.isoCountry,
+			displayCountry: obj.displayCountry,
+			isoLanguage: obj.isoLanguage,
+			displayLanguage: obj.displayLanguage };
+	   // and, finally if the device supports it, report the BCP47 tag:
+	   if ( bcp47LanguageTag in obj ) {
+		   info.bcp47LanguageTag = obj.bcp47LanguageTag;
+	   }
+	   return info;
+   },
+   
+   /**
     * Return true if there is some type of localization for the given i18nToken and locale
 	* OR if there is a 'default' localization value.
 	*
