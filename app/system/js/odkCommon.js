@@ -182,15 +182,17 @@ window.odkCommon = {
 	   var obj = JSON.parse(pi);
 	   var info = {
 			preferredLocale: obj.preferredLocale,
+			// true only if user did not override the device locale
 			usingDeviceLocale: obj.usingDeviceLocale,
 			// info about the device locale:
 			isoCountry: obj.isoCountry,
 			displayCountry: obj.displayCountry,
 			isoLanguage: obj.isoLanguage,
 			displayLanguage: obj.displayLanguage };
+			
 	   // and, finally if the device supports it, report the BCP47 tag:
 	   if ( bcp47LanguageTag in obj ) {
-		   info.bcp47LanguageTag = obj.bcp47LanguageTag;
+		  info.bcp47LanguageTag = obj.bcp47LanguageTag;
 	   }
 	   return info;
    },
@@ -850,7 +852,15 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 baseUri: that._computeBaseUri(),
                 formsUri: "content://org.opendatakit.provider.forms/",
                 activeUser: 'username:badger',
-                logLevel: this._logLevel
+                logLevel: this._logLevel,
+				preferredLocale: 'en_US',
+				// true only if user did not override the device locale
+				usingDeviceLocale: true,
+				// info about the device locale:
+				isoCountry: 'US',
+				displayCountry: "United States",
+				isoLanguage: 'en',
+				displayLanguage: "English"
             };
             // Because the phone returns a String, we too are going to return a
             // string here.

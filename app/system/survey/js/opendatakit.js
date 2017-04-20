@@ -440,28 +440,18 @@ return {
     },
 
     /**
-        The default locale is a synthesized value. It is specified by
-        the value of the '_default_locale' setting.
-
-        This is generally the first locale in the _locales list, above.
-     */
-    getDefaultFormLocale:function(formDef) {
-        if ( formDef !== null &&  formDef !== undefined ) {
-            var localeObject = this.getSettingObject(formDef, '_default_locale');
-            if ( localeObject !== null && localeObject !== undefined &&
-                 localeObject.value !== null && localeObject.value !== undefined ) {
-                return localeObject.value;
-            }
-            alert("_default_locales not present in form! See console:");
-            console.error("The synthesized _default_locales field is not present in the form!");
-        }
-        return "default";
-    },
-    /**
-     use this when the formDef is known to be stored in the mdl
+     changed in rev 210 to use the setting from the Java side's Device Settings menu.
      */
     getDefaultFormLocaleValue:function() {
-        return this.getDefaultFormLocale(this.getCurrentFormDef());
+		// fetch this from platformInfo -- all forms share the same default locale
+		// and any user-defined locales must be defined in the framework form (so they
+		// can be processed by the Java side in this settings menu).
+		// 
+		// individual forms can still offer different locales independent of this
+		// global setting, and the user can change into and out of any locale as
+		// they see fit, but those changes don't propogate up to the Java layer.
+		//
+		return odkCommon.getPreferredLocale();
     },
 
     getFormLocalesValue:function() {
