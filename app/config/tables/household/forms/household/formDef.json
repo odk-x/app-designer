@@ -114,16 +114,6 @@
         "_row_num": 4
       }
     ],
-    "properties": [
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "colOrder",
-        "type": "object",
-        "value": "[\"household_id\",\"num_rooms\",\"electricity\",\"water\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"owner\",\"youngest\"]",
-        "_row_num": 2
-      }
-    ],
     "household": [
       {
         "type": "text",
@@ -191,7 +181,7 @@
       {
         "type": "select_one",
         "values_list": "select_linked_data",
-        "name": "owner",
+        "name": "household_owner",
         "display": {
           "text": "Who is the owner of the household?"
         },
@@ -445,7 +435,7 @@
         },
         "elementKey": "location"
       },
-      "owner": {
+      "household_owner": {
         "_defn": [
           {
             "_row_num": 4,
@@ -454,7 +444,7 @@
         ],
         "type": "string",
         "valuesList": "select_linked_data",
-        "elementKey": "owner"
+        "elementKey": "household_owner"
       },
       "youngest": {
         "_defn": [
@@ -782,7 +772,7 @@
           {
             "type": "select_one",
             "values_list": "select_linked_data",
-            "name": "owner",
+            "name": "household_owner",
             "display": {
               "text": "Who is the owner of the household?"
             },
@@ -1247,7 +1237,7 @@
         ],
         "notUnitOfRetention": true
       },
-      "owner": {
+      "household_owner": {
         "_defn": [
           {
             "_row_num": 4,
@@ -1256,10 +1246,10 @@
         ],
         "type": "string",
         "valuesList": "select_linked_data",
-        "elementKey": "owner",
-        "elementName": "owner",
+        "elementKey": "household_owner",
+        "elementName": "household_owner",
         "elementSet": "data",
-        "elementPath": "owner"
+        "elementPath": "household_owner"
       },
       "youngest": {
         "_defn": [
@@ -1354,29 +1344,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
-      },
-      "_filter_ext": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_ext",
-        "elementName": "_filter_ext",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_ext"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -1386,21 +1360,29 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
-      "_group_type": {
+      "_group_modify": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_group_type",
-        "elementName": "_group_type",
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
         "elementSet": "instanceMetadata",
-        "elementPath": "_group_type"
+        "elementPath": "_group_modify"
       },
-      "_groups_list": {
+      "_group_privileged": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_groups_list",
-        "elementName": "_groups_list",
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
         "elementSet": "instanceMetadata",
-        "elementPath": "_groups_list"
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
       },
       "_locale": {
         "type": "string",
@@ -1409,6 +1391,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_owner",
+        "elementName": "_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1463,13 +1453,6 @@
         "_key": "SurveyUtil.formId",
         "_type": "string",
         "_value": "household"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
-        "_key": "colOrder",
-        "_type": "object",
-        "_value": "[\"household_id\",\"num_rooms\",\"electricity\",\"water\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"owner\",\"youngest\"]"
       },
       {
         "_partition": "Table",
