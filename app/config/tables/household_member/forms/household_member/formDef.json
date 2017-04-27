@@ -139,16 +139,6 @@
         "_row_num": 6
       }
     ],
-    "properties": [
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "colOrder",
-        "type": "object",
-        "value": "[\"household_id\",\"num_rooms\",\"electricity\",\"water\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"name\",\"age\",\"sex\",\"income_contribution\",\"owner\",\"youngest\",\"write_language\",\"attend_school\",\"school_type\",\"grade_level\",\"post_secondary\",\"currently_school\"]",
-        "_row_num": 2
-      }
-    ],
     "model": [
       {
         "name": "household_id",
@@ -196,7 +186,7 @@
         "_row_num": 10
       },
       {
-        "name": "owner",
+        "name": "household_owner",
         "type": "select_one",
         "_row_num": 11
       },
@@ -495,7 +485,7 @@
         ],
         "elementKey": "income_contribution"
       },
-      "owner": {
+      "household_owner": {
         "type": "string",
         "_defn": [
           {
@@ -503,7 +493,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "owner"
+        "elementKey": "household_owner"
       },
       "youngest": {
         "type": "array",
@@ -1050,7 +1040,7 @@
         "elementSet": "data",
         "elementPath": "income_contribution"
       },
-      "owner": {
+      "household_owner": {
         "type": "string",
         "_defn": [
           {
@@ -1058,10 +1048,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "owner",
-        "elementName": "owner",
+        "elementKey": "household_owner",
+        "elementName": "household_owner",
         "elementSet": "data",
-        "elementPath": "owner"
+        "elementPath": "household_owner"
       },
       "youngest": {
         "type": "array",
@@ -1252,21 +1242,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -1276,6 +1258,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -1283,6 +1289,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_owner",
+        "elementName": "_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1337,13 +1351,6 @@
         "_key": "SurveyUtil.formId",
         "_type": "string",
         "_value": "household_member"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
-        "_key": "colOrder",
-        "_type": "object",
-        "_value": "[\"household_id\",\"num_rooms\",\"electricity\",\"water\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"name\",\"age\",\"sex\",\"income_contribution\",\"owner\",\"youngest\",\"write_language\",\"attend_school\",\"school_type\",\"grade_level\",\"post_secondary\",\"currently_school\"]"
       },
       {
         "_partition": "Table",
