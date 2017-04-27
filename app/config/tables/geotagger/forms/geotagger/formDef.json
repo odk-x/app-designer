@@ -5,8 +5,12 @@
         "type": "datetime",
         "name": "Date_and_Time",
         "display": {
-          "text": "Date and Time",
-          "hint": "The date and time of this observation"
+          "prompt": {
+            "text": "Date and Time"
+          },
+          "hint": {
+            "text": "The date and time of this observation"
+          }
         },
         "required": true,
         "_row_num": 2
@@ -15,8 +19,12 @@
         "type": "string",
         "name": "Description",
         "display": {
-          "text": "Description",
-          "hint": "A brief description of this location"
+          "prompt": {
+            "text": "Description"
+          },
+          "hint": {
+            "text": "A brief description of this location"
+          }
         },
         "required": true,
         "_row_num": 3
@@ -25,8 +33,12 @@
         "type": "image",
         "name": "Image",
         "display": {
-          "text": "Image",
-          "hint": "Take an image of this location"
+          "prompt": {
+            "text": "Image"
+          },
+          "hint": {
+            "text": "Take an image of this location"
+          }
         },
         "_row_num": 4
       },
@@ -34,10 +46,16 @@
         "type": "geopoint",
         "name": "Location",
         "display": {
-          "text": "Location",
-          "hint": "Capture the GPS coordinates of this location"
+          "prompt": {
+            "text": "Location"
+          },
+          "hint": {
+            "text": "Capture the GPS coordinates of this location"
+          },
+          "button_label": {
+            "text": "Record Location"
+          }
         },
-        "buttonLabel": "Record Location",
         "_row_num": 5
       }
     ],
@@ -121,7 +139,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Geotagger"
+          "title": {
+            "text": "Geotagger"
+          }
         },
         "_row_num": 4
       },
@@ -150,10 +170,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -169,7 +186,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Geotagger"
+          "title": {
+            "text": "Geotagger"
+          }
         },
         "_row_num": 4
       },
@@ -189,7 +208,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -203,12 +224,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Geotagger"
+          "title": {
+            "text": "Geotagger"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {}
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -301,8 +327,12 @@
             "type": "datetime",
             "name": "Date_and_Time",
             "display": {
-              "text": "Date and Time",
-              "hint": "The date and time of this observation"
+              "prompt": {
+                "text": "Date and Time"
+              },
+              "hint": {
+                "text": "The date and time of this observation"
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -316,8 +346,12 @@
             "type": "string",
             "name": "Description",
             "display": {
-              "text": "Description",
-              "hint": "A brief description of this location"
+              "prompt": {
+                "text": "Description"
+              },
+              "hint": {
+                "text": "A brief description of this location"
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -331,8 +365,12 @@
             "type": "image",
             "name": "Image",
             "display": {
-              "text": "Image",
-              "hint": "Take an image of this location"
+              "prompt": {
+                "text": "Image"
+              },
+              "hint": {
+                "text": "Take an image of this location"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -345,10 +383,16 @@
             "type": "geopoint",
             "name": "Location",
             "display": {
-              "text": "Location",
-              "hint": "Capture the GPS coordinates of this location"
+              "prompt": {
+                "text": "Location"
+              },
+              "hint": {
+                "text": "Capture the GPS coordinates of this location"
+              },
+              "button_label": {
+                "text": "Record Location"
+              }
             },
-            "buttonLabel": "Record Location",
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
@@ -455,7 +499,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Geotagger"
+              "title": {
+                "text": "Geotagger"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -919,7 +965,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Geotagger\""
+        "_value": "{\"text\":\"Geotagger\"}"
       },
       {
         "_partition": "Table",

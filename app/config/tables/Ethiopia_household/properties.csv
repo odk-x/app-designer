@@ -21,4 +21,4 @@ Column,religion_affects_habits,displayChoicesList,object,"[{""choice_list_name""
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,Ethiopia_household
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Ethiopia Household Data"""
+Table,default,displayName,object,"{""text"":""Ethiopia Household Data""}"

@@ -53,30 +53,6 @@ verifyLoad('builder',
         requirejs_path : function(content) {
             'use strict';
             alert("Internal Error: this should already be substituted");
-        },
-        app_path_localized : function(content) {
-            'use strict';
-            var fd = this.requirejs_path('');
-            if ( content === undefined || content === null ) {
-                return content;
-            } else if ( $.isPlainObject(content) ) {
-                var newcontent = {};
-                for ( var key in content ) {
-                    var val = content[key];
-                    if ( val.indexOf('/') === 0 || val.indexOf('http:') === 0 || val.indexOf('https:') === 0 ) {
-                        newcontent[key] = val;
-                    } else {
-                        newcontent[key] = fd + val;
-                    }
-                }
-                return newcontent;
-            } else {
-                if ( content.indexOf('/') === 0 || content.indexOf('http:') === 0 || content.indexOf('https:') === 0 ) {
-                    return content;
-                } else {
-                    return fd + content;
-                }
-            }
         }
     };
 
@@ -255,10 +231,13 @@ verifyLoad('builder',
                                 k, propertyParsers );
                         }
                     });
-
-                    ExtendedPromptType = PromptType.extend(rowObject);
+					
+			        ExtendedPromptType = PromptType.extend(rowObject);
                     PromptInstance = new ExtendedPromptType();
-
+					
+					// fold in the prototype display fields (for default framework translations
+					PromptInstance._foldInProtoDisplayFields();
+					
                     sectionObject.parsed_prompts.push(PromptInstance);
                 }
 
@@ -346,34 +325,67 @@ verifyLoad('builder',
             });
         };
 
-        //This tries to load any user defined prompt types provided in customPromptTypes.js.
-        //TODO: The approach to getting the current form path might need to change.
-        require([formPath + 'customScreenTypes.js'], function (customScreenTypes) {
-            odkCommon.log("I","builder.buildSurvey: customScreenTypes found");
-            //Ensure all custom prompt type names are lowercase.
-            _.each(_.keys(customScreenTypes), function(screenTypeName){
-                if(screenTypeName !== screenTypeName.toLowerCase()) {
-                    console.error('builder.buildSurvey: Invalid screen type name: ' + screenTypeName);
-                    alert("Invalid screen type name: " + screenTypeName);
-                }
-            });
-            $.extend(currentScreenTypes, customScreenTypes);
-            afterCustomScreensLoadAttempt();
-        }, function (err) {
-            odkCommon.log("W",'builder.buildSurvey: error loading ' +
-                        formPath + 'customScreenTypes.js');
-            //The errback, error callback
-            if(err.requireModules) {
-                //The error has a list of modules that failed
-                _.each(err.requireModules, function(failedId){
-                    odkCommon.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
-                    //I'm using undef to clear internal knowledge of the given module.
-                    //I'm not sure if it is necessiary.
-                    requirejs.undef(failedId);
-                });
-            }
-            afterCustomScreensLoadAttempt();
-        });
+        var afterTableSpecificTranslationsLoadAttempt = function(){
+			//This tries to load any user defined screen types provided in customScreenTypes.js.
+			//TODO: The approach to getting the current form path might need to change.
+			require([formPath + 'customScreenTypes.js'], function (customScreenTypes) {
+				odkCommon.log("I","builder.buildSurvey: customScreenTypes found");
+				//Ensure all custom prompt type names are lowercase.
+				_.each(_.keys(customScreenTypes), function(screenTypeName){
+					if(screenTypeName !== screenTypeName.toLowerCase()) {
+						console.error('builder.buildSurvey: Invalid screen type name: ' + screenTypeName);
+						alert("Invalid screen type name: " + screenTypeName);
+					}
+				});
+				$.extend(currentScreenTypes, customScreenTypes);
+				afterCustomScreensLoadAttempt();
+			}, function (err) {
+				odkCommon.log("W",'builder.buildSurvey: error loading ' +
+							formPath + 'customScreenTypes.js');
+				//The errback, error callback
+				if(err.requireModules) {
+					//The error has a list of modules that failed
+					_.each(err.requireModules, function(failedId){
+						odkCommon.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
+						//I'm using undef to clear internal knowledge of the given module.
+						//I'm not sure if it is necessiary.
+						requirejs.undef(failedId);
+					});
+				}
+				afterCustomScreensLoadAttempt();
+			});
+        };
+
+		var tableId = surveyJson.specification.settings.table_id.value;
+		if ( tableId === 'framework') {
+			afterTableSpecificTranslationsLoadAttempt();
+		} else {
+			var formPathCells = formPath.split('/');
+			formPathCells = formPathCells.slice(0,formPathCells.length-3);
+			formPathCells.push('tableSpecificTranslations.js');
+			var path = formPathCells.join('/');
+			//This tries to load any user defined screen types provided in customScreenTypes.js.
+			//TODO: The approach to getting the current form path might need to change.
+			require(['text!' + path], function (source) {
+				odkCommon.log("I","builder.buildSurvey: tableSpecificTranslations found");
+				// this is inserted at the top level.
+				eval(source);
+				afterTableSpecificTranslationsLoadAttempt();
+			}, function (err) {
+				odkCommon.log("W",'builder.buildSurvey: error loading ' + path);
+				//The errback, error callback
+				if(err.requireModules) {
+					//The error has a list of modules that failed
+					_.each(err.requireModules, function(failedId){
+						odkCommon.log('W', 'builder.buildSurvey: failed requirejs load: ' + failedId);
+						//I'm using undef to clear internal knowledge of the given module.
+						//I'm not sure if it is necessiary.
+						requirejs.undef(failedId);
+					});
+				}
+				afterTableSpecificTranslationsLoadAttempt();
+			});
+		}
     }
 };
 });

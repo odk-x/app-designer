@@ -51,28 +51,36 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Household Survey"
+          "title": {
+            "text": "Household Survey"
+          }
         },
         "_row_num": 5
       },
       {
         "setting_name": "household",
         "display": {
-          "title": "Household"
+          "title": {
+            "text": "Household"
+          }
         },
         "_row_num": 6
       },
       {
         "setting_name": "members",
         "display": {
-          "title": "Household Members"
+          "title": {
+            "text": "Household Members"
+          }
         },
         "_row_num": 7
       },
       {
         "setting_name": "education",
         "display": {
-          "title": "Education"
+          "title": {
+            "text": "Education"
+          }
         },
         "_row_num": 8
       },
@@ -119,7 +127,9 @@
         "type": "text",
         "name": "household_id",
         "display": {
-          "text": "Unique barcode ID or locator designation for this household"
+          "prompt": {
+            "text": "Unique barcode ID or locator designation for this household"
+          }
         },
         "required": true,
         "_row_num": 2
@@ -128,7 +138,9 @@
         "type": "integer",
         "name": "num_rooms",
         "display": {
-          "text": "How many rooms does the house contain?"
+          "prompt": {
+            "text": "How many rooms does the house contain?"
+          }
         },
         "_row_num": 3
       },
@@ -137,7 +149,9 @@
         "values_list": "yesno",
         "name": "electricity",
         "display": {
-          "text": "Does the house have electricity?"
+          "prompt": {
+            "text": "Does the house have electricity?"
+          }
         },
         "_row_num": 4
       },
@@ -146,7 +160,9 @@
         "values_list": "yesno",
         "name": "water",
         "display": {
-          "text": "Does the house have running water?"
+          "prompt": {
+            "text": "Does the house have running water?"
+          }
         },
         "_row_num": 5
       },
@@ -154,9 +170,13 @@
         "type": "geopoint",
         "name": "location",
         "display": {
-          "text": "Capture the household location."
+          "prompt": {
+            "text": "Capture the household location."
+          },
+          "button_label": {
+            "text": "Record Location"
+          }
         },
-        "buttonLabel": "Record Location",
         "_row_num": 6
       }
     ],
@@ -164,8 +184,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Household Members Section:",
-          "hint": "This section is used to gather information about all household members."
+          "prompt": {
+            "text": "Household Members Section:"
+          },
+          "hint": {
+            "text": "This section is used to gather information about all household members."
+          }
         },
         "_row_num": 2
       },
@@ -173,8 +197,12 @@
         "type": "linked_table",
         "values_list": "linked_members",
         "display": {
-          "text": "Make a list of all individuals who normally live in this household",
-          "new_instance_text": "Add House Member"
+          "prompt": {
+            "text": "Make a list of all individuals who normally live in this household"
+          },
+          "new_instance_label": {
+            "text": "Add House Member"
+          }
         },
         "_row_num": 3
       },
@@ -183,7 +211,9 @@
         "values_list": "select_linked_data",
         "name": "household_owner",
         "display": {
-          "text": "Who is the owner of the household?"
+          "prompt": {
+            "text": "Who is the owner of the household?"
+          }
         },
         "_row_num": 4
       },
@@ -192,7 +222,9 @@
         "values_list": "select_linked_data",
         "name": "youngest",
         "display": {
-          "text": "Who are the two youngest members of the household?"
+          "prompt": {
+            "text": "Who are the two youngest members of the household?"
+          }
         },
         "_row_num": 5
       }
@@ -201,8 +233,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Education:",
-          "hint": "This section is used to gather education information on the relevant household members."
+          "prompt": {
+            "text": "Education:"
+          },
+          "hint": {
+            "text": "This section is used to gather education information on the relevant household members."
+          }
         },
         "_row_num": 2
       },
@@ -210,7 +246,9 @@
         "type": "linked_table",
         "values_list": "linked_members_education",
         "display": {
-          "text": "Questions are asked to members of the household who are at least 5 years old.",
+          "prompt": {
+            "text": "Questions are asked to members of the household who are at least 5 years old."
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -231,10 +269,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -255,28 +290,36 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Household Survey"
+          "title": {
+            "text": "Household Survey"
+          }
         },
         "_row_num": 5
       },
       "household": {
         "setting_name": "household",
         "display": {
-          "title": "Household"
+          "title": {
+            "text": "Household"
+          }
         },
         "_row_num": 6
       },
       "members": {
         "setting_name": "members",
         "display": {
-          "title": "Household Members"
+          "title": {
+            "text": "Household Members"
+          }
         },
         "_row_num": 7
       },
       "education": {
         "setting_name": "education",
         "display": {
-          "title": "Education"
+          "title": {
+            "text": "Education"
+          }
         },
         "_row_num": 8
       },
@@ -291,7 +334,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -305,7 +350,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Household Survey"
+          "title": {
+            "text": "Household Survey"
+          }
         },
         "_row_num": 5
       }
@@ -329,6 +376,9 @@
           "_row_num": 3
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {}
     },
     "queries": {
       "linked_members": {
@@ -492,7 +542,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Household"
+              "title": {
+                "text": "Household"
+              }
             },
             "_branch_label_enclosing_screen": "household/0"
           },
@@ -505,7 +557,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Household Members"
+              "title": {
+                "text": "Household Members"
+              }
             },
             "_branch_label_enclosing_screen": "members/0"
           },
@@ -518,7 +572,9 @@
             "_type": "_section",
             "promptIdx": 2,
             "display": {
-              "title": "Education"
+              "title": {
+                "text": "Education"
+              }
             },
             "_branch_label_enclosing_screen": "education/0"
           },
@@ -595,7 +651,9 @@
             "type": "text",
             "name": "household_id",
             "display": {
-              "text": "Unique barcode ID or locator designation for this household"
+              "prompt": {
+                "text": "Unique barcode ID or locator designation for this household"
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -609,7 +667,9 @@
             "type": "integer",
             "name": "num_rooms",
             "display": {
-              "text": "How many rooms does the house contain?"
+              "prompt": {
+                "text": "How many rooms does the house contain?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -623,7 +683,9 @@
             "values_list": "yesno",
             "name": "electricity",
             "display": {
-              "text": "Does the house have electricity?"
+              "prompt": {
+                "text": "Does the house have electricity?"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -637,7 +699,9 @@
             "values_list": "yesno",
             "name": "water",
             "display": {
-              "text": "Does the house have running water?"
+              "prompt": {
+                "text": "Does the house have running water?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -650,9 +714,13 @@
             "type": "geopoint",
             "name": "location",
             "display": {
-              "text": "Capture the household location."
+              "prompt": {
+                "text": "Capture the household location."
+              },
+              "button_label": {
+                "text": "Record Location"
+              }
             },
-            "buttonLabel": "Record Location",
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -745,8 +813,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Household Members Section:",
-              "hint": "This section is used to gather information about all household members."
+              "prompt": {
+                "text": "Household Members Section:"
+              },
+              "hint": {
+                "text": "This section is used to gather information about all household members."
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -759,8 +831,12 @@
             "type": "linked_table",
             "values_list": "linked_members",
             "display": {
-              "text": "Make a list of all individuals who normally live in this household",
-              "new_instance_text": "Add House Member"
+              "prompt": {
+                "text": "Make a list of all individuals who normally live in this household"
+              },
+              "new_instance_label": {
+                "text": "Add House Member"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -774,7 +850,9 @@
             "values_list": "select_linked_data",
             "name": "household_owner",
             "display": {
-              "text": "Who is the owner of the household?"
+              "prompt": {
+                "text": "Who is the owner of the household?"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -788,7 +866,9 @@
             "values_list": "select_linked_data",
             "name": "youngest",
             "display": {
-              "text": "Who are the two youngest members of the household?"
+              "prompt": {
+                "text": "Who are the two youngest members of the household?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -873,8 +953,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Education:",
-              "hint": "This section is used to gather education information on the relevant household members."
+              "prompt": {
+                "text": "Education:"
+              },
+              "hint": {
+                "text": "This section is used to gather education information on the relevant household members."
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -887,7 +971,9 @@
             "type": "linked_table",
             "values_list": "linked_members_education",
             "display": {
-              "text": "Questions are asked to members of the household who are at least 5 years old.",
+              "prompt": {
+                "text": "Questions are asked to members of the household who are at least 5 years old."
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -983,7 +1069,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Household Survey"
+              "title": {
+                "text": "Household Survey"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1466,7 +1554,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Household Survey\""
+        "_value": "{\"text\":\"Household Survey\"}"
       }
     ]
   }

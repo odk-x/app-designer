@@ -17,7 +17,9 @@
         "values_list": "no_yes",
         "name": "write_language",
         "display": {
-          "text": "Can {{data.name}} read and write in any language?"
+          "prompt": {
+            "text": "Can {{data.name}} read and write in any language?"
+          }
         },
         "_row_num": 2
       },
@@ -26,7 +28,9 @@
         "values_list": "no_yes",
         "name": "attend_school",
         "display": {
-          "text": "Has {{data.name}} ever attended school?"
+          "prompt": {
+            "text": "Has {{data.name}} ever attended school?"
+          }
         },
         "_row_num": 3
       },
@@ -40,7 +44,9 @@
         "values_list": "school_types",
         "name": "school_type",
         "display": {
-          "text": "What kind(s) of school did {{data.name}} primarily attend?"
+          "prompt": {
+            "text": "What kind(s) of school did {{data.name}} primarily attend?"
+          }
         },
         "_row_num": 5
       },
@@ -51,7 +57,9 @@
       {
         "type": "note",
         "display": {
-          "text": "What is the highest grade {{data.name}} completed?"
+          "prompt": {
+            "text": "What is the highest grade {{data.name}} completed?"
+          }
         },
         "_row_num": 7
       },
@@ -60,7 +68,9 @@
         "values_list": "grade_levels",
         "name": "grade_level",
         "display": {
-          "text": "Level:"
+          "prompt": {
+            "text": "Level:"
+          }
         },
         "_row_num": 8
       },
@@ -74,7 +84,9 @@
         "values_list": "post_secondary_types",
         "name": "post_secondary",
         "display": {
-          "text": "If post-secondary:"
+          "prompt": {
+            "text": "If post-secondary:"
+          }
         },
         "_row_num": 10
       },
@@ -91,7 +103,9 @@
         "values_list": "no_yes",
         "name": "currently_school",
         "display": {
-          "text": "Is  {{data.name}} currently in attending school?"
+          "prompt": {
+            "text": "Is  {{data.name}} currently in attending school?"
+          }
         },
         "_row_num": 13
       },
@@ -217,7 +231,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Education"
+          "title": {
+            "text": "Education"
+          }
         },
         "_row_num": 5
       },
@@ -328,10 +344,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -352,7 +365,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Education"
+          "title": {
+            "text": "Education"
+          }
         },
         "_row_num": 5
       },
@@ -367,7 +382,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -381,7 +398,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Education"
+          "title": {
+            "text": "Education"
+          }
         },
         "_row_num": 5
       }
@@ -746,7 +765,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Education"
+              "title": {
+                "text": "Education"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -844,7 +865,9 @@
             "values_list": "no_yes",
             "name": "write_language",
             "display": {
-              "text": "Can {{data.name}} read and write in any language?"
+              "prompt": {
+                "text": "Can {{data.name}} read and write in any language?"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -858,7 +881,9 @@
             "values_list": "no_yes",
             "name": "attend_school",
             "display": {
-              "text": "Has {{data.name}} ever attended school?"
+              "prompt": {
+                "text": "Has {{data.name}} ever attended school?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -872,7 +897,9 @@
             "values_list": "school_types",
             "name": "school_type",
             "display": {
-              "text": "What kind(s) of school did {{data.name}} primarily attend?"
+              "prompt": {
+                "text": "What kind(s) of school did {{data.name}} primarily attend?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -884,7 +911,9 @@
           {
             "type": "note",
             "display": {
-              "text": "What is the highest grade {{data.name}} completed?"
+              "prompt": {
+                "text": "What is the highest grade {{data.name}} completed?"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -898,7 +927,9 @@
             "values_list": "grade_levels",
             "name": "grade_level",
             "display": {
-              "text": "Level:"
+              "prompt": {
+                "text": "Level:"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -912,7 +943,9 @@
             "values_list": "post_secondary_types",
             "name": "post_secondary",
             "display": {
-              "text": "If post-secondary:"
+              "prompt": {
+                "text": "If post-secondary:"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -926,7 +959,9 @@
             "values_list": "no_yes",
             "name": "currently_school",
             "display": {
-              "text": "Is  {{data.name}} currently in attending school?"
+              "prompt": {
+                "text": "Is  {{data.name}} currently in attending school?"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,

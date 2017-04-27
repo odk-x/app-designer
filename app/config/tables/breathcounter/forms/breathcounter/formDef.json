@@ -5,8 +5,12 @@
         "type": "breathcounter",
         "name": "breath_count",
         "display": {
-          "text": "This breathcounter an example of a custom prompt that launches an intent.",
-          "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+          "prompt": {
+            "text": "This breathcounter an example of a custom prompt that launches an intent."
+          },
+          "hint": {
+            "text": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+          }
         },
         "_row_num": 2
       }
@@ -32,7 +36,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Breathcounter"
+          "title": {
+            "text": "Breathcounter"
+          }
         },
         "_row_num": 4
       }
@@ -51,10 +57,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -70,7 +73,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Breathcounter"
+          "title": {
+            "text": "Breathcounter"
+          }
         },
         "_row_num": 4
       },
@@ -86,7 +91,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -100,12 +107,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Breathcounter"
+          "title": {
+            "text": "Breathcounter"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {}
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -135,8 +147,12 @@
             "type": "breathcounter",
             "name": "breath_count",
             "display": {
-              "text": "This breathcounter an example of a custom prompt that launches an intent.",
-              "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+              "prompt": {
+                "text": "This breathcounter an example of a custom prompt that launches an intent."
+              },
+              "hint": {
+                "text": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -220,7 +236,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Breathcounter"
+              "title": {
+                "text": "Breathcounter"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -523,7 +541,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Breathcounter\""
+        "_value": "{\"text\":\"Breathcounter\"}"
       }
     ]
   }

@@ -4,4 +4,4 @@ Column,water,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,household
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Household Survey"""
+Table,default,displayName,object,"{""text"":""Household Survey""}"

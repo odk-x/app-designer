@@ -16,7 +16,9 @@
         "type": "user_branch",
         "values_list": "test_forms",
         "display": {
-          "text": "Choose a test form (there are many)"
+          "prompt": {
+            "text": "Choose a test form (there are many)"
+          }
         },
         "_row_num": 3
       },
@@ -27,8 +29,12 @@
       {
         "type": "note",
         "display": {
-          "text": "This is the default form.",
-          "hint": "Set your url hash to #formPath=[relative path to form directory]/ to change forms."
+          "prompt": {
+            "text": "This is the default form."
+          },
+          "hint": {
+            "text": "Set your url hash to #formPath=[relative path to form directory]/ to change forms."
+          }
         },
         "_row_num": 5
       },
@@ -48,7 +54,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/agriculture/forms/agriculture/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 9
       },
@@ -64,7 +72,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/geotagger/forms/geotagger/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 12
       },
@@ -80,7 +90,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/breathcounter/forms/breathcounter/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 15
       },
@@ -96,7 +108,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/complex_validate_test/forms/complex_validate_test/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 18
       },
@@ -112,7 +126,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/customAppearance/forms/customAppearance/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 21
       },
@@ -128,7 +144,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/exampleForm/forms/exampleForm/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 24
       },
@@ -144,7 +162,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/household/forms/household/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 27
       },
@@ -160,7 +180,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/imnci/forms/imnci_test/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 30
       },
@@ -176,7 +198,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/refrigerators/forms/refrigerators_init/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 33
       },
@@ -192,7 +216,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/refrigerators/forms/refrigerators_update/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 36
       },
@@ -208,7 +234,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/section_test/forms/section_test/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 39
       },
@@ -224,7 +252,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/selects/forms/selects/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 42
       },
@@ -240,7 +270,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/twoColumn/forms/twoColumn/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 45
       },
@@ -256,7 +288,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/gridScreen/forms/gridScreen/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 48
       },
@@ -272,7 +306,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/adult_coverage/forms/adult_coverage/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 51
       },
@@ -288,7 +324,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/child_coverage/forms/child_coverage/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 54
       },
@@ -304,7 +342,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/graphExample/forms/graphExample/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 57
       },
@@ -320,7 +360,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/visit/forms/visit/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 60
       },
@@ -336,7 +378,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/plot/forms/plot/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 63
       },
@@ -352,7 +396,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/geoweather/forms/geoweather/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 66
       },
@@ -368,7 +414,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/send_sms/forms/send_sms/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 69
       },
@@ -384,7 +432,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/eonasdan/forms/eonasdan/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 72
       },
@@ -400,7 +450,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/screenClient/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 75
       },
@@ -416,7 +468,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/client6Week/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 78
       },
@@ -432,7 +486,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/client6Month/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 81
       },
@@ -448,7 +504,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/maleClients/forms/screenPartner/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 84
       },
@@ -464,7 +522,9 @@
         "url": "'?' + opendatakit.getHashString('../config/tables/maleClients/forms/partner6Month/',null)",
         "type": "external_link",
         "display": {
-          "text": "Open form"
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 87
       },
@@ -494,11 +554,43 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Common Javascript Framework"
+          "title": {
+            "text": {
+              "english": "Common Javascript Framework",
+              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "default": "Common Javascript Framework"
+            }
+          }
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
         "showContents": false,
         "_row_num": 5
+      },
+      {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "English",
+              "hindi": "English (as hindi name)",
+              "default": "English"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "setting_name": "hindi",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Hindi",
+              "hindi": "Hindi (as hindi name)",
+              "default": "Hindi"
+            }
+          }
+        },
+        "_row_num": 8
       }
     ],
     "choices": [
@@ -718,6 +810,398 @@
         },
         "_row_num": 28
       }
+    ],
+    "framework_translations": [
+      {
+        "string_token": "constraint_message",
+        "text": {
+          "default": "Constraint violated."
+        },
+        "_row_num": 2
+      },
+      {
+        "string_token": "invalid_value_message",
+        "text": {
+          "default": "Invalid value."
+        },
+        "_row_num": 3
+      },
+      {
+        "string_token": "required_message",
+        "text": {
+          "default": "Required value not provided."
+        },
+        "_row_num": 4
+      },
+      {
+        "string_token": "required_exception_message",
+        "text": {
+          "default": "Exception while evaluating required() expression. See console log."
+        },
+        "_row_num": 5
+      },
+      {
+        "string_token": "constraint_exception_message",
+        "text": {
+          "default": "Exception while evaluating constraint() expression. See console log."
+        },
+        "_row_num": 6
+      },
+      {
+        "string_token": "acknLabel",
+        "text": {
+          "default": "Acknowledge",
+          "hindi": "स्वीकार करना"
+        },
+        "_row_num": 7
+      },
+      {
+        "string_token": "back_button_label",
+        "text": {
+          "default": "Back",
+          "hindi": "लौटना"
+        },
+        "_row_num": 8
+      },
+      {
+        "string_token": "next_button_label",
+        "text": {
+          "default": "Next",
+          "hindi": "आगामी"
+        },
+        "_row_num": 9
+      },
+      {
+        "string_token": "continue_button_label",
+        "text": {
+          "default": "Continue",
+          "hindi": "जारी रहना"
+        },
+        "_row_num": 10
+      },
+      {
+        "string_token": "select_one_dropdown_label",
+        "text": {
+          "default": "Choose Option"
+        },
+        "_row_num": 11
+      },
+      {
+        "string_token": "requiredValueErr",
+        "text": {
+          "default": "Required value was not provided."
+        },
+        "_row_num": 12
+      },
+      {
+        "string_token": "geopoint_button_label",
+        "text": {
+          "default": "Record Location"
+        },
+        "_row_num": 13
+      },
+      {
+        "string_token": "geopoint_latitude_component",
+        "text": {
+          "default": "Latitude: {{value.latitude}}"
+        },
+        "_row_num": 14
+      },
+      {
+        "string_token": "geopoint_longitude_component",
+        "text": {
+          "default": "Longitude: {{value.longitude}}"
+        },
+        "_row_num": 15
+      },
+      {
+        "string_token": "geopoint_altitude_component",
+        "text": {
+          "default": "Altitude: {{value.altitude}}"
+        },
+        "_row_num": 16
+      },
+      {
+        "string_token": "geopoint_accuracy_component",
+        "text": {
+          "default": "Accuracy: {{value.accuracy}}"
+        },
+        "_row_num": 17
+      },
+      {
+        "string_token": "waiting_text",
+        "text": {
+          "default": "Please wait…"
+        },
+        "_row_num": 18
+      },
+      {
+        "string_token": "take_video_button_label",
+        "text": {
+          "default": "Take Video"
+        },
+        "_row_num": 19
+      },
+      {
+        "string_token": "choose_video_button_label",
+        "text": {
+          "default": "Choose Video"
+        },
+        "_row_num": 20
+      },
+      {
+        "string_token": "video_control_not_supported",
+        "text": {
+          "default": "Video controls are not supported."
+        },
+        "_row_num": 21
+      },
+      {
+        "string_token": "take_audio_button_label",
+        "text": {
+          "default": "Capture Audio"
+        },
+        "_row_num": 22
+      },
+      {
+        "string_token": "choose_audio_button_label",
+        "text": {
+          "default": "Choose Audio"
+        },
+        "_row_num": 23
+      },
+      {
+        "string_token": "audio_control_not_supported",
+        "text": {
+          "default": "Audio controls are not supported."
+        },
+        "_row_num": 24
+      },
+      {
+        "string_token": "confirm_action_no_label",
+        "text": {
+          "default": "NO"
+        },
+        "_row_num": 25
+      },
+      {
+        "string_token": "confirm_action_yes_label",
+        "text": {
+          "default": "YES"
+        },
+        "_row_num": 26
+      },
+      {
+        "string_token": "external_link_button_label",
+        "text": {
+          "default": "Follow link"
+        },
+        "_row_num": 27
+      },
+      {
+        "string_token": "survey_form_identification",
+        "text": {
+          "default": "<div><center>ODK Survey</center><hr></div><div><p>Form name: {{localizeText form_title}}</p>{{#if form_version}}<p>Form version: {{form_version}}</p>{{/if}}<hr></div>"
+        },
+        "_row_num": 28
+      },
+      {
+        "string_token": "finalize_survey_instance_detail",
+        "text": {
+          "default": "<p>You are at the end of instance: </p><p>\"{{display_field}}\"</p><hr>"
+        },
+        "_row_num": 29
+      },
+      {
+        "string_token": "finalize_survey_button_label",
+        "text": {
+          "default": "Finalize"
+        },
+        "_row_num": 30
+      },
+      {
+        "string_token": "save_as_incomplete_survey_button_label",
+        "text": {
+          "default": "Incomplete"
+        },
+        "_row_num": 31
+      },
+      {
+        "string_token": "take_image_button_label",
+        "text": {
+          "default": "Take Photo"
+        },
+        "_row_num": 33
+      },
+      {
+        "string_token": "choose_image_button_label",
+        "text": {
+          "default": "Choose Image"
+        },
+        "_row_num": 34
+      },
+      {
+        "string_token": "launch_intent_button_label",
+        "text": {
+          "default": "Launch Intent"
+        },
+        "_row_num": 35
+      },
+      {
+        "string_token": "opening_survey_instance_detail",
+        "text": {
+          "default": "{{#if display_field}}\n        <p>You are at the start of instance: </p>\n        <p>\"{{display_field}}\"</p> \n  {{else}}\n        <p>You are at the start of a new instance.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>Last saved:</p> \n            <p>{{last_save_date}}</p>\n        {{/if}}\n        <hr>"
+        },
+        "_row_num": 36
+      },
+      {
+        "string_token": "opening_survey_next_button_label",
+        "text": {
+          "default": "Go to next prompt"
+        },
+        "_row_num": 37
+      },
+      {
+        "string_token": "options_popup_language_heading",
+        "text": {
+          "default": "Language"
+        },
+        "_row_num": 38
+      },
+      {
+        "string_token": "options_popup_contents_heading",
+        "text": {
+          "default": "Contents"
+        },
+        "_row_num": 39
+      },
+      {
+        "string_token": "options_popup_ignore_changes_heading",
+        "text": {
+          "default": "Ignore Changes + Exit"
+        },
+        "_row_num": 40
+      },
+      {
+        "string_token": "options_popup_save_changes_heading",
+        "text": {
+          "default": "Save Changes + Exit"
+        },
+        "_row_num": 41
+      },
+      {
+        "string_token": "options_popup_finalize_changes_heading",
+        "text": {
+          "default": "Finalize Changes + Exit"
+        },
+        "_row_num": 42
+      },
+      {
+        "string_token": "screen_popup_ok_button_label",
+        "text": {
+          "default": "OK"
+        },
+        "_row_num": 43
+      },
+      {
+        "string_token": "select_with_other_other_label",
+        "text": {
+          "default": "Other:"
+        },
+        "_row_num": 44
+      },
+      {
+        "string_token": "select_deselect_label",
+        "text": {
+          "default": "Deselect",
+          "hindi": "अचयनित"
+        },
+        "_row_num": 45
+      },
+      {
+        "string_token": "take_signature_button_label",
+        "text": {
+          "default": "Get Signature"
+        },
+        "_row_num": 46
+      },
+      {
+        "string_token": "instances_survey_create_button_label",
+        "text": {
+          "default": "Create new instance"
+        },
+        "_row_num": 47
+      },
+      {
+        "string_token": "instances_no_saved_instances_label",
+        "text": {
+          "default": "No saved instances."
+        },
+        "_row_num": 48
+      },
+      {
+        "string_token": "instances_last_save_date_label",
+        "text": {
+          "default": "<p><strong>Last Save Date:</strong></p>"
+        },
+        "_row_num": 49
+      },
+      {
+        "string_token": "instances_previously_created_instances_label",
+        "text": {
+          "default": "<p>Previously created instances:</p>"
+        },
+        "_row_num": 50
+      },
+      {
+        "string_token": "savepoint_type_finalized_text_label",
+        "text": {
+          "default": "Finalized"
+        },
+        "_row_num": 51
+      },
+      {
+        "string_token": "savepoint_type_incomplete_text_label",
+        "text": {
+          "default": "Incomplete"
+        },
+        "_row_num": 52
+      },
+      {
+        "string_token": "savepoint_type_checkpoint_text_label",
+        "text": {
+          "default": "Checkpoint"
+        },
+        "_row_num": 53
+      },
+      {
+        "string_token": "linked_table_new_instance_label",
+        "text": {
+          "default": "Create new instance"
+        },
+        "_row_num": 54
+      },
+      {
+        "string_token": "barcode_button_label",
+        "text": {
+          "default": "Scan Barcode"
+        },
+        "_row_num": 55
+      },
+      {
+        "string_token": "invalid_numeric_message",
+        "text": {
+          "default": "Numeric value expected"
+        },
+        "_row_num": 56
+      },
+      {
+        "string_token": "invalid_integer_message",
+        "text": {
+          "default": "Integer value expected"
+        },
+        "_row_num": 57
+      }
     ]
   },
   "specification": {
@@ -733,10 +1217,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -759,11 +1240,43 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Common Javascript Framework"
+          "title": {
+            "text": {
+              "english": "Common Javascript Framework",
+              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "default": "Common Javascript Framework"
+            }
+          }
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
         "showContents": false,
         "_row_num": 5
+      },
+      "english": {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "English",
+              "hindi": "English (as hindi name)",
+              "default": "English"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      "hindi": {
+        "setting_name": "hindi",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Hindi",
+              "hindi": "Hindi (as hindi name)",
+              "default": "Hindi"
+            }
+          }
+        },
+        "_row_num": 8
       },
       "_locales": {
         "setting_name": "_locales",
@@ -771,21 +1284,47 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": {
+                  "english": "English",
+                  "hindi": "English (as hindi name)",
+                  "default": "English"
+                }
+              }
             },
-            "name": "default"
+            "_row_num": 7,
+            "name": "english"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Hindi",
+                  "hindi": "Hindi (as hindi name)",
+                  "default": "Hindi"
+                }
+              }
+            },
+            "_row_num": 8,
+            "name": "hindi"
           }
         ]
       },
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "default"
+        "value": "english"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Common Javascript Framework"
+          "title": {
+            "text": {
+              "english": "Common Javascript Framework",
+              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "default": "Common Javascript Framework"
+            }
+          }
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
         "showContents": false,
@@ -1012,6 +1551,440 @@
         }
       ]
     },
+    "framework_translations": {
+      "_tokens": {
+        "constraint_message": {
+          "string_token": "constraint_message",
+          "text": {
+            "default": "Constraint violated."
+          },
+          "_row_num": 2
+        },
+        "invalid_value_message": {
+          "string_token": "invalid_value_message",
+          "text": {
+            "default": "Invalid value."
+          },
+          "_row_num": 3
+        },
+        "required_message": {
+          "string_token": "required_message",
+          "text": {
+            "default": "Required value not provided."
+          },
+          "_row_num": 4
+        },
+        "required_exception_message": {
+          "string_token": "required_exception_message",
+          "text": {
+            "default": "Exception while evaluating required() expression. See console log."
+          },
+          "_row_num": 5
+        },
+        "constraint_exception_message": {
+          "string_token": "constraint_exception_message",
+          "text": {
+            "default": "Exception while evaluating constraint() expression. See console log."
+          },
+          "_row_num": 6
+        },
+        "acknLabel": {
+          "string_token": "acknLabel",
+          "text": {
+            "default": "Acknowledge",
+            "hindi": "स्वीकार करना"
+          },
+          "_row_num": 7
+        },
+        "back_button_label": {
+          "string_token": "back_button_label",
+          "text": {
+            "default": "Back",
+            "hindi": "लौटना"
+          },
+          "_row_num": 8
+        },
+        "next_button_label": {
+          "string_token": "next_button_label",
+          "text": {
+            "default": "Next",
+            "hindi": "आगामी"
+          },
+          "_row_num": 9
+        },
+        "continue_button_label": {
+          "string_token": "continue_button_label",
+          "text": {
+            "default": "Continue",
+            "hindi": "जारी रहना"
+          },
+          "_row_num": 10
+        },
+        "select_one_dropdown_label": {
+          "string_token": "select_one_dropdown_label",
+          "text": {
+            "default": "Choose Option"
+          },
+          "_row_num": 11
+        },
+        "requiredValueErr": {
+          "string_token": "requiredValueErr",
+          "text": {
+            "default": "Required value was not provided."
+          },
+          "_row_num": 12
+        },
+        "geopoint_button_label": {
+          "string_token": "geopoint_button_label",
+          "text": {
+            "default": "Record Location"
+          },
+          "_row_num": 13
+        },
+        "geopoint_latitude_component": {
+          "string_token": "geopoint_latitude_component",
+          "text": {
+            "default": "Latitude: {{value.latitude}}"
+          },
+          "_row_num": 14
+        },
+        "geopoint_longitude_component": {
+          "string_token": "geopoint_longitude_component",
+          "text": {
+            "default": "Longitude: {{value.longitude}}"
+          },
+          "_row_num": 15
+        },
+        "geopoint_altitude_component": {
+          "string_token": "geopoint_altitude_component",
+          "text": {
+            "default": "Altitude: {{value.altitude}}"
+          },
+          "_row_num": 16
+        },
+        "geopoint_accuracy_component": {
+          "string_token": "geopoint_accuracy_component",
+          "text": {
+            "default": "Accuracy: {{value.accuracy}}"
+          },
+          "_row_num": 17
+        },
+        "waiting_text": {
+          "string_token": "waiting_text",
+          "text": {
+            "default": "Please wait…"
+          },
+          "_row_num": 18
+        },
+        "take_video_button_label": {
+          "string_token": "take_video_button_label",
+          "text": {
+            "default": "Take Video"
+          },
+          "_row_num": 19
+        },
+        "choose_video_button_label": {
+          "string_token": "choose_video_button_label",
+          "text": {
+            "default": "Choose Video"
+          },
+          "_row_num": 20
+        },
+        "video_control_not_supported": {
+          "string_token": "video_control_not_supported",
+          "text": {
+            "default": "Video controls are not supported."
+          },
+          "_row_num": 21
+        },
+        "take_audio_button_label": {
+          "string_token": "take_audio_button_label",
+          "text": {
+            "default": "Capture Audio"
+          },
+          "_row_num": 22
+        },
+        "choose_audio_button_label": {
+          "string_token": "choose_audio_button_label",
+          "text": {
+            "default": "Choose Audio"
+          },
+          "_row_num": 23
+        },
+        "audio_control_not_supported": {
+          "string_token": "audio_control_not_supported",
+          "text": {
+            "default": "Audio controls are not supported."
+          },
+          "_row_num": 24
+        },
+        "confirm_action_no_label": {
+          "string_token": "confirm_action_no_label",
+          "text": {
+            "default": "NO"
+          },
+          "_row_num": 25
+        },
+        "confirm_action_yes_label": {
+          "string_token": "confirm_action_yes_label",
+          "text": {
+            "default": "YES"
+          },
+          "_row_num": 26
+        },
+        "external_link_button_label": {
+          "string_token": "external_link_button_label",
+          "text": {
+            "default": "Follow link"
+          },
+          "_row_num": 27
+        },
+        "survey_form_identification": {
+          "string_token": "survey_form_identification",
+          "text": {
+            "default": "<div><center>ODK Survey</center><hr></div><div><p>Form name: {{localizeText form_title}}</p>{{#if form_version}}<p>Form version: {{form_version}}</p>{{/if}}<hr></div>"
+          },
+          "_row_num": 28
+        },
+        "finalize_survey_instance_detail": {
+          "string_token": "finalize_survey_instance_detail",
+          "text": {
+            "default": "<p>You are at the end of instance: </p><p>\"{{display_field}}\"</p><hr>"
+          },
+          "_row_num": 29
+        },
+        "finalize_survey_button_label": {
+          "string_token": "finalize_survey_button_label",
+          "text": {
+            "default": "Finalize"
+          },
+          "_row_num": 30
+        },
+        "save_as_incomplete_survey_button_label": {
+          "string_token": "save_as_incomplete_survey_button_label",
+          "text": {
+            "default": "Incomplete"
+          },
+          "_row_num": 31
+        },
+        "take_image_button_label": {
+          "string_token": "take_image_button_label",
+          "text": {
+            "default": "Take Photo"
+          },
+          "_row_num": 33
+        },
+        "choose_image_button_label": {
+          "string_token": "choose_image_button_label",
+          "text": {
+            "default": "Choose Image"
+          },
+          "_row_num": 34
+        },
+        "launch_intent_button_label": {
+          "string_token": "launch_intent_button_label",
+          "text": {
+            "default": "Launch Intent"
+          },
+          "_row_num": 35
+        },
+        "opening_survey_instance_detail": {
+          "string_token": "opening_survey_instance_detail",
+          "text": {
+            "default": "{{#if display_field}}\n        <p>You are at the start of instance: </p>\n        <p>\"{{display_field}}\"</p> \n  {{else}}\n        <p>You are at the start of a new instance.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>Last saved:</p> \n            <p>{{last_save_date}}</p>\n        {{/if}}\n        <hr>"
+          },
+          "_row_num": 36
+        },
+        "opening_survey_next_button_label": {
+          "string_token": "opening_survey_next_button_label",
+          "text": {
+            "default": "Go to next prompt"
+          },
+          "_row_num": 37
+        },
+        "options_popup_language_heading": {
+          "string_token": "options_popup_language_heading",
+          "text": {
+            "default": "Language"
+          },
+          "_row_num": 38
+        },
+        "options_popup_contents_heading": {
+          "string_token": "options_popup_contents_heading",
+          "text": {
+            "default": "Contents"
+          },
+          "_row_num": 39
+        },
+        "options_popup_ignore_changes_heading": {
+          "string_token": "options_popup_ignore_changes_heading",
+          "text": {
+            "default": "Ignore Changes + Exit"
+          },
+          "_row_num": 40
+        },
+        "options_popup_save_changes_heading": {
+          "string_token": "options_popup_save_changes_heading",
+          "text": {
+            "default": "Save Changes + Exit"
+          },
+          "_row_num": 41
+        },
+        "options_popup_finalize_changes_heading": {
+          "string_token": "options_popup_finalize_changes_heading",
+          "text": {
+            "default": "Finalize Changes + Exit"
+          },
+          "_row_num": 42
+        },
+        "screen_popup_ok_button_label": {
+          "string_token": "screen_popup_ok_button_label",
+          "text": {
+            "default": "OK"
+          },
+          "_row_num": 43
+        },
+        "select_with_other_other_label": {
+          "string_token": "select_with_other_other_label",
+          "text": {
+            "default": "Other:"
+          },
+          "_row_num": 44
+        },
+        "select_deselect_label": {
+          "string_token": "select_deselect_label",
+          "text": {
+            "default": "Deselect",
+            "hindi": "अचयनित"
+          },
+          "_row_num": 45
+        },
+        "take_signature_button_label": {
+          "string_token": "take_signature_button_label",
+          "text": {
+            "default": "Get Signature"
+          },
+          "_row_num": 46
+        },
+        "instances_survey_create_button_label": {
+          "string_token": "instances_survey_create_button_label",
+          "text": {
+            "default": "Create new instance"
+          },
+          "_row_num": 47
+        },
+        "instances_no_saved_instances_label": {
+          "string_token": "instances_no_saved_instances_label",
+          "text": {
+            "default": "No saved instances."
+          },
+          "_row_num": 48
+        },
+        "instances_last_save_date_label": {
+          "string_token": "instances_last_save_date_label",
+          "text": {
+            "default": "<p><strong>Last Save Date:</strong></p>"
+          },
+          "_row_num": 49
+        },
+        "instances_previously_created_instances_label": {
+          "string_token": "instances_previously_created_instances_label",
+          "text": {
+            "default": "<p>Previously created instances:</p>"
+          },
+          "_row_num": 50
+        },
+        "savepoint_type_finalized_text_label": {
+          "string_token": "savepoint_type_finalized_text_label",
+          "text": {
+            "default": "Finalized"
+          },
+          "_row_num": 51
+        },
+        "savepoint_type_incomplete_text_label": {
+          "string_token": "savepoint_type_incomplete_text_label",
+          "text": {
+            "default": "Incomplete"
+          },
+          "_row_num": 52
+        },
+        "savepoint_type_checkpoint_text_label": {
+          "string_token": "savepoint_type_checkpoint_text_label",
+          "text": {
+            "default": "Checkpoint"
+          },
+          "_row_num": 53
+        },
+        "linked_table_new_instance_label": {
+          "string_token": "linked_table_new_instance_label",
+          "text": {
+            "default": "Create new instance"
+          },
+          "_row_num": 54
+        },
+        "barcode_button_label": {
+          "string_token": "barcode_button_label",
+          "text": {
+            "default": "Scan Barcode"
+          },
+          "_row_num": 55
+        },
+        "invalid_numeric_message": {
+          "string_token": "invalid_numeric_message",
+          "text": {
+            "default": "Numeric value expected"
+          },
+          "_row_num": 56
+        },
+        "invalid_integer_message": {
+          "string_token": "invalid_integer_message",
+          "text": {
+            "default": "Integer value expected"
+          },
+          "_row_num": 57
+        }
+      }
+    },
+    "common_translations": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 5,
+        "value": [
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "English",
+                  "hindi": "English (as hindi name)",
+                  "default": "English"
+                }
+              }
+            },
+            "_row_num": 7,
+            "name": "english"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Hindi",
+                  "hindi": "Hindi (as hindi name)",
+                  "default": "Hindi"
+                }
+              }
+            },
+            "_row_num": 8,
+            "name": "hindi"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 5,
+        "value": "english"
+      }
+    },
     "queries": {},
     "calculates": {},
     "model": {},
@@ -1038,7 +2011,13 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Common Javascript Framework"
+              "title": {
+                "text": {
+                  "english": "Common Javascript Framework",
+                  "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+                  "default": "Common Javascript Framework"
+                }
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1126,7 +2105,9 @@
             "type": "user_branch",
             "values_list": "test_forms",
             "display": {
-              "text": "Choose a test form (there are many)"
+              "prompt": {
+                "text": "Choose a test form (there are many)"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1138,8 +2119,12 @@
           {
             "type": "note",
             "display": {
-              "text": "This is the default form.",
-              "hint": "Set your url hash to #formPath=[relative path to form directory]/ to change forms."
+              "prompt": {
+                "text": "This is the default form."
+              },
+              "hint": {
+                "text": "Set your url hash to #formPath=[relative path to form directory]/ to change forms."
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -1152,7 +2137,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/agriculture/forms/agriculture/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -1165,7 +2152,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/geotagger/forms/geotagger/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -1178,7 +2167,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/breathcounter/forms/breathcounter/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -1191,7 +2182,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/complex_validate_test/forms/complex_validate_test/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 18,
             "__rowNum__": 17,
@@ -1204,7 +2197,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/customAppearance/forms/customAppearance/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -1217,7 +2212,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/exampleForm/forms/exampleForm/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 24,
             "__rowNum__": 23,
@@ -1230,7 +2227,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/household/forms/household/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -1243,7 +2242,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/imnci/forms/imnci_test/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -1256,7 +2257,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/refrigerators/forms/refrigerators_init/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 33,
             "__rowNum__": 32,
@@ -1269,7 +2272,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/refrigerators/forms/refrigerators_update/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 36,
             "__rowNum__": 35,
@@ -1282,7 +2287,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/section_test/forms/section_test/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 39,
             "__rowNum__": 38,
@@ -1295,7 +2302,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/selects/forms/selects/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 42,
             "__rowNum__": 41,
@@ -1308,7 +2317,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/twoColumn/forms/twoColumn/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 45,
             "__rowNum__": 44,
@@ -1321,7 +2332,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/gridScreen/forms/gridScreen/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 48,
             "__rowNum__": 47,
@@ -1334,7 +2347,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/adult_coverage/forms/adult_coverage/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 51,
             "__rowNum__": 50,
@@ -1347,7 +2362,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/child_coverage/forms/child_coverage/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 54,
             "__rowNum__": 53,
@@ -1360,7 +2377,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/graphExample/forms/graphExample/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 57,
             "__rowNum__": 56,
@@ -1373,7 +2392,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/visit/forms/visit/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 60,
             "__rowNum__": 59,
@@ -1386,7 +2407,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/plot/forms/plot/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 63,
             "__rowNum__": 62,
@@ -1399,7 +2422,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/geoweather/forms/geoweather/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 66,
             "__rowNum__": 65,
@@ -1412,7 +2437,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/send_sms/forms/send_sms/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 69,
             "__rowNum__": 68,
@@ -1425,7 +2452,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/eonasdan/forms/eonasdan/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 72,
             "__rowNum__": 71,
@@ -1438,7 +2467,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/screenClient/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 75,
             "__rowNum__": 74,
@@ -1451,7 +2482,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/client6Week/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 78,
             "__rowNum__": 77,
@@ -1464,7 +2497,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/client6Month/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 81,
             "__rowNum__": 80,
@@ -1477,7 +2512,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/maleClients/forms/screenPartner/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 84,
             "__rowNum__": 83,
@@ -1490,7 +2527,9 @@
             "url": "'?' + opendatakit.getHashString('../config/tables/maleClients/forms/partner6Month/',null)",
             "type": "external_link",
             "display": {
-              "text": "Open form"
+              "prompt": {
+                "text": "Open form"
+              }
             },
             "_row_num": 87,
             "__rowNum__": 86,
@@ -2020,7 +3059,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Common Javascript Framework\""
+        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"hindi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\",\"default\":\"Common Javascript Framework\"}}"
       }
     ]
   }

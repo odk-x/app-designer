@@ -67,4 +67,4 @@ Column,wasting,displayChoicesList,object,"[{""choice_list_name"":""present"",""d
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,imgci
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""<b>IMCI Ghana</b>"""
+Table,default,displayName,object,"{""text"":""<b>IMCI Ghana</b>""}"

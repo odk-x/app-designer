@@ -5,7 +5,9 @@
         "type": "text",
         "name": "FOL_date",
         "display": {
-          "text": "Date of follow"
+          "prompt": {
+            "text": "Date of follow"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "text",
         "name": "FOL_B_AnimID",
         "display": {
-          "text": "ID of focal chimp"
+          "prompt": {
+            "text": "ID of focal chimp"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "text",
         "name": "FOL_CL_community_id",
         "display": {
-          "text": "Community of focal chimp."
+          "prompt": {
+            "text": "Community of focal chimp."
+          }
         },
         "_row_num": 4
       },
@@ -29,7 +35,9 @@
         "type": "text",
         "name": "FOL_time_begin",
         "display": {
-          "text": "Begin time of follow"
+          "prompt": {
+            "text": "Begin time of follow"
+          }
         },
         "_row_num": 5
       },
@@ -37,7 +45,9 @@
         "type": "text",
         "name": "FOL_time_end",
         "display": {
-          "text": "End time of follow"
+          "prompt": {
+            "text": "End time of follow"
+          }
         },
         "_row_num": 6
       },
@@ -46,7 +56,9 @@
         "values_list": "yes_no",
         "name": "FOL_flag_begin_in_nest",
         "display": {
-          "text": "Focal chimp started the follow in his/her nest"
+          "prompt": {
+            "text": "Focal chimp started the follow in his/her nest"
+          }
         },
         "_row_num": 7
       },
@@ -55,7 +67,9 @@
         "values_list": "yes_no",
         "name": "FOL_flag_end_in_nest",
         "display": {
-          "text": "Focal chimp ended the follow in his/her nest"
+          "prompt": {
+            "text": "Focal chimp ended the follow in his/her nest"
+          }
         },
         "_row_num": 8
       },
@@ -63,7 +77,9 @@
         "type": "integer",
         "name": "FOL_duration",
         "display": {
-          "text": "number of minutes that data was collected"
+          "prompt": {
+            "text": "number of minutes that data was collected"
+          }
         },
         "_row_num": 9
       },
@@ -71,7 +87,9 @@
         "type": "integer",
         "name": "FOL_distance_traveled",
         "display": {
-          "text": "Total distance of the follow"
+          "prompt": {
+            "text": "Total distance of the follow"
+          }
         },
         "_row_num": 10
       },
@@ -79,7 +97,9 @@
         "type": "text",
         "name": "FOL_am_observer1",
         "display": {
-          "text": "Name of researcher who recorded the data in the AM"
+          "prompt": {
+            "text": "Name of researcher who recorded the data in the AM"
+          }
         },
         "_row_num": 11
       },
@@ -87,7 +107,9 @@
         "type": "text",
         "name": "FOL_am_observer2",
         "display": {
-          "text": "Name of researcher who recorded the data in the AM"
+          "prompt": {
+            "text": "Name of researcher who recorded the data in the AM"
+          }
         },
         "_row_num": 12
       },
@@ -95,7 +117,9 @@
         "type": "text",
         "name": "FOL_pm_observer1",
         "display": {
-          "text": "Name of researcher who recorded the data in the PM"
+          "prompt": {
+            "text": "Name of researcher who recorded the data in the PM"
+          }
         },
         "_row_num": 13
       },
@@ -103,7 +127,9 @@
         "type": "text",
         "name": "FOL_pm_observer2",
         "display": {
-          "text": "Name of researcher who recorded the data in the PM"
+          "prompt": {
+            "text": "Name of researcher who recorded the data in the PM"
+          }
         },
         "_row_num": 14
       },
@@ -111,7 +137,9 @@
         "type": "text",
         "name": "FOL_study_code1",
         "display": {
-          "text": "Indicates if the follow was part of a specific study"
+          "prompt": {
+            "text": "Indicates if the follow was part of a specific study"
+          }
         },
         "_row_num": 15
       },
@@ -119,7 +147,9 @@
         "type": "text",
         "name": "FOL_study_code2",
         "display": {
-          "text": "Indicates if the follow was part of a specific study"
+          "prompt": {
+            "text": "Indicates if the follow was part of a specific study"
+          }
         },
         "_row_num": 16
       },
@@ -127,7 +157,9 @@
         "type": "integer",
         "name": "FOL_day",
         "display": {
-          "text": "The day the follow took place"
+          "prompt": {
+            "text": "The day the follow took place"
+          }
         },
         "_row_num": 17
       },
@@ -135,7 +167,9 @@
         "type": "integer",
         "name": "FOL_month",
         "display": {
-          "text": "The month in which the follow took place"
+          "prompt": {
+            "text": "The month in which the follow took place"
+          }
         },
         "_row_num": 18
       },
@@ -143,7 +177,9 @@
         "type": "integer",
         "name": "FOL_year",
         "display": {
-          "text": "The year in which the follow took place"
+          "prompt": {
+            "text": "The year in which the follow took place"
+          }
         },
         "_row_num": 19
       }
@@ -180,7 +216,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Follow"
+          "title": {
+            "text": "Follow"
+          }
         },
         "_row_num": 4
       }
@@ -233,10 +271,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -252,7 +287,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Follow"
+          "title": {
+            "text": "Follow"
+          }
         },
         "_row_num": 4
       },
@@ -268,7 +305,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -282,7 +321,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Follow"
+          "title": {
+            "text": "Follow"
+          }
         },
         "_row_num": 4
       }
@@ -306,6 +347,9 @@
           "_row_num": 3
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {}
     },
     "queries": {},
     "calculates": {},
@@ -507,7 +551,9 @@
             "type": "text",
             "name": "FOL_date",
             "display": {
-              "text": "Date of follow"
+              "prompt": {
+                "text": "Date of follow"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -520,7 +566,9 @@
             "type": "text",
             "name": "FOL_B_AnimID",
             "display": {
-              "text": "ID of focal chimp"
+              "prompt": {
+                "text": "ID of focal chimp"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -533,7 +581,9 @@
             "type": "text",
             "name": "FOL_CL_community_id",
             "display": {
-              "text": "Community of focal chimp."
+              "prompt": {
+                "text": "Community of focal chimp."
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -546,7 +596,9 @@
             "type": "text",
             "name": "FOL_time_begin",
             "display": {
-              "text": "Begin time of follow"
+              "prompt": {
+                "text": "Begin time of follow"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -559,7 +611,9 @@
             "type": "text",
             "name": "FOL_time_end",
             "display": {
-              "text": "End time of follow"
+              "prompt": {
+                "text": "End time of follow"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -573,7 +627,9 @@
             "values_list": "yes_no",
             "name": "FOL_flag_begin_in_nest",
             "display": {
-              "text": "Focal chimp started the follow in his/her nest"
+              "prompt": {
+                "text": "Focal chimp started the follow in his/her nest"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -587,7 +643,9 @@
             "values_list": "yes_no",
             "name": "FOL_flag_end_in_nest",
             "display": {
-              "text": "Focal chimp ended the follow in his/her nest"
+              "prompt": {
+                "text": "Focal chimp ended the follow in his/her nest"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -600,7 +658,9 @@
             "type": "integer",
             "name": "FOL_duration",
             "display": {
-              "text": "number of minutes that data was collected"
+              "prompt": {
+                "text": "number of minutes that data was collected"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -613,7 +673,9 @@
             "type": "integer",
             "name": "FOL_distance_traveled",
             "display": {
-              "text": "Total distance of the follow"
+              "prompt": {
+                "text": "Total distance of the follow"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -626,7 +688,9 @@
             "type": "text",
             "name": "FOL_am_observer1",
             "display": {
-              "text": "Name of researcher who recorded the data in the AM"
+              "prompt": {
+                "text": "Name of researcher who recorded the data in the AM"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -639,7 +703,9 @@
             "type": "text",
             "name": "FOL_am_observer2",
             "display": {
-              "text": "Name of researcher who recorded the data in the AM"
+              "prompt": {
+                "text": "Name of researcher who recorded the data in the AM"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -652,7 +718,9 @@
             "type": "text",
             "name": "FOL_pm_observer1",
             "display": {
-              "text": "Name of researcher who recorded the data in the PM"
+              "prompt": {
+                "text": "Name of researcher who recorded the data in the PM"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -665,7 +733,9 @@
             "type": "text",
             "name": "FOL_pm_observer2",
             "display": {
-              "text": "Name of researcher who recorded the data in the PM"
+              "prompt": {
+                "text": "Name of researcher who recorded the data in the PM"
+              }
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -678,7 +748,9 @@
             "type": "text",
             "name": "FOL_study_code1",
             "display": {
-              "text": "Indicates if the follow was part of a specific study"
+              "prompt": {
+                "text": "Indicates if the follow was part of a specific study"
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -691,7 +763,9 @@
             "type": "text",
             "name": "FOL_study_code2",
             "display": {
-              "text": "Indicates if the follow was part of a specific study"
+              "prompt": {
+                "text": "Indicates if the follow was part of a specific study"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -704,7 +778,9 @@
             "type": "integer",
             "name": "FOL_day",
             "display": {
-              "text": "The day the follow took place"
+              "prompt": {
+                "text": "The day the follow took place"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -717,7 +793,9 @@
             "type": "integer",
             "name": "FOL_month",
             "display": {
-              "text": "The month in which the follow took place"
+              "prompt": {
+                "text": "The month in which the follow took place"
+              }
             },
             "_row_num": 18,
             "__rowNum__": 17,
@@ -730,7 +808,9 @@
             "type": "integer",
             "name": "FOL_year",
             "display": {
-              "text": "The year in which the follow took place"
+              "prompt": {
+                "text": "The year in which the follow took place"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -933,7 +1013,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Follow"
+              "title": {
+                "text": "Follow"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1486,7 +1568,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Follow\""
+        "_value": "{\"text\":\"Follow\"}"
       },
       {
         "_partition": "Table",

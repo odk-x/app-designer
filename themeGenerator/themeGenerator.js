@@ -11,7 +11,7 @@ $(document).ready(function (){
 
   $.get("./templates/customStyles.template.css", function(data){
     window.customStyle = data;
-      $(".update-styles").bind('change',function(){
+      $(".update-styles").on('change',function(){
         addToIFrame(generateCustomStyles());
       });
       $("#generateStyles").click(function(){

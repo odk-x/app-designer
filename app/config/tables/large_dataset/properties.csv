@@ -3,5 +3,5 @@ Column,type_of_store,displayChoicesList,object,"[{""choice_list_name"":""store_t
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,large_dataset
 Table,default,defaultViewType,string,LIST
-Table,default,displayName,object,"""Large Dataset Timing Test"""
+Table,default,displayName,object,"{""text"":""Large Dataset Timing Test""}"
 Table,default,listViewFileName,string,config/tables/large_dataset/html/large_dataset.html

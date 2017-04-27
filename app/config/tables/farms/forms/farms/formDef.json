@@ -29,21 +29,27 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Farms Survey"
+          "title": {
+            "text": "Farms Survey"
+          }
         },
         "_row_num": 5
       },
       {
         "setting_name": "farms",
         "display": {
-          "title": "Farms"
+          "title": {
+            "text": "Farms"
+          }
         },
         "_row_num": 6
       },
       {
         "setting_name": "fields",
         "display": {
-          "title": "Fields"
+          "title": {
+            "text": "Fields"
+          }
         },
         "_row_num": 7
       },
@@ -94,7 +100,9 @@
         "type": "text",
         "name": "farm_name",
         "display": {
-          "text": "Enter the name of the farm:"
+          "prompt": {
+            "text": "Enter the name of the farm:"
+          }
         },
         "required": true,
         "_row_num": 2
@@ -109,7 +117,9 @@
         "type": "geopoint",
         "name": "location",
         "display": {
-          "text": "Record the location of farm:"
+          "prompt": {
+            "text": "Record the location of farm:"
+          }
         },
         "_row_num": 4
       },
@@ -117,7 +127,9 @@
         "type": "integer",
         "name": "farm_num_employee",
         "display": {
-          "text": "Enter the number of employee:"
+          "prompt": {
+            "text": "Enter the number of employee:"
+          }
         },
         "_row_num": 5
       },
@@ -125,7 +137,9 @@
         "type": "decimal",
         "name": "farm_revenue",
         "display": {
-          "text": "Enter the revenue for the farm:"
+          "prompt": {
+            "text": "Enter the revenue for the farm:"
+          }
         },
         "_row_num": 6
       }
@@ -134,8 +148,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Farms Fields section:",
-          "hint": "This section is to gather information about fields in the farm"
+          "prompt": {
+            "text": "Farms Fields section:"
+          },
+          "hint": {
+            "text": "This section is to gather information about fields in the farm"
+          }
         },
         "_row_num": 2
       },
@@ -143,8 +161,12 @@
         "type": "linked_table",
         "values_list": "linked_fields",
         "display": {
-          "text": "Record all the fields in this farm",
-          "new_instance_text": "Add Fields"
+          "prompt": {
+            "text": "Record all the fields in this farm"
+          },
+          "new_instance_label": {
+            "text": "Add Fields"
+          }
         },
         "_row_num": 3
       }
@@ -207,10 +229,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -231,21 +250,27 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Farms Survey"
+          "title": {
+            "text": "Farms Survey"
+          }
         },
         "_row_num": 5
       },
       "farms": {
         "setting_name": "farms",
         "display": {
-          "title": "Farms"
+          "title": {
+            "text": "Farms"
+          }
         },
         "_row_num": 6
       },
       "fields": {
         "setting_name": "fields",
         "display": {
-          "title": "Fields"
+          "title": {
+            "text": "Fields"
+          }
         },
         "_row_num": 7
       },
@@ -260,7 +285,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -274,12 +301,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Farms Survey"
+          "title": {
+            "text": "Farms Survey"
+          }
         },
         "_row_num": 5
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {}
+    },
     "queries": {
       "linked_fields": {
         "query_name": "linked_fields",
@@ -476,7 +508,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Farms"
+              "title": {
+                "text": "Farms"
+              }
             },
             "_branch_label_enclosing_screen": "farms/0"
           },
@@ -489,7 +523,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Fields"
+              "title": {
+                "text": "Fields"
+              }
             },
             "_branch_label_enclosing_screen": "fields/0"
           },
@@ -558,7 +594,9 @@
             "type": "text",
             "name": "farm_name",
             "display": {
-              "text": "Enter the name of the farm:"
+              "prompt": {
+                "text": "Enter the name of the farm:"
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -572,7 +610,9 @@
             "type": "geopoint",
             "name": "location",
             "display": {
-              "text": "Record the location of farm:"
+              "prompt": {
+                "text": "Record the location of farm:"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -585,7 +625,9 @@
             "type": "integer",
             "name": "farm_num_employee",
             "display": {
-              "text": "Enter the number of employee:"
+              "prompt": {
+                "text": "Enter the number of employee:"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -598,7 +640,9 @@
             "type": "decimal",
             "name": "farm_revenue",
             "display": {
-              "text": "Enter the revenue for the farm:"
+              "prompt": {
+                "text": "Enter the revenue for the farm:"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -694,8 +738,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Farms Fields section:",
-              "hint": "This section is to gather information about fields in the farm"
+              "prompt": {
+                "text": "Farms Fields section:"
+              },
+              "hint": {
+                "text": "This section is to gather information about fields in the farm"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -708,8 +756,12 @@
             "type": "linked_table",
             "values_list": "linked_fields",
             "display": {
-              "text": "Record all the fields in this farm",
-              "new_instance_text": "Add Fields"
+              "prompt": {
+                "text": "Record all the fields in this farm"
+              },
+              "new_instance_label": {
+                "text": "Add Fields"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -802,7 +854,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Farms Survey"
+              "title": {
+                "text": "Farms Survey"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1350,7 +1404,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Farms Survey\""
+        "_value": "{\"text\":\"Farms Survey\"}"
       }
     ]
   }

@@ -5,8 +5,10 @@
         "type": "integer",
         "name": "default_rating",
         "display": {
-          "text": "Enter an initial rating (1-10) for this survey",
-          "hint": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
+          "prompt": "first_prompt",
+          "hint": {
+            "text": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
+          }
         },
         "model": {
           "isSessionVariable": true
@@ -18,7 +20,9 @@
         "values_list": "examples",
         "name": "examples",
         "display": {
-          "text": "Which examples would you like to see?"
+          "prompt": {
+            "text": "Which examples would you like to see?"
+          }
         },
         "_row_num": 3
       },
@@ -31,7 +35,9 @@
         "type": "barcode",
         "name": "barcode",
         "display": {
-          "text": "Scan a barcode"
+          "prompt": {
+            "text": "Scan a barcode"
+          }
         },
         "_row_num": 5
       },
@@ -39,7 +45,9 @@
         "type": "geopoint",
         "name": "geopoint",
         "display": {
-          "text": "Capture your location"
+          "prompt": {
+            "text": "Capture your location"
+          }
         },
         "_row_num": 6
       },
@@ -47,7 +55,9 @@
         "type": "image",
         "name": "picture",
         "display": {
-          "text": "Take a picture"
+          "prompt": {
+            "text": "Take a picture"
+          }
         },
         "_row_num": 7
       },
@@ -55,7 +65,9 @@
         "type": "audio",
         "name": "recording",
         "display": {
-          "text": "Make a recording"
+          "prompt": {
+            "text": "Make a recording"
+          }
         },
         "_row_num": 8
       },
@@ -71,8 +83,12 @@
       {
         "type": "note",
         "display": {
-          "text": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>",
-          "hint": "So can <b>hints</b>"
+          "prompt": {
+            "text": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>"
+          },
+          "hint": {
+            "text": "So can <b>hints</b>"
+          }
         },
         "hideInContents": true,
         "_row_num": 11
@@ -80,9 +96,11 @@
       {
         "type": "note",
         "display": {
-          "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
-          "audio": "audio/carrioncrow.mp3",
-          "image": "img/dolphin.png"
+          "prompt": {
+            "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
+            "audio": "audio/carrioncrow.mp3",
+            "image": "img/dolphin.png"
+          }
         },
         "hideInContents": true,
         "_row_num": 12
@@ -91,16 +109,24 @@
         "type": "text",
         "name": "name",
         "display": {
-          "text": "Enter your name",
-          "hint": "It will be used in the next question."
+          "prompt": {
+            "text": "Enter your name"
+          },
+          "hint": {
+            "text": "It will be used in the next question."
+          }
         },
         "_row_num": 13
       },
       {
         "type": "note",
         "display": {
-          "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}",
-          "hint": "Handlebars templates allow labels to change depending on the values previously entered."
+          "prompt": {
+            "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}"
+          },
+          "hint": {
+            "text": "Handlebars templates allow labels to change depending on the values previously entered."
+          }
         },
         "hideInContents": true,
         "_row_num": 14
@@ -118,7 +144,9 @@
         "type": "integer",
         "name": "avg_coffee",
         "display": {
-          "text": "On average, how many cups of coffee do you drink in a day?"
+          "prompt": {
+            "text": "On average, how many cups of coffee do you drink in a day?"
+          }
         },
         "_row_num": 17
       },
@@ -145,7 +173,9 @@
         "type": "integer",
         "name": "coffee_today",
         "display": {
-          "text": "How many cups of coffee did you drink today?"
+          "prompt": {
+            "text": "How many cups of coffee did you drink today?"
+          }
         },
         "_row_num": 22
       },
@@ -166,7 +196,9 @@
         "type": "date",
         "name": "born",
         "display": {
-          "text": "When were you born?"
+          "prompt": {
+            "text": "When were you born?"
+          }
         },
         "_row_num": 26
       },
@@ -178,8 +210,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Happy Birthday!",
-          "hint": "This prompt shows how to use dates in fomulas."
+          "prompt": {
+            "text": "Happy Birthday!"
+          },
+          "hint": {
+            "text": "This prompt shows how to use dates in fomulas."
+          }
         },
         "hideInContents": true,
         "_row_num": 28
@@ -192,7 +228,9 @@
         "type": "time",
         "name": "time",
         "display": {
-          "text": "What time do you usually wake up?"
+          "prompt": {
+            "text": "What time do you usually wake up?"
+          }
         },
         "_row_num": 30
       },
@@ -200,7 +238,9 @@
         "type": "datetime",
         "name": "datetime",
         "display": {
-          "text": "When will you be available for a follow up survey?"
+          "prompt": {
+            "text": "When will you be available for a follow up survey?"
+          }
         },
         "_row_num": 31
       },
@@ -217,7 +257,9 @@
         "type": "geopoint",
         "name": "location",
         "display": {
-          "text": "Record your location:"
+          "prompt": {
+            "text": "Record your location:"
+          }
         },
         "_row_num": 34
       },
@@ -239,7 +281,9 @@
         "values_list": "continents",
         "name": "visited_continents",
         "display": {
-          "text": "Which continents have you visited?"
+          "prompt": {
+            "text": "Which continents have you visited?"
+          }
         },
         "_row_num": 38
       },
@@ -253,7 +297,9 @@
         "values_list": "yesno",
         "name": "visited_seattle",
         "display": {
-          "text": "Have you visited Seattle?"
+          "prompt": {
+            "text": "Have you visited Seattle?"
+          }
         },
         "_row_num": 40
       },
@@ -282,7 +328,9 @@
         "type": "audio",
         "name": "audio_test",
         "display": {
-          "text": "Make a recording:"
+          "prompt": {
+            "text": "Make a recording:"
+          }
         },
         "_row_num": 46
       },
@@ -290,7 +338,9 @@
         "type": "video",
         "name": "video_test",
         "display": {
-          "text": "Take a video:"
+          "prompt": {
+            "text": "Take a video:"
+          }
         },
         "_row_num": 47
       },
@@ -298,7 +348,9 @@
         "type": "image",
         "name": "image_test",
         "display": {
-          "text": "Take a picture:"
+          "prompt": {
+            "text": "Take a picture:"
+          }
         },
         "_row_num": 48
       },
@@ -322,7 +374,9 @@
       {
         "type": "note",
         "display": {
-          "text": "The following data will be used to generate a weight for age plot."
+          "prompt": {
+            "text": "The following data will be used to generate a weight for age plot."
+          }
         },
         "hideInContents": true,
         "_row_num": 53
@@ -331,18 +385,26 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "Enter age (in years):",
-          "hint": "Must be less than 20."
+          "prompt": {
+            "text": "Enter age (in years):"
+          },
+          "hint": {
+            "text": "Must be less than 20."
+          },
+          "constraint_message": {
+            "text": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot."
+          }
         },
         "constraint": "data('age') <= 20",
-        "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
         "_row_num": 54
       },
       {
         "type": "decimal",
         "name": "weight",
         "display": {
-          "text": "Enter weight (in lbs):"
+          "prompt": {
+            "text": "Enter weight (in lbs):"
+          }
         },
         "_row_num": 55
       },
@@ -351,7 +413,9 @@
         "values_list": "sexes",
         "name": "sex",
         "display": {
-          "text": "Enter sex:"
+          "prompt": {
+            "text": "Enter sex:"
+          }
         },
         "_row_num": 56
       },
@@ -363,7 +427,9 @@
         "type": "note",
         "name": "specialTemplateTest",
         "display": {
-          "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
+          "prompt": {
+            "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
+          }
         },
         "templatePath": "ageWeightPlot.handlebars",
         "hideInContents": true,
@@ -387,8 +453,12 @@
         "type": "integer",
         "name": "rating",
         "display": {
-          "text": "How would you rate this survey?",
-          "hint": "1 is very bad. 10 is very good."
+          "prompt": {
+            "text": "How would you rate this survey?"
+          },
+          "hint": {
+            "text": "1 is very bad. 10 is very good."
+          }
         },
         "inputAttributes": {
           "type": "range",
@@ -400,6 +470,16 @@
       {
         "clause": "end screen",
         "_row_num": 63
+      }
+    ],
+    "table_specific_translations": [
+      {
+        "string_token": "first_prompt",
+        "text": {
+          "default": "Enter an initial rating (1-10) for this survey",
+          "hindi": "HINDI Enter an initial rating (1-10) for this survey"
+        },
+        "_row_num": 2
       }
     ],
     "calculates": [
@@ -577,9 +657,41 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Example Form"
+          "title": {
+            "text": {
+              "english": "Example Form",
+              "hindi": "hindi exampleform",
+              "default": "Example Form"
+            }
+          }
         },
         "_row_num": 4
+      },
+      {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "English",
+              "hindi": "English (as hindi name)",
+              "default": "English"
+            }
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "setting_name": "hindi",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Hindi",
+              "hindi": "Hindi (as hindi name)",
+              "default": "Hindi"
+            }
+          }
+        },
+        "_row_num": 6
       }
     ]
   },
@@ -596,10 +708,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -615,9 +724,41 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Example Form"
+          "title": {
+            "text": {
+              "english": "Example Form",
+              "hindi": "hindi exampleform",
+              "default": "Example Form"
+            }
+          }
         },
         "_row_num": 4
+      },
+      "english": {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "English",
+              "hindi": "English (as hindi name)",
+              "default": "English"
+            }
+          }
+        },
+        "_row_num": 5
+      },
+      "hindi": {
+        "setting_name": "hindi",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Hindi",
+              "hindi": "Hindi (as hindi name)",
+              "default": "Hindi"
+            }
+          }
+        },
+        "_row_num": 6
       },
       "form_id": {
         "setting_name": "form_id",
@@ -631,21 +772,47 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": {
+                  "english": "English",
+                  "hindi": "English (as hindi name)",
+                  "default": "English"
+                }
+              }
             },
-            "name": "default"
+            "_row_num": 5,
+            "name": "english"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Hindi",
+                  "hindi": "Hindi (as hindi name)",
+                  "default": "Hindi"
+                }
+              }
+            },
+            "_row_num": 6,
+            "name": "hindi"
           }
         ]
       },
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 4,
-        "value": "default"
+        "value": "english"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Example Form"
+          "title": {
+            "text": {
+              "english": "Example Form",
+              "hindi": "hindi exampleform",
+              "default": "Example Form"
+            }
+          }
         },
         "_row_num": 4
       }
@@ -811,6 +978,18 @@
           "_row_num": 22
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {
+        "first_prompt": {
+          "string_token": "first_prompt",
+          "text": {
+            "default": "Enter an initial rating (1-10) for this survey",
+            "hindi": "HINDI Enter an initial rating (1-10) for this survey"
+          },
+          "_row_num": 2
+        }
+      }
     },
     "queries": {},
     "calculates": {
@@ -1180,8 +1359,10 @@
             "type": "integer",
             "name": "default_rating",
             "display": {
-              "text": "Enter an initial rating (1-10) for this survey",
-              "hint": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
+              "prompt": "first_prompt",
+              "hint": {
+                "text": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
+              }
             },
             "model": {
               "isSessionVariable": true
@@ -1198,7 +1379,9 @@
             "values_list": "examples",
             "name": "examples",
             "display": {
-              "text": "Which examples would you like to see?"
+              "prompt": {
+                "text": "Which examples would you like to see?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1211,7 +1394,9 @@
             "type": "barcode",
             "name": "barcode",
             "display": {
-              "text": "Scan a barcode"
+              "prompt": {
+                "text": "Scan a barcode"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -1224,7 +1409,9 @@
             "type": "geopoint",
             "name": "geopoint",
             "display": {
-              "text": "Capture your location"
+              "prompt": {
+                "text": "Capture your location"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -1237,7 +1424,9 @@
             "type": "image",
             "name": "picture",
             "display": {
-              "text": "Take a picture"
+              "prompt": {
+                "text": "Take a picture"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -1250,7 +1439,9 @@
             "type": "audio",
             "name": "recording",
             "display": {
-              "text": "Make a recording"
+              "prompt": {
+                "text": "Make a recording"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -1262,8 +1453,12 @@
           {
             "type": "note",
             "display": {
-              "text": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>",
-              "hint": "So can <b>hints</b>"
+              "prompt": {
+                "text": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>"
+              },
+              "hint": {
+                "text": "So can <b>hints</b>"
+              }
             },
             "hideInContents": true,
             "_row_num": 11,
@@ -1276,9 +1471,11 @@
           {
             "type": "note",
             "display": {
-              "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
-              "audio": "audio/carrioncrow.mp3",
-              "image": "img/dolphin.png"
+              "prompt": {
+                "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
+                "audio": "audio/carrioncrow.mp3",
+                "image": "img/dolphin.png"
+              }
             },
             "hideInContents": true,
             "_row_num": 12,
@@ -1292,8 +1489,12 @@
             "type": "text",
             "name": "name",
             "display": {
-              "text": "Enter your name",
-              "hint": "It will be used in the next question."
+              "prompt": {
+                "text": "Enter your name"
+              },
+              "hint": {
+                "text": "It will be used in the next question."
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -1305,8 +1506,12 @@
           {
             "type": "note",
             "display": {
-              "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}",
-              "hint": "Handlebars templates allow labels to change depending on the values previously entered."
+              "prompt": {
+                "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}"
+              },
+              "hint": {
+                "text": "Handlebars templates allow labels to change depending on the values previously entered."
+              }
             },
             "hideInContents": true,
             "_row_num": 14,
@@ -1320,7 +1525,9 @@
             "type": "integer",
             "name": "avg_coffee",
             "display": {
-              "text": "On average, how many cups of coffee do you drink in a day?"
+              "prompt": {
+                "text": "On average, how many cups of coffee do you drink in a day?"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -1333,7 +1540,9 @@
             "type": "integer",
             "name": "coffee_today",
             "display": {
-              "text": "How many cups of coffee did you drink today?"
+              "prompt": {
+                "text": "How many cups of coffee did you drink today?"
+              }
             },
             "_row_num": 22,
             "__rowNum__": 21,
@@ -1346,7 +1555,9 @@
             "type": "date",
             "name": "born",
             "display": {
-              "text": "When were you born?"
+              "prompt": {
+                "text": "When were you born?"
+              }
             },
             "_row_num": 26,
             "__rowNum__": 25,
@@ -1358,8 +1569,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Happy Birthday!",
-              "hint": "This prompt shows how to use dates in fomulas."
+              "prompt": {
+                "text": "Happy Birthday!"
+              },
+              "hint": {
+                "text": "This prompt shows how to use dates in fomulas."
+              }
             },
             "hideInContents": true,
             "_row_num": 28,
@@ -1373,7 +1588,9 @@
             "type": "time",
             "name": "time",
             "display": {
-              "text": "What time do you usually wake up?"
+              "prompt": {
+                "text": "What time do you usually wake up?"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -1386,7 +1603,9 @@
             "type": "datetime",
             "name": "datetime",
             "display": {
-              "text": "When will you be available for a follow up survey?"
+              "prompt": {
+                "text": "When will you be available for a follow up survey?"
+              }
             },
             "_row_num": 31,
             "__rowNum__": 30,
@@ -1399,7 +1618,9 @@
             "type": "geopoint",
             "name": "location",
             "display": {
-              "text": "Record your location:"
+              "prompt": {
+                "text": "Record your location:"
+              }
             },
             "_row_num": 34,
             "__rowNum__": 33,
@@ -1413,7 +1634,9 @@
             "values_list": "continents",
             "name": "visited_continents",
             "display": {
-              "text": "Which continents have you visited?"
+              "prompt": {
+                "text": "Which continents have you visited?"
+              }
             },
             "_row_num": 38,
             "__rowNum__": 37,
@@ -1427,7 +1650,9 @@
             "values_list": "yesno",
             "name": "visited_seattle",
             "display": {
-              "text": "Have you visited Seattle?"
+              "prompt": {
+                "text": "Have you visited Seattle?"
+              }
             },
             "_row_num": 40,
             "__rowNum__": 39,
@@ -1440,7 +1665,9 @@
             "type": "audio",
             "name": "audio_test",
             "display": {
-              "text": "Make a recording:"
+              "prompt": {
+                "text": "Make a recording:"
+              }
             },
             "_row_num": 46,
             "__rowNum__": 45,
@@ -1453,7 +1680,9 @@
             "type": "video",
             "name": "video_test",
             "display": {
-              "text": "Take a video:"
+              "prompt": {
+                "text": "Take a video:"
+              }
             },
             "_row_num": 47,
             "__rowNum__": 46,
@@ -1466,7 +1695,9 @@
             "type": "image",
             "name": "image_test",
             "display": {
-              "text": "Take a picture:"
+              "prompt": {
+                "text": "Take a picture:"
+              }
             },
             "_row_num": 48,
             "__rowNum__": 47,
@@ -1478,7 +1709,9 @@
           {
             "type": "note",
             "display": {
-              "text": "The following data will be used to generate a weight for age plot."
+              "prompt": {
+                "text": "The following data will be used to generate a weight for age plot."
+              }
             },
             "hideInContents": true,
             "_row_num": 53,
@@ -1492,11 +1725,17 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "Enter age (in years):",
-              "hint": "Must be less than 20."
+              "prompt": {
+                "text": "Enter age (in years):"
+              },
+              "hint": {
+                "text": "Must be less than 20."
+              },
+              "constraint_message": {
+                "text": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot."
+              }
             },
             "constraint": "data('age') <= 20",
-            "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
             "_row_num": 54,
             "__rowNum__": 53,
             "_token_type": "prompt",
@@ -1508,7 +1747,9 @@
             "type": "decimal",
             "name": "weight",
             "display": {
-              "text": "Enter weight (in lbs):"
+              "prompt": {
+                "text": "Enter weight (in lbs):"
+              }
             },
             "_row_num": 55,
             "__rowNum__": 54,
@@ -1522,7 +1763,9 @@
             "values_list": "sexes",
             "name": "sex",
             "display": {
-              "text": "Enter sex:"
+              "prompt": {
+                "text": "Enter sex:"
+              }
             },
             "_row_num": 56,
             "__rowNum__": 55,
@@ -1535,7 +1778,9 @@
             "type": "note",
             "name": "specialTemplateTest",
             "display": {
-              "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
+              "prompt": {
+                "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
+              }
             },
             "templatePath": "ageWeightPlot.handlebars",
             "hideInContents": true,
@@ -1550,8 +1795,12 @@
             "type": "integer",
             "name": "rating",
             "display": {
-              "text": "How would you rate this survey?",
-              "hint": "1 is very bad. 10 is very good."
+              "prompt": {
+                "text": "How would you rate this survey?"
+              },
+              "hint": {
+                "text": "1 is very bad. 10 is very good."
+              }
             },
             "inputAttributes": {
               "type": "range",
@@ -2091,7 +2340,13 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Example Form"
+              "title": {
+                "text": {
+                  "english": "Example Form",
+                  "hindi": "hindi exampleform",
+                  "default": "Example Form"
+                }
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -3082,7 +3337,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Example Form\""
+        "_value": "{\"text\":{\"english\":\"Example Form\",\"hindi\":\"hindi exampleform\",\"default\":\"Example Form\"}}"
       }
     ]
   }

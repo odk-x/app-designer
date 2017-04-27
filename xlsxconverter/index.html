@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <!-- Author: mitchellsundt@gmail.com -->
@@ -121,16 +122,12 @@ function handleSave(e) {
     if (formDefStr === undefined || formDefStr === null) {
       formDefStr = '';
     }
-
-    var uriContent = "data:application/octet-stream," + encodeURIComponent(formDefStr);
-    var downloader = document.createElement("iframe");
-    downloader.style.display = "none";
-    downloader.src = uriContent;
-    document.body.appendChild(downloader);
-
+    var formDefJson = JSON.parse(formDefStr);
+	var formDefFile = "data:application/javascript;charset=utf-8," + formDefStr;
+	downloadFormDefJsonFile(formDefFile, "formDef.json");
+	
     // Generate definition.csv and properties.csv if necessary
-    if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDefStr)) {
-        var formDefJson = JSON.parse(formDefStr);
+    if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDefJson)) {
 
         // Get the dataTableModel
         var dtm = formDefJson.specification.dataTableModel;
@@ -145,6 +142,41 @@ function handleSave(e) {
         propCsv = "data:text/csv;charset=utf-8," + propCsv;
         downloadCsvFile(propCsv, "properties.csv");
     } 
+	
+	if (util.shouldWriteOutTranslationsJs(formDefJson)) {
+		var tableId = util.getTableIdFromFormDef(formDefJson);
+
+		if ( tableId === 'framework' ) {
+			// Get the framework translations
+			var trx = formDefJson.specification.framework_translations;
+			var trxFilename = 'frameworkTranslations.js';
+
+			// Create and write out frameworkTranslations.js
+			var trxJs = util.createTranslationsJsFromDataTableModel(tableId, trx);
+			trxJs = "data:application/javascript;charset=utf-8," + trxJs;
+			downloadTrxFile(trxJs, trxFilename);
+			
+			// Get the common translations
+			// Get the translations
+			var trx = formDefJson.specification.common_translations;
+			var trxFilename = 'commonTranslations.js';
+
+			// Create and write out translations.js
+			var trxJs = util.createTranslationsJsFromDataTableModel(null, trx);
+			trxJs = "data:application/javascript;charset=utf-8," + trxJs;
+			downloadTrxFile(trxJs, trxFilename);
+			
+		} else {
+			// Get the table_specific_translations
+			var trx = formDefJson.specification.table_specific_translations;
+			var trxFilename = 'tableSpecificTranslations.js';
+
+			// Create and write out tableSpecificTranslations.js
+			var trxJs = util.createTranslationsJsFromDataTableModel(tableId, trx);
+			trxJs = "data:application/javascript;charset=utf-8," + trxJs;
+			downloadTrxFile(trxJs, trxFilename);
+		}
+	}
 }
 
 /**
@@ -172,7 +204,16 @@ function postFormDef() {
           formId);
     } else {
       var path;
+	  var shouldWriteTranslationsJs = false;
       var shouldWriteDefAndPropCsv = false;
+	  if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDefJson)) {
+		shouldWriteDefAndPropCsv = true;
+	  }
+
+	  if (util.shouldWriteOutTranslationsJs(formDefJson)) {
+		shouldWriteTranslationsJs = true;
+	  }
+
       if (formId === util.getFrameworkFormId()) {
         // a special case for the framework file, which is reserved.
         path = util.getRelativePathToFrameworkFormDef();
@@ -185,10 +226,6 @@ function postFormDef() {
           '/forms/' +
           formId +
           '/formDef.json';
-
-          if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDef)) {
-            shouldWriteDefAndPropCsv = true;
-          }
       }
       console.log('going to write formDef to: ' + path);
 
@@ -229,11 +266,74 @@ function postFormDef() {
             }
         });
       }
+      if (shouldWriteTranslationsJs) {
+		var tableId = util.getTableIdFromFormDef(formDefJson);
+		
+		if ( tableId === 'framework' ) {
+			// Get the framework_translations
+			var trx = formDefJson.specification.framework_translations;
+
+			var trxPath = 'app/config/assets/framework/frameworkTranslations.js';
+			var trxJs = util.createTranslationsJsFromDataTableModel(tableId, trx);
+			util.postFile(trxPath, trxJs, function(err, response, body) {
+				if (err || response.statusCode !== 200) {
+					alert(
+					  'Something went wrong! Please save the file manually.');
+				} else {
+					alert('Saved the file to: ' + trxPath);
+				}
+			});
+			// Get the common_translations
+			var trx = formDefJson.specification.common_translations;
+
+			var ctrxPath = 'app/config/assets/commonTranslations.js';
+			var trxJs = util.createTranslationsJsFromDataTableModel(null, trx);
+			util.postFile(ctrxPath, trxJs, function(err, response, body) {
+				if (err || response.statusCode !== 200) {
+					alert(
+					  'Something went wrong! Please save the file manually.');
+				} else {
+					alert('Saved the file to: ' + ctrxPath);
+				}
+			});
+		} else {
+			// Get the table_specific_translations
+			var trx = formDefJson.specification.table_specific_translations;
+
+			var trxPath;
+			trxPath = 'app/config/tables/' + tableId + '/tableSpecificTranslations.js';
+			var trxJs = util.createTranslationsJsFromDataTableModel(tableId, trx);
+			util.postFile(trxPath, trxJs, function(err, response, body) {
+				if (err || response.statusCode !== 200) {
+					alert(
+					  'Something went wrong! Please save the file manually.');
+				} else {
+					alert('Saved the file to: ' + trxPath);
+				}
+			});
+		}
+      }
     }
+}
+
+function downloadFormDefJsonFile (formDefContent, fileName) {
+    var encodedUri = encodeURI(formDefContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", fileName);
+    link.click();
 }
 
 function downloadCsvFile (csvContent, fileName) {
     var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", fileName);
+    link.click();
+}
+
+function downloadTrxFile (trxContent, fileName) {
+    var encodedUri = encodeURI(trxContent);
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", fileName);

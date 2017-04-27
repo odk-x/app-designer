@@ -6,7 +6,7 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,Tea_houses
 Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/tables/Tea_houses/html/Tea_houses_detail.html
-Table,default,displayName,object,"""Tea Houses"""
+Table,default,displayName,object,"{""text"":""Tea Houses""}"
 Table,default,listViewFileName,string,config/tables/Tea_houses/html/Tea_houses_list.html
 Table,default,mapListViewFileName,string,config/tables/Tea_houses/html/Tea_houses_list.html
 TableMapFragment,default,keyColorRuleType,string,None

@@ -15,7 +15,9 @@
         "type": "text",
         "name": "fuel_injury",
         "display": {
-          "text": "Specify injury"
+          "prompt": {
+            "text": "Specify injury"
+          }
         },
         "_row_num": 2
       }
@@ -39,7 +41,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.3"
+          "title": {
+            "text": "Section 9.3"
+          }
         },
         "_row_num": 5
       },
@@ -397,10 +401,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -421,7 +422,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.3"
+          "title": {
+            "text": "Section 9.3"
+          }
         },
         "_row_num": 5
       },
@@ -436,7 +439,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -450,7 +455,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.3"
+          "title": {
+            "text": "Section 9.3"
+          }
         },
         "_row_num": 5
       }
@@ -1142,7 +1149,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 9.3"
+              "title": {
+                "text": "Section 9.3"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1238,7 +1247,9 @@
             "type": "text",
             "name": "fuel_injury",
             "display": {
-              "text": "Specify injury"
+              "prompt": {
+                "text": "Specify injury"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,

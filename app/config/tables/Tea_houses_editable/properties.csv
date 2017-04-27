@@ -5,4 +5,4 @@ Column,WiFi,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_v
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,Tea_houses_editable
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Tea Houses Editable"""
+Table,default,displayName,object,"{""text"":""Tea Houses Editable""}"

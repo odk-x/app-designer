@@ -6,7 +6,9 @@
         "values_list": "store_type",
         "name": "type_of_store",
         "display": {
-          "text": "Type of store"
+          "prompt": {
+            "text": "Type of store"
+          }
         },
         "_row_num": 2
       },
@@ -14,7 +16,9 @@
         "type": "barcode",
         "name": "scancode",
         "display": {
-          "text": "UPC code of item"
+          "prompt": {
+            "text": "UPC code of item"
+          }
         },
         "_row_num": 3
       },
@@ -22,7 +26,9 @@
         "type": "geopoint",
         "name": "location",
         "display": {
-          "text": "location"
+          "prompt": {
+            "text": "location"
+          }
         },
         "_row_num": 4
       },
@@ -30,7 +36,9 @@
         "type": "image",
         "name": "photo",
         "display": {
-          "text": "photo"
+          "prompt": {
+            "text": "photo"
+          }
         },
         "_row_num": 5
       },
@@ -38,7 +46,9 @@
         "type": "text",
         "name": "obj_name",
         "display": {
-          "text": "Name of object"
+          "prompt": {
+            "text": "Name of object"
+          }
         },
         "_row_num": 6
       },
@@ -46,7 +56,9 @@
         "type": "text",
         "name": "description",
         "display": {
-          "text": "description"
+          "prompt": {
+            "text": "description"
+          }
         },
         "_row_num": 7
       },
@@ -54,7 +66,9 @@
         "type": "integer",
         "name": "quantity",
         "display": {
-          "text": "quantity in stock"
+          "prompt": {
+            "text": "quantity in stock"
+          }
         },
         "_row_num": 8
       },
@@ -62,7 +76,9 @@
         "type": "decimal",
         "name": "price",
         "display": {
-          "text": "Unit price"
+          "prompt": {
+            "text": "Unit price"
+          }
         },
         "_row_num": 9
       },
@@ -70,7 +86,9 @@
         "type": "date",
         "name": "as_of_date",
         "display": {
-          "text": "Current date?"
+          "prompt": {
+            "text": "Current date?"
+          }
         },
         "_row_num": 10
       }
@@ -160,7 +178,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Large Dataset Timing Test"
+          "title": {
+            "text": "Large Dataset Timing Test"
+          }
         },
         "_row_num": 5
       },
@@ -202,10 +222,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -226,7 +243,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Large Dataset Timing Test"
+          "title": {
+            "text": "Large Dataset Timing Test"
+          }
         },
         "_row_num": 5
       },
@@ -241,7 +260,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -255,7 +276,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Large Dataset Timing Test"
+          "title": {
+            "text": "Large Dataset Timing Test"
+          }
         },
         "_row_num": 5
       }
@@ -327,6 +350,9 @@
           "_row_num": 9
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {}
     },
     "queries": {},
     "calculates": {},
@@ -476,7 +502,9 @@
             "values_list": "store_type",
             "name": "type_of_store",
             "display": {
-              "text": "Type of store"
+              "prompt": {
+                "text": "Type of store"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -489,7 +517,9 @@
             "type": "barcode",
             "name": "scancode",
             "display": {
-              "text": "UPC code of item"
+              "prompt": {
+                "text": "UPC code of item"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -502,7 +532,9 @@
             "type": "geopoint",
             "name": "location",
             "display": {
-              "text": "location"
+              "prompt": {
+                "text": "location"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -515,7 +547,9 @@
             "type": "image",
             "name": "photo",
             "display": {
-              "text": "photo"
+              "prompt": {
+                "text": "photo"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -528,7 +562,9 @@
             "type": "text",
             "name": "obj_name",
             "display": {
-              "text": "Name of object"
+              "prompt": {
+                "text": "Name of object"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -541,7 +577,9 @@
             "type": "text",
             "name": "description",
             "display": {
-              "text": "description"
+              "prompt": {
+                "text": "description"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -554,7 +592,9 @@
             "type": "integer",
             "name": "quantity",
             "display": {
-              "text": "quantity in stock"
+              "prompt": {
+                "text": "quantity in stock"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -567,7 +607,9 @@
             "type": "decimal",
             "name": "price",
             "display": {
-              "text": "Unit price"
+              "prompt": {
+                "text": "Unit price"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -580,7 +622,9 @@
             "type": "date",
             "name": "as_of_date",
             "display": {
-              "text": "Current date?"
+              "prompt": {
+                "text": "Current date?"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -720,7 +764,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Large Dataset Timing Test"
+              "title": {
+                "text": "Large Dataset Timing Test"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1262,7 +1308,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Large Dataset Timing Test\""
+        "_value": "{\"text\":\"Large Dataset Timing Test\"}"
       },
       {
         "_partition": "Table",

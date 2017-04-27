@@ -5,8 +5,12 @@
         "type": "integer",
         "name": "client_id",
         "display": {
-          "text": "Client ID:",
-          "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+          "prompt": {
+            "text": "Client ID:"
+          },
+          "hint": {
+            "text": "5 Digit ID, cannot include 0. \nex: 12345"
+          }
         },
         "required": true,
         "_row_num": 2
@@ -15,7 +19,9 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "Age:"
+          "prompt": {
+            "text": "Age:"
+          }
         },
         "required": true,
         "_row_num": 3
@@ -25,7 +31,9 @@
         "values_list": "randomization_arms",
         "name": "randomization",
         "display": {
-          "text": "Randomization Arm:"
+          "prompt": {
+            "text": "Randomization Arm:"
+          }
         },
         "required": true,
         "_row_num": 4
@@ -68,7 +76,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Add Client Brief"
+          "title": {
+            "text": "Add Client Brief"
+          }
         },
         "_row_num": 5
       }
@@ -409,10 +419,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -433,7 +440,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Add Client Brief"
+          "title": {
+            "text": "Add Client Brief"
+          }
         },
         "_row_num": 5
       },
@@ -443,7 +452,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -457,7 +468,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Add Client Brief"
+          "title": {
+            "text": "Add Client Brief"
+          }
         },
         "_row_num": 5
       }
@@ -1179,8 +1192,12 @@
             "type": "integer",
             "name": "client_id",
             "display": {
-              "text": "Client ID:",
-              "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+              "prompt": {
+                "text": "Client ID:"
+              },
+              "hint": {
+                "text": "5 Digit ID, cannot include 0. \nex: 12345"
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -1194,7 +1211,9 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "Age:"
+              "prompt": {
+                "text": "Age:"
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -1209,7 +1228,9 @@
             "values_list": "randomization_arms",
             "name": "randomization",
             "display": {
-              "text": "Randomization Arm:"
+              "prompt": {
+                "text": "Randomization Arm:"
+              }
             },
             "required": true,
             "_row_num": 4,
@@ -1312,7 +1333,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Add Client Brief"
+              "title": {
+                "text": "Add Client Brief"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },

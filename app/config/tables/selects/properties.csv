@@ -6,4 +6,4 @@ Column,sex,displayChoicesList,object,"[{""choice_list_name"":""sexes"",""data_va
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,selects
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Select Examples"""
+Table,default,displayName,object,"{""text"":""Select Examples""}"

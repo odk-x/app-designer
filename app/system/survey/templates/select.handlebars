@@ -63,14 +63,14 @@
                         value="{{data_value}}" 
 						tabindex="0"
                     />
-                {{#if display.image}}
+                {{#ifHasImageLocalization display}}
                     <div>
-                        <img src="{{formDirectory}}{{localize display.image}}"></img>
+                        <img src="{{localizeImage display}}"></img>
                     </div>
-                {{/if}}
-                {{#if display.text}}
-                    <span class="select-text">{{{localize display.text}}}</span>
-                {{/if}}
+                {{/ifHasImageLocalization}}
+                {{#ifHasTextLocalization display}}
+                    <span class="select-text">{{{localizeText display}}}</span>
+                {{/ifHasTextLocalization}}
                 </label>
             
         {{/each}}
@@ -90,7 +90,7 @@
                     value="other"
 					tabindex="0"/>
                     <label for="other" style="float:left">
-                        <span class="select-text">Other:</span>
+                        <span class="select-text">{{localizeText 'select_with_other_other_label'}}</span>
                         {{#if other.checked}}
                         <input class="input-other"
                             name="otherValue"
@@ -102,10 +102,9 @@
         {{/if}}
     </fieldset>
     {{#unless required}}
-        {{#if false}}
         {{#if display.deselect}}
-            <a data-role="button" data-mini="true" class="deselect" tabindex="0">{{localize display.deselect}}</a>
-        {{/if}}
+			<div style="clear:both;"></div>
+            <a data-role="button" data-mini="true" class="deselect" tabindex="0">{{localize display.select_deselect_label}}</a>
         {{/if}}
     {{/unless}}
     <div style="clear:both;"></div>

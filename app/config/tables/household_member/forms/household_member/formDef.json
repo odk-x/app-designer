@@ -15,7 +15,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Data for household: {{data.household_id}}"
+          "prompt": {
+            "text": "Data for household: {{data.household_id}}"
+          }
         },
         "_row_num": 2
       },
@@ -23,7 +25,9 @@
         "type": "text",
         "name": "name",
         "display": {
-          "text": "Enter the name of the household member:"
+          "prompt": {
+            "text": "Enter the name of the household member:"
+          }
         },
         "_row_num": 3
       },
@@ -31,7 +35,9 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "Enter age of {{data.name}}:"
+          "prompt": {
+            "text": "Enter age of {{data.name}}:"
+          }
         },
         "_row_num": 4
       },
@@ -40,14 +46,18 @@
         "values_list": "sexes",
         "name": "sex",
         "display": {
-          "text": "Enter sex of {{data.name}}:"
+          "prompt": {
+            "text": "Enter sex of {{data.name}}:"
+          }
         },
         "_row_num": 5
       },
       {
         "type": "note",
         "display": {
-          "text": "{{data.name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
+          "prompt": {
+            "text": "{{data.name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
+          }
         },
         "hideInContents": true,
         "_row_num": 6
@@ -57,7 +67,9 @@
         "values_list": "yesno",
         "name": "income_contribution",
         "display": {
-          "text": "Does {{data.name}} contribute to the household income?"
+          "prompt": {
+            "text": "Does {{data.name}} contribute to the household income?"
+          }
         },
         "_row_num": 7
       }
@@ -115,7 +127,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Household Members"
+          "title": {
+            "text": "Household Members"
+          }
         },
         "_row_num": 5
       },
@@ -233,10 +247,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -257,7 +268,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Household Members"
+          "title": {
+            "text": "Household Members"
+          }
         },
         "_row_num": 5
       },
@@ -272,7 +285,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -286,7 +301,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Household Members"
+          "title": {
+            "text": "Household Members"
+          }
         },
         "_row_num": 5
       }
@@ -328,6 +345,9 @@
           "_row_num": 6
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {}
     },
     "queries": {},
     "calculates": {
@@ -577,7 +597,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Household Members"
+              "title": {
+                "text": "Household Members"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -673,7 +695,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Data for household: {{data.household_id}}"
+              "prompt": {
+                "text": "Data for household: {{data.household_id}}"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -686,7 +710,9 @@
             "type": "text",
             "name": "name",
             "display": {
-              "text": "Enter the name of the household member:"
+              "prompt": {
+                "text": "Enter the name of the household member:"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -699,7 +725,9 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "Enter age of {{data.name}}:"
+              "prompt": {
+                "text": "Enter age of {{data.name}}:"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -713,7 +741,9 @@
             "values_list": "sexes",
             "name": "sex",
             "display": {
-              "text": "Enter sex of {{data.name}}:"
+              "prompt": {
+                "text": "Enter sex of {{data.name}}:"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -725,7 +755,9 @@
           {
             "type": "note",
             "display": {
-              "text": "{{data.name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
+              "prompt": {
+                "text": "{{data.name}} age is {{evaluate calculates.ageIsOddOrEven}} in {{setting 'table_id'}}"
+              }
             },
             "hideInContents": true,
             "_row_num": 6,
@@ -740,7 +772,9 @@
             "values_list": "yesno",
             "name": "income_contribution",
             "display": {
-              "text": "Does {{data.name}} contribute to the household income?"
+              "prompt": {
+                "text": "Does {{data.name}} contribute to the household income?"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -1330,7 +1364,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Household Members\""
+        "_value": "{\"text\":\"Household Members\"}"
       }
     ]
   }

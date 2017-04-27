@@ -15,8 +15,12 @@
         "type": "integer",
         "name": "hours_collecting",
         "display": {
-          "text": "How many hours did {{data.name}} spend collecting or preparing fuel in the last 7 days?",
-          "hint": "(Hours)"
+          "prompt": {
+            "text": "How many hours did {{data.name}} spend collecting or preparing fuel in the last 7 days?"
+          },
+          "hint": {
+            "text": "(Hours)"
+          }
         },
         "_row_num": 2
       },
@@ -24,8 +28,12 @@
         "type": "integer",
         "name": "hours_fuel_materials",
         "display": {
-          "text": "How many hours in the last 7 days did {{data.name}} collect or prepare fuel materials specifically for household cooking use?",
-          "hint": "(Hours)"
+          "prompt": {
+            "text": "How many hours in the last 7 days did {{data.name}} collect or prepare fuel materials specifically for household cooking use?"
+          },
+          "hint": {
+            "text": "(Hours)"
+          }
         },
         "_row_num": 3
       },
@@ -33,8 +41,12 @@
         "type": "integer",
         "name": "hours_fuel_sale",
         "display": {
-          "text": "How many hours in the last 7 days did {{data.name}} collect, transport, or prepare fuel materials for sale and not for household use?",
-          "hint": "(Hours)"
+          "prompt": {
+            "text": "How many hours in the last 7 days did {{data.name}} collect, transport, or prepare fuel materials for sale and not for household use?"
+          },
+          "hint": {
+            "text": "(Hours)"
+          }
         },
         "_row_num": 4
       }
@@ -58,7 +70,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 8.2"
+          "title": {
+            "text": "Section 8.2"
+          }
         },
         "_row_num": 5
       },
@@ -416,10 +430,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -440,7 +451,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 8.2"
+          "title": {
+            "text": "Section 8.2"
+          }
         },
         "_row_num": 5
       },
@@ -455,7 +468,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -469,7 +484,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 8.2"
+          "title": {
+            "text": "Section 8.2"
+          }
         },
         "_row_num": 5
       }
@@ -1169,7 +1186,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 8.2"
+              "title": {
+                "text": "Section 8.2"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1265,8 +1284,12 @@
             "type": "integer",
             "name": "hours_collecting",
             "display": {
-              "text": "How many hours did {{data.name}} spend collecting or preparing fuel in the last 7 days?",
-              "hint": "(Hours)"
+              "prompt": {
+                "text": "How many hours did {{data.name}} spend collecting or preparing fuel in the last 7 days?"
+              },
+              "hint": {
+                "text": "(Hours)"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -1279,8 +1302,12 @@
             "type": "integer",
             "name": "hours_fuel_materials",
             "display": {
-              "text": "How many hours in the last 7 days did {{data.name}} collect or prepare fuel materials specifically for household cooking use?",
-              "hint": "(Hours)"
+              "prompt": {
+                "text": "How many hours in the last 7 days did {{data.name}} collect or prepare fuel materials specifically for household cooking use?"
+              },
+              "hint": {
+                "text": "(Hours)"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1293,8 +1320,12 @@
             "type": "integer",
             "name": "hours_fuel_sale",
             "display": {
-              "text": "How many hours in the last 7 days did {{data.name}} collect, transport, or prepare fuel materials for sale and not for household use?",
-              "hint": "(Hours)"
+              "prompt": {
+                "text": "How many hours in the last 7 days did {{data.name}} collect, transport, or prepare fuel materials for sale and not for household use?"
+              },
+              "hint": {
+                "text": "(Hours)"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,

@@ -4,4 +4,4 @@ Column,sex,displayChoicesList,object,"[{""choice_list_name"":""sexes"",""data_va
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,household_member
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Household Members"""
+Table,default,displayName,object,"{""text"":""Household Members""}"

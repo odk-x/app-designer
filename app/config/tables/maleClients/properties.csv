@@ -32,4 +32,4 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,maleClients
 Table,default,colOrder,array,"[""interviewerw_init"",""interviewer_id"",""date"",""client_id"",""agree_screening"",""age"",""ethnic_group"",""ethnic_group_other"",""education_level"",""religion"",""religion_other"",""employment"",""employment_other"",""curr_relationship"",""living_children"",""living_children_enrolled_female"",""hiv_tested"",""test_result"",""ineligible_statement"",""client_consent"",""refusal_reasons"",""refusal_reasons_other"",""hiv_status"",""pretest"",""still_relationship"",""preg_want_children"",""more_children"",""partner_want_children"",""influences"",""influences_other"",""ccc"",""prescr_tmp"",""curr_tmp"",""prescr_art"",""curr_taking_art"",""determine"",""advise_second"",""unigold"",""elisa_blood_drawn"",""discordant"",""return_disc_retest"",""comments""]"
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""All Partner Form Fields"""
+Table,default,displayName,object,"{""text"":""All Partner Form Fields""}"

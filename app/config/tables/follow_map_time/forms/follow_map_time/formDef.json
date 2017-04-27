@@ -5,7 +5,9 @@
         "type": "text",
         "name": "FMT_FOL_date",
         "display": {
-          "text": "Date of the follow"
+          "prompt": {
+            "text": "Date of the follow"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "text",
         "name": "FMT_FOL_B_focal_AnimID",
         "display": {
-          "text": "ID of the focal chimp"
+          "prompt": {
+            "text": "ID of the focal chimp"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "text",
         "name": "FMT_time",
         "display": {
-          "text": "time at the start of the 15 minute time interval"
+          "prompt": {
+            "text": "time at the start of the 15 minute time interval"
+          }
         },
         "_row_num": 4
       },
@@ -29,7 +35,9 @@
         "type": "integer",
         "name": "FMT_FMP_seq_num",
         "display": {
-          "text": "The map sequence number"
+          "prompt": {
+            "text": "The map sequence number"
+          }
         },
         "_row_num": 5
       },
@@ -37,7 +45,9 @@
         "type": "text",
         "name": "FMT_notes",
         "display": {
-          "text": "15 min time interval"
+          "prompt": {
+            "text": "15 min time interval"
+          }
         },
         "_row_num": 6
       },
@@ -45,7 +55,9 @@
         "type": "text",
         "name": "FMT_fixed",
         "display": {
-          "text": "Indicates Ian manually corrected records or the follow"
+          "prompt": {
+            "text": "Indicates Ian manually corrected records or the follow"
+          }
         },
         "_row_num": 7
       },
@@ -53,7 +65,9 @@
         "type": "text",
         "name": "FMT_FOL_foll_num",
         "display": {
-          "text": "Combination of focal chimp and date"
+          "prompt": {
+            "text": "Combination of focal chimp and date"
+          }
         },
         "_row_num": 8
       }
@@ -72,7 +86,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Follow Map Time"
+          "title": {
+            "text": "Follow Map Time"
+          }
         },
         "_row_num": 4
       }
@@ -101,10 +117,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -120,7 +133,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Follow Map Time"
+          "title": {
+            "text": "Follow Map Time"
+          }
         },
         "_row_num": 4
       },
@@ -136,7 +151,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -150,12 +167,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Follow Map Time"
+          "title": {
+            "text": "Follow Map Time"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {}
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -244,7 +266,9 @@
             "type": "text",
             "name": "FMT_FOL_date",
             "display": {
-              "text": "Date of the follow"
+              "prompt": {
+                "text": "Date of the follow"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -257,7 +281,9 @@
             "type": "text",
             "name": "FMT_FOL_B_focal_AnimID",
             "display": {
-              "text": "ID of the focal chimp"
+              "prompt": {
+                "text": "ID of the focal chimp"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -270,7 +296,9 @@
             "type": "text",
             "name": "FMT_time",
             "display": {
-              "text": "time at the start of the 15 minute time interval"
+              "prompt": {
+                "text": "time at the start of the 15 minute time interval"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -283,7 +311,9 @@
             "type": "integer",
             "name": "FMT_FMP_seq_num",
             "display": {
-              "text": "The map sequence number"
+              "prompt": {
+                "text": "The map sequence number"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -296,7 +326,9 @@
             "type": "text",
             "name": "FMT_notes",
             "display": {
-              "text": "15 min time interval"
+              "prompt": {
+                "text": "15 min time interval"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -309,7 +341,9 @@
             "type": "text",
             "name": "FMT_fixed",
             "display": {
-              "text": "Indicates Ian manually corrected records or the follow"
+              "prompt": {
+                "text": "Indicates Ian manually corrected records or the follow"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -322,7 +356,9 @@
             "type": "text",
             "name": "FMT_FOL_foll_num",
             "display": {
-              "text": "Combination of focal chimp and date"
+              "prompt": {
+                "text": "Combination of focal chimp and date"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -448,7 +484,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Follow Map Time"
+              "title": {
+                "text": "Follow Map Time"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -835,7 +873,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Follow Map Time\""
+        "_value": "{\"text\":\"Follow Map Time\"}"
       }
     ]
   }

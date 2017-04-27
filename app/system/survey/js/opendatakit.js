@@ -17,6 +17,7 @@ return {
     savepoint_type_complete: 'COMPLETE',
     savepoint_type_incomplete: 'INCOMPLETE',
     baseDir: '',
+	cachedLocale: undefined,
     /**
      * Global object that is the container for
      * - formDef
@@ -371,7 +372,8 @@ return {
         } else {
             var display = ref.display;
             if ( "title" in display ) {
-                return display.title;
+				var titleEntry = display.title;
+				return titleEntry;
             } else {
                 return "<no title>";
             }
@@ -393,24 +395,6 @@ return {
         }
 
         return sectionSettings.showContents;
-    },
-    localize:function(textOrLangMap, locale) {
-        if(_.isUndefined(textOrLangMap)) {
-            return 'text_undefined';
-        }
-        if(_.isString(textOrLangMap)) {
-            return textOrLangMap;
-        }
-        if( locale in textOrLangMap ){
-            return textOrLangMap[locale];
-        } else if( 'default' in textOrLangMap ){
-            return textOrLangMap['default'];
-        } else {
-            alert("Could not localize object. See console:");
-            console.error("Non localizable object:");
-            console.error(textOrLangMap);
-            return 'no_suitable_language_mapping_defined';
-        }
     },
     /**
      * Retrieve the value of a setting from the form definition file or null if
@@ -439,8 +423,8 @@ return {
         The list of locales should have been constructed by the XLSXConverter.
         It will be saved under settings._locales.value as a list:
 
-        [ { name: "en_us", display: { text: { "en_us": "English", "fr": "Anglais"}}},
-           { name: "fr", display: { text: {"en_us": "French", "fr": "Francais"}}} ]
+        [ { name: "en_us", locale: { text: { "en_us": "English", "fr": "Anglais"}}},
+           { name: "fr", locale: { text: {"en_us": "French", "fr": "Francais"}}} ]
     */
     getFormLocales:function(formDef) {
         if ( formDef !== null && formDef !== undefined ) {
@@ -452,38 +436,39 @@ return {
             alert("_locales not present in form! See console:");
             console.error("The synthesized _locales field is not present in the form!");
         }
-        return [ { display: { text: 'default' }, name: 'default' } ];
+        return [ { locale: { text: 'default' }, name: 'default' } ];
     },
 
     /**
-        The default locale is a synthesized value. It is specified by
-        the value of the '_default_locale' setting.
-
-        This is generally the first locale in the _locales list, above.
-     */
-    getDefaultFormLocale:function(formDef) {
-        if ( formDef !== null &&  formDef !== undefined ) {
-            var localeObject = this.getSettingObject(formDef, '_default_locale');
-            if ( localeObject !== null && localeObject !== undefined &&
-                 localeObject.value !== null && localeObject.value !== undefined ) {
-                return localeObject.value;
-            }
-            alert("_default_locales not present in form! See console:");
-            console.error("The synthesized _default_locales field is not present in the form!");
-        }
-        return "default";
-    },
-    /**
-     use this when the formDef is known to be stored in the mdl
+     changed in rev 210 to use the setting from the Java side's Device Settings menu.
      */
     getDefaultFormLocaleValue:function() {
-        return this.getDefaultFormLocale(this.getCurrentFormDef());
+		// fetch this from platformInfo -- all forms share the same default locale
+		// and any user-defined locales must be defined in the framework form (so they
+		// can be processed by the Java side in this settings menu).
+		// 
+		// individual forms can still offer different locales independent of this
+		// global setting, and the user can change into and out of any locale as
+		// they see fit, but those changes don't propogate up to the Java layer.
+		//
+		return odkCommon.getPreferredLocale();
     },
 
     getFormLocalesValue:function() {
         return this.getFormLocales(this.getCurrentFormDef());
     },
-
+	
+	/**
+	 * cache the locale here so that we preserve the locale when we leave an instance.
+	 */
+	setCachedLocale:function(locale) {
+		this.cachedLocale = locale;
+	},
+	
+	getCachedLocale:function() {
+		return this.cachedLocale;
+	},
+	
     /**
      * Lower-level function to access a formDef file and parse it.
      * Should not be called from renderers!

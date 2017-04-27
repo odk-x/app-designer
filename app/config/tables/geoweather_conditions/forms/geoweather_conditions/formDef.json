@@ -9,8 +9,12 @@
         "type": "string",
         "name": "Code",
         "display": {
-          "text": "Weather Condition Code",
-          "hint": "The scoring code for this weather condition"
+          "prompt": {
+            "text": "Weather Condition Code"
+          },
+          "hint": {
+            "text": "The scoring code for this weather condition"
+          }
         },
         "required": true,
         "_row_num": 3
@@ -19,8 +23,12 @@
         "type": "string",
         "name": "Language",
         "display": {
-          "text": "Language and Locale",
-          "hint": "The language and locale of the description text"
+          "prompt": {
+            "text": "Language and Locale"
+          },
+          "hint": {
+            "text": "The language and locale of the description text"
+          }
         },
         "required": true,
         "_row_num": 4
@@ -29,8 +37,12 @@
         "type": "string",
         "name": "Description",
         "display": {
-          "text": "Description",
-          "hint": "The description shown to the user"
+          "prompt": {
+            "text": "Description"
+          },
+          "hint": {
+            "text": "The description shown to the user"
+          }
         },
         "required": true,
         "_row_num": 5
@@ -80,7 +92,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Weather Conditions for Geo-Weather Survey"
+          "title": {
+            "text": "Weather Conditions for Geo-Weather Survey"
+          }
         },
         "_row_num": 4
       },
@@ -109,10 +123,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -128,7 +139,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Weather Conditions for Geo-Weather Survey"
+          "title": {
+            "text": "Weather Conditions for Geo-Weather Survey"
+          }
         },
         "_row_num": 4
       },
@@ -148,7 +161,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -162,12 +177,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Weather Conditions for Geo-Weather Survey"
+          "title": {
+            "text": "Weather Conditions for Geo-Weather Survey"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {}
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -216,8 +236,12 @@
             "type": "string",
             "name": "Code",
             "display": {
-              "text": "Weather Condition Code",
-              "hint": "The scoring code for this weather condition"
+              "prompt": {
+                "text": "Weather Condition Code"
+              },
+              "hint": {
+                "text": "The scoring code for this weather condition"
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -231,8 +255,12 @@
             "type": "string",
             "name": "Language",
             "display": {
-              "text": "Language and Locale",
-              "hint": "The language and locale of the description text"
+              "prompt": {
+                "text": "Language and Locale"
+              },
+              "hint": {
+                "text": "The language and locale of the description text"
+              }
             },
             "required": true,
             "_row_num": 4,
@@ -246,8 +274,12 @@
             "type": "string",
             "name": "Description",
             "display": {
-              "text": "Description",
-              "hint": "The description shown to the user"
+              "prompt": {
+                "text": "Description"
+              },
+              "hint": {
+                "text": "The description shown to the user"
+              }
             },
             "required": true,
             "_row_num": 5,
@@ -344,7 +376,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Weather Conditions for Geo-Weather Survey"
+              "title": {
+                "text": "Weather Conditions for Geo-Weather Survey"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -672,7 +706,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Weather Conditions for Geo-Weather Survey\""
+        "_value": "{\"text\":\"Weather Conditions for Geo-Weather Survey\"}"
       },
       {
         "_partition": "Table",

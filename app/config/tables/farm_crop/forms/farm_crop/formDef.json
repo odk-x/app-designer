@@ -15,7 +15,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Data for field: {{data.field_uuid}}"
+          "prompt": {
+            "text": "Data for field: {{data.field_uuid}}"
+          }
         },
         "_row_num": 2
       },
@@ -23,7 +25,9 @@
         "type": "text",
         "name": "crop_name",
         "display": {
-          "text": "Enter the name of the crop:"
+          "prompt": {
+            "text": "Enter the name of the crop:"
+          }
         },
         "required": true,
         "_row_num": 3
@@ -32,7 +36,9 @@
         "type": "integer",
         "name": "num_crop",
         "display": {
-          "text": "Enter the approximate number of crop:"
+          "prompt": {
+            "text": "Enter the approximate number of crop:"
+          }
         },
         "_row_num": 4
       },
@@ -40,7 +46,9 @@
         "type": "text",
         "name": "crop_harvest",
         "display": {
-          "text": "Enter the harvest time of the crop:"
+          "prompt": {
+            "text": "Enter the harvest time of the crop:"
+          }
         },
         "_row_num": 5
       }
@@ -136,7 +144,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Crops"
+          "title": {
+            "text": "Crops"
+          }
         },
         "_row_num": 5
       },
@@ -176,10 +186,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -200,7 +207,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Crops"
+          "title": {
+            "text": "Crops"
+          }
         },
         "_row_num": 5
       },
@@ -215,7 +224,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -229,12 +240,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Crops"
+          "title": {
+            "text": "Crops"
+          }
         },
         "_row_num": 5
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {}
+    },
     "queries": {
       "pesticides_csv": {
         "query_name": "pesticides_csv",
@@ -456,7 +472,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Crops"
+              "title": {
+                "text": "Crops"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -552,7 +570,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Data for field: {{data.field_uuid}}"
+              "prompt": {
+                "text": "Data for field: {{data.field_uuid}}"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -565,7 +585,9 @@
             "type": "text",
             "name": "crop_name",
             "display": {
-              "text": "Enter the name of the crop:"
+              "prompt": {
+                "text": "Enter the name of the crop:"
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -579,7 +601,9 @@
             "type": "integer",
             "name": "num_crop",
             "display": {
-              "text": "Enter the approximate number of crop:"
+              "prompt": {
+                "text": "Enter the approximate number of crop:"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -592,7 +616,9 @@
             "type": "text",
             "name": "crop_harvest",
             "display": {
-              "text": "Enter the harvest time of the crop:"
+              "prompt": {
+                "text": "Enter the harvest time of the crop:"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -1111,7 +1137,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Crops\""
+        "_value": "{\"text\":\"Crops\"}"
       }
     ]
   }

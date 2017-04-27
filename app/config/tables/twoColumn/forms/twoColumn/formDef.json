@@ -11,7 +11,9 @@
         "values_list": "continents",
         "name": "visited_continents",
         "display": {
-          "text": "Which continents have you visited?"
+          "prompt": {
+            "text": "Which continents have you visited?"
+          }
         },
         "_row_num": 3
       },
@@ -26,7 +28,9 @@
         "values_list": "yesno",
         "name": "visited_seattle",
         "display": {
-          "text": "Have you visited Seattle?"
+          "prompt": {
+            "text": "Have you visited Seattle?"
+          }
         },
         "_row_num": 5
       },
@@ -49,7 +53,9 @@
         "screen_column": 1,
         "type": "note",
         "display": {
-          "text": "The following data will be used to generate a weight for age plot."
+          "prompt": {
+            "text": "The following data will be used to generate a weight for age plot."
+          }
         },
         "hideInContents": true,
         "_row_num": 9
@@ -59,11 +65,17 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "Enter age (in years):",
-          "hint": "Must be less than 20."
+          "prompt": {
+            "text": "Enter age (in years):"
+          },
+          "hint": {
+            "text": "Must be less than 20."
+          },
+          "constraint_message": {
+            "text": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot."
+          }
         },
         "constraint": "data('age') <= 20",
-        "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
         "_row_num": 10
       },
       {
@@ -72,7 +84,9 @@
         "values_list": "sexes",
         "name": "sex",
         "display": {
-          "text": "Enter sex:"
+          "prompt": {
+            "text": "Enter sex:"
+          }
         },
         "_row_num": 11
       },
@@ -81,7 +95,9 @@
         "type": "decimal",
         "name": "weight",
         "display": {
-          "text": "Enter weight (in lbs):"
+          "prompt": {
+            "text": "Enter weight (in lbs):"
+          }
         },
         "_row_num": 12
       },
@@ -99,8 +115,12 @@
         "type": "integer",
         "name": "rating",
         "display": {
-          "text": "How would you rate this survey?",
-          "hint": "1 is very bad. 10 is very good."
+          "prompt": {
+            "text": "How would you rate this survey?"
+          },
+          "hint": {
+            "text": "1 is very bad. 10 is very good."
+          }
         },
         "inputAttributes": {
           "type": "range",
@@ -301,7 +321,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Two Column Form"
+          "title": {
+            "text": "Two Column Form"
+          }
         },
         "_row_num": 4
       }
@@ -320,10 +342,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -339,7 +358,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Two Column Form"
+          "title": {
+            "text": "Two Column Form"
+          }
         },
         "_row_num": 4
       },
@@ -355,7 +376,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -369,7 +392,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Two Column Form"
+          "title": {
+            "text": "Two Column Form"
+          }
         },
         "_row_num": 4
       }
@@ -552,6 +577,9 @@
         }
       ]
     },
+    "table_specific_translations": {
+      "_tokens": {}
+    },
     "queries": {},
     "calculates": {
       "ask_about_seattle": {
@@ -649,7 +677,9 @@
             "values_list": "continents",
             "name": "visited_continents",
             "display": {
-              "text": "Which continents have you visited?"
+              "prompt": {
+                "text": "Which continents have you visited?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -664,7 +694,9 @@
             "values_list": "yesno",
             "name": "visited_seattle",
             "display": {
-              "text": "Have you visited Seattle?"
+              "prompt": {
+                "text": "Have you visited Seattle?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -677,7 +709,9 @@
             "screen_column": 1,
             "type": "note",
             "display": {
-              "text": "The following data will be used to generate a weight for age plot."
+              "prompt": {
+                "text": "The following data will be used to generate a weight for age plot."
+              }
             },
             "hideInContents": true,
             "_row_num": 9,
@@ -692,11 +726,17 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "Enter age (in years):",
-              "hint": "Must be less than 20."
+              "prompt": {
+                "text": "Enter age (in years):"
+              },
+              "hint": {
+                "text": "Must be less than 20."
+              },
+              "constraint_message": {
+                "text": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot."
+              }
             },
             "constraint": "data('age') <= 20",
-            "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "prompt",
@@ -710,7 +750,9 @@
             "values_list": "sexes",
             "name": "sex",
             "display": {
-              "text": "Enter sex:"
+              "prompt": {
+                "text": "Enter sex:"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -724,7 +766,9 @@
             "type": "decimal",
             "name": "weight",
             "display": {
-              "text": "Enter weight (in lbs):"
+              "prompt": {
+                "text": "Enter weight (in lbs):"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -737,8 +781,12 @@
             "type": "integer",
             "name": "rating",
             "display": {
-              "text": "How would you rate this survey?",
-              "hint": "1 is very bad. 10 is very good."
+              "prompt": {
+                "text": "How would you rate this survey?"
+              },
+              "hint": {
+                "text": "1 is very bad. 10 is very good."
+              }
             },
             "inputAttributes": {
               "type": "range",
@@ -871,7 +919,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Two Column Form"
+              "title": {
+                "text": "Two Column Form"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1285,7 +1335,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Two Column Form\""
+        "_value": "{\"text\":\"Two Column Form\"}"
       }
     ]
   }

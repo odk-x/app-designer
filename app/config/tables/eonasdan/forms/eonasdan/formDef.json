@@ -5,7 +5,9 @@
         "type": "datetime",
         "name": "example1",
         "display": {
-          "text": "Date and Time"
+          "prompt": {
+            "text": "Date and Time"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "date",
         "name": "example2",
         "display": {
-          "text": "Date"
+          "prompt": {
+            "text": "Date"
+          }
         },
         "inputAttributes": {
           "timeFormat": "YYYY/DD/MM"
@@ -24,7 +28,9 @@
         "type": "time",
         "name": "example3",
         "display": {
-          "text": "Time"
+          "prompt": {
+            "text": "Time"
+          }
         },
         "inputAttributes": {
           "timeFormat": "HH:mm"
@@ -46,7 +52,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "DateTime Picker"
+          "title": {
+            "text": "DateTime Picker"
+          }
         },
         "_row_num": 4
       },
@@ -75,10 +83,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -94,7 +99,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "DateTime Picker"
+          "title": {
+            "text": "DateTime Picker"
+          }
         },
         "_row_num": 4
       },
@@ -114,7 +121,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -128,12 +137,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "DateTime Picker"
+          "title": {
+            "text": "DateTime Picker"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {}
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -185,7 +199,9 @@
             "type": "datetime",
             "name": "example1",
             "display": {
-              "text": "Date and Time"
+              "prompt": {
+                "text": "Date and Time"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -198,7 +214,9 @@
             "type": "date",
             "name": "example2",
             "display": {
-              "text": "Date"
+              "prompt": {
+                "text": "Date"
+              }
             },
             "inputAttributes": {
               "timeFormat": "YYYY/DD/MM"
@@ -214,7 +232,9 @@
             "type": "time",
             "name": "example3",
             "display": {
-              "text": "Time"
+              "prompt": {
+                "text": "Time"
+              }
             },
             "inputAttributes": {
               "timeFormat": "HH:mm"
@@ -315,7 +335,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "DateTime Picker"
+              "title": {
+                "text": "DateTime Picker"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -646,7 +668,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"DateTime Picker\""
+        "_value": "{\"text\":\"DateTime Picker\"}"
       }
     ]
   }

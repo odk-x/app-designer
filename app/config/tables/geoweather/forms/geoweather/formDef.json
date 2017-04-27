@@ -18,8 +18,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Current Date and Time<br> {{data.Date_and_Time}}",
-          "hint": "The date and time of this observation"
+          "prompt": {
+            "text": "Current Date and Time<br> {{data.Date_and_Time}}"
+          },
+          "hint": {
+            "text": "The date and time of this observation"
+          }
         },
         "_row_num": 4
       },
@@ -27,8 +31,12 @@
         "type": "string",
         "name": "Description",
         "display": {
-          "text": "Description",
-          "hint": "A brief description of this location"
+          "prompt": {
+            "text": "Description"
+          },
+          "hint": {
+            "text": "A brief description of this location"
+          }
         },
         "required": true,
         "_row_num": 5
@@ -38,8 +46,12 @@
         "values_list": "select_geoweather_conditions",
         "name": "Weather",
         "display": {
-          "text": "Current Weather",
-          "hint": "Record the current conditions at this location"
+          "prompt": {
+            "text": "Current Weather"
+          },
+          "hint": {
+            "text": "Record the current conditions at this location"
+          }
         },
         "_row_num": 6
       },
@@ -47,8 +59,12 @@
         "type": "integer",
         "name": "Temperature",
         "display": {
-          "text": "Outdoor Temperature",
-          "hint": "Record the current outdoor temperature"
+          "prompt": {
+            "text": "Outdoor Temperature"
+          },
+          "hint": {
+            "text": "Record the current outdoor temperature"
+          }
         },
         "_row_num": 7
       },
@@ -56,10 +72,16 @@
         "type": "geopoint",
         "name": "Location",
         "display": {
-          "text": "Location",
-          "hint": "Capture the GPS coordinates of this location"
+          "prompt": {
+            "text": "Location"
+          },
+          "hint": {
+            "text": "Capture the GPS coordinates of this location"
+          },
+          "button_label": {
+            "text": "Record Location"
+          }
         },
-        "buttonLabel": "Record Location",
         "_row_num": 8
       },
       {
@@ -129,7 +151,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Simple Weather Survey"
+          "title": {
+            "text": "Simple Weather Survey"
+          }
         },
         "_row_num": 4
       },
@@ -224,10 +248,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -243,7 +264,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Simple Weather Survey"
+          "title": {
+            "text": "Simple Weather Survey"
+          }
         },
         "_row_num": 4
       },
@@ -263,7 +286,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -277,7 +302,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Simple Weather Survey"
+          "title": {
+            "text": "Simple Weather Survey"
+          }
         },
         "_row_num": 4
       }
@@ -349,6 +376,9 @@
           "_row_num": 9
         }
       ]
+    },
+    "table_specific_translations": {
+      "_tokens": {}
     },
     "queries": {
       "select_geoweather_conditions": {
@@ -459,8 +489,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Current Date and Time<br> {{data.Date_and_Time}}",
-              "hint": "The date and time of this observation"
+              "prompt": {
+                "text": "Current Date and Time<br> {{data.Date_and_Time}}"
+              },
+              "hint": {
+                "text": "The date and time of this observation"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -473,8 +507,12 @@
             "type": "string",
             "name": "Description",
             "display": {
-              "text": "Description",
-              "hint": "A brief description of this location"
+              "prompt": {
+                "text": "Description"
+              },
+              "hint": {
+                "text": "A brief description of this location"
+              }
             },
             "required": true,
             "_row_num": 5,
@@ -489,8 +527,12 @@
             "values_list": "select_geoweather_conditions",
             "name": "Weather",
             "display": {
-              "text": "Current Weather",
-              "hint": "Record the current conditions at this location"
+              "prompt": {
+                "text": "Current Weather"
+              },
+              "hint": {
+                "text": "Record the current conditions at this location"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -503,8 +545,12 @@
             "type": "integer",
             "name": "Temperature",
             "display": {
-              "text": "Outdoor Temperature",
-              "hint": "Record the current outdoor temperature"
+              "prompt": {
+                "text": "Outdoor Temperature"
+              },
+              "hint": {
+                "text": "Record the current outdoor temperature"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -517,10 +563,16 @@
             "type": "geopoint",
             "name": "Location",
             "display": {
-              "text": "Location",
-              "hint": "Capture the GPS coordinates of this location"
+              "prompt": {
+                "text": "Location"
+              },
+              "hint": {
+                "text": "Capture the GPS coordinates of this location"
+              },
+              "button_label": {
+                "text": "Record Location"
+              }
             },
-            "buttonLabel": "Record Location",
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
@@ -639,7 +691,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Simple Weather Survey"
+              "title": {
+                "text": "Simple Weather Survey"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1075,7 +1129,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Simple Weather Survey\""
+        "_value": "{\"text\":\"Simple Weather Survey\"}"
       },
       {
         "_partition": "Table",

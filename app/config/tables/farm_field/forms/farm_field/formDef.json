@@ -4,7 +4,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Data for farm: {{data.farm_uuid}}"
+          "prompt": {
+            "text": "Data for farm: {{data.farm_uuid}}"
+          }
         },
         "_row_num": 2
       },
@@ -12,7 +14,9 @@
         "type": "text",
         "name": "field_name",
         "display": {
-          "text": "Enter the name of the field:"
+          "prompt": {
+            "text": "Enter the name of the field:"
+          }
         },
         "required": true,
         "_row_num": 3
@@ -94,14 +98,18 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Fields"
+          "title": {
+            "text": "Fields"
+          }
         },
         "_row_num": 5
       },
       {
         "setting_name": "crops",
         "display": {
-          "title": "Crops"
+          "title": {
+            "text": "Crops"
+          }
         },
         "_row_num": 6
       },
@@ -127,8 +135,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Farms Crop section:",
-          "hint": "This section is to gather information about crops in the farm"
+          "prompt": {
+            "text": "Farms Crop section:"
+          },
+          "hint": {
+            "text": "This section is to gather information about crops in the farm"
+          }
         },
         "_row_num": 2
       },
@@ -136,8 +148,12 @@
         "type": "linked_table",
         "values_list": "linked_crops",
         "display": {
-          "text": "Record all the crops produced in this farm",
-          "new_instance_text": "Add Crop"
+          "prompt": {
+            "text": "Record all the crops produced in this farm"
+          },
+          "new_instance_label": {
+            "text": "Add Crop"
+          }
         },
         "_row_num": 3
       }
@@ -163,10 +179,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -187,14 +200,18 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Fields"
+          "title": {
+            "text": "Fields"
+          }
         },
         "_row_num": 5
       },
       "crops": {
         "setting_name": "crops",
         "display": {
-          "title": "Crops"
+          "title": {
+            "text": "Crops"
+          }
         },
         "_row_num": 6
       },
@@ -209,7 +226,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -223,12 +242,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Fields"
+          "title": {
+            "text": "Fields"
+          }
         },
         "_row_num": 5
       }
     },
     "choices": {},
+    "table_specific_translations": {
+      "_tokens": {}
+    },
     "queries": {
       "linked_crops": {
         "query_name": "linked_crops",
@@ -385,7 +409,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Data for farm: {{data.farm_uuid}}"
+              "prompt": {
+                "text": "Data for farm: {{data.farm_uuid}}"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -398,7 +424,9 @@
             "type": "text",
             "name": "field_name",
             "display": {
-              "text": "Enter the name of the field:"
+              "prompt": {
+                "text": "Enter the name of the field:"
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -417,7 +445,9 @@
             "_type": "_section",
             "promptIdx": 2,
             "display": {
-              "title": "Crops"
+              "title": {
+                "text": "Crops"
+              }
             },
             "_branch_label_enclosing_screen": "crops/0"
           },
@@ -502,8 +532,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Farms Crop section:",
-              "hint": "This section is to gather information about crops in the farm"
+              "prompt": {
+                "text": "Farms Crop section:"
+              },
+              "hint": {
+                "text": "This section is to gather information about crops in the farm"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -516,8 +550,12 @@
             "type": "linked_table",
             "values_list": "linked_crops",
             "display": {
-              "text": "Record all the crops produced in this farm",
-              "new_instance_text": "Add Crop"
+              "prompt": {
+                "text": "Record all the crops produced in this farm"
+              },
+              "new_instance_label": {
+                "text": "Add Crop"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -609,7 +647,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Fields"
+              "title": {
+                "text": "Fields"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1089,7 +1129,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Fields\""
+        "_value": "{\"text\":\"Fields\"}"
       }
     ]
   }

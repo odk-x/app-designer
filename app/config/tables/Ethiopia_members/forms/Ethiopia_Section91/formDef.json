@@ -16,7 +16,9 @@
         "values_list": "med_location",
         "name": "where_medical_attention",
         "display": {
-          "text": "Where did {{data.name}} receive or consult medical assistance primarily?"
+          "prompt": {
+            "text": "Where did {{data.name}} receive or consult medical assistance primarily?"
+          }
         },
         "_row_num": 2
       }
@@ -98,7 +100,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.1"
+          "title": {
+            "text": "Section 9.1"
+          }
         },
         "_row_num": 5
       },
@@ -456,10 +460,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -480,7 +481,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.1"
+          "title": {
+            "text": "Section 9.1"
+          }
         },
         "_row_num": 5
       },
@@ -495,7 +498,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -509,7 +514,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.1"
+          "title": {
+            "text": "Section 9.1"
+          }
         },
         "_row_num": 5
       }
@@ -1261,7 +1268,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 9.1"
+              "title": {
+                "text": "Section 9.1"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1358,7 +1367,9 @@
             "values_list": "med_location",
             "name": "where_medical_attention",
             "display": {
-              "text": "Where did {{data.name}} receive or consult medical assistance primarily?"
+              "prompt": {
+                "text": "Where did {{data.name}} receive or consult medical assistance primarily?"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,

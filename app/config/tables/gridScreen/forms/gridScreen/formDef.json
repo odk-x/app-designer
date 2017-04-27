@@ -13,8 +13,12 @@
         "type": "note",
         "name": "description",
         "display": {
-          "text": "Price Comparisons",
-          "hint": "Please enter items and their prices."
+          "prompt": {
+            "text": "Price Comparisons"
+          },
+          "hint": {
+            "text": "Please enter items and their prices."
+          }
         },
         "_row_num": 3
       },
@@ -22,7 +26,9 @@
         "type": "text",
         "name": "item_1",
         "display": {
-          "title": "item_1"
+          "title": {
+            "text": "item_1"
+          }
         },
         "_row_num": 4
       },
@@ -30,7 +36,9 @@
         "type": "text",
         "name": "item_2",
         "display": {
-          "title": "item_2"
+          "title": {
+            "text": "item_2"
+          }
         },
         "_row_num": 5
       },
@@ -38,7 +46,9 @@
         "type": "text",
         "name": "item_3",
         "display": {
-          "title": "item_3"
+          "title": {
+            "text": "item_3"
+          }
         },
         "_row_num": 6
       },
@@ -46,7 +56,9 @@
         "type": "text",
         "name": "item_4",
         "display": {
-          "title": "item_4"
+          "title": {
+            "text": "item_4"
+          }
         },
         "_row_num": 7
       },
@@ -54,7 +66,9 @@
         "type": "text",
         "name": "item_5",
         "display": {
-          "title": "item_5"
+          "title": {
+            "text": "item_5"
+          }
         },
         "_row_num": 8
       },
@@ -62,7 +76,9 @@
         "type": "text",
         "name": "item_6",
         "display": {
-          "title": "item_6"
+          "title": {
+            "text": "item_6"
+          }
         },
         "_row_num": 9
       },
@@ -70,7 +86,9 @@
         "type": "text",
         "name": "item_7",
         "display": {
-          "title": "item_7"
+          "title": {
+            "text": "item_7"
+          }
         },
         "_row_num": 10
       },
@@ -78,7 +96,9 @@
         "type": "decimal",
         "name": "QFC_item_1",
         "display": {
-          "title": "QFC_item_1"
+          "title": {
+            "text": "QFC_item_1"
+          }
         },
         "_row_num": 11
       },
@@ -86,7 +106,9 @@
         "type": "decimal",
         "name": "QFC_item_2",
         "display": {
-          "title": "QFC_item_2"
+          "title": {
+            "text": "QFC_item_2"
+          }
         },
         "_row_num": 12
       },
@@ -94,7 +116,9 @@
         "type": "decimal",
         "name": "QFC_item_3",
         "display": {
-          "title": "QFC_item_3"
+          "title": {
+            "text": "QFC_item_3"
+          }
         },
         "_row_num": 13
       },
@@ -102,7 +126,9 @@
         "type": "decimal",
         "name": "QFC_item_4",
         "display": {
-          "title": "QFC_item_4"
+          "title": {
+            "text": "QFC_item_4"
+          }
         },
         "_row_num": 14
       },
@@ -110,7 +136,9 @@
         "type": "decimal",
         "name": "QFC_item_5",
         "display": {
-          "title": "QFC_item_5"
+          "title": {
+            "text": "QFC_item_5"
+          }
         },
         "_row_num": 15
       },
@@ -118,7 +146,9 @@
         "type": "decimal",
         "name": "QFC_item_6",
         "display": {
-          "title": "QFC_item_6"
+          "title": {
+            "text": "QFC_item_6"
+          }
         },
         "_row_num": 16
       },
@@ -132,7 +162,9 @@
         "type": "decimal",
         "name": "QFC_sum",
         "display": {
-          "title": "QFC_item_7"
+          "title": {
+            "text": "QFC_item_7"
+          }
         },
         "_row_num": 18
       },
@@ -140,7 +172,9 @@
         "type": "decimal",
         "name": "Safeway_item_1",
         "display": {
-          "title": "Safeway_item_1"
+          "title": {
+            "text": "Safeway_item_1"
+          }
         },
         "_row_num": 19
       },
@@ -148,7 +182,9 @@
         "type": "decimal",
         "name": "Safeway_item_2",
         "display": {
-          "title": "Safeway_item_2"
+          "title": {
+            "text": "Safeway_item_2"
+          }
         },
         "_row_num": 20
       },
@@ -156,7 +192,9 @@
         "type": "decimal",
         "name": "Safeway_item_3",
         "display": {
-          "title": "Safeway_item_3"
+          "title": {
+            "text": "Safeway_item_3"
+          }
         },
         "_row_num": 21
       },
@@ -164,7 +202,9 @@
         "type": "decimal",
         "name": "Safeway_item_4",
         "display": {
-          "title": "Safeway_item_4"
+          "title": {
+            "text": "Safeway_item_4"
+          }
         },
         "_row_num": 22
       },
@@ -172,7 +212,9 @@
         "type": "decimal",
         "name": "Safeway_item_5",
         "display": {
-          "title": "Safeway_item_5"
+          "title": {
+            "text": "Safeway_item_5"
+          }
         },
         "_row_num": 23
       },
@@ -180,7 +222,9 @@
         "type": "decimal",
         "name": "Safeway_item_6",
         "display": {
-          "title": "Safeway_item_6"
+          "title": {
+            "text": "Safeway_item_6"
+          }
         },
         "_row_num": 24
       },
@@ -194,7 +238,9 @@
         "type": "decimal",
         "name": "Safeway_sum",
         "display": {
-          "title": "Safeway_item_7"
+          "title": {
+            "text": "Safeway_item_7"
+          }
         },
         "_row_num": 26
       },
@@ -202,7 +248,9 @@
         "type": "decimal",
         "name": "Target_item_1",
         "display": {
-          "title": "Target_item_1"
+          "title": {
+            "text": "Target_item_1"
+          }
         },
         "_row_num": 27
       },
@@ -210,7 +258,9 @@
         "type": "decimal",
         "name": "Target_item_2",
         "display": {
-          "title": "Target_item_2"
+          "title": {
+            "text": "Target_item_2"
+          }
         },
         "_row_num": 28
       },
@@ -218,7 +268,9 @@
         "type": "decimal",
         "name": "Target_item_3",
         "display": {
-          "title": "Target_item_3"
+          "title": {
+            "text": "Target_item_3"
+          }
         },
         "_row_num": 29
       },
@@ -226,7 +278,9 @@
         "type": "decimal",
         "name": "Target_item_4",
         "display": {
-          "title": "Target_item_4"
+          "title": {
+            "text": "Target_item_4"
+          }
         },
         "_row_num": 30
       },
@@ -234,7 +288,9 @@
         "type": "decimal",
         "name": "Target_item_5",
         "display": {
-          "title": "Target_item_5"
+          "title": {
+            "text": "Target_item_5"
+          }
         },
         "_row_num": 31
       },
@@ -242,7 +298,9 @@
         "type": "decimal",
         "name": "Target_item_6",
         "display": {
-          "title": "Target_item_6"
+          "title": {
+            "text": "Target_item_6"
+          }
         },
         "_row_num": 32
       },
@@ -256,7 +314,9 @@
         "type": "decimal",
         "name": "Target_sum",
         "display": {
-          "title": "Target_item_7"
+          "title": {
+            "text": "Target_item_7"
+          }
         },
         "_row_num": 34
       },
@@ -264,7 +324,9 @@
         "type": "select_multiple",
         "name": "selected_store",
         "display": {
-          "text": "Which store will you visit?"
+          "prompt": {
+            "text": "Which store will you visit?"
+          }
         },
         "values_list": "stores",
         "_row_num": 35
@@ -279,7 +341,9 @@
         },
         "type": "note",
         "display": {
-          "text": "This is a test"
+          "prompt": {
+            "text": "This is a test"
+          }
         },
         "_row_num": 37
       }
@@ -514,7 +578,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Grid Screen Form"
+          "title": {
+            "text": "Grid Screen Form"
+          }
         },
         "_row_num": 4
       }
@@ -543,10 +609,7 @@
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -562,7 +625,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Grid Screen Form"
+          "title": {
+            "text": "Grid Screen Form"
+          }
         },
         "_row_num": 4
       },
@@ -578,7 +643,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -592,7 +659,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Grid Screen Form"
+          "title": {
+            "text": "Grid Screen Form"
+          }
         },
         "_row_num": 4
       }
@@ -801,6 +870,9 @@
         }
       ]
     },
+    "table_specific_translations": {
+      "_tokens": {}
+    },
     "queries": {},
     "calculates": {
       "ask_about_seattle": {
@@ -833,7 +905,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_1",
+        "displayName": {
+          "text": "item_1"
+        },
         "elementKey": "item_1"
       },
       "item_2": {
@@ -844,7 +918,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_2",
+        "displayName": {
+          "text": "item_2"
+        },
         "elementKey": "item_2"
       },
       "item_3": {
@@ -855,7 +931,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_3",
+        "displayName": {
+          "text": "item_3"
+        },
         "elementKey": "item_3"
       },
       "item_4": {
@@ -866,7 +944,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_4",
+        "displayName": {
+          "text": "item_4"
+        },
         "elementKey": "item_4"
       },
       "item_5": {
@@ -877,7 +957,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_5",
+        "displayName": {
+          "text": "item_5"
+        },
         "elementKey": "item_5"
       },
       "item_6": {
@@ -888,7 +970,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_6",
+        "displayName": {
+          "text": "item_6"
+        },
         "elementKey": "item_6"
       },
       "item_7": {
@@ -899,7 +983,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_7",
+        "displayName": {
+          "text": "item_7"
+        },
         "elementKey": "item_7"
       },
       "QFC_item_1": {
@@ -910,7 +996,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_1",
+        "displayName": {
+          "text": "QFC_item_1"
+        },
         "elementKey": "QFC_item_1"
       },
       "QFC_item_2": {
@@ -921,7 +1009,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_2",
+        "displayName": {
+          "text": "QFC_item_2"
+        },
         "elementKey": "QFC_item_2"
       },
       "QFC_item_3": {
@@ -932,7 +1022,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_3",
+        "displayName": {
+          "text": "QFC_item_3"
+        },
         "elementKey": "QFC_item_3"
       },
       "QFC_item_4": {
@@ -943,7 +1035,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_4",
+        "displayName": {
+          "text": "QFC_item_4"
+        },
         "elementKey": "QFC_item_4"
       },
       "QFC_item_5": {
@@ -954,7 +1048,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_5",
+        "displayName": {
+          "text": "QFC_item_5"
+        },
         "elementKey": "QFC_item_5"
       },
       "QFC_item_6": {
@@ -965,7 +1061,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_6",
+        "displayName": {
+          "text": "QFC_item_6"
+        },
         "elementKey": "QFC_item_6"
       },
       "QFC_sum": {
@@ -976,7 +1074,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_7",
+        "displayName": {
+          "text": "QFC_item_7"
+        },
         "elementKey": "QFC_sum"
       },
       "Safeway_item_1": {
@@ -987,7 +1087,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_1",
+        "displayName": {
+          "text": "Safeway_item_1"
+        },
         "elementKey": "Safeway_item_1"
       },
       "Safeway_item_2": {
@@ -998,7 +1100,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_2",
+        "displayName": {
+          "text": "Safeway_item_2"
+        },
         "elementKey": "Safeway_item_2"
       },
       "Safeway_item_3": {
@@ -1009,7 +1113,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_3",
+        "displayName": {
+          "text": "Safeway_item_3"
+        },
         "elementKey": "Safeway_item_3"
       },
       "Safeway_item_4": {
@@ -1020,7 +1126,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_4",
+        "displayName": {
+          "text": "Safeway_item_4"
+        },
         "elementKey": "Safeway_item_4"
       },
       "Safeway_item_5": {
@@ -1031,7 +1139,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_5",
+        "displayName": {
+          "text": "Safeway_item_5"
+        },
         "elementKey": "Safeway_item_5"
       },
       "Safeway_item_6": {
@@ -1042,7 +1152,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_6",
+        "displayName": {
+          "text": "Safeway_item_6"
+        },
         "elementKey": "Safeway_item_6"
       },
       "Safeway_sum": {
@@ -1053,7 +1165,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_7",
+        "displayName": {
+          "text": "Safeway_item_7"
+        },
         "elementKey": "Safeway_sum"
       },
       "Target_item_1": {
@@ -1064,7 +1178,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_1",
+        "displayName": {
+          "text": "Target_item_1"
+        },
         "elementKey": "Target_item_1"
       },
       "Target_item_2": {
@@ -1075,7 +1191,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_2",
+        "displayName": {
+          "text": "Target_item_2"
+        },
         "elementKey": "Target_item_2"
       },
       "Target_item_3": {
@@ -1086,7 +1204,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_3",
+        "displayName": {
+          "text": "Target_item_3"
+        },
         "elementKey": "Target_item_3"
       },
       "Target_item_4": {
@@ -1097,7 +1217,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_4",
+        "displayName": {
+          "text": "Target_item_4"
+        },
         "elementKey": "Target_item_4"
       },
       "Target_item_5": {
@@ -1108,7 +1230,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_5",
+        "displayName": {
+          "text": "Target_item_5"
+        },
         "elementKey": "Target_item_5"
       },
       "Target_item_6": {
@@ -1119,7 +1243,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_6",
+        "displayName": {
+          "text": "Target_item_6"
+        },
         "elementKey": "Target_item_6"
       },
       "Target_sum": {
@@ -1130,7 +1256,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_7",
+        "displayName": {
+          "text": "Target_item_7"
+        },
         "elementKey": "Target_sum"
       },
       "selected_store": {
@@ -1163,8 +1291,12 @@
             "type": "note",
             "name": "description",
             "display": {
-              "text": "Price Comparisons",
-              "hint": "Please enter items and their prices."
+              "prompt": {
+                "text": "Price Comparisons"
+              },
+              "hint": {
+                "text": "Please enter items and their prices."
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1177,7 +1309,9 @@
             "type": "text",
             "name": "item_1",
             "display": {
-              "title": "item_1"
+              "title": {
+                "text": "item_1"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -1190,7 +1324,9 @@
             "type": "text",
             "name": "item_2",
             "display": {
-              "title": "item_2"
+              "title": {
+                "text": "item_2"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -1203,7 +1339,9 @@
             "type": "text",
             "name": "item_3",
             "display": {
-              "title": "item_3"
+              "title": {
+                "text": "item_3"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -1216,7 +1354,9 @@
             "type": "text",
             "name": "item_4",
             "display": {
-              "title": "item_4"
+              "title": {
+                "text": "item_4"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -1229,7 +1369,9 @@
             "type": "text",
             "name": "item_5",
             "display": {
-              "title": "item_5"
+              "title": {
+                "text": "item_5"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -1242,7 +1384,9 @@
             "type": "text",
             "name": "item_6",
             "display": {
-              "title": "item_6"
+              "title": {
+                "text": "item_6"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -1255,7 +1399,9 @@
             "type": "text",
             "name": "item_7",
             "display": {
-              "title": "item_7"
+              "title": {
+                "text": "item_7"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -1268,7 +1414,9 @@
             "type": "decimal",
             "name": "QFC_item_1",
             "display": {
-              "title": "QFC_item_1"
+              "title": {
+                "text": "QFC_item_1"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -1281,7 +1429,9 @@
             "type": "decimal",
             "name": "QFC_item_2",
             "display": {
-              "title": "QFC_item_2"
+              "title": {
+                "text": "QFC_item_2"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -1294,7 +1444,9 @@
             "type": "decimal",
             "name": "QFC_item_3",
             "display": {
-              "title": "QFC_item_3"
+              "title": {
+                "text": "QFC_item_3"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -1307,7 +1459,9 @@
             "type": "decimal",
             "name": "QFC_item_4",
             "display": {
-              "title": "QFC_item_4"
+              "title": {
+                "text": "QFC_item_4"
+              }
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -1320,7 +1474,9 @@
             "type": "decimal",
             "name": "QFC_item_5",
             "display": {
-              "title": "QFC_item_5"
+              "title": {
+                "text": "QFC_item_5"
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -1333,7 +1489,9 @@
             "type": "decimal",
             "name": "QFC_item_6",
             "display": {
-              "title": "QFC_item_6"
+              "title": {
+                "text": "QFC_item_6"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -1346,7 +1504,9 @@
             "type": "decimal",
             "name": "QFC_sum",
             "display": {
-              "title": "QFC_item_7"
+              "title": {
+                "text": "QFC_item_7"
+              }
             },
             "_row_num": 18,
             "__rowNum__": 17,
@@ -1359,7 +1519,9 @@
             "type": "decimal",
             "name": "Safeway_item_1",
             "display": {
-              "title": "Safeway_item_1"
+              "title": {
+                "text": "Safeway_item_1"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -1372,7 +1534,9 @@
             "type": "decimal",
             "name": "Safeway_item_2",
             "display": {
-              "title": "Safeway_item_2"
+              "title": {
+                "text": "Safeway_item_2"
+              }
             },
             "_row_num": 20,
             "__rowNum__": 19,
@@ -1385,7 +1549,9 @@
             "type": "decimal",
             "name": "Safeway_item_3",
             "display": {
-              "title": "Safeway_item_3"
+              "title": {
+                "text": "Safeway_item_3"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -1398,7 +1564,9 @@
             "type": "decimal",
             "name": "Safeway_item_4",
             "display": {
-              "title": "Safeway_item_4"
+              "title": {
+                "text": "Safeway_item_4"
+              }
             },
             "_row_num": 22,
             "__rowNum__": 21,
@@ -1411,7 +1579,9 @@
             "type": "decimal",
             "name": "Safeway_item_5",
             "display": {
-              "title": "Safeway_item_5"
+              "title": {
+                "text": "Safeway_item_5"
+              }
             },
             "_row_num": 23,
             "__rowNum__": 22,
@@ -1424,7 +1594,9 @@
             "type": "decimal",
             "name": "Safeway_item_6",
             "display": {
-              "title": "Safeway_item_6"
+              "title": {
+                "text": "Safeway_item_6"
+              }
             },
             "_row_num": 24,
             "__rowNum__": 23,
@@ -1437,7 +1609,9 @@
             "type": "decimal",
             "name": "Safeway_sum",
             "display": {
-              "title": "Safeway_item_7"
+              "title": {
+                "text": "Safeway_item_7"
+              }
             },
             "_row_num": 26,
             "__rowNum__": 25,
@@ -1450,7 +1624,9 @@
             "type": "decimal",
             "name": "Target_item_1",
             "display": {
-              "title": "Target_item_1"
+              "title": {
+                "text": "Target_item_1"
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -1463,7 +1639,9 @@
             "type": "decimal",
             "name": "Target_item_2",
             "display": {
-              "title": "Target_item_2"
+              "title": {
+                "text": "Target_item_2"
+              }
             },
             "_row_num": 28,
             "__rowNum__": 27,
@@ -1476,7 +1654,9 @@
             "type": "decimal",
             "name": "Target_item_3",
             "display": {
-              "title": "Target_item_3"
+              "title": {
+                "text": "Target_item_3"
+              }
             },
             "_row_num": 29,
             "__rowNum__": 28,
@@ -1489,7 +1669,9 @@
             "type": "decimal",
             "name": "Target_item_4",
             "display": {
-              "title": "Target_item_4"
+              "title": {
+                "text": "Target_item_4"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -1502,7 +1684,9 @@
             "type": "decimal",
             "name": "Target_item_5",
             "display": {
-              "title": "Target_item_5"
+              "title": {
+                "text": "Target_item_5"
+              }
             },
             "_row_num": 31,
             "__rowNum__": 30,
@@ -1515,7 +1699,9 @@
             "type": "decimal",
             "name": "Target_item_6",
             "display": {
-              "title": "Target_item_6"
+              "title": {
+                "text": "Target_item_6"
+              }
             },
             "_row_num": 32,
             "__rowNum__": 31,
@@ -1528,7 +1714,9 @@
             "type": "decimal",
             "name": "Target_sum",
             "display": {
-              "title": "Target_item_7"
+              "title": {
+                "text": "Target_item_7"
+              }
             },
             "_row_num": 34,
             "__rowNum__": 33,
@@ -1541,7 +1729,9 @@
             "type": "select_multiple",
             "name": "selected_store",
             "display": {
-              "text": "Which store will you visit?"
+              "prompt": {
+                "text": "Which store will you visit?"
+              }
             },
             "values_list": "stores",
             "_row_num": 35,
@@ -1554,7 +1744,9 @@
           {
             "type": "note",
             "display": {
-              "text": "This is a test"
+              "prompt": {
+                "text": "This is a test"
+              }
             },
             "_row_num": 37,
             "__rowNum__": 36,
@@ -1660,7 +1852,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Grid Screen Form"
+              "title": {
+                "text": "Grid Screen Form"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1817,7 +2011,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_1",
+        "displayName": {
+          "text": "item_1"
+        },
         "elementKey": "item_1",
         "elementName": "item_1",
         "elementSet": "data",
@@ -1831,7 +2027,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_2",
+        "displayName": {
+          "text": "item_2"
+        },
         "elementKey": "item_2",
         "elementName": "item_2",
         "elementSet": "data",
@@ -1845,7 +2043,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_3",
+        "displayName": {
+          "text": "item_3"
+        },
         "elementKey": "item_3",
         "elementName": "item_3",
         "elementSet": "data",
@@ -1859,7 +2059,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_4",
+        "displayName": {
+          "text": "item_4"
+        },
         "elementKey": "item_4",
         "elementName": "item_4",
         "elementSet": "data",
@@ -1873,7 +2075,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_5",
+        "displayName": {
+          "text": "item_5"
+        },
         "elementKey": "item_5",
         "elementName": "item_5",
         "elementSet": "data",
@@ -1887,7 +2091,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_6",
+        "displayName": {
+          "text": "item_6"
+        },
         "elementKey": "item_6",
         "elementName": "item_6",
         "elementSet": "data",
@@ -1901,7 +2107,9 @@
           }
         ],
         "type": "string",
-        "displayName": "item_7",
+        "displayName": {
+          "text": "item_7"
+        },
         "elementKey": "item_7",
         "elementName": "item_7",
         "elementSet": "data",
@@ -1915,7 +2123,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_1",
+        "displayName": {
+          "text": "QFC_item_1"
+        },
         "elementKey": "QFC_item_1",
         "elementName": "QFC_item_1",
         "elementSet": "data",
@@ -1929,7 +2139,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_2",
+        "displayName": {
+          "text": "QFC_item_2"
+        },
         "elementKey": "QFC_item_2",
         "elementName": "QFC_item_2",
         "elementSet": "data",
@@ -1943,7 +2155,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_3",
+        "displayName": {
+          "text": "QFC_item_3"
+        },
         "elementKey": "QFC_item_3",
         "elementName": "QFC_item_3",
         "elementSet": "data",
@@ -1957,7 +2171,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_4",
+        "displayName": {
+          "text": "QFC_item_4"
+        },
         "elementKey": "QFC_item_4",
         "elementName": "QFC_item_4",
         "elementSet": "data",
@@ -1971,7 +2187,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_5",
+        "displayName": {
+          "text": "QFC_item_5"
+        },
         "elementKey": "QFC_item_5",
         "elementName": "QFC_item_5",
         "elementSet": "data",
@@ -1985,7 +2203,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_6",
+        "displayName": {
+          "text": "QFC_item_6"
+        },
         "elementKey": "QFC_item_6",
         "elementName": "QFC_item_6",
         "elementSet": "data",
@@ -1999,7 +2219,9 @@
           }
         ],
         "type": "number",
-        "displayName": "QFC_item_7",
+        "displayName": {
+          "text": "QFC_item_7"
+        },
         "elementKey": "QFC_sum",
         "elementName": "QFC_sum",
         "elementSet": "data",
@@ -2013,7 +2235,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_1",
+        "displayName": {
+          "text": "Safeway_item_1"
+        },
         "elementKey": "Safeway_item_1",
         "elementName": "Safeway_item_1",
         "elementSet": "data",
@@ -2027,7 +2251,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_2",
+        "displayName": {
+          "text": "Safeway_item_2"
+        },
         "elementKey": "Safeway_item_2",
         "elementName": "Safeway_item_2",
         "elementSet": "data",
@@ -2041,7 +2267,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_3",
+        "displayName": {
+          "text": "Safeway_item_3"
+        },
         "elementKey": "Safeway_item_3",
         "elementName": "Safeway_item_3",
         "elementSet": "data",
@@ -2055,7 +2283,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_4",
+        "displayName": {
+          "text": "Safeway_item_4"
+        },
         "elementKey": "Safeway_item_4",
         "elementName": "Safeway_item_4",
         "elementSet": "data",
@@ -2069,7 +2299,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_5",
+        "displayName": {
+          "text": "Safeway_item_5"
+        },
         "elementKey": "Safeway_item_5",
         "elementName": "Safeway_item_5",
         "elementSet": "data",
@@ -2083,7 +2315,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_6",
+        "displayName": {
+          "text": "Safeway_item_6"
+        },
         "elementKey": "Safeway_item_6",
         "elementName": "Safeway_item_6",
         "elementSet": "data",
@@ -2097,7 +2331,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Safeway_item_7",
+        "displayName": {
+          "text": "Safeway_item_7"
+        },
         "elementKey": "Safeway_sum",
         "elementName": "Safeway_sum",
         "elementSet": "data",
@@ -2111,7 +2347,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_1",
+        "displayName": {
+          "text": "Target_item_1"
+        },
         "elementKey": "Target_item_1",
         "elementName": "Target_item_1",
         "elementSet": "data",
@@ -2125,7 +2363,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_2",
+        "displayName": {
+          "text": "Target_item_2"
+        },
         "elementKey": "Target_item_2",
         "elementName": "Target_item_2",
         "elementSet": "data",
@@ -2139,7 +2379,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_3",
+        "displayName": {
+          "text": "Target_item_3"
+        },
         "elementKey": "Target_item_3",
         "elementName": "Target_item_3",
         "elementSet": "data",
@@ -2153,7 +2395,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_4",
+        "displayName": {
+          "text": "Target_item_4"
+        },
         "elementKey": "Target_item_4",
         "elementName": "Target_item_4",
         "elementSet": "data",
@@ -2167,7 +2411,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_5",
+        "displayName": {
+          "text": "Target_item_5"
+        },
         "elementKey": "Target_item_5",
         "elementName": "Target_item_5",
         "elementSet": "data",
@@ -2181,7 +2427,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_6",
+        "displayName": {
+          "text": "Target_item_6"
+        },
         "elementKey": "Target_item_6",
         "elementName": "Target_item_6",
         "elementSet": "data",
@@ -2195,7 +2443,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Target_item_7",
+        "displayName": {
+          "text": "Target_item_7"
+        },
         "elementKey": "Target_sum",
         "elementName": "Target_sum",
         "elementSet": "data",
@@ -2353,196 +2603,196 @@
         "_aspect": "QFC_item_1",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"QFC_item_1\""
+        "_value": "{\"text\":\"QFC_item_1\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "QFC_item_2",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"QFC_item_2\""
+        "_value": "{\"text\":\"QFC_item_2\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "QFC_item_3",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"QFC_item_3\""
+        "_value": "{\"text\":\"QFC_item_3\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "QFC_item_4",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"QFC_item_4\""
+        "_value": "{\"text\":\"QFC_item_4\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "QFC_item_5",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"QFC_item_5\""
+        "_value": "{\"text\":\"QFC_item_5\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "QFC_item_6",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"QFC_item_6\""
+        "_value": "{\"text\":\"QFC_item_6\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "QFC_sum",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"QFC_item_7\""
+        "_value": "{\"text\":\"QFC_item_7\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Safeway_item_1",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Safeway_item_1\""
+        "_value": "{\"text\":\"Safeway_item_1\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Safeway_item_2",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Safeway_item_2\""
+        "_value": "{\"text\":\"Safeway_item_2\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Safeway_item_3",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Safeway_item_3\""
+        "_value": "{\"text\":\"Safeway_item_3\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Safeway_item_4",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Safeway_item_4\""
+        "_value": "{\"text\":\"Safeway_item_4\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Safeway_item_5",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Safeway_item_5\""
+        "_value": "{\"text\":\"Safeway_item_5\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Safeway_item_6",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Safeway_item_6\""
+        "_value": "{\"text\":\"Safeway_item_6\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Safeway_sum",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Safeway_item_7\""
+        "_value": "{\"text\":\"Safeway_item_7\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Target_item_1",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Target_item_1\""
+        "_value": "{\"text\":\"Target_item_1\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Target_item_2",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Target_item_2\""
+        "_value": "{\"text\":\"Target_item_2\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Target_item_3",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Target_item_3\""
+        "_value": "{\"text\":\"Target_item_3\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Target_item_4",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Target_item_4\""
+        "_value": "{\"text\":\"Target_item_4\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Target_item_5",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Target_item_5\""
+        "_value": "{\"text\":\"Target_item_5\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Target_item_6",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Target_item_6\""
+        "_value": "{\"text\":\"Target_item_6\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Target_sum",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Target_item_7\""
+        "_value": "{\"text\":\"Target_item_7\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "item_1",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"item_1\""
+        "_value": "{\"text\":\"item_1\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "item_2",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"item_2\""
+        "_value": "{\"text\":\"item_2\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "item_3",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"item_3\""
+        "_value": "{\"text\":\"item_3\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "item_4",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"item_4\""
+        "_value": "{\"text\":\"item_4\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "item_5",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"item_5\""
+        "_value": "{\"text\":\"item_5\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "item_6",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"item_6\""
+        "_value": "{\"text\":\"item_6\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "item_7",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"item_7\""
+        "_value": "{\"text\":\"item_7\"}"
       },
       {
         "_partition": "Column",
@@ -2584,7 +2834,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Grid Screen Form\""
+        "_value": "{\"text\":\"Grid Screen Form\"}"
       }
     ]
   }
