@@ -148,6 +148,55 @@ window.odkCommon = {
    
    i18nFieldNames: [ 'text', 'image', 'audio', 'video' ],
    
+   extractLangOnlyLocale: function(locale) {
+	  // Device locale strings are of the form: language + "_" + country
+	  // Allow for generic language translations and for country-specific langauge 
+	  // translations.
+	  var idxUnderscore = locale.indexOf('_');
+	  if ( idxUnderscore > 0) {
+		  return locale.substring(0,idxUnderscore);
+	  }
+	  return null;
+   },
+   
+   /**
+    * Return the locale that was configured by the user in the Java-side's Device Settings.
+	*/
+   getPreferredLocale: function() {
+	   var pi = this.getPlatformInfo();
+	   var obj = JSON.parse(pi);
+	   return obj.preferredLocale;
+   },
+   
+   /**
+    * Get details about the preferred locale and the Device's locale setting.
+	* And also whether or not the preferred locale (above) is (just) the Device
+	* locale.
+	* Note that the user may have set the preferred locale to be "en_US" and the
+	* device locale may also happen to be "en_US". In this case, usingDeviceLocale
+	* is false. Only if the user chooses to use the device locale (vs. one of the 
+	* locales defined in the common translations) will this be true.
+	*/
+   getLocaleDetails: function() {
+	   var pi = this.getPlatformInfo();
+	   var obj = JSON.parse(pi);
+	   var info = {
+			preferredLocale: obj.preferredLocale,
+			// true only if user did not override the device locale
+			usingDeviceLocale: obj.usingDeviceLocale,
+			// info about the device locale:
+			isoCountry: obj.isoCountry,
+			displayCountry: obj.displayCountry,
+			isoLanguage: obj.isoLanguage,
+			displayLanguage: obj.displayLanguage };
+			
+	   // and, finally if the device supports it, report the BCP47 tag:
+	   if ( bcp47LanguageTag in obj ) {
+		  info.bcp47LanguageTag = obj.bcp47LanguageTag;
+	   }
+	   return info;
+   },
+   
    /**
     * Return true if there is some type of localization for the given i18nToken and locale
 	* OR if there is a 'default' localization value.
@@ -164,6 +213,11 @@ window.odkCommon = {
           return true;
       }
 	  
+	  // Device locale strings are of the form: language + "_" + country
+	  // Allow for generic language translations and for country-specific langauge 
+	  // translations.
+	  var langOnlyLocale = this.extractLangOnlyLocale(locale);
+	  
 	  // the keys in the textOrLangMap are one of: text, image, audio, video
 	  // see if any of these have a localization.
 	  for ( var i = 0 ; i < this.i18nFieldNames.length ; ++i ) {
@@ -173,6 +227,8 @@ window.odkCommon = {
 		  if(this.isString(textMap)) {
 			  return true;
 		  } else if( locale in textMap ) {
+			  return true;
+		  } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
 			  return true;
 		  } else if ( 'default' in textMap ) {
 			  return true;
@@ -190,12 +246,19 @@ window.odkCommon = {
       if(this.isString(textOrLangMap)) {
           return true;
       }
-	  
+		  
+	  // Device locale strings are of the form: language + "_" + country
+	  // Allow for generic language translations and for country-specific langauge 
+	  // translations.
+	  var langOnlyLocale = this.extractLangOnlyLocale(locale);
+  
 	  if ( fieldName in textOrLangMap ) {
 		  var textMap = textOrLangMap[fieldName];
 		  if(this.isString(textMap)) {
 			  return true;
 		  } else if( locale in textMap ) {
+			  return true;
+		  } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
 			  return true;
 		  } else if ( 'default' in textMap ) {
 			  return true;
@@ -219,9 +282,17 @@ window.odkCommon = {
       if(this.isString(textMap)) {
           return textMap;
       }
+
+	  // Device locale strings are of the form: language + "_" + country
+	  // Allow for generic language translations and for country-specific langauge 
+	  // translations.
+	  var langOnlyLocale = this.extractLangOnlyLocale(locale);
+
       if( locale in textMap ) {
           return textMap[locale];
-      } else if( 'default' in textMap ){
+	  } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
+		  return textMap[langOnlyLocale];
+      } else if( 'default' in textMap ) {
           return textMap['default'];
       } else {
 		  return undefined;
@@ -781,7 +852,15 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 baseUri: that._computeBaseUri(),
                 formsUri: "content://org.opendatakit.provider.forms/",
                 activeUser: 'username:badger',
-                logLevel: this._logLevel
+                logLevel: this._logLevel,
+				preferredLocale: 'en_US',
+				// true only if user did not override the device locale
+				usingDeviceLocale: true,
+				// info about the device locale:
+				isoCountry: 'US',
+				displayCountry: "United States",
+				isoLanguage: 'en',
+				displayLanguage: "English"
             };
             // Because the phone returns a String, we too are going to return a
             // string here.
