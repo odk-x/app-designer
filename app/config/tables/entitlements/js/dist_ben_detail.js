@@ -18,29 +18,48 @@ var cbSuccess = function (result) {
   $('#is_override').text(entitlementsResultSet.get('is_override'));
   $('#beneficiary_code').text(entitlementsResultSet.get('beneficiary_code'));
   updateEntitlements();
+            
+  var rolesPromise = new Promise(function(resolve, reject) {
+      odkData.getRoles(resolve, reject);
+  });
+
+  var deliveryPromise = new Promise(function(resolve, reject)) {
+    odkData.arbitraryQuery('authorizations', 
+      'SELECT delivery_name FROM authorizations WHERE authorization_id = ?',
+       [entitlementsResultSet.get("authorization_id")],
+        null, null, resolve, reject);
+  }
+
+  Promise.all([rolesPromise, deliveryPromise]).then(function(resultArray) {
+      console.log(resultArray.length);
+    var roles = resultArray[0].getRoles();
+    var deliveryName = resultArray[1];
+  }
+
   $('#launch').on(
     'click',
     function() {
-      odkData.getRoles(rolesSuccess, rolesFailure);
+      if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
+        odkData.addRow(deliveryName, getStructVals(), util.genUUID(), proxyRowSuccess, proxyRowFailure);
+      } else if (entitlementsResultSet.get('is_delivered') == 'false') {
+          var jsonMap = getJSONMapValues();
+          odkTables.addRowWithSurvey(deliveryName, deliveryName, null, jsonMap);
+      }
     });
 };
 
-var rolesSuccess = function(result) {
-  var roles = result.getRoles();
-  var superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
-  if (superUser) {
+/*var rolesSuccess = function(result) {
+  if ($.inArray('ROLE_SUPER_USER_TABLES', result.getRoles()) > -1) {
     odkData.addRow('deliveries', getStructVals(), util.genUUID(), proxyRowSuccess, proxyRowFailure);
-  } else {
-    if (entitlementsResultSet.get('is_delivered') == 'false') {
-        var jsonMap = getJSONMapValues();
-        odkTables.addRowWithSurvey('deliveries', 'deliveries', null, jsonMap);
-      }
+  } else if (entitlementsResultSet.get('is_delivered') == 'false') {
+      var jsonMap = getJSONMapValues();
+      odkTables.addRowWithSurvey('deliveries', 'deliveries', null, jsonMap);
   }
 }
 
 var rolesFailure = function(error) {
   console.log('roles failure with error: ' + error);
-}
+}*/
 
 function proxyRowSuccess(result) {
     console.log('made it!');

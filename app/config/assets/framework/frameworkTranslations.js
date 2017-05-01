@@ -400,6 +400,7 @@ window.odkFrameworkTranslations = {
           "locale": {
             "text": {
               "english": "English",
+              "spanish": "Ingles",
               "hindi": "English (as hindi name)"
             }
           }
@@ -412,12 +413,26 @@ window.odkFrameworkTranslations = {
           "locale": {
             "text": {
               "english": "Hindi",
+              "spanish": "Hindi",
               "hindi": "Hindi (as hindi name)"
             }
           }
         },
         "_row_num": 8,
         "name": "hindi"
+      },
+      {
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Spanish",
+              "spanish": "Espanol",
+              "hindi": "Espanol"
+            }
+          }
+        },
+        "_row_num": 9,
+        "name": "spanish"
       }
     ]
   },

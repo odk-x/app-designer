@@ -1,5 +1,14 @@
 window.odkCommonTranslations = {
-  "_tokens": {},
+  "_tokens": {
+    "select_user": {
+      "string_token": "select_user",
+      "text": {
+        "default": "Please Select User",
+        "spanish": "por favor"
+      },
+      "_row_num": 2
+    }
+  },
   "_locales": {
     "setting_name": "_locales",
     "_row_num": 5,
@@ -9,6 +18,7 @@ window.odkCommonTranslations = {
           "locale": {
             "text": {
               "english": "English",
+              "spanish": "Ingles",
               "hindi": "English (as hindi name)"
             }
           }
@@ -21,12 +31,26 @@ window.odkCommonTranslations = {
           "locale": {
             "text": {
               "english": "Hindi",
+              "spanish": "Hindi",
               "hindi": "Hindi (as hindi name)"
             }
           }
         },
         "_row_num": 8,
         "name": "hindi"
+      },
+      {
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Spanish",
+              "spanish": "Espanol",
+              "hindi": "Espanol"
+            }
+          }
+        },
+        "_row_num": 9,
+        "name": "spanish"
       }
     ]
   },

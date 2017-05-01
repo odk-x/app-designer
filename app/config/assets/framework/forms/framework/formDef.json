@@ -533,6 +533,16 @@
         "_row_num": 88
       }
     ],
+    "common_translations": [
+      {
+        "string_token": "select_user",
+        "text": {
+          "default": "Please Select User",
+          "spanish": "por favor"
+        },
+        "_row_num": 2
+      }
+    ],
     "settings": [
       {
         "setting_name": "table_id",
@@ -557,6 +567,7 @@
           "title": {
             "text": {
               "english": "Common Javascript Framework",
+              "spanish": "Common Javascript Framework",
               "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
             }
           }
@@ -571,6 +582,7 @@
           "locale": {
             "text": {
               "english": "English",
+              "spanish": "Ingles",
               "hindi": "English (as hindi name)"
             }
           }
@@ -583,11 +595,25 @@
           "locale": {
             "text": {
               "english": "Hindi",
+              "spanish": "Hindi",
               "hindi": "Hindi (as hindi name)"
             }
           }
         },
         "_row_num": 8
+      },
+      {
+        "setting_name": "spanish",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Spanish",
+              "spanish": "Espanol",
+              "hindi": "Espanol"
+            }
+          }
+        },
+        "_row_num": 9
       }
     ],
     "choices": [
@@ -1240,6 +1266,7 @@
           "title": {
             "text": {
               "english": "Common Javascript Framework",
+              "spanish": "Common Javascript Framework",
               "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
             }
           }
@@ -1254,6 +1281,7 @@
           "locale": {
             "text": {
               "english": "English",
+              "spanish": "Ingles",
               "hindi": "English (as hindi name)"
             }
           }
@@ -1266,11 +1294,25 @@
           "locale": {
             "text": {
               "english": "Hindi",
+              "spanish": "Hindi",
               "hindi": "Hindi (as hindi name)"
             }
           }
         },
         "_row_num": 8
+      },
+      "spanish": {
+        "setting_name": "spanish",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Spanish",
+              "spanish": "Espanol",
+              "hindi": "Espanol"
+            }
+          }
+        },
+        "_row_num": 9
       },
       "_locales": {
         "setting_name": "_locales",
@@ -1281,6 +1323,7 @@
               "locale": {
                 "text": {
                   "english": "English",
+                  "spanish": "Ingles",
                   "hindi": "English (as hindi name)"
                 }
               }
@@ -1293,12 +1336,26 @@
               "locale": {
                 "text": {
                   "english": "Hindi",
+                  "spanish": "Hindi",
                   "hindi": "Hindi (as hindi name)"
                 }
               }
             },
             "_row_num": 8,
             "name": "hindi"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Spanish",
+                  "spanish": "Espanol",
+                  "hindi": "Espanol"
+                }
+              }
+            },
+            "_row_num": 9,
+            "name": "spanish"
           }
         ]
       },
@@ -1313,6 +1370,7 @@
           "title": {
             "text": {
               "english": "Common Javascript Framework",
+              "spanish": "Common Javascript Framework",
               "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
             }
           }
@@ -1944,6 +2002,7 @@
               "locale": {
                 "text": {
                   "english": "English",
+                  "spanish": "Ingles",
                   "hindi": "English (as hindi name)"
                 }
               }
@@ -1956,12 +2015,26 @@
               "locale": {
                 "text": {
                   "english": "Hindi",
+                  "spanish": "Hindi",
                   "hindi": "Hindi (as hindi name)"
                 }
               }
             },
             "_row_num": 8,
             "name": "hindi"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Spanish",
+                  "spanish": "Espanol",
+                  "hindi": "Espanol"
+                }
+              }
+            },
+            "_row_num": 9,
+            "name": "spanish"
           }
         ]
       },
@@ -1972,7 +2045,16 @@
       }
     },
     "common_translations": {
-      "_tokens": {},
+      "_tokens": {
+        "select_user": {
+          "string_token": "select_user",
+          "text": {
+            "default": "Please Select User",
+            "spanish": "por favor"
+          },
+          "_row_num": 2
+        }
+      },
       "_locales": {
         "setting_name": "_locales",
         "_row_num": 5,
@@ -1982,6 +2064,7 @@
               "locale": {
                 "text": {
                   "english": "English",
+                  "spanish": "Ingles",
                   "hindi": "English (as hindi name)"
                 }
               }
@@ -1994,12 +2077,26 @@
               "locale": {
                 "text": {
                   "english": "Hindi",
+                  "spanish": "Hindi",
                   "hindi": "Hindi (as hindi name)"
                 }
               }
             },
             "_row_num": 8,
             "name": "hindi"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Spanish",
+                  "spanish": "Espanol",
+                  "hindi": "Espanol"
+                }
+              }
+            },
+            "_row_num": 9,
+            "name": "spanish"
           }
         ]
       },
@@ -2038,6 +2135,7 @@
               "title": {
                 "text": {
                   "english": "Common Javascript Framework",
+                  "spanish": "Common Javascript Framework",
                   "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क"
                 }
               }
@@ -3082,7 +3180,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"hindi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\"}}"
+        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"spanish\":\"Common Javascript Framework\",\"hindi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\"}}"
       }
     ]
   }
