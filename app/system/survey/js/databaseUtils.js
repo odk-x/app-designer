@@ -817,7 +817,6 @@ return {
     _reconstructModelDataFromElementPathDetectActualValueRequiringUpdate: function(model, dbKey, elementPathValue) {
         var that = this;
         var elementPath;
-        var elementPathValue;
         var de;
 		var hasUpdates = false;
 		de = model.dataTableModel[dbKey];

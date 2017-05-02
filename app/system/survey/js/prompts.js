@@ -1,7 +1,9 @@
-/* globals odkCommon */
 /**
  * All  the standard prompts available to a form designer.
  */
+/* jshint unused: vars */
+/* global odkCommon */
+/* global odkSurvey */
 define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','datetimepicker'],
 function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh) {
 'use strict';
@@ -85,7 +87,7 @@ promptTypes.base = Backbone.View.extend({
     /**
      * getPromptPath
      * retrieve the path to this prompt. This is used ONLY in
-     * constructing the dispatchString for the
+     * constructing the dispatchStruct for the
      * odkCommon.doAction(...) method and the corresponding
      * controller.actionCallback(...) method to ensure that
      * the results of an intent execution (doAction) are routed
@@ -162,14 +164,18 @@ promptTypes.base = Backbone.View.extend({
     _initializeRenderContext: function() {
         //Object.create is used because we don't want to modify the class's render context.
         this.renderContext = Object.create(this.renderContext);
+		// every prompt gets the current instance's data fields and instanceMetadata fields
+		// if there is no current instanceId, then the non-session-variable fields will be null.
+		var model = opendatakit.getCurrentModel();
+		this.renderContext.instanceId = model.instanceId;
+		this.renderContext.data = model.data;
+        this.renderContext.instanceMetadata = model.instanceMetadata;
+		this.renderContext.metadata = model.metadata;
+            
         this.renderContext.display = this.display;
         this.renderContext.promptId = this.getPromptId();
         this.renderContext.name = this.name;
         this.renderContext.disabled = this.disabled;
-        this.renderContext.image = this.image;
-        this.renderContext.audio = this.audio;
-        this.renderContext.video = this.video;
-        this.renderContext.hint = this.hint;
         this.renderContext.required = this.required;
         this.renderContext.appearance = this.appearance;
         this.renderContext.withOther = this.withOther;
@@ -313,8 +319,8 @@ promptTypes.base = Backbone.View.extend({
         odkCommon.log('D',"prompts." + this.type + " px: " + this.promptIdx);
         return null;
     },
-    getCallback: function(promptPath, internalPromptContext, action) {
-        throw new Error("prompts." + this.type, "px: " + this.promptIdx + " unimplemented promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
+    getCallback: function(promptPath) {
+        throw new Error("prompts." + this.type, "px: " + this.promptIdx + " getCallback(promptPath) is unimplemented promptPath: " + promptPath );
     },
     /**
      * Useful routines to convert a selection string and an order by string
@@ -753,18 +759,6 @@ promptTypes._linked_type = promptTypes.base.extend({
             return null;
         }
     },
-    getFormPath: function() {
-        if ( this.getLinkedFormId() === "framework" ) {
-            return '../config/assets/framework/forms/framework/';
-        } else {
-            return '../config/tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/';
-        }
-    },
-    getLinkedUri: function(platInfo) {
-        var that = this;
-        var uri = platInfo.formsUri + platInfo.appName + '/' + that.getLinkedTableId() + '/' + that.getLinkedFormId();
-        return uri;
-    },
     _linkedCachedModel: null,
     _linkedCachedInstanceName: null,
     getLinkedInstanceName: function() {
@@ -776,7 +770,7 @@ promptTypes._linked_type = promptTypes.base.extend({
             ctxt.success(that._linkedCachedModel);
             return;
         }
-        var filePath = that.getFormPath() + 'formDef.json';
+        var filePath = odkSurvey.getFormPath(that.getLinkedTableId(), that.getLinkedFormId()) + 'formDef.json';
         opendatakit.readFormDefFile($.extend({},ctxt,{success:function(formDef) {
              var ino = opendatakit.getSettingObject(formDef, 'instance_name');
              if ( ino !== null ) {
@@ -792,7 +786,7 @@ promptTypes._linked_type = promptTypes.base.extend({
             }}), formDef, that.getLinkedTableId(), filePath);
         }}), filePath );
     },
-    getCallback: function(promptPath, byinternalPromptContext, byaction) {
+    getCallback: function(promptPath) {
         var that = this;
         if ( that.getPromptPath() != promptPath ) {
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
@@ -812,7 +806,7 @@ promptTypes._linked_type = promptTypes.base.extend({
                     internalPromptContext + " action: " + action);
                 that.enableButtons();
                 that.reRender($.extend({}, ctxt, {success: function() { ctxt.failure({message: "Action canceled."});},
-                    failure: function(j) { ctxt.failure({message: "Action canceled."});}}));
+                    failure: function(m) { ctxt.failure({message: "Action canceled."});}}));
             }
         };
     }
@@ -912,14 +906,20 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var that = this;
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
-        // TODO: is this the right sequence?
-        var uri = that.getLinkedUri(platInfo);
-        var expandedUrl = platInfo.baseUri + 'system/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath);
-        var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'launchSurvey'});
-        odkCommon.log('D','linked_table.openInstance -- invoking doAction');
-        var outcome = odkCommon.doAction(dispatchString, that.launchAction,
-            JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath),
-                             extras: { url: expandedUrl }}));
+        var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
+
+        var openInstanceElementKeyToValueMap = null;
+        if ( queryDefn.openRowInitialElementKeyToValueMap ) {
+            openInstanceElementKeyToValueMap = queryDefn.openRowInitialElementKeyToValueMap();
+        }
+		
+        var dispatchStruct = {promptPath: that.getPromptPath(), userAction: 'launchSurvey'};
+		
+		var outcome = odkSurvey.openInstance(dispatchStruct, 
+			opendatakit.getCurrentTableId(), 
+			opendatakit.getSettingValue('form_id'), 
+			instanceId, openInstanceElementKeyToValueMap);
+		
         odkCommon.log('D','linked_table.openInstance - doAction: ' +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             odkCommon.log('W',"linked_table.openInstance - doAction cancelled -- Should be OK got >" + outcome + "<");
@@ -1001,25 +1001,20 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
     addInstance: function(evt) {
         var that = this;
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
-        var instanceId = opendatakit.genUUID();
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
-        // TODO: is this the right sequence?
-        var uri = that.getLinkedUri(platInfo);
-        var auxHash = '';
-        if ( queryDefn.auxillaryHash ) {
-            auxHash = queryDefn.auxillaryHash();
-            if ( auxHash && auxHash !== '' && auxHash.charAt(0) !== '&' ) {
-                auxHash = '&' + auxHash;
-            }
+ 
+        var newInstanceElementKeyToValueMap = null;
+        if ( queryDefn.newRowInitialElementKeyToValueMap ) {
+            newInstanceElementKeyToValueMap = queryDefn.newRowInitialElementKeyToValueMap();
         }
-        var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'launchSurvey'});
-        var expandedUrl = platInfo.baseUri + 'system/index.html' + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash;
-
-        odkCommon.log('D','linked_table.addInstance -- invoking doAction');
-        var outcome = odkCommon.doAction( dispatchString, that.launchAction,
-            JSON.stringify({ uri: uri + opendatakit.getHashString(that.getFormPath(),instanceId, opendatakit.initialScreenPath) + auxHash,
-                             extras: { url: expandedUrl }}));
+		
+        var dispatchStruct = {promptPath: that.getPromptPath(), userAction: 'launchSurvey'};
+		
+		var outcome = odkSurvey.addInstance(dispatchStruct, 
+			opendatakit.getCurrentTableId(), 
+			opendatakit.getSettingValue('form_id'), 
+			newInstanceElementKeyToValueMap);
 
         odkCommon.log('D','linked_table.addInstance - doAction: ' +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
@@ -1036,7 +1031,6 @@ promptTypes.external_link = promptTypes.base.extend({
 	_protoDisplay: { 
 		new_button_label: 'external_link_button_label' },
     templatePath: 'templates/external_link.handlebars',
-    launchAction: 'android.content.Intent.ACTION_VIEW',
     url: null,
     renderContext: {
     },
@@ -1054,28 +1048,13 @@ promptTypes.external_link = promptTypes.base.extend({
     openLink: function(evt) {
         var that = this;
         var fullUrl = that.url();
-        var launchAction = that.launchAction;
-        var expandedUrl;
-        if ( fullUrl.match(/^(\/|\.|[a-zA-Z]+:).*/) ) {
-            expandedUrl = fullUrl;
-        } else {
-            // relative URL. Assume this stays within Survey
-            expandedUrl = opendatakit.getPlatformInfo().baseUri + 'system/index.html' + fullUrl;
-            fullUrl = opendatakit.convertHashStringToSurveyUri(fullUrl);
-            // implicit intents are not working?
-            // launchAction = 'android.content.Intent.ACTION_EDIT';
-            launchAction = 'org.opendatakit.survey.activities.SplashScreenActivity';
-        }
-        that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
-        // TODO: is this the right sequence?
-        var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'openLink'});
+ 
+        that.disableButtons();
 
-        odkCommon.log('D',"prompts." + that.type + ".openLink -- invoking doAction");
-        var outcome = odkCommon.doAction( dispatchString, launchAction,
-            JSON.stringify({ uri: fullUrl,
-                extras: { url: expandedUrl }}));
+        var dispatchStruct = {promptPath: that.getPromptPath(), userAction: 'openLink'};
 
+		var outcome = odkSurvey.openLink(dispatchStruct, fullUrl);
         odkCommon.log('D',"prompts." + that.type + ".openLink - doAction: " +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
             odkCommon.log('W',"prompts." + that.type + ".openLink - doAction cancelled -- Should be OK got >" + outcome + "<");
@@ -1084,7 +1063,7 @@ promptTypes.external_link = promptTypes.base.extend({
             odkCommon.log('W',"prompts." + that.type + ".openLink - doAction in play -- awaiting responseAvailable");
         }
     },
-    getCallback: function(promptPath, byinternalPromptContext, byaction) {
+    getCallback: function(promptPath) {
         var that = this;
         if ( that.getPromptPath() != promptPath ) {
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
@@ -2089,20 +2068,14 @@ promptTypes.media = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'capture'});
+        var dispatchStruct = {promptPath: that.getPromptPath(), userAction: 'capture'};
 
         var mediaUri = that.getValue();
-        var uriFragment = (mediaUri !== null && mediaUri !== undefined &&
-                    mediaUri.uriFragment !== null && mediaUri.uriFragment !== undefined) ? mediaUri.uriFragment : null;
 
-        odkCommon.log('D',"prompts." + that.type + ".capture -- invoking doAction");
-        var outcome = odkCommon.doAction( dispatchString, that.captureAction,
-            JSON.stringify({ extras: {
-                appName: opendatakit.getPlatformInfo().appName,
-                tableId: opendatakit.getCurrentTableId(),
-                instanceId: opendatakit.getCurrentInstanceId(),
-                currentUriFragment: uriFragment,
-                uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
+        var outcome = odkSurvey.fileAttachmentAction(dispatchStruct, 
+			that.captureAction, 
+			opendatakit.getCurrentTableId(), 
+			opendatakit.getCurrentInstanceId(), mediaUri);
 
         odkCommon.log('D',"prompts." + that.type + ".capture - doAction: " +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
@@ -2117,15 +2090,14 @@ promptTypes.media = promptTypes.base.extend({
         that.disableButtons();
         var platInfo = opendatakit.getPlatformInfo();
         // TODO: is this the right sequence?
-        var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'choose'});
+        var dispatchStruct = {promptPath: that.getPromptPath(), userAction: 'choose'};
 
-        odkCommon.log('D',"prompts." + that.type + ".choose -- invoking doAction");
-        var outcome = odkCommon.doAction( dispatchString, that.chooseAction,
-            JSON.stringify({ extras: {
-                appName: opendatakit.getPlatformInfo().appName,
-                tableId: opendatakit.getCurrentTableId(),
-                instanceId: opendatakit.getCurrentInstanceId(),
-                uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" }}));
+        var mediaUri = that.getValue();
+
+        var outcome = odkSurvey.fileAttachmentAction(dispatchStruct, 
+			that.chooseAction, 
+			opendatakit.getCurrentTableId(), 
+			opendatakit.getCurrentInstanceId(), mediaUri);
 
         odkCommon.log('D',"prompts." + that.type + ".choose - doAction: " +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
@@ -2136,7 +2108,7 @@ promptTypes.media = promptTypes.base.extend({
         }
     },
     // TODO: support deletion of the media files??
-    getCallback: function(promptPath, byinternalPromptContext, byaction) {
+    getCallback: function(promptPath) {
         var that = this;
         if ( that.getPromptPath() != promptPath ) {
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
@@ -2307,11 +2279,11 @@ promptTypes.launch_intent = promptTypes.base.extend({
         });
         //We assume that the webkit could go away when an intent is launched,
         //so this prompt's "address" is passed along with the intent.
-        var dispatchString = JSON.stringify({promptPath: that.getPromptPath(), userAction: 'launch'});
+        var dispatchStruct = {promptPath: that.getPromptPath(), userAction: 'launch'};
 
         odkCommon.log('D',"prompts." + that.type + ".launch -- invoking doAction");
-        var outcome = odkCommon.doAction( dispatchString, that.intentString,
-            ((that.intentParameters === null || that.intentParameters === undefined) ? null : JSON.stringify(that.intentParameters)));
+        var outcome = odkCommon.doAction( dispatchStruct, that.intentString,
+            ((that.intentParameters === null || that.intentParameters === undefined) ? null : that.intentParameters));
 
         odkCommon.log('D',"prompts." + that.type + ".launch - doAction: " +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
@@ -2325,7 +2297,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
      * When the intent returns a result this factory function creates a callback to process it.
      * The callback can't use any state set before the intent was launched because the page might have been reloaded.
      */
-    getCallback: function(promptPath, byinternalPromptContext, byaction) {
+    getCallback: function(promptPath) {
         var that = this;
         $('#block-ui').hide().off();
         if ( that.getPromptPath() != promptPath ) {

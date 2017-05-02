@@ -1,29 +1,16 @@
 /**
  * This is the file that will create the list view for the tea types display.
  */
-/* global $, odkTables, data */
+/* global $, odkTables, odkData, odkCommon */
 'use strict';
-
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/Tea_types_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 
 var idxStart = -1;
 var teaTypeResultSet = {};
 
 function cbSuccess(result) {
     teaTypeResultSet = result;
-    
-    return (function() {
-        displayGroup(idxStart);
-    }());
+   	// we know this is the first time - so displayGroup argument idxStart === 0.
+    displayGroup(0);
 }
 
 function cbFailure(error) {
@@ -36,13 +23,13 @@ function cbFailure(error) {
  * Called when page loads to display things (Nothing to edit here)
  */
 var resumeFn = function(fIdxStart) {
-    odkData.getViewData(cbSuccess, cbFailure);
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
-    // The first time through we're going to make a map of typeId to
-    // typeName so that we can display the name of each shop's specialty.
-    if (idxStart === 0) {
+
+	if ( fIdxStart === 0 ) {
+		// First time through...
+
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
@@ -62,11 +49,15 @@ var resumeFn = function(fIdxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.openDetailView(tableId, rowId, null);
+                odkTables.openDetailView(null, tableId, rowId, null);
             }
         });
-    }
 
+		// and fetch the list of tea types...
+		odkData.getViewData(cbSuccess, cbFailure);
+    } else {
+		displayGroup(fIdxStart);
+	}
 };
  
 /**

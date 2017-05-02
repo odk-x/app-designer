@@ -98,7 +98,8 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id: data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       {
@@ -108,7 +109,8 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id: data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
       },
       {
@@ -118,7 +120,8 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id: data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
       }
     ],
@@ -273,7 +276,8 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
@@ -398,7 +402,8 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id: data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       "linked_members_education": {
@@ -408,7 +413,8 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id: data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
       },
       "select_linked_data": {
@@ -418,7 +424,8 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id: data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
       }
     },

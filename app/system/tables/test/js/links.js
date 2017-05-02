@@ -30,14 +30,16 @@ appendElement(htmlTitle);
 var listViewDefault = getAnchor();
 listViewDefault.text('Open Tea_inventory with default');
 listViewDefault.click(function() {
-    control.openTableToListView('Tea_inventory', null, null, null);
+    odkTables.openTableToListView(
+		'openTableToListView -- Tea_inventory','Tea_inventory', null, null, null);
 });
 appendElement(listViewDefault);
 
 var listViewCustom = getAnchor();
 listViewCustom.text('Open Tea_inventory LIST with specific file');
 listViewCustom.click(function() {
-    control.openTableToListView(
+    odkTables.openTableToListView(
+		'openTableToListView -- Tea_inventory',
         'Tea_inventory',
         null,
         null,
@@ -50,7 +52,8 @@ appendElement(listViewCustom);
 var listViewMismatch = getAnchor();
 listViewMismatch.text('Open Tea_houses DETAIL USING LIST method');
 listViewMismatch.click(function() {
-    control.openTableToListView(
+    odkTables.openTableToListView(
+		'openTableToListView -- Tea_houses_editable',
         'Tea_houses_editable',
         null,
         null,
@@ -63,7 +66,8 @@ appendElement(listViewMismatch);
 var detailViewMismatch = getAnchor();
 detailViewMismatch.text('Open Tea_houses LIST USING DETAIL method');
 detailViewMismatch.click(function() {
-    control.openDetailView(
+    odkTables.openDetailView(
+		'openDetailView -- Tea_houses_editable',
         'Tea_houses_editable',
         data.getRowId(0),
         'system/tables/test/html/Tea_houses_list.html');
@@ -82,14 +86,17 @@ appendElement(surveyTitle);
 var addSurveyDefault = getAnchor();
 addSurveyDefault.text('ADD SURVEY DEFAULT: State = epsilon');
 addSurveyDefault.click(function() {
-    control.addRowWithSurveyDefault('Tea_houses_editable');
+    odkTables.addRowWithSurveyDefault(
+		'addRowWithSurvey -- Tea_houses_editable',
+		'Tea_houses_editable');
 });
 appendElement(addSurveyDefault);
 
 var addSurveyCustom = getAnchor();
 addSurveyCustom.text('ADD SURVEY CUSTOM: State = zeta');
 addSurveyCustom.click(function() {
-    control.addRowWithSurvey(
+    odkTables.addRowWithSurvey(
+		'addRowWithSurvey -- Tea_houses_editable',
         'Tea_houses_editable',
         'Tea_houses_editable_form',
         null,
@@ -102,15 +109,15 @@ addSurveyValues.text('ADD SURVEY VALUES: save');
 addSurveyValues.click(function() {
     // The test is that Name = surveyName and Customers = 111, so prepopulate
     // those values.
-    var values = {};
-    values.Name = 'surveyName';
-    values.Customers = 111;
-    var valuesStr = JSON.stringify(values);
-    control.addRowWithSurvey(
+    var elementKeyToValueMap = {};
+    elementKeyToValueMap.Name = 'surveyName';
+    elementKeyToValueMap.Customers = 111;
+    odkTables.addRowWithSurvey(
+		'addRowWithSurvey -- Tea_houses_editable',
         'Tea_houses_editable',
         null,
         null,
-        valuesStr);
+        elementKeyToValueMap);
 });
 appendElement(addSurveyValues);
 
@@ -119,15 +126,15 @@ addSurveyCustomValues.text('ADD SURVEY CUSTOM VALUES: save');
 addSurveyCustomValues.click(function() {
     // The test is that Name = surveyName2 and Customers = 222, so prepopulate
     // those values.
-    var values = {};
-    values.Name = 'surveyName2';
-    values.Customers = 222;
-    var valuesStr = JSON.stringify(values);
-    control.addRowWithSurvey(
+    var elementKeyToValueMap = {};
+    elementKeyToValueMap.Name = 'surveyName2';
+    elementKeyToValueMap.Customers = 222;
+    odkTables.addRowWithSurvey(
+		'addRowWithSurvey -- Tea_houses_editable',
         'Tea_houses_editable',
         'Tea_houses_editable_form',
         null,
-        valuesStr);
+        elementKeyToValueMap);
 });
 appendElement(addSurveyCustomValues);
 
@@ -136,14 +143,14 @@ addSurveyUnicode.text('ADD SURVEY VALUES UNICODE: save');
 addSurveyUnicode.click(function() {
     // The test is that Name =
     // Testing Survey «ταБЬℓσ»: 1<2 & 4+1>3, now 20% off! 
-    var values = {};
-    values.Name = 'Testing Survey «ταБЬℓσ»: 1<2 & 4+1>3, now" 20% off!';
-    var valuesStr = JSON.stringify(values);
-    control.addRowWithSurvey(
+    var elementKeyToValueMap = {};
+    elementKeyToValueMap.Name = 'Testing Survey «ταБЬℓσ»: 1<2 & 4+1>3, now" 20% off!';
+    odkTables.addRowWithSurvey(
+		'addRowWithSurvey -- Tea_houses_editable',
         'Tea_houses_editable',
         'Tea_houses_editable_form',
         null,
-        valuesStr);
+        elementKeyToValueMap);
 });
 appendElement(addSurveyUnicode);
 
@@ -153,14 +160,14 @@ addSurveyCustomValuesScreenpath.text(
         'ADD SURVEY VALUES SCREENPATH: save--should open to State');
 addSurveyCustomValuesScreenpath.click(function() {
     // The test is that State = screenpath, prepopulate those values.
-    var values = {};
-    values.State = 'screenPath';
-    var valuesStr = JSON.stringify(values);
-    control.addRowWithSurvey(
+    var elementKeyToValueMap = {};
+    elementKeyToValueMap.State = 'screenPath';
+    odkTables.addRowWithSurvey(
+		'addRowWithSurvey -- Tea_houses_editable',
         'Tea_houses_editable',
         'Tea_houses_editable_form',
         'survey/location',  // assumes that the State has been there.
-        valuesStr);
+        elementKeyToValueMap);
 });
 appendElement(addSurveyCustomValuesScreenpath);
 
@@ -168,7 +175,10 @@ var editSurveyDefault = getAnchor();
 editSurveyDefault.text('EDIT SURVEY DEFAULT: State = eta');
 editSurveyDefault.click(function() {
     var rowId = data.getRowId(0);
-    control.editRowWithSurveyDefault('Tea_houses_editable', rowId);
+    odkTables.editRowWithSurveyDefault(
+		'editRowWithSurvey -- Tea_houses_editable',
+		'Tea_houses_editable', 
+		rowId);
 });
 appendElement(editSurveyDefault);
 
@@ -176,7 +186,8 @@ var editSurveyCustom = getAnchor();
 editSurveyCustom.text('EDIT SURVEY CUSTOM: State = theta');
 editSurveyCustom.click(function() {
     var rowId = data.getRowId(1);
-    control.editRowWithSurvey(
+    odkTables.editRowWithSurvey(
+		'editRowWithSurvey -- Tea_houses_editable',
         'Tea_houses_editable',
         rowId,
         'Tea_houses_editable_form',
@@ -189,7 +200,8 @@ editSurveyCustomScreenPath.text(
         'EDIT SURVEY CUSTOM SCREENPATH: State = iota--open to State');
 editSurveyCustomScreenPath.click(function() {
     var rowId = data.getRowId(2);
-    control.editRowWithSurvey(
+    odkTables.editRowWithSurvey(
+		'editRowWithSurvey -- Tea_houses_editable',
         'Tea_houses_editable',
         rowId,
         'Tea_houses_editable_form',

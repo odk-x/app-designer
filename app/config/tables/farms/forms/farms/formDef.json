@@ -67,7 +67,8 @@
         "linked_table_id": "farm_field",
         "selection": "farm_uuid = ?",
         "selectionArgs": "[ data('farm_uuid') ]",
-        "auxillaryHash": "'farm_uuid='+opendatakit.encodeURIDataElement('farm_uuid')",
+        "newRowInitialElementKeyToValueMap": "{ farm_uuid : data('farm_uuid') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       {
@@ -223,7 +224,8 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
@@ -320,7 +322,8 @@
         "linked_table_id": "farm_field",
         "selection": "farm_uuid = ?",
         "selectionArgs": "[ data('farm_uuid') ]",
-        "auxillaryHash": "'farm_uuid='+opendatakit.encodeURIDataElement('farm_uuid')",
+        "newRowInitialElementKeyToValueMap": "{ farm_uuid : data('farm_uuid') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       "states_csv": {

@@ -1,20 +1,8 @@
 /**
  * The file for displaying the detail view of the tea inventory table.
  */
-/* global $, odkTables, data */
+/* global $, odkData */
 'use strict';
-
-// Handle the case where we are debugging in chrome.
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/Tea_inventory_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 
 var teaInvResultSet = {};
 var typeData = {};
@@ -63,6 +51,7 @@ function cbSuccess(result) {
 
     teaInvResultSet = result;
     
+	// can't really render the screen until we know the name of this type of tea...
     odkData.query('Tea_types', '_id = ?', [teaInvResultSet.get('Type_id')],
         null, null, null, null, null, null, true, cbTypeSuccess, cbTypeFailure);
 }
@@ -70,12 +59,9 @@ function cbSuccess(result) {
 function cbFailure(error) {
 
     console.log('cbFailure: getViewData failed with message: ' + error);
-
 }
 
 var display = function() {
 
     odkData.getViewData(cbSuccess, cbFailure);
-
-}
-
+};

@@ -271,7 +271,8 @@
         "linked_table_id": "Tea_types",
         "selection": "_id >= ?",
         "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     ]
@@ -283,7 +284,8 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
@@ -381,7 +383,8 @@
         "linked_table_id": "Tea_types",
         "selection": "_id >= ?",
         "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     },

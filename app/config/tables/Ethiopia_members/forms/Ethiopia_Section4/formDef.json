@@ -65,7 +65,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     ],
@@ -442,7 +443,8 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
@@ -553,7 +555,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     },

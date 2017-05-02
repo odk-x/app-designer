@@ -1,8 +1,8 @@
-/* globals odkCommon, odkSurvey */
+/* globals odkCommon, odkSurveyStateManagement */
 /**
  * This is a random collection of methods that don't quite belong anywhere.
  *
- * A set of utilities, some of which wrap the Java interface (odkSurvey.js), and others
+ * A set of utilities, some of which wrap the Java interface (odkSurveyStateManagement.js), and others
  * provide useful parsing or interpretation of localization details.
  *
  */
@@ -189,18 +189,7 @@ return {
     },
 
     genUUID:function() {
-        /*jshint bitwise: false*/
-        // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
-        var id = "uuid:" +
-        'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            // NOTE: the logical OR forces the number into an integer
-            var r = Math.random()*16|0;
-            // and the logical OR for 'y' values forces the number to be 8, 9, a or b.
-            // https://en.wikipedia.org/wiki/Universally_unique_identifier -- Version 4 (random)
-            var v = (c === 'x') ? r : (r&0x3|0x8);
-            return v.toString(16);
-        });
-        return id;
+		return odkCommon.genUUID();
     },
     getSameRefIdHashString:function(formPath, instanceId, screenPath) {
         var refId = this.getRefId();
@@ -213,79 +202,6 @@ return {
             '&screenPath=' + encodeURIComponent((screenPath === undefined || screenPath === null) ? this.initialScreenPath : screenPath) +
             ((refId === undefined || refId === null) ? '' : ('&refId=' + encodeURIComponent(refId)));
         return qpl;
-    },
-    getHashString:function(formPath, instanceId, screenPath) {
-        var refId = this.genUUID();
-        if ( formPath === undefined || formPath === null ) {
-            formPath = odkCommon.getBaseUrl() + "/";
-        }
-        var qpl =
-            '#formPath=' + encodeURIComponent(formPath) +
-            ((instanceId === undefined || instanceId === null) ? '' : ('&instanceId=' + encodeURIComponent(instanceId))) +
-            '&screenPath=' + encodeURIComponent((screenPath === undefined || screenPath === null) ? this.initialScreenPath : screenPath) +
-            ((refId === undefined || refId === null) ? '' : ('&refId=' + encodeURIComponent(refId)));
-        return qpl;
-    },
-    convertHashStringToSurveyUri: function(hashString) {
-        // assume we have a hashString:
-        // #formPath=...&instanceId=...&...
-        // reformat it into a URI suitable for invoking ODK Survey
-        var that = this;
-        odkCommon.log("D","convertHashStringToSurveyUri: hash " + hashString);
-        if ( !hashString.match(/^(\??#).*/) ) {
-            throw new Error('parsing of hashString failed - not a relative path (does not begin with ?# or #');
-        }
-
-        // we expect it to start with ?# or #
-        if ( hashString.charAt(0) === '?' ) {
-            hashString = hashString.substring(1);
-        }
-        if ( hashString.charAt(0) === '#' ) {
-            hashString = hashString.substring(1);
-        }
-        var keyValues = hashString.split("&");
-        var reconstitutedKeyValues = "";
-        var formPath = null;
-        var instanceId = null;
-        var i;
-        var parts;
-        for ( i = 0 ; i < keyValues.length ; ++i ) {
-            parts = keyValues[i].split('=');
-            if ( parts.length > 2 ) {
-                throw new Error('parsing of hashString failed - incorrect &key=value sequence');
-            }
-            var key = parts[0];
-            if ( key === 'formPath' ) {
-                formPath = parts[1];
-            } else if ( key === 'instanceId' ) {
-                instanceId = parts[1];
-            } else {
-                reconstitutedKeyValues = reconstitutedKeyValues +
-                    "&" + keyValues[i];
-            }
-        }
-        if ( instanceId !== null ) {
-            reconstitutedKeyValues =
-                "&instanceId=" + encodeURIComponent(instanceId) +
-                reconstitutedKeyValues;
-        }
-        if ( formPath === null ) {
-            throw new Error('parsing of hashString failed - no formPath found');
-        }
-        parts = decodeURIComponent(formPath).split("/");
-        // the formPath ends in a slash, so we want the entry before the last one...
-        var formId = parts[parts.length-2];
-
-        var tableId = parts[parts.length-4];
-
-        var appName = that.getPlatformInfo().appName;
-
-        var uri = "content://org.opendatakit.provider.forms/" +
-            appName + "/" + tableId + "/" + formId + "/#" +
-            reconstitutedKeyValues.substring(1);
-
-        odkCommon.log("D","convertHashStringToSurveyUri: as Uri " + uri);
-        return uri;
     },
     setCurrentFormDef:function(formDef) {
         this.mdl.formDef = formDef;
@@ -325,7 +241,7 @@ return {
 
     clearLocalInfo:function(type) {
         // wipe the ref_id --
-        // this prevents saves into odkSurvey from succeeding...
+        // this prevents saves into odkSurveyStateManagement from succeeding...
         this.mdl.ref_id = this.genUUID();
         if ( type === "table" ) {
             this.mdl.table_id = null;
@@ -341,17 +257,17 @@ return {
     clearCurrentInstanceId:function() {
         // Update container so that it can save media and auxillary data
         // under different directories...
-        odkSurvey.clearInstanceId(this.getRefId());
+        odkSurveyStateManagement.clearInstanceId(this.getRefId());
     },
 
     setCurrentInstanceId:function(instanceId) {
         // Update container so that it can save media and auxillary data
         // under different directories...
-        odkSurvey.setInstanceId( this.getRefId(), instanceId);
+        odkSurveyStateManagement.setInstanceId( this.getRefId(), instanceId);
     },
 
     getCurrentInstanceId:function() {
-        return odkSurvey.getInstanceId(this.getRefId());
+        return odkSurveyStateManagement.getInstanceId(this.getRefId());
     },
 
     setCurrentTableId:function(table_id) {

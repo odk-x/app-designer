@@ -214,7 +214,7 @@ verifyLoad('builder',
                     } else {
                         odkCommon.log('W', 'builder.initializePrompts: unknown _type ' + rowObject._type +
                             ' -- using text for prompt in row ' + rowObject._row_num + ' section: ' + key);
-                        PromptType = currentPromptTypes['text'];
+                        PromptType = currentPromptTypes.text;
                     }
                     // ensure that the section is saved...
                     rowObject._section_name = key;

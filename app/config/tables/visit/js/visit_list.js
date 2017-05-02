@@ -1,7 +1,7 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, odkTables */
+/* global $, odkData, odkTables */
 'use strict';
 
 // if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
@@ -122,7 +122,7 @@ var resumeFn = function(fidxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.openDetailView(
+                odkTables.openDetailView(null,
                     tableId,
                     rowId,
                     'config/tables/visit/html/visit_detail.html');

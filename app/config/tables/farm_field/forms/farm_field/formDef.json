@@ -127,7 +127,8 @@
         "linked_table_id": "farm_crop",
         "selection": "field_uuid = ?",
         "selectionArgs": "[ data('field_uuid') ]",
-        "auxillaryHash": "'field_uuid='+opendatakit.encodeURIDataElement('field_uuid')",
+        "newRowInitialElementKeyToValueMap": "{ field_uuid: data('field_uuid') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     ],
@@ -173,7 +174,8 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
@@ -261,7 +263,8 @@
         "linked_table_id": "farm_crop",
         "selection": "field_uuid = ?",
         "selectionArgs": "[ data('field_uuid') ]",
-        "auxillaryHash": "'field_uuid='+opendatakit.encodeURIDataElement('field_uuid')",
+        "newRowInitialElementKeyToValueMap": "{ field_uuid: data('field_uuid') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     },

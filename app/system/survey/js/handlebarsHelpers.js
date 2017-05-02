@@ -4,6 +4,7 @@
  * These are invoked via {{helperFunction arg1}} or {{helperFunction arg1 arg2}}
  * within the handelbars templates.
  */
+ /* global odkCommon */
 define(['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars','jquery'],
 function(database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial,                     $) {
 'use strict';
@@ -35,7 +36,7 @@ var hasFieldLocalization = function(fieldName) {
 	};
 };
 
-var localizeField = function(fieldName) {
+var localizeTextField = function(fieldName) {
 	return function(displayObjectField) {
 		var locale = formulaFunctions.getCurrentLocale();
 		var str =  odkCommon.localizeTokenField(locale, displayObjectField, fieldName);
@@ -43,12 +44,20 @@ var localizeField = function(fieldName) {
 			return "";
 		}
 		var context = this;
-		if ( fieldName !== 'text' ) {
-			// assume this is a url
-			// convert a relative url to a fully qualified one.
-			str = formulaFunctions.expandRelativeUrlPath(str);
-		}
 		var template = Handlebars.compile(str);
+		return template(context);
+	};
+};
+
+var localizeUrlField = function(fieldName) {
+	return function(displayObjectField) {
+		var locale = formulaFunctions.getCurrentLocale();
+		var url = odkCommon.localizeUrl(locale, displayObjectField, fieldName, opendatakit.getCurrentFormPath());
+		if ( url === undefined ) {
+			return "";
+		}
+		var context = this;
+		var template = Handlebars.compile(url);
 		return template(context);
 	};
 };
@@ -57,19 +66,23 @@ Handlebars.registerHelper('ifHasLocalization', hasLocalization());
 
 Handlebars.registerHelper('ifHasTextLocalization', hasFieldLocalization('text'));
 
-Handlebars.registerHelper('localizeText', localizeField('text'));
+Handlebars.registerHelper('localizeText', localizeTextField('text'));
 
 Handlebars.registerHelper('ifHasImageLocalization', hasFieldLocalization('image'));
 
-Handlebars.registerHelper('localizeImage', localizeField('image'));
+Handlebars.registerHelper('localizeImage', localizeUrlField('image'));
 
 Handlebars.registerHelper('ifHasAudioLocalization', hasFieldLocalization('audio'));
 
-Handlebars.registerHelper('localizeAudio', localizeField('audio'));
+Handlebars.registerHelper('localizeAudio', localizeUrlField('audio'));
 
 Handlebars.registerHelper('ifHasVideoLocalization', hasFieldLocalization('video'));
 
-Handlebars.registerHelper('localizeVideo', localizeField('video'));
+Handlebars.registerHelper('localizeVideo', localizeUrlField('video'));
+
+Handlebars.registerHelper('expandFormDirRelativeUrlPath', function(content) {
+	return formulaFunctions.expandFormDirRelativeUrlPath(content);
+});
 
 Handlebars.registerHelper('metadata', function(fieldName) {
     var val = database.getInstanceMetaDataValue( fieldName );

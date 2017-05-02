@@ -1,315 +1,345 @@
+//'use strict';
+// don't warn about unused parameters, since all of these methods are stubs
+/* jshint unused: vars */
 /* global odkCommon */
+
 /**
- * The odkSurvey object is something we use to mock out some functionality for
- * testing in the browser. See the `window.odkSurvey` definition below for more
- * information.
+ * This represents the OdkTables object handed to the android web view in the
+ * Tables code.
+ *
+ * It should provide all the functions available to the javascript at this
+ * version of the code. This does not currently have a dual Java injection. 
+ * All calls are mapped to odkCommon.doAction() interactions.
  */
+    
+window.odkSurvey = {
+    initialScreenPath: "initial/0",
 
-/*
-This odkSurvey  object is just a facade for browser testing.
-It defines the interface that ODK Survey or other container apps
-must implement to work with the javascript library.
-It will be replaced by one injected by Android Java code.
-*/
-window.odkSurvey = window.odkSurvey || {
-    showAlerts: false,
-    refId: null,
-    enforceRefIdMatch: true,
-    clearAuxillaryHash: function() {
-        // this only makes sense for screen-rotation recovery actions.
-    },
     /**
-     * The odkSurvey now remembers an entire history of refId values.
-     *
-     * The manipulators below access the values for their respective refId
-     * via refIdMap[refId]. The values tracked per refId are:
-     *   instanceId
-     *   sectionStateScreenHistory
+     * Returns true if a variable is an array.
      */
-    refIdMap: {}, // map indexed by refId
-    lookupRefIdData: function(refId) {
-        var settings = this.refIdMap[refId];
-        if ( settings === undefined || settings === null ) {
-            settings = {
-                instanceId: null,
-                sectionStateScreenHistory: []
-            };
-            this.refIdMap[refId] = settings;
-        }
-        return settings;
-    },
-    clearInstanceId: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: clearInstanceId(" + refId + ")");
-            return;
-        }
-        odkCommon.log("D","odkSurvey: DO: clearInstanceId(" + refId + ")");
-        var settings = this.lookupRefIdData(refId);
-        settings.instanceId = null;
-    },
-    setInstanceId: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: setInstanceId(" + refId + ", " + instanceId + ")");
-            return;
-        }
-        // report the new instanceId to ODK Survey...
-        // needed so that callbacks, etc. can properly track the instanceId
-        // currently being worked on.
-        odkCommon.log("D","odkSurvey: DO: setInstanceId(" + refId + ", " + instanceId + ")");
-        var settings = this.lookupRefIdData(refId);
-        settings.instanceId = instanceId;
-    },
-    getInstanceId: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: getInstanceId(" + refId + ")");
-            return null;
-        }
-        // report the new instanceId to ODK Survey...
-        // needed so that callbacks, etc. can properly track the instanceId
-        // currently being worked on.
-        odkCommon.log("D","odkSurvey: DO: getInstanceId(" + refId + ")");
-        var settings = this.lookupRefIdData(refId);
-        return settings.instanceId;
-    },
-    _dumpScreenStateHistory : function(settings) {
-        odkCommon.log("D","odkSurvey -------------*start* dumpScreenStateHistory--------------------");
-        if ( settings.sectionStateScreenHistory.length === 0 ) {
-            odkCommon.log("D","odkSurvey sectionScreenStateHistory EMPTY");
-        } else {
-            var i;
-            for ( i = settings.sectionStateScreenHistory.length-1 ; i >= 0 ; --i ) {
-                var thisSection = settings.sectionStateScreenHistory[i];
-                odkCommon.log("D","odkSurvey [" + i + "] screenPath: " + thisSection.screen );
-                odkCommon.log("D","odkSurvey [" + i + "] state:      " + thisSection.state );
-                if ( thisSection.history.length === 0 ) {
-                    odkCommon.log("D","odkSurvey [" + i + "] history[] EMPTY" );
-                } else {
-                    var j;
-                    for ( j = thisSection.history.length-1 ; j >= 0 ; --j ) {
-                        var ss = thisSection.history[j];
-                        odkCommon.log("D","odkSurvey [" + i + "] history[" + j + "] screenPath: " + ss.screen );
-                        odkCommon.log("D","odkSurvey [" + i + "] history[" + j + "] state:      " + ss.state );
-                    }
-                }
-            }
-        }
-        odkCommon.log("D","odkSurvey ------------- *end*  dumpScreenStateHistory--------------------");
-    },
-    pushSectionScreenState: function( refId) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: pushSectionScreenState(" + refId + ")");
-            return;
-        }
-
-        odkCommon.log("D","odkSurvey: DO: pushSectionScreenState(" + refId + ")");
-        var settings = this.lookupRefIdData(refId);
-
-        if ( settings.sectionStateScreenHistory.length === 0 ) {
-            return;
-        }
-
-        var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
-        lastSection.history.push( { screen: lastSection.screen, state: lastSection.state } );
-    },
-    setSectionScreenState: function( refId, screenPath, state) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: setSectionScreenState(" + refId + ", " + screenPath + ", " + state + ")");
-            return;
-        }
-
-        odkCommon.log("D","odkSurvey: DO: setSectionScreenState(" + refId + ", " + screenPath + ", " + state + ")");
-        var settings = this.lookupRefIdData(refId);
-        if ( screenPath === undefined || screenPath === null ) {
-            alert("setSectionScreenState received a null screen path!");
-            odkCommon.log("E","setSectionScreenState received a null screen path!");
-            return;
-        } else {
-            var splits = screenPath.split('/');
-            var sectionName = splits[0] + "/";
-            if (settings.sectionStateScreenHistory.length === 0) {
-                settings.sectionStateScreenHistory.push( { history: [], screen: screenPath, state: state } );
-            } else {
-                var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
-                if ( lastSection.screen.substring(0,sectionName.length) === sectionName ) {
-                    lastSection.screen = screenPath;
-                    lastSection.state = state;
-                } else {
-                    settings.sectionStateScreenHistory.push( { history: [], screen: screenPath, state: state } );
-                }
-            }
-        }
-    },
-    clearSectionScreenState: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: clearSectionScreenState(" + refId + ")");
-            return;
-        }
-
-        odkCommon.log("D","odkSurvey: DO: clearSectionScreenState(" + refId + ")");
-        var settings = this.lookupRefIdData(refId);
-        settings.sectionStateScreenHistory = [ { history: [], screen: 'initial/0', state: null } ];
-    },
-    getControllerState: function( refId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: getControllerState(" + refId + ")");
-            return null;
-        }
-        odkCommon.log("D","odkSurvey: DO: getControllerState(" + refId + ")");
-        var settings = this.lookupRefIdData(refId);
-
-        if ( settings.sectionStateScreenHistory.length === 0 ) {
-            odkCommon.log("D","odkSurvey: getControllerState: NULL!");
-            return null;
-        }
-        var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
-        return lastSection.state;
-    },
-    getScreenPath: function(refId) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: getScreenPath(" + refId + ")");
-            return null;
-        }
-        odkCommon.log("D","odkSurvey: DO: getScreenPath(" + refId + ")");
-        var settings = this.lookupRefIdData(refId);
-        this._dumpScreenStateHistory(settings);
-
-        if ( settings.sectionStateScreenHistory.length === 0 ) {
-            odkCommon.log("D","odkSurvey: getScreenPath: NULL!");
-            return null;
-        }
-        var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
-        return lastSection.screen;
-    },
-    hasScreenHistory: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: hasScreenHistory(" + refId + ")");
-            return false;
-        }
-        odkCommon.log("D","odkSurvey: DO: hasScreenHistory(" + refId + ")");
-        var settings = this.lookupRefIdData(refId);
-        // two or more sections -- there must be history!
-        if ( settings.sectionStateScreenHistory.length > 1 ) {
+    isArray : function(varToTest) {
+        if (Object.prototype.toString.call(varToTest) === '[object Array]') {
             return true;
-        }
-        // nothing at all -- no history
-        if ( settings.sectionStateScreenHistory.length === 0 ) {
+        } else {
             return false;
         }
-        // just one section -- is there any screen history within it?
-        var thisSection = settings.sectionStateScreenHistory[0];
-        return ( thisSection.history.length !== 0 );
     },
-    popScreenHistory: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: popScreenHistory(" + refId + ")");
-            return null;
-        }
-        odkCommon.log("D","odkSurvey: DO: popScreenHistory(" + refId + ")");
-        var settings = this.lookupRefIdData(refId);
 
-        if ( settings.sectionStateScreenHistory.length === 0 ) {
-            return null;
-        }
-
-        var lastSection;
-
-        lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
-        if ( lastSection.history.length !== 0 ) {
-            // pop history from within this section
-            var lastHistory = lastSection.history.pop();
-            lastSection.screen = lastHistory.screen;
-            lastSection.state = lastHistory.state;
-            return lastSection.screen;
-        }
-
-        // pop to an enclosing section
-        settings.sectionStateScreenHistory.pop();
-        if ( settings.sectionStateScreenHistory.length === 0 ) {
-            return null;
-        }
-
-        // return the screen from that last section... (do not pop the history)
-        lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
-        return lastSection.screen;
-    },
     /**
-     * Section stack -- maintains the stack of sections from which you can exit.
+     * Returns true if str is a string, else false.
      */
-    hasSectionStack: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: hasSectionStack(" + refId + ")");
-            return false;
-        }
-        odkCommon.log("D","odkSurvey: DO: hasSectionStack(" + refId + ")");
-        var settings = this.lookupRefIdData(refId);
-        return settings.sectionStateScreenHistory.length !== 0;
+    isString: function(str) {
+        return (typeof str === 'string');
     },
-    popSectionStack: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: popSectionStack(" + refId + ")");
-            return null;
-        }
-        odkCommon.log("D","odkSurvey: DO: popSectionStack(" + refId + ")");
-        var settings = this.lookupRefIdData(refId);
-        if ( settings.sectionStateScreenHistory.length !== 0 ) {
-            settings.sectionStateScreenHistory.pop();
+	
+    getHashString:function(tableId, formId, instanceId, screenPath, elementKeyToValueMap) {
+		var that = this;
+		
+		if ( tableId === null || tableId === undefined || !that.isString(tableId) ) {
+			throw new Error("tableId must be a string");
+		}
+		if ( formId === null || formId === undefined ) {
+			formId = tableId;
+		}
+		if ( !that.isString(formId) ) {
+			throw new Error("formId must be a string");
+		}
+		if ( instanceId === undefined ) {
+			instanceId = null;
+		}
+		if ( instanceId !== null && !that.isString(instanceId) ) {
+			throw new Error("instanceId must be either a null or a string");
+		}
+		if ( screenPath === null || screenPath === undefined ) {
+			screenPath = this.initialScreenPath;
+		}
+		if ( !that.isString(screenPath) ) {
+			throw new Error("screenPath must be a 'screen/prompt' designation");
+		}
+		if ( elementKeyToValueMap === undefined ) {
+			elementKeyToValueMap = null;
+		}
+		var uri = odkCommon.constructSurveyUri(tableId, formId, instanceId, screenPath, elementKeyToValueMap );
+
+		// strip off the hash portion
+		var hashString = uri.substring(uri.indexOf('#')+1);
+
+		if ( hashString !== '' ) {
+			hashString = '&' + hashString;
+		}
+		
+		// and add a formPath=... to the front of the hash
+		if ( tableId === 'framework' ) {
+			return "#formPath=" + encodeURIComponent( odkCommon.getBaseUrl() + "/") + hashString;
+		} else {
+			return "#formPath=" + encodeURIComponent( "../config/tables/" + tableId + "/forms/" + formId + "/") + hashString;
+		}
+    },
+	
+	
+	
+    getFormsProviderUri: function(platInfo, tableId, formId ) {
+
+        var uri = platInfo.formsUri + platInfo.appName + '/' + tableId + '/' + formId;
+        return uri;
+    },
+	
+    convertHashStringToSurveyUri: function(hashString) {
+		var that = this;
+
+        // assume we have a hashString:
+        // #formPath=...&instanceId=...&...
+        // reformat it into a URI suitable for invoking ODK Survey
+        odkCommon.log("D","convertHashStringToSurveyUri: hash " + hashString);
+        if ( !hashString.match(/^(\??#).*/) ) {
+            throw new Error('parsing of hashString failed - not a relative path (does not begin with ?# or #');
         }
 
-        if ( settings.sectionStateScreenHistory.length !== 0 ) {
-            var lastSection = settings.sectionStateScreenHistory[settings.sectionStateScreenHistory.length-1];
-            return lastSection.screen;
+        // we expect it to start with ?# or #
+        if ( hashString.charAt(0) === '?' ) {
+            hashString = hashString.substring(1);
         }
+        if ( hashString.charAt(0) === '#' ) {
+            hashString = hashString.substring(1);
+        }
+        var keyValues = hashString.split("&");
+        var reconstitutedKeyValues = "";
+        var formPath = null;
+        var instanceId = null;
+        var i;
+        var parts;
+        for ( i = 0 ; i < keyValues.length ; ++i ) {
+            parts = keyValues[i].split('=');
+            if ( parts.length > 2 ) {
+                throw new Error('parsing of hashString failed - incorrect &key=value sequence');
+            }
+            var key = parts[0];
+            if ( key === 'formPath' ) {
+                formPath = parts[1];
+            } else if ( key === 'instanceId' ) {
+                instanceId = decodeURIComponent(parts[1]);
+            } else {
+                reconstitutedKeyValues = reconstitutedKeyValues +
+                    "&" + keyValues[i];
+            }
+        }
+        if ( instanceId !== null ) {
+            reconstitutedKeyValues =
+                "&instanceId=" + encodeURIComponent(instanceId) +
+                reconstitutedKeyValues;
+        }
+        if ( formPath === null ) {
+            throw new Error('parsing of hashString failed - no formPath found');
+        }
+        parts = decodeURIComponent(formPath).split("/");
+        // the formPath ends in a slash, so we want the entry before the last one...
+        var formId = parts[parts.length-2];
 
-        return null;
+        var tableId = parts[parts.length-4];
+
+		var platInfo = JSON.parse(odkCommon.getPlatformInfo());
+
+        var uri = that.getFormsProviderUri(platInfo, tableId, formId) +
+            "/#" + reconstitutedKeyValues.substring(1);
+
+        odkCommon.log("D","convertHashStringToSurveyUri: as Uri " + uri);
+        return uri;
     },
-    frameworkHasLoaded: function(refId, outcome) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: frameworkHasLoaded(" + refId + ", " + outcome + ")");
-            return;
-        }
-        odkCommon.log("E","odkSurvey: DO: frameworkHasLoaded(" + refId + ", " + outcome + ")");
-        if ( this.showAlerts ) alert("notify container frameworkHasLoaded " + (outcome ? "SUCCESS" : "FAILURE"));
-    },
-    saveAllChangesCompleted: function( refId, instanceId, asComplete ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
-            return;
-        }
-        odkCommon.log("D","odkSurvey: DO: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
-        if ( this.showAlerts ) alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
-        if ( window.parent === window ) {
-            window.close();
+	
+    getFormPath: function(tableId, formId) {
+
+        if ( tableId === "framework" ) {
+            return '../config/assets/framework/forms/framework/';
         } else {
-            window.parent.closeAndPopPage();
+            return '../config/tables/' + tableId + '/forms/' + formId + '/';
         }
     },
-    saveAllChangesFailed: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: saveAllChangesFailed(" + refId + ", " + instanceId + ")");
-            return;
-        }
-        odkCommon.log("D","odkSurvey: DO: saveAllChangesFailed(" + refId + ", " + instanceId + ")");
-        if ( this.showAlerts ) alert("notify container FAILED save (unknown whether COMPLETE or INCOMPLETE was attempted).");
-    },
-    ignoreAllChangesCompleted: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
-            return;
-        }
-        odkCommon.log("D","odkSurvey: DO: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
-        if ( this.showAlerts ) alert("notify container OK ignore all changes.");
-        if ( window.parent === window ) {
-            window.close();
+
+	openInstance: function(dispatchStruct, tableId, formId, instanceId, initialValuesElementKeyToValueMap) {
+		var that = this;
+		var platInfo = JSON.parse(odkCommon.getPlatformInfo());
+
+		var uri = odkCommon.constructSurveyUri(tableId, formId, instanceId, that.initialScreenPath, initialValuesElementKeyToValueMap );
+
+		var hashString = uri.substring(uri.indexOf('#'));
+		
+		var extrasBundle = { url: platInfo.baseUri + 'system/index.html' + hashString
+		};
+		
+		var intentArgs = {
+			uri: uri,
+			extras: extrasBundle,
+			// uri:      // set the data field of intent to this
+			// data:     // unless data is supplied -- that takes precedence
+			// type:     // set the intent type to this value
+			// package:  // set the intent package to this value
+		};
+
+        return odkCommon.doAction(dispatchStruct, 
+			'org.opendatakit.survey.activities.MainMenuActivity', 
+			intentArgs );
+	},
+	
+	addInstance: function(dispatchStruct, tableId, formId, initialValuesElementKeyToValueMap) {
+		var that = this;
+
+		// start a new instanceId
+        var instanceId = odkCommon.genUUID();
+		return that.openInstance(dispatchStruct, tableId, formId, instanceId, initialValuesElementKeyToValueMap);
+	},
+	
+	openLink: function(dispatchStruct, relativeOrFullUrl ) {
+        var that = this;
+
+        var expandedUrl;
+		var launchAction;
+		
+        if ( relativeOrFullUrl.match(/^(\/|\.|[a-zA-Z]+:).*/) ) {
+			// begins with slash (/) or dot (.) or schema (e.g., http:)
+            expandedUrl = relativeOrFullUrl;
+			launchAction = 'android.content.Intent.ACTION_VIEW';
         } else {
-            window.parent.closeAndPopPage();
+			var platInfo = JSON.parse(odkCommon.getPlatformInfo());
+	
+            // relative URL. Assume this stays within Survey
+            expandedUrl = platInfo.baseUri + 'system/index.html' + relativeOrFullUrl;
+            relativeOrFullUrl = that.convertHashStringToSurveyUri(relativeOrFullUrl);
+            // implicit intents are not working?
+            // launchAction = 'android.content.Intent.ACTION_EDIT';
+            launchAction = 'org.opendatakit.survey.activities.SplashScreenActivity';
         }
-    },
-    ignoreAllChangesFailed: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
-            odkCommon.log("D","odkSurvey: IGNORED: ignoreAllChangesFailed(" + refId + ", " + instanceId + ")");
-            return;
-        }
-        odkCommon.log("D","odkSurvey: DO: ignoreAllChangesFailed(" + refId + ", " + instanceId + ")");
-        if ( this.showAlerts ) alert("notify container FAILED ignore all changes.");
-    }
+		
+		var extrasBundle = { url: expandedUrl
+		};
+		
+		var intentArgs = {
+			uri: relativeOrFullUrl,
+			extras: extrasBundle,
+			// uri:      // set the data field of intent to this
+			// data:     // unless data is supplied -- that takes precedence
+			// type:     // set the intent type to this value
+			// package:  // set the intent package to this value
+		};
+
+        return odkCommon.doAction(dispatchStruct, 
+			launchAction, 
+			intentArgs );
+	},
+	
+	fileAttachmentAction: function(dispatchStruct, intentAction, tableId, instanceId, existingFileAttachmentFieldContent) {
+
+		var extrasBundle = {
+                tableId: tableId,
+                instanceId: instanceId,
+                uriFragmentNewFileBase: "opendatakit-macro(uriFragmentNewInstanceFile)" };
+			
+		if ( existingFileAttachmentFieldContent !== undefined && existingFileAttachmentFieldContent !== null ) {
+			if ( existingFileAttachmentFieldContent.contentType !== undefined &&
+                 existingFileAttachmentFieldContent.contentType !== null &&
+			     existingFileAttachmentFieldContent.uriFragment !== undefined &&
+				 existingFileAttachmentFieldContent.uriFragment !== null ) {
+				extrasBundle.currentContentType = existingFileAttachmentFieldContent.contentType;
+				extrasBundle.currentUriFragment = existingFileAttachmentFieldContent.uriFragment;
+			}
+		}
+		
+        return odkCommon.doAction( dispatchStruct, intentAction, { extras: extrasBundle });
+	},
+	
+	captureImage: function(dispatchStruct, tableId, instanceId, existingFileAttachmentFieldContent) {
+		var that = this;
+		
+		return that.fileAttachmentAction(dispatchStruct, 
+			'org.opendatakit.survey.activities.MediaCaptureImageActivity', 
+			tableId, instanceId, existingFileAttachmentFieldContent);
+	},
+	captureSignature: function(dispatchStruct, tableId, instanceId, existingFileAttachmentFieldContent) {
+		var that = this;
+		
+		return that.fileAttachmentAction(dispatchStruct, 
+			'org.opendatakit.survey.activities.SignatureActivity', 
+			tableId, instanceId, existingFileAttachmentFieldContent);
+	},
+	captureAudio: function(dispatchStruct, tableId, instanceId, existingFileAttachmentFieldContent) {
+		var that = this;
+		
+		return that.fileAttachmentAction(dispatchStruct, 
+			'org.opendatakit.survey.activities.MediaCaptureAudioActivity', 
+			tableId, instanceId, existingFileAttachmentFieldContent);
+	},
+	captureVideo: function(dispatchStruct, tableId, instanceId, existingFileAttachmentFieldContent) {
+		var that = this;
+		
+		return that.fileAttachmentAction(dispatchStruct, 
+			'org.opendatakit.survey.activities.MediaCaptureVideoActivity', 
+			tableId, instanceId, existingFileAttachmentFieldContent);
+	},
+	chooseImage: function(dispatchStruct, tableId, instanceId, existingFileAttachmentFieldContent) {
+		var that = this;
+		
+		return that.fileAttachmentAction(dispatchStruct, 
+			'org.opendatakit.survey.activities.MediaChooseImageActivity', 
+			tableId, instanceId, existingFileAttachmentFieldContent);
+	},
+	chooseAudio: function(dispatchStruct, tableId, instanceId, existingFileAttachmentFieldContent) {
+		var that = this;
+		
+		return that.fileAttachmentAction(dispatchStruct, 
+			'org.opendatakit.survey.activities.MediaChooseAudioActivity', 
+			tableId, instanceId, existingFileAttachmentFieldContent);
+	},
+	chooseVideo: function(dispatchStruct, tableId, instanceId, existingFileAttachmentFieldContent) {
+		var that = this;
+		
+		return that.fileAttachmentAction(dispatchStruct, 
+			'org.opendatakit.survey.activities.MediaChooseVideoActivity', 
+			tableId, instanceId, existingFileAttachmentFieldContent);
+	},
+
+	scanBarcode: function(dispatchStruct) {
+		
+		var intentArgs = {
+			// extras: extrasBundle,
+			// uri:      // set the data field of intent to this
+			// data:     // unless data is supplied -- that takes precedence
+			// type:     // set the intent type to this value
+			// package:  // set the intent package to this value
+		};
+
+        return odkCommon.doAction(dispatchStruct, 
+			'com.google.zxing.client.android.SCAN', 
+			intentArgs );
+	},
+
+	captureGeopoint: function(dispatchStruct) {
+		
+		var intentArgs = {
+			// extras: extrasBundle,
+			// uri:      // set the data field of intent to this
+			// data:     // unless data is supplied -- that takes precedence
+			// type:     // set the intent type to this value
+			// package:  // set the intent package to this value
+		};
+
+        return odkCommon.doAction(dispatchStruct, 
+			'org.opendatakit.survey.activities.GeoPointActivity', 
+			intentArgs );
+	},
+
+	captureGeopointUsingMap: function(dispatchStruct) {
+		
+		var intentArgs = {
+			// extras: extrasBundle,
+			// uri:      // set the data field of intent to this
+			// data:     // unless data is supplied -- that takes precedence
+			// type:     // set the intent type to this value
+			// package:  // set the intent package to this value
+		};
+
+        return odkCommon.doAction(dispatchStruct, 
+			'org.opendatakit.survey.activities.GeoPointMapActivity', 
+			intentArgs );
+	}
 };
+

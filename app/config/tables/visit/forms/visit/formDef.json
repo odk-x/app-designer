@@ -522,7 +522,8 @@
         "linked_form_id": "plot",
         "selection": "_id >= ?",
         "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'plot_id>='+opendatakit.encodeURIValue(0)",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       {
@@ -533,7 +534,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "plant_height",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
       },
       {
@@ -544,7 +546,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "crop_yield",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
       },
       {
@@ -555,7 +558,8 @@
         "selection": "_id = ?",
         "selectionArgs": "[data('plot_id')]",
         "fieldName": "planting",
-        "auxillaryHash": "'plot_id='+opendatakit.encodeURIDataElement('plot_id')",
+        "newRowInitialElementKeyToValueMap": "{ plot_id : data('plot_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
       }
     ],
@@ -709,7 +713,8 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
@@ -900,7 +905,8 @@
         "linked_form_id": "plot",
         "selection": "_id >= ?",
         "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'plot_id>='+opendatakit.encodeURIValue(0)",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       "min_max_height": {
@@ -911,7 +917,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "plant_height",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
       },
       "min_max_yield": {
@@ -922,7 +929,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "crop_yield",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
       },
       "plant_type_query": {
@@ -933,7 +941,8 @@
         "selection": "_id = ?",
         "selectionArgs": "[data('plot_id')]",
         "fieldName": "planting",
-        "auxillaryHash": "'plot_id='+opendatakit.encodeURIDataElement('plot_id')",
+        "newRowInitialElementKeyToValueMap": "{ plot_id : data('plot_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
       }
     },

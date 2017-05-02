@@ -27,10 +27,10 @@ function(opendatakit,  database,  $,       _) {
 			}
 			return locale;
 		},
-		expandRelativeUrlPath: function(content) {
+		expandFormDirRelativeUrlPath: function(content) {
             'use strict';
 			if (!_.isString(content)) {
-				throw Error("formulaFunctions.resolveRelativeUrlPath(content) -- content is not a string: " + JSON.stringify(content));
+				throw Error("formulaFunctions.expandFormDirRelativeUrlPath(content) -- content is not a string: " + JSON.stringify(content));
 			}
 			var formPath = opendatakit.getCurrentFormPath();
 			// if the Url is not prefixed by slash or http prefix, then prefix with form path
