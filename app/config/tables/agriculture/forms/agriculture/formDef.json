@@ -250,7 +250,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "Sample",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     ],
@@ -306,7 +307,8 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
@@ -426,7 +428,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "Sample",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     },

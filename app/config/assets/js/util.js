@@ -1,4 +1,4 @@
-/* global */
+/* global _ */
 /**
  * Various functions that we might need across screens.
  */
@@ -155,4 +155,4 @@ util.formatDisplayText = function(txt) {
         .replace(/\w\S*/g, function(str){return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();});
 
     return displayText;
-}
+};

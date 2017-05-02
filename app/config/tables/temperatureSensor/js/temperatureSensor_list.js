@@ -1,51 +1,59 @@
 /**
  * This is the file that will create the list view for the tea inventory table.
  */
-/* global $, control, data */
+/* global $, _, odkTables, odkData, odkCommon */
 'use strict';
 
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/Tea_inventory_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
-
+var resultSet = {};
+var idxStart = -1;
 var uniqueSensorIds = [];
 var uniqueSensorIdToRowIdMap = {};
+    
+function cbFailure(error) {
 
-/* Called when page loads to display things (Nothing to edit here) */
-var resumeFn = function(idxStart) {
-    console.log('resumeFn called. idxStart: ' + idxStart);
+    console.log('temperatureSensor_list: cbFailure failed with error: ' + error);
+}
+    
+function uniqueSensorsCbFailure(error) {
+
+    console.log('temperatureSensor temperatureSensors query: cbFailure failed with error: ' + error);
+}
+
+function uniqueSensorsCbSuccess(result) {
+
     // The first time through we're going to make a map sensorId and
     // a rowId for that sensorId
-    var sensorIdMap = [];
-    if (idxStart === 0) {
-        var tempData = control.query('temperatureSensor', null, null);
-        for (var i = 0; i < tempData.getCount(); i++) {
-            console.log('tempData.getData: ' + tempData.getData(i, 'sensorid'));
-            sensorIdMap[i] =
-                tempData.getData(i, 'sensorid');
-        }
-       
-        // Use underscore to get only unique id's for the list
-        uniqueSensorIds = _.uniq(sensorIdMap);   
+	var sensorIdMap = [];
+	
+	for (var i = 0; i < result.getCount(); i++) {
+		console.log('tempData.getData: ' + result.getData(i, 'sensorid'));
+		sensorIdMap[i] = result.getData(i, 'sensorid');
+	}
+   
+	// Use underscore to get only unique id's for the list
+	uniqueSensorIds = _.uniq(sensorIdMap);   
 
-        // Now get the last index of from the sensorIdMap and create a map of
-        // rowIds and sensorids
-        for (var j = 0; j < uniqueSensorIds.count; j++) {
-            var index = _.lastIndexOf(sensorIdMap, uniqueSensorIds[j]);
-            uniqueSensorIdToRowIdMap[uniqueSensorIds[j]] = index;
-        }     
+	// Now get the last index of from the sensorIdMap and create a map of
+	// rowIds and sensorids
+	for (var j = 0; j < uniqueSensorIds.count; j++) {
+		var index = _.lastIndexOf(sensorIdMap, uniqueSensorIds[j]);
+		uniqueSensorIdToRowIdMap[uniqueSensorIds[j]] = index;
+	}     
+	// we know this is the first time - so displayGroup argument idxStart === 0.
+	displayGroup(0);
+}
+
+/* Called when page loads to display things (Nothing to edit here) */
+var resumeFn = function(fidxStart) {
+	
+    console.log('resumeFn called. idxStart: ' + idxStart);
+	idxStart = fidxStart;
+    if (fidxStart === 0) {
 
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
-            var tableId = data.getTableId();
+            var tableId = resultSet.getTableId();
             // We set the rowId for the li. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
@@ -61,14 +69,22 @@ var resumeFn = function(idxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                control.openDetailView(tableId, rowId, null);
+                odkTables.openDetailView(null, tableId, rowId, null);
             }
         });
-    }
-    
-    return (function() {
+
+		odkData.getViewData(function(result) {
+				resultSet = result;
+	
+				// get the sensor data for this sensor id
+				odkData.query('temperatureSensor', null, null, 
+					null, null, null, null, null, null, true, 
+					uniqueSensorsCbSuccess, uniqueSensorsCbFailure);
+					
+		}, cbFailure);
+    } else {
         displayGroup(idxStart);
-    }());
+    }
 };
 
 
@@ -93,13 +109,13 @@ var displayGroup = function(idxStart) {
         /* Creates the item space */
         // We're going to select the ul and then start adding things to it.
         var item = $('<li>');
-        item.attr('rowId', data.getRowId(rowId));
+        item.attr('rowId', resultSet.getRowId(rowId));
         item.attr('class', 'item_space');
-        item.text(data.getData(rowId, 'sensorid'));
+        item.text(resultSet.getData(rowId, 'sensorid'));
                 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
-        chevron.attr('src', control.getFileAsUrl('config/assets/img/little_arrow.png'));
+        chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
         item.append(chevron);
                 
@@ -111,7 +127,7 @@ var displayGroup = function(idxStart) {
          * 'field1' with new, specific label that are more meaningful to you
          */
         var field1 = $('<li>');
-        var sensorType = data.getData(rowId, 'sensortype');
+        var sensorType = resultSet.getData(rowId, 'sensortype');
         field1.attr('class', 'detail');
         field1.text('Sensor Type: ' + sensorType);
         item.append(field1);

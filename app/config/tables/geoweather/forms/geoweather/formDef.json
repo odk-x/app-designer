@@ -133,7 +133,8 @@
         "linked_table_id": "geoweather_conditions",
         "selection": "Language = ?",
         "selectionArgs": "[ 'en' ]",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     ],
@@ -242,7 +243,8 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
@@ -388,7 +390,8 @@
         "linked_table_id": "geoweather_conditions",
         "selection": "Language = ?",
         "selectionArgs": "[ 'en' ]",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     },

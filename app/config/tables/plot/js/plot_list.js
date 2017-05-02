@@ -1,36 +1,14 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, odkTables */
+/* global $, odkTables, odkData, odkCommon */
 'use strict';
-
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/plot_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             if (dataObj === undefined || dataObj === null) {
-//                 console.log('Could not load data json for table: plot');
-//             }
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 
 // Use chunked list view for larger tables: We want to chunk the displays so
 // that there is less load time.
 var plotResultSet = {};   
 var idxStart = -1;
     
-function cbSuccess(result) {
-    plotResultSet = result;
-  
-    // return (function() {
-    displayGroup(idxStart);
-    // }());
-}
-
 function cbFailure(error) {
 
     console.log('plot_list: cbFailure failed with error: ' + error);
@@ -41,44 +19,12 @@ function cbFailure(error) {
  * displayed at this iteration through the loop.
  */
 var resumeFn = function(fidxStart) {
-    odkData.getViewData(cbSuccess, cbFailure);
 
     idxStart = fidxStart;
-    // if (idxStart === 0) {
-    //     // We want to be able to drag and drop without the drop triggering a click.
-    //     // Idea for this taken from:
-    //     // http://stackoverflow.com/questions/14301026/how-do-i-avoid-a-click-event-firing-after-dragging-a-gridster-js-widget-with-cli
-
-    //     var preventClick = function(e) {
-    //         e.stopPropagation();
-    //         e.preventDefault();
-    //     };
-
-    //     $('.gridster ul').gridster({
-    //         widget_margins: [10, 10],
-    //         widget_base_dimensions: [140, 140],
-    //         draggable: {
-    //             start: function(event, ui) {
-    //                 // stop propagating in the capture phase.
-    //                 ui.$player[0].addEventListener('click', preventClick, true);
-    //             },
-    //             stop: function(event, ui) {
-    //                 var player = ui.$player;
-    //                 setTimeout(function() {
-    //                     player[0].removeEventListener(
-    //                       'click',
-    //                       preventClick,
-    //                       true);
-    //                 });
-    //             }
-    //         }
-    //     });
-    // }
-
     console.log('resumeFn called. idxStart: ' + idxStart);
     // The first time through construct any constants you need to refer to
     // and set the click handler on the list elements.
-    if (idxStart === 0) {
+    if (fidxStart === 0) {
         // This add a click handler on the wrapper ul that will handle all of
         // the clicks on its children.
         $('#list').click(function(e) {
@@ -98,11 +44,20 @@ var resumeFn = function(fidxStart) {
           // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.openDetailView(tableId, rowId, 'config/tables/plot/html/plot_detail.html');
+                odkTables.openDetailView(null, tableId, rowId, 'config/tables/plot/html/plot_detail.html');
             }
         });
-    }
 
+		odkData.getViewData(function(result) {
+				plotResultSet = result;
+
+				// we know this is the first time - so displayGroup argument idxStart === 0.
+				displayGroup(0);
+		}, cbFailure);
+
+    } else {
+		displayGroup(fidxStart);
+	}
 };
             
 /**

@@ -1,7 +1,7 @@
 /**
  * File used to create list view for large data set test
  */
-
+/* global $, odkTables, odkData, odkCommon, util */
 'use strict';
 var largeDataSetResult = {};
 var limit = 10;
@@ -29,7 +29,7 @@ var prevResults = function () {
     // Empty the list and then re-render
     $('#list').empty();
     render(idxStart);
-}
+};
 
 var nextResults = function () {
     // Increment the number of times the next button has been hit
@@ -43,7 +43,7 @@ var nextResults = function () {
     // Empty the list and then re-render
     $('#list').empty();
     render(idxStart);
-}
+};
 
 var cbSuccess = function (result) {
     largeDataSetResult = result;
@@ -62,19 +62,19 @@ var cbSuccess = function (result) {
     return (function() {
         displayGroup();
     }());
-}
+};
 
 var cbFailure = function (error) {
     console.log('cbFailure: failed with error ' + error);
-}
+};
 
 var cbAddTestRowSuccess = function (result) {
     console.log('cbAddTestRowSuccess: added test row successful');
-}
+};
 
 var cbAddTestRowFailure = function (error) {
     console.log('cbAddTestRowFailure: failed with error ' + error);
-}
+};
 
 var render = function(fIdxStart) {
     idxStart = fIdxStart;
@@ -87,7 +87,7 @@ var render = function(fIdxStart) {
 
         $('#nextButton').on('click', function () {
             nextResults();
-        })
+        });
 
         // Define click listener for any cell in the list
         // To open the appropriate detail view
@@ -99,7 +99,7 @@ var render = function(fIdxStart) {
             var rowId = containingDiv.attr('row_id');
             console.log('clicked with row_id: ' + rowId);
             if (rowId !== null && rowId !== undefined) {
-                odkTables.openDetailView(tableId, rowId, null);
+                odkTables.openDetailView(null, tableId, rowId, null);
             }
         });
 
@@ -137,7 +137,7 @@ var render = function(fIdxStart) {
 
     // Write row to the database
     // We reuse the testUUID until render is called
-    testUUID = util.genUUID();
+    testUUID = odkCommon.genUUID();
     var desc = 'Query large_dataset table with limit=' + limit + ' offset=' + offset;
     var step = 'Calling odkData.getViewData in render(' + idxStart + ')';
 
@@ -149,7 +149,7 @@ var render = function(fIdxStart) {
 
     odkData.getViewData(cbSuccess, cbFailure, limit, offset);
 
-}
+};
 
 var displayGroup = function () {
     console.log('displayGroup called with limit: '  + limit + ' offset: ' + offset);
@@ -201,26 +201,26 @@ var displayGroup = function () {
     }
 
     $('#iter').text(inc);
-}
+};
 
 var addTestDataRow = function(testName, testDesc, testStep, testDevice, testOS, testDb, testServices, testAll1, numOfRowsInTable, resultRows, cbSuccessFn, cbFailureFn) {
     var struct = {};
-    struct['testId'] = testUUID
-    struct['test'] = testName;
-    struct['description'] = testDesc
-    struct['step'] = testStep;
-    struct['device'] = testDevice;
-    struct['os'] = testOS;
-    struct['rowsInTable'] = numOfRowsInTable;
-    struct['resultRows'] = resultRows;
-    struct['db'] = testDb;
-    struct['services'] = testServices;
-    struct['all_in_one'] = testAll1;
+    struct.testId = testUUID;
+    struct.test = testName;
+    struct.description = testDesc;
+    struct.step = testStep;
+    struct.device = testDevice;
+    struct.os = testOS;
+    struct.rowsInTable = numOfRowsInTable;
+    struct.resultRows = resultRows;
+    struct.db = testDb;
+    struct.services = testServices;
+    struct.all_in_one = testAll1;
 
     // Get the current time 
     var date = new Date();
-    struct['time'] = odkCommon.toOdkTimeFromDate(date);;
+    struct.time = odkCommon.toOdkTimeFromDate(date);
     
-    var uuidForRow = util.genUUID();
+    var uuidForRow = odkCommon.genUUID();
     odkData.addRow('testRun', struct, uuidForRow, cbSuccessFn, cbFailureFn);
-}
+};
