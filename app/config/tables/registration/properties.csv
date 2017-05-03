@@ -4,6 +4,6 @@ Column,gender,displayChoicesList,object,"[{""choice_list_name"":""genders"",""da
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,registration
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Registration"""
+Table,default,displayName,object,"{""text"":""Registration""}"
 Table,security,filterTypeOnCreation,string,HIDDEN
 Table,security,unverifiedUserCanCreate,boolean,false

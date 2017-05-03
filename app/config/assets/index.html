@@ -7,31 +7,44 @@
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../config/assets/commonTranslations.js"></script>
+
         <script type="text/javascript">
+
+        var titleToken = "main_title";
+        var registrationToken = "registration_path";
+        var deliveryToken = "delivery_path";
+        var dataToken = "data_path";
+        var overrideToken = "override_path";
+        var registrationTitleToken = 'registration_title';
+        var deliveryTitleToken = 'delivery_title';
+
 
         // Displays homescreen
         function display() {
+            var locale = odkCommon.getPreferredLocale();
+            $('#title').text(odkCommon.localizeText(locale, titleToken));
 
             var newClient = document.createElement("button");
-            newClient.innerHTML = "Registration";
+            newClient.innerHTML = odkCommon.localizeText(locale, registrationToken);
             newClient.setAttribute("id", "register");
             newClient.onclick = function() {
-                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent('Register Beneficiary Code') + '&type=registration');
+                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent(odkCommon.localizeText(locale, registrationTitleToken)) + '&type=registration');
             }
             document.getElementById("wrapper").appendChild(newClient);    
 
 
             var followUp = document.createElement("button");
-            followUp.innerHTML = "Delivery";
+            followUp.innerHTML = odkCommon.localizeText(locale, deliveryToken);
             followUp.setAttribute("id", "deliver");
             followUp.onclick = function() {
                 odkTables.launchHTML(
-                    'config/assets/choose_method.html?title=' + encodeURIComponent('Verify Beneficiary Code') +'&type=delivery');
+                    'config/assets/choose_method.html?title=' + encodeURIComponent(odkCommon.localizeText(locale, deliveryTitleToken)) +'&type=delivery');
             }
             document.getElementById("wrapper").appendChild(followUp);
 
             var viewData = document.createElement("button");
-            viewData.innerHTML = "View Data";
+            viewData.innerHTML = odkCommon.localizeText(locale, dataToken);
             viewData.setAttribute("id", "data");
             viewData.onclick = function() {
               odkTables.launchHTML(
@@ -47,7 +60,7 @@
             var roles = result.getRoles();
             if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
                 var override = document.createElement("button");
-                override.innerHTML = "Administrator Overrides";
+                override.innerHTML = odkCommon.localizeText(locale, overrideToken);
                 override.setAttribute("id", "overrides");
                 override.onclick = function() {
                     odkTables.launchHTML(
@@ -66,7 +79,7 @@
 
     <body onload="display();">
         <div id="main">
-            <h1>Disaster Relief</h1>
+            <h1 id="title"></h1>
             <div id="wrapper"></div>
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>

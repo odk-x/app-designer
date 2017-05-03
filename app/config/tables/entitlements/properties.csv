@@ -1,6 +1,6 @@
 _partition,_aspect,_key,_type,_value
 SurveyUtil,default,SurveyUtil.formId,string,wrong_form
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"""Entitlements"""
+Table,default,displayName,object,"{""text"":""Entitlements""}"
 Table,security,filterTypeOnCreation,string,READ_ONLY
 Table,security,locked,boolean,true

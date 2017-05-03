@@ -7,6 +7,7 @@
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../config/assets/js/util.js"></script>
+        <script type="text/javascript" src="../../config/assets/commonTranslations.js"></script>
         <script type="text/javascript">
         var insideQueue = false;
         var htmlFileNameValue = "delivery_start";
@@ -14,12 +15,29 @@
         var myTimeoutVal = null;
         var idComponent = "";
         var user;
-        var USER_TAG = 'Please Select User';
+        var locale = odkCommon.getPreferredLocale();
+        var viewAuthorizationDetailsToken = "view_authorization_details";
+        var scanBarcodeToken = "scan_barcode";
+        var enterToken = "enter";
+        var userToken = "select_user";
+        var disabledBeneficiaryNotificationToken = "disabled_beneficiary_notification";
+        var missingBeneficiaryNotificationToken = "missing_beneficiary_notification";
+        var barcodeAvailableToken = "barcode_available";
+        var voucherDetectedToken = "voucher_detected";
+        var barcodeUnavailableToken = "barcode_unavailable";
+        var alreadyQualifiesOverrideToken = "already_qualifies_override";
+        var eligibleOverrideToken = "eligible_override";
+        var overrideCreationSuccessToken = "override_creation_success";
         var superUser;
         var type = util.getQueryParameter('type');
         var code;
 
         function display() {
+            $('#view_details').text(odkCommon.localizeText(locale, viewAuthorizationDetailsToken));
+            $('#barcode').text(odkCommon.localizeText(locale, scanBarcodeToken));
+            $('#search').text(odkCommon.localizeText(locale, enterToken));
+
+            var localizedUser = odkCommon.localizeText(locale, userToken);
             $('#choose_user').hide();
             if (type != 'ent_override') {
                 $('#view_details').hide();
@@ -52,9 +70,9 @@
                     $('#search').prop("disabled", true).addClass('disabled');
                     console.log(users);
                     users.forEach(addOption);
-                    $('#choose_user').append($("<option/>").attr("value", USER_TAG).attr('selected', true).text(USER_TAG));
+                    $('#choose_user').append($("<option/>").attr("value", localizedUser).attr('selected', true).text(localizedUser));
                     $('#choose_user').on('change', function() {
-                        if ($('#choose_user').val() != USER_TAG) {
+                        if ($('#choose_user').val() != localizedUser) {
                             $('#barcode').prop("disabled", false).removeClass('disabled');
                             $('#search').prop("disabled", false).removeClass('disabled');
                         } else {
@@ -180,9 +198,9 @@
         function deliveryDisabledCBSuccess(result) {
             console.log('disabledCB called');
             if (result.getCount() > 0) {
-                $('#search_results').text('This beneficiary is disabled');
+                $('#search_results').text(odkCommon.localizeText(locale, disabledBeneficiaryNotificationToken));
             } else {
-                $('#search_results').text('Scanned code not found in system');
+                $('#search_results').text(odkCommon.localizeText(locale, missingBeneficiaryNotificationToken));
 
             }
             odkCommon.removeFirstQueuedAction();
@@ -215,7 +233,7 @@
                 }
 
             } else {
-                $('#search_results').text('Barcode Unavailable');
+                $('#search_results').text(odkCommon.localizeText(locale, barcodeUnavailableToken));
                 odkCommon.removeFirstQueuedAction();
             }
         }
@@ -227,9 +245,9 @@
         function registrationVoucherCBSuccess(result) {
             voucherResultSet = result;
             if (voucherResultSet.getCount() == 0) {
-                $('#search_results').text('Barcode Available');
+                $('#search_results').text(odkCommon.localizeText(locale, barcodeAvailableToken));
             } else {
-                $('#search_results').text('Voucher Barcode Detected');
+                $('#search_results').text(odkCommon.localizeText(locale, voucherDetectedToken));
             }
             setTimeout(function() {
                 if (superUser) {
@@ -251,7 +269,6 @@
         }
 
         function proxyRowSuccess(result) {
-            console.log('made it!');
             odkData.changeAccessFilterOfRow('registration', 'HIDDEN', decodeURIComponent(util.getQueryParameter('user')), result.getRowId(0), setFilterSuccess, setFilterFailure);
         }
 
@@ -288,12 +305,10 @@
         function voucherBCheckCBSuccess(result) {
             console.log('voucherBCheckCBSuccess called');
             if (result.getCount() === 0) {
-                console.log("Count = 0");
                 odkData.query('entitlements', 'beneficiary_code = ?', [code],
                     null, null, null, null, null, null, true, voucherSelfCBSuccess, voucherSelfCBFailure);
             } else {
-                console.log("count > 0");
-                $('#search_results').text(code + " -- beneficiary with this code already detected in system: please contact Administrator");
+                $('#search_results').text(code + odkCommon.localizeText(locale, barcodeUnavailableToken));
             }
         }
 
@@ -438,7 +453,7 @@
                             [util.getQueryParameter('authorization_id')],
                             null, null, null, null, null, null, true, createOverrideCBSuccess, createOverrideCBFailure);
             } else {
-                $('#search_results').text('Scanned beneficiary already qualifies for this authorization');
+                $('#search_results').text(odkCommon.localizeText(locale, alreadyQualifiesOverrideToken));
             }
         }
 
@@ -447,7 +462,7 @@
         }
 
         function createOverrideCBSuccess(result) {
-            $('#search_results').text('Beneficiary Eligible for Entitlement Override');
+            $('#search_results').text(odkCommon.localizeText(locale, eligibleOverrideToken));
 
             var struct = {};
             struct['authorization_id'] = result.get('_id');
@@ -470,7 +485,7 @@
         var addDistCBSuccess = function(result) {
             console.log('authorizations_detail addDistCBSuccess');
             odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, result.getRowId(0), finalFilterSuccess, finalFilterFailure);
-            $('#search_results').text('Override Successfully Created');
+            $('#search_results').text(odkCommon.localizeText(locale, overrideCreationSuccessToken));
         };
 
         var addDistCBFailure = function(error) {
@@ -496,7 +511,7 @@
             </select>
             <button type="reg" id='barcode'>Scan Barcode</button>
             <div id="enter_code" style='text-align: center'><input id="code" style='margin: auto' style='font-size: 20px'></input></div>
-            <button id='search'>Enter</button>
+            <button id='search'></button>
             <p><span id="search_results"></span></p>
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>

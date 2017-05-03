@@ -19,7 +19,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Entitlements"
+          "title": {
+            "text": "Entitlements"
+          }
         },
         "_row_num": 5
       },
@@ -164,7 +166,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Entitlements"
+          "title": {
+            "text": "Entitlements"
+          }
         },
         "_row_num": 5
       },
@@ -178,8 +182,10 @@
         "_row_num": 5,
         "value": [
           {
-            "locale": {
-              "text": "default"
+            "display": {
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -193,31 +199,16 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Entitlements"
+          "title": {
+            "text": "Entitlements"
+          }
         },
         "_row_num": 5
       }
     },
     "choices": {},
     "table_specific_translations": {
-      "_tokens": {},
-      "_locales": {
-        "setting_name": "_locales",
-        "_row_num": 5,
-        "value": [
-          {
-            "locale": {
-              "text": "default"
-            },
-            "name": "default"
-          }
-        ]
-      },
-      "_default_locale": {
-        "setting_name": "_default_locale",
-        "_row_num": 5,
-        "value": "default"
-      }
+      "_tokens": {}
     },
     "queries": {},
     "calculates": {},
@@ -412,7 +403,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Entitlements"
+              "title": {
+                "text": "Entitlements"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -664,21 +657,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -688,6 +673,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -695,6 +704,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_owner",
+        "elementName": "_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -741,7 +758,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Entitlements\""
+        "_value": "{\"text\":\"Entitlements\"}"
       },
       {
         "_partition": "Table",
