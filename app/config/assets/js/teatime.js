@@ -4,8 +4,31 @@
 'use strict';
 /* global odkTables */
 
-function display() {
 
+// define a callback handler
+// this doesn't need to return anything.
+// we register it (at the bottom of the file)
+//
+// The framework will call this asynchronously 
+// when a result is available. It does not call it
+// if there is already a result available. You 
+// should call this once after you are initialized
+// to process any queued results.
+function doActionCallback() {
+   var action = odkCommon.viewFirstQueuedAction();
+   if ( action !== null ) {
+	  // process action -- be idempotent!
+	  // if processing fails, the action will still
+	  // be on the queue.
+	  odkCommon.removeFirstQueuedAction();
+	  return true;
+   } else { 
+	  return false;
+   }
+}
+
+function display() {
+	
     var body = $('#main');
     // Set the background to be a picture.
     body.css('background-image', 'url(img/teaBackground.jpg)');
@@ -15,6 +38,7 @@ function display() {
         'click',
         function() {
             odkTables.openTableToListView(
+				'teatime.js - openTableToListView -- Tea_houses',
                 'Tea_houses',
                 null,
                 null,
@@ -27,6 +51,7 @@ function display() {
         'click',
         function() {
             odkTables.openTableToListView(
+				'teatime.js - openTableToListView -- Tea_inventory',
                 'Tea_inventory',
                 null,
                 null,
@@ -39,6 +64,7 @@ function display() {
         'click',
         function() {
             odkTables.openTableToListView(
+				'teatime.js - openTableToListView -- Tea_types',
                 'Tea_types',
                 null,
                 null,
@@ -46,4 +72,14 @@ function display() {
         }
     );
 
+	// we are initialized -- 
+	// process any queued results.
+	doActionCallback();
+}
+
+// register the callback handler -- this might stomp on other handlers.
+// since we don't do anything with the outcome, don't register if someone 
+// else has.
+if ( !odkCommon.hasListener() ) {
+   odkCommon.registerListener(doActionCallback);
 }
