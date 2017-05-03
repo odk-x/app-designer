@@ -204,7 +204,7 @@
       },
       {
         "type": "text",
-        "name": "Owner",
+        "name": "Store_Owner",
         "display": {
           "prompt": {
             "text": "Owner"
@@ -284,16 +284,6 @@
         "setting_name": "instance_name",
         "value": "Name",
         "_row_num": 6
-      }
-    ],
-    "properties": [
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "colOrder",
-        "type": "array",
-        "value": "[\"House_id\",\"State\",\"Region\",\"District\",\"Neighborhood\",\"Specialty_Type_id\",\"Name\",\"Customers\",\"Visits\",\"Iced\",\"Hot\",\"WiFi\",\"Location_latitude\",\"Location_longitude\",\"Location_altitude\",\"Location_accuracy\",\"Date_Opened\",\"Owner\",\"Phone_Number\"]",
-        "_row_num": 2
       }
     ],
     "model": [
@@ -615,7 +605,7 @@
         "valuesList": "yesno",
         "elementKey": "WiFi"
       },
-      "Owner": {
+      "Store_Owner": {
         "_defn": [
           {
             "_row_num": 28,
@@ -623,7 +613,7 @@
           }
         ],
         "type": "string",
-        "elementKey": "Owner"
+        "elementKey": "Store_Owner"
       },
       "Phone_Number": {
         "_defn": [
@@ -886,7 +876,7 @@
           },
           {
             "type": "text",
-            "name": "Owner",
+            "name": "Store_Owner",
             "display": {
               "prompt": {
                 "text": "Owner"
@@ -1507,7 +1497,7 @@
         "elementSet": "data",
         "elementPath": "WiFi"
       },
-      "Owner": {
+      "Store_Owner": {
         "_defn": [
           {
             "_row_num": 28,
@@ -1515,10 +1505,10 @@
           }
         ],
         "type": "string",
-        "elementKey": "Owner",
-        "elementName": "Owner",
+        "elementKey": "Store_Owner",
+        "elementName": "Store_Owner",
         "elementSet": "data",
-        "elementPath": "Owner"
+        "elementPath": "Store_Owner"
       },
       "Phone_Number": {
         "_defn": [
@@ -1607,21 +1597,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -1631,6 +1613,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -1638,6 +1644,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_owner",
+        "elementName": "_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1699,13 +1713,6 @@
         "_key": "SurveyUtil.formId",
         "_type": "string",
         "_value": "Tea_houses_editable"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
-        "_key": "colOrder",
-        "_type": "array",
-        "_value": "[\"House_id\",\"State\",\"Region\",\"District\",\"Neighborhood\",\"Specialty_Type_id\",\"Name\",\"Customers\",\"Visits\",\"Iced\",\"Hot\",\"WiFi\",\"Location_latitude\",\"Location_longitude\",\"Location_altitude\",\"Location_accuracy\",\"Date_Opened\",\"Owner\",\"Phone_Number\"]"
       },
       {
         "_partition": "Table",
