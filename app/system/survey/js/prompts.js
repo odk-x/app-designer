@@ -916,8 +916,8 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var dispatchStruct = {promptPath: that.getPromptPath(), userAction: 'launchSurvey'};
 		
 		var outcome = odkSurvey.openInstance(dispatchStruct, 
-			opendatakit.getCurrentTableId(), 
-			opendatakit.getSettingValue('form_id'), 
+			that.getLinkedTableId(), 
+			that.getLinkedFormId(),
 			instanceId, openInstanceElementKeyToValueMap);
 		
         odkCommon.log('D','linked_table.openInstance - doAction: ' +  platInfo.container + " outcome is " + outcome);
@@ -1012,8 +1012,8 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         var dispatchStruct = {promptPath: that.getPromptPath(), userAction: 'launchSurvey'};
 		
 		var outcome = odkSurvey.addInstance(dispatchStruct, 
-			opendatakit.getCurrentTableId(), 
-			opendatakit.getSettingValue('form_id'), 
+			that.getLinkedTableId(), 
+			that.getLinkedFormId(),
 			newInstanceElementKeyToValueMap);
 
         odkCommon.log('D','linked_table.addInstance - doAction: ' +  platInfo.container + " outcome is " + outcome);
@@ -2283,7 +2283,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
 
         odkCommon.log('D',"prompts." + that.type + ".launch -- invoking doAction");
         var outcome = odkCommon.doAction( dispatchStruct, that.intentString,
-            ((that.intentParameters === null || that.intentParameters === undefined) ? null : that.intentParameters));
+            ((that.intentParameters === null || that.intentParameters === undefined) ? {} : that.intentParameters));
 
         odkCommon.log('D',"prompts." + that.type + ".launch - doAction: " +  platInfo.container + " outcome is " + outcome);
         if (outcome === null || outcome !== "OK") {
