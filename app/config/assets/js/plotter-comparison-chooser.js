@@ -94,7 +94,7 @@ var resumeFn = function(fidxStart) {
                     compareTypeQueryParam += '&plotId=' + encodeURIComponent(originPlotId);
                 }
 
-                odkTables.launchHTML('config/assets/plotter-comparison-reports.html' + compareTypeQueryParam);
+                odkTables.launchHTML('plotter-comparison-reports result', 'config/assets/plotter-comparison-reports.html' + compareTypeQueryParam);
             }
         });
     }

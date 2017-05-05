@@ -591,6 +591,10 @@
           }
         },
         "_row_num": 8
+      },
+      {
+        "setting_name": "framework_variant",
+        "_row_num": 9
       }
     ],
     "choices": [
@@ -1278,6 +1282,10 @@
           }
         },
         "_row_num": 8
+      },
+      "framework_variant": {
+        "setting_name": "framework_variant",
+        "_row_num": 9
       },
       "_locales": {
         "setting_name": "_locales",

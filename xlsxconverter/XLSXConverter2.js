@@ -27,9 +27,9 @@ var XLSXConverter = {};
           "settings",
           "properties",
           "translations", // prohibit this just in case...
-		  "table_specific_translations", // tableId == formId
-          "framework_translations",  // tableId == formId == 'framework'
-          "common_translations",  // tableId == formId == 'framework'
+		  "table_specific_translations", // tableId == formId != 'framework'
+          "framework_translations",  // tableId (== formId) == 'framework'
+          "common_translations",  // tableId (== formId) == 'framework'
           "choices",
           "queries",
           "calculates",
@@ -2763,17 +2763,7 @@ var XLSXConverter = {};
 			throw Error("The sheet name 'translations' is reserved and cannot be used.");
 		}
 		
-		if ( specification.settings.form_id.value !== specification.settings.table_id.value ) {
-			if ( 'framework_translations' in wbJson ) {
-				throw Error("The sheet name 'framework_translations' is only allowed in the framework form.");
-			}
-			if ( 'common_translations' in wbJson ) {
-				throw Error("The sheet name 'common_translations' is only allowed in the framework form.");
-			}
-			if ( 'table_specific_translations' in wbJson ) {
-				throw Error("The sheet name 'table_specific_translations' is only allowed when form_id === table_id.");
-			}
-		} else if ( specification.settings.form_id.value === 'framework' ) {
+		if ( specification.settings.table_id.value === 'framework' ) {
 			if ( 'table_specific_translations' in wbJson ) {
 				throw Error("The sheet name 'table_specific_translations' is not allowed in the framework form.");
 			}
@@ -2819,6 +2809,16 @@ var XLSXConverter = {};
 				specification.common_translations._tokens = processedCmnTranslations;
 				specification.common_translations._locales = specification.settings._locales;
 				specification.common_translations._default_locale = specification.settings._default_locale;
+			}
+		} else if ( specification.settings.form_id.value !== specification.settings.table_id.value ) {
+			if ( 'framework_translations' in wbJson ) {
+				throw Error("The sheet name 'framework_translations' is only allowed in the framework form.");
+			}
+			if ( 'common_translations' in wbJson ) {
+				throw Error("The sheet name 'common_translations' is only allowed in the framework form.");
+			}
+			if ( 'table_specific_translations' in wbJson ) {
+				throw Error("The sheet name 'table_specific_translations' is only allowed when form_id === table_id.");
 			}
 		} else {
 			if ( 'framework_translations' in wbJson ) {

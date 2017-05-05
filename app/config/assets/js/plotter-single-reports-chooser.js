@@ -89,7 +89,7 @@ var resumeFn = function(fidxStart) {
                 // we'll pass null as the relative path to use the default file
                 var rowIdQueryParam = '?' + rowIdStr + '=' + encodeURIComponent(rowId);
 
-                odkTables.launchHTML('config/assets/plotter-single-reports.html' + rowIdQueryParam);
+                odkTables.launchHTML('plotter single reports result', 'config/assets/plotter-single-reports.html' + rowIdQueryParam);
             }
         });
     }

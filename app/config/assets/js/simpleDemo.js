@@ -9,7 +9,7 @@ function display() {
             'click',
             function() {
                 // Note we're relying on geotagger's list view to be set.
-                odkTables.openTable(
+                odkTables.openTable('launch geotagger result',
                     'geotagger',
                     null,
                     null);

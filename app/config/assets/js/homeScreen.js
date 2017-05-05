@@ -15,7 +15,7 @@ function display() {
     viewHousesButton.on(
         'click',
         function() {
-            odkTables.openTableToListView('Tea_houses', null, null, null);
+            odkTables.openTableToListView('openTableToListView tea houses result','Tea_houses', null, null, null);
         }
     );
     $('#wrapper').append(viewHousesButton);
@@ -25,7 +25,7 @@ function display() {
     viewTeasButton.on(
         'click',
         function() {
-            odkTables.openTable('Tea_inventory', null, null);
+            odkTables.openTable('openTableToListView tea inventory result', 'Tea_inventory', null, null);
         }
     );
     $('#wrapper').append(viewTeasButton);
@@ -35,7 +35,7 @@ function display() {
     viewTeaTypesButton.on(
         'click',
         function() {
-            odkTables.openTable('Tea_types', null, null);
+            odkTables.openTable('openTableToListView tea types result', 'Tea_types', null, null);
         }
     );
     $('#wrapper').append(viewTeaTypesButton);

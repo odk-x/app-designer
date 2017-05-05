@@ -47,15 +47,15 @@
         "_row_num": 7
       },
       {
-        "branch_label": "geotagger",
+        "branch_label": "geoweather",
         "_row_num": 8
       },
       {
-        "url": "'?' + odkSurvey.getHashString('geotagger')",
+        "url": "'?' + odkSurvey.getHashString('geoweather')",
         "type": "external_link",
         "display": {
           "prompt": {
-            "text": "Open form"
+            "text": "Open Geo-weather form"
           }
         },
         "_row_num": 9
@@ -65,15 +65,15 @@
         "_row_num": 10
       },
       {
-        "branch_label": "visit",
+        "branch_label": "geoweather_conditions",
         "_row_num": 11
       },
       {
-        "url": "'?' + odkSurvey.getHashString('visit')",
+        "url": "'?' + odkSurvey.getHashString('geoweather_conditions')",
         "type": "external_link",
         "display": {
           "prompt": {
-            "text": "Open form"
+            "text": "Open Geo-weather conditions form"
           }
         },
         "_row_num": 12
@@ -81,78 +81,6 @@
       {
         "clause": "exit section",
         "_row_num": 13
-      },
-      {
-        "branch_label": "plot",
-        "_row_num": 14
-      },
-      {
-        "url": "'?' + odkSurvey.getHashString('plot')",
-        "type": "external_link",
-        "display": {
-          "prompt": {
-            "text": "Open form"
-          }
-        },
-        "_row_num": 15
-      },
-      {
-        "clause": "exit section",
-        "_row_num": 16
-      },
-      {
-        "branch_label": "Tea_houses",
-        "_row_num": 17
-      },
-      {
-        "url": "'?' + odkSurvey.getHashString('Tea_houses')",
-        "type": "external_link",
-        "display": {
-          "prompt": {
-            "text": "Open form"
-          }
-        },
-        "_row_num": 18
-      },
-      {
-        "clause": "exit section",
-        "_row_num": 19
-      },
-      {
-        "branch_label": "Tea_inventory",
-        "_row_num": 20
-      },
-      {
-        "url": "'?' + odkSurvey.getHashString('Tea_inventory')",
-        "type": "external_link",
-        "display": {
-          "prompt": {
-            "text": "Open form"
-          }
-        },
-        "_row_num": 21
-      },
-      {
-        "clause": "exit section",
-        "_row_num": 22
-      },
-      {
-        "branch_label": "Tea_types",
-        "_row_num": 23
-      },
-      {
-        "url": "'?' + odkSurvey.getHashString('Tea_types')",
-        "type": "external_link",
-        "display": {
-          "prompt": {
-            "text": "Open form"
-          }
-        },
-        "_row_num": 24
-      },
-      {
-        "clause": "exit section",
-        "_row_num": 25
       }
     ],
     "settings": [
@@ -177,12 +105,35 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Common Javascript Framework for tablesdemo"
+            "text": "Common Javascript Framework for Geo-weather example"
           }
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
         "showContents": false,
         "_row_num": 5
+      },
+      {
+        "setting_name": "framework_variant",
+        "value": "rowlevelaccessdemo",
+        "_row_num": 6
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "geoweather",
+        "display": {
+          "text": "Geo-weather form"
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "geoweather_conditions",
+        "display": {
+          "text": "Geo-weather conditions form"
+        },
+        "_row_num": 3
       }
     ],
     "framework_translations": [
@@ -576,56 +527,6 @@
         },
         "_row_num": 57
       }
-    ],
-    "choices": [
-      {
-        "choice_list_name": "test_forms",
-        "data_value": "geotagger",
-        "display": {
-          "text": "Geotagger"
-        },
-        "_row_num": 2
-      },
-      {
-        "choice_list_name": "test_forms",
-        "data_value": "visit",
-        "display": {
-          "text": "Visit"
-        },
-        "_row_num": 3
-      },
-      {
-        "choice_list_name": "test_forms",
-        "data_value": "plot",
-        "display": {
-          "text": "Plot"
-        },
-        "_row_num": 4
-      },
-      {
-        "choice_list_name": "test_forms",
-        "data_value": "Tea_houses",
-        "display": {
-          "text": "Tea Houses"
-        },
-        "_row_num": 5
-      },
-      {
-        "choice_list_name": "test_forms",
-        "data_value": "Tea_inventory",
-        "display": {
-          "text": "Tea Inventory"
-        },
-        "_row_num": 6
-      },
-      {
-        "choice_list_name": "test_forms",
-        "data_value": "Tea_types",
-        "display": {
-          "text": "Tea Types"
-        },
-        "_row_num": 7
-      }
     ]
   },
   "specification": {
@@ -666,12 +567,17 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Common Javascript Framework for tablesdemo"
+            "text": "Common Javascript Framework for Geo-weather example"
           }
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
         "showContents": false,
         "_row_num": 5
+      },
+      "framework_variant": {
+        "setting_name": "framework_variant",
+        "value": "rowlevelaccessdemo",
+        "_row_num": 6
       },
       "_locales": {
         "setting_name": "_locales",
@@ -696,7 +602,7 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Common Javascript Framework for tablesdemo"
+            "text": "Common Javascript Framework for Geo-weather example"
           }
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
@@ -708,51 +614,19 @@
       "test_forms": [
         {
           "choice_list_name": "test_forms",
-          "data_value": "geotagger",
+          "data_value": "geoweather",
           "display": {
-            "text": "Geotagger"
+            "text": "Geo-weather form"
           },
           "_row_num": 2
         },
         {
           "choice_list_name": "test_forms",
-          "data_value": "visit",
+          "data_value": "geoweather_conditions",
           "display": {
-            "text": "Visit"
+            "text": "Geo-weather conditions form"
           },
           "_row_num": 3
-        },
-        {
-          "choice_list_name": "test_forms",
-          "data_value": "plot",
-          "display": {
-            "text": "Plot"
-          },
-          "_row_num": 4
-        },
-        {
-          "choice_list_name": "test_forms",
-          "data_value": "Tea_houses",
-          "display": {
-            "text": "Tea Houses"
-          },
-          "_row_num": 5
-        },
-        {
-          "choice_list_name": "test_forms",
-          "data_value": "Tea_inventory",
-          "display": {
-            "text": "Tea Inventory"
-          },
-          "_row_num": 6
-        },
-        {
-          "choice_list_name": "test_forms",
-          "data_value": "Tea_types",
-          "display": {
-            "text": "Tea Types"
-          },
-          "_row_num": 7
         }
       ]
     },
@@ -1199,7 +1073,7 @@
             "promptIdx": 0,
             "display": {
               "title": {
-                "text": "Common Javascript Framework for tablesdemo"
+                "text": "Common Javascript Framework for Geo-weather example"
               }
             },
             "_branch_label_enclosing_screen": "survey/0"
@@ -1317,11 +1191,11 @@
             "promptIdx": 1
           },
           {
-            "url": "'?' + odkSurvey.getHashString('geotagger')",
+            "url": "'?' + odkSurvey.getHashString('geoweather')",
             "type": "external_link",
             "display": {
               "prompt": {
-                "text": "Open form"
+                "text": "Open Geo-weather form"
               }
             },
             "_row_num": 9,
@@ -1332,11 +1206,11 @@
             "promptIdx": 2
           },
           {
-            "url": "'?' + odkSurvey.getHashString('visit')",
+            "url": "'?' + odkSurvey.getHashString('geoweather_conditions')",
             "type": "external_link",
             "display": {
               "prompt": {
-                "text": "Open form"
+                "text": "Open Geo-weather conditions form"
               }
             },
             "_row_num": 12,
@@ -1347,72 +1221,12 @@
             "promptIdx": 3
           },
           {
-            "url": "'?' + odkSurvey.getHashString('plot')",
-            "type": "external_link",
-            "display": {
-              "prompt": {
-                "text": "Open form"
-              }
-            },
-            "_row_num": 15,
-            "__rowNum__": 14,
-            "_token_type": "prompt",
-            "_type": "external_link",
-            "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 4
-          },
-          {
-            "url": "'?' + odkSurvey.getHashString('Tea_houses')",
-            "type": "external_link",
-            "display": {
-              "prompt": {
-                "text": "Open form"
-              }
-            },
-            "_row_num": 18,
-            "__rowNum__": 17,
-            "_token_type": "prompt",
-            "_type": "external_link",
-            "_branch_label_enclosing_screen": "survey/_screen18",
-            "promptIdx": 5
-          },
-          {
-            "url": "'?' + odkSurvey.getHashString('Tea_inventory')",
-            "type": "external_link",
-            "display": {
-              "prompt": {
-                "text": "Open form"
-              }
-            },
-            "_row_num": 21,
-            "__rowNum__": 20,
-            "_token_type": "prompt",
-            "_type": "external_link",
-            "_branch_label_enclosing_screen": "survey/_screen21",
-            "promptIdx": 6
-          },
-          {
-            "url": "'?' + odkSurvey.getHashString('Tea_types')",
-            "type": "external_link",
-            "display": {
-              "prompt": {
-                "text": "Open form"
-              }
-            },
-            "_row_num": 24,
-            "__rowNum__": 23,
-            "_token_type": "prompt",
-            "_type": "external_link",
-            "_branch_label_enclosing_screen": "survey/_screen24",
-            "promptIdx": 7
-          },
-          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 26,
-            "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 8
+            "_row_num": 14,
+            "_branch_label_enclosing_screen": "survey/_screen14",
+            "promptIdx": 4
           }
         ],
         "validation_tag_map": {
@@ -1488,77 +1302,25 @@
             "operationIdx": 9
           },
           {
-            "_row_num": 15,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 14,
             "operationIdx": 10
           },
           {
-            "clause": "exit section",
-            "_row_num": 16,
-            "__rowNum__": 15,
-            "_token_type": "exit_section",
-            "operationIdx": 11
-          },
-          {
-            "_row_num": 18,
+            "_row_num": 14,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 12
-          },
-          {
-            "clause": "exit section",
-            "_row_num": 19,
-            "__rowNum__": 18,
-            "_token_type": "exit_section",
-            "operationIdx": 13
-          },
-          {
-            "_row_num": 21,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 14
-          },
-          {
-            "clause": "exit section",
-            "_row_num": 22,
-            "__rowNum__": 21,
-            "_token_type": "exit_section",
-            "operationIdx": 15
-          },
-          {
-            "_row_num": 24,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 16
-          },
-          {
-            "clause": "exit section",
-            "_row_num": 25,
-            "__rowNum__": 24,
-            "_token_type": "exit_section",
-            "operationIdx": 17
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 26,
-            "operationIdx": 18
-          },
-          {
-            "_row_num": 26,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 19
+            "operationIdx": 11
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 26,
-            "operationIdx": 20
+            "_row_num": 14,
+            "operationIdx": 12
           }
         ],
         "branch_label_map": {
@@ -1567,20 +1329,12 @@
           "_else4": 4,
           "_screen5": 4,
           "_endif6": 5,
-          "geotagger": 6,
+          "geoweather": 6,
           "_screen9": 6,
-          "visit": 8,
+          "geoweather_conditions": 8,
           "_screen12": 8,
-          "plot": 10,
-          "_screen15": 10,
-          "Tea_houses": 12,
-          "_screen18": 12,
-          "Tea_inventory": 14,
-          "_screen21": 14,
-          "Tea_types": 16,
-          "_screen24": 16,
-          "_contents": 19,
-          "_screen26": 19
+          "_contents": 11,
+          "_screen14": 11
         }
       }
     },
@@ -1612,7 +1366,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"Common Javascript Framework for tablesdemo\"}"
+        "_value": "{\"text\":\"Common Javascript Framework for Geo-weather example\"}"
       }
     ]
   }

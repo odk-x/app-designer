@@ -193,7 +193,7 @@ function postFormDef() {
     var tableId = util.getTableIdFromFormDef(formDefJson);
     var formId = util.getFormIdFromFormDef(formDefJson);
     var canWriteFile =
-      formId === util.getFrameworkFormId() ||
+      tableId === util.getFrameworkFormId() ||
       (tableId !== null && formId !== null);
     if (!canWriteFile) {
       console.log('form id or table id could not be found, not posting file.');
@@ -214,9 +214,9 @@ function postFormDef() {
 		shouldWriteTranslationsJs = true;
 	  }
 
-      if (formId === util.getFrameworkFormId()) {
+      if (tableId === util.getFrameworkFormId()) {
         // a special case for the framework file, which is reserved.
-        path = util.getRelativePathToFrameworkFormDef();
+        path = util.getRelativePathToFrameworkFormDef(formDefJson);
       } else {
         // we're dealing with a formdef that we're assuming must be for a
         // particular table, if we're going to be saving it automatically.
@@ -273,7 +273,7 @@ function postFormDef() {
 			// Get the framework_translations
 			var trx = formDefJson.specification.framework_translations;
 
-			var trxPath = 'app/config/assets/framework/frameworkTranslations.js';
+			var trxPath = util.getRelativePathToFrameworkTranslationsJs(formDefJson);
 			var trxJs = util.createTranslationsJsFromDataTableModel(tableId, trx);
 			util.postFile(trxPath, trxJs, function(err, response, body) {
 				if (err || response.statusCode !== 200) {
@@ -286,7 +286,7 @@ function postFormDef() {
 			// Get the common_translations
 			var trx = formDefJson.specification.common_translations;
 
-			var ctrxPath = 'app/config/assets/commonTranslations.js';
+			var ctrxPath = util.getRelativePathToCommonTranslationsJs(formDefJson);
 			var trxJs = util.createTranslationsJsFromDataTableModel(null, trx);
 			util.postFile(ctrxPath, trxJs, function(err, response, body) {
 				if (err || response.statusCode !== 200) {

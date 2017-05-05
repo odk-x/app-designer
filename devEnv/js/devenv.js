@@ -1735,15 +1735,43 @@ exports.rootpath = 'http://localhost:8000';
 /**
  * Get the path to the framework's formDef.json file. Returns:
  *
- * app/config/assets/framework/forms/framework/formDef.json
+ * app/config/assets/framework/forms/framework[.variant]/formDef.json
  *
  * Includes the file name and does not begin with a slash.
  */
-exports.getRelativePathToFrameworkFormDef = function() {
+exports.getRelativePathToFrameworkFormDef = function(formDefJson) {
 
-    var result = 'app/config/assets/framework/forms/framework/formDef.json';
+    var result = 'app/config/assets/framework/forms/framework' +
+		getFrameworkVariantFromFormDef(formDefJson) + '/formDef.json';
     return result;
+};
 
+/**
+ * Get the path to the frameworkTranslations file. Returns:
+ *
+ * app/config/assets/framework/frameworkTranslations[.variant].js
+ *
+ * Includes the file name and does not begin with a slash.
+ */
+exports.getRelativePathToFrameworkTranslationsJs = function(formDefJson) {
+
+    var result = 'app/config/assets/framework/frameworkTranslations' +
+		getFrameworkVariantFromFormDef(formDefJson) + '.js';
+    return result;
+};
+
+/**
+ * Get the path to the commonTranslations file. Returns:
+ *
+ * app/config/assets/commonTranslations[.variant].js
+ *
+ * Includes the file name and does not begin with a slash.
+ */
+exports.getRelativePathToCommonTranslationsJs = function(formDefJson) {
+
+    var result = 'app/config/assets/commonTranslations' +
+		getFrameworkVariantFromFormDef(formDefJson) + '.js';
+    return result;
 };
 
 /**
@@ -1854,6 +1882,23 @@ var getFormIdFromFormDef = exports.getFormIdFromFormDef = function(formDef) {
 
     var result = getValueOfSetting(formDef, 'form_id');
     return result;
+
+};
+
+/**
+ * Get the framework_variant from the formDef json object and prepend ".". The variant is used
+ * within the app-designer to manage the various independent demos that might 
+ * otherwise collide in the naming of the common translations, framework translations
+ * and framework form definitions. It is inserted into the filename to differentiate
+ * among the independent demos.
+ */
+var getFrameworkVariantFromFormDef = exports.getFrameworkVariantFromFormDef = function(formDef) {
+
+    var result = getValueOfSetting(formDef, 'framework_variant');
+	if ( result === undefined || result === null ) {
+		return "";
+	}
+    return "." + result;
 
 };
 

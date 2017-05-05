@@ -78,14 +78,14 @@ function writeOutTrx(formDefStr) {
 			if ( tableId === 'framework' ) {
 				// Get framework_translations
 				var trx = formDefJson.specification.framework_translations;
-				var trxPath = 'app/config/assets/framework/frameworkTranslations.js';
+				var trxPath = util.getRelativePathToFrameworkTranslationsJs(formDefJson);
 
 				var trxJs = util.createTranslationsJsFromDataTableModel(tableId, trx);
 				fs.writeFileSync(trxPath, trxJs);
 
 				// Get common_translations
 				var trx = formDefJson.specification.common_translations;
-				var trxPath = 'app/config/assets/commonTranslations.js';
+				var trxPath = util.getRelativePathToCommonTranslationsJs(formDefJson);
 
 				var trxJs = util.createTranslationsJsFromDataTableModel(null, trx);
 				fs.writeFileSync(trxPath, trxJs);

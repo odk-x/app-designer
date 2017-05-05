@@ -9,7 +9,7 @@ function display() {
             'click',
             function() {
                 // Note we're relying on geotagger's list view to be set.
-                odkTables.openTable(
+                odkTables.openTable('geoweather open table result',
                     'geoweather',
                     null,
                     null);
@@ -20,7 +20,7 @@ function display() {
             'click',
             function() {
                 // Note we're relying on geotagger's list view to be set.
-                odkTables.openTable(
+                odkTables.openTable('geotagger open table result',
                     'geotagger',
                     null,
                     null);
@@ -31,7 +31,7 @@ function display() {
             'click',
             function() {
                 // Note we're relying on geotagger's list view to be set.
-                odkTables.openTable(
+                odkTables.openTable('geoweather-conditions open table result',
                     'geoweather_conditions',
                     null,
                     null);
@@ -41,7 +41,7 @@ function display() {
 	$('#alter-button').on(
 			'click',
 			function() {
-                odkTables.launchHTML('config/assets/changeAccessFilters.html');
+                odkTables.launchHTML('launch change filters result', 'config/assets/changeAccessFilters.html');
             });
     document.getElementById("wrapper").appendChild(followUp);    
 }

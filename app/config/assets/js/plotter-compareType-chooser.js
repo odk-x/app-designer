@@ -20,7 +20,7 @@ function display() {
         function() {
             compareTypeStr = 'plant_type';
             queryParam = makeQueryParam(compareTypeStr);
-            odkTables.launchHTML('config/assets/plotter-comparison-chooser.html' + queryParam);
+            odkTables.launchHTML('plotter-comparison-chooser result', 'config/assets/plotter-comparison-chooser.html' + queryParam);
         }
     );
 
@@ -30,7 +30,7 @@ function display() {
         function() {
             compareTypeStr = 'soil';
             queryParam = makeQueryParam(compareTypeStr);
-            odkTables.launchHTML('config/assets/plotter-comparison-chooser.html' + queryParam);
+            odkTables.launchHTML('plotter-comparison-chooser result', 'config/assets/plotter-comparison-chooser.html' + queryParam);
         }
     );
 
@@ -40,7 +40,7 @@ function display() {
         function() {
             var originPlotId = util.getQueryParameter('plotId');
             queryParam = '?plotId=' + encodeURIComponent(originPlotId);
-            odkTables.launchHTML('config/assets/plotter-comparison-histogram.html' + queryParam);
+            odkTables.launchHTML('plotter-comparison-histogram result', 'config/assets/plotter-comparison-histogram.html' + queryParam);
         }
     );
 

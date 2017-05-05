@@ -14,7 +14,7 @@ function display() {
     viewPlotsButton.on(
         'click',
         function() {
-            odkTables.openTable(
+            odkTables.openTable('openTable plot result',
                 'plot',
                 null,
                 null);
@@ -25,7 +25,7 @@ function display() {
     viewVisitsButton.on(
         'click',
         function() {
-            odkTables.openTableToListView(
+            odkTables.openTableToListView('openTableToListView visit list result',
                 'visit',
                 null,
                 null,
@@ -37,7 +37,7 @@ function display() {
     viewReportsButton.on(
         'click',
         function() {
-            odkTables.launchHTML('config/assets/plotter-reports.html');
+            odkTables.launchHTML('plotter-reports result', 'config/assets/plotter-reports.html');
         }
     );
 

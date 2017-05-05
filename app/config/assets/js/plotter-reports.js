@@ -14,7 +14,7 @@ function display() {
     viewOverallButton.on(
         'click',
         function() {
-            odkTables.launchHTML('config/assets/plotter-overall-reports.html');
+            odkTables.launchHTML('plotter-overall-reports result', 'config/assets/plotter-overall-reports.html');
         }
     );
 
@@ -22,7 +22,7 @@ function display() {
     viewSingleButton.on(
         'click',
         function() {
-            odkTables.launchHTML('config/assets/plotter-single-reports-chooser.html');
+            odkTables.launchHTML('plotter-single-reports-chooser result', 'config/assets/plotter-single-reports-chooser.html');
         }
     );
 
@@ -30,7 +30,7 @@ function display() {
     viewComparisonButton.on(
         'click',
         function() {
-            odkTables.launchHTML('config/assets/plotter-compareType-chooser.html');
+            odkTables.launchHTML('plotter-compareType-chooser result', 'config/assets/plotter-compareType-chooser.html');
         }
     );
 

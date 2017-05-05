@@ -70,7 +70,7 @@ function startTest() {
         all1 = tempAllInOne;
     }
 
-    odkTables.openTableToListView(tableId, null, null,
+    odkTables.openTableToListView('index-large-dataset result', tableId, null, null,
         'config/tables/' + encodeURIComponent(tableId) + '/html/largeDataSet_list.html?offset=' + encodeURIComponent(offset)
         + '&limit=' + encodeURIComponent(limit) 
         + '&count=' + encodeURIComponent(rowCnt)
