@@ -7,6 +7,8 @@
         <script type="text/javascript" src="commonTranslations.js"></script>
         <script type="text/javascript" src="libs/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="libs/jquery-migrate-3.0.0.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript">
 
@@ -18,7 +20,7 @@
             newClient.setAttribute("id", "button1");
             newClient.innerHTML = "Screen Female Client";
             newClient.onclick = function() {
-                odkTables.addRowWithSurvey(
+                odkTables.addRowWithSurvey(null,
                     'femaleClients',
                     'screenClient',
                     null,
@@ -32,7 +34,7 @@
             followUp.setAttribute("id", "button2");
             followUp.innerHTML = "Follow Up with Existing Client";
             followUp.onclick = function() {
-                odkTables.openTableToListView(
+                odkTables.openTableToListView(null,
                     'femaleClients',
                     null,
                     null,
