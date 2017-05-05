@@ -1,4 +1,3 @@
-/* globals odkCommon, odkSurveyStateManagement */
 /**
  * This is a random collection of methods that don't quite belong anywhere.
  *
@@ -8,6 +7,7 @@
  */
 
 define(['underscore', 'XRegExp', 'databaseUtils'],function(_,XRegExp,databaseUtils) {
+/* globals odkCommon, odkSurveyStateManagement */
 'use strict';
 verifyLoad('opendatakit',
     ['underscore', 'XRegExp', 'databaseUtils'],
@@ -96,11 +96,13 @@ return {
 
         // Get data table model info for the element_key specified
         for (dbKey in this.mdl.dataTableModel) {
-            def = this.mdl.dataTableModel[dbKey];
-            if (def.elementKey === elementKey) {
-                elementKeyDef = def;
-                break;
-            }
+			if ( this.mdl.dataTableModel.hasOwnProperty(dbKey) ) {
+				def = this.mdl.dataTableModel[dbKey];
+				if (def.elementKey === elementKey) {
+					elementKeyDef = def;
+					break;
+				}
+			}
         }
 
         if (elementKey === null) {
@@ -108,7 +110,7 @@ return {
         }
 
         // Get the database value
-        var value = databaseUtils.getElementPathValue(this.mdl.data, elementKey)
+        var value = databaseUtils.getElementPathValue(this.mdl.data, elementKey);
 
         // Call the toSerializeFunction
         var finalValue = databaseUtils.toSerializationFromElementType(elementKeyDef, value, true);

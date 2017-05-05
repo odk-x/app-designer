@@ -1,4 +1,3 @@
-/* global odkCommon */
 /**
  * Main entry point: buildSurvey
  *
@@ -10,6 +9,7 @@
  */
 define(['controller', 'opendatakit', 'jquery', 'screenTypes', 'promptTypes', 'formulaFunctions', 'underscore', 'screens', 'prompts'],
 function(controller,   opendatakit,   $,        screenTypes,   promptTypes,   formulaFunctions,   _,           _screens,  _prompts) {
+/* global odkCommon */
 verifyLoad('builder',
     ['controller', 'opendatakit', 'jquery', 'screenTypes', 'promptTypes', 'formulaFunctions', 'underscore', 'screens', 'prompts'],
     [controller,   opendatakit,    $,        screenTypes,   promptTypes,   formulaFunctions,   _,           _screens,  _prompts]);

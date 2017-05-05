@@ -1,4 +1,3 @@
-/* global odkCommon */
 /**
  * The odkSurveyStateManagement object is something we use to mock out some functionality for
  * testing in the browser. See the `window.odkSurveyStateManagement` definition below for more
@@ -11,6 +10,9 @@ It defines the interface that ODK Survey or other container apps
 must implement to work with the javascript library.
 It will be replaced by one injected by Android Java code.
 */
+(function() {
+'use strict';
+/* global odkCommon */
 window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
     showAlerts: false,
     refId: null,
@@ -313,3 +315,4 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         if ( this.showAlerts ) alert("notify container FAILED ignore all changes.");
     }
 };
+})();

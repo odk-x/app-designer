@@ -1,5 +1,5 @@
-/* global odkCommon */
 define(['mockImpl', 'mockUtils', 'mockSchema', 'mockDbif', 'jquery'],function(mockImpl, mockUtils,  mockSchema, mockDbif, $) {
+/* global odkCommon */
 'use strict';
 verifyLoad('mockImpl',
     ['mockImpl', 'mockUtils', 'mockSchema', 'mockDbif', 'jquery'],
@@ -218,10 +218,12 @@ var odkDataIf = {
             //
             def.orderedColumns = {};
             for ( var f in formDef.specification.dataTableModel ) {
-                var entry = formDef.specification.dataTableModel[f];
-                if ( !entry.isSessionVariable ) {
-                    def.orderedColumns[f] = entry;
-                }
+				if ( formDef.specification.dataTableModel.hasOwnProperty(f) ) {
+					var entry = formDef.specification.dataTableModel[f];
+					if ( !entry.isSessionVariable ) {
+						def.orderedColumns[f] = entry;
+					}
+				}
             }
 
             // and we need to fold in the admin columns to construct the data table model...
@@ -317,19 +319,21 @@ var odkDataIf = {
             var colDefs = [];
 
             for ( var dbColumnName in def.dataTableModel ) {
-                // the XLSXconverter already handles expanding complex types
-                // such as geopoint into their underlying storage representation.
-                var jsonDefn = def.dataTableModel[dbColumnName];
+				if ( def.dataTableModel.hasOwnProperty(dbColumnName) ) {
+					// the XLSXconverter already handles expanding complex types
+					// such as geopoint into their underlying storage representation.
+					var jsonDefn = def.dataTableModel[dbColumnName];
 
-                if ( jsonDefn.elementSet === 'data' && !jsonDefn.isSessionVariable ) {
-                    colDefs.push( {
-                        _table_id: tableId,
-                        _element_key: dbColumnName,
-                        _element_name: jsonDefn.elementName,
-                        _element_type: (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType),
-                        _list_child_element_keys : ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? JSON.stringify([]) : JSON.stringify(jsonDefn.listChildElementKeys))
-                    } );
-                }
+					if ( jsonDefn.elementSet === 'data' && !jsonDefn.isSessionVariable ) {
+						colDefs.push( {
+							_table_id: tableId,
+							_element_key: dbColumnName,
+							_element_name: jsonDefn.elementName,
+							_element_type: (jsonDefn.elementType === undefined || jsonDefn.elementType === null ? jsonDefn.type : jsonDefn.elementType),
+							_list_child_element_keys : ((jsonDefn.listChildElementKeys === undefined || jsonDefn.listChildElementKeys === null) ? JSON.stringify([]) : JSON.stringify(jsonDefn.listChildElementKeys))
+						} );
+					}
+				}
             }
             // create the data table
             ctxt.sqlStatement = mockSchema.createTableStmt(tableId, def.dataTableModel);
@@ -430,26 +434,30 @@ var odkDataIf = {
                             // initialize the elementNameMap
                             j = 0;
                             for ( f in row ) {
-                                elementNameMap[f] = j;
-                                ++j;
+								if ( row.hasOwnProperty(f) ) {
+									elementNameMap[f] = j;
+									++j;
+								}
                             }
                         }
                         rowArray = [];
                         for ( f in row ) {
-                            mdlf = f;
-                            if ( f.lastIndexOf('.') != -1 ) {
-                                mdlf = f.substring(f.lastIndexOf('.')+1);
-                            }
-                            defElement = tableDef.dataTableModel[mdlf];
-                            if ( defElement === null || defElement === undefined ) {
-                                dbValue = row[f];
-                                // don't do any conversion
-                                rowArray.push(dbValue);
-                            } else if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
-                                dbValue = row[f];
-                                value = mockUtils.fromDatabaseToOdkDataInterfaceElementType( defElement, dbValue );
-                                rowArray.push(value);
-                            }
+							if ( row.hasOwnProperty(f) ) {
+								mdlf = f;
+								if ( f.lastIndexOf('.') != -1 ) {
+									mdlf = f.substring(f.lastIndexOf('.')+1);
+								}
+								defElement = tableDef.dataTableModel[mdlf];
+								if ( defElement === null || defElement === undefined ) {
+									dbValue = row[f];
+									// don't do any conversion
+									rowArray.push(dbValue);
+								} else if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
+									dbValue = row[f];
+									value = mockUtils.fromDatabaseToOdkDataInterfaceElementType( defElement, dbValue );
+									rowArray.push(value);
+								}
+							}
                         }
                         resultRows.push(rowArray);
                     }

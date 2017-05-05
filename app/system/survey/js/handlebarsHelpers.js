@@ -4,9 +4,9 @@
  * These are invoked via {{helperFunction arg1}} or {{helperFunction arg1 arg2}}
  * within the handelbars templates.
  */
- /* global odkCommon */
 define(['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars','jquery'],
 function(database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial,                     $) {
+/* global odkCommon */
 'use strict';
 verifyLoad('handlebarsHelpers',
     ['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars','jquery'],

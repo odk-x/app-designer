@@ -1,4 +1,3 @@
-/* global odkCommon */
 /**
  * Common functions accessible from the user's Javascript eval environment
  * (for use within their formulas).
@@ -6,6 +5,7 @@
  //TODO: These functions need unit testing.
 define(['opendatakit','database','jquery','underscore'],
 function(opendatakit,  database,  $,       _) {
+    /* global odkCommon */
     verifyLoad('formulaFunctions',
         ['opendatakit','database','jquery','underscore'],
         [opendatakit,  database,   $,      _]);
@@ -14,6 +14,7 @@ function(opendatakit,  database,  $,       _) {
         calculates: {},
         opendatakit: opendatakit,
 		getCurrentLocale: function() {
+            'use strict';
 			var tableId = opendatakit.getCurrentTableId();
 			var instanceId = opendatakit.getCurrentInstanceId();
 			var locale;

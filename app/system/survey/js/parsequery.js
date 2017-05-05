@@ -1,4 +1,3 @@
-/* globals odkCommon, odkSurveyStateManagement */
 /**
  circular dependency upon: controller, builder (set via initialize)
 
@@ -10,6 +9,7 @@
 */
 define(['opendatakit','database','jquery'],
 function(opendatakit,  database,  $) {
+/* globals odkCommon, odkSurveyStateManagement */
 'use strict';
 verifyLoad('parsequery',
     ['opendatakit','database','jquery'],

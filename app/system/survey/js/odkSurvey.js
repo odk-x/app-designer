@@ -1,17 +1,15 @@
-//'use strict';
-// don't warn about unused parameters, since all of these methods are stubs
-/* jshint unused: vars */
-/* global odkCommon */
-
 /**
- * This represents the OdkTables object handed to the android web view in the
- * Tables code.
+ * This represents the odkSurvey actions that can be performed from, e.g., odkTables
+ * webviews if, e.g., you want to capture a barcode, etc.
  *
  * It should provide all the functions available to the javascript at this
  * version of the code. This does not currently have a dual Java injection. 
  * All calls are mapped to odkCommon.doAction() interactions.
  */
     
+(function() {
+'use strict';
+/* global odkCommon */
 window.odkSurvey = {
     initialScreenPath: "initial/0",
 
@@ -342,4 +340,4 @@ window.odkSurvey = {
 			intentArgs );
 	}
 };
-
+})();

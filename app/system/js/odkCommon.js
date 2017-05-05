@@ -1,11 +1,51 @@
-/* global odkCommonIf, odkCommon */
 /**
- * The odkCommonIf injected interface will be used in conjunction with this class to
- * create closures for callback functions to be invoked once a response is available
- * from the Java side.
+ * The odkCommonIf injected interface is used in conjunction with
+ * this class to access information about the webkit (e.g., platformInfo)
+ * and perform localizations. 
+ *
+ * The Java side can asynchronously inform the JS side of state
+ * changing actions. The two actions currently supported are:
+ *  (1) results of a doAction() request when dispatchStruct (1st arg) 
+ *      is not null.
+ *
+ *  (2) Java-initiated actions (as #-prefixed strings).
+ *
+ * Because these can occur at any time, the JS code should
+ * register a listener that will be invoked when an action is
+ * available. i.e., the Java code can direct a change in
+ * the JS code without it being initiated by the JS side.
+ *
+ * Actions are queued and resilient to failure.
+ * they are fetched via
+ *      odkCommon.viewFirstQueuedAction().
+ * And they are removed from the queue via
+ *      odkCommon.removeFirstQueuedAction();
+ *
+ * Users of odkCommon should register their own handler by
+ * calling:
+ *
+ * odkCommon.registerListener(
+ *            function() {
+ *               var action = odkCommon.viewFirstQueuedAction();
+ *               if ( action !== null ) {
+ *                   // process action -- be idempotent!
+ *                   // if processing fails, the action will still
+ *                   // be on the queue.
+ *                   odkCommon.removeFirstQueuedAction();
+ *               }
+ *            });
+ *
+ * Users of odkCommon should invoke this listener function 
+ * once, themselves, after registration, to ensure that any
+ * queued action is processed. They should do this after all
+ * initialization is complete.
  */
+
+ (function() {
 'use strict';
-/* jshint unused: vars */
+/* global odkCommonIf, odkCommon */
+/** NOTE: global require -- for odkCommonIf stub ONLY */
+
 window.odkCommon = {
     _listener: null,
     /**
@@ -870,11 +910,17 @@ window.odkCommon = {
     *      odkCommon.removeFirstQueuedAction();
     */
    doAction: function(dispatchStruct, action, intentObject) {
+	  // stringify the intent object if present
+	  var intentObjectJSONString = null;
+	  if ( intentObject !== null && intentObject !== undefined ) {
+		  intentObjectJSONString = JSON.stringify(intentObject);
+	  }
+	  // and stringify the dispatchStruct if present
 	  if ( dispatchStruct === null || dispatchStruct === undefined ) {
 		// will not notify of completion
-		return odkCommonIf.doAction(null, action, JSON.stringify(intentObject));
+		return odkCommonIf.doAction(null, action, intentObjectJSONString);
 	  } else {
-		return odkCommonIf.doAction(JSON.stringify(dispatchStruct), action, JSON.stringify(intentObject));
+		return odkCommonIf.doAction(JSON.stringify(dispatchStruct), action, intentObjectJSONString);
 	  }
    },
 
@@ -1401,4 +1447,4 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
     };
 }
 
-
+ })();

@@ -1,12 +1,10 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-/* jshint unused: vars */
-/* global odkCommon */
-/* global odkSurvey */
 define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','datetimepicker'],
 function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh) {
 'use strict';
+/* global odkCommon, odkSurvey */
 verifyLoad('prompts',
     ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','datetimepicker'],
     [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.datetimepicker] );

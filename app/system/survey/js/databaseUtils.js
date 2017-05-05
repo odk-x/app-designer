@@ -1,9 +1,9 @@
-/* globals odkCommon */
 /**
  * This file contains utilities that operate on the data as represented in the JSON
  * and as serialized into and out of the database or session storage.
  */
 define(['XRegExp','jquery'], function(XRegExp,$) {
+/* globals odkCommon */
 'use strict';
 verifyLoad('databaseUtils',
     ['XRegExp','jquery'],
@@ -774,16 +774,18 @@ return {
         var elementPathValue;
         var de;
         for (dbKey in updates) {
-            elementPathValue = updates[dbKey];
-            de = model.dataTableModel[dbKey];
-            if (that.isUnitOfRetention(de)) {
-                elementPath = de.elementPath || elementPathValue.elementPath;
-                if ( de.elementSet === 'instanceMetadata' ) {
-                    that._reconstructElementPathValueUpdate(elementPath || dbKey, de, elementPathValue.value, model.instanceMetadata );
-                } else {
-                    that._reconstructElementPathValueUpdate(elementPath, de, elementPathValue.value, model.data );
-                }
-            }
+			if ( updates.hasOwnProperty(dbKey) ) {
+				elementPathValue = updates[dbKey];
+				de = model.dataTableModel[dbKey];
+				if (that.isUnitOfRetention(de)) {
+					elementPath = de.elementPath || elementPathValue.elementPath;
+					if ( de.elementSet === 'instanceMetadata' ) {
+						that._reconstructElementPathValueUpdate(elementPath || dbKey, de, elementPathValue.value, model.instanceMetadata );
+					} else {
+						that._reconstructElementPathValueUpdate(elementPath, de, elementPathValue.value, model.data );
+					}
+				}
+			}
         }
     },
 
@@ -928,16 +930,18 @@ return {
                 var found = false;
                 var f;
                 for (f in linkedModel.dataTableModel) {
-                    var defElement = linkedModel.dataTableModel[f];
-                    var elementPath = defElement.elementPath;
-                    if ( elementPath === null || elementPath === undefined ) {
-                        elementPath = f;
-                    }
-                    if ( elementPath === e ) {
-                        remapped = remapped + ' "' + f + '"';
-                        found = true;
-                        break;
-                    }
+					if ( linkedModel.dataTableModel.hasOwnProperty(f) ) {
+						var defElement = linkedModel.dataTableModel[f];
+						var elementPath = defElement.elementPath;
+						if ( elementPath === null || elementPath === undefined ) {
+							elementPath = f;
+						}
+						if ( elementPath === e ) {
+							remapped = remapped + ' "' + f + '"';
+							found = true;
+							break;
+						}
+					}
                 }
                 if ( found === false ) {
                     alert('databaseUtils.convertSelectionString: unrecognized elementPath: ' + e );
@@ -966,16 +970,18 @@ return {
                 var found = false;
                 var f;
                 for (f in linkedModel.dataTableModel) {
-                    var defElement = linkedModel.dataTableModel[f];
-                    var elementPath = defElement.elementPath;
-                    if ( elementPath === null || elementPath === undefined ) {
-                        elementPath = f;
-                    }
-                    if ( elementPath === e ) {
-                        remapped = remapped + ' "' + f + '"';
-                        found = true;
-                        break;
-                    }
+					if ( linkedModel.dataTableModel.hasOwnProperty(f) ) {
+						var defElement = linkedModel.dataTableModel[f];
+						var elementPath = defElement.elementPath;
+						if ( elementPath === null || elementPath === undefined ) {
+							elementPath = f;
+						}
+						if ( elementPath === e ) {
+							remapped = remapped + ' "' + f + '"';
+							found = true;
+							break;
+						}
+					}
                 }
                 if ( found === false ) {
                     alert('databaseUtils.convertOrderByString: unrecognized elementPath: ' + e );
@@ -1012,51 +1018,54 @@ return {
         var sessionVariableChanges = {};
 
         for (f in dataTableModel) {
-            defElement = dataTableModel[f];
-            if ( that.isUnitOfRetention(defElement) ) {
-                var elementPath = defElement.elementPath;
-                // don't allow working with elementKey primitives if not manipulating metadata
-                if (( elementPath === undefined || elementPath === null ) &&
-                      defElement.elementSet === 'instanceMetadata') {
-                    elementPath = f;
-                }
-                // TODO: get kvElement for this elementPath
-                elementPathPair = that._getElementPathPairFromKvMap(kvMap, elementPath);
-                if ( elementPathPair !== null && elementPathPair !== undefined ) {
-                    kvElement = elementPathPair.element;
-                    // track that we matched the keyname...
-                    processSet[elementPathPair.elementPath] = true;
-                    // ensure that undefined are treated as null...
-                    if (kvElement.value === undefined || kvElement.value === null) {
-                        kvElement.value = null;
-                    }
-                    changeElement = {"elementPath": elementPath, "value": kvElement.value};
-                    // the odkData layer works directly on the value
-                    // but session variables need the storage value...
-                    if ( !defElement.isSessionVariable ) {
-                        if ( instanceId !== null && instanceId !== undefined ) {
-							// force the change or only add it if it would actually change the value
-							if ( forceUpdate || accumulatedChanges[f] !== undefined ||
-							     that._reconstructModelDataFromElementPathDetectActualValueRequiringUpdate(model, f, changeElement) ) {
-								accumulatedChanges[f] = changeElement;
+			if ( dataTableModel.hasOwnProperty(f) ) {
+				defElement = dataTableModel[f];
+				if ( that.isUnitOfRetention(defElement) ) {
+					var elementPath = defElement.elementPath;
+					// don't allow working with elementKey primitives if not manipulating metadata
+					if (( elementPath === undefined || elementPath === null ) &&
+						  defElement.elementSet === 'instanceMetadata') {
+						elementPath = f;
+					}
+					// TODO: get kvElement for this elementPath
+					elementPathPair = that._getElementPathPairFromKvMap(kvMap, elementPath);
+					if ( elementPathPair !== null && elementPathPair !== undefined ) {
+						kvElement = elementPathPair.element;
+						// track that we matched the keyname...
+						processSet[elementPathPair.elementPath] = true;
+						// ensure that undefined are treated as null...
+						if (kvElement.value === undefined || kvElement.value === null) {
+							kvElement.value = null;
+						}
+						changeElement = {"elementPath": elementPath, "value": kvElement.value};
+						// the odkData layer works directly on the value
+						// but session variables need the storage value...
+						if ( !defElement.isSessionVariable ) {
+							if ( instanceId !== null && instanceId !== undefined ) {
+								// force the change or only add it if it would actually change the value
+								if ( forceUpdate || accumulatedChanges[f] !== undefined ||
+									 that._reconstructModelDataFromElementPathDetectActualValueRequiringUpdate(model, f, changeElement) ) {
+									accumulatedChanges[f] = changeElement;
+								}
 							}
-                        }
-                    } else {
-                        v = that.toSerializationFromElementType(defElement, kvElement.value, true);
-                        odkCommon.setSessionVariable(elementPath, v);
-                        sessionVariableChanges[f] = changeElement;
-                    }
-                }
-            }
-        }
-        // apply the session variable changes immediately to the model.
-        that.reconstructModelDataFromElementPathValueUpdates(model, sessionVariableChanges);
+						} else {
+							v = that.toSerializationFromElementType(defElement, kvElement.value, true);
+							odkCommon.setSessionVariable(elementPath, v);
+							sessionVariableChanges[f] = changeElement;
+						}
+					}
+				}
+			}
+		}
 
-        for ( f in kvMap ) {
-            if ( processSet[f] !== true ) {
-                console.error("_accumulateUnitOfRetentionUpdates: kvMap contains unrecognized database column " + dbTableName + "." + f );
-            }
-        }
+		// apply the session variable changes immediately to the model.
+		that.reconstructModelDataFromElementPathValueUpdates(model, sessionVariableChanges);
+
+		for ( f in kvMap ) {
+			if ( processSet[f] !== true ) {
+				console.error("_accumulateUnitOfRetentionUpdates: kvMap contains unrecognized database column " + dbTableName + "." + f );
+			}
+		}
     },
     /**
      * Does not depend upon any global values.

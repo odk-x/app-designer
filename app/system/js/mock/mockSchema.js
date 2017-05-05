@@ -1,5 +1,5 @@
-/* global odkCommon */
 define(['mockUtils'],function(mockUtils) {
+/* global odkCommon */
 'use strict';
 verifyLoad('mockSchema',
     ['mockUtils'],
@@ -24,8 +24,11 @@ dataTablePredefinedColumns: {
                      _row_etag: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
                      _sync_state: { type: 'string', isNotNullable: true, 'default': 'new_row', elementSet: 'instanceMetadata' },
                      _conflict_type: { type: 'integer', isNotNullable: false, elementSet: 'instanceMetadata' },
-                     _filter_type: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
-                     _filter_value: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _default_access: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _owner: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _group_read_only: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _group_modify: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _group_privileged: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
                      _form_id: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
                      _locale: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
                      _savepoint_type: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
@@ -58,26 +61,28 @@ createTableStmt: function( dbTableName, dataTableModel, tableConstraint ) {
         var createTableCmd = 'CREATE TABLE IF NOT EXISTS "' + dbTableName + '"(';
         var comma = '';
         for ( var dbColumnName in dataTableModel ) {
-            var f = dataTableModel[dbColumnName];
-            if ( mockUtils.isUnitOfRetention(f) && !f.isSessionVariable ) {
-                createTableCmd += comma + dbColumnName + " ";
-                comma = ',';
-                if ( f.type === "string" ) {
-                    createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else if ( f.type === "integer" ) {
-                    createTableCmd += "INTEGER" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else if ( f.type === "number" ) {
-                    createTableCmd += "REAL" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else if ( f.type === "boolean" ) {
-                    createTableCmd += "INTEGER" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else if ( f.type === "object" ) {
-                    createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else if ( f.type === "array" ) {
-                    createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
-                } else {
-                    throw new Error("unhandled type: " + f.type);
-                }
-            }
+			if ( dataTableModel.hasOwnProperty(dbColumnName) ) {
+				var f = dataTableModel[dbColumnName];
+				if ( mockUtils.isUnitOfRetention(f) && !f.isSessionVariable ) {
+					createTableCmd += comma + dbColumnName + " ";
+					comma = ',';
+					if ( f.type === "string" ) {
+						createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
+					} else if ( f.type === "integer" ) {
+						createTableCmd += "INTEGER" + (f.isNotNullable ? " NOT NULL" : " NULL");
+					} else if ( f.type === "number" ) {
+						createTableCmd += "REAL" + (f.isNotNullable ? " NOT NULL" : " NULL");
+					} else if ( f.type === "boolean" ) {
+						createTableCmd += "INTEGER" + (f.isNotNullable ? " NOT NULL" : " NULL");
+					} else if ( f.type === "object" ) {
+						createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
+					} else if ( f.type === "array" ) {
+						createTableCmd += "TEXT" + (f.isNotNullable ? " NOT NULL" : " NULL");
+					} else {
+						throw new Error("unhandled type: " + f.type);
+					}
+				}
+			}
         }
         if ( tableConstraint !== null &&  tableConstraint !== undefined ) {
             createTableCmd += comma + tableConstraint + " ";
@@ -179,62 +184,68 @@ addChangesDataTableStmt:function(tableDef, changes, rowId) {
     changes._id = rowId;
     var stmt = 'insert into "' + dbTableName + '" (';
     for ( f in dataTableModel ) {
-        defElement = dataTableModel[f];
-        if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
-            stmt += comma;
-            comma = ', ';
-            stmt += '"' + f + '"';
-        }
+		if ( dataTableModel.hasOwnProperty(f) ) {
+			defElement = dataTableModel[f];
+			if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
+				stmt += comma;
+				comma = ', ';
+				stmt += '"' + f + '"';
+			}
+		}
     }
     stmt += ") values (";
     comma = '';
     for (f in dataTableModel) {
-        defElement = dataTableModel[f];
-        if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
-            stmt += comma;
-            comma = ', ';
-            var elementPath = defElement.elementPath;
-            // don't allow working with elementKey primitives if not manipulating metadata
-            if (( elementPath === undefined || elementPath === null ) &&
-                  defElement.elementSet === 'instanceMetadata') {
-                elementPath = f;
-            }
-            // TODO: get kvElement for this elementPath
-            elementPathPair = mockUtils.getElementPathPairFromChanges(changes, elementPath);
-            if ( elementPathPair !== null && elementPathPair !== undefined ) {
-                v = elementPathPair.value;
-                // track that we matched the keyname...
-                processSet[elementPathPair.elementPath] = true;
-                if (v === undefined || v === null) {
-                    stmt += "null";
-                } else {
-                    v = mockUtils.toDatabaseFromOdkDataInterfaceElementType(defElement, v);
-                    stmt += "?";
-                    bindings.push(v);
-                }
-            } else if ( f === "_savepoint_timestamp" ) {
-                stmt += "?";
-                bindings.push(nowNano);
-            } else if (f === "_savepoint_creator") {
-                stmt += "?";
-                bindings.push(activeUser);
-            } else if ( f === "_sync_state" ) {
-                stmt += "?";
-                bindings.push('new_row');
-            } else if ( f === "_form_id" ) {
-                stmt += "?";
-                bindings.push(formId);
-            } else {
-                stmt += "null";
-            }
-        }
+		if ( dataTableModel.hasOwnProperty(f) ) {
+			defElement = dataTableModel[f];
+			if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
+				stmt += comma;
+				comma = ', ';
+				var elementPath = defElement.elementPath;
+				// don't allow working with elementKey primitives if not manipulating metadata
+				if (( elementPath === undefined || elementPath === null ) &&
+					  defElement.elementSet === 'instanceMetadata') {
+					elementPath = f;
+				}
+				// TODO: get kvElement for this elementPath
+				elementPathPair = mockUtils.getElementPathPairFromChanges(changes, elementPath);
+				if ( elementPathPair !== null && elementPathPair !== undefined ) {
+					v = elementPathPair.value;
+					// track that we matched the keyname...
+					processSet[elementPathPair.elementPath] = true;
+					if (v === undefined || v === null) {
+						stmt += "null";
+					} else {
+						v = mockUtils.toDatabaseFromOdkDataInterfaceElementType(defElement, v);
+						stmt += "?";
+						bindings.push(v);
+					}
+				} else if ( f === "_savepoint_timestamp" ) {
+					stmt += "?";
+					bindings.push(nowNano);
+				} else if (f === "_savepoint_creator") {
+					stmt += "?";
+					bindings.push(activeUser);
+				} else if ( f === "_sync_state" ) {
+					stmt += "?";
+					bindings.push('new_row');
+				} else if ( f === "_form_id" ) {
+					stmt += "?";
+					bindings.push(formId);
+				} else {
+					stmt += "null";
+				}
+			}
+		}
     }
     stmt += ');';
 
     for ( f in changes ) {
-        if ( processSet[f] !== true && f.charAt(0) !== '_') {
-            console.error("insertNewKeyValueMapDataTableStmt: changes contains unrecognized database column " + dbTableName + "." + f );
-        }
+		if ( changes.hasOwnProperty(f) ) {
+			if ( processSet[f] !== true && f.charAt(0) !== '_') {
+				console.error("insertNewKeyValueMapDataTableStmt: changes contains unrecognized database column " + dbTableName + "." + f );
+			}
+		}
     }
     console.log('addChangesDataTableStmt: ' + stmt  + '\n bindings: ' + JSON.stringify(bindings));
     return {
@@ -259,43 +270,45 @@ updateChangesDataTableStmt:function(tableDef, changes, rowId) {
 
     var stmt = 'update "' + dbTableName + '" set ';
     for (f in dataTableModel) {
-        defElement = dataTableModel[f];
-        if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
-            // don't allow working with elementKey primitives if not manipulating metadata
-            if (( elementPath === undefined || elementPath === null ) &&
-                  defElement.elementSet === 'instanceMetadata') {
-                elementPath = f;
-            }
-            stmt += comma;
-            stmt += f + " = ";
-            comma = ', ';
-            var elementPath = defElement.elementPath;
-            // TODO: get kvElement for this elementPath
-            elementPathPair = mockUtils.getElementPathPairFromChanges(changes, elementPath);
-            if ( elementPathPair !== null && elementPathPair !== undefined ) {
-                v = elementPathPair.value;
-                // track that we matched the keyname...
-                processSet[elementPathPair.elementPath] = true;
-                if (v === undefined || v === null) {
-                    stmt += "null";
-                } else {
-                    v = mockUtils.toDatabaseFromOdkDataInterfaceElementType(defElement, v);
-                    stmt += "?";
-                    bindings.push(v);
-                }
-            } else if ( f === "_savepoint_timestamp" ) {
-                stmt += "?";
-                bindings.push(nowNano);
-            } else if (f === "_savepoint_creator") {
-                stmt += "?";
-                bindings.push(activeUser);
-            } else if ( f === "_sync_state" ) {
-                stmt += "case when _sync_state='new_row' then 'new_row' else 'changed' end";
-            } else if ( f === "_form_id" ) {
-                stmt += "?";
-                bindings.push(formId);
-            }
-        }
+		if ( dataTableModel.hasOwnProperty(f) ) {
+			defElement = dataTableModel[f];
+			if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
+				// don't allow working with elementKey primitives if not manipulating metadata
+				if (( elementPath === undefined || elementPath === null ) &&
+					  defElement.elementSet === 'instanceMetadata') {
+					elementPath = f;
+				}
+				stmt += comma;
+				stmt += f + " = ";
+				comma = ', ';
+				var elementPath = defElement.elementPath;
+				// TODO: get kvElement for this elementPath
+				elementPathPair = mockUtils.getElementPathPairFromChanges(changes, elementPath);
+				if ( elementPathPair !== null && elementPathPair !== undefined ) {
+					v = elementPathPair.value;
+					// track that we matched the keyname...
+					processSet[elementPathPair.elementPath] = true;
+					if (v === undefined || v === null) {
+						stmt += "null";
+					} else {
+						v = mockUtils.toDatabaseFromOdkDataInterfaceElementType(defElement, v);
+						stmt += "?";
+						bindings.push(v);
+					}
+				} else if ( f === "_savepoint_timestamp" ) {
+					stmt += "?";
+					bindings.push(nowNano);
+				} else if (f === "_savepoint_creator") {
+					stmt += "?";
+					bindings.push(activeUser);
+				} else if ( f === "_sync_state" ) {
+					stmt += "case when _sync_state='new_row' then 'new_row' else 'changed' end";
+				} else if ( f === "_form_id" ) {
+					stmt += "?";
+					bindings.push(formId);
+				}
+			}
+		}
     }
     stmt += ' where _id = ? and _savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=? )';
     bindings.push(rowId);
@@ -329,56 +342,60 @@ insertCheckpointChangesDataTableStmt:function(tableDef, changes, rowId) {
     changes._id = rowId;
     var stmt = 'insert into "' + dbTableName + '" (';
     for ( f in dataTableModel ) {
-        defElement = dataTableModel[f];
-        if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
-            stmt += comma;
-            comma = ', ';
-            stmt += '"' + f + '"';
-        }
+		if ( dataTableModel.hasOwnProperty(f) ) {
+			defElement = dataTableModel[f];
+			if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
+				stmt += comma;
+				comma = ', ';
+				stmt += '"' + f + '"';
+			}
+		}
     }
     stmt += ") select ";
     comma = '';
     for (f in dataTableModel) {
-        defElement = dataTableModel[f];
-        if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
-            stmt += comma;
-            comma = ', ';
-            var elementPath = defElement.elementPath;
-            // don't allow working with elementKey primitives if not manipulating metadata
-            if (( elementPath === undefined || elementPath === null ) &&
-                  defElement.elementSet === 'instanceMetadata') {
-                elementPath = f;
-            }
-            // TODO: get kvElement for this elementPath
-            elementPathPair = mockUtils.getElementPathPairFromChanges(changes, elementPath);
-            if ( elementPathPair !== null && elementPathPair !== undefined ) {
-                v = elementPathPair.value;
-                // track that we matched the keyname...
-                processSet[elementPathPair.elementPath] = true;
-                if (v === undefined || v === null) {
-                    stmt += "null";
-                } else {
-                    v = mockUtils.toDatabaseFromOdkDataInterfaceElementType(defElement, v);
-                    stmt += "?";
-                    bindings.push(v);
-                }
-            } else if (f === "_savepoint_timestamp") {
-                stmt += "?";
-                bindings.push(nowNano);
-            } else if (f === "_savepoint_creator") {
-                stmt += "?";
-                bindings.push(activeUser);
-            } else if ( f === "_form_id" ) {
-                stmt += "?";
-                bindings.push(formId);
-            } else if ( f === "_savepoint_type" ) { // if not specified explicitly
-                stmt += "null";
-            } else if ( f === "_sync_state" ) {
-                stmt += "case when _sync_state='new_row' then 'new_row' else 'changed' end";
-            } else {
-                stmt += '"' + f + '"';
-            }
-        }
+		if ( dataTableModel.hasOwnProperty(f) ) {
+			defElement = dataTableModel[f];
+			if ( mockUtils.isUnitOfRetention(defElement) && !defElement.isSessionVariable ) {
+				stmt += comma;
+				comma = ', ';
+				var elementPath = defElement.elementPath;
+				// don't allow working with elementKey primitives if not manipulating metadata
+				if (( elementPath === undefined || elementPath === null ) &&
+					  defElement.elementSet === 'instanceMetadata') {
+					elementPath = f;
+				}
+				// TODO: get kvElement for this elementPath
+				elementPathPair = mockUtils.getElementPathPairFromChanges(changes, elementPath);
+				if ( elementPathPair !== null && elementPathPair !== undefined ) {
+					v = elementPathPair.value;
+					// track that we matched the keyname...
+					processSet[elementPathPair.elementPath] = true;
+					if (v === undefined || v === null) {
+						stmt += "null";
+					} else {
+						v = mockUtils.toDatabaseFromOdkDataInterfaceElementType(defElement, v);
+						stmt += "?";
+						bindings.push(v);
+					}
+				} else if (f === "_savepoint_timestamp") {
+					stmt += "?";
+					bindings.push(nowNano);
+				} else if (f === "_savepoint_creator") {
+					stmt += "?";
+					bindings.push(activeUser);
+				} else if ( f === "_form_id" ) {
+					stmt += "?";
+					bindings.push(formId);
+				} else if ( f === "_savepoint_type" ) { // if not specified explicitly
+					stmt += "null";
+				} else if ( f === "_sync_state" ) {
+					stmt += "case when _sync_state='new_row' then 'new_row' else 'changed' end";
+				} else {
+					stmt += '"' + f + '"';
+				}
+			}
+		}
     }
     stmt += ' from "' + dbTableName + '" as T where _id=? and ' +
         'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' + dbTableName + '" as V where V._id=T._id)';

@@ -3,8 +3,9 @@
  * create closures for callback functions to be invoked once a response is available
  * from the Java side.
  */
+ 
+ (function() {
 'use strict';
-/* jshint unused: vars */
 
 window.odkData = {
     _requestMap: [],
@@ -320,12 +321,8 @@ window.odkData = {
         };
 
         /**
-         * Returns ture if num is a number, else false.
+         * Returns ture if num is an integer, else false.
          */
-        var isNumber = function(num) {
-            return (typeof num === 'number');
-        };
-
         var isInteger = function(i) {
             return (typeof i === 'number' && Math.floor(i) === i);
         };
@@ -362,7 +359,7 @@ window.odkData = {
             // convert the elementPath to a unique elementKey (column name in database)
             // assumes the elementPath is a unit of retention in the database.
             getElementKey:function(elementPath) {
-                var that = this;
+                // var that = this;
                 var hackPath = elementPath.replace(/\./g, "_");
                 return hackPath;
             },
@@ -545,8 +542,10 @@ window.odkData = {
                 var i;
                 var key;
                 for ( key in elementKeyMap ) {
-                    i = elementKeyMap[key];
-                    columns[i] = key;
+					if (elementKeyMap.hasOwnProperty(key)) {
+						i = elementKeyMap[key];
+						columns[i] = key;
+					}
                 }
                 return columns;
             },
@@ -830,6 +829,7 @@ window.odkData = {
             },
 
             getTableDisplayName:function(tableId) {
+                var that = this;
                 var retVal = tableId;
 
                 if (that.resultObj === null || that.resultObj === undefined) {
@@ -860,7 +860,7 @@ window.odkData = {
         
             },
 
-            getIsTableLocked:function(tableId) {
+            getIsTableLocked:function() {
                 var that = this;
                 var retVal = false;
 
@@ -895,6 +895,8 @@ window.odkData = {
 
             getCanCreateRow:function() {
                 var that = this;
+                var retVal = false;
+				
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return retVal;
                 }
@@ -983,3 +985,4 @@ window.odkData = {
         return pub;
     }
 };
+ })();

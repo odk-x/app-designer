@@ -1,8 +1,3 @@
-//'use strict';
-// don't warn about unused parameters, since all of these methods are stubs
-/* jshint unused: vars */
-/* global odkCommon */
-
 /**
  * This represents the OdkTables object handed to the android web view in the
  * Tables code.
@@ -12,6 +7,10 @@
  * All calls are mapped to odkCommon.doAction() interactions.
  */
     
+(function() {
+'use strict';
+/* global odkCommon */
+
 window.odkTables = {
 
     /**
@@ -398,3 +397,4 @@ window.odkTables = {
     }
 };
 
+})();

@@ -1,4 +1,3 @@
-/* global odkCommon, odkSurveyStateManagement */
 /**
  * Manages the execution state and screen history of the overall survey,
  * including form validation, saving and marking the form as 'complete'.
@@ -13,6 +12,7 @@
  */
 define(['screenManager','opendatakit','database', 'parsequery', 'jquery','underscore' ],
 function(ScreenManager,  opendatakit,  database,   parsequery,  $,        _ ) {
+/* global odkCommon, odkSurveyStateManagement */
 'use strict';
 verifyLoad('controller',
     ['screenManager','opendatakit','database', 'parsequery', 'jquery','underscore' ],
