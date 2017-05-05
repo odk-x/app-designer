@@ -1,3 +1,5 @@
+/* global $, odkTables, odkData, util */
+/* exported init */
 "use strict";
 
 // Default values provided is user does
@@ -8,7 +10,7 @@ var tableId = 'large_dataset';
 var rowCnt = 0;
 var os = 'default';
 var device = 'default';
-var db = 'default'
+var db = 'default';
 var services = 'default';
 var all1 = 'default';
 
@@ -21,7 +23,7 @@ var init = function() {
 
     // Find out the number of rows that are in the table
     odkData.arbitraryQuery(tableId, "select count(*) from " + tableId, null, null, null, successCB, failureCB);
-}
+};
 
 function successCB(result) {
 
@@ -70,13 +72,14 @@ function startTest() {
         all1 = tempAllInOne;
     }
 
-    odkTables.openTableToListView('index-large-dataset result', tableId, null, null,
-        'config/tables/' + encodeURIComponent(tableId) + '/html/largeDataSet_list.html?offset=' + encodeURIComponent(offset)
-        + '&limit=' + encodeURIComponent(limit) 
-        + '&count=' + encodeURIComponent(rowCnt)
-        + '&os=' + encodeURIComponent(os)
-        + '&device=' + encodeURIComponent(device)
-        + '&db=' + encodeURIComponent(db)
-        + '&services=' + encodeURIComponent(services)
-        + '&all1=' + encodeURIComponent(all1));
+    odkTables.openTableToListView(null, tableId, null, null,
+        'config/tables/' + encodeURIComponent(tableId) + 
+		'/html/largeDataSet_list.html?offset=' + encodeURIComponent(offset) +
+        '&limit=' + encodeURIComponent(limit) +
+        '&count=' + encodeURIComponent(rowCnt) +
+        '&os=' + encodeURIComponent(os) +
+        '&device=' + encodeURIComponent(device) +
+        '&db=' + encodeURIComponent(db) +
+        '&services=' + encodeURIComponent(services) +
+        '&all1=' + encodeURIComponent(all1));
 }

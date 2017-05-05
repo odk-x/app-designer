@@ -1,25 +1,8 @@
+/* global $, odkTables, odkCommon */
+/* exported display */
 "use strict";
 
 var currentTab = 0;
-
-// define a callback handler
-// this doesn't need to return anything.
-// we register it (at the bottom of the file)
-//
-// The framework will call this asynchronously 
-// when a result is available. It does not call it
-// if there is already a result available. You 
-// should call this once after you are initialized
-// to process any queued results.
-function doActionCallback() {
-   var action = odkCommon.viewFirstQueuedAction();
-   if ( action !== null ) {
-	  // process action -- be idempotent!
-	  // if processing fails, the action will still
-	  // be on the queue.
-	  odkCommon.removeFirstQueuedAction();
-   }
-}
 
 function display() { 
     updateForTab(currentTab);
@@ -49,27 +32,23 @@ function display() {
             'click',
             function() {
                 if (currentTab === 0) {
-                    odkTables.launchHTML('launch result teatime.html', 'config/assets/teatime.html');
+                    odkTables.launchHTML(null, 'config/assets/teatime.html');
                 } else if (currentTab === 1) {
-                    odkTables.launchHTML('launch result hope.html', 'config/assets/hope.html');
+                    odkTables.launchHTML(null, 'config/assets/hope.html');
                 } else if (currentTab === 2) {
-                    odkTables.launchHTML('launch result plotter.html', 'config/assets/plotter.html');
+                    odkTables.launchHTML(null, 'config/assets/plotter.html');
                 } else if (currentTab === 3) {
                     // Note we're relying on geotagger's list view to be set.
-                    odkTables.openTable('openTable result geotagger',
+                    odkTables.openTable(null,
                         'geotagger',
                         null,
                         null);
                 } else if (currentTab === 4) {
-                    odkTables.launchHTML('launch result jgiIndex.html', 'config/assets/jgiIndex.html');
+                    odkTables.launchHTML(null, 'config/assets/jgiIndex.html');
                 } else {
                     console.log('trouble, unrecognized tab');
                 }
             });
-
-	// we are initialized -- 
-	// process any queued results.
-	doActionCallback();
 }
 
 function updateForTab(tab) {
@@ -120,10 +99,3 @@ function updateForTab(tab) {
     // Make the tab highlighted as active.
     tabItem.addClass('active');
 }
-
-// register the callback handler
-if ( !odkCommon.hasListener() ) {
-   odkCommon.registerListener(doActionCallback);
-}
-
-

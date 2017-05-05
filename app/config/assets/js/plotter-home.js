@@ -1,9 +1,10 @@
+'use strict';
+/* global $, odkTables */
+/* exported display */
+
 /**
  * Responsible for rendering the home screen.
  */
-'use strict';
-/* global odkTables */
-
 function display() {
 
     var body = $('#main');
@@ -14,7 +15,7 @@ function display() {
     viewPlotsButton.on(
         'click',
         function() {
-            odkTables.openTable('openTable plot result',
+            odkTables.openTable(null,
                 'plot',
                 null,
                 null);
@@ -25,7 +26,7 @@ function display() {
     viewVisitsButton.on(
         'click',
         function() {
-            odkTables.openTableToListView('openTableToListView visit list result',
+            odkTables.openTableToListView(null,
                 'visit',
                 null,
                 null,
@@ -37,7 +38,7 @@ function display() {
     viewReportsButton.on(
         'click',
         function() {
-            odkTables.launchHTML('plotter-reports result', 'config/assets/plotter-reports.html');
+            odkTables.launchHTML(null, 'config/assets/plotter-reports.html');
         }
     );
 

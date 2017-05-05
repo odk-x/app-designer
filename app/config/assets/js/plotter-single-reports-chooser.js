@@ -1,9 +1,10 @@
+/* global $, odkTables, odkData */
+/* exported resumeFn */
+'use strict';
+
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, odkTables */
-'use strict';
-
 // Use chunked list view for larger tables: We want to chunk the displays so
 // that there is less load time.
 var plotResultSet = {};   
@@ -71,7 +72,7 @@ var resumeFn = function(fidxStart) {
         // This add a click handler on the wrapper ul that will handle all of
         // the clicks on its children.
         $('#list').click(function(e) {
-            var tableId = plotResultSet.getTableId();
+            // var tableId = plotResultSet.getTableId();
             // We have set the rowId while as the li id. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
@@ -89,7 +90,7 @@ var resumeFn = function(fidxStart) {
                 // we'll pass null as the relative path to use the default file
                 var rowIdQueryParam = '?' + rowIdStr + '=' + encodeURIComponent(rowId);
 
-                odkTables.launchHTML('plotter single reports result', 'config/assets/plotter-single-reports.html' + rowIdQueryParam);
+                odkTables.launchHTML(null, 'config/assets/plotter-single-reports.html' + rowIdQueryParam);
             }
         });
     }

@@ -1,14 +1,15 @@
-/* global odkTables */
+/* global $, odkTables, odkCommon */
+/* exported display */
 'use strict';
 
 function display() {
     $('#begin-follow-button').on('click', function() {
-        odkTables.launchHTML('newFollow launch result', 'config/assets/newFollow.html');
+        odkTables.launchHTML(null, 'config/assets/newFollow.html');
     });
 
     $('#existing-follow-button').on('click', function() {
         //alert('Not yet implemented');
-        odkTables.launchHTML('follow screen result', 'config/assets/followScreen.html');
+        odkTables.launchHTML(null, 'config/assets/followScreen.html');
     });
 
     // Set up the background image.

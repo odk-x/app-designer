@@ -1,8 +1,10 @@
+/* global $, _, d3, odkData, util */
+/* exported display */
+'use strict';
+
 /**
  * Responsible for rendering the home screen.
  */
-'use strict';
-/* global odkTables */
 var visitData = {};
 var plotData = {};
 
@@ -75,8 +77,9 @@ function linegraphColAgainstDate(plotName, colName, divName, yAxisText) {
         width = paramWidth - margin.left - margin.right,
         height = paramHeight - margin.top - margin.bottom;
 
+	var i;
     var plot_id = null;
-    for (var i = 0; i < plotData.getCount(); i++) {
+    for (i = 0; i < plotData.getCount(); i++) {
         var name = plotData.getData(i, 'plot_name');
         if (name === plotName) {
             plot_id = plotData.getRowId(i);
@@ -92,7 +95,7 @@ function linegraphColAgainstDate(plotName, colName, divName, yAxisText) {
     // Parse the date / time
     var	parseDate = d3.time.format("%Y-%m-%d").parse;
 
-    var x = d3.time.scale().range([0, width]);;
+    var x = d3.time.scale().range([0, width]);
 
     var y = d3.scale.linear().range([height, 0]);
 
@@ -107,7 +110,7 @@ function linegraphColAgainstDate(plotName, colName, divName, yAxisText) {
         .ticks(10);
 
     var data = [];
-    for (var i = 0; i < visitData.getCount(); i++) {
+    for (i = 0; i < visitData.getCount(); i++) {
         var visit_plot_id = visitData.getData(i, 'plot_id');
         if (visit_plot_id === plot_id) {
             var visit = {};
@@ -125,7 +128,7 @@ function linegraphColAgainstDate(plotName, colName, divName, yAxisText) {
         }
     }
 
-    var data = _.sortBy(data, 'date');
+    data = _.sortBy(data, 'date');
     data.forEach(function(d) {
         d.date = parseDate(d.date);
         d.value = +d.value;
@@ -180,8 +183,9 @@ function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
         width = paramWidth - margin.left - margin.right,
         height = paramHeight - margin.top - margin.bottom;
 
+	var i;
     var plot_id = null;
-    for (var i = 0; i < plotData.getCount(); i++) {
+    for (i = 0; i < plotData.getCount(); i++) {
         var name = plotData.getData(i, 'plot_name');
         if (name === plotName) {
             plot_id = plotData.getRowId(i);
@@ -197,7 +201,7 @@ function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
     // Parse the date / time
     var	parseDate = d3.time.format("%Y-%m-%d").parse;
 
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+    var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.05);
 
     var y = d3.scale.linear().range([height, 0]);
 
@@ -212,7 +216,7 @@ function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
         .ticks(10);
 
     var data = [];
-    for (var i = 0; i < visitData.getCount(); i++) {
+    for (i = 0; i < visitData.getCount(); i++) {
         var visit_plot_id = visitData.getData(i, 'plot_id');
         if (visit_plot_id === plot_id) {
             var visit = {};
@@ -230,7 +234,7 @@ function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
         }
     }
 
-    var data = _.sortBy(data, 'date');
+    data = _.sortBy(data, 'date');
     data.forEach(function(d) {
         d.date = parseDate(d.date);
         d.value = +d.value;
@@ -273,5 +277,5 @@ function bargraphColAgainstDate(plotName, colName, divName, yAxisText) {
         .attr("x", function(d) { return x(d.date); })
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.value); })
-        .attr("height", function(d) { return height - y(d.value); })
+        .attr("height", function(d) { return height - y(d.value); });
 }

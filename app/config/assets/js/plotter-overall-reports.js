@@ -1,8 +1,10 @@
+/* global $, _, d3, odkData */
+/* exported display */
+'use strict';
+
 /**
  * Responsible for rendering the home screen.
  */
-'use strict';
-/* global odkTables */
 var visitData = {};
 var plotData = {};
 
@@ -247,7 +249,7 @@ function displayMaizeVar() {
     for (var property in typesOfCorn) {
         if (typesOfCorn.hasOwnProperty(property)) {
             var corn = {};
-            corn.x = property
+            corn.x = property;
             corn.y = typesOfCorn[property];
             dataJ.push(corn);
         }
