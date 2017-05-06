@@ -48,7 +48,9 @@
         "choice_list_name": "plant_type",
         "data_value": "white",
         "display": {
-          "text": "White"
+          "title": {
+            "text": "White"
+          }
         },
         "_row_num": 2
       },
@@ -56,7 +58,9 @@
         "choice_list_name": "plant_type",
         "data_value": "yellow",
         "display": {
-          "text": "Yellow"
+          "title": {
+            "text": "Yellow"
+          }
         },
         "_row_num": 3
       },
@@ -64,7 +68,9 @@
         "choice_list_name": "plant_type",
         "data_value": "orange",
         "display": {
-          "text": "Orange"
+          "title": {
+            "text": "Orange"
+          }
         },
         "_row_num": 4
       }
@@ -258,7 +264,9 @@
           "choice_list_name": "plant_type",
           "data_value": "white",
           "display": {
-            "text": "White"
+            "title": {
+              "text": "White"
+            }
           },
           "_row_num": 2
         },
@@ -266,7 +274,9 @@
           "choice_list_name": "plant_type",
           "data_value": "yellow",
           "display": {
-            "text": "Yellow"
+            "title": {
+              "text": "Yellow"
+            }
           },
           "_row_num": 3
         },
@@ -274,7 +284,9 @@
           "choice_list_name": "plant_type",
           "data_value": "orange",
           "display": {
-            "text": "Orange"
+            "title": {
+              "text": "Orange"
+            }
           },
           "_row_num": 4
         }
@@ -903,7 +915,7 @@
         "_aspect": "planting",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"plant_type\",\"data_value\":\"white\",\"display\":{\"text\":\"White\"},\"_row_num\":2},{\"choice_list_name\":\"plant_type\",\"data_value\":\"yellow\",\"display\":{\"text\":\"Yellow\"},\"_row_num\":3},{\"choice_list_name\":\"plant_type\",\"data_value\":\"orange\",\"display\":{\"text\":\"Orange\"},\"_row_num\":4}]"
+        "_value": "[{\"choice_list_name\":\"plant_type\",\"data_value\":\"white\",\"display\":{\"title\":{\"text\":\"White\"}},\"_row_num\":2},{\"choice_list_name\":\"plant_type\",\"data_value\":\"yellow\",\"display\":{\"title\":{\"text\":\"Yellow\"}},\"_row_num\":3},{\"choice_list_name\":\"plant_type\",\"data_value\":\"orange\",\"display\":{\"title\":{\"text\":\"Orange\"}},\"_row_num\":4}]"
       },
       {
         "_partition": "FormType",

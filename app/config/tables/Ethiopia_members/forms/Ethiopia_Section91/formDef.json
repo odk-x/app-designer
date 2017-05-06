@@ -28,7 +28,9 @@
         "choice_list_name": "med_location",
         "data_value": "hospital",
         "display": {
-          "text": "Hospital"
+          "title": {
+            "text": "Hospital"
+          }
         },
         "_row_num": 2
       },
@@ -36,7 +38,9 @@
         "choice_list_name": "med_location",
         "data_value": "health_center",
         "display": {
-          "text": "Health Center"
+          "title": {
+            "text": "Health Center"
+          }
         },
         "_row_num": 3
       },
@@ -44,7 +48,9 @@
         "choice_list_name": "med_location",
         "data_value": "health_post",
         "display": {
-          "text": "Health Post"
+          "title": {
+            "text": "Health Post"
+          }
         },
         "_row_num": 4
       },
@@ -52,7 +58,9 @@
         "choice_list_name": "med_location",
         "data_value": "clinics",
         "display": {
-          "text": "Clinics"
+          "title": {
+            "text": "Clinics"
+          }
         },
         "_row_num": 5
       },
@@ -60,7 +68,9 @@
         "choice_list_name": "med_location",
         "data_value": "pharmacy",
         "display": {
-          "text": "Pharmacy"
+          "title": {
+            "text": "Pharmacy"
+          }
         },
         "_row_num": 6
       },
@@ -68,7 +78,9 @@
         "choice_list_name": "med_location",
         "data_value": "tradition",
         "display": {
-          "text": "Traditional Healer"
+          "title": {
+            "text": "Traditional Healer"
+          }
         },
         "_row_num": 7
       },
@@ -76,7 +88,9 @@
         "choice_list_name": "med_location",
         "data_value": "religious",
         "display": {
-          "text": "Religious / Spiritual"
+          "title": {
+            "text": "Religious / Spiritual"
+          }
         },
         "_row_num": 8
       }
@@ -528,7 +542,9 @@
           "choice_list_name": "med_location",
           "data_value": "hospital",
           "display": {
-            "text": "Hospital"
+            "title": {
+              "text": "Hospital"
+            }
           },
           "_row_num": 2
         },
@@ -536,7 +552,9 @@
           "choice_list_name": "med_location",
           "data_value": "health_center",
           "display": {
-            "text": "Health Center"
+            "title": {
+              "text": "Health Center"
+            }
           },
           "_row_num": 3
         },
@@ -544,7 +562,9 @@
           "choice_list_name": "med_location",
           "data_value": "health_post",
           "display": {
-            "text": "Health Post"
+            "title": {
+              "text": "Health Post"
+            }
           },
           "_row_num": 4
         },
@@ -552,7 +572,9 @@
           "choice_list_name": "med_location",
           "data_value": "clinics",
           "display": {
-            "text": "Clinics"
+            "title": {
+              "text": "Clinics"
+            }
           },
           "_row_num": 5
         },
@@ -560,7 +582,9 @@
           "choice_list_name": "med_location",
           "data_value": "pharmacy",
           "display": {
-            "text": "Pharmacy"
+            "title": {
+              "text": "Pharmacy"
+            }
           },
           "_row_num": 6
         },
@@ -568,7 +592,9 @@
           "choice_list_name": "med_location",
           "data_value": "tradition",
           "display": {
-            "text": "Traditional Healer"
+            "title": {
+              "text": "Traditional Healer"
+            }
           },
           "_row_num": 7
         },
@@ -576,7 +602,9 @@
           "choice_list_name": "med_location",
           "data_value": "religious",
           "display": {
-            "text": "Religious / Spiritual"
+            "title": {
+              "text": "Religious / Spiritual"
+            }
           },
           "_row_num": 8
         }

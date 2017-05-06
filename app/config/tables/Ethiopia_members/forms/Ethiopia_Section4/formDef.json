@@ -28,7 +28,9 @@
         "choice_list_name": "occupations",
         "data_value": "student",
         "display": {
-          "text": "Student"
+          "title": {
+            "text": "Student"
+          }
         },
         "_row_num": 2
       },
@@ -36,7 +38,9 @@
         "choice_list_name": "occupations",
         "data_value": "homemaker",
         "display": {
-          "text": "Homemaker"
+          "title": {
+            "text": "Homemaker"
+          }
         },
         "_row_num": 3
       },
@@ -44,7 +48,9 @@
         "choice_list_name": "occupations",
         "data_value": "retired",
         "display": {
-          "text": "Retired"
+          "title": {
+            "text": "Retired"
+          }
         },
         "_row_num": 4
       },
@@ -52,7 +58,9 @@
         "choice_list_name": "occupations",
         "data_value": "unemployed",
         "display": {
-          "text": "Unemployed"
+          "title": {
+            "text": "Unemployed"
+          }
         },
         "_row_num": 5
       }
@@ -517,7 +525,9 @@
           "choice_list_name": "occupations",
           "data_value": "student",
           "display": {
-            "text": "Student"
+            "title": {
+              "text": "Student"
+            }
           },
           "_row_num": 2
         },
@@ -525,7 +535,9 @@
           "choice_list_name": "occupations",
           "data_value": "homemaker",
           "display": {
-            "text": "Homemaker"
+            "title": {
+              "text": "Homemaker"
+            }
           },
           "_row_num": 3
         },
@@ -533,7 +545,9 @@
           "choice_list_name": "occupations",
           "data_value": "retired",
           "display": {
-            "text": "Retired"
+            "title": {
+              "text": "Retired"
+            }
           },
           "_row_num": 4
         },
@@ -541,7 +555,9 @@
           "choice_list_name": "occupations",
           "data_value": "unemployed",
           "display": {
-            "text": "Unemployed"
+            "title": {
+              "text": "Unemployed"
+            }
           },
           "_row_num": 5
         }

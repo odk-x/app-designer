@@ -102,7 +102,9 @@
         "choice_list_name": "yesno",
         "data_value": "yes",
         "display": {
-          "text": "yes"
+          "title": {
+            "text": "yes"
+          }
         },
         "_row_num": 2
       },
@@ -110,7 +112,9 @@
         "choice_list_name": "yesno",
         "data_value": "no",
         "display": {
-          "text": "no"
+          "title": {
+            "text": "no"
+          }
         },
         "_row_num": 3
       },
@@ -118,7 +122,9 @@
         "choice_list_name": "continents",
         "data_value": "NorthAmerica",
         "display": {
-          "text": "North America"
+          "title": {
+            "text": "North America"
+          }
         },
         "_row_num": 4
       },
@@ -126,7 +132,9 @@
         "choice_list_name": "continents",
         "data_value": "SouthAmerica",
         "display": {
-          "text": "South America"
+          "title": {
+            "text": "South America"
+          }
         },
         "_row_num": 5
       },
@@ -134,7 +142,9 @@
         "choice_list_name": "continents",
         "data_value": "Europe",
         "display": {
-          "text": "Europe"
+          "title": {
+            "text": "Europe"
+          }
         },
         "_row_num": 6
       },
@@ -142,7 +152,9 @@
         "choice_list_name": "continents",
         "data_value": "Africa",
         "display": {
-          "text": "Africa"
+          "title": {
+            "text": "Africa"
+          }
         },
         "_row_num": 7
       },
@@ -150,7 +162,9 @@
         "choice_list_name": "continents",
         "data_value": "Asia",
         "display": {
-          "text": "Asia"
+          "title": {
+            "text": "Asia"
+          }
         },
         "_row_num": 8
       },
@@ -158,7 +172,9 @@
         "choice_list_name": "continents",
         "data_value": "Australia",
         "display": {
-          "text": "Australia"
+          "title": {
+            "text": "Australia"
+          }
         },
         "_row_num": 9
       },
@@ -166,7 +182,9 @@
         "choice_list_name": "continents",
         "data_value": "Antarctica",
         "display": {
-          "text": "Antarctica"
+          "title": {
+            "text": "Antarctica"
+          }
         },
         "_row_num": 10
       }
@@ -290,7 +308,9 @@
           "choice_list_name": "yesno",
           "data_value": "yes",
           "display": {
-            "text": "yes"
+            "title": {
+              "text": "yes"
+            }
           },
           "_row_num": 2
         },
@@ -298,7 +318,9 @@
           "choice_list_name": "yesno",
           "data_value": "no",
           "display": {
-            "text": "no"
+            "title": {
+              "text": "no"
+            }
           },
           "_row_num": 3
         }
@@ -308,7 +330,9 @@
           "choice_list_name": "continents",
           "data_value": "NorthAmerica",
           "display": {
-            "text": "North America"
+            "title": {
+              "text": "North America"
+            }
           },
           "_row_num": 4
         },
@@ -316,7 +340,9 @@
           "choice_list_name": "continents",
           "data_value": "SouthAmerica",
           "display": {
-            "text": "South America"
+            "title": {
+              "text": "South America"
+            }
           },
           "_row_num": 5
         },
@@ -324,7 +350,9 @@
           "choice_list_name": "continents",
           "data_value": "Europe",
           "display": {
-            "text": "Europe"
+            "title": {
+              "text": "Europe"
+            }
           },
           "_row_num": 6
         },
@@ -332,7 +360,9 @@
           "choice_list_name": "continents",
           "data_value": "Africa",
           "display": {
-            "text": "Africa"
+            "title": {
+              "text": "Africa"
+            }
           },
           "_row_num": 7
         },
@@ -340,7 +370,9 @@
           "choice_list_name": "continents",
           "data_value": "Asia",
           "display": {
-            "text": "Asia"
+            "title": {
+              "text": "Asia"
+            }
           },
           "_row_num": 8
         },
@@ -348,7 +380,9 @@
           "choice_list_name": "continents",
           "data_value": "Australia",
           "display": {
-            "text": "Australia"
+            "title": {
+              "text": "Australia"
+            }
           },
           "_row_num": 9
         },
@@ -356,7 +390,9 @@
           "choice_list_name": "continents",
           "data_value": "Antarctica",
           "display": {
-            "text": "Antarctica"
+            "title": {
+              "text": "Antarctica"
+            }
           },
           "_row_num": 10
         }
@@ -1026,14 +1062,14 @@
         "_aspect": "visited_continents",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"continents\",\"data_value\":\"NorthAmerica\",\"display\":{\"text\":\"North America\"},\"_row_num\":4},{\"choice_list_name\":\"continents\",\"data_value\":\"SouthAmerica\",\"display\":{\"text\":\"South America\"},\"_row_num\":5},{\"choice_list_name\":\"continents\",\"data_value\":\"Europe\",\"display\":{\"text\":\"Europe\"},\"_row_num\":6},{\"choice_list_name\":\"continents\",\"data_value\":\"Africa\",\"display\":{\"text\":\"Africa\"},\"_row_num\":7},{\"choice_list_name\":\"continents\",\"data_value\":\"Asia\",\"display\":{\"text\":\"Asia\"},\"_row_num\":8},{\"choice_list_name\":\"continents\",\"data_value\":\"Australia\",\"display\":{\"text\":\"Australia\"},\"_row_num\":9},{\"choice_list_name\":\"continents\",\"data_value\":\"Antarctica\",\"display\":{\"text\":\"Antarctica\"},\"_row_num\":10}]"
+        "_value": "[{\"choice_list_name\":\"continents\",\"data_value\":\"NorthAmerica\",\"display\":{\"title\":{\"text\":\"North America\"}},\"_row_num\":4},{\"choice_list_name\":\"continents\",\"data_value\":\"SouthAmerica\",\"display\":{\"title\":{\"text\":\"South America\"}},\"_row_num\":5},{\"choice_list_name\":\"continents\",\"data_value\":\"Europe\",\"display\":{\"title\":{\"text\":\"Europe\"}},\"_row_num\":6},{\"choice_list_name\":\"continents\",\"data_value\":\"Africa\",\"display\":{\"title\":{\"text\":\"Africa\"}},\"_row_num\":7},{\"choice_list_name\":\"continents\",\"data_value\":\"Asia\",\"display\":{\"title\":{\"text\":\"Asia\"}},\"_row_num\":8},{\"choice_list_name\":\"continents\",\"data_value\":\"Australia\",\"display\":{\"title\":{\"text\":\"Australia\"}},\"_row_num\":9},{\"choice_list_name\":\"continents\",\"data_value\":\"Antarctica\",\"display\":{\"title\":{\"text\":\"Antarctica\"}},\"_row_num\":10}]"
       },
       {
         "_partition": "Column",
         "_aspect": "visited_seattle",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"text\":\"no\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"no\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "FormType",

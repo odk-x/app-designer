@@ -58,6 +58,14 @@ var XLSXConverter = {};
         savepoint_type: true,
         form_id: true,
         locale: true,
+		/*
+		 * access filter columns
+		 */
+		default_access: true,
+		row_owner: true,
+		group_read_only: true,
+		group_modify: true,
+		group_privileged: true,
 
         /**
          * SQLite keywords ( http://www.sqlite.org/lang_keywords.html )

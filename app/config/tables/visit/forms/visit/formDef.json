@@ -414,7 +414,9 @@
         "choice_list_name": "plant_health_type",
         "data_value": "bad",
         "display": {
-          "image": "media/dying_corn_leaves.jpg"
+          "title": {
+            "image": "media/dying_corn_leaves.jpg"
+          }
         },
         "_row_num": 2
       },
@@ -422,7 +424,9 @@
         "choice_list_name": "plant_health_type",
         "data_value": "fair",
         "display": {
-          "image": "media/fair_corn_leaves.jpeg"
+          "title": {
+            "image": "media/fair_corn_leaves.jpeg"
+          }
         },
         "_row_num": 3
       },
@@ -430,7 +434,9 @@
         "choice_list_name": "plant_health_type",
         "data_value": "good",
         "display": {
-          "image": "media/healthy_corn_leaves.jpg"
+          "title": {
+            "image": "media/healthy_corn_leaves.jpg"
+          }
         },
         "_row_num": 4
       },
@@ -438,7 +444,9 @@
         "choice_list_name": "soil_texture",
         "data_value": "fine_sand",
         "display": {
-          "text": "Fine Sand"
+          "title": {
+            "text": "Fine Sand"
+          }
         },
         "_row_num": 6
       },
@@ -446,7 +454,9 @@
         "choice_list_name": "soil_texture",
         "data_value": "sandy_loam",
         "display": {
-          "text": "Sandy Loam"
+          "title": {
+            "text": "Sandy Loam"
+          }
         },
         "_row_num": 7
       },
@@ -454,7 +464,9 @@
         "choice_list_name": "soil_texture",
         "data_value": "loam",
         "display": {
-          "text": "Loam"
+          "title": {
+            "text": "Loam"
+          }
         },
         "_row_num": 8
       },
@@ -462,7 +474,9 @@
         "choice_list_name": "pest_type",
         "data_value": "earworm",
         "display": {
-          "image": "media/earworm.jpg"
+          "title": {
+            "image": "media/earworm.jpg"
+          }
         },
         "_row_num": 10
       },
@@ -470,7 +484,9 @@
         "choice_list_name": "pest_type",
         "data_value": "stink_bug",
         "display": {
-          "image": "media/stink_bug.jpg"
+          "title": {
+            "image": "media/stink_bug.jpg"
+          }
         },
         "_row_num": 11
       },
@@ -478,7 +494,9 @@
         "choice_list_name": "pest_type",
         "data_value": "cutworm",
         "display": {
-          "image": "media/cutworm.jpg"
+          "title": {
+            "image": "media/cutworm.jpg"
+          }
         },
         "_row_num": 12
       },
@@ -486,7 +504,9 @@
         "choice_list_name": "pest_type",
         "data_value": "beetle",
         "display": {
-          "image": "media/corn_flea_beetle.jpg"
+          "title": {
+            "image": "media/corn_flea_beetle.jpg"
+          }
         },
         "_row_num": 13
       },
@@ -494,7 +514,9 @@
         "choice_list_name": "maize",
         "data_value": "white",
         "display": {
-          "text": "White"
+          "title": {
+            "text": "White"
+          }
         },
         "_row_num": 15
       },
@@ -502,7 +524,9 @@
         "choice_list_name": "maize",
         "data_value": "yellow",
         "display": {
-          "text": "Yellow"
+          "title": {
+            "text": "Yellow"
+          }
         },
         "_row_num": 16
       },
@@ -510,7 +534,9 @@
         "choice_list_name": "maize",
         "data_value": "orange",
         "display": {
-          "text": "Orange"
+          "title": {
+            "text": "Orange"
+          }
         },
         "_row_num": 17
       }
@@ -520,8 +546,8 @@
         "query_name": "select_linked_plot",
         "query_type": "linked_table",
         "linked_form_id": "plot",
-        "selection": "_id >= ?",
-        "selectionArgs": "[ '0' ]",
+        "selection": "1=1",
+        "selectionArgs": "[]",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
@@ -787,7 +813,9 @@
           "choice_list_name": "plant_health_type",
           "data_value": "bad",
           "display": {
-            "image": "media/dying_corn_leaves.jpg"
+            "title": {
+              "image": "media/dying_corn_leaves.jpg"
+            }
           },
           "_row_num": 2
         },
@@ -795,7 +823,9 @@
           "choice_list_name": "plant_health_type",
           "data_value": "fair",
           "display": {
-            "image": "media/fair_corn_leaves.jpeg"
+            "title": {
+              "image": "media/fair_corn_leaves.jpeg"
+            }
           },
           "_row_num": 3
         },
@@ -803,7 +833,9 @@
           "choice_list_name": "plant_health_type",
           "data_value": "good",
           "display": {
-            "image": "media/healthy_corn_leaves.jpg"
+            "title": {
+              "image": "media/healthy_corn_leaves.jpg"
+            }
           },
           "_row_num": 4
         }
@@ -813,7 +845,9 @@
           "choice_list_name": "soil_texture",
           "data_value": "fine_sand",
           "display": {
-            "text": "Fine Sand"
+            "title": {
+              "text": "Fine Sand"
+            }
           },
           "_row_num": 6
         },
@@ -821,7 +855,9 @@
           "choice_list_name": "soil_texture",
           "data_value": "sandy_loam",
           "display": {
-            "text": "Sandy Loam"
+            "title": {
+              "text": "Sandy Loam"
+            }
           },
           "_row_num": 7
         },
@@ -829,7 +865,9 @@
           "choice_list_name": "soil_texture",
           "data_value": "loam",
           "display": {
-            "text": "Loam"
+            "title": {
+              "text": "Loam"
+            }
           },
           "_row_num": 8
         }
@@ -839,7 +877,9 @@
           "choice_list_name": "pest_type",
           "data_value": "earworm",
           "display": {
-            "image": "media/earworm.jpg"
+            "title": {
+              "image": "media/earworm.jpg"
+            }
           },
           "_row_num": 10
         },
@@ -847,7 +887,9 @@
           "choice_list_name": "pest_type",
           "data_value": "stink_bug",
           "display": {
-            "image": "media/stink_bug.jpg"
+            "title": {
+              "image": "media/stink_bug.jpg"
+            }
           },
           "_row_num": 11
         },
@@ -855,7 +897,9 @@
           "choice_list_name": "pest_type",
           "data_value": "cutworm",
           "display": {
-            "image": "media/cutworm.jpg"
+            "title": {
+              "image": "media/cutworm.jpg"
+            }
           },
           "_row_num": 12
         },
@@ -863,7 +907,9 @@
           "choice_list_name": "pest_type",
           "data_value": "beetle",
           "display": {
-            "image": "media/corn_flea_beetle.jpg"
+            "title": {
+              "image": "media/corn_flea_beetle.jpg"
+            }
           },
           "_row_num": 13
         }
@@ -873,7 +919,9 @@
           "choice_list_name": "maize",
           "data_value": "white",
           "display": {
-            "text": "White"
+            "title": {
+              "text": "White"
+            }
           },
           "_row_num": 15
         },
@@ -881,7 +929,9 @@
           "choice_list_name": "maize",
           "data_value": "yellow",
           "display": {
-            "text": "Yellow"
+            "title": {
+              "text": "Yellow"
+            }
           },
           "_row_num": 16
         },
@@ -889,7 +939,9 @@
           "choice_list_name": "maize",
           "data_value": "orange",
           "display": {
-            "text": "Orange"
+            "title": {
+              "text": "Orange"
+            }
           },
           "_row_num": 17
         }
@@ -903,8 +955,8 @@
         "query_name": "select_linked_plot",
         "query_type": "linked_table",
         "linked_form_id": "plot",
-        "selection": "_id >= ?",
-        "selectionArgs": "[ '0' ]",
+        "selection": "1=1",
+        "selectionArgs": "[]",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
@@ -2530,28 +2582,28 @@
         "_aspect": "pests",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"pest_type\",\"data_value\":\"earworm\",\"display\":{\"image\":\"media/earworm.jpg\"},\"_row_num\":10},{\"choice_list_name\":\"pest_type\",\"data_value\":\"stink_bug\",\"display\":{\"image\":\"media/stink_bug.jpg\"},\"_row_num\":11},{\"choice_list_name\":\"pest_type\",\"data_value\":\"cutworm\",\"display\":{\"image\":\"media/cutworm.jpg\"},\"_row_num\":12},{\"choice_list_name\":\"pest_type\",\"data_value\":\"beetle\",\"display\":{\"image\":\"media/corn_flea_beetle.jpg\"},\"_row_num\":13}]"
+        "_value": "[{\"choice_list_name\":\"pest_type\",\"data_value\":\"earworm\",\"display\":{\"title\":{\"image\":\"media/earworm.jpg\"}},\"_row_num\":10},{\"choice_list_name\":\"pest_type\",\"data_value\":\"stink_bug\",\"display\":{\"title\":{\"image\":\"media/stink_bug.jpg\"}},\"_row_num\":11},{\"choice_list_name\":\"pest_type\",\"data_value\":\"cutworm\",\"display\":{\"title\":{\"image\":\"media/cutworm.jpg\"}},\"_row_num\":12},{\"choice_list_name\":\"pest_type\",\"data_value\":\"beetle\",\"display\":{\"title\":{\"image\":\"media/corn_flea_beetle.jpg\"}},\"_row_num\":13}]"
       },
       {
         "_partition": "Column",
         "_aspect": "plant_health",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"bad\",\"display\":{\"image\":\"media/dying_corn_leaves.jpg\"},\"_row_num\":2},{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"fair\",\"display\":{\"image\":\"media/fair_corn_leaves.jpeg\"},\"_row_num\":3},{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"good\",\"display\":{\"image\":\"media/healthy_corn_leaves.jpg\"},\"_row_num\":4}]"
+        "_value": "[{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"bad\",\"display\":{\"title\":{\"image\":\"media/dying_corn_leaves.jpg\"}},\"_row_num\":2},{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"fair\",\"display\":{\"title\":{\"image\":\"media/fair_corn_leaves.jpeg\"}},\"_row_num\":3},{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"good\",\"display\":{\"title\":{\"image\":\"media/healthy_corn_leaves.jpg\"}},\"_row_num\":4}]"
       },
       {
         "_partition": "Column",
         "_aspect": "plant_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"maize\",\"data_value\":\"white\",\"display\":{\"text\":\"White\"},\"_row_num\":15},{\"choice_list_name\":\"maize\",\"data_value\":\"yellow\",\"display\":{\"text\":\"Yellow\"},\"_row_num\":16},{\"choice_list_name\":\"maize\",\"data_value\":\"orange\",\"display\":{\"text\":\"Orange\"},\"_row_num\":17}]"
+        "_value": "[{\"choice_list_name\":\"maize\",\"data_value\":\"white\",\"display\":{\"title\":{\"text\":\"White\"}},\"_row_num\":15},{\"choice_list_name\":\"maize\",\"data_value\":\"yellow\",\"display\":{\"title\":{\"text\":\"Yellow\"}},\"_row_num\":16},{\"choice_list_name\":\"maize\",\"data_value\":\"orange\",\"display\":{\"title\":{\"text\":\"Orange\"}},\"_row_num\":17}]"
       },
       {
         "_partition": "Column",
         "_aspect": "soil",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"soil_texture\",\"data_value\":\"fine_sand\",\"display\":{\"text\":\"Fine Sand\"},\"_row_num\":6},{\"choice_list_name\":\"soil_texture\",\"data_value\":\"sandy_loam\",\"display\":{\"text\":\"Sandy Loam\"},\"_row_num\":7},{\"choice_list_name\":\"soil_texture\",\"data_value\":\"loam\",\"display\":{\"text\":\"Loam\"},\"_row_num\":8}]"
+        "_value": "[{\"choice_list_name\":\"soil_texture\",\"data_value\":\"fine_sand\",\"display\":{\"title\":{\"text\":\"Fine Sand\"}},\"_row_num\":6},{\"choice_list_name\":\"soil_texture\",\"data_value\":\"sandy_loam\",\"display\":{\"title\":{\"text\":\"Sandy Loam\"}},\"_row_num\":7},{\"choice_list_name\":\"soil_texture\",\"data_value\":\"loam\",\"display\":{\"title\":{\"text\":\"Loam\"}},\"_row_num\":8}]"
       },
       {
         "_partition": "FormType",

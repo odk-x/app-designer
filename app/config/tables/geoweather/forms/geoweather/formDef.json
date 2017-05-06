@@ -174,7 +174,9 @@
         "choice_list_name": "conditions",
         "data_value": "clear",
         "display": {
-          "text": "Clear skies"
+          "title": {
+            "text": "Clear skies"
+          }
         },
         "_row_num": 2
       },
@@ -182,7 +184,9 @@
         "choice_list_name": "conditions",
         "data_value": "partly_clear",
         "display": {
-          "text": "Partly clear skies"
+          "title": {
+            "text": "Partly clear skies"
+          }
         },
         "_row_num": 3
       },
@@ -190,7 +194,9 @@
         "choice_list_name": "conditions",
         "data_value": "overcast",
         "display": {
-          "text": "Overcast (cloudy) skies"
+          "title": {
+            "text": "Overcast (cloudy) skies"
+          }
         },
         "_row_num": 4
       },
@@ -198,7 +204,9 @@
         "choice_list_name": "conditions",
         "data_value": "foggy",
         "display": {
-          "text": "Foggy"
+          "title": {
+            "text": "Foggy"
+          }
         },
         "_row_num": 5
       },
@@ -206,7 +214,9 @@
         "choice_list_name": "conditions",
         "data_value": "drizzle",
         "display": {
-          "text": "Light rain"
+          "title": {
+            "text": "Light rain"
+          }
         },
         "_row_num": 6
       },
@@ -214,7 +224,9 @@
         "choice_list_name": "conditions",
         "data_value": "rain",
         "display": {
-          "text": "Raining"
+          "title": {
+            "text": "Raining"
+          }
         },
         "_row_num": 7
       },
@@ -222,7 +234,9 @@
         "choice_list_name": "conditions",
         "data_value": "thunderstorm",
         "display": {
-          "text": "Thunderstorms"
+          "title": {
+            "text": "Thunderstorms"
+          }
         },
         "_row_num": 8
       },
@@ -230,7 +244,9 @@
         "choice_list_name": "conditions",
         "data_value": "snow",
         "display": {
-          "text": "Snowing"
+          "title": {
+            "text": "Snowing"
+          }
         },
         "_row_num": 9
       }
@@ -317,7 +333,9 @@
           "choice_list_name": "conditions",
           "data_value": "clear",
           "display": {
-            "text": "Clear skies"
+            "title": {
+              "text": "Clear skies"
+            }
           },
           "_row_num": 2
         },
@@ -325,7 +343,9 @@
           "choice_list_name": "conditions",
           "data_value": "partly_clear",
           "display": {
-            "text": "Partly clear skies"
+            "title": {
+              "text": "Partly clear skies"
+            }
           },
           "_row_num": 3
         },
@@ -333,7 +353,9 @@
           "choice_list_name": "conditions",
           "data_value": "overcast",
           "display": {
-            "text": "Overcast (cloudy) skies"
+            "title": {
+              "text": "Overcast (cloudy) skies"
+            }
           },
           "_row_num": 4
         },
@@ -341,7 +363,9 @@
           "choice_list_name": "conditions",
           "data_value": "foggy",
           "display": {
-            "text": "Foggy"
+            "title": {
+              "text": "Foggy"
+            }
           },
           "_row_num": 5
         },
@@ -349,7 +373,9 @@
           "choice_list_name": "conditions",
           "data_value": "drizzle",
           "display": {
-            "text": "Light rain"
+            "title": {
+              "text": "Light rain"
+            }
           },
           "_row_num": 6
         },
@@ -357,7 +383,9 @@
           "choice_list_name": "conditions",
           "data_value": "rain",
           "display": {
-            "text": "Raining"
+            "title": {
+              "text": "Raining"
+            }
           },
           "_row_num": 7
         },
@@ -365,7 +393,9 @@
           "choice_list_name": "conditions",
           "data_value": "thunderstorm",
           "display": {
-            "text": "Thunderstorms"
+            "title": {
+              "text": "Thunderstorms"
+            }
           },
           "_row_num": 8
         },
@@ -373,7 +403,9 @@
           "choice_list_name": "conditions",
           "data_value": "snow",
           "display": {
-            "text": "Snowing"
+            "title": {
+              "text": "Snowing"
+            }
           },
           "_row_num": 9
         }

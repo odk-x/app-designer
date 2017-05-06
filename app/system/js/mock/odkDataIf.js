@@ -462,6 +462,19 @@ var odkDataIf = {
                         resultRows.push(rowArray);
                     }
 
+					if ( $.isEmptyObject(elementNameMap) ) {
+						// fake it -- assume these are in the order they appear in dataTableModel
+						i = 0;
+						for ( var f in tableDef.dataTableModel ) {
+							if ( tableDef.dataTableModel.hasOwnProperty(f) ) {
+								var entry = tableDef.dataTableModel[f];
+								if ( !entry.isSessionVariable && !entry.notUnitOfRetention ) {
+									elementNameMap[entry.elementKey] = i;
+									++i;
+								}
+							}
+						}
+					}
                     content.data = resultRows;
                     content.metadata.tableId = tableDef.tableId;
                     content.metadata.schemaETag = tableDef.schemaETag;

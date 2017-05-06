@@ -99,7 +99,9 @@
         "choice_list_name": "smoker_type",
         "data_value": "never_smoked",
         "display": {
-          "text": "Never smoked"
+          "title": {
+            "text": "Never smoked"
+          }
         },
         "_row_num": 2
       },
@@ -107,7 +109,9 @@
         "choice_list_name": "smoker_type",
         "data_value": "used_to_smoke",
         "display": {
-          "text": "Used to smoke but no longer"
+          "title": {
+            "text": "Used to smoke but no longer"
+          }
         },
         "_row_num": 3
       },
@@ -115,7 +119,9 @@
         "choice_list_name": "smoker_type",
         "data_value": "smokes_now",
         "display": {
-          "text": "Yes, smokes now"
+          "title": {
+            "text": "Yes, smokes now"
+          }
         },
         "_row_num": 4
       },
@@ -123,7 +129,9 @@
         "choice_list_name": "smokes_frequency",
         "data_value": "never",
         "display": {
-          "text": "Never"
+          "title": {
+            "text": "Never"
+          }
         },
         "_row_num": 5
       },
@@ -131,7 +139,9 @@
         "choice_list_name": "smokes_frequency",
         "data_value": "occasionally",
         "display": {
-          "text": "Occasionally"
+          "title": {
+            "text": "Occasionally"
+          }
         },
         "_row_num": 6
       },
@@ -139,7 +149,9 @@
         "choice_list_name": "smokes_frequency",
         "data_value": "daily_few",
         "display": {
-          "text": "Almost every day but only a few cigarettes (up to 2)"
+          "title": {
+            "text": "Almost every day but only a few cigarettes (up to 2)"
+          }
         },
         "_row_num": 7
       },
@@ -147,7 +159,9 @@
         "choice_list_name": "smokes_frequency",
         "data_value": "daily_many",
         "display": {
-          "text": "Almost daily many cigarettes (more than 2)"
+          "title": {
+            "text": "Almost daily many cigarettes (more than 2)"
+          }
         },
         "_row_num": 8
       }
@@ -599,7 +613,9 @@
           "choice_list_name": "smoker_type",
           "data_value": "never_smoked",
           "display": {
-            "text": "Never smoked"
+            "title": {
+              "text": "Never smoked"
+            }
           },
           "_row_num": 2
         },
@@ -607,7 +623,9 @@
           "choice_list_name": "smoker_type",
           "data_value": "used_to_smoke",
           "display": {
-            "text": "Used to smoke but no longer"
+            "title": {
+              "text": "Used to smoke but no longer"
+            }
           },
           "_row_num": 3
         },
@@ -615,7 +633,9 @@
           "choice_list_name": "smoker_type",
           "data_value": "smokes_now",
           "display": {
-            "text": "Yes, smokes now"
+            "title": {
+              "text": "Yes, smokes now"
+            }
           },
           "_row_num": 4
         }
@@ -625,7 +645,9 @@
           "choice_list_name": "smokes_frequency",
           "data_value": "never",
           "display": {
-            "text": "Never"
+            "title": {
+              "text": "Never"
+            }
           },
           "_row_num": 5
         },
@@ -633,7 +655,9 @@
           "choice_list_name": "smokes_frequency",
           "data_value": "occasionally",
           "display": {
-            "text": "Occasionally"
+            "title": {
+              "text": "Occasionally"
+            }
           },
           "_row_num": 6
         },
@@ -641,7 +665,9 @@
           "choice_list_name": "smokes_frequency",
           "data_value": "daily_few",
           "display": {
-            "text": "Almost every day but only a few cigarettes (up to 2)"
+            "title": {
+              "text": "Almost every day but only a few cigarettes (up to 2)"
+            }
           },
           "_row_num": 7
         },
@@ -649,7 +675,9 @@
           "choice_list_name": "smokes_frequency",
           "data_value": "daily_many",
           "display": {
-            "text": "Almost daily many cigarettes (more than 2)"
+            "title": {
+              "text": "Almost daily many cigarettes (more than 2)"
+            }
           },
           "_row_num": 8
         }

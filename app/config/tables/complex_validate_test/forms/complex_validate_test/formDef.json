@@ -249,9 +249,11 @@
         "choice_list_name": "my_branch",
         "data_value": "branch1",
         "display": {
-          "text": {
-            "default": "Go to section 1",
-            "hindi": "खंड 1 के लिए जाओ"
+          "title": {
+            "text": {
+              "default": "Go to section 1",
+              "hindi": "खंड 1 के लिए जाओ"
+            }
           }
         },
         "_row_num": 2
@@ -260,9 +262,11 @@
         "choice_list_name": "my_branch",
         "data_value": "branch2",
         "display": {
-          "text": {
-            "default": "Go to section 2",
-            "hindi": "धारा 2 के लिए जाओ"
+          "title": {
+            "text": {
+              "default": "Go to section 2",
+              "hindi": "धारा 2 के लिए जाओ"
+            }
           }
         },
         "_row_num": 3
@@ -271,9 +275,11 @@
         "choice_list_name": "my_branch",
         "data_value": "exitpath",
         "display": {
-          "text": {
-            "default": "Exit Survey",
-            "hindi": "सर्वेक्षण से बाहर निकलें"
+          "title": {
+            "text": {
+              "default": "Exit Survey",
+              "hindi": "सर्वेक्षण से बाहर निकलें"
+            }
           }
         },
         "_row_num": 4
@@ -499,9 +505,11 @@
           "choice_list_name": "my_branch",
           "data_value": "branch1",
           "display": {
-            "text": {
-              "default": "Go to section 1",
-              "hindi": "खंड 1 के लिए जाओ"
+            "title": {
+              "text": {
+                "default": "Go to section 1",
+                "hindi": "खंड 1 के लिए जाओ"
+              }
             }
           },
           "_row_num": 2
@@ -510,9 +518,11 @@
           "choice_list_name": "my_branch",
           "data_value": "branch2",
           "display": {
-            "text": {
-              "default": "Go to section 2",
-              "hindi": "धारा 2 के लिए जाओ"
+            "title": {
+              "text": {
+                "default": "Go to section 2",
+                "hindi": "धारा 2 के लिए जाओ"
+              }
             }
           },
           "_row_num": 3
@@ -521,9 +531,11 @@
           "choice_list_name": "my_branch",
           "data_value": "exitpath",
           "display": {
-            "text": {
-              "default": "Exit Survey",
-              "hindi": "सर्वेक्षण से बाहर निकलें"
+            "title": {
+              "text": {
+                "default": "Exit Survey",
+                "hindi": "सर्वेक्षण से बाहर निकलें"
+              }
             }
           },
           "_row_num": 4

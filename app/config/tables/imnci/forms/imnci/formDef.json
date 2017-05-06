@@ -8228,9 +8228,11 @@
         "choice_list_name": "yes_no",
         "data_value": "yes",
         "display": {
-          "text": {
-            "default": "Yes",
-            "hindi": "हाँ"
+          "title": {
+            "text": {
+              "default": "Yes",
+              "hindi": "हाँ"
+            }
           }
         },
         "_row_num": 2
@@ -8239,9 +8241,11 @@
         "choice_list_name": "yes_no",
         "data_value": "no",
         "display": {
-          "text": {
-            "default": "No",
-            "hindi": "ना"
+          "title": {
+            "text": {
+              "default": "No",
+              "hindi": "ना"
+            }
           }
         },
         "_row_num": 3
@@ -8250,9 +8254,11 @@
         "choice_list_name": "present",
         "data_value": "present",
         "display": {
-          "text": {
-            "default": "Present",
-            "hindi": "है"
+          "title": {
+            "text": {
+              "default": "Present",
+              "hindi": "है"
+            }
           }
         },
         "_row_num": 5
@@ -8261,9 +8267,11 @@
         "choice_list_name": "present",
         "data_value": "not_present",
         "display": {
-          "text": {
-            "default": "Not present",
-            "hindi": "नही है"
+          "title": {
+            "text": {
+              "default": "Not present",
+              "hindi": "नही है"
+            }
           }
         },
         "_row_num": 6
@@ -8272,9 +8280,11 @@
         "choice_list_name": "agree",
         "data_value": "agree",
         "display": {
-          "text": {
-            "default": "Agree",
-            "hindi": "राज़ी"
+          "title": {
+            "text": {
+              "default": "Agree",
+              "hindi": "राज़ी"
+            }
           }
         },
         "_row_num": 8
@@ -8283,9 +8293,11 @@
         "choice_list_name": "agree",
         "data_value": "disagree",
         "display": {
-          "text": {
-            "default": "Disagree",
-            "hindi": "नही राज़ी"
+          "title": {
+            "text": {
+              "default": "Disagree",
+              "hindi": "नही राज़ी"
+            }
           }
         },
         "_row_num": 9
@@ -8294,9 +8306,11 @@
         "choice_list_name": "sex",
         "data_value": "male",
         "display": {
-          "text": {
-            "default": "Male",
-            "hindi": "पुरुष"
+          "title": {
+            "text": {
+              "default": "Male",
+              "hindi": "पुरुष"
+            }
           }
         },
         "_row_num": 11
@@ -8305,9 +8319,11 @@
         "choice_list_name": "sex",
         "data_value": "female",
         "display": {
-          "text": {
-            "default": "Female",
-            "hindi": "नारी"
+          "title": {
+            "text": {
+              "default": "Female",
+              "hindi": "नारी"
+            }
           }
         },
         "_row_num": 12
@@ -8316,9 +8332,11 @@
         "choice_list_name": "skin_elasticity",
         "data_value": "very_slow",
         "display": {
-          "text": {
-            "default": "Very slowly (longer than 2 seconds)?",
-            "hindi": "बहुत धीरे (२ सेकेंड से ज़्यादा)"
+          "title": {
+            "text": {
+              "default": "Very slowly (longer than 2 seconds)?",
+              "hindi": "बहुत धीरे (२ सेकेंड से ज़्यादा)"
+            }
           }
         },
         "_row_num": 15
@@ -8327,9 +8345,11 @@
         "choice_list_name": "skin_elasticity",
         "data_value": "slow",
         "display": {
-          "text": {
-            "default": "Slowly?",
-            "hindi": "धीरे?"
+          "title": {
+            "text": {
+              "default": "Slowly?",
+              "hindi": "धीरे?"
+            }
           }
         },
         "_row_num": 16
@@ -8338,9 +8358,11 @@
         "choice_list_name": "skin_elasticity",
         "data_value": "normal",
         "display": {
-          "text": {
-            "default": "Skin goes back normally.",
-            "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
+          "title": {
+            "text": {
+              "default": "Skin goes back normally.",
+              "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
+            }
           }
         },
         "_row_num": 17
@@ -8349,9 +8371,11 @@
         "choice_list_name": "attachment_quality",
         "data_value": "none",
         "display": {
-          "text": {
-            "default": "No attachment at all.",
-            "hindi": "कोई लगाव नही"
+          "title": {
+            "text": {
+              "default": "No attachment at all.",
+              "hindi": "कोई लगाव नही"
+            }
           }
         },
         "_row_num": 20
@@ -8360,9 +8384,11 @@
         "choice_list_name": "attachment_quality",
         "data_value": "poor",
         "display": {
-          "text": {
-            "default": "Not well attached.",
-            "hindi": "लगाव ठीक से नही है"
+          "title": {
+            "text": {
+              "default": "Not well attached.",
+              "hindi": "लगाव ठीक से नही है"
+            }
           }
         },
         "_row_num": 21
@@ -8371,9 +8397,11 @@
         "choice_list_name": "attachment_quality",
         "data_value": "good",
         "display": {
-          "text": {
-            "default": "Good attachment.",
-            "hindi": "अच्छा लगाव"
+          "title": {
+            "text": {
+              "default": "Good attachment.",
+              "hindi": "अच्छा लगाव"
+            }
           }
         },
         "_row_num": 22
@@ -8382,9 +8410,11 @@
         "choice_list_name": "sucking_effectiveness",
         "data_value": "none",
         "display": {
-          "text": {
-            "default": "Not suckling at all.",
-            "hindi": "स्तन को बिल्कुल नही चूसना"
+          "title": {
+            "text": {
+              "default": "Not suckling at all.",
+              "hindi": "स्तन को बिल्कुल नही चूसना"
+            }
           }
         },
         "_row_num": 25
@@ -8393,9 +8423,11 @@
         "choice_list_name": "sucking_effectiveness",
         "data_value": "not_effective",
         "display": {
-          "text": {
-            "default": "Not suckling effectively.",
-            "hindi": "स्तन को प्रभावी डांग से नही चूसना"
+          "title": {
+            "text": {
+              "default": "Not suckling effectively.",
+              "hindi": "स्तन को प्रभावी डांग से नही चूसना"
+            }
           }
         },
         "_row_num": 26
@@ -8404,9 +8436,11 @@
         "choice_list_name": "sucking_effectiveness",
         "data_value": "effective",
         "display": {
-          "text": {
-            "default": "Suckling effectively.",
-            "hindi": "स्तन को प्रभावी डांग से चूसना"
+          "title": {
+            "text": {
+              "default": "Suckling effectively.",
+              "hindi": "स्तन को प्रभावी डांग से चूसना"
+            }
           }
         },
         "_row_num": 27
@@ -8415,9 +8449,11 @@
         "choice_list_name": "vaccinations",
         "data_value": "bcg",
         "display": {
-          "text": {
-            "default": "BCG",
-            "hindi": "बी. सी. गी"
+          "title": {
+            "text": {
+              "default": "BCG",
+              "hindi": "बी. सी. गी"
+            }
           }
         },
         "age_weeks": 0,
@@ -8427,9 +8463,11 @@
         "choice_list_name": "vaccinations",
         "data_value": "opv0",
         "display": {
-          "text": {
-            "default": "OPV-0",
-            "hindi": "ओ. पी. वी.-०"
+          "title": {
+            "text": {
+              "default": "OPV-0",
+              "hindi": "ओ. पी. वी.-०"
+            }
           }
         },
         "age_weeks": 0,
@@ -8439,7 +8477,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "opv1hepatitusb1dpt1",
         "display": {
-          "text": "OPV-1 + Hep B-1 + DPT-1"
+          "title": {
+            "text": "OPV-1 + Hep B-1 + DPT-1"
+          }
         },
         "age_weeks": 6,
         "_row_num": 32
@@ -8448,7 +8488,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "opv2hepatitusb2dpt2",
         "display": {
-          "text": "OPV-2 + Hep B-2 + DPT-2"
+          "title": {
+            "text": "OPV-2 + Hep B-2 + DPT-2"
+          }
         },
         "age_weeks": 10,
         "_row_num": 33
@@ -8457,7 +8499,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "opv3hepatitusb3dpt3",
         "display": {
-          "text": "OPV-3 + Hep B-3 + DPT-3"
+          "title": {
+            "text": "OPV-3 + Hep B-3 + DPT-3"
+          }
         },
         "age_weeks": 14,
         "_row_num": 34
@@ -8466,9 +8510,11 @@
         "choice_list_name": "vaccinations",
         "data_value": "measles",
         "display": {
-          "text": {
-            "default": "Measles",
-            "hindi": "खसरा"
+          "title": {
+            "text": {
+              "default": "Measles",
+              "hindi": "खसरा"
+            }
           }
         },
         "age_weeks": 36,
@@ -8478,9 +8524,11 @@
         "choice_list_name": "vaccinations",
         "data_value": "vitamin_a",
         "display": {
-          "text": {
-            "default": "Vitamin A",
-            "hindi": "विटामिन ए"
+          "title": {
+            "text": {
+              "default": "Vitamin A",
+              "hindi": "विटामिन ए"
+            }
           }
         },
         "age_weeks": 36,
@@ -8490,7 +8538,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "dpt",
         "display": {
-          "text": "DPT Booster"
+          "title": {
+            "text": "DPT Booster"
+          }
         },
         "age_weeks": 64,
         "_row_num": 37
@@ -8499,7 +8549,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "opv",
         "display": {
-          "text": "OPV Booster"
+          "title": {
+            "text": "OPV Booster"
+          }
         },
         "age_weeks": 64,
         "_row_num": 38
@@ -8508,9 +8560,11 @@
         "choice_list_name": "vaccinations",
         "data_value": "dt",
         "display": {
-          "text": {
-            "default": "DT",
-            "hindi": "डीटी"
+          "title": {
+            "text": {
+              "default": "DT",
+              "hindi": "डीटी"
+            }
           }
         },
         "age_weeks": 240,
@@ -8520,9 +8574,11 @@
         "choice_list_name": "food",
         "data_value": "milk",
         "display": {
-          "text": {
-            "default": "Milk",
-            "hindi": "दूध"
+          "title": {
+            "text": {
+              "default": "Milk",
+              "hindi": "दूध"
+            }
           }
         },
         "_row_num": 42
@@ -8531,9 +8587,11 @@
         "choice_list_name": "food",
         "data_value": "juice",
         "display": {
-          "text": {
-            "default": "Juice",
-            "hindi": "जूस"
+          "title": {
+            "text": {
+              "default": "Juice",
+              "hindi": "जूस"
+            }
           }
         },
         "_row_num": 43
@@ -8542,9 +8600,11 @@
         "choice_list_name": "food",
         "data_value": "water",
         "display": {
-          "text": {
-            "default": "Water",
-            "hindi": "पानी"
+          "title": {
+            "text": {
+              "default": "Water",
+              "hindi": "पानी"
+            }
           }
         },
         "_row_num": 44
@@ -8553,9 +8613,11 @@
         "choice_list_name": "food",
         "data_value": "formula",
         "display": {
-          "text": {
-            "default": "Formula",
-            "hindi": "फ़ॉर्मूला"
+          "title": {
+            "text": {
+              "default": "Formula",
+              "hindi": "फ़ॉर्मूला"
+            }
           }
         },
         "_row_num": 45
@@ -8564,9 +8626,11 @@
         "choice_list_name": "food",
         "data_value": "cereal",
         "display": {
-          "text": {
-            "default": "Cereal",
-            "hindi": "सेरल"
+          "title": {
+            "text": {
+              "default": "Cereal",
+              "hindi": "सेरल"
+            }
           }
         },
         "_row_num": 46
@@ -8575,9 +8639,11 @@
         "choice_list_name": "food",
         "data_value": "milk_based_wheat/rice",
         "display": {
-          "text": {
-            "default": "Cooked wheat/rice based with undiluted milk and sugar",
-            "hindi": "पक्की हुई रोति / चावल शूध दूष और चीनी के साथ."
+          "title": {
+            "text": {
+              "default": "Cooked wheat/rice based with undiluted milk and sugar",
+              "hindi": "पक्की हुई रोति / चावल शूध दूष और चीनी के साथ."
+            }
           }
         },
         "_row_num": 47
@@ -8586,9 +8652,11 @@
         "choice_list_name": "food",
         "data_value": "water_based_wheat/rice",
         "display": {
-          "text": {
-            "default": "Cooked wheat/rice based with dal/lentil water",
-            "hindi": "पक्की हुई रोति / चावल डाल और पानी के साथ."
+          "title": {
+            "text": {
+              "default": "Cooked wheat/rice based with dal/lentil water",
+              "hindi": "पक्की हुई रोति / चावल डाल और पानी के साथ."
+            }
           }
         },
         "_row_num": 48
@@ -8597,9 +8665,11 @@
         "choice_list_name": "food",
         "data_value": "khichri",
         "display": {
-          "text": {
-            "default": "Khichri (cooked rice+dal/lentil in thinned form)",
-            "hindi": "खिचरी (पक्के हुए चावल+दल पतले रूप मैं.)"
+          "title": {
+            "text": {
+              "default": "Khichri (cooked rice+dal/lentil in thinned form)",
+              "hindi": "खिचरी (पक्के हुए चावल+दल पतले रूप मैं.)"
+            }
           }
         },
         "_row_num": 49
@@ -8608,9 +8678,11 @@
         "choice_list_name": "food",
         "data_value": "fruit",
         "display": {
-          "text": {
-            "default": "Mashed fruit",
-            "hindi": "पीसा हुए फल"
+          "title": {
+            "text": {
+              "default": "Mashed fruit",
+              "hindi": "पीसा हुए फल"
+            }
           }
         },
         "_row_num": 50
@@ -8619,9 +8691,11 @@
         "choice_list_name": "food",
         "data_value": "vegetables",
         "display": {
-          "text": {
-            "default": "Boiled or cooked vegetables",
-            "hindi": "उबली या पक्की हुई सब्ज़ियाँ."
+          "title": {
+            "text": {
+              "default": "Boiled or cooked vegetables",
+              "hindi": "उबली या पक्की हुई सब्ज़ियाँ."
+            }
           }
         },
         "_row_num": 51
@@ -8630,9 +8704,11 @@
         "choice_list_name": "food",
         "data_value": "mixed_food",
         "display": {
-          "text": {
-            "default": "Normal mixed food as adults",
-            "hindi": "बढ़ों जैसे सामान्य खाना."
+          "title": {
+            "text": {
+              "default": "Normal mixed food as adults",
+              "hindi": "बढ़ों जैसे सामान्य खाना."
+            }
           }
         },
         "_row_num": 52
@@ -8641,9 +8717,11 @@
         "choice_list_name": "attachment_quality_sign",
         "data_value": "chin_touching_breast",
         "display": {
-          "text": {
-            "default": "Chin touching breast",
-            "hindi": "तोढी स्तन को चू रही है."
+          "title": {
+            "text": {
+              "default": "Chin touching breast",
+              "hindi": "तोढी स्तन को चू रही है."
+            }
           }
         },
         "_row_num": 55
@@ -8652,9 +8730,11 @@
         "choice_list_name": "attachment_quality_sign",
         "data_value": "mouth_wide_open",
         "display": {
-          "text": {
-            "default": "Mouth wide open",
-            "hindi": "मूँह पूरा खुला हुआ है."
+          "title": {
+            "text": {
+              "default": "Mouth wide open",
+              "hindi": "मूँह पूरा खुला हुआ है."
+            }
           }
         },
         "_row_num": 56
@@ -8663,9 +8743,11 @@
         "choice_list_name": "attachment_quality_sign",
         "data_value": "lower_lip_outward",
         "display": {
-          "text": {
-            "default": "Lower lip turned outward",
-            "hindi": "निचला होंठ बाहर की तरफ मूधा हुआ है."
+          "title": {
+            "text": {
+              "default": "Lower lip turned outward",
+              "hindi": "निचला होंठ बाहर की तरफ मूधा हुआ है."
+            }
           }
         },
         "_row_num": 57
@@ -8674,9 +8756,11 @@
         "choice_list_name": "attachment_quality_sign",
         "data_value": "visible_areola",
         "display": {
-          "text": {
-            "default": "More areola visible above than below the \nmouth",
-            "hindi": "नीचे की अपेक्षा उपर एरियोला अधिक दिख रहा है."
+          "title": {
+            "text": {
+              "default": "More areola visible above than below the \nmouth",
+              "hindi": "नीचे की अपेक्षा उपर एरियोला अधिक दिख रहा है."
+            }
           }
         },
         "_row_num": 58
@@ -8685,9 +8769,11 @@
         "choice_list_name": "visit_type",
         "data_value": "initial_visit",
         "display": {
-          "text": {
-            "default": "Initial visit",
-            "hindi": "प्रथम भेट."
+          "title": {
+            "text": {
+              "default": "Initial visit",
+              "hindi": "प्रथम भेट."
+            }
           }
         },
         "_row_num": 61
@@ -8696,9 +8782,11 @@
         "choice_list_name": "visit_type",
         "data_value": "followup",
         "display": {
-          "text": {
-            "default": "Follow-up",
-            "hindi": "पुन: भेट"
+          "title": {
+            "text": {
+              "default": "Follow-up",
+              "hindi": "पुन: भेट"
+            }
           }
         },
         "_row_num": 62
@@ -8707,9 +8795,11 @@
         "choice_list_name": "breast_problems",
         "data_value": "flat_nipple",
         "display": {
-          "text": {
-            "default": "Flat/inverted nipple",
-            "hindi": "चुचक के घाव"
+          "title": {
+            "text": {
+              "default": "Flat/inverted nipple",
+              "hindi": "चुचक के घाव"
+            }
           }
         },
         "_row_num": 65
@@ -8718,9 +8808,11 @@
         "choice_list_name": "breast_problems",
         "data_value": "sore_nipple",
         "display": {
-          "text": {
-            "default": "Sore/cracked nipple",
-            "hindi": "चुचक के घाव"
+          "title": {
+            "text": {
+              "default": "Sore/cracked nipple",
+              "hindi": "चुचक के घाव"
+            }
           }
         },
         "_row_num": 66
@@ -8729,9 +8821,11 @@
         "choice_list_name": "breast_problems",
         "data_value": "engorged_breasts",
         "display": {
-          "text": {
-            "default": "Engorged breasts",
-            "hindi": "स्तानो मैं सूजन"
+          "title": {
+            "text": {
+              "default": "Engorged breasts",
+              "hindi": "स्तानो मैं सूजन"
+            }
           }
         },
         "_row_num": 67
@@ -8740,9 +8834,11 @@
         "choice_list_name": "breast_problems",
         "data_value": "breast_abscess",
         "display": {
-          "text": {
-            "default": "Breast abscess",
-            "hindi": "स्तानो मैं फोड़े"
+          "title": {
+            "text": {
+              "default": "Breast abscess",
+              "hindi": "स्तानो मैं फोड़े"
+            }
           }
         },
         "_row_num": 68
@@ -8751,9 +8847,11 @@
         "choice_list_name": "no_some_severe",
         "data_value": "none",
         "display": {
-          "text": {
-            "default": "None",
-            "hindi": "कुच्छ"
+          "title": {
+            "text": {
+              "default": "None",
+              "hindi": "कुच्छ"
+            }
           }
         },
         "_row_num": 70
@@ -8762,9 +8860,11 @@
         "choice_list_name": "no_some_severe",
         "data_value": "some",
         "display": {
-          "text": {
-            "default": "Some",
-            "hindi": "तोढा"
+          "title": {
+            "text": {
+              "default": "Some",
+              "hindi": "तोढा"
+            }
           }
         },
         "_row_num": 71
@@ -8773,9 +8873,11 @@
         "choice_list_name": "no_some_severe",
         "data_value": "severe",
         "display": {
-          "text": {
-            "default": "Severe",
-            "hindi": "बहुत"
+          "title": {
+            "text": {
+              "default": "Severe",
+              "hindi": "बहुत"
+            }
           }
         },
         "_row_num": 72
@@ -8784,9 +8886,11 @@
         "choice_list_name": "katori_teaspoon",
         "data_value": "katori",
         "display": {
-          "text": {
-            "default": "Katori",
-            "hindi": "कटोरी"
+          "title": {
+            "text": {
+              "default": "Katori",
+              "hindi": "कटोरी"
+            }
           }
         },
         "_row_num": 74
@@ -8795,9 +8899,11 @@
         "choice_list_name": "katori_teaspoon",
         "data_value": "teaspoon",
         "display": {
-          "text": {
-            "default": "Teaspoon",
-            "hindi": "चम्मच"
+          "title": {
+            "text": {
+              "default": "Teaspoon",
+              "hindi": "चम्मच"
+            }
           }
         },
         "_row_num": 75
@@ -8806,9 +8912,11 @@
         "choice_list_name": "cotrimoxazole_type",
         "data_value": "adult",
         "display": {
-          "text": {
-            "default": "Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)",
-            "hindi": "अडल्ट टॅबलेट सिंगल स्ट्रेंत (80म्ग त्रमेट्ोपरिम + 400 म्ग सुल्फमेठोकशज़ोले)"
+          "title": {
+            "text": {
+              "default": "Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)",
+              "hindi": "अडल्ट टॅबलेट सिंगल स्ट्रेंत (80म्ग त्रमेट्ोपरिम + 400 म्ग सुल्फमेठोकशज़ोले)"
+            }
           }
         },
         "_row_num": 77
@@ -8817,9 +8925,11 @@
         "choice_list_name": "cotrimoxazole_type",
         "data_value": "pediatric",
         "display": {
-          "text": {
-            "default": "Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)",
-            "hindi": "बच्चों की टॅबलेट (२0म्ग त्रमेट्ोपरिम + १00 म्ग सुल्फमेठोकशज़ोले)"
+          "title": {
+            "text": {
+              "default": "Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)",
+              "hindi": "बच्चों की टॅबलेट (२0म्ग त्रमेट्ोपरिम + १00 म्ग सुल्फमेठोकशज़ोले)"
+            }
           }
         },
         "_row_num": 78
@@ -8828,9 +8938,11 @@
         "choice_list_name": "malnutrition_grade",
         "data_value": "normal",
         "display": {
-          "text": {
-            "default": "Normal",
-            "hindi": "नॉर्मल"
+          "title": {
+            "text": {
+              "default": "Normal",
+              "hindi": "नॉर्मल"
+            }
           }
         },
         "_row_num": 80
@@ -8839,9 +8951,11 @@
         "choice_list_name": "malnutrition_grade",
         "data_value": "grade1",
         "display": {
-          "text": {
-            "default": "Grade I",
-            "hindi": "ग्रेड १"
+          "title": {
+            "text": {
+              "default": "Grade I",
+              "hindi": "ग्रेड १"
+            }
           }
         },
         "_row_num": 81
@@ -8850,9 +8964,11 @@
         "choice_list_name": "malnutrition_grade",
         "data_value": "grade2",
         "display": {
-          "text": {
-            "default": "Grade II",
-            "hindi": "ग्रेड २"
+          "title": {
+            "text": {
+              "default": "Grade II",
+              "hindi": "ग्रेड २"
+            }
           }
         },
         "_row_num": 82
@@ -8861,9 +8977,11 @@
         "choice_list_name": "malnutrition_grade",
         "data_value": "grade3",
         "display": {
-          "text": {
-            "default": "Grade III",
-            "hindi": "ग्रेड ३"
+          "title": {
+            "text": {
+              "default": "Grade III",
+              "hindi": "ग्रेड ३"
+            }
           }
         },
         "_row_num": 83
@@ -8872,9 +8990,11 @@
         "choice_list_name": "malnutrition_grade",
         "data_value": "grade4",
         "display": {
-          "text": {
-            "default": "Grade IV",
-            "hindi": "ग्रेड ४"
+          "title": {
+            "text": {
+              "default": "Grade IV",
+              "hindi": "ग्रेड ४"
+            }
           }
         },
         "_row_num": 84
@@ -8883,7 +9003,9 @@
         "choice_list_name": "high_low",
         "data_value": "high",
         "display": {
-          "text": "High Risk"
+          "title": {
+            "text": "High Risk"
+          }
         },
         "_row_num": 86
       },
@@ -8891,7 +9013,9 @@
         "choice_list_name": "high_low",
         "data_value": "low",
         "display": {
-          "text": "Low Risk"
+          "title": {
+            "text": "Low Risk"
+          }
         },
         "_row_num": 87
       },
@@ -8899,7 +9023,9 @@
         "choice_list_name": "tablet_syrup",
         "data_value": "tablet",
         "display": {
-          "text": "Tablet"
+          "title": {
+            "text": "Tablet"
+          }
         },
         "_row_num": 89
       },
@@ -8907,7 +9033,9 @@
         "choice_list_name": "tablet_syrup",
         "data_value": "syrup",
         "display": {
-          "text": "Syrup"
+          "title": {
+            "text": "Syrup"
+          }
         },
         "_row_num": 90
       },
@@ -8915,7 +9043,9 @@
         "choice_list_name": "basic_four_questions",
         "data_value": "difficulty_breathing",
         "display": {
-          "text": "Cough or difficulty breathing"
+          "title": {
+            "text": "Cough or difficulty breathing"
+          }
         },
         "_row_num": 92
       },
@@ -8923,7 +9053,9 @@
         "choice_list_name": "basic_four_questions",
         "data_value": "diarrhoea",
         "display": {
-          "text": "Diarrhoea"
+          "title": {
+            "text": "Diarrhoea"
+          }
         },
         "_row_num": 93
       },
@@ -8931,7 +9063,9 @@
         "choice_list_name": "basic_four_questions",
         "data_value": "fever_reported",
         "display": {
-          "text": "Fever"
+          "title": {
+            "text": "Fever"
+          }
         },
         "_row_num": 94
       },
@@ -8939,7 +9073,9 @@
         "choice_list_name": "basic_four_questions",
         "data_value": "ear_problem",
         "display": {
-          "text": "Ear problem"
+          "title": {
+            "text": "Ear problem"
+          }
         },
         "_row_num": 95
       },
@@ -8947,7 +9083,9 @@
         "choice_list_name": "antimalarial",
         "data_value": "chloroquine",
         "display": {
-          "text": "First-line antimalarial:<br />\nChloroquine"
+          "title": {
+            "text": "First-line antimalarial:<br />\nChloroquine"
+          }
         },
         "_row_num": 97
       },
@@ -8955,7 +9093,9 @@
         "choice_list_name": "antimalarial",
         "data_value": "sulphadoxine",
         "display": {
-          "text": "Second-line antimalarial:\n<br />Sulphadoxine (or sulphalena) plus pyrimethamine*<br />\n*First line treatment in areas with High Resistance to Chloroquine"
+          "title": {
+            "text": "Second-line antimalarial:\n<br />Sulphadoxine (or sulphalena) plus pyrimethamine*<br />\n*First line treatment in areas with High Resistance to Chloroquine"
+          }
         },
         "_row_num": 98
       }
@@ -9294,9 +9434,11 @@
           "choice_list_name": "yes_no",
           "data_value": "yes",
           "display": {
-            "text": {
-              "default": "Yes",
-              "hindi": "हाँ"
+            "title": {
+              "text": {
+                "default": "Yes",
+                "hindi": "हाँ"
+              }
             }
           },
           "_row_num": 2
@@ -9305,9 +9447,11 @@
           "choice_list_name": "yes_no",
           "data_value": "no",
           "display": {
-            "text": {
-              "default": "No",
-              "hindi": "ना"
+            "title": {
+              "text": {
+                "default": "No",
+                "hindi": "ना"
+              }
             }
           },
           "_row_num": 3
@@ -9318,9 +9462,11 @@
           "choice_list_name": "present",
           "data_value": "present",
           "display": {
-            "text": {
-              "default": "Present",
-              "hindi": "है"
+            "title": {
+              "text": {
+                "default": "Present",
+                "hindi": "है"
+              }
             }
           },
           "_row_num": 5
@@ -9329,9 +9475,11 @@
           "choice_list_name": "present",
           "data_value": "not_present",
           "display": {
-            "text": {
-              "default": "Not present",
-              "hindi": "नही है"
+            "title": {
+              "text": {
+                "default": "Not present",
+                "hindi": "नही है"
+              }
             }
           },
           "_row_num": 6
@@ -9342,9 +9490,11 @@
           "choice_list_name": "agree",
           "data_value": "agree",
           "display": {
-            "text": {
-              "default": "Agree",
-              "hindi": "राज़ी"
+            "title": {
+              "text": {
+                "default": "Agree",
+                "hindi": "राज़ी"
+              }
             }
           },
           "_row_num": 8
@@ -9353,9 +9503,11 @@
           "choice_list_name": "agree",
           "data_value": "disagree",
           "display": {
-            "text": {
-              "default": "Disagree",
-              "hindi": "नही राज़ी"
+            "title": {
+              "text": {
+                "default": "Disagree",
+                "hindi": "नही राज़ी"
+              }
             }
           },
           "_row_num": 9
@@ -9366,9 +9518,11 @@
           "choice_list_name": "sex",
           "data_value": "male",
           "display": {
-            "text": {
-              "default": "Male",
-              "hindi": "पुरुष"
+            "title": {
+              "text": {
+                "default": "Male",
+                "hindi": "पुरुष"
+              }
             }
           },
           "_row_num": 11
@@ -9377,9 +9531,11 @@
           "choice_list_name": "sex",
           "data_value": "female",
           "display": {
-            "text": {
-              "default": "Female",
-              "hindi": "नारी"
+            "title": {
+              "text": {
+                "default": "Female",
+                "hindi": "नारी"
+              }
             }
           },
           "_row_num": 12
@@ -9390,9 +9546,11 @@
           "choice_list_name": "skin_elasticity",
           "data_value": "very_slow",
           "display": {
-            "text": {
-              "default": "Very slowly (longer than 2 seconds)?",
-              "hindi": "बहुत धीरे (२ सेकेंड से ज़्यादा)"
+            "title": {
+              "text": {
+                "default": "Very slowly (longer than 2 seconds)?",
+                "hindi": "बहुत धीरे (२ सेकेंड से ज़्यादा)"
+              }
             }
           },
           "_row_num": 15
@@ -9401,9 +9559,11 @@
           "choice_list_name": "skin_elasticity",
           "data_value": "slow",
           "display": {
-            "text": {
-              "default": "Slowly?",
-              "hindi": "धीरे?"
+            "title": {
+              "text": {
+                "default": "Slowly?",
+                "hindi": "धीरे?"
+              }
             }
           },
           "_row_num": 16
@@ -9412,9 +9572,11 @@
           "choice_list_name": "skin_elasticity",
           "data_value": "normal",
           "display": {
-            "text": {
-              "default": "Skin goes back normally.",
-              "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
+            "title": {
+              "text": {
+                "default": "Skin goes back normally.",
+                "hindi": "चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना"
+              }
             }
           },
           "_row_num": 17
@@ -9425,9 +9587,11 @@
           "choice_list_name": "attachment_quality",
           "data_value": "none",
           "display": {
-            "text": {
-              "default": "No attachment at all.",
-              "hindi": "कोई लगाव नही"
+            "title": {
+              "text": {
+                "default": "No attachment at all.",
+                "hindi": "कोई लगाव नही"
+              }
             }
           },
           "_row_num": 20
@@ -9436,9 +9600,11 @@
           "choice_list_name": "attachment_quality",
           "data_value": "poor",
           "display": {
-            "text": {
-              "default": "Not well attached.",
-              "hindi": "लगाव ठीक से नही है"
+            "title": {
+              "text": {
+                "default": "Not well attached.",
+                "hindi": "लगाव ठीक से नही है"
+              }
             }
           },
           "_row_num": 21
@@ -9447,9 +9613,11 @@
           "choice_list_name": "attachment_quality",
           "data_value": "good",
           "display": {
-            "text": {
-              "default": "Good attachment.",
-              "hindi": "अच्छा लगाव"
+            "title": {
+              "text": {
+                "default": "Good attachment.",
+                "hindi": "अच्छा लगाव"
+              }
             }
           },
           "_row_num": 22
@@ -9460,9 +9628,11 @@
           "choice_list_name": "sucking_effectiveness",
           "data_value": "none",
           "display": {
-            "text": {
-              "default": "Not suckling at all.",
-              "hindi": "स्तन को बिल्कुल नही चूसना"
+            "title": {
+              "text": {
+                "default": "Not suckling at all.",
+                "hindi": "स्तन को बिल्कुल नही चूसना"
+              }
             }
           },
           "_row_num": 25
@@ -9471,9 +9641,11 @@
           "choice_list_name": "sucking_effectiveness",
           "data_value": "not_effective",
           "display": {
-            "text": {
-              "default": "Not suckling effectively.",
-              "hindi": "स्तन को प्रभावी डांग से नही चूसना"
+            "title": {
+              "text": {
+                "default": "Not suckling effectively.",
+                "hindi": "स्तन को प्रभावी डांग से नही चूसना"
+              }
             }
           },
           "_row_num": 26
@@ -9482,9 +9654,11 @@
           "choice_list_name": "sucking_effectiveness",
           "data_value": "effective",
           "display": {
-            "text": {
-              "default": "Suckling effectively.",
-              "hindi": "स्तन को प्रभावी डांग से चूसना"
+            "title": {
+              "text": {
+                "default": "Suckling effectively.",
+                "hindi": "स्तन को प्रभावी डांग से चूसना"
+              }
             }
           },
           "_row_num": 27
@@ -9495,9 +9669,11 @@
           "choice_list_name": "vaccinations",
           "data_value": "bcg",
           "display": {
-            "text": {
-              "default": "BCG",
-              "hindi": "बी. सी. गी"
+            "title": {
+              "text": {
+                "default": "BCG",
+                "hindi": "बी. सी. गी"
+              }
             }
           },
           "age_weeks": 0,
@@ -9507,9 +9683,11 @@
           "choice_list_name": "vaccinations",
           "data_value": "opv0",
           "display": {
-            "text": {
-              "default": "OPV-0",
-              "hindi": "ओ. पी. वी.-०"
+            "title": {
+              "text": {
+                "default": "OPV-0",
+                "hindi": "ओ. पी. वी.-०"
+              }
             }
           },
           "age_weeks": 0,
@@ -9519,7 +9697,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "opv1hepatitusb1dpt1",
           "display": {
-            "text": "OPV-1 + Hep B-1 + DPT-1"
+            "title": {
+              "text": "OPV-1 + Hep B-1 + DPT-1"
+            }
           },
           "age_weeks": 6,
           "_row_num": 32
@@ -9528,7 +9708,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "opv2hepatitusb2dpt2",
           "display": {
-            "text": "OPV-2 + Hep B-2 + DPT-2"
+            "title": {
+              "text": "OPV-2 + Hep B-2 + DPT-2"
+            }
           },
           "age_weeks": 10,
           "_row_num": 33
@@ -9537,7 +9719,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "opv3hepatitusb3dpt3",
           "display": {
-            "text": "OPV-3 + Hep B-3 + DPT-3"
+            "title": {
+              "text": "OPV-3 + Hep B-3 + DPT-3"
+            }
           },
           "age_weeks": 14,
           "_row_num": 34
@@ -9546,9 +9730,11 @@
           "choice_list_name": "vaccinations",
           "data_value": "measles",
           "display": {
-            "text": {
-              "default": "Measles",
-              "hindi": "खसरा"
+            "title": {
+              "text": {
+                "default": "Measles",
+                "hindi": "खसरा"
+              }
             }
           },
           "age_weeks": 36,
@@ -9558,9 +9744,11 @@
           "choice_list_name": "vaccinations",
           "data_value": "vitamin_a",
           "display": {
-            "text": {
-              "default": "Vitamin A",
-              "hindi": "विटामिन ए"
+            "title": {
+              "text": {
+                "default": "Vitamin A",
+                "hindi": "विटामिन ए"
+              }
             }
           },
           "age_weeks": 36,
@@ -9570,7 +9758,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "dpt",
           "display": {
-            "text": "DPT Booster"
+            "title": {
+              "text": "DPT Booster"
+            }
           },
           "age_weeks": 64,
           "_row_num": 37
@@ -9579,7 +9769,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "opv",
           "display": {
-            "text": "OPV Booster"
+            "title": {
+              "text": "OPV Booster"
+            }
           },
           "age_weeks": 64,
           "_row_num": 38
@@ -9588,9 +9780,11 @@
           "choice_list_name": "vaccinations",
           "data_value": "dt",
           "display": {
-            "text": {
-              "default": "DT",
-              "hindi": "डीटी"
+            "title": {
+              "text": {
+                "default": "DT",
+                "hindi": "डीटी"
+              }
             }
           },
           "age_weeks": 240,
@@ -9602,9 +9796,11 @@
           "choice_list_name": "food",
           "data_value": "milk",
           "display": {
-            "text": {
-              "default": "Milk",
-              "hindi": "दूध"
+            "title": {
+              "text": {
+                "default": "Milk",
+                "hindi": "दूध"
+              }
             }
           },
           "_row_num": 42
@@ -9613,9 +9809,11 @@
           "choice_list_name": "food",
           "data_value": "juice",
           "display": {
-            "text": {
-              "default": "Juice",
-              "hindi": "जूस"
+            "title": {
+              "text": {
+                "default": "Juice",
+                "hindi": "जूस"
+              }
             }
           },
           "_row_num": 43
@@ -9624,9 +9822,11 @@
           "choice_list_name": "food",
           "data_value": "water",
           "display": {
-            "text": {
-              "default": "Water",
-              "hindi": "पानी"
+            "title": {
+              "text": {
+                "default": "Water",
+                "hindi": "पानी"
+              }
             }
           },
           "_row_num": 44
@@ -9635,9 +9835,11 @@
           "choice_list_name": "food",
           "data_value": "formula",
           "display": {
-            "text": {
-              "default": "Formula",
-              "hindi": "फ़ॉर्मूला"
+            "title": {
+              "text": {
+                "default": "Formula",
+                "hindi": "फ़ॉर्मूला"
+              }
             }
           },
           "_row_num": 45
@@ -9646,9 +9848,11 @@
           "choice_list_name": "food",
           "data_value": "cereal",
           "display": {
-            "text": {
-              "default": "Cereal",
-              "hindi": "सेरल"
+            "title": {
+              "text": {
+                "default": "Cereal",
+                "hindi": "सेरल"
+              }
             }
           },
           "_row_num": 46
@@ -9657,9 +9861,11 @@
           "choice_list_name": "food",
           "data_value": "milk_based_wheat/rice",
           "display": {
-            "text": {
-              "default": "Cooked wheat/rice based with undiluted milk and sugar",
-              "hindi": "पक्की हुई रोति / चावल शूध दूष और चीनी के साथ."
+            "title": {
+              "text": {
+                "default": "Cooked wheat/rice based with undiluted milk and sugar",
+                "hindi": "पक्की हुई रोति / चावल शूध दूष और चीनी के साथ."
+              }
             }
           },
           "_row_num": 47
@@ -9668,9 +9874,11 @@
           "choice_list_name": "food",
           "data_value": "water_based_wheat/rice",
           "display": {
-            "text": {
-              "default": "Cooked wheat/rice based with dal/lentil water",
-              "hindi": "पक्की हुई रोति / चावल डाल और पानी के साथ."
+            "title": {
+              "text": {
+                "default": "Cooked wheat/rice based with dal/lentil water",
+                "hindi": "पक्की हुई रोति / चावल डाल और पानी के साथ."
+              }
             }
           },
           "_row_num": 48
@@ -9679,9 +9887,11 @@
           "choice_list_name": "food",
           "data_value": "khichri",
           "display": {
-            "text": {
-              "default": "Khichri (cooked rice+dal/lentil in thinned form)",
-              "hindi": "खिचरी (पक्के हुए चावल+दल पतले रूप मैं.)"
+            "title": {
+              "text": {
+                "default": "Khichri (cooked rice+dal/lentil in thinned form)",
+                "hindi": "खिचरी (पक्के हुए चावल+दल पतले रूप मैं.)"
+              }
             }
           },
           "_row_num": 49
@@ -9690,9 +9900,11 @@
           "choice_list_name": "food",
           "data_value": "fruit",
           "display": {
-            "text": {
-              "default": "Mashed fruit",
-              "hindi": "पीसा हुए फल"
+            "title": {
+              "text": {
+                "default": "Mashed fruit",
+                "hindi": "पीसा हुए फल"
+              }
             }
           },
           "_row_num": 50
@@ -9701,9 +9913,11 @@
           "choice_list_name": "food",
           "data_value": "vegetables",
           "display": {
-            "text": {
-              "default": "Boiled or cooked vegetables",
-              "hindi": "उबली या पक्की हुई सब्ज़ियाँ."
+            "title": {
+              "text": {
+                "default": "Boiled or cooked vegetables",
+                "hindi": "उबली या पक्की हुई सब्ज़ियाँ."
+              }
             }
           },
           "_row_num": 51
@@ -9712,9 +9926,11 @@
           "choice_list_name": "food",
           "data_value": "mixed_food",
           "display": {
-            "text": {
-              "default": "Normal mixed food as adults",
-              "hindi": "बढ़ों जैसे सामान्य खाना."
+            "title": {
+              "text": {
+                "default": "Normal mixed food as adults",
+                "hindi": "बढ़ों जैसे सामान्य खाना."
+              }
             }
           },
           "_row_num": 52
@@ -9725,9 +9941,11 @@
           "choice_list_name": "attachment_quality_sign",
           "data_value": "chin_touching_breast",
           "display": {
-            "text": {
-              "default": "Chin touching breast",
-              "hindi": "तोढी स्तन को चू रही है."
+            "title": {
+              "text": {
+                "default": "Chin touching breast",
+                "hindi": "तोढी स्तन को चू रही है."
+              }
             }
           },
           "_row_num": 55
@@ -9736,9 +9954,11 @@
           "choice_list_name": "attachment_quality_sign",
           "data_value": "mouth_wide_open",
           "display": {
-            "text": {
-              "default": "Mouth wide open",
-              "hindi": "मूँह पूरा खुला हुआ है."
+            "title": {
+              "text": {
+                "default": "Mouth wide open",
+                "hindi": "मूँह पूरा खुला हुआ है."
+              }
             }
           },
           "_row_num": 56
@@ -9747,9 +9967,11 @@
           "choice_list_name": "attachment_quality_sign",
           "data_value": "lower_lip_outward",
           "display": {
-            "text": {
-              "default": "Lower lip turned outward",
-              "hindi": "निचला होंठ बाहर की तरफ मूधा हुआ है."
+            "title": {
+              "text": {
+                "default": "Lower lip turned outward",
+                "hindi": "निचला होंठ बाहर की तरफ मूधा हुआ है."
+              }
             }
           },
           "_row_num": 57
@@ -9758,9 +9980,11 @@
           "choice_list_name": "attachment_quality_sign",
           "data_value": "visible_areola",
           "display": {
-            "text": {
-              "default": "More areola visible above than below the \nmouth",
-              "hindi": "नीचे की अपेक्षा उपर एरियोला अधिक दिख रहा है."
+            "title": {
+              "text": {
+                "default": "More areola visible above than below the \nmouth",
+                "hindi": "नीचे की अपेक्षा उपर एरियोला अधिक दिख रहा है."
+              }
             }
           },
           "_row_num": 58
@@ -9771,9 +9995,11 @@
           "choice_list_name": "visit_type",
           "data_value": "initial_visit",
           "display": {
-            "text": {
-              "default": "Initial visit",
-              "hindi": "प्रथम भेट."
+            "title": {
+              "text": {
+                "default": "Initial visit",
+                "hindi": "प्रथम भेट."
+              }
             }
           },
           "_row_num": 61
@@ -9782,9 +10008,11 @@
           "choice_list_name": "visit_type",
           "data_value": "followup",
           "display": {
-            "text": {
-              "default": "Follow-up",
-              "hindi": "पुन: भेट"
+            "title": {
+              "text": {
+                "default": "Follow-up",
+                "hindi": "पुन: भेट"
+              }
             }
           },
           "_row_num": 62
@@ -9795,9 +10023,11 @@
           "choice_list_name": "breast_problems",
           "data_value": "flat_nipple",
           "display": {
-            "text": {
-              "default": "Flat/inverted nipple",
-              "hindi": "चुचक के घाव"
+            "title": {
+              "text": {
+                "default": "Flat/inverted nipple",
+                "hindi": "चुचक के घाव"
+              }
             }
           },
           "_row_num": 65
@@ -9806,9 +10036,11 @@
           "choice_list_name": "breast_problems",
           "data_value": "sore_nipple",
           "display": {
-            "text": {
-              "default": "Sore/cracked nipple",
-              "hindi": "चुचक के घाव"
+            "title": {
+              "text": {
+                "default": "Sore/cracked nipple",
+                "hindi": "चुचक के घाव"
+              }
             }
           },
           "_row_num": 66
@@ -9817,9 +10049,11 @@
           "choice_list_name": "breast_problems",
           "data_value": "engorged_breasts",
           "display": {
-            "text": {
-              "default": "Engorged breasts",
-              "hindi": "स्तानो मैं सूजन"
+            "title": {
+              "text": {
+                "default": "Engorged breasts",
+                "hindi": "स्तानो मैं सूजन"
+              }
             }
           },
           "_row_num": 67
@@ -9828,9 +10062,11 @@
           "choice_list_name": "breast_problems",
           "data_value": "breast_abscess",
           "display": {
-            "text": {
-              "default": "Breast abscess",
-              "hindi": "स्तानो मैं फोड़े"
+            "title": {
+              "text": {
+                "default": "Breast abscess",
+                "hindi": "स्तानो मैं फोड़े"
+              }
             }
           },
           "_row_num": 68
@@ -9841,9 +10077,11 @@
           "choice_list_name": "no_some_severe",
           "data_value": "none",
           "display": {
-            "text": {
-              "default": "None",
-              "hindi": "कुच्छ"
+            "title": {
+              "text": {
+                "default": "None",
+                "hindi": "कुच्छ"
+              }
             }
           },
           "_row_num": 70
@@ -9852,9 +10090,11 @@
           "choice_list_name": "no_some_severe",
           "data_value": "some",
           "display": {
-            "text": {
-              "default": "Some",
-              "hindi": "तोढा"
+            "title": {
+              "text": {
+                "default": "Some",
+                "hindi": "तोढा"
+              }
             }
           },
           "_row_num": 71
@@ -9863,9 +10103,11 @@
           "choice_list_name": "no_some_severe",
           "data_value": "severe",
           "display": {
-            "text": {
-              "default": "Severe",
-              "hindi": "बहुत"
+            "title": {
+              "text": {
+                "default": "Severe",
+                "hindi": "बहुत"
+              }
             }
           },
           "_row_num": 72
@@ -9876,9 +10118,11 @@
           "choice_list_name": "katori_teaspoon",
           "data_value": "katori",
           "display": {
-            "text": {
-              "default": "Katori",
-              "hindi": "कटोरी"
+            "title": {
+              "text": {
+                "default": "Katori",
+                "hindi": "कटोरी"
+              }
             }
           },
           "_row_num": 74
@@ -9887,9 +10131,11 @@
           "choice_list_name": "katori_teaspoon",
           "data_value": "teaspoon",
           "display": {
-            "text": {
-              "default": "Teaspoon",
-              "hindi": "चम्मच"
+            "title": {
+              "text": {
+                "default": "Teaspoon",
+                "hindi": "चम्मच"
+              }
             }
           },
           "_row_num": 75
@@ -9900,9 +10146,11 @@
           "choice_list_name": "cotrimoxazole_type",
           "data_value": "adult",
           "display": {
-            "text": {
-              "default": "Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)",
-              "hindi": "अडल्ट टॅबलेट सिंगल स्ट्रेंत (80म्ग त्रमेट्ोपरिम + 400 म्ग सुल्फमेठोकशज़ोले)"
+            "title": {
+              "text": {
+                "default": "Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)",
+                "hindi": "अडल्ट टॅबलेट सिंगल स्ट्रेंत (80म्ग त्रमेट्ोपरिम + 400 म्ग सुल्फमेठोकशज़ोले)"
+              }
             }
           },
           "_row_num": 77
@@ -9911,9 +10159,11 @@
           "choice_list_name": "cotrimoxazole_type",
           "data_value": "pediatric",
           "display": {
-            "text": {
-              "default": "Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)",
-              "hindi": "बच्चों की टॅबलेट (२0म्ग त्रमेट्ोपरिम + १00 म्ग सुल्फमेठोकशज़ोले)"
+            "title": {
+              "text": {
+                "default": "Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)",
+                "hindi": "बच्चों की टॅबलेट (२0म्ग त्रमेट्ोपरिम + १00 म्ग सुल्फमेठोकशज़ोले)"
+              }
             }
           },
           "_row_num": 78
@@ -9924,9 +10174,11 @@
           "choice_list_name": "malnutrition_grade",
           "data_value": "normal",
           "display": {
-            "text": {
-              "default": "Normal",
-              "hindi": "नॉर्मल"
+            "title": {
+              "text": {
+                "default": "Normal",
+                "hindi": "नॉर्मल"
+              }
             }
           },
           "_row_num": 80
@@ -9935,9 +10187,11 @@
           "choice_list_name": "malnutrition_grade",
           "data_value": "grade1",
           "display": {
-            "text": {
-              "default": "Grade I",
-              "hindi": "ग्रेड १"
+            "title": {
+              "text": {
+                "default": "Grade I",
+                "hindi": "ग्रेड १"
+              }
             }
           },
           "_row_num": 81
@@ -9946,9 +10200,11 @@
           "choice_list_name": "malnutrition_grade",
           "data_value": "grade2",
           "display": {
-            "text": {
-              "default": "Grade II",
-              "hindi": "ग्रेड २"
+            "title": {
+              "text": {
+                "default": "Grade II",
+                "hindi": "ग्रेड २"
+              }
             }
           },
           "_row_num": 82
@@ -9957,9 +10213,11 @@
           "choice_list_name": "malnutrition_grade",
           "data_value": "grade3",
           "display": {
-            "text": {
-              "default": "Grade III",
-              "hindi": "ग्रेड ३"
+            "title": {
+              "text": {
+                "default": "Grade III",
+                "hindi": "ग्रेड ३"
+              }
             }
           },
           "_row_num": 83
@@ -9968,9 +10226,11 @@
           "choice_list_name": "malnutrition_grade",
           "data_value": "grade4",
           "display": {
-            "text": {
-              "default": "Grade IV",
-              "hindi": "ग्रेड ४"
+            "title": {
+              "text": {
+                "default": "Grade IV",
+                "hindi": "ग्रेड ४"
+              }
             }
           },
           "_row_num": 84
@@ -9981,7 +10241,9 @@
           "choice_list_name": "high_low",
           "data_value": "high",
           "display": {
-            "text": "High Risk"
+            "title": {
+              "text": "High Risk"
+            }
           },
           "_row_num": 86
         },
@@ -9989,7 +10251,9 @@
           "choice_list_name": "high_low",
           "data_value": "low",
           "display": {
-            "text": "Low Risk"
+            "title": {
+              "text": "Low Risk"
+            }
           },
           "_row_num": 87
         }
@@ -9999,7 +10263,9 @@
           "choice_list_name": "tablet_syrup",
           "data_value": "tablet",
           "display": {
-            "text": "Tablet"
+            "title": {
+              "text": "Tablet"
+            }
           },
           "_row_num": 89
         },
@@ -10007,7 +10273,9 @@
           "choice_list_name": "tablet_syrup",
           "data_value": "syrup",
           "display": {
-            "text": "Syrup"
+            "title": {
+              "text": "Syrup"
+            }
           },
           "_row_num": 90
         }
@@ -10017,7 +10285,9 @@
           "choice_list_name": "basic_four_questions",
           "data_value": "difficulty_breathing",
           "display": {
-            "text": "Cough or difficulty breathing"
+            "title": {
+              "text": "Cough or difficulty breathing"
+            }
           },
           "_row_num": 92
         },
@@ -10025,7 +10295,9 @@
           "choice_list_name": "basic_four_questions",
           "data_value": "diarrhoea",
           "display": {
-            "text": "Diarrhoea"
+            "title": {
+              "text": "Diarrhoea"
+            }
           },
           "_row_num": 93
         },
@@ -10033,7 +10305,9 @@
           "choice_list_name": "basic_four_questions",
           "data_value": "fever_reported",
           "display": {
-            "text": "Fever"
+            "title": {
+              "text": "Fever"
+            }
           },
           "_row_num": 94
         },
@@ -10041,7 +10315,9 @@
           "choice_list_name": "basic_four_questions",
           "data_value": "ear_problem",
           "display": {
-            "text": "Ear problem"
+            "title": {
+              "text": "Ear problem"
+            }
           },
           "_row_num": 95
         }
@@ -10051,7 +10327,9 @@
           "choice_list_name": "antimalarial",
           "data_value": "chloroquine",
           "display": {
-            "text": "First-line antimalarial:<br />\nChloroquine"
+            "title": {
+              "text": "First-line antimalarial:<br />\nChloroquine"
+            }
           },
           "_row_num": 97
         },
@@ -10059,7 +10337,9 @@
           "choice_list_name": "antimalarial",
           "data_value": "sulphadoxine",
           "display": {
-            "text": "Second-line antimalarial:\n<br />Sulphadoxine (or sulphalena) plus pyrimethamine*<br />\n*First line treatment in areas with High Resistance to Chloroquine"
+            "title": {
+              "text": "Second-line antimalarial:\n<br />Sulphadoxine (or sulphalena) plus pyrimethamine*<br />\n*First line treatment in areas with High Resistance to Chloroquine"
+            }
           },
           "_row_num": 98
         }
@@ -23677,35 +23957,35 @@
         "_aspect": "able_to_drink",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "anaemia_check",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"none\",\"display\":{\"text\":{\"default\":\"None\",\"hindi\":\"कुच्छ\"}},\"_row_num\":70},{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"some\",\"display\":{\"text\":{\"default\":\"Some\",\"hindi\":\"तोढा\"}},\"_row_num\":71},{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"severe\",\"display\":{\"text\":{\"default\":\"Severe\",\"hindi\":\"बहुत\"}},\"_row_num\":72}]"
+        "_value": "[{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"hindi\":\"कुच्छ\"}}},\"_row_num\":70},{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"some\",\"display\":{\"title\":{\"text\":{\"default\":\"Some\",\"hindi\":\"तोढा\"}}},\"_row_num\":71},{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"severe\",\"display\":{\"title\":{\"text\":{\"default\":\"Severe\",\"hindi\":\"बहुत\"}}},\"_row_num\":72}]"
       },
       {
         "_partition": "Column",
         "_aspect": "antimalarial",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"antimalarial\",\"data_value\":\"chloroquine\",\"display\":{\"text\":\"First-line antimalarial:<br />\\nChloroquine\"},\"_row_num\":97},{\"choice_list_name\":\"antimalarial\",\"data_value\":\"sulphadoxine\",\"display\":{\"text\":\"Second-line antimalarial:\\n<br />Sulphadoxine (or sulphalena) plus pyrimethamine*<br />\\n*First line treatment in areas with High Resistance to Chloroquine\"},\"_row_num\":98}]"
+        "_value": "[{\"choice_list_name\":\"antimalarial\",\"data_value\":\"chloroquine\",\"display\":{\"title\":{\"text\":\"First-line antimalarial:<br />\\nChloroquine\"}},\"_row_num\":97},{\"choice_list_name\":\"antimalarial\",\"data_value\":\"sulphadoxine\",\"display\":{\"title\":{\"text\":\"Second-line antimalarial:\\n<br />Sulphadoxine (or sulphalena) plus pyrimethamine*<br />\\n*First line treatment in areas with High Resistance to Chloroquine\"}},\"_row_num\":98}]"
       },
       {
         "_partition": "Column",
         "_aspect": "axillary_temperature_possible",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "basic_q",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"difficulty_breathing\",\"display\":{\"text\":\"Cough or difficulty breathing\"},\"_row_num\":92},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"diarrhoea\",\"display\":{\"text\":\"Diarrhoea\"},\"_row_num\":93},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"fever_reported\",\"display\":{\"text\":\"Fever\"},\"_row_num\":94},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"ear_problem\",\"display\":{\"text\":\"Ear problem\"},\"_row_num\":95}]"
+        "_value": "[{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"difficulty_breathing\",\"display\":{\"title\":{\"text\":\"Cough or difficulty breathing\"}},\"_row_num\":92},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"diarrhoea\",\"display\":{\"title\":{\"text\":\"Diarrhoea\"}},\"_row_num\":93},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"fever_reported\",\"display\":{\"title\":{\"text\":\"Fever\"}},\"_row_num\":94},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"ear_problem\",\"display\":{\"title\":{\"text\":\"Ear problem\"}},\"_row_num\":95}]"
       },
       {
         "_partition": "Column",
@@ -23719,315 +23999,315 @@
         "_aspect": "birthdayKnown",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "blood_in_stool",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "breastfed",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "breastfed_at_night",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "bulging_fontanelle",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "change_in_feeding",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "chest_indrawing",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cholera_in_area",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "convulsions",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cornea_clouding",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cotrimoxazole_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"cotrimoxazole_type\",\"data_value\":\"adult\",\"display\":{\"text\":{\"default\":\"Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)\",\"hindi\":\"अडल्ट टॅबलेट सिंगल स्ट्रेंत (80म्ग त्रमेट्ोपरिम + 400 म्ग सुल्फमेठोकशज़ोले)\"}},\"_row_num\":77},{\"choice_list_name\":\"cotrimoxazole_type\",\"data_value\":\"pediatric\",\"display\":{\"text\":{\"default\":\"Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)\",\"hindi\":\"बच्चों की टॅबलेट (२0म्ग त्रमेट्ोपरिम + १00 म्ग सुल्फमेठोकशज़ोले)\"}},\"_row_num\":78}]"
+        "_value": "[{\"choice_list_name\":\"cotrimoxazole_type\",\"data_value\":\"adult\",\"display\":{\"title\":{\"text\":{\"default\":\"Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)\",\"hindi\":\"अडल्ट टॅबलेट सिंगल स्ट्रेंत (80म्ग त्रमेट्ोपरिम + 400 म्ग सुल्फमेठोकशज़ोले)\"}}},\"_row_num\":77},{\"choice_list_name\":\"cotrimoxazole_type\",\"data_value\":\"pediatric\",\"display\":{\"title\":{\"text\":{\"default\":\"Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)\",\"hindi\":\"बच्चों की टॅबलेट (२0म्ग त्रमेट्ोपरिम + १00 म्ग सुल्फमेठोकशज़ोले)\"}}},\"_row_num\":78}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cotrimoxazole_type_red",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"cotrimoxazole_type\",\"data_value\":\"adult\",\"display\":{\"text\":{\"default\":\"Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)\",\"hindi\":\"अडल्ट टॅबलेट सिंगल स्ट्रेंत (80म्ग त्रमेट्ोपरिम + 400 म्ग सुल्फमेठोकशज़ोले)\"}},\"_row_num\":77},{\"choice_list_name\":\"cotrimoxazole_type\",\"data_value\":\"pediatric\",\"display\":{\"text\":{\"default\":\"Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)\",\"hindi\":\"बच्चों की टॅबलेट (२0म्ग त्रमेट्ोपरिम + १00 म्ग सुल्फमेठोकशज़ोले)\"}},\"_row_num\":78}]"
+        "_value": "[{\"choice_list_name\":\"cotrimoxazole_type\",\"data_value\":\"adult\",\"display\":{\"title\":{\"text\":{\"default\":\"Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)\",\"hindi\":\"अडल्ट टॅबलेट सिंगल स्ट्रेंत (80म्ग त्रमेट्ोपरिम + 400 म्ग सुल्फमेठोकशज़ोले)\"}}},\"_row_num\":77},{\"choice_list_name\":\"cotrimoxazole_type\",\"data_value\":\"pediatric\",\"display\":{\"title\":{\"text\":{\"default\":\"Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)\",\"hindi\":\"बच्चों की टॅबलेट (२0म्ग त्रमेट्ोपरिम + १00 म्ग सुल्फमेठोकशज़ोले)\"}}},\"_row_num\":78}]"
       },
       {
         "_partition": "Column",
         "_aspect": "drinking_eagerly",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "drinking_poorly",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ear_discharge_observed",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ear_discharge_reported",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ear_pain",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ear_swelling",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "eye_pus",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "feel_for_fever",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "fever_present_every_day",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "given_vaccinations",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"vaccinations\",\"data_value\":\"bcg\",\"display\":{\"text\":{\"default\":\"BCG\",\"hindi\":\"बी. सी. गी\"}},\"age_weeks\":0,\"_row_num\":30},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv0\",\"display\":{\"text\":{\"default\":\"OPV-0\",\"hindi\":\"ओ. पी. वी.-०\"}},\"age_weeks\":0,\"_row_num\":31},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv1hepatitusb1dpt1\",\"display\":{\"text\":\"OPV-1 + Hep B-1 + DPT-1\"},\"age_weeks\":6,\"_row_num\":32},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv2hepatitusb2dpt2\",\"display\":{\"text\":\"OPV-2 + Hep B-2 + DPT-2\"},\"age_weeks\":10,\"_row_num\":33},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv3hepatitusb3dpt3\",\"display\":{\"text\":\"OPV-3 + Hep B-3 + DPT-3\"},\"age_weeks\":14,\"_row_num\":34},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"measles\",\"display\":{\"text\":{\"default\":\"Measles\",\"hindi\":\"खसरा\"}},\"age_weeks\":36,\"_row_num\":35},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"vitamin_a\",\"display\":{\"text\":{\"default\":\"Vitamin A\",\"hindi\":\"विटामिन ए\"}},\"age_weeks\":36,\"_row_num\":36},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"dpt\",\"display\":{\"text\":\"DPT Booster\"},\"age_weeks\":64,\"_row_num\":37},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv\",\"display\":{\"text\":\"OPV Booster\"},\"age_weeks\":64,\"_row_num\":38},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"dt\",\"display\":{\"text\":{\"default\":\"DT\",\"hindi\":\"डीटी\"}},\"age_weeks\":240,\"_row_num\":39}]"
+        "_value": "[{\"choice_list_name\":\"vaccinations\",\"data_value\":\"bcg\",\"display\":{\"title\":{\"text\":{\"default\":\"BCG\",\"hindi\":\"बी. सी. गी\"}}},\"age_weeks\":0,\"_row_num\":30},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv0\",\"display\":{\"title\":{\"text\":{\"default\":\"OPV-0\",\"hindi\":\"ओ. पी. वी.-०\"}}},\"age_weeks\":0,\"_row_num\":31},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv1hepatitusb1dpt1\",\"display\":{\"title\":{\"text\":\"OPV-1 + Hep B-1 + DPT-1\"}},\"age_weeks\":6,\"_row_num\":32},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv2hepatitusb2dpt2\",\"display\":{\"title\":{\"text\":\"OPV-2 + Hep B-2 + DPT-2\"}},\"age_weeks\":10,\"_row_num\":33},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv3hepatitusb3dpt3\",\"display\":{\"title\":{\"text\":\"OPV-3 + Hep B-3 + DPT-3\"}},\"age_weeks\":14,\"_row_num\":34},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"measles\",\"display\":{\"title\":{\"text\":{\"default\":\"Measles\",\"hindi\":\"खसरा\"}}},\"age_weeks\":36,\"_row_num\":35},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"vitamin_a\",\"display\":{\"title\":{\"text\":{\"default\":\"Vitamin A\",\"hindi\":\"विटामिन ए\"}}},\"age_weeks\":36,\"_row_num\":36},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"dpt\",\"display\":{\"title\":{\"text\":\"DPT Booster\"}},\"age_weeks\":64,\"_row_num\":37},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv\",\"display\":{\"title\":{\"text\":\"OPV Booster\"}},\"age_weeks\":64,\"_row_num\":38},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"dt\",\"display\":{\"title\":{\"text\":{\"default\":\"DT\",\"hindi\":\"डीटी\"}}},\"age_weeks\":240,\"_row_num\":39}]"
       },
       {
         "_partition": "Column",
         "_aspect": "going_to_hospital",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "leave_before_treatment_end",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "lethargic",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "malaria_risk",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"high_low\",\"data_value\":\"high\",\"display\":{\"text\":\"High Risk\"},\"_row_num\":86},{\"choice_list_name\":\"high_low\",\"data_value\":\"low\",\"display\":{\"text\":\"Low Risk\"},\"_row_num\":87}]"
+        "_value": "[{\"choice_list_name\":\"high_low\",\"data_value\":\"high\",\"display\":{\"title\":{\"text\":\"High Risk\"}},\"_row_num\":86},{\"choice_list_name\":\"high_low\",\"data_value\":\"low\",\"display\":{\"title\":{\"text\":\"Low Risk\"}},\"_row_num\":87}]"
       },
       {
         "_partition": "Column",
         "_aspect": "malnutrition_grade",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"normal\",\"display\":{\"text\":{\"default\":\"Normal\",\"hindi\":\"नॉर्मल\"}},\"_row_num\":80},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"grade1\",\"display\":{\"text\":{\"default\":\"Grade I\",\"hindi\":\"ग्रेड १\"}},\"_row_num\":81},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"grade2\",\"display\":{\"text\":{\"default\":\"Grade II\",\"hindi\":\"ग्रेड २\"}},\"_row_num\":82},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"grade3\",\"display\":{\"text\":{\"default\":\"Grade III\",\"hindi\":\"ग्रेड ३\"}},\"_row_num\":83},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"grade4\",\"display\":{\"text\":{\"default\":\"Grade IV\",\"hindi\":\"ग्रेड ४\"}},\"_row_num\":84}]"
+        "_value": "[{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"normal\",\"display\":{\"title\":{\"text\":{\"default\":\"Normal\",\"hindi\":\"नॉर्मल\"}}},\"_row_num\":80},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"grade1\",\"display\":{\"title\":{\"text\":{\"default\":\"Grade I\",\"hindi\":\"ग्रेड १\"}}},\"_row_num\":81},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"grade2\",\"display\":{\"title\":{\"text\":{\"default\":\"Grade II\",\"hindi\":\"ग्रेड २\"}}},\"_row_num\":82},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"grade3\",\"display\":{\"title\":{\"text\":{\"default\":\"Grade III\",\"hindi\":\"ग्रेड ३\"}}},\"_row_num\":83},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"grade4\",\"display\":{\"title\":{\"text\":{\"default\":\"Grade IV\",\"hindi\":\"ग्रेड ४\"}}},\"_row_num\":84}]"
       },
       {
         "_partition": "Column",
         "_aspect": "measles_three_month",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "mouth_ulcers",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "mouth_ulcers_deep",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "needed_vaccinations",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"vaccinations\",\"data_value\":\"bcg\",\"display\":{\"text\":{\"default\":\"BCG\",\"hindi\":\"बी. सी. गी\"}},\"age_weeks\":0,\"_row_num\":30},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv0\",\"display\":{\"text\":{\"default\":\"OPV-0\",\"hindi\":\"ओ. पी. वी.-०\"}},\"age_weeks\":0,\"_row_num\":31},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv1hepatitusb1dpt1\",\"display\":{\"text\":\"OPV-1 + Hep B-1 + DPT-1\"},\"age_weeks\":6,\"_row_num\":32},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv2hepatitusb2dpt2\",\"display\":{\"text\":\"OPV-2 + Hep B-2 + DPT-2\"},\"age_weeks\":10,\"_row_num\":33},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv3hepatitusb3dpt3\",\"display\":{\"text\":\"OPV-3 + Hep B-3 + DPT-3\"},\"age_weeks\":14,\"_row_num\":34},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"measles\",\"display\":{\"text\":{\"default\":\"Measles\",\"hindi\":\"खसरा\"}},\"age_weeks\":36,\"_row_num\":35},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"vitamin_a\",\"display\":{\"text\":{\"default\":\"Vitamin A\",\"hindi\":\"विटामिन ए\"}},\"age_weeks\":36,\"_row_num\":36},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"dpt\",\"display\":{\"text\":\"DPT Booster\"},\"age_weeks\":64,\"_row_num\":37},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv\",\"display\":{\"text\":\"OPV Booster\"},\"age_weeks\":64,\"_row_num\":38},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"dt\",\"display\":{\"text\":{\"default\":\"DT\",\"hindi\":\"डीटी\"}},\"age_weeks\":240,\"_row_num\":39}]"
+        "_value": "[{\"choice_list_name\":\"vaccinations\",\"data_value\":\"bcg\",\"display\":{\"title\":{\"text\":{\"default\":\"BCG\",\"hindi\":\"बी. सी. गी\"}}},\"age_weeks\":0,\"_row_num\":30},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv0\",\"display\":{\"title\":{\"text\":{\"default\":\"OPV-0\",\"hindi\":\"ओ. पी. वी.-०\"}}},\"age_weeks\":0,\"_row_num\":31},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv1hepatitusb1dpt1\",\"display\":{\"title\":{\"text\":\"OPV-1 + Hep B-1 + DPT-1\"}},\"age_weeks\":6,\"_row_num\":32},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv2hepatitusb2dpt2\",\"display\":{\"title\":{\"text\":\"OPV-2 + Hep B-2 + DPT-2\"}},\"age_weeks\":10,\"_row_num\":33},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv3hepatitusb3dpt3\",\"display\":{\"title\":{\"text\":\"OPV-3 + Hep B-3 + DPT-3\"}},\"age_weeks\":14,\"_row_num\":34},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"measles\",\"display\":{\"title\":{\"text\":{\"default\":\"Measles\",\"hindi\":\"खसरा\"}}},\"age_weeks\":36,\"_row_num\":35},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"vitamin_a\",\"display\":{\"title\":{\"text\":{\"default\":\"Vitamin A\",\"hindi\":\"विटामिन ए\"}}},\"age_weeks\":36,\"_row_num\":36},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"dpt\",\"display\":{\"title\":{\"text\":\"DPT Booster\"}},\"age_weeks\":64,\"_row_num\":37},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"opv\",\"display\":{\"title\":{\"text\":\"OPV Booster\"}},\"age_weeks\":64,\"_row_num\":38},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"dt\",\"display\":{\"title\":{\"text\":{\"default\":\"DT\",\"hindi\":\"डीटी\"}}},\"age_weeks\":240,\"_row_num\":39}]"
       },
       {
         "_partition": "Column",
         "_aspect": "oedema",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "other_foods_types",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"food\",\"data_value\":\"milk\",\"display\":{\"text\":{\"default\":\"Milk\",\"hindi\":\"दूध\"}},\"_row_num\":42},{\"choice_list_name\":\"food\",\"data_value\":\"juice\",\"display\":{\"text\":{\"default\":\"Juice\",\"hindi\":\"जूस\"}},\"_row_num\":43},{\"choice_list_name\":\"food\",\"data_value\":\"water\",\"display\":{\"text\":{\"default\":\"Water\",\"hindi\":\"पानी\"}},\"_row_num\":44},{\"choice_list_name\":\"food\",\"data_value\":\"formula\",\"display\":{\"text\":{\"default\":\"Formula\",\"hindi\":\"फ़ॉर्मूला\"}},\"_row_num\":45},{\"choice_list_name\":\"food\",\"data_value\":\"cereal\",\"display\":{\"text\":{\"default\":\"Cereal\",\"hindi\":\"सेरल\"}},\"_row_num\":46},{\"choice_list_name\":\"food\",\"data_value\":\"milk_based_wheat/rice\",\"display\":{\"text\":{\"default\":\"Cooked wheat/rice based with undiluted milk and sugar\",\"hindi\":\"पक्की हुई रोति / चावल शूध दूष और चीनी के साथ.\"}},\"_row_num\":47},{\"choice_list_name\":\"food\",\"data_value\":\"water_based_wheat/rice\",\"display\":{\"text\":{\"default\":\"Cooked wheat/rice based with dal/lentil water\",\"hindi\":\"पक्की हुई रोति / चावल डाल और पानी के साथ.\"}},\"_row_num\":48},{\"choice_list_name\":\"food\",\"data_value\":\"khichri\",\"display\":{\"text\":{\"default\":\"Khichri (cooked rice+dal/lentil in thinned form)\",\"hindi\":\"खिचरी (पक्के हुए चावल+दल पतले रूप मैं.)\"}},\"_row_num\":49},{\"choice_list_name\":\"food\",\"data_value\":\"fruit\",\"display\":{\"text\":{\"default\":\"Mashed fruit\",\"hindi\":\"पीसा हुए फल\"}},\"_row_num\":50},{\"choice_list_name\":\"food\",\"data_value\":\"vegetables\",\"display\":{\"text\":{\"default\":\"Boiled or cooked vegetables\",\"hindi\":\"उबली या पक्की हुई सब्ज़ियाँ.\"}},\"_row_num\":51},{\"choice_list_name\":\"food\",\"data_value\":\"mixed_food\",\"display\":{\"text\":{\"default\":\"Normal mixed food as adults\",\"hindi\":\"बढ़ों जैसे सामान्य खाना.\"}},\"_row_num\":52}]"
+        "_value": "[{\"choice_list_name\":\"food\",\"data_value\":\"milk\",\"display\":{\"title\":{\"text\":{\"default\":\"Milk\",\"hindi\":\"दूध\"}}},\"_row_num\":42},{\"choice_list_name\":\"food\",\"data_value\":\"juice\",\"display\":{\"title\":{\"text\":{\"default\":\"Juice\",\"hindi\":\"जूस\"}}},\"_row_num\":43},{\"choice_list_name\":\"food\",\"data_value\":\"water\",\"display\":{\"title\":{\"text\":{\"default\":\"Water\",\"hindi\":\"पानी\"}}},\"_row_num\":44},{\"choice_list_name\":\"food\",\"data_value\":\"formula\",\"display\":{\"title\":{\"text\":{\"default\":\"Formula\",\"hindi\":\"फ़ॉर्मूला\"}}},\"_row_num\":45},{\"choice_list_name\":\"food\",\"data_value\":\"cereal\",\"display\":{\"title\":{\"text\":{\"default\":\"Cereal\",\"hindi\":\"सेरल\"}}},\"_row_num\":46},{\"choice_list_name\":\"food\",\"data_value\":\"milk_based_wheat/rice\",\"display\":{\"title\":{\"text\":{\"default\":\"Cooked wheat/rice based with undiluted milk and sugar\",\"hindi\":\"पक्की हुई रोति / चावल शूध दूष और चीनी के साथ.\"}}},\"_row_num\":47},{\"choice_list_name\":\"food\",\"data_value\":\"water_based_wheat/rice\",\"display\":{\"title\":{\"text\":{\"default\":\"Cooked wheat/rice based with dal/lentil water\",\"hindi\":\"पक्की हुई रोति / चावल डाल और पानी के साथ.\"}}},\"_row_num\":48},{\"choice_list_name\":\"food\",\"data_value\":\"khichri\",\"display\":{\"title\":{\"text\":{\"default\":\"Khichri (cooked rice+dal/lentil in thinned form)\",\"hindi\":\"खिचरी (पक्के हुए चावल+दल पतले रूप मैं.)\"}}},\"_row_num\":49},{\"choice_list_name\":\"food\",\"data_value\":\"fruit\",\"display\":{\"title\":{\"text\":{\"default\":\"Mashed fruit\",\"hindi\":\"पीसा हुए फल\"}}},\"_row_num\":50},{\"choice_list_name\":\"food\",\"data_value\":\"vegetables\",\"display\":{\"title\":{\"text\":{\"default\":\"Boiled or cooked vegetables\",\"hindi\":\"उबली या पक्की हुई सब्ज़ियाँ.\"}}},\"_row_num\":51},{\"choice_list_name\":\"food\",\"data_value\":\"mixed_food\",\"display\":{\"title\":{\"text\":{\"default\":\"Normal mixed food as adults\",\"hindi\":\"बढ़ों जैसे सामान्य खाना.\"}}},\"_row_num\":52}]"
       },
       {
         "_partition": "Column",
         "_aspect": "other_problems",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "rash_generalized",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "red_eyes",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "restless",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "runny_nose",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "separate_serving",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "serving_unit",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"katori_teaspoon\",\"data_value\":\"katori\",\"display\":{\"text\":{\"default\":\"Katori\",\"hindi\":\"कटोरी\"}},\"_row_num\":74},{\"choice_list_name\":\"katori_teaspoon\",\"data_value\":\"teaspoon\",\"display\":{\"text\":{\"default\":\"Teaspoon\",\"hindi\":\"चम्मच\"}},\"_row_num\":75}]"
+        "_value": "[{\"choice_list_name\":\"katori_teaspoon\",\"data_value\":\"katori\",\"display\":{\"title\":{\"text\":{\"default\":\"Katori\",\"hindi\":\"कटोरी\"}}},\"_row_num\":74},{\"choice_list_name\":\"katori_teaspoon\",\"data_value\":\"teaspoon\",\"display\":{\"title\":{\"text\":{\"default\":\"Teaspoon\",\"hindi\":\"चम्मच\"}}},\"_row_num\":75}]"
       },
       {
         "_partition": "Column",
         "_aspect": "skin_elasticity",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"very_slow\",\"display\":{\"text\":{\"default\":\"Very slowly (longer than 2 seconds)?\",\"hindi\":\"बहुत धीरे (२ सेकेंड से ज़्यादा)\"}},\"_row_num\":15},{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"slow\",\"display\":{\"text\":{\"default\":\"Slowly?\",\"hindi\":\"धीरे?\"}},\"_row_num\":16},{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"normal\",\"display\":{\"text\":{\"default\":\"Skin goes back normally.\",\"hindi\":\"चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना\"}},\"_row_num\":17}]"
+        "_value": "[{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"very_slow\",\"display\":{\"title\":{\"text\":{\"default\":\"Very slowly (longer than 2 seconds)?\",\"hindi\":\"बहुत धीरे (२ सेकेंड से ज़्यादा)\"}}},\"_row_num\":15},{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"slow\",\"display\":{\"title\":{\"text\":{\"default\":\"Slowly?\",\"hindi\":\"धीरे?\"}}},\"_row_num\":16},{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"normal\",\"display\":{\"title\":{\"text\":{\"default\":\"Skin goes back normally.\",\"hindi\":\"चिकोती भरना पर त्वचा का बहुत धीरे वापस जाना\"}}},\"_row_num\":17}]"
       },
       {
         "_partition": "Column",
         "_aspect": "stiff_neck",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "stridor",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "sunken_eyes",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "takes_other_foods",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
@@ -24041,28 +24321,28 @@
         "_aspect": "visit_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"visit_type\",\"data_value\":\"initial_visit\",\"display\":{\"text\":{\"default\":\"Initial visit\",\"hindi\":\"प्रथम भेट.\"}},\"_row_num\":61},{\"choice_list_name\":\"visit_type\",\"data_value\":\"followup\",\"display\":{\"text\":{\"default\":\"Follow-up\",\"hindi\":\"पुन: भेट\"}},\"_row_num\":62}]"
+        "_value": "[{\"choice_list_name\":\"visit_type\",\"data_value\":\"initial_visit\",\"display\":{\"title\":{\"text\":{\"default\":\"Initial visit\",\"hindi\":\"प्रथम भेट.\"}}},\"_row_num\":61},{\"choice_list_name\":\"visit_type\",\"data_value\":\"followup\",\"display\":{\"title\":{\"text\":{\"default\":\"Follow-up\",\"hindi\":\"पुन: भेट\"}}},\"_row_num\":62}]"
       },
       {
         "_partition": "Column",
         "_aspect": "vomit_everything",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"hindi\":\"हाँ\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"hindi\":\"ना\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "wasting",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":{\"default\":\"Present\",\"hindi\":\"है\"}}},\"_row_num\":5},{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":{\"default\":\"Not present\",\"hindi\":\"नही है\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "zinc_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"tablet_syrup\",\"data_value\":\"tablet\",\"display\":{\"text\":\"Tablet\"},\"_row_num\":89},{\"choice_list_name\":\"tablet_syrup\",\"data_value\":\"syrup\",\"display\":{\"text\":\"Syrup\"},\"_row_num\":90}]"
+        "_value": "[{\"choice_list_name\":\"tablet_syrup\",\"data_value\":\"tablet\",\"display\":{\"title\":{\"text\":\"Tablet\"}},\"_row_num\":89},{\"choice_list_name\":\"tablet_syrup\",\"data_value\":\"syrup\",\"display\":{\"title\":{\"text\":\"Syrup\"}},\"_row_num\":90}]"
       },
       {
         "_partition": "FormType",

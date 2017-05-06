@@ -602,7 +602,9 @@
         "choice_list_name": "test_forms",
         "data_value": "geotagger",
         "display": {
-          "text": "Geotagger"
+          "title": {
+            "text": "Geotagger"
+          }
         },
         "_row_num": 2
       },
@@ -610,7 +612,9 @@
         "choice_list_name": "test_forms",
         "data_value": "breathcounter",
         "display": {
-          "text": "breathcounter"
+          "title": {
+            "text": "breathcounter"
+          }
         },
         "_row_num": 3
       },
@@ -618,7 +622,9 @@
         "choice_list_name": "test_forms",
         "data_value": "complex_validate_test",
         "display": {
-          "text": "complex_validate_test"
+          "title": {
+            "text": "complex_validate_test"
+          }
         },
         "_row_num": 4
       },
@@ -626,7 +632,9 @@
         "choice_list_name": "test_forms",
         "data_value": "customAppearance",
         "display": {
-          "text": "customAppearance"
+          "title": {
+            "text": "customAppearance"
+          }
         },
         "_row_num": 5
       },
@@ -634,7 +642,9 @@
         "choice_list_name": "test_forms",
         "data_value": "exampleForm",
         "display": {
-          "text": "exampleForm"
+          "title": {
+            "text": "exampleForm"
+          }
         },
         "_row_num": 6
       },
@@ -642,7 +652,9 @@
         "choice_list_name": "test_forms",
         "data_value": "household",
         "display": {
-          "text": "household"
+          "title": {
+            "text": "household"
+          }
         },
         "_row_num": 7
       },
@@ -650,7 +662,9 @@
         "choice_list_name": "test_forms",
         "data_value": "imnci_test",
         "display": {
-          "text": "imnci_test"
+          "title": {
+            "text": "imnci_test"
+          }
         },
         "_row_num": 8
       },
@@ -658,7 +672,9 @@
         "choice_list_name": "test_forms",
         "data_value": "refrigerators_init",
         "display": {
-          "text": "refrigerators_init"
+          "title": {
+            "text": "refrigerators_init"
+          }
         },
         "_row_num": 9
       },
@@ -666,7 +682,9 @@
         "choice_list_name": "test_forms",
         "data_value": "refrigerators_update",
         "display": {
-          "text": "refrigerators_update"
+          "title": {
+            "text": "refrigerators_update"
+          }
         },
         "_row_num": 10
       },
@@ -674,7 +692,9 @@
         "choice_list_name": "test_forms",
         "data_value": "section_test",
         "display": {
-          "text": "section_test"
+          "title": {
+            "text": "section_test"
+          }
         },
         "_row_num": 11
       },
@@ -682,7 +702,9 @@
         "choice_list_name": "test_forms",
         "data_value": "selects",
         "display": {
-          "text": "selects"
+          "title": {
+            "text": "selects"
+          }
         },
         "_row_num": 12
       },
@@ -690,7 +712,9 @@
         "choice_list_name": "test_forms",
         "data_value": "twoColumn",
         "display": {
-          "text": "twoColumn"
+          "title": {
+            "text": "twoColumn"
+          }
         },
         "_row_num": 13
       },
@@ -698,7 +722,9 @@
         "choice_list_name": "test_forms",
         "data_value": "gridScreen",
         "display": {
-          "text": "gridScreen"
+          "title": {
+            "text": "gridScreen"
+          }
         },
         "_row_num": 14
       },
@@ -706,7 +732,9 @@
         "choice_list_name": "test_forms",
         "data_value": "child_coverage",
         "display": {
-          "text": "Child Coverage Immunizations"
+          "title": {
+            "text": "Child Coverage Immunizations"
+          }
         },
         "_row_num": 15
       },
@@ -714,7 +742,9 @@
         "choice_list_name": "test_forms",
         "data_value": "adult_coverage",
         "display": {
-          "text": "Adult Coverage Immunizations"
+          "title": {
+            "text": "Adult Coverage Immunizations"
+          }
         },
         "_row_num": 16
       },
@@ -722,7 +752,9 @@
         "choice_list_name": "test_forms",
         "data_value": "graphExample",
         "display": {
-          "text": "Graph Examples"
+          "title": {
+            "text": "Graph Examples"
+          }
         },
         "_row_num": 17
       },
@@ -730,7 +762,9 @@
         "choice_list_name": "test_forms",
         "data_value": "visit",
         "display": {
-          "text": "Visit"
+          "title": {
+            "text": "Visit"
+          }
         },
         "_row_num": 18
       },
@@ -738,7 +772,9 @@
         "choice_list_name": "test_forms",
         "data_value": "plot",
         "display": {
-          "text": "Plot"
+          "title": {
+            "text": "Plot"
+          }
         },
         "_row_num": 19
       },
@@ -746,7 +782,9 @@
         "choice_list_name": "test_forms",
         "data_value": "agriculture",
         "display": {
-          "text": "Agriculture"
+          "title": {
+            "text": "Agriculture"
+          }
         },
         "_row_num": 20
       },
@@ -754,7 +792,9 @@
         "choice_list_name": "test_forms",
         "data_value": "geoweather",
         "display": {
-          "text": "geoweather"
+          "title": {
+            "text": "geoweather"
+          }
         },
         "_row_num": 21
       },
@@ -762,7 +802,9 @@
         "choice_list_name": "test_forms",
         "data_value": "send_sms",
         "display": {
-          "text": "Send SMS"
+          "title": {
+            "text": "Send SMS"
+          }
         },
         "_row_num": 22
       },
@@ -770,7 +812,9 @@
         "choice_list_name": "test_forms",
         "data_value": "eonasdan",
         "display": {
-          "text": "DateTime Picker"
+          "title": {
+            "text": "DateTime Picker"
+          }
         },
         "_row_num": 23
       },
@@ -778,7 +822,9 @@
         "choice_list_name": "test_forms",
         "data_value": "screenClient",
         "display": {
-          "text": "Screen Female Client"
+          "title": {
+            "text": "Screen Female Client"
+          }
         },
         "_row_num": 24
       },
@@ -786,7 +832,9 @@
         "choice_list_name": "test_forms",
         "data_value": "client6Week",
         "display": {
-          "text": "Client 6 Week"
+          "title": {
+            "text": "Client 6 Week"
+          }
         },
         "_row_num": 25
       },
@@ -794,7 +842,9 @@
         "choice_list_name": "test_forms",
         "data_value": "client6Month",
         "display": {
-          "text": "Client 6 Month"
+          "title": {
+            "text": "Client 6 Month"
+          }
         },
         "_row_num": 26
       },
@@ -802,7 +852,9 @@
         "choice_list_name": "test_forms",
         "data_value": "screenPartner",
         "display": {
-          "text": "Screen Partner"
+          "title": {
+            "text": "Screen Partner"
+          }
         },
         "_row_num": 27
       },
@@ -810,7 +862,9 @@
         "choice_list_name": "test_forms",
         "data_value": "partner6Month",
         "display": {
-          "text": "Partner 6 Month"
+          "title": {
+            "text": "Partner 6 Month"
+          }
         },
         "_row_num": 28
       }
@@ -1346,7 +1400,9 @@
           "choice_list_name": "test_forms",
           "data_value": "geotagger",
           "display": {
-            "text": "Geotagger"
+            "title": {
+              "text": "Geotagger"
+            }
           },
           "_row_num": 2
         },
@@ -1354,7 +1410,9 @@
           "choice_list_name": "test_forms",
           "data_value": "breathcounter",
           "display": {
-            "text": "breathcounter"
+            "title": {
+              "text": "breathcounter"
+            }
           },
           "_row_num": 3
         },
@@ -1362,7 +1420,9 @@
           "choice_list_name": "test_forms",
           "data_value": "complex_validate_test",
           "display": {
-            "text": "complex_validate_test"
+            "title": {
+              "text": "complex_validate_test"
+            }
           },
           "_row_num": 4
         },
@@ -1370,7 +1430,9 @@
           "choice_list_name": "test_forms",
           "data_value": "customAppearance",
           "display": {
-            "text": "customAppearance"
+            "title": {
+              "text": "customAppearance"
+            }
           },
           "_row_num": 5
         },
@@ -1378,7 +1440,9 @@
           "choice_list_name": "test_forms",
           "data_value": "exampleForm",
           "display": {
-            "text": "exampleForm"
+            "title": {
+              "text": "exampleForm"
+            }
           },
           "_row_num": 6
         },
@@ -1386,7 +1450,9 @@
           "choice_list_name": "test_forms",
           "data_value": "household",
           "display": {
-            "text": "household"
+            "title": {
+              "text": "household"
+            }
           },
           "_row_num": 7
         },
@@ -1394,7 +1460,9 @@
           "choice_list_name": "test_forms",
           "data_value": "imnci_test",
           "display": {
-            "text": "imnci_test"
+            "title": {
+              "text": "imnci_test"
+            }
           },
           "_row_num": 8
         },
@@ -1402,7 +1470,9 @@
           "choice_list_name": "test_forms",
           "data_value": "refrigerators_init",
           "display": {
-            "text": "refrigerators_init"
+            "title": {
+              "text": "refrigerators_init"
+            }
           },
           "_row_num": 9
         },
@@ -1410,7 +1480,9 @@
           "choice_list_name": "test_forms",
           "data_value": "refrigerators_update",
           "display": {
-            "text": "refrigerators_update"
+            "title": {
+              "text": "refrigerators_update"
+            }
           },
           "_row_num": 10
         },
@@ -1418,7 +1490,9 @@
           "choice_list_name": "test_forms",
           "data_value": "section_test",
           "display": {
-            "text": "section_test"
+            "title": {
+              "text": "section_test"
+            }
           },
           "_row_num": 11
         },
@@ -1426,7 +1500,9 @@
           "choice_list_name": "test_forms",
           "data_value": "selects",
           "display": {
-            "text": "selects"
+            "title": {
+              "text": "selects"
+            }
           },
           "_row_num": 12
         },
@@ -1434,7 +1510,9 @@
           "choice_list_name": "test_forms",
           "data_value": "twoColumn",
           "display": {
-            "text": "twoColumn"
+            "title": {
+              "text": "twoColumn"
+            }
           },
           "_row_num": 13
         },
@@ -1442,7 +1520,9 @@
           "choice_list_name": "test_forms",
           "data_value": "gridScreen",
           "display": {
-            "text": "gridScreen"
+            "title": {
+              "text": "gridScreen"
+            }
           },
           "_row_num": 14
         },
@@ -1450,7 +1530,9 @@
           "choice_list_name": "test_forms",
           "data_value": "child_coverage",
           "display": {
-            "text": "Child Coverage Immunizations"
+            "title": {
+              "text": "Child Coverage Immunizations"
+            }
           },
           "_row_num": 15
         },
@@ -1458,7 +1540,9 @@
           "choice_list_name": "test_forms",
           "data_value": "adult_coverage",
           "display": {
-            "text": "Adult Coverage Immunizations"
+            "title": {
+              "text": "Adult Coverage Immunizations"
+            }
           },
           "_row_num": 16
         },
@@ -1466,7 +1550,9 @@
           "choice_list_name": "test_forms",
           "data_value": "graphExample",
           "display": {
-            "text": "Graph Examples"
+            "title": {
+              "text": "Graph Examples"
+            }
           },
           "_row_num": 17
         },
@@ -1474,7 +1560,9 @@
           "choice_list_name": "test_forms",
           "data_value": "visit",
           "display": {
-            "text": "Visit"
+            "title": {
+              "text": "Visit"
+            }
           },
           "_row_num": 18
         },
@@ -1482,7 +1570,9 @@
           "choice_list_name": "test_forms",
           "data_value": "plot",
           "display": {
-            "text": "Plot"
+            "title": {
+              "text": "Plot"
+            }
           },
           "_row_num": 19
         },
@@ -1490,7 +1580,9 @@
           "choice_list_name": "test_forms",
           "data_value": "agriculture",
           "display": {
-            "text": "Agriculture"
+            "title": {
+              "text": "Agriculture"
+            }
           },
           "_row_num": 20
         },
@@ -1498,7 +1590,9 @@
           "choice_list_name": "test_forms",
           "data_value": "geoweather",
           "display": {
-            "text": "geoweather"
+            "title": {
+              "text": "geoweather"
+            }
           },
           "_row_num": 21
         },
@@ -1506,7 +1600,9 @@
           "choice_list_name": "test_forms",
           "data_value": "send_sms",
           "display": {
-            "text": "Send SMS"
+            "title": {
+              "text": "Send SMS"
+            }
           },
           "_row_num": 22
         },
@@ -1514,7 +1610,9 @@
           "choice_list_name": "test_forms",
           "data_value": "eonasdan",
           "display": {
-            "text": "DateTime Picker"
+            "title": {
+              "text": "DateTime Picker"
+            }
           },
           "_row_num": 23
         },
@@ -1522,7 +1620,9 @@
           "choice_list_name": "test_forms",
           "data_value": "screenClient",
           "display": {
-            "text": "Screen Female Client"
+            "title": {
+              "text": "Screen Female Client"
+            }
           },
           "_row_num": 24
         },
@@ -1530,7 +1630,9 @@
           "choice_list_name": "test_forms",
           "data_value": "client6Week",
           "display": {
-            "text": "Client 6 Week"
+            "title": {
+              "text": "Client 6 Week"
+            }
           },
           "_row_num": 25
         },
@@ -1538,7 +1640,9 @@
           "choice_list_name": "test_forms",
           "data_value": "client6Month",
           "display": {
-            "text": "Client 6 Month"
+            "title": {
+              "text": "Client 6 Month"
+            }
           },
           "_row_num": 26
         },
@@ -1546,7 +1650,9 @@
           "choice_list_name": "test_forms",
           "data_value": "screenPartner",
           "display": {
-            "text": "Screen Partner"
+            "title": {
+              "text": "Screen Partner"
+            }
           },
           "_row_num": 27
         },
@@ -1554,7 +1660,9 @@
           "choice_list_name": "test_forms",
           "data_value": "partner6Month",
           "display": {
-            "text": "Partner 6 Month"
+            "title": {
+              "text": "Partner 6 Month"
+            }
           },
           "_row_num": 28
         }

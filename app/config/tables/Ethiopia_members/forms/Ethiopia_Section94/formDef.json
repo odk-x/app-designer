@@ -179,7 +179,9 @@
         "choice_list_name": "self",
         "data_value": "self",
         "display": {
-          "text": "Self"
+          "title": {
+            "text": "Self"
+          }
         },
         "_row_num": 2
       },
@@ -187,7 +189,9 @@
         "choice_list_name": "no_yes",
         "data_value": "no",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 3
       },
@@ -195,7 +199,9 @@
         "choice_list_name": "no_yes",
         "data_value": "yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 4
       },
@@ -203,7 +209,9 @@
         "choice_list_name": "frequency",
         "data_value": "frequent",
         "display": {
-          "text": "Frequent"
+          "title": {
+            "text": "Frequent"
+          }
         },
         "_row_num": 5
       },
@@ -211,7 +219,9 @@
         "choice_list_name": "frequency",
         "data_value": "infrequent",
         "display": {
-          "text": "Once in a while"
+          "title": {
+            "text": "Once in a while"
+          }
         },
         "_row_num": 6
       }
@@ -663,7 +673,9 @@
           "choice_list_name": "self",
           "data_value": "self",
           "display": {
-            "text": "Self"
+            "title": {
+              "text": "Self"
+            }
           },
           "_row_num": 2
         }
@@ -673,7 +685,9 @@
           "choice_list_name": "no_yes",
           "data_value": "no",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 3
         },
@@ -681,7 +695,9 @@
           "choice_list_name": "no_yes",
           "data_value": "yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 4
         }
@@ -691,7 +707,9 @@
           "choice_list_name": "frequency",
           "data_value": "frequent",
           "display": {
-            "text": "Frequent"
+            "title": {
+              "text": "Frequent"
+            }
           },
           "_row_num": 5
         },
@@ -699,7 +717,9 @@
           "choice_list_name": "frequency",
           "data_value": "infrequent",
           "display": {
-            "text": "Once in a while"
+            "title": {
+              "text": "Once in a while"
+            }
           },
           "_row_num": 6
         }

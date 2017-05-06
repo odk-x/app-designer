@@ -262,7 +262,9 @@
         "choice_list_name": "no_yes",
         "data_value": "no",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 2
       },
@@ -270,7 +272,9 @@
         "choice_list_name": "no_yes",
         "data_value": "yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 3
       },
@@ -278,7 +282,9 @@
         "choice_list_name": "buy_bake",
         "data_value": "buy",
         "display": {
-          "text": "1. Buy"
+          "title": {
+            "text": "1. Buy"
+          }
         },
         "_row_num": 4
       },
@@ -286,7 +292,9 @@
         "choice_list_name": "buy_bake",
         "data_value": "bake",
         "display": {
-          "text": "2. Bake"
+          "title": {
+            "text": "2. Bake"
+          }
         },
         "_row_num": 5
       },
@@ -294,7 +302,9 @@
         "choice_list_name": "languages",
         "data_value": "amharic",
         "display": {
-          "text": "1. Amharic"
+          "title": {
+            "text": "1. Amharic"
+          }
         },
         "_row_num": 6
       },
@@ -302,7 +312,9 @@
         "choice_list_name": "languages",
         "data_value": "english",
         "display": {
-          "text": "2. English"
+          "title": {
+            "text": "2. English"
+          }
         },
         "_row_num": 7
       },
@@ -310,7 +322,9 @@
         "choice_list_name": "languages",
         "data_value": "oromiffa",
         "display": {
-          "text": "3. Oromiffa"
+          "title": {
+            "text": "3. Oromiffa"
+          }
         },
         "_row_num": 8
       },
@@ -318,7 +332,9 @@
         "choice_list_name": "reasons",
         "data_value": "lack_money",
         "display": {
-          "text": "Lack of money"
+          "title": {
+            "text": "Lack of money"
+          }
         },
         "_row_num": 9
       },
@@ -326,7 +342,9 @@
         "choice_list_name": "reasons",
         "data_value": "expensive",
         "display": {
-          "text": "Expensive"
+          "title": {
+            "text": "Expensive"
+          }
         },
         "_row_num": 10
       },
@@ -334,7 +352,9 @@
         "choice_list_name": "reasons",
         "data_value": "too_far",
         "display": {
-          "text": "Too far"
+          "title": {
+            "text": "Too far"
+          }
         },
         "_row_num": 11
       },
@@ -342,7 +362,9 @@
         "choice_list_name": "reasons",
         "data_value": "medicine_belief",
         "display": {
-          "text": "Do not believe in medicine"
+          "title": {
+            "text": "Do not believe in medicine"
+          }
         },
         "_row_num": 12
       },
@@ -350,7 +372,9 @@
         "choice_list_name": "reasons",
         "data_value": "lack_health_pro",
         "display": {
-          "text": "Lack of health professional"
+          "title": {
+            "text": "Lack of health professional"
+          }
         },
         "_row_num": 13
       },
@@ -358,7 +382,9 @@
         "choice_list_name": "reasons",
         "data_value": "poor_quality",
         "display": {
-          "text": "Poor quality/service"
+          "title": {
+            "text": "Poor quality/service"
+          }
         },
         "_row_num": 14
       },
@@ -366,7 +392,9 @@
         "choice_list_name": "reasons",
         "data_value": "no_need",
         "display": {
-          "text": "Did not require medical assistance"
+          "title": {
+            "text": "Did not require medical assistance"
+          }
         },
         "_row_num": 15
       },
@@ -374,7 +402,9 @@
         "choice_list_name": "cooking_injury_types",
         "data_value": "burns",
         "display": {
-          "text": "Burns"
+          "title": {
+            "text": "Burns"
+          }
         },
         "_row_num": 16
       },
@@ -382,7 +412,9 @@
         "choice_list_name": "cooking_injury_types",
         "data_value": "cuts",
         "display": {
-          "text": "Cuts"
+          "title": {
+            "text": "Cuts"
+          }
         },
         "_row_num": 17
       },
@@ -390,7 +422,9 @@
         "choice_list_name": "severity",
         "data_value": "light",
         "display": {
-          "text": "Light (No scar)"
+          "title": {
+            "text": "Light (No scar)"
+          }
         },
         "_row_num": 18
       },
@@ -398,7 +432,9 @@
         "choice_list_name": "severity",
         "data_value": "moderate",
         "display": {
-          "text": "Moderate (moderate scar)"
+          "title": {
+            "text": "Moderate (moderate scar)"
+          }
         },
         "_row_num": 19
       },
@@ -406,7 +442,9 @@
         "choice_list_name": "severity",
         "data_value": "serious",
         "display": {
-          "text": "Serious (larger scar)"
+          "title": {
+            "text": "Serious (larger scar)"
+          }
         },
         "_row_num": 20
       },
@@ -414,7 +452,9 @@
         "choice_list_name": "burn_types",
         "data_value": "fell",
         "display": {
-          "text": "Fell in the fire"
+          "title": {
+            "text": "Fell in the fire"
+          }
         },
         "_row_num": 21
       },
@@ -422,7 +462,9 @@
         "choice_list_name": "burn_types",
         "data_value": "contact",
         "display": {
-          "text": "Contact with stove"
+          "title": {
+            "text": "Contact with stove"
+          }
         },
         "_row_num": 22
       },
@@ -430,7 +472,9 @@
         "choice_list_name": "burn_types",
         "data_value": "object",
         "display": {
-          "text": "Burned with other hot object"
+          "title": {
+            "text": "Burned with other hot object"
+          }
         },
         "_row_num": 23
       },
@@ -438,7 +482,9 @@
         "choice_list_name": "burn_types",
         "data_value": "water",
         "display": {
-          "text": "Container with hot water was spilled"
+          "title": {
+            "text": "Container with hot water was spilled"
+          }
         },
         "_row_num": 24
       }
@@ -1662,7 +1708,9 @@
           "choice_list_name": "no_yes",
           "data_value": "no",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 2
         },
@@ -1670,7 +1718,9 @@
           "choice_list_name": "no_yes",
           "data_value": "yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 3
         }
@@ -1680,7 +1730,9 @@
           "choice_list_name": "buy_bake",
           "data_value": "buy",
           "display": {
-            "text": "1. Buy"
+            "title": {
+              "text": "1. Buy"
+            }
           },
           "_row_num": 4
         },
@@ -1688,7 +1740,9 @@
           "choice_list_name": "buy_bake",
           "data_value": "bake",
           "display": {
-            "text": "2. Bake"
+            "title": {
+              "text": "2. Bake"
+            }
           },
           "_row_num": 5
         }
@@ -1698,7 +1752,9 @@
           "choice_list_name": "languages",
           "data_value": "amharic",
           "display": {
-            "text": "1. Amharic"
+            "title": {
+              "text": "1. Amharic"
+            }
           },
           "_row_num": 6
         },
@@ -1706,7 +1762,9 @@
           "choice_list_name": "languages",
           "data_value": "english",
           "display": {
-            "text": "2. English"
+            "title": {
+              "text": "2. English"
+            }
           },
           "_row_num": 7
         },
@@ -1714,7 +1772,9 @@
           "choice_list_name": "languages",
           "data_value": "oromiffa",
           "display": {
-            "text": "3. Oromiffa"
+            "title": {
+              "text": "3. Oromiffa"
+            }
           },
           "_row_num": 8
         }
@@ -1724,7 +1784,9 @@
           "choice_list_name": "reasons",
           "data_value": "lack_money",
           "display": {
-            "text": "Lack of money"
+            "title": {
+              "text": "Lack of money"
+            }
           },
           "_row_num": 9
         },
@@ -1732,7 +1794,9 @@
           "choice_list_name": "reasons",
           "data_value": "expensive",
           "display": {
-            "text": "Expensive"
+            "title": {
+              "text": "Expensive"
+            }
           },
           "_row_num": 10
         },
@@ -1740,7 +1804,9 @@
           "choice_list_name": "reasons",
           "data_value": "too_far",
           "display": {
-            "text": "Too far"
+            "title": {
+              "text": "Too far"
+            }
           },
           "_row_num": 11
         },
@@ -1748,7 +1814,9 @@
           "choice_list_name": "reasons",
           "data_value": "medicine_belief",
           "display": {
-            "text": "Do not believe in medicine"
+            "title": {
+              "text": "Do not believe in medicine"
+            }
           },
           "_row_num": 12
         },
@@ -1756,7 +1824,9 @@
           "choice_list_name": "reasons",
           "data_value": "lack_health_pro",
           "display": {
-            "text": "Lack of health professional"
+            "title": {
+              "text": "Lack of health professional"
+            }
           },
           "_row_num": 13
         },
@@ -1764,7 +1834,9 @@
           "choice_list_name": "reasons",
           "data_value": "poor_quality",
           "display": {
-            "text": "Poor quality/service"
+            "title": {
+              "text": "Poor quality/service"
+            }
           },
           "_row_num": 14
         },
@@ -1772,7 +1844,9 @@
           "choice_list_name": "reasons",
           "data_value": "no_need",
           "display": {
-            "text": "Did not require medical assistance"
+            "title": {
+              "text": "Did not require medical assistance"
+            }
           },
           "_row_num": 15
         }
@@ -1782,7 +1856,9 @@
           "choice_list_name": "cooking_injury_types",
           "data_value": "burns",
           "display": {
-            "text": "Burns"
+            "title": {
+              "text": "Burns"
+            }
           },
           "_row_num": 16
         },
@@ -1790,7 +1866,9 @@
           "choice_list_name": "cooking_injury_types",
           "data_value": "cuts",
           "display": {
-            "text": "Cuts"
+            "title": {
+              "text": "Cuts"
+            }
           },
           "_row_num": 17
         }
@@ -1800,7 +1878,9 @@
           "choice_list_name": "severity",
           "data_value": "light",
           "display": {
-            "text": "Light (No scar)"
+            "title": {
+              "text": "Light (No scar)"
+            }
           },
           "_row_num": 18
         },
@@ -1808,7 +1888,9 @@
           "choice_list_name": "severity",
           "data_value": "moderate",
           "display": {
-            "text": "Moderate (moderate scar)"
+            "title": {
+              "text": "Moderate (moderate scar)"
+            }
           },
           "_row_num": 19
         },
@@ -1816,7 +1898,9 @@
           "choice_list_name": "severity",
           "data_value": "serious",
           "display": {
-            "text": "Serious (larger scar)"
+            "title": {
+              "text": "Serious (larger scar)"
+            }
           },
           "_row_num": 20
         }
@@ -1826,7 +1910,9 @@
           "choice_list_name": "burn_types",
           "data_value": "fell",
           "display": {
-            "text": "Fell in the fire"
+            "title": {
+              "text": "Fell in the fire"
+            }
           },
           "_row_num": 21
         },
@@ -1834,7 +1920,9 @@
           "choice_list_name": "burn_types",
           "data_value": "contact",
           "display": {
-            "text": "Contact with stove"
+            "title": {
+              "text": "Contact with stove"
+            }
           },
           "_row_num": 22
         },
@@ -1842,7 +1930,9 @@
           "choice_list_name": "burn_types",
           "data_value": "object",
           "display": {
-            "text": "Burned with other hot object"
+            "title": {
+              "text": "Burned with other hot object"
+            }
           },
           "_row_num": 23
         },
@@ -1850,7 +1940,9 @@
           "choice_list_name": "burn_types",
           "data_value": "water",
           "display": {
-            "text": "Container with hot water was spilled"
+            "title": {
+              "text": "Container with hot water was spilled"
+            }
           },
           "_row_num": 24
         }
@@ -6392,133 +6484,133 @@
         "_aspect": "burn_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"burn_types\",\"data_value\":\"fell\",\"display\":{\"text\":\"Fell in the fire\"},\"_row_num\":21},{\"choice_list_name\":\"burn_types\",\"data_value\":\"contact\",\"display\":{\"text\":\"Contact with stove\"},\"_row_num\":22},{\"choice_list_name\":\"burn_types\",\"data_value\":\"object\",\"display\":{\"text\":\"Burned with other hot object\"},\"_row_num\":23},{\"choice_list_name\":\"burn_types\",\"data_value\":\"water\",\"display\":{\"text\":\"Container with hot water was spilled\"},\"_row_num\":24}]"
+        "_value": "[{\"choice_list_name\":\"burn_types\",\"data_value\":\"fell\",\"display\":{\"title\":{\"text\":\"Fell in the fire\"}},\"_row_num\":21},{\"choice_list_name\":\"burn_types\",\"data_value\":\"contact\",\"display\":{\"title\":{\"text\":\"Contact with stove\"}},\"_row_num\":22},{\"choice_list_name\":\"burn_types\",\"data_value\":\"object\",\"display\":{\"title\":{\"text\":\"Burned with other hot object\"}},\"_row_num\":23},{\"choice_list_name\":\"burn_types\",\"data_value\":\"water\",\"display\":{\"title\":{\"text\":\"Container with hot water was spilled\"}},\"_row_num\":24}]"
       },
       {
         "_partition": "Column",
         "_aspect": "celebrate_holiday",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cooking_commercial",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cooking_injuries",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cooking_injury_severity",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"severity\",\"data_value\":\"light\",\"display\":{\"text\":\"Light (No scar)\"},\"_row_num\":18},{\"choice_list_name\":\"severity\",\"data_value\":\"moderate\",\"display\":{\"text\":\"Moderate (moderate scar)\"},\"_row_num\":19},{\"choice_list_name\":\"severity\",\"data_value\":\"serious\",\"display\":{\"text\":\"Serious (larger scar)\"},\"_row_num\":20}]"
+        "_value": "[{\"choice_list_name\":\"severity\",\"data_value\":\"light\",\"display\":{\"title\":{\"text\":\"Light (No scar)\"}},\"_row_num\":18},{\"choice_list_name\":\"severity\",\"data_value\":\"moderate\",\"display\":{\"title\":{\"text\":\"Moderate (moderate scar)\"}},\"_row_num\":19},{\"choice_list_name\":\"severity\",\"data_value\":\"serious\",\"display\":{\"title\":{\"text\":\"Serious (larger scar)\"}},\"_row_num\":20}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cooking_injury_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"cooking_injury_types\",\"data_value\":\"burns\",\"display\":{\"text\":\"Burns\"},\"_row_num\":16},{\"choice_list_name\":\"cooking_injury_types\",\"data_value\":\"cuts\",\"display\":{\"text\":\"Cuts\"},\"_row_num\":17}]"
+        "_value": "[{\"choice_list_name\":\"cooking_injury_types\",\"data_value\":\"burns\",\"display\":{\"title\":{\"text\":\"Burns\"}},\"_row_num\":16},{\"choice_list_name\":\"cooking_injury_types\",\"data_value\":\"cuts\",\"display\":{\"title\":{\"text\":\"Cuts\"}},\"_row_num\":17}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ever_smoked",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "faced_health_problems",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "fasting",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "fuel_injuries",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "fuel_sold",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "in_room_smoke",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "injera_buy_bake",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"buy_bake\",\"data_value\":\"buy\",\"display\":{\"text\":\"1. Buy\"},\"_row_num\":4},{\"choice_list_name\":\"buy_bake\",\"data_value\":\"bake\",\"display\":{\"text\":\"2. Bake\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"buy_bake\",\"data_value\":\"buy\",\"display\":{\"title\":{\"text\":\"1. Buy\"}},\"_row_num\":4},{\"choice_list_name\":\"buy_bake\",\"data_value\":\"bake\",\"display\":{\"title\":{\"text\":\"2. Bake\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "injera_eat",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "primary_languages",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"languages\",\"data_value\":\"amharic\",\"display\":{\"text\":\"1. Amharic\"},\"_row_num\":6},{\"choice_list_name\":\"languages\",\"data_value\":\"english\",\"display\":{\"text\":\"2. English\"},\"_row_num\":7},{\"choice_list_name\":\"languages\",\"data_value\":\"oromiffa\",\"display\":{\"text\":\"3. Oromiffa\"},\"_row_num\":8}]"
+        "_value": "[{\"choice_list_name\":\"languages\",\"data_value\":\"amharic\",\"display\":{\"title\":{\"text\":\"1. Amharic\"}},\"_row_num\":6},{\"choice_list_name\":\"languages\",\"data_value\":\"english\",\"display\":{\"title\":{\"text\":\"2. English\"}},\"_row_num\":7},{\"choice_list_name\":\"languages\",\"data_value\":\"oromiffa\",\"display\":{\"title\":{\"text\":\"3. Oromiffa\"}},\"_row_num\":8}]"
       },
       {
         "_partition": "Column",
         "_aspect": "produce_charcoal",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "reasons_not",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_money\",\"display\":{\"text\":\"Lack of money\"},\"_row_num\":9},{\"choice_list_name\":\"reasons\",\"data_value\":\"expensive\",\"display\":{\"text\":\"Expensive\"},\"_row_num\":10},{\"choice_list_name\":\"reasons\",\"data_value\":\"too_far\",\"display\":{\"text\":\"Too far\"},\"_row_num\":11},{\"choice_list_name\":\"reasons\",\"data_value\":\"medicine_belief\",\"display\":{\"text\":\"Do not believe in medicine\"},\"_row_num\":12},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_health_pro\",\"display\":{\"text\":\"Lack of health professional\"},\"_row_num\":13},{\"choice_list_name\":\"reasons\",\"data_value\":\"poor_quality\",\"display\":{\"text\":\"Poor quality/service\"},\"_row_num\":14},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_need\",\"display\":{\"text\":\"Did not require medical assistance\"},\"_row_num\":15}]"
+        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_money\",\"display\":{\"title\":{\"text\":\"Lack of money\"}},\"_row_num\":9},{\"choice_list_name\":\"reasons\",\"data_value\":\"expensive\",\"display\":{\"title\":{\"text\":\"Expensive\"}},\"_row_num\":10},{\"choice_list_name\":\"reasons\",\"data_value\":\"too_far\",\"display\":{\"title\":{\"text\":\"Too far\"}},\"_row_num\":11},{\"choice_list_name\":\"reasons\",\"data_value\":\"medicine_belief\",\"display\":{\"title\":{\"text\":\"Do not believe in medicine\"}},\"_row_num\":12},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_health_pro\",\"display\":{\"title\":{\"text\":\"Lack of health professional\"}},\"_row_num\":13},{\"choice_list_name\":\"reasons\",\"data_value\":\"poor_quality\",\"display\":{\"title\":{\"text\":\"Poor quality/service\"}},\"_row_num\":14},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_need\",\"display\":{\"title\":{\"text\":\"Did not require medical assistance\"}},\"_row_num\":15}]"
       },
       {
         "_partition": "Column",
         "_aspect": "received_medical_care",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "religion_affects_habits",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "FormType",

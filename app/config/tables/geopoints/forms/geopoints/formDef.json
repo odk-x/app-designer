@@ -132,7 +132,9 @@
         "choice_list_name": "transportation",
         "data_value": "Walk",
         "display": {
-          "text": "Walked"
+          "title": {
+            "text": "Walked"
+          }
         },
         "_row_num": 2
       },
@@ -140,7 +142,9 @@
         "choice_list_name": "transportation",
         "data_value": "Tuk-tuk",
         "display": {
-          "text": "Tuk-tuk"
+          "title": {
+            "text": "Tuk-tuk"
+          }
         },
         "_row_num": 3
       },
@@ -148,7 +152,9 @@
         "choice_list_name": "transportation",
         "data_value": "Boda-boda",
         "display": {
-          "text": "Boda-boda"
+          "title": {
+            "text": "Boda-boda"
+          }
         },
         "_row_num": 4
       },
@@ -156,7 +162,9 @@
         "choice_list_name": "transportation",
         "data_value": "Matatu",
         "display": {
-          "text": "Matatu"
+          "title": {
+            "text": "Matatu"
+          }
         },
         "_row_num": 5
       },
@@ -164,7 +172,9 @@
         "choice_list_name": "transportation",
         "data_value": "Taxi",
         "display": {
-          "text": "Taxi car"
+          "title": {
+            "text": "Taxi car"
+          }
         },
         "_row_num": 6
       },
@@ -172,7 +182,9 @@
         "choice_list_name": "transportation",
         "data_value": "Other",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 7
       }
@@ -280,7 +292,9 @@
           "choice_list_name": "transportation",
           "data_value": "Walk",
           "display": {
-            "text": "Walked"
+            "title": {
+              "text": "Walked"
+            }
           },
           "_row_num": 2
         },
@@ -288,7 +302,9 @@
           "choice_list_name": "transportation",
           "data_value": "Tuk-tuk",
           "display": {
-            "text": "Tuk-tuk"
+            "title": {
+              "text": "Tuk-tuk"
+            }
           },
           "_row_num": 3
         },
@@ -296,7 +312,9 @@
           "choice_list_name": "transportation",
           "data_value": "Boda-boda",
           "display": {
-            "text": "Boda-boda"
+            "title": {
+              "text": "Boda-boda"
+            }
           },
           "_row_num": 4
         },
@@ -304,7 +322,9 @@
           "choice_list_name": "transportation",
           "data_value": "Matatu",
           "display": {
-            "text": "Matatu"
+            "title": {
+              "text": "Matatu"
+            }
           },
           "_row_num": 5
         },
@@ -312,7 +332,9 @@
           "choice_list_name": "transportation",
           "data_value": "Taxi",
           "display": {
-            "text": "Taxi car"
+            "title": {
+              "text": "Taxi car"
+            }
           },
           "_row_num": 6
         },
@@ -320,7 +342,9 @@
           "choice_list_name": "transportation",
           "data_value": "Other",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 7
         }
@@ -1073,7 +1097,7 @@
         "_aspect": "transportation_mode",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"transportation\",\"data_value\":\"Walk\",\"display\":{\"text\":\"Walked\"},\"_row_num\":2},{\"choice_list_name\":\"transportation\",\"data_value\":\"Tuk-tuk\",\"display\":{\"text\":\"Tuk-tuk\"},\"_row_num\":3},{\"choice_list_name\":\"transportation\",\"data_value\":\"Boda-boda\",\"display\":{\"text\":\"Boda-boda\"},\"_row_num\":4},{\"choice_list_name\":\"transportation\",\"data_value\":\"Matatu\",\"display\":{\"text\":\"Matatu\"},\"_row_num\":5},{\"choice_list_name\":\"transportation\",\"data_value\":\"Taxi\",\"display\":{\"text\":\"Taxi car\"},\"_row_num\":6},{\"choice_list_name\":\"transportation\",\"data_value\":\"Other\",\"display\":{\"text\":\"Other\"},\"_row_num\":7}]"
+        "_value": "[{\"choice_list_name\":\"transportation\",\"data_value\":\"Walk\",\"display\":{\"title\":{\"text\":\"Walked\"}},\"_row_num\":2},{\"choice_list_name\":\"transportation\",\"data_value\":\"Tuk-tuk\",\"display\":{\"title\":{\"text\":\"Tuk-tuk\"}},\"_row_num\":3},{\"choice_list_name\":\"transportation\",\"data_value\":\"Boda-boda\",\"display\":{\"title\":{\"text\":\"Boda-boda\"}},\"_row_num\":4},{\"choice_list_name\":\"transportation\",\"data_value\":\"Matatu\",\"display\":{\"title\":{\"text\":\"Matatu\"}},\"_row_num\":5},{\"choice_list_name\":\"transportation\",\"data_value\":\"Taxi\",\"display\":{\"title\":{\"text\":\"Taxi car\"}},\"_row_num\":6},{\"choice_list_name\":\"transportation\",\"data_value\":\"Other\",\"display\":{\"title\":{\"text\":\"Other\"}},\"_row_num\":7}]"
       },
       {
         "_partition": "FormType",

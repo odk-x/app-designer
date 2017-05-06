@@ -375,7 +375,9 @@
         "choice_list_name": "yesno",
         "data_value": "yes",
         "display": {
-          "text": "yes"
+          "title": {
+            "text": "yes"
+          }
         },
         "_row_num": 2
       },
@@ -383,7 +385,9 @@
         "choice_list_name": "yesno",
         "data_value": "no",
         "display": {
-          "text": "no"
+          "title": {
+            "text": "no"
+          }
         },
         "_row_num": 3
       },
@@ -391,7 +395,9 @@
         "choice_list_name": "continents",
         "data_value": "NorthAmerica",
         "display": {
-          "text": "North America"
+          "title": {
+            "text": "North America"
+          }
         },
         "_row_num": 4
       },
@@ -399,7 +405,9 @@
         "choice_list_name": "continents",
         "data_value": "SouthAmerica",
         "display": {
-          "text": "South America"
+          "title": {
+            "text": "South America"
+          }
         },
         "_row_num": 5
       },
@@ -407,7 +415,9 @@
         "choice_list_name": "continents",
         "data_value": "Europe",
         "display": {
-          "text": "Europe"
+          "title": {
+            "text": "Europe"
+          }
         },
         "_row_num": 6
       },
@@ -415,7 +425,9 @@
         "choice_list_name": "continents",
         "data_value": "Africa",
         "display": {
-          "text": "Africa"
+          "title": {
+            "text": "Africa"
+          }
         },
         "_row_num": 7
       },
@@ -423,7 +435,9 @@
         "choice_list_name": "continents",
         "data_value": "Asia",
         "display": {
-          "text": "Asia"
+          "title": {
+            "text": "Asia"
+          }
         },
         "_row_num": 8
       },
@@ -431,7 +445,9 @@
         "choice_list_name": "continents",
         "data_value": "Australia",
         "display": {
-          "text": "Australia"
+          "title": {
+            "text": "Australia"
+          }
         },
         "_row_num": 9
       },
@@ -439,7 +455,9 @@
         "choice_list_name": "continents",
         "data_value": "Antarctica",
         "display": {
-          "text": "Antarctica"
+          "title": {
+            "text": "Antarctica"
+          }
         },
         "_row_num": 10
       },
@@ -447,7 +465,9 @@
         "choice_list_name": "examples",
         "data_value": "error",
         "display": {
-          "text": "error"
+          "title": {
+            "text": "error"
+          }
         },
         "_row_num": 12
       },
@@ -455,7 +475,9 @@
         "choice_list_name": "examples",
         "data_value": "intents",
         "display": {
-          "text": "intent launching"
+          "title": {
+            "text": "intent launching"
+          }
         },
         "_row_num": 13
       },
@@ -463,7 +485,9 @@
         "choice_list_name": "examples",
         "data_value": "label_features",
         "display": {
-          "text": "label features"
+          "title": {
+            "text": "label features"
+          }
         },
         "_row_num": 14
       },
@@ -471,7 +495,9 @@
         "choice_list_name": "examples",
         "data_value": "dynamic_defaults",
         "display": {
-          "text": "computed default values"
+          "title": {
+            "text": "computed default values"
+          }
         },
         "_row_num": 15
       },
@@ -479,7 +505,9 @@
         "choice_list_name": "examples",
         "data_value": "datetime",
         "display": {
-          "text": "datetime"
+          "title": {
+            "text": "datetime"
+          }
         },
         "_row_num": 16
       },
@@ -487,7 +515,9 @@
         "choice_list_name": "examples",
         "data_value": "geopoint",
         "display": {
-          "text": "geopoint"
+          "title": {
+            "text": "geopoint"
+          }
         },
         "_row_num": 17
       },
@@ -495,7 +525,9 @@
         "choice_list_name": "examples",
         "data_value": "media",
         "display": {
-          "text": "media"
+          "title": {
+            "text": "media"
+          }
         },
         "_row_num": 18
       },
@@ -503,7 +535,9 @@
         "choice_list_name": "examples",
         "data_value": "screen_group",
         "display": {
-          "text": "screen group with select and calculate"
+          "title": {
+            "text": "screen group with select and calculate"
+          }
         },
         "_row_num": 19
       },
@@ -511,7 +545,9 @@
         "choice_list_name": "examples",
         "data_value": "custom_template",
         "display": {
-          "text": "custom template"
+          "title": {
+            "text": "custom template"
+          }
         },
         "_row_num": 20
       },
@@ -519,7 +555,9 @@
         "choice_list_name": "examples",
         "data_value": "prompt_link",
         "display": {
-          "text": "prompt linking"
+          "title": {
+            "text": "prompt linking"
+          }
         },
         "_row_num": 21
       },
@@ -527,7 +565,9 @@
         "choice_list_name": "sexes",
         "data_value": "male",
         "display": {
-          "text": "male"
+          "title": {
+            "text": "male"
+          }
         },
         "_row_num": 23
       },
@@ -535,7 +575,9 @@
         "choice_list_name": "sexes",
         "data_value": "female",
         "display": {
-          "text": "female"
+          "title": {
+            "text": "female"
+          }
         },
         "_row_num": 24
       },
@@ -543,7 +585,9 @@
         "choice_list_name": "stores",
         "data_value": "QFC",
         "display": {
-          "text": "QFC"
+          "title": {
+            "text": "QFC"
+          }
         },
         "_row_num": 26
       },
@@ -551,7 +595,9 @@
         "choice_list_name": "stores",
         "data_value": "Safeway",
         "display": {
-          "text": "Safeway"
+          "title": {
+            "text": "Safeway"
+          }
         },
         "_row_num": 27
       },
@@ -559,7 +605,9 @@
         "choice_list_name": "stores",
         "data_value": "FredMeyer",
         "display": {
-          "text": "Target"
+          "title": {
+            "text": "Target"
+          }
         },
         "_row_num": 28
       }
@@ -673,7 +721,9 @@
           "choice_list_name": "yesno",
           "data_value": "yes",
           "display": {
-            "text": "yes"
+            "title": {
+              "text": "yes"
+            }
           },
           "_row_num": 2
         },
@@ -681,7 +731,9 @@
           "choice_list_name": "yesno",
           "data_value": "no",
           "display": {
-            "text": "no"
+            "title": {
+              "text": "no"
+            }
           },
           "_row_num": 3
         }
@@ -691,7 +743,9 @@
           "choice_list_name": "continents",
           "data_value": "NorthAmerica",
           "display": {
-            "text": "North America"
+            "title": {
+              "text": "North America"
+            }
           },
           "_row_num": 4
         },
@@ -699,7 +753,9 @@
           "choice_list_name": "continents",
           "data_value": "SouthAmerica",
           "display": {
-            "text": "South America"
+            "title": {
+              "text": "South America"
+            }
           },
           "_row_num": 5
         },
@@ -707,7 +763,9 @@
           "choice_list_name": "continents",
           "data_value": "Europe",
           "display": {
-            "text": "Europe"
+            "title": {
+              "text": "Europe"
+            }
           },
           "_row_num": 6
         },
@@ -715,7 +773,9 @@
           "choice_list_name": "continents",
           "data_value": "Africa",
           "display": {
-            "text": "Africa"
+            "title": {
+              "text": "Africa"
+            }
           },
           "_row_num": 7
         },
@@ -723,7 +783,9 @@
           "choice_list_name": "continents",
           "data_value": "Asia",
           "display": {
-            "text": "Asia"
+            "title": {
+              "text": "Asia"
+            }
           },
           "_row_num": 8
         },
@@ -731,7 +793,9 @@
           "choice_list_name": "continents",
           "data_value": "Australia",
           "display": {
-            "text": "Australia"
+            "title": {
+              "text": "Australia"
+            }
           },
           "_row_num": 9
         },
@@ -739,7 +803,9 @@
           "choice_list_name": "continents",
           "data_value": "Antarctica",
           "display": {
-            "text": "Antarctica"
+            "title": {
+              "text": "Antarctica"
+            }
           },
           "_row_num": 10
         }
@@ -749,7 +815,9 @@
           "choice_list_name": "examples",
           "data_value": "error",
           "display": {
-            "text": "error"
+            "title": {
+              "text": "error"
+            }
           },
           "_row_num": 12
         },
@@ -757,7 +825,9 @@
           "choice_list_name": "examples",
           "data_value": "intents",
           "display": {
-            "text": "intent launching"
+            "title": {
+              "text": "intent launching"
+            }
           },
           "_row_num": 13
         },
@@ -765,7 +835,9 @@
           "choice_list_name": "examples",
           "data_value": "label_features",
           "display": {
-            "text": "label features"
+            "title": {
+              "text": "label features"
+            }
           },
           "_row_num": 14
         },
@@ -773,7 +845,9 @@
           "choice_list_name": "examples",
           "data_value": "dynamic_defaults",
           "display": {
-            "text": "computed default values"
+            "title": {
+              "text": "computed default values"
+            }
           },
           "_row_num": 15
         },
@@ -781,7 +855,9 @@
           "choice_list_name": "examples",
           "data_value": "datetime",
           "display": {
-            "text": "datetime"
+            "title": {
+              "text": "datetime"
+            }
           },
           "_row_num": 16
         },
@@ -789,7 +865,9 @@
           "choice_list_name": "examples",
           "data_value": "geopoint",
           "display": {
-            "text": "geopoint"
+            "title": {
+              "text": "geopoint"
+            }
           },
           "_row_num": 17
         },
@@ -797,7 +875,9 @@
           "choice_list_name": "examples",
           "data_value": "media",
           "display": {
-            "text": "media"
+            "title": {
+              "text": "media"
+            }
           },
           "_row_num": 18
         },
@@ -805,7 +885,9 @@
           "choice_list_name": "examples",
           "data_value": "screen_group",
           "display": {
-            "text": "screen group with select and calculate"
+            "title": {
+              "text": "screen group with select and calculate"
+            }
           },
           "_row_num": 19
         },
@@ -813,7 +895,9 @@
           "choice_list_name": "examples",
           "data_value": "custom_template",
           "display": {
-            "text": "custom template"
+            "title": {
+              "text": "custom template"
+            }
           },
           "_row_num": 20
         },
@@ -821,7 +905,9 @@
           "choice_list_name": "examples",
           "data_value": "prompt_link",
           "display": {
-            "text": "prompt linking"
+            "title": {
+              "text": "prompt linking"
+            }
           },
           "_row_num": 21
         }
@@ -831,7 +917,9 @@
           "choice_list_name": "sexes",
           "data_value": "male",
           "display": {
-            "text": "male"
+            "title": {
+              "text": "male"
+            }
           },
           "_row_num": 23
         },
@@ -839,7 +927,9 @@
           "choice_list_name": "sexes",
           "data_value": "female",
           "display": {
-            "text": "female"
+            "title": {
+              "text": "female"
+            }
           },
           "_row_num": 24
         }
@@ -849,7 +939,9 @@
           "choice_list_name": "stores",
           "data_value": "QFC",
           "display": {
-            "text": "QFC"
+            "title": {
+              "text": "QFC"
+            }
           },
           "_row_num": 26
         },
@@ -857,7 +949,9 @@
           "choice_list_name": "stores",
           "data_value": "Safeway",
           "display": {
-            "text": "Safeway"
+            "title": {
+              "text": "Safeway"
+            }
           },
           "_row_num": 27
         },
@@ -865,7 +959,9 @@
           "choice_list_name": "stores",
           "data_value": "FredMeyer",
           "display": {
-            "text": "Target"
+            "title": {
+              "text": "Target"
+            }
           },
           "_row_num": 28
         }
@@ -2800,7 +2896,7 @@
         "_aspect": "selected_store",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"stores\",\"data_value\":\"QFC\",\"display\":{\"text\":\"QFC\"},\"_row_num\":26},{\"choice_list_name\":\"stores\",\"data_value\":\"Safeway\",\"display\":{\"text\":\"Safeway\"},\"_row_num\":27},{\"choice_list_name\":\"stores\",\"data_value\":\"FredMeyer\",\"display\":{\"text\":\"Target\"},\"_row_num\":28}]"
+        "_value": "[{\"choice_list_name\":\"stores\",\"data_value\":\"QFC\",\"display\":{\"title\":{\"text\":\"QFC\"}},\"_row_num\":26},{\"choice_list_name\":\"stores\",\"data_value\":\"Safeway\",\"display\":{\"title\":{\"text\":\"Safeway\"}},\"_row_num\":27},{\"choice_list_name\":\"stores\",\"data_value\":\"FredMeyer\",\"display\":{\"title\":{\"text\":\"Target\"}},\"_row_num\":28}]"
       },
       {
         "_partition": "FormType",

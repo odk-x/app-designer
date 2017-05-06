@@ -260,7 +260,9 @@
         "choice_list_name": "soil_type",
         "data_value": "dry",
         "display": {
-          "text": "Dry"
+          "title": {
+            "text": "Dry"
+          }
         },
         "_row_num": 2
       },
@@ -268,7 +270,9 @@
         "choice_list_name": "soil_type",
         "data_value": "damp",
         "display": {
-          "text": "Damp"
+          "title": {
+            "text": "Damp"
+          }
         },
         "_row_num": 3
       },
@@ -276,7 +280,9 @@
         "choice_list_name": "soil_type",
         "data_value": "moist",
         "display": {
-          "text": "Moist"
+          "title": {
+            "text": "Moist"
+          }
         },
         "_row_num": 4
       },
@@ -284,7 +290,9 @@
         "choice_list_name": "soil_type",
         "data_value": "wet",
         "display": {
-          "text": "Wet"
+          "title": {
+            "text": "Wet"
+          }
         },
         "_row_num": 5
       }
@@ -386,7 +394,9 @@
           "choice_list_name": "soil_type",
           "data_value": "dry",
           "display": {
-            "text": "Dry"
+            "title": {
+              "text": "Dry"
+            }
           },
           "_row_num": 2
         },
@@ -394,7 +404,9 @@
           "choice_list_name": "soil_type",
           "data_value": "damp",
           "display": {
-            "text": "Damp"
+            "title": {
+              "text": "Damp"
+            }
           },
           "_row_num": 3
         },
@@ -402,7 +414,9 @@
           "choice_list_name": "soil_type",
           "data_value": "moist",
           "display": {
-            "text": "Moist"
+            "title": {
+              "text": "Moist"
+            }
           },
           "_row_num": 4
         },
@@ -410,7 +424,9 @@
           "choice_list_name": "soil_type",
           "data_value": "wet",
           "display": {
-            "text": "Wet"
+            "title": {
+              "text": "Wet"
+            }
           },
           "_row_num": 5
         }
@@ -1296,7 +1312,7 @@
         "_aspect": "soil_condition",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"soil_type\",\"data_value\":\"dry\",\"display\":{\"text\":\"Dry\"},\"_row_num\":2},{\"choice_list_name\":\"soil_type\",\"data_value\":\"damp\",\"display\":{\"text\":\"Damp\"},\"_row_num\":3},{\"choice_list_name\":\"soil_type\",\"data_value\":\"moist\",\"display\":{\"text\":\"Moist\"},\"_row_num\":4},{\"choice_list_name\":\"soil_type\",\"data_value\":\"wet\",\"display\":{\"text\":\"Wet\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"soil_type\",\"data_value\":\"dry\",\"display\":{\"title\":{\"text\":\"Dry\"}},\"_row_num\":2},{\"choice_list_name\":\"soil_type\",\"data_value\":\"damp\",\"display\":{\"title\":{\"text\":\"Damp\"}},\"_row_num\":3},{\"choice_list_name\":\"soil_type\",\"data_value\":\"moist\",\"display\":{\"title\":{\"text\":\"Moist\"}},\"_row_num\":4},{\"choice_list_name\":\"soil_type\",\"data_value\":\"wet\",\"display\":{\"title\":{\"text\":\"Wet\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "FormType",

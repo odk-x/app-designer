@@ -51,7 +51,9 @@
         "choice_list_name": "conditions",
         "data_value": "Excellent",
         "display": {
-          "text": "Excellent"
+          "title": {
+            "text": "Excellent"
+          }
         },
         "_row_num": 2
       },
@@ -59,7 +61,9 @@
         "choice_list_name": "conditions",
         "data_value": "Good",
         "display": {
-          "text": "Good"
+          "title": {
+            "text": "Good"
+          }
         },
         "_row_num": 3
       },
@@ -67,7 +71,9 @@
         "choice_list_name": "conditions",
         "data_value": "Fair",
         "display": {
-          "text": "Fair"
+          "title": {
+            "text": "Fair"
+          }
         },
         "_row_num": 4
       },
@@ -75,7 +81,9 @@
         "choice_list_name": "conditions",
         "data_value": "Poor",
         "display": {
-          "text": "Poor"
+          "title": {
+            "text": "Poor"
+          }
         },
         "_row_num": 5
       },
@@ -83,7 +91,9 @@
         "choice_list_name": "conditions",
         "data_value": "Terrible",
         "display": {
-          "text": "Terrible"
+          "title": {
+            "text": "Terrible"
+          }
         },
         "_row_num": 6
       }
@@ -223,7 +233,9 @@
           "choice_list_name": "conditions",
           "data_value": "Excellent",
           "display": {
-            "text": "Excellent"
+            "title": {
+              "text": "Excellent"
+            }
           },
           "_row_num": 2
         },
@@ -231,7 +243,9 @@
           "choice_list_name": "conditions",
           "data_value": "Good",
           "display": {
-            "text": "Good"
+            "title": {
+              "text": "Good"
+            }
           },
           "_row_num": 3
         },
@@ -239,7 +253,9 @@
           "choice_list_name": "conditions",
           "data_value": "Fair",
           "display": {
-            "text": "Fair"
+            "title": {
+              "text": "Fair"
+            }
           },
           "_row_num": 4
         },
@@ -247,7 +263,9 @@
           "choice_list_name": "conditions",
           "data_value": "Poor",
           "display": {
-            "text": "Poor"
+            "title": {
+              "text": "Poor"
+            }
           },
           "_row_num": 5
         },
@@ -255,7 +273,9 @@
           "choice_list_name": "conditions",
           "data_value": "Terrible",
           "display": {
-            "text": "Terrible"
+            "title": {
+              "text": "Terrible"
+            }
           },
           "_row_num": 6
         }

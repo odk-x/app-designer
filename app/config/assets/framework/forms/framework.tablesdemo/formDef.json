@@ -195,7 +195,9 @@
         "choice_list_name": "test_forms",
         "data_value": "geotagger",
         "display": {
-          "text": "Geotagger"
+          "title": {
+            "text": "Geotagger"
+          }
         },
         "_row_num": 2
       },
@@ -203,7 +205,9 @@
         "choice_list_name": "test_forms",
         "data_value": "visit",
         "display": {
-          "text": "Visit"
+          "title": {
+            "text": "Visit"
+          }
         },
         "_row_num": 3
       },
@@ -211,7 +215,9 @@
         "choice_list_name": "test_forms",
         "data_value": "plot",
         "display": {
-          "text": "Plot"
+          "title": {
+            "text": "Plot"
+          }
         },
         "_row_num": 4
       },
@@ -219,7 +225,9 @@
         "choice_list_name": "test_forms",
         "data_value": "Tea_houses",
         "display": {
-          "text": "Tea Houses"
+          "title": {
+            "text": "Tea Houses"
+          }
         },
         "_row_num": 5
       },
@@ -227,7 +235,9 @@
         "choice_list_name": "test_forms",
         "data_value": "Tea_inventory",
         "display": {
-          "text": "Tea Inventory"
+          "title": {
+            "text": "Tea Inventory"
+          }
         },
         "_row_num": 6
       },
@@ -235,7 +245,9 @@
         "choice_list_name": "test_forms",
         "data_value": "Tea_types",
         "display": {
-          "text": "Tea Types"
+          "title": {
+            "text": "Tea Types"
+          }
         },
         "_row_num": 7
       }
@@ -720,7 +732,9 @@
           "choice_list_name": "test_forms",
           "data_value": "geotagger",
           "display": {
-            "text": "Geotagger"
+            "title": {
+              "text": "Geotagger"
+            }
           },
           "_row_num": 2
         },
@@ -728,7 +742,9 @@
           "choice_list_name": "test_forms",
           "data_value": "visit",
           "display": {
-            "text": "Visit"
+            "title": {
+              "text": "Visit"
+            }
           },
           "_row_num": 3
         },
@@ -736,7 +752,9 @@
           "choice_list_name": "test_forms",
           "data_value": "plot",
           "display": {
-            "text": "Plot"
+            "title": {
+              "text": "Plot"
+            }
           },
           "_row_num": 4
         },
@@ -744,7 +762,9 @@
           "choice_list_name": "test_forms",
           "data_value": "Tea_houses",
           "display": {
-            "text": "Tea Houses"
+            "title": {
+              "text": "Tea Houses"
+            }
           },
           "_row_num": 5
         },
@@ -752,7 +772,9 @@
           "choice_list_name": "test_forms",
           "data_value": "Tea_inventory",
           "display": {
-            "text": "Tea Inventory"
+            "title": {
+              "text": "Tea Inventory"
+            }
           },
           "_row_num": 6
         },
@@ -760,7 +782,9 @@
           "choice_list_name": "test_forms",
           "data_value": "Tea_types",
           "display": {
-            "text": "Tea Types"
+            "title": {
+              "text": "Tea Types"
+            }
           },
           "_row_num": 7
         }

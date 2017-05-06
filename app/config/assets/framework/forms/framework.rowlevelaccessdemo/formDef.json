@@ -123,7 +123,9 @@
         "choice_list_name": "test_forms",
         "data_value": "geoweather",
         "display": {
-          "text": "Geo-weather form"
+          "title": {
+            "text": "Geo-weather form"
+          }
         },
         "_row_num": 2
       },
@@ -131,7 +133,9 @@
         "choice_list_name": "test_forms",
         "data_value": "geoweather_conditions",
         "display": {
-          "text": "Geo-weather conditions form"
+          "title": {
+            "text": "Geo-weather conditions form"
+          }
         },
         "_row_num": 3
       }
@@ -616,7 +620,9 @@
           "choice_list_name": "test_forms",
           "data_value": "geoweather",
           "display": {
-            "text": "Geo-weather form"
+            "title": {
+              "text": "Geo-weather form"
+            }
           },
           "_row_num": 2
         },
@@ -624,7 +630,9 @@
           "choice_list_name": "test_forms",
           "data_value": "geoweather_conditions",
           "display": {
-            "text": "Geo-weather conditions form"
+            "title": {
+              "text": "Geo-weather conditions form"
+            }
           },
           "_row_num": 3
         }

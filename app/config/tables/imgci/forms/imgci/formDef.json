@@ -12021,7 +12021,9 @@
         "choice_list_name": "gender",
         "data_value": "male",
         "display": {
-          "text": "Male"
+          "title": {
+            "text": "Male"
+          }
         },
         "_row_num": 2
       },
@@ -12029,7 +12031,9 @@
         "choice_list_name": "gender",
         "data_value": "female",
         "display": {
-          "text": "Female"
+          "title": {
+            "text": "Female"
+          }
         },
         "_row_num": 3
       },
@@ -12038,7 +12042,9 @@
         "choice_list_name": "muac",
         "data_value": "green",
         "display": {
-          "text": "<strong><span style=\"background-color:#00CC00\">GREEN</strong></span> - MUAC > 13.5 cm"
+          "title": {
+            "text": "<strong><span style=\"background-color:#00CC00\">GREEN</strong></span> - MUAC > 13.5 cm"
+          }
         },
         "_row_num": 4
       },
@@ -12046,7 +12052,9 @@
         "choice_list_name": "muac",
         "data_value": "yellow",
         "display": {
-          "text": "<strong><span style=\"background-color: #ffff66\">YELLOW</strong></span> - MUAC 12.5 - 13.5 cm"
+          "title": {
+            "text": "<strong><span style=\"background-color: #ffff66\">YELLOW</strong></span> - MUAC 12.5 - 13.5 cm"
+          }
         },
         "_row_num": 5
       },
@@ -12054,7 +12062,9 @@
         "choice_list_name": "muac",
         "data_value": "orange",
         "display": {
-          "text": "<strong><span style=\"background-color:orange\">ORANGE</strong></span> - MUAC 12.0 - 12.5 cm"
+          "title": {
+            "text": "<strong><span style=\"background-color:orange\">ORANGE</strong></span> - MUAC 12.0 - 12.5 cm"
+          }
         },
         "_row_num": 6
       },
@@ -12062,7 +12072,9 @@
         "choice_list_name": "muac",
         "data_value": "red",
         "display": {
-          "text": "<strong><span style=\"background-color:red\">RED</strong></span> - MUAC < 12 cm"
+          "title": {
+            "text": "<strong><span style=\"background-color:red\">RED</strong></span> - MUAC < 12 cm"
+          }
         },
         "_row_num": 7
       },
@@ -12071,7 +12083,9 @@
         "choice_list_name": "cipro",
         "data_value": "250mg",
         "display": {
-          "text": "250 mg TABLET"
+          "title": {
+            "text": "250 mg TABLET"
+          }
         },
         "_row_num": 8
       },
@@ -12079,7 +12093,9 @@
         "choice_list_name": "cipro",
         "data_value": "500mg",
         "display": {
-          "text": "500 mg TABLET"
+          "title": {
+            "text": "500 mg TABLET"
+          }
         },
         "_row_num": 9
       },
@@ -12088,7 +12104,9 @@
         "choice_list_name": "pneumonia_tx",
         "data_value": "eryth",
         "display": {
-          "text": "Erythromycin, oral"
+          "title": {
+            "text": "Erythromycin, oral"
+          }
         },
         "_row_num": 10
       },
@@ -12096,7 +12114,9 @@
         "choice_list_name": "pneumonia_tx",
         "data_value": "azith",
         "display": {
-          "text": "Azithromycin, oral"
+          "title": {
+            "text": "Azithromycin, oral"
+          }
         },
         "_row_num": 11
       },
@@ -12105,7 +12125,9 @@
         "choice_list_name": "otitis_tx",
         "data_value": "eryth",
         "display": {
-          "text": "Erythromycin, oral"
+          "title": {
+            "text": "Erythromycin, oral"
+          }
         },
         "_row_num": 12
       },
@@ -12113,7 +12135,9 @@
         "choice_list_name": "otitis_tx",
         "data_value": "cotrimox",
         "display": {
-          "text": "Co-trimoxazole, oral"
+          "title": {
+            "text": "Co-trimoxazole, oral"
+          }
         },
         "_row_num": 13
       },
@@ -12122,7 +12146,9 @@
         "choice_list_name": "malaria_treatment",
         "data_value": "quinine",
         "display": {
-          "text": "Quinine, IM"
+          "title": {
+            "text": "Quinine, IM"
+          }
         },
         "_row_num": 15
       },
@@ -12130,7 +12156,9 @@
         "choice_list_name": "malaria_treatment",
         "data_value": "artemether",
         "display": {
-          "text": "Artemether, IM"
+          "title": {
+            "text": "Artemether, IM"
+          }
         },
         "_row_num": 16
       },
@@ -12138,7 +12166,9 @@
         "choice_list_name": "malaria_treatment",
         "data_value": "artesunate",
         "display": {
-          "text": "Artesunate, rectal"
+          "title": {
+            "text": "Artesunate, rectal"
+          }
         },
         "_row_num": 17
       },
@@ -12147,7 +12177,9 @@
         "choice_list_name": "Amoxicillin_type",
         "data_value": "ped",
         "display": {
-          "text": "Pediatric (250 mg)"
+          "title": {
+            "text": "Pediatric (250 mg)"
+          }
         },
         "_row_num": 19
       },
@@ -12155,7 +12187,9 @@
         "choice_list_name": "Amoxicillin_type",
         "data_value": "adult",
         "display": {
-          "text": "Adult (500 mg)"
+          "title": {
+            "text": "Adult (500 mg)"
+          }
         },
         "_row_num": 20
       },
@@ -12164,7 +12198,9 @@
         "choice_list_name": "altern_abx",
         "data_value": "eryth",
         "display": {
-          "text": "Erythromycin, oral"
+          "title": {
+            "text": "Erythromycin, oral"
+          }
         },
         "_row_num": 22
       },
@@ -12172,7 +12208,9 @@
         "choice_list_name": "altern_abx",
         "data_value": "azith",
         "display": {
-          "text": "Azithromycin, oral"
+          "title": {
+            "text": "Azithromycin, oral"
+          }
         },
         "_row_num": 23
       },
@@ -12181,7 +12219,9 @@
         "choice_list_name": "sunken_eyes",
         "data_value": "normal",
         "display": {
-          "text": "Normal"
+          "title": {
+            "text": "Normal"
+          }
         },
         "_row_num": 25
       },
@@ -12189,7 +12229,9 @@
         "choice_list_name": "sunken_eyes",
         "data_value": "sunken",
         "display": {
-          "text": "Sunken"
+          "title": {
+            "text": "Sunken"
+          }
         },
         "_row_num": 26
       },
@@ -12197,7 +12239,9 @@
         "choice_list_name": "sunken_eyes",
         "data_value": "very_sunken",
         "display": {
-          "text": "Very sunken and dry"
+          "title": {
+            "text": "Very sunken and dry"
+          }
         },
         "_row_num": 27
       },
@@ -12206,7 +12250,9 @@
         "choice_list_name": "dry_mouth",
         "data_value": "moist",
         "display": {
-          "text": "Moist"
+          "title": {
+            "text": "Moist"
+          }
         },
         "_row_num": 29
       },
@@ -12214,7 +12260,9 @@
         "choice_list_name": "dry_mouth",
         "data_value": "dry",
         "display": {
-          "text": "Dry"
+          "title": {
+            "text": "Dry"
+          }
         },
         "_row_num": 30
       },
@@ -12222,7 +12270,9 @@
         "choice_list_name": "dry_mouth",
         "data_value": "very_dry",
         "display": {
-          "text": "Very dry"
+          "title": {
+            "text": "Very dry"
+          }
         },
         "_row_num": 31
       },
@@ -12230,7 +12280,9 @@
         "choice_list_name": "yes_no",
         "data_value": "no",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 33
       },
@@ -12238,7 +12290,9 @@
         "choice_list_name": "yes_no",
         "data_value": "yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 34
       },
@@ -12246,7 +12300,9 @@
         "choice_list_name": "present",
         "data_value": "not_present",
         "display": {
-          "text": "Not Present"
+          "title": {
+            "text": "Not Present"
+          }
         },
         "_row_num": 36
       },
@@ -12254,7 +12310,9 @@
         "choice_list_name": "present",
         "data_value": "present",
         "display": {
-          "text": "Present"
+          "title": {
+            "text": "Present"
+          }
         },
         "_row_num": 37
       },
@@ -12262,7 +12320,9 @@
         "choice_list_name": "agree",
         "data_value": "agree",
         "display": {
-          "text": "Agree"
+          "title": {
+            "text": "Agree"
+          }
         },
         "_row_num": 39
       },
@@ -12270,7 +12330,9 @@
         "choice_list_name": "agree",
         "data_value": "disagree",
         "display": {
-          "text": "Disagree"
+          "title": {
+            "text": "Disagree"
+          }
         },
         "_row_num": 40
       },
@@ -12278,7 +12340,9 @@
         "choice_list_name": "sex",
         "data_value": "male",
         "display": {
-          "text": "Male"
+          "title": {
+            "text": "Male"
+          }
         },
         "_row_num": 42
       },
@@ -12286,7 +12350,9 @@
         "choice_list_name": "sex",
         "data_value": "female",
         "display": {
-          "text": "Female"
+          "title": {
+            "text": "Female"
+          }
         },
         "_row_num": 43
       },
@@ -12294,7 +12360,9 @@
         "choice_list_name": "skin_elasticity",
         "data_value": "normal",
         "display": {
-          "text": "Skin goes back normally"
+          "title": {
+            "text": "Skin goes back normally"
+          }
         },
         "_row_num": 46
       },
@@ -12302,7 +12370,9 @@
         "choice_list_name": "skin_elasticity",
         "data_value": "slow",
         "display": {
-          "text": "Slowly"
+          "title": {
+            "text": "Slowly"
+          }
         },
         "_row_num": 47
       },
@@ -12310,7 +12380,9 @@
         "choice_list_name": "skin_elasticity",
         "data_value": "very_slow",
         "display": {
-          "text": "Very slowly (longer than 2 seconds)"
+          "title": {
+            "text": "Very slowly (longer than 2 seconds)"
+          }
         },
         "_row_num": 48
       },
@@ -12322,7 +12394,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "bcg",
         "display": {
-          "text": "<span style=\"background-color:#FFFFFF\">BCG</span>"
+          "title": {
+            "text": "<span style=\"background-color:#FFFFFF\">BCG</span>"
+          }
         },
         "age_weeks": 0,
         "_row_num": 50
@@ -12332,7 +12406,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "polio_zero",
         "display": {
-          "text": "<span style=\"background-color:#FFFFFF\">Polio 'O'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#FFFFFF\">Polio 'O'</span>"
+          }
         },
         "age_weeks": 0,
         "_row_num": 51
@@ -12341,7 +12417,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "polio_one",
         "display": {
-          "text": "<span style=\"background-color:#DDDDDD\">Polio '1'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#DDDDDD\">Polio '1'</span>"
+          }
         },
         "age_weeks": 6,
         "_row_num": 52
@@ -12350,7 +12428,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "five_one",
         "display": {
-          "text": "<span style=\"background-color:#DDDDDD\">\"Five in One\" 1</span>"
+          "title": {
+            "text": "<span style=\"background-color:#DDDDDD\">\"Five in One\" 1</span>"
+          }
         },
         "age_weeks": 6,
         "_row_num": 53
@@ -12359,7 +12439,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "pneumo_one",
         "display": {
-          "text": "<span style=\"background-color:#DDDDDD'>Pneumococcal '1'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#DDDDDD'>Pneumococcal '1'</span>"
+          }
         },
         "age_weeks": 6,
         "_row_num": 54
@@ -12368,7 +12450,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "rota_one",
         "display": {
-          "text": "<span style=\"background-color:#DDDDDD\">Rotavirus  '1'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#DDDDDD\">Rotavirus  '1'</span>"
+          }
         },
         "age_weeks": 6,
         "_row_num": 55
@@ -12377,7 +12461,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "polio_two",
         "display": {
-          "text": "<span style=\"background-color:#BBBBBB\">Polio '2'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#BBBBBB\">Polio '2'</span>"
+          }
         },
         "age_weeks": 10,
         "_row_num": 56
@@ -12386,7 +12472,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "five_two",
         "display": {
-          "text": "<span style=\"background-color:#BBBBBB\">\"Five in One\" 2</span>"
+          "title": {
+            "text": "<span style=\"background-color:#BBBBBB\">\"Five in One\" 2</span>"
+          }
         },
         "age_weeks": 10,
         "_row_num": 57
@@ -12395,7 +12483,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "pneumo_two",
         "display": {
-          "text": "<span style=\"background-color:#BBBBBB\">Pneumococcal '2'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#BBBBBB\">Pneumococcal '2'</span>"
+          }
         },
         "age_weeks": 10,
         "_row_num": 58
@@ -12404,7 +12494,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "rota_two",
         "display": {
-          "text": "<span style=\"background-color:#BBBBBB\">Rotavirus  '2'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#BBBBBB\">Rotavirus  '2'</span>"
+          }
         },
         "age_weeks": 10,
         "_row_num": 59
@@ -12413,7 +12505,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "polio_three",
         "display": {
-          "text": "<span style=\"background-color:#DDDDDD; \"font color:white\">Polio '3'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#DDDDDD; \"font color:white\">Polio '3'</span>"
+          }
         },
         "age_weeks": 14,
         "_row_num": 60
@@ -12422,7 +12516,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "five_three",
         "display": {
-          "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">\"Five in One\" 3</span>"
+          "title": {
+            "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">\"Five in One\" 3</span>"
+          }
         },
         "age_weeks": 14,
         "_row_num": 61
@@ -12431,7 +12527,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "pneumo_three",
         "display": {
-          "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">Pneumococcal '3'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">Pneumococcal '3'</span>"
+          }
         },
         "age_weeks": 14,
         "_row_num": 62
@@ -12440,7 +12538,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "rota_three",
         "display": {
-          "text": "<span style=\"background-color:#DDDDDD\"; \"font-color:white\">Rotavirus  '3'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#DDDDDD\"; \"font-color:white\">Rotavirus  '3'</span>"
+          }
         },
         "age_weeks": 14,
         "_row_num": 63
@@ -12449,7 +12549,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "measles_one",
         "display": {
-          "text": "<span style=\"background-color:#BBBBBB\"; \"font color:white\">Measles '1'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#BBBBBB\"; \"font color:white\">Measles '1'</span>"
+          }
         },
         "age_weeks": 36,
         "_row_num": 64
@@ -12458,7 +12560,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "yellow_fever",
         "display": {
-          "text": "<span style=\"background-color:#BBBBBB\"; \"color:white\">Yellow Fever</span>"
+          "title": {
+            "text": "<span style=\"background-color:#BBBBBB\"; \"color:white\">Yellow Fever</span>"
+          }
         },
         "age_weeks": 36,
         "_row_num": 65
@@ -12467,7 +12571,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "measles_two",
         "display": {
-          "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">Measles '2'</span>"
+          "title": {
+            "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">Measles '2'</span>"
+          }
         },
         "age_weeks": 72,
         "_row_num": 66
@@ -12477,7 +12583,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "vitA",
         "display": {
-          "text": "<span style=\"background-color:#FFFFFF\">Vitamin A</span>"
+          "title": {
+            "text": "<span style=\"background-color:#FFFFFF\">Vitamin A</span>"
+          }
         },
         "age_weeks": 0,
         "_row_num": 67
@@ -12486,7 +12594,9 @@
         "choice_list_name": "vaccinations",
         "data_value": "uptodate",
         "display": {
-          "text": "<i>Child is up to date on all vaccinations.</i>"
+          "title": {
+            "text": "<i>Child is up to date on all vaccinations.</i>"
+          }
         },
         "age_weeks": 0,
         "_row_num": 68
@@ -12495,7 +12605,9 @@
         "choice_list_name": "food",
         "data_value": "milk",
         "display": {
-          "text": "Milk"
+          "title": {
+            "text": "Milk"
+          }
         },
         "_row_num": 70
       },
@@ -12503,7 +12615,9 @@
         "choice_list_name": "food",
         "data_value": "juice",
         "display": {
-          "text": "Juice"
+          "title": {
+            "text": "Juice"
+          }
         },
         "_row_num": 71
       },
@@ -12511,7 +12625,9 @@
         "choice_list_name": "food",
         "data_value": "water",
         "display": {
-          "text": "Water"
+          "title": {
+            "text": "Water"
+          }
         },
         "_row_num": 72
       },
@@ -12519,7 +12635,9 @@
         "choice_list_name": "food",
         "data_value": "formula",
         "display": {
-          "text": "Formula"
+          "title": {
+            "text": "Formula"
+          }
         },
         "_row_num": 73
       },
@@ -12527,7 +12645,9 @@
         "choice_list_name": "food",
         "data_value": "cereal",
         "display": {
-          "text": "Cereal"
+          "title": {
+            "text": "Cereal"
+          }
         },
         "_row_num": 74
       },
@@ -12535,7 +12655,9 @@
         "choice_list_name": "food",
         "data_value": "milk_based_wheat/rice",
         "display": {
-          "text": "Cooked wheat/rice based with undiluted milk and sugar"
+          "title": {
+            "text": "Cooked wheat/rice based with undiluted milk and sugar"
+          }
         },
         "_row_num": 75
       },
@@ -12543,7 +12665,9 @@
         "choice_list_name": "food",
         "data_value": "water_based_wheat/rice",
         "display": {
-          "text": "Cooked wheat/rice based with dal/lentil water"
+          "title": {
+            "text": "Cooked wheat/rice based with dal/lentil water"
+          }
         },
         "_row_num": 76
       },
@@ -12551,7 +12675,9 @@
         "choice_list_name": "food",
         "data_value": "khichri",
         "display": {
-          "text": "Khichri (cooked rice+dal/lentil in thinned form)"
+          "title": {
+            "text": "Khichri (cooked rice+dal/lentil in thinned form)"
+          }
         },
         "_row_num": 77
       },
@@ -12559,7 +12685,9 @@
         "choice_list_name": "food",
         "data_value": "fruit",
         "display": {
-          "text": "Mashed fruit"
+          "title": {
+            "text": "Mashed fruit"
+          }
         },
         "_row_num": 78
       },
@@ -12567,7 +12695,9 @@
         "choice_list_name": "food",
         "data_value": "vegetables",
         "display": {
-          "text": "Boiled or cooked vegetables"
+          "title": {
+            "text": "Boiled or cooked vegetables"
+          }
         },
         "_row_num": 79
       },
@@ -12575,7 +12705,9 @@
         "choice_list_name": "food",
         "data_value": "mixed_food",
         "display": {
-          "text": "Normal mixed food as adults"
+          "title": {
+            "text": "Normal mixed food as adults"
+          }
         },
         "_row_num": 80
       },
@@ -12583,7 +12715,9 @@
         "choice_list_name": "attachment_quality_sign",
         "data_value": "chin_touching_breast",
         "display": {
-          "text": "Chin touching breast"
+          "title": {
+            "text": "Chin touching breast"
+          }
         },
         "_row_num": 83
       },
@@ -12591,7 +12725,9 @@
         "choice_list_name": "attachment_quality_sign",
         "data_value": "mouth_wide_open",
         "display": {
-          "text": "Mouth wide open"
+          "title": {
+            "text": "Mouth wide open"
+          }
         },
         "_row_num": 84
       },
@@ -12599,7 +12735,9 @@
         "choice_list_name": "attachment_quality_sign",
         "data_value": "lower_lip_outward",
         "display": {
-          "text": "Lower lip turned outward"
+          "title": {
+            "text": "Lower lip turned outward"
+          }
         },
         "_row_num": 85
       },
@@ -12607,7 +12745,9 @@
         "choice_list_name": "attachment_quality_sign",
         "data_value": "visible_areola",
         "display": {
-          "text": "More areola visible above than below the \nmouth"
+          "title": {
+            "text": "More areola visible above than below the \nmouth"
+          }
         },
         "_row_num": 86
       },
@@ -12615,7 +12755,9 @@
         "choice_list_name": "visit_type",
         "data_value": "initial_visit",
         "display": {
-          "text": "Initial visit"
+          "title": {
+            "text": "Initial visit"
+          }
         },
         "_row_num": 89
       },
@@ -12623,7 +12765,9 @@
         "choice_list_name": "visit_type",
         "data_value": "followup",
         "display": {
-          "text": "Follow-up"
+          "title": {
+            "text": "Follow-up"
+          }
         },
         "_row_num": 90
       },
@@ -12631,7 +12775,9 @@
         "choice_list_name": "breast_problems",
         "data_value": "flat_nipple",
         "display": {
-          "text": "Flat/inverted nipple"
+          "title": {
+            "text": "Flat/inverted nipple"
+          }
         },
         "_row_num": 93
       },
@@ -12639,7 +12785,9 @@
         "choice_list_name": "breast_problems",
         "data_value": "sore_nipple",
         "display": {
-          "text": "Sore/cracked nipple"
+          "title": {
+            "text": "Sore/cracked nipple"
+          }
         },
         "_row_num": 94
       },
@@ -12647,7 +12795,9 @@
         "choice_list_name": "breast_problems",
         "data_value": "engorged_breasts",
         "display": {
-          "text": "Engorged breasts"
+          "title": {
+            "text": "Engorged breasts"
+          }
         },
         "_row_num": 95
       },
@@ -12655,7 +12805,9 @@
         "choice_list_name": "breast_problems",
         "data_value": "breast_abscess",
         "display": {
-          "text": "Breast abscess"
+          "title": {
+            "text": "Breast abscess"
+          }
         },
         "_row_num": 96
       },
@@ -12663,7 +12815,9 @@
         "choice_list_name": "no_some_severe",
         "data_value": "none",
         "display": {
-          "text": "None"
+          "title": {
+            "text": "None"
+          }
         },
         "_row_num": 98
       },
@@ -12671,7 +12825,9 @@
         "choice_list_name": "no_some_severe",
         "data_value": "some",
         "display": {
-          "text": "Some <i>(skin of the child's palm is pale)</i>"
+          "title": {
+            "text": "Some <i>(skin of the child's palm is pale)</i>"
+          }
         },
         "_row_num": 99
       },
@@ -12679,7 +12835,9 @@
         "choice_list_name": "no_some_severe",
         "data_value": "severe",
         "display": {
-          "text": "Severe <i>(skin of the palm is so pale that it looks white)</i>"
+          "title": {
+            "text": "Severe <i>(skin of the palm is so pale that it looks white)</i>"
+          }
         },
         "_row_num": 100
       },
@@ -12687,7 +12845,9 @@
         "choice_list_name": "katori_teaspoon",
         "data_value": "katori",
         "display": {
-          "text": "Katori"
+          "title": {
+            "text": "Katori"
+          }
         },
         "_row_num": 102
       },
@@ -12695,7 +12855,9 @@
         "choice_list_name": "katori_teaspoon",
         "data_value": "teaspoon",
         "display": {
-          "text": "Teaspoon"
+          "title": {
+            "text": "Teaspoon"
+          }
         },
         "_row_num": 103
       },
@@ -12703,7 +12865,9 @@
         "choice_list_name": "cotrimoxazole_type",
         "data_value": "adult",
         "display": {
-          "text": "Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)"
+          "title": {
+            "text": "Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)"
+          }
         },
         "_row_num": 105
       },
@@ -12711,7 +12875,9 @@
         "choice_list_name": "cotrimoxazole_type",
         "data_value": "pediatric",
         "display": {
-          "text": "Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)"
+          "title": {
+            "text": "Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)"
+          }
         },
         "_row_num": 106
       },
@@ -12719,7 +12885,9 @@
         "choice_list_name": "malnutrition_grade",
         "data_value": "Normal",
         "display": {
-          "text": "<strong><span style=\"background-color:#00CC00\">Weight for age > 80% (Above the median)</span>"
+          "title": {
+            "text": "<strong><span style=\"background-color:#00CC00\">Weight for age > 80% (Above the median)</span>"
+          }
         },
         "_row_num": 108
       },
@@ -12727,7 +12895,9 @@
         "choice_list_name": "malnutrition_grade",
         "data_value": "MildPEM",
         "display": {
-          "text": "<strong><span style=\"background-color: #ffff66\">Weight for age < 80% but > 75% (Below median)</span>"
+          "title": {
+            "text": "<strong><span style=\"background-color: #ffff66\">Weight for age < 80% but > 75% (Below median)</span>"
+          }
         },
         "_row_num": 109
       },
@@ -12735,7 +12905,9 @@
         "choice_list_name": "malnutrition_grade",
         "data_value": "ModPEM",
         "display": {
-          "text": "<strong><span style=\"background-color:orange\">Weight for age < 75% but > 60% (Below low weight for age)</span>"
+          "title": {
+            "text": "<strong><span style=\"background-color:orange\">Weight for age < 75% but > 60% (Below low weight for age)</span>"
+          }
         },
         "_row_num": 110
       },
@@ -12743,7 +12915,9 @@
         "choice_list_name": "malnutrition_grade",
         "data_value": "SeverePEM",
         "display": {
-          "text": "<strong><span style=\"background-color:red\">Weight for age < 60% expected weight for age (Below very low weight for age)</span>"
+          "title": {
+            "text": "<strong><span style=\"background-color:red\">Weight for age < 60% expected weight for age (Below very low weight for age)</span>"
+          }
         },
         "_row_num": 111
       },
@@ -12751,7 +12925,9 @@
         "choice_list_name": "high_low",
         "data_value": "high",
         "display": {
-          "text": "High Risk"
+          "title": {
+            "text": "High Risk"
+          }
         },
         "_row_num": 113
       },
@@ -12759,7 +12935,9 @@
         "choice_list_name": "high_low",
         "data_value": "low",
         "display": {
-          "text": "Low Risk"
+          "title": {
+            "text": "Low Risk"
+          }
         },
         "_row_num": 114
       },
@@ -12767,7 +12945,9 @@
         "choice_list_name": "tablet_syrup",
         "data_value": "tablet",
         "display": {
-          "text": "Tablet"
+          "title": {
+            "text": "Tablet"
+          }
         },
         "_row_num": 116
       },
@@ -12775,7 +12955,9 @@
         "choice_list_name": "tablet_syrup",
         "data_value": "syrup",
         "display": {
-          "text": "Syrup"
+          "title": {
+            "text": "Syrup"
+          }
         },
         "_row_num": 117
       },
@@ -12783,7 +12965,9 @@
         "choice_list_name": "basic_four_questions",
         "data_value": "difficulty_breathing",
         "display": {
-          "text": "Cough or difficulty breathing"
+          "title": {
+            "text": "Cough or difficulty breathing"
+          }
         },
         "_row_num": 119
       },
@@ -12791,7 +12975,9 @@
         "choice_list_name": "basic_four_questions",
         "data_value": "diarrhoea",
         "display": {
-          "text": "Diarrhoea"
+          "title": {
+            "text": "Diarrhoea"
+          }
         },
         "_row_num": 120
       },
@@ -12799,7 +12985,9 @@
         "choice_list_name": "basic_four_questions",
         "data_value": "fever_reported",
         "display": {
-          "text": "Fever"
+          "title": {
+            "text": "Fever"
+          }
         },
         "_row_num": 121
       },
@@ -12807,7 +12995,9 @@
         "choice_list_name": "basic_four_questions",
         "data_value": "ear_problem",
         "display": {
-          "text": "Ear problem"
+          "title": {
+            "text": "Ear problem"
+          }
         },
         "_row_num": 122
       },
@@ -12816,7 +13006,9 @@
         "choice_list_name": "antimalarial",
         "data_value": "ArtAmod",
         "display": {
-          "text": "Artesunate-Amodiaquine, oral"
+          "title": {
+            "text": "Artesunate-Amodiaquine, oral"
+          }
         },
         "_row_num": 124
       },
@@ -12824,7 +13016,9 @@
         "choice_list_name": "antimalarial",
         "data_value": "ArtLum",
         "display": {
-          "text": "Artemether-Lumefantrine, oral  (Reserved for patients not tolerating Artesunate-Amodiaquine)"
+          "title": {
+            "text": "Artemether-Lumefantrine, oral  (Reserved for patients not tolerating Artesunate-Amodiaquine)"
+          }
         },
         "_row_num": 125
       },
@@ -12832,7 +13026,9 @@
         "choice_list_name": "antimalarial",
         "data_value": "DihydPip",
         "display": {
-          "text": "Dihydroartemisinin-Piperaquine, oral"
+          "title": {
+            "text": "Dihydroartemisinin-Piperaquine, oral"
+          }
         },
         "_row_num": 126
       },
@@ -12841,7 +13037,9 @@
         "choice_list_name": "ArtAmod_dosing",
         "data_value": "FixedDose",
         "display": {
-          "text": "Fixed Dose Combination Artesunate (AS) + Amodiaquine (AQ)  (Standard Regimen)"
+          "title": {
+            "text": "Fixed Dose Combination Artesunate (AS) + Amodiaquine (AQ)  (Standard Regimen)"
+          }
         },
         "_row_num": 127
       },
@@ -12849,7 +13047,9 @@
         "choice_list_name": "ArtAmod_dosing",
         "data_value": "CoBlistered",
         "display": {
-          "text": "Co-Blistered Tablets (50 mg Artesunate, 150 mg Amodiaquine) for ONCE or TWICE daily dosing regimen"
+          "title": {
+            "text": "Co-Blistered Tablets (50 mg Artesunate, 150 mg Amodiaquine) for ONCE or TWICE daily dosing regimen"
+          }
         },
         "_row_num": 128
       },
@@ -12858,7 +13058,9 @@
         "choice_list_name": "severemalaria_tx",
         "data_value": "IMQuinine",
         "display": {
-          "text": "Quinine, IM"
+          "title": {
+            "text": "Quinine, IM"
+          }
         },
         "_row_num": 129
       },
@@ -12866,7 +13068,9 @@
         "choice_list_name": "severemalaria_tx",
         "data_value": "Artemether",
         "display": {
-          "text": "Artemether, IM"
+          "title": {
+            "text": "Artemether, IM"
+          }
         },
         "_row_num": 130
       },
@@ -12874,7 +13078,9 @@
         "choice_list_name": "severemalaria_tx",
         "data_value": "ArtesunateRectal",
         "display": {
-          "text": "Artesunate, rectal"
+          "title": {
+            "text": "Artesunate, rectal"
+          }
         },
         "_row_num": 131
       },
@@ -12883,7 +13089,9 @@
         "choice_list_name": "amox_tx",
         "data_value": "amox",
         "display": {
-          "text": "Amoxicillin, oral (125 mg/5 ml)"
+          "title": {
+            "text": "Amoxicillin, oral (125 mg/5 ml)"
+          }
         },
         "_row_num": 132
       },
@@ -12891,7 +13099,9 @@
         "choice_list_name": "amox_tx",
         "data_value": "amoxiclav",
         "display": {
-          "text": "Co-amoxiclav, oral"
+          "title": {
+            "text": "Co-amoxiclav, oral"
+          }
         },
         "_row_num": 133
       },
@@ -12900,7 +13110,9 @@
         "choice_list_name": "coblister_dosing",
         "data_value": "once",
         "display": {
-          "text": "ONCE Daily"
+          "title": {
+            "text": "ONCE Daily"
+          }
         },
         "_row_num": 135
       },
@@ -12908,7 +13120,9 @@
         "choice_list_name": "coblister_dosing",
         "data_value": "twice",
         "display": {
-          "text": "TWICE Daily"
+          "title": {
+            "text": "TWICE Daily"
+          }
         },
         "_row_num": 136
       }
@@ -13586,7 +13800,9 @@
           "choice_list_name": "gender",
           "data_value": "male",
           "display": {
-            "text": "Male"
+            "title": {
+              "text": "Male"
+            }
           },
           "_row_num": 2
         },
@@ -13594,7 +13810,9 @@
           "choice_list_name": "gender",
           "data_value": "female",
           "display": {
-            "text": "Female"
+            "title": {
+              "text": "Female"
+            }
           },
           "_row_num": 3
         }
@@ -13605,7 +13823,9 @@
           "choice_list_name": "muac",
           "data_value": "green",
           "display": {
-            "text": "<strong><span style=\"background-color:#00CC00\">GREEN</strong></span> - MUAC > 13.5 cm"
+            "title": {
+              "text": "<strong><span style=\"background-color:#00CC00\">GREEN</strong></span> - MUAC > 13.5 cm"
+            }
           },
           "_row_num": 4
         },
@@ -13613,7 +13833,9 @@
           "choice_list_name": "muac",
           "data_value": "yellow",
           "display": {
-            "text": "<strong><span style=\"background-color: #ffff66\">YELLOW</strong></span> - MUAC 12.5 - 13.5 cm"
+            "title": {
+              "text": "<strong><span style=\"background-color: #ffff66\">YELLOW</strong></span> - MUAC 12.5 - 13.5 cm"
+            }
           },
           "_row_num": 5
         },
@@ -13621,7 +13843,9 @@
           "choice_list_name": "muac",
           "data_value": "orange",
           "display": {
-            "text": "<strong><span style=\"background-color:orange\">ORANGE</strong></span> - MUAC 12.0 - 12.5 cm"
+            "title": {
+              "text": "<strong><span style=\"background-color:orange\">ORANGE</strong></span> - MUAC 12.0 - 12.5 cm"
+            }
           },
           "_row_num": 6
         },
@@ -13629,7 +13853,9 @@
           "choice_list_name": "muac",
           "data_value": "red",
           "display": {
-            "text": "<strong><span style=\"background-color:red\">RED</strong></span> - MUAC < 12 cm"
+            "title": {
+              "text": "<strong><span style=\"background-color:red\">RED</strong></span> - MUAC < 12 cm"
+            }
           },
           "_row_num": 7
         }
@@ -13640,7 +13866,9 @@
           "choice_list_name": "cipro",
           "data_value": "250mg",
           "display": {
-            "text": "250 mg TABLET"
+            "title": {
+              "text": "250 mg TABLET"
+            }
           },
           "_row_num": 8
         },
@@ -13648,7 +13876,9 @@
           "choice_list_name": "cipro",
           "data_value": "500mg",
           "display": {
-            "text": "500 mg TABLET"
+            "title": {
+              "text": "500 mg TABLET"
+            }
           },
           "_row_num": 9
         }
@@ -13659,7 +13889,9 @@
           "choice_list_name": "pneumonia_tx",
           "data_value": "eryth",
           "display": {
-            "text": "Erythromycin, oral"
+            "title": {
+              "text": "Erythromycin, oral"
+            }
           },
           "_row_num": 10
         },
@@ -13667,7 +13899,9 @@
           "choice_list_name": "pneumonia_tx",
           "data_value": "azith",
           "display": {
-            "text": "Azithromycin, oral"
+            "title": {
+              "text": "Azithromycin, oral"
+            }
           },
           "_row_num": 11
         }
@@ -13678,7 +13912,9 @@
           "choice_list_name": "otitis_tx",
           "data_value": "eryth",
           "display": {
-            "text": "Erythromycin, oral"
+            "title": {
+              "text": "Erythromycin, oral"
+            }
           },
           "_row_num": 12
         },
@@ -13686,7 +13922,9 @@
           "choice_list_name": "otitis_tx",
           "data_value": "cotrimox",
           "display": {
-            "text": "Co-trimoxazole, oral"
+            "title": {
+              "text": "Co-trimoxazole, oral"
+            }
           },
           "_row_num": 13
         }
@@ -13697,7 +13935,9 @@
           "choice_list_name": "malaria_treatment",
           "data_value": "quinine",
           "display": {
-            "text": "Quinine, IM"
+            "title": {
+              "text": "Quinine, IM"
+            }
           },
           "_row_num": 15
         },
@@ -13705,7 +13945,9 @@
           "choice_list_name": "malaria_treatment",
           "data_value": "artemether",
           "display": {
-            "text": "Artemether, IM"
+            "title": {
+              "text": "Artemether, IM"
+            }
           },
           "_row_num": 16
         },
@@ -13713,7 +13955,9 @@
           "choice_list_name": "malaria_treatment",
           "data_value": "artesunate",
           "display": {
-            "text": "Artesunate, rectal"
+            "title": {
+              "text": "Artesunate, rectal"
+            }
           },
           "_row_num": 17
         }
@@ -13724,7 +13968,9 @@
           "choice_list_name": "Amoxicillin_type",
           "data_value": "ped",
           "display": {
-            "text": "Pediatric (250 mg)"
+            "title": {
+              "text": "Pediatric (250 mg)"
+            }
           },
           "_row_num": 19
         },
@@ -13732,7 +13978,9 @@
           "choice_list_name": "Amoxicillin_type",
           "data_value": "adult",
           "display": {
-            "text": "Adult (500 mg)"
+            "title": {
+              "text": "Adult (500 mg)"
+            }
           },
           "_row_num": 20
         }
@@ -13743,7 +13991,9 @@
           "choice_list_name": "altern_abx",
           "data_value": "eryth",
           "display": {
-            "text": "Erythromycin, oral"
+            "title": {
+              "text": "Erythromycin, oral"
+            }
           },
           "_row_num": 22
         },
@@ -13751,7 +14001,9 @@
           "choice_list_name": "altern_abx",
           "data_value": "azith",
           "display": {
-            "text": "Azithromycin, oral"
+            "title": {
+              "text": "Azithromycin, oral"
+            }
           },
           "_row_num": 23
         }
@@ -13762,7 +14014,9 @@
           "choice_list_name": "sunken_eyes",
           "data_value": "normal",
           "display": {
-            "text": "Normal"
+            "title": {
+              "text": "Normal"
+            }
           },
           "_row_num": 25
         },
@@ -13770,7 +14024,9 @@
           "choice_list_name": "sunken_eyes",
           "data_value": "sunken",
           "display": {
-            "text": "Sunken"
+            "title": {
+              "text": "Sunken"
+            }
           },
           "_row_num": 26
         },
@@ -13778,7 +14034,9 @@
           "choice_list_name": "sunken_eyes",
           "data_value": "very_sunken",
           "display": {
-            "text": "Very sunken and dry"
+            "title": {
+              "text": "Very sunken and dry"
+            }
           },
           "_row_num": 27
         }
@@ -13789,7 +14047,9 @@
           "choice_list_name": "dry_mouth",
           "data_value": "moist",
           "display": {
-            "text": "Moist"
+            "title": {
+              "text": "Moist"
+            }
           },
           "_row_num": 29
         },
@@ -13797,7 +14057,9 @@
           "choice_list_name": "dry_mouth",
           "data_value": "dry",
           "display": {
-            "text": "Dry"
+            "title": {
+              "text": "Dry"
+            }
           },
           "_row_num": 30
         },
@@ -13805,7 +14067,9 @@
           "choice_list_name": "dry_mouth",
           "data_value": "very_dry",
           "display": {
-            "text": "Very dry"
+            "title": {
+              "text": "Very dry"
+            }
           },
           "_row_num": 31
         }
@@ -13815,7 +14079,9 @@
           "choice_list_name": "yes_no",
           "data_value": "no",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 33
         },
@@ -13823,7 +14089,9 @@
           "choice_list_name": "yes_no",
           "data_value": "yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 34
         }
@@ -13833,7 +14101,9 @@
           "choice_list_name": "present",
           "data_value": "not_present",
           "display": {
-            "text": "Not Present"
+            "title": {
+              "text": "Not Present"
+            }
           },
           "_row_num": 36
         },
@@ -13841,7 +14111,9 @@
           "choice_list_name": "present",
           "data_value": "present",
           "display": {
-            "text": "Present"
+            "title": {
+              "text": "Present"
+            }
           },
           "_row_num": 37
         }
@@ -13851,7 +14123,9 @@
           "choice_list_name": "agree",
           "data_value": "agree",
           "display": {
-            "text": "Agree"
+            "title": {
+              "text": "Agree"
+            }
           },
           "_row_num": 39
         },
@@ -13859,7 +14133,9 @@
           "choice_list_name": "agree",
           "data_value": "disagree",
           "display": {
-            "text": "Disagree"
+            "title": {
+              "text": "Disagree"
+            }
           },
           "_row_num": 40
         }
@@ -13869,7 +14145,9 @@
           "choice_list_name": "sex",
           "data_value": "male",
           "display": {
-            "text": "Male"
+            "title": {
+              "text": "Male"
+            }
           },
           "_row_num": 42
         },
@@ -13877,7 +14155,9 @@
           "choice_list_name": "sex",
           "data_value": "female",
           "display": {
-            "text": "Female"
+            "title": {
+              "text": "Female"
+            }
           },
           "_row_num": 43
         }
@@ -13887,7 +14167,9 @@
           "choice_list_name": "skin_elasticity",
           "data_value": "normal",
           "display": {
-            "text": "Skin goes back normally"
+            "title": {
+              "text": "Skin goes back normally"
+            }
           },
           "_row_num": 46
         },
@@ -13895,7 +14177,9 @@
           "choice_list_name": "skin_elasticity",
           "data_value": "slow",
           "display": {
-            "text": "Slowly"
+            "title": {
+              "text": "Slowly"
+            }
           },
           "_row_num": 47
         },
@@ -13903,7 +14187,9 @@
           "choice_list_name": "skin_elasticity",
           "data_value": "very_slow",
           "display": {
-            "text": "Very slowly (longer than 2 seconds)"
+            "title": {
+              "text": "Very slowly (longer than 2 seconds)"
+            }
           },
           "_row_num": 48
         }
@@ -13913,7 +14199,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "bcg",
           "display": {
-            "text": "<span style=\"background-color:#FFFFFF\">BCG</span>"
+            "title": {
+              "text": "<span style=\"background-color:#FFFFFF\">BCG</span>"
+            }
           },
           "age_weeks": 0,
           "_row_num": 50
@@ -13923,7 +14211,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "polio_zero",
           "display": {
-            "text": "<span style=\"background-color:#FFFFFF\">Polio 'O'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#FFFFFF\">Polio 'O'</span>"
+            }
           },
           "age_weeks": 0,
           "_row_num": 51
@@ -13932,7 +14222,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "polio_one",
           "display": {
-            "text": "<span style=\"background-color:#DDDDDD\">Polio '1'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#DDDDDD\">Polio '1'</span>"
+            }
           },
           "age_weeks": 6,
           "_row_num": 52
@@ -13941,7 +14233,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "five_one",
           "display": {
-            "text": "<span style=\"background-color:#DDDDDD\">\"Five in One\" 1</span>"
+            "title": {
+              "text": "<span style=\"background-color:#DDDDDD\">\"Five in One\" 1</span>"
+            }
           },
           "age_weeks": 6,
           "_row_num": 53
@@ -13950,7 +14244,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "pneumo_one",
           "display": {
-            "text": "<span style=\"background-color:#DDDDDD'>Pneumococcal '1'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#DDDDDD'>Pneumococcal '1'</span>"
+            }
           },
           "age_weeks": 6,
           "_row_num": 54
@@ -13959,7 +14255,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "rota_one",
           "display": {
-            "text": "<span style=\"background-color:#DDDDDD\">Rotavirus  '1'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#DDDDDD\">Rotavirus  '1'</span>"
+            }
           },
           "age_weeks": 6,
           "_row_num": 55
@@ -13968,7 +14266,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "polio_two",
           "display": {
-            "text": "<span style=\"background-color:#BBBBBB\">Polio '2'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#BBBBBB\">Polio '2'</span>"
+            }
           },
           "age_weeks": 10,
           "_row_num": 56
@@ -13977,7 +14277,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "five_two",
           "display": {
-            "text": "<span style=\"background-color:#BBBBBB\">\"Five in One\" 2</span>"
+            "title": {
+              "text": "<span style=\"background-color:#BBBBBB\">\"Five in One\" 2</span>"
+            }
           },
           "age_weeks": 10,
           "_row_num": 57
@@ -13986,7 +14288,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "pneumo_two",
           "display": {
-            "text": "<span style=\"background-color:#BBBBBB\">Pneumococcal '2'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#BBBBBB\">Pneumococcal '2'</span>"
+            }
           },
           "age_weeks": 10,
           "_row_num": 58
@@ -13995,7 +14299,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "rota_two",
           "display": {
-            "text": "<span style=\"background-color:#BBBBBB\">Rotavirus  '2'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#BBBBBB\">Rotavirus  '2'</span>"
+            }
           },
           "age_weeks": 10,
           "_row_num": 59
@@ -14004,7 +14310,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "polio_three",
           "display": {
-            "text": "<span style=\"background-color:#DDDDDD; \"font color:white\">Polio '3'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#DDDDDD; \"font color:white\">Polio '3'</span>"
+            }
           },
           "age_weeks": 14,
           "_row_num": 60
@@ -14013,7 +14321,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "five_three",
           "display": {
-            "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">\"Five in One\" 3</span>"
+            "title": {
+              "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">\"Five in One\" 3</span>"
+            }
           },
           "age_weeks": 14,
           "_row_num": 61
@@ -14022,7 +14332,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "pneumo_three",
           "display": {
-            "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">Pneumococcal '3'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">Pneumococcal '3'</span>"
+            }
           },
           "age_weeks": 14,
           "_row_num": 62
@@ -14031,7 +14343,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "rota_three",
           "display": {
-            "text": "<span style=\"background-color:#DDDDDD\"; \"font-color:white\">Rotavirus  '3'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#DDDDDD\"; \"font-color:white\">Rotavirus  '3'</span>"
+            }
           },
           "age_weeks": 14,
           "_row_num": 63
@@ -14040,7 +14354,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "measles_one",
           "display": {
-            "text": "<span style=\"background-color:#BBBBBB\"; \"font color:white\">Measles '1'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#BBBBBB\"; \"font color:white\">Measles '1'</span>"
+            }
           },
           "age_weeks": 36,
           "_row_num": 64
@@ -14049,7 +14365,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "yellow_fever",
           "display": {
-            "text": "<span style=\"background-color:#BBBBBB\"; \"color:white\">Yellow Fever</span>"
+            "title": {
+              "text": "<span style=\"background-color:#BBBBBB\"; \"color:white\">Yellow Fever</span>"
+            }
           },
           "age_weeks": 36,
           "_row_num": 65
@@ -14058,7 +14376,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "measles_two",
           "display": {
-            "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">Measles '2'</span>"
+            "title": {
+              "text": "<span style=\"background-color:#DDDDDD\"; \"font color:white\">Measles '2'</span>"
+            }
           },
           "age_weeks": 72,
           "_row_num": 66
@@ -14068,7 +14388,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "vitA",
           "display": {
-            "text": "<span style=\"background-color:#FFFFFF\">Vitamin A</span>"
+            "title": {
+              "text": "<span style=\"background-color:#FFFFFF\">Vitamin A</span>"
+            }
           },
           "age_weeks": 0,
           "_row_num": 67
@@ -14077,7 +14399,9 @@
           "choice_list_name": "vaccinations",
           "data_value": "uptodate",
           "display": {
-            "text": "<i>Child is up to date on all vaccinations.</i>"
+            "title": {
+              "text": "<i>Child is up to date on all vaccinations.</i>"
+            }
           },
           "age_weeks": 0,
           "_row_num": 68
@@ -14088,7 +14412,9 @@
           "choice_list_name": "food",
           "data_value": "milk",
           "display": {
-            "text": "Milk"
+            "title": {
+              "text": "Milk"
+            }
           },
           "_row_num": 70
         },
@@ -14096,7 +14422,9 @@
           "choice_list_name": "food",
           "data_value": "juice",
           "display": {
-            "text": "Juice"
+            "title": {
+              "text": "Juice"
+            }
           },
           "_row_num": 71
         },
@@ -14104,7 +14432,9 @@
           "choice_list_name": "food",
           "data_value": "water",
           "display": {
-            "text": "Water"
+            "title": {
+              "text": "Water"
+            }
           },
           "_row_num": 72
         },
@@ -14112,7 +14442,9 @@
           "choice_list_name": "food",
           "data_value": "formula",
           "display": {
-            "text": "Formula"
+            "title": {
+              "text": "Formula"
+            }
           },
           "_row_num": 73
         },
@@ -14120,7 +14452,9 @@
           "choice_list_name": "food",
           "data_value": "cereal",
           "display": {
-            "text": "Cereal"
+            "title": {
+              "text": "Cereal"
+            }
           },
           "_row_num": 74
         },
@@ -14128,7 +14462,9 @@
           "choice_list_name": "food",
           "data_value": "milk_based_wheat/rice",
           "display": {
-            "text": "Cooked wheat/rice based with undiluted milk and sugar"
+            "title": {
+              "text": "Cooked wheat/rice based with undiluted milk and sugar"
+            }
           },
           "_row_num": 75
         },
@@ -14136,7 +14472,9 @@
           "choice_list_name": "food",
           "data_value": "water_based_wheat/rice",
           "display": {
-            "text": "Cooked wheat/rice based with dal/lentil water"
+            "title": {
+              "text": "Cooked wheat/rice based with dal/lentil water"
+            }
           },
           "_row_num": 76
         },
@@ -14144,7 +14482,9 @@
           "choice_list_name": "food",
           "data_value": "khichri",
           "display": {
-            "text": "Khichri (cooked rice+dal/lentil in thinned form)"
+            "title": {
+              "text": "Khichri (cooked rice+dal/lentil in thinned form)"
+            }
           },
           "_row_num": 77
         },
@@ -14152,7 +14492,9 @@
           "choice_list_name": "food",
           "data_value": "fruit",
           "display": {
-            "text": "Mashed fruit"
+            "title": {
+              "text": "Mashed fruit"
+            }
           },
           "_row_num": 78
         },
@@ -14160,7 +14502,9 @@
           "choice_list_name": "food",
           "data_value": "vegetables",
           "display": {
-            "text": "Boiled or cooked vegetables"
+            "title": {
+              "text": "Boiled or cooked vegetables"
+            }
           },
           "_row_num": 79
         },
@@ -14168,7 +14512,9 @@
           "choice_list_name": "food",
           "data_value": "mixed_food",
           "display": {
-            "text": "Normal mixed food as adults"
+            "title": {
+              "text": "Normal mixed food as adults"
+            }
           },
           "_row_num": 80
         }
@@ -14178,7 +14524,9 @@
           "choice_list_name": "attachment_quality_sign",
           "data_value": "chin_touching_breast",
           "display": {
-            "text": "Chin touching breast"
+            "title": {
+              "text": "Chin touching breast"
+            }
           },
           "_row_num": 83
         },
@@ -14186,7 +14534,9 @@
           "choice_list_name": "attachment_quality_sign",
           "data_value": "mouth_wide_open",
           "display": {
-            "text": "Mouth wide open"
+            "title": {
+              "text": "Mouth wide open"
+            }
           },
           "_row_num": 84
         },
@@ -14194,7 +14544,9 @@
           "choice_list_name": "attachment_quality_sign",
           "data_value": "lower_lip_outward",
           "display": {
-            "text": "Lower lip turned outward"
+            "title": {
+              "text": "Lower lip turned outward"
+            }
           },
           "_row_num": 85
         },
@@ -14202,7 +14554,9 @@
           "choice_list_name": "attachment_quality_sign",
           "data_value": "visible_areola",
           "display": {
-            "text": "More areola visible above than below the \nmouth"
+            "title": {
+              "text": "More areola visible above than below the \nmouth"
+            }
           },
           "_row_num": 86
         }
@@ -14212,7 +14566,9 @@
           "choice_list_name": "visit_type",
           "data_value": "initial_visit",
           "display": {
-            "text": "Initial visit"
+            "title": {
+              "text": "Initial visit"
+            }
           },
           "_row_num": 89
         },
@@ -14220,7 +14576,9 @@
           "choice_list_name": "visit_type",
           "data_value": "followup",
           "display": {
-            "text": "Follow-up"
+            "title": {
+              "text": "Follow-up"
+            }
           },
           "_row_num": 90
         }
@@ -14230,7 +14588,9 @@
           "choice_list_name": "breast_problems",
           "data_value": "flat_nipple",
           "display": {
-            "text": "Flat/inverted nipple"
+            "title": {
+              "text": "Flat/inverted nipple"
+            }
           },
           "_row_num": 93
         },
@@ -14238,7 +14598,9 @@
           "choice_list_name": "breast_problems",
           "data_value": "sore_nipple",
           "display": {
-            "text": "Sore/cracked nipple"
+            "title": {
+              "text": "Sore/cracked nipple"
+            }
           },
           "_row_num": 94
         },
@@ -14246,7 +14608,9 @@
           "choice_list_name": "breast_problems",
           "data_value": "engorged_breasts",
           "display": {
-            "text": "Engorged breasts"
+            "title": {
+              "text": "Engorged breasts"
+            }
           },
           "_row_num": 95
         },
@@ -14254,7 +14618,9 @@
           "choice_list_name": "breast_problems",
           "data_value": "breast_abscess",
           "display": {
-            "text": "Breast abscess"
+            "title": {
+              "text": "Breast abscess"
+            }
           },
           "_row_num": 96
         }
@@ -14264,7 +14630,9 @@
           "choice_list_name": "no_some_severe",
           "data_value": "none",
           "display": {
-            "text": "None"
+            "title": {
+              "text": "None"
+            }
           },
           "_row_num": 98
         },
@@ -14272,7 +14640,9 @@
           "choice_list_name": "no_some_severe",
           "data_value": "some",
           "display": {
-            "text": "Some <i>(skin of the child's palm is pale)</i>"
+            "title": {
+              "text": "Some <i>(skin of the child's palm is pale)</i>"
+            }
           },
           "_row_num": 99
         },
@@ -14280,7 +14650,9 @@
           "choice_list_name": "no_some_severe",
           "data_value": "severe",
           "display": {
-            "text": "Severe <i>(skin of the palm is so pale that it looks white)</i>"
+            "title": {
+              "text": "Severe <i>(skin of the palm is so pale that it looks white)</i>"
+            }
           },
           "_row_num": 100
         }
@@ -14290,7 +14662,9 @@
           "choice_list_name": "katori_teaspoon",
           "data_value": "katori",
           "display": {
-            "text": "Katori"
+            "title": {
+              "text": "Katori"
+            }
           },
           "_row_num": 102
         },
@@ -14298,7 +14672,9 @@
           "choice_list_name": "katori_teaspoon",
           "data_value": "teaspoon",
           "display": {
-            "text": "Teaspoon"
+            "title": {
+              "text": "Teaspoon"
+            }
           },
           "_row_num": 103
         }
@@ -14308,7 +14684,9 @@
           "choice_list_name": "cotrimoxazole_type",
           "data_value": "adult",
           "display": {
-            "text": "Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)"
+            "title": {
+              "text": "Adult Tablet single strength (80mg trimethoprim + 400 mg sulphamethoxazole)"
+            }
           },
           "_row_num": 105
         },
@@ -14316,7 +14694,9 @@
           "choice_list_name": "cotrimoxazole_type",
           "data_value": "pediatric",
           "display": {
-            "text": "Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)"
+            "title": {
+              "text": "Pediatric Tablet (20mg trimethoprim + 100 mg sulphamethoxazole)"
+            }
           },
           "_row_num": 106
         }
@@ -14326,7 +14706,9 @@
           "choice_list_name": "malnutrition_grade",
           "data_value": "Normal",
           "display": {
-            "text": "<strong><span style=\"background-color:#00CC00\">Weight for age > 80% (Above the median)</span>"
+            "title": {
+              "text": "<strong><span style=\"background-color:#00CC00\">Weight for age > 80% (Above the median)</span>"
+            }
           },
           "_row_num": 108
         },
@@ -14334,7 +14716,9 @@
           "choice_list_name": "malnutrition_grade",
           "data_value": "MildPEM",
           "display": {
-            "text": "<strong><span style=\"background-color: #ffff66\">Weight for age < 80% but > 75% (Below median)</span>"
+            "title": {
+              "text": "<strong><span style=\"background-color: #ffff66\">Weight for age < 80% but > 75% (Below median)</span>"
+            }
           },
           "_row_num": 109
         },
@@ -14342,7 +14726,9 @@
           "choice_list_name": "malnutrition_grade",
           "data_value": "ModPEM",
           "display": {
-            "text": "<strong><span style=\"background-color:orange\">Weight for age < 75% but > 60% (Below low weight for age)</span>"
+            "title": {
+              "text": "<strong><span style=\"background-color:orange\">Weight for age < 75% but > 60% (Below low weight for age)</span>"
+            }
           },
           "_row_num": 110
         },
@@ -14350,7 +14736,9 @@
           "choice_list_name": "malnutrition_grade",
           "data_value": "SeverePEM",
           "display": {
-            "text": "<strong><span style=\"background-color:red\">Weight for age < 60% expected weight for age (Below very low weight for age)</span>"
+            "title": {
+              "text": "<strong><span style=\"background-color:red\">Weight for age < 60% expected weight for age (Below very low weight for age)</span>"
+            }
           },
           "_row_num": 111
         }
@@ -14360,7 +14748,9 @@
           "choice_list_name": "high_low",
           "data_value": "high",
           "display": {
-            "text": "High Risk"
+            "title": {
+              "text": "High Risk"
+            }
           },
           "_row_num": 113
         },
@@ -14368,7 +14758,9 @@
           "choice_list_name": "high_low",
           "data_value": "low",
           "display": {
-            "text": "Low Risk"
+            "title": {
+              "text": "Low Risk"
+            }
           },
           "_row_num": 114
         }
@@ -14378,7 +14770,9 @@
           "choice_list_name": "tablet_syrup",
           "data_value": "tablet",
           "display": {
-            "text": "Tablet"
+            "title": {
+              "text": "Tablet"
+            }
           },
           "_row_num": 116
         },
@@ -14386,7 +14780,9 @@
           "choice_list_name": "tablet_syrup",
           "data_value": "syrup",
           "display": {
-            "text": "Syrup"
+            "title": {
+              "text": "Syrup"
+            }
           },
           "_row_num": 117
         }
@@ -14396,7 +14792,9 @@
           "choice_list_name": "basic_four_questions",
           "data_value": "difficulty_breathing",
           "display": {
-            "text": "Cough or difficulty breathing"
+            "title": {
+              "text": "Cough or difficulty breathing"
+            }
           },
           "_row_num": 119
         },
@@ -14404,7 +14802,9 @@
           "choice_list_name": "basic_four_questions",
           "data_value": "diarrhoea",
           "display": {
-            "text": "Diarrhoea"
+            "title": {
+              "text": "Diarrhoea"
+            }
           },
           "_row_num": 120
         },
@@ -14412,7 +14812,9 @@
           "choice_list_name": "basic_four_questions",
           "data_value": "fever_reported",
           "display": {
-            "text": "Fever"
+            "title": {
+              "text": "Fever"
+            }
           },
           "_row_num": 121
         },
@@ -14420,7 +14822,9 @@
           "choice_list_name": "basic_four_questions",
           "data_value": "ear_problem",
           "display": {
-            "text": "Ear problem"
+            "title": {
+              "text": "Ear problem"
+            }
           },
           "_row_num": 122
         }
@@ -14431,7 +14835,9 @@
           "choice_list_name": "antimalarial",
           "data_value": "ArtAmod",
           "display": {
-            "text": "Artesunate-Amodiaquine, oral"
+            "title": {
+              "text": "Artesunate-Amodiaquine, oral"
+            }
           },
           "_row_num": 124
         },
@@ -14439,7 +14845,9 @@
           "choice_list_name": "antimalarial",
           "data_value": "ArtLum",
           "display": {
-            "text": "Artemether-Lumefantrine, oral  (Reserved for patients not tolerating Artesunate-Amodiaquine)"
+            "title": {
+              "text": "Artemether-Lumefantrine, oral  (Reserved for patients not tolerating Artesunate-Amodiaquine)"
+            }
           },
           "_row_num": 125
         },
@@ -14447,7 +14855,9 @@
           "choice_list_name": "antimalarial",
           "data_value": "DihydPip",
           "display": {
-            "text": "Dihydroartemisinin-Piperaquine, oral"
+            "title": {
+              "text": "Dihydroartemisinin-Piperaquine, oral"
+            }
           },
           "_row_num": 126
         }
@@ -14458,7 +14868,9 @@
           "choice_list_name": "ArtAmod_dosing",
           "data_value": "FixedDose",
           "display": {
-            "text": "Fixed Dose Combination Artesunate (AS) + Amodiaquine (AQ)  (Standard Regimen)"
+            "title": {
+              "text": "Fixed Dose Combination Artesunate (AS) + Amodiaquine (AQ)  (Standard Regimen)"
+            }
           },
           "_row_num": 127
         },
@@ -14466,7 +14878,9 @@
           "choice_list_name": "ArtAmod_dosing",
           "data_value": "CoBlistered",
           "display": {
-            "text": "Co-Blistered Tablets (50 mg Artesunate, 150 mg Amodiaquine) for ONCE or TWICE daily dosing regimen"
+            "title": {
+              "text": "Co-Blistered Tablets (50 mg Artesunate, 150 mg Amodiaquine) for ONCE or TWICE daily dosing regimen"
+            }
           },
           "_row_num": 128
         }
@@ -14477,7 +14891,9 @@
           "choice_list_name": "severemalaria_tx",
           "data_value": "IMQuinine",
           "display": {
-            "text": "Quinine, IM"
+            "title": {
+              "text": "Quinine, IM"
+            }
           },
           "_row_num": 129
         },
@@ -14485,7 +14901,9 @@
           "choice_list_name": "severemalaria_tx",
           "data_value": "Artemether",
           "display": {
-            "text": "Artemether, IM"
+            "title": {
+              "text": "Artemether, IM"
+            }
           },
           "_row_num": 130
         },
@@ -14493,7 +14911,9 @@
           "choice_list_name": "severemalaria_tx",
           "data_value": "ArtesunateRectal",
           "display": {
-            "text": "Artesunate, rectal"
+            "title": {
+              "text": "Artesunate, rectal"
+            }
           },
           "_row_num": 131
         }
@@ -14504,7 +14924,9 @@
           "choice_list_name": "amox_tx",
           "data_value": "amox",
           "display": {
-            "text": "Amoxicillin, oral (125 mg/5 ml)"
+            "title": {
+              "text": "Amoxicillin, oral (125 mg/5 ml)"
+            }
           },
           "_row_num": 132
         },
@@ -14512,7 +14934,9 @@
           "choice_list_name": "amox_tx",
           "data_value": "amoxiclav",
           "display": {
-            "text": "Co-amoxiclav, oral"
+            "title": {
+              "text": "Co-amoxiclav, oral"
+            }
           },
           "_row_num": 133
         }
@@ -14523,7 +14947,9 @@
           "choice_list_name": "coblister_dosing",
           "data_value": "once",
           "display": {
-            "text": "ONCE Daily"
+            "title": {
+              "text": "ONCE Daily"
+            }
           },
           "_row_num": 135
         },
@@ -14531,7 +14957,9 @@
           "choice_list_name": "coblister_dosing",
           "data_value": "twice",
           "display": {
-            "text": "TWICE Daily"
+            "title": {
+              "text": "TWICE Daily"
+            }
           },
           "_row_num": 136
         }
@@ -34161,455 +34589,455 @@
         "_aspect": "ArtAmod_dosing",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"ArtAmod_dosing\",\"choice_list_name\":\"ArtAmod_dosing\",\"data_value\":\"FixedDose\",\"display\":{\"text\":\"Fixed Dose Combination Artesunate (AS) + Amodiaquine (AQ)  (Standard Regimen)\"},\"_row_num\":127},{\"choice_list_name\":\"ArtAmod_dosing\",\"data_value\":\"CoBlistered\",\"display\":{\"text\":\"Co-Blistered Tablets (50 mg Artesunate, 150 mg Amodiaquine) for ONCE or TWICE daily dosing regimen\"},\"_row_num\":128}]"
+        "_value": "[{\"comments\":\"ArtAmod_dosing\",\"choice_list_name\":\"ArtAmod_dosing\",\"data_value\":\"FixedDose\",\"display\":{\"title\":{\"text\":\"Fixed Dose Combination Artesunate (AS) + Amodiaquine (AQ)  (Standard Regimen)\"}},\"_row_num\":127},{\"choice_list_name\":\"ArtAmod_dosing\",\"data_value\":\"CoBlistered\",\"display\":{\"title\":{\"text\":\"Co-Blistered Tablets (50 mg Artesunate, 150 mg Amodiaquine) for ONCE or TWICE daily dosing regimen\"}},\"_row_num\":128}]"
       },
       {
         "_partition": "Column",
         "_aspect": "Dehyd_IV",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "able_to_drink",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "altern_abx",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"amoxicillin alternatives\",\"choice_list_name\":\"altern_abx\",\"data_value\":\"eryth\",\"display\":{\"text\":\"Erythromycin, oral\"},\"_row_num\":22},{\"choice_list_name\":\"altern_abx\",\"data_value\":\"azith\",\"display\":{\"text\":\"Azithromycin, oral\"},\"_row_num\":23}]"
+        "_value": "[{\"comments\":\"amoxicillin alternatives\",\"choice_list_name\":\"altern_abx\",\"data_value\":\"eryth\",\"display\":{\"title\":{\"text\":\"Erythromycin, oral\"}},\"_row_num\":22},{\"choice_list_name\":\"altern_abx\",\"data_value\":\"azith\",\"display\":{\"title\":{\"text\":\"Azithromycin, oral\"}},\"_row_num\":23}]"
       },
       {
         "_partition": "Column",
         "_aspect": "amox_allergy",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "amox_tx",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"amox_tx\",\"choice_list_name\":\"amox_tx\",\"data_value\":\"amox\",\"display\":{\"text\":\"Amoxicillin, oral (125 mg/5 ml)\"},\"_row_num\":132},{\"choice_list_name\":\"amox_tx\",\"data_value\":\"amoxiclav\",\"display\":{\"text\":\"Co-amoxiclav, oral\"},\"_row_num\":133}]"
+        "_value": "[{\"comments\":\"amox_tx\",\"choice_list_name\":\"amox_tx\",\"data_value\":\"amox\",\"display\":{\"title\":{\"text\":\"Amoxicillin, oral (125 mg/5 ml)\"}},\"_row_num\":132},{\"choice_list_name\":\"amox_tx\",\"data_value\":\"amoxiclav\",\"display\":{\"title\":{\"text\":\"Co-amoxiclav, oral\"}},\"_row_num\":133}]"
       },
       {
         "_partition": "Column",
         "_aspect": "anaemia_check",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"none\",\"display\":{\"text\":\"None\"},\"_row_num\":98},{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"some\",\"display\":{\"text\":\"Some <i>(skin of the child's palm is pale)</i>\"},\"_row_num\":99},{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"severe\",\"display\":{\"text\":\"Severe <i>(skin of the palm is so pale that it looks white)</i>\"},\"_row_num\":100}]"
+        "_value": "[{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":\"None\"}},\"_row_num\":98},{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"some\",\"display\":{\"title\":{\"text\":\"Some <i>(skin of the child's palm is pale)</i>\"}},\"_row_num\":99},{\"choice_list_name\":\"no_some_severe\",\"data_value\":\"severe\",\"display\":{\"title\":{\"text\":\"Severe <i>(skin of the palm is so pale that it looks white)</i>\"}},\"_row_num\":100}]"
       },
       {
         "_partition": "Column",
         "_aspect": "antimalarial",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"antimalarial\",\"choice_list_name\":\"antimalarial\",\"data_value\":\"ArtAmod\",\"display\":{\"text\":\"Artesunate-Amodiaquine, oral\"},\"_row_num\":124},{\"choice_list_name\":\"antimalarial\",\"data_value\":\"ArtLum\",\"display\":{\"text\":\"Artemether-Lumefantrine, oral  (Reserved for patients not tolerating Artesunate-Amodiaquine)\"},\"_row_num\":125},{\"choice_list_name\":\"antimalarial\",\"data_value\":\"DihydPip\",\"display\":{\"text\":\"Dihydroartemisinin-Piperaquine, oral\"},\"_row_num\":126}]"
+        "_value": "[{\"comments\":\"antimalarial\",\"choice_list_name\":\"antimalarial\",\"data_value\":\"ArtAmod\",\"display\":{\"title\":{\"text\":\"Artesunate-Amodiaquine, oral\"}},\"_row_num\":124},{\"choice_list_name\":\"antimalarial\",\"data_value\":\"ArtLum\",\"display\":{\"title\":{\"text\":\"Artemether-Lumefantrine, oral  (Reserved for patients not tolerating Artesunate-Amodiaquine)\"}},\"_row_num\":125},{\"choice_list_name\":\"antimalarial\",\"data_value\":\"DihydPip\",\"display\":{\"title\":{\"text\":\"Dihydroartemisinin-Piperaquine, oral\"}},\"_row_num\":126}]"
       },
       {
         "_partition": "Column",
         "_aspect": "axillary_temperature_possible",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "basic_q",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"difficulty_breathing\",\"display\":{\"text\":\"Cough or difficulty breathing\"},\"_row_num\":119},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"diarrhoea\",\"display\":{\"text\":\"Diarrhoea\"},\"_row_num\":120},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"fever_reported\",\"display\":{\"text\":\"Fever\"},\"_row_num\":121},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"ear_problem\",\"display\":{\"text\":\"Ear problem\"},\"_row_num\":122}]"
+        "_value": "[{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"difficulty_breathing\",\"display\":{\"title\":{\"text\":\"Cough or difficulty breathing\"}},\"_row_num\":119},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"diarrhoea\",\"display\":{\"title\":{\"text\":\"Diarrhoea\"}},\"_row_num\":120},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"fever_reported\",\"display\":{\"title\":{\"text\":\"Fever\"}},\"_row_num\":121},{\"choice_list_name\":\"basic_four_questions\",\"data_value\":\"ear_problem\",\"display\":{\"title\":{\"text\":\"Ear problem\"}},\"_row_num\":122}]"
       },
       {
         "_partition": "Column",
         "_aspect": "birthdayKnown",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "blood_in_stool",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "breastfed",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "breastfed_at_night",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "bulging_fontanelle",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "change_in_feeding",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "chest_indrawing",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cholera",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cipro",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"Cipro\",\"choice_list_name\":\"cipro\",\"data_value\":\"250mg\",\"display\":{\"text\":\"250 mg TABLET\"},\"_row_num\":8},{\"choice_list_name\":\"cipro\",\"data_value\":\"500mg\",\"display\":{\"text\":\"500 mg TABLET\"},\"_row_num\":9}]"
+        "_value": "[{\"comments\":\"Cipro\",\"choice_list_name\":\"cipro\",\"data_value\":\"250mg\",\"display\":{\"title\":{\"text\":\"250 mg TABLET\"}},\"_row_num\":8},{\"choice_list_name\":\"cipro\",\"data_value\":\"500mg\",\"display\":{\"title\":{\"text\":\"500 mg TABLET\"}},\"_row_num\":9}]"
       },
       {
         "_partition": "Column",
         "_aspect": "coblister_dosing",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"coblister_dosing\",\"choice_list_name\":\"coblister_dosing\",\"data_value\":\"once\",\"display\":{\"text\":\"ONCE Daily\"},\"_row_num\":135},{\"choice_list_name\":\"coblister_dosing\",\"data_value\":\"twice\",\"display\":{\"text\":\"TWICE Daily\"},\"_row_num\":136}]"
+        "_value": "[{\"comments\":\"coblister_dosing\",\"choice_list_name\":\"coblister_dosing\",\"data_value\":\"once\",\"display\":{\"title\":{\"text\":\"ONCE Daily\"}},\"_row_num\":135},{\"choice_list_name\":\"coblister_dosing\",\"data_value\":\"twice\",\"display\":{\"title\":{\"text\":\"TWICE Daily\"}},\"_row_num\":136}]"
       },
       {
         "_partition": "Column",
         "_aspect": "convulsions",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "convulsions_now",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cornea_clouding",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cornea_clouding_tx",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "deworm",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "drinking_eagerly",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "drinking_poorly",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "dry_mouth",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"inserted dry_mouth\",\"choice_list_name\":\"dry_mouth\",\"data_value\":\"moist\",\"display\":{\"text\":\"Moist\"},\"_row_num\":29},{\"choice_list_name\":\"dry_mouth\",\"data_value\":\"dry\",\"display\":{\"text\":\"Dry\"},\"_row_num\":30},{\"choice_list_name\":\"dry_mouth\",\"data_value\":\"very_dry\",\"display\":{\"text\":\"Very dry\"},\"_row_num\":31}]"
+        "_value": "[{\"comments\":\"inserted dry_mouth\",\"choice_list_name\":\"dry_mouth\",\"data_value\":\"moist\",\"display\":{\"title\":{\"text\":\"Moist\"}},\"_row_num\":29},{\"choice_list_name\":\"dry_mouth\",\"data_value\":\"dry\",\"display\":{\"title\":{\"text\":\"Dry\"}},\"_row_num\":30},{\"choice_list_name\":\"dry_mouth\",\"data_value\":\"very_dry\",\"display\":{\"title\":{\"text\":\"Very dry\"}},\"_row_num\":31}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ear_discharge_observed",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ear_discharge_reported",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ear_pain",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ear_swelling",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "eye_pus",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "feel_for_fever",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "fever_present_every_day",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "going_to_hospital",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "leave_before_treatment_end",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "lethargic",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "malaria_risk",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"high_low\",\"data_value\":\"high\",\"display\":{\"text\":\"High Risk\"},\"_row_num\":113},{\"choice_list_name\":\"high_low\",\"data_value\":\"low\",\"display\":{\"text\":\"Low Risk\"},\"_row_num\":114}]"
+        "_value": "[{\"choice_list_name\":\"high_low\",\"data_value\":\"high\",\"display\":{\"title\":{\"text\":\"High Risk\"}},\"_row_num\":113},{\"choice_list_name\":\"high_low\",\"data_value\":\"low\",\"display\":{\"title\":{\"text\":\"Low Risk\"}},\"_row_num\":114}]"
       },
       {
         "_partition": "Column",
         "_aspect": "malaria_treatment",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"malaria_treatment\",\"choice_list_name\":\"malaria_treatment\",\"data_value\":\"quinine\",\"display\":{\"text\":\"Quinine, IM\"},\"_row_num\":15},{\"choice_list_name\":\"malaria_treatment\",\"data_value\":\"artemether\",\"display\":{\"text\":\"Artemether, IM\"},\"_row_num\":16},{\"choice_list_name\":\"malaria_treatment\",\"data_value\":\"artesunate\",\"display\":{\"text\":\"Artesunate, rectal\"},\"_row_num\":17}]"
+        "_value": "[{\"comments\":\"malaria_treatment\",\"choice_list_name\":\"malaria_treatment\",\"data_value\":\"quinine\",\"display\":{\"title\":{\"text\":\"Quinine, IM\"}},\"_row_num\":15},{\"choice_list_name\":\"malaria_treatment\",\"data_value\":\"artemether\",\"display\":{\"title\":{\"text\":\"Artemether, IM\"}},\"_row_num\":16},{\"choice_list_name\":\"malaria_treatment\",\"data_value\":\"artesunate\",\"display\":{\"title\":{\"text\":\"Artesunate, rectal\"}},\"_row_num\":17}]"
       },
       {
         "_partition": "Column",
         "_aspect": "malnutrition_grade",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"Normal\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:#00CC00\\\">Weight for age > 80% (Above the median)</span>\"},\"_row_num\":108},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"MildPEM\",\"display\":{\"text\":\"<strong><span style=\\\"background-color: #ffff66\\\">Weight for age < 80% but > 75% (Below median)</span>\"},\"_row_num\":109},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"ModPEM\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:orange\\\">Weight for age < 75% but > 60% (Below low weight for age)</span>\"},\"_row_num\":110},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"SeverePEM\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:red\\\">Weight for age < 60% expected weight for age (Below very low weight for age)</span>\"},\"_row_num\":111}]"
+        "_value": "[{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"Normal\",\"display\":{\"title\":{\"text\":\"<strong><span style=\\\"background-color:#00CC00\\\">Weight for age > 80% (Above the median)</span>\"}},\"_row_num\":108},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"MildPEM\",\"display\":{\"title\":{\"text\":\"<strong><span style=\\\"background-color: #ffff66\\\">Weight for age < 80% but > 75% (Below median)</span>\"}},\"_row_num\":109},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"ModPEM\",\"display\":{\"title\":{\"text\":\"<strong><span style=\\\"background-color:orange\\\">Weight for age < 75% but > 60% (Below low weight for age)</span>\"}},\"_row_num\":110},{\"choice_list_name\":\"malnutrition_grade\",\"data_value\":\"SeverePEM\",\"display\":{\"title\":{\"text\":\"<strong><span style=\\\"background-color:red\\\">Weight for age < 60% expected weight for age (Below very low weight for age)</span>\"}},\"_row_num\":111}]"
       },
       {
         "_partition": "Column",
         "_aspect": "measles_three_month",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "mouth_ulcers",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "mouth_ulcers_deep",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "muac",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"muac\",\"choice_list_name\":\"muac\",\"data_value\":\"green\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:#00CC00\\\">GREEN</strong></span> - MUAC > 13.5 cm\"},\"_row_num\":4},{\"choice_list_name\":\"muac\",\"data_value\":\"yellow\",\"display\":{\"text\":\"<strong><span style=\\\"background-color: #ffff66\\\">YELLOW</strong></span> - MUAC 12.5 - 13.5 cm\"},\"_row_num\":5},{\"choice_list_name\":\"muac\",\"data_value\":\"orange\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:orange\\\">ORANGE</strong></span> - MUAC 12.0 - 12.5 cm\"},\"_row_num\":6},{\"choice_list_name\":\"muac\",\"data_value\":\"red\",\"display\":{\"text\":\"<strong><span style=\\\"background-color:red\\\">RED</strong></span> - MUAC < 12 cm\"},\"_row_num\":7}]"
+        "_value": "[{\"comments\":\"muac\",\"choice_list_name\":\"muac\",\"data_value\":\"green\",\"display\":{\"title\":{\"text\":\"<strong><span style=\\\"background-color:#00CC00\\\">GREEN</strong></span> - MUAC > 13.5 cm\"}},\"_row_num\":4},{\"choice_list_name\":\"muac\",\"data_value\":\"yellow\",\"display\":{\"title\":{\"text\":\"<strong><span style=\\\"background-color: #ffff66\\\">YELLOW</strong></span> - MUAC 12.5 - 13.5 cm\"}},\"_row_num\":5},{\"choice_list_name\":\"muac\",\"data_value\":\"orange\",\"display\":{\"title\":{\"text\":\"<strong><span style=\\\"background-color:orange\\\">ORANGE</strong></span> - MUAC 12.0 - 12.5 cm\"}},\"_row_num\":6},{\"choice_list_name\":\"muac\",\"data_value\":\"red\",\"display\":{\"title\":{\"text\":\"<strong><span style=\\\"background-color:red\\\">RED</strong></span> - MUAC < 12 cm\"}},\"_row_num\":7}]"
       },
       {
         "_partition": "Column",
         "_aspect": "needed_vaccinations",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"vaccinations\",\"data_value\":\"bcg\",\"display\":{\"text\":\"<span style=\\\"background-color:#FFFFFF\\\">BCG</span>\"},\"age_weeks\":0,\"_row_num\":50},{\"comments\":\"edited vaccination names\",\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_zero\",\"display\":{\"text\":\"<span style=\\\"background-color:#FFFFFF\\\">Polio 'O'</span>\"},\"age_weeks\":0,\"_row_num\":51},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_one\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\">Polio '1'</span>\"},\"age_weeks\":6,\"_row_num\":52},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"five_one\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\">\\\"Five in One\\\" 1</span>\"},\"age_weeks\":6,\"_row_num\":53},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"pneumo_one\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD'>Pneumococcal '1'</span>\"},\"age_weeks\":6,\"_row_num\":54},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"rota_one\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\">Rotavirus  '1'</span>\"},\"age_weeks\":6,\"_row_num\":55},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_two\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">Polio '2'</span>\"},\"age_weeks\":10,\"_row_num\":56},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"five_two\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">\\\"Five in One\\\" 2</span>\"},\"age_weeks\":10,\"_row_num\":57},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"pneumo_two\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">Pneumococcal '2'</span>\"},\"age_weeks\":10,\"_row_num\":58},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"rota_two\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">Rotavirus  '2'</span>\"},\"age_weeks\":10,\"_row_num\":59},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_three\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD; \\\"font color:white\\\">Polio '3'</span>\"},\"age_weeks\":14,\"_row_num\":60},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"five_three\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font color:white\\\">\\\"Five in One\\\" 3</span>\"},\"age_weeks\":14,\"_row_num\":61},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"pneumo_three\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font color:white\\\">Pneumococcal '3'</span>\"},\"age_weeks\":14,\"_row_num\":62},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"rota_three\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font-color:white\\\">Rotavirus  '3'</span>\"},\"age_weeks\":14,\"_row_num\":63},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"measles_one\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\"; \\\"font color:white\\\">Measles '1'</span>\"},\"age_weeks\":36,\"_row_num\":64},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"yellow_fever\",\"display\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\"; \\\"color:white\\\">Yellow Fever</span>\"},\"age_weeks\":36,\"_row_num\":65},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"measles_two\",\"display\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font color:white\\\">Measles '2'</span>\"},\"age_weeks\":72,\"_row_num\":66},{\"comments\":\"ask doctor age appropriate weeks vitA\",\"choice_list_name\":\"vaccinations\",\"data_value\":\"vitA\",\"display\":{\"text\":\"<span style=\\\"background-color:#FFFFFF\\\">Vitamin A</span>\"},\"age_weeks\":0,\"_row_num\":67},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"uptodate\",\"display\":{\"text\":\"<i>Child is up to date on all vaccinations.</i>\"},\"age_weeks\":0,\"_row_num\":68}]"
+        "_value": "[{\"choice_list_name\":\"vaccinations\",\"data_value\":\"bcg\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#FFFFFF\\\">BCG</span>\"}},\"age_weeks\":0,\"_row_num\":50},{\"comments\":\"edited vaccination names\",\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_zero\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#FFFFFF\\\">Polio 'O'</span>\"}},\"age_weeks\":0,\"_row_num\":51},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_one\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\">Polio '1'</span>\"}},\"age_weeks\":6,\"_row_num\":52},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"five_one\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\">\\\"Five in One\\\" 1</span>\"}},\"age_weeks\":6,\"_row_num\":53},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"pneumo_one\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#DDDDDD'>Pneumococcal '1'</span>\"}},\"age_weeks\":6,\"_row_num\":54},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"rota_one\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\">Rotavirus  '1'</span>\"}},\"age_weeks\":6,\"_row_num\":55},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_two\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">Polio '2'</span>\"}},\"age_weeks\":10,\"_row_num\":56},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"five_two\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">\\\"Five in One\\\" 2</span>\"}},\"age_weeks\":10,\"_row_num\":57},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"pneumo_two\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">Pneumococcal '2'</span>\"}},\"age_weeks\":10,\"_row_num\":58},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"rota_two\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\">Rotavirus  '2'</span>\"}},\"age_weeks\":10,\"_row_num\":59},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"polio_three\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#DDDDDD; \\\"font color:white\\\">Polio '3'</span>\"}},\"age_weeks\":14,\"_row_num\":60},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"five_three\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font color:white\\\">\\\"Five in One\\\" 3</span>\"}},\"age_weeks\":14,\"_row_num\":61},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"pneumo_three\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font color:white\\\">Pneumococcal '3'</span>\"}},\"age_weeks\":14,\"_row_num\":62},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"rota_three\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font-color:white\\\">Rotavirus  '3'</span>\"}},\"age_weeks\":14,\"_row_num\":63},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"measles_one\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\"; \\\"font color:white\\\">Measles '1'</span>\"}},\"age_weeks\":36,\"_row_num\":64},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"yellow_fever\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#BBBBBB\\\"; \\\"color:white\\\">Yellow Fever</span>\"}},\"age_weeks\":36,\"_row_num\":65},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"measles_two\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#DDDDDD\\\"; \\\"font color:white\\\">Measles '2'</span>\"}},\"age_weeks\":72,\"_row_num\":66},{\"comments\":\"ask doctor age appropriate weeks vitA\",\"choice_list_name\":\"vaccinations\",\"data_value\":\"vitA\",\"display\":{\"title\":{\"text\":\"<span style=\\\"background-color:#FFFFFF\\\">Vitamin A</span>\"}},\"age_weeks\":0,\"_row_num\":67},{\"choice_list_name\":\"vaccinations\",\"data_value\":\"uptodate\",\"display\":{\"title\":{\"text\":\"<i>Child is up to date on all vaccinations.</i>\"}},\"age_weeks\":0,\"_row_num\":68}]"
       },
       {
         "_partition": "Column",
         "_aspect": "oedema",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "other_foods_types",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"food\",\"data_value\":\"milk\",\"display\":{\"text\":\"Milk\"},\"_row_num\":70},{\"choice_list_name\":\"food\",\"data_value\":\"juice\",\"display\":{\"text\":\"Juice\"},\"_row_num\":71},{\"choice_list_name\":\"food\",\"data_value\":\"water\",\"display\":{\"text\":\"Water\"},\"_row_num\":72},{\"choice_list_name\":\"food\",\"data_value\":\"formula\",\"display\":{\"text\":\"Formula\"},\"_row_num\":73},{\"choice_list_name\":\"food\",\"data_value\":\"cereal\",\"display\":{\"text\":\"Cereal\"},\"_row_num\":74},{\"choice_list_name\":\"food\",\"data_value\":\"milk_based_wheat/rice\",\"display\":{\"text\":\"Cooked wheat/rice based with undiluted milk and sugar\"},\"_row_num\":75},{\"choice_list_name\":\"food\",\"data_value\":\"water_based_wheat/rice\",\"display\":{\"text\":\"Cooked wheat/rice based with dal/lentil water\"},\"_row_num\":76},{\"choice_list_name\":\"food\",\"data_value\":\"khichri\",\"display\":{\"text\":\"Khichri (cooked rice+dal/lentil in thinned form)\"},\"_row_num\":77},{\"choice_list_name\":\"food\",\"data_value\":\"fruit\",\"display\":{\"text\":\"Mashed fruit\"},\"_row_num\":78},{\"choice_list_name\":\"food\",\"data_value\":\"vegetables\",\"display\":{\"text\":\"Boiled or cooked vegetables\"},\"_row_num\":79},{\"choice_list_name\":\"food\",\"data_value\":\"mixed_food\",\"display\":{\"text\":\"Normal mixed food as adults\"},\"_row_num\":80}]"
+        "_value": "[{\"choice_list_name\":\"food\",\"data_value\":\"milk\",\"display\":{\"title\":{\"text\":\"Milk\"}},\"_row_num\":70},{\"choice_list_name\":\"food\",\"data_value\":\"juice\",\"display\":{\"title\":{\"text\":\"Juice\"}},\"_row_num\":71},{\"choice_list_name\":\"food\",\"data_value\":\"water\",\"display\":{\"title\":{\"text\":\"Water\"}},\"_row_num\":72},{\"choice_list_name\":\"food\",\"data_value\":\"formula\",\"display\":{\"title\":{\"text\":\"Formula\"}},\"_row_num\":73},{\"choice_list_name\":\"food\",\"data_value\":\"cereal\",\"display\":{\"title\":{\"text\":\"Cereal\"}},\"_row_num\":74},{\"choice_list_name\":\"food\",\"data_value\":\"milk_based_wheat/rice\",\"display\":{\"title\":{\"text\":\"Cooked wheat/rice based with undiluted milk and sugar\"}},\"_row_num\":75},{\"choice_list_name\":\"food\",\"data_value\":\"water_based_wheat/rice\",\"display\":{\"title\":{\"text\":\"Cooked wheat/rice based with dal/lentil water\"}},\"_row_num\":76},{\"choice_list_name\":\"food\",\"data_value\":\"khichri\",\"display\":{\"title\":{\"text\":\"Khichri (cooked rice+dal/lentil in thinned form)\"}},\"_row_num\":77},{\"choice_list_name\":\"food\",\"data_value\":\"fruit\",\"display\":{\"title\":{\"text\":\"Mashed fruit\"}},\"_row_num\":78},{\"choice_list_name\":\"food\",\"data_value\":\"vegetables\",\"display\":{\"title\":{\"text\":\"Boiled or cooked vegetables\"}},\"_row_num\":79},{\"choice_list_name\":\"food\",\"data_value\":\"mixed_food\",\"display\":{\"title\":{\"text\":\"Normal mixed food as adults\"}},\"_row_num\":80}]"
       },
       {
         "_partition": "Column",
         "_aspect": "other_problems",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "otitis_tx",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"otitis_tx\",\"choice_list_name\":\"otitis_tx\",\"data_value\":\"eryth\",\"display\":{\"text\":\"Erythromycin, oral\"},\"_row_num\":12},{\"choice_list_name\":\"otitis_tx\",\"data_value\":\"cotrimox\",\"display\":{\"text\":\"Co-trimoxazole, oral\"},\"_row_num\":13}]"
+        "_value": "[{\"comments\":\"otitis_tx\",\"choice_list_name\":\"otitis_tx\",\"data_value\":\"eryth\",\"display\":{\"title\":{\"text\":\"Erythromycin, oral\"}},\"_row_num\":12},{\"choice_list_name\":\"otitis_tx\",\"data_value\":\"cotrimox\",\"display\":{\"title\":{\"text\":\"Co-trimoxazole, oral\"}},\"_row_num\":13}]"
       },
       {
         "_partition": "Column",
         "_aspect": "pneumonia_tx",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"pneumonia_tx\",\"choice_list_name\":\"pneumonia_tx\",\"data_value\":\"eryth\",\"display\":{\"text\":\"Erythromycin, oral\"},\"_row_num\":10},{\"choice_list_name\":\"pneumonia_tx\",\"data_value\":\"azith\",\"display\":{\"text\":\"Azithromycin, oral\"},\"_row_num\":11}]"
+        "_value": "[{\"comments\":\"pneumonia_tx\",\"choice_list_name\":\"pneumonia_tx\",\"data_value\":\"eryth\",\"display\":{\"title\":{\"text\":\"Erythromycin, oral\"}},\"_row_num\":10},{\"choice_list_name\":\"pneumonia_tx\",\"data_value\":\"azith\",\"display\":{\"title\":{\"text\":\"Azithromycin, oral\"}},\"_row_num\":11}]"
       },
       {
         "_partition": "Column",
         "_aspect": "rash_generalized",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "red_eyes",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "restless",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "rice_water",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "runny_nose",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "separate_serving",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "serving_unit",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"katori_teaspoon\",\"data_value\":\"katori\",\"display\":{\"text\":\"Katori\"},\"_row_num\":102},{\"choice_list_name\":\"katori_teaspoon\",\"data_value\":\"teaspoon\",\"display\":{\"text\":\"Teaspoon\"},\"_row_num\":103}]"
+        "_value": "[{\"choice_list_name\":\"katori_teaspoon\",\"data_value\":\"katori\",\"display\":{\"title\":{\"text\":\"Katori\"}},\"_row_num\":102},{\"choice_list_name\":\"katori_teaspoon\",\"data_value\":\"teaspoon\",\"display\":{\"title\":{\"text\":\"Teaspoon\"}},\"_row_num\":103}]"
       },
       {
         "_partition": "Column",
         "_aspect": "skin_elasticity",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"normal\",\"display\":{\"text\":\"Skin goes back normally\"},\"_row_num\":46},{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"slow\",\"display\":{\"text\":\"Slowly\"},\"_row_num\":47},{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"very_slow\",\"display\":{\"text\":\"Very slowly (longer than 2 seconds)\"},\"_row_num\":48}]"
+        "_value": "[{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"normal\",\"display\":{\"title\":{\"text\":\"Skin goes back normally\"}},\"_row_num\":46},{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"slow\",\"display\":{\"title\":{\"text\":\"Slowly\"}},\"_row_num\":47},{\"choice_list_name\":\"skin_elasticity\",\"data_value\":\"very_slow\",\"display\":{\"title\":{\"text\":\"Very slowly (longer than 2 seconds)\"}},\"_row_num\":48}]"
       },
       {
         "_partition": "Column",
         "_aspect": "stiff_neck",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "stridor",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "Column",
         "_aspect": "sunken_eyes",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"comments\":\"inserted sunken_eyes\",\"choice_list_name\":\"sunken_eyes\",\"data_value\":\"normal\",\"display\":{\"text\":\"Normal\"},\"_row_num\":25},{\"choice_list_name\":\"sunken_eyes\",\"data_value\":\"sunken\",\"display\":{\"text\":\"Sunken\"},\"_row_num\":26},{\"choice_list_name\":\"sunken_eyes\",\"data_value\":\"very_sunken\",\"display\":{\"text\":\"Very sunken and dry\"},\"_row_num\":27}]"
+        "_value": "[{\"comments\":\"inserted sunken_eyes\",\"choice_list_name\":\"sunken_eyes\",\"data_value\":\"normal\",\"display\":{\"title\":{\"text\":\"Normal\"}},\"_row_num\":25},{\"choice_list_name\":\"sunken_eyes\",\"data_value\":\"sunken\",\"display\":{\"title\":{\"text\":\"Sunken\"}},\"_row_num\":26},{\"choice_list_name\":\"sunken_eyes\",\"data_value\":\"very_sunken\",\"display\":{\"title\":{\"text\":\"Very sunken and dry\"}},\"_row_num\":27}]"
       },
       {
         "_partition": "Column",
         "_aspect": "takes_other_foods",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "vomit_everything",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":33},{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "wasting",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"text\":\"Not Present\"},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"text\":\"Present\"},\"_row_num\":37}]"
+        "_value": "[{\"choice_list_name\":\"present\",\"data_value\":\"not_present\",\"display\":{\"title\":{\"text\":\"Not Present\"}},\"_row_num\":36},{\"choice_list_name\":\"present\",\"data_value\":\"present\",\"display\":{\"title\":{\"text\":\"Present\"}},\"_row_num\":37}]"
       },
       {
         "_partition": "FormType",

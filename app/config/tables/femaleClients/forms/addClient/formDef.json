@@ -44,7 +44,9 @@
         "choice_list_name": "randomization_arms",
         "data_value": "HOPE",
         "display": {
-          "text": "HOPE Intervention Arm"
+          "title": {
+            "text": "HOPE Intervention Arm"
+          }
         },
         "_row_num": 2
       },
@@ -52,7 +54,9 @@
         "choice_list_name": "randomization_arms",
         "data_value": "Control",
         "display": {
-          "text": "Control Arm"
+          "title": {
+            "text": "Control Arm"
+          }
         },
         "_row_num": 3
       }
@@ -482,7 +486,9 @@
           "choice_list_name": "randomization_arms",
           "data_value": "HOPE",
           "display": {
-            "text": "HOPE Intervention Arm"
+            "title": {
+              "text": "HOPE Intervention Arm"
+            }
           },
           "_row_num": 2
         },
@@ -490,7 +496,9 @@
           "choice_list_name": "randomization_arms",
           "data_value": "Control",
           "display": {
-            "text": "Control Arm"
+            "title": {
+              "text": "Control Arm"
+            }
           },
           "_row_num": 3
         }

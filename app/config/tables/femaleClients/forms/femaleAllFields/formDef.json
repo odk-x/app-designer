@@ -1519,7 +1519,9 @@
         "choice_list_name": "randomization_arms",
         "data_value": "HOPE",
         "display": {
-          "text": "HOPE Intervention Arm"
+          "title": {
+            "text": "HOPE Intervention Arm"
+          }
         },
         "_row_num": 2
       },
@@ -1527,7 +1529,9 @@
         "choice_list_name": "randomization_arms",
         "data_value": "Control",
         "display": {
-          "text": "Control Arm"
+          "title": {
+            "text": "Control Arm"
+          }
         },
         "_row_num": 3
       },
@@ -1535,7 +1539,9 @@
         "choice_list_name": "yes_no",
         "data_value": "a1",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 4
       },
@@ -1543,7 +1549,9 @@
         "choice_list_name": "yes_no",
         "data_value": "a0",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 5
       },
@@ -1551,7 +1559,9 @@
         "choice_list_name": "yes_no_nr",
         "data_value": "a1",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 6
       },
@@ -1559,7 +1569,9 @@
         "choice_list_name": "yes_no_nr",
         "data_value": "a0",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 7
       },
@@ -1567,7 +1579,9 @@
         "choice_list_name": "yes_no_nr",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 8
       },
@@ -1575,7 +1589,9 @@
         "choice_list_name": "no_response",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 9
       },
@@ -1583,7 +1599,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": "a1",
         "display": {
-          "text": "Luo"
+          "title": {
+            "text": "Luo"
+          }
         },
         "_row_num": 10
       },
@@ -1591,7 +1609,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": "a2",
         "display": {
-          "text": "Luhya"
+          "title": {
+            "text": "Luhya"
+          }
         },
         "_row_num": 11
       },
@@ -1599,7 +1619,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": "a3",
         "display": {
-          "text": "Kalenjin"
+          "title": {
+            "text": "Kalenjin"
+          }
         },
         "_row_num": 12
       },
@@ -1607,7 +1629,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": "a4",
         "display": {
-          "text": "Kisii"
+          "title": {
+            "text": "Kisii"
+          }
         },
         "_row_num": 13
       },
@@ -1615,7 +1639,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": "a5",
         "display": {
-          "text": "Kuria"
+          "title": {
+            "text": "Kuria"
+          }
         },
         "_row_num": 14
       },
@@ -1623,7 +1649,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": "a6",
         "display": {
-          "text": "Nandi"
+          "title": {
+            "text": "Nandi"
+          }
         },
         "_row_num": 15
       },
@@ -1631,7 +1659,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": "a7",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 16
       },
@@ -1639,7 +1669,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 17
       },
@@ -1647,7 +1679,9 @@
         "choice_list_name": "religion",
         "data_value": "a1",
         "display": {
-          "text": "Anglican"
+          "title": {
+            "text": "Anglican"
+          }
         },
         "_row_num": 18
       },
@@ -1655,7 +1689,9 @@
         "choice_list_name": "religion",
         "data_value": "a2",
         "display": {
-          "text": "Catholic"
+          "title": {
+            "text": "Catholic"
+          }
         },
         "_row_num": 19
       },
@@ -1663,7 +1699,9 @@
         "choice_list_name": "religion",
         "data_value": "a3",
         "display": {
-          "text": "Pentecostal"
+          "title": {
+            "text": "Pentecostal"
+          }
         },
         "_row_num": 20
       },
@@ -1671,7 +1709,9 @@
         "choice_list_name": "religion",
         "data_value": "a4",
         "display": {
-          "text": "Seventh Day Adventist"
+          "title": {
+            "text": "Seventh Day Adventist"
+          }
         },
         "_row_num": 21
       },
@@ -1679,7 +1719,9 @@
         "choice_list_name": "religion",
         "data_value": "a5",
         "display": {
-          "text": "African Independent Churches"
+          "title": {
+            "text": "African Independent Churches"
+          }
         },
         "_row_num": 22
       },
@@ -1687,7 +1729,9 @@
         "choice_list_name": "religion",
         "data_value": "a6",
         "display": {
-          "text": "African Inland Church"
+          "title": {
+            "text": "African Inland Church"
+          }
         },
         "_row_num": 23
       },
@@ -1695,7 +1739,9 @@
         "choice_list_name": "religion",
         "data_value": "a7",
         "display": {
-          "text": "Protestant"
+          "title": {
+            "text": "Protestant"
+          }
         },
         "_row_num": 24
       },
@@ -1703,7 +1749,9 @@
         "choice_list_name": "religion",
         "data_value": "a8",
         "display": {
-          "text": "Muslim"
+          "title": {
+            "text": "Muslim"
+          }
         },
         "_row_num": 25
       },
@@ -1711,7 +1759,9 @@
         "choice_list_name": "religion",
         "data_value": "a9",
         "display": {
-          "text": "No religion"
+          "title": {
+            "text": "No religion"
+          }
         },
         "_row_num": 26
       },
@@ -1719,7 +1769,9 @@
         "choice_list_name": "religion",
         "data_value": "a10",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 27
       },
@@ -1727,7 +1779,9 @@
         "choice_list_name": "religion",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 28
       },
@@ -1735,7 +1789,9 @@
         "choice_list_name": "employment_options",
         "data_value": "a0",
         "display": {
-          "text": "Not employed"
+          "title": {
+            "text": "Not employed"
+          }
         },
         "_row_num": 29
       },
@@ -1743,7 +1799,9 @@
         "choice_list_name": "employment_options",
         "data_value": "a1",
         "display": {
-          "text": "Housewife"
+          "title": {
+            "text": "Housewife"
+          }
         },
         "_row_num": 30
       },
@@ -1751,7 +1809,9 @@
         "choice_list_name": "employment_options",
         "data_value": "a2",
         "display": {
-          "text": "Housekeeping"
+          "title": {
+            "text": "Housekeeping"
+          }
         },
         "_row_num": 31
       },
@@ -1759,7 +1819,9 @@
         "choice_list_name": "employment_options",
         "data_value": "a3",
         "display": {
-          "text": "Small business"
+          "title": {
+            "text": "Small business"
+          }
         },
         "_row_num": 32
       },
@@ -1767,7 +1829,9 @@
         "choice_list_name": "employment_options",
         "data_value": "a4",
         "display": {
-          "text": "Salaried position"
+          "title": {
+            "text": "Salaried position"
+          }
         },
         "_row_num": 33
       },
@@ -1775,7 +1839,9 @@
         "choice_list_name": "employment_options",
         "data_value": "a5",
         "display": {
-          "text": "Farming/pastoralism"
+          "title": {
+            "text": "Farming/pastoralism"
+          }
         },
         "_row_num": 34
       },
@@ -1783,7 +1849,9 @@
         "choice_list_name": "employment_options",
         "data_value": "a6",
         "display": {
-          "text": "Fishing business"
+          "title": {
+            "text": "Fishing business"
+          }
         },
         "_row_num": 35
       },
@@ -1791,7 +1859,9 @@
         "choice_list_name": "employment_options",
         "data_value": "a7",
         "display": {
-          "text": "Sex worker"
+          "title": {
+            "text": "Sex worker"
+          }
         },
         "_row_num": 36
       },
@@ -1799,7 +1869,9 @@
         "choice_list_name": "employment_options",
         "data_value": "a8",
         "display": {
-          "text": "Casual laborer"
+          "title": {
+            "text": "Casual laborer"
+          }
         },
         "_row_num": 37
       },
@@ -1807,7 +1879,9 @@
         "choice_list_name": "employment_options",
         "data_value": "a9",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 38
       },
@@ -1815,7 +1889,9 @@
         "choice_list_name": "employment_options",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 39
       },
@@ -1823,7 +1899,9 @@
         "choice_list_name": "residence",
         "data_value": "a1",
         "display": {
-          "text": "Countryside (rural area)"
+          "title": {
+            "text": "Countryside (rural area)"
+          }
         },
         "_row_num": 40
       },
@@ -1831,7 +1909,9 @@
         "choice_list_name": "residence",
         "data_value": "a2",
         "display": {
-          "text": "In an urban area"
+          "title": {
+            "text": "In an urban area"
+          }
         },
         "_row_num": 41
       },
@@ -1839,7 +1919,9 @@
         "choice_list_name": "residence",
         "data_value": "a3",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 42
       },
@@ -1847,7 +1929,9 @@
         "choice_list_name": "residence",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 43
       },
@@ -1855,7 +1939,9 @@
         "choice_list_name": "hiv_status",
         "data_value": "a0",
         "display": {
-          "text": "HIV negative"
+          "title": {
+            "text": "HIV negative"
+          }
         },
         "_row_num": 44
       },
@@ -1863,7 +1949,9 @@
         "choice_list_name": "hiv_status",
         "data_value": "a1",
         "display": {
-          "text": "HIV positive"
+          "title": {
+            "text": "HIV positive"
+          }
         },
         "_row_num": 45
       },
@@ -1871,7 +1959,9 @@
         "choice_list_name": "hiv_status",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 46
       },
@@ -1879,7 +1969,9 @@
         "choice_list_name": "hiv_status",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 47
       },
@@ -1887,7 +1979,9 @@
         "choice_list_name": "y_n_ns",
         "data_value": "a1",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 48
       },
@@ -1895,7 +1989,9 @@
         "choice_list_name": "y_n_ns",
         "data_value": "a0",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 49
       },
@@ -1903,7 +1999,9 @@
         "choice_list_name": "y_n_ns",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 50
       },
@@ -1911,7 +2009,9 @@
         "choice_list_name": "y_n_ns",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 51
       },
@@ -1919,7 +2019,9 @@
         "choice_list_name": "relationship_status_options",
         "data_value": "a1",
         "display": {
-          "text": "Married, living together"
+          "title": {
+            "text": "Married, living together"
+          }
         },
         "_row_num": 52
       },
@@ -1927,7 +2029,9 @@
         "choice_list_name": "relationship_status_options",
         "data_value": "a2",
         "display": {
-          "text": "Married, not living together"
+          "title": {
+            "text": "Married, not living together"
+          }
         },
         "_row_num": 53
       },
@@ -1935,7 +2039,9 @@
         "choice_list_name": "relationship_status_options",
         "data_value": "a3",
         "display": {
-          "text": "Not married, living together"
+          "title": {
+            "text": "Not married, living together"
+          }
         },
         "_row_num": 54
       },
@@ -1943,7 +2049,9 @@
         "choice_list_name": "relationship_status_options",
         "data_value": "a4",
         "display": {
-          "text": "Not married, not living together"
+          "title": {
+            "text": "Not married, not living together"
+          }
         },
         "_row_num": 55
       },
@@ -1951,7 +2059,9 @@
         "choice_list_name": "m_f",
         "data_value": "f",
         "display": {
-          "text": "Female"
+          "title": {
+            "text": "Female"
+          }
         },
         "_row_num": 56
       },
@@ -1959,7 +2069,9 @@
         "choice_list_name": "m_f",
         "data_value": "m",
         "display": {
-          "text": "Male"
+          "title": {
+            "text": "Male"
+          }
         },
         "_row_num": 57
       },
@@ -1967,7 +2079,9 @@
         "choice_list_name": "date_options",
         "data_value": "day",
         "display": {
-          "text": "Day known"
+          "title": {
+            "text": "Day known"
+          }
         },
         "_row_num": 58
       },
@@ -1975,7 +2089,9 @@
         "choice_list_name": "date_options",
         "data_value": "month",
         "display": {
-          "text": "Month known"
+          "title": {
+            "text": "Month known"
+          }
         },
         "_row_num": 59
       },
@@ -1983,7 +2099,9 @@
         "choice_list_name": "date_options",
         "data_value": "year",
         "display": {
-          "text": "Year known"
+          "title": {
+            "text": "Year known"
+          }
         },
         "_row_num": 60
       },
@@ -1991,7 +2109,9 @@
         "choice_list_name": "education_level_options",
         "data_value": "a0",
         "display": {
-          "text": "No formal education"
+          "title": {
+            "text": "No formal education"
+          }
         },
         "_row_num": 61
       },
@@ -1999,7 +2119,9 @@
         "choice_list_name": "education_level_options",
         "data_value": "a1",
         "display": {
-          "text": "Lower primary 1-3"
+          "title": {
+            "text": "Lower primary 1-3"
+          }
         },
         "_row_num": 62
       },
@@ -2007,7 +2129,9 @@
         "choice_list_name": "education_level_options",
         "data_value": "a2",
         "display": {
-          "text": "Upper primary 4-8"
+          "title": {
+            "text": "Upper primary 4-8"
+          }
         },
         "_row_num": 63
       },
@@ -2015,7 +2139,9 @@
         "choice_list_name": "education_level_options",
         "data_value": "a3",
         "display": {
-          "text": "Secondary - not completed"
+          "title": {
+            "text": "Secondary - not completed"
+          }
         },
         "_row_num": 64
       },
@@ -2023,7 +2149,9 @@
         "choice_list_name": "education_level_options",
         "data_value": "a4",
         "display": {
-          "text": "Secondary - completed"
+          "title": {
+            "text": "Secondary - completed"
+          }
         },
         "_row_num": 65
       },
@@ -2031,7 +2159,9 @@
         "choice_list_name": "education_level_options",
         "data_value": "a5",
         "display": {
-          "text": "Above secondary"
+          "title": {
+            "text": "Above secondary"
+          }
         },
         "_row_num": 66
       },
@@ -2039,7 +2169,9 @@
         "choice_list_name": "education_level_options",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 67
       },
@@ -2047,7 +2179,9 @@
         "choice_list_name": "date_estimated",
         "data_value": "a9999",
         "display": {
-          "text": "estimated with help of nurse"
+          "title": {
+            "text": "estimated with help of nurse"
+          }
         },
         "_row_num": 68
       },
@@ -2055,7 +2189,9 @@
         "choice_list_name": "measurement_taken",
         "data_value": "a0",
         "display": {
-          "text": "Measurement was not taken"
+          "title": {
+            "text": "Measurement was not taken"
+          }
         },
         "_row_num": 69
       },
@@ -2063,7 +2199,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": "a1",
         "display": {
-          "text": "No time"
+          "title": {
+            "text": "No time"
+          }
         },
         "_row_num": 70
       },
@@ -2071,7 +2209,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": "a2",
         "display": {
-          "text": "Needs to ask partner for participation"
+          "title": {
+            "text": "Needs to ask partner for participation"
+          }
         },
         "_row_num": 71
       },
@@ -2079,7 +2219,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": "a3",
         "display": {
-          "text": "Concerned about intimate partner violence"
+          "title": {
+            "text": "Concerned about intimate partner violence"
+          }
         },
         "_row_num": 72
       },
@@ -2087,7 +2229,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": "a4",
         "display": {
-          "text": "Does not want to be tested with partner"
+          "title": {
+            "text": "Does not want to be tested with partner"
+          }
         },
         "_row_num": 73
       },
@@ -2095,7 +2239,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": "a5",
         "display": {
-          "text": "Does not want to be tested at home"
+          "title": {
+            "text": "Does not want to be tested at home"
+          }
         },
         "_row_num": 74
       },
@@ -2103,7 +2249,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": "a6",
         "display": {
-          "text": "Feels partner does not need the testing"
+          "title": {
+            "text": "Feels partner does not need the testing"
+          }
         },
         "_row_num": 75
       },
@@ -2111,7 +2259,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": "a7",
         "display": {
-          "text": "Feels partner does not need the education"
+          "title": {
+            "text": "Feels partner does not need the education"
+          }
         },
         "_row_num": 76
       },
@@ -2119,7 +2269,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": "a8",
         "display": {
-          "text": "No answer given"
+          "title": {
+            "text": "No answer given"
+          }
         },
         "_row_num": 77
       },
@@ -2127,7 +2279,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": "a9",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 78
       },
@@ -2135,7 +2289,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 79
       },
@@ -2143,7 +2299,9 @@
         "choice_list_name": "acknowledge",
         "data_value": "a1",
         "display": {
-          "text": "Continue"
+          "title": {
+            "text": "Continue"
+          }
         },
         "_row_num": 80
       },
@@ -2151,7 +2309,9 @@
         "choice_list_name": "months_years",
         "data_value": "a1",
         "display": {
-          "text": "Enter months"
+          "title": {
+            "text": "Enter months"
+          }
         },
         "_row_num": 81
       },
@@ -2159,7 +2319,9 @@
         "choice_list_name": "months_years",
         "data_value": "a2",
         "display": {
-          "text": "Enter years"
+          "title": {
+            "text": "Enter years"
+          }
         },
         "_row_num": 82
       },
@@ -2167,7 +2329,9 @@
         "choice_list_name": "months_years",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 83
       },
@@ -2175,7 +2339,9 @@
         "choice_list_name": "study_participation",
         "data_value": "a1",
         "display": {
-          "text": "Wants to participate in full study"
+          "title": {
+            "text": "Wants to participate in full study"
+          }
         },
         "_row_num": 84
       },
@@ -2183,7 +2349,9 @@
         "choice_list_name": "study_participation",
         "data_value": "a0",
         "display": {
-          "text": "Does not want to participate"
+          "title": {
+            "text": "Does not want to participate"
+          }
         },
         "_row_num": 85
       },
@@ -2191,7 +2359,9 @@
         "choice_list_name": "happen",
         "data_value": "a1",
         "display": {
-          "text": "Miscarriage"
+          "title": {
+            "text": "Miscarriage"
+          }
         },
         "_row_num": 88
       },
@@ -2199,7 +2369,9 @@
         "choice_list_name": "happen",
         "data_value": "a2",
         "display": {
-          "text": "Stillbirth"
+          "title": {
+            "text": "Stillbirth"
+          }
         },
         "_row_num": 89
       },
@@ -2207,7 +2379,9 @@
         "choice_list_name": "happen",
         "data_value": "a3",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 90
       },
@@ -2215,7 +2389,9 @@
         "choice_list_name": "happen",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 91
       },
@@ -2223,7 +2399,9 @@
         "choice_list_name": "birthplace",
         "data_value": "a1",
         "display": {
-          "text": "Your home"
+          "title": {
+            "text": "Your home"
+          }
         },
         "_row_num": 92
       },
@@ -2231,7 +2409,9 @@
         "choice_list_name": "birthplace",
         "data_value": "a2",
         "display": {
-          "text": "Other home"
+          "title": {
+            "text": "Other home"
+          }
         },
         "_row_num": 93
       },
@@ -2239,7 +2419,9 @@
         "choice_list_name": "birthplace",
         "data_value": "a3",
         "display": {
-          "text": "Hospital"
+          "title": {
+            "text": "Hospital"
+          }
         },
         "_row_num": 94
       },
@@ -2247,7 +2429,9 @@
         "choice_list_name": "birthplace",
         "data_value": "a4",
         "display": {
-          "text": "Other government facility"
+          "title": {
+            "text": "Other government facility"
+          }
         },
         "_row_num": 95
       },
@@ -2255,7 +2439,9 @@
         "choice_list_name": "birthplace",
         "data_value": "a5",
         "display": {
-          "text": "Private facility"
+          "title": {
+            "text": "Private facility"
+          }
         },
         "_row_num": 96
       },
@@ -2263,7 +2449,9 @@
         "choice_list_name": "birthplace",
         "data_value": "a6",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 97
       },
@@ -2271,7 +2459,9 @@
         "choice_list_name": "birthplace",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 98
       },
@@ -2279,7 +2469,9 @@
         "choice_list_name": "issues",
         "data_value": "a1",
         "display": {
-          "text": "Cost too much"
+          "title": {
+            "text": "Cost too much"
+          }
         },
         "_row_num": 99
       },
@@ -2287,7 +2479,9 @@
         "choice_list_name": "issues",
         "data_value": "a2",
         "display": {
-          "text": "Facility not open"
+          "title": {
+            "text": "Facility not open"
+          }
         },
         "_row_num": 100
       },
@@ -2295,7 +2489,9 @@
         "choice_list_name": "issues",
         "data_value": "a3",
         "display": {
-          "text": "Too far/no transportation"
+          "title": {
+            "text": "Too far/no transportation"
+          }
         },
         "_row_num": 101
       },
@@ -2303,7 +2499,9 @@
         "choice_list_name": "issues",
         "data_value": "a4",
         "display": {
-          "text": "Don’t trust facility/poor quality service"
+          "title": {
+            "text": "Don’t trust facility/poor quality service"
+          }
         },
         "_row_num": 102
       },
@@ -2311,7 +2509,9 @@
         "choice_list_name": "issues",
         "data_value": "a5",
         "display": {
-          "text": "No female provider at facility"
+          "title": {
+            "text": "No female provider at facility"
+          }
         },
         "_row_num": 103
       },
@@ -2319,7 +2519,9 @@
         "choice_list_name": "issues",
         "data_value": "a6",
         "display": {
-          "text": "Partner did not allow it"
+          "title": {
+            "text": "Partner did not allow it"
+          }
         },
         "_row_num": 104
       },
@@ -2327,7 +2529,9 @@
         "choice_list_name": "issues",
         "data_value": "a7",
         "display": {
-          "text": "Family did not allow it"
+          "title": {
+            "text": "Family did not allow it"
+          }
         },
         "_row_num": 105
       },
@@ -2335,7 +2539,9 @@
         "choice_list_name": "issues",
         "data_value": "a8",
         "display": {
-          "text": "Not necessary"
+          "title": {
+            "text": "Not necessary"
+          }
         },
         "_row_num": 106
       },
@@ -2343,7 +2549,9 @@
         "choice_list_name": "issues",
         "data_value": "a9",
         "display": {
-          "text": "Not customary"
+          "title": {
+            "text": "Not customary"
+          }
         },
         "_row_num": 107
       },
@@ -2351,7 +2559,9 @@
         "choice_list_name": "issues",
         "data_value": "a10",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 108
       },
@@ -2359,7 +2569,9 @@
         "choice_list_name": "issues",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 109
       },
@@ -2367,7 +2579,9 @@
         "choice_list_name": "attendant",
         "data_value": "a1",
         "display": {
-          "text": "Traditional birth attendant"
+          "title": {
+            "text": "Traditional birth attendant"
+          }
         },
         "_row_num": 110
       },
@@ -2375,7 +2589,9 @@
         "choice_list_name": "attendant",
         "data_value": "a2",
         "display": {
-          "text": "Skilled birth attendant (nurse/midwife)"
+          "title": {
+            "text": "Skilled birth attendant (nurse/midwife)"
+          }
         },
         "_row_num": 111
       },
@@ -2383,7 +2599,9 @@
         "choice_list_name": "attendant",
         "data_value": "a3",
         "display": {
-          "text": "Doctor"
+          "title": {
+            "text": "Doctor"
+          }
         },
         "_row_num": 112
       },
@@ -2391,7 +2609,9 @@
         "choice_list_name": "attendant",
         "data_value": "a4",
         "display": {
-          "text": "Male partner"
+          "title": {
+            "text": "Male partner"
+          }
         },
         "_row_num": 113
       },
@@ -2399,7 +2619,9 @@
         "choice_list_name": "attendant",
         "data_value": "a5",
         "display": {
-          "text": "Family member(s)"
+          "title": {
+            "text": "Family member(s)"
+          }
         },
         "_row_num": 114
       },
@@ -2407,7 +2629,9 @@
         "choice_list_name": "attendant",
         "data_value": "a6",
         "display": {
-          "text": "Friend(s)"
+          "title": {
+            "text": "Friend(s)"
+          }
         },
         "_row_num": 115
       },
@@ -2415,7 +2639,9 @@
         "choice_list_name": "attendant",
         "data_value": "a7",
         "display": {
-          "text": "Community health worker"
+          "title": {
+            "text": "Community health worker"
+          }
         },
         "_row_num": 116
       },
@@ -2423,7 +2649,9 @@
         "choice_list_name": "attendant",
         "data_value": "a8",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 117
       },
@@ -2431,7 +2659,9 @@
         "choice_list_name": "attendant",
         "data_value": "a9",
         "display": {
-          "text": "No one"
+          "title": {
+            "text": "No one"
+          }
         },
         "_row_num": 118
       },
@@ -2439,7 +2669,9 @@
         "choice_list_name": "attendant",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 119
       },
@@ -2447,7 +2679,9 @@
         "choice_list_name": "complication",
         "data_value": "a0",
         "display": {
-          "text": "None"
+          "title": {
+            "text": "None"
+          }
         },
         "_row_num": 120
       },
@@ -2455,7 +2689,9 @@
         "choice_list_name": "complication",
         "data_value": "a1",
         "display": {
-          "text": "Premature rupture of membranes"
+          "title": {
+            "text": "Premature rupture of membranes"
+          }
         },
         "_row_num": 121
       },
@@ -2463,7 +2699,9 @@
         "choice_list_name": "complication",
         "data_value": "a2",
         "display": {
-          "text": "Obstructed labor/breech"
+          "title": {
+            "text": "Obstructed labor/breech"
+          }
         },
         "_row_num": 122
       },
@@ -2471,7 +2709,9 @@
         "choice_list_name": "complication",
         "data_value": "a3",
         "display": {
-          "text": "Pre-eclampsia/eclampsia"
+          "title": {
+            "text": "Pre-eclampsia/eclampsia"
+          }
         },
         "_row_num": 123
       },
@@ -2479,7 +2719,9 @@
         "choice_list_name": "complication",
         "data_value": "a4",
         "display": {
-          "text": "Postpartum hemorrhage"
+          "title": {
+            "text": "Postpartum hemorrhage"
+          }
         },
         "_row_num": 124
       },
@@ -2487,7 +2729,9 @@
         "choice_list_name": "complication",
         "data_value": "a5",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 125
       },
@@ -2495,7 +2739,9 @@
         "choice_list_name": "complication",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 126
       },
@@ -2503,7 +2749,9 @@
         "choice_list_name": "HIVpartner",
         "data_value": "a1",
         "display": {
-          "text": "HIV positive"
+          "title": {
+            "text": "HIV positive"
+          }
         },
         "_row_num": 127
       },
@@ -2511,7 +2759,9 @@
         "choice_list_name": "HIVpartner",
         "data_value": "a0",
         "display": {
-          "text": "HIV negative"
+          "title": {
+            "text": "HIV negative"
+          }
         },
         "_row_num": 128
       },
@@ -2519,7 +2769,9 @@
         "choice_list_name": "HIVpartner",
         "data_value": "a2",
         "display": {
-          "text": "Partner declined HIV testing"
+          "title": {
+            "text": "Partner declined HIV testing"
+          }
         },
         "_row_num": 129
       },
@@ -2527,7 +2779,9 @@
         "choice_list_name": "HIVpartner",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 130
       },
@@ -2535,7 +2789,9 @@
         "choice_list_name": "HIV",
         "data_value": "a0",
         "display": {
-          "text": "HIV negative"
+          "title": {
+            "text": "HIV negative"
+          }
         },
         "_row_num": 131
       },
@@ -2543,7 +2799,9 @@
         "choice_list_name": "HIV",
         "data_value": "a1",
         "display": {
-          "text": "HIV positive"
+          "title": {
+            "text": "HIV positive"
+          }
         },
         "_row_num": 132
       },
@@ -2551,7 +2809,9 @@
         "choice_list_name": "HIV",
         "data_value": "a2",
         "display": {
-          "text": "Client declined previous testing"
+          "title": {
+            "text": "Client declined previous testing"
+          }
         },
         "_row_num": 133
       },
@@ -2559,7 +2819,9 @@
         "choice_list_name": "HIV",
         "data_value": "a3",
         "display": {
-          "text": "Client has not been tested for study yet"
+          "title": {
+            "text": "Client has not been tested for study yet"
+          }
         },
         "_row_num": 134
       },
@@ -2567,7 +2829,9 @@
         "choice_list_name": "rapid",
         "data_value": "a1",
         "display": {
-          "text": "Client accepted testing, blood drawn"
+          "title": {
+            "text": "Client accepted testing, blood drawn"
+          }
         },
         "_row_num": 135
       },
@@ -2575,7 +2839,9 @@
         "choice_list_name": "rapid",
         "data_value": "a2",
         "display": {
-          "text": "Client declined testing, blood not drawn"
+          "title": {
+            "text": "Client declined testing, blood not drawn"
+          }
         },
         "_row_num": 136
       },
@@ -2583,7 +2849,9 @@
         "choice_list_name": "wheretest",
         "data_value": "a1",
         "display": {
-          "text": "Antenatal clinic (MCH)"
+          "title": {
+            "text": "Antenatal clinic (MCH)"
+          }
         },
         "_row_num": 137
       },
@@ -2591,7 +2859,9 @@
         "choice_list_name": "wheretest",
         "data_value": "a2",
         "display": {
-          "text": "Home"
+          "title": {
+            "text": "Home"
+          }
         },
         "_row_num": 138
       },
@@ -2599,7 +2869,9 @@
         "choice_list_name": "wheretest",
         "data_value": "a3",
         "display": {
-          "text": "VCT"
+          "title": {
+            "text": "VCT"
+          }
         },
         "_row_num": 139
       },
@@ -2607,7 +2879,9 @@
         "choice_list_name": "wheretest",
         "data_value": "a4",
         "display": {
-          "text": "Delivery ward"
+          "title": {
+            "text": "Delivery ward"
+          }
         },
         "_row_num": 140
       },
@@ -2615,7 +2889,9 @@
         "choice_list_name": "wheretest",
         "data_value": "a5",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 141
       },
@@ -2623,7 +2899,9 @@
         "choice_list_name": "wheretest",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 142
       },
@@ -2631,7 +2909,9 @@
         "choice_list_name": "yes_noanswer",
         "data_value": "a1",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 143
       },
@@ -2639,7 +2919,9 @@
         "choice_list_name": "yes_noanswer",
         "data_value": "a0",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 144
       },
@@ -2647,7 +2929,9 @@
         "choice_list_name": "yes_noanswer",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 145
       },
@@ -2655,7 +2939,9 @@
         "choice_list_name": "resulttest",
         "data_value": "a1",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 146
       },
@@ -2663,7 +2949,9 @@
         "choice_list_name": "resulttest",
         "data_value": "a666",
         "display": {
-          "text": "Test not done"
+          "title": {
+            "text": "Test not done"
+          }
         },
         "_row_num": 147
       },
@@ -2671,7 +2959,9 @@
         "choice_list_name": "resulttest",
         "data_value": "a777",
         "display": {
-          "text": "Did not receive results"
+          "title": {
+            "text": "Did not receive results"
+          }
         },
         "_row_num": 148
       },
@@ -2679,7 +2969,9 @@
         "choice_list_name": "resulttest",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 149
       },
@@ -2687,7 +2979,9 @@
         "choice_list_name": "resulttest",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 150
       },
@@ -2695,7 +2989,9 @@
         "choice_list_name": "recentHIV",
         "data_value": "a0",
         "display": {
-          "text": "HIV negative"
+          "title": {
+            "text": "HIV negative"
+          }
         },
         "_row_num": 151
       },
@@ -2703,7 +2999,9 @@
         "choice_list_name": "recentHIV",
         "data_value": "a1",
         "display": {
-          "text": "HIV positive"
+          "title": {
+            "text": "HIV positive"
+          }
         },
         "_row_num": 152
       },
@@ -2711,7 +3009,9 @@
         "choice_list_name": "recentHIV",
         "data_value": "a2",
         "display": {
-          "text": "Client has never been tested"
+          "title": {
+            "text": "Client has never been tested"
+          }
         },
         "_row_num": 153
       },
@@ -2719,7 +3019,9 @@
         "choice_list_name": "recentHIV",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 154
       },
@@ -2727,7 +3029,9 @@
         "choice_list_name": "yes_notsure",
         "data_value": "a1",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 155
       },
@@ -2735,7 +3039,9 @@
         "choice_list_name": "yes_notsure",
         "data_value": "a0",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 156
       },
@@ -2743,7 +3049,9 @@
         "choice_list_name": "yes_notsure",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 157
       },
@@ -2751,7 +3059,9 @@
         "choice_list_name": "yes_notsure",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 158
       },
@@ -2759,7 +3069,9 @@
         "choice_list_name": "long",
         "data_value": "a1",
         "display": {
-          "text": "Indefinitely"
+          "title": {
+            "text": "Indefinitely"
+          }
         },
         "_row_num": 159
       },
@@ -2767,7 +3079,9 @@
         "choice_list_name": "long",
         "data_value": "a2",
         "display": {
-          "text": "Only during pregnancy and breastfeeding"
+          "title": {
+            "text": "Only during pregnancy and breastfeeding"
+          }
         },
         "_row_num": 160
       },
@@ -2775,7 +3089,9 @@
         "choice_list_name": "long",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 161
       },
@@ -2783,7 +3099,9 @@
         "choice_list_name": "long",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 162
       },
@@ -2791,7 +3109,9 @@
         "choice_list_name": "miss",
         "data_value": "a1",
         "display": {
-          "text": "Yes, I miss one or more doses but took some"
+          "title": {
+            "text": "Yes, I miss one or more doses but took some"
+          }
         },
         "_row_num": 163
       },
@@ -2799,7 +3119,9 @@
         "choice_list_name": "miss",
         "data_value": "a0",
         "display": {
-          "text": "No, I took all my doses"
+          "title": {
+            "text": "No, I took all my doses"
+          }
         },
         "_row_num": 164
       },
@@ -2807,7 +3129,9 @@
         "choice_list_name": "miss",
         "data_value": "a2",
         "display": {
-          "text": "I did not take any of the medication"
+          "title": {
+            "text": "I did not take any of the medication"
+          }
         },
         "_row_num": 165
       },
@@ -2815,7 +3139,9 @@
         "choice_list_name": "miss",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 166
       },
@@ -2823,7 +3149,9 @@
         "choice_list_name": "miss",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 167
       },
@@ -2831,7 +3159,9 @@
         "choice_list_name": "advise",
         "data_value": "a1",
         "display": {
-          "text": "My decision"
+          "title": {
+            "text": "My decision"
+          }
         },
         "_row_num": 168
       },
@@ -2839,7 +3169,9 @@
         "choice_list_name": "advise",
         "data_value": "a2",
         "display": {
-          "text": "Provider advised to discontiue"
+          "title": {
+            "text": "Provider advised to discontiue"
+          }
         },
         "_row_num": 169
       },
@@ -2847,7 +3179,9 @@
         "choice_list_name": "advise",
         "data_value": "a3",
         "display": {
-          "text": "Ran out of medication"
+          "title": {
+            "text": "Ran out of medication"
+          }
         },
         "_row_num": 170
       },
@@ -2855,7 +3189,9 @@
         "choice_list_name": "advise",
         "data_value": "a4",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 171
       },
@@ -2863,7 +3199,9 @@
         "choice_list_name": "advise",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 172
       },
@@ -2871,7 +3209,9 @@
         "choice_list_name": "advise",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 173
       },
@@ -2879,7 +3219,9 @@
         "choice_list_name": "misschild",
         "data_value": "a1",
         "display": {
-          "text": "Yes, child missed one or more doses but took some"
+          "title": {
+            "text": "Yes, child missed one or more doses but took some"
+          }
         },
         "_row_num": 174
       },
@@ -2887,7 +3229,9 @@
         "choice_list_name": "misschild",
         "data_value": "a0",
         "display": {
-          "text": "No, the child took all doses"
+          "title": {
+            "text": "No, the child took all doses"
+          }
         },
         "_row_num": 175
       },
@@ -2895,7 +3239,9 @@
         "choice_list_name": "misschild",
         "data_value": "a2",
         "display": {
-          "text": "The child did not take any of the medication"
+          "title": {
+            "text": "The child did not take any of the medication"
+          }
         },
         "_row_num": 176
       },
@@ -2903,7 +3249,9 @@
         "choice_list_name": "misschild",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 177
       },
@@ -2911,7 +3259,9 @@
         "choice_list_name": "misschild",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 178
       },
@@ -2919,7 +3269,9 @@
         "choice_list_name": "foodlist",
         "data_value": "a1",
         "display": {
-          "text": "Infant formula"
+          "title": {
+            "text": "Infant formula"
+          }
         },
         "_row_num": 179
       },
@@ -2927,7 +3279,9 @@
         "choice_list_name": "foodlist",
         "data_value": "a2",
         "display": {
-          "text": "Milk (other than breast milk)"
+          "title": {
+            "text": "Milk (other than breast milk)"
+          }
         },
         "_row_num": 180
       },
@@ -2935,7 +3289,9 @@
         "choice_list_name": "foodlist",
         "data_value": "a3",
         "display": {
-          "text": "Sugar or glucose water"
+          "title": {
+            "text": "Sugar or glucose water"
+          }
         },
         "_row_num": 181
       },
@@ -2943,7 +3299,9 @@
         "choice_list_name": "foodlist",
         "data_value": "a4",
         "display": {
-          "text": "Plain water"
+          "title": {
+            "text": "Plain water"
+          }
         },
         "_row_num": 182
       },
@@ -2951,7 +3309,9 @@
         "choice_list_name": "foodlist",
         "data_value": "a5",
         "display": {
-          "text": "Fruit juice"
+          "title": {
+            "text": "Fruit juice"
+          }
         },
         "_row_num": 183
       },
@@ -2959,7 +3319,9 @@
         "choice_list_name": "foodlist",
         "data_value": "a6",
         "display": {
-          "text": "Tea/infusions"
+          "title": {
+            "text": "Tea/infusions"
+          }
         },
         "_row_num": 184
       },
@@ -2967,7 +3329,9 @@
         "choice_list_name": "foodlist",
         "data_value": "a7",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 185
       },
@@ -2975,7 +3339,9 @@
         "choice_list_name": "foodlist",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 186
       },
@@ -2983,7 +3349,9 @@
         "choice_list_name": "foodmany",
         "data_value": "a1",
         "display": {
-          "text": "Infant formula"
+          "title": {
+            "text": "Infant formula"
+          }
         },
         "_row_num": 187
       },
@@ -2991,7 +3359,9 @@
         "choice_list_name": "foodmany",
         "data_value": "a2",
         "display": {
-          "text": "Milk (other than breast milk)"
+          "title": {
+            "text": "Milk (other than breast milk)"
+          }
         },
         "_row_num": 188
       },
@@ -2999,7 +3369,9 @@
         "choice_list_name": "foodmany",
         "data_value": "a3",
         "display": {
-          "text": "Sugar or glucose water"
+          "title": {
+            "text": "Sugar or glucose water"
+          }
         },
         "_row_num": 189
       },
@@ -3007,7 +3379,9 @@
         "choice_list_name": "foodmany",
         "data_value": "a4",
         "display": {
-          "text": "Plain water"
+          "title": {
+            "text": "Plain water"
+          }
         },
         "_row_num": 190
       },
@@ -3015,7 +3389,9 @@
         "choice_list_name": "foodmany",
         "data_value": "a5",
         "display": {
-          "text": "Fruit juice"
+          "title": {
+            "text": "Fruit juice"
+          }
         },
         "_row_num": 191
       },
@@ -3023,7 +3399,9 @@
         "choice_list_name": "foodmany",
         "data_value": "a6",
         "display": {
-          "text": "Tea/infusions"
+          "title": {
+            "text": "Tea/infusions"
+          }
         },
         "_row_num": 192
       },
@@ -3031,7 +3409,9 @@
         "choice_list_name": "foodmany",
         "data_value": "a7",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 193
       },
@@ -3039,7 +3419,9 @@
         "choice_list_name": "foodmany",
         "data_value": "a8",
         "display": {
-          "text": "None of the above were fed regularly to the child"
+          "title": {
+            "text": "None of the above were fed regularly to the child"
+          }
         },
         "_row_num": 194
       },
@@ -3047,7 +3429,9 @@
         "choice_list_name": "foodmany",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 195
       },
@@ -3055,7 +3439,9 @@
         "choice_list_name": "children",
         "data_value": "a1",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 196
       },
@@ -3063,7 +3449,9 @@
         "choice_list_name": "children",
         "data_value": "a0",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 197
       },
@@ -3071,7 +3459,9 @@
         "choice_list_name": "children",
         "data_value": "666",
         "display": {
-          "text": "Says she can't get pregnant again"
+          "title": {
+            "text": "Says she can't get pregnant again"
+          }
         },
         "_row_num": 198
       },
@@ -3079,7 +3469,9 @@
         "choice_list_name": "children",
         "data_value": "888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 199
       },
@@ -3087,7 +3479,9 @@
         "choice_list_name": "children",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 200
       },
@@ -3095,7 +3489,9 @@
         "choice_list_name": "timewait",
         "data_value": "Months",
         "display": {
-          "text": "Months"
+          "title": {
+            "text": "Months"
+          }
         },
         "_row_num": 201
       },
@@ -3103,7 +3499,9 @@
         "choice_list_name": "timewait",
         "data_value": "Years",
         "display": {
-          "text": "Years"
+          "title": {
+            "text": "Years"
+          }
         },
         "_row_num": 202
       },
@@ -3111,7 +3509,9 @@
         "choice_list_name": "timewait",
         "data_value": "a777",
         "display": {
-          "text": "After marriage (no specific time frame)"
+          "title": {
+            "text": "After marriage (no specific time frame)"
+          }
         },
         "_row_num": 203
       },
@@ -3119,7 +3519,9 @@
         "choice_list_name": "timewait",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 204
       },
@@ -3127,7 +3529,9 @@
         "choice_list_name": "timewait",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 205
       },
@@ -3135,7 +3539,9 @@
         "choice_list_name": "childnumber",
         "data_value": "a1",
         "display": {
-          "text": "Same number"
+          "title": {
+            "text": "Same number"
+          }
         },
         "_row_num": 206
       },
@@ -3143,7 +3549,9 @@
         "choice_list_name": "childnumber",
         "data_value": "a2",
         "display": {
-          "text": "More children"
+          "title": {
+            "text": "More children"
+          }
         },
         "_row_num": 207
       },
@@ -3151,7 +3559,9 @@
         "choice_list_name": "childnumber",
         "data_value": "a3",
         "display": {
-          "text": "Fewer children"
+          "title": {
+            "text": "Fewer children"
+          }
         },
         "_row_num": 208
       },
@@ -3159,7 +3569,9 @@
         "choice_list_name": "childnumber",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 209
       },
@@ -3167,7 +3579,9 @@
         "choice_list_name": "childnumber",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 210
       },
@@ -3175,7 +3589,9 @@
         "choice_list_name": "influence",
         "data_value": "a1",
         "display": {
-          "text": "Mainly respondent"
+          "title": {
+            "text": "Mainly respondent"
+          }
         },
         "_row_num": 211
       },
@@ -3183,7 +3599,9 @@
         "choice_list_name": "influence",
         "data_value": "a2",
         "display": {
-          "text": "Mainly partner"
+          "title": {
+            "text": "Mainly partner"
+          }
         },
         "_row_num": 212
       },
@@ -3191,7 +3609,9 @@
         "choice_list_name": "influence",
         "data_value": "a3",
         "display": {
-          "text": "Both respondent and partner together"
+          "title": {
+            "text": "Both respondent and partner together"
+          }
         },
         "_row_num": 213
       },
@@ -3199,7 +3619,9 @@
         "choice_list_name": "influence",
         "data_value": "a4",
         "display": {
-          "text": "Mainly parents"
+          "title": {
+            "text": "Mainly parents"
+          }
         },
         "_row_num": 214
       },
@@ -3207,7 +3629,9 @@
         "choice_list_name": "influence",
         "data_value": "a5",
         "display": {
-          "text": "Mainly partner’s parents"
+          "title": {
+            "text": "Mainly partner’s parents"
+          }
         },
         "_row_num": 215
       },
@@ -3215,7 +3639,9 @@
         "choice_list_name": "influence",
         "data_value": "a6",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 216
       },
@@ -3223,7 +3649,9 @@
         "choice_list_name": "influence",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 217
       },
@@ -3231,7 +3659,9 @@
         "choice_list_name": "FP",
         "data_value": "a1",
         "display": {
-          "text": "Female sterilization"
+          "title": {
+            "text": "Female sterilization"
+          }
         },
         "_row_num": 218
       },
@@ -3239,7 +3669,9 @@
         "choice_list_name": "FP",
         "data_value": "a2",
         "display": {
-          "text": "Male sterilization"
+          "title": {
+            "text": "Male sterilization"
+          }
         },
         "_row_num": 219
       },
@@ -3247,7 +3679,9 @@
         "choice_list_name": "FP",
         "data_value": "a3",
         "display": {
-          "text": "Pill"
+          "title": {
+            "text": "Pill"
+          }
         },
         "_row_num": 220
       },
@@ -3255,7 +3689,9 @@
         "choice_list_name": "FP",
         "data_value": "a4",
         "display": {
-          "text": "Injectable"
+          "title": {
+            "text": "Injectable"
+          }
         },
         "_row_num": 221
       },
@@ -3263,7 +3699,9 @@
         "choice_list_name": "FP",
         "data_value": "a5",
         "display": {
-          "text": "Implants"
+          "title": {
+            "text": "Implants"
+          }
         },
         "_row_num": 222
       },
@@ -3271,7 +3709,9 @@
         "choice_list_name": "FP",
         "data_value": "a6",
         "display": {
-          "text": "IUD"
+          "title": {
+            "text": "IUD"
+          }
         },
         "_row_num": 223
       },
@@ -3279,7 +3719,9 @@
         "choice_list_name": "FP",
         "data_value": "a7",
         "display": {
-          "text": "Male condom"
+          "title": {
+            "text": "Male condom"
+          }
         },
         "_row_num": 224
       },
@@ -3287,7 +3729,9 @@
         "choice_list_name": "FP",
         "data_value": "a8",
         "display": {
-          "text": "Female condom"
+          "title": {
+            "text": "Female condom"
+          }
         },
         "_row_num": 225
       },
@@ -3295,7 +3739,9 @@
         "choice_list_name": "FP",
         "data_value": "a9",
         "display": {
-          "text": "Lactational amenorrhea method"
+          "title": {
+            "text": "Lactational amenorrhea method"
+          }
         },
         "_row_num": 226
       },
@@ -3303,7 +3749,9 @@
         "choice_list_name": "FP",
         "data_value": "a10",
         "display": {
-          "text": "Natural, rhythm or calendar method"
+          "title": {
+            "text": "Natural, rhythm or calendar method"
+          }
         },
         "_row_num": 227
       },
@@ -3311,7 +3759,9 @@
         "choice_list_name": "FP",
         "data_value": "a11",
         "display": {
-          "text": "Withdrawal (man pulls out penis before end)"
+          "title": {
+            "text": "Withdrawal (man pulls out penis before end)"
+          }
         },
         "_row_num": 228
       },
@@ -3319,7 +3769,9 @@
         "choice_list_name": "FP",
         "data_value": "a12",
         "display": {
-          "text": "Emergency contraception"
+          "title": {
+            "text": "Emergency contraception"
+          }
         },
         "_row_num": 229
       },
@@ -3327,7 +3779,9 @@
         "choice_list_name": "FP",
         "data_value": "a13",
         "display": {
-          "text": "Herbs or other traditional method"
+          "title": {
+            "text": "Herbs or other traditional method"
+          }
         },
         "_row_num": 230
       },
@@ -3335,7 +3789,9 @@
         "choice_list_name": "FP",
         "data_value": "a14",
         "display": {
-          "text": "Abstaining from sex"
+          "title": {
+            "text": "Abstaining from sex"
+          }
         },
         "_row_num": 231
       },
@@ -3343,7 +3799,9 @@
         "choice_list_name": "FP",
         "data_value": "a15",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 232
       },
@@ -3351,7 +3809,9 @@
         "choice_list_name": "FP",
         "data_value": "a16",
         "display": {
-          "text": "None of the above"
+          "title": {
+            "text": "None of the above"
+          }
         },
         "_row_num": 233
       },
@@ -3359,7 +3819,9 @@
         "choice_list_name": "FP",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 234
       },
@@ -3367,7 +3829,9 @@
         "choice_list_name": "hormone",
         "data_value": "a1",
         "display": {
-          "text": "Not having sex / partner is absent"
+          "title": {
+            "text": "Not having sex / partner is absent"
+          }
         },
         "_row_num": 235
       },
@@ -3375,7 +3839,9 @@
         "choice_list_name": "hormone",
         "data_value": "a2",
         "display": {
-          "text": "Hysterectomy"
+          "title": {
+            "text": "Hysterectomy"
+          }
         },
         "_row_num": 236
       },
@@ -3383,7 +3849,9 @@
         "choice_list_name": "hormone",
         "data_value": "a3",
         "display": {
-          "text": "Breastfeeding – it provides enough protection"
+          "title": {
+            "text": "Breastfeeding – it provides enough protection"
+          }
         },
         "_row_num": 237
       },
@@ -3391,7 +3859,9 @@
         "choice_list_name": "hormone",
         "data_value": "a4",
         "display": {
-          "text": "Breastfeeding –  afraid that using those methods may harm my baby"
+          "title": {
+            "text": "Breastfeeding –  afraid that using those methods may harm my baby"
+          }
         },
         "_row_num": 238
       },
@@ -3399,7 +3869,9 @@
         "choice_list_name": "hormone",
         "data_value": "a5",
         "display": {
-          "text": "I want more children"
+          "title": {
+            "text": "I want more children"
+          }
         },
         "_row_num": 239
       },
@@ -3407,7 +3879,9 @@
         "choice_list_name": "hormone",
         "data_value": "a6",
         "display": {
-          "text": "I am opposed"
+          "title": {
+            "text": "I am opposed"
+          }
         },
         "_row_num": 240
       },
@@ -3415,7 +3889,9 @@
         "choice_list_name": "hormone",
         "data_value": "a7",
         "display": {
-          "text": "My partner is opposed"
+          "title": {
+            "text": "My partner is opposed"
+          }
         },
         "_row_num": 241
       },
@@ -3423,7 +3899,9 @@
         "choice_list_name": "hormone",
         "data_value": "a8",
         "display": {
-          "text": "I believe current method is effective enough"
+          "title": {
+            "text": "I believe current method is effective enough"
+          }
         },
         "_row_num": 242
       },
@@ -3431,7 +3909,9 @@
         "choice_list_name": "hormone",
         "data_value": "a9",
         "display": {
-          "text": "My religion does not allow"
+          "title": {
+            "text": "My religion does not allow"
+          }
         },
         "_row_num": 243
       },
@@ -3439,7 +3919,9 @@
         "choice_list_name": "hormone",
         "data_value": "a10",
         "display": {
-          "text": "I do not know about methods or where to get the methods"
+          "title": {
+            "text": "I do not know about methods or where to get the methods"
+          }
         },
         "_row_num": 244
       },
@@ -3447,7 +3929,9 @@
         "choice_list_name": "hormone",
         "data_value": "a11",
         "display": {
-          "text": "I am worried about health or side effects"
+          "title": {
+            "text": "I am worried about health or side effects"
+          }
         },
         "_row_num": 245
       },
@@ -3455,7 +3939,9 @@
         "choice_list_name": "hormone",
         "data_value": "a12",
         "display": {
-          "text": "The method I want to use is not available"
+          "title": {
+            "text": "The method I want to use is not available"
+          }
         },
         "_row_num": 246
       },
@@ -3463,7 +3949,9 @@
         "choice_list_name": "hormone",
         "data_value": "a13",
         "display": {
-          "text": "Too far to go"
+          "title": {
+            "text": "Too far to go"
+          }
         },
         "_row_num": 247
       },
@@ -3471,7 +3959,9 @@
         "choice_list_name": "hormone",
         "data_value": "a14",
         "display": {
-          "text": "Cost"
+          "title": {
+            "text": "Cost"
+          }
         },
         "_row_num": 248
       },
@@ -3479,7 +3969,9 @@
         "choice_list_name": "hormone",
         "data_value": "a15",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 249
       },
@@ -3487,7 +3979,9 @@
         "choice_list_name": "hormone",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 250
       },
@@ -3495,7 +3989,9 @@
         "choice_list_name": "influencedelay",
         "data_value": "a1",
         "display": {
-          "text": "Mainly respondent"
+          "title": {
+            "text": "Mainly respondent"
+          }
         },
         "_row_num": 251
       },
@@ -3503,7 +3999,9 @@
         "choice_list_name": "influencedelay",
         "data_value": "a2",
         "display": {
-          "text": "Mainly partner"
+          "title": {
+            "text": "Mainly partner"
+          }
         },
         "_row_num": 252
       },
@@ -3511,7 +4009,9 @@
         "choice_list_name": "influencedelay",
         "data_value": "a3",
         "display": {
-          "text": "Both respondent and partner together"
+          "title": {
+            "text": "Both respondent and partner together"
+          }
         },
         "_row_num": 253
       },
@@ -3519,7 +4019,9 @@
         "choice_list_name": "influencedelay",
         "data_value": "a4",
         "display": {
-          "text": "Mainly parents"
+          "title": {
+            "text": "Mainly parents"
+          }
         },
         "_row_num": 254
       },
@@ -3527,7 +4029,9 @@
         "choice_list_name": "influencedelay",
         "data_value": "a5",
         "display": {
-          "text": "Mainly partner’s parents"
+          "title": {
+            "text": "Mainly partner’s parents"
+          }
         },
         "_row_num": 255
       },
@@ -3535,7 +4039,9 @@
         "choice_list_name": "influencedelay",
         "data_value": "a6",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 256
       },
@@ -3543,7 +4049,9 @@
         "choice_list_name": "influencedelay",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 257
       },
@@ -3551,7 +4059,9 @@
         "choice_list_name": "approval",
         "data_value": "a1",
         "display": {
-          "text": "Approves"
+          "title": {
+            "text": "Approves"
+          }
         },
         "_row_num": 258
       },
@@ -3559,7 +4069,9 @@
         "choice_list_name": "approval",
         "data_value": "a0",
         "display": {
-          "text": "Disapproves"
+          "title": {
+            "text": "Disapproves"
+          }
         },
         "_row_num": 259
       },
@@ -3567,7 +4079,9 @@
         "choice_list_name": "approval",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 260
       },
@@ -3575,7 +4089,9 @@
         "choice_list_name": "approval",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 261
       },
@@ -3583,7 +4099,9 @@
         "choice_list_name": "talkFP",
         "data_value": "a0",
         "display": {
-          "text": "Never"
+          "title": {
+            "text": "Never"
+          }
         },
         "_row_num": 262
       },
@@ -3591,7 +4109,9 @@
         "choice_list_name": "talkFP",
         "data_value": "a1",
         "display": {
-          "text": "Once or twice"
+          "title": {
+            "text": "Once or twice"
+          }
         },
         "_row_num": 263
       },
@@ -3599,7 +4119,9 @@
         "choice_list_name": "talkFP",
         "data_value": "a2",
         "display": {
-          "text": "More often"
+          "title": {
+            "text": "More often"
+          }
         },
         "_row_num": 264
       },
@@ -3607,7 +4129,9 @@
         "choice_list_name": "talkFP",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 265
       },
@@ -3615,7 +4139,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a0",
         "display": {
-          "text": "None"
+          "title": {
+            "text": "None"
+          }
         },
         "_row_num": 266
       },
@@ -3623,7 +4149,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a1",
         "display": {
-          "text": "Female sterilization"
+          "title": {
+            "text": "Female sterilization"
+          }
         },
         "_row_num": 267
       },
@@ -3631,7 +4159,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a2",
         "display": {
-          "text": "Male sterilization"
+          "title": {
+            "text": "Male sterilization"
+          }
         },
         "_row_num": 268
       },
@@ -3639,7 +4169,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a3",
         "display": {
-          "text": "Pill"
+          "title": {
+            "text": "Pill"
+          }
         },
         "_row_num": 269
       },
@@ -3647,7 +4179,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a4",
         "display": {
-          "text": "Injectable"
+          "title": {
+            "text": "Injectable"
+          }
         },
         "_row_num": 270
       },
@@ -3655,7 +4189,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a5",
         "display": {
-          "text": "Implants"
+          "title": {
+            "text": "Implants"
+          }
         },
         "_row_num": 271
       },
@@ -3663,7 +4199,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a6",
         "display": {
-          "text": "IUD"
+          "title": {
+            "text": "IUD"
+          }
         },
         "_row_num": 272
       },
@@ -3671,7 +4209,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a7",
         "display": {
-          "text": "Male condom"
+          "title": {
+            "text": "Male condom"
+          }
         },
         "_row_num": 273
       },
@@ -3679,7 +4219,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a8",
         "display": {
-          "text": "Female condom"
+          "title": {
+            "text": "Female condom"
+          }
         },
         "_row_num": 274
       },
@@ -3687,7 +4229,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a9",
         "display": {
-          "text": "Lactational amenorrhea method"
+          "title": {
+            "text": "Lactational amenorrhea method"
+          }
         },
         "_row_num": 275
       },
@@ -3695,7 +4239,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a10",
         "display": {
-          "text": "Natural, rhythm or calendar method"
+          "title": {
+            "text": "Natural, rhythm or calendar method"
+          }
         },
         "_row_num": 276
       },
@@ -3703,7 +4249,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a11",
         "display": {
-          "text": "Withdrawal (man pulls out penis before end)"
+          "title": {
+            "text": "Withdrawal (man pulls out penis before end)"
+          }
         },
         "_row_num": 277
       },
@@ -3711,7 +4259,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a12",
         "display": {
-          "text": "Emergency contraception"
+          "title": {
+            "text": "Emergency contraception"
+          }
         },
         "_row_num": 278
       },
@@ -3719,7 +4269,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a13",
         "display": {
-          "text": "Herbs or other traditional method"
+          "title": {
+            "text": "Herbs or other traditional method"
+          }
         },
         "_row_num": 279
       },
@@ -3727,7 +4279,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a14",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 280
       },
@@ -3735,7 +4289,9 @@
         "choice_list_name": "Fpchoice",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 281
       },
@@ -3743,7 +4299,9 @@
         "choice_list_name": "condom",
         "data_value": "a4",
         "display": {
-          "text": "Always"
+          "title": {
+            "text": "Always"
+          }
         },
         "_row_num": 282
       },
@@ -3751,7 +4309,9 @@
         "choice_list_name": "condom",
         "data_value": "a3",
         "display": {
-          "text": "On most occasions"
+          "title": {
+            "text": "On most occasions"
+          }
         },
         "_row_num": 283
       },
@@ -3759,7 +4319,9 @@
         "choice_list_name": "condom",
         "data_value": "a2",
         "display": {
-          "text": "Sometimes"
+          "title": {
+            "text": "Sometimes"
+          }
         },
         "_row_num": 284
       },
@@ -3767,7 +4329,9 @@
         "choice_list_name": "condom",
         "data_value": "a1",
         "display": {
-          "text": "Rarely"
+          "title": {
+            "text": "Rarely"
+          }
         },
         "_row_num": 285
       },
@@ -3775,7 +4339,9 @@
         "choice_list_name": "condom",
         "data_value": "a0",
         "display": {
-          "text": "Never"
+          "title": {
+            "text": "Never"
+          }
         },
         "_row_num": 286
       },
@@ -3783,7 +4349,9 @@
         "choice_list_name": "condom",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 287
       },
@@ -3791,7 +4359,9 @@
         "choice_list_name": "testsite",
         "data_value": "a1",
         "display": {
-          "text": "Antenatal clinic (He came with me)"
+          "title": {
+            "text": "Antenatal clinic (He came with me)"
+          }
         },
         "_row_num": 288
       },
@@ -3799,7 +4369,9 @@
         "choice_list_name": "testsite",
         "data_value": "a2",
         "display": {
-          "text": "Antenatal clinic (He visited alone)"
+          "title": {
+            "text": "Antenatal clinic (He visited alone)"
+          }
         },
         "_row_num": 289
       },
@@ -3807,7 +4379,9 @@
         "choice_list_name": "testsite",
         "data_value": "a3",
         "display": {
-          "text": "Home (Not related to the study)"
+          "title": {
+            "text": "Home (Not related to the study)"
+          }
         },
         "_row_num": 290
       },
@@ -3815,7 +4389,9 @@
         "choice_list_name": "testsite",
         "data_value": "a4",
         "display": {
-          "text": "VCT"
+          "title": {
+            "text": "VCT"
+          }
         },
         "_row_num": 291
       },
@@ -3823,7 +4399,9 @@
         "choice_list_name": "testsite",
         "data_value": "a5",
         "display": {
-          "text": "Delivery ward"
+          "title": {
+            "text": "Delivery ward"
+          }
         },
         "_row_num": 292
       },
@@ -3831,7 +4409,9 @@
         "choice_list_name": "testsite",
         "data_value": "a6",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 293
       },
@@ -3839,7 +4419,9 @@
         "choice_list_name": "testsite",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 294
       },
@@ -3847,7 +4429,9 @@
         "choice_list_name": "testsite",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 295
       },
@@ -3855,7 +4439,9 @@
         "choice_list_name": "typetest",
         "data_value": "a0",
         "display": {
-          "text": "Tested alone"
+          "title": {
+            "text": "Tested alone"
+          }
         },
         "_row_num": 296
       },
@@ -3863,7 +4449,9 @@
         "choice_list_name": "typetest",
         "data_value": "a1",
         "display": {
-          "text": "Tested together"
+          "title": {
+            "text": "Tested together"
+          }
         },
         "_row_num": 297
       },
@@ -3871,7 +4459,9 @@
         "choice_list_name": "typetest",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 298
       },
@@ -3879,7 +4469,9 @@
         "choice_list_name": "testresult",
         "data_value": "a1",
         "display": {
-          "text": "HIV positive"
+          "title": {
+            "text": "HIV positive"
+          }
         },
         "_row_num": 299
       },
@@ -3887,7 +4479,9 @@
         "choice_list_name": "testresult",
         "data_value": "a0",
         "display": {
-          "text": "HIV negative"
+          "title": {
+            "text": "HIV negative"
+          }
         },
         "_row_num": 300
       },
@@ -3895,7 +4489,9 @@
         "choice_list_name": "testresult",
         "data_value": "a2",
         "display": {
-          "text": "Inconclusive result"
+          "title": {
+            "text": "Inconclusive result"
+          }
         },
         "_row_num": 301
       },
@@ -3903,7 +4499,9 @@
         "choice_list_name": "testresult",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 302
       },
@@ -3911,7 +4509,9 @@
         "choice_list_name": "gotoCCC",
         "data_value": "a1",
         "display": {
-          "text": "Yes, during the pregnancy"
+          "title": {
+            "text": "Yes, during the pregnancy"
+          }
         },
         "_row_num": 303
       },
@@ -3919,7 +4519,9 @@
         "choice_list_name": "gotoCCC",
         "data_value": "a2",
         "display": {
-          "text": "Yes, after delivery"
+          "title": {
+            "text": "Yes, after delivery"
+          }
         },
         "_row_num": 304
       },
@@ -3927,7 +4529,9 @@
         "choice_list_name": "gotoCCC",
         "data_value": "a3",
         "display": {
-          "text": "Yes, both before and after delivery"
+          "title": {
+            "text": "Yes, both before and after delivery"
+          }
         },
         "_row_num": 305
       },
@@ -3935,7 +4539,9 @@
         "choice_list_name": "gotoCCC",
         "data_value": "a0",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 306
       },
@@ -3943,7 +4549,9 @@
         "choice_list_name": "gotoCCC",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 307
       },
@@ -3951,7 +4559,9 @@
         "choice_list_name": "gotoCCC",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 308
       },
@@ -3959,7 +4569,9 @@
         "choice_list_name": "changerelat",
         "data_value": "a0",
         "display": {
-          "text": "No change"
+          "title": {
+            "text": "No change"
+          }
         },
         "_row_num": 309
       },
@@ -3967,7 +4579,9 @@
         "choice_list_name": "changerelat",
         "data_value": "a1",
         "display": {
-          "text": "You were married"
+          "title": {
+            "text": "You were married"
+          }
         },
         "_row_num": 310
       },
@@ -3975,7 +4589,9 @@
         "choice_list_name": "changerelat",
         "data_value": "a2",
         "display": {
-          "text": "This partner is no longer living with you"
+          "title": {
+            "text": "This partner is no longer living with you"
+          }
         },
         "_row_num": 311
       },
@@ -3983,7 +4599,9 @@
         "choice_list_name": "changerelat",
         "data_value": "a3",
         "display": {
-          "text": "You are no longer in a relationship"
+          "title": {
+            "text": "You are no longer in a relationship"
+          }
         },
         "_row_num": 312
       },
@@ -3991,7 +4609,9 @@
         "choice_list_name": "changerelat",
         "data_value": "a4",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 313
       },
@@ -3999,7 +4619,9 @@
         "choice_list_name": "changerelat",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 314
       },
@@ -4007,7 +4629,9 @@
         "choice_list_name": "relationend",
         "data_value": "a1",
         "display": {
-          "text": "Respondent tested HIV+"
+          "title": {
+            "text": "Respondent tested HIV+"
+          }
         },
         "_row_num": 315
       },
@@ -4015,7 +4639,9 @@
         "choice_list_name": "relationend",
         "data_value": "a2",
         "display": {
-          "text": "Partner tested HIV+"
+          "title": {
+            "text": "Partner tested HIV+"
+          }
         },
         "_row_num": 316
       },
@@ -4023,7 +4649,9 @@
         "choice_list_name": "relationend",
         "data_value": "a3",
         "display": {
-          "text": "Education received"
+          "title": {
+            "text": "Education received"
+          }
         },
         "_row_num": 317
       },
@@ -4031,7 +4659,9 @@
         "choice_list_name": "relationend",
         "data_value": "a4",
         "display": {
-          "text": "Partner did not approve of participation"
+          "title": {
+            "text": "Partner did not approve of participation"
+          }
         },
         "_row_num": 318
       },
@@ -4039,7 +4669,9 @@
         "choice_list_name": "relationend",
         "data_value": "a5",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 319
       },
@@ -4047,7 +4679,9 @@
         "choice_list_name": "relationend",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 320
       },
@@ -4055,7 +4689,9 @@
         "choice_list_name": "relationend",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 321
       },
@@ -4063,7 +4699,9 @@
         "choice_list_name": "qualitychange",
         "data_value": "a0",
         "display": {
-          "text": "No change"
+          "title": {
+            "text": "No change"
+          }
         },
         "_row_num": 322
       },
@@ -4071,7 +4709,9 @@
         "choice_list_name": "qualitychange",
         "data_value": "a1",
         "display": {
-          "text": "Improved"
+          "title": {
+            "text": "Improved"
+          }
         },
         "_row_num": 323
       },
@@ -4079,7 +4719,9 @@
         "choice_list_name": "qualitychange",
         "data_value": "a2",
         "display": {
-          "text": "Worsened"
+          "title": {
+            "text": "Worsened"
+          }
         },
         "_row_num": 324
       },
@@ -4087,7 +4729,9 @@
         "choice_list_name": "qualitychange",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 325
       },
@@ -4095,7 +4739,9 @@
         "choice_list_name": "qualitychange",
         "data_value": "a999",
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 326
       },
@@ -4103,7 +4749,9 @@
         "choice_list_name": "pretest",
         "data_value": "a1",
         "display": {
-          "text": "Client accepted testing, blood drawn"
+          "title": {
+            "text": "Client accepted testing, blood drawn"
+          }
         },
         "_row_num": 327
       },
@@ -4111,7 +4759,9 @@
         "choice_list_name": "pretest",
         "data_value": "a0",
         "display": {
-          "text": "Client declined testing, blood not drawn"
+          "title": {
+            "text": "Client declined testing, blood not drawn"
+          }
         },
         "_row_num": 328
       },
@@ -4119,7 +4769,9 @@
         "choice_list_name": "testinfant",
         "data_value": "a1",
         "display": {
-          "text": "Client accepted testing, blood drawn"
+          "title": {
+            "text": "Client accepted testing, blood drawn"
+          }
         },
         "_row_num": 329
       },
@@ -4127,7 +4779,9 @@
         "choice_list_name": "testinfant",
         "data_value": "a0",
         "display": {
-          "text": "Client declined testing, blood not drawn"
+          "title": {
+            "text": "Client declined testing, blood not drawn"
+          }
         },
         "_row_num": 330
       },
@@ -4135,7 +4789,9 @@
         "choice_list_name": "testinfant",
         "data_value": "a2",
         "display": {
-          "text": "Infant already tested HIV positive"
+          "title": {
+            "text": "Infant already tested HIV positive"
+          }
         },
         "_row_num": 331
       },
@@ -4143,7 +4799,9 @@
         "choice_list_name": "discordant",
         "data_value": "a1",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 332
       },
@@ -4151,7 +4809,9 @@
         "choice_list_name": "discordant",
         "data_value": "a0",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 333
       },
@@ -4159,7 +4819,9 @@
         "choice_list_name": "discordant",
         "data_value": "a3",
         "display": {
-          "text": "Male HIV status is unknown"
+          "title": {
+            "text": "Male HIV status is unknown"
+          }
         },
         "_row_num": 334
       },
@@ -4167,7 +4829,9 @@
         "choice_list_name": "acknowledge",
         "data_value": "a1",
         "display": {
-          "text": "Continue"
+          "title": {
+            "text": "Continue"
+          }
         },
         "_row_num": 335
       },
@@ -4175,7 +4839,9 @@
         "choice_list_name": "date_nr",
         "data_value": "a1",
         "display": {
-          "text": "Enter date"
+          "title": {
+            "text": "Enter date"
+          }
         },
         "_row_num": 336
       },
@@ -4183,7 +4849,9 @@
         "choice_list_name": "date_nr",
         "data_value": "a888",
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 337
       }
@@ -4613,7 +5281,9 @@
           "choice_list_name": "randomization_arms",
           "data_value": "HOPE",
           "display": {
-            "text": "HOPE Intervention Arm"
+            "title": {
+              "text": "HOPE Intervention Arm"
+            }
           },
           "_row_num": 2
         },
@@ -4621,7 +5291,9 @@
           "choice_list_name": "randomization_arms",
           "data_value": "Control",
           "display": {
-            "text": "Control Arm"
+            "title": {
+              "text": "Control Arm"
+            }
           },
           "_row_num": 3
         }
@@ -4631,7 +5303,9 @@
           "choice_list_name": "yes_no",
           "data_value": "a1",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 4
         },
@@ -4639,7 +5313,9 @@
           "choice_list_name": "yes_no",
           "data_value": "a0",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 5
         }
@@ -4649,7 +5325,9 @@
           "choice_list_name": "yes_no_nr",
           "data_value": "a1",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 6
         },
@@ -4657,7 +5335,9 @@
           "choice_list_name": "yes_no_nr",
           "data_value": "a0",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 7
         },
@@ -4665,7 +5345,9 @@
           "choice_list_name": "yes_no_nr",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 8
         }
@@ -4675,7 +5357,9 @@
           "choice_list_name": "no_response",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 9
         }
@@ -4685,7 +5369,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": "a1",
           "display": {
-            "text": "Luo"
+            "title": {
+              "text": "Luo"
+            }
           },
           "_row_num": 10
         },
@@ -4693,7 +5379,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": "a2",
           "display": {
-            "text": "Luhya"
+            "title": {
+              "text": "Luhya"
+            }
           },
           "_row_num": 11
         },
@@ -4701,7 +5389,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": "a3",
           "display": {
-            "text": "Kalenjin"
+            "title": {
+              "text": "Kalenjin"
+            }
           },
           "_row_num": 12
         },
@@ -4709,7 +5399,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": "a4",
           "display": {
-            "text": "Kisii"
+            "title": {
+              "text": "Kisii"
+            }
           },
           "_row_num": 13
         },
@@ -4717,7 +5409,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": "a5",
           "display": {
-            "text": "Kuria"
+            "title": {
+              "text": "Kuria"
+            }
           },
           "_row_num": 14
         },
@@ -4725,7 +5419,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": "a6",
           "display": {
-            "text": "Nandi"
+            "title": {
+              "text": "Nandi"
+            }
           },
           "_row_num": 15
         },
@@ -4733,7 +5429,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": "a7",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 16
         },
@@ -4741,7 +5439,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 17
         }
@@ -4751,7 +5451,9 @@
           "choice_list_name": "religion",
           "data_value": "a1",
           "display": {
-            "text": "Anglican"
+            "title": {
+              "text": "Anglican"
+            }
           },
           "_row_num": 18
         },
@@ -4759,7 +5461,9 @@
           "choice_list_name": "religion",
           "data_value": "a2",
           "display": {
-            "text": "Catholic"
+            "title": {
+              "text": "Catholic"
+            }
           },
           "_row_num": 19
         },
@@ -4767,7 +5471,9 @@
           "choice_list_name": "religion",
           "data_value": "a3",
           "display": {
-            "text": "Pentecostal"
+            "title": {
+              "text": "Pentecostal"
+            }
           },
           "_row_num": 20
         },
@@ -4775,7 +5481,9 @@
           "choice_list_name": "religion",
           "data_value": "a4",
           "display": {
-            "text": "Seventh Day Adventist"
+            "title": {
+              "text": "Seventh Day Adventist"
+            }
           },
           "_row_num": 21
         },
@@ -4783,7 +5491,9 @@
           "choice_list_name": "religion",
           "data_value": "a5",
           "display": {
-            "text": "African Independent Churches"
+            "title": {
+              "text": "African Independent Churches"
+            }
           },
           "_row_num": 22
         },
@@ -4791,7 +5501,9 @@
           "choice_list_name": "religion",
           "data_value": "a6",
           "display": {
-            "text": "African Inland Church"
+            "title": {
+              "text": "African Inland Church"
+            }
           },
           "_row_num": 23
         },
@@ -4799,7 +5511,9 @@
           "choice_list_name": "religion",
           "data_value": "a7",
           "display": {
-            "text": "Protestant"
+            "title": {
+              "text": "Protestant"
+            }
           },
           "_row_num": 24
         },
@@ -4807,7 +5521,9 @@
           "choice_list_name": "religion",
           "data_value": "a8",
           "display": {
-            "text": "Muslim"
+            "title": {
+              "text": "Muslim"
+            }
           },
           "_row_num": 25
         },
@@ -4815,7 +5531,9 @@
           "choice_list_name": "religion",
           "data_value": "a9",
           "display": {
-            "text": "No religion"
+            "title": {
+              "text": "No religion"
+            }
           },
           "_row_num": 26
         },
@@ -4823,7 +5541,9 @@
           "choice_list_name": "religion",
           "data_value": "a10",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 27
         },
@@ -4831,7 +5551,9 @@
           "choice_list_name": "religion",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 28
         }
@@ -4841,7 +5563,9 @@
           "choice_list_name": "employment_options",
           "data_value": "a0",
           "display": {
-            "text": "Not employed"
+            "title": {
+              "text": "Not employed"
+            }
           },
           "_row_num": 29
         },
@@ -4849,7 +5573,9 @@
           "choice_list_name": "employment_options",
           "data_value": "a1",
           "display": {
-            "text": "Housewife"
+            "title": {
+              "text": "Housewife"
+            }
           },
           "_row_num": 30
         },
@@ -4857,7 +5583,9 @@
           "choice_list_name": "employment_options",
           "data_value": "a2",
           "display": {
-            "text": "Housekeeping"
+            "title": {
+              "text": "Housekeeping"
+            }
           },
           "_row_num": 31
         },
@@ -4865,7 +5593,9 @@
           "choice_list_name": "employment_options",
           "data_value": "a3",
           "display": {
-            "text": "Small business"
+            "title": {
+              "text": "Small business"
+            }
           },
           "_row_num": 32
         },
@@ -4873,7 +5603,9 @@
           "choice_list_name": "employment_options",
           "data_value": "a4",
           "display": {
-            "text": "Salaried position"
+            "title": {
+              "text": "Salaried position"
+            }
           },
           "_row_num": 33
         },
@@ -4881,7 +5613,9 @@
           "choice_list_name": "employment_options",
           "data_value": "a5",
           "display": {
-            "text": "Farming/pastoralism"
+            "title": {
+              "text": "Farming/pastoralism"
+            }
           },
           "_row_num": 34
         },
@@ -4889,7 +5623,9 @@
           "choice_list_name": "employment_options",
           "data_value": "a6",
           "display": {
-            "text": "Fishing business"
+            "title": {
+              "text": "Fishing business"
+            }
           },
           "_row_num": 35
         },
@@ -4897,7 +5633,9 @@
           "choice_list_name": "employment_options",
           "data_value": "a7",
           "display": {
-            "text": "Sex worker"
+            "title": {
+              "text": "Sex worker"
+            }
           },
           "_row_num": 36
         },
@@ -4905,7 +5643,9 @@
           "choice_list_name": "employment_options",
           "data_value": "a8",
           "display": {
-            "text": "Casual laborer"
+            "title": {
+              "text": "Casual laborer"
+            }
           },
           "_row_num": 37
         },
@@ -4913,7 +5653,9 @@
           "choice_list_name": "employment_options",
           "data_value": "a9",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 38
         },
@@ -4921,7 +5663,9 @@
           "choice_list_name": "employment_options",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 39
         }
@@ -4931,7 +5675,9 @@
           "choice_list_name": "residence",
           "data_value": "a1",
           "display": {
-            "text": "Countryside (rural area)"
+            "title": {
+              "text": "Countryside (rural area)"
+            }
           },
           "_row_num": 40
         },
@@ -4939,7 +5685,9 @@
           "choice_list_name": "residence",
           "data_value": "a2",
           "display": {
-            "text": "In an urban area"
+            "title": {
+              "text": "In an urban area"
+            }
           },
           "_row_num": 41
         },
@@ -4947,7 +5695,9 @@
           "choice_list_name": "residence",
           "data_value": "a3",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 42
         },
@@ -4955,7 +5705,9 @@
           "choice_list_name": "residence",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 43
         }
@@ -4965,7 +5717,9 @@
           "choice_list_name": "hiv_status",
           "data_value": "a0",
           "display": {
-            "text": "HIV negative"
+            "title": {
+              "text": "HIV negative"
+            }
           },
           "_row_num": 44
         },
@@ -4973,7 +5727,9 @@
           "choice_list_name": "hiv_status",
           "data_value": "a1",
           "display": {
-            "text": "HIV positive"
+            "title": {
+              "text": "HIV positive"
+            }
           },
           "_row_num": 45
         },
@@ -4981,7 +5737,9 @@
           "choice_list_name": "hiv_status",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 46
         },
@@ -4989,7 +5747,9 @@
           "choice_list_name": "hiv_status",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 47
         }
@@ -4999,7 +5759,9 @@
           "choice_list_name": "y_n_ns",
           "data_value": "a1",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 48
         },
@@ -5007,7 +5769,9 @@
           "choice_list_name": "y_n_ns",
           "data_value": "a0",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 49
         },
@@ -5015,7 +5779,9 @@
           "choice_list_name": "y_n_ns",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 50
         },
@@ -5023,7 +5789,9 @@
           "choice_list_name": "y_n_ns",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 51
         }
@@ -5033,7 +5801,9 @@
           "choice_list_name": "relationship_status_options",
           "data_value": "a1",
           "display": {
-            "text": "Married, living together"
+            "title": {
+              "text": "Married, living together"
+            }
           },
           "_row_num": 52
         },
@@ -5041,7 +5811,9 @@
           "choice_list_name": "relationship_status_options",
           "data_value": "a2",
           "display": {
-            "text": "Married, not living together"
+            "title": {
+              "text": "Married, not living together"
+            }
           },
           "_row_num": 53
         },
@@ -5049,7 +5821,9 @@
           "choice_list_name": "relationship_status_options",
           "data_value": "a3",
           "display": {
-            "text": "Not married, living together"
+            "title": {
+              "text": "Not married, living together"
+            }
           },
           "_row_num": 54
         },
@@ -5057,7 +5831,9 @@
           "choice_list_name": "relationship_status_options",
           "data_value": "a4",
           "display": {
-            "text": "Not married, not living together"
+            "title": {
+              "text": "Not married, not living together"
+            }
           },
           "_row_num": 55
         }
@@ -5067,7 +5843,9 @@
           "choice_list_name": "m_f",
           "data_value": "f",
           "display": {
-            "text": "Female"
+            "title": {
+              "text": "Female"
+            }
           },
           "_row_num": 56
         },
@@ -5075,7 +5853,9 @@
           "choice_list_name": "m_f",
           "data_value": "m",
           "display": {
-            "text": "Male"
+            "title": {
+              "text": "Male"
+            }
           },
           "_row_num": 57
         }
@@ -5085,7 +5865,9 @@
           "choice_list_name": "date_options",
           "data_value": "day",
           "display": {
-            "text": "Day known"
+            "title": {
+              "text": "Day known"
+            }
           },
           "_row_num": 58
         },
@@ -5093,7 +5875,9 @@
           "choice_list_name": "date_options",
           "data_value": "month",
           "display": {
-            "text": "Month known"
+            "title": {
+              "text": "Month known"
+            }
           },
           "_row_num": 59
         },
@@ -5101,7 +5885,9 @@
           "choice_list_name": "date_options",
           "data_value": "year",
           "display": {
-            "text": "Year known"
+            "title": {
+              "text": "Year known"
+            }
           },
           "_row_num": 60
         }
@@ -5111,7 +5897,9 @@
           "choice_list_name": "education_level_options",
           "data_value": "a0",
           "display": {
-            "text": "No formal education"
+            "title": {
+              "text": "No formal education"
+            }
           },
           "_row_num": 61
         },
@@ -5119,7 +5907,9 @@
           "choice_list_name": "education_level_options",
           "data_value": "a1",
           "display": {
-            "text": "Lower primary 1-3"
+            "title": {
+              "text": "Lower primary 1-3"
+            }
           },
           "_row_num": 62
         },
@@ -5127,7 +5917,9 @@
           "choice_list_name": "education_level_options",
           "data_value": "a2",
           "display": {
-            "text": "Upper primary 4-8"
+            "title": {
+              "text": "Upper primary 4-8"
+            }
           },
           "_row_num": 63
         },
@@ -5135,7 +5927,9 @@
           "choice_list_name": "education_level_options",
           "data_value": "a3",
           "display": {
-            "text": "Secondary - not completed"
+            "title": {
+              "text": "Secondary - not completed"
+            }
           },
           "_row_num": 64
         },
@@ -5143,7 +5937,9 @@
           "choice_list_name": "education_level_options",
           "data_value": "a4",
           "display": {
-            "text": "Secondary - completed"
+            "title": {
+              "text": "Secondary - completed"
+            }
           },
           "_row_num": 65
         },
@@ -5151,7 +5947,9 @@
           "choice_list_name": "education_level_options",
           "data_value": "a5",
           "display": {
-            "text": "Above secondary"
+            "title": {
+              "text": "Above secondary"
+            }
           },
           "_row_num": 66
         },
@@ -5159,7 +5957,9 @@
           "choice_list_name": "education_level_options",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 67
         }
@@ -5169,7 +5969,9 @@
           "choice_list_name": "date_estimated",
           "data_value": "a9999",
           "display": {
-            "text": "estimated with help of nurse"
+            "title": {
+              "text": "estimated with help of nurse"
+            }
           },
           "_row_num": 68
         }
@@ -5179,7 +5981,9 @@
           "choice_list_name": "measurement_taken",
           "data_value": "a0",
           "display": {
-            "text": "Measurement was not taken"
+            "title": {
+              "text": "Measurement was not taken"
+            }
           },
           "_row_num": 69
         }
@@ -5189,7 +5993,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": "a1",
           "display": {
-            "text": "No time"
+            "title": {
+              "text": "No time"
+            }
           },
           "_row_num": 70
         },
@@ -5197,7 +6003,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": "a2",
           "display": {
-            "text": "Needs to ask partner for participation"
+            "title": {
+              "text": "Needs to ask partner for participation"
+            }
           },
           "_row_num": 71
         },
@@ -5205,7 +6013,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": "a3",
           "display": {
-            "text": "Concerned about intimate partner violence"
+            "title": {
+              "text": "Concerned about intimate partner violence"
+            }
           },
           "_row_num": 72
         },
@@ -5213,7 +6023,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": "a4",
           "display": {
-            "text": "Does not want to be tested with partner"
+            "title": {
+              "text": "Does not want to be tested with partner"
+            }
           },
           "_row_num": 73
         },
@@ -5221,7 +6033,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": "a5",
           "display": {
-            "text": "Does not want to be tested at home"
+            "title": {
+              "text": "Does not want to be tested at home"
+            }
           },
           "_row_num": 74
         },
@@ -5229,7 +6043,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": "a6",
           "display": {
-            "text": "Feels partner does not need the testing"
+            "title": {
+              "text": "Feels partner does not need the testing"
+            }
           },
           "_row_num": 75
         },
@@ -5237,7 +6053,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": "a7",
           "display": {
-            "text": "Feels partner does not need the education"
+            "title": {
+              "text": "Feels partner does not need the education"
+            }
           },
           "_row_num": 76
         },
@@ -5245,7 +6063,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": "a8",
           "display": {
-            "text": "No answer given"
+            "title": {
+              "text": "No answer given"
+            }
           },
           "_row_num": 77
         },
@@ -5253,7 +6073,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": "a9",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 78
         },
@@ -5261,7 +6083,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 79
         }
@@ -5271,7 +6095,9 @@
           "choice_list_name": "acknowledge",
           "data_value": "a1",
           "display": {
-            "text": "Continue"
+            "title": {
+              "text": "Continue"
+            }
           },
           "_row_num": 80
         },
@@ -5279,7 +6105,9 @@
           "choice_list_name": "acknowledge",
           "data_value": "a1",
           "display": {
-            "text": "Continue"
+            "title": {
+              "text": "Continue"
+            }
           },
           "_row_num": 335
         }
@@ -5289,7 +6117,9 @@
           "choice_list_name": "months_years",
           "data_value": "a1",
           "display": {
-            "text": "Enter months"
+            "title": {
+              "text": "Enter months"
+            }
           },
           "_row_num": 81
         },
@@ -5297,7 +6127,9 @@
           "choice_list_name": "months_years",
           "data_value": "a2",
           "display": {
-            "text": "Enter years"
+            "title": {
+              "text": "Enter years"
+            }
           },
           "_row_num": 82
         },
@@ -5305,7 +6137,9 @@
           "choice_list_name": "months_years",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 83
         }
@@ -5315,7 +6149,9 @@
           "choice_list_name": "study_participation",
           "data_value": "a1",
           "display": {
-            "text": "Wants to participate in full study"
+            "title": {
+              "text": "Wants to participate in full study"
+            }
           },
           "_row_num": 84
         },
@@ -5323,7 +6159,9 @@
           "choice_list_name": "study_participation",
           "data_value": "a0",
           "display": {
-            "text": "Does not want to participate"
+            "title": {
+              "text": "Does not want to participate"
+            }
           },
           "_row_num": 85
         }
@@ -5333,7 +6171,9 @@
           "choice_list_name": "happen",
           "data_value": "a1",
           "display": {
-            "text": "Miscarriage"
+            "title": {
+              "text": "Miscarriage"
+            }
           },
           "_row_num": 88
         },
@@ -5341,7 +6181,9 @@
           "choice_list_name": "happen",
           "data_value": "a2",
           "display": {
-            "text": "Stillbirth"
+            "title": {
+              "text": "Stillbirth"
+            }
           },
           "_row_num": 89
         },
@@ -5349,7 +6191,9 @@
           "choice_list_name": "happen",
           "data_value": "a3",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 90
         },
@@ -5357,7 +6201,9 @@
           "choice_list_name": "happen",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 91
         }
@@ -5367,7 +6213,9 @@
           "choice_list_name": "birthplace",
           "data_value": "a1",
           "display": {
-            "text": "Your home"
+            "title": {
+              "text": "Your home"
+            }
           },
           "_row_num": 92
         },
@@ -5375,7 +6223,9 @@
           "choice_list_name": "birthplace",
           "data_value": "a2",
           "display": {
-            "text": "Other home"
+            "title": {
+              "text": "Other home"
+            }
           },
           "_row_num": 93
         },
@@ -5383,7 +6233,9 @@
           "choice_list_name": "birthplace",
           "data_value": "a3",
           "display": {
-            "text": "Hospital"
+            "title": {
+              "text": "Hospital"
+            }
           },
           "_row_num": 94
         },
@@ -5391,7 +6243,9 @@
           "choice_list_name": "birthplace",
           "data_value": "a4",
           "display": {
-            "text": "Other government facility"
+            "title": {
+              "text": "Other government facility"
+            }
           },
           "_row_num": 95
         },
@@ -5399,7 +6253,9 @@
           "choice_list_name": "birthplace",
           "data_value": "a5",
           "display": {
-            "text": "Private facility"
+            "title": {
+              "text": "Private facility"
+            }
           },
           "_row_num": 96
         },
@@ -5407,7 +6263,9 @@
           "choice_list_name": "birthplace",
           "data_value": "a6",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 97
         },
@@ -5415,7 +6273,9 @@
           "choice_list_name": "birthplace",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 98
         }
@@ -5425,7 +6285,9 @@
           "choice_list_name": "issues",
           "data_value": "a1",
           "display": {
-            "text": "Cost too much"
+            "title": {
+              "text": "Cost too much"
+            }
           },
           "_row_num": 99
         },
@@ -5433,7 +6295,9 @@
           "choice_list_name": "issues",
           "data_value": "a2",
           "display": {
-            "text": "Facility not open"
+            "title": {
+              "text": "Facility not open"
+            }
           },
           "_row_num": 100
         },
@@ -5441,7 +6305,9 @@
           "choice_list_name": "issues",
           "data_value": "a3",
           "display": {
-            "text": "Too far/no transportation"
+            "title": {
+              "text": "Too far/no transportation"
+            }
           },
           "_row_num": 101
         },
@@ -5449,7 +6315,9 @@
           "choice_list_name": "issues",
           "data_value": "a4",
           "display": {
-            "text": "Don’t trust facility/poor quality service"
+            "title": {
+              "text": "Don’t trust facility/poor quality service"
+            }
           },
           "_row_num": 102
         },
@@ -5457,7 +6325,9 @@
           "choice_list_name": "issues",
           "data_value": "a5",
           "display": {
-            "text": "No female provider at facility"
+            "title": {
+              "text": "No female provider at facility"
+            }
           },
           "_row_num": 103
         },
@@ -5465,7 +6335,9 @@
           "choice_list_name": "issues",
           "data_value": "a6",
           "display": {
-            "text": "Partner did not allow it"
+            "title": {
+              "text": "Partner did not allow it"
+            }
           },
           "_row_num": 104
         },
@@ -5473,7 +6345,9 @@
           "choice_list_name": "issues",
           "data_value": "a7",
           "display": {
-            "text": "Family did not allow it"
+            "title": {
+              "text": "Family did not allow it"
+            }
           },
           "_row_num": 105
         },
@@ -5481,7 +6355,9 @@
           "choice_list_name": "issues",
           "data_value": "a8",
           "display": {
-            "text": "Not necessary"
+            "title": {
+              "text": "Not necessary"
+            }
           },
           "_row_num": 106
         },
@@ -5489,7 +6365,9 @@
           "choice_list_name": "issues",
           "data_value": "a9",
           "display": {
-            "text": "Not customary"
+            "title": {
+              "text": "Not customary"
+            }
           },
           "_row_num": 107
         },
@@ -5497,7 +6375,9 @@
           "choice_list_name": "issues",
           "data_value": "a10",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 108
         },
@@ -5505,7 +6385,9 @@
           "choice_list_name": "issues",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 109
         }
@@ -5515,7 +6397,9 @@
           "choice_list_name": "attendant",
           "data_value": "a1",
           "display": {
-            "text": "Traditional birth attendant"
+            "title": {
+              "text": "Traditional birth attendant"
+            }
           },
           "_row_num": 110
         },
@@ -5523,7 +6407,9 @@
           "choice_list_name": "attendant",
           "data_value": "a2",
           "display": {
-            "text": "Skilled birth attendant (nurse/midwife)"
+            "title": {
+              "text": "Skilled birth attendant (nurse/midwife)"
+            }
           },
           "_row_num": 111
         },
@@ -5531,7 +6417,9 @@
           "choice_list_name": "attendant",
           "data_value": "a3",
           "display": {
-            "text": "Doctor"
+            "title": {
+              "text": "Doctor"
+            }
           },
           "_row_num": 112
         },
@@ -5539,7 +6427,9 @@
           "choice_list_name": "attendant",
           "data_value": "a4",
           "display": {
-            "text": "Male partner"
+            "title": {
+              "text": "Male partner"
+            }
           },
           "_row_num": 113
         },
@@ -5547,7 +6437,9 @@
           "choice_list_name": "attendant",
           "data_value": "a5",
           "display": {
-            "text": "Family member(s)"
+            "title": {
+              "text": "Family member(s)"
+            }
           },
           "_row_num": 114
         },
@@ -5555,7 +6447,9 @@
           "choice_list_name": "attendant",
           "data_value": "a6",
           "display": {
-            "text": "Friend(s)"
+            "title": {
+              "text": "Friend(s)"
+            }
           },
           "_row_num": 115
         },
@@ -5563,7 +6457,9 @@
           "choice_list_name": "attendant",
           "data_value": "a7",
           "display": {
-            "text": "Community health worker"
+            "title": {
+              "text": "Community health worker"
+            }
           },
           "_row_num": 116
         },
@@ -5571,7 +6467,9 @@
           "choice_list_name": "attendant",
           "data_value": "a8",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 117
         },
@@ -5579,7 +6477,9 @@
           "choice_list_name": "attendant",
           "data_value": "a9",
           "display": {
-            "text": "No one"
+            "title": {
+              "text": "No one"
+            }
           },
           "_row_num": 118
         },
@@ -5587,7 +6487,9 @@
           "choice_list_name": "attendant",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 119
         }
@@ -5597,7 +6499,9 @@
           "choice_list_name": "complication",
           "data_value": "a0",
           "display": {
-            "text": "None"
+            "title": {
+              "text": "None"
+            }
           },
           "_row_num": 120
         },
@@ -5605,7 +6509,9 @@
           "choice_list_name": "complication",
           "data_value": "a1",
           "display": {
-            "text": "Premature rupture of membranes"
+            "title": {
+              "text": "Premature rupture of membranes"
+            }
           },
           "_row_num": 121
         },
@@ -5613,7 +6519,9 @@
           "choice_list_name": "complication",
           "data_value": "a2",
           "display": {
-            "text": "Obstructed labor/breech"
+            "title": {
+              "text": "Obstructed labor/breech"
+            }
           },
           "_row_num": 122
         },
@@ -5621,7 +6529,9 @@
           "choice_list_name": "complication",
           "data_value": "a3",
           "display": {
-            "text": "Pre-eclampsia/eclampsia"
+            "title": {
+              "text": "Pre-eclampsia/eclampsia"
+            }
           },
           "_row_num": 123
         },
@@ -5629,7 +6539,9 @@
           "choice_list_name": "complication",
           "data_value": "a4",
           "display": {
-            "text": "Postpartum hemorrhage"
+            "title": {
+              "text": "Postpartum hemorrhage"
+            }
           },
           "_row_num": 124
         },
@@ -5637,7 +6549,9 @@
           "choice_list_name": "complication",
           "data_value": "a5",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 125
         },
@@ -5645,7 +6559,9 @@
           "choice_list_name": "complication",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 126
         }
@@ -5655,7 +6571,9 @@
           "choice_list_name": "HIVpartner",
           "data_value": "a1",
           "display": {
-            "text": "HIV positive"
+            "title": {
+              "text": "HIV positive"
+            }
           },
           "_row_num": 127
         },
@@ -5663,7 +6581,9 @@
           "choice_list_name": "HIVpartner",
           "data_value": "a0",
           "display": {
-            "text": "HIV negative"
+            "title": {
+              "text": "HIV negative"
+            }
           },
           "_row_num": 128
         },
@@ -5671,7 +6591,9 @@
           "choice_list_name": "HIVpartner",
           "data_value": "a2",
           "display": {
-            "text": "Partner declined HIV testing"
+            "title": {
+              "text": "Partner declined HIV testing"
+            }
           },
           "_row_num": 129
         },
@@ -5679,7 +6601,9 @@
           "choice_list_name": "HIVpartner",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 130
         }
@@ -5689,7 +6613,9 @@
           "choice_list_name": "HIV",
           "data_value": "a0",
           "display": {
-            "text": "HIV negative"
+            "title": {
+              "text": "HIV negative"
+            }
           },
           "_row_num": 131
         },
@@ -5697,7 +6623,9 @@
           "choice_list_name": "HIV",
           "data_value": "a1",
           "display": {
-            "text": "HIV positive"
+            "title": {
+              "text": "HIV positive"
+            }
           },
           "_row_num": 132
         },
@@ -5705,7 +6633,9 @@
           "choice_list_name": "HIV",
           "data_value": "a2",
           "display": {
-            "text": "Client declined previous testing"
+            "title": {
+              "text": "Client declined previous testing"
+            }
           },
           "_row_num": 133
         },
@@ -5713,7 +6643,9 @@
           "choice_list_name": "HIV",
           "data_value": "a3",
           "display": {
-            "text": "Client has not been tested for study yet"
+            "title": {
+              "text": "Client has not been tested for study yet"
+            }
           },
           "_row_num": 134
         }
@@ -5723,7 +6655,9 @@
           "choice_list_name": "rapid",
           "data_value": "a1",
           "display": {
-            "text": "Client accepted testing, blood drawn"
+            "title": {
+              "text": "Client accepted testing, blood drawn"
+            }
           },
           "_row_num": 135
         },
@@ -5731,7 +6665,9 @@
           "choice_list_name": "rapid",
           "data_value": "a2",
           "display": {
-            "text": "Client declined testing, blood not drawn"
+            "title": {
+              "text": "Client declined testing, blood not drawn"
+            }
           },
           "_row_num": 136
         }
@@ -5741,7 +6677,9 @@
           "choice_list_name": "wheretest",
           "data_value": "a1",
           "display": {
-            "text": "Antenatal clinic (MCH)"
+            "title": {
+              "text": "Antenatal clinic (MCH)"
+            }
           },
           "_row_num": 137
         },
@@ -5749,7 +6687,9 @@
           "choice_list_name": "wheretest",
           "data_value": "a2",
           "display": {
-            "text": "Home"
+            "title": {
+              "text": "Home"
+            }
           },
           "_row_num": 138
         },
@@ -5757,7 +6697,9 @@
           "choice_list_name": "wheretest",
           "data_value": "a3",
           "display": {
-            "text": "VCT"
+            "title": {
+              "text": "VCT"
+            }
           },
           "_row_num": 139
         },
@@ -5765,7 +6707,9 @@
           "choice_list_name": "wheretest",
           "data_value": "a4",
           "display": {
-            "text": "Delivery ward"
+            "title": {
+              "text": "Delivery ward"
+            }
           },
           "_row_num": 140
         },
@@ -5773,7 +6717,9 @@
           "choice_list_name": "wheretest",
           "data_value": "a5",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 141
         },
@@ -5781,7 +6727,9 @@
           "choice_list_name": "wheretest",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 142
         }
@@ -5791,7 +6739,9 @@
           "choice_list_name": "yes_noanswer",
           "data_value": "a1",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 143
         },
@@ -5799,7 +6749,9 @@
           "choice_list_name": "yes_noanswer",
           "data_value": "a0",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 144
         },
@@ -5807,7 +6759,9 @@
           "choice_list_name": "yes_noanswer",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 145
         }
@@ -5817,7 +6771,9 @@
           "choice_list_name": "resulttest",
           "data_value": "a1",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 146
         },
@@ -5825,7 +6781,9 @@
           "choice_list_name": "resulttest",
           "data_value": "a666",
           "display": {
-            "text": "Test not done"
+            "title": {
+              "text": "Test not done"
+            }
           },
           "_row_num": 147
         },
@@ -5833,7 +6791,9 @@
           "choice_list_name": "resulttest",
           "data_value": "a777",
           "display": {
-            "text": "Did not receive results"
+            "title": {
+              "text": "Did not receive results"
+            }
           },
           "_row_num": 148
         },
@@ -5841,7 +6801,9 @@
           "choice_list_name": "resulttest",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 149
         },
@@ -5849,7 +6811,9 @@
           "choice_list_name": "resulttest",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 150
         }
@@ -5859,7 +6823,9 @@
           "choice_list_name": "recentHIV",
           "data_value": "a0",
           "display": {
-            "text": "HIV negative"
+            "title": {
+              "text": "HIV negative"
+            }
           },
           "_row_num": 151
         },
@@ -5867,7 +6833,9 @@
           "choice_list_name": "recentHIV",
           "data_value": "a1",
           "display": {
-            "text": "HIV positive"
+            "title": {
+              "text": "HIV positive"
+            }
           },
           "_row_num": 152
         },
@@ -5875,7 +6843,9 @@
           "choice_list_name": "recentHIV",
           "data_value": "a2",
           "display": {
-            "text": "Client has never been tested"
+            "title": {
+              "text": "Client has never been tested"
+            }
           },
           "_row_num": 153
         },
@@ -5883,7 +6853,9 @@
           "choice_list_name": "recentHIV",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 154
         }
@@ -5893,7 +6865,9 @@
           "choice_list_name": "yes_notsure",
           "data_value": "a1",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 155
         },
@@ -5901,7 +6875,9 @@
           "choice_list_name": "yes_notsure",
           "data_value": "a0",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 156
         },
@@ -5909,7 +6885,9 @@
           "choice_list_name": "yes_notsure",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 157
         },
@@ -5917,7 +6895,9 @@
           "choice_list_name": "yes_notsure",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 158
         }
@@ -5927,7 +6907,9 @@
           "choice_list_name": "long",
           "data_value": "a1",
           "display": {
-            "text": "Indefinitely"
+            "title": {
+              "text": "Indefinitely"
+            }
           },
           "_row_num": 159
         },
@@ -5935,7 +6917,9 @@
           "choice_list_name": "long",
           "data_value": "a2",
           "display": {
-            "text": "Only during pregnancy and breastfeeding"
+            "title": {
+              "text": "Only during pregnancy and breastfeeding"
+            }
           },
           "_row_num": 160
         },
@@ -5943,7 +6927,9 @@
           "choice_list_name": "long",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 161
         },
@@ -5951,7 +6937,9 @@
           "choice_list_name": "long",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 162
         }
@@ -5961,7 +6949,9 @@
           "choice_list_name": "miss",
           "data_value": "a1",
           "display": {
-            "text": "Yes, I miss one or more doses but took some"
+            "title": {
+              "text": "Yes, I miss one or more doses but took some"
+            }
           },
           "_row_num": 163
         },
@@ -5969,7 +6959,9 @@
           "choice_list_name": "miss",
           "data_value": "a0",
           "display": {
-            "text": "No, I took all my doses"
+            "title": {
+              "text": "No, I took all my doses"
+            }
           },
           "_row_num": 164
         },
@@ -5977,7 +6969,9 @@
           "choice_list_name": "miss",
           "data_value": "a2",
           "display": {
-            "text": "I did not take any of the medication"
+            "title": {
+              "text": "I did not take any of the medication"
+            }
           },
           "_row_num": 165
         },
@@ -5985,7 +6979,9 @@
           "choice_list_name": "miss",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 166
         },
@@ -5993,7 +6989,9 @@
           "choice_list_name": "miss",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 167
         }
@@ -6003,7 +7001,9 @@
           "choice_list_name": "advise",
           "data_value": "a1",
           "display": {
-            "text": "My decision"
+            "title": {
+              "text": "My decision"
+            }
           },
           "_row_num": 168
         },
@@ -6011,7 +7011,9 @@
           "choice_list_name": "advise",
           "data_value": "a2",
           "display": {
-            "text": "Provider advised to discontiue"
+            "title": {
+              "text": "Provider advised to discontiue"
+            }
           },
           "_row_num": 169
         },
@@ -6019,7 +7021,9 @@
           "choice_list_name": "advise",
           "data_value": "a3",
           "display": {
-            "text": "Ran out of medication"
+            "title": {
+              "text": "Ran out of medication"
+            }
           },
           "_row_num": 170
         },
@@ -6027,7 +7031,9 @@
           "choice_list_name": "advise",
           "data_value": "a4",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 171
         },
@@ -6035,7 +7041,9 @@
           "choice_list_name": "advise",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 172
         },
@@ -6043,7 +7051,9 @@
           "choice_list_name": "advise",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 173
         }
@@ -6053,7 +7063,9 @@
           "choice_list_name": "misschild",
           "data_value": "a1",
           "display": {
-            "text": "Yes, child missed one or more doses but took some"
+            "title": {
+              "text": "Yes, child missed one or more doses but took some"
+            }
           },
           "_row_num": 174
         },
@@ -6061,7 +7073,9 @@
           "choice_list_name": "misschild",
           "data_value": "a0",
           "display": {
-            "text": "No, the child took all doses"
+            "title": {
+              "text": "No, the child took all doses"
+            }
           },
           "_row_num": 175
         },
@@ -6069,7 +7083,9 @@
           "choice_list_name": "misschild",
           "data_value": "a2",
           "display": {
-            "text": "The child did not take any of the medication"
+            "title": {
+              "text": "The child did not take any of the medication"
+            }
           },
           "_row_num": 176
         },
@@ -6077,7 +7093,9 @@
           "choice_list_name": "misschild",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 177
         },
@@ -6085,7 +7103,9 @@
           "choice_list_name": "misschild",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 178
         }
@@ -6095,7 +7115,9 @@
           "choice_list_name": "foodlist",
           "data_value": "a1",
           "display": {
-            "text": "Infant formula"
+            "title": {
+              "text": "Infant formula"
+            }
           },
           "_row_num": 179
         },
@@ -6103,7 +7125,9 @@
           "choice_list_name": "foodlist",
           "data_value": "a2",
           "display": {
-            "text": "Milk (other than breast milk)"
+            "title": {
+              "text": "Milk (other than breast milk)"
+            }
           },
           "_row_num": 180
         },
@@ -6111,7 +7135,9 @@
           "choice_list_name": "foodlist",
           "data_value": "a3",
           "display": {
-            "text": "Sugar or glucose water"
+            "title": {
+              "text": "Sugar or glucose water"
+            }
           },
           "_row_num": 181
         },
@@ -6119,7 +7145,9 @@
           "choice_list_name": "foodlist",
           "data_value": "a4",
           "display": {
-            "text": "Plain water"
+            "title": {
+              "text": "Plain water"
+            }
           },
           "_row_num": 182
         },
@@ -6127,7 +7155,9 @@
           "choice_list_name": "foodlist",
           "data_value": "a5",
           "display": {
-            "text": "Fruit juice"
+            "title": {
+              "text": "Fruit juice"
+            }
           },
           "_row_num": 183
         },
@@ -6135,7 +7165,9 @@
           "choice_list_name": "foodlist",
           "data_value": "a6",
           "display": {
-            "text": "Tea/infusions"
+            "title": {
+              "text": "Tea/infusions"
+            }
           },
           "_row_num": 184
         },
@@ -6143,7 +7175,9 @@
           "choice_list_name": "foodlist",
           "data_value": "a7",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 185
         },
@@ -6151,7 +7185,9 @@
           "choice_list_name": "foodlist",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 186
         }
@@ -6161,7 +7197,9 @@
           "choice_list_name": "foodmany",
           "data_value": "a1",
           "display": {
-            "text": "Infant formula"
+            "title": {
+              "text": "Infant formula"
+            }
           },
           "_row_num": 187
         },
@@ -6169,7 +7207,9 @@
           "choice_list_name": "foodmany",
           "data_value": "a2",
           "display": {
-            "text": "Milk (other than breast milk)"
+            "title": {
+              "text": "Milk (other than breast milk)"
+            }
           },
           "_row_num": 188
         },
@@ -6177,7 +7217,9 @@
           "choice_list_name": "foodmany",
           "data_value": "a3",
           "display": {
-            "text": "Sugar or glucose water"
+            "title": {
+              "text": "Sugar or glucose water"
+            }
           },
           "_row_num": 189
         },
@@ -6185,7 +7227,9 @@
           "choice_list_name": "foodmany",
           "data_value": "a4",
           "display": {
-            "text": "Plain water"
+            "title": {
+              "text": "Plain water"
+            }
           },
           "_row_num": 190
         },
@@ -6193,7 +7237,9 @@
           "choice_list_name": "foodmany",
           "data_value": "a5",
           "display": {
-            "text": "Fruit juice"
+            "title": {
+              "text": "Fruit juice"
+            }
           },
           "_row_num": 191
         },
@@ -6201,7 +7247,9 @@
           "choice_list_name": "foodmany",
           "data_value": "a6",
           "display": {
-            "text": "Tea/infusions"
+            "title": {
+              "text": "Tea/infusions"
+            }
           },
           "_row_num": 192
         },
@@ -6209,7 +7257,9 @@
           "choice_list_name": "foodmany",
           "data_value": "a7",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 193
         },
@@ -6217,7 +7267,9 @@
           "choice_list_name": "foodmany",
           "data_value": "a8",
           "display": {
-            "text": "None of the above were fed regularly to the child"
+            "title": {
+              "text": "None of the above were fed regularly to the child"
+            }
           },
           "_row_num": 194
         },
@@ -6225,7 +7277,9 @@
           "choice_list_name": "foodmany",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 195
         }
@@ -6235,7 +7289,9 @@
           "choice_list_name": "children",
           "data_value": "a1",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 196
         },
@@ -6243,7 +7299,9 @@
           "choice_list_name": "children",
           "data_value": "a0",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 197
         },
@@ -6251,7 +7309,9 @@
           "choice_list_name": "children",
           "data_value": "666",
           "display": {
-            "text": "Says she can't get pregnant again"
+            "title": {
+              "text": "Says she can't get pregnant again"
+            }
           },
           "_row_num": 198
         },
@@ -6259,7 +7319,9 @@
           "choice_list_name": "children",
           "data_value": "888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 199
         },
@@ -6267,7 +7329,9 @@
           "choice_list_name": "children",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 200
         }
@@ -6277,7 +7341,9 @@
           "choice_list_name": "timewait",
           "data_value": "Months",
           "display": {
-            "text": "Months"
+            "title": {
+              "text": "Months"
+            }
           },
           "_row_num": 201
         },
@@ -6285,7 +7351,9 @@
           "choice_list_name": "timewait",
           "data_value": "Years",
           "display": {
-            "text": "Years"
+            "title": {
+              "text": "Years"
+            }
           },
           "_row_num": 202
         },
@@ -6293,7 +7361,9 @@
           "choice_list_name": "timewait",
           "data_value": "a777",
           "display": {
-            "text": "After marriage (no specific time frame)"
+            "title": {
+              "text": "After marriage (no specific time frame)"
+            }
           },
           "_row_num": 203
         },
@@ -6301,7 +7371,9 @@
           "choice_list_name": "timewait",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 204
         },
@@ -6309,7 +7381,9 @@
           "choice_list_name": "timewait",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 205
         }
@@ -6319,7 +7393,9 @@
           "choice_list_name": "childnumber",
           "data_value": "a1",
           "display": {
-            "text": "Same number"
+            "title": {
+              "text": "Same number"
+            }
           },
           "_row_num": 206
         },
@@ -6327,7 +7403,9 @@
           "choice_list_name": "childnumber",
           "data_value": "a2",
           "display": {
-            "text": "More children"
+            "title": {
+              "text": "More children"
+            }
           },
           "_row_num": 207
         },
@@ -6335,7 +7413,9 @@
           "choice_list_name": "childnumber",
           "data_value": "a3",
           "display": {
-            "text": "Fewer children"
+            "title": {
+              "text": "Fewer children"
+            }
           },
           "_row_num": 208
         },
@@ -6343,7 +7423,9 @@
           "choice_list_name": "childnumber",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 209
         },
@@ -6351,7 +7433,9 @@
           "choice_list_name": "childnumber",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 210
         }
@@ -6361,7 +7445,9 @@
           "choice_list_name": "influence",
           "data_value": "a1",
           "display": {
-            "text": "Mainly respondent"
+            "title": {
+              "text": "Mainly respondent"
+            }
           },
           "_row_num": 211
         },
@@ -6369,7 +7455,9 @@
           "choice_list_name": "influence",
           "data_value": "a2",
           "display": {
-            "text": "Mainly partner"
+            "title": {
+              "text": "Mainly partner"
+            }
           },
           "_row_num": 212
         },
@@ -6377,7 +7465,9 @@
           "choice_list_name": "influence",
           "data_value": "a3",
           "display": {
-            "text": "Both respondent and partner together"
+            "title": {
+              "text": "Both respondent and partner together"
+            }
           },
           "_row_num": 213
         },
@@ -6385,7 +7475,9 @@
           "choice_list_name": "influence",
           "data_value": "a4",
           "display": {
-            "text": "Mainly parents"
+            "title": {
+              "text": "Mainly parents"
+            }
           },
           "_row_num": 214
         },
@@ -6393,7 +7485,9 @@
           "choice_list_name": "influence",
           "data_value": "a5",
           "display": {
-            "text": "Mainly partner’s parents"
+            "title": {
+              "text": "Mainly partner’s parents"
+            }
           },
           "_row_num": 215
         },
@@ -6401,7 +7495,9 @@
           "choice_list_name": "influence",
           "data_value": "a6",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 216
         },
@@ -6409,7 +7505,9 @@
           "choice_list_name": "influence",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 217
         }
@@ -6419,7 +7517,9 @@
           "choice_list_name": "FP",
           "data_value": "a1",
           "display": {
-            "text": "Female sterilization"
+            "title": {
+              "text": "Female sterilization"
+            }
           },
           "_row_num": 218
         },
@@ -6427,7 +7527,9 @@
           "choice_list_name": "FP",
           "data_value": "a2",
           "display": {
-            "text": "Male sterilization"
+            "title": {
+              "text": "Male sterilization"
+            }
           },
           "_row_num": 219
         },
@@ -6435,7 +7537,9 @@
           "choice_list_name": "FP",
           "data_value": "a3",
           "display": {
-            "text": "Pill"
+            "title": {
+              "text": "Pill"
+            }
           },
           "_row_num": 220
         },
@@ -6443,7 +7547,9 @@
           "choice_list_name": "FP",
           "data_value": "a4",
           "display": {
-            "text": "Injectable"
+            "title": {
+              "text": "Injectable"
+            }
           },
           "_row_num": 221
         },
@@ -6451,7 +7557,9 @@
           "choice_list_name": "FP",
           "data_value": "a5",
           "display": {
-            "text": "Implants"
+            "title": {
+              "text": "Implants"
+            }
           },
           "_row_num": 222
         },
@@ -6459,7 +7567,9 @@
           "choice_list_name": "FP",
           "data_value": "a6",
           "display": {
-            "text": "IUD"
+            "title": {
+              "text": "IUD"
+            }
           },
           "_row_num": 223
         },
@@ -6467,7 +7577,9 @@
           "choice_list_name": "FP",
           "data_value": "a7",
           "display": {
-            "text": "Male condom"
+            "title": {
+              "text": "Male condom"
+            }
           },
           "_row_num": 224
         },
@@ -6475,7 +7587,9 @@
           "choice_list_name": "FP",
           "data_value": "a8",
           "display": {
-            "text": "Female condom"
+            "title": {
+              "text": "Female condom"
+            }
           },
           "_row_num": 225
         },
@@ -6483,7 +7597,9 @@
           "choice_list_name": "FP",
           "data_value": "a9",
           "display": {
-            "text": "Lactational amenorrhea method"
+            "title": {
+              "text": "Lactational amenorrhea method"
+            }
           },
           "_row_num": 226
         },
@@ -6491,7 +7607,9 @@
           "choice_list_name": "FP",
           "data_value": "a10",
           "display": {
-            "text": "Natural, rhythm or calendar method"
+            "title": {
+              "text": "Natural, rhythm or calendar method"
+            }
           },
           "_row_num": 227
         },
@@ -6499,7 +7617,9 @@
           "choice_list_name": "FP",
           "data_value": "a11",
           "display": {
-            "text": "Withdrawal (man pulls out penis before end)"
+            "title": {
+              "text": "Withdrawal (man pulls out penis before end)"
+            }
           },
           "_row_num": 228
         },
@@ -6507,7 +7627,9 @@
           "choice_list_name": "FP",
           "data_value": "a12",
           "display": {
-            "text": "Emergency contraception"
+            "title": {
+              "text": "Emergency contraception"
+            }
           },
           "_row_num": 229
         },
@@ -6515,7 +7637,9 @@
           "choice_list_name": "FP",
           "data_value": "a13",
           "display": {
-            "text": "Herbs or other traditional method"
+            "title": {
+              "text": "Herbs or other traditional method"
+            }
           },
           "_row_num": 230
         },
@@ -6523,7 +7647,9 @@
           "choice_list_name": "FP",
           "data_value": "a14",
           "display": {
-            "text": "Abstaining from sex"
+            "title": {
+              "text": "Abstaining from sex"
+            }
           },
           "_row_num": 231
         },
@@ -6531,7 +7657,9 @@
           "choice_list_name": "FP",
           "data_value": "a15",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 232
         },
@@ -6539,7 +7667,9 @@
           "choice_list_name": "FP",
           "data_value": "a16",
           "display": {
-            "text": "None of the above"
+            "title": {
+              "text": "None of the above"
+            }
           },
           "_row_num": 233
         },
@@ -6547,7 +7677,9 @@
           "choice_list_name": "FP",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 234
         }
@@ -6557,7 +7689,9 @@
           "choice_list_name": "hormone",
           "data_value": "a1",
           "display": {
-            "text": "Not having sex / partner is absent"
+            "title": {
+              "text": "Not having sex / partner is absent"
+            }
           },
           "_row_num": 235
         },
@@ -6565,7 +7699,9 @@
           "choice_list_name": "hormone",
           "data_value": "a2",
           "display": {
-            "text": "Hysterectomy"
+            "title": {
+              "text": "Hysterectomy"
+            }
           },
           "_row_num": 236
         },
@@ -6573,7 +7709,9 @@
           "choice_list_name": "hormone",
           "data_value": "a3",
           "display": {
-            "text": "Breastfeeding – it provides enough protection"
+            "title": {
+              "text": "Breastfeeding – it provides enough protection"
+            }
           },
           "_row_num": 237
         },
@@ -6581,7 +7719,9 @@
           "choice_list_name": "hormone",
           "data_value": "a4",
           "display": {
-            "text": "Breastfeeding –  afraid that using those methods may harm my baby"
+            "title": {
+              "text": "Breastfeeding –  afraid that using those methods may harm my baby"
+            }
           },
           "_row_num": 238
         },
@@ -6589,7 +7729,9 @@
           "choice_list_name": "hormone",
           "data_value": "a5",
           "display": {
-            "text": "I want more children"
+            "title": {
+              "text": "I want more children"
+            }
           },
           "_row_num": 239
         },
@@ -6597,7 +7739,9 @@
           "choice_list_name": "hormone",
           "data_value": "a6",
           "display": {
-            "text": "I am opposed"
+            "title": {
+              "text": "I am opposed"
+            }
           },
           "_row_num": 240
         },
@@ -6605,7 +7749,9 @@
           "choice_list_name": "hormone",
           "data_value": "a7",
           "display": {
-            "text": "My partner is opposed"
+            "title": {
+              "text": "My partner is opposed"
+            }
           },
           "_row_num": 241
         },
@@ -6613,7 +7759,9 @@
           "choice_list_name": "hormone",
           "data_value": "a8",
           "display": {
-            "text": "I believe current method is effective enough"
+            "title": {
+              "text": "I believe current method is effective enough"
+            }
           },
           "_row_num": 242
         },
@@ -6621,7 +7769,9 @@
           "choice_list_name": "hormone",
           "data_value": "a9",
           "display": {
-            "text": "My religion does not allow"
+            "title": {
+              "text": "My religion does not allow"
+            }
           },
           "_row_num": 243
         },
@@ -6629,7 +7779,9 @@
           "choice_list_name": "hormone",
           "data_value": "a10",
           "display": {
-            "text": "I do not know about methods or where to get the methods"
+            "title": {
+              "text": "I do not know about methods or where to get the methods"
+            }
           },
           "_row_num": 244
         },
@@ -6637,7 +7789,9 @@
           "choice_list_name": "hormone",
           "data_value": "a11",
           "display": {
-            "text": "I am worried about health or side effects"
+            "title": {
+              "text": "I am worried about health or side effects"
+            }
           },
           "_row_num": 245
         },
@@ -6645,7 +7799,9 @@
           "choice_list_name": "hormone",
           "data_value": "a12",
           "display": {
-            "text": "The method I want to use is not available"
+            "title": {
+              "text": "The method I want to use is not available"
+            }
           },
           "_row_num": 246
         },
@@ -6653,7 +7809,9 @@
           "choice_list_name": "hormone",
           "data_value": "a13",
           "display": {
-            "text": "Too far to go"
+            "title": {
+              "text": "Too far to go"
+            }
           },
           "_row_num": 247
         },
@@ -6661,7 +7819,9 @@
           "choice_list_name": "hormone",
           "data_value": "a14",
           "display": {
-            "text": "Cost"
+            "title": {
+              "text": "Cost"
+            }
           },
           "_row_num": 248
         },
@@ -6669,7 +7829,9 @@
           "choice_list_name": "hormone",
           "data_value": "a15",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 249
         },
@@ -6677,7 +7839,9 @@
           "choice_list_name": "hormone",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 250
         }
@@ -6687,7 +7851,9 @@
           "choice_list_name": "influencedelay",
           "data_value": "a1",
           "display": {
-            "text": "Mainly respondent"
+            "title": {
+              "text": "Mainly respondent"
+            }
           },
           "_row_num": 251
         },
@@ -6695,7 +7861,9 @@
           "choice_list_name": "influencedelay",
           "data_value": "a2",
           "display": {
-            "text": "Mainly partner"
+            "title": {
+              "text": "Mainly partner"
+            }
           },
           "_row_num": 252
         },
@@ -6703,7 +7871,9 @@
           "choice_list_name": "influencedelay",
           "data_value": "a3",
           "display": {
-            "text": "Both respondent and partner together"
+            "title": {
+              "text": "Both respondent and partner together"
+            }
           },
           "_row_num": 253
         },
@@ -6711,7 +7881,9 @@
           "choice_list_name": "influencedelay",
           "data_value": "a4",
           "display": {
-            "text": "Mainly parents"
+            "title": {
+              "text": "Mainly parents"
+            }
           },
           "_row_num": 254
         },
@@ -6719,7 +7891,9 @@
           "choice_list_name": "influencedelay",
           "data_value": "a5",
           "display": {
-            "text": "Mainly partner’s parents"
+            "title": {
+              "text": "Mainly partner’s parents"
+            }
           },
           "_row_num": 255
         },
@@ -6727,7 +7901,9 @@
           "choice_list_name": "influencedelay",
           "data_value": "a6",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 256
         },
@@ -6735,7 +7911,9 @@
           "choice_list_name": "influencedelay",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 257
         }
@@ -6745,7 +7923,9 @@
           "choice_list_name": "approval",
           "data_value": "a1",
           "display": {
-            "text": "Approves"
+            "title": {
+              "text": "Approves"
+            }
           },
           "_row_num": 258
         },
@@ -6753,7 +7933,9 @@
           "choice_list_name": "approval",
           "data_value": "a0",
           "display": {
-            "text": "Disapproves"
+            "title": {
+              "text": "Disapproves"
+            }
           },
           "_row_num": 259
         },
@@ -6761,7 +7943,9 @@
           "choice_list_name": "approval",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 260
         },
@@ -6769,7 +7953,9 @@
           "choice_list_name": "approval",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 261
         }
@@ -6779,7 +7965,9 @@
           "choice_list_name": "talkFP",
           "data_value": "a0",
           "display": {
-            "text": "Never"
+            "title": {
+              "text": "Never"
+            }
           },
           "_row_num": 262
         },
@@ -6787,7 +7975,9 @@
           "choice_list_name": "talkFP",
           "data_value": "a1",
           "display": {
-            "text": "Once or twice"
+            "title": {
+              "text": "Once or twice"
+            }
           },
           "_row_num": 263
         },
@@ -6795,7 +7985,9 @@
           "choice_list_name": "talkFP",
           "data_value": "a2",
           "display": {
-            "text": "More often"
+            "title": {
+              "text": "More often"
+            }
           },
           "_row_num": 264
         },
@@ -6803,7 +7995,9 @@
           "choice_list_name": "talkFP",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 265
         }
@@ -6813,7 +8007,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a0",
           "display": {
-            "text": "None"
+            "title": {
+              "text": "None"
+            }
           },
           "_row_num": 266
         },
@@ -6821,7 +8017,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a1",
           "display": {
-            "text": "Female sterilization"
+            "title": {
+              "text": "Female sterilization"
+            }
           },
           "_row_num": 267
         },
@@ -6829,7 +8027,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a2",
           "display": {
-            "text": "Male sterilization"
+            "title": {
+              "text": "Male sterilization"
+            }
           },
           "_row_num": 268
         },
@@ -6837,7 +8037,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a3",
           "display": {
-            "text": "Pill"
+            "title": {
+              "text": "Pill"
+            }
           },
           "_row_num": 269
         },
@@ -6845,7 +8047,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a4",
           "display": {
-            "text": "Injectable"
+            "title": {
+              "text": "Injectable"
+            }
           },
           "_row_num": 270
         },
@@ -6853,7 +8057,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a5",
           "display": {
-            "text": "Implants"
+            "title": {
+              "text": "Implants"
+            }
           },
           "_row_num": 271
         },
@@ -6861,7 +8067,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a6",
           "display": {
-            "text": "IUD"
+            "title": {
+              "text": "IUD"
+            }
           },
           "_row_num": 272
         },
@@ -6869,7 +8077,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a7",
           "display": {
-            "text": "Male condom"
+            "title": {
+              "text": "Male condom"
+            }
           },
           "_row_num": 273
         },
@@ -6877,7 +8087,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a8",
           "display": {
-            "text": "Female condom"
+            "title": {
+              "text": "Female condom"
+            }
           },
           "_row_num": 274
         },
@@ -6885,7 +8097,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a9",
           "display": {
-            "text": "Lactational amenorrhea method"
+            "title": {
+              "text": "Lactational amenorrhea method"
+            }
           },
           "_row_num": 275
         },
@@ -6893,7 +8107,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a10",
           "display": {
-            "text": "Natural, rhythm or calendar method"
+            "title": {
+              "text": "Natural, rhythm or calendar method"
+            }
           },
           "_row_num": 276
         },
@@ -6901,7 +8117,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a11",
           "display": {
-            "text": "Withdrawal (man pulls out penis before end)"
+            "title": {
+              "text": "Withdrawal (man pulls out penis before end)"
+            }
           },
           "_row_num": 277
         },
@@ -6909,7 +8127,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a12",
           "display": {
-            "text": "Emergency contraception"
+            "title": {
+              "text": "Emergency contraception"
+            }
           },
           "_row_num": 278
         },
@@ -6917,7 +8137,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a13",
           "display": {
-            "text": "Herbs or other traditional method"
+            "title": {
+              "text": "Herbs or other traditional method"
+            }
           },
           "_row_num": 279
         },
@@ -6925,7 +8147,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a14",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 280
         },
@@ -6933,7 +8157,9 @@
           "choice_list_name": "Fpchoice",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 281
         }
@@ -6943,7 +8169,9 @@
           "choice_list_name": "condom",
           "data_value": "a4",
           "display": {
-            "text": "Always"
+            "title": {
+              "text": "Always"
+            }
           },
           "_row_num": 282
         },
@@ -6951,7 +8179,9 @@
           "choice_list_name": "condom",
           "data_value": "a3",
           "display": {
-            "text": "On most occasions"
+            "title": {
+              "text": "On most occasions"
+            }
           },
           "_row_num": 283
         },
@@ -6959,7 +8189,9 @@
           "choice_list_name": "condom",
           "data_value": "a2",
           "display": {
-            "text": "Sometimes"
+            "title": {
+              "text": "Sometimes"
+            }
           },
           "_row_num": 284
         },
@@ -6967,7 +8199,9 @@
           "choice_list_name": "condom",
           "data_value": "a1",
           "display": {
-            "text": "Rarely"
+            "title": {
+              "text": "Rarely"
+            }
           },
           "_row_num": 285
         },
@@ -6975,7 +8209,9 @@
           "choice_list_name": "condom",
           "data_value": "a0",
           "display": {
-            "text": "Never"
+            "title": {
+              "text": "Never"
+            }
           },
           "_row_num": 286
         },
@@ -6983,7 +8219,9 @@
           "choice_list_name": "condom",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 287
         }
@@ -6993,7 +8231,9 @@
           "choice_list_name": "testsite",
           "data_value": "a1",
           "display": {
-            "text": "Antenatal clinic (He came with me)"
+            "title": {
+              "text": "Antenatal clinic (He came with me)"
+            }
           },
           "_row_num": 288
         },
@@ -7001,7 +8241,9 @@
           "choice_list_name": "testsite",
           "data_value": "a2",
           "display": {
-            "text": "Antenatal clinic (He visited alone)"
+            "title": {
+              "text": "Antenatal clinic (He visited alone)"
+            }
           },
           "_row_num": 289
         },
@@ -7009,7 +8251,9 @@
           "choice_list_name": "testsite",
           "data_value": "a3",
           "display": {
-            "text": "Home (Not related to the study)"
+            "title": {
+              "text": "Home (Not related to the study)"
+            }
           },
           "_row_num": 290
         },
@@ -7017,7 +8261,9 @@
           "choice_list_name": "testsite",
           "data_value": "a4",
           "display": {
-            "text": "VCT"
+            "title": {
+              "text": "VCT"
+            }
           },
           "_row_num": 291
         },
@@ -7025,7 +8271,9 @@
           "choice_list_name": "testsite",
           "data_value": "a5",
           "display": {
-            "text": "Delivery ward"
+            "title": {
+              "text": "Delivery ward"
+            }
           },
           "_row_num": 292
         },
@@ -7033,7 +8281,9 @@
           "choice_list_name": "testsite",
           "data_value": "a6",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 293
         },
@@ -7041,7 +8291,9 @@
           "choice_list_name": "testsite",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 294
         },
@@ -7049,7 +8301,9 @@
           "choice_list_name": "testsite",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 295
         }
@@ -7059,7 +8313,9 @@
           "choice_list_name": "typetest",
           "data_value": "a0",
           "display": {
-            "text": "Tested alone"
+            "title": {
+              "text": "Tested alone"
+            }
           },
           "_row_num": 296
         },
@@ -7067,7 +8323,9 @@
           "choice_list_name": "typetest",
           "data_value": "a1",
           "display": {
-            "text": "Tested together"
+            "title": {
+              "text": "Tested together"
+            }
           },
           "_row_num": 297
         },
@@ -7075,7 +8333,9 @@
           "choice_list_name": "typetest",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 298
         }
@@ -7085,7 +8345,9 @@
           "choice_list_name": "testresult",
           "data_value": "a1",
           "display": {
-            "text": "HIV positive"
+            "title": {
+              "text": "HIV positive"
+            }
           },
           "_row_num": 299
         },
@@ -7093,7 +8355,9 @@
           "choice_list_name": "testresult",
           "data_value": "a0",
           "display": {
-            "text": "HIV negative"
+            "title": {
+              "text": "HIV negative"
+            }
           },
           "_row_num": 300
         },
@@ -7101,7 +8365,9 @@
           "choice_list_name": "testresult",
           "data_value": "a2",
           "display": {
-            "text": "Inconclusive result"
+            "title": {
+              "text": "Inconclusive result"
+            }
           },
           "_row_num": 301
         },
@@ -7109,7 +8375,9 @@
           "choice_list_name": "testresult",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 302
         }
@@ -7119,7 +8387,9 @@
           "choice_list_name": "gotoCCC",
           "data_value": "a1",
           "display": {
-            "text": "Yes, during the pregnancy"
+            "title": {
+              "text": "Yes, during the pregnancy"
+            }
           },
           "_row_num": 303
         },
@@ -7127,7 +8397,9 @@
           "choice_list_name": "gotoCCC",
           "data_value": "a2",
           "display": {
-            "text": "Yes, after delivery"
+            "title": {
+              "text": "Yes, after delivery"
+            }
           },
           "_row_num": 304
         },
@@ -7135,7 +8407,9 @@
           "choice_list_name": "gotoCCC",
           "data_value": "a3",
           "display": {
-            "text": "Yes, both before and after delivery"
+            "title": {
+              "text": "Yes, both before and after delivery"
+            }
           },
           "_row_num": 305
         },
@@ -7143,7 +8417,9 @@
           "choice_list_name": "gotoCCC",
           "data_value": "a0",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 306
         },
@@ -7151,7 +8427,9 @@
           "choice_list_name": "gotoCCC",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 307
         },
@@ -7159,7 +8437,9 @@
           "choice_list_name": "gotoCCC",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 308
         }
@@ -7169,7 +8449,9 @@
           "choice_list_name": "changerelat",
           "data_value": "a0",
           "display": {
-            "text": "No change"
+            "title": {
+              "text": "No change"
+            }
           },
           "_row_num": 309
         },
@@ -7177,7 +8459,9 @@
           "choice_list_name": "changerelat",
           "data_value": "a1",
           "display": {
-            "text": "You were married"
+            "title": {
+              "text": "You were married"
+            }
           },
           "_row_num": 310
         },
@@ -7185,7 +8469,9 @@
           "choice_list_name": "changerelat",
           "data_value": "a2",
           "display": {
-            "text": "This partner is no longer living with you"
+            "title": {
+              "text": "This partner is no longer living with you"
+            }
           },
           "_row_num": 311
         },
@@ -7193,7 +8479,9 @@
           "choice_list_name": "changerelat",
           "data_value": "a3",
           "display": {
-            "text": "You are no longer in a relationship"
+            "title": {
+              "text": "You are no longer in a relationship"
+            }
           },
           "_row_num": 312
         },
@@ -7201,7 +8489,9 @@
           "choice_list_name": "changerelat",
           "data_value": "a4",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 313
         },
@@ -7209,7 +8499,9 @@
           "choice_list_name": "changerelat",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 314
         }
@@ -7219,7 +8511,9 @@
           "choice_list_name": "relationend",
           "data_value": "a1",
           "display": {
-            "text": "Respondent tested HIV+"
+            "title": {
+              "text": "Respondent tested HIV+"
+            }
           },
           "_row_num": 315
         },
@@ -7227,7 +8521,9 @@
           "choice_list_name": "relationend",
           "data_value": "a2",
           "display": {
-            "text": "Partner tested HIV+"
+            "title": {
+              "text": "Partner tested HIV+"
+            }
           },
           "_row_num": 316
         },
@@ -7235,7 +8531,9 @@
           "choice_list_name": "relationend",
           "data_value": "a3",
           "display": {
-            "text": "Education received"
+            "title": {
+              "text": "Education received"
+            }
           },
           "_row_num": 317
         },
@@ -7243,7 +8541,9 @@
           "choice_list_name": "relationend",
           "data_value": "a4",
           "display": {
-            "text": "Partner did not approve of participation"
+            "title": {
+              "text": "Partner did not approve of participation"
+            }
           },
           "_row_num": 318
         },
@@ -7251,7 +8551,9 @@
           "choice_list_name": "relationend",
           "data_value": "a5",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 319
         },
@@ -7259,7 +8561,9 @@
           "choice_list_name": "relationend",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 320
         },
@@ -7267,7 +8571,9 @@
           "choice_list_name": "relationend",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 321
         }
@@ -7277,7 +8583,9 @@
           "choice_list_name": "qualitychange",
           "data_value": "a0",
           "display": {
-            "text": "No change"
+            "title": {
+              "text": "No change"
+            }
           },
           "_row_num": 322
         },
@@ -7285,7 +8593,9 @@
           "choice_list_name": "qualitychange",
           "data_value": "a1",
           "display": {
-            "text": "Improved"
+            "title": {
+              "text": "Improved"
+            }
           },
           "_row_num": 323
         },
@@ -7293,7 +8603,9 @@
           "choice_list_name": "qualitychange",
           "data_value": "a2",
           "display": {
-            "text": "Worsened"
+            "title": {
+              "text": "Worsened"
+            }
           },
           "_row_num": 324
         },
@@ -7301,7 +8613,9 @@
           "choice_list_name": "qualitychange",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 325
         },
@@ -7309,7 +8623,9 @@
           "choice_list_name": "qualitychange",
           "data_value": "a999",
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 326
         }
@@ -7319,7 +8635,9 @@
           "choice_list_name": "pretest",
           "data_value": "a1",
           "display": {
-            "text": "Client accepted testing, blood drawn"
+            "title": {
+              "text": "Client accepted testing, blood drawn"
+            }
           },
           "_row_num": 327
         },
@@ -7327,7 +8645,9 @@
           "choice_list_name": "pretest",
           "data_value": "a0",
           "display": {
-            "text": "Client declined testing, blood not drawn"
+            "title": {
+              "text": "Client declined testing, blood not drawn"
+            }
           },
           "_row_num": 328
         }
@@ -7337,7 +8657,9 @@
           "choice_list_name": "testinfant",
           "data_value": "a1",
           "display": {
-            "text": "Client accepted testing, blood drawn"
+            "title": {
+              "text": "Client accepted testing, blood drawn"
+            }
           },
           "_row_num": 329
         },
@@ -7345,7 +8667,9 @@
           "choice_list_name": "testinfant",
           "data_value": "a0",
           "display": {
-            "text": "Client declined testing, blood not drawn"
+            "title": {
+              "text": "Client declined testing, blood not drawn"
+            }
           },
           "_row_num": 330
         },
@@ -7353,7 +8677,9 @@
           "choice_list_name": "testinfant",
           "data_value": "a2",
           "display": {
-            "text": "Infant already tested HIV positive"
+            "title": {
+              "text": "Infant already tested HIV positive"
+            }
           },
           "_row_num": 331
         }
@@ -7363,7 +8689,9 @@
           "choice_list_name": "discordant",
           "data_value": "a1",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 332
         },
@@ -7371,7 +8699,9 @@
           "choice_list_name": "discordant",
           "data_value": "a0",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 333
         },
@@ -7379,7 +8709,9 @@
           "choice_list_name": "discordant",
           "data_value": "a3",
           "display": {
-            "text": "Male HIV status is unknown"
+            "title": {
+              "text": "Male HIV status is unknown"
+            }
           },
           "_row_num": 334
         }
@@ -7389,7 +8721,9 @@
           "choice_list_name": "date_nr",
           "data_value": "a1",
           "display": {
-            "text": "Enter date"
+            "title": {
+              "text": "Enter date"
+            }
           },
           "_row_num": 336
         },
@@ -7397,7 +8731,9 @@
           "choice_list_name": "date_nr",
           "data_value": "a888",
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 337
         }

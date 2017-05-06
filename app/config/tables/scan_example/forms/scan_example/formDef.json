@@ -326,7 +326,9 @@
         "choice_list_name": "chores",
         "data_value": "dishes",
         "display": {
-          "text": "Wash dishes"
+          "title": {
+            "text": "Wash dishes"
+          }
         },
         "_row_num": 2
       },
@@ -334,7 +336,9 @@
         "choice_list_name": "chores",
         "data_value": "sweep",
         "display": {
-          "text": "Sweep patio"
+          "title": {
+            "text": "Sweep patio"
+          }
         },
         "_row_num": 3
       },
@@ -342,7 +346,9 @@
         "choice_list_name": "chores",
         "data_value": "cook",
         "display": {
-          "text": "Cook dinner"
+          "title": {
+            "text": "Cook dinner"
+          }
         },
         "_row_num": 4
       },
@@ -350,7 +356,9 @@
         "choice_list_name": "chores",
         "data_value": "roomba",
         "display": {
-          "text": "Program roomba"
+          "title": {
+            "text": "Program roomba"
+          }
         },
         "_row_num": 5
       }
@@ -512,7 +520,9 @@
           "choice_list_name": "chores",
           "data_value": "dishes",
           "display": {
-            "text": "Wash dishes"
+            "title": {
+              "text": "Wash dishes"
+            }
           },
           "_row_num": 2
         },
@@ -520,7 +530,9 @@
           "choice_list_name": "chores",
           "data_value": "sweep",
           "display": {
-            "text": "Sweep patio"
+            "title": {
+              "text": "Sweep patio"
+            }
           },
           "_row_num": 3
         },
@@ -528,7 +540,9 @@
           "choice_list_name": "chores",
           "data_value": "cook",
           "display": {
-            "text": "Cook dinner"
+            "title": {
+              "text": "Cook dinner"
+            }
           },
           "_row_num": 4
         },
@@ -536,7 +550,9 @@
           "choice_list_name": "chores",
           "data_value": "roomba",
           "display": {
-            "text": "Program roomba"
+            "title": {
+              "text": "Program roomba"
+            }
           },
           "_row_num": 5
         }
@@ -2879,49 +2895,49 @@
         "_aspect": "fri_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "mon_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "sat_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "sun_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "thurs_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "tues_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "wed_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "FormType",

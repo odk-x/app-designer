@@ -27,7 +27,7 @@ Column,item_4,displayName,object,"{""text"":""item_4""}"
 Column,item_5,displayName,object,"{""text"":""item_5""}"
 Column,item_6,displayName,object,"{""text"":""item_6""}"
 Column,item_7,displayName,object,"{""text"":""item_7""}"
-Column,selected_store,displayChoicesList,object,"[{""choice_list_name"":""stores"",""data_value"":""QFC"",""display"":{""text"":""QFC""},""_row_num"":26},{""choice_list_name"":""stores"",""data_value"":""Safeway"",""display"":{""text"":""Safeway""},""_row_num"":27},{""choice_list_name"":""stores"",""data_value"":""FredMeyer"",""display"":{""text"":""Target""},""_row_num"":28}]"
+Column,selected_store,displayChoicesList,object,"[{""choice_list_name"":""stores"",""data_value"":""QFC"",""display"":{""title"":{""text"":""QFC""}},""_row_num"":26},{""choice_list_name"":""stores"",""data_value"":""Safeway"",""display"":{""title"":{""text"":""Safeway""}},""_row_num"":27},{""choice_list_name"":""stores"",""data_value"":""FredMeyer"",""display"":{""title"":{""text"":""Target""}},""_row_num"":28}]"
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,gridScreen
 Table,default,colOrder,array,"[""item_1"",""item_2"",""item_3"",""item_4"",""item_5"",""item_6"",""item_7"",""QFC_item_1"",""QFC_item_2"",""QFC_item_3"",""QFC_item_4"",""QFC_item_5"",""QFC_item_6"",""QFC_sum"",""Safeway_item_1"",""Safeway_item_2"",""Safeway_item_3"",""Safeway_item_4"",""Safeway_item_5"",""Safeway_item_6"",""Safeway_sum"",""Target_item_1"",""Target_item_2"",""Target_item_3"",""Target_item_4"",""Target_item_5"",""Target_item_6"",""Target_sum"",""selected_store""]"

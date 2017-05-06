@@ -105,7 +105,9 @@
         "choice_list_name": "test_forms",
         "data_value": "geotagger",
         "display": {
-          "text": "Geotagger"
+          "title": {
+            "text": "Geotagger"
+          }
         },
         "_row_num": 2
       }
@@ -590,7 +592,9 @@
           "choice_list_name": "test_forms",
           "data_value": "geotagger",
           "display": {
-            "text": "Geotagger"
+            "title": {
+              "text": "Geotagger"
+            }
           },
           "_row_num": 2
         }

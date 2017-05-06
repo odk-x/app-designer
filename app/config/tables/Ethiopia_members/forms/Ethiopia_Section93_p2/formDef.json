@@ -131,7 +131,9 @@
         "choice_list_name": "self",
         "data_value": "self",
         "display": {
-          "text": "Self"
+          "title": {
+            "text": "Self"
+          }
         },
         "_row_num": 2
       },
@@ -139,7 +141,9 @@
         "choice_list_name": "no_yes",
         "data_value": "no",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 3
       },
@@ -147,7 +151,9 @@
         "choice_list_name": "no_yes",
         "data_value": "yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 4
       }
@@ -599,7 +605,9 @@
           "choice_list_name": "self",
           "data_value": "self",
           "display": {
-            "text": "Self"
+            "title": {
+              "text": "Self"
+            }
           },
           "_row_num": 2
         }
@@ -609,7 +617,9 @@
           "choice_list_name": "no_yes",
           "data_value": "no",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 3
         },
@@ -617,7 +627,9 @@
           "choice_list_name": "no_yes",
           "data_value": "yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 4
         }

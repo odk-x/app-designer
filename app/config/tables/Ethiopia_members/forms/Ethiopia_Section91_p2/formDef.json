@@ -72,7 +72,9 @@
         "choice_list_name": "injuries",
         "data_value": "malaria",
         "display": {
-          "text": "Malaria"
+          "title": {
+            "text": "Malaria"
+          }
         },
         "_row_num": 2
       },
@@ -80,7 +82,9 @@
         "choice_list_name": "injuries",
         "data_value": "diarrhea",
         "display": {
-          "text": "Diarrhea"
+          "title": {
+            "text": "Diarrhea"
+          }
         },
         "_row_num": 3
       },
@@ -88,7 +92,9 @@
         "choice_list_name": "injuries",
         "data_value": "injury",
         "display": {
-          "text": "Injury"
+          "title": {
+            "text": "Injury"
+          }
         },
         "_row_num": 4
       },
@@ -96,7 +102,9 @@
         "choice_list_name": "injuries",
         "data_value": "dental",
         "display": {
-          "text": "Dental"
+          "title": {
+            "text": "Dental"
+          }
         },
         "_row_num": 5
       },
@@ -104,7 +112,9 @@
         "choice_list_name": "injuries",
         "data_value": "ophthalmic",
         "display": {
-          "text": "Ophthalmic (eye-related)"
+          "title": {
+            "text": "Ophthalmic (eye-related)"
+          }
         },
         "_row_num": 6
       },
@@ -112,7 +122,9 @@
         "choice_list_name": "injuries",
         "data_value": "skin",
         "display": {
-          "text": "Skin disease"
+          "title": {
+            "text": "Skin disease"
+          }
         },
         "_row_num": 7
       },
@@ -120,7 +132,9 @@
         "choice_list_name": "injuries",
         "data_value": "ear_nose_throat",
         "display": {
-          "text": "Ear/Nose?throat"
+          "title": {
+            "text": "Ear/Nose?throat"
+          }
         },
         "_row_num": 8
       },
@@ -128,7 +142,9 @@
         "choice_list_name": "injuries",
         "data_value": "tuberculoss",
         "display": {
-          "text": "Tuberculosis"
+          "title": {
+            "text": "Tuberculosis"
+          }
         },
         "_row_num": 9
       },
@@ -136,7 +152,9 @@
         "choice_list_name": "injuries",
         "data_value": "pneumonia",
         "display": {
-          "text": "Pneumonia"
+          "title": {
+            "text": "Pneumonia"
+          }
         },
         "_row_num": 10
       },
@@ -144,7 +162,9 @@
         "choice_list_name": "injuries",
         "data_value": "AIR",
         "display": {
-          "text": "AIR"
+          "title": {
+            "text": "AIR"
+          }
         },
         "_row_num": 11
       },
@@ -152,7 +172,9 @@
         "choice_list_name": "injuries",
         "data_value": "COPD",
         "display": {
-          "text": "COPD"
+          "title": {
+            "text": "COPD"
+          }
         },
         "_row_num": 12
       },
@@ -160,7 +182,9 @@
         "choice_list_name": "diagnosis_source",
         "data_value": "hospital",
         "display": {
-          "text": "Hospital"
+          "title": {
+            "text": "Hospital"
+          }
         },
         "_row_num": 13
       },
@@ -168,7 +192,9 @@
         "choice_list_name": "diagnosis_source",
         "data_value": "health_center",
         "display": {
-          "text": "Helath Center"
+          "title": {
+            "text": "Helath Center"
+          }
         },
         "_row_num": 14
       },
@@ -176,7 +202,9 @@
         "choice_list_name": "diagnosis_source",
         "data_value": "health_post",
         "display": {
-          "text": "Health Post"
+          "title": {
+            "text": "Health Post"
+          }
         },
         "_row_num": 15
       },
@@ -184,7 +212,9 @@
         "choice_list_name": "diagnosis_source",
         "data_value": "clinics",
         "display": {
-          "text": "Clinics"
+          "title": {
+            "text": "Clinics"
+          }
         },
         "_row_num": 16
       },
@@ -192,7 +222,9 @@
         "choice_list_name": "diagnosis_source",
         "data_value": "pharmacy",
         "display": {
-          "text": "Pharmacy"
+          "title": {
+            "text": "Pharmacy"
+          }
         },
         "_row_num": 17
       },
@@ -200,7 +232,9 @@
         "choice_list_name": "diagnosis_source",
         "data_value": "traditional",
         "display": {
-          "text": "Traditional Healer"
+          "title": {
+            "text": "Traditional Healer"
+          }
         },
         "_row_num": 18
       },
@@ -208,7 +242,9 @@
         "choice_list_name": "diagnosis_source",
         "data_value": "religious",
         "display": {
-          "text": "Religious / Spiritual"
+          "title": {
+            "text": "Religious / Spiritual"
+          }
         },
         "_row_num": 19
       },
@@ -216,7 +252,9 @@
         "choice_list_name": "diagnosis_source",
         "data_value": "self",
         "display": {
-          "text": "Self Diagnosis"
+          "title": {
+            "text": "Self Diagnosis"
+          }
         },
         "_row_num": 20
       },
@@ -224,7 +262,9 @@
         "choice_list_name": "diagnosis_source",
         "data_value": "friend",
         "display": {
-          "text": "Friend or Family Member"
+          "title": {
+            "text": "Friend or Family Member"
+          }
         },
         "_row_num": 21
       },
@@ -232,7 +272,9 @@
         "choice_list_name": "no_yes",
         "data_value": "no",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 22
       },
@@ -240,7 +282,9 @@
         "choice_list_name": "no_yes",
         "data_value": "yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 23
       }
@@ -692,7 +736,9 @@
           "choice_list_name": "injuries",
           "data_value": "malaria",
           "display": {
-            "text": "Malaria"
+            "title": {
+              "text": "Malaria"
+            }
           },
           "_row_num": 2
         },
@@ -700,7 +746,9 @@
           "choice_list_name": "injuries",
           "data_value": "diarrhea",
           "display": {
-            "text": "Diarrhea"
+            "title": {
+              "text": "Diarrhea"
+            }
           },
           "_row_num": 3
         },
@@ -708,7 +756,9 @@
           "choice_list_name": "injuries",
           "data_value": "injury",
           "display": {
-            "text": "Injury"
+            "title": {
+              "text": "Injury"
+            }
           },
           "_row_num": 4
         },
@@ -716,7 +766,9 @@
           "choice_list_name": "injuries",
           "data_value": "dental",
           "display": {
-            "text": "Dental"
+            "title": {
+              "text": "Dental"
+            }
           },
           "_row_num": 5
         },
@@ -724,7 +776,9 @@
           "choice_list_name": "injuries",
           "data_value": "ophthalmic",
           "display": {
-            "text": "Ophthalmic (eye-related)"
+            "title": {
+              "text": "Ophthalmic (eye-related)"
+            }
           },
           "_row_num": 6
         },
@@ -732,7 +786,9 @@
           "choice_list_name": "injuries",
           "data_value": "skin",
           "display": {
-            "text": "Skin disease"
+            "title": {
+              "text": "Skin disease"
+            }
           },
           "_row_num": 7
         },
@@ -740,7 +796,9 @@
           "choice_list_name": "injuries",
           "data_value": "ear_nose_throat",
           "display": {
-            "text": "Ear/Nose?throat"
+            "title": {
+              "text": "Ear/Nose?throat"
+            }
           },
           "_row_num": 8
         },
@@ -748,7 +806,9 @@
           "choice_list_name": "injuries",
           "data_value": "tuberculoss",
           "display": {
-            "text": "Tuberculosis"
+            "title": {
+              "text": "Tuberculosis"
+            }
           },
           "_row_num": 9
         },
@@ -756,7 +816,9 @@
           "choice_list_name": "injuries",
           "data_value": "pneumonia",
           "display": {
-            "text": "Pneumonia"
+            "title": {
+              "text": "Pneumonia"
+            }
           },
           "_row_num": 10
         },
@@ -764,7 +826,9 @@
           "choice_list_name": "injuries",
           "data_value": "AIR",
           "display": {
-            "text": "AIR"
+            "title": {
+              "text": "AIR"
+            }
           },
           "_row_num": 11
         },
@@ -772,7 +836,9 @@
           "choice_list_name": "injuries",
           "data_value": "COPD",
           "display": {
-            "text": "COPD"
+            "title": {
+              "text": "COPD"
+            }
           },
           "_row_num": 12
         }
@@ -782,7 +848,9 @@
           "choice_list_name": "diagnosis_source",
           "data_value": "hospital",
           "display": {
-            "text": "Hospital"
+            "title": {
+              "text": "Hospital"
+            }
           },
           "_row_num": 13
         },
@@ -790,7 +858,9 @@
           "choice_list_name": "diagnosis_source",
           "data_value": "health_center",
           "display": {
-            "text": "Helath Center"
+            "title": {
+              "text": "Helath Center"
+            }
           },
           "_row_num": 14
         },
@@ -798,7 +868,9 @@
           "choice_list_name": "diagnosis_source",
           "data_value": "health_post",
           "display": {
-            "text": "Health Post"
+            "title": {
+              "text": "Health Post"
+            }
           },
           "_row_num": 15
         },
@@ -806,7 +878,9 @@
           "choice_list_name": "diagnosis_source",
           "data_value": "clinics",
           "display": {
-            "text": "Clinics"
+            "title": {
+              "text": "Clinics"
+            }
           },
           "_row_num": 16
         },
@@ -814,7 +888,9 @@
           "choice_list_name": "diagnosis_source",
           "data_value": "pharmacy",
           "display": {
-            "text": "Pharmacy"
+            "title": {
+              "text": "Pharmacy"
+            }
           },
           "_row_num": 17
         },
@@ -822,7 +898,9 @@
           "choice_list_name": "diagnosis_source",
           "data_value": "traditional",
           "display": {
-            "text": "Traditional Healer"
+            "title": {
+              "text": "Traditional Healer"
+            }
           },
           "_row_num": 18
         },
@@ -830,7 +908,9 @@
           "choice_list_name": "diagnosis_source",
           "data_value": "religious",
           "display": {
-            "text": "Religious / Spiritual"
+            "title": {
+              "text": "Religious / Spiritual"
+            }
           },
           "_row_num": 19
         },
@@ -838,7 +918,9 @@
           "choice_list_name": "diagnosis_source",
           "data_value": "self",
           "display": {
-            "text": "Self Diagnosis"
+            "title": {
+              "text": "Self Diagnosis"
+            }
           },
           "_row_num": 20
         },
@@ -846,7 +928,9 @@
           "choice_list_name": "diagnosis_source",
           "data_value": "friend",
           "display": {
-            "text": "Friend or Family Member"
+            "title": {
+              "text": "Friend or Family Member"
+            }
           },
           "_row_num": 21
         }
@@ -856,7 +940,9 @@
           "choice_list_name": "no_yes",
           "data_value": "no",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 22
         },
@@ -864,7 +950,9 @@
           "choice_list_name": "no_yes",
           "data_value": "yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 23
         }

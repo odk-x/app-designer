@@ -98,7 +98,9 @@
         "choice_list_name": "store_type",
         "data_value": "small",
         "display": {
-          "text": "< 1000 sq ft"
+          "title": {
+            "text": "< 1000 sq ft"
+          }
         },
         "_row_num": 2
       },
@@ -106,7 +108,9 @@
         "choice_list_name": "store_type",
         "data_value": "medium",
         "display": {
-          "text": "1000 sq ft - 10,000 sq ft"
+          "title": {
+            "text": "1000 sq ft - 10,000 sq ft"
+          }
         },
         "_row_num": 3
       },
@@ -114,7 +118,9 @@
         "choice_list_name": "store_type",
         "data_value": "large",
         "display": {
-          "text": "> 10,000 sq ft"
+          "title": {
+            "text": "> 10,000 sq ft"
+          }
         },
         "_row_num": 4
       },
@@ -122,7 +128,9 @@
         "choice_list_name": "store_type",
         "data_value": "online",
         "display": {
-          "text": "Online only"
+          "title": {
+            "text": "Online only"
+          }
         },
         "_row_num": 5
       },
@@ -130,7 +138,9 @@
         "choice_list_name": "store_type",
         "data_value": "single_site",
         "display": {
-          "text": "Single Location"
+          "title": {
+            "text": "Single Location"
+          }
         },
         "_row_num": 6
       },
@@ -138,7 +148,9 @@
         "choice_list_name": "store_type",
         "data_value": "chain_store",
         "display": {
-          "text": "Part of a chain"
+          "title": {
+            "text": "Part of a chain"
+          }
         },
         "_row_num": 7
       },
@@ -146,7 +158,9 @@
         "choice_list_name": "store_type",
         "data_value": "in_mall",
         "display": {
-          "text": "Within a Mall"
+          "title": {
+            "text": "Within a Mall"
+          }
         },
         "_row_num": 8
       },
@@ -154,7 +168,9 @@
         "choice_list_name": "store_type",
         "data_value": "street_front",
         "display": {
-          "text": "On a street frontage"
+          "title": {
+            "text": "On a street frontage"
+          }
         },
         "_row_num": 9
       }
@@ -290,7 +306,9 @@
           "choice_list_name": "store_type",
           "data_value": "small",
           "display": {
-            "text": "< 1000 sq ft"
+            "title": {
+              "text": "< 1000 sq ft"
+            }
           },
           "_row_num": 2
         },
@@ -298,7 +316,9 @@
           "choice_list_name": "store_type",
           "data_value": "medium",
           "display": {
-            "text": "1000 sq ft - 10,000 sq ft"
+            "title": {
+              "text": "1000 sq ft - 10,000 sq ft"
+            }
           },
           "_row_num": 3
         },
@@ -306,7 +326,9 @@
           "choice_list_name": "store_type",
           "data_value": "large",
           "display": {
-            "text": "> 10,000 sq ft"
+            "title": {
+              "text": "> 10,000 sq ft"
+            }
           },
           "_row_num": 4
         },
@@ -314,7 +336,9 @@
           "choice_list_name": "store_type",
           "data_value": "online",
           "display": {
-            "text": "Online only"
+            "title": {
+              "text": "Online only"
+            }
           },
           "_row_num": 5
         },
@@ -322,7 +346,9 @@
           "choice_list_name": "store_type",
           "data_value": "single_site",
           "display": {
-            "text": "Single Location"
+            "title": {
+              "text": "Single Location"
+            }
           },
           "_row_num": 6
         },
@@ -330,7 +356,9 @@
           "choice_list_name": "store_type",
           "data_value": "chain_store",
           "display": {
-            "text": "Part of a chain"
+            "title": {
+              "text": "Part of a chain"
+            }
           },
           "_row_num": 7
         },
@@ -338,7 +366,9 @@
           "choice_list_name": "store_type",
           "data_value": "in_mall",
           "display": {
-            "text": "Within a Mall"
+            "title": {
+              "text": "Within a Mall"
+            }
           },
           "_row_num": 8
         },
@@ -346,7 +376,9 @@
           "choice_list_name": "store_type",
           "data_value": "street_front",
           "display": {
-            "text": "On a street frontage"
+            "title": {
+              "text": "On a street frontage"
+            }
           },
           "_row_num": 9
         }
@@ -1281,7 +1313,7 @@
         "_aspect": "type_of_store",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"store_type\",\"data_value\":\"small\",\"display\":{\"text\":\"< 1000 sq ft\"},\"_row_num\":2},{\"choice_list_name\":\"store_type\",\"data_value\":\"medium\",\"display\":{\"text\":\"1000 sq ft - 10,000 sq ft\"},\"_row_num\":3},{\"choice_list_name\":\"store_type\",\"data_value\":\"large\",\"display\":{\"text\":\"> 10,000 sq ft\"},\"_row_num\":4},{\"choice_list_name\":\"store_type\",\"data_value\":\"online\",\"display\":{\"text\":\"Online only\"},\"_row_num\":5},{\"choice_list_name\":\"store_type\",\"data_value\":\"single_site\",\"display\":{\"text\":\"Single Location\"},\"_row_num\":6},{\"choice_list_name\":\"store_type\",\"data_value\":\"chain_store\",\"display\":{\"text\":\"Part of a chain\"},\"_row_num\":7},{\"choice_list_name\":\"store_type\",\"data_value\":\"in_mall\",\"display\":{\"text\":\"Within a Mall\"},\"_row_num\":8},{\"choice_list_name\":\"store_type\",\"data_value\":\"street_front\",\"display\":{\"text\":\"On a street frontage\"},\"_row_num\":9}]"
+        "_value": "[{\"choice_list_name\":\"store_type\",\"data_value\":\"small\",\"display\":{\"title\":{\"text\":\"< 1000 sq ft\"}},\"_row_num\":2},{\"choice_list_name\":\"store_type\",\"data_value\":\"medium\",\"display\":{\"title\":{\"text\":\"1000 sq ft - 10,000 sq ft\"}},\"_row_num\":3},{\"choice_list_name\":\"store_type\",\"data_value\":\"large\",\"display\":{\"title\":{\"text\":\"> 10,000 sq ft\"}},\"_row_num\":4},{\"choice_list_name\":\"store_type\",\"data_value\":\"online\",\"display\":{\"title\":{\"text\":\"Online only\"}},\"_row_num\":5},{\"choice_list_name\":\"store_type\",\"data_value\":\"single_site\",\"display\":{\"title\":{\"text\":\"Single Location\"}},\"_row_num\":6},{\"choice_list_name\":\"store_type\",\"data_value\":\"chain_store\",\"display\":{\"title\":{\"text\":\"Part of a chain\"}},\"_row_num\":7},{\"choice_list_name\":\"store_type\",\"data_value\":\"in_mall\",\"display\":{\"title\":{\"text\":\"Within a Mall\"}},\"_row_num\":8},{\"choice_list_name\":\"store_type\",\"data_value\":\"street_front\",\"display\":{\"title\":{\"text\":\"On a street frontage\"}},\"_row_num\":9}]"
       },
       {
         "_partition": "FormType",

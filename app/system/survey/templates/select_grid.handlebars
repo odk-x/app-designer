@@ -33,14 +33,12 @@
                             id="{{data_value}}"
                             value="{{data_value}}"
 							tabindex="0"/>
-                        {{#ifHasImageLocalization display}}
-                            <center>
-                                <img src="{{localizeImage display}}"></img>
-                            </center>
-                        {{/ifHasImageLocalization}}
-                        {{#ifHasTextLocalization display}}
-                            {{{localizeText display}}}
-                        {{/ifHasTextLocalization}}
+		   {{#ifHasImageLocalization display.title}}<center><img src="{{localizeImage display.title}}"></img></center>{{/ifHasImageLocalization}}
+		   {{#ifHasAudioLocalization display.title}}<div><audio src="{{localizeAudio display.title}}" tabindex="0"
+			  audio="true" controls="controls">{{localizeText 'audio_control_not_supported'}}</audio></div>{{/ifHasAudioLocalization}}
+		   {{#ifHasVideoLocalization display.title}}<div><video src="{{localizeVideo display.title}}" tabindex="0"
+			  video="true" controls="controls">{{localizeText 'video_control_not_supported'}}</video></div>{{/ifHasVideoLocalization}}
+		   {{#ifHasTextLocalization display.title}}{{{localizeText display.title}}}{{/ifHasTextLocalization}}
                     </td>
             {{#if isLastInRow}}
                 </tr><!-- row -->
