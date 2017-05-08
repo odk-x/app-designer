@@ -495,6 +495,14 @@ var odkDataIf = {
         throw new Error("Not implemented in app-designer");
     },
 
+    getDefaultGroup: function(_callbackId) {
+        var that = this;
+
+        var ctxt = that.newStartContext(_callbackId);
+
+        throw new Error("Not implemented in app-designer");
+    },
+
     getUsers: function(_callbackId) {
         var that = this;
 

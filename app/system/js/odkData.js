@@ -37,6 +37,15 @@ window.odkData = {
         that.getOdkDataIf().getRoles(req._callbackId);
     },
 
+    getDefaultGroup: function(successCallbackFn, failureCallbackFn) {
+        var that = this;
+        
+        var req = that.queueRequest('getDefaultGroup', successCallbackFn, failureCallbackFn);
+        console.log('getDefaultGroup cbId=' + req._callbackId);
+
+        that.getOdkDataIf().getDefaultGroup(req._callbackId);
+    },
+
     getUsers: function(successCallbackFn, failureCallbackFn) {
         var that = this;
         
@@ -959,6 +968,25 @@ window.odkData = {
                 }
 
                 return that.resultObj.metadata.roles;
+            },
+
+            // only valid after call to getDefaultGroup()
+            getDefaultGroup:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata.defaultGroup === null || 
+                    that.resultObj.metadata.defaultGroup === undefined) {
+                    return null;
+                }
+
+                return that.resultObj.metadata.defaultGroup;
             },
 
             // only valid after call to getUsers()
