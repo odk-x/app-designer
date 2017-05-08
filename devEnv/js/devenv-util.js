@@ -42,29 +42,29 @@ exports.getRelativePathToFrameworkFormDef = function(formDefJson) {
 };
 
 /**
- * Get the path to the frameworkTranslations file. Returns:
+ * Get the path to the frameworkDefinition file. Returns:
  *
- * app/config/assets/framework/frameworkTranslations[.variant].js
+ * app/config/assets/framework/frameworkDefinitions[.variant].js
  *
  * Includes the file name and does not begin with a slash.
  */
-exports.getRelativePathToFrameworkTranslationsJs = function(formDefJson) {
+exports.getRelativePathToFrameworkDefinitionsJs = function(formDefJson) {
 
-    var result = 'app/config/assets/framework/frameworkTranslations' +
+    var result = 'app/config/assets/framework/frameworkDefinitions' +
 		getFrameworkVariantFromFormDef(formDefJson) + '.js';
     return result;
 };
 
 /**
- * Get the path to the commonTranslations file. Returns:
+ * Get the path to the commonDefinitions file. Returns:
  *
- * app/config/assets/commonTranslations[.variant].js
+ * app/config/assets/commonDefinitions[.variant].js
  *
  * Includes the file name and does not begin with a slash.
  */
-exports.getRelativePathToCommonTranslationsJs = function(formDefJson) {
+exports.getRelativePathToCommonDefinitionsJs = function(formDefJson) {
 
-    var result = 'app/config/assets/commonTranslations' +
+    var result = 'app/config/assets/commonDefinitions' +
 		getFrameworkVariantFromFormDef(formDefJson) + '.js';
     return result;
 };
@@ -244,7 +244,7 @@ exports.shouldWriteOutDefinitionAndPropertiesCsv = function(formDefJson) {
     return false;
 };
 
-exports.shouldWriteOutTranslationsJs = function(formDefJson) {
+exports.shouldWriteOutDefinitionsJs = function(formDefJson) {
     var tableId = getTableIdFromFormDef(formDefJson);
     var formId = getFormIdFromFormDef(formDefJson);
 
@@ -337,17 +337,21 @@ exports.createPropertiesCsvFromDataTableModel = function(dataTableModel, formDef
 };
 
 /**
- *  Create translations.js from the formDef.json 
+ *  Create ...Definitions.js from the formDef.json 
  * for XLSXConverter processing
  */
-exports.createTranslationsJsFromDataTableModel = function(tableId, translations) {
+exports.createDefinitionsJsFromDataTableModel = function(tableId, formDefJson) {
 	var defJs;
+	var definitions;
 	if ( tableId === undefined || tableId === null ) {
-		defJs = "window.odkCommonTranslations = " + JSON.stringify(translations, 2, 2);
+		definitions = formDefJson.specification.common_definitions;
+		defJs = "window.odkCommonDefinitions = " + JSON.stringify(definitions, 2, 2);
 	} else if ( tableId === 'framework' ) {
-		defJs = "window.odkFrameworkTranslations = " + JSON.stringify(translations, 2, 2);
+		definitions = formDefJson.specification.framework_definitions;
+		defJs = "window.odkFrameworkDefinitions = " + JSON.stringify(definitions, 2, 2);
 	} else {
-		defJs = "window.odkTableSpecificTranslations = " + JSON.stringify(translations, 2, 2);
+		definitions = formDefJson.specification.table_specific_definitions;
+		defJs = "window.odkTableSpecificDefinitions = " + JSON.stringify(definitions, 2, 2);
 	}
 	return defJs;
 };

@@ -25,17 +25,31 @@ var XLSXConverter = {};
 
     var reservedSheetNames = [
           "settings",
-          "properties",
+          "properties",   // only applicable for table_id === form_id forms
+          "table_specific_properties",   // prohibit this just in case...
+          "common_properties",           // prohibit this just in case...
           "translations", // prohibit this just in case...
 		  "table_specific_translations", // tableId == formId != 'framework'
-          "framework_translations",  // tableId (== formId) == 'framework'
-          "common_translations",  // tableId (== formId) == 'framework'
+          "framework_translations",      // tableId (== formId) == 'framework'
+          "common_translations",         // tableId (== formId) == 'framework'
           "choices",
-          "queries",
-          "calculates",
+		  "table_specific_choices",      // prohibit this just in case...
+		  "common_choices",              // unused -- would need to be loaded into XLSXConverter2 dynamically
+          "queries",      // must remain form-specific because it may contain session variable and field references
+          "table_specific_queries",      // prohibit this just in case...
+          "common_queries",              // prohibit this just in case...
+          "calculates",   // must remain form-specific because it may contain session variable and field references
+          "table_specific_calculates",   // prohibit this just in case...
+          "common_calculates",           // prohibit this just in case...
           "column_types",
+		  "table_specific_column_types", // prohibit this just in case...
+		  "common_column_types",         // unused -- would need to be loaded into XLSXConverter2 dynamically
           "prompt_types",
-          "model"
+		  "table_specific_prompt_types", // prohibit this just in case...
+		  "common_prompt_types",         // unused -- would need to be loaded into XLSXConverter2 dynamically
+          "model",                       // must remain form-specific because it contains session variable definitions
+          "table_specific_model",        // prohibit this just in case...
+          "common_model",                // prohibit this just in case...
       ];
 
     var reservedFieldNames = {
@@ -2793,8 +2807,8 @@ var XLSXConverter = {};
 						}
 					});
 				}
-				specification.framework_translations = {};
-				specification.framework_translations._tokens = processedFmkTranslations;
+				specification.framework_definitions = {};
+				specification.framework_definitions._tokens = processedFmkTranslations;
 			}
 			{
 				var processedCmnTranslations = {};
@@ -2813,10 +2827,10 @@ var XLSXConverter = {};
 						}
 					});
 				}
-				specification.common_translations = {};
-				specification.common_translations._tokens = processedCmnTranslations;
-				specification.common_translations._locales = specification.settings._locales;
-				specification.common_translations._default_locale = specification.settings._default_locale;
+				specification.common_definitions = {};
+				specification.common_definitions._tokens = processedCmnTranslations;
+				specification.common_definitions._locales = specification.settings._locales;
+				specification.common_definitions._default_locale = specification.settings._default_locale;
 			}
 		} else if ( specification.settings.form_id.value !== specification.settings.table_id.value ) {
 			if ( 'framework_translations' in wbJson ) {
@@ -2851,8 +2865,8 @@ var XLSXConverter = {};
 					}
 				});
 			}
-			specification.table_specific_translations = {};
-			specification.table_specific_translations._tokens = processedTSTranslations;
+			specification.table_specific_definitions = {};
+			specification.table_specific_definitions._tokens = processedTSTranslations;
 		}
 
         // QUERIES

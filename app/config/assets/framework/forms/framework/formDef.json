@@ -1668,7 +1668,7 @@
         }
       ]
     },
-    "framework_translations": {
+    "framework_definitions": {
       "_tokens": {
         "constraint_message": {
           "string_token": "constraint_message",
@@ -2062,7 +2062,7 @@
         }
       }
     },
-    "common_translations": {
+    "common_definitions": {
       "_tokens": {},
       "_locales": {
         "setting_name": "_locales",

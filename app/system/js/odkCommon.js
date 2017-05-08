@@ -168,18 +168,18 @@ window.odkCommon = {
       if(!this.isString(stringToken)) {
           return stringToken;
       }
-	  var foundFramework = ('odkFrameworkTranslations' in window &&
-		   (window.odkFrameworkTranslations !== undefined) &&
-   	       (window.odkFrameworkTranslations !== null) &&
-		   stringToken in window.odkFrameworkTranslations._tokens );
-	  var foundCommon = ('odkCommonTranslations' in window &&
-		   (window.odkCommonTranslations !== undefined) &&
-   	       (window.odkCommonTranslations !== null) &&
-		   stringToken in window.odkCommonTranslations._tokens );
-	  var foundTableSpecific = ('odkTableSpecificTranslations' in window &&
-	       (window.odkTableSpecificTranslations !== undefined) &&
-   	       (window.odkTableSpecificTranslations !== null) &&
-		   stringToken in window.odkTableSpecificTranslations._tokens );
+	  var foundFramework = ('odkFrameworkDefinitions' in window &&
+		   (window.odkFrameworkDefinitions !== undefined) &&
+   	       (window.odkFrameworkDefinitions !== null) &&
+		   stringToken in window.odkFrameworkDefinitions._tokens );
+	  var foundCommon = ('odkCommonDefinitions' in window &&
+		   (window.odkCommonDefinitions !== undefined) &&
+   	       (window.odkCommonDefinitions !== null) &&
+		   stringToken in window.odkCommonDefinitions._tokens );
+	  var foundTableSpecific = ('odkTableSpecificDefinitions' in window &&
+	       (window.odkTableSpecificDefinitions !== undefined) &&
+   	       (window.odkTableSpecificDefinitions !== null) &&
+		   stringToken in window.odkTableSpecificDefinitions._tokens );
 	
 	  var countFound = (foundFramework ? 1 : 0) + (foundCommon ? 1 : 0) + (foundTableSpecific ? 1 : 0);
 	  if ( countFound > 1 ) {
@@ -187,15 +187,15 @@ window.odkCommon = {
 	  }
 	  if ( foundTableSpecific ) {
 		// found it in table-specific translations
-		return window.odkTableSpecificTranslations._tokens[stringToken];
+		return window.odkTableSpecificDefinitions._tokens[stringToken];
 	  }
 	  if ( foundCommon ) {
 		// found it in common translations
-		return window.odkCommonTranslations._tokens[stringToken];
+		return window.odkCommonDefinitions._tokens[stringToken];
 	  }
 	  if ( foundFramework ) {
 		// found it in framework translations
-		return window.odkFrameworkTranslations._tokens[stringToken];
+		return window.odkFrameworkDefinitions._tokens[stringToken];
 	  }
 	  return undefined;
    },

@@ -1,3 +1,0 @@
-window.odkTableSpecificTranslations = {
-  "_tokens": {}
-}

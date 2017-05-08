@@ -1056,7 +1056,7 @@
         }
       ]
     },
-    "table_specific_translations": {
+    "table_specific_definitions": {
       "_tokens": {
         "first_prompt": {
           "string_token": "first_prompt",

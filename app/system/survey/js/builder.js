@@ -325,7 +325,7 @@ verifyLoad('builder',
             });
         };
 
-        var afterTableSpecificTranslationsLoadAttempt = function(){
+        var afterTableSpecificDefinitionsLoadAttempt = function(){
 			//This tries to load any user defined screen types provided in customScreenTypes.js.
 			//TODO: The approach to getting the current form path might need to change.
 			require([formPath + 'customScreenTypes.js'], function (customScreenTypes) {
@@ -358,19 +358,19 @@ verifyLoad('builder',
 
 		var tableId = surveyJson.specification.settings.table_id.value;
 		if ( tableId === 'framework') {
-			afterTableSpecificTranslationsLoadAttempt();
+			afterTableSpecificDefinitionsLoadAttempt();
 		} else {
 			var formPathCells = formPath.split('/');
 			formPathCells = formPathCells.slice(0,formPathCells.length-3);
-			formPathCells.push('tableSpecificTranslations.js');
+			formPathCells.push('tableSpecificDefinitions.js');
 			var path = formPathCells.join('/');
 			//This tries to load any user defined screen types provided in customScreenTypes.js.
 			//TODO: The approach to getting the current form path might need to change.
 			require(['text!' + path], function (source) {
-				odkCommon.log("I","builder.buildSurvey: tableSpecificTranslations found");
+				odkCommon.log("I","builder.buildSurvey: tableSpecificDefinitions found");
 				// this is inserted at the top level.
 				eval(source);
-				afterTableSpecificTranslationsLoadAttempt();
+				afterTableSpecificDefinitionsLoadAttempt();
 			}, function (err) {
 				odkCommon.log("W",'builder.buildSurvey: error loading ' + path);
 				//The errback, error callback
@@ -383,7 +383,7 @@ verifyLoad('builder',
 						requirejs.undef(failedId);
 					});
 				}
-				afterTableSpecificTranslationsLoadAttempt();
+				afterTableSpecificDefinitionsLoadAttempt();
 			});
 		}
     }

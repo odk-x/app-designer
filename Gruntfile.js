@@ -340,7 +340,7 @@ module.exports = function (grunt) {
 				cells = xlsFile.split('/');
 				cells[cells.length-1] = 'formDef.json';
 				formDefFile = cells.join('/');
-                grunt.log.writeln('macGenConvert: ' + xlsFile + ' > ' + formDefFile);
+				grunt.log.writeln('macGenConvert: ' + xlsFile + ' > ' + formDefFile);
 				grunt.task.run('exec:macGenConvert:' + xlsFile + ':' + formDefFile);
             });
         });
@@ -412,7 +412,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 {filter: 'isFile',
                  cwd: 'app' },
 				'config/assets/framework/**',
-                'config/assets/commonTranslations.js',
+                'config/assets/commonDefinitions.js',
                 'config/assets/img/play.png',
                 'config/assets/img/form_logo.png',
                 'config/assets/img/backup.png',
@@ -435,7 +435,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 'config/assets/libs/jquery*',
                 'config/assets/libs/d3*',
                 'config/assets/libs/d3-amd/**',
-                'config/assets/commonTranslations.js',
+                'config/assets/commonDefinitions.js',
                 'config/assets/img/little_arrow.png',
 				'!**/.DS_Store');
 
@@ -1402,7 +1402,6 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'!config/assets/**',
 			'!config/tables/**',
 			'config/**/*.opendatakit-2.*',
-			'config/assets/framework/translations.js',
 			'config/assets/framework/forms/framework.opendatakit-2/**',
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
