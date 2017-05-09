@@ -161,14 +161,14 @@
         "query_name": "pesticides_csv",
         "query_type": "csv",
         "uri": "\"pesticides.csv\"",
-        "callback": "_.chain(context).pluck('pesticides').uniq().map(function(pesticides){\nreturn {name:pesticides, label:pesticides, data_value:pesticides, display:{text:pesticides}};\n}).value()",
+        "callback": "_.chain(context).pluck('pesticides').uniq().map(function(pesticides){\nreturn { data_value:pesticides, display: {title: {text:pesticides} } };\n}).value()",
         "_row_num": 2
       },
       {
         "query_name": "fertilizer_csv",
         "query_type": "csv",
         "uri": "\"fertilizer.csv\"",
-        "callback": "_.chain(context).pluck('fertilizer').uniq().map(function(fertilizer){\nreturn {name:fertilizer, label:fertilizer, data_value:fertilizer, display:{text:fertilizer}};\n}).value()",
+        "callback": "_.chain(context).pluck('fertilizer').uniq().map(function(fertilizer){\nreturn { data_value:fertilizer, display:{title: {text: fertilizer} } };\n}).value()",
         "_row_num": 3
       }
     ]
@@ -257,14 +257,14 @@
         "query_name": "pesticides_csv",
         "query_type": "csv",
         "uri": "\"pesticides.csv\"",
-        "callback": "_.chain(context).pluck('pesticides').uniq().map(function(pesticides){\nreturn {name:pesticides, label:pesticides, data_value:pesticides, display:{text:pesticides}};\n}).value()",
+        "callback": "_.chain(context).pluck('pesticides').uniq().map(function(pesticides){\nreturn { data_value:pesticides, display: {title: {text:pesticides} } };\n}).value()",
         "_row_num": 2
       },
       "fertilizer_csv": {
         "query_name": "fertilizer_csv",
         "query_type": "csv",
         "uri": "\"fertilizer.csv\"",
-        "callback": "_.chain(context).pluck('fertilizer').uniq().map(function(fertilizer){\nreturn {name:fertilizer, label:fertilizer, data_value:fertilizer, display:{text:fertilizer}};\n}).value()",
+        "callback": "_.chain(context).pluck('fertilizer').uniq().map(function(fertilizer){\nreturn { data_value:fertilizer, display:{title: {text: fertilizer} } };\n}).value()",
         "_row_num": 3
       }
     },

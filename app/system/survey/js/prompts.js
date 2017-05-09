@@ -1352,7 +1352,7 @@ promptTypes.select = promptTypes._linked_type.extend({
                 var displayElementName = that.getLinkedInstanceName();
                 database.get_linked_instances($.extend({},newctxt,{success:function(instanceList) {
                     that.renderContext.choices = _.map(instanceList, function(instance) {
-                        instance.display = {text:instance.display_field};
+                        instance.display = { title: { text: instance.display_field } };
                         instance.data_value = instance.instance_id;
                         return instance;
                     });

@@ -294,15 +294,24 @@ window.odkTables = {
         if (!this.isString(rowId)) {
             throw 'editRowWithSurveyDefault()--rowId not a string';
         }
-				
+		var platInfo = JSON.parse(odkCommon.getPlatformInfo());
+
 		var uri = odkCommon.constructSurveyUri(tableId, null, rowId, null, null);
 		
+		var hashString = uri.substring(uri.indexOf('#'));
+		
+		var extrasBundle = { url: platInfo.baseUri + 'system/index.html' + hashString
+		};
+
 		var intentArgs = {
 			// uri:      // set the data field of intent to this
 			data: uri,   // unless data is supplied -- that takes precedence
-			// type:     // set the intent type to this value
+			type: "vnd.android.cursor.item/vnd.opendatakit.form", // mime type
 			// package:  // set the intent package to this value
-			action: "EDIT"
+			action: "android.intent.action.EDIT",
+			category: "android.intent.category.DEFAULT",
+			
+			extras: extrasBundle
 		};
 		
 		return odkCommon.doAction( dispatchStruct, 
@@ -325,15 +334,24 @@ window.odkTables = {
 		if ( screenPath === undefined ) {
 			screenPath = null;
 		}
+		var platInfo = JSON.parse(odkCommon.getPlatformInfo());
 		
 		var uri = odkCommon.constructSurveyUri(tableId, formId, rowId, screenPath, null);
+		
+		var hashString = uri.substring(uri.indexOf('#'));
+		
+		var extrasBundle = { url: platInfo.baseUri + 'system/index.html' + hashString
+		};
 		
 		var intentArgs = {
 			// uri:      // set the data field of intent to this
 			data: uri,   // unless data is supplied -- that takes precedence
-			// type:     // set the intent type to this value
+			type: "vnd.android.cursor.item/vnd.opendatakit.form", // mime type
 			// package:  // set the intent package to this value
-			action: "EDIT"
+			action: "android.intent.action.EDIT",
+			category: "android.intent.category.DEFAULT",
+			
+			extras: extrasBundle
 		};
 		
 		return odkCommon.doAction( dispatchStruct, 
@@ -346,15 +364,25 @@ window.odkTables = {
             throw 'editRowWithSurveyDefault()--tableId not a string';
         }
 		var rowId = odkCommon.genUUID();
+
+		var platInfo = JSON.parse(odkCommon.getPlatformInfo());
 				
 		var uri = odkCommon.constructSurveyUri(tableId, null, rowId, null, null);
+		
+		var hashString = uri.substring(uri.indexOf('#'));
+		
+		var extrasBundle = { url: platInfo.baseUri + 'system/index.html' + hashString
+		};
 		
 		var intentArgs = {
 			// uri:      // set the data field of intent to this
 			data: uri,   // unless data is supplied -- that takes precedence
-			// type:     // set the intent type to this value
+			type: "vnd.android.cursor.item/vnd.opendatakit.form", // mime type
 			// package:  // set the intent package to this value
-			action: "EDIT"
+			action: "android.intent.action.EDIT",
+			category: "android.intent.category.DEFAULT",
+			
+			extras: extrasBundle
 		};
 		
 		return odkCommon.doAction( dispatchStruct, 
@@ -367,6 +395,8 @@ window.odkTables = {
             throw 'editRowWithSurveyDefault()--tableId not a string';
         }
 		var rowId = odkCommon.genUUID();
+
+		var platInfo = JSON.parse(odkCommon.getPlatformInfo());
 		
 		if ( formId === undefined ) {
 			formId = null;
@@ -383,12 +413,20 @@ window.odkTables = {
 		
 		var uri = odkCommon.constructSurveyUri(tableId, formId, rowId, screenPath, stringifiedMap);
 		
+		var hashString = uri.substring(uri.indexOf('#'));
+		
+		var extrasBundle = { url: platInfo.baseUri + 'system/index.html' + hashString
+		};
+		
 		var intentArgs = {
 			// uri:      // set the data field of intent to this
 			data: uri,   // unless data is supplied -- that takes precedence
-			// type:     // set the intent type to this value
+			type: "vnd.android.cursor.item/vnd.opendatakit.form", // mime type
 			// package:  // set the intent package to this value
-			action: "EDIT"
+			action: "android.intent.action.EDIT",
+			category: "android.intent.category.DEFAULT",
+			
+			extras: extrasBundle
 		};
 		
 		return odkCommon.doAction( dispatchStruct, 

@@ -166,12 +166,15 @@ window.odkSurvey = {
 		};
 		
 		var intentArgs = {
-			uri: uri,
-			extras: extrasBundle,
 			// uri:      // set the data field of intent to this
+			uri: uri,
 			// data:     // unless data is supplied -- that takes precedence
-			// type:     // set the intent type to this value
+			type: "vnd.android.cursor.item/vnd.opendatakit.form", // mime type
 			// package:  // set the intent package to this value
+			action: "android.intent.action.EDIT",
+			category: "android.intent.category.DEFAULT",
+			
+			extras: extrasBundle
 		};
 
         return odkCommon.doAction(dispatchStruct, 
