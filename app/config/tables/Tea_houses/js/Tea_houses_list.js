@@ -66,8 +66,8 @@ var resumeFn = function(fIdxStart) {
 			console.log('clicked with rowId: ' + rowId);
 			// make sure we retrieved the rowId
 			if (rowId !== null && rowId !== undefined) {
-				// we'll pass null as the relative path to use the default file
-				odkTables.openDetailView(null, tableId, rowId, null );
+				odkTables.openDetailWithListView(null, tableId, rowId,
+                                         'config/tables/Tea_houses/html/Tea_houses_detail.html');
 			}
 		});
 
