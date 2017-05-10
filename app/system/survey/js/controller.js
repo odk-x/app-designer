@@ -1,4 +1,3 @@
-/* global odkCommon, odkSurvey */
 /**
  * Manages the execution state and screen history of the overall survey,
  * including form validation, saving and marking the form as 'complete'.
@@ -13,6 +12,7 @@
  */
 define(['screenManager','opendatakit','database', 'parsequery', 'jquery','underscore' ],
 function(ScreenManager,  opendatakit,  database,   parsequery,  $,        _ ) {
+/* global odkCommon, odkSurveyStateManagement */
 'use strict';
 verifyLoad('controller',
     ['screenManager','opendatakit','database', 'parsequery', 'jquery','underscore' ],
@@ -30,7 +30,7 @@ return {
         odkCommon.removeFirstQueuedAction();
     },
     getCurrentScreenPath: function() {
-        var path = odkSurvey.getScreenPath(opendatakit.getRefId());
+        var path = odkSurveyStateManagement.getScreenPath(opendatakit.getRefId());
         if ( path === undefined ) return null;
         return path;
     },
@@ -239,10 +239,10 @@ return {
         var repop = false;
         var clearState = true;
         var oldScreenPath = that.getCurrentScreenPath();
-        while (odkSurvey.hasScreenHistory(opendatakit.getRefId())) {
+        while (odkSurveyStateManagement.hasScreenHistory(opendatakit.getRefId())) {
             clearState = false;
-            path = odkSurvey.popScreenHistory(opendatakit.getRefId());
-            state = odkSurvey.getControllerState(opendatakit.getRefId());
+            path = odkSurveyStateManagement.popScreenHistory(opendatakit.getRefId());
+            state = odkSurveyStateManagement.getControllerState(opendatakit.getRefId());
             // possible 'state' values:
             // advanceOnReturn
             // hideInBackHistory
@@ -296,7 +296,7 @@ return {
                         // If we go backward, we will silently
                         // clear this record out and move to the
                         // screen before the do section.
-                        odkSurvey.pushSectionScreenState(opendatakit.getRefId());
+                        odkSurveyStateManagement.pushSectionScreenState(opendatakit.getRefId());
                         path = that.getCurrentContentsScreenPath();
                         state = '';
                         repop = true;
@@ -397,12 +397,12 @@ return {
                     path = that.getNextOperationPath(path);
                     break;
                 case "advance":
-                    state = odkSurvey.getControllerState(opendatakit.getRefId());
+                    state = odkSurveyStateManagement.getControllerState(opendatakit.getRefId());
                     if ( state !== 'popHistoryOnExit' ) {
                         path = that.getNextOperationPath(path);
                         break;
                     }
-                    // otherwise drop through...
+					/* falls through */
                 case "back_in_history":
                     // pop the history stack, and render that screen.
                     combo = that.findPreviousScreenAndState(false);
@@ -413,7 +413,7 @@ return {
                         path = opendatakit.initialScreenPath;
                     }
                     // just for debugging...
-                    odkSurvey.getScreenPath(opendatakit.getRefId());
+                    odkSurveyStateManagement.getScreenPath(opendatakit.getRefId());
                     break;
                 case "resume":
                     // pop the history stack, and render the next screen.
@@ -426,17 +426,17 @@ return {
                        path = that.getNextOperationPath(path);
                     }
                     // just for debugging...
-                    odkSurvey.getScreenPath(opendatakit.getRefId());
+                    odkSurveyStateManagement.getScreenPath(opendatakit.getRefId());
                     break;
                 case "do_section":
                     // save our op...
-                    odkSurvey.setSectionScreenState(opendatakit.getRefId(), path, 'advanceOnReturn');
+                    odkSurveyStateManagement.setSectionScreenState(opendatakit.getRefId(), path, 'advanceOnReturn');
                     // start at operation 0 in the new section
                     path = op._do_section_name + "/0";
                     break;
                 case "exit_section":
-                    path = odkSurvey.popSectionStack(opendatakit.getRefId());
-                    if ( odkSurvey.getControllerState(opendatakit.getRefId()) === 'advanceOnReturn' ) {
+                    path = odkSurveyStateManagement.popSectionStack(opendatakit.getRefId());
+                    if ( odkSurveyStateManagement.getControllerState(opendatakit.getRefId()) === 'advanceOnReturn' ) {
                         path = that.getNextOperationPath(path);
                     }
                     if ( path === null || path === undefined ) {
@@ -453,11 +453,11 @@ return {
                 case "validate":
                     var validationTag = op._sweep_name;
 
-                    if ( odkSurvey.getScreenPath(opendatakit.getRefId()) !== path ||
-                         odkSurvey.getControllerState(opendatakit.getRefId()) !== 'validateInProgress' ) {
+                    if ( odkSurveyStateManagement.getScreenPath(opendatakit.getRefId()) !== path ||
+                         odkSurveyStateManagement.getControllerState(opendatakit.getRefId()) !== 'validateInProgress' ) {
                         // tag this op as a 'validateInProgress' node. Push onto stack.
-                        odkSurvey.setSectionScreenState( opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'validateInProgress');
-                        odkSurvey.pushSectionScreenState( opendatakit.getRefId());
+                        odkSurveyStateManagement.setSectionScreenState( opendatakit.getRefId(), op._section_name + "/" + op.operationIdx, 'validateInProgress');
+                        odkSurveyStateManagement.pushSectionScreenState( opendatakit.getRefId());
                     }
 
                     that._innerValidate(ctxt, op, validationTag);
@@ -498,12 +498,12 @@ return {
         var that = this;
         database.save_all_changes($.extend({},ctxt,{success:function() {
                 that.screenManager.hideSpinnerOverlay();
-                odkSurvey.saveAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId(), complete);
+                odkSurveyStateManagement.saveAllChangesCompleted( opendatakit.getRefId(), opendatakit.getCurrentInstanceId(), complete);
                 // the odkSurvey should terminate the window... if not, at least leave the instance.
                 that.leaveInstance(ctxt);
             },
             failure:function(m) {
-                odkSurvey.saveAllChangesFailed( opendatakit.getRefId(), opendatakit.getCurrentInstanceId());
+                odkSurveyStateManagement.saveAllChangesFailed( opendatakit.getRefId(), opendatakit.getCurrentInstanceId());
                 // advance to next operation if we fail...
                 path = that.getNextOperationPath(path);
                 op = that.getOperation(path);
@@ -525,7 +525,7 @@ return {
                 success:function(operation, options, m) {
                     if ( operation === undefined || operation === null ) {
                         // validation is DONE: pop ourselves off return stack.
-                        var refPath = odkSurvey.popScreenHistory( opendatakit.getRefId());
+                        var refPath = odkSurveyStateManagement.popScreenHistory( opendatakit.getRefId());
                         if ( refPath != op._section_name + "/" + op.operationIdx ) {
                             ctxt.log('E',"unexpected mis-match of screen history states");
                             ctxt.failure(that.moveFailureMessage);
@@ -702,7 +702,7 @@ return {
                     }
                 }, failure:function(m) {
                     if ( popStateOnFailure ) {
-                        odkSurvey.popScreenHistory(opendatakit.getRefId());
+                        odkSurveyStateManagement.popScreenHistory(opendatakit.getRefId());
                     }
                     if ( that.getCurrentScreenPath() !== currentScreenPath ) {
                         ctxt.log('W',"controller._doActionAt._doActionAtLoop.failure", "px: " +
@@ -755,7 +755,7 @@ return {
         var oldPath = that.getCurrentScreenPath();
         if ( oldPath === newPath ) {
             // redrawing -- take whatever was already there...
-            stateString = odkSurvey.getControllerState(opendatakit.getRefId());
+            stateString = odkSurveyStateManagement.getControllerState(opendatakit.getRefId());
             if ( stateString === undefined ) {
                 ctxt.log('W',"undefined state returned from getControllerState!");
                 stateString = null;
@@ -768,7 +768,7 @@ return {
             stateString = 'hideInBackHistory';
         }
 
-        odkSurvey.setSectionScreenState( opendatakit.getRefId(), newPath, stateString);
+        odkSurveyStateManagement.setSectionScreenState( opendatakit.getRefId(), newPath, stateString);
         // Build a new Screen object so that jQuery Mobile is always happy...
         var formDef = opendatakit.getCurrentFormDef();
         var screen_attrs = operation.screen;
@@ -893,12 +893,12 @@ return {
             ctxt.failure(that.moveFailureMessage);
             return;
         }
-        var stateString = odkSurvey.getControllerState(opendatakit.getRefId());
+        var stateString = odkSurveyStateManagement.getControllerState(opendatakit.getRefId());
         var popHistoryOnExit = ( stateString === 'popHistoryOnExit' );
         // if the current screen is supposed to be popped from the stack
         // when we advance off of it, then do not push it onto the stack!
         if ( !popHistoryOnExit ) {
-            odkSurvey.pushSectionScreenState(opendatakit.getRefId());
+            odkSurveyStateManagement.pushSectionScreenState(opendatakit.getRefId());
         }
         that._doActionAt(ctxt, op, 'advance', !popHistoryOnExit);
     },
@@ -929,7 +929,7 @@ return {
             ctxt.failure(that.moveFailureMessage);
             return;
         }
-        odkSurvey.pushSectionScreenState(opendatakit.getRefId());
+        odkSurveyStateManagement.pushSectionScreenState(opendatakit.getRefId());
         that._doActionAt(ctxt, op, op._token_type, true);
     },
     /*
@@ -962,7 +962,7 @@ return {
             ctxt.failure(that.moveFailureMessage);
             return;
         }
-        odkSurvey.pushSectionScreenState(opendatakit.getRefId());
+        odkSurveyStateManagement.pushSectionScreenState(opendatakit.getRefId());
         that._doActionAt(ctxt, op, op._token_type, true);
     },
     /*
@@ -1000,7 +1000,7 @@ return {
         // do not push the current screen if we are changing sections,
         // as all section jumps implicitly save where they came from.
         if ( currentOp !== null && currentOp !== undefined && op._section_name === currentOp._section_name && advancing ) {
-            odkSurvey.pushSectionScreenState(opendatakit.getRefId());
+            odkSurveyStateManagement.pushSectionScreenState(opendatakit.getRefId());
         }
         that._doActionAt(ctxt, op, op._token_type, advancing);
     },
@@ -1038,7 +1038,7 @@ return {
      * Success: we have successfully deleted all checkpoint
      *   records for this instance the database.
      *
-     * NOTE: the odkSurvey.ignoreAllChangesCompleted() call may terminate the webkit
+     * NOTE: the odkSurveyStateManagement.ignoreAllChangesCompleted() call may terminate the webkit
      * before ctxt.success() is executed.
      *
      * Failure: we were unable to delete the records.
@@ -1048,11 +1048,11 @@ return {
         var formId = opendatakit.getSettingValue('form_id');
         var instanceId = opendatakit.getCurrentInstanceId();
         database.ignore_all_changes($.extend({},ctxt,{success:function() {
-                odkSurvey.ignoreAllChangesCompleted( opendatakit.getRefId(), instanceId);
+                odkSurveyStateManagement.ignoreAllChangesCompleted( opendatakit.getRefId(), instanceId);
                 ctxt.success();
             },
             failure:function(m) {
-                odkSurvey.ignoreAllChangesFailed( opendatakit.getRefId(), instanceId);
+                odkSurveyStateManagement.ignoreAllChangesFailed( opendatakit.getRefId(), instanceId);
                 ctxt.failure(m);
             }}), model, formId, instanceId);
     },
@@ -1063,7 +1063,7 @@ return {
      * Success: we have successfully saved-as-incomplete all checkpoint
      *   records for this instance the database.
      *
-     * NOTE: the odkSurvey.saveAllChangesCompleted() call may terminate
+     * NOTE: the odkSurveyStateManagement.saveAllChangesCompleted() call may terminate
      * the webkit before ctxt.success() is executed.
      *
      * Failure: we were unable to save-as-incomplete the records.
@@ -1074,11 +1074,11 @@ return {
         var formId = opendatakit.getSettingValue('form_id');
         var instanceId = opendatakit.getCurrentInstanceId();
         database.save_all_changes($.extend({},ctxt,{success:function() {
-                odkSurvey.saveAllChangesCompleted( opendatakit.getRefId(), instanceId, false);
+                odkSurveyStateManagement.saveAllChangesCompleted( opendatakit.getRefId(), instanceId, false);
                 ctxt.success();
             },
             failure:function(m) {
-                odkSurvey.saveAllChangesFailed( opendatakit.getRefId(), instanceId);
+                odkSurveyStateManagement.saveAllChangesFailed( opendatakit.getRefId(), instanceId);
                 ctxt.failure(m);
             }}), model, formId, instanceId, false);
     },
@@ -1086,11 +1086,10 @@ return {
      * Callback interface from ODK Survey (or other container apps) into javascript.
      * Handles all dispatching back into javascript from external intents
     */
-    actionCallback:function(ctxt, dispatchString, action, jsonObject) {
+    actionCallback:function(ctxt, dispatchStruct, action, jsonObject) {
         var that = this;
-        var dispatchObj = JSON.parse(dispatchString);
-        var promptPath = dispatchObj.promptPath;
-        var internalPromptContext = dispatchObj.userAction;
+        var promptPath = dispatchStruct.promptPath;
+        var internalPromptContext = dispatchStruct.userAction;
         var screenPath = that.getCurrentScreenPath();
         ctxt.log('I','controller.actionCallback', ((screenPath !== null && screenPath !== undefined) ? ("px: " + screenPath) : "no current prompt"));
 
@@ -1101,7 +1100,7 @@ return {
         if ( prompt !== null && prompt !== undefined ) {
             try {
                 // ask this page to then get the appropriate handler
-                var handler = prompt.getCallback(promptPath, internalPromptContext, action);
+                var handler = prompt.getCallback(promptPath);
                 if ( handler !== null && handler !== undefined ) {
                     handler( ctxt, internalPromptContext, action, jsonObject );
                 } else {
@@ -1137,11 +1136,10 @@ return {
         if ( this.insideQueue || this.insideCallbackCtxt ) return;
         try {
             this.insideQueue = true;
-            var value = that.viewFirstQueuedAction();
-            if ( value === null || value === undefined ) {
+            var action = that.viewFirstQueuedAction();
+            if ( action === null || action === undefined ) {
                 return;
             }
-            var action = JSON.parse(value);
             that.insideCallbackCtxt = true;
             var baseCtxt = that.newCallbackContext("controller.queuedActionAvailableListener-terminalRetrigger");
             var terminateCtxt = $.extend({},baseCtxt,{success: function() {
@@ -1178,7 +1176,7 @@ return {
                     that.changeUrlHash(ctxt,action);
                 } else {
                     ctxt.log('I', "controller.queuedActionAvailableListener.actionCallback (immediate)", action.action);
-                    that.actionCallback( ctxt, action.dispatchString, action.action, action.jsonValue );
+                    that.actionCallback( ctxt, action.dispatchStruct, action.action, action.jsonValue );
                 }
             }}));
 
@@ -1205,12 +1203,14 @@ return {
         var baseCtxt = that.newCallbackContext("controller.registerQueuedActionAvailableListener");
         var terminateCtxt = $.extend({},baseCtxt,{success: function() {
                 odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
-                odkSurvey.frameworkHasLoaded(refId, true );
+                odkSurveyStateManagement.frameworkHasLoaded(refId, true );
                 baseCtxt.success();
+				that.queuedActionAvailableListener();
             }, failure: function(m) {
                 odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
-                odkSurvey.frameworkHasLoaded(refId, false );
+                odkSurveyStateManagement.frameworkHasLoaded(refId, false );
                 baseCtxt.failure(m);
+				that.queuedActionAvailableListener();
             }});
         ctxt.setTerminalContext(terminateCtxt);
         if ( m === undefined || m === null ) {
@@ -1270,7 +1270,7 @@ return {
     reset: function(ctxt,sameForm) {
         var that = this;
         ctxt.log('I','controller.reset');
-        odkSurvey.clearSectionScreenState(opendatakit.getRefId());
+        odkSurveyStateManagement.clearSectionScreenState(opendatakit.getRefId());
         opendatakit.clearCurrentInstanceId();
         if ( that.screenManager !== null && that.screenManager !== undefined) {
             // this asynchronously calls ctxt.success()...

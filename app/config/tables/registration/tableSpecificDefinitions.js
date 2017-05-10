@@ -1,4 +1,4 @@
-window.odkTableSpecificTranslations = {
+window.odkTableSpecificDefinitions = {
   "_tokens": {
     "address": {
       "string_token": "address",

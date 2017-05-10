@@ -63,14 +63,12 @@
                         value="{{data_value}}" 
 						tabindex="0"
                     />
-                {{#ifHasImageLocalization display}}
-                    <div>
-                        <img src="{{localizeImage display}}"></img>
-                    </div>
-                {{/ifHasImageLocalization}}
-                {{#ifHasTextLocalization display}}
-                    <span class="select-text">{{{localizeText display}}}</span>
-                {{/ifHasTextLocalization}}
+		   {{#ifHasImageLocalization display.title}}<div><img src="{{localizeImage display.title}}"></img></div>{{/ifHasImageLocalization}}
+		   {{#ifHasAudioLocalization display.title}}<div><audio src="{{localizeAudio display.title}}" tabindex="0"
+			  audio="true" controls="controls">{{localizeText 'audio_control_not_supported'}}</audio></div>{{/ifHasAudioLocalization}}
+		   {{#ifHasVideoLocalization display.title}}<div><video src="{{localizeVideo display.title}}" tabindex="0"
+			  video="true" controls="controls">{{localizeText 'video_control_not_supported'}}</video></div>{{/ifHasVideoLocalization}}
+		   {{#ifHasTextLocalization display.title}}<span class="select-text">{{{localizeText display.title}}}</span>{{/ifHasTextLocalization}}
                 </label>
             
         {{/each}}

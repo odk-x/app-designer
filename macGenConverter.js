@@ -69,37 +69,31 @@ function writeOutProp(formDefStr) {
 
 function writeOutTrx(formDefStr) {
 
-    // Write the translations.js if necessary
+    // Write the ...Definitions.js if necessary
     var formDefJson = JSON.parse(formDefStr);
 	var tableId = util.getTableIdFromFormDef(formDefJson);
 
 	try {
-		if (util.shouldWriteOutTranslationsJs(formDefJson)) {
+		if (util.shouldWriteOutDefinitionsJs(formDefJson)) {
 			if ( tableId === 'framework' ) {
-				// Get framework_translations
-				var trx = formDefJson.specification.framework_translations;
-				var trxPath = 'app/config/assets/framework/frameworkTranslations.js';
-
-				var trxJs = util.createTranslationsJsFromDataTableModel(tableId, trx);
+				// Create and write out frameworkDefinitions.js
+				var trxPath = util.getRelativePathToFrameworkDefinitionsJs(formDefJson);
+				var trxJs = util.createDefinitionsJsFromDataTableModel(tableId, formDefJson);
 				fs.writeFileSync(trxPath, trxJs);
 
-				// Get common_translations
-				var trx = formDefJson.specification.common_translations;
-				var trxPath = 'app/config/assets/commonTranslations.js';
-
-				var trxJs = util.createTranslationsJsFromDataTableModel(null, trx);
-				fs.writeFileSync(trxPath, trxJs);
+				// Create and write out commonDefinitions.js
+				var trxCmnPath = util.getRelativePathToCommonDefinitionsJs(formDefJson);
+				var trxCmnJs = util.createDefinitionsJsFromDataTableModel(null, formDefJson);
+				fs.writeFileSync(trxCmnPath, trxCmnJs);
 			} else {
-				// Get table_specific_translations
-				var trx = formDefJson.specification.table_specific_translations;
-				var trxPath = 'app/config/tables/' + tableId + '/tableSpecificTranslations.js';
-
-				var trxJs = util.createTranslationsJsFromDataTableModel(tableId, trx);
+				// Create and write out tableSpecificDefinitions.js
+				var trxPath = 'app/config/tables/' + tableId + '/tableSpecificDefinitions.js';
+				var trxJs = util.createDefinitionsJsFromDataTableModel(tableId, formDefJson);
 				fs.writeFileSync(trxPath, trxJs);
 			}
 		}
 	} catch (e) {
-		fs.writeFileSync(trxPath, e.stack);
+		throw new Error("unable to write out ...Definitions file: " + tableId + " error: " + e.name + " message: " + e.message );
 	}
 }
 
@@ -142,7 +136,7 @@ writeOutDef(result);
 // Write out the properties.csv if necessary
 writeOutProp(result);
 
-// Write out the translations.js if necessary
+// Write out the ...Definitions.js if necessary
 writeOutTrx(result);
 
 

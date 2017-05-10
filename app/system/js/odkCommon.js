@@ -1,11 +1,51 @@
-/* global odkCommonIf, odkCommon */
 /**
- * The odkCommonIf injected interface will be used in conjunction with this class to
- * create closures for callback functions to be invoked once a response is available
- * from the Java side.
+ * The odkCommonIf injected interface is used in conjunction with
+ * this class to access information about the webkit (e.g., platformInfo)
+ * and perform localizations. 
+ *
+ * The Java side can asynchronously inform the JS side of state
+ * changing actions. The two actions currently supported are:
+ *  (1) results of a doAction() request when dispatchStruct (1st arg) 
+ *      is not null.
+ *
+ *  (2) Java-initiated actions (as #-prefixed strings).
+ *
+ * Because these can occur at any time, the JS code should
+ * register a listener that will be invoked when an action is
+ * available. i.e., the Java code can direct a change in
+ * the JS code without it being initiated by the JS side.
+ *
+ * Actions are queued and resilient to failure.
+ * they are fetched via
+ *      odkCommon.viewFirstQueuedAction().
+ * And they are removed from the queue via
+ *      odkCommon.removeFirstQueuedAction();
+ *
+ * Users of odkCommon should register their own handler by
+ * calling:
+ *
+ * odkCommon.registerListener(
+ *            function() {
+ *               var action = odkCommon.viewFirstQueuedAction();
+ *               if ( action !== null ) {
+ *                   // process action -- be idempotent!
+ *                   // if processing fails, the action will still
+ *                   // be on the queue.
+ *                   odkCommon.removeFirstQueuedAction();
+ *               }
+ *            });
+ *
+ * Users of odkCommon should invoke this listener function 
+ * once, themselves, after registration, to ensure that any
+ * queued action is processed. They should do this after all
+ * initialization is complete.
  */
+
+ (function() {
 'use strict';
-/* jshint unused: vars */
+/* global odkCommonIf, odkCommon */
+/** NOTE: global require -- for odkCommonIf stub ONLY */
+
 window.odkCommon = {
     _listener: null,
     /**
@@ -26,7 +66,6 @@ window.odkCommon = {
      * And they are removed from the queue via
      *      odkCommon.removeFirstQueuedAction();
      *
-     *
      * Users of odkCommon should register their own handler by
      * calling:
      *
@@ -40,14 +79,29 @@ window.odkCommon = {
      *                   odkCommon.removeFirstQueuedAction();
      *               }
      *            });
+	 *
+	 * Users of odkCommon should invoke this listener function 
+	 * once, themselves, after registration, to ensure that any
+	 * queued action is processed. They should do this after all
+	 * initialization is complete.
      */
     registerListener: function(listener) {
         var that = this;
         that._listener = listener;
-        // whenever a listener is registered, we queue to fire a trigger.
-        // This ensures that the listener will process any queued up actions.
-        setTimeout(function() { that.signalQueuedActionAvailable(); }, 0);
+		// NOTE: users should invoke the listener once to ensure that 
+		// any queued actions are processed. This should be done after
+		// all page initialization is complete.
     },
+	/**
+	 * @return true if there is a listener already registered
+	 */
+	hasListener: function() {
+		var that = this;
+		if ( that._listener !== undefined && that._listener !== null ) {
+			return true;
+		}
+		return false;
+	},
     /**
      * callback from Java side to notify of data available.
      */
@@ -114,18 +168,18 @@ window.odkCommon = {
       if(!this.isString(stringToken)) {
           return stringToken;
       }
-	  var foundFramework = ('odkFrameworkTranslations' in window &&
-		   (window.odkFrameworkTranslations !== undefined) &&
-   	       (window.odkFrameworkTranslations !== null) &&
-		   stringToken in window.odkFrameworkTranslations._tokens );
-	  var foundCommon = ('odkCommonTranslations' in window &&
-		   (window.odkCommonTranslations !== undefined) &&
-   	       (window.odkCommonTranslations !== null) &&
-		   stringToken in window.odkCommonTranslations._tokens );
-	  var foundTableSpecific = ('odkTableSpecificTranslations' in window &&
-	       (window.odkTableSpecificTranslations !== undefined) &&
-   	       (window.odkTableSpecificTranslations !== null) &&
-		   stringToken in window.odkTableSpecificTranslations._tokens );
+	  var foundFramework = ('odkFrameworkDefinitions' in window &&
+		   (window.odkFrameworkDefinitions !== undefined) &&
+   	       (window.odkFrameworkDefinitions !== null) &&
+		   stringToken in window.odkFrameworkDefinitions._tokens );
+	  var foundCommon = ('odkCommonDefinitions' in window &&
+		   (window.odkCommonDefinitions !== undefined) &&
+   	       (window.odkCommonDefinitions !== null) &&
+		   stringToken in window.odkCommonDefinitions._tokens );
+	  var foundTableSpecific = ('odkTableSpecificDefinitions' in window &&
+	       (window.odkTableSpecificDefinitions !== undefined) &&
+   	       (window.odkTableSpecificDefinitions !== null) &&
+		   stringToken in window.odkTableSpecificDefinitions._tokens );
 	
 	  var countFound = (foundFramework ? 1 : 0) + (foundCommon ? 1 : 0) + (foundTableSpecific ? 1 : 0);
 	  if ( countFound > 1 ) {
@@ -133,19 +187,18 @@ window.odkCommon = {
 	  }
 	  if ( foundTableSpecific ) {
 		// found it in table-specific translations
-		return window.odkTableSpecificTranslations._tokens[stringToken];
+		return window.odkTableSpecificDefinitions._tokens[stringToken];
 	  }
 	  if ( foundCommon ) {
 		// found it in common translations
-		return window.odkCommonTranslations._tokens[stringToken];
+		return window.odkCommonDefinitions._tokens[stringToken];
 	  }
 	  if ( foundFramework ) {
 		// found it in framework translations
-		return window.odkFrameworkTranslations._tokens[stringToken];
+		return window.odkFrameworkDefinitions._tokens[stringToken];
 	  }
 	  return undefined;
    },
-   
    i18nFieldNames: [ 'text', 'image', 'audio', 'video' ],
    
    extractLangOnlyLocale: function(locale) {
@@ -191,7 +244,7 @@ window.odkCommon = {
 			displayLanguage: obj.displayLanguage };
 			
 	   // and, finally if the device supports it, report the BCP47 tag:
-	   if ( bcp47LanguageTag in obj ) {
+	   if ( 'bcp47LanguageTag' in obj ) {
 		  info.bcp47LanguageTag = obj.bcp47LanguageTag;
 	   }
 	   return info;
@@ -767,19 +820,71 @@ window.odkCommon = {
    },
 
    /**
+    * Generate a globally unique id.
+	*/
+   genUUID:function() {
+      /*jshint bitwise: false*/
+      // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
+      var id = "uuid:" + 
+		'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          // NOTE: the logical OR forces the number into an integer
+          var r = Math.random()*16|0;
+          // and the logical OR for 'y' values forces the number to be 8, 9, a or b.
+          // https://en.wikipedia.org/wiki/Universally_unique_identifier -- Version 4 (random)
+          var v = (c === 'x') ? r : (r&0x3|0x8);
+          return v.toString(16);
+      });
+      return id;
+   },
+
+   constructSurveyUri: function(tableId, formId, rowId, screenPath, elementKeyToValueMap ) {
+	   
+       if (!this.isString(tableId)) {
+           throw 'constructSurveyUri()--tableId not a string';
+       }
+	   var theFormId = null;
+	   var theRowId = null;
+	   var theScreenPath = null;
+	   if ( formId !== undefined && formId !== null ) {
+		   theFormId = formId;
+	   }
+	   if ( rowId !== undefined && rowId !== null ) {
+		   theRowId = rowId;
+	   }
+	   if ( screenPath !== undefined && screenPath !== null ) {
+		   theScreenPath = screenPath;
+	   }
+	   
+	   // stringify the key-value map before passing it to Java side...
+	   if ( elementKeyToValueMap === undefined || elementKeyToValueMap === null ) {
+		  return odkCommonIf.constructSurveyUri(tableId, theFormId, theRowId, theScreenPath, null);
+	   } else {
+		  return odkCommonIf.constructSurveyUri(tableId, theFormId, theRowId, theScreenPath, 
+				JSON.stringify(elementKeyToValueMap));
+	   }
+   },
+   
+   /**
     * Execute an action (intent call).
     *
-    * @param dispatchString  Can be anything -- holds reconstructive state for JS
+    * @param dispatchStruct   Can be anything -- holds reconstructive state for JS
+    *                                   If this is null, then the Javascript layer is not notified
+    *                                   of the result of this action. It just transparently happens
+    *                                   and the webkit might reload as a result of the activity
+    *                                   swapping out.
     *
     * @param action    The intent. e.g.,
     *                   org.opendatakit.survey.activities.MediaCaptureImageActivity
     *
-    * @param jsonMap  JSON.stringify of Map of the following structure:
+    * @param intentObject  an object with the following structure:
     *                   {
     *                         "uri" : intent.setData(value)
     *                         "data" : intent.setData(value)  (preferred over "uri")
     *                         "package" : intent.setPackage(value)
     *                         "type" : intent.setType(value)
+	*                         "action" : intent.setAction(value)
+	*                         "category" : either a single string or a list of strings for intent.addCategory(item)
+	*                         "flags" : the integer code for the values to store
     *                         "extras" : { key-value map describing extras bundle }
     *                   }
     *
@@ -793,26 +898,64 @@ window.odkCommon = {
     *
     * @return one of:
     *          "IGNORE"                -- there is already a pending action
-    *          "JSONException: " + ex.toString()
+    *          "JSONException"		   -- something is wrong with the intentObject
     *          "OK"                    -- request issued
     *          "Application not found" -- could not find app to handle intent
     *
-    * If the request has been issued, the javascript will be notified of the availability
-    * of a result via the
+    * If the request has been issued, and the dispatchStruct is not null then 
+	* the javascript will be notified of the availability of a result via the
+    * registerListener callback. That callback should fetch the the results via
+    *      odkCommon.viewFirstQueuedAction().
+    * And they are removed from the queue via
+    *      odkCommon.removeFirstQueuedAction();
     */
-   doAction: function(dispatchString, action, jsonMap) {
-      return odkCommonIf.doAction(dispatchString, action, jsonMap);
+   doAction: function(dispatchStruct, action, intentObject) {
+	  // stringify the intent object if present
+	  var intentObjectJSONString = null;
+	  if ( intentObject !== null && intentObject !== undefined ) {
+		  intentObjectJSONString = JSON.stringify(intentObject);
+	  }
+	  // and stringify the dispatchStruct if present
+	  if ( dispatchStruct === null || dispatchStruct === undefined ) {
+		// will not notify of completion
+		return odkCommonIf.doAction(null, action, intentObjectJSONString);
+	  } else {
+		return odkCommonIf.doAction(JSON.stringify(dispatchStruct), action, intentObjectJSONString);
+	  }
    },
 
+   /**
+    *  Terminate the current webkit by calling:
+	*
+    *	activity.setResult(resultCode, intent);
+	*   finish();
+	*
+	*  Where the intent's extras are set to the content of the keyValueBundle
+	*
+	*  resultCode === 0 -- RESULT_CANCELLED
+	*  resultCode === -1  -- RESULT_OK
+	*  any result code >= 1 is user-defined. Unclear the level of support
+	*
+	*  This will log errors but any errors will cause a RESULT_CANCELLED 
+	*  exit. See the logs for what the error was.
+    */
+   closeWindow: function( resultCode, keyValueBundle ) {
+	   if ( keyValueBundle === null || keyValueBundle === undefined ) {
+		  odkCommonIf.closeWindow( "" + resultCode, null );
+	   } else {
+	      odkCommonIf.closeWindow( "" + resultCode, JSON.stringify(keyValueBundle) );
+	   }
+   },
+   
    /**
     * @return the oldest queued action outcome.
     *   or Url change. Return null if there are none.
     *   The action remains queued until removeFirstQueuedAction
     *   is called.
     *
-    *   The return value is either a JSON serialization of:
+    *   The return value is either a structure:
     *
-    *   {  dispatchString: dispatchString,
+    *   {  dispatchStruct: dispatchStruct,
     *      action: refAction,
     *      jsonValue: {
     *        status: resultCodeOfAction, // 0 === success
@@ -820,12 +963,16 @@ window.odkCommon = {
     *      }
     *   }
     *
-    *   or, a JSON serialized string value beginning with #
+    *   or, a string value beginning with #
     *
     *   "#urlhash"   // if the Java code wants the Javascript to take some action without a reload
     */
    viewFirstQueuedAction: function() {
-      return odkCommonIf.viewFirstQueuedAction();
+	  var retVal = odkCommonIf.viewFirstQueuedAction();
+	  if ( retVal === null || retVal === undefined ) {
+		  return null;
+	  }
+	  return JSON.parse(retVal);
    },
    /**
     * Remove the first queued action.
@@ -872,6 +1019,10 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             var that = this;
             // strip off backslashes
             var cleanedStr = relativePath.replace(/\\/g, '');
+			// approx. attempt to parse the string as a URI. If it succeeds, return it as-is.
+			if ( cleanedStr.startsWith("http://") || cleanedStr.startsWith("https://") ) {
+				return cleanedStr;
+			}
             var baseUri = that._computeBaseUri();
             var result = baseUri + cleanedStr;
             return result;
@@ -1010,15 +1161,45 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             return term;
         },
-        doAction: function(dispatchString, action, jsonObj ) {
+		constructSurveyUri: function(tableId, formId, rowId, screenPath, elementKeyToValueMap ) {
+			var that = this;
+			var pi = JSON.parse(that.getPlatformInfo());
+			var appName = pi.appName;
+			if ( formId === null || formId === undefined ) {
+				formId = "";
+			}
+			var uri = "content://org.opendatakit.provider.forms/" + appName + "/" + tableId + "/" + formId + "/#";
+			var continueChar = "";
+			if ( rowId !== null && rowId !== undefined ) {
+				uri += "instanceId=" + encodeURIComponent(rowId);
+				continueChar = "&";
+			}
+			if ( screenPath !== null && screenPath !== undefined ) {
+				uri += continueChar + "screenPath=" + encodeURIComponent(screenPath);
+				continueChar = "&";
+			}
+			if ( elementKeyToValueMap !== null && elementKeyToValueMap !== undefined ) {
+				var theMap = JSON.parse(elementKeyToValueMap);
+				for ( var key in theMap ) {
+					if ( theMap.hasOwnProperty(key) ) {
+						var value = theMap[key];
+						uri += continueChar + encodeURIComponent(key) + "=" + encodeURIComponent(JSON.stringify(value));
+						continueChar = "&";
+					}
+				}
+			}
+			return uri;
+		},
+        doAction: function(dispatchStructAsJSONstring, action, jsonObj ) {
             var that = this;
             var lat, lng, alt, acc;
 
+			var dispatchStruct = JSON.parse(dispatchStructAsJSONstring);
             var value;
-            that.log("D","odkCommon: DO: doAction(" + dispatchString + ", " + action + ", ...)");
+            that.log("D","odkCommon: DO: doAction(" + dispatchStructAsJSONstring + ", " + action + ", ...)");
             if ( action === 'org.opendatakit.survey.activities.MediaCaptureImageActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/venice.jpg",
                                                        contentType: "image/jpg" } } }));
                 setTimeout(function() {
@@ -1028,7 +1209,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.activities.MediaCaptureVideoActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/bali.3gp",
                                                        contentType: "video/3gp" } } }));
                 setTimeout(function() {
@@ -1038,7 +1219,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.activities.MediaCaptureAudioActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/raven.wav",
                                                        contentType: "audio/wav" } } }));
                 setTimeout(function() {
@@ -1048,7 +1229,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.activities.MediaChooseImageActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/venice.jpg",
                                                        contentType: "image/jpg" } } }));
                 setTimeout(function() {
@@ -1058,7 +1239,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.activities.MediaChooseVideoActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/bali.3gp",
                                                        contentType: "video/3gp" } } }));
                 setTimeout(function() {
@@ -1068,7 +1249,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.activities.MediaChooseAudioActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/raven.wav",
                                                        contentType: "audio/wav" } } }));
                 setTimeout(function() {
@@ -1079,7 +1260,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             if ( action === 'org.opendatakit.sensors.PULSEOX' ) {
                 var oxValue = prompt("Enter ox:");
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { pulse: 100,
                                                        ox: oxValue } } }));
                 setTimeout(function() {
@@ -1090,7 +1271,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             if ( action === 'change.uw.android.BREATHCOUNT' ) {
                 var breathCount = prompt("Enter breath count:");
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: {  value: breathCount } } }));
                 setTimeout(function() {
                     odkCommon.signalQueuedActionAvailable();
@@ -1100,7 +1281,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             if ( action === 'com.google.zxing.client.android.SCAN' ) {
                 var barcode = prompt("Enter barcode:");
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: {  SCAN_RESULT: barcode } } }));
                 setTimeout(function() {
                     odkCommon.signalQueuedActionAvailable();
@@ -1113,7 +1294,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 alt = prompt("Enter altitude:");
                 acc = prompt("Enter accuracy:");
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { latitude: lat,
                                                        longitude: lng,
                                                        altitude: alt,
@@ -1129,7 +1310,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 alt = prompt("Enter altitude:");
                 acc = prompt("Enter accuracy:");
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { latitude: lat,
                                                        longitude: lng,
                                                        altitude: alt,
@@ -1141,7 +1322,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.activities.MainMenuActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1 } }));
                 value = JSON.parse(jsonObj);
                 if ( window.parent === window ) {
@@ -1159,7 +1340,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'org.opendatakit.survey.activities.SplashScreenActivity' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1 } }));
                 value = JSON.parse(jsonObj);
                 if ( window.parent === window ) {
@@ -1177,7 +1358,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             if ( action === 'android.content.Intent.ACTION_VIEW' ) {
                 that._queuedActions.push(
-                  JSON.stringify({ dispatchString: dispatchString, action: action,
+                  JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1 } }));
                 value = JSON.parse(jsonObj);
                 if ( window.parent === window ) {
@@ -1266,4 +1447,4 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
     };
 }
 
-
+ })();

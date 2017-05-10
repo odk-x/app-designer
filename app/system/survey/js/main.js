@@ -36,6 +36,8 @@ requirejs.config({
         // odkCommon.js -- stub directly loaded
         // odkData.js -- stub directly loaded
         // odkSurvey.js -- stub directly loaded
+        // odkSurveyStateManagement.js -- stub directly loaded
+        // odkTables.js -- stub directly loaded
         // functionality
         screens : 'survey/js/screens',
         prompts : 'survey/js/prompts',

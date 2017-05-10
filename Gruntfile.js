@@ -340,7 +340,7 @@ module.exports = function (grunt) {
 				cells = xlsFile.split('/');
 				cells[cells.length-1] = 'formDef.json';
 				formDefFile = cells.join('/');
-                grunt.log.writeln('macGenConvert: ' + xlsFile + ' > ' + formDefFile);
+				grunt.log.writeln('macGenConvert: ' + xlsFile + ' > ' + formDefFile);
 				grunt.task.run('exec:macGenConvert:' + xlsFile + ':' + formDefFile);
             });
         });
@@ -412,7 +412,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 {filter: 'isFile',
                  cwd: 'app' },
 				'config/assets/framework/**',
-                'config/assets/commonTranslations.js',
+                'config/assets/commonDefinitions.js',
                 'config/assets/img/play.png',
                 'config/assets/img/form_logo.png',
                 'config/assets/img/backup.png',
@@ -435,7 +435,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 'config/assets/libs/jquery*',
                 'config/assets/libs/d3*',
                 'config/assets/libs/d3-amd/**',
-                'config/assets/commonTranslations.js',
+                'config/assets/commonDefinitions.js',
                 'config/assets/img/little_arrow.png',
 				'!**/.DS_Store');
 
@@ -734,10 +734,10 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 
 	//
 	// returns a function that will handle the copying of files into the
-	// build/ + suffix.substr(1) folder with any files ending in suffix
-	// stripped of that suffix.
+	// build/ + infix.substr(1) folder with any files containing ".infix."
+	// stripped of that infix and any folders ending in ".infix" also stripped.
 	//
-	var suffixRenameCopier = function(demoSuffix, offsetDir) {
+	var infixRenameCopier = function(demoInfix, offsetDir) {
 		return function(fileName) {
 			//  Have to add app back into the file name for the adb push
 			var src;
@@ -748,15 +748,28 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			} else {
 				src = fileName;
 			}
-			var isSuffixed = false;
+			var isInfixed = false;
+			// need to handle infixed directories and files
 			var destFileName = fileName;
-			if ( fileName.endsWith(demoSuffix) ) {
-				isSuffixed = true;
-				destFileName = fileName.substring(0,fileName.length-demoSuffix.length);
+			var idx = destFileName.indexOf(demoInfix + ".");
+			while ( idx >= 0 ) {
+				// file...
+				isInfixed = true;
+				destFileName = destFileName.substring(0,idx) + destFileName.substring(idx+demoInfix.length);
+				idx = destFileName.indexOf(demoInfix + ".");
 			}
+			
+			var idxDir = destFileName.indexOf(demoInfix + "/");
+			while ( idxDir >= 0 ) {
+				// directory...
+				isInfixed = true;
+				destFileName = destFileName.substring(0,idxDir) + destFileName.substring(idxDir+demoInfix.length);
+				idxDir = destFileName.indexOf(demoInfix + "/");
+			}
+			
 			var buildDir = 'build' +
 				'/' +
-				demoSuffix.substring(1);
+				demoInfix.substring(1);
 
 			var baseDir = buildDir;
 
@@ -767,7 +780,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			}
 
 			var dest;
-			if ( isSuffixed ) {
+			if ( isInfixed ) {
 				// copy the original so that, e.g, grunt adbpush-tables-tablesdemo will work
 				dest = baseDir +
 					'/' +
@@ -787,9 +800,10 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 
 	//
 	// returns a function that will handle the adb push of files onto the
-	// device with any files ending in suffix stripped of that suffix.
+	// device with any files containing ".infix." stripped of that infix 
+	// and any folders ending in ".infix" also stripped.
 	//
-	var suffixRenameAdbPusher = function(demoSuffix, offsetDir) {
+	var infixRenameAdbPusher = function(demoInfix, offsetDir) {
 		           // Now push these files to the phone.
         return function(fileName) {
 			//  Have to add app back into the file name for the adb push
@@ -801,10 +815,26 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			} else {
 				src = fileName;
 			}
+
+			var isInfixed = false;
+			// need to handle infixed directories and files
 			var destFileName = fileName;
-			if ( fileName.endsWith(demoSuffix) ) {
-				destFileName = fileName.substring(0,fileName.length-demoSuffix.length);
+			var idx = destFileName.indexOf(demoInfix + ".");
+			while ( idx >= 0 ) {
+				// file...
+				isInfixed = true;
+				destFileName = destFileName.substring(0,idx) + destFileName.substring(idx+demoInfix.length);
+				idx = destFileName.indexOf(demoInfix + ".");
 			}
+			
+			var idxDir = destFileName.indexOf(demoInfix + "/");
+			while ( idxDir >= 0 ) {
+				// directory...
+				isInfixed = true;
+				destFileName = destFileName.substring(0,idxDir) + destFileName.substring(idxDir+demoInfix.length);
+				idxDir = destFileName.indexOf(demoInfix + "/");
+			}
+
 			var dest =
 				tablesConfig.deviceMount +
 				'/' +
@@ -848,7 +878,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             var dirs = largeDataSetFiles(grunt);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameAdbPusher(".largeDataSet500", tablesConfig.appDir));
+            dirs.forEach(infixRenameAdbPusher(".largeDataSet500", tablesConfig.appDir));
         }
     );
 
@@ -859,7 +889,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             var dirs = largeDataSetFiles(grunt);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameAdbPusher(".largeDataSet3000", tablesConfig.appDir));
+            dirs.forEach(infixRenameAdbPusher(".largeDataSet3000", tablesConfig.appDir));
         }
     );
 
@@ -916,7 +946,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             var dirs = gatesDemoFiles072216(grunt);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameAdbPusher(".gatesDemo072216", tablesConfig.appDir));
+            dirs.forEach(infixRenameAdbPusher(".gatesDemo072216", tablesConfig.appDir));
         });
 
 
@@ -933,7 +963,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameCopier(".gatesDemo072216", tablesConfig.appDir));
+            dirs.forEach(infixRenameCopier(".gatesDemo072216", tablesConfig.appDir));
 
 			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
@@ -946,7 +976,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				'app/data/tables/geotagger/**',
 				'app/output/**');
 
-            otherFiles.forEach(suffixRenameCopier(".gatesDemo072216", ""));
+            otherFiles.forEach(infixRenameCopier(".gatesDemo072216", ""));
         });
 
 	var simpleDemoFiles = function(grunt) {
@@ -970,9 +1000,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'!output/**',
 			'!config/assets/**',
 			'!config/tables/**',
-			'config/**/*.simpledemo',
-			'config/assets/framework/translations.js',
-			'config/assets/framework/forms/framework/*.simpledemo',
+			'config/**/*.simpledemo.*',
+			'config/assets/framework/forms/framework.simpledemo/**',
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
@@ -998,7 +1027,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             var dirs = simpleDemoFiles(grunt);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameAdbPusher(".simpledemo", tablesConfig.appDir));
+            dirs.forEach(infixRenameAdbPusher(".simpledemo", tablesConfig.appDir));
         });
 
 
@@ -1015,7 +1044,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameCopier(".simpledemo", tablesConfig.appDir));
+            dirs.forEach(infixRenameCopier(".simpledemo", tablesConfig.appDir));
 
 			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
@@ -1028,7 +1057,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				'app/data/tables/geotagger/**',
 				'app/output/**');
 
-            otherFiles.forEach(suffixRenameCopier(".simpledemo", ""));
+            otherFiles.forEach(infixRenameCopier(".simpledemo", ""));
         });
 
 	var rowLevelAccessDemoFiles = function(grunt) {
@@ -1044,10 +1073,9 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'!output/**',
 			'!config/assets/**',
 			'!config/tables/**',
-			'config/**/*.rowlevelaccessdemo',
+			'config/**/*.rowlevelaccessdemo.*',
 			'config/assets/changeAccessFilters.html',
-			'config/assets/framework/translations.js',
-			'config/assets/framework/forms/framework/*.rowlevelaccessdemo',
+			'config/assets/framework/forms/framework.rowlevelaccessdemo/**',
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
@@ -1077,7 +1105,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             var dirs = rowLevelAccessDemoFiles(grunt);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameAdbPusher(".rowlevelaccessdemo", tablesConfig.appDir));
+            dirs.forEach(infixRenameAdbPusher(".rowlevelaccessdemo", tablesConfig.appDir));
         });
 
 
@@ -1094,7 +1122,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameCopier(".rowlevelaccessdemo", tablesConfig.appDir));
+            dirs.forEach(infixRenameCopier(".rowlevelaccessdemo", tablesConfig.appDir));
 
 			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
@@ -1108,7 +1136,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				'app/data/tables/geoweather_conditions/**',
 				'app/output/**');
 
-            otherFiles.forEach(suffixRenameCopier(".rowlevelaccessdemo", ""));
+            otherFiles.forEach(infixRenameCopier(".rowlevelaccessdemo", ""));
         });
 
 	var georowlevelaccessdemo = function(grunt) {
@@ -1124,10 +1152,9 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'!output/**',
 			'!config/assets/**',
 			'!config/tables/**',
-			'config/**/*.georowlevelaccessdemo',
+			'config/**/*.georowlevelaccessdemo.*',
 			'config/assets/changeAccessFilters.html',
-			'config/assets/framework/translations.js',
-			'config/assets/framework/forms/framework/*.georowlevelaccessdemo',
+			'config/assets/framework/forms/framework.georowlevelaccessdemo/**',
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
@@ -1160,7 +1187,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             var dirs = georowlevelaccessdemo(grunt);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameAdbPusher(".georowlevelaccessdemo", tablesConfig.appDir));
+            dirs.forEach(infixRenameAdbPusher(".georowlevelaccessdemo", tablesConfig.appDir));
         });
 
 
@@ -1177,7 +1204,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameCopier(".georowlevelaccessdemo", tablesConfig.appDir));
+            dirs.forEach(infixRenameCopier(".georowlevelaccessdemo", tablesConfig.appDir));
 
 			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
@@ -1192,7 +1219,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				'app/data/tables/geoweather_conditions/**',
 				'app/output/**');
 
-            otherFiles.forEach(suffixRenameCopier(".georowlevelaccessdemo", ""));
+            otherFiles.forEach(infixRenameCopier(".georowlevelaccessdemo", ""));
         });
 
 	var tablesDemoFiles = function(grunt) {
@@ -1216,9 +1243,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'!output/**',
 			'!config/assets/**',
 			'!config/tables/**',
-			'config/**/*.tablesdemo',
-			'config/assets/framework/translations.js',
-			'config/assets/framework/forms/framework/*.tablesdemo',
+			'config/**/*.tablesdemo.*',
+			'config/assets/framework/forms/framework.tablesdemo/**',
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
@@ -1297,7 +1323,9 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/visit-list.css',
 			'config/assets/css/visit-detail.css',
 			'config/assets/plotter.html',
-			'config/assets/js/plotter-home.js',
+			'config/assets/plotter-*.html',
+			'config/assets/js/util.js',
+			'config/assets/js/plotter-*.js',
 			'config/assets/img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg',
 			'config/assets/csv/plot.example.csv',
 			'config/tables/plot/**',
@@ -1331,7 +1359,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
         function() {
             var dirs = tablesDemoFiles(grunt);
 
-			dirs.forEach(suffixRenameAdbPusher(".tablesdemo", tablesConfig.appDir));
+			dirs.forEach(infixRenameAdbPusher(".tablesdemo", tablesConfig.appDir));
         });
 
     grunt.registerTask(
@@ -1347,7 +1375,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameCopier(".tablesdemo", tablesConfig.appDir));
+            dirs.forEach(infixRenameCopier(".tablesdemo", tablesConfig.appDir));
 
 			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
@@ -1360,7 +1388,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				'app/data/tables/geotagger/**',
 				'app/output/**');
 
-            otherFiles.forEach(suffixRenameCopier(".tablesdemo", ""));
+            otherFiles.forEach(infixRenameCopier(".tablesdemo", ""));
         });
 
 	var opendatakit2DemoFiles = function(grunt) {
@@ -1375,9 +1403,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'!output/**',
 			'!config/assets/**',
 			'!config/tables/**',
-			'config/**/*.opendatakit-2',
-			'config/assets/framework/translations.js',
-			'config/assets/framework/forms/framework/*.opendatakit-2',
+			'config/**/*.opendatakit-2.*',
+			'config/assets/framework/forms/framework.opendatakit-2/**',
 			'config/assets/css/odk-survey.css',
 			'config/assets/img/advance.png',
 			'config/assets/img/backup.png',
@@ -1400,7 +1427,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
         function() {
             var dirs = opendatakit2DemoFiles(grunt);
 
-			dirs.forEach(suffixRenameAdbPusher(".opendatakit-2", tablesConfig.appDir));
+			dirs.forEach(infixRenameAdbPusher(".opendatakit-2", tablesConfig.appDir));
         });
 
     grunt.registerTask(
@@ -1416,7 +1443,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			grunt.file.mkdir(buildDir + '/' + tablesConfig.appDir);
 
             // Now push these files to the phone.
-            dirs.forEach(suffixRenameCopier(".opendatakit-2", tablesConfig.appDir));
+            dirs.forEach(infixRenameCopier(".opendatakit-2", tablesConfig.appDir));
 
 			var otherFiles = grunt.file.expand(
 				{filter: 'isFile',
@@ -1428,7 +1455,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				'app/system/**',
 				'app/output/**');
 
-            otherFiles.forEach(suffixRenameCopier(".opendatakit-2", ""));
+            otherFiles.forEach(infixRenameCopier(".opendatakit-2", ""));
         });
 
     grunt.registerTask(

@@ -498,7 +498,8 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
@@ -592,7 +593,7 @@
         }
       ]
     },
-    "table_specific_translations": {
+    "table_specific_definitions": {
       "_tokens": {}
     },
     "queries": {},

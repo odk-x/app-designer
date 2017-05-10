@@ -1,4 +1,4 @@
-window.odkFrameworkTranslations = {
+window.odkFrameworkDefinitions = {
   "_tokens": {
     "constraint_message": {
       "string_token": "constraint_message",

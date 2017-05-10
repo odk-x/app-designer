@@ -1,4 +1,4 @@
-window.odkTableSpecificTranslations = {
+window.odkTableSpecificDefinitions = {
   "_tokens": {
     "authorization_details": {
       "string_token": "authorization_details",

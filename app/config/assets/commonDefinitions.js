@@ -1,4 +1,4 @@
-window.odkCommonTranslations = {
+window.odkCommonDefinitions = {
   "_tokens": {
     "select_user": {
       "string_token": "select_user",

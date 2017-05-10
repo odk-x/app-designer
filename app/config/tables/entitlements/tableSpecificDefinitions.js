@@ -1,4 +1,4 @@
-window.odkTableSpecificTranslations = {
+window.odkTableSpecificDefinitions = {
   "_tokens": {
     "is_override": {
       "string_token": "is_override",

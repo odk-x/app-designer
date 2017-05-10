@@ -1626,7 +1626,8 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
@@ -2013,7 +2014,7 @@
         }
       ]
     },
-    "framework_translations": {
+    "framework_definitions": {
       "_tokens": {
         "constraint_message": {
           "string_token": "constraint_message",
@@ -2407,7 +2408,7 @@
         }
       }
     },
-    "common_translations": {
+    "common_definitions": {
       "_tokens": {
         "select_user": {
           "string_token": "select_user",

@@ -1,10 +1,10 @@
-/* global odkCommon */
 /**
  * This file contains utilities that operate on the data as represented in the JSON
  * and as serialized into and out of the database or session storage.
  */
 define([],
 function() {
+/* global odkCommon */
 'use strict';
 return {
     isUnitOfRetention: function(jsonDefn) {

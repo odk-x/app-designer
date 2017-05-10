@@ -3,8 +3,9 @@
  * create closures for callback functions to be invoked once a response is available
  * from the Java side.
  */
+ 
+ (function() {
 'use strict';
-/* jshint unused: vars */
 
 window.odkData = {
     _requestMap: [],
@@ -34,6 +35,15 @@ window.odkData = {
         console.log('getRoles cbId=' + req._callbackId);
 
         that.getOdkDataIf().getRoles(req._callbackId);
+    },
+
+    getDefaultGroup: function(successCallbackFn, failureCallbackFn) {
+        var that = this;
+        
+        var req = that.queueRequest('getDefaultGroup', successCallbackFn, failureCallbackFn);
+        console.log('getDefaultGroup cbId=' + req._callbackId);
+
+        that.getOdkDataIf().getDefaultGroup(req._callbackId);
     },
 
     getUsers: function(successCallbackFn, failureCallbackFn) {
@@ -320,12 +330,8 @@ window.odkData = {
         };
 
         /**
-         * Returns ture if num is a number, else false.
+         * Returns ture if num is an integer, else false.
          */
-        var isNumber = function(num) {
-            return (typeof num === 'number');
-        };
-
         var isInteger = function(i) {
             return (typeof i === 'number' && Math.floor(i) === i);
         };
@@ -362,7 +368,7 @@ window.odkData = {
             // convert the elementPath to a unique elementKey (column name in database)
             // assumes the elementPath is a unit of retention in the database.
             getElementKey:function(elementPath) {
-                var that = this;
+                // var that = this;
                 var hackPath = elementPath.replace(/\./g, "_");
                 return hackPath;
             },
@@ -545,8 +551,10 @@ window.odkData = {
                 var i;
                 var key;
                 for ( key in elementKeyMap ) {
-                    i = elementKeyMap[key];
-                    columns[i] = key;
+					if (elementKeyMap.hasOwnProperty(key)) {
+						i = elementKeyMap[key];
+						columns[i] = key;
+					}
                 }
                 return columns;
             },
@@ -830,6 +838,7 @@ window.odkData = {
             },
 
             getTableDisplayName:function(tableId) {
+                var that = this;
                 var retVal = tableId;
 
                 if (that.resultObj === null || that.resultObj === undefined) {
@@ -860,7 +869,7 @@ window.odkData = {
         
             },
 
-            getIsTableLocked:function(tableId) {
+            getIsTableLocked:function() {
                 var that = this;
                 var retVal = false;
 
@@ -895,6 +904,8 @@ window.odkData = {
 
             getCanCreateRow:function() {
                 var that = this;
+                var retVal = false;
+				
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return retVal;
                 }
@@ -959,6 +970,25 @@ window.odkData = {
                 return that.resultObj.metadata.roles;
             },
 
+            // only valid after call to getDefaultGroup()
+            getDefaultGroup:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata.defaultGroup === null || 
+                    that.resultObj.metadata.defaultGroup === undefined) {
+                    return null;
+                }
+
+                return that.resultObj.metadata.defaultGroup;
+            },
+
             // only valid after call to getUsers()
             getUsers:function() {
                 var that = this;
@@ -983,3 +1013,4 @@ window.odkData = {
         return pub;
     }
 };
+ })();

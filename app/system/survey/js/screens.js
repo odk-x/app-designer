@@ -1,4 +1,3 @@
-/* global odkCommon */
 /**
 * circular dependency:
 *
@@ -10,6 +9,7 @@
 */
 define(['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers'],
 function(screenTypes,  opendatakit,  controller,  Backbone,  $,       _,           Handlebars, _hh) {
+/* global odkCommon */
 'use strict';
 verifyLoad('screens',
     ['screenTypes','opendatakit','controller','backbone','jquery','underscore','handlebars','handlebarsHelpers'],
