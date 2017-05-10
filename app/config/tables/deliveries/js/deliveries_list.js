@@ -11,7 +11,7 @@ var deliveriesResultSet = {};
  * Use chunked list view for larger tables: We want to chunk the displays so
  * that there is less load time.
  */
- 
+
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
@@ -109,7 +109,7 @@ var displayGroup = function(idxStart) {
       var field2 = $('<li>');
       field2.attr('class', 'detail');
       var beneficiary_code = deliveriesResultSet.getData(i, 'beneficiary_code');
-      field2.text('Beneficiary Code: ' + beneficiary_code);
+      field2.text(odkCommon.localizeText(odkCommon.getPreferredLocale(), 'beneficiary_code') + ' : ' + beneficiary_code);
       item.append(field2);
 
 

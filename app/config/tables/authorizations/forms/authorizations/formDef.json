@@ -48,8 +48,29 @@
       },
       {
         "type": "string",
-        "name": "delivery_name",
+        "name": "delivery_table",
         "_row_num": 11
+      },
+      {
+        "type": "string",
+        "name": "delivery_form",
+        "_row_num": 12
+      }
+    ],
+    "table_specific_translations": [
+      {
+        "string_token": "authorization_details",
+        "text": {
+          "default": "Authorization Details"
+        },
+        "_row_num": 2
+      },
+      {
+        "string_token": "choose_authorization",
+        "text": {
+          "default": "Choose an Authorization"
+        },
+        "_row_num": 3
       }
     ],
     "settings": [
@@ -213,7 +234,22 @@
     },
     "choices": {},
     "table_specific_translations": {
-      "_tokens": {}
+      "_tokens": {
+        "authorization_details": {
+          "string_token": "authorization_details",
+          "text": {
+            "default": "Authorization Details"
+          },
+          "_row_num": 2
+        },
+        "choose_authorization": {
+          "string_token": "choose_authorization",
+          "text": {
+            "default": "Choose an Authorization"
+          },
+          "_row_num": 3
+        }
+      }
     },
     "queries": {},
     "calculates": {},
@@ -308,7 +344,7 @@
         ],
         "elementKey": "is_simple"
       },
-      "delivery_name": {
+      "delivery_table": {
         "type": "string",
         "_defn": [
           {
@@ -316,7 +352,17 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "delivery_name"
+        "elementKey": "delivery_table"
+      },
+      "delivery_form": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_form"
       }
     },
     "section_names": [
@@ -686,7 +732,7 @@
         "elementSet": "data",
         "elementPath": "is_simple"
       },
-      "delivery_name": {
+      "delivery_table": {
         "type": "string",
         "_defn": [
           {
@@ -694,10 +740,23 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "delivery_name",
-        "elementName": "delivery_name",
+        "elementKey": "delivery_table",
+        "elementName": "delivery_table",
         "elementSet": "data",
-        "elementPath": "delivery_name"
+        "elementPath": "delivery_table"
+      },
+      "delivery_form": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_form",
+        "elementName": "delivery_form",
+        "elementSet": "data",
+        "elementPath": "delivery_form"
       },
       "_id": {
         "type": "string",

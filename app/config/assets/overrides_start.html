@@ -6,14 +6,17 @@
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../config/assets/commonTranslations.js"></script>
         <script type="text/javascript">
+
+        var locale = odkCommon.getPreferredLocale();
 
         // Displays homescreen
         function display() {
-
+            $('#title').text(odkCommon.localizeText(locale, "override_options"));
             var override_registration = document.createElement("button");
             override_registration.setAttribute("id", "registration");
-            override_registration.innerHTML = "Override Registration";
+            override_registration.innerHTML = odkCommon.localizeText(locale, "override_registration");
             override_registration.onclick = function() {
                 odkTables.launchHTML(
                     'config/assets/overrides_registration_start.html');
@@ -22,7 +25,7 @@
 
             var override_entitlement = document.createElement("button");
             override_entitlement.setAttribute("id", "authorization");
-            override_entitlement.innerHTML = "Override Entitlement";
+            override_entitlement.innerHTML = odkCommon.localizeText(locale, "override_entitlement");;
             override_entitlement.onclick = function() {
               odkTables.launchHTML(
                   'config/tables/authorizations/html/authorizations_list.html');
@@ -36,7 +39,7 @@
 
     <body onload="display();">
         <div id="main">
-            <h1>Override Options</h1>
+            <h1 id='title'></h1>
             <div id="wrapper"></div>
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>

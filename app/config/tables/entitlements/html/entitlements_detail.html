@@ -7,10 +7,11 @@
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../../../config/assets/js/util.js"></script>
+        <script type="text/javascript" src="../../config/assets/commonTranslations.js"></script>
     </head>
     <body>
-        <script type="text/javascript" src="../js/dist_ben_detail.js"></script>
-        <h1><span id="TITLE" class="main-text">Entitlement Details</span></h1>
+        <script type="text/javascript" src="../js/entitlements_detail.js"></script>
+        <h1><span id="title"></span></h1>
         <!-- To query and link to the result, replace the placeholders and put the
         following around the <span></span> tags.
         <a href="#" onclick="control.openTable('TABLE_NAME', 'COL_NAME:' +
@@ -19,14 +20,14 @@
         Example:<a href="#" onclick="control.openTable('TABLE_NAME',
         'COL_NAME:' + data.get('COL_NAME'));"><span id="FIELD_1"></span></a>
         -->
-        <p>Authorization Name: <span id="authorization_name"></span></p>
-        <p>Item Pack Name: <span id="item_pack_name"></span></p>
-        <p>Item Pack Description: <span id="item_description"></span></p>
-        <p>Is an Override: <span id="is_override"></span></p> 
-        <p>Beneficiary Code: <span id="beneficiary_code"></span></p>
+        <p id='authorization_name'>Authorization Name: <span id="inner_authorization_name"></span></p>
+        <p id='item_pack_name'>Item Pack Name: <span id="inner_item_pack_name"></span></p>
+        <p id='item_description'>Item Pack Description: <span id="inner_item_description"></span></p>
+        <p id='is_override'>Is an Override: <span id="inner_is_override"></span></p> 
+        <p id='beneficiary_code'>Beneficiary Code: <span id="inner_beneficiary_code"></span></p>
 	<br>
 
-        <button id="launch">Click to Deliver</button>
+        <button id="launch"></button>
 
         <script>
             $(display());

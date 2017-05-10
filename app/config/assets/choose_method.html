@@ -16,28 +16,16 @@
         var idComponent = "";
         var user;
         var locale = odkCommon.getPreferredLocale();
-        var viewAuthorizationDetailsToken = "view_authorization_details";
-        var scanBarcodeToken = "scan_barcode";
-        var enterToken = "enter";
-        var userToken = "select_user";
-        var disabledBeneficiaryNotificationToken = "disabled_beneficiary_notification";
-        var missingBeneficiaryNotificationToken = "missing_beneficiary_notification";
-        var barcodeAvailableToken = "barcode_available";
-        var voucherDetectedToken = "voucher_detected";
-        var barcodeUnavailableToken = "barcode_unavailable";
-        var alreadyQualifiesOverrideToken = "already_qualifies_override";
-        var eligibleOverrideToken = "eligible_override";
-        var overrideCreationSuccessToken = "override_creation_success";
         var superUser;
         var type = util.getQueryParameter('type');
         var code;
 
         function display() {
-            $('#view_details').text(odkCommon.localizeText(locale, viewAuthorizationDetailsToken));
-            $('#barcode').text(odkCommon.localizeText(locale, scanBarcodeToken));
-            $('#search').text(odkCommon.localizeText(locale, enterToken));
+            $('#view_details').text(odkCommon.localizeText(locale, "view_authorization_details"));
+            $('#barcode').text(odkCommon.localizeText(locale, "scan_barcode"));
+            $('#search').text(odkCommon.localizeText(locale, "enter"));
 
-            var localizedUser = odkCommon.localizeText(locale, userToken);
+            var localizedUser = odkCommon.localizeText(locale, "select_user");
             $('#choose_user').hide();
             if (type != 'ent_override') {
                 $('#view_details').hide();
@@ -68,7 +56,7 @@
                     $('#choose_user').show();
                     $('#barcode').prop("disabled", true).addClass('disabled');
                     $('#search').prop("disabled", true).addClass('disabled');
-                    console.log(users);
+                    console.log(roles);
                     users.forEach(addOption);
                     $('#choose_user').append($("<option/>").attr("value", localizedUser).attr('selected', true).text(localizedUser));
                     $('#choose_user').on('change', function() {
@@ -198,9 +186,9 @@
         function deliveryDisabledCBSuccess(result) {
             console.log('disabledCB called');
             if (result.getCount() > 0) {
-                $('#search_results').text(odkCommon.localizeText(locale, disabledBeneficiaryNotificationToken));
+                $('#search_results').text(odkCommon.localizeText(locale, "disabled_beneficiary_notification"));
             } else {
-                $('#search_results').text(odkCommon.localizeText(locale, missingBeneficiaryNotificationToken));
+                $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
 
             }
             odkCommon.removeFirstQueuedAction();
@@ -233,7 +221,7 @@
                 }
 
             } else {
-                $('#search_results').text(odkCommon.localizeText(locale, barcodeUnavailableToken));
+                $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
                 odkCommon.removeFirstQueuedAction();
             }
         }
@@ -245,9 +233,9 @@
         function registrationVoucherCBSuccess(result) {
             voucherResultSet = result;
             if (voucherResultSet.getCount() == 0) {
-                $('#search_results').text(odkCommon.localizeText(locale, barcodeAvailableToken));
+                $('#search_results').text(odkCommon.localizeText(locale, "barcode_available"));
             } else {
-                $('#search_results').text(odkCommon.localizeText(locale, voucherDetectedToken));
+                $('#search_results').text(odkCommon.localizeText(locale, "voucher_detected"));
             }
             setTimeout(function() {
                 if (superUser) {
@@ -284,104 +272,17 @@
             console.log('set filter failure with error: ' + error);
         }
 
-        var setJSONMap = function(JSONMap, key, value) {
+        function setJSONMap(JSONMap, key, value) {
             if (value !== null && value !== undefined) {
                 JSONMap[key] = JSON.stringify(value);
             }
         }
 
-        var getJSONMapValues = function() {
+        function getJSONMapValues() {
             var jsonMap = {};
             setJSONMap(jsonMap, 'beneficiary_code', code);
             jsonMap = JSON.stringify(jsonMap);    
             return jsonMap;
-        };
-
-        function voucherFunction() {
-            odkData.query('registration', 'beneficiary_code = ?', [code], null, null,
-                            null, null, null, null, true, voucherBCheckCBSuccess, voucherBCheckCBFailure);
-        }
-
-        function voucherBCheckCBSuccess(result) {
-            console.log('voucherBCheckCBSuccess called');
-            if (result.getCount() === 0) {
-                odkData.query('entitlements', 'beneficiary_code = ?', [code],
-                    null, null, null, null, null, null, true, voucherSelfCBSuccess, voucherSelfCBFailure);
-            } else {
-                $('#search_results').text(code + odkCommon.localizeText(locale, barcodeUnavailableToken));
-            }
-        }
-
-        function voucherBCheckCBFailure(error) {
-            console.log('voucherBCheckCBFailure called with error: ' + error);
-        }
-
-        function voucherSelfCBSuccess(result) {
-            console.log('voucherSelfCBSuccess called');
-            if (result.getCount() === 0) {
-                $('#search_results').text('Scanned voucher code not found in system');
-            } else {
-                $('#search_results').text(code + ' -- Voucher Detected!');
-                if (superUser) {
-                    var struct = {};
-                    struct['beneficiary_code'] = code;
-                        odkData.addRow('registration', struct, util.genUUID(), proxyVoucherSuccess, proxyVoucherFailure);
-                    
-                } else {
-                        odkTables.addRowWithSurvey(
-                        'registration', 'registration', null, getJSONMapValues());
-                }
-            }
-            odkCommon.removeFirstQueuedAction();
-        }
-
-        function voucherSelfCBFailure(error) {
-            console.log('activeCBFailure called with error: ' + error);
-        }
-
-        function proxyVoucherSuccess(result) {
-            odkData.changeAccessFilterOfRow('registration', 'HIDDEN', user, result.getRowId(0), setVoucherFilterSuccess, setVoucherFilterFailure);
-        }
-
-        function proxyVoucherFailure(error) {
-            console.log('proxy set failure with error: ' + error);
-        }
-
-        function setVoucherFilterSuccess(result) {
-            newVoucherReg = result.getRowId(0);
-            odkData.query('entitlements', 'beneficiary_code = ?', [code], null, null,null, null, null, null, true, entitlementFindSuccess, entitlementFindFailure);
-        }
-
-        function setVoucherFilterFailure(error) {
-            console.log('set filter failure with error: ' + error);
-        }
-
-        function entitlementFindSuccess(result) {
-            for (var i = 0; i < result.getCount() - 1; i++) {
-                odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, result.getRowId(i), voucherEntitlementUpdateSuccess, voucherEntitlementUpdateFailure);
-            }
-            odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, result.getRowId(result.getCount() - 1), finalUpdateSuccess, finalUpdateFailure);
-
-        }
-
-        function entitlementFindFailure(error) {
-            console.log('entitlement find failure with error: ' + error);
-        }
-
-        function voucherEntitlementUpdateSuccess(result) {
-            console.log('update voucher entitlement success');
-        }
-
-        function voucherEntitlementUpdateFailure(error) {
-            console.log('update voucher entitlement failure with error: ' + error);
-        }
-
-        function finalUpdateSuccess(result) {
-            odkTables.editRowWithSurvey('registration', newVoucherReg, 'registration', null)
-        }
-
-        function finalUpdateFailure(error) {
-            console.log('final update failure with error: ' + error);
         }
 
         function regOverrideFunction() {
@@ -398,12 +299,12 @@
         }
 
         function regOverrideBenSuccess(result) {
-            var descriptor;
-                if (type == 'activate') {
-                    descriptor = "Disabled";
-                } else {
-                    descriptor = "Active";
-                }
+            //var descriptor;
+                //if (type == 'activate') {
+                    //descriptor = "Disabled";
+                ////} else {
+                //    descriptor = "Active";
+                //}
             if (result.getCount() == 1) {
                 odkTables.openDetailView('registration', result.getRowId(0),
                     'config/tables/registration/html/registration_detail.html?type=' + encodeURIComponent(type));
@@ -414,7 +315,11 @@
                     [code, queriedType],
                     'config/tables/registration/html/registration_list.html?type=' + encodeURIComponent(type));
             } else {
-                $('#search_results').text('No ' + descriptor + ' Beneficiary Detected');
+                if (type == 'activate') {
+                    $('#search_results').text(odkCommon.localizeText(locale, "no_active_beneficiary"));
+                } else {
+                    $('#search_results').text(odkCommon.localizeText(locale, "no_disabled_beneficiary"));
+                }
             }
         }
 
@@ -429,7 +334,7 @@
                     [code, user],
                     null, null, null, null, null, null, true, benEntOverrideCBSuccess, benEntOverrideCBFailure);
             } else {
-                $('#search_results').text("Please Enter Beneficiary Code");
+                $('#search_results').text(odkCommon.localizeText(locale, "enter_beneficiary_code"));
             }
         }
 
@@ -437,8 +342,7 @@
             if (result.getCount() != 0) {
                 odkData.query('entitlements', 'beneficiary_code = ? and authorization_id = ? and _filter_value = ?', [code, util.getQueryParameter('authorization_id'), user], null, null, null, null, null, null, true, entCheckCBSuccess, entCheckCBFailure);
             } else {
-                $('#search_results').text('Beneficiary code (' + code
-                                      + ') not found in system.');
+                $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
                 odkCommon.removeFirstQueuedAction();
             }
         }
@@ -453,7 +357,7 @@
                             [util.getQueryParameter('authorization_id')],
                             null, null, null, null, null, null, true, createOverrideCBSuccess, createOverrideCBFailure);
             } else {
-                $('#search_results').text(odkCommon.localizeText(locale, alreadyQualifiesOverrideToken));
+                $('#search_results').text(odkCommon.localizeText(locale, "already_qualifies_override"));
             }
         }
 
@@ -462,7 +366,7 @@
         }
 
         function createOverrideCBSuccess(result) {
-            $('#search_results').text(odkCommon.localizeText(locale, eligibleOverrideToken));
+            $('#search_results').text(odkCommon.localizeText(locale, "eligible_override"));
 
             var struct = {};
             struct['authorization_id'] = result.get('_id');
@@ -485,7 +389,7 @@
         var addDistCBSuccess = function(result) {
             console.log('authorizations_detail addDistCBSuccess');
             odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, result.getRowId(0), finalFilterSuccess, finalFilterFailure);
-            $('#search_results').text(odkCommon.localizeText(locale, overrideCreationSuccessToken));
+            $('#search_results').text(odkCommon.localizeText(locale, "override_creation_success"));
         };
 
         var addDistCBFailure = function(error) {

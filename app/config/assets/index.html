@@ -18,11 +18,10 @@
         var overrideToken = "override_path";
         var registrationTitleToken = 'registration_title';
         var deliveryTitleToken = 'delivery_title';
-
+        var locale = odkCommon.getPreferredLocale();
 
         // Displays homescreen
         function display() {
-            var locale = odkCommon.getPreferredLocale();
             $('#title').text(odkCommon.localizeText(locale, titleToken));
 
             var newClient = document.createElement("button");
@@ -32,7 +31,6 @@
                 odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent(odkCommon.localizeText(locale, registrationTitleToken)) + '&type=registration');
             }
             document.getElementById("wrapper").appendChild(newClient);    
-
 
             var followUp = document.createElement("button");
             followUp.innerHTML = odkCommon.localizeText(locale, deliveryToken);
@@ -58,6 +56,7 @@
 
         function rolesCBSuccess(result) {
             var roles = result.getRoles();
+            console.log(roles);
             if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
                 var override = document.createElement("button");
                 override.innerHTML = odkCommon.localizeText(locale, overrideToken);

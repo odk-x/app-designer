@@ -8,8 +8,10 @@
         <script type='text/javascript' src='../../system/js/odkData.js'></script>
         <script type='text/javascript' src='../../system/tables/js/odkTables.js'></script>
         <script type='text/javascript' src='../../config/assets/js/util.js'></script>
+        <script type="text/javascript" src="../../config/assets/commonTranslations.js"></script>
         <script type='text/javascript'>
 
+        var locale = odkCommon.getPreferredLocale();
         // Displays homescreen
         function display() {
             var type = util.getQueryParameter('type');
@@ -17,15 +19,15 @@
             var list = document.createElement('button');
             list.setAttribute('id', 'lists');
             if (type == 'registration') {
-                title.text('Beneficiary Data');
-                list.innerHTML = 'Beneficiary Lists';
+                title.text(odkCommon.localizeText(locale, "beneficiary_data_title"));
+                list.innerHTML = odkCommon.localizeText(locale, "beneficiary_lists");
                 list.onclick = function() {
                   odkTables.launchHTML(
                       'config/assets/beneficiary_lists.html');
                 }
             } else {
-                title.text('Delivery Data');
-                list.innerHTML = 'View All Deliveries';
+                title.text(odkCommon.localizeText(locale, "delivery_data_title"));
+                list.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
                 list.onclick = function() {
                     odkTables.launchHTML(
                         'config/tables/deliveries/html/deliveries_list.html');
@@ -35,7 +37,7 @@
 
             var search = document.createElement('button');
             search.setAttribute('id', 'searcher');
-            search.innerHTML = 'Advanced Search';
+            search.innerHTML = odkCommon.localizeText(locale, "advanced_search");
             search.onclick = function() {
                 odkTables.launchHTML(
                     'config/assets/search.html?type=' + type);

@@ -16,7 +16,9 @@ var authorizationsCBFailure = function(error) {
     console.log('authorizations_list authorizationsCBFailure: ' + error);
 };
 
-var resumeFn = function(fIdxStart) {  
+var resumeFn = function(fIdxStart) { 
+  var locale = odkCommon.getPreferredLocale();
+  $('#title').text(odkCommon.localizeText(locale, 'choose_authorization'));
         odkData.query('authorizations', null, null, null, null,
             null, null, null, null, true, authorizationsCBSuccess, 
             authorizationsCBFailure); 
@@ -44,8 +46,8 @@ var resumeFn = function(fIdxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent('Choose Method')
-                  + '&secondary_manual_title=' + encodeURIComponent('Enter Beneficiary Code')
+                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent(odkCommon.localizeText('choose_method'))
+                  + '&secondary_manual_title=' + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_code'))
                   + '&type=ent_override&authorization_id=' + rowId);
             }
         });

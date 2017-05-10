@@ -4,36 +4,54 @@
 var entitlementsResultSet = {};
 var compStr = 'COMPLETE';
 var timer;
+var locale = odkCommon.getPreferredLocale();
 
 var display = function() {
+  $('#launch').text(odkCommon.localizeText('click_to_deliver'));
+  $('#title').text(odkCommon.localizeText('entitlement_details'));
   odkData.getViewData(cbSuccess, cbFailure);
   console.log('displayed');
 };
 
 var cbSuccess = function (result) {
   entitlementsResultSet = result;
-  $('#authorization_name').text(entitlementsResultSet.get('authorization_name'));
-  $('#item_pack_name').text(entitlementsResultSet.get('item_pack_name'));
-  $('#item_description').text(entitlementsResultSet.get('item_description'));
-  $('#is_override').text(entitlementsResultSet.get('is_override'));
-  $('#beneficiary_code').text(entitlementsResultSet.get('beneficiary_code'));
+  $('#authorization_name').text(odkCommon.localizeText(locale, 'authorization_name') + ": ");
+  $('#item_pack_name').text(odkCommon.localizeText(locale, 'item_pack_name') + ": ");
+  $('#item_description').text(odkCommon.localizeText(locale, 'item_description') + ": ");
+  $('#is_override').text(odkCommon.localizeText(locale, 'is_override') + ": ");
+  $('#beneficiary_code').text(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
+
+
+  $('#inner_authorization_name').text(entitlementsResultSet.get('authorization_name'));
+  $('#inner_item_pack_name').text(entitlementsResultSet.get('item_pack_name'));
+  $('#inner_item_description').text(entitlementsResultSet.get('item_description'));
+  $('#inner_is_override').text(entitlementsResultSet.get('is_override'));
+  $('#inner_beneficiary_code').text(entitlementsResultSet.get('beneficiary_code'));
   updateEntitlements();
             
   var rolesPromise = new Promise(function(resolve, reject) {
       odkData.getRoles(resolve, reject);
   });
 
-  var deliveryPromise = new Promise(function(resolve, reject)) {
+  var deliveryTablePromise = new Promise(function(resolve, reject)) {
     odkData.arbitraryQuery('authorizations', 
-      'SELECT delivery_name FROM authorizations WHERE authorization_id = ?',
-       [entitlementsResultSet.get("authorization_id")],
+      'SELECT delivery_table FROM authorizations WHERE authorization_id = ?',
+       [entitlementsResultSet.get('authorization_id')],
         null, null, resolve, reject);
   }
 
-  Promise.all([rolesPromise, deliveryPromise]).then(function(resultArray) {
+  var deliveryFormPromise = new Promise(function(resolve, reject)) {
+    odkData.arbitraryQuery('authorizations', 
+      'SELECT delivery_form FROM authorizations WHERE authorization_id = ?',
+       [entitlementsResultSet.get('authorization_id')],
+        null, null, resolve, reject);
+  }
+
+  Promise.all([rolesPromise, deliveryTablePromise, deliveryFormPromise]).then(function(resultArray) {
       console.log(resultArray.length);
     var roles = resultArray[0].getRoles();
-    var deliveryName = resultArray[1];
+    var deliveryTable = resultArray[1];
+    var deliveryForm = resultArray[2];
   }
 
   $('#launch').on(
@@ -43,23 +61,10 @@ var cbSuccess = function (result) {
         odkData.addRow(deliveryName, getStructVals(), util.genUUID(), proxyRowSuccess, proxyRowFailure);
       } else if (entitlementsResultSet.get('is_delivered') == 'false') {
           var jsonMap = getJSONMapValues();
-          odkTables.addRowWithSurvey(deliveryName, deliveryName, null, jsonMap);
+          odkTables.addRowWithSurvey(deliveryTable, deliveryForm, null, jsonMap);
       }
     });
 };
-
-/*var rolesSuccess = function(result) {
-  if ($.inArray('ROLE_SUPER_USER_TABLES', result.getRoles()) > -1) {
-    odkData.addRow('deliveries', getStructVals(), util.genUUID(), proxyRowSuccess, proxyRowFailure);
-  } else if (entitlementsResultSet.get('is_delivered') == 'false') {
-      var jsonMap = getJSONMapValues();
-      odkTables.addRowWithSurvey('deliveries', 'deliveries', null, jsonMap);
-  }
-}
-
-var rolesFailure = function(error) {
-  console.log('roles failure with error: ' + error);
-}*/
 
 function proxyRowSuccess(result) {
     console.log('made it!');
@@ -152,6 +157,6 @@ var getJSONMapValues = function() {
 };
 
 var cbFailure = function (error) {
-  console.log('dist_ben_detail cbFailure: getViewData failed with message: ' + error);
+  console.log('entitlements_detail cbFailure: getViewData failed with message: ' + error);
 
 };

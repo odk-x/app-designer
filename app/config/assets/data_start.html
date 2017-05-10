@@ -7,12 +7,16 @@
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../config/assets/commonTranslations.js"></script>
         <script type="text/javascript">
 
+        var locale = odkCommon.getPreferredLocale();
+
         function display() {
+            $('#title').text(odkCommon.localizeText(locale, "data_categories"));
             var benData = document.createElement("button");
             benData.setAttribute("id", "beneficiary");
-            benData.innerHTML = "View Beneficiary Data";
+            benData.innerHTML = odkCommon.localizeText(locale, "view_beneficiary_data");
             benData.onclick = function() {
               odkTables.launchHTML(
                   'config/assets/data_options.html?type=registration');
@@ -21,7 +25,7 @@
 
             var delData = document.createElement("button");
             delData.setAttribute("id", "delivery");
-            delData.innerHTML = "View Delivery Data";
+            delData.innerHTML = odkCommon.localizeText(locale, "view_delivery_data");
             delData.onclick = function() {
               odkTables.launchHTML(
                   'config/assets/data_options.html?type=deliveries');
@@ -35,7 +39,7 @@
 
     <body onload="display();">
         <div id="main">
-            <h1 id="title">Data Categories</h1>
+            <h1 id="title"></h1>
             <div id="wrapper"></div>
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>

@@ -13,7 +13,7 @@ var entitlementsCBSuccess = function(result) {
 
 var entitlementsCBFailure = function(error) {
 
-    console.log('dist_ben_list entitlementsCBFailure: ' + error);
+    console.log('entitlements_list entitlementsCBFailure: ' + error);
 }; 
 
 var resumeFn = function(fIdxStart) {  

@@ -7,6 +7,7 @@
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../config/assets/js/util.js"></script>
+        <script type="text/javascript" src="../../config/assets/commonTranslations.js"></script>
         <script type="text/javascript">
 
         var sqlWhereClause = null;
@@ -14,12 +15,13 @@
         var windowHeight = $(window).innerHeight();
         var search_font;
         var type = util.getQueryParameter('type');
+        var locale = odkCommon.getPreferredLocale();
 
         function start() {
             if (type == 'registration') {
-                $('#title').text('Search for Beneficiaries');                
+                $('#title').text(odkCommon.localizeText(locale, "search_beneficiaries"));                
             } else {
-                $('#title').text('Search for Deliveries');
+                $('#title').text(odkCommon.localizeText(locale, "search_deliveries"));
             }
             odkData.query(type, null, null, null, null, null, null, null, null, null, populateSuccess, populateFailure);
             search_font = $('#search').css('font-size');
@@ -53,18 +55,18 @@
             var label;
             if (type = 'registration') {
                 if (count == 1) {
-                    label = 'beneficiary';
+                    label = odkCommon.localizeText(locale, "beneficiary");
                 } else {
-                    label = 'beneficiaries';
+                    label = odkCommon.localizeText(locale, "beneficiaries");
                 }
             } else {
                 if (count == 1) {
-                    label = 'delivery';
+                    label = odkCommon.localizeText(locale, "delivery");
                 } else {
-                    label = 'deliveries';
+                    label = odkCommon.localizeText(locale, "deliveries");
                 }
             }
-            $('#search_results').text(count + ' ' + label + ' found');
+            $('#search_results').text(count + ' ' + label + ' ' + odkCommon.localizeText(locale, 'found'));
             if (count > 0) {
                 $('#launch').show();
             } else {
@@ -73,7 +75,7 @@
         }
 
         function failureCallbackFn(error) {
-            $('#search_results').text('invalid field');
+            $('#search_results').text(odkCommon.localizeText(locale, "invalid_search"));
             $('#launch').hide();
         }
 
