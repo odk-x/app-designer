@@ -28,7 +28,10 @@
             newClient.innerHTML = odkCommon.localizeText(locale, registrationToken);
             newClient.setAttribute("id", "register");
             newClient.onclick = function() {
-                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent(odkCommon.localizeText(locale, registrationTitleToken)) + '&type=registration');
+                odkTables.launchHTML(null, 
+                    'config/assets/choose_method.html?title='
+                    + encodeURIComponent(odkCommon.localizeText(locale, registrationTitleToken))
+                    + '&type=registration');
             }
             document.getElementById("wrapper").appendChild(newClient);    
 
@@ -36,8 +39,10 @@
             followUp.innerHTML = odkCommon.localizeText(locale, deliveryToken);
             followUp.setAttribute("id", "deliver");
             followUp.onclick = function() {
-                odkTables.launchHTML(
-                    'config/assets/choose_method.html?title=' + encodeURIComponent(odkCommon.localizeText(locale, deliveryTitleToken)) +'&type=delivery');
+                odkTables.launchHTML(null,
+                    'config/assets/choose_method.html?title='
+                    + encodeURIComponent(odkCommon.localizeText(locale, deliveryTitleToken))
+                    +'&type=delivery');
             }
             document.getElementById("wrapper").appendChild(followUp);
 
@@ -45,7 +50,7 @@
             viewData.innerHTML = odkCommon.localizeText(locale, dataToken);
             viewData.setAttribute("id", "data");
             viewData.onclick = function() {
-              odkTables.launchHTML(
+              odkTables.launchHTML(null,
                   'config/assets/data_start.html');
             }
             document.getElementById("wrapper").appendChild(viewData);
@@ -62,7 +67,7 @@
                 override.innerHTML = odkCommon.localizeText(locale, overrideToken);
                 override.setAttribute("id", "overrides");
                 override.onclick = function() {
-                    odkTables.launchHTML(
+                    odkTables.launchHTML(null,
                         'config/assets/overrides_start.html');
                 }
                 document.getElementById("wrapper").appendChild(override);

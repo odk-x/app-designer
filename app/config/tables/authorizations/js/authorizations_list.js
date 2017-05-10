@@ -46,8 +46,11 @@ var resumeFn = function(fIdxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent(odkCommon.localizeText('choose_method'))
-                  + '&secondary_manual_title=' + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_code'))
+                odkTables.launchHTML(null,
+                  'config/assets/choose_method.html?title='
+                  + encodeURIComponent(odkCommon.localizeText('choose_method'))
+                  + '&secondary_manual_title='
+                  + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_code'))
                   + '&type=ent_override&authorization_id=' + rowId);
             }
         });

@@ -19,8 +19,12 @@
             var enableText = odkCommon.localizeText("enable_beneficiary");
             enable.innerHTML = enableText;
             enable.onclick = function() {
-                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent(chooseText) +
-                    '&secondary_manual_title=' + encodeURIComponent(enableText) + '&type=activate');
+                odkTables.launchHTML(null,
+                    'config/assets/choose_method.html?title=' 
+                    + encodeURIComponent(chooseText) 
+                    + '&secondary_manual_title='
+                    + encodeURIComponent(enableText)
+                    + '&type=activate');
             }
             document.getElementById("wrapper").appendChild(enable);    
 
@@ -29,8 +33,12 @@
             var disableText = odkCommon.localizeText("disable_beneficiary");
             disable.innerHTML = disableText;
             disable.onclick = function() {
-                odkTables.launchHTML('config/assets/choose_method.html?title=' + encodeURIComponent(chooseText) +
-                    '&secondary_manual_title=' + encodeURIComponent(disableText) + '&type=disable');
+                odkTables.launchHTML(null,
+                    'config/assets/choose_method.html?title='
+                    + encodeURIComponent(chooseText)
+                    + '&secondary_manual_title='
+                    + encodeURIComponent(disableText)
+                    + '&type=disable');
             }
             document.getElementById("wrapper").appendChild(disable);    
         }
