@@ -5,5 +5,5 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,registration
 Table,default,defaultViewType,string,SPREADSHEET
 Table,default,displayName,object,"{""text"":""Registration""}"
-Table,security,filterTypeOnCreation,string,HIDDEN
+Table,security,defaultAccessOnCreation,string,HIDDEN
 Table,security,unverifiedUserCanCreate,boolean,false

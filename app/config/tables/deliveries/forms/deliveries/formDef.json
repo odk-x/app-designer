@@ -114,40 +114,30 @@
         "_row_num": 6
       }
     ],
-    "Sheet1": [
+    "table_specific_translations": [
       {
         "string_token": "delivery_id",
-        "text": {
-          "default": "Delivery ID"
-        },
+        "text": "Delivery ID",
         "_row_num": 2
       },
       {
         "string_token": "date_time",
-        "text": {
-          "default": "Time of Delivery"
-        },
+        "text": "Time of Delivery",
         "_row_num": 3
       },
       {
         "string_token": "delivery_site",
-        "text": {
-          "default": "Delivery Site"
-        },
+        "text": "Delivery Site",
         "_row_num": 4
       },
       {
         "string_token": "distributor",
-        "text": {
-          "default": "Distributor"
-        },
+        "text": "Distributor",
         "_row_num": 5
       },
       {
         "string_token": "scanned_item_pack",
-        "text": {
-          "default": "Scanned Item Pack"
-        },
+        "text": "Scanned Item Pack",
         "_row_num": 6
       }
     ],
@@ -473,7 +463,7 @@
       {
         "partition": "Table",
         "aspect": "security",
-        "key": "filterTypeOnCreation",
+        "key": "defaultAccessOnCreation",
         "type": "string",
         "value": "HIDDEN",
         "_row_num": 4
@@ -564,13 +554,6 @@
           }
         },
         "_row_num": 5
-      },
-      "Sheet1": {
-        "display": {
-          "title": {
-            "text": "Deliveries"
-          }
-        }
       }
     },
     "choices": {
@@ -594,7 +577,33 @@
       ]
     },
     "table_specific_definitions": {
-      "_tokens": {}
+      "_tokens": {
+        "delivery_id": {
+          "string_token": "delivery_id",
+          "text": "Delivery ID",
+          "_row_num": 2
+        },
+        "date_time": {
+          "string_token": "date_time",
+          "text": "Time of Delivery",
+          "_row_num": 3
+        },
+        "delivery_site": {
+          "string_token": "delivery_site",
+          "text": "Delivery Site",
+          "_row_num": 4
+        },
+        "distributor": {
+          "string_token": "distributor",
+          "text": "Distributor",
+          "_row_num": 5
+        },
+        "scanned_item_pack": {
+          "string_token": "scanned_item_pack",
+          "text": "Scanned Item Pack",
+          "_row_num": 6
+        }
+      }
     },
     "queries": {},
     "calculates": {
@@ -852,56 +861,10 @@
       }
     },
     "section_names": [
-      "Sheet1",
       "initial",
       "survey"
     ],
     "sections": {
-      "Sheet1": {
-        "section_name": "Sheet1",
-        "nested_sections": {},
-        "reachable_sections": {},
-        "prompts": [
-          {
-            "_token_type": "prompt",
-            "type": "contents",
-            "_type": "contents",
-            "_row_num": 2,
-            "_branch_label_enclosing_screen": "Sheet1/_screen2",
-            "promptIdx": 0
-          }
-        ],
-        "validation_tag_map": {
-          "finalize": []
-        },
-        "operations": [
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 2,
-            "operationIdx": 0
-          },
-          {
-            "_row_num": 2,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 1
-          },
-          {
-            "_token_type": "resume",
-            "clause": "resume",
-            "_row_num": 2,
-            "operationIdx": 2
-          }
-        ],
-        "branch_label_map": {
-          "_contents": 1,
-          "_screen2": 1
-        }
-      },
       "survey": {
         "section_name": "survey",
         "nested_sections": {},
@@ -2041,7 +2004,7 @@
       {
         "_partition": "Table",
         "_aspect": "security",
-        "_key": "filterTypeOnCreation",
+        "_key": "defaultAccessOnCreation",
         "_type": "string",
         "_value": "HIDDEN"
       },

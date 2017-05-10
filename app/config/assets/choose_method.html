@@ -201,6 +201,7 @@
         function registrationFunction() {
             console.log('registration function path entered');
             if (superUser) {
+                console.log('is superuser');
                 odkData.query('registration', 'beneficiary_code = ? and _filter_value = ?', [code, user], null, null, null, null, null, null, true, registrationBCheckCBSuccess, 
                             registrationBCheckCBFailure);
             } else {
@@ -214,6 +215,7 @@
             console.log('registrationBCheckCBSuccess called with value' + result);
             if (result.getCount() === 0) {
                 if (superUser) {
+                    console.log('is superuser');
                     odkData.query('entitlements', 'beneficiary_code = ? and _filter_type = ?', [code, "READ_ONLY"], null, null, null, null, null, null, true, registrationVoucherCBSuccess, registrationVoucherCBFailure);
                 } else {
                     odkData.query('entitlements', 'beneficiary_code = ?', [code], null, null,
@@ -221,6 +223,7 @@
                 }
 
             } else {
+
                 $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
                 odkCommon.removeFirstQueuedAction();
             }

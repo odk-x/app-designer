@@ -60,16 +60,12 @@
     "table_specific_translations": [
       {
         "string_token": "authorization_details",
-        "text": {
-          "default": "Authorization Details"
-        },
+        "text": "Authorization Details",
         "_row_num": 2
       },
       {
         "string_token": "choose_authorization",
-        "text": {
-          "default": "Choose an Authorization"
-        },
+        "text": "Choose an Authorization",
         "_row_num": 3
       }
     ],
@@ -127,7 +123,7 @@
       {
         "partition": "Table",
         "aspect": "security",
-        "key": "filterTypeOnCreation",
+        "key": "defaultAccessOnCreation",
         "type": "string",
         "value": "READ_ONLY",
         "_row_num": 3
@@ -238,16 +234,12 @@
       "_tokens": {
         "authorization_details": {
           "string_token": "authorization_details",
-          "text": {
-            "default": "Authorization Details"
-          },
+          "text": "Authorization Details",
           "_row_num": 2
         },
         "choose_authorization": {
           "string_token": "choose_authorization",
-          "text": {
-            "default": "Choose an Authorization"
-          },
+          "text": "Choose an Authorization",
           "_row_num": 3
         }
       }
@@ -904,7 +896,7 @@
       {
         "_partition": "Table",
         "_aspect": "security",
-        "_key": "filterTypeOnCreation",
+        "_key": "defaultAccessOnCreation",
         "_type": "string",
         "_value": "READ_ONLY"
       },
