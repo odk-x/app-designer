@@ -934,28 +934,28 @@
         "query_name": "countries",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place) {\nreturn { data_value: place.name, display: {title: {text: place.name} } };\n}) : []",
         "_row_num": 2
       },
       {
         "query_name": "states",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nreturn { data_value: place.name, display: {title: {text: place.name} } };\n}) : []",
         "_row_num": 3
       },
       {
         "query_name": "regions_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {data_value:region, display: {title: {text: region} } };\n}).value()",
         "_row_num": 4
       },
       {
         "query_name": "countries_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
+        "callback": "_.map(context, function(place){\nreturn {data_value: place.country, region: place.region, display: {title: {text: place.country} } };\n})",
         "_row_num": 5
       },
       {
@@ -1447,28 +1447,28 @@
         "query_name": "countries",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place) {\nreturn { data_value: place.name, display: {title: {text: place.name} } };\n}) : []",
         "_row_num": 2
       },
       "states": {
         "query_name": "states",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nreturn { data_value: place.name, display: {title: {text: place.name} } };\n}) : []",
         "_row_num": 3
       },
       "regions_csv": {
         "query_name": "regions_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {data_value:region, display: {title: {text: region} } };\n}).value()",
         "_row_num": 4
       },
       "countries_csv": {
         "query_name": "countries_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
+        "callback": "_.map(context, function(place){\nreturn {data_value: place.country, region: place.region, display: {title: {text: place.country} } };\n})",
         "_row_num": 5
       },
       "linegraph_csv": {
@@ -2833,13 +2833,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
       },
-      "_owner": {
+      "_row_owner": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_owner",
-        "elementName": "_owner",
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
         "elementSet": "instanceMetadata",
-        "elementPath": "_owner"
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",

@@ -23918,13 +23918,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
       },
-      "_owner": {
+      "_row_owner": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_owner",
-        "elementName": "_owner",
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
         "elementSet": "instanceMetadata",
-        "elementPath": "_owner"
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",

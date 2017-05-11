@@ -25,7 +25,7 @@ dataTablePredefinedColumns: {
                      _sync_state: { type: 'string', isNotNullable: true, 'default': 'new_row', elementSet: 'instanceMetadata' },
                      _conflict_type: { type: 'integer', isNotNullable: false, elementSet: 'instanceMetadata' },
                      _default_access: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
-                     _owner: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
+                     _row_owner: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
                      _group_read_only: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
                      _group_modify: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
                      _group_privileged: { type: 'string', isNotNullable: false, elementSet: 'instanceMetadata' },
