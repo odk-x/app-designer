@@ -224,41 +224,92 @@ window.odkTables = {
     },
 
     openDetailView : function(dispatchStruct, tableId, rowId, relativePath) {
-        if (!this.isString(tableId)) {
-            throw 'openDetailView()--tableId not a string';
-        }
-        if (!this.isString(rowId)) {
-            throw 'openDetailView()--rowId not a string';
-        }
-        if (relativePath !== null &&
-            relativePath !== undefined &&
-			!this.isString(relativePath)) {
-            throw 'openDetailView()--relativePath not a string';
-        }
-				
-		var extrasBundle = { 
-						// appName: // automatically supplied for org.opendatakit activities
-						tableId: tableId,
-						instanceId: rowId,
-						tableDisplayViewType: 'DETAIL',
-						// filename:
-		};
-		
-		if ( relativePath !== null && relativePath !== undefined ) {
-			extrasBundle.filename = relativePath;
-		}
-		
-		var intentArgs = {
-			extras: extrasBundle,
-			// uri:      // set the data field of intent to this
-			// data:     // unless data is supplied -- that takes precedence
-			// type:     // set the intent type to this value
-			// package:  // set the intent package to this value
-		};
-		
-		return odkCommon.doAction( dispatchStruct, 
-						"org.opendatakit.tables.activities.TableDisplayActivity",
-						intentArgs );
+      if (!this.isString(tableId)) {
+        throw 'openDetailView()--tableId not a string';
+      }
+      if (!this.isString(rowId)) {
+        throw 'openDetailView()--rowId not a string';
+      }
+      if (relativePath !== null &&
+          relativePath !== undefined &&
+          !this.isString(relativePath)) {
+        throw 'openDetailView()--relativePath not a string';
+      }
+
+      var extrasBundle = {
+        // appName: // automatically supplied for org.opendatakit activities
+        tableId: tableId,
+        instanceId: rowId,
+        tableDisplayViewType: 'DETAIL',
+        // filename:
+      };
+
+      if ( relativePath !== null && relativePath !== undefined ) {
+        extrasBundle.filename = relativePath;
+      }
+
+      var intentArgs = {
+        extras: extrasBundle,
+        // uri:      // set the data field of intent to this
+        // data:     // unless data is supplied -- that takes precedence
+        // type:     // set the intent type to this value
+        // package:  // set the intent package to this value
+      };
+
+      return odkCommon.doAction( dispatchStruct,
+                                 "org.opendatakit.tables.activities.TableDisplayActivity",
+                                 intentArgs );
+    },
+
+    openDetailWithListView : function(dispatchStruct, tableId, rowId, relativePath) {
+      if (!this.isString(tableId)) {
+        throw 'openDetailWithListView()--tableId not a string';
+      }
+      if (!this.isString(rowId)) {
+        throw 'openDetailWithListView()--rowId not a string';
+      }
+      if (relativePath !== null && relativePath !== undefined &&
+          !this.isString(relativePath)) {
+        throw 'openDetailWithListView()--relativePath not a string';
+      }
+      var extrasBundle = {
+        // appName: // automatically supplied for org.opendatakit activities
+        tableId: tableId,
+        instanceId: rowId,
+        tableDisplayViewType: 'DETAIL_WITH_LIST',
+        // filename:
+      };
+
+      if ( relativePath !== null && relativePath !== undefined ) {
+        extrasBundle.filename = relativePath;
+      }
+
+      var intentArgs = {
+        extras: extrasBundle,
+        // uri:      // set the data field of intent to this
+        // data:     // unless data is supplied -- that takes precedence
+        // type:     // set the intent type to this value
+        // package:  // set the intent package to this value
+      };
+
+      return odkCommon.doAction( dispatchStruct,
+                                 "org.opendatakit.tables.activities.TableDisplayActivity",
+                                 intentArgs );
+    },
+
+    setSubListView : function(tableId, sqlWhereClause,
+                              sqlSelectionArgs, relativePath) {
+      this.assertOpenTypes('setSubListView()',
+                           tableId,
+                           sqlWhereClause,
+                           sqlSelectionArgs,
+                           relativePath);
+      if (arguments.length > 4) {
+        throw 'setSubListView()--too many arguments';
+      }
+
+      odkTablesIf.setSubListView(tableId, sqlWhereClause, sqlSelectionArgs, relativePath);
+
     },
 
     launchHTML : function(dispatchStruct, relativePath) {

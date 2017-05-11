@@ -105,13 +105,13 @@ window.odkData = {
         that.getOdkDataIf().getMostRecentRow(tableId, rowId, req._callbackId);
     },
 
-	changeAccessFilterOfRow: function(tableId, defaultAccess, owner, groupReadOnly, groupModify, 
+	changeAccessFilterOfRow: function(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify, 
         groupPrivileged, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('changeAccessFilterOfRow', successCallbackFn, failureCallbackFn);
 
-    that.getOdkDataIf().changeAccessFilterOfRow(tableId, defaultAccess, owner, groupReadOnly, groupModify,
+    that.getOdkDataIf().changeAccessFilterOfRow(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify,
         groupPrivileged, rowId, req._callbackId);
     },
 	

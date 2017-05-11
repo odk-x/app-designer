@@ -466,7 +466,7 @@ return {
                         locale: reqData.getData(rowCntr, '_locale'),
                         form_id: reqData.getData(rowCntr, '_form_id'),
 						default_access: reqData.getData(rowCntr, '_default_access'),
-						owner: reqData.getData(rowCntr, '_owner'),
+						row_owner: reqData.getData(rowCntr, '_row_owner'),
 						group_read_only: reqData.getData(rowCntr, '_group_read_only'),
 						group_modify: reqData.getData(rowCntr, '_group_modify'),
 						group_privileged: reqData.getData(rowCntr, '_group_privileged'),
