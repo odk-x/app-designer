@@ -9,106 +9,13 @@
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
-        <script type="text/javascript">
-
-        var sqlWhereClause = null;
-        var sqlSelectionArgs = null;
-        var windowHeight = $(window).innerHeight();
-        var search_font;
-        var type = util.getQueryParameter('type');
-        var locale = odkCommon.getPreferredLocale();
-
-        function start() {
-            if (type == 'registration') {
-                $('#title').text(odkCommon.localizeText(locale, "search_beneficiaries"));                
-            } else {
-                $('#title').text(odkCommon.localizeText(locale, "search_deliveries"));
-            }
-            odkData.query(type, null, null, null, null, null, null, null, null, null, populateSuccess, populateFailure);
-            search_font = $('#search').css('font-size');
-        }
-
-        function populateSuccess(result) {
-            var columns = result.getColumns();
-            columns.forEach(addField);
-        }
-
-        function populateFailure(error) {
-            console.log('populateFailure with error: ' + error);
-        }
-
-        function addField(item, index) {
-            if (item.charAt(0) != '_') {
-                $('#field').append($("<option/>").attr("value", item).text(item));
-            } 
-        }
-
-        function search() {
-            sqlWhereClause = document.getElementById('field').value +' = ?';
-            sqlSelectionArgs = document.getElementById('value').value;
-            odkData.query(type, sqlWhereClause, [sqlSelectionArgs],
-            null, null, null, null, null, null, null,
-            successCallbackFn, failureCallbackFn);
-        }
-
-        function successCallbackFn(result) {
-            var count = result.getCount();
-            var label;
-            if (type = 'registration') {
-                if (count == 1) {
-                    label = odkCommon.localizeText(locale, "beneficiary");
-                } else {
-                    label = odkCommon.localizeText(locale, "beneficiaries");
-                }
-            } else {
-                if (count == 1) {
-                    label = odkCommon.localizeText(locale, "delivery");
-                } else {
-                    label = odkCommon.localizeText(locale, "deliveries");
-                }
-            }
-            $('#search_results').text(count + ' ' + label + ' ' + odkCommon.localizeText(locale, 'found'));
-            if (count > 0) {
-                $('#launch').show();
-            } else {
-                $('#launch').hide();
-            }
-        }
-
-        function failureCallbackFn(error) {
-            $('#search_results').text(odkCommon.localizeText(locale, "invalid_search"));
-            $('#launch').hide();
-        }
-
-        function launch() {
-            odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' + type + '/html/' + type + '_list.html');
-        }
-
-        $(window).resize(function() {
-            helper('search', search_font, 'font-size');
-            windowHeight = $(window).innerHeight(); 
-
-        });
-
-        function helper(name, value, attribute) {
-           var viewportHeight = $(window).innerHeight();
-            if (viewportHeight < windowHeight) {
-                console.log('set ' + name + '\'s ' + attribute + ' to ' + value);
-                if (attribute == 'height') {
-                    $('#' + name).css({'height':value});
-                } else {
-                    $('#' + name).css({'font-size':value});
-                }
-            }
-        }
-        
-        </script>
+        <script type="text/javascript" src="js/renderers/search.js"></script>
     </head>
 
     <body>
         <div id="main">
             <h1 id="title"></h1>
-            <form>    
+            <form>
                 <select id="field"></select>
             </form>
             <form>
@@ -117,9 +24,11 @@
             <button type="reg" id="search" onclick="search()">Search</button>
             <br>
             <p id="search_results"></p>
-            <button type = 'reg' id='launch' style='display:none;' onclick='launch()'>View Matching Deliveries</button>
+            <button type = 'reg' id='launch' style='display:none;' onclick='launch()'>
+                View Matching Deliveries
+            </button>
             <script>
-              $(start);
+                $(start);
             </script>
         </div>
     </body>

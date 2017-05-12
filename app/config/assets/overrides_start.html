@@ -9,34 +9,7 @@
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
-        <script type="text/javascript">
-
-        var locale = odkCommon.getPreferredLocale();
-
-        // Displays homescreen
-        function display() {
-            $('#title').text(odkCommon.localizeText(locale, "override_options"));
-            var override_registration = document.createElement("button");
-            override_registration.setAttribute("id", "registration");
-            override_registration.innerHTML = odkCommon.localizeText(locale, "override_registration");
-            override_registration.onclick = function() {
-                odkTables.launchHTML(null,
-                    'config/assets/overrides_registration_start.html');
-            };
-            document.getElementById("wrapper").appendChild(override_registration);    
-
-            var override_entitlement = document.createElement("button");
-            override_entitlement.setAttribute("id", "authorization");
-            override_entitlement.innerHTML = odkCommon.localizeText(locale, "override_entitlement");;
-            override_entitlement.onclick = function() {
-              odkTables.launchHTML(null,
-                  'config/tables/authorizations/html/authorizations_list.html');
-            }
-            document.getElementById("wrapper").appendChild(override_entitlement);    
-        }
-            
-        
-        </script>
+        <script type="text/javascript" src="js/renderers/overrides_start.js"></script>
     </head>
 
     <body>
@@ -46,7 +19,7 @@
         </div>
         <div id="logo"><img src="img/small_2025.jpg"></div>
         <script>
-          $(display);
+            $(display);
         </script>
     </body>
 </html>

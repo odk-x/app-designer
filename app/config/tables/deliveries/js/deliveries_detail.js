@@ -3,7 +3,6 @@
  */
 'use strict';
 
- 
 var deliveriesResultSet = {};
 
 function cbSuccess(result) {

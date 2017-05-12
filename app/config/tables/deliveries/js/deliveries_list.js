@@ -3,11 +3,11 @@
  */
 
 'use strict';
- 
+
 var idxStart = -1;
 var deliveriesResultSet = {};
-            
-/** 
+
+/**
  * Use chunked list view for larger tables: We want to chunk the displays so
  * that there is less load time.
  */
@@ -26,7 +26,7 @@ var deliveriesCBSuccess = function(result) {
 var deliveriesCBFailure = function(error) {
 
     console.log('deliveries_list deliveriesCBFailure: ' + error);
-}; 
+};
 
 var firstLoad = function() {
   resumeFn(0);
@@ -35,7 +35,7 @@ var firstLoad = function() {
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
-var resumeFn = function(fIdxStart) {  
+var resumeFn = function(fIdxStart) {
     odkData.getViewData(deliveriesCBSuccess, deliveriesCBFailure);
 
     idxStart = fIdxStart;
@@ -71,7 +71,7 @@ var resumeFn = function(fIdxStart) {
         });
     }
 };
-            
+
 /**
  * Displays the list view in chunks or groups. Number of list entries per chunk
  * can be modified. The list view is designed so that each row in the table is
@@ -96,13 +96,13 @@ var displayGroup = function(idxStart) {
       /*var first_name = deliveriesResultSet.getData(i, 'first_name');
       var last_name = deliveriesResultSet.getData(i, 'last_name');
       item.text(first_name + ' ' + last_name);*/
-              
+
       /* Creates arrow icon (Nothing to edit here) */
       var chevron = $('<img>');
       chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
       chevron.attr('class', 'chevron');
       item.append(chevron);
-              
+
       /**
        * Adds other data/details in item space.
        * Replace COLUMN_NAME with the column whose data you want to display

@@ -14,13 +14,13 @@ var entitlementsCBSuccess = function(result) {
 var entitlementsCBFailure = function(error) {
 
     console.log('entitlements_list entitlementsCBFailure: ' + error);
-}; 
+};
 
 var firstLoad = function() {
   resumeFn(0);
 };
 
-var resumeFn = function(fIdxStart) {  
+var resumeFn = function(fIdxStart) {
     odkData.getViewData(entitlementsCBSuccess, entitlementsCBFailure);
 
     idxStart = fIdxStart;
@@ -68,7 +68,7 @@ var displayGroup = function(idxStart) {
       item.attr('id', entitlementsResultSet.getRowId(i));
       var auth_name = entitlementsResultSet.getData(i, 'authorization_name');
       item.text(auth_name);
-              
+
       /* Creates arrow icon (Nothing to edit here) */
       var chevron = $('<img>');
       chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));

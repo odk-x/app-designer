@@ -1,6 +1,5 @@
 'use strict';
 
- 
 var entitlementsResultSet = {};
 var compStr = 'COMPLETE';
 var timer;
@@ -28,20 +27,20 @@ var cbSuccess = function (result) {
   $('#inner_is_override').text(entitlementsResultSet.get('is_override'));
   $('#inner_beneficiary_code').text(entitlementsResultSet.get('beneficiary_code'));
   updateEntitlements();
-            
+
   var rolesPromise = new Promise(function(resolve, reject) {
       odkData.getRoles(resolve, reject);
   });
 
   var deliveryTablePromise = new Promise(function(resolve, reject)) {
-    odkData.arbitraryQuery('authorizations', 
+    odkData.arbitraryQuery('authorizations',
       'SELECT delivery_table FROM authorizations WHERE authorization_id = ?',
        [entitlementsResultSet.get('authorization_id')],
         null, null, resolve, reject);
   }
 
   var deliveryFormPromise = new Promise(function(resolve, reject)) {
-    odkData.arbitraryQuery('authorizations', 
+    odkData.arbitraryQuery('authorizations',
       'SELECT delivery_form FROM authorizations WHERE authorization_id = ?',
        [entitlementsResultSet.get('authorization_id')],
         null, null, resolve, reject);
@@ -68,8 +67,8 @@ var cbSuccess = function (result) {
 
 function proxyRowSuccess(result) {
     console.log('made it!');
-    odkData.changeAccessFilterOfRow('deliveries', 'HIDDEN', 
-      entitlementsResultSet.get('_filter_value'), 
+    odkData.changeAccessFilterOfRow('deliveries', 'HIDDEN',
+      entitlementsResultSet.get('_filter_value'),
       result.getRowId(0), setFilterSuccess, setFilterFailure);
 }
 
@@ -152,7 +151,7 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'is_override', entitlementsResultSet.get('is_override'));
   setJSONMap(jsonMap, 'ranges', entitlementsResultSet.get('ranges'));
   setJSONMap(jsonMap, 'assigned_code', entitlementsResultSet.get('assigned_code'));
-  jsonMap = JSON.stringify(jsonMap);    
+  jsonMap = JSON.stringify(jsonMap);
   return jsonMap;
 };
 

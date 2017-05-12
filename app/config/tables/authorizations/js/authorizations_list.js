@@ -20,12 +20,12 @@ var firstLoad = function() {
   resumeFn(0);
 };
 
-var resumeFn = function(fIdxStart) { 
+var resumeFn = function(fIdxStart) {
   var locale = odkCommon.getPreferredLocale();
   $('#title').text(odkCommon.localizeText(locale, 'choose_authorization'));
         odkData.query('authorizations', null, null, null, null,
-            null, null, null, null, true, authorizationsCBSuccess, 
-            authorizationsCBFailure); 
+            null, null, null, null, true, authorizationsCBSuccess,
+            authorizationsCBFailure);
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
@@ -75,7 +75,7 @@ var displayGroup = function(idxStart) {
       item.attr('class', 'item_space');
       var auth_name = authorizationsResultSet.getData(i, 'authorization_name');
       item.text(auth_name);
-              
+
       /* Creates arrow icon (Nothing to edit here) */
       var chevron = $('<img>');
       chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
