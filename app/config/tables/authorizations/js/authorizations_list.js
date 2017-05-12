@@ -16,6 +16,10 @@ var authorizationsCBFailure = function(error) {
     console.log('authorizations_list authorizationsCBFailure: ' + error);
 };
 
+var firstLoad = function() {
+  resumeFn(0);
+};
+
 var resumeFn = function(fIdxStart) { 
   var locale = odkCommon.getPreferredLocale();
   $('#title').text(odkCommon.localizeText(locale, 'choose_authorization'));

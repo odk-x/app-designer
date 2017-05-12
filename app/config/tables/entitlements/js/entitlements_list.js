@@ -16,6 +16,10 @@ var entitlementsCBFailure = function(error) {
     console.log('entitlements_list entitlementsCBFailure: ' + error);
 }; 
 
+var firstLoad = function() {
+  resumeFn(0);
+};
+
 var resumeFn = function(fIdxStart) {  
     odkData.getViewData(entitlementsCBSuccess, entitlementsCBFailure);
 

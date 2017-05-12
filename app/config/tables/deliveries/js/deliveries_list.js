@@ -26,7 +26,12 @@ var deliveriesCBSuccess = function(result) {
 var deliveriesCBFailure = function(error) {
 
     console.log('deliveries_list deliveriesCBFailure: ' + error);
-};           
+}; 
+
+var firstLoad = function() {
+  resumeFn(0);
+};
+
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
