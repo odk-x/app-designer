@@ -61,7 +61,7 @@ var cbSuccess = function (result) {
         odkData.addRow(deliveryName, getStructVals(), util.genUUID(), proxyRowSuccess, proxyRowFailure);
       } else if (entitlementsResultSet.get('is_delivered') == 'false') {
           var jsonMap = getJSONMapValues();
-          odkTables.addRowWithSurvey(deliveryTable, deliveryForm, null, jsonMap);
+          odkTables.addRowWithSurvey(null, deliveryTable, deliveryForm, null, jsonMap);
       }
     });
 };
@@ -78,7 +78,7 @@ function proxyRowFailure(error) {
 }
 
 function setFilterSuccess(result) {
-    odkTables.editRowWithSurvey('deliveries', result.getRowId(0), 'deliveries', null);
+    odkTables.editRowWithSurvey(null, 'deliveries', result.getRowId(0), 'deliveries', null);
     console.log('set filter success');
 }
 

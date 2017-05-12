@@ -32,6 +32,7 @@
                 idComponent = "&authorization_id=" + encodeURIComponent(util.getQueryParameter('authorization_id'));
                 $('#view_details').on('click', function() {
                    odkTables.openDetailView(
+                  null,
                   'authorizations',
                   util.getQueryParameter('authorization_id'),
                   'config/tables/authorizations/html/authorizations_detail.html');
@@ -157,6 +158,7 @@
                 }
             } else if (result.getCount() === 1) {
                     odkTables.openDetailView(
+                  null,
                   'registration',
                   result.getRowId(0),
                   'config/tables/registration/html/registration_detail.html?type=' + type);
@@ -172,6 +174,7 @@
                     vals = [code,'true'];
                 }
                 odkTables.openTableToListView(
+                null,
                 'registration', params, vals
                 , 'config/tables/registration/html/registration_list.html?type=' + type);
                 odkCommon.removeFirstQueuedAction();                
@@ -248,7 +251,7 @@
                     var jsonMap = {};
                     setJSONMap(jsonMap, 'beneficiary_code', code);
                     jsonMap = JSON.stringify(jsonMap);
-                    odkTables.addRowWithSurvey('registration', 'registration', null, jsonMap);
+                    odkTables.addRowWithSurvey(null, 'registration', 'registration', null, jsonMap);
                 }
                 odkCommon.removeFirstQueuedAction();
                 }, 1000);
@@ -267,7 +270,7 @@
         }
 
         function setFilterSuccess(result) {
-            odkTables.editRowWithSurvey('registration', result.getRowId(0), 'registration', null);
+            odkTables.editRowWithSurvey(null, 'registration', result.getRowId(0), 'registration', null);
         }
 
         function setFilterFailure(error) {
@@ -308,10 +311,11 @@
                 //    descriptor = "Active";
                 //}
             if (result.getCount() == 1) {
-                odkTables.openDetailView('registration', result.getRowId(0),
+                odkTables.openDetailView(null, 'registration', result.getRowId(0),
                     'config/tables/registration/html/registration_detail.html?type=' + encodeURIComponent(type));
             } else if (result.getCount() > 1) {
                 odkTables.openTableToListView(
+                    null,
                     'registration',
                     'beneficiary_code = ? and is_active = ?',
                     [code, queriedType],

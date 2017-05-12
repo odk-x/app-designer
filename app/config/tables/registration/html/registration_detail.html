@@ -98,6 +98,7 @@
                     'click',
                     function() {
                         odkTables.openTableToListView(
+                            null,
                             'entitlements',
                             'beneficiary_code = ? and is_delivered = ?', [registrationResultSet.get('beneficiary_code'), 'false'],
                             'config/tables/entitlements/html/entitlements_list.html'
