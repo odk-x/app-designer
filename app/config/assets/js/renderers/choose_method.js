@@ -6,6 +6,7 @@
 var insideQueue = false;
 var htmlFileNameValue = "delivery_start";
 var userActionValue = "launchBarcode";
+var barcodeSessionVariable = "barcodeVal";
 var myTimeoutVal = null;
 var idComponent = "";
 var user;
@@ -18,6 +19,11 @@ function display() {
     $('#view_details').text(odkCommon.localizeText(locale, "view_authorization_details"));
     $('#barcode').text(odkCommon.localizeText(locale, "scan_barcode"));
     $('#search').text(odkCommon.localizeText(locale, "enter"));
+
+    var barcodeVal = odkCommon.getSessionVariable(barcodeSessionVariable);
+    if (barcodeVal != null && barcodeVal != undefined) {
+        $('#code').val(barcodeVal);
+    }
 
     var localizedUser = odkCommon.localizeText(locale, "select_user");
     $('#choose_user').hide();
@@ -70,11 +76,8 @@ function display() {
 
         $('#barcode').on('click', function() {
             window.localStorage.setItem('odk_user', $('#choose_user').val());
-            odkCommon.registerListener(function() {
-                callBackFn();
-            });
-            var dispatchString = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
-            odkCommon.doAction(dispatchString, 'com.google.zxing.client.android.SCAN', null);
+            var dispatchStruct = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
+            odkCommon.doAction(dispatchStruct, 'com.google.zxing.client.android.SCAN', null);
         });
         myTimeoutVal = setTimeout(callBackFn(), 1000);
 
@@ -85,6 +88,14 @@ function display() {
     }, function(err) {
         console.log('promise failure with error: ' + err);
     });
+
+    odkCommon.registerListener(function() {
+        callBackFn();
+    });
+
+    // Call the registered callback in case the notification occured before the page finished
+    // loading
+    callBackFn();
 }
 
 function addOption(item, index) {
@@ -94,22 +105,36 @@ function addOption(item, index) {
 }
 
 function callBackFn () {
-    if (insideQueue == true) return;
-    insideQueue = true;
-    var value = odkCommon.viewFirstQueuedAction();
-    console.log('callback entered with value: ' + value);
-    if ( value !== null && value !== undefined ) {
-        var action = JSON.parse(value);
-        var dispatchStr = JSON.parse(action.dispatchString);
+    var action = odkCommon.viewFirstQueuedAction();
+    console.log('callback entered with action: ' + action);
+    if ( action !== null && action !== undefined ) {
+        var dispatchStr = JSON.parse(action.dispatchStruct);
+        if (dispatchStr === null || dispatchStr === undefined) {
+            console.log('Error: missing dispatch struct');
+            return;
+        }
 
-        console.log("callBackFn: action: " + dispatchStr.userAction + " htmlPath: " + dispatchStr.htmlPath);
+        var actionStr = dispatchStr["userAction"];
+        if (actionStr === null || actionStr === undefined ||
+            !(actionStr === userActionValue)) {
+            console.log('Error: missing or incorrect action string' + actionStr);
+            return;
+        }
 
-        if (dispatchStr.userAction === userActionValue &&
-            dispatchStr.htmlPath === htmlFileNameValue &&
-            action.jsonValue.status === -1) {
+        var htmlPath = dispatchStr["htmlPath"];
+        if (htmlPath === null || htmlPath === undefined ||
+            !(htmlPath === htmlFileNameValue)) {
+            console.log('Error: missing or incorrect htmlPath string' + htmlPath);
+            return;
+        }
+
+        console.log("callBackFn: action: " + actionStr + " htmlPath: " + htmlPath);
+
+        if (action.jsonValue.status === -1) {
             clearTimeout(myTimeoutVal);
             var scanned = action.jsonValue.result.SCAN_RESULT;
             $('#code').val(scanned);
+            odkCommon.setSessionVariable(barcodeSessionVariable, scanned);
             odkCommon.removeFirstQueuedAction();
             queryChain(action.jsonValue.result.SCAN_RESULT);
         }
@@ -162,7 +187,6 @@ function deliveryBCheckCBSuccess(result) {
                                  'registration',
                                  result.getRowId(0),
                                  'config/tables/registration/html/registration_detail.html?type=' + type);
-        odkCommon.removeFirstQueuedAction();
     } else {
         var params;
         var vals;
@@ -177,7 +201,6 @@ function deliveryBCheckCBSuccess(result) {
                                       null,
                                       'registration', params, vals
                                       , 'config/tables/registration/html/registration_list.html?type=' + type);
-        odkCommon.removeFirstQueuedAction();
     }
 }
 
@@ -193,7 +216,6 @@ function deliveryDisabledCBSuccess(result) {
         $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
 
     }
-    odkCommon.removeFirstQueuedAction();
 }
 
 function deliveryDisabledCBFailure(error) {
