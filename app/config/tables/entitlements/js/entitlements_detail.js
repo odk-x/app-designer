@@ -1,5 +1,8 @@
 'use strict';
 
+var actionTypeKey = "actionTypeKey";
+var actionAddDelivery = 0;
+var actionEditDelivery = 1;
 var entitlementsResultSet = {};
 var compStr = 'COMPLETE';
 var timer;
@@ -8,9 +11,44 @@ var locale = odkCommon.getPreferredLocale();
 var display = function() {
   $('#launch').text(odkCommon.localizeText('click_to_deliver'));
   $('#title').text(odkCommon.localizeText('entitlement_details'));
+
+  odkCommon.registerListener(function() {
+      actionCBFn();
+  });
+  actionCBFn();
+
   odkData.getViewData(cbSuccess, cbFailure);
   console.log('displayed');
 };
+
+function actionCBFn() {
+    var action = odkCommon.viewFirstQueuedAction();
+    console.log('callback entered with action: ' + action);
+
+    if (action === null || action === undefined) {
+        // The queue is empty
+        return;
+    }
+
+    var dispatchStr = JSON.parse(action.dispatchStruct);
+    if (dispatchStr === null || dispatchStr === undefined) {
+        console.log('Error: missing dispatch strct');
+        return;
+    }
+
+    var actionType = dipatchStr[actionTypeKey];
+    switch (actionType) {
+        case actionAddDelivery:
+            console.log("TODO: LAUNCH DETAIL VIEW add delivery");
+            break;
+        case actionEditDelivery:
+            console.log("TODO: What do we do here? Probably launch detail view (edit delivery)");
+            break;
+        default:
+            console.log("Error: unrecognized action type in callback");
+    }
+
+}
 
 var cbSuccess = function (result) {
   entitlementsResultSet = result;
@@ -60,7 +98,8 @@ var cbSuccess = function (result) {
         odkData.addRow(deliveryName, getStructVals(), util.genUUID(), proxyRowSuccess, proxyRowFailure);
       } else if (entitlementsResultSet.get('is_delivered') == 'false') {
           var jsonMap = getJSONMapValues();
-          odkTables.addRowWithSurvey(null, deliveryTable, deliveryForm, null, jsonMap);
+          var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery});
+          odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
       }
     });
 };
@@ -77,7 +116,8 @@ function proxyRowFailure(error) {
 }
 
 function setFilterSuccess(result) {
-    odkTables.editRowWithSurvey(null, 'deliveries', result.getRowId(0), 'deliveries', null);
+    var dispatchStruct = JSON.stringify({actionTypeKey: actionEditDelivery});
+    odkTables.editRowWithSurvey(dispatchStruct, 'deliveries', result.getRowId(0), 'deliveries', null);
     console.log('set filter success');
 }
 

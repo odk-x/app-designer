@@ -3,10 +3,13 @@
  */
 'use strict';
 
-var insideQueue = false;
+var actionTypeKey = "actionTypeKey";
+var actionBarcode = 0;
+var actionRegistration = 1;
 var htmlFileNameValue = "delivery_start";
 var userActionValue = "launchBarcode";
 var barcodeSessionVariable = "barcodeVal";
+var chooseListSessionVariable = "chooseList";
 var myTimeoutVal = null;
 var idComponent = "";
 var user;
@@ -23,7 +26,7 @@ function display() {
     $('#search').text(odkCommon.localizeText(locale, "enter"));
 
     var barcodeVal = odkCommon.getSessionVariable(barcodeSessionVariable);
-    if (barcodeVal != null && barcodeVal != undefined) {
+    if (barcodeVal !== null && barcodeVal !== undefined) {
         $('#code').val(barcodeVal);
     }
 
@@ -67,6 +70,8 @@ function display() {
             users.forEach(addOption);
             $('#choose_user').append($("<option/>").attr("value", localizedUser).attr('selected', true).text(localizedUser));
             $('#choose_user').on('change', function() {
+                user = $('#choose_user').val();
+
                 if ($('#choose_user').val() != localizedUser) {
                     $('#barcode').prop("disabled", false).removeClass('disabled');
                     $('#search').prop("disabled", false).removeClass('disabled');
@@ -81,7 +86,8 @@ function display() {
 
         $('#barcode').on('click', function() {
             window.localStorage.setItem('odk_user', $('#choose_user').val());
-            var dispatchStruct = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
+            var dispatchStruct = JSON.stringify({actionTypeKey: actionBarcode,
+                htmlPath:htmlFileNameValue, userAction:userActionValue});
             odkCommon.doAction(dispatchStruct, 'com.google.zxing.client.android.SCAN', null);
         });
         myTimeoutVal = setTimeout(callBackFn(), 1000);
@@ -112,38 +118,65 @@ function addOption(item, index) {
 function callBackFn () {
     var action = odkCommon.viewFirstQueuedAction();
     console.log('callback entered with action: ' + action);
-    if ( action !== null && action !== undefined ) {
-        var dispatchStr = JSON.parse(action.dispatchStruct);
-        if (dispatchStr === null || dispatchStr === undefined) {
-            console.log('Error: missing dispatch struct');
-            return;
-        }
 
-        var actionStr = dispatchStr["userAction"];
-        if (actionStr === null || actionStr === undefined ||
-            !(actionStr === userActionValue)) {
-            console.log('Error: missing or incorrect action string' + actionStr);
-            return;
-        }
-
-        var htmlPath = dispatchStr["htmlPath"];
-        if (htmlPath === null || htmlPath === undefined ||
-            !(htmlPath === htmlFileNameValue)) {
-            console.log('Error: missing or incorrect htmlPath string' + htmlPath);
-            return;
-        }
-
-        console.log("callBackFn: action: " + actionStr + " htmlPath: " + htmlPath);
-
-        if (action.jsonValue.status === -1) {
-            clearTimeout(myTimeoutVal);
-            var scanned = action.jsonValue.result.SCAN_RESULT;
-            $('#code').val(scanned);
-            odkCommon.setSessionVariable(barcodeSessionVariable, scanned);
-            odkCommon.removeFirstQueuedAction();
-            queryChain(action.jsonValue.result.SCAN_RESULT);
-        }
+    if (action === null || action === undefined) {
+        // The queue is empty
+        return;
     }
+
+    var dispatchStr = JSON.parse(action.dispatchStruct);
+    if (dispatchStr === null || dispatchStr === undefined) {
+        console.log('Error: missing dispatch struct');
+        return;
+    }
+
+    var actionType = dispatchStr[actionTypeKey];
+    switch (actionType) {
+        case actionBarcode:
+            handleBarcodeCallback(action, dispatchStr);
+            break;
+        case actionRegistration:
+            handleRegistrationCallback(action, dispatchStr);
+            break;
+        default:
+            console.log("Error: unrecognized action type in callback");
+            break;
+    }
+}
+
+function handleBarcodeCallback(action, dispatchStr) {
+
+    var actionStr = dispatchStr["userAction"];
+    if (actionStr === null || actionStr === undefined ||
+        !(actionStr === userActionValue)) {
+        console.log('Error: missing or incorrect action string' + actionStr);
+        return;
+    }
+
+    var htmlPath = dispatchStr["htmlPath"];
+    if (htmlPath === null || htmlPath === undefined ||
+        !(htmlPath === htmlFileNameValue)) {
+        console.log('Error: missing or incorrect htmlPath string' + htmlPath);
+        return;
+    }
+
+    console.log("callBackFn: action: " + actionStr + " htmlPath: " + htmlPath);
+
+    if (action.jsonValue.status === -1) {
+        clearTimeout(myTimeoutVal);
+        var scanned = action.jsonValue.result.SCAN_RESULT;
+        $('#code').val(scanned);
+        odkCommon.setSessionVariable(barcodeSessionVariable, scanned);
+        odkCommon.removeFirstQueuedAction();
+        queryChain(action.jsonValue.result.SCAN_RESULT);
+    }
+}
+
+function handleRegistrationCallback(action, dispatchStr) {
+
+    console.log("Registration Action occured");
+    odkCommon.removeFirstQueuedAction();
+
 }
 
 function queryChain(passed_code) {
@@ -259,7 +292,6 @@ function registrationBCheckCBSuccess(result) {
     } else {
 
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
-        odkCommon.removeFirstQueuedAction();
     }
 }
 
@@ -268,7 +300,7 @@ function registrationBCheckCBFailure(error) {
 }
 
 function registrationVoucherCBSuccess(result) {
-    voucherResultSet = result;
+    var voucherResultSet = result;
     if (voucherResultSet.getCount() == 0) {
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_available"));
     } else {
@@ -282,10 +314,9 @@ function registrationVoucherCBSuccess(result) {
         } else {
             var jsonMap = {};
             setJSONMap(jsonMap, 'beneficiary_code', code);
-            jsonMap = JSON.stringify(jsonMap);
-            odkTables.addRowWithSurvey(null, 'registration', 'registration', null, jsonMap);
+            var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration});
+            odkTables.addRowWithSurvey(dispatchStruct, 'registration', 'registration', null, jsonMap);
         }
-        odkCommon.removeFirstQueuedAction();
     }, 1000);
 }
 
@@ -303,7 +334,8 @@ function proxyRowFailure(error) {
 }
 
 function setFilterSuccess(result) {
-    odkTables.editRowWithSurvey(null, 'registration', result.getRowId(0), 'registration', null);
+    var dispatchStruct = JSON.stringify({actionTypeKey: registration});
+    odkTables.editRowWithSurvey(dispatchStruct, 'registration', result.getRowId(0), 'registration', null);
 }
 
 function setFilterFailure(error) {
@@ -312,14 +344,13 @@ function setFilterFailure(error) {
 
 function setJSONMap(JSONMap, key, value) {
     if (value !== null && value !== undefined) {
-        JSONMap[key] = JSON.stringify(value);
+        JSONMap[key] = value;
     }
 }
 
 function getJSONMapValues() {
     var jsonMap = {};
     setJSONMap(jsonMap, 'beneficiary_code', code);
-    jsonMap = JSON.stringify(jsonMap);
     return jsonMap;
 }
 
@@ -389,7 +420,6 @@ function benEntOverrideCBSuccess(result) {
                       null, true, entCheckCBSuccess, entCheckCBFailure);
     } else {
         $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
-        odkCommon.removeFirstQueuedAction();
     }
 }
 
