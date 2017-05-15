@@ -12,6 +12,7 @@ var registrationResultSet = {};
  */
 var registrationCBSuccess = function(result) {
     registrationResultSet = result;
+    console.log(result.getCount());
 
     return (function() {
         displayGroup(idxStart);

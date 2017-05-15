@@ -2,13 +2,20 @@
 
 var idxStart = -1;
 var authorizationsResultSet = {};
+var locale;
 
 var authorizationsCBSuccess = function(result) {
     authorizationsResultSet = result;
-
-    return (function() {
+    locale = odkCommon.getPreferredLocale();
+    if (authorizationsResultSet.getCount() == 0) {
+      $('#title').text(odkCommon.localizeText(locale, 'no_authorizations'));
+      return null;
+    } else {
+      $('#title').text(odkCommon.localizeText(locale, 'choose_authorization'));
+      return (function() {
         displayGroup(idxStart);
-    }());
+      }());
+    }
 };
 
 var authorizationsCBFailure = function(error) {
@@ -21,11 +28,11 @@ var firstLoad = function() {
 };
 
 var resumeFn = function(fIdxStart) {
-  var locale = odkCommon.getPreferredLocale();
-  $('#title').text(odkCommon.localizeText(locale, 'choose_authorization'));
-        odkData.query('authorizations', null, null, null, null,
+  odkData.query('authorizations', null, null, null, null,
             null, null, null, null, true, authorizationsCBSuccess,
             authorizationsCBFailure);
+  
+  
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
@@ -52,7 +59,7 @@ var resumeFn = function(fIdxStart) {
                 // we'll pass null as the relative path to use the default file
                 odkTables.launchHTML(null,
                   'config/assets/choose_method.html?title='
-                  + encodeURIComponent(odkCommon.localizeText('choose_method'))
+                  + encodeURIComponent(odkCommon.localizeText(locale, 'choose_method'))
                   + '&secondary_manual_title='
                   + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_code'))
                   + '&type=ent_override&authorization_id=' + rowId);

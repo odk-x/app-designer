@@ -51,7 +51,7 @@
         "_row_num": 8
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/agriculture/forms/agriculture/',null)",
+        "url": "'?' + opendatakit.getHashString('agriculture')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -69,7 +69,7 @@
         "_row_num": 11
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/geotagger/forms/geotagger/',null)",
+        "url": "'?' + opendatakit.getHashString('geotagger')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -87,7 +87,7 @@
         "_row_num": 14
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/breathcounter/forms/breathcounter/',null)",
+        "url": "'?' + odkSurvey.getHashString('breathcounter')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -105,7 +105,7 @@
         "_row_num": 17
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/complex_validate_test/forms/complex_validate_test/',null)",
+        "url": "'?' + odkSurvey.getHashString('complex_validate_test')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -123,7 +123,7 @@
         "_row_num": 20
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/customAppearance/forms/customAppearance/',null)",
+        "url": "'?' + odkSurvey.getHashString('customAppearance')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -141,7 +141,7 @@
         "_row_num": 23
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/exampleForm/forms/exampleForm/',null)",
+        "url": "'?' + odkSurvey.getHashString('exampleForm')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -159,7 +159,7 @@
         "_row_num": 26
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/household/forms/household/',null)",
+        "url": "'?' + odkSurvey.getHashString('household')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -177,7 +177,7 @@
         "_row_num": 29
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/imnci/forms/imnci_test/',null)",
+        "url": "'?' + odkSurvey.getHashString('imnci','imnci_test')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -195,7 +195,7 @@
         "_row_num": 32
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/refrigerators/forms/refrigerators_init/',null)",
+        "url": "'?' +  odkSurvey.getHashString('refrigerators','refrigerators_init')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -213,7 +213,7 @@
         "_row_num": 35
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/refrigerators/forms/refrigerators_update/',null)",
+        "url": "'?' +  odkSurvey.getHashString('refrigerators','refrigerators_update')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -231,7 +231,7 @@
         "_row_num": 38
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/section_test/forms/section_test/',null)",
+        "url": "'?' +  odkSurvey.getHashString('section_test')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -249,7 +249,7 @@
         "_row_num": 41
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/selects/forms/selects/',null)",
+        "url": "'?' +  odkSurvey.getHashString('selects')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -267,7 +267,7 @@
         "_row_num": 44
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/twoColumn/forms/twoColumn/',null)",
+        "url": "'?' +  odkSurvey.getHashString('twoColumn')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -285,7 +285,7 @@
         "_row_num": 47
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/gridScreen/forms/gridScreen/',null)",
+        "url": "'?' +  odkSurvey.getHashString('gridScreen')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -303,7 +303,7 @@
         "_row_num": 50
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/adult_coverage/forms/adult_coverage/',null)",
+        "url": "'?' +  odkSurvey.getHashString('adult_coverage')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -321,7 +321,7 @@
         "_row_num": 53
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/child_coverage/forms/child_coverage/',null)",
+        "url": "'?' +  odkSurvey.getHashString('child_coverage')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -339,7 +339,7 @@
         "_row_num": 56
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/graphExample/forms/graphExample/',null)",
+        "url": "'?' +  odkSurvey.getHashString('graphExample')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -357,7 +357,7 @@
         "_row_num": 59
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/visit/forms/visit/',null)",
+        "url": "'?' +  odkSurvey.getHashString('visit')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -375,7 +375,7 @@
         "_row_num": 62
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/plot/forms/plot/',null)",
+        "url": "'?' +  odkSurvey.getHashString('plot')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -393,7 +393,7 @@
         "_row_num": 65
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/geoweather/forms/geoweather/',null)",
+        "url": "'?' +  odkSurvey.getHashString('geoweather')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -411,7 +411,7 @@
         "_row_num": 68
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/send_sms/forms/send_sms/',null)",
+        "url": "'?' +  odkSurvey.getHashString('send_sms')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -429,7 +429,7 @@
         "_row_num": 71
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/eonasdan/forms/eonasdan/',null)",
+        "url": "'?' + odkSurvey.getHashString('eonasdan')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -447,7 +447,7 @@
         "_row_num": 74
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/screenClient/',null)",
+        "url": "'?' +  odkSurvey.getHashString('femaleClients', 'screenClient')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -465,7 +465,7 @@
         "_row_num": 77
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/client6Week/',null)",
+        "url": "'?' +  odkSurvey.getHashString('femaleClients','client6Week')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -483,7 +483,7 @@
         "_row_num": 80
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/client6Month/',null)",
+        "url": "'?' +  odkSurvey.getHashString('femaleClients', 'client6Month')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -501,7 +501,7 @@
         "_row_num": 83
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/maleClients/forms/screenPartner/',null)",
+        "url": "'?' +  odkSurvey.getHashString('maleClients', 'screenPartner')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -519,7 +519,7 @@
         "_row_num": 86
       },
       {
-        "url": "'?' + opendatakit.getHashString('../config/tables/maleClients/forms/partner6Month/',null)",
+        "url": "'?' +  odkSurvey.getHashString('maleClients','partner6Month')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -916,6 +916,13 @@
           "default": "Beneficiary Code"
         },
         "_row_num": 53
+      },
+      {
+        "string_token": "no_authorizations",
+        "text": {
+          "default": "No Authorizations"
+        },
+        "_row_num": 54
       }
     ],
     "settings": [
@@ -1013,7 +1020,9 @@
         "choice_list_name": "test_forms",
         "data_value": "geotagger",
         "display": {
-          "text": "Geotagger"
+          "title": {
+            "text": "Geotagger"
+          }
         },
         "_row_num": 2
       },
@@ -1021,7 +1030,9 @@
         "choice_list_name": "test_forms",
         "data_value": "breathcounter",
         "display": {
-          "text": "breathcounter"
+          "title": {
+            "text": "breathcounter"
+          }
         },
         "_row_num": 3
       },
@@ -1029,7 +1040,9 @@
         "choice_list_name": "test_forms",
         "data_value": "complex_validate_test",
         "display": {
-          "text": "complex_validate_test"
+          "title": {
+            "text": "complex_validate_test"
+          }
         },
         "_row_num": 4
       },
@@ -1037,7 +1050,9 @@
         "choice_list_name": "test_forms",
         "data_value": "customAppearance",
         "display": {
-          "text": "customAppearance"
+          "title": {
+            "text": "customAppearance"
+          }
         },
         "_row_num": 5
       },
@@ -1045,7 +1060,9 @@
         "choice_list_name": "test_forms",
         "data_value": "exampleForm",
         "display": {
-          "text": "exampleForm"
+          "title": {
+            "text": "exampleForm"
+          }
         },
         "_row_num": 6
       },
@@ -1053,7 +1070,9 @@
         "choice_list_name": "test_forms",
         "data_value": "household",
         "display": {
-          "text": "household"
+          "title": {
+            "text": "household"
+          }
         },
         "_row_num": 7
       },
@@ -1061,7 +1080,9 @@
         "choice_list_name": "test_forms",
         "data_value": "imnci_test",
         "display": {
-          "text": "imnci_test"
+          "title": {
+            "text": "imnci_test"
+          }
         },
         "_row_num": 8
       },
@@ -1069,7 +1090,9 @@
         "choice_list_name": "test_forms",
         "data_value": "refrigerators_init",
         "display": {
-          "text": "refrigerators_init"
+          "title": {
+            "text": "refrigerators_init"
+          }
         },
         "_row_num": 9
       },
@@ -1077,7 +1100,9 @@
         "choice_list_name": "test_forms",
         "data_value": "refrigerators_update",
         "display": {
-          "text": "refrigerators_update"
+          "title": {
+            "text": "refrigerators_update"
+          }
         },
         "_row_num": 10
       },
@@ -1085,7 +1110,9 @@
         "choice_list_name": "test_forms",
         "data_value": "section_test",
         "display": {
-          "text": "section_test"
+          "title": {
+            "text": "section_test"
+          }
         },
         "_row_num": 11
       },
@@ -1093,7 +1120,9 @@
         "choice_list_name": "test_forms",
         "data_value": "selects",
         "display": {
-          "text": "selects"
+          "title": {
+            "text": "selects"
+          }
         },
         "_row_num": 12
       },
@@ -1101,7 +1130,9 @@
         "choice_list_name": "test_forms",
         "data_value": "twoColumn",
         "display": {
-          "text": "twoColumn"
+          "title": {
+            "text": "twoColumn"
+          }
         },
         "_row_num": 13
       },
@@ -1109,7 +1140,9 @@
         "choice_list_name": "test_forms",
         "data_value": "gridScreen",
         "display": {
-          "text": "gridScreen"
+          "title": {
+            "text": "gridScreen"
+          }
         },
         "_row_num": 14
       },
@@ -1117,7 +1150,9 @@
         "choice_list_name": "test_forms",
         "data_value": "child_coverage",
         "display": {
-          "text": "Child Coverage Immunizations"
+          "title": {
+            "text": "Child Coverage Immunizations"
+          }
         },
         "_row_num": 15
       },
@@ -1125,7 +1160,9 @@
         "choice_list_name": "test_forms",
         "data_value": "adult_coverage",
         "display": {
-          "text": "Adult Coverage Immunizations"
+          "title": {
+            "text": "Adult Coverage Immunizations"
+          }
         },
         "_row_num": 16
       },
@@ -1133,7 +1170,9 @@
         "choice_list_name": "test_forms",
         "data_value": "graphExample",
         "display": {
-          "text": "Graph Examples"
+          "title": {
+            "text": "Graph Examples"
+          }
         },
         "_row_num": 17
       },
@@ -1141,7 +1180,9 @@
         "choice_list_name": "test_forms",
         "data_value": "visit",
         "display": {
-          "text": "Visit"
+          "title": {
+            "text": "Visit"
+          }
         },
         "_row_num": 18
       },
@@ -1149,7 +1190,9 @@
         "choice_list_name": "test_forms",
         "data_value": "plot",
         "display": {
-          "text": "Plot"
+          "title": {
+            "text": "Plot"
+          }
         },
         "_row_num": 19
       },
@@ -1157,7 +1200,9 @@
         "choice_list_name": "test_forms",
         "data_value": "agriculture",
         "display": {
-          "text": "Agriculture"
+          "title": {
+            "text": "Agriculture"
+          }
         },
         "_row_num": 20
       },
@@ -1165,7 +1210,9 @@
         "choice_list_name": "test_forms",
         "data_value": "geoweather",
         "display": {
-          "text": "geoweather"
+          "title": {
+            "text": "geoweather"
+          }
         },
         "_row_num": 21
       },
@@ -1173,7 +1220,9 @@
         "choice_list_name": "test_forms",
         "data_value": "send_sms",
         "display": {
-          "text": "Send SMS"
+          "title": {
+            "text": "Send SMS"
+          }
         },
         "_row_num": 22
       },
@@ -1181,7 +1230,9 @@
         "choice_list_name": "test_forms",
         "data_value": "eonasdan",
         "display": {
-          "text": "DateTime Picker"
+          "title": {
+            "text": "DateTime Picker"
+          }
         },
         "_row_num": 23
       },
@@ -1189,7 +1240,9 @@
         "choice_list_name": "test_forms",
         "data_value": "screenClient",
         "display": {
-          "text": "Screen Female Client"
+          "title": {
+            "text": "Screen Female Client"
+          }
         },
         "_row_num": 24
       },
@@ -1197,7 +1250,9 @@
         "choice_list_name": "test_forms",
         "data_value": "client6Week",
         "display": {
-          "text": "Client 6 Week"
+          "title": {
+            "text": "Client 6 Week"
+          }
         },
         "_row_num": 25
       },
@@ -1205,7 +1260,9 @@
         "choice_list_name": "test_forms",
         "data_value": "client6Month",
         "display": {
-          "text": "Client 6 Month"
+          "title": {
+            "text": "Client 6 Month"
+          }
         },
         "_row_num": 26
       },
@@ -1213,7 +1270,9 @@
         "choice_list_name": "test_forms",
         "data_value": "screenPartner",
         "display": {
-          "text": "Screen Partner"
+          "title": {
+            "text": "Screen Partner"
+          }
         },
         "_row_num": 27
       },
@@ -1221,7 +1280,9 @@
         "choice_list_name": "test_forms",
         "data_value": "partner6Month",
         "display": {
-          "text": "Partner 6 Month"
+          "title": {
+            "text": "Partner 6 Month"
+          }
         },
         "_row_num": 28
       }
@@ -1800,7 +1861,9 @@
           "choice_list_name": "test_forms",
           "data_value": "geotagger",
           "display": {
-            "text": "Geotagger"
+            "title": {
+              "text": "Geotagger"
+            }
           },
           "_row_num": 2
         },
@@ -1808,7 +1871,9 @@
           "choice_list_name": "test_forms",
           "data_value": "breathcounter",
           "display": {
-            "text": "breathcounter"
+            "title": {
+              "text": "breathcounter"
+            }
           },
           "_row_num": 3
         },
@@ -1816,7 +1881,9 @@
           "choice_list_name": "test_forms",
           "data_value": "complex_validate_test",
           "display": {
-            "text": "complex_validate_test"
+            "title": {
+              "text": "complex_validate_test"
+            }
           },
           "_row_num": 4
         },
@@ -1824,7 +1891,9 @@
           "choice_list_name": "test_forms",
           "data_value": "customAppearance",
           "display": {
-            "text": "customAppearance"
+            "title": {
+              "text": "customAppearance"
+            }
           },
           "_row_num": 5
         },
@@ -1832,7 +1901,9 @@
           "choice_list_name": "test_forms",
           "data_value": "exampleForm",
           "display": {
-            "text": "exampleForm"
+            "title": {
+              "text": "exampleForm"
+            }
           },
           "_row_num": 6
         },
@@ -1840,7 +1911,9 @@
           "choice_list_name": "test_forms",
           "data_value": "household",
           "display": {
-            "text": "household"
+            "title": {
+              "text": "household"
+            }
           },
           "_row_num": 7
         },
@@ -1848,7 +1921,9 @@
           "choice_list_name": "test_forms",
           "data_value": "imnci_test",
           "display": {
-            "text": "imnci_test"
+            "title": {
+              "text": "imnci_test"
+            }
           },
           "_row_num": 8
         },
@@ -1856,7 +1931,9 @@
           "choice_list_name": "test_forms",
           "data_value": "refrigerators_init",
           "display": {
-            "text": "refrigerators_init"
+            "title": {
+              "text": "refrigerators_init"
+            }
           },
           "_row_num": 9
         },
@@ -1864,7 +1941,9 @@
           "choice_list_name": "test_forms",
           "data_value": "refrigerators_update",
           "display": {
-            "text": "refrigerators_update"
+            "title": {
+              "text": "refrigerators_update"
+            }
           },
           "_row_num": 10
         },
@@ -1872,7 +1951,9 @@
           "choice_list_name": "test_forms",
           "data_value": "section_test",
           "display": {
-            "text": "section_test"
+            "title": {
+              "text": "section_test"
+            }
           },
           "_row_num": 11
         },
@@ -1880,7 +1961,9 @@
           "choice_list_name": "test_forms",
           "data_value": "selects",
           "display": {
-            "text": "selects"
+            "title": {
+              "text": "selects"
+            }
           },
           "_row_num": 12
         },
@@ -1888,7 +1971,9 @@
           "choice_list_name": "test_forms",
           "data_value": "twoColumn",
           "display": {
-            "text": "twoColumn"
+            "title": {
+              "text": "twoColumn"
+            }
           },
           "_row_num": 13
         },
@@ -1896,7 +1981,9 @@
           "choice_list_name": "test_forms",
           "data_value": "gridScreen",
           "display": {
-            "text": "gridScreen"
+            "title": {
+              "text": "gridScreen"
+            }
           },
           "_row_num": 14
         },
@@ -1904,7 +1991,9 @@
           "choice_list_name": "test_forms",
           "data_value": "child_coverage",
           "display": {
-            "text": "Child Coverage Immunizations"
+            "title": {
+              "text": "Child Coverage Immunizations"
+            }
           },
           "_row_num": 15
         },
@@ -1912,7 +2001,9 @@
           "choice_list_name": "test_forms",
           "data_value": "adult_coverage",
           "display": {
-            "text": "Adult Coverage Immunizations"
+            "title": {
+              "text": "Adult Coverage Immunizations"
+            }
           },
           "_row_num": 16
         },
@@ -1920,7 +2011,9 @@
           "choice_list_name": "test_forms",
           "data_value": "graphExample",
           "display": {
-            "text": "Graph Examples"
+            "title": {
+              "text": "Graph Examples"
+            }
           },
           "_row_num": 17
         },
@@ -1928,7 +2021,9 @@
           "choice_list_name": "test_forms",
           "data_value": "visit",
           "display": {
-            "text": "Visit"
+            "title": {
+              "text": "Visit"
+            }
           },
           "_row_num": 18
         },
@@ -1936,7 +2031,9 @@
           "choice_list_name": "test_forms",
           "data_value": "plot",
           "display": {
-            "text": "Plot"
+            "title": {
+              "text": "Plot"
+            }
           },
           "_row_num": 19
         },
@@ -1944,7 +2041,9 @@
           "choice_list_name": "test_forms",
           "data_value": "agriculture",
           "display": {
-            "text": "Agriculture"
+            "title": {
+              "text": "Agriculture"
+            }
           },
           "_row_num": 20
         },
@@ -1952,7 +2051,9 @@
           "choice_list_name": "test_forms",
           "data_value": "geoweather",
           "display": {
-            "text": "geoweather"
+            "title": {
+              "text": "geoweather"
+            }
           },
           "_row_num": 21
         },
@@ -1960,7 +2061,9 @@
           "choice_list_name": "test_forms",
           "data_value": "send_sms",
           "display": {
-            "text": "Send SMS"
+            "title": {
+              "text": "Send SMS"
+            }
           },
           "_row_num": 22
         },
@@ -1968,7 +2071,9 @@
           "choice_list_name": "test_forms",
           "data_value": "eonasdan",
           "display": {
-            "text": "DateTime Picker"
+            "title": {
+              "text": "DateTime Picker"
+            }
           },
           "_row_num": 23
         },
@@ -1976,7 +2081,9 @@
           "choice_list_name": "test_forms",
           "data_value": "screenClient",
           "display": {
-            "text": "Screen Female Client"
+            "title": {
+              "text": "Screen Female Client"
+            }
           },
           "_row_num": 24
         },
@@ -1984,7 +2091,9 @@
           "choice_list_name": "test_forms",
           "data_value": "client6Week",
           "display": {
-            "text": "Client 6 Week"
+            "title": {
+              "text": "Client 6 Week"
+            }
           },
           "_row_num": 25
         },
@@ -1992,7 +2101,9 @@
           "choice_list_name": "test_forms",
           "data_value": "client6Month",
           "display": {
-            "text": "Client 6 Month"
+            "title": {
+              "text": "Client 6 Month"
+            }
           },
           "_row_num": 26
         },
@@ -2000,7 +2111,9 @@
           "choice_list_name": "test_forms",
           "data_value": "screenPartner",
           "display": {
-            "text": "Screen Partner"
+            "title": {
+              "text": "Screen Partner"
+            }
           },
           "_row_num": 27
         },
@@ -2008,7 +2121,9 @@
           "choice_list_name": "test_forms",
           "data_value": "partner6Month",
           "display": {
-            "text": "Partner 6 Month"
+            "title": {
+              "text": "Partner 6 Month"
+            }
           },
           "_row_num": 28
         }
@@ -2792,6 +2907,13 @@
             "default": "Beneficiary Code"
           },
           "_row_num": 53
+        },
+        "no_authorizations": {
+          "string_token": "no_authorizations",
+          "text": {
+            "default": "No Authorizations"
+          },
+          "_row_num": 54
         }
       },
       "_locales": {
@@ -2998,7 +3120,7 @@
             "promptIdx": 1
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/agriculture/forms/agriculture/',null)",
+            "url": "'?' + opendatakit.getHashString('agriculture')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3013,7 +3135,7 @@
             "promptIdx": 2
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/geotagger/forms/geotagger/',null)",
+            "url": "'?' + opendatakit.getHashString('geotagger')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3028,7 +3150,7 @@
             "promptIdx": 3
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/breathcounter/forms/breathcounter/',null)",
+            "url": "'?' + odkSurvey.getHashString('breathcounter')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3043,7 +3165,7 @@
             "promptIdx": 4
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/complex_validate_test/forms/complex_validate_test/',null)",
+            "url": "'?' + odkSurvey.getHashString('complex_validate_test')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3058,7 +3180,7 @@
             "promptIdx": 5
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/customAppearance/forms/customAppearance/',null)",
+            "url": "'?' + odkSurvey.getHashString('customAppearance')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3073,7 +3195,7 @@
             "promptIdx": 6
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/exampleForm/forms/exampleForm/',null)",
+            "url": "'?' + odkSurvey.getHashString('exampleForm')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3088,7 +3210,7 @@
             "promptIdx": 7
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/household/forms/household/',null)",
+            "url": "'?' + odkSurvey.getHashString('household')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3103,7 +3225,7 @@
             "promptIdx": 8
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/imnci/forms/imnci_test/',null)",
+            "url": "'?' + odkSurvey.getHashString('imnci','imnci_test')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3118,7 +3240,7 @@
             "promptIdx": 9
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/refrigerators/forms/refrigerators_init/',null)",
+            "url": "'?' +  odkSurvey.getHashString('refrigerators','refrigerators_init')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3133,7 +3255,7 @@
             "promptIdx": 10
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/refrigerators/forms/refrigerators_update/',null)",
+            "url": "'?' +  odkSurvey.getHashString('refrigerators','refrigerators_update')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3148,7 +3270,7 @@
             "promptIdx": 11
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/section_test/forms/section_test/',null)",
+            "url": "'?' +  odkSurvey.getHashString('section_test')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3163,7 +3285,7 @@
             "promptIdx": 12
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/selects/forms/selects/',null)",
+            "url": "'?' +  odkSurvey.getHashString('selects')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3178,7 +3300,7 @@
             "promptIdx": 13
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/twoColumn/forms/twoColumn/',null)",
+            "url": "'?' +  odkSurvey.getHashString('twoColumn')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3193,7 +3315,7 @@
             "promptIdx": 14
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/gridScreen/forms/gridScreen/',null)",
+            "url": "'?' +  odkSurvey.getHashString('gridScreen')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3208,7 +3330,7 @@
             "promptIdx": 15
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/adult_coverage/forms/adult_coverage/',null)",
+            "url": "'?' +  odkSurvey.getHashString('adult_coverage')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3223,7 +3345,7 @@
             "promptIdx": 16
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/child_coverage/forms/child_coverage/',null)",
+            "url": "'?' +  odkSurvey.getHashString('child_coverage')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3238,7 +3360,7 @@
             "promptIdx": 17
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/graphExample/forms/graphExample/',null)",
+            "url": "'?' +  odkSurvey.getHashString('graphExample')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3253,7 +3375,7 @@
             "promptIdx": 18
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/visit/forms/visit/',null)",
+            "url": "'?' +  odkSurvey.getHashString('visit')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3268,7 +3390,7 @@
             "promptIdx": 19
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/plot/forms/plot/',null)",
+            "url": "'?' +  odkSurvey.getHashString('plot')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3283,7 +3405,7 @@
             "promptIdx": 20
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/geoweather/forms/geoweather/',null)",
+            "url": "'?' +  odkSurvey.getHashString('geoweather')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3298,7 +3420,7 @@
             "promptIdx": 21
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/send_sms/forms/send_sms/',null)",
+            "url": "'?' +  odkSurvey.getHashString('send_sms')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3313,7 +3435,7 @@
             "promptIdx": 22
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/eonasdan/forms/eonasdan/',null)",
+            "url": "'?' + odkSurvey.getHashString('eonasdan')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3328,7 +3450,7 @@
             "promptIdx": 23
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/screenClient/',null)",
+            "url": "'?' +  odkSurvey.getHashString('femaleClients', 'screenClient')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3343,7 +3465,7 @@
             "promptIdx": 24
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/client6Week/',null)",
+            "url": "'?' +  odkSurvey.getHashString('femaleClients','client6Week')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3358,7 +3480,7 @@
             "promptIdx": 25
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/femaleClients/forms/client6Month/',null)",
+            "url": "'?' +  odkSurvey.getHashString('femaleClients', 'client6Month')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3373,7 +3495,7 @@
             "promptIdx": 26
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/maleClients/forms/screenPartner/',null)",
+            "url": "'?' +  odkSurvey.getHashString('maleClients', 'screenPartner')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -3388,7 +3510,7 @@
             "promptIdx": 27
           },
           {
-            "url": "'?' + opendatakit.getHashString('../config/tables/maleClients/forms/partner6Month/',null)",
+            "url": "'?' +  odkSurvey.getHashString('maleClients','partner6Month')",
             "type": "external_link",
             "display": {
               "prompt": {

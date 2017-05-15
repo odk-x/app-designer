@@ -32,26 +32,26 @@ var cbSuccess = function (result) {
       odkData.getRoles(resolve, reject);
   });
 
-  var deliveryTablePromise = new Promise(function(resolve, reject)) {
+  var deliveryTablePromise = new Promise(function(resolve, reject) {
     odkData.arbitraryQuery('authorizations',
-      'SELECT delivery_table FROM authorizations WHERE authorization_id = ?',
+      'SELECT delivery_table FROM authorizations WHERE _id = ?',
        [entitlementsResultSet.get('authorization_id')],
         null, null, resolve, reject);
-  }
+  });
 
-  var deliveryFormPromise = new Promise(function(resolve, reject)) {
+  var deliveryFormPromise = new Promise(function(resolve, reject) {
     odkData.arbitraryQuery('authorizations',
-      'SELECT delivery_form FROM authorizations WHERE authorization_id = ?',
+      'SELECT delivery_form FROM authorizations WHERE _id = ?',
        [entitlementsResultSet.get('authorization_id')],
         null, null, resolve, reject);
-  }
+  });
 
   Promise.all([rolesPromise, deliveryTablePromise, deliveryFormPromise]).then(function(resultArray) {
       console.log(resultArray.length);
     var roles = resultArray[0].getRoles();
     var deliveryTable = resultArray[1];
     var deliveryForm = resultArray[2];
-  }
+  });
 
   $('#launch').on(
     'click',

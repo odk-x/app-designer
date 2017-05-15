@@ -47,7 +47,7 @@ var resumeFn = function(fIdxStart) {
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                   odkTables.openDetailView(null, 'entitlements', rowId,
-                  'config/tables/entitlements/html/dist_ben_detail.html');
+                  'config/tables/entitlements/html/entitlements_detail.html');
             }
         });
     }

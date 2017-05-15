@@ -382,6 +382,13 @@ window.odkCommonDefinitions = {
         "default": "Beneficiary Code"
       },
       "_row_num": 53
+    },
+    "no_authorizations": {
+      "string_token": "no_authorizations",
+      "text": {
+        "default": "No Authorizations"
+      },
+      "_row_num": 54
     }
   },
   "_locales": {
