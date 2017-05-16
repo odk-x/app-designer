@@ -209,8 +209,15 @@ function handleRegistrationCallback(action, dispatchStr) {
         return;
     }
 
-    odkTables.openDetailWithListView(null, registrationTable, instanceId,
-                                     'config/tables/registration/html/registration_detail.html?type=' + type);
+    if (type == 'delivery') {
+        odkTables.openDetailWithListView(null, registrationTable, instanceId,
+                                         'config/tables/registration/html/registration_detail.html?type=' +
+                                         encodeURIComponent(type));
+    } else {
+        odkTables.openDetailView(null, registrationTable, instanceId,
+                                 'config/tables/registration/html/registration_detail.html?type=' +
+                                 encodeURIComponent(type));
+    }
 }
 
 function queryChain(passed_code) {
@@ -255,11 +262,15 @@ function deliveryBCheckCBSuccess(result) {
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
         }
     } else if (result.getCount() === 1) {
-        odkTables.openDetailWithListView(
-                                 null,
-                                 registrationTable,
-                                 result.getRowId(0),
-                                 'config/tables/registration/html/registration_detail.html?type=' + type);
+        if (type == 'delivery') {
+            odkTables.openDetailWithListView(null, registrationTable, result.getRowId(0),
+                                             'config/tables/registration/html/registration_detail.html?type=' +
+                                             encodeURIComponent(type));
+        } else {
+            odkTables.openDetailView(null, registrationTable,result.getRowId(0),
+                                     'config/tables/registration/html/registration_detail.html?type=' +
+                                     encodeURIComponent(type));
+        }
     } else {
         var params;
         var vals;
@@ -397,9 +408,15 @@ function regOverrideBenSuccess(result) {
     //    descriptor = "Active";
     //}
     if (result.getCount() == 1) {
-        odkTables.openDetailWithListView(null, registrationTable, result.getRowId(0),
-                                 'config/tables/registration/html/registration_detail.html?type=' +
-                                 encodeURIComponent(type));
+        if (type == 'delivery') {
+            odkTables.openDetailWithListView(null, registrationTable, result.getRowId(0),
+                                             'config/tables/registration/html/registration_detail.html?type=' +
+                                             encodeURIComponent(type));
+        } else {
+            odkTables.openDetailView(null, registrationTable,result.getRowId(0),
+                                     'config/tables/registration/html/registration_detail.html?type=' +
+                                     encodeURIComponent(type));
+        }
     } else if (result.getCount() > 1) {
         odkTables.openTableToListView(null, registrationTable,
                                       'beneficiary_code = ? and is_active = ?',
