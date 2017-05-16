@@ -57,12 +57,9 @@ var resumeFn = function(fIdxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.openDetailView(
-                                         null,
-                                         tableId,
-                                         rowId,
-                                         'config/tables/registration/html/registration_detail.html?type='
-                                         + encodeURIComponent(util.getQueryParameter('type')));
+                odkTables.openDetailWithListView(null, tableId, rowId,
+                                                 'config/tables/registration/html/registration_detail.html?type='
+                                                 + encodeURIComponent(util.getQueryParameter('type')));
             }
         });
     }

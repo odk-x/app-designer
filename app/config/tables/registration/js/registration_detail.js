@@ -82,22 +82,28 @@ function updateCBFailure(result) {
 function entCBSuccess(result) {
     if (result.getCount() > 0) {
         console.log(result.getCount());
+        updateSubListView('false');
+
         var deliver = $('#followup');
         deliver.text(odkCommon.localizeText(locale, "choose_entitlement"));
         deliver.show();
-        deliver.on(
-                   'click',
-                   function() {
-                       odkTables.openTableToListView(null, 'entitlements',
-                                                     'beneficiary_code = ? and is_delivered = ?',
-                                                     [registrationResultSet.get('beneficiary_code'), 'false'],
-                                                     'config/tables/entitlements/html/entitlements_list.html'
-                                                    );
-                   }
-                  );
+        deliver.on('click', function() {updateSubListView('false')});
+
+        var deliveredList = $('#delivered');
+        deliveredList.text('See delivered entitlements'); // TODO: Localize this
+        deliveredList.show();
+        deliveredList.on('click', function() {updateSubListView('true')});
     } else {
         $('#reject').text(odkCommon.localizeText(locale, "no_entitlements"));
     }
+}
+
+function updateSubListView(isDelivered) {
+    odkTables.setSubListView('entitlements',
+                             'beneficiary_code = ? and is_delivered = ?',
+                             [registrationResultSet.get('beneficiary_code'), isDelivered],
+                             'config/tables/entitlements/html/entitlements_list.html'
+                            );
 }
 
 function entCBFailure(error) {
