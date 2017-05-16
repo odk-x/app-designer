@@ -9,6 +9,7 @@
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="js/renderers/viewport_styling.js"></script>
         <script type="text/javascript" src="js/renderers/index.js"></script>
     </head>
 
@@ -16,10 +17,11 @@
         <div id="main">
             <h1 id="title"></h1>
             <div id="wrapper"></div>
+            <div id="logo"><img src="img/small_2025.jpg"></div>
         </div>
-        <div id="logo"><img src="img/small_2025.jpg"></div>
         <script>
             $(display);
+            $(setVirtualHeights);
         </script>
     </body>
 </html>

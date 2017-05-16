@@ -9,6 +9,7 @@
         <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="js/renderers/viewport_styling.js"></script>
         <script type="text/javascript" src="../../../../config/assets/js/util.js"></script>
     </head>
     <body>
@@ -22,7 +23,7 @@
         Example:<a href="#" onclick="control.openTable('TABLE_NAME',
         'COL_NAME:' + data.get('COL_NAME'));"><span id="FIELD_1"></span></a>
         -->
-        <p id='authorization_name'><span id="inner_authorization_name" line-height:1em></span></p>
+        <p id='authorization_name'><span id="inner_authorization_name"></span></p>
         <p id='item_pack_name'><span id="inner_item_pack_name"></span></p>
         <p id='item_description'><span id="inner_item_description"></span></p>
         <p id='is_override'><span id="inner_is_override"></span></p>
@@ -32,6 +33,7 @@
         <button id="launch"></button>
 
         <script>
+            $(setVirtualHeights);
             $(display);
         </script>
     </body>

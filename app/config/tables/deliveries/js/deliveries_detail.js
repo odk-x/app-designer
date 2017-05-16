@@ -8,14 +8,14 @@ var deliveriesResultSet = {};
 function cbSuccess(result) {
   deliveriesResultSet = result;
   var locale = odkCommon.getPreferredLocale();
-  $('#ben_code').text(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
-  $('#del_id').text(odkCommon.localizeText(locale, 'delivery_id') + ": ");
-  $('#auth_name').text(odkCommon.localizeText(locale, 'authorization_name') + ": ");
-  $('#del_time').text(odkCommon.localizeText(locale, 'date_time') + ": ");
-  $('#del_site').text(odkCommon.localizeText(locale, 'delivery_site') + ": ");
-  $('#distributor').text(odkCommon.localizeText(locale, 'distributor') + ": ");
-  $('#item_pack_name').text(odkCommon.localizeText(locale, 'item_pack_name') + ": ");
-  $('#scanned').text(odkCommon.localizeText(locale, 'scanned_item_pack') + ": ");
+  $('#ben_code').prepend(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
+  $('#del_id').prepend(odkCommon.localizeText(locale, 'delivery_id') + ": ");
+  $('#auth_name').prepend(odkCommon.localizeText(locale, 'authorization_name') + ": ");
+  $('#del_time').prepend(odkCommon.localizeText(locale, 'date_time') + ": ");
+  $('#del_site').prepend(odkCommon.localizeText(locale, 'delivery_site') + ": ");
+  $('#distributor').prepend(odkCommon.localizeText(locale, 'distributor') + ": ");
+  $('#item_pack_name').prepend(odkCommon.localizeText(locale, 'item_pack_name') + ": ");
+  $('#scanned').prepend(odkCommon.localizeText(locale, 'scanned_item_pack') + ": ");
 
 
   $('#inner_ben_code').text(deliveriesResultSet.get('beneficiary_code'));

@@ -14,11 +14,11 @@ var display = function() {
 
 var cbSuccess = function (result) {
   entitlementsResultSet = result;
-  $('#authorization_name').text(odkCommon.localizeText(locale, 'authorization_name') + ": ");
-  $('#item_pack_name').text(odkCommon.localizeText(locale, 'item_pack_name') + ": ");
-  $('#item_description').text(odkCommon.localizeText(locale, 'item_description') + ": ");
-  $('#is_override').text(odkCommon.localizeText(locale, 'is_override') + ": ");
-  $('#beneficiary_code').text(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
+  $('#authorization_name').prepend(odkCommon.localizeText(locale, 'authorization_name') + ": ");
+  $('#item_pack_name').prepend(odkCommon.localizeText(locale, 'item_pack_name') + ": ");
+  $('#item_description').prepend(odkCommon.localizeText(locale, 'item_description') + ": ");
+  $('#is_override').prepend(odkCommon.localizeText(locale, 'is_override') + ": ");
+  $('#beneficiary_code').prepend(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
 
 
   $('#inner_authorization_name').text(entitlementsResultSet.get('authorization_name'));

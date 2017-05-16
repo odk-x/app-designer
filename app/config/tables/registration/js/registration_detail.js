@@ -15,6 +15,7 @@ function cbSuccess(result) {
     var last_name = registrationResultSet.get('last_name');
     $('#title').text(first_name + ' ' + last_name);
 
+
     $('#inner_beneficiary_code').text(registrationResultSet.get('beneficiary_code'));
     $('#inner_address').text(registrationResultSet.get('address'));
     $('#inner_id_number').text(registrationResultSet.get('id_number'));
@@ -22,12 +23,12 @@ function cbSuccess(result) {
     $('#inner_telephone').text(registrationResultSet.get('telephone'));
     $('#inner_mobile_provider').text(registrationResultSet.get('mobile_provider'));
 
-    $('#beneficiary_code').text(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
-    $('#address').text(odkCommon.localizeText(locale, 'address') + ": ");
-    $('#id_number').text(odkCommon.localizeText(locale, 'id_number') + ": ");
-    $('#city').text(odkCommon.localizeText(locale, 'city') + ": ");
-    $('#telephone').text(odkCommon.localizeText(locale, 'telephone') + ": ");
-    $('#mobile_provider').text(odkCommon.localizeText(locale, 'mobile_provider') + ": ");
+    $('#beneficiary_code').prepend(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
+    $('#address').prepend(odkCommon.localizeText(locale, 'address') + ": ");
+    $('#id_number').prepend(odkCommon.localizeText(locale, 'id_number') + ": ");
+    $('#city').prepend(odkCommon.localizeText(locale, 'city') + ": ");
+    $('#telephone').prepend(odkCommon.localizeText(locale, 'telephone') + ": ");
+    $('#mobile_provider').prepend(odkCommon.localizeText(locale, 'mobile_provider') + ": ");
 
     if (registrationResultSet.get('is_active') == 'true' && type == 'delivery') {
         odkData.query('entitlements', 'beneficiary_code = ? and is_delivered = ?',

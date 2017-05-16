@@ -15,7 +15,9 @@ var superUser;
 var type = util.getQueryParameter('type');
 var code;
 
+
 function display() {
+
     $('#view_details').text(odkCommon.localizeText(locale, "view_authorization_details"));
     $('#barcode').text(odkCommon.localizeText(locale, "scan_barcode"));
     $('#search').text(odkCommon.localizeText(locale, "enter"));
@@ -39,6 +41,10 @@ function display() {
                                      'config/tables/authorizations/html/authorizations_detail.html');
         });
     }
+    $('#title').text(util.getQueryParameter('title'));
+
+    $('#main').css({'visibility' : 'visible'});
+
     var userPromise = new Promise(function(resolve, reject) {
         odkData.getUsers(resolve, reject);
     });
@@ -72,7 +78,6 @@ function display() {
         }
 
 
-        $('#title').text(util.getQueryParameter('title'));
 
         $('#barcode').on('click', function() {
             window.localStorage.setItem('odk_user', $('#choose_user').val());
@@ -159,6 +164,7 @@ function queryChain(passed_code) {
 
 function deliveryFunction() {
     if (superUser) {
+        console.log(user);
         odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _filter_value = ?',
                       [code, 'true', user], null, null, null, null, null, null, true,
                       deliveryBCheckCBSuccess, deliveryBCheckCBFailure);

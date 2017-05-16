@@ -10,11 +10,12 @@
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="js/util.js"></script>
+        <script type="text/javascript" src="js/renderers/viewport_styling.js"></script>
         <script type="text/javascript" src="js/renderers/choose_method.js"></script>
     </head>
 
     <body>
-        <div id="main">
+        <div id="main" style='visibility: hidden'>
             <h1 id="title"></h1>
             <button type ='reg' id='view_details'>View Authorization Details</button>
             <select id="choose_user" class="dropdown" display='none'>
@@ -26,8 +27,8 @@
             <button id='search'></button>
             <p><span id="search_results"></span></p>
         </div>
-        <div id="logo"><img src="img/small_2025.jpg"></div>
         <script>
+            $(setVirtualHeights);
             $(display);
         </script>
     </body>

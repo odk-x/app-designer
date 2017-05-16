@@ -28,7 +28,7 @@ div {
 button {
     width: 80vw;
     /*float: none;*/
-    margin: auto;
+    /*margin: auto;*/
     border-left: 15px solid;
     border-top: none;
     border-right: none;
@@ -51,6 +51,7 @@ p {
   padding: 0px;
   margin: 0px;
   color: black;
+  font-size: 24px;
 }
 
 .main-text {
