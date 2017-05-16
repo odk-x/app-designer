@@ -3,21 +3,27 @@
     "survey": [
       {
         "type": "assign",
+        "name": "verify_user",
+        "calculation": "null",
+        "_row_num": 2
+      },
+      {
+        "type": "assign",
         "name": "date_screened",
         "calculation": "now().getTime()",
-        "_row_num": 2
+        "_row_num": 3
       },
       {
         "type": "assign",
         "name": "is_active",
         "calculation": true,
-        "_row_num": 3
+        "_row_num": 4
       },
       {
         "type": "assign",
         "name": "is_override",
         "calculation": false,
-        "_row_num": 4
+        "_row_num": 5
       },
       {
         "type": "string",
@@ -31,7 +37,7 @@
           }
         },
         "required": true,
-        "_row_num": 5
+        "_row_num": 6
       },
       {
         "type": "string",
@@ -45,46 +51,17 @@
           }
         },
         "required": true,
-        "_row_num": 6
+        "_row_num": 7
       },
       {
         "type": "assign",
         "name": "first_last_name",
         "calculation": "data('first_name') + \" \" + data('last_name')",
-        "_row_num": 7
-      },
-      {
-        "type": "date",
-        "name": "birth_date",
-        "display": {
-          "prompt": {
-            "text": "What is your date of birth?"
-          }
-        },
-        "required": true,
         "_row_num": 8
       },
       {
-        "type": "assign",
-        "name": "age",
-        "calculation": "calculates.age()",
-        "_row_num": 9
-      },
-      {
-        "type": "select_one",
-        "name": "gender",
-        "display": {
-          "prompt": {
-            "text": "What is your gender?"
-          }
-        },
-        "values_list": "genders",
-        "required": true,
-        "_row_num": 10
-      },
-      {
         "clause": "begin screen",
-        "_row_num": 11
+        "_row_num": 9
       },
       {
         "type": "string",
@@ -94,7 +71,7 @@
             "text": "What type of ID do you have?"
           }
         },
-        "_row_num": 12
+        "_row_num": 10
       },
       {
         "type": "string",
@@ -105,39 +82,15 @@
           }
         },
         "required": true,
-        "_row_num": 13
+        "_row_num": 11
       },
       {
         "clause": "end screen",
-        "_row_num": 14
-      },
-      {
-        "type": "select_one",
-        "name": "delivery_site",
-        "display": {
-          "prompt": {
-            "text": "What is the name of the intended delivery site?"
-          }
-        },
-        "values_list": "sites",
-        "_row_num": 15
-      },
-      {
-        "type": "string",
-        "name": "address",
-        "display": {
-          "prompt": {
-            "text": "What is your current address?"
-          },
-          "hint": {
-            "text": "Address"
-          }
-        },
-        "_row_num": 16
+        "_row_num": 12
       },
       {
         "clause": "begin screen",
-        "_row_num": 17
+        "_row_num": 13
       },
       {
         "type": "string",
@@ -147,7 +100,7 @@
             "text": "What is your mobile phone service provider?"
           }
         },
-        "_row_num": 18
+        "_row_num": 14
       },
       {
         "type": "string",
@@ -160,11 +113,88 @@
             "text": "Telephone number"
           }
         },
-        "_row_num": 19
+        "_row_num": 15
+      },
+      {
+        "type": "async_assign_single_string",
+        "name": "verify_user",
+        "values_list": "verify_user_query",
+        "_row_num": 16
       },
       {
         "clause": "end screen",
+        "_row_num": 17
+      },
+      {
+        "clause": "if",
+        "condition": "(data('verify_user') !== null)",
+        "_row_num": 18
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "User {{data.verify_user}} already exists.  Continue if you are sure.  Otherwise, exit."
+          }
+        },
+        "_row_num": 19
+      },
+      {
+        "clause": "end if",
         "_row_num": 20
+      },
+      {
+        "type": "date",
+        "name": "birth_date",
+        "display": {
+          "prompt": {
+            "text": "What is your date of birth?"
+          }
+        },
+        "required": true,
+        "_row_num": 21
+      },
+      {
+        "type": "assign",
+        "name": "age",
+        "calculation": "calculates.age()",
+        "_row_num": 22
+      },
+      {
+        "type": "select_one",
+        "name": "gender",
+        "display": {
+          "prompt": {
+            "text": "What is your gender?"
+          }
+        },
+        "values_list": "genders",
+        "required": true,
+        "_row_num": 23
+      },
+      {
+        "type": "select_one",
+        "name": "delivery_site",
+        "display": {
+          "prompt": {
+            "text": "What is the name of the intended delivery site?"
+          }
+        },
+        "values_list": "sites",
+        "_row_num": 24
+      },
+      {
+        "type": "string",
+        "name": "address",
+        "display": {
+          "prompt": {
+            "text": "What is your current address?"
+          },
+          "hint": {
+            "text": "Address"
+          }
+        },
+        "_row_num": 25
       },
       {
         "type": "string",
@@ -178,7 +208,7 @@
           }
         },
         "required": true,
-        "_row_num": 21
+        "_row_num": 26
       },
       {
         "type": "geopoint",
@@ -188,7 +218,7 @@
             "text": "Capture current location"
           }
         },
-        "_row_num": 22
+        "_row_num": 27
       },
       {
         "type": "note",
@@ -197,7 +227,7 @@
             "text": "Press \"Next\" to finish."
           }
         },
-        "_row_num": 23
+        "_row_num": 28
       }
     ],
     "settings": [
@@ -391,7 +421,9 @@
         "choice_list_name": "genders",
         "data_value": "Male",
         "display": {
-          "text": "Male"
+          "title": {
+            "text": "Male"
+          }
         },
         "_row_num": 2
       },
@@ -399,7 +431,9 @@
         "choice_list_name": "genders",
         "data_value": "Female",
         "display": {
-          "text": "Female"
+          "title": {
+            "text": "Female"
+          }
         },
         "_row_num": 3
       },
@@ -407,7 +441,9 @@
         "choice_list_name": "sites",
         "data_value": "a0",
         "display": {
-          "text": "Site A"
+          "title": {
+            "text": "Site A"
+          }
         },
         "_row_num": 4
       },
@@ -415,7 +451,9 @@
         "choice_list_name": "sites",
         "data_value": "a1",
         "display": {
-          "text": "Site B"
+          "title": {
+            "text": "Site B"
+          }
         },
         "_row_num": 5
       },
@@ -423,7 +461,9 @@
         "choice_list_name": "sites",
         "data_value": "a2",
         "display": {
-          "text": "Site C"
+          "title": {
+            "text": "Site C"
+          }
         },
         "_row_num": 6
       },
@@ -431,7 +471,9 @@
         "choice_list_name": "sites",
         "data_value": "a3",
         "display": {
-          "text": "Site D"
+          "title": {
+            "text": "Site D"
+          }
         },
         "_row_num": 7
       }
@@ -459,6 +501,57 @@
         "type": "boolean",
         "value": "false",
         "_row_num": 3
+      }
+    ],
+    "queries": [
+      {
+        "query_name": "verify_user_query",
+        "query_type": "linked_table",
+        "linked_form_id": "registration",
+        "linked_table_id": "registration",
+        "selection": "_savepoint_type = ? and first_last_name = ? and id_number = ? and telephone = ?",
+        "selectionArgs": "['COMPLETE', data('first_last_name'), data('id_number'), data('telephone')]",
+        "fieldName": "first_last_name",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 2
+      }
+    ],
+    "prompt_types": [
+      {
+        "prompt_type_name": "async_assign_max",
+        "type": "number",
+        "_row_num": 2
+      },
+      {
+        "prompt_type_name": "async_assign_min",
+        "type": "number",
+        "_row_num": 3
+      },
+      {
+        "prompt_type_name": "async_assign_avg",
+        "type": "number",
+        "_row_num": 4
+      },
+      {
+        "prompt_type_name": "async_assign_sum",
+        "type": "number",
+        "_row_num": 5
+      },
+      {
+        "prompt_type_name": "async_assign_total",
+        "type": "number",
+        "_row_num": 6
+      },
+      {
+        "prompt_type_name": "async_assign_count",
+        "type": "number",
+        "_row_num": 7
+      },
+      {
+        "prompt_type_name": "async_assign_single_string",
+        "type": "string",
+        "_row_num": 8
       }
     ]
   },
@@ -543,7 +636,9 @@
           "choice_list_name": "genders",
           "data_value": "Male",
           "display": {
-            "text": "Male"
+            "title": {
+              "text": "Male"
+            }
           },
           "_row_num": 2
         },
@@ -551,7 +646,9 @@
           "choice_list_name": "genders",
           "data_value": "Female",
           "display": {
-            "text": "Female"
+            "title": {
+              "text": "Female"
+            }
           },
           "_row_num": 3
         }
@@ -561,7 +658,9 @@
           "choice_list_name": "sites",
           "data_value": "a0",
           "display": {
-            "text": "Site A"
+            "title": {
+              "text": "Site A"
+            }
           },
           "_row_num": 4
         },
@@ -569,7 +668,9 @@
           "choice_list_name": "sites",
           "data_value": "a1",
           "display": {
-            "text": "Site B"
+            "title": {
+              "text": "Site B"
+            }
           },
           "_row_num": 5
         },
@@ -577,7 +678,9 @@
           "choice_list_name": "sites",
           "data_value": "a2",
           "display": {
-            "text": "Site C"
+            "title": {
+              "text": "Site C"
+            }
           },
           "_row_num": 6
         },
@@ -585,7 +688,9 @@
           "choice_list_name": "sites",
           "data_value": "a3",
           "display": {
-            "text": "Site D"
+            "title": {
+              "text": "Site D"
+            }
           },
           "_row_num": 7
         }
@@ -640,7 +745,20 @@
         }
       }
     },
-    "queries": {},
+    "queries": {
+      "verify_user_query": {
+        "query_name": "verify_user_query",
+        "query_type": "linked_table",
+        "linked_form_id": "registration",
+        "linked_table_id": "registration",
+        "selection": "_savepoint_type = ? and first_last_name = ? and id_number = ? and telephone = ?",
+        "selectionArgs": "['COMPLETE', data('first_last_name'), data('id_number'), data('telephone')]",
+        "fieldName": "first_last_name",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 2
+      }
+    },
     "calculates": {
       "age": {
         "calculation_name": "age",
@@ -653,7 +771,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 2,
+            "_row_num": 3,
             "section_name": "survey"
           },
           {
@@ -667,7 +785,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "survey"
           },
           {
@@ -681,7 +799,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 7,
             "section_name": "survey"
           },
           {
@@ -695,7 +813,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
@@ -710,7 +828,7 @@
         "elementType": "date",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -724,7 +842,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {
@@ -739,7 +857,7 @@
         "valuesList": "genders",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 23,
             "section_name": "survey"
           },
           {
@@ -753,7 +871,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -767,7 +885,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
@@ -782,7 +900,7 @@
         "valuesList": "sites",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 24,
             "section_name": "survey"
           },
           {
@@ -796,7 +914,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 25,
             "section_name": "survey"
           },
           {
@@ -810,7 +928,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 14,
             "section_name": "survey"
           },
           {
@@ -824,7 +942,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
@@ -838,7 +956,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 26,
             "section_name": "survey"
           },
           {
@@ -862,7 +980,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 4,
             "section_name": "survey"
           },
           {
@@ -886,7 +1004,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 5,
             "section_name": "survey"
           },
           {
@@ -919,7 +1037,7 @@
         },
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 27,
             "section_name": "survey"
           },
           {
@@ -928,6 +1046,22 @@
           }
         ],
         "elementKey": "location"
+      },
+      "verify_user": {
+        "prompt_type_name": "async_assign_single_string",
+        "type": "string",
+        "valuesList": "verify_user_query",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "verify_user"
       }
     },
     "section_names": [
@@ -952,11 +1086,11 @@
               }
             },
             "required": true,
-            "_row_num": 5,
-            "__rowNum__": 4,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen5",
+            "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 0
           },
           {
@@ -971,45 +1105,12 @@
               }
             },
             "required": true,
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen6",
+            "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 1
-          },
-          {
-            "type": "date",
-            "name": "birth_date",
-            "display": {
-              "prompt": {
-                "text": "What is your date of birth?"
-              }
-            },
-            "required": true,
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "prompt",
-            "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen8",
-            "promptIdx": 2
-          },
-          {
-            "type": "select_one",
-            "name": "gender",
-            "display": {
-              "prompt": {
-                "text": "What is your gender?"
-              }
-            },
-            "values_list": "genders",
-            "required": true,
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 3
           },
           {
             "type": "string",
@@ -1019,12 +1120,12 @@
                 "text": "What type of ID do you have?"
               }
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 4
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 2
           },
           {
             "type": "string",
@@ -1035,46 +1136,12 @@
               }
             },
             "required": true,
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 5
-          },
-          {
-            "type": "select_one",
-            "name": "delivery_site",
-            "display": {
-              "prompt": {
-                "text": "What is the name of the intended delivery site?"
-              }
-            },
-            "values_list": "sites",
-            "_row_num": 15,
-            "__rowNum__": 14,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 6
-          },
-          {
-            "type": "string",
-            "name": "address",
-            "display": {
-              "prompt": {
-                "text": "What is your current address?"
-              },
-              "hint": {
-                "text": "Address"
-              }
-            },
-            "_row_num": 16,
-            "__rowNum__": 15,
-            "_token_type": "prompt",
-            "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 7
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 3
           },
           {
             "type": "string",
@@ -1084,12 +1151,12 @@
                 "text": "What is your mobile phone service provider?"
               }
             },
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen17",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 4
           },
           {
             "type": "string",
@@ -1102,12 +1169,104 @@
                 "text": "Telephone number"
               }
             },
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 5
+          },
+          {
+            "type": "async_assign_single_string",
+            "name": "verify_user",
+            "values_list": "verify_user_query",
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "prompt",
+            "_type": "async_assign_single_string",
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 6
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "User {{data.verify_user}} already exists.  Continue if you are sure.  Otherwise, exit."
+              }
+            },
             "_row_num": 19,
             "__rowNum__": 18,
             "_token_type": "prompt",
-            "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen17",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 7
+          },
+          {
+            "type": "date",
+            "name": "birth_date",
+            "display": {
+              "prompt": {
+                "text": "What is your date of birth?"
+              }
+            },
+            "required": true,
+            "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "prompt",
+            "_type": "date",
+            "_branch_label_enclosing_screen": "survey/_screen21",
+            "promptIdx": 8
+          },
+          {
+            "type": "select_one",
+            "name": "gender",
+            "display": {
+              "prompt": {
+                "text": "What is your gender?"
+              }
+            },
+            "values_list": "genders",
+            "required": true,
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen23",
             "promptIdx": 9
+          },
+          {
+            "type": "select_one",
+            "name": "delivery_site",
+            "display": {
+              "prompt": {
+                "text": "What is the name of the intended delivery site?"
+              }
+            },
+            "values_list": "sites",
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 10
+          },
+          {
+            "type": "string",
+            "name": "address",
+            "display": {
+              "prompt": {
+                "text": "What is your current address?"
+              },
+              "hint": {
+                "text": "Address"
+              }
+            },
+            "_row_num": 25,
+            "__rowNum__": 24,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen25",
+            "promptIdx": 11
           },
           {
             "type": "string",
@@ -1121,12 +1280,12 @@
               }
             },
             "required": true,
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen21",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen26",
+            "promptIdx": 12
           },
           {
             "type": "geopoint",
@@ -1136,12 +1295,12 @@
                 "text": "Capture current location"
               }
             },
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "prompt",
             "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen27",
+            "promptIdx": 13
           },
           {
             "type": "note",
@@ -1150,37 +1309,37 @@
                 "text": "Press \"Next\" to finish."
               }
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen23",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen28",
+            "promptIdx": 14
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 24,
-            "_branch_label_enclosing_screen": "survey/_screen24",
-            "promptIdx": 13
+            "_row_num": 29,
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 15
           }
         ],
         "validation_tag_map": {
           "finalize": [
             0,
             1,
-            2,
             3,
-            5,
-            10
+            8,
+            9,
+            12
           ]
         },
         "operations": [
           {
             "type": "assign",
-            "name": "date_screened",
-            "calculation": "now().getTime()",
+            "name": "verify_user",
+            "calculation": "null",
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "assign",
@@ -1188,8 +1347,8 @@
           },
           {
             "type": "assign",
-            "name": "is_active",
-            "calculation": true,
+            "name": "date_screened",
+            "calculation": "now().getTime()",
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "assign",
@@ -1197,149 +1356,191 @@
           },
           {
             "type": "assign",
-            "name": "is_override",
-            "calculation": false,
+            "name": "is_active",
+            "calculation": true,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "assign",
             "operationIdx": 2
           },
           {
+            "type": "assign",
+            "name": "is_override",
+            "calculation": false,
             "_row_num": 5,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 4,
+            "_token_type": "assign",
             "operationIdx": 3
           },
           {
             "_row_num": 6,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
           },
           {
             "type": "assign",
             "name": "first_last_name",
             "calculation": "data('first_name') + \" \" + data('last_name')",
-            "_row_num": 7,
-            "__rowNum__": 6,
-            "_token_type": "assign",
-            "operationIdx": 5
-          },
-          {
             "_row_num": 8,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 7,
+            "_token_type": "assign",
             "operationIdx": 6
           },
           {
-            "type": "assign",
-            "name": "age",
-            "calculation": "calculates.age()",
+            "clause": "begin screen",
             "_row_num": 9,
             "__rowNum__": 8,
-            "_token_type": "assign",
-            "operationIdx": 7
-          },
-          {
-            "_row_num": 10,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 8
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 11,
-            "__rowNum__": 10,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 14,
-              "__rowNum__": 13,
+              "_row_num": 12,
+              "__rowNum__": 11,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 17,
+              "__rowNum__": 16,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "clause": "if",
+            "condition": "(data('verify_user') !== null)",
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "goto_label",
+            "_branch_label": "_then18",
             "operationIdx": 9
           },
           {
-            "_row_num": 15,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else20",
+            "_row_num": 20,
             "operationIdx": 10
           },
           {
-            "_row_num": 16,
+            "_row_num": 19,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 11
           },
           {
-            "clause": "begin screen",
-            "_row_num": 17,
-            "__rowNum__": 16,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 20,
-              "__rowNum__": 19,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif20",
+            "_row_num": 20,
             "operationIdx": 12
           },
           {
             "_row_num": 21,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 13
           },
           {
+            "type": "assign",
+            "name": "age",
+            "calculation": "calculates.age()",
             "_row_num": 22,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 21,
+            "_token_type": "assign",
             "operationIdx": 14
           },
           {
             "_row_num": 23,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 15
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 24,
-            "operationIdx": 16
           },
           {
             "_row_num": 24,
             "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 16
+          },
+          {
+            "_row_num": 25,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 17
+          },
+          {
+            "_row_num": 26,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 18
+          },
+          {
+            "_row_num": 27,
+            "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 19
+          },
+          {
+            "_row_num": 28,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 20
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 29,
+            "operationIdx": 21
+          },
+          {
+            "_row_num": 29,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 17
+            "operationIdx": 22
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 24,
-            "operationIdx": 18
+            "_row_num": 29,
+            "operationIdx": 23
           }
         ],
         "branch_label_map": {
-          "_screen5": 3,
           "_screen6": 4,
-          "_screen8": 6,
-          "_screen10": 8,
-          "_screen11": 9,
-          "_screen15": 10,
-          "_screen16": 11,
-          "_screen17": 12,
+          "_screen7": 5,
+          "_screen9": 7,
+          "_screen13": 8,
+          "_then18": 11,
+          "_screen19": 11,
+          "_else20": 13,
+          "_endif20": 13,
           "_screen21": 13,
-          "_screen22": 14,
           "_screen23": 15,
-          "_contents": 17,
-          "_screen24": 17
+          "_screen24": 16,
+          "_screen25": 17,
+          "_screen26": 18,
+          "_screen27": 19,
+          "_screen28": 20,
+          "_contents": 22,
+          "_screen29": 22
         }
       },
       "initial": {
@@ -1456,7 +1657,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 2,
+            "_row_num": 3,
             "section_name": "survey"
           },
           {
@@ -1473,7 +1674,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 6,
             "section_name": "survey"
           },
           {
@@ -1490,7 +1691,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 7,
             "section_name": "survey"
           },
           {
@@ -1507,7 +1708,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
@@ -1525,7 +1726,7 @@
         "elementType": "date",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -1542,7 +1743,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {
@@ -1560,7 +1761,7 @@
         "valuesList": "genders",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 23,
             "section_name": "survey"
           },
           {
@@ -1577,7 +1778,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -1594,7 +1795,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
@@ -1612,7 +1813,7 @@
         "valuesList": "sites",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 24,
             "section_name": "survey"
           },
           {
@@ -1629,7 +1830,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 25,
             "section_name": "survey"
           },
           {
@@ -1646,7 +1847,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 14,
             "section_name": "survey"
           },
           {
@@ -1663,7 +1864,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
@@ -1680,7 +1881,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 26,
             "section_name": "survey"
           },
           {
@@ -1710,7 +1911,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 4,
             "section_name": "survey"
           },
           {
@@ -1740,7 +1941,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 5,
             "section_name": "survey"
           },
           {
@@ -1788,7 +1989,7 @@
         },
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 27,
             "section_name": "survey"
           },
           {
@@ -1807,6 +2008,25 @@
           "location_longitude"
         ],
         "notUnitOfRetention": true
+      },
+      "verify_user": {
+        "prompt_type_name": "async_assign_single_string",
+        "type": "string",
+        "valuesList": "verify_user_query",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "verify_user",
+        "elementName": "verify_user",
+        "elementSet": "data",
+        "elementPath": "verify_user"
       },
       "location_latitude": {
         "type": "number",
@@ -1916,13 +2136,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
       },
-      "_owner": {
+      "_row_owner": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_owner",
-        "elementName": "_owner",
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
         "elementSet": "instanceMetadata",
-        "elementPath": "_owner"
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1955,14 +2175,14 @@
         "_aspect": "delivery_site",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"sites\",\"data_value\":\"a0\",\"display\":{\"text\":\"Site A\"},\"_row_num\":4},{\"choice_list_name\":\"sites\",\"data_value\":\"a1\",\"display\":{\"text\":\"Site B\"},\"_row_num\":5},{\"choice_list_name\":\"sites\",\"data_value\":\"a2\",\"display\":{\"text\":\"Site C\"},\"_row_num\":6},{\"choice_list_name\":\"sites\",\"data_value\":\"a3\",\"display\":{\"text\":\"Site D\"},\"_row_num\":7}]"
+        "_value": "[{\"choice_list_name\":\"sites\",\"data_value\":\"a0\",\"display\":{\"title\":{\"text\":\"Site A\"}},\"_row_num\":4},{\"choice_list_name\":\"sites\",\"data_value\":\"a1\",\"display\":{\"title\":{\"text\":\"Site B\"}},\"_row_num\":5},{\"choice_list_name\":\"sites\",\"data_value\":\"a2\",\"display\":{\"title\":{\"text\":\"Site C\"}},\"_row_num\":6},{\"choice_list_name\":\"sites\",\"data_value\":\"a3\",\"display\":{\"title\":{\"text\":\"Site D\"}},\"_row_num\":7}]"
       },
       {
         "_partition": "Column",
         "_aspect": "gender",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"genders\",\"data_value\":\"Male\",\"display\":{\"text\":\"Male\"},\"_row_num\":2},{\"choice_list_name\":\"genders\",\"data_value\":\"Female\",\"display\":{\"text\":\"Female\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"genders\",\"data_value\":\"Male\",\"display\":{\"title\":{\"text\":\"Male\"}},\"_row_num\":2},{\"choice_list_name\":\"genders\",\"data_value\":\"Female\",\"display\":{\"title\":{\"text\":\"Female\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "FormType",
