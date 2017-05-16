@@ -9,8 +9,6 @@ var timer;
 var locale = odkCommon.getPreferredLocale();
 
 var display = function() {
-  $('#launch').text(odkCommon.localizeText('click_to_deliver'));
-  $('#title').text(odkCommon.localizeText('entitlement_details'));
 
   odkCommon.registerListener(function() {
       actionCBFn();
@@ -18,7 +16,6 @@ var display = function() {
   actionCBFn();
 
   odkData.getViewData(cbSuccess, cbFailure);
-  console.log('displayed');
 };
 
 function actionCBFn() {
@@ -36,7 +33,7 @@ function actionCBFn() {
         return;
     }
 
-    var actionType = dipatchStr[actionTypeKey];
+    var actionType = dispatchStr[actionTypeKey];
     switch (actionType) {
         case actionAddDelivery:
             console.log("TODO: LAUNCH DETAIL VIEW add delivery");
@@ -52,9 +49,11 @@ function actionCBFn() {
 
 var cbSuccess = function (result) {
   entitlementsResultSet = result;
+  $('#launch').text(odkCommon.localizeText(locale, 'click_to_deliver'));
+  $('#title').text(odkCommon.localizeText(locale, 'entitlement_details'));
   $('#authorization_name').prepend(odkCommon.localizeText(locale, 'authorization_name') + ": ");
   $('#item_pack_name').prepend(odkCommon.localizeText(locale, 'item_pack_name') + ": ");
-  $('#item_description').prepend(odkCommon.localizeText(locale, 'item_description') + ": ");
+  $('#item_description').prepend(odkCommon.localizeText(locale, 'item_pack_description') + ": ");
   $('#is_override').prepend(odkCommon.localizeText(locale, 'is_override') + ": ");
   $('#beneficiary_code').prepend(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
 
@@ -70,38 +69,49 @@ var cbSuccess = function (result) {
       odkData.getRoles(resolve, reject);
   });
 
-  var deliveryTablePromise = new Promise(function(resolve, reject) {
+  var authorizationPromise = new Promise(function(resolve, reject) {
     odkData.arbitraryQuery('authorizations',
-      'SELECT delivery_table FROM authorizations WHERE _id = ?',
+      'SELECT delivery_table, delivery_form, ranges FROM authorizations WHERE _id = ?',
        [entitlementsResultSet.get('authorization_id')],
         null, null, resolve, reject);
   });
 
-  var deliveryFormPromise = new Promise(function(resolve, reject) {
-    odkData.arbitraryQuery('authorizations',
-      'SELECT delivery_form FROM authorizations WHERE _id = ?',
-       [entitlementsResultSet.get('authorization_id')],
-        null, null, resolve, reject);
-  });
-
-  Promise.all([rolesPromise, deliveryTablePromise, deliveryFormPromise]).then(function(resultArray) {
-      console.log(resultArray.length);
+  Promise.all([rolesPromise, authorizationPromise]).then(function(resultArray) {
     var roles = resultArray[0].getRoles();
-    var deliveryTable = resultArray[1];
-    var deliveryForm = resultArray[2];
+    if (resultArray[1].getCount() > 0) {
+      $('#launch').text(odkCommon.localizeText(locale, 'click_to_deliver'));
+      var deliveryTable = resultArray[1].getData(0, 'delivery_table');
+      var deliveryForm = resultArray[1].getData(0, 'delivery_form');
+      var ranges = resultArray[1].getData(0, 'ranges');
+
+      // arbitrary default delivery table/form
+      if (deliveryTable == undefined || deliveryTable == null || deliveryTable == "") {
+        deliveryTable = 'deliveries';
+      }
+      if (deliveryForm == undefined || deliveryForm == null || deliveryForm == "" ) {
+        deliveryForm = 'deliveries';
+      }
+
+      $('#launch').on(
+      'click',
+      function() {
+        var jsonMap = getJSONMapValues();
+        setJSONMap(jsonMap, 'ranges', ranges);
+        if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
+          console.log('wait what');
+          odkData.addRow(deliveryTable, jsonMap, util.genUUID(), proxyRowSuccess, proxyRowFailure);
+        } else if (entitlementsResultSet.get('is_delivered') == 'false') {
+            var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery});
+            odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
+        }
+      });
+    } else {
+      $('#launch').prop("disabled", true);
+      $('#launch').text('Missing Authorization Data');
+    }
   });
 
-  $('#launch').on(
-    'click',
-    function() {
-      if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
-        odkData.addRow(deliveryName, getStructVals(), util.genUUID(), proxyRowSuccess, proxyRowFailure);
-      } else if (entitlementsResultSet.get('is_delivered') == 'false') {
-          var jsonMap = getJSONMapValues();
-          var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery});
-          odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
-      }
-    });
+  
 };
 
 function proxyRowSuccess(result) {
@@ -156,22 +166,6 @@ var updateCBFailure = function(error) {
   console.log('updateCBFailure called with error: ' + error);
 }
 
- function getStructVals() {
-  var struct = {};
-  struct['beneficiary_code'] = entitlementsResultSet.get('beneficiary_code');
-  struct['entitlement_id'] = entitlementsResultSet.get('_id');
-  struct['authorization_id'] = entitlementsResultSet.get('authorization_id');
-  struct['authorization_name'] = entitlementsResultSet.get('authorization_name');
-  struct['item_pack_id'] = entitlementsResultSet.get('item_pack_id');
-  struct['item_pack_name'] = entitlementsResultSet.get('item_pack_name');
-  struct['item_description'] = entitlementsResultSet.get('item_description');
-  struct['is_override'] = entitlementsResultSet.get('is_override');
-  struct['ranges'] = entitlementsResultSet.get('ranges');
-  struct['assigned_code'] = entitlementsResultSet.get('assigned_code');
-  console.log(struct);
-  return struct;
-}
-
 var setJSONMap = function(JSONMap, key, value) {
     if (value !== null && value !== undefined) {
         JSONMap[key] = JSON.stringify(value);
@@ -189,9 +183,7 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'item_pack_name', entitlementsResultSet.get('item_pack_name'));
   setJSONMap(jsonMap, 'item_description', entitlementsResultSet.get('item_description'));
   setJSONMap(jsonMap, 'is_override', entitlementsResultSet.get('is_override'));
-  setJSONMap(jsonMap, 'ranges', entitlementsResultSet.get('ranges'));
   setJSONMap(jsonMap, 'assigned_code', entitlementsResultSet.get('assigned_code'));
-  jsonMap = JSON.stringify(jsonMap);
   return jsonMap;
 };
 

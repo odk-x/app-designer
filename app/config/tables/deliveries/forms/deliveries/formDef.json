@@ -146,7 +146,9 @@
         "choice_list_name": "yes_no",
         "data_value": "true",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 2
       },
@@ -154,7 +156,9 @@
         "choice_list_name": "yes_no",
         "data_value": "false",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 3
       }
@@ -434,7 +438,7 @@
     "calculates": [
       {
         "calculation_name": "parse_ranges",
-        "calculation": "(function() {\n var obj = JSON.parse(data('ranges'));\n if (obj.ranges.length < 1) {\n  return 'with any barcode value';\n } else {\n  var str = 'within the range of ';\n  for (var i = 0; i < obj.ranges.length - 1; i++) {\n   str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n';\n  }\n  if (obj.ranges.length > 1) {\n   str += 'or ';\n  }\n  str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max;\n  return str;\n  } \n})()",
+        "calculation": "(function() {var obj = JSON.parse(data('ranges'));\n if (obj.ranges.length < 1) {\n  return 'with any barcode value';\n } else {\n  var str = 'within the range of ';\n  for (var i = 0; i < obj.ranges.length - 1; i++) {\n   str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n';\n  }\n  if (obj.ranges.length > 1) {\n   str += 'or ';\n  }\n  str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max;\n  return str;\n  } \n})()",
         "_row_num": 2
       },
       {
@@ -562,7 +566,9 @@
           "choice_list_name": "yes_no",
           "data_value": "true",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 2
         },
@@ -570,7 +576,9 @@
           "choice_list_name": "yes_no",
           "data_value": "false",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 3
         }
@@ -609,7 +617,7 @@
     "calculates": {
       "parse_ranges": {
         "calculation_name": "parse_ranges",
-        "calculation": "(function() {\n var obj = JSON.parse(data('ranges'));\n if (obj.ranges.length < 1) {\n  return 'with any barcode value';\n } else {\n  var str = 'within the range of ';\n  for (var i = 0; i < obj.ranges.length - 1; i++) {\n   str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n';\n  }\n  if (obj.ranges.length > 1) {\n   str += 'or ';\n  }\n  str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max;\n  return str;\n  } \n})()",
+        "calculation": "(function() {var obj = JSON.parse(data('ranges'));\n if (obj.ranges.length < 1) {\n  return 'with any barcode value';\n } else {\n  var str = 'within the range of ';\n  for (var i = 0; i < obj.ranges.length - 1; i++) {\n   str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n';\n  }\n  if (obj.ranges.length > 1) {\n   str += 'or ';\n  }\n  str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max;\n  return str;\n  } \n})()",
         "_row_num": 2
       },
       "in_range": {
@@ -1939,13 +1947,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
       },
-      "_owner": {
+      "_row_owner": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_owner",
-        "elementName": "_owner",
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
         "elementSet": "instanceMetadata",
-        "elementPath": "_owner"
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1978,7 +1986,7 @@
         "_aspect": "is_delivered",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"true\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"false\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"true\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"false\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "SurveyUtil",
