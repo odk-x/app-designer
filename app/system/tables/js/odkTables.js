@@ -456,13 +456,8 @@ window.odkTables = {
 		if ( screenPath === undefined ) {
 			screenPath = null;
 		}
-				
-		var stringifiedMap = null;
-		if ( jsonMap !== null && jsonMap !== undefined ) {
-			stringifiedMap = JSON.stringify(jsonMap);
-		}
-		
-		var uri = odkCommon.constructSurveyUri(tableId, formId, rowId, screenPath, stringifiedMap);
+
+		var uri = odkCommon.constructSurveyUri(tableId, formId, rowId, screenPath, jsonMap);
 		
 		var hashString = uri.substring(uri.indexOf('#'));
 		
