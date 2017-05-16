@@ -66,6 +66,7 @@ function rolesCBSuccess(result) {
         }
         document.getElementById("wrapper").appendChild(override);
     }
+    setVirtualHeights();
 }
 
 function rolesCBFailure(error) {

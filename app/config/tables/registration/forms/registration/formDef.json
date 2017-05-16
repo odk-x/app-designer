@@ -391,7 +391,9 @@
         "choice_list_name": "genders",
         "data_value": "Male",
         "display": {
-          "text": "Male"
+          "title": {
+            "text": "Male"
+          }
         },
         "_row_num": 2
       },
@@ -399,7 +401,9 @@
         "choice_list_name": "genders",
         "data_value": "Female",
         "display": {
-          "text": "Female"
+          "title": {
+            "text": "Female"
+          }
         },
         "_row_num": 3
       },
@@ -407,7 +411,9 @@
         "choice_list_name": "sites",
         "data_value": "a0",
         "display": {
-          "text": "Site A"
+          "title": {
+            "text": "Site A"
+          }
         },
         "_row_num": 4
       },
@@ -415,7 +421,9 @@
         "choice_list_name": "sites",
         "data_value": "a1",
         "display": {
-          "text": "Site B"
+          "title": {
+            "text": "Site B"
+          }
         },
         "_row_num": 5
       },
@@ -423,7 +431,9 @@
         "choice_list_name": "sites",
         "data_value": "a2",
         "display": {
-          "text": "Site C"
+          "title": {
+            "text": "Site C"
+          }
         },
         "_row_num": 6
       },
@@ -431,7 +441,9 @@
         "choice_list_name": "sites",
         "data_value": "a3",
         "display": {
-          "text": "Site D"
+          "title": {
+            "text": "Site D"
+          }
         },
         "_row_num": 7
       }
@@ -439,7 +451,7 @@
     "calculates": [
       {
         "calculation_name": "age",
-        "calculation": "(function() { \n    var ageDifMs = Date.now() - data('birth_date').getTime();\n    var ageDate = new Date(ageDifMs); \n    var years = Math.abs(ageDate.getUTCFullYear() - 1970);\n    var months = ageDate.getUTCMonth();\n    var days = ageDate.getUTCDate();\n    var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; \n    var daysInCurrYear = 0;\n    for (var i = 0; i < months; i++) {\n     daysInCurrYear += daysOfMonth[i];\n    }\n    daysInCurrYear += days;\n    var age = years + (daysInCurrYear / 365.0);\n    return age;\n})()",
+        "calculation": "(function() { var ageDifMs = Date.now() - data('birth_date').getTime();\n    var ageDate = new Date(ageDifMs); \n    var years = Math.abs(ageDate.getUTCFullYear() - 1970);\n    var months = ageDate.getUTCMonth();\n    var days = ageDate.getUTCDate();\n    var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; \n    var daysInCurrYear = 0;\n    for (var i = 0; i < months; i++) {\n     daysInCurrYear += daysOfMonth[i];\n    }\n    daysInCurrYear += days;\n    var age = years + (daysInCurrYear / 365.0);\n    return age;\n})()",
         "_row_num": 2
       }
     ],
@@ -543,7 +555,9 @@
           "choice_list_name": "genders",
           "data_value": "Male",
           "display": {
-            "text": "Male"
+            "title": {
+              "text": "Male"
+            }
           },
           "_row_num": 2
         },
@@ -551,7 +565,9 @@
           "choice_list_name": "genders",
           "data_value": "Female",
           "display": {
-            "text": "Female"
+            "title": {
+              "text": "Female"
+            }
           },
           "_row_num": 3
         }
@@ -561,7 +577,9 @@
           "choice_list_name": "sites",
           "data_value": "a0",
           "display": {
-            "text": "Site A"
+            "title": {
+              "text": "Site A"
+            }
           },
           "_row_num": 4
         },
@@ -569,7 +587,9 @@
           "choice_list_name": "sites",
           "data_value": "a1",
           "display": {
-            "text": "Site B"
+            "title": {
+              "text": "Site B"
+            }
           },
           "_row_num": 5
         },
@@ -577,7 +597,9 @@
           "choice_list_name": "sites",
           "data_value": "a2",
           "display": {
-            "text": "Site C"
+            "title": {
+              "text": "Site C"
+            }
           },
           "_row_num": 6
         },
@@ -585,7 +607,9 @@
           "choice_list_name": "sites",
           "data_value": "a3",
           "display": {
-            "text": "Site D"
+            "title": {
+              "text": "Site D"
+            }
           },
           "_row_num": 7
         }
@@ -644,7 +668,7 @@
     "calculates": {
       "age": {
         "calculation_name": "age",
-        "calculation": "(function() { \n    var ageDifMs = Date.now() - data('birth_date').getTime();\n    var ageDate = new Date(ageDifMs); \n    var years = Math.abs(ageDate.getUTCFullYear() - 1970);\n    var months = ageDate.getUTCMonth();\n    var days = ageDate.getUTCDate();\n    var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; \n    var daysInCurrYear = 0;\n    for (var i = 0; i < months; i++) {\n     daysInCurrYear += daysOfMonth[i];\n    }\n    daysInCurrYear += days;\n    var age = years + (daysInCurrYear / 365.0);\n    return age;\n})()",
+        "calculation": "(function() { var ageDifMs = Date.now() - data('birth_date').getTime();\n    var ageDate = new Date(ageDifMs); \n    var years = Math.abs(ageDate.getUTCFullYear() - 1970);\n    var months = ageDate.getUTCMonth();\n    var days = ageDate.getUTCDate();\n    var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; \n    var daysInCurrYear = 0;\n    for (var i = 0; i < months; i++) {\n     daysInCurrYear += daysOfMonth[i];\n    }\n    daysInCurrYear += days;\n    var age = years + (daysInCurrYear / 365.0);\n    return age;\n})()",
         "_row_num": 2
       }
     },
@@ -1916,13 +1940,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
       },
-      "_owner": {
+      "_row_owner": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_owner",
-        "elementName": "_owner",
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
         "elementSet": "instanceMetadata",
-        "elementPath": "_owner"
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1955,14 +1979,14 @@
         "_aspect": "delivery_site",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"sites\",\"data_value\":\"a0\",\"display\":{\"text\":\"Site A\"},\"_row_num\":4},{\"choice_list_name\":\"sites\",\"data_value\":\"a1\",\"display\":{\"text\":\"Site B\"},\"_row_num\":5},{\"choice_list_name\":\"sites\",\"data_value\":\"a2\",\"display\":{\"text\":\"Site C\"},\"_row_num\":6},{\"choice_list_name\":\"sites\",\"data_value\":\"a3\",\"display\":{\"text\":\"Site D\"},\"_row_num\":7}]"
+        "_value": "[{\"choice_list_name\":\"sites\",\"data_value\":\"a0\",\"display\":{\"title\":{\"text\":\"Site A\"}},\"_row_num\":4},{\"choice_list_name\":\"sites\",\"data_value\":\"a1\",\"display\":{\"title\":{\"text\":\"Site B\"}},\"_row_num\":5},{\"choice_list_name\":\"sites\",\"data_value\":\"a2\",\"display\":{\"title\":{\"text\":\"Site C\"}},\"_row_num\":6},{\"choice_list_name\":\"sites\",\"data_value\":\"a3\",\"display\":{\"title\":{\"text\":\"Site D\"}},\"_row_num\":7}]"
       },
       {
         "_partition": "Column",
         "_aspect": "gender",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"genders\",\"data_value\":\"Male\",\"display\":{\"text\":\"Male\"},\"_row_num\":2},{\"choice_list_name\":\"genders\",\"data_value\":\"Female\",\"display\":{\"text\":\"Female\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"genders\",\"data_value\":\"Male\",\"display\":{\"title\":{\"text\":\"Male\"}},\"_row_num\":2},{\"choice_list_name\":\"genders\",\"data_value\":\"Female\",\"display\":{\"title\":{\"text\":\"Female\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "FormType",

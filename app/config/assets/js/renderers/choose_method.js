@@ -307,15 +307,13 @@ function registrationVoucherCBSuccess(result) {
         $('#search_results').text(odkCommon.localizeText(locale, "voucher_detected"));
     }
     setTimeout(function() {
+        var struct = {};
+        struct['beneficiary_code'] = code;
         if (superUser) {
-            var struct = {};
-            struct['beneficiary_code'] = code;
             odkData.addRow('registration', struct, util.genUUID(), proxyRowSuccess, proxyRowFailure);
         } else {
-            var jsonMap = {};
-            setJSONMap(jsonMap, 'beneficiary_code', code);
             var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration});
-            odkTables.addRowWithSurvey(dispatchStruct, 'registration', 'registration', null, jsonMap);
+            odkTables.addRowWithSurvey(dispatchStruct, 'registration', 'registration', null, struct);
         }
     }, 1000);
 }
@@ -340,18 +338,6 @@ function setFilterSuccess(result) {
 
 function setFilterFailure(error) {
     console.log('set filter failure with error: ' + error);
-}
-
-function setJSONMap(JSONMap, key, value) {
-    if (value !== null && value !== undefined) {
-        JSONMap[key] = value;
-    }
-}
-
-function getJSONMapValues() {
-    var jsonMap = {};
-    setJSONMap(jsonMap, 'beneficiary_code', code);
-    return jsonMap;
 }
 
 function regOverrideFunction() {
