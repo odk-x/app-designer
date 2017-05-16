@@ -36,15 +36,46 @@ function actionCBFn() {
     var actionType = dispatchStr[actionTypeKey];
     switch (actionType) {
         case actionAddDelivery:
-            console.log("TODO: LAUNCH DETAIL VIEW add delivery");
-            break;
         case actionEditDelivery:
-            console.log("TODO: What do we do here? Probably launch detail view (edit delivery)");
+            handleSurveyRowCallback(action, dispatchStr);
             break;
         default:
             console.log("Error: unrecognized action type in callback");
     }
 
+    odkCommon.removeFirstQueuedAction();
+
+}
+
+function handleSurveyRowCallback(action, dispatchStr) {
+
+    console.log("Row change action occured");
+
+    var result = action.jsonValue.result;
+    if (result === null || result === undefined) {
+        console.log("Error: no result object on registration");
+        return;
+    }
+
+    var instanceId = result.instanceId;
+    if (instanceId === null || instanceId === undefined) {
+        console.log("Error: no instance ID on registration");
+        return;
+    }
+
+    var savepointType = result.savepoint_type;
+    if (savepointType === null || savepointType === undefined) {
+        console.log("Error: no savepoint type on registration");
+        return;
+    }
+
+    if (savepointType !== savepointSuccess) {
+        console.log("The row was not saved as complete. Not launching detailview");
+        return;
+    }
+
+    odkTables.openDetailView(null, registrationTable, instanceId,
+                             'config/tables/deliveries/html/deliveries_detail.html?type=delivery');
 }
 
 var cbSuccess = function (result) {

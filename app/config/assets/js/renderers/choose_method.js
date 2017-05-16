@@ -10,6 +10,12 @@ var htmlFileNameValue = "delivery_start";
 var userActionValue = "launchBarcode";
 var barcodeSessionVariable = "barcodeVal";
 var chooseListSessionVariable = "chooseList";
+var savepointSuccess = "COMPLETE";
+
+// Table IDs
+var registrationTable = 'registration';
+var authorizationTable = 'authorizations';
+
 var myTimeoutVal = null;
 var idComponent = "";
 var user;
@@ -39,7 +45,7 @@ function display() {
         $('#view_details').on('click', function() {
             odkTables.openDetailView(
                                      null,
-                                     'authorizations',
+                                     authorizationTable,
                                      util.getQueryParameter('authorization_id'),
                                      'config/tables/authorizations/html/authorizations_detail.html');
         });
@@ -127,6 +133,7 @@ function callBackFn () {
     var dispatchStr = JSON.parse(action.dispatchStruct);
     if (dispatchStr === null || dispatchStr === undefined) {
         console.log('Error: missing dispatch struct');
+        odkCommon.removeFirstQueuedAction();
         return;
     }
 
@@ -142,9 +149,13 @@ function callBackFn () {
             console.log("Error: unrecognized action type in callback");
             break;
     }
+
+    odkCommon.removeFirstQueuedAction();
 }
 
 function handleBarcodeCallback(action, dispatchStr) {
+
+    console.log("Barcode action occured");
 
     var actionStr = dispatchStr["userAction"];
     if (actionStr === null || actionStr === undefined ||
@@ -167,16 +178,39 @@ function handleBarcodeCallback(action, dispatchStr) {
         var scanned = action.jsonValue.result.SCAN_RESULT;
         $('#code').val(scanned);
         odkCommon.setSessionVariable(barcodeSessionVariable, scanned);
-        odkCommon.removeFirstQueuedAction();
         queryChain(action.jsonValue.result.SCAN_RESULT);
     }
 }
 
 function handleRegistrationCallback(action, dispatchStr) {
 
-    console.log("Registration Action occured");
-    odkCommon.removeFirstQueuedAction();
+    console.log("Registration action occured");
 
+    var result = action.jsonValue.result;
+    if (result === null || result === undefined) {
+        console.log("Error: no result object on registration");
+        return;
+    }
+
+    var instanceId = result.instanceId;
+    if (instanceId === null || instanceId === undefined) {
+        console.log("Error: no instance ID on registration");
+        return;
+    }
+
+    var savepointType = result.savepoint_type;
+    if (savepointType === null || savepointType === undefined) {
+        console.log("Error: no savepoint type on registration");
+        return;
+    }
+
+    if (savepointType !== savepointSuccess) {
+        console.log("The row was not saved as complete. Not launching detailview");
+        return;
+    }
+
+    odkTables.openDetailView(null, registrationTable, instanceId,
+                             'config/tables/registration/html/registration_detail.html?type=' + type);
 }
 
 function queryChain(passed_code) {
@@ -223,7 +257,7 @@ function deliveryBCheckCBSuccess(result) {
     } else if (result.getCount() === 1) {
         odkTables.openDetailView(
                                  null,
-                                 'registration',
+                                 registrationTable,
                                  result.getRowId(0),
                                  'config/tables/registration/html/registration_detail.html?type=' + type);
     } else {
@@ -238,7 +272,7 @@ function deliveryBCheckCBSuccess(result) {
         }
         odkTables.openTableToListView(
                                       null,
-                                      'registration', params, vals
+                                      registrationTable, params, vals
                                       , 'config/tables/registration/html/registration_list.html?type=' + type);
     }
 }
@@ -313,7 +347,7 @@ function registrationVoucherCBSuccess(result) {
             odkData.addRow('registration', struct, util.genUUID(), proxyRowSuccess, proxyRowFailure);
         } else {
             var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration});
-            odkTables.addRowWithSurvey(dispatchStruct, 'registration', 'registration', null, struct);
+            odkTables.addRowWithSurvey(dispatchStruct, registrationTable, 'registration', null, struct);
         }
     }, 1000);
 }
@@ -333,7 +367,7 @@ function proxyRowFailure(error) {
 
 function setFilterSuccess(result) {
     var dispatchStruct = JSON.stringify({actionTypeKey: registration});
-    odkTables.editRowWithSurvey(dispatchStruct, 'registration', result.getRowId(0), 'registration', null);
+    odkTables.editRowWithSurvey(dispatchStruct, registrationTable, result.getRowId(0), 'registration', null);
 }
 
 function setFilterFailure(error) {
@@ -363,13 +397,13 @@ function regOverrideBenSuccess(result) {
     //    descriptor = "Active";
     //}
     if (result.getCount() == 1) {
-        odkTables.openDetailView(null, 'registration', result.getRowId(0),
+        odkTables.openDetailView(null, registrationTable, result.getRowId(0),
                                  'config/tables/registration/html/registration_detail.html?type=' +
                                  encodeURIComponent(type));
     } else if (result.getCount() > 1) {
         odkTables.openTableToListView(
                                       null,
-                                      'registration',
+                                      registrationTable,
                                       'beneficiary_code = ? and is_active = ?',
                                       [code, queriedType],
                                       'config/tables/registration/html/registration_list.html?type=' +
