@@ -551,7 +551,7 @@ return Backbone.View.extend({
         }
         var rc = (that.activeScreen && that.activeScreen._renderContext) ?
             that.activeScreen._renderContext : that.renderContext;
-        var rcWithMsg = $.extend({message: msg.message}, rc);
+        var rcWithMsg = $.extend({ message: { text: msg.message} }, rc);
         that.activeScreen.$el.append(that.screenTemplate(rcWithMsg)).trigger('pagecreate');
         //var $screenPopup = $( "#screenPopup" );
         //$('#screenPopup').enhanceWithin().popup();  // calling the popup plugin
