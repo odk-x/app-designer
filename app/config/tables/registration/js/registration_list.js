@@ -61,11 +61,11 @@ var resumeFn = function(fIdxStart) {
                 if (launchType == 'delivery') {
                     odkTables.openDetailWithListView(null, tableId, rowId,
                                                      'config/tables/registration/html/registration_detail.html?type='
-                                                     + encodeURIComponent(launchType)));
+                                                     + encodeURIComponent(launchType));
                 } else {
                     odkTables.openDetailView(null, tableId, rowId,
                                                      'config/tables/registration/html/registration_detail.html?type='
-                                                     + encodeURIComponent(launchType)));
+                                                     + encodeURIComponent(launchType));
                 }
             }
         });
