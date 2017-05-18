@@ -2,7 +2,7 @@
   "name": "xlsxconverterapi",
   "version": "0.0.0",
   "scripts": {
-    "build": "shx rm -rf out && babel . -d out && shx cp -r public out"
+    "build": "shx rm -rf out && babel . -d out"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
