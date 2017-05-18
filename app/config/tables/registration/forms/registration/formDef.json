@@ -481,7 +481,7 @@
     "calculates": [
       {
         "calculation_name": "age",
-        "calculation": "(function() { var ageDifMs = Date.now() - data('birth_date').getTime();\n    var ageDate = new Date(ageDifMs); \n    var years = Math.abs(ageDate.getUTCFullYear() - 1970);\n    var months = ageDate.getUTCMonth();\n    var days = ageDate.getUTCDate();\n    var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; \n    var daysInCurrYear = 0;\n    for (var i = 0; i < months; i++) {\n     daysInCurrYear += daysOfMonth[i];\n    }\n    daysInCurrYear += days;\n    var age = years + (daysInCurrYear / 365.0);\n    return age;\n})()",
+        "calculation": "(function() { \n    var ageDifMs = Date.now() - data('birth_date').getTime();\n    var ageDate = new Date(ageDifMs); \n    var years = Math.abs(ageDate.getUTCFullYear() - 1970);\n    var months = ageDate.getUTCMonth();\n    var days = ageDate.getUTCDate();\n    var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; \n    var daysInCurrYear = 0;\n    for (var i = 0; i < months; i++) {\n     daysInCurrYear += daysOfMonth[i];\n    }\n    daysInCurrYear += days;\n    var age = years + (daysInCurrYear / 365.0);\n    return age;\n})()",
         "_row_num": 2
       }
     ],
@@ -762,7 +762,7 @@
     "calculates": {
       "age": {
         "calculation_name": "age",
-        "calculation": "(function() { var ageDifMs = Date.now() - data('birth_date').getTime();\n    var ageDate = new Date(ageDifMs); \n    var years = Math.abs(ageDate.getUTCFullYear() - 1970);\n    var months = ageDate.getUTCMonth();\n    var days = ageDate.getUTCDate();\n    var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; \n    var daysInCurrYear = 0;\n    for (var i = 0; i < months; i++) {\n     daysInCurrYear += daysOfMonth[i];\n    }\n    daysInCurrYear += days;\n    var age = years + (daysInCurrYear / 365.0);\n    return age;\n})()",
+        "calculation": "(function() { \n    var ageDifMs = Date.now() - data('birth_date').getTime();\n    var ageDate = new Date(ageDifMs); \n    var years = Math.abs(ageDate.getUTCFullYear() - 1970);\n    var months = ageDate.getUTCMonth();\n    var days = ageDate.getUTCDate();\n    var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; \n    var daysInCurrYear = 0;\n    for (var i = 0; i < months; i++) {\n     daysInCurrYear += daysOfMonth[i];\n    }\n    daysInCurrYear += days;\n    var age = years + (daysInCurrYear / 365.0);\n    return age;\n})()",
         "_row_num": 2
       }
     },
