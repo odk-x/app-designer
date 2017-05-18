@@ -81,3 +81,17 @@ input {
     font-size: 18px;
     text-align: center;
 }
+
+input[type="radio" i] {
+    float:left;
+    margin: 5px;
+    vertical-align: middle;
+}
+
+label {
+  float:left;
+  padding: 0px;
+  margin: 0px;
+  color: black;
+  font-size: 24px;
+}

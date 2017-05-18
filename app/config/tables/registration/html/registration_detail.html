@@ -21,9 +21,14 @@
         <p id="telephone"><span id="inner_telephone"></span></p>
         <p id="mobile_provider"><span id="inner_mobile_provider"></span></p>
         <p id="reject"><span id="inner_reject"></span></p>
-        </br>
+
+        <input type="radio" id="entitlements_pending" style="display:none" checked="true"/>
+        <label id="pending_txt"></label>
+        <br /><br />
+        <input type="radio" id="entitlements_delivered" style="display:none"/>
+        <label id="delivered_txt"></label>
+        <br/>
         <button id="followup" style="display:none"></button>
-        <button id="delivered" style="display:none"></button>
         <p><span id="message"></span></p>
         <script>
           $(display);
