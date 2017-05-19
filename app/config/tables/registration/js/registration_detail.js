@@ -84,15 +84,14 @@ function entCBSuccess(result) {
     if (result.getCount() > 0) {
         console.log(result.getCount());
 
+        $('#entitlements_switch').show();
+        $('#entitlements_title').text('Entitlements Listed'); // TODO: localize this
+
         $('#pending_txt').text('Pending'); // TODO: Localize this
-        var ent_pending = $('#entitlements_pending');
-        ent_pending.show();
-        ent_pending.click(function() {updateSubListView()});
+        $('#entitlements_pending').click(updateSubListView);
 
         $('#delivered_txt').text('Delivered'); // TODO: Localize this
-        var ent_delivered = $('#entitlements_delivered');
-        ent_delivered.show();
-        ent_delivered.click(function() {updateSubListView()});
+        $('#entitlements_delivered').click(updateSubListView);
 
         updateSubListView();
     } else {
@@ -109,10 +108,8 @@ function updateSubListView() {
 
     if (showDelivered === 'true') {
         showDelivered = 'false';
-        $('#entitlements_pending').prop('checked', false);
     } else {
         showDelivered = 'true';
-        $('#entitlements_delivered').prop('checked', false);
     }
 }
 

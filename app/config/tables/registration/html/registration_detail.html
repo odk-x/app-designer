@@ -2,6 +2,7 @@
 <html>
     <head>
         <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <link href="../css/radio_button.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
         <script type="text/javascript" src="../tableSpecificDefinitions.js"></script>
         <script type="text/javascript" src="../../../assets/libs/jquery-3.2.1.js"></script>
@@ -22,12 +23,14 @@
         <p id="mobile_provider"><span id="inner_mobile_provider"></span></p>
         <p id="reject"><span id="inner_reject"></span></p>
 
-        <input type="radio" id="entitlements_pending" style="display:none" checked="true"/>
-        <label id="pending_txt"></label>
-        <br /><br />
-        <input type="radio" id="entitlements_delivered" style="display:none"/>
-        <label id="delivered_txt"></label>
         <br/>
+        <div class="switch-field" id="entitlements_switch" style="display:none">
+            <div class="switch-title" id="entitlements_title"></div>
+            <input type="radio" name="entitlements" id="entitlements_pending" checked="true"/>
+            <label for="entitlements_pending" id="pending_txt"></label>
+            <input type="radio" name="entitlements" id="entitlements_delivered"/>
+            <label for="entitlements_delivered" id="delivered_txt"></label>
+        </div>
         <button id="followup" style="display:none"></button>
         <p><span id="message"></span></p>
         <script>
