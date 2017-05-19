@@ -81,6 +81,14 @@ var resumeFn = function(fIdxStart) {
 */
 var displayGroup = function(idxStart) {
     console.log('displayGroup called. idxStart: ' + idxStart);
+
+    /* If the list comes back empty, inform the user */
+    if (deliveriesResultSet.getCount() === 0) {
+        var errorText = $('#error');
+        errorText.show();
+        errorText.text('No deliveries found'); // TODO: Translate this
+    }
+
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
