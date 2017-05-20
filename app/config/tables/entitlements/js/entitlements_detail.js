@@ -148,7 +148,7 @@ var cbSuccess = function (result) {
 function proxyRowSuccess(result) {
     console.log('made it!');
     odkData.changeAccessFilterOfRow('deliveries', 'HIDDEN',
-      entitlementsResultSet.get('_filter_value'),
+      entitlementsResultSet.get('_row_owner'), null, null, null, 
       result.getRowId(0), setFilterSuccess, setFilterFailure);
 }
 
