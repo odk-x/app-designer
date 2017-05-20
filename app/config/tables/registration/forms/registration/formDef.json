@@ -16,13 +16,13 @@
       {
         "type": "assign",
         "name": "is_active",
-        "calculation": 1,
+        "calculation": true,
         "_row_num": 4
       },
       {
         "type": "assign",
         "name": "is_override",
-        "calculation": 0,
+        "calculation": false,
         "_row_num": 5
       },
       {
@@ -40,7 +40,7 @@
             "text": "First name"
           }
         },
-        "required": 1,
+        "required": true,
         "_row_num": 7
       },
       {
@@ -54,7 +54,7 @@
             "text": "Last name"
           }
         },
-        "required": 1,
+        "required": true,
         "_row_num": 8
       },
       {
@@ -89,7 +89,7 @@
             "text": "What is your ID number?"
           }
         },
-        "required": 1,
+        "required": true,
         "_row_num": 13
       },
       {
@@ -146,7 +146,7 @@
         "type": "note",
         "display": {
           "prompt": {
-            "text": "User {{data.verify_user}} already exists.  Continue if you are sure.  Otherwise, exit."
+            "text": "User {{data.verify_user}} already exists.  Continue if you are sure.  Otherwise, Ignore Changes + Exit."
           }
         },
         "_row_num": 21
@@ -167,7 +167,7 @@
             "text": "What is your date of birth?"
           }
         },
-        "required": 1,
+        "required": true,
         "_row_num": 24
       },
       {
@@ -185,7 +185,7 @@
           }
         },
         "values_list": "genders",
-        "required": 1,
+        "required": true,
         "_row_num": 26
       },
       {
@@ -231,7 +231,7 @@
             "text": "Including household representative"
           }
         },
-        "required": 1,
+        "required": true,
         "_row_num": 31
       },
       {
@@ -431,6 +431,12 @@
         "type": "geopoint",
         "name": "location",
         "_row_num": 20
+      },
+      {
+        "type": "string",
+        "name": "verify_user",
+        "undefined": true,
+        "_row_num": 21
       }
     ],
     "initial": [
@@ -1079,8 +1085,13 @@
           {
             "_row_num": 2,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 21,
+            "section_name": "model"
           }
         ],
+        "undefined": true,
         "elementKey": "verify_user"
       }
     },
@@ -1105,7 +1116,7 @@
                 "text": "First name"
               }
             },
-            "required": 1,
+            "required": true,
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
@@ -1124,7 +1135,7 @@
                 "text": "Last name"
               }
             },
-            "required": 1,
+            "required": true,
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
@@ -1155,7 +1166,7 @@
                 "text": "What is your ID number?"
               }
             },
-            "required": 1,
+            "required": true,
             "_row_num": 13,
             "__rowNum__": 12,
             "_token_type": "prompt",
@@ -1215,7 +1226,7 @@
             "type": "note",
             "display": {
               "prompt": {
-                "text": "User {{data.verify_user}} already exists.  Continue if you are sure.  Otherwise, exit."
+                "text": "User {{data.verify_user}} already exists.  Continue if you are sure.  Otherwise, Ignore Changes + Exit."
               }
             },
             "_row_num": 21,
@@ -1233,7 +1244,7 @@
                 "text": "What is your date of birth?"
               }
             },
-            "required": 1,
+            "required": true,
             "_row_num": 24,
             "__rowNum__": 23,
             "_token_type": "prompt",
@@ -1250,7 +1261,7 @@
               }
             },
             "values_list": "genders",
-            "required": 1,
+            "required": true,
             "_row_num": 26,
             "__rowNum__": 25,
             "_token_type": "prompt",
@@ -1303,7 +1314,7 @@
                 "text": "Including household representative"
               }
             },
-            "required": 1,
+            "required": true,
             "_row_num": 31,
             "__rowNum__": 30,
             "_token_type": "prompt",
@@ -1382,7 +1393,7 @@
           {
             "type": "assign",
             "name": "is_active",
-            "calculation": 1,
+            "calculation": true,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "assign",
@@ -1391,7 +1402,7 @@
           {
             "type": "assign",
             "name": "is_override",
-            "calculation": 0,
+            "calculation": false,
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "assign",
@@ -2016,8 +2027,13 @@
           {
             "_row_num": 2,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 21,
+            "section_name": "model"
           }
         ],
+        "undefined": true,
         "elementKey": "verify_user",
         "elementName": "verify_user",
         "elementSet": "data",
