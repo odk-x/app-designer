@@ -121,7 +121,6 @@
             "text": "Telephone number"
           }
         },
-        "constraint": "(telephone.length > 6)",
         "inputAttributes": {
           "type": "number"
         },
@@ -138,26 +137,8 @@
         "_row_num": 19
       },
       {
-        "clause": "if",
-        "condition": "(data('verify_user') !== null)",
-        "_row_num": 20
-      },
-      {
-        "type": "note",
-        "display": {
-          "prompt": {
-            "text": "User {{data.verify_user}} already exists.  Continue if you are sure.  Otherwise, Ignore Changes + Exit."
-          }
-        },
-        "_row_num": 21
-      },
-      {
-        "clause": "end if",
-        "_row_num": 22
-      },
-      {
         "clause": "begin screen",
-        "_row_num": 23
+        "_row_num": 20
       },
       {
         "type": "date",
@@ -168,13 +149,7 @@
           }
         },
         "required": true,
-        "_row_num": 24
-      },
-      {
-        "type": "assign",
-        "name": "age",
-        "calculation": "calculates.age()",
-        "_row_num": 25
+        "_row_num": 21
       },
       {
         "type": "select_one",
@@ -186,14 +161,38 @@
         },
         "values_list": "genders",
         "required": true,
-        "_row_num": 26
+        "_row_num": 22
       },
       {
         "clause": "end screen",
-        "_row_num": 27
+        "_row_num": 23
+      },
+      {
+        "clause": "if",
+        "condition": "(data('verify_user') !== null)",
+        "_row_num": 24
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "User {{data.verify_user}} already exists.  Continue if you are sure.  Otherwise, Ignore Changes + Exit."
+          }
+        },
+        "_row_num": 25
+      },
+      {
+        "clause": "end if",
+        "_row_num": 26
       },
       {
         "clause": "begin screen",
+        "_row_num": 27
+      },
+      {
+        "type": "assign",
+        "name": "age",
+        "calculation": "calculates.age()",
         "_row_num": 28
       },
       {
@@ -435,19 +434,8 @@
       {
         "type": "string",
         "name": "verify_user",
-        "undefined": true,
+        "isSessionVariable": true,
         "_row_num": 21
-      }
-    ],
-    "initial": [
-      {
-        "clause": "do section survey",
-        "_row_num": 2
-      },
-      {
-        "clause": "goto _finalize",
-        "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
-        "_row_num": 3
       }
     ],
     "choices": [
@@ -586,6 +574,17 @@
         "prompt_type_name": "async_assign_single_string",
         "type": "string",
         "_row_num": 8
+      }
+    ],
+    "initial": [
+      {
+        "clause": "do section survey",
+        "_row_num": 2
+      },
+      {
+        "clause": "goto _finalize",
+        "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
+        "_row_num": 3
       }
     ]
   },
@@ -858,7 +857,7 @@
         "elementType": "date",
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -883,7 +882,7 @@
         "valuesList": "genders",
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {
@@ -1091,7 +1090,7 @@
             "section_name": "model"
           }
         ],
-        "undefined": true,
+        "isSessionVariable": true,
         "elementKey": "verify_user"
       }
     },
@@ -1200,7 +1199,6 @@
                 "text": "Telephone number"
               }
             },
-            "constraint": "(telephone.length > 6)",
             "inputAttributes": {
               "type": "number"
             },
@@ -1223,20 +1221,6 @@
             "promptIdx": 6
           },
           {
-            "type": "note",
-            "display": {
-              "prompt": {
-                "text": "User {{data.verify_user}} already exists.  Continue if you are sure.  Otherwise, Ignore Changes + Exit."
-              }
-            },
-            "_row_num": 21,
-            "__rowNum__": 20,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen21",
-            "promptIdx": 7
-          },
-          {
             "type": "date",
             "name": "birth_date",
             "display": {
@@ -1245,12 +1229,12 @@
               }
             },
             "required": true,
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen23",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen20",
+            "promptIdx": 7
           },
           {
             "type": "select_one",
@@ -1262,11 +1246,25 @@
             },
             "values_list": "genders",
             "required": true,
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen23",
+            "_branch_label_enclosing_screen": "survey/_screen20",
+            "promptIdx": 8
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "User {{data.verify_user}} already exists.  Continue if you are sure.  Otherwise, Ignore Changes + Exit."
+              }
+            },
+            "_row_num": 25,
+            "__rowNum__": 24,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen25",
             "promptIdx": 9
           },
           {
@@ -1282,7 +1280,7 @@
             "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen28",
+            "_branch_label_enclosing_screen": "survey/_screen27",
             "promptIdx": 10
           },
           {
@@ -1300,7 +1298,7 @@
             "__rowNum__": 29,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen28",
+            "_branch_label_enclosing_screen": "survey/_screen27",
             "promptIdx": 11
           },
           {
@@ -1319,7 +1317,7 @@
             "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen28",
+            "_branch_label_enclosing_screen": "survey/_screen27",
             "promptIdx": 12
           },
           {
@@ -1365,9 +1363,8 @@
             0,
             1,
             3,
-            5,
+            7,
             8,
-            9,
             12
           ]
         },
@@ -1451,52 +1448,52 @@
             "operationIdx": 6
           },
           {
-            "clause": "if",
-            "condition": "(data('verify_user') !== null)",
+            "clause": "begin screen",
             "_row_num": 20,
             "__rowNum__": 19,
-            "_token_type": "goto_label",
-            "_branch_label": "_then20",
-            "operationIdx": 7
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else22",
-            "_row_num": 22,
-            "operationIdx": 8
-          },
-          {
-            "_row_num": 21,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 9
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif22",
-            "_row_num": 22,
-            "operationIdx": 10
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 23,
-            "__rowNum__": 22,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 27,
-              "__rowNum__": 26,
+              "_row_num": 23,
+              "__rowNum__": 22,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nassign('age', calculates.age());\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "clause": "if",
+            "condition": "(data('verify_user') !== null)",
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "goto_label",
+            "_branch_label": "_then24",
+            "operationIdx": 8
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else26",
+            "_row_num": 26,
+            "operationIdx": 9
+          },
+          {
+            "_row_num": 25,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 10
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif26",
+            "_row_num": 26,
             "operationIdx": 11
           },
           {
             "clause": "begin screen",
-            "_row_num": 28,
-            "__rowNum__": 27,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
@@ -1504,7 +1501,7 @@
               "__rowNum__": 31,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('age', calculates.age());\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 12
           },
           {
@@ -1545,12 +1542,12 @@
           "_screen6": 4,
           "_screen11": 5,
           "_screen15": 6,
-          "_then20": 9,
-          "_screen21": 9,
-          "_else22": 11,
-          "_endif22": 11,
-          "_screen23": 11,
-          "_screen28": 12,
+          "_screen20": 7,
+          "_then24": 10,
+          "_screen25": 10,
+          "_else26": 12,
+          "_endif26": 12,
+          "_screen27": 12,
           "_screen33": 13,
           "_screen34": 14,
           "_contents": 16,
@@ -1736,7 +1733,7 @@
         "elementType": "date",
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 21,
             "section_name": "survey"
           },
           {
@@ -1767,7 +1764,7 @@
         "valuesList": "genders",
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {
@@ -2033,7 +2030,7 @@
             "section_name": "model"
           }
         ],
-        "undefined": true,
+        "isSessionVariable": true,
         "elementKey": "verify_user",
         "elementName": "verify_user",
         "elementSet": "data",

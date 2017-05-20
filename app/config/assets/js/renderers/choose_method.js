@@ -23,7 +23,9 @@ var locale = odkCommon.getPreferredLocale();
 var superUser;
 var type = util.getQueryParameter('type');
 var code;
-var defaultGroup = null;
+var regInstanceIdKey = "regInstanceId";
+var userKey = "user";
+var defaultGroupKey = "defaultGroup";
 
 
 function display() {
@@ -56,7 +58,7 @@ function display() {
     $('#main').css({'visibility' : 'visible'});
 
     user = odkCommon.getActiveUser();
-    //user = "sue@mezuricloud.com";
+    odkCommon.setSessionVariable(userKey, user);
     console.log("Active User:" + user);
 
     var userPromise = new Promise(function(resolve, reject) {
@@ -78,7 +80,9 @@ function display() {
         var filteredRoles = _.filter(roles, function(s) {
             return s.substring(0, 5) === 'GROUP';
         });
-        defaultGroup = resultArray[2].getDefaultGroup();
+        var defaultGroup = resultArray[2].getDefaultGroup();
+        odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
+
         superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
         console.log(superUser);
         console.log("ROLES: " + roles);
@@ -92,7 +96,7 @@ function display() {
             $('#choose_user').append($("<option/>").attr("value", localizedUser).attr('selected', true).text(localizedUser));
             $('#choose_user').on('change', function() {
                 defaultGroup = $('#choose_user').val();
-
+                odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
                 if ($('#choose_user').val() != localizedUser) {
                     $('#barcode').prop("disabled", false).removeClass('disabled');
                     $('#search').prop("disabled", false).removeClass('disabled');
@@ -156,16 +160,16 @@ function callBackFn () {
     switch (actionType) {
         case actionBarcode:
             handleBarcodeCallback(action, dispatchStr);
+            odkCommon.removeFirstQueuedAction();
             break;
         case actionRegistration:
             handleRegistrationCallback(action, dispatchStr);
             break;
         default:
             console.log("Error: unrecognized action type in callback");
+            odkCommon.removeFirstQueuedAction();
             break;
     }
-
-    odkCommon.removeFirstQueuedAction();
 }
 
 function handleBarcodeCallback(action, dispatchStr) {
@@ -208,6 +212,7 @@ function handleRegistrationCallback(action, dispatchStr) {
     }
 
     var instanceId = result.instanceId;
+    odkCommon.setSessionVariable(regInstanceIdKey, instanceId);
     if (instanceId === null || instanceId === undefined) {
         console.log("Error: no instance ID on registration");
         return;
@@ -224,6 +229,20 @@ function handleRegistrationCallback(action, dispatchStr) {
         return;
     }
 
+    var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+    var user = odkCommon.getSessionVariable(userKey);
+    console.log("CAL: handleRegistrationCallback");
+    odkData.changeAccessFilterOfRow('registration', 'HIDDEN', user,
+                                    null, defaultGroup, null, instanceId, setRegSuccess, setRegFailure);
+
+
+}
+
+function setRegSuccess(result) {
+    console.log("CAL: setRegSuccess");
+    odkCommon.removeFirstQueuedAction();
+
+    var instanceId = odkCommon.getSessionVariable(regInstanceIdKey);
     if (type == 'delivery') {
         odkTables.openDetailWithListView(null, registrationTable, instanceId,
                                          'config/tables/registration/html/registration_detail.html?type=' +
@@ -233,6 +252,11 @@ function handleRegistrationCallback(action, dispatchStr) {
                                  'config/tables/registration/html/registration_detail.html?type=' +
                                  encodeURIComponent(type));
     }
+}
+
+function setRegFailure(error) {
+    console.log("CAL: setRegFailure");
+    console.log('reg set failure with error: ' + error);
 }
 
 function queryChain(passed_code) {
@@ -383,7 +407,8 @@ function registrationVoucherCBFailure(error) {
 }
 
 function proxyRowSuccess(result) {
-    // CAL: Ori shouldn't this just be user??
+    var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+    var user = odkCommon.getSessionVariable(userKey);
     odkData.changeAccessFilterOfRow('registration', 'HIDDEN', user,
                                     null, defaultGroup, null, result.getRowId(0), setFilterSuccess, setFilterFailure);
 }
@@ -515,6 +540,9 @@ function createOverrideCBFailure(error) {
 
 var addDistCBSuccess = function(result) {
     console.log('authorizations_detail addDistCBSuccess');
+
+    var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+    var user = odkCommon.getSessionVariable(userKey);
     odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, null, defaultGroup, 
                                     null, result.getRowId(0), finalFilterSuccess, finalFilterFailure);
     $('#search_results').text(odkCommon.localizeText(locale, "override_creation_success"));
