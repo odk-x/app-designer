@@ -285,8 +285,8 @@ window.odkCommonDefinitions = {
       },
       "_row_num": 39
     },
-    "serach_beneficiaries": {
-      "string_token": "serach_beneficiaries",
+    "search_beneficiaries": {
+      "string_token": "search_beneficiaries",
       "text": {
         "default": "Search for Beneficiaries"
       },

@@ -23,6 +23,8 @@ var locale = odkCommon.getPreferredLocale();
 var superUser;
 var type = util.getQueryParameter('type');
 var code;
+var queriedType;
+
 
 
 function display() {
@@ -209,15 +211,9 @@ function handleRegistrationCallback(action, dispatchStr) {
         return;
     }
 
-    if (type == 'delivery') {
-        odkTables.openDetailWithListView(null, registrationTable, instanceId,
+    odkTables.openDetailWithListView(null, registrationTable, instanceId,
                                          'config/tables/registration/html/registration_detail.html?type=' +
                                          encodeURIComponent(type));
-    } else {
-        odkTables.openDetailView(null, registrationTable, instanceId,
-                                 'config/tables/registration/html/registration_detail.html?type=' +
-                                 encodeURIComponent(type));
-    }
 }
 
 function queryChain(passed_code) {

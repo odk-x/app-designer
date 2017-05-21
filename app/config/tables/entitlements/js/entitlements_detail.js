@@ -199,7 +199,7 @@ var updateCBFailure = function(error) {
 
 var setJSONMap = function(JSONMap, key, value) {
     if (value !== null && value !== undefined) {
-        JSONMap[key] = JSON.stringify(value);
+        JSONMap[key] = value;
     }
 }
 

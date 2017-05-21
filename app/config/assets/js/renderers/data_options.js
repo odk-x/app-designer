@@ -9,24 +9,37 @@ var locale = odkCommon.getPreferredLocale();
 function display() {
     var type = util.getQueryParameter('type');
     var title = $('#title');
-    var list = document.createElement('button');
-    list.setAttribute('id', 'lists');
+    var top = document.createElement('button');
+    var middle = null;
+    top.setAttribute('id', 'top');
     if (type == 'registration') {
         title.text(odkCommon.localizeText(locale, "beneficiary_data_title"));
-        list.innerHTML = odkCommon.localizeText(locale, "beneficiary_lists");
-        list.onclick = function() {
-            odkTables.launchHTML(null,
-                                 'config/assets/beneficiary_lists.html');
+        top.innerHTML = odkCommon.localizeText(locale, "active_beneficiaries_title");
+        top.onclick = function() {
+            odkTables.openTableToListView(
+                                      null, 'registration', 'is_active = ?', ['true']
+                                      , 'config/tables/registration/html/registration_list.html?type=delivery');
+        }
+        var middle = document.createElement('button');
+        middle.setAttribute('id', 'middle');
+        middle.innerHTML = odkCommon.localizeText(locale, "disabled_beneficiaries_title");
+        middle.onclick = function() {
+            odkTables.openTableToListView(
+                                      null, 'registration', 'is_active = ?', ['false']
+                                      , 'config/tables/registration/html/registration_list.html?type=delivery');
         }
     } else {
         title.text(odkCommon.localizeText(locale, "delivery_data_title"));
-        list.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
-        list.onclick = function() {
+        top.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
+        top.onclick = function() {
             odkTables.launchHTML(null,
                                  'config/tables/deliveries/html/deliveries_list.html');
         }
     }
-    document.getElementById('wrapper').appendChild(list);
+    document.getElementById('wrapper').appendChild(top);
+    if (middle !== null) {
+        document.getElementById('wrapper').appendChild(middle);
+    }
 
     var search = document.createElement('button');
     search.setAttribute('id', 'searcher');

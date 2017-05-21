@@ -31,11 +31,14 @@ function cbSuccess(result) {
     $('#telephone').prepend(odkCommon.localizeText(locale, 'telephone') + ": ");
     $('#mobile_provider').prepend(odkCommon.localizeText(locale, 'mobile_provider') + ": ");
 
-    if (registrationResultSet.get('is_active') == 'true' && type == 'delivery') {
+    
+
+
+    if (registrationResultSet.get('is_active') == 'true' && (type == 'delivery' || type == 'registration')) {
         odkData.query('entitlements', 'beneficiary_code = ? and is_delivered = ?',
                       [registrationResultSet.get('beneficiary_code'), 'false'],
                       null, null, null, null, null, null, null, entCBSuccess, entCBFailure);
-    }  else if (registrationResultSet.get('is_active') == 'false' && type == 'delivery') {
+    }  else if (registrationResultSet.get('is_active') == 'false' && (type == 'delivery' || type == 'registration')) {
         $('#inner_reject').text(odkCommon.localizeText(locale, 'disabled_beneficiary_notification'));
     } else {
         var action = $('#followup');
@@ -81,22 +84,18 @@ function updateCBFailure(result) {
 }
 
 function entCBSuccess(result) {
-    if (result.getCount() > 0) {
-        console.log(result.getCount());
+  console.log(result.getCount());
 
-        $('#entitlements_switch').show();
-        $('#entitlements_title').text('Entitlements Listed'); // TODO: localize this
+  $('#entitlements_switch').show();
+  $('#entitlements_title').text('Entitlements Listed'); // TODO: localize this
 
-        $('#pending_txt').text('Pending'); // TODO: Localize this
-        $('#entitlements_pending').click(updateSubListView);
+  $('#pending_txt').text('Pending'); // TODO: Localize this
+  $('#entitlements_pending').click(updateSubListView);
 
-        $('#delivered_txt').text('Delivered'); // TODO: Localize this
-        $('#entitlements_delivered').click(updateSubListView);
+  $('#delivered_txt').text('Delivered'); // TODO: Localize this
+  $('#entitlements_delivered').click(updateSubListView);
 
-        updateSubListView();
-    } else {
-        $('#reject').text(odkCommon.localizeText(locale, "no_entitlements"));
-    }
+  updateSubListView();
 }
 
 function updateSubListView() {

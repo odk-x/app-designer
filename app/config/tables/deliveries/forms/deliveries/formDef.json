@@ -467,7 +467,7 @@
     "calculates": [
       {
         "calculation_name": "parse_ranges",
-        "calculation": "(function() {\n var obj = JSON.parse(data('ranges'));\n if (obj === null || obj === undefined) {\n  return 'with any barcode value';\n }\n if (obj.ranges.length < 1) {\n  return 'with any barcode value';\n } else {\n  var str = 'within the range of ';\n  for (var i = 0; i < obj.ranges.length - 1; i++) {\n   str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n';\n  }\n  if (obj.ranges.length > 1) {\n   str += 'or ';\n  }\n  str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max;\n  return str;\n  } \n})()",
+        "calculation": "(function() {var obj = JSON.parse(data('ranges'));\n if (obj === null || obj === undefined) {\n  return 'with any barcode value';\n }\n if (obj.ranges.length < 1) {\n  return 'with any barcode value';\n } else {\n  var str = 'within the range of ';\n  for (var i = 0; i < obj.ranges.length - 1; i++) {\n   str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n';\n  }\n  if (obj.ranges.length > 1) {\n   str += 'or ';\n  }\n  str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max;\n  return str;\n  } \n})()",
         "_row_num": 2
       },
       {
@@ -646,7 +646,7 @@
     "calculates": {
       "parse_ranges": {
         "calculation_name": "parse_ranges",
-        "calculation": "(function() {\n var obj = JSON.parse(data('ranges'));\n if (obj === null || obj === undefined) {\n  return 'with any barcode value';\n }\n if (obj.ranges.length < 1) {\n  return 'with any barcode value';\n } else {\n  var str = 'within the range of ';\n  for (var i = 0; i < obj.ranges.length - 1; i++) {\n   str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n';\n  }\n  if (obj.ranges.length > 1) {\n   str += 'or ';\n  }\n  str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max;\n  return str;\n  } \n})()",
+        "calculation": "(function() {var obj = JSON.parse(data('ranges'));\n if (obj === null || obj === undefined) {\n  return 'with any barcode value';\n }\n if (obj.ranges.length < 1) {\n  return 'with any barcode value';\n } else {\n  var str = 'within the range of ';\n  for (var i = 0; i < obj.ranges.length - 1; i++) {\n   str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n';\n  }\n  if (obj.ranges.length > 1) {\n   str += 'or ';\n  }\n  str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max;\n  return str;\n  } \n})()",
         "_row_num": 2
       },
       "in_range": {

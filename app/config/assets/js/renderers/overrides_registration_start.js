@@ -10,7 +10,7 @@ function display() {
     var chooseText = odkCommon.localizeText(locale, "choose_method");
     var enable = document.createElement("button");
     enable.setAttribute("id", "enable");
-    var enableText = odkCommon.localizeText("enable_beneficiary");
+    var enableText = odkCommon.localizeText(locale, "enable_beneficiary");
     enable.innerHTML = enableText;
     enable.onclick = function() {
         odkTables.launchHTML(null,
@@ -24,7 +24,7 @@ function display() {
 
     var disable = document.createElement("button");
     disable.setAttribute("id", "disable");
-    var disableText = odkCommon.localizeText("disable_beneficiary");
+    var disableText = odkCommon.localizeText(locale, "disable_beneficiary");
     disable.innerHTML = disableText;
     disable.onclick = function() {
         odkTables.launchHTML(null,

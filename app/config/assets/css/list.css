@@ -26,6 +26,13 @@ h1 {
   overflow: auto;
 }
 
+#error {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  font-size: 20px;
+}
+
 li {
   list-style-type: none;
   margin: 0 0 0 0;
