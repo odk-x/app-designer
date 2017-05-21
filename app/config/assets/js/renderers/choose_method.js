@@ -24,7 +24,9 @@ var superUser;
 var type = util.getQueryParameter('type');
 var code;
 var queriedType;
-
+var regInstanceIdKey = "regInstanceId";
+var userKey = "user";
+var defaultGroupKey = "defaultGroup";
 
 
 function display() {
@@ -56,6 +58,10 @@ function display() {
 
     $('#main').css({'visibility' : 'visible'});
 
+    user = odkCommon.getActiveUser();
+    odkCommon.setSessionVariable(userKey, user);
+    console.log("Active User:" + user);
+
     var userPromise = new Promise(function(resolve, reject) {
         odkData.getUsers(resolve, reject);
     });
@@ -63,23 +69,35 @@ function display() {
     var rolesPromise = new Promise(function(resolve, reject) {
         odkData.getRoles(resolve, reject);
     });
+    
+    var defaultGroupPromise = new Promise(function(resolve, reject) {
+        odkData.getDefaultGroup(resolve, reject);
+    });
 
-    Promise.all([userPromise, rolesPromise]).then(function(resultArray) {
+    Promise.all([userPromise, rolesPromise, defaultGroupPromise]).then(function(resultArray) {
         console.log(resultArray.length);
         var users = resultArray[0].getUsers();
         var roles = resultArray[1].getRoles();
+        var filteredRoles = _.filter(roles, function(s) {
+            return s.substring(0, 5) === 'GROUP';
+        });
+        var defaultGroup = resultArray[2].getDefaultGroup();
+        odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
+
         superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
         console.log(superUser);
+        console.log("ROLES: " + roles);
+        console.log("USERS: " + users);
+        console.log("DEFAULT_GROUP: " + defaultGroup);
         if (superUser && type != 'activate' && type != 'disable') {
             $('#choose_user').show();
             $('#barcode').prop("disabled", true).addClass('disabled');
             $('#search').prop("disabled", true).addClass('disabled');
-            console.log(roles);
-            users.forEach(addOption);
+            filteredRoles.forEach(addOption);
             $('#choose_user').append($("<option/>").attr("value", localizedUser).attr('selected', true).text(localizedUser));
             $('#choose_user').on('change', function() {
-                user = $('#choose_user').val();
-
+                defaultGroup = $('#choose_user').val();
+                odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
                 if ($('#choose_user').val() != localizedUser) {
                     $('#barcode').prop("disabled", false).removeClass('disabled');
                     $('#search').prop("disabled", false).removeClass('disabled');
@@ -102,6 +120,7 @@ function display() {
 
 
         $('#search').on('click', function() {
+            console.log("USERS: " + users);
             queryChain($('#code').val());
         });
     }, function(err) {
@@ -117,10 +136,9 @@ function display() {
     callBackFn();
 }
 
-function addOption(item, index) {
-    if ($.inArray("ROLE_USER", item.roles) > -1 && $.inArray("ROLE_SUPER_USER_TABLES", item.roles) == -1) {
-        $('#choose_user').append($("<option/>").attr("value", item.user_id).text(item.full_name));
-    }
+function addOption(item) {
+    $('#choose_user').append($("<option/>").attr("value", item).text(item));
+
 }
 
 function callBackFn () {
@@ -143,16 +161,16 @@ function callBackFn () {
     switch (actionType) {
         case actionBarcode:
             handleBarcodeCallback(action, dispatchStr);
+            odkCommon.removeFirstQueuedAction();
             break;
         case actionRegistration:
             handleRegistrationCallback(action, dispatchStr);
             break;
         default:
             console.log("Error: unrecognized action type in callback");
+            odkCommon.removeFirstQueuedAction();
             break;
     }
-
-    odkCommon.removeFirstQueuedAction();
 }
 
 function handleBarcodeCallback(action, dispatchStr) {
@@ -195,6 +213,7 @@ function handleRegistrationCallback(action, dispatchStr) {
     }
 
     var instanceId = result.instanceId;
+    odkCommon.setSessionVariable(regInstanceIdKey, instanceId);
     if (instanceId === null || instanceId === undefined) {
         console.log("Error: no instance ID on registration");
         return;
@@ -211,9 +230,29 @@ function handleRegistrationCallback(action, dispatchStr) {
         return;
     }
 
-    odkTables.openDetailWithListView(null, registrationTable, instanceId,
+    var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+    var user = odkCommon.getSessionVariable(userKey);
+    console.log("CAL: handleRegistrationCallback");
+    odkData.changeAccessFilterOfRow('registration', 'HIDDEN', user,
+                                    null, defaultGroup, null, instanceId, setRegSuccess, setRegFailure);
+
+
+}
+
+function setRegSuccess(result) {
+    console.log("CAL: setRegSuccess");
+    odkCommon.removeFirstQueuedAction();
+
+    var instanceId = odkCommon.getSessionVariable(regInstanceIdKey);
+    if (type == 'delivery') {
+        odkTables.openDetailWithListView(null, registrationTable, instanceId,
                                          'config/tables/registration/html/registration_detail.html?type=' +
                                          encodeURIComponent(type));
+}
+
+function setRegFailure(error) {
+    console.log("CAL: setRegFailure");
+    console.log('reg set failure with error: ' + error);
 }
 
 function queryChain(passed_code) {
@@ -235,7 +274,7 @@ function queryChain(passed_code) {
 function deliveryFunction() {
     if (superUser) {
         console.log(user);
-        odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _filter_value = ?',
+        odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _row_owner = ?',
                       [code, 'true', user], null, null, null, null, null, null, true,
                       deliveryBCheckCBSuccess, deliveryBCheckCBFailure);
     } else {
@@ -249,7 +288,7 @@ function deliveryBCheckCBSuccess(result) {
     if (result.getCount() === 0) {
         if (superUser) {
             console.log(user);
-            odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _filter_value = ?',
+            odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _row_owner = ?',
                           [code, 'false', user], null, null, null, null, null, null, true,
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
         } else {
@@ -271,7 +310,7 @@ function deliveryBCheckCBSuccess(result) {
         var params;
         var vals;
         if (superUser) {
-            params = 'beneficiary_code = ? and is_active = ? and _filter_value = ?';
+            params = 'beneficiary_code = ? and is_active = ? and _row_owner = ?';
             vals = [code,'true', user];
         } else {
             params = 'beneficiary_code = ? and is_active = ?';
@@ -306,7 +345,7 @@ function registrationFunction() {
     console.log('registration function path entered');
     if (superUser) {
         console.log('is superuser');
-        odkData.query('registration', 'beneficiary_code = ? and _filter_value = ?', [code, user],
+        odkData.query('registration', 'beneficiary_code = ? and _row_owner = ?', [code, user],
                       null, null, null, null, null, null, true,
                       registrationBCheckCBSuccess, registrationBCheckCBFailure);
     } else {
@@ -321,7 +360,7 @@ function registrationBCheckCBSuccess(result) {
     if (result.getCount() === 0) {
         if (superUser) {
             console.log('is superuser');
-            odkData.query('entitlements', 'beneficiary_code = ? and _filter_type = ?',
+            odkData.query('entitlements', 'beneficiary_code = ? and _default_access = ?',
                           [code, "READ_ONLY"], null, null, null, null, null, null, true,
                           registrationVoucherCBSuccess, registrationVoucherCBFailure);
         } else {
@@ -364,8 +403,10 @@ function registrationVoucherCBFailure(error) {
 }
 
 function proxyRowSuccess(result) {
-    odkData.changeAccessFilterOfRow('registration', 'HIDDEN', decodeURIComponent(util.getQueryParameter('user')),
-                                    result.getRowId(0), setFilterSuccess, setFilterFailure);
+    var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+    var user = odkCommon.getSessionVariable(userKey);
+    odkData.changeAccessFilterOfRow('registration', 'HIDDEN', user,
+                                    null, defaultGroup, null, result.getRowId(0), setFilterSuccess, setFilterFailure);
 }
 
 function proxyRowFailure(error) {
@@ -373,7 +414,7 @@ function proxyRowFailure(error) {
 }
 
 function setFilterSuccess(result) {
-    var dispatchStruct = JSON.stringify({actionTypeKey: registration});
+    var dispatchStruct = JSON.stringify({actionTypeKey: registrationTable});
     odkTables.editRowWithSurvey(dispatchStruct, registrationTable, result.getRowId(0), 'registration', null);
 }
 
@@ -435,7 +476,7 @@ function regOverrideBenFailure(error) {
 
 function entOverrideFunction() {
     if (code !== "") {
-        odkData.query('registration', 'beneficiary_code = ? and _filter_value = ?',
+        odkData.query('registration', 'beneficiary_code = ? and _row_owner = ?',
                       [code, user],
                       null, null, null, null, null, null, true, benEntOverrideCBSuccess,
                       benEntOverrideCBFailure);
@@ -446,7 +487,7 @@ function entOverrideFunction() {
 
 function benEntOverrideCBSuccess(result) {
     if (result.getCount() != 0) {
-        odkData.query('entitlements', 'beneficiary_code = ? and authorization_id = ? and _filter_value = ?',
+        odkData.query('entitlements', 'beneficiary_code = ? and authorization_id = ? and _row_owner = ?',
                       [code, util.getQueryParameter('authorization_id'), user], null, null, null, null, null,
                       null, true, entCheckCBSuccess, entCheckCBFailure);
     } else {
@@ -495,8 +536,11 @@ function createOverrideCBFailure(error) {
 
 var addDistCBSuccess = function(result) {
     console.log('authorizations_detail addDistCBSuccess');
-    odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, result.getRowId(0),
-                                    finalFilterSuccess, finalFilterFailure);
+
+    var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+    var user = odkCommon.getSessionVariable(userKey);
+    odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, null, defaultGroup, 
+                                    null, result.getRowId(0), finalFilterSuccess, finalFilterFailure);
     $('#search_results').text(odkCommon.localizeText(locale, "override_creation_success"));
 };
 

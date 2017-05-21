@@ -17,7 +17,7 @@ window.odkTableSpecificDefinitions = {
     },
     "telephone": {
       "string_token": "telephone",
-      "text": "Telephon",
+      "text": "Telephone",
       "_row_num": 5
     },
     "mobile_provider": {
