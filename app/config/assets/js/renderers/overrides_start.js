@@ -22,7 +22,16 @@ function display() {
     override_entitlement.innerHTML = odkCommon.localizeText(locale, "override_entitlement");;
     override_entitlement.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/tables/authorizations/html/authorizations_list.html');
+                             'config/tables/authorizations/html/authorizations_list.html?type=override');
     }
     document.getElementById("wrapper").appendChild(override_entitlement);
+
+    var distribution_report = document.createElement("button");
+    distribution_report.setAttribute("id", "distribution_report");
+    distribution_report.innerHTML = "Fill Distribution Report";
+    distribution_report.onclick = function() {
+        odkTables.launchHTML(null,
+                        'config/tables/authorizations/html/authorizations_list.html?type=distribution_report')
+    }
+    document.getElementById("wrapper").appendChild(distribution_report);
 }

@@ -7,6 +7,7 @@ var deliveriesResultSet = {};
 
 function cbSuccess(result) {
   deliveriesResultSet = result;
+  updateEntitlement();
   var locale = odkCommon.getPreferredLocale();
   $('#ben_code').prepend(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
   $('#del_id').prepend(odkCommon.localizeText(locale, 'delivery_id') + ": ");
@@ -35,6 +36,21 @@ function cbSuccess(result) {
 
 function cbFailure(error) {
   console.log('deliveries_detail cbFailure: getViewData failed with message: ' + error);
+}
+
+function updateEntitlement() {
+  var struct = {};
+  struct.is_delivered = 'true';
+  odkData.updateRow('entitlements', struct, deliveriesResultSet.get('entitlement_id')
+  , updateCBSuccess, updateCBFailure);
+}
+
+var updateCBSuccess = function(result) {
+  console.log('updateCBSuccess called');
+}
+
+var updateCBFailure = function(error) {
+  console.log('updateCBFailure called with error: ' + error);
 }
 
 function display() {

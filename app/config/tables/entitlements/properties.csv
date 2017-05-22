@@ -3,4 +3,4 @@ SurveyUtil,default,SurveyUtil.formId,string,wrong_form
 Table,default,defaultViewType,string,SPREADSHEET
 Table,default,displayName,object,"{""text"":""Entitlements""}"
 Table,security,defaultAccessOnCreation,string,READ_ONLY
-Table,security,locked,boolean,true
+Table,security,locked,boolean,false

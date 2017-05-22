@@ -7,6 +7,11 @@ var entitlementsResultSet = {};
 var compStr = 'COMPLETE';
 var timer;
 var locale = odkCommon.getPreferredLocale();
+var savepointSuccess = "COMPLETE";
+// Table IDs
+var registrationTable = 'registration';
+var authorizationTable = 'authorizations';
+
 
 var display = function() {
 
@@ -50,7 +55,7 @@ function actionCBFn() {
 function handleSurveyRowCallback(action, dispatchStr) {
 
     console.log("Row change action occured");
-
+    console.log(result);
     var result = action.jsonValue.result;
     if (result === null || result === undefined) {
         console.log("Error: no result object on registration");
@@ -73,8 +78,9 @@ function handleSurveyRowCallback(action, dispatchStr) {
         console.log("The row was not saved as complete. Not launching detailview");
         return;
     }
+    //updateEntitlementsWithRowId(instanceId);
 
-    odkTables.openDetailView(null, registrationTable, instanceId,
+    odkTables.openDetailView(null, 'deliveries', instanceId,
                              'config/tables/deliveries/html/deliveries_detail.html?type=delivery');
 }
 
@@ -87,8 +93,7 @@ var cbSuccess = function (result) {
   $('#item_description').prepend(odkCommon.localizeText(locale, 'item_pack_description') + ": ");
   $('#is_override').prepend(odkCommon.localizeText(locale, 'is_override') + ": ");
   $('#beneficiary_code').prepend(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
-
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
   $('#inner_authorization_name').text(entitlementsResultSet.get('authorization_name'));
   $('#inner_item_pack_name').text(entitlementsResultSet.get('item_pack_name'));
   $('#inner_item_description').text(entitlementsResultSet.get('item_description'));
@@ -122,6 +127,7 @@ var cbSuccess = function (result) {
       if (deliveryForm == undefined || deliveryForm == null || deliveryForm == "" ) {
         deliveryForm = 'deliveries';
       }
+      console.log(deliveryTable + deliveryForm);
 
       $('#launch').on(
       'click',
@@ -170,6 +176,13 @@ var updateEntitlements = function() {
   console.log('entitlement_id is: ' + entitlementsResultSet.get('_id'));
   odkData.query('deliveries', 'entitlement_id = ? and is_delivered = ? and _savepoint_type = ?',
                 [entitlementsResultSet.get('_id'), 'true', compStr],
+                null, null, null, null, null, null, null, queryCBSuccess, queryCBFailure);
+}
+
+var updateEntitlementsWithRowId = function(rowId) {
+  console.log('entitlement_id is: ' + rowId);
+  odkData.query('deliveries', 'entitlement_id = ? and is_delivered = ? and _savepoint_type = ?',
+                [rowId, 'true', compStr],
                 null, null, null, null, null, null, null, queryCBSuccess, queryCBFailure);
 }
 

@@ -17,7 +17,7 @@ function display() {
         top.innerHTML = odkCommon.localizeText(locale, "active_beneficiaries_title");
         top.onclick = function() {
             odkTables.openTableToListView(
-                                      null, 'registration', 'is_active = ?', ['true']
+                                      null, 'registration', 'is_active = ?', ['TRUE']
                                       , 'config/tables/registration/html/registration_list.html?type=delivery');
         }
         var middle = document.createElement('button');
@@ -25,14 +25,14 @@ function display() {
         middle.innerHTML = odkCommon.localizeText(locale, "disabled_beneficiaries_title");
         middle.onclick = function() {
             odkTables.openTableToListView(
-                                      null, 'registration', 'is_active = ?', ['false']
+                                      null, 'registration', 'is_active = ?', ['FALSE']
                                       , 'config/tables/registration/html/registration_list.html?type=delivery');
         }
     } else {
         title.text(odkCommon.localizeText(locale, "delivery_data_title"));
         top.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
         top.onclick = function() {
-            odkTables.launchHTML(null,
+            odkTables.openTableToListView(null, 'deliveries', null, null,
                                  'config/tables/deliveries/html/deliveries_list.html');
         }
     }

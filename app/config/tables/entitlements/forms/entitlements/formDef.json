@@ -136,7 +136,7 @@
         "aspect": "security",
         "key": "locked",
         "type": "boolean",
-        "value": "true",
+        "value": "false",
         "_row_num": 3
       },
       {
@@ -806,7 +806,7 @@
         "_aspect": "security",
         "_key": "locked",
         "_type": "boolean",
-        "_value": "true"
+        "_value": "false"
       }
     ]
   }

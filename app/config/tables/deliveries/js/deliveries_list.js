@@ -101,9 +101,9 @@ var displayGroup = function(idxStart) {
       var item = $('<li>');
       item.attr('rowId', deliveriesResultSet.getRowId(i));
       item.attr('class', 'item_space');
-      /*var first_name = deliveriesResultSet.getData(i, 'first_name');
+      var first_name = deliveriesResultSet.getData(i, 'first_name');
       var last_name = deliveriesResultSet.getData(i, 'last_name');
-      item.text(first_name + ' ' + last_name);*/
+      item.text(deliveriesResultSet.getData(i, 'item_pack_name'));
 
       /* Creates arrow icon (Nothing to edit here) */
       var chevron = $('<img>');

@@ -27,10 +27,8 @@ h1 {
 }
 
 #error {
-  display: inline-block;
+  font-size: 35px;
   position: relative;
-  text-align: center;
-  font-size: 20px;
 }
 
 li {

@@ -47,7 +47,7 @@ function search() {
 function successCallbackFn(result) {
     var count = result.getCount();
     var label;
-    if (type = 'registration') {
+    if (type == 'registration') {
         if (count == 1) {
             label = odkCommon.localizeText(locale, "beneficiary");
         } else {

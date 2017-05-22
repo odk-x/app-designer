@@ -55,9 +55,6 @@ function display() {
         });
     }
     $('#title').text(util.getQueryParameter('title'));
-
-    $('#main').css({'visibility' : 'visible'});
-
     user = odkCommon.getActiveUser();
     odkCommon.setSessionVariable(userKey, user);
     console.log("Active User:" + user);
@@ -244,10 +241,11 @@ function setRegSuccess(result) {
     odkCommon.removeFirstQueuedAction();
 
     var instanceId = odkCommon.getSessionVariable(regInstanceIdKey);
-    if (type == 'delivery') {
+    if (type == 'delivery' || type == 'registration') {
         odkTables.openDetailWithListView(null, registrationTable, instanceId,
                                          'config/tables/registration/html/registration_detail.html?type=' +
                                          encodeURIComponent(type));
+    }
 }
 
 function setRegFailure(error) {
@@ -262,8 +260,6 @@ function queryChain(passed_code) {
         deliveryFunction();
     } else if (type == 'registration') {
         registrationFunction();
-    } else if (type == 'voucher') {
-        voucherFunction();
     } else if (type == 'activate' || type == 'disable') {
         regOverrideFunction();
     } else if (type == 'ent_override') {
@@ -275,10 +271,10 @@ function deliveryFunction() {
     if (superUser) {
         console.log(user);
         odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _row_owner = ?',
-                      [code, 'true', user], null, null, null, null, null, null, true,
+                      [code, 'TRUE', user], null, null, null, null, null, null, true,
                       deliveryBCheckCBSuccess, deliveryBCheckCBFailure);
     } else {
-        odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'true'], null,
+        odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'TRUE'], null,
                       null, null, null, null, null, true, deliveryBCheckCBSuccess, deliveryBCheckCBFailure);
     }
 }
@@ -289,10 +285,10 @@ function deliveryBCheckCBSuccess(result) {
         if (superUser) {
             console.log(user);
             odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _row_owner = ?',
-                          [code, 'false', user], null, null, null, null, null, null, true,
+                          [code, 'FALSE', user], null, null, null, null, null, null, true,
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
         } else {
-            odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'false'],
+            odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'FALSE'],
                           null, null, null, null, null, null, true,
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
         }
@@ -311,10 +307,10 @@ function deliveryBCheckCBSuccess(result) {
         var vals;
         if (superUser) {
             params = 'beneficiary_code = ? and is_active = ? and _row_owner = ?';
-            vals = [code,'true', user];
+            vals = [code,'TRUE', user];
         } else {
             params = 'beneficiary_code = ? and is_active = ?';
-            vals = [code,'true'];
+            vals = [code,'TRUE'];
         }
         odkTables.openTableToListView(
                                       null,
@@ -427,9 +423,9 @@ function regOverrideFunction() {
     if (code !== "") {
         console.log(code);
         if (type == 'activate') {
-            queriedType = 'false';
+            queriedType = 'FALSE';
         } else {
-            queriedType = 'true';
+            queriedType = 'TRUE';
         }
         odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, queriedType],
                       null, null, null, null, null, null, true,

@@ -34,34 +34,35 @@ function cbSuccess(result) {
     
 
 
-    if (registrationResultSet.get('is_active') == 'true' && (type == 'delivery' || type == 'registration')) {
-        odkData.query('entitlements', 'beneficiary_code = ? and is_delivered = ?',
+    
+    if (type == 'activate' || type == 'disable') {
+      var action = $('#followup');
+      if (type == 'activate') {
+          action.text(odkCommon.localizeText(locale, "enable_beneficiary"));
+      } else {
+          action.text(odkCommon.localizeText(locale, "disable_beneficiary"));
+      }
+      action.show();
+      action.on(
+                'click',
+                function() {
+                    var struct = {};
+                    if (type == 'activate') {
+                        struct.is_active = 'true';
+                    } else {
+                        struct.is_active = 'false';
+                    }
+                    struct.is_override = 'true';
+                    odkData.updateRow('registration', struct, registrationResultSet.getRowId(0),
+                                      updateCBSuccess, updateCBFailure);
+                }
+               );
+    } else if (registrationResultSet.get('is_active') == 'false') {
+      $('#inner_reject').text(odkCommon.localizeText(locale, 'disabled_beneficiary_notification'));
+    } else {
+      odkData.query('entitlements', 'beneficiary_code = ? and is_delivered = ?',
                       [registrationResultSet.get('beneficiary_code'), 'false'],
                       null, null, null, null, null, null, null, entCBSuccess, entCBFailure);
-    }  else if (registrationResultSet.get('is_active') == 'false' && (type == 'delivery' || type == 'registration')) {
-        $('#inner_reject').text(odkCommon.localizeText(locale, 'disabled_beneficiary_notification'));
-    } else {
-        var action = $('#followup');
-        if (type == 'activate') {
-            action.text(odkCommon.localizeText(locale, "enable_beneficiary"));
-        } else {
-            action.text(odkCommon.localizeText(locale, "disable_beneficiary"));
-        }
-        action.show();
-        action.on(
-                  'click',
-                  function() {
-                      var struct = {};
-                      if (type == 'activate') {
-                          struct.is_active = 'true';
-                      } else {
-                          struct.is_active = 'false';
-                      }
-                      struct.is_override = 'true';
-                      odkData.updateRow('registration', struct, registrationResultSet.getRowId(0),
-                                        updateCBSuccess, updateCBFailure);
-                  }
-                 );
     }
 }
 

@@ -58,12 +58,12 @@ var resumeFn = function(fIdxStart) {
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                 var launchType = util.getQueryParameter('type');
-                if (launchType == 'delivery') {
-                    odkTables.openDetailWithListView(null, tableId, rowId,
+                if (launchType == 'activate' || launchType == 'disable') {
+                    odkTables.openDetailView(null, tableId, rowId,
                                                      'config/tables/registration/html/registration_detail.html?type='
                                                      + encodeURIComponent(launchType));
                 } else {
-                    odkTables.openDetailView(null, tableId, rowId,
+                    odkTables.openDetailWithListView(null, tableId, rowId,
                                                      'config/tables/registration/html/registration_detail.html?type='
                                                      + encodeURIComponent(launchType));
                 }
@@ -86,7 +86,7 @@ var displayGroup = function(idxStart) {
     if (registrationResultSet.getCount() === 0) {
         var errorText = $('#error');
         errorText.show();
-        errorText.text('No registration found'); // TODO: Translate this
+        errorText.text('No beneficiaries found'); // TODO: Translate this
     }
 
     /* Number of rows displayed per 'chunk' - can modify this value */
