@@ -63,7 +63,7 @@ var resumeFn = function(fIdxStart) {
                 // we'll pass null as the relative path to use the default file
                  // odkTables.openDetailView(null, 'entitlements', rowId,
                  // 'config/tables/entitlements/html/entitlements_detail.html');
-                if (entitlementsResultSet.getData(0, 'is_delivered') == 'true') {
+                if (entitlementsResultSet.getData(0, 'is_delivered') === 'true' || entitlementsResultSet.getData(0, 'is_delivered') === 'TRUE') {
                   odkData.query('deliveries', 'entitlement_id = ?', [rowId], null,
                       null, null, null, null, null, true, deliveredCaseSuccess, 
                       deliveredCaseFailure);
@@ -187,7 +187,7 @@ function formResolutionSuccess(result) {
       setJSONMap(jsonMap, 'ranges', ranges);
       if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
         odkData.addRow(deliveryTable, jsonMap, util.genUUID(), proxyRowSuccess, proxyRowFailure);
-      } else if (newEntitlementsResultSet.get('is_delivered') == 'false') {
+      } else if (newEntitlementsResultSet.get('is_delivered') === 'false' || newEntitlementsResultSet.get('is_delivered') === 'FALSE') {
           var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery});
           odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
       }
@@ -272,8 +272,8 @@ var displayGroup = function(idxStart) {
 
 var updateEntitlementsWithRowId = function(rowId) {
   console.log('entitlement_id is: ' + rowId);
-  odkData.query('deliveries', '_id = ? and is_delivered = ? and _savepoint_type = ?',
-                [rowId, 'true', compStr],
+  odkData.query('deliveries', '_id = ? and (is_delivered = ? or is_delivered = ?) and _savepoint_type = ?',
+                [rowId, 'true', 'TRUE', compStr],
                 null, null, null, null, null, null, null, queryCBSuccess, queryCBFailure);
 }
 

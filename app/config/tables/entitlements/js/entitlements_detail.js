@@ -137,7 +137,7 @@ var cbSuccess = function (result) {
         if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
           console.log('wait what');
           odkData.addRow(deliveryTable, jsonMap, util.genUUID(), proxyRowSuccess, proxyRowFailure);
-        } else if (entitlementsResultSet.get('is_delivered') == 'false') {
+        } else if (entitlementsResultSet.get('is_delivered') == 'false' || entitlementsResultSet.get('is_delivered') == 'FALSE') {
             var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery});
             odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
         }
@@ -174,15 +174,15 @@ function setFilterFailure(error) {
 
 var updateEntitlements = function() {
   console.log('entitlement_id is: ' + entitlementsResultSet.get('_id'));
-  odkData.query('deliveries', 'entitlement_id = ? and is_delivered = ? and _savepoint_type = ?',
-                [entitlementsResultSet.get('_id'), 'true', compStr],
+  odkData.query('deliveries', 'entitlement_id = ? and (is_delivered = ? or is_delivered = ?) and _savepoint_type = ?',
+                [entitlementsResultSet.get('_id'), 'true', 'TRUE', compStr],
                 null, null, null, null, null, null, null, queryCBSuccess, queryCBFailure);
 }
 
 var updateEntitlementsWithRowId = function(rowId) {
   console.log('entitlement_id is: ' + rowId);
-  odkData.query('deliveries', 'entitlement_id = ? and is_delivered = ? and _savepoint_type = ?',
-                [rowId, 'true', compStr],
+  odkData.query('deliveries', 'entitlement_id = ? and (is_delivered = ? or is_delivered = ?) and _savepoint_type = ?',
+                [rowId, 'true', 'TRUE', compStr],
                 null, null, null, null, null, null, null, queryCBSuccess, queryCBFailure);
 }
 

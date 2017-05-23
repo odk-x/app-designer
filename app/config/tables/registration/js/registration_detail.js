@@ -57,11 +57,12 @@ function cbSuccess(result) {
                                       updateCBSuccess, updateCBFailure);
                 }
                );
-    } else if (registrationResultSet.get('is_active') == 'false') {
+    } else if (registrationResultSet.get('is_active') == 'false' || 
+               registrationResultSet.get('is_active') == 'FALSE') {
       $('#inner_reject').text(odkCommon.localizeText(locale, 'disabled_beneficiary_notification'));
     } else {
-      odkData.query('entitlements', 'beneficiary_code = ? and is_delivered = ?',
-                      [registrationResultSet.get('beneficiary_code'), 'false'],
+      odkData.query('entitlements', 'beneficiary_code = ? and (is_delivered = ? or is_delivered = ?)',
+                      [registrationResultSet.get('beneficiary_code'), 'false', 'FALSE'],
                       null, null, null, null, null, null, null, entCBSuccess, entCBFailure);
     }
 }
@@ -104,9 +105,19 @@ function updateSubListView() {
     console.log("registrationResultSet: " + registrationResultSet);
     console.log("groupModify: " + groupModify);
     
+    var showDeliveredCase = 'FALSE';
+    if (showDelivered === 'true') {
+        showDeliveredCase = 'TRUE';
+    } else if (showDelivered === 'TRUE') {
+        showDeliveredCase = 'true';
+    } else if (showDelivered === 'false') {
+        showDeliveredCase = 'FALSE';
+    } else if (showDelivered === 'FALSE'){
+        showDeliveredCase = 'false';
+    }
     odkTables.setSubListView('entitlements',
-                             'beneficiary_code = ? and is_delivered = ?',
-                             [registrationResultSet.get('beneficiary_code'), showDelivered],
+                             'beneficiary_code = ? and (is_delivered = ? or is_delivered = ?)',
+                             [registrationResultSet.get('beneficiary_code'), showDelivered, showDeliveredCase],
                              'config/tables/entitlements/html/entitlements_list.html?groupModify=' + encodeURIComponent(groupModify));
 
     if (showDelivered === 'true') {

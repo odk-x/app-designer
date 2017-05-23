@@ -274,7 +274,7 @@ function deliveryFunction() {
 function deliveryBCheckCBSuccess(result) {
     console.log('deliveryBCheckCBSuccess called');
     if (result.getCount() === 0) {
-        odkData.query('registration', 'beneficiary_code = ? and (is_active = ? or is_active)', [code, 'FALSE', 'false'],
+        odkData.query('registration', 'beneficiary_code = ? and (is_active = ? or is_active = ?)', [code, 'FALSE', 'false'],
                           null, null, null, null, null, null, true,
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
     } else if (result.getCount() === 1) {
@@ -437,9 +437,9 @@ function regOverrideBenSuccess(result) {
                                       encodeURIComponent(type));
     } else {
         if (type == 'activate') {
-            $('#search_results').text(odkCommon.localizeText(locale, "no_active_beneficiary"));
-        } else {
             $('#search_results').text(odkCommon.localizeText(locale, "no_disabled_beneficiary"));
+        } else {
+            $('#search_results').text(odkCommon.localizeText(locale, "no_active_beneficiary"));
         }
     }
 }

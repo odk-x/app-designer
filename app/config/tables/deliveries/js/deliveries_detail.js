@@ -25,7 +25,7 @@ function cbSuccess(result) {
   $('#inner_del_time').text(deliveriesResultSet.get('date_time'));
   $('#inner_del_site').text(deliveriesResultSet.get('delivery_site'));
   $('#inner_distributor').text(deliveriesResultSet.get('distributor'));
-  if (deliveriesResultSet.get('is_delivered') == 'true') {
+  if (deliveriesResultSet.get('is_delivered') === 'true' || deliveriesResultSet.get('is_delivered') === 'TRUE') {
     $('#is_delivered').text('Successfully Delivered');
   } else {
     $('#is_delivered').text('Not Delivered!');
