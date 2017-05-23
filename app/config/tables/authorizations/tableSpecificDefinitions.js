@@ -7,7 +7,7 @@ window.odkTableSpecificDefinitions = {
     },
     "choose_authorization": {
       "string_token": "choose_authorization",
-      "text": "Choose an Authorization",
+      "text": "Choose a Distribution",
       "_row_num": 3
     }
   }

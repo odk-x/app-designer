@@ -197,8 +197,11 @@ function formResolutionSuccess(result) {
 
 function proxyRowSuccess(result) {
     console.log('made it!');
+    
+    // TODO: Take groupModify and put it into groupReadOnly
+    var groupReadOnly = util.getQueryParameter('groupModify');
     odkData.changeAccessFilterOfRow('deliveries', 'HIDDEN',
-      newEntitlementsResultSet.get('_row_owner'), null, null, null, 
+      newEntitlementsResultSet.get('_row_owner'), groupReadOnly, null, null, 
       result.getRowId(0), setFilterSuccess, setFilterFailure);
 }
 

@@ -100,11 +100,14 @@ function entCBSuccess(result) {
 }
 
 function updateSubListView() {
+    var groupModify = registrationResultSet.get('_group_modify');
+    console.log("registrationResultSet: " + registrationResultSet);
+    console.log("groupModify: " + groupModify);
+    
     odkTables.setSubListView('entitlements',
                              'beneficiary_code = ? and is_delivered = ?',
                              [registrationResultSet.get('beneficiary_code'), showDelivered],
-                             'config/tables/entitlements/html/entitlements_list.html'
-                            );
+                             'config/tables/entitlements/html/entitlements_list.html?groupModify=' + encodeURIComponent(groupModify));
 
     if (showDelivered === 'true') {
         showDelivered = 'false';

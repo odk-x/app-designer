@@ -17,7 +17,7 @@ function display() {
         top.innerHTML = odkCommon.localizeText(locale, "active_beneficiaries_title");
         top.onclick = function() {
             odkTables.openTableToListView(
-                                      null, 'registration', 'is_active = ?', ['TRUE']
+                                      null, 'registration', '(is_active = ? or is_active = ?)', ['TRUE', 'true']
                                       , 'config/tables/registration/html/registration_list.html?type=delivery');
         }
         var middle = document.createElement('button');
@@ -25,7 +25,7 @@ function display() {
         middle.innerHTML = odkCommon.localizeText(locale, "disabled_beneficiaries_title");
         middle.onclick = function() {
             odkTables.openTableToListView(
-                                      null, 'registration', 'is_active = ?', ['FALSE']
+                                      null, 'registration', '(is_active = ? or is_active)', ['FALSE', 'false']
                                       , 'config/tables/registration/html/registration_list.html?type=delivery');
         }
     } else {

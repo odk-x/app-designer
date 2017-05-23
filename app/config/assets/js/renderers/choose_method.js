@@ -86,7 +86,7 @@ function display() {
         console.log("ROLES: " + roles);
         console.log("USERS: " + users);
         console.log("DEFAULT_GROUP: " + defaultGroup);
-        if (superUser && type != 'activate' && type != 'disable') {
+        if (superUser && type === 'registration') {
             $('#choose_user').show();
             $('#barcode').prop("disabled", true).addClass('disabled');
             $('#search').prop("disabled", true).addClass('disabled');
@@ -229,7 +229,7 @@ function handleRegistrationCallback(action, dispatchStr) {
 
     var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
     var user = odkCommon.getSessionVariable(userKey);
-    console.log("CAL: handleRegistrationCallback");
+
     odkData.changeAccessFilterOfRow('registration', 'HIDDEN', user,
                                     null, defaultGroup, null, instanceId, setRegSuccess, setRegFailure);
 
@@ -237,7 +237,7 @@ function handleRegistrationCallback(action, dispatchStr) {
 }
 
 function setRegSuccess(result) {
-    console.log("CAL: setRegSuccess");
+
     odkCommon.removeFirstQueuedAction();
 
     var instanceId = odkCommon.getSessionVariable(regInstanceIdKey);
@@ -249,7 +249,6 @@ function setRegSuccess(result) {
 }
 
 function setRegFailure(error) {
-    console.log("CAL: setRegFailure");
     console.log('reg set failure with error: ' + error);
 }
 
@@ -268,31 +267,19 @@ function queryChain(passed_code) {
 }
 
 function deliveryFunction() {
-    if (superUser) {
-        console.log(user);
-        odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _row_owner = ?',
-                      [code, 'TRUE', user], null, null, null, null, null, null, true,
-                      deliveryBCheckCBSuccess, deliveryBCheckCBFailure);
-    } else {
-        odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'TRUE'], null,
-                      null, null, null, null, null, true, deliveryBCheckCBSuccess, deliveryBCheckCBFailure);
-    }
+    odkData.query('registration', 'beneficiary_code = ? and (is_active = ? or is_active = ?)', [code, 'TRUE', 'true'], null,
+                           null, null, null, null, null, true, deliveryBCheckCBSuccess, deliveryBCheckCBFailure);
 }
 
 function deliveryBCheckCBSuccess(result) {
     console.log('deliveryBCheckCBSuccess called');
     if (result.getCount() === 0) {
-        if (superUser) {
-            console.log(user);
-            odkData.query('registration', 'beneficiary_code = ? and is_active = ? and _row_owner = ?',
-                          [code, 'FALSE', user], null, null, null, null, null, null, true,
-                          deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
-        } else {
-            odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, 'FALSE'],
+        odkData.query('registration', 'beneficiary_code = ? and (is_active = ? or is_active)', [code, 'FALSE', 'false'],
                           null, null, null, null, null, null, true,
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
-        }
     } else if (result.getCount() === 1) {
+        // TODO: This should be changed as well - probably don't need if and else 
+        // double check that this is the case
         if (type == 'delivery') {
             odkTables.openDetailWithListView(null, registrationTable, result.getRowId(0),
                                              'config/tables/registration/html/registration_detail.html?type=' +
@@ -305,13 +292,9 @@ function deliveryBCheckCBSuccess(result) {
     } else {
         var params;
         var vals;
-        if (superUser) {
-            params = 'beneficiary_code = ? and is_active = ? and _row_owner = ?';
-            vals = [code,'TRUE', user];
-        } else {
-            params = 'beneficiary_code = ? and is_active = ?';
-            vals = [code,'TRUE'];
-        }
+
+        params = 'beneficiary_code = ? and (is_active = ? or is_active = ?)';
+        vals = [code,'TRUE', 'true'];
         odkTables.openTableToListView(
                                       null,
                                       registrationTable, params, vals
@@ -339,31 +322,17 @@ function deliveryDisabledCBFailure(error) {
 
 function registrationFunction() {
     console.log('registration function path entered');
-    if (superUser) {
-        console.log('is superuser');
-        odkData.query('registration', 'beneficiary_code = ? and _row_owner = ?', [code, user],
-                      null, null, null, null, null, null, true,
-                      registrationBCheckCBSuccess, registrationBCheckCBFailure);
-    } else {
         odkData.query('registration', 'beneficiary_code = ?', [code], null, null,
                       null, null, null, null, true, registrationBCheckCBSuccess,
                       registrationBCheckCBFailure);
-    }
 }
 
 function registrationBCheckCBSuccess(result) {
     console.log('registrationBCheckCBSuccess called with value' + result);
     if (result.getCount() === 0) {
-        if (superUser) {
-            console.log('is superuser');
-            odkData.query('entitlements', 'beneficiary_code = ? and _default_access = ?',
-                          [code, "READ_ONLY"], null, null, null, null, null, null, true,
-                          registrationVoucherCBSuccess, registrationVoucherCBFailure);
-        } else {
             odkData.query('entitlements', 'beneficiary_code = ?', [code], null, null,
                           null, null, null, null, true, registrationVoucherCBSuccess,
                           registrationVoucherCBFailure);
-        }
 
     } else {
 
@@ -420,14 +389,17 @@ function setFilterFailure(error) {
 
 function regOverrideFunction() {
     console.log('entered regoverride path');
+    var queryCaseType;
     if (code !== "") {
         console.log(code);
         if (type == 'activate') {
             queriedType = 'FALSE';
+            queryCaseType = 'false';
         } else {
             queriedType = 'TRUE';
+            queryCaseType = 'true';
         }
-        odkData.query('registration', 'beneficiary_code = ? and is_active = ?', [code, queriedType],
+        odkData.query('registration', 'beneficiary_code = ? and (is_active = ? or is_active = ?)', [code, queriedType, queryCaseType],
                       null, null, null, null, null, null, true,
                       regOverrideBenSuccess, regOverrideBenFailure);
     }
@@ -451,9 +423,16 @@ function regOverrideBenSuccess(result) {
                                      encodeURIComponent(type));
         }
     } else if (result.getCount() > 1) {
+        var queryCaseType;
+        // TODO: Revisit this logic and make it better
+        if (queriedType == 'TRUE' || queriedType == 'true') {
+            queryCaseType = 'true';
+        } else {
+            queryCaseType = 'false';
+        }
         odkTables.openTableToListView(null, registrationTable,
-                                      'beneficiary_code = ? and is_active = ?',
-                                      [code, queriedType],
+                                      'beneficiary_code = ? and (is_active = ? or is_active = ?)',
+                                      [code, queriedType, queryCaseType],
                                       'config/tables/registration/html/registration_list.html?type=' +
                                       encodeURIComponent(type));
     } else {
@@ -472,8 +451,8 @@ function regOverrideBenFailure(error) {
 
 function entOverrideFunction() {
     if (code !== "") {
-        odkData.query('registration', 'beneficiary_code = ? and _row_owner = ?',
-                      [code, user],
+        odkData.query('registration', 'beneficiary_code = ?',
+                      [code],
                       null, null, null, null, null, null, true, benEntOverrideCBSuccess,
                       benEntOverrideCBFailure);
     } else {
@@ -483,8 +462,8 @@ function entOverrideFunction() {
 
 function benEntOverrideCBSuccess(result) {
     if (result.getCount() != 0) {
-        odkData.query('entitlements', 'beneficiary_code = ? and authorization_id = ? and _row_owner = ?',
-                      [code, util.getQueryParameter('authorization_id'), user], null, null, null, null, null,
+        odkData.query('entitlements', 'beneficiary_code = ? and authorization_id = ?',
+                      [code, util.getQueryParameter('authorization_id')], null, null, null, null, null,
                       null, true, entCheckCBSuccess, entCheckCBFailure);
     } else {
         $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));

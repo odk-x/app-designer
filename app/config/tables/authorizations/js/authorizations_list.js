@@ -106,6 +106,13 @@ var displayGroup = function(idxStart) {
       chevron.attr('class', 'chevron');
       item.append(chevron);
 
+      var field2 = $('<li>');
+      field2.attr('class', 'detail')
+      var itemPack = authorizationsResultSet.getData(i, 'item_pack_name');
+      field2.text(itemPack);
+      item.append(field2);
+        
+
       $('#list').append(item);
 
       // don't append the last one to avoid the fencepost problem
