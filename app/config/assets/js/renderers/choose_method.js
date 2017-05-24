@@ -27,6 +27,7 @@ var queriedType;
 var regInstanceIdKey = "regInstanceId";
 var userKey = "user";
 var defaultGroupKey = "defaultGroup";
+var entDefaultGroupKey = "entDefaultGroup";
 
 
 function display() {
@@ -462,6 +463,8 @@ function entOverrideFunction() {
 
 function benEntOverrideCBSuccess(result) {
     if (result.getCount() != 0) {
+        var entDefaultGroup = result.getData(0, '_group_modify');
+        odkCommon.setSessionVariable(entDefaultGroupKey, entDefaultGroup);
         odkData.query('entitlements', 'beneficiary_code = ? and authorization_id = ?',
                       [code, util.getQueryParameter('authorization_id')], null, null, null, null, null,
                       null, true, entCheckCBSuccess, entCheckCBFailure);
@@ -512,7 +515,7 @@ function createOverrideCBFailure(error) {
 var addDistCBSuccess = function(result) {
     console.log('authorizations_detail addDistCBSuccess');
 
-    var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+    var defaultGroup = odkCommon.getSessionVariable(entDefaultGroupKey);
     var user = odkCommon.getSessionVariable(userKey);
     odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, null, defaultGroup, 
                                     null, result.getRowId(0), finalFilterSuccess, finalFilterFailure);
