@@ -37,7 +37,10 @@ async function convert(xlsxFiles) {
         form.append('properties.csv', shouldWriteCsv ? createPropCsv(dtm, formDef) : "");
         form.append('tableSpecificDefinitions.js', shouldWriteDefJs(formDef) ? createDefJs(tableId, formDef) : "");
 
-        return fetch(`/xlsx/${tableId}/${formId}?xlsx=${f}`, {
+        let params = new URLSearchParams();
+        params.append('xlsx', f);
+        params.append('timestamp', (new URL(document.location)).searchParams.get("timestamp"));
+        return fetch(`/xlsx/${tableId}/${formId}?${params.toString()}`, {
             method: 'POST',
             body: form
         });
