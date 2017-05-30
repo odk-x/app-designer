@@ -169,7 +169,8 @@ promptTypes.base = Backbone.View.extend({
 		this.renderContext.data = model.data;
         this.renderContext.instanceMetadata = model.instanceMetadata;
 		this.renderContext.metadata = model.metadata;
-            
+        
+        this.renderContext.calculates = formulaFunctions.calculates;    
         this.renderContext.display = this.display;
         this.renderContext.promptId = this.getPromptId();
         this.renderContext.name = this.name;
@@ -605,7 +606,7 @@ promptTypes.instances = promptTypes.base.extend({
                     }
 					// this field is undefined if rendering through the app designer
 					var effective_access = term.effective_access;
-					if ( effective_access === "rwd" || effective_access === undefined ) {
+					if ( effective_access === undefined || effective_access.startsWith("rwd") ) {
 						term.show_delete = true;
 					} else {
 						term.show_delete = false;
@@ -660,7 +661,7 @@ promptTypes.instances = promptTypes.base.extend({
         var that  = this;
         that._cachedEvent = evt;
         var instanceDisplayValueToDelete = $(evt.currentTarget).attr('display_value');
-        that._screen._screenManager.showConfirmationPopup({message: "Delete " + instanceDisplayValueToDelete + " ?",
+        that._screen._screenManager.showConfirmationPopup({message: {text: "Delete " + instanceDisplayValueToDelete + " ?"},
                                                            promptIndex: that.promptIdx});
     },
     handleConfirmation: function(){
@@ -942,7 +943,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
         }
 
         that._cachedEvent = evt;
-        that._screen._screenManager.showConfirmationPopup({message:"Delete " + instanceName + "?",
+        that._screen._screenManager.showConfirmationPopup({message: {text: "Delete " + instanceName + "?"},
                                                            promptIndex:that.promptIdx});
     },
     handleConfirmation: function() {
