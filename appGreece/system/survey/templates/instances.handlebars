@@ -1,0 +1,62 @@
+<div>
+    <div>
+        <center><img src="{{ headerImg }}" class="odk-formlogo" /></center>
+        <hr>
+    </div>
+	{{{localizeText display.instances_survey_form_identification}}}
+
+    <div class="instanceClearDiv"></div>
+    <div>
+        <fieldset class="instanceNew">
+            <div class="row">
+                <div>
+                    <button type="button" class="createInstance btn btn-default" tabindex="0">{{localizeText display.new_button_label}}
+                        <span class="glyphicon glyphicon-plus-sign" style="font-size:20px;"></span>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+        <hr>
+    </div>
+
+    {{{localizeText display.instances_previously_created_instances_label}}}
+    <hr>
+    <div class="instanceList">
+        <ul class="list-group">
+            {{#each instances}}
+                {{#if dateDivider}}
+                    <li class="list-group-item">{{dateDivider}}</li>
+                {{/if}}
+                <li class="list-group-item">
+                    <fieldset class="instanceListGrid">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <p><strong>{{display_field}}</strong></p>
+								{{{localizeText ../display.instances_last_save_date_label}}}
+                                <p>{{savepoint_timestamp}}</p>
+								<p><strong>{{localizeText savepoint_type_text}}</strong></p>
+								{{#if is_checkpoint}}
+									<span class="glyphicon glyphicon-warning-sign"></span></p>
+								{{/if}}
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="instanceRowControl btn-group">
+                                    <button type="button" id="{{instance_id}}" class="odk openInstance btn btn-default" tabindex="0">
+                                        <span class="glyphicon glyphicon-pencil" style="font-size:20px;">
+                                    </button>
+									{{#if show_delete}}
+										<button type="button" id="{{instance_id}}" display_value="{{display_field}}" class="odk deleteInstance btn btn-default" tabindex="0">
+											<span class="glyphicon glyphicon-remove-sign" style="font-size:20px;">
+										</button>
+									{{/if}}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </li>
+            {{else}}
+                <li>{{localizeText display.instances_no_saved_instances_label}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</div>

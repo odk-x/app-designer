@@ -1,0 +1,15 @@
+<div>
+    {{> labelHint}}
+    <input type="text" name="{{name}}" value="{{mediaPath}}"
+            style="background-color:lightgray;"
+            disabled="true"
+        />
+    {{#if invalid}}
+        <p>{{localizeText display.invalid_value_message}}</p>
+    {{/if}}
+    <div class="mediaContainer">
+        {{#if uriFragmentValue}}
+            <img id="{{name}}" src="{{mediaPath}}"/>
+        {{/if}}
+    </div>
+<div>

@@ -1,0 +1,7 @@
+_partition,_aspect,_key,_type,_value
+Column,is_delivered,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":""true"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yes_no"",""data_value"":""false"",""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
+SurveyUtil,default,SurveyUtil.formId,string,wrong_form
+Table,default,defaultViewType,string,SPREADSHEET
+Table,default,displayName,object,"{""text"":""Deliveries""}"
+Table,security,defaultAccessOnCreation,string,HIDDEN
+Table,security,unverifiedUserCanCreate,boolean,false

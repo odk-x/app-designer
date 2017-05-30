@@ -1,0 +1,18 @@
+<h4>Contents</h4>
+<div class="btn-group-vertical" style="display:block; padding:5px">
+    {{#each prompts}}
+        {{#unless hideInContents}}
+            <a href="#" class="select-contents-item launch btn btn-default" label="{{_branch_label_enclosing_screen}}" tabindex="0" style="padding:10px">
+                {{#ifHasTextLocalization display.title}}
+                    <h4 class="contents-heading">{{localizeText display.title}}</h4>
+                {{else}}
+                    {{#ifHasTextLocalization display.prompt}}
+                        <h4 class="contents-heading">{{localizeText display.prompt}}</h4>
+                    {{/ifHasTextLocalization}}
+                {{/ifHasTextLocalization}}
+                <span class="glyphicon glyphicon-chevron-right pull-right center-in-contents"></span> 
+                <p class="contents-description">{{formattedValueForContentsDisplay}}</p>
+            </a>
+        {{/unless}}
+    {{/each}}
+</div>

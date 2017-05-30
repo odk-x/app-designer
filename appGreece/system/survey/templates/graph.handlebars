@@ -1,0 +1,40 @@
+<style>
+
+.y_axis path{ 
+  display: none; 
+} 
+.y_axis line{ 
+  stroke: black; 
+} 
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+#plot {
+	clear: both;
+	overflow: auto;
+    font: 10px sans-serif;
+}
+</style>
+<div>{{> labelHint}}</div>
+{{#ifEqual graphType "piechart"}}
+<div>
+    <div>
+        Scale<a class="scale_up btn btn-default btn-lg active">+</a><a class="scale_down btn btn-default btn-lg active">-</a>
+    </div>
+</div>
+{{else}}
+<div>
+    y axis<a class="y_up btn btn-default btn-lg active">+</a><a class="y_down btn btn-default btn-lg active">-</a>
+    x axis<a class="x_up btn btn-default btn-lg active">+</a><a class="x_down btn btn-default btn-lg active">-</a>
+</div>
+{{/ifEqual}}
+<div id="plot"></div>

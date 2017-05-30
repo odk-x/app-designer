@@ -1,0 +1,154 @@
+/* CSS Stylesheet - Standard User Homescreen*/
+
+
+#wrapper { 
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#logo {
+    position: relative;
+    /*right: 0;
+    bottom: 0;
+    left: 0;*/
+    text-align: center;
+}
+
+
+body {
+    position: relative;
+    font-family: helvetica;
+    margin: 0;
+    max-height: 100%;
+}
+
+
+button {
+    width: 90vw;
+    /*float: none;*/
+    margin: auto;
+    border-left: 15px solid;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1.5px solid;
+    background-color: #F1F1F1;
+    display: block;
+    color: #5C5C5C;
+    border-color: #EE3224;
+}
+
+button:active {
+    background-color: #FFC9C9;
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
+.dropdown {
+    display: block;
+    margin: auto;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+#field {
+    display: block;
+    margin: auto;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+#value {
+    display: block;
+    padding: 5px;
+    margin: auto;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    text-align: center;
+}
+
+#search {
+    height: 75px;
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+#search_results {
+    height: 35px;
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+#title {
+    font-size: 44px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+#launch {
+    height: 75px;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+#enter_code {
+    margin-bottom: 20px;
+}
+
+#enter {
+    font-size: 25px;
+}
+
+
+h1 {
+    font-size: 12vmin;
+    margin-top: 4vh;
+    margin-bottom: 6vh;
+    text-align: center;
+    color: #5C5C5C;
+    position: relative;
+}
+
+h2 {
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #5C5C5C;
+    position: relative;
+}
+
+p {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    height: 23vh;
+    width: 100vw;
+    text-align: center;
+}
+
+img {
+    position: relative;
+    display: inline-block;
+    width: 100vmin;
+}
+
+#code {
+     margin: auto;
+     font-size: 20px;
+     height: 35px;
+}
+
+input {
+    margin: auto;
+    font-size: 20px
+}

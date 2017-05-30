@@ -1,0 +1,12 @@
+<div>
+    {{> labelHint}}
+    {{#if value}}
+        <ul class="list-group">
+        <li class="list-group-item">{{localizeText display.geopoint_latitude_component}}</li>
+        <li class="list-group-item">{{localizeText display.geopoint_longitude_component}}</li>
+        <li class="list-group-item">{{localizeText display.geopoint_altitude_component}}</li>
+        <li class="list-group-item">{{localizeText display.geopoint_accuracy_component}}</li>
+        </ul>
+    {{/if}}
+    <button type="button" class="launch btn btn-default btn-lg">{{localizeText display.new_button_label}}</button>
+</div>

@@ -112,6 +112,7 @@ module.exports = function (grunt) {
         // also modify the other properties in this object that refer to
         // app
         appDir: 'app',
+        appGreeceDir: 'appGreece',
         appName: 'default',
         // The mount point of the device. Should allow adb push/pull.
         deviceMount: '/sdcard/opendatakit',
@@ -494,6 +495,40 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             dirs.forEach(function(fileName) {
                 //  Have to add app back into the file name for the adb push
                 var src = tablesConfig.appDir + '/' + fileName;
+                var dest =
+                    tablesConfig.deviceMount +
+                    '/' +
+                    tablesConfig.appName +
+                    '/' +
+                    fileName;
+                grunt.log.writeln('adb push ' + src + ' ' + dest);
+                grunt.task.run('exec:adbpush:' + src + ':' + dest);
+            });
+        });
+
+    grunt.registerTask(
+        'adbpush-greece-app',
+        'Push everything in the app directory (except system) to the device',
+        function() {
+            // Do not push any system, data or output files.
+            // The first parameter is an options object where we specify that
+            // we only want files--this is important because otherwise when
+            // we get directory names adb will push everything in the directory
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
+            var dirs = grunt.file.expand(
+                {filter: 'isFile',
+                 cwd: 'appGreece' },
+				'.nomedia',
+                '**',
+                '!system/**',
+				'!data/**',
+				'!output/**');
+
+            // Now push these files to the phone.
+            dirs.forEach(function(fileName) {
+                //  Have to add app back into the file name for the adb push
+                var src = tablesConfig.appGreeceDir + '/' + fileName;
                 var dest =
                     tablesConfig.deviceMount +
                     '/' +

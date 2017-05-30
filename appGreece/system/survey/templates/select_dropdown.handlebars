@@ -1,0 +1,25 @@
+{{#if passiveError}}
+    <div>
+        {{passiveError}}
+    </div>
+{{/if}}
+<form action="javascript:void(0);" onsubmit="odkLeaveField(this);">
+    {{> labelHint}}
+    <select class="form-control" name="{{name}}" tabindex="0">  
+        <option selected disabled>{{{localizeText display.select_one_dropdown_label}}}</option>     
+        {{#each choices}}
+            <option 
+                {{#if checked}}
+                    selected="selected"
+                {{/if}}
+                value="{{data_value}}">
+		   {{#ifHasImageLocalization display.title}}<div><img class="odk-label-image" src="{{localizeImage display.title}}"></img></div>{{/ifHasImageLocalization}}
+		   {{#ifHasAudioLocalization display.title}}<div><audio src="{{localizeAudio display.title}}" tabindex="0"
+			  audio="true" controls="controls">{{localizeText 'audio_control_not_supported'}}</audio></div>{{/ifHasAudioLocalization}}
+		   {{#ifHasVideoLocalization display.title}}<div><video src="{{localizeVideo display.title}}" tabindex="0"
+			  video="true" controls="controls">{{localizeText 'video_control_not_supported'}}</video></div>{{/ifHasVideoLocalization}}
+		   {{#ifHasTextLocalization display.title}}{{{localizeText display.title}}}{{/ifHasTextLocalization}}
+            </option>
+        {{/each}}
+    </select>
+</form>

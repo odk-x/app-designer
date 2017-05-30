@@ -1,0 +1,20 @@
+{{#ifHasLocalization display.prompt}}
+   {{#ifHasImageLocalization display.prompt}}<div style="text-align: center;">
+        <img class="odk-label-image" src="{{localizeImage display.prompt}}"></img>
+   </div>{{/ifHasImageLocalization}}
+   {{#ifHasAudioLocalization display.prompt}}<div><audio src="{{localizeAudio display.prompt}}" tabindex="0"
+	  audio="true" controls="controls">{{localizeText 'audio_control_not_supported'}}</audio></div>{{/ifHasAudioLocalization}}
+   {{#ifHasVideoLocalization display.prompt}}<div><video src="{{localizeVideo display.prompt}}" tabindex="0"
+	  video="true" controls="controls">{{localizeText 'video_control_not_supported'}}</video></div>{{/ifHasVideoLocalization}}
+   {{#ifHasTextLocalization display.prompt}}<p class="odk-label">{{{localizeText display.prompt}}}</p>{{/ifHasTextLocalization}}
+{{/ifHasLocalization}}
+{{#ifHasLocalization display.hint}}
+   {{#ifHasImageLocalization display.hint}}<div style="text-align: center;">
+        <img class="odk-hint-image" src="{{localizeImage display.hint}}"></img>
+   </div>{{/ifHasImageLocalization}}
+   {{#ifHasAudioLocalization display.hint}}<div><audio src="{{localizeAudio display.hint}}" tabindex="0"
+	  audio="true" controls="controls">{{localizeText 'audio_control_not_supported'}}</audio></div>{{/ifHasAudioLocalization}}
+   {{#ifHasVideoLocalization display.hint}}<div><video src="{{localizeVideo display.hint}}" tabindex="0"
+	  video="true" controls="controls">{{localizeText 'video_control_not_supported'}}</video></div>{{/ifHasVideoLocalization}}
+   {{#ifHasTextLocalization display.hint}}<p class="odk-hint">{{{localizeText display.hint}}}</p>{{/ifHasTextLocalization}}
+{{/ifHasLocalization}}

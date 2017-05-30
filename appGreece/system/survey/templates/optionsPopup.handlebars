@@ -1,0 +1,24 @@
+<div class="modal" id="optionsPopup" tabindex="-1" aria-labelledby="optionsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="btn-group-vertical">
+                    <a href="#" class="languageMenu btn btn-default"
+                                data-toggle="modal" data-target="languagePopup"
+                                {{#unless hasTranslations}}disabled="disabled"{{/unless}}">{{localizeText 'options_popup_language_heading'}}</a>
+					<br>
+                    <a href="#" class="show-contents btn btn-default"
+                                data-toggle="modal" data-target="languagePopup"
+                                {{#unless showContents}}disabled="disabled"{{/unless}}">{{localizeText 'options_popup_contents_heading'}}</a>
+					<br>
+                    <a href="#" class="ignore-changes-and-exit btn btn-default">{{localizeText 'options_popup_ignore_changes_heading'}}</a>
+					<br>
+                    <a href="#" class="save-incomplete-and-exit btn btn-default">{{localizeText 'options_popup_save_changes_heading'}}</a>
+					<br>
+                    <a href="#" class="finalize-and-exit btn btn-default">{{localizeText 'options_popup_finalize_changes_heading'}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

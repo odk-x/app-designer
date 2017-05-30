@@ -1,0 +1,21 @@
+<div>
+{{#if passiveError}}
+    <div>
+        {{passiveError}}
+    </div>
+{{/if}}
+
+{{> labelHint}}
+<div class="btn-group-vertical" style="display:block; padding:5px">
+    {{#each choices}}
+            <a href="#" class="branch-select-item launch btn btn-default" tabindex="0" label="{{data_value}}" style="padding:10px">
+		   {{#ifHasImageLocalization display.title}}<div><center class="odk-label-image" src="{{localizeImage display.title}}"></center></div>{{/ifHasImageLocalization}}
+		   {{#ifHasAudioLocalization display.title}}<div><audio src="{{localizeAudio display.title}}" tabindex="0"
+			  audio="true" controls="controls">{{localizeText 'audio_control_not_supported'}}</audio></div>{{/ifHasAudioLocalization}}
+		   {{#ifHasVideoLocalization display.title}}<div><video src="{{localizeVideo display.title}}" tabindex="0"
+			  video="true" controls="controls">{{localizeText 'video_control_not_supported'}}</video></div>{{/ifHasVideoLocalization}}
+		   {{#ifHasTextLocalization display.title}}<h4 style="font-weight:bold;text-align:left">{{{localizeText display.title}}} <span class="glyphicon glyphicon-chevron-right" style="float:right"></span></h4>{{/ifHasTextLocalization}}
+            </a>
+    {{/each}}
+</div>
+</div>

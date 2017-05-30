@@ -1,0 +1,15 @@
+<div class="modal" id="languagePopup" tabindex="-1" aria-labelledby="languageModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="btn-group-vertical" style="display:block;">
+                    {{#each locales}}
+                        <a href="#" id="{{name}}" class="language btn btn-default"> 
+                            {{localizeText display.locale}}
+                        </a>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

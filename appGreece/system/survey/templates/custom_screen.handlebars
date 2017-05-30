@@ -1,0 +1,64 @@
+<div class="odk-screen{{#unless disableSwipeNavigation}}{{#if enableNavigation}}{{#if enableForwardNavigation}} swipeForwardEnabled{{/if}}{{#if enableBackNavigation}} swipeBackEnabled{{/if}}{{/if}}{{/unless}}" >
+    {{#if showHeader}}
+        <div class="row odk-header container">
+            <div class="my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
+                <div class="col-xs-6">
+                    <button type="button" class="odk-options-btn btn btn-default btn-lg" data-toggle="modal" data-target="#myModal" tabindex="0">
+                        <span>{{localizeText form_title}}</span>
+                    </button>
+                </div>
+                <div class="col-xs-3 odk-header-back-btn">
+                    <a class="odk-prev-btn btn btn-default btn-lg navbar-btn {{#unless enableBackNavigation}}disabled{{/unless}}" tabindex="0">
+                    {{#unless hideNavigationButtonText}}<span class="glyphicon glyphicon-chevron-left" style="float:left"></span> {{localizeText 'back_button_label'}}{{/unless}}</a> 
+                </div>
+                <div class="col-xs-3 odk-next-btn">   
+                    <a class="odk-next-btn btn btn-default btn-lg navbar-btn  {{#unless enableForwardNavigation}}disabled{{/unless}}" tabindex="0">
+                    {{#unless hideNavigationButtonText}}{{#if showAsContinueButton}}{{localizeText 'continue_button_label'}}{{else}}{{localizeText 'next_button_label'}}{{/if}} <span class="glyphicon glyphicon-chevron-right" style="float:right"></span>{{/unless}}</a>               
+                </div>
+            </div>
+        </div>
+    {{/if}}
+    <div class="odk-scroll"><div class="odk-container container">
+
+
+{{! YOUR CUSTOM CONTENT BEGINS HERE }}
+<h2>How to Define a custom layout using HTML.</h2>
+<p>The <tt>custom</tt> screen type enables you to define your own placement and layout of prompts. 
+To use a custom screen, the prompts you want to display on that screen must be bracketed by a <tt>begin screen</tt> 
+and an <tt>end screen</tt> row. On the <tt>begin screen</tt> row, define <tt>screen.screen_type</tt> to be <tt>custom</tt> and
+define <tt>screen.templatePath</tt> to be the relative path to a Handlebars template used as a basis for the screen contents.
+The template path is relative to the <tt>framework</tt> directory (i.e., if the template is in your form's directory, you would specify
+ <tt>../tables/tableid/forms/formid/yourtemplate.template</tt>).</p>
+<p>We recommend you start with this template, found in <tt>framework/survey/templates/custom_screen.template</tt>. Copy and rename this,
+then delete these descriptions and fill in your own content between the <tt>YOUR CUSTOM CONTENT BEGINS HERE</tt> and the
+<tt>YOUR CUSTOM CONTENT ENDS HERE</tt> lines (these two lines are Handlebars comment lines and do not appear in the rendered page).</p>
+<p>Within that template (e.g., <tt>yourtemplate.template</tt>), your prompts are placed using <tt>div</tt> elements with a <tt>field-name</tt> 
+attribute equal to your prompt's name. I.e., to place a prompt named "myPromptName" include this in your template:</p>
+<pre>
+&lt;div field-name="myPromptName"&gt;Other (default) content
+to be displayed if "myPromptName" is not visible&lt;div&gt;
+</pre>
+<p>The default content is replaced with the prompt if the prompt is visible; otherwise, the default content is displayed.</p>
+{{! YOUR CUSTOM CONTENT ENDS HERE }}
+
+
+</div></div>
+{{! emit the footer always -- so that we get full-screen content area }}
+{{#if showFooter}} 
+    <div class="row odk-footer container">
+        <div class="my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
+            <div class="col-xs-3 odk-footer-back-btn ">
+                <a class="odk-prev-btn btn btn-default btn-lg navbar-btn {{#unless enableBackNavigation}}disabled{{/unless}}" tabindex="0">
+                {{#unless hideNavigationButtonText}}<span class="glyphicon glyphicon-chevron-left" style="float:left"></span> {{localizeText 'back_button_label'}}{{/unless}}</a> 
+            </div>
+            <div class="col-xs-6">
+
+            </div>
+            <div class="col-xs-3 odk-next-btn">   
+                <a class="odk-next-btn btn btn-default btn-lg navbar-btn {{#unless enableForwardNavigation}}disabled{{/unless}}" tabindex="0">
+                {{#unless hideNavigationButtonText}}{{#if showAsContinueButton}}{{localizeText 'continue_button_label'}}{{else}}{{localizeText 'next_button_label'}}{{/if}} <span class="glyphicon glyphicon-chevron-right" style="float:right"></span>{{/unless}}</a>               
+            </div>
+        </div>
+    </div>
+{{/if}}
+</div>
