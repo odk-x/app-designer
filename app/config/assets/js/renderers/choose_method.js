@@ -156,6 +156,8 @@ function callBackFn () {
     }
 
     var actionType = dispatchStr[actionTypeKey];
+    console.log('callBackFn: actionType: ' + actionType);
+
     switch (actionType) {
         case actionBarcode:
             handleBarcodeCallback(action, dispatchStr);
