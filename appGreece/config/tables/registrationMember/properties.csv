@@ -1,0 +1,9 @@
+_partition,_aspect,_key,_type,_value
+Column,gender,displayChoicesList,object,"[{""choice_list_name"":""genders"",""data_value"":""Male"",""display"":{""title"":{""text"":""Male""}},""_row_num"":2},{""choice_list_name"":""genders"",""data_value"":""Female"",""display"":{""title"":{""text"":""Female""}},""_row_num"":3}]"
+Column,is_head_of_household,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":""TRUE"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":10},{""choice_list_name"":""yes_no"",""data_value"":""FALSE"",""display"":{""title"":{""text"":""No""}},""_row_num"":11}]"
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,registrationMember
+Table,default,defaultViewType,string,SPREADSHEET
+Table,default,displayName,object,"{""text"":""Register Member""}"
+Table,security,defaultAccessOnCreation,string,HIDDEN
+Table,security,unverifiedUserCanCreate,boolean,false
