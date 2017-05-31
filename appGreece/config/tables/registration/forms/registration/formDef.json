@@ -164,15 +164,6 @@
           }
         },
         "_row_num": 22
-      },
-      {
-        "type": "note",
-        "display": {
-          "prompt": {
-            "text": "Press \"Next\" to finish."
-          }
-        },
-        "_row_num": 23
       }
     ],
     "settings": [
@@ -1031,26 +1022,12 @@
             "promptIdx": 9
           },
           {
-            "type": "note",
-            "display": {
-              "prompt": {
-                "text": "Press \"Next\" to finish."
-              }
-            },
-            "_row_num": 23,
-            "__rowNum__": 22,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen23",
-            "promptIdx": 10
-          },
-          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 24,
-            "_branch_label_enclosing_screen": "survey/_screen24",
-            "promptIdx": 11
+            "_row_num": 23,
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 10
           }
         ],
         "validation_tag_map": {
@@ -1155,31 +1132,25 @@
             "operationIdx": 8
           },
           {
+            "_token_type": "exit_section",
+            "clause": "exit section",
             "_row_num": 23,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 9
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 24,
-            "operationIdx": 10
-          },
-          {
-            "_row_num": 24,
+            "_row_num": 23,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 11
+            "operationIdx": 10
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 24,
-            "operationIdx": 12
+            "_row_num": 23,
+            "operationIdx": 11
           }
         ],
         "branch_label_map": {
@@ -1189,9 +1160,8 @@
           "_screen17": 6,
           "_screen21": 7,
           "_screen22": 8,
-          "_screen23": 9,
-          "_contents": 11,
-          "_screen24": 11
+          "_contents": 10,
+          "_screen23": 10
         }
       },
       "initial": {
