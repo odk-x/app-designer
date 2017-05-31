@@ -12,59 +12,52 @@ var showDelivered = 'false';
 function cbSuccess(result) {
     registrationResultSet = result;
     console.log(registrationResultSet.get('beneficiary_code'));
-    var first_name = registrationResultSet.get('first_name');
-    var last_name = registrationResultSet.get('last_name');
-    $('#title').text(first_name + ' ' + last_name);
+    $('#title').text(registrationResultSet.get('beneficiary_code'));
+    $('#title').prepend(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
 
-
-    $('#inner_beneficiary_code').text(registrationResultSet.get('beneficiary_code'));
     $('#inner_address').text(registrationResultSet.get('address'));
-    $('#inner_id_number').text(registrationResultSet.get('id_number'));
-    $('#inner_city').text(registrationResultSet.get('city'));
     $('#inner_telephone').text(registrationResultSet.get('telephone'));
     $('#inner_mobile_provider').text(registrationResultSet.get('mobile_provider'));
 
-    $('#beneficiary_code').prepend(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
     $('#address').prepend(odkCommon.localizeText(locale, 'address') + ": ");
-    $('#id_number').prepend(odkCommon.localizeText(locale, 'id_number') + ": ");
-    $('#city').prepend(odkCommon.localizeText(locale, 'city') + ": ");
     $('#telephone').prepend(odkCommon.localizeText(locale, 'telephone') + ": ");
     $('#mobile_provider').prepend(odkCommon.localizeText(locale, 'mobile_provider') + ": ");
-
-    
-
-
     
     if (type == 'activate' || type == 'disable') {
-      var action = $('#followup');
-      if (type == 'activate') {
-          action.text(odkCommon.localizeText(locale, "enable_beneficiary"));
-      } else {
-          action.text(odkCommon.localizeText(locale, "disable_beneficiary"));
-      }
-      action.show();
-      action.on(
-                'click',
-                function() {
-                    var struct = {};
-                    if (type == 'activate') {
-                        struct.is_active = 'true';
-                    } else {
-                        struct.is_active = 'false';
-                    }
-                    struct.is_override = 'true';
-                    odkData.updateRow('registration', struct, registrationResultSet.getRowId(0),
-                                      updateCBSuccess, updateCBFailure);
-                }
-               );
+        var action = $('#followup');
+        if (type == 'activate') {
+            action.text(odkCommon.localizeText(locale, "enable_beneficiary"));
+        } else {
+            action.text(odkCommon.localizeText(locale, "disable_beneficiary"));
+        }
+        action.show();
+        action.on('click', function() {
+        
+            var struct = {};
+            if (type == 'activate') {
+                struct.is_active = 'true';
+            } else {
+                struct.is_active = 'false';
+            }
+            struct.is_override = 'true';
+            odkData.updateRow('registration', struct, registrationResultSet.getRowId(0),
+                updateCBSuccess, updateCBFailure);
+        });
+
     } else if (registrationResultSet.get('is_active') == 'false' || 
                registrationResultSet.get('is_active') == 'FALSE') {
-      $('#inner_reject').text(odkCommon.localizeText(locale, 'disabled_beneficiary_notification'));
+        $('#inner_reject').text(odkCommon.localizeText(locale, 'disabled_beneficiary_notification'));
     } else {
-      odkData.query('entitlements', 'beneficiary_code = ? and (is_delivered = ? or is_delivered = ?)',
+        odkData.query('entitlements', 'beneficiary_code = ? and (is_delivered = ? or is_delivered = ?)',
                       [registrationResultSet.get('beneficiary_code'), 'false', 'FALSE'],
                       null, null, null, null, null, null, null, entCBSuccess, entCBFailure);
     }
+
+    // Set onClick event listener
+    $('#hh_members').click(function(e) {
+        odkTables.openTableToListView(null, 'registrationMember', 'beneficiary_code = ?',
+        [registrationResultSet.get('beneficiary_code')], 'config/tables/registrationMember/html/registrationMember_list.html') ;
+    });
 }
 
 function cbFailure(error) {
@@ -86,16 +79,16 @@ function updateCBFailure(result) {
 }
 
 function entCBSuccess(result) {
-  console.log(result.getCount());
+    console.log(result.getCount());
 
-  $('#entitlements_switch').show();
-  $('#entitlements_title').text('Entitlements Listed'); // TODO: localize this
+    $('#entitlements_switch').show();
+    $('#entitlements_title').text('Entitlements Listed'); // TODO: localize this
 
-  $('#pending_txt').text('Pending'); // TODO: Localize this
-  $('#entitlements_pending').click(updateSubListView);
+    $('#pending_txt').text('Pending'); // TODO: Localize this
+    $('#entitlements_pending').click(updateSubListView);
 
-  $('#delivered_txt').text('Delivered'); // TODO: Localize this
-  $('#entitlements_delivered').click(updateSubListView);
+    $('#delivered_txt').text('Delivered'); // TODO: Localize this
+    $('#entitlements_delivered').click(updateSubListView);
 
   updateSubListView();
 }

@@ -84,6 +84,7 @@
           }
         },
         "values_list": "sites",
+        "required": true,
         "_row_num": 13
       },
       {
@@ -163,6 +164,7 @@
             "text": "Tent/Caravan code:"
           }
         },
+        "required": true,
         "_row_num": 22
       }
     ],
@@ -340,43 +342,53 @@
       },
       {
         "choice_list_name": "sites",
-        "data_value": "a0",
+        "data_value": "Ritsona",
         "display": {
           "title": {
-            "text": "Site A"
+            "text": "Ritsona"
           }
         },
         "_row_num": 5
       },
       {
         "choice_list_name": "sites",
-        "data_value": "a1",
+        "data_value": "Skaramagas",
         "display": {
           "title": {
-            "text": "Site B"
+            "text": "Skaramagas"
           }
         },
         "_row_num": 6
       },
       {
         "choice_list_name": "sites",
-        "data_value": "a2",
+        "data_value": "Nea Kavala",
         "display": {
           "title": {
-            "text": "Site C"
+            "text": "Nea Kavala"
           }
         },
         "_row_num": 7
       },
       {
         "choice_list_name": "sites",
-        "data_value": "a3",
+        "data_value": "Softex",
         "display": {
           "title": {
-            "text": "Site D"
+            "text": "Softex"
           }
         },
         "_row_num": 8
+      },
+      {
+        "choice_list_name": "sites",
+        "data_value": "Athens",
+        "display": {
+          "title": {
+            "text": "Athens"
+          }
+        },
+        "_row_num": 9
       }
     ],
     "properties": [
@@ -523,43 +535,53 @@
       "sites": [
         {
           "choice_list_name": "sites",
-          "data_value": "a0",
+          "data_value": "Ritsona",
           "display": {
             "title": {
-              "text": "Site A"
+              "text": "Ritsona"
             }
           },
           "_row_num": 5
         },
         {
           "choice_list_name": "sites",
-          "data_value": "a1",
+          "data_value": "Skaramagas",
           "display": {
             "title": {
-              "text": "Site B"
+              "text": "Skaramagas"
             }
           },
           "_row_num": 6
         },
         {
           "choice_list_name": "sites",
-          "data_value": "a2",
+          "data_value": "Nea Kavala",
           "display": {
             "title": {
-              "text": "Site C"
+              "text": "Nea Kavala"
             }
           },
           "_row_num": 7
         },
         {
           "choice_list_name": "sites",
-          "data_value": "a3",
+          "data_value": "Softex",
           "display": {
             "title": {
-              "text": "Site D"
+              "text": "Softex"
             }
           },
           "_row_num": 8
+        },
+        {
+          "choice_list_name": "sites",
+          "data_value": "Athens",
+          "display": {
+            "title": {
+              "text": "Athens"
+            }
+          },
+          "_row_num": 9
         }
       ]
     },
@@ -917,6 +939,7 @@
               }
             },
             "values_list": "sites",
+            "required": true,
             "_row_num": 13,
             "__rowNum__": 12,
             "_token_type": "prompt",
@@ -1014,6 +1037,7 @@
                 "text": "Tent/Caravan code:"
               }
             },
+            "required": true,
             "_row_num": 22,
             "__rowNum__": 21,
             "_token_type": "prompt",
@@ -1032,7 +1056,9 @@
         ],
         "validation_tag_map": {
           "finalize": [
-            5
+            3,
+            5,
+            9
           ]
         },
         "operations": [
@@ -1729,7 +1755,7 @@
         "_aspect": "delivery_site",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"sites\",\"data_value\":\"a0\",\"display\":{\"title\":{\"text\":\"Site A\"}},\"_row_num\":5},{\"choice_list_name\":\"sites\",\"data_value\":\"a1\",\"display\":{\"title\":{\"text\":\"Site B\"}},\"_row_num\":6},{\"choice_list_name\":\"sites\",\"data_value\":\"a2\",\"display\":{\"title\":{\"text\":\"Site C\"}},\"_row_num\":7},{\"choice_list_name\":\"sites\",\"data_value\":\"a3\",\"display\":{\"title\":{\"text\":\"Site D\"}},\"_row_num\":8}]"
+        "_value": "[{\"choice_list_name\":\"sites\",\"data_value\":\"Ritsona\",\"display\":{\"title\":{\"text\":\"Ritsona\"}},\"_row_num\":5},{\"choice_list_name\":\"sites\",\"data_value\":\"Skaramagas\",\"display\":{\"title\":{\"text\":\"Skaramagas\"}},\"_row_num\":6},{\"choice_list_name\":\"sites\",\"data_value\":\"Nea Kavala\",\"display\":{\"title\":{\"text\":\"Nea Kavala\"}},\"_row_num\":7},{\"choice_list_name\":\"sites\",\"data_value\":\"Softex\",\"display\":{\"title\":{\"text\":\"Softex\"}},\"_row_num\":8},{\"choice_list_name\":\"sites\",\"data_value\":\"Athens\",\"display\":{\"title\":{\"text\":\"Athens\"}},\"_row_num\":9}]"
       },
       {
         "_partition": "FormType",

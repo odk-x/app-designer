@@ -12,27 +12,16 @@
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../../assets/js/util.js"></script>
         <script type="text/javascript" src="../../../assets/js/renderers/viewport_styling.js"></script>
-        <script type="text/javascript" src="../js/registration_detail.js"></script>
+        <script type="text/javascript" src="../js/registrationMember_detail.js"></script>
     </head>
     <body>
         <h1 id="title"></h1>
-        <p id="address"><span id="inner_address"></span></p>
-        <p id="telephone"><span id="inner_telephone"></span></p>
-        <p id="mobile_provider"><span id="inner_mobile_provider"></span></p>
-        <p id="reject"><span id="inner_reject"></span></p>
+        <p id="id_type"><span id="inner_id_type"></span></p>
+        <p id="id_number"><span id="inner_id_number"></span></p>
+        <p id="gender"><span id="inner_gender"></span></p>
+        <p id="is_hh_head"><span id="inner_is_hh_head"></span></p>
+        <p id="age"><span id="inner_age"></span></p>
 
-        <button id="hh_members">View Household Members</button>
-
-        <br/>
-        <div class="switch-field" id="entitlements_switch" style="display:none">
-            <div class="switch-title" id="entitlements_title"></div>
-            <input type="radio" name="entitlements" id="entitlements_pending" checked="true"/>
-            <label for="entitlements_pending" id="pending_txt"></label>
-            <input type="radio" name="entitlements" id="entitlements_delivered"/>
-            <label for="entitlements_delivered" id="delivered_txt"></label>
-        </div>
-        <button id="followup" style="display:none"></button>
-        <p><span id="message"></span></p>
         <script>
           $(display);
         </script>
