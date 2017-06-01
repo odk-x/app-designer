@@ -363,7 +363,7 @@ module.exports = function (grunt) {
 						return (cells.length >= 6) &&
 						  ( cells[cells.length-1] === cells[cells.length-2] + ".xlsx" ); 
 					},
-                 cwd: 'app' },
+                 cwd: 'appGreece' },
 				'**/*.xlsx'
 				);
 
