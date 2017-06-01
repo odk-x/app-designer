@@ -586,6 +586,14 @@ window.odkFrameworkDefinitions = {
         "spanish": "Valor entero esperado"
       },
       "_row_num": 57
+    },
+    "select_group": {
+      "string_token": "select_group",
+      "text": {
+        "default": "Please Select Group"
+      },
+      "English": "Please Select Group",
+      "_row_num": 58
     }
   }
 }
