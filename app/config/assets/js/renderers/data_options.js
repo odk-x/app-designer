@@ -25,7 +25,7 @@ function display() {
         middle.innerHTML = odkCommon.localizeText(locale, "disabled_beneficiaries_title");
         middle.onclick = function() {
             odkTables.openTableToListView(
-                                      null, 'registration', '(is_active = ? or is_active)', ['FALSE', 'false']
+                                      null, 'registration', '(is_active = ? or is_active = ?)', ['FALSE', 'false']
                                       , 'config/tables/registration/html/registration_list.html?type=delivery');
         }
     } else {
