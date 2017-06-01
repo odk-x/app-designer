@@ -346,42 +346,6 @@ module.exports = function (grunt) {
             });
         });
 
-    grunt.registerTask(
-        'xlsx-convert-greece',
-        'Run the XLSX converter on all form definitions',
-        function() {
-			var platform = require('os').platform();
-			var isWindows = (platform.search('win') >= 0 &&
-                             platform.search('darwin') < 0);
-							 
-            var dirs = grunt.file.expand(
-                {filter: function(path) {
- 						if ( !path.endsWith(".xlsx") ) {
-							return false;
-						}
-						var cells = path.split((isWindows ? "\\" : "/"));
-						return (cells.length >= 6) &&
-						  ( cells[cells.length-1] === cells[cells.length-2] + ".xlsx" ); 
-					},
-                 cwd: 'appGreece' },
-				'**/*.xlsx'
-				);
-
-            // Now run these files through macGenConvert.js
-            dirs.forEach(function(fileName) {
-				// fileName uses forward slashes on all platforms
-				var xlsFile;
-				var formDefFile;
-				var cells;
-				xlsFile = 'appGreece/' + fileName;
-				cells = xlsFile.split('/');
-				cells[cells.length-1] = 'formDef.json';
-				formDefFile = cells.join('/');
-				grunt.log.writeln('macGenConvert: ' + xlsFile + ' > ' + formDefFile);
-				grunt.task.run('exec:macGenConvert:' + xlsFile + ':' + formDefFile);
-            });
-        });
-
 var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			// create a file to stream archive data to. 
 			var fs = require('fs');
