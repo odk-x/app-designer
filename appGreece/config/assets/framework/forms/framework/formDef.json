@@ -761,14 +761,6 @@
           "default": "Household Advanced Search"
         },
         "_row_num": 60
-      },
-      {
-        "string_token": "select_group",
-        "text": {
-          "default": "Please Select Group"
-        },
-        "English": "Please Select Group",
-        "_row_num": 61
       }
     ],
     "settings": [
@@ -1474,6 +1466,33 @@
           "spanish": "Crear nueva instancia"
         },
         "_row_num": 54
+      },
+      {
+        "string_token": "barcode_button_label",
+        "text": {
+          "default": "Scan Barcode",
+          "greek": "Scan Barcode",
+          "spanish": "Escanear Código de Barras"
+        },
+        "_row_num": 55
+      },
+      {
+        "string_token": "invalid_numeric_message",
+        "text": {
+          "default": "Numeric value expected",
+          "greek": "Αναμενόμενη αριθμητική τιμή",
+          "spanish": "Valor numérico esperado"
+        },
+        "_row_num": 56
+      },
+      {
+        "string_token": "invalid_integer_message",
+        "text": {
+          "default": "Integer value expected",
+          "greek": "Αναμενόμενη τιμή ακέραιας",
+          "spanish": "Valor entero esperado"
+        },
+        "_row_num": 57
       }
     ]
   },
@@ -2308,6 +2327,33 @@
             "spanish": "Crear nueva instancia"
           },
           "_row_num": 54
+        },
+        "barcode_button_label": {
+          "string_token": "barcode_button_label",
+          "text": {
+            "default": "Scan Barcode",
+            "greek": "Scan Barcode",
+            "spanish": "Escanear Código de Barras"
+          },
+          "_row_num": 55
+        },
+        "invalid_numeric_message": {
+          "string_token": "invalid_numeric_message",
+          "text": {
+            "default": "Numeric value expected",
+            "greek": "Αναμενόμενη αριθμητική τιμή",
+            "spanish": "Valor numérico esperado"
+          },
+          "_row_num": 56
+        },
+        "invalid_integer_message": {
+          "string_token": "invalid_integer_message",
+          "text": {
+            "default": "Integer value expected",
+            "greek": "Αναμενόμενη τιμή ακέραιας",
+            "spanish": "Valor entero esperado"
+          },
+          "_row_num": 57
         }
       }
     },
@@ -2990,14 +3036,6 @@
             "default": "Household Advanced Search"
           },
           "_row_num": 60
-        },
-        "select_group": {
-          "string_token": "select_group",
-          "text": {
-            "default": "Please Select Group"
-          },
-          "English": "Please Select Group",
-          "_row_num": 61
         }
       },
       "_locales": {

@@ -677,14 +677,6 @@ window.odkCommonDefinitions = {
         "default": "Household Advanced Search"
       },
       "_row_num": 60
-    },
-    "select_group": {
-      "string_token": "select_group",
-      "text": {
-        "default": "Please Select Group"
-      },
-      "English": "Please Select Group",
-      "_row_num": 61
     }
   },
   "_locales": {
