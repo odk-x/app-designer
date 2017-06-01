@@ -719,6 +719,48 @@
         },
         "English": "No Distributions",
         "_row_num": 54
+      },
+      {
+        "string_token": "view_household_data",
+        "text": {
+          "default": "View Household Data"
+        },
+        "_row_num": 55
+      },
+      {
+        "string_token": "active_households",
+        "text": {
+          "default": "Active Households"
+        },
+        "_row_num": 56
+      },
+      {
+        "string_token": "disabled_households",
+        "text": {
+          "default": "Disabled Households"
+        },
+        "_row_num": 57
+      },
+      {
+        "string_token": "household_data",
+        "text": {
+          "default": "Household Data"
+        },
+        "_row_num": 58
+      },
+      {
+        "string_token": "search_members",
+        "text": {
+          "default": "Beneficiary Advanced Search"
+        },
+        "_row_num": 59
+      },
+      {
+        "string_token": "search_households",
+        "text": {
+          "default": "Household Advanced Search"
+        },
+        "_row_num": 60
       }
     ],
     "settings": [
@@ -2898,6 +2940,48 @@
           },
           "English": "No Distributions",
           "_row_num": 54
+        },
+        "view_household_data": {
+          "string_token": "view_household_data",
+          "text": {
+            "default": "View Household Data"
+          },
+          "_row_num": 55
+        },
+        "active_households": {
+          "string_token": "active_households",
+          "text": {
+            "default": "Active Households"
+          },
+          "_row_num": 56
+        },
+        "disabled_households": {
+          "string_token": "disabled_households",
+          "text": {
+            "default": "Disabled Households"
+          },
+          "_row_num": 57
+        },
+        "household_data": {
+          "string_token": "household_data",
+          "text": {
+            "default": "Household Data"
+          },
+          "_row_num": 58
+        },
+        "search_members": {
+          "string_token": "search_members",
+          "text": {
+            "default": "Beneficiary Advanced Search"
+          },
+          "_row_num": 59
+        },
+        "search_households": {
+          "string_token": "search_households",
+          "text": {
+            "default": "Household Advanced Search"
+          },
+          "_row_num": 60
         }
       },
       "_locales": {

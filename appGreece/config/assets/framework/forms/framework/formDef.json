@@ -719,6 +719,48 @@
         },
         "English": "No Distributions",
         "_row_num": 54
+      },
+      {
+        "string_token": "view_household_data",
+        "text": {
+          "default": "View Household Data"
+        },
+        "_row_num": 55
+      },
+      {
+        "string_token": "active_households",
+        "text": {
+          "default": "Active Households"
+        },
+        "_row_num": 56
+      },
+      {
+        "string_token": "disabled_households",
+        "text": {
+          "default": "Disabled Households"
+        },
+        "_row_num": 57
+      },
+      {
+        "string_token": "household_data",
+        "text": {
+          "default": "Household Data"
+        },
+        "_row_num": 58
+      },
+      {
+        "string_token": "search_members",
+        "text": {
+          "default": "Beneficiary Advanced Search"
+        },
+        "_row_num": 59
+      },
+      {
+        "string_token": "search_households",
+        "text": {
+          "default": "Household Advanced Search"
+        },
+        "_row_num": 60
       }
     ],
     "settings": [
@@ -746,6 +788,9 @@
             "text": {
               "english": "Common Javascript Framework",
               "spanish": "Common Javascript Framework",
+              "greek": "Common Javascript Framework",
+              "arabic": "Common Javascript Framework",
+              "farsi": "Common Javascript Framework",
               "default": "Common Javascript Framework"
             }
           }
@@ -795,7 +840,8 @@
               "spanish": "Arabic",
               "greek": "Arabic",
               "arabic": "Arabic",
-              "farsi": "Arabic"
+              "farsi": "Arabic",
+              "default": "Arabic"
             }
           }
         },
@@ -810,7 +856,8 @@
               "spanish": "Farsi",
               "greek": "Farsi",
               "arabic": "Farsi",
-              "farsi": "Farsi"
+              "farsi": "Farsi",
+              "default": "Farsi"
             }
           }
         },
@@ -825,7 +872,8 @@
               "spanish": "Greek",
               "greek": "Greek",
               "arabic": "Greek",
-              "farsi": "Greek"
+              "farsi": "Greek",
+              "default": "Greek"
             }
           }
         },
@@ -1462,6 +1510,9 @@
             "text": {
               "english": "Common Javascript Framework",
               "spanish": "Common Javascript Framework",
+              "greek": "Common Javascript Framework",
+              "arabic": "Common Javascript Framework",
+              "farsi": "Common Javascript Framework",
               "default": "Common Javascript Framework"
             }
           }
@@ -1511,7 +1562,8 @@
               "spanish": "Arabic",
               "greek": "Arabic",
               "arabic": "Arabic",
-              "farsi": "Arabic"
+              "farsi": "Arabic",
+              "default": "Arabic"
             }
           }
         },
@@ -1526,7 +1578,8 @@
               "spanish": "Farsi",
               "greek": "Farsi",
               "arabic": "Farsi",
-              "farsi": "Farsi"
+              "farsi": "Farsi",
+              "default": "Farsi"
             }
           }
         },
@@ -1541,7 +1594,8 @@
               "spanish": "Greek",
               "greek": "Greek",
               "arabic": "Greek",
-              "farsi": "Greek"
+              "farsi": "Greek",
+              "default": "Greek"
             }
           }
         },
@@ -1586,6 +1640,54 @@
             },
             "_row_num": 8,
             "name": "spanish"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Arabic",
+                  "spanish": "Arabic",
+                  "greek": "Arabic",
+                  "arabic": "Arabic",
+                  "farsi": "Arabic",
+                  "default": "Arabic"
+                }
+              }
+            },
+            "_row_num": 9,
+            "name": "arabic"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Farsi",
+                  "spanish": "Farsi",
+                  "greek": "Farsi",
+                  "arabic": "Farsi",
+                  "farsi": "Farsi",
+                  "default": "Farsi"
+                }
+              }
+            },
+            "_row_num": 10,
+            "name": "farsi"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Greek",
+                  "spanish": "Greek",
+                  "greek": "Greek",
+                  "arabic": "Greek",
+                  "farsi": "Greek",
+                  "default": "Greek"
+                }
+              }
+            },
+            "_row_num": 11,
+            "name": "greek"
           }
         ]
       },
@@ -1601,6 +1703,9 @@
             "text": {
               "english": "Common Javascript Framework",
               "spanish": "Common Javascript Framework",
+              "greek": "Common Javascript Framework",
+              "arabic": "Common Javascript Framework",
+              "farsi": "Common Javascript Framework",
               "default": "Common Javascript Framework"
             }
           }
@@ -2835,6 +2940,48 @@
           },
           "English": "No Distributions",
           "_row_num": 54
+        },
+        "view_household_data": {
+          "string_token": "view_household_data",
+          "text": {
+            "default": "View Household Data"
+          },
+          "_row_num": 55
+        },
+        "active_households": {
+          "string_token": "active_households",
+          "text": {
+            "default": "Active Households"
+          },
+          "_row_num": 56
+        },
+        "disabled_households": {
+          "string_token": "disabled_households",
+          "text": {
+            "default": "Disabled Households"
+          },
+          "_row_num": 57
+        },
+        "household_data": {
+          "string_token": "household_data",
+          "text": {
+            "default": "Household Data"
+          },
+          "_row_num": 58
+        },
+        "search_members": {
+          "string_token": "search_members",
+          "text": {
+            "default": "Beneficiary Advanced Search"
+          },
+          "_row_num": 59
+        },
+        "search_households": {
+          "string_token": "search_households",
+          "text": {
+            "default": "Household Advanced Search"
+          },
+          "_row_num": 60
         }
       },
       "_locales": {
@@ -2872,6 +3019,54 @@
             },
             "_row_num": 8,
             "name": "spanish"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Arabic",
+                  "spanish": "Arabic",
+                  "greek": "Arabic",
+                  "arabic": "Arabic",
+                  "farsi": "Arabic",
+                  "default": "Arabic"
+                }
+              }
+            },
+            "_row_num": 9,
+            "name": "arabic"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Farsi",
+                  "spanish": "Farsi",
+                  "greek": "Farsi",
+                  "arabic": "Farsi",
+                  "farsi": "Farsi",
+                  "default": "Farsi"
+                }
+              }
+            },
+            "_row_num": 10,
+            "name": "farsi"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Greek",
+                  "spanish": "Greek",
+                  "greek": "Greek",
+                  "arabic": "Greek",
+                  "farsi": "Greek",
+                  "default": "Greek"
+                }
+              }
+            },
+            "_row_num": 11,
+            "name": "greek"
           }
         ]
       },
@@ -2911,6 +3106,9 @@
                 "text": {
                   "english": "Common Javascript Framework",
                   "spanish": "Common Javascript Framework",
+                  "greek": "Common Javascript Framework",
+                  "arabic": "Common Javascript Framework",
+                  "farsi": "Common Javascript Framework",
                   "default": "Common Javascript Framework"
                 }
               }
@@ -3205,7 +3403,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"spanish\":\"Common Javascript Framework\",\"default\":\"Common Javascript Framework\"}}"
+        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"spanish\":\"Common Javascript Framework\",\"greek\":\"Common Javascript Framework\",\"arabic\":\"Common Javascript Framework\",\"farsi\":\"Common Javascript Framework\",\"default\":\"Common Javascript Framework\"}}"
       }
     ]
   }
