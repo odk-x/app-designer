@@ -24,7 +24,7 @@ function display() {
         disabledHouseholds.innerHTML = odkCommon.localizeText(locale, "disabled_households");
         disabledHouseholds.onclick = function() {
             odkTables.openTableToListView(
-                                      null, 'registration', '(is_active = ? or is_active)', ['FALSE', 'false']
+                                      null, 'registration', '(is_active = ? or is_active = ?)', ['FALSE', 'false']
                                       , 'config/tables/registration/html/registration_list_hh.html?type=standard');
         }
 
