@@ -11,8 +11,10 @@ var type = util.getQueryParameter('type');
 var locale = odkCommon.getPreferredLocale();
 
 function start() {
-    if (type == 'registration') {
+    if (type == 'registrationMember') {
         $('#title').text(odkCommon.localizeText(locale, "search_beneficiaries"));
+    } else if (type == 'registration') {
+        $('#title').text('household placeholder search title');
     } else {
         $('#title').text(odkCommon.localizeText(locale, "search_deliveries"));
     }
@@ -47,11 +49,17 @@ function search() {
 function successCallbackFn(result) {
     var count = result.getCount();
     var label;
-    if (type == 'registration') {
+    if (type == 'registrationMember') {
         if (count == 1) {
             label = odkCommon.localizeText(locale, "beneficiary");
         } else {
             label = odkCommon.localizeText(locale, "beneficiaries");
+        }
+    } else if (type == 'registration') {
+        if (count == 1) {
+            label = 'household placeholder text';
+        } else {
+            label = 'households placeholder text';
         }
     } else {
         if (count == 1) {
