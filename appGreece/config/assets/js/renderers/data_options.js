@@ -12,20 +12,20 @@ function display() {
     if (type == 'registration') {
         var activeHouseholds = document.createElement('button');
 
-        title.text(odkCommon.localizeText(locale, "beneficiary_data_title"));
-        activeHouseholds.innerHTML = odkCommon.localizeText(locale, "active_beneficiaries_title");
+        title.text(odkCommon.localizeText(locale, "household_data"));
+        activeHouseholds.innerHTML = odkCommon.localizeText(locale, "active_households");
         activeHouseholds.onclick = function() {
             odkTables.openTableToListView(
                                       null, 'registration', '(is_active = ? or is_active = ?)', ['TRUE', 'true']
-                                      , 'config/tables/registration/html/registration_list.html?type=standard');
+                                      , 'config/tables/registration/html/registration_list_hh.html?type=standard');
         }
 
         var disabledHouseholds = document.createElement('button');
-        disabledHouseholds.innerHTML = odkCommon.localizeText(locale, "disabled_beneficiaries_title");
+        disabledHouseholds.innerHTML = odkCommon.localizeText(locale, "disabled_households");
         disabledHouseholds.onclick = function() {
             odkTables.openTableToListView(
                                       null, 'registration', '(is_active = ? or is_active)', ['FALSE', 'false']
-                                      , 'config/tables/registration/html/registration_list.html?type=standard');
+                                      , 'config/tables/registration/html/registration_list_hh.html?type=standard');
         }
 
         var householdSearch = document.createElement('button');

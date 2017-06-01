@@ -1,10 +1,10 @@
 window.odkCommonDefinitions = {
   "_tokens": {
-    "select_user": {
-      "string_token": "select_user",
+    "select_group": {
+      "string_token": "select_group",
       "text": {
-        "default": "Please Select User",
-        "spanish": "Seleccione usuario"
+        "default": "Please Select Group",
+        "spanish": "Seleccione grupo"
       },
       "_row_num": 2
     },
@@ -389,6 +389,34 @@ window.odkCommonDefinitions = {
         "default": "No Authorizations"
       },
       "_row_num": 54
+    },
+    "view_household_data": {
+      "string_token": "view_household_data",
+      "text": {
+        "default": "View Household Data"
+      },
+      "_row_num": 55
+    },
+    "active_households": {
+      "string_token": "active_households",
+      "text": {
+        "default": "Active Households"
+      },
+      "_row_num": 56
+    },
+    "disabled_households": {
+      "string_token": "disabled_households",
+      "text": {
+        "default": "Disabled Households"
+      },
+      "_row_num": 57
+    },
+    "household_data": {
+      "string_token": "household_data",
+      "text": {
+        "default": "Household Data"
+      },
+      "_row_num": 58
     }
   },
   "_locales": {

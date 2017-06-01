@@ -41,7 +41,7 @@ function display() {
         $('#code').val(barcodeVal);
     }
 
-    var localizedUser = odkCommon.localizeText(locale, "select_user");
+    var localizedUser = odkCommon.localizeText(locale, "select_group");
     $('#choose_user').hide();
     if (type != 'ent_override') {
         $('#view_details').hide();
@@ -164,6 +164,7 @@ function callBackFn () {
             odkCommon.removeFirstQueuedAction();
             break;
         case actionRegistration:
+        case registrationTable:
             handleRegistrationCallback(action, dispatchStr);
             break;
         default:
@@ -244,9 +245,13 @@ function setRegSuccess(result) {
     odkCommon.removeFirstQueuedAction();
 
     var instanceId = odkCommon.getSessionVariable(regInstanceIdKey);
-    if (type == 'delivery' || type == 'registration') {
+    if (type == 'delivery') {
         odkTables.openDetailWithListView(null, registrationTable, instanceId,
                                          'config/tables/registration/html/registration_detail.html?type=' +
+                                         encodeURIComponent(type));
+    } else if (type == 'registration') {
+        odkTables.openDetailWithListView(null, registrationTable, instanceId,
+                                         'config/tables/registration/html/registration_detail_hh.html?type=' +
                                          encodeURIComponent(type));
     }
 }
@@ -340,6 +345,8 @@ function registrationBCheckCBSuccess(result) {
     } else {
 
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
+        // Now launch the registration_detail_hh.html
+        odkTables.openDetailWithListView(null, 'registration', result.getRowId(0),'config/tables/registration/html/registration_detail_hh.html');
     }
 }
 
@@ -383,6 +390,7 @@ function proxyRowFailure(error) {
 
 function setFilterSuccess(result) {
     var dispatchStruct = JSON.stringify({actionTypeKey: registrationTable});
+    //odkTables.editRowWithSurvey(dispatchStruct, registrationTable, result.getRowId(0), 'registration', null);
     odkTables.editRowWithSurvey(dispatchStruct, registrationTable, result.getRowId(0), 'registration', null);
 }
 
@@ -420,6 +428,10 @@ function regOverrideBenSuccess(result) {
             odkTables.openDetailWithListView(null, registrationTable, result.getRowId(0),
                                              'config/tables/registration/html/registration_detail.html?type=' +
                                              encodeURIComponent(type));
+        } else if (type == 'registration') {
+            odkTables.openDetailView(null, registrationTable,result.getRowId(0),
+                                     'config/tables/registration/html/registration_detail_hh.html?type=' +
+                                     encodeURIComponent(type));
         } else {
             odkTables.openDetailView(null, registrationTable,result.getRowId(0),
                                      'config/tables/registration/html/registration_detail.html?type=' +
