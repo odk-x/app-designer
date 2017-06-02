@@ -12,7 +12,7 @@ function display() {
     if (type == 'registration') {
         var activeHouseholds = document.createElement('button');
 
-        title.text(odkCommon.localizeText(locale, "household_data"));
+        title.text(odkCommon.localizeText(locale, "registration_data"));
         activeHouseholds.innerHTML = odkCommon.localizeText(locale, "active_households");
         activeHouseholds.onclick = function() {
             odkTables.openTableToListView(

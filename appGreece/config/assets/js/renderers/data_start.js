@@ -9,7 +9,7 @@ function display() {
     $('#title').text(odkCommon.localizeText(locale, "data_categories"));
     var benData = document.createElement("button");
     benData.setAttribute("id", "beneficiary");
-    benData.innerHTML = odkCommon.localizeText(locale, "view_household_data");
+    benData.innerHTML = odkCommon.localizeText(locale, "view_registration_data");
     benData.onclick = function() {
         odkTables.launchHTML(null,
                              'config/assets/data_options.html?type=registration');
