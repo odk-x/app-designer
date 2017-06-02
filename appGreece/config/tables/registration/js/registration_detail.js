@@ -22,6 +22,12 @@ function cbSuccess(result) {
     $('#address').prepend(odkCommon.localizeText(locale, 'address') + ": ");
     $('#telephone').prepend(odkCommon.localizeText(locale, 'telephone') + ": ");
     $('#mobile_provider').prepend(odkCommon.localizeText(locale, 'mobile_provider') + ": ");
+
+    $("#household").click(function(e) {
+        e.preventDefault();   
+        odkTables.openDetailWithListView(null, 'registration', registrationResultSet.getRowId(0),
+            'config/tables/registration/html/registration_detail_hh.html');
+    }); 
     
     if (type == 'activate' || type == 'disable') {
         var action = $('#followup');

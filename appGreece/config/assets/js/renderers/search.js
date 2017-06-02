@@ -83,8 +83,13 @@ function failureCallbackFn(error) {
 }
 
 function launch() {
-    odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' +
+    if (type === 'registration') {
+        odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' +
+                                  type + '/html/' + type + '_list_hh.html');
+    } else {
+        odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' +
                                   type + '/html/' + type + '_list.html');
+    }
 }
 
 $(window).resize(function() {

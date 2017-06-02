@@ -29,6 +29,14 @@ function cbSuccess(result) {
     $('#delivery_site').prepend(odkCommon.localizeText(locale, 'delivery_site') + ": ");
     $('#household_size').prepend(odkCommon.localizeText(locale, 'household_size') + ": ");
     $('#tent_caravan').prepend(odkCommon.localizeText(locale, 'tent_caravan') + ": ");
+
+
+    $("#entitle").click(function(e) {
+        e.preventDefault();   
+        odkTables.openDetailWithListView(null, 'registration', registrationResultSet.getRowId(0),
+            'config/tables/registration/html/registration_detail.html');
+    }); 
+
     
     odkTables.setSubListView('registrationMember', 'beneficiary_code = ?', 
         [registrationResultSet.get('beneficiary_code')], 
