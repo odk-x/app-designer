@@ -701,6 +701,13 @@ window.odkCommonDefinitions = {
         "default": "View"
       },
       "_row_num": 71
+    },
+    "select_group": {
+      "string_token": "select_group",
+      "text": {
+        "default": "Please Select Group"
+      },
+      "_row_num": 72
     }
   },
   "_locales": {
