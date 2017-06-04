@@ -7,7 +7,6 @@
 var registrationResultSet = {};
 var type = util.getQueryParameter('type');
 var locale = odkCommon.getPreferredLocale();
-var showDelivered = 'false';
 
 function cbSuccess(result) {
     registrationResultSet = result;
@@ -91,39 +90,35 @@ function entCBSuccess(result) {
     $('#entitlements_title').text('Entitlements Listed'); // TODO: localize this
 
     $('#pending_txt').text('Pending'); // TODO: Localize this
-    $('#entitlements_pending').click(updateSubListView);
+    $('#entitlements_pending').click(function() {
+        updateSubListView(false)
+    });
 
     $('#delivered_txt').text('Delivered'); // TODO: Localize this
-    $('#entitlements_delivered').click(updateSubListView);
+    $('#entitlements_delivered').click(function() {
+        updateSubListView(true)
+    });
 
-  updateSubListView();
+  updateSubListView(false);
 }
 
-function updateSubListView() {
+function updateSubListView(forDelivered) {
     var groupModify = registrationResultSet.get('_group_modify');
     console.log("registrationResultSet: " + registrationResultSet);
     console.log("groupModify: " + groupModify);
     
+    var showDelivered = 'false';
     var showDeliveredCase = 'FALSE';
-    if (showDelivered === 'true') {
+
+    if (forDelivered === true) {
+        showDelivered = 'true';
         showDeliveredCase = 'TRUE';
-    } else if (showDelivered === 'TRUE') {
-        showDeliveredCase = 'true';
-    } else if (showDelivered === 'false') {
-        showDeliveredCase = 'FALSE';
-    } else if (showDelivered === 'FALSE'){
-        showDeliveredCase = 'false';
     }
+
     odkTables.setSubListView('entitlements',
                              'beneficiary_code = ? and (is_delivered = ? or is_delivered = ?)',
                              [registrationResultSet.get('beneficiary_code'), showDelivered, showDeliveredCase],
                              'config/tables/entitlements/html/entitlements_list.html?groupModify=' + encodeURIComponent(groupModify));
-
-    if (showDelivered === 'true') {
-        showDelivered = 'false';
-    } else {
-        showDelivered = 'true';
-    }
 }
 
 function entCBFailure(error) {
@@ -131,8 +126,5 @@ function entCBFailure(error) {
 }
 
 function display() {
-    // Default to showing undelivered entitlements
-    showDelivered = 'false';
-
     odkData.getViewData(cbSuccess, cbFailure);
 }

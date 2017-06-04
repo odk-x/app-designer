@@ -23,7 +23,6 @@ var locale = odkCommon.getPreferredLocale();
 var superUser;
 var type = util.getQueryParameter('type');
 var code;
-var queriedType;
 var userKey = "user";
 var defaultGroupKey = "defaultGroup";
 var entDefaultGroupKey = "entDefaultGroup";
@@ -36,7 +35,7 @@ function display() {
     $('#search').text(odkCommon.localizeText(locale, "enter"));
 
     var barcodeVal = odkCommon.getSessionVariable(barcodeSessionVariable);
-    if (barcodeVal !== null && barcodeVal !== undefined) {
+    if (barcodeVal !== null && barcodeVal !== undefined && barcodeVal !== "") {
         $('#code').val(barcodeVal);
     }
 
@@ -244,7 +243,7 @@ function queryChain(passed_code) {
         deliveryFunction();
     } else if (type === 'registration') {
         if (code === null || code === undefined || code === "") {
-             $('#search_results').text(odkCommon.localizeText(locale, "barcode_available"));
+             $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
         } else {
             registrationFunction();
         }
@@ -325,7 +324,6 @@ function registrationBCheckCBSuccess(result) {
                           registrationVoucherCBFailure);
 
     } else {
-
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
         // Now launch the registration_detail_hh.html
         odkTables.openDetailWithListView(null, 'registration', result.getRowId(0),'config/tables/registration/html/registration_detail_hh.html');
@@ -366,7 +364,8 @@ function registrationVoucherCBFailure(error) {
 function regOverrideFunction() {
     console.log('entered regoverride path');
     var queryCaseType;
-    if (code !== "") {
+    var queriedType;
+    if (code !== "" && code !== undefined && code !== null) {
         console.log(code);
         if (type === 'activate') {
             queriedType = 'FALSE';
@@ -397,12 +396,14 @@ function regOverrideBenSuccess(result) {
                                      encodeURIComponent(type));
         }
     } else if (result.getCount() > 1) {
+        var queriedType;
         var queryCaseType;
-        // TODO: Revisit this logic and make it better
-        if (queriedType === 'TRUE' || queriedType === 'true') {
-            queryCaseType = 'true';
-        } else {
+        if (type === 'activate') {
+            queriedType = 'FALSE';
             queryCaseType = 'false';
+        } else {
+            queriedType = 'TRUE';
+            queryCaseType = 'true';
         }
         odkTables.openTableToListView(null, registrationTable,
                                       'beneficiary_code = ? and (is_active = ? or is_active = ?)',
@@ -424,7 +425,7 @@ function regOverrideBenFailure(error) {
 
 
 function entOverrideFunction() {
-    if (code !== "") {
+    if (code !== "" && code !== undefined && code !== null) {
         odkData.query('registration', 'beneficiary_code = ?',
                       [code],
                       null, null, null, null, null, null, true, benEntOverrideCBSuccess,

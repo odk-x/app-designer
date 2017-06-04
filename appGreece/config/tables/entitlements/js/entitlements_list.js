@@ -161,9 +161,11 @@ function formResolutionSuccess(result) {
   });
 
   var authorizationPromise = new Promise(function(resolve, reject) {
+    var auth_id = newEntitlementsResultSet.get('authorization_id');
+    console.log("authorizationPromise auth_id:" + auth_id);
     odkData.arbitraryQuery('authorizations',
       'SELECT delivery_table, delivery_form, ranges FROM authorizations WHERE _id = ?',
-       [newEntitlementsResultSet.get('authorization_id')],
+       [auth_id],
         null, null, resolve, reject);
   });
 
