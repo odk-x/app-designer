@@ -471,7 +471,7 @@
         "linked_table_id": "registrationMember",
         "selection": "beneficiary_code = ?",
         "selectionArgs": "[ data('beneficiary_code') ]",
-        "newRowInitialElementKeyToValueMap": "{beneficiary_code: data('beneficiary_code')}",
+        "newRowInitialElementKeyToValueMap": "{beneficiary_code: data('beneficiary_code'), _group_modify: 'hardcodedTestGroup'}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
@@ -750,7 +750,7 @@
         "linked_table_id": "registrationMember",
         "selection": "beneficiary_code = ?",
         "selectionArgs": "[ data('beneficiary_code') ]",
-        "newRowInitialElementKeyToValueMap": "{beneficiary_code: data('beneficiary_code')}",
+        "newRowInitialElementKeyToValueMap": "{beneficiary_code: data('beneficiary_code'), _group_modify: 'hardcodedTestGroup'}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }

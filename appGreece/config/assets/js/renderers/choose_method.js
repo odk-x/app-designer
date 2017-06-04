@@ -24,7 +24,6 @@ var superUser;
 var type = util.getQueryParameter('type');
 var code;
 var queriedType;
-var regInstanceIdKey = "regInstanceId";
 var userKey = "user";
 var defaultGroupKey = "defaultGroup";
 var entDefaultGroupKey = "entDefaultGroup";
@@ -43,7 +42,7 @@ function display() {
 
     var localizedUser = odkCommon.localizeText(locale, "select_group");
     $('#choose_user').hide();
-    if (type != 'ent_override') {
+    if (type !== 'ent_override') {
         $('#view_details').hide();
     } else {
         idComponent = "&authorization_id=" + encodeURIComponent(util.getQueryParameter('authorization_id'));
@@ -96,20 +95,17 @@ function display() {
             $('#choose_user').on('change', function() {
                 defaultGroup = $('#choose_user').val();
                 odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
-                if ($('#choose_user').val() != localizedUser) {
-                    $('#barcode').prop("disabled", false).removeClass('disabled');
-                    $('#search').prop("disabled", false).removeClass('disabled');
-                } else {
+                if ($('#choose_user').val() === localizedUser) {
                     $('#barcode').prop("disabled", true).addClass('disabled');
                     $('#search').prop("disabled", true).addClass('disabled');
+                } else {
+                    $('#barcode').prop("disabled", false).removeClass('disabled');
+                    $('#search').prop("disabled", false).removeClass('disabled');
                 }
             });
         }
 
-
-
         $('#barcode').on('click', function() {
-            window.localStorage.setItem('odk_user', $('#choose_user').val());
             var dispatchStruct = JSON.stringify({actionTypeKey: actionBarcode,
                 htmlPath:htmlFileNameValue, userAction:userActionValue});
             odkCommon.doAction(dispatchStruct, 'com.google.zxing.client.android.SCAN', null);
@@ -164,8 +160,8 @@ function callBackFn () {
             odkCommon.removeFirstQueuedAction();
             break;
         case actionRegistration:
-        case registrationTable:
             handleRegistrationCallback(action, dispatchStr);
+            odkCommon.removeFirstQueuedAction();
             break;
         default:
             console.log("Error: unrecognized action type in callback");
@@ -214,7 +210,6 @@ function handleRegistrationCallback(action, dispatchStr) {
     }
 
     var instanceId = result.instanceId;
-    odkCommon.setSessionVariable(regInstanceIdKey, instanceId);
     if (instanceId === null || instanceId === undefined) {
         console.log("Error: no instance ID on registration");
         return;
@@ -231,45 +226,32 @@ function handleRegistrationCallback(action, dispatchStr) {
         return;
     }
 
-    var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
-    var user = odkCommon.getSessionVariable(userKey);
-
-    odkData.changeAccessFilterOfRow('registration', 'HIDDEN', user,
-                                    null, defaultGroup, null, instanceId, setRegSuccess, setRegFailure);
-
-
-}
-
-function setRegSuccess(result) {
-
-    odkCommon.removeFirstQueuedAction();
-
-    var instanceId = odkCommon.getSessionVariable(regInstanceIdKey);
-    if (type == 'delivery') {
+    if (type === 'delivery') {
         odkTables.openDetailWithListView(null, registrationTable, instanceId,
                                          'config/tables/registration/html/registration_detail.html?type=' +
                                          encodeURIComponent(type));
-    } else if (type == 'registration') {
+    } else if (type === 'registration') {
         odkTables.openDetailWithListView(null, registrationTable, instanceId,
                                          'config/tables/registration/html/registration_detail_hh.html?type=' +
                                          encodeURIComponent(type));
     }
 }
 
-function setRegFailure(error) {
-    console.log('reg set failure with error: ' + error);
-}
-
 function queryChain(passed_code) {
     code = passed_code;
     console.log(code);
-    if (type == 'delivery') {
+    if (type === 'delivery') {
         deliveryFunction();
-    } else if (type == 'registration') {
-        registrationFunction();
-    } else if (type == 'activate' || type == 'disable') {
+    } else if (type === 'registration') {
+        if (code === null || code === undefined || code === "") {
+             $('#search_results').text(odkCommon.localizeText(locale, "barcode_available"));
+        } else {
+            registrationFunction();
+        }
+        
+    } else if (type === 'activate' || type === 'disable') {
         regOverrideFunction();
-    } else if (type == 'ent_override') {
+    } else if (type === 'ent_override') {
         entOverrideFunction();
     }
 }
@@ -288,7 +270,7 @@ function deliveryBCheckCBSuccess(result) {
     } else if (result.getCount() === 1) {
         // TODO: This should be changed as well - probably don't need if and else 
         // double check that this is the case
-        if (type == 'delivery') {
+        if (type === 'delivery') {
             odkTables.openDetailWithListView(null, registrationTable, result.getRowId(0),
                                              'config/tables/registration/html/registration_detail.html?type=' +
                                              encodeURIComponent(type));
@@ -356,20 +338,24 @@ function registrationBCheckCBFailure(error) {
 
 function registrationVoucherCBSuccess(result) {
     var voucherResultSet = result;
-    if (voucherResultSet.getCount() == 0) {
+    if (voucherResultSet.getCount() === 0) {
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_available"));
     } else {
         $('#search_results').text(odkCommon.localizeText(locale, "voucher_detected"));
     }
     setTimeout(function() {
+        var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+        var user = odkCommon.getSessionVariable(userKey);
+
         var struct = {};
         struct['beneficiary_code'] = code;
-        if (superUser) {
-            odkData.addRow('registration', struct, util.genUUID(), proxyRowSuccess, proxyRowFailure);
-        } else {
-            var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration});
-            odkTables.addRowWithSurvey(dispatchStruct, registrationTable, 'registration', null, struct);
-        }
+        struct['_group_modify'] = defaultGroup;
+        struct['_default_access'] = 'HIDDEN';
+        struct['_row_owner'] = user;
+
+        var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration});
+        odkTables.addRowWithSurvey(dispatchStruct, registrationTable, 'registration', null, struct);
+        
     }, 1000);
 }
 
@@ -377,33 +363,12 @@ function registrationVoucherCBFailure(error) {
     console.log('registrationVoucherCBFailure called with error: ' + error);
 }
 
-function proxyRowSuccess(result) {
-    var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
-    var user = odkCommon.getSessionVariable(userKey);
-    odkData.changeAccessFilterOfRow('registration', 'HIDDEN', user,
-                                    null, defaultGroup, null, result.getRowId(0), setFilterSuccess, setFilterFailure);
-}
-
-function proxyRowFailure(error) {
-    console.log('proxy set failure with error: ' + error);
-}
-
-function setFilterSuccess(result) {
-    var dispatchStruct = JSON.stringify({actionTypeKey: registrationTable});
-    //odkTables.editRowWithSurvey(dispatchStruct, registrationTable, result.getRowId(0), 'registration', null);
-    odkTables.editRowWithSurvey(dispatchStruct, registrationTable, result.getRowId(0), 'registration', null);
-}
-
-function setFilterFailure(error) {
-    console.log('set filter failure with error: ' + error);
-}
-
 function regOverrideFunction() {
     console.log('entered regoverride path');
     var queryCaseType;
     if (code !== "") {
         console.log(code);
-        if (type == 'activate') {
+        if (type === 'activate') {
             queriedType = 'FALSE';
             queryCaseType = 'false';
         } else {
@@ -417,18 +382,12 @@ function regOverrideFunction() {
 }
 
 function regOverrideBenSuccess(result) {
-    //var descriptor;
-    //if (type == 'activate') {
-    //descriptor = "Disabled";
-    ////} else {
-    //    descriptor = "Active";
-    //}
-    if (result.getCount() == 1) {
-        if (type == 'delivery') {
+    if (result.getCount() === 1) {
+        if (type === 'delivery') {
             odkTables.openDetailWithListView(null, registrationTable, result.getRowId(0),
                                              'config/tables/registration/html/registration_detail.html?type=' +
                                              encodeURIComponent(type));
-        } else if (type == 'registration') {
+        } else if (type === 'registration') {
             odkTables.openDetailView(null, registrationTable,result.getRowId(0),
                                      'config/tables/registration/html/registration_detail_hh.html?type=' +
                                      encodeURIComponent(type));
@@ -440,7 +399,7 @@ function regOverrideBenSuccess(result) {
     } else if (result.getCount() > 1) {
         var queryCaseType;
         // TODO: Revisit this logic and make it better
-        if (queriedType == 'TRUE' || queriedType == 'true') {
+        if (queriedType === 'TRUE' || queriedType === 'true') {
             queryCaseType = 'true';
         } else {
             queryCaseType = 'false';
@@ -451,7 +410,7 @@ function regOverrideBenSuccess(result) {
                                       'config/tables/registration/html/registration_list.html?type=' +
                                       encodeURIComponent(type));
     } else {
-        if (type == 'activate') {
+        if (type === 'activate') {
             $('#search_results').text(odkCommon.localizeText(locale, "no_disabled_beneficiary"));
         } else {
             $('#search_results').text(odkCommon.localizeText(locale, "no_active_beneficiary"));
@@ -492,7 +451,7 @@ function benEntOverrideCBFailure(error) {
 }
 
 function entCheckCBSuccess(result) {
-    if (result.getCount() == 0) {
+    if (result.getCount() === 0) {
         odkData.query('authorizations', '_id = ?',
                       [util.getQueryParameter('authorization_id')],
                       null, null, null, null, null, null, true, createOverrideCBSuccess,
@@ -509,6 +468,9 @@ function entCheckCBFailure(error) {
 function createOverrideCBSuccess(result) {
     $('#search_results').text(odkCommon.localizeText(locale, "eligible_override"));
 
+    var defaultGroup = odkCommon.getSessionVariable(entDefaultGroupKey);
+    var user = odkCommon.getSessionVariable(userKey)
+
     var struct = {};
     struct['authorization_id'] = result.get('_id');
     struct['authorization_name'] = result.get('authorization_name');
@@ -519,6 +481,9 @@ function createOverrideCBSuccess(result) {
     struct['beneficiary_code'] = code;
     struct['is_delivered'] = 'false';
     struct['is_override'] = 'true';
+    struct['_default_access'] = 'HIDDEN'; 
+    struct['_row_owner'] = user;
+    struct['_group_modify'] = defaultGroup;
     odkData.addRow('entitlements', struct, util.genUUID(), addDistCBSuccess, addDistCBFailure);
 }
 
@@ -529,22 +494,9 @@ function createOverrideCBFailure(error) {
 var addDistCBSuccess = function(result) {
     console.log('authorizations_detail addDistCBSuccess');
 
-    var defaultGroup = odkCommon.getSessionVariable(entDefaultGroupKey);
-    var user = odkCommon.getSessionVariable(userKey);
-    odkData.changeAccessFilterOfRow('entitlements', 'HIDDEN', user, null, defaultGroup, 
-                                    null, result.getRowId(0), finalFilterSuccess, finalFilterFailure);
     $('#search_results').text(odkCommon.localizeText(locale, "override_creation_success"));
 };
 
 var addDistCBFailure = function(error) {
     console.log('authorizations_detail addDistCBFailure: ' + error);
 };
-
-function finalFilterSuccess(result) {
-    console.log('final filter success');
-}
-
-function finalFilterFailure(error) {
-    console.log('final filter failure with error: ' + error);
-}
-
