@@ -14,4 +14,5 @@ last_name,last_name,string,[]
 picture,picture,mimeUri,"[""picture_contentType"",""picture_uriFragment""]"
 picture_contentType,contentType,mimeType,[]
 picture_uriFragment,uriFragment,rowpath,[]
-vulnerability,vulnerability,string,[]
+vulnerability,vulnerability,array,"[""vulnerability_items""]"
+vulnerability_items,items,string,[]

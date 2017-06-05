@@ -31,6 +31,7 @@
             "text": "\"Data collected will be used to provide you with easier access to the Red Cross services. The information gathered during this interview will stay with Red Cross and will be stored in a Spanish Red Cross server. No sensitive data will be shared with any other person or organization. \n\nIf you agree with this process and this use of information, we will proceed with the interview.\nWe inform you that you can exercise, at any time, the rights of access, rectification, cancellation and opposition, directing a letter to: Cruz Roja Española, Secretaría General, Avenida Reina Victoria, 26, 28003 Madrid, or to the email address: odksupport@cruzroja.es, previous accreditation of your identity.\n\nConsent signature (In the case of a minor, the legal guardian will sign in its place)\""
           }
         },
+        "required": true,
         "_row_num": 6
       },
       {
@@ -96,22 +97,26 @@
           },
           "hint": {
             "text": "Address"
+          },
+          "required_message": {
+            "text": "Either tent/caravan or address must be completed."
           }
         },
+        "required": "!data('tent_caravan')",
         "_row_num": 14
       },
       {
-        "type": "integer",
-        "name": "hh_size",
+        "type": "string",
+        "name": "tent_caravan",
         "display": {
           "prompt": {
-            "text": "How many people are in your household?"
+            "text": "Tent/Caravan code:"
           },
-          "hint": {
-            "text": "Including household representative"
+          "required_message": {
+            "text": "Either tent/caravan or address must be completed."
           }
         },
-        "required": true,
+        "required": "!data('address')",
         "_row_num": 15
       },
       {
@@ -147,6 +152,10 @@
         "_row_num": 20
       },
       {
+        "clause": "begin screen",
+        "_row_num": 21
+      },
+      {
         "type": "geopoint",
         "name": "location",
         "display": {
@@ -154,18 +163,17 @@
             "text": "Capture current location"
           }
         },
-        "_row_num": 21
+        "_row_num": 22
       },
       {
-        "type": "string",
-        "name": "tent_caravan",
-        "display": {
-          "prompt": {
-            "text": "Tent/Caravan code:"
-          }
-        },
-        "required": true,
-        "_row_num": 22
+        "type": "async_assign_count",
+        "name": "hh_size",
+        "values_list": "count_members",
+        "_row_num": 23
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 24
       }
     ],
     "settings": [
@@ -471,9 +479,20 @@
         "linked_table_id": "registrationMember",
         "selection": "beneficiary_code = ?",
         "selectionArgs": "[ data('beneficiary_code') ]",
-        "newRowInitialElementKeyToValueMap": "{beneficiary_code: data('beneficiary_code'), _group_modify: 'hardcodedTestGroup'}",
+        "newRowInitialElementKeyToValueMap": "{beneficiary_code: data('beneficiary_code'), _group_modify: metadata('_group_modify')}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
+      },
+      {
+        "query_name": "count_members",
+        "query_type": "linked_table",
+        "linked_form_id": "registrationMember",
+        "linked_table_id": "registrationMember",
+        "selection": "beneficiary_code = ?",
+        "selectionArgs": "[ data('beneficiary_code') ]",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 3
       }
     ],
     "initial": [
@@ -485,6 +504,43 @@
         "clause": "goto _finalize",
         "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
         "_row_num": 3
+      }
+    ],
+    "prompt_types": [
+      {
+        "prompt_type_name": "async_assign_max",
+        "type": "number",
+        "_row_num": 2
+      },
+      {
+        "prompt_type_name": "async_assign_min",
+        "type": "number",
+        "_row_num": 3
+      },
+      {
+        "prompt_type_name": "async_assign_avg",
+        "type": "number",
+        "_row_num": 4
+      },
+      {
+        "prompt_type_name": "async_assign_sum",
+        "type": "number",
+        "_row_num": 5
+      },
+      {
+        "prompt_type_name": "async_assign_total",
+        "type": "number",
+        "_row_num": 6
+      },
+      {
+        "prompt_type_name": "async_assign_count",
+        "type": "number",
+        "_row_num": 7
+      },
+      {
+        "prompt_type_name": "async_assign_single_string",
+        "type": "string",
+        "_row_num": 8
       }
     ]
   },
@@ -750,9 +806,20 @@
         "linked_table_id": "registrationMember",
         "selection": "beneficiary_code = ?",
         "selectionArgs": "[ data('beneficiary_code') ]",
-        "newRowInitialElementKeyToValueMap": "{beneficiary_code: data('beneficiary_code'), _group_modify: 'hardcodedTestGroup'}",
+        "newRowInitialElementKeyToValueMap": "{beneficiary_code: data('beneficiary_code'), _group_modify: metadata('_group_modify')}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
+      },
+      "count_members": {
+        "query_name": "count_members",
+        "query_type": "linked_table",
+        "linked_form_id": "registrationMember",
+        "linked_table_id": "registrationMember",
+        "selection": "beneficiary_code = ?",
+        "selectionArgs": "[ data('beneficiary_code') ]",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 3
       }
     },
     "calculates": {},
@@ -829,10 +896,12 @@
         "elementKey": "telephone"
       },
       "hh_size": {
+        "prompt_type_name": "async_assign_count",
         "type": "integer",
+        "valuesList": "count_members",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 23,
             "section_name": "survey"
           },
           {
@@ -913,7 +982,7 @@
         },
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {
@@ -966,7 +1035,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {
@@ -995,6 +1064,7 @@
                 "text": "\"Data collected will be used to provide you with easier access to the Red Cross services. The information gathered during this interview will stay with Red Cross and will be stored in a Spanish Red Cross server. No sensitive data will be shared with any other person or organization. \n\nIf you agree with this process and this use of information, we will proceed with the interview.\nWe inform you that you can exercise, at any time, the rights of access, rectification, cancellation and opposition, directing a letter to: Cruz Roja Española, Secretaría General, Avenida Reina Victoria, 26, 28003 Madrid, or to the email address: odksupport@cruzroja.es, previous accreditation of your identity.\n\nConsent signature (In the case of a minor, the legal guardian will sign in its place)\""
               }
             },
+            "required": true,
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -1064,8 +1134,12 @@
               },
               "hint": {
                 "text": "Address"
+              },
+              "required_message": {
+                "text": "Either tent/caravan or address must be completed."
               }
             },
+            "required": "!data('tent_caravan')",
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
@@ -1074,21 +1148,21 @@
             "promptIdx": 4
           },
           {
-            "type": "integer",
-            "name": "hh_size",
+            "type": "string",
+            "name": "tent_caravan",
             "display": {
               "prompt": {
-                "text": "How many people are in your household?"
+                "text": "Tent/Caravan code:"
               },
-              "hint": {
-                "text": "Including household representative"
+              "required_message": {
+                "text": "Either tent/caravan or address must be completed."
               }
             },
-            "required": true,
+            "required": "!data('address')",
             "_row_num": 15,
             "__rowNum__": 14,
             "_token_type": "prompt",
-            "_type": "integer",
+            "_type": "string",
             "_branch_label_enclosing_screen": "survey/_screen12",
             "promptIdx": 5
           },
@@ -1130,43 +1204,39 @@
                 "text": "Capture current location"
               }
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "geopoint",
             "_branch_label_enclosing_screen": "survey/_screen21",
             "promptIdx": 8
           },
           {
-            "type": "string",
-            "name": "tent_caravan",
-            "display": {
-              "prompt": {
-                "text": "Tent/Caravan code:"
-              }
-            },
-            "required": true,
-            "_row_num": 22,
-            "__rowNum__": 21,
+            "type": "async_assign_count",
+            "name": "hh_size",
+            "values_list": "count_members",
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
-            "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen22",
+            "_type": "async_assign_count",
+            "_branch_label_enclosing_screen": "survey/_screen21",
             "promptIdx": 9
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 23,
-            "_branch_label_enclosing_screen": "survey/_screen23",
+            "_row_num": 25,
+            "_branch_label_enclosing_screen": "survey/_screen25",
             "promptIdx": 10
           }
         ],
         "validation_tag_map": {
           "finalize": [
+            0,
             3,
-            5,
-            9
+            4,
+            5
           ]
         },
         "operations": [
@@ -1254,37 +1324,39 @@
             "operationIdx": 6
           },
           {
+            "clause": "begin screen",
             "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 24,
+              "__rowNum__": 23,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
-          },
-          {
-            "_row_num": 22,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 8
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 23,
-            "operationIdx": 9
+            "_row_num": 25,
+            "operationIdx": 8
           },
           {
-            "_row_num": 23,
+            "_row_num": 25,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 10
+            "operationIdx": 9
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 23,
-            "operationIdx": 11
+            "_row_num": 25,
+            "operationIdx": 10
           }
         ],
         "branch_label_map": {
@@ -1293,9 +1365,8 @@
           "_screen12": 5,
           "_screen17": 6,
           "_screen21": 7,
-          "_screen22": 8,
-          "_contents": 10,
-          "_screen23": 10
+          "_contents": 9,
+          "_screen25": 9
         }
       },
       "initial": {
@@ -1495,10 +1566,12 @@
         "elementPath": "telephone"
       },
       "hh_size": {
+        "prompt_type_name": "async_assign_count",
         "type": "integer",
+        "valuesList": "count_members",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 23,
             "section_name": "survey"
           },
           {
@@ -1606,7 +1679,7 @@
         },
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 22,
             "section_name": "survey"
           },
           {
@@ -1686,7 +1759,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 22,
+            "_row_num": 15,
             "section_name": "survey"
           },
           {

@@ -183,7 +183,7 @@
         "_row_num": 25
       },
       {
-        "type": "select_one",
+        "type": "select_multiple",
         "name": "vulnerability",
         "display": {
           "prompt": {
@@ -191,6 +191,7 @@
           }
         },
         "values_list": "vulnerability_list",
+        "required": true,
         "_row_num": 26
       },
       {
@@ -205,6 +206,7 @@
             "text": "Take a picture of the beneficiary."
           }
         },
+        "required": true,
         "_row_num": 28
       }
     ],
@@ -331,6 +333,7 @@
       {
         "type": "string",
         "name": "is_head_of_household",
+        "default": "FALSE",
         "_row_num": 13
       },
       {
@@ -344,8 +347,11 @@
         "_row_num": 15
       },
       {
-        "type": "string",
+        "type": "select_multiple",
         "name": "vulnerability",
+        "default": [
+          "None"
+        ],
         "_row_num": 16
       }
     ],
@@ -1071,6 +1077,7 @@
             "section_name": "model"
           }
         ],
+        "default": "FALSE",
         "elementKey": "is_head_of_household"
       },
       "picture": {
@@ -1116,7 +1123,11 @@
         "elementKey": "email"
       },
       "vulnerability": {
-        "type": "string",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "vulnerability_items"
+        },
         "valuesList": "vulnerability_list",
         "_defn": [
           {
@@ -1127,6 +1138,9 @@
             "_row_num": 16,
             "section_name": "model"
           }
+        ],
+        "default": [
+          "None"
         ],
         "elementKey": "vulnerability"
       }
@@ -1317,7 +1331,7 @@
             "promptIdx": 10
           },
           {
-            "type": "select_one",
+            "type": "select_multiple",
             "name": "vulnerability",
             "display": {
               "prompt": {
@@ -1325,10 +1339,11 @@
               }
             },
             "values_list": "vulnerability_list",
+            "required": true,
             "_row_num": 26,
             "__rowNum__": 25,
             "_token_type": "prompt",
-            "_type": "select_one",
+            "_type": "select_multiple",
             "_branch_label_enclosing_screen": "survey/_screen24",
             "promptIdx": 11
           },
@@ -1340,6 +1355,7 @@
                 "text": "Take a picture of the beneficiary."
               }
             },
+            "required": true,
             "_row_num": 28,
             "__rowNum__": 27,
             "_token_type": "prompt",
@@ -1364,7 +1380,9 @@
             4,
             6,
             7,
-            9
+            9,
+            11,
+            12
           ]
         },
         "operations": [
@@ -1848,6 +1866,7 @@
             "section_name": "model"
           }
         ],
+        "default": "FALSE",
         "elementKey": "is_head_of_household",
         "elementName": "is_head_of_household",
         "elementSet": "data",
@@ -1913,7 +1932,15 @@
         "elementPath": "email"
       },
       "vulnerability": {
-        "type": "string",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "vulnerability_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "vulnerability.items",
+          "notUnitOfRetention": true
+        },
         "valuesList": "vulnerability_list",
         "_defn": [
           {
@@ -1925,10 +1952,16 @@
             "section_name": "model"
           }
         ],
+        "default": [
+          "None"
+        ],
         "elementKey": "vulnerability",
         "elementName": "vulnerability",
         "elementSet": "data",
-        "elementPath": "vulnerability"
+        "elementPath": "vulnerability",
+        "listChildElementKeys": [
+          "vulnerability_items"
+        ]
       },
       "picture_uriFragment": {
         "type": "string",
@@ -1946,6 +1979,14 @@
         "elementName": "contentType",
         "elementSet": "data",
         "elementPath": "picture.contentType"
+      },
+      "vulnerability_items": {
+        "type": "string",
+        "elementKey": "vulnerability_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "vulnerability.items",
+        "notUnitOfRetention": true
       },
       "_id": {
         "type": "string",
