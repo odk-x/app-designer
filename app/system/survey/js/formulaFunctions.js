@@ -107,6 +107,12 @@ function(opendatakit,  database,  $,       _) {
             var datavalue = database.getDataValue(valueName);
             return datavalue;
         },
+        //data gets a value by name.
+        metadata: function(valueName) {
+            'use strict';
+            var datavalue = database.getInstanceMetaDataValue(valueName);
+            return datavalue;
+        },
         /**
          * assignment operator that returns the value that was assigned.
          * i.e., assign('a', 3) will store the value 3 in data('a') and
