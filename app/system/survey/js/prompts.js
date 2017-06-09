@@ -1,13 +1,13 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','datetimepicker'],
+define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','combodate'],
 function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh) {
 'use strict';
 /* global odkCommon, odkSurvey */
 verifyLoad('prompts',
-    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','datetimepicker'],
-    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.datetimepicker] );
+    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','combodate'],
+    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.combodate] );
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -1871,6 +1871,7 @@ promptTypes.decimal = promptTypes.input_type.extend({
 promptTypes.datetime = promptTypes.input_type.extend({
     type: "datetime",
     templatePath: "templates/datetimepicker.handlebars",
+    // TODO: Use a template?
     usePicker: true,
     insideAfterRender: false,
     timeFormat: "MM/DD/YYYY h:mm A",
@@ -1996,12 +1997,16 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 that.dtp.destroy();
             }
 
+            var now = new Date();
             if (that.showDate && !that.showTime) {
-                that.$('input').datetimepicker({pickTime: false, format: this.timeFormat});
+                // TODO: Remove time portion
+                that.$('input').combodate({format: this.timeFormat, value: now, minuteStep: 1, minYear: 1900, maxYear: now.getFullYear()});
             } else if (!that.showDate && that.showTime) {
-                that.$('input').datetimepicker({pickDate: false, format: this.timeFormat});
+                // TODO: Remove date portion
+                that.$('input').combodate({format: this.timeFormat, value: now, minuteStep: 1, minYear: 1900, maxYear: now.getFullYear()});
             } else {
-                that.$('input').datetimepicker({format: this.timeFormat});
+                // TODO: Fix defaults
+                that.$('input').combodate({format: this.timeFormat, value: now, minuteStep: 1, minYear: 1900, maxYear: now.getFullYear()});
             }
             var inputElement = that.$('input');
             that.dtp = inputElement.data('DateTimePicker');
@@ -2011,7 +2016,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
     },
     beforeMove: function() {
         // the spinner will have already saved the value
-        // destroy the datetimepicker if it is still present
+        // destroy the combodate if it is still present
         var that = this;
 
         if (that.dtp) {
