@@ -1933,7 +1933,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
         var that = this;
         odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx);
         if ( !that.insideAfterRender ) {
-            var date_value = that.$('input').data('DateTimePicker').getDate();
+            var date_value = that.$('input').data('DateTimePicker').getValue();
             var value = (date_value === undefined || date_value === null) ? null : date_value.toDate();
             var formattedDateValue = moment(value).format(that.timeFormat);
 
