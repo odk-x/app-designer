@@ -13,8 +13,6 @@ function cbSuccess(result) {
   $('#del_id').prepend(odkCommon.localizeText(locale, 'delivery_id') + ": ");
   $('#auth_name').prepend(odkCommon.localizeText(locale, 'authorization_name') + ": ");
   $('#del_time').prepend(odkCommon.localizeText(locale, 'date_time') + ": ");
-  $('#del_site').prepend(odkCommon.localizeText(locale, 'delivery_site') + ": ");
-  $('#distributor').prepend(odkCommon.localizeText(locale, 'distributor') + ": ");
   $('#item_pack_name').prepend(odkCommon.localizeText(locale, 'item_pack_name') + ": ");
   $('#scanned').prepend(odkCommon.localizeText(locale, 'scanned_item_pack') + ": ");
 
@@ -23,8 +21,6 @@ function cbSuccess(result) {
   $('#inner_del_id').text(deliveriesResultSet.get('_id'));
   $('#inner_auth_name').text(deliveriesResultSet.get('authorization_name'));
   $('#inner_del_time').text(deliveriesResultSet.get('date_time'));
-  $('#inner_del_site').text(deliveriesResultSet.get('delivery_site'));
-  $('#inner_distributor').text(deliveriesResultSet.get('distributor'));
   if (deliveriesResultSet.get('is_delivered') === 'true' || deliveriesResultSet.get('is_delivered') === 'TRUE') {
     $('#is_delivered').text('Successfully Delivered');
   } else {

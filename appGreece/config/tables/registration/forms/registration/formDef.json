@@ -10,13 +10,13 @@
       {
         "type": "assign",
         "name": "is_active",
-        "calculation": true,
+        "calculation": "(data('is_active') !== null && data('is_active') !== undefined) ? data('is_active') : 'TRUE'",
         "_row_num": 3
       },
       {
         "type": "assign",
         "name": "is_override",
-        "calculation": false,
+        "calculation": "(data('is_override') !== null && data('is_override') !== undefined) ? data('is_override') : 'FALSE'",
         "_row_num": 4
       },
       {
@@ -1252,7 +1252,7 @@
           {
             "type": "assign",
             "name": "is_active",
-            "calculation": true,
+            "calculation": "(data('is_active') !== null && data('is_active') !== undefined) ? data('is_active') : 'TRUE'",
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "assign",
@@ -1261,7 +1261,7 @@
           {
             "type": "assign",
             "name": "is_override",
-            "calculation": false,
+            "calculation": "(data('is_override') !== null && data('is_override') !== undefined) ? data('is_override') : 'FALSE'",
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "assign",

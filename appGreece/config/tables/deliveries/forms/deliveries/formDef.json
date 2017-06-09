@@ -207,26 +207,6 @@
         "_row_num": 28
       },
       {
-        "type": "string",
-        "name": "distributor",
-        "display": {
-          "prompt": {
-            "text": "What is the name of the distributor?"
-          }
-        },
-        "_row_num": 29
-      },
-      {
-        "type": "string",
-        "name": "delivery_site",
-        "display": {
-          "prompt": {
-            "text": "What is the name of the delivery site?"
-          }
-        },
-        "_row_num": 30
-      },
-      {
         "type": "note",
         "name": "thanks",
         "display": {
@@ -234,11 +214,11 @@
             "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
           }
         },
-        "_row_num": 31
+        "_row_num": 29
       },
       {
         "clause": "else",
-        "_row_num": 32
+        "_row_num": 30
       },
       {
         "type": "select_one",
@@ -249,20 +229,20 @@
             "text": "Would you like to scan a different item pack instead?"
           }
         },
-        "_row_num": 33
+        "_row_num": 31
       },
       {
         "clause": "if",
         "condition": "selected(data('try_again'),'true')",
-        "_row_num": 34
+        "_row_num": 32
       },
       {
         "clause": "goto item_scan",
-        "_row_num": 35
+        "_row_num": 33
       },
       {
         "clause": "else",
-        "_row_num": 36
+        "_row_num": 34
       },
       {
         "type": "note",
@@ -272,15 +252,15 @@
             "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
           }
         },
+        "_row_num": 35
+      },
+      {
+        "clause": "end if",
+        "_row_num": 36
+      },
+      {
+        "clause": "end if",
         "_row_num": 37
-      },
-      {
-        "clause": "end if",
-        "_row_num": 38
-      },
-      {
-        "clause": "end if",
-        "_row_num": 39
       }
     ],
     "model": [
@@ -674,10 +654,6 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 30,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 4,
             "section_name": "model"
           }
@@ -687,10 +663,6 @@
       "distributor": {
         "type": "string",
         "_defn": [
-          {
-            "_row_num": 29,
-            "section_name": "survey"
-          },
           {
             "_row_num": 5,
             "section_name": "model"
@@ -884,7 +856,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 33,
+            "_row_num": 31,
             "section_name": "survey"
           },
           {
@@ -1072,36 +1044,6 @@
             "promptIdx": 9
           },
           {
-            "type": "string",
-            "name": "distributor",
-            "display": {
-              "prompt": {
-                "text": "What is the name of the distributor?"
-              }
-            },
-            "_row_num": 29,
-            "__rowNum__": 28,
-            "_token_type": "prompt",
-            "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen29",
-            "promptIdx": 10
-          },
-          {
-            "type": "string",
-            "name": "delivery_site",
-            "display": {
-              "prompt": {
-                "text": "What is the name of the delivery site?"
-              }
-            },
-            "_row_num": 30,
-            "__rowNum__": 29,
-            "_token_type": "prompt",
-            "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen30",
-            "promptIdx": 11
-          },
-          {
             "type": "note",
             "name": "thanks",
             "display": {
@@ -1109,12 +1051,12 @@
                 "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
               }
             },
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 10
           },
           {
             "type": "select_one",
@@ -1125,12 +1067,12 @@
                 "text": "Would you like to scan a different item pack instead?"
               }
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen33",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen31",
+            "promptIdx": 11
           },
           {
             "type": "note",
@@ -1140,20 +1082,20 @@
                 "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
               }
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen37",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen35",
+            "promptIdx": 12
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 40,
-            "_branch_label_enclosing_screen": "survey/_screen40",
-            "promptIdx": 15
+            "_row_num": 38,
+            "_branch_label_enclosing_screen": "survey/_screen38",
+            "promptIdx": 13
           }
         ],
         "validation_tag_map": {
@@ -1332,8 +1274,8 @@
           {
             "clause": "else",
             "_token_type": "goto_label",
-            "_branch_label": "_else32",
-            "_row_num": 32,
+            "_branch_label": "_else30",
+            "_row_num": 30,
             "operationIdx": 22
           },
           {
@@ -1367,87 +1309,75 @@
             "operationIdx": 26
           },
           {
-            "_row_num": 30,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif37",
+            "_row_num": 37,
             "operationIdx": 27
           },
           {
             "_row_num": 31,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 28
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif39",
-            "_row_num": 39,
-            "operationIdx": 29
-          },
-          {
-            "_row_num": 33,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 30
           },
           {
             "clause": "if",
             "condition": "selected(data('try_again'),'true')",
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "goto_label",
-            "_branch_label": "_then34",
-            "operationIdx": 31
+            "_branch_label": "_then32",
+            "operationIdx": 29
           },
           {
             "clause": "else",
             "_token_type": "goto_label",
-            "_branch_label": "_else36",
-            "_row_num": 36,
-            "operationIdx": 32
+            "_branch_label": "_else34",
+            "_row_num": 34,
+            "operationIdx": 30
           },
           {
             "clause": "goto item_scan",
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "goto_label",
             "_branch_label": "item_scan",
-            "operationIdx": 33
+            "operationIdx": 31
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif38",
-            "_row_num": 38,
-            "operationIdx": 34
+            "_branch_label": "_endif36",
+            "_row_num": 36,
+            "operationIdx": 32
           },
           {
-            "_row_num": 37,
+            "_row_num": 35,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 35
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 33
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 40,
-            "operationIdx": 36
+            "_row_num": 38,
+            "operationIdx": 34
           },
           {
-            "_row_num": 40,
+            "_row_num": 38,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 37
+            "operationIdx": 35
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 40,
-            "operationIdx": 38
+            "_row_num": 38,
+            "operationIdx": 36
           }
         ],
         "branch_label_map": {
@@ -1473,17 +1403,15 @@
           "_then25": 23,
           "_screen27": 24,
           "_screen29": 26,
-          "_screen30": 27,
+          "_else30": 28,
           "_screen31": 28,
-          "_else32": 30,
-          "_screen33": 30,
-          "_then34": 33,
-          "_else36": 35,
-          "_screen37": 35,
-          "_endif38": 36,
-          "_endif39": 36,
-          "_contents": 37,
-          "_screen40": 37
+          "_then32": 31,
+          "_else34": 33,
+          "_screen35": 33,
+          "_endif36": 34,
+          "_endif37": 34,
+          "_contents": 35,
+          "_screen38": 35
         }
       },
       "initial": {
@@ -1700,10 +1628,6 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 30,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 4,
             "section_name": "model"
           }
@@ -1716,10 +1640,6 @@
       "distributor": {
         "type": "string",
         "_defn": [
-          {
-            "_row_num": 29,
-            "section_name": "survey"
-          },
           {
             "_row_num": 5,
             "section_name": "model"
@@ -1958,7 +1878,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 33,
+            "_row_num": 31,
             "section_name": "survey"
           },
           {
