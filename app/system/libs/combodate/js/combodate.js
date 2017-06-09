@@ -506,19 +506,19 @@
          //in this format value stored in original input
         format: 'DD-MM-YYYY HH:mm',
         //in this format items in dropdowns are displayed
-        template: 'D / MMM / YYYY   H : mm',
+        template: 'DD / MMM / YYYY   HH : mm',
         //initial value, can be `new Date()`
-        value: null,
-        minYear: 1970,
-        maxYear: 2015,
+        value: new Date(),
+        minYear: 1900,
+        maxYear: new Date().getFullYear(),
         yearDescending: true,
-        minuteStep: 5,
+        minuteStep: 1,
         secondStep: 1,
         firstItem: 'empty', //'name', 'empty', 'none'
         errorClass: null,
         customClass: '',
-        roundTime: true, // whether to round minutes and seconds if step > 1
-        smartDays: false // whether days in combo depend on selected month: 31, 30, 28
+        roundTime: false, // whether to round minutes and seconds if step > 1
+        smartDays: true, // whether days in combo depend on selected month: 31, 30, 28
     };
 
 }(window.jQuery));

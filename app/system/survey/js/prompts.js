@@ -1875,6 +1875,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
     usePicker: true,
     insideAfterRender: false,
     timeFormat: "MM/DD/YYYY h:mm A",
+    timeTemplate: "DD / MMM / YYYY  HH : mm",
     showDate: true,
     showTime: true,
     dtp: null,
@@ -1997,16 +1998,12 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 that.dtp.destroy();
             }
 
-            var now = new Date();
             if (that.showDate && !that.showTime) {
-                // TODO: Remove time portion
-                that.$('input').combodate({format: this.timeFormat, value: now, minuteStep: 1, minYear: 1900, maxYear: now.getFullYear()});
+                that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
             } else if (!that.showDate && that.showTime) {
-                // TODO: Remove date portion
-                that.$('input').combodate({format: this.timeFormat, value: now, minuteStep: 1, minYear: 1900, maxYear: now.getFullYear()});
+                that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
             } else {
-                // TODO: Fix defaults
-                that.$('input').combodate({format: this.timeFormat, value: now, minuteStep: 1, minYear: 1900, maxYear: now.getFullYear()});
+                that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
             }
             var inputElement = that.$('input');
             that.dtp = inputElement.data('DateTimePicker');
@@ -2028,12 +2025,14 @@ promptTypes.datetime = promptTypes.input_type.extend({
 promptTypes.date = promptTypes.datetime.extend({
     type: "date",
     showTime: false,
-    timeFormat: "MM/DD/YYYY"
+    timeFormat: "MM/DD/YYYY",
+    timeTemplate: "DD / MMM / YYYY"
 });
 promptTypes.time = promptTypes.datetime.extend({
     type: "time",
     showDate: false,
     timeFormat: "h:mm A",
+    timeTemplate: "HH : mm",
     sameValue: function(ref, value) {
         // these are milliseconds relative to Jan 1 1970...
         var ref_tod = (ref.valueOf() % 86400000);
