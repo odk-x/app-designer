@@ -221,6 +221,8 @@ window.odkData = {
                     ' error: ' + errorMsg);
                     if(trxn._failureCbFn !== null && trxn._failureCbFn !== undefined) {
                         (trxn._failureCbFn)(errorMsg);
+                    } else if (errorMsg.indexOf("org.opendatakit.exception.ActionNotAuthorize") === 0) {
+                        body.innerHTML = "<h1>Access denied</h1>Your user doesn't have access to add a row to this table"; // TEMPORARY
                     }
                 } else {
                     console.log('odkData invokeCallbackFn success - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId);
