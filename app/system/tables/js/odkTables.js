@@ -372,10 +372,10 @@ window.odkTables = {
 
     editRowWithSurvey : function(dispatchStruct, tableId, rowId, formId, screenPath) {
         if (!this.isString(tableId)) {
-            throw 'editRowWithSurveyDefault()--tableId not a string';
+            throw 'editRowWithSurvey()--tableId not a string';
         }
         if (!this.isString(rowId)) {
-            throw 'editRowWithSurveyDefault()--rowId not a string';
+            throw 'editRowWithSurvey()--rowId not a string';
         }
 				
 		if ( formId === undefined ) {
@@ -412,7 +412,7 @@ window.odkTables = {
 
     addRowWithSurveyDefault : function(dispatchStruct, tableId) {
         if (!this.isString(tableId)) {
-            throw 'editRowWithSurveyDefault()--tableId not a string';
+            throw 'addRowWithSurveyDefault()--tableId not a string';
         }
 		var rowId = odkCommon.genUUID();
 
@@ -443,7 +443,7 @@ window.odkTables = {
 
     addRowWithSurvey : function(dispatchStruct, tableId, formId, screenPath, jsonMap) {
         if (!this.isString(tableId)) {
-            throw 'editRowWithSurveyDefault()--tableId not a string';
+            throw 'addRowWithSurvey()--tableId not a string';
         }
 		var rowId = odkCommon.genUUID();
 
