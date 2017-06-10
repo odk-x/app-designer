@@ -12,6 +12,8 @@ var savepointSuccess = "COMPLETE";
 // Table IDs
 var registrationTable = 'registration';
 var authorizationTable = 'authorizations';
+var defaultDeliveryTable = 'deliveries';
+var defaultDeliveryForm = 'deliveries';
 
 
 var entitlementsCBSuccess = function(result) {
@@ -155,72 +157,64 @@ function formResolutionFailure(error) {
 var newEntitlementsResultSet;
 
 function formResolutionSuccess(result) {
+  // Add a new role to the root deliveries table, then trigger the delivery on the callback
+  // TODO: Don't just keep polluting all the time. Update a previous row if it exists
   newEntitlementsResultSet = result;
-  var rolesPromise = new Promise(function(resolve, reject) {
-      odkData.getRoles(resolve, reject);
-  });
+  var jsonMap = getJSONMapValues();
+  odkData.addRow(defaultDeliveryTable, jsonMap, util.genUUID(), addDefaultDeliverySuccess, addDefaultDeliveryFailure);
+}
 
-  var authorizationPromise = new Promise(function(resolve, reject) {
+function addDefaultDeliverySuccess(result) {
+    var rowId = result.getRowId(0);
+    console.log('add default delivery success ' + rowId);
+
+    var authorizationPromise = new Promise(function(resolve, reject) {
     var auth_id = newEntitlementsResultSet.get('authorization_id');
     console.log("authorizationPromise auth_id:" + auth_id);
     odkData.arbitraryQuery('authorizations',
       'SELECT delivery_table, delivery_form, ranges FROM authorizations WHERE _id = ?',
        [auth_id],
         null, null, resolve, reject);
+    });
+
+    /* TODO: Check if the table ID exists before launching survey
+  var tableIDsPromise = new Promise(function(resolve, reject) {
+    odkData.getAllTableIds(resolve, reject);
   });
+  */
 
-  Promise.all([rolesPromise, authorizationPromise]).then(function(resultArray) {
-    var roles = resultArray[0].getRoles();
-    if (resultArray[1].getCount() > 0) {
-      var deliveryTable = resultArray[1].getData(0, 'delivery_table');
-      var deliveryForm = resultArray[1].getData(0, 'delivery_form');
-      var ranges = resultArray[1].getData(0, 'ranges');
+    Promise.all([authorizationPromise]).then(function(resultArray) {
+        if (resultArray[0].getCount() > 0) {
+            var deliveryTable = resultArray[1].getData(0, 'delivery_table');
+            var deliveryForm = resultArray[1].getData(0, 'delivery_form');
 
-      // arbitrary default delivery table/form
-      if (deliveryTable == undefined || deliveryTable == null || deliveryTable == "") {
-        deliveryTable = 'deliveries';
-      }
-      if (deliveryForm == undefined || deliveryForm == null || deliveryForm == "" ) {
-        deliveryForm = 'deliveries';
-      }
-      console.log(deliveryTable + deliveryForm);
+            // arbitrary default delivery table/form
+            if (deliveryTable == undefined || deliveryTable == null || deliveryTable == "") {
+                deliveryTable = defaultDeliveryTable;
+            }
+            if (deliveryForm == undefined || deliveryForm == null || deliveryForm == "" ) {
+                deliveryForm = defaultDeliveryForm;
+            }
 
-      var jsonMap = getJSONMapValues();
-      setJSONMap(jsonMap, 'ranges', ranges);
-      if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
-        odkData.addRow(deliveryTable, jsonMap, util.genUUID(), proxyRowSuccess, proxyRowFailure);
-      } else if (newEntitlementsResultSet.get('is_delivered') === 'false' || newEntitlementsResultSet.get('is_delivered') === 'FALSE') {
-          var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery});
-          odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
-      }
-    }
-  });
+            if (deliveryTable !== defaultDeliveryTable) {
+                console.log('Launching custom delivery form: ' + deliveryForm);
+
+                var jsonMap = {};
+                setJSONMap(jsonMap, 'delivery_id', rowId);
+                setJSONMap(jsonMap, 'entitlement_id', newEntitlementsResultSet.get('_id'));
+
+                var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery});
+                odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
+            } else {
+                console.log("TODO: Make a new web page to say delivered");
+            }
+        }
+    });
 }
 
-function proxyRowSuccess(result) {
-    console.log('made it!');
-    
-    // TODO: Take groupModify and put it into groupReadOnly
-    var groupReadOnly = util.getQueryParameter('groupModify');
-    odkData.changeAccessFilterOfRow('deliveries', 'HIDDEN',
-      newEntitlementsResultSet.get('_row_owner'), groupReadOnly, null, null, 
-      result.getRowId(0), setFilterSuccess, setFilterFailure);
+function addDefaultDeliveryFailure(error) {
+    console.log('add default delivery failure with error: ' + error);
 }
-
-function proxyRowFailure(error) {
-    console.log('proxy set failure with error: ' + error);
-}
-
-function setFilterSuccess(result) {
-    var dispatchStruct = JSON.stringify({actionTypeKey: actionEditDelivery});
-    odkTables.editRowWithSurvey(dispatchStruct, 'deliveries', result.getRowId(0), 'deliveries', null);
-    console.log('set filter success');
-}
-
-function setFilterFailure(error) {
-    console.log('set filter failure with error: ' + error);
-}
-
 
 var displayGroup = function(idxStart) {
     console.log('displayGroup called. idxStart: ' + idxStart);
@@ -273,10 +267,13 @@ var displayGroup = function(idxStart) {
 };
 
 var updateEntitlementsWithRowId = function(rowId) {
-  console.log('entitlement_id is: ' + rowId);
+  console.log('delivery_id is: ' + rowId);
+  // TODO: Query the custom delivery table
+  /*
   odkData.query('deliveries', '_id = ? and (is_delivered = ? or is_delivered = ?) and _savepoint_type = ?',
                 [rowId, 'true', 'TRUE', compStr],
                 null, null, null, null, null, null, null, queryCBSuccess, queryCBFailure);
+                */
 }
 
 var queryCBSuccess = function(result) {
@@ -320,5 +317,10 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'item_description', newEntitlementsResultSet.get('item_description'));
   setJSONMap(jsonMap, 'is_override', newEntitlementsResultSet.get('is_override'));
   setJSONMap(jsonMap, 'assigned_code', newEntitlementsResultSet.get('assigned_code'));
+  setJSONMap(jsonMap, '_group_read_only', newEntitlementsResultSet.get('_group_modify'));
+
+  var user = odkCommon.getActiveUser();
+  setJSONMap(jsonMap, '_row_owner', user);
+
   return jsonMap;
 }

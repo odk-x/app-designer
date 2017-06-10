@@ -2,9 +2,38 @@
   "xlsx": {
     "survey": [
       {
-        "type": "note",
-        "name": "This table should not be edited via survey",
+        "clause": "begin screen",
         "_row_num": 2
+      },
+      {
+        "type": "note",
+        "name": "instruction",
+        "display": {
+          "prompt": {
+            "text": "Distribute the Ice Skates"
+          }
+        },
+        "_row_num": 3
+      },
+      {
+        "name": "skatesize",
+        "display": {
+          "prompt": {
+            "text": "What size of skate?",
+            "hint": "Foot Size of Skate"
+          }
+        },
+        "_row_num": 4
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 5
+      },
+      {
+        "type": "assign",
+        "name": "isDelivered",
+        "calculation": true,
+        "_row_num": 6
       }
     ],
     "model": [
@@ -15,71 +44,41 @@
       },
       {
         "type": "string",
-        "name": "is_delivered",
+        "name": "delivery_id",
         "_row_num": 3
       },
       {
         "type": "string",
-        "name": "beneficiary_code",
+        "name": "is_delivered",
         "_row_num": 4
       },
       {
-        "type": "string",
-        "name": "authorization_id",
+        "type": "decimal",
+        "name": "skatesize",
         "_row_num": 5
-      },
-      {
-        "type": "string",
-        "name": "authorization_name",
-        "_row_num": 6
-      },
-      {
-        "type": "string",
-        "name": "item_pack_id",
-        "_row_num": 7
-      },
-      {
-        "type": "string",
-        "name": "item_pack_name",
-        "_row_num": 8
-      },
-      {
-        "type": "string",
-        "name": "item_description",
-        "_row_num": 9
-      },
-      {
-        "type": "string",
-        "name": "is_override",
-        "_row_num": 10
-      },
-      {
-        "type": "string",
-        "name": "table_id",
-        "_row_num": 11
       }
     ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "deliveries",
+        "value": "basic_delivery",
         "_row_num": 2
       },
       {
         "setting_name": "form_version",
-        "value": 20160822,
+        "value": 1,
         "_row_num": 3
       },
       {
         "setting_name": "table_id",
-        "value": "deliveries",
+        "value": "basic_delivery",
         "_row_num": 4
       },
       {
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Deliveries"
+            "text": "Basic Delivery"
           }
         },
         "_row_num": 5
@@ -117,6 +116,28 @@
         "_row_num": 6
       }
     ],
+    "choices": [
+      {
+        "choice_list_name": "yes_no",
+        "data_value": "true",
+        "display": {
+          "title": {
+            "text": "Yes"
+          }
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "yes_no",
+        "data_value": "false",
+        "display": {
+          "title": {
+            "text": "No"
+          }
+        },
+        "_row_num": 3
+      }
+    ],
     "properties": [
       {
         "partition": "SurveyUtil",
@@ -142,6 +163,12 @@
         "value": "HIDDEN",
         "_row_num": 4
       }
+    ],
+    "initial": [
+      {
+        "clause": "do section survey",
+        "_row_num": 2
+      }
     ]
   },
   "specification": {
@@ -163,24 +190,24 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "deliveries",
+        "value": "basic_delivery",
         "_row_num": 2
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20160822,
+        "value": 1,
         "_row_num": 3
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "deliveries",
+        "value": "basic_delivery",
         "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Deliveries"
+            "text": "Basic Delivery"
           }
         },
         "_row_num": 5
@@ -213,13 +240,36 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Deliveries"
+            "text": "Basic Delivery"
           }
         },
         "_row_num": 5
       }
     },
-    "choices": {},
+    "choices": {
+      "yes_no": [
+        {
+          "choice_list_name": "yes_no",
+          "data_value": "true",
+          "display": {
+            "title": {
+              "text": "Yes"
+            }
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "yes_no",
+          "data_value": "false",
+          "display": {
+            "title": {
+              "text": "No"
+            }
+          },
+          "_row_num": 3
+        }
+      ]
+    },
     "table_specific_definitions": {
       "_tokens": {
         "delivery_id": {
@@ -262,7 +312,7 @@
         ],
         "elementKey": "entitlement_id"
       },
-      "is_delivered": {
+      "delivery_id": {
         "type": "string",
         "_defn": [
           {
@@ -270,9 +320,9 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "is_delivered"
+        "elementKey": "delivery_id"
       },
-      "beneficiary_code": {
+      "is_delivered": {
         "type": "string",
         "_defn": [
           {
@@ -280,77 +330,26 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "beneficiary_code"
+        "elementKey": "is_delivered"
       },
-      "authorization_id": {
-        "type": "string",
+      "skatesize": {
+        "type": "number",
         "_defn": [
           {
             "_row_num": 5,
             "section_name": "model"
           }
         ],
-        "elementKey": "authorization_id"
+        "elementKey": "skatesize"
       },
-      "authorization_name": {
-        "type": "string",
+      "isDelivered": {
         "_defn": [
           {
             "_row_num": 6,
-            "section_name": "model"
+            "section_name": "survey"
           }
         ],
-        "elementKey": "authorization_name"
-      },
-      "item_pack_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "item_pack_id"
-      },
-      "item_pack_name": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "item_pack_name"
-      },
-      "item_description": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 9,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "item_description"
-      },
-      "is_override": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "is_override"
-      },
-      "table_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 11,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "table_id"
+        "elementKey": "isDelivered"
       }
     },
     "section_names": [
@@ -365,9 +364,14 @@
         "prompts": [
           {
             "type": "note",
-            "name": "This table should not be edited via survey",
-            "_row_num": 2,
-            "__rowNum__": 1,
+            "name": "instruction",
+            "display": {
+              "prompt": {
+                "text": "Distribute the Ice Skates"
+              }
+            },
+            "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "note",
             "_branch_label_enclosing_screen": "survey/_screen2",
@@ -377,8 +381,8 @@
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 3,
-            "_branch_label_enclosing_screen": "survey/_screen3",
+            "_row_num": 7,
+            "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 1
           }
         ],
@@ -387,9 +391,99 @@
         },
         "operations": [
           {
+            "clause": "begin screen",
             "_row_num": 2,
+            "__rowNum__": 1,
             "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 5,
+              "__rowNum__": 4,
+              "_token_type": "end_screen"
+            },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "type": "assign",
+            "name": "isDelivered",
+            "calculation": true,
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "assign",
+            "operationIdx": 1
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 7,
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 3
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 7,
+            "operationIdx": 4
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_contents": 3,
+          "_screen7": 3
+        }
+      },
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_do_section_name": "survey",
+            "_type": "_section",
+            "promptIdx": 0,
+            "display": {
+              "title": {
+                "text": "Basic Delivery"
+              }
+            },
+            "_branch_label_enclosing_screen": "survey/0"
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 3,
+            "_branch_label_enclosing_screen": "initial/_screen3",
+            "promptIdx": 1
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
             "operationIdx": 0
           },
           {
@@ -412,189 +506,38 @@
             "clause": "resume",
             "_row_num": 3,
             "operationIdx": 3
-          }
-        ],
-        "branch_label_map": {
-          "_screen2": 0,
-          "_contents": 2,
-          "_screen3": 2
-        }
-      },
-      "initial": {
-        "section_name": "initial",
-        "nested_sections": {
-          "survey": true
-        },
-        "reachable_sections": {
-          "survey": true
-        },
-        "prompts": [
-          {
-            "_row_num": 3,
-            "type": "opening",
-            "display": {
-              "text": "Edit form"
-            },
-            "_token_type": "prompt",
-            "_type": "opening",
-            "_branch_label_enclosing_screen": "initial/_screen3",
-            "promptIdx": 0
-          },
-          {
-            "_row_num": 4,
-            "clause": "do section survey",
-            "_token_type": "prompt",
-            "_do_section_name": "survey",
-            "_type": "_section",
-            "promptIdx": 1,
-            "display": {
-              "title": {
-                "text": "Deliveries"
-              }
-            },
-            "_branch_label_enclosing_screen": "survey/0"
-          },
-          {
-            "_row_num": 5,
-            "type": "finalize",
-            "display": {
-              "text": "Save form"
-            },
-            "_token_type": "prompt",
-            "_type": "finalize",
-            "_branch_label_enclosing_screen": "initial/_screen5",
-            "promptIdx": 2
-          },
-          {
-            "_row_num": 7,
-            "type": "instances",
-            "display": {
-              "text": "Saved instances"
-            },
-            "_token_type": "prompt",
-            "_type": "instances",
-            "_branch_label_enclosing_screen": "initial/_screen7",
-            "promptIdx": 3
-          },
-          {
-            "_token_type": "prompt",
-            "type": "contents",
-            "_type": "contents",
-            "_row_num": 9,
-            "_branch_label_enclosing_screen": "initial/_screen9",
-            "promptIdx": 4
-          }
-        ],
-        "validation_tag_map": {
-          "finalize": []
-        },
-        "operations": [
-          {
-            "_row_num": 2,
-            "clause": "if // start",
-            "condition": "(opendatakit.getCurrentInstanceId() != null)",
-            "_token_type": "goto_label",
-            "_tag_name": "start",
-            "_branch_label": "_then2",
-            "operationIdx": 0
-          },
-          {
-            "clause": "else // start",
-            "_token_type": "goto_label",
-            "_branch_label": "_else6",
-            "_row_num": 6,
-            "operationIdx": 1
-          },
-          {
-            "_row_num": 3,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
-          },
-          {
-            "_row_num": 4,
-            "clause": "do section survey",
-            "_token_type": "do_section",
-            "_do_section_name": "survey",
-            "operationIdx": 3
-          },
-          {
-            "_row_num": 5,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "clause": "end if // start",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif8",
-            "_row_num": 8,
-            "operationIdx": 5
-          },
-          {
-            "_row_num": 7,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 9,
-            "operationIdx": 7
-          },
-          {
-            "_row_num": 9,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 8
-          },
-          {
-            "_token_type": "resume",
-            "clause": "resume",
-            "_row_num": 9,
-            "operationIdx": 9
           },
           {
             "_token_type": "validate",
             "clause": "validate finalize",
             "_sweep_name": "finalize",
-            "_row_num": 9,
+            "_row_num": 3,
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 10
+            "operationIdx": 4
           },
           {
             "_token_type": "save_and_terminate",
             "clause": "save and terminate",
             "calculation": true,
-            "_row_num": 9,
+            "_row_num": 3,
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 11
+            "operationIdx": 5
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 9,
-            "operationIdx": 12
+            "_row_num": 3,
+            "operationIdx": 6
           }
         ],
         "branch_label_map": {
-          "_then2": 2,
+          "_contents": 2,
           "_screen3": 2,
-          "_screen5": 4,
-          "_else6": 6,
-          "_screen7": 6,
-          "_endif8": 7,
-          "_contents": 8,
-          "_screen9": 8,
-          "_finalize": 10
+          "_finalize": 4
         }
       }
     },
@@ -612,11 +555,24 @@
         "elementSet": "data",
         "elementPath": "entitlement_id"
       },
-      "is_delivered": {
+      "delivery_id": {
         "type": "string",
         "_defn": [
           {
             "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_id",
+        "elementName": "delivery_id",
+        "elementSet": "data",
+        "elementPath": "delivery_id"
+      },
+      "is_delivered": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -625,109 +581,30 @@
         "elementSet": "data",
         "elementPath": "is_delivered"
       },
-      "beneficiary_code": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "beneficiary_code",
-        "elementName": "beneficiary_code",
-        "elementSet": "data",
-        "elementPath": "beneficiary_code"
-      },
-      "authorization_id": {
-        "type": "string",
+      "skatesize": {
+        "type": "number",
         "_defn": [
           {
             "_row_num": 5,
             "section_name": "model"
           }
         ],
-        "elementKey": "authorization_id",
-        "elementName": "authorization_id",
+        "elementKey": "skatesize",
+        "elementName": "skatesize",
         "elementSet": "data",
-        "elementPath": "authorization_id"
+        "elementPath": "skatesize"
       },
-      "authorization_name": {
-        "type": "string",
+      "isDelivered": {
         "_defn": [
           {
             "_row_num": 6,
-            "section_name": "model"
+            "section_name": "survey"
           }
         ],
-        "elementKey": "authorization_name",
-        "elementName": "authorization_name",
+        "elementKey": "isDelivered",
+        "elementName": "isDelivered",
         "elementSet": "data",
-        "elementPath": "authorization_name"
-      },
-      "item_pack_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "item_pack_id",
-        "elementName": "item_pack_id",
-        "elementSet": "data",
-        "elementPath": "item_pack_id"
-      },
-      "item_pack_name": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "item_pack_name",
-        "elementName": "item_pack_name",
-        "elementSet": "data",
-        "elementPath": "item_pack_name"
-      },
-      "item_description": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 9,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "item_description",
-        "elementName": "item_description",
-        "elementSet": "data",
-        "elementPath": "item_description"
-      },
-      "is_override": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "is_override",
-        "elementName": "is_override",
-        "elementSet": "data",
-        "elementPath": "is_override"
-      },
-      "table_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 11,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "table_id",
-        "elementName": "table_id",
-        "elementSet": "data",
-        "elementPath": "table_id"
+        "elementPath": "isDelivered"
       },
       "_id": {
         "type": "string",
@@ -862,7 +739,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"Deliveries\"}"
+        "_value": "{\"text\":\"Basic Delivery\"}"
       },
       {
         "_partition": "Table",

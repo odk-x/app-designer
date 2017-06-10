@@ -1,0 +1,1466 @@
+{
+  "xlsx": {
+    "survey": [
+      {
+        "clause": "begin screen",
+        "_row_num": 2
+      },
+      {
+        "type": "note",
+        "name": "pre-delivery",
+        "display": {
+          "prompt": {
+            "text": "We will now distribute the appropriate item pack"
+          }
+        },
+        "_row_num": 3
+      },
+      {
+        "type": "async_assign_single_string",
+        "values_list": "get_barcoderanges",
+        "name": "valid_bar_codes",
+        "model": {
+          "isSessionVariable": true,
+          "valuesList": "get_barcoderanges"
+        },
+        "_row_num": 4
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 5
+      },
+      {
+        "type": "assign",
+        "name": "summary",
+        "calculation": "calculates.parse_ranges()",
+        "_row_num": 6
+      },
+      {
+        "branch_label": "item_scan",
+        "_row_num": 7
+      },
+      {
+        "type": "barcode",
+        "name": "item_pack_barcode",
+        "display": {
+          "prompt": {
+            "text": "Scan an item pack of type {{data.item_pack_name}} {{data.summary}}"
+          }
+        },
+        "model": {
+          "isSessionVariable": true
+        },
+        "_row_num": 8
+      },
+      {
+        "type": "string",
+        "name": "item_pack_barcode",
+        "display": {
+          "prompt": {
+            "text": "Please confirm or update item pack barcode."
+          }
+        },
+        "model": {
+          "isSessionVariable": true
+        },
+        "_row_num": 9
+      },
+      {
+        "type": "assign",
+        "name": "valid",
+        "calculation": "calculates.in_range()",
+        "model": {
+          "isSessionVariable": true
+        },
+        "_row_num": 10
+      },
+      {
+        "clause": "if",
+        "condition": "!data('valid')",
+        "_row_num": 12
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "try_again",
+        "display": {
+          "prompt": {
+            "text": "Unauthorized Item Pack! Do not distribute this item pack. Would you like to scan a different item pack?"
+          }
+        },
+        "model": {
+          "isSessionVariable": true,
+          "valuesList": "yes_no"
+        },
+        "_row_num": 13
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('try_again'),'true')",
+        "_row_num": 14
+      },
+      {
+        "clause": "goto item_scan",
+        "_row_num": 15
+      },
+      {
+        "clause": "end if",
+        "_row_num": 16
+      },
+      {
+        "clause": "else",
+        "_row_num": 17
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "This item pack is authorized. Please deliver this item pack."
+          }
+        },
+        "_row_num": 18
+      },
+      {
+        "type": "signature",
+        "name": "receive_signature",
+        "display": {
+          "prompt": {
+            "text": "Sign for receipt of item"
+          }
+        },
+        "_row_num": 19
+      },
+      {
+        "type": "assign",
+        "name": "is_delivered",
+        "calculation": "TRUE",
+        "_row_num": 20
+      },
+      {
+        "clause": "end if",
+        "_row_num": 21
+      }
+    ],
+    "queries": [
+      {
+        "query_name": "get_barcoderanges",
+        "query_type": "linked_table",
+        "linked_table_id": "entitlements",
+        "linked_form_id": "entitlements",
+        "selection": "_savepoint_type = ? and entitlement_id = ?",
+        "selectionArgs": "['COMPLETE', data('first_last_name'), data('entitlement_id')]",
+        "fieldName": "ranges",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 2
+      }
+    ],
+    "model": [
+      {
+        "type": "string",
+        "name": "entitlement_id",
+        "_row_num": 2
+      },
+      {
+        "type": "string",
+        "name": "delivery_id",
+        "_row_num": 3
+      },
+      {
+        "type": "string",
+        "name": "is_delivered",
+        "_row_num": 4
+      },
+      {
+        "type": "string",
+        "name": "item_pack_barcode",
+        "_row_num": 5
+      },
+      {
+        "type": "string",
+        "name": "signature",
+        "_row_num": 6
+      },
+      {
+        "type": "string",
+        "name": "delivery_time",
+        "_row_num": 7
+      },
+      {
+        "type": "signature",
+        "name": "receive_signature",
+        "_row_num": 8
+      },
+      {
+        "type": "string",
+        "name": "valid_bar_codes",
+        "isSessionVariable": true,
+        "_row_num": 9
+      },
+      {
+        "type": "string",
+        "name": "try_again",
+        "isSessionVariable": true,
+        "_row_num": 10
+      },
+      {
+        "type": "boolean",
+        "name": "valid",
+        "isSessionVariable": true,
+        "_row_num": 11
+      }
+    ],
+    "settings": [
+      {
+        "setting_name": "form_id",
+        "value": "complex_delivery",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "form_version",
+        "value": 1,
+        "_row_num": 3
+      },
+      {
+        "setting_name": "table_id",
+        "value": "complex_delivery",
+        "_row_num": 4
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": "Deliveries"
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "setting_name": "instance_name",
+        "value": "delivery_id",
+        "_row_num": 6
+      }
+    ],
+    "table_specific_translations": [
+      {
+        "string_token": "delivery_id",
+        "text": "Delivery ID",
+        "_row_num": 2
+      },
+      {
+        "string_token": "date_time",
+        "text": "Time of Delivery",
+        "_row_num": 3
+      },
+      {
+        "string_token": "delivery_site",
+        "text": "Delivery Site",
+        "_row_num": 4
+      },
+      {
+        "string_token": "distributor",
+        "text": "Distributor",
+        "_row_num": 5
+      },
+      {
+        "string_token": "scanned_item_pack",
+        "text": "Scanned Item Pack",
+        "_row_num": 6
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "yes_no",
+        "data_value": "true",
+        "display": {
+          "title": {
+            "text": "Yes"
+          }
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "yes_no",
+        "data_value": "false",
+        "display": {
+          "title": {
+            "text": "No"
+          }
+        },
+        "_row_num": 3
+      }
+    ],
+    "calculates": [
+      {
+        "calculation_name": "parse_ranges",
+        "calculation": "(function() {var obj = JSON.parse(data('ranges'));\n if (obj === null || obj === undefined) {\n  return 'with any barcode value';\n }\n if (obj.ranges.length < 1) {\n  return 'with any barcode value';\n } else {\n  var str = 'within the range of ';\n  for (var i = 0; i < obj.ranges.length - 1; i++) {\n   str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n';\n  }\n  if (obj.ranges.length > 1) {\n   str += 'or ';\n  }\n  str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max;\n  return str;\n  } \n})()",
+        "_row_num": 2
+      },
+      {
+        "calculation_name": "in_range",
+        "calculation": "(function() {var code = parseInt(data('item_pack_barcode'));\n var json = JSON.parse(data('ranges'));\n if (json === null || json === undefined) {\n   return 'true';\n }\n if (json.ranges.length < 1) {\n  return 'true';\n }\n var valid = 'false';\n var i = 0;\n while (valid == 'false' && i < json.ranges.length) {\n  if ((json.ranges[i].min <= code) && (json.ranges[i].max >= code)) {\n   valid = 'true';\n  }\n  i++;\n }\n return valid;\n})()",
+        "_row_num": 3
+      }
+    ],
+    "properties": [
+      {
+        "partition": "SurveyUtil",
+        "aspect": "default",
+        "key": "SurveyUtil.formId",
+        "type": "string",
+        "value": "wrong_form",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "unverifiedUserCanCreate",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "defaultAccessOnCreation",
+        "type": "string",
+        "value": "HIDDEN",
+        "_row_num": 4
+      }
+    ],
+    "prompt_types": [
+      {
+        "prompt_type_name": "async_assign_max",
+        "type": "number",
+        "_row_num": 2
+      },
+      {
+        "prompt_type_name": "async_assign_min",
+        "type": "number",
+        "_row_num": 3
+      },
+      {
+        "prompt_type_name": "async_assign_avg",
+        "type": "number",
+        "_row_num": 4
+      },
+      {
+        "prompt_type_name": "async_assign_sum",
+        "type": "number",
+        "_row_num": 5
+      },
+      {
+        "prompt_type_name": "async_assign_total",
+        "type": "number",
+        "_row_num": 6
+      },
+      {
+        "prompt_type_name": "async_assign_count",
+        "type": "number",
+        "_row_num": 7
+      },
+      {
+        "prompt_type_name": "async_assign_single_string",
+        "type": "string",
+        "_row_num": 8
+      }
+    ],
+    "initial": [
+      {
+        "clause": "do section survey",
+        "_row_num": 2
+      }
+    ]
+  },
+  "specification": {
+    "column_types": {
+      "_screen_block": "function",
+      "condition": "formula",
+      "constraint": "formula",
+      "required": "formula",
+      "calculation": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
+      "selectionArgs": "formula",
+      "url": "formula",
+      "uri": "formula",
+      "callback": "formula(context)",
+      "choice_filter": "formula(choice_item)",
+      "templatePath": "requirejs_path"
+    },
+    "settings": {
+      "form_id": {
+        "setting_name": "form_id",
+        "value": "complex_delivery",
+        "_row_num": 2
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 1,
+        "_row_num": 3
+      },
+      "table_id": {
+        "setting_name": "table_id",
+        "value": "complex_delivery",
+        "_row_num": 4
+      },
+      "survey": {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": "Deliveries"
+          }
+        },
+        "_row_num": 5
+      },
+      "instance_name": {
+        "setting_name": "instance_name",
+        "value": "delivery_id",
+        "_row_num": 6
+      },
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 5,
+        "value": [
+          {
+            "display": {
+              "locale": {
+                "text": "default"
+              }
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 5,
+        "value": "default"
+      },
+      "initial": {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": "Deliveries"
+          }
+        },
+        "_row_num": 5
+      }
+    },
+    "choices": {
+      "yes_no": [
+        {
+          "choice_list_name": "yes_no",
+          "data_value": "true",
+          "display": {
+            "title": {
+              "text": "Yes"
+            }
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "yes_no",
+          "data_value": "false",
+          "display": {
+            "title": {
+              "text": "No"
+            }
+          },
+          "_row_num": 3
+        }
+      ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {
+        "delivery_id": {
+          "string_token": "delivery_id",
+          "text": "Delivery ID",
+          "_row_num": 2
+        },
+        "date_time": {
+          "string_token": "date_time",
+          "text": "Time of Delivery",
+          "_row_num": 3
+        },
+        "delivery_site": {
+          "string_token": "delivery_site",
+          "text": "Delivery Site",
+          "_row_num": 4
+        },
+        "distributor": {
+          "string_token": "distributor",
+          "text": "Distributor",
+          "_row_num": 5
+        },
+        "scanned_item_pack": {
+          "string_token": "scanned_item_pack",
+          "text": "Scanned Item Pack",
+          "_row_num": 6
+        }
+      }
+    },
+    "queries": {
+      "get_barcoderanges": {
+        "query_name": "get_barcoderanges",
+        "query_type": "linked_table",
+        "linked_table_id": "entitlements",
+        "linked_form_id": "entitlements",
+        "selection": "_savepoint_type = ? and entitlement_id = ?",
+        "selectionArgs": "['COMPLETE', data('first_last_name'), data('entitlement_id')]",
+        "fieldName": "ranges",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 2
+      }
+    },
+    "calculates": {
+      "parse_ranges": {
+        "calculation_name": "parse_ranges",
+        "calculation": "(function() {var obj = JSON.parse(data('ranges'));\n if (obj === null || obj === undefined) {\n  return 'with any barcode value';\n }\n if (obj.ranges.length < 1) {\n  return 'with any barcode value';\n } else {\n  var str = 'within the range of ';\n  for (var i = 0; i < obj.ranges.length - 1; i++) {\n   str += obj.ranges[i].min + ' to ' + obj.ranges[i].max + ',\\n';\n  }\n  if (obj.ranges.length > 1) {\n   str += 'or ';\n  }\n  str += obj.ranges[obj.ranges.length - 1].min + ' to ' + obj.ranges[obj.ranges.length - 1].max;\n  return str;\n  } \n})()",
+        "_row_num": 2
+      },
+      "in_range": {
+        "calculation_name": "in_range",
+        "calculation": "(function() {var code = parseInt(data('item_pack_barcode'));\n var json = JSON.parse(data('ranges'));\n if (json === null || json === undefined) {\n   return 'true';\n }\n if (json.ranges.length < 1) {\n  return 'true';\n }\n var valid = 'false';\n var i = 0;\n while (valid == 'false' && i < json.ranges.length) {\n  if ((json.ranges[i].min <= code) && (json.ranges[i].max >= code)) {\n   valid = 'true';\n  }\n  i++;\n }\n return valid;\n})()",
+        "_row_num": 3
+      }
+    },
+    "model": {
+      "entitlement_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "entitlement_id"
+      },
+      "delivery_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_id"
+      },
+      "is_delivered": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "is_delivered"
+      },
+      "item_pack_barcode": {
+        "type": "string",
+        "isSessionVariable": true,
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_pack_barcode"
+      },
+      "signature": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "signature"
+      },
+      "delivery_time": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_time"
+      },
+      "receive_signature": {
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "receive_signature_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "receive_signature_contentType"
+          }
+        },
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "receive_signature"
+      },
+      "valid_bar_codes": {
+        "prompt_type_name": "async_assign_single_string",
+        "type": "string",
+        "isSessionVariable": true,
+        "valuesList": "get_barcoderanges",
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "valid_bar_codes"
+      },
+      "try_again": {
+        "type": "string",
+        "isSessionVariable": true,
+        "valuesList": "yes_no",
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "try_again"
+      },
+      "valid": {
+        "isSessionVariable": true,
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "valid"
+      },
+      "summary": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "summary"
+      }
+    },
+    "section_names": [
+      "initial",
+      "survey"
+    ],
+    "sections": {
+      "survey": {
+        "section_name": "survey",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "note",
+            "name": "pre-delivery",
+            "display": {
+              "prompt": {
+                "text": "We will now distribute the appropriate item pack"
+              }
+            },
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 0
+          },
+          {
+            "type": "async_assign_single_string",
+            "values_list": "get_barcoderanges",
+            "name": "valid_bar_codes",
+            "model": {
+              "isSessionVariable": true,
+              "valuesList": "get_barcoderanges"
+            },
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "async_assign_single_string",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 1
+          },
+          {
+            "type": "barcode",
+            "name": "item_pack_barcode",
+            "display": {
+              "prompt": {
+                "text": "Scan an item pack of type {{data.item_pack_name}} {{data.summary}}"
+              }
+            },
+            "model": {
+              "isSessionVariable": true
+            },
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "barcode",
+            "_branch_label_enclosing_screen": "survey/_screen8",
+            "promptIdx": 2
+          },
+          {
+            "type": "string",
+            "name": "item_pack_barcode",
+            "display": {
+              "prompt": {
+                "text": "Please confirm or update item pack barcode."
+              }
+            },
+            "model": {
+              "isSessionVariable": true
+            },
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 3
+          },
+          {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "name": "try_again",
+            "display": {
+              "prompt": {
+                "text": "Unauthorized Item Pack! Do not distribute this item pack. Would you like to scan a different item pack?"
+              }
+            },
+            "model": {
+              "isSessionVariable": true,
+              "valuesList": "yes_no"
+            },
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 4
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "This item pack is authorized. Please deliver this item pack."
+              }
+            },
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 5
+          },
+          {
+            "type": "signature",
+            "name": "receive_signature",
+            "display": {
+              "prompt": {
+                "text": "Sign for receipt of item"
+              }
+            },
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "prompt",
+            "_type": "signature",
+            "_branch_label_enclosing_screen": "survey/_screen19",
+            "promptIdx": 6
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 22,
+            "_branch_label_enclosing_screen": "survey/_screen22",
+            "promptIdx": 7
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "begin screen",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 5,
+              "__rowNum__": 4,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "type": "assign",
+            "name": "summary",
+            "calculation": "calculates.parse_ranges()",
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "assign",
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 8,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 3
+          },
+          {
+            "type": "assign",
+            "name": "valid",
+            "calculation": "calculates.in_range()",
+            "model": {
+              "isSessionVariable": true
+            },
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "assign",
+            "operationIdx": 4
+          },
+          {
+            "clause": "if",
+            "condition": "!data('valid')",
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "goto_label",
+            "_branch_label": "_then12",
+            "operationIdx": 5
+          },
+          {
+            "clause": "else",
+            "_token_type": "goto_label",
+            "_branch_label": "_else17",
+            "_row_num": 17,
+            "operationIdx": 6
+          },
+          {
+            "_row_num": 13,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('try_again'),'true')",
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "goto_label",
+            "_branch_label": "_then14",
+            "operationIdx": 8
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else16",
+            "_row_num": 16,
+            "operationIdx": 9
+          },
+          {
+            "clause": "goto item_scan",
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "goto_label",
+            "_branch_label": "item_scan",
+            "operationIdx": 10
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif16",
+            "_row_num": 16,
+            "operationIdx": 11
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif21",
+            "_row_num": 21,
+            "operationIdx": 12
+          },
+          {
+            "_row_num": 18,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 13
+          },
+          {
+            "_row_num": 19,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 14
+          },
+          {
+            "type": "assign",
+            "name": "is_delivered",
+            "calculation": "TRUE",
+            "_row_num": 20,
+            "__rowNum__": 19,
+            "_token_type": "assign",
+            "operationIdx": 15
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 22,
+            "operationIdx": 16
+          },
+          {
+            "_row_num": 22,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 17
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 22,
+            "operationIdx": 18
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "item_scan": 2,
+          "_screen8": 2,
+          "_screen9": 3,
+          "_then12": 7,
+          "_screen13": 7,
+          "_then14": 10,
+          "_else16": 12,
+          "_endif16": 12,
+          "_else17": 13,
+          "_screen18": 13,
+          "_screen19": 14,
+          "_endif21": 16,
+          "_contents": 17,
+          "_screen22": 17
+        }
+      },
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_do_section_name": "survey",
+            "_type": "_section",
+            "promptIdx": 0,
+            "display": {
+              "title": {
+                "text": "Deliveries"
+              }
+            },
+            "_branch_label_enclosing_screen": "survey/0"
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 3,
+            "_branch_label_enclosing_screen": "initial/_screen3",
+            "promptIdx": 1
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 3,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 3,
+            "operationIdx": 3
+          },
+          {
+            "_token_type": "validate",
+            "clause": "validate finalize",
+            "_sweep_name": "finalize",
+            "_row_num": 3,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 4
+          },
+          {
+            "_token_type": "save_and_terminate",
+            "clause": "save and terminate",
+            "calculation": true,
+            "_row_num": 3,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 5
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 3,
+            "operationIdx": 6
+          }
+        ],
+        "branch_label_map": {
+          "_contents": 2,
+          "_screen3": 2,
+          "_finalize": 4
+        }
+      }
+    },
+    "dataTableModel": {
+      "entitlement_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "entitlement_id",
+        "elementName": "entitlement_id",
+        "elementSet": "data",
+        "elementPath": "entitlement_id"
+      },
+      "delivery_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_id",
+        "elementName": "delivery_id",
+        "elementSet": "data",
+        "elementPath": "delivery_id"
+      },
+      "is_delivered": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "is_delivered",
+        "elementName": "is_delivered",
+        "elementSet": "data",
+        "elementPath": "is_delivered"
+      },
+      "item_pack_barcode": {
+        "type": "string",
+        "isSessionVariable": true,
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_pack_barcode",
+        "elementName": "item_pack_barcode",
+        "elementSet": "data",
+        "elementPath": "item_pack_barcode"
+      },
+      "signature": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "signature",
+        "elementName": "signature",
+        "elementSet": "data",
+        "elementPath": "signature"
+      },
+      "delivery_time": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "delivery_time",
+        "elementName": "delivery_time",
+        "elementSet": "data",
+        "elementPath": "delivery_time"
+      },
+      "receive_signature": {
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "receive_signature_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "receive_signature.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "receive_signature_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "receive_signature.contentType"
+          }
+        },
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "receive_signature",
+        "elementName": "receive_signature",
+        "elementSet": "data",
+        "elementPath": "receive_signature",
+        "listChildElementKeys": [
+          "receive_signature_contentType",
+          "receive_signature_uriFragment"
+        ],
+        "notUnitOfRetention": true
+      },
+      "valid_bar_codes": {
+        "prompt_type_name": "async_assign_single_string",
+        "type": "string",
+        "isSessionVariable": true,
+        "valuesList": "get_barcoderanges",
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "valid_bar_codes",
+        "elementName": "valid_bar_codes",
+        "elementSet": "data",
+        "elementPath": "valid_bar_codes"
+      },
+      "try_again": {
+        "type": "string",
+        "isSessionVariable": true,
+        "valuesList": "yes_no",
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "try_again",
+        "elementName": "try_again",
+        "elementSet": "data",
+        "elementPath": "try_again"
+      },
+      "valid": {
+        "isSessionVariable": true,
+        "type": "boolean",
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "valid",
+        "elementName": "valid",
+        "elementSet": "data",
+        "elementPath": "valid"
+      },
+      "summary": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "elementKey": "summary",
+        "elementName": "summary",
+        "elementSet": "data",
+        "elementPath": "summary"
+      },
+      "receive_signature_uriFragment": {
+        "type": "string",
+        "elementType": "rowpath",
+        "elementKey": "receive_signature_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "receive_signature.uriFragment"
+      },
+      "receive_signature_contentType": {
+        "type": "string",
+        "elementType": "mimeType",
+        "default": "image/*",
+        "elementKey": "receive_signature_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "receive_signature.contentType"
+      },
+      "_id": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_id",
+        "elementName": "_id",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_id"
+      },
+      "_row_etag": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_etag",
+        "elementName": "_row_etag",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_etag"
+      },
+      "_sync_state": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_sync_state",
+        "elementName": "_sync_state",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_sync_state"
+      },
+      "_conflict_type": {
+        "type": "integer",
+        "isNotNullable": false,
+        "elementKey": "_conflict_type",
+        "elementName": "_conflict_type",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_conflict_type"
+      },
+      "_default_access": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_default_access"
+      },
+      "_form_id": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_form_id",
+        "elementName": "_form_id",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_form_id"
+      },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
+      "_locale": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_locale",
+        "elementName": "_locale",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
+      },
+      "_savepoint_type": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_savepoint_type",
+        "elementName": "_savepoint_type",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_type"
+      },
+      "_savepoint_timestamp": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_savepoint_timestamp",
+        "elementName": "_savepoint_timestamp",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_timestamp"
+      },
+      "_savepoint_creator": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_savepoint_creator",
+        "elementName": "_savepoint_creator",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_creator"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "wrong_form"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Deliveries\"}"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "defaultAccessOnCreation",
+        "_type": "string",
+        "_value": "HIDDEN"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "unverifiedUserCanCreate",
+        "_type": "boolean",
+        "_value": "false"
+      }
+    ]
+  }
+}
