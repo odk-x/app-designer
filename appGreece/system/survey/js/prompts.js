@@ -1880,9 +1880,9 @@ promptTypes.datetime = promptTypes.input_type.extend({
     showTime: true,
     dtp: null,
     events: {
-        "dp.hide": "modification",
         "swipeleft input": "stopPropagation",
-        "swiperight input": "stopPropagation"
+        "swiperight input": "stopPropagation",
+        "change input": "modification" 
     },
     detectNativeDatePicker: function (){
         //For now never use the native datepicker because the samsung note's
@@ -1933,8 +1933,9 @@ promptTypes.datetime = promptTypes.input_type.extend({
         var that = this;
         odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx);
         if ( !that.insideAfterRender ) {
-            var formattedDateValue = that.$('input').data('DateTimePicker').combodate('getValue');
-
+            var formattedDateValue = that.$('input').combodate('getValue');
+            var value = new Date(formattedDateValue);
+            
             //
             // we are using a date pop-up.  If an earlier action fails, we should not
             // attempt to apply the state changes of this pop-up. Tolerate the loss
