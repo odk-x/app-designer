@@ -189,16 +189,6 @@ function formResolutionSuccess(result) {
       setJSONMap(jsonMap, 'ranges', ranges);
 
       if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
-        // ORI: I'm not convinced that this logic is what we want???
-        // We should check this
-        var groupReadOnly = util.getQueryParameter('groupModify');
-        setJSONMap(jsonMap, '_group_read_only', groupReadOnly);
-
-        var rowOwner = newEntitlementsResultSet.get('_row_owner');
-        setJSONMap(jsonMap, '_row_owner', rowOwner);
-        
-        setJSONMap(jsonMap, '_default_access', 'HIDDEN');
-
         var dispatchStruct = JSON.stringify({actionTypeKey: actionEditDelivery});
         odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
 
@@ -308,5 +298,10 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'item_description', newEntitlementsResultSet.get('item_description'));
   setJSONMap(jsonMap, 'is_override', newEntitlementsResultSet.get('is_override'));
   setJSONMap(jsonMap, 'assigned_code', newEntitlementsResultSet.get('assigned_code'));
+  setJSONMap(jsonMap, '_group_read_only', newEntitlementsResultSet.get('_group_modify'));
+
+  user = odkCommon.getActiveUser();
+  setJSONMap(jsonMap, '_row_owner', user);
+
   return jsonMap;
 }
