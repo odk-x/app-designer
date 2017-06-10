@@ -2,6 +2,7 @@
 
 var idxStart = -1;
 var actionTypeKey = "actionTypeKey";
+var deliveryTableKey = "deliveryTable";
 var actionAddDelivery = 0;
 var actionEditDelivery = 1;
 var entitlementsResultSet = {};
@@ -12,6 +13,7 @@ var savepointSuccess = "COMPLETE";
 // Table IDs
 var registrationTable = 'registration';
 var authorizationTable = 'authorizations';
+var entitlementsTable = 'entitlements';
 var defaultDeliveryTable = 'deliveries';
 var defaultDeliveryForm = 'deliveries';
 
@@ -125,19 +127,25 @@ function handleSurveyRowCallback(action, dispatchStr) {
     console.log(result);
     var result = action.jsonValue.result;
     if (result === null || result === undefined) {
-        console.log("Error: no result object on registration");
+        console.log("Error: no result object on delivery");
         return;
     }
 
     var instanceId = result.instanceId;
     if (instanceId === null || instanceId === undefined) {
-        console.log("Error: no instance ID on registration");
+        console.log("Error: no instance ID on delivery");
+        return;
+    }
+
+    var deliveryTableName = dispatchStr[deliveryTableKey];
+    if (deliveryTableName === null || deliveryTableName === undefined) {
+        console.log("Error: no delivery table name");
         return;
     }
 
     var savepointType = result.savepoint_type;
     if (savepointType === null || savepointType === undefined) {
-        console.log("Error: no savepoint type on registration");
+        console.log("Error: no savepoint type on delivery");
         return;
     }
 
@@ -145,9 +153,7 @@ function handleSurveyRowCallback(action, dispatchStr) {
         console.log("The row was not saved as complete. Not launching detailview");
         return;
     }
-    //console.log('updating entitlements');
-    updateEntitlementsWithRowId(instanceId);
-    console.log(instanceId);
+    updateEntitlementsWithRowId(instanceId, deliveryTableName);
 }
 
 function formResolutionFailure(error) {
@@ -185,8 +191,8 @@ function addDefaultDeliverySuccess(result) {
 
     Promise.all([authorizationPromise]).then(function(resultArray) {
         if (resultArray[0].getCount() > 0) {
-            var deliveryTable = resultArray[1].getData(0, 'delivery_table');
-            var deliveryForm = resultArray[1].getData(0, 'delivery_form');
+            var deliveryTable = resultArray[0].getData(0, 'delivery_table');
+            var deliveryForm = resultArray[0].getData(0, 'delivery_form');
 
             // arbitrary default delivery table/form
             if (deliveryTable == undefined || deliveryTable == null || deliveryTable == "") {
@@ -203,7 +209,7 @@ function addDefaultDeliverySuccess(result) {
                 setJSONMap(jsonMap, 'delivery_id', rowId);
                 setJSONMap(jsonMap, 'entitlement_id', newEntitlementsResultSet.get('_id'));
 
-                var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery});
+                var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery, deliveryTableKey: deliveryTable});
                 odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
             } else {
                 console.log("TODO: Make a new web page to say delivered");
@@ -266,37 +272,48 @@ var displayGroup = function(idxStart) {
     }
 };
 
-var updateEntitlementsWithRowId = function(rowId) {
+var isDeliveredCustomDeliveryRow = function(rowId, deliveryTableName) {
   console.log('delivery_id is: ' + rowId);
-  // TODO: Query the custom delivery table
-  /*
-  odkData.query('deliveries', '_id = ? and (is_delivered = ? or is_delivered = ?) and _savepoint_type = ?',
+  console.log('delivery table is ' + deliveryTableName);
+
+  odkData.query(deliveryTableName, '_id = ? and (is_delivered = ? or is_delivered = ?) and _savepoint_type = ?',
                 [rowId, 'true', 'TRUE', compStr],
-                null, null, null, null, null, null, null, queryCBSuccess, queryCBFailure);
-                */
+                null, null, null, null, null, null, null, isDeliveredCBSuccess, isDeliveredCBFailure);
 }
 
-var queryCBSuccess = function(result) {
+var isDeliveredCBFailure = function(error) {
+  console.log('isDeliveredCBFailure called with error: ' + error);
+}
+
+var isDeliveredCBSuccess = function(result) {
   console.log(result.getCount());
   if (result.getCount() > 0) {
     var entitlement_id = result.get('entitlement_id');
     var struct = {};
     struct.is_delivered = result.get('is_delivered');
-    //clearInterval(timer);
-    odkData.updateRow('entitlements', struct, entitlement_id, updateCBSuccess, updateCBFailure);
+    odkData.updateRow('entitlements', struct, entitlement_id, updateEntitlementsCBSuccess, updateEntitlementsCBFailure);
+
+    var rootDelivery_id = result.get('delivery_id');
+    var struct = {};
+    struct.is_delivered = result.get('is_delivered');
+    odkData.updateRow('deliveries', struct, entitlement_id, updateEntitlementsCBSuccess, updateEntitlementsCBFailure);
   }
 }
 
-var queryCBFailure = function(error) {
-  console.log('queryCBFailure called with error: ' + error);
+var updateDeliveriesCBSuccess = function(result) {
+  console.log('updateDeliveriesCBSuccess called');
 }
 
-var updateCBSuccess = function(result) {
-  console.log('updateCBSuccess called');
+var updateDeliveriesCBFailure = function(error) {
+  console.log('updateDeliveriesCBFailure called with error: ' + error);
 }
 
-var updateCBFailure = function(error) {
-  console.log('updateCBFailure called with error: ' + error);
+var updateEntitlementsCBSuccess = function(result) {
+  console.log('updateEntitlementsCBSuccess called');
+}
+
+var updateEntitlementsCBFailure = function(error) {
+  console.log('updateEntitlementsCBFailure called with error: ' + error);
 }
 
 var setJSONMap = function(JSONMap, key, value) {
