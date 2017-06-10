@@ -300,7 +300,7 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'assigned_code', newEntitlementsResultSet.get('assigned_code'));
   setJSONMap(jsonMap, '_group_read_only', newEntitlementsResultSet.get('_group_modify'));
 
-  user = odkCommon.getActiveUser();
+  var user = odkCommon.getActiveUser();
   setJSONMap(jsonMap, '_row_owner', user);
 
   return jsonMap;
