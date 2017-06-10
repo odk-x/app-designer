@@ -2,7 +2,7 @@
 
 var idxStart = -1;
 var actionTypeKey = "actionTypeKey";
-var deliveryTableKey = "deliveryTable";
+var deliveryTableKey = "deliveryTableKey";
 var actionAddDelivery = 0;
 var actionEditDelivery = 1;
 var entitlementsResultSet = {};
@@ -296,7 +296,7 @@ var isDeliveredCBSuccess = function(result) {
     var rootDelivery_id = result.get('delivery_id');
     var struct = {};
     struct.is_delivered = result.get('is_delivered');
-    odkData.updateRow('deliveries', struct, entitlement_id, updateEntitlementsCBSuccess, updateEntitlementsCBFailure);
+    odkData.updateRow('deliveries', struct, entitlement_id, updateDeliveriesCBSuccess, updateDeliveriesCBFailure);
   }
 }
 
