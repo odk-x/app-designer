@@ -133,7 +133,7 @@
       {
         "type": "assign",
         "name": "is_delivered",
-        "calculation": true,
+        "calculation": "\"TRUE\"",
         "_row_num": 20
       },
       {
@@ -167,7 +167,7 @@
         "_row_num": 3
       },
       {
-        "type": "boolean",
+        "type": "string",
         "name": "is_delivered",
         "_row_num": 4
       },
@@ -553,7 +553,7 @@
         "elementKey": "delivery_id"
       },
       "is_delivered": {
-        "type": "boolean",
+        "type": "string",
         "_defn": [
           {
             "_row_num": 20,
@@ -951,7 +951,7 @@
           {
             "type": "assign",
             "name": "is_delivered",
-            "calculation": true,
+            "calculation": "\"TRUE\"",
             "_row_num": 20,
             "__rowNum__": 19,
             "_token_type": "assign",
@@ -1134,7 +1134,7 @@
         "elementPath": "delivery_id"
       },
       "is_delivered": {
-        "type": "boolean",
+        "type": "string",
         "_defn": [
           {
             "_row_num": 20,
