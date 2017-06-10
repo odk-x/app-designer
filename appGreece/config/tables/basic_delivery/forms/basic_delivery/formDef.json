@@ -10,17 +10,18 @@
         "name": "instruction",
         "display": {
           "prompt": {
-            "text": "Distribute the Ice Skates"
+            "text": "Distribute the hygiene kit"
           }
         },
         "_row_num": 3
       },
       {
-        "name": "skatesize",
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "supply",
         "display": {
           "prompt": {
-            "text": "What size of skate?",
-            "hint": "Foot Size of Skate"
+            "text": "Did the supplies last you the entire month?"
           }
         },
         "_row_num": 4
@@ -53,8 +54,8 @@
         "_row_num": 4
       },
       {
-        "type": "decimal",
-        "name": "skatesize",
+        "type": "string",
+        "name": "supply",
         "_row_num": 5
       }
     ],
@@ -119,7 +120,7 @@
     "choices": [
       {
         "choice_list_name": "yes_no",
-        "data_value": "true",
+        "data_value": "TRUE",
         "display": {
           "title": {
             "text": "Yes"
@@ -129,7 +130,7 @@
       },
       {
         "choice_list_name": "yes_no",
-        "data_value": "false",
+        "data_value": "FALSE",
         "display": {
           "title": {
             "text": "No"
@@ -255,7 +256,7 @@
       "yes_no": [
         {
           "choice_list_name": "yes_no",
-          "data_value": "true",
+          "data_value": "TRUE",
           "display": {
             "title": {
               "text": "Yes"
@@ -265,7 +266,7 @@
         },
         {
           "choice_list_name": "yes_no",
-          "data_value": "false",
+          "data_value": "FALSE",
           "display": {
             "title": {
               "text": "No"
@@ -341,15 +342,20 @@
         ],
         "elementKey": "is_delivered"
       },
-      "skatesize": {
-        "type": "number",
+      "supply": {
+        "type": "string",
+        "valuesList": "yes_no",
         "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          },
           {
             "_row_num": 5,
             "section_name": "model"
           }
         ],
-        "elementKey": "skatesize"
+        "elementKey": "supply"
       }
     },
     "section_names": [
@@ -367,7 +373,7 @@
             "name": "instruction",
             "display": {
               "prompt": {
-                "text": "Distribute the Ice Skates"
+                "text": "Distribute the hygiene kit"
               }
             },
             "_row_num": 3,
@@ -378,12 +384,28 @@
             "promptIdx": 0
           },
           {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "name": "supply",
+            "display": {
+              "prompt": {
+                "text": "Did the supplies last you the entire month?"
+              }
+            },
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 1
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
             "_row_num": 7,
             "_branch_label_enclosing_screen": "survey/_screen7",
-            "promptIdx": 1
+            "promptIdx": 2
           }
         ],
         "validation_tag_map": {
@@ -401,7 +423,7 @@
               "__rowNum__": 4,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
@@ -422,7 +444,7 @@
           {
             "_row_num": 7,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
@@ -594,18 +616,23 @@
         "elementSet": "data",
         "elementPath": "is_delivered"
       },
-      "skatesize": {
-        "type": "number",
+      "supply": {
+        "type": "string",
+        "valuesList": "yes_no",
         "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          },
           {
             "_row_num": 5,
             "section_name": "model"
           }
         ],
-        "elementKey": "skatesize",
-        "elementName": "skatesize",
+        "elementKey": "supply",
+        "elementName": "supply",
         "elementSet": "data",
-        "elementPath": "skatesize"
+        "elementPath": "supply"
       },
       "_id": {
         "type": "string",
@@ -721,6 +748,13 @@
       }
     },
     "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "supply",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"TRUE\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"FALSE\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
+      },
       {
         "_partition": "SurveyUtil",
         "_aspect": "default",
