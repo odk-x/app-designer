@@ -187,8 +187,21 @@ function formResolutionSuccess(result) {
 
       var jsonMap = getJSONMapValues();
       setJSONMap(jsonMap, 'ranges', ranges);
+
       if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
-        odkData.addRow(deliveryTable, jsonMap, util.genUUID(), proxyRowSuccess, proxyRowFailure);
+        // ORI: I'm not convinced that this logic is what we want???
+        // We should check this
+        var groupReadOnly = util.getQueryParameter('groupModify');
+        setJSONMap(jsonMap, '_group_read_only', groupReadOnly);
+
+        var rowOwner = newEntitlementsResultSet.get('_row_owner');
+        setJSONMap(jsonMap, '_row_owner', rowOwner);
+        
+        setJSONMap(jsonMap, '_default_access', 'HIDDEN');
+
+        var dispatchStruct = JSON.stringify({actionTypeKey: actionEditDelivery});
+        odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
+
       } else if (newEntitlementsResultSet.get('is_delivered') === 'false' || newEntitlementsResultSet.get('is_delivered') === 'FALSE') {
           var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery});
           odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
@@ -196,31 +209,6 @@ function formResolutionSuccess(result) {
     }
   });
 }
-
-function proxyRowSuccess(result) {
-    console.log('made it!');
-    
-    // TODO: Take groupModify and put it into groupReadOnly
-    var groupReadOnly = util.getQueryParameter('groupModify');
-    odkData.changeAccessFilterOfRow('deliveries', 'HIDDEN',
-      newEntitlementsResultSet.get('_row_owner'), groupReadOnly, null, null, 
-      result.getRowId(0), setFilterSuccess, setFilterFailure);
-}
-
-function proxyRowFailure(error) {
-    console.log('proxy set failure with error: ' + error);
-}
-
-function setFilterSuccess(result) {
-    var dispatchStruct = JSON.stringify({actionTypeKey: actionEditDelivery});
-    odkTables.editRowWithSurvey(dispatchStruct, 'deliveries', result.getRowId(0), 'deliveries', null);
-    console.log('set filter success');
-}
-
-function setFilterFailure(error) {
-    console.log('set filter failure with error: ' + error);
-}
-
 
 var displayGroup = function(idxStart) {
     console.log('displayGroup called. idxStart: ' + idxStart);

@@ -134,12 +134,14 @@ var cbSuccess = function (result) {
       function() {
         var jsonMap = getJSONMapValues();
         setJSONMap(jsonMap, 'ranges', ranges);
+
         if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
-          console.log('wait what');
-          odkData.addRow(deliveryTable, jsonMap, util.genUUID(), proxyRowSuccess, proxyRowFailure);
+          var dispatchStruct = JSON.stringify({actionTypeKey: actionEditDelivery});
+          odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
         } else if (entitlementsResultSet.get('is_delivered') == 'false' || entitlementsResultSet.get('is_delivered') == 'FALSE') {
-            var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery});
-            odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
+          var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery});
+
+          odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
         }
       });
     } else {
@@ -150,27 +152,6 @@ var cbSuccess = function (result) {
 
   
 };
-
-function proxyRowSuccess(result) {
-    console.log('made it!');
-    odkData.changeAccessFilterOfRow('deliveries', 'HIDDEN',
-      entitlementsResultSet.get('_row_owner'), null, null, null, 
-      result.getRowId(0), setFilterSuccess, setFilterFailure);
-}
-
-function proxyRowFailure(error) {
-    console.log('proxy set failure with error: ' + error);
-}
-
-function setFilterSuccess(result) {
-    var dispatchStruct = JSON.stringify({actionTypeKey: actionEditDelivery});
-    odkTables.editRowWithSurvey(dispatchStruct, 'deliveries', result.getRowId(0), 'deliveries', null);
-    console.log('set filter success');
-}
-
-function setFilterFailure(error) {
-    console.log('set filter failure with error: ' + error);
-}
 
 var updateEntitlements = function() {
   console.log('entitlement_id is: ' + entitlementsResultSet.get('_id'));
@@ -228,6 +209,11 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'item_description', entitlementsResultSet.get('item_description'));
   setJSONMap(jsonMap, 'is_override', entitlementsResultSet.get('is_override'));
   setJSONMap(jsonMap, 'assigned_code', entitlementsResultSet.get('assigned_code'));
+  setJSONMap(jsonMap, '_group_modify', entitlementsResultSet.get('_group_modify'));
+
+  user = odkCommon.getActiveUser();
+  setJSONMap(jsonMap, '_row_owner', user);
+
   return jsonMap;
 };
 

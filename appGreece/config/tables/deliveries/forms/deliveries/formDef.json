@@ -165,102 +165,14 @@
         "_row_num": 22
       },
       {
-        "type": "select_one",
-        "values_list": "yes_no",
+        "type": "assign",
         "name": "is_delivered",
-        "display": {
-          "prompt": {
-            "text": "Has the item pack been successfully delivered?"
-          }
-        },
+        "calculation": "TRUE",
         "_row_num": 23
       },
       {
         "clause": "end if",
         "_row_num": 24
-      },
-      {
-        "clause": "if",
-        "condition": "selected(data('is_delivered'), 'true')",
-        "_row_num": 25
-      },
-      {
-        "type": "assign",
-        "name": "scanned_item_pack",
-        "calculation": "data('item_pack_barcode')",
-        "_row_num": 26
-      },
-      {
-        "type": "note",
-        "name": "pre-summary",
-        "display": {
-          "prompt": {
-            "text": "Since the entitlement was successfully delivered, we will now complete a brief delivery report."
-          }
-        },
-        "_row_num": 27
-      },
-      {
-        "type": "assign",
-        "name": "date_time",
-        "calculation": "now()",
-        "_row_num": 28
-      },
-      {
-        "type": "note",
-        "name": "thanks",
-        "display": {
-          "prompt": {
-            "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
-          }
-        },
-        "_row_num": 29
-      },
-      {
-        "clause": "else",
-        "_row_num": 30
-      },
-      {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "try_again",
-        "display": {
-          "prompt": {
-            "text": "Would you like to scan a different item pack instead?"
-          }
-        },
-        "_row_num": 31
-      },
-      {
-        "clause": "if",
-        "condition": "selected(data('try_again'),'true')",
-        "_row_num": 32
-      },
-      {
-        "clause": "goto item_scan",
-        "_row_num": 33
-      },
-      {
-        "clause": "else",
-        "_row_num": 34
-      },
-      {
-        "type": "note",
-        "name": "no_report_option",
-        "display": {
-          "prompt": {
-            "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
-          }
-        },
-        "_row_num": 35
-      },
-      {
-        "clause": "end if",
-        "_row_num": 36
-      },
-      {
-        "clause": "end if",
-        "_row_num": 37
       }
     ],
     "model": [
@@ -640,10 +552,6 @@
         "elementType": "dateTime",
         "_defn": [
           {
-            "_row_num": 28,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 3,
             "section_name": "model"
           }
@@ -672,7 +580,6 @@
       },
       "is_delivered": {
         "type": "string",
-        "valuesList": "yes_no",
         "_defn": [
           {
             "_row_num": 23,
@@ -769,10 +676,6 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 26,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 15,
             "section_name": "model"
           }
@@ -853,10 +756,6 @@
         "_defn": [
           {
             "_row_num": 17,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 31,
             "section_name": "survey"
           },
           {
@@ -1013,89 +912,12 @@
             "promptIdx": 7
           },
           {
-            "type": "select_one",
-            "values_list": "yes_no",
-            "name": "is_delivered",
-            "display": {
-              "prompt": {
-                "text": "Has the item pack been successfully delivered?"
-              }
-            },
-            "_row_num": 23,
-            "__rowNum__": 22,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen23",
-            "promptIdx": 8
-          },
-          {
-            "type": "note",
-            "name": "pre-summary",
-            "display": {
-              "prompt": {
-                "text": "Since the entitlement was successfully delivered, we will now complete a brief delivery report."
-              }
-            },
-            "_row_num": 27,
-            "__rowNum__": 26,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen27",
-            "promptIdx": 9
-          },
-          {
-            "type": "note",
-            "name": "thanks",
-            "display": {
-              "prompt": {
-                "text": "Thank you for completing the post-delivery survey. Continue to the next screen to finalize."
-              }
-            },
-            "_row_num": 29,
-            "__rowNum__": 28,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen29",
-            "promptIdx": 10
-          },
-          {
-            "type": "select_one",
-            "values_list": "yes_no",
-            "name": "try_again",
-            "display": {
-              "prompt": {
-                "text": "Would you like to scan a different item pack instead?"
-              }
-            },
-            "_row_num": 31,
-            "__rowNum__": 30,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 11
-          },
-          {
-            "type": "note",
-            "name": "no_report_option",
-            "display": {
-              "prompt": {
-                "text": "Since no item pack was successfully delivery, we will not fill out a post-distribution report."
-              }
-            },
-            "_row_num": 35,
-            "__rowNum__": 34,
-            "_token_type": "prompt",
-            "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen35",
-            "promptIdx": 12
-          },
-          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 38,
-            "_branch_label_enclosing_screen": "survey/_screen38",
-            "promptIdx": 13
+            "_row_num": 25,
+            "_branch_label_enclosing_screen": "survey/_screen25",
+            "promptIdx": 8
           }
         ],
         "validation_tag_map": {
@@ -1257,127 +1079,34 @@
             "operationIdx": 19
           },
           {
+            "type": "assign",
+            "name": "is_delivered",
+            "calculation": "TRUE",
             "_row_num": 23,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 22,
+            "_token_type": "assign",
             "operationIdx": 20
-          },
-          {
-            "clause": "if",
-            "condition": "selected(data('is_delivered'), 'true')",
-            "_row_num": 25,
-            "__rowNum__": 24,
-            "_token_type": "goto_label",
-            "_branch_label": "_then25",
-            "operationIdx": 21
-          },
-          {
-            "clause": "else",
-            "_token_type": "goto_label",
-            "_branch_label": "_else30",
-            "_row_num": 30,
-            "operationIdx": 22
-          },
-          {
-            "type": "assign",
-            "name": "scanned_item_pack",
-            "calculation": "data('item_pack_barcode')",
-            "_row_num": 26,
-            "__rowNum__": 25,
-            "_token_type": "assign",
-            "operationIdx": 23
-          },
-          {
-            "_row_num": 27,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 24
-          },
-          {
-            "type": "assign",
-            "name": "date_time",
-            "calculation": "now()",
-            "_row_num": 28,
-            "__rowNum__": 27,
-            "_token_type": "assign",
-            "operationIdx": 25
-          },
-          {
-            "_row_num": 29,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 26
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif37",
-            "_row_num": 37,
-            "operationIdx": 27
-          },
-          {
-            "_row_num": 31,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 28
-          },
-          {
-            "clause": "if",
-            "condition": "selected(data('try_again'),'true')",
-            "_row_num": 32,
-            "__rowNum__": 31,
-            "_token_type": "goto_label",
-            "_branch_label": "_then32",
-            "operationIdx": 29
-          },
-          {
-            "clause": "else",
-            "_token_type": "goto_label",
-            "_branch_label": "_else34",
-            "_row_num": 34,
-            "operationIdx": 30
-          },
-          {
-            "clause": "goto item_scan",
-            "_row_num": 33,
-            "__rowNum__": 32,
-            "_token_type": "goto_label",
-            "_branch_label": "item_scan",
-            "operationIdx": 31
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif36",
-            "_row_num": 36,
-            "operationIdx": 32
-          },
-          {
-            "_row_num": 35,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 33
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 38,
-            "operationIdx": 34
+            "_row_num": 25,
+            "operationIdx": 21
           },
           {
-            "_row_num": 38,
+            "_row_num": 25,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 35
+            "operationIdx": 22
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 38,
-            "operationIdx": 36
+            "_row_num": 25,
+            "operationIdx": 23
           }
         ],
         "branch_label_map": {
@@ -1398,20 +1127,9 @@
           "_endif20": 18,
           "_else21": 19,
           "_screen22": 19,
-          "_screen23": 20,
           "_endif24": 21,
-          "_then25": 23,
-          "_screen27": 24,
-          "_screen29": 26,
-          "_else30": 28,
-          "_screen31": 28,
-          "_then32": 31,
-          "_else34": 33,
-          "_screen35": 33,
-          "_endif36": 34,
-          "_endif37": 34,
-          "_contents": 35,
-          "_screen38": 35
+          "_contents": 22,
+          "_screen25": 22
         }
       },
       "initial": {
@@ -1611,10 +1329,6 @@
         "elementType": "dateTime",
         "_defn": [
           {
-            "_row_num": 28,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 3,
             "section_name": "model"
           }
@@ -1652,7 +1366,6 @@
       },
       "is_delivered": {
         "type": "string",
-        "valuesList": "yes_no",
         "_defn": [
           {
             "_row_num": 23,
@@ -1776,10 +1489,6 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 26,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 15,
             "section_name": "model"
           }
@@ -1875,10 +1584,6 @@
         "_defn": [
           {
             "_row_num": 17,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 31,
             "section_name": "survey"
           },
           {
@@ -2005,13 +1710,6 @@
       }
     },
     "properties": [
-      {
-        "_partition": "Column",
-        "_aspect": "is_delivered",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"true\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"false\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
-      },
       {
         "_partition": "SurveyUtil",
         "_aspect": "default",
