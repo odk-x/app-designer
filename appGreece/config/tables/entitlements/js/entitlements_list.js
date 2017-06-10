@@ -153,7 +153,7 @@ function handleSurveyRowCallback(action, dispatchStr) {
         console.log("The row was not saved as complete. Not launching detailview");
         return;
     }
-    updateEntitlementsWithRowId(instanceId, deliveryTableName);
+    isDeliveredCustomDeliveryRow(instanceId, deliveryTableName);
 }
 
 function formResolutionFailure(error) {
