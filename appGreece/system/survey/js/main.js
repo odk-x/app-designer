@@ -20,7 +20,7 @@ requirejs.config({
 		jquerymigrate: 'libs/jquery-migrate-3.0.0',
         bootstrap : 'libs/bootstrap-3.3.7-dist/js/bootstrap.min',
         moment : 'libs/eonasdan/moment',
-        datetimepicker : 'libs/eonasdan/bootstrap-datetimepicker',
+        combodate : 'libs/combodate/js/combodate',
         spinner : 'libs/spinner/waitMe.min',
         backbone : 'libs/backbone.1.3.3',
         handlebars : 'libs/handlebars-v4.0.5',
@@ -67,12 +67,10 @@ requirejs.config({
         'moment': {
             deps: [],
         },
-        // datetimepicker already uses requirejs if it
-        // is available so it doesn't need to be shimmed
-        //'datetimepicker': {
-        //    deps: ['jquery', 'bootstrap', 'moment'],
-        //    exports: '$.fn.datetimepicker'
-        //},
+        'combodate': {
+            deps: ['jquery', 'moment'],
+            exports: '$.fn.combodate'
+        },
         'spinner': {
             deps: ['jquery'],
             exports: '$.fn.waitMe'
@@ -195,13 +193,13 @@ require(['jquery','XRegExp'],
 
             // and launch the framework...
             require([ 'spinner', 'databaseUtils', 'opendatakit', 'database', 'parsequery',
-                            'builder', 'controller', 'd3', 'jqueryCsv', 'datetimepicker'],
+                            'builder', 'controller', 'd3', 'jqueryCsv', 'combodate'],
             function(spinner,   databaseUtils, opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv) {
                 verifyLoad('main.require.framework.loaded',
-                    ['datetimepicker', 'spinner', 'databaseUtils', 'opendatakit', 'database','parsequery',
+                    ['combodate', 'spinner', 'databaseUtils', 'opendatakit', 'database','parsequery',
                             'builder', 'controller', 'd3', 'jqueryCsv'],
-                    [ $.fn.datetimepicker,   spinner,  databaseUtils,  opendatakit,   database,  parsequery,
+                    [ $.fn.combodate,   spinner,  databaseUtils,  opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv]);
 
 

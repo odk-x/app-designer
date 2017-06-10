@@ -2,13 +2,13 @@
 <div class="form-group">
     <div class="container">
         <label for="picker-{{promptId}}">{{> labelHint}}</label>
+        <br />
         <input id="picker-{{promptId}}" 
-            class="form-control"
+            type="text"
             name="{{name}}"
             value="{{value}}"
 			tabindex="0"
 			style="background-color:#ffffff"
-            readonly
             {{#eachProperty inputAttributes}}
                 {{property}}="{{value}}"
             {{/eachProperty}}

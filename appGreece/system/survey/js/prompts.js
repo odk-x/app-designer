@@ -1,13 +1,13 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','datetimepicker'],
+define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','combodate'],
 function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh) {
 'use strict';
 /* global odkCommon, odkSurvey */
 verifyLoad('prompts',
-    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','datetimepicker'],
-    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.datetimepicker] );
+    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','combodate'],
+    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.combodate] );
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -1871,9 +1871,11 @@ promptTypes.decimal = promptTypes.input_type.extend({
 promptTypes.datetime = promptTypes.input_type.extend({
     type: "datetime",
     templatePath: "templates/datetimepicker.handlebars",
+    // TODO: Use a template?
     usePicker: true,
     insideAfterRender: false,
     timeFormat: "MM/DD/YYYY h:mm A",
+    timeTemplate: "DD / MMM / YYYY  HH : mm",
     showDate: true,
     showTime: true,
     dtp: null,
@@ -1931,9 +1933,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
         var that = this;
         odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx);
         if ( !that.insideAfterRender ) {
-            var date_value = that.$('input').data('DateTimePicker').getDate();
-            var value = (date_value === undefined || date_value === null) ? null : date_value.toDate();
-            var formattedDateValue = moment(value).format(that.timeFormat);
+            var formattedDateValue = that.$('input').data('DateTimePicker').combodate('getValue');
 
             //
             // we are using a date pop-up.  If an earlier action fails, we should not
@@ -1997,11 +1997,11 @@ promptTypes.datetime = promptTypes.input_type.extend({
             }
 
             if (that.showDate && !that.showTime) {
-                that.$('input').datetimepicker({pickTime: false, format: this.timeFormat});
+                that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
             } else if (!that.showDate && that.showTime) {
-                that.$('input').datetimepicker({pickDate: false, format: this.timeFormat});
+                that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
             } else {
-                that.$('input').datetimepicker({format: this.timeFormat});
+                that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
             }
             var inputElement = that.$('input');
             that.dtp = inputElement.data('DateTimePicker');
@@ -2011,7 +2011,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
     },
     beforeMove: function() {
         // the spinner will have already saved the value
-        // destroy the datetimepicker if it is still present
+        // destroy the combodate if it is still present
         var that = this;
 
         if (that.dtp) {
@@ -2023,12 +2023,14 @@ promptTypes.datetime = promptTypes.input_type.extend({
 promptTypes.date = promptTypes.datetime.extend({
     type: "date",
     showTime: false,
-    timeFormat: "MM/DD/YYYY"
+    timeFormat: "MM/DD/YYYY",
+    timeTemplate: "DD / MMM / YYYY"
 });
 promptTypes.time = promptTypes.datetime.extend({
     type: "time",
     showDate: false,
     timeFormat: "h:mm A",
+    timeTemplate: "HH : mm",
     sameValue: function(ref, value) {
         // these are milliseconds relative to Jan 1 1970...
         var ref_tod = (ref.valueOf() % 86400000);
