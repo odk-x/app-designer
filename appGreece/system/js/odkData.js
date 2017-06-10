@@ -219,11 +219,11 @@ window.odkData = {
                 if (errorMsg !== null && errorMsg !== undefined) {
                     console.log('odkData invokeCallbackFn error - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId +
                     ' error: ' + errorMsg);
+                    if (errorMsg.indexOf("org.opendatakit.exception.ActionNotAuthorize") === 0) {
+                        $('body').html("<h1>Access denied</h1>You do have access to perform this action. Please log in or check your credentials."); // TODO: TEMPORARY
+                    }
                     if(trxn._failureCbFn !== null && trxn._failureCbFn !== undefined) {
                         (trxn._failureCbFn)(errorMsg);
-                    }
-                    if (errorMsg.indexOf("org.opendatakit.exception.ActionNotAuthorize") === 0) {
-                        body.innerHTML = "<h1>Access denied</h1>Your user doesn't have access to add a row to this table"; // TEMPORARY
                     }
                 } else {
                     console.log('odkData invokeCallbackFn success - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId);
