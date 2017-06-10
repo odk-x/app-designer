@@ -202,17 +202,25 @@ function addDefaultDeliverySuccess(result) {
                 deliveryForm = defaultDeliveryForm;
             }
 
+            var entitlement_id = newEntitlementsResultSet.get('_id');
             if (deliveryTable !== defaultDeliveryTable) {
+                // Custom delivery form
                 console.log('Launching custom delivery form: ' + deliveryForm);
 
                 var jsonMap = {};
                 setJSONMap(jsonMap, 'delivery_id', rowId);
-                setJSONMap(jsonMap, 'entitlement_id', newEntitlementsResultSet.get('_id'));
+                setJSONMap(jsonMap, 'entitlement_id', entitlement_id);
 
                 var dispatchStruct = JSON.stringify({actionTypeKey: actionAddDelivery, deliveryTableKey: deliveryTable});
                 odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
             } else {
-                console.log("TODO: Make a new web page to say delivered");
+                // Standard simple delivery
+                odkTables.launchHTML(null,
+                                     'config/assets/deliver.html?delivery_id='
+                                     + encodeURIComponent(rowId)
+                                     + '&entitlement_id='
+                                     + encodeURIComponent(entitlement_id)
+                                     );
             }
         }
     });
@@ -296,7 +304,7 @@ var isDeliveredCBSuccess = function(result) {
     var rootDelivery_id = result.get('delivery_id');
     var struct = {};
     struct.is_delivered = result.get('is_delivered');
-    odkData.updateRow('deliveries', struct, entitlement_id, updateDeliveriesCBSuccess, updateDeliveriesCBFailure);
+    odkData.updateRow('deliveries', struct, rootDelivery_id, updateDeliveriesCBSuccess, updateDeliveriesCBFailure);
   }
 }
 
