@@ -341,7 +341,9 @@ var getJSONMapValues = function() {
   setJSONMap(jsonMap, 'item_pack_name', newEntitlementsResultSet.get('item_pack_name'));
   setJSONMap(jsonMap, 'item_description', newEntitlementsResultSet.get('item_description'));
   setJSONMap(jsonMap, 'is_override', newEntitlementsResultSet.get('is_override'));
-  setJSONMap(jsonMap, 'assigned_code', newEntitlementsResultSet.get('assigned_code'));
+
+  // Ori & Waylon will fix this 
+  //setJSONMap(jsonMap, 'assigned_code', newEntitlementsResultSet.get('assigned_code'));
   setJSONMap(jsonMap, '_group_read_only', newEntitlementsResultSet.get('_group_modify'));
 
   var user = odkCommon.getActiveUser();
