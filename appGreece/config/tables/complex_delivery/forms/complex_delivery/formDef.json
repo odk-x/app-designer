@@ -86,7 +86,7 @@
       },
       {
         "clause": "if",
-        "condition": "!data('valid')",
+        "condition": "!data('valid') || data('valid') == 'false'",
         "_row_num": 13
       },
       {
@@ -950,7 +950,7 @@
           },
           {
             "clause": "if",
-            "condition": "!data('valid')",
+            "condition": "!data('valid') || data('valid') == 'false'",
             "_row_num": 13,
             "__rowNum__": 12,
             "_token_type": "goto_label",
