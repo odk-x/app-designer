@@ -15,15 +15,16 @@
     </head>
 
     <body>
-        <div id="main">
+        <div id="main" onload>
             <h1 id="title">Deliver Items</h1>
-            <button type="reg" id="deliver" onclick="deliver()">Deliver</button>
+            <button type="reg" id="deliver" onclick="deliver()">Confirm Delivery</button>
             <br />
-            <button type="reg" id="cancel" onclick="cancel()">Cancel</button>
+            <span id=confirmation></span>
         </div>
         <script>
             $(setVirtualHeights);
             document.body.style.display = "block";
+            $(display);
         </script>
     </body>
 </html>

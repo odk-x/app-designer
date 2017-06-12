@@ -167,6 +167,7 @@ function formResolutionSuccess(result) {
   // TODO: Don't just keep polluting all the time. Update a previous row if it exists
   newEntitlementsResultSet = result;
   var jsonMap = getJSONMapValues();
+  setJSONMap(jsonMap, 'is_delivered', 'FALSE');
   odkData.addRow(defaultDeliveryTable, jsonMap, util.genUUID(), addDefaultDeliverySuccess, addDefaultDeliveryFailure);
 }
 
