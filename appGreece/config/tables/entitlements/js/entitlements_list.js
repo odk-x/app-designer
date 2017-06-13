@@ -177,6 +177,7 @@ var performCustomDelivery = function(rootDeliveryRowId, entitlement_id, delivery
     setJSONMap(jsonMap, 'entitlement_id', entitlement_id);
 
     var dispatchStruct = JSON.stringify({actionTypeKey: actionAddCustomDelivery,
+        deliveryId: rootDeliveryRowId,
         deliveryTableKey: deliveryTable});
     odkTables.addRowWithSurvey(dispatchStruct, deliveryTable, deliveryForm, null, jsonMap);
 
@@ -217,16 +218,18 @@ var actionCBFn = function() {
 var finishSimpleDelivery = function(action, dispatchStr) {
 
     console.log("Finishing simple delivery");
-    console.log(result);
     var result = action.jsonValue.result;
-    if (result === null || result === undefined) {
-        console.log("Error: no result object on delivery");
-        return;
-    }
+    console.log(result);
 
     var rootDeliveryRowId = dispatchStr[deliveryId];
     if (rootDeliveryRowId === null || rootDeliveryRowId === undefined) {
         console.log("Error: no delivery id");
+        return;
+    }
+
+    if (result === null || result === undefined) {
+        console.log("Error: no result object on delivery");
+        executeDeleteRootDeliveryRow(root_delivery_id);
         return;
     }
 
@@ -256,23 +259,34 @@ var finishSimpleDelivery = function(action, dispatchStr) {
 
 var finishCustomDelivery = function(action, dispatchStr) {
 
+    var result = action.jsonValue.result;
+
     console.log("Finishing custom delivery");
     console.log(result);
-    var result = action.jsonValue.result;
+
+    var root_delivery_id = dispatchStr['deliveryId'];
+    if (root_delivery_id === null || root_delivery_id === undefined) {
+        console.log("Error: no root delivery id");
+        return;
+    }
+
     if (result === null || result === undefined) {
         console.log("Error: no result object on delivery");
+        executeDeleteRootDeliveryRow(root_delivery_id);
         return;
     }
 
     var custom_delivery_id = result.instanceId;
     if (custom_delivery_id === null || custom_delivery_id === undefined) {
         console.log("Error: no instance ID on delivery");
+        executeDeleteRootDeliveryRow(root_delivery_id);
         return;
     }
 
     var custom_delivery_table = dispatchStr[deliveryTableKey];
     if (custom_delivery_table === null || custom_delivery_table === undefined) {
         console.log("Error: no delivery table name");
+        executeDeleteRootDeliveryRow(root_delivery_id);
         return;
     }
 
@@ -287,7 +301,6 @@ var finishCustomDelivery = function(action, dispatchStr) {
         // Check if the delivery succeeded
         var is_delivered = custom_delivery_row.get('is_delivered');
         var savepoint_type = custom_delivery_row.get('_savepoint_type');
-        var root_delivery_id = custom_delivery_row.get('delivery_id');
         var entitlement_id = custom_delivery_row.get('entitlement_id');
 
         // Update the entitlement to reflect the delivery status
@@ -312,11 +325,7 @@ var finishCustomDelivery = function(action, dispatchStr) {
         } else {
 
             // Failed delivery, so clean up delivery tables
-            deleteRootDeliveryRow(root_delivery_id).then( function(result) {
-                console.log('Deleted root delivery row: ' + root_delivery_id);
-            }).catch( function(reason) {
-                console.log('Failed to delete root delivery row: ' + reason);
-            });
+            executeDeleteRootDeliveryRow(root_delivery_id);
 
             deleteCustomDeliveryRow(custom_delivery_id, custom_delivery_table).then( function(result) {
                 console.log('Deleted custom delivery row: ' + custom_delivery_id
@@ -328,6 +337,16 @@ var finishCustomDelivery = function(action, dispatchStr) {
     }).catch( function(reason) {
         console.log('Failed to finish custom delivery: ' + reason);
     });
+}
+
+// Convenience because we call this on any kind of error
+var executeDeleteRootDeliveryRow = function(root_delivery_id) {
+    deleteRootDeliveryRow(root_delivery_id).then( function(result) {
+        console.log('Deleted root delivery row: ' + root_delivery_id);
+    }).catch( function(reason) {
+        console.log('Failed to delete root delivery row: ' + reason);
+    });
+
 }
 
 /************************** UI Rending functions *********************************/
