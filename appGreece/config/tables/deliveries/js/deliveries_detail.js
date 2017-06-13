@@ -12,14 +12,12 @@ function cbSuccess(result) {
   $('#ben_code').prepend(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
   $('#del_id').prepend(odkCommon.localizeText(locale, 'delivery_id') + ": ");
   $('#auth_name').prepend(odkCommon.localizeText(locale, 'authorization_name') + ": ");
-  $('#del_time').prepend(odkCommon.localizeText(locale, 'date_time') + ": ");
   $('#item_pack_name').prepend(odkCommon.localizeText(locale, 'item_pack_name') + ": ");
 
 
   $('#inner_ben_code').text(deliveriesResultSet.get('beneficiary_code'));
   $('#inner_del_id').text(deliveriesResultSet.get('_id'));
   $('#inner_auth_name').text(deliveriesResultSet.get('authorization_name'));
-  $('#inner_del_time').text(deliveriesResultSet.get('date_time'));
   $('#inner_item_pack_name').text(deliveriesResultSet.get('item_pack_name'));
 
   odkData.query('entitlements', '_id = ? and (is_delivered = ? or is_delivered = ?) and _savepoint_type = ?',
