@@ -7,4 +7,4 @@ receive_signature,receive_signature,mimeUri,"[""receive_signature_contentType"",
 receive_signature_contentType,contentType,mimeType,[]
 receive_signature_uriFragment,uriFragment,rowpath,[]
 signature,signature,string,[]
-summary,summary,undefined,[]
+summary,summary,string,[]

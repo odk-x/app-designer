@@ -236,6 +236,11 @@
         "name": "item_pack_name",
         "isSessionVariable": true,
         "_row_num": 12
+      },
+      {
+        "type": "string",
+        "name": "summary",
+        "_row_num": 13
       }
     ],
     "settings": [
@@ -739,10 +744,15 @@
         "elementKey": "item_pack_name"
       },
       "summary": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 7,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 13,
+            "section_name": "model"
           }
         ],
         "elementKey": "summary"
@@ -1390,10 +1400,15 @@
         "elementPath": "item_pack_name"
       },
       "summary": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 7,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 13,
+            "section_name": "model"
           }
         ],
         "elementKey": "summary",
