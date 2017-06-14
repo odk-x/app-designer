@@ -29,7 +29,7 @@ var resumeFn = function(fIdxStart) {
         entitlementsResultSet = result;
 
         idxStart = fIdxStart;
-        console.log('resumeFn called. idxStart: ' + idxStart);
+        odkCommon.log('E','resumeFn called. idxStart: ' + idxStart);
         // The first time through we're going to make a map of typeId to
         // typeName so that we can display the name of each shop's specialty.
         if (idxStart === 0) {
@@ -47,7 +47,7 @@ var resumeFn = function(fIdxStart) {
                 // have set up to have the row id
                 var containingDiv = jqueryObject.closest('.item_space');
                 var rowId = containingDiv.attr('rowId');
-                console.log('clicked with rowId: ' + rowId);
+                odkCommon.log('E','clicked with rowId: ' + rowId);
                 // make sure we retrieved the rowId
                 if (rowId !== null && rowId !== undefined) {
                     if (entitlementsResultSet.getData(0, 'is_delivered') === 'true'
@@ -62,7 +62,7 @@ var resumeFn = function(fIdxStart) {
 
         displayGroup(idxStart, result);
     }).catch( function(reason) {
-        console.log("Failed to get view data: " + reason);
+        odkCommon.log('E',"Failed to get view data: " + reason);
     });
 
 
@@ -70,7 +70,7 @@ var resumeFn = function(fIdxStart) {
 
 
 var launchDeliveryDetailView = function(entitlement_id) {
-    console.log("Launching delivery detail view for entitlement: " + entitlement_id);
+    odkCommon.log('E',"Launching delivery detail view for entitlement: " + entitlement_id);
 
     var deliveryIdPromise = new Promise(function(resolve, reject) {
         odkData.query(defaultDeliveryTable, 'entitlement_id = ?', [entitlement_id], null,
@@ -83,7 +83,7 @@ var launchDeliveryDetailView = function(entitlement_id) {
                                      'config/tables/deliveries/html/deliveries_detail.html')
         }
     }).catch(function(reason) {
-        console.log("Failed to retrieve delivery: " + reason);
+        odkCommon.log('E',"Failed to retrieve delivery: " + reason);
     });
 }
 
@@ -93,13 +93,13 @@ var launchDeliveryDetailView = function(entitlement_id) {
  * and launch the UI to either perform a simple or a custom delivery
  **/
 var prepareToDeliver = function(entitlement_id) {
-    console.log("Preparing to deliver entitlement: " + entitlement_id);
+    odkCommon.log('E',"Preparing to deliver entitlement: " + entitlement_id);
 
     var entitlement_row = null;
     var authTableRow = null;
 
     getEntitlementRow(entitlement_id).then( function(result) {
-        console.log('Got entitlement row');
+        odkCommon.log('E','Got entitlement row');
         if (!result || result.getCount === 0) {
             throw ('Failed to retrieve entitlement.');
         }
@@ -107,13 +107,13 @@ var prepareToDeliver = function(entitlement_id) {
 
         return getCustomDeliveryForm(entitlement_row.get('authorization_id'));
     }).then( function (result) {
-        console.log('Got auth row');
+        odkCommon.log('E','Got auth row');
         if (!result || result.getCount() === 0) {
-            console.log('Failed to retrieve custom delivery form. Defaulting to simple delivery');
+            odkCommon.log('E','Failed to retrieve custom delivery form. Defaulting to simple delivery');
             performSimpleDelivery(entitlement_id);
             return;
         }
-        console.log('auth row count: ' + result.getCount())
+        odkCommon.log('E','auth row count: ' + result.getCount())
             authTableRow = result;
 
         var delivery_table = authTableRow.getData(0, 'delivery_table');
@@ -135,12 +135,12 @@ var prepareToDeliver = function(entitlement_id) {
         }
 
     }).catch( function(reason) {
-        console.log('Failed to prepare delivery: ' + reason);
+        odkCommon.log('E','Failed to prepare delivery: ' + reason);
     });
 }
 
 var performSimpleDelivery = function(entitlement_id) {
-    console.log('Performing simple delivery');
+    odkCommon.log('E','Performing simple delivery');
     odkTables.launchHTML(null,
                          'config/assets/deliver.html?entitlement_id='
                          + encodeURIComponent(entitlement_id)
@@ -149,16 +149,16 @@ var performSimpleDelivery = function(entitlement_id) {
 }
 
 var performCustomDelivery = function(entitlement_row, entitlement_id, delivery_table, delivery_form) {
-    console.log('Performing custom delivery: ' + delivery_form);
+    odkCommon.log('E','Performing custom delivery: ' + delivery_form);
 
     addDeliveryRow(entitlement_row).then( function(result) {
-        console.log('Added delivery row');
+        odkCommon.log('E','Added delivery row');
         if (!result || result.getCount === 0) {
             throw ('Failed to add delivery to root table.');
         }
         var root_delivery_row = result;
         var root_delivery_row_id = root_delivery_row.get('_id');
-        console.log('Created new row in root delivery table: ' + root_delivery_row_id);
+        odkCommon.log('E','Created new row in root delivery table: ' + root_delivery_row_id);
 
         var jsonMap = {};
         setJSONMap(jsonMap, 'delivery_id', root_delivery_row_id);
@@ -178,7 +178,7 @@ var performCustomDelivery = function(entitlement_row, entitlement_id, delivery_t
         // Control flow is now handed off to the delivery user interface.
         // When that returns it will trigget actionCBFn, where we will finalize
     }).catch( function(reason) {
-        console.log('Failed to perform custom delivery: ' + reason);
+        odkCommon.log('E','Failed to perform custom delivery: ' + reason);
     });
 }
 
@@ -186,7 +186,7 @@ var performCustomDelivery = function(entitlement_row, entitlement_id, delivery_t
 
 var actionCBFn = function() {
     var action = odkCommon.viewFirstQueuedAction();
-    console.log('callback entered with action: ' + action);
+    odkCommon.log('E','callback entered with action: ' + action);
 
     if (action === null || action === undefined) {
         // The queue is empty
@@ -195,7 +195,7 @@ var actionCBFn = function() {
 
     var dispatchStr = JSON.parse(action.dispatchStruct);
     if (dispatchStr === null || dispatchStr === undefined) {
-        console.log('Error: missing dispatch strct');
+        odkCommon.log('E','Error: missing dispatch strct');
         return;
     }
 
@@ -205,7 +205,7 @@ var actionCBFn = function() {
             finishCustomDelivery(action, dispatchStr);
             break;
         default:
-            console.log("Error: unrecognized action type in callback");
+            odkCommon.log('E',"Error: unrecognized action type in callback");
     }
 
     odkCommon.removeFirstQueuedAction();
@@ -216,31 +216,31 @@ var finishCustomDelivery = function(action, dispatchStr) {
 
     var result = action.jsonValue.result;
 
-    console.log("Finishing custom delivery");
-    console.log(result);
+    odkCommon.log('E',"Finishing custom delivery");
+    odkCommon.log('E',result);
 
     var root_delivery_id = dispatchStr['deliveryId'];
     if (root_delivery_id === null || root_delivery_id === undefined) {
-        console.log("Error: no root delivery id");
+        odkCommon.log('E',"Error: no root delivery id");
         return;
     }
 
     if (result === null || result === undefined) {
-        console.log("Error: no result object on delivery");
+        odkCommon.log('E',"Error: no result object on delivery");
         executeDeleteRootDeliveryRow(root_delivery_id);
         return;
     }
 
     var custom_delivery_id = result.instanceId;
     if (custom_delivery_id === null || custom_delivery_id === undefined) {
-        console.log("Error: no instance ID on delivery");
+        odkCommon.log('E',"Error: no instance ID on delivery");
         executeDeleteRootDeliveryRow(root_delivery_id);
         return;
     }
 
     var custom_delivery_table = dispatchStr[deliveryTableKey];
     if (custom_delivery_table === null || custom_delivery_table === undefined) {
-        console.log("Error: no delivery table name");
+        odkCommon.log('E',"Error: no delivery table name");
         executeDeleteRootDeliveryRow(root_delivery_id);
         return;
     }
@@ -260,10 +260,10 @@ var finishCustomDelivery = function(action, dispatchStr) {
 
         // Update the entitlement to reflect the delivery status
         updateEntitlementDeliveryStatus(entitlement_id, is_delivered).then( function(result) {
-            console.log('Updated entitlement delivery status: ' + entitlement_id + ' to: '
+            odkCommon.log('E','Updated entitlement delivery status: ' + entitlement_id + ' to: '
                         + is_delivered);
         }).catch( function(reason) {
-            console.log('Failed to update entitlement delivery status: ' + reason);
+            odkCommon.log('E','Failed to update entitlement delivery status: ' + reason);
         });
 
         if ((is_delivered === 'true' || is_delivered === 'TRUE')
@@ -271,10 +271,10 @@ var finishCustomDelivery = function(action, dispatchStr) {
 
             // Successfully delivered, so update the root directory
             updateRootDeliveryStatus(root_delivery_id, is_delivered).then( function(result) {
-                console.log('Updated root delivery status: ' + root_delivery_id + ' to: '
+                odkCommon.log('E','Updated root delivery status: ' + root_delivery_id + ' to: '
                             + is_delivered);
             }).catch( function(reason) {
-                console.log('Failed to update root delivery status: ' + reason);
+                odkCommon.log('E','Failed to update root delivery status: ' + reason);
             });
 
         } else {
@@ -283,23 +283,23 @@ var finishCustomDelivery = function(action, dispatchStr) {
             executeDeleteRootDeliveryRow(root_delivery_id);
 
             deleteCustomDeliveryRow(custom_delivery_id, custom_delivery_table).then( function(result) {
-                console.log('Deleted custom delivery row: ' + custom_delivery_id
+                odkCommon.log('E','Deleted custom delivery row: ' + custom_delivery_id
                             + ' from table: ' + custom_delivery_table);
             }).catch( function(reason) {
-                console.log('Failed to delete custom delivery row: ' + reason);
+                odkCommon.log('E','Failed to delete custom delivery row: ' + reason);
             });
         }
     }).catch( function(reason) {
-        console.log('Failed to finish custom delivery: ' + reason);
+        odkCommon.log('E','Failed to finish custom delivery: ' + reason);
     });
 }
 
 // Convenience because we call this on any kind of error
 var executeDeleteRootDeliveryRow = function(root_delivery_id) {
     deleteRootDeliveryRow(root_delivery_id).then( function(result) {
-        console.log('Deleted root delivery row: ' + root_delivery_id);
+        odkCommon.log('E','Deleted root delivery row: ' + root_delivery_id);
     }).catch( function(reason) {
-        console.log('Failed to delete root delivery row: ' + reason);
+        odkCommon.log('E','Failed to delete root delivery row: ' + reason);
     });
 
 }
@@ -307,7 +307,7 @@ var executeDeleteRootDeliveryRow = function(root_delivery_id) {
 /************************** UI Rending functions *********************************/
 
 var displayGroup = function(idxStart, entitlementsResultSet) {
-    console.log('displayGroup called. idxStart: ' + idxStart);
+    odkCommon.log('E','displayGroup called. idxStart: ' + idxStart);
 
     /* If the list comes back empty, inform the user */
     if (entitlementsResultSet.getCount() === 0) {
