@@ -372,12 +372,12 @@ var displayGroup = function(idxStart, entitlementsResultSet) {
       item.attr('rowId', entitlementsResultSet.getRowId(i));
       item.attr('class', 'item_space');
       item.attr('id', entitlementsResultSet.getRowId(i));
-      var auth_name = entitlementsResultSet.getData(i, 'authorization_name');
+      var auth_name = entitlementsResultSet.getData(i, 'item_pack_name');
       item.text(auth_name);
 
       var item2 = $('<li>');
       item2.attr('class', 'detail');
-      var ipn = entitlementsResultSet.getData(i, 'item_pack_name');
+      var ipn = entitlementsResultSet.getData(i, 'authorization_name');
       item2.text(ipn);
 
       /* Creates arrow icon (Nothing to edit here) */
@@ -385,7 +385,6 @@ var displayGroup = function(idxStart, entitlementsResultSet) {
       chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
       chevron.attr('class', 'chevron');
       item.append(chevron);
-      item.append(item2);
       item.append(item2);
 
       $('#list').append(item);

@@ -13,14 +13,8 @@ function cbSuccess(result) {
     console.log(registrationResultSet.get('beneficiary_code'));
     $('#title').text(registrationResultSet.get('beneficiary_code'));
     $('#title').prepend(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
-
-    $('#inner_address').text(registrationResultSet.get('address'));
-    $('#inner_telephone').text(registrationResultSet.get('telephone'));
-    $('#inner_mobile_provider').text(registrationResultSet.get('mobile_provider'));
-
-    $('#address').prepend(odkCommon.localizeText(locale, 'address') + ": ");
-    $('#telephone').prepend(odkCommon.localizeText(locale, 'telephone') + ": ");
-    $('#mobile_provider').prepend(odkCommon.localizeText(locale, 'mobile_provider') + ": ");
+    
+    
 
     $("#household").click(function(e) {
         e.preventDefault();   
@@ -69,6 +63,8 @@ function cbFailure(error) {
     console.log('registration_detail cbFailure: getViewData failed with message: ' + error);
 }
 
+
+
 function updateCBSuccess(result) {
     console.log('Update is_active callback success');
     $("#followup").prop("disabled",true);
@@ -99,7 +95,26 @@ function entCBSuccess(result) {
         updateSubListView(true)
     });
 
+    odkData.query('registrationMember', 'beneficiary_code = ? and (is_head_of_household = ? or is_head_of_household = ?)',
+                      [registrationResultSet.get('beneficiary_code'), 'true', 'TRUE'],
+                      null, null, null, null, null, null, null, headCBSuccess, headCBFailure);
+
   updateSubListView(false);
+}
+
+function headCBSuccess(result) {
+    $('#head_of_household').prepend("Head of Household: ");
+    $('#head_id').prepend("Head of Household ID: ");
+    $('#hh_size').prepend("Household Size: ");
+    $('#caravan_code').prepend("Caravan Code: ");
+    $('#inner_head_of_household').text(result.get('first_last_name'));
+    $('#inner_head_id').text(result.get('id_number'));
+    $('#inner_hh_size').text(registrationResultSet.get('hh_size'));
+    $('#inner_caravan_code').text(registrationResultSet.get('tent_caravan'));
+ }   
+
+function headCBFailure(error) {
+    console.log('headCBFailure with error: ' + error);
 }
 
 function updateSubListView(forDelivered) {
