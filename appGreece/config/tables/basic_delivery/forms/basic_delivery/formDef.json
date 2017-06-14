@@ -27,13 +27,13 @@
         "_row_num": 4
       },
       {
-        "clause": "end screen",
-        "_row_num": 5
-      },
-      {
         "type": "assign",
         "name": "is_delivered",
         "calculation": "\"TRUE\"",
+        "_row_num": 5
+      },
+      {
+        "clause": "end screen",
         "_row_num": 6
       }
     ],
@@ -332,10 +332,6 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
-            "section_name": "survey"
-          },
-          {
             "_row_num": 4,
             "section_name": "model"
           }
@@ -419,27 +415,18 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 5,
-              "__rowNum__": 4,
+              "_row_num": 6,
+              "__rowNum__": 5,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nassign('is_delivered', \"TRUE\");\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
-          },
-          {
-            "type": "assign",
-            "name": "is_delivered",
-            "calculation": "\"TRUE\"",
-            "_row_num": 6,
-            "__rowNum__": 5,
-            "_token_type": "assign",
-            "operationIdx": 1
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
             "_row_num": 7,
-            "operationIdx": 2
+            "operationIdx": 1
           },
           {
             "_row_num": 7,
@@ -448,19 +435,19 @@
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 3
+            "operationIdx": 2
           },
           {
             "_token_type": "resume",
             "clause": "resume",
             "_row_num": 7,
-            "operationIdx": 4
+            "operationIdx": 3
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_contents": 3,
-          "_screen7": 3
+          "_contents": 2,
+          "_screen7": 2
         }
       },
       "initial": {
@@ -602,10 +589,6 @@
       "is_delivered": {
         "type": "string",
         "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          },
           {
             "_row_num": 4,
             "section_name": "model"
