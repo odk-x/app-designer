@@ -164,6 +164,12 @@ var performCustomDelivery = function(entitlement_row, entitlement_id, delivery_t
         setJSONMap(jsonMap, 'delivery_id', root_delivery_row_id);
         setJSONMap(jsonMap, 'entitlement_id', entitlement_id);
 
+        // We also need to add group permission fields
+        setJSONMap(jsonMap, '_group_read_only', entitlement_row.get('_group_modify'));
+
+        var user = odkCommon.getActiveUser();
+        setJSONMap(jsonMap, '_row_owner', user);
+
         var dispatchStruct = JSON.stringify({actionTypeKey: actionAddCustomDelivery,
             deliveryId: root_delivery_row_id,
             deliveryTableKey: delivery_table});
