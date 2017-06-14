@@ -1,6 +1,6 @@
 'use strict';
 
-var LOG_TAG = 'entitlements_list: '
+var LOG_TAG = 'entitlements_list: ';
 
 var idxStart = -1;
 var actionTypeKey = "actionTypeKey";
@@ -267,8 +267,8 @@ var finishCustomDelivery = function(action, dispatchStr) {
         dbActions.push(updateEntitlementDeliveryStatus(entitlement_id, is_delivered));
 
         if ((is_delivered === 'true' || is_delivered === 'TRUE')
-            odkCommon.log('I', LOG_TAG +  "Delivery succeeded; update rows");
             && savepoint_type === savepointSuccess) {
+            odkCommon.log('I', LOG_TAG +  "Delivery succeeded; update rows");
 
             dbActions.push(updateRootDeliveryStatus(root_delivery_id, is_delivered));
 
