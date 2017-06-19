@@ -1328,6 +1328,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/plot-list.css',
 			'config/assets/css/plot-detail.css',
 			'config/assets/css/plot-graph.css',
+			'config/assets/css/plot-report.css',
+			'config/assets/css/plot-view.css',
 			'config/assets/css/visit-list.css',
 			'config/assets/css/visit-detail.css',
 			'config/assets/plotter.html',
