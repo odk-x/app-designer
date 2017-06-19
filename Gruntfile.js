@@ -134,6 +134,8 @@ module.exports = function (grunt) {
         outputDbDir: 'output/db',
         // The directory where csvs are output.
         outputCsvDir: 'output/csv',
+        // The directory where the device.properties and app.properties objects are stored
+        outputPropsDir: 'output/props',
         // The directory where the debug objects are output.
         outputDebugDir: 'output/debug',
         // The db directory path on the phone. %APP% should be replaced by app name
@@ -272,7 +274,13 @@ module.exports = function (grunt) {
     grunt.registerTask(
         'adbpush',
         'Perform all the adbpush tasks',
-        ['adbpush-collect', 'adbpush-default-app']);
+        ["adbpull-props", "remove-folders", 'adbpush-collect', 'adbpush-default-app', "adbpush-props"]);
+
+    grunt.registerTask(
+        'clean',
+        'wipe the device',
+        ["adbpull-props", "remove-folders", "adbpush-props", "setup"]);
+
 
     grunt.registerTask(
         'adbpull-debug',
@@ -1957,4 +1965,74 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 
         });
 
+    grunt.registerTask(
+        "killall",
+        "Force stops survey, tables and services",
+        function killall() {
+            var apps = ["survey", "tables", "services"];
+            for (var i = 0; i < apps.length; i++) {
+                console.log("Force stopping ".concat(apps[i]));
+                grunt.task.run("exec:adbshell:am force-stop org.opendatakit.".concat(apps[i]));
+            }
+        });
+
+    grunt.registerTask(
+        "remove-folders",
+        "Removes the opendatakit folders",
+        function remove_folders() {
+            grunt.task.run("killall");
+            var folders = [tablesConfig.deviceMount, "/sdcard/odk"];
+            for (var i = 0; i < folders.length; i++) {
+                console.log("Deleting ".concat(folders[i]));
+                grunt.task.run("exec:adbshell:rm -rf ".concat(folders[i]));
+            }
+        });
+    grunt.registerTask(
+        "adbpull-props",
+        "Copies the properties from the device",
+        function props() {
+            var base = tablesConfig.deviceMount.concat("/", tablesConfig.appName);
+            var destbase = tablesConfig.appDir.concat("/", tablesConfig.outputPropsDir, "/");
+            var files = ["/config/assets/app.properties", "/data/device.properties"];
+            grunt.task.run("force:on")
+            for (var i = 0; i < files.length; i++) {
+                grunt.task.run("exec:adbpull:".concat(base, files[i], ":", destbase, basename(files[i])));
+            }
+            grunt.task.run("force:restore")
+        });
+    grunt.registerTask(
+        "adbpush-props",
+        "Copies the properties to the device",
+        function props() {
+            var base = tablesConfig.deviceMount.concat("/", tablesConfig.appName);
+            var destbase = tablesConfig.appDir.concat("/", tablesConfig.outputPropsDir, "/");
+            var files = ["/config/assets/app.properties", "/data/device.properties"];
+            grunt.task.run("force:on")
+            for (var i = 0; i < files.length; i++) {
+                grunt.task.run("exec:adbpush:".concat(destbase, basename(files[i]), ":", base, files[i]));
+            }
+            grunt.task.run("force:restore")
+        });
+    var basename = function basename(path) {
+        var idx = path.lastIndexOf("/");
+        if (path.length != idx + 1) {
+            return path.substr(idx + 1);
+        } else {
+            return basename(path.substr(0, idx))
+        }
+    }
+    grunt.registerTask(
+        "setup",
+        "Launch the login and sync screen",
+        function() {
+            grunt.task.run("exec:adbshell:am start -a android.intent.action.MAIN -n org.opendatakit.services/.sync.actions.activities.SyncActivity --es appName default --es showLogin true");
+        }
+    )
+    // https://stackoverflow.com/questions/16612495/continue-certain-tasks-in-grunt-even-if-one-fails
+    var previous_force_state = grunt.option("force");
+    grunt.registerTask("force",function(set){
+        if (set === "on") grunt.option("force", true);
+        if (set === "off") grunt.option("force", false);
+        if (set === "restore") grunt.option("force", previous_force_state);
+    });
 };
