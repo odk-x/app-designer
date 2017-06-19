@@ -75,7 +75,8 @@ window.odkData = {
 //         console.log('odkData: query: Need to include the KVS is ' + needToIncludeKVS);
 
         // Test always make this false
-        that.getOdkDataIf().query(tableId, whereClause, sqlBindParams, groupBy, 
+		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+        that.getOdkDataIf().query(tableId, whereClause, JSON.stringify(sqlBindParams), groupBy, 
             having, orderByElementKey, orderByDirection, limit, offset, includeKVS, req._callbackId);
 //             having, orderByElementKey, orderByDirection, limit, offset, false, req._callbackId);
     },
@@ -86,7 +87,8 @@ window.odkData = {
         var req = that.queueRequest('arbitraryQuery', successCallbackFn, failureCallbackFn);
         console.log('arbitraryQuery cbId=' + req._callbackId);
 
-        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParams, limit, offset, req._callbackId);
+		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, JSON.stringify(sqlBindParams), limit, offset, req._callbackId);
     },
 
     getRows: function(tableId, rowId, successCallbackFn, failureCallbackFn) {

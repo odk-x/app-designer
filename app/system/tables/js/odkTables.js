@@ -81,7 +81,8 @@ window.odkTables = {
                 ' so opening list view.');
 				
 		var extrasBundle = { sqlWhereClause: sqlWhereClause, 
-						sqlSelectionArgs: sqlSelectionArgs,
+						// pass as JSON string so we can bind integers, numerics and booleans
+						sqlSelectionArgs: JSON.stringify(sqlSelectionArgs),
 						// sqlGroupByArgs: 
 						// sqlHavingClause:
 						// sqlOrderByElementKey:
@@ -117,7 +118,8 @@ window.odkTables = {
         }
 				
 		var extrasBundle = { sqlWhereClause: sqlWhereClause, 
-						sqlSelectionArgs: sqlSelectionArgs,
+						// pass as JSON string so we can bind integers, numerics and booleans
+						sqlSelectionArgs: JSON.stringify(sqlSelectionArgs),
 						// sqlGroupByArgs: 
 						// sqlHavingClause:
 						// sqlOrderByElementKey:
@@ -157,7 +159,8 @@ window.odkTables = {
         }
 				
 		var extrasBundle = { sqlWhereClause: sqlWhereClause, 
-						sqlSelectionArgs: sqlSelectionArgs,
+						// pass as JSON string so we can bind integers, numerics and booleans
+						sqlSelectionArgs: JSON.stringify(sqlSelectionArgs),
 						// sqlGroupByArgs: 
 						// sqlHavingClause:
 						// sqlOrderByElementKey:
@@ -199,7 +202,8 @@ window.odkTables = {
         }
 				
 		var extrasBundle = { sqlWhereClause: sqlWhereClause, 
-						sqlSelectionArgs: sqlSelectionArgs,
+						// pass as JSON string so we can bind integers, numerics and booleans
+						sqlSelectionArgs: JSON.stringify(sqlSelectionArgs),
 						// sqlGroupByArgs: 
 						// sqlHavingClause:
 						// sqlOrderByElementKey:
@@ -308,7 +312,8 @@ window.odkTables = {
         throw 'setSubListView()--too many arguments';
       }
 
-      odkTablesIf.setSubListView(tableId, sqlWhereClause, sqlSelectionArgs, relativePath);
+	  // JSON.stringify the sqlSelectionArgs so we can pass integer, numeric and boolean as-is
+      odkTablesIf.setSubListView(tableId, sqlWhereClause, JSON.stringify(sqlSelectionArgs), relativePath);
 
     },
 
