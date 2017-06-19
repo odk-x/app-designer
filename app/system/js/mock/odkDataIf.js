@@ -519,10 +519,13 @@ var odkDataIf = {
         throw new Error("Not implemented in app-designer");
     },
 
-    query: function(tableId, whereClause, sqlBindParams, groupBy, having,
+    query: function(tableId, whereClause, sqlBindParamsJSON, groupBy, having,
             orderByElementKey, orderByDirection, limit, offset, includeKVS, _callbackId) {
         var that = this;
 
+		var sqlBindParams = (sqlBindParamsJSON === null || sqlBindParamsJSON === undefined) ?
+			[] : JSON.parse(sqlBindParamsJSON);
+			
         var ctxt = that.newStartContext(_callbackId);
 
         that._getTableDef($.extend({}, ctxt, {
@@ -555,10 +558,14 @@ var odkDataIf = {
         }), tableId);
     },
 
-    arbitraryQuery: function(tableId, sqlCommand, sqlBindParams, limit, offset, _callbackId) {
+    arbitraryQuery: function(tableId, sqlCommand, sqlBindParamsJSON, limit, offset, _callbackId) {
         var that = this;
 
+		var sqlBindParams = (sqlBindParamsJSON === null || sqlBindParamsJSON === undefined) ?
+			[] : JSON.parse(sqlBindParamsJSON);
+
         var ctxt = that.newStartContext(_callbackId);
+
         that._getTableDef($.extend({}, ctxt, {
             success: function(tableDef) {
                 var sqlStatement = {
