@@ -681,6 +681,16 @@
         "_row_num": 22
       }
     ],
+    "model": [
+      {
+        "type": "select_multiple",
+        "name": "visited_continents",
+        "default": [
+          "Africa"
+        ],
+        "_row_num": 2
+      }
+    ],
     "settings": [
       {
         "setting_name": "table_id",
@@ -1077,6 +1087,28 @@
       }
     },
     "model": {
+      "visited_continents": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "visited_continents_items"
+        },
+        "valuesList": "continents",
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "default": [
+          "Africa"
+        ],
+        "elementKey": "visited_continents"
+      },
       "default_rating": {
         "_defn": [
           {
@@ -1281,21 +1313,6 @@
           }
         },
         "elementKey": "location"
-      },
-      "visited_continents": {
-        "_defn": [
-          {
-            "_row_num": 38,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "visited_continents_items"
-        },
-        "valuesList": "continents",
-        "elementKey": "visited_continents"
       },
       "visited_seattle": {
         "_defn": [
@@ -2572,6 +2589,38 @@
       }
     },
     "dataTableModel": {
+      "visited_continents": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "visited_continents_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "visited_continents.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "continents",
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "default": [
+          "Africa"
+        ],
+        "elementKey": "visited_continents",
+        "elementName": "visited_continents",
+        "elementSet": "data",
+        "elementPath": "visited_continents",
+        "listChildElementKeys": [
+          "visited_continents_items"
+        ]
+      },
       "default_rating": {
         "_defn": [
           {
@@ -2883,31 +2932,6 @@
         ],
         "notUnitOfRetention": true
       },
-      "visited_continents": {
-        "_defn": [
-          {
-            "_row_num": 38,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "visited_continents_items",
-          "elementName": "items",
-          "elementSet": "data",
-          "elementPath": "visited_continents.items",
-          "notUnitOfRetention": true
-        },
-        "valuesList": "continents",
-        "elementKey": "visited_continents",
-        "elementName": "visited_continents",
-        "elementSet": "data",
-        "elementPath": "visited_continents",
-        "listChildElementKeys": [
-          "visited_continents_items"
-        ]
-      },
       "visited_seattle": {
         "_defn": [
           {
@@ -3089,6 +3113,14 @@
         "elementSet": "data",
         "elementPath": "rating"
       },
+      "visited_continents_items": {
+        "type": "string",
+        "elementKey": "visited_continents_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "visited_continents.items",
+        "notUnitOfRetention": true
+      },
       "examples_items": {
         "type": "string",
         "elementKey": "examples_items",
@@ -3186,14 +3218,6 @@
         "elementName": "accuracy",
         "elementSet": "data",
         "elementPath": "location.accuracy"
-      },
-      "visited_continents_items": {
-        "type": "string",
-        "elementKey": "visited_continents_items",
-        "elementName": "items",
-        "elementSet": "data",
-        "elementPath": "visited_continents.items",
-        "notUnitOfRetention": true
       },
       "audio_test_uriFragment": {
         "type": "string",
