@@ -76,7 +76,9 @@ window.odkData = {
 
         // Test always make this false
 		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
-        that.getOdkDataIf().query(tableId, whereClause, JSON.stringify(sqlBindParams), groupBy, 
+		var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+				JSON.stringify(sqlBindParams);
+        that.getOdkDataIf().query(tableId, whereClause, sqlBindParamsJSON, groupBy, 
             having, orderByElementKey, orderByDirection, limit, offset, includeKVS, req._callbackId);
 //             having, orderByElementKey, orderByDirection, limit, offset, false, req._callbackId);
     },
@@ -88,7 +90,9 @@ window.odkData = {
         console.log('arbitraryQuery cbId=' + req._callbackId);
 
 		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
-        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, JSON.stringify(sqlBindParams), limit, offset, req._callbackId);
+		var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+				JSON.stringify(sqlBindParams);
+        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParamsJSON, limit, offset, req._callbackId);
     },
 
     getRows: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
