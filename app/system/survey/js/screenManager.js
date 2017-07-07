@@ -8,16 +8,18 @@
 *    Displays pop-up dialogs and toasts.
 *    Displays the options dialog for changing languages and navigations.
 */
+/* jshint unused: vars */
 define(['opendatakit','backbone','jquery', 'spinner', 'handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
-    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars', 'handlebarsHelpers', 'translations'],
+    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars', 'handlebarsHelpers'],
 function(opendatakit,  Backbone,  $,        spinner,   Handlebars,  screenTypes,  screenPopup, confirmationPopup,
-     optionsPopup,                             languagePopup, _hh, translations) {
+     optionsPopup,                             languagePopup, _hh) {
+/* global odkCommon */
 'use strict';
 verifyLoad('screenManager',
     ['opendatakit','backbone','jquery','spinner','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
-    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' , 'handlebarsHelpers', 'translations'],
+    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' , 'handlebarsHelpers'],
     [opendatakit,  Backbone,  $,        spinner,  Handlebars,  screenTypes,  screenPopup, confirmationPopup,
-     optionsPopup,                             languagePopup, _hh, translations]);
+     optionsPopup,                             languagePopup, _hh]);
 
 return Backbone.View.extend({
     el: "body",
@@ -45,8 +47,8 @@ return Backbone.View.extend({
         "click #yes-btn": "handleConfirmation",
         "click #no-btn": "closeConfirmationPopup"
     },
-    initialize: function(){
-        this.controller = this.options.controller;
+    initialize: function(options){
+        this.controller = options.controller;
         this.$el = $('body');
     },
     cleanUpScreenManager: function(ctxt){
@@ -549,7 +551,7 @@ return Backbone.View.extend({
         }
         var rc = (that.activeScreen && that.activeScreen._renderContext) ?
             that.activeScreen._renderContext : that.renderContext;
-        var rcWithMsg = $.extend({message: msg.message}, rc);
+        var rcWithMsg = $.extend({ message: { text: msg.message} }, rc);
         that.activeScreen.$el.append(that.screenTemplate(rcWithMsg)).trigger('pagecreate');
         //var $screenPopup = $( "#screenPopup" );
         //$('#screenPopup').enhanceWithin().popup();  // calling the popup plugin

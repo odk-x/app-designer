@@ -2,7 +2,7 @@
   "name": "jswebviewer",
   "version": "0.0.0",
   "dependencies": {
-    "jquery": "~1.9.0",
+    "jquery": "~1.12.4",
     "d3-amd": null
   },
   "devDependencies": {

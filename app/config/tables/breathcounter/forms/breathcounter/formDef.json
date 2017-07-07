@@ -5,8 +5,12 @@
         "type": "breathcounter",
         "name": "breath_count",
         "display": {
-          "text": "This breathcounter an example of a custom prompt that launches an intent.",
-          "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+          "prompt": {
+            "text": "This breathcounter an example of a custom prompt that launches an intent."
+          },
+          "hint": {
+            "text": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+          }
         },
         "_row_num": 2
       }
@@ -32,7 +36,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Breathcounter"
+          "title": {
+            "text": "Breathcounter"
+          }
         },
         "_row_num": 4
       }
@@ -45,16 +51,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -70,7 +74,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Breathcounter"
+          "title": {
+            "text": "Breathcounter"
+          }
         },
         "_row_num": 4
       },
@@ -86,7 +92,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -100,12 +108,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Breathcounter"
+          "title": {
+            "text": "Breathcounter"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_definitions": {
+      "_tokens": {}
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -135,8 +148,12 @@
             "type": "breathcounter",
             "name": "breath_count",
             "display": {
-              "text": "This breathcounter an example of a custom prompt that launches an intent.",
-              "hint": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+              "prompt": {
+                "text": "This breathcounter an example of a custom prompt that launches an intent."
+              },
+              "hint": {
+                "text": "Custom prompt behavior is specified in the customPromptTypes.js file and we require a model to be defined on the prompt_types sheet."
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -220,7 +237,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Breathcounter"
+              "title": {
+                "text": "Breathcounter"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -415,21 +434,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -439,6 +450,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -446,6 +481,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -499,7 +542,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Breathcounter\""
+        "_value": "{\"text\":\"Breathcounter\"}"
       }
     ]
   }

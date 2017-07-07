@@ -6,22 +6,82 @@
  */
 define(['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars','jquery'],
 function(database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial,                     $) {
+/* global odkCommon */
 'use strict';
 verifyLoad('handlebarsHelpers',
     ['database','opendatakit','handlebars','formulaFunctions', 'text!templates/labelHint.handlebars','jquery'],
     [database,  opendatakit,  Handlebars,  formulaFunctions,   labelHintPartial,                      $]);
 
-Handlebars.registerHelper('localize', function(textOrLangMap) {
-    var locale = database.getInstanceMetaDataValue('_locale');
-    if ( locale === undefined || locale === null ) {
-        locale = opendatakit.getDefaultFormLocaleValue();
-    }
-    var str = formulaFunctions.localize(textOrLangMap,locale);
-    var context = this;
-    var template = Handlebars.compile(str);
-    context.data = database.getAllDataValues();
-    context.calculates = formulaFunctions.calculates;
-    return template(context);
+var hasLocalization = function() {
+	return function(displayObjectField, options) {
+		var locale = formulaFunctions.getCurrentLocale();
+		var hasLocalization = odkCommon.hasLocalization(locale, displayObjectField);
+		if ( hasLocalization ) {
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
+	};
+};
+
+var hasFieldLocalization = function(fieldName) {
+	return function(displayObjectField, options) {
+		var locale = formulaFunctions.getCurrentLocale();
+		var hasLocalization = odkCommon.hasFieldLocalization(locale, displayObjectField, fieldName);
+		if ( hasLocalization ) {
+			return options.fn(this);
+		} else {
+			return options.inverse(this);
+		}
+	};
+};
+
+var localizeTextField = function(fieldName) {
+	return function(displayObjectField) {
+		var locale = formulaFunctions.getCurrentLocale();
+		var str =  odkCommon.localizeTokenField(locale, displayObjectField, fieldName);
+		if ( str === undefined ) {
+			return "";
+		}
+		var context = this;
+		var template = Handlebars.compile(str);
+		return template(context);
+	};
+};
+
+var localizeUrlField = function(fieldName) {
+	return function(displayObjectField) {
+		var locale = formulaFunctions.getCurrentLocale();
+		var url = odkCommon.localizeUrl(locale, displayObjectField, fieldName, opendatakit.getCurrentFormPath());
+		if ( url === undefined ) {
+			return "";
+		}
+		var context = this;
+		var template = Handlebars.compile(url);
+		return template(context);
+	};
+};
+
+Handlebars.registerHelper('ifHasLocalization', hasLocalization());
+
+Handlebars.registerHelper('ifHasTextLocalization', hasFieldLocalization('text'));
+
+Handlebars.registerHelper('localizeText', localizeTextField('text'));
+
+Handlebars.registerHelper('ifHasImageLocalization', hasFieldLocalization('image'));
+
+Handlebars.registerHelper('localizeImage', localizeUrlField('image'));
+
+Handlebars.registerHelper('ifHasAudioLocalization', hasFieldLocalization('audio'));
+
+Handlebars.registerHelper('localizeAudio', localizeUrlField('audio'));
+
+Handlebars.registerHelper('ifHasVideoLocalization', hasFieldLocalization('video'));
+
+Handlebars.registerHelper('localizeVideo', localizeUrlField('video'));
+
+Handlebars.registerHelper('expandFormDirRelativeUrlPath', function(content) {
+	return formulaFunctions.expandFormDirRelativeUrlPath(content);
 });
 
 Handlebars.registerHelper('metadata', function(fieldName) {
@@ -57,11 +117,6 @@ Handlebars.registerHelper('toString', function(value, options) {
     
 Handlebars.registerHelper('stringify', function(value, options) {
     return new Handlebars.SafeString( JSON.stringify(value,null,options) );
-});
-
-//Where does this get used?
-Handlebars.registerHelper('formDirectory', function(options) {
-    return opendatakit.getCurrentFormPath();
 });
 
 Handlebars.registerHelper('eachProperty', function(context, options) {

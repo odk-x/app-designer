@@ -5,7 +5,9 @@
         "type": "bargraph",
         "values_list": "graph_csv",
         "display": {
-          "text": "Bar Graph"
+          "prompt": {
+            "text": "Bar Graph"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "linegraph",
         "values_list": "linegraph_csv",
         "display": {
-          "text": "Line Graph"
+          "prompt": {
+            "text": "Line Graph"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "piechart",
         "values_list": "piechart_csv",
         "display": {
-          "text": "PieChart"
+          "prompt": {
+            "text": "PieChart"
+          }
         },
         "_row_num": 4
       },
@@ -29,7 +35,9 @@
         "type": "scatterplot",
         "values_list": "scatterplot_csv",
         "display": {
-          "text": "Scatterplot"
+          "prompt": {
+            "text": "Scatterplot"
+          }
         },
         "_row_num": 5
       }
@@ -39,14 +47,14 @@
         "query_name": "regions_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn { data_value:region, display: {title: {text: region} } };\n}).value()",
         "_row_num": 2
       },
       {
         "query_name": "countries_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
+        "callback": "_.map(context, function(place){\nreturn { data_value: place.country, region: place.region, display: {title: {text: place.country} } };\n})",
         "_row_num": 3
       },
       {
@@ -92,7 +100,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Graph Examples"
+          "title": {
+            "text": "Graph Examples"
+          }
         },
         "_row_num": 4
       },
@@ -110,16 +120,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -135,7 +143,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Graph Examples"
+          "title": {
+            "text": "Graph Examples"
+          }
         },
         "_row_num": 4
       },
@@ -156,7 +166,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -170,25 +182,30 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Graph Examples"
+          "title": {
+            "text": "Graph Examples"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_definitions": {
+      "_tokens": {}
+    },
     "queries": {
       "regions_csv": {
         "query_name": "regions_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn { data_value:region, display: {title: {text: region} } };\n}).value()",
         "_row_num": 2
       },
       "countries_csv": {
         "query_name": "countries_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
+        "callback": "_.map(context, function(place){\nreturn { data_value: place.country, region: place.region, display: {title: {text: place.country} } };\n})",
         "_row_num": 3
       },
       "graph_csv": {
@@ -236,7 +253,9 @@
             "type": "bargraph",
             "values_list": "graph_csv",
             "display": {
-              "text": "Bar Graph"
+              "prompt": {
+                "text": "Bar Graph"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -249,7 +268,9 @@
             "type": "linegraph",
             "values_list": "linegraph_csv",
             "display": {
-              "text": "Line Graph"
+              "prompt": {
+                "text": "Line Graph"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -262,7 +283,9 @@
             "type": "piechart",
             "values_list": "piechart_csv",
             "display": {
-              "text": "PieChart"
+              "prompt": {
+                "text": "PieChart"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -275,7 +298,9 @@
             "type": "scatterplot",
             "values_list": "scatterplot_csv",
             "display": {
-              "text": "Scatterplot"
+              "prompt": {
+                "text": "Scatterplot"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -380,7 +405,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Graph Examples"
+              "title": {
+                "text": "Graph Examples"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -561,21 +588,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -585,6 +604,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -592,6 +635,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -645,7 +696,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Graph Examples\""
+        "_value": "{\"text\":\"Graph Examples\"}"
       }
     ]
   }

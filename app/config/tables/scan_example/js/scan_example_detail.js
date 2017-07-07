@@ -1,45 +1,33 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, control, d3, data */
+/* global $, odkData, odkCommon */
 'use strict';
 
-// Handle the case where we are debugging in chrome.
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/scan_example_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log('Could not load data json for table: plot');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
  
-function display() {
+var resultSet = {};
+
+function updateContent() {
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
-    $('#NAME').text(data.get('name'));
-    $('#qrcode').text(data.get('qrcode'));
-    $('#roomNum').text(data.get('roomNum'));
-    $('#stay').text(data.get('stay'));
-    $('#address').text(data.get('address'));
-    $('#mon_chores').text(data.get('mon_chores'));
-    $('#tues_chores').text(data.get('tues_chores'));
-    $('#wed_chores').text(data.get('wed_chores'));
-    $('#thurs_chores').text(data.get('thurs_chores'));
-    $('#fri_chores').text(data.get('fri_chores'));
-    $('#sat_chores').text(data.get('sat_chores'));
-    $('#sun_chores').text(data.get('sun_chores'));
-    $('#comments').text(data.get('comments'));
+    $('#NAME').text(resultSet.get('name'));
+    $('#qrcode').text(resultSet.get('qrcode'));
+    $('#roomNum').text(resultSet.get('roomNum'));
+    $('#stay').text(resultSet.get('stay'));
+    $('#address').text(resultSet.get('address'));
+    $('#mon_chores').text(resultSet.get('mon_chores'));
+    $('#tues_chores').text(resultSet.get('tues_chores'));
+    $('#wed_chores').text(resultSet.get('wed_chores'));
+    $('#thurs_chores').text(resultSet.get('thurs_chores'));
+    $('#fri_chores').text(resultSet.get('fri_chores'));
+    $('#sat_chores').text(resultSet.get('sat_chores'));
+    $('#sun_chores').text(resultSet.get('sun_chores'));
+    $('#comments').text(resultSet.get('comments'));
 
-    var addrUriRelative = data.get('address_image0.uriFragment');
+    var addrUriRelative = resultSet.get('address_image0.uriFragment');
     var addrSrc = '';
     if (addrUriRelative !== null && addrUriRelative !== "") {
-        var addrUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), addrUriRelative);
+        var addrUriAbsolute = odkCommon.getRowFileAsUrl(resultSet.getTableId(), resultSet.getRowId(0), addrUriRelative);
         addrSrc = addrUriAbsolute;
     }
 
@@ -49,10 +37,10 @@ function display() {
     addrThumbnail.attr('id', 'address_image0');
     $('#homeAddress').append(addrThumbnail);
 
-    var stayUriRelative = data.get('stay_image0.uriFragment');
+    var stayUriRelative = resultSet.get('stay_image0.uriFragment');
     var staySrc = '';
     if (stayUriRelative !== null && stayUriRelative !== "") {
-        var stayUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), stayUriRelative);
+        var stayUriAbsolute = odkCommon.getRowFileAsUrl(resultSet.getTableId(), resultSet.getRowId(0), stayUriRelative);
         staySrc = stayUriAbsolute;
     }
 
@@ -63,10 +51,10 @@ function display() {
     $('#lengthOfStay').append(stayThumbnail);
 
 
-    var commentsUriRelative = data.get('comments_image0.uriFragment');
+    var commentsUriRelative = resultSet.get('comments_image0.uriFragment');
     var commentsSrc = '';
     if (commentsUriRelative !== null && commentsUriRelative !== "") {
-        var commentsUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), commentsUriRelative);
+        var commentsUriAbsolute = odkCommon.getRowFileAsUrl(resultSet.getTableId(), resultSet.getRowId(0), commentsUriRelative);
         commentsSrc = commentsUriAbsolute;
     }
 
@@ -76,4 +64,22 @@ function display() {
     commentsThumbnail.attr('id', 'comments_image0');
     $('#handComments').append(commentsThumbnail);
 }
+
+function cbSuccess(result) {
+
+    resultSet = result;
+	// and update the document with the values for this plot
+	updateContent();
+}
+
+function cbFailure(error) {
+
+	// a real application would perhaps clear the document fiels if there were an error
+    console.log('Tea_houses_detail getViewData CB error : ' + error);
+}
+
+var display = function() {
+	
+    odkData.getViewData(cbSuccess, cbFailure);
+};
 

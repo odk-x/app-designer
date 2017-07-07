@@ -18,8 +18,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Current Date and Time<br> {{data.Date_and_Time}}",
-          "hint": "The date and time of this observation"
+          "prompt": {
+            "text": "Current Date and Time<br> {{data.Date_and_Time}}"
+          },
+          "hint": {
+            "text": "The date and time of this observation"
+          }
         },
         "_row_num": 4
       },
@@ -27,8 +31,12 @@
         "type": "string",
         "name": "Description",
         "display": {
-          "text": "Description",
-          "hint": "A brief description of this location"
+          "prompt": {
+            "text": "Description"
+          },
+          "hint": {
+            "text": "A brief description of this location"
+          }
         },
         "required": true,
         "_row_num": 5
@@ -38,8 +46,12 @@
         "values_list": "select_geoweather_conditions",
         "name": "Weather",
         "display": {
-          "text": "Current Weather",
-          "hint": "Record the current conditions at this location"
+          "prompt": {
+            "text": "Current Weather"
+          },
+          "hint": {
+            "text": "Record the current conditions at this location"
+          }
         },
         "_row_num": 6
       },
@@ -47,8 +59,12 @@
         "type": "integer",
         "name": "Temperature",
         "display": {
-          "text": "Outdoor Temperature",
-          "hint": "Record the current outdoor temperature"
+          "prompt": {
+            "text": "Outdoor Temperature"
+          },
+          "hint": {
+            "text": "Record the current outdoor temperature"
+          }
         },
         "_row_num": 7
       },
@@ -56,10 +72,16 @@
         "type": "geopoint",
         "name": "Location",
         "display": {
-          "text": "Location",
-          "hint": "Capture the GPS coordinates of this location"
+          "prompt": {
+            "text": "Location"
+          },
+          "hint": {
+            "text": "Capture the GPS coordinates of this location"
+          },
+          "button_label": {
+            "text": "Record Location"
+          }
         },
-        "buttonLabel": "Record Location",
         "_row_num": 8
       },
       {
@@ -111,7 +133,8 @@
         "linked_table_id": "geoweather_conditions",
         "selection": "Language = ?",
         "selectionArgs": "[ 'en' ]",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     ],
@@ -129,7 +152,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Simple Weather Survey"
+          "title": {
+            "text": "Simple Weather Survey"
+          }
         },
         "_row_num": 4
       },
@@ -149,7 +174,9 @@
         "choice_list_name": "conditions",
         "data_value": "clear",
         "display": {
-          "text": "Clear skies"
+          "title": {
+            "text": "Clear skies"
+          }
         },
         "_row_num": 2
       },
@@ -157,7 +184,9 @@
         "choice_list_name": "conditions",
         "data_value": "partly_clear",
         "display": {
-          "text": "Partly clear skies"
+          "title": {
+            "text": "Partly clear skies"
+          }
         },
         "_row_num": 3
       },
@@ -165,7 +194,9 @@
         "choice_list_name": "conditions",
         "data_value": "overcast",
         "display": {
-          "text": "Overcast (cloudy) skies"
+          "title": {
+            "text": "Overcast (cloudy) skies"
+          }
         },
         "_row_num": 4
       },
@@ -173,7 +204,9 @@
         "choice_list_name": "conditions",
         "data_value": "foggy",
         "display": {
-          "text": "Foggy"
+          "title": {
+            "text": "Foggy"
+          }
         },
         "_row_num": 5
       },
@@ -181,7 +214,9 @@
         "choice_list_name": "conditions",
         "data_value": "drizzle",
         "display": {
-          "text": "Light rain"
+          "title": {
+            "text": "Light rain"
+          }
         },
         "_row_num": 6
       },
@@ -189,7 +224,9 @@
         "choice_list_name": "conditions",
         "data_value": "rain",
         "display": {
-          "text": "Raining"
+          "title": {
+            "text": "Raining"
+          }
         },
         "_row_num": 7
       },
@@ -197,7 +234,9 @@
         "choice_list_name": "conditions",
         "data_value": "thunderstorm",
         "display": {
-          "text": "Thunderstorms"
+          "title": {
+            "text": "Thunderstorms"
+          }
         },
         "_row_num": 8
       },
@@ -205,7 +244,9 @@
         "choice_list_name": "conditions",
         "data_value": "snow",
         "display": {
-          "text": "Snowing"
+          "title": {
+            "text": "Snowing"
+          }
         },
         "_row_num": 9
       }
@@ -218,16 +259,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -243,7 +282,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Simple Weather Survey"
+          "title": {
+            "text": "Simple Weather Survey"
+          }
         },
         "_row_num": 4
       },
@@ -263,7 +304,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -277,7 +320,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Simple Weather Survey"
+          "title": {
+            "text": "Simple Weather Survey"
+          }
         },
         "_row_num": 4
       }
@@ -288,7 +333,9 @@
           "choice_list_name": "conditions",
           "data_value": "clear",
           "display": {
-            "text": "Clear skies"
+            "title": {
+              "text": "Clear skies"
+            }
           },
           "_row_num": 2
         },
@@ -296,7 +343,9 @@
           "choice_list_name": "conditions",
           "data_value": "partly_clear",
           "display": {
-            "text": "Partly clear skies"
+            "title": {
+              "text": "Partly clear skies"
+            }
           },
           "_row_num": 3
         },
@@ -304,7 +353,9 @@
           "choice_list_name": "conditions",
           "data_value": "overcast",
           "display": {
-            "text": "Overcast (cloudy) skies"
+            "title": {
+              "text": "Overcast (cloudy) skies"
+            }
           },
           "_row_num": 4
         },
@@ -312,7 +363,9 @@
           "choice_list_name": "conditions",
           "data_value": "foggy",
           "display": {
-            "text": "Foggy"
+            "title": {
+              "text": "Foggy"
+            }
           },
           "_row_num": 5
         },
@@ -320,7 +373,9 @@
           "choice_list_name": "conditions",
           "data_value": "drizzle",
           "display": {
-            "text": "Light rain"
+            "title": {
+              "text": "Light rain"
+            }
           },
           "_row_num": 6
         },
@@ -328,7 +383,9 @@
           "choice_list_name": "conditions",
           "data_value": "rain",
           "display": {
-            "text": "Raining"
+            "title": {
+              "text": "Raining"
+            }
           },
           "_row_num": 7
         },
@@ -336,7 +393,9 @@
           "choice_list_name": "conditions",
           "data_value": "thunderstorm",
           "display": {
-            "text": "Thunderstorms"
+            "title": {
+              "text": "Thunderstorms"
+            }
           },
           "_row_num": 8
         },
@@ -344,11 +403,16 @@
           "choice_list_name": "conditions",
           "data_value": "snow",
           "display": {
-            "text": "Snowing"
+            "title": {
+              "text": "Snowing"
+            }
           },
           "_row_num": 9
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {
       "select_geoweather_conditions": {
@@ -358,7 +422,8 @@
         "linked_table_id": "geoweather_conditions",
         "selection": "Language = ?",
         "selectionArgs": "[ 'en' ]",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     },
@@ -459,8 +524,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Current Date and Time<br> {{data.Date_and_Time}}",
-              "hint": "The date and time of this observation"
+              "prompt": {
+                "text": "Current Date and Time<br> {{data.Date_and_Time}}"
+              },
+              "hint": {
+                "text": "The date and time of this observation"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -473,8 +542,12 @@
             "type": "string",
             "name": "Description",
             "display": {
-              "text": "Description",
-              "hint": "A brief description of this location"
+              "prompt": {
+                "text": "Description"
+              },
+              "hint": {
+                "text": "A brief description of this location"
+              }
             },
             "required": true,
             "_row_num": 5,
@@ -489,8 +562,12 @@
             "values_list": "select_geoweather_conditions",
             "name": "Weather",
             "display": {
-              "text": "Current Weather",
-              "hint": "Record the current conditions at this location"
+              "prompt": {
+                "text": "Current Weather"
+              },
+              "hint": {
+                "text": "Record the current conditions at this location"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -503,8 +580,12 @@
             "type": "integer",
             "name": "Temperature",
             "display": {
-              "text": "Outdoor Temperature",
-              "hint": "Record the current outdoor temperature"
+              "prompt": {
+                "text": "Outdoor Temperature"
+              },
+              "hint": {
+                "text": "Record the current outdoor temperature"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -517,10 +598,16 @@
             "type": "geopoint",
             "name": "Location",
             "display": {
-              "text": "Location",
-              "hint": "Capture the GPS coordinates of this location"
+              "prompt": {
+                "text": "Location"
+              },
+              "hint": {
+                "text": "Capture the GPS coordinates of this location"
+              },
+              "button_label": {
+                "text": "Record Location"
+              }
             },
-            "buttonLabel": "Record Location",
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
@@ -639,7 +726,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Simple Weather Survey"
+              "title": {
+                "text": "Simple Weather Survey"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -967,21 +1056,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -991,6 +1072,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -998,6 +1103,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1051,7 +1164,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Simple Weather Survey\""
+        "_value": "{\"text\":\"Simple Weather Survey\"}"
       },
       {
         "_partition": "Table",

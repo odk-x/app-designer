@@ -5,7 +5,9 @@
         "type": "text",
         "name": "plot_name",
         "display": {
-          "text": "Enter the name of the plot:"
+          "prompt": {
+            "text": "Enter the name of the plot:"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "geopoint",
         "name": "location",
         "display": {
-          "text": "Capture location:"
+          "prompt": {
+            "text": "Capture location:"
+          }
         },
         "_row_num": 3
       },
@@ -22,7 +26,9 @@
         "values_list": "plant_type",
         "name": "planting",
         "display": {
-          "text": "What type of maize plant is in this plot?"
+          "prompt": {
+            "text": "What type of maize plant is in this plot?"
+          }
         },
         "_row_num": 4
       },
@@ -30,7 +36,9 @@
         "type": "number",
         "name": "plot_size",
         "display": {
-          "text": "How big is this plot in hectares?"
+          "prompt": {
+            "text": "How big is this plot in hectares?"
+          }
         },
         "_row_num": 5
       }
@@ -40,7 +48,9 @@
         "choice_list_name": "plant_type",
         "data_value": "white",
         "display": {
-          "text": "White"
+          "title": {
+            "text": "White"
+          }
         },
         "_row_num": 2
       },
@@ -48,7 +58,9 @@
         "choice_list_name": "plant_type",
         "data_value": "yellow",
         "display": {
-          "text": "Yellow"
+          "title": {
+            "text": "Yellow"
+          }
         },
         "_row_num": 3
       },
@@ -56,7 +68,9 @@
         "choice_list_name": "plant_type",
         "data_value": "orange",
         "display": {
-          "text": "Orange"
+          "title": {
+            "text": "Orange"
+          }
         },
         "_row_num": 4
       }
@@ -75,7 +89,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Plot"
+          "title": {
+            "text": "Plot"
+          }
         },
         "_row_num": 4
       },
@@ -169,16 +185,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -194,7 +208,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Plot"
+          "title": {
+            "text": "Plot"
+          }
         },
         "_row_num": 4
       },
@@ -219,7 +235,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -233,7 +251,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Plot"
+          "title": {
+            "text": "Plot"
+          }
         },
         "_row_num": 4
       }
@@ -244,7 +264,9 @@
           "choice_list_name": "plant_type",
           "data_value": "white",
           "display": {
-            "text": "White"
+            "title": {
+              "text": "White"
+            }
           },
           "_row_num": 2
         },
@@ -252,7 +274,9 @@
           "choice_list_name": "plant_type",
           "data_value": "yellow",
           "display": {
-            "text": "Yellow"
+            "title": {
+              "text": "Yellow"
+            }
           },
           "_row_num": 3
         },
@@ -260,11 +284,16 @@
           "choice_list_name": "plant_type",
           "data_value": "orange",
           "display": {
-            "text": "Orange"
+            "title": {
+              "text": "Orange"
+            }
           },
           "_row_num": 4
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {},
     "calculates": {},
@@ -344,7 +373,9 @@
             "type": "text",
             "name": "plot_name",
             "display": {
-              "text": "Enter the name of the plot:"
+              "prompt": {
+                "text": "Enter the name of the plot:"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -357,7 +388,9 @@
             "type": "geopoint",
             "name": "location",
             "display": {
-              "text": "Capture location:"
+              "prompt": {
+                "text": "Capture location:"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -371,7 +404,9 @@
             "values_list": "plant_type",
             "name": "planting",
             "display": {
-              "text": "What type of maize plant is in this plot?"
+              "prompt": {
+                "text": "What type of maize plant is in this plot?"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -384,7 +419,9 @@
             "type": "number",
             "name": "plot_size",
             "display": {
-              "text": "How big is this plot in hectares?"
+              "prompt": {
+                "text": "How big is this plot in hectares?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -489,7 +526,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Plot"
+              "title": {
+                "text": "Plot"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -789,21 +828,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -813,6 +844,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -820,6 +875,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -852,7 +915,7 @@
         "_aspect": "planting",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"plant_type\",\"data_value\":\"white\",\"display\":{\"text\":\"White\"},\"_row_num\":2},{\"choice_list_name\":\"plant_type\",\"data_value\":\"yellow\",\"display\":{\"text\":\"Yellow\"},\"_row_num\":3},{\"choice_list_name\":\"plant_type\",\"data_value\":\"orange\",\"display\":{\"text\":\"Orange\"},\"_row_num\":4}]"
+        "_value": "[{\"choice_list_name\":\"plant_type\",\"data_value\":\"white\",\"display\":{\"title\":{\"text\":\"White\"}},\"_row_num\":2},{\"choice_list_name\":\"plant_type\",\"data_value\":\"yellow\",\"display\":{\"title\":{\"text\":\"Yellow\"}},\"_row_num\":3},{\"choice_list_name\":\"plant_type\",\"data_value\":\"orange\",\"display\":{\"title\":{\"text\":\"Orange\"}},\"_row_num\":4}]"
       },
       {
         "_partition": "FormType",
@@ -894,7 +957,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Plot\""
+        "_value": "{\"text\":\"Plot\"}"
       },
       {
         "_partition": "Table",

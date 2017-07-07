@@ -1,16 +1,6 @@
-/* global $, odkTables */
+/* global odkData, odkCommon */
 'use strict';
 
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/geotagger_default_location_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 var geoDetailResultSet = {};
 
 function cbSuccess(result) {

@@ -8,7 +8,9 @@
       {
         "type": "finalize",
         "display": {
-          "text": "Save Form"
+          "prompt": {
+            "text": "Save Form"
+          }
         },
         "_row_num": 3
       }
@@ -19,7 +21,9 @@
         "values_list": "self",
         "name": "answering_self_95",
         "display": {
-          "text": "Who is answering for  {{data.name}}?"
+          "prompt": {
+            "text": "Who is answering for  {{data.name}}?"
+          }
         },
         "_row_num": 2
       },
@@ -28,7 +32,9 @@
         "values_list": "no_yes",
         "name": "stuffy_nose",
         "display": {
-          "text": "In the past seven days have you experienced stuffy or runny nose?"
+          "prompt": {
+            "text": "In the past seven days have you experienced stuffy or runny nose?"
+          }
         },
         "_row_num": 3
       },
@@ -41,7 +47,9 @@
         "type": "integer",
         "name": "days_stuffy_nose",
         "display": {
-          "text": "How many days of the past 7 days have you experienced stuffy or runny nose?"
+          "prompt": {
+            "text": "How many days of the past 7 days have you experienced stuffy or runny nose?"
+          }
         },
         "_row_num": 5
       },
@@ -54,7 +62,9 @@
         "values_list": "no_yes",
         "name": "month_stuffy_nose",
         "display": {
-          "text": "Have you ever experienced stuffy or runny nose in the past 2 months?"
+          "prompt": {
+            "text": "Have you ever experienced stuffy or runny nose in the past 2 months?"
+          }
         },
         "_row_num": 7
       },
@@ -67,7 +77,9 @@
         "values_list": "no_yes",
         "name": "fever",
         "display": {
-          "text": "In the past seven days have you experienced fever?"
+          "prompt": {
+            "text": "In the past seven days have you experienced fever?"
+          }
         },
         "_row_num": 9
       },
@@ -80,7 +92,9 @@
         "type": "integer",
         "name": "days_fever",
         "display": {
-          "text": "How many days of the past 7 days have you experienced fever?"
+          "prompt": {
+            "text": "How many days of the past 7 days have you experienced fever?"
+          }
         },
         "_row_num": 11
       },
@@ -93,7 +107,9 @@
         "values_list": "no_yes",
         "name": "month_fever",
         "display": {
-          "text": "Have you experienced fever in the past 2 months"
+          "prompt": {
+            "text": "Have you experienced fever in the past 2 months"
+          }
         },
         "_row_num": 13
       },
@@ -106,7 +122,9 @@
         "values_list": "no_yes",
         "name": "eye_problem",
         "display": {
-          "text": "In the past seven days have you experienced burning irritated or watery eyes?"
+          "prompt": {
+            "text": "In the past seven days have you experienced burning irritated or watery eyes?"
+          }
         },
         "_row_num": 15
       },
@@ -119,7 +137,9 @@
         "type": "integer",
         "name": "days_eye_problem",
         "display": {
-          "text": "How many days of the past 7 days have you experienced burning/irritated or watery eyes?"
+          "prompt": {
+            "text": "How many days of the past 7 days have you experienced burning/irritated or watery eyes?"
+          }
         },
         "_row_num": 17
       },
@@ -132,7 +152,9 @@
         "values_list": "no_yes",
         "name": "month_eye_problem",
         "display": {
-          "text": "Have you experienced burning or irritated eyes in the past 2 months?"
+          "prompt": {
+            "text": "Have you experienced burning or irritated eyes in the past 2 months?"
+          }
         },
         "_row_num": 19
       },
@@ -146,7 +168,9 @@
         "choice_list_name": "self",
         "data_value": "self",
         "display": {
-          "text": "Self"
+          "title": {
+            "text": "Self"
+          }
         },
         "_row_num": 2
       },
@@ -154,7 +178,9 @@
         "choice_list_name": "no_yes",
         "data_value": "no",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 3
       },
@@ -162,7 +188,9 @@
         "choice_list_name": "no_yes",
         "data_value": "yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 4
       }
@@ -186,7 +214,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.5"
+          "title": {
+            "text": "Section 9.5"
+          }
         },
         "_row_num": 5
       },
@@ -538,16 +568,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -568,7 +596,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.5"
+          "title": {
+            "text": "Section 9.5"
+          }
         },
         "_row_num": 5
       },
@@ -583,7 +613,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -597,7 +629,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 9.5"
+          "title": {
+            "text": "Section 9.5"
+          }
         },
         "_row_num": 5
       }
@@ -608,7 +642,9 @@
           "choice_list_name": "self",
           "data_value": "self",
           "display": {
-            "text": "Self"
+            "title": {
+              "text": "Self"
+            }
           },
           "_row_num": 2
         }
@@ -618,7 +654,9 @@
           "choice_list_name": "no_yes",
           "data_value": "no",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 3
         },
@@ -626,7 +664,9 @@
           "choice_list_name": "no_yes",
           "data_value": "yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 4
         }
@@ -1361,14 +1401,18 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 9.5"
+              "title": {
+                "text": "Section 9.5"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "type": "finalize",
             "display": {
-              "text": "Save Form"
+              "prompt": {
+                "text": "Save Form"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1469,7 +1513,9 @@
             "values_list": "self",
             "name": "answering_self_95",
             "display": {
-              "text": "Who is answering for  {{data.name}}?"
+              "prompt": {
+                "text": "Who is answering for  {{data.name}}?"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -1483,7 +1529,9 @@
             "values_list": "no_yes",
             "name": "stuffy_nose",
             "display": {
-              "text": "In the past seven days have you experienced stuffy or runny nose?"
+              "prompt": {
+                "text": "In the past seven days have you experienced stuffy or runny nose?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1496,7 +1544,9 @@
             "type": "integer",
             "name": "days_stuffy_nose",
             "display": {
-              "text": "How many days of the past 7 days have you experienced stuffy or runny nose?"
+              "prompt": {
+                "text": "How many days of the past 7 days have you experienced stuffy or runny nose?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -1510,7 +1560,9 @@
             "values_list": "no_yes",
             "name": "month_stuffy_nose",
             "display": {
-              "text": "Have you ever experienced stuffy or runny nose in the past 2 months?"
+              "prompt": {
+                "text": "Have you ever experienced stuffy or runny nose in the past 2 months?"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -1524,7 +1576,9 @@
             "values_list": "no_yes",
             "name": "fever",
             "display": {
-              "text": "In the past seven days have you experienced fever?"
+              "prompt": {
+                "text": "In the past seven days have you experienced fever?"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -1537,7 +1591,9 @@
             "type": "integer",
             "name": "days_fever",
             "display": {
-              "text": "How many days of the past 7 days have you experienced fever?"
+              "prompt": {
+                "text": "How many days of the past 7 days have you experienced fever?"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -1551,7 +1607,9 @@
             "values_list": "no_yes",
             "name": "month_fever",
             "display": {
-              "text": "Have you experienced fever in the past 2 months"
+              "prompt": {
+                "text": "Have you experienced fever in the past 2 months"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -1565,7 +1623,9 @@
             "values_list": "no_yes",
             "name": "eye_problem",
             "display": {
-              "text": "In the past seven days have you experienced burning irritated or watery eyes?"
+              "prompt": {
+                "text": "In the past seven days have you experienced burning irritated or watery eyes?"
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -1578,7 +1638,9 @@
             "type": "integer",
             "name": "days_eye_problem",
             "display": {
-              "text": "How many days of the past 7 days have you experienced burning/irritated or watery eyes?"
+              "prompt": {
+                "text": "How many days of the past 7 days have you experienced burning/irritated or watery eyes?"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -1592,7 +1654,9 @@
             "values_list": "no_yes",
             "name": "month_eye_problem",
             "display": {
-              "text": "Have you experienced burning or irritated eyes in the past 2 months?"
+              "prompt": {
+                "text": "Have you experienced burning or irritated eyes in the past 2 months?"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -2744,21 +2808,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -2768,6 +2824,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -2775,6 +2855,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",

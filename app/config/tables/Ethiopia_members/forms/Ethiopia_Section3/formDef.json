@@ -8,7 +8,9 @@
       {
         "type": "finalize",
         "display": {
-          "text": "Save Form"
+          "prompt": {
+            "text": "Save Form"
+          }
         },
         "_row_num": 3
       }
@@ -19,7 +21,9 @@
         "values_list": "no_yes",
         "name": "write_language",
         "display": {
-          "text": "Can {{data.name}} read and write in any language?"
+          "prompt": {
+            "text": "Can {{data.name}} read and write in any language?"
+          }
         },
         "_row_num": 2
       },
@@ -28,7 +32,9 @@
         "values_list": "no_yes",
         "name": "attend_school",
         "display": {
-          "text": "Has {{data.name}} ever attended school?"
+          "prompt": {
+            "text": "Has {{data.name}} ever attended school?"
+          }
         },
         "_row_num": 3
       },
@@ -42,7 +48,9 @@
         "values_list": "school_types",
         "name": "school_type",
         "display": {
-          "text": "What kind(s) of school did {{data.name}} primarily attend?"
+          "prompt": {
+            "text": "What kind(s) of school did {{data.name}} primarily attend?"
+          }
         },
         "_row_num": 5
       },
@@ -54,7 +62,9 @@
       {
         "type": "note",
         "display": {
-          "text": "What is the highest grade {{data.name}} completed?"
+          "prompt": {
+            "text": "What is the highest grade {{data.name}} completed?"
+          }
         },
         "_row_num": 7
       },
@@ -63,7 +73,9 @@
         "values_list": "grade_levels",
         "name": "grade_level",
         "display": {
-          "text": "Level:"
+          "prompt": {
+            "text": "Level:"
+          }
         },
         "_row_num": 8
       },
@@ -77,7 +89,9 @@
         "values_list": "post_secondary_types",
         "name": "post_secondary",
         "display": {
-          "text": "If post-secondary:"
+          "prompt": {
+            "text": "If post-secondary:"
+          }
         },
         "_row_num": 10
       },
@@ -87,7 +101,9 @@
         "type": "text",
         "name": "grade_within_level",
         "display": {
-          "text": "WILL INCLUDE CODES"
+          "prompt": {
+            "text": "WILL INCLUDE CODES"
+          }
         },
         "_row_num": 12
       },
@@ -104,7 +120,9 @@
         "values_list": "no_yes",
         "name": "currently_school",
         "display": {
-          "text": "Is  {{data.name}} currently in attending school?"
+          "prompt": {
+            "text": "Is  {{data.name}} currently in attending school?"
+          }
         },
         "_row_num": 16
       },
@@ -118,7 +136,9 @@
         "choice_list_name": "no_yes",
         "data_value": "no",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 2
       },
@@ -126,7 +146,9 @@
         "choice_list_name": "no_yes",
         "data_value": "yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 3
       },
@@ -134,7 +156,9 @@
         "choice_list_name": "school_types",
         "data_value": "formal",
         "display": {
-          "text": "Formal"
+          "title": {
+            "text": "Formal"
+          }
         },
         "_row_num": 4
       },
@@ -142,7 +166,9 @@
         "choice_list_name": "school_types",
         "data_value": "traditional",
         "display": {
-          "text": "Traditional"
+          "title": {
+            "text": "Traditional"
+          }
         },
         "_row_num": 5
       },
@@ -150,7 +176,9 @@
         "choice_list_name": "school_types",
         "data_value": "religious",
         "display": {
-          "text": "Religious"
+          "title": {
+            "text": "Religious"
+          }
         },
         "_row_num": 6
       },
@@ -158,7 +186,9 @@
         "choice_list_name": "grade_levels",
         "data_value": "pre-primary",
         "display": {
-          "text": "Pre-primary."
+          "title": {
+            "text": "Pre-primary."
+          }
         },
         "_row_num": 7
       },
@@ -166,7 +196,9 @@
         "choice_list_name": "grade_levels",
         "data_value": "primary",
         "display": {
-          "text": "Primary"
+          "title": {
+            "text": "Primary"
+          }
         },
         "_row_num": 8
       },
@@ -174,7 +206,9 @@
         "choice_list_name": "grade_levels",
         "data_value": "secondary",
         "display": {
-          "text": "Secondary"
+          "title": {
+            "text": "Secondary"
+          }
         },
         "_row_num": 9
       },
@@ -182,7 +216,9 @@
         "choice_list_name": "grade_levels",
         "data_value": "post_secondary",
         "display": {
-          "text": "Post Secondary"
+          "title": {
+            "text": "Post Secondary"
+          }
         },
         "_row_num": 10
       },
@@ -190,7 +226,9 @@
         "choice_list_name": "post_secondary_types",
         "data_value": "technical_vocational",
         "display": {
-          "text": "Technical/vocational"
+          "title": {
+            "text": "Technical/vocational"
+          }
         },
         "_row_num": 11
       },
@@ -198,7 +236,9 @@
         "choice_list_name": "post_secondary_types",
         "data_value": "university",
         "display": {
-          "text": "University"
+          "title": {
+            "text": "University"
+          }
         },
         "_row_num": 12
       },
@@ -206,7 +246,9 @@
         "choice_list_name": "post_secondary_types",
         "data_value": "graduate_studies",
         "display": {
-          "text": "Graduate studies"
+          "title": {
+            "text": "Graduate studies"
+          }
         },
         "_row_num": 13
       }
@@ -225,7 +267,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 3"
+          "title": {
+            "text": "Section 3"
+          }
         },
         "_row_num": 4
       },
@@ -577,16 +621,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -602,7 +644,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 3"
+          "title": {
+            "text": "Section 3"
+          }
         },
         "_row_num": 4
       },
@@ -617,7 +661,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -631,7 +677,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 3"
+          "title": {
+            "text": "Section 3"
+          }
         },
         "_row_num": 4
       }
@@ -642,7 +690,9 @@
           "choice_list_name": "no_yes",
           "data_value": "no",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 2
         },
@@ -650,7 +700,9 @@
           "choice_list_name": "no_yes",
           "data_value": "yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 3
         }
@@ -660,7 +712,9 @@
           "choice_list_name": "school_types",
           "data_value": "formal",
           "display": {
-            "text": "Formal"
+            "title": {
+              "text": "Formal"
+            }
           },
           "_row_num": 4
         },
@@ -668,7 +722,9 @@
           "choice_list_name": "school_types",
           "data_value": "traditional",
           "display": {
-            "text": "Traditional"
+            "title": {
+              "text": "Traditional"
+            }
           },
           "_row_num": 5
         },
@@ -676,7 +732,9 @@
           "choice_list_name": "school_types",
           "data_value": "religious",
           "display": {
-            "text": "Religious"
+            "title": {
+              "text": "Religious"
+            }
           },
           "_row_num": 6
         }
@@ -686,7 +744,9 @@
           "choice_list_name": "grade_levels",
           "data_value": "pre-primary",
           "display": {
-            "text": "Pre-primary."
+            "title": {
+              "text": "Pre-primary."
+            }
           },
           "_row_num": 7
         },
@@ -694,7 +754,9 @@
           "choice_list_name": "grade_levels",
           "data_value": "primary",
           "display": {
-            "text": "Primary"
+            "title": {
+              "text": "Primary"
+            }
           },
           "_row_num": 8
         },
@@ -702,7 +764,9 @@
           "choice_list_name": "grade_levels",
           "data_value": "secondary",
           "display": {
-            "text": "Secondary"
+            "title": {
+              "text": "Secondary"
+            }
           },
           "_row_num": 9
         },
@@ -710,7 +774,9 @@
           "choice_list_name": "grade_levels",
           "data_value": "post_secondary",
           "display": {
-            "text": "Post Secondary"
+            "title": {
+              "text": "Post Secondary"
+            }
           },
           "_row_num": 10
         }
@@ -720,7 +786,9 @@
           "choice_list_name": "post_secondary_types",
           "data_value": "technical_vocational",
           "display": {
-            "text": "Technical/vocational"
+            "title": {
+              "text": "Technical/vocational"
+            }
           },
           "_row_num": 11
         },
@@ -728,7 +796,9 @@
           "choice_list_name": "post_secondary_types",
           "data_value": "university",
           "display": {
-            "text": "University"
+            "title": {
+              "text": "University"
+            }
           },
           "_row_num": 12
         },
@@ -736,7 +806,9 @@
           "choice_list_name": "post_secondary_types",
           "data_value": "graduate_studies",
           "display": {
-            "text": "Graduate studies"
+            "title": {
+              "text": "Graduate studies"
+            }
           },
           "_row_num": 13
         }
@@ -1454,14 +1526,18 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 3"
+              "title": {
+                "text": "Section 3"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "type": "finalize",
             "display": {
-              "text": "Save Form"
+              "prompt": {
+                "text": "Save Form"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1562,7 +1638,9 @@
             "values_list": "no_yes",
             "name": "write_language",
             "display": {
-              "text": "Can {{data.name}} read and write in any language?"
+              "prompt": {
+                "text": "Can {{data.name}} read and write in any language?"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -1576,7 +1654,9 @@
             "values_list": "no_yes",
             "name": "attend_school",
             "display": {
-              "text": "Has {{data.name}} ever attended school?"
+              "prompt": {
+                "text": "Has {{data.name}} ever attended school?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1590,7 +1670,9 @@
             "values_list": "school_types",
             "name": "school_type",
             "display": {
-              "text": "What kind(s) of school did {{data.name}} primarily attend?"
+              "prompt": {
+                "text": "What kind(s) of school did {{data.name}} primarily attend?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -1602,7 +1684,9 @@
           {
             "type": "note",
             "display": {
-              "text": "What is the highest grade {{data.name}} completed?"
+              "prompt": {
+                "text": "What is the highest grade {{data.name}} completed?"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -1616,7 +1700,9 @@
             "values_list": "grade_levels",
             "name": "grade_level",
             "display": {
-              "text": "Level:"
+              "prompt": {
+                "text": "Level:"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -1630,7 +1716,9 @@
             "values_list": "post_secondary_types",
             "name": "post_secondary",
             "display": {
-              "text": "If post-secondary:"
+              "prompt": {
+                "text": "If post-secondary:"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -1644,7 +1732,9 @@
             "values_list": "no_yes",
             "name": "currently_school",
             "display": {
-              "text": "Is  {{data.name}} currently in attending school?"
+              "prompt": {
+                "text": "Is  {{data.name}} currently in attending school?"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -2701,21 +2791,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -2725,6 +2807,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -2732,6 +2838,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",

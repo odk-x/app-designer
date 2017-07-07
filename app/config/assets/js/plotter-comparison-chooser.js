@@ -1,10 +1,12 @@
+/* global $, _, odkTables, odkData, util */
+/* exported resumeFn */
+'use strict';
+
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, odkTables */
-'use strict';
 
-// Use chunked list view for larger tables: We want to chunk the displays so
+ // Use chunked list view for larger tables: We want to chunk the displays so
 // that there is less load time.
 var visitResultSet = {};   
 var idxStart = -1;
@@ -86,15 +88,16 @@ var resumeFn = function(fidxStart) {
           // make sure we retrieved the rowId
             if (compareTypeVal !== null && compareTypeVal !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                var compareTypeQueryParam = '?' + compareTypeStr + '=' + encodeURIComponent(compareTypeFromChooser)
+                var compareTypeQueryParam =
+					'?' + compareTypeStr + '=' + encodeURIComponent(compareTypeFromChooser) +
                     // Soil should be changed to compareType passed in via query parameter
-                    + '&' + compareTypeValStr + '=' + encodeURIComponent(compareTypeVal);
+                    '&' + compareTypeValStr + '=' + encodeURIComponent(compareTypeVal);
 
                 if (originPlotId !== null) {
                     compareTypeQueryParam += '&plotId=' + encodeURIComponent(originPlotId);
                 }
 
-                odkTables.launchHTML('config/assets/plotter-comparison-reports.html' + compareTypeQueryParam);
+                odkTables.launchHTML(null, 'config/assets/plotter-comparison-reports.html' + compareTypeQueryParam);
             }
         });
     }
@@ -120,7 +123,7 @@ var displayGroup = function() {
     for (i = 0; i < uniqCompareTypeArray.length; i++) {
         addDataForCompareType(uniqCompareTypeArray[i]);
     }
-    console.log(compareTypeFromChooser + ' list (unique): ' + uniqCompareTypeArray)
+    console.log(compareTypeFromChooser + ' list (unique): ' + uniqCompareTypeArray);
 
     console.log('Leaving displayGroup');
         

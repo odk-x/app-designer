@@ -30,15 +30,43 @@ exports.rootpath = 'http://localhost:8000';
 /**
  * Get the path to the framework's formDef.json file. Returns:
  *
- * app/config/assets/framework/forms/framework/formDef.json
+ * app/config/assets/framework/forms/framework[.variant]/formDef.json
  *
  * Includes the file name and does not begin with a slash.
  */
-exports.getRelativePathToFrameworkFormDef = function() {
+exports.getRelativePathToFrameworkFormDef = function(formDefJson) {
 
-    var result = 'app/config/assets/framework/forms/framework/formDef.json';
+    var result = 'app/config/assets/framework/forms/framework' +
+		getFrameworkVariantFromFormDef(formDefJson) + '/formDef.json';
     return result;
+};
 
+/**
+ * Get the path to the frameworkDefinition file. Returns:
+ *
+ * app/config/assets/framework/frameworkDefinitions[.variant].js
+ *
+ * Includes the file name and does not begin with a slash.
+ */
+exports.getRelativePathToFrameworkDefinitionsJs = function(formDefJson) {
+
+    var result = 'app/config/assets/framework/frameworkDefinitions' +
+		getFrameworkVariantFromFormDef(formDefJson) + '.js';
+    return result;
+};
+
+/**
+ * Get the path to the commonDefinitions file. Returns:
+ *
+ * app/config/assets/commonDefinitions[.variant].js
+ *
+ * Includes the file name and does not begin with a slash.
+ */
+exports.getRelativePathToCommonDefinitionsJs = function(formDefJson) {
+
+    var result = 'app/config/assets/commonDefinitions' +
+		getFrameworkVariantFromFormDef(formDefJson) + '.js';
+    return result;
 };
 
 /**
@@ -153,6 +181,23 @@ var getFormIdFromFormDef = exports.getFormIdFromFormDef = function(formDef) {
 };
 
 /**
+ * Get the framework_variant from the formDef json object and prepend ".". The variant is used
+ * within the app-designer to manage the various independent demos that might 
+ * otherwise collide in the naming of the common translations, framework translations
+ * and framework form definitions. It is inserted into the filename to differentiate
+ * among the independent demos.
+ */
+var getFrameworkVariantFromFormDef = exports.getFrameworkVariantFromFormDef = function(formDef) {
+
+    var result = getValueOfSetting(formDef, 'framework_variant');
+	if ( result === undefined || result === null ) {
+		return "";
+	}
+    return "." + result;
+
+};
+
+/**
  * Remove empty strings for the XLSXConverter
  */
 exports.removeEmptyStrings =  function(rObjArr){
@@ -176,8 +221,7 @@ exports.removeEmptyStrings =  function(rObjArr){
  * Determine whether to create defintion.csv and
  * properties.csv for the XLSXConverter
  */
-exports.shouldWriteOutDefinitionAndPropertiesCsv = function(formDefStr) {
-    var formDefJson = JSON.parse(formDefStr);
+exports.shouldWriteOutDefinitionAndPropertiesCsv = function(formDefJson) {
     var tableId = getTableIdFromFormDef(formDefJson);
     var formId = getFormIdFromFormDef(formDefJson);
 
@@ -188,6 +232,25 @@ exports.shouldWriteOutDefinitionAndPropertiesCsv = function(formDefStr) {
     if (formId === getFrameworkFormId()) {
         return false;
     }
+
+    if (tableId !== formId) {
+        return false;
+    }
+    
+    if (tableId === formId) {
+        return true;
+    }
+
+    return false;
+};
+
+exports.shouldWriteOutDefinitionsJs = function(formDefJson) {
+    var tableId = getTableIdFromFormDef(formDefJson);
+    var formId = getFormIdFromFormDef(formDefJson);
+
+    if (tableId === null || formId === null) {
+        return false;
+    } 
 
     if (tableId !== formId) {
         return false;
@@ -256,8 +319,8 @@ exports.createDefinitionCsvFromDataTableModel = function(dataTableModel) {
  *  Create properties.csv from inverted the formDef.json 
  * for XLSXConverter processing
  */
-exports.createPropertiesCsvFromDataTableModel = function(dataTableModel, formDef) {
-    var properties = formDef.specification.properties;
+exports.createPropertiesCsvFromDataTableModel = function(dataTableModel, formDefJson) {
+    var properties = formDefJson.specification.properties;
 
     // Now write the properties in CSV format
     var propCsv = "_partition,_aspect,_key,_type,_value\r\n";
@@ -271,6 +334,26 @@ exports.createPropertiesCsvFromDataTableModel = function(dataTableModel, formDef
     });
 
     return propCsv;
+};
+
+/**
+ *  Create ...Definitions.js from the formDef.json 
+ * for XLSXConverter processing
+ */
+exports.createDefinitionsJsFromDataTableModel = function(tableId, formDefJson) {
+	var defJs;
+	var definitions;
+	if ( tableId === undefined || tableId === null ) {
+		definitions = formDefJson.specification.common_definitions;
+		defJs = "window.odkCommonDefinitions = " + JSON.stringify(definitions, 2, 2);
+	} else if ( tableId === 'framework' ) {
+		definitions = formDefJson.specification.framework_definitions;
+		defJs = "window.odkFrameworkDefinitions = " + JSON.stringify(definitions, 2, 2);
+	} else {
+		definitions = formDefJson.specification.table_specific_definitions;
+		defJs = "window.odkTableSpecificDefinitions = " + JSON.stringify(definitions, 2, 2);
+	}
+	return defJs;
 };
 
 /**

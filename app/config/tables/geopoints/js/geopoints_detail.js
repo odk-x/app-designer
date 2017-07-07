@@ -1,24 +1,9 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, odkTables, data */
+/* global odkData */
 /*exported display */
 'use strict';
-
-// Handle the case where we are debugging in chrome.
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/geopoints_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             if (dataObj === undefined || dataObj === null) {
-//                 console.log('Could not load data json for table: geopoints');
-//             }
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 
 function cbSuccess(result) {
     var clientId = result.get('client_id');
@@ -37,7 +22,7 @@ function cbSuccess(result) {
     document.getElementById('description').innerHTML = result.get('description');
     var latitude = result.get('coordinates.latitude');
     var longitude = result.get('coordinates.longitude');
-    if (latitude != null || longitude != null) {
+    if (latitude !== null && latitude !== undefined && longitude !== null && longitude !== undefined) {
         document.getElementById('coordinates').innerHTML = latitude + 
         ' ' + longitude;
     }

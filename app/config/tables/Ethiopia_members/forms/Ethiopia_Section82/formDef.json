@@ -15,8 +15,12 @@
         "type": "integer",
         "name": "hours_collecting",
         "display": {
-          "text": "How many hours did {{data.name}} spend collecting or preparing fuel in the last 7 days?",
-          "hint": "(Hours)"
+          "prompt": {
+            "text": "How many hours did {{data.name}} spend collecting or preparing fuel in the last 7 days?"
+          },
+          "hint": {
+            "text": "(Hours)"
+          }
         },
         "_row_num": 2
       },
@@ -24,8 +28,12 @@
         "type": "integer",
         "name": "hours_fuel_materials",
         "display": {
-          "text": "How many hours in the last 7 days did {{data.name}} collect or prepare fuel materials specifically for household cooking use?",
-          "hint": "(Hours)"
+          "prompt": {
+            "text": "How many hours in the last 7 days did {{data.name}} collect or prepare fuel materials specifically for household cooking use?"
+          },
+          "hint": {
+            "text": "(Hours)"
+          }
         },
         "_row_num": 3
       },
@@ -33,8 +41,12 @@
         "type": "integer",
         "name": "hours_fuel_sale",
         "display": {
-          "text": "How many hours in the last 7 days did {{data.name}} collect, transport, or prepare fuel materials for sale and not for household use?",
-          "hint": "(Hours)"
+          "prompt": {
+            "text": "How many hours in the last 7 days did {{data.name}} collect, transport, or prepare fuel materials for sale and not for household use?"
+          },
+          "hint": {
+            "text": "(Hours)"
+          }
         },
         "_row_num": 4
       }
@@ -58,7 +70,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 8.2"
+          "title": {
+            "text": "Section 8.2"
+          }
         },
         "_row_num": 5
       },
@@ -410,16 +424,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -440,7 +452,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 8.2"
+          "title": {
+            "text": "Section 8.2"
+          }
         },
         "_row_num": 5
       },
@@ -455,7 +469,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -469,7 +485,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 8.2"
+          "title": {
+            "text": "Section 8.2"
+          }
         },
         "_row_num": 5
       }
@@ -1169,7 +1187,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 8.2"
+              "title": {
+                "text": "Section 8.2"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1265,8 +1285,12 @@
             "type": "integer",
             "name": "hours_collecting",
             "display": {
-              "text": "How many hours did {{data.name}} spend collecting or preparing fuel in the last 7 days?",
-              "hint": "(Hours)"
+              "prompt": {
+                "text": "How many hours did {{data.name}} spend collecting or preparing fuel in the last 7 days?"
+              },
+              "hint": {
+                "text": "(Hours)"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -1279,8 +1303,12 @@
             "type": "integer",
             "name": "hours_fuel_materials",
             "display": {
-              "text": "How many hours in the last 7 days did {{data.name}} collect or prepare fuel materials specifically for household cooking use?",
-              "hint": "(Hours)"
+              "prompt": {
+                "text": "How many hours in the last 7 days did {{data.name}} collect or prepare fuel materials specifically for household cooking use?"
+              },
+              "hint": {
+                "text": "(Hours)"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1293,8 +1321,12 @@
             "type": "integer",
             "name": "hours_fuel_sale",
             "display": {
-              "text": "How many hours in the last 7 days did {{data.name}} collect, transport, or prepare fuel materials for sale and not for household use?",
-              "hint": "(Hours)"
+              "prompt": {
+                "text": "How many hours in the last 7 days did {{data.name}} collect, transport, or prepare fuel materials for sale and not for household use?"
+              },
+              "hint": {
+                "text": "(Hours)"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -2284,21 +2316,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -2308,6 +2332,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -2315,6 +2363,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",

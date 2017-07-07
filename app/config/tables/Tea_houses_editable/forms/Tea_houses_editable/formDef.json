@@ -9,7 +9,9 @@
         "type": "text",
         "name": "House_id",
         "display": {
-          "text": "Tea House Id"
+          "prompt": {
+            "text": "Tea House Id"
+          }
         },
         "_row_num": 3
       },
@@ -17,7 +19,9 @@
         "type": "text",
         "name": "Name",
         "display": {
-          "text": "Name"
+          "prompt": {
+            "text": "Name"
+          }
         },
         "_row_num": 4
       },
@@ -34,7 +38,9 @@
         "type": "text",
         "name": "State",
         "display": {
-          "text": "State"
+          "prompt": {
+            "text": "State"
+          }
         },
         "_row_num": 7
       },
@@ -42,7 +48,9 @@
         "type": "text",
         "name": "Region",
         "display": {
-          "text": "Region"
+          "prompt": {
+            "text": "Region"
+          }
         },
         "_row_num": 8
       },
@@ -50,7 +58,9 @@
         "type": "text",
         "name": "District",
         "display": {
-          "text": "District"
+          "prompt": {
+            "text": "District"
+          }
         },
         "_row_num": 9
       },
@@ -58,7 +68,9 @@
         "type": "text",
         "name": "Neighborhood",
         "display": {
-          "text": "Neighborhood"
+          "prompt": {
+            "text": "Neighborhood"
+          }
         },
         "_row_num": 10
       },
@@ -86,7 +98,9 @@
         "type": "decimal",
         "name": "lat",
         "display": {
-          "text": "Latitude to edit"
+          "prompt": {
+            "text": "Latitude to edit"
+          }
         },
         "_row_num": 15
       },
@@ -94,7 +108,9 @@
         "type": "decimal",
         "name": "lon",
         "display": {
-          "text": "Longitude to edit"
+          "prompt": {
+            "text": "Longitude to edit"
+          }
         },
         "_row_num": 16
       },
@@ -105,7 +121,9 @@
       {
         "type": "note",
         "display": {
-          "text": "TODO: enable saving with <em>assign Location_latitude data('lat')</em> etc."
+          "prompt": {
+            "text": "TODO: enable saving with <em>assign Location_latitude data('lat')</em> etc."
+          }
         },
         "_row_num": 18
       },
@@ -117,7 +135,9 @@
         "type": "text",
         "name": "Specialty_Type_id",
         "display": {
-          "text": "Id of Specialty Type of Tea"
+          "prompt": {
+            "text": "Id of Specialty Type of Tea"
+          }
         },
         "_row_num": 20
       },
@@ -125,7 +145,9 @@
         "type": "integer",
         "name": "Customers",
         "display": {
-          "text": "Customers"
+          "prompt": {
+            "text": "Customers"
+          }
         },
         "_row_num": 21
       },
@@ -133,7 +155,9 @@
         "type": "integer",
         "name": "Visits",
         "display": {
-          "text": "Visits"
+          "prompt": {
+            "text": "Visits"
+          }
         },
         "_row_num": 22
       },
@@ -142,7 +166,9 @@
         "values_list": "yesno",
         "name": "Iced",
         "display": {
-          "text": "Tea Available Iced"
+          "prompt": {
+            "text": "Tea Available Iced"
+          }
         },
         "_row_num": 23
       },
@@ -151,7 +177,9 @@
         "values_list": "yesno",
         "name": "Hot",
         "display": {
-          "text": "Tea Available Hot"
+          "prompt": {
+            "text": "Tea Available Hot"
+          }
         },
         "_row_num": 24
       },
@@ -160,7 +188,9 @@
         "values_list": "yesno",
         "name": "WiFi",
         "display": {
-          "text": "WiFi Available"
+          "prompt": {
+            "text": "WiFi Available"
+          }
         },
         "_row_num": 25
       },
@@ -174,9 +204,11 @@
       },
       {
         "type": "text",
-        "name": "Owner",
+        "name": "Store_Owner",
         "display": {
-          "text": "Owner"
+          "prompt": {
+            "text": "Owner"
+          }
         },
         "_row_num": 28
       },
@@ -184,7 +216,9 @@
         "type": "integer",
         "name": "Phone_Number",
         "display": {
-          "text": "Phone Number"
+          "prompt": {
+            "text": "Phone Number"
+          }
         },
         "_row_num": 29
       },
@@ -192,7 +226,9 @@
         "type": "date",
         "name": "Date_Opened",
         "display": {
-          "text": "Date Opened"
+          "prompt": {
+            "text": "Date Opened"
+          }
         },
         "_row_num": 30
       },
@@ -206,7 +242,9 @@
         "choice_list_name": "yesno",
         "data_value": "Yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 2
       },
@@ -214,7 +252,9 @@
         "choice_list_name": "yesno",
         "data_value": "No",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 3
       }
@@ -233,7 +273,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Houses Editable"
+          "title": {
+            "text": "Tea Houses Editable"
+          }
         },
         "_row_num": 4
       },
@@ -246,16 +288,6 @@
         "setting_name": "instance_name",
         "value": "Name",
         "_row_num": 6
-      }
-    ],
-    "properties": [
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "colOrder",
-        "type": "array",
-        "value": "[\"House_id\",\"State\",\"Region\",\"District\",\"Neighborhood\",\"Specialty_Type_id\",\"Name\",\"Customers\",\"Visits\",\"Iced\",\"Hot\",\"WiFi\",\"Location_latitude\",\"Location_longitude\",\"Location_altitude\",\"Location_accuracy\",\"Date_Opened\",\"Owner\",\"Phone_Number\"]",
-        "_row_num": 2
       }
     ],
     "model": [
@@ -289,16 +321,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -314,7 +344,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Houses Editable"
+          "title": {
+            "text": "Tea Houses Editable"
+          }
         },
         "_row_num": 4
       },
@@ -334,7 +366,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -348,7 +382,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Houses Editable"
+          "title": {
+            "text": "Tea Houses Editable"
+          }
         },
         "_row_num": 4
       }
@@ -359,7 +395,9 @@
           "choice_list_name": "yesno",
           "data_value": "Yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 2
         },
@@ -367,17 +405,21 @@
           "choice_list_name": "yesno",
           "data_value": "No",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 3
         }
       ]
     },
+    "table_specific_definitions": {
+      "_tokens": {}
+    },
     "queries": {},
     "calculates": {},
     "model": {
       "Location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {
@@ -571,7 +613,7 @@
         "valuesList": "yesno",
         "elementKey": "WiFi"
       },
-      "Owner": {
+      "Store_Owner": {
         "_defn": [
           {
             "_row_num": 28,
@@ -579,7 +621,7 @@
           }
         ],
         "type": "string",
-        "elementKey": "Owner"
+        "elementKey": "Store_Owner"
       },
       "Phone_Number": {
         "_defn": [
@@ -617,7 +659,9 @@
             "type": "text",
             "name": "House_id",
             "display": {
-              "text": "Tea House Id"
+              "prompt": {
+                "text": "Tea House Id"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -630,7 +674,9 @@
             "type": "text",
             "name": "Name",
             "display": {
-              "text": "Name"
+              "prompt": {
+                "text": "Name"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -643,7 +689,9 @@
             "type": "text",
             "name": "State",
             "display": {
-              "text": "State"
+              "prompt": {
+                "text": "State"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -656,7 +704,9 @@
             "type": "text",
             "name": "Region",
             "display": {
-              "text": "Region"
+              "prompt": {
+                "text": "Region"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -669,7 +719,9 @@
             "type": "text",
             "name": "District",
             "display": {
-              "text": "District"
+              "prompt": {
+                "text": "District"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -682,7 +734,9 @@
             "type": "text",
             "name": "Neighborhood",
             "display": {
-              "text": "Neighborhood"
+              "prompt": {
+                "text": "Neighborhood"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -695,7 +749,9 @@
             "type": "decimal",
             "name": "lat",
             "display": {
-              "text": "Latitude to edit"
+              "prompt": {
+                "text": "Latitude to edit"
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -708,7 +764,9 @@
             "type": "decimal",
             "name": "lon",
             "display": {
-              "text": "Longitude to edit"
+              "prompt": {
+                "text": "Longitude to edit"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -720,7 +778,9 @@
           {
             "type": "note",
             "display": {
-              "text": "TODO: enable saving with <em>assign Location_latitude data('lat')</em> etc."
+              "prompt": {
+                "text": "TODO: enable saving with <em>assign Location_latitude data('lat')</em> etc."
+              }
             },
             "_row_num": 18,
             "__rowNum__": 17,
@@ -733,7 +793,9 @@
             "type": "text",
             "name": "Specialty_Type_id",
             "display": {
-              "text": "Id of Specialty Type of Tea"
+              "prompt": {
+                "text": "Id of Specialty Type of Tea"
+              }
             },
             "_row_num": 20,
             "__rowNum__": 19,
@@ -746,7 +808,9 @@
             "type": "integer",
             "name": "Customers",
             "display": {
-              "text": "Customers"
+              "prompt": {
+                "text": "Customers"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -759,7 +823,9 @@
             "type": "integer",
             "name": "Visits",
             "display": {
-              "text": "Visits"
+              "prompt": {
+                "text": "Visits"
+              }
             },
             "_row_num": 22,
             "__rowNum__": 21,
@@ -773,7 +839,9 @@
             "values_list": "yesno",
             "name": "Iced",
             "display": {
-              "text": "Tea Available Iced"
+              "prompt": {
+                "text": "Tea Available Iced"
+              }
             },
             "_row_num": 23,
             "__rowNum__": 22,
@@ -787,7 +855,9 @@
             "values_list": "yesno",
             "name": "Hot",
             "display": {
-              "text": "Tea Available Hot"
+              "prompt": {
+                "text": "Tea Available Hot"
+              }
             },
             "_row_num": 24,
             "__rowNum__": 23,
@@ -801,7 +871,9 @@
             "values_list": "yesno",
             "name": "WiFi",
             "display": {
-              "text": "WiFi Available"
+              "prompt": {
+                "text": "WiFi Available"
+              }
             },
             "_row_num": 25,
             "__rowNum__": 24,
@@ -812,9 +884,11 @@
           },
           {
             "type": "text",
-            "name": "Owner",
+            "name": "Store_Owner",
             "display": {
-              "text": "Owner"
+              "prompt": {
+                "text": "Owner"
+              }
             },
             "_row_num": 28,
             "__rowNum__": 27,
@@ -827,7 +901,9 @@
             "type": "integer",
             "name": "Phone_Number",
             "display": {
-              "text": "Phone Number"
+              "prompt": {
+                "text": "Phone Number"
+              }
             },
             "_row_num": 29,
             "__rowNum__": 28,
@@ -840,7 +916,9 @@
             "type": "date",
             "name": "Date_Opened",
             "display": {
-              "text": "Date Opened"
+              "prompt": {
+                "text": "Date Opened"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -1018,7 +1096,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Tea Houses Editable"
+              "title": {
+                "text": "Tea Houses Editable"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1168,7 +1248,6 @@
     },
     "dataTableModel": {
       "Location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {
@@ -1426,7 +1505,7 @@
         "elementSet": "data",
         "elementPath": "WiFi"
       },
-      "Owner": {
+      "Store_Owner": {
         "_defn": [
           {
             "_row_num": 28,
@@ -1434,10 +1513,10 @@
           }
         ],
         "type": "string",
-        "elementKey": "Owner",
-        "elementName": "Owner",
+        "elementKey": "Store_Owner",
+        "elementName": "Store_Owner",
         "elementSet": "data",
-        "elementPath": "Owner"
+        "elementPath": "Store_Owner"
       },
       "Phone_Number": {
         "_defn": [
@@ -1526,21 +1605,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -1550,6 +1621,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -1557,6 +1652,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1589,21 +1692,21 @@
         "_aspect": "Hot",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "Iced",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "WiFi",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "FormType",
@@ -1622,13 +1725,6 @@
       {
         "_partition": "Table",
         "_aspect": "default",
-        "_key": "colOrder",
-        "_type": "array",
-        "_value": "[\"House_id\",\"State\",\"Region\",\"District\",\"Neighborhood\",\"Specialty_Type_id\",\"Name\",\"Customers\",\"Visits\",\"Iced\",\"Hot\",\"WiFi\",\"Location_latitude\",\"Location_longitude\",\"Location_altitude\",\"Location_accuracy\",\"Date_Opened\",\"Owner\",\"Phone_Number\"]"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
         "_key": "defaultViewType",
         "_type": "string",
         "_value": "SPREADSHEET"
@@ -1638,7 +1734,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Tea Houses Editable\""
+        "_value": "{\"text\":\"Tea Houses Editable\"}"
       }
     ]
   }

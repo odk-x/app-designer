@@ -1,13 +1,13 @@
-/* globals odkCommon, odkSurvey */
 /**
  * This is a random collection of methods that don't quite belong anywhere.
  *
- * A set of utilities, some of which wrap the Java interface (odkSurvey.js), and others
+ * A set of utilities, some of which wrap the Java interface (odkSurveyStateManagement.js), and others
  * provide useful parsing or interpretation of localization details.
  *
  */
 
 define(['underscore', 'XRegExp', 'databaseUtils'],function(_,XRegExp,databaseUtils) {
+/* globals odkCommon, odkSurveyStateManagement */
 'use strict';
 verifyLoad('opendatakit',
     ['underscore', 'XRegExp', 'databaseUtils'],
@@ -17,6 +17,7 @@ return {
     savepoint_type_complete: 'COMPLETE',
     savepoint_type_incomplete: 'INCOMPLETE',
     baseDir: '',
+	cachedLocale: undefined,
     /**
      * Global object that is the container for
      * - formDef
@@ -95,11 +96,13 @@ return {
 
         // Get data table model info for the element_key specified
         for (dbKey in this.mdl.dataTableModel) {
-            def = this.mdl.dataTableModel[dbKey];
-            if (def.elementKey === elementKey) {
-                elementKeyDef = def;
-                break;
-            }
+			if ( this.mdl.dataTableModel.hasOwnProperty(dbKey) ) {
+				def = this.mdl.dataTableModel[dbKey];
+				if (def.elementKey === elementKey) {
+					elementKeyDef = def;
+					break;
+				}
+			}
         }
 
         if (elementKey === null) {
@@ -107,7 +110,7 @@ return {
         }
 
         // Get the database value
-        var value = databaseUtils.getElementPathValue(this.mdl.data, elementKey)
+        var value = databaseUtils.getElementPathValue(this.mdl.data, elementKey);
 
         // Call the toSerializeFunction
         var finalValue = databaseUtils.toSerializationFromElementType(elementKeyDef, value, true);
@@ -188,18 +191,7 @@ return {
     },
 
     genUUID:function() {
-        /*jshint bitwise: false*/
-        // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
-        var id = "uuid:" +
-        'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            // NOTE: the logical OR forces the number into an integer
-            var r = Math.random()*16|0;
-            // and the logical OR for 'y' values forces the number to be 8, 9, a or b.
-            // https://en.wikipedia.org/wiki/Universally_unique_identifier -- Version 4 (random)
-            var v = (c === 'x') ? r : (r&0x3|0x8);
-            return v.toString(16);
-        });
-        return id;
+		return odkCommon.genUUID();
     },
     getSameRefIdHashString:function(formPath, instanceId, screenPath) {
         var refId = this.getRefId();
@@ -212,79 +204,6 @@ return {
             '&screenPath=' + encodeURIComponent((screenPath === undefined || screenPath === null) ? this.initialScreenPath : screenPath) +
             ((refId === undefined || refId === null) ? '' : ('&refId=' + encodeURIComponent(refId)));
         return qpl;
-    },
-    getHashString:function(formPath, instanceId, screenPath) {
-        var refId = this.genUUID();
-        if ( formPath === undefined || formPath === null ) {
-            formPath = odkCommon.getBaseUrl() + "/";
-        }
-        var qpl =
-            '#formPath=' + encodeURIComponent(formPath) +
-            ((instanceId === undefined || instanceId === null) ? '' : ('&instanceId=' + encodeURIComponent(instanceId))) +
-            '&screenPath=' + encodeURIComponent((screenPath === undefined || screenPath === null) ? this.initialScreenPath : screenPath) +
-            ((refId === undefined || refId === null) ? '' : ('&refId=' + encodeURIComponent(refId)));
-        return qpl;
-    },
-    convertHashStringToSurveyUri: function(hashString) {
-        // assume we have a hashString:
-        // #formPath=...&instanceId=...&...
-        // reformat it into a URI suitable for invoking ODK Survey
-        var that = this;
-        odkCommon.log("D","convertHashStringToSurveyUri: hash " + hashString);
-        if ( !hashString.match(/^(\??#).*/) ) {
-            throw new Error('parsing of hashString failed - not a relative path (does not begin with ?# or #');
-        }
-
-        // we expect it to start with ?# or #
-        if ( hashString.charAt(0) === '?' ) {
-            hashString = hashString.substring(1);
-        }
-        if ( hashString.charAt(0) === '#' ) {
-            hashString = hashString.substring(1);
-        }
-        var keyValues = hashString.split("&");
-        var reconstitutedKeyValues = "";
-        var formPath = null;
-        var instanceId = null;
-        var i;
-        var parts;
-        for ( i = 0 ; i < keyValues.length ; ++i ) {
-            parts = keyValues[i].split('=');
-            if ( parts.length > 2 ) {
-                throw new Error('parsing of hashString failed - incorrect &key=value sequence');
-            }
-            var key = parts[0];
-            if ( key === 'formPath' ) {
-                formPath = parts[1];
-            } else if ( key === 'instanceId' ) {
-                instanceId = parts[1];
-            } else {
-                reconstitutedKeyValues = reconstitutedKeyValues +
-                    "&" + keyValues[i];
-            }
-        }
-        if ( instanceId !== null ) {
-            reconstitutedKeyValues =
-                "&instanceId=" + encodeURIComponent(instanceId) +
-                reconstitutedKeyValues;
-        }
-        if ( formPath === null ) {
-            throw new Error('parsing of hashString failed - no formPath found');
-        }
-        parts = decodeURIComponent(formPath).split("/");
-        // the formPath ends in a slash, so we want the entry before the last one...
-        var formId = parts[parts.length-2];
-
-        var tableId = parts[parts.length-4];
-
-        var appName = that.getPlatformInfo().appName;
-
-        var uri = "content://org.opendatakit.provider.forms/" +
-            appName + "/" + tableId + "/" + formId + "/#" +
-            reconstitutedKeyValues.substring(1);
-
-        odkCommon.log("D","convertHashStringToSurveyUri: as Uri " + uri);
-        return uri;
     },
     setCurrentFormDef:function(formDef) {
         this.mdl.formDef = formDef;
@@ -324,7 +243,7 @@ return {
 
     clearLocalInfo:function(type) {
         // wipe the ref_id --
-        // this prevents saves into odkSurvey from succeeding...
+        // this prevents saves into odkSurveyStateManagement from succeeding...
         this.mdl.ref_id = this.genUUID();
         if ( type === "table" ) {
             this.mdl.table_id = null;
@@ -340,17 +259,17 @@ return {
     clearCurrentInstanceId:function() {
         // Update container so that it can save media and auxillary data
         // under different directories...
-        odkSurvey.clearInstanceId(this.getRefId());
+        odkSurveyStateManagement.clearInstanceId(this.getRefId());
     },
 
     setCurrentInstanceId:function(instanceId) {
         // Update container so that it can save media and auxillary data
         // under different directories...
-        odkSurvey.setInstanceId( this.getRefId(), instanceId);
+        odkSurveyStateManagement.setInstanceId( this.getRefId(), instanceId);
     },
 
     getCurrentInstanceId:function() {
-        return odkSurvey.getInstanceId(this.getRefId());
+        return odkSurveyStateManagement.getInstanceId(this.getRefId());
     },
 
     setCurrentTableId:function(table_id) {
@@ -371,7 +290,8 @@ return {
         } else {
             var display = ref.display;
             if ( "title" in display ) {
-                return display.title;
+				var titleEntry = display.title;
+				return titleEntry;
             } else {
                 return "<no title>";
             }
@@ -393,24 +313,6 @@ return {
         }
 
         return sectionSettings.showContents;
-    },
-    localize:function(textOrLangMap, locale) {
-        if(_.isUndefined(textOrLangMap)) {
-            return 'text_undefined';
-        }
-        if(_.isString(textOrLangMap)) {
-            return textOrLangMap;
-        }
-        if( locale in textOrLangMap ){
-            return textOrLangMap[locale];
-        } else if( 'default' in textOrLangMap ){
-            return textOrLangMap['default'];
-        } else {
-            alert("Could not localize object. See console:");
-            console.error("Non localizable object:");
-            console.error(textOrLangMap);
-            return 'no_suitable_language_mapping_defined';
-        }
     },
     /**
      * Retrieve the value of a setting from the form definition file or null if
@@ -439,8 +341,8 @@ return {
         The list of locales should have been constructed by the XLSXConverter.
         It will be saved under settings._locales.value as a list:
 
-        [ { name: "en_us", display: { text: { "en_us": "English", "fr": "Anglais"}}},
-           { name: "fr", display: { text: {"en_us": "French", "fr": "Francais"}}} ]
+        [ { name: "en_us", locale: { text: { "en_us": "English", "fr": "Anglais"}}},
+           { name: "fr", locale: { text: {"en_us": "French", "fr": "Francais"}}} ]
     */
     getFormLocales:function(formDef) {
         if ( formDef !== null && formDef !== undefined ) {
@@ -452,38 +354,39 @@ return {
             alert("_locales not present in form! See console:");
             console.error("The synthesized _locales field is not present in the form!");
         }
-        return [ { display: { text: 'default' }, name: 'default' } ];
+        return [ { locale: { text: 'default' }, name: 'default' } ];
     },
 
     /**
-        The default locale is a synthesized value. It is specified by
-        the value of the '_default_locale' setting.
-
-        This is generally the first locale in the _locales list, above.
-     */
-    getDefaultFormLocale:function(formDef) {
-        if ( formDef !== null &&  formDef !== undefined ) {
-            var localeObject = this.getSettingObject(formDef, '_default_locale');
-            if ( localeObject !== null && localeObject !== undefined &&
-                 localeObject.value !== null && localeObject.value !== undefined ) {
-                return localeObject.value;
-            }
-            alert("_default_locales not present in form! See console:");
-            console.error("The synthesized _default_locales field is not present in the form!");
-        }
-        return "default";
-    },
-    /**
-     use this when the formDef is known to be stored in the mdl
+     changed in rev 210 to use the setting from the Java side's Device Settings menu.
      */
     getDefaultFormLocaleValue:function() {
-        return this.getDefaultFormLocale(this.getCurrentFormDef());
+		// fetch this from platformInfo -- all forms share the same default locale
+		// and any user-defined locales must be defined in the framework form (so they
+		// can be processed by the Java side in this settings menu).
+		// 
+		// individual forms can still offer different locales independent of this
+		// global setting, and the user can change into and out of any locale as
+		// they see fit, but those changes don't propogate up to the Java layer.
+		//
+		return odkCommon.getPreferredLocale();
     },
 
     getFormLocalesValue:function() {
         return this.getFormLocales(this.getCurrentFormDef());
     },
-
+	
+	/**
+	 * cache the locale here so that we preserve the locale when we leave an instance.
+	 */
+	setCachedLocale:function(locale) {
+		this.cachedLocale = locale;
+	},
+	
+	getCachedLocale:function() {
+		return this.cachedLocale;
+	},
+	
     /**
      * Lower-level function to access a formDef file and parse it.
      * Should not be called from renderers!

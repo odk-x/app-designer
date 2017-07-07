@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 rootDir=$(pwd)
 
 # Parse arguments
@@ -81,17 +83,20 @@ cp -r "$appSystem/libs"/* "$surveySystem/libs"
 cp -r "$appSystem/survey/js"/* "$surveySystem/survey/js"
 cp -r "$appSystem/survey/templates"/* "$surveySystem/survey/templates"
 
-cd $surveyDir
-zip -r config.zip config
-zip -r system.zip system
-cd -
+(
+cd "$surveyDir" || exit
+echo "Making zips"
+zip -qr config.zip config
+zip -qr system.zip system
+)
 
 mv "$surveyDir/config.zip" "$surveyDir/configzip"
 mv "$surveyDir/system.zip" "$surveyDir/systemzip"
 
-if [ $surveyCopyPath ]; then
-    cp "$surveyDir/configzip" "$surveyCopyPath"
-    cp "$surveyDir/systemzip" "$surveyCopyPath"
+if test -n "$surveyCopyPath"; then
+  echo "Copying zips to $surveyCopyPath"
+  cp "$surveyDir/configzip" "$surveyCopyPath"
+  cp "$surveyDir/systemzip" "$surveyCopyPath"
 fi
 
 mkdir "$tablesDir"
@@ -123,16 +128,19 @@ cp -r "$appSystem/libs"/* "$tablesSystem/libs"
 # Tables system tables files
 cp -r "$appSystem/tables"/* "$tablesSystem/tables"
 
-cd $tablesDir
-zip -r config.zip config
-zip -r system.zip system
-cd -
+(
+cd "$tablesDir" || exit
+zip -qr config.zip config
+zip -qr system.zip system
+)
 
 mv "$tablesDir/config.zip" "$tablesDir/configzip"
 mv "$tablesDir/system.zip" "$tablesDir/systemzip"
 
-if [ "$tablesCopyPath" ]; then
-    cp "$tablesDir/configzip" "$tablesCopyPath"
-    cp "$tablesDir/systemzip" "$tablesCopyPath"
+if test -n "$tablesCopyPath"; then
+  echo "Copying zips to $tablesCopyPath"
+  cp "$tablesDir/configzip" "$tablesCopyPath"
+  cp "$tablesDir/systemzip" "$tablesCopyPath"
 fi
 
+echo Done

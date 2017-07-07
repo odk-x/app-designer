@@ -1,20 +1,8 @@
-/* global odkCommon, util, alert */
+/* global $, odkData, odkCommon, util, alert */
+/* exported display */
 /* jshint camelcase:false */ 
 'use strict';
 
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/follow_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             if (dataObj === undefined || dataObj === null) {
-//                 console.log('Could not load data json for table: follow');
-//             }
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 var previousTime;
 var rowIdCache = {};
 var speciesRowIdCache = {};
@@ -363,7 +351,7 @@ function display() {
                 cbSuccessSpeciesData,
                 cbFailSpeciesData);
 
-        if (isNew == false) {
+        if (isNew === false) {
             // Fixes the back button issues
             // Ensures caches and time are set as appropriate 
             util.getFoodDataForTimePoint(
@@ -487,16 +475,16 @@ function display() {
         }
 
         var baseUrl = 'config/assets/followScreen.html';
-
+		var anchorObj;
         // handle the case where there are no timepoints yet.
         if (existingTimes.length === 0) {
             var noTimesItem = $('<li>').eq(0);
             // we also need to create an anchor to get bootstrap to style the
             // item correctly
-            var anchor = $('<a>');
-            anchor.prop('href', '#');  // we don't want it to go anywhere
-            anchor.html('No Other Time Points');
-            noTimesItem.append(anchor);
+            anchorObj = $('<a>');
+            anchorObj.prop('href', '#');  // we don't want it to go anywhere
+            anchorObj.html('No Other Time Points');
+            noTimesItem.append(anchorObj);
             dropdownMenu.append(noTimesItem);
             return;
         }
@@ -509,9 +497,9 @@ function display() {
                     followDate,
                     olderFollowTime,
                     focalChimpId);
-            var anchor = $('<a>');
+            anchorObj = $('<a>');
             //anchor.prop('href', odkCommon.getFileAsUrl(baseUrl + queryString));
-            anchor.html(olderFollowTime);
+            anchorObj.html(olderFollowTime);
             // Ok, and now yet another annoyance of dealing with the current
             // setup. We can't let the links launch themselves, as this
             // wouldn't inject the correct objects. We need to launch the page
@@ -522,7 +510,7 @@ function display() {
             // which obviously isn't correct. Assigning the correct query
             // string in the closure solves this.
             (function(queryStr) {
-                anchor.on('click', function() {
+                anchorObj.on('click', function() {
                     var url = odkCommon.getFileAsUrl(baseUrl + queryStr);
                     console.log('url: ' + url);
                     window.location.href = url;
@@ -530,7 +518,7 @@ function display() {
             })(queryString);
             
             var menuItem = $('<li>');
-            menuItem.append(anchor);
+            menuItem.append(anchorObj);
             
             // And now append the menu item.
             dropdownMenu.append(menuItem);
@@ -699,7 +687,7 @@ function display() {
             
             var sexualState = $('#' + chimpId + sexualStateSuffix);
             var sexState = $(sexualState).html();
-            if (sexState == null) {
+            if (sexState === undefined || sexState === null) {
                 sexState = 'N/A';
             }
 
@@ -784,13 +772,13 @@ function display() {
     var writeForSpecies = function(isUpdate, rowId, speciesId, numPresent) {
 
         var struct = {};
-        struct['OS_FOL_date'] = followDate;
-        struct['OS_time_begin'] = followTime;
-        struct['OS_FOL_B_focal_AnimID'] = focalChimpId;
+        struct.OS_FOL_date = followDate;
+        struct.OS_time_begin = followTime;
+        struct.OS_FOL_B_focal_AnimID = focalChimpId;
 
-        struct['OS_local_species_name_written'] = speciesId;
+        struct.OS_local_species_name_written = speciesId;
         var numPresentStr = numPresent.toString();
-        struct['OS_duration'] = numPresentStr;
+        struct.OS_duration = numPresentStr;
 
 
         if (isUpdate) {
@@ -817,24 +805,24 @@ function display() {
     var writeForFood = function(isUpdate, rowId, foodId, isPresent, foodPart1, foodPart2) {
 
         var struct = {};
-        struct['FB_FOL_date'] = followDate;
-        struct['FB_begin_feed_time'] = followTime;
-        struct['FB_FOL_B_AnimID'] = focalChimpId;
+        struct.FB_FOL_date = followDate;
+        struct.FB_begin_feed_time = followTime;
+        struct.FB_FOL_B_AnimID = focalChimpId;
 
         if (foodId !== null) {
-            struct['FB_FL_local_food_name'] = foodId;
+            struct.FB_FL_local_food_name = foodId;
         }
         if (foodId !== null) {
-            struct['FB_FPL_local_food_part'] = foodPart1;
+            struct.FB_FPL_local_food_part = foodPart1;
         }
         if (foodId !== null) {
-            struct['FB_FPL_local_food_part2'] = foodPart2;
+            struct.FB_FPL_local_food_part2 = foodPart2;
         }
 
         // this column is an integer in the database.
         if (isPresent !== null) {
             var isPresentStr = isPresent ? '1' : '0';
-            struct['FB_duration'] = isPresentStr;
+            struct.FB_duration = isPresentStr;
         }
 
         if (isUpdate) {
@@ -883,36 +871,36 @@ function display() {
         // indicate the state of the chimp. They have in the data tables
         // document that 1 is chimp definitely seen, 0 is expected to be
         // nearby. We're also going to say 2 is not present.
-        struct['FA_FOL_date'] = followDate;
-        struct['FA_FOL_B_focal_AnimID'] = focalChimpId;
-        struct['FA_B_arr_AnimID'] = chimpId;
-        struct['FA_time_start'] = followTime;
+        struct.FA_FOL_date = followDate;
+        struct.FA_FOL_B_focal_AnimID = focalChimpId;
+        struct.FA_B_arr_AnimID = chimpId;
+        struct.FA_time_start = followTime;
         
         if (sState !== null) {
-            struct['FA_type_of_cycle'] = sState;
+            struct.FA_type_of_cycle = sState;
         }
         
         if (isPresent !== null) {
             if (isPresent) {
-                struct['FA_type_of_certainty'] = flag_chimpPresent;
+                struct.FA_type_of_certainty = flag_chimpPresent;
             } else {
-                struct['FA_type_of_certainty'] = flag_chimpAbsent;
+                struct.FA_type_of_certainty = flag_chimpAbsent;
             }
         } 
 
         if (isWithin5 !== null) {
             if (isWithin5) {
-                struct['FA_within_five_meters'] = flag_chimpPresent;
+                struct.FA_within_five_meters = flag_chimpPresent;
             } else {
-                struct['FA_within_five_meters'] = flag_chimpAbsent;
+                struct.FA_within_five_meters = flag_chimpAbsent;
             }
         } 
 
         if (isClosest !== null) {
             if (isClosest) {
-                struct['FA_closest_to_focal'] = flag_chimpPresent;
+                struct.FA_closest_to_focal = flag_chimpPresent;
             } else {
-                struct['FA_closest_to_focal'] = flag_chimpAbsent;
+                struct.FA_closest_to_focal = flag_chimpAbsent;
             }
         } 
         
@@ -1125,7 +1113,7 @@ function display() {
 
     var cbPrevNewTimePointSuccess = function(result) {
         // previous time is not a new time point
-        if (!(result.getCount() === 0)) {
+        if (result.getCount() !== 0) {
             console.log(
                     'there is a previous time point, updating ui for that');
             initUIFromDatabaseForTime(previousTime, true);
@@ -1321,7 +1309,7 @@ function display() {
         var closestId = $('.closest-chimp').prop('id');
         var noClosestOk = false;
         //If no closest to focal, give an alert. 
-        if (closestId == undefined) {
+        if (closestId === undefined) {
             noClosestOk = confirm('No nearest to focal. Are you sure?');
         }
         else {
@@ -1337,16 +1325,16 @@ function display() {
         for (var i = 0; i < allChimps.length; i++) {
             var chimpId = allChimps[i].id;
             var within5Checkbox = $('#' + chimpId + fiveMeterSuffix);
-            if (within5Checkbox.prop('checked') == true) {
+            if (within5Checkbox.prop('checked') === true) {
                 noneWithin5ok = true;
             }
         }
         //If none within 5m of focal, give an alert. 
-        if (noneWithin5ok == false) {
+        if (noneWithin5ok === false) {
             noneWithin5ok = confirm('No chimps within 5m. Are you sure?');
         }
 
-        if ((noClosestOk == true) && (noneWithin5ok == true)) {
+        if ((noClosestOk === true) && (noneWithin5ok === true)) {
             // And now launch the next screen
             var nextTime = incrementTime(followTime);
 
@@ -1365,7 +1353,7 @@ function display() {
     $('.sexual-state').on('click', function() {
         console.log('clicked sexual state');
         // find the current sexual state, just as a sanity check.
-        var chimpId = this.id;
+        // var chimpId = this.id;
         
         var indexOfSuffix = this.id.indexOf(sexualStateSuffix);
         var chimpName = this.id.substr(0, indexOfSuffix);

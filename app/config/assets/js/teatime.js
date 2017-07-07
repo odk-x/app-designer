@@ -1,11 +1,12 @@
+'use strict';
+/* global $, odkTables */
+/* exported display */
+
 /**
  * Responsible for rendering the home screen.
  */
-'use strict';
-/* global odkTables */
-
 function display() {
-
+	
     var body = $('#main');
     // Set the background to be a picture.
     body.css('background-image', 'url(img/teaBackground.jpg)');
@@ -15,6 +16,7 @@ function display() {
         'click',
         function() {
             odkTables.openTableToListView(
+				null,
                 'Tea_houses',
                 null,
                 null,
@@ -27,6 +29,7 @@ function display() {
         'click',
         function() {
             odkTables.openTableToListView(
+				null,
                 'Tea_inventory',
                 null,
                 null,
@@ -39,11 +42,11 @@ function display() {
         'click',
         function() {
             odkTables.openTableToListView(
+				null,
                 'Tea_types',
                 null,
                 null,
                 'config/tables/Tea_types/html/Tea_types_list.html');
         }
     );
-
 }

@@ -117,7 +117,7 @@ var convert_position = function($obj) {
 *	These key bindings allow selected fields to be nudged
 *	up, down, left, or right be using the arrow keys.
 */
-$(document).bind("keydown", "left", function() {				
+$(document).on("keydown", "left", function() {				
 	var $field = $(".selected_field");
 	if ($field.parent().hasClass("field_group")) {
 		$field = $field.parent();
@@ -134,7 +134,7 @@ $(document).bind("keydown", "left", function() {
 	}
 });
 
-$(document).bind("keydown", "right", function() {
+$(document).on("keydown", "right", function() {
 	var $field = $(".selected_field");
 	if ($field.parent().hasClass("field_group")) {
 		$field = $field.parent();
@@ -155,7 +155,7 @@ $(document).bind("keydown", "right", function() {
 	}
 });
 
-$(document).bind("keydown", "up", function() {
+$(document).on("keydown", "up", function() {
 	var $field = $(".selected_field");
 	if ($field.parent().hasClass("field_group")) {
 		$field = $field.parent();
@@ -172,7 +172,7 @@ $(document).bind("keydown", "up", function() {
 	}
 });
 
-$(document).bind("keydown", "down", function() {
+$(document).on("keydown", "down", function() {
 	var $field = $(".selected_field");
 	if ($field.parent().hasClass("field_group")) {
 		$field = $field.parent();

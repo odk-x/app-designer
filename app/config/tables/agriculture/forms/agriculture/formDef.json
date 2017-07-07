@@ -37,7 +37,9 @@
         "type": "text",
         "name": "plot_name",
         "display": {
-          "text": "Enter the name of the corn plot:"
+          "prompt": {
+            "text": "Enter the name of the corn plot:"
+          }
         },
         "required": true,
         "_row_num": 8
@@ -51,7 +53,9 @@
         "name": "soil_condition",
         "values_list": "soil_type",
         "display": {
-          "text": "Select the condition of the soil"
+          "prompt": {
+            "text": "Select the condition of the soil"
+          }
         },
         "required": true,
         "_row_num": 10
@@ -82,10 +86,16 @@
         "type": "number",
         "name": "Sample",
         "display": {
-          "title": "Sample",
-          "text": "Enter the height of the plant in inches",
-          "hint": "This will be compared against outliers",
-          "image": "img/weedsfig1.jpg"
+          "title": {
+            "text": "Sample"
+          },
+          "prompt": {
+            "text": "Enter the height of the plant in inches",
+            "image": "img/weedsfig1.jpg"
+          },
+          "hint": {
+            "text": "This will be compared against outliers"
+          }
         },
         "required": true,
         "_row_num": 14
@@ -99,8 +109,12 @@
         "type": "acknowledge",
         "name": "ack_ok",
         "display": {
-          "text": "The height you have entered is an outlier.  Are you certain of this measurement?",
-          "hint": "The value you entered is outside of the range {{data.min_sample}} thru {{data.max_sample}}"
+          "prompt": {
+            "text": "The height you have entered is an outlier.  Are you certain of this measurement?"
+          },
+          "hint": {
+            "text": "The value you entered is outside of the range {{data.min_sample}} thru {{data.max_sample}}"
+          }
         },
         "constraint": "data('ack_ok') || calculates.between_min_max()",
         "_row_num": 16
@@ -141,7 +155,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Agriculture"
+          "title": {
+            "text": "Agriculture"
+          }
         },
         "_row_num": 4
       },
@@ -234,7 +250,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "Sample",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     ],
@@ -243,7 +260,9 @@
         "choice_list_name": "soil_type",
         "data_value": "dry",
         "display": {
-          "text": "Dry"
+          "title": {
+            "text": "Dry"
+          }
         },
         "_row_num": 2
       },
@@ -251,7 +270,9 @@
         "choice_list_name": "soil_type",
         "data_value": "damp",
         "display": {
-          "text": "Damp"
+          "title": {
+            "text": "Damp"
+          }
         },
         "_row_num": 3
       },
@@ -259,7 +280,9 @@
         "choice_list_name": "soil_type",
         "data_value": "moist",
         "display": {
-          "text": "Moist"
+          "title": {
+            "text": "Moist"
+          }
         },
         "_row_num": 4
       },
@@ -267,7 +290,9 @@
         "choice_list_name": "soil_type",
         "data_value": "wet",
         "display": {
-          "text": "Wet"
+          "title": {
+            "text": "Wet"
+          }
         },
         "_row_num": 5
       }
@@ -290,16 +315,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -315,7 +338,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Agriculture"
+          "title": {
+            "text": "Agriculture"
+          }
         },
         "_row_num": 4
       },
@@ -340,7 +365,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -354,7 +381,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Agriculture"
+          "title": {
+            "text": "Agriculture"
+          }
         },
         "_row_num": 4
       }
@@ -365,7 +394,9 @@
           "choice_list_name": "soil_type",
           "data_value": "dry",
           "display": {
-            "text": "Dry"
+            "title": {
+              "text": "Dry"
+            }
           },
           "_row_num": 2
         },
@@ -373,7 +404,9 @@
           "choice_list_name": "soil_type",
           "data_value": "damp",
           "display": {
-            "text": "Damp"
+            "title": {
+              "text": "Damp"
+            }
           },
           "_row_num": 3
         },
@@ -381,7 +414,9 @@
           "choice_list_name": "soil_type",
           "data_value": "moist",
           "display": {
-            "text": "Moist"
+            "title": {
+              "text": "Moist"
+            }
           },
           "_row_num": 4
         },
@@ -389,11 +424,16 @@
           "choice_list_name": "soil_type",
           "data_value": "wet",
           "display": {
-            "text": "Wet"
+            "title": {
+              "text": "Wet"
+            }
           },
           "_row_num": 5
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {
       "min_max": {
@@ -404,7 +444,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "Sample",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       }
     },
@@ -521,7 +562,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Sample",
+        "displayName": {
+          "text": "Sample"
+        },
         "elementKey": "Sample"
       }
     },
@@ -539,7 +582,9 @@
             "type": "text",
             "name": "plot_name",
             "display": {
-              "text": "Enter the name of the corn plot:"
+              "prompt": {
+                "text": "Enter the name of the corn plot:"
+              }
             },
             "required": true,
             "_row_num": 8,
@@ -554,7 +599,9 @@
             "name": "soil_condition",
             "values_list": "soil_type",
             "display": {
-              "text": "Select the condition of the soil"
+              "prompt": {
+                "text": "Select the condition of the soil"
+              }
             },
             "required": true,
             "_row_num": 10,
@@ -596,10 +643,16 @@
             "type": "number",
             "name": "Sample",
             "display": {
-              "title": "Sample",
-              "text": "Enter the height of the plant in inches",
-              "hint": "This will be compared against outliers",
-              "image": "img/weedsfig1.jpg"
+              "title": {
+                "text": "Sample"
+              },
+              "prompt": {
+                "text": "Enter the height of the plant in inches",
+                "image": "img/weedsfig1.jpg"
+              },
+              "hint": {
+                "text": "This will be compared against outliers"
+              }
             },
             "required": true,
             "_row_num": 14,
@@ -613,8 +666,12 @@
             "type": "acknowledge",
             "name": "ack_ok",
             "display": {
-              "text": "The height you have entered is an outlier.  Are you certain of this measurement?",
-              "hint": "The value you entered is outside of the range {{data.min_sample}} thru {{data.max_sample}}"
+              "prompt": {
+                "text": "The height you have entered is an outlier.  Are you certain of this measurement?"
+              },
+              "hint": {
+                "text": "The value you entered is outside of the range {{data.min_sample}} thru {{data.max_sample}}"
+              }
             },
             "constraint": "data('ack_ok') || calculates.between_min_max()",
             "_row_num": 16,
@@ -847,7 +904,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Agriculture"
+              "title": {
+                "text": "Agriculture"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1119,7 +1178,9 @@
           }
         ],
         "type": "number",
-        "displayName": "Sample",
+        "displayName": {
+          "text": "Sample"
+        },
         "elementKey": "Sample",
         "elementName": "Sample",
         "elementSet": "data",
@@ -1157,21 +1218,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -1181,6 +1234,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -1188,6 +1265,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1220,14 +1305,14 @@
         "_aspect": "Sample",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Sample\""
+        "_value": "{\"text\":\"Sample\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "soil_condition",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"soil_type\",\"data_value\":\"dry\",\"display\":{\"text\":\"Dry\"},\"_row_num\":2},{\"choice_list_name\":\"soil_type\",\"data_value\":\"damp\",\"display\":{\"text\":\"Damp\"},\"_row_num\":3},{\"choice_list_name\":\"soil_type\",\"data_value\":\"moist\",\"display\":{\"text\":\"Moist\"},\"_row_num\":4},{\"choice_list_name\":\"soil_type\",\"data_value\":\"wet\",\"display\":{\"text\":\"Wet\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"soil_type\",\"data_value\":\"dry\",\"display\":{\"title\":{\"text\":\"Dry\"}},\"_row_num\":2},{\"choice_list_name\":\"soil_type\",\"data_value\":\"damp\",\"display\":{\"title\":{\"text\":\"Damp\"}},\"_row_num\":3},{\"choice_list_name\":\"soil_type\",\"data_value\":\"moist\",\"display\":{\"title\":{\"text\":\"Moist\"}},\"_row_num\":4},{\"choice_list_name\":\"soil_type\",\"data_value\":\"wet\",\"display\":{\"title\":{\"text\":\"Wet\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "FormType",
@@ -1262,7 +1347,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Agriculture\""
+        "_value": "{\"text\":\"Agriculture\"}"
       }
     ]
   }

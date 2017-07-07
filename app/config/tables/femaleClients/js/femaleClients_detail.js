@@ -1,24 +1,9 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, odkTables */
+/* global $, odkTables, odkData */
 'use strict';
 
-// Handle the case where we are debugging in chrome.
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/femaleClients_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             if (dataObj === undefined || dataObj === null) {
-//                 console.log(
-//                     'Could not load data json for table: femaleClients');
-//             }
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 var clientId;
 
 function createFormLauncherForEdit(tableId, formId, rowId, label, element) {
@@ -27,6 +12,7 @@ function createFormLauncherForEdit(tableId, formId, rowId, label, element) {
     formLauncher.innerHTML = label;
     formLauncher.onclick = function() {
         odkTables.editRowWithSurvey(
+				null,
                 tableId,
                 rowId,
                 formId,
@@ -35,16 +21,17 @@ function createFormLauncherForEdit(tableId, formId, rowId, label, element) {
     element.appendChild(formLauncher);
 }
 
-function createFormLauncherForAdd(tableId, formId, jsonMap, label, element) {
+function createFormLauncherForAdd(tableId, formId, elementKeyToValueMap, label, element) {
     var formLauncher = document.createElement('p');
     formLauncher.setAttribute('class', 'forms');
     formLauncher.innerHTML = label;
     formLauncher.onclick = function() {
         odkTables.addRowWithSurvey(
+				null,
                 tableId,
                 formId,
                 null,
-                jsonMap);
+                elementKeyToValueMap);
     };
     element.appendChild(formLauncher);
 }
@@ -66,7 +53,7 @@ function display(result) {
 
     // Creates key-to-value map that can be interpreted by the specified
     // Collect form - to prepopulate forms with client id
-    var mapMaleId = JSON.stringify({'client_id': clientId});
+    var elementKeyToValueMapMaleId = {client_id: clientId};
 
     // Create item that displays links to all female forms when clicked
     var fItem = document.createElement('p');
@@ -86,6 +73,7 @@ function display(result) {
     $(homeLocator).click(function() {
         console.log('In homeLocator click client_id is ' + clientId);
         odkTables.openTableToListView(
+			null,
             'geopoints',
             'client_id = ?',
             ['' + clientId],
@@ -128,7 +116,7 @@ function display(result) {
     createFormLauncherForAdd(
             'maleClients',
             'screenPartner',
-            mapMaleId,
+            elementKeyToValueMapMaleId,
             'Partner Screening',
             mContainer);
     // TODO: this should be passing the rowId of the entry in the client table,

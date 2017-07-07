@@ -1,16 +1,5 @@
-/* global $, odkTables */
+/* global $, odkTables, odkData, odkCommon */
 'use strict';
-
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/geotagger_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 
 var geoListResultSet = {};
 
@@ -31,22 +20,20 @@ function setup() {
 function handleClick(index) {
     var tableId = geoListResultSet.getTableId();
     var rowId = geoListResultSet.getRowId(index);
-    odkTables.openDetailView(tableId, rowId, null);
+    odkTables.openDetailView(null, tableId, rowId, null);
 }
 
 var imgHeight;
 var imgWidth;
 
-function adjustDimensions() {
-    imgHeight = this.height;
-    imgWidth = this.width;
-    return true;
-}
-
 function showImage(imgPath) {
     var myImage = new Image();
     myImage.name = imgPath;
-    myImage.onload = adjustDimensions;
+    myImage.onload = function () {
+		imgHeight = this.height;
+		imgWidth = this.width;
+		return true;
+	};
     myImage.src = imgPath;
 }
 

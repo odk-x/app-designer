@@ -33,7 +33,7 @@
 </style>
 <div id="plot"></div>
 <script type="text/javascript">
-require(['database', "{{formDirectory}}d3.v2.js"], function(database){
+require(['database', "{{expandFormDirRelativeUrlPath 'd3.v2.js'}}"], function(database){
 //Defering in hopes that the template fully loads before the script runs.
 _.defer(function() {
         

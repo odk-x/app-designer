@@ -1,10 +1,12 @@
+/* global $, odkData, odkCommon */
+/* exported resumeFn */
+'use strict';
+ 
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, odkTables */
-'use strict';
- 
-// This will be used to store the geotagger locations.
+
+ // This will be used to store the geotagger locations.
 var dataMap = {};
 var retObj = {};
             

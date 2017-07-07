@@ -5,7 +5,9 @@
         "type": "text",
         "name": "FMP_FOL_date",
         "display": {
-          "text": "Date of follow"
+          "prompt": {
+            "text": "Date of follow"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "text",
         "name": "FMP_FOL_B_focal_AnimID",
         "display": {
-          "text": "ID of the focal chimp"
+          "prompt": {
+            "text": "ID of the focal chimp"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "integer",
         "name": "FMP_seq_num",
         "display": {
-          "text": "Map sequence number"
+          "prompt": {
+            "text": "Map sequence number"
+          }
         },
         "_row_num": 4
       },
@@ -29,7 +35,9 @@
         "type": "integer",
         "name": "FMP_xcoord",
         "display": {
-          "text": "x-coord of the location"
+          "prompt": {
+            "text": "x-coord of the location"
+          }
         },
         "_row_num": 5
       },
@@ -37,7 +45,9 @@
         "type": "integer",
         "name": "FMP_ycoord",
         "display": {
-          "text": "y-coord of the location"
+          "prompt": {
+            "text": "y-coord of the location"
+          }
         },
         "_row_num": 6
       },
@@ -45,7 +55,9 @@
         "type": "integer",
         "name": "FMP_meters_to_next_seq_num",
         "display": {
-          "text": "The number of meters to the next sequence number for that follow"
+          "prompt": {
+            "text": "The number of meters to the next sequence number for that follow"
+          }
         },
         "_row_num": 7
       },
@@ -53,7 +65,9 @@
         "type": "text",
         "name": "FMP_community_id",
         "display": {
-          "text": "The community to which the focal chimp belongs at the time of the follow"
+          "prompt": {
+            "text": "The community to which the focal chimp belongs at the time of the follow"
+          }
         },
         "_row_num": 8
       },
@@ -61,7 +75,9 @@
         "type": "integer",
         "name": "FMP_xcoord_old",
         "display": {
-          "text": "old x-coordinate of the location"
+          "prompt": {
+            "text": "old x-coordinate of the location"
+          }
         },
         "_row_num": 9
       },
@@ -69,7 +85,9 @@
         "type": "integer",
         "name": "FMP_ycoord_old",
         "display": {
-          "text": "old y-coordinate of the location"
+          "prompt": {
+            "text": "old y-coordinate of the location"
+          }
         },
         "_row_num": 10
       }
@@ -88,7 +106,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Follow Map Position"
+          "title": {
+            "text": "Follow Map Position"
+          }
         },
         "_row_num": 4
       }
@@ -111,16 +131,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -136,7 +154,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Follow Map Position"
+          "title": {
+            "text": "Follow Map Position"
+          }
         },
         "_row_num": 4
       },
@@ -152,7 +172,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -166,12 +188,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Follow Map Position"
+          "title": {
+            "text": "Follow Map Position"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_definitions": {
+      "_tokens": {}
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -280,7 +307,9 @@
             "type": "text",
             "name": "FMP_FOL_date",
             "display": {
-              "text": "Date of follow"
+              "prompt": {
+                "text": "Date of follow"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -293,7 +322,9 @@
             "type": "text",
             "name": "FMP_FOL_B_focal_AnimID",
             "display": {
-              "text": "ID of the focal chimp"
+              "prompt": {
+                "text": "ID of the focal chimp"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -306,7 +337,9 @@
             "type": "integer",
             "name": "FMP_seq_num",
             "display": {
-              "text": "Map sequence number"
+              "prompt": {
+                "text": "Map sequence number"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -319,7 +352,9 @@
             "type": "integer",
             "name": "FMP_xcoord",
             "display": {
-              "text": "x-coord of the location"
+              "prompt": {
+                "text": "x-coord of the location"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -332,7 +367,9 @@
             "type": "integer",
             "name": "FMP_ycoord",
             "display": {
-              "text": "y-coord of the location"
+              "prompt": {
+                "text": "y-coord of the location"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -345,7 +382,9 @@
             "type": "integer",
             "name": "FMP_meters_to_next_seq_num",
             "display": {
-              "text": "The number of meters to the next sequence number for that follow"
+              "prompt": {
+                "text": "The number of meters to the next sequence number for that follow"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -358,7 +397,9 @@
             "type": "text",
             "name": "FMP_community_id",
             "display": {
-              "text": "The community to which the focal chimp belongs at the time of the follow"
+              "prompt": {
+                "text": "The community to which the focal chimp belongs at the time of the follow"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -371,7 +412,9 @@
             "type": "integer",
             "name": "FMP_xcoord_old",
             "display": {
-              "text": "old x-coordinate of the location"
+              "prompt": {
+                "text": "old x-coordinate of the location"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -384,7 +427,9 @@
             "type": "integer",
             "name": "FMP_ycoord_old",
             "display": {
-              "text": "old y-coordinate of the location"
+              "prompt": {
+                "text": "old y-coordinate of the location"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -524,7 +569,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Follow Map Position"
+              "title": {
+                "text": "Follow Map Position"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -822,21 +869,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -846,6 +885,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -853,6 +916,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -913,7 +984,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Follow Map Position\""
+        "_value": "{\"text\":\"Follow Map Position\"}"
       }
     ]
   }
