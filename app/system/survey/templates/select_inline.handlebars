@@ -64,24 +64,20 @@
                         id="{{data_value}}"
                         value="{{data_value}}"
 						tabindex="0"/>
-                    {{#if display.image}}
-                        <div>
-                            <img src="{{formDirectory}}{{localize display.image}}"></img>
-                        </div>
-                    {{/if}}
-                    {{#if display.text}}
-                        {{{localize display.text}}}
-                    {{/if}}
+		   {{#ifHasImageLocalization display.title}}<div><img src="{{localizeImage display.title}}"></img></div>{{/ifHasImageLocalization}}
+		   {{#ifHasAudioLocalization display.title}}<div><audio src="{{localizeAudio display.title}}" tabindex="0"
+			  audio="true" controls="controls">{{localizeText 'audio_control_not_supported'}}</audio></div>{{/ifHasAudioLocalization}}
+		   {{#ifHasVideoLocalization display.title}}<div><video src="{{localizeVideo display.title}}" tabindex="0"
+			  video="true" controls="controls">{{localizeText 'video_control_not_supported'}}</video></div>{{/ifHasVideoLocalization}}
+		   {{#ifHasTextLocalization display.title}}{{{localizeText display.title}}}{{/ifHasTextLocalization}}
                 </label>
             {{/each}}
         </div>
     </fieldset>
     {{#unless required}}
-        {{#if false}}
         {{#if display.deselect}}
             <div style="clear:both;"></div>
-            <a data-role="button" data-mini="true" class="deselect inline-deselect" tabindex="0">{{localize display.deselect}}</a>
-        {{/if}}
+            <a data-role="button" data-mini="true" class="deselect inline-deselect" tabindex="0">{{localize display.select_deselect_label}}</a>
     	{{/if}}
     {{/unless}}
     <div style="clear:both;"></div>

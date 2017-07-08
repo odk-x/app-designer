@@ -6,17 +6,17 @@
             disabled="true"
         />
     {{#if invalid}}
-        <p>invalid</p>
+        <p>{{localizeText display.invalid_value_message}}</p>
     {{/if}}
-    <button type="button" class="captureAction btn btn-default btn-lg">Capture Audio</button>
-    <button type="button" class="chooseAction btn btn-default btn-lg">Choose Audio</button>
+	{{#ifHasLocalization display.new_button_label}}<button type="button" class="captureAction btn btn-default btn-lg" tabindex="1">{{localizeText display.new_button_label}}</button>{{/ifHasLocalization}}
+	{{#ifHasLocalization display.pick_button_label}}<button type="button" class="chooseAction btn btn-default btn-lg" tabindex="2">{{localizeText display.pick_button_label}}</button>{{/ifHasLocalization}}
 </div>
 </form>
 
 <div class="mediaContainer">
     {{#if uriFragmentValue}}
-        <{{#if pre4Android}}video{{else}}audio{{/if}} id="{{safeIdentity}}" src="{{mediaPath}}" type="{{contentType}}" tabindex="0" {{#if videoPoster}}poster="{{videoPoster}}"{{/if}}
-                    audio="true"{{#if pre4Android}} onclick="play()"{{/if}} controls="controls">audio control not supported</{{#if pre4Android}}video{{else}}audio{{/if}}>
+        <audio id="{{safeIdentity}}" src="{{mediaPath}}" type="{{contentType}}" tabindex="3"
+                    audio="true" controls="controls">{{localizeText 'audio_control_not_supported'}}</audio>
         
     {{/if}}
 </div>

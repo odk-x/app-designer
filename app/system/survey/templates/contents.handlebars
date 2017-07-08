@@ -3,15 +3,13 @@
     {{#each prompts}}
         {{#unless hideInContents}}
             <a href="#" class="select-contents-item launch btn btn-default" label="{{_branch_label_enclosing_screen}}" tabindex="0" style="padding:10px">
-                {{#if display.title}}
-                    <h4 class="contents-heading">{{#if display.title}}{{{localize display.title}}}{{/if}}</h4>
+                {{#ifHasTextLocalization display.title}}
+                    <h4 class="contents-heading">{{localizeText display.title}}</h4>
                 {{else}}
-                    {{#if display.text}}
-                        <h4 class="contents-heading">
-                            {{{localize display.text}}}
-                        </h4>
-                    {{/if}}
-                {{/if}}
+                    {{#ifHasTextLocalization display.prompt}}
+                        <h4 class="contents-heading">{{localizeText display.prompt}}</h4>
+                    {{/ifHasTextLocalization}}
+                {{/ifHasTextLocalization}}
                 <span class="glyphicon glyphicon-chevron-right pull-right center-in-contents"></span> 
                 <p class="contents-description">{{formattedValueForContentsDisplay}}</p>
             </a>
