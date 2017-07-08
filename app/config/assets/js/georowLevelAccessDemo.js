@@ -41,7 +41,7 @@ function display() {
 	$('#alter-button').on(
 			'click',
 			function() {
-                odkTables.launchHTML('config/assets/changeAccessFilters.html');
+                odkTables.launchHTML(null,'config/assets/changeAccessFilters.html');
             });
     document.getElementById("wrapper").appendChild(followUp);    
 }

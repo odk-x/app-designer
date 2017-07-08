@@ -14,7 +14,7 @@ function display() {
     viewFacilitiesButton.on(
         'click',
         function() {
-            odkTables.launchHTML('config/assets/filterHealthFacilities.html');
+            odkTables.launchHTML(null,'config/assets/filterHealthFacilities.html');
         }
     );
 

@@ -29,7 +29,7 @@ function display() {
             var queryParam = util.getKeysToAppendToColdChainURL(facilityType, facilityRegion, powerSource);
 
             //odkTables.openTableToMapView('health_facility', selection, selectionArgs, 'config/tables/health_facility/html/hFacility_list.html');
-            odkTables.launchHTML('config/assets/graphFrigInventoryForAge.html' + queryParam);
+            odkTables.launchHTML(null,'config/assets/graphFrigInventoryForAge.html' + queryParam);
         }
     );
 }

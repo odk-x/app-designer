@@ -14,7 +14,7 @@ function display() {
     viewFacilitiesButton.on(
         'click',
         function() {
-            odkTables.launchHTML('config/assets/filterFrigInventoryForAge.html');
+            odkTables.launchHTML(null,'config/assets/filterFrigInventoryForAge.html');
         }
     );
 
@@ -22,7 +22,7 @@ function display() {
     viewRefrigeratorsButton.on(
         'click',
         function() {
-            odkTables.launchHTML('config/assets/filterFacilityInventoryForGridPower.html');
+            odkTables.launchHTML(null,'config/assets/filterFacilityInventoryForGridPower.html');
         }
     );
 

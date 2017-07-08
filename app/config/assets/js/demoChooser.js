@@ -18,9 +18,9 @@ function display() {
             'click',
             function() {
                 if (currentTab === 0) {
-                    odkTables.launchHTML('config/assets/coldchaindemo.html');
+                    odkTables.launchHTML(null,'config/assets/coldchaindemo.html');
                 } else if (currentTab === 1) {
-                    odkTables.launchHTML('config/assets/rowlevelaccessdemo.html');
+                    odkTables.launchHTML(null,'config/assets/rowlevelaccessdemo.html');
                 } else {
                     console.log('trouble, unrecognized tab');
                 }

@@ -14,7 +14,7 @@ function display() {
     viewFacilitiesButton.on(
         'click',
         function() {
-            odkTables.launchHTML('config/assets/filterHealthFacilities.html');
+            odkTables.launchHTML(null,'config/assets/filterHealthFacilities.html');
         }
     );
 
@@ -22,7 +22,7 @@ function display() {
     viewRefrigeratorsButton.on(
         'click',
         function() {
-            odkTables.launchHTML('config/assets/filterInventory.html');
+            odkTables.launchHTML(null,'config/assets/filterInventory.html');
         }
     );
 

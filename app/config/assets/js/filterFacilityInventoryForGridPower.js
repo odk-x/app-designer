@@ -26,7 +26,7 @@ function display() {
             var queryParam = util.getKeysToAppendToColdChainURL(facilityType, facilityRegion, null);
 
             //odkTables.openTableToMapView('health_facility', selection, selectionArgs, 'config/tables/health_facility/html/hFacility_list.html');
-            odkTables.launchHTML('config/assets/graphFacilityInventoryForGridPower.html' + queryParam);
+            odkTables.launchHTML(null,'config/assets/graphFacilityInventoryForGridPower.html' + queryParam);
         }
     );
 }
