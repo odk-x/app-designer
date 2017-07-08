@@ -29,7 +29,7 @@ var postHandler = function(req, res, next) {
 
         var mkdirp = require('mkdirp');
         var fs = require('fs');
-        var Buffer = require('buffer/').Buffer;
+        //var Buffer = require('buffer/').Buffer;
 
         // We don't want the leading /, or else the file system will think
         // we're writing to root, which we don't have permission to. Should
@@ -1988,6 +1988,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 console.log("Deleting ".concat(folders[i]));
                 grunt.task.run("exec:adbshell:rm -rf ".concat(folders[i]));
             }
+            grunt.task.run("exec:adbshell:run-as org.opendatakit.services rm -rf /data/data/org.opendatakit.services/app_" + tablesConfig.appName);
         });
     grunt.registerTask(
         "adbpull-props",
