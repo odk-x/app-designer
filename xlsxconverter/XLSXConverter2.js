@@ -11,6 +11,10 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
+/* jshint unused: vars */
+/* global require */
+/* global exports */
+/* global XRegExp */
 var XLSXConverter = {};
 (function(XLSXConverter){
 
@@ -21,13 +25,31 @@ var XLSXConverter = {};
 
     var reservedSheetNames = [
           "settings",
-          "properties",
+          "properties",   // only applicable for table_id === form_id forms
+          "table_specific_properties",   // prohibit this just in case...
+          "common_properties",           // prohibit this just in case...
+          "translations", // prohibit this just in case...
+		  "table_specific_translations", // tableId == formId != 'framework'
+          "framework_translations",      // tableId (== formId) == 'framework'
+          "common_translations",         // tableId (== formId) == 'framework'
           "choices",
-          "queries",
-          "calculates",
+		  "table_specific_choices",      // prohibit this just in case...
+		  "common_choices",              // unused -- would need to be loaded into XLSXConverter2 dynamically
+          "queries",      // must remain form-specific because it may contain session variable and field references
+          "table_specific_queries",      // prohibit this just in case...
+          "common_queries",              // prohibit this just in case...
+          "calculates",   // must remain form-specific because it may contain session variable and field references
+          "table_specific_calculates",   // prohibit this just in case...
+          "common_calculates",           // prohibit this just in case...
           "column_types",
+		  "table_specific_column_types", // prohibit this just in case...
+		  "common_column_types",         // unused -- would need to be loaded into XLSXConverter2 dynamically
           "prompt_types",
-          "model"
+		  "table_specific_prompt_types", // prohibit this just in case...
+		  "common_prompt_types",         // unused -- would need to be loaded into XLSXConverter2 dynamically
+          "model",                       // must remain form-specific because it contains session variable definitions
+          "table_specific_model",        // prohibit this just in case...
+          "common_model",                // prohibit this just in case...
       ];
 
     var reservedFieldNames = {
@@ -50,6 +72,14 @@ var XLSXConverter = {};
         savepoint_type: true,
         form_id: true,
         locale: true,
+		/*
+		 * access filter columns
+		 */
+		default_access: true,
+		row_owner: true,
+		group_read_only: true,
+		group_modify: true,
+		group_privileged: true,
 
         /**
          * SQLite keywords ( http://www.sqlite.org/lang_keywords.html )
@@ -221,16 +251,14 @@ var XLSXConverter = {};
             constraint: 'formula',
             required: 'formula',
             calculation: 'formula', // 'assign' prompt and on calculates sheet.
-            auxillaryHash: 'formula', // TODO: move to queries
+            newRowInitialElementKeyToValueMap: 'formula', // TODO: move to queries
+            openRowInitialElementKeyToValueMap: 'formula', // TODO: move to queries
             selectionArgs: 'formula', // TODO: move to queries
             url: 'formula', // external_link prompt
             uri: 'formula', // queries
             callback: 'formula(context)', // queries
             choice_filter: 'formula(choice_item)', // expects "choice" context arg.
-            templatePath: 'requirejs_path',
-            image: 'app_path_localized',
-            audio: 'app_path_localized',
-            video: 'app_path_localized'
+            templatePath: 'requirejs_path'
     };
 
     //The prompt type map is not kept in a separate JSON file because
@@ -376,6 +404,21 @@ var XLSXConverter = {};
 					"type": "string",
 					"elementType": "mimeType",
                     "default": "video/*"
+                }
+            }
+        },
+        "json": {
+            "type": "object",
+            "elementType": "mimeUri",
+            "properties": {
+                "uriFragment": {
+					"type": "string",
+					"elementType": "rowpath"
+                },
+                "contentType": {
+					"type": "string",
+					"elementType": "mimeType",
+                    "default": "application/json"
                 }
             }
         },
@@ -590,7 +633,7 @@ var XLSXConverter = {};
                         if ( i !== -1 ) {
                             if ( prop.lastIndexOf("]") !== prop.length-1 ) {
                                 throw Error("Invalid array subscript in column heading: " + prop);
-                            };
+                            }
                             var nm = prop.substring(0,i);
                             var rem = prop.substring(i+1,prop.length-1);
                             rem = rem.replace(/\s+/g,'');// remove extra spaces
@@ -647,14 +690,14 @@ var XLSXConverter = {};
                         " for column: " + requiredField + " on row: " + row._row_num);
             }
             var value = row[requiredField];
-            if ( nonEmpty && (value !== 0) && (value == null || value == [] || value == {}) ) {
+            if ( nonEmpty && (value !== 0) && (value === undefined || value === null || value == [] || value == {}) ) {
                 throw Error("Cell value is unexpectedly empty on sheet: " + sheetName +
                         " for column: " + requiredField + " on row: " + row._row_num);
             }
         });
     };
 
-    var errorIfFieldsMissingForQueryType = function(sheetName, rows, queryType, requiredField, nonEmpty ) {
+    var errorIfFieldsMissingForQueryType = function(sheetName, rows, queryType, requiredField ) {
         _.each(rows, function(row) {
             if ((row.query_type ==  queryType) && !(requiredField in row)) {
                 throw Error("Missing cell value on sheet: " + sheetName +
@@ -693,7 +736,10 @@ var XLSXConverter = {};
                 var labelEntry = { _token_type: "branch_label", branch_label: row.branch_label, _row_num: row._row_num };
                 flow.push(labelEntry);
             }
-
+			
+			var parts;
+			var first;
+			
             if ( "clause" in row ) {
                 var clauseEntry = _.extend({}, row);
                 delete clauseEntry.branch_label;
@@ -706,9 +752,9 @@ var XLSXConverter = {};
                 raw_clause_type = raw_clause_type.replace(/\/\//g,' // ');// surround with spaces
                 raw_clause_type = raw_clause_type.replace(/\s+/g,' ');// remove extra spaces
                 raw_clause_type = raw_clause_type.trim();// remove BOL/EOL spaces
-                var parts = raw_clause_type.split(' ');
+                parts = raw_clause_type.split(' ');
 
-                var first = parts[0];
+                first = parts[0];
 
                 // Code to allow the user to comment out lines
                 if (first.length >= 2)
@@ -858,7 +904,7 @@ var XLSXConverter = {};
                         throw Error("Expected 'save and terminate' but found: " + row.clause +
                                 " on sheet: " + sheetName + " on row: " + row._row_num);
                     }
-                    if (! "calculation" in row) {
+                    if ( !("calculation" in row) ) {
                         clauseEntry.calculation = false;
                     }
                     clauseEntry._token_type = "save_and_terminate";
@@ -884,8 +930,8 @@ var XLSXConverter = {};
                 var raw_prompt_type = row.type;
                 raw_prompt_type = raw_prompt_type.replace(/\s+/g,' ');// remove extra spaces
                 raw_prompt_type = raw_prompt_type.trim();// remove BOL/EOL spaces
-                var parts = raw_prompt_type.split(' ');
-                var first = parts[0];
+                parts = raw_prompt_type.split(' ');
+                first = parts[0];
                 if ( first === "assign" ) {
                     typeEntry._token_type = "assign";
                     if ( parts.length >= 2 ) {
@@ -922,6 +968,7 @@ var XLSXConverter = {};
     var parseScreenIfBlock = function(sheetName, flow, idx ) {
         var i = idx+1;
         var tag = flow[idx]._tag_name;
+		var end_tag;
         var thenFlow = true;
         var blockFlow = [];
         while (i < flow.length) {
@@ -944,14 +991,14 @@ var XLSXConverter = {};
             case "end_screen":
                 throw Error("Disallowed clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName + " within '" + flow[idx].clause + "' beginning at row " + flow[idx]._row_num);
-                break;
+                // break;
             case "begin_if":
                 var psi = parseScreenIfBlock(sheetName, flow, i);
                 blockFlow.push(psi.clause);
                 i = psi.idx;
                 break;
             case "else":
-                var end_tag = flow[i]._tag_name;
+                end_tag = flow[i]._tag_name;
                 if ( tag != end_tag ) {
                     throw Error("Mismatched tag on '" + flow[i].clause + "' at row " + flow[i]._row_num +
                             ". Should match tag on '" + flow[idx].clause + "' at row " + flow[idx]._row_num + " on sheet: " +
@@ -969,7 +1016,7 @@ var XLSXConverter = {};
                 ++i;
                 break;
             case "end_if":
-                var end_tag = flow[i]._tag_name;
+                end_tag = flow[i]._tag_name;
                 if ( tag != end_tag ) {
                     throw Error("Mismatched tag on '" + flow[i].clause + "' at row " + flow[i]._row_num +
                             ". Should match tag on '" + flow[idx].clause + "' at row " + flow[idx]._row_num + " on sheet: " +
@@ -987,7 +1034,7 @@ var XLSXConverter = {};
                         sheetName + " at row " + clause._row_num);
             }
         }
-        if ( tag != null ) {
+        if ( tag !== undefined && tag !== null ) {
             throw Error("No matching 'end if // " + tag + "' on sheet: " +
                     sheetName + " for '" + flow[idx].clause + "' at row " + flow[idx]._row_num);
         } else {
@@ -1019,15 +1066,15 @@ var XLSXConverter = {};
             case "begin_screen":
                 throw Error("Disallowed clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName + " within '" + flow[idx].clause + "' beginning at row " + flow[idx]._row_num);
-                break;
+                // break;
             case "else":
                 throw Error("'else' without preceding 'if' clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName + " within '" + flow[idx].clause + "' beginning at row " + flow[idx]._row_num);
-                break;
+                // break;
             case "end_if":
                 throw Error("'end if' without preceding 'if' clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName + " within '" + flow[idx].clause + "' beginning at row " + flow[idx]._row_num);
-                break;
+                // break;
             case "begin_if":
                 var psi = parseScreenIfBlock(sheetName, flow, i);
                 blockFlow.push(psi.clause);
@@ -1048,7 +1095,7 @@ var XLSXConverter = {};
                         sheetName + " at row " + clause._row_num);
             }
         }
-        if ( tag != null ) {
+        if ( tag !== undefined && tag !== null ) {
             throw Error("No matching 'end screen // " + tag + "' on sheet: " +
                     sheetName + " for '" + flow[idx].clause + "' at row " + flow[idx]._row_num);
         } else {
@@ -1060,6 +1107,8 @@ var XLSXConverter = {};
     var parseTopLevelIfBlock = function(sheetName, flow, idx ) {
         var i = idx+1;
         var tag = flow[idx]._tag_name;
+		var end_tag;
+		var psi;
         var thenFlow = true;
         var blockFlow = [];
         while (i < flow.length) {
@@ -1079,21 +1128,21 @@ var XLSXConverter = {};
                 ++i;
                 break;
             case "begin_screen":
-                var psi = parseScreenBlock(sheetName, flow, i);
+                psi = parseScreenBlock(sheetName, flow, i);
                 blockFlow.push(psi.clause);
                 i = psi.idx;
                 break;
             case "end_screen":
                 throw Error("'end screen' without preceding 'begin screen' clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName + " within '" + flow[idx].clause + "' beginning at row " + flow[idx]._row_num);
-                break;
+                // break;
             case "begin_if":
-                var psi = parseTopLevelIfBlock(sheetName, flow, i);
+                psi = parseTopLevelIfBlock(sheetName, flow, i);
                 blockFlow.push(psi.clause);
                 i = psi.idx;
                 break;
             case "else":
-                var end_tag = flow[i]._tag_name;
+                end_tag = flow[i]._tag_name;
                 if ( tag != end_tag ) {
                     throw Error("Mismatched tag on '" + flow[i].clause + "' at row " + flow[i]._row_num +
                             ". Should match tag on '" + flow[idx].clause + "' at row " + flow[idx]._row_num + " on sheet: " +
@@ -1111,7 +1160,7 @@ var XLSXConverter = {};
                 ++i;
                 break;
             case "end_if":
-                var end_tag = flow[i]._tag_name;
+                end_tag = flow[i]._tag_name;
                 if ( tag != end_tag ) {
                     throw Error("Mismatched tag on '" + flow[i].clause + "' at row " + flow[i]._row_num +
                             ". Should match tag on '" + flow[idx].clause + "' at row " + flow[idx]._row_num + " on sheet: " +
@@ -1129,7 +1178,7 @@ var XLSXConverter = {};
                         sheetName + " at row " + clause._row_num);
             }
         }
-        if ( tag != null ) {
+        if ( tag !== undefined && tag !== null ) {
             throw Error("No matching 'end if // " + tag + "' on sheet: " +
                     sheetName + " for '" + flow[idx].clause + "' at row " + flow[idx]._row_num);
         } else {
@@ -1145,6 +1194,7 @@ var XLSXConverter = {};
         var blockFlow = [];
         while (i < flow.length) {
             var clause = flow[i];
+			var psi;
             switch (clause._token_type) {
             case "branch_label":
                 if ( clause.branch_label === '_contents' ) {
@@ -1166,27 +1216,27 @@ var XLSXConverter = {};
                 ++i;
                 break;
             case "begin_screen":
-                var psi = parseScreenBlock(sheetName, flow, i);
+                psi = parseScreenBlock(sheetName, flow, i);
                 blockFlow.push(psi.clause);
                 i = psi.idx;
                 break;
             case "end_screen":
                 throw Error("'end screen' without preceding 'begin screen' clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName);
-                break;
+                // break;
             case "begin_if":
-                var psi = parseTopLevelIfBlock(sheetName, flow, i);
+                psi = parseTopLevelIfBlock(sheetName, flow, i);
                 blockFlow.push(psi.clause);
                 i = psi.idx;
                 break;
             case "else":
                 throw Error("'else' without preceding 'if' clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName);
-                break;
+                // break;
             case "end_if":
                 throw Error("'end if' without preceding 'if' clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName);
-                break;
+                // break;
             default:
                 throw Error("Unrecognized clause: '" + clause.clause + "' on sheet: " +
                         sheetName + " at row " + clause._row_num);
@@ -1250,10 +1300,10 @@ var XLSXConverter = {};
         }
     };
 
-    var constructScreenDefn = function(sheetName, prompts, validationTagMap, blockFlow, idx, enclosingScreenLabel) {
-        if ( enclosingScreenLabel == null ) {
+    var constructScreenDefn = function(sheetName, prompts, validationTagMap, blockFlow, idx, enclosingScreenLabel, enclosing_row_num) {
+        if ( enclosingScreenLabel === undefined || enclosingScreenLabel === null ) {
             throw Error("Internal error. No enclosing screen label defined on sheet: " +
-            sheetName + " at row " + clause._row_num);
+            sheetName + " at row " + enclosing_row_num);
         }
         var defn = "";
         var i = idx;
@@ -1286,11 +1336,11 @@ var XLSXConverter = {};
                 var elseBlock = clause._else_block;
 
                 defn += "if (" + clause.condition + ") {\n";
-                defn +=    constructScreenDefn(sheetName, prompts, validationTagMap, thenBlock, 0, enclosingScreenLabel);
+                defn +=    constructScreenDefn(sheetName, prompts, validationTagMap, thenBlock, 0, enclosingScreenLabel, enclosing_row_num);
                 defn += "}\n";
-                if ( elseBlock != null && elseBlock.length > 0 ) {
+                if ( elseBlock !== undefined && elseBlock !== null && elseBlock.length > 0 ) {
                     defn += "else {\n";
-                    defn +=    constructScreenDefn(sheetName, prompts, validationTagMap, elseBlock, 0, enclosingScreenLabel);
+                    defn +=    constructScreenDefn(sheetName, prompts, validationTagMap, elseBlock, 0, enclosingScreenLabel, enclosing_row_num);
                     defn += "}\n";
                 }
                 ++i;
@@ -1308,7 +1358,7 @@ var XLSXConverter = {};
             case "save_and_terminate":
                 throw Error("Internal error. clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName);
-                break;
+                // break;
             default:
                 throw Error("Unrecognized clause: '" + clause.clause + "' on sheet: " +
                         sheetName + " at row " + clause._row_num);
@@ -1325,6 +1375,9 @@ var XLSXConverter = {};
         var i = idx;
         while ( i < blockFlow.length ) {
             var clause = blockFlow[i];
+			var newScreenLabel;
+			var labelEntry;
+			var defn;
             switch (clause._token_type) {
             case "branch_label":
             case "assign":
@@ -1354,8 +1407,8 @@ var XLSXConverter = {};
                 ++i;
                 break;
             case "prompt":
-                var newScreenLabel = "_screen"+clause._row_num;
-                var labelEntry = { _token_type: "branch_label",
+                newScreenLabel = "_screen"+clause._row_num;
+                labelEntry = { _token_type: "branch_label",
                         branch_label: newScreenLabel, _row_num: clause._row_num };
                 flattened.push(labelEntry);
                 // inform the prompt of the tag for the enclosing screen...
@@ -1365,7 +1418,7 @@ var XLSXConverter = {};
                 prompts.push(clause);
                 updateValidationTagMap( validationTagMap, promptIdx, clause);
 
-                var defn = "activePromptIndicies.push(" + promptIdx + ");\n";
+                defn = "activePromptIndicies.push(" + promptIdx + ");\n";
                 defn = "function() {var activePromptIndicies = [];\n"+defn+"\nreturn activePromptIndicies;\n}\n";
 
                 var bsb = { clause: clause.clause,
@@ -1381,12 +1434,12 @@ var XLSXConverter = {};
                 ++i;
                 break;
             case "begin_screen":
-                var newScreenLabel = "_screen"+clause._row_num;
-                var labelEntry = { _token_type: "branch_label",
+                newScreenLabel = "_screen"+clause._row_num;
+                labelEntry = { _token_type: "branch_label",
                         branch_label: newScreenLabel, _row_num: clause._row_num };
                 flattened.push(labelEntry);
                 // process the screen definition
-                var defn = constructScreenDefn(sheetName, prompts, validationTagMap, clause._screen_block, 0, newScreenLabel);
+                defn = constructScreenDefn(sheetName, prompts, validationTagMap, clause._screen_block, 0, newScreenLabel, clause._row_num);
                 defn = "function() {var activePromptIndicies = [];\n"+defn+"\nreturn activePromptIndicies;\n}\n";
                 clause._screen_block = defn;
                 flattened.push(clause);
@@ -1394,7 +1447,7 @@ var XLSXConverter = {};
                 break;
             case "begin_if":
                 var endIfClause = clause._end_if_clause;
-                var elseClause = (clause._else_clause != null) ? clause._else_clause : endIfClause;
+                var elseClause = (clause._else_clause !== undefined && clause._else_clause !== null) ? clause._else_clause : endIfClause;
                 var thenBlock = clause._then_block;
                 var elseBlock = clause._else_block;
                 var thenLabel = "_then" + clause._row_num;
@@ -1421,7 +1474,7 @@ var XLSXConverter = {};
 
                 flattened.push(goelse); // goto Else unconditionally
 
-                var labelEntry = { _token_type: "branch_label",
+                labelEntry = { _token_type: "branch_label",
                         branch_label: thenLabel, _row_num: clause._row_num };
 
                 flattened.push(labelEntry); // Then label
@@ -1442,7 +1495,7 @@ var XLSXConverter = {};
                 flattened.push(labelEntry); // Else label
 
                 // else block...
-                if ( elseBlock != null ) {
+                if ( elseBlock !== undefined && elseBlock !== null ) {
                     flattenBlocks(sheetName, prompts, validationTagMap, flattened, elseBlock, 0, specSettings);
                 }
 
@@ -1457,7 +1510,7 @@ var XLSXConverter = {};
             case "end_if":
                 throw Error("Internal error. clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName);
-                break;
+                // break;
             default:
                 throw Error("Unrecognized clause: '" + clause.clause + "' on sheet: " +
                         sheetName + " at row " + clause._row_num);
@@ -1498,7 +1551,7 @@ var XLSXConverter = {};
             case "end_if":
                 throw Error("Internal error. clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName);
-                break;
+                // break;
             default:
                 throw Error("Unrecognized clause: '" + clause.clause + "' on sheet: " +
                         sheetName + " at row " + clause._row_num);
@@ -1545,7 +1598,7 @@ var XLSXConverter = {};
             case "end_if":
                 throw Error("Internal error. clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName);
-                break;
+                // break;
             default:
                 throw Error("Unrecognized clause: '" + clause.clause + "' on sheet: " +
                         sheetName + " at row " + clause._row_num);
@@ -1584,7 +1637,7 @@ var XLSXConverter = {};
             case "end_if":
                 throw Error("Internal error. clause: '" + clause.clause + "' at row " + clause._row_num + " on sheet: " +
                         sheetName);
-                break;
+                // break;
             default:
                 throw Error("Unrecognized clause: '" + clause.clause + "' on sheet: " +
                         sheetName + " at row " + clause._row_num);
@@ -1635,8 +1688,6 @@ var XLSXConverter = {};
             // see if we can eval it...
             evalAsFunction('('+field+')', field, worksheet, rowNum, columnPath);
         } else if ( columnType === 'requirejs_path') {
-            // nothing to test
-        } else if ( columnType === 'app_path_localized') {
             // nothing to test
         }
     };
@@ -1804,7 +1855,7 @@ var XLSXConverter = {};
             });
         });
         var key_length = 0;
-        for ( key in keys ) {
+        for ( var akey in keys ) {
             key_length++;
         }
 
@@ -1852,10 +1903,12 @@ var XLSXConverter = {};
         var name = promptOrAction.name;
 
         // if a displayName has not already been defined and if
-        // display.title is present, then it becomes the displayName for the model.
+        // display.title.text is present, then display.title becomes the displayName for the model.
         // otherwise, use the element name.
         if ( !("displayName" in mdef) ) {
-            if ( "display" in promptOrAction && "title" in promptOrAction.display ) {
+            if ( "display" in promptOrAction && 
+			     "title" in promptOrAction.display &&
+				 "text" in promptOrAction.display.title	) {
                 mdef.displayName = promptOrAction.display.title;
             }
         }
@@ -1867,8 +1920,9 @@ var XLSXConverter = {};
             mdef.valuesList = promptOrAction.values_list;
         }
         
+		var defn;
         if ( name in model ) {
-            var defn = model[name];
+            defn = model[name];
             var amodb = deepExtendObject( deepExtendObject(
                             deepExtendObject({},defn), schema), mdef );
             var bmoda = deepExtendObject( deepExtendObject(
@@ -1900,7 +1954,7 @@ var XLSXConverter = {};
     };
 
     var assertValidUserDefinedName = function(errorPrefix, name) {
-        if ( name == null ) {
+        if ( name === undefined || name === null ) {
             throw Error(errorPrefix + " is not defined.");
         }
         if ( !pattern_valid_user_defined_name.test(name) ) {
@@ -1922,7 +1976,7 @@ var XLSXConverter = {};
      */
     var assertValidElementKey = function(elementPath, elementKey, fullSetOfElementKeys) {
         var isSimple = false;
-        if ( elementPath == null ) {
+        if ( elementPath === undefined || elementPath === null ) {
             throw Error("Field is not defined.");
         } else if ( elementPath.indexOf('.') === -1) {
             // simple name
@@ -1932,26 +1986,26 @@ var XLSXConverter = {};
             try {
                 assertValidUserDefinedName("Fully qualified element path ", elementKey);
             } catch (e) {
-                var name = elementPath.substring(0,elementPath.indexOf('.'));
-                throw Error(e.message + " Full elementPath: " + elementPath + " Consider shortening the field name '" + name + "'.");
+                var ex1name = elementPath.substring(0,elementPath.indexOf('.'));
+                throw Error(e.message + " Full elementPath: " + elementPath + " Consider shortening the field name '" + ex1name + "'.");
             }
         }
 
-        if ( fullSetOfElementKeys != null ) {
+        if ( fullSetOfElementKeys !== undefined && fullSetOfElementKeys !== null ) {
             if ( elementKey in fullSetOfElementKeys ) {
                 var path = fullSetOfElementKeys[elementKey];
 
                 if ( isSimple ) {
-                    var name = path.indexOf('.') === -1 ? path : path.substring(0,path.indexOf('.'));
+                    var ex2name = path.indexOf('.') === -1 ? path : path.substring(0,path.indexOf('.'));
                     throw Error("The framework's identifier for field '" + elementPath +
                             "' collides with the identifier for the full elementPath: '" + path +
-                            "'. Please change one of the field names ('" + elementPath + "' or '" + name + "').");
+                            "'. Please change one of the field names ('" + elementPath + "' or '" + ex2name + "').");
                 } else {
                     var refname = path.indexOf('.') === -1 ? path : path.substring(0,path.indexOf('.'));
-                    var name = elementPath.substring(0,elementPath.indexOf('.'));
+                    var ex3name = elementPath.substring(0,elementPath.indexOf('.'));
                     throw Error("The framework's identifier for the full elementPath: '" + elementPath +
                             "' collides with the identifier for the full elementPath: '" + path +
-                            "'. Please change one of the field names ('" + name + "' or '" + refname + "').");
+                            "'. Please change one of the field names ('" + ex3name + "' or '" + refname + "').");
                 }
             } else {
                 fullSetOfElementKeys[elementKey] = elementPath;
@@ -1979,7 +2033,7 @@ var XLSXConverter = {};
      * Helper function for constructing and assigning the elementKey in the model
      */
     var recursiveAssignPropertiesElementKey = function( elementPathPrefix, elementKeyPrefix, fullSetOfElementKeys, properties ) {
-        if ( properties == null ) {
+        if ( properties === undefined || properties === null ) {
             return;
         }
 
@@ -2127,7 +2181,7 @@ var XLSXConverter = {};
                             throw Error(e.message + " Assign clause: '" + operation.type + "' at row " +
                                     operation._row_num + " on sheet: " + section.section_name);
                         }
-                        if (operation._data_type == null ) {
+                        if (operation._data_type === undefined || operation._data_type === null) {
                             // no explicit type -- hope that the field gets a value somewhere else...
                             // record name to verify that is the case.
                             updateModel( section, operation, model, {} );
@@ -2247,7 +2301,7 @@ var XLSXConverter = {};
     var _setSessionVariableFlag = function( dbKeyMap, listChildElementKeys) {
         //var that = this;
         var i;
-        if ( listChildElementKeys != null ) {
+        if ( listChildElementKeys !== undefined && listChildElementKeys !== null ) {
             for ( i = 0 ; i < listChildElementKeys.length ; ++i ) {
                 var f = listChildElementKeys[i];
                 var jsonType = dbKeyMap[f];
@@ -2266,9 +2320,7 @@ var XLSXConverter = {};
      */
     var flattenElementPath = function( dbKeyMap, elementPathPrefix, elementName, elementKeyPrefix, jsonType ) {
         //var that = this;
-        var fullPath;
         var elementKey;
-        var i = 0;
 
         // remember the element name...
         jsonType.elementName = elementName;
@@ -2309,6 +2361,7 @@ var XLSXConverter = {};
         dbKeyMap[elementKey] = jsonType;
 
         // handle the recursive structures...
+		var f;
         if ( jsonType.type === 'array' ) {
             // explode with subordinate elements
             f = flattenElementPath( dbKeyMap, elementPathPrefix, 'items', elementKey, jsonType.items );
@@ -2316,7 +2369,6 @@ var XLSXConverter = {};
         } else if ( jsonType.type === 'object' ) {
             // object...
             var e;
-            var f;
             var listChildElementKeys = [];
             for ( e in jsonType.properties ) {
                 f = flattenElementPath( dbKeyMap, elementPathPrefix, e, elementKey, jsonType.properties[e] );
@@ -2327,7 +2379,7 @@ var XLSXConverter = {};
             jsonType.listChildElementKeys = listChildElementKeys;
         }
 
-        if ( jsonType.isSessionVariable && (jsonType.listChildElementKeys != null)) {
+        if ( jsonType.isSessionVariable && (jsonType.listChildElementKeys !== undefined) && (jsonType.listChildElementKeys !== null)) {
             // we have some sort of structure that is a sessionVariable
             // Set the isSessionVariable tags on all its nested elements.
             _setSessionVariableFlag(dbKeyMap, jsonType.listChildElementKeys);
@@ -2354,7 +2406,7 @@ var XLSXConverter = {};
 				return elementType.substring(idxColon+1);
 			}
 		}
-	}
+	};
     /**
      * Mark the elements of an inverted formDef.json
      * that will be retained in the database for XLSXConverter
@@ -2468,10 +2520,13 @@ var XLSXConverter = {};
             dataTableModel._row_etag = { type: 'string', isNotNullable: false, elementKey: "_row_etag", elementName: "_row_etag", elementSet: 'instanceMetadata', elementPath: "_row_etag" };
             dataTableModel._sync_state = { type: 'string', isNotNullable: true, elementKey: "_sync_state", elementName: "_sync_state", elementSet: 'instanceMetadata', elementPath: "_sync_state" };
             dataTableModel._conflict_type = { type: 'integer', isNotNullable: false, elementKey: "_conflict_type", elementName: "_conflict_type", elementSet: 'instanceMetadata', elementPath: "_conflict_type" };
-            dataTableModel._filter_type = { type: 'string', isNotNullable: false, elementKey: "_filter_type", elementName: "_filter_type", elementSet: 'instanceMetadata', elementPath: "_filter_type" };
-            dataTableModel._filter_value = { type: 'string', isNotNullable: false, elementKey: "_filter_value", elementName: "_filter_value", elementSet: 'instanceMetadata', elementPath: "_filter_value" };
+            dataTableModel._default_access = { type: 'string', isNotNullable: false, elementKey: "_default_access", elementName: "_default_access", elementSet: 'instanceMetadata', elementPath: "_default_access" };
             dataTableModel._form_id = { type: 'string', isNotNullable: false, elementKey: "_form_id", elementName: "_form_id", elementSet: 'instanceMetadata', elementPath: "_form_id" };
+            dataTableModel._group_modify = { type: 'string', isNotNullable: false, elementKey: "_group_modify", elementName: "_group_modify", elementSet: 'instanceMetadata', elementPath: "_group_modify" };
+            dataTableModel._group_privileged = { type: 'string', isNotNullable: false, elementKey: "_group_privileged", elementName: "_group_privileged", elementSet: 'instanceMetadata', elementPath: "_group_privileged" };
+            dataTableModel._group_read_only = { type: 'string', isNotNullable: false, elementKey: "_group_read_only", elementName: "_group_read_only", elementSet: 'instanceMetadata', elementPath: "_group_read_only" };
             dataTableModel._locale = { type: 'string', isNotNullable: false, elementKey: "_locale", elementName: "_locale", elementSet: 'instanceMetadata', elementPath: "_locale" };
+            dataTableModel._row_owner = { type: 'string', isNotNullable: false, elementKey: "_row_owner", elementName: "_row_owner", elementSet: 'instanceMetadata', elementPath: "_row_owner" };            
             dataTableModel._savepoint_type = { type: 'string', isNotNullable: false, elementKey: "_savepoint_type", elementName: "_savepoint_type", elementSet: 'instanceMetadata', elementPath: "_savepoint_type" };
             dataTableModel._savepoint_timestamp = { type: 'string', isNotNullable: true, elementKey: "_savepoint_timestamp", elementName: "_savepoint_timestamp", elementSet: 'instanceMetadata', elementPath: "_savepoint_timestamp" };
             dataTableModel._savepoint_creator = { type: 'string', isNotNullable: false, elementKey: "_savepoint_creator", elementName: "_savepoint_creator", elementSet: 'instanceMetadata', elementPath: "_savepoint_creator" };
@@ -2506,7 +2561,7 @@ var XLSXConverter = {};
         // COLUMN_TYPES
         var processedColumnTypes = columnTypeMap;
         if("column_types" in wbJson) {
-            var userDefColumnTypes = wbJson['column_types'];
+            var userDefColumnTypes = wbJson.column_types;
             if (userDefColumnTypes.length !== 1) {
                 throw Error("Expected only one row in the 'column_types' sheet");
             }
@@ -2520,9 +2575,9 @@ var XLSXConverter = {};
         // SETTINGS
         var processedSettings = {};
         if ('settings' in wbJson) {
-            var cleanSet = wbJson['settings'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'setting_name');
-            processedSettings = _.groupBy(cleanSet, 'setting_name');
+            var cleanSettingsSet = wbJson.settings;
+            cleanSettingsSet = omitRowsWithMissingField(cleanSettingsSet, 'setting_name');
+            processedSettings = _.groupBy(cleanSettingsSet, 'setting_name');
             _.each(processedSettings, function(value, name) {
                 if(_.isArray(value)){
                     if (value.length !== 1) {
@@ -2539,9 +2594,9 @@ var XLSXConverter = {};
         }
         // and form_id is just the table_id if it is missing
         if ( !('form_id' in processedSettings) ) {
-            var entry = _.extend({},processedSettings['table_id']);
+            var entry = _.extend({},processedSettings.table_id);
             entry.setting_name = "form_id";
-            processedSettings['form_id'] = entry;
+            processedSettings.form_id = entry;
         }
 
         // restrict the table_id and form_id to be no more than 50 characters long.
@@ -2568,27 +2623,28 @@ var XLSXConverter = {};
             throw Error("Please specify the survey title under the display.title column for the 'survey' setting_name on the settings sheet");
         }
         if ( _.isEmpty(processedSettings.survey.display) ||
-                (processedSettings.survey.display.title == null && processedSettings.survey.display.text != null) ) {
+                ((processedSettings.survey.display.title === null || processedSettings.survey.display.title === undefined) && 
+				 (processedSettings.survey.display.text !== null && processedSettings.survey.display.text !== undefined)) ) {
             throw Error("Please specify the survey title under the display.title column for the 'survey' setting_name on the settings sheet");
         }
 
         // construct the list of all available form locales and the default locale.
         // Relies upon the title translations of the 'survey' sheet.
         // If
-        //   settings.survey.display.title = { 'en' : 'Joy of life', 'fr' : 'Joi de vivre'}
+        //   settings.survey.display.title.text = { 'en' : 'Joy of life', 'fr' : 'Joi de vivre'}
         // and if
-        //   settings.en.display = { text: {'en' : 'English', 'fr' : 'Anglais'} }
-        //   settings.fr.display = { text: {'en' : 'French', 'fr', 'Francais' } }
+        //   settings.en.display.locale.text = {'en' : 'English', 'fr' : 'Anglais'}
+        //   settings.fr.display.locale.text = {'en' : 'French', 'fr', 'Francais' }
         // then we compose
         //
-        //   settings._locales = [ { name: 'en', display: { text: { 'en' : 'English' , 'fr': 'Anglais' }}},
-        //                         { name: 'fr', display: { text: { 'en' : 'French', 'fr': 'Francais' }}} ]
+        //   settings._locales = [ { name: 'en', locale: { text: { 'en' : 'English' , 'fr': 'Anglais' }}},
+        //                         { name: 'fr', locale: { text: { 'en' : 'French', 'fr': 'Francais' }}} ]
         //
         // If the localizations for the language tags are missing (e.g., no settings.en, settings.fr)
         // then we just use the tag as the display string for that translation:
         //
-        //   settings._locales = [ { name: 'en', display: { text: 'en'} },
-        //                         { name: 'fr', display: { text: 'fr'} } ]
+        //   settings._locales = [ { name: 'en', locale: { text: 'en'} },
+        //                         { name: 'fr', locale: { text: 'fr'} } ]
         //
         // The default locale is the first locale in the settings sheet.
         // i.e., if you have two languages, settings.en and settings.fr,
@@ -2603,38 +2659,58 @@ var XLSXConverter = {};
             var locales = [];
             var defaultLocale = null;
 
-            // assume all the locales are specified by the title...
-            var form_title = processedSettings.survey.display.title;
-            if ( _.isUndefined(form_title) || _.isString(form_title) ) {
+            // assume all the locales are specified by the title text...
+			var form_title_text;
+			try {
+				form_title_text = processedSettings.survey.display.title.text;
+			} catch (e) {
+			}
+            if ( _.isUndefined(form_title_text) || _.isString(form_title_text) ) {
                 // no internationalization -- just default choice
-                locales.push({display: {text: 'default'}, name: 'default'});
+                locales.push({  display: {
+									locale: {text: 'default'}
+								},
+								name: 'default'});
                 defaultLocale = 'default';
             } else {
                 // we have localization -- find all the tags
                 var firstTranslation = null;
+				var hasDefaultMapping = false;
 
-                for ( var f in form_title ) {
+                for ( var f in form_title_text ) {
+					if ( f === "default" ) {
+						hasDefaultMapping = true;
+					}
                     // If the tag value is defined in the settings page, use its
                     // display value as the display string for the language.
                     // Otherwise, use the tag itself as the name for that language.
                     var translations = processedSettings[f];
-                    if ( translations == null || translations.display == null ) {
-                        locales.push( { display: {text: f},
+                    if ( translations === null ||  translations === undefined || 
+						 translations.display === null || translations.display === undefined ) {
+                        locales.push( { display: {
+											locale: {text: f}
+										},
                                         name: f } );
-                        if ( defaultLocale == null ) {
+                        if ( defaultLocale === null || defaultLocale === undefined ) {
                             defaultLocale = f;
                         }
                     } else {
                         locales.push( { display: translations.display,
                                         _row_num: translations._row_num,
                                         name: f } );
-                        if ( firstTranslation == null ||
+                        if ( firstTranslation === null || firstTranslation === undefined ||
                              firstTranslation > translations._row_num) {
                             defaultLocale = f;
                             firstTranslation = translations._row_num;
                         }
                     }
                 }
+				
+				if ( !hasDefaultMapping ) {
+					// use the defaultLocale label as the default mapping for the title.
+					form_title_text["default"] = form_title_text[defaultLocale];
+					// this ensures that a default value is available for the title.
+				}
 
                 // Order by _row_num, if not null...
                 // If some are defined and some are not,
@@ -2657,16 +2733,30 @@ var XLSXConverter = {};
                     }
                 });
             }
+			
+			// ensure that all the locales have a default translation
+			// which will be a copy of the defaultLocale label if one is missing.
+			for ( var i = 0 ; i < locales.length ; ++i ) {
+				var localeField = locales[i].display.locale;
+				if ( !(_.isString(localeField)) ) {
+					var textField = localeField.text;
+					if ( !(_.isString(textField)) ) {
+						if ( !('default' in textField) ) {
+							textField["default"] = textField[defaultLocale];
+						}
+					}
+				}
+			}
 
-            var entry = { setting_name: "_locales",
+            var localeEntry = { setting_name: "_locales",
                           _row_num: processedSettings.survey._row_num,
                           value: locales };
-            processedSettings['_locales'] = entry;
+            processedSettings._locales = localeEntry;
 
-            var entry = { setting_name: "_default_locale",
+            var defaultLocaleEntry = { setting_name: "_default_locale",
                           _row_num: processedSettings.survey._row_num,
                           value: defaultLocale };
-            processedSettings['_default_locale'] = entry;
+            processedSettings._default_locale = defaultLocaleEntry;
         }
 
         if ( !('initial' in processedSettings) ) {
@@ -2678,29 +2768,123 @@ var XLSXConverter = {};
         // CHOICES
         var processedChoices = {};
         if ('choices' in wbJson) {
-            var cleanSet = wbJson['choices'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'choice_list_name');
-            errorIfFieldMissing('choices',cleanSet,'data_value', true);
-            errorIfFieldMissing('choices',cleanSet, 'display', true);
-            processedChoices = _.groupBy(cleanSet, 'choice_list_name');
+            var cleanChoicesSet = wbJson.choices;
+            cleanChoicesSet = omitRowsWithMissingField(cleanChoicesSet, 'choice_list_name');
+            errorIfFieldMissing('choices',cleanChoicesSet,'data_value', true);
+            errorIfFieldMissing('choices',cleanChoicesSet, 'display', true);
+            processedChoices = _.groupBy(cleanChoicesSet, 'choice_list_name');
         }
         specification.choices = processedChoices;
+
+        // TRANSLATIONS --
+        // three different possible sheets:
+		//    framework_translations -- only applicable in "framework"
+		//    common_translations -- only applicable in "framework"
+		//    table_specific_translations -- only applicable in tableId = formId forms
+		if ( 'translations' in wbJson ) {
+			throw Error("The sheet name 'translations' is reserved and cannot be used.");
+		}
+		
+		if ( specification.settings.table_id.value === 'framework' ) {
+			if ( 'table_specific_translations' in wbJson ) {
+				throw Error("The sheet name 'table_specific_translations' is not allowed in the framework form.");
+			}
+			// framework_translations
+			{
+				var processedFmkTranslations = {};
+				if ('framework_translations' in wbJson) {
+					var cleanFmkTranslationsSet = wbJson.framework_translations;
+					cleanFmkTranslationsSet = omitRowsWithMissingField(cleanFmkTranslationsSet, 'string_token');
+					processedFmkTranslations = _.groupBy(cleanFmkTranslationsSet, 'string_token');
+					_.each(processedFmkTranslations, function(value, name) {
+						if(_.isArray(value)){
+							if (value.length !== 1) {
+								throw Error("Duplicate definitions of '" + name + "' on 'framework_translations' sheet");
+							}
+							processedFmkTranslations[name] = value[0];
+						} else {
+							throw Error("Unexpected non-array for '" + name + "' on 'framework_translations' sheet");
+						}
+					});
+				}
+				specification.framework_definitions = {};
+				specification.framework_definitions._tokens = processedFmkTranslations;
+			}
+			{
+				var processedCmnTranslations = {};
+				if ('common_translations' in wbJson) {
+					var cleanCmnTranslationsSet = wbJson.common_translations;
+					cleanCmnTranslationsSet = omitRowsWithMissingField(cleanCmnTranslationsSet, 'string_token');
+					processedCmnTranslations = _.groupBy(cleanCmnTranslationsSet, 'string_token');
+					_.each(processedCmnTranslations, function(value, name) {
+						if(_.isArray(value)){
+							if (value.length !== 1) {
+								throw Error("Duplicate definitions of '" + name + "' on 'common_translations' sheet");
+							}
+							processedCmnTranslations[name] = value[0];
+						} else {
+							throw Error("Unexpected non-array for '" + name + "' on 'common_translations' sheet");
+						}
+					});
+				}
+				specification.common_definitions = {};
+				specification.common_definitions._tokens = processedCmnTranslations;
+				specification.common_definitions._locales = specification.settings._locales;
+				specification.common_definitions._default_locale = specification.settings._default_locale;
+			}
+		} else if ( specification.settings.form_id.value !== specification.settings.table_id.value ) {
+			if ( 'framework_translations' in wbJson ) {
+				throw Error("The sheet name 'framework_translations' is only allowed in the framework form.");
+			}
+			if ( 'common_translations' in wbJson ) {
+				throw Error("The sheet name 'common_translations' is only allowed in the framework form.");
+			}
+			if ( 'table_specific_translations' in wbJson ) {
+				throw Error("The sheet name 'table_specific_translations' is only allowed when form_id === table_id.");
+			}
+		} else {
+			if ( 'framework_translations' in wbJson ) {
+				throw Error("The sheet name 'framework_translations' is only allowed in the framework form.");
+			}
+			if ( 'common_translations' in wbJson ) {
+				throw Error("The sheet name 'common_translations' is only allowed in the framework form.");
+			}
+			var processedTSTranslations = {};
+			if ('table_specific_translations' in wbJson) {
+				var cleanTSTranslationsSet = wbJson.table_specific_translations;
+				cleanTSTranslationsSet = omitRowsWithMissingField(cleanTSTranslationsSet, 'string_token');
+				processedTSTranslations = _.groupBy(cleanTSTranslationsSet, 'string_token');
+				_.each(processedTSTranslations, function(value, name) {
+					if(_.isArray(value)){
+						if (value.length !== 1) {
+							throw Error("Duplicate definitions of '" + name + "' on 'table_specific_translations' sheet");
+						}
+						processedTSTranslations[name] = value[0];
+					} else {
+						throw Error("Unexpected non-array for '" + name + "' on 'table_specific_translations' sheet");
+					}
+				});
+			}
+			specification.table_specific_definitions = {};
+			specification.table_specific_definitions._tokens = processedTSTranslations;
+		}
 
         // QUERIES
         var processedQueries = {};
         if ('queries' in wbJson) {
-            var cleanSet = wbJson['queries'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'query_name');
-            errorIfFieldMissing('queries',cleanSet,'query_type', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'csv', 'uri', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'csv', 'callback', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'ajax', 'uri', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'ajax', 'callback', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'linked_form_id', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'selection', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'selectionArgs', true);
-            errorIfFieldsMissingForQueryType('queries',cleanSet,'linked_table', 'auxillaryHash', true);
-            processedQueries = _.groupBy(cleanSet, 'query_name');
+            var cleanQueriesSet = wbJson.queries;
+            cleanQueriesSet = omitRowsWithMissingField(cleanQueriesSet, 'query_name');
+            errorIfFieldMissing('queries',cleanQueriesSet,'query_type', true);
+            errorIfFieldsMissingForQueryType('queries',cleanQueriesSet,'csv', 'uri');
+            errorIfFieldsMissingForQueryType('queries',cleanQueriesSet,'csv', 'callback');
+            errorIfFieldsMissingForQueryType('queries',cleanQueriesSet,'ajax', 'uri');
+            errorIfFieldsMissingForQueryType('queries',cleanQueriesSet,'ajax', 'callback');
+            errorIfFieldsMissingForQueryType('queries',cleanQueriesSet,'linked_table', 'linked_form_id');
+            errorIfFieldsMissingForQueryType('queries',cleanQueriesSet,'linked_table', 'selection');
+            errorIfFieldsMissingForQueryType('queries',cleanQueriesSet,'linked_table', 'selectionArgs');
+            errorIfFieldsMissingForQueryType('queries',cleanQueriesSet,'linked_table', 'newRowInitialElementKeyToValueMap');
+            errorIfFieldsMissingForQueryType('queries',cleanQueriesSet,'linked_table', 'openRowInitialElementKeyToValueMap');
+            processedQueries = _.groupBy(cleanQueriesSet, 'query_name');
             _.each(processedQueries, function(value, name) {
                 if(_.isArray(value)){
                     if (value.length !== 1) {
@@ -2724,10 +2908,10 @@ var XLSXConverter = {};
         // CALCULATES
         var processedCalculates = {};
         if ('calculates' in wbJson) {
-            var cleanSet = wbJson['calculates'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'calculation_name');
-            errorIfFieldMissing('calculates',cleanSet,'calculation', true);
-            processedCalculates = _.groupBy(cleanSet, 'calculation_name');
+            var cleanCalculatesSet = wbJson.calculates;
+            cleanCalculatesSet = omitRowsWithMissingField(cleanCalculatesSet, 'calculation_name');
+            errorIfFieldMissing('calculates',cleanCalculatesSet,'calculation', true);
+            processedCalculates = _.groupBy(cleanCalculatesSet, 'calculation_name');
             _.each(processedCalculates, function(value, name) {
                 if(_.isArray(value)){
                     if (value.length !== 1) {
@@ -2745,11 +2929,11 @@ var XLSXConverter = {};
         // NOTE: does NOT have any column_type processing
         var processedPromptTypes = promptTypeMap;
         if("prompt_types" in wbJson) {
-            var cleanSet = wbJson['prompt_types'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'prompt_type_name');
-            errorIfFieldMissing('prompt_types',cleanSet,'type', true);
+            var cleanPromptTypesSet = wbJson.prompt_types;
+            cleanPromptTypesSet = omitRowsWithMissingField(cleanPromptTypesSet, 'prompt_type_name');
+            errorIfFieldMissing('prompt_types',cleanPromptTypesSet,'type', true);
             var userDefPrompts = {};
-            userDefPrompts = _.groupBy(cleanSet, "prompt_type_name");
+            userDefPrompts = _.groupBy(cleanPromptTypesSet, "prompt_type_name");
             _.each(userDefPrompts, function(value, key){
                 if(_.isArray(value)){
                     if (value.length !== 1) {
@@ -2772,10 +2956,10 @@ var XLSXConverter = {};
         // NOTE: does NOT have any column_type processing
         var processedModel = {};
         if("model" in wbJson){
-            var cleanSet = wbJson['model'];
-            cleanSet = omitRowsWithMissingField(cleanSet, 'name');
-            errorIfFieldMissing('model',cleanSet,'type', true);
-            processedModel = _.groupBy(cleanSet, "name");
+            var cleanModelSet = wbJson.model;
+            cleanModelSet = omitRowsWithMissingField(cleanModelSet, 'name');
+            errorIfFieldMissing('model',cleanModelSet,'type', true);
+            processedModel = _.groupBy(cleanModelSet, "name");
             _.each(processedModel, function(value, key){
                 if(_.isArray(value)){
                     if (value.length !== 1) {
@@ -2805,7 +2989,7 @@ var XLSXConverter = {};
             }
         });
         if ( !("initial" in sections) ) {
-            sections["initial"] = default_initial;
+            sections.initial = default_initial;
             sectionNames.push("initial");
         }
 
@@ -2869,7 +3053,7 @@ var XLSXConverter = {};
 
         // TODO: deal with column_types
         // column types are applied to ALL sheets.
-        specification.column_types
+        // specification.column_types
 
         // DATA TABLE MODEL
 
@@ -2891,13 +3075,13 @@ var XLSXConverter = {};
             var foundTableFormTypeSurveySpec = false;
             
             if ('properties' in wbJson) {
-                var cleanSet = wbJson['properties'];
-                cleanSet = omitRowsWithMissingField(cleanSet, 'partition');
-                cleanSet = omitRowsWithMissingField(cleanSet, 'aspect');
-                cleanSet = omitRowsWithMissingField(cleanSet, 'key');
-                cleanSet = omitRowsWithMissingField(cleanSet, 'type');
-                cleanSet = omitRowsWithMissingField(cleanSet, 'value');
-                _.each(cleanSet, function(row) {
+                var cleanPropertiesSet = wbJson.properties;
+                cleanPropertiesSet = omitRowsWithMissingField(cleanPropertiesSet, 'partition');
+                cleanPropertiesSet = omitRowsWithMissingField(cleanPropertiesSet, 'aspect');
+                cleanPropertiesSet = omitRowsWithMissingField(cleanPropertiesSet, 'key');
+                cleanPropertiesSet = omitRowsWithMissingField(cleanPropertiesSet, 'type');
+                cleanPropertiesSet = omitRowsWithMissingField(cleanPropertiesSet, 'value');
+                _.each(cleanPropertiesSet, function(row) {
                     if ( !_.isString(row.partition) ) {
                         throw Error("The 'partition' column on the 'properties' sheet must be a string. Error at row: " + row._row_num);
                     }
@@ -2956,10 +3140,10 @@ var XLSXConverter = {};
             for ( var dbColumnName in specification.dataTableModel ) {
                 // the XLSXconverter already handles expanding complex types
                 // such as geopoint into their underlying storage representation.
-                jsonDefn = specification.dataTableModel[dbColumnName];
+                var jsonDefn = specification.dataTableModel[dbColumnName];
                 
                 if ( jsonDefn.elementSet === 'data' && !jsonDefn.isSessionVariable ) {
-                    var surveyElementName = jsonDefn.elementName;
+                    // var surveyElementName = jsonDefn.elementName;
                     
                     if (jsonDefn.displayName !== undefined && jsonDefn.displayName !== null) {
                         processedProperties.push( {

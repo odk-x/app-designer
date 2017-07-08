@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>ODK Scan</title>
 	<!-- 
 	
@@ -10,7 +10,7 @@
 	-->
 
 	<!-- CSS -->
-		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="js/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="style/imgareaselect-animated.css">
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" href="style/style.css">
@@ -18,33 +18,33 @@
 
 	<!-- JavaScript libraries -->
 		<!-- jQuery libraries -->
-		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/libs/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 		
 		<!-- required for EmberJS (model-view-controller framework) -->
-		<script src="js/libs/handlebars-1.0.0.js"></script>
-		<script src="js/libs/ember.js"></script>
+		<script type="text/javascript" src="js/libs/handlebars-1.0.0.js"></script>
+		<script type="text/javascript" src="js/libs/ember.js"></script>
 			
 		<!-- used to implement image cropping/selection -->
-		<script src="js/libs/jquery.imgareaselect.pack.js"></script>
+		<script type="text/javascript" src="js/libs/jquery.imgareaselect.pack.js"></script>
 		
 		<!-- used to implement dropdown UI tabs -->
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>		
-		
+		<script type="text/javascript" src="js/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>		
+
 		<!-- converts a DOM element to a canvas element -->
-		<script src="js/libs/html2canvas.js"></script>
+		<script type="text/javascript" src="js/libs/html2canvas.js"></script>
 		
 		<!-- used to save Blobs to a file -->
-		<script src="js/libs/FileSaver.js"></script>
+		<script type="text/javascript" src="js/libs/FileSaver.js"></script>
 		
 		<!-- used to save zip files of the Scan doc and JSON output -->
-		<script src="js/libs/jszip.js"></script>
+		<script type="text/javascript" src="js/libs/jszip.js"></script>
 		
 		<!-- used to nudge the movement of fields -->
-		<script src="js/libs/jquery.hotkeys.js"></script>
+		<script type="text/javascript" src="js/libs/jquery.hotkeys.js"></script>
 
 		<!--used for xlsx file-->
-		<script src="http://yourjavascript.com/119112369/xlsx.js"></script>
+		<script type="text/javascript" src="http://yourjavascript.com/119112369/xlsx.js"></script>
 		
 	    <script type="text/javascript" src="../xlsxconverter/js-xlsx/xlsx.js"></script>
 	    <script type="text/javascript" src="../xlsxconverter/XRegExp-All-3.0.0-pre-2014-12-24.js"></script>
@@ -53,7 +53,7 @@
 
         <!--used for saving files to filesystem-->
         <script type="text/javascript" src="../devEnv/js/devenv.js"></script>
-	
+
 	<!-- ODK Scan scripts -->
 		<script src="js/globals.js"></script>
 		<script src="js/ember_setup.js"></script>
@@ -74,7 +74,7 @@
 		<script src="js/views/default_prop_view.js"></script>
 	<!---->
   </head>
-  <body>    
+  <body class="fullembedded" >    
 	<!-- inner body content is wrapped in 'handlebars' -->
 	<script type="text/x-handlebars" data-template-name="fields">
 		<!-- this is where the application 'main' code resides -->
