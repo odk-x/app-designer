@@ -1994,7 +1994,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
         "Removes the opendatakit folders",
         function remove_folders() {
             grunt.task.run("killall");
-            var folders = [tablesConfig.deviceMount, "/sdcard/odk"];
+            var folders = [tablesConfig.deviceMount + "/" + tablesConfig.appName];//, "/sdcard/odk"];
             for (var i = 0; i < folders.length; i++) {
                 console.log("Deleting ".concat(folders[i]));
                 grunt.task.run("exec:adbshell:rm -rf ".concat(folders[i]));
@@ -2052,7 +2052,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
         "setup",
         "Launch the login and sync screen",
         function() {
-            grunt.task.run("exec:adbshell:am start -a android.intent.action.MAIN -n org.opendatakit.services/.sync.actions.activities.SyncActivity --es appName default --es showLogin true");
+            grunt.task.run("exec:adbshell:am start -a android.intent.action.MAIN -n org.opendatakit.services/.sync.actions.activities.SyncActivity --es appName "+tablesConfig.appName+" --es showLogin true");
         }
     )
     // https://stackoverflow.com/questions/16612495/continue-certain-tasks-in-grunt-even-if-one-fails
