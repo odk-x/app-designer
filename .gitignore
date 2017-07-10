@@ -1,4 +1,5 @@
 build/
 *.~lock.*
 app/output/props/*
+app/output/db
 tempZipDir
