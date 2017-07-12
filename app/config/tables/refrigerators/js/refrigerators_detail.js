@@ -84,7 +84,7 @@ function onLinkClickModel() {
 
     if (!$.isEmptyObject(typeData)) {
 
-        odkTables.openDetailView(
+        odkTables.openDetailView(null, 
             'refrigerator_types',
             typeData.getRowId(0),
             'config/tables/refrigerator_types/html/refrigerator_types_detail.html');
@@ -97,7 +97,7 @@ function onLinkClickFacility() {
 
     if (!$.isEmptyObject(facilityData)) {
 
-        odkTables.openDetailView(
+        odkTables.openDetailView(null, 
             'health_facility',
             facilityData.getRowId(0),
             'config/tables/health_facility/html/health_facility_detail.html');
