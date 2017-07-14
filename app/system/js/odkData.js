@@ -87,12 +87,14 @@ window.odkData = {
         var that = this;
         
         var req = that.queueRequest('arbitraryQuery', successCallbackFn, failureCallbackFn);
+        var stringLimit = limit == null ? null : limit.toString();
+        var stringOffset = offset == null ? null : offset.toString();
         console.log('arbitraryQuery cbId=' + req._callbackId);
 
 		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
 		var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
 				JSON.stringify(sqlBindParams);
-        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParamsJSON, limit, offset, req._callbackId);
+        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParamsJSON, stringLimit, stringOffset, req._callbackId);
     },
 
     getRows: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
