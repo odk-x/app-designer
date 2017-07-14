@@ -6,5 +6,5 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,refrigerator_types
 Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/assets/aa_refrigerator_types_detail.html
-Table,default,displayName,object,"""Refrigerator Types"""
+Table,default,displayName,object,"{""text"":""Refrigerator Types""}"
 Table,default,listViewFileName,string,config/assets/aa_refrigerator_types_list.html

@@ -15,7 +15,7 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,health_facility
 Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/assets/aa_health_facility_detail.html
-Table,default,displayName,object,"""Health Facility"""
+Table,default,displayName,object,"{""text"":""Health Facility""}"
 Table,default,listViewFileName,string,config/assets/aa_health_facility_list.html
 Table,default,mapListViewFileName,string,config/tables/health_facility/html/health_facility_list.html
 TableMapFragment,default,keyColorRuleType,string,None

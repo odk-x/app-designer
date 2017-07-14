@@ -762,7 +762,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Health Facility"
+          "title": {
+            "text": "Health Facility"
+          }
         },
         "_row_num": 4
       },
@@ -871,7 +873,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Health Facility"
+          "title": {
+            "text": "Health Facility"
+          }
         },
         "_row_num": 4
       },
@@ -917,7 +921,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Health Facility"
+          "title": {
+            "text": "Health Facility"
+          }
         },
         "_row_num": 4
       }
@@ -2221,7 +2227,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Health Facility"
+              "title": {
+                "text": "Health Facility"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -2994,7 +3002,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Health Facility\""
+        "_value": "{\"text\":\"Health Facility\"}"
       },
       {
         "_partition": "Table",

@@ -58,7 +58,7 @@
       {
         "type": "select_one_dropdown",
         "values_list": "health_facility_list",
-        "name": "health_facility",
+        "name": "facility_row_id",
         "display": {
           "prompt": {
             "text": "Health Facility"
@@ -470,7 +470,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerators"
+          "title": {
+            "text": "Refrigerators"
+          }
         },
         "_row_num": 5
       },
@@ -516,7 +518,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerators"
+          "title": {
+            "text": "Refrigerators"
+          }
         },
         "_row_num": 5
       },
@@ -547,7 +551,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerators"
+          "title": {
+            "text": "Refrigerators"
+          }
         },
         "_row_num": 5
       }
@@ -859,7 +865,7 @@
         "valuesList": "regionLevel3_csv",
         "elementKey": "adminRegion"
       },
-      "health_facility": {
+      "facility_row_id": {
         "_defn": [
           {
             "_row_num": 8,
@@ -868,7 +874,7 @@
         ],
         "type": "string",
         "valuesList": "health_facility_list",
-        "elementKey": "health_facility"
+        "elementKey": "facility_row_id"
       },
       "model_row_id": {
         "_defn": [
@@ -1035,7 +1041,7 @@
           {
             "type": "select_one_dropdown",
             "values_list": "health_facility_list",
-            "name": "health_facility",
+            "name": "facility_row_id",
             "display": {
               "prompt": {
                 "text": "Health Facility"
@@ -1349,7 +1355,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Refrigerators"
+              "title": {
+                "text": "Refrigerators"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1553,7 +1561,7 @@
         "elementSet": "data",
         "elementPath": "adminRegion"
       },
-      "health_facility": {
+      "facility_row_id": {
         "_defn": [
           {
             "_row_num": 8,
@@ -1562,10 +1570,10 @@
         ],
         "type": "string",
         "valuesList": "health_facility_list",
-        "elementKey": "health_facility",
-        "elementName": "health_facility",
+        "elementKey": "facility_row_id",
+        "elementName": "facility_row_id",
         "elementSet": "data",
-        "elementPath": "health_facility"
+        "elementPath": "facility_row_id"
       },
       "model_row_id": {
         "_defn": [
@@ -1859,7 +1867,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Refrigerators\""
+        "_value": "{\"text\":\"Refrigerators\"}"
       },
       {
         "_partition": "Table",

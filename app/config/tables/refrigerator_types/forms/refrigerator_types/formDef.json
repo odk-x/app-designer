@@ -308,7 +308,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerator Types"
+          "title": {
+            "text": "Refrigerator Types"
+          }
         },
         "_row_num": 4
       },
@@ -359,7 +361,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerator Types"
+          "title": {
+            "text": "Refrigerator Types"
+          }
         },
         "_row_num": 4
       },
@@ -405,7 +409,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Refrigerator Types"
+          "title": {
+            "text": "Refrigerator Types"
+          }
         },
         "_row_num": 4
       }
@@ -1000,7 +1006,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Refrigerator Types"
+              "title": {
+                "text": "Refrigerator Types"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1524,7 +1532,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Refrigerator Types\""
+        "_value": "{\"text\":\"Refrigerator Types\"}"
       },
       {
         "_partition": "Table",
