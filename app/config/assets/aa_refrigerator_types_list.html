@@ -569,6 +569,7 @@ var doSearch = function doSearch() {
             var mainDisplay = document.createElement("div")
             mainDisplay.classList.add("main-display");
             mainDisplay.innerText = d.getData(i, display_col);
+            if (global_group_by) mainDisplay.innerText = pretty(mainDisplay.innerText);
             displays.appendChild(mainDisplay)
             var subDisplay = null;
             // we keep this variable for use in poor-man's vertical centering later
