@@ -7,6 +7,6 @@ Column,working_status,displayChoicesList,object,"[{""choice_list_name"":""status
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,refrigerators
 Table,default,defaultViewType,string,LIST
-Table,default,detailViewFileName,string,config/tables/refrigerators/html/refrigerators_detail.html
+Table,default,detailViewFileName,string,config/assets/aa_refrigerators_detail.html
 Table,default,displayName,object,"""Refrigerators"""
-Table,default,listViewFileName,string,config/tables/refrigerators/html/refrigerators_list.html
+Table,default,listViewFileName,string,config/assets/aa_refrigerators_list.html

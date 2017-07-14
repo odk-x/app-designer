@@ -732,6 +732,11 @@
         "setting_name": "instance_name",
         "value": "facility_name",
         "_row_num": 7
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20170713,
+        "_row_num": 8
       }
     ],
     "properties": [
@@ -748,7 +753,7 @@
         "aspect": "default",
         "key": "detailViewFileName",
         "type": "string",
-        "value": "config/tables/health_facility/html/health_facility_detail.html",
+        "value": "config/assets/aa_health_facility_detail.html",
         "_row_num": 3
       },
       {
@@ -756,7 +761,7 @@
         "aspect": "default",
         "key": "listViewFileName",
         "type": "string",
-        "value": "config/tables/health_facility/html/health_facility_list.html",
+        "value": "config/assets/aa_health_facility_list.html",
         "_row_num": 4
       },
       {
@@ -836,6 +841,11 @@
         "setting_name": "instance_name",
         "value": "facility_name",
         "_row_num": 7
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 20170713,
+        "_row_num": 8
       },
       "_locales": {
         "setting_name": "_locales",
@@ -2881,7 +2891,7 @@
         "_aspect": "default",
         "_key": "detailViewFileName",
         "_type": "string",
-        "_value": "config/tables/health_facility/html/health_facility_detail.html"
+        "_value": "config/assets/aa_health_facility_detail.html"
       },
       {
         "_partition": "Table",
@@ -2895,7 +2905,7 @@
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "string",
-        "_value": "config/tables/health_facility/html/health_facility_list.html"
+        "_value": "config/assets/aa_health_facility_list.html"
       },
       {
         "_partition": "Table",
