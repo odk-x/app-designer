@@ -9,7 +9,9 @@
         "type": "text",
         "name": "facility_name",
         "display": {
-          "text": "Enter health facility name"
+          "prompt": {
+            "text": "Enter health facility name"
+          }
         },
         "required": 1,
         "_row_num": 3
@@ -18,7 +20,9 @@
         "type": "text",
         "name": "facility_id",
         "display": {
-          "text": "Enter health facility ID"
+          "prompt": {
+            "text": "Enter health facility ID"
+          }
         },
         "required": 1,
         "_row_num": 4
@@ -35,7 +39,9 @@
         "type": "geopoint",
         "name": "Location",
         "display": {
-          "text": "Capture location"
+          "prompt": {
+            "text": "Capture location"
+          }
         },
         "_row_num": 7
       },
@@ -44,7 +50,9 @@
         "values_list": "regionLevel1_csv",
         "name": "regionLevel1",
         "display": {
-          "text": "Level 1 of admin region"
+          "prompt": {
+            "text": "Level 1 of admin region"
+          }
         },
         "_row_num": 8
       },
@@ -53,7 +61,9 @@
         "values_list": "regionLevel2_csv",
         "name": "regionLevel2",
         "display": {
-          "text": "Level 2 of admin region"
+          "prompt": {
+            "text": "Level 2 of admin region"
+          }
         },
         "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
         "_row_num": 9
@@ -63,7 +73,9 @@
         "values_list": "regionLevel3_csv",
         "name": "admin_region",
         "display": {
-          "text": "Admin Region"
+          "prompt": {
+            "text": "Admin Region"
+          }
         },
         "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
         "_row_num": 10
@@ -81,7 +93,9 @@
         "values_list": "facility_types",
         "name": "facility_type",
         "display": {
-          "text": "Choose the facility type"
+          "prompt": {
+            "text": "Choose the facility type"
+          }
         },
         "_row_num": 13
       },
@@ -90,7 +104,9 @@
         "values_list": "ownership_types",
         "name": "facility_ownership",
         "display": {
-          "text": "Choose the ownership"
+          "prompt": {
+            "text": "Choose the ownership"
+          }
         },
         "_row_num": 14
       },
@@ -98,7 +114,9 @@
         "type": "number",
         "name": "facility_population",
         "display": {
-          "text": "Enter the facility population"
+          "prompt": {
+            "text": "Enter the facility population"
+          }
         },
         "_row_num": 15
       },
@@ -106,7 +124,9 @@
         "type": "number",
         "name": "facility_coverage",
         "display": {
-          "text": "Percent coverage?"
+          "prompt": {
+            "text": "Percent coverage?"
+          }
         },
         "_row_num": 16
       },
@@ -123,7 +143,9 @@
         "values_list": "elec_sources",
         "name": "electricity_source",
         "display": {
-          "text": "Choose the electricity source"
+          "prompt": {
+            "text": "Choose the electricity source"
+          }
         },
         "_row_num": 19
       },
@@ -137,7 +159,9 @@
         "values_list": "grid",
         "name": "grid_power_availability",
         "display": {
-          "text": "Choose the grid availability"
+          "prompt": {
+            "text": "Choose the grid availability"
+          }
         },
         "_row_num": 21
       },
@@ -150,7 +174,9 @@
         "values_list": "fuel_availability",
         "name": "gas_availability",
         "display": {
-          "text": "Choose the gas availability"
+          "prompt": {
+            "text": "Choose the gas availability"
+          }
         },
         "_row_num": 23
       },
@@ -159,7 +185,9 @@
         "values_list": "fuel_availability",
         "name": "kerosene_availability",
         "display": {
-          "text": "Choose the kerosene availability"
+          "prompt": {
+            "text": "Choose the kerosene availability"
+          }
         },
         "_row_num": 24
       },
@@ -176,7 +204,9 @@
         "values_list": "yes_no",
         "name": "solar_suitable_climate",
         "display": {
-          "text": "Is this a solar suitable climate?"
+          "prompt": {
+            "text": "Is this a solar suitable climate?"
+          }
         },
         "_row_num": 27
       },
@@ -185,7 +215,9 @@
         "values_list": "yes_no",
         "name": "solar_suitable_site",
         "display": {
-          "text": "Is this a solar suitable site?"
+          "prompt": {
+            "text": "Is this a solar suitable site?"
+          }
         },
         "_row_num": 28
       },
@@ -194,7 +226,9 @@
         "values_list": "climate_types",
         "name": "climate_zone",
         "display": {
-          "text": "What is the climate of this location?"
+          "prompt": {
+            "text": "What is the climate of this location?"
+          }
         },
         "_row_num": 29
       },
@@ -210,7 +244,9 @@
         "type": "number",
         "name": "distance_to_supply",
         "display": {
-          "text": "What is the distance to the nearest supply point?"
+          "prompt": {
+            "text": "What is the distance to the nearest supply point?"
+          }
         },
         "_row_num": 32
       },
@@ -219,7 +255,9 @@
         "values_list": "storage_types",
         "name": "storage_type",
         "display": {
-          "text": "Storage type?"
+          "prompt": {
+            "text": "Storage type?"
+          }
         },
         "_row_num": 33
       },
@@ -228,7 +266,9 @@
         "values_list": "delivery_types",
         "name": "delivery_type",
         "display": {
-          "text": "Delivery type?"
+          "prompt": {
+            "text": "Delivery type?"
+          }
         },
         "_row_num": 34
       },
@@ -244,7 +284,9 @@
         "type": "number",
         "name": "vaccine_supply_interval",
         "display": {
-          "text": "Vaccine Supply Interval?"
+          "prompt": {
+            "text": "Vaccine Supply Interval?"
+          }
         },
         "_row_num": 37
       },
@@ -252,7 +294,9 @@
         "type": "number",
         "name": "vaccine_reserve_stock_requirement",
         "display": {
-          "text": "Vaccine Reserve Stock Requirement?"
+          "prompt": {
+            "text": "Vaccine Reserve Stock Requirement?"
+          }
         },
         "_row_num": 38
       },
@@ -261,7 +305,9 @@
         "values_list": "vaccine_modes",
         "name": "vaccine_supply_mode",
         "display": {
-          "text": "Vaccine Supply Mode?"
+          "prompt": {
+            "text": "Vaccine Supply Mode?"
+          }
         },
         "_row_num": 39
       },
@@ -273,7 +319,9 @@
         "type": "text",
         "name": "contact_name",
         "display": {
-          "text": "Contact Name?"
+          "prompt": {
+            "text": "Contact Name?"
+          }
         },
         "_row_num": 41
       }
@@ -735,7 +783,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170713,
+        "value": 20170714,
         "_row_num": 8
       }
     ],
@@ -844,7 +892,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170713,
+        "value": 20170714,
         "_row_num": 8
       },
       "_locales": {
@@ -1615,7 +1663,9 @@
             "type": "text",
             "name": "facility_name",
             "display": {
-              "text": "Enter health facility name"
+              "prompt": {
+                "text": "Enter health facility name"
+              }
             },
             "required": 1,
             "_row_num": 3,
@@ -1629,7 +1679,9 @@
             "type": "text",
             "name": "facility_id",
             "display": {
-              "text": "Enter health facility ID"
+              "prompt": {
+                "text": "Enter health facility ID"
+              }
             },
             "required": 1,
             "_row_num": 4,
@@ -1643,7 +1695,9 @@
             "type": "geopoint",
             "name": "Location",
             "display": {
-              "text": "Capture location"
+              "prompt": {
+                "text": "Capture location"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -1657,7 +1711,9 @@
             "values_list": "regionLevel1_csv",
             "name": "regionLevel1",
             "display": {
-              "text": "Level 1 of admin region"
+              "prompt": {
+                "text": "Level 1 of admin region"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -1671,7 +1727,9 @@
             "values_list": "regionLevel2_csv",
             "name": "regionLevel2",
             "display": {
-              "text": "Level 2 of admin region"
+              "prompt": {
+                "text": "Level 2 of admin region"
+              }
             },
             "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
             "_row_num": 9,
@@ -1686,7 +1744,9 @@
             "values_list": "regionLevel3_csv",
             "name": "admin_region",
             "display": {
-              "text": "Admin Region"
+              "prompt": {
+                "text": "Admin Region"
+              }
             },
             "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
             "_row_num": 10,
@@ -1701,7 +1761,9 @@
             "values_list": "facility_types",
             "name": "facility_type",
             "display": {
-              "text": "Choose the facility type"
+              "prompt": {
+                "text": "Choose the facility type"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -1715,7 +1777,9 @@
             "values_list": "ownership_types",
             "name": "facility_ownership",
             "display": {
-              "text": "Choose the ownership"
+              "prompt": {
+                "text": "Choose the ownership"
+              }
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -1728,7 +1792,9 @@
             "type": "number",
             "name": "facility_population",
             "display": {
-              "text": "Enter the facility population"
+              "prompt": {
+                "text": "Enter the facility population"
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -1741,7 +1807,9 @@
             "type": "number",
             "name": "facility_coverage",
             "display": {
-              "text": "Percent coverage?"
+              "prompt": {
+                "text": "Percent coverage?"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -1755,7 +1823,9 @@
             "values_list": "elec_sources",
             "name": "electricity_source",
             "display": {
-              "text": "Choose the electricity source"
+              "prompt": {
+                "text": "Choose the electricity source"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -1769,7 +1839,9 @@
             "values_list": "grid",
             "name": "grid_power_availability",
             "display": {
-              "text": "Choose the grid availability"
+              "prompt": {
+                "text": "Choose the grid availability"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -1783,7 +1855,9 @@
             "values_list": "fuel_availability",
             "name": "gas_availability",
             "display": {
-              "text": "Choose the gas availability"
+              "prompt": {
+                "text": "Choose the gas availability"
+              }
             },
             "_row_num": 23,
             "__rowNum__": 22,
@@ -1797,7 +1871,9 @@
             "values_list": "fuel_availability",
             "name": "kerosene_availability",
             "display": {
-              "text": "Choose the kerosene availability"
+              "prompt": {
+                "text": "Choose the kerosene availability"
+              }
             },
             "_row_num": 24,
             "__rowNum__": 23,
@@ -1811,7 +1887,9 @@
             "values_list": "yes_no",
             "name": "solar_suitable_climate",
             "display": {
-              "text": "Is this a solar suitable climate?"
+              "prompt": {
+                "text": "Is this a solar suitable climate?"
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -1825,7 +1903,9 @@
             "values_list": "yes_no",
             "name": "solar_suitable_site",
             "display": {
-              "text": "Is this a solar suitable site?"
+              "prompt": {
+                "text": "Is this a solar suitable site?"
+              }
             },
             "_row_num": 28,
             "__rowNum__": 27,
@@ -1839,7 +1919,9 @@
             "values_list": "climate_types",
             "name": "climate_zone",
             "display": {
-              "text": "What is the climate of this location?"
+              "prompt": {
+                "text": "What is the climate of this location?"
+              }
             },
             "_row_num": 29,
             "__rowNum__": 28,
@@ -1852,7 +1934,9 @@
             "type": "number",
             "name": "distance_to_supply",
             "display": {
-              "text": "What is the distance to the nearest supply point?"
+              "prompt": {
+                "text": "What is the distance to the nearest supply point?"
+              }
             },
             "_row_num": 32,
             "__rowNum__": 31,
@@ -1866,7 +1950,9 @@
             "values_list": "storage_types",
             "name": "storage_type",
             "display": {
-              "text": "Storage type?"
+              "prompt": {
+                "text": "Storage type?"
+              }
             },
             "_row_num": 33,
             "__rowNum__": 32,
@@ -1880,7 +1966,9 @@
             "values_list": "delivery_types",
             "name": "delivery_type",
             "display": {
-              "text": "Delivery type?"
+              "prompt": {
+                "text": "Delivery type?"
+              }
             },
             "_row_num": 34,
             "__rowNum__": 33,
@@ -1893,7 +1981,9 @@
             "type": "number",
             "name": "vaccine_supply_interval",
             "display": {
-              "text": "Vaccine Supply Interval?"
+              "prompt": {
+                "text": "Vaccine Supply Interval?"
+              }
             },
             "_row_num": 37,
             "__rowNum__": 36,
@@ -1906,7 +1996,9 @@
             "type": "number",
             "name": "vaccine_reserve_stock_requirement",
             "display": {
-              "text": "Vaccine Reserve Stock Requirement?"
+              "prompt": {
+                "text": "Vaccine Reserve Stock Requirement?"
+              }
             },
             "_row_num": 38,
             "__rowNum__": 37,
@@ -1920,7 +2012,9 @@
             "values_list": "vaccine_modes",
             "name": "vaccine_supply_mode",
             "display": {
-              "text": "Vaccine Supply Mode?"
+              "prompt": {
+                "text": "Vaccine Supply Mode?"
+              }
             },
             "_row_num": 39,
             "__rowNum__": 38,
@@ -1933,7 +2027,9 @@
             "type": "text",
             "name": "contact_name",
             "display": {
-              "text": "Contact Name?"
+              "prompt": {
+                "text": "Contact Name?"
+              }
             },
             "_row_num": 41,
             "__rowNum__": 40,

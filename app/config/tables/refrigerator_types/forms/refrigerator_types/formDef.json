@@ -9,7 +9,9 @@
         "type": "text",
         "name": "catalog_id",
         "display": {
-          "text": "Enter catalog ID:"
+          "prompt": {
+            "text": "Enter catalog ID:"
+          }
         },
         "_row_num": 3
       },
@@ -17,7 +19,9 @@
         "type": "text",
         "name": "model_id",
         "display": {
-          "text": "Enter the model ID:"
+          "prompt": {
+            "text": "Enter the model ID:"
+          }
         },
         "_row_num": 4
       },
@@ -29,7 +33,9 @@
         "type": "image",
         "name": "refrigerator_picture",
         "display": {
-          "text": "Take a picture of the refrigerator"
+          "prompt": {
+            "text": "Take a picture of the refrigerator"
+          }
         },
         "_row_num": 6
       },
@@ -37,7 +43,9 @@
         "type": "text",
         "name": "manufacturer",
         "display": {
-          "text": "Enter the manufacturer:"
+          "prompt": {
+            "text": "Enter the manufacturer:"
+          }
         },
         "_row_num": 7
       },
@@ -49,8 +57,12 @@
         "type": "decimal",
         "name": "refrigerator_gross_volume",
         "display": {
-          "text": "Enter the refrigerator's gross volume:",
-          "hint": "(cubic meters)"
+          "prompt": {
+            "text": "Enter the refrigerator's gross volume:"
+          },
+          "hint": {
+            "text": "(cubic meters)"
+          }
         },
         "_row_num": 9
       },
@@ -58,8 +70,12 @@
         "type": "decimal",
         "name": "refrigerator_net_volume",
         "display": {
-          "text": "Enter the refrigerator's net volume:",
-          "hint": "(cubic meters)"
+          "prompt": {
+            "text": "Enter the refrigerator's net volume:"
+          },
+          "hint": {
+            "text": "(cubic meters)"
+          }
         },
         "_row_num": 10
       },
@@ -67,8 +83,12 @@
         "type": "decimal",
         "name": "freezer_gross_volume",
         "display": {
-          "text": "Enter the freezer's gross volume:",
-          "hint": "(cubic meters)"
+          "prompt": {
+            "text": "Enter the freezer's gross volume:"
+          },
+          "hint": {
+            "text": "(cubic meters)"
+          }
         },
         "_row_num": 11
       },
@@ -76,8 +96,12 @@
         "type": "decimal",
         "name": "freezer_net_volume",
         "display": {
-          "text": "Enter the freezer's net volume:",
-          "hint": "(cubic meters)"
+          "prompt": {
+            "text": "Enter the freezer's net volume:"
+          },
+          "hint": {
+            "text": "(cubic meters)"
+          }
         },
         "_row_num": 12
       },
@@ -90,7 +114,9 @@
         "values_list": "power_sources",
         "name": "power_source",
         "display": {
-          "text": "Choose power source required:"
+          "prompt": {
+            "text": "Choose power source required:"
+          }
         },
         "_row_num": 14
       },
@@ -103,7 +129,9 @@
         "values_list": "equipment_types",
         "name": "equipment_type",
         "display": {
-          "text": "Select what type of equipment this is"
+          "prompt": {
+            "text": "Select what type of equipment this is"
+          }
         },
         "_row_num": 16
       },
@@ -112,7 +140,9 @@
         "values_list": "climate_zones",
         "name": "climate_zone",
         "display": {
-          "text": "What climate zone is this equipment best for?"
+          "prompt": {
+            "text": "What climate zone is this equipment best for?"
+          }
         },
         "_row_num": 17
       },
@@ -299,7 +329,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170713,
+        "value": 20170714,
         "_row_num": 8
       }
     ]
@@ -350,7 +380,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170713,
+        "value": 20170714,
         "_row_num": 8
       },
       "_locales": {
@@ -660,7 +690,9 @@
             "type": "text",
             "name": "catalog_id",
             "display": {
-              "text": "Enter catalog ID:"
+              "prompt": {
+                "text": "Enter catalog ID:"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -673,7 +705,9 @@
             "type": "text",
             "name": "model_id",
             "display": {
-              "text": "Enter the model ID:"
+              "prompt": {
+                "text": "Enter the model ID:"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -686,7 +720,9 @@
             "type": "image",
             "name": "refrigerator_picture",
             "display": {
-              "text": "Take a picture of the refrigerator"
+              "prompt": {
+                "text": "Take a picture of the refrigerator"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -699,7 +735,9 @@
             "type": "text",
             "name": "manufacturer",
             "display": {
-              "text": "Enter the manufacturer:"
+              "prompt": {
+                "text": "Enter the manufacturer:"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -712,8 +750,12 @@
             "type": "decimal",
             "name": "refrigerator_gross_volume",
             "display": {
-              "text": "Enter the refrigerator's gross volume:",
-              "hint": "(cubic meters)"
+              "prompt": {
+                "text": "Enter the refrigerator's gross volume:"
+              },
+              "hint": {
+                "text": "(cubic meters)"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -726,8 +768,12 @@
             "type": "decimal",
             "name": "refrigerator_net_volume",
             "display": {
-              "text": "Enter the refrigerator's net volume:",
-              "hint": "(cubic meters)"
+              "prompt": {
+                "text": "Enter the refrigerator's net volume:"
+              },
+              "hint": {
+                "text": "(cubic meters)"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -740,8 +786,12 @@
             "type": "decimal",
             "name": "freezer_gross_volume",
             "display": {
-              "text": "Enter the freezer's gross volume:",
-              "hint": "(cubic meters)"
+              "prompt": {
+                "text": "Enter the freezer's gross volume:"
+              },
+              "hint": {
+                "text": "(cubic meters)"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -754,8 +804,12 @@
             "type": "decimal",
             "name": "freezer_net_volume",
             "display": {
-              "text": "Enter the freezer's net volume:",
-              "hint": "(cubic meters)"
+              "prompt": {
+                "text": "Enter the freezer's net volume:"
+              },
+              "hint": {
+                "text": "(cubic meters)"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -769,7 +823,9 @@
             "values_list": "power_sources",
             "name": "power_source",
             "display": {
-              "text": "Choose power source required:"
+              "prompt": {
+                "text": "Choose power source required:"
+              }
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -783,7 +839,9 @@
             "values_list": "equipment_types",
             "name": "equipment_type",
             "display": {
-              "text": "Select what type of equipment this is"
+              "prompt": {
+                "text": "Select what type of equipment this is"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -797,7 +855,9 @@
             "values_list": "climate_zones",
             "name": "climate_zone",
             "display": {
-              "text": "What climate zone is this equipment best for?"
+              "prompt": {
+                "text": "What climate zone is this equipment best for?"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,

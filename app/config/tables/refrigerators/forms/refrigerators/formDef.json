@@ -5,7 +5,9 @@
         "type": "text",
         "name": "refrigerator_id",
         "display": {
-          "text": "Enter refrigerator ID:"
+          "prompt": {
+            "text": "Enter refrigerator ID:"
+          }
         },
         "_row_num": 2
       },
@@ -19,7 +21,9 @@
         "values_list": "regionLevel1_csv",
         "name": "regionLevel1",
         "display": {
-          "text": "Level 1 of admin region"
+          "prompt": {
+            "text": "Level 1 of admin region"
+          }
         },
         "_row_num": 4
       },
@@ -28,111 +32,150 @@
         "values_list": "regionLevel2_csv",
         "name": "regionLevel2",
         "display": {
-          "text": "Level 2 of admin region"
+          "prompt": {
+            "text": "Level 2 of admin region"
+          }
         },
         "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
         "_row_num": 5
       },
       {
-        "comments": "If we’re going to keep this in here it needs to be on its own screen. Formgen will regenerate the choices in anything on the screen with a choice filter for every onblur",
         "type": "select_one_dropdown",
-        "values_list": "health_facility_list",
-        "name": "facility_row_id",
+        "values_list": "regionLevel3_csv",
+        "name": "adminRegion",
         "display": {
-          "text": "Choose the health facility:"
+          "prompt": {
+            "text": "Admin region"
+          }
         },
         "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
         "_row_num": 6
       },
       {
-        "clause": "end if",
+        "clause": "begin screen",
         "_row_num": 7
+      },
+      {
+        "type": "select_one_dropdown",
+        "values_list": "health_facility_list",
+        "name": "health_facility",
+        "display": {
+          "prompt": {
+            "text": "Health Facility"
+          }
+        },
+        "choice_filter": "choice_item.admin_region === data('adminRegion')",
+        "_row_num": 8
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 9
+      },
+      {
+        "clause": "end if",
+        "_row_num": 10
       },
       {
         "type": "select_one",
         "values_list": "refrigerator_model_list",
         "name": "model_row_id",
         "display": {
-          "text": "Choose the refrigerator model:"
+          "prompt": {
+            "text": "Choose the refrigerator model:"
+          }
         },
-        "_row_num": 8
+        "_row_num": 11
       },
       {
         "clause": "begin screen",
-        "_row_num": 9
+        "_row_num": 12
       },
       {
         "type": "text",
         "name": "tracking_id",
         "display": {
-          "text": "Enter the tracking ID:"
+          "prompt": {
+            "text": "Enter the tracking ID:"
+          }
         },
-        "_row_num": 10
+        "_row_num": 13
       },
       {
         "type": "number",
         "name": "year",
         "display": {
-          "text": "Enter the year installed:"
+          "prompt": {
+            "text": "Enter the year installed:"
+          }
         },
-        "_row_num": 11
+        "_row_num": 14
       },
       {
         "type": "select_one",
         "values_list": "power",
         "name": "power_source",
         "display": {
-          "text": "Choose the power source:"
+          "prompt": {
+            "text": "Choose the power source:"
+          }
         },
-        "_row_num": 12
+        "_row_num": 15
       },
       {
         "clause": "end screen",
-        "_row_num": 13
+        "_row_num": 16
       },
       {
         "clause": "begin screen",
-        "_row_num": 14
+        "_row_num": 17
       },
       {
         "type": "select_one",
         "values_list": "current_use",
         "name": "utilization",
         "display": {
-          "text": "Choose the current use status:"
+          "prompt": {
+            "text": "Choose the current use status:"
+          }
         },
-        "_row_num": 15
+        "_row_num": 18
       },
       {
         "type": "select_one",
         "values_list": "status",
         "name": "working_status",
         "display": {
-          "text": "Working status:"
+          "prompt": {
+            "text": "Working status:"
+          }
         },
-        "_row_num": 16
+        "_row_num": 19
       },
       {
         "type": "select_one",
         "values_list": "reasons",
         "name": "reason_not_working",
         "display": {
-          "text": "Reason not working:"
+          "prompt": {
+            "text": "Reason not working:"
+          }
         },
-        "_row_num": 17
+        "_row_num": 20
       },
       {
         "type": "select_one",
         "values_list": "yes_no",
         "name": "voltage_regulator",
         "display": {
-          "text": "Voltage regulator?"
+          "prompt": {
+            "text": "Voltage regulator?"
+          }
         },
-        "_row_num": 18
+        "_row_num": 21
       },
       {
         "clause": "end screen",
-        "_row_num": 19
+        "_row_num": 22
       }
     ],
     "choices": [
@@ -371,6 +414,15 @@
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
+      },
+      {
+        "query_name": "regionLevel3_csv",
+        "query_type": "csv",
+        "uri": "\"regions2-3.csv\"",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 6
       }
     ],
     "properties": [
@@ -412,7 +464,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170713,
+        "value": 20170714,
         "_row_num": 4
       },
       {
@@ -458,7 +510,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170713,
+        "value": 20170714,
         "_row_num": 4
       },
       "survey": {
@@ -751,6 +803,15 @@
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
+      },
+      "regionLevel3_csv": {
+        "query_name": "regionLevel3_csv",
+        "query_type": "csv",
+        "uri": "\"regions2-3.csv\"",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 6
       }
     },
     "calculates": {},
@@ -787,7 +848,7 @@
         "valuesList": "regionLevel2_csv",
         "elementKey": "regionLevel2"
       },
-      "facility_row_id": {
+      "adminRegion": {
         "_defn": [
           {
             "_row_num": 6,
@@ -795,13 +856,24 @@
           }
         ],
         "type": "string",
+        "valuesList": "regionLevel3_csv",
+        "elementKey": "adminRegion"
+      },
+      "health_facility": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
         "valuesList": "health_facility_list",
-        "elementKey": "facility_row_id"
+        "elementKey": "health_facility"
       },
       "model_row_id": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 11,
             "section_name": "survey"
           }
         ],
@@ -812,7 +884,7 @@
       "tracking_id": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
@@ -822,7 +894,7 @@
       "year": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -832,7 +904,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 15,
             "section_name": "survey"
           }
         ],
@@ -843,7 +915,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 18,
             "section_name": "survey"
           }
         ],
@@ -854,7 +926,7 @@
       "working_status": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -865,7 +937,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -876,7 +948,7 @@
       "voltage_regulator": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -899,7 +971,9 @@
             "type": "text",
             "name": "refrigerator_id",
             "display": {
-              "text": "Enter refrigerator ID:"
+              "prompt": {
+                "text": "Enter refrigerator ID:"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -913,7 +987,9 @@
             "values_list": "regionLevel1_csv",
             "name": "regionLevel1",
             "display": {
-              "text": "Level 1 of admin region"
+              "prompt": {
+                "text": "Level 1 of admin region"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -927,7 +1003,9 @@
             "values_list": "regionLevel2_csv",
             "name": "regionLevel2",
             "display": {
-              "text": "Level 2 of admin region"
+              "prompt": {
+                "text": "Level 2 of admin region"
+              }
             },
             "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
             "_row_num": 5,
@@ -938,12 +1016,13 @@
             "promptIdx": 2
           },
           {
-            "comments": "If we’re going to keep this in here it needs to be on its own screen. Formgen will regenerate the choices in anything on the screen with a choice filter for every onblur",
             "type": "select_one_dropdown",
-            "values_list": "health_facility_list",
-            "name": "facility_row_id",
+            "values_list": "regionLevel3_csv",
+            "name": "adminRegion",
             "display": {
-              "text": "Choose the health facility:"
+              "prompt": {
+                "text": "Admin region"
+              }
             },
             "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
             "_row_num": 6,
@@ -954,122 +1033,155 @@
             "promptIdx": 3
           },
           {
+            "type": "select_one_dropdown",
+            "values_list": "health_facility_list",
+            "name": "health_facility",
+            "display": {
+              "prompt": {
+                "text": "Health Facility"
+              }
+            },
+            "choice_filter": "choice_item.admin_region === data('adminRegion')",
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "select_one_dropdown",
+            "_branch_label_enclosing_screen": "survey/_screen7",
+            "promptIdx": 4
+          },
+          {
             "type": "select_one",
             "values_list": "refrigerator_model_list",
             "name": "model_row_id",
             "display": {
-              "text": "Choose the refrigerator model:"
+              "prompt": {
+                "text": "Choose the refrigerator model:"
+              }
             },
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen8",
-            "promptIdx": 4
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 5
           },
           {
             "type": "text",
             "name": "tracking_id",
             "display": {
-              "text": "Enter the tracking ID:"
+              "prompt": {
+                "text": "Enter the tracking ID:"
+              }
             },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 5
+            "_branch_label_enclosing_screen": "survey/_screen12",
+            "promptIdx": 6
           },
           {
             "type": "number",
             "name": "year",
             "display": {
-              "text": "Enter the year installed:"
+              "prompt": {
+                "text": "Enter the year installed:"
+              }
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 6
+            "_branch_label_enclosing_screen": "survey/_screen12",
+            "promptIdx": 7
           },
           {
             "type": "select_one",
             "values_list": "power",
             "name": "power_source",
             "display": {
-              "text": "Choose the power source:"
+              "prompt": {
+                "text": "Choose the power source:"
+              }
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 7
+            "_branch_label_enclosing_screen": "survey/_screen12",
+            "promptIdx": 8
           },
           {
             "type": "select_one",
             "values_list": "current_use",
             "name": "utilization",
             "display": {
-              "text": "Choose the current use status:"
+              "prompt": {
+                "text": "Choose the current use status:"
+              }
             },
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen14",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 9
           },
           {
             "type": "select_one",
             "values_list": "status",
             "name": "working_status",
             "display": {
-              "text": "Working status:"
+              "prompt": {
+                "text": "Working status:"
+              }
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen14",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 10
           },
           {
             "type": "select_one",
             "values_list": "reasons",
             "name": "reason_not_working",
             "display": {
-              "text": "Reason not working:"
+              "prompt": {
+                "text": "Reason not working:"
+              }
             },
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen14",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 11
           },
           {
             "type": "select_one",
             "values_list": "yes_no",
             "name": "voltage_regulator",
             "display": {
-              "text": "Voltage regulator?"
+              "prompt": {
+                "text": "Voltage regulator?"
+              }
             },
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen14",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 12
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 20,
-            "_branch_label_enclosing_screen": "survey/_screen20",
-            "promptIdx": 12
+            "_row_num": 23,
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 13
           }
         ],
         "validation_tag_map": {
@@ -1094,8 +1206,8 @@
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else7",
-            "_row_num": 7,
+            "_branch_label": "_else10",
+            "_row_num": 10,
             "operationIdx": 2
           },
           {
@@ -1117,66 +1229,80 @@
             "operationIdx": 5
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif7",
-            "_row_num": 7,
-            "operationIdx": 6
-          },
-          {
-            "_row_num": 8,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 7
-          },
-          {
             "clause": "begin screen",
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 13,
-              "__rowNum__": 12,
+              "_row_num": 9,
+              "__rowNum__": 8,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif10",
+            "_row_num": 10,
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 11,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
             "clause": "begin screen",
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 19,
-              "__rowNum__": 18,
+              "_row_num": 16,
+              "__rowNum__": 15,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 9
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 17,
+            "__rowNum__": 16,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 22,
+              "__rowNum__": 21,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 10
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 20,
-            "operationIdx": 10
+            "_row_num": 23,
+            "operationIdx": 11
           },
           {
-            "_row_num": 20,
+            "_row_num": 23,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 11
+            "operationIdx": 12
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 20,
-            "operationIdx": 12
+            "_row_num": 23,
+            "operationIdx": 13
           }
         ],
         "branch_label_map": {
@@ -1185,13 +1311,14 @@
           "_screen4": 3,
           "_screen5": 4,
           "_screen6": 5,
-          "_else7": 7,
-          "_endif7": 7,
-          "_screen8": 7,
-          "_screen9": 8,
-          "_screen14": 9,
-          "_contents": 11,
-          "_screen20": 11
+          "_screen7": 6,
+          "_else10": 8,
+          "_endif10": 8,
+          "_screen11": 8,
+          "_screen12": 9,
+          "_screen17": 10,
+          "_contents": 12,
+          "_screen23": 12
         }
       },
       "initial": {
@@ -1412,7 +1539,7 @@
         "elementSet": "data",
         "elementPath": "regionLevel2"
       },
-      "facility_row_id": {
+      "adminRegion": {
         "_defn": [
           {
             "_row_num": 6,
@@ -1420,16 +1547,30 @@
           }
         ],
         "type": "string",
-        "valuesList": "health_facility_list",
-        "elementKey": "facility_row_id",
-        "elementName": "facility_row_id",
+        "valuesList": "regionLevel3_csv",
+        "elementKey": "adminRegion",
+        "elementName": "adminRegion",
         "elementSet": "data",
-        "elementPath": "facility_row_id"
+        "elementPath": "adminRegion"
+      },
+      "health_facility": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "health_facility_list",
+        "elementKey": "health_facility",
+        "elementName": "health_facility",
+        "elementSet": "data",
+        "elementPath": "health_facility"
       },
       "model_row_id": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 11,
             "section_name": "survey"
           }
         ],
@@ -1443,7 +1584,7 @@
       "tracking_id": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
@@ -1456,7 +1597,7 @@
       "year": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -1469,7 +1610,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 15,
             "section_name": "survey"
           }
         ],
@@ -1483,7 +1624,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 18,
             "section_name": "survey"
           }
         ],
@@ -1497,7 +1638,7 @@
       "working_status": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -1511,7 +1652,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -1525,7 +1666,7 @@
       "voltage_regulator": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
