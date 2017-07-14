@@ -45,29 +45,102 @@ body {
         <script type="text/javascript" src="formgen_common.js"></script>
         <script>
 
-    var title = "PATH Cold Chain Demo"
-    var menu = [
-        ["config/assets/health_facility_demo.html", "View Health Facilities"],
-        ["config/assets/refrigerators_demo.html", "View Refrigerators"],
-        ["config/assets/refrigerator_types_demo.html", "View Refrigerator Models"]
-    ]
-
-var ol = function ol(d) {
-    document.getElementById("title").innerText = title;
-    for (var i = 0; i < menu.length; i++) {
-        var button = document.createElement("button");
-        var pair = menu[i]
-        button.innerText = pair[1]
-        button.classList.add("button");
-        document.getElementById("list").appendChild(button);
-        (function(button, this_pair) {
-            button.addEventListener("click", function() {
-                odkTables.launchHTML(null, this_pair[0]);
-            });
-        })(button, pair);
-        console.log(button)
-        document.getElementById("list").appendChild(button);
+var metadata = {};
+var list_views = {
+    "health_facility": "assets/config/aa_health_facility_list.html",
+    "refrigerators": "assets/config/aa_refrigerators_list.html",
+    "refrigerator_types": "assets/config/aa_refrigerator_types.html",
+}
+var menu = [
+        "PATH Cold Chain Demo", null, [
+        ["View Health Facilities", "health_facility", [
+            ["View All", "health_facility", ""],
+            [true, "health_facility", "admin_region"],
+            [true, "health_facility", "facility_type"],
+            [true, "health_facility", "ownership"],
+            ["More", [
+                [true, "health_facility", "climate_zone"],
+                [true, "health_facility", "delivery_type"],
+                [true, "health_facility", "electricity_source"],
+                [true, "health_facility", "storage_type"],
+                [true, "health_facility", "solar_suitable_climate"],
+                [true, "health_facility", "solar_suitable_site"],
+                [true, "health_facility", "vaccine_supply_mode"],
+                ["By Reserve Stock Requirement", "health_facility", "vaccine_reserve_stock_requirement"]
+            ]]
+        ]], ["View Refrigerators", "refrigerators", [
+            ["View All", "refrigerators", ""],
+            ["By Facility", "refrigerators", "facility_name"],
+            ["By Model", "refrigerators", "catalog_id"],
+            ["By Year", "refrigerators", "year"],
+            ["More", [
+                ["By Use", "refrigerators", "utilization"],
+                ["By Working Status", "refrigerators", "working_status"],
+                ["By Reason Not Working", "refrigerators", "reason_not_working"]
+            ]]
+        ]], ["View Refrigerator Models", "refrigerator_types", [
+            ["View All", "refrigerator_types", ""],
+            ["By Manufacturer", "refrigerator_types", "manufacturer"],
+            ["By Equipment Type", "refrigerator_types", "equipment_type"],
+            ["More", [
+                ["By Climate Zone", "refrigerator_types", "climate_zone"]
+            ]]
+        ]]
+    ]];
+        
+var ol = function ol() {
+    doMenu();
+}
+var getMetadataAndThen = function getMetadata(table, callback) {
+    if (metadata[table] == undefined) {
+        odkData.arbitraryQuery(table, "SELECT _id FROM " + table + ";", [], 0, 0, function success(d) {
+            metadata[table] = d.getMetadata();
+            callback(metadata[table]);
+        }, function error(e) {
+            alert("Error: " + e);
+        });
+    } else {
+        callback(metadata[table]);
     }
+}
+var menu_path = []
+var buttonClick = function doButtonClick(path) {
+    menu_path = menu_path.concat(Number(path));
+    doMenu();
+}
+var doMenu = function doMenu() {
+    document.getElementById("list").innerHTML = "";
+    var submenu = menu;
+    for (var i = 0; i < menu_path.length; i++) {
+        submenu = submenu[2][menu_path[i]];
+    }
+    document.getElementById("title").innerText = submenu[0];
+    getMetadataAndThen(submenu[1], function(this_table_metadata) {
+
+        var triplet = submenu[2][i];
+        if (typeof(submenu[2]) == typeof([])) {
+            for (var i = 0; i < submenu[2].length; i++) {
+                var button = document.createElement("button");
+                if (triplet[0] === true) {
+                    button.innerText = "By " + displayCol(triplet[1], this_table_metadata);
+                } else {
+                    button.innerText = triplet[0];
+                }
+                button.classList.add("button");
+                document.getElementById("list").appendChild(button);
+                (function(button, this_pair) {
+                    button.addEventListener("click", function() {
+                        buttonClick(i);
+                    });
+                })(button, pair);
+                console.log(button)
+                document.getElementById("list").appendChild(button);
+            }
+        } else {
+            // It's a string, open a group by view
+            odkTables.launchHTML(null, list_views[triplet[1]] + "#" + triplet[1] + "/" + triplet[2]);
+        }
+    });
 }
         </script>
     </head>
