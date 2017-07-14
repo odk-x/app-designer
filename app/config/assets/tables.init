@@ -1,6 +1,4 @@
-table_keys=healthFacility, refrigeratorTypes, refrigerators,geoweather,geoweather_conditions
+table_keys=healthFacility,refrigeratorTypes,refrigerators
 healthFacility.filename=config/assets/csv/health_facility.updated.csv
 refrigeratorTypes.filename=config/assets/csv/refrigerator_types.updated.csv
 refrigerators.filename=config/assets/csv/refrigerators.updated.csv
-geoweather.filename=config/assets/csv/geoweather.updated.csv
-geoweather_conditions.filename=config/assets/csv/geoweather_conditions.updated.csv

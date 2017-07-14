@@ -87,64 +87,6 @@
         "value": "date_serviced",
         "_row_num": 7
       }
-    ],
-    "properties": [
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "defaultViewType",
-        "type": "string",
-        "value": "LIST",
-        "_row_num": 2
-      },
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "detailViewFileName",
-        "type": "string",
-        "value": "config/tables/Tea_houses/html/Tea_houses_detail.html",
-        "_row_num": 3
-      },
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "listViewFileName",
-        "type": "string",
-        "value": "config/tables/Tea_houses/html/Tea_houses_list.html",
-        "_row_num": 4
-      },
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "mapListViewFileName",
-        "type": "string",
-        "value": "config/tables/Tea_houses/html/Tea_houses_list.html",
-        "_row_num": 5
-      },
-      {
-        "partition": "TableMapFragment",
-        "aspect": "default",
-        "key": "keyColorRuleType",
-        "type": "string",
-        "value": "None",
-        "_row_num": 6
-      },
-      {
-        "partition": "TableMapFragment",
-        "aspect": "default",
-        "key": "keyMapLatCol",
-        "type": "string",
-        "value": "Location_latitude",
-        "_row_num": 7
-      },
-      {
-        "partition": "TableMapFragment",
-        "aspect": "default",
-        "key": "keyMapLongCol",
-        "type": "string",
-        "value": "Location_longitude",
-        "_row_num": 8
-      }
     ]
   },
   "specification": {
@@ -748,14 +690,7 @@
         "_aspect": "default",
         "_key": "defaultViewType",
         "_type": "string",
-        "_value": "LIST"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
-        "_key": "detailViewFileName",
-        "_type": "string",
-        "_value": "config/tables/Tea_houses/html/Tea_houses_detail.html"
+        "_value": "SPREADSHEET"
       },
       {
         "_partition": "Table",
@@ -763,41 +698,6 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":\"Maintenance Logs\"}"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
-        "_key": "listViewFileName",
-        "_type": "string",
-        "_value": "config/tables/Tea_houses/html/Tea_houses_list.html"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
-        "_key": "mapListViewFileName",
-        "_type": "string",
-        "_value": "config/tables/Tea_houses/html/Tea_houses_list.html"
-      },
-      {
-        "_partition": "TableMapFragment",
-        "_aspect": "default",
-        "_key": "keyColorRuleType",
-        "_type": "string",
-        "_value": "None"
-      },
-      {
-        "_partition": "TableMapFragment",
-        "_aspect": "default",
-        "_key": "keyMapLatCol",
-        "_type": "string",
-        "_value": "Location_latitude"
-      },
-      {
-        "_partition": "TableMapFragment",
-        "_aspect": "default",
-        "_key": "keyMapLongCol",
-        "_type": "string",
-        "_value": "Location_longitude"
       }
     ]
   }

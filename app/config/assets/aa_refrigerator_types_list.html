@@ -174,6 +174,8 @@ input, button {font-size: 16px;}
 	border-style: none;
 	margin-top: 22;
 	margin-bottom: 18;
+	/* TEMP !!! */
+	/*background-color: #38c0f4; */
 }
 .status[data-status="COMPLETE"] {
 	background-color: #38c0f4; /* Blue */
@@ -197,11 +199,11 @@ input, button {font-size: 16px;}
 // If you set a display_col, that column will be shown in the large text for each row item.
 // If you don't set one, we'll try and use the table id to pull it from this variable, which stores the
 // instance column for each table or _id if it couldn't be found.
-var display_cols = {"refrigerators": "refrigerator_id", "health_facility": "facility_name", "geoweather": "Description_Date", "refrigerator_types": "catalog_id", "geoweather_conditions": "Description"}
+var display_cols = {"refrigerators": "refrigerator_id", "health_facility": "facility_name", "m_logs": "date_serviced", "refrigerator_types": "catalog_id"}
 // List of tables we can add/edit with formgen, if the table isn't found in this list, we'll use survey
-var allowed_tables = ["refrigerators", "health_facility", "geoweather", "refrigerator_types", "geoweather_conditions"]
+var allowed_tables = ["refrigerators", "health_facility", "m_logs", "refrigerator_types"]
 // A map of table ids to tokens that can be used to localize their display name
-var localized_tables = {"refrigerators": {"title": "Refrigerators"}, "health_facility": {"title": "Health Facility"}, "geoweather": {"title": "Simple Weather Survey"}, "refrigerator_types": {"title": "Refrigerator Types"}, "geoweather_conditions": {"title": "Weather Conditions for Geo-Weather Survey"}};
+var localized_tables = {"refrigerators": {"title": {"text": "Refrigerators"}}, "health_facility": {"title": {"text": "Health Facility"}}, "m_logs": {"title": {"text": "Maintenance Logs"}}, "refrigerator_types": {"title": {"text": "Refrigerator Types"}}};
 // SET THIS
 var table_id = "";
 // A list of options to appear in the dropdown menu for group by.
@@ -390,9 +392,15 @@ var update_total_rows = function update_total_rows(force) {
     // clause will cause it to return the wrong number of results in a group by view
     var the_query = make_query(search, 10000, 0);
     if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
-        odkData.arbitraryQuery(table_id, "SELECT COUNT(*) FROM (SELECT * FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + " GROUP BY " + the_query[2] + ")", the_query[1], the_query[6], the_query[7], success, failure);
+        var raw = "SELECT COUNT(*) FROM (SELECT * FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + " GROUP BY " + the_query[2] + ")";
+        console.log(raw);
+        //odkData.arbitraryQuery(table_id, raw, the_query[1], the_query[6], the_query[7], success, failure);
+        // TEST
+        odkData.arbitraryQuery(table_id, raw, [], the_query[6], the_query[7], success, failure);
     } else {
-        odkData.arbitraryQuery(table_id, "SELECT COUNT(*) FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + (the_query[0] ? " WHERE " + the_query[0] : "") + (the_query[2] ? " GROUP BY " + the_query[2] : ""), the_query[1], the_query[6], the_query[7], success, failure);
+        var raw = "SELECT COUNT(*) FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + (the_query[0] ? " WHERE " + the_query[0] : "") + (the_query[2] ? " GROUP BY " + the_query[2] : "");
+        console.log(raw);
+        odkData.arbitraryQuery(table_id, raw, the_query[1], the_query[6], the_query[7], success, failure);
     }
 }
 // Called when the user clicks the next button. This can't make offset too big because doSearch will
@@ -446,7 +454,11 @@ var make_query = function make_query(search, limit, offset) {
             where += " AND ";
         }
         if (where == null) where = "";
-        where += global_where_clause;
+        // TESTING
+        var global_where_clause_temp = global_where_clause
+        if (global_where_clause_temp.indexOf(".") > 0) global_where_clause_temp = global_where_clause_temp.split(".", 2)[1]
+
+        where += global_where_clause_temp;
         // this is a bit of a hack, if we were passed 'refrigerator_type IS NULL' then don't put anything in the bindargs because
         // there's no question mark in the clause
         if (!(global_where_clause.indexOf("IS NULL") > 0)) {
@@ -456,7 +468,8 @@ var make_query = function make_query(search, limit, offset) {
     // If we're in a group by view, apply that. We have to add the table id because people like to group by things from join tables
     var group_by = null;
     if (global_group_by != undefined && global_group_by != null) {
-        group_by = table_id + "." + global_group_by
+        //group_by = table_id + "." + global_group_by
+        group_by = global_group_by;
     }
     join = ""
     // If we have a global join from the customJsOl configuration, apply that.
@@ -512,7 +525,7 @@ var doSearch = function doSearch() {
     // Make a query for the results to put on the page and run it
     var the_query = make_query(search, limit, offset);
     var raw = "SELECT " + the_query[10] + " FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + (the_query[0] ? " WHERE " + the_query[0] : "") + (the_query[2] ? " GROUP BY " + the_query[2] : "")
-    console.log(raw);
+    //console.log(raw);
     odkData.arbitraryQuery(table_id, raw , the_query[1], the_query[6], the_query[7], function success(d) {
         // Cache metadata for use in translating the column names later
         metadata = d.getMetadata();
@@ -635,7 +648,10 @@ var doSearch = function doSearch() {
                     if (global_group_by == null || global_group_by == undefined || global_group_by.trim().length == 0) {
                         odkTables.openDetailView({}, table_id, d.getData(i, "_id"));
                     } else {
-                        odkTables.launchHTML({}, clean_href() + "#" + table_id + "/" + global_group_by + (d.getData(i, global_group_by) == null ? " IS NULL " : " = ?" ) + "/" + d.getData(i, global_group_by));
+                        //odkTables.launchHTML({}, clean_href() + "#" + table_id + "/" + global_group_by + (d.getData(i, global_group_by) == null ? " IS NULL " : " = ?" ) + "/" + d.getData(i, global_group_by));
+                        var global_group_by_temp = global_group_by
+                        if (global_group_by_temp.indexOf(".") > 0) global_group_by_temp = global_group_by_temp.split(".", 2)[1]
+                        odkTables.launchHTML({}, clean_href() + "#" + table_id + "/" + global_group_by_temp + (d.getData(i, global_group_by) == null ? " IS NULL " : " = ?" ) + "/" + d.getData(i, global_group_by));
                     }
                 });
                 _delete.addEventListener("click", function() {
@@ -651,10 +667,12 @@ var doSearch = function doSearch() {
             })(edit, _delete, i, d);
             buttons.appendChild(edit);
             buttons.appendChild(_delete);
-            li.appendChild(buttons)
+            if (!global_group_by) {
+                li.appendChild(buttons)
+            }
             var hr = document.createElement("hr")
             hr.classList.add("status");
-            hr.setAttribute("data-status", d.getData(i, "_savepoint_type"))
+            hr.setAttribute("data-_liststatus", d.getData(i, "_savepoint_type"))
             list.appendChild(li);
             // We cache these two values because they're going to be the same for each item in the list, and clientWidth and clientHeight are very expensive
             // I used to call clientHeight and clientWidth for each iteration of this loop and the callback took ~250ms, now it takes ~40 for 20 rows
