@@ -246,6 +246,10 @@ var cached_search = null;
 var global_line_height = null;
 var global_displays_width = null;
 
+var global_static = false;
+var global_static_args = false;
+var global_human_readable_what = false;
+
 
 // Helper function to add a row with formgen or survey. If the table is in allowed_tables it opens
 // with formgen, otherwise survey
@@ -261,17 +265,30 @@ var add = function() {
 
 // Function run on page load
 var ol = function ol() {
-    // The sections of the url hash deliminated by slashes
+    // The sections of the url hash delimited by slashes
     var sections = document.location.hash.substr(1).split("/");
     // The first section is always the table id
     table_id = sections[0]
     // If we have more than one section, we must either be in a group by view or a collection view
-    if (sections.length == 2) {
+    if (sections.length == 0) {
+        // let's hope the user configured one
+    } else if (sections.length == 1) {
+        // we should have a table id now
+    } else if (sections.length == 2) {
         global_group_by = sections[1];
-    } else {
+    } else if (sections.length == 3) {
         global_where_clause = sections[1]
         if (global_where_clause && !(global_where_clause.indexOf(".") >= 0)) global_where_clause = table_id + "." + global_where_clause
         global_where_arg = sections[2]
+    } else {
+        var selector = sections[1];
+        if (selector == "STATIC") {
+            global_static = sections[2];
+            global_static_args = jsonParse(sections[3]);
+            global_human_readable_what = sections[4];
+        } else {
+            alert("Unknown selector in query hash");
+        }
     }
     // SET THIS
     display_subcol = [];
@@ -387,17 +404,18 @@ var update_total_rows = function update_total_rows(force) {
     };
     // I don't really remember why these are different cases, but having them both use the query currently in the else
     // clause will cause it to return the wrong number of results in a group by view
-    var the_query = make_query(search, 10000, 0);
+    //var the_query = make_query(search, 10000, 0);
     if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
-        var raw = "SELECT COUNT(*) FROM (SELECT * FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + " GROUP BY " + the_query[2] + ")";
-        console.log(raw);
+        var the_query = make_query(search, false, true, "COUNT(*)")
+        //var raw = "SELECT COUNT(*) FROM (SELECT * FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + " GROUP BY " + the_query[2] + ")";
         //odkData.arbitraryQuery(table_id, raw, the_query[1], the_query[6], the_query[7], success, failure);
         // TEST
-        odkData.arbitraryQuery(table_id, raw, [], the_query[6], the_query[7], success, failure);
+        odkData.arbitraryQuery(table_id, the_query[0], the_query[1], 10000, 0, success, failure);
     } else {
-        var raw = "SELECT COUNT(*) FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + (the_query[0] ? " WHERE " + the_query[0] : "") + (the_query[2] ? " GROUP BY " + the_query[2] : "");
-        console.log(raw);
-        odkData.arbitraryQuery(table_id, raw, the_query[1], the_query[6], the_query[7], success, failure);
+        var the_query = make_query(search, true, true, "COUNT(*)")
+        //var raw = "SELECT COUNT(*) FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + (the_query[0] ? " WHERE " + the_query[0] : "") + (the_query[2] ? " GROUP BY " + the_query[2] : "");
+        console.log(the_query[0]);
+        odkData.arbitraryQuery(table_id, the_query[0], the_query[1], 10000, 0, success, failure);
     }
 }
 // Called when the user clicks the next button. This can't make offset too big because doSearch will
@@ -414,7 +432,14 @@ var prev = function next() {
 // Helper function to make the sections of a query. It used to return the arguments to odkData.query so you could call
 // odkData.query.apply(make_query(...)) but we need functionality that's not available in odkData.query, so we just pull
 // random indexes out of its result array whenver we need them and use that to call arbitraryQuery
-var make_query = function make_query(search, limit, offset) {
+var make_query = function make_query(search, apply_where, for_total, cols_to_select) {
+    if (global_static && global_static_args) {
+        if (!for_total) {
+            return [global_static, global_static_args];
+        } else {
+            return ["SELECT " + cols_to_select + " FROM (" + global_static + ")", global_static_args]
+        }
+    }
     // bind args
     var query_args = []
     // where clause, will be populated
@@ -473,9 +498,15 @@ var make_query = function make_query(search, limit, offset) {
     if (global_join != null && global_join != undefined && global_join.trim().length > 0) {
         join = global_join;
     }
-    //[whereClause, sqlBindParams, groupBy, having, orderByElementKey, orderByDirection, limit,
-    //      offset, includeKVS, (NOT IN odkData.query!!!) join, (same) cols to select]
-    return [where, query_args, group_by, null, null, null, limit, offset, false, join, global_which_cols_to_select];
+    where = (where ? " WHERE " + where : "")
+    if (!apply_where) {
+        var raw = "SELECT COUNT(*) FROM (SELECT * FROM " + table_id + (join.length > 0 ? " JOIN " + the_query[9] : "") + " GROUP BY " + group_by + ")";
+        return [raw, []]
+    }
+    var raw = "SELECT " + cols_to_select + " FROM " + table_id + (join.length > 0 ? " JOIN " + join : "") + where + (group_by ? " GROUP BY " + group_by : "")
+    console.log(raw);
+    //return [where, query_args, group_by, null, null, null, limit, offset, false, join, global_which_cols_to_select];
+    return [raw, query_args];
 }
 // Helper function to populate cols with a list of the columns in the table. If no allowed_group_bys was set, we'll use that to
 // populate the list of group by columns. Will only do anything on the first time its run
@@ -523,10 +554,10 @@ var doSearch = function doSearch() {
     // Populate the columns of the row so we can make the dropdown menu
     getCols()
     // Make a query for the results to put on the page and run it
-    var the_query = make_query(search, limit, offset);
-    var raw = "SELECT " + the_query[10] + " FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + (the_query[0] ? " WHERE " + the_query[0] : "") + (the_query[2] ? " GROUP BY " + the_query[2] : "")
-    //console.log(raw);
-    odkData.arbitraryQuery(table_id, raw , the_query[1], the_query[6], the_query[7], function success(d) {
+    var the_query = make_query(search, true, false, global_which_cols_to_select);
+    //var raw = "SELECT " + the_query[10] + " FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + (the_query[0] ? " WHERE " + the_query[0] : "") + (the_query[2] ? " GROUP BY " + the_query[2] : "")
+    console.log(the_query[0]);
+    odkData.arbitraryQuery(table_id, the_query[0] , the_query[1], limit, offset, function success(d) {
         // Cache metadata for use in translating the column names later
         metadata = d.getMetadata();
         // If we have no results
@@ -551,7 +582,7 @@ var doSearch = function doSearch() {
         var display_total = Number(total_rows);
         // trying to make a computer speak english is hard
         var rows = ""
-        if (global_group_by == null && global_where_clause == null) {
+        if (global_group_by == null && global_where_clause == null && !global_human_readable_what) {
             rows = "rows ";
         }
         var newtext = "Showing " + rows + (offset + (total_rows == 0 ? 0 : 1)) + "-" + (offset + d.getCount()) + " of " + display_total;
@@ -562,6 +593,9 @@ var doSearch = function doSearch() {
         // if we're in a collection, mention that
         if (global_where_clause != null && global_where_clause != undefined && global_where_clause.trim().length > 0) {
             newtext += " rows where " + get_from_allowed_group_bys(allowed_group_bys, global_where_clause.split(" ")[0], false, metadata) + " is " + global_where_arg;
+        }
+        if (global_human_readable_what) {
+          newtext += " " + global_human_readable_what
         }
         document.getElementById("navigation-text").innerText = newtext;
         // for each row in the result set, make an element and add it to `list`
