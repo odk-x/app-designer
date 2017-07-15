@@ -125,84 +125,6 @@ body {
 }
 input, button {font-size: 16px;}
 
-#rest {
-	display: none;
-}
-body {
-	font-family: arial;
-}
-.h4-wrapper {
-	margin-top: 1.5em;
-	text-align: center;
-	display: block;
-	/* wrapper height 45px, text height 25px */
-	height: 45px;
-	line-height: 45px; /* TEST for vertical center */
-	background: linear-gradient(indianred, lightcoral);
-}
-h4 {
-	display: inline-block;
-	height: 25px;
-	margin: 0px 0px;
-	color: #eeeeee;
-}
-.main-col-wrapper {
-	background: repeating-radial-gradient(mediumaquamarine, lightseagreen, teal);
-	box-shadow: 0 2px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-	color: white;
-	border-bottom: none !important;
-	margin-top: 3.5em;
-	text-align: center;
-	font-size: 150%;
-	/*line-height: 1.5em;*/
-	padding-top: 1em;
-	padding-bottom: 1em;
-}
-@media screen and (min-width: 480px) {
-	.main-col-wrapper {
-		/*line-height: 4em;*/
-	}
-}
-
-button {
-	/*margin-top: -4em;*/
-	padding: 1em 10%;
-	border: 2px solid teal;
-	border-radius: 10px;
-	background-color: lightsegreen;
-}
-.li-inner {
-	border-bottom: 2px solid teal
-}
-li {
-	/*margin-top: 10px;*/
-	margin-bottom: 20px;
-	padding-bottom: 5px;
-	break-inside: avoid-column;
-	-webkit-column-break-inside: avoid;
-	display: block;
-}
-
-@media screen and (min-width: 480px) {
-	ul {
-		columns: 2;
-		-webkit-columns: 2;
-	}
-}
-ul {
-	list-style-type: none;
-	padding-left: 20px;
-	padding-right: 20px;
-}
-.main-col-wrapper > div {
-	border-bottom-style: none;
-}
-#edit {
-	margin-left: 8px;
-}
-#main-col {
-	display: none;
-}
 
         </style>
         <script>
@@ -233,90 +155,13 @@ var ol = function ol() {
         row_id = hash.split("/")[1]
     }
     // BEGIN CONFIG
-    var generic_callback = function generic_callback(e, c, d, which, pretty, optional_col_name) {
-	if (optional_col_name == null || optional_col_name == undefined || typeof(optional_col_name) != "string") optional_col_name = displayCol(which, d.getMetadata())
-	wrapper = function(i) { return i; };
-	if (pretty) wrapper = function(i) { return window.pretty(i.toString()); };
-	document.getElementById("inject-" + which).innerHTML = "<b>" + optional_col_name + "</b>: " + wrapper(c);
-	document.getElementById("inject-" + which).classList.add("li-inner");
-}
-var build_generic_callback = function build_generic_callback(which, pretty, optional_col_name) {
-	return function _generic_callback_wrapper(e, c, d) {
-		if (typeof(pretty) == "string") {
-			c = c.toString() + pretty;
-			pretty = false;
-		}
-		if (typeof(pretty) == "function") {
-			c = pretty(c)
-			pretty = false;
-		}
-		return generic_callback(e, c, d, which, pretty, optional_col_name);
-	}
-}
-
-
-    var model_callback = function model_callback(e, c, d) {
-        var btn = document.getElementById("open_model");
-        var model = d.getData(0, "catalog_id"); // from join, not actually the model id
-        var model_row_id = d.getData(0, "model_row_id");
-        btn.disabled = false;
-        btn.addEventListener("click", function() {
-            odkTables.openDetailView(null, "refrigerator_types", model_row_id);
-        });
-        build_generic_callback("model_id", true)(e, c, d)
-        return "";
-    }
-    var hf_callback = function hf_callback(e, c, d) {
-        console.log(d.getData(0, "facility_name"));
-        var btn = document.getElementById("open_hf");
-        var hf = d.getData(0, "facility_name"); // from join, not actually the hf id
-        var hf_row_id = d.getData(0, "facility_row_id");
-        btn.disabled = false;
-        btn.addEventListener("click", function() {
-            odkTables.openDetailView(null, "health_facility", hf_row_id, "config/assets/aa_health_facility_detail.html#health_facility/" + hf_row_id);
-        });
-        build_generic_callback("facility_name", true, "Facility")(e, c, d)
-        document.getElementById("add_m_log").disabled = false;
-        var defaults = {"refrigerator_id": d.getData(0, "refrigerator_id"), "date_serviced": odkCommon.toOdkTimeStampFromDate(new Date())};
-        document.getElementById("add_m_log").addEventListener("click", function add_m_log() {
-            if (allowed_tables.indexOf("m_logs") >= 0) {
-                var id = newGuid();
-                odkData.addRow("m_logs", defaults, id, function() {
-                    // Escape the LIMIT 1
-                    odkData.arbitraryQuery("m_logs", "UPDATE m_logs SET _savepoint_type = ? WHERE _id = ?;--", ["INCOMPLETE", id], 100, 0, function success(d) {
-                        odkTables.launchHTML({}, "config/assets/formgen/m_logs#" + id);
-                    }, null);
-                });
-            } else {
-                odkTables.addRowWithSurvey({}, "m_logs", "m_logs", null, defaults);
-            }
-        });
-        // UNTESTED
-        document.getElementById("view_m_log").disabled = false;
-        document.getElementById("view_m_log").addEventListener("click", function add_m_log() {
-            odkTables.launchHTML(null, clean_href() + "config/assets/aa_m_log_list.html#m_log/refrigerator_id = ?/" + d.getData(0, "refrigerator_id"));
-        });
-
-        return "";
-    }
-
-    allowed_tables = ["m_logs"];
-    main_col = "";
-    global_join = "refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id JOIN health_facility ON refrigerators.facility_row_id = health_facility._id"
-    global_which_cols_to_select = "*"
-    var subquery = "(SELECT date_serviced FROM m_logs WHERE m_logs.refrigerator_id = refrigerators.refrigerator_id AND m_logs._savepoint_type != 'INCOMPLETE' ORDER BY date_serviced DESC LIMIT 1)"
-    global_which_cols_to_select = global_which_cols_to_select.concat(", (CASE WHEN "+subquery+" IS NOT NULL THEN "+subquery+" ELSE 'No Records' END) as date_serviced")
+    
+    main_col = "refrigerator_id";
     colmap = [
-        ["facility_name", hf_callback],
-        ["year", build_generic_callback("year", true, "Year Installed")],
-        ["working_status", build_generic_callback("working_status", true, "Status")],
-        ["reason_not_working", build_generic_callback("reason_not_working", true)],
-        ["model_row_id", model_callback],
-        ["tracking_id", build_generic_callback("tracking_id", false, "Tracking Number")],
-        ["voltage_regulator", build_generic_callback("voltage_regulator", true)],
-        ["refrigerator_id", build_generic_callback("refrigerator_id", true)],
-        ["date_serviced", build_generic_callback("date_serviced", function(i) { return i.split("T")[0]; })]
-    ];
+        ['refrigerator_id', false],
+        ['date_serviced', function(e, c, d) { return "<b>Date Serviced:</b> " + c.split("T")[0]; }],
+        ['notes', false]
+    ]
 
     // END CONFIG
     if (main_col.length == 0) {
@@ -512,28 +357,5 @@ var edit = function() {
         </div>
         <ul id="rest">Loading...</ul>
 
-    <div class="main-col-wrapper">
-        <div id="inject-refrigerator_id">Loading...</div>
-    </div>
-    <div class='h4-wrapper'><h4>Basic Refrigerator Information<h4></div>
-    <ul>
-        <li id='inject-facility_name'></li>
-        <li id='inject-year'></li>
-        <li id='inject-working_status'></li>
-        <li id='inject-reason_not_working'></li>
-        <li id='inject-model_id'></li>
-        <li id='inject-tracking_id'></li>
-        <li id='inject-voltage_regulator'></li>
-        <li id='inject-date_serviced'></li>
-    </ul>
-    <button disabled id='open_model'>Model Information</button>
-    <br />
-    <button disabled id='open_hf'>Health Facility Information</button>
-    <br />
-    <button disabled id='add_m_log'>Add Maintenance Record</button>
-    <br />
-    <button disabled id='view_m_log'>View all maintenance logs</button>
-    <br />
-        
     </body>
 </html>

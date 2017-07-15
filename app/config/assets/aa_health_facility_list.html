@@ -167,15 +167,10 @@ input, button {font-size: 16px;}
 	text-align: center;
 }
 .status {
-	/*
-	width: 95%;
-	*/
 	height: 10px;
 	border-style: none;
 	margin-top: 22;
 	margin-bottom: 18;
-	/* TEMP !!! */
-	/*background-color: #38c0f4; */
 }
 .status[data-status="COMPLETE"] {
 	background-color: #38c0f4; /* Blue */
@@ -282,6 +277,7 @@ var ol = function ol() {
     display_subcol = [];
     // SET THIS
     display_col = null;
+    // BEGIN CONFIG
     
     allowed_tables = [];
     display_col = "facility_name"
@@ -292,6 +288,7 @@ var ol = function ol() {
     global_which_cols_to_select = "*, (SELECT COUNT(*) FROM refrigerators WHERE facility_row_id = health_facility._id) AS refrigerator_count"
     display_subcol = [["Facility ID: ", "facility_id", true], ["Refrigerators: ", "refrigerator_count", true]]
 
+    // END CONFIG
     // If there are no columns the user is allowed to group by, disable the group by button
     if (allowed_group_bys != null && allowed_group_bys.length == 0) document.getElementById("group-by").style.display = "none"
     // If there are some columns, get them into the standard format, a list of pairs [:column_name, :display_name]
@@ -498,11 +495,14 @@ var getCols = function getCols() {
                 }
             }
             document.getElementById("group-by").disabled = false;
-            // If we're in a group by view or a collection view, call groupBy because it will call
-            // groupByGo which will add the "Group By Value" to display_subcol
-            if ((global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) || (global_where_clause != null && global_where_clause != undefined && global_where_clause.trim().length > 0)) {
-                //global_group_by = global_group_by.trim();
-                groupBy();
+            // If we're in a group by view or a collection view, 
+            // TODO document
+            if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
+                document.getElementById("group-by").style.display = "none";
+                display_subcol = [];
+                display_col = global_group_by;
+            } else if (global_where_clause != null && global_where_clause != undefined && global_where_clause.trim().length > 0) {
+                document.getElementById("group-by").style.display = "none";
             }
         }, function failure(e) {
             alert("Could not get columns: " + e);
@@ -670,12 +670,15 @@ var doSearch = function doSearch() {
             })(edit, _delete, i, d);
             buttons.appendChild(edit);
             buttons.appendChild(_delete);
+            // If we're in a group by view, don't show edit/delete buttons
             if (!global_group_by) {
                 li.appendChild(buttons)
             }
-            var hr = document.createElement("hr")
+            // hr element shows the current savepoint type. In the future I want it to also show the sync status
+            var hr = document.createElement("div")
             hr.classList.add("status");
-            hr.setAttribute("data-_liststatus", d.getData(i, "_savepoint_type"))
+            hr.setAttribute("data-status", d.getData(i, "_savepoint_type"))
+            hr.setAttribute("data-sync", d.getData(i, "_sync_status")) // no css rules for this one
             list.appendChild(li);
             // We cache these two values because they're going to be the same for each item in the list, and clientWidth and clientHeight are very expensive
             // I used to call clientHeight and clientWidth for each iteration of this loop and the callback took ~250ms, now it takes ~40 for 20 rows
@@ -692,7 +695,9 @@ var doSearch = function doSearch() {
             displays.style.width = global_displays_width;
             list.appendChild(hr);
         }
+        // BEGIN CUSTOM JS SEARCH
         
+        // END CUSTOM JS SEARCH
     }, function(d) {
         alert("Failure! " + d);
     });
@@ -700,53 +705,51 @@ var doSearch = function doSearch() {
 // Called when the user clicks the group by button, or on load if we're in a group by view or a collection view
 var groupBy = function groupBy() {
     var list = document.getElementById("group-by-list");
+    // If the user didn't set a list of allowed group bys, add every column
     if (allowed_group_bys == null) {
         for (var i = 0; i < cols.length; i++) {
             var child = document.createElement("option");
-            child.value = cols[i];
+            child.value = cols[i]; // value is the column id, text is the translated column name
             child.innerText = displayCol(cols[i], metadata);
             list.appendChild(child);
+            // Not sure if this is important or not
             if (global_group_by == cols[i]) {
                 list.selectedOptions = [child];
             }
         }
     } else {
+        // If they did specify it, loop through the allowed group bys, and delegate figuring out what to display
+        // to get_from_allowed_group_bys in formgen_common
         for (var i = 0; i < allowed_group_bys.length; i++) {
             var child = document.createElement("option");
             child.value = allowed_group_bys[i][0];
             child.innerText = get_from_allowed_group_bys(allowed_group_bys, allowed_group_bys[i][1], allowed_group_bys[i], metadata)
             list.appendChild(child);
+            // Not sure if this is important or not
             if (global_group_by == cols[i]) {
                 list.selectedOptions = [child];
             }
         }
     }
-    if (global_where_clause != null && global_where_clause != undefined && global_where_clause.trim().length > 0) {
-        document.getElementById("group-by").style.display = "none";
-        return;
-    }
+    // If there's only one thing to group by, just do it
     if (list.children.length == 1) {
         list.selectedOptions = [list.children[0]];
         groupByGo();
     }
-    if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
-        document.getElementById("group-by").style.display = "none";
-        groupByGo()
-    } else {
-        list.style.display = "inline-block";
-        document.getElementById("group-by").style.display = "none";
-        document.getElementById("group-by-list").addEventListener("change", groupByGo);
-        document.getElementById("group-by-list").addEventListener("blur", groupByGo);
-        document.getElementById("group-by-list").focus()
-        // This button doesn't actually go anywhere but it will trigger the blur listener in
-        // the case that the user wants to group by the first thing in the list
-        var fake_button = document.createElement("button")
-        fake_button.appendChild(document.createTextNode("Go"))
-        document.getElementById("navigation").insertBefore(fake_button, document.getElementById("limit"));
-        document.getElementById("limit").style.display = "none";
-        //document.getElementById("group-by-go").style.display = "inline-block";
-    };
+    // Now that the user has hit the group by button, hide it and show the list
+    list.style.display = "inline-block";
+    document.getElementById("group-by").style.display = "none";
+    document.getElementById("group-by-list").addEventListener("change", groupByGo);
+    document.getElementById("group-by-list").addEventListener("blur", groupByGo);
+    document.getElementById("group-by-list").focus()
+    // This button doesn't actually go anywhere but it will trigger the blur listener in
+    // the case that the user wants to group by the first thing in the list
+    var fake_button = document.createElement("button")
+    fake_button.appendChild(document.createTextNode("Go"))
+    document.getElementById("navigation").insertBefore(fake_button, document.getElementById("limit"));
+    document.getElementById("limit").style.display = "none";
 }
+// This is called when the user selects a group by option
 var groupByGo = function groupByGo() {
     var go = true;
     if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
@@ -755,36 +758,6 @@ var groupByGo = function groupByGo() {
         var list = document.getElementById("group-by-list");
         global_group_by = list.selectedOptions[0].value;
     }
-    // /*
-    display_subcol = [];
-    display_col = global_group_by;
-    // */
-    /*
-    var _in = false;
-    if (display_col == global_group_by) {
-        _in = true;
-    } else {
-        for (var i = 0; i < display_subcol.length; i++) {
-            if (display_subcol[i][1] == global_group_by && display_subcol[i][0] != "Group by value: ") {
-                _in = true;
-                break;
-            }
-        }
-    }
-    if (display_subcol.length == 0 || display_subcol[display_subcol.length - 1][0] != "Group by value: ") {
-        if (!_in || display_subcol.length == 0) {
-            display_subcol = display_subcol.concat(0)
-            display_subcol[display_subcol.length - 1] = ["Group by value: ", global_group_by, true];
-        }
-        display_subcol[display_subcol.length - 1][2] = true;
-    } else {
-        if (_in) {
-            display_subcol = display_subcol.reverse().slice(1).reverse()
-        } else {
-            display_subcol[display_subcol.length - 1][1] = global_group_by;
-        }
-    }
-    */
     //window.location.hash = "#" + table_id + "/" + global_group_by
     if (go) {
         odkTables.launchHTML({}, clean_href() + "#" + table_id + "/" + global_group_by);

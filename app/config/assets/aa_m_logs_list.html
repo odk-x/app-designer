@@ -280,11 +280,10 @@ var ol = function ol() {
     // BEGIN CONFIG
     
     allowed_tables = [];
-    global_join = "refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id JOIN health_facility ON refrigerators.facility_row_id = health_facility._id"
-    display_subcol = [["", "model_id", true], ["Healthcare Facility: ", "facility_name", true]];
-    display_col = "refrigerator_id"
-    table_id = "refrigerators";
-    allowed_group_bys = [["facility_row_id", "Facility"], ["model_row_id", "Model"], ["reason_not_working", true], ["utilization", "Use"], ["working_status", true], ["year", true]]
+    display_subcol = [["", "refrigerator_id", false]];
+    allowed_group_bys = ["manufacturer", "climate_zone", "equipment_type"]
+    display_col = "date_serviced"
+    table_id = "m_logs";
 
     // END CONFIG
     // If there are no columns the user is allowed to group by, disable the group by button

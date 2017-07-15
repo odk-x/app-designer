@@ -320,6 +320,6 @@ window.get_from_allowed_group_bys = function get_from_allowed_group_bys(allowed_
 // return config/assets/refrigerators.html , which we can then add a hash to and pass to odkTables.launchHTML
 var clean_href = function clean_href() {
     var href = window.location.href.split("#")[0]
-    href = href.split('coldchain', 2)[1]
+    href = href.split("coldchain", 2)[1]
     return href;
 }

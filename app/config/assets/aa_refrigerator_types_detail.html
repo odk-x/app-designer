@@ -221,14 +221,18 @@ var colmap = [];
 var main_col = "";
 // Used so we only have to query the database once, just save the result object
 var cached_d = null;
+// Global join and select arguments, see README
 var global_join = "";
 var global_which_cols_to_select = "*"
+// Function called on page load, tries to pull table id and row id from url hash, sets up doAction listener so we'll reload
+// when the user comes back from editing the row
 var ol = function ol() {
     var hash = document.location.hash.substr(1);
     if (hash.length > 0 && hash.indexOf("/") > 0) {
         table_id = hash.split("/")[0]
         row_id = hash.split("/")[1]
     }
+    // BEGIN CONFIG
     var generic_callback = function generic_callback(e, c, d, which, pretty, optional_col_name) {
 	if (optional_col_name == null || optional_col_name == undefined || typeof(optional_col_name) != "string") optional_col_name = displayCol(which, d.getMetadata())
 	wrapper = function(i) { return i; };
@@ -277,10 +281,12 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
         ["refrigerator_picture", function(e,c,d){document.getElementById("inject-refrigerator_picture").appendChild(c)}]
     ]
 
+    // END CONFIG
     if (main_col.length == 0) {
         main_col = display_cols[table_id];
     }
-    get_row_id(update);
+    // Don't call update until we have our table id and our row id
+    getWhichColumnAndThen(update);
     odkCommon.registerListener(function doaction_listener() {
         var a = odkCommon.viewFirstQueuedAction();
         if (a != null) {
@@ -290,13 +296,15 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
         }
     });
 }
-var get_row_id = function get_row_id(callback) {
+// If we couldn't figure out our row/table ids, this function will try and get them from the view data
+var getWhichColumnAndThen = function getWhichColumnAndThen(callback) {
     odkData.getViewData(function (d) {
         row_id = d.getData(0, "_id");
         table_id = d.getTableId();
         callback();
     }, failure_callback, 1, 0);
 }
+// Called when the user clicks the delete row button, asks for a confirmation then calls deleteRow
 var _delete = function _delete() {
     if (confirm("Please confirm deletion of row " + row_id)) {
         odkData.deleteRow(table_id, null, row_id, function(d) {
@@ -306,44 +314,64 @@ var _delete = function _delete() {
         });
     }
 }
+// Called with the results of our arbitraryQuery, sets cached_d and displays all the columns on the page
 var update_callback = function update_callback(d) {
     cached_d = d;
+    // Used for localization of column ids
     var metadata = d.getMetadata();
 
+    // Enable the edit and delete buttons now that we know which row id we're operating on
     document.getElementById("edit").disabled = false;
     document.getElementById("delete").disabled = false;
 
     var ul = document.getElementById("rest");
+    // Clear the "Loading..." message
     ul.innerHTML = "";
+    // Handle no row
     if (d.getCount() == 0) {
         ul.innerText = "Row not found!";
     }
+    // pending_media aggregates contentType and uriFragment rows until we have enough information to display them
+    // Right now it depends on the fact that the rows are usually close together in the database
     var pending_media = {}
     for (var i = 0; i < d.getColumns().length; i++) {
+        // col is the column key, val is the value of that cell in our row
         var col = d.getColumns()[i];
         var val = d.getData(0, col);
+        // holds whether we found this column id in the colmap
         var found = false;
+        // in the database, you just write the data type "picture" and the column name "some_name", and odk expands
+        // that into two different columns, some_name_uriFragment and some_name_contentType
+        // xlscol will hold "some_name" in the example above
         var xlscol = col;
+        // If we found a uriFragment or contentType we should check to see if we have both of them yet, this variable notes that
         var checkMedia = false;
         var split = xlscol.split("_")
+        // If we have a uriFragment or contentType, store the value and set the checkMedia flag
         if (["contentType", "uriFragment"].indexOf(split[split.length - 1]) >= 0) {
             var tail_fragment = split[split.length - 1];
             xlscol = split.reverse().slice(1).reverse().join("_")
             pending_media[tail_fragment] = val;
             checkMedia = true;
         }
+        // Try and find it in the colmap
         for (var j = 0; j < colmap.length; j++) {
             if (colmap[j][0] == xlscol) {
                 found = colmap[j];
                 break;
             }
         }
+        // If it's the main column (to be displayed in ibg letters at the top), put it in the header instead
         var li = null;
         if (col == main_col) {
             li = document.getElementById("main-col")
         } else {
             li = document.createElement("li");
         }
+        // This has to do with how colmap is specified. If the user writes literal text, we should display that text
+        // and we know we can set innerText (because setting innerHTML is slower).
+        // However if we're displaying the result of a user-given callback, it might contain html, so we'll put "html" in this variable
+        // If it's media, like a picture or video, it'll be a dom element, so this will be set to "element"
         var is_html = "text";
         if (checkMedia) {
             if ("contentType" in pending_media && "uriFragment" in pending_media) {
@@ -373,6 +401,8 @@ var update_callback = function update_callback(d) {
                 li.appendChild(make_li(xlscol, found[1], val, "text"));
             } else if (found[1] === true) {
                 li.appendChild(make_li(xlscol, displayCol(col, metadata), pretty(val), "text"));
+            } else if (found[1] === false) {
+                li.appendChild(make_li(xlscol, displayCol(col, metadata), val, "text"));
             } else {
                 li.appendChild(make_li(xlscol, "", found[1](li, val, d), "html"));
             }
