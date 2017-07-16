@@ -227,6 +227,9 @@ var global_which_cols_to_select = "*"
 // Function called on page load, tries to pull table id and row id from url hash, sets up doAction listener so we'll reload
 // when the user comes back from editing the row
 var ol = function ol() {
+    document.getElementById("back").innerText = _t("Back")
+    document.getElementById("delete").innerText = _t("Delete Row")
+    document.getElementById("edit").innerText = _t("Edit Row")
     var hash = document.location.hash.substr(1);
     if (hash.length > 0 && hash.indexOf("/") > 0) {
         table_id = hash.split("/")[0]
@@ -234,7 +237,11 @@ var ol = function ol() {
     }
     // BEGIN CONFIG
     var generic_callback = function generic_callback(e, c, d, which, pretty, optional_col_name) {
-	if (optional_col_name == null || optional_col_name == undefined || typeof(optional_col_name) != "string") optional_col_name = displayCol(which, d.getMetadata())
+	if (optional_col_name == null || optional_col_name == undefined || typeof(optional_col_name) != "string") {
+      optional_col_name = displayCol(which, d.getMetadata());
+	} else {
+	    optional_col_name = _tu(optional_col_name);
+	}
 	wrapper = function(i) { return i; };
 	if (pretty) wrapper = function(i) { return window.pretty(i.toString()); };
 	document.getElementById("inject-" + which).innerHTML = "<b>" + optional_col_name + "</b>: " + wrapper(c);
@@ -243,7 +250,7 @@ var ol = function ol() {
 var build_generic_callback = function build_generic_callback(which, pretty, optional_col_name) {
 	return function _generic_callback_wrapper(e, c, d) {
 		if (typeof(pretty) == "string") {
-			c = c.toString() + pretty;
+			c = c + pretty;
 			pretty = false;
 		}
 		if (typeof(pretty) == "function") {
@@ -260,7 +267,7 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
     global_which_cols_to_select = "*, (SELECT COUNT(*) FROM refrigerators WHERE facility_row_id = health_facility._id) as refrig_with_this_hfid_count"
     var fname_callback = function fname_callback(e, c, d) {
         generic_callback(e, c, d, "facility_name", true, "Health Facility ID");
-        document.getElementById("refrigerator_inventory").innerHTML = "Refrigerator Inventory (<span id='refrig_with_this_hfid_count'>Loading...</span>)"
+        document.getElementById("refrigerator_inventory").innerHTML = _tu("Refrigerator Inventory (<span id='refrig_with_this_hfid_count'>Loading...</span>)")
         document.getElementById("refrigerator_inventory").disabled = false;
         document.getElementById("refrigerator_inventory").addEventListener("click", function click() {
             odkTables.launchHTML(null, "config/assets/aa_refrigerators_list.html#refrigerators/facility_row_id = ?/" + row_id);
@@ -289,6 +296,11 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
         ['vaccine_reserve_stock_requirement', build_generic_callback("vaccine_reserve_stock_requirement", true, "Vaccine Reserve Stock Req")],
         ['vaccine_supply_mode', build_generic_callback("vaccine_supply_mode", true)],
     ]
+    document.getElementById("bfi").innerText = _tu("Basic Facility Information");
+    document.getElementById("pi").innerText = _tu("Power Information");
+    document.getElementById("locationi").innerText = _tu("Location Information");
+    document.getElementById("stocki").innerText = _tu("Stock Information");
+    document.getElementById("addref").innerText = _tu("Add Refrigerator");
 
     // END CONFIG
     if (main_col.length == 0) {
@@ -315,11 +327,11 @@ var getWhichColumnAndThen = function getWhichColumnAndThen(callback) {
 }
 // Called when the user clicks the delete row button, asks for a confirmation then calls deleteRow
 var _delete = function _delete() {
-    if (confirm("Please confirm deletion of row " + row_id)) {
+    if (confirm(_t("Please confirm deletion of row ") + row_id)) {
         odkData.deleteRow(table_id, null, row_id, function(d) {
             odkCommon.closeWindow();
         }, function(e) {
-            alert("Failed to _delete row - " + JSON.stringify(e));
+            alert(_t("Failed to _delete row - ") + JSON.stringify(e));
         });
     }
 }
@@ -338,7 +350,7 @@ var update_callback = function update_callback(d) {
     ul.innerHTML = "";
     // Handle no row
     if (d.getCount() == 0) {
-        ul.innerText = "Row not found!";
+        ul.innerText = _t("Row not found!");
     }
     // pending_media aggregates contentType and uriFragment rows until we have enough information to display them
     // Right now it depends on the fact that the rows are usually close together in the database
@@ -407,11 +419,11 @@ var update_callback = function update_callback(d) {
         } 
         if (found) {
             if (typeof(found[1]) == "string") {
-                li.appendChild(make_li(xlscol, found[1], val, "text"));
+                li.appendChild(make_li(xlscol, _tu(found[1]), _tc(table_id, col, val), "text"));
             } else if (found[1] === true) {
                 li.appendChild(make_li(xlscol, displayCol(col, metadata), pretty(val), "text"));
             } else if (found[1] === false) {
-                li.appendChild(make_li(xlscol, displayCol(col, metadata), val, "text"));
+                li.appendChild(make_li(xlscol, displayCol(col, metadata), _tc(table_id, col, val), "text"));
             } else {
                 li.appendChild(make_li(xlscol, "", found[1](li, val, d), "html"));
             }
@@ -422,7 +434,7 @@ var update_callback = function update_callback(d) {
                 // If we don't have a colmap, default to displaying everything (except underscore prefixed/special columns)
                 continue;
             }
-            li.appendChild(make_li(xlscol, displayCol(col, metadata), val, is_html));
+            li.appendChild(make_li(xlscol, displayCol(col, metadata), _tc(table_id, col, val), is_html));
         }
         if (col != main_col) {
             ul.appendChild(li);
@@ -449,7 +461,7 @@ var make_li = function make_li(column_id, column_text, value_text, is_html) {
     return wrapper;
 }
 var failure_callback = function failure_callback(e) {
-    alert("Error querying data: " + e);
+    alert(_t("Error querying data: ") + e);
     odkCommon.closeWindow();
 }
 var update = function update() {
@@ -477,9 +489,9 @@ var edit = function() {
     </head>
     <body onLoad='ol();'>
         <div id="header">
-            <button id="back" onClick='odkCommon.closeWindow();'>Back</button>
-            <button id="delete" onClick='_delete();' disabled>Delete Row</button>
-            <button id="edit" onClick='edit();' disabled>Edit Row</button>
+            <button id="back" onClick='odkCommon.closeWindow();'></button>
+            <button id="delete" onClick='_delete();' disabled></button>
+            <button id="edit" onClick='edit();' disabled></button>
             <span id="main-col"></span>
         </div>
         <ul id="rest">Loading...</ul>
@@ -487,7 +499,7 @@ var edit = function() {
     <div class="main-col-wrapper">
         <div id="inject-facility_name">Loading...</div>
     </div>
-    <div class="h4-wrapper"><h4>Basic Facility Information</h4></div>
+    <div class="h4-wrapper"><h4 id="bfi"></h4></div>
     <ul>
         <li id='inject-facility_id'></li>
         <li id='inject-facility_type'></li>
@@ -496,7 +508,7 @@ var edit = function() {
         <li id='inject-facility_coverage'></li>
         <li id='inject-admin_region'></li>
     </ul>
-    <div class="h4-wrapper"><h4>Power Information</h4></div>
+    <div class="h4-wrapper"><h4 id="pi"></h4></div>
     <ul>
         <li id='inject-electricity_source'></li>
         <li id='inject-grid_power_availability'></li>
@@ -505,13 +517,13 @@ var edit = function() {
         <li id='inject-solar_suitable_climate'></li>
         <li id='inject-solar_suitable_site'></li>
     </ul>
-    <div class="h4-wrapper"><h4>Location Information</h4></div>
+    <div class="h4-wrapper"><h4 id="locationi"></h4></div>
     <ul>
         <li id='inject-Location_latitude'></li>
         <li id='inject-Location_longitude'></li>
         <li id='inject-climate_zone'></li>
     </ul>
-    <div class="h4-wrapper"><h4>Stock Information</h4></div>
+    <div class="h4-wrapper"><h4 id="stocki"></h4></div>
     <ul>
         <li id='inject-distance_to_supply'></li>
         <li id='inject-vaccine_supply_interval'></li>
@@ -521,7 +533,7 @@ var edit = function() {
     <div style="text-align: center;">
         <button disabled id='refrigerator_inventory'>Loading...</button>
         <br />
-        <button onClick="odkTables.launchHTML(null, "/config/assets/formgen/refrigerators#" + newGuid())">Add refrigerator</button>
+        <button onClick="odkTables.launchHTML(null, "/config/assets/formgen/refrigerators#" + newGuid())" id="addref"></button>
     </div>
         
     </body>
