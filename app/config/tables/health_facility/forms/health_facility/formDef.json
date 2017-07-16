@@ -511,10 +511,10 @@
       },
       {
         "choice_list_name": "facility_types",
-        "data_value": "health_centre",
+        "data_value": "health_center",
         "display": {
           "text": {
-            "default": "Health centre",
+            "default": "Health center",
             "spanish": "Centro de salud"
           }
         },
@@ -1329,10 +1329,10 @@
         },
         {
           "choice_list_name": "facility_types",
-          "data_value": "health_centre",
+          "data_value": "health_center",
           "display": {
             "text": {
-              "default": "Health centre",
+              "default": "Health center",
               "spanish": "Centro de salud"
             }
           },
@@ -3422,7 +3422,7 @@
         "_aspect": "facility_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"facility_types\",\"data_value\":\"national_vaccine_store\",\"display\":{\"text\":{\"default\":\"National vaccine store\",\"spanish\":\"Tienda nacional de vacunas\"}},\"_row_num\":5},{\"choice_list_name\":\"facility_types\",\"data_value\":\"regional_vaccine_store\",\"display\":{\"text\":{\"default\":\"Regional vaccine store\",\"spanish\":\"Tienda regional de vacunas\"}},\"_row_num\":6},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_vaccine_store\",\"display\":{\"text\":{\"default\":\"District vaccine store\",\"spanish\":\"Tienda de vacunas por un distrito\"}},\"_row_num\":7},{\"choice_list_name\":\"facility_types\",\"data_value\":\"central_hospital\",\"display\":{\"text\":{\"default\":\"Central hospital\",\"spanish\":\"Hospital centrál\"}},\"_row_num\":8},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_hospital\",\"display\":{\"text\":{\"default\":\"District hospital\",\"spanish\":\"Hospital por un distrito\"}},\"_row_num\":9},{\"choice_list_name\":\"facility_types\",\"data_value\":\"rural_hospital\",\"display\":{\"text\":{\"default\":\"Rural hospital\",\"spanish\":\"Hospital rurál\"}},\"_row_num\":10},{\"choice_list_name\":\"facility_types\",\"data_value\":\"hospital\",\"display\":{\"text\":{\"default\":\"Hospital\",\"spanish\":\"Hospital generál\"}},\"_row_num\":11},{\"choice_list_name\":\"facility_types\",\"data_value\":\"community_hospital\",\"display\":{\"text\":{\"default\":\"Community hospital\",\"spanish\":\"Hospital de comunidad\"}},\"_row_num\":12},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_centre\",\"display\":{\"text\":{\"default\":\"Health centre\",\"spanish\":\"Centro de salud\"}},\"_row_num\":13},{\"choice_list_name\":\"facility_types\",\"data_value\":\"dispensary\",\"display\":{\"text\":{\"default\":\"Dispensary\",\"spanish\":\"Dispensario\"}},\"_row_num\":14},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_post\",\"display\":{\"text\":{\"default\":\"Health post\",\"spanish\":\"Campamiento de salud\"}},\"_row_num\":15},{\"choice_list_name\":\"facility_types\",\"data_value\":\"maternity\",\"display\":{\"text\":{\"default\":\"Maternity\",\"spanish\":\"Maternidad\"}},\"_row_num\":16}]"
+        "_value": "[{\"choice_list_name\":\"facility_types\",\"data_value\":\"national_vaccine_store\",\"display\":{\"text\":{\"default\":\"National vaccine store\",\"spanish\":\"Tienda nacional de vacunas\"}},\"_row_num\":5},{\"choice_list_name\":\"facility_types\",\"data_value\":\"regional_vaccine_store\",\"display\":{\"text\":{\"default\":\"Regional vaccine store\",\"spanish\":\"Tienda regional de vacunas\"}},\"_row_num\":6},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_vaccine_store\",\"display\":{\"text\":{\"default\":\"District vaccine store\",\"spanish\":\"Tienda de vacunas por un distrito\"}},\"_row_num\":7},{\"choice_list_name\":\"facility_types\",\"data_value\":\"central_hospital\",\"display\":{\"text\":{\"default\":\"Central hospital\",\"spanish\":\"Hospital centrál\"}},\"_row_num\":8},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_hospital\",\"display\":{\"text\":{\"default\":\"District hospital\",\"spanish\":\"Hospital por un distrito\"}},\"_row_num\":9},{\"choice_list_name\":\"facility_types\",\"data_value\":\"rural_hospital\",\"display\":{\"text\":{\"default\":\"Rural hospital\",\"spanish\":\"Hospital rurál\"}},\"_row_num\":10},{\"choice_list_name\":\"facility_types\",\"data_value\":\"hospital\",\"display\":{\"text\":{\"default\":\"Hospital\",\"spanish\":\"Hospital generál\"}},\"_row_num\":11},{\"choice_list_name\":\"facility_types\",\"data_value\":\"community_hospital\",\"display\":{\"text\":{\"default\":\"Community hospital\",\"spanish\":\"Hospital de comunidad\"}},\"_row_num\":12},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_center\",\"display\":{\"text\":{\"default\":\"Health center\",\"spanish\":\"Centro de salud\"}},\"_row_num\":13},{\"choice_list_name\":\"facility_types\",\"data_value\":\"dispensary\",\"display\":{\"text\":{\"default\":\"Dispensary\",\"spanish\":\"Dispensario\"}},\"_row_num\":14},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_post\",\"display\":{\"text\":{\"default\":\"Health post\",\"spanish\":\"Campamiento de salud\"}},\"_row_num\":15},{\"choice_list_name\":\"facility_types\",\"data_value\":\"maternity\",\"display\":{\"text\":{\"default\":\"Maternity\",\"spanish\":\"Maternidad\"}},\"_row_num\":16}]"
       },
       {
         "_partition": "Column",
