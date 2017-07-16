@@ -8,5 +8,5 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,refrigerators
 Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/assets/aa_refrigerators_detail.html
-Table,default,displayName,object,"{""text"":""Refrigerators""}"
+Table,default,displayName,object,"{""text"":{""default"":""Refrigerators"",""spanish"":""Frigoríficos""}}"
 Table,default,listViewFileName,string,config/assets/aa_refrigerators_list.html

@@ -3,5 +3,5 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,m_logs
 Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/assets/aa_m_logs_detail.html
-Table,default,displayName,object,"{""text"":""Maintenance Logs""}"
+Table,default,displayName,object,"{""text"":{""default"":""Maintenance Logs"",""spanish"":""Registro de Servicio""}}"
 Table,default,listViewFileName,string,config/assets/aa_m_logs_list.html

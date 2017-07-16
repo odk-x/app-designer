@@ -464,14 +464,17 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170714,
+        "value": 20170715,
         "_row_num": 4
       },
       {
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Refrigerators"
+            "text": {
+              "default": "Refrigerators",
+              "spanish": "Frigoríficos"
+            }
           }
         },
         "_row_num": 5
@@ -480,6 +483,30 @@
         "setting_name": "instance_name",
         "value": "refrigerator_id",
         "_row_num": 6
+      },
+      {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "English",
+              "spanish": "Inglés"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "setting_name": "spanish",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "Spanish",
+              "spanish": "Español"
+            }
+          }
+        },
+        "_row_num": 8
       }
     ]
   },
@@ -512,14 +539,17 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170714,
+        "value": 20170715,
         "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Refrigerators"
+            "text": {
+              "default": "Refrigerators",
+              "spanish": "Frigoríficos"
+            }
           }
         },
         "_row_num": 5
@@ -529,10 +559,46 @@
         "value": "refrigerator_id",
         "_row_num": 6
       },
+      "english": {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "English",
+              "spanish": "Inglés"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      "spanish": {
+        "setting_name": "spanish",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "Spanish",
+              "spanish": "Español"
+            }
+          }
+        },
+        "_row_num": 8
+      },
       "_locales": {
         "setting_name": "_locales",
         "_row_num": 5,
         "value": [
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "default": "Spanish",
+                  "spanish": "Español"
+                }
+              }
+            },
+            "_row_num": 8,
+            "name": "spanish"
+          },
           {
             "display": {
               "locale": {
@@ -546,13 +612,16 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "default"
+        "value": "spanish"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Refrigerators"
+            "text": {
+              "default": "Refrigerators",
+              "spanish": "Frigoríficos"
+            }
           }
         },
         "_row_num": 5
@@ -1356,7 +1425,10 @@
             "promptIdx": 1,
             "display": {
               "title": {
-                "text": "Refrigerators"
+                "text": {
+                  "default": "Refrigerators",
+                  "spanish": "Frigoríficos"
+                }
               }
             },
             "_branch_label_enclosing_screen": "survey/0"
@@ -1867,7 +1939,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"Refrigerators\"}"
+        "_value": "{\"text\":{\"default\":\"Refrigerators\",\"spanish\":\"Frigoríficos\"}}"
       },
       {
         "_partition": "Table",

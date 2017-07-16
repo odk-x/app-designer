@@ -10,7 +10,10 @@
         "name": "catalog_id",
         "display": {
           "prompt": {
-            "text": "Enter catalog ID:"
+            "text": {
+              "default": "Enter catalog ID:",
+              "spanish": "ID de cataĺogo"
+            }
           }
         },
         "_row_num": 3
@@ -20,7 +23,10 @@
         "name": "model_id",
         "display": {
           "prompt": {
-            "text": "Enter the model ID:"
+            "text": {
+              "default": "Enter the model ID:",
+              "spanish": "Modelo"
+            }
           }
         },
         "_row_num": 4
@@ -34,7 +40,10 @@
         "name": "refrigerator_picture",
         "display": {
           "prompt": {
-            "text": "Take a picture of the refrigerator"
+            "text": {
+              "default": "Take a picture of the refrigerator",
+              "spanish": "Foto del frigorífico"
+            }
           }
         },
         "_row_num": 6
@@ -44,7 +53,10 @@
         "name": "manufacturer",
         "display": {
           "prompt": {
-            "text": "Enter the manufacturer:"
+            "text": {
+              "default": "Enter the manufacturer:",
+              "spanish": "Fabricante"
+            }
           }
         },
         "_row_num": 7
@@ -58,10 +70,16 @@
         "name": "refrigerator_gross_volume",
         "display": {
           "prompt": {
-            "text": "Enter the refrigerator's gross volume:"
+            "text": {
+              "default": "Enter the refrigerator's gross volume:",
+              "spanish": "Volumen en bruto de frigorífico"
+            }
           },
           "hint": {
-            "text": "(cubic meters)"
+            "text": {
+              "default": "(cubic meters)",
+              "spanish": "(metro cúbico)"
+            }
           }
         },
         "_row_num": 9
@@ -71,10 +89,16 @@
         "name": "refrigerator_net_volume",
         "display": {
           "prompt": {
-            "text": "Enter the refrigerator's net volume:"
+            "text": {
+              "default": "Enter the refrigerator's net volume:",
+              "spanish": "Volumen neto de frigorífico"
+            }
           },
           "hint": {
-            "text": "(cubic meters)"
+            "text": {
+              "default": "(cubic meters)",
+              "spanish": "(metro cúbico)"
+            }
           }
         },
         "_row_num": 10
@@ -84,10 +108,16 @@
         "name": "freezer_gross_volume",
         "display": {
           "prompt": {
-            "text": "Enter the freezer's gross volume:"
+            "text": {
+              "default": "Enter the freezer's gross volume:",
+              "spanish": "Volumen en bruto de congelador"
+            }
           },
           "hint": {
-            "text": "(cubic meters)"
+            "text": {
+              "default": "(cubic meters)",
+              "spanish": "(metro cúbico)"
+            }
           }
         },
         "_row_num": 11
@@ -97,10 +127,16 @@
         "name": "freezer_net_volume",
         "display": {
           "prompt": {
-            "text": "Enter the freezer's net volume:"
+            "text": {
+              "default": "Enter the freezer's net volume:",
+              "spanish": "Volumen neto de congelador"
+            }
           },
           "hint": {
-            "text": "(cubic meters)"
+            "text": {
+              "default": "(cubic meters)",
+              "spanish": "(metro cúbico)"
+            }
           }
         },
         "_row_num": 12
@@ -115,7 +151,10 @@
         "name": "power_source",
         "display": {
           "prompt": {
-            "text": "Choose power source required:"
+            "text": {
+              "default": "Choose power source required:",
+              "spanish": "Eliga el fuente de poder requerido"
+            }
           }
         },
         "_row_num": 14
@@ -130,7 +169,10 @@
         "name": "equipment_type",
         "display": {
           "prompt": {
-            "text": "Select what type of equipment this is"
+            "text": {
+              "default": "Select what type of equipment this is",
+              "spanish": "Tipo"
+            }
           }
         },
         "_row_num": 16
@@ -141,7 +183,10 @@
         "name": "climate_zone",
         "display": {
           "prompt": {
-            "text": "What climate zone is this equipment best for?"
+            "text": {
+              "default": "What climate zone is this equipment best for?",
+              "spanish": "Mejor clima"
+            }
           }
         },
         "_row_num": 17
@@ -156,7 +201,10 @@
         "choice_list_name": "power_sources",
         "data_value": "electricity",
         "display": {
-          "text": "Electricity"
+          "text": {
+            "default": "Electricity",
+            "spanish": "Electricidad"
+          }
         },
         "_row_num": 2
       },
@@ -164,7 +212,10 @@
         "choice_list_name": "power_sources",
         "data_value": "kerosene",
         "display": {
-          "text": "Kerosene"
+          "text": {
+            "default": "Kerosene",
+            "spanish": "Queroseno"
+          }
         },
         "_row_num": 3
       },
@@ -172,7 +223,10 @@
         "choice_list_name": "power_sources",
         "data_value": "gas",
         "display": {
-          "text": "Gas"
+          "text": {
+            "default": "Gas",
+            "spanish": "Combustible"
+          }
         },
         "_row_num": 4
       },
@@ -180,7 +234,10 @@
         "choice_list_name": "power_sources",
         "data_value": "solar",
         "display": {
-          "text": "Solar"
+          "text": {
+            "default": "Solar",
+            "spanish": "Solár"
+          }
         },
         "_row_num": 5
       },
@@ -188,7 +245,10 @@
         "choice_list_name": "power_sources",
         "data_value": "unknown",
         "display": {
-          "text": "Unknown"
+          "text": {
+            "default": "Unknown",
+            "spanish": "Desconocido"
+          }
         },
         "_row_num": 6
       },
@@ -196,7 +256,10 @@
         "choice_list_name": "equipment_types",
         "data_value": "chest_refrigerator",
         "display": {
-          "text": "Chest Refrigerator"
+          "text": {
+            "default": "Chest Refrigerator",
+            "spanish": "Frigorífico de baúl"
+          }
         },
         "_row_num": 8
       },
@@ -204,7 +267,10 @@
         "choice_list_name": "equipment_types",
         "data_value": "chest_freezer",
         "display": {
-          "text": "Chest Freezer"
+          "text": {
+            "default": "Chest Freezer",
+            "spanish": "Congelador de baúl"
+          }
         },
         "_row_num": 9
       },
@@ -212,7 +278,10 @@
         "choice_list_name": "equipment_types",
         "data_value": "upright_refrigerator",
         "display": {
-          "text": "Upright Refrigerator"
+          "text": {
+            "default": "Upright Refrigerator",
+            "spanish": "Frigorífico fijo"
+          }
         },
         "_row_num": 10
       },
@@ -220,7 +289,10 @@
         "choice_list_name": "equipment_types",
         "data_value": "ice_pack_freezer",
         "display": {
-          "text": "Ice Pack Freezer"
+          "text": {
+            "default": "Ice Pack Freezer",
+            "spanish": "Congelador de bloque de hielo"
+          }
         },
         "_row_num": 11
       },
@@ -228,7 +300,10 @@
         "choice_list_name": "equipment_types",
         "data_value": "ice_lined_refrigerator",
         "display": {
-          "text": "Ice Lined Refrigerator"
+          "text": {
+            "default": "Ice Lined Refrigerator",
+            "spanish": "Congelador lineado con hielo"
+          }
         },
         "_row_num": 12
       },
@@ -236,7 +311,10 @@
         "choice_list_name": "equipment_types",
         "data_value": "solar_photovoltaic_refrigerator",
         "display": {
-          "text": "Solar Photovoltaic Refrigerator"
+          "text": {
+            "default": "Solar Photovoltaic Refrigerator",
+            "spanish": "Frigorífico de solár"
+          }
         },
         "_row_num": 13
       },
@@ -244,7 +322,10 @@
         "choice_list_name": "equipment_types",
         "data_value": "solar_thermal_refrigerator",
         "display": {
-          "text": "Solar Thermal Refrigerator"
+          "text": {
+            "default": "Solar Thermal Refrigerator",
+            "spanish": "Frigorífico termal"
+          }
         },
         "_row_num": 14
       },
@@ -252,7 +333,10 @@
         "choice_list_name": "climate_zones",
         "data_value": "moderate",
         "display": {
-          "text": "Moderate"
+          "text": {
+            "default": "Moderate",
+            "spanish": "Moderate"
+          }
         },
         "_row_num": 16
       },
@@ -260,7 +344,10 @@
         "choice_list_name": "climate_zones",
         "data_value": "temperate",
         "display": {
-          "text": "Temperate"
+          "text": {
+            "default": "Temperate",
+            "spanish": "Templado"
+          }
         },
         "_row_num": 17
       },
@@ -268,7 +355,10 @@
         "choice_list_name": "climate_zones",
         "data_value": "hot",
         "display": {
-          "text": "Hot"
+          "text": {
+            "default": "Hot",
+            "spanish": "Caliente"
+          }
         },
         "_row_num": 18
       }
@@ -309,7 +399,10 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Refrigerator Types"
+            "text": {
+              "default": "Refrigerator Types",
+              "spanish": "Modelos de Frigeríficos"
+            }
           }
         },
         "_row_num": 4
@@ -331,8 +424,32 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170714,
+        "value": 20170715,
         "_row_num": 8
+      },
+      {
+        "setting_name": "english",
+        "locale": {
+          "title": {
+            "text": {
+              "default": "English",
+              "spanish": "Inglés"
+            }
+          }
+        },
+        "_row_num": 9
+      },
+      {
+        "setting_name": "spanish",
+        "locale": {
+          "title": {
+            "text": {
+              "default": "Spanish",
+              "spanish": "Español"
+            }
+          }
+        },
+        "_row_num": 10
       }
     ]
   },
@@ -362,7 +479,10 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Refrigerator Types"
+            "text": {
+              "default": "Refrigerator Types",
+              "spanish": "Modelos de Frigeríficos"
+            }
           }
         },
         "_row_num": 4
@@ -384,8 +504,32 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170714,
+        "value": 20170715,
         "_row_num": 8
+      },
+      "english": {
+        "setting_name": "english",
+        "locale": {
+          "title": {
+            "text": {
+              "default": "English",
+              "spanish": "Inglés"
+            }
+          }
+        },
+        "_row_num": 9
+      },
+      "spanish": {
+        "setting_name": "spanish",
+        "locale": {
+          "title": {
+            "text": {
+              "default": "Spanish",
+              "spanish": "Español"
+            }
+          }
+        },
+        "_row_num": 10
       },
       "_locales": {
         "setting_name": "_locales",
@@ -398,6 +542,14 @@
               }
             },
             "name": "default"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": "spanish"
+              }
+            },
+            "name": "spanish"
           }
         ]
       },
@@ -410,7 +562,10 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Refrigerator Types"
+            "text": {
+              "default": "Refrigerator Types",
+              "spanish": "Modelos de Frigeríficos"
+            }
           }
         },
         "_row_num": 4
@@ -422,7 +577,10 @@
           "choice_list_name": "power_sources",
           "data_value": "electricity",
           "display": {
-            "text": "Electricity"
+            "text": {
+              "default": "Electricity",
+              "spanish": "Electricidad"
+            }
           },
           "_row_num": 2
         },
@@ -430,7 +588,10 @@
           "choice_list_name": "power_sources",
           "data_value": "kerosene",
           "display": {
-            "text": "Kerosene"
+            "text": {
+              "default": "Kerosene",
+              "spanish": "Queroseno"
+            }
           },
           "_row_num": 3
         },
@@ -438,7 +599,10 @@
           "choice_list_name": "power_sources",
           "data_value": "gas",
           "display": {
-            "text": "Gas"
+            "text": {
+              "default": "Gas",
+              "spanish": "Combustible"
+            }
           },
           "_row_num": 4
         },
@@ -446,7 +610,10 @@
           "choice_list_name": "power_sources",
           "data_value": "solar",
           "display": {
-            "text": "Solar"
+            "text": {
+              "default": "Solar",
+              "spanish": "Solár"
+            }
           },
           "_row_num": 5
         },
@@ -454,7 +621,10 @@
           "choice_list_name": "power_sources",
           "data_value": "unknown",
           "display": {
-            "text": "Unknown"
+            "text": {
+              "default": "Unknown",
+              "spanish": "Desconocido"
+            }
           },
           "_row_num": 6
         }
@@ -464,7 +634,10 @@
           "choice_list_name": "equipment_types",
           "data_value": "chest_refrigerator",
           "display": {
-            "text": "Chest Refrigerator"
+            "text": {
+              "default": "Chest Refrigerator",
+              "spanish": "Frigorífico de baúl"
+            }
           },
           "_row_num": 8
         },
@@ -472,7 +645,10 @@
           "choice_list_name": "equipment_types",
           "data_value": "chest_freezer",
           "display": {
-            "text": "Chest Freezer"
+            "text": {
+              "default": "Chest Freezer",
+              "spanish": "Congelador de baúl"
+            }
           },
           "_row_num": 9
         },
@@ -480,7 +656,10 @@
           "choice_list_name": "equipment_types",
           "data_value": "upright_refrigerator",
           "display": {
-            "text": "Upright Refrigerator"
+            "text": {
+              "default": "Upright Refrigerator",
+              "spanish": "Frigorífico fijo"
+            }
           },
           "_row_num": 10
         },
@@ -488,7 +667,10 @@
           "choice_list_name": "equipment_types",
           "data_value": "ice_pack_freezer",
           "display": {
-            "text": "Ice Pack Freezer"
+            "text": {
+              "default": "Ice Pack Freezer",
+              "spanish": "Congelador de bloque de hielo"
+            }
           },
           "_row_num": 11
         },
@@ -496,7 +678,10 @@
           "choice_list_name": "equipment_types",
           "data_value": "ice_lined_refrigerator",
           "display": {
-            "text": "Ice Lined Refrigerator"
+            "text": {
+              "default": "Ice Lined Refrigerator",
+              "spanish": "Congelador lineado con hielo"
+            }
           },
           "_row_num": 12
         },
@@ -504,7 +689,10 @@
           "choice_list_name": "equipment_types",
           "data_value": "solar_photovoltaic_refrigerator",
           "display": {
-            "text": "Solar Photovoltaic Refrigerator"
+            "text": {
+              "default": "Solar Photovoltaic Refrigerator",
+              "spanish": "Frigorífico de solár"
+            }
           },
           "_row_num": 13
         },
@@ -512,7 +700,10 @@
           "choice_list_name": "equipment_types",
           "data_value": "solar_thermal_refrigerator",
           "display": {
-            "text": "Solar Thermal Refrigerator"
+            "text": {
+              "default": "Solar Thermal Refrigerator",
+              "spanish": "Frigorífico termal"
+            }
           },
           "_row_num": 14
         }
@@ -522,7 +713,10 @@
           "choice_list_name": "climate_zones",
           "data_value": "moderate",
           "display": {
-            "text": "Moderate"
+            "text": {
+              "default": "Moderate",
+              "spanish": "Moderate"
+            }
           },
           "_row_num": 16
         },
@@ -530,7 +724,10 @@
           "choice_list_name": "climate_zones",
           "data_value": "temperate",
           "display": {
-            "text": "Temperate"
+            "text": {
+              "default": "Temperate",
+              "spanish": "Templado"
+            }
           },
           "_row_num": 17
         },
@@ -538,7 +735,10 @@
           "choice_list_name": "climate_zones",
           "data_value": "hot",
           "display": {
-            "text": "Hot"
+            "text": {
+              "default": "Hot",
+              "spanish": "Caliente"
+            }
           },
           "_row_num": 18
         }
@@ -697,7 +897,10 @@
             "name": "catalog_id",
             "display": {
               "prompt": {
-                "text": "Enter catalog ID:"
+                "text": {
+                  "default": "Enter catalog ID:",
+                  "spanish": "ID de cataĺogo"
+                }
               }
             },
             "_row_num": 3,
@@ -712,7 +915,10 @@
             "name": "model_id",
             "display": {
               "prompt": {
-                "text": "Enter the model ID:"
+                "text": {
+                  "default": "Enter the model ID:",
+                  "spanish": "Modelo"
+                }
               }
             },
             "_row_num": 4,
@@ -727,7 +933,10 @@
             "name": "refrigerator_picture",
             "display": {
               "prompt": {
-                "text": "Take a picture of the refrigerator"
+                "text": {
+                  "default": "Take a picture of the refrigerator",
+                  "spanish": "Foto del frigorífico"
+                }
               }
             },
             "_row_num": 6,
@@ -742,7 +951,10 @@
             "name": "manufacturer",
             "display": {
               "prompt": {
-                "text": "Enter the manufacturer:"
+                "text": {
+                  "default": "Enter the manufacturer:",
+                  "spanish": "Fabricante"
+                }
               }
             },
             "_row_num": 7,
@@ -757,10 +969,16 @@
             "name": "refrigerator_gross_volume",
             "display": {
               "prompt": {
-                "text": "Enter the refrigerator's gross volume:"
+                "text": {
+                  "default": "Enter the refrigerator's gross volume:",
+                  "spanish": "Volumen en bruto de frigorífico"
+                }
               },
               "hint": {
-                "text": "(cubic meters)"
+                "text": {
+                  "default": "(cubic meters)",
+                  "spanish": "(metro cúbico)"
+                }
               }
             },
             "_row_num": 9,
@@ -775,10 +993,16 @@
             "name": "refrigerator_net_volume",
             "display": {
               "prompt": {
-                "text": "Enter the refrigerator's net volume:"
+                "text": {
+                  "default": "Enter the refrigerator's net volume:",
+                  "spanish": "Volumen neto de frigorífico"
+                }
               },
               "hint": {
-                "text": "(cubic meters)"
+                "text": {
+                  "default": "(cubic meters)",
+                  "spanish": "(metro cúbico)"
+                }
               }
             },
             "_row_num": 10,
@@ -793,10 +1017,16 @@
             "name": "freezer_gross_volume",
             "display": {
               "prompt": {
-                "text": "Enter the freezer's gross volume:"
+                "text": {
+                  "default": "Enter the freezer's gross volume:",
+                  "spanish": "Volumen en bruto de congelador"
+                }
               },
               "hint": {
-                "text": "(cubic meters)"
+                "text": {
+                  "default": "(cubic meters)",
+                  "spanish": "(metro cúbico)"
+                }
               }
             },
             "_row_num": 11,
@@ -811,10 +1041,16 @@
             "name": "freezer_net_volume",
             "display": {
               "prompt": {
-                "text": "Enter the freezer's net volume:"
+                "text": {
+                  "default": "Enter the freezer's net volume:",
+                  "spanish": "Volumen neto de congelador"
+                }
               },
               "hint": {
-                "text": "(cubic meters)"
+                "text": {
+                  "default": "(cubic meters)",
+                  "spanish": "(metro cúbico)"
+                }
               }
             },
             "_row_num": 12,
@@ -830,7 +1066,10 @@
             "name": "power_source",
             "display": {
               "prompt": {
-                "text": "Choose power source required:"
+                "text": {
+                  "default": "Choose power source required:",
+                  "spanish": "Eliga el fuente de poder requerido"
+                }
               }
             },
             "_row_num": 14,
@@ -846,7 +1085,10 @@
             "name": "equipment_type",
             "display": {
               "prompt": {
-                "text": "Select what type of equipment this is"
+                "text": {
+                  "default": "Select what type of equipment this is",
+                  "spanish": "Tipo"
+                }
               }
             },
             "_row_num": 16,
@@ -862,7 +1104,10 @@
             "name": "climate_zone",
             "display": {
               "prompt": {
-                "text": "What climate zone is this equipment best for?"
+                "text": {
+                  "default": "What climate zone is this equipment best for?",
+                  "spanish": "Mejor clima"
+                }
               }
             },
             "_row_num": 17,
@@ -1007,7 +1252,10 @@
             "promptIdx": 1,
             "display": {
               "title": {
-                "text": "Refrigerator Types"
+                "text": {
+                  "default": "Refrigerator Types",
+                  "spanish": "Modelos de Frigeríficos"
+                }
               }
             },
             "_branch_label_enclosing_screen": "survey/0"
@@ -1483,21 +1731,21 @@
         "_aspect": "climate_zone",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"climate_zones\",\"data_value\":\"moderate\",\"display\":{\"text\":\"Moderate\"},\"_row_num\":16},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"temperate\",\"display\":{\"text\":\"Temperate\"},\"_row_num\":17},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"hot\",\"display\":{\"text\":\"Hot\"},\"_row_num\":18}]"
+        "_value": "[{\"choice_list_name\":\"climate_zones\",\"data_value\":\"moderate\",\"display\":{\"text\":{\"default\":\"Moderate\",\"spanish\":\"Moderate\"}},\"_row_num\":16},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"temperate\",\"display\":{\"text\":{\"default\":\"Temperate\",\"spanish\":\"Templado\"}},\"_row_num\":17},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"hot\",\"display\":{\"text\":{\"default\":\"Hot\",\"spanish\":\"Caliente\"}},\"_row_num\":18}]"
       },
       {
         "_partition": "Column",
         "_aspect": "equipment_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_refrigerator\",\"display\":{\"text\":\"Chest Refrigerator\"},\"_row_num\":8},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_freezer\",\"display\":{\"text\":\"Chest Freezer\"},\"_row_num\":9},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"upright_refrigerator\",\"display\":{\"text\":\"Upright Refrigerator\"},\"_row_num\":10},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_pack_freezer\",\"display\":{\"text\":\"Ice Pack Freezer\"},\"_row_num\":11},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_lined_refrigerator\",\"display\":{\"text\":\"Ice Lined Refrigerator\"},\"_row_num\":12},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_photovoltaic_refrigerator\",\"display\":{\"text\":\"Solar Photovoltaic Refrigerator\"},\"_row_num\":13},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_thermal_refrigerator\",\"display\":{\"text\":\"Solar Thermal Refrigerator\"},\"_row_num\":14}]"
+        "_value": "[{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_refrigerator\",\"display\":{\"text\":{\"default\":\"Chest Refrigerator\",\"spanish\":\"Frigorífico de baúl\"}},\"_row_num\":8},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_freezer\",\"display\":{\"text\":{\"default\":\"Chest Freezer\",\"spanish\":\"Congelador de baúl\"}},\"_row_num\":9},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"upright_refrigerator\",\"display\":{\"text\":{\"default\":\"Upright Refrigerator\",\"spanish\":\"Frigorífico fijo\"}},\"_row_num\":10},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_pack_freezer\",\"display\":{\"text\":{\"default\":\"Ice Pack Freezer\",\"spanish\":\"Congelador de bloque de hielo\"}},\"_row_num\":11},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_lined_refrigerator\",\"display\":{\"text\":{\"default\":\"Ice Lined Refrigerator\",\"spanish\":\"Congelador lineado con hielo\"}},\"_row_num\":12},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_photovoltaic_refrigerator\",\"display\":{\"text\":{\"default\":\"Solar Photovoltaic Refrigerator\",\"spanish\":\"Frigorífico de solár\"}},\"_row_num\":13},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_thermal_refrigerator\",\"display\":{\"text\":{\"default\":\"Solar Thermal Refrigerator\",\"spanish\":\"Frigorífico termal\"}},\"_row_num\":14}]"
       },
       {
         "_partition": "Column",
         "_aspect": "power_source",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"power_sources\",\"data_value\":\"electricity\",\"display\":{\"text\":\"Electricity\"},\"_row_num\":2},{\"choice_list_name\":\"power_sources\",\"data_value\":\"kerosene\",\"display\":{\"text\":\"Kerosene\"},\"_row_num\":3},{\"choice_list_name\":\"power_sources\",\"data_value\":\"gas\",\"display\":{\"text\":\"Gas\"},\"_row_num\":4},{\"choice_list_name\":\"power_sources\",\"data_value\":\"solar\",\"display\":{\"text\":\"Solar\"},\"_row_num\":5},{\"choice_list_name\":\"power_sources\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"power_sources\",\"data_value\":\"electricity\",\"display\":{\"text\":{\"default\":\"Electricity\",\"spanish\":\"Electricidad\"}},\"_row_num\":2},{\"choice_list_name\":\"power_sources\",\"data_value\":\"kerosene\",\"display\":{\"text\":{\"default\":\"Kerosene\",\"spanish\":\"Queroseno\"}},\"_row_num\":3},{\"choice_list_name\":\"power_sources\",\"data_value\":\"gas\",\"display\":{\"text\":{\"default\":\"Gas\",\"spanish\":\"Combustible\"}},\"_row_num\":4},{\"choice_list_name\":\"power_sources\",\"data_value\":\"solar\",\"display\":{\"text\":{\"default\":\"Solar\",\"spanish\":\"Solár\"}},\"_row_num\":5},{\"choice_list_name\":\"power_sources\",\"data_value\":\"unknown\",\"display\":{\"text\":{\"default\":\"Unknown\",\"spanish\":\"Desconocido\"}},\"_row_num\":6}]"
       },
       {
         "_partition": "FormType",
@@ -1532,7 +1780,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"Refrigerator Types\"}"
+        "_value": "{\"text\":{\"default\":\"Refrigerator Types\",\"spanish\":\"Modelos de Frigeríficos\"}}"
       },
       {
         "_partition": "Table",
