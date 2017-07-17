@@ -225,6 +225,7 @@ var clean_href = function clean_href() {
 }
 
 var __tr = function __tr(s) {
+	console.log("About to translate: " + s);
     if (s.length == 0) return ["ok",  ""]
     var found = formgen_specific_translations[s];
     if (found != undefined) {

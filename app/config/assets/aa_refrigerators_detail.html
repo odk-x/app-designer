@@ -152,7 +152,7 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
         btn.addEventListener("click", function() {
             odkTables.openDetailView(null, "refrigerator_types", model_row_id);
         });
-        build_generic_callback("model_id", true)(e, c, d)
+        build_generic_callback("model_id", true, _tu("Model ID"))(e, c, d)
         return "";
     }
     var hf_callback = function hf_callback(e, c, d) {
@@ -206,7 +206,12 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
         ["tracking_id", build_generic_callback("tracking_id", false, "Tracking Number")],
         ["voltage_regulator", build_generic_callback("voltage_regulator", true)],
         ["refrigerator_id", build_generic_callback("refrigerator_id", true)],
-        ["date_serviced", build_generic_callback("date_serviced", function(i) { return i.split("T")[0]; })]
+        ["date_serviced", build_generic_callback("date_serviced", function(i) {
+            if (i == "No Records") {
+                return _tu(i);
+            }
+            return i.split("T")[0];
+        }, _tu("Date Serviced"))]
     ];
 
 }

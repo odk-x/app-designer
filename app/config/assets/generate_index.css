@@ -21,6 +21,15 @@ body {
 	padding-bottom: 30px;
 	margin-bottom: 20px;
 }
+.small-button {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.tiny-button {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
 #title {
 	display: block;
 	font-family: serif;

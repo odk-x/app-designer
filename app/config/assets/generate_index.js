@@ -54,8 +54,8 @@ var doMenu = function doMenu() {
 	var submenu = make_submenu();
 	document.getElementById("title").innerText = _tu(submenu[0]);
 	getMetadataAndThen(submenu[1], function(this_table_metadata) {
-
-		for (var i = 0; i < submenu[2].length; i++) {
+		var len = submenu[2].length;
+		for (var i = 0; i < len; i++) {
 			var triplet = submenu[2][i];
 			var button = document.createElement("button");
 			if (triplet[0] === true) {
@@ -64,6 +64,11 @@ var doMenu = function doMenu() {
 				button.innerText = _tu(triplet[0]);
 			}
 			button.classList.add("button");
+			if (len > 10) {
+				button.classList.add("tiny-button");
+			} else if (len > 6) {
+				button.classList.add("small-button")
+			}
 			document.getElementById("list").appendChild(button);
 			(function(button, i) {
 				button.addEventListener("click", function() {
