@@ -278,226 +278,226 @@ window._tc = function(table, column, text) {
 var formgen_specific_translations = {
     "Prompt for database column ": {"text": {
         "default": true,
-        "spanish": "Prompt por la columna "
+        "es": "Prompt por la columna "
     }},
     " not found on the screen! Will be stored in the database as null!": {"text": {
         "default": true,
-        "spanish": " no encontrado en el viento! Estará en el baso de datos como null!"
+        "es": " no encontrado en el viento! Estará en el baso de datos como null!"
     }},
     "Unknown query type ": {"text": {
         "default": true,
-        "spanish": "No conozco la forma de popular opciones: "
+        "es": "No conozco la forma de popular opciones: "
     }},
     "Failed to start cross-table query: ": {"text": {
         "default": true,
-        "spanish": "No se pudo empezar el poblar de opciones de una tabla: "
+        "es": "No se pudo empezar el poblar de opciones de una tabla: "
     }},
     "Unexpected failure": {"text": {
         "default": true,
-        "spanish": ""
+        "es": ""
     }},
     "This shouldn't be possible, don't know how to update screen column ": {"text": {
         "default": true,
-        "spanish": "Este no debe ser posible, no hay forma de cambiar el texto en el viento para la celuda "
+        "es": "Este no debe ser posible, no hay forma de cambiar el texto en el viento para la celuda "
     }},
     "Unexpected failure to save row": {"text": {
         "default": true,
-        "spanish": "Inesperadamente no se puede salvar la fila"
+        "es": "Inesperadamente no se puede salvar la fila"
     }},
     "Error saving row: ": {"text": {
         "default": true,
-        "spanish": "Inesperadamente no se puede salvar la fila"
+        "es": "Inesperadamente no se puede salvar la fila"
     }},
     "An error occurred while loading the page. ": {"text": {
         "default": true,
-        "spanish": "Se ha occurido un error mientras cargando este viento. "
+        "es": "Se ha occurido un error mientras cargando este viento. "
     }},
     "Error, location providers are disabled.": {"text": {
         "default": true,
-        "spanish": "Error, provisor de ubicacion no está eneblado"
+        "es": "Error, provisor de ubicacion no está eneblado"
     }},
     "Unknown type in dispatch struct!": {"text": {
         "default": true,
-        "spanish": "Tipo de pregunta en la estructura de envío no conocido"
+        "es": "Tipo de pregunta en la estructura de envío no conocido"
     }},
     "Error translating ": {"text": {
         "default": true,
-        "spanish": "Error al traducir "
+        "es": "Error al traducir "
     }},
     "Are you sure? All entered data will be deleted.": {"text": {
         "default": true,
-        "spanish": "¿Está usted seguro? Todos los datos en este fila será perdido."
+        "es": "¿Está usted seguro? Todos los datos en este fila será perdido."
     }},
     "Unexpected error deleting row: ": {"text": {
         "default": true,
-        "spanish": "Inesperadamente no se puede eliminar la fila"
+        "es": "Inesperadamente no se puede eliminar la fila"
     }},
     "Error launching ": {"text": {
         "default": true,
-        "spanish": "Inesperadamente no se puede lanzar "
+        "es": "Inesperadamente no se puede lanzar "
     }},
     "yes": {"text": {
         "default": true,
-        "spanish": "sí"
+        "es": "sí"
     }},
     "no": {"text": {
         "default": true,
-        "spanish": "no"
+        "es": "no"
     }},
     "No row id in uri, beginning new instance with id ": {"text": {
         "default": true,
-        "spanish": "No se puede hallar el id de la fila en el URL, empezando una fila nueva"
+        "es": "No se puede hallar el id de la fila en el URL, empezando una fila nueva"
     }},
     "Save incomplete": {"text": {
         "default": true,
-        "spanish": "Salvar como no completado"
+        "es": "Salvar como no completado"
     }},
     "Cancel and delete row": {"text": {
         "default": true,
-        "spanish": "Cancelar e eliminar fila"
+        "es": "Cancelar e eliminar fila"
     }},
     "Next": {"text": {
         "default": true,
-        "spanish": "Adelante!"
+        "es": "Adelante!"
     }},
     "Back": {"text": {
         "default": true,
-        "spanish": "Retirarse"
+        "es": "Retirarse"
     }},
     "Finalize": {"text": {
         "default": true,
-        "spanish": "Finalizar"
+        "es": "Finalizar"
     }},
     "Can't translate undefined!": {"text": {
         "default": true,
-        "spanish": "¡No se puede traducir texto lo que no existe!"
+        "es": "¡No se puede traducir texto lo que no existe!"
     }},
     "Error fake translating ": {"text": {
         "default": true,
-        "spanish": "Error al pretender a traducir "
+        "es": "Error al pretender a traducir "
     }},
     "Couldn't translate ": {"text": {
         "default": true,
-        "spanish": "No se puede traducir "
+        "es": "No se puede traducir "
     }},
     "Please confirm deletion of row ": {"text": {
         "default": true,
-        "spanish": "Por favor confirme que quiere usted eliminar la fila "
+        "es": "Por favor confirme que quiere usted eliminar la fila "
     }},
     "Failed to _delete row - ": {"text": {
         "default": true,
-        "spanish": "Inesperadamente no se puede _eliminar la fila "
+        "es": "Inesperadamente no se puede _eliminar la fila "
     }},
     "Row not found!": {"text": {
         "default": true,
-        "spanish": "¡Fila no encontrada!"
+        "es": "¡Fila no encontrada!"
     }},
     "Error querying data: ": {"text": {
         "default": true,
-        "spanish": "Error al pedir data: "
+        "es": "Error al pedir data: "
     }},
     "Delete Row": {"text": {
         "default": true,
-        "spanish": "Eliminar fila"
+        "es": "Eliminar fila"
     }},
     "Edit Row": {"text": {
         "default": true,
-        "spanish": "Editar fila"
+        "es": "Editar fila"
     }},
     "Edit": {"text": {
         "default": true,
-        "spanish": "Editar"
+        "es": "Editar"
     }},
     "Delete": {"text": {
         "default": true,
-        "spanish": "Eliminar"
+        "es": "Eliminar"
     }},
     "By ": {"text": {
         "default": true,
-        "spanish": "En grupos de "
+        "es": "En grupos de "
     }},
     "Unknown selector in query hash": {"text": {
         "default": true,
-        "spanish": "El seleccionador encontrado en el URL es desconocido"
+        "es": "El seleccionador encontrado en el URL es desconocido"
     }},
     "Couldn't guess instance col. Bailing out, you're on your own.": {"text": {
         "default": true,
-        "spanish": "No se puede automáticamente detectar cual celda por demostrar, demostrando el id"
+        "es": "No se puede automáticamente detectar cual celda por demostrar, demostrando el id"
     }},
     "No table id! Please set it in customJsOl or pass it in the url hash": {"text": {
         "default": true,
-        "spanish": "¡No hay ID de tabla! Por favor ponerlo en customJsOl o darla en el URL"
+        "es": "¡No hay ID de tabla! Por favor ponerlo en customJsOl o darla en el URL"
     }},
     "Unexpected error ": {"text": {
         "default": true,
-        "spanish": "Error inesperado"
+        "es": "Error inesperado"
     }},
     "Could not get columns: ": {"text": {
         "default": true,
-        "spanish": "No se puede obtener las columnas"
+        "es": "No se puede obtener las columnas"
     }},
     "Still searching...": {"text": {
         "default": true,
-        "spanish": "Todavia buscando..."
+        "es": "Todavia buscando..."
     }},
     "No results": {"text": {
         "default": true,
-        "spanish": "Sin resultos"
+        "es": "Sin resultos"
     }},
     "rows ": {"text": {
         "default": true,
-        "spanish": "filas "
+        "es": "filas "
     }},
     "Showing ": {"text": {
         "default": true,
-        "spanish": "Demostrando "
+        "es": "Demostrando "
     }},
     " of ": {"text": {
         "default": true,
-        "spanish": " de "
+        "es": " de "
     }},
     " distinct values of ": {"text": {
         "default": true,
-        "spanish": " valores unicos de "
+        "es": " valores unicos de "
     }},
     " rows where ": {"text": {
         "default": true,
-        "spanish": " filas donde "
+        "es": " filas donde "
     }},
     " is ": {"text": {
         "default": true,
-        "spanish": " está "
+        "es": " está "
     }},
     "Add Row": {"text": {
         "default": true,
-        "spanish": "Aggregar fila"
+        "es": "Aggregar fila"
     }},
     "Group by": {"text": {
         "default": true,
-        "spanish": "Ver in grupos de..."
+        "es": "Ver in grupos de..."
     }},
     "Go": {"text": {
         "default": true,
-        "spanish": "¡Ir!"
+        "es": "¡Ir!"
     }},
     "Previous Page": {"text": {
         "default": true,
-        "spanish": "Previo"
+        "es": "Previo"
     }},
     "Next Page": {"text": {
         "default": true,
-        "spanish": "Siguiente"
+        "es": "Siguiente"
     }},
     "Search": {"text": {
         "default": true,
-        "spanish": "Buscar"
+        "es": "Buscar"
     }},
     "List of tables": {"text": {
         "default": true,
-        "spanish": "Lista de tablas"
+        "es": "Lista de tablas"
     }},
     "Failure! ": {"text": {
         "default": true,
-        "spanish": "¡Error!"
+        "es": "¡Error!"
     }},
 }
