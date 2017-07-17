@@ -60,18 +60,32 @@ input, button {font-size: 16px;}
 	text-align: center;
 }
 .status {
-	height: 10px;
+	height: 0px;
 	border-style: none;
-	margin-top: 22;
-	margin-bottom: 18;
+	margin-top: 4px;
+	margin-bottom: 0;
+	border-bottom: 5px solid #38c0f4;
+	border-top: 5px solid #38c0f4;
 }
 .status[data-status="COMPLETE"] {
-	background-color: #38c0f4; /* Blue */
+	border-bottom-color: #38c0f4; /* Blue */
 }
 .status[data-status="INCOMPLETE"] {
-	background-color: #F7C64A; /* Kournikova */
+	border-bottom-color: #F7C64A; /* Kournikova */
 }
 .status[data-status="null"] {
-	background-color: red;
+	border-bottom-color: red;
+}
+.status[data-sync="synced"], .status[data-sync="synced_pending_files"] {
+	border-bottom-color: #38c0f4; /* Blue */
+}
+.status[data-sync="new_row"] {
+	border-bottom-color: #AAC46C; /* Chelsea Cucumber */
+}
+.status[data-sync="null"], .status[data-sync="deleted"], .status[data-sync="in_conflict"] {
+	border-bottom-color: red;
+}
+.status[data-sync="changed"] {
+	border-bottom-color: #F7C64A; /* Kournikova */
 }
 

@@ -512,11 +512,16 @@ var doSearch = function doSearch() {
             if (!global_group_by) {
                 li.appendChild(buttons)
             }
-            // hr element shows the current savepoint type. In the future I want it to also show the sync status
+            var hr2 = document.createElement("div")
             var hr = document.createElement("div")
             hr.classList.add("status");
-            hr.setAttribute("data-status", d.getData(i, "_savepoint_type"))
-            hr.setAttribute("data-sync", d.getData(i, "_sync_status")) // no css rules for this one
+            if (global_group_by == null || global_group_by == "undefined" || global_group_by.trim().length == 0) {
+				hr.setAttribute("data-status", d.getData(i, "_savepoint_type"))
+				hr.setAttribute("data-sync", d.getData(i, "_sync_state")) // no css rules for this one
+            } else {
+				hr.setAttribute("data-status", "COMPLETE")
+				hr.setAttribute("data-sync", "synced")
+            }
             list.appendChild(li);
             // We cache these two values because they're going to be the same for each item in the list, and clientWidth and clientHeight are very expensive
             // I used to call clientHeight and clientWidth for each iteration of this loop and the callback took ~250ms, now it takes ~40 for 20 rows

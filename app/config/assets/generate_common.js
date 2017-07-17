@@ -501,4 +501,8 @@ var formgen_specific_translations = {
         "default": true,
         "es": "¡Error!"
     }},
+    "Loading...": {"text": {
+        "default": true,
+        "es": "Cargando..."
+    }},
 }

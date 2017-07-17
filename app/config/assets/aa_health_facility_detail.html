@@ -156,7 +156,7 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
         document.getElementById("refrig_with_this_hfid_count").innerText = d.getData(0, "refrig_with_this_hfid_count");
         document.getElementById("addref").addEventListener("click", function() {
             var defaults = {"facility_row_id": d.getData(0, "_id")}
-            if (allowed_tables.indexOf("refrigerators") > 0) {
+            if (allowed_tables.indexOf("refrigerators") >= 0) {
                 var id = newGuid();
                 odkData.addRow("m_logs", defaults, id, function() {
                     // Escape the LIMIT 1
