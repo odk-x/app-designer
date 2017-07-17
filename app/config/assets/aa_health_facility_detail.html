@@ -154,6 +154,20 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
             odkTables.launchHTML(null, "config/assets/aa_refrigerators_list.html#refrigerators/facility_row_id = ?/" + row_id);
         });
         document.getElementById("refrig_with_this_hfid_count").innerText = d.getData(0, "refrig_with_this_hfid_count");
+        document.getElementById("addref").addEventListener("click", function() {
+            var defaults = {"facility_row_id": d.getData(0, "_id")}
+            if (allowed_tables.indexOf("refrigerators") > 0) {
+                var id = newGuid();
+                odkData.addRow("m_logs", defaults, id, function() {
+                    // Escape the LIMIT 1
+                    odkData.arbitraryQuery("m_logs", "UPDATE m_logs SET _savepoint_type = ? WHERE _id = ?;--", ["INCOMPLETE", id], 100, 0, function success(d) {
+                        odkTables.launchHTML({}, "config/assets/formgen/refrigerators#" + id);
+                    }, null);
+                });
+            } else {
+                odkTables.addRowWithSurvey({}, "m_logs", "m_logs", null, defaults);
+            }
+        });
     }
     colmap = [
         ['facility_name', fname_callback],
@@ -234,7 +248,7 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
     <div style="text-align: center;">
         <button disabled id='refrigerator_inventory'>Loading...</button>
         <br />
-        <button onClick="odkTables.launchHTML(null, "/config/assets/formgen/refrigerators#" + newGuid())" id="addref"></button>
+        <button id="addref"></button>
     </div>
         
     </body>
