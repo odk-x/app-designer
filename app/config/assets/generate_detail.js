@@ -142,7 +142,7 @@ var update_callback = function update_callback(d) {
             if (typeof(found[1]) == "string") {
                 li.appendChild(make_li(xlscol, _tu(found[1]), _tc(table_id, col, val), "text"));
             } else if (found[1] === true) {
-                li.appendChild(make_li(xlscol, displayCol(col, metadata), pretty(val), "text"));
+                li.appendChild(make_li(xlscol, displayCol(col, metadata), pretty(_tc(table_id, col, val)), "text"));
             } else if (found[1] === false) {
                 li.appendChild(make_li(xlscol, displayCol(col, metadata), _tc(table_id, col, val), "text"));
             } else {

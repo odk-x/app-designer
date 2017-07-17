@@ -1,5 +1,3 @@
-var list_views = {};
-var menu = ["Empty menu!", null, ""]
 var ol = function ol() {
 	if (window.location.hash.slice(1).length > 0) {
 		new_menu_path = window.location.hash.slice(1).split("/");
