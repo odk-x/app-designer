@@ -27,18 +27,18 @@ var getMetadataAndThen = function getMetadata(table, callback) {
 	}
 }
 // Given a complex menu object like this:
-//    ["View Data", None, [
-//        ["View Health Facilities", "health_facility", [
-//            ["View All", "health_facility", ""],
-//            [True, "health_facility", "admin_region"],
-//        ]], ["View Refrigerators", "refrigerators", [
-//            ["View All", "refrigerators", ""],
-//            ["More", "refrigerators", [
-//                ["By Use", "refrigerators", "utilization"],
-//                ["By Reason Not Working", "refrigerators", "reason_not_working"]
-//            ]]
-//        ]]
-//    ]]
+//	["View Data", None, [
+//		["View Health Facilities", "health_facility", [
+//			["View All", "health_facility", ""],
+//			[True, "health_facility", "admin_region"],
+//		]], ["View Refrigerators", "refrigerators", [
+//			["View All", "refrigerators", ""],
+//			["More", "refrigerators", [
+//				["By Use", "refrigerators", "utilization"],
+//				["By Reason Not Working", "refrigerators", "reason_not_working"]
+//			]]
+//		]]
+//	]]
 // and a menu_path like [1, 1, 0]
 // it will navigate down the chain and return ["By Use", "refrigerators", "utilization"]
 
