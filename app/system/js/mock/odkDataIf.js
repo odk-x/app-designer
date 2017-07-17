@@ -476,11 +476,15 @@ var odkDataIf = {
 						}
 					}
                     content.data = resultRows;
+					content.metadata = {};
                     content.metadata.tableId = tableDef.tableId;
                     content.metadata.schemaETag = tableDef.schemaETag;
                     content.metadata.lastDataETag = tableDef.lastDataETag;
                     content.metadata.lastSyncTime = tableDef.lastSyncTime;
                     content.metadata.elementKeyMap = elementNameMap;
+					// TODO: determine the correct value for this
+					content.metadata.canCreateRow = true;
+					content.metadata.dataTableModel = tableDef.dataTableModel;
                     content.metadata.orderedColumns = tableDef.orderedColumns;
                     content.metadata.keyValueStoreList = tableDef.keyValueStoreList;
                 });
@@ -530,6 +534,7 @@ var odkDataIf = {
 
         that._getTableDef($.extend({}, ctxt, {
             success: function(tableDef) {
+				// TODO: row filtering
                 var sql = 'SELECT * FROM "' + tableId + '"';
                 if ( whereClause !== null && whereClause !== undefined ) {
                     sql = sql + " WHERE " + whereClause;
@@ -561,6 +566,7 @@ var odkDataIf = {
     arbitraryQuery: function(tableId, sqlCommand, sqlBindParamsJSON, limit, offset, _callbackId) {
         var that = this;
 
+		// TODO: row filtering
 		var sqlBindParams = (sqlBindParamsJSON === null || sqlBindParamsJSON === undefined) ?
 			[] : JSON.parse(sqlBindParamsJSON);
 
@@ -591,6 +597,7 @@ var odkDataIf = {
 
         that._getTableDef($.extend({}, ctxt, {
             success: function(tableDef) {
+				// TODO: row filtering
                 var sqlStatement = {
                         stmt : 'select * from "' + tableId + '" where _id=?',
                         bind : [ rowId ]
@@ -603,6 +610,7 @@ var odkDataIf = {
     _getMostRecentRow: function( ctxt, tableDef, rowId ) {
         var that = this;
 
+		// TODO: row filtering
         var sqlStatement =  {
             stmt : 'select * from "' + tableDef.tableId + '" as T where _id=? and ' +
                     'T._savepoint_timestamp=(select max(V._savepoint_timestamp) from "' +
