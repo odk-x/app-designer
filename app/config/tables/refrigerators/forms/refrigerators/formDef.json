@@ -5,8 +5,17 @@
         "type": "text",
         "name": "refrigerator_id",
         "display": {
+          "title": {
+            "text": {
+              "default": "Refrigerator ID",
+              "es": "ID de Frigorífico"
+            }
+          },
           "prompt": {
-            "text": "Enter refrigerator ID:"
+            "text": {
+              "default": "Enter refrigerator ID:",
+              "es": "ID de Frigorífico"
+            }
           }
         },
         "_row_num": 2
@@ -21,8 +30,17 @@
         "values_list": "regionLevel1_csv",
         "name": "regionLevel1",
         "display": {
+          "title": {
+            "text": {
+              "default": "Level 1 of admin region",
+              "es": "Nievel Uno de Región de Administracion"
+            }
+          },
           "prompt": {
-            "text": "Level 1 of admin region"
+            "text": {
+              "default": "Level 1 of admin region",
+              "es": "Nievel Uno de Región de Administracion"
+            }
           }
         },
         "_row_num": 4
@@ -32,8 +50,17 @@
         "values_list": "regionLevel2_csv",
         "name": "regionLevel2",
         "display": {
+          "title": {
+            "text": {
+              "default": "Level 2 of admin region",
+              "es": "Nievel Dos de Región de Administracion"
+            }
+          },
           "prompt": {
-            "text": "Level 2 of admin region"
+            "text": {
+              "default": "Level 2 of admin region",
+              "es": "Nievel Dos de Región de Administracion"
+            }
           }
         },
         "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
@@ -44,8 +71,17 @@
         "values_list": "regionLevel3_csv",
         "name": "adminRegion",
         "display": {
+          "title": {
+            "text": {
+              "default": "Admin region",
+              "es": "Región de Administracion"
+            }
+          },
           "prompt": {
-            "text": "Admin region"
+            "text": {
+              "default": "Admin region",
+              "es": "Región de Administracion"
+            }
           }
         },
         "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
@@ -60,8 +96,17 @@
         "values_list": "health_facility_list",
         "name": "facility_row_id",
         "display": {
+          "title": {
+            "text": {
+              "default": "Health Facility",
+              "es": "Facilidad de Salúd"
+            }
+          },
           "prompt": {
-            "text": "Health Facility"
+            "text": {
+              "default": "Health Facility",
+              "es": "Facilidad de Salúd"
+            }
           }
         },
         "choice_filter": "choice_item.admin_region === data('adminRegion')",
@@ -80,8 +125,17 @@
         "values_list": "refrigerator_model_list",
         "name": "model_row_id",
         "display": {
+          "title": {
+            "text": {
+              "default": "Model",
+              "es": "Modelo"
+            }
+          },
           "prompt": {
-            "text": "Choose the refrigerator model:"
+            "text": {
+              "default": "Choose the refrigerator model:",
+              "es": "Modelo"
+            }
           }
         },
         "_row_num": 11
@@ -94,8 +148,17 @@
         "type": "text",
         "name": "tracking_id",
         "display": {
+          "title": {
+            "text": {
+              "default": "Tracking ID",
+              "es": "Número de seguimiento"
+            }
+          },
           "prompt": {
-            "text": "Enter the tracking ID:"
+            "text": {
+              "default": "Enter the tracking ID:",
+              "es": "Número de seguimiento"
+            }
           }
         },
         "_row_num": 13
@@ -104,8 +167,17 @@
         "type": "number",
         "name": "year",
         "display": {
+          "title": {
+            "text": {
+              "default": "Year Installed",
+              "es": "Año de instalacion"
+            }
+          },
           "prompt": {
-            "text": "Enter the year installed:"
+            "text": {
+              "default": "Enter the year installed:",
+              "es": "Año de instalacion"
+            }
           }
         },
         "_row_num": 14
@@ -115,8 +187,17 @@
         "values_list": "power",
         "name": "power_source",
         "display": {
+          "title": {
+            "text": {
+              "default": "Power Source",
+              "es": "Fuente de Poder"
+            }
+          },
           "prompt": {
-            "text": "Choose the power source:"
+            "text": {
+              "default": "Choose the power source:",
+              "es": "Fuente de Poder"
+            }
           }
         },
         "_row_num": 15
@@ -134,8 +215,17 @@
         "values_list": "current_use",
         "name": "utilization",
         "display": {
+          "title": {
+            "text": {
+              "default": "In Use",
+              "es": "En uso"
+            }
+          },
           "prompt": {
-            "text": "Choose the current use status:"
+            "text": {
+              "default": "Choose the current use status:",
+              "es": "¿En uso?"
+            }
           }
         },
         "_row_num": 18
@@ -145,8 +235,17 @@
         "values_list": "status",
         "name": "working_status",
         "display": {
+          "title": {
+            "text": {
+              "default": "Working Status",
+              "es": "Functionando"
+            }
+          },
           "prompt": {
-            "text": "Working status:"
+            "text": {
+              "default": "Working status:",
+              "es": "¿Functionando?"
+            }
           }
         },
         "_row_num": 19
@@ -156,8 +255,17 @@
         "values_list": "reasons",
         "name": "reason_not_working",
         "display": {
+          "title": {
+            "text": {
+              "default": "Reason Not Working",
+              "es": "Razon por no functionar"
+            }
+          },
           "prompt": {
-            "text": "Reason not working:"
+            "text": {
+              "default": "Reason not working:",
+              "es": "Razon por no functionar"
+            }
           }
         },
         "_row_num": 20
@@ -167,8 +275,17 @@
         "values_list": "yes_no",
         "name": "voltage_regulator",
         "display": {
+          "title": {
+            "text": {
+              "default": "Voltage Regulator",
+              "es": "Regulador de voltaje"
+            }
+          },
           "prompt": {
-            "text": "Voltage regulator?"
+            "text": {
+              "default": "Voltage regulator?",
+              "es": "¿Tiene regulador de voltaje?"
+            }
           }
         },
         "_row_num": 21
@@ -183,7 +300,10 @@
         "choice_list_name": "conditions",
         "data_value": "excellent",
         "display": {
-          "text": "Excellent"
+          "text": {
+            "default": "Excellent",
+            "es": "Excelente"
+          }
         },
         "_row_num": 2
       },
@@ -191,7 +311,10 @@
         "choice_list_name": "conditions",
         "data_value": "good",
         "display": {
-          "text": "Good"
+          "text": {
+            "default": "Good",
+            "es": "Bueno"
+          }
         },
         "_row_num": 3
       },
@@ -199,7 +322,10 @@
         "choice_list_name": "conditions",
         "data_value": "fair",
         "display": {
-          "text": "Fair"
+          "text": {
+            "default": "Fair",
+            "es": "Bello"
+          }
         },
         "_row_num": 4
       },
@@ -207,7 +333,10 @@
         "choice_list_name": "conditions",
         "data_value": "poor",
         "display": {
-          "text": "Poor"
+          "text": {
+            "default": "Poor",
+            "es": "Pobre"
+          }
         },
         "_row_num": 5
       },
@@ -215,7 +344,10 @@
         "choice_list_name": "conditions",
         "data_value": "terrible",
         "display": {
-          "text": "Terrible"
+          "text": {
+            "default": "Terrible",
+            "es": "Terrible"
+          }
         },
         "_row_num": 6
       },
@@ -223,7 +355,10 @@
         "choice_list_name": "power",
         "data_value": "electricity",
         "display": {
-          "text": "Electricity"
+          "text": {
+            "default": "Electricity",
+            "es": "Electricidad"
+          }
         },
         "_row_num": 8
       },
@@ -231,7 +366,10 @@
         "choice_list_name": "power",
         "data_value": "gas",
         "display": {
-          "text": "Gas"
+          "text": {
+            "default": "Gas",
+            "es": "Combustible"
+          }
         },
         "_row_num": 9
       },
@@ -239,7 +377,10 @@
         "choice_list_name": "power",
         "data_value": "kerosene",
         "display": {
-          "text": "Kerosene"
+          "text": {
+            "default": "Kerosene",
+            "es": "Queroseno"
+          }
         },
         "_row_num": 10
       },
@@ -247,7 +388,10 @@
         "choice_list_name": "power",
         "data_value": "solar",
         "display": {
-          "text": "Solar"
+          "text": {
+            "default": "Solar",
+            "es": "Solár"
+          }
         },
         "_row_num": 11
       },
@@ -255,7 +399,10 @@
         "choice_list_name": "power",
         "data_value": "unknown",
         "display": {
-          "text": "Unknown"
+          "text": {
+            "default": "Unknown",
+            "es": "Desconocido"
+          }
         },
         "_row_num": 12
       },
@@ -263,7 +410,10 @@
         "choice_list_name": "status",
         "data_value": "functioning",
         "display": {
-          "text": "Functioning"
+          "text": {
+            "default": "Functioning",
+            "es": "Functionando"
+          }
         },
         "_row_num": 14
       },
@@ -271,7 +421,10 @@
         "choice_list_name": "status",
         "data_value": "awaiting_repair",
         "display": {
-          "text": "Awaiting Repair"
+          "text": {
+            "default": "Awaiting Repair",
+            "es": "Esperando Servicio"
+          }
         },
         "_row_num": 15
       },
@@ -279,7 +432,10 @@
         "choice_list_name": "status",
         "data_value": "unservicable",
         "display": {
-          "text": "Unservicable"
+          "text": {
+            "default": "Unservicable",
+            "es": "Irreparable"
+          }
         },
         "_row_num": 16
       },
@@ -287,7 +443,10 @@
         "choice_list_name": "reasons",
         "data_value": "needs_spare_parts",
         "display": {
-          "text": "Needs Spare Parts"
+          "text": {
+            "default": "Needs Spare Parts",
+            "es": "Necesita Partes"
+          }
         },
         "_row_num": 18
       },
@@ -295,7 +454,10 @@
         "choice_list_name": "reasons",
         "data_value": "no_finance",
         "display": {
-          "text": "No Finance"
+          "text": {
+            "default": "No Finance",
+            "es": "Sin Dinero"
+          }
         },
         "_row_num": 19
       },
@@ -303,7 +465,10 @@
         "choice_list_name": "reasons",
         "data_value": "no_fuel",
         "display": {
-          "text": "No Fuel"
+          "text": {
+            "default": "No Fuel",
+            "es": "Sin Combustible"
+          }
         },
         "_row_num": 20
       },
@@ -311,7 +476,10 @@
         "choice_list_name": "reasons",
         "data_value": "dead",
         "display": {
-          "text": "Dead"
+          "text": {
+            "default": "Dead",
+            "es": "Muerto"
+          }
         },
         "_row_num": 21
       },
@@ -319,7 +487,10 @@
         "choice_list_name": "reasons",
         "data_value": "not_applicable",
         "display": {
-          "text": "Not Applicable"
+          "text": {
+            "default": "Not Applicable",
+            "es": "N/A"
+          }
         },
         "_row_num": 22
       },
@@ -327,7 +498,10 @@
         "choice_list_name": "current_use",
         "data_value": "in_use",
         "display": {
-          "text": "In Use"
+          "text": {
+            "default": "In Use",
+            "es": "En Uso"
+          }
         },
         "_row_num": 24
       },
@@ -335,7 +509,10 @@
         "choice_list_name": "current_use",
         "data_value": "not_in_use",
         "display": {
-          "text": "Not In Use"
+          "text": {
+            "default": "Not In Use",
+            "es": "No En Uso"
+          }
         },
         "_row_num": 25
       },
@@ -343,7 +520,10 @@
         "choice_list_name": "current_use",
         "data_value": "in_store_for_allocation",
         "display": {
-          "text": "In Store For Allocation"
+          "text": {
+            "default": "In Store For Allocation",
+            "es": "Almacenado Epsperando asignación"
+          }
         },
         "_row_num": 26
       },
@@ -351,7 +531,10 @@
         "choice_list_name": "yes_no",
         "data_value": "yes",
         "display": {
-          "text": "Yes"
+          "text": {
+            "default": "Yes",
+            "es": "Sí"
+          }
         },
         "_row_num": 28
       },
@@ -359,7 +542,10 @@
         "choice_list_name": "yes_no",
         "data_value": "no",
         "display": {
-          "text": "No"
+          "text": {
+            "default": "No",
+            "es": "No"
+          }
         },
         "_row_num": 29
       },
@@ -367,7 +553,10 @@
         "choice_list_name": "yes_no",
         "data_value": "unknown",
         "display": {
-          "text": "Unknown"
+          "text": {
+            "default": "Unknown",
+            "es": "Desconocido"
+          }
         },
         "_row_num": 30
       }
@@ -464,7 +653,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170715,
+        "value": 20170717,
         "_row_num": 4
       },
       {
@@ -473,7 +662,7 @@
           "title": {
             "text": {
               "default": "Refrigerators",
-              "spanish": "Frigoríficos"
+              "es": "Frigoríficos"
             }
           }
         },
@@ -490,19 +679,19 @@
           "locale": {
             "text": {
               "default": "English",
-              "spanish": "Inglés"
+              "es": "Inglés"
             }
           }
         },
         "_row_num": 7
       },
       {
-        "setting_name": "spanish",
+        "setting_name": "es",
         "display": {
           "locale": {
             "text": {
               "default": "Spanish",
-              "spanish": "Español"
+              "es": "Español"
             }
           }
         },
@@ -539,7 +728,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170715,
+        "value": 20170717,
         "_row_num": 4
       },
       "survey": {
@@ -548,7 +737,7 @@
           "title": {
             "text": {
               "default": "Refrigerators",
-              "spanish": "Frigoríficos"
+              "es": "Frigoríficos"
             }
           }
         },
@@ -565,19 +754,19 @@
           "locale": {
             "text": {
               "default": "English",
-              "spanish": "Inglés"
+              "es": "Inglés"
             }
           }
         },
         "_row_num": 7
       },
-      "spanish": {
-        "setting_name": "spanish",
+      "es": {
+        "setting_name": "es",
         "display": {
           "locale": {
             "text": {
               "default": "Spanish",
-              "spanish": "Español"
+              "es": "Español"
             }
           }
         },
@@ -592,12 +781,12 @@
               "locale": {
                 "text": {
                   "default": "Spanish",
-                  "spanish": "Español"
+                  "es": "Español"
                 }
               }
             },
             "_row_num": 8,
-            "name": "spanish"
+            "name": "es"
           },
           {
             "display": {
@@ -612,7 +801,7 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "spanish"
+        "value": "es"
       },
       "initial": {
         "setting_name": "survey",
@@ -620,7 +809,7 @@
           "title": {
             "text": {
               "default": "Refrigerators",
-              "spanish": "Frigoríficos"
+              "es": "Frigoríficos"
             }
           }
         },
@@ -633,7 +822,10 @@
           "choice_list_name": "conditions",
           "data_value": "excellent",
           "display": {
-            "text": "Excellent"
+            "text": {
+              "default": "Excellent",
+              "es": "Excelente"
+            }
           },
           "_row_num": 2
         },
@@ -641,7 +833,10 @@
           "choice_list_name": "conditions",
           "data_value": "good",
           "display": {
-            "text": "Good"
+            "text": {
+              "default": "Good",
+              "es": "Bueno"
+            }
           },
           "_row_num": 3
         },
@@ -649,7 +844,10 @@
           "choice_list_name": "conditions",
           "data_value": "fair",
           "display": {
-            "text": "Fair"
+            "text": {
+              "default": "Fair",
+              "es": "Bello"
+            }
           },
           "_row_num": 4
         },
@@ -657,7 +855,10 @@
           "choice_list_name": "conditions",
           "data_value": "poor",
           "display": {
-            "text": "Poor"
+            "text": {
+              "default": "Poor",
+              "es": "Pobre"
+            }
           },
           "_row_num": 5
         },
@@ -665,7 +866,10 @@
           "choice_list_name": "conditions",
           "data_value": "terrible",
           "display": {
-            "text": "Terrible"
+            "text": {
+              "default": "Terrible",
+              "es": "Terrible"
+            }
           },
           "_row_num": 6
         }
@@ -675,7 +879,10 @@
           "choice_list_name": "power",
           "data_value": "electricity",
           "display": {
-            "text": "Electricity"
+            "text": {
+              "default": "Electricity",
+              "es": "Electricidad"
+            }
           },
           "_row_num": 8
         },
@@ -683,7 +890,10 @@
           "choice_list_name": "power",
           "data_value": "gas",
           "display": {
-            "text": "Gas"
+            "text": {
+              "default": "Gas",
+              "es": "Combustible"
+            }
           },
           "_row_num": 9
         },
@@ -691,7 +901,10 @@
           "choice_list_name": "power",
           "data_value": "kerosene",
           "display": {
-            "text": "Kerosene"
+            "text": {
+              "default": "Kerosene",
+              "es": "Queroseno"
+            }
           },
           "_row_num": 10
         },
@@ -699,7 +912,10 @@
           "choice_list_name": "power",
           "data_value": "solar",
           "display": {
-            "text": "Solar"
+            "text": {
+              "default": "Solar",
+              "es": "Solár"
+            }
           },
           "_row_num": 11
         },
@@ -707,7 +923,10 @@
           "choice_list_name": "power",
           "data_value": "unknown",
           "display": {
-            "text": "Unknown"
+            "text": {
+              "default": "Unknown",
+              "es": "Desconocido"
+            }
           },
           "_row_num": 12
         }
@@ -717,7 +936,10 @@
           "choice_list_name": "status",
           "data_value": "functioning",
           "display": {
-            "text": "Functioning"
+            "text": {
+              "default": "Functioning",
+              "es": "Functionando"
+            }
           },
           "_row_num": 14
         },
@@ -725,7 +947,10 @@
           "choice_list_name": "status",
           "data_value": "awaiting_repair",
           "display": {
-            "text": "Awaiting Repair"
+            "text": {
+              "default": "Awaiting Repair",
+              "es": "Esperando Servicio"
+            }
           },
           "_row_num": 15
         },
@@ -733,7 +958,10 @@
           "choice_list_name": "status",
           "data_value": "unservicable",
           "display": {
-            "text": "Unservicable"
+            "text": {
+              "default": "Unservicable",
+              "es": "Irreparable"
+            }
           },
           "_row_num": 16
         }
@@ -743,7 +971,10 @@
           "choice_list_name": "reasons",
           "data_value": "needs_spare_parts",
           "display": {
-            "text": "Needs Spare Parts"
+            "text": {
+              "default": "Needs Spare Parts",
+              "es": "Necesita Partes"
+            }
           },
           "_row_num": 18
         },
@@ -751,7 +982,10 @@
           "choice_list_name": "reasons",
           "data_value": "no_finance",
           "display": {
-            "text": "No Finance"
+            "text": {
+              "default": "No Finance",
+              "es": "Sin Dinero"
+            }
           },
           "_row_num": 19
         },
@@ -759,7 +993,10 @@
           "choice_list_name": "reasons",
           "data_value": "no_fuel",
           "display": {
-            "text": "No Fuel"
+            "text": {
+              "default": "No Fuel",
+              "es": "Sin Combustible"
+            }
           },
           "_row_num": 20
         },
@@ -767,7 +1004,10 @@
           "choice_list_name": "reasons",
           "data_value": "dead",
           "display": {
-            "text": "Dead"
+            "text": {
+              "default": "Dead",
+              "es": "Muerto"
+            }
           },
           "_row_num": 21
         },
@@ -775,7 +1015,10 @@
           "choice_list_name": "reasons",
           "data_value": "not_applicable",
           "display": {
-            "text": "Not Applicable"
+            "text": {
+              "default": "Not Applicable",
+              "es": "N/A"
+            }
           },
           "_row_num": 22
         }
@@ -785,7 +1028,10 @@
           "choice_list_name": "current_use",
           "data_value": "in_use",
           "display": {
-            "text": "In Use"
+            "text": {
+              "default": "In Use",
+              "es": "En Uso"
+            }
           },
           "_row_num": 24
         },
@@ -793,7 +1039,10 @@
           "choice_list_name": "current_use",
           "data_value": "not_in_use",
           "display": {
-            "text": "Not In Use"
+            "text": {
+              "default": "Not In Use",
+              "es": "No En Uso"
+            }
           },
           "_row_num": 25
         },
@@ -801,7 +1050,10 @@
           "choice_list_name": "current_use",
           "data_value": "in_store_for_allocation",
           "display": {
-            "text": "In Store For Allocation"
+            "text": {
+              "default": "In Store For Allocation",
+              "es": "Almacenado Epsperando asignación"
+            }
           },
           "_row_num": 26
         }
@@ -811,7 +1063,10 @@
           "choice_list_name": "yes_no",
           "data_value": "yes",
           "display": {
-            "text": "Yes"
+            "text": {
+              "default": "Yes",
+              "es": "Sí"
+            }
           },
           "_row_num": 28
         },
@@ -819,7 +1074,10 @@
           "choice_list_name": "yes_no",
           "data_value": "no",
           "display": {
-            "text": "No"
+            "text": {
+              "default": "No",
+              "es": "No"
+            }
           },
           "_row_num": 29
         },
@@ -827,7 +1085,10 @@
           "choice_list_name": "yes_no",
           "data_value": "unknown",
           "display": {
-            "text": "Unknown"
+            "text": {
+              "default": "Unknown",
+              "es": "Desconocido"
+            }
           },
           "_row_num": 30
         }
@@ -899,6 +1160,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Refrigerator ID",
+            "es": "ID de Frigorífico"
+          }
+        },
         "elementKey": "refrigerator_id"
       },
       "regionLevel1": {
@@ -909,6 +1176,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Level 1 of admin region",
+            "es": "Nievel Uno de Región de Administracion"
+          }
+        },
         "valuesList": "regionLevel1_csv",
         "elementKey": "regionLevel1"
       },
@@ -920,6 +1193,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Level 2 of admin region",
+            "es": "Nievel Dos de Región de Administracion"
+          }
+        },
         "valuesList": "regionLevel2_csv",
         "elementKey": "regionLevel2"
       },
@@ -931,6 +1210,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Admin region",
+            "es": "Región de Administracion"
+          }
+        },
         "valuesList": "regionLevel3_csv",
         "elementKey": "adminRegion"
       },
@@ -942,6 +1227,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Health Facility",
+            "es": "Facilidad de Salúd"
+          }
+        },
         "valuesList": "health_facility_list",
         "elementKey": "facility_row_id"
       },
@@ -953,6 +1244,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Model",
+            "es": "Modelo"
+          }
+        },
         "valuesList": "refrigerator_model_list",
         "elementKey": "model_row_id"
       },
@@ -964,6 +1261,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Tracking ID",
+            "es": "Número de seguimiento"
+          }
+        },
         "elementKey": "tracking_id"
       },
       "year": {
@@ -974,6 +1277,12 @@
           }
         ],
         "type": "number",
+        "displayName": {
+          "text": {
+            "default": "Year Installed",
+            "es": "Año de instalacion"
+          }
+        },
         "elementKey": "year"
       },
       "power_source": {
@@ -984,6 +1293,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Power Source",
+            "es": "Fuente de Poder"
+          }
+        },
         "valuesList": "power",
         "elementKey": "power_source"
       },
@@ -995,6 +1310,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "In Use",
+            "es": "En uso"
+          }
+        },
         "valuesList": "current_use",
         "elementKey": "utilization"
       },
@@ -1006,6 +1327,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Working Status",
+            "es": "Functionando"
+          }
+        },
         "valuesList": "status",
         "elementKey": "working_status"
       },
@@ -1017,6 +1344,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Reason Not Working",
+            "es": "Razon por no functionar"
+          }
+        },
         "valuesList": "reasons",
         "elementKey": "reason_not_working"
       },
@@ -1028,6 +1361,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Voltage Regulator",
+            "es": "Regulador de voltaje"
+          }
+        },
         "valuesList": "yes_no",
         "elementKey": "voltage_regulator"
       }
@@ -1046,8 +1385,17 @@
             "type": "text",
             "name": "refrigerator_id",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Refrigerator ID",
+                  "es": "ID de Frigorífico"
+                }
+              },
               "prompt": {
-                "text": "Enter refrigerator ID:"
+                "text": {
+                  "default": "Enter refrigerator ID:",
+                  "es": "ID de Frigorífico"
+                }
               }
             },
             "_row_num": 2,
@@ -1062,8 +1410,17 @@
             "values_list": "regionLevel1_csv",
             "name": "regionLevel1",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Level 1 of admin region",
+                  "es": "Nievel Uno de Región de Administracion"
+                }
+              },
               "prompt": {
-                "text": "Level 1 of admin region"
+                "text": {
+                  "default": "Level 1 of admin region",
+                  "es": "Nievel Uno de Región de Administracion"
+                }
               }
             },
             "_row_num": 4,
@@ -1078,8 +1435,17 @@
             "values_list": "regionLevel2_csv",
             "name": "regionLevel2",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Level 2 of admin region",
+                  "es": "Nievel Dos de Región de Administracion"
+                }
+              },
               "prompt": {
-                "text": "Level 2 of admin region"
+                "text": {
+                  "default": "Level 2 of admin region",
+                  "es": "Nievel Dos de Región de Administracion"
+                }
               }
             },
             "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
@@ -1095,8 +1461,17 @@
             "values_list": "regionLevel3_csv",
             "name": "adminRegion",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Admin region",
+                  "es": "Región de Administracion"
+                }
+              },
               "prompt": {
-                "text": "Admin region"
+                "text": {
+                  "default": "Admin region",
+                  "es": "Región de Administracion"
+                }
               }
             },
             "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
@@ -1112,8 +1487,17 @@
             "values_list": "health_facility_list",
             "name": "facility_row_id",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Health Facility",
+                  "es": "Facilidad de Salúd"
+                }
+              },
               "prompt": {
-                "text": "Health Facility"
+                "text": {
+                  "default": "Health Facility",
+                  "es": "Facilidad de Salúd"
+                }
               }
             },
             "choice_filter": "choice_item.admin_region === data('adminRegion')",
@@ -1129,8 +1513,17 @@
             "values_list": "refrigerator_model_list",
             "name": "model_row_id",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Model",
+                  "es": "Modelo"
+                }
+              },
               "prompt": {
-                "text": "Choose the refrigerator model:"
+                "text": {
+                  "default": "Choose the refrigerator model:",
+                  "es": "Modelo"
+                }
               }
             },
             "_row_num": 11,
@@ -1144,8 +1537,17 @@
             "type": "text",
             "name": "tracking_id",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Tracking ID",
+                  "es": "Número de seguimiento"
+                }
+              },
               "prompt": {
-                "text": "Enter the tracking ID:"
+                "text": {
+                  "default": "Enter the tracking ID:",
+                  "es": "Número de seguimiento"
+                }
               }
             },
             "_row_num": 13,
@@ -1159,8 +1561,17 @@
             "type": "number",
             "name": "year",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Year Installed",
+                  "es": "Año de instalacion"
+                }
+              },
               "prompt": {
-                "text": "Enter the year installed:"
+                "text": {
+                  "default": "Enter the year installed:",
+                  "es": "Año de instalacion"
+                }
               }
             },
             "_row_num": 14,
@@ -1175,8 +1586,17 @@
             "values_list": "power",
             "name": "power_source",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Power Source",
+                  "es": "Fuente de Poder"
+                }
+              },
               "prompt": {
-                "text": "Choose the power source:"
+                "text": {
+                  "default": "Choose the power source:",
+                  "es": "Fuente de Poder"
+                }
               }
             },
             "_row_num": 15,
@@ -1191,8 +1611,17 @@
             "values_list": "current_use",
             "name": "utilization",
             "display": {
+              "title": {
+                "text": {
+                  "default": "In Use",
+                  "es": "En uso"
+                }
+              },
               "prompt": {
-                "text": "Choose the current use status:"
+                "text": {
+                  "default": "Choose the current use status:",
+                  "es": "¿En uso?"
+                }
               }
             },
             "_row_num": 18,
@@ -1207,8 +1636,17 @@
             "values_list": "status",
             "name": "working_status",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Working Status",
+                  "es": "Functionando"
+                }
+              },
               "prompt": {
-                "text": "Working status:"
+                "text": {
+                  "default": "Working status:",
+                  "es": "¿Functionando?"
+                }
               }
             },
             "_row_num": 19,
@@ -1223,8 +1661,17 @@
             "values_list": "reasons",
             "name": "reason_not_working",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Reason Not Working",
+                  "es": "Razon por no functionar"
+                }
+              },
               "prompt": {
-                "text": "Reason not working:"
+                "text": {
+                  "default": "Reason not working:",
+                  "es": "Razon por no functionar"
+                }
               }
             },
             "_row_num": 20,
@@ -1239,8 +1686,17 @@
             "values_list": "yes_no",
             "name": "voltage_regulator",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Voltage Regulator",
+                  "es": "Regulador de voltaje"
+                }
+              },
               "prompt": {
-                "text": "Voltage regulator?"
+                "text": {
+                  "default": "Voltage regulator?",
+                  "es": "¿Tiene regulador de voltaje?"
+                }
               }
             },
             "_row_num": 21,
@@ -1427,7 +1883,7 @@
               "title": {
                 "text": {
                   "default": "Refrigerators",
-                  "spanish": "Frigoríficos"
+                  "es": "Frigoríficos"
                 }
               }
             },
@@ -1586,6 +2042,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Refrigerator ID",
+            "es": "ID de Frigorífico"
+          }
+        },
         "elementKey": "refrigerator_id",
         "elementName": "refrigerator_id",
         "elementSet": "data",
@@ -1599,6 +2061,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Level 1 of admin region",
+            "es": "Nievel Uno de Región de Administracion"
+          }
+        },
         "valuesList": "regionLevel1_csv",
         "elementKey": "regionLevel1",
         "elementName": "regionLevel1",
@@ -1613,6 +2081,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Level 2 of admin region",
+            "es": "Nievel Dos de Región de Administracion"
+          }
+        },
         "valuesList": "regionLevel2_csv",
         "elementKey": "regionLevel2",
         "elementName": "regionLevel2",
@@ -1627,6 +2101,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Admin region",
+            "es": "Región de Administracion"
+          }
+        },
         "valuesList": "regionLevel3_csv",
         "elementKey": "adminRegion",
         "elementName": "adminRegion",
@@ -1641,6 +2121,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Health Facility",
+            "es": "Facilidad de Salúd"
+          }
+        },
         "valuesList": "health_facility_list",
         "elementKey": "facility_row_id",
         "elementName": "facility_row_id",
@@ -1655,6 +2141,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Model",
+            "es": "Modelo"
+          }
+        },
         "valuesList": "refrigerator_model_list",
         "elementKey": "model_row_id",
         "elementName": "model_row_id",
@@ -1669,6 +2161,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Tracking ID",
+            "es": "Número de seguimiento"
+          }
+        },
         "elementKey": "tracking_id",
         "elementName": "tracking_id",
         "elementSet": "data",
@@ -1682,6 +2180,12 @@
           }
         ],
         "type": "number",
+        "displayName": {
+          "text": {
+            "default": "Year Installed",
+            "es": "Año de instalacion"
+          }
+        },
         "elementKey": "year",
         "elementName": "year",
         "elementSet": "data",
@@ -1695,6 +2199,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Power Source",
+            "es": "Fuente de Poder"
+          }
+        },
         "valuesList": "power",
         "elementKey": "power_source",
         "elementName": "power_source",
@@ -1709,6 +2219,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "In Use",
+            "es": "En uso"
+          }
+        },
         "valuesList": "current_use",
         "elementKey": "utilization",
         "elementName": "utilization",
@@ -1723,6 +2239,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Working Status",
+            "es": "Functionando"
+          }
+        },
         "valuesList": "status",
         "elementKey": "working_status",
         "elementName": "working_status",
@@ -1737,6 +2259,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Reason Not Working",
+            "es": "Razon por no functionar"
+          }
+        },
         "valuesList": "reasons",
         "elementKey": "reason_not_working",
         "elementName": "reason_not_working",
@@ -1751,6 +2279,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Voltage Regulator",
+            "es": "Regulador de voltaje"
+          }
+        },
         "valuesList": "yes_no",
         "elementKey": "voltage_regulator",
         "elementName": "voltage_regulator",
@@ -1873,38 +2407,129 @@
     "properties": [
       {
         "_partition": "Column",
+        "_aspect": "adminRegion",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Admin region\",\"es\":\"Región de Administracion\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "facility_row_id",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Health Facility\",\"es\":\"Facilidad de Salúd\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "model_row_id",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Model\",\"es\":\"Modelo\"}}"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "power_source",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"power\",\"data_value\":\"electricity\",\"display\":{\"text\":\"Electricity\"},\"_row_num\":8},{\"choice_list_name\":\"power\",\"data_value\":\"gas\",\"display\":{\"text\":\"Gas\"},\"_row_num\":9},{\"choice_list_name\":\"power\",\"data_value\":\"kerosene\",\"display\":{\"text\":\"Kerosene\"},\"_row_num\":10},{\"choice_list_name\":\"power\",\"data_value\":\"solar\",\"display\":{\"text\":\"Solar\"},\"_row_num\":11},{\"choice_list_name\":\"power\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":12}]"
+        "_value": "[{\"choice_list_name\":\"power\",\"data_value\":\"electricity\",\"display\":{\"text\":{\"default\":\"Electricity\",\"es\":\"Electricidad\"}},\"_row_num\":8},{\"choice_list_name\":\"power\",\"data_value\":\"gas\",\"display\":{\"text\":{\"default\":\"Gas\",\"es\":\"Combustible\"}},\"_row_num\":9},{\"choice_list_name\":\"power\",\"data_value\":\"kerosene\",\"display\":{\"text\":{\"default\":\"Kerosene\",\"es\":\"Queroseno\"}},\"_row_num\":10},{\"choice_list_name\":\"power\",\"data_value\":\"solar\",\"display\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solár\"}},\"_row_num\":11},{\"choice_list_name\":\"power\",\"data_value\":\"unknown\",\"display\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}},\"_row_num\":12}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "power_source",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Power Source\",\"es\":\"Fuente de Poder\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "reason_not_working",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"needs_spare_parts\",\"display\":{\"text\":\"Needs Spare Parts\"},\"_row_num\":18},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_finance\",\"display\":{\"text\":\"No Finance\"},\"_row_num\":19},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_fuel\",\"display\":{\"text\":\"No Fuel\"},\"_row_num\":20},{\"choice_list_name\":\"reasons\",\"data_value\":\"dead\",\"display\":{\"text\":\"Dead\"},\"_row_num\":21},{\"choice_list_name\":\"reasons\",\"data_value\":\"not_applicable\",\"display\":{\"text\":\"Not Applicable\"},\"_row_num\":22}]"
+        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"needs_spare_parts\",\"display\":{\"text\":{\"default\":\"Needs Spare Parts\",\"es\":\"Necesita Partes\"}},\"_row_num\":18},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_finance\",\"display\":{\"text\":{\"default\":\"No Finance\",\"es\":\"Sin Dinero\"}},\"_row_num\":19},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_fuel\",\"display\":{\"text\":{\"default\":\"No Fuel\",\"es\":\"Sin Combustible\"}},\"_row_num\":20},{\"choice_list_name\":\"reasons\",\"data_value\":\"dead\",\"display\":{\"text\":{\"default\":\"Dead\",\"es\":\"Muerto\"}},\"_row_num\":21},{\"choice_list_name\":\"reasons\",\"data_value\":\"not_applicable\",\"display\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"N/A\"}},\"_row_num\":22}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "reason_not_working",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Reason Not Working\",\"es\":\"Razon por no functionar\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "refrigerator_id",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Refrigerator ID\",\"es\":\"ID de Frigorífico\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "regionLevel1",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Level 1 of admin region\",\"es\":\"Nievel Uno de Región de Administracion\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "regionLevel2",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Level 2 of admin region\",\"es\":\"Nievel Dos de Región de Administracion\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "tracking_id",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Tracking ID\",\"es\":\"Número de seguimiento\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "utilization",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"current_use\",\"data_value\":\"in_use\",\"display\":{\"text\":\"In Use\"},\"_row_num\":24},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_in_use\",\"display\":{\"text\":\"Not In Use\"},\"_row_num\":25},{\"choice_list_name\":\"current_use\",\"data_value\":\"in_store_for_allocation\",\"display\":{\"text\":\"In Store For Allocation\"},\"_row_num\":26}]"
+        "_value": "[{\"choice_list_name\":\"current_use\",\"data_value\":\"in_use\",\"display\":{\"text\":{\"default\":\"In Use\",\"es\":\"En Uso\"}},\"_row_num\":24},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_in_use\",\"display\":{\"text\":{\"default\":\"Not In Use\",\"es\":\"No En Uso\"}},\"_row_num\":25},{\"choice_list_name\":\"current_use\",\"data_value\":\"in_store_for_allocation\",\"display\":{\"text\":{\"default\":\"In Store For Allocation\",\"es\":\"Almacenado Epsperando asignación\"}},\"_row_num\":26}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "utilization",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"In Use\",\"es\":\"En uso\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "voltage_regulator",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":28},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":29},{\"choice_list_name\":\"yes_no\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}},\"_row_num\":28},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}},\"_row_num\":29},{\"choice_list_name\":\"yes_no\",\"data_value\":\"unknown\",\"display\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}},\"_row_num\":30}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "voltage_regulator",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Voltage Regulator\",\"es\":\"Regulador de voltaje\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "working_status",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"text\":\"Functioning\"},\"_row_num\":14},{\"choice_list_name\":\"status\",\"data_value\":\"awaiting_repair\",\"display\":{\"text\":\"Awaiting Repair\"},\"_row_num\":15},{\"choice_list_name\":\"status\",\"data_value\":\"unservicable\",\"display\":{\"text\":\"Unservicable\"},\"_row_num\":16}]"
+        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\"}},\"_row_num\":14},{\"choice_list_name\":\"status\",\"data_value\":\"awaiting_repair\",\"display\":{\"text\":{\"default\":\"Awaiting Repair\",\"es\":\"Esperando Servicio\"}},\"_row_num\":15},{\"choice_list_name\":\"status\",\"data_value\":\"unservicable\",\"display\":{\"text\":{\"default\":\"Unservicable\",\"es\":\"Irreparable\"}},\"_row_num\":16}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "working_status",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Working Status\",\"es\":\"Functionando\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "year",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Year Installed\",\"es\":\"Año de instalacion\"}}"
       },
       {
         "_partition": "FormType",
@@ -1939,7 +2564,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Refrigerators\",\"spanish\":\"Frigoríficos\"}}"
+        "_value": "{\"text\":{\"default\":\"Refrigerators\",\"es\":\"Frigoríficos\"}}"
       },
       {
         "_partition": "Table",

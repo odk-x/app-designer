@@ -9,6 +9,12 @@
         "type": "string",
         "name": "refrigerator_id",
         "display": {
+          "title": {
+            "text": {
+              "default": "Refrigerator ID",
+              "es": "ID de Frigorífico"
+            }
+          },
           "prompt": {
             "text": "Enter the ID of the refrigerator"
           }
@@ -27,7 +33,7 @@
         "display": {
           "prompt": {
             "text": "Enter the ID of the refrigerator",
-            "spanish": "Por favor entre el ID del frigorífico"
+            "es": "Por favor entre el ID del frigorífico"
           }
         },
         "_row_num": 5
@@ -48,9 +54,15 @@
         "type": "date",
         "name": "date_serviced",
         "display": {
+          "title": {
+            "text": {
+              "default": "Date Serviced",
+              "es": "Fecha de Servicio"
+            }
+          },
           "prompt": {
             "text": "Enter the date of service",
-            "spanish": "Fecha de servicio"
+            "es": "Fecha de servicio"
           }
         },
         "_row_num": 9
@@ -59,9 +71,15 @@
         "type": "string",
         "name": "notes",
         "display": {
+          "title": {
+            "text": {
+              "default": "Notes",
+              "es": "Notas"
+            }
+          },
           "prompt": {
             "text": "Enter any extra notes",
-            "spanish": "Notas extras"
+            "es": "Notas extras"
           }
         },
         "_row_num": 10
@@ -101,7 +119,7 @@
           "title": {
             "text": {
               "default": "Maintenance Logs",
-              "spanish": "Registro de Servicio"
+              "es": "Registro de Servicio"
             }
           }
         },
@@ -109,7 +127,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170715,
+        "value": 20170717,
         "_row_num": 5
       },
       {
@@ -123,19 +141,19 @@
           "locale": {
             "text": {
               "default": "English",
-              "spanish": "Inglés"
+              "es": "Inglés"
             }
           }
         },
         "_row_num": 7
       },
       {
-        "setting_name": "spanish",
+        "setting_name": "es",
         "display": {
           "locale": {
             "text": {
               "default": "Spanish",
-              "spanish": "Español"
+              "es": "Español"
             }
           }
         },
@@ -202,7 +220,7 @@
           "title": {
             "text": {
               "default": "Maintenance Logs",
-              "spanish": "Registro de Servicio"
+              "es": "Registro de Servicio"
             }
           }
         },
@@ -210,7 +228,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170715,
+        "value": 20170717,
         "_row_num": 5
       },
       "instance_name": {
@@ -224,19 +242,19 @@
           "locale": {
             "text": {
               "default": "English",
-              "spanish": "Inglés"
+              "es": "Inglés"
             }
           }
         },
         "_row_num": 7
       },
-      "spanish": {
-        "setting_name": "spanish",
+      "es": {
+        "setting_name": "es",
         "display": {
           "locale": {
             "text": {
               "default": "Spanish",
-              "spanish": "Español"
+              "es": "Español"
             }
           }
         },
@@ -251,12 +269,12 @@
               "locale": {
                 "text": {
                   "default": "Spanish",
-                  "spanish": "Español"
+                  "es": "Español"
                 }
               }
             },
             "_row_num": 8,
-            "name": "spanish"
+            "name": "es"
           },
           {
             "display": {
@@ -271,7 +289,7 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 4,
-        "value": "spanish"
+        "value": "es"
       },
       "initial": {
         "setting_name": "survey",
@@ -279,7 +297,7 @@
           "title": {
             "text": {
               "default": "Maintenance Logs",
-              "spanish": "Registro de Servicio"
+              "es": "Registro de Servicio"
             }
           }
         },
@@ -313,6 +331,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Refrigerator ID",
+            "es": "ID de Frigorífico"
+          }
+        },
         "elementKey": "refrigerator_id"
       },
       "refrigerator_row_id_fake": {
@@ -335,6 +359,12 @@
         ],
         "type": "string",
         "elementType": "date",
+        "displayName": {
+          "text": {
+            "default": "Date Serviced",
+            "es": "Fecha de Servicio"
+          }
+        },
         "elementKey": "date_serviced"
       },
       "notes": {
@@ -345,6 +375,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Notes",
+            "es": "Notas"
+          }
+        },
         "elementKey": "notes"
       }
     },
@@ -362,6 +398,12 @@
             "type": "string",
             "name": "refrigerator_id",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Refrigerator ID",
+                  "es": "ID de Frigorífico"
+                }
+              },
               "prompt": {
                 "text": "Enter the ID of the refrigerator"
               }
@@ -380,7 +422,7 @@
             "display": {
               "prompt": {
                 "text": "Enter the ID of the refrigerator",
-                "spanish": "Por favor entre el ID del frigorífico"
+                "es": "Por favor entre el ID del frigorífico"
               }
             },
             "_row_num": 5,
@@ -394,9 +436,15 @@
             "type": "date",
             "name": "date_serviced",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Date Serviced",
+                  "es": "Fecha de Servicio"
+                }
+              },
               "prompt": {
                 "text": "Enter the date of service",
-                "spanish": "Fecha de servicio"
+                "es": "Fecha de servicio"
               }
             },
             "_row_num": 9,
@@ -410,9 +458,15 @@
             "type": "string",
             "name": "notes",
             "display": {
+              "title": {
+                "text": {
+                  "default": "Notes",
+                  "es": "Notas"
+                }
+              },
               "prompt": {
                 "text": "Enter any extra notes",
-                "spanish": "Notas extras"
+                "es": "Notas extras"
               }
             },
             "_row_num": 10,
@@ -523,7 +577,7 @@
               "title": {
                 "text": {
                   "default": "Maintenance Logs",
-                  "spanish": "Registro de Servicio"
+                  "es": "Registro de Servicio"
                 }
               }
             },
@@ -682,6 +736,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Refrigerator ID",
+            "es": "ID de Frigorífico"
+          }
+        },
         "elementKey": "refrigerator_id",
         "elementName": "refrigerator_id",
         "elementSet": "data",
@@ -710,6 +770,12 @@
         ],
         "type": "string",
         "elementType": "date",
+        "displayName": {
+          "text": {
+            "default": "Date Serviced",
+            "es": "Fecha de Servicio"
+          }
+        },
         "elementKey": "date_serviced",
         "elementName": "date_serviced",
         "elementSet": "data",
@@ -723,6 +789,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Notes",
+            "es": "Notas"
+          }
+        },
         "elementKey": "notes",
         "elementName": "notes",
         "elementSet": "data",
@@ -843,6 +915,27 @@
     },
     "properties": [
       {
+        "_partition": "Column",
+        "_aspect": "date_serviced",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Date Serviced\",\"es\":\"Fecha de Servicio\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "notes",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Notes\",\"es\":\"Notas\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "refrigerator_id",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Refrigerator ID\",\"es\":\"ID de Frigorífico\"}}"
+      },
+      {
         "_partition": "FormType",
         "_aspect": "default",
         "_key": "FormType.formType",
@@ -875,7 +968,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Maintenance Logs\",\"spanish\":\"Registro de Servicio\"}}"
+        "_value": "{\"text\":{\"default\":\"Maintenance Logs\",\"es\":\"Registro de Servicio\"}}"
       },
       {
         "_partition": "Table",
