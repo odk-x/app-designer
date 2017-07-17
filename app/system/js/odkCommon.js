@@ -1377,6 +1377,15 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 return "OK";
             }
         },
+		closeWindow: function( resultCode, jsonResult ) {
+			// TODO: return resultCode and result when there is a parent window
+			// stub just closes window and doesn't return value.
+		    if ( window.parent === window ) { 
+                window.close(); 
+            } else { 
+                window.parent.closeAndPopPage(); 
+            } 
+		},
         /**
          * Return the first queued action without removing it.
          */
