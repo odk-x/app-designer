@@ -451,7 +451,7 @@ var doSearch = function doSearch() {
 					subDisplay.appendChild(document.createTextNode(pretty(d.getData(i, display_subcol[j][1]))))
 				} else {
 					var span = document.createElement("span");
-					span.innerHTML = display_subcol[j][0](subDisplay, d.getData(i, display_subcol[j][1]), d, j);
+					span.innerHTML = display_subcol[j][0](subDisplay, d.getData(i, display_subcol[j][1]), d, i);
 					subDisplay.appendChild(span);
 				}
 				if (display_subcol[j][2]) {

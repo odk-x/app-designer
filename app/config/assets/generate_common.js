@@ -104,9 +104,9 @@ window.display = function display(thing) {
 		if (this_result === true) return true; // used in __tr for passthrough translations
 		result = display_update_result(result, this_result, field);
 	}
-	if (result.length === 0) {
-		return _t("Couldn't translate ") + JSON.stringify(thing);
-	}
+	//if (result.length === 0) {
+		//return _t("Couldn't translate ") + JSON.stringify(thing);
+	//}
 	odkCommonDefinitions[id] = null; // let it be garbage collected
 	return result;
 };

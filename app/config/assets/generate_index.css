@@ -30,6 +30,16 @@ body {
 	padding-bottom: 10px;
 	margin-bottom: 10px;
 }
+.reallytiny-button {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	display: block;
+	margin-left: 2%;
+	margin-right: 2%;
+	width: 25%;
+	display: inline-block;
+}
 #title {
 	display: block;
 	font-family: serif;
