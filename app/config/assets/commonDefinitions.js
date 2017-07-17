@@ -8,7 +8,7 @@ window.odkCommonDefinitions = {
           "locale": {
             "text": {
               "english": "English",
-              "spanish": "Inglés",
+              "es": "Inglés",
               "default": "English"
             }
           }
@@ -20,12 +20,12 @@ window.odkCommonDefinitions = {
           "locale": {
             "text": {
               "english": "Spanish",
-              "spanish": "Español",
+              "es": "Español",
               "default": "Spanish"
             }
           }
         },
-        "name": "spanish"
+        "name": "es"
       }
     ]
   },
