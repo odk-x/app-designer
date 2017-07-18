@@ -300,9 +300,11 @@
         "choice_list_name": "conditions",
         "data_value": "excellent",
         "display": {
-          "text": {
-            "default": "Excellent",
-            "es": "Excelente"
+          "title": {
+            "text": {
+              "default": "Excellent",
+              "es": "Excelente"
+            }
           }
         },
         "_row_num": 2
@@ -311,9 +313,11 @@
         "choice_list_name": "conditions",
         "data_value": "good",
         "display": {
-          "text": {
-            "default": "Good",
-            "es": "Bueno"
+          "title": {
+            "text": {
+              "default": "Good",
+              "es": "Bueno"
+            }
           }
         },
         "_row_num": 3
@@ -322,9 +326,11 @@
         "choice_list_name": "conditions",
         "data_value": "fair",
         "display": {
-          "text": {
-            "default": "Fair",
-            "es": "Bello"
+          "title": {
+            "text": {
+              "default": "Fair",
+              "es": "Bello"
+            }
           }
         },
         "_row_num": 4
@@ -333,9 +339,11 @@
         "choice_list_name": "conditions",
         "data_value": "poor",
         "display": {
-          "text": {
-            "default": "Poor",
-            "es": "Pobre"
+          "title": {
+            "text": {
+              "default": "Poor",
+              "es": "Pobre"
+            }
           }
         },
         "_row_num": 5
@@ -344,9 +352,11 @@
         "choice_list_name": "conditions",
         "data_value": "terrible",
         "display": {
-          "text": {
-            "default": "Terrible",
-            "es": "Terrible"
+          "title": {
+            "text": {
+              "default": "Terrible",
+              "es": "Terrible"
+            }
           }
         },
         "_row_num": 6
@@ -355,9 +365,11 @@
         "choice_list_name": "power",
         "data_value": "electricity",
         "display": {
-          "text": {
-            "default": "Electricity",
-            "es": "Electricidad"
+          "title": {
+            "text": {
+              "default": "Electricity",
+              "es": "Electricidad"
+            }
           }
         },
         "_row_num": 8
@@ -366,9 +378,11 @@
         "choice_list_name": "power",
         "data_value": "gas",
         "display": {
-          "text": {
-            "default": "Gas",
-            "es": "Combustible"
+          "title": {
+            "text": {
+              "default": "Gas",
+              "es": "Combustible"
+            }
           }
         },
         "_row_num": 9
@@ -377,9 +391,11 @@
         "choice_list_name": "power",
         "data_value": "kerosene",
         "display": {
-          "text": {
-            "default": "Kerosene",
-            "es": "Queroseno"
+          "title": {
+            "text": {
+              "default": "Kerosene",
+              "es": "Queroseno"
+            }
           }
         },
         "_row_num": 10
@@ -388,9 +404,11 @@
         "choice_list_name": "power",
         "data_value": "solar",
         "display": {
-          "text": {
-            "default": "Solar",
-            "es": "Solár"
+          "title": {
+            "text": {
+              "default": "Solar",
+              "es": "Solár"
+            }
           }
         },
         "_row_num": 11
@@ -399,9 +417,11 @@
         "choice_list_name": "power",
         "data_value": "unknown",
         "display": {
-          "text": {
-            "default": "Unknown",
-            "es": "Desconocido"
+          "title": {
+            "text": {
+              "default": "Unknown",
+              "es": "Desconocido"
+            }
           }
         },
         "_row_num": 12
@@ -410,9 +430,11 @@
         "choice_list_name": "status",
         "data_value": "functioning",
         "display": {
-          "text": {
-            "default": "Functioning",
-            "es": "Functionando"
+          "title": {
+            "text": {
+              "default": "Functioning",
+              "es": "Functionando"
+            }
           }
         },
         "_row_num": 14
@@ -421,9 +443,11 @@
         "choice_list_name": "status",
         "data_value": "awaiting_repair",
         "display": {
-          "text": {
-            "default": "Awaiting Repair",
-            "es": "Esperando Servicio"
+          "title": {
+            "text": {
+              "default": "Awaiting Repair",
+              "es": "Esperando Servicio"
+            }
           }
         },
         "_row_num": 15
@@ -432,9 +456,11 @@
         "choice_list_name": "status",
         "data_value": "unservicable",
         "display": {
-          "text": {
-            "default": "Unservicable",
-            "es": "Irreparable"
+          "title": {
+            "text": {
+              "default": "Unservicable",
+              "es": "Irreparable"
+            }
           }
         },
         "_row_num": 16
@@ -443,9 +469,11 @@
         "choice_list_name": "reasons",
         "data_value": "needs_spare_parts",
         "display": {
-          "text": {
-            "default": "Needs Spare Parts",
-            "es": "Necesita Partes"
+          "title": {
+            "text": {
+              "default": "Needs Spare Parts",
+              "es": "Necesita Partes"
+            }
           }
         },
         "_row_num": 18
@@ -454,9 +482,11 @@
         "choice_list_name": "reasons",
         "data_value": "no_finance",
         "display": {
-          "text": {
-            "default": "No Finance",
-            "es": "Sin Dinero"
+          "title": {
+            "text": {
+              "default": "No Finance",
+              "es": "Sin Dinero"
+            }
           }
         },
         "_row_num": 19
@@ -465,9 +495,11 @@
         "choice_list_name": "reasons",
         "data_value": "no_fuel",
         "display": {
-          "text": {
-            "default": "No Fuel",
-            "es": "Sin Combustible"
+          "title": {
+            "text": {
+              "default": "No Fuel",
+              "es": "Sin Combustible"
+            }
           }
         },
         "_row_num": 20
@@ -476,9 +508,11 @@
         "choice_list_name": "reasons",
         "data_value": "dead",
         "display": {
-          "text": {
-            "default": "Dead",
-            "es": "Muerto"
+          "title": {
+            "text": {
+              "default": "Dead",
+              "es": "Muerto"
+            }
           }
         },
         "_row_num": 21
@@ -487,9 +521,11 @@
         "choice_list_name": "reasons",
         "data_value": "not_applicable",
         "display": {
-          "text": {
-            "default": "Not Applicable",
-            "es": "N/A"
+          "title": {
+            "text": {
+              "default": "Not Applicable",
+              "es": "N/A"
+            }
           }
         },
         "_row_num": 22
@@ -498,9 +534,11 @@
         "choice_list_name": "current_use",
         "data_value": "in_use",
         "display": {
-          "text": {
-            "default": "In Use",
-            "es": "En Uso"
+          "title": {
+            "text": {
+              "default": "In Use",
+              "es": "En Uso"
+            }
           }
         },
         "_row_num": 24
@@ -509,9 +547,11 @@
         "choice_list_name": "current_use",
         "data_value": "not_in_use",
         "display": {
-          "text": {
-            "default": "Not In Use",
-            "es": "No En Uso"
+          "title": {
+            "text": {
+              "default": "Not In Use",
+              "es": "No En Uso"
+            }
           }
         },
         "_row_num": 25
@@ -520,9 +560,11 @@
         "choice_list_name": "current_use",
         "data_value": "in_store_for_allocation",
         "display": {
-          "text": {
-            "default": "In Store For Allocation",
-            "es": "Almacenado Epsperando asignación"
+          "title": {
+            "text": {
+              "default": "In Store For Allocation",
+              "es": "Almacenado Epsperando asignación"
+            }
           }
         },
         "_row_num": 26
@@ -531,9 +573,11 @@
         "choice_list_name": "yes_no",
         "data_value": "yes",
         "display": {
-          "text": {
-            "default": "Yes",
-            "es": "Sí"
+          "title": {
+            "text": {
+              "default": "Yes",
+              "es": "Sí"
+            }
           }
         },
         "_row_num": 28
@@ -542,9 +586,11 @@
         "choice_list_name": "yes_no",
         "data_value": "no",
         "display": {
-          "text": {
-            "default": "No",
-            "es": "No"
+          "title": {
+            "text": {
+              "default": "No",
+              "es": "No"
+            }
           }
         },
         "_row_num": 29
@@ -553,9 +599,11 @@
         "choice_list_name": "yes_no",
         "data_value": "unknown",
         "display": {
-          "text": {
-            "default": "Unknown",
-            "es": "Desconocido"
+          "title": {
+            "text": {
+              "default": "Unknown",
+              "es": "Desconocido"
+            }
           }
         },
         "_row_num": 30
@@ -590,7 +638,7 @@
         "query_name": "regionLevel1_csv",
         "query_type": "csv",
         "uri": "\"regions1-2.csv\"",
-        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{text:regionLevel1}}; }).value()",
+        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{title: {text:regionLevel1}}}; }).value()",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
@@ -599,7 +647,7 @@
         "query_name": "regionLevel2_csv",
         "query_type": "csv",
         "uri": "\"regions1-2.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
@@ -608,7 +656,7 @@
         "query_name": "regionLevel3_csv",
         "query_type": "csv",
         "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 6
@@ -653,7 +701,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170717,
+        "value": 20170718,
         "_row_num": 4
       },
       {
@@ -728,7 +776,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170717,
+        "value": 20170718,
         "_row_num": 4
       },
       "survey": {
@@ -822,9 +870,11 @@
           "choice_list_name": "conditions",
           "data_value": "excellent",
           "display": {
-            "text": {
-              "default": "Excellent",
-              "es": "Excelente"
+            "title": {
+              "text": {
+                "default": "Excellent",
+                "es": "Excelente"
+              }
             }
           },
           "_row_num": 2
@@ -833,9 +883,11 @@
           "choice_list_name": "conditions",
           "data_value": "good",
           "display": {
-            "text": {
-              "default": "Good",
-              "es": "Bueno"
+            "title": {
+              "text": {
+                "default": "Good",
+                "es": "Bueno"
+              }
             }
           },
           "_row_num": 3
@@ -844,9 +896,11 @@
           "choice_list_name": "conditions",
           "data_value": "fair",
           "display": {
-            "text": {
-              "default": "Fair",
-              "es": "Bello"
+            "title": {
+              "text": {
+                "default": "Fair",
+                "es": "Bello"
+              }
             }
           },
           "_row_num": 4
@@ -855,9 +909,11 @@
           "choice_list_name": "conditions",
           "data_value": "poor",
           "display": {
-            "text": {
-              "default": "Poor",
-              "es": "Pobre"
+            "title": {
+              "text": {
+                "default": "Poor",
+                "es": "Pobre"
+              }
             }
           },
           "_row_num": 5
@@ -866,9 +922,11 @@
           "choice_list_name": "conditions",
           "data_value": "terrible",
           "display": {
-            "text": {
-              "default": "Terrible",
-              "es": "Terrible"
+            "title": {
+              "text": {
+                "default": "Terrible",
+                "es": "Terrible"
+              }
             }
           },
           "_row_num": 6
@@ -879,9 +937,11 @@
           "choice_list_name": "power",
           "data_value": "electricity",
           "display": {
-            "text": {
-              "default": "Electricity",
-              "es": "Electricidad"
+            "title": {
+              "text": {
+                "default": "Electricity",
+                "es": "Electricidad"
+              }
             }
           },
           "_row_num": 8
@@ -890,9 +950,11 @@
           "choice_list_name": "power",
           "data_value": "gas",
           "display": {
-            "text": {
-              "default": "Gas",
-              "es": "Combustible"
+            "title": {
+              "text": {
+                "default": "Gas",
+                "es": "Combustible"
+              }
             }
           },
           "_row_num": 9
@@ -901,9 +963,11 @@
           "choice_list_name": "power",
           "data_value": "kerosene",
           "display": {
-            "text": {
-              "default": "Kerosene",
-              "es": "Queroseno"
+            "title": {
+              "text": {
+                "default": "Kerosene",
+                "es": "Queroseno"
+              }
             }
           },
           "_row_num": 10
@@ -912,9 +976,11 @@
           "choice_list_name": "power",
           "data_value": "solar",
           "display": {
-            "text": {
-              "default": "Solar",
-              "es": "Solár"
+            "title": {
+              "text": {
+                "default": "Solar",
+                "es": "Solár"
+              }
             }
           },
           "_row_num": 11
@@ -923,9 +989,11 @@
           "choice_list_name": "power",
           "data_value": "unknown",
           "display": {
-            "text": {
-              "default": "Unknown",
-              "es": "Desconocido"
+            "title": {
+              "text": {
+                "default": "Unknown",
+                "es": "Desconocido"
+              }
             }
           },
           "_row_num": 12
@@ -936,9 +1004,11 @@
           "choice_list_name": "status",
           "data_value": "functioning",
           "display": {
-            "text": {
-              "default": "Functioning",
-              "es": "Functionando"
+            "title": {
+              "text": {
+                "default": "Functioning",
+                "es": "Functionando"
+              }
             }
           },
           "_row_num": 14
@@ -947,9 +1017,11 @@
           "choice_list_name": "status",
           "data_value": "awaiting_repair",
           "display": {
-            "text": {
-              "default": "Awaiting Repair",
-              "es": "Esperando Servicio"
+            "title": {
+              "text": {
+                "default": "Awaiting Repair",
+                "es": "Esperando Servicio"
+              }
             }
           },
           "_row_num": 15
@@ -958,9 +1030,11 @@
           "choice_list_name": "status",
           "data_value": "unservicable",
           "display": {
-            "text": {
-              "default": "Unservicable",
-              "es": "Irreparable"
+            "title": {
+              "text": {
+                "default": "Unservicable",
+                "es": "Irreparable"
+              }
             }
           },
           "_row_num": 16
@@ -971,9 +1045,11 @@
           "choice_list_name": "reasons",
           "data_value": "needs_spare_parts",
           "display": {
-            "text": {
-              "default": "Needs Spare Parts",
-              "es": "Necesita Partes"
+            "title": {
+              "text": {
+                "default": "Needs Spare Parts",
+                "es": "Necesita Partes"
+              }
             }
           },
           "_row_num": 18
@@ -982,9 +1058,11 @@
           "choice_list_name": "reasons",
           "data_value": "no_finance",
           "display": {
-            "text": {
-              "default": "No Finance",
-              "es": "Sin Dinero"
+            "title": {
+              "text": {
+                "default": "No Finance",
+                "es": "Sin Dinero"
+              }
             }
           },
           "_row_num": 19
@@ -993,9 +1071,11 @@
           "choice_list_name": "reasons",
           "data_value": "no_fuel",
           "display": {
-            "text": {
-              "default": "No Fuel",
-              "es": "Sin Combustible"
+            "title": {
+              "text": {
+                "default": "No Fuel",
+                "es": "Sin Combustible"
+              }
             }
           },
           "_row_num": 20
@@ -1004,9 +1084,11 @@
           "choice_list_name": "reasons",
           "data_value": "dead",
           "display": {
-            "text": {
-              "default": "Dead",
-              "es": "Muerto"
+            "title": {
+              "text": {
+                "default": "Dead",
+                "es": "Muerto"
+              }
             }
           },
           "_row_num": 21
@@ -1015,9 +1097,11 @@
           "choice_list_name": "reasons",
           "data_value": "not_applicable",
           "display": {
-            "text": {
-              "default": "Not Applicable",
-              "es": "N/A"
+            "title": {
+              "text": {
+                "default": "Not Applicable",
+                "es": "N/A"
+              }
             }
           },
           "_row_num": 22
@@ -1028,9 +1112,11 @@
           "choice_list_name": "current_use",
           "data_value": "in_use",
           "display": {
-            "text": {
-              "default": "In Use",
-              "es": "En Uso"
+            "title": {
+              "text": {
+                "default": "In Use",
+                "es": "En Uso"
+              }
             }
           },
           "_row_num": 24
@@ -1039,9 +1125,11 @@
           "choice_list_name": "current_use",
           "data_value": "not_in_use",
           "display": {
-            "text": {
-              "default": "Not In Use",
-              "es": "No En Uso"
+            "title": {
+              "text": {
+                "default": "Not In Use",
+                "es": "No En Uso"
+              }
             }
           },
           "_row_num": 25
@@ -1050,9 +1138,11 @@
           "choice_list_name": "current_use",
           "data_value": "in_store_for_allocation",
           "display": {
-            "text": {
-              "default": "In Store For Allocation",
-              "es": "Almacenado Epsperando asignación"
+            "title": {
+              "text": {
+                "default": "In Store For Allocation",
+                "es": "Almacenado Epsperando asignación"
+              }
             }
           },
           "_row_num": 26
@@ -1063,9 +1153,11 @@
           "choice_list_name": "yes_no",
           "data_value": "yes",
           "display": {
-            "text": {
-              "default": "Yes",
-              "es": "Sí"
+            "title": {
+              "text": {
+                "default": "Yes",
+                "es": "Sí"
+              }
             }
           },
           "_row_num": 28
@@ -1074,9 +1166,11 @@
           "choice_list_name": "yes_no",
           "data_value": "no",
           "display": {
-            "text": {
-              "default": "No",
-              "es": "No"
+            "title": {
+              "text": {
+                "default": "No",
+                "es": "No"
+              }
             }
           },
           "_row_num": 29
@@ -1085,9 +1179,11 @@
           "choice_list_name": "yes_no",
           "data_value": "unknown",
           "display": {
-            "text": {
-              "default": "Unknown",
-              "es": "Desconocido"
+            "title": {
+              "text": {
+                "default": "Unknown",
+                "es": "Desconocido"
+              }
             }
           },
           "_row_num": 30
@@ -1126,7 +1222,7 @@
         "query_name": "regionLevel1_csv",
         "query_type": "csv",
         "uri": "\"regions1-2.csv\"",
-        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{text:regionLevel1}}; }).value()",
+        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{title: {text:regionLevel1}}}; }).value()",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
@@ -1135,7 +1231,7 @@
         "query_name": "regionLevel2_csv",
         "query_type": "csv",
         "uri": "\"regions1-2.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
@@ -1144,7 +1240,7 @@
         "query_name": "regionLevel3_csv",
         "query_type": "csv",
         "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 6
@@ -2431,7 +2527,7 @@
         "_aspect": "power_source",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"power\",\"data_value\":\"electricity\",\"display\":{\"text\":{\"default\":\"Electricity\",\"es\":\"Electricidad\"}},\"_row_num\":8},{\"choice_list_name\":\"power\",\"data_value\":\"gas\",\"display\":{\"text\":{\"default\":\"Gas\",\"es\":\"Combustible\"}},\"_row_num\":9},{\"choice_list_name\":\"power\",\"data_value\":\"kerosene\",\"display\":{\"text\":{\"default\":\"Kerosene\",\"es\":\"Queroseno\"}},\"_row_num\":10},{\"choice_list_name\":\"power\",\"data_value\":\"solar\",\"display\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solár\"}},\"_row_num\":11},{\"choice_list_name\":\"power\",\"data_value\":\"unknown\",\"display\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}},\"_row_num\":12}]"
+        "_value": "[{\"choice_list_name\":\"power\",\"data_value\":\"electricity\",\"display\":{\"title\":{\"text\":{\"default\":\"Electricity\",\"es\":\"Electricidad\"}}},\"_row_num\":8},{\"choice_list_name\":\"power\",\"data_value\":\"gas\",\"display\":{\"title\":{\"text\":{\"default\":\"Gas\",\"es\":\"Combustible\"}}},\"_row_num\":9},{\"choice_list_name\":\"power\",\"data_value\":\"kerosene\",\"display\":{\"title\":{\"text\":{\"default\":\"Kerosene\",\"es\":\"Queroseno\"}}},\"_row_num\":10},{\"choice_list_name\":\"power\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solár\"}}},\"_row_num\":11},{\"choice_list_name\":\"power\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":12}]"
       },
       {
         "_partition": "Column",
@@ -2445,7 +2541,7 @@
         "_aspect": "reason_not_working",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"needs_spare_parts\",\"display\":{\"text\":{\"default\":\"Needs Spare Parts\",\"es\":\"Necesita Partes\"}},\"_row_num\":18},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_finance\",\"display\":{\"text\":{\"default\":\"No Finance\",\"es\":\"Sin Dinero\"}},\"_row_num\":19},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_fuel\",\"display\":{\"text\":{\"default\":\"No Fuel\",\"es\":\"Sin Combustible\"}},\"_row_num\":20},{\"choice_list_name\":\"reasons\",\"data_value\":\"dead\",\"display\":{\"text\":{\"default\":\"Dead\",\"es\":\"Muerto\"}},\"_row_num\":21},{\"choice_list_name\":\"reasons\",\"data_value\":\"not_applicable\",\"display\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"N/A\"}},\"_row_num\":22}]"
+        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"needs_spare_parts\",\"display\":{\"title\":{\"text\":{\"default\":\"Needs Spare Parts\",\"es\":\"Necesita Partes\"}}},\"_row_num\":18},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_finance\",\"display\":{\"title\":{\"text\":{\"default\":\"No Finance\",\"es\":\"Sin Dinero\"}}},\"_row_num\":19},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_fuel\",\"display\":{\"title\":{\"text\":{\"default\":\"No Fuel\",\"es\":\"Sin Combustible\"}}},\"_row_num\":20},{\"choice_list_name\":\"reasons\",\"data_value\":\"dead\",\"display\":{\"title\":{\"text\":{\"default\":\"Dead\",\"es\":\"Muerto\"}}},\"_row_num\":21},{\"choice_list_name\":\"reasons\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"N/A\"}}},\"_row_num\":22}]"
       },
       {
         "_partition": "Column",
@@ -2487,7 +2583,7 @@
         "_aspect": "utilization",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"current_use\",\"data_value\":\"in_use\",\"display\":{\"text\":{\"default\":\"In Use\",\"es\":\"En Uso\"}},\"_row_num\":24},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_in_use\",\"display\":{\"text\":{\"default\":\"Not In Use\",\"es\":\"No En Uso\"}},\"_row_num\":25},{\"choice_list_name\":\"current_use\",\"data_value\":\"in_store_for_allocation\",\"display\":{\"text\":{\"default\":\"In Store For Allocation\",\"es\":\"Almacenado Epsperando asignación\"}},\"_row_num\":26}]"
+        "_value": "[{\"choice_list_name\":\"current_use\",\"data_value\":\"in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"In Use\",\"es\":\"En Uso\"}}},\"_row_num\":24},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"Not In Use\",\"es\":\"No En Uso\"}}},\"_row_num\":25},{\"choice_list_name\":\"current_use\",\"data_value\":\"in_store_for_allocation\",\"display\":{\"title\":{\"text\":{\"default\":\"In Store For Allocation\",\"es\":\"Almacenado Epsperando asignación\"}}},\"_row_num\":26}]"
       },
       {
         "_partition": "Column",
@@ -2501,7 +2597,7 @@
         "_aspect": "voltage_regulator",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}},\"_row_num\":28},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}},\"_row_num\":29},{\"choice_list_name\":\"yes_no\",\"data_value\":\"unknown\",\"display\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":28},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":29},{\"choice_list_name\":\"yes_no\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
@@ -2515,7 +2611,7 @@
         "_aspect": "working_status",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\"}},\"_row_num\":14},{\"choice_list_name\":\"status\",\"data_value\":\"awaiting_repair\",\"display\":{\"text\":{\"default\":\"Awaiting Repair\",\"es\":\"Esperando Servicio\"}},\"_row_num\":15},{\"choice_list_name\":\"status\",\"data_value\":\"unservicable\",\"display\":{\"text\":{\"default\":\"Unservicable\",\"es\":\"Irreparable\"}},\"_row_num\":16}]"
+        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\"}}},\"_row_num\":14},{\"choice_list_name\":\"status\",\"data_value\":\"awaiting_repair\",\"display\":{\"title\":{\"text\":{\"default\":\"Awaiting Repair\",\"es\":\"Esperando Servicio\"}}},\"_row_num\":15},{\"choice_list_name\":\"status\",\"data_value\":\"unservicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Unservicable\",\"es\":\"Irreparable\"}}},\"_row_num\":16}]"
       },
       {
         "_partition": "Column",

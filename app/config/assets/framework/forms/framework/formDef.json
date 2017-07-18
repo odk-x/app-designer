@@ -8,7 +8,12 @@
     ],
     "survey": [
       {
-        "clause": "exit section",
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "framework"
+          }
+        },
         "_row_num": 2
       }
     ],
@@ -1253,12 +1258,26 @@
         "reachable_sections": {},
         "prompts": [
           {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "framework"
+              }
+            },
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 0
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
             "_row_num": 3,
             "_branch_label_enclosing_screen": "survey/_screen3",
-            "promptIdx": 0
+            "promptIdx": 1
           }
         ],
         "validation_tag_map": {
@@ -1266,10 +1285,9 @@
         },
         "operations": [
           {
-            "clause": "exit section",
             "_row_num": 2,
-            "__rowNum__": 1,
-            "_token_type": "exit_section",
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
@@ -1281,7 +1299,7 @@
           {
             "_row_num": 3,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
@@ -1295,6 +1313,7 @@
           }
         ],
         "branch_label_map": {
+          "_screen2": 0,
           "_contents": 2,
           "_screen3": 2
         }

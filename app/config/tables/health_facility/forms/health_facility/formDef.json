@@ -547,9 +547,11 @@
         "choice_list_name": "yes_no",
         "data_value": "yes",
         "display": {
-          "text": {
-            "default": "Yes",
-            "es": "Sí"
+          "title": {
+            "text": {
+              "default": "Yes",
+              "es": "Sí"
+            }
           }
         },
         "_row_num": 2
@@ -558,9 +560,11 @@
         "choice_list_name": "yes_no",
         "data_value": "no",
         "display": {
-          "text": {
-            "default": "No",
-            "es": "No"
+          "title": {
+            "text": {
+              "default": "No",
+              "es": "No"
+            }
           }
         },
         "_row_num": 3
@@ -569,9 +573,11 @@
         "choice_list_name": "facility_types",
         "data_value": "national_vaccine_store",
         "display": {
-          "text": {
-            "default": "National vaccine store",
-            "es": "Tienda nacional de vacunas"
+          "title": {
+            "text": {
+              "default": "National vaccine store",
+              "es": "Tienda nacional de vacunas"
+            }
           }
         },
         "_row_num": 5
@@ -580,9 +586,11 @@
         "choice_list_name": "facility_types",
         "data_value": "regional_vaccine_store",
         "display": {
-          "text": {
-            "default": "Regional vaccine store",
-            "es": "Tienda regional de vacunas"
+          "title": {
+            "text": {
+              "default": "Regional vaccine store",
+              "es": "Tienda regional de vacunas"
+            }
           }
         },
         "_row_num": 6
@@ -591,9 +599,11 @@
         "choice_list_name": "facility_types",
         "data_value": "district_vaccine_store",
         "display": {
-          "text": {
-            "default": "District vaccine store",
-            "es": "Tienda de vacunas por un distrito"
+          "title": {
+            "text": {
+              "default": "District vaccine store",
+              "es": "Tienda de vacunas por un distrito"
+            }
           }
         },
         "_row_num": 7
@@ -602,9 +612,11 @@
         "choice_list_name": "facility_types",
         "data_value": "central_hospital",
         "display": {
-          "text": {
-            "default": "Central hospital",
-            "es": "Hospital centrál"
+          "title": {
+            "text": {
+              "default": "Central hospital",
+              "es": "Hospital centrál"
+            }
           }
         },
         "_row_num": 8
@@ -613,9 +625,11 @@
         "choice_list_name": "facility_types",
         "data_value": "district_hospital",
         "display": {
-          "text": {
-            "default": "District hospital",
-            "es": "Hospital por un distrito"
+          "title": {
+            "text": {
+              "default": "District hospital",
+              "es": "Hospital por un distrito"
+            }
           }
         },
         "_row_num": 9
@@ -624,9 +638,11 @@
         "choice_list_name": "facility_types",
         "data_value": "rural_hospital",
         "display": {
-          "text": {
-            "default": "Rural hospital",
-            "es": "Hospital rurál"
+          "title": {
+            "text": {
+              "default": "Rural hospital",
+              "es": "Hospital rurál"
+            }
           }
         },
         "_row_num": 10
@@ -635,9 +651,11 @@
         "choice_list_name": "facility_types",
         "data_value": "hospital",
         "display": {
-          "text": {
-            "default": "Hospital",
-            "es": "Hospital generál"
+          "title": {
+            "text": {
+              "default": "Hospital",
+              "es": "Hospital generál"
+            }
           }
         },
         "_row_num": 11
@@ -646,9 +664,11 @@
         "choice_list_name": "facility_types",
         "data_value": "community_hospital",
         "display": {
-          "text": {
-            "default": "Community hospital",
-            "es": "Hospital de comunidad"
+          "title": {
+            "text": {
+              "default": "Community hospital",
+              "es": "Hospital de comunidad"
+            }
           }
         },
         "_row_num": 12
@@ -657,9 +677,11 @@
         "choice_list_name": "facility_types",
         "data_value": "health_center",
         "display": {
-          "text": {
-            "default": "Health center",
-            "es": "Centro de salud"
+          "title": {
+            "text": {
+              "default": "Health center",
+              "es": "Centro de salud"
+            }
           }
         },
         "_row_num": 13
@@ -668,9 +690,11 @@
         "choice_list_name": "facility_types",
         "data_value": "dispensary",
         "display": {
-          "text": {
-            "default": "Dispensary",
-            "es": "Dispensario"
+          "title": {
+            "text": {
+              "default": "Dispensary",
+              "es": "Dispensario"
+            }
           }
         },
         "_row_num": 14
@@ -679,9 +703,11 @@
         "choice_list_name": "facility_types",
         "data_value": "health_post",
         "display": {
-          "text": {
-            "default": "Health post",
-            "es": "Campamiento de salud"
+          "title": {
+            "text": {
+              "default": "Health post",
+              "es": "Campamiento de salud"
+            }
           }
         },
         "_row_num": 15
@@ -690,9 +716,11 @@
         "choice_list_name": "facility_types",
         "data_value": "maternity",
         "display": {
-          "text": {
-            "default": "Maternity",
-            "es": "Maternidad"
+          "title": {
+            "text": {
+              "default": "Maternity",
+              "es": "Maternidad"
+            }
           }
         },
         "_row_num": 16
@@ -701,9 +729,11 @@
         "choice_list_name": "ownership_types",
         "data_value": "public",
         "display": {
-          "text": {
-            "default": "Public",
-            "es": "Público"
+          "title": {
+            "text": {
+              "default": "Public",
+              "es": "Público"
+            }
           }
         },
         "_row_num": 18
@@ -712,9 +742,11 @@
         "choice_list_name": "ownership_types",
         "data_value": "private",
         "display": {
-          "text": {
-            "default": "Private",
-            "es": "Privado"
+          "title": {
+            "text": {
+              "default": "Private",
+              "es": "Privado"
+            }
           }
         },
         "_row_num": 19
@@ -723,9 +755,11 @@
         "choice_list_name": "ownership_types",
         "data_value": "ngo",
         "display": {
-          "text": {
-            "default": "NGO",
-            "es": "ONG"
+          "title": {
+            "text": {
+              "default": "NGO",
+              "es": "ONG"
+            }
           }
         },
         "_row_num": 20
@@ -734,9 +768,11 @@
         "choice_list_name": "ownership_types",
         "data_value": "faithbased",
         "display": {
-          "text": {
-            "default": "Faithbased",
-            "es": "Basado en fé"
+          "title": {
+            "text": {
+              "default": "Faithbased",
+              "es": "Basado en fé"
+            }
           }
         },
         "_row_num": 21
@@ -745,9 +781,11 @@
         "choice_list_name": "ownership_types",
         "data_value": "other",
         "display": {
-          "text": {
-            "default": "Other",
-            "es": "Otro"
+          "title": {
+            "text": {
+              "default": "Other",
+              "es": "Otro"
+            }
           }
         },
         "_row_num": 22
@@ -756,9 +794,11 @@
         "choice_list_name": "elec_sources",
         "data_value": "grid",
         "display": {
-          "text": {
-            "default": "Grid",
-            "es": "Red"
+          "title": {
+            "text": {
+              "default": "Grid",
+              "es": "Red"
+            }
           }
         },
         "_row_num": 24
@@ -767,9 +807,11 @@
         "choice_list_name": "elec_sources",
         "data_value": "generator",
         "display": {
-          "text": {
-            "default": "Generator",
-            "es": "Generador"
+          "title": {
+            "text": {
+              "default": "Generator",
+              "es": "Generador"
+            }
           }
         },
         "_row_num": 25
@@ -778,9 +820,11 @@
         "choice_list_name": "elec_sources",
         "data_value": "both",
         "display": {
-          "text": {
-            "default": "Both Grid and Generator",
-            "es": "Red y generador"
+          "title": {
+            "text": {
+              "default": "Both Grid and Generator",
+              "es": "Red y generador"
+            }
           }
         },
         "_row_num": 26
@@ -789,9 +833,11 @@
         "choice_list_name": "elec_sources",
         "data_value": "none",
         "display": {
-          "text": {
-            "default": "None",
-            "es": "Nada"
+          "title": {
+            "text": {
+              "default": "None",
+              "es": "Nada"
+            }
           }
         },
         "_row_num": 27
@@ -800,9 +846,11 @@
         "choice_list_name": "grid",
         "data_value": "more_than_16",
         "display": {
-          "text": {
-            "default": "More than 16",
-            "es": "Más que 16"
+          "title": {
+            "text": {
+              "default": "More than 16",
+              "es": "Más que 16"
+            }
           }
         },
         "_row_num": 29
@@ -811,9 +859,11 @@
         "choice_list_name": "grid",
         "data_value": "8_to_16",
         "display": {
-          "text": {
-            "default": "8 to 16",
-            "es": "8 a 16"
+          "title": {
+            "text": {
+              "default": "8 to 16",
+              "es": "8 a 16"
+            }
           }
         },
         "_row_num": 30
@@ -822,9 +872,11 @@
         "choice_list_name": "grid",
         "data_value": "4_to_8",
         "display": {
-          "text": {
-            "default": "4 to 8",
-            "es": "4 a 8"
+          "title": {
+            "text": {
+              "default": "4 to 8",
+              "es": "4 a 8"
+            }
           }
         },
         "_row_num": 31
@@ -833,9 +885,11 @@
         "choice_list_name": "grid",
         "data_value": "fewer_than_4",
         "display": {
-          "text": {
-            "default": "Fewer than 4",
-            "es": "Menos que 4"
+          "title": {
+            "text": {
+              "default": "Fewer than 4",
+              "es": "Menos que 4"
+            }
           }
         },
         "_row_num": 32
@@ -844,9 +898,11 @@
         "choice_list_name": "grid",
         "data_value": "none",
         "display": {
-          "text": {
-            "default": "None",
-            "es": "Ninguno"
+          "title": {
+            "text": {
+              "default": "None",
+              "es": "Ninguno"
+            }
           }
         },
         "_row_num": 33
@@ -855,9 +911,11 @@
         "choice_list_name": "fuel_availability",
         "data_value": "available",
         "display": {
-          "text": {
-            "default": "Available",
-            "es": "Disponible"
+          "title": {
+            "text": {
+              "default": "Available",
+              "es": "Disponible"
+            }
           }
         },
         "_row_num": 35
@@ -866,9 +924,11 @@
         "choice_list_name": "fuel_availability",
         "data_value": "irregular",
         "display": {
-          "text": {
-            "default": "Irregular",
-            "es": "Irregular"
+          "title": {
+            "text": {
+              "default": "Irregular",
+              "es": "Irregular"
+            }
           }
         },
         "_row_num": 36
@@ -877,9 +937,11 @@
         "choice_list_name": "fuel_availability",
         "data_value": "not_available",
         "display": {
-          "text": {
-            "default": "Not Available",
-            "es": "No Disponible"
+          "title": {
+            "text": {
+              "default": "Not Available",
+              "es": "No Disponible"
+            }
           }
         },
         "_row_num": 37
@@ -888,9 +950,11 @@
         "choice_list_name": "fuel_availability",
         "data_value": "unknown",
         "display": {
-          "text": {
-            "default": "Unknown",
-            "es": "Desconocido"
+          "title": {
+            "text": {
+              "default": "Unknown",
+              "es": "Desconocido"
+            }
           }
         },
         "_row_num": 38
@@ -899,9 +963,11 @@
         "choice_list_name": "fuel_availability",
         "data_value": "not_applicable",
         "display": {
-          "text": {
-            "default": "Not Applicable",
-            "es": "No Applicable"
+          "title": {
+            "text": {
+              "default": "Not Applicable",
+              "es": "No Applicable"
+            }
           }
         },
         "_row_num": 39
@@ -910,9 +976,11 @@
         "choice_list_name": "climate_types",
         "data_value": "moderate",
         "display": {
-          "text": {
-            "default": "Moderate",
-            "es": "Moderate"
+          "title": {
+            "text": {
+              "default": "Moderate",
+              "es": "Moderate"
+            }
           }
         },
         "_row_num": 41
@@ -921,9 +989,11 @@
         "choice_list_name": "climate_types",
         "data_value": "temperate",
         "display": {
-          "text": {
-            "default": "Temperate",
-            "es": "Templado"
+          "title": {
+            "text": {
+              "default": "Temperate",
+              "es": "Templado"
+            }
           }
         },
         "_row_num": 42
@@ -932,9 +1002,11 @@
         "choice_list_name": "climate_types",
         "data_value": "hot",
         "display": {
-          "text": {
-            "default": "Hot",
-            "es": "Caliente"
+          "title": {
+            "text": {
+              "default": "Hot",
+              "es": "Caliente"
+            }
           }
         },
         "_row_num": 43
@@ -943,9 +1015,11 @@
         "choice_list_name": "storage_types",
         "data_value": "depot",
         "display": {
-          "text": {
-            "default": "Depot",
-            "es": "Depósito"
+          "title": {
+            "text": {
+              "default": "Depot",
+              "es": "Depósito"
+            }
           }
         },
         "_row_num": 45
@@ -954,9 +1028,11 @@
         "choice_list_name": "storage_types",
         "data_value": "delivery",
         "display": {
-          "text": {
-            "default": "Delivery",
-            "es": "Depósito y Envío"
+          "title": {
+            "text": {
+              "default": "Delivery",
+              "es": "Depósito y Envío"
+            }
           }
         },
         "_row_num": 46
@@ -965,9 +1041,11 @@
         "choice_list_name": "storage_types",
         "data_value": "both",
         "display": {
-          "text": {
-            "default": "Both Depot and Delivery",
-            "es": "Depósito"
+          "title": {
+            "text": {
+              "default": "Both Depot and Delivery",
+              "es": "Depósito"
+            }
           }
         },
         "_row_num": 47
@@ -976,9 +1054,11 @@
         "choice_list_name": "delivery_types",
         "data_value": "static",
         "display": {
-          "text": {
-            "default": "Static",
-            "es": "Estático"
+          "title": {
+            "text": {
+              "default": "Static",
+              "es": "Estático"
+            }
           }
         },
         "_row_num": 49
@@ -987,9 +1067,11 @@
         "choice_list_name": "delivery_types",
         "data_value": "outreach",
         "display": {
-          "text": {
-            "default": "Outreach",
-            "es": "Extensión"
+          "title": {
+            "text": {
+              "default": "Outreach",
+              "es": "Extensión"
+            }
           }
         },
         "_row_num": 50
@@ -998,9 +1080,11 @@
         "choice_list_name": "delivery_types",
         "data_value": "both",
         "display": {
-          "text": {
-            "default": "Both Static and Outreach",
-            "es": "Estático y Extensión"
+          "title": {
+            "text": {
+              "default": "Both Static and Outreach",
+              "es": "Estático y Extensión"
+            }
           }
         },
         "_row_num": 51
@@ -1009,9 +1093,11 @@
         "choice_list_name": "delivery_types",
         "data_value": "none",
         "display": {
-          "text": {
-            "default": "None",
-            "es": "Nada"
+          "title": {
+            "text": {
+              "default": "None",
+              "es": "Nada"
+            }
           }
         },
         "_row_num": 52
@@ -1020,9 +1106,11 @@
         "choice_list_name": "vaccine_modes",
         "data_value": "delivered",
         "display": {
-          "text": {
-            "default": "Delivered",
-            "es": "Enviado"
+          "title": {
+            "text": {
+              "default": "Delivered",
+              "es": "Enviado"
+            }
           }
         },
         "_row_num": 54
@@ -1031,9 +1119,11 @@
         "choice_list_name": "vaccine_modes",
         "data_value": "collected",
         "display": {
-          "text": {
-            "default": "Collected",
-            "es": "Collectado"
+          "title": {
+            "text": {
+              "default": "Collected",
+              "es": "Collectado"
+            }
           }
         },
         "_row_num": 55
@@ -1042,9 +1132,11 @@
         "choice_list_name": "vaccine_modes",
         "data_value": "both",
         "display": {
-          "text": {
-            "default": "Both Delivered and Collected",
-            "es": "Enviado y Collectado"
+          "title": {
+            "text": {
+              "default": "Both Delivered and Collected",
+              "es": "Enviado y Collectado"
+            }
           }
         },
         "_row_num": 56
@@ -1053,9 +1145,11 @@
         "choice_list_name": "vaccine_modes",
         "data_value": "none",
         "display": {
-          "text": {
-            "default": "None",
-            "es": "Ninguno"
+          "title": {
+            "text": {
+              "default": "None",
+              "es": "Ninguno"
+            }
           }
         },
         "_row_num": 57
@@ -1064,9 +1158,11 @@
         "choice_list_name": "vaccine_modes",
         "data_value": "unknown",
         "display": {
-          "text": {
-            "default": "Unknown",
-            "es": "Desconocido"
+          "title": {
+            "text": {
+              "default": "Unknown",
+              "es": "Desconocido"
+            }
           }
         },
         "_row_num": 58
@@ -1089,7 +1185,7 @@
         "query_name": "regionLevel1_csv",
         "query_type": "csv",
         "uri": "\"regions1-2.csv\"",
-        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{text:regionLevel1}}; }).value()",
+        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{title:{text:regionLevel1}}}; }).value()",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
@@ -1098,7 +1194,7 @@
         "query_name": "regionLevel2_csv",
         "query_type": "csv",
         "uri": "\"regions1-2.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {title:{text:place.label}}; return place; })",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
@@ -1107,7 +1203,7 @@
         "query_name": "regionLevel3_csv",
         "query_type": "csv",
         "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
@@ -1148,7 +1244,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170717,
+        "value": 20170718,
         "_row_num": 8
       },
       {
@@ -1286,7 +1382,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170717,
+        "value": 20170718,
         "_row_num": 8
       },
       "english": {
@@ -1363,9 +1459,11 @@
           "choice_list_name": "yes_no",
           "data_value": "yes",
           "display": {
-            "text": {
-              "default": "Yes",
-              "es": "Sí"
+            "title": {
+              "text": {
+                "default": "Yes",
+                "es": "Sí"
+              }
             }
           },
           "_row_num": 2
@@ -1374,9 +1472,11 @@
           "choice_list_name": "yes_no",
           "data_value": "no",
           "display": {
-            "text": {
-              "default": "No",
-              "es": "No"
+            "title": {
+              "text": {
+                "default": "No",
+                "es": "No"
+              }
             }
           },
           "_row_num": 3
@@ -1387,9 +1487,11 @@
           "choice_list_name": "facility_types",
           "data_value": "national_vaccine_store",
           "display": {
-            "text": {
-              "default": "National vaccine store",
-              "es": "Tienda nacional de vacunas"
+            "title": {
+              "text": {
+                "default": "National vaccine store",
+                "es": "Tienda nacional de vacunas"
+              }
             }
           },
           "_row_num": 5
@@ -1398,9 +1500,11 @@
           "choice_list_name": "facility_types",
           "data_value": "regional_vaccine_store",
           "display": {
-            "text": {
-              "default": "Regional vaccine store",
-              "es": "Tienda regional de vacunas"
+            "title": {
+              "text": {
+                "default": "Regional vaccine store",
+                "es": "Tienda regional de vacunas"
+              }
             }
           },
           "_row_num": 6
@@ -1409,9 +1513,11 @@
           "choice_list_name": "facility_types",
           "data_value": "district_vaccine_store",
           "display": {
-            "text": {
-              "default": "District vaccine store",
-              "es": "Tienda de vacunas por un distrito"
+            "title": {
+              "text": {
+                "default": "District vaccine store",
+                "es": "Tienda de vacunas por un distrito"
+              }
             }
           },
           "_row_num": 7
@@ -1420,9 +1526,11 @@
           "choice_list_name": "facility_types",
           "data_value": "central_hospital",
           "display": {
-            "text": {
-              "default": "Central hospital",
-              "es": "Hospital centrál"
+            "title": {
+              "text": {
+                "default": "Central hospital",
+                "es": "Hospital centrál"
+              }
             }
           },
           "_row_num": 8
@@ -1431,9 +1539,11 @@
           "choice_list_name": "facility_types",
           "data_value": "district_hospital",
           "display": {
-            "text": {
-              "default": "District hospital",
-              "es": "Hospital por un distrito"
+            "title": {
+              "text": {
+                "default": "District hospital",
+                "es": "Hospital por un distrito"
+              }
             }
           },
           "_row_num": 9
@@ -1442,9 +1552,11 @@
           "choice_list_name": "facility_types",
           "data_value": "rural_hospital",
           "display": {
-            "text": {
-              "default": "Rural hospital",
-              "es": "Hospital rurál"
+            "title": {
+              "text": {
+                "default": "Rural hospital",
+                "es": "Hospital rurál"
+              }
             }
           },
           "_row_num": 10
@@ -1453,9 +1565,11 @@
           "choice_list_name": "facility_types",
           "data_value": "hospital",
           "display": {
-            "text": {
-              "default": "Hospital",
-              "es": "Hospital generál"
+            "title": {
+              "text": {
+                "default": "Hospital",
+                "es": "Hospital generál"
+              }
             }
           },
           "_row_num": 11
@@ -1464,9 +1578,11 @@
           "choice_list_name": "facility_types",
           "data_value": "community_hospital",
           "display": {
-            "text": {
-              "default": "Community hospital",
-              "es": "Hospital de comunidad"
+            "title": {
+              "text": {
+                "default": "Community hospital",
+                "es": "Hospital de comunidad"
+              }
             }
           },
           "_row_num": 12
@@ -1475,9 +1591,11 @@
           "choice_list_name": "facility_types",
           "data_value": "health_center",
           "display": {
-            "text": {
-              "default": "Health center",
-              "es": "Centro de salud"
+            "title": {
+              "text": {
+                "default": "Health center",
+                "es": "Centro de salud"
+              }
             }
           },
           "_row_num": 13
@@ -1486,9 +1604,11 @@
           "choice_list_name": "facility_types",
           "data_value": "dispensary",
           "display": {
-            "text": {
-              "default": "Dispensary",
-              "es": "Dispensario"
+            "title": {
+              "text": {
+                "default": "Dispensary",
+                "es": "Dispensario"
+              }
             }
           },
           "_row_num": 14
@@ -1497,9 +1617,11 @@
           "choice_list_name": "facility_types",
           "data_value": "health_post",
           "display": {
-            "text": {
-              "default": "Health post",
-              "es": "Campamiento de salud"
+            "title": {
+              "text": {
+                "default": "Health post",
+                "es": "Campamiento de salud"
+              }
             }
           },
           "_row_num": 15
@@ -1508,9 +1630,11 @@
           "choice_list_name": "facility_types",
           "data_value": "maternity",
           "display": {
-            "text": {
-              "default": "Maternity",
-              "es": "Maternidad"
+            "title": {
+              "text": {
+                "default": "Maternity",
+                "es": "Maternidad"
+              }
             }
           },
           "_row_num": 16
@@ -1521,9 +1645,11 @@
           "choice_list_name": "ownership_types",
           "data_value": "public",
           "display": {
-            "text": {
-              "default": "Public",
-              "es": "Público"
+            "title": {
+              "text": {
+                "default": "Public",
+                "es": "Público"
+              }
             }
           },
           "_row_num": 18
@@ -1532,9 +1658,11 @@
           "choice_list_name": "ownership_types",
           "data_value": "private",
           "display": {
-            "text": {
-              "default": "Private",
-              "es": "Privado"
+            "title": {
+              "text": {
+                "default": "Private",
+                "es": "Privado"
+              }
             }
           },
           "_row_num": 19
@@ -1543,9 +1671,11 @@
           "choice_list_name": "ownership_types",
           "data_value": "ngo",
           "display": {
-            "text": {
-              "default": "NGO",
-              "es": "ONG"
+            "title": {
+              "text": {
+                "default": "NGO",
+                "es": "ONG"
+              }
             }
           },
           "_row_num": 20
@@ -1554,9 +1684,11 @@
           "choice_list_name": "ownership_types",
           "data_value": "faithbased",
           "display": {
-            "text": {
-              "default": "Faithbased",
-              "es": "Basado en fé"
+            "title": {
+              "text": {
+                "default": "Faithbased",
+                "es": "Basado en fé"
+              }
             }
           },
           "_row_num": 21
@@ -1565,9 +1697,11 @@
           "choice_list_name": "ownership_types",
           "data_value": "other",
           "display": {
-            "text": {
-              "default": "Other",
-              "es": "Otro"
+            "title": {
+              "text": {
+                "default": "Other",
+                "es": "Otro"
+              }
             }
           },
           "_row_num": 22
@@ -1578,9 +1712,11 @@
           "choice_list_name": "elec_sources",
           "data_value": "grid",
           "display": {
-            "text": {
-              "default": "Grid",
-              "es": "Red"
+            "title": {
+              "text": {
+                "default": "Grid",
+                "es": "Red"
+              }
             }
           },
           "_row_num": 24
@@ -1589,9 +1725,11 @@
           "choice_list_name": "elec_sources",
           "data_value": "generator",
           "display": {
-            "text": {
-              "default": "Generator",
-              "es": "Generador"
+            "title": {
+              "text": {
+                "default": "Generator",
+                "es": "Generador"
+              }
             }
           },
           "_row_num": 25
@@ -1600,9 +1738,11 @@
           "choice_list_name": "elec_sources",
           "data_value": "both",
           "display": {
-            "text": {
-              "default": "Both Grid and Generator",
-              "es": "Red y generador"
+            "title": {
+              "text": {
+                "default": "Both Grid and Generator",
+                "es": "Red y generador"
+              }
             }
           },
           "_row_num": 26
@@ -1611,9 +1751,11 @@
           "choice_list_name": "elec_sources",
           "data_value": "none",
           "display": {
-            "text": {
-              "default": "None",
-              "es": "Nada"
+            "title": {
+              "text": {
+                "default": "None",
+                "es": "Nada"
+              }
             }
           },
           "_row_num": 27
@@ -1624,9 +1766,11 @@
           "choice_list_name": "grid",
           "data_value": "more_than_16",
           "display": {
-            "text": {
-              "default": "More than 16",
-              "es": "Más que 16"
+            "title": {
+              "text": {
+                "default": "More than 16",
+                "es": "Más que 16"
+              }
             }
           },
           "_row_num": 29
@@ -1635,9 +1779,11 @@
           "choice_list_name": "grid",
           "data_value": "8_to_16",
           "display": {
-            "text": {
-              "default": "8 to 16",
-              "es": "8 a 16"
+            "title": {
+              "text": {
+                "default": "8 to 16",
+                "es": "8 a 16"
+              }
             }
           },
           "_row_num": 30
@@ -1646,9 +1792,11 @@
           "choice_list_name": "grid",
           "data_value": "4_to_8",
           "display": {
-            "text": {
-              "default": "4 to 8",
-              "es": "4 a 8"
+            "title": {
+              "text": {
+                "default": "4 to 8",
+                "es": "4 a 8"
+              }
             }
           },
           "_row_num": 31
@@ -1657,9 +1805,11 @@
           "choice_list_name": "grid",
           "data_value": "fewer_than_4",
           "display": {
-            "text": {
-              "default": "Fewer than 4",
-              "es": "Menos que 4"
+            "title": {
+              "text": {
+                "default": "Fewer than 4",
+                "es": "Menos que 4"
+              }
             }
           },
           "_row_num": 32
@@ -1668,9 +1818,11 @@
           "choice_list_name": "grid",
           "data_value": "none",
           "display": {
-            "text": {
-              "default": "None",
-              "es": "Ninguno"
+            "title": {
+              "text": {
+                "default": "None",
+                "es": "Ninguno"
+              }
             }
           },
           "_row_num": 33
@@ -1681,9 +1833,11 @@
           "choice_list_name": "fuel_availability",
           "data_value": "available",
           "display": {
-            "text": {
-              "default": "Available",
-              "es": "Disponible"
+            "title": {
+              "text": {
+                "default": "Available",
+                "es": "Disponible"
+              }
             }
           },
           "_row_num": 35
@@ -1692,9 +1846,11 @@
           "choice_list_name": "fuel_availability",
           "data_value": "irregular",
           "display": {
-            "text": {
-              "default": "Irregular",
-              "es": "Irregular"
+            "title": {
+              "text": {
+                "default": "Irregular",
+                "es": "Irregular"
+              }
             }
           },
           "_row_num": 36
@@ -1703,9 +1859,11 @@
           "choice_list_name": "fuel_availability",
           "data_value": "not_available",
           "display": {
-            "text": {
-              "default": "Not Available",
-              "es": "No Disponible"
+            "title": {
+              "text": {
+                "default": "Not Available",
+                "es": "No Disponible"
+              }
             }
           },
           "_row_num": 37
@@ -1714,9 +1872,11 @@
           "choice_list_name": "fuel_availability",
           "data_value": "unknown",
           "display": {
-            "text": {
-              "default": "Unknown",
-              "es": "Desconocido"
+            "title": {
+              "text": {
+                "default": "Unknown",
+                "es": "Desconocido"
+              }
             }
           },
           "_row_num": 38
@@ -1725,9 +1885,11 @@
           "choice_list_name": "fuel_availability",
           "data_value": "not_applicable",
           "display": {
-            "text": {
-              "default": "Not Applicable",
-              "es": "No Applicable"
+            "title": {
+              "text": {
+                "default": "Not Applicable",
+                "es": "No Applicable"
+              }
             }
           },
           "_row_num": 39
@@ -1738,9 +1900,11 @@
           "choice_list_name": "climate_types",
           "data_value": "moderate",
           "display": {
-            "text": {
-              "default": "Moderate",
-              "es": "Moderate"
+            "title": {
+              "text": {
+                "default": "Moderate",
+                "es": "Moderate"
+              }
             }
           },
           "_row_num": 41
@@ -1749,9 +1913,11 @@
           "choice_list_name": "climate_types",
           "data_value": "temperate",
           "display": {
-            "text": {
-              "default": "Temperate",
-              "es": "Templado"
+            "title": {
+              "text": {
+                "default": "Temperate",
+                "es": "Templado"
+              }
             }
           },
           "_row_num": 42
@@ -1760,9 +1926,11 @@
           "choice_list_name": "climate_types",
           "data_value": "hot",
           "display": {
-            "text": {
-              "default": "Hot",
-              "es": "Caliente"
+            "title": {
+              "text": {
+                "default": "Hot",
+                "es": "Caliente"
+              }
             }
           },
           "_row_num": 43
@@ -1773,9 +1941,11 @@
           "choice_list_name": "storage_types",
           "data_value": "depot",
           "display": {
-            "text": {
-              "default": "Depot",
-              "es": "Depósito"
+            "title": {
+              "text": {
+                "default": "Depot",
+                "es": "Depósito"
+              }
             }
           },
           "_row_num": 45
@@ -1784,9 +1954,11 @@
           "choice_list_name": "storage_types",
           "data_value": "delivery",
           "display": {
-            "text": {
-              "default": "Delivery",
-              "es": "Depósito y Envío"
+            "title": {
+              "text": {
+                "default": "Delivery",
+                "es": "Depósito y Envío"
+              }
             }
           },
           "_row_num": 46
@@ -1795,9 +1967,11 @@
           "choice_list_name": "storage_types",
           "data_value": "both",
           "display": {
-            "text": {
-              "default": "Both Depot and Delivery",
-              "es": "Depósito"
+            "title": {
+              "text": {
+                "default": "Both Depot and Delivery",
+                "es": "Depósito"
+              }
             }
           },
           "_row_num": 47
@@ -1808,9 +1982,11 @@
           "choice_list_name": "delivery_types",
           "data_value": "static",
           "display": {
-            "text": {
-              "default": "Static",
-              "es": "Estático"
+            "title": {
+              "text": {
+                "default": "Static",
+                "es": "Estático"
+              }
             }
           },
           "_row_num": 49
@@ -1819,9 +1995,11 @@
           "choice_list_name": "delivery_types",
           "data_value": "outreach",
           "display": {
-            "text": {
-              "default": "Outreach",
-              "es": "Extensión"
+            "title": {
+              "text": {
+                "default": "Outreach",
+                "es": "Extensión"
+              }
             }
           },
           "_row_num": 50
@@ -1830,9 +2008,11 @@
           "choice_list_name": "delivery_types",
           "data_value": "both",
           "display": {
-            "text": {
-              "default": "Both Static and Outreach",
-              "es": "Estático y Extensión"
+            "title": {
+              "text": {
+                "default": "Both Static and Outreach",
+                "es": "Estático y Extensión"
+              }
             }
           },
           "_row_num": 51
@@ -1841,9 +2021,11 @@
           "choice_list_name": "delivery_types",
           "data_value": "none",
           "display": {
-            "text": {
-              "default": "None",
-              "es": "Nada"
+            "title": {
+              "text": {
+                "default": "None",
+                "es": "Nada"
+              }
             }
           },
           "_row_num": 52
@@ -1854,9 +2036,11 @@
           "choice_list_name": "vaccine_modes",
           "data_value": "delivered",
           "display": {
-            "text": {
-              "default": "Delivered",
-              "es": "Enviado"
+            "title": {
+              "text": {
+                "default": "Delivered",
+                "es": "Enviado"
+              }
             }
           },
           "_row_num": 54
@@ -1865,9 +2049,11 @@
           "choice_list_name": "vaccine_modes",
           "data_value": "collected",
           "display": {
-            "text": {
-              "default": "Collected",
-              "es": "Collectado"
+            "title": {
+              "text": {
+                "default": "Collected",
+                "es": "Collectado"
+              }
             }
           },
           "_row_num": 55
@@ -1876,9 +2062,11 @@
           "choice_list_name": "vaccine_modes",
           "data_value": "both",
           "display": {
-            "text": {
-              "default": "Both Delivered and Collected",
-              "es": "Enviado y Collectado"
+            "title": {
+              "text": {
+                "default": "Both Delivered and Collected",
+                "es": "Enviado y Collectado"
+              }
             }
           },
           "_row_num": 56
@@ -1887,9 +2075,11 @@
           "choice_list_name": "vaccine_modes",
           "data_value": "none",
           "display": {
-            "text": {
-              "default": "None",
-              "es": "Ninguno"
+            "title": {
+              "text": {
+                "default": "None",
+                "es": "Ninguno"
+              }
             }
           },
           "_row_num": 57
@@ -1898,9 +2088,11 @@
           "choice_list_name": "vaccine_modes",
           "data_value": "unknown",
           "display": {
-            "text": {
-              "default": "Unknown",
-              "es": "Desconocido"
+            "title": {
+              "text": {
+                "default": "Unknown",
+                "es": "Desconocido"
+              }
             }
           },
           "_row_num": 58
@@ -1927,7 +2119,7 @@
         "query_name": "regionLevel1_csv",
         "query_type": "csv",
         "uri": "\"regions1-2.csv\"",
-        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{text:regionLevel1}}; }).value()",
+        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{title:{text:regionLevel1}}}; }).value()",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
@@ -1936,7 +2128,7 @@
         "query_name": "regionLevel2_csv",
         "query_type": "csv",
         "uri": "\"regions1-2.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {title:{text:place.label}}; return place; })",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
@@ -1945,7 +2137,7 @@
         "query_name": "regionLevel3_csv",
         "query_type": "csv",
         "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
@@ -3984,7 +4176,7 @@
         "_aspect": "climate_zone",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"climate_types\",\"data_value\":\"moderate\",\"display\":{\"text\":{\"default\":\"Moderate\",\"es\":\"Moderate\"}},\"_row_num\":41},{\"choice_list_name\":\"climate_types\",\"data_value\":\"temperate\",\"display\":{\"text\":{\"default\":\"Temperate\",\"es\":\"Templado\"}},\"_row_num\":42},{\"choice_list_name\":\"climate_types\",\"data_value\":\"hot\",\"display\":{\"text\":{\"default\":\"Hot\",\"es\":\"Caliente\"}},\"_row_num\":43}]"
+        "_value": "[{\"choice_list_name\":\"climate_types\",\"data_value\":\"moderate\",\"display\":{\"title\":{\"text\":{\"default\":\"Moderate\",\"es\":\"Moderate\"}}},\"_row_num\":41},{\"choice_list_name\":\"climate_types\",\"data_value\":\"temperate\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperate\",\"es\":\"Templado\"}}},\"_row_num\":42},{\"choice_list_name\":\"climate_types\",\"data_value\":\"hot\",\"display\":{\"title\":{\"text\":{\"default\":\"Hot\",\"es\":\"Caliente\"}}},\"_row_num\":43}]"
       },
       {
         "_partition": "Column",
@@ -4005,7 +4197,7 @@
         "_aspect": "delivery_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"delivery_types\",\"data_value\":\"static\",\"display\":{\"text\":{\"default\":\"Static\",\"es\":\"Estático\"}},\"_row_num\":49},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"outreach\",\"display\":{\"text\":{\"default\":\"Outreach\",\"es\":\"Extensión\"}},\"_row_num\":50},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"both\",\"display\":{\"text\":{\"default\":\"Both Static and Outreach\",\"es\":\"Estático y Extensión\"}},\"_row_num\":51},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"none\",\"display\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\"}},\"_row_num\":52}]"
+        "_value": "[{\"choice_list_name\":\"delivery_types\",\"data_value\":\"static\",\"display\":{\"title\":{\"text\":{\"default\":\"Static\",\"es\":\"Estático\"}}},\"_row_num\":49},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Outreach\",\"es\":\"Extensión\"}}},\"_row_num\":50},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Static and Outreach\",\"es\":\"Estático y Extensión\"}}},\"_row_num\":51},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\"}}},\"_row_num\":52}]"
       },
       {
         "_partition": "Column",
@@ -4026,7 +4218,7 @@
         "_aspect": "electricity_source",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"elec_sources\",\"data_value\":\"grid\",\"display\":{\"text\":{\"default\":\"Grid\",\"es\":\"Red\"}},\"_row_num\":24},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"generator\",\"display\":{\"text\":{\"default\":\"Generator\",\"es\":\"Generador\"}},\"_row_num\":25},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both\",\"display\":{\"text\":{\"default\":\"Both Grid and Generator\",\"es\":\"Red y generador\"}},\"_row_num\":26},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"none\",\"display\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\"}},\"_row_num\":27}]"
+        "_value": "[{\"choice_list_name\":\"elec_sources\",\"data_value\":\"grid\",\"display\":{\"title\":{\"text\":{\"default\":\"Grid\",\"es\":\"Red\"}}},\"_row_num\":24},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Generator\",\"es\":\"Generador\"}}},\"_row_num\":25},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Grid and Generator\",\"es\":\"Red y generador\"}}},\"_row_num\":26},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\"}}},\"_row_num\":27}]"
       },
       {
         "_partition": "Column",
@@ -4061,7 +4253,7 @@
         "_aspect": "facility_ownership",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"ownership_types\",\"data_value\":\"public\",\"display\":{\"text\":{\"default\":\"Public\",\"es\":\"Público\"}},\"_row_num\":18},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"private\",\"display\":{\"text\":{\"default\":\"Private\",\"es\":\"Privado\"}},\"_row_num\":19},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"ngo\",\"display\":{\"text\":{\"default\":\"NGO\",\"es\":\"ONG\"}},\"_row_num\":20},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"faithbased\",\"display\":{\"text\":{\"default\":\"Faithbased\",\"es\":\"Basado en fé\"}},\"_row_num\":21},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"other\",\"display\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}},\"_row_num\":22}]"
+        "_value": "[{\"choice_list_name\":\"ownership_types\",\"data_value\":\"public\",\"display\":{\"title\":{\"text\":{\"default\":\"Public\",\"es\":\"Público\"}}},\"_row_num\":18},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"private\",\"display\":{\"title\":{\"text\":{\"default\":\"Private\",\"es\":\"Privado\"}}},\"_row_num\":19},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"ngo\",\"display\":{\"title\":{\"text\":{\"default\":\"NGO\",\"es\":\"ONG\"}}},\"_row_num\":20},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"faithbased\",\"display\":{\"title\":{\"text\":{\"default\":\"Faithbased\",\"es\":\"Basado en fé\"}}},\"_row_num\":21},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":22}]"
       },
       {
         "_partition": "Column",
@@ -4082,7 +4274,7 @@
         "_aspect": "facility_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"facility_types\",\"data_value\":\"national_vaccine_store\",\"display\":{\"text\":{\"default\":\"National vaccine store\",\"es\":\"Tienda nacional de vacunas\"}},\"_row_num\":5},{\"choice_list_name\":\"facility_types\",\"data_value\":\"regional_vaccine_store\",\"display\":{\"text\":{\"default\":\"Regional vaccine store\",\"es\":\"Tienda regional de vacunas\"}},\"_row_num\":6},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_vaccine_store\",\"display\":{\"text\":{\"default\":\"District vaccine store\",\"es\":\"Tienda de vacunas por un distrito\"}},\"_row_num\":7},{\"choice_list_name\":\"facility_types\",\"data_value\":\"central_hospital\",\"display\":{\"text\":{\"default\":\"Central hospital\",\"es\":\"Hospital centrál\"}},\"_row_num\":8},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_hospital\",\"display\":{\"text\":{\"default\":\"District hospital\",\"es\":\"Hospital por un distrito\"}},\"_row_num\":9},{\"choice_list_name\":\"facility_types\",\"data_value\":\"rural_hospital\",\"display\":{\"text\":{\"default\":\"Rural hospital\",\"es\":\"Hospital rurál\"}},\"_row_num\":10},{\"choice_list_name\":\"facility_types\",\"data_value\":\"hospital\",\"display\":{\"text\":{\"default\":\"Hospital\",\"es\":\"Hospital generál\"}},\"_row_num\":11},{\"choice_list_name\":\"facility_types\",\"data_value\":\"community_hospital\",\"display\":{\"text\":{\"default\":\"Community hospital\",\"es\":\"Hospital de comunidad\"}},\"_row_num\":12},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_center\",\"display\":{\"text\":{\"default\":\"Health center\",\"es\":\"Centro de salud\"}},\"_row_num\":13},{\"choice_list_name\":\"facility_types\",\"data_value\":\"dispensary\",\"display\":{\"text\":{\"default\":\"Dispensary\",\"es\":\"Dispensario\"}},\"_row_num\":14},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_post\",\"display\":{\"text\":{\"default\":\"Health post\",\"es\":\"Campamiento de salud\"}},\"_row_num\":15},{\"choice_list_name\":\"facility_types\",\"data_value\":\"maternity\",\"display\":{\"text\":{\"default\":\"Maternity\",\"es\":\"Maternidad\"}},\"_row_num\":16}]"
+        "_value": "[{\"choice_list_name\":\"facility_types\",\"data_value\":\"national_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"National vaccine store\",\"es\":\"Tienda nacional de vacunas\"}}},\"_row_num\":5},{\"choice_list_name\":\"facility_types\",\"data_value\":\"regional_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"Regional vaccine store\",\"es\":\"Tienda regional de vacunas\"}}},\"_row_num\":6},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"District vaccine store\",\"es\":\"Tienda de vacunas por un distrito\"}}},\"_row_num\":7},{\"choice_list_name\":\"facility_types\",\"data_value\":\"central_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Central hospital\",\"es\":\"Hospital centrál\"}}},\"_row_num\":8},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"District hospital\",\"es\":\"Hospital por un distrito\"}}},\"_row_num\":9},{\"choice_list_name\":\"facility_types\",\"data_value\":\"rural_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Rural hospital\",\"es\":\"Hospital rurál\"}}},\"_row_num\":10},{\"choice_list_name\":\"facility_types\",\"data_value\":\"hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Hospital\",\"es\":\"Hospital generál\"}}},\"_row_num\":11},{\"choice_list_name\":\"facility_types\",\"data_value\":\"community_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Community hospital\",\"es\":\"Hospital de comunidad\"}}},\"_row_num\":12},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_center\",\"display\":{\"title\":{\"text\":{\"default\":\"Health center\",\"es\":\"Centro de salud\"}}},\"_row_num\":13},{\"choice_list_name\":\"facility_types\",\"data_value\":\"dispensary\",\"display\":{\"title\":{\"text\":{\"default\":\"Dispensary\",\"es\":\"Dispensario\"}}},\"_row_num\":14},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_post\",\"display\":{\"title\":{\"text\":{\"default\":\"Health post\",\"es\":\"Campamiento de salud\"}}},\"_row_num\":15},{\"choice_list_name\":\"facility_types\",\"data_value\":\"maternity\",\"display\":{\"title\":{\"text\":{\"default\":\"Maternity\",\"es\":\"Maternidad\"}}},\"_row_num\":16}]"
       },
       {
         "_partition": "Column",
@@ -4096,7 +4288,7 @@
         "_aspect": "gas_availability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"available\",\"display\":{\"text\":{\"default\":\"Available\",\"es\":\"Disponible\"}},\"_row_num\":35},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"irregular\",\"display\":{\"text\":{\"default\":\"Irregular\",\"es\":\"Irregular\"}},\"_row_num\":36},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_available\",\"display\":{\"text\":{\"default\":\"Not Available\",\"es\":\"No Disponible\"}},\"_row_num\":37},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"unknown\",\"display\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}},\"_row_num\":38},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_applicable\",\"display\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Applicable\"}},\"_row_num\":39}]"
+        "_value": "[{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"available\",\"display\":{\"title\":{\"text\":{\"default\":\"Available\",\"es\":\"Disponible\"}}},\"_row_num\":35},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"irregular\",\"display\":{\"title\":{\"text\":{\"default\":\"Irregular\",\"es\":\"Irregular\"}}},\"_row_num\":36},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_available\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Available\",\"es\":\"No Disponible\"}}},\"_row_num\":37},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":38},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Applicable\"}}},\"_row_num\":39}]"
       },
       {
         "_partition": "Column",
@@ -4110,7 +4302,7 @@
         "_aspect": "grid_power_availability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"grid\",\"data_value\":\"more_than_16\",\"display\":{\"text\":{\"default\":\"More than 16\",\"es\":\"Más que 16\"}},\"_row_num\":29},{\"choice_list_name\":\"grid\",\"data_value\":\"8_to_16\",\"display\":{\"text\":{\"default\":\"8 to 16\",\"es\":\"8 a 16\"}},\"_row_num\":30},{\"choice_list_name\":\"grid\",\"data_value\":\"4_to_8\",\"display\":{\"text\":{\"default\":\"4 to 8\",\"es\":\"4 a 8\"}},\"_row_num\":31},{\"choice_list_name\":\"grid\",\"data_value\":\"fewer_than_4\",\"display\":{\"text\":{\"default\":\"Fewer than 4\",\"es\":\"Menos que 4\"}},\"_row_num\":32},{\"choice_list_name\":\"grid\",\"data_value\":\"none\",\"display\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\"}},\"_row_num\":33}]"
+        "_value": "[{\"choice_list_name\":\"grid\",\"data_value\":\"more_than_16\",\"display\":{\"title\":{\"text\":{\"default\":\"More than 16\",\"es\":\"Más que 16\"}}},\"_row_num\":29},{\"choice_list_name\":\"grid\",\"data_value\":\"8_to_16\",\"display\":{\"title\":{\"text\":{\"default\":\"8 to 16\",\"es\":\"8 a 16\"}}},\"_row_num\":30},{\"choice_list_name\":\"grid\",\"data_value\":\"4_to_8\",\"display\":{\"title\":{\"text\":{\"default\":\"4 to 8\",\"es\":\"4 a 8\"}}},\"_row_num\":31},{\"choice_list_name\":\"grid\",\"data_value\":\"fewer_than_4\",\"display\":{\"title\":{\"text\":{\"default\":\"Fewer than 4\",\"es\":\"Menos que 4\"}}},\"_row_num\":32},{\"choice_list_name\":\"grid\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\"}}},\"_row_num\":33}]"
       },
       {
         "_partition": "Column",
@@ -4124,7 +4316,7 @@
         "_aspect": "kerosene_availability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"available\",\"display\":{\"text\":{\"default\":\"Available\",\"es\":\"Disponible\"}},\"_row_num\":35},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"irregular\",\"display\":{\"text\":{\"default\":\"Irregular\",\"es\":\"Irregular\"}},\"_row_num\":36},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_available\",\"display\":{\"text\":{\"default\":\"Not Available\",\"es\":\"No Disponible\"}},\"_row_num\":37},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"unknown\",\"display\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}},\"_row_num\":38},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_applicable\",\"display\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Applicable\"}},\"_row_num\":39}]"
+        "_value": "[{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"available\",\"display\":{\"title\":{\"text\":{\"default\":\"Available\",\"es\":\"Disponible\"}}},\"_row_num\":35},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"irregular\",\"display\":{\"title\":{\"text\":{\"default\":\"Irregular\",\"es\":\"Irregular\"}}},\"_row_num\":36},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_available\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Available\",\"es\":\"No Disponible\"}}},\"_row_num\":37},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":38},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Applicable\"}}},\"_row_num\":39}]"
       },
       {
         "_partition": "Column",
@@ -4152,7 +4344,7 @@
         "_aspect": "solar_suitable_climate",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
@@ -4166,7 +4358,7 @@
         "_aspect": "solar_suitable_site",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
@@ -4180,7 +4372,7 @@
         "_aspect": "storage_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"storage_types\",\"data_value\":\"depot\",\"display\":{\"text\":{\"default\":\"Depot\",\"es\":\"Depósito\"}},\"_row_num\":45},{\"choice_list_name\":\"storage_types\",\"data_value\":\"delivery\",\"display\":{\"text\":{\"default\":\"Delivery\",\"es\":\"Depósito y Envío\"}},\"_row_num\":46},{\"choice_list_name\":\"storage_types\",\"data_value\":\"both\",\"display\":{\"text\":{\"default\":\"Both Depot and Delivery\",\"es\":\"Depósito\"}},\"_row_num\":47}]"
+        "_value": "[{\"choice_list_name\":\"storage_types\",\"data_value\":\"depot\",\"display\":{\"title\":{\"text\":{\"default\":\"Depot\",\"es\":\"Depósito\"}}},\"_row_num\":45},{\"choice_list_name\":\"storage_types\",\"data_value\":\"delivery\",\"display\":{\"title\":{\"text\":{\"default\":\"Delivery\",\"es\":\"Depósito y Envío\"}}},\"_row_num\":46},{\"choice_list_name\":\"storage_types\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Depot and Delivery\",\"es\":\"Depósito\"}}},\"_row_num\":47}]"
       },
       {
         "_partition": "Column",
@@ -4208,7 +4400,7 @@
         "_aspect": "vaccine_supply_mode",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"delivered\",\"display\":{\"text\":{\"default\":\"Delivered\",\"es\":\"Enviado\"}},\"_row_num\":54},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"collected\",\"display\":{\"text\":{\"default\":\"Collected\",\"es\":\"Collectado\"}},\"_row_num\":55},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"both\",\"display\":{\"text\":{\"default\":\"Both Delivered and Collected\",\"es\":\"Enviado y Collectado\"}},\"_row_num\":56},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"none\",\"display\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\"}},\"_row_num\":57},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"unknown\",\"display\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}},\"_row_num\":58}]"
+        "_value": "[{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"delivered\",\"display\":{\"title\":{\"text\":{\"default\":\"Delivered\",\"es\":\"Enviado\"}}},\"_row_num\":54},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"collected\",\"display\":{\"title\":{\"text\":{\"default\":\"Collected\",\"es\":\"Collectado\"}}},\"_row_num\":55},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Delivered and Collected\",\"es\":\"Enviado y Collectado\"}}},\"_row_num\":56},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\"}}},\"_row_num\":57},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":58}]"
       },
       {
         "_partition": "Column",

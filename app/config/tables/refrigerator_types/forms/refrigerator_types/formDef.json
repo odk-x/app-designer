@@ -267,9 +267,11 @@
         "choice_list_name": "power_sources",
         "data_value": "electricity",
         "display": {
-          "text": {
-            "default": "Electricity",
-            "es": "Electricidad"
+          "title": {
+            "text": {
+              "default": "Electricity",
+              "es": "Electricidad"
+            }
           }
         },
         "_row_num": 2
@@ -278,9 +280,11 @@
         "choice_list_name": "power_sources",
         "data_value": "kerosene",
         "display": {
-          "text": {
-            "default": "Kerosene",
-            "es": "Queroseno"
+          "title": {
+            "text": {
+              "default": "Kerosene",
+              "es": "Queroseno"
+            }
           }
         },
         "_row_num": 3
@@ -289,9 +293,11 @@
         "choice_list_name": "power_sources",
         "data_value": "gas",
         "display": {
-          "text": {
-            "default": "Gas",
-            "es": "Combustible"
+          "title": {
+            "text": {
+              "default": "Gas",
+              "es": "Combustible"
+            }
           }
         },
         "_row_num": 4
@@ -300,9 +306,11 @@
         "choice_list_name": "power_sources",
         "data_value": "solar",
         "display": {
-          "text": {
-            "default": "Solar",
-            "es": "Solár"
+          "title": {
+            "text": {
+              "default": "Solar",
+              "es": "Solár"
+            }
           }
         },
         "_row_num": 5
@@ -311,9 +319,11 @@
         "choice_list_name": "power_sources",
         "data_value": "unknown",
         "display": {
-          "text": {
-            "default": "Unknown",
-            "es": "Desconocido"
+          "title": {
+            "text": {
+              "default": "Unknown",
+              "es": "Desconocido"
+            }
           }
         },
         "_row_num": 6
@@ -322,9 +332,11 @@
         "choice_list_name": "equipment_types",
         "data_value": "chest_refrigerator",
         "display": {
-          "text": {
-            "default": "Chest Refrigerator",
-            "es": "Frigorífico de baúl"
+          "title": {
+            "text": {
+              "default": "Chest Refrigerator",
+              "es": "Frigorífico de baúl"
+            }
           }
         },
         "_row_num": 8
@@ -333,9 +345,11 @@
         "choice_list_name": "equipment_types",
         "data_value": "chest_freezer",
         "display": {
-          "text": {
-            "default": "Chest Freezer",
-            "es": "Congelador de baúl"
+          "title": {
+            "text": {
+              "default": "Chest Freezer",
+              "es": "Congelador de baúl"
+            }
           }
         },
         "_row_num": 9
@@ -344,9 +358,11 @@
         "choice_list_name": "equipment_types",
         "data_value": "upright_refrigerator",
         "display": {
-          "text": {
-            "default": "Upright Refrigerator",
-            "es": "Frigorífico fijo"
+          "title": {
+            "text": {
+              "default": "Upright Refrigerator",
+              "es": "Frigorífico fijo"
+            }
           }
         },
         "_row_num": 10
@@ -355,9 +371,11 @@
         "choice_list_name": "equipment_types",
         "data_value": "ice_pack_freezer",
         "display": {
-          "text": {
-            "default": "Ice Pack Freezer",
-            "es": "Congelador de bloque de hielo"
+          "title": {
+            "text": {
+              "default": "Ice Pack Freezer",
+              "es": "Congelador de bloque de hielo"
+            }
           }
         },
         "_row_num": 11
@@ -366,9 +384,11 @@
         "choice_list_name": "equipment_types",
         "data_value": "ice_lined_refrigerator",
         "display": {
-          "text": {
-            "default": "Ice Lined Refrigerator",
-            "es": "Congelador lineado con hielo"
+          "title": {
+            "text": {
+              "default": "Ice Lined Refrigerator",
+              "es": "Congelador lineado con hielo"
+            }
           }
         },
         "_row_num": 12
@@ -377,9 +397,11 @@
         "choice_list_name": "equipment_types",
         "data_value": "solar_photovoltaic_refrigerator",
         "display": {
-          "text": {
-            "default": "Solar Photovoltaic Refrigerator",
-            "es": "Frigorífico de solár"
+          "title": {
+            "text": {
+              "default": "Solar Photovoltaic Refrigerator",
+              "es": "Frigorífico de solár"
+            }
           }
         },
         "_row_num": 13
@@ -388,9 +410,11 @@
         "choice_list_name": "equipment_types",
         "data_value": "solar_thermal_refrigerator",
         "display": {
-          "text": {
-            "default": "Solar Thermal Refrigerator",
-            "es": "Frigorífico termal"
+          "title": {
+            "text": {
+              "default": "Solar Thermal Refrigerator",
+              "es": "Frigorífico termal"
+            }
           }
         },
         "_row_num": 14
@@ -399,9 +423,11 @@
         "choice_list_name": "climate_zones",
         "data_value": "moderate",
         "display": {
-          "text": {
-            "default": "Moderate",
-            "es": "Moderate"
+          "title": {
+            "text": {
+              "default": "Moderate",
+              "es": "Moderate"
+            }
           }
         },
         "_row_num": 16
@@ -410,9 +436,11 @@
         "choice_list_name": "climate_zones",
         "data_value": "temperate",
         "display": {
-          "text": {
-            "default": "Temperate",
-            "es": "Templado"
+          "title": {
+            "text": {
+              "default": "Temperate",
+              "es": "Templado"
+            }
           }
         },
         "_row_num": 17
@@ -421,9 +449,11 @@
         "choice_list_name": "climate_zones",
         "data_value": "hot",
         "display": {
-          "text": {
-            "default": "Hot",
-            "es": "Caliente"
+          "title": {
+            "text": {
+              "default": "Hot",
+              "es": "Caliente"
+            }
           }
         },
         "_row_num": 18
@@ -490,7 +520,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170717,
+        "value": 20170718,
         "_row_num": 8
       },
       {
@@ -570,7 +600,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170717,
+        "value": 20170718,
         "_row_num": 8
       },
       "english": {
@@ -643,9 +673,11 @@
           "choice_list_name": "power_sources",
           "data_value": "electricity",
           "display": {
-            "text": {
-              "default": "Electricity",
-              "es": "Electricidad"
+            "title": {
+              "text": {
+                "default": "Electricity",
+                "es": "Electricidad"
+              }
             }
           },
           "_row_num": 2
@@ -654,9 +686,11 @@
           "choice_list_name": "power_sources",
           "data_value": "kerosene",
           "display": {
-            "text": {
-              "default": "Kerosene",
-              "es": "Queroseno"
+            "title": {
+              "text": {
+                "default": "Kerosene",
+                "es": "Queroseno"
+              }
             }
           },
           "_row_num": 3
@@ -665,9 +699,11 @@
           "choice_list_name": "power_sources",
           "data_value": "gas",
           "display": {
-            "text": {
-              "default": "Gas",
-              "es": "Combustible"
+            "title": {
+              "text": {
+                "default": "Gas",
+                "es": "Combustible"
+              }
             }
           },
           "_row_num": 4
@@ -676,9 +712,11 @@
           "choice_list_name": "power_sources",
           "data_value": "solar",
           "display": {
-            "text": {
-              "default": "Solar",
-              "es": "Solár"
+            "title": {
+              "text": {
+                "default": "Solar",
+                "es": "Solár"
+              }
             }
           },
           "_row_num": 5
@@ -687,9 +725,11 @@
           "choice_list_name": "power_sources",
           "data_value": "unknown",
           "display": {
-            "text": {
-              "default": "Unknown",
-              "es": "Desconocido"
+            "title": {
+              "text": {
+                "default": "Unknown",
+                "es": "Desconocido"
+              }
             }
           },
           "_row_num": 6
@@ -700,9 +740,11 @@
           "choice_list_name": "equipment_types",
           "data_value": "chest_refrigerator",
           "display": {
-            "text": {
-              "default": "Chest Refrigerator",
-              "es": "Frigorífico de baúl"
+            "title": {
+              "text": {
+                "default": "Chest Refrigerator",
+                "es": "Frigorífico de baúl"
+              }
             }
           },
           "_row_num": 8
@@ -711,9 +753,11 @@
           "choice_list_name": "equipment_types",
           "data_value": "chest_freezer",
           "display": {
-            "text": {
-              "default": "Chest Freezer",
-              "es": "Congelador de baúl"
+            "title": {
+              "text": {
+                "default": "Chest Freezer",
+                "es": "Congelador de baúl"
+              }
             }
           },
           "_row_num": 9
@@ -722,9 +766,11 @@
           "choice_list_name": "equipment_types",
           "data_value": "upright_refrigerator",
           "display": {
-            "text": {
-              "default": "Upright Refrigerator",
-              "es": "Frigorífico fijo"
+            "title": {
+              "text": {
+                "default": "Upright Refrigerator",
+                "es": "Frigorífico fijo"
+              }
             }
           },
           "_row_num": 10
@@ -733,9 +779,11 @@
           "choice_list_name": "equipment_types",
           "data_value": "ice_pack_freezer",
           "display": {
-            "text": {
-              "default": "Ice Pack Freezer",
-              "es": "Congelador de bloque de hielo"
+            "title": {
+              "text": {
+                "default": "Ice Pack Freezer",
+                "es": "Congelador de bloque de hielo"
+              }
             }
           },
           "_row_num": 11
@@ -744,9 +792,11 @@
           "choice_list_name": "equipment_types",
           "data_value": "ice_lined_refrigerator",
           "display": {
-            "text": {
-              "default": "Ice Lined Refrigerator",
-              "es": "Congelador lineado con hielo"
+            "title": {
+              "text": {
+                "default": "Ice Lined Refrigerator",
+                "es": "Congelador lineado con hielo"
+              }
             }
           },
           "_row_num": 12
@@ -755,9 +805,11 @@
           "choice_list_name": "equipment_types",
           "data_value": "solar_photovoltaic_refrigerator",
           "display": {
-            "text": {
-              "default": "Solar Photovoltaic Refrigerator",
-              "es": "Frigorífico de solár"
+            "title": {
+              "text": {
+                "default": "Solar Photovoltaic Refrigerator",
+                "es": "Frigorífico de solár"
+              }
             }
           },
           "_row_num": 13
@@ -766,9 +818,11 @@
           "choice_list_name": "equipment_types",
           "data_value": "solar_thermal_refrigerator",
           "display": {
-            "text": {
-              "default": "Solar Thermal Refrigerator",
-              "es": "Frigorífico termal"
+            "title": {
+              "text": {
+                "default": "Solar Thermal Refrigerator",
+                "es": "Frigorífico termal"
+              }
             }
           },
           "_row_num": 14
@@ -779,9 +833,11 @@
           "choice_list_name": "climate_zones",
           "data_value": "moderate",
           "display": {
-            "text": {
-              "default": "Moderate",
-              "es": "Moderate"
+            "title": {
+              "text": {
+                "default": "Moderate",
+                "es": "Moderate"
+              }
             }
           },
           "_row_num": 16
@@ -790,9 +846,11 @@
           "choice_list_name": "climate_zones",
           "data_value": "temperate",
           "display": {
-            "text": {
-              "default": "Temperate",
-              "es": "Templado"
+            "title": {
+              "text": {
+                "default": "Temperate",
+                "es": "Templado"
+              }
             }
           },
           "_row_num": 17
@@ -801,9 +859,11 @@
           "choice_list_name": "climate_zones",
           "data_value": "hot",
           "display": {
-            "text": {
-              "default": "Hot",
-              "es": "Caliente"
+            "title": {
+              "text": {
+                "default": "Hot",
+                "es": "Caliente"
+              }
             }
           },
           "_row_num": 18
@@ -2002,7 +2062,7 @@
         "_aspect": "climate_zone",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"climate_zones\",\"data_value\":\"moderate\",\"display\":{\"text\":{\"default\":\"Moderate\",\"es\":\"Moderate\"}},\"_row_num\":16},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"temperate\",\"display\":{\"text\":{\"default\":\"Temperate\",\"es\":\"Templado\"}},\"_row_num\":17},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"hot\",\"display\":{\"text\":{\"default\":\"Hot\",\"es\":\"Caliente\"}},\"_row_num\":18}]"
+        "_value": "[{\"choice_list_name\":\"climate_zones\",\"data_value\":\"moderate\",\"display\":{\"title\":{\"text\":{\"default\":\"Moderate\",\"es\":\"Moderate\"}}},\"_row_num\":16},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"temperate\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperate\",\"es\":\"Templado\"}}},\"_row_num\":17},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"hot\",\"display\":{\"title\":{\"text\":{\"default\":\"Hot\",\"es\":\"Caliente\"}}},\"_row_num\":18}]"
       },
       {
         "_partition": "Column",
@@ -2016,7 +2076,7 @@
         "_aspect": "equipment_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_refrigerator\",\"display\":{\"text\":{\"default\":\"Chest Refrigerator\",\"es\":\"Frigorífico de baúl\"}},\"_row_num\":8},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_freezer\",\"display\":{\"text\":{\"default\":\"Chest Freezer\",\"es\":\"Congelador de baúl\"}},\"_row_num\":9},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"upright_refrigerator\",\"display\":{\"text\":{\"default\":\"Upright Refrigerator\",\"es\":\"Frigorífico fijo\"}},\"_row_num\":10},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_pack_freezer\",\"display\":{\"text\":{\"default\":\"Ice Pack Freezer\",\"es\":\"Congelador de bloque de hielo\"}},\"_row_num\":11},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_lined_refrigerator\",\"display\":{\"text\":{\"default\":\"Ice Lined Refrigerator\",\"es\":\"Congelador lineado con hielo\"}},\"_row_num\":12},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_photovoltaic_refrigerator\",\"display\":{\"text\":{\"default\":\"Solar Photovoltaic Refrigerator\",\"es\":\"Frigorífico de solár\"}},\"_row_num\":13},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_thermal_refrigerator\",\"display\":{\"text\":{\"default\":\"Solar Thermal Refrigerator\",\"es\":\"Frigorífico termal\"}},\"_row_num\":14}]"
+        "_value": "[{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Chest Refrigerator\",\"es\":\"Frigorífico de baúl\"}}},\"_row_num\":8},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_freezer\",\"display\":{\"title\":{\"text\":{\"default\":\"Chest Freezer\",\"es\":\"Congelador de baúl\"}}},\"_row_num\":9},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"upright_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Upright Refrigerator\",\"es\":\"Frigorífico fijo\"}}},\"_row_num\":10},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_pack_freezer\",\"display\":{\"title\":{\"text\":{\"default\":\"Ice Pack Freezer\",\"es\":\"Congelador de bloque de hielo\"}}},\"_row_num\":11},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_lined_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Ice Lined Refrigerator\",\"es\":\"Congelador lineado con hielo\"}}},\"_row_num\":12},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_photovoltaic_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar Photovoltaic Refrigerator\",\"es\":\"Frigorífico de solár\"}}},\"_row_num\":13},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_thermal_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar Thermal Refrigerator\",\"es\":\"Frigorífico termal\"}}},\"_row_num\":14}]"
       },
       {
         "_partition": "Column",
@@ -2058,7 +2118,7 @@
         "_aspect": "power_source",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"power_sources\",\"data_value\":\"electricity\",\"display\":{\"text\":{\"default\":\"Electricity\",\"es\":\"Electricidad\"}},\"_row_num\":2},{\"choice_list_name\":\"power_sources\",\"data_value\":\"kerosene\",\"display\":{\"text\":{\"default\":\"Kerosene\",\"es\":\"Queroseno\"}},\"_row_num\":3},{\"choice_list_name\":\"power_sources\",\"data_value\":\"gas\",\"display\":{\"text\":{\"default\":\"Gas\",\"es\":\"Combustible\"}},\"_row_num\":4},{\"choice_list_name\":\"power_sources\",\"data_value\":\"solar\",\"display\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solár\"}},\"_row_num\":5},{\"choice_list_name\":\"power_sources\",\"data_value\":\"unknown\",\"display\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"power_sources\",\"data_value\":\"electricity\",\"display\":{\"title\":{\"text\":{\"default\":\"Electricity\",\"es\":\"Electricidad\"}}},\"_row_num\":2},{\"choice_list_name\":\"power_sources\",\"data_value\":\"kerosene\",\"display\":{\"title\":{\"text\":{\"default\":\"Kerosene\",\"es\":\"Queroseno\"}}},\"_row_num\":3},{\"choice_list_name\":\"power_sources\",\"data_value\":\"gas\",\"display\":{\"title\":{\"text\":{\"default\":\"Gas\",\"es\":\"Combustible\"}}},\"_row_num\":4},{\"choice_list_name\":\"power_sources\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solár\"}}},\"_row_num\":5},{\"choice_list_name\":\"power_sources\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
