@@ -1,0 +1,1335 @@
+{
+  "xlsx": {
+    "initial": [
+      {
+        "clause": "do section survey",
+        "_row_num": 2
+      }
+    ],
+    "survey": [
+      {
+        "clause": "exit section",
+        "_row_num": 2
+      }
+    ],
+    "settings": [
+      {
+        "setting_name": "table_id",
+        "value": "framework",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "form_id",
+        "value": "framework",
+        "comments": "The unique form id.",
+        "_row_num": 3
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20170718,
+        "comments": "The version of this form",
+        "_row_num": 4
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Common Javascript Framework",
+              "es": "Esquema General de Javascript",
+              "default": "Common Javascript Framework"
+            }
+          }
+        },
+        "comments": "The title of the 'survey' section (a.k.a. form title)",
+        "showContents": 0,
+        "_row_num": 5
+      },
+      {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "English",
+              "es": "Inglés",
+              "default": "English"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "setting_name": "es",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Spanish",
+              "es": "Español",
+              "default": "Spanish"
+            }
+          }
+        },
+        "_row_num": 8
+      },
+      {
+        "setting_name": "framework_variant",
+        "_row_num": 9
+      }
+    ],
+    "framework_translations": [
+      {
+        "string_token": "constraint_message",
+        "text": {
+          "default": "Constraint violated.",
+          "es": "Restricción inválido"
+        },
+        "_row_num": 2
+      },
+      {
+        "string_token": "invalid_value_message",
+        "text": {
+          "default": "Invalid value.",
+          "es": "Dato inválido"
+        },
+        "_row_num": 3
+      },
+      {
+        "string_token": "required_message",
+        "text": {
+          "default": "Required value not provided.",
+          "es": "Dato requirido no encontrado"
+        },
+        "_row_num": 4
+      },
+      {
+        "string_token": "required_exception_message",
+        "text": {
+          "default": "Exception while evaluating required() expression. See console log.",
+          "es": "Error al evaluar expresión required()"
+        },
+        "_row_num": 5
+      },
+      {
+        "string_token": "constraint_exception_message",
+        "text": {
+          "default": "Exception while evaluating constraint() expression. See console log.",
+          "es": "Error al evaluar expresión constraint()"
+        },
+        "_row_num": 6
+      },
+      {
+        "string_token": "acknLabel",
+        "text": {
+          "default": "Acknowledge",
+          "es": "Aceptar"
+        },
+        "_row_num": 7
+      },
+      {
+        "string_token": "back_button_label",
+        "text": {
+          "default": "Back",
+          "es": "Retraso"
+        },
+        "_row_num": 8
+      },
+      {
+        "string_token": "next_button_label",
+        "text": {
+          "default": "Next",
+          "es": "Siguiente"
+        },
+        "_row_num": 9
+      },
+      {
+        "string_token": "continue_button_label",
+        "text": {
+          "default": "Continue",
+          "es": "Continuar"
+        },
+        "_row_num": 10
+      },
+      {
+        "string_token": "select_one_dropdown_label",
+        "text": {
+          "default": "Choose Option",
+          "es": "Eligir Opción"
+        },
+        "_row_num": 11
+      },
+      {
+        "string_token": "requiredValueErr",
+        "text": {
+          "default": "Required value was not provided.",
+          "es": "Dato requirido no encontrado"
+        },
+        "_row_num": 12
+      },
+      {
+        "string_token": "geopoint_button_label",
+        "text": {
+          "default": "Record Location",
+          "es": "Grabar Ubicación"
+        },
+        "_row_num": 13
+      },
+      {
+        "string_token": "geopoint_latitude_component",
+        "text": {
+          "default": "Latitude: {{value.latitude}}",
+          "es": "Latitud: {{value.latitude}}"
+        },
+        "_row_num": 14
+      },
+      {
+        "string_token": "geopoint_longitude_component",
+        "text": {
+          "default": "Longitude: {{value.longitude}}",
+          "es": "Longitud: {{value.longitude}}"
+        },
+        "_row_num": 15
+      },
+      {
+        "string_token": "geopoint_altitude_component",
+        "text": {
+          "default": "Altitude: {{value.altitude}}",
+          "es": "Altura: {{value.altitude}}"
+        },
+        "_row_num": 16
+      },
+      {
+        "string_token": "geopoint_accuracy_component",
+        "text": {
+          "default": "Accuracy: {{value.accuracy}}",
+          "es": "Exactitud: {{value.accuracy}}"
+        },
+        "_row_num": 17
+      },
+      {
+        "string_token": "waiting_text",
+        "text": {
+          "default": "Please wait…",
+          "es": "Cargando…"
+        },
+        "_row_num": 18
+      },
+      {
+        "string_token": "take_video_button_label",
+        "text": {
+          "default": "Take Video",
+          "es": "Grabar Video"
+        },
+        "_row_num": 19
+      },
+      {
+        "string_token": "choose_video_button_label",
+        "text": {
+          "default": "Choose Video",
+          "es": "Eligir Video"
+        },
+        "_row_num": 20
+      },
+      {
+        "string_token": "video_control_not_supported",
+        "text": {
+          "default": "Video controls are not supported.",
+          "es": "No se puede controlar el video"
+        },
+        "_row_num": 21
+      },
+      {
+        "string_token": "take_audio_button_label",
+        "text": {
+          "default": "Capture Audio",
+          "es": "Grabar Audio"
+        },
+        "_row_num": 22
+      },
+      {
+        "string_token": "choose_audio_button_label",
+        "text": {
+          "default": "Choose Audio",
+          "es": "Eligir Audio"
+        },
+        "_row_num": 23
+      },
+      {
+        "string_token": "audio_control_not_supported",
+        "text": {
+          "default": "Audio controls are not supported.",
+          "es": "No se puede controlar el audio"
+        },
+        "_row_num": 24
+      },
+      {
+        "string_token": "confirm_action_no_label",
+        "text": {
+          "default": "NO",
+          "es": "No se puede controlar el audio"
+        },
+        "_row_num": 25
+      },
+      {
+        "string_token": "confirm_action_yes_label",
+        "text": {
+          "default": "YES",
+          "es": "Sí"
+        },
+        "_row_num": 26
+      },
+      {
+        "string_token": "external_link_button_label",
+        "text": {
+          "default": "Follow link",
+          "es": "Seguir enlance"
+        },
+        "_row_num": 27
+      },
+      {
+        "string_token": "survey_form_identification",
+        "text": {
+          "default": "<div><center>ODK Survey</center><hr></div><div><p>Form name: {{localizeText form_title}}</p>{{#if form_version}}<p>Form version: {{form_version}}</p>{{/if}}<hr></div>",
+          "es": "<div><center>ODK Estudio</center><hr></div><div><p>Nombre: {{localizeText form_title}}</p>{{#if form_version}}<p>Revisión: {{form_version}}</p>{{/if}}<hr></div>"
+        },
+        "_row_num": 28
+      },
+      {
+        "string_token": "finalize_survey_instance_detail",
+        "text": {
+          "default": "<p>You are at the end of instance: </p><p>\"{{display_field}}\"</p><hr>",
+          "es": "<p>Este es el fín del caso \"{{display_field}}\"</p><hr>"
+        },
+        "_row_num": 29
+      },
+      {
+        "string_token": "finalize_survey_button_label",
+        "text": {
+          "default": "Finalize",
+          "es": "Finalizar"
+        },
+        "_row_num": 30
+      },
+      {
+        "string_token": "save_as_incomplete_survey_button_label",
+        "text": {
+          "default": "Incomplete",
+          "es": "No completado"
+        },
+        "_row_num": 31
+      },
+      {
+        "string_token": "take_image_button_label",
+        "text": {
+          "default": "Take Photo",
+          "es": "Grabar Foto"
+        },
+        "_row_num": 33
+      },
+      {
+        "string_token": "choose_image_button_label",
+        "text": {
+          "default": "Choose Image",
+          "es": "Eligir Foto"
+        },
+        "_row_num": 34
+      },
+      {
+        "string_token": "launch_intent_button_label",
+        "text": {
+          "default": "Launch Intent",
+          "es": "Lanzar Intento"
+        },
+        "_row_num": 35
+      },
+      {
+        "string_token": "opening_survey_instance_detail",
+        "text": {
+          "default": "{{#if display_field}}&#10;        <p>You are at the start of instance: </p>&#10;        <p>\"{{display_field}}\"</p> &#10;  {{else}}&#10;        <p>You are at the start of a new instance.</p>&#10;  {{/if}}&#10;        <hr>&#10;        {{#if last_save_date}}&#10;            <p>Last saved:</p> &#10;            <p>{{last_save_date}}</p>&#10;        {{/if}}&#10;        <hr>&#10;",
+          "es": "{{#if display_field}}&#10;        <p>Estás en el empezando del caso \"{{display_field}}\"</p> &#10;  {{else}}&#10;        <p>Estás haciendo un caso nuevo.</p>&#10;  {{/if}}&#10;        <hr>&#10;        {{#if last_save_date}}&#10;            <p>Guardado {{last_save_date}}</p>&#10;        {{/if}}&#10;        <hr>&#10;"
+        },
+        "_row_num": 36
+      },
+      {
+        "string_token": "opening_survey_next_button_label",
+        "text": {
+          "default": "Go to next prompt",
+          "es": "¡Adelante!"
+        },
+        "_row_num": 37
+      },
+      {
+        "string_token": "options_popup_language_heading",
+        "text": {
+          "default": "Language",
+          "es": "Idioma"
+        },
+        "_row_num": 38
+      },
+      {
+        "string_token": "options_popup_contents_heading",
+        "text": {
+          "default": "Contents",
+          "es": "Sumario"
+        },
+        "_row_num": 39
+      },
+      {
+        "string_token": "options_popup_ignore_changes_heading",
+        "text": {
+          "default": "Ignore Changes + Exit",
+          "es": "Ignorar cambios y salir"
+        },
+        "_row_num": 40
+      },
+      {
+        "string_token": "options_popup_save_changes_heading",
+        "text": {
+          "default": "Save Changes + Exit",
+          "es": "Guardar cambios y salir"
+        },
+        "_row_num": 41
+      },
+      {
+        "string_token": "options_popup_finalize_changes_heading",
+        "text": {
+          "default": "Finalize Changes + Exit",
+          "es": "Finalizar cambios y salir"
+        },
+        "_row_num": 42
+      },
+      {
+        "string_token": "screen_popup_ok_button_label",
+        "text": {
+          "default": "OK",
+          "es": "OK"
+        },
+        "_row_num": 43
+      },
+      {
+        "string_token": "select_with_other_other_label",
+        "text": {
+          "default": "Other:",
+          "es": "Otro:"
+        },
+        "_row_num": 44
+      },
+      {
+        "string_token": "select_deselect_label",
+        "text": {
+          "default": "Deselect",
+          "es": "Deselegir"
+        },
+        "_row_num": 45
+      },
+      {
+        "string_token": "take_signature_button_label",
+        "text": {
+          "default": "Get Signature",
+          "es": "Grabar Firma"
+        },
+        "_row_num": 46
+      },
+      {
+        "string_token": "instances_survey_create_button_label",
+        "text": {
+          "default": "Create new instance",
+          "es": "Hacer Caso Nuevo"
+        },
+        "_row_num": 47
+      },
+      {
+        "string_token": "instances_no_saved_instances_label",
+        "text": {
+          "default": "No saved instances.",
+          "es": "Sin Casos Guardados"
+        },
+        "_row_num": 48
+      },
+      {
+        "string_token": "instances_last_save_date_label",
+        "text": {
+          "default": "<p><strong>Last Save Date:</strong></p>",
+          "es": "<p><strong>Guardado:</strong></p>"
+        },
+        "_row_num": 49
+      },
+      {
+        "string_token": "instances_previously_created_instances_label",
+        "text": {
+          "default": "<p>Previously created instances:</p>",
+          "es": "<p>Guardados previos:</p>"
+        },
+        "_row_num": 50
+      },
+      {
+        "string_token": "savepoint_type_finalized_text_label",
+        "text": {
+          "default": "Finalized",
+          "es": "Finalizado"
+        },
+        "_row_num": 51
+      },
+      {
+        "string_token": "savepoint_type_incomplete_text_label",
+        "text": {
+          "default": "Incomplete",
+          "es": "No completado"
+        },
+        "_row_num": 52
+      },
+      {
+        "string_token": "savepoint_type_checkpoint_text_label",
+        "text": {
+          "default": "Checkpoint",
+          "es": "Guardado en parte"
+        },
+        "_row_num": 53
+      },
+      {
+        "string_token": "linked_table_new_instance_label",
+        "text": {
+          "default": "Create new instance",
+          "es": "Hacer Caso Nuevo"
+        },
+        "_row_num": 54
+      },
+      {
+        "string_token": "barcode_button_label",
+        "text": {
+          "default": "Scan Barcode",
+          "es": "Grabar códingo de barras"
+        },
+        "_row_num": 55
+      },
+      {
+        "string_token": "invalid_numeric_message",
+        "text": {
+          "default": "Numeric value expected",
+          "es": "Dato numérico esperado"
+        },
+        "_row_num": 56
+      },
+      {
+        "string_token": "invalid_integer_message",
+        "text": {
+          "default": "Integer value expected",
+          "es": "Número entero esperado"
+        },
+        "_row_num": 57
+      }
+    ]
+  },
+  "specification": {
+    "column_types": {
+      "_screen_block": "function",
+      "condition": "formula",
+      "constraint": "formula",
+      "required": "formula",
+      "calculation": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
+      "selectionArgs": "formula",
+      "url": "formula",
+      "uri": "formula",
+      "callback": "formula(context)",
+      "choice_filter": "formula(choice_item)",
+      "templatePath": "requirejs_path"
+    },
+    "settings": {
+      "table_id": {
+        "setting_name": "table_id",
+        "value": "framework",
+        "_row_num": 2
+      },
+      "form_id": {
+        "setting_name": "form_id",
+        "value": "framework",
+        "comments": "The unique form id.",
+        "_row_num": 3
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 20170718,
+        "comments": "The version of this form",
+        "_row_num": 4
+      },
+      "survey": {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Common Javascript Framework",
+              "es": "Esquema General de Javascript",
+              "default": "Common Javascript Framework"
+            }
+          }
+        },
+        "comments": "The title of the 'survey' section (a.k.a. form title)",
+        "showContents": 0,
+        "_row_num": 5
+      },
+      "english": {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "English",
+              "es": "Inglés",
+              "default": "English"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      "es": {
+        "setting_name": "es",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Spanish",
+              "es": "Español",
+              "default": "Spanish"
+            }
+          }
+        },
+        "_row_num": 8
+      },
+      "framework_variant": {
+        "setting_name": "framework_variant",
+        "_row_num": 9
+      },
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 5,
+        "value": [
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "English",
+                  "es": "Inglés",
+                  "default": "English"
+                }
+              }
+            },
+            "_row_num": 7,
+            "name": "english"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Spanish",
+                  "es": "Español",
+                  "default": "Spanish"
+                }
+              }
+            },
+            "_row_num": 8,
+            "name": "es"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 5,
+        "value": "english"
+      },
+      "initial": {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Common Javascript Framework",
+              "es": "Esquema General de Javascript",
+              "default": "Common Javascript Framework"
+            }
+          }
+        },
+        "comments": "The title of the 'survey' section (a.k.a. form title)",
+        "showContents": 0,
+        "_row_num": 5
+      }
+    },
+    "choices": {},
+    "framework_definitions": {
+      "_tokens": {
+        "constraint_message": {
+          "string_token": "constraint_message",
+          "text": {
+            "default": "Constraint violated.",
+            "es": "Restricción inválido"
+          },
+          "_row_num": 2
+        },
+        "invalid_value_message": {
+          "string_token": "invalid_value_message",
+          "text": {
+            "default": "Invalid value.",
+            "es": "Dato inválido"
+          },
+          "_row_num": 3
+        },
+        "required_message": {
+          "string_token": "required_message",
+          "text": {
+            "default": "Required value not provided.",
+            "es": "Dato requirido no encontrado"
+          },
+          "_row_num": 4
+        },
+        "required_exception_message": {
+          "string_token": "required_exception_message",
+          "text": {
+            "default": "Exception while evaluating required() expression. See console log.",
+            "es": "Error al evaluar expresión required()"
+          },
+          "_row_num": 5
+        },
+        "constraint_exception_message": {
+          "string_token": "constraint_exception_message",
+          "text": {
+            "default": "Exception while evaluating constraint() expression. See console log.",
+            "es": "Error al evaluar expresión constraint()"
+          },
+          "_row_num": 6
+        },
+        "acknLabel": {
+          "string_token": "acknLabel",
+          "text": {
+            "default": "Acknowledge",
+            "es": "Aceptar"
+          },
+          "_row_num": 7
+        },
+        "back_button_label": {
+          "string_token": "back_button_label",
+          "text": {
+            "default": "Back",
+            "es": "Retraso"
+          },
+          "_row_num": 8
+        },
+        "next_button_label": {
+          "string_token": "next_button_label",
+          "text": {
+            "default": "Next",
+            "es": "Siguiente"
+          },
+          "_row_num": 9
+        },
+        "continue_button_label": {
+          "string_token": "continue_button_label",
+          "text": {
+            "default": "Continue",
+            "es": "Continuar"
+          },
+          "_row_num": 10
+        },
+        "select_one_dropdown_label": {
+          "string_token": "select_one_dropdown_label",
+          "text": {
+            "default": "Choose Option",
+            "es": "Eligir Opción"
+          },
+          "_row_num": 11
+        },
+        "requiredValueErr": {
+          "string_token": "requiredValueErr",
+          "text": {
+            "default": "Required value was not provided.",
+            "es": "Dato requirido no encontrado"
+          },
+          "_row_num": 12
+        },
+        "geopoint_button_label": {
+          "string_token": "geopoint_button_label",
+          "text": {
+            "default": "Record Location",
+            "es": "Grabar Ubicación"
+          },
+          "_row_num": 13
+        },
+        "geopoint_latitude_component": {
+          "string_token": "geopoint_latitude_component",
+          "text": {
+            "default": "Latitude: {{value.latitude}}",
+            "es": "Latitud: {{value.latitude}}"
+          },
+          "_row_num": 14
+        },
+        "geopoint_longitude_component": {
+          "string_token": "geopoint_longitude_component",
+          "text": {
+            "default": "Longitude: {{value.longitude}}",
+            "es": "Longitud: {{value.longitude}}"
+          },
+          "_row_num": 15
+        },
+        "geopoint_altitude_component": {
+          "string_token": "geopoint_altitude_component",
+          "text": {
+            "default": "Altitude: {{value.altitude}}",
+            "es": "Altura: {{value.altitude}}"
+          },
+          "_row_num": 16
+        },
+        "geopoint_accuracy_component": {
+          "string_token": "geopoint_accuracy_component",
+          "text": {
+            "default": "Accuracy: {{value.accuracy}}",
+            "es": "Exactitud: {{value.accuracy}}"
+          },
+          "_row_num": 17
+        },
+        "waiting_text": {
+          "string_token": "waiting_text",
+          "text": {
+            "default": "Please wait…",
+            "es": "Cargando…"
+          },
+          "_row_num": 18
+        },
+        "take_video_button_label": {
+          "string_token": "take_video_button_label",
+          "text": {
+            "default": "Take Video",
+            "es": "Grabar Video"
+          },
+          "_row_num": 19
+        },
+        "choose_video_button_label": {
+          "string_token": "choose_video_button_label",
+          "text": {
+            "default": "Choose Video",
+            "es": "Eligir Video"
+          },
+          "_row_num": 20
+        },
+        "video_control_not_supported": {
+          "string_token": "video_control_not_supported",
+          "text": {
+            "default": "Video controls are not supported.",
+            "es": "No se puede controlar el video"
+          },
+          "_row_num": 21
+        },
+        "take_audio_button_label": {
+          "string_token": "take_audio_button_label",
+          "text": {
+            "default": "Capture Audio",
+            "es": "Grabar Audio"
+          },
+          "_row_num": 22
+        },
+        "choose_audio_button_label": {
+          "string_token": "choose_audio_button_label",
+          "text": {
+            "default": "Choose Audio",
+            "es": "Eligir Audio"
+          },
+          "_row_num": 23
+        },
+        "audio_control_not_supported": {
+          "string_token": "audio_control_not_supported",
+          "text": {
+            "default": "Audio controls are not supported.",
+            "es": "No se puede controlar el audio"
+          },
+          "_row_num": 24
+        },
+        "confirm_action_no_label": {
+          "string_token": "confirm_action_no_label",
+          "text": {
+            "default": "NO",
+            "es": "No se puede controlar el audio"
+          },
+          "_row_num": 25
+        },
+        "confirm_action_yes_label": {
+          "string_token": "confirm_action_yes_label",
+          "text": {
+            "default": "YES",
+            "es": "Sí"
+          },
+          "_row_num": 26
+        },
+        "external_link_button_label": {
+          "string_token": "external_link_button_label",
+          "text": {
+            "default": "Follow link",
+            "es": "Seguir enlance"
+          },
+          "_row_num": 27
+        },
+        "survey_form_identification": {
+          "string_token": "survey_form_identification",
+          "text": {
+            "default": "<div><center>ODK Survey</center><hr></div><div><p>Form name: {{localizeText form_title}}</p>{{#if form_version}}<p>Form version: {{form_version}}</p>{{/if}}<hr></div>",
+            "es": "<div><center>ODK Estudio</center><hr></div><div><p>Nombre: {{localizeText form_title}}</p>{{#if form_version}}<p>Revisión: {{form_version}}</p>{{/if}}<hr></div>"
+          },
+          "_row_num": 28
+        },
+        "finalize_survey_instance_detail": {
+          "string_token": "finalize_survey_instance_detail",
+          "text": {
+            "default": "<p>You are at the end of instance: </p><p>\"{{display_field}}\"</p><hr>",
+            "es": "<p>Este es el fín del caso \"{{display_field}}\"</p><hr>"
+          },
+          "_row_num": 29
+        },
+        "finalize_survey_button_label": {
+          "string_token": "finalize_survey_button_label",
+          "text": {
+            "default": "Finalize",
+            "es": "Finalizar"
+          },
+          "_row_num": 30
+        },
+        "save_as_incomplete_survey_button_label": {
+          "string_token": "save_as_incomplete_survey_button_label",
+          "text": {
+            "default": "Incomplete",
+            "es": "No completado"
+          },
+          "_row_num": 31
+        },
+        "take_image_button_label": {
+          "string_token": "take_image_button_label",
+          "text": {
+            "default": "Take Photo",
+            "es": "Grabar Foto"
+          },
+          "_row_num": 33
+        },
+        "choose_image_button_label": {
+          "string_token": "choose_image_button_label",
+          "text": {
+            "default": "Choose Image",
+            "es": "Eligir Foto"
+          },
+          "_row_num": 34
+        },
+        "launch_intent_button_label": {
+          "string_token": "launch_intent_button_label",
+          "text": {
+            "default": "Launch Intent",
+            "es": "Lanzar Intento"
+          },
+          "_row_num": 35
+        },
+        "opening_survey_instance_detail": {
+          "string_token": "opening_survey_instance_detail",
+          "text": {
+            "default": "{{#if display_field}}&#10;        <p>You are at the start of instance: </p>&#10;        <p>\"{{display_field}}\"</p> &#10;  {{else}}&#10;        <p>You are at the start of a new instance.</p>&#10;  {{/if}}&#10;        <hr>&#10;        {{#if last_save_date}}&#10;            <p>Last saved:</p> &#10;            <p>{{last_save_date}}</p>&#10;        {{/if}}&#10;        <hr>&#10;",
+            "es": "{{#if display_field}}&#10;        <p>Estás en el empezando del caso \"{{display_field}}\"</p> &#10;  {{else}}&#10;        <p>Estás haciendo un caso nuevo.</p>&#10;  {{/if}}&#10;        <hr>&#10;        {{#if last_save_date}}&#10;            <p>Guardado {{last_save_date}}</p>&#10;        {{/if}}&#10;        <hr>&#10;"
+          },
+          "_row_num": 36
+        },
+        "opening_survey_next_button_label": {
+          "string_token": "opening_survey_next_button_label",
+          "text": {
+            "default": "Go to next prompt",
+            "es": "¡Adelante!"
+          },
+          "_row_num": 37
+        },
+        "options_popup_language_heading": {
+          "string_token": "options_popup_language_heading",
+          "text": {
+            "default": "Language",
+            "es": "Idioma"
+          },
+          "_row_num": 38
+        },
+        "options_popup_contents_heading": {
+          "string_token": "options_popup_contents_heading",
+          "text": {
+            "default": "Contents",
+            "es": "Sumario"
+          },
+          "_row_num": 39
+        },
+        "options_popup_ignore_changes_heading": {
+          "string_token": "options_popup_ignore_changes_heading",
+          "text": {
+            "default": "Ignore Changes + Exit",
+            "es": "Ignorar cambios y salir"
+          },
+          "_row_num": 40
+        },
+        "options_popup_save_changes_heading": {
+          "string_token": "options_popup_save_changes_heading",
+          "text": {
+            "default": "Save Changes + Exit",
+            "es": "Guardar cambios y salir"
+          },
+          "_row_num": 41
+        },
+        "options_popup_finalize_changes_heading": {
+          "string_token": "options_popup_finalize_changes_heading",
+          "text": {
+            "default": "Finalize Changes + Exit",
+            "es": "Finalizar cambios y salir"
+          },
+          "_row_num": 42
+        },
+        "screen_popup_ok_button_label": {
+          "string_token": "screen_popup_ok_button_label",
+          "text": {
+            "default": "OK",
+            "es": "OK"
+          },
+          "_row_num": 43
+        },
+        "select_with_other_other_label": {
+          "string_token": "select_with_other_other_label",
+          "text": {
+            "default": "Other:",
+            "es": "Otro:"
+          },
+          "_row_num": 44
+        },
+        "select_deselect_label": {
+          "string_token": "select_deselect_label",
+          "text": {
+            "default": "Deselect",
+            "es": "Deselegir"
+          },
+          "_row_num": 45
+        },
+        "take_signature_button_label": {
+          "string_token": "take_signature_button_label",
+          "text": {
+            "default": "Get Signature",
+            "es": "Grabar Firma"
+          },
+          "_row_num": 46
+        },
+        "instances_survey_create_button_label": {
+          "string_token": "instances_survey_create_button_label",
+          "text": {
+            "default": "Create new instance",
+            "es": "Hacer Caso Nuevo"
+          },
+          "_row_num": 47
+        },
+        "instances_no_saved_instances_label": {
+          "string_token": "instances_no_saved_instances_label",
+          "text": {
+            "default": "No saved instances.",
+            "es": "Sin Casos Guardados"
+          },
+          "_row_num": 48
+        },
+        "instances_last_save_date_label": {
+          "string_token": "instances_last_save_date_label",
+          "text": {
+            "default": "<p><strong>Last Save Date:</strong></p>",
+            "es": "<p><strong>Guardado:</strong></p>"
+          },
+          "_row_num": 49
+        },
+        "instances_previously_created_instances_label": {
+          "string_token": "instances_previously_created_instances_label",
+          "text": {
+            "default": "<p>Previously created instances:</p>",
+            "es": "<p>Guardados previos:</p>"
+          },
+          "_row_num": 50
+        },
+        "savepoint_type_finalized_text_label": {
+          "string_token": "savepoint_type_finalized_text_label",
+          "text": {
+            "default": "Finalized",
+            "es": "Finalizado"
+          },
+          "_row_num": 51
+        },
+        "savepoint_type_incomplete_text_label": {
+          "string_token": "savepoint_type_incomplete_text_label",
+          "text": {
+            "default": "Incomplete",
+            "es": "No completado"
+          },
+          "_row_num": 52
+        },
+        "savepoint_type_checkpoint_text_label": {
+          "string_token": "savepoint_type_checkpoint_text_label",
+          "text": {
+            "default": "Checkpoint",
+            "es": "Guardado en parte"
+          },
+          "_row_num": 53
+        },
+        "linked_table_new_instance_label": {
+          "string_token": "linked_table_new_instance_label",
+          "text": {
+            "default": "Create new instance",
+            "es": "Hacer Caso Nuevo"
+          },
+          "_row_num": 54
+        },
+        "barcode_button_label": {
+          "string_token": "barcode_button_label",
+          "text": {
+            "default": "Scan Barcode",
+            "es": "Grabar códingo de barras"
+          },
+          "_row_num": 55
+        },
+        "invalid_numeric_message": {
+          "string_token": "invalid_numeric_message",
+          "text": {
+            "default": "Numeric value expected",
+            "es": "Dato numérico esperado"
+          },
+          "_row_num": 56
+        },
+        "invalid_integer_message": {
+          "string_token": "invalid_integer_message",
+          "text": {
+            "default": "Integer value expected",
+            "es": "Número entero esperado"
+          },
+          "_row_num": 57
+        }
+      }
+    },
+    "common_definitions": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 5,
+        "value": [
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "English",
+                  "es": "Inglés",
+                  "default": "English"
+                }
+              }
+            },
+            "_row_num": 7,
+            "name": "english"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Spanish",
+                  "es": "Español",
+                  "default": "Spanish"
+                }
+              }
+            },
+            "_row_num": 8,
+            "name": "es"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 5,
+        "value": "english"
+      }
+    },
+    "queries": {},
+    "calculates": {},
+    "model": {},
+    "section_names": [
+      "initial",
+      "survey"
+    ],
+    "sections": {
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_do_section_name": "survey",
+            "_type": "_section",
+            "promptIdx": 0,
+            "display": {
+              "title": {
+                "text": {
+                  "english": "Common Javascript Framework",
+                  "es": "Esquema General de Javascript",
+                  "default": "Common Javascript Framework"
+                }
+              }
+            },
+            "_branch_label_enclosing_screen": "survey/0"
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 3,
+            "_branch_label_enclosing_screen": "initial/_screen3",
+            "promptIdx": 1
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 3,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 3,
+            "operationIdx": 3
+          },
+          {
+            "_token_type": "validate",
+            "clause": "validate finalize",
+            "_sweep_name": "finalize",
+            "_row_num": 3,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 4
+          },
+          {
+            "_token_type": "save_and_terminate",
+            "clause": "save and terminate",
+            "calculation": true,
+            "_row_num": 3,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 5
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 3,
+            "operationIdx": 6
+          }
+        ],
+        "branch_label_map": {
+          "_contents": 2,
+          "_screen3": 2,
+          "_finalize": 4
+        }
+      },
+      "survey": {
+        "section_name": "survey",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 3,
+            "_branch_label_enclosing_screen": "survey/_screen3",
+            "promptIdx": 0
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "exit section",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "exit_section",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 3,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 3,
+            "operationIdx": 3
+          }
+        ],
+        "branch_label_map": {
+          "_contents": 2,
+          "_screen3": 2
+        }
+      }
+    },
+    "dataTableModel": {},
+    "properties": [
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "framework"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"es\":\"Esquema General de Javascript\",\"default\":\"Common Javascript Framework\"}}"
+      }
+    ]
+  }
+}
