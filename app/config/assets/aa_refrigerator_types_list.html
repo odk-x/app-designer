@@ -62,14 +62,16 @@ var customJsOl = function customJsOl() {
 	display_col = "catalog_id"
 	table_id = "refrigerator_types";
 	// Dirty hacks beyond this point
-	var option = document.createElement("option");
-	option.value = 5;
-	option.innerText = 5;
-	var l = document.getElementById("limit");
-	l.appendChild(option);
-	l.selectedIndex = l.children.length - 1;
-	limit = 5;
-	newLimit();
+	if (global_group_by == null || global_group_by == undefined || global_group_by.trim().length == 0) {
+        var option = document.createElement("option");
+        option.value = 5;
+        option.innerText = 5;
+        var l = document.getElementById("limit");
+        l.appendChild(option);
+        l.selectedIndex = l.children.length - 1;
+        limit = 5;
+        newLimit();
+	}
 
 }
 var customJsSearch = function customJsSearch() {
