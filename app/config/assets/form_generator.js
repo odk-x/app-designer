@@ -209,6 +209,7 @@ var do_csv_xhr = function do_csv_xhr(choice_id, filename, callback) {
 			update(0);
 		}
 	};
+	url = odkCommon.localizeUrl(odkCommon.getPreferredLocale(), {"text": filename}, "text", "/" + appname + "/config/tables/" + table_id + "/forms/" + table_id + "/")
 	xhr.open("GET", filename, true);
 	xhr.send();
 }
@@ -217,7 +218,6 @@ var do_csv_xhr = function do_csv_xhr(choice_id, filename, callback) {
 // Everything after that is a pair of [real_value, translated_display_name], and all of those pairs are added to the on-screen prompt's options
 // in update()
 var get_choices = function get_choices(which, not_first_time, filter) {
-	// TODO HANDLE CHOICE_FILTER !!
 	// Default result - we didn't find anything so check again later
 	var result = [false];
 	// For each choice

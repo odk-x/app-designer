@@ -394,7 +394,7 @@ var doSearch = function doSearch() {
 		if (global_where_clause != null && global_where_clause != undefined && global_where_clause.trim().length > 0) {
 			var where_col = global_where_clause.split(" ")[0];
 			if (where_col.indexOf(".") >= 0) where_col = where_col.split(".")[1];
-			newtext += _t(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, global_where_clause.split(" ")[0], false, metadata) + _t(" is ") + _tc(table_id, where_col, global_where_arg);
+			newtext += _t(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, global_where_clause.split(" ")[0], false, metadata) + _t(" is ") + _tc(d, where_col, global_where_arg);
 		}
 		if (global_human_readable_what) {
 			hrw = _tu(global_human_readable_what);
@@ -422,7 +422,7 @@ var doSearch = function doSearch() {
 			displays.classList.add("displays");
 			var mainDisplay = document.createElement("div")
 			mainDisplay.classList.add("main-display");
-			mainDisplay.innerText = _tc(table_id, display_col, d.getData(i, display_col));
+			mainDisplay.innerText = _tc(d, display_col, d.getData(i, display_col));
 			if (global_group_by) mainDisplay.innerText = pretty(mainDisplay.innerText);
 			displays.appendChild(mainDisplay)
 			var subDisplay = null;
@@ -445,7 +445,7 @@ var doSearch = function doSearch() {
 				if (typeof(display_subcol[j][0]) == "string") {
 					subDisplay.appendChild(document.createTextNode(_tu(display_subcol[j][0])))
 					if (display_subcol[j][1] != null) {
-						subDisplay.appendChild(document.createTextNode(_tc(table_id, display_subcol[j][1], d.getData(i, display_subcol[j][1]))))
+						subDisplay.appendChild(document.createTextNode(_tc(d, display_subcol[j][1], d.getData(i, display_subcol[j][1]))))
 					}
 				} else if (display_subcol[j][0] === true) {
 					subDisplay.appendChild(document.createTextNode(pretty(d.getData(i, display_subcol[j][1]))))

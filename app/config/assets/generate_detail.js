@@ -140,11 +140,11 @@ var update_callback = function update_callback(d) {
 		} 
 		if (found) {
 			if (typeof(found[1]) == "string") {
-				li.appendChild(make_li(xlscol, _tu(found[1]), _tc(table_id, col, val), "text"));
+				li.appendChild(make_li(xlscol, _tu(found[1]), _tc(d, col, val), "text"));
 			} else if (found[1] === true) {
-				li.appendChild(make_li(xlscol, displayCol(col, metadata), pretty(_tc(table_id, col, val)), "text"));
+				li.appendChild(make_li(xlscol, displayCol(col, metadata), pretty(_tc(d, col, val)), "text"));
 			} else if (found[1] === false) {
-				li.appendChild(make_li(xlscol, displayCol(col, metadata), _tc(table_id, col, val), "text"));
+				li.appendChild(make_li(xlscol, displayCol(col, metadata), _tc(d, col, val), "text"));
 			} else {
 				li.appendChild(make_li(xlscol, "", found[1](li, val, d), "html"));
 			}
@@ -155,7 +155,7 @@ var update_callback = function update_callback(d) {
 				// If we don't have a colmap, default to displaying everything (except underscore prefixed/special columns)
 				continue;
 			}
-			li.appendChild(make_li(xlscol, displayCol(col, metadata), _tc(table_id, col, val), is_html));
+			li.appendChild(make_li(xlscol, displayCol(col, metadata), _tc(d, col, val), is_html));
 		}
 		if (col != main_col) {
 			ul.appendChild(li);

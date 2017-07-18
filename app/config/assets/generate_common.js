@@ -31,7 +31,7 @@ window.fake_translate = function fake_translate(thing) {
 	var result = "";
 	for (var j = 0; j < odkCommon.i18nFieldNames.length; j++) {
 		if (thing[odkCommon.i18nFieldNames[j]] !== undefined) {
-			result = display_update_result(result, thing[odkCommon.i18nFieldNames[j]], odkCommon.i18nFieldNames[j]);
+			result = display_update_result(result, thing[odkCommon.i18nFieldNames[j]], odkCommon.i18nFieldNames[j], "default");
 		}
 	}
 
@@ -45,20 +45,29 @@ window.fake_translate = function fake_translate(thing) {
 };
 
 // Helper function for display and fake_translate
-window.display_update_result = function display_update_result(result, this_result, field) {
+window.display_update_result = function display_update_result(result, this_result, field, selected_locale) {
 	if (!result) result = "";
 	if (this_result !== null && this_result !== undefined && this_result.trim().length > 0) {
 		if (field == "text") {
 			result += this_result;
-		}
-		if (field == "audio") {
-			result += "<audio controls='controls'><source src='" + this_result + "' /></audio>";
-		}
-		if (field == "video") {
-			result += "<video controls='controls'><source src='" + this_result + "' /></video>";
-		}
-		if (field == "image") {
-			result += "<img src='" + this_result + "' />";
+		} else {
+			var url = "";
+			if (window.table) {
+				var thing = {};
+				thing[field] = this_result;
+				url = localizeUrl(selected_locale, thing, field, "/" + appname + "/assets/config/tables/" + table + "/" + table)
+			} else {
+				url = this_result;
+			}
+			if (field == "audio") {
+				result += "<audio controls='controls'><source src='" + url + "' /></audio>";
+			}
+			if (field == "video") {
+				result += "<video controls='controls'><source src='" + url + "' /></video>";
+			}
+			if (field == "image") {
+				result += "<img src='" + url + "' />";
+			}
 		}
 	}
 	return result;
@@ -87,8 +96,6 @@ window.display = function display(thing) {
 
 	// Insert it into odkCommonDefinitions so that we can pass it to localizeTokenField, which
 	// only takes a key into odkCommonDefinitions because the whole translation system was designed poorly
-	var id = newGuid();
-	window.odkCommonDefinitions._tokens[id] = thing;
 
 	// i18nFieldNames is usually ["text", "audio", "video", "image"]
 	// Since an object might have multiple of these, like {"text": "Egret selected", "image": "media/egret.jpeg"}
@@ -100,14 +107,10 @@ window.display = function display(thing) {
 		if (preferred_locale == null) {
 			preferred_locale = odkCommon.getPreferredLocale();
 		}
-		this_result = odkCommon.localizeTokenField(preferred_locale, id, field);
+		this_result = odkCommon.localizeTokenField(preferred_locale, thing, field);
 		if (this_result === true) return true; // used in __tr for passthrough translations
-		result = display_update_result(result, this_result, field);
+		result = display_update_result(result, this_result, field, preferred_locale);
 	}
-	//if (result.length === 0) {
-		//return _t("Couldn't translate ") + JSON.stringify(thing);
-	//}
-	odkCommonDefinitions[id] = null; // let it be garbage collected
 	return result;
 };
 
@@ -255,24 +258,17 @@ window._tu = function(s) {
 	//odkData.addRow("m_logs", {"notes": "_tu failed to translate '''" + s + "''' on the page " + window.location.href}, newGuid());
 	return s;
 }
-window._tc = function(table, column, text) {
-	if (cols_that_need_choices[table] != undefined) {
-		if (column in cols_that_need_choices[table]) {
-			choice_list = cols_that_need_choices[table][column];
-			var cs = all_choices[table];
-			for (var i = 0; i < cs.length; i++) {
-			  if (cs[i]["choice_list_name"] == choice_list && cs[i]["data_value"] == text) {
-				  return display(cs[i]["display"])
-			  }
-			}
-			// other in a select one with other row
-			return text;
-		}
-		// not a column with choices
+window._tc = function(d, column, text) {
+	if (d.getColumnChoicesList(column) == null) {
+		// not a prompt type that needs choices
 		return text;
 	}
-	// wtf
-	return text;
+	var toTranslate = d.getColumnChoiceDataValueObject(column, text);
+	if (toTranslate == null) {
+		// user-entered other value in a select-one-with-other
+		return text;
+	}
+	return display(toTranslate.display);
 }
 
 
