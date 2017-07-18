@@ -1022,7 +1022,7 @@ window.odkData = {
             // associated with this choice data value (via the tableId form).
             getColumnChoiceDataValueObject:function(elementPath, choiceDataValue) {
                 var that = this;
-                var retVal = elementPath;
+                var retVal = null;
 
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return retVal;
