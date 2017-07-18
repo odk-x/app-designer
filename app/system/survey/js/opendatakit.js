@@ -222,6 +222,15 @@ return {
     },
 
     getChoicesDefinition: function(choice_list_name) {
+		// the table properties retrieved from the Java layer should provide the definitive choice list.
+		if ( this.mdl.resultObject !== null && this.mdl.resultObject !== undefined ) {
+			var result = this.mdl.resultObject.getColumnChoicesList(choice_list_name);
+			if ( result !== null && result !== undefined ) {
+				return result;
+			}
+		}
+		// but the list might not be available? In which case we use the one in the formDef.
+		odkCommon.log('W', 'Using this.mdl.formDef.specification.choices instead of Table properties for choice definitions');
         return this.mdl.formDef.specification.choices[choice_list_name];
     },
 

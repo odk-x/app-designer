@@ -73,6 +73,8 @@ return {
                         instanceId: null,
                         table_id: table_id
                         };
+					// save the result object
+					tlo.resultObject = reqData;
                     tlo.metadata = reqData.getMetadata();
 					tlo.dataTableModel = reqData.getMetadata().dataTableModel
                     ctxt.success(tlo);
