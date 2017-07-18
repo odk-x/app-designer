@@ -780,6 +780,7 @@ return {
             // overwrite the existing model with this one
             var model = opendatakit.getCurrentModel();
             model.formDef = tlo.formDef;
+			model.resultObject = tlo.resultObject;
             model.dataTableModel = tlo.dataTableModel;
             model.metadata = tlo.metadata;
             model.instanceMetadata = tlo.instanceMetadata;
