@@ -103,7 +103,7 @@ var doMenu = function doMenu() {
 		button.classList.add("button");
 		// If we have a lot of buttons, make the buttons smaller
 		if (len > 20) {
-			button.classList.add("reallytiny-button");
+			button.classList.add("grid-button");
 		} else if (len > 10) {
 			button.classList.add("tiny-button");
 		} else if (len > 6) {
