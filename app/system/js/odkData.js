@@ -1017,12 +1017,12 @@ window.odkData = {
             // searching through the '_displayChoicesList' value for the object
             // where object.data_value === choiceDataValue.
             //
-            // The caller can then access the display.title for the 
+            // The caller can then access the .display.title for the 
             // text translation of this object or any custom property 
             // associated with this choice data value (via the tableId form).
             getColumnChoiceDataValueObject:function(elementPath, choiceDataValue) {
                 var that = this;
-                var retVal = elementPath;
+                var retVal = null;
 
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return retVal;
@@ -1055,7 +1055,7 @@ window.odkData = {
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
-                retVal = ref.display;
+                retVal = ref;
                 return retVal;
             },
 
