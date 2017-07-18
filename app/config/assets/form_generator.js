@@ -1060,9 +1060,9 @@ var ol = function onLoad() {
 			// Change the text in the cancel button based on whether we're adding or editing a row
 			var cancel = document.getElementById('cancel');
 			if (opened_for_edit) {
-				cancel.innerText = "Save incomplete";
+				cancel.innerText = _t("Save incomplete");
 			} else {
-				cancel.innerText = "Cancel and delete row"
+				cancel.innerText = _t("Cancel and delete row")
 			}
 			cancel.disabled = false;
 			//console.log(row_data);

@@ -505,4 +505,12 @@ var formgen_specific_translations = {
 		"default": true,
 		"es": "Cargando..."
 	}},
+	"Save incomplete": {"text": {
+		"default": true,
+		"es": "Guardar como no completado"
+	}},
+	"Cancel and delete row": {"text": {
+		"default": true,
+		"es": "Cancelar y eliminar fila"
+	}},
 }

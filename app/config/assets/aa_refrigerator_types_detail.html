@@ -140,7 +140,7 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
 
 	document.getElementById("mi").innerText = _tu("Model Information")
 
-	allowed_tables = [];
+	//allowed_tables = [];
 	main_col = "";
 	global_which_cols_to_select = "*, (SELECT COUNT(*) FROM refrigerators WHERE model_row_id = refrigerator_types._id) as refrig_with_this_model_count"
 	var mid_callback = function mid_callback(e, c, d) {

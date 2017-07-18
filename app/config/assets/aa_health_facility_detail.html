@@ -138,7 +138,7 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
 }
 
 
-	allowed_tables = [];
+	//allowed_tables = [];
 	main_col = "";
 	global_which_cols_to_select = "*, (SELECT COUNT(*) FROM refrigerators WHERE facility_row_id = health_facility._id) as refrig_with_this_hfid_count"
 	var fname_callback = function fname_callback(e, c, d) {
