@@ -37,7 +37,8 @@ body {
 	display: block;
 	margin-left: 2%;
 	margin-right: 2%;
-	width: 25%;
+	/*width: 25%;*/
+	width: 135px;
 	display: inline-block;
 }
 #title {

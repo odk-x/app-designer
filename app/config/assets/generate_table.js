@@ -298,7 +298,7 @@ var make_query = function make_query(search, apply_where, for_total, cols_to_sel
 	}
 	where = (where ? " WHERE " + where : "")
 	if (!apply_where) {
-		var raw = "SELECT COUNT(*) FROM (SELECT * FROM " + table_id + (join.length > 0 ? " JOIN " + the_query[9] : "") + " GROUP BY " + group_by + ")";
+		var raw = "SELECT COUNT(*) FROM (SELECT * FROM " + table_id + (join.length > 0 ? " JOIN " + join : "") + " GROUP BY " + group_by + ")";
 		return [raw, []]
 	}
 	var raw = "SELECT " + cols_to_select + " FROM " + table_id + (join.length > 0 ? " JOIN " + join : "") + where + (group_by ? " GROUP BY " + group_by : "")
