@@ -1051,7 +1051,7 @@ window.odkData = {
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
-                var ref = ref.vale[choiceDataValue];
+                var ref = ref.value[choiceDataValue];
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
