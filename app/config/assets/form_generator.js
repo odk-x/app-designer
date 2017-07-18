@@ -679,7 +679,19 @@ var update = function update(delta) {
 			elems[0].outerHTML = display(text);
 		} catch (e) {
 			console.log(e)
-			elems[0].outerHTML = "Error translating " + JSON.stringify(text);
+			elems[0].outerHTML = _t("Error translating ") + JSON.stringify(text);
+		}
+	}
+	var elems = document.getElementsByClassName("formgen-specific-translate");
+	var len = elems.length;
+	for (var i = 0; i < len; i++) {
+		var text = elems[0].innerText;
+		try {
+			// YES elems[0] NOT elems[i]
+			elems[0].outerHTML = _t(text);
+		} catch (e) {
+			console.log(e)
+			elems[0].outerHTML = _t("Error translating ") + JSON.stringify(text);
 		}
 	}
 
@@ -1076,8 +1088,6 @@ var ol = function onLoad() {
 		odkCommon.registerListener(function doaction_listener() {
 			var a = odkCommon.viewFirstQueuedAction();
 			if (a != null) {
-				console.log(a);
-				odkCommon.removeFirstQueuedAction();
 				update(0);
 			}
 		});

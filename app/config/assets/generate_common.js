@@ -513,4 +513,28 @@ var formgen_specific_translations = {
 		"default": true,
 		"es": "Cancelar y eliminar fila"
 	}},
+	"Choose Picture": {"text": {
+		"default": true,
+		"es": "Elegir Foto"
+	}},
+	"Capture Picture": {"text": {
+		"default": true,
+		"es": "Grabar Foto"
+	}},
+	"Choose Audio": {"text": {
+		"default": true,
+		"es": "Elegir Audio"
+	}},
+	"Capture Audio": {"text": {
+		"default": true,
+		"es": "Grabar Audio"
+	}},
+	"Choose Video": {"text": {
+		"default": true,
+		"es": "Elegir Video"
+	}},
+	"Capture Video": {"text": {
+		"default": true,
+		"es": "Grabar Video"
+	}},
 }
