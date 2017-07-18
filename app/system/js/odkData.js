@@ -997,7 +997,8 @@ window.odkData = {
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
-                var ref = ref[elementPath];
+                var elementKey = that.getElementKey(elementPath);
+                var ref = ref[elementKey];
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
@@ -1040,7 +1041,8 @@ window.odkData = {
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
-                var ref = ref[elementPath];
+                var elementKey = that.getElementKey(elementPath);
+                var ref = ref[elementKey];
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
