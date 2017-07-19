@@ -35,7 +35,7 @@ var ol = function ol() {
 	for (var i = 0; i < table_ids.length; i++) {
 		var table = table_ids[i];
 		var h2 = document.createElement("h2");
-		h2.innerText = display(localized_tables[table]);
+		h2.innerText = display(localized_tables[table], table);
 		(function(h2, table) {
 			h2.addEventListener("click", function() {
 				page_go("config/assets/table.html#" + table);

@@ -45,14 +45,14 @@ window.fake_translate = function fake_translate(thing) {
 };
 
 // Helper function for display and fake_translate
-window.display_update_result = function display_update_result(result, this_result, field, selected_locale) {
+window.display_update_result = function display_update_result(result, this_result, field, selected_locale, table) {
 	if (!result) result = "";
 	if (this_result !== null && this_result !== undefined && this_result.trim().length > 0) {
 		if (field == "text") {
 			result += this_result;
 		} else {
 			var url = "";
-			if (window.table) {
+			if (table) {
 				var thing = {};
 				thing[field] = this_result;
 				url = localizeUrl(selected_locale, thing, field, "/" + appname + "/assets/config/tables/" + table + "/" + table)
@@ -75,7 +75,7 @@ window.display_update_result = function display_update_result(result, this_resul
 
 // This is an unfortunately named function, it should really be called translate, not display
 // It also needs to be optimized. Nothing obvious to do, but it gets called a lot
-window.display = function display(thing) {
+window.display = function display(thing, table) {
   if (typeof(thing) == "string") return thing;
 	if (typeof(thing) == "undefined") {
 		// A recursive call on an error? What could possibly go wrong!
@@ -83,7 +83,7 @@ window.display = function display(thing) {
 	}
 	for (var i = 0; i < possible_wrapped.length; i++) {
 		if (thing[possible_wrapped[i]] !== undefined) {
-			return display(thing[possible_wrapped[i]]);
+			return display(thing[possible_wrapped[i]], table);
 		}
 	}
 	// if we get {text: "something"}, don't bother asking odkCommon to do it, just call fake_translate
@@ -109,7 +109,7 @@ window.display = function display(thing) {
 		}
 		this_result = odkCommon.localizeTokenField(preferred_locale, thing, field);
 		if (this_result === true) return true; // used in __tr for passthrough translations
-		result = display_update_result(result, this_result, field, preferred_locale);
+		result = display_update_result(result, this_result, field, preferred_locale, table);
 	}
 	return result;
 };
@@ -154,7 +154,7 @@ window.jsonParse = function jsonParse(text) {
 };
 // Tries to translate the given column name, and if there's no translation, at least it will make it look pretty
 // Even in the default app, no columns have translations, so whatever
-window.displayCol = function constructSimpleDisplayName(name, metadata) {
+window.displayCol = function constructSimpleDisplayName(name, metadata, table) {
 	// Otherwise remove anything after the dot, if it's a group by column in a list view it may be in the form of table_id.column_id
 	if (name.indexOf(".") > 0) {
 		name = name.split(".", 2)[1]
@@ -166,7 +166,7 @@ window.displayCol = function constructSimpleDisplayName(name, metadata) {
 		for (var i = 0; i < kvslen; i++) {
 			var entry = kvs[i];
 			if (entry.partition == "Column" && entry.aspect == name && (entry.key == "displayName" || entry.key == "display_name")) {
-				return display(jsonParse(entry.value));
+				return display(jsonParse(entry.value), table);
 			}
 		}
 	}
@@ -191,7 +191,7 @@ window.pretty = function pretty(name) {
 // Retrieves what should be displayed on screen for the given column name. First tries to pull it from
 // optional_pair, which is supposedly an entry in allowed_group_bys, but if that's not set it tries to
 // pull it from allowed_group_bys, and if that doesn't contain it it just returns the translated column name
-window.get_from_allowed_group_bys = function get_from_allowed_group_bys(allowed_group_bys, colname, optional_pair, metadata) {
+window.get_from_allowed_group_bys = function get_from_allowed_group_bys(allowed_group_bys, colname, optional_pair, metadata, table) {
 	// If we have no allowed_group_bys, always just translate the column name and leave it at that
 	if (!allowed_group_bys) {
 		optional_pair = [colname, true];
@@ -211,7 +211,7 @@ window.get_from_allowed_group_bys = function get_from_allowed_group_bys(allowed_
 	// if the user specified true, translate the column, if they specified false, return the exact column id
 	// otherwise show the string the user specified
 	if (optional_pair[1] === true) {
-		return displayCol(optional_pair[0], metadata);
+		return displayCol(optional_pair[0], metadata, table);
 	} else if (optional_pair[1] === false) {
 		return optional_pair[0];
 	} else {
@@ -232,13 +232,13 @@ var __tr = function __tr(s) {
 	if (s.length == 0) return ["ok",  ""]
 	var found = formgen_specific_translations[s];
 	if (found != undefined) {
-	  result = display(found);
+	  result = display(found, null);
 	  if (result === true) return ["ok", s];
 	  return ["ok", result];
 	}
 	found = user_translations[s];
 	if (found != undefined) {
-	  result = display(found);
+	  result = display(found, null);
 	  if (result === true) return ["ok", s];
 	  return ["ok", result];
 	}
@@ -268,7 +268,7 @@ window._tc = function(d, column, text) {
 		// user-entered other value in a select-one-with-other
 		return text;
 	}
-	return display(toTranslate.display);
+	return display(toTranslate.display, null);
 }
 
 

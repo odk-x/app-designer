@@ -160,7 +160,7 @@ var ol = function ol() {
 // Just a continuation of the onLoad function
 var olHasTableId = function olHasTableId() {
 	// Put the translated display name of the table that's open in the header
-	document.getElementById("table_id").innerText = display(localized_tables[table_id]);
+	document.getElementById("table_id").innerText = display(localized_tables[table_id], table_id);
 	odkCommon.registerListener(function doaction_listener() {
 		var a = odkCommon.viewFirstQueuedAction();
 		if (a != null) {
@@ -388,13 +388,13 @@ var doSearch = function doSearch() {
 		var newtext = _t("Showing ") + rows + (offset + (total_rows == 0 ? 0 : 1)) + "-" + (offset + d.getCount()) + _t(" of ") + display_total;
 		// if we have a group by, mention that we're in a group by view
 		if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
-			newtext += _t(" distinct values of ") + get_from_allowed_group_bys(allowed_group_bys, global_group_by, false, metadata);
+			newtext += _t(" distinct values of ") + get_from_allowed_group_bys(allowed_group_bys, global_group_by, false, metadata, table_id);
 		}
 		// if we're in a collection, mention that
 		if (global_where_clause != null && global_where_clause != undefined && global_where_clause.trim().length > 0) {
 			var where_col = global_where_clause.split(" ")[0];
 			if (where_col.indexOf(".") >= 0) where_col = where_col.split(".")[1];
-			newtext += _t(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, global_where_clause.split(" ")[0], false, metadata) + _t(" is ") + _tc(d, where_col, global_where_arg);
+			newtext += _t(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, global_where_clause.split(" ")[0], false, metadata, table_id) + _t(" is ") + _tc(d, where_col, global_where_arg);
 		}
 		if (global_human_readable_what) {
 			hrw = _tu(global_human_readable_what);
@@ -406,7 +406,7 @@ var doSearch = function doSearch() {
 		// we may have been passed html via global_human_readable_what
 		document.getElementById("navigation-text").innerHTML = newtext;
 		// for each row in the result set, make an element and add it to `list`
-		// heirarchy looks something like this
+		// hierarchy looks something like this
 		// li
 		//	  displays
 		//		  main display column value
@@ -553,7 +553,7 @@ var groupBy = function groupBy() {
 		for (var i = 0; i < cols.length; i++) {
 			var child = document.createElement("option");
 			child.value = cols[i]; // value is the column id, text is the translated column name
-			child.innerText = displayCol(cols[i], metadata);
+			child.innerText = displayCol(cols[i], metadata, table_id);
 			list.appendChild(child);
 			// Not sure if this is important or not
 			if (global_group_by == cols[i]) {
@@ -566,7 +566,7 @@ var groupBy = function groupBy() {
 		for (var i = 0; i < allowed_group_bys.length; i++) {
 			var child = document.createElement("option");
 			child.value = allowed_group_bys[i][0];
-			child.innerText = _tu(get_from_allowed_group_bys(allowed_group_bys, allowed_group_bys[i][1], allowed_group_bys[i], metadata));
+			child.innerText = _tu(get_from_allowed_group_bys(allowed_group_bys, allowed_group_bys[i][1], allowed_group_bys[i], metadata, table_id));
 			list.appendChild(child);
 			// Not sure if this is important or not
 			if (global_group_by == cols[i]) {

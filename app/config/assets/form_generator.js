@@ -242,7 +242,7 @@ var get_choices = function get_choices(which, not_first_time, filter) {
 				var displayed = choices[j].display;
 				// If there's no "notranslate" key, translate it using display, otherwise fake translate it
 				if (choices[j].notranslate == undefined) {
-					displayed = display(choices[j].display)
+					displayed = display(choices[j].display, table_id)
 				} else {
 					displayed = fake_translate(choices[j].display);
 				}
@@ -662,7 +662,7 @@ var update = function update(delta) {
 	var elems = document.getElementsByTagName("input");
 	for (var i = 0; i < elems.length; i++) {
 		if (elems[i].getAttribute("data-placeholder") != undefined && elems[i].getAttribute("data-placeholder").length > 0) {
-			elems[i].setAttribute("placeholder", display(tokens[elems[i].getAttribute("data-placeholder")]));
+			elems[i].setAttribute("placeholder", display(tokens[elems[i].getAttribute("data-placeholder")], table_id));
 			elems[i].setAttribute("data-placeholder", "");
 		}
 	}
@@ -676,7 +676,7 @@ var update = function update(delta) {
 		var text = tokens[elems[0].innerText];
 		try {
 			// YES elems[0] NOT elems[i]
-			elems[0].outerHTML = display(text);
+			elems[0].outerHTML = display(text, table_id);
 		} catch (e) {
 			console.log(e)
 			elems[0].outerHTML = _t("Error translating ") + JSON.stringify(text);
@@ -870,7 +870,7 @@ var update = function update(delta) {
 			if (elems[i].getAttribute("data-constraint_message") != null) {
 				var message = document.createElement("div");
 				message.classList.add("constraint-message");
-				message.innerText = display(tokens[elems[i].getAttribute("data-constraint_message")]);
+				message.innerText = display(tokens[elems[i].getAttribute("data-constraint_message")], table_id);
 				elems[i].parentNode.insertBefore(message, elems[i].nextSibling);
 			}
 		} else {

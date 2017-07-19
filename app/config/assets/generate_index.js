@@ -93,7 +93,7 @@ var doMenu = function doMenu() {
 			button.innerText = _t("Loading...");
 			(function(button, triplet) {
 				getMetadataAndThen(triplet[1], function(this_table_metadata) {
-					button.innerText = _t("By ") + displayCol(triplet[2], this_table_metadata);
+					button.innerText = _t("By ") + displayCol(triplet[2], this_table_metadata, triplet[1]);
 				});
 			})(button, triplet);
 		} else {
