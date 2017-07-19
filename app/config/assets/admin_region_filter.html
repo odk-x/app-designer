@@ -1,0 +1,61 @@
+
+<!doctype html>
+<html>
+	<head>
+		<script type="text/javascript" src="/coldchain/system/js/odkCommon.js"></script>
+		<script type="text/javascript" src="/coldchain/system/js/odkData.js"></script>
+		<script type="text/javascript" src="/coldchain/system/tables/js/odkTables.js"></script>
+		<script type="text/javascript" src="formgen_common.js"></script>
+		<script type="text/javascript" src="generate_common.js"></script>
+		<link href="generate_index.css" rel="stylesheet" />
+		<style>
+		
+body {
+	background: url('/coldchain/config/assets/img/hallway.jpg') no-repeat center/cover fixed;
+}
+		
+		</style>
+		<script>
+			var metadata = {};
+			var list_views = {};
+			var menu = ["Empty menu!", null, []];
+			// BEGIN CONFIG
+			
+list_views = {
+	"health_facility": "config/assets/aa_health_facility_list.html",
+}
+
+	var hash = window.location.hash.substr(1);
+	var val = hash.split(":")[0];
+	window.location.hash = "#" + hash.split(":").slice(1)
+	menu = ["Loading...", null, []];
+	
+	odkData.arbitraryQuery("health_facility", "SELECT * FROM health_facility WHERE admin_region LIKE ? GROUP BY facility_type", [val], 100, 0, function(d) {
+		if (d.getCount() == 0) {
+			// TODO LOCALIZE
+			menu = ["Admin region " + val + " has no health facilities!", null, []];
+			doMenu();
+		} else {
+			var val = d.getData(0, "admin_region");
+			// TODO LOCALIZE
+			menu = ["Filtering " + val, null, []]
+			for (var i = 0; i < d.getCount(); i++) {
+				var ftype = d.getData(i, "facility_type")
+				menu[2] = menu[2].concat(0);
+				// TODO localize "View "
+				menu[2][menu[2].length - 1] = ["View " + _tc(d, "facility_type", ftype) + "s", "health_facility", "STATIC/SELECT * FROM health_facility WHERE admin_region = ? AND facility_type = ?/"+JSON.stringify([val, ftype])+"/health facilities in the admin region ? of the type ?"];
+			}
+			doMenu();
+		}
+	}, function(e) { alert(e); });
+		
+			// END CONFIG
+		</script>
+		<script src="generate_index.js"></script>
+	</head>
+	<body onLoad='ol();'>
+		<div id="title" class="button"></div>
+		<div id="list"></div>
+	</body>
+</html>
+	
