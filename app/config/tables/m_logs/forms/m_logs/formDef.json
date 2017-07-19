@@ -16,7 +16,10 @@
             }
           },
           "prompt": {
-            "text": "Enter the ID of the refrigerator"
+            "text": {
+              "default": "Enter the ID of the refrigerator",
+              "es": "Por favor entre el ID del frigorífico"
+            }
           }
         },
         "_row_num": 3
@@ -411,7 +414,10 @@
                 }
               },
               "prompt": {
-                "text": "Enter the ID of the refrigerator"
+                "text": {
+                  "default": "Enter the ID of the refrigerator",
+                  "es": "Por favor entre el ID del frigorífico"
+                }
               }
             },
             "_row_num": 3,
