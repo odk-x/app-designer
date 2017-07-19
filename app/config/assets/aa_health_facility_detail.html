@@ -139,7 +139,7 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
 }
 
 
-	//allowed_tables = [];
+	allowed_tables = [];
 	main_col = "";
 	global_which_cols_to_select = "*, (SELECT COUNT(*) FROM refrigerators WHERE facility_row_id = health_facility._id) as refrig_with_this_hfid_count"
 	var fname_callback = function fname_callback(e, c, d) {
@@ -147,11 +147,12 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
 		document.getElementById("refrigerator_inventory").innerHTML = _tu("Refrigerator Inventory (<span id='refrig_with_this_hfid_count'>Loading...</span>)")
 		document.getElementById("refrigerator_inventory").disabled = false;
 		document.getElementById("refrigerator_inventory").addEventListener("click", function click() {
-			odkTables.launchHTML(null, "config/assets/aa_refrigerators_list.html#refrigerators/facility_row_id = ?/" + row_id);
+			// TODO needs testing!
+			odkTables.launchHTML(null, "config/assets/aa_refrigerators_list.html#refrigerators/facility_name = ?/" + d.getData(0, "facility_name");
 		});
 		document.getElementById("refrig_with_this_hfid_count").innerText = d.getData(0, "refrig_with_this_hfid_count");
 		document.getElementById("addref").addEventListener("click", function() {
-			var defaults = {"facility_row_id": d.getData(0, "_id")}
+			var defaults = {"facility_row_id": d.getData(0, "_id")}; // TODO - Get admin region information in there too
 			if (allowed_tables.indexOf("refrigerators") >= 0) {
 				var id = newGuid();
 				odkData.addRow("m_logs", defaults, id, function() {

@@ -152,15 +152,16 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
 		return "";
 	}
 	var hf_callback = function hf_callback(e, c, d) {
-		console.log(d.getData(0, "facility_name"));
-		var btn = document.getElementById("open_hf");
-		btn.innerText = _tu("Health Facility Information");
-		var hf = d.getData(0, "facility_name"); // from join, not actually the hf id
-		var hf_row_id = d.getData(0, "facility_row_id");
-		btn.disabled = false;
-		btn.addEventListener("click", function() {
-			odkTables.openDetailView(null, "health_facility", hf_row_id, "config/assets/aa_health_facility_detail.html#health_facility/" + hf_row_id);
-		});
+		/*
+			var btn = document.getElementById("open_hf");
+			btn.innerText = _tu("Health Facility Information");
+			var hf = d.getData(0, "facility_name"); // from join, not actually the hf id
+			var hf_row_id = d.getData(0, "facility_row_id");
+			btn.disabled = false;
+			btn.addEventListener("click", function() {
+				odkTables.openDetailView(null, "health_facility", hf_row_id, "config/assets/aa_health_facility_detail.html#health_facility/" + hf_row_id);
+			});
+		*/
 		build_generic_callback("facility_name", true, "Facility")(e, c, d)
 		document.getElementById("add_m_log").disabled = false;
 		document.getElementById("add_m_log").innerText = _tu("Add Maintenance Record");
@@ -188,6 +189,7 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
 	}
 
 	//allowed_tables = ["m_logs"];
+	allowed_tables = [];
 	main_col = "";
 	global_join = "refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id JOIN health_facility ON refrigerators.facility_row_id = health_facility._id"
 	global_which_cols_to_select = "*"
@@ -239,8 +241,10 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
 		<li id='inject-date_serviced'></li>
 	</ul>
 	<button disabled id='open_model'></button>
-	<br />
-	<button disabled id='open_hf'></button>
+	<!--
+		<br />
+		<button disabled id='open_hf'></button>
+	-->
 	<br />
 	<button disabled id='add_m_log'></button>
 	<br />

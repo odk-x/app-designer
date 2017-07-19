@@ -57,7 +57,7 @@ var customJsOl = function customJsOl() {
 		if (c == null || c == "null") return "No picture available";
 		return "<div class='img-wrapper'><img class='refrig-img' src='" + odkCommon.getRowFileAsUrl(table_id, d.getData(i, "_id"), c) + "' /></div>";
 	}
-	//allowed_tables = [];
+	allowed_tables = [];
 	display_subcol = [["Manufacturer: ", "manufacturer", true], ["Model ID: ", "model_id", true], [makepicture, "refrigerator_picture_uriFragment", true]];
 	allowed_group_bys = ["manufacturer", "climate_zone", "equipment_type"]
 	display_col = "catalog_id"
