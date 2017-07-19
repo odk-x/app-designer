@@ -537,4 +537,8 @@ var formgen_specific_translations = {
 		"default": true,
 		"es": "Grabar Ubicación"
 	}},
+	"Required field": {"text": {
+		"default": true,
+		"es": "Dato requerido"
+	}},
 }

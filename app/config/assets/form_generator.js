@@ -830,7 +830,8 @@ var update = function update(delta) {
 				} else {
 					elem.setAttribute("data-data_populated", "done");
 				}
-				// I feel like this should be updateAllSelects(true) but for some reason that doesn't work (testing on health_facility)
+				// Since the choice filters of other prompts might depend on the value of this prompt, update all the prompts with choice filters
+				// Except for some reason updateAllSelects(true) doesn't work, but this does
 				updateAllSelects(false);
 			}
 		}
@@ -862,6 +863,7 @@ var update = function update(delta) {
 		}
 		// Checks if the field is required
 		if (elems[i].getAttribute("data-required") != null) {
+			elems[i].placeholder = _t("Required field")
 			var entered = screen_data(col);
 			if (entered == null || entered.length == 0) {
 				this_valid = false;
