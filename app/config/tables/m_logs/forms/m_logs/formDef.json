@@ -32,8 +32,10 @@
         "name": "refrigerator_row_id_fake",
         "display": {
           "prompt": {
-            "text": "Enter the ID of the refrigerator",
-            "es": "Por favor entre el ID del frigorífico"
+            "text": {
+              "default": "Enter the ID of the refrigerator",
+              "es": "Por favor entre el ID del frigorífico"
+            }
           }
         },
         "_row_num": 5
@@ -61,8 +63,10 @@
             }
           },
           "prompt": {
-            "text": "Enter the date of service",
-            "es": "Fecha de servicio"
+            "text": {
+              "default": "Enter the date of service",
+              "es": "Fecha de servicio"
+            }
           }
         },
         "_row_num": 9
@@ -78,8 +82,10 @@
             }
           },
           "prompt": {
-            "text": "Enter any extra notes",
-            "es": "Notas extras"
+            "text": {
+              "default": "Enter any extra notes",
+              "es": "Notas extras"
+            }
           }
         },
         "_row_num": 10
@@ -421,8 +427,10 @@
             "name": "refrigerator_row_id_fake",
             "display": {
               "prompt": {
-                "text": "Enter the ID of the refrigerator",
-                "es": "Por favor entre el ID del frigorífico"
+                "text": {
+                  "default": "Enter the ID of the refrigerator",
+                  "es": "Por favor entre el ID del frigorífico"
+                }
               }
             },
             "_row_num": 5,
@@ -443,8 +451,10 @@
                 }
               },
               "prompt": {
-                "text": "Enter the date of service",
-                "es": "Fecha de servicio"
+                "text": {
+                  "default": "Enter the date of service",
+                  "es": "Fecha de servicio"
+                }
               }
             },
             "_row_num": 9,
@@ -465,8 +475,10 @@
                 }
               },
               "prompt": {
-                "text": "Enter any extra notes",
-                "es": "Notas extras"
+                "text": {
+                  "default": "Enter any extra notes",
+                  "es": "Notas extras"
+                }
               }
             },
             "_row_num": 10,
