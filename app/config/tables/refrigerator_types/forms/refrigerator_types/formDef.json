@@ -515,12 +515,12 @@
       },
       {
         "setting_name": "instance_name",
-        "value": "catalog_id",
+        "value": "model_id",
         "_row_num": 7
       },
       {
         "setting_name": "form_version",
-        "value": 20170718,
+        "value": 20170719,
         "_row_num": 8
       },
       {
@@ -595,12 +595,12 @@
       },
       "instance_name": {
         "setting_name": "instance_name",
-        "value": "catalog_id",
+        "value": "model_id",
         "_row_num": 7
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170718,
+        "value": 20170719,
         "_row_num": 8
       },
       "english": {

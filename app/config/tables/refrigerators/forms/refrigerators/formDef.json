@@ -21,8 +21,7 @@
         "_row_num": 2
       },
       {
-        "clause": "if",
-        "condition": 0,
+        "clause": "begin screen",
         "_row_num": 3
       },
       {
@@ -88,8 +87,12 @@
         "_row_num": 6
       },
       {
-        "clause": "begin screen",
+        "clause": "end screen",
         "_row_num": 7
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 8
       },
       {
         "type": "select_one_dropdown",
@@ -110,20 +113,20 @@
           }
         },
         "choice_filter": "choice_item.admin_region === data('adminRegion')",
-        "_row_num": 8
-      },
-      {
-        "clause": "end screen",
         "_row_num": 9
       },
       {
-        "clause": "end if",
+        "clause": "end screen",
         "_row_num": 10
       },
       {
+        "clause": "begin screen",
+        "_row_num": 11
+      },
+      {
         "type": "select_one",
-        "values_list": "refrigerator_model_list",
-        "name": "model_row_id",
+        "values_list": "common_models",
+        "name": "models_common",
         "display": {
           "title": {
             "text": {
@@ -138,11 +141,50 @@
             }
           }
         },
-        "_row_num": 11
+        "_row_num": 12
+      },
+      {
+        "clause": "if",
+        "condition": "data('common_models') === 'other'",
+        "_row_num": 13
+      },
+      {
+        "type": "select_one",
+        "values_list": "refrigerator_model_list",
+        "name": "model_other",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Model",
+              "es": "Modelo"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Choose the refrigerator model:",
+              "es": "Modelo"
+            }
+          }
+        },
+        "_row_num": 14
+      },
+      {
+        "clause": "end if",
+        "_row_num": 15
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 16
       },
       {
         "clause": "begin screen",
-        "_row_num": 12
+        "_row_num": 17
+      },
+      {
+        "type": "assign",
+        "name": "model_row_id",
+        "calculation": "(function() {if (data('common_models') === 'other') { return data('model_other'); } return data('common_models');})()",
+        "_row_num": 18
       },
       {
         "type": "text",
@@ -161,7 +203,7 @@
             }
           }
         },
-        "_row_num": 13
+        "_row_num": 19
       },
       {
         "type": "number",
@@ -180,7 +222,7 @@
             }
           }
         },
-        "_row_num": 14
+        "_row_num": 20
       },
       {
         "type": "select_one",
@@ -200,15 +242,15 @@
             }
           }
         },
-        "_row_num": 15
+        "_row_num": 21
       },
       {
         "clause": "end screen",
-        "_row_num": 16
+        "_row_num": 22
       },
       {
         "clause": "begin screen",
-        "_row_num": 17
+        "_row_num": 23
       },
       {
         "type": "select_one",
@@ -228,7 +270,7 @@
             }
           }
         },
-        "_row_num": 18
+        "_row_num": 24
       },
       {
         "type": "select_one",
@@ -248,7 +290,7 @@
             }
           }
         },
-        "_row_num": 19
+        "_row_num": 25
       },
       {
         "type": "select_one",
@@ -268,7 +310,7 @@
             }
           }
         },
-        "_row_num": 20
+        "_row_num": 26
       },
       {
         "type": "select_one",
@@ -288,11 +330,11 @@
             }
           }
         },
-        "_row_num": 21
+        "_row_num": 27
       },
       {
         "clause": "end screen",
-        "_row_num": 22
+        "_row_num": 28
       }
     ],
     "choices": [
@@ -607,6 +649,84 @@
           }
         },
         "_row_num": 30
+      },
+      {
+        "choice_list_name": "common_models",
+        "data_value": "M5",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Common Model Name One",
+              "es": "Nombre del Modelo Popular Uno"
+            }
+          }
+        },
+        "_row_num": 33
+      },
+      {
+        "choice_list_name": "common_models",
+        "data_value": "M6",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Common Model Name Two",
+              "es": "Nombre del Modelo Popular Dos"
+            }
+          }
+        },
+        "_row_num": 34
+      },
+      {
+        "choice_list_name": "common_models",
+        "data_value": "M7",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Common Model Name Three",
+              "es": "Nombre del Modelo Popular Tres"
+            }
+          }
+        },
+        "_row_num": 35
+      },
+      {
+        "choice_list_name": "common_models",
+        "data_value": "M8",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Common Model Name Four",
+              "es": "Nombre del Modelo Popular Quatro"
+            }
+          }
+        },
+        "_row_num": 36
+      },
+      {
+        "choice_list_name": "common_models",
+        "data_value": "M9",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Common Model Name Five",
+              "es": "Nombre del Modelo Popular Cinco"
+            }
+          }
+        },
+        "_row_num": 37
+      },
+      {
+        "choice_list_name": "common_models",
+        "data_value": "other",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Other",
+              "es": "Otro"
+            }
+          }
+        },
+        "_row_num": 38
       }
     ],
     "queries": [
@@ -701,7 +821,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170718,
+        "value": 20170719,
         "_row_num": 4
       },
       {
@@ -776,7 +896,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170718,
+        "value": 20170719,
         "_row_num": 4
       },
       "survey": {
@@ -1188,6 +1308,86 @@
           },
           "_row_num": 30
         }
+      ],
+      "common_models": [
+        {
+          "choice_list_name": "common_models",
+          "data_value": "M5",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Common Model Name One",
+                "es": "Nombre del Modelo Popular Uno"
+              }
+            }
+          },
+          "_row_num": 33
+        },
+        {
+          "choice_list_name": "common_models",
+          "data_value": "M6",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Common Model Name Two",
+                "es": "Nombre del Modelo Popular Dos"
+              }
+            }
+          },
+          "_row_num": 34
+        },
+        {
+          "choice_list_name": "common_models",
+          "data_value": "M7",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Common Model Name Three",
+                "es": "Nombre del Modelo Popular Tres"
+              }
+            }
+          },
+          "_row_num": 35
+        },
+        {
+          "choice_list_name": "common_models",
+          "data_value": "M8",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Common Model Name Four",
+                "es": "Nombre del Modelo Popular Quatro"
+              }
+            }
+          },
+          "_row_num": 36
+        },
+        {
+          "choice_list_name": "common_models",
+          "data_value": "M9",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Common Model Name Five",
+                "es": "Nombre del Modelo Popular Cinco"
+              }
+            }
+          },
+          "_row_num": 37
+        },
+        {
+          "choice_list_name": "common_models",
+          "data_value": "other",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Other",
+                "es": "Otro"
+              }
+            }
+          },
+          "_row_num": 38
+        }
       ]
     },
     "table_specific_definitions": {
@@ -1318,7 +1518,7 @@
       "facility_row_id": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
@@ -1332,10 +1532,27 @@
         "valuesList": "health_facility_list",
         "elementKey": "facility_row_id"
       },
-      "model_row_id": {
+      "models_common": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Model",
+            "es": "Modelo"
+          }
+        },
+        "valuesList": "common_models",
+        "elementKey": "models_common"
+      },
+      "model_other": {
+        "_defn": [
+          {
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -1347,12 +1564,12 @@
           }
         },
         "valuesList": "refrigerator_model_list",
-        "elementKey": "model_row_id"
+        "elementKey": "model_other"
       },
       "tracking_id": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -1368,7 +1585,7 @@
       "year": {
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -1384,7 +1601,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -1401,7 +1618,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
@@ -1418,7 +1635,7 @@
       "working_status": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 25,
             "section_name": "survey"
           }
         ],
@@ -1435,7 +1652,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -1452,7 +1669,7 @@
       "voltage_regulator": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
@@ -1523,7 +1740,7 @@
             "__rowNum__": 3,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen4",
+            "_branch_label_enclosing_screen": "survey/_screen3",
             "promptIdx": 1
           },
           {
@@ -1549,7 +1766,7 @@
             "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen5",
+            "_branch_label_enclosing_screen": "survey/_screen3",
             "promptIdx": 2
           },
           {
@@ -1575,7 +1792,7 @@
             "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen6",
+            "_branch_label_enclosing_screen": "survey/_screen3",
             "promptIdx": 3
           },
           {
@@ -1597,17 +1814,17 @@
               }
             },
             "choice_filter": "choice_item.admin_region === data('adminRegion')",
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen7",
+            "_branch_label_enclosing_screen": "survey/_screen8",
             "promptIdx": 4
           },
           {
             "type": "select_one",
-            "values_list": "refrigerator_model_list",
-            "name": "model_row_id",
+            "values_list": "common_models",
+            "name": "models_common",
             "display": {
               "title": {
                 "text": {
@@ -1622,12 +1839,37 @@
                 }
               }
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 5
+          },
+          {
+            "type": "select_one",
+            "values_list": "refrigerator_model_list",
+            "name": "model_other",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Model",
+                  "es": "Modelo"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Choose the refrigerator model:",
+                  "es": "Modelo"
+                }
+              }
+            },
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 6
           },
           {
             "type": "text",
@@ -1646,12 +1888,12 @@
                 }
               }
             },
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 6
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 7
           },
           {
             "type": "number",
@@ -1670,12 +1912,12 @@
                 }
               }
             },
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 7
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 8
           },
           {
             "type": "select_one",
@@ -1695,12 +1937,12 @@
                 }
               }
             },
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 9
           },
           {
             "type": "select_one",
@@ -1720,12 +1962,12 @@
                 }
               }
             },
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen17",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 10
           },
           {
             "type": "select_one",
@@ -1745,12 +1987,12 @@
                 }
               }
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen17",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 11
           },
           {
             "type": "select_one",
@@ -1770,12 +2012,12 @@
                 }
               }
             },
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen17",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 12
           },
           {
             "type": "select_one",
@@ -1795,20 +2037,20 @@
                 }
               }
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen17",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 13
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 23,
-            "_branch_label_enclosing_screen": "survey/_screen23",
-            "promptIdx": 13
+            "_row_num": 29,
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 14
           }
         ],
         "validation_tag_map": {
@@ -1822,70 +2064,37 @@
             "operationIdx": 0
           },
           {
-            "clause": "if",
-            "condition": 0,
+            "clause": "begin screen",
             "_row_num": 3,
             "__rowNum__": 2,
-            "_token_type": "goto_label",
-            "_branch_label": "_then3",
-            "operationIdx": 1
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else10",
-            "_row_num": 10,
-            "operationIdx": 2
-          },
-          {
-            "_row_num": 4,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 3
-          },
-          {
-            "_row_num": 5,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "_row_num": 6,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 5
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 7,
-            "__rowNum__": 6,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 9,
-              "__rowNum__": 8,
+              "_row_num": 7,
+              "__rowNum__": 6,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif10",
-            "_row_num": 10,
-            "operationIdx": 7
-          },
-          {
-            "_row_num": 11,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 8
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
           },
           {
             "clause": "begin screen",
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 10,
+              "__rowNum__": 9,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
@@ -1893,8 +2102,8 @@
               "__rowNum__": 15,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 9
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nif (data('common_models') === 'other') {\nactivePromptIndicies.push(6);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 3
           },
           {
             "clause": "begin screen",
@@ -1907,45 +2116,54 @@
               "__rowNum__": 21,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 10
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('model_row_id', (function() {if (data('common_models') === 'other') { return data('model_other'); } return data('common_models');})());\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 28,
+              "__rowNum__": 27,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 23,
-            "operationIdx": 11
+            "_row_num": 29,
+            "operationIdx": 6
           },
           {
-            "_row_num": 23,
+            "_row_num": 29,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 12
+            "operationIdx": 7
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 23,
-            "operationIdx": 13
+            "_row_num": 29,
+            "operationIdx": 8
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_then3": 3,
-          "_screen4": 3,
-          "_screen5": 4,
-          "_screen6": 5,
-          "_screen7": 6,
-          "_else10": 8,
-          "_endif10": 8,
-          "_screen11": 8,
-          "_screen12": 9,
-          "_screen17": 10,
-          "_contents": 12,
-          "_screen23": 12
+          "_screen3": 1,
+          "_screen8": 2,
+          "_screen11": 3,
+          "_screen17": 4,
+          "_screen23": 5,
+          "_contents": 7,
+          "_screen29": 7
         }
       },
       "initial": {
@@ -2212,7 +2430,7 @@
       "facility_row_id": {
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 9,
             "section_name": "survey"
           }
         ],
@@ -2229,10 +2447,30 @@
         "elementSet": "data",
         "elementPath": "facility_row_id"
       },
-      "model_row_id": {
+      "models_common": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Model",
+            "es": "Modelo"
+          }
+        },
+        "valuesList": "common_models",
+        "elementKey": "models_common",
+        "elementName": "models_common",
+        "elementSet": "data",
+        "elementPath": "models_common"
+      },
+      "model_other": {
+        "_defn": [
+          {
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
@@ -2244,15 +2482,15 @@
           }
         },
         "valuesList": "refrigerator_model_list",
-        "elementKey": "model_row_id",
-        "elementName": "model_row_id",
+        "elementKey": "model_other",
+        "elementName": "model_other",
         "elementSet": "data",
-        "elementPath": "model_row_id"
+        "elementPath": "model_other"
       },
       "tracking_id": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -2271,7 +2509,7 @@
       "year": {
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -2290,7 +2528,7 @@
       "power_source": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -2310,7 +2548,7 @@
       "utilization": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
@@ -2330,7 +2568,7 @@
       "working_status": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 25,
             "section_name": "survey"
           }
         ],
@@ -2350,7 +2588,7 @@
       "reason_not_working": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -2370,7 +2608,7 @@
       "voltage_regulator": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
@@ -2517,7 +2755,21 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "model_row_id",
+        "_aspect": "model_other",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Model\",\"es\":\"Modelo\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "models_common",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"common_models\",\"data_value\":\"M5\",\"display\":{\"title\":{\"text\":{\"default\":\"Common Model Name One\",\"es\":\"Nombre del Modelo Popular Uno\"}}},\"_row_num\":33},{\"choice_list_name\":\"common_models\",\"data_value\":\"M6\",\"display\":{\"title\":{\"text\":{\"default\":\"Common Model Name Two\",\"es\":\"Nombre del Modelo Popular Dos\"}}},\"_row_num\":34},{\"choice_list_name\":\"common_models\",\"data_value\":\"M7\",\"display\":{\"title\":{\"text\":{\"default\":\"Common Model Name Three\",\"es\":\"Nombre del Modelo Popular Tres\"}}},\"_row_num\":35},{\"choice_list_name\":\"common_models\",\"data_value\":\"M8\",\"display\":{\"title\":{\"text\":{\"default\":\"Common Model Name Four\",\"es\":\"Nombre del Modelo Popular Quatro\"}}},\"_row_num\":36},{\"choice_list_name\":\"common_models\",\"data_value\":\"M9\",\"display\":{\"title\":{\"text\":{\"default\":\"Common Model Name Five\",\"es\":\"Nombre del Modelo Popular Cinco\"}}},\"_row_num\":37},{\"choice_list_name\":\"common_models\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":38}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "models_common",
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Model\",\"es\":\"Modelo\"}}"
