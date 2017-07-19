@@ -206,11 +206,12 @@ var do_csv_xhr = function do_csv_xhr(choice_id, filename, callback) {
 				// ignore
 				console.log(e);
 			}
+			console.log("XHR complete: " + choice_id)
 			update(0);
 		}
 	};
 	url = odkCommon.localizeUrl(odkCommon.getPreferredLocale(), {"text": filename}, "text", "/" + appname + "/config/tables/" + table_id + "/forms/" + table_id + "/")
-	xhr.open("GET", filename, true);
+	xhr.open("GET", url, true);
 	xhr.send();
 }
 // Called in update() to return a list of choices to put in a select one or select multiple (or select one dropdown or select one with other) prompt
@@ -233,10 +234,9 @@ var get_choices = function get_choices(which, not_first_time, filter) {
 					if (sdat == null || sdat == undefined || sdat.length == 0) return row_data[i];
 					return sdat;
 				}
-						filter_result = eval(tokens[filter])
+				filter_result = eval(tokens[filter])
 			}
-			console.log("result: " + filter_result + " " + typeof(filter_result));
-			if (filter_result === true) {
+			if (filter_result) {
 				// concat on a list will merge them
 				result = result.concat(0);
 				var displayed = choices[j].display;
@@ -364,7 +364,7 @@ var populate_choices = function populate_choices(selects, callback) {
 		stuffs = stuffs.slice(1);
 		// give the list of choices to set and the element to put them on to the callback
 		callback(stuffs, select);
-		if (filter != null &&  saved != null && saved != undefined) {
+		if (saved != null && saved != undefined && saved.trim().length > 0) {
 			changeElement(select, saved);
 		}
 	}
@@ -531,6 +531,82 @@ var updateOrInsert = function updateOrInsert() {
 		alert(_t("Error saving row: ") + d);
 	});
 }
+var updateAllSelects = function updateAllSelects(with_filter_only) {
+
+	populate_choices(document.getElementsByTagName("select"), function(stuffs, select) {
+		for (var j = 0; j < stuffs.length; j++) {
+			var elem = document.createElement("option")
+			if (with_filter_only && !elem.hasAttribute("data-choice-filter")) continue;
+			elem.setAttribute("value", stuffs[j][0]);
+			elem.innerHTML = stuffs[j][1];
+			select.appendChild(elem);
+		}
+	});
+	// Helper function that takes a list of pairs and a prompt element, then adds radio buttons or
+	// checkboxes (depending on the type) with labels to the given element
+	var pop_choices_for_select_one = function(stuffs, select, type) {
+		for (var j = 0; j < stuffs.length; j++) {
+			var id = select.getAttribute("data-dbcol") + "_" + stuffs[j][0];
+			var elem = document.createElement("div")
+			if (with_filter_only && !elem.hasAttribute("data-choice-filter")) continue;
+			elem.style.width = "100%";
+			//elem.classList.add("option")
+			var inner = document.createElement("input")
+			inner.type = type;
+			inner.setAttribute("value", stuffs[j][0]);
+			inner.setAttribute("id", id);
+			inner.setAttribute("name", select.getAttribute("data-dbcol"));
+			inner.addEventListener("change", function() {update(0);});
+			elem.appendChild(inner);
+			var label = document.createElement("label");
+			//var n = document.createElement("span");
+			//n.style.width = "100%";
+			//n.innerHTML = stuffs[j][1];
+			//label.appendChild(n);
+			label.innerHTML = stuffs[j][1]
+			label.setAttribute("for", id);
+			label.id = id + "_tag";
+			elem.appendChild(label);
+			//elem.appendChild(document.createElement("br"));
+			select.appendChild(elem);
+			//label.style.width = (elem.clientWidth - inner.clientWidth - 10).toString() + "px"
+		}
+	};
+	// For select multiple, populate using checkboxes
+	populate_choices(document.getElementsByClassName("select-multiple"), function(stuffs, select) {
+		pop_choices_for_select_one(stuffs, select, "checkbox")
+	});
+	// For select one, populate using radio buttons
+	populate_choices(document.getElementsByClassName("select-one"), function(stuffs, select) {
+		pop_choices_for_select_one(stuffs, select, "radio");
+	});
+	// For select one with other, populate normally then add an extra _other value with the label set to an input element
+	populate_choices(document.getElementsByClassName("select-one-with-other"), function(stuffs, select) {
+		pop_choices_for_select_one(stuffs, select, "radio");
+		var dbcol = select.getAttribute("data-dbcol")
+		pop_choices_for_select_one(["_other", "<input type='text' name='"+dbcol+"' id='"+dbcol+"__other_tag' onblur='document.getElementById(\""+dbcol+"__other\").checked = true; update(0);' />"], select);
+		/*
+		//var elem = document.createElement("div")
+		////elem.classList.add("option")
+		//var id = select.getAttribute("data-dbcol") + "_" + "_other";
+		//var radio = document.createElement("input")
+		//radio.type = "radio";
+		//radio.setAttribute("value", "_other");
+		//radio.id = id
+		//radio.setAttribute("name", select.getAttribute("data-dbcol"));
+		//radio.addEventListener("change", function() {update(0);});
+		//textbox = document.createElement("input");
+		//textbox.type = "text";
+		//textbox.id = id + "_tag"
+		//textbox.setAttribute("name", select.getAttribute("data-dbcol"));
+		//textbox.addEventListener("blur", function() {document.getElementById(select.getAttribute("data-dbcol") + "__other").checked = true; update(0);});
+		//elem.appendChild(radio);
+		//elem.appendChild(textbox);
+		//select.appendChild(elem);
+		*/
+	});
+}
+
 // This is the big function that expects to be called every time there's a change.
 // First argument is a number to be added to global_screen_idx, and if it's not zero, it will redraw the screen with the new page and call update(0)
 // It handles putting the results of doactions onto the screen, setting event listeners on input and select elements, assigns, translations
@@ -696,76 +772,7 @@ var update = function update(delta) {
 	}
 
 	// SET UP SELECT ONE, SELECT MULTIPLE AVAILABLE CHOICES LOGIC
-	populate_choices(document.getElementsByTagName("select"), function(stuffs, select) {
-		for (var j = 0; j < stuffs.length; j++) {
-			var elem = document.createElement("option")
-			elem.setAttribute("value", stuffs[j][0]);
-			elem.innerHTML = stuffs[j][1];
-			select.appendChild(elem);
-		}
-	});
-	// Helper functiont that takes a list of pairs and a prompt element, then adds radio buttons or
-	// checkboxes (depending on the type) with labels to the given element
-	var pop_choices_for_select_one = function(stuffs, select, type) {
-		for (var j = 0; j < stuffs.length; j++) {
-			var id = select.getAttribute("data-dbcol") + "_" + stuffs[j][0];
-			var elem = document.createElement("div")
-			elem.style.width = "100%";
-			//elem.classList.add("option")
-			var inner = document.createElement("input")
-			inner.type = type;
-			inner.setAttribute("value", stuffs[j][0]);
-			inner.setAttribute("id", id);
-			inner.setAttribute("name", select.getAttribute("data-dbcol"));
-			inner.addEventListener("change", function() {update(0);});
-			elem.appendChild(inner);
-			var label = document.createElement("label");
-			//var n = document.createElement("span");
-			//n.style.width = "100%";
-			//n.innerHTML = stuffs[j][1];
-			//label.appendChild(n);
-			label.innerHTML = stuffs[j][1]
-			label.setAttribute("for", id);
-			label.id = id + "_tag";
-			elem.appendChild(label);
-			//elem.appendChild(document.createElement("br"));
-			select.appendChild(elem);
-			//label.style.width = (elem.clientWidth - inner.clientWidth - 10).toString() + "px"
-		}
-	};
-	// For select multiple, populate using checkboxes
-	populate_choices(document.getElementsByClassName("select-multiple"), function(stuffs, select) {
-		pop_choices_for_select_one(stuffs, select, "checkbox")
-	});
-	// For select one, populate using radio buttons
-	populate_choices(document.getElementsByClassName("select-one"), function(stuffs, select) {
-		pop_choices_for_select_one(stuffs, select, "radio");
-	});
-	// For select one with other, populate normally then add an extra _other value with the label set to an input element
-	populate_choices(document.getElementsByClassName("select-one-with-other"), function(stuffs, select) {
-		pop_choices_for_select_one(stuffs, select, "radio");
-		var dbcol = select.getAttribute("data-dbcol")
-		pop_choices_for_select_one(["_other", "<input type='text' name='"+dbcol+"' id='"+dbcol+"__other_tag' onblur='document.getElementById(\""+dbcol+"__other\").checked = true; update(0);' />"], select);
-		/*
-		//var elem = document.createElement("div")
-		////elem.classList.add("option")
-		//var id = select.getAttribute("data-dbcol") + "_" + "_other";
-		//var radio = document.createElement("input")
-		//radio.type = "radio";
-		//radio.setAttribute("value", "_other");
-		//radio.id = id
-		//radio.setAttribute("name", select.getAttribute("data-dbcol"));
-		//radio.addEventListener("change", function() {update(0);});
-		//textbox = document.createElement("input");
-		//textbox.type = "text";
-		//textbox.id = id + "_tag"
-		//textbox.setAttribute("name", select.getAttribute("data-dbcol"));
-		//textbox.addEventListener("blur", function() {document.getElementById(select.getAttribute("data-dbcol") + "__other").checked = true; update(0);});
-		//elem.appendChild(radio);
-		//elem.appendChild(textbox);
-		//select.appendChild(elem);
-		*/
-	});
+	updateAllSelects(false);
 
 	// DATA UPDATE LOGIC
 	// Scrapes all prompts on the screen, compares the result of screen_data(dbcol) against row_data[dbcol] for that prompt,
@@ -813,6 +820,7 @@ var update = function update(delta) {
 				}
 				console.log("Updating " + col + " to saved value " + row_data[col]);
 				var loading = changeElement(elem, row_data[col]);
+				console.log(loading);
 				var sdat = screen_data(col);
 				if (row_data[col] !== null && sdat != row_data[col] && !loading) {
 					// This can happen when the database says a select one should be set to "M55" or something, but that's not one of the possible options.
@@ -822,6 +830,8 @@ var update = function update(delta) {
 				} else {
 					elem.setAttribute("data-data_populated", "done");
 				}
+				// I feel like this should be updateAllSelects(true) but for some reason that doesn't work (testing on health_facility)
+				updateAllSelects(false);
 			}
 		}
 	}

@@ -533,4 +533,8 @@ var formgen_specific_translations = {
 		"default": true,
 		"es": "Grabar Video"
 	}},
+	"Record location": {"text": {
+		"default": true,
+		"es": "Grabar Ubicación"
+	}},
 }
