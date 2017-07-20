@@ -268,7 +268,12 @@ window._tc = function(d, column, text) {
 		// user-entered other value in a select-one-with-other
 		return text;
 	}
-	return display(toTranslate.display, null);
+	var result = display(toTranslate.display, null);
+	if (result == null) {
+		// odkCommon shit the bed again
+		return text;
+	}
+	return result;
 }
 
 

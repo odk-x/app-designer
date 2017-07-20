@@ -25,7 +25,7 @@
 				raw += make_part(15, "15-20 years")
 				raw += make_part(12, "12-15 years")
 				raw += make_part(10, "10-12 years")
-				for (var i = 1; i <= 9; i++) {
+				for (var i = 9; i >= 1; i--) {
 					raw += make_part(i, i.toString() + " years")
 				}
 				raw += make_part(0.5, "6 months");
@@ -42,6 +42,7 @@
 				if (regionDone && typeDone && sourceDone) {
 					var btn = document.getElementById("go");
 					btn.disabled = false;
+					btn.innerText = _tu("Go");
 					btn.addEventListener("click", go);
 				}
 			}
@@ -80,7 +81,7 @@
 				document.getElementById("region_label").innerText = _tu("Select Region");
 				document.getElementById("type_label").innerText = _tu("Select Facility Type");
 				document.getElementById("source_label").innerText = _tu("Select Power Source");
-				document.getElementById("go").innerText = _tu("Go");
+				document.getElementById("go").innerText = _tu("Loading...");
 				document.getElementById("region").children[0].innerText = _tu("None");
 				document.getElementById("type").children[0].innerText = _tu("None");
 				document.getElementById("source").children[0].innerText = _tu("None");
@@ -147,6 +148,9 @@ select {
 	line-height: 1.4;
 	font-size: 20px;
 	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+button:disabled {
+	background-color: grey;
 }
 		</style>
 	</head>

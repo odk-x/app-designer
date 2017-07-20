@@ -14,23 +14,28 @@
 				if (regionDone && typeDone) {
 					var btn = document.getElementById("go");
 					btn.disabled = false;
+					btn.innerText = _tu("Go");
 					btn.addEventListener("click", go);
 				}
 			}
 			var go = function go() {
-				var args = ["grid"];
-				var extras = "";
+				var args = [];
+				var extras = [];
 				var region = document.getElementById("region").selectedOptions[0].value;
 				if (region != "none") {
-					extras = extras.concat(" AND regionLevel2 = ?");
+					extras = extras.concat(" regionLevel2 = ?");
 					args = args.concat(region);
 				}
 				var type = document.getElementById("type").selectedOptions[0].value;
 				if (type != "none") {
-					extras = extras.concat(" AND facility_type = ?");
+					extras = extras.concat(" facility_type = ?");
 					args = args.concat(type);
 				}
-				odkTables.launchHTML(null, "config/assets/cc_graph.html#bar/health_facility/grid_power_availability/SELECT grid_power_availability FROM health_facility WHERE electricity_source = ?" + extras + "/" + JSON.stringify(args) + "/Facility Inventory By Grid Power");
+				if (document.getElementById("electricity_only").checked) {
+					extras = extras.concat(" electricity_source = ?");
+					args = args.concat("grid");
+				}
+				odkTables.launchHTML(null, "config/assets/cc_graph.html#bar/health_facility/grid_power_availability/SELECT (CASE WHEN grid_power_availability IS NULL THEN 'none' ELSE grid_power_availability END) AS grid_power_availability FROM health_facility " + (extras.length == 0 ? "" : " WHERE " + extras.join(" AND ")) + "/" + JSON.stringify(args) + "/Facility Inventory By Grid Power");
 			}
 			var save = function save() {
 				var region = document.getElementById("region").selectedOptions[0].value;
@@ -43,7 +48,8 @@
 				document.getElementById("title").innerText = _tu("Facility Inventory By Grid Power");
 				document.getElementById("region_label").innerText = _tu("Select Region");
 				document.getElementById("type_label").innerText = _tu("Select Facility Type");
-				document.getElementById("go").innerText = _tu("Go");
+				document.getElementById("eo_label").innerText = _tu("Only facilities that use grid power");
+				document.getElementById("go").innerText = _tu("Loading...");
 				document.getElementById("region").children[0].innerText = _tu("None");
 				document.getElementById("type").children[0].innerText = _tu("None");
 				odkData.arbitraryQuery("health_facility", "SELECT regionLevel2 FROM health_facility GROUP BY regionLevel2", [], 10000, 0, function success(d) {
@@ -94,6 +100,9 @@ select {
 	font-size: 20px;
 	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
+button:disabled {
+	background-color: grey;
+}
 		</style>
 	</head>
 	<body onLoad='ol();'>
@@ -103,6 +112,12 @@ select {
 		<br />
 		<div id='type_label'></div>
 		<select id='type'><option value='none'></option></select>
+		<br />
+		<!-- commented out because it's ugly -->
+		<div style="display: none;">
+			<div id='eo_label'></div>
+			<input type="checkbox" id="electricity_only" />
+		</div>
 		<br />
 		<button class="button" disabled id='go'></button>
 	</body>

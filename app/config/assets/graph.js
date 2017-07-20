@@ -35,8 +35,8 @@ var ol = function ol() {
 	canvas.style.height = w;
 	canvas.width = w;
 	canvas.height = w;
-	document.getElementById("key").style.marginTop = w + 30 + "px";
 	odkData.arbitraryQuery(table_id, raw, args, 10000, 0, function success(d) {
+		total_total = d.getCount();
 		for (var i = 0; i < d.getCount(); i++) {
 			var val = d.getData(i, graph_col);
 			if (map[val] === undefined) {
@@ -44,12 +44,15 @@ var ol = function ol() {
 				all_values = all_values.concat(val);
 			}
 			map[val]++;
-			total_total++;
 		}
 		all_values.sort(function(a, b) {
 			return map[a] < map[b];
 		});
-		doGraph(d);
+		if (total_total == 0) {
+			document.getElementById("key").innerText = _t("No results")
+		} else {
+			doGraph(d);
+		}
 	}, function(e) {
 		alert(e);
 	})
@@ -115,16 +118,17 @@ var doGraph = function doGraph(d) {
 		var color = newColor();
 		drawSegment(center_x, center_y, current_percent, percent, color);
 		current_percent += percent;
+		// add to key
 		var label = document.createElement("div");
 		var square = document.createElement("span");
 		square.style.backgroundColor = color;
-		//square.style.border = "1px solid black";
 		square.style.width = square.style.height = "30px";
 		square.style.display = "inline-block";
 		label.appendChild(square);
 		label.appendChild(document.createTextNode(" " + _tu(_tc(d, graph_col, val))+ " - " + pretty_percent(percent)));
 		document.getElementById("key").appendChild(label);
 	}
+	document.getElementById("key").style.marginTop = (canvas.height + 30).toString() + "px";
 }
 var pretty_percent = function pretty_percent(n) {
 	var s = (n * 100).toString();

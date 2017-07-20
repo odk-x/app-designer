@@ -41,7 +41,7 @@ list_views = {
 			for (var i = 0; i < d.getCount(); i++) {
 				var ftype = d.getData(i, "facility_type")
 				menu[2] = menu[2].concat(0);
-				// TODO localize "View "
+				// TODO LOCALIZE "View "
 				menu[2][menu[2].length - 1] = ["View " + _tc(d, "facility_type", ftype) + "s", "health_facility", "STATIC/SELECT *, (SELECT COUNT(*) FROM refrigerators WHERE facility_row_id = health_facility._id) AS refrigerator_count FROM health_facility WHERE admin_region = ? AND facility_type = ?/"+JSON.stringify([val, ftype])+"/health facilities in the admin region ? of the type ?"];
 			}
 			doMenu();
