@@ -112,7 +112,6 @@
             }
           }
         },
-        "choice_filter": "choice_item.admin_region === data('adminRegion')",
         "_row_num": 9
       },
       {
@@ -145,7 +144,7 @@
       },
       {
         "clause": "if",
-        "condition": "data('common_models') === 'other'",
+        "condition": "data('models_common') === 'other'",
         "_row_num": 13
       },
       {
@@ -173,22 +172,8 @@
         "_row_num": 15
       },
       {
-        "clause": "if",
-        "condition": 0,
-        "_row_num": 16
-      },
-      {
-        "type": "text",
-        "name": "model_row_id",
-        "_row_num": 17
-      },
-      {
-        "clause": "end if",
-        "_row_num": 18
-      },
-      {
         "clause": "end screen",
-        "_row_num": 19
+        "_row_num": 16
       },
       {
         "clause": "begin screen",
@@ -196,8 +181,8 @@
       },
       {
         "type": "assign",
-        "name": "model_row_id_wtf_xlsxgenerator_stop_that",
-        "calculation": "(function() {var x = 0; if (data('common_models') === 'other') { x = data('model_other'); } else { x = data('common_models');}; assign('model_row_id', x); })()",
+        "name": "model_row_id",
+        "calculation": "(function() {if (data('models_common') === 'other') { return data('model_other'); } return data('models_common');})()",
         "_row_num": 21
       },
       {
@@ -761,8 +746,8 @@
         "query_type": "linked_table",
         "linked_form_id": "health_facility",
         "linked_table_id": "health_facility",
-        "selection": "facility_id >= ?",
-        "selectionArgs": "['0']",
+        "selection": "admin_region = ?",
+        "selectionArgs": "[data('adminRegion')]",
         "auxillaryHash": "'facility_id>='+opendatakit.encodeURIValue(0)",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
@@ -835,7 +820,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170719,
+        "value": 20170720,
         "_row_num": 4
       },
       {
@@ -910,7 +895,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170719,
+        "value": 20170720,
         "_row_num": 4
       },
       "survey": {
@@ -1425,8 +1410,8 @@
         "query_type": "linked_table",
         "linked_form_id": "health_facility",
         "linked_table_id": "health_facility",
-        "selection": "facility_id >= ?",
-        "selectionArgs": "['0']",
+        "selection": "admin_region = ?",
+        "selectionArgs": "[data('adminRegion')]",
         "auxillaryHash": "'facility_id>='+opendatakit.encodeURIValue(0)",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
@@ -1579,16 +1564,6 @@
         },
         "valuesList": "refrigerator_model_list",
         "elementKey": "model_other"
-      },
-      "model_row_id": {
-        "_defn": [
-          {
-            "_row_num": 17,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "model_row_id"
       },
       "tracking_id": {
         "_defn": [
@@ -1837,7 +1812,6 @@
                 }
               }
             },
-            "choice_filter": "choice_item.admin_region === data('adminRegion')",
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
@@ -1897,16 +1871,6 @@
           },
           {
             "type": "text",
-            "name": "model_row_id",
-            "_row_num": 17,
-            "__rowNum__": 16,
-            "_token_type": "prompt",
-            "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 7
-          },
-          {
-            "type": "text",
             "name": "tracking_id",
             "display": {
               "title": {
@@ -1927,7 +1891,7 @@
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen20",
-            "promptIdx": 8
+            "promptIdx": 7
           },
           {
             "type": "number",
@@ -1951,7 +1915,7 @@
             "_token_type": "prompt",
             "_type": "number",
             "_branch_label_enclosing_screen": "survey/_screen20",
-            "promptIdx": 9
+            "promptIdx": 8
           },
           {
             "type": "select_one",
@@ -1976,7 +1940,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen20",
-            "promptIdx": 10
+            "promptIdx": 9
           },
           {
             "type": "select_one",
@@ -2001,7 +1965,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 11
+            "promptIdx": 10
           },
           {
             "type": "select_one",
@@ -2026,7 +1990,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 12
+            "promptIdx": 11
           },
           {
             "type": "select_one",
@@ -2051,7 +2015,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 13
+            "promptIdx": 12
           },
           {
             "type": "select_one",
@@ -2076,7 +2040,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 14
+            "promptIdx": 13
           },
           {
             "_token_type": "prompt",
@@ -2084,7 +2048,7 @@
             "_type": "contents",
             "_row_num": 32,
             "_branch_label_enclosing_screen": "survey/_screen32",
-            "promptIdx": 15
+            "promptIdx": 14
           }
         ],
         "validation_tag_map": {
@@ -2132,11 +2096,11 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 19,
-              "__rowNum__": 18,
+              "_row_num": 16,
+              "__rowNum__": 15,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nif (data('common_models') === 'other') {\nactivePromptIndicies.push(6);\n}\nif (0) {\nactivePromptIndicies.push(7);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nif (data('models_common') === 'other') {\nactivePromptIndicies.push(6);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
@@ -2150,7 +2114,7 @@
               "__rowNum__": 24,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nassign('model_row_id_wtf_xlsxgenerator_stop_that', (function() {var x = 0; if (data('common_models') === 'other') { x = data('model_other'); } else { x = data('common_models');}; assign('model_row_id', x); })());\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('model_row_id', (function() {if (data('models_common') === 'other') { return data('model_other'); } return data('models_common');})());\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
@@ -2164,7 +2128,7 @@
               "__rowNum__": 30,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
           },
           {
@@ -2176,7 +2140,7 @@
           {
             "_row_num": 32,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
@@ -2520,19 +2484,6 @@
         "elementName": "model_other",
         "elementSet": "data",
         "elementPath": "model_other"
-      },
-      "model_row_id": {
-        "_defn": [
-          {
-            "_row_num": 17,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "elementKey": "model_row_id",
-        "elementName": "model_row_id",
-        "elementSet": "data",
-        "elementPath": "model_row_id"
       },
       "tracking_id": {
         "_defn": [
