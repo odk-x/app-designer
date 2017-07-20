@@ -15,7 +15,7 @@ canvas {
 }
 @media screen and (max-height: 700px) {
 	#key {
-		font-size: 1em;
+		font-size: 70%;
 	}
 }
 

@@ -864,6 +864,13 @@
         },
         "_row_num": 8
       }
+    ],
+    "model": [
+      {
+        "type": "string",
+        "name": "model_row_id",
+        "_row_num": 2
+      }
     ]
   },
   "specification": {
@@ -1447,6 +1454,16 @@
     },
     "calculates": {},
     "model": {
+      "model_row_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "model_row_id"
+      },
       "refrigerator_id": {
         "_defn": [
           {
@@ -2346,6 +2363,19 @@
       }
     },
     "dataTableModel": {
+      "model_row_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "model_row_id",
+        "elementName": "model_row_id",
+        "elementSet": "data",
+        "elementPath": "model_row_id"
+      },
       "refrigerator_id": {
         "_defn": [
           {

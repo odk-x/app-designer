@@ -54,8 +54,7 @@ var make_submenu = function make_submenu() {
 // the menu_path and opens the same html document but with the updated menu_path passed through via the hash
 var buttonClick = function doButtonClick(path) {
 	// first get the submenu that the button represents
-	menu_path = menu_path.concat(Number(path));
-	var submenu = make_submenu();
+	var submenu = make_submenu()[2][Number(path)];
 	// _html should launch a page
 	if (submenu[1] == "_html") {
 		odkTables.launchHTML(null, submenu[2]);
@@ -69,6 +68,7 @@ var buttonClick = function doButtonClick(path) {
 			odkTables.launchHTML(null, listview + "#" + submenu[1] + "/" + submenu[2]);
 		} else {
 			// otherwise it's a submenu. Construct a new hash with our current menu path and open it
+			menu_path = menu_path.concat(Number(path));
 			var new_hash = "#";
 			for (var i = 0; i < menu_path.length; i++) {
 				new_hash += menu_path[i] + "/";

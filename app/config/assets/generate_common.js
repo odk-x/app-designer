@@ -275,7 +275,9 @@ window._tc = function(d, column, text) {
 	}
 	return result;
 }
-
+var open_simple_map = function open_map(table, where, args) {
+	odkTables.openTableToMapView(null, table, where, args, list_views[table] + "#" + table + "/" + where + "/" + args[0]);
+}
 
 var formgen_specific_translations = {
 	"Prompt for database column ": {"text": {

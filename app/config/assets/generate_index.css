@@ -4,6 +4,7 @@ body {
 	font-size: 2em;
 	color: #eee;
 	min-height: 100vh;
+	margin: 0px 0px 0px 0px;
 }
 .button {
 	display: block;
@@ -47,4 +48,5 @@ body {
 	font-family: serif;
 	background-color: #aac;
 	color: black;
+	margin-top: 8px;
 }

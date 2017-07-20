@@ -2,6 +2,7 @@ _element_key,_element_name,_element_type,_list_child_element_keys
 adminRegion,adminRegion,string,[]
 facility_row_id,facility_row_id,string,[]
 model_other,model_other,string,[]
+model_row_id,model_row_id,string,[]
 models_common,models_common,string,[]
 power_source,power_source,string,[]
 reason_not_working,reason_not_working,string,[]
