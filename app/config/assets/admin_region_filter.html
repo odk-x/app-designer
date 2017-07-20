@@ -29,22 +29,44 @@ list_views = {
 	window.location.hash = "#" + hash.split(":").slice(1)
 	menu = ["Loading...", null, []];
 	
-	odkData.arbitraryQuery("health_facility", "SELECT * FROM health_facility WHERE admin_region LIKE ? GROUP BY facility_type", [val], 100, 0, function(d) {
+	odkData.arbitraryQuery("health_facility", "SELECT * FROM health_facility WHERE admin_region LIKE ? OR regionLevel2 LIKE ? GROUP BY facility_type", [val, val], 100, 0, function(d) {
 		if (d.getCount() == 0) {
 			// TODO LOCALIZE
 			menu = ["Admin region " + val + " has no health facilities!", null, []];
 			doMenu();
 		} else {
-			var val = d.getData(0, "admin_region");
-			// TODO LOCALIZE
-			menu = ["Filtering " + val, null, []]
+			var distinct_admin_regions = 0;
+			var all_regions = [];
 			for (var i = 0; i < d.getCount(); i++) {
-				var ftype = d.getData(i, "facility_type")
-				menu[2] = menu[2].concat(0);
-				// TODO LOCALIZE "View "
-				menu[2][menu[2].length - 1] = ["View " + _tc(d, "facility_type", ftype) + "s", "health_facility", "STATIC/SELECT *, (SELECT COUNT(*) FROM refrigerators WHERE facility_row_id = health_facility._id) AS refrigerator_count FROM health_facility WHERE admin_region = ? AND facility_type = ?/"+JSON.stringify([val, ftype])+"/health facilities in the admin region ? of the type ?"];
+				var this_admin_region = d.getData(i, "admin_region")
+				if (all_regions.indexOf(this_admin_region) == -1) {
+					all_regions = all_regions.concat(this_admin_region);
+					distinct_admin_regions++;
+				}
 			}
-			doMenu();
+			if (distinct_admin_regions == 1) {
+				var val = d.getData(0, "admin_region");
+				// TODO LOCALIZE
+				menu = ["Filtering " + val, null, []]
+				for (var i = 0; i < d.getCount(); i++) {
+					var ftype = d.getData(i, "facility_type")
+					menu[2] = menu[2].concat(0);
+					// TODO LOCALIZE "View "
+					menu[2][menu[2].length - 1] = ["View " + _tc(d, "facility_type", ftype) + "s", "health_facility", "STATIC/SELECT *, (SELECT COUNT(*) FROM refrigerators WHERE facility_row_id = health_facility._id) AS refrigerator_count FROM health_facility WHERE admin_region = ? AND facility_type = ?/"+JSON.stringify([val, ftype])+"/health facilities in the admin region ? of the type ?"];
+				}
+				doMenu();
+			} else {
+				var val = d.getData(0, "regionLevel2");
+				// TODO LOCALIZE
+				menu = ["Filtering " + val, null, []]
+				for (var i = 0; i < d.getCount(); i++) {
+					var ftype = d.getData(i, "facility_type")
+					menu[2] = menu[2].concat(0);
+					// TODO LOCALIZE "View "
+					menu[2][menu[2].length - 1] = ["View " + _tc(d, "facility_type", ftype) + "s", "health_facility", "STATIC/SELECT *, (SELECT COUNT(*) FROM refrigerators WHERE facility_row_id = health_facility._id) AS refrigerator_count FROM health_facility WHERE regionLevel2 = ? AND facility_type = ?/"+JSON.stringify([val, ftype])+"/health facilities in region level 2 ? of the type ?"];
+				}
+				doMenu();
+			}
 		}
 	}, function(e) { alert(e); });
 		
