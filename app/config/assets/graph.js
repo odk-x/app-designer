@@ -27,8 +27,6 @@ var ol = function ol() {
 		title = title.replace("?", args[i]);
 	}
 	document.getElementById("title").innerText = title;
-	//document.getElementById("graph").appendChild(canvas);
-	//document.body.appendChild(canvas);
 	document.body.insertBefore(canvas, document.getElementById("key"));
 	var w = Math.min(document.body.clientHeight - document.getElementById("title").clientHeight, document.body.clientWidth);
 	canvas.style.width = w;
@@ -153,7 +151,7 @@ var pretty_percent = function pretty_percent(n) {
 var newColor = function newColor() {
 	if (current_color_idx == all_colors.length) {
 		// We're out of colors!
-		return "#" + newGuid().replace(/-/g, "").substr(0, 6);
+		return "#" + newGuid().replace("-", "").substr(0, 6);
 	}
 	return all_colors[current_color_idx++];
 }

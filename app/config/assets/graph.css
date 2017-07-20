@@ -13,3 +13,9 @@ canvas {
 	padding-bottom: 10px;
 	padding-left: 10px;
 }
+@media screen and (max-height: 700px) {
+	#key {
+		font-size: 1em;
+	}
+}
+

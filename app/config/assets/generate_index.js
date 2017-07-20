@@ -86,6 +86,8 @@ var doMenu = function doMenu() {
 	document.getElementById("title").innerText = _tu(submenu[0]);
 	// len is the number of buttons to put on the screen
 	var len = submenu[2].length;
+	var adjusted_len = len;
+	if (screen.height <= 640) adjusted_len += 4
 	for (var i = 0; i < len; i++) {
 		// the triplet that represents the button
 		var triplet = submenu[2][i];
@@ -104,11 +106,11 @@ var doMenu = function doMenu() {
 		}
 		button.classList.add("button");
 		// If we have a lot of buttons, make the buttons smaller
-		if (len > 20) {
+		if (adjusted_len > 20) {
 			button.classList.add("grid-button");
-		} else if (len > 10) {
+		} else if (adjusted_len > 9) {
 			button.classList.add("tiny-button");
-		} else if (len > 6) {
+		} else if (adjusted_len > 6) {
 			button.classList.add("small-button")
 		}
 		// buttonClick will be passed the index into the list of buttons, so it knows what to add to menu_path
