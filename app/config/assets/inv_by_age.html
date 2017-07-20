@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="generate_common.js"></script>
+		<script src="formgen_common.js"></script>
+		<script type="text/javascript" src="/coldchain/system/js/odkCommon.js"></script>
+		<script type="text/javascript" src="/coldchain/system/js/odkData.js"></script>
+		<script type="text/javascript" src="/coldchain/system/tables/js/odkTables.js"></script>
+		<link href="generate_index.css" rel="stylesheet" />
+		<script>
+			var regionDone = false;
+			var typeDone = false;
+			var sourceDone = false;
+			var check = function check() {
+				if (regionDone && typeDone && sourceDone) {
+					var btn = document.getElementById("go");
+					btn.disabled = false;
+					btn.addEventListener("click", go);
+				}
+			}
+			var go = function go() {
+				var args = [];
+				var extras = [];
+				var region = document.getElementById("region").selectedOptions[0].value;
+				if (region != "none") {
+					extras = extras.concat(" health_facility.regionLevel2 = ?");
+					args = args.concat(region);
+				}
+				var type = document.getElementById("type").selectedOptions[0].value;
+				if (type != "none") {
+					extras = extras.concat(" health_facility.facility_type = ?");
+					args = args.concat(type);
+				}
+				var source = document.getElementById("source").selectedOptions[0].value;
+				if (source != "none") {
+					extras = extras.concat(" power_source = ?");
+					args = args.concat(source);
+				}
+				var raw = "SELECT (CASE WHEN year = 1995 THEN 'the value' ELSE 'other' END) AS normaized_year FROM refrigerators JOIN health_facility ON health_facility._id = refrigerators.facility_row_id " + (extras.length == 0 ? "" : " WHERE " + extras.join(" AND "));
+				odkTables.launchHTML(null, "config/assets/cc_graph.html#bar/refrigerators/normaized_year/"+ raw + "/" + JSON.stringify(args) + "/Refrigerator Age");
+			}
+			var save = function save() {
+				var region = document.getElementById("region").selectedOptions[0].value;
+				var type = document.getElementById("type").selectedOptions[0].value;
+				var source = document.getElementById("source").selectedOptions[0].value;
+				odkCommon.setSessionVariable("inv_by_grid_power:region", region);
+				odkCommon.setSessionVariable("inv_by_grid_power:type", type);
+				odkCommon.setSessionVariable("inv_by_grid_power:source", source);
+			}
+			var ol = function ol() {
+				// TODO LOCALIZE!!!
+				document.getElementById("title").innerText = _tu("Refrigerator Age");
+				document.getElementById("region_label").innerText = _tu("Select Region");
+				document.getElementById("type_label").innerText = _tu("Select Facility Type");
+				document.getElementById("source_label").innerText = _tu("Select Power Source");
+				document.getElementById("go").innerText = _tu("Go");
+				document.getElementById("region").children[0].innerText = _tu("None");
+				document.getElementById("type").children[0].innerText = _tu("None");
+				document.getElementById("source").children[0].innerText = _tu("None");
+				odkData.arbitraryQuery("health_facility", "SELECT regionLevel2 FROM health_facility GROUP BY regionLevel2", [], 10000, 0, function success(d) {
+					var sel = document.getElementById("region");
+					sel.addEventListener("blur", save);
+					sel.addEventListener("change", save);
+					for (var i = 0; i < d.getCount(); i++) {
+						var option = document.createElement("option");
+						option.value = d.getData(i, "regionLevel2");
+						option.innerText = _tu(option.value);
+						sel.appendChild(option);
+						if (odkCommon.getSessionVariable("inv_by_grid_power:region") == option.value) {
+							sel.selectedIndex = i + 1;
+						}
+					}
+					regionDone = true;
+					check();
+				}, null); // TODO failure function
+				odkData.arbitraryQuery("health_facility", "SELECT facility_type FROM health_facility GROUP BY facility_type", [], 10000, 0, function success(d) {
+					var sel = document.getElementById("type");
+					sel.addEventListener("blur", save);
+					sel.addEventListener("change", save);
+					for (var i = 0; i < d.getCount(); i++) {
+						var option = document.createElement("option");
+						option.value = d.getData(i, "facility_type");
+						option.innerText = _tc(d, "facility_type", option.value);
+						sel.appendChild(option);
+						if (odkCommon.getSessionVariable("inv_by_grid_power:type") == option.value) {
+							sel.selectedIndex = i + 1;
+						}
+					}
+					typeDone = true;
+					check();
+				}, null); // TODO failure function
+				odkData.arbitraryQuery("refrigerators", "SELECT power_source FROM refrigerators GROUP BY power_source", [], 10000, 0, function success(d) {
+					var sel = document.getElementById("source");
+					sel.addEventListener("blur", save);
+					sel.addEventListener("change", save);
+					for (var i = 0; i < d.getCount(); i++) {
+						var option = document.createElement("option");
+						option.value = d.getData(i, "power_source");
+						option.innerText = _tc(d, "power_source", option.value);
+						sel.appendChild(option);
+						if (odkCommon.getSessionVariable("inv_by_grid_power:source") == option.value) {
+							sel.selectedIndex = i + 1;
+						}
+					}
+					sourceDone = true;
+					check();
+				}, null); // TODO failure function
+			}
+		</script>
+		<style>
+body {
+	background: url('/coldchain/config/assets/img/hallway.jpg') no-repeat center/cover fixed;
+}
+select {
+	min-width: 50%;
+	background-color: white;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	color: #555;
+	line-height: 1.4;
+	font-size: 20px;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+		</style>
+	</head>
+	<body onLoad='ol();'>
+		<div id="title" class="button"></div>
+		<div id='region_label'></div>
+		<select id='region'><option value='none'></option></select>
+		<br />
+		<div id='type_label'></div>
+		<select id='type'><option value='none'></option></select>
+		<br />
+		<div id='source_label'></div>
+		<select id='source'><option value='none'></option></select>
+		<br />
+		<button class="button" disabled id='go'></button>
+	</body>
+</html>
