@@ -8,6 +8,33 @@
 		<script type="text/javascript" src="/coldchain/system/tables/js/odkTables.js"></script>
 		<link href="generate_index.css" rel="stylesheet" />
 		<script>
+			// can't have a forward slash in the query
+			var one_over_365 = (1.0/365.0).toString();
+			var now = function now() {
+				return "(((julianday(datetime('now')) - julianday(datetime('0001-01-01T00:00:00.0000000'))) * "+one_over_365+") - 0.3)"
+			}
+			var diff = function diff() {
+				return "(abs(" + now() + " - year))"
+			}
+			var make_part = function make_part(years, text) {
+				return " WHEN " + diff() + " > " + years.toString() + " THEN '" + text + "' "
+			}
+			var build_case = function build_case() {
+				var raw = "CASE "
+				raw += make_part(20, "20+ years")
+				raw += make_part(15, "15-20 years")
+				raw += make_part(12, "12-15 years")
+				raw += make_part(10, "10-12 years")
+				for (var i = 1; i <= 9; i++) {
+					raw += make_part(i, i.toString() + " years")
+				}
+				raw += make_part(0.5, "6 months");
+				raw += " ELSE 'Within 6 months' END"
+				return raw
+			}
+			var build = function build() {
+				return "SELECT (" + build_case() + ") AS normalized_year FROM refrigerators JOIN health_facility ON health_facility._id = refrigerators.facility_row_id "
+			}
 			var regionDone = false;
 			var typeDone = false;
 			var sourceDone = false;
@@ -36,16 +63,16 @@
 					extras = extras.concat(" power_source = ?");
 					args = args.concat(source);
 				}
-				var raw = "SELECT (CASE WHEN year = 1995 THEN 'the value' ELSE 'other' END) AS normaized_year FROM refrigerators JOIN health_facility ON health_facility._id = refrigerators.facility_row_id " + (extras.length == 0 ? "" : " WHERE " + extras.join(" AND "));
-				odkTables.launchHTML(null, "config/assets/cc_graph.html#bar/refrigerators/normaized_year/"+ raw + "/" + JSON.stringify(args) + "/Refrigerator Age");
+				var raw = build() + (extras.length == 0 ? "" : " WHERE " + extras.join(" AND "));
+				odkTables.launchHTML(null, "config/assets/cc_graph.html#bar/refrigerators/normalized_year/"+ raw + "/" + JSON.stringify(args) + "/Refrigerator Age");
 			}
 			var save = function save() {
 				var region = document.getElementById("region").selectedOptions[0].value;
 				var type = document.getElementById("type").selectedOptions[0].value;
 				var source = document.getElementById("source").selectedOptions[0].value;
-				odkCommon.setSessionVariable("inv_by_grid_power:region", region);
-				odkCommon.setSessionVariable("inv_by_grid_power:type", type);
-				odkCommon.setSessionVariable("inv_by_grid_power:source", source);
+				odkCommon.setSessionVariable("inv_by_age:region", region);
+				odkCommon.setSessionVariable("inv_by_age:type", type);
+				odkCommon.setSessionVariable("inv_by_age:source", source);
 			}
 			var ol = function ol() {
 				// TODO LOCALIZE!!!
@@ -66,7 +93,7 @@
 						option.value = d.getData(i, "regionLevel2");
 						option.innerText = _tu(option.value);
 						sel.appendChild(option);
-						if (odkCommon.getSessionVariable("inv_by_grid_power:region") == option.value) {
+						if (odkCommon.getSessionVariable("inv_by_age:region") == option.value) {
 							sel.selectedIndex = i + 1;
 						}
 					}
@@ -82,7 +109,7 @@
 						option.value = d.getData(i, "facility_type");
 						option.innerText = _tc(d, "facility_type", option.value);
 						sel.appendChild(option);
-						if (odkCommon.getSessionVariable("inv_by_grid_power:type") == option.value) {
+						if (odkCommon.getSessionVariable("inv_by_age:type") == option.value) {
 							sel.selectedIndex = i + 1;
 						}
 					}
@@ -98,7 +125,7 @@
 						option.value = d.getData(i, "power_source");
 						option.innerText = _tc(d, "power_source", option.value);
 						sel.appendChild(option);
-						if (odkCommon.getSessionVariable("inv_by_grid_power:source") == option.value) {
+						if (odkCommon.getSessionVariable("inv_by_age:source") == option.value) {
 							sel.selectedIndex = i + 1;
 						}
 					}
