@@ -5,7 +5,7 @@
         "clause": "begin screen",
         "screen": {
           "screen_type": "custom",
-          "templatePath": "../tables/adult_coverage/forms/adult_coverage/VR_adult_coverage.handlebars"
+          "templatePath": "../config/tables/adult_coverage/forms/adult_coverage/VR_adult_coverage.handlebars"
         },
         "_row_num": 2
       },
@@ -3586,7 +3586,7 @@
             "clause": "begin screen",
             "screen": {
               "screen_type": "custom",
-              "templatePath": "../tables/adult_coverage/forms/adult_coverage/VR_adult_coverage.handlebars"
+              "templatePath": "../config/tables/adult_coverage/forms/adult_coverage/VR_adult_coverage.handlebars"
             },
             "_row_num": 2,
             "__rowNum__": 1,
