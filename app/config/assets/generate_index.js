@@ -59,6 +59,8 @@ var buttonClick = function doButtonClick(path) {
 	// _html should launch a page
 	if (submenu[1] == "_html") {
 		odkTables.launchHTML(null, submenu[2]);
+	} else if (submenu[1] == "_js") {
+		submenu[2]();
 	} else {
 		// if the third thing is a string, it should be appended to the end of a hash for a list view and then launch the list view
 		if (typeof(submenu[2]) == "string") {

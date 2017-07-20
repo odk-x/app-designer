@@ -39,14 +39,14 @@ var allowed_tables = ["refrigerators", "health_facility", "m_logs", "refrigerato
 // A map of table ids to tokens that can be used to localize their display name
 var localized_tables = {"refrigerators": {"title": {"text": {"default": "Refrigerators", "es": "Frigor\u00edficos"}}}, "health_facility": {"title": {"text": {"default": "Health Facility", "es": "Facilidad de Sal\u00fad"}}}, "m_logs": {"title": {"text": {"default": "Maintenance Logs", "es": "Registro de Servicio"}}}, "refrigerator_types": {"title": {"text": {"default": "Refrigerator Types", "es": "Modelos de Friger\u00edficos"}}}};
 var customJsOl = function customJsOl() {
-	
 	allowed_tables = [];
+document.getElementById("add").style.display = "none";
+
 	global_join = "refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id JOIN health_facility ON refrigerators.facility_row_id = health_facility._id"
 	display_subcol = [["", "model_id", true], ["Healthcare Facility: ", "facility_name", true]];
 	display_col = "refrigerator_id"
 	table_id = "refrigerators";
 	allowed_group_bys = [["facility_row_id", "Facility"], ["model_row_id", "Model"], "reason_not_working", ["utilization", "Use"], "working_status", "year"]
-	document.getElementById("add").style.display = "none";
 
 }
 var customJsSearch = function customJsSearch() {
