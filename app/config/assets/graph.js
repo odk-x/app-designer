@@ -28,7 +28,8 @@ var ol = function ol() {
 	}
 	document.getElementById("title").innerText = title;
 	document.body.insertBefore(canvas, document.getElementById("key"));
-	var w = Math.min(document.body.clientHeight - document.getElementById("title").clientHeight, document.body.clientWidth);
+	var w = Math.min(document.body.clientHeight - document.getElementById("title").clientHeight, document.body.clientWidth) - 16;
+	canvas.style.marginLeft = "8px";
 	canvas.style.width = w;
 	canvas.style.height = w;
 	canvas.width = w;
@@ -49,7 +50,13 @@ var ol = function ol() {
 		if (total_total == 0) {
 			document.getElementById("key").innerText = _t("No results")
 		} else {
-			doGraph(d);
+			if (type == "pie") {
+				doPie(d);
+			} else {
+				doBar(d);
+			}
+			document.getElementById("key").style.marginTop = (canvas.height + 30).toString() + "px";
+			document.getElementById("bg").style.height = document.body.clientHeight.toString() + "px";
 		}
 	}, function(e) {
 		alert(e);
@@ -102,7 +109,17 @@ var drawSegment = function drawSegment(center_x, center_y, starting_percent, per
 	ctxt.fill();
 }
 var key = {};
-var doGraph = function doGraph(d) {
+var add_key = function add_key(color, val, d, percent) {
+	var label = document.createElement("div");
+	var square = document.createElement("span");
+	square.style.backgroundColor = color;
+	square.style.width = square.style.height = "30px";
+	square.style.display = "inline-block";
+	label.appendChild(square);
+	label.appendChild(document.createTextNode(" " + _tu(_tc(d, graph_col, val))+ " - " + pretty_percent(percent)));
+	document.getElementById("key").appendChild(label);
+}
+var doPie = function doPie(d) {
 	var current_percent = 0;
 	var center_x = canvas.width / 2;
 	var center_y = canvas.height / 2;
@@ -116,17 +133,8 @@ var doGraph = function doGraph(d) {
 		var color = newColor();
 		drawSegment(center_x, center_y, current_percent, percent, color);
 		current_percent += percent;
-		// add to key
-		var label = document.createElement("div");
-		var square = document.createElement("span");
-		square.style.backgroundColor = color;
-		square.style.width = square.style.height = "30px";
-		square.style.display = "inline-block";
-		label.appendChild(square);
-		label.appendChild(document.createTextNode(" " + _tu(_tc(d, graph_col, val))+ " - " + pretty_percent(percent)));
-		document.getElementById("key").appendChild(label);
+		add_key(color, val, d, percent);
 	}
-	document.getElementById("key").style.marginTop = (canvas.height + 30).toString() + "px";
 }
 var pretty_percent = function pretty_percent(n) {
 	var s = (n * 100).toString();
@@ -154,4 +162,38 @@ var newColor = function newColor() {
 		return "#" + newGuid().replace("-", "").substr(0, 6);
 	}
 	return all_colors[current_color_idx++];
+}
+var doBar = function doBar(d) {
+	var h = canvas.height;
+	var w = canvas.width
+	var max_percent = 0;
+	var percentages = [];
+	var width_of_one_bar = w / all_values.length;
+	for (var i = 0; i < all_values.length; i++) {
+		var val = all_values[i];
+		var percent = map[val] / total_total;
+		percentages = percentages.concat(percent);
+		max_percent = Math.max(max_percent, percent);
+	}
+	for (var i = 0; i < all_values.length; i++) {
+		var val = all_values[i];
+		var percent = percentages[i];
+		var color = newColor();
+		add_key(color, val, d, percent);
+		var bar_height = h * (percent / max_percent);
+		drawBar(bar_height, width_of_one_bar * i, width_of_one_bar, color);
+	}
+}
+var drawBar = function drawBar(bar_height, starting_y, bar_width, color) {
+	starting_y += bar_width * .05;
+	bar_width *= .90;
+	var ctxt = canvas.getContext("2d");
+	ctxt.fillStyle = color;
+	ctxt.beginPath();
+	ctxt.moveTo(starting_y, canvas.height);
+	ctxt.lineTo(starting_y, canvas.height - bar_height);
+	ctxt.lineTo(starting_y + bar_width, canvas.height - bar_height);
+	ctxt.lineTo(starting_y + bar_width, canvas.height);
+	ctxt.closePath();
+	ctxt.fill();
 }

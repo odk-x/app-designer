@@ -35,7 +35,7 @@
 					extras = extras.concat(" electricity_source = ?");
 					args = args.concat("grid");
 				}
-				odkTables.launchHTML(null, "config/assets/cc_graph.html#bar/health_facility/grid_power_availability/SELECT (CASE WHEN grid_power_availability IS NULL THEN 'none' ELSE grid_power_availability END) AS grid_power_availability FROM health_facility " + (extras.length == 0 ? "" : " WHERE " + extras.join(" AND ")) + "/" + JSON.stringify(args) + "/Facility Inventory By Grid Power");
+				odkTables.launchHTML(null, "config/assets/cc_graph.html#pie/health_facility/grid_power_availability/SELECT (CASE WHEN grid_power_availability IS NULL THEN 'none' ELSE grid_power_availability END) AS grid_power_availability FROM health_facility " + (extras.length == 0 ? "" : " WHERE " + extras.join(" AND ")) + "/" + JSON.stringify(args) + "/Facility Inventory By Grid Power");
 			}
 			var save = function save() {
 				var region = document.getElementById("region").selectedOptions[0].value;
