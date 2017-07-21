@@ -227,6 +227,7 @@ var clean_href = function clean_href() {
 	return href;
 }
 
+// Don't use this function, use _t or _tu
 var __tr = function __tr(s) {
 	console.log("About to translate: " + s);
 	if (s.length == 0) return ["ok",  ""]
@@ -245,19 +246,21 @@ var __tr = function __tr(s) {
 	return ["error", s];
 }
 
+// Try and translate something that's formgen specific, alert if we can't
 window._t = function(s) {
 	var result = __tr(s);
 	if (result[0] == "ok") return result[1];
 	alert("_t could not translate " + s);
 	return s;
 }
+// Try and translate something from the user specific translations, log a message if we can't
 window._tu = function(s) {
 	var result = __tr(s);
 	if (result[0] == "ok") return result[1];
 	console.log("_tu could not translate " + s)
-	//odkData.addRow("m_logs", {"notes": "_tu failed to translate '''" + s + "''' on the page " + window.location.href}, newGuid());
 	return s;
 }
+// Try and translate a choice, this should be used for anything coming out of the database
 window._tc = function(d, column, text) {
 	if (d.getColumnChoicesList(column) == null) {
 		// not a prompt type that needs choices
@@ -275,6 +278,7 @@ window._tc = function(d, column, text) {
 	}
 	return result;
 }
+// Opens a map view for a where clause that only takes one argument, for anything else use STATIC
 var open_simple_map = function open_map(table, where, args) {
 	odkTables.openTableToMapView(null, table, where, args, list_views[table] + "#" + table + "/" + where + "/" + args[0]);
 }

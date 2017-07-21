@@ -63,8 +63,16 @@ var update_callback = function update_callback(d) {
 	var metadata = d.getMetadata();
 
 	// Enable the edit and delete buttons now that we know which row id we're operating on
-	document.getElementById("edit").disabled = false;
-	document.getElementById("delete").disabled = false;
+	if (d.getData(0, "_effective_access").indexOf("w") >= 0) {
+		document.getElementById("edit").disabled = false;
+	} else {
+		document.getElementById("edit").style.display = "none";
+	}
+	if (d.getData(0, "_effective_access").indexOf("d") >= 0) {
+		document.getElementById("delete").disabled = false;
+	} else {
+		document.getElementById("delete").style.display = "none";
+	}
 
 	var ul = document.getElementById("rest");
 	// Clear the "Loading..." message

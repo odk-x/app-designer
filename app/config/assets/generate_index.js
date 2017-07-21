@@ -54,6 +54,7 @@ var make_submenu = function make_submenu() {
 // the menu_path and opens the same html document but with the updated menu_path passed through via the hash
 var buttonClick = function doButtonClick(path) {
 	// first get the submenu that the button represents
+	// Don't want to actually change menu_path because if we open a html view or something and then the activity DOESN'T get destroyed and recreated when we return, menu_path will be pointed into a string and the whole thing will get fucked up
 	var submenu = make_submenu()[2][Number(path)];
 	// _html should launch a page
 	if (submenu[1] == "_html") {

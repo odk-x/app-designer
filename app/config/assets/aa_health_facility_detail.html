@@ -157,14 +157,14 @@ allowed_tables = [];
 			defaults["adminRegion"] = d.getData(0, "admin_region");
 			if (allowed_tables.indexOf("refrigerators") >= 0) {
 				var id = newGuid();
-				odkData.addRow("m_logs", defaults, id, function() {
+				odkData.addRow("refrigerators", defaults, id, function() {
 					// Escape the LIMIT 1
-					odkData.arbitraryQuery("m_logs", "UPDATE m_logs SET _savepoint_type = ? WHERE _id = ?;--", ["INCOMPLETE", id], 100, 0, function success(d) {
+					odkData.arbitraryQuery("refrigerators", "UPDATE refrigerators SET _savepoint_type = ? WHERE _id = ?;--", ["INCOMPLETE", id], 100, 0, function success(d) {
 						odkTables.launchHTML({}, "config/assets/formgen/refrigerators#" + id);
 					}, null);
 				});
 			} else {
-				odkTables.addRowWithSurvey({}, "m_logs", "m_logs", null, defaults);
+				odkTables.addRowWithSurvey({}, "refrigerators", "refrigerators", null, defaults);
 			}
 		});
 	}

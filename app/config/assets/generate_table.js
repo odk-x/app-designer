@@ -313,6 +313,9 @@ var getCols = function getCols() {
 		// Don't use global_which_cols_to_select or we will get extra columns in there that we can't actually group by
 		odkData.arbitraryQuery(table_id, "SELECT * FROM " + table_id + " WHERE 0", [], 0, 0, function success(d) {
 			metadata = d.getMetadata();
+			if (!metadata.canCreateRow) {
+				document.getElementById("add").style.display = "none";
+			}
 			// Skip all the columns that start with underscores
 			for (var i = 0; i < d.getColumns().length; i++) {
 				var col = d.getColumns()[i];
@@ -508,8 +511,14 @@ var doSearch = function doSearch() {
 					});
 				});
 			})(edit, _delete, i, d);
-			buttons.appendChild(edit);
-			buttons.appendChild(_delete);
+			// show edit button only if we can edit the row
+			if (d.getData(i, "_effective_access").indexOf("w") >= 0) {
+				buttons.appendChild(edit);
+			}
+			// show delete button only if we can delete the row
+			if (d.getData(i, "_effective_access").indexOf("d") >= 0) {
+				buttons.appendChild(_delete);
+			}
 			// If we're in a group by view, don't show edit/delete buttons
 			if (!global_group_by) {
 				li.appendChild(buttons)
