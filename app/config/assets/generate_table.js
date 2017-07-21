@@ -169,7 +169,10 @@ var olHasTableId = function olHasTableId() {
 			odkCommon.removeFirstQueuedAction();
 		}
 	});
-	update_total_rows();
+	if (global_static) {
+		document.getElementById("search").style.display = "none";
+	}
+	update_total_rows(true);
 }
 // Called when the user changes the limit dropdown menu.
 // Attempts to change `limit` then calls doSearch
