@@ -108,9 +108,9 @@ ul {
 		</style>
 		<script>
 // A map of table ids to their instance columns (or _id if we couldn't pull it)
-var display_cols = {"refrigerators": "refrigerator_id", "health_facility": "facility_name", "m_logs": "date_serviced", "refrigerator_types": "model_id"}
+var display_cols = {"refrigerators": "tracking_id", "health_facility": "facility_name", "m_logs": "date_serviced", "refrigerator_types": "model_id"}
 // List of tables to edit with formgen. If a table isn't found in this list, we edit it with survey instead
-var allowed_tables = ["refrigerators", "health_facility", "m_logs", "refrigerator_types"];
+var allowed_tables = ["health_facility", "m_logs", "refrigerator_types"];
 var customJsOl = function customJsOl() {
 	var generic_callback = function generic_callback(e, c, d, which, pretty, optional_col_name) {
 	if (optional_col_name == null || optional_col_name == undefined || typeof(optional_col_name) != "string") {
@@ -155,6 +155,7 @@ allowed_tables = [];
 			defaults["regionLevel1"] = d.getData(0, "regionLevel1");
 			defaults["regionLevel2"] = d.getData(0, "regionLevel2");
 			defaults["adminRegion"] = d.getData(0, "admin_region");
+			defaults["refrigerator_id"] = newGuid();
 			if (allowed_tables.indexOf("refrigerators") >= 0) {
 				var id = newGuid();
 				odkData.addRow("refrigerators", defaults, id, function() {
