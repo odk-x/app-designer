@@ -194,7 +194,7 @@ var update_total_rows = function update_total_rows(force) {
 	cached_search = search;
 	// Function to be called when we get the results of the query
 	var success = function success(d) {
-		total_rows = d.getData(0, "COUNT(*)");
+		total_rows = d.getData(0, "cnt");
 		doSearch();
 	};
 	var failure = function failure(e) {
@@ -204,14 +204,13 @@ var update_total_rows = function update_total_rows(force) {
 	// clause will cause it to return the wrong number of results in a group by view
 	//var the_query = make_query(search, 10000, 0);
 	if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
-		var the_query = make_query(search, false, true, "COUNT(*)")
-		//var raw = "SELECT COUNT(*) FROM (SELECT * FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + " GROUP BY " + the_query[2] + ")";
-		//odkData.arbitraryQuery(table_id, raw, the_query[1], the_query[6], the_query[7], success, failure);
-		// TEST
+		var first_query = make_query(search, true, false, global_which_cols_to_select)
+		var the_query = make_query(search, false, true, "COUNT(*) AS cnt FROM ("+first_query[0]+")")
+		console.log(the_query[0]);
 		odkData.arbitraryQuery(table_id, the_query[0], the_query[1], 10000, 0, success, failure);
 	} else {
-		var the_query = make_query(search, true, true, "COUNT(*)")
-		//var raw = "SELECT COUNT(*) FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + (the_query[0] ? " WHERE " + the_query[0] : "") + (the_query[2] ? " GROUP BY " + the_query[2] : "");
+		var first_query = make_query(search, true, false, global_which_cols_to_select)
+		var the_query = make_query(search, false, true, "COUNT(*) AS cnt FROM ("+first_query[0]+")")
 		console.log(the_query[0]);
 		odkData.arbitraryQuery(table_id, the_query[0], the_query[1], 10000, 0, success, failure);
 	}
@@ -229,13 +228,13 @@ var prev = function next() {
 }
 // Helper function to make the sections of a query. It used to return the arguments to odkData.query so you could call
 // odkData.query.apply(make_query(...)) but we need functionality that's not available in odkData.query, so we just pull
-// random indexes out of its result array whenver we need them and use that to call arbitraryQuery
+// random indexes out of its result array whenever we need them and use that to call arbitraryQuery
 var make_query = function make_query(search, apply_where, for_total, cols_to_select) {
 	if (global_static && global_static_args) {
 		if (!for_total) {
 			return [global_static, global_static_args];
 		} else {
-			return ["SELECT " + cols_to_select + " FROM (" + global_static + ")", global_static_args]
+			return ["SELECT " + cols_to_select, global_static_args]
 		}
 	}
 	// bind args
@@ -296,12 +295,9 @@ var make_query = function make_query(search, apply_where, for_total, cols_to_sel
 	if (global_join != null && global_join != undefined && global_join.trim().length > 0) {
 		join = global_join;
 	}
-	where = (where ? " WHERE " + where : "")
-	if (!apply_where) {
-		var raw = "SELECT COUNT(*) FROM (SELECT * FROM " + table_id + (join.length > 0 ? " JOIN " + join : "") + " GROUP BY " + group_by + ")";
-		return [raw, []]
-	}
-	var raw = "SELECT " + cols_to_select + " FROM " + table_id + (join.length > 0 ? " JOIN " + join : "") + where + (group_by ? " GROUP BY " + group_by : "")
+	where = (where && apply_where ? " WHERE " + where : "")
+	group_by = (group_by && apply_where ? " GROUP BY " + group_by : "")
+	var raw = "SELECT " + cols_to_select + (for_total ? "" : " FROM " + table_id) + (join.length > 0 ? " JOIN " + join : "") + where + group_by
 	console.log(raw);
 	//return [where, query_args, group_by, null, null, null, limit, offset, false, join, global_which_cols_to_select];
 	return [raw, query_args];
@@ -367,7 +363,7 @@ var doSearch = function doSearch() {
 		if (d.getCount() == 0) {
 			// try more columns first
 			if (!try_more_cols) {
-				list.innerText = _t("Still searching...");
+				list.innerText = _t("Simple search did not return any results, trying a more advanced search. This might take a minute...");
 				try_more_cols = true;
 				update_total_rows(true)
 				return;
@@ -375,6 +371,7 @@ var doSearch = function doSearch() {
 				// if that doesn't work
 				list.innerText = _t("No results");
 				document.getElementById("navigation-text").innerText = ""
+				try_more_cols = false;
 			}
 		} else {
 			// Clear the results of the last doSearch

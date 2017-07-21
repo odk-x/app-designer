@@ -444,7 +444,7 @@ var formgen_specific_translations = {
 		"default": true,
 		"es": "No se puede obtener las columnas"
 	}},
-	"Still searching...": {"text": {
+	"Simple search did not return any results, trying a more advanced search. This might take a minute...": {"text": {
 		"default": true,
 		"es": "Todavia buscando..."
 	}},
