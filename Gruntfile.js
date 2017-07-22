@@ -1979,6 +1979,17 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
         });
 
     grunt.registerTask(
+        "uninstall",
+        "Uninstalls ODK tools",
+        function remove_folders() {
+            grunt.task.run("remove-folders");
+            var apps = ["core", "services", "survey.android", "survey", "tables"];
+            for (var i = 0; i < apps.length; i++) {
+                console.log("Uninstalling ".concat(apps[i]));
+                grunt.task.run("exec:adbshell:pm uninstall org.opendatakit.".concat(apps[i]));
+            }
+        });
+    grunt.registerTask(
         "remove-folders",
         "Removes the opendatakit folders",
         function remove_folders() {
