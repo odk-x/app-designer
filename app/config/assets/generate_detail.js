@@ -40,11 +40,16 @@ var ol = function ol() {
 }
 // If we couldn't figure out our row/table ids, this function will try and get them from the view data
 var getWhichColumnAndThen = function getWhichColumnAndThen(callback) {
-	odkData.getViewData(function (d) {
-		row_id = d.getData(0, "_id");
-		table_id = d.getTableId();
+	try {
+		odkData.getViewData(function (d) {
+			row_id = d.getData(0, "_id");
+			table_id = d.getTableId();
+			callback();
+		}, failure_callback, 1, 0);
+	} catch (e) {
+		// not in a detail view, oh well, hope they didn't need it to look good
 		callback();
-	}, failure_callback, 1, 0);
+	}
 }
 // Called when the user clicks the delete row button, asks for a confirmation then calls deleteRow
 var _delete = function _delete() {

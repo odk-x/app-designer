@@ -300,7 +300,8 @@ var make_query = function make_query(search, apply_where, for_total, cols_to_sel
 	}
 	where = (where && apply_where ? " WHERE " + where : "")
 	group_by = (group_by && apply_where ? " GROUP BY " + group_by : "")
-	var raw = "SELECT " + cols_to_select + (for_total ? "" : " FROM " + table_id) + (join.length > 0 ? " JOIN " + join : "") + where + group_by
+	join = (join && apply_where ? " JOIN " + join : "")
+	var raw = "SELECT " + cols_to_select + (for_total ? "" : " FROM " + table_id) + join + where + group_by
 	console.log(raw);
 	//return [where, query_args, group_by, null, null, null, limit, offset, false, join, global_which_cols_to_select];
 	return [raw, query_args];
