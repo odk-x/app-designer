@@ -179,7 +179,7 @@
             }
           }
         },
-        "required": 1,
+        "required": "data('models_common') === 'other'",
         "_row_num": 16
       },
       {
@@ -2371,7 +2371,7 @@
                 }
               }
             },
-            "required": 1,
+            "required": "data('models_common') === 'other'",
             "_row_num": 16,
             "__rowNum__": 15,
             "_token_type": "prompt",
