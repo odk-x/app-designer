@@ -262,6 +262,7 @@ window._tu = function(s) {
 }
 // Try and translate a choice, this should be used for anything coming out of the database
 window._tc = function(d, column, text) {
+	/*
 	if (d.getColumnChoicesList(column) == null) {
 		// not a prompt type that needs choices
 		return text;
@@ -277,6 +278,24 @@ window._tc = function(d, column, text) {
 		return text;
 	}
 	return result;
+	*/
+	var table = d.getTableId();
+	if (cols_that_need_choices[table] != undefined) {
+		if (column in cols_that_need_choices[table]) {
+			choice_list = cols_that_need_choices[table][column];
+			var cs = all_choices[table];
+			for (var i = 0; i < cs.length; i++) {
+				if (cs[i]["choice_list_name"] == choice_list && cs[i]["data_value"] == text) {
+					return display(cs[i]["display"]);
+				}
+			}
+			// other in a select one with other
+			return text;
+		}
+		// wtf
+		return text;
+	}
+	return text;
 }
 // Opens a map view for a where clause that only takes one argument, for anything else use STATIC
 var open_simple_map = function open_map(table, where, args) {
