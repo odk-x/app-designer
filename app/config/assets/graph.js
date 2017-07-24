@@ -169,6 +169,7 @@ var doBar = function doBar(d) {
 	var max_percent = 0;
 	var percentages = [];
 	var width_of_one_bar = w / all_values.length;
+	width_of_one_bar = Math.min(width_of_one_bar, w / 3);
 	for (var i = 0; i < all_values.length; i++) {
 		var val = all_values[i];
 		var percent = map[val] / total_total;

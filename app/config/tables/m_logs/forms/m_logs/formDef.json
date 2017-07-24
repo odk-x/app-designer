@@ -6,6 +6,11 @@
         "_row_num": 2
       },
       {
+        "clause": "if",
+        "condition": 0,
+        "_row_num": 3
+      },
+      {
         "type": "string",
         "name": "refrigerator_id",
         "display": {
@@ -22,38 +27,20 @@
             }
           }
         },
-        "_row_num": 3
-      },
-      {
-        "clause": "if",
-        "condition": 0,
+        "required": 1,
         "_row_num": 4
       },
       {
-        "type": "select_one_dropdown",
-        "values_list": "refrigerator_ids",
-        "name": "refrigerator_row_id_fake",
-        "display": {
-          "prompt": {
-            "text": {
-              "default": "Enter the ID of the refrigerator",
-              "es": "Por favor entre el ID del frigorífico"
-            }
-          }
-        },
+        "clause": "end if",
         "_row_num": 5
       },
       {
-        "clause": "end if",
+        "clause": "end screen",
         "_row_num": 6
       },
       {
-        "clause": "end screen",
-        "_row_num": 7
-      },
-      {
         "clause": "begin screen",
-        "_row_num": 8
+        "_row_num": 9
       },
       {
         "type": "date",
@@ -72,7 +59,7 @@
             }
           }
         },
-        "_row_num": 9
+        "_row_num": 10
       },
       {
         "type": "string",
@@ -91,11 +78,11 @@
             }
           }
         },
-        "_row_num": 10
+        "_row_num": 11
       },
       {
         "clause": "end screen",
-        "_row_num": 11
+        "_row_num": 12
       }
     ],
     "queries": [
@@ -335,7 +322,7 @@
       "refrigerator_id": {
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 4,
             "section_name": "survey"
           }
         ],
@@ -348,21 +335,10 @@
         },
         "elementKey": "refrigerator_id"
       },
-      "refrigerator_row_id_fake": {
-        "_defn": [
-          {
-            "_row_num": 5,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "refrigerator_ids",
-        "elementKey": "refrigerator_row_id_fake"
-      },
       "date_serviced": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -379,7 +355,7 @@
       "notes": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 11,
             "section_name": "survey"
           }
         ],
@@ -420,31 +396,13 @@
                 }
               }
             },
-            "_row_num": 3,
-            "__rowNum__": 2,
+            "required": 1,
+            "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "prompt",
             "_type": "string",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
-          },
-          {
-            "type": "select_one_dropdown",
-            "values_list": "refrigerator_ids",
-            "name": "refrigerator_row_id_fake",
-            "display": {
-              "prompt": {
-                "text": {
-                  "default": "Enter the ID of the refrigerator",
-                  "es": "Por favor entre el ID del frigorífico"
-                }
-              }
-            },
-            "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "prompt",
-            "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen2",
-            "promptIdx": 1
           },
           {
             "type": "date",
@@ -463,12 +421,12 @@
                 }
               }
             },
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen8",
-            "promptIdx": 2
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 1
           },
           {
             "type": "string",
@@ -487,24 +445,26 @@
                 }
               }
             },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen8",
-            "promptIdx": 3
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 2
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 12,
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 4
+            "_row_num": 13,
+            "_branch_label_enclosing_screen": "survey/_screen13",
+            "promptIdx": 3
           }
         ],
         "validation_tag_map": {
-          "finalize": []
+          "finalize": [
+            0
+          ]
         },
         "operations": [
           {
@@ -514,37 +474,37 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 7,
-              "__rowNum__": 6,
+              "_row_num": 6,
+              "__rowNum__": 5,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nif (0) {\nactivePromptIndicies.push(1);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (0) {\nactivePromptIndicies.push(0);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
             "clause": "begin screen",
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 11,
-              "__rowNum__": 10,
+              "_row_num": 12,
+              "__rowNum__": 11,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 12,
+            "_row_num": 13,
             "operationIdx": 2
           },
           {
-            "_row_num": 12,
+            "_row_num": 13,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
@@ -553,15 +513,15 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 12,
+            "_row_num": 13,
             "operationIdx": 4
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_screen8": 1,
+          "_screen9": 1,
           "_contents": 3,
-          "_screen12": 3
+          "_screen13": 3
         }
       },
       "initial": {
@@ -749,7 +709,7 @@
       "refrigerator_id": {
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 4,
             "section_name": "survey"
           }
         ],
@@ -765,24 +725,10 @@
         "elementSet": "data",
         "elementPath": "refrigerator_id"
       },
-      "refrigerator_row_id_fake": {
-        "_defn": [
-          {
-            "_row_num": 5,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "refrigerator_ids",
-        "elementKey": "refrigerator_row_id_fake",
-        "elementName": "refrigerator_row_id_fake",
-        "elementSet": "data",
-        "elementPath": "refrigerator_row_id_fake"
-      },
       "date_serviced": {
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 10,
             "section_name": "survey"
           }
         ],
@@ -802,7 +748,7 @@
       "notes": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 11,
             "section_name": "survey"
           }
         ],

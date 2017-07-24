@@ -1,6 +1,7 @@
 body {
 	font-family: "Helvetica", sans-serif;
 	min-height: 100vh;
+	margin-left: 0px;
 }
 /* test */
 #bg {

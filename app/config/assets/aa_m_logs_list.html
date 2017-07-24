@@ -38,14 +38,26 @@ var display_cols = {"refrigerators": "tracking_id", "health_facility": "facility
 var allowed_tables = ["health_facility", "m_logs", "refrigerator_types"]
 // A map of table ids to tokens that can be used to localize their display name
 var localized_tables = {"refrigerators": {"title": {"text": {"default": "Refrigerators", "es": "Frigor\u00edficos"}}}, "health_facility": {"title": {"text": {"default": "Health Facility", "es": "Facilidad de Sal\u00fad"}}}, "m_logs": {"title": {"text": {"default": "Maintenance Logs", "es": "Registro de Servicio"}}}, "refrigerator_types": {"title": {"text": {"default": "Refrigerator Types", "es": "Modelos de Friger\u00edficos"}}}};
+var display_col_wrapper = null;
 var customJsOl = function customJsOl() {
 	allowed_tables = [];
 document.getElementById("add").style.display = "none";
 
-	display_subcol = [["", "refrigerator_id", false]];
+	var notes_cb = function notes_cb(e, notes) {
+		if (notes == undefined || notes == null) {
+			return "";
+		}
+		return notes;
+	}
+	display_col_wrapper = function display_col_wrapper(d, i, c) {
+		return c.split("T")[0];
+	}
+	display_subcol = [["", "refs_tracking_number", true], [notes_cb, "notes", true]];
 	allowed_group_bys = ["manufacturer", "climate_zone", "equipment_type"]
 	display_col = "date_serviced"
 	table_id = "m_logs";
+	global_join = "refrigerators ON refrigerators.refrigerator_id = m_logs.refrigerator_id"
+	global_which_cols_to_select = "*, refrigerators.refrigerator_id AS refs_refid, refrigerators.tracking_id AS refs_tracking_number"
 	document.getElementById("add").style.display = "none";
 
 }

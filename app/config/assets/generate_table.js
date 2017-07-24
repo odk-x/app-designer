@@ -426,7 +426,11 @@ var doSearch = function doSearch() {
 			displays.classList.add("displays");
 			var mainDisplay = document.createElement("div")
 			mainDisplay.classList.add("main-display");
-			mainDisplay.innerText = _tc(d, display_col, d.getData(i, display_col));
+			var to_display = _tc(d, display_col, d.getData(i, display_col));
+			if (display_col_wrapper != null) {
+				to_display = display_col_wrapper(d, i, to_display);
+			}
+			mainDisplay.innerText = to_display;
 			if (global_group_by) mainDisplay.innerText = pretty(mainDisplay.innerText);
 			displays.appendChild(mainDisplay)
 			var subDisplay = null;
