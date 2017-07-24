@@ -4,8 +4,9 @@ body {
 	font-size: 2em;
 	color: #eee;
 	min-height: 100vh;
-	/* test */
-	margin: 0px 0px 0px 0px;
+	margin-top: -8px;
+	margin-bottom: -10px;
+	padding-top: 8px;
 }
 .button {
 	display: block;
