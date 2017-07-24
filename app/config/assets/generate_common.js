@@ -47,7 +47,7 @@ window.fake_translate = function fake_translate(thing) {
 // Helper function for display and fake_translate
 window.display_update_result = function display_update_result(result, this_result, field, selected_locale, table) {
 	if (!result) result = "";
-	if (this_result !== null && this_result !== undefined && this_result.trim().length > 0) {
+	if (this_result !== null && this_result !== undefined && (typeof(this_result) != "string" || this_result.trim().length > 0)) {
 		if (field == "text") {
 			result += this_result;
 		} else {
