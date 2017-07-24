@@ -217,6 +217,7 @@
             }
           }
         },
+        "required": 1,
         "_row_num": 24
       },
       {
@@ -1070,7 +1071,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170721,
+        "value": 20170724,
         "_row_num": 4
       },
       {
@@ -1152,7 +1153,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170721,
+        "value": 20170724,
         "_row_num": 4
       },
       "survey": {
@@ -2396,6 +2397,7 @@
                 }
               }
             },
+            "required": 1,
             "_row_num": 24,
             "__rowNum__": 23,
             "_token_type": "prompt",
@@ -2569,7 +2571,8 @@
             3,
             4,
             5,
-            6
+            6,
+            7
           ]
         },
         "operations": [
