@@ -44,6 +44,10 @@ var localizeTextField = function(fieldName) {
 			return "";
 		}
 		var context = this;
+		if (typeof(str) != "string" || typeof(str) != "Program") {
+		    // Fixes select one integer, the localized value may be 2017 but handlebars NEEDS "2017"
+		    str = str.toString();
+		}
 		var template = Handlebars.compile(str);
 		return template(context);
 	};
