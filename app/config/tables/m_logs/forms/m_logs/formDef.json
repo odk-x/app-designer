@@ -35,14 +35,6 @@
         "_row_num": 5
       },
       {
-        "clause": "end screen",
-        "_row_num": 6
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 9
-      },
-      {
         "type": "date",
         "name": "date_serviced",
         "display": {
@@ -59,7 +51,7 @@
             }
           }
         },
-        "_row_num": 10
+        "_row_num": 6
       },
       {
         "type": "string",
@@ -78,11 +70,11 @@
             }
           }
         },
-        "_row_num": 11
+        "_row_num": 7
       },
       {
         "clause": "end screen",
-        "_row_num": 12
+        "_row_num": 8
       }
     ],
     "queries": [
@@ -338,7 +330,7 @@
       "date_serviced": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -355,7 +347,7 @@
       "notes": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
@@ -421,11 +413,11 @@
                 }
               }
             },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen9",
+            "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 1
           },
           {
@@ -445,19 +437,19 @@
                 }
               }
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen9",
+            "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 2
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 13,
-            "_branch_label_enclosing_screen": "survey/_screen13",
+            "_row_num": 9,
+            "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 3
           }
         ],
@@ -474,54 +466,39 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 6,
-              "__rowNum__": 5,
+              "_row_num": 8,
+              "__rowNum__": 7,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nif (0) {\nactivePromptIndicies.push(0);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (0) {\nactivePromptIndicies.push(0);\n}\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 9,
-            "__rowNum__": 8,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 12,
-              "__rowNum__": 11,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 1
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 13,
-            "operationIdx": 2
+            "_row_num": 9,
+            "operationIdx": 1
           },
           {
-            "_row_num": 13,
+            "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 3
+            "operationIdx": 2
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 13,
-            "operationIdx": 4
+            "_row_num": 9,
+            "operationIdx": 3
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_screen9": 1,
-          "_contents": 3,
-          "_screen13": 3
+          "_contents": 2,
+          "_screen9": 2
         }
       },
       "initial": {
@@ -728,7 +705,7 @@
       "date_serviced": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 6,
             "section_name": "survey"
           }
         ],
@@ -748,7 +725,7 @@
       "notes": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
