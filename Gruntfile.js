@@ -1979,6 +1979,17 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
         });
 
     grunt.registerTask(
+        "uninstall",
+        "Uninstalls ODK tools",
+        function remove_folders() {
+            grunt.task.run("remove-folders");
+            var apps = ["core", "services", "survey.android", "survey", "tables"];
+            for (var i = 0; i < apps.length; i++) {
+                console.log("Uninstalling ".concat(apps[i]));
+                grunt.task.run("exec:adbshell:pm uninstall org.opendatakit.".concat(apps[i]));
+            }
+        });
+    grunt.registerTask(
         "remove-folders",
         "Removes the opendatakit folders",
         function remove_folders() {
@@ -2000,7 +2011,21 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             for (var i = 0; i < files.length; i++) {
                 grunt.task.run("exec:adbpull:".concat(base, files[i], ":", destbase, basename(files[i])));
             }
+            grunt.task.run("adbpull-fixprops")
             grunt.task.run("force:restore")
+        });
+    grunt.registerTask(
+        "adbpull-fixprops",
+        "Removes init strings from device.properties",
+        function props() {
+            var file = tablesConfig.appDir.concat("/", tablesConfig.outputPropsDir, "/device.properties");
+            var props = grunt.file.read(file).split("\n");
+            for (var i = 0; i < props.length; i++) {
+                if (props[i].indexOf("tool_last_initialization_start_time") >= 0) {
+                    props[i] = "";
+                }
+            }
+            grunt.file.write(file, props.join("\n"));
         });
     grunt.registerTask(
         "adbpush-props",

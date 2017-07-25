@@ -14,12 +14,30 @@ It will be replaced by one injected by Android Java code.
 'use strict';
 /* global odkCommon */
 window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
+	_nonEmbeddedState: {},
     showAlerts: false,
-    refId: null,
     enforceRefIdMatch: true,
     clearAuxillaryHash: function() {
         // this only makes sense for screen-rotation recovery actions.
     },
+	_getSurveyStateMgmt: function() {
+		// if ( window.parent === window ) {
+			return this._nonEmbeddedState;
+		// } else {
+		//	return window.parent.getSurveyStateMgmt();
+		// }
+	},
+	_setRefId: function(refId) {
+		var surveyStateMgmt = this._getSurveyStateMgmt();
+		surveyStateMgmt.refId = refId;
+	},
+	_getRefId: function() {
+		var surveyStateMgmt = this._getSurveyStateMgmt();
+		if ( !('refId' in surveyStateMgmt) ) {
+			surveyStateMgmt.refId = null;
+		}
+		return surveyStateMgmt.refId;
+	},
     /**
      * The odkSurveyStateManagement now remembers an entire history of refId values.
      *
@@ -28,20 +46,23 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
      *   instanceId
      *   sectionStateScreenHistory
      */
-    refIdMap: {}, // map indexed by refId
     lookupRefIdData: function(refId) {
-        var settings = this.refIdMap[refId];
+		var surveyStateMgmt = this._getSurveyStateMgmt();
+		if ( !('refIdMap' in surveyStateMgmt) ) {
+			surveyStateMgmt.refIdMap = {};
+		} 
+        var settings = surveyStateMgmt.refIdMap[refId];
         if ( settings === undefined || settings === null ) {
             settings = {
                 instanceId: null,
                 sectionStateScreenHistory: []
             };
-            this.refIdMap[refId] = settings;
+            surveyStateMgmt.refIdMap[refId] = settings;
         }
         return settings;
     },
     clearInstanceId: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: clearInstanceId(" + refId + ")");
             return;
         }
@@ -50,7 +71,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         settings.instanceId = null;
     },
     setInstanceId: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: setInstanceId(" + refId + ", " + instanceId + ")");
             return;
         }
@@ -62,7 +83,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         settings.instanceId = instanceId;
     },
     getInstanceId: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: getInstanceId(" + refId + ")");
             return null;
         }
@@ -98,7 +119,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         odkCommon.log("D","odkSurveyStateManagement ------------- *end*  dumpScreenStateHistory--------------------");
     },
     pushSectionScreenState: function( refId) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: pushSectionScreenState(" + refId + ")");
             return;
         }
@@ -114,7 +135,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         lastSection.history.push( { screen: lastSection.screen, state: lastSection.state } );
     },
     setSectionScreenState: function( refId, screenPath, state) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: setSectionScreenState(" + refId + ", " + screenPath + ", " + state + ")");
             return;
         }
@@ -142,7 +163,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         }
     },
     clearSectionScreenState: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: clearSectionScreenState(" + refId + ")");
             return;
         }
@@ -152,7 +173,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         settings.sectionStateScreenHistory = [ { history: [], screen: 'initial/0', state: null } ];
     },
     getControllerState: function( refId ) {
-        if (this.enforceRefIdMatch && refId != this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: getControllerState(" + refId + ")");
             return null;
         }
@@ -167,7 +188,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         return lastSection.state;
     },
     getScreenPath: function(refId) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: getScreenPath(" + refId + ")");
             return null;
         }
@@ -183,7 +204,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         return lastSection.screen;
     },
     hasScreenHistory: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: hasScreenHistory(" + refId + ")");
             return false;
         }
@@ -202,7 +223,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         return ( thisSection.history.length !== 0 );
     },
     popScreenHistory: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: popScreenHistory(" + refId + ")");
             return null;
         }
@@ -238,7 +259,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
      * Section stack -- maintains the stack of sections from which you can exit.
      */
     hasSectionStack: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: hasSectionStack(" + refId + ")");
             return false;
         }
@@ -247,7 +268,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         return settings.sectionStateScreenHistory.length !== 0;
     },
     popSectionStack: function( refId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: popSectionStack(" + refId + ")");
             return null;
         }
@@ -265,7 +286,7 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         return null;
     },
     frameworkHasLoaded: function(refId, outcome) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: frameworkHasLoaded(" + refId + ", " + outcome + ")");
             return;
         }
@@ -273,20 +294,18 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         if ( this.showAlerts ) alert("notify container frameworkHasLoaded " + (outcome ? "SUCCESS" : "FAILURE"));
     },
     saveAllChangesCompleted: function( refId, instanceId, asComplete ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
             return;
         }
         odkCommon.log("D","odkSurveyStateManagement: DO: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");
         if ( this.showAlerts ) alert("notify container OK save " + (asComplete ? 'COMPLETE' : 'INCOMPLETE') + '.');
-        if ( window.parent === window ) {
-            window.close();
-        } else {
-            window.parent.closeAndPopPage();
-        }
+		odkCommon.closeWindow(-1, {
+			instanceId: instanceId, 
+			savepoint_type: (asComplete ? 'COMPLETE' : 'INCOMPLETE') } );
     },
     saveAllChangesFailed: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: saveAllChangesFailed(" + refId + ", " + instanceId + ")");
             return;
         }
@@ -294,20 +313,19 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
         if ( this.showAlerts ) alert("notify container FAILED save (unknown whether COMPLETE or INCOMPLETE was attempted).");
     },
     ignoreAllChangesCompleted: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
             return;
         }
         odkCommon.log("D","odkSurveyStateManagement: DO: ignoreAllChangesCompleted(" + refId + ", " + instanceId + ")");
         if ( this.showAlerts ) alert("notify container OK ignore all changes.");
-        if ( window.parent === window ) {
-            window.close();
-        } else {
-            window.parent.closeAndPopPage();
-        }
+		// TODO: should we return current savepoint_type for this row?
+		odkCommon.closeWindow(-1, {
+			instanceId: instanceId, 
+			savepoint_type: 'INCOMPLETE' } );
     },
     ignoreAllChangesFailed: function( refId, instanceId ) {
-        if (this.enforceRefIdMatch && refId !== this.refId) {
+        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: ignoreAllChangesFailed(" + refId + ", " + instanceId + ")");
             return;
         }

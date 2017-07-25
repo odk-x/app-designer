@@ -882,9 +882,11 @@ window.odkCommon = {
     *                         "data" : intent.setData(value)  (preferred over "uri")
     *                         "package" : intent.setPackage(value)
     *                         "type" : intent.setType(value)
-	*                         "action" : intent.setAction(value)
-	*                         "category" : either a single string or a list of strings for intent.addCategory(item)
-	*                         "flags" : the integer code for the values to store
+    *                         "action" : intent.setAction(value)
+    *                         "category" : either a single string or a list of strings for intent.addCategory(item)
+    *                         "flags" : the integer code for the values to store
+    *                         "componentPackage" : If both package and activity are specified, 
+    *                         "componentActivity" : will call intent.setComponent(new ComponentInfo(package, activity))
     *                         "extras" : { key-value map describing extras bundle }
     *                   }
     *
@@ -1375,6 +1377,15 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 return "OK";
             }
         },
+		closeWindow: function( resultCode, jsonResult ) {
+			// TODO: return resultCode and result when there is a parent window
+			// stub just closes window and doesn't return value.
+		    if ( window.parent === window ) { 
+                window.close(); 
+            } else { 
+                window.parent.closeAndPopPage(); 
+            } 
+		},
         /**
          * Return the first queued action without removing it.
          */
