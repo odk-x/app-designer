@@ -490,12 +490,13 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             // name, effectively pushing everything twice.  We also specify that we
             // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
-                { cwd: 'app' },
-                '.nomedia',
-                '*',
-                '!system',
-                '!data',
-                '!output');
+                {filter: 'isFile',
+                 cwd: 'app' },
+				'.nomedia',
+                '**',
+                '!system/**',
+				'!data/**',
+				'!output/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
