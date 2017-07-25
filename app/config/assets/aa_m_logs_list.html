@@ -44,7 +44,7 @@ var customJsOl = function customJsOl() {
 document.getElementById("add").style.display = "none";
 
 	var notes_cb = function notes_cb(e, notes) {
-		if (notes == undefined || notes == null) {
+		if (notes == undefined || notes == null || notes == "null") {
 			return "";
 		}
 		return notes;

@@ -11,7 +11,8 @@
 			// can't have a forward slash in the query
 			var one_over_365 = (1.0/365.0).toString();
 			var now = function now() {
-				return "(((julianday(datetime('now')) - julianday(datetime('0001-01-01T00:00:00.0000000'))) * "+one_over_365+") - 0.3)"
+				//return "(((julianday(datetime('now')) - julianday(datetime('0001-01-01T00:00:00.0000000'))) * "+one_over_365+") - 0.32)"
+				return "(CAST(strftime('%Y', 'now') AS INT))"
 			}
 			var diff = function diff() {
 				return "(abs(" + now() + " - year))"

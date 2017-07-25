@@ -35,7 +35,7 @@ var addrf = function addrf() {
 menu[2] = menu[2].concat(0);
 menu[2][menu[2].length - 1] = ["Administrative Actions", null, [
 		["Add Health Facility", "_js", addhf],
-		["Add Refrigerator", "_js", addrf]
+		//["Add Refrigerator", "_js", addrf]
 	]]
 
 if (window.location.hash.substr(1).length == 0) {
@@ -48,7 +48,11 @@ if (window.location.hash.substr(1).length == 0) {
 				var region = r[i].replace("GROUP_ADMIN_REGION_", "");
 				// replace all occurrences
 				region = region.replace(/_/g, " ");
-				odkTables.launchHTML(null, "config/assets/admin_region.html#" + region + ":");
+				var html = "config/assets/admin_region.html#" + region + ":";
+				odkTables.launchHTML(null, html);
+				// just to be safe, in case they press the back button and we weren't destroyed
+				menu = [region, null, [region, "_html", html]]
+				doMenu();
 				break;
 			}
 		}
