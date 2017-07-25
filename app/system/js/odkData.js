@@ -71,9 +71,13 @@ window.odkData = {
 
         var req = that.queueRequest('query', successCallbackFn, failureCallbackFn);
 
-        // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
-        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
-                JSON.stringify(sqlBindParams);
+//         var needToIncludeKVS = that.needToIncludeKVSInQuery(tableId);
+//         console.log('odkData: query: Need to include the KVS is ' + needToIncludeKVS);
+
+        // Test always make this false
+		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+		var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+				JSON.stringify(sqlBindParams);
         that.getOdkDataIf().query(tableId, whereClause, sqlBindParamsJSON, groupBy, 
             having, orderByElementKey, orderByDirection, limit, offset, includeKVS, req._callbackId);
     },
@@ -86,9 +90,9 @@ window.odkData = {
         var stringOffset = offset == null ? null : offset.toString();
         console.log('arbitraryQuery cbId=' + req._callbackId);
 
-        // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
-        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
-                JSON.stringify(sqlBindParams);
+		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+		var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+				JSON.stringify(sqlBindParams);
         that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParamsJSON, stringLimit, stringOffset, req._callbackId);
     },
 
@@ -108,7 +112,7 @@ window.odkData = {
         that.getOdkDataIf().getMostRecentRow(tableId, rowId, req._callbackId);
     },
 
-    changeAccessFilterOfRow: function(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify, 
+	changeAccessFilterOfRow: function(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify, 
         groupPrivileged, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
@@ -117,7 +121,7 @@ window.odkData = {
     that.getOdkDataIf().changeAccessFilterOfRow(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify,
         groupPrivileged, rowId, req._callbackId);
     },
-    
+	
     updateRow: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
@@ -345,8 +349,6 @@ window.odkData = {
         // This is the object that will wrap up the result from an async query.
         var pub = {
             resultObj : null,
-            // holds keyValueList re-imagined as a map.
-            kvMap : {},
 
             /**
              * This function is used to set the 
@@ -356,61 +358,7 @@ window.odkData = {
              * jsonObj should be a JSON object.
              */
             setBackingObject:function(jsonObj) {
-                var that = this;
-                
-                that.resultObj = jsonObj;
-
-                // and build the kvMap
-                if (that.resultObj.metadata.keyValueStoreList === null || 
-                    that.resultObj.metadata.keyValueStoreList === undefined) {
-                    return;
-                }
-
-                var kvsLen = that.resultObj.metadata.keyValueStoreList.length;
-
-                odkCommon.log('W',"odkData/setBackingObject: processing keyValueStoreList of size " + kvsLen);
-
-                // the keyValueStoreList is not very efficient for accessing values.
-                // Convert this into a Javascript map stored in that.kvMap so we can access it as:
-                //      that.kvMap[partition][aspect][key]
-                // And, for partition === 'Column' && key === 'displayChoicesList', add 
-                // two new synthesized keys:
-                //      _displayChoicesList -- JSON.parse of 'displayChoicesList' value (array)
-                //      _displayChoicesMap -- conversion of this list into a map indexed by data_value.
-                //
-                for (var i = 0; i < kvsLen; i++) {
-                    var kvs = that.resultObj.metadata.keyValueStoreList[i];
-                    if ( !(that.kvMap.hasOwnProperty(kvs.partition)) ) {
-                        that.kvMap[kvs.partition] = {};
-                    }
-                    var partition = that.kvMap[kvs.partition];
-                    if ( !(partition.hasOwnProperty(kvs.aspect)) ) {
-                        partition[kvs.aspect] = {};
-                    }
-                    var aspect = partition[kvs.aspect];
-                    aspect[kvs.key] = kvs;
-                    
-                    // Transform the choice list into a map. 
-                    // Use _displayChoicesList as the key.
-                    if ( kvs.partition === "Column" &&
-                         kvs.key === "displayChoicesList" &&
-                         kvs.value !== null ) {
-
-                        // save the parsed content
-                        var choiceList = JSON.parse(kvs.value);
-                        aspect["_" + kvs.key] = choiceList;
-
-                        // create a map of choiceList data_value to object
-                        var choiceMap = {};
-                        aspect["_displayChoicesMap"] = choiceMap;
-                        
-                        var choiceListLen = choiceList.length;
-                        for ( var j = 0 ; j < choiceListLen ; j++) {
-                            var choice = choiceList[j];
-                            choiceMap[choice.data_value] = choice;
-                        }
-                    }
-                }
+                this.resultObj = jsonObj;
             },
 
             // get the number of rows in the result set
@@ -613,10 +561,10 @@ window.odkData = {
                 var i;
                 var key;
                 for ( key in elementKeyMap ) {
-                    if (elementKeyMap.hasOwnProperty(key)) {
-                        i = elementKeyMap[key];
-                        columns[i] = key;
-                    }
+					if (elementKeyMap.hasOwnProperty(key)) {
+						i = elementKeyMap[key];
+						columns[i] = key;
+					}
                 }
                 return columns;
             },
@@ -885,19 +833,17 @@ window.odkData = {
                     return retVal;
                 }
 
-                var ref = that.kvMap['Column'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
+                var kvsLen = that.resultObj.metadata.keyValueStoreList.length;
+
+                for (var i = 0; i < kvsLen; i++) {
+                    var kvs = that.resultObj.metadata.keyValueStoreList[i];
+                    if (kvs.partition === 'Column' &&
+                        kvs.aspect === elementPath && 
+                        kvs.key === 'displayName') {
+                        retVal = kvs.value;
+                    }
                 }
-                var ref = ref[elementPath];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                var ref = ref['displayName'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                retVal = ref.value;
+      
                 return retVal;
             },
 
@@ -918,20 +864,19 @@ window.odkData = {
                     return retVal;
                 }
 
-                var ref = that.kvMap['Table'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
+                var kvsLen = that.resultObj.metadata.keyValueStoreList.length;
+
+                for (var i = 0; i < kvsLen; i++) {
+                    var kvs = that.resultObj.metadata.keyValueStoreList[i];
+                    if (kvs.partition === 'Table' &&
+                        kvs.aspect === 'default' && 
+                        kvs.key === 'displayName') {
+                        retVal = kvs.value;
+                    }
                 }
-                var ref = ref['default'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                var ref = ref['displayName'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                retVal = ref.value;
-                return retVal;       
+
+                return retVal;
+        
             },
 
             getIsTableLocked:function() {
@@ -951,118 +896,26 @@ window.odkData = {
                     return retVal;
                 }
 
-                var ref = that.kvMap['Table'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                var ref = ref['security'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                var ref = ref['locked'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                var v = ref.value;
-                if ( v !== null && v !== undefined && (v.toLowerCase() == "true") ) {
-                    retVal = true;
-                }
-                return retVal;
-            },
+                var kvsLen = that.resultObj.metadata.keyValueStoreList.length;
 
-            //
-            // Retrieves the list of choices for the given elementPath
-            // or null if there is not a list of choices in the table
-            // properties for this column. This is the already-JSON-parsed
-            // value. The list order is the order in which these choices
-            // should be presented in the selection-list.
-            getColumnChoicesList:function(elementPath) {
-                var that = this;
-                var retVal = null;
-
-                if (that.resultObj === null || that.resultObj === undefined) {
-                    return retVal;
+                for (var i = 0; i < kvsLen; i++) {
+                    var kvs = that.resultObj.metadata.keyValueStoreList[i];
+                    if (kvs.partition === 'Table' &&
+                        kvs.aspect === 'security' && 
+                        kvs.key === 'locked') {
+                        var v = kvs.value;
+                        if ( v !== null && v !== undefined && (v.toLowerCase() == "true") ) {
+                            retVal = true;
+                        }
+                    }
                 }
-
-                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
-                    return retVal;
-                }
-
-                if (that.resultObj.metadata.keyValueStoreList === null || 
-                    that.resultObj.metadata.keyValueStoreList === undefined) {
-                    return retVal;
-                }
-
-                var ref = that.kvMap['Column'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                var elementKey = that.getElementKey(elementPath);
-                var ref = ref[elementKey];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                // NOTE: this is synthesized within setBackingObject()
-                var ref = ref['_displayChoicesList'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                retVal = ref;
-                return retVal;
-            },
-
-            //
-            // Effectively retrieves the object for the given data_value from 
-            // the displayChoicesList for the given elementPath. Equivalent to 
-            // searching through the '_displayChoicesList' value for the object
-            // where object.data_value === choiceDataValue.
-            //
-            // The caller can then access the display.title for the 
-            // text translation of this object or any custom property 
-            // associated with this choice data value (via the tableId form).
-            getColumnChoiceDataValueObject:function(elementPath, choiceDataValue) {
-                var that = this;
-                var retVal = elementPath;
-
-                if (that.resultObj === null || that.resultObj === undefined) {
-                    return retVal;
-                }
-
-                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
-                    return retVal;
-                }
-
-                if (that.resultObj.metadata.keyValueStoreList === null || 
-                    that.resultObj.metadata.keyValueStoreList === undefined) {
-                    return retVal;
-                }
-
-                var ref = that.kvMap['Column'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                var elementKey = that.getElementKey(elementPath);
-                var ref = ref[elementKey];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                // NOTE: this is synthesized within setBackingObject()
-                var ref = ref['_displayChoicesMap'];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                var ref = ref.value[choiceDataValue];
-                if ( ref === null || ref === undefined ) {
-                    return retVal;
-                }
-                retVal = ref.display;
                 return retVal;
             },
 
             getCanCreateRow:function() {
                 var that = this;
                 var retVal = false;
-                
+				
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return retVal;
                 }
