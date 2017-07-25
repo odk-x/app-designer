@@ -29,7 +29,7 @@ var postHandler = function(req, res, next) {
 
         var mkdirp = require('mkdirp');
         var fs = require('fs');
-        //var Buffer = require('buffer/').Buffer;
+        var Buffer = require('buffer/').Buffer;
 
         // We don't want the leading /, or else the file system will think
         // we're writing to root, which we don't have permission to. Should
@@ -490,12 +490,13 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             // name, effectively pushing everything twice.  We also specify that we
             // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
-                { cwd: 'app' },
-                '.nomedia',
-                '*',
-                '!system',
-                '!data',
-                '!output');
+                {filter: 'isFile',
+                 cwd: 'app' },
+				'.nomedia',
+                '**',
+                '!system/**',
+				'!data/**',
+				'!output/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -1993,12 +1994,11 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
         "Removes the opendatakit folders",
         function remove_folders() {
             grunt.task.run("killall");
-            var folders = [tablesConfig.deviceMount + "/" + tablesConfig.appName];//, "/sdcard/odk"];
+            var folders = [tablesConfig.deviceMount, "/sdcard/odk"];
             for (var i = 0; i < folders.length; i++) {
                 console.log("Deleting ".concat(folders[i]));
                 grunt.task.run("exec:adbshell:rm -rf ".concat(folders[i]));
             }
-            grunt.task.run("exec:adbshell:run-as org.opendatakit.services rm -rf /data/data/org.opendatakit.services/app_" + tablesConfig.appName);
         });
     grunt.registerTask(
         "adbpull-props",
@@ -2052,7 +2052,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
         "setup",
         "Launch the login and sync screen",
         function() {
-            grunt.task.run("exec:adbshell:am start -a android.intent.action.MAIN -n org.opendatakit.services/.sync.actions.activities.SyncActivity --es appName "+tablesConfig.appName+" --es showLogin true");
+            grunt.task.run("exec:adbshell:am start -a android.intent.action.MAIN -n org.opendatakit.services/.sync.actions.activities.SyncActivity --es appName default --es showLogin true");
         }
     )
     // https://stackoverflow.com/questions/16612495/continue-certain-tasks-in-grunt-even-if-one-fails
