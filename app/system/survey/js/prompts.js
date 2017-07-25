@@ -606,7 +606,7 @@ promptTypes.instances = promptTypes.base.extend({
                     }
 					// this field is undefined if rendering through the app designer
 					var effective_access = term.effective_access;
-					if ( effective_access === undefined || effective_access === null || effective_access.indexOf("rwd") !== -1 ) {
+					if ( effective_access === undefined || effective_access.startsWith("rwd") ) {
 						term.show_delete = true;
 					} else {
 						term.show_delete = false;
