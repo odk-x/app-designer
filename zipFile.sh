@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 rootDir=$(pwd)
 
 # Parse arguments
@@ -83,16 +81,15 @@ cp -r "$appSystem/libs"/* "$surveySystem/libs"
 cp -r "$appSystem/survey/js"/* "$surveySystem/survey/js"
 cp -r "$appSystem/survey/templates"/* "$surveySystem/survey/templates"
 
-(
-  cd "$surveyDir" || exit
-  zip -r config.zip config
-  zip -r system.zip system
-)
+cd $surveyDir
+zip -r config.zip config
+zip -r system.zip system
+cd -
 
 mv "$surveyDir/config.zip" "$surveyDir/configzip"
 mv "$surveyDir/system.zip" "$surveyDir/systemzip"
 
-if test -n "$surveyCopyPath"; then
+if [ $surveyCopyPath ]; then
     cp "$surveyDir/configzip" "$surveyCopyPath"
     cp "$surveyDir/systemzip" "$surveyCopyPath"
 fi
@@ -126,16 +123,15 @@ cp -r "$appSystem/libs"/* "$tablesSystem/libs"
 # Tables system tables files
 cp -r "$appSystem/tables"/* "$tablesSystem/tables"
 
-(
-  cd "$tablesDir" || exit
-  zip -r config.zip config
-  zip -r system.zip system
-)
+cd $tablesDir
+zip -r config.zip config
+zip -r system.zip system
+cd -
 
 mv "$tablesDir/config.zip" "$tablesDir/configzip"
 mv "$tablesDir/system.zip" "$tablesDir/systemzip"
 
-if test -n "$tablesCopyPath"; then
+if [ "$tablesCopyPath" ]; then
     cp "$tablesDir/configzip" "$tablesCopyPath"
     cp "$tablesDir/systemzip" "$tablesCopyPath"
 fi
