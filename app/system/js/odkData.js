@@ -80,6 +80,7 @@ window.odkData = {
 				JSON.stringify(sqlBindParams);
         that.getOdkDataIf().query(tableId, whereClause, sqlBindParamsJSON, groupBy, 
             having, orderByElementKey, orderByDirection, limit, offset, includeKVS, req._callbackId);
+//             having, orderByElementKey, orderByDirection, limit, offset, false, req._callbackId);
     },
 
     arbitraryQuery: function(tableId, sqlCommand, sqlBindParams, limit, offset, successCallbackFn, failureCallbackFn) {
