@@ -20,25 +20,6 @@
     {{/if}}
     <div class="odk-scroll"><div class="odk-container container"></div>
 </div>
-
-{{#if showFooter}} 
-    <div class="row odk-footer container">
-        <div class="my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
-            <div class="col-xs-3 odk-footer-back-btn ">
-                <a class="odk-prev-btn btn btn-default btn-lg navbar-btn {{#unless enableBackNavigation}}disabled{{/unless}}" tabindex="0">
-                {{#unless hideNavigationButtonText}}<span class="glyphicon glyphicon-chevron-left" style="float:left"></span> {{localizeText 'back_button_label'}}{{/unless}}</a> 
-            </div>
-            <div class="col-xs-6">
-
-            </div>
-            <div class="col-xs-3 odk-next-btn">   
-                <a class="odk-next-btn btn btn-default btn-lg navbar-btn {{#unless enableForwardNavigation}}disabled{{/unless}}" tabindex="0" >
-                {{#unless hideNavigationButtonText}}{{#if showAsContinueButton}}{{localizeText 'continue_button_label'}}{{else}}{{localizeText 'next_button_label'}}{{/if}} <span class="glyphicon glyphicon-chevron-right" style="float:right"></span>{{/unless}}</a>               
-            </div>
-        </div>
-    </div>
-{{/if}}
-
     
     
 <style>
@@ -158,24 +139,19 @@
 </div></div>
   
 
-{{! emit the footer always -- so that we get full-screen content area }}
 {{#if showFooter}} 
     <div class="row odk-footer container">
         <div class="my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
             <div class="col-xs-3 odk-footer-back-btn ">
-                <a class="odk-prev-btn btn btn-default btn-lg navbar-btn 
-                {{#unless enableBackNavigation}}disabled{{/unless}}" 
-                role="button">
-                {{#unless hideNavigationButtonText}}<span class="glyphicon glyphicon-chevron-left" style="float:left"></span> back {{/unless}}</a> 
+                <a class="odk-prev-btn btn btn-default btn-lg navbar-btn {{#unless enableBackNavigation}}disabled{{/unless}}" tabindex="0">
+                {{#unless hideNavigationButtonText}}<span class="glyphicon glyphicon-chevron-left" style="float:left"></span> {{localizeText 'back_button_label'}}{{/unless}}</a> 
             </div>
             <div class="col-xs-6">
 
             </div>
             <div class="col-xs-3 odk-next-btn">   
-                <a class="odk-next-btn btn btn-default btn-lg navbar-btn 
-                {{#unless enableForwardNavigation}}disabled{{/unless}}"
-                role="button">
-                {{#unless hideNavigationButtonText}}{{#if showAsContinueButton}}continue {{else}}next{{/if}}<span class="glyphicon glyphicon-chevron-right" style="float:right"></span>{{/unless}}</a>               
+                <a class="odk-next-btn btn btn-default btn-lg navbar-btn {{#unless enableForwardNavigation}}disabled{{/unless}}" tabindex="0" >
+                {{#unless hideNavigationButtonText}}{{#if showAsContinueButton}}{{localizeText 'continue_button_label'}}{{else}}{{localizeText 'next_button_label'}}{{/if}} <span class="glyphicon glyphicon-chevron-right" style="float:right"></span>{{/unless}}</a>               
             </div>
         </div>
     </div>
