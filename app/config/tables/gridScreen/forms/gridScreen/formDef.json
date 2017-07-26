@@ -356,17 +356,17 @@
       },
       {
         "calculation_name": "QFC_get_total",
-        "calculation": "data('QFC_item_1')+data('QFC_item_2')+data('QFC_item_3')+data('QFC_item_4')+data('QFC_item_5')+data('QFC_item_6')",
+        "calculation": "(parseInt(data('QFC_item_1')) ? parseInt(data('QFC_item_1')) : 0) + \n(parseInt(data('QFC_item_2')) ? parseInt(data('QFC_item_2')) : 0) +\n(parseInt(data('QFC_item_3')) ? parseInt(data('QFC_item_3')) : 0) +\n(parseInt(data('QFC_item_4')) ? parseInt(data('QFC_item_4')) : 0) +\n(parseInt(data('QFC_item_5')) ? parseInt(data('QFC_item_5')) : 0) +\n(parseInt(data('QFC_item_6')) ? parseInt(data('QFC_item_6')) : 0)",
         "_row_num": 3
       },
       {
         "calculation_name": "Safeway_get_total",
-        "calculation": "data('Safeway_item_1')+data('Safeway_item_2')+data('Safeway_item_3')+data('Safeway_item_4')+data('Safeway_item_5')+data('Safeway_item_6')",
+        "calculation": "(parseInt(data('Safeway_item_1')) ? parseInt(data('Safeway_item_1')) : 0) + \n(parseInt(data('Safeway_item_2')) ? parseInt(data('Safeway_item_2')) : 0) +\n(parseInt(data('Safeway_item_3')) ? parseInt(data('Safeway_item_3')) : 0) +\n(parseInt(data('Safeway_item_4')) ? parseInt(data('Safeway_item_4')) : 0) +\n(parseInt(data('Safeway_item_5')) ? parseInt(data('Safeway_item_5')) : 0) +\n(parseInt(data('Safeway_item_6')) ? parseInt(data('Safeway_item_6')) : 0)",
         "_row_num": 4
       },
       {
         "calculation_name": "Target_get_total",
-        "calculation": "data('Target_item_1')+data('Target_item_2')+data('Target_item_3')+data('Target_item_4')+data('Target_item_5')+data('Target_item_6')",
+        "calculation": "(parseInt(data('Target_item_1')) ? parseInt(data('Target_item_1')) : 0) + \n(parseInt(data('Target_item_2')) ? parseInt(data('Target_item_2')) : 0) +\n(parseInt(data('Target_item_3')) ? parseInt(data('Target_item_3')) : 0) +\n(parseInt(data('Target_item_4')) ? parseInt(data('Target_item_4')) : 0) +\n(parseInt(data('Target_item_5')) ? parseInt(data('Target_item_5')) : 0) +\n(parseInt(data('Target_item_6')) ? parseInt(data('Target_item_6')) : 0)",
         "_row_num": 5
       }
     ],
@@ -979,17 +979,17 @@
       },
       "QFC_get_total": {
         "calculation_name": "QFC_get_total",
-        "calculation": "data('QFC_item_1')+data('QFC_item_2')+data('QFC_item_3')+data('QFC_item_4')+data('QFC_item_5')+data('QFC_item_6')",
+        "calculation": "(parseInt(data('QFC_item_1')) ? parseInt(data('QFC_item_1')) : 0) + \n(parseInt(data('QFC_item_2')) ? parseInt(data('QFC_item_2')) : 0) +\n(parseInt(data('QFC_item_3')) ? parseInt(data('QFC_item_3')) : 0) +\n(parseInt(data('QFC_item_4')) ? parseInt(data('QFC_item_4')) : 0) +\n(parseInt(data('QFC_item_5')) ? parseInt(data('QFC_item_5')) : 0) +\n(parseInt(data('QFC_item_6')) ? parseInt(data('QFC_item_6')) : 0)",
         "_row_num": 3
       },
       "Safeway_get_total": {
         "calculation_name": "Safeway_get_total",
-        "calculation": "data('Safeway_item_1')+data('Safeway_item_2')+data('Safeway_item_3')+data('Safeway_item_4')+data('Safeway_item_5')+data('Safeway_item_6')",
+        "calculation": "(parseInt(data('Safeway_item_1')) ? parseInt(data('Safeway_item_1')) : 0) + \n(parseInt(data('Safeway_item_2')) ? parseInt(data('Safeway_item_2')) : 0) +\n(parseInt(data('Safeway_item_3')) ? parseInt(data('Safeway_item_3')) : 0) +\n(parseInt(data('Safeway_item_4')) ? parseInt(data('Safeway_item_4')) : 0) +\n(parseInt(data('Safeway_item_5')) ? parseInt(data('Safeway_item_5')) : 0) +\n(parseInt(data('Safeway_item_6')) ? parseInt(data('Safeway_item_6')) : 0)",
         "_row_num": 4
       },
       "Target_get_total": {
         "calculation_name": "Target_get_total",
-        "calculation": "data('Target_item_1')+data('Target_item_2')+data('Target_item_3')+data('Target_item_4')+data('Target_item_5')+data('Target_item_6')",
+        "calculation": "(parseInt(data('Target_item_1')) ? parseInt(data('Target_item_1')) : 0) + \n(parseInt(data('Target_item_2')) ? parseInt(data('Target_item_2')) : 0) +\n(parseInt(data('Target_item_3')) ? parseInt(data('Target_item_3')) : 0) +\n(parseInt(data('Target_item_4')) ? parseInt(data('Target_item_4')) : 0) +\n(parseInt(data('Target_item_5')) ? parseInt(data('Target_item_5')) : 0) +\n(parseInt(data('Target_item_6')) ? parseInt(data('Target_item_6')) : 0)",
         "_row_num": 5
       }
     },
