@@ -216,11 +216,20 @@ promptTypes.base = Backbone.View.extend({
         var that = this;
         try {
             // First check that it needs to be reRendered
-            var currEl = that.$el
-            var currElString = currEl[0].innerHTML;
+            var currEl = that.$el;
+            // Get the innerHTML if we can 
+            var currElString = null;
+            var currElStringNoSpaces = null;
+            if (currEl.length > 0) {
+                currElString = currEl[0].innerHTML;
+                currElStringNoSpaces = currElString.replace(/\s/g, '');
+            }
             var toBeDrawnEl = that.template(that.renderContext);
-            var currElStringNoSpaces = currElString.replace(/\s/g, '');
-            var tbdString = toBeDrawnEl.replace(/\s/g, '');
+            var tbdString = null;
+            if (toBeDrawnEl !== null && toBeDrawnEl !== undefined) {
+                tbdString = toBeDrawnEl.replace(/\s/g, '');
+            }
+
             if (currElStringNoSpaces !== tbdString) {
                 that.$el.html(toBeDrawnEl);
             }
