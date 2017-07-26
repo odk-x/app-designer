@@ -48,8 +48,7 @@
             sendData.setAttribute("id", "button3");
             sendData.innerHTML = "Send Data";
             sendData.onclick = function() {
-              // nothing for now
-              console.log("not plugged in, but should launch sync");
+              odkCommon.doAction(null, "org.opendatakit.services.sync.actions.activities.SyncActivity", {"componentPackage": "org.opendatakit.services", "componentActivity": "org.opendatakit.services.sync.actions.activities.SyncActivity"});
             }
             document.getElementById("wrapper").appendChild(sendData);    
         }
