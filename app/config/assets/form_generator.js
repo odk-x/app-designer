@@ -947,18 +947,21 @@ var update = function update(delta) {
 	var elems = document.getElementsByClassName("image");
 	for (var i = 0; i < elems.length; i++) {
 		var elem = elems[i];
-		var dbcol = elem.getAttribute("data-dbcol") + "_uriFragment";
-		if (row_data[dbcol] == null || row_data[dbcol] == undefined || row_data[dbcol].trim().length == 0) {
+		var source_col = elem.getAttribute("data-dbcol") + "_uriFragment";
+		if (row_data[source_col] == null || row_data[source_col] == undefined || row_data[source_col].trim().length == 0) {
 			// don't bother setting it if there's no source to set
 			continue;
 		}
-		var newsrc = odkCommon.getRowFileAsUrl(table_id, row_id, data(dbcol));
+		var newsrc = odkCommon.getRowFileAsUrl(table_id, row_id, data(source_col));
+		var type = data(elem.getAttribute("data-dbcol") + "_contentType")
 		if (elem.src != newsrc) {
 			if (elem.classList.contains("audio") || elem.classList.contains("video")) {
 				elem.innerHTML = "";
 				var newsource = document.createElement("source");
 				newsource.src = newsrc;
+				newsource.type = type;
 				elem.appendChild(newsource);
+				elem.controls = "controls"
 			} else {
 				elem.src = newsrc;
 			}
