@@ -6,6 +6,6 @@ Column,Loose_Leaf,displayChoicesList,object,"[{""choice_list_name"":""yes_no"","
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,Tea_inventory
 Table,default,defaultViewType,string,LIST
-Table,default,detailViewFileName,string,config/tables/Tea_inventory/html/Tea_inventory_detail.html
+Table,default,detailViewFileName,string,config/assets/Tea_inventory_detail.html
 Table,default,displayName,object,"{""text"":""Tea Inventory""}"
-Table,default,listViewFileName,string,config/tables/Tea_inventory/html/Tea_inventory_list.html
+Table,default,listViewFileName,string,config/assets/Tea_inventory_list.html

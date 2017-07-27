@@ -9,7 +9,7 @@
             "text": "Enter the name of the tea."
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 2
       },
       {
@@ -21,7 +21,7 @@
             "text": "Choose the tea type."
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 3
       },
       {
@@ -33,7 +33,7 @@
             "text": "Is {{data.Name}} served with bags?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 4
       },
       {
@@ -45,7 +45,7 @@
             "text": "Is {{data.Name}} served cold?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 5
       },
       {
@@ -57,7 +57,7 @@
             "text": "Is {{data.Name}} served hot?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 6
       },
       {
@@ -69,7 +69,7 @@
             "text": "Is {{data.Name}} loose leaf?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 7
       },
       {
@@ -80,7 +80,7 @@
             "text": "What is the price of an 8 ounce {{data.Name}}?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 8
       },
       {
@@ -91,7 +91,7 @@
             "text": "What is the price of a 12 ounce {{data.Name}}?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 9
       },
       {
@@ -102,7 +102,7 @@
             "text": "What is the price of a 16 ounce {{data.Name}}?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 10
       },
       {
@@ -114,7 +114,7 @@
             "text": "Select the Tea house where this tea is served"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 11
       }
     ],
@@ -177,7 +177,7 @@
         "aspect": "default",
         "key": "detailViewFileName",
         "type": "string",
-        "value": "config/tables/Tea_inventory/html/Tea_inventory_detail.html",
+        "value": "config/assets/Tea_inventory_detail.html",
         "_row_num": 3
       },
       {
@@ -185,7 +185,7 @@
         "aspect": "default",
         "key": "listViewFileName",
         "type": "string",
-        "value": "config/tables/Tea_inventory/html/Tea_inventory_list.html",
+        "value": "config/assets/Tea_inventory_list.html",
         "_row_num": 4
       }
     ],
@@ -455,7 +455,7 @@
                 "text": "Enter the name of the tea."
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -472,7 +472,7 @@
                 "text": "Choose the tea type."
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
@@ -489,7 +489,7 @@
                 "text": "Is {{data.Name}} served with bags?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
@@ -506,7 +506,7 @@
                 "text": "Is {{data.Name}} served cold?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
@@ -523,7 +523,7 @@
                 "text": "Is {{data.Name}} served hot?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -540,7 +540,7 @@
                 "text": "Is {{data.Name}} loose leaf?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
@@ -556,7 +556,7 @@
                 "text": "What is the price of an 8 ounce {{data.Name}}?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
@@ -572,7 +572,7 @@
                 "text": "What is the price of a 12 ounce {{data.Name}}?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
@@ -588,7 +588,7 @@
                 "text": "What is the price of a 16 ounce {{data.Name}}?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "prompt",
@@ -605,7 +605,7 @@
                 "text": "Select the Tea house where this tea is served"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 11,
             "__rowNum__": 10,
             "_token_type": "prompt",
@@ -1217,7 +1217,7 @@
         "_aspect": "default",
         "_key": "detailViewFileName",
         "_type": "string",
-        "_value": "config/tables/Tea_inventory/html/Tea_inventory_detail.html"
+        "_value": "config/assets/Tea_inventory_detail.html"
       },
       {
         "_partition": "Table",
@@ -1231,7 +1231,7 @@
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "string",
-        "_value": "config/tables/Tea_inventory/html/Tea_inventory_list.html"
+        "_value": "config/assets/Tea_inventory_list.html"
       }
     ]
   }

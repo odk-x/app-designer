@@ -4,6 +4,6 @@ Column,Fermented,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,Tea_types
 Table,default,defaultViewType,string,LIST
-Table,default,detailViewFileName,string,config/tables/Tea_types/html/Tea_types_detail.html
+Table,default,detailViewFileName,string,config/assets/Tea_types_detail.html
 Table,default,displayName,object,"{""text"":""Tea Types""}"
-Table,default,listViewFileName,string,config/tables/Tea_types/html/Tea_types_list.html
+Table,default,listViewFileName,string,config/assets/Tea_types_list.html

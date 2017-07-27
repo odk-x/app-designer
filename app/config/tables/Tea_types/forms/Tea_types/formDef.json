@@ -9,7 +9,7 @@
             "text": "Enter the Tea Type Name"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 2
       },
       {
@@ -20,7 +20,7 @@
             "text": "Enter the Origin"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 3
       },
       {
@@ -32,7 +32,7 @@
             "text": "Is the Tea Caffeinated?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 4
       },
       {
@@ -44,7 +44,7 @@
             "text": "Is the Tea Fermented?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 5
       }
     ],
@@ -92,7 +92,7 @@
       },
       {
         "setting_name": "disableSwipeNavigation",
-        "value": true,
+        "value": 1,
         "_row_num": 6
       },
       {
@@ -115,7 +115,7 @@
         "aspect": "default",
         "key": "detailViewFileName",
         "type": "string",
-        "value": "config/tables/Tea_types/html/Tea_types_detail.html",
+        "value": "config/assets/Tea_types_detail.html",
         "_row_num": 3
       },
       {
@@ -123,7 +123,7 @@
         "aspect": "default",
         "key": "listViewFileName",
         "type": "string",
-        "value": "config/tables/Tea_types/html/Tea_types_list.html",
+        "value": "config/assets/Tea_types_list.html",
         "_row_num": 4
       }
     ]
@@ -166,7 +166,7 @@
       },
       "disableSwipeNavigation": {
         "setting_name": "disableSwipeNavigation",
-        "value": true,
+        "value": 1,
         "_row_num": 6
       },
       "instance_name": {
@@ -294,7 +294,7 @@
                 "text": "Enter the Tea Type Name"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -310,7 +310,7 @@
                 "text": "Enter the Origin"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
@@ -327,7 +327,7 @@
                 "text": "Is the Tea Caffeinated?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
@@ -344,7 +344,7 @@
                 "text": "Is the Tea Fermented?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
@@ -812,7 +812,7 @@
         "_aspect": "default",
         "_key": "detailViewFileName",
         "_type": "string",
-        "_value": "config/tables/Tea_types/html/Tea_types_detail.html"
+        "_value": "config/assets/Tea_types_detail.html"
       },
       {
         "_partition": "Table",
@@ -826,7 +826,7 @@
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "string",
-        "_value": "config/tables/Tea_types/html/Tea_types_list.html"
+        "_value": "config/assets/Tea_types_list.html"
       }
     ]
   }

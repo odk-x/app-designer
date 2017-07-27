@@ -44,15 +44,11 @@ var clicked = function(table_id, row_id) {
 }
 var customJsOl = function customJsOl() {
 	
-		var ack = function(_, c) {
-			if (c == "true") {
-				return "Does acknowledge <i><span style='color: red; font-weight: bold;>html</html>";
-			}
-			return "Doesn't acknowledge!";
-		}
-		display_subcol = [[ack, "has_html", false], ["/10", null, true]];
-		display_col = "name"
-		table_id = "exampleForm";
+	global_join = "Tea_houses ON Tea_houses._id = Tea_inventory.House_id JOIN Tea_types ON Tea_types._id = Tea_inventory.Type_id"
+	global_which_cols_to_select = "*, Tea_types.Name AS ttName, Tea_houses.Name AS thName, Tea_inventory.Name AS tiName"
+	display_subcol = [["Tea House: ", "thName", true], ["Type: ", "ttName", true]];
+	display_col = "tiName";
+	table_id = "Tea_inventory";
 
 }
 var customJsSearch = function customJsSearch() {
