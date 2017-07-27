@@ -178,6 +178,7 @@ window.displayCol = function constructSimpleDisplayName(name, metadata, table) {
 // Pretty prints stuff with underscores in them. First it replaces underscores with spaces, then capitalizes each word.
 window.pretty = function pretty(name) {
 	if (name === null || name === undefined) name = ""
+	if (typeof(name) != "string") name = name.toString();
 	name = name.replace(/_/g, " "); // can't just replace("_", " ") or it will only hit the first instance
 	var sections = name.split(" ");
 	var new_name = ""
