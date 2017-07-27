@@ -1,0 +1,36 @@
+
+<!doctype html>
+<html>
+	<head>
+		<script type="text/javascript" src="/example/system/js/odkCommon.js"></script>
+		<script type="text/javascript" src="/example/system/js/odkData.js"></script>
+		<script type="text/javascript" src="/example/system/tables/js/odkTables.js"></script>
+		<script type="text/javascript" src="formgen_common.js"></script>
+		<script type="text/javascript" src="generate_common.js"></script>
+		<link href="generate_index.css" rel="stylesheet" />
+		<style>
+		
+		</style>
+		<script>
+			var metadata = {};
+			var list_views = {};
+			var menu = ["Empty menu!", null, []];
+			// BEGIN CONFIG
+			
+	list_views = {
+		"Tea_houses": "Tea_houses_list.html",
+		"Tea_types": "Tea_types_list.html",
+		"Tea_inventory": "Tea_inventory_list.html",
+	}
+	menu = ["TODO", null, []];
+
+			// END CONFIG
+		</script>
+		<script src="generate_index.js"></script>
+	</head>
+	<body onLoad='ol();'>
+		<div id="title" class="button"></div>
+		<div id="list"></div>
+	</body>
+</html>
+	

@@ -1,0 +1,41 @@
+
+<!doctype html>
+<html>
+	<head>
+		<script type="text/javascript" src="/example/system/js/odkCommon.js"></script>
+		<script type="text/javascript" src="/example/system/js/odkData.js"></script>
+		<script type="text/javascript" src="/example/system/tables/js/odkTables.js"></script>
+		<script type="text/javascript" src="formgen_common.js"></script>
+		<script type="text/javascript" src="generate_common.js"></script>
+		<link href="generate_index.css" rel="stylesheet" />
+		<style>
+		
+		</style>
+		<script>
+			var metadata = {};
+			var list_views = {};
+			var menu = ["Empty menu!", null, []];
+			// BEGIN CONFIG
+			
+	list_views = {
+		"exampleForm": "exampleForm_list.html"
+	}
+	var newinstance = function newinstance() {
+		var id = newGuid();
+		odkTables.launchHTML(null, "config/assets/formgen/exampleForm#" + id);
+	}
+	menu = ["Example Form", null, [
+		["New Instance", "_js", newinstance],
+		["View Responses", "exampleForm", ""]
+	]]
+
+			// END CONFIG
+		</script>
+		<script src="generate_index.js"></script>
+	</head>
+	<body onLoad='ol();'>
+		<div id="title" class="button"></div>
+		<div id="list"></div>
+	</body>
+</html>
+	
