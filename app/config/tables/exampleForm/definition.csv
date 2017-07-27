@@ -1,6 +1,6 @@
 _element_key,_element_name,_element_type,_list_child_element_keys
 add_one,add_one,number,[]
-add_res,add_res,number,[]
+add_res,add_res,string,[]
 add_two,add_two,number,[]
 adminRegion,adminRegion,string,[]
 has_html,has_html,boolean,[]

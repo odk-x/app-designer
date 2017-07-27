@@ -23,7 +23,7 @@
             "text": "HTML"
           },
           "prompt": {
-            "text": "Please acknowledge that prompts can contain <b><i>html</i></b>"
+            "text": "Please acknowledge that prompts can contain <i><span style=\"font-weight: bold; color: red;\">html</span></i>"
           },
           "constraint_message": {
             "text": "You must acknowledge!"
@@ -115,7 +115,7 @@
         "_row_num": 13
       },
       {
-        "type": "number",
+        "type": "text",
         "name": "add_res",
         "display": {
           "title": {
@@ -130,7 +130,7 @@
       {
         "type": "assign",
         "name": "add_res",
-        "calculation": "data('add_one') + data('add_two')",
+        "calculation": "Number(data('add_one')) + Number(data('add_two'))",
         "_row_num": 15
       },
       {
@@ -157,7 +157,7 @@
       {
         "type": "assign",
         "name": "multiply_res",
-        "calculation": "data('add_one') * data('add_two')",
+        "calculation": "Number(data('add_one')) * Number(data('add_two'))",
         "_row_num": 19
       },
       {
@@ -630,7 +630,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "string",
         "displayName": {
           "text": "Addition result"
         },
@@ -737,7 +737,7 @@
                 "text": "HTML"
               },
               "prompt": {
-                "text": "Please acknowledge that prompts can contain <b><i>html</i></b>"
+                "text": "Please acknowledge that prompts can contain <i><span style=\"font-weight: bold; color: red;\">html</span></i>"
               },
               "constraint_message": {
                 "text": "You must acknowledge!"
@@ -843,7 +843,7 @@
             "promptIdx": 6
           },
           {
-            "type": "number",
+            "type": "text",
             "name": "add_res",
             "display": {
               "title": {
@@ -856,7 +856,7 @@
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
-            "_type": "number",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 7
           },
@@ -1018,7 +1018,7 @@
               "__rowNum__": 15,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nassign('add_res', data('add_one') + data('add_two'));\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nassign('add_res', Number(data('add_one')) + Number(data('add_two')));\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
@@ -1032,7 +1032,7 @@
               "__rowNum__": 21,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nassign('multiply_res', data('add_one') * data('add_two'));\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nassign('multiply_res', Number(data('add_one')) * Number(data('add_two')));\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
@@ -1394,7 +1394,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "string",
         "displayName": {
           "text": "Addition result"
         },
