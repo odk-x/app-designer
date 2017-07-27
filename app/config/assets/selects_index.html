@@ -18,24 +18,15 @@
 			// BEGIN CONFIG
 			
 	list_views = {
-		"Tea_houses": "Tea_houses_list.html",
-		"Tea_types": "Tea_types_list.html",
-		"Tea_inventory": "Tea_inventory_list.html",
+		"exampleForm": "exampleForm_list.html"
 	}
-	var newinstance = function newinstance(table) {
-		return function() {
-			var id = newGuid();
-			odkTables.launchHTML(null, "config/assets/formgen/"+table+"#" + id);
-		}
+	var newinstance = function newinstance() {
+		var id = newGuid();
+		odkTables.launchHTML(null, "config/assets/formgen/selects#" + id);
 	}
-	menu = ["Tea Demo", null, [
-		["View Tea Houses (try searching for "Hill")", "Tea_houses", ""],
-		["View Tea Houses on a Map", "_js", function() { odkTables.openTableToMapView(null, "Tea_Houses", null, null, "config/assets/Tea_houses_list.html"); }],
-		["New tea house", "_js", newinstance("Tea_houses")]
-		["View Tea Types", "Tea_types", ""],
-		["Add Tea Type", "_js", newinstance("Tea_types")]
-		["View Tea Inventory", "Tea_inventory", ""],
-		["Add Tea Inventory Entry", "_js", newinstance("Tea_inventory")]
+	menu = ["Selects Demo", null, [
+		["New Instance", "_js", newinstance],
+		["View Responses", "selects", ""]
 	]]
 
 			// END CONFIG
