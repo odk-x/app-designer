@@ -29,7 +29,7 @@
             "text": "Please acknowledge that prompts can contain <i><span style=\"font-weight: bold; color: red;\">html</span></i>"
           },
           "constraint_message": {
-            "text": "You must acknowledge!"
+            "text": "You must acknowledge the greatness of <i><span style=\"font-weight: bold; color: red;\">html</span></i>!"
           }
         },
         "constraint": "data('has_html') == 'true' || data('has_html') == true",
@@ -174,7 +174,7 @@
             "text": "Might be required"
           }
         },
-        "required": "data('make_above_required') == 'yes' || data('make_above_required') == null",
+        "required": "data('make_above_required') == 'yes'",
         "_row_num": 20
       },
       {
@@ -698,7 +698,7 @@
                 "text": "Please acknowledge that prompts can contain <i><span style=\"font-weight: bold; color: red;\">html</span></i>"
               },
               "constraint_message": {
-                "text": "You must acknowledge!"
+                "text": "You must acknowledge the greatness of <i><span style=\"font-weight: bold; color: red;\">html</span></i>!"
               }
             },
             "constraint": "data('has_html') == 'true' || data('has_html') == true",
@@ -847,7 +847,7 @@
                 "text": "Might be required"
               }
             },
-            "required": "data('make_above_required') == 'yes' || data('make_above_required') == null",
+            "required": "data('make_above_required') == 'yes'",
             "_row_num": 20,
             "__rowNum__": 19,
             "_token_type": "prompt",
