@@ -68,13 +68,13 @@ input, button {font-size: 16px;}
 	border-top: 5px solid #38c0f4;
 }
 .status[data-status="COMPLETE"] {
-	border-bottom-color: #38c0f4; /* Blue */
+	border-top-color: #38c0f4; /* Blue */
 }
 .status[data-status="INCOMPLETE"] {
-	border-bottom-color: #F7C64A; /* Kournikova */
+	border-top-color: #F7C64A; /* Kournikova */
 }
 .status[data-status="null"] {
-	border-bottom-color: red;
+	border-top-color: red;
 }
 .status[data-sync="synced"], .status[data-sync="synced_pending_files"] {
 	border-bottom-color: #38c0f4; /* Blue */
