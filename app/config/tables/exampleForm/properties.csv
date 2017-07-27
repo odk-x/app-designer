@@ -1,0 +1,21 @@
+_partition,_aspect,_key,_type,_value
+Column,add_one,displayName,object,"{""text"":""First addition number""}"
+Column,add_res,displayName,object,"{""text"":""Addition result""}"
+Column,add_two,displayName,object,"{""text"":""Second addition number""}"
+Column,adminRegion,displayName,object,"{""text"":""Admin region""}"
+Column,has_html,displayName,object,"{""text"":""Please acknowledge that prompts can contain <b><i>html</i></b>""}"
+Column,make_above_required,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""yes"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""no"",""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
+Column,make_above_required,displayName,object,"{""text"":""Make above required""}"
+Column,make_prev_required,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""yes"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""no"",""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
+Column,make_prev_required,displayName,object,"{""text"":""Make previous page required""}"
+Column,multiply_res,displayName,object,"{""text"":""Multiply result""}"
+Column,possibly_required,displayName,object,"{""text"":""Possibly required""}"
+Column,possibly_required_2,displayName,object,"{""text"":""Possibly required 2""}"
+Column,regionLevel1,displayName,object,"{""text"":""Level 1 of admin region""}"
+Column,regionLevel2,displayName,object,"{""text"":""Level 2 of admin region""}"
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,exampleForm
+Table,default,defaultViewType,string,LIST
+Table,default,detailViewFileName,string,config/assets/example_detail.html
+Table,default,displayName,object,"{""text"":""Example form""}"
+Table,default,listViewFileName,string,config/assets/example_list.html

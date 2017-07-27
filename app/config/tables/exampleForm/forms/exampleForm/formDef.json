@@ -1,0 +1,1738 @@
+{
+  "xlsx": {
+    "survey": [
+      {
+        "clause": "begin screen",
+        "_row_num": 2
+      },
+      {
+        "type": "text",
+        "name": "name",
+        "display": {
+          "prompt": {
+            "text": "Enter your name"
+          }
+        },
+        "_row_num": 3
+      },
+      {
+        "type": "acknowledge",
+        "name": "has_html",
+        "display": {
+          "title": {
+            "text": "Please acknowledge that prompts can contain <b><i>html</i></b>"
+          },
+          "constraint_message": {
+            "text": "You must acknowledge!"
+          }
+        },
+        "constraint": "data('has_html') == 'true'",
+        "_row_num": 4
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 5
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 6
+      },
+      {
+        "type": "select_one_dropdown",
+        "values_list": "regionLevel1_csv",
+        "name": "regionLevel1",
+        "display": {
+          "title": {
+            "text": "Level 1 of admin region"
+          },
+          "prompt": {
+            "text": "Demo of dynamic query filters!"
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "type": "select_one_dropdown",
+        "values_list": "regionLevel2_csv",
+        "name": "regionLevel2",
+        "display": {
+          "title": {
+            "text": "Level 2 of admin region"
+          }
+        },
+        "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
+        "_row_num": 8
+      },
+      {
+        "type": "select_one_dropdown",
+        "values_list": "regionLevel3_csv",
+        "name": "adminRegion",
+        "display": {
+          "title": {
+            "text": "Admin region"
+          }
+        },
+        "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
+        "_row_num": 9
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 10
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 11
+      },
+      {
+        "type": "number",
+        "name": "add_one",
+        "display": {
+          "title": {
+            "text": "First addition number"
+          },
+          "prompt": {
+            "text": "You can only type numbers in these two boxes"
+          }
+        },
+        "required": 1,
+        "_row_num": 12
+      },
+      {
+        "type": "number",
+        "name": "add_two",
+        "display": {
+          "title": {
+            "text": "Second addition number"
+          },
+          "prompt": {
+            "text": "+"
+          }
+        },
+        "required": 1,
+        "_row_num": 13
+      },
+      {
+        "type": "number",
+        "name": "add_res",
+        "display": {
+          "title": {
+            "text": "Addition result"
+          },
+          "prompt": {
+            "text": "="
+          }
+        },
+        "_row_num": 14
+      },
+      {
+        "type": "assign",
+        "name": "add_res",
+        "calculation": "data('add_one') + data('add_two')",
+        "_row_num": 15
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 16
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 17
+      },
+      {
+        "type": "text",
+        "name": "multiply_res",
+        "display": {
+          "title": {
+            "text": "Multiply result"
+          },
+          "prompt": {
+            "text": "Result of multiplying the two numbers on the previous page"
+          }
+        },
+        "_row_num": 18
+      },
+      {
+        "type": "assign",
+        "name": "multiply_res",
+        "calculation": "data('add_one') * data('add_two')",
+        "_row_num": 19
+      },
+      {
+        "type": "text",
+        "name": "possibly_required",
+        "display": {
+          "title": {
+            "text": "Possibly required"
+          },
+          "prompt": {
+            "text": "Might be required"
+          }
+        },
+        "required": "data('make_above_required') == 'yes'",
+        "_row_num": 20
+      },
+      {
+        "type": "select_one",
+        "values_list": "yesno",
+        "name": "make_above_required",
+        "display": {
+          "title": {
+            "text": "Make above required"
+          },
+          "prompt": {
+            "text": "Select yes here to make the previous question required!"
+          }
+        },
+        "_row_num": 21
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 22
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 23
+      },
+      {
+        "type": "text",
+        "name": "possibly_required_2",
+        "display": {
+          "title": {
+            "text": "Possibly required 2"
+          },
+          "prompt": {
+            "text": "Leave this blank"
+          }
+        },
+        "required": "data('make_prev_required') == 'yes'",
+        "_row_num": 24
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 25
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 26
+      },
+      {
+        "type": "select_one",
+        "values_list": "yesno",
+        "name": "make_prev_required",
+        "display": {
+          "title": {
+            "text": "Make previous page required"
+          },
+          "prompt": {
+            "text": "Selecting yes will make the prompt on the previous page required. You won’t be able to finalize until you go back. Also, the only allowed answer to this question is yes."
+          },
+          "constraint_message": {
+            "text": "The only allowed answer is yes"
+          }
+        },
+        "required": 1,
+        "constraint": "data('make_prev_required') == 'yes'",
+        "_row_num": 27
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 28
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "yesno",
+        "data_value": "yes",
+        "display": {
+          "title": {
+            "text": "Yes"
+          }
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "yesno",
+        "data_value": "no",
+        "display": {
+          "title": {
+            "text": "No"
+          }
+        },
+        "_row_num": 3
+      }
+    ],
+    "queries": [
+      {
+        "query_name": "refrigerator_model_list",
+        "query_type": "linked_table",
+        "linked_form_id": "refrigerator_types",
+        "linked_table_id": "refrigerator_types",
+        "selection": "catalog_id >= ?",
+        "selectionArgs": "['0']",
+        "auxillaryHash": "'catalog_id>='+opendatakit.encodeURIValue(0)",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 2
+      },
+      {
+        "query_name": "health_facility_list",
+        "query_type": "linked_table",
+        "linked_form_id": "health_facility",
+        "linked_table_id": "health_facility",
+        "selection": "admin_region = ?",
+        "selectionArgs": "[data('adminRegion')]",
+        "auxillaryHash": "'facility_id>='+opendatakit.encodeURIValue(0)",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 3
+      },
+      {
+        "query_name": "regionLevel1_csv",
+        "query_type": "csv",
+        "uri": "\"regions1-2.csv\"",
+        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{title: {text:regionLevel1}}}; }).value()",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 4
+      },
+      {
+        "query_name": "regionLevel2_csv",
+        "query_type": "csv",
+        "uri": "\"regions1-2.csv\"",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 5
+      },
+      {
+        "query_name": "regionLevel3_csv",
+        "query_type": "csv",
+        "uri": "\"regions2-3.csv\"",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 6
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
+        "type": "string",
+        "value": "LIST",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "string",
+        "value": "config/assets/example_detail.html",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "listViewFileName",
+        "type": "string",
+        "value": "config/assets/example_list.html",
+        "_row_num": 4
+      }
+    ],
+    "settings": [
+      {
+        "setting_name": "form_id",
+        "value": "exampleForm",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "table_id",
+        "value": "exampleForm",
+        "_row_num": 3
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20170726,
+        "_row_num": 4
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": "Example form"
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "setting_name": "instance_name",
+        "value": "name",
+        "_row_num": 6
+      }
+    ]
+  },
+  "specification": {
+    "column_types": {
+      "_screen_block": "function",
+      "condition": "formula",
+      "constraint": "formula",
+      "required": "formula",
+      "calculation": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
+      "selectionArgs": "formula",
+      "url": "formula",
+      "uri": "formula",
+      "callback": "formula(context)",
+      "choice_filter": "formula(choice_item)",
+      "templatePath": "requirejs_path"
+    },
+    "settings": {
+      "form_id": {
+        "setting_name": "form_id",
+        "value": "exampleForm",
+        "_row_num": 2
+      },
+      "table_id": {
+        "setting_name": "table_id",
+        "value": "exampleForm",
+        "_row_num": 3
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 20170726,
+        "_row_num": 4
+      },
+      "survey": {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": "Example form"
+          }
+        },
+        "_row_num": 5
+      },
+      "instance_name": {
+        "setting_name": "instance_name",
+        "value": "name",
+        "_row_num": 6
+      },
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 5,
+        "value": [
+          {
+            "display": {
+              "locale": {
+                "text": "default"
+              }
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 5,
+        "value": "default"
+      },
+      "initial": {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": "Example form"
+          }
+        },
+        "_row_num": 5
+      }
+    },
+    "choices": {
+      "yesno": [
+        {
+          "choice_list_name": "yesno",
+          "data_value": "yes",
+          "display": {
+            "title": {
+              "text": "Yes"
+            }
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "yesno",
+          "data_value": "no",
+          "display": {
+            "title": {
+              "text": "No"
+            }
+          },
+          "_row_num": 3
+        }
+      ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
+    },
+    "queries": {
+      "refrigerator_model_list": {
+        "query_name": "refrigerator_model_list",
+        "query_type": "linked_table",
+        "linked_form_id": "refrigerator_types",
+        "linked_table_id": "refrigerator_types",
+        "selection": "catalog_id >= ?",
+        "selectionArgs": "['0']",
+        "auxillaryHash": "'catalog_id>='+opendatakit.encodeURIValue(0)",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 2
+      },
+      "health_facility_list": {
+        "query_name": "health_facility_list",
+        "query_type": "linked_table",
+        "linked_form_id": "health_facility",
+        "linked_table_id": "health_facility",
+        "selection": "admin_region = ?",
+        "selectionArgs": "[data('adminRegion')]",
+        "auxillaryHash": "'facility_id>='+opendatakit.encodeURIValue(0)",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 3
+      },
+      "regionLevel1_csv": {
+        "query_name": "regionLevel1_csv",
+        "query_type": "csv",
+        "uri": "\"regions1-2.csv\"",
+        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{title: {text:regionLevel1}}}; }).value()",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 4
+      },
+      "regionLevel2_csv": {
+        "query_name": "regionLevel2_csv",
+        "query_type": "csv",
+        "uri": "\"regions1-2.csv\"",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 5
+      },
+      "regionLevel3_csv": {
+        "query_name": "regionLevel3_csv",
+        "query_type": "csv",
+        "uri": "\"regions2-3.csv\"",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 6
+      }
+    },
+    "calculates": {},
+    "model": {
+      "name": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "name"
+      },
+      "has_html": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "boolean",
+        "displayName": {
+          "text": "Please acknowledge that prompts can contain <b><i>html</i></b>"
+        },
+        "elementKey": "has_html"
+      },
+      "regionLevel1": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Level 1 of admin region"
+        },
+        "valuesList": "regionLevel1_csv",
+        "elementKey": "regionLevel1"
+      },
+      "regionLevel2": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Level 2 of admin region"
+        },
+        "valuesList": "regionLevel2_csv",
+        "elementKey": "regionLevel2"
+      },
+      "adminRegion": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Admin region"
+        },
+        "valuesList": "regionLevel3_csv",
+        "elementKey": "adminRegion"
+      },
+      "add_one": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": {
+          "text": "First addition number"
+        },
+        "elementKey": "add_one"
+      },
+      "add_two": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": {
+          "text": "Second addition number"
+        },
+        "elementKey": "add_two"
+      },
+      "add_res": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": {
+          "text": "Addition result"
+        },
+        "elementKey": "add_res"
+      },
+      "multiply_res": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Multiply result"
+        },
+        "elementKey": "multiply_res"
+      },
+      "possibly_required": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Possibly required"
+        },
+        "elementKey": "possibly_required"
+      },
+      "make_above_required": {
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Make above required"
+        },
+        "valuesList": "yesno",
+        "elementKey": "make_above_required"
+      },
+      "possibly_required_2": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Possibly required 2"
+        },
+        "elementKey": "possibly_required_2"
+      },
+      "make_prev_required": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Make previous page required"
+        },
+        "valuesList": "yesno",
+        "elementKey": "make_prev_required"
+      }
+    },
+    "section_names": [
+      "initial",
+      "survey"
+    ],
+    "sections": {
+      "survey": {
+        "section_name": "survey",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "text",
+            "name": "name",
+            "display": {
+              "prompt": {
+                "text": "Enter your name"
+              }
+            },
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 0
+          },
+          {
+            "type": "acknowledge",
+            "name": "has_html",
+            "display": {
+              "title": {
+                "text": "Please acknowledge that prompts can contain <b><i>html</i></b>"
+              },
+              "constraint_message": {
+                "text": "You must acknowledge!"
+              }
+            },
+            "constraint": "data('has_html') == 'true'",
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "acknowledge",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 1
+          },
+          {
+            "type": "select_one_dropdown",
+            "values_list": "regionLevel1_csv",
+            "name": "regionLevel1",
+            "display": {
+              "title": {
+                "text": "Level 1 of admin region"
+              },
+              "prompt": {
+                "text": "Demo of dynamic query filters!"
+              }
+            },
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "select_one_dropdown",
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 2
+          },
+          {
+            "type": "select_one_dropdown",
+            "values_list": "regionLevel2_csv",
+            "name": "regionLevel2",
+            "display": {
+              "title": {
+                "text": "Level 2 of admin region"
+              }
+            },
+            "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "select_one_dropdown",
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 3
+          },
+          {
+            "type": "select_one_dropdown",
+            "values_list": "regionLevel3_csv",
+            "name": "adminRegion",
+            "display": {
+              "title": {
+                "text": "Admin region"
+              }
+            },
+            "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "prompt",
+            "_type": "select_one_dropdown",
+            "_branch_label_enclosing_screen": "survey/_screen6",
+            "promptIdx": 4
+          },
+          {
+            "type": "number",
+            "name": "add_one",
+            "display": {
+              "title": {
+                "text": "First addition number"
+              },
+              "prompt": {
+                "text": "You can only type numbers in these two boxes"
+              }
+            },
+            "required": 1,
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "prompt",
+            "_type": "number",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 5
+          },
+          {
+            "type": "number",
+            "name": "add_two",
+            "display": {
+              "title": {
+                "text": "Second addition number"
+              },
+              "prompt": {
+                "text": "+"
+              }
+            },
+            "required": 1,
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "prompt",
+            "_type": "number",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 6
+          },
+          {
+            "type": "number",
+            "name": "add_res",
+            "display": {
+              "title": {
+                "text": "Addition result"
+              },
+              "prompt": {
+                "text": "="
+              }
+            },
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "prompt",
+            "_type": "number",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 7
+          },
+          {
+            "type": "text",
+            "name": "multiply_res",
+            "display": {
+              "title": {
+                "text": "Multiply result"
+              },
+              "prompt": {
+                "text": "Result of multiplying the two numbers on the previous page"
+              }
+            },
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 8
+          },
+          {
+            "type": "text",
+            "name": "possibly_required",
+            "display": {
+              "title": {
+                "text": "Possibly required"
+              },
+              "prompt": {
+                "text": "Might be required"
+              }
+            },
+            "required": "data('make_above_required') == 'yes'",
+            "_row_num": 20,
+            "__rowNum__": 19,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 9
+          },
+          {
+            "type": "select_one",
+            "values_list": "yesno",
+            "name": "make_above_required",
+            "display": {
+              "title": {
+                "text": "Make above required"
+              },
+              "prompt": {
+                "text": "Select yes here to make the previous question required!"
+              }
+            },
+            "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen17",
+            "promptIdx": 10
+          },
+          {
+            "type": "text",
+            "name": "possibly_required_2",
+            "display": {
+              "title": {
+                "text": "Possibly required 2"
+              },
+              "prompt": {
+                "text": "Leave this blank"
+              }
+            },
+            "required": "data('make_prev_required') == 'yes'",
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 11
+          },
+          {
+            "type": "select_one",
+            "values_list": "yesno",
+            "name": "make_prev_required",
+            "display": {
+              "title": {
+                "text": "Make previous page required"
+              },
+              "prompt": {
+                "text": "Selecting yes will make the prompt on the previous page required. You won’t be able to finalize until you go back. Also, the only allowed answer to this question is yes."
+              },
+              "constraint_message": {
+                "text": "The only allowed answer is yes"
+              }
+            },
+            "required": 1,
+            "constraint": "data('make_prev_required') == 'yes'",
+            "_row_num": 27,
+            "__rowNum__": 26,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen26",
+            "promptIdx": 12
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 29,
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 13
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": [
+            1,
+            5,
+            6,
+            9,
+            11,
+            12
+          ]
+        },
+        "operations": [
+          {
+            "clause": "begin screen",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 5,
+              "__rowNum__": 4,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 10,
+              "__rowNum__": 9,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 16,
+              "__rowNum__": 15,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nassign('add_res', data('add_one') + data('add_two'));\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 17,
+            "__rowNum__": 16,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 22,
+              "__rowNum__": 21,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nassign('multiply_res', data('add_one') * data('add_two'));\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 3
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 25,
+              "__rowNum__": 24,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 26,
+            "__rowNum__": 25,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 28,
+              "__rowNum__": 27,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 29,
+            "operationIdx": 6
+          },
+          {
+            "_row_num": 29,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 7
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 29,
+            "operationIdx": 8
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_screen6": 1,
+          "_screen11": 2,
+          "_screen17": 3,
+          "_screen23": 4,
+          "_screen26": 5,
+          "_contents": 7,
+          "_screen29": 7
+        }
+      },
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "_row_num": 3,
+            "type": "opening",
+            "display": {
+              "text": "Edit form"
+            },
+            "_token_type": "prompt",
+            "_type": "opening",
+            "_branch_label_enclosing_screen": "initial/_screen3",
+            "promptIdx": 0
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "prompt",
+            "_do_section_name": "survey",
+            "_type": "_section",
+            "promptIdx": 1,
+            "display": {
+              "title": {
+                "text": "Example form"
+              }
+            },
+            "_branch_label_enclosing_screen": "survey/0"
+          },
+          {
+            "_row_num": 5,
+            "type": "finalize",
+            "display": {
+              "text": "Save form"
+            },
+            "_token_type": "prompt",
+            "_type": "finalize",
+            "_branch_label_enclosing_screen": "initial/_screen5",
+            "promptIdx": 2
+          },
+          {
+            "_row_num": 7,
+            "type": "instances",
+            "display": {
+              "text": "Saved instances"
+            },
+            "_token_type": "prompt",
+            "_type": "instances",
+            "_branch_label_enclosing_screen": "initial/_screen7",
+            "promptIdx": 3
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 9,
+            "_branch_label_enclosing_screen": "initial/_screen9",
+            "promptIdx": 4
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "clause": "if // start",
+            "condition": "(opendatakit.getCurrentInstanceId() != null)",
+            "_token_type": "goto_label",
+            "_tag_name": "start",
+            "_branch_label": "_then2",
+            "operationIdx": 0
+          },
+          {
+            "clause": "else // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_else6",
+            "_row_num": 6,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "end if // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif8",
+            "_row_num": 8,
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 9,
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 8
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 9,
+            "operationIdx": 9
+          },
+          {
+            "_token_type": "validate",
+            "clause": "validate finalize",
+            "_sweep_name": "finalize",
+            "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 10
+          },
+          {
+            "_token_type": "save_and_terminate",
+            "clause": "save and terminate",
+            "calculation": true,
+            "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 11
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 9,
+            "operationIdx": 12
+          }
+        ],
+        "branch_label_map": {
+          "_then2": 2,
+          "_screen3": 2,
+          "_screen5": 4,
+          "_else6": 6,
+          "_screen7": 6,
+          "_endif8": 7,
+          "_contents": 8,
+          "_screen9": 8,
+          "_finalize": 10
+        }
+      }
+    },
+    "dataTableModel": {
+      "name": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "name",
+        "elementName": "name",
+        "elementSet": "data",
+        "elementPath": "name"
+      },
+      "has_html": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "boolean",
+        "displayName": {
+          "text": "Please acknowledge that prompts can contain <b><i>html</i></b>"
+        },
+        "elementKey": "has_html",
+        "elementName": "has_html",
+        "elementSet": "data",
+        "elementPath": "has_html"
+      },
+      "regionLevel1": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Level 1 of admin region"
+        },
+        "valuesList": "regionLevel1_csv",
+        "elementKey": "regionLevel1",
+        "elementName": "regionLevel1",
+        "elementSet": "data",
+        "elementPath": "regionLevel1"
+      },
+      "regionLevel2": {
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Level 2 of admin region"
+        },
+        "valuesList": "regionLevel2_csv",
+        "elementKey": "regionLevel2",
+        "elementName": "regionLevel2",
+        "elementSet": "data",
+        "elementPath": "regionLevel2"
+      },
+      "adminRegion": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Admin region"
+        },
+        "valuesList": "regionLevel3_csv",
+        "elementKey": "adminRegion",
+        "elementName": "adminRegion",
+        "elementSet": "data",
+        "elementPath": "adminRegion"
+      },
+      "add_one": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": {
+          "text": "First addition number"
+        },
+        "elementKey": "add_one",
+        "elementName": "add_one",
+        "elementSet": "data",
+        "elementPath": "add_one"
+      },
+      "add_two": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": {
+          "text": "Second addition number"
+        },
+        "elementKey": "add_two",
+        "elementName": "add_two",
+        "elementSet": "data",
+        "elementPath": "add_two"
+      },
+      "add_res": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          }
+        ],
+        "type": "number",
+        "displayName": {
+          "text": "Addition result"
+        },
+        "elementKey": "add_res",
+        "elementName": "add_res",
+        "elementSet": "data",
+        "elementPath": "add_res"
+      },
+      "multiply_res": {
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Multiply result"
+        },
+        "elementKey": "multiply_res",
+        "elementName": "multiply_res",
+        "elementSet": "data",
+        "elementPath": "multiply_res"
+      },
+      "possibly_required": {
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Possibly required"
+        },
+        "elementKey": "possibly_required",
+        "elementName": "possibly_required",
+        "elementSet": "data",
+        "elementPath": "possibly_required"
+      },
+      "make_above_required": {
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Make above required"
+        },
+        "valuesList": "yesno",
+        "elementKey": "make_above_required",
+        "elementName": "make_above_required",
+        "elementSet": "data",
+        "elementPath": "make_above_required"
+      },
+      "possibly_required_2": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Possibly required 2"
+        },
+        "elementKey": "possibly_required_2",
+        "elementName": "possibly_required_2",
+        "elementSet": "data",
+        "elementPath": "possibly_required_2"
+      },
+      "make_prev_required": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Make previous page required"
+        },
+        "valuesList": "yesno",
+        "elementKey": "make_prev_required",
+        "elementName": "make_prev_required",
+        "elementSet": "data",
+        "elementPath": "make_prev_required"
+      },
+      "_id": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_id",
+        "elementName": "_id",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_id"
+      },
+      "_row_etag": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_etag",
+        "elementName": "_row_etag",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_etag"
+      },
+      "_sync_state": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_sync_state",
+        "elementName": "_sync_state",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_sync_state"
+      },
+      "_conflict_type": {
+        "type": "integer",
+        "isNotNullable": false,
+        "elementKey": "_conflict_type",
+        "elementName": "_conflict_type",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_conflict_type"
+      },
+      "_default_access": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_default_access"
+      },
+      "_form_id": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_form_id",
+        "elementName": "_form_id",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_form_id"
+      },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
+      "_locale": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_locale",
+        "elementName": "_locale",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
+      },
+      "_savepoint_type": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_savepoint_type",
+        "elementName": "_savepoint_type",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_type"
+      },
+      "_savepoint_timestamp": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_savepoint_timestamp",
+        "elementName": "_savepoint_timestamp",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_timestamp"
+      },
+      "_savepoint_creator": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_savepoint_creator",
+        "elementName": "_savepoint_creator",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_creator"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "add_one",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"First addition number\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "add_res",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Addition result\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "add_two",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Second addition number\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "adminRegion",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Admin region\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "has_html",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Please acknowledge that prompts can contain <b><i>html</i></b>\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "make_above_required",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "make_above_required",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Make above required\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "make_prev_required",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "make_prev_required",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Make previous page required\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "multiply_res",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Multiply result\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "possibly_required",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Possibly required\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "possibly_required_2",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Possibly required 2\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "regionLevel1",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Level 1 of admin region\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "regionLevel2",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Level 2 of admin region\"}"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "exampleForm"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "LIST"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "detailViewFileName",
+        "_type": "string",
+        "_value": "config/assets/example_detail.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Example form\"}"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "listViewFileName",
+        "_type": "string",
+        "_value": "config/assets/example_list.html"
+      }
+    ]
+  }
+}

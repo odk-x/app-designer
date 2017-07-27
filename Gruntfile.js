@@ -112,7 +112,7 @@ module.exports = function (grunt) {
         // also modify the other properties in this object that refer to
         // app
         appDir: 'app',
-        appName: 'coldchain',
+        appName: 'example',
         // The mount point of the device. Should allow adb push/pull.
         deviceMount: '/sdcard/opendatakit',
         // The mount point of the device for odk collect forms.
