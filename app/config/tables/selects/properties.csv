@@ -5,5 +5,7 @@ Column,secondaryColor,displayChoicesList,object,"[{""choice_list_name"":""colors
 Column,sex,displayChoicesList,object,"[{""choice_list_name"":""sexes"",""data_value"":""male"",""display"":{""title"":{""text"":""male""}},""_row_num"":32},{""choice_list_name"":""sexes"",""data_value"":""female"",""display"":{""title"":{""text"":""female""}},""_row_num"":33}]"
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,selects
-Table,default,defaultViewType,string,SPREADSHEET
+Table,default,defaultViewType,string,LIST
+Table,default,detailViewFileName,string,config/assets/selects_detail.html
 Table,default,displayName,object,"{""text"":""Select Examples""}"
+Table,default,listViewFileName,string,config/assets/selects_list.html

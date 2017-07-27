@@ -94,7 +94,7 @@
             "text": "Blackbird selected"
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 12
       },
       {
@@ -113,7 +113,7 @@
             "text": "Bluethroat selected"
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 15
       },
       {
@@ -133,7 +133,7 @@
             "audio": "media/carrioncrow.mp3"
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 18
       },
       {
@@ -153,7 +153,7 @@
             "audio": "media/goldeneagle.mp3"
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 21
       },
       {
@@ -172,7 +172,7 @@
             "text": "Egret selected"
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 24
       },
       {
@@ -192,7 +192,7 @@
             "video": "media/kingfisher.3gp"
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 27
       },
       {
@@ -211,7 +211,7 @@
             "text": "Gull selected"
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 30
       },
       {
@@ -230,7 +230,7 @@
             "text": "Hawfinch selected"
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 33
       },
       {
@@ -250,7 +250,7 @@
             "audio": "media/european-robin.mp3"
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 36
       },
       {
@@ -301,7 +301,7 @@
             "text": "Teal birds are very unique.  Please confirm that you saw a <span style=\"color:aqua;\">teal</span> bird."
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 43
       },
       {
@@ -364,7 +364,7 @@
             "text": "Holidays"
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 50
       },
       {
@@ -419,7 +419,7 @@
             "text": "Food"
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 56
       },
       {
@@ -473,7 +473,7 @@
             "text": "The following data will be used to generate a graph."
           }
         },
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 62
       },
       {
@@ -536,7 +536,7 @@
         "x_value": "age",
         "y_value": "weight",
         "legend_text": "male median weight for age",
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 68
       },
       {
@@ -561,7 +561,7 @@
         "x_value": "age",
         "y_value": "weight",
         "legend_text": "female median weight for age",
-        "hideInContents": true,
+        "hideInContents": 1,
         "_row_num": 71
       },
       {
@@ -846,42 +846,42 @@
         "query_name": "countries",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nreturn { data_value : place.name,\n              display : {title: {text: place.name} } };\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){return { data_value : place.name, display : {title: {text: place.name} } };}) : []",
         "_row_num": 2
       },
       {
         "query_name": "states",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nreturn { data_value : place.name,\n              display : {title: {text: place.name} } };\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){return { data_value : place.name,              display : {title: {text: place.name} } };}) : []",
         "_row_num": 3
       },
       {
         "query_name": "regions_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {data_value: region, display: {title: {text: region} } };\n}).value()",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){return {data_value: region, display: {title: {text: region} } };}).value()",
         "_row_num": 4
       },
       {
         "query_name": "countries_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nreturn { region: place.region, data_value: place.country, display: {title: {text: place.country} } };\n})",
+        "callback": "_.map(context, function(place){return { region: place.region, data_value: place.country, display: {title: {text: place.country} } };})",
         "_row_num": 5
       },
       {
         "query_name": "male_linegraph_csv",
         "query_type": "csv",
         "uri": "\"maleLinegraph.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
+        "callback": "_.map(context, function(place){return place;})",
         "_row_num": 6
       },
       {
         "query_name": "female_linegraph_csv",
         "query_type": "csv",
         "uri": "\"femaleLinegraph.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
+        "callback": "_.map(context, function(place){return place;})",
         "_row_num": 7
       }
     ],
@@ -893,7 +893,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20130408,
+        "value": 20170726,
         "_row_num": 3
       },
       {
@@ -903,6 +903,32 @@
             "text": "Select Examples"
           }
         },
+        "_row_num": 4
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
+        "type": "string",
+        "value": "LIST",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "string",
+        "value": "config/assets/selects_detail.html",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "listViewFileName",
+        "type": "string",
+        "value": "config/assets/selects_list.html",
         "_row_num": 4
       }
     ]
@@ -931,7 +957,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20130408,
+        "value": 20170726,
         "_row_num": 3
       },
       "survey": {
@@ -1270,42 +1296,42 @@
         "query_name": "countries",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nreturn { data_value : place.name,\n              display : {title: {text: place.name} } };\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){return { data_value : place.name, display : {title: {text: place.name} } };}) : []",
         "_row_num": 2
       },
       "states": {
         "query_name": "states",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nreturn { data_value : place.name,\n              display : {title: {text: place.name} } };\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){return { data_value : place.name,              display : {title: {text: place.name} } };}) : []",
         "_row_num": 3
       },
       "regions_csv": {
         "query_name": "regions_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {data_value: region, display: {title: {text: region} } };\n}).value()",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){return {data_value: region, display: {title: {text: region} } };}).value()",
         "_row_num": 4
       },
       "countries_csv": {
         "query_name": "countries_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nreturn { region: place.region, data_value: place.country, display: {title: {text: place.country} } };\n})",
+        "callback": "_.map(context, function(place){return { region: place.region, data_value: place.country, display: {title: {text: place.country} } };})",
         "_row_num": 5
       },
       "male_linegraph_csv": {
         "query_name": "male_linegraph_csv",
         "query_type": "csv",
         "uri": "\"maleLinegraph.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
+        "callback": "_.map(context, function(place){return place;})",
         "_row_num": 6
       },
       "female_linegraph_csv": {
         "query_name": "female_linegraph_csv",
         "query_type": "csv",
         "uri": "\"femaleLinegraph.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
+        "callback": "_.map(context, function(place){return place;})",
         "_row_num": 7
       }
     },
@@ -1590,7 +1616,7 @@
                 "text": "Blackbird selected"
               }
             },
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 12,
             "__rowNum__": 11,
             "_token_type": "prompt",
@@ -1605,7 +1631,7 @@
                 "text": "Bluethroat selected"
               }
             },
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 15,
             "__rowNum__": 14,
             "_token_type": "prompt",
@@ -1621,7 +1647,7 @@
                 "audio": "media/carrioncrow.mp3"
               }
             },
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 18,
             "__rowNum__": 17,
             "_token_type": "prompt",
@@ -1637,7 +1663,7 @@
                 "audio": "media/goldeneagle.mp3"
               }
             },
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 21,
             "__rowNum__": 20,
             "_token_type": "prompt",
@@ -1652,7 +1678,7 @@
                 "text": "Egret selected"
               }
             },
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 24,
             "__rowNum__": 23,
             "_token_type": "prompt",
@@ -1668,7 +1694,7 @@
                 "video": "media/kingfisher.3gp"
               }
             },
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 27,
             "__rowNum__": 26,
             "_token_type": "prompt",
@@ -1683,7 +1709,7 @@
                 "text": "Gull selected"
               }
             },
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 30,
             "__rowNum__": 29,
             "_token_type": "prompt",
@@ -1698,7 +1724,7 @@
                 "text": "Hawfinch selected"
               }
             },
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 33,
             "__rowNum__": 32,
             "_token_type": "prompt",
@@ -1714,7 +1740,7 @@
                 "audio": "media/european-robin.mp3"
               }
             },
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 36,
             "__rowNum__": 35,
             "_token_type": "prompt",
@@ -1763,7 +1789,7 @@
                 "text": "Teal birds are very unique.  Please confirm that you saw a <span style=\"color:aqua;\">teal</span> bird."
               }
             },
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 43,
             "__rowNum__": 42,
             "_token_type": "prompt",
@@ -1778,7 +1804,7 @@
                 "text": "The following data will be used to generate a graph."
               }
             },
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 62,
             "__rowNum__": 61,
             "_token_type": "prompt",
@@ -1852,7 +1878,7 @@
             "x_value": "age",
             "y_value": "weight",
             "legend_text": "male median weight for age",
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 68,
             "__rowNum__": 67,
             "_token_type": "prompt",
@@ -1873,7 +1899,7 @@
             "x_value": "age",
             "y_value": "weight",
             "legend_text": "female median weight for age",
-            "hideInContents": true,
+            "hideInContents": 1,
             "_row_num": 71,
             "__rowNum__": 70,
             "_token_type": "prompt",
@@ -2693,7 +2719,14 @@
         "_aspect": "default",
         "_key": "defaultViewType",
         "_type": "string",
-        "_value": "SPREADSHEET"
+        "_value": "LIST"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "detailViewFileName",
+        "_type": "string",
+        "_value": "config/assets/selects_detail.html"
       },
       {
         "_partition": "Table",
@@ -2701,6 +2734,13 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":\"Select Examples\"}"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "listViewFileName",
+        "_type": "string",
+        "_value": "config/assets/selects_list.html"
       }
     ]
   }

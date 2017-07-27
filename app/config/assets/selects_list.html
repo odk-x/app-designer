@@ -41,11 +41,12 @@ var localized_tables = {"exampleForm": {"title": {"text": "Example form"}}, "Tea
 var display_col_wrapper = null;
 var customJsOl = function customJsOl() {
 	
-	var cb = function(elem, bird) {
+	var cb = function(elem, bird, d, i) {
 		if (bird == null || bird == undefined || bird.trim().length == 0) return "Didn't see anything";
+		var color = d.getData(i, "color");
 		var n = ""
-		if ("aeiou".indexOf(bird[0].toLowerCase()) >= 0) n = "n"
-		return "Saw a" + n + " " + bird;
+		if ("aeiou".indexOf(color[0].toLowerCase()) >= 0) n = "n"
+		return "Saw a" + n + " " + color + " " + bird;
 	}
 	display_subcol = [[cb, "bird", true]];
 	display_col = "user_name"

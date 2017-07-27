@@ -105,7 +105,7 @@ var screen_data = function screen_data(id, optional_no_alert) {
 				// If the selected radio button corrisponds to the "Other: " text field, grab the label text box and return its value
 				// Otherwise, just return the value of the radio button
 				if (subs[j].value.trim() == "_other") {
-					return document.getElementById(id + "_" + "_other" + "_tag").value;
+					return document.getElementById(id + "_" + "_other" + "_tag").children[0].value;
 				} else {
 					return subs[j].value.trim();
 				}
@@ -185,6 +185,7 @@ var do_csv_xhr = function do_csv_xhr(choice_id, filename, callback) {
 					*/
 					// Trim out the column name and the cell
 					cols[j] = cols[j].trim().replace("\r", "");
+					if (cs[j] == undefined) continue; // HACK
 					var this_col = cs[j].trim().replace("\r", "");
 					// If there's no trailing comma or something weird, put it in choice
 					if (cols[j].length > 0 && this_col.length > 0) {
@@ -460,7 +461,7 @@ var changeElement = function changeElement(elem, newdata) {
 		// If we didn't find any radio buttons to select and it's a select one with other, select the "Other: " radio button and set
 		// the text box's value to newdata
 		if (!found && elem.classList.contains("select-one-with-other") && newdata != null) {
-			document.getElementById(elem.getAttribute("data-dbcol") + "_" + "_other" + "_tag").value = newdata;
+			document.getElementById(elem.getAttribute("data-dbcol") + "_" + "_other" + "_tag").children[0].value = newdata;
 			document.getElementById(elem.getAttribute("data-dbcol") + "_" + "_other").checked = true;
 		}
 	} else if (elem.classList.contains("date")) {
@@ -589,7 +590,7 @@ var updateAllSelects = function updateAllSelects(with_filter_only) {
 	populate_choices(document.getElementsByClassName("select-one-with-other"), function(stuffs, select) {
 		pop_choices_for_select_one(stuffs, select, "radio");
 		var dbcol = select.getAttribute("data-dbcol")
-		pop_choices_for_select_one(["_other", "<input type='text' name='"+dbcol+"' id='"+dbcol+"__other_tag' onblur='document.getElementById(\""+dbcol+"__other\").checked = true; update(0);' />"], select);
+		pop_choices_for_select_one([["_other", "<input type='text' name='"+dbcol+"' id='"+dbcol+"__other_tag' onblur='document.getElementById(\""+dbcol+"__other\").checked = true; update(0);' />"]], select, "radio");
 		/*
 		//var elem = document.createElement("div")
 		////elem.classList.add("option")

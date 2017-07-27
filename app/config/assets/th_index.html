@@ -18,9 +18,9 @@
 			// BEGIN CONFIG
 			
 	list_views = {
-		"Tea_houses": "Tea_houses_list.html",
-		"Tea_types": "Tea_types_list.html",
-		"Tea_inventory": "Tea_inventory_list.html",
+		"Tea_houses": "config/assets/Tea_houses_list.html",
+		"Tea_types": "config/assets/Tea_types_list.html",
+		"Tea_inventory": "config/assets/Tea_inventory_list.html",
 	}
 	var newinstance = function newinstance(table) {
 		return function() {
@@ -29,11 +29,11 @@
 		}
 	}
 	menu = ["Tea Demo", null, [
-		["View Tea Houses (try searching for "Hill")", "Tea_houses", ""],
+		["View Tea Houses (try searching for \"Hill\")", "Tea_houses", ""],
 		["View Tea Houses on a Map", "_js", function() { odkTables.openTableToMapView(null, "Tea_Houses", null, null, "config/assets/Tea_houses_list.html"); }],
-		["New tea house", "_js", newinstance("Tea_houses")]
+		["New tea house", "_js", newinstance("Tea_houses")],
 		["View Tea Types", "Tea_types", ""],
-		["Add Tea Type", "_js", newinstance("Tea_types")]
+		["Add Tea Type", "_js", newinstance("Tea_types")],
 		["View Tea Inventory", "Tea_inventory", ""],
 		["Add Tea Inventory Entry", "_js", newinstance("Tea_inventory")]
 	]]
