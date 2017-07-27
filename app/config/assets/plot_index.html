@@ -11,7 +11,7 @@
 		<style>
 		
 body {
-	background: url('img/hallway.jpg') no-repeat center/cover fixed;
+	background: url('img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg') no-repeat center/cover fixed;
 }
 
 		</style>
@@ -22,15 +22,13 @@ body {
 			// BEGIN CONFIG
 			
 	list_views = {
-		"exampleForm": "config/assets/example_list.html"
+		//"selects": "config/assets/selects_list.html"
 	}
-	var newinstance = function newinstance() {
-		var id = newGuid();
-		odkTables.launchHTML(null, "config/assets/formgen/exampleForm#" + id);
-	}
-	menu = ["Example Form", null, [
-		["New Instance", "_js", newinstance],
-		["View Responses", "exampleForm", ""]
+	var todo = function() {alert("TODO")};
+	menu = ["Plots Demo", null, [
+		["View Plots", "_js", todo],
+		["View Visits", "_js", todo],
+		["View Reports", "_js", todo]
 	]]
 
 			// END CONFIG
