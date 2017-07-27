@@ -892,7 +892,8 @@ var update = function update(delta) {
 			if (elems[i].getAttribute("data-constraint_message") != null) {
 				var message = document.createElement("div");
 				message.classList.add("constraint-message");
-				message.innerText = display(tokens[elems[i].getAttribute("data-constraint_message")], table_id);
+				// constraint messages can contain html
+				message.innerHTML = display(tokens[elems[i].getAttribute("data-constraint_message")], table_id);
 				elems[i].parentNode.insertBefore(message, elems[i].nextSibling);
 			}
 		} else {

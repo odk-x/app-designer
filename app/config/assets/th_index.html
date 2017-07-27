@@ -22,7 +22,17 @@
 		"Tea_types": "Tea_types_list.html",
 		"Tea_inventory": "Tea_inventory_list.html",
 	}
-	menu = ["TODO", null, []];
+	var newinstance = function newinstance(table) {
+		return function() {
+			var id = newGuid();
+			odkTables.launchHTML(null, "config/assets/formgen/"+table+"#" + id);
+		}
+	}
+	menu = ["Tea Demo", null, [
+		["View Tea Houses", "_js", function() { odkTables.openTableToListView(null, "Tea_Houses", null, null, "config/assets/Tea_houses_list.html"); }],
+		["View Tea Houses on a Map", "_js", function() { odkTables.openTableToMapView(null, "Tea_Houses", null, null, "config/assets/Tea_houses_list.html"); }],
+		["New tea houses", "_js", newinstance("Tea_houses")]
+	]]
 
 			// END CONFIG
 		</script>
