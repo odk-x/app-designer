@@ -185,6 +185,11 @@
         "_row_num": 2
       },
       {
+        "setting_name": "version",
+        "value": 20170726,
+        "_row_num": 3
+      },
+      {
         "setting_name": "survey",
         "display": {
           "title": {
@@ -200,7 +205,7 @@
       },
       {
         "setting_name": "disableSwipeNavigation",
-        "value": true,
+        "value": 1,
         "_row_num": 6
       },
       {
@@ -223,7 +228,7 @@
         "aspect": "default",
         "key": "detailViewFileName",
         "type": "string",
-        "value": "config/tables/Tea_houses/html/Tea_houses_detail.html",
+        "value": "config/assets/Tea_houses_detail.html",
         "_row_num": 3
       },
       {
@@ -231,7 +236,7 @@
         "aspect": "default",
         "key": "listViewFileName",
         "type": "string",
-        "value": "config/tables/Tea_houses/html/Tea_houses_list.html",
+        "value": "config/assets/Tea_houses_list.html",
         "_row_num": 4
       },
       {
@@ -239,7 +244,7 @@
         "aspect": "default",
         "key": "mapListViewFileName",
         "type": "string",
-        "value": "config/tables/Tea_houses/html/Tea_houses_list.html",
+        "value": "config/assets/Tea_houses_list.html",
         "_row_num": 5
       },
       {
@@ -303,6 +308,11 @@
         "value": "Tea_houses",
         "_row_num": 2
       },
+      "version": {
+        "setting_name": "version",
+        "value": 20170726,
+        "_row_num": 3
+      },
       "survey": {
         "setting_name": "survey",
         "display": {
@@ -319,7 +329,7 @@
       },
       "disableSwipeNavigation": {
         "setting_name": "disableSwipeNavigation",
-        "value": true,
+        "value": 1,
         "_row_num": 6
       },
       "instance_name": {
@@ -1563,7 +1573,7 @@
         "_aspect": "default",
         "_key": "detailViewFileName",
         "_type": "string",
-        "_value": "config/tables/Tea_houses/html/Tea_houses_detail.html"
+        "_value": "config/assets/Tea_houses_detail.html"
       },
       {
         "_partition": "Table",
@@ -1577,14 +1587,14 @@
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "string",
-        "_value": "config/tables/Tea_houses/html/Tea_houses_list.html"
+        "_value": "config/assets/Tea_houses_list.html"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "mapListViewFileName",
         "_type": "string",
-        "_value": "config/tables/Tea_houses/html/Tea_houses_list.html"
+        "_value": "config/assets/Tea_houses_list.html"
       },
       {
         "_partition": "TableMapFragment",

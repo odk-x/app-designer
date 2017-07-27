@@ -5,10 +5,10 @@ Column,WiFi,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,Tea_houses
 Table,default,defaultViewType,string,LIST
-Table,default,detailViewFileName,string,config/tables/Tea_houses/html/Tea_houses_detail.html
+Table,default,detailViewFileName,string,config/assets/Tea_houses_detail.html
 Table,default,displayName,object,"{""text"":""Tea Houses""}"
-Table,default,listViewFileName,string,config/tables/Tea_houses/html/Tea_houses_list.html
-Table,default,mapListViewFileName,string,config/tables/Tea_houses/html/Tea_houses_list.html
+Table,default,listViewFileName,string,config/assets/Tea_houses_list.html
+Table,default,mapListViewFileName,string,config/assets/Tea_houses_list.html
 TableMapFragment,default,keyColorRuleType,string,None
 TableMapFragment,default,keyMapLatCol,string,Location_latitude
 TableMapFragment,default,keyMapLongCol,string,Location_longitude

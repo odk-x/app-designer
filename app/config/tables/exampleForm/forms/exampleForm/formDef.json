@@ -20,13 +20,16 @@
         "name": "has_html",
         "display": {
           "title": {
+            "text": "HTML"
+          },
+          "prompt": {
             "text": "Please acknowledge that prompts can contain <b><i>html</i></b>"
           },
           "constraint_message": {
             "text": "You must acknowledge!"
           }
         },
-        "constraint": "data('has_html') == 'true'",
+        "constraint": "data('has_html') == 'true' || data('has_html') == true",
         "_row_num": 4
       },
       {
@@ -548,7 +551,7 @@
         ],
         "type": "boolean",
         "displayName": {
-          "text": "Please acknowledge that prompts can contain <b><i>html</i></b>"
+          "text": "HTML"
         },
         "elementKey": "has_html"
       },
@@ -731,13 +734,16 @@
             "name": "has_html",
             "display": {
               "title": {
+                "text": "HTML"
+              },
+              "prompt": {
                 "text": "Please acknowledge that prompts can contain <b><i>html</i></b>"
               },
               "constraint_message": {
                 "text": "You must acknowledge!"
               }
             },
-            "constraint": "data('has_html') == 'true'",
+            "constraint": "data('has_html') == 'true' || data('has_html') == true",
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
@@ -1291,7 +1297,7 @@
         ],
         "type": "boolean",
         "displayName": {
-          "text": "Please acknowledge that prompts can contain <b><i>html</i></b>"
+          "text": "HTML"
         },
         "elementKey": "has_html",
         "elementName": "has_html",
@@ -1626,7 +1632,7 @@
         "_aspect": "has_html",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"Please acknowledge that prompts can contain <b><i>html</i></b>\"}"
+        "_value": "{\"text\":\"HTML\"}"
       },
       {
         "_partition": "Column",
