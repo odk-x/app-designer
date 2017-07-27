@@ -10,6 +10,26 @@
 		<link href="generate_index.css" rel="stylesheet" />
 		<style>
 		
+body {
+	background: url('img/teaBackground.jpg') no-repeat center/cover fixed;
+}
+#title {
+	width: 100%;
+	display: block;
+	box-shadow: none;
+	color: white;
+	font-family: arial;
+	border-bottom: 2px solid #38c0f4;
+	background: none;
+	margin-left: 0px;
+	margin-right: 0px;
+	font-size: 35px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 25px;
+	font-weight: bold;
+}
+
 		</style>
 		<script>
 			var metadata = {};
@@ -32,10 +52,10 @@
 		["View Tea Houses (try searching for \"Hill\")", "Tea_houses", ""],
 		["View Tea Houses on a Map", "_js", function() { odkTables.openTableToMapView(null, "Tea_Houses", null, null, "config/assets/Tea_houses_list.html"); }],
 		["New tea house", "_js", newinstance("Tea_houses")],
+		["View Teas", "Tea_inventory", ""],
+		["Add Tea", "_js", newinstance("Tea_inventory")],
 		["View Tea Types", "Tea_types", ""],
 		["Add Tea Type", "_js", newinstance("Tea_types")],
-		["View Tea Inventory", "Tea_inventory", ""],
-		["Add Tea Inventory Entry", "_js", newinstance("Tea_inventory")]
 	]]
 
 			// END CONFIG

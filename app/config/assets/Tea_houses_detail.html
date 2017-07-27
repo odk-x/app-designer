@@ -68,12 +68,18 @@ var customJsOl = function customJsOl() {
 		["_id", function(e, c, d) {
 			odkData.arbitraryQuery("Tea_inventory", "SELECT COUNT(*) FROM Tea_inventory WHERE House_id = ?", [row_id], 1, 0, function(d) {
 				var count = d.getData(0, "COUNT(*)");
-				document.getElementById("teas").innerText = count + " Tea" + (count == 1 || count == "1" ? "" : "s");
+				var teas = document.getElementById("teas")
+				teas.style.color = "blue";
+				teas.style.textDecoration = "underline";
+				teas.innerText = count + " Tea" + (count == 1 || count == "1" ? "" : "s");
+				teas.addEventListener("click", function() {
+					odkTables.openTableToListView({}, "Tea_inventory", "House_id = ?", [c], "config/assets/Tea_inventory_list.html#Tea_inventory/House_id = ?/" + c);
+				});
 			}, function(e) {
 				alert(e);
 			});
 			odkTables.setSubListView("Tea_inventory", "House_id = ?", [c], "config/assets/Tea_inventory_list.html#Tea_inventory/House_id = ?/" + c);
-			return "<a onClick='odkTables.openTableToListView(null, \'Tea_inventory\', null, null, \'Tea_inventory_list.html#Tea_inventory/House_id = ?/"+c+"\')' id='teas'>Loading...</span>"
+			return "<span onClick='odkTables.openTableToListView(null, \'Tea_inventory\', null, null, \'Tea_inventory_list.html#Tea_inventory/House_id = ?/"+c+"\')' id='teas'>Loading...</span>"
 		}]
 	]
 

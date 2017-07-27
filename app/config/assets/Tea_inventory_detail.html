@@ -35,6 +35,28 @@ var display_cols = {"exampleForm": "name", "Tea_types": "Name", "Tea_inventory":
 var allowed_tables = ["exampleForm", "Tea_types", "Tea_inventory", "selects", "Tea_houses"];
 var customJsOl = function customJsOl() {
 	
+
+	main_col = "tiName";
+	table_id = "Tea_inventory";
+	global_join = "Tea_houses ON Tea_houses._id = Tea_inventory.House_id JOIN Tea_types ON Tea_types._id = Tea_inventory.Type_id"
+	global_which_cols_to_select = "*, Tea_types.Name AS ttName, Tea_houses.Name AS thName, Tea_inventory.Name AS tiName"
+	var check = function(col) {
+		return function(e, c, d) {
+			return "<input disabled type='checkbox' " + (c.toUpperCase() == "YES" ? "checked=checked" : "") + " /><b>" + col + "</b>";
+		};
+	}
+	colmap = [
+		["tiName", function(e, c, d) { return c }],
+		["ttName", "Type: "],
+		["Price_8oz", false],
+		["Price_12oz", false],
+		["Price_16oz", function(e, c, d) { return "<b>16oz</b>: " + c + "<br /><br /><b>Offered</b>:" }],
+		["Iced", check("Iced")],
+		["Hot", check("Hot")],
+		["Loose_Leaf", check("Loose Leaf")],
+		["Bags", check("Bags")],
+	]
+
 }
 
 		</script>

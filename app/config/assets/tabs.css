@@ -6,6 +6,7 @@
 	height: 70px;
 	text-align: center;
 	background-color: lightblue;
+	padding-bottom: 3px;
 }
 #iframe {
 	position: absolute;
