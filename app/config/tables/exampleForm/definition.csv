@@ -1,4 +1,14 @@
 _element_key,_element_name,_element_type,_list_child_element_keys
+Audio,Audio,mimeUri,"[""Audio_contentType"",""Audio_uriFragment""]"
+Audio_contentType,contentType,mimeType,[]
+Audio_uriFragment,uriFragment,rowpath,[]
+Barcode,Barcode,string,[]
+Image,Image,mimeUri,"[""Image_contentType"",""Image_uriFragment""]"
+Image_contentType,contentType,mimeType,[]
+Image_uriFragment,uriFragment,rowpath,[]
+Video,Video,mimeUri,"[""Video_contentType"",""Video_uriFragment""]"
+Video_contentType,contentType,mimeType,[]
+Video_uriFragment,uriFragment,rowpath,[]
 add_one,add_one,number,[]
 add_res,add_res,string,[]
 add_two,add_two,number,[]
@@ -8,6 +18,7 @@ make_above_required,make_above_required,string,[]
 make_prev_required,make_prev_required,string,[]
 multiply_res,multiply_res,string,[]
 name,name,string,[]
+operation,operation,string,[]
 possibly_required,possibly_required,string,[]
 possibly_required_2,possibly_required_2,string,[]
 regionLevel1,regionLevel1,string,[]

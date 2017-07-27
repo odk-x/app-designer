@@ -104,45 +104,43 @@
         "_row_num": 12
       },
       {
+        "type": "select_one",
+        "values_list": "operations",
+        "name": "operation",
+        "_row_num": 13
+      },
+      {
         "type": "number",
         "name": "add_two",
-        "display": {
-          "title": {
-            "text": "Second addition number"
-          },
-          "prompt": {
-            "text": "+"
-          }
-        },
         "required": 1,
-        "_row_num": 13
+        "_row_num": 14
       },
       {
         "type": "text",
         "name": "add_res",
         "display": {
           "title": {
-            "text": "Addition result"
+            "text": "Math result"
           },
           "prompt": {
-            "text": "="
+            "text": "Equals"
           }
         },
-        "_row_num": 14
+        "_row_num": 15
       },
       {
         "type": "assign",
         "name": "add_res",
-        "calculation": "Number(data('add_one')) + Number(data('add_two'))",
-        "_row_num": 15
-      },
-      {
-        "clause": "end screen",
+        "calculation": "eval(data('add_one') + data('operation') + data('add_two'))",
         "_row_num": 16
       },
       {
-        "clause": "begin screen",
+        "clause": "end screen",
         "_row_num": 17
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 18
       },
       {
         "type": "text",
@@ -152,16 +150,16 @@
             "text": "Multiply result"
           },
           "prompt": {
-            "text": "Result of multiplying the two numbers on the previous page"
+            "text": "Result of multiplying the result on the previous page by two"
           }
         },
-        "_row_num": 18
+        "_row_num": 19
       },
       {
         "type": "assign",
         "name": "multiply_res",
-        "calculation": "Number(data('add_one')) * Number(data('add_two'))",
-        "_row_num": 19
+        "calculation": "Number(data('add_res')) * 2",
+        "_row_num": 20
       },
       {
         "type": "text",
@@ -175,7 +173,7 @@
           }
         },
         "required": "data('make_above_required') == 'yes'",
-        "_row_num": 20
+        "_row_num": 21
       },
       {
         "type": "select_one",
@@ -189,15 +187,63 @@
             "text": "Select yes here to make the previous question required!"
           }
         },
-        "_row_num": 21
-      },
-      {
-        "clause": "end screen",
         "_row_num": 22
       },
       {
-        "clause": "begin screen",
+        "clause": "end screen",
         "_row_num": 23
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 24
+      },
+      {
+        "type": "image",
+        "name": "Image",
+        "display": {
+          "title": {
+            "text": "Image"
+          }
+        },
+        "_row_num": 25
+      },
+      {
+        "type": "audio",
+        "name": "Audio",
+        "display": {
+          "title": {
+            "text": "Audio"
+          }
+        },
+        "_row_num": 26
+      },
+      {
+        "type": "video",
+        "name": "Video",
+        "display": {
+          "title": {
+            "text": "Video"
+          }
+        },
+        "_row_num": 27
+      },
+      {
+        "type": "barcode",
+        "name": "Barcode",
+        "display": {
+          "title": {
+            "text": "Barcode"
+          }
+        },
+        "_row_num": 28
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 29
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 30
       },
       {
         "type": "text",
@@ -211,15 +257,15 @@
           }
         },
         "required": "data('make_prev_required') == 'yes'",
-        "_row_num": 24
+        "_row_num": 31
       },
       {
         "clause": "end screen",
-        "_row_num": 25
+        "_row_num": 32
       },
       {
         "clause": "begin screen",
-        "_row_num": 26
+        "_row_num": 33
       },
       {
         "type": "select_one",
@@ -238,11 +284,11 @@
         },
         "required": 1,
         "constraint": "data('make_prev_required') == 'yes'",
-        "_row_num": 27
+        "_row_num": 34
       },
       {
         "clause": "end screen",
-        "_row_num": 28
+        "_row_num": 35
       }
     ],
     "choices": [
@@ -265,6 +311,46 @@
           }
         },
         "_row_num": 3
+      },
+      {
+        "choice_list_name": "operations",
+        "data_value": "+",
+        "display": {
+          "title": {
+            "text": "Plus"
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "operations",
+        "data_value": "-",
+        "display": {
+          "title": {
+            "text": "Minus"
+          }
+        },
+        "_row_num": 6
+      },
+      {
+        "choice_list_name": "operations",
+        "data_value": "*",
+        "display": {
+          "title": {
+            "text": "Times"
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "choice_list_name": "operations",
+        "data_value": "/",
+        "display": {
+          "title": {
+            "text": "Divided By"
+          }
+        },
+        "_row_num": 8
       }
     ],
     "queries": [
@@ -451,6 +537,48 @@
           },
           "_row_num": 3
         }
+      ],
+      "operations": [
+        {
+          "choice_list_name": "operations",
+          "data_value": "+",
+          "display": {
+            "title": {
+              "text": "Plus"
+            }
+          },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "operations",
+          "data_value": "-",
+          "display": {
+            "title": {
+              "text": "Minus"
+            }
+          },
+          "_row_num": 6
+        },
+        {
+          "choice_list_name": "operations",
+          "data_value": "*",
+          "display": {
+            "title": {
+              "text": "Times"
+            }
+          },
+          "_row_num": 7
+        },
+        {
+          "choice_list_name": "operations",
+          "data_value": "/",
+          "display": {
+            "title": {
+              "text": "Divided By"
+            }
+          },
+          "_row_num": 8
+        }
       ]
     },
     "table_specific_definitions": {
@@ -565,36 +693,44 @@
         },
         "elementKey": "add_one"
       },
-      "add_two": {
+      "operation": {
         "_defn": [
           {
             "_row_num": 13,
             "section_name": "survey"
           }
         ],
-        "type": "number",
-        "displayName": {
-          "text": "Second addition number"
-        },
-        "elementKey": "add_two"
+        "type": "string",
+        "valuesList": "operations",
+        "elementKey": "operation"
       },
-      "add_res": {
+      "add_two": {
         "_defn": [
           {
             "_row_num": 14,
             "section_name": "survey"
           }
         ],
+        "type": "number",
+        "elementKey": "add_two"
+      },
+      "add_res": {
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          }
+        ],
         "type": "string",
         "displayName": {
-          "text": "Addition result"
+          "text": "Math result"
         },
         "elementKey": "add_res"
       },
       "multiply_res": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -607,7 +743,7 @@
       "possibly_required": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -620,7 +756,7 @@
       "make_above_required": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -631,10 +767,104 @@
         "valuesList": "yesno",
         "elementKey": "make_above_required"
       },
+      "Image": {
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "Image_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "Image_contentType"
+          }
+        },
+        "displayName": {
+          "text": "Image"
+        },
+        "elementKey": "Image"
+      },
+      "Audio": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "Audio_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "audio/*",
+            "elementKey": "Audio_contentType"
+          }
+        },
+        "displayName": {
+          "text": "Audio"
+        },
+        "elementKey": "Audio"
+      },
+      "Video": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "Video_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "video/*",
+            "elementKey": "Video_contentType"
+          }
+        },
+        "displayName": {
+          "text": "Video"
+        },
+        "elementKey": "Video"
+      },
+      "Barcode": {
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Barcode"
+        },
+        "elementKey": "Barcode"
+      },
       "possibly_required_2": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -647,7 +877,7 @@
       "make_prev_required": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -782,41 +1012,44 @@
             "promptIdx": 5
           },
           {
-            "type": "number",
-            "name": "add_two",
-            "display": {
-              "title": {
-                "text": "Second addition number"
-              },
-              "prompt": {
-                "text": "+"
-              }
-            },
-            "required": 1,
+            "type": "select_one",
+            "values_list": "operations",
+            "name": "operation",
             "_row_num": 13,
             "__rowNum__": 12,
             "_token_type": "prompt",
-            "_type": "number",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 6
+          },
+          {
+            "type": "number",
+            "name": "add_two",
+            "required": 1,
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "prompt",
+            "_type": "number",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 7
           },
           {
             "type": "text",
             "name": "add_res",
             "display": {
               "title": {
-                "text": "Addition result"
+                "text": "Math result"
               },
               "prompt": {
-                "text": "="
+                "text": "Equals"
               }
             },
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 7
+            "promptIdx": 8
           },
           {
             "type": "text",
@@ -826,15 +1059,15 @@
                 "text": "Multiply result"
               },
               "prompt": {
-                "text": "Result of multiplying the two numbers on the previous page"
+                "text": "Result of multiplying the result on the previous page by two"
               }
             },
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen17",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 9
           },
           {
             "type": "text",
@@ -848,12 +1081,12 @@
               }
             },
             "required": "data('make_above_required') == 'yes'",
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen17",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 10
           },
           {
             "type": "select_one",
@@ -867,12 +1100,72 @@
                 "text": "Select yes here to make the previous question required!"
               }
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen17",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 11
+          },
+          {
+            "type": "image",
+            "name": "Image",
+            "display": {
+              "title": {
+                "text": "Image"
+              }
+            },
+            "_row_num": 25,
+            "__rowNum__": 24,
+            "_token_type": "prompt",
+            "_type": "image",
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 12
+          },
+          {
+            "type": "audio",
+            "name": "Audio",
+            "display": {
+              "title": {
+                "text": "Audio"
+              }
+            },
+            "_row_num": 26,
+            "__rowNum__": 25,
+            "_token_type": "prompt",
+            "_type": "audio",
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 13
+          },
+          {
+            "type": "video",
+            "name": "Video",
+            "display": {
+              "title": {
+                "text": "Video"
+              }
+            },
+            "_row_num": 27,
+            "__rowNum__": 26,
+            "_token_type": "prompt",
+            "_type": "video",
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 14
+          },
+          {
+            "type": "barcode",
+            "name": "Barcode",
+            "display": {
+              "title": {
+                "text": "Barcode"
+              }
+            },
+            "_row_num": 28,
+            "__rowNum__": 27,
+            "_token_type": "prompt",
+            "_type": "barcode",
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 15
           },
           {
             "type": "text",
@@ -886,12 +1179,12 @@
               }
             },
             "required": "data('make_prev_required') == 'yes'",
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen23",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 16
           },
           {
             "type": "select_one",
@@ -910,30 +1203,30 @@
             },
             "required": 1,
             "constraint": "data('make_prev_required') == 'yes'",
-            "_row_num": 27,
-            "__rowNum__": 26,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 17
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 29,
-            "_branch_label_enclosing_screen": "survey/_screen29",
-            "promptIdx": 13
+            "_row_num": 36,
+            "_branch_label_enclosing_screen": "survey/_screen36",
+            "promptIdx": 18
           }
         ],
         "validation_tag_map": {
           "finalize": [
             1,
             5,
-            6,
-            9,
-            11,
-            12
+            7,
+            10,
+            16,
+            17
           ]
         },
         "operations": [
@@ -972,86 +1265,101 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 16,
-              "__rowNum__": 15,
+              "_row_num": 17,
+              "__rowNum__": 16,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nassign('add_res', Number(data('add_one')) + Number(data('add_two')));\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nassign('add_res', eval(data('add_one') + data('operation') + data('add_two')));\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
             "clause": "begin screen",
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 22,
-              "__rowNum__": 21,
+              "_row_num": 23,
+              "__rowNum__": 22,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nassign('multiply_res', Number(data('add_one')) * Number(data('add_two')));\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\nassign('multiply_res', Number(data('add_res')) * 2);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
             "clause": "begin screen",
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 25,
-              "__rowNum__": 24,
+              "_row_num": 29,
+              "__rowNum__": 28,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
             "clause": "begin screen",
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 28,
-              "__rowNum__": 27,
+              "_row_num": 32,
+              "__rowNum__": 31,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 33,
+            "__rowNum__": 32,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 35,
+              "__rowNum__": 34,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 29,
-            "operationIdx": 6
+            "_row_num": 36,
+            "operationIdx": 7
           },
           {
-            "_row_num": 29,
+            "_row_num": 36,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 7
+            "operationIdx": 8
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 29,
-            "operationIdx": 8
+            "_row_num": 36,
+            "operationIdx": 9
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen6": 1,
           "_screen11": 2,
-          "_screen17": 3,
-          "_screen23": 4,
-          "_screen26": 5,
-          "_contents": 7,
-          "_screen29": 7
+          "_screen18": 3,
+          "_screen24": 4,
+          "_screen30": 5,
+          "_screen33": 6,
+          "_contents": 8,
+          "_screen36": 8
         }
       },
       "initial": {
@@ -1329,17 +1637,28 @@
         "elementSet": "data",
         "elementPath": "add_one"
       },
-      "add_two": {
+      "operation": {
         "_defn": [
           {
             "_row_num": 13,
             "section_name": "survey"
           }
         ],
+        "type": "string",
+        "valuesList": "operations",
+        "elementKey": "operation",
+        "elementName": "operation",
+        "elementSet": "data",
+        "elementPath": "operation"
+      },
+      "add_two": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          }
+        ],
         "type": "number",
-        "displayName": {
-          "text": "Second addition number"
-        },
         "elementKey": "add_two",
         "elementName": "add_two",
         "elementSet": "data",
@@ -1348,13 +1667,13 @@
       "add_res": {
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "displayName": {
-          "text": "Addition result"
+          "text": "Math result"
         },
         "elementKey": "add_res",
         "elementName": "add_res",
@@ -1364,7 +1683,7 @@
       "multiply_res": {
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
@@ -1380,7 +1699,7 @@
       "possibly_required": {
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -1396,7 +1715,7 @@
       "make_above_required": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -1410,10 +1729,149 @@
         "elementSet": "data",
         "elementPath": "make_above_required"
       },
+      "Image": {
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "Image_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "Image.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "Image_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "Image.contentType"
+          }
+        },
+        "displayName": {
+          "text": "Image"
+        },
+        "elementKey": "Image",
+        "elementName": "Image",
+        "elementSet": "data",
+        "elementPath": "Image",
+        "listChildElementKeys": [
+          "Image_contentType",
+          "Image_uriFragment"
+        ],
+        "notUnitOfRetention": true
+      },
+      "Audio": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "Audio_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "Audio.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "audio/*",
+            "elementKey": "Audio_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "Audio.contentType"
+          }
+        },
+        "displayName": {
+          "text": "Audio"
+        },
+        "elementKey": "Audio",
+        "elementName": "Audio",
+        "elementSet": "data",
+        "elementPath": "Audio",
+        "listChildElementKeys": [
+          "Audio_contentType",
+          "Audio_uriFragment"
+        ],
+        "notUnitOfRetention": true
+      },
+      "Video": {
+        "_defn": [
+          {
+            "_row_num": 27,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "Video_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "Video.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "video/*",
+            "elementKey": "Video_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "Video.contentType"
+          }
+        },
+        "displayName": {
+          "text": "Video"
+        },
+        "elementKey": "Video",
+        "elementName": "Video",
+        "elementSet": "data",
+        "elementPath": "Video",
+        "listChildElementKeys": [
+          "Video_contentType",
+          "Video_uriFragment"
+        ],
+        "notUnitOfRetention": true
+      },
+      "Barcode": {
+        "_defn": [
+          {
+            "_row_num": 28,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Barcode"
+        },
+        "elementKey": "Barcode",
+        "elementName": "Barcode",
+        "elementSet": "data",
+        "elementPath": "Barcode"
+      },
       "possibly_required_2": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
@@ -1429,7 +1887,7 @@
       "make_prev_required": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -1442,6 +1900,57 @@
         "elementName": "make_prev_required",
         "elementSet": "data",
         "elementPath": "make_prev_required"
+      },
+      "Image_uriFragment": {
+        "type": "string",
+        "elementType": "rowpath",
+        "elementKey": "Image_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "Image.uriFragment"
+      },
+      "Image_contentType": {
+        "type": "string",
+        "elementType": "mimeType",
+        "default": "image/*",
+        "elementKey": "Image_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "Image.contentType"
+      },
+      "Audio_uriFragment": {
+        "type": "string",
+        "elementType": "rowpath",
+        "elementKey": "Audio_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "Audio.uriFragment"
+      },
+      "Audio_contentType": {
+        "type": "string",
+        "elementType": "mimeType",
+        "default": "audio/*",
+        "elementKey": "Audio_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "Audio.contentType"
+      },
+      "Video_uriFragment": {
+        "type": "string",
+        "elementType": "rowpath",
+        "elementKey": "Video_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "Video.uriFragment"
+      },
+      "Video_contentType": {
+        "type": "string",
+        "elementType": "mimeType",
+        "default": "video/*",
+        "elementKey": "Video_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "Video.contentType"
       },
       "_id": {
         "type": "string",
@@ -1559,6 +2068,34 @@
     "properties": [
       {
         "_partition": "Column",
+        "_aspect": "Audio",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Audio\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Barcode",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Barcode\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Image",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Image\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "Video",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Video\"}"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "add_one",
         "_key": "displayName",
         "_type": "object",
@@ -1569,14 +2106,7 @@
         "_aspect": "add_res",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"Addition result\"}"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "add_two",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":\"Second addition number\"}"
+        "_value": "{\"text\":\"Math result\"}"
       },
       {
         "_partition": "Column",
@@ -1626,6 +2156,13 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":\"Multiply result\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "operation",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"operations\",\"data_value\":\"+\",\"display\":{\"title\":{\"text\":\"Plus\"}},\"_row_num\":5},{\"choice_list_name\":\"operations\",\"data_value\":\"-\",\"display\":{\"title\":{\"text\":\"Minus\"}},\"_row_num\":6},{\"choice_list_name\":\"operations\",\"data_value\":\"*\",\"display\":{\"title\":{\"text\":\"Times\"}},\"_row_num\":7},{\"choice_list_name\":\"operations\",\"data_value\":\"/\",\"display\":{\"title\":{\"text\":\"Divided By\"}},\"_row_num\":8}]"
       },
       {
         "_partition": "Column",
