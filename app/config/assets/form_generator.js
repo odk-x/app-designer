@@ -81,7 +81,7 @@ var screen_data = function screen_data(id, optional_no_alert) {
 		if (elem.selectedOptions.length > 0) {
 			return elem.selectedOptions[0].value.trim();
 		}
-		return "";
+		return null;
 	} else if (elem.classList.contains("select-multiple")) {
 		// for select multiple, accumulate everything the user checked in a list, then stringify it
 		// we stringify it because whatever we return will be put into row_data and then from row_data into the database by update()
@@ -370,7 +370,7 @@ var populate_choices = function populate_choices(selects, callback) {
 		stuffs = stuffs.slice(1);
 		// give the list of choices to set and the element to put them on to the callback
 		callback(stuffs, select);
-		if (saved != null && saved != undefined && saved.trim().length > 0) {
+		if (saved != null && saved != undefined && saved.toString().trim().length > 0) {
 			changeElement(select, saved);
 		}
 	}
@@ -400,7 +400,7 @@ var changeElement = function changeElement(elem, newdata) {
 			newdata = newdata.toString();
 		}
 		// trim the data
-		if (newdata != null) {
+		if (newdata != null && typeof(newdata) == "string") {
 			newdata = newdata.trim();
 		}
 		// we won't be able to find null in the options list
@@ -504,8 +504,15 @@ var makeIntent = function makeIntent(package, activity, optional_dbcol) {
 // Helper function used by update() whenever something on the screen has changed and we should put row_data in the database
 // Also sets savepoint type to incomplete
 var updateOrInsert = function updateOrInsert() {
+	var temp_row_data = row_data;
+	for (var i = 0; i < hack_for_acknowledges.length; i++) {
+		var col = hack_for_acknowledges[i];
+		if (typeof(temp_row_data[col]) == "string") {
+			temp_row_data[col] = temp_row_data[col].toUpperCase() == "TRUE" ? 1 : 0;
+		}
+	}
 	if (!row_exists) {
-		odkData.addRow(table_id, row_data, row_id, function(d) {
+		odkData.addRow(table_id, temp_row_data, row_id, function(d) {
 			row_exists = true;
 		}, function(d) {
 			if (d.indexOf("ActionNotAuthorizedException") >= 0) {
@@ -521,7 +528,10 @@ var updateOrInsert = function updateOrInsert() {
 			if (!noop) noop = true;
 		});
 	} else {
-		odkData.updateRow(table_id, row_data, row_id, function(){}, function() {
+		// acknowledges MUST go into the database as integer 1 or 0, don't ask me why
+		// But we can't do that in screen_data/changeElement/row_data because survey stores it in the javascript as
+		// true/false and that's what a bunch of constraints/validations/if statements expect
+		odkData.updateRow(table_id, temp_row_data, row_id, function(){}, function() {
 			alert(_t("Unexpected failure to save row"));
 			console.log(arguments);
 		});
@@ -807,9 +817,6 @@ var update = function update(delta) {
 			}
 			if (row_data[col] != newdata) {
 				num_updated++;
-				// fix acknowledges
-				if (newdata == "true") newdata = "1";
-				if (newdata == "false") newdata = "0";
 				// update row_data to match what's on the screen
 				row_data[col] = newdata;
 				console.log("Updating database value for " + col + " to screen value " + row_data[col]);
@@ -828,14 +835,17 @@ var update = function update(delta) {
 					// this fixes acknowledges, otherwise we would changeElement to true (boolean) then screen_data would return true (string)
 					row_data[col] = row_data[col].toString();
 				}
-				console.log("Updating " + col + " to saved value " + row_data[col]);
-				var loading = changeElement(elem, row_data[col]);
-				console.log(loading);
+				var saved_value = row_data[col];
+				if (hack_for_acknowledges.indexOf(col) >= 0) {
+					saved_value = (saved_value == null || saved_value == undefined || saved_value == false || saved_value == 0) ? "false" : "true";
+				}
+				console.log("Updating " + col + " to saved value " + saved_value);
+				var loading = changeElement(elem, saved_value);
 				var sdat = screen_data(col);
-				if (row_data[col] !== null && sdat != row_data[col] && !loading) {
+				if (saved_value !== null && sdat != saved_value && !loading) {
 					// This can happen when the database says a select one should be set to "M55" or something, but that's not one of the possible options.
 					// noop = "Unexpected failure to set screen value of " + col + ". Tried to set it to " + row_data[col] + " ("+typeof(row_data[col])+") but it came out as " + sdat + " ("+typeof(sdat)+")";
-					console.log("Unexpected failure to set screen value of " + col + ". Tried to set it to " + row_data[col] + " ("+typeof(row_data[col])+") but it came out as " + sdat + " ("+typeof(sdat)+")");
+					console.log("Unexpected failure to set screen value of " + col + ". Tried to set it to " + saved_value + " ("+typeof(saved_value)+") but it came out as " + sdat + " ("+typeof(sdat)+")");
 					row_data[col] = sdat;
 				} else {
 					elem.setAttribute("data-data_populated", "done");
