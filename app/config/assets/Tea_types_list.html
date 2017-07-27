@@ -44,16 +44,19 @@ var clicked = function(table_id, row_id) {
 }
 var customJsOl = function customJsOl() {
 	
-	clicked = function clicked(table_id, row_id) {
-		odkTables.openDetailWithListView(null, table_id, row_id, "config/assets/Tea_houses_detail.html");
+	var extras_cb = function extras_cb(e, c, d, i) {
+		var caffeinated = d.getData(i, "Caffeinated").toUpperCase() == "YES"
+		var fermented = d.getData(i, "Fermented").toUpperCase() == "YES"
+		var extras = []
+		if (caffeinated) extras = extras.concat("Caffeinated");
+		if (fermented) extras = extras.concat("Fermented");
+		return extras.join(", ");
 	}
-	global_join = "Tea_types ON Tea_types._id = Tea_houses.Specialty_Type_id"
-	global_which_cols_to_select = "*, Tea_types.Name AS ttName, Tea_houses.Name AS thName"
-	display_subcol = [["Specialty: ", "ttName", true], ["", "District", false], [", ", "Neighborhood", true]];
-	display_col = "thName";
-	table_id = "Tea_houses";
+	display_subcol = [["Origin: ", "Origin", true], [extras_cb, "_id", true]];
+	display_col = "Name";
+	table_id = "Tea_types";
 	allowed_group_bys = [
-		"District", "Neighborhood", "State", "WiFi", "Hot", "Iced", "State", ["ttName", "Specialty"]
+		"Origin", "Caffeinated, "Fermented"
 	]
 
 }

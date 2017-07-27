@@ -35,10 +35,6 @@ var display_cols = {"exampleForm": "name", "Tea_types": "Name", "Tea_inventory":
 var allowed_tables = ["exampleForm", "Tea_types", "Tea_inventory", "selects", "Tea_houses"];
 var customJsOl = function customJsOl() {
 	
-	main_col = "thName";
-	table_id = "Tea_houses";
-	global_join = "Tea_types ON Tea_types._id = Tea_houses.Specialty_Type_id"
-	global_which_cols_to_select = "*, Tea_types.Name AS ttName, Tea_houses.Name AS thName"
 	var br = function(col, extra) {
 		return function(e, c, d) { return "<b>" + col + "</b>: " + c + (extra ? extra : "<br />"); };
 	}
@@ -47,6 +43,11 @@ var customJsOl = function customJsOl() {
 			return "<input disabled type='checkbox' " + (c.toUpperCase() == "YES" ? "checked=checked" : "") + " /><b>" + col + "</b>";
 		};
 	}
+
+	main_col = "thName";
+	table_id = "Tea_houses";
+	global_join = "Tea_types ON Tea_types._id = Tea_houses.Specialty_Type_id"
+	global_which_cols_to_select = "*, Tea_types.Name AS ttName, Tea_houses.Name AS thName, (SELECT COUNT(*) FROM Tea_inventory WHERE Tea_inventory.House_id = Tea_houses._id) AS num_teas"
 	var opened = function(e, c, d) { return "<b>Opened</b>: " + (c == null ? "" : c).split("T")[0]; };
 	colmap = [
 		["thName", function(e, c, d) { return c }],
@@ -65,23 +66,14 @@ var customJsOl = function customJsOl() {
 		["WiFi", function(e, c, d) { return check("WiFi")(e, c, d) + "<br /><h3>Contact Information</h3>"; }],
 		["Store_Owner", true],
 		["Phone_Number", "Mobile number: "],
-		["_id", function(e, c, d) {
-			odkData.arbitraryQuery("Tea_inventory", "SELECT COUNT(*) FROM Tea_inventory WHERE House_id = ?", [row_id], 1, 0, function(d) {
-				var count = d.getData(0, "COUNT(*)");
-				var teas = document.getElementById("teas")
-				teas.style.color = "blue";
-				teas.style.textDecoration = "underline";
-				teas.innerText = count + " Tea" + (count == 1 || count == "1" ? "" : "s");
-				teas.addEventListener("click", function() {
-					odkTables.openTableToListView({}, "Tea_inventory", "House_id = ?", [c], "config/assets/Tea_inventory_list.html#Tea_inventory/House_id = ?/" + c);
-				});
-			}, function(e) {
-				alert(e);
-			});
-			odkTables.setSubListView("Tea_inventory", "House_id = ?", [c], "config/assets/Tea_inventory_list.html#Tea_inventory/House_id = ?/" + c);
-			return "<span onClick='odkTables.openTableToListView(null, \'Tea_inventory\', null, null, \'Tea_inventory_list.html#Tea_inventory/House_id = ?/"+c+"\')' id='teas'>Loading...</span>"
-		}]
+		["num_teas", function (e, c, d) {
+			odkTables.setSubListView("Tea_inventory", "House_id = ?", [row_id], "config/assets/Tea_inventory_list.html#Tea_inventory/thName = ?/" + d.getData(0, "thName"));
+			return "<span onClick='openTeas();' style='color: blue; text-decoration: underline;'>" + c + " tea" + (c.toString() == 1 ? "" : "s") + "</span>";
+		}],
 	]
+	window.openTeas = function openTeas() {
+		odkTables.openTableToListView({}, "Tea_inventory", "House_id = ?", [row_id], "config/assets/Tea_inventory_list.html#Tea_inventory/thName = ?/" + cached_d.getData(0, "thName"));
+	}
 
 }
 
