@@ -10,7 +10,7 @@
 				alert(e);
 			}
 			var onYieldLoad = function onYieldLoad(elem, id) {
-				elem.contentWindow.show_value = function(num, percent) { return num; };
+				elem.contentWindow.show_value = function(num, percent) { return num + "kg/hectare"; };
 				odkData.arbitraryQuery("plot", yield_raw, [id], 10000, 0, elem.contentWindow.success, failure);
 			}
 			var onHeightLoad = function(elem, id) {

@@ -40,7 +40,6 @@ body {
 		"plot": "config/assets/plot_list.html",
 		"visit": "config/assets/visit_list.html",
 	}
-	var todo = function() {alert("TODO")};
 	menu = ["Plots Demo", null, [
 		["View Plots", "plot", ""],
 		["View Plots on a Map", "_js", function() { odkTables.openTableToMapView(null, "plot", null, null, "config/assets/plot_list.html#plot") }],
@@ -49,8 +48,8 @@ body {
 			["View Overall Data", "_html", "config/assets/view_overall_data.html"],
 			["View Single Plot Data", "_html", "config/assets/single_plot_data_list.html"],
 			["View Comparison Data", null, [
-				["Compare by plant type", "_html", "config/assets/compare_list_planting.html#plot/STATIC/SELECT * FROM plot GROUP BY planting/[]/unused"],
-				["Compare by soil type", "_html", "config/assets/compare_list_soil.html#plot/STATIC/SELECT * FROM plot JOIN visit ON visit.plot_id = plot._id GROUP BY soil/[]/unused"],
+				["Compare by plant type", "_html", "config/assets/compare_list_planting.html#plot/STATIC/SELECT * FROM plot GROUP BY planting/[]/distinct values of planting"],
+				["Compare by soil type", "_html", "config/assets/compare_list_soil.html#plot/STATIC/SELECT * FROM plot JOIN visit ON visit.plot_id = plot._id GROUP BY soil/[]/distinct values of soil type"],
 				["Compare all plots", "_html", "config/assets/compare_all_plots.html"],
 			]],
 		]]

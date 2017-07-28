@@ -190,7 +190,7 @@ var update_total_rows = function update_total_rows(force) {
 	var search = document.getElementById("search-box").value;
 	if (search == cached_search && !force) {
 		console.log("Search was unchanged!")
-		// TODO this seems wrong
+		// Don't actually do the query to update the number of rows, just refresh the result set
 		doSearch();
 		return;
 	}

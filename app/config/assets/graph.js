@@ -94,6 +94,8 @@ window.success = function success(d) {
 	} else {
 		if (type == "pie") {
 			doPie(d);
+		} else if (type == "line") {
+			doLine(d);
 		} else {
 			doBar(d);
 		}
@@ -116,14 +118,17 @@ var getCorner = function getCorner(center_x, center_y, x, y) {
 }
 var drawSegment = function drawSegment(center_x, center_y, starting_percent, percent, color) {
 	var end_percent = starting_percent + percent;
+	/*
 	var x1 = (1 + Math.cos(2 * Math.PI * starting_percent)) * center_y;
 	var y1 = (1 + Math.sin(2 * Math.PI * starting_percent)) * center_x;
 	var x2 = (1 + Math.cos(2 * Math.PI * end_percent)) * center_y;
 	var y2 = (1 + Math.sin(2 * Math.PI * end_percent)) * center_x;
+	*/
 	var ctxt = canvas.getContext("2d");
 	ctxt.fillStyle = color;
 	ctxt.beginPath();
 	ctxt.moveTo(center_x, center_y);
+	/*
 	ctxt.lineTo(x1, y1);
 	var corner = getCorner(center_x, center_y, x1, y1);
 	ctxt.lineTo(corner[0], corner[1]);
@@ -141,6 +146,8 @@ var drawSegment = function drawSegment(center_x, center_y, starting_percent, per
 	corner = getCorner(center_x, center_y, x2, y2);
 	ctxt.lineTo(corner[0], corner[1]);
 	ctxt.lineTo(x2, y2);
+	*/
+	ctxt.arc(center_x, center_y, center_x /* that's the radius */, starting_percent * 2 * Math.PI, (starting_percent + percent) * 2 * Math.PI)
 	ctxt.closePath();
 	ctxt.fill();
 }
@@ -168,9 +175,11 @@ var doPie = function doPie(d) {
 	var center_x = canvas.width / 2;
 	var center_y = canvas.height / 2;
 	var ctxt = canvas.getContext("2d");
+	/*
 	ctxt.beginPath();
 	ctxt.arc(center_x, center_y, Math.min(center_x, center_y), 0, Math.PI * 2);
 	ctxt.clip();
+	*/
 	for (var i = 0; i < all_values.length; i++) {
 		var val = all_values[i];
 		var percent = map[val] / total_total;
@@ -241,4 +250,54 @@ var drawBar = function drawBar(bar_height, starting_y, bar_width, color) {
 	ctxt.lineTo(starting_y + bar_width, canvas.height);
 	ctxt.closePath();
 	ctxt.fill();
+}
+var doLine = function doLine(d) {
+	var h = canvas.height;
+	var w = canvas.width
+	var max_percent = 0;
+	var percentages = [];
+	var width_of_one_bar = w / all_values.length;
+	width_of_one_bar = Math.min(width_of_one_bar, w / 3);
+	for (var i = 0; i < all_values.length; i++) {
+		var val = all_values[i];
+		var percent = map[val] / total_total;
+		percentages = percentages.concat(percent);
+		max_percent = Math.max(max_percent, percent);
+	}
+	var points = []
+	for (var i = 0; i < all_values.length; i++) {
+		var val = all_values[i];
+		var percent = percentages[i];
+		var color = newColor();
+		add_key(color, val, d, percent, map[val]);
+		var bar_height = h * (percent / max_percent);
+		points = points.concat(0);
+		points[points.length - 1] = [(width_of_one_bar/2) + i * width_of_one_bar, (canvas.height + /* line graph point radius */ 10) - bar_height, color];
+	}
+	var current = points[0];
+	var last = null;
+	for (var i = 0; i < points.length - 1; i++) {
+		last = current;
+		current = points[i + 1];
+		drawLine(last, current);
+		drawPoint(last);
+	}
+	drawPoint(current);
+}
+var drawPoint = function drawPoint(point) {
+	var ctxt = canvas.getContext("2d");
+	ctxt.fillStyle = point[2];
+	ctxt.beginPath();
+	ctxt.arc(point[0], point[1], 10, 0, 2 * Math.PI);
+	ctxt.closePath();
+	ctxt.fill();
+}
+var drawLine = function drawLine(a, b) {
+	var ctxt = canvas.getContext("2d");
+	ctxt.strokeStyle = "#37393d";
+	ctxt.beginPath();
+	ctxt.moveTo(a[0], a[1]);
+	ctxt.lineTo(b[0], b[1]);
+	ctxt.closePath();
+	ctxt.stroke();
 }
