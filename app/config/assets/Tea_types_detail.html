@@ -38,10 +38,23 @@ var customJsOl = function customJsOl() {
 	var br = function(col, extra) {
 		return function(e, c, d) { return "<b>" + col + "</b>: " + c + (extra ? extra : "<br />"); };
 	}
-	var check = function(col) {
+	var check = function(col, accepting, type) {
+		if (accepting === undefined) {
+			accepting = function(e, c, d) {
+				return c.toUpperCase() == "YES";
+			}
+		}
+		if (type === undefined) type = "checkbox"
 		return function(e, c, d) {
-			return "<input disabled type='checkbox' " + (c.toUpperCase() == "YES" ? "checked=checked" : "") + " /><b>" + col + "</b>";
+			return "<input disabled type='"+type+"' " + (accepting(e, c, d) ? "checked=checked" : "") + " /><b>" + col + "</b>";
 		};
+	}
+	var selected = function(a, b) {
+		if (a == null) return false;
+		if (a[0] == "[") {
+			return jsonParse(a).indexOf(b) >= 0;
+		}
+		return a.toUpperCase() == b.toUpperCase();
 	}
 
 

@@ -1,5 +1,5 @@
 var type = "";
-var graph_col = "";
+var graph_cols = [];
 var raw = "";
 var args = [];
 var table_id = "";
@@ -10,6 +10,25 @@ var all_values = [];
 var total_total = 0;
 var canvas = document.createElement("canvas");
 
+var parseReallyDirtyInt = function parseReallyDirtyInt(val) {
+	if (val.length == 29 && val.indexOf("T") == 10) {
+		// It's a date
+		return odkCommon.toDateFromOdkTimeStamp(val).getTime();
+	}
+	var newstr = ""
+	for (var i = 0; i < val.length; i++) {
+		if ("0123456789.".indexOf(val[i]) >= 0) {
+			newstr = newstr.concat(val[i])
+		} else {
+			if (newstr.length == 0) {
+				return  -1 * (255 - val.charCodeAt(0));
+			}
+			return Number(newstr)
+		}
+	}
+	return Number(newstr);
+}
+
 var ol = function ol() {
 	var split = window.location.hash.substr(1).split("/");
 	if (split.length < 6) {
@@ -18,11 +37,12 @@ var ol = function ol() {
 	}
 	type = split[0];
 	table_id = split[1];
-	graph_col = split[2];
+	graph_cols = jsonParse(split[2]);
 	raw = split[3];
 	args = jsonParse(split[4]);
 	title = split[5];
 	title = _tu(title);
+	console.log(raw);
 	for (var i = 0; i < args.length; i++) {
 		title = title.replace("?", args[i]);
 	}
@@ -35,17 +55,17 @@ var ol = function ol() {
 	canvas.width = w;
 	canvas.height = w;
 	odkData.arbitraryQuery(table_id, raw, args, 10000, 0, function success(d) {
-		total_total = d.getCount();
 		for (var i = 0; i < d.getCount(); i++) {
-			var val = d.getData(i, graph_col);
-			if (map[val] === undefined) {
-				map[val] = 0;
-				all_values = all_values.concat(val);
-			}
-			map[val]++;
+			var key = d.getData(i, graph_cols[0]);
+			var val = d.getData(i, graph_cols[1]);
+			map[key] = Number(val);
+			all_values = all_values.concat(key);
+			total_total += Number(val);
 		}
+		console.log(map);
 		all_values.sort(function(a, b) {
-			return map[a] < map[b];
+			//return map[a] - map[b];
+			return parseReallyDirtyInt(a) - parseReallyDirtyInt(b);
 		});
 		if (total_total == 0) {
 			document.getElementById("key").innerText = _t("No results")
@@ -116,7 +136,13 @@ var add_key = function add_key(color, val, d, percent) {
 	square.style.width = square.style.height = "30px";
 	square.style.display = "inline-block";
 	label.appendChild(square);
-	label.appendChild(document.createTextNode(" " + _tu(_tc(d, graph_col, val))+ " - " + pretty_percent(percent)));
+	var label_text = val;
+	if (val.length == 29 && val[10] == "T") {
+		label_text = val.split("T")[0]
+	} else {
+		label_text = _tu(_tc(d, graph_cols[0], val));
+	}
+	label.appendChild(document.createTextNode(" " + label_text + " - " + pretty_percent(percent)));
 	document.getElementById("key").appendChild(label);
 }
 var doPie = function doPie(d) {

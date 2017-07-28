@@ -30,7 +30,7 @@
             "text": "Which plot are you observing?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 6
       },
       {
@@ -51,7 +51,7 @@
             "text": "Select the date and time of your visit."
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 9
       },
       {
@@ -59,7 +59,7 @@
         "name": "max_height",
         "values_list": "min_max_height",
         "display": {
-          "debug": false
+          "debug": 0
         },
         "_row_num": 10
       },
@@ -105,7 +105,7 @@
             "image": "media/measure.jpg"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 16
       },
       {
@@ -338,7 +338,7 @@
         "name": "max_yield",
         "values_list": "min_max_yield",
         "display": {
-          "debug": false
+          "debug": 0
         },
         "_row_num": 55
       },
@@ -642,43 +642,43 @@
       {
         "name": "ack_ok",
         "type": "boolean",
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "_row_num": 2
       },
       {
         "name": "ack_ok_2",
         "type": "boolean",
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "_row_num": 3
       },
       {
         "name": "max_height_disp",
         "type": "number",
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "_row_num": 4
       },
       {
         "name": "max_yield_disp",
         "type": "number",
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "_row_num": 5
       },
       {
         "name": "max_height",
         "type": "number",
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "_row_num": 6
       },
       {
         "name": "max_yield",
         "type": "number",
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "_row_num": 7
       },
       {
         "name": "plant_type_query_text",
         "type": "string",
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "_row_num": 8
       }
     ],
@@ -690,7 +690,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20140331,
+        "value": 20170727,
         "_row_num": 3
       },
       {
@@ -709,7 +709,7 @@
       },
       {
         "setting_name": "disableSwipeNavigation",
-        "value": true,
+        "value": 1,
         "_row_num": 6
       }
     ],
@@ -727,8 +727,16 @@
         "aspect": "default",
         "key": "listViewFileName",
         "type": "configpath",
-        "value": "config/tables/visit/html/visit_list.html",
+        "value": "config/assets/visit_list.html",
         "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "configpath",
+        "value": "config/assets/visit_detail.html",
+        "_row_num": 4
       }
     ]
   },
@@ -756,7 +764,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20140331,
+        "value": 20170727,
         "_row_num": 3
       },
       "survey": {
@@ -775,7 +783,7 @@
       },
       "disableSwipeNavigation": {
         "setting_name": "disableSwipeNavigation",
-        "value": true,
+        "value": 1,
         "_row_num": 6
       },
       "_locales": {
@@ -1023,7 +1031,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "ack_ok"
       },
       "ack_ok_2": {
@@ -1038,7 +1046,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "ack_ok_2"
       },
       "max_height_disp": {
@@ -1053,7 +1061,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "max_height_disp"
       },
       "max_yield_disp": {
@@ -1068,7 +1076,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "max_yield_disp"
       },
       "max_height": {
@@ -1089,7 +1097,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "max_height"
       },
       "max_yield": {
@@ -1110,7 +1118,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "max_yield"
       },
       "plant_type_query_text": {
@@ -1127,7 +1135,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "plant_type_query_text"
       },
       "plot_id": {
@@ -1278,7 +1286,7 @@
                 "text": "Which plot are you observing?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -1294,7 +1302,7 @@
                 "text": "Select the date and time of your visit."
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
@@ -1307,7 +1315,7 @@
             "name": "max_height",
             "values_list": "min_max_height",
             "display": {
-              "debug": false
+              "debug": 0
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -1352,7 +1360,7 @@
                 "image": "media/measure.jpg"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 16,
             "__rowNum__": 15,
             "_token_type": "prompt",
@@ -1545,7 +1553,7 @@
             "name": "max_yield",
             "values_list": "min_max_yield",
             "display": {
-              "debug": false
+              "debug": 0
             },
             "_row_num": 55,
             "__rowNum__": 54,
@@ -2134,7 +2142,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "ack_ok",
         "elementName": "ack_ok",
         "elementSet": "data",
@@ -2152,7 +2160,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "ack_ok_2",
         "elementName": "ack_ok_2",
         "elementSet": "data",
@@ -2170,7 +2178,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "max_height_disp",
         "elementName": "max_height_disp",
         "elementSet": "data",
@@ -2188,7 +2196,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "max_yield_disp",
         "elementName": "max_yield_disp",
         "elementSet": "data",
@@ -2212,7 +2220,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "max_height",
         "elementName": "max_height",
         "elementSet": "data",
@@ -2236,7 +2244,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "max_yield",
         "elementName": "max_yield",
         "elementSet": "data",
@@ -2256,7 +2264,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "plant_type_query_text",
         "elementName": "plant_type_query_text",
         "elementSet": "data",
@@ -2629,6 +2637,13 @@
       {
         "_partition": "Table",
         "_aspect": "default",
+        "_key": "detailViewFileName",
+        "_type": "configpath",
+        "_value": "config/assets/visit_detail.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":\"Plot Visits\"}"
@@ -2638,7 +2653,7 @@
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "configpath",
-        "_value": "config/tables/visit/html/visit_list.html"
+        "_value": "config/assets/visit_list.html"
       }
     ]
   }

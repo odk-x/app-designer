@@ -4,10 +4,10 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,plot
 Table,default,colOrder,array,"[""plot_name"",""location_latitude"",""location_longitude"",""location_altitude"",""location_accuracy"",""planting"", ""plot_size""]"
 Table,default,defaultViewType,string,MAP
-Table,default,detailViewFileName,configpath,config/tables/plot/html/plot_detail.html
+Table,default,detailViewFileName,configpath,config/assets/plot_detail.html
 Table,default,displayName,object,"{""text"":""Plot""}"
-Table,default,listViewFileName,configpath,config/tables/plot/html/plot_list.html
-Table,default,mapListViewFileName,configpath,config/tables/plot/html/plot_list.html
+Table,default,listViewFileName,configpath,config/assets/plot_list.html
+Table,default,mapListViewFileName,configpath,config/assets/plot_list.html
 TableMapFragment,default,keyColorRuleType,string,None
 TableMapFragment,default,keyMapLatCol,string,location_latitude
 TableMapFragment,default,keyMapLongCol,string,location_longitude

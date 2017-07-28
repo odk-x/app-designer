@@ -6,5 +6,6 @@ Column,soil,displayChoicesList,object,"[{""choice_list_name"":""soil_texture"","
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,visit
 Table,default,defaultViewType,string,LIST
+Table,default,detailViewFileName,configpath,config/assets/visit_detail.html
 Table,default,displayName,object,"{""text"":""Plot Visits""}"
-Table,default,listViewFileName,configpath,config/tables/visit/html/visit_list.html
+Table,default,listViewFileName,configpath,config/assets/visit_list.html

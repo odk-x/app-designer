@@ -153,9 +153,9 @@ var update_callback = function update_callback(d) {
 				continue;
 			}
 		} 
-		if (col === null) {
-			li.appendChild(make_li(xlscol, "", _tu(found[1]), "html"));
-		} else if (typeof(found[1]) == "string") {
+		//if (col === null) {
+			//li.appendChild(make_li(xlscol, "", _tu(found[1]), "html"));
+		/*} else*/ if (typeof(found[1]) == "string") {
 			li.appendChild(make_li(xlscol, _tu(found[1]), _tc(d, col, val), "html"));
 		} else if (found[1] === true) {
 			li.appendChild(make_li(xlscol, displayCol(col, metadata, table_id), pretty(_tc(d, col, val)), "text"));

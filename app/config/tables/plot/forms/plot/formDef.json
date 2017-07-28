@@ -83,7 +83,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20140331,
+        "value": 20170727,
         "_row_num": 3
       },
       {
@@ -107,7 +107,7 @@
       },
       {
         "setting_name": "disableSwipeNavigation",
-        "value": true,
+        "value": 1,
         "_row_num": 7
       }
     ],
@@ -133,7 +133,7 @@
         "aspect": "default",
         "key": "detailViewFileName",
         "type": "configpath",
-        "value": "config/tables/plot/html/plot_detail.html",
+        "value": "config/assets/plot_detail.html",
         "_row_num": 4
       },
       {
@@ -141,7 +141,7 @@
         "aspect": "default",
         "key": "listViewFileName",
         "type": "configpath",
-        "value": "config/tables/plot/html/plot_list.html",
+        "value": "config/assets/plot_list.html",
         "_row_num": 5
       },
       {
@@ -149,7 +149,7 @@
         "aspect": "default",
         "key": "mapListViewFileName",
         "type": "configpath",
-        "value": "config/tables/plot/html/plot_list.html",
+        "value": "config/assets/plot_list.html",
         "_row_num": 6
       },
       {
@@ -202,7 +202,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20140331,
+        "value": 20170727,
         "_row_num": 3
       },
       "survey": {
@@ -226,7 +226,7 @@
       },
       "disableSwipeNavigation": {
         "setting_name": "disableSwipeNavigation",
-        "value": true,
+        "value": 1,
         "_row_num": 7
       },
       "_locales": {
@@ -950,7 +950,7 @@
         "_aspect": "default",
         "_key": "detailViewFileName",
         "_type": "configpath",
-        "_value": "config/tables/plot/html/plot_detail.html"
+        "_value": "config/assets/plot_detail.html"
       },
       {
         "_partition": "Table",
@@ -964,14 +964,14 @@
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "configpath",
-        "_value": "config/tables/plot/html/plot_list.html"
+        "_value": "config/assets/plot_list.html"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "mapListViewFileName",
         "_type": "configpath",
-        "_value": "config/tables/plot/html/plot_list.html"
+        "_value": "config/assets/plot_list.html"
       },
       {
         "_partition": "TableMapFragment",
