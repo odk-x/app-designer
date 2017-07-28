@@ -16,7 +16,10 @@ var parseReallyDirtyInt = function parseReallyDirtyInt(val) {
 		if ("0123456789.".indexOf(val[i]) >= 0) {
 			newstr = newstr.concat(val[i])
 		} else {
-			return Number(newstr);
+			if (newstr.length == 0) {
+				return  -1 * (255 - val.charCodeAt(0));
+			}
+			return Number(newstr)
 		}
 	}
 	return Number(newstr);
@@ -35,6 +38,7 @@ var ol = function ol() {
 	args = jsonParse(split[4]);
 	title = split[5];
 	title = _tu(title);
+	console.log(raw);
 	for (var i = 0; i < args.length; i++) {
 		title = title.replace("?", args[i]);
 	}
@@ -56,8 +60,8 @@ var ol = function ol() {
 		}
 		console.log(map);
 		all_values.sort(function(a, b) {
-			//return map[a] < map[b];
-			return parseReallyDirtyInt(a) < parseReallyDirtyInt(b)
+			//return map[a] - map[b];
+			return parseReallyDirtyInt(a) - parseReallyDirtyInt(b);
 		});
 		if (total_total == 0) {
 			document.getElementById("key").innerText = _t("No results")
