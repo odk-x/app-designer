@@ -1813,7 +1813,11 @@ promptTypes.input_type = promptTypes.base.extend({
     },
     beforeMove: function() {
         var that = this;
-        var input = document.getElementsByTagName('input')[0];
+
+        var input = this.el.getElementsByTagName('input')[0];
+        // this validity check is needed because modification is not always called
+        // for example when going from either an invalid input (caught by HTML form validation)
+        // or an empty input to an invalid input (caught by HTML form validation)
         var isInvalid = (input.validity && !input.validity.valid) || that.setValueAndValidate(input.value);
         if ( isInvalid ) {
             return { message: that.display.invalid_value_message };
@@ -1892,8 +1896,9 @@ promptTypes.integer = promptTypes.input_type.extend({
         ctxt.success();
     },
     modification: function(evt) {
-        var value = evt.target.validity.valid ? $(evt.target).val() : "NaN";
         var that = this;
+
+        var value = evt.target.validity.valid ? $(evt.target).val() : "NaN";
         that.modified = false;
         if ( that.lastEventTimestamp == evt.timeStamp ) {
             odkCommon.log("D","prompts." + that.type + ".modification duplicate event ignored");
@@ -1907,10 +1912,19 @@ promptTypes.integer = promptTypes.input_type.extend({
             valueBox.innerHTML = value;
         }
         var renderContext = that.renderContext;
-        // track original value
         renderContext.invalid = that.setValueAndValidate(value);
         that.modified = true;
         renderContext.value = value;
+    },
+    setValueAndValidate: function(value) {
+        // override super
+        // not tracking the previous input so that validateValue and _isValid
+        // can catch invalid input
+        // correct value is persisted by beforeMove
+
+        var that = this;
+        that.setValueDeferredChange((!value ? null : value));
+        return !that.validateValue();
     },
     validateValue: function() {
         var value = this.getValue();
