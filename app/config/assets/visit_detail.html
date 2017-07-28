@@ -61,7 +61,6 @@ var customJsOl = function customJsOl() {
 	table_id = "visit";
 	global_which_cols_to_select = "visit.*, plot.plot_name AS plot_name"
 	global_join = "plot ON plot._id = visit.plot_id"
-	// UNTESTED
 	colmap = [
 		["date", function(e, c, d) { return "Visit on " + c.split("T")[0]; }],
 		["plot_name", true],
@@ -84,7 +83,7 @@ var customJsOl = function customJsOl() {
 		["pests", function(e, c, d) {
 			var retVal = "<b>Pests</b>: <br />"
 			retVal += check("Earworm", function(e, c, d) { return selected(c, "earworm"); })(e, c, d) + "<br />";
-			retVal += check("Stink Bug", function(e, c, d) { return selected(c, "stinkbug"); })(e, c, d) + "<br />"; // THIS ONE UNTESTED
+			retVal += check("Stink Bug", function(e, c, d) { return selected(c, "stink_bug"); })(e, c, d) + "<br />";
 			retVal += check("Beetle", function(e, c, d) { return selected(c, "beetle"); })(e, c, d) + "<br />";
 			retVal += check("Cutworm", function(e, c, d) { return selected(c, "cutworm"); })(e, c, d) + "<br />";
 			retVal += "<h3>Observations: </h3>"
