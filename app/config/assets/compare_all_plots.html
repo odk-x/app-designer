@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<script src='../../system/js/odkData.js'></script>
+		<script>
+			var height_raw = "SELECT plot_name, (SELECT plant_height FROM visit WHERE visit.plot_id = plot._id AND visit._savepoint_type != 'INCOMPLETE' ORDER BY date DESC LIMIT 1) AS plant_height FROM plot"
+			var yield_raw = "SELECT plot_name, (SELECT crop_yield FROM visit WHERE visit.plot_id = plot._id AND visit._savepoint_type != 'INCOMPLETE' ORDER BY date DESC LIMIT 1) AS plot_yield FROM plot"
+			var failure = function(e) {
+				alert(e);
+			}
+			var onHeightLoad = function onHeightLoad() {
+				document.getElementById("height_iframe").contentWindow.sort = true;
+				document.getElementById("height_iframe").contentWindow.reverse = true;
+				document.getElementById("height_iframe").contentWindow.show_value = function(num, percent) { return num + " cm"; };
+				odkData.arbitraryQuery("plot", height_raw, [], 10000, 0, document.getElementById("height_iframe").contentWindow.success, failure);
+			}
+			var onYieldLoad = function() {
+				document.getElementById("yield_iframe").contentWindow.sort = true;
+				document.getElementById("yield_iframe").contentWindow.reverse = true;
+				document.getElementById("yield_iframe").contentWindow.show_value = function(num, percent) { return num; };
+				odkData.arbitraryQuery("plot", yield_raw, [], 10000, 0, document.getElementById("yield_iframe").contentWindow.success, failure);
+			}
+			var ol = function ol() {
+				document.getElementById("height_iframe").src = 'plot_graph.html#bar/plot/["plot_name","plant_height"]/'+height_raw+'/[]/unused'
+				document.getElementById("height_iframe").addEventListener("load", onHeightLoad);
+				document.getElementById("yield_iframe").src = 'plot_graph.html#bar/plot/["plot_name","plot_yield"]/'+yield_raw+'/[]/unused'
+				document.getElementById("yield_iframe").addEventListener("load", onYieldLoad);
+			}
+		</script>
+		<style>
+			iframe {
+				width: 500px;
+				min-height: 833px;
+				border: none;
+			}
+			body {
+				background: url('img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg') no-repeat center/cover fixed;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body onLoad='ol();'>
+		<h1>Plant Height</h1>
+		<h2>By most recent visit</h2>
+		<iframe id='height_iframe'></iframe>
+		<h1>Plot Yield</h1>
+		<h2>By most recent visit</h2>
+		<iframe id='yield_iframe'></iframe>
+	</body>
+</html>

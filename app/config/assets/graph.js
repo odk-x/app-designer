@@ -4,7 +4,6 @@ var raw = "";
 var args = [];
 var table_id = "";
 var title = "";
-window.show_value = false;
 
 var map = {};
 var all_values = [];
@@ -55,15 +54,19 @@ var ol = function ol() {
 	canvas.style.height = w;
 	canvas.width = w;
 	canvas.height = w;
-	odkData.arbitraryQuery(table_id, raw, args, 10000, 0, success, function(e) {
-		alert(e);
-	})
+	if (!iframeOnly) {
+		odkData.arbitraryQuery(table_id, raw, args, 10000, 0, success, function(e) {
+			alert(e);
+		})
+	}
 }
 
 // Needs to be on window because the odkData callback above will never occur if we're inside an iframe.
 // If we are inside an iframe, the parent can do something like this
 // odkData.arbitraryQuery("table", raw, [args], 10000, 0, document.getElementById("iframe").contentWindow.success, function(e) { alert(e); });
 window.success = function success(d) {
+	console.log(d.resultObj)
+	console.log(graph_cols)
 	for (var i = 0; i < d.getCount(); i++) {
 		var key = d.getData(i, graph_cols[0]);
 		var val = d.getData(i, graph_cols[1]);
@@ -73,8 +76,18 @@ window.success = function success(d) {
 	}
 	console.log(map);
 	all_values.sort(function(a, b) {
-		//return map[a] - map[b];
-		return parseReallyDirtyInt(a) - parseReallyDirtyInt(b);
+		var retVal = 0;
+		if (window.sort === true) {
+			retVal = map[b] - map[a];
+		} else if (window.sort === false) {
+			retVal = parseReallyDirtyInt(a) - parseReallyDirtyInt(b);
+		} else {
+			retVal = window.sort(a, b);
+		}
+		if (window.reverse) {
+			retVal *= -1
+		}
+		return retVal;
 	});
 	if (total_total == 0) {
 		document.getElementById("key").innerText = _t("No results")
@@ -89,9 +102,6 @@ window.success = function success(d) {
 	}
 }
 
-// If we need more than this the graph is going to look ugly anyways
-// Colors are Oxley, Serenade, Chilean Fire, Vulcan, Zest, Froly, Havelock Blue, Firebrick, Purple and Regal Blue
-var all_colors = ["#85ac85", "#ffebd7", "#993300", "#37393d", "#e58755", "#ff8080", "#4891d9", "#cc2e2d", "#9900ff", "#1f4864"]
 var current_color_idx = 0;
 var getCorner = function getCorner(center_x, center_y, x, y) {
 	var ret_x = 0;
@@ -143,12 +153,14 @@ var add_key = function add_key(color, val, d, percent, raw_number) {
 	square.style.display = "inline-block";
 	label.appendChild(square);
 	var label_text = val;
+	if (val === null || val === undefined) val = "null"
+	if (typeof(val) != "string") val = val.toString();
 	if (val.length == 29 && val[10] == "T") {
 		label_text = val.split("T")[0]
 	} else {
 		label_text = _tu(_tc(d, graph_cols[0], val));
 	}
-	label.appendChild(document.createTextNode(" " + label_text + " - " + (show_value ? (show_value === true ? raw_number : show_value(raw_number)) : pretty_percent(percent))));
+	label.appendChild(document.createTextNode(" " + label_text + " - " + (show_value ? (show_value === true ? raw_number : show_value(raw_number, percent)) : pretty_percent(percent))));
 	document.getElementById("key").appendChild(label);
 }
 var doPie = function doPie(d) {
@@ -189,11 +201,11 @@ var pretty_percent = function pretty_percent(n) {
 	}
 }
 var newColor = function newColor() {
-	if (current_color_idx == all_colors.length) {
+	if (current_color_idx == window.all_colors.length) {
 		// We're out of colors!
 		return "#" + newGuid().replace("-", "").substr(0, 6);
 	}
-	return all_colors[current_color_idx++];
+	return window.all_colors[current_color_idx++];
 }
 var doBar = function doBar(d) {
 	var h = canvas.height;

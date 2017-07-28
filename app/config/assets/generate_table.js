@@ -497,7 +497,7 @@ var doSearch = function doSearch() {
 				displays.addEventListener("click", function() {
 					console.log(global_group_by);
 					if (global_group_by == null || global_group_by == undefined || global_group_by.trim().length == 0) {
-						clicked(table_id, d.getData(i, "_id"));
+						clicked(table_id, d.getData(i, "_id"), d, i);
 					} else {
 						var global_group_by_temp = global_group_by
 						if (global_group_by_temp.indexOf(".") > 0) global_group_by_temp = global_group_by_temp.split(".", 2)[1]

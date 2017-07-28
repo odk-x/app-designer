@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+	<script src='../../system/js/odkData.js'></script>
+	<script>
+			var row_id = ""
+			var height_raw = "SELECT date, plant_height FROM visit WHERE plot_id = ?"
+			var yield_raw = "SELECT date, crop_yield FROM visit WHERE plot_id = ?"
+			var failure = function(e) {
+				alert(e);
+			}
+			var onHeightLoad = function onHeightLoad() {
+				document.getElementById("height_iframe").contentWindow.show_value = function(num, percent) { return num + " cm"; };
+				odkData.arbitraryQuery("plot", height_raw, [row_id], 10000, 0, document.getElementById("height_iframe").contentWindow.success, failure);
+			}
+			var onYieldLoad = function() {
+				document.getElementById("yield_iframe").contentWindow.show_value = function(num, percent) { return num; };
+				odkData.arbitraryQuery("visit", yield_raw, [row_id], 10000, 0, document.getElementById("yield_iframe").contentWindow.success, failure);
+			}
+			var ol = function ol() {
+				row_id = window.location.hash.substr(1);
+				document.getElementById("height_iframe").src = 'plot_graph.html#line/plot/["date","plant_height"]/'+height_raw+'/['+row_id+']/unused'
+				document.getElementById("height_iframe").addEventListener("load", onHeightLoad);
+				document.getElementById("yield_iframe").src = 'plot_graph.html#bar/visit/["date","crop_yield"]/'+yield_raw+'/['+row_id+']/unused'
+				document.getElementById("yield_iframe").addEventListener("load", onYieldLoad);
+			}
+		</script>
+	<style>
+			iframe {
+				width: 500px;
+				min-height: 666px;
+				border: none;
+			}
+			body {
+				background: url('img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg') no-repeat center/cover fixed;
+				text-align: center;
+			}
+		</style>
+</head>
+<body onLoad='ol();'>
+<h1>Height</h1>
+<iframe id='height_iframe'></iframe>
+<h1>Yield</h1>
+<iframe id='yield_iframe'></iframe>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<script src='../../system/js/odkData.js'></script>
+		<script>
+			var height_raw = "SELECT planting, SUM(plot_size) AS sum FROM plot GROUP BY planting"
+			var yield_raw = "SELECT soil, SUM(crop_yield) AS sum FROM visit GROUP BY soil"
+			var size_raw = "SELECT plot_name, plot_size FROM plot";
+			var failure = function(e) {
+				alert(e);
+			}
+			var onVarietyLoad = function onVarietyLoad() {
+				odkData.arbitraryQuery("plot", height_raw, [], 10000, 0, document.getElementById("variety_iframe").contentWindow.success, failure);
+			}
+			var onYieldLoad = function() {
+				odkData.arbitraryQuery("visit", yield_raw, [], 10000, 0, document.getElementById("yield_iframe").contentWindow.success, failure);
+			}
+			var onSizeLoad = function() {
+				document.getElementById("size_iframe").contentWindow.sort = true;
+				odkData.arbitraryQuery("plot", size_raw, [], 10000, 0, document.getElementById("size_iframe").contentWindow.success, failure);
+			}
+			var ol = function ol() {
+				document.getElementById("variety_iframe").src = 'plot_graph.html#pie/plot/["planting","sum"]/'+height_raw+'/[]/unused'
+				document.getElementById("variety_iframe").addEventListener("load", onVarietyLoad);
+				document.getElementById("yield_iframe").src = 'plot_graph.html#pie/visit/["soil","sum"]/'+yield_raw+'/[]/unused'
+				document.getElementById("yield_iframe").addEventListener("load", onYieldLoad);
+				document.getElementById("size_iframe").src = 'plot_graph.html#pie/plot/["plot_name","plot_size"]/'+size_raw+'/[]/unused'
+				document.getElementById("size_iframe").addEventListener("load", onSizeLoad);
+			}
+		</script>
+		<style>
+			iframe {
+				width: 500px;
+				min-height: 666px;
+				border: none;
+			}
+			#size_iframe {
+				min-height: 750px;
+			}
+			body {
+				background: url('img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg') no-repeat center/cover fixed;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body onLoad='ol();'>
+		<h1>Maize Variety</h1>
+		<iframe id='variety_iframe'></iframe>
+		<h1>Soil Type</h1>
+		<iframe id='yield_iframe'></iframe>
+		<h1>Plot Size</h1>
+		<iframe id='size_iframe'></iframe>
+	</body>
+</html>

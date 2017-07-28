@@ -124,7 +124,7 @@ var customJsOl = function customJsOl() {
 		return "<button onClick='newVisit()'>New Visit</button><br /><button onClick='alert(\"TODO\")'>Compare Plots</button>"
 	}
 	var doGraphQuery = function() {
-		document.getElementById("iframe").contentWindow.show_value = function(i) { return i + " cm" };
+		document.getElementById("iframe").contentWindow.show_value = function(num, percent) { return num + " cm" };
 		odkData.arbitraryQuery("visit", raw, [row_id], 10000, 0, document.getElementById("iframe").contentWindow.success, function(e) {
 			alert(e);
 		});

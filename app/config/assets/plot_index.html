@@ -45,7 +45,15 @@ body {
 		["View Plots", "plot", ""],
 		["View Plots on a Map", "_js", function() { odkTables.openTableToMapView(null, "plot", null, null, "config/assets/plot_list.html#plot") }],
 		["View Visits", "visit", ""],
-		["View Reports", "_js", todo]
+		["View Reports", null, [
+			["View Overall Data", "_html", "config/assets/view_overall_data.html"],
+			["View Single Plot Data", "_html", "config/assets/single_plot_data_list.html"],
+			["View Comparison Data", null, [
+				["Compare by plant type", "_html", "config/assets/compare_list_planting.html#plot/STATIC/SELECT * FROM plot GROUP BY planting/[]/unused"],
+				["Compare by soil type", "_html", "config/assets/compare_list_soil.html#plot/STATIC/SELECT * FROM plot JOIN visit ON visit.plot_id = plot._id GROUP BY soil/[]/unused"],
+				["Compare all plots", "_html", "config/assets/compare_all_plots.html"],
+			]],
+		]]
 	]]
 
 			// END CONFIG

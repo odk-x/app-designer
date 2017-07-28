@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+	<script src='../../system/js/odkData.js'></script>
+	<script>
+			var plot_names = []
+			var height_raw = "SELECT date, plant_height FROM visit JOIN plot ON plot._id = visit.plot_id WHERE plot_name = ?"
+			var yield_raw = "SELECT date, crop_yield FROM visit JOIN plot ON plot._id = visit.plot_id WHERE plot_name = ?"
+			var failure = function(e) {
+				alert(e);
+			}
+			var onYieldLoad = function onYieldLoad(elem, id) {
+				elem.contentWindow.show_value = function(num, percent) { return num; };
+				odkData.arbitraryQuery("plot", yield_raw, [id], 10000, 0, elem.contentWindow.success, failure);
+			}
+			var onHeightLoad = function(elem, id) {
+				elem.contentWindow.show_value = function(num, percent) { return num + " cm"; };
+				odkData.arbitraryQuery("visit", height_raw, [id], 10000, 0, elem.contentWindow.success, failure);
+			}
+			var ol = function ol() {
+				plot_names = window.location.hash.substr(1).split("/");
+				var do_yield = false;
+				for (var i = 0; i < plot_names.length; i++) {
+					var plot_name = plot_names[i];
+					var iframe = document.createElement("iframe");
+					var h2 = document.createElement("h2");
+					if (do_yield) {
+						h2.innerText = "Yield for plot " + plot_name
+						iframe.src = 'plot_graph.html#line/plot/["date","crop_yield"]/'+height_raw+'/["'+plot_name+'"]/unused';
+						(function(elem, id) {
+							elem.addEventListener("load", function() { onYieldLoad(elem, id); });
+						})(iframe, plot_name);
+					} else {
+						h2.innerText = "Height for plot " + plot_name
+						iframe.src = 'plot_graph.html#line/plot/["date","plant_height"]/'+yield_raw+'/["'+plot_name+'"]/unused';
+						(function(elem, id) {
+							elem.addEventListener("load", function() { onHeightLoad(elem, id); });
+						})(iframe, plot_name);
+						if (plot_names.length == 1) {
+							i--;
+							do_yield = true;
+						}
+					}
+					document.body.appendChild(h2);
+					document.body.appendChild(iframe);
+				}
+			}
+		</script>
+	<style>
+			iframe {
+				width: 500px;
+				min-height: 666px;
+				border: none;
+			}
+			body {
+				background: url('img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg') no-repeat center/cover fixed;
+				text-align: center;
+			}
+		</style>
+</head>
+<body onLoad='ol();'>
+</body>
+</html>

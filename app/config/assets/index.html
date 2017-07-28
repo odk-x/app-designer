@@ -19,12 +19,18 @@
 	]
 
 var idx = 0;
+var loadCallback = function loadCallback() {
+	if (tabs[idx] && tabs[idx][2]) {
+		tabs[idx][2](document.getElementById("iframe"));
+	}
+}
 var ol = function ol() {
 	idx = Number(odkCommon.getSessionVariable("idx"));
 	if (isNaN(idx)) idx = 0;
 	var tabs_div = document.getElementById("tabs");
 	tabs_div.innerHTML = "";
 	var iframe = document.getElementById("iframe");
+	iframe.addEventListener("load", loadCallback);
 	for (var i = 0; i < tabs.length; i++) {
 		var tab = document.createElement("span");
 		tab.classList.add("tab");
