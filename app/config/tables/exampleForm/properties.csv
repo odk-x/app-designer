@@ -1,6 +1,7 @@
 _partition,_aspect,_key,_type,_value
 Column,Audio,displayName,object,"{""text"":""Audio""}"
 Column,Barcode,displayName,object,"{""text"":""Barcode""}"
+Column,Geopoint,displayName,object,"{""text"":""Geopoint""}"
 Column,Image,displayName,object,"{""text"":""Image""}"
 Column,Video,displayName,object,"{""text"":""Video""}"
 Column,add_one,displayName,object,"{""text"":""First addition number""}"
@@ -17,6 +18,10 @@ Column,possibly_required,displayName,object,"{""text"":""Possibly required""}"
 Column,possibly_required_2,displayName,object,"{""text"":""Possibly required 2""}"
 Column,regionLevel1,displayName,object,"{""text"":""Level 1 of admin region""}"
 Column,regionLevel2,displayName,object,"{""text"":""Level 2 of admin region""}"
+Column,see_media,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""yes"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""no"",""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
+Column,see_media,displayName,object,"{""text"":""Make above required""}"
+Column,see_more,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""yes"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""no"",""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
+Column,see_more,displayName,object,"{""text"":""More""}"
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,exampleForm
 Table,default,defaultViewType,string,LIST

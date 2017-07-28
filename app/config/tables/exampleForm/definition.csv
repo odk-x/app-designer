@@ -3,6 +3,11 @@ Audio,Audio,mimeUri,"[""Audio_contentType"",""Audio_uriFragment""]"
 Audio_contentType,contentType,mimeType,[]
 Audio_uriFragment,uriFragment,rowpath,[]
 Barcode,Barcode,string,[]
+Geopoint,Geopoint,geopoint,"[""Geopoint_accuracy"",""Geopoint_altitude"",""Geopoint_latitude"",""Geopoint_longitude""]"
+Geopoint_accuracy,accuracy,number,[]
+Geopoint_altitude,altitude,number,[]
+Geopoint_latitude,latitude,number,[]
+Geopoint_longitude,longitude,number,[]
 Image,Image,mimeUri,"[""Image_contentType"",""Image_uriFragment""]"
 Image_contentType,contentType,mimeType,[]
 Image_uriFragment,uriFragment,rowpath,[]
@@ -23,3 +28,5 @@ possibly_required,possibly_required,string,[]
 possibly_required_2,possibly_required_2,string,[]
 regionLevel1,regionLevel1,string,[]
 regionLevel2,regionLevel2,string,[]
+see_media,see_media,string,[]
+see_more,see_more,string,[]

@@ -21,10 +21,18 @@ var noop = true;
 // some user defined javascript (like assigns, query filters) takes place before row_data has been updated with the data
 // that's actually on the screen, so we should poll screen data first
 var _data_wrapper = function _data_wrapper(i) {
-	var sdat = screen_data(i, true);
-	if (sdat == null || sdat == undefined || sdat.length == 0) return row_data[i];
-	return sdat;
+	var gsp_result = get_screen_prompt(i);
+	if (gsp_result[0]) {
+		if (gsp_result[1].getAttribute("data-data_populated") == "done") {
+			return screen_data(i);
+		} else {
+			throw -1;
+		}
+	} else {
+		return row_data[i];
+	}
 }
+
 
 // Helper function for constraints, so people can write like "selected(data('color'), 'blue')" and it will return true/false 
 var selected = function selected(value1, value2) {
@@ -217,6 +225,9 @@ var do_csv_xhr = function do_csv_xhr(choice_id, filename, callback) {
 				console.log(e);
 			}
 			console.log("XHR complete: " + choice_id)
+			// don't ask me why we have to call it twice, but it fixes regionlevel1/regionlevel2/adminregion
+			// sometimes
+			update(0);
 			update(0);
 		}
 	};
@@ -240,7 +251,11 @@ var get_choices = function get_choices(which, not_first_time, filter) {
 			if (filter != null) {
 				choice_item = choices[j] // used in the eval
 				var data = _data_wrapper
-				filter_result = eval(tokens[filter])
+				try {
+					filter_result = eval(tokens[filter])
+				} catch (e) {
+					if (e == -1) filter_result = false;
+				}
 			}
 			if (filter_result) {
 				// concat on a list will merge them
@@ -326,8 +341,8 @@ var do_cross_table_query = function do_cross_table_query(which, query) {
 		}
 		// make update() call get_choices again now that we've added things to the global `choices` list
 		update(0);
-	}, function failure_callback() {
-		alert(_t("Unexpected failure"));
+	}, function failure_callback(e) {
+		alert(_t("Unexpected failure") + " " + e);
 	});
 }
 // Helper function called by update, detects if a prompt in the given list of prompts has had choices added to it yet,
@@ -371,7 +386,15 @@ var populate_choices = function populate_choices(selects, callback) {
 		// give the list of choices to set and the element to put them on to the callback
 		callback(stuffs, select);
 		if (saved != null && saved != undefined && saved.toString().trim().length > 0) {
-			changeElement(select, saved);
+			if (changeElement(select, saved) == "failure") {
+				if (select.getAttribute("data-data_populated") == "done") {
+					// BAD HACK
+					var col = select.getAttribute("data-dbcol")
+					var newdata = screen_data(col);
+					console.log("POPULATE CHOICES setting " + col + " to " + newdata + " because we couldn't restore it to saved")
+					row_data[col] = newdata;
+				}
+			}
 		}
 	}
 }
@@ -395,6 +418,7 @@ var changeElement = function changeElement(elem, newdata) {
 	} else if (elem.tagName == "SELECT") {
 		// This handles regular old dropdown menus
 
+
 		// fix for acknowledges
 		if (typeof(newdata) == "boolean") {
 			newdata = newdata.toString();
@@ -414,7 +438,6 @@ var changeElement = function changeElement(elem, newdata) {
 		for (var i = 0; i < options.length; i++) {
 			var val = options[i].value
 			if (val != null) val = val.trim()
-			// If it's sele
 			if (val == newdata || (newdata == "1" && val == "true") || (newdata == "0" && val == "false")) {
 				index = i;
 				break;
@@ -422,7 +445,8 @@ var changeElement = function changeElement(elem, newdata) {
 		}
 		if (index == -1) {
 			// !!! THIS IS BAD !!!
-			console.log("Couldn't set selected option for " + elem.getAttribute("data-dbcol"))
+			console.log("Couldn't set selected option for " + elem.getAttribute("data-dbcol") + " - Tried to set it to " + newdata)
+			return "failure"
 		}
 		// Set the selected option on the dropdown menu
 		elem.selectedIndex = index;
@@ -601,25 +625,6 @@ var updateAllSelects = function updateAllSelects(with_filter_only) {
 		pop_choices_for_select_one(stuffs, select, "radio");
 		var dbcol = select.getAttribute("data-dbcol")
 		pop_choices_for_select_one([["_other", "<input type='text' name='"+dbcol+"' id='"+dbcol+"__other_tag' onblur='document.getElementById(\""+dbcol+"__other\").checked = true; update(0);' />"]], select, "radio");
-		/*
-		//var elem = document.createElement("div")
-		////elem.classList.add("option")
-		//var id = select.getAttribute("data-dbcol") + "_" + "_other";
-		//var radio = document.createElement("input")
-		//radio.type = "radio";
-		//radio.setAttribute("value", "_other");
-		//radio.id = id
-		//radio.setAttribute("name", select.getAttribute("data-dbcol"));
-		//radio.addEventListener("change", function() {update(0);});
-		//textbox = document.createElement("input");
-		//textbox.type = "text";
-		//textbox.id = id + "_tag"
-		//textbox.setAttribute("name", select.getAttribute("data-dbcol"));
-		//textbox.addEventListener("blur", function() {document.getElementById(select.getAttribute("data-dbcol") + "__other").checked = true; update(0);});
-		//elem.appendChild(radio);
-		//elem.appendChild(textbox);
-		//select.appendChild(elem);
-		*/
 	});
 }
 
@@ -742,7 +747,14 @@ var update = function update(delta) {
 		var elem = elems[i];
 		var col = elem.getAttribute("data-dbcol");
 		// the "data-calculation" attribute holds a key to a string in `tokens` that we can eval to get the result
-		row_data[col] = eval(tokens[elem.getAttribute("data-calculation")]).toString()
+		try {
+			var new_value = eval(tokens[elem.getAttribute("data-calculation")]).toString();
+			row_data[col] = new_value;
+		} catch (e) {
+			if (e != -1) {
+				//noop = e
+			}
+		}
 		// If it's on the screen, let us update it from row_data later
 		var gsp_result = get_screen_prompt(col);
 		if (gsp_result[0]) {
@@ -808,8 +820,6 @@ var update = function update(delta) {
 		if (elem.getAttribute("data-populated") == "loading") {
 			// if it's a select one or select multiple, and it doesn't have any choices yet, don't touch it
 			continue;
-		} else if (elem.getAttribute("data-data_populated") == "loading") {
-			continue;
 		} else if (elem.getAttribute("data-data_populated") == "done") {
 			var newdata = screen_data(col);
 			if (newdata != null) {
@@ -826,6 +836,7 @@ var update = function update(delta) {
 		}
 	}
 	if (to_set.length > 0) {
+		console.log("Need to set screen data for " + to_set.join(", "))
 		var elems = document.getElementsByClassName("prompt");
 		for (var j = 0; j < elems.length; j++) {
 			var elem = elems[j];
@@ -842,19 +853,25 @@ var update = function update(delta) {
 				console.log("Updating " + col + " to saved value " + saved_value);
 				var loading = changeElement(elem, saved_value);
 				var sdat = screen_data(col);
-				if (saved_value !== null && sdat != saved_value && !loading) {
+				if (loading == "failure" || (saved_value !== null && sdat != saved_value && loading !== true)) {
 					// This can happen when the database says a select one should be set to "M55" or something, but that's not one of the possible options.
-					// noop = "Unexpected failure to set screen value of " + col + ". Tried to set it to " + row_data[col] + " ("+typeof(row_data[col])+") but it came out as " + sdat + " ("+typeof(sdat)+")";
-					console.log("Unexpected failure to set screen value of " + col + ". Tried to set it to " + saved_value + " ("+typeof(saved_value)+") but it came out as " + sdat + " ("+typeof(sdat)+")");
+					var message = "Unexpected failure to set screen value of " + col + ". Tried to set it to " + saved_value + " ("+typeof(saved_value)+") but it came out as " + sdat + " ("+typeof(sdat)+")";
+					// noop = message;
+					console.log(message);
 					row_data[col] = sdat;
 				} else {
-					elem.setAttribute("data-data_populated", "done");
+					if (loading === false) {
+						// Since the choice filters of other prompts might depend on the value of this prompt, update all the prompts with choice filters
+						// Except for some reason updateAllSelects(true) doesn't work, but this does
+						console.log("Updating all selects after successful set of " + col)
+						updateAllSelects(false);
+						elem.setAttribute("data-data_populated", "done");
+					}
 				}
-				// Since the choice filters of other prompts might depend on the value of this prompt, update all the prompts with choice filters
-				// Except for some reason updateAllSelects(true) doesn't work, but this does
-				updateAllSelects(false);
 			}
 		}
+		// If we changed something (like region level 1), we might need to cascade those changes to other things with query filters (like admin region)
+		// Otherwise we might end up with admin region having data-populated=loading and data-data_populated totally unset
 	}
 
 
