@@ -34,7 +34,7 @@
 				return raw
 			}
 			var build = function build() {
-				return "SELECT (" + build_case() + ") AS normalized_year FROM refrigerators JOIN health_facility ON health_facility._id = refrigerators.facility_row_id "
+				return "SELECT (" + build_case() + ") AS normalized_year, COUNT(*) AS count FROM refrigerators JOIN health_facility ON health_facility._id = refrigerators.facility_row_id "
 			}
 			var regionDone = false;
 			var typeDone = false;
@@ -65,8 +65,8 @@
 					extras = extras.concat(" power_source = ?");
 					args = args.concat(source);
 				}
-				var raw = build() + (extras.length == 0 ? "" : " WHERE " + extras.join(" AND "));
-				odkTables.launchHTML(null, "config/assets/cc_graph.html#bar/refrigerators/normalized_year/"+ raw + "/" + JSON.stringify(args) + "/Refrigerator Age");
+				var raw = build() + (extras.length == 0 ? "" : " WHERE " + extras.join(" AND ")) + " GROUP BY normalized_year";
+				odkTables.launchHTML(null, "config/assets/cc_graph.html#bar/refrigerators/"+JSON.stringify(["normalized_year", "count"])+"/"+ raw + "/" + JSON.stringify(args) + "/Refrigerator Age");
 			}
 			var save = function save() {
 				var region = document.getElementById("region").selectedOptions[0].value;

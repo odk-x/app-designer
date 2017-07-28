@@ -324,17 +324,6 @@ var getCols = function getCols() {
 				}
 			}
 			document.getElementById("group-by").disabled = false;
-			// If we're in a group by view or a collection view, 
-			// TODO document
-			if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
-				document.getElementById("group-by").style.display = "none";
-				display_subcol = [];
-				display_col = global_group_by;
-			} else if (global_where_clause != null && global_where_clause != undefined && global_where_clause.trim().length > 0) {
-				document.getElementById("group-by").style.display = "none";
-			} else if (global_static) {
-				document.getElementById("group-by").style.display = "none";
-			}
 		}, function failure(e) {
 			alert(_t("Could not get columns: ") + e);
 		}, 0, 0);
@@ -356,6 +345,17 @@ var doSearch = function doSearch() {
 	odkCommon.setSessionVariable(table_id + ":offset", offset);
 	// Populate the columns of the row so we can make the dropdown menu
 	getCols()
+	// If we're in a group by, only show the value we're grouping on
+	// If we're in a collection view or a static view, disable the group by button
+	if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
+		document.getElementById("group-by").style.display = "none";
+		display_subcol = [];
+		display_col = global_group_by;
+	} else if (global_where_clause != null && global_where_clause != undefined && global_where_clause.trim().length > 0) {
+		document.getElementById("group-by").style.display = "none";
+	} else if (global_static) {
+		document.getElementById("group-by").style.display = "none";
+	}
 	// Make a query for the results to put on the page and run it
 	var the_query = make_query(search, true, false, global_which_cols_to_select);
 	//var raw = "SELECT " + the_query[10] + " FROM " + table_id + (the_query[9].length > 0 ? " JOIN " + the_query[9] : "") + (the_query[0] ? " WHERE " + the_query[0] : "") + (the_query[2] ? " GROUP BY " + the_query[2] : "")
@@ -497,9 +497,8 @@ var doSearch = function doSearch() {
 				displays.addEventListener("click", function() {
 					console.log(global_group_by);
 					if (global_group_by == null || global_group_by == undefined || global_group_by.trim().length == 0) {
-						odkTables.openDetailView({}, table_id, d.getData(i, "_id"));
+						clicked(table_id, d.getData(i, "_id"));
 					} else {
-						//odkTables.launchHTML({}, clean_href() + "#" + table_id + "/" + global_group_by + (d.getData(i, global_group_by) == null ? " IS NULL " : " = ?" ) + "/" + d.getData(i, global_group_by));
 						var global_group_by_temp = global_group_by
 						if (global_group_by_temp.indexOf(".") > 0) global_group_by_temp = global_group_by_temp.split(".", 2)[1]
 						odkTables.launchHTML({}, clean_href() + "#" + table_id + "/" + global_group_by_temp + (d.getData(i, global_group_by) == null ? " IS NULL " : " = ?" ) + "/" + d.getData(i, global_group_by));

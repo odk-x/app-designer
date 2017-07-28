@@ -4,7 +4,7 @@ var possible_wrapped = ["prompt", "title"];
 var preferred_locale = null; // for caching
 
 // Mocks translation, much faster than actual translation
-window.fake_translate = function fake_translate(thing) {
+window.fake_translate = function fake_translate(thing, optional_table) {
 	// Can't translate undefined
 	if (thing === undefined) return _t("Error translating ") + thing;
 
@@ -20,7 +20,7 @@ window.fake_translate = function fake_translate(thing) {
 		// if thing is like {"default": inner} then return fake_translate(inner)
 		// but also do that for everything in possible_wrapped_full not just "default"
 		if (thing[possible_wrapped_full[i]] !== undefined) {
-			return fake_translate(thing[possible_wrapped_full[i]]);
+			return fake_translate(thing[possible_wrapped_full[i]], optional_table);
 		}
 	}
 
@@ -31,7 +31,7 @@ window.fake_translate = function fake_translate(thing) {
 	var result = "";
 	for (var j = 0; j < odkCommon.i18nFieldNames.length; j++) {
 		if (thing[odkCommon.i18nFieldNames[j]] !== undefined) {
-			result = display_update_result(result, thing[odkCommon.i18nFieldNames[j]], odkCommon.i18nFieldNames[j], "default");
+			result = display_update_result(result, thing[odkCommon.i18nFieldNames[j]], odkCommon.i18nFieldNames[j], "default", optional_table);
 		}
 	}
 
@@ -55,7 +55,7 @@ window.display_update_result = function display_update_result(result, this_resul
 			if (table) {
 				var thing = {};
 				thing[field] = this_result;
-				url = localizeUrl(selected_locale, thing, field, "/" + appname + "/assets/config/tables/" + table + "/" + table)
+				url = odkCommon.localizeUrl(selected_locale, thing, field, "/" + appname + "/config/tables/" + table + "/forms/" + table + "/")
 			} else {
 				url = this_result;
 			}
@@ -90,7 +90,7 @@ window.display = function display(thing, table) {
 	// however if we get {text: {default: "a", hindi: "b"}} we should continue with the real translation instead
 	for (var j = 0; j < odkCommon.i18nFieldNames.length; j++) {
 		if (typeof(thing[odkCommon.i18nFieldNames[j]]) == "string") {
-			return fake_translate(thing);
+			return fake_translate(thing, table);
 		}
 	}
 
@@ -177,6 +177,8 @@ window.displayCol = function constructSimpleDisplayName(name, metadata, table) {
 };
 // Pretty prints stuff with underscores in them. First it replaces underscores with spaces, then capitalizes each word.
 window.pretty = function pretty(name) {
+	if (name === null || name === undefined) name = ""
+	if (typeof(name) != "string") name = name.toString();
 	name = name.replace(/_/g, " "); // can't just replace("_", " ") or it will only hit the first instance
 	var sections = name.split(" ");
 	var new_name = ""
@@ -570,5 +572,9 @@ var formgen_specific_translations = {
 	"Required field": {"text": {
 		"default": true,
 		"es": "Dato requerido"
+	}},
+	"Column ? is required but no value was provided": {"text": {
+		"default": true,
+		"es": "Dato ? es requerido pero no tiene respuesta"
 	}},
 }

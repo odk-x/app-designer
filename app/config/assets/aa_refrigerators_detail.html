@@ -183,7 +183,7 @@ allowed_tables = [];
 		document.getElementById("view_m_log").disabled = false;
 		document.getElementById("view_m_log").innerText = _tu("View all maintenance logs")
 		document.getElementById("view_m_log").addEventListener("click", function add_m_log() {
-			odkTables.launchHTML(null, "config/assets/aa_m_logs_list.html#m_log/STATIC/SELECT *, refrigerators.refrigerator_id AS refs_refid, refrigerators.tracking_id AS refs_tracking_number FROM m_logs JOIN refrigerators ON refrigerators.refrigerator_id = m_logs.refrigerator_id WHERE refs_refid = ? ORDER BY date_serviced DESC/" + JSON.stringify([d.getData(0, "refrigerator_id")]) + "/maintenance records for the selected refrigerator");
+			odkTables.launchHTML(null, "config/assets/aa_m_logs_list.html#m_log/STATIC/SELECT *, refrigerators.refrigerator_id AS refs_refid, refrigerators.tracking_id AS refs_tracking_number FROM m_logs JOIN refrigerators ON refrigerators.refrigerator_id = m_logs.refrigerator_id WHERE refs_refid = ?/" + JSON.stringify([d.getData(0, "refrigerator_id")]) + "/maintenance records for the selected refrigerator");
 		});
 
 		return "";

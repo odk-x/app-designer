@@ -89,16 +89,25 @@ var update_callback = function update_callback(d) {
 	// pending_media aggregates contentType and uriFragment rows until we have enough information to display them
 	// Right now it depends on the fact that the rows are usually close together in the database
 	var pending_media = {}
-	for (var i = 0; i < d.getColumns().length; i++) {
-		// col is the column key, val is the value of that cell in our row
-		var col = d.getColumns()[i];
-		var val = d.getData(0, col);
+	var temp_colmap = colmap;
+	if (colmap.length == 0) {
+		for (var i = 0; i < d.getColumns().length; i++) {
+			var col = d.getColumns()[i]
+			if (col.substr(0, 1) == "_") continue
+			temp_colmap = temp_colmap.concat(0);
+			temp_colmap[temp_colmap.length - 1] = [col, true];
+		}
+	}
+	for (var i = 0; i < temp_colmap.length; i++) {
 		// holds whether we found this column id in the colmap
-		var found = false;
+		var found = temp_colmap[i];
+		// col is the column key, val is the value of that cell in our row
+		var col = found[0];
+		var val = (col === null ? "" : d.getData(0, col));
 		// in the database, you just write the data type "picture" and the column name "some_name", and odk expands
 		// that into two different columns, some_name_uriFragment and some_name_contentType
 		// xlscol will hold "some_name" in the example above
-		var xlscol = col;
+		var xlscol = (col === null ? "" : col);
 		// If we found a uriFragment or contentType we should check to see if we have both of them yet, this variable notes that
 		var checkMedia = false;
 		var split = xlscol.split("_")
@@ -108,13 +117,6 @@ var update_callback = function update_callback(d) {
 			xlscol = split.reverse().slice(1).reverse().join("_")
 			pending_media[tail_fragment] = val;
 			checkMedia = true;
-		}
-		// Try and find it in the colmap
-		for (var j = 0; j < colmap.length; j++) {
-			if (colmap[j][0] == xlscol) {
-				found = colmap[j];
-				break;
-			}
 		}
 		// If it's the main column (to be displayed in ibg letters at the top), put it in the header instead
 		var li = null;
@@ -151,24 +153,16 @@ var update_callback = function update_callback(d) {
 				continue;
 			}
 		} 
-		if (found) {
-			if (typeof(found[1]) == "string") {
-				li.appendChild(make_li(xlscol, _tu(found[1]), _tc(d, col, val), "text"));
-			} else if (found[1] === true) {
-				li.appendChild(make_li(xlscol, displayCol(col, metadata, table_id), pretty(_tc(d, col, val)), "text"));
-			} else if (found[1] === false) {
-				li.appendChild(make_li(xlscol, displayCol(col, metadata, table_id), _tc(d, col, val), "text"));
-			} else {
-				li.appendChild(make_li(xlscol, "", found[1](li, val, d), "html"));
-			}
+		if (col === null) {
+			li.appendChild(make_li(xlscol, "", _tu(found[1]), "html"));
+		} else if (typeof(found[1]) == "string") {
+			li.appendChild(make_li(xlscol, _tu(found[1]), _tc(d, col, val), "html"));
+		} else if (found[1] === true) {
+			li.appendChild(make_li(xlscol, displayCol(col, metadata, table_id), pretty(_tc(d, col, val)), "text"));
+		} else if (found[1] === false) {
+			li.appendChild(make_li(xlscol, displayCol(col, metadata, table_id), _tc(d, col, val), "text"));
 		} else {
-			if (col[0] == "_" || colmap.length > 0) {
-				// TODO check if its _sync_state or _savepoint_type and change body appropriately
-				// Wasn't in the colmap and we have a colmap? Don't display it
-				// If we don't have a colmap, default to displaying everything (except underscore prefixed/special columns)
-				continue;
-			}
-			li.appendChild(make_li(xlscol, displayCol(col, metadata, table_id), _tc(d, col, val), is_html));
+			li.appendChild(make_li(xlscol, "", found[1](li, val, d), "html"));
 		}
 		if (col != main_col) {
 			ul.appendChild(li);

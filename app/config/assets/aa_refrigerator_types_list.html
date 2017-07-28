@@ -52,6 +52,9 @@ var allowed_tables = ["health_facility", "m_logs", "refrigerator_types"]
 // A map of table ids to tokens that can be used to localize their display name
 var localized_tables = {"refrigerators": {"title": {"text": {"default": "Refrigerators", "es": "Frigor\u00edficos"}}}, "health_facility": {"title": {"text": {"default": "Health Facility", "es": "Facilidad de Sal\u00fad"}}}, "m_logs": {"title": {"text": {"default": "Maintenance Logs", "es": "Registro de Servicio"}}}, "refrigerator_types": {"title": {"text": {"default": "Refrigerator Types", "es": "Modelos de Friger\u00edficos"}}}};
 var display_col_wrapper = null;
+var clicked = function(table_id, row_id) {
+	odkTables.openDetailView({}, table_id, row_id);
+}
 var customJsOl = function customJsOl() {
 	allowed_tables = [];
 document.getElementById("add").style.display = "none";
