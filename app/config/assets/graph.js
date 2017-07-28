@@ -4,6 +4,7 @@ var raw = "";
 var args = [];
 var table_id = "";
 var title = "";
+window.show_value = false;
 
 var map = {};
 var all_values = [];
@@ -11,6 +12,10 @@ var total_total = 0;
 var canvas = document.createElement("canvas");
 
 var parseReallyDirtyInt = function parseReallyDirtyInt(val) {
+	if (val.length == 29 && val.indexOf("T") == 10) {
+		// It's a date
+		return odkCommon.toDateFromOdkTimeStamp(val).getTime();
+	}
 	var newstr = ""
 	for (var i = 0; i < val.length; i++) {
 		if ("0123456789.".indexOf(val[i]) >= 0) {
@@ -50,33 +55,38 @@ var ol = function ol() {
 	canvas.style.height = w;
 	canvas.width = w;
 	canvas.height = w;
-	odkData.arbitraryQuery(table_id, raw, args, 10000, 0, function success(d) {
-		for (var i = 0; i < d.getCount(); i++) {
-			var key = d.getData(i, graph_cols[0]);
-			var val = d.getData(i, graph_cols[1]);
-			map[key] = Number(val);
-			all_values = all_values.concat(key);
-			total_total += Number(val);
-		}
-		console.log(map);
-		all_values.sort(function(a, b) {
-			//return map[a] - map[b];
-			return parseReallyDirtyInt(a) - parseReallyDirtyInt(b);
-		});
-		if (total_total == 0) {
-			document.getElementById("key").innerText = _t("No results")
-		} else {
-			if (type == "pie") {
-				doPie(d);
-			} else {
-				doBar(d);
-			}
-			document.getElementById("key").style.marginTop = (canvas.height + 30).toString() + "px";
-			document.getElementById("bg").style.height = document.body.clientHeight.toString() + "px";
-		}
-	}, function(e) {
+	odkData.arbitraryQuery(table_id, raw, args, 10000, 0, success, function(e) {
 		alert(e);
 	})
+}
+
+// Needs to be on window because the odkData callback above will never occur if we're inside an iframe.
+// If we are inside an iframe, the parent can do something like this
+// odkData.arbitraryQuery("table", raw, [args], 10000, 0, document.getElementById("iframe").contentWindow.success, function(e) { alert(e); });
+window.success = function success(d) {
+	for (var i = 0; i < d.getCount(); i++) {
+		var key = d.getData(i, graph_cols[0]);
+		var val = d.getData(i, graph_cols[1]);
+		map[key] = Number(val);
+		all_values = all_values.concat(key);
+		total_total += Number(val);
+	}
+	console.log(map);
+	all_values.sort(function(a, b) {
+		//return map[a] - map[b];
+		return parseReallyDirtyInt(a) - parseReallyDirtyInt(b);
+	});
+	if (total_total == 0) {
+		document.getElementById("key").innerText = _t("No results")
+	} else {
+		if (type == "pie") {
+			doPie(d);
+		} else {
+			doBar(d);
+		}
+		document.getElementById("key").style.marginTop = (canvas.height + 30).toString() + "px";
+		document.getElementById("bg").style.height = document.body.clientHeight.toString() + "px";
+	}
 }
 
 // If we need more than this the graph is going to look ugly anyways
@@ -125,14 +135,20 @@ var drawSegment = function drawSegment(center_x, center_y, starting_percent, per
 	ctxt.fill();
 }
 var key = {};
-var add_key = function add_key(color, val, d, percent) {
+var add_key = function add_key(color, val, d, percent, raw_number) {
 	var label = document.createElement("div");
 	var square = document.createElement("span");
 	square.style.backgroundColor = color;
 	square.style.width = square.style.height = "30px";
 	square.style.display = "inline-block";
 	label.appendChild(square);
-	label.appendChild(document.createTextNode(" " + _tu(_tc(d, graph_cols[0], val))+ " - " + pretty_percent(percent)));
+	var label_text = val;
+	if (val.length == 29 && val[10] == "T") {
+		label_text = val.split("T")[0]
+	} else {
+		label_text = _tu(_tc(d, graph_cols[0], val));
+	}
+	label.appendChild(document.createTextNode(" " + label_text + " - " + (show_value ? (show_value === true ? raw_number : show_value(raw_number)) : pretty_percent(percent))));
 	document.getElementById("key").appendChild(label);
 }
 var doPie = function doPie(d) {
@@ -149,7 +165,7 @@ var doPie = function doPie(d) {
 		var color = newColor();
 		drawSegment(center_x, center_y, current_percent, percent, color);
 		current_percent += percent;
-		add_key(color, val, d, percent);
+		add_key(color, val, d, percent, map[val]);
 	}
 }
 var pretty_percent = function pretty_percent(n) {
@@ -196,7 +212,7 @@ var doBar = function doBar(d) {
 		var val = all_values[i];
 		var percent = percentages[i];
 		var color = newColor();
-		add_key(color, val, d, percent);
+		add_key(color, val, d, percent, map[val]);
 		var bar_height = h * (percent / max_percent);
 		drawBar(bar_height, width_of_one_bar * i, width_of_one_bar, color);
 	}
