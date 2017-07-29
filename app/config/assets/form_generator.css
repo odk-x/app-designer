@@ -53,11 +53,20 @@ label, input[type="radio"] {
 .select-one > div:not(:first-child), .select-multiple > div:not(:first-child), .select-one-with-other > div:not(:first-child) {
 	border-top: 1px solid grey;
 }
+.grid > .option:first-child, .grid > .option:nth-child(2), .grid > .option:nth-child(3) {
+	border-top: none;
+}
+.grid > .option:nth-child(3n), .grid > .option:nth-child(3n+2) {
+	border-left: 1px solid grey;
+}
 .select-one, .select-multiple, .select-one-with-other {
 	border: 1px solid grey;
 	border-radius: 10px;
 	min-width: 50%;
 	background-color: lightgrey;
+}
+.grid {
+	min-width: 100%;
 }
 @media screen and (max-width: 480px) {
 	.select-one, .select-multiple, .select-one-with-other {
@@ -73,8 +82,18 @@ input[type="checkbox"], input[type="radio"] {
 label {
 	width: 85%;
 	padding-left: 15%;
+	overflow: hidden;
 }
 iframe {
-	min-width: 60vw;
+	/* min-width: 60vw; */
+	width: 100%;
 	min-height: 120vw;
 }
+.option {
+	width: 100%;
+}
+.grid > .option {
+	display: inline-block;
+	width: 33%;
+}
+

@@ -30,7 +30,7 @@
         "name": "Bags",
         "display": {
           "prompt": {
-            "text": "Is {{data.Name}} served with bags?"
+            "text": "Is this tea served with bags?"
           }
         },
         "required": 1,
@@ -42,7 +42,7 @@
         "name": "Cold",
         "display": {
           "prompt": {
-            "text": "Is {{data.Name}} served cold?"
+            "text": "Is this tea served cold?"
           }
         },
         "required": 1,
@@ -54,7 +54,7 @@
         "name": "Hot",
         "display": {
           "prompt": {
-            "text": "Is {{data.Name}} served hot?"
+            "text": "Is this tea served hot?"
           }
         },
         "required": 1,
@@ -66,7 +66,7 @@
         "name": "Loose_Leaf",
         "display": {
           "prompt": {
-            "text": "Is {{data.Name}} loose leaf?"
+            "text": "Is this tea loose leaf?"
           }
         },
         "required": 1,
@@ -77,7 +77,7 @@
         "name": "Price_8oz",
         "display": {
           "prompt": {
-            "text": "What is the price of an 8 ounce {{data.Name}}?"
+            "text": "What is the price of an 8 ounce cup?"
           }
         },
         "required": 1,
@@ -88,7 +88,7 @@
         "name": "Price_12oz",
         "display": {
           "prompt": {
-            "text": "What is the price of a 12 ounce {{data.Name}}?"
+            "text": "What is the price of an 12 ounce cup?"
           }
         },
         "required": 1,
@@ -99,7 +99,7 @@
         "name": "Price_16oz",
         "display": {
           "prompt": {
-            "text": "What is the price of a 16 ounce {{data.Name}}?"
+            "text": "What is the price of an 16 ounce cup?"
           }
         },
         "required": 1,
@@ -137,6 +137,11 @@
           }
         },
         "_row_num": 4
+      },
+      {
+        "setting_name": "version",
+        "value": 20170729,
+        "_row_num": 5
       }
     ],
     "queries": [
@@ -247,6 +252,11 @@
           }
         },
         "_row_num": 4
+      },
+      "version": {
+        "setting_name": "version",
+        "value": 20170729,
+        "_row_num": 5
       },
       "_locales": {
         "setting_name": "_locales",
@@ -486,7 +496,7 @@
             "name": "Bags",
             "display": {
               "prompt": {
-                "text": "Is {{data.Name}} served with bags?"
+                "text": "Is this tea served with bags?"
               }
             },
             "required": 1,
@@ -503,7 +513,7 @@
             "name": "Cold",
             "display": {
               "prompt": {
-                "text": "Is {{data.Name}} served cold?"
+                "text": "Is this tea served cold?"
               }
             },
             "required": 1,
@@ -520,7 +530,7 @@
             "name": "Hot",
             "display": {
               "prompt": {
-                "text": "Is {{data.Name}} served hot?"
+                "text": "Is this tea served hot?"
               }
             },
             "required": 1,
@@ -537,7 +547,7 @@
             "name": "Loose_Leaf",
             "display": {
               "prompt": {
-                "text": "Is {{data.Name}} loose leaf?"
+                "text": "Is this tea loose leaf?"
               }
             },
             "required": 1,
@@ -553,7 +563,7 @@
             "name": "Price_8oz",
             "display": {
               "prompt": {
-                "text": "What is the price of an 8 ounce {{data.Name}}?"
+                "text": "What is the price of an 8 ounce cup?"
               }
             },
             "required": 1,
@@ -569,7 +579,7 @@
             "name": "Price_12oz",
             "display": {
               "prompt": {
-                "text": "What is the price of a 12 ounce {{data.Name}}?"
+                "text": "What is the price of an 12 ounce cup?"
               }
             },
             "required": 1,
@@ -585,7 +595,7 @@
             "name": "Price_16oz",
             "display": {
               "prompt": {
-                "text": "What is the price of a 16 ounce {{data.Name}}?"
+                "text": "What is the price of an 16 ounce cup?"
               }
             },
             "required": 1,
