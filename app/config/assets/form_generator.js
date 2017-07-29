@@ -263,7 +263,7 @@ var get_choices = function get_choices(which, not_first_time, filter) {
 				var displayed = choices[j].display;
 				// If there's no "notranslate" key, translate it using display, otherwise fake translate it
 				if (choices[j].notranslate == undefined) {
-					displayed = display(choices[j].display, table_id)
+					displayed = display(choices[j].display, table_id, window.possible_wrapped.concat("title"))
 				} else {
 					displayed = fake_translate(choices[j].display);
 				}

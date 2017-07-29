@@ -1,7 +1,7 @@
 window.odkCommonDefinitions = {_tokens: {}};
 // used in both display and fake_translate, just stuff that the translatable object might be wrapped in
 //var possible_wrapped = ["prompt", "title"];
-var possible_wrapped = ["prompt"]
+window.possible_wrapped = ["prompt"]
 var preferred_locale = null; // for caching
 
 // Mocks translation, much faster than actual translation
@@ -16,7 +16,7 @@ window.fake_translate = function fake_translate(thing, optional_table) {
 
 	// A list of all the things the text might be wrapped in.
 	// For real translation, we wouldn't do this, but for fake translation, attempt to automatically unwrap things like normal but also unwrap from the device default locale (sometimes "default", sometimes "_")
-	var possible_wrapped_full = possible_wrapped.concat(["default", "_", "title"]);
+	var possible_wrapped_full = window.possible_wrapped.concat(["default", "_", "title"]);
 	for (var i = 0; i < possible_wrapped_full.length; i++) {
 		// if thing is like {"default": inner} then return fake_translate(inner)
 		// but also do that for everything in possible_wrapped_full not just "default"
@@ -76,15 +76,18 @@ window.display_update_result = function display_update_result(result, this_resul
 
 // This is an unfortunately named function, it should really be called translate, not display
 // It also needs to be optimized. Nothing obvious to do, but it gets called a lot
-window.display = function display(thing, table) {
-  if (typeof(thing) == "string") return thing;
+window.display = function display(thing, table, optional_possible_wrapped) {
+	var this_possible_wrapped = window.possible_wrapped;
+	if (optional_possible_wrapped) this_possible_wrapped = optional_possible_wrapped;
+	console.log(this_possible_wrapped)
+	if (typeof(thing) == "string") return thing;
 	if (typeof(thing) == "undefined") {
 		// A recursive call on an error? What could possibly go wrong!
-	  return _t("Can't translate undefined!");
+		return _t("Can't translate undefined!");
 	}
-	for (var i = 0; i < possible_wrapped.length; i++) {
-		if (thing[possible_wrapped[i]] !== undefined) {
-			return display(thing[possible_wrapped[i]], table);
+	for (var i = 0; i < this_possible_wrapped.length; i++) {
+		if (thing[this_possible_wrapped[i]] !== undefined) {
+			return display(thing[this_possible_wrapped[i]], table);
 		}
 	}
 	// if we get {text: "something"}, don't bother asking odkCommon to do it, just call fake_translate
@@ -296,7 +299,7 @@ window._tc = function(d, column, text) {
 			var cs = all_choices[table];
 			for (var i = 0; i < cs.length; i++) {
 				if (cs[i]["choice_list_name"] == choice_list && cs[i]["data_value"] == text) {
-					return display(cs[i]["display"]);
+					return display(cs[i]["display"], d.getTableId(), window.possible_wrapped.concat("title"));
 				}
 			}
 			// other in a select one with other
