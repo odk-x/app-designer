@@ -17,7 +17,7 @@
 			var onYieldLoad = function() {
 				document.getElementById("yield_iframe").contentWindow.sort = true;
 				document.getElementById("yield_iframe").contentWindow.reverse = true;
-				document.getElementById("yield_iframe").contentWindow.show_value = function(num, percent) { return num; };
+				document.getElementById("yield_iframe").contentWindow.show_value = function(num, percent) { return num + "kg/hectare"; };
 				odkData.arbitraryQuery("plot", yield_raw, [], 10000, 0, document.getElementById("yield_iframe").contentWindow.success, failure);
 			}
 			var ol = function ol() {
