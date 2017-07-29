@@ -74,4 +74,7 @@ label {
 	width: 85%;
 	padding-left: 15%;
 }
-
+iframe {
+	min-width: 60vw;
+	min-height: 120vw;
+}

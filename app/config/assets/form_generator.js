@@ -239,7 +239,7 @@ var do_csv_xhr = function do_csv_xhr(choice_id, filename, callback) {
 // It returns a list, first thing in the returned list is a boolean, true if the results are all there, false if they will be added to choices later
 // Everything after that is a pair of [real_value, translated_display_name], and all of those pairs are added to the on-screen prompt's options
 // in update()
-var get_choices = function get_choices(which, not_first_time, filter) {
+var get_choices = function get_choices(which, not_first_time, filter, raw) {
 	// Default result - we didn't find anything so check again later
 	var result = [false];
 	// For each choice
@@ -258,15 +258,20 @@ var get_choices = function get_choices(which, not_first_time, filter) {
 				}
 			}
 			if (filter_result) {
+				var displayed = null;
+				if (raw) {
+					displayed = choices[j]
+				} else {
+					var displayed = choices[j].display;
+					// If there's no "notranslate" key, translate it using display, otherwise fake translate it
+					if (choices[j].notranslate == undefined) {
+						displayed = display(choices[j].display, table_id, window.possible_wrapped.concat("title"))
+					} else {
+						displayed = fake_translate(choices[j].display);
+					}
+				}
 				// concat on a list will merge them
 				result = result.concat(0);
-				var displayed = choices[j].display;
-				// If there's no "notranslate" key, translate it using display, otherwise fake translate it
-				if (choices[j].notranslate == undefined) {
-					displayed = display(choices[j].display, table_id, window.possible_wrapped.concat("title"))
-				} else {
-					displayed = fake_translate(choices[j].display);
-				}
 				result[result.length - 1] = [choices[j].data_value, displayed];
 				result[0] = true; // we found at least one thing
 			}
@@ -986,6 +991,42 @@ var update = function update(delta) {
 		}
 	}
 
+	// Display graphs
+	var elems = document.getElementsByClassName("graph")
+	for (var i = 0; i < elems.length; i++) {
+		var elem = elems[i];
+		if (elem.getAttribute("data-src_set") == "done") continue
+		var x_value = data(elem.getAttribute("data-x_value"))
+		var y_value = data(elem.getAttribute("data-y_value"))
+		var label = tokens[elem.getAttribute("data-legend_text")]
+		var type = elem.getAttribute("data-type")
+		var type = type == "linegraph" ? "line" : (type == "bargraph" ? "bar" : "pie")
+		var query = elem.getAttribute("data-query")
+		var choices = get_choices(query, false, null, true);
+		if (choices[0] !== false) {
+			choices = choices.slice(1)
+			var raw = "SELECT CAST(? AS TEXT), CAST(? AS TEXT) "
+			var args = [x_value, y_value]
+			for (var j = 0; j < choices.length; j++) {
+				var choice = choices[j][1];
+				raw = raw.concat(" UNION SELECT CAST(? AS TEXT), CAST(? AS TEXT) ")
+				console.log(choice)
+				args = args.concat(choice["x"])
+				args = args.concat(choice["y"])
+			}
+			var columns = ['__formgen_raw', '__formgen_raw']
+			var table = table_id;
+			var src = "../../graph.html#" + type + "/" + table + "/" + JSON.stringify(columns) + "/" + raw + "/" + JSON.stringify(args) + "/" + label;
+			(function(elem, raw, args) {
+				elem.addEventListener("load", function() {
+					graph_loaded(elem, raw, args);
+				})
+			})(elem, raw, args);
+			elem.src = src;
+			elem.setAttribute("data-src_set", "done");
+		}
+	}
+
 	// ENABLE/DISABLE NEXT/BACK/FINALIZE BUTTON LOGIC
 	if (!valid) return; // buttons have already been disabled
 	// Update global_screen_idx to prepare to change the data on the screen to it
@@ -1167,3 +1208,9 @@ var ol = function onLoad() {
 	});
 };
 
+var graph_loaded = function graph_loaded(elem, raw, args) {
+	elem.contentWindow.iframeOnly = true;
+	odkData.arbitraryQuery(table_id, raw, args, 10000, 0, elem.contentWindow.success, function failure(e) {
+		alert(_t("Unexpected failure") + " " + e);
+	});
+}

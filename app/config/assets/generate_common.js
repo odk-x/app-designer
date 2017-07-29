@@ -79,7 +79,6 @@ window.display_update_result = function display_update_result(result, this_resul
 window.display = function display(thing, table, optional_possible_wrapped) {
 	var this_possible_wrapped = window.possible_wrapped;
 	if (optional_possible_wrapped) this_possible_wrapped = optional_possible_wrapped;
-	console.log(this_possible_wrapped)
 	if (typeof(thing) == "string") return thing;
 	if (typeof(thing) == "undefined") {
 		// A recursive call on an error? What could possibly go wrong!
@@ -267,7 +266,6 @@ window._t = function(s) {
 }
 // Try and translate something from the user specific translations, log a message if we can't
 window._tu = function(s) {
-	console.log(arguments)
 	var result = __tr.apply(null, arguments);
 	if (result[0] == "ok") return result[1];
 	console.log("_tu could not translate " + s)

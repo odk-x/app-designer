@@ -70,6 +70,10 @@ window.success = function success(d) {
 	for (var i = 0; i < d.getCount(); i++) {
 		var key = d.getData(i, graph_cols[0]);
 		var val = d.getData(i, graph_cols[1]);
+		if (graph_cols[0] == "__formgen_raw" && graph_cols[0] == "__formgen_raw") {
+			key = d.resultObj.data[i][0]
+			val = d.resultObj.data[i][1]
+		}
 		map[key] = Number(val);
 		all_values = all_values.concat(key);
 		total_total += Number(val);
@@ -147,7 +151,7 @@ var drawSegment = function drawSegment(center_x, center_y, starting_percent, per
 	ctxt.lineTo(corner[0], corner[1]);
 	ctxt.lineTo(x2, y2);
 	*/
-	ctxt.arc(center_x, center_y, center_x /* that's the radius */, starting_percent * 2 * Math.PI, (starting_percent + percent) * 2 * Math.PI)
+	ctxt.arc(center_x, center_y, center_x /* that's the radius */, starting_percent * 2 * Math.PI, end_percent * 2 * Math.PI)
 	ctxt.closePath();
 	ctxt.fill();
 }
