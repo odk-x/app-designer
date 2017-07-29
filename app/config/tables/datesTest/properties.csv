@@ -1,0 +1,7 @@
+_partition,_aspect,_key,_type,_value
+Column,test,displayName,object,"{""text"":""test""}"
+Column,test2,displayName,object,"{""text"":""test2""}"
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,datesTest
+Table,default,defaultViewType,string,SPREADSHEET
+Table,default,displayName,object,"{""text"":""Dates test""}"

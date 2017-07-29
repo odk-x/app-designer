@@ -160,7 +160,7 @@ var ol = function ol() {
 // Just a continuation of the onLoad function
 var olHasTableId = function olHasTableId() {
 	// Put the translated display name of the table that's open in the header
-	document.getElementById("table_id").innerText = display(localized_tables[table_id], table_id);
+	document.getElementById("table_id").innerText = display(localized_tables[table_id], table_id, window.possible_wrapped.concat("title"));
 	odkCommon.registerListener(function doaction_listener() {
 		var a = odkCommon.viewFirstQueuedAction();
 		if (a != null) {

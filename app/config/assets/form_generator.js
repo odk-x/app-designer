@@ -144,8 +144,13 @@ var screen_data = function screen_data(id, optional_no_alert) {
 		var pad = odkCommon.padWithLeadingZeros
 		return pad(total[0], 4) + "-" + pad(total[1], 2) + "-" + pad(total[2], 2) + "T00:00:00.000000000";
 	} else {
+		for (var i = 0; i < all_custom_prompt_types.length; i++) {
+			if (elem.classList.contains(all_custom_prompt_types[i]) >= 0) {
+				return custom_prompt_types[all_custom_prompt_types[i]]["screen_data"](elem);
+			}
+		}
 		// fuck
-		alert("Unknown prompt type!");
+		alert("Unknown prompt type!"); // TODO LOCALIZE
 		return "ERROR";
 	}
 }
@@ -507,6 +512,11 @@ var changeElement = function changeElement(elem, newdata) {
 			changeElement(field, total[i]);
 		}
 	} else {
+		for (var i = 0; i < all_custom_prompt_types.length; i++) {
+			if (elem.classList.contains(all_custom_prompt_types[i]) >= 0) {
+				return !custom_prompt_types[all_custom_prompt_types[i]]["changeElement"](elem, newdata);
+			}
+		}
 		alert("This shouldn't be possible, don't know how to update screen column " + elem.getAttribute("data-dbcol"));
 	}
 	// remember, false means success
@@ -902,6 +912,14 @@ var update = function update(delta) {
 			if (isNaN(num) || !elems[i].validity.valid) {
 				this_valid = false;
 			}
+		} else {
+			// if it's not a custom prompt type, it'll just default to true
+			for (var j = 0; j < all_custom_prompt_types.length; j++) {
+				if (elems[i].classList.contains(all_custom_prompt_types[j]) >= 0) {
+					this_valid = custom_prompt_types[all_custom_prompt_types[j]]["validate"](elems[i]);
+					break;
+				}
+			}
 		}
 		// Checks if the field is required
 		var required = elems[i].getAttribute("data-required");
@@ -1016,7 +1034,7 @@ var update = function update(delta) {
 			}
 			var columns = ['__formgen_raw', '__formgen_raw']
 			var table = table_id;
-			var src = "../../graph_iframe.html#" + type + "/" + table + "/" + JSON.stringify(columns) + "/" + raw + "/" + JSON.stringify(args) + "/" + label;
+			var src = "../graph_iframe.html#" + type + "/" + table + "/" + JSON.stringify(columns) + "/" + raw + "/" + JSON.stringify(args) + "/" + label;
 			var loaded = !(elem.src == null || elem.src == undefined || elem.src.trim().length == 0)
 			if (loaded) {
 				graph_loaded(elem, raw, args)
@@ -1078,7 +1096,7 @@ var get_screen_prompt = function get_screen_prompt(id) {
 	return [false, null];
 }
 // Function to insert the row into the database one last time (does that by calling update()), then sets savepoint type to complete and finishes
-var finalize = function finalize() {  
+var finalize = function finalize() {
 	update(0);
 	// Make sure all required fields were provided
 	for (var i = 0; i < requireds.length; i++) {
