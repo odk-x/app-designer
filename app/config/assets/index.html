@@ -39,20 +39,45 @@ menu[2][menu[2].length - 1] = ["Administrative Actions", null, [
 	]]
 
 if (window.location.hash.substr(1).length == 0) {
+	var region_as_role = "";
+	var all_regions = [];
+	var rolesDone = regionsDone = false;
+	var redirect = function redirect() {
+		if (!(rolesDone && regionsDone)) return;
+		var region = "";
+		for (var i = 0; i < all_regions.length; i++) {
+			if (region_as_role.toUpperCase() == all_regions[i].toUpperCase()) {
+				region = all_regions[i];
+			}
+		}
+		if (region.length == 0) {
+			menu = [_tu("Error - Admin region ? does not exist or has no health facilities", region_as_role), null, []];
+		}
+		var html = "config/assets/admin_region.html#" + region + ":";
+		window.location.href = "/coldchain/" + html
+		//odkTables.launchHTML(null, html);
+	}
+	odkData.arbitraryQuery("health_facility", "SELECT DISTINCT admin_region FROM health_facility", [], 10000, 0, function(d) {
+		for (var i = 0; i < d.getCount(); i++) {
+			all_regions = all_regions.concat(d.getData(i, "admin_region"));
+		}
+		regionsDone = true;
+		redirect();
+	}, function(e) {
+		alert(e);
+	});
 	odkData.getRoles(function(r) {
-		// TEMP DEBUG TEST
-		//r = ["GROUP_ADMIN_REGION_MCHINJI"];
-		//r = ["GROUP_ADMIN_REGION_MZIMBA_SOUTH"];
+		r = r.resultObj.metadata.roles
 		for (var i = 0; i < r.length; i++) {
 			if (r[i].indexOf("GROUP_ADMIN_REGION_") == 0) {
 				var region = r[i].replace("GROUP_ADMIN_REGION_", "");
 				// replace all occurrences
 				region = region.replace(/_/g, " ");
-				var html = "config/assets/admin_region.html#" + region + ":";
-				odkTables.launchHTML(null, html);
-				// just to be safe, in case they press the back button and we weren't destroyed
-				menu = [region, null, [region, "_html", html]]
+				region_as_role = region;
+				menu = [_tu("Loading..."), null, []]
 				doMenu();
+				rolesDone = true;
+				redirect();
 				break;
 			}
 		}

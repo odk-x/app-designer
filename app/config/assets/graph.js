@@ -4,7 +4,6 @@ var raw = "";
 var args = [];
 var table_id = "";
 var title = "";
-window.show_value = false;
 
 var map = {};
 var all_values = [];
@@ -55,15 +54,19 @@ var ol = function ol() {
 	canvas.style.height = w;
 	canvas.width = w;
 	canvas.height = w;
-	odkData.arbitraryQuery(table_id, raw, args, 10000, 0, success, function(e) {
-		alert(e);
-	})
+	if (!iframeOnly) {
+		odkData.arbitraryQuery(table_id, raw, args, 10000, 0, success, function(e) {
+			alert(e);
+		})
+	}
 }
 
 // Needs to be on window because the odkData callback above will never occur if we're inside an iframe.
 // If we are inside an iframe, the parent can do something like this
 // odkData.arbitraryQuery("table", raw, [args], 10000, 0, document.getElementById("iframe").contentWindow.success, function(e) { alert(e); });
 window.success = function success(d) {
+	console.log(d.resultObj)
+	console.log(graph_cols)
 	for (var i = 0; i < d.getCount(); i++) {
 		var key = d.getData(i, graph_cols[0]);
 		var val = d.getData(i, graph_cols[1]);
@@ -73,14 +76,26 @@ window.success = function success(d) {
 	}
 	console.log(map);
 	all_values.sort(function(a, b) {
-		//return map[a] - map[b];
-		return parseReallyDirtyInt(a) - parseReallyDirtyInt(b);
+		var retVal = 0;
+		if (window.sort === true) {
+			retVal = map[b] - map[a];
+		} else if (window.sort === false) {
+			retVal = parseReallyDirtyInt(a) - parseReallyDirtyInt(b);
+		} else {
+			retVal = window.sort(a, b);
+		}
+		if (window.reverse) {
+			retVal *= -1
+		}
+		return retVal;
 	});
 	if (total_total == 0) {
 		document.getElementById("key").innerText = _t("No results")
 	} else {
 		if (type == "pie") {
 			doPie(d);
+		} else if (type == "line") {
+			doLine(d);
 		} else {
 			doBar(d);
 		}
@@ -89,9 +104,6 @@ window.success = function success(d) {
 	}
 }
 
-// If we need more than this the graph is going to look ugly anyways
-// Colors are Oxley, Serenade, Chilean Fire, Vulcan, Zest, Froly, Havelock Blue, Firebrick, Purple and Regal Blue
-var all_colors = ["#85ac85", "#ffebd7", "#993300", "#37393d", "#e58755", "#ff8080", "#4891d9", "#cc2e2d", "#9900ff", "#1f4864"]
 var current_color_idx = 0;
 var getCorner = function getCorner(center_x, center_y, x, y) {
 	var ret_x = 0;
@@ -106,14 +118,17 @@ var getCorner = function getCorner(center_x, center_y, x, y) {
 }
 var drawSegment = function drawSegment(center_x, center_y, starting_percent, percent, color) {
 	var end_percent = starting_percent + percent;
+	/*
 	var x1 = (1 + Math.cos(2 * Math.PI * starting_percent)) * center_y;
 	var y1 = (1 + Math.sin(2 * Math.PI * starting_percent)) * center_x;
 	var x2 = (1 + Math.cos(2 * Math.PI * end_percent)) * center_y;
 	var y2 = (1 + Math.sin(2 * Math.PI * end_percent)) * center_x;
+	*/
 	var ctxt = canvas.getContext("2d");
 	ctxt.fillStyle = color;
 	ctxt.beginPath();
 	ctxt.moveTo(center_x, center_y);
+	/*
 	ctxt.lineTo(x1, y1);
 	var corner = getCorner(center_x, center_y, x1, y1);
 	ctxt.lineTo(corner[0], corner[1]);
@@ -131,6 +146,8 @@ var drawSegment = function drawSegment(center_x, center_y, starting_percent, per
 	corner = getCorner(center_x, center_y, x2, y2);
 	ctxt.lineTo(corner[0], corner[1]);
 	ctxt.lineTo(x2, y2);
+	*/
+	ctxt.arc(center_x, center_y, center_x /* that's the radius */, starting_percent * 2 * Math.PI, (starting_percent + percent) * 2 * Math.PI)
 	ctxt.closePath();
 	ctxt.fill();
 }
@@ -143,12 +160,14 @@ var add_key = function add_key(color, val, d, percent, raw_number) {
 	square.style.display = "inline-block";
 	label.appendChild(square);
 	var label_text = val;
+	if (val === null || val === undefined) val = "null"
+	if (typeof(val) != "string") val = val.toString();
 	if (val.length == 29 && val[10] == "T") {
 		label_text = val.split("T")[0]
 	} else {
 		label_text = _tu(_tc(d, graph_cols[0], val));
 	}
-	label.appendChild(document.createTextNode(" " + label_text + " - " + (show_value ? (show_value === true ? raw_number : show_value(raw_number)) : pretty_percent(percent))));
+	label.appendChild(document.createTextNode(" " + label_text + " - " + (show_value ? (show_value === true ? raw_number : show_value(raw_number, percent)) : pretty_percent(percent))));
 	document.getElementById("key").appendChild(label);
 }
 var doPie = function doPie(d) {
@@ -156,9 +175,11 @@ var doPie = function doPie(d) {
 	var center_x = canvas.width / 2;
 	var center_y = canvas.height / 2;
 	var ctxt = canvas.getContext("2d");
+	/*
 	ctxt.beginPath();
 	ctxt.arc(center_x, center_y, Math.min(center_x, center_y), 0, Math.PI * 2);
 	ctxt.clip();
+	*/
 	for (var i = 0; i < all_values.length; i++) {
 		var val = all_values[i];
 		var percent = map[val] / total_total;
@@ -189,11 +210,11 @@ var pretty_percent = function pretty_percent(n) {
 	}
 }
 var newColor = function newColor() {
-	if (current_color_idx == all_colors.length) {
+	if (current_color_idx == window.all_colors.length) {
 		// We're out of colors!
 		return "#" + newGuid().replace("-", "").substr(0, 6);
 	}
-	return all_colors[current_color_idx++];
+	return window.all_colors[current_color_idx++];
 }
 var doBar = function doBar(d) {
 	var h = canvas.height;
@@ -229,4 +250,54 @@ var drawBar = function drawBar(bar_height, starting_y, bar_width, color) {
 	ctxt.lineTo(starting_y + bar_width, canvas.height);
 	ctxt.closePath();
 	ctxt.fill();
+}
+var doLine = function doLine(d) {
+	var h = canvas.height;
+	var w = canvas.width
+	var max_percent = 0;
+	var percentages = [];
+	var width_of_one_bar = w / all_values.length;
+	width_of_one_bar = Math.min(width_of_one_bar, w / 3);
+	for (var i = 0; i < all_values.length; i++) {
+		var val = all_values[i];
+		var percent = map[val] / total_total;
+		percentages = percentages.concat(percent);
+		max_percent = Math.max(max_percent, percent);
+	}
+	var points = []
+	for (var i = 0; i < all_values.length; i++) {
+		var val = all_values[i];
+		var percent = percentages[i];
+		var color = newColor();
+		add_key(color, val, d, percent, map[val]);
+		var bar_height = h * (percent / max_percent);
+		points = points.concat(0);
+		points[points.length - 1] = [(width_of_one_bar/2) + i * width_of_one_bar, (canvas.height + /* line graph point radius */ 10) - bar_height, color];
+	}
+	var current = points[0];
+	var last = null;
+	for (var i = 0; i < points.length - 1; i++) {
+		last = current;
+		current = points[i + 1];
+		drawLine(last, current);
+		drawPoint(last);
+	}
+	drawPoint(current);
+}
+var drawPoint = function drawPoint(point) {
+	var ctxt = canvas.getContext("2d");
+	ctxt.fillStyle = point[2];
+	ctxt.beginPath();
+	ctxt.arc(point[0], point[1], 10, 0, 2 * Math.PI);
+	ctxt.closePath();
+	ctxt.fill();
+}
+var drawLine = function drawLine(a, b) {
+	var ctxt = canvas.getContext("2d");
+	ctxt.strokeStyle = "#37393d";
+	ctxt.beginPath();
+	ctxt.moveTo(a[0], a[1]);
+	ctxt.lineTo(b[0], b[1]);
+	ctxt.closePath();
+	ctxt.stroke();
 }

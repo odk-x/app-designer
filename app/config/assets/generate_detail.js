@@ -131,7 +131,7 @@ var update_callback = function update_callback(d) {
 		// If it's media, like a picture or video, it'll be a dom element, so this will be set to "element"
 		var is_html = "text";
 		if (checkMedia) {
-			if ("contentType" in pending_media && "uriFragment" in pending_media) {
+			if (typeof(pending_media["contentType"]) == "string" && typeof(pending_media["uriFragment"]) == "string" /* check that they're not null/undefined */) {
 				is_html = "element";
 				var type = pending_media["contentType"].split("/")[0];
 				var src = odkCommon.getRowFileAsUrl(table_id, row_id, pending_media["uriFragment"]);
