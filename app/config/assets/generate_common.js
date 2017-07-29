@@ -232,32 +232,39 @@ var clean_href = function clean_href() {
 // Don't use this function, use _t or _tu
 var __tr = function __tr(s) {
 	console.log("About to translate: " + s);
+	var args = Array.prototype.slice.call(arguments, 1)
 	if (s.length == 0) return ["ok",  ""]
 	var found = formgen_specific_translations[s];
+	var retVal = null;
 	if (found != undefined) {
-	  result = display(found, null);
-	  if (result === true) return ["ok", s];
-	  return ["ok", result];
+		var result = display(found, null);
+		retVal = ["ok", result];
+		if (result === true) retVal[1] = s;
 	}
 	found = user_translations[s];
 	if (found != undefined) {
-	  result = display(found, null);
-	  if (result === true) return ["ok", s];
-	  return ["ok", result];
+		var result = display(found, null);
+		retVal = ["ok", result];
+		if (result === true) retVal[1] = s;
 	}
-	return ["error", s];
+	if (retVal == null) return ["error", s];
+	for (var i = 0; i < args.length; i++) {
+		retVal[1] = retVal[1].replace("?", args[i])
+	}
+	return retVal;
 }
 
 // Try and translate something that's formgen specific, alert if we can't
 window._t = function(s) {
-	var result = __tr(s);
+	var result = __tr.apply(null, arguments);
 	if (result[0] == "ok") return result[1];
 	alert("_t could not translate " + s);
 	return s;
 }
 // Try and translate something from the user specific translations, log a message if we can't
 window._tu = function(s) {
-	var result = __tr(s);
+	console.log(arguments)
+	var result = __tr.apply(null, arguments);
 	if (result[0] == "ok") return result[1];
 	console.log("_tu could not translate " + s)
 	return s;
@@ -274,7 +281,7 @@ window._tc = function(d, column, text) {
 		// user-entered other value in a select-one-with-other
 		return text;
 	}
-	var result = display(toTranslate.display, null);
+	var result = display(toTranslate.display, d.getTableId());
 	if (result == null) {
 		// odkCommon shit the bed again
 		return text;
