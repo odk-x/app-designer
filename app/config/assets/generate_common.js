@@ -1,6 +1,7 @@
 window.odkCommonDefinitions = {_tokens: {}};
 // used in both display and fake_translate, just stuff that the translatable object might be wrapped in
-var possible_wrapped = ["prompt", "title"];
+//var possible_wrapped = ["prompt", "title"];
+var possible_wrapped = ["prompt"]
 var preferred_locale = null; // for caching
 
 // Mocks translation, much faster than actual translation
@@ -15,7 +16,7 @@ window.fake_translate = function fake_translate(thing, optional_table) {
 
 	// A list of all the things the text might be wrapped in.
 	// For real translation, we wouldn't do this, but for fake translation, attempt to automatically unwrap things like normal but also unwrap from the device default locale (sometimes "default", sometimes "_")
-	var possible_wrapped_full = possible_wrapped.concat(["default", "_"]);
+	var possible_wrapped_full = possible_wrapped.concat(["default", "_", "title"]);
 	for (var i = 0; i < possible_wrapped_full.length; i++) {
 		// if thing is like {"default": inner} then return fake_translate(inner)
 		// but also do that for everything in possible_wrapped_full not just "default"

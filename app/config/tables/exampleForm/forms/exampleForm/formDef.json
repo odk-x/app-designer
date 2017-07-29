@@ -8,11 +8,6 @@
       {
         "type": "assign",
         "name": "see_media",
-        "display": {
-          "title": {
-            "text": "Media"
-          }
-        },
         "calculation": "data('see_media') == null ? 'yes' : data('see_media')",
         "_row_num": 3
       },
@@ -75,6 +70,9 @@
         "display": {
           "title": {
             "text": "Level 2 of admin region"
+          },
+          "prompt": {
+            "text": "Level 2 of admin region"
           }
         },
         "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
@@ -86,6 +84,9 @@
         "name": "adminRegion",
         "display": {
           "title": {
+            "text": "Admin region"
+          },
+          "prompt": {
             "text": "Admin region"
           }
         },
@@ -105,7 +106,7 @@
         "name": "add_one",
         "display": {
           "title": {
-            "text": "First addition number"
+            "text": "Math first number"
           },
           "prompt": {
             "text": "You can only type numbers in these two boxes"
@@ -118,11 +119,21 @@
         "type": "select_one",
         "values_list": "operations",
         "name": "operation",
+        "display": {
+          "title": {
+            "text": "Operation"
+          }
+        },
         "_row_num": 14
       },
       {
         "type": "number",
         "name": "add_two",
+        "display": {
+          "title": {
+            "text": "Math second number"
+          }
+        },
         "required": 1,
         "_row_num": 15
       },
@@ -233,6 +244,9 @@
         "display": {
           "title": {
             "text": "Image"
+          },
+          "prompt": {
+            "text": "Image"
           }
         },
         "_row_num": 28
@@ -242,6 +256,9 @@
         "name": "Audio",
         "display": {
           "title": {
+            "text": "Audio"
+          },
+          "prompt": {
             "text": "Audio"
           }
         },
@@ -253,6 +270,9 @@
         "display": {
           "title": {
             "text": "Video"
+          },
+          "prompt": {
+            "text": "Video"
           }
         },
         "_row_num": 30
@@ -262,6 +282,9 @@
         "name": "Barcode",
         "display": {
           "title": {
+            "text": "Barcode"
+          },
+          "prompt": {
             "text": "Barcode"
           }
         },
@@ -292,6 +315,9 @@
         "display": {
           "title": {
             "text": "Geopoint"
+          },
+          "prompt": {
+            "text": "Geopoint"
           }
         },
         "_row_num": 34
@@ -301,6 +327,9 @@
         "name": "signature",
         "display": {
           "title": {
+            "text": "Signature"
+          },
+          "prompt": {
             "text": "TODO signature"
           }
         },
@@ -766,7 +795,7 @@
         ],
         "type": "number",
         "displayName": {
-          "text": "First addition number"
+          "text": "Math first number"
         },
         "elementKey": "add_one"
       },
@@ -778,6 +807,9 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": "Operation"
+        },
         "valuesList": "operations",
         "elementKey": "operation"
       },
@@ -789,6 +821,9 @@
           }
         ],
         "type": "number",
+        "displayName": {
+          "text": "Math second number"
+        },
         "elementKey": "add_two"
       },
       "add_res": {
@@ -1102,6 +1137,9 @@
             "display": {
               "title": {
                 "text": "Level 2 of admin region"
+              },
+              "prompt": {
+                "text": "Level 2 of admin region"
               }
             },
             "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
@@ -1119,6 +1157,9 @@
             "display": {
               "title": {
                 "text": "Admin region"
+              },
+              "prompt": {
+                "text": "Admin region"
               }
             },
             "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
@@ -1134,7 +1175,7 @@
             "name": "add_one",
             "display": {
               "title": {
-                "text": "First addition number"
+                "text": "Math first number"
               },
               "prompt": {
                 "text": "You can only type numbers in these two boxes"
@@ -1152,6 +1193,11 @@
             "type": "select_one",
             "values_list": "operations",
             "name": "operation",
+            "display": {
+              "title": {
+                "text": "Operation"
+              }
+            },
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
@@ -1162,6 +1208,11 @@
           {
             "type": "number",
             "name": "add_two",
+            "display": {
+              "title": {
+                "text": "Math second number"
+              }
+            },
             "required": 1,
             "_row_num": 15,
             "__rowNum__": 14,
@@ -1269,6 +1320,9 @@
             "display": {
               "title": {
                 "text": "Image"
+              },
+              "prompt": {
+                "text": "Image"
               }
             },
             "_row_num": 28,
@@ -1283,6 +1337,9 @@
             "name": "Audio",
             "display": {
               "title": {
+                "text": "Audio"
+              },
+              "prompt": {
                 "text": "Audio"
               }
             },
@@ -1299,6 +1356,9 @@
             "display": {
               "title": {
                 "text": "Video"
+              },
+              "prompt": {
+                "text": "Video"
               }
             },
             "_row_num": 30,
@@ -1313,6 +1373,9 @@
             "name": "Barcode",
             "display": {
               "title": {
+                "text": "Barcode"
+              },
+              "prompt": {
                 "text": "Barcode"
               }
             },
@@ -1348,6 +1411,9 @@
             "display": {
               "title": {
                 "text": "Geopoint"
+              },
+              "prompt": {
+                "text": "Geopoint"
               }
             },
             "_row_num": 34,
@@ -1362,6 +1428,9 @@
             "name": "signature",
             "display": {
               "title": {
+                "text": "Signature"
+              },
+              "prompt": {
                 "text": "TODO signature"
               }
             },
@@ -1835,7 +1904,7 @@
         ],
         "type": "number",
         "displayName": {
-          "text": "First addition number"
+          "text": "Math first number"
         },
         "elementKey": "add_one",
         "elementName": "add_one",
@@ -1850,6 +1919,9 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": "Operation"
+        },
         "valuesList": "operations",
         "elementKey": "operation",
         "elementName": "operation",
@@ -1864,6 +1936,9 @@
           }
         ],
         "type": "number",
+        "displayName": {
+          "text": "Math second number"
+        },
         "elementKey": "add_two",
         "elementName": "add_two",
         "elementSet": "data",
@@ -2427,7 +2502,7 @@
         "_aspect": "add_one",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"First addition number\"}"
+        "_value": "{\"text\":\"Math first number\"}"
       },
       {
         "_partition": "Column",
@@ -2435,6 +2510,13 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":\"Math result\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "add_two",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Math second number\"}"
       },
       {
         "_partition": "Column",
@@ -2491,6 +2573,13 @@
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"operations\",\"data_value\":\"+\",\"display\":{\"title\":{\"text\":\"Plus\"}},\"_row_num\":5},{\"choice_list_name\":\"operations\",\"data_value\":\"-\",\"display\":{\"title\":{\"text\":\"Minus\"}},\"_row_num\":6},{\"choice_list_name\":\"operations\",\"data_value\":\"*\",\"display\":{\"title\":{\"text\":\"Times\"}},\"_row_num\":7},{\"choice_list_name\":\"operations\",\"data_value\":\"/\",\"display\":{\"title\":{\"text\":\"Divided By\"}},\"_row_num\":8}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "operation",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"Operation\"}"
       },
       {
         "_partition": "Column",
