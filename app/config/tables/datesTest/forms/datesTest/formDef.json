@@ -46,42 +46,19 @@
       {
         "clause": "end screen",
         "_row_num": 6
-      }
-    ],
-    "queries": [
-      {
-        "query_name": "regionLevel1_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{title: {text:regionLevel1}}}; }).value()",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 2
       },
       {
-        "query_name": "regionLevel2_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 3
+        "clause": "do section Sheet7",
+        "_row_num": 7
       },
       {
-        "query_name": "regionLevel3_csv",
-        "query_type": "csv",
-        "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 4
-      },
-      {
-        "query_name": "nums",
-        "query_type": "csv",
-        "uri": "\"nums.csv\"",
-        "callback": "context",
-        "_row_num": 5
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "Back in survey section"
+          }
+        },
+        "_row_num": 8
       }
     ],
     "properties": [
@@ -123,6 +100,84 @@
         "setting_name": "instance_name",
         "value": "test",
         "_row_num": 6
+      }
+    ],
+    "Sheet7": [
+      {
+        "clause": "begin screen",
+        "_row_num": 2
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "Now in Sheet7 section"
+          }
+        },
+        "_row_num": 3
+      },
+      {
+        "type": "number",
+        "name": "test3",
+        "display": {
+          "prompt": {
+            "text": "If you enter a number greater than 100, I will execute “exit section”. Otherwise, you will pass through two more screens in this section"
+          }
+        },
+        "_row_num": 4
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 5
+      },
+      {
+        "clause": "if",
+        "condition": "data('test3') > 100",
+        "_row_num": 6
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 7
+      },
+      {
+        "clause": "end if",
+        "_row_num": 8
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 9
+      },
+      {
+        "type": "date",
+        "name": "test4",
+        "display": {
+          "prompt": {
+            "text": "Some other text field, for testing next/back buttons"
+          }
+        },
+        "_row_num": 10
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 11
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 12
+      },
+      {
+        "type": "time",
+        "name": "test5",
+        "display": {
+          "prompt": {
+            "text": "This is the last screen in section Sheet7"
+          }
+        },
+        "_row_num": 13
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 14
       }
     ]
   },
@@ -199,48 +254,20 @@
           }
         },
         "_row_num": 5
+      },
+      "Sheet7": {
+        "display": {
+          "title": {
+            "text": "Dates test"
+          }
+        }
       }
     },
     "choices": {},
     "table_specific_definitions": {
       "_tokens": {}
     },
-    "queries": {
-      "regionLevel1_csv": {
-        "query_name": "regionLevel1_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{title: {text:regionLevel1}}}; }).value()",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 2
-      },
-      "regionLevel2_csv": {
-        "query_name": "regionLevel2_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 3
-      },
-      "regionLevel3_csv": {
-        "query_name": "regionLevel3_csv",
-        "query_type": "csv",
-        "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 4
-      },
-      "nums": {
-        "query_name": "nums",
-        "query_type": "csv",
-        "uri": "\"nums.csv\"",
-        "callback": "context",
-        "_row_num": 5
-      }
-    },
+    "queries": {},
     "calculates": {},
     "model": {
       "test": {
@@ -270,17 +297,54 @@
           "text": "test2"
         },
         "elementKey": "test2"
+      },
+      "test3": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "Sheet7"
+          }
+        ],
+        "type": "number",
+        "elementKey": "test3"
+      },
+      "test4": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "Sheet7"
+          }
+        ],
+        "type": "string",
+        "elementType": "date",
+        "elementKey": "test4"
+      },
+      "test5": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "Sheet7"
+          }
+        ],
+        "type": "string",
+        "elementType": "time",
+        "elementKey": "test5"
       }
     },
     "section_names": [
+      "Sheet7",
       "initial",
       "survey"
     ],
     "sections": {
       "survey": {
         "section_name": "survey",
-        "nested_sections": {},
-        "reachable_sections": {},
+        "nested_sections": {
+          "Sheet7": true
+        },
+        "reachable_sections": {
+          "Sheet7": true
+        },
         "prompts": [
           {
             "type": "date",
@@ -336,12 +400,41 @@
             "promptIdx": 2
           },
           {
+            "clause": "do section Sheet7",
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_do_section_name": "Sheet7",
+            "_type": "_section",
+            "promptIdx": 3,
+            "display": {
+              "title": {
+                "text": "Dates test"
+              }
+            },
+            "_branch_label_enclosing_screen": "Sheet7/0"
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "Back in survey section"
+              }
+            },
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen8",
+            "promptIdx": 4
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 7,
-            "_branch_label_enclosing_screen": "survey/_screen7",
-            "promptIdx": 3
+            "_row_num": 9,
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 5
           }
         ],
         "validation_tag_map": {
@@ -363,31 +456,228 @@
             "operationIdx": 0
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
+            "clause": "do section Sheet7",
             "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "do_section",
+            "_do_section_name": "Sheet7",
             "operationIdx": 1
           },
           {
-            "_row_num": 7,
+            "_row_num": 8,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 9,
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 2
+            "operationIdx": 4
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 7,
-            "operationIdx": 3
+            "_row_num": 9,
+            "operationIdx": 5
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_contents": 2,
-          "_screen7": 2
+          "_screen8": 2,
+          "_contents": 4,
+          "_screen9": 4
+        }
+      },
+      "Sheet7": {
+        "section_name": "Sheet7",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "Now in Sheet7 section"
+              }
+            },
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "Sheet7/_screen2",
+            "promptIdx": 0
+          },
+          {
+            "type": "number",
+            "name": "test3",
+            "display": {
+              "prompt": {
+                "text": "If you enter a number greater than 100, I will execute “exit section”. Otherwise, you will pass through two more screens in this section"
+              }
+            },
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "number",
+            "_branch_label_enclosing_screen": "Sheet7/_screen2",
+            "promptIdx": 1
+          },
+          {
+            "type": "date",
+            "name": "test4",
+            "display": {
+              "prompt": {
+                "text": "Some other text field, for testing next/back buttons"
+              }
+            },
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "prompt",
+            "_type": "date",
+            "_branch_label_enclosing_screen": "Sheet7/_screen9",
+            "promptIdx": 2
+          },
+          {
+            "type": "time",
+            "name": "test5",
+            "display": {
+              "prompt": {
+                "text": "This is the last screen in section Sheet7"
+              }
+            },
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "prompt",
+            "_type": "time",
+            "_branch_label_enclosing_screen": "Sheet7/_screen12",
+            "promptIdx": 3
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 15,
+            "_branch_label_enclosing_screen": "Sheet7/_screen15",
+            "promptIdx": 4
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "begin screen",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 5,
+              "__rowNum__": 4,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "clause": "if",
+            "condition": "data('test3') > 100",
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "goto_label",
+            "_branch_label": "_then6",
+            "operationIdx": 1
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else8",
+            "_row_num": 8,
+            "operationIdx": 2
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "exit_section",
+            "operationIdx": 3
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif8",
+            "_row_num": 8,
+            "operationIdx": 4
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 11,
+              "__rowNum__": 10,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 14,
+              "__rowNum__": 13,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 15,
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 15,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 8
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 15,
+            "operationIdx": 9
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_then6": 3,
+          "_else8": 5,
+          "_endif8": 5,
+          "_screen9": 5,
+          "_screen12": 6,
+          "_contents": 8,
+          "_screen15": 8
         }
       },
       "initial": {
@@ -396,7 +686,8 @@
           "survey": true
         },
         "reachable_sections": {
-          "survey": true
+          "survey": true,
+          "Sheet7": true
         },
         "prompts": [
           {
@@ -602,6 +893,47 @@
         "elementName": "test2",
         "elementSet": "data",
         "elementPath": "test2"
+      },
+      "test3": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "Sheet7"
+          }
+        ],
+        "type": "number",
+        "elementKey": "test3",
+        "elementName": "test3",
+        "elementSet": "data",
+        "elementPath": "test3"
+      },
+      "test4": {
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "Sheet7"
+          }
+        ],
+        "type": "string",
+        "elementType": "date",
+        "elementKey": "test4",
+        "elementName": "test4",
+        "elementSet": "data",
+        "elementPath": "test4"
+      },
+      "test5": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "Sheet7"
+          }
+        ],
+        "type": "string",
+        "elementType": "time",
+        "elementKey": "test5",
+        "elementName": "test5",
+        "elementSet": "data",
+        "elementPath": "test5"
       },
       "_id": {
         "type": "string",

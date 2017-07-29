@@ -13,6 +13,9 @@ var survey = "org.opendatakit.survey"
 // Initially set to -1 and the onLoad function (`ol`) will call update(1) to force displaying of the screen at index 0, whereas
 // if we just started it at zero and called update(0) it wouldn't change the current screen data
 var global_screen_idx = -1;
+var global_current_section = "survey"
+
+var global_section_stack = [];
 
 // noop is a magic and special variable, if noop is set to true then update() will refuse to do anything and display an error message
 // Set to true initially and set to false in onLoad (`ol`) before it calls update()
@@ -873,7 +876,7 @@ var update = function update(delta) {
 					var message = "Unexpected failure to set screen value of " + col + ". Tried to set it to " + saved_value + " ("+typeof(saved_value)+") but it came out as " + sdat + " ("+typeof(sdat)+")";
 					// noop = message;
 					console.log(message);
-					row_data[col] = sdat;
+					//row_data[col] = sdat;
 				} else {
 					if (loading === false) {
 						// Since the choice filters of other prompts might depend on the value of this prompt, update all the prompts with choice filters
@@ -1014,20 +1017,26 @@ var update = function update(delta) {
 	for (var i = 0; i < elems.length; i++) {
 		var elem = elems[i];
 		if (elem.getAttribute("data-src_set") == "done" && num_updated == 0) continue
-		var x_value = data(elem.getAttribute("data-x_value"))
-		var y_value = data(elem.getAttribute("data-y_value"))
-		var label = tokens[elem.getAttribute("data-legend_text")]
+		// TODO use a default better than the empty string (and translate it)
+		var label = elem.hasAttribute("data-legend_text") ? tokens[elem.getAttribute("data-legend_text")] : ""
 		var type = elem.getAttribute("data-type")
 		var type = type == "linegraph" ? "line" : (type == "bargraph" ? "bar" : "pie")
 		var query = elem.getAttribute("data-query")
 		var choices = get_choices(query, false, null, true);
 		if (choices[0] !== false) {
 			choices = choices.slice(1)
-			var raw = "SELECT CAST(? AS TEXT), CAST(? AS TEXT) "
-			var args = [x_value, y_value]
+			raw = ""
+			args = []
+			if (elem.hasAttribute("data-x_value") && elem.hasAttribute("data-y_value")) {
+				var x_value = data(elem.getAttribute("data-x_value"))
+				var y_value = data(elem.getAttribute("data-y_value"))
+				raw = "SELECT CAST(? AS TEXT), CAST(? AS TEXT) "
+				args = [x_value, y_value]
+			}
 			for (var j = 0; j < choices.length; j++) {
 				var choice = choices[j][1];
-				raw = raw.concat(" UNION ALL SELECT CAST(? AS TEXT), CAST(? AS TEXT) ")
+				var raw_prefix = raw.length == 0 ? "" : " UNION ALL ";
+				raw = raw.concat(raw_prefix + "SELECT CAST(? AS TEXT), CAST(? AS TEXT) ")
 				console.log(choice)
 				args = args.concat(choice["x"])
 				args = args.concat(choice["y"])
@@ -1058,20 +1067,32 @@ var update = function update(delta) {
 	// Update global_screen_idx to prepare to change the data on the screen to it
 	global_screen_idx += delta;
 	odkCommon.setSessionVariable(table_id + ":" + row_id + ":global_screen_idx", global_screen_idx);
+	odkCommon.setSessionVariable(table_id + ":" + row_id + ":stack", JSON.stringify(global_section_stack));
+	odkCommon.setSessionVariable(table_id + ":" + row_id + ":section", global_current_section);
 	// If we're at the beginning, disable the back button, otherwise enable it
-	if (global_screen_idx <= 0) {
-		global_screen_idx = 0;
+	if (global_screen_idx < 0) {
+		global_section_stack[0][1] = global_section_stack[0][1] - 2;
+		endSection();
+		return;
+	}
+	if (global_screen_idx == 0 && global_section_stack.length == 0) {
 		document.getElementById("back").disabled = true;
 	} else {
 		document.getElementById("back").disabled = false;
 	}
-	if (global_screen_idx >= screens.length - 1) {
+	if (global_screen_idx == sections[global_current_section].length) {
+		endSectionImmediate();
+	} else if (global_screen_idx == sections[global_current_section].length - 1) {
 		// If we're at the end of the survey, disable the next button and show the finalize button
-		global_screen_idx = screens.length - 1;
-		document.getElementById("next").disabled = true;
-		document.getElementById("next").style.display = "none";
-		document.getElementById("finalize").style.display = "block";
-		document.getElementById("finalize").disabled = false;
+		if (global_section_stack.length == 0) {
+			document.getElementById("next").disabled = true;
+			document.getElementById("next").style.display = "none";
+			document.getElementById("finalize").style.display = "block";
+			document.getElementById("finalize").disabled = false;
+		} else {
+			document.getElementById("next").disabled = false;
+			document.getElementById("next").style.display = "block";
+		}
 	} else {
 		// Otherwise, enable the next button and hide the finalize button
 		document.getElementById("finalize").style.display = "none";
@@ -1081,8 +1102,14 @@ var update = function update(delta) {
 	// If we're actually switching to a new screen, change the html on the page
 	if (delta != 0) {
 		var container = document.getElementById("odk-container");
-		container.innerHTML = screens[global_screen_idx];
-		update(0);
+		container.innerHTML = sections[global_current_section][global_screen_idx];
+		if (document.getElementsByClassName("doSection").length > 0) {
+			doSection(document.getElementsByClassName("doSection")[0], delta)
+		} else if (document.getElementsByClassName("endSection").length > 0) {
+			endSection(document.getElementsByClassName("endSection")[0], delta)
+		} else {
+			update(0);
+		}
 	}
 }
 // Helper function to determine if the screen has a particular prompt or not, and if so, return it as a dom element
@@ -1176,6 +1203,14 @@ var ol = function onLoad() {
 		alert("No row id in uri, beginning new instance with id " + row_id);
 		opened_for_edit = false;
 	}
+	var stack = odkCommon.getSessionVariable(table_id + ":" + row_id + ":stack");
+	if (stack !== null && stack !== undefined && stack.trim().length > 0 && stack[0] == "[") {
+		global_section_stack = jsonParse(stack);
+	}
+	var section = odkCommon.getSessionVariable(table_id + ":" + row_id + ":section");
+	if (stack !== null && stack !== undefined && stack.trim().length > 0) {
+		global_current_section = section;
+	}
 	// Try to load global_screen_idx from a session variable, but default to zero (we will subtract one later)
 	global_screen_idx = Number(odkCommon.getSessionVariable(table_id + ":" + row_id + ":global_screen_idx"));
 	if (isNaN(global_screen_idx)) {
@@ -1238,4 +1273,43 @@ var graph_loaded = function graph_loaded(elem, raw, args) {
 	odkData.arbitraryQuery(table_id, raw, args, 10000, 0, elem.contentWindow.success, function failure(e) {
 		alert(_t("Unexpected failure") + " " + e);
 	});
+}
+var doSection = function doSection(elem, delta) {
+	var section = tokens[elem.getAttribute("data-section")];
+	var rules = elem.getAttribute("data-if");
+	if (rules.length > 0) {
+		rules = rules.split(" ")
+		// If a single one of the rules is false, skip to the next screen
+		for (var i = 0; i < rules.length; i++) {
+			if (!eval(tokens[rules[i]])) {
+				update(delta);
+				return;
+			}
+		}
+	}
+	global_section_stack = [0].concat(global_section_stack)
+	global_section_stack[0] = [global_current_section, global_screen_idx];
+	global_current_section = section;
+	global_screen_idx = -1;
+	update(1);
+}
+var endSection = function endSection(elem, delta) {
+	var rules = elem.getAttribute("data-if");
+	if (rules.length > 0) {
+		rules = rules.split(" ")
+		// If a single one of the rules is false, skip to the next screen
+		for (var i = 0; i < rules.length; i++) {
+			if (!eval(tokens[rules[i]])) {
+				update(delta);
+				return;
+			}
+		}
+	}
+	endSectionImmediate();
+}
+var endSectionImmediate = function endSectionImmediate() {
+	global_current_section = global_section_stack[0][0]
+	global_screen_idx = global_section_stack[0][1]
+	global_section_stack = global_section_stack.slice(1)
+	update(1);
 }

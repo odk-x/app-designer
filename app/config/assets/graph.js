@@ -266,7 +266,7 @@ var doLine = function doLine(d) {
 	var max_percent = 0;
 	var percentages = [];
 	var max_key = 0;
-	var min_key = 0;
+	var min_key = null;
 	for (var i = 0; i < all_values.length; i++) {
 		var key = all_values[i][0];
 		var val = all_values[i][1];
@@ -274,7 +274,7 @@ var doLine = function doLine(d) {
 		percentages = percentages.concat(percent);
 		max_percent = Math.max(max_percent, percent);
 		max_key = Math.max(parseReallyDirtyInt(key), max_key);
-		min_key = min_key == 0 ? parseReallyDirtyInt(key) : Math.min(parseReallyDirtyInt(key), min_key);
+		min_key = min_key == null ? parseReallyDirtyInt(key) : Math.min(parseReallyDirtyInt(key), min_key);
 	}
 	var points = []
 	for (var i = 0; i < all_values.length; i++) {

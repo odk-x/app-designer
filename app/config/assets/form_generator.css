@@ -87,7 +87,8 @@ label {
 iframe {
 	/* min-width: 60vw; */
 	width: 100%;
-	min-height: 120vw;
+	/*min-height: calc(100vw + 200px /* title * / + 16px /* padding * / + 30px /* key margin * / + 20px /* key padding * / + 200px /* guess 6 key values * /); */
+	min-height: calc(56%% + 200px  + 16px  + 30px  + 20px  + 200px );
 }
 .option {
 	width: 100%;
