@@ -558,7 +558,7 @@
             "text": "The only allowed answer is yes"
           }
         },
-        "required": "selected(data('sections'), 'dynamic_graphs_and_assigns')",
+        "required": "selected(data('sections'), 'hard_stuff')",
         "constraint": "data('make_prev_required') == 'yes'",
         "_row_num": 13
       },
@@ -2791,7 +2791,7 @@
                 "text": "The only allowed answer is yes"
               }
             },
-            "required": "selected(data('sections'), 'dynamic_graphs_and_assigns')",
+            "required": "selected(data('sections'), 'hard_stuff')",
             "constraint": "data('make_prev_required') == 'yes'",
             "_row_num": 13,
             "__rowNum__": 12,

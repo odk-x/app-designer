@@ -390,9 +390,9 @@ var formgen_specific_translations = {
 		"default": true,
 		"es": "Salvar como no completado"
 	}},
-	"Cancel and delete row": {"text": {
+	"Cancel": {"text": {
 		"default": true,
-		"es": "Cancelar e eliminar fila"
+		"es": "Cancelar"
 	}},
 	"Next": {"text": {
 		"default": true,

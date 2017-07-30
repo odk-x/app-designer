@@ -99,8 +99,8 @@ window.success = function success(d) {
 	} else {
 		if (type == "pie") {
 			doPie(d);
-		} else if (type == "line") {
-			doLine(d);
+		} else if (type == "line" || type == "scatter") {
+			doLine(d, type == "line");
 		} else {
 			doBar(d);
 		}
@@ -260,7 +260,7 @@ var drawBar = function drawBar(bar_height, starting_y, bar_width, color) {
 	ctxt.closePath();
 	ctxt.fill();
 }
-var doLine = function doLine(d) {
+var doLine = function doLine(d, draw_lines) {
 	var h = canvas.height;
 	var w = canvas.width
 	var max_percent = 0;
@@ -292,7 +292,9 @@ var doLine = function doLine(d) {
 	for (var i = 0; i < points.length - 1; i++) {
 		last = current;
 		current = points[i + 1];
-		drawLine(last, current);
+		if (draw_lines) {
+			drawLine(last, current);
+		}
 		drawPoint(last);
 	}
 	drawPoint(current);
