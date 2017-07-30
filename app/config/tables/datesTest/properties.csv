@@ -1,6 +1,9 @@
 _partition,_aspect,_key,_type,_value
+Column,other_sections,displayChoicesList,object,"[{""choice_list_name"":""other_sections"",""data_value"":""select one integer"",""display"":{""title"":{""text"":""select one integer""}},""_row_num"":2},{""choice_list_name"":""other_sections"",""data_value"":""select multiple grid"",""display"":{""title"":{""text"":""select multiple grid""}},""_row_num"":3}]"
+Column,pests,displayChoicesList,object,"[{""choice_list_name"":""pests"",""data_value"":""earworm"",""display"":{""title"":{""image"":""media/earworm.jpg""}},""_row_num"":10},{""choice_list_name"":""pests"",""data_value"":""stink_bug"",""display"":{""title"":{""image"":""media/stink_bug.jpg""}},""_row_num"":11},{""choice_list_name"":""pests"",""data_value"":""cutworm"",""display"":{""title"":{""image"":""media/cutworm.jpg""}},""_row_num"":12},{""choice_list_name"":""pests"",""data_value"":""beetle"",""display"":{""title"":{""image"":""media/corn_flea_beetle.jpg""}},""_row_num"":13}]"
 Column,test,displayName,object,"{""text"":""test""}"
 Column,test2,displayName,object,"{""text"":""test2""}"
+Column,year,displayChoicesList,object,"[{""choice_list_name"":""years"",""data_value"":2017,""display"":{""title"":{""text"":2017}},""_row_num"":5},{""choice_list_name"":""years"",""data_value"":2016,""display"":{""title"":{""text"":2016}},""_row_num"":6},{""choice_list_name"":""years"",""data_value"":2015,""display"":{""title"":{""text"":2015}},""_row_num"":7},{""choice_list_name"":""years"",""data_value"":2014,""display"":{""title"":{""text"":2014}},""_row_num"":8}]"
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,datesTest
 Table,default,defaultViewType,string,SPREADSHEET

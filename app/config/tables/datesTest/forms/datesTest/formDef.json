@@ -59,6 +59,145 @@
           }
         },
         "_row_num": 8
+      },
+      {
+        "type": "select_multiple",
+        "values_list": "other_sections",
+        "name": "other_sections",
+        "display": {
+          "prompt": {
+            "text": "What other sections to go to?"
+          }
+        },
+        "_row_num": 9
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('other_sections'), 'select one integer')",
+        "_row_num": 10
+      },
+      {
+        "clause": "do section soi",
+        "_row_num": 11
+      },
+      {
+        "clause": "end if",
+        "_row_num": 12
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('other_sections'), 'select multiple grid')",
+        "_row_num": 13
+      },
+      {
+        "clause": "do section smg",
+        "_row_num": 14
+      },
+      {
+        "clause": "end if",
+        "_row_num": 15
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "other_sections",
+        "data_value": "select one integer",
+        "display": {
+          "title": {
+            "text": "select one integer"
+          }
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "other_sections",
+        "data_value": "select multiple grid",
+        "display": {
+          "title": {
+            "text": "select multiple grid"
+          }
+        },
+        "_row_num": 3
+      },
+      {
+        "choice_list_name": "years",
+        "data_value": 2017,
+        "display": {
+          "title": {
+            "text": 2017
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "years",
+        "data_value": 2016,
+        "display": {
+          "title": {
+            "text": 2016
+          }
+        },
+        "_row_num": 6
+      },
+      {
+        "choice_list_name": "years",
+        "data_value": 2015,
+        "display": {
+          "title": {
+            "text": 2015
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "choice_list_name": "years",
+        "data_value": 2014,
+        "display": {
+          "title": {
+            "text": 2014
+          }
+        },
+        "_row_num": 8
+      },
+      {
+        "choice_list_name": "pests",
+        "data_value": "earworm",
+        "display": {
+          "title": {
+            "image": "media/earworm.jpg"
+          }
+        },
+        "_row_num": 10
+      },
+      {
+        "choice_list_name": "pests",
+        "data_value": "stink_bug",
+        "display": {
+          "title": {
+            "image": "media/stink_bug.jpg"
+          }
+        },
+        "_row_num": 11
+      },
+      {
+        "choice_list_name": "pests",
+        "data_value": "cutworm",
+        "display": {
+          "title": {
+            "image": "media/cutworm.jpg"
+          }
+        },
+        "_row_num": 12
+      },
+      {
+        "choice_list_name": "pests",
+        "data_value": "beetle",
+        "display": {
+          "title": {
+            "image": "media/corn_flea_beetle.jpg"
+          }
+        },
+        "_row_num": 13
       }
     ],
     "properties": [
@@ -210,6 +349,22 @@
         "clause": "end screen",
         "_row_num": 19
       }
+    ],
+    "soi": [
+      {
+        "type": "select_one_integer",
+        "values_list": "years",
+        "name": "year",
+        "_row_num": 2
+      }
+    ],
+    "smg": [
+      {
+        "type": "select_multiple_grid",
+        "values_list": "pests",
+        "name": "pests",
+        "_row_num": 2
+      }
     ]
   },
   "specification": {
@@ -292,9 +447,130 @@
             "text": "Dates test"
           }
         }
+      },
+      "smg": {
+        "display": {
+          "title": {
+            "text": "Dates test"
+          }
+        }
+      },
+      "soi": {
+        "display": {
+          "title": {
+            "text": "Dates test"
+          }
+        }
       }
     },
-    "choices": {},
+    "choices": {
+      "other_sections": [
+        {
+          "choice_list_name": "other_sections",
+          "data_value": "select one integer",
+          "display": {
+            "title": {
+              "text": "select one integer"
+            }
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "other_sections",
+          "data_value": "select multiple grid",
+          "display": {
+            "title": {
+              "text": "select multiple grid"
+            }
+          },
+          "_row_num": 3
+        }
+      ],
+      "years": [
+        {
+          "choice_list_name": "years",
+          "data_value": 2017,
+          "display": {
+            "title": {
+              "text": 2017
+            }
+          },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "years",
+          "data_value": 2016,
+          "display": {
+            "title": {
+              "text": 2016
+            }
+          },
+          "_row_num": 6
+        },
+        {
+          "choice_list_name": "years",
+          "data_value": 2015,
+          "display": {
+            "title": {
+              "text": 2015
+            }
+          },
+          "_row_num": 7
+        },
+        {
+          "choice_list_name": "years",
+          "data_value": 2014,
+          "display": {
+            "title": {
+              "text": 2014
+            }
+          },
+          "_row_num": 8
+        }
+      ],
+      "pests": [
+        {
+          "choice_list_name": "pests",
+          "data_value": "earworm",
+          "display": {
+            "title": {
+              "image": "media/earworm.jpg"
+            }
+          },
+          "_row_num": 10
+        },
+        {
+          "choice_list_name": "pests",
+          "data_value": "stink_bug",
+          "display": {
+            "title": {
+              "image": "media/stink_bug.jpg"
+            }
+          },
+          "_row_num": 11
+        },
+        {
+          "choice_list_name": "pests",
+          "data_value": "cutworm",
+          "display": {
+            "title": {
+              "image": "media/cutworm.jpg"
+            }
+          },
+          "_row_num": 12
+        },
+        {
+          "choice_list_name": "pests",
+          "data_value": "beetle",
+          "display": {
+            "title": {
+              "image": "media/corn_flea_beetle.jpg"
+            }
+          },
+          "_row_num": 13
+        }
+      ]
+    },
     "table_specific_definitions": {
       "_tokens": {}
     },
@@ -329,6 +605,21 @@
         },
         "elementKey": "test2"
       },
+      "other_sections": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "other_sections_items"
+        },
+        "valuesList": "other_sections",
+        "elementKey": "other_sections"
+      },
       "test3": {
         "_defn": [
           {
@@ -360,21 +651,53 @@
         "type": "string",
         "elementType": "time",
         "elementKey": "test5"
+      },
+      "year": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "soi"
+          }
+        ],
+        "type": "integer",
+        "valuesList": "years",
+        "elementKey": "year"
+      },
+      "pests": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "smg"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "pests_items"
+        },
+        "valuesList": "pests",
+        "elementKey": "pests"
       }
     },
     "section_names": [
       "Sheet7",
       "initial",
+      "smg",
+      "soi",
       "survey"
     ],
     "sections": {
       "survey": {
         "section_name": "survey",
         "nested_sections": {
-          "Sheet7": true
+          "Sheet7": true,
+          "soi": true,
+          "smg": true
         },
         "reachable_sections": {
-          "Sheet7": true
+          "Sheet7": true,
+          "soi": true,
+          "smg": true
         },
         "prompts": [
           {
@@ -460,12 +783,58 @@
             "promptIdx": 4
           },
           {
+            "type": "select_multiple",
+            "values_list": "other_sections",
+            "name": "other_sections",
+            "display": {
+              "prompt": {
+                "text": "What other sections to go to?"
+              }
+            },
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 5
+          },
+          {
+            "clause": "do section soi",
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "prompt",
+            "_do_section_name": "soi",
+            "_type": "_section",
+            "promptIdx": 6,
+            "display": {
+              "title": {
+                "text": "Dates test"
+              }
+            },
+            "_branch_label_enclosing_screen": "soi/0"
+          },
+          {
+            "clause": "do section smg",
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "prompt",
+            "_do_section_name": "smg",
+            "_type": "_section",
+            "promptIdx": 7,
+            "display": {
+              "title": {
+                "text": "Dates test"
+              }
+            },
+            "_branch_label_enclosing_screen": "smg/0"
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 9,
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 5
+            "_row_num": 16,
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 8
           }
         ],
         "validation_tag_map": {
@@ -501,32 +870,107 @@
             "operationIdx": 2
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 9,
-            "operationIdx": 3
-          },
-          {
             "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 3
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('other_sections'), 'select one integer')",
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "goto_label",
+            "_branch_label": "_then10",
+            "operationIdx": 4
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else12",
+            "_row_num": 12,
+            "operationIdx": 5
+          },
+          {
+            "clause": "do section soi",
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "do_section",
+            "_do_section_name": "soi",
+            "operationIdx": 6
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif12",
+            "_row_num": 12,
+            "operationIdx": 7
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('other_sections'), 'select multiple grid')",
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "goto_label",
+            "_branch_label": "_then13",
+            "operationIdx": 8
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else15",
+            "_row_num": 15,
+            "operationIdx": 9
+          },
+          {
+            "clause": "do section smg",
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "do_section",
+            "_do_section_name": "smg",
+            "operationIdx": 10
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif15",
+            "_row_num": 15,
+            "operationIdx": 11
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 16,
+            "operationIdx": 12
+          },
+          {
+            "_row_num": 16,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 4
+            "operationIdx": 13
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 9,
-            "operationIdx": 5
+            "_row_num": 16,
+            "operationIdx": 14
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen8": 2,
-          "_contents": 4,
-          "_screen9": 4
+          "_screen9": 3,
+          "_then10": 6,
+          "_else12": 8,
+          "_endif12": 8,
+          "_then13": 10,
+          "_else15": 12,
+          "_endif15": 12,
+          "_contents": 13,
+          "_screen16": 13
         }
       },
       "Sheet7": {
@@ -739,6 +1183,132 @@
           "_screen20": 8
         }
       },
+      "soi": {
+        "section_name": "soi",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "select_one_integer",
+            "values_list": "years",
+            "name": "year",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_type": "select_one_integer",
+            "_branch_label_enclosing_screen": "soi/_screen2",
+            "promptIdx": 0
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 3,
+            "_branch_label_enclosing_screen": "soi/_screen3",
+            "promptIdx": 1
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 3,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 3,
+            "operationIdx": 3
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_contents": 2,
+          "_screen3": 2
+        }
+      },
+      "smg": {
+        "section_name": "smg",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "select_multiple_grid",
+            "values_list": "pests",
+            "name": "pests",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_type": "select_multiple_grid",
+            "_branch_label_enclosing_screen": "smg/_screen2",
+            "promptIdx": 0
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 3,
+            "_branch_label_enclosing_screen": "smg/_screen3",
+            "promptIdx": 1
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 3,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 3,
+            "operationIdx": 3
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_contents": 2,
+          "_screen3": 2
+        }
+      },
       "initial": {
         "section_name": "initial",
         "nested_sections": {
@@ -746,7 +1316,9 @@
         },
         "reachable_sections": {
           "survey": true,
-          "Sheet7": true
+          "Sheet7": true,
+          "soi": true,
+          "smg": true
         },
         "prompts": [
           {
@@ -953,6 +1525,31 @@
         "elementSet": "data",
         "elementPath": "test2"
       },
+      "other_sections": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "other_sections_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "other_sections.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "other_sections",
+        "elementKey": "other_sections",
+        "elementName": "other_sections",
+        "elementSet": "data",
+        "elementPath": "other_sections",
+        "listChildElementKeys": [
+          "other_sections_items"
+        ]
+      },
       "test3": {
         "_defn": [
           {
@@ -993,6 +1590,61 @@
         "elementName": "test5",
         "elementSet": "data",
         "elementPath": "test5"
+      },
+      "year": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "soi"
+          }
+        ],
+        "type": "integer",
+        "valuesList": "years",
+        "elementKey": "year",
+        "elementName": "year",
+        "elementSet": "data",
+        "elementPath": "year"
+      },
+      "pests": {
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "smg"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "pests_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "pests.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "pests",
+        "elementKey": "pests",
+        "elementName": "pests",
+        "elementSet": "data",
+        "elementPath": "pests",
+        "listChildElementKeys": [
+          "pests_items"
+        ]
+      },
+      "other_sections_items": {
+        "type": "string",
+        "elementKey": "other_sections_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "other_sections.items",
+        "notUnitOfRetention": true
+      },
+      "pests_items": {
+        "type": "string",
+        "elementKey": "pests_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "pests.items",
+        "notUnitOfRetention": true
       },
       "_id": {
         "type": "string",
@@ -1110,6 +1762,20 @@
     "properties": [
       {
         "_partition": "Column",
+        "_aspect": "other_sections",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"other_sections\",\"data_value\":\"select one integer\",\"display\":{\"title\":{\"text\":\"select one integer\"}},\"_row_num\":2},{\"choice_list_name\":\"other_sections\",\"data_value\":\"select multiple grid\",\"display\":{\"title\":{\"text\":\"select multiple grid\"}},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "pests",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"pests\",\"data_value\":\"earworm\",\"display\":{\"title\":{\"image\":\"media/earworm.jpg\"}},\"_row_num\":10},{\"choice_list_name\":\"pests\",\"data_value\":\"stink_bug\",\"display\":{\"title\":{\"image\":\"media/stink_bug.jpg\"}},\"_row_num\":11},{\"choice_list_name\":\"pests\",\"data_value\":\"cutworm\",\"display\":{\"title\":{\"image\":\"media/cutworm.jpg\"}},\"_row_num\":12},{\"choice_list_name\":\"pests\",\"data_value\":\"beetle\",\"display\":{\"title\":{\"image\":\"media/corn_flea_beetle.jpg\"}},\"_row_num\":13}]"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "test",
         "_key": "displayName",
         "_type": "object",
@@ -1121,6 +1787,13 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":\"test2\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "year",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"years\",\"data_value\":2017,\"display\":{\"title\":{\"text\":2017}},\"_row_num\":5},{\"choice_list_name\":\"years\",\"data_value\":2016,\"display\":{\"title\":{\"text\":2016}},\"_row_num\":6},{\"choice_list_name\":\"years\",\"data_value\":2015,\"display\":{\"title\":{\"text\":2015}},\"_row_num\":7},{\"choice_list_name\":\"years\",\"data_value\":2014,\"display\":{\"title\":{\"text\":2014}},\"_row_num\":8}]"
       },
       {
         "_partition": "FormType",

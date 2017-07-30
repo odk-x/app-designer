@@ -1081,7 +1081,11 @@ var update = function update(delta) {
 		document.getElementById("back").disabled = false;
 	}
 	if (global_screen_idx == sections[global_current_section].length) {
-		endSectionImmediate();
+		if (global_section_stack.length > 0) {
+			endSectionImmediate();
+		} else {
+			finalizeImmediate();
+		}
 	} else if (global_screen_idx == sections[global_current_section].length - 1) {
 		// If we're at the end of the survey, disable the next button and show the finalize button
 		if (global_section_stack.length == 0) {
@@ -1092,6 +1096,8 @@ var update = function update(delta) {
 		} else {
 			document.getElementById("next").disabled = false;
 			document.getElementById("next").style.display = "block";
+			document.getElementById("finalize").style.display = "none";
+			document.getElementById("finalize").disabled = true;
 		}
 	} else {
 		// Otherwise, enable the next button and hide the finalize button
@@ -1125,6 +1131,9 @@ var get_screen_prompt = function get_screen_prompt(id) {
 // Function to insert the row into the database one last time (does that by calling update()), then sets savepoint type to complete and finishes
 var finalize = function finalize() {
 	update(0);
+	finalizeImmediate();
+}
+var finalizeImmediate = function finalizeImmediate() {
 	// Make sure all required fields were provided
 	for (var i = 0; i < requireds.length; i++) {
 		var column = requireds[i][0];

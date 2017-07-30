@@ -97,4 +97,8 @@ iframe {
 	display: inline-block;
 	width: 33%;
 }
+label > img {
+	width: 85%;
+	height: 100%;
+}
 

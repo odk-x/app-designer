@@ -10,9 +10,8 @@ window.fake_translate = function fake_translate(thing, optional_table) {
 	if (thing === undefined) return _t("Error translating ") + thing;
 
 	// This will be hit eventually in a recursive call
-	if (typeof(thing) == "string") {
-		return thing; 
-	}
+	if (typeof(thing) == "string") return thing;
+	if (typeof(thing) == "number") return thing;
 
 	// A list of all the things the text might be wrapped in.
 	// For real translation, we wouldn't do this, but for fake translation, attempt to automatically unwrap things like normal but also unwrap from the device default locale (sometimes "default", sometimes "_")
@@ -92,7 +91,8 @@ window.display = function display(thing, table, optional_possible_wrapped) {
 	// if we get {text: "something"}, don't bother asking odkCommon to do it, just call fake_translate
 	// however if we get {text: {default: "a", hindi: "b"}} we should continue with the real translation instead
 	for (var j = 0; j < odkCommon.i18nFieldNames.length; j++) {
-		if (typeof(thing[odkCommon.i18nFieldNames[j]]) == "string") {
+		var unwrapped = thing[odkCommon.i18nFieldNames[j]]
+		if (typeof(unwrapped) == "string" || typeof(unwrapped) == "number") {
 			return fake_translate(thing, table);
 		}
 	}
