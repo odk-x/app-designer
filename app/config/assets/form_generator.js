@@ -150,7 +150,7 @@ var screen_data = function screen_data(id, optional_no_alert) {
 		return pad(total[0], 4) + "-" + pad(total[1], 2) + "-" + pad(total[2], 2) + "T00:00:00.000000000";
 	} else {
 		for (var i = 0; i < all_custom_prompt_types.length; i++) {
-			if (elem.classList.contains(all_custom_prompt_types[i]) >= 0) {
+			if (elem.classList.contains(all_custom_prompt_types[i])) {
 				return custom_prompt_types[all_custom_prompt_types[i]]["screen_data"](elem);
 			}
 		}
@@ -518,7 +518,7 @@ var changeElement = function changeElement(elem, newdata) {
 		}
 	} else {
 		for (var i = 0; i < all_custom_prompt_types.length; i++) {
-			if (elem.classList.contains(all_custom_prompt_types[i]) >= 0) {
+			if (elem.classList.contains(all_custom_prompt_types[i])) {
 				return !custom_prompt_types[all_custom_prompt_types[i]]["changeElement"](elem, newdata);
 			}
 		}
@@ -898,7 +898,7 @@ var update = function update(delta) {
 		} else {
 			// if it's not a custom prompt type, it'll just default to true
 			for (var j = 0; j < all_custom_prompt_types.length; j++) {
-				if (elems[i].classList.contains(all_custom_prompt_types[j]) >= 0) {
+				if (elems[i].classList.contains(all_custom_prompt_types[j])) {
 					this_valid = custom_prompt_types[all_custom_prompt_types[j]]["validate"](elems[i]);
 					break;
 				}

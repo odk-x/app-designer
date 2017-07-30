@@ -62,6 +62,53 @@ changeElement: function(elem, newdata) {
 validate: function(elem) {
 	return true;
 }
+},"datetime": {
+screen_data: function(elem) {
+	var get_at_idx = function get_at_idx(elem, idx) {
+		var select = elem.getElementsByTagName("select")[idx];
+		if (select.selectedOptions[0] != undefined) {
+			if (select.selectedIndex == 0) return null;
+			return Number(select.selectedOptions[0].value);
+		}
+	}
+	var year = get_at_idx(elem, 0);
+	var month = get_at_idx(elem, 1);
+	var day = get_at_idx(elem, 2);
+	var hour = get_at_idx(elem, 3);
+	var minute = get_at_idx(elem, 4);
+	var seconds = Number(elem.getAttribute("data-sec"));
+	var millis = Number(elem.getAttribute("data-millis"));
+	if (year == null || month == null || day == null || hour == null || minute == null) return null;
+	var date = new Date(year, month - 1, day - 1, hour, minute, seconds, millis);
+	return odkCommon.toOdkTimeStampFromDate(date);
+},
+changeElement: function(elem, newdata) {
+	var date = odkCommon.toDateFromOdkTimeStamp(newdata);
+	if (date == null) date = new Date();
+	var year = date.getYear() + 1900;
+	var month = date.getMonth();
+	var day = date.getDate();
+	var hours = date.getHours();
+	var minutes = date.getMinutes();
+	elem.setAttribute("data-sec", date.getSeconds());
+	elem.setAttribute("data-millis", date.getMilliseconds());
+	if (newdata == null) {
+		year = -1;
+		month = -1;
+		day = -1;
+		hours = -1;
+		minutes = -1;
+	}
+	elem.getElementsByTagName("select")[0].selectedIndex = year - 1970 + 1;
+	elem.getElementsByTagName("select")[1].selectedIndex = month + 1;
+	elem.getElementsByTagName("select")[2].selectedIndex = day + 1;
+	elem.getElementsByTagName("select")[3].selectedIndex = hours + 1;
+	elem.getElementsByTagName("select")[4].selectedIndex = minutes + 1;
+	return true;
+},
+validate: function(elem) {
+	return true;
+}
 },};
-var all_custom_prompt_types = ["time"];
+var all_custom_prompt_types = ["time", "datetime"];
 var user_translations = {};

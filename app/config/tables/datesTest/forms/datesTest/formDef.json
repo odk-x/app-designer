@@ -32,13 +32,14 @@
         "_row_num": 4
       },
       {
-        "type": "note",
+        "type": "datetime",
+        "name": "Test2_5",
         "display": {
           "title": {
             "text": "datetime"
           },
           "prompt": {
-            "text": "TODO datetime"
+            "text": "Datetime test"
           }
         },
         "_row_num": 5
@@ -605,6 +606,20 @@
         },
         "elementKey": "test2"
       },
+      "Test2_5": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "dateTime",
+        "displayName": {
+          "text": "datetime"
+        },
+        "elementKey": "Test2_5"
+      },
       "other_sections": {
         "_defn": [
           {
@@ -737,19 +752,20 @@
             "promptIdx": 1
           },
           {
-            "type": "note",
+            "type": "datetime",
+            "name": "Test2_5",
             "display": {
               "title": {
                 "text": "datetime"
               },
               "prompt": {
-                "text": "TODO datetime"
+                "text": "Datetime test"
               }
             },
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
-            "_type": "note",
+            "_type": "datetime",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 2
           },
@@ -1525,6 +1541,23 @@
         "elementSet": "data",
         "elementPath": "test2"
       },
+      "Test2_5": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "dateTime",
+        "displayName": {
+          "text": "datetime"
+        },
+        "elementKey": "Test2_5",
+        "elementName": "Test2_5",
+        "elementSet": "data",
+        "elementPath": "Test2_5"
+      },
       "other_sections": {
         "_defn": [
           {
@@ -1760,6 +1793,13 @@
       }
     },
     "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "Test2_5",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":\"datetime\"}"
+      },
       {
         "_partition": "Column",
         "_aspect": "other_sections",
