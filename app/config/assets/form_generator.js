@@ -13,7 +13,8 @@ var survey = "org.opendatakit.survey"
 // Initially set to -1 and the onLoad function (`ol`) will call update(1) to force displaying of the screen at index 0, whereas
 // if we just started it at zero and called update(0) it wouldn't change the current screen data
 var global_screen_idx = -1;
-var global_current_section = "survey"
+//var global_current_section = "survey"
+var global_current_section = "initial"
 
 var global_section_stack = [];
 
@@ -1072,9 +1073,12 @@ var update = function update(delta) {
 	odkCommon.setSessionVariable(table_id + ":" + row_id + ":section", global_current_section);
 	// If we're at the beginning, disable the back button, otherwise enable it
 	if (global_screen_idx < 0) {
-		global_section_stack[0][1] = global_section_stack[0][1] - 2;
-		endSectionImmediate();
-		return;
+		if (global_section_stack.length > 0) {
+			global_section_stack[0][1] = global_section_stack[0][1] - 2;
+			endSectionImmediate();
+			return;
+		}
+		global_screen_idx = 0;
 	}
 	if (global_screen_idx == 0 && global_section_stack.length == 0) {
 		document.getElementById("back").disabled = true;
@@ -1141,6 +1145,7 @@ var finalizeImmediate = function finalizeImmediate() {
 		var js = requireds[i][1];
 		if ((data(column) == null || data(column) == undefined || (typeof(data(column)) == "string" && data(column).trim().length == 0)) && eval(tokens[js])) {
 			alert(_t("Column ? is required but no value was provided").replace("?", column))
+			goto("_" + column);
 			return;
 		}
 	}
@@ -1284,42 +1289,50 @@ var graph_loaded = function graph_loaded(elem, raw, args) {
 		alert(_t("Unexpected failure") + " " + e);
 	});
 }
+var all_rules_match = function all_rules_match(rules) {
+	if (rules == null || rules == undefined || rules.trim().length == 0) return true;
+	rules = rules.split(" ")
+	// If a single one of the rules is false, skip to the next screen
+	for (var i = 0; i < rules.length; i++) {
+		if (!eval(tokens[rules[i]])) {
+			return false;
+		}
+	}
+	return true;
+}
 var doSection = function doSection(elem, delta) {
 	var section = tokens[elem.getAttribute("data-section")];
-	var rules = elem.getAttribute("data-if");
-	if (rules.length > 0) {
-		rules = rules.split(" ")
-		// If a single one of the rules is false, skip to the next screen
-		for (var i = 0; i < rules.length; i++) {
-			if (!eval(tokens[rules[i]])) {
-				update(delta);
-				return;
-			}
-		}
+	if (all_rules_match(elem.getAttribute("data-if"))) {
+		global_section_stack = [0].concat(global_section_stack)
+		global_section_stack[0] = [global_current_section, global_screen_idx];
+		global_current_section = section;
+		global_screen_idx = -1;
+		update(1);
+	} else {
+		update(delta);
 	}
-	global_section_stack = [0].concat(global_section_stack)
-	global_section_stack[0] = [global_current_section, global_screen_idx];
-	global_current_section = section;
-	global_screen_idx = -1;
-	update(1);
 }
 var endSection = function endSection(elem, delta) {
-	var rules = elem.getAttribute("data-if");
-	if (rules.length > 0) {
-		rules = rules.split(" ")
-		// If a single one of the rules is false, skip to the next screen
-		for (var i = 0; i < rules.length; i++) {
-			if (!eval(tokens[rules[i]])) {
-				update(delta);
-				return;
-			}
-		}
+	if (all_rules_match(elem.getAttribute("data-if"))) {
+		endSectionImmediate();
+	} else {
+		update(delta);
 	}
-	endSectionImmediate();
 }
 var endSectionImmediate = function endSectionImmediate() {
 	global_current_section = global_section_stack[0][0]
 	global_screen_idx = global_section_stack[0][1]
 	global_section_stack = global_section_stack.slice(1)
+	update(1);
+}
+var goto = function goto(label) {
+	var new_section = goto_labels[label][0];
+	if (new_section != global_current_section) {
+		global_section_stack = [0].concat(global_section_stack)
+		// unlike when we push to the stack in doSection, we want to come back at this screen, not the one after it, so subtract one from the screen_idx
+		global_section_stack[0] = [global_current_section, global_screen_idx - 1];
+		global_current_section = goto_labels[label][0]
+	}
+	global_screen_idx = goto_labels[label][1];
 	update(1);
 }
