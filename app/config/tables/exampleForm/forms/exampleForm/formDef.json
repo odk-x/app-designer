@@ -12,6 +12,105 @@
         "_row_num": 3
       },
       {
+        "type": "select_multiple",
+        "values_list": "sections",
+        "name": "sections",
+        "display": {
+          "prompt": {
+            "text": "What would you like to see?"
+          }
+        },
+        "_row_num": 4
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 5
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('sections'), 'easy_stuff')",
+        "_row_num": 6
+      },
+      {
+        "clause": "do section easy_stuff",
+        "_row_num": 7
+      },
+      {
+        "clause": "end if",
+        "_row_num": 8
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('sections'), 'dynamic_query_filters')",
+        "_row_num": 9
+      },
+      {
+        "clause": "do section dynamic_query_filters",
+        "_row_num": 10
+      },
+      {
+        "clause": "end if",
+        "_row_num": 11
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('sections'), 'dynamic_graphs_and_assigns')",
+        "_row_num": 12
+      },
+      {
+        "clause": "do section dynamic_graphs_and_assigns",
+        "_row_num": 13
+      },
+      {
+        "clause": "end if",
+        "_row_num": 14
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('sections'), 'media')",
+        "_row_num": 15
+      },
+      {
+        "clause": "do section media",
+        "_row_num": 16
+      },
+      {
+        "clause": "end if",
+        "_row_num": 17
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('sections'), 'calculates_demo')",
+        "_row_num": 18
+      },
+      {
+        "clause": "do section calculates_demo",
+        "_row_num": 19
+      },
+      {
+        "clause": "end if",
+        "_row_num": 20
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('sections'), 'hard_stuff')",
+        "_row_num": 21
+      },
+      {
+        "clause": "do section hard_stuff",
+        "_row_num": 22
+      },
+      {
+        "clause": "end if",
+        "_row_num": 23
+      }
+    ],
+    "easy_stuff": [
+      {
+        "clause": "begin screen",
+        "_row_num": 2
+      },
+      {
         "type": "text",
         "name": "name",
         "display": {
@@ -44,10 +143,12 @@
       {
         "clause": "end screen",
         "_row_num": 6
-      },
+      }
+    ],
+    "dynamic_query_filters": [
       {
         "clause": "begin screen",
-        "_row_num": 7
+        "_row_num": 2
       },
       {
         "type": "select_one_dropdown",
@@ -61,7 +162,7 @@
             "text": "Demo of dynamic query filters!"
           }
         },
-        "_row_num": 8
+        "_row_num": 3
       },
       {
         "type": "select_one_dropdown",
@@ -76,7 +177,7 @@
           }
         },
         "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
-        "_row_num": 9
+        "_row_num": 4
       },
       {
         "type": "select_one_dropdown",
@@ -91,15 +192,17 @@
           }
         },
         "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
-        "_row_num": 10
+        "_row_num": 5
       },
       {
         "clause": "end screen",
-        "_row_num": 11
-      },
+        "_row_num": 6
+      }
+    ],
+    "dynamic_graphs_and_assigns": [
       {
         "clause": "begin screen",
-        "_row_num": 12
+        "_row_num": 2
       },
       {
         "type": "number",
@@ -112,8 +215,8 @@
             "text": "You can only type numbers in these two boxes"
           }
         },
-        "required": 1,
-        "_row_num": 13
+        "required": "selected(data('sections'), 'dynamic_graphs_and_assigns')",
+        "_row_num": 3
       },
       {
         "type": "select_one",
@@ -124,7 +227,7 @@
             "text": "Operation"
           }
         },
-        "_row_num": 14
+        "_row_num": 4
       },
       {
         "type": "number",
@@ -134,8 +237,8 @@
             "text": "Math second number"
           }
         },
-        "required": 1,
-        "_row_num": 15
+        "required": "selected(data('sections'), 'dynamic_graphs_and_assigns')",
+        "_row_num": 5
       },
       {
         "type": "text",
@@ -148,19 +251,19 @@
             "text": "Equals"
           }
         },
-        "_row_num": 16
+        "_row_num": 6
       },
       {
         "type": "assign",
         "name": "add_res",
         "calculation": "eval(data('add_one') + data('operation') + data('add_two'))",
-        "_row_num": 17
+        "_row_num": 7
       },
       {
         "type": "assign",
         "name": "hidden_field",
         "calculation": "'Your Number'",
-        "_row_num": 18
+        "_row_num": 8
       },
       {
         "type": "piechart",
@@ -168,15 +271,15 @@
         "legend_text": "Your number compared to some other numbers",
         "x_value": "hidden_field",
         "y_value": "add_res",
-        "_row_num": 19
+        "_row_num": 9
       },
       {
         "clause": "end screen",
-        "_row_num": 24
+        "_row_num": 10
       },
       {
         "clause": "begin screen",
-        "_row_num": 25
+        "_row_num": 11
       },
       {
         "type": "text",
@@ -189,49 +292,23 @@
             "text": "Result of multiplying the result on the previous page by two"
           }
         },
-        "_row_num": 26
+        "_row_num": 12
       },
       {
         "type": "assign",
         "name": "multiply_res",
         "calculation": "Number(data('add_res')) * 2",
-        "_row_num": 27
-      },
-      {
-        "type": "text",
-        "name": "possibly_required",
-        "display": {
-          "title": {
-            "text": "Possibly required"
-          },
-          "prompt": {
-            "text": "Might be required"
-          }
-        },
-        "required": "data('make_above_required') == 'yes'",
-        "_row_num": 28
-      },
-      {
-        "type": "select_one",
-        "values_list": "yesno",
-        "name": "make_above_required",
-        "display": {
-          "title": {
-            "text": "Make above required"
-          },
-          "prompt": {
-            "text": "Select yes here to make the previous question required!"
-          }
-        },
-        "_row_num": 29
+        "_row_num": 13
       },
       {
         "clause": "end screen",
-        "_row_num": 30
-      },
+        "_row_num": 14
+      }
+    ],
+    "media": [
       {
         "clause": "begin screen",
-        "_row_num": 31
+        "_row_num": 2
       },
       {
         "type": "select_one",
@@ -239,18 +316,18 @@
         "name": "see_media",
         "display": {
           "title": {
-            "text": "Make above required"
+            "text": "See media?"
           },
           "prompt": {
             "text": "Want to see some media?"
           }
         },
-        "_row_num": 32
+        "_row_num": 3
       },
       {
         "clause": "if",
         "condition": "data('see_media') == 'yes'",
-        "_row_num": 33
+        "_row_num": 4
       },
       {
         "type": "image",
@@ -263,7 +340,7 @@
             "text": "Image"
           }
         },
-        "_row_num": 34
+        "_row_num": 5
       },
       {
         "type": "audio",
@@ -276,7 +353,7 @@
             "text": "Audio"
           }
         },
-        "_row_num": 35
+        "_row_num": 6
       },
       {
         "type": "video",
@@ -289,7 +366,7 @@
             "text": "Video"
           }
         },
-        "_row_num": 36
+        "_row_num": 7
       },
       {
         "type": "barcode",
@@ -302,7 +379,7 @@
             "text": "Barcode"
           }
         },
-        "_row_num": 37
+        "_row_num": 8
       },
       {
         "type": "select_one",
@@ -316,12 +393,12 @@
             "text": "See more?"
           }
         },
-        "_row_num": 38
+        "_row_num": 9
       },
       {
         "clause": "if",
         "condition": "data('see_more') == 'yes'",
-        "_row_num": 39
+        "_row_num": 10
       },
       {
         "type": "geopoint",
@@ -334,7 +411,7 @@
             "text": "Geopoint"
           }
         },
-        "_row_num": 40
+        "_row_num": 11
       },
       {
         "type": "note",
@@ -347,23 +424,102 @@
             "text": "TODO signature"
           }
         },
-        "_row_num": 41
+        "_row_num": 12
       },
       {
         "clause": "end if",
-        "_row_num": 42
+        "_row_num": 13
       },
       {
         "clause": "end if",
-        "_row_num": 43
+        "_row_num": 14
       },
       {
         "clause": "end screen",
-        "_row_num": 44
+        "_row_num": 15
+      }
+    ],
+    "calculates_demo": [
+      {
+        "clause": "begin screen",
+        "_row_num": 2
+      },
+      {
+        "values_list": "continents",
+        "type": "select_multiple",
+        "name": "visited_continents",
+        "display": {
+          "prompt": {
+            "text": "Which continents have you visited?"
+          }
+        },
+        "_row_num": 3
+      },
+      {
+        "clause": "if",
+        "condition": "calculates.ask_about_seattle()",
+        "_row_num": 4
+      },
+      {
+        "values_list": "yesno",
+        "type": "select_one",
+        "name": "visited_seattle",
+        "display": {
+          "prompt": {
+            "text": "Have you visited Seattle?"
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "clause": "end if",
+        "_row_num": 6
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 7
+      }
+    ],
+    "hard_stuff": [
+      {
+        "clause": "begin screen",
+        "_row_num": 5
+      },
+      {
+        "type": "text",
+        "name": "possibly_required",
+        "display": {
+          "title": {
+            "text": "Possibly required"
+          },
+          "prompt": {
+            "text": "Might be required"
+          }
+        },
+        "required": "data('make_above_required') == 'yes'",
+        "_row_num": 6
+      },
+      {
+        "type": "select_one",
+        "values_list": "yesno",
+        "name": "make_above_required",
+        "display": {
+          "title": {
+            "text": "Make above required"
+          },
+          "prompt": {
+            "text": "Select yes here to make the previous question required!"
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 8
       },
       {
         "clause": "begin screen",
-        "_row_num": 45
+        "_row_num": 9
       },
       {
         "type": "text",
@@ -377,15 +533,15 @@
           }
         },
         "required": "data('make_prev_required') == 'yes'",
-        "_row_num": 46
+        "_row_num": 10
       },
       {
         "clause": "end screen",
-        "_row_num": 47
+        "_row_num": 11
       },
       {
         "clause": "begin screen",
-        "_row_num": 48
+        "_row_num": 12
       },
       {
         "type": "select_one",
@@ -402,13 +558,13 @@
             "text": "The only allowed answer is yes"
           }
         },
-        "required": 1,
+        "required": "selected(data('sections'), 'dynamic_graphs_and_assigns')",
         "constraint": "data('make_prev_required') == 'yes'",
-        "_row_num": 49
+        "_row_num": 13
       },
       {
         "clause": "end screen",
-        "_row_num": 50
+        "_row_num": 14
       }
     ],
     "choices": [
@@ -471,6 +627,136 @@
           }
         },
         "_row_num": 8
+      },
+      {
+        "choice_list_name": "continents",
+        "data_value": "NorthAmerica",
+        "display": {
+          "title": {
+            "text": "North America"
+          }
+        },
+        "_row_num": 10
+      },
+      {
+        "choice_list_name": "continents",
+        "data_value": "SouthAmerica",
+        "display": {
+          "title": {
+            "text": "South America"
+          }
+        },
+        "_row_num": 11
+      },
+      {
+        "choice_list_name": "continents",
+        "data_value": "Europe",
+        "display": {
+          "title": {
+            "text": "Europe"
+          }
+        },
+        "_row_num": 12
+      },
+      {
+        "choice_list_name": "continents",
+        "data_value": "Africa",
+        "display": {
+          "title": {
+            "text": "Africa"
+          }
+        },
+        "_row_num": 13
+      },
+      {
+        "choice_list_name": "continents",
+        "data_value": "Asia",
+        "display": {
+          "title": {
+            "text": "Asia"
+          }
+        },
+        "_row_num": 14
+      },
+      {
+        "choice_list_name": "continents",
+        "data_value": "Australia",
+        "display": {
+          "title": {
+            "text": "Australia"
+          }
+        },
+        "_row_num": 15
+      },
+      {
+        "choice_list_name": "continents",
+        "data_value": "Antarctica",
+        "display": {
+          "title": {
+            "text": "Antarctica"
+          }
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "sections",
+        "data_value": "easy_stuff",
+        "display": {
+          "title": {
+            "text": "Easy stuff"
+          }
+        },
+        "_row_num": 18
+      },
+      {
+        "choice_list_name": "sections",
+        "data_value": "dynamic_query_filters",
+        "display": {
+          "title": {
+            "text": "Dynamic query filters"
+          }
+        },
+        "_row_num": 19
+      },
+      {
+        "choice_list_name": "sections",
+        "data_value": "dynamic_graphs_and_assigns",
+        "display": {
+          "title": {
+            "text": "Dynamic graphs and assigns"
+          }
+        },
+        "_row_num": 20
+      },
+      {
+        "choice_list_name": "sections",
+        "data_value": "media",
+        "display": {
+          "title": {
+            "text": "Media"
+          }
+        },
+        "_row_num": 21
+      },
+      {
+        "choice_list_name": "sections",
+        "data_value": "calculates_demo",
+        "display": {
+          "title": {
+            "text": "Calculates object"
+          }
+        },
+        "_row_num": 22
+      },
+      {
+        "choice_list_name": "sections",
+        "data_value": "hard_stuff",
+        "display": {
+          "title": {
+            "text": "Hard stuff (constraints, etc..)"
+          }
+        },
+        "_row_num": 23
       }
     ],
     "queries": [
@@ -509,32 +795,6 @@
         "_row_num": 5
       }
     ],
-    "properties": [
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "defaultViewType",
-        "type": "string",
-        "value": "LIST",
-        "_row_num": 2
-      },
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "detailViewFileName",
-        "type": "string",
-        "value": "config/assets/example_detail.html",
-        "_row_num": 3
-      },
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "listViewFileName",
-        "type": "string",
-        "value": "config/assets/example_list.html",
-        "_row_num": 4
-      }
-    ],
     "settings": [
       {
         "setting_name": "form_id",
@@ -566,10 +826,43 @@
         "_row_num": 6
       }
     ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
+        "type": "string",
+        "value": "LIST",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "string",
+        "value": "config/assets/example_detail.html",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "listViewFileName",
+        "type": "string",
+        "value": "config/assets/example_list.html",
+        "_row_num": 4
+      }
+    ],
     "model": [
       {
         "name": "hidden_field",
         "type": "string",
+        "_row_num": 2
+      }
+    ],
+    "calculates": [
+      {
+        "calculation_name": "ask_about_seattle",
+        "calculation": "selected(data('visited_continents'), 'NorthAmerica')",
         "_row_num": 2
       }
     ]
@@ -647,6 +940,48 @@
           }
         },
         "_row_num": 5
+      },
+      "calculates_demo": {
+        "display": {
+          "title": {
+            "text": "Example form"
+          }
+        }
+      },
+      "dynamic_graphs_and_assigns": {
+        "display": {
+          "title": {
+            "text": "Example form"
+          }
+        }
+      },
+      "dynamic_query_filters": {
+        "display": {
+          "title": {
+            "text": "Example form"
+          }
+        }
+      },
+      "easy_stuff": {
+        "display": {
+          "title": {
+            "text": "Example form"
+          }
+        }
+      },
+      "hard_stuff": {
+        "display": {
+          "title": {
+            "text": "Example form"
+          }
+        }
+      },
+      "media": {
+        "display": {
+          "title": {
+            "text": "Example form"
+          }
+        }
       }
     },
     "choices": {
@@ -713,6 +1048,140 @@
           },
           "_row_num": 8
         }
+      ],
+      "continents": [
+        {
+          "choice_list_name": "continents",
+          "data_value": "NorthAmerica",
+          "display": {
+            "title": {
+              "text": "North America"
+            }
+          },
+          "_row_num": 10
+        },
+        {
+          "choice_list_name": "continents",
+          "data_value": "SouthAmerica",
+          "display": {
+            "title": {
+              "text": "South America"
+            }
+          },
+          "_row_num": 11
+        },
+        {
+          "choice_list_name": "continents",
+          "data_value": "Europe",
+          "display": {
+            "title": {
+              "text": "Europe"
+            }
+          },
+          "_row_num": 12
+        },
+        {
+          "choice_list_name": "continents",
+          "data_value": "Africa",
+          "display": {
+            "title": {
+              "text": "Africa"
+            }
+          },
+          "_row_num": 13
+        },
+        {
+          "choice_list_name": "continents",
+          "data_value": "Asia",
+          "display": {
+            "title": {
+              "text": "Asia"
+            }
+          },
+          "_row_num": 14
+        },
+        {
+          "choice_list_name": "continents",
+          "data_value": "Australia",
+          "display": {
+            "title": {
+              "text": "Australia"
+            }
+          },
+          "_row_num": 15
+        },
+        {
+          "choice_list_name": "continents",
+          "data_value": "Antarctica",
+          "display": {
+            "title": {
+              "text": "Antarctica"
+            }
+          },
+          "_row_num": 16
+        }
+      ],
+      "sections": [
+        {
+          "choice_list_name": "sections",
+          "data_value": "easy_stuff",
+          "display": {
+            "title": {
+              "text": "Easy stuff"
+            }
+          },
+          "_row_num": 18
+        },
+        {
+          "choice_list_name": "sections",
+          "data_value": "dynamic_query_filters",
+          "display": {
+            "title": {
+              "text": "Dynamic query filters"
+            }
+          },
+          "_row_num": 19
+        },
+        {
+          "choice_list_name": "sections",
+          "data_value": "dynamic_graphs_and_assigns",
+          "display": {
+            "title": {
+              "text": "Dynamic graphs and assigns"
+            }
+          },
+          "_row_num": 20
+        },
+        {
+          "choice_list_name": "sections",
+          "data_value": "media",
+          "display": {
+            "title": {
+              "text": "Media"
+            }
+          },
+          "_row_num": 21
+        },
+        {
+          "choice_list_name": "sections",
+          "data_value": "calculates_demo",
+          "display": {
+            "title": {
+              "text": "Calculates object"
+            }
+          },
+          "_row_num": 22
+        },
+        {
+          "choice_list_name": "sections",
+          "data_value": "hard_stuff",
+          "display": {
+            "title": {
+              "text": "Hard stuff (constraints, etc..)"
+            }
+          },
+          "_row_num": 23
+        }
       ]
     },
     "table_specific_definitions": {
@@ -754,7 +1223,13 @@
         "_row_num": 5
       }
     },
-    "calculates": {},
+    "calculates": {
+      "ask_about_seattle": {
+        "calculation_name": "ask_about_seattle",
+        "calculation": "selected(data('visited_continents'), 'NorthAmerica')",
+        "_row_num": 2
+      }
+    },
     "model": {
       "hidden_field": {
         "type": "string",
@@ -766,11 +1241,26 @@
         ],
         "elementKey": "hidden_field"
       },
-      "name": {
+      "sections": {
         "_defn": [
           {
             "_row_num": 4,
             "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "sections_items"
+        },
+        "valuesList": "sections",
+        "elementKey": "sections"
+      },
+      "name": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "easy_stuff"
           }
         ],
         "type": "string",
@@ -780,7 +1270,7 @@
         "_defn": [
           {
             "_row_num": 5,
-            "section_name": "survey"
+            "section_name": "easy_stuff"
           }
         ],
         "type": "boolean",
@@ -792,8 +1282,8 @@
       "regionLevel1": {
         "_defn": [
           {
-            "_row_num": 8,
-            "section_name": "survey"
+            "_row_num": 3,
+            "section_name": "dynamic_query_filters"
           }
         ],
         "type": "string",
@@ -806,8 +1296,8 @@
       "regionLevel2": {
         "_defn": [
           {
-            "_row_num": 9,
-            "section_name": "survey"
+            "_row_num": 4,
+            "section_name": "dynamic_query_filters"
           }
         ],
         "type": "string",
@@ -820,8 +1310,8 @@
       "adminRegion": {
         "_defn": [
           {
-            "_row_num": 10,
-            "section_name": "survey"
+            "_row_num": 5,
+            "section_name": "dynamic_query_filters"
           }
         ],
         "type": "string",
@@ -834,8 +1324,8 @@
       "add_one": {
         "_defn": [
           {
-            "_row_num": 13,
-            "section_name": "survey"
+            "_row_num": 3,
+            "section_name": "dynamic_graphs_and_assigns"
           }
         ],
         "type": "number",
@@ -847,8 +1337,8 @@
       "operation": {
         "_defn": [
           {
-            "_row_num": 14,
-            "section_name": "survey"
+            "_row_num": 4,
+            "section_name": "dynamic_graphs_and_assigns"
           }
         ],
         "type": "string",
@@ -861,8 +1351,8 @@
       "add_two": {
         "_defn": [
           {
-            "_row_num": 15,
-            "section_name": "survey"
+            "_row_num": 5,
+            "section_name": "dynamic_graphs_and_assigns"
           }
         ],
         "type": "number",
@@ -874,8 +1364,8 @@
       "add_res": {
         "_defn": [
           {
-            "_row_num": 16,
-            "section_name": "survey"
+            "_row_num": 6,
+            "section_name": "dynamic_graphs_and_assigns"
           }
         ],
         "type": "string",
@@ -887,8 +1377,8 @@
       "multiply_res": {
         "_defn": [
           {
-            "_row_num": 26,
-            "section_name": "survey"
+            "_row_num": 12,
+            "section_name": "dynamic_graphs_and_assigns"
           }
         ],
         "type": "string",
@@ -897,43 +1387,16 @@
         },
         "elementKey": "multiply_res"
       },
-      "possibly_required": {
-        "_defn": [
-          {
-            "_row_num": 28,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": "Possibly required"
-        },
-        "elementKey": "possibly_required"
-      },
-      "make_above_required": {
-        "_defn": [
-          {
-            "_row_num": 29,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": "Make above required"
-        },
-        "valuesList": "yesno",
-        "elementKey": "make_above_required"
-      },
       "see_media": {
         "_defn": [
           {
-            "_row_num": 32,
-            "section_name": "survey"
+            "_row_num": 3,
+            "section_name": "media"
           }
         ],
         "type": "string",
         "displayName": {
-          "text": "Make above required"
+          "text": "See media?"
         },
         "valuesList": "yesno",
         "elementKey": "see_media"
@@ -941,8 +1404,8 @@
       "Image": {
         "_defn": [
           {
-            "_row_num": 34,
-            "section_name": "survey"
+            "_row_num": 5,
+            "section_name": "media"
           }
         ],
         "type": "object",
@@ -968,8 +1431,8 @@
       "Audio": {
         "_defn": [
           {
-            "_row_num": 35,
-            "section_name": "survey"
+            "_row_num": 6,
+            "section_name": "media"
           }
         ],
         "type": "object",
@@ -995,8 +1458,8 @@
       "Video": {
         "_defn": [
           {
-            "_row_num": 36,
-            "section_name": "survey"
+            "_row_num": 7,
+            "section_name": "media"
           }
         ],
         "type": "object",
@@ -1022,8 +1485,8 @@
       "Barcode": {
         "_defn": [
           {
-            "_row_num": 37,
-            "section_name": "survey"
+            "_row_num": 8,
+            "section_name": "media"
           }
         ],
         "type": "string",
@@ -1035,8 +1498,8 @@
       "see_more": {
         "_defn": [
           {
-            "_row_num": 38,
-            "section_name": "survey"
+            "_row_num": 9,
+            "section_name": "media"
           }
         ],
         "type": "string",
@@ -1049,8 +1512,8 @@
       "Geopoint": {
         "_defn": [
           {
-            "_row_num": 40,
-            "section_name": "survey"
+            "_row_num": 11,
+            "section_name": "media"
           }
         ],
         "type": "object",
@@ -1078,11 +1541,64 @@
         },
         "elementKey": "Geopoint"
       },
+      "visited_continents": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "calculates_demo"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "visited_continents_items"
+        },
+        "valuesList": "continents",
+        "elementKey": "visited_continents"
+      },
+      "visited_seattle": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "calculates_demo"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yesno",
+        "elementKey": "visited_seattle"
+      },
+      "possibly_required": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "hard_stuff"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Possibly required"
+        },
+        "elementKey": "possibly_required"
+      },
+      "make_above_required": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "hard_stuff"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Make above required"
+        },
+        "valuesList": "yesno",
+        "elementKey": "make_above_required"
+      },
       "possibly_required_2": {
         "_defn": [
           {
-            "_row_num": 46,
-            "section_name": "survey"
+            "_row_num": 10,
+            "section_name": "hard_stuff"
           }
         ],
         "type": "string",
@@ -1094,8 +1610,8 @@
       "make_prev_required": {
         "_defn": [
           {
-            "_row_num": 49,
-            "section_name": "survey"
+            "_row_num": 13,
+            "section_name": "hard_stuff"
           }
         ],
         "type": "string",
@@ -1107,12 +1623,402 @@
       }
     },
     "section_names": [
+      "calculates_demo",
+      "dynamic_graphs_and_assigns",
+      "dynamic_query_filters",
+      "easy_stuff",
+      "hard_stuff",
       "initial",
+      "media",
       "survey"
     ],
     "sections": {
       "survey": {
         "section_name": "survey",
+        "nested_sections": {
+          "easy_stuff": true,
+          "dynamic_query_filters": true,
+          "dynamic_graphs_and_assigns": true,
+          "media": true,
+          "calculates_demo": true,
+          "hard_stuff": true
+        },
+        "reachable_sections": {
+          "easy_stuff": true,
+          "dynamic_query_filters": true,
+          "dynamic_graphs_and_assigns": true,
+          "media": true,
+          "calculates_demo": true,
+          "hard_stuff": true
+        },
+        "prompts": [
+          {
+            "type": "select_multiple",
+            "values_list": "sections",
+            "name": "sections",
+            "display": {
+              "prompt": {
+                "text": "What would you like to see?"
+              }
+            },
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 0
+          },
+          {
+            "clause": "do section easy_stuff",
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_do_section_name": "easy_stuff",
+            "_type": "_section",
+            "promptIdx": 1,
+            "display": {
+              "title": {
+                "text": "Example form"
+              }
+            },
+            "_branch_label_enclosing_screen": "easy_stuff/0"
+          },
+          {
+            "clause": "do section dynamic_query_filters",
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "prompt",
+            "_do_section_name": "dynamic_query_filters",
+            "_type": "_section",
+            "promptIdx": 2,
+            "display": {
+              "title": {
+                "text": "Example form"
+              }
+            },
+            "_branch_label_enclosing_screen": "dynamic_query_filters/0"
+          },
+          {
+            "clause": "do section dynamic_graphs_and_assigns",
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "prompt",
+            "_do_section_name": "dynamic_graphs_and_assigns",
+            "_type": "_section",
+            "promptIdx": 3,
+            "display": {
+              "title": {
+                "text": "Example form"
+              }
+            },
+            "_branch_label_enclosing_screen": "dynamic_graphs_and_assigns/0"
+          },
+          {
+            "clause": "do section media",
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "prompt",
+            "_do_section_name": "media",
+            "_type": "_section",
+            "promptIdx": 4,
+            "display": {
+              "title": {
+                "text": "Example form"
+              }
+            },
+            "_branch_label_enclosing_screen": "media/0"
+          },
+          {
+            "clause": "do section calculates_demo",
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "prompt",
+            "_do_section_name": "calculates_demo",
+            "_type": "_section",
+            "promptIdx": 5,
+            "display": {
+              "title": {
+                "text": "Example form"
+              }
+            },
+            "_branch_label_enclosing_screen": "calculates_demo/0"
+          },
+          {
+            "clause": "do section hard_stuff",
+            "_row_num": 22,
+            "__rowNum__": 21,
+            "_token_type": "prompt",
+            "_do_section_name": "hard_stuff",
+            "_type": "_section",
+            "promptIdx": 6,
+            "display": {
+              "title": {
+                "text": "Example form"
+              }
+            },
+            "_branch_label_enclosing_screen": "hard_stuff/0"
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 24,
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 7
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "begin screen",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 5,
+              "__rowNum__": 4,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('see_media', data('see_media') == null ? 'yes' : data('see_media'));\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('sections'), 'easy_stuff')",
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "goto_label",
+            "_branch_label": "_then6",
+            "operationIdx": 1
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else8",
+            "_row_num": 8,
+            "operationIdx": 2
+          },
+          {
+            "clause": "do section easy_stuff",
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "do_section",
+            "_do_section_name": "easy_stuff",
+            "operationIdx": 3
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif8",
+            "_row_num": 8,
+            "operationIdx": 4
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('sections'), 'dynamic_query_filters')",
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "goto_label",
+            "_branch_label": "_then9",
+            "operationIdx": 5
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else11",
+            "_row_num": 11,
+            "operationIdx": 6
+          },
+          {
+            "clause": "do section dynamic_query_filters",
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "do_section",
+            "_do_section_name": "dynamic_query_filters",
+            "operationIdx": 7
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif11",
+            "_row_num": 11,
+            "operationIdx": 8
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('sections'), 'dynamic_graphs_and_assigns')",
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "goto_label",
+            "_branch_label": "_then12",
+            "operationIdx": 9
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else14",
+            "_row_num": 14,
+            "operationIdx": 10
+          },
+          {
+            "clause": "do section dynamic_graphs_and_assigns",
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "do_section",
+            "_do_section_name": "dynamic_graphs_and_assigns",
+            "operationIdx": 11
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif14",
+            "_row_num": 14,
+            "operationIdx": 12
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('sections'), 'media')",
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "goto_label",
+            "_branch_label": "_then15",
+            "operationIdx": 13
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else17",
+            "_row_num": 17,
+            "operationIdx": 14
+          },
+          {
+            "clause": "do section media",
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "do_section",
+            "_do_section_name": "media",
+            "operationIdx": 15
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif17",
+            "_row_num": 17,
+            "operationIdx": 16
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('sections'), 'calculates_demo')",
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "goto_label",
+            "_branch_label": "_then18",
+            "operationIdx": 17
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else20",
+            "_row_num": 20,
+            "operationIdx": 18
+          },
+          {
+            "clause": "do section calculates_demo",
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "do_section",
+            "_do_section_name": "calculates_demo",
+            "operationIdx": 19
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif20",
+            "_row_num": 20,
+            "operationIdx": 20
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('sections'), 'hard_stuff')",
+            "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "goto_label",
+            "_branch_label": "_then21",
+            "operationIdx": 21
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else23",
+            "_row_num": 23,
+            "operationIdx": 22
+          },
+          {
+            "clause": "do section hard_stuff",
+            "_row_num": 22,
+            "__rowNum__": 21,
+            "_token_type": "do_section",
+            "_do_section_name": "hard_stuff",
+            "operationIdx": 23
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif23",
+            "_row_num": 23,
+            "operationIdx": 24
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 24,
+            "operationIdx": 25
+          },
+          {
+            "_row_num": 24,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 26
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 24,
+            "operationIdx": 27
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_then6": 3,
+          "_else8": 5,
+          "_endif8": 5,
+          "_then9": 7,
+          "_else11": 9,
+          "_endif11": 9,
+          "_then12": 11,
+          "_else14": 13,
+          "_endif14": 13,
+          "_then15": 15,
+          "_else17": 17,
+          "_endif17": 17,
+          "_then18": 19,
+          "_else20": 21,
+          "_endif20": 21,
+          "_then21": 23,
+          "_else23": 25,
+          "_endif23": 25,
+          "_contents": 26,
+          "_screen24": 26
+        }
+      },
+      "easy_stuff": {
+        "section_name": "easy_stuff",
         "nested_sections": {},
         "reachable_sections": {},
         "prompts": [
@@ -1131,7 +2037,7 @@
             "__rowNum__": 3,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen2",
+            "_branch_label_enclosing_screen": "easy_stuff/_screen2",
             "promptIdx": 0
           },
           {
@@ -1153,9 +2059,71 @@
             "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "acknowledge",
-            "_branch_label_enclosing_screen": "survey/_screen2",
+            "_branch_label_enclosing_screen": "easy_stuff/_screen2",
             "promptIdx": 1
           },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 7,
+            "_branch_label_enclosing_screen": "easy_stuff/_screen7",
+            "promptIdx": 2
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": [
+            1
+          ]
+        },
+        "operations": [
+          {
+            "clause": "begin screen",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 6,
+              "__rowNum__": 5,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 7,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 7,
+            "operationIdx": 3
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_contents": 2,
+          "_screen7": 2
+        }
+      },
+      "dynamic_query_filters": {
+        "section_name": "dynamic_query_filters",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
           {
             "type": "select_one_dropdown",
             "values_list": "regionLevel1_csv",
@@ -1168,12 +2136,12 @@
                 "text": "Demo of dynamic query filters!"
               }
             },
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen7",
-            "promptIdx": 2
+            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen2",
+            "promptIdx": 0
           },
           {
             "type": "select_one_dropdown",
@@ -1188,12 +2156,12 @@
               }
             },
             "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen7",
-            "promptIdx": 3
+            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen2",
+            "promptIdx": 1
           },
           {
             "type": "select_one_dropdown",
@@ -1208,13 +2176,73 @@
               }
             },
             "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen7",
-            "promptIdx": 4
+            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen2",
+            "promptIdx": 2
           },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 7,
+            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen7",
+            "promptIdx": 3
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "begin screen",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 6,
+              "__rowNum__": 5,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 7,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 7,
+            "operationIdx": 3
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_contents": 2,
+          "_screen7": 2
+        }
+      },
+      "dynamic_graphs_and_assigns": {
+        "section_name": "dynamic_graphs_and_assigns",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
           {
             "type": "number",
             "name": "add_one",
@@ -1226,13 +2254,13 @@
                 "text": "You can only type numbers in these two boxes"
               }
             },
-            "required": 1,
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "required": "selected(data('sections'), 'dynamic_graphs_and_assigns')",
+            "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 5
+            "_branch_label_enclosing_screen": "dynamic_graphs_and_assigns/_screen2",
+            "promptIdx": 0
           },
           {
             "type": "select_one",
@@ -1243,12 +2271,12 @@
                 "text": "Operation"
               }
             },
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 6
+            "_branch_label_enclosing_screen": "dynamic_graphs_and_assigns/_screen2",
+            "promptIdx": 1
           },
           {
             "type": "number",
@@ -1258,13 +2286,13 @@
                 "text": "Math second number"
               }
             },
-            "required": 1,
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "required": "selected(data('sections'), 'dynamic_graphs_and_assigns')",
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 7
+            "_branch_label_enclosing_screen": "dynamic_graphs_and_assigns/_screen2",
+            "promptIdx": 2
           },
           {
             "type": "text",
@@ -1277,12 +2305,12 @@
                 "text": "Equals"
               }
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 8
+            "_branch_label_enclosing_screen": "dynamic_graphs_and_assigns/_screen2",
+            "promptIdx": 3
           },
           {
             "type": "piechart",
@@ -1290,12 +2318,12 @@
             "legend_text": "Your number compared to some other numbers",
             "x_value": "hidden_field",
             "y_value": "add_res",
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "prompt",
             "_type": "piechart",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "dynamic_graphs_and_assigns/_screen2",
+            "promptIdx": 4
           },
           {
             "type": "text",
@@ -1308,69 +2336,109 @@
                 "text": "Result of multiplying the result on the previous page by two"
               }
             },
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen25",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "dynamic_graphs_and_assigns/_screen11",
+            "promptIdx": 5
           },
           {
-            "type": "text",
-            "name": "possibly_required",
-            "display": {
-              "title": {
-                "text": "Possibly required"
-              },
-              "prompt": {
-                "text": "Might be required"
-              }
-            },
-            "required": "data('make_above_required') == 'yes'",
-            "_row_num": 28,
-            "__rowNum__": 27,
             "_token_type": "prompt",
-            "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen25",
-            "promptIdx": 11
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 15,
+            "_branch_label_enclosing_screen": "dynamic_graphs_and_assigns/_screen15",
+            "promptIdx": 6
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": [
+            0,
+            2
+          ]
+        },
+        "operations": [
+          {
+            "clause": "begin screen",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 10,
+              "__rowNum__": 9,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\nassign('add_res', eval(data('add_one') + data('operation') + data('add_two')));\nassign('hidden_field', 'Your Number');\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
           },
           {
-            "type": "select_one",
-            "values_list": "yesno",
-            "name": "make_above_required",
-            "display": {
-              "title": {
-                "text": "Make above required"
-              },
-              "prompt": {
-                "text": "Select yes here to make the previous question required!"
-              }
+            "clause": "begin screen",
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 14,
+              "__rowNum__": 13,
+              "_token_type": "end_screen"
             },
-            "_row_num": 29,
-            "__rowNum__": 28,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen25",
-            "promptIdx": 12
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nassign('multiply_res', Number(data('add_res')) * 2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
           },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 15,
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 15,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 3
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 15,
+            "operationIdx": 4
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_screen11": 1,
+          "_contents": 3,
+          "_screen15": 3
+        }
+      },
+      "media": {
+        "section_name": "media",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
           {
             "type": "select_one",
             "values_list": "yesno",
             "name": "see_media",
             "display": {
               "title": {
-                "text": "Make above required"
+                "text": "See media?"
               },
               "prompt": {
                 "text": "Want to see some media?"
               }
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "media/_screen2",
+            "promptIdx": 0
           },
           {
             "type": "image",
@@ -1383,12 +2451,12 @@
                 "text": "Image"
               }
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "media/_screen2",
+            "promptIdx": 1
           },
           {
             "type": "audio",
@@ -1401,12 +2469,12 @@
                 "text": "Audio"
               }
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "audio",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "media/_screen2",
+            "promptIdx": 2
           },
           {
             "type": "video",
@@ -1419,12 +2487,12 @@
                 "text": "Video"
               }
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "prompt",
             "_type": "video",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "media/_screen2",
+            "promptIdx": 3
           },
           {
             "type": "barcode",
@@ -1437,12 +2505,12 @@
                 "text": "Barcode"
               }
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "barcode",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "media/_screen2",
+            "promptIdx": 4
           },
           {
             "type": "select_one",
@@ -1456,12 +2524,12 @@
                 "text": "See more?"
               }
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "media/_screen2",
+            "promptIdx": 5
           },
           {
             "type": "geopoint",
@@ -1474,12 +2542,12 @@
                 "text": "Geopoint"
               }
             },
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "media/_screen2",
+            "promptIdx": 6
           },
           {
             "type": "note",
@@ -1492,12 +2560,202 @@
                 "text": "TODO signature"
               }
             },
-            "_row_num": 41,
-            "__rowNum__": 40,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "media/_screen2",
+            "promptIdx": 7
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 16,
+            "_branch_label_enclosing_screen": "media/_screen16",
+            "promptIdx": 8
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "begin screen",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 15,
+              "__rowNum__": 14,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nif (data('see_media') == 'yes') {\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nif (data('see_more') == 'yes') {\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n}\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 16,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 16,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 16,
+            "operationIdx": 3
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_contents": 2,
+          "_screen16": 2
+        }
+      },
+      "calculates_demo": {
+        "section_name": "calculates_demo",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "values_list": "continents",
+            "type": "select_multiple",
+            "name": "visited_continents",
+            "display": {
+              "prompt": {
+                "text": "Which continents have you visited?"
+              }
+            },
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "calculates_demo/_screen2",
+            "promptIdx": 0
+          },
+          {
+            "values_list": "yesno",
+            "type": "select_one",
+            "name": "visited_seattle",
+            "display": {
+              "prompt": {
+                "text": "Have you visited Seattle?"
+              }
+            },
+            "_row_num": 5,
+            "__rowNum__": 4,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "calculates_demo/_screen2",
+            "promptIdx": 1
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 8,
+            "_branch_label_enclosing_screen": "calculates_demo/_screen8",
+            "promptIdx": 2
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "begin screen",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 7,
+              "__rowNum__": 6,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nif (calculates.ask_about_seattle()) {\nactivePromptIndicies.push(1);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 8,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 8,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 2
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 8,
+            "operationIdx": 3
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_contents": 2,
+          "_screen8": 2
+        }
+      },
+      "hard_stuff": {
+        "section_name": "hard_stuff",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "text",
+            "name": "possibly_required",
+            "display": {
+              "title": {
+                "text": "Possibly required"
+              },
+              "prompt": {
+                "text": "Might be required"
+              }
+            },
+            "required": "data('make_above_required') == 'yes'",
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "hard_stuff/_screen5",
+            "promptIdx": 0
+          },
+          {
+            "type": "select_one",
+            "values_list": "yesno",
+            "name": "make_above_required",
+            "display": {
+              "title": {
+                "text": "Make above required"
+              },
+              "prompt": {
+                "text": "Select yes here to make the previous question required!"
+              }
+            },
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "hard_stuff/_screen5",
+            "promptIdx": 1
           },
           {
             "type": "text",
@@ -1511,12 +2769,12 @@
               }
             },
             "required": "data('make_prev_required') == 'yes'",
-            "_row_num": 46,
-            "__rowNum__": 45,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen45",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "hard_stuff/_screen9",
+            "promptIdx": 2
           },
           {
             "type": "select_one",
@@ -1533,53 +2791,50 @@
                 "text": "The only allowed answer is yes"
               }
             },
-            "required": 1,
+            "required": "selected(data('sections'), 'dynamic_graphs_and_assigns')",
             "constraint": "data('make_prev_required') == 'yes'",
-            "_row_num": 49,
-            "__rowNum__": 48,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen48",
-            "promptIdx": 22
+            "_branch_label_enclosing_screen": "hard_stuff/_screen12",
+            "promptIdx": 3
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 51,
-            "_branch_label_enclosing_screen": "survey/_screen51",
-            "promptIdx": 23
+            "_row_num": 15,
+            "_branch_label_enclosing_screen": "hard_stuff/_screen15",
+            "promptIdx": 4
           }
         ],
         "validation_tag_map": {
           "finalize": [
-            1,
-            5,
-            7,
-            11,
-            21,
-            22
+            0,
+            2,
+            3
           ]
         },
         "operations": [
           {
             "clause": "begin screen",
-            "_row_num": 2,
-            "__rowNum__": 1,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 6,
-              "__rowNum__": 5,
+              "_row_num": 8,
+              "__rowNum__": 7,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nassign('see_media', data('see_media') == null ? 'yes' : data('see_media'));\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
             "clause": "begin screen",
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
@@ -1587,7 +2842,7 @@
               "__rowNum__": 10,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
@@ -1597,101 +2852,41 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 24,
-              "__rowNum__": 23,
+              "_row_num": 14,
+              "__rowNum__": 13,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nassign('add_res', eval(data('add_one') + data('operation') + data('add_two')));\nassign('hidden_field', 'Your Number');\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 25,
-            "__rowNum__": 24,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 30,
-              "__rowNum__": 29,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nassign('multiply_res', Number(data('add_res')) * 2);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 3
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 31,
-            "__rowNum__": 30,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 44,
-              "__rowNum__": 43,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\nif (data('see_media') == 'yes') {\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nif (data('see_more') == 'yes') {\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n}\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 45,
-            "__rowNum__": 44,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 47,
-              "__rowNum__": 46,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 5
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 48,
-            "__rowNum__": 47,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 50,
-              "__rowNum__": 49,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 51,
-            "operationIdx": 7
+            "_row_num": 15,
+            "operationIdx": 3
           },
           {
-            "_row_num": 51,
+            "_row_num": 15,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 8
+            "operationIdx": 4
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 51,
-            "operationIdx": 9
+            "_row_num": 15,
+            "operationIdx": 5
           }
         ],
         "branch_label_map": {
-          "_screen2": 0,
-          "_screen7": 1,
+          "_screen5": 0,
+          "_screen9": 1,
           "_screen12": 2,
-          "_screen25": 3,
-          "_screen31": 4,
-          "_screen45": 5,
-          "_screen48": 6,
-          "_contents": 8,
-          "_screen51": 8
+          "_contents": 4,
+          "_screen15": 4
         }
       },
       "initial": {
@@ -1700,7 +2895,13 @@
           "survey": true
         },
         "reachable_sections": {
-          "survey": true
+          "survey": true,
+          "easy_stuff": true,
+          "dynamic_query_filters": true,
+          "dynamic_graphs_and_assigns": true,
+          "media": true,
+          "calculates_demo": true,
+          "hard_stuff": true
         },
         "prompts": [
           {
@@ -1886,11 +3087,36 @@
         "elementSet": "data",
         "elementPath": "hidden_field"
       },
-      "name": {
+      "sections": {
         "_defn": [
           {
             "_row_num": 4,
             "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "sections_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "sections.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "sections",
+        "elementKey": "sections",
+        "elementName": "sections",
+        "elementSet": "data",
+        "elementPath": "sections",
+        "listChildElementKeys": [
+          "sections_items"
+        ]
+      },
+      "name": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "easy_stuff"
           }
         ],
         "type": "string",
@@ -1903,7 +3129,7 @@
         "_defn": [
           {
             "_row_num": 5,
-            "section_name": "survey"
+            "section_name": "easy_stuff"
           }
         ],
         "type": "boolean",
@@ -1918,8 +3144,8 @@
       "regionLevel1": {
         "_defn": [
           {
-            "_row_num": 8,
-            "section_name": "survey"
+            "_row_num": 3,
+            "section_name": "dynamic_query_filters"
           }
         ],
         "type": "string",
@@ -1935,8 +3161,8 @@
       "regionLevel2": {
         "_defn": [
           {
-            "_row_num": 9,
-            "section_name": "survey"
+            "_row_num": 4,
+            "section_name": "dynamic_query_filters"
           }
         ],
         "type": "string",
@@ -1952,8 +3178,8 @@
       "adminRegion": {
         "_defn": [
           {
-            "_row_num": 10,
-            "section_name": "survey"
+            "_row_num": 5,
+            "section_name": "dynamic_query_filters"
           }
         ],
         "type": "string",
@@ -1969,8 +3195,8 @@
       "add_one": {
         "_defn": [
           {
-            "_row_num": 13,
-            "section_name": "survey"
+            "_row_num": 3,
+            "section_name": "dynamic_graphs_and_assigns"
           }
         ],
         "type": "number",
@@ -1985,8 +3211,8 @@
       "operation": {
         "_defn": [
           {
-            "_row_num": 14,
-            "section_name": "survey"
+            "_row_num": 4,
+            "section_name": "dynamic_graphs_and_assigns"
           }
         ],
         "type": "string",
@@ -2002,8 +3228,8 @@
       "add_two": {
         "_defn": [
           {
-            "_row_num": 15,
-            "section_name": "survey"
+            "_row_num": 5,
+            "section_name": "dynamic_graphs_and_assigns"
           }
         ],
         "type": "number",
@@ -2018,8 +3244,8 @@
       "add_res": {
         "_defn": [
           {
-            "_row_num": 16,
-            "section_name": "survey"
+            "_row_num": 6,
+            "section_name": "dynamic_graphs_and_assigns"
           }
         ],
         "type": "string",
@@ -2034,8 +3260,8 @@
       "multiply_res": {
         "_defn": [
           {
-            "_row_num": 26,
-            "section_name": "survey"
+            "_row_num": 12,
+            "section_name": "dynamic_graphs_and_assigns"
           }
         ],
         "type": "string",
@@ -2047,49 +3273,16 @@
         "elementSet": "data",
         "elementPath": "multiply_res"
       },
-      "possibly_required": {
-        "_defn": [
-          {
-            "_row_num": 28,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": "Possibly required"
-        },
-        "elementKey": "possibly_required",
-        "elementName": "possibly_required",
-        "elementSet": "data",
-        "elementPath": "possibly_required"
-      },
-      "make_above_required": {
-        "_defn": [
-          {
-            "_row_num": 29,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": "Make above required"
-        },
-        "valuesList": "yesno",
-        "elementKey": "make_above_required",
-        "elementName": "make_above_required",
-        "elementSet": "data",
-        "elementPath": "make_above_required"
-      },
       "see_media": {
         "_defn": [
           {
-            "_row_num": 32,
-            "section_name": "survey"
+            "_row_num": 3,
+            "section_name": "media"
           }
         ],
         "type": "string",
         "displayName": {
-          "text": "Make above required"
+          "text": "See media?"
         },
         "valuesList": "yesno",
         "elementKey": "see_media",
@@ -2100,8 +3293,8 @@
       "Image": {
         "_defn": [
           {
-            "_row_num": 34,
-            "section_name": "survey"
+            "_row_num": 5,
+            "section_name": "media"
           }
         ],
         "type": "object",
@@ -2141,8 +3334,8 @@
       "Audio": {
         "_defn": [
           {
-            "_row_num": 35,
-            "section_name": "survey"
+            "_row_num": 6,
+            "section_name": "media"
           }
         ],
         "type": "object",
@@ -2182,8 +3375,8 @@
       "Video": {
         "_defn": [
           {
-            "_row_num": 36,
-            "section_name": "survey"
+            "_row_num": 7,
+            "section_name": "media"
           }
         ],
         "type": "object",
@@ -2223,8 +3416,8 @@
       "Barcode": {
         "_defn": [
           {
-            "_row_num": 37,
-            "section_name": "survey"
+            "_row_num": 8,
+            "section_name": "media"
           }
         ],
         "type": "string",
@@ -2239,8 +3432,8 @@
       "see_more": {
         "_defn": [
           {
-            "_row_num": 38,
-            "section_name": "survey"
+            "_row_num": 9,
+            "section_name": "media"
           }
         ],
         "type": "string",
@@ -2256,8 +3449,8 @@
       "Geopoint": {
         "_defn": [
           {
-            "_row_num": 40,
-            "section_name": "survey"
+            "_row_num": 11,
+            "section_name": "media"
           }
         ],
         "type": "object",
@@ -2307,11 +3500,83 @@
         ],
         "notUnitOfRetention": true
       },
+      "visited_continents": {
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "calculates_demo"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "visited_continents_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "visited_continents.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "continents",
+        "elementKey": "visited_continents",
+        "elementName": "visited_continents",
+        "elementSet": "data",
+        "elementPath": "visited_continents",
+        "listChildElementKeys": [
+          "visited_continents_items"
+        ]
+      },
+      "visited_seattle": {
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "calculates_demo"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yesno",
+        "elementKey": "visited_seattle",
+        "elementName": "visited_seattle",
+        "elementSet": "data",
+        "elementPath": "visited_seattle"
+      },
+      "possibly_required": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "hard_stuff"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Possibly required"
+        },
+        "elementKey": "possibly_required",
+        "elementName": "possibly_required",
+        "elementSet": "data",
+        "elementPath": "possibly_required"
+      },
+      "make_above_required": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "hard_stuff"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": "Make above required"
+        },
+        "valuesList": "yesno",
+        "elementKey": "make_above_required",
+        "elementName": "make_above_required",
+        "elementSet": "data",
+        "elementPath": "make_above_required"
+      },
       "possibly_required_2": {
         "_defn": [
           {
-            "_row_num": 46,
-            "section_name": "survey"
+            "_row_num": 10,
+            "section_name": "hard_stuff"
           }
         ],
         "type": "string",
@@ -2326,8 +3591,8 @@
       "make_prev_required": {
         "_defn": [
           {
-            "_row_num": 49,
-            "section_name": "survey"
+            "_row_num": 13,
+            "section_name": "hard_stuff"
           }
         ],
         "type": "string",
@@ -2339,6 +3604,14 @@
         "elementName": "make_prev_required",
         "elementSet": "data",
         "elementPath": "make_prev_required"
+      },
+      "sections_items": {
+        "type": "string",
+        "elementKey": "sections_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "sections.items",
+        "notUnitOfRetention": true
       },
       "Image_uriFragment": {
         "type": "string",
@@ -2418,6 +3691,14 @@
         "elementName": "accuracy",
         "elementSet": "data",
         "elementPath": "Geopoint.accuracy"
+      },
+      "visited_continents_items": {
+        "type": "string",
+        "elementKey": "visited_continents_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "visited_continents.items",
+        "notUnitOfRetention": true
       },
       "_id": {
         "type": "string",
@@ -2682,6 +3963,13 @@
       },
       {
         "_partition": "Column",
+        "_aspect": "sections",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"sections\",\"data_value\":\"easy_stuff\",\"display\":{\"title\":{\"text\":\"Easy stuff\"}},\"_row_num\":18},{\"choice_list_name\":\"sections\",\"data_value\":\"dynamic_query_filters\",\"display\":{\"title\":{\"text\":\"Dynamic query filters\"}},\"_row_num\":19},{\"choice_list_name\":\"sections\",\"data_value\":\"dynamic_graphs_and_assigns\",\"display\":{\"title\":{\"text\":\"Dynamic graphs and assigns\"}},\"_row_num\":20},{\"choice_list_name\":\"sections\",\"data_value\":\"media\",\"display\":{\"title\":{\"text\":\"Media\"}},\"_row_num\":21},{\"choice_list_name\":\"sections\",\"data_value\":\"calculates_demo\",\"display\":{\"title\":{\"text\":\"Calculates object\"}},\"_row_num\":22},{\"choice_list_name\":\"sections\",\"data_value\":\"hard_stuff\",\"display\":{\"title\":{\"text\":\"Hard stuff (constraints, etc..)\"}},\"_row_num\":23}]"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "see_media",
         "_key": "displayChoicesList",
         "_type": "object",
@@ -2692,7 +3980,7 @@
         "_aspect": "see_media",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"Make above required\"}"
+        "_value": "{\"text\":\"See media?\"}"
       },
       {
         "_partition": "Column",
@@ -2707,6 +3995,20 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":\"More\"}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "visited_continents",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"continents\",\"data_value\":\"NorthAmerica\",\"display\":{\"title\":{\"text\":\"North America\"}},\"_row_num\":10},{\"choice_list_name\":\"continents\",\"data_value\":\"SouthAmerica\",\"display\":{\"title\":{\"text\":\"South America\"}},\"_row_num\":11},{\"choice_list_name\":\"continents\",\"data_value\":\"Europe\",\"display\":{\"title\":{\"text\":\"Europe\"}},\"_row_num\":12},{\"choice_list_name\":\"continents\",\"data_value\":\"Africa\",\"display\":{\"title\":{\"text\":\"Africa\"}},\"_row_num\":13},{\"choice_list_name\":\"continents\",\"data_value\":\"Asia\",\"display\":{\"title\":{\"text\":\"Asia\"}},\"_row_num\":14},{\"choice_list_name\":\"continents\",\"data_value\":\"Australia\",\"display\":{\"title\":{\"text\":\"Australia\"}},\"_row_num\":15},{\"choice_list_name\":\"continents\",\"data_value\":\"Antarctica\",\"display\":{\"title\":{\"text\":\"Antarctica\"}},\"_row_num\":16}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "visited_seattle",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "FormType",

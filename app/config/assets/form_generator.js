@@ -7,6 +7,7 @@ var row_data = {};
 // Holds whether the row exists or not yet, set in onLoad (`ol`)
 var row_exists = true;
 
+var running_queries = [];
 // Helper package for doActions, used in makeIntent
 var survey = "org.opendatakit.survey"
 // The index of the currently displayed screen in `screens`. 
@@ -38,7 +39,7 @@ var _data_wrapper = function _data_wrapper(i) {
 }
 
 
-// Helper function for constraints, so people can write like "selected(data('color'), 'blue')" and it will return true/false 
+// Helper function for constraints, so people can write like "selected(data('color'), 'blue')" and it will return true/false
 var selected = function selected(value1, value2) {
 	if (value1 == null) {
 		return value2 == null || value2.length == 0;
@@ -79,7 +80,7 @@ var screen_data = function screen_data(id, optional_no_alert) {
 			return null;
 		}
 		// If it's supposed to be a number/double, cast it to a number and return it. IMPORTANT - If it's an invalid number/double,
-		// the code will never reach here. If it's not a valid Number, then element.value will return an empty string instead of 
+		// the code will never reach here. If it's not a valid Number, then element.value will return an empty string instead of
 		// the invalid stuff the user put in the textbox, and we will have returned null already. The way you check if there's really
 		// nothing in the box versus if there's something in the box but it's not a valid number is by checking elem.validity, and that's
 		// exactly what the validation function does
@@ -126,7 +127,7 @@ var screen_data = function screen_data(id, optional_no_alert) {
 		// No radio buttons checked? Just leave it as null in the database, that's what survey does
 		return null;
 	} else if (elem.classList.contains("date")) {
-		// Dates are a little complicated, they're made up of three dropdown menus. 
+		// Dates are a little complicated, they're made up of three dropdown menus.
 		// First, grab the three dropdowns
 		var fields = elem.getElementsByTagName("select");
 		// This will be used to store the result once we've scraped all three dropdown menus
@@ -234,9 +235,6 @@ var do_csv_xhr = function do_csv_xhr(choice_id, filename, callback) {
 				console.log(e);
 			}
 			console.log("XHR complete: " + choice_id)
-			// don't ask me why we have to call it twice, but it fixes regionlevel1/regionlevel2/adminregion
-			// sometimes
-			update(0);
 			update(0);
 		}
 	};
@@ -289,10 +287,12 @@ var get_choices = function get_choices(which, not_first_time, filter, raw) {
 	// If we found choices, return them
 	if (result.length > 1) return result;
 	// If the csv xhr or cross table query is still in progress, return false and we'll be asked again later
+	if (running_queries.indexOf(which) >= 0) return [false];
 	if (not_first_time) return [false];
 	// Otherwise check queries
 	for (var j = 0; j < queries.length; j++) {
 		if (queries[j].query_name == which) {
+			running_queries = running_queries.concat(which);
 			if (queries[j].query_type == "linked_table") {
 				do_cross_table_query(which, queries[j]);
 				// false to let update() know that more choices will be added, so we'll be called again later
@@ -431,7 +431,6 @@ var changeElement = function changeElement(elem, newdata) {
 		elem.value = newdata;
 	} else if (elem.tagName == "SELECT") {
 		// This handles regular old dropdown menus
-
 
 		// fix for acknowledges
 		if (typeof(newdata) == "boolean") {
@@ -967,7 +966,8 @@ var update = function update(delta) {
 	// DATABASE UPDATE
 	// If the screen is valid and we changed something in row_data, updateOrInsert()
 	if (num_updated > 0 && valid) {
-		updateOrInsert()
+		// async because sometimes it takes upwards of 30ms
+		setTimeout(updateOrInsert, 0);
 	}
 
 	// If statements may be run more than once, so let's cache their results in this validates object
@@ -1068,14 +1068,16 @@ var update = function update(delta) {
 	if (!valid) return; // buttons have already been disabled
 	// Update global_screen_idx to prepare to change the data on the screen to it
 	global_screen_idx += delta;
-	odkCommon.setSessionVariable(table_id + ":" + row_id + ":global_screen_idx", global_screen_idx);
-	odkCommon.setSessionVariable(table_id + ":" + row_id + ":stack", JSON.stringify(global_section_stack));
-	odkCommon.setSessionVariable(table_id + ":" + row_id + ":section", global_current_section);
+	setTimeout(function() {
+		odkCommon.setSessionVariable(table_id + ":" + row_id + ":global_screen_idx", global_screen_idx);
+		odkCommon.setSessionVariable(table_id + ":" + row_id + ":stack", JSON.stringify(global_section_stack));
+		odkCommon.setSessionVariable(table_id + ":" + row_id + ":section", global_current_section);
+	}, 0);
 	// If we're at the beginning, disable the back button, otherwise enable it
 	if (global_screen_idx < 0) {
 		if (global_section_stack.length > 0) {
 			global_section_stack[0][1] = global_section_stack[0][1] - 2;
-			endSectionImmediate();
+			endSectionImmediate(-1);
 			return;
 		}
 		global_screen_idx = 0;
@@ -1087,7 +1089,7 @@ var update = function update(delta) {
 	}
 	if (global_screen_idx == sections[global_current_section].length) {
 		if (global_section_stack.length > 0) {
-			endSectionImmediate();
+			endSectionImmediate(1);
 		} else {
 			finalizeImmediate();
 		}
@@ -1314,16 +1316,16 @@ var doSection = function doSection(elem, delta) {
 }
 var endSection = function endSection(elem, delta) {
 	if (all_rules_match(elem.getAttribute("data-if"))) {
-		endSectionImmediate();
+		endSectionImmediate(1);
 	} else {
 		update(delta);
 	}
 }
-var endSectionImmediate = function endSectionImmediate() {
+var endSectionImmediate = function endSectionImmediate(delta) {
 	global_current_section = global_section_stack[0][0]
 	global_screen_idx = global_section_stack[0][1]
 	global_section_stack = global_section_stack.slice(1)
-	update(1);
+	update(delta);
 }
 var goto = function goto(label) {
 	var new_section = goto_labels[label][0];

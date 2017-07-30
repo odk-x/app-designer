@@ -29,5 +29,10 @@ possibly_required,possibly_required,string,[]
 possibly_required_2,possibly_required_2,string,[]
 regionLevel1,regionLevel1,string,[]
 regionLevel2,regionLevel2,string,[]
+sections,sections,array,"[""sections_items""]"
+sections_items,items,string,[]
 see_media,see_media,string,[]
 see_more,see_more,string,[]
+visited_continents,visited_continents,array,"[""visited_continents_items""]"
+visited_continents_items,items,string,[]
+visited_seattle,visited_seattle,string,[]

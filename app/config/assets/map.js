@@ -20,10 +20,8 @@ var update_canvas = function update_canvas(sections, global_current_section, glo
 	var y = 0;
 	var x = 0;
 	for (var i = global_section_stack.length - 1; i >= 0; i--) {
-		var num = global_section_stack[i][1] + 1;
-		console.log("Drawing " + num + " blue squares")
 		x--;
-		for (var j = 0; j < num; j++) {
+		for (var j = 0; j < global_section_stack[i][1] + 1; j++) {
 			x++;
 			drawSquare(elem, x, y, blue);
 		}
