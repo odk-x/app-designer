@@ -655,6 +655,7 @@ var updateAllSelects = function updateAllSelects(with_filter_only) {
 // messages, and displaying media that the user has selected
 var update = function update(delta) {
 	console.log("Update called " + delta);
+	update_canvas(sections, global_current_section, global_section_stack, global_screen_idx, document.getElementById('canvas'));
 	// If we failed to load the data from the database in the first place,
 	if (noop) {
 		var error = _t("An error occurred while loading the page. ");
@@ -1072,7 +1073,7 @@ var update = function update(delta) {
 	// If we're at the beginning, disable the back button, otherwise enable it
 	if (global_screen_idx < 0) {
 		global_section_stack[0][1] = global_section_stack[0][1] - 2;
-		endSection();
+		endSectionImmediate();
 		return;
 	}
 	if (global_screen_idx == 0 && global_section_stack.length == 0) {
