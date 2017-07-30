@@ -659,6 +659,7 @@ var updateAllSelects = function updateAllSelects(with_filter_only) {
 var update = function update(delta) {
 	console.log("Update called " + delta);
 	update_canvas(sections, global_current_section, global_section_stack, global_screen_idx, document.getElementById('canvas'));
+	checkIfCurrentScreenIsUserBranch(delta);
 	// If we failed to load the data from the database in the first place,
 	if (noop) {
 		var error = _t("An error occurred while loading the page. ");
@@ -1354,4 +1355,16 @@ var setCancelButton = function setCancelButton(cancel_or_save_incomplete) {
 		cancel.innerText = _t("Save incomplete");
 	}
 	cancel.disabled = false;
+}
+var checkIfCurrentScreenIsUserBranch = function checkIfCurrentScreenIsUserBranch(delta) {
+	if (delta != 0) return;
+	var elems = document.getElementsByClassName("userBranch")
+	if (elems.length == 0) return;
+	var elems = elems[0].getElementsByClassName("option")
+	for (var i = 0; i < elems.length; i++) {
+		var elem = elems[i].children[0];
+		if (elem.checked) {
+			gotoImmediate(elem.value);
+		}
+	}
 }

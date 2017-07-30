@@ -21,7 +21,9 @@ var update_canvas = function update_canvas(sections, global_current_section, glo
 	var x = 0;
 	for (var i = global_section_stack.length - 1; i >= 0; i--) {
 		x--;
-		for (var j = 0; j < global_section_stack[i][1] + 1; j++) {
+		var num = global_section_stack[i][1]
+		if (num == -1) num = 0
+		for (var j = 0; j < num + 1; j++) {
 			x++;
 			drawSquare(elem, x, y, blue);
 		}

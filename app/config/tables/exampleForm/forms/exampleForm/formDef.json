@@ -93,16 +93,29 @@
       },
       {
         "clause": "if",
-        "condition": "selected(data('sections'), 'hard_stuff')",
+        "condition": "selected(data('sections'), 'user_branch')",
         "_row_num": 21
       },
       {
-        "clause": "do section hard_stuff",
+        "clause": "do section user_branch",
         "_row_num": 22
       },
       {
         "clause": "end if",
         "_row_num": 23
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('sections'), 'hard_stuff')",
+        "_row_num": 24
+      },
+      {
+        "clause": "do section hard_stuff",
+        "_row_num": 25
+      },
+      {
+        "clause": "end if",
+        "_row_num": 26
       }
     ],
     "easy_stuff": [
@@ -147,8 +160,12 @@
     ],
     "dynamic_query_filters": [
       {
-        "clause": "begin screen",
+        "branch_label": "some label in another section",
         "_row_num": 2
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 3
       },
       {
         "type": "select_one_dropdown",
@@ -162,7 +179,7 @@
             "text": "Demo of dynamic query filters!"
           }
         },
-        "_row_num": 3
+        "_row_num": 5
       },
       {
         "type": "select_one_dropdown",
@@ -177,7 +194,7 @@
           }
         },
         "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
-        "_row_num": 4
+        "_row_num": 6
       },
       {
         "type": "select_one_dropdown",
@@ -192,11 +209,11 @@
           }
         },
         "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
-        "_row_num": 5
+        "_row_num": 7
       },
       {
         "clause": "end screen",
-        "_row_num": 6
+        "_row_num": 8
       }
     ],
     "dynamic_graphs_and_assigns": [
@@ -480,6 +497,69 @@
         "_row_num": 7
       }
     ],
+    "user_branch": [
+      {
+        "type": "user_branch",
+        "values_list": "branches",
+        "display": {
+          "prompt": {
+            "text": "Select where to go next"
+          }
+        },
+        "_row_num": 2
+      },
+      {
+        "branch_label": "some label 1",
+        "_row_num": 3
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "You are at some label 1"
+          }
+        },
+        "_row_num": 4
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 5
+      },
+      {
+        "branch_label": "some label 2",
+        "_row_num": 6
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "You are at some label 2"
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 8
+      },
+      {
+        "branch_label": "some label 3",
+        "_row_num": 9
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "You are at some label 3"
+          }
+        },
+        "_row_num": 10
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 11
+      }
+    ],
     "hard_stuff": [
       {
         "clause": "begin screen",
@@ -757,6 +837,56 @@
           }
         },
         "_row_num": 23
+      },
+      {
+        "choice_list_name": "sections",
+        "data_value": "user_branch",
+        "display": {
+          "title": {
+            "text": "User branch"
+          }
+        },
+        "_row_num": 24
+      },
+      {
+        "choice_list_name": "branches",
+        "data_value": "some label 1",
+        "display": {
+          "title": {
+            "text": "some label 1"
+          }
+        },
+        "_row_num": 26
+      },
+      {
+        "choice_list_name": "branches",
+        "data_value": "some label 2",
+        "display": {
+          "title": {
+            "text": "some label 2"
+          }
+        },
+        "_row_num": 27
+      },
+      {
+        "choice_list_name": "branches",
+        "data_value": "some label 3",
+        "display": {
+          "title": {
+            "text": "some label 3"
+          }
+        },
+        "_row_num": 28
+      },
+      {
+        "choice_list_name": "branches",
+        "data_value": "some label in another section",
+        "display": {
+          "title": {
+            "text": "some label in another section"
+          }
+        },
+        "_row_num": 29
       }
     ],
     "queries": [
@@ -982,6 +1112,13 @@
             "text": "Example form"
           }
         }
+      },
+      "user_branch": {
+        "display": {
+          "title": {
+            "text": "Example form"
+          }
+        }
       }
     },
     "choices": {
@@ -1181,6 +1318,58 @@
             }
           },
           "_row_num": 23
+        },
+        {
+          "choice_list_name": "sections",
+          "data_value": "user_branch",
+          "display": {
+            "title": {
+              "text": "User branch"
+            }
+          },
+          "_row_num": 24
+        }
+      ],
+      "branches": [
+        {
+          "choice_list_name": "branches",
+          "data_value": "some label 1",
+          "display": {
+            "title": {
+              "text": "some label 1"
+            }
+          },
+          "_row_num": 26
+        },
+        {
+          "choice_list_name": "branches",
+          "data_value": "some label 2",
+          "display": {
+            "title": {
+              "text": "some label 2"
+            }
+          },
+          "_row_num": 27
+        },
+        {
+          "choice_list_name": "branches",
+          "data_value": "some label 3",
+          "display": {
+            "title": {
+              "text": "some label 3"
+            }
+          },
+          "_row_num": 28
+        },
+        {
+          "choice_list_name": "branches",
+          "data_value": "some label in another section",
+          "display": {
+            "title": {
+              "text": "some label in another section"
+            }
+          },
+          "_row_num": 29
         }
       ]
     },
@@ -1282,7 +1471,7 @@
       "regionLevel1": {
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 5,
             "section_name": "dynamic_query_filters"
           }
         ],
@@ -1296,7 +1485,7 @@
       "regionLevel2": {
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 6,
             "section_name": "dynamic_query_filters"
           }
         ],
@@ -1310,7 +1499,7 @@
       "adminRegion": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 7,
             "section_name": "dynamic_query_filters"
           }
         ],
@@ -1630,7 +1819,8 @@
       "hard_stuff",
       "initial",
       "media",
-      "survey"
+      "survey",
+      "user_branch"
     ],
     "sections": {
       "survey": {
@@ -1641,6 +1831,7 @@
           "dynamic_graphs_and_assigns": true,
           "media": true,
           "calculates_demo": true,
+          "user_branch": true,
           "hard_stuff": true
         },
         "reachable_sections": {
@@ -1649,6 +1840,7 @@
           "dynamic_graphs_and_assigns": true,
           "media": true,
           "calculates_demo": true,
+          "user_branch": true,
           "hard_stuff": true
         },
         "prompts": [
@@ -1744,13 +1936,28 @@
             "_branch_label_enclosing_screen": "calculates_demo/0"
           },
           {
-            "clause": "do section hard_stuff",
+            "clause": "do section user_branch",
             "_row_num": 22,
             "__rowNum__": 21,
             "_token_type": "prompt",
-            "_do_section_name": "hard_stuff",
+            "_do_section_name": "user_branch",
             "_type": "_section",
             "promptIdx": 6,
+            "display": {
+              "title": {
+                "text": "Example form"
+              }
+            },
+            "_branch_label_enclosing_screen": "user_branch/0"
+          },
+          {
+            "clause": "do section hard_stuff",
+            "_row_num": 25,
+            "__rowNum__": 24,
+            "_token_type": "prompt",
+            "_do_section_name": "hard_stuff",
+            "_type": "_section",
+            "promptIdx": 7,
             "display": {
               "title": {
                 "text": "Example form"
@@ -1762,9 +1969,9 @@
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 24,
-            "_branch_label_enclosing_screen": "survey/_screen24",
-            "promptIdx": 7
+            "_row_num": 27,
+            "_branch_label_enclosing_screen": "survey/_screen27",
+            "promptIdx": 8
           }
         ],
         "validation_tag_map": {
@@ -1942,7 +2149,7 @@
           },
           {
             "clause": "if",
-            "condition": "selected(data('sections'), 'hard_stuff')",
+            "condition": "selected(data('sections'), 'user_branch')",
             "_row_num": 21,
             "__rowNum__": 20,
             "_token_type": "goto_label",
@@ -1957,11 +2164,11 @@
             "operationIdx": 22
           },
           {
-            "clause": "do section hard_stuff",
+            "clause": "do section user_branch",
             "_row_num": 22,
             "__rowNum__": 21,
             "_token_type": "do_section",
-            "_do_section_name": "hard_stuff",
+            "_do_section_name": "user_branch",
             "operationIdx": 23
           },
           {
@@ -1972,25 +2179,56 @@
             "operationIdx": 24
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
+            "clause": "if",
+            "condition": "selected(data('sections'), 'hard_stuff')",
             "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "goto_label",
+            "_branch_label": "_then24",
             "operationIdx": 25
           },
           {
-            "_row_num": 24,
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else26",
+            "_row_num": 26,
+            "operationIdx": 26
+          },
+          {
+            "clause": "do section hard_stuff",
+            "_row_num": 25,
+            "__rowNum__": 24,
+            "_token_type": "do_section",
+            "_do_section_name": "hard_stuff",
+            "operationIdx": 27
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif26",
+            "_row_num": 26,
+            "operationIdx": 28
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 27,
+            "operationIdx": 29
+          },
+          {
+            "_row_num": 27,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 26
+            "operationIdx": 30
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 24,
-            "operationIdx": 27
+            "_row_num": 27,
+            "operationIdx": 31
           }
         ],
         "branch_label_map": {
@@ -2013,8 +2251,11 @@
           "_then21": 23,
           "_else23": 25,
           "_endif23": 25,
-          "_contents": 26,
-          "_screen24": 26
+          "_then24": 27,
+          "_else26": 29,
+          "_endif26": 29,
+          "_contents": 30,
+          "_screen27": 30
         }
       },
       "easy_stuff": {
@@ -2136,11 +2377,11 @@
                 "text": "Demo of dynamic query filters!"
               }
             },
-            "_row_num": 3,
-            "__rowNum__": 2,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen2",
+            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen3",
             "promptIdx": 0
           },
           {
@@ -2156,11 +2397,11 @@
               }
             },
             "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
-            "_row_num": 4,
-            "__rowNum__": 3,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen2",
+            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen3",
             "promptIdx": 1
           },
           {
@@ -2176,19 +2417,19 @@
               }
             },
             "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
-            "_row_num": 5,
-            "__rowNum__": 4,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen2",
+            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen3",
             "promptIdx": 2
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 7,
-            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen7",
+            "_row_num": 9,
+            "_branch_label_enclosing_screen": "dynamic_query_filters/_screen9",
             "promptIdx": 3
           }
         ],
@@ -2198,13 +2439,13 @@
         "operations": [
           {
             "clause": "begin screen",
-            "_row_num": 2,
-            "__rowNum__": 1,
+            "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 6,
-              "__rowNum__": 5,
+              "_row_num": 8,
+              "__rowNum__": 7,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
@@ -2213,11 +2454,11 @@
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 7,
+            "_row_num": 9,
             "operationIdx": 1
           },
           {
-            "_row_num": 7,
+            "_row_num": 9,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
@@ -2228,14 +2469,15 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 7,
+            "_row_num": 9,
             "operationIdx": 3
           }
         ],
         "branch_label_map": {
-          "_screen2": 0,
+          "some label in another section": 0,
+          "_screen3": 0,
           "_contents": 2,
-          "_screen7": 2
+          "_screen9": 2
         }
       },
       "dynamic_graphs_and_assigns": {
@@ -2714,6 +2956,160 @@
           "_screen8": 2
         }
       },
+      "user_branch": {
+        "section_name": "user_branch",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "user_branch",
+            "values_list": "branches",
+            "display": {
+              "prompt": {
+                "text": "Select where to go next"
+              }
+            },
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_type": "user_branch",
+            "_branch_label_enclosing_screen": "user_branch/_screen2",
+            "promptIdx": 0
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "You are at some label 1"
+              }
+            },
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "user_branch/_screen4",
+            "promptIdx": 1
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "You are at some label 2"
+              }
+            },
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "user_branch/_screen7",
+            "promptIdx": 2
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "You are at some label 3"
+              }
+            },
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "user_branch/_screen10",
+            "promptIdx": 3
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 12,
+            "_branch_label_enclosing_screen": "user_branch/_screen12",
+            "promptIdx": 4
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_row_num": 4,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 5,
+            "__rowNum__": 4,
+            "_token_type": "exit_section",
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 3
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "exit_section",
+            "operationIdx": 4
+          },
+          {
+            "_row_num": 10,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 5
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "exit_section",
+            "operationIdx": 6
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 12,
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 12,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 8
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 12,
+            "operationIdx": 9
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "some label 1": 1,
+          "_screen4": 1,
+          "some label 2": 3,
+          "_screen7": 3,
+          "some label 3": 5,
+          "_screen10": 5,
+          "_contents": 8,
+          "_screen12": 8
+        }
+      },
       "hard_stuff": {
         "section_name": "hard_stuff",
         "nested_sections": {},
@@ -2901,6 +3297,7 @@
           "dynamic_graphs_and_assigns": true,
           "media": true,
           "calculates_demo": true,
+          "user_branch": true,
           "hard_stuff": true
         },
         "prompts": [
@@ -3144,7 +3541,7 @@
       "regionLevel1": {
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 5,
             "section_name": "dynamic_query_filters"
           }
         ],
@@ -3161,7 +3558,7 @@
       "regionLevel2": {
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 6,
             "section_name": "dynamic_query_filters"
           }
         ],
@@ -3178,7 +3575,7 @@
       "adminRegion": {
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 7,
             "section_name": "dynamic_query_filters"
           }
         ],
@@ -3966,7 +4363,7 @@
         "_aspect": "sections",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"sections\",\"data_value\":\"easy_stuff\",\"display\":{\"title\":{\"text\":\"Easy stuff\"}},\"_row_num\":18},{\"choice_list_name\":\"sections\",\"data_value\":\"dynamic_query_filters\",\"display\":{\"title\":{\"text\":\"Dynamic query filters\"}},\"_row_num\":19},{\"choice_list_name\":\"sections\",\"data_value\":\"dynamic_graphs_and_assigns\",\"display\":{\"title\":{\"text\":\"Dynamic graphs and assigns\"}},\"_row_num\":20},{\"choice_list_name\":\"sections\",\"data_value\":\"media\",\"display\":{\"title\":{\"text\":\"Media\"}},\"_row_num\":21},{\"choice_list_name\":\"sections\",\"data_value\":\"calculates_demo\",\"display\":{\"title\":{\"text\":\"Calculates object\"}},\"_row_num\":22},{\"choice_list_name\":\"sections\",\"data_value\":\"hard_stuff\",\"display\":{\"title\":{\"text\":\"Hard stuff (constraints, etc..)\"}},\"_row_num\":23}]"
+        "_value": "[{\"choice_list_name\":\"sections\",\"data_value\":\"easy_stuff\",\"display\":{\"title\":{\"text\":\"Easy stuff\"}},\"_row_num\":18},{\"choice_list_name\":\"sections\",\"data_value\":\"dynamic_query_filters\",\"display\":{\"title\":{\"text\":\"Dynamic query filters\"}},\"_row_num\":19},{\"choice_list_name\":\"sections\",\"data_value\":\"dynamic_graphs_and_assigns\",\"display\":{\"title\":{\"text\":\"Dynamic graphs and assigns\"}},\"_row_num\":20},{\"choice_list_name\":\"sections\",\"data_value\":\"media\",\"display\":{\"title\":{\"text\":\"Media\"}},\"_row_num\":21},{\"choice_list_name\":\"sections\",\"data_value\":\"calculates_demo\",\"display\":{\"title\":{\"text\":\"Calculates object\"}},\"_row_num\":22},{\"choice_list_name\":\"sections\",\"data_value\":\"hard_stuff\",\"display\":{\"title\":{\"text\":\"Hard stuff (constraints, etc..)\"}},\"_row_num\":23},{\"choice_list_name\":\"sections\",\"data_value\":\"user_branch\",\"display\":{\"title\":{\"text\":\"User branch\"}},\"_row_num\":24}]"
       },
       {
         "_partition": "Column",
