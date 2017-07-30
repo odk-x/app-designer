@@ -127,25 +127,56 @@
         "_row_num": 4
       },
       {
-        "clause": "end screen",
+        "clause": "if",
+        "condition": "data('test3') > 100",
         "_row_num": 5
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "Will exit section"
+          }
+        },
+        "_row_num": 6
+      },
+      {
+        "clause": "else",
+        "_row_num": 7
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "Will not exit section"
+          }
+        },
+        "_row_num": 8
+      },
+      {
+        "clause": "end if",
+        "_row_num": 9
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 10
       },
       {
         "clause": "if",
         "condition": "data('test3') > 100",
-        "_row_num": 6
+        "_row_num": 11
       },
       {
         "clause": "exit section",
-        "_row_num": 7
+        "_row_num": 12
       },
       {
         "clause": "end if",
-        "_row_num": 8
+        "_row_num": 13
       },
       {
         "clause": "begin screen",
-        "_row_num": 9
+        "_row_num": 14
       },
       {
         "type": "date",
@@ -155,15 +186,15 @@
             "text": "Some other text field, for testing next/back buttons"
           }
         },
-        "_row_num": 10
+        "_row_num": 15
       },
       {
         "clause": "end screen",
-        "_row_num": 11
+        "_row_num": 16
       },
       {
         "clause": "begin screen",
-        "_row_num": 12
+        "_row_num": 17
       },
       {
         "type": "time",
@@ -173,11 +204,11 @@
             "text": "This is the last screen in section Sheet7"
           }
         },
-        "_row_num": 13
+        "_row_num": 18
       },
       {
         "clause": "end screen",
-        "_row_num": 14
+        "_row_num": 19
       }
     ]
   },
@@ -311,7 +342,7 @@
       "test4": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 15,
             "section_name": "Sheet7"
           }
         ],
@@ -322,7 +353,7 @@
       "test5": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 18,
             "section_name": "Sheet7"
           }
         ],
@@ -533,6 +564,34 @@
             "promptIdx": 1
           },
           {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "Will exit section"
+              }
+            },
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "Sheet7/_screen2",
+            "promptIdx": 2
+          },
+          {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": "Will not exit section"
+              }
+            },
+            "_row_num": 8,
+            "__rowNum__": 7,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "Sheet7/_screen2",
+            "promptIdx": 3
+          },
+          {
             "type": "date",
             "name": "test4",
             "display": {
@@ -540,12 +599,12 @@
                 "text": "Some other text field, for testing next/back buttons"
               }
             },
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "date",
-            "_branch_label_enclosing_screen": "Sheet7/_screen9",
-            "promptIdx": 2
+            "_branch_label_enclosing_screen": "Sheet7/_screen14",
+            "promptIdx": 4
           },
           {
             "type": "time",
@@ -555,20 +614,20 @@
                 "text": "This is the last screen in section Sheet7"
               }
             },
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "prompt",
             "_type": "time",
-            "_branch_label_enclosing_screen": "Sheet7/_screen12",
-            "promptIdx": 3
+            "_branch_label_enclosing_screen": "Sheet7/_screen17",
+            "promptIdx": 5
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 15,
-            "_branch_label_enclosing_screen": "Sheet7/_screen15",
-            "promptIdx": 4
+            "_row_num": 20,
+            "_branch_label_enclosing_screen": "Sheet7/_screen20",
+            "promptIdx": 6
           }
         ],
         "validation_tag_map": {
@@ -582,81 +641,81 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 5,
-              "__rowNum__": 4,
+              "_row_num": 10,
+              "__rowNum__": 9,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nif (data('test3') > 100) {\nactivePromptIndicies.push(2);\n}\nelse {\nactivePromptIndicies.push(3);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
             "clause": "if",
             "condition": "data('test3') > 100",
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "goto_label",
-            "_branch_label": "_then6",
+            "_branch_label": "_then11",
             "operationIdx": 1
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else8",
-            "_row_num": 8,
+            "_branch_label": "_else13",
+            "_row_num": 13,
             "operationIdx": 2
           },
           {
             "clause": "exit section",
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "exit_section",
             "operationIdx": 3
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif8",
-            "_row_num": 8,
+            "_branch_label": "_endif13",
+            "_row_num": 13,
             "operationIdx": 4
           },
           {
             "clause": "begin screen",
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 11,
-              "__rowNum__": 10,
+              "_row_num": 16,
+              "__rowNum__": 15,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
           },
           {
             "clause": "begin screen",
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 14,
-              "__rowNum__": 13,
+              "_row_num": 19,
+              "__rowNum__": 18,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 6
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 15,
+            "_row_num": 20,
             "operationIdx": 7
           },
           {
-            "_row_num": 15,
+            "_row_num": 20,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
@@ -665,19 +724,19 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 15,
+            "_row_num": 20,
             "operationIdx": 9
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_then6": 3,
-          "_else8": 5,
-          "_endif8": 5,
-          "_screen9": 5,
-          "_screen12": 6,
+          "_then11": 3,
+          "_else13": 5,
+          "_endif13": 5,
+          "_screen14": 5,
+          "_screen17": 6,
           "_contents": 8,
-          "_screen15": 8
+          "_screen20": 8
         }
       },
       "initial": {
@@ -910,7 +969,7 @@
       "test4": {
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 15,
             "section_name": "Sheet7"
           }
         ],
@@ -924,7 +983,7 @@
       "test5": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 18,
             "section_name": "Sheet7"
           }
         ],
