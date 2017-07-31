@@ -799,6 +799,28 @@ var update = function update(delta) {
 		var elem = elems[i];
 		// If it's already set up, ignore it
 		if (elem.getAttribute("data-setup_done") == "done") continue;
+
+		// Clear it so we don't add the + button twice
+		elem.innerHTML = "";
+		// determine if we're supposed to show or hide the add and delete buttons
+		var show_add = true, show_delete = true, new_instance_label = "+";
+		if (elem.hasAttribute("data-hide_add_instance") && eval(tokens[elem.getAttribute("data-hide_add_instance")])) {
+			show_add = false;
+		}
+		// add the add button if we should do so
+		if (show_add) {
+			if (elem.hasAttribute("data-new_instance_label")) new_instance_label = display(tokens[elem.getAttribute("data-new_instance_label")], table_id, window.possible_wrapped, form_id);
+			var child = document.createElement("button")
+			child.innerText = _tu(new_instance_label);
+			child.addEventListener("click", function() {
+				addOrEdit("add", subtable, subform, Function("return " + defaults)());
+			});
+			elem.appendChild(child);
+		}
+		if (elem.hasAttribute("data-hide_delete_button") && eval(tokens[elem.getAttribute("data-hide_delete_button")])) {
+			show_delete = false;
+		}
+
 		// We set "loading" instead of ignoring it so we only do the cross table query once
 		var first_time = true;
 		if (elem.getAttribute("data-setup_done") == "loading") {
@@ -827,24 +849,6 @@ var update = function update(delta) {
 		var defaults = ("newRowInitialElementKeyToValueMap" in query ? query["newRowInitialElementKeyToValueMap"] : "{}");
 		// chop off the true from the beginning of the array
 		choices = choices.slice(1);
-		// determine if we're supposed to show or hide the add and delete buttons
-		var show_add = true, show_delete = true, new_instance_label = "+";
-		if (elem.hasAttribute("data-hide_add_instance") && eval(tokens[elem.getAttribute("data-hide_add_instance")])) {
-			show_add = false;
-		}
-		if (elem.hasAttribute("data-hide_delete_button") && eval(tokens[elem.getAttribute("data-hide_delete_button")])) {
-			show_delete = false;
-		}
-		// add the add button if we should do so
-		if (show_add) {
-			if (elem.hasAttribute("data-new_instance_label")) new_instance_label = display(tokens[elem.getAttribute("data-new_instance_label")], table_id, window.possible_wrapped, form_id);
-			var child = document.createElement("button")
-			child.innerText = _tu(new_instance_label);
-			child.addEventListener("click", function() {
-				addOrEdit("add", subtable, subform, Function("return " + defaults)());
-			});
-			elem.appendChild(child);
-		}
 		for (var j = 0; j < choices.length; j++) {
 			// add the choice
 			var span = document.createElement("div");
