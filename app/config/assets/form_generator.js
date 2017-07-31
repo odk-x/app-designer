@@ -20,6 +20,8 @@ var global_current_section = "initial"
 
 var global_section_stack = [];
 
+var global_metadata = null;
+
 // noop is a magic and special variable, if noop is set to true then update() will refuse to do anything and display an error message
 // Set to true initially and set to false in onLoad (`ol`) before it calls update()
 var noop = true;
@@ -1246,18 +1248,18 @@ var finalizeImmediate = blockForDatabase(function finalizeImmediate() {
 		console.log("already finalized, ignoring")
 		return;
 	}
-	already_finalized = true;
 	document.getElementById("odk-container").innerHTML = _t("Saving...")
 	// Make sure all required fields were provided
 	for (var i = 0; i < requireds.length; i++) {
 		var column = requireds[i][0];
 		var js = requireds[i][1];
 		if ((data(column) == null || data(column) == undefined || (typeof(data(column)) == "string" && data(column).trim().length == 0)) && eval(tokens[js])) {
-			alert(_t("Column ? is required but no value was provided", column)) // can't use displayCol because no metadata -- TODO cache metadata
+			alert(_t("Column ? is required but no value was provided", displayCol(column, global_metadata, table_id, form_id))) // can't use displayCol because no metadata -- TODO cache metadata
 			gotoImmediate("_" + column);
 			return;
 		}
 	}
+	already_finalized = true;
 	odkCommon.setSessionVariable(table_id + ":" + row_id + ":global_screen_idx", 0);
 	// Escape the LIMIT 1
 	document.getElementById("odk-container").innerHTML = _t("Finalizing...")
@@ -1331,6 +1333,7 @@ var ol = function onLoad() {
 	// Get row data
 	odkData.getRows(table_id, row_id, function success(d) {
 		try {
+			global_metadata = d.getMetadata();
 			// Try to load all rows from the result object into row_data if we're editing a row
 			var cols = d.getColumns();
 			var generator = function(i) { return d.getData(0, cols[i]); };
