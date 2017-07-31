@@ -1254,7 +1254,7 @@ var finalizeImmediate = blockForDatabase(function finalizeImmediate() {
 		var column = requireds[i][0];
 		var js = requireds[i][1];
 		if ((data(column) == null || data(column) == undefined || (typeof(data(column)) == "string" && data(column).trim().length == 0)) && eval(tokens[js])) {
-			alert(_t("Column ? is required but no value was provided", displayCol(column, global_metadata, table_id, form_id))) // can't use displayCol because no metadata -- TODO cache metadata
+			alert(_t("Column ? is required but no value was provided", displayCol(column, global_metadata, table_id, form_id)))
 			gotoImmediate("_" + column);
 			return;
 		}
