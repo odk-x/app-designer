@@ -126,28 +126,6 @@ var screen_data = function screen_data(id, optional_no_alert) {
 		}
 		// No radio buttons checked? Just leave it as null in the database, that's what survey does
 		return null;
-	} else if (elem.classList.contains("date")) {
-		// Dates are a little complicated, they're made up of three dropdown menus.
-		// First, grab the three dropdowns
-		var fields = elem.getElementsByTagName("select");
-		// This will be used to store the result once we've scraped all three dropdown menus
-		var total = ["0", "0", "0"];
-		// For each dropdown, update total
-		for (var j = 0; j < fields.length; j++) {
-			var field = fields[j]; // the select element for day, month or year
-			if (field.selectedOptions[0] == undefined) {
-				// If there's nothing, set to "0", will be padded with zeroes later
-				total[j] = "0"
-			} else {
-				// But if there was a value to pull, put it in the right place in totals
-				total[j] = field.selectedOptions[0].value.trim();
-			}
-		}
-		// fields on the screen are in the order YYYY/MM/DD
-		// return here as YYYY-MM-DDT00:00:00.000000000 for storage in the database, will need to pad things to the
-		// right length, e.g. "6" -> "06"
-		var pad = odkCommon.padWithLeadingZeros
-		return pad(total[0], 4) + "-" + pad(total[1], 2) + "-" + pad(total[2], 2) + "T00:00:00.000000000";
 	} else {
 		for (var i = 0; i < all_custom_prompt_types.length; i++) {
 			if (elem.classList.contains(all_custom_prompt_types[i])) {
@@ -502,19 +480,6 @@ var changeElement = function changeElement(elem, newdata) {
 		if (!found && elem.classList.contains("select-one-with-other") && newdata != null) {
 			document.getElementById(elem.getAttribute("data-dbcol") + "_" + "_other" + "_tag").children[0].value = newdata;
 			document.getElementById(elem.getAttribute("data-dbcol") + "_" + "_other").checked = true;
-		}
-	} else if (elem.classList.contains("date")) {
-		// For dates, first extract the year month and date from newdata, then set the three subfields to that data in order
-		var total = ["-1", "-1", "-1"]
-		if (newdata != null) {
-			total = newdata.split("-"); // total is now [YYYY, MM, DD plus some garbage]
-		}
-		total[2] = total[2].split("T")[0]; // should now be [YYYY, MM, DD]
-		var fields = elem.getElementsByTagName("select");
-		for (var i = 0; i < fields.length; i++) {
-			total[i] = Number(total[i]).toString(); // "06" -> "6"
-			var field = fields[i]; // the select element for day, month or year
-			changeElement(field, total[i]);
 		}
 	} else {
 		for (var i = 0; i < all_custom_prompt_types.length; i++) {
@@ -881,8 +846,9 @@ var update = function update(delta) {
 	var valid = true
 	// Remove all constraint warning messages, we're about to re-add them
 	var elems = document.getElementsByClassName("constraint-message");
-	for (var i = 0; i < elems.length; i++) {
-		elems[i].outerHTML = ""; // remove the element
+	var len = elems.length
+	for (var i = 0; i < len; i++) {
+		elems[0].outerHTML = ""; // remove the element
 	}
 	// Check validation for each prompt
 	var elems = document.getElementsByClassName("prompt");
@@ -1205,18 +1171,6 @@ var ol = function onLoad() {
 	document.getElementById("next").innerText = _t("Next");
 	document.getElementById("back").innerText = _t("Back");
 	document.getElementById("finalize").innerText = _t("Finalize");
-	if (has_dates) {
-		// won't be localized, so we can set display to i instead of {text: i}
-		for (var i = 1; i <= 31; i++) {
-			choices = choices.concat({choice_list_name: "_day", data_value: i.toString(), display: i.toString(), notranslate: true})
-		}
-		for (var i = 1; i <= 12; i++) {
-			choices = choices.concat({choice_list_name: "_month", data_value: i.toString(), display: i.toString(), notranslate: true})
-		}
-		for (var i = 2020; i >= 1940; i--) {
-			choices = choices.concat({choice_list_name: "_year", data_value: i.toString(), display: i.toString(), notranslate: true})
-		}
-	}
 	choices = choices.concat({"choice_list_name": "_yesno", "data_value": "false", "display": {"text": _t("no")}});
 	choices = choices.concat({"choice_list_name": "_yesno", "data_value": "true", "display": {"text": _t("yes")}});
 	// Get the row id from the url, or makes a new id if it can't get it

@@ -22,6 +22,20 @@ var all_choices = {"exampleForm": [{"choice_list_name": "yesno", "data_value": "
 var cols_that_need_choices = {"exampleForm": {"sections": "sections", "operation": "operations", "see_media": "yesno", "see_more": "yesno", "visited_continents": "continents", "visited_seattle": "yesno", "make_above_required": "yesno", "make_prev_required": "yesno"}, "Tea_types": {"Caffeinated": "yes_no", "Fermented": "yes_no"}, "plot": {"planting": "plant_type"}, "Tea_inventory": {"Type_id": "Tea_type_list", "Bags": "yes_no", "Cold": "yes_no", "Hot": "yes_no", "Loose_Leaf": "yes_no", "House_id": "Tea_house_list"}, "datesTest": {"other_sections": "other_sections", "year": "years", "pests": "pests"}, "selects": {"bird": "birds", "color": "colors", "secondaryColor": "colors", "sex": "sexes"}, "visit": {"plot_id": "select_linked_plot"}, "Tea_houses": {"Hot": "yes_no", "Iced": "yes_no", "WiFi": "yes_no", "Specialty_Type_id": "Tea_type_list"}};
 var appname = "example";
 var custom_prompt_types = {"time": {
+fill: function(elem, min, max, pad) {
+	elem.appendChild(document.createElement("option"))
+	for (var i = min; i <= max; i++) {
+		var str = i.toString()
+		while (str.length < pad) {
+			str = "0" + str;
+		}
+		var child = document.createElement("option");
+		child.value = i;
+		child.innerText = str;
+		elem.appendChild(child);
+	}
+},
+
 screen_data: function(elem) {
 	var hour = elem.getElementsByTagName("select")[0];
 	if (hour.selectedOptions[0] !== undefined) {
@@ -55,6 +69,11 @@ screen_data: function(elem) {
 	}
 },
 changeElement: function(elem, newdata) {
+	var hour = elem.getElementsByTagName("select")[0];
+	if (hour.children.length == 0) this.fill(hour, 0, 23, 0);
+	var minute = elem.getElementsByTagName("select")[1];
+	if (minute.children.length == 0) this.fill(minute, 0, 59, 2);
+
 	var date = odkCommon.toDateFromOdkTime(new Date(), newdata);
 	if (date == null) date = new Date();
 	var hours = date.getHours();
@@ -73,6 +92,20 @@ validate: function(elem) {
 	return true;
 }
 },"datetime": {
+fill: function(elem, min, max, pad) {
+	elem.appendChild(document.createElement("option"))
+	for (var i = min; i <= max; i++) {
+		var str = i.toString()
+		while (str.length < pad) {
+			str = "0" + str;
+		}
+		var child = document.createElement("option");
+		child.value = i;
+		child.innerText = str;
+		elem.appendChild(child);
+	}
+},
+
 screen_data: function(elem) {
 	var get_at_idx = function get_at_idx(elem, idx) {
 		var select = elem.getElementsByTagName("select")[idx];
@@ -93,6 +126,18 @@ screen_data: function(elem) {
 	return odkCommon.toOdkTimeStampFromDate(date);
 },
 changeElement: function(elem, newdata) {
+	var year = elem.getElementsByTagName("select")[0];
+	if (year.children.length == 0) this.fill(year, 1970, 2020, 0);
+	var month = elem.getElementsByTagName("select")[1];
+	if (month.children.length == 0) this.fill(month, 1, 12, 0);
+	var day = elem.getElementsByTagName("select")[2];
+	if (day.children.length == 0) this.fill(day, 1, 31, 0);
+	var hour = elem.getElementsByTagName("select")[3];
+	if (hour.children.length == 0) this.fill(hour, 0, 23, 0);
+	var minute = elem.getElementsByTagName("select")[4];
+	if (minute.children.length == 0) this.fill(minute, 0, 59, 2);
+
+
 	var date = odkCommon.toDateFromOdkTimeStamp(newdata);
 	if (date == null) date = new Date();
 	var year = date.getYear() + 1900;
@@ -119,6 +164,71 @@ changeElement: function(elem, newdata) {
 validate: function(elem) {
 	return true;
 }
+},"date": {
+fill: function(elem, min, max, pad) {
+	elem.appendChild(document.createElement("option"))
+	for (var i = min; i <= max; i++) {
+		var str = i.toString()
+		while (str.length < pad) {
+			str = "0" + str;
+		}
+		var child = document.createElement("option");
+		child.value = i;
+		child.innerText = str;
+		elem.appendChild(child);
+	}
+},
+
+screen_data: function(elem) {
+	var get_at_idx = function get_at_idx(elem, idx) {
+		var select = elem.getElementsByTagName("select")[idx];
+		if (select.selectedOptions[0] != undefined) {
+			if (select.selectedIndex == 0) return null;
+			return Number(select.selectedOptions[0].value);
+		}
+	}
+	var year = get_at_idx(elem, 0);
+	var month = get_at_idx(elem, 1);
+	var day = get_at_idx(elem, 2);
+	var hour = Number(elem.getAttribute("data-hour"));
+	var minute = Number(elem.getAttribute("data-minute"));
+	var seconds = Number(elem.getAttribute("data-sec"));
+	var millis = Number(elem.getAttribute("data-millis"));
+	if (year == null || month == null || day == null) return null;
+	var date = new Date(year, month- 1, day - 1, hour, minute, seconds, millis);
+	return odkCommon.toOdkTimeStampFromDate(date);
+},
+changeElement: function(elem, newdata) {
+	var year = elem.getElementsByTagName("select")[0];
+	if (year.children.length == 0) this.fill(year, 1970, 2020, 0);
+	var month = elem.getElementsByTagName("select")[1];
+	if (month.children.length == 0) this.fill(month, 1, 12, 0);
+	var day = elem.getElementsByTagName("select")[2];
+	if (day.children.length == 0) this.fill(day, 1, 31, 0);
+
+
+	var date = odkCommon.toDateFromOdkTimeStamp(newdata);
+	//date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
+	var year = -1;
+	var month = -1;
+	var day = -1;
+	if (newdata != null) {
+		year = Number(newdata.split("-")[0])
+		month = Number(newdata.split("-")[1])
+		day = Number(newdata.split("-")[2].split("T")[0])
+		elem.setAttribute("data-hour", date.getHours());
+		elem.setAttribute("data-minute", date.getMinutes());
+		elem.setAttribute("data-sec", date.getSeconds());
+		elem.setAttribute("data-millis", date.getMilliseconds());
+	}
+	elem.getElementsByTagName("select")[0].selectedIndex = year - 1970 + 1;
+	elem.getElementsByTagName("select")[1].selectedIndex = month;
+	elem.getElementsByTagName("select")[2].selectedIndex = day;
+	return true;
+},
+validate: function(elem) {
+	return true;
+}
 },};
-var all_custom_prompt_types = ["time", "datetime"];
+var all_custom_prompt_types = ["time", "datetime", "date"];
 var user_translations = {};

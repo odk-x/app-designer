@@ -2,6 +2,11 @@ var green = "#75ab5f"
 var blue = "#3dbcfe"
 var grey = "#c5c8c6"
 var update_canvas = function update_canvas(sections, global_current_section, global_section_stack, global_screen_idx, elem) {
+	setTimeout(function() {
+		update_canvas_real(sections, global_current_section, global_section_stack, global_screen_idx, elem);
+	}, 0);
+}
+var update_canvas_real = function update_canvas_real(sections, global_current_section, global_section_stack, global_screen_idx, elem) {
 	clearCanvas(elem);
 	elem.style.width = "200px";
 	elem.style.height = "66px";
