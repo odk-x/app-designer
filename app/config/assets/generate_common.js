@@ -7,7 +7,7 @@ var preferred_locale = null; // for caching
 // Mocks translation, much faster than actual translation
 window.fake_translate = function fake_translate(thing, optional_table) {
 	// Can't translate undefined
-	if (thing === undefined) return _t("Error translating ") + thing;
+	if (thing === undefined || thing === null) return _t("Error translating ") + thing;
 
 	// This will be hit eventually in a recursive call
 	if (typeof(thing) == "string") return thing;
@@ -585,5 +585,9 @@ var formgen_specific_translations = {
 	"Column ? is required but no value was provided": {"text": {
 		"default": true,
 		"es": "Dato ? es requerido pero no tiene respuesta"
+	}},
+	"Delete row ??": {"text": {
+		"default": true,
+		"es": "¿Eliminar fila ??"
 	}},
 }

@@ -8,6 +8,7 @@ var row_data = {};
 var row_exists = true;
 
 var running_queries = [];
+var empty_queries = [];
 // Helper package for doActions, used in makeIntent
 var survey = "org.opendatakit.survey"
 // The index of the currently displayed screen in `screens`. 
@@ -195,6 +196,11 @@ var do_csv_xhr = function do_csv_xhr(choice_id, filename, callback) {
 					all = all.concat(choice);
 				}
 			}
+			// If there were no results, record that so we don't report that this query is still "loading" when we find no
+			// choices associated with it and it is in running_queries
+			if (s.length <= 1) {
+				empty_queries = empty_queries.concat(which);
+			}
 			try {
 				// the callback is specified in the xlsx and expects the list to be called "context". It also expects it to have a choice_list_name
 				// set to the name of the query, and I add "notranslate" in there so it will be evaluated with fake_translate rather than
@@ -266,6 +272,8 @@ var get_choices = function get_choices(which, not_first_time, filter, raw) {
 	}
 	// If we found choices, return them
 	if (result.length > 1) return result;
+	// If there are no choices because we ran the query and it came back with no results, report that
+	if (empty_queries.indexOf(which) >= 0) return [true];
 	// If the csv xhr or cross table query is still in progress, return false and we'll be asked again later
 	if (running_queries.indexOf(which) >= 0) return [false];
 	if (not_first_time) return [false];
@@ -304,7 +312,7 @@ var do_cross_table_query = function do_cross_table_query(which, query) {
 	var selectionArgs = [];
 	if (query.selectionArgs) {
 		try {
-			selectionArgs = jsonParse(query.selectionArgs);
+			selectionArgs = eval(query.selectionArgs);
 		} catch (e) {
 			alert(_t("Failed to start cross-table query: ") + e);
 			console.log(e);
@@ -332,6 +340,11 @@ var do_cross_table_query = function do_cross_table_query(which, query) {
 				var this_val = d.getData(i, this_col);
 				choices[choices.length - 1][this_col] = this_val;
 			}
+		}
+		// If there were no results, record that so we don't report that this query is still "loading" when we find no
+		// choices associated with it and it is in running_queries
+		if (d.getCount() == 0) {
+			empty_queries = empty_queries.concat(which);
 		}
 		// make update() call get_choices again now that we've added things to the global `choices` list
 		update(0);
@@ -770,6 +783,94 @@ var update = function update(delta) {
 	// SET UP SELECT ONE, SELECT MULTIPLE AVAILABLE CHOICES LOGIC
 	updateAllSelects(false);
 
+	// SET UP LINKED TABLES, if they aren't set up already. Tables reloads the entire page on activity return so we don't
+	// need to worry about changing it, only initial setup
+	var elems = document.getElementsByClassName("linked-table")
+	for (var i = 0; i < elems.length; i++) {
+		var elem = elems[i];
+		// If it's already set up, ignore it
+		if (elem.getAttribute("data-setup_done") == "done") continue;
+		// We set "loading" instead of ignoring it so we only do the cross table query once
+		var first_time = true;
+		if (elem.getAttribute("data-setup_done") == "loading") {
+			first_time = false;
+		}
+		// Get the rows from that table
+		var choices = get_choices(elem.getAttribute("data-values-list"), !first_time, null, false);
+		// If we've fired off a cross table query but don't have any items back yet, just continue
+		// do_cross_table_query will call update() when we have something to display
+		if (choices[0] == false) {
+			elem.setAttribute("data-setup_done", "loading");
+			continue;
+		}
+		elem.setAttribute("data-setup_done", "done");
+		// Find the query in the queries object
+		var query = null;
+		for (var j = 0; j < queries.length; j++) {
+			if (queries[j]["query_name"] == elem.getAttribute("data-values-list")) {
+				query = queries[j];
+				break;
+			}
+		}
+		// extract the id of the linked table, and the form and defaults to use to edit it
+		var subtable = query["linked_table_id"]
+		var subform = ("linked_form_id" in query ? query["linked_form_id"] : subtable);
+		var defaults = ("newRowInitialElementKeyToValueMap" in query ? query["newRowInitialElementKeyToValueMap"] : "{}");
+		// chop off the true from the beginning of the array
+		choices = choices.slice(1);
+		// determine if we're supposed to show or hide the add and delete buttons
+		var show_add = true, show_delete = true, new_instance_label = "+";
+		if (elem.hasAttribute("data-hide_add_instance") && eval(tokens[elem.getAttribute("data-hide_add_instance")])) {
+			show_add = false;
+		}
+		if (elem.hasAttribute("data-hide_delete_button") && eval(tokens[elem.getAttribute("data-hide_delete_button")])) {
+			show_delete = false;
+		}
+		// add the add button if we should do so
+		if (show_add) {
+			if (elem.hasAttribute("data-new_instance_label")) new_instance_label = display(tokens[elem.getAttribute("data-new_instance_label")]);
+			var child = document.createElement("button")
+			child.innerText = _tu(new_instance_label);
+			child.addEventListener("click", function() {
+				addOrEdit("add", subtable, subform, Function("return " + defaults)());
+			});
+			elem.appendChild(child);
+		}
+		for (var j = 0; j < choices.length; j++) {
+			// add the choice
+			var span = document.createElement("div");
+			var id = choices[j][0]
+			var _delete = document.createElement("button");
+			_delete.innerText = _tu("-");
+			var edit = document.createElement("button");
+			edit.innerText = _t("Edit");
+			(function(elem, _delete, edit, id) {
+				_delete.addEventListener("click", function() {
+					if (confirm(_t("Delete row ??", id))) {
+						odkData.deleteRow(subtable, null, id, function(d) {
+							// just re set-up from scratch
+							//elem.innerHTML = ""
+							//elem.setAttribute("data-setup_done", "loading");
+							//update(0);
+							window.location.reload();
+						}, function(e) {
+							alert(_t("Unexpected error deleting row: ") + e);
+						});
+					}
+				})
+				edit.addEventListener("click", function() {
+					addOrEdit("edit", subtable, subform, defaults, id);
+				})
+			})(span, _delete, edit, id)
+			if (show_delete) {
+				span.appendChild(_delete)
+			}
+			span.appendChild(edit)
+			span.appendChild(document.createTextNode(choices[j][1]));
+			elem.appendChild(span)
+		}
+	}
+
 	// DATA UPDATE LOGIC
 	// Scrapes all prompts on the screen, compares the result of screen_data(dbcol) against row_data[dbcol] for that prompt,
 	// and if they differ, and the data is entirely populated, then update row_data to match and set num_changed so we know we
@@ -836,6 +937,35 @@ var update = function update(delta) {
 		}
 		// If we changed something (like region level 1), we might need to cascade those changes to other things with query filters (like admin region)
 		// Otherwise we might end up with admin region having data-populated=loading and data-data_populated totally unset
+	}
+
+
+	// ASSIGNS LOGIC
+	// If an assign hasn't been put in the database yet, eval it and put that in, change the screen data as well,
+	// then remind ourselves that we need to call updateOrInsert later
+	var elems = document.getElementsByClassName("assign");
+	for (var i = 0; i < elems.length; i++) {
+		var elem = elems[i];
+		var col = elem.getAttribute("data-dbcol");
+		// the "data-calculation" attribute holds a key to a string in `tokens` that we can eval to get the result
+		var new_value = null;
+		try {
+			//alert(tokens[elem.getAttribute("data-calculation")])
+			//alert(eval(tokens[elem.getAttribute("data-calculation")]))
+			new_value = eval(tokens[elem.getAttribute("data-calculation")]).toString();
+			row_data[col] = new_value;
+		} catch (e) {
+			if (e != -1) {
+				//noop = e
+			}
+		}
+		// If it's on the screen, let us update it from row_data later
+		var gsp_result = get_screen_prompt(col);
+		if (gsp_result[0]) {
+			//gsp_result[1].setAttribute("data-data_populated", "");
+			changeElement(gsp_result[1], new_value)
+		}
+		num_updated++;
 	}
 
 
@@ -908,33 +1038,6 @@ var update = function update(delta) {
 		document.getElementById("finalize").disabled = true;
 		delta = 0;
 	}
-	// ASSIGNS LOGIC
-	// If an assign hasn't been put in the database yet, eval it and put that in, change the screen data as well,
-	// then remind ourselves that we need to call updateOrInsert later
-	var elems = document.getElementsByClassName("assign");
-	for (var i = 0; i < elems.length; i++) {
-		var elem = elems[i];
-		var col = elem.getAttribute("data-dbcol");
-		// the "data-calculation" attribute holds a key to a string in `tokens` that we can eval to get the result
-		var new_value = null;
-		try {
-			//alert(tokens[elem.getAttribute("data-calculation")])
-			//alert(eval(tokens[elem.getAttribute("data-calculation")]))
-			new_value = eval(tokens[elem.getAttribute("data-calculation")]).toString();
-			row_data[col] = new_value;
-		} catch (e) {
-			if (e != -1) {
-				//noop = e
-			}
-		}
-		// If it's on the screen, let us update it from row_data later
-		var gsp_result = get_screen_prompt(col);
-		if (gsp_result[0]) {
-			//gsp_result[1].setAttribute("data-data_populated", "");
-			changeElement(gsp_result[1], new_value)
-		}
-		num_updated++;
-	}
 
 	// DATABASE UPDATE
 	// If the screen is valid and we changed something in row_data, updateOrInsert()
@@ -945,6 +1048,7 @@ var update = function update(delta) {
 		setCancelButton(!row_exists);
 	}
 
+	// IF STATEMENTS LOGIC
 	// If statements may be run more than once, so let's cache their results in this validates object
 	var validates = {}
 	// For each of the if statements, eval it then set the display style on it if applicable
@@ -1320,5 +1424,18 @@ var checkIfCurrentScreenIsUserBranch = function checkIfCurrentScreenIsUserBranch
 		if (elem.checked) {
 			gotoImmediate(elem.value);
 		}
+	}
+}
+var addOrEdit = function addOrEdit(operation, subtable, subform, defaults, id) {
+	if (operation == "add") {
+		var id = newGuid();
+		odkData.addRow(subtable, defaults, id, function(d) {
+			addOrEdit("edit", subtable, subform, defaults, id);
+		}, function(e) {
+			alert(_t("Unexpected failure") + " " + e);
+		});
+	} else {
+		if (subform == subtable) subform = "index";
+		odkTables.launchHTML(null, "config/assets/formgen/" + subtable + "/" + subform + ".html#" + id)
 	}
 }
