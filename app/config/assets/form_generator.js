@@ -248,8 +248,8 @@ var get_choices = function get_choices(which, not_first_time, filter, raw) {
 			var filter_result = true;
 			if (filter != null) {
 				choice_item = choices[j] // used in the eval
-				var data = _data_wrapper
 				try {
+					var data = _data_wrapper
 					filter_result = eval(tokens[filter])
 				} catch (e) {
 					if (e == -1) filter_result = false;

@@ -35,6 +35,12 @@ fill: function(elem, min, max, pad) {
 		elem.appendChild(child);
 	}
 },
+pad:  function pad(thing) {
+	while (thing.length < 2) {
+		thing = "0" + thing;
+	}
+	return thing;
+},
 
 screen_data: function(elem) {
 	var hour = elem.getElementsByTagName("select")[0];
@@ -57,12 +63,7 @@ screen_data: function(elem) {
 	date.setSeconds(Number(elem.getAttribute("data-sec")));
 	date.setMilliseconds(Number(elem.getAttribute("data-millis")));
 	if (elem.hasAttribute("data-time_format")) {
-		var pad = function pad(thing) {
-			while (thing.length < 2) {
-				thing = "0" + thing;
-			}
-			return thing;
-		}
+		var pad = this.pad;
 		return elem.getAttribute("data-time_format").replace("YYYY", date.getFullYear()).replace("YY", pad(date.getYear() % 100)).replace("DD", pad(d.getDate())).replace("hh", pad(d.getHours())).replace("MM", pad(d.getMinutes()));
 	} else {
 		return odkCommon.toOdkTimeFromDate(date);
@@ -104,6 +105,12 @@ fill: function(elem, min, max, pad) {
 		child.innerText = str;
 		elem.appendChild(child);
 	}
+},
+pad:  function pad(thing) {
+	while (thing.length < 2) {
+		thing = "0" + thing;
+	}
+	return thing;
 },
 
 screen_data: function(elem) {
@@ -178,6 +185,12 @@ fill: function(elem, min, max, pad) {
 		elem.appendChild(child);
 	}
 },
+pad:  function pad(thing) {
+	while (thing.length < 2) {
+		thing = "0" + thing;
+	}
+	return thing;
+},
 
 screen_data: function(elem) {
 	var get_at_idx = function get_at_idx(elem, idx) {
@@ -189,14 +202,20 @@ screen_data: function(elem) {
 	}
 	var year = get_at_idx(elem, 0);
 	var month = get_at_idx(elem, 1);
-	var day = get_at_idx(elem, 2);
+	var day = get_at_idx(elem, 2) + 1;
 	var hour = Number(elem.getAttribute("data-hour"));
 	var minute = Number(elem.getAttribute("data-minute"));
 	var seconds = Number(elem.getAttribute("data-sec"));
 	var millis = Number(elem.getAttribute("data-millis"));
 	if (year == null || month == null || day == null) return null;
 	var date = new Date(year, month- 1, day - 1, hour, minute, seconds, millis);
-	return odkCommon.toOdkTimeStampFromDate(date);
+	if (elem.hasAttribute("data-time_format")) {
+		var pad = this.pad
+		return elem.getAttribute("data-time_format").replace("YYYY", date.getFullYear()).replace("YY", pad(date.getYear() % 100)).replace("DD", pad(d.getDate())).replace("hh", pad(d.getHours())).replace("MM", pad(d.getMinutes()));
+	} else {
+		return odkCommon.toOdkTimeStampFromDate(date);
+	}
+
 },
 changeElement: function(elem, newdata) {
 	var year = elem.getElementsByTagName("select")[0];
@@ -208,7 +227,6 @@ changeElement: function(elem, newdata) {
 
 
 	var date = odkCommon.toDateFromOdkTimeStamp(newdata);
-	//date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
 	var year = -1;
 	var month = -1;
 	var day = -1;

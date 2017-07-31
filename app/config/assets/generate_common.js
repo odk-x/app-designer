@@ -49,7 +49,7 @@ window.display_update_result = function display_update_result(result, this_resul
 	if (!result) result = "";
 	if (this_result !== null && this_result !== undefined && (typeof(this_result) != "string" || this_result.trim().length > 0)) {
 		if (field == "text") {
-			while (this_result.indexOf("{{data.") > 0 && _data_wrapper) {
+			while (typeof(this_result) == "string" && typeof(_data_wrapper) != "undefined" && this_result.indexOf("{{data.") > 0) {
 				var idx = this_result.indexOf("{{data.");
 				var beginning = this_result.substr(0, idx);
 				var rest = this_result.substr(idx + "{{data.".length);
@@ -93,7 +93,7 @@ window.display = function display(thing, table, optional_possible_wrapped, form)
 	}
 	for (var i = 0; i < this_possible_wrapped.length; i++) {
 		if (thing[this_possible_wrapped[i]] !== undefined) {
-			return display(thing[this_possible_wrapped[i]], table);
+			return display(thing[this_possible_wrapped[i]], table, this_possible_wrapped, form);
 		}
 	}
 	// if we get {text: "something"}, don't bother asking odkCommon to do it, just call fake_translate
