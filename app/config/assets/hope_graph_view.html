@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+	<head>
+		<script src='../../system/js/odkData.js'></script>
+		<script>
+			var arm_raw = "SELECT randomization, COUNT(randomization) AS sum FROM femaleClients GROUP BY randomization"
+			var hiv_raw = "SELECT hiv_tested, COUNT(hiv_tested) AS sum FROM femaleClients GROUP BY hiv_tested"
+			var failure = function(e) {
+				alert(e);
+			}
+			var onArmsLoad = function onArmsLoad() {
+				odkData.arbitraryQuery("femaleClients", arm_raw, [], 10000, 0, document.getElementById("arms_iframe").contentWindow.success, failure);
+			}
+			var hivLoad = function() {
+				odkData.arbitraryQuery("femaleClients", hiv_raw, [], 10000, 0, document.getElementById("hiv_iframe").contentWindow.success, failure);
+			}
+			var ol = function ol() {
+				document.getElementById("arms_iframe").src = 'plot_graph.html#pie/femaleClients/["randomization","sum"]/'+arm_raw+'/[]/unused'
+				document.getElementById("arms_iframe").addEventListener("load", onArmsLoad);
+				document.getElementById("hiv_iframe").src = 'plot_graph.html#pie/femaleClients/["hiv_tested","sum"]/'+hiv_raw+'/[]/unused'
+				document.getElementById("hiv_iframe").addEventListener("load", hivLoad);
+			}
+		</script>
+		<style>
+			iframe {
+				width: 500px;
+				min-height: 666px;
+				border: none;
+			}
+			body {
+				background: url('img/Agriculture_in_Malawi_by_Joachim_Huber_CClicense.jpg') no-repeat center/cover fixed;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body onLoad='ol();'>
+		<h2>Intervention Arms</h2>
+		<iframe id='arms_iframe'></iframe>
+		<h2>HIV Status</h2>
+		<iframe id='hiv_iframe'></iframe>
+	</body>
+</html>

@@ -1,0 +1,83 @@
+
+<!doctype html>
+<html>
+	<head>
+		<script type="text/javascript" src="/example/system/js/odkCommon.js"></script>
+		<script type="text/javascript" src="/example/system/js/odkData.js"></script>
+		<script type="text/javascript" src="/example/system/tables/js/odkTables.js"></script>
+		<script type="text/javascript" src="formgen_common.js"></script>
+		<script type="text/javascript" src="generate_common.js"></script>
+		<link href="generate_index.css" rel="stylesheet" />
+		<style>
+		
+	body {
+		background-color: white;
+		font-family: arial;
+	}
+	.button {
+		color: #5c5c5c;
+		width: 90%;
+		margin-left: 5%;
+		box-shadow: none;
+		-webkit-box-shadow: none;
+		background-color: #f1f1f1;
+	}
+	.button:first-child {
+		border-left: 15px solid #003d5c;
+		border-bottom: 1px solid #003d5c;
+	}
+	.button:nth-child(2) {
+		border-left: 15px solid #006699;
+		border-bottom: 1px solid #006699;
+	}
+	.button:nth-child(3) {
+		border-left: 15px solid #66a3c2;
+		border-bottom: 1px solid #66a3c2;
+	}
+	#title {
+		font-weight: bold;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		font-size: 40pt;
+		font-family: arial;
+		border: none;
+		background-color: white;
+		color: #5c5c5c;
+	}
+
+		</style>
+		<script>
+			var metadata = {};
+			var list_views = {};
+			var menu = ["Empty menu!", null, []];
+			// BEGIN CONFIG
+			
+	var send = function() {
+		odkCommon.doAction(null, "org.opendatakit.services.sync.actions.activities.SyncActivity", {"componentPackage": "org.opendatakit.services", "componentActivity": "org.opendatakit.services.sync.actions.activities.SyncActivity"});
+	}
+	var newinstance = function newinstance(table, form) {
+		return function() {
+			var id = newGuid();
+			if (form == table) form = "index";
+			odkTables.launchHTML(null, "config/assets/formgen/"+table+"/" + form + ".html#" + id);
+		}
+	}
+	list_views = {
+		"femaleClients": "config/assets/femaleClients_list.html"
+	}
+	menu = ["Hope Study" + "<br />xlsx not copied over yet, nothing will work", null, [
+		["Screen Female Client", "_js", newinstance("femaleClients", "screenClient")],
+		["Follow Up with Existing Client", "femaleClients", ""],
+		["Send Data", "_js", send]
+	]]
+
+			// END CONFIG
+		</script>
+		<script src="generate_index.js"></script>
+	</head>
+	<body onLoad='ol();'>
+		<div id="title" class="button"></div>
+		<div id="list"></div>
+	</body>
+</html>
+	
