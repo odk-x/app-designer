@@ -24,6 +24,9 @@ var global_section_stack = [];
 // Set to true initially and set to false in onLoad (`ol`) before it calls update()
 var noop = true;
 
+// Used to ensure that we don't call closeWindow until we've saved everything
+var updateOrInsert_running = false;
+
 // some user defined javascript (like assigns, query filters) takes place before row_data has been updated with the data
 // that's actually on the screen, so we should poll screen data first
 var _data_wrapper = function _data_wrapper(i) {
@@ -224,7 +227,7 @@ var do_csv_xhr = function do_csv_xhr(choice_id, filename, callback) {
 			update(0);
 		}
 	};
-	url = odkCommon.localizeUrl(odkCommon.getPreferredLocale(), {"text": filename}, "text", "/" + appname + "/config/tables/" + table_id + "/forms/" + table_id + "/")
+	url = odkCommon.localizeUrl(odkCommon.getPreferredLocale(), {"text": filename}, "text", "/" + appname + "/config/tables/" + table_id + "/forms/" + form_id + "/")
 	xhr.open("GET", url, true);
 	xhr.send();
 }
@@ -258,9 +261,9 @@ var get_choices = function get_choices(which, not_first_time, filter, raw) {
 					var displayed = choices[j].display;
 					// If there's no "notranslate" key, translate it using display, otherwise fake translate it
 					if (choices[j].notranslate == undefined) {
-						displayed = display(choices[j].display, table_id, window.possible_wrapped.concat("title"))
+						displayed = display(choices[j].display, table_id, window.possible_wrapped.concat("title"), form_id)
 					} else {
-						displayed = fake_translate(choices[j].display);
+						displayed = fake_translate(choices[j].display, table_id, form_id);
 					}
 				}
 				// concat on a list will merge them
@@ -529,6 +532,7 @@ var updateOrInsert = function updateOrInsert() {
 	// acknowledges MUST go into the database as integer 1 or 0, don't ask me why
 	// But we can't do that in screen_data/changeElement/row_data because survey stores it in the javascript as
 	// true/false and that's what a bunch of constraints/validations/if statements expect
+	updateOrInsert_running = true;
 	var temp_row_data = row_data;
 	for (var i = 0; i < hack_for_acknowledges.length; i++) {
 		var col = hack_for_acknowledges[i];
@@ -539,6 +543,7 @@ var updateOrInsert = function updateOrInsert() {
 	if (!row_exists) {
 		odkData.addRow(table_id, temp_row_data, row_id, function(d) {
 			row_exists = true;
+			updateOrInsert_running = false;
 		}, function(d) {
 			if (d.indexOf("ActionNotAuthorizedException") >= 0) {
 				alert("ActionNotAuthorizedException")
@@ -553,7 +558,9 @@ var updateOrInsert = function updateOrInsert() {
 			if (!noop) noop = true;
 		});
 	} else {
-		odkData.updateRow(table_id, temp_row_data, row_id, function(){}, function() {
+		odkData.updateRow(table_id, temp_row_data, row_id, function(){
+			updateOrInsert_running = false;
+		}, function() {
 			alert(_t("Unexpected failure to save row"));
 			console.log(arguments);
 		});
@@ -747,7 +754,7 @@ var update = function update(delta) {
 	var elems = document.getElementsByTagName("input");
 	for (var i = 0; i < elems.length; i++) {
 		if (elems[i].getAttribute("data-placeholder") != undefined && elems[i].getAttribute("data-placeholder").length > 0) {
-			elems[i].setAttribute("placeholder", display(tokens[elems[i].getAttribute("data-placeholder")], table_id));
+			elems[i].setAttribute("placeholder", display(tokens[elems[i].getAttribute("data-placeholder")], table_id, window.possible_wrapped, form_id));
 			elems[i].setAttribute("data-placeholder", "");
 		}
 	}
@@ -761,7 +768,7 @@ var update = function update(delta) {
 		var text = tokens[elems[0].innerText];
 		try {
 			// YES elems[0] NOT elems[i]
-			elems[0].outerHTML = display(text, table_id);
+			elems[0].outerHTML = display(text, table_id, window.possible_wrapped, form_id);
 		} catch (e) {
 			console.log(e)
 			elems[0].outerHTML = _t("Error translating ") + JSON.stringify(text);
@@ -828,7 +835,7 @@ var update = function update(delta) {
 		}
 		// add the add button if we should do so
 		if (show_add) {
-			if (elem.hasAttribute("data-new_instance_label")) new_instance_label = display(tokens[elem.getAttribute("data-new_instance_label")]);
+			if (elem.hasAttribute("data-new_instance_label")) new_instance_label = display(tokens[elem.getAttribute("data-new_instance_label")], table_id, window.possible_wrapped, form_id);
 			var child = document.createElement("button")
 			child.innerText = _tu(new_instance_label);
 			child.addEventListener("click", function() {
@@ -1024,7 +1031,7 @@ var update = function update(delta) {
 				var message = document.createElement("div");
 				message.classList.add("constraint-message");
 				// constraint messages can contain html
-				message.innerHTML = display(tokens[elems[i].getAttribute("data-constraint_message")], table_id);
+				message.innerHTML = display(tokens[elems[i].getAttribute("data-constraint_message")], table_id, window.possible_wrapped, form_id);
 				elems[i].parentNode.insertBefore(message, elems[i].nextSibling);
 			}
 		} else {
@@ -1043,6 +1050,7 @@ var update = function update(delta) {
 	// If the screen is valid and we changed something in row_data, updateOrInsert()
 	if (num_updated > 0 && valid) {
 		// async because sometimes it takes upwards of 30ms
+		updateOrInsert_running = true;
 		setTimeout(updateOrInsert, 0);
 	} else {
 		setCancelButton(!row_exists);
@@ -1221,19 +1229,38 @@ var finalize = function finalize() {
 	update(0);
 	finalizeImmediate();
 }
-var finalizeImmediate = function finalizeImmediate() {
+var blockForDatabase = function(fn) {
+	return function() {
+		console.log( fn.name + " called, updateOrInsert_running: " + updateOrInsert_running);
+		var args = Array.prototype.slice.call(arguments, 0);
+		if (updateOrInsert_running) {
+			setTimeout(function() { blockForDatabase(fn).apply(null, args) }, 50);
+			return;
+		}
+		fn.apply(null, args);
+	}
+}
+var already_finalized = false;
+var finalizeImmediate = blockForDatabase(function finalizeImmediate() {
+	if (already_finalized) {
+		console.log("already finalized, ignoring")
+		return;
+	}
+	already_finalized = true;
+	document.getElementById("odk-container").innerHTML = _t("Saving...")
 	// Make sure all required fields were provided
 	for (var i = 0; i < requireds.length; i++) {
 		var column = requireds[i][0];
 		var js = requireds[i][1];
 		if ((data(column) == null || data(column) == undefined || (typeof(data(column)) == "string" && data(column).trim().length == 0)) && eval(tokens[js])) {
-			alert(_t("Column ? is required but no value was provided").replace("?", column))
+			alert(_t("Column ? is required but no value was provided", column)) // can't use displayCol because no metadata -- TODO cache metadata
 			gotoImmediate("_" + column);
 			return;
 		}
 	}
 	odkCommon.setSessionVariable(table_id + ":" + row_id + ":global_screen_idx", 0);
 	// Escape the LIMIT 1
+	document.getElementById("odk-container").innerHTML = _t("Finalizing...")
 	odkData.arbitraryQuery(table_id, "UPDATE " + table_id + " SET _savepoint_type = ? WHERE _id = ?;--", ["COMPLETE", row_id], 1000, 0, function success_callback(d) {
 		console.log("Set _savepoint_type to COMPLETE successfully");
 		page_back();
@@ -1245,8 +1272,9 @@ var finalizeImmediate = function finalizeImmediate() {
 		} else {
 			noop = true
 		}
+		update(0);
 	});
-};
+});
 // Cancels the add and deletes the intermediate row, asks for confirmation if we've already inserted data but if they didn't type anything yet, it doesn't
 var cancel = function cancel() {
 	/*
@@ -1426,7 +1454,7 @@ var checkIfCurrentScreenIsUserBranch = function checkIfCurrentScreenIsUserBranch
 		}
 	}
 }
-var addOrEdit = function addOrEdit(operation, subtable, subform, defaults, id) {
+var addOrEdit = blockForDatabase(function addOrEdit(operation, subtable, subform, defaults, id) {
 	if (operation == "add") {
 		var id = newGuid();
 		odkData.addRow(subtable, defaults, id, function(d) {
@@ -1438,4 +1466,4 @@ var addOrEdit = function addOrEdit(operation, subtable, subform, defaults, id) {
 		if (subform == subtable) subform = "index";
 		odkTables.launchHTML(null, "config/assets/formgen/" + subtable + "/" + subform + ".html#" + id)
 	}
-}
+});
