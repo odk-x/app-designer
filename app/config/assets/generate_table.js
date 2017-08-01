@@ -161,14 +161,16 @@ var ol = function ol() {
 			alert(e);
 		}, 10000, 0);
 	} else {
-		try {
-			odkData.getViewData(function success(d) {
-				handleMapIndex(d);
-			}, function failure(e) {
-				alert(e);
-			}, 10000, 0);
-		} catch (e) {
-			// can only happen in a launchHTML, which means we're not in a map view so it doesn't matter if we can't get the map index
+		if (forMapView) {
+			try {
+				odkData.getViewData(function success(d) {
+					handleMapIndex(d);
+				}, function failure(e) {
+					alert(e);
+				}, 10000, 0);
+			} catch (e) {
+				// can only happen in a launchHTML, which means we're not in a map view so it doesn't matter if we can't get the map index
+			}
 		}
 		olHasTableId();
 	}
@@ -646,6 +648,7 @@ var groupByGo = function groupByGo() {
 	}
 }
 var handleMapIndex = function handleMapIndex(d) {
+	if (!forMapView) return;
 	var idx = d.getMapIndex();
 	if (idx == -1) return;
 	//alert(idx);
