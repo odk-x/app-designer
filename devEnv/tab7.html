@@ -127,6 +127,11 @@
 				iframe.contentWindow.odkData = odkData
 				iframe.contentWindow.location.hash = "#" + table
 				iframe.contentWindow.table_id = table
+				try {
+					iframe.contentWindow.ol();
+				} catch (e) {
+					// this is expected
+				}
 				iframe.contentWindow.display_col = display_col
 				iframe.contentWindow.display_subcol = display_subcol
 				iframe.contentWindow.allowed_group_bys = allowed_group_bys
