@@ -1,26 +1,26 @@
 window.odkCommonDefinitions = {_tokens: {}};
 // used in both display and fake_translate, just stuff that the translatable object might be wrapped in
-var possible_wrapped = ["prompt", "title"];
+//var possible_wrapped = ["prompt", "title"];
+window.possible_wrapped = ["prompt"]
 var preferred_locale = null; // for caching
 
 // Mocks translation, much faster than actual translation
-window.fake_translate = function fake_translate(thing, optional_table) {
+window.fake_translate = function fake_translate(thing, optional_table, optional_form) {
 	// Can't translate undefined
-	if (thing === undefined) return _t("Error translating ") + thing;
+	if (thing === undefined || thing === null) return _t("Error translating ") + thing;
 
 	// This will be hit eventually in a recursive call
-	if (typeof(thing) == "string") {
-		return thing; 
-	}
+	if (typeof(thing) == "string") return thing;
+	if (typeof(thing) == "number") return thing;
 
 	// A list of all the things the text might be wrapped in.
 	// For real translation, we wouldn't do this, but for fake translation, attempt to automatically unwrap things like normal but also unwrap from the device default locale (sometimes "default", sometimes "_")
-	var possible_wrapped_full = possible_wrapped.concat(["default", "_"]);
+	var possible_wrapped_full = window.possible_wrapped.concat(["default", "_", "title"]);
 	for (var i = 0; i < possible_wrapped_full.length; i++) {
 		// if thing is like {"default": inner} then return fake_translate(inner)
 		// but also do that for everything in possible_wrapped_full not just "default"
 		if (thing[possible_wrapped_full[i]] !== undefined) {
-			return fake_translate(thing[possible_wrapped_full[i]], optional_table);
+			return fake_translate(thing[possible_wrapped_full[i]], optional_table, optional_form);
 		}
 	}
 
@@ -31,7 +31,7 @@ window.fake_translate = function fake_translate(thing, optional_table) {
 	var result = "";
 	for (var j = 0; j < odkCommon.i18nFieldNames.length; j++) {
 		if (thing[odkCommon.i18nFieldNames[j]] !== undefined) {
-			result = display_update_result(result, thing[odkCommon.i18nFieldNames[j]], odkCommon.i18nFieldNames[j], "default", optional_table);
+			result = display_update_result(result, thing[odkCommon.i18nFieldNames[j]], odkCommon.i18nFieldNames[j], "default", optional_table, optional_form);
 		}
 	}
 
@@ -45,17 +45,25 @@ window.fake_translate = function fake_translate(thing, optional_table) {
 };
 
 // Helper function for display and fake_translate
-window.display_update_result = function display_update_result(result, this_result, field, selected_locale, table) {
+window.display_update_result = function display_update_result(result, this_result, field, selected_locale, table, form) {
 	if (!result) result = "";
 	if (this_result !== null && this_result !== undefined && (typeof(this_result) != "string" || this_result.trim().length > 0)) {
 		if (field == "text") {
+			while (typeof(this_result) == "string" && typeof(_data_wrapper) != "undefined" && this_result.indexOf("{{data.") > 0) {
+				var idx = this_result.indexOf("{{data.");
+				var beginning = this_result.substr(0, idx);
+				var rest = this_result.substr(idx + "{{data.".length);
+				var col = rest.substr(0, rest.indexOf("}}"))
+				rest = rest.substr(rest.indexOf("}}") + "}}".length);
+				this_result = beginning + _data_wrapper(col) + rest;
+			}
 			result += this_result;
 		} else {
 			var url = "";
-			if (table) {
+			if (table && form) {
 				var thing = {};
 				thing[field] = this_result;
-				url = odkCommon.localizeUrl(selected_locale, thing, field, "/" + appname + "/config/tables/" + table + "/forms/" + table + "/")
+				url = odkCommon.localizeUrl(selected_locale, thing, field, "/" + appname + "/config/tables/" + table + "/forms/" + form + "/")
 			} else {
 				url = this_result;
 			}
@@ -75,22 +83,25 @@ window.display_update_result = function display_update_result(result, this_resul
 
 // This is an unfortunately named function, it should really be called translate, not display
 // It also needs to be optimized. Nothing obvious to do, but it gets called a lot
-window.display = function display(thing, table) {
-  if (typeof(thing) == "string") return thing;
+window.display = function display(thing, table, optional_possible_wrapped, form) {
+	var this_possible_wrapped = window.possible_wrapped;
+	if (optional_possible_wrapped) this_possible_wrapped = optional_possible_wrapped;
+	if (typeof(thing) == "string") return thing;
 	if (typeof(thing) == "undefined") {
 		// A recursive call on an error? What could possibly go wrong!
-	  return _t("Can't translate undefined!");
+		return _t("Can't translate undefined!");
 	}
-	for (var i = 0; i < possible_wrapped.length; i++) {
-		if (thing[possible_wrapped[i]] !== undefined) {
-			return display(thing[possible_wrapped[i]], table);
+	for (var i = 0; i < this_possible_wrapped.length; i++) {
+		if (thing[this_possible_wrapped[i]] !== undefined) {
+			return display(thing[this_possible_wrapped[i]], table, this_possible_wrapped, form);
 		}
 	}
 	// if we get {text: "something"}, don't bother asking odkCommon to do it, just call fake_translate
 	// however if we get {text: {default: "a", hindi: "b"}} we should continue with the real translation instead
 	for (var j = 0; j < odkCommon.i18nFieldNames.length; j++) {
-		if (typeof(thing[odkCommon.i18nFieldNames[j]]) == "string") {
-			return fake_translate(thing, table);
+		var unwrapped = thing[odkCommon.i18nFieldNames[j]]
+		if (typeof(unwrapped) == "string" || typeof(unwrapped) == "number") {
+			return fake_translate(thing, table, form);
 		}
 	}
 
@@ -109,7 +120,7 @@ window.display = function display(thing, table) {
 		}
 		this_result = odkCommon.localizeTokenField(preferred_locale, thing, field);
 		if (this_result === true) return true; // used in __tr for passthrough translations
-		result = display_update_result(result, this_result, field, preferred_locale, table);
+		result = display_update_result(result, this_result, field, preferred_locale, table, form);
 	}
 	return result;
 };
@@ -129,7 +140,15 @@ window.page_go = function page_go(location) {
 	//document.location.href = location;
 	odkTables.launchHTML({}, location);
 };
+// if this is called twice in the same webkit, tables hangs on all webkits and you have to force restart it.
+// Some forms that override the `initial` section call it twice
+var page_back_called = false;
 window.page_back = function page_back() {
+	if (page_back_called) {
+		console.log("Already called close window, ignoring")
+		return;
+	}
+	page_back_called = true;
 	//window.history.back();
 	odkCommon.closeWindow(-1, null);
 };
@@ -154,7 +173,7 @@ window.jsonParse = function jsonParse(text) {
 };
 // Tries to translate the given column name, and if there's no translation, at least it will make it look pretty
 // Even in the default app, no columns have translations, so whatever
-window.displayCol = function constructSimpleDisplayName(name, metadata, table) {
+window.displayCol = function constructSimpleDisplayName(name, metadata, table, optional_form) {
 	// Otherwise remove anything after the dot, if it's a group by column in a list view it may be in the form of table_id.column_id
 	if (name.indexOf(".") > 0) {
 		name = name.split(".", 2)[1]
@@ -166,7 +185,7 @@ window.displayCol = function constructSimpleDisplayName(name, metadata, table) {
 		for (var i = 0; i < kvslen; i++) {
 			var entry = kvs[i];
 			if (entry.partition == "Column" && entry.aspect == name && (entry.key == "displayName" || entry.key == "display_name")) {
-				return display(jsonParse(entry.value), table);
+				return display(jsonParse(entry.value), table, window.possible_wrapped, optional_form);
 			}
 		}
 	}
@@ -263,7 +282,6 @@ window._t = function(s) {
 }
 // Try and translate something from the user specific translations, log a message if we can't
 window._tu = function(s) {
-	console.log(arguments)
 	var result = __tr.apply(null, arguments);
 	if (result[0] == "ok") return result[1];
 	console.log("_tu could not translate " + s)
@@ -295,7 +313,7 @@ window._tc = function(d, column, text) {
 			var cs = all_choices[table];
 			for (var i = 0; i < cs.length; i++) {
 				if (cs[i]["choice_list_name"] == choice_list && cs[i]["data_value"] == text) {
-					return display(cs[i]["display"]);
+					return display(cs[i]["display"], d.getTableId(), window.possible_wrapped.concat("title"));
 				}
 			}
 			// other in a select one with other
@@ -388,9 +406,9 @@ var formgen_specific_translations = {
 		"default": true,
 		"es": "Salvar como no completado"
 	}},
-	"Cancel and delete row": {"text": {
+	"Cancel": {"text": {
 		"default": true,
-		"es": "Cancelar e eliminar fila"
+		"es": "Cancelar"
 	}},
 	"Next": {"text": {
 		"default": true,
@@ -583,5 +601,17 @@ var formgen_specific_translations = {
 	"Column ? is required but no value was provided": {"text": {
 		"default": true,
 		"es": "Dato ? es requerido pero no tiene respuesta"
+	}},
+	"Delete row ??": {"text": {
+		"default": true,
+		"es": "¿Eliminar fila ??"
+	}},
+	"Saving...": {"text": {
+		"default": true,
+		"es": "Guardando..."
+	}},
+	"Finalizing...": {"text": {
+		"default": true,
+		"es": "Finalizando..."
 	}},
 }

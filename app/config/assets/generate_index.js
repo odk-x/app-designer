@@ -84,7 +84,7 @@ var doMenu = function doMenu() {
 	document.getElementById("list").innerHTML = "";
 	var submenu = make_submenu();
 	// Set the title of the page
-	document.getElementById("title").innerText = _tu(submenu[0]);
+	document.getElementById("title").innerHTML = _tu(submenu[0]);
 	// len is the number of buttons to put on the screen
 	var len = submenu[2].length;
 	var adjusted_len = len;
