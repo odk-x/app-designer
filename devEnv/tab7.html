@@ -10,7 +10,7 @@
 		<script src='../app/config/assets/formgen_common.js'></script>
 		<script src='../app/config/assets/generate_common.js'></script>
 		<script>
-			var columns = [];
+			var columns = {};
 			var metadata = null;
 			var fail = function failure() {
 				alert(Array.prototype.slice.call(arguments, 0).join(", "))
@@ -43,21 +43,21 @@
 				}, fail);
 				odkData.arbitraryQuery(table, "SELECT * FROM " + table, [], 0, 0, function(d) {
 					metadata = d.getMetadata();
-					columns = [];
+					columns[table] = []
 					for (var i = 0; i < d.getColumns().length; i++) {
 						if (d.getColumns()[i][0] == "_") {
 							continue;
 						}
-						columns = columns.concat(d.getColumns()[i])
+						columns[table] = columns[table].concat(d.getColumns()[i])
 					}
 					getDisplayCol();
 					document.getElementById("display_col").innerHTML = ""
-					for (var i = 0; i < columns.length; i++) {
+					for (var i = 0; i < columns[table].length; i++) {
 						var option = document.createElement("option")
-						option.value = columns[i];
-						option.innerText = displayCol(columns[i], metadata, table, table);
+						option.value = columns[table][i];
+						option.innerText = displayCol(columns[table][i], metadata, table, table);
 						document.getElementById("display_col").appendChild(option)
-						if (columns[i] == display_col) {
+						if (columns[table][i] == display_col) {
 							document.getElementById("display_col").selectedIndex = i;
 						}
 					}
@@ -176,10 +176,10 @@
 				option.value = "_null";
 				option.innerText = "null";
 				select.appendChild(option)
-				for (var i = 0; i < columns.length; i++) {
+				for (var i = 0; i < columns[table].length; i++) {
 					option = document.createElement("option")
-					option.value = columns[i];
-					option.innerText = displayCol(columns[i], metadata, table, table);
+					option.value = columns[table][i];
+					option.innerText = displayCol(columns[table][i], metadata, table, table);
 					select.appendChild(option)
 				}
 				option = document.createElement("option")
@@ -251,8 +251,8 @@
 			var redrawGroupBys = function redrawGroupBys() {
 				var group_bys = document.getElementById("group_bys");
 				group_bys.innerHTML = ""
-				for (var i = 0; i < columns.length; i++) {
-					var col = columns[i];
+				for (var i = 0; i < columns[table].length; i++) {
+					var col = columns[table][i];
 					var box = document.createElement("input")
 					box.type = "checkbox"
 					box.setAttribute("data-dbcol", col);
@@ -310,6 +310,7 @@
 				}
 			}
 			var allowed_group_bys = null;
+			var global_joins = []
 		</script>
 		<style>
 			#iframe {
