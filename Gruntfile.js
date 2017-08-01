@@ -250,6 +250,8 @@ module.exports = function (grunt) {
                         // Windows expects chrome.
                         grunt.log.writeln('detected Windows environment');
                         return 'chrome';
+                    } else if (platform.search("Linux") >= 0) {
+                        return "xdg-open";
                     } else {
                         // Mac (and maybe others--add as discovered), expects
                         // Google Chrome
