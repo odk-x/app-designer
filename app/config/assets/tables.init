@@ -1,5 +1,2 @@
-table_keys=healthFacility,refrigeratorTypes,refrigerators,m_logs
-healthFacility.filename=config/assets/csv/health_facility.csv
+table_keys=refrigeratorTypes
 refrigeratorTypes.filename=config/assets/csv/refrigerator_types.updated.csv
-refrigerators.filename=config/assets/csv/refrigerators.csv
-m_logs.filename=config/assets/csv/m_logs.csv
