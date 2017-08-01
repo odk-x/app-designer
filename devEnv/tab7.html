@@ -121,6 +121,7 @@
 				getDisplaySubcols();
 				getGroupBys();
 				getJoins();
+				getColsToSelect();
 				var iframe = document.getElementById("iframe")
 				iframe.contentWindow.odkDataIf = odkDataIf
 				iframe.contentWindow.odkData = odkData
@@ -155,6 +156,12 @@
 						"global_join = " + JSON.stringify(global_join) + ";"
 					));
 				}
+				if (global_cols_to_select != "*" && global_cols_to_select != table + ".*") {
+					pre.appendChild(document.createElement("br"))
+					pre.appendChild(document.createTextNode(
+						"global_cols_to_select = " + JSON.stringify(global_cols_to_select) + ";"
+					));
+				}
 			}
 			var global_join = "";
 			var display_subcol = []
@@ -164,12 +171,39 @@
 				for (var i = 0; i < count; i++) {
 					var elem = document.getElementById("subcols-" + i);
 					var text = elem.getElementsByTagName("input")[0].value
-					var col = elem.getElementsByTagName("select")[0].selectedOptions[0].value
+					var opt = elem.getElementsByTagName("select")[0].selectedOptions[0] 
+					var col = opt == null ? "" : opt.value
 					col = col == "_null" ? null : col
 					var nl = elem.getElementsByTagName("select")[1].selectedOptions[0].value.toString().toLowerCase() == "false" ? false : true
 					var triplet = [text, col, nl];
 					display_subcol = display_subcol.concat(0)
 					display_subcol[i] = triplet;
+				}
+			}
+			var redrawDisplaySubcols = function redrawDisplaySubcols() {
+				var children = document.getElementById("subcols").children;
+				var count = children == null ? 0 : children.length;
+				getColsToSelect()
+				for (var i = 0; i < count; i++) {
+					var div = document.getElementById("subcols-" + i);
+					div.getElementsByTagName("input")[0] = display_subcol[i][0];
+					var select = div.getElementsByTagName("select")[0]
+					select.innerHTML = "";
+					var cols = ["_null"].concat(columns[table]);
+					for (var j = 0; j < all_cols_to_select.length; j++) {
+						cols = cols.concat(all_cols_to_select[j][1])
+					}
+					for (var j = 0; j < cols.length; j++) {
+						var col = cols[j];
+						var option = document.createElement("option")
+						option.value = col;
+						option.innerText = displayCol(col, metadata, table, table);
+						select.appendChild(option)
+						if (col == display_subcol[i][1]) {
+							select.selectedIndex = j;
+						}
+					}
+					div.getElementsByTagName("select")[1].selectedIndex = display_subcol[i][2] ? 0 : 1;
 				}
 			}
 			var add = function add() {
@@ -188,16 +222,6 @@
 				select2.addEventListener("change", update)
 				select2.setAttribute("data-subcol", idx);
 				var option = document.createElement("option")
-				option.value = "_null";
-				option.innerText = "null";
-				select.appendChild(option)
-				for (var i = 0; i < columns[table].length; i++) {
-					option = document.createElement("option")
-					option.value = columns[table][i];
-					option.innerText = displayCol(columns[table][i], metadata, table, table);
-					select.appendChild(option)
-				}
-				option = document.createElement("option")
 				option.value = true;
 				option.innerText = "true";
 				select2.appendChild(option)
@@ -215,6 +239,9 @@
 				div.appendChild(select2);
 				div.appendChild(remove);
 				document.getElementById("subcols").appendChild(div)
+				display_subcol = display_subcol.concat(0);
+				display_subcol[display_subcol.length - 1] = ["", "", true]
+				redrawDisplaySubcols();
 			}
 			var goAdvanced = function() {
 				document.getElementById("goAdvanced").outerHTML = ""
@@ -237,21 +264,30 @@
 				document.getElementById("right").appendChild(addjoin)
 				document.getElementById("right").appendChild(joins)
 				redrawJoins();
+				var cols_to_select = document.createElement("div");
+				cols_to_select.id = "cols_to_select"
+				document.getElementById("right").appendChild(cols_to_select);
+				redrawColsToSelect();
 				advanced = true;
 			}
+			var all_cols_to_select = []
 			var newjoin = function newjoin() {
+				var handler = function() {
+					redrawColsToSelect();
+					update();
+				}
 				var joins = document.getElementById("joins")
 				var idx = all_joins.length
 				var wrapper = document.createElement("div");
 				wrapper.id = "join-" + idx;
 				wrapper.innerText = "JOIN "
 				var select1 = document.createElement("select")
-				select1.addEventListener("change", function() { redrawJoin(idx); });
+				select1.addEventListener("change", function() { redrawJoin(idx); handler(); });
 				wrapper.appendChild(select1)
 				wrapper.appendChild(document.createTextNode(" ON " + table))
 				wrapper.appendChild(document.createTextNode("."))
 				var select2 = document.createElement("select")
-				select2.addEventListener("change", update);
+				select2.addEventListener("change", handler);
 				wrapper.appendChild(select2);
 				wrapper.appendChild(document.createTextNode(" = "))
 				var span = document.createElement("span")
@@ -259,7 +295,7 @@
 				wrapper.appendChild(span)
 				wrapper.appendChild(document.createTextNode("."))
 				var select3 = document.createElement("select")
-				select3.addEventListener("change", update);
+				select3.addEventListener("change", handler);
 				wrapper.appendChild(select3);
 				var btn = document.createElement("button")
 				btn.innerText = "-"
@@ -302,8 +338,9 @@
 				getColumns(tbl, function() {
 					var select = thing.getElementsByTagName("select")[2];
 					select.innerHTML = "";
-					for (var i = 0; i < columns[tbl].length; i++) {
-						var col = columns[tbl][i];
+					var cols = ["_id"].concat(columns[tbl])
+					for (var i = 0; i < cols.length; i++) {
+						var col = cols[i];
 						var option = document.createElement("option")
 						option.value = col;
 						option.innerText = displayCol(col, metadata, tbl);
@@ -377,10 +414,15 @@
 				}
 			}
 			var redrawGroupBys = function redrawGroupBys() {
+				getColsToSelect();
 				var group_bys = document.getElementById("group_bys");
 				group_bys.innerHTML = ""
-				for (var i = 0; i < columns[table].length; i++) {
-					var col = columns[table][i];
+				var cols = columns[table]
+				for (var j = 0; j < all_cols_to_select.length; j++) {
+					cols = cols.concat(all_cols_to_select[j][1])
+				}
+				for (var i = 0; i < cols.length; i++) {
+					var col = cols[i];
 					var box = document.createElement("input")
 					box.type = "checkbox"
 					box.setAttribute("data-dbcol", col);
@@ -435,6 +477,70 @@
 					wrapper.appendChild(select)
 					wrapper.appendChild(label)
 					group_bys.appendChild(wrapper)
+				}
+			}
+			var getColsToSelect = function getColsToSelect() {
+				if (!advanced) {
+					global_cols_to_select = table + ".*"
+					all_cols_to_select = [];
+					return;
+				}
+				var elems = document.getElementById("cols_to_select").getElementsByTagName("input")
+				all_cols_to_select = [];
+				for (var i = 0; i < elems.length; i += 2) {
+					if (!elems[i].checked) continue;
+					all_cols_to_select = all_cols_to_select.concat(0);
+					all_cols_to_select[all_cols_to_select.length - 1] = [elems[i].getAttribute("data-dbcol"), elems[i + 1].value]
+				}
+				global_cols_to_select = table + ".*"
+				for (var i = 0; i < all_cols_to_select.length; i++) {
+					global_cols_to_select += ", " + all_cols_to_select[i][0] + " AS " + all_cols_to_select[i][1]
+				}
+			}
+			var global_cols_to_select = "*";
+			var redrawColsToSelect = function redrawColsToSelect() {
+				getColsToSelect()
+				var handler = function handler() {
+					// TODO redraw display col too
+					redrawDisplaySubcols();
+					redrawGroupBys();
+					update();
+				}
+				var div = document.getElementById("cols_to_select")
+				div.innerHtml = ""
+				div.innerText = table + ".*, "
+				getJoins()
+				for (var i = 0; i < all_joins.length; i++) {
+					var tbl = all_joins[i][0];
+					getColumns(tbl, function() {
+						for (var j = 0; j < columns[tbl].length; j++) {
+							var col = columns[tbl][j];
+							var wrapper = document.createElement("div")
+							var box = document.createElement("input")
+							box.addEventListener("change", handler);
+							box.type = "checkbox"
+							box.id = "select-" + tbl + "-" + col;
+							box.setAttribute("data-dbcol", tbl + "." + col)
+							var found = false;
+							var value = ""
+							for (var k = 0; k < all_cols_to_select.length; k++) {
+								if (all_cols_to_select[k] == tbl + "." + col) {
+									found = true;
+									value = all_cols_to_select[k][1];
+									break;
+								}
+							}
+							box.checked = found;
+							wrapper.appendChild(box)
+							wrapper.appendChild(document.createTextNode(tbl + "." + displayCol(col, metadata, tbl, tbl) + " AS "))
+							var input = document.createElement("input")
+							input.addEventListener("change", handler);
+							input.id = "select-" + tbl + "-" + col + "-as";
+							input.value = value;
+							wrapper.appendChild(input);
+							div.appendChild(wrapper);
+						}
+					})
 				}
 			}
 			var allowed_group_bys = null;
