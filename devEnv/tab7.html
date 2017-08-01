@@ -19,8 +19,7 @@
 				for (var i = 0; i < all_tables.length; i++) {
 					var option = document.createElement("option")
 					option.value = all_tables[i];
-					option.innerText = all_tables[i];
-					//option.innerText = display(localized_tables[all_tables[i]], all_tables[i], window.possible_wrapped, all_tables[i]);
+					option.innerText = display(localized_tables[all_tables[i]], all_tables[i], window.possible_wrapped.concat("title"), all_tables[i]);
 					document.getElementById("table").appendChild(option)
 				}
 				document.getElementById("table").selectedIndex = 0;
@@ -113,6 +112,7 @@
 			var update = function update() {
 				getDisplayCol();
 				getDisplaySubcols();
+				getGroupBys();
 				var iframe = document.getElementById("iframe")
 				iframe.contentWindow.odkDataIf = odkDataIf
 				iframe.contentWindow.odkData = odkData
@@ -120,6 +120,7 @@
 				iframe.contentWindow.table_id = table
 				iframe.contentWindow.display_col = display_col
 				iframe.contentWindow.display_subcol = display_subcol
+				iframe.contentWindow.allowed_group_bys = allowed_group_bys
 				iframe.contentWindow.update_total_rows(true);
 				var pre = document.getElementById("exported")
 				pre.innerHTML = ""
@@ -134,6 +135,12 @@
 				pre.appendChild(document.createTextNode(
 					"display_subcol = " + JSON.stringify(display_subcol) + ";"
 				));
+				if (allowed_group_bys != null) {
+					pre.appendChild(document.createElement("br"))
+					pre.appendChild(document.createTextNode(
+						"allowed_group_bys = " + JSON.stringify(allowed_group_bys) + ";"
+					));
+				}
 			}
 			var display_subcol = []
 			var getDisplaySubcols = function getDisplaySubcols() {
@@ -194,6 +201,115 @@
 				div.appendChild(remove);
 				document.getElementById("subcols").appendChild(div)
 			}
+			var goAdvanced = function() {
+				document.getElementById("goAdvanced").outerHTML = ""
+				var allow_group_bys = document.createElement("input")
+				allow_group_bys.type = "checkbox"
+				allow_group_bys.id = "allow_group_bys"
+				allow_group_bys.checked = true;
+				allow_group_bys.addEventListener("change", update)
+				document.getElementById("right").appendChild(allow_group_bys)
+				document.getElementById("right").appendChild(document.createTextNode("Allow group bys"))
+				var group_bys = document.createElement("div")
+				group_bys.id = "group_bys"
+				document.getElementById("right").appendChild(group_bys)
+				redrawGroupBys();
+				advanced = true;
+			}
+			var advanced = false;
+			var getGroupBys = function getGroupBys() {
+				if (!advanced) return;
+				if (!document.getElementById("allow_group_bys").checked) {
+					allowed_group_bys = [];
+					return allow_group_bys;
+				}
+				allowed_group_bys = []
+				var elems = document.getElementsByClassName("group_by")
+				for (var i = 0; i < elems.length; i++) {
+					var elem = elems[i];
+					if (elem.checked) {
+						var col = elem.getAttribute("data-dbcol")
+						var display_input = document.getElementById(col + "-display")
+						if (display_input.tagName == "SELECT") {
+							var value = display_input.selectedOptions[0].value
+							if (value == "custom") {
+								display_input.outerHTML = "<input type='text' id='"+col+"-display' />"
+								document.getElementById(col + "-display").value = displayCol(col, metadata, table, table)
+								document.getElementById(col + "-display").addEventListener("change", update)
+								display_input = true;
+							} else {
+								display_input = value == "true" ? true : false;
+							}
+						} else {
+							display_input = display_input.value;
+						}
+						allowed_group_bys = allowed_group_bys.concat(0);
+						allowed_group_bys[allowed_group_bys.length - 1] = [col, display_input]
+					}
+				}
+			}
+			var redrawGroupBys = function redrawGroupBys() {
+				var group_bys = document.getElementById("group_bys");
+				group_bys.innerHTML = ""
+				for (var i = 0; i < columns.length; i++) {
+					var col = columns[i];
+					var box = document.createElement("input")
+					box.type = "checkbox"
+					box.setAttribute("data-dbcol", col);
+					box.classList.add("group_by")
+					box.id = col;
+					box.name = col;
+					box.addEventListener("change", update)
+					var exists = false;
+					var value = true
+					if (allowed_group_bys == null) {
+						exists = true;
+					} else {
+						for (var j = 0; j < allowed_group_bys.length; j++) {
+							if (allowed_group_bys[j][0] == col) {
+								exists = true;
+								value = allowed_group_bys[j][1];
+								break;
+							}
+						}
+					}
+					if (exists) {
+						box.checked = true;
+					}
+					var select;
+					if (value === true || value === false) {
+						select = document.createElement("select");
+						var option = document.createElement("option")
+						option.value = "true";
+						option.innerText = "Pretty"
+						select.appendChild(option)
+						option = document.createElement("option")
+						option.value = "false";
+						option.innerText = "Raw"
+						select.appendChild(option)
+						option = document.createElement("option")
+						option.value = "custom";
+						option.innerText = "Custom"
+						select.appendChild(option)
+						select.selectedIndex = value == true ? 0 : 1;
+					} else {
+						select = document.createElement("input")
+						select.type = "text"
+						select.value = value;
+					}
+					select.id = col + "-display"
+					select.addEventListener("change", update);
+					var label = document.createElement("label")
+					label.setAttribute("for", col);
+					label.innerText = displayCol(col, metadata, table, table);
+					var wrapper = document.createElement("div")
+					wrapper.appendChild(box)
+					wrapper.appendChild(select)
+					wrapper.appendChild(label)
+					group_bys.appendChild(wrapper)
+				}
+			}
+			var allowed_group_bys = null;
 		</script>
 		<style>
 			#iframe {
@@ -217,11 +333,15 @@
 			#table, #display_col {
 				min-width: 200px;
 			}
+			label {
+				padding-left: 8px;
+			}
 		</style>
 	</head>
 	<body onLoad='ol();'>
 		<iframe id='iframe' onLoad='ifOl();'></iframe>
 		<div id='right'>
+			<button onClick='goAdvanced();' id='goAdvanced'>Go Advanced</button><br />
 			Table: 
 			<select id='table' onChange='newTable();'></select>
 			<br />
