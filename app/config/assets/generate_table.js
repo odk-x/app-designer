@@ -644,6 +644,6 @@ var groupByGo = function groupByGo() {
 var handleMapIndex = function handleMapIndex(d) {
 	var idx = d.getMapIndex();
 	if (idx == -1) return;
-	alert(idx);
+	//alert(idx);
 	clicked(table_id, d.getData(idx, "_id"), d, idx);
 }
