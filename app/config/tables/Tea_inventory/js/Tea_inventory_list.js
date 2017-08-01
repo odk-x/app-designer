@@ -1,19 +1,8 @@
 /**
  * This is the file that will create the list view for the tea inventory table.
  */
-/* global $, odkTables, data */
+/* global $, odkTables, odkData, odkCommon */
 'use strict';
-
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/Tea_inventory_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 
 var teaInvResultSet = {};
 var houseData = {};
@@ -31,10 +20,11 @@ function teaTypesCBSuccess(result) {
             typeData.getData(i, 'Name');
     }
 
-    return (function() {
-        displayGroup(idxStart);
-    }());
-
+	// we've got the type name map
+	// now get the names of all the tea houses
+	
+	odkData.query('Tea_houses', null, null, null, null, null, null, null, null, true, 
+		teaHousesCBSuccess, teaHousesCBFailure);
 }
 
 function teaTypesCBFailure(error) {
@@ -54,6 +44,9 @@ function teaHousesCBSuccess(result) {
             houseData.getData(i, 'Name');
     }
 
+	// and finally, get the inventory list.
+	// we will display the inventory once we get this list
+	odkData.getViewData(cbSuccess, cbFailure);
 }
 
 function teaHousesCBFailure(error) {
@@ -66,12 +59,8 @@ function cbSuccess(result) {
 
     teaInvResultSet = result;
 
-    odkData.query('Tea_houses', null, null, null, null, null, null, null, null, true, 
-        teaHousesCBSuccess, teaHousesCBFailure);
-
-    odkData.query('Tea_types', null, null, null, null, null, null, null, null, true, 
-        teaTypesCBSuccess, teaTypesCBFailure);
-
+	// we know this is the first time - so displayGroup argument idxStart === 0.
+	displayGroup(0);
 }
 
 function cbFailure(error) {
@@ -82,13 +71,13 @@ function cbFailure(error) {
 
 /* Called when page loads to display things (Nothing to edit here) */
 var resumeFn = function(fIdxStart) {
-    odkData.getViewData(cbSuccess, cbFailure);
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
     // The first time through we're going to make a map of typeId to
     // typeName so that we can display the name of each shop's specialty.
     if (idxStart === 0) {
+		// First time through...
 
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
@@ -109,10 +98,27 @@ var resumeFn = function(fIdxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.openDetailView(tableId, rowId, null);
+                odkTables.openDetailView(null, tableId, rowId, null);
             }
         });
-    }
+
+		// Build the reference maps for the names of tea types and tea houses.
+		// begin with the tea types....
+		odkData.query('Tea_types', null, null, null, null, null, null, null, null, true, 
+			teaTypesCBSuccess, teaTypesCBFailure);
+			
+	} else if ( $.isEmptyObject(typeNameMap) ) {
+		console.log('unable to display subsequent list of tea inventory because tea types map is empty');
+	} else if ( $.isEmptyObject(houseNameMap) ) {
+		console.log('unable to display subsequent list of tea inventory because tea houses map is empty');
+	} else {
+		// we have the reference maps, so we can display this new list of inventory.
+		
+		// if we were paginating the odkData results, we would test whether we
+        // exhausted the data in the teaInvResultSet and issue a new query 
+		//  on the "Tea_inventory" table with a new offset (fIdxStart) and limit.
+		displayGroup(fIdxStart);
+	}
 };
 
 
@@ -179,3 +185,5 @@ var displayGroup = function(idxStart) {
     }
 
 };
+
+

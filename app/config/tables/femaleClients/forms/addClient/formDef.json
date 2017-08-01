@@ -5,8 +5,12 @@
         "type": "integer",
         "name": "client_id",
         "display": {
-          "text": "Client ID:",
-          "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+          "prompt": {
+            "text": "Client ID:"
+          },
+          "hint": {
+            "text": "5 Digit ID, cannot include 0. \nex: 12345"
+          }
         },
         "required": true,
         "_row_num": 2
@@ -15,7 +19,9 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "Age:"
+          "prompt": {
+            "text": "Age:"
+          }
         },
         "required": true,
         "_row_num": 3
@@ -25,7 +31,9 @@
         "values_list": "randomization_arms",
         "name": "randomization",
         "display": {
-          "text": "Randomization Arm:"
+          "prompt": {
+            "text": "Randomization Arm:"
+          }
         },
         "required": true,
         "_row_num": 4
@@ -36,7 +44,9 @@
         "choice_list_name": "randomization_arms",
         "data_value": "HOPE",
         "display": {
-          "text": "HOPE Intervention Arm"
+          "title": {
+            "text": "HOPE Intervention Arm"
+          }
         },
         "_row_num": 2
       },
@@ -44,7 +54,9 @@
         "choice_list_name": "randomization_arms",
         "data_value": "Control",
         "display": {
-          "text": "Control Arm"
+          "title": {
+            "text": "Control Arm"
+          }
         },
         "_row_num": 3
       }
@@ -68,7 +80,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Add Client Brief"
+          "title": {
+            "text": "Add Client Brief"
+          }
         },
         "_row_num": 5
       }
@@ -403,16 +417,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -433,7 +445,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Add Client Brief"
+          "title": {
+            "text": "Add Client Brief"
+          }
         },
         "_row_num": 5
       },
@@ -443,7 +457,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -457,7 +473,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Add Client Brief"
+          "title": {
+            "text": "Add Client Brief"
+          }
         },
         "_row_num": 5
       }
@@ -468,7 +486,9 @@
           "choice_list_name": "randomization_arms",
           "data_value": "HOPE",
           "display": {
-            "text": "HOPE Intervention Arm"
+            "title": {
+              "text": "HOPE Intervention Arm"
+            }
           },
           "_row_num": 2
         },
@@ -476,7 +496,9 @@
           "choice_list_name": "randomization_arms",
           "data_value": "Control",
           "display": {
-            "text": "Control Arm"
+            "title": {
+              "text": "Control Arm"
+            }
           },
           "_row_num": 3
         }
@@ -1179,8 +1201,12 @@
             "type": "integer",
             "name": "client_id",
             "display": {
-              "text": "Client ID:",
-              "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+              "prompt": {
+                "text": "Client ID:"
+              },
+              "hint": {
+                "text": "5 Digit ID, cannot include 0. \nex: 12345"
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -1194,7 +1220,9 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "Age:"
+              "prompt": {
+                "text": "Age:"
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -1209,7 +1237,9 @@
             "values_list": "randomization_arms",
             "name": "randomization",
             "display": {
-              "text": "Randomization Arm:"
+              "prompt": {
+                "text": "Randomization Arm:"
+              }
             },
             "required": true,
             "_row_num": 4,
@@ -1312,7 +1342,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Add Client Brief"
+              "title": {
+                "text": "Add Client Brief"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -2454,21 +2486,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -2478,6 +2502,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -2485,6 +2533,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",

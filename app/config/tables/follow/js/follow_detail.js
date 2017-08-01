@@ -1,47 +1,34 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, control, d3, data */
+/* global $, odkData */
 'use strict';
 
-// Handle the case where we are debugging in chrome.
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/follow_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log('Could not load data json for table: plot');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
- 
-function display() {
+var crumbResultSet = {}; 
+
+function updateContent() {
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
-    $('#chimp_id').text(data.get('FOL_B_AnimID'));
-    $('#follow_date').text(data.get('FOL_date'));
-    $('#comm_id').text(data.get('FOL_CL_community_id'));
-    $('#time_begin').text(data.get('FOL_time_begin'));
-    $('#time_end').text(data.get('FOL_time_end'));
-    $('#begin_in_nest').text(data.get('FOL_flag_begin_in_nest'));
-    $('#end_in_nest').text(data.get('FOL_flag_end_in_nest'));
-    $('#follow_duration').text(data.get('FOL_duration'));
-    $('#dist_traveled').text(data.get('FOL_distance_traveled'));
-    $('#am_obs1').text(data.get('FOL_am_observer1'));
-    $('#am_obs2').text(data.get('FOL_am_observer2'));
-    $('#pm_obs1').text(data.get('FOL_pm_observer1'));
-    $('#pm_obs2').text(data.get('FOL_pm_observer2'));
-    $('#study_code1').text(data.get('FOL_study_code1'));
-    $('#study_code2').text(data.get('FOL_study_code2'));
+    $('#chimp_id').text(crumbResultSet.get('FOL_B_AnimID'));
+    $('#follow_date').text(crumbResultSet.get('FOL_date'));
+    $('#comm_id').text(crumbResultSet.get('FOL_CL_community_id'));
+    $('#time_begin').text(crumbResultSet.get('FOL_time_begin'));
+    $('#time_end').text(crumbResultSet.get('FOL_time_end'));
+    $('#begin_in_nest').text(crumbResultSet.get('FOL_flag_begin_in_nest'));
+    $('#end_in_nest').text(crumbResultSet.get('FOL_flag_end_in_nest'));
+    $('#follow_duration').text(crumbResultSet.get('FOL_duration'));
+    $('#dist_traveled').text(crumbResultSet.get('FOL_distance_traveled'));
+    $('#am_obs1').text(crumbResultSet.get('FOL_am_observer1'));
+    $('#am_obs2').text(crumbResultSet.get('FOL_am_observer2'));
+    $('#pm_obs1').text(crumbResultSet.get('FOL_pm_observer1'));
+    $('#pm_obs2').text(crumbResultSet.get('FOL_pm_observer2'));
+    $('#study_code1').text(crumbResultSet.get('FOL_study_code1'));
+    $('#study_code2').text(crumbResultSet.get('FOL_study_code2'));
 
-    /*var addrUriRelative = data.get('address_image_0.uriFragment');
+    /*var addrUriRelative = crumbResultSet.get('address_image_0.uriFragment');
     var addrSrc = '';
     if (addrUriRelative !== null && addrUriRelative !== "") {
-        var addrUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), addrUriRelative);
+        var addrUriAbsolute = odkCommon.getRowFileAsUrl(data.getTableId(), data.getRowId(0), addrUriRelative);
         addrSrc = addrUriAbsolute;
     }
 
@@ -51,10 +38,10 @@ function display() {
     addrThumbnail.attr('id', 'address_image_0');
     $('#homeAddress').append(addrThumbnail);
 
-    var stayUriRelative = data.get('stay_image_0.uriFragment');
+    var stayUriRelative = crumbResultSet.get('stay_image_0.uriFragment');
     var staySrc = '';
     if (stayUriRelative !== null && stayUriRelative !== "") {
-        var stayUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), stayUriRelative);
+        var stayUriAbsolute = odkCommon.getRowFileAsUrl(data.getTableId(), data.getRowId(0), stayUriRelative);
         staySrc = stayUriAbsolute;
     }
 
@@ -65,10 +52,10 @@ function display() {
     $('#lengthOfStay').append(stayThumbnail);
 
 
-    var commentsUriRelative = data.get('comments_image_0.uriFragment');
+    var commentsUriRelative = crumbResultSet.get('comments_image_0.uriFragment');
     var commentsSrc = '';
     if (commentsUriRelative !== null && commentsUriRelative !== "") {
-        var commentsUriAbsolute = control.getRowFileAsUrl(data.getTableId(), data.getRowId(0), commentsUriRelative);
+        var commentsUriAbsolute = odkCommon.getRowFileAsUrl(data.getTableId(), data.getRowId(0), commentsUriRelative);
         commentsSrc = commentsUriAbsolute;
     }
 
@@ -78,4 +65,22 @@ function display() {
     commentsThumbnail.attr('id', 'comments_image_0');
     $('#handComments').append(commentsThumbnail);*/
 }
+
+function cbSuccess(result) {
+
+    crumbResultSet = result;
+	// and update the document with the values for this tea house
+	updateContent();
+}
+
+function cbFailure(error) {
+
+	// a real application would perhaps clear the document fiels if there were an error
+    console.log('follow_detail getViewData CB error : ' + error);
+}
+
+var display = function() {
+	
+    odkData.getViewData(cbSuccess, cbFailure);
+};
 

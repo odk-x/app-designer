@@ -1,4 +1,5 @@
-/* global odkTables, util */
+/* global $, odkData, odkCommon, util */
+/* exported display */
 'use strict';
 
 function cbSuccess(result) {
@@ -19,6 +20,7 @@ function cbSuccess(result) {
 
     // There seems to be an issue with the way window.location is set here
     window.location.href = url;
+	// perhaps?  odkTables.launchHTML(null, url);
 }
 
 function cbFailure(error) {
@@ -40,11 +42,11 @@ function display() {
             researcher) {
 		
         var struct = {};
-        struct['FOL_date'] = date;
-        struct['FOL_B_AnimID'] = focalChimpId;
-        struct['FOL_CL_community_id'] = communityId;
-        struct['FOL_time_begin'] = beginTime;
-        struct['FOL_am_observer1'] = researcher;
+        struct.FOL_date = date;
+        struct.FOL_B_AnimID = focalChimpId;
+        struct.FOL_CL_community_id = communityId;
+        struct.FOL_time_begin = beginTime;
+        struct.FOL_am_observer1 = researcher;
 
         // Now we'll write it into the database.
 

@@ -26,7 +26,9 @@
         "name": "plot_id",
         "values_list": "select_linked_plot",
         "display": {
-          "text": "Which plot are you observing?"
+          "prompt": {
+            "text": "Which plot are you observing?"
+          }
         },
         "required": true,
         "_row_num": 6
@@ -45,7 +47,9 @@
         "type": "datetime",
         "name": "date",
         "display": {
-          "text": "Select the date and time of your visit."
+          "prompt": {
+            "text": "Select the date and time of your visit."
+          }
         },
         "required": true,
         "_row_num": 9
@@ -86,7 +90,9 @@
         "name": "plant_type",
         "values_list": "maize",
         "display": {
-          "text": "What type of maize is grown at this plot?"
+          "prompt": {
+            "text": "What type of maize is grown at this plot?"
+          }
         },
         "_row_num": 15
       },
@@ -94,8 +100,10 @@
         "type": "decimal",
         "name": "plant_height",
         "display": {
-          "text": "What is the height of the crop in cm?",
-          "image": "media/measure.jpg"
+          "prompt": {
+            "text": "What is the height of the crop in cm?",
+            "image": "media/measure.jpg"
+          }
         },
         "required": true,
         "_row_num": 16
@@ -109,8 +117,12 @@
         "type": "acknowledge",
         "name": "ack_ok",
         "display": {
-          "text": "The height you have entered is an outlier.  Are you certain of this measurement?",
-          "hint": "The value you entered is outside of the current recorded range 0 thru {{data.max_height_disp}}"
+          "prompt": {
+            "text": "The height you have entered is an outlier.  Are you certain of this measurement?"
+          },
+          "hint": {
+            "text": "The value you entered is outside of the current recorded range 0 thru {{data.max_height_disp}}"
+          }
         },
         "constraint": "data('ack_ok') || calculates.below_max_height()",
         "_row_num": 18
@@ -141,7 +153,9 @@
         "name": "plant_health",
         "values_list": "plant_health_type",
         "display": {
-          "text": "Select the image that best indicates the health of the plants at this plot."
+          "prompt": {
+            "text": "Select the image that best indicates the health of the plants at this plot."
+          }
         },
         "_row_num": 25
       },
@@ -153,7 +167,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Bad Selected"
+          "prompt": {
+            "text": "Bad Selected"
+          }
         },
         "_row_num": 27
       },
@@ -169,7 +185,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Fair Selected"
+          "prompt": {
+            "text": "Fair Selected"
+          }
         },
         "_row_num": 30
       },
@@ -185,7 +203,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Good Selected"
+          "prompt": {
+            "text": "Good Selected"
+          }
         },
         "_row_num": 33
       },
@@ -201,7 +221,9 @@
         "type": "image",
         "name": "plant_picture",
         "display": {
-          "text": "Take a picture of the plant."
+          "prompt": {
+            "text": "Take a picture of the plant."
+          }
         },
         "_row_num": 36
       },
@@ -214,7 +236,9 @@
         "name": "pests",
         "values_list": "pest_type",
         "display": {
-          "text": "Which pests have you found at this plot?"
+          "prompt": {
+            "text": "Which pests have you found at this plot?"
+          }
         },
         "_row_num": 38
       },
@@ -226,7 +250,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Earworm Selected"
+          "prompt": {
+            "text": "Earworm Selected"
+          }
         },
         "_row_num": 40
       },
@@ -242,7 +268,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Stink Bug Selected"
+          "prompt": {
+            "text": "Stink Bug Selected"
+          }
         },
         "_row_num": 43
       },
@@ -258,7 +286,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Cutworm Selected"
+          "prompt": {
+            "text": "Cutworm Selected"
+          }
         },
         "_row_num": 46
       },
@@ -274,7 +304,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Beetle Selected"
+          "prompt": {
+            "text": "Beetle Selected"
+          }
         },
         "_row_num": 49
       },
@@ -295,7 +327,9 @@
         "name": "soil",
         "values_list": "soil_texture",
         "display": {
-          "text": "What is the texture of the soil?"
+          "prompt": {
+            "text": "What is the texture of the soil?"
+          }
         },
         "_row_num": 54
       },
@@ -322,7 +356,9 @@
         "type": "integer",
         "name": "crop_yield",
         "display": {
-          "text": "What is the current crop yield in kg per hectare?"
+          "prompt": {
+            "text": "What is the current crop yield in kg per hectare?"
+          }
         },
         "_row_num": 58
       },
@@ -335,8 +371,12 @@
         "type": "acknowledge",
         "name": "ack_ok_2",
         "display": {
-          "text": "The yield you have entered is an outlier.  Are you certain of this measurement?",
-          "hint": "The value you entered is outside of the current recorded range 0 thru {{data.max_yield_disp}}"
+          "prompt": {
+            "text": "The yield you have entered is an outlier.  Are you certain of this measurement?"
+          },
+          "hint": {
+            "text": "The value you entered is outside of the current recorded range 0 thru {{data.max_yield_disp}}"
+          }
         },
         "constraint": "data('ack_ok_2') || calculates.below_max_yield()",
         "_row_num": 60
@@ -362,7 +402,9 @@
         "type": "text",
         "name": "observations",
         "display": {
-          "text": "Enter in any other observations"
+          "prompt": {
+            "text": "Enter in any other observations"
+          }
         },
         "_row_num": 65
       }
@@ -372,7 +414,9 @@
         "choice_list_name": "plant_health_type",
         "data_value": "bad",
         "display": {
-          "image": "media/dying_corn_leaves.jpg"
+          "title": {
+            "image": "media/dying_corn_leaves.jpg"
+          }
         },
         "_row_num": 2
       },
@@ -380,7 +424,9 @@
         "choice_list_name": "plant_health_type",
         "data_value": "fair",
         "display": {
-          "image": "media/fair_corn_leaves.jpeg"
+          "title": {
+            "image": "media/fair_corn_leaves.jpeg"
+          }
         },
         "_row_num": 3
       },
@@ -388,7 +434,9 @@
         "choice_list_name": "plant_health_type",
         "data_value": "good",
         "display": {
-          "image": "media/healthy_corn_leaves.jpg"
+          "title": {
+            "image": "media/healthy_corn_leaves.jpg"
+          }
         },
         "_row_num": 4
       },
@@ -396,7 +444,9 @@
         "choice_list_name": "soil_texture",
         "data_value": "fine_sand",
         "display": {
-          "text": "Fine Sand"
+          "title": {
+            "text": "Fine Sand"
+          }
         },
         "_row_num": 6
       },
@@ -404,7 +454,9 @@
         "choice_list_name": "soil_texture",
         "data_value": "sandy_loam",
         "display": {
-          "text": "Sandy Loam"
+          "title": {
+            "text": "Sandy Loam"
+          }
         },
         "_row_num": 7
       },
@@ -412,7 +464,9 @@
         "choice_list_name": "soil_texture",
         "data_value": "loam",
         "display": {
-          "text": "Loam"
+          "title": {
+            "text": "Loam"
+          }
         },
         "_row_num": 8
       },
@@ -420,7 +474,9 @@
         "choice_list_name": "pest_type",
         "data_value": "earworm",
         "display": {
-          "image": "media/earworm.jpg"
+          "title": {
+            "image": "media/earworm.jpg"
+          }
         },
         "_row_num": 10
       },
@@ -428,7 +484,9 @@
         "choice_list_name": "pest_type",
         "data_value": "stink_bug",
         "display": {
-          "image": "media/stink_bug.jpg"
+          "title": {
+            "image": "media/stink_bug.jpg"
+          }
         },
         "_row_num": 11
       },
@@ -436,7 +494,9 @@
         "choice_list_name": "pest_type",
         "data_value": "cutworm",
         "display": {
-          "image": "media/cutworm.jpg"
+          "title": {
+            "image": "media/cutworm.jpg"
+          }
         },
         "_row_num": 12
       },
@@ -444,7 +504,9 @@
         "choice_list_name": "pest_type",
         "data_value": "beetle",
         "display": {
-          "image": "media/corn_flea_beetle.jpg"
+          "title": {
+            "image": "media/corn_flea_beetle.jpg"
+          }
         },
         "_row_num": 13
       },
@@ -452,7 +514,9 @@
         "choice_list_name": "maize",
         "data_value": "white",
         "display": {
-          "text": "White"
+          "title": {
+            "text": "White"
+          }
         },
         "_row_num": 15
       },
@@ -460,7 +524,9 @@
         "choice_list_name": "maize",
         "data_value": "yellow",
         "display": {
-          "text": "Yellow"
+          "title": {
+            "text": "Yellow"
+          }
         },
         "_row_num": 16
       },
@@ -468,7 +534,9 @@
         "choice_list_name": "maize",
         "data_value": "orange",
         "display": {
-          "text": "Orange"
+          "title": {
+            "text": "Orange"
+          }
         },
         "_row_num": 17
       }
@@ -478,9 +546,10 @@
         "query_name": "select_linked_plot",
         "query_type": "linked_table",
         "linked_form_id": "plot",
-        "selection": "_id >= ?",
-        "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'plot_id>='+opendatakit.encodeURIValue(0)",
+        "selection": "1=1",
+        "selectionArgs": "[]",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       {
@@ -491,7 +560,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "plant_height",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
       },
       {
@@ -502,7 +572,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "crop_yield",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
       },
       {
@@ -513,7 +584,8 @@
         "selection": "_id = ?",
         "selectionArgs": "[data('plot_id')]",
         "fieldName": "planting",
-        "auxillaryHash": "'plot_id='+opendatakit.encodeURIDataElement('plot_id')",
+        "newRowInitialElementKeyToValueMap": "{ plot_id : data('plot_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
       }
     ],
@@ -624,7 +696,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Plot Visits"
+          "title": {
+            "text": "Plot Visits"
+          }
         },
         "_row_num": 4
       },
@@ -665,16 +739,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -690,7 +762,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Plot Visits"
+          "title": {
+            "text": "Plot Visits"
+          }
         },
         "_row_num": 4
       },
@@ -710,7 +784,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -724,7 +800,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Plot Visits"
+          "title": {
+            "text": "Plot Visits"
+          }
         },
         "_row_num": 4
       }
@@ -735,7 +813,9 @@
           "choice_list_name": "plant_health_type",
           "data_value": "bad",
           "display": {
-            "image": "media/dying_corn_leaves.jpg"
+            "title": {
+              "image": "media/dying_corn_leaves.jpg"
+            }
           },
           "_row_num": 2
         },
@@ -743,7 +823,9 @@
           "choice_list_name": "plant_health_type",
           "data_value": "fair",
           "display": {
-            "image": "media/fair_corn_leaves.jpeg"
+            "title": {
+              "image": "media/fair_corn_leaves.jpeg"
+            }
           },
           "_row_num": 3
         },
@@ -751,7 +833,9 @@
           "choice_list_name": "plant_health_type",
           "data_value": "good",
           "display": {
-            "image": "media/healthy_corn_leaves.jpg"
+            "title": {
+              "image": "media/healthy_corn_leaves.jpg"
+            }
           },
           "_row_num": 4
         }
@@ -761,7 +845,9 @@
           "choice_list_name": "soil_texture",
           "data_value": "fine_sand",
           "display": {
-            "text": "Fine Sand"
+            "title": {
+              "text": "Fine Sand"
+            }
           },
           "_row_num": 6
         },
@@ -769,7 +855,9 @@
           "choice_list_name": "soil_texture",
           "data_value": "sandy_loam",
           "display": {
-            "text": "Sandy Loam"
+            "title": {
+              "text": "Sandy Loam"
+            }
           },
           "_row_num": 7
         },
@@ -777,7 +865,9 @@
           "choice_list_name": "soil_texture",
           "data_value": "loam",
           "display": {
-            "text": "Loam"
+            "title": {
+              "text": "Loam"
+            }
           },
           "_row_num": 8
         }
@@ -787,7 +877,9 @@
           "choice_list_name": "pest_type",
           "data_value": "earworm",
           "display": {
-            "image": "media/earworm.jpg"
+            "title": {
+              "image": "media/earworm.jpg"
+            }
           },
           "_row_num": 10
         },
@@ -795,7 +887,9 @@
           "choice_list_name": "pest_type",
           "data_value": "stink_bug",
           "display": {
-            "image": "media/stink_bug.jpg"
+            "title": {
+              "image": "media/stink_bug.jpg"
+            }
           },
           "_row_num": 11
         },
@@ -803,7 +897,9 @@
           "choice_list_name": "pest_type",
           "data_value": "cutworm",
           "display": {
-            "image": "media/cutworm.jpg"
+            "title": {
+              "image": "media/cutworm.jpg"
+            }
           },
           "_row_num": 12
         },
@@ -811,7 +907,9 @@
           "choice_list_name": "pest_type",
           "data_value": "beetle",
           "display": {
-            "image": "media/corn_flea_beetle.jpg"
+            "title": {
+              "image": "media/corn_flea_beetle.jpg"
+            }
           },
           "_row_num": 13
         }
@@ -821,7 +919,9 @@
           "choice_list_name": "maize",
           "data_value": "white",
           "display": {
-            "text": "White"
+            "title": {
+              "text": "White"
+            }
           },
           "_row_num": 15
         },
@@ -829,7 +929,9 @@
           "choice_list_name": "maize",
           "data_value": "yellow",
           "display": {
-            "text": "Yellow"
+            "title": {
+              "text": "Yellow"
+            }
           },
           "_row_num": 16
         },
@@ -837,20 +939,26 @@
           "choice_list_name": "maize",
           "data_value": "orange",
           "display": {
-            "text": "Orange"
+            "title": {
+              "text": "Orange"
+            }
           },
           "_row_num": 17
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {
       "select_linked_plot": {
         "query_name": "select_linked_plot",
         "query_type": "linked_table",
         "linked_form_id": "plot",
-        "selection": "_id >= ?",
-        "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'plot_id>='+opendatakit.encodeURIValue(0)",
+        "selection": "1=1",
+        "selectionArgs": "[]",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       "min_max_height": {
@@ -861,7 +969,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "plant_height",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
       },
       "min_max_yield": {
@@ -872,7 +981,8 @@
         "selection": "_savepoint_type = ?",
         "selectionArgs": "['COMPLETE']",
         "fieldName": "crop_yield",
-        "auxillaryHash": "''",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
       },
       "plant_type_query": {
@@ -883,7 +993,8 @@
         "selection": "_id = ?",
         "selectionArgs": "[data('plot_id')]",
         "fieldName": "planting",
-        "auxillaryHash": "'plot_id='+opendatakit.encodeURIDataElement('plot_id')",
+        "newRowInitialElementKeyToValueMap": "{ plot_id : data('plot_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
       }
     },
@@ -1163,7 +1274,9 @@
             "name": "plot_id",
             "values_list": "select_linked_plot",
             "display": {
-              "text": "Which plot are you observing?"
+              "prompt": {
+                "text": "Which plot are you observing?"
+              }
             },
             "required": true,
             "_row_num": 6,
@@ -1177,7 +1290,9 @@
             "type": "datetime",
             "name": "date",
             "display": {
-              "text": "Select the date and time of your visit."
+              "prompt": {
+                "text": "Select the date and time of your visit."
+              }
             },
             "required": true,
             "_row_num": 9,
@@ -1217,7 +1332,9 @@
             "name": "plant_type",
             "values_list": "maize",
             "display": {
-              "text": "What type of maize is grown at this plot?"
+              "prompt": {
+                "text": "What type of maize is grown at this plot?"
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -1230,8 +1347,10 @@
             "type": "decimal",
             "name": "plant_height",
             "display": {
-              "text": "What is the height of the crop in cm?",
-              "image": "media/measure.jpg"
+              "prompt": {
+                "text": "What is the height of the crop in cm?",
+                "image": "media/measure.jpg"
+              }
             },
             "required": true,
             "_row_num": 16,
@@ -1245,8 +1364,12 @@
             "type": "acknowledge",
             "name": "ack_ok",
             "display": {
-              "text": "The height you have entered is an outlier.  Are you certain of this measurement?",
-              "hint": "The value you entered is outside of the current recorded range 0 thru {{data.max_height_disp}}"
+              "prompt": {
+                "text": "The height you have entered is an outlier.  Are you certain of this measurement?"
+              },
+              "hint": {
+                "text": "The value you entered is outside of the current recorded range 0 thru {{data.max_height_disp}}"
+              }
             },
             "constraint": "data('ack_ok') || calculates.below_max_height()",
             "_row_num": 18,
@@ -1261,7 +1384,9 @@
             "name": "plant_health",
             "values_list": "plant_health_type",
             "display": {
-              "text": "Select the image that best indicates the health of the plants at this plot."
+              "prompt": {
+                "text": "Select the image that best indicates the health of the plants at this plot."
+              }
             },
             "_row_num": 25,
             "__rowNum__": 24,
@@ -1273,7 +1398,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Bad Selected"
+              "prompt": {
+                "text": "Bad Selected"
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -1285,7 +1412,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Fair Selected"
+              "prompt": {
+                "text": "Fair Selected"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -1297,7 +1426,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Good Selected"
+              "prompt": {
+                "text": "Good Selected"
+              }
             },
             "_row_num": 33,
             "__rowNum__": 32,
@@ -1310,7 +1441,9 @@
             "type": "image",
             "name": "plant_picture",
             "display": {
-              "text": "Take a picture of the plant."
+              "prompt": {
+                "text": "Take a picture of the plant."
+              }
             },
             "_row_num": 36,
             "__rowNum__": 35,
@@ -1324,7 +1457,9 @@
             "name": "pests",
             "values_list": "pest_type",
             "display": {
-              "text": "Which pests have you found at this plot?"
+              "prompt": {
+                "text": "Which pests have you found at this plot?"
+              }
             },
             "_row_num": 38,
             "__rowNum__": 37,
@@ -1336,7 +1471,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Earworm Selected"
+              "prompt": {
+                "text": "Earworm Selected"
+              }
             },
             "_row_num": 40,
             "__rowNum__": 39,
@@ -1348,7 +1485,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Stink Bug Selected"
+              "prompt": {
+                "text": "Stink Bug Selected"
+              }
             },
             "_row_num": 43,
             "__rowNum__": 42,
@@ -1360,7 +1499,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Cutworm Selected"
+              "prompt": {
+                "text": "Cutworm Selected"
+              }
             },
             "_row_num": 46,
             "__rowNum__": 45,
@@ -1372,7 +1513,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Beetle Selected"
+              "prompt": {
+                "text": "Beetle Selected"
+              }
             },
             "_row_num": 49,
             "__rowNum__": 48,
@@ -1386,7 +1529,9 @@
             "name": "soil",
             "values_list": "soil_texture",
             "display": {
-              "text": "What is the texture of the soil?"
+              "prompt": {
+                "text": "What is the texture of the soil?"
+              }
             },
             "_row_num": 54,
             "__rowNum__": 53,
@@ -1413,7 +1558,9 @@
             "type": "integer",
             "name": "crop_yield",
             "display": {
-              "text": "What is the current crop yield in kg per hectare?"
+              "prompt": {
+                "text": "What is the current crop yield in kg per hectare?"
+              }
             },
             "_row_num": 58,
             "__rowNum__": 57,
@@ -1426,8 +1573,12 @@
             "type": "acknowledge",
             "name": "ack_ok_2",
             "display": {
-              "text": "The yield you have entered is an outlier.  Are you certain of this measurement?",
-              "hint": "The value you entered is outside of the current recorded range 0 thru {{data.max_yield_disp}}"
+              "prompt": {
+                "text": "The yield you have entered is an outlier.  Are you certain of this measurement?"
+              },
+              "hint": {
+                "text": "The value you entered is outside of the current recorded range 0 thru {{data.max_yield_disp}}"
+              }
             },
             "constraint": "data('ack_ok_2') || calculates.below_max_yield()",
             "_row_num": 60,
@@ -1441,7 +1592,9 @@
             "type": "text",
             "name": "observations",
             "display": {
-              "text": "Enter in any other observations"
+              "prompt": {
+                "text": "Enter in any other observations"
+              }
             },
             "_row_num": 65,
             "__rowNum__": 64,
@@ -1818,7 +1971,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Plot Visits"
+              "title": {
+                "text": "Plot Visits"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -2340,21 +2495,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -2364,6 +2511,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -2371,6 +2542,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -2403,28 +2582,28 @@
         "_aspect": "pests",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"pest_type\",\"data_value\":\"earworm\",\"display\":{\"image\":\"media/earworm.jpg\"},\"_row_num\":10},{\"choice_list_name\":\"pest_type\",\"data_value\":\"stink_bug\",\"display\":{\"image\":\"media/stink_bug.jpg\"},\"_row_num\":11},{\"choice_list_name\":\"pest_type\",\"data_value\":\"cutworm\",\"display\":{\"image\":\"media/cutworm.jpg\"},\"_row_num\":12},{\"choice_list_name\":\"pest_type\",\"data_value\":\"beetle\",\"display\":{\"image\":\"media/corn_flea_beetle.jpg\"},\"_row_num\":13}]"
+        "_value": "[{\"choice_list_name\":\"pest_type\",\"data_value\":\"earworm\",\"display\":{\"title\":{\"image\":\"media/earworm.jpg\"}},\"_row_num\":10},{\"choice_list_name\":\"pest_type\",\"data_value\":\"stink_bug\",\"display\":{\"title\":{\"image\":\"media/stink_bug.jpg\"}},\"_row_num\":11},{\"choice_list_name\":\"pest_type\",\"data_value\":\"cutworm\",\"display\":{\"title\":{\"image\":\"media/cutworm.jpg\"}},\"_row_num\":12},{\"choice_list_name\":\"pest_type\",\"data_value\":\"beetle\",\"display\":{\"title\":{\"image\":\"media/corn_flea_beetle.jpg\"}},\"_row_num\":13}]"
       },
       {
         "_partition": "Column",
         "_aspect": "plant_health",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"bad\",\"display\":{\"image\":\"media/dying_corn_leaves.jpg\"},\"_row_num\":2},{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"fair\",\"display\":{\"image\":\"media/fair_corn_leaves.jpeg\"},\"_row_num\":3},{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"good\",\"display\":{\"image\":\"media/healthy_corn_leaves.jpg\"},\"_row_num\":4}]"
+        "_value": "[{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"bad\",\"display\":{\"title\":{\"image\":\"media/dying_corn_leaves.jpg\"}},\"_row_num\":2},{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"fair\",\"display\":{\"title\":{\"image\":\"media/fair_corn_leaves.jpeg\"}},\"_row_num\":3},{\"choice_list_name\":\"plant_health_type\",\"data_value\":\"good\",\"display\":{\"title\":{\"image\":\"media/healthy_corn_leaves.jpg\"}},\"_row_num\":4}]"
       },
       {
         "_partition": "Column",
         "_aspect": "plant_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"maize\",\"data_value\":\"white\",\"display\":{\"text\":\"White\"},\"_row_num\":15},{\"choice_list_name\":\"maize\",\"data_value\":\"yellow\",\"display\":{\"text\":\"Yellow\"},\"_row_num\":16},{\"choice_list_name\":\"maize\",\"data_value\":\"orange\",\"display\":{\"text\":\"Orange\"},\"_row_num\":17}]"
+        "_value": "[{\"choice_list_name\":\"maize\",\"data_value\":\"white\",\"display\":{\"title\":{\"text\":\"White\"}},\"_row_num\":15},{\"choice_list_name\":\"maize\",\"data_value\":\"yellow\",\"display\":{\"title\":{\"text\":\"Yellow\"}},\"_row_num\":16},{\"choice_list_name\":\"maize\",\"data_value\":\"orange\",\"display\":{\"title\":{\"text\":\"Orange\"}},\"_row_num\":17}]"
       },
       {
         "_partition": "Column",
         "_aspect": "soil",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"soil_texture\",\"data_value\":\"fine_sand\",\"display\":{\"text\":\"Fine Sand\"},\"_row_num\":6},{\"choice_list_name\":\"soil_texture\",\"data_value\":\"sandy_loam\",\"display\":{\"text\":\"Sandy Loam\"},\"_row_num\":7},{\"choice_list_name\":\"soil_texture\",\"data_value\":\"loam\",\"display\":{\"text\":\"Loam\"},\"_row_num\":8}]"
+        "_value": "[{\"choice_list_name\":\"soil_texture\",\"data_value\":\"fine_sand\",\"display\":{\"title\":{\"text\":\"Fine Sand\"}},\"_row_num\":6},{\"choice_list_name\":\"soil_texture\",\"data_value\":\"sandy_loam\",\"display\":{\"title\":{\"text\":\"Sandy Loam\"}},\"_row_num\":7},{\"choice_list_name\":\"soil_texture\",\"data_value\":\"loam\",\"display\":{\"title\":{\"text\":\"Loam\"}},\"_row_num\":8}]"
       },
       {
         "_partition": "FormType",
@@ -2452,7 +2631,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Plot Visits\""
+        "_value": "{\"text\":\"Plot Visits\"}"
       },
       {
         "_partition": "Table",

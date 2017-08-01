@@ -5,7 +5,9 @@
         "type": "text",
         "name": "interviewerw_init",
         "display": {
-          "text": "Enter Interviewer Initials"
+          "prompt": {
+            "text": "Enter Interviewer Initials"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "integer",
         "name": "interviewer_id",
         "display": {
-          "text": "Enter Interviewer ID Number"
+          "prompt": {
+            "text": "Enter Interviewer ID Number"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "date",
         "name": "date",
         "display": {
-          "text": "Date of Interview"
+          "prompt": {
+            "text": "Date of Interview"
+          }
         },
         "_row_num": 4
       },
@@ -29,8 +35,12 @@
         "type": "integer",
         "name": "client_id",
         "display": {
-          "text": "Enter female partner's Client ID.",
-          "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+          "prompt": {
+            "text": "Enter female partner's Client ID."
+          },
+          "hint": {
+            "text": "5 Digit ID, cannot include 0. \nex: 12345"
+          }
         },
         "required": "true",
         "_row_num": 5
@@ -39,7 +49,9 @@
         "type": "note",
         "name": "study_description",
         "display": {
-          "text": "Interviewer script: The antenatal clinic is participating in a study on home-based partner testing and counseling, in which couples will receive a home visit. In order to know whether you are eligible to participate in the study, I would like to ask you some questions. If you are eligible, I will tell you more about the study so you can decide whether or not you want to participate. If you agree, you will be giving verbal consent for us to ask you these questions and record your answers without recording your name."
+          "prompt": {
+            "text": "Interviewer script: The antenatal clinic is participating in a study on home-based partner testing and counseling, in which couples will receive a home visit. In order to know whether you are eligible to participate in the study, I would like to ask you some questions. If you are eligible, I will tell you more about the study so you can decide whether or not you want to participate. If you agree, you will be giving verbal consent for us to ask you these questions and record your answers without recording your name."
+          }
         },
         "_row_num": 6
       },
@@ -48,7 +60,9 @@
         "values_list": "yes_no",
         "name": "agree_screening",
         "display": {
-          "text": "Client agreed to be screened for eligibility?"
+          "prompt": {
+            "text": "Client agreed to be screened for eligibility?"
+          }
         },
         "required": "true",
         "_row_num": 7
@@ -57,7 +71,9 @@
         "type": "note",
         "name": "refused_screening",
         "display": {
-          "text": "Thank you for considering being screened for the study. This will in no way affect the care that you, your children, or your partner will receive at the antenatal clinic."
+          "prompt": {
+            "text": "Thank you for considering being screened for the study. This will in no way affect the care that you, your children, or your partner will receive at the antenatal clinic."
+          }
         },
         "_row_num": 8
       },
@@ -65,8 +81,12 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "How old were you on your last birthday?",
-          "hint": "If younger than 18 years old, client is ineligible to be in the study. Screening will not continue."
+          "prompt": {
+            "text": "How old were you on your last birthday?"
+          },
+          "hint": {
+            "text": "If younger than 18 years old, client is ineligible to be in the study. Screening will not continue."
+          }
         },
         "required": "true",
         "_row_num": 9
@@ -81,7 +101,9 @@
         "values_list": "ethnic_groups",
         "name": "ethnic_group",
         "display": {
-          "text": "What is your ethnic group background? Choose one:"
+          "prompt": {
+            "text": "What is your ethnic group background? Choose one:"
+          }
         },
         "_row_num": 11
       },
@@ -89,7 +111,9 @@
         "type": "text",
         "name": "ethnic_group_other",
         "display": {
-          "text": "Specify other ethnic group background."
+          "prompt": {
+            "text": "Specify other ethnic group background."
+          }
         },
         "_row_num": 12
       },
@@ -98,7 +122,9 @@
         "values_list": "education_level_options",
         "name": "education_level",
         "display": {
-          "text": "What is the highest level of education you attended? Choose one:"
+          "prompt": {
+            "text": "What is the highest level of education you attended? Choose one:"
+          }
         },
         "_row_num": 13
       },
@@ -107,7 +133,9 @@
         "values_list": "religion",
         "name": "religion",
         "display": {
-          "text": "What is your religious affiliation?"
+          "prompt": {
+            "text": "What is your religious affiliation?"
+          }
         },
         "_row_num": 14
       },
@@ -115,7 +143,9 @@
         "type": "text",
         "name": "religion_other",
         "display": {
-          "text": "Specify other religious affiliation."
+          "prompt": {
+            "text": "Specify other religious affiliation."
+          }
         },
         "_row_num": 15
       },
@@ -128,7 +158,9 @@
         "values_list": "employment",
         "name": "employment",
         "display": {
-          "text": "How would you characterize your employment or occupation? Choose all that apply:"
+          "prompt": {
+            "text": "How would you characterize your employment or occupation? Choose all that apply:"
+          }
         },
         "_row_num": 17
       },
@@ -136,7 +168,9 @@
         "type": "text",
         "name": "employment_other",
         "display": {
-          "text": "Specify other employment."
+          "prompt": {
+            "text": "Specify other employment."
+          }
         },
         "_row_num": 18
       },
@@ -145,9 +179,13 @@
         "values_list": "yes_no",
         "name": "curr_relationship",
         "display": {
-          "text": "Are you currently in a relationship with the woman who enrolled in the study?"
+          "prompt": {
+            "text": "Are you currently in a relationship with the woman who enrolled in the study?"
+          },
+          "constraint_message": {
+            "text": "Client is ineligible if not currently in a relationship with the woman who enrolled in the study, but continue screening"
+          }
         },
-        "constraint_message": "Client is ineligible if not currently in a relationship with the woman who enrolled in the study, but continue screening",
         "required": "true",
         "_row_num": 19
       },
@@ -155,7 +193,9 @@
         "type": "integer",
         "name": "living_children",
         "display": {
-          "text": "How many living children do you have currently?"
+          "prompt": {
+            "text": "How many living children do you have currently?"
+          }
         },
         "_row_num": 20
       },
@@ -163,7 +203,9 @@
         "type": "integer",
         "name": "living_children_enrolled_female",
         "display": {
-          "text": "How many living children do you have with the woman who enrolled in the study?"
+          "prompt": {
+            "text": "How many living children do you have with the woman who enrolled in the study?"
+          }
         },
         "_row_num": 21
       },
@@ -172,7 +214,9 @@
         "values_list": "yes_no_nr",
         "name": "hiv_tested",
         "display": {
-          "text": "Have you been tested for HIV before?"
+          "prompt": {
+            "text": "Have you been tested for HIV before?"
+          }
         },
         "_row_num": 22
       },
@@ -181,7 +225,9 @@
         "values_list": "hiv_test_results",
         "name": "test_result",
         "display": {
-          "text": "What was the result of your last HIV test?"
+          "prompt": {
+            "text": "What was the result of your last HIV test?"
+          }
         },
         "_row_num": 23
       },
@@ -189,8 +235,12 @@
         "type": "note",
         "name": "ineligible_list",
         "display": {
-          "text": "Client is INELIGIBLE for the following reasons:",
-          "hint": "If client is eligible for study, review previous questions and responses."
+          "prompt": {
+            "text": "Client is INELIGIBLE for the following reasons:"
+          },
+          "hint": {
+            "text": "If client is eligible for study, review previous questions and responses."
+          }
         },
         "_row_num": 24
       },
@@ -198,7 +248,9 @@
         "type": "note",
         "name": "list_curr_rel",
         "display": {
-          "text": "- ${_ineligible_curr_relationship}"
+          "prompt": {
+            "text": "- ${_ineligible_curr_relationship}"
+          }
         },
         "_row_num": 25
       },
@@ -207,7 +259,9 @@
         "values_list": "acknowledge",
         "name": "ineligible_statement",
         "display": {
-          "text": "Say: Thank you for your time in answering these questions. Based on some of the answers you gave, you are ineligible to be a part of the study. This in no way affects the care you will receive here at the antenatal clinic. Can I answer any questions you may have?"
+          "prompt": {
+            "text": "Say: Thank you for your time in answering these questions. Based on some of the answers you gave, you are ineligible to be a part of the study. This in no way affects the care you will receive here at the antenatal clinic. Can I answer any questions you may have?"
+          }
         },
         "_row_num": 26
       },
@@ -215,8 +269,12 @@
         "type": "note",
         "name": "client_eligible",
         "display": {
-          "text": "Client is ELIGIBLE",
-          "hint": "If client is NOT eligible for study, review previous questions and responses."
+          "prompt": {
+            "text": "Client is ELIGIBLE"
+          },
+          "hint": {
+            "text": "If client is NOT eligible for study, review previous questions and responses."
+          }
         },
         "_row_num": 27
       },
@@ -225,8 +283,12 @@
         "values_list": "study_participation",
         "name": "client_consent",
         "display": {
-          "text": "Say: Thank you for your time in answering these questions. Based on the answers you gave, you are eligible to be a part of the study. Would you like to participate in the study?",
-          "hint": "Read consent form with participant and go through written consent process."
+          "prompt": {
+            "text": "Say: Thank you for your time in answering these questions. Based on the answers you gave, you are eligible to be a part of the study. Would you like to participate in the study?"
+          },
+          "hint": {
+            "text": "Read consent form with participant and go through written consent process."
+          }
         },
         "_row_num": 28
       },
@@ -235,7 +297,9 @@
         "values_list": "no_participation_reasons",
         "name": "refusal_reasons",
         "display": {
-          "text": "I understand you do not want to participate in this study. Could you let me know why you would not like to participate? Check all that apply:"
+          "prompt": {
+            "text": "I understand you do not want to participate in this study. Could you let me know why you would not like to participate? Check all that apply:"
+          }
         },
         "_row_num": 29
       },
@@ -243,7 +307,9 @@
         "type": "text",
         "name": "refusal_reasons_other",
         "display": {
-          "text": "Specify other reason"
+          "prompt": {
+            "text": "Specify other reason"
+          }
         },
         "_row_num": 30
       },
@@ -251,7 +317,9 @@
         "type": "note",
         "name": "refusal_statement",
         "display": {
-          "text": "Say: Thank you for letting me know why you do not want to participate. It is important for us to know why women may feel this way. This will in no way affect the care that you, your children, or your partner will receive at the antenatal clinic."
+          "prompt": {
+            "text": "Say: Thank you for letting me know why you do not want to participate. It is important for us to know why women may feel this way. This will in no way affect the care that you, your children, or your partner will receive at the antenatal clinic."
+          }
         },
         "_row_num": 31
       },
@@ -259,7 +327,9 @@
         "type": "note",
         "name": "survey_complete",
         "display": {
-          "text": "The screening is now complete, please go to the next page to finalize your responses."
+          "prompt": {
+            "text": "The screening is now complete, please go to the next page to finalize your responses."
+          }
         },
         "_row_num": 32
       },
@@ -267,7 +337,9 @@
         "type": "text",
         "name": "interviewerw_init",
         "display": {
-          "text": "Enter Interviewer Initials"
+          "prompt": {
+            "text": "Enter Interviewer Initials"
+          }
         },
         "_row_num": 33
       },
@@ -275,7 +347,9 @@
         "type": "integer",
         "name": "interviewer_id",
         "display": {
-          "text": "Enter Interviewer ID Number"
+          "prompt": {
+            "text": "Enter Interviewer ID Number"
+          }
         },
         "_row_num": 34
       },
@@ -283,7 +357,9 @@
         "type": "date",
         "name": "date",
         "display": {
-          "text": "Date of Interview"
+          "prompt": {
+            "text": "Date of Interview"
+          }
         },
         "_row_num": 35
       },
@@ -291,8 +367,12 @@
         "type": "integer",
         "name": "client_id",
         "display": {
-          "text": "Enter female partner's Client ID.",
-          "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+          "prompt": {
+            "text": "Enter female partner's Client ID."
+          },
+          "hint": {
+            "text": "5 Digit ID, cannot include 0. \nex: 12345"
+          }
         },
         "required": "true",
         "_row_num": 36
@@ -302,8 +382,12 @@
         "values_list": "prev_hiv_status",
         "name": "hiv_status",
         "display": {
-          "text": "What is the client’s HIV status from previous study HIV testing?",
-          "hint": "Refer to patient information"
+          "prompt": {
+            "text": "What is the client’s HIV status from previous study HIV testing?"
+          },
+          "hint": {
+            "text": "Refer to patient information"
+          }
         },
         "_row_num": 37
       },
@@ -312,7 +396,9 @@
         "values_list": "rapid",
         "name": "pretest",
         "display": {
-          "text": "Please do pre-test counseling and draw blood from client for rapid test."
+          "prompt": {
+            "text": "Please do pre-test counseling and draw blood from client for rapid test."
+          }
         },
         "_row_num": 38
       },
@@ -320,7 +406,9 @@
         "type": "note",
         "name": "script1",
         "display": {
-          "text": "Script 1: I will now ask about your current relationship status."
+          "prompt": {
+            "text": "Script 1: I will now ask about your current relationship status."
+          }
         },
         "_row_num": 39
       },
@@ -329,7 +417,9 @@
         "values_list": "yes_no",
         "name": "still_relationship",
         "display": {
-          "text": "Are you still in a relationship with the woman who enrolled in this study during pregnancy?"
+          "prompt": {
+            "text": "Are you still in a relationship with the woman who enrolled in this study during pregnancy?"
+          }
         },
         "_row_num": 40
       },
@@ -337,7 +427,9 @@
         "type": "note",
         "name": "script2",
         "display": {
-          "text": "Script 2 : Now I will ask you questions about the number of children you would like to have."
+          "prompt": {
+            "text": "Script 2 : Now I will ask you questions about the number of children you would like to have."
+          }
         },
         "_row_num": 41
       },
@@ -346,7 +438,9 @@
         "values_list": "wanted_pregnancy_time",
         "name": "preg_want_children",
         "display": {
-          "text": "At the time your wife/partner became pregnant, did you want her to become pregnant, did you want her to wait until later, or did you not want any (more) children at all?"
+          "prompt": {
+            "text": "At the time your wife/partner became pregnant, did you want her to become pregnant, did you want her to wait until later, or did you not want any (more) children at all?"
+          }
         },
         "_row_num": 42
       },
@@ -355,7 +449,9 @@
         "values_list": "want_more_children",
         "name": "more_children",
         "display": {
-          "text": "Would you like to have more children?"
+          "prompt": {
+            "text": "Would you like to have more children?"
+          }
         },
         "_row_num": 43
       },
@@ -364,7 +460,9 @@
         "values_list": "partner_wants_children",
         "name": "partner_want_children",
         "display": {
-          "text": "Do you think that your wife/partner wants the same number of children that you want, or does she want more or fewer than you want?"
+          "prompt": {
+            "text": "Do you think that your wife/partner wants the same number of children that you want, or does she want more or fewer than you want?"
+          }
         },
         "_row_num": 44
       },
@@ -373,8 +471,12 @@
         "values_list": "influences_having_children",
         "name": "influences",
         "display": {
-          "text": "Who has the most influence on decisions about the timing and number of children you will have?",
-          "hint": "Review options with client and choose one."
+          "prompt": {
+            "text": "Who has the most influence on decisions about the timing and number of children you will have?"
+          },
+          "hint": {
+            "text": "Review options with client and choose one."
+          }
         },
         "_row_num": 45
       },
@@ -382,7 +484,9 @@
         "type": "text",
         "name": "influences_other",
         "display": {
-          "text": "Specify other influence."
+          "prompt": {
+            "text": "Specify other influence."
+          }
         },
         "_row_num": 46
       },
@@ -390,7 +494,9 @@
         "type": "note",
         "name": "script3",
         "display": {
-          "text": "Script 3: Now I would like to talk about your HIV test results."
+          "prompt": {
+            "text": "Script 3: Now I would like to talk about your HIV test results."
+          }
         },
         "_row_num": 47
       },
@@ -399,7 +505,9 @@
         "values_list": "hiv_test_results",
         "name": "test_result",
         "display": {
-          "text": "What was the result of your most recent HIV test?"
+          "prompt": {
+            "text": "What was the result of your most recent HIV test?"
+          }
         },
         "_row_num": 48
       },
@@ -408,7 +516,9 @@
         "values_list": "yes_no_ns",
         "name": "ccc",
         "display": {
-          "text": "Have you ever enrolled or registered into a HIV comprehensive care clinic (CCC)?"
+          "prompt": {
+            "text": "Have you ever enrolled or registered into a HIV comprehensive care clinic (CCC)?"
+          }
         },
         "_row_num": 49
       },
@@ -417,7 +527,9 @@
         "values_list": "yes_no_nr",
         "name": "prescr_tmp",
         "display": {
-          "text": "Have you been prescribed TMP-SMX (Cotrimoxazole)?"
+          "prompt": {
+            "text": "Have you been prescribed TMP-SMX (Cotrimoxazole)?"
+          }
         },
         "_row_num": 50
       },
@@ -426,7 +538,9 @@
         "values_list": "yes_no_nr",
         "name": "curr_tmp",
         "display": {
-          "text": "Are you currently taking TMP-SMX?"
+          "prompt": {
+            "text": "Are you currently taking TMP-SMX?"
+          }
         },
         "_row_num": 51
       },
@@ -435,7 +549,9 @@
         "values_list": "yes_no_nr",
         "name": "prescr_art",
         "display": {
-          "text": "Have you been prescribed ART to manage your HIV infection?"
+          "prompt": {
+            "text": "Have you been prescribed ART to manage your HIV infection?"
+          }
         },
         "_row_num": 52
       },
@@ -444,7 +560,9 @@
         "values_list": "yes_no_nr",
         "name": "curr_taking_art",
         "display": {
-          "text": "Are you currently taking the treatment you were prescribed?"
+          "prompt": {
+            "text": "Are you currently taking the treatment you were prescribed?"
+          }
         },
         "_row_num": 53
       },
@@ -452,7 +570,9 @@
         "type": "note",
         "name": "script4",
         "display": {
-          "text": "Script 4: Thank you for your time in answering these questions."
+          "prompt": {
+            "text": "Script 4: Thank you for your time in answering these questions."
+          }
         },
         "_row_num": 54
       },
@@ -460,8 +580,12 @@
         "type": "note",
         "name": "hiv_testing_script",
         "display": {
-          "text": "Now we will do the post-test counseling for the HIV test.",
-          "hint": "The interviewer will record the HIV test results and provide post-test counsel for client concerning the results."
+          "prompt": {
+            "text": "Now we will do the post-test counseling for the HIV test."
+          },
+          "hint": {
+            "text": "The interviewer will record the HIV test results and provide post-test counsel for client concerning the results."
+          }
         },
         "_row_num": 55
       },
@@ -470,7 +594,9 @@
         "values_list": "hiv_status",
         "name": "determine",
         "display": {
-          "text": "HIV – 1st Test Result (Rapid Test—Determine)"
+          "prompt": {
+            "text": "HIV – 1st Test Result (Rapid Test—Determine)"
+          }
         },
         "_row_num": 56
       },
@@ -479,7 +605,9 @@
         "values_list": "pretest",
         "name": "advise_second",
         "display": {
-          "text": "Please advise client a second test is needed."
+          "prompt": {
+            "text": "Please advise client a second test is needed."
+          }
         },
         "_row_num": 57
       },
@@ -488,7 +616,9 @@
         "values_list": "hiv_status",
         "name": "unigold",
         "display": {
-          "text": "HIV – 2nd Test Result (Rapid Test—Unigold)"
+          "prompt": {
+            "text": "HIV – 2nd Test Result (Rapid Test—Unigold)"
+          }
         },
         "_row_num": 58
       },
@@ -496,7 +626,9 @@
         "type": "note",
         "name": "pos",
         "display": {
-          "text": "Client's HIV status is: HIV positive"
+          "prompt": {
+            "text": "Client's HIV status is: HIV positive"
+          }
         },
         "_row_num": 59
       },
@@ -504,7 +636,9 @@
         "type": "note",
         "name": "neg",
         "display": {
-          "text": "Client's HIV status is: HIV negative"
+          "prompt": {
+            "text": "Client's HIV status is: HIV negative"
+          }
         },
         "_row_num": 60
       },
@@ -512,7 +646,9 @@
         "type": "note",
         "name": "inconclusive",
         "display": {
-          "text": "Client's HIV status is: Inconclusive, requires ELISA testing"
+          "prompt": {
+            "text": "Client's HIV status is: Inconclusive, requires ELISA testing"
+          }
         },
         "_row_num": 61
       },
@@ -521,8 +657,12 @@
         "values_list": "yes_no",
         "name": "elisa_blood_drawn",
         "display": {
-          "text": "Was blood drawn from client for ELISA?",
-          "hint": "If instructed to perform ELISA"
+          "prompt": {
+            "text": "Was blood drawn from client for ELISA?"
+          },
+          "hint": {
+            "text": "If instructed to perform ELISA"
+          }
         },
         "_row_num": 62
       },
@@ -531,7 +671,9 @@
         "values_list": "discordant",
         "name": "discordant",
         "display": {
-          "text": "Is the couple discordant?"
+          "prompt": {
+            "text": "Is the couple discordant?"
+          }
         },
         "_row_num": 63
       },
@@ -540,7 +682,9 @@
         "values_list": "yes_no",
         "name": "return_disc_retest",
         "display": {
-          "text": "Was a return visit scheduled for discordant re-testing?"
+          "prompt": {
+            "text": "Was a return visit scheduled for discordant re-testing?"
+          }
         },
         "_row_num": 64
       },
@@ -548,7 +692,9 @@
         "type": "text",
         "name": "comments",
         "display": {
-          "text": "Interviewer comments:"
+          "prompt": {
+            "text": "Interviewer comments:"
+          }
         },
         "_row_num": 65
       },
@@ -556,7 +702,9 @@
         "type": "note",
         "name": "survey_end",
         "display": {
-          "text": "The screening is now complete, please go to the next page to finalize your responses."
+          "prompt": {
+            "text": "The screening is now complete, please go to the next page to finalize your responses."
+          }
         },
         "_row_num": 66
       }
@@ -566,7 +714,9 @@
         "choice_list_name": "yes_no",
         "data_value": 1,
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 2
       },
@@ -574,7 +724,9 @@
         "choice_list_name": "yes_no",
         "data_value": 0,
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 3
       },
@@ -582,7 +734,9 @@
         "choice_list_name": "no_response",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 4
       },
@@ -590,7 +744,9 @@
         "choice_list_name": "yes_no_nr",
         "data_value": 1,
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 5
       },
@@ -598,7 +754,9 @@
         "choice_list_name": "yes_no_nr",
         "data_value": 0,
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 6
       },
@@ -606,7 +764,9 @@
         "choice_list_name": "yes_no_nr",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 7
       },
@@ -614,7 +774,9 @@
         "choice_list_name": "unknown_nr",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 8
       },
@@ -622,7 +784,9 @@
         "choice_list_name": "unknown_nr",
         "data_value": 999,
         "display": {
-          "text": "Don't know"
+          "title": {
+            "text": "Don't know"
+          }
         },
         "_row_num": 9
       },
@@ -630,7 +794,9 @@
         "choice_list_name": "study_arm_options",
         "data_value": 1,
         "display": {
-          "text": "HOPE Intervention"
+          "title": {
+            "text": "HOPE Intervention"
+          }
         },
         "_row_num": 10
       },
@@ -638,7 +804,9 @@
         "choice_list_name": "study_arm_options",
         "data_value": 2,
         "display": {
-          "text": "6 month follow-up"
+          "title": {
+            "text": "6 month follow-up"
+          }
         },
         "_row_num": 11
       },
@@ -646,7 +814,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": 1,
         "display": {
-          "text": "Luo"
+          "title": {
+            "text": "Luo"
+          }
         },
         "_row_num": 12
       },
@@ -654,7 +824,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": 2,
         "display": {
-          "text": "Luhya"
+          "title": {
+            "text": "Luhya"
+          }
         },
         "_row_num": 13
       },
@@ -662,7 +834,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": 3,
         "display": {
-          "text": "Kalenjin"
+          "title": {
+            "text": "Kalenjin"
+          }
         },
         "_row_num": 14
       },
@@ -670,7 +844,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": 4,
         "display": {
-          "text": "Kisii"
+          "title": {
+            "text": "Kisii"
+          }
         },
         "_row_num": 15
       },
@@ -678,7 +854,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": 5,
         "display": {
-          "text": "Kuria"
+          "title": {
+            "text": "Kuria"
+          }
         },
         "_row_num": 16
       },
@@ -686,7 +864,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": 6,
         "display": {
-          "text": "Nandi"
+          "title": {
+            "text": "Nandi"
+          }
         },
         "_row_num": 17
       },
@@ -694,7 +874,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": 7,
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 18
       },
@@ -702,7 +884,9 @@
         "choice_list_name": "ethnic_groups",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 19
       },
@@ -710,7 +894,9 @@
         "choice_list_name": "religion",
         "data_value": 1,
         "display": {
-          "text": "Anglican"
+          "title": {
+            "text": "Anglican"
+          }
         },
         "_row_num": 20
       },
@@ -718,7 +904,9 @@
         "choice_list_name": "religion",
         "data_value": 2,
         "display": {
-          "text": "Catholic"
+          "title": {
+            "text": "Catholic"
+          }
         },
         "_row_num": 21
       },
@@ -726,7 +914,9 @@
         "choice_list_name": "religion",
         "data_value": 3,
         "display": {
-          "text": "Pentecostal"
+          "title": {
+            "text": "Pentecostal"
+          }
         },
         "_row_num": 22
       },
@@ -734,7 +924,9 @@
         "choice_list_name": "religion",
         "data_value": 4,
         "display": {
-          "text": "Seventh Day Adventist"
+          "title": {
+            "text": "Seventh Day Adventist"
+          }
         },
         "_row_num": 23
       },
@@ -742,7 +934,9 @@
         "choice_list_name": "religion",
         "data_value": 5,
         "display": {
-          "text": "African Independent Churches"
+          "title": {
+            "text": "African Independent Churches"
+          }
         },
         "_row_num": 24
       },
@@ -750,7 +944,9 @@
         "choice_list_name": "religion",
         "data_value": 6,
         "display": {
-          "text": "African Inland Church"
+          "title": {
+            "text": "African Inland Church"
+          }
         },
         "_row_num": 25
       },
@@ -758,7 +954,9 @@
         "choice_list_name": "religion",
         "data_value": 7,
         "display": {
-          "text": "Protestant"
+          "title": {
+            "text": "Protestant"
+          }
         },
         "_row_num": 26
       },
@@ -766,7 +964,9 @@
         "choice_list_name": "religion",
         "data_value": 8,
         "display": {
-          "text": "Muslim"
+          "title": {
+            "text": "Muslim"
+          }
         },
         "_row_num": 27
       },
@@ -774,7 +974,9 @@
         "choice_list_name": "religion",
         "data_value": 9,
         "display": {
-          "text": "No religion"
+          "title": {
+            "text": "No religion"
+          }
         },
         "_row_num": 28
       },
@@ -782,7 +984,9 @@
         "choice_list_name": "religion",
         "data_value": 10,
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 29
       },
@@ -790,7 +994,9 @@
         "choice_list_name": "religion",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 30
       },
@@ -798,7 +1004,9 @@
         "choice_list_name": "employment",
         "data_value": 0,
         "display": {
-          "text": "Not employed"
+          "title": {
+            "text": "Not employed"
+          }
         },
         "_row_num": 31
       },
@@ -806,7 +1014,9 @@
         "choice_list_name": "employment",
         "data_value": 1,
         "display": {
-          "text": "Casual laborer"
+          "title": {
+            "text": "Casual laborer"
+          }
         },
         "_row_num": 32
       },
@@ -814,7 +1024,9 @@
         "choice_list_name": "employment",
         "data_value": 2,
         "display": {
-          "text": "Small business"
+          "title": {
+            "text": "Small business"
+          }
         },
         "_row_num": 33
       },
@@ -822,7 +1034,9 @@
         "choice_list_name": "employment",
         "data_value": 3,
         "display": {
-          "text": "Salaried position"
+          "title": {
+            "text": "Salaried position"
+          }
         },
         "_row_num": 34
       },
@@ -830,7 +1044,9 @@
         "choice_list_name": "employment",
         "data_value": 4,
         "display": {
-          "text": "Farmer/pastoralist"
+          "title": {
+            "text": "Farmer/pastoralist"
+          }
         },
         "_row_num": 35
       },
@@ -838,7 +1054,9 @@
         "choice_list_name": "employment",
         "data_value": 5,
         "display": {
-          "text": "Fishing business"
+          "title": {
+            "text": "Fishing business"
+          }
         },
         "_row_num": 36
       },
@@ -846,7 +1064,9 @@
         "choice_list_name": "employment",
         "data_value": 6,
         "display": {
-          "text": "Pastor/religious leader"
+          "title": {
+            "text": "Pastor/religious leader"
+          }
         },
         "_row_num": 37
       },
@@ -854,7 +1074,9 @@
         "choice_list_name": "employment",
         "data_value": 7,
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 38
       },
@@ -862,7 +1084,9 @@
         "choice_list_name": "employment",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 39
       },
@@ -870,7 +1094,9 @@
         "choice_list_name": "earnings",
         "data_value": 0,
         "display": {
-          "text": "None"
+          "title": {
+            "text": "None"
+          }
         },
         "_row_num": 40
       },
@@ -878,7 +1104,9 @@
         "choice_list_name": "earnings",
         "data_value": 1,
         "display": {
-          "text": "Less than 1000 Ksh"
+          "title": {
+            "text": "Less than 1000 Ksh"
+          }
         },
         "_row_num": 41
       },
@@ -886,7 +1114,9 @@
         "choice_list_name": "earnings",
         "data_value": 2,
         "display": {
-          "text": "1000-4999 Ksh"
+          "title": {
+            "text": "1000-4999 Ksh"
+          }
         },
         "_row_num": 42
       },
@@ -894,7 +1124,9 @@
         "choice_list_name": "earnings",
         "data_value": 3,
         "display": {
-          "text": "5000-9999 Ksh"
+          "title": {
+            "text": "5000-9999 Ksh"
+          }
         },
         "_row_num": 43
       },
@@ -902,7 +1134,9 @@
         "choice_list_name": "earnings",
         "data_value": 4,
         "display": {
-          "text": "10000 Ksh and above"
+          "title": {
+            "text": "10000 Ksh and above"
+          }
         },
         "_row_num": 44
       },
@@ -910,7 +1144,9 @@
         "choice_list_name": "earnings",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 45
       },
@@ -918,7 +1154,9 @@
         "choice_list_name": "education_level_options",
         "data_value": 0,
         "display": {
-          "text": "No formal education"
+          "title": {
+            "text": "No formal education"
+          }
         },
         "_row_num": 46
       },
@@ -926,7 +1164,9 @@
         "choice_list_name": "education_level_options",
         "data_value": 1,
         "display": {
-          "text": "Lower primary 1-3"
+          "title": {
+            "text": "Lower primary 1-3"
+          }
         },
         "_row_num": 47
       },
@@ -934,7 +1174,9 @@
         "choice_list_name": "education_level_options",
         "data_value": 2,
         "display": {
-          "text": "Upper primary 4-8"
+          "title": {
+            "text": "Upper primary 4-8"
+          }
         },
         "_row_num": 48
       },
@@ -942,7 +1184,9 @@
         "choice_list_name": "education_level_options",
         "data_value": 3,
         "display": {
-          "text": "Secondary - not completed"
+          "title": {
+            "text": "Secondary - not completed"
+          }
         },
         "_row_num": 49
       },
@@ -950,7 +1194,9 @@
         "choice_list_name": "education_level_options",
         "data_value": 4,
         "display": {
-          "text": "Secondary completed"
+          "title": {
+            "text": "Secondary completed"
+          }
         },
         "_row_num": 50
       },
@@ -958,7 +1204,9 @@
         "choice_list_name": "education_level_options",
         "data_value": 5,
         "display": {
-          "text": "Above secondary"
+          "title": {
+            "text": "Above secondary"
+          }
         },
         "_row_num": 51
       },
@@ -966,7 +1214,9 @@
         "choice_list_name": "education_level_options",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 52
       },
@@ -974,7 +1224,9 @@
         "choice_list_name": "relationship_status_options",
         "data_value": 1,
         "display": {
-          "text": "Married, living together"
+          "title": {
+            "text": "Married, living together"
+          }
         },
         "_row_num": 53
       },
@@ -982,7 +1234,9 @@
         "choice_list_name": "relationship_status_options",
         "data_value": 2,
         "display": {
-          "text": "Married, not living together"
+          "title": {
+            "text": "Married, not living together"
+          }
         },
         "_row_num": 54
       },
@@ -990,7 +1244,9 @@
         "choice_list_name": "relationship_status_options",
         "data_value": 3,
         "display": {
-          "text": "Not married, living together"
+          "title": {
+            "text": "Not married, living together"
+          }
         },
         "_row_num": 55
       },
@@ -998,7 +1254,9 @@
         "choice_list_name": "relationship_status_options",
         "data_value": 4,
         "display": {
-          "text": "Not married, not living together"
+          "title": {
+            "text": "Not married, not living together"
+          }
         },
         "_row_num": 56
       },
@@ -1006,7 +1264,9 @@
         "choice_list_name": "circumcision_options",
         "data_value": 1,
         "display": {
-          "text": "As an infant"
+          "title": {
+            "text": "As an infant"
+          }
         },
         "_row_num": 57
       },
@@ -1014,7 +1274,9 @@
         "choice_list_name": "circumcision_options",
         "data_value": 2,
         "display": {
-          "text": "As a child/youth"
+          "title": {
+            "text": "As a child/youth"
+          }
         },
         "_row_num": 58
       },
@@ -1022,7 +1284,9 @@
         "choice_list_name": "circumcision_options",
         "data_value": 3,
         "display": {
-          "text": "As an adult"
+          "title": {
+            "text": "As an adult"
+          }
         },
         "_row_num": 59
       },
@@ -1030,7 +1294,9 @@
         "choice_list_name": "circumcision_options",
         "data_value": 999,
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 60
       },
@@ -1038,7 +1304,9 @@
         "choice_list_name": "hiv_status",
         "data_value": 0,
         "display": {
-          "text": "HIV negative"
+          "title": {
+            "text": "HIV negative"
+          }
         },
         "_row_num": 61
       },
@@ -1046,7 +1314,9 @@
         "choice_list_name": "hiv_status",
         "data_value": 1,
         "display": {
-          "text": "HIV positive"
+          "title": {
+            "text": "HIV positive"
+          }
         },
         "_row_num": 62
       },
@@ -1054,7 +1324,9 @@
         "choice_list_name": "hiv_status",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 63
       },
@@ -1062,7 +1334,9 @@
         "choice_list_name": "hiv_status",
         "data_value": 999,
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 64
       },
@@ -1070,7 +1344,9 @@
         "choice_list_name": "yes_no_ns",
         "data_value": 1,
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 65
       },
@@ -1078,7 +1354,9 @@
         "choice_list_name": "yes_no_ns",
         "data_value": 0,
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 66
       },
@@ -1086,7 +1364,9 @@
         "choice_list_name": "yes_no_ns",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 67
       },
@@ -1094,7 +1374,9 @@
         "choice_list_name": "yes_no_ns",
         "data_value": 999,
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 68
       },
@@ -1102,7 +1384,9 @@
         "choice_list_name": "cd4_test_options",
         "data_value": -777,
         "display": {
-          "text": "Test not done"
+          "title": {
+            "text": "Test not done"
+          }
         },
         "_row_num": 69
       },
@@ -1110,7 +1394,9 @@
         "choice_list_name": "cd4_test_options",
         "data_value": -888,
         "display": {
-          "text": "Did not receive results"
+          "title": {
+            "text": "Did not receive results"
+          }
         },
         "_row_num": 70
       },
@@ -1118,7 +1404,9 @@
         "choice_list_name": "cd4_test_options",
         "data_value": -999,
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 71
       },
@@ -1126,7 +1414,9 @@
         "choice_list_name": "art_dose_options",
         "data_value": 1,
         "display": {
-          "text": "Yes, I missed one or more doses, but I took some medication"
+          "title": {
+            "text": "Yes, I missed one or more doses, but I took some medication"
+          }
         },
         "_row_num": 72
       },
@@ -1134,7 +1424,9 @@
         "choice_list_name": "art_dose_options",
         "data_value": 0,
         "display": {
-          "text": "No, I took all my doses"
+          "title": {
+            "text": "No, I took all my doses"
+          }
         },
         "_row_num": 73
       },
@@ -1142,7 +1434,9 @@
         "choice_list_name": "art_dose_options",
         "data_value": 2,
         "display": {
-          "text": "I did not take any of the medication"
+          "title": {
+            "text": "I did not take any of the medication"
+          }
         },
         "_row_num": 74
       },
@@ -1150,7 +1444,9 @@
         "choice_list_name": "art_dose_options",
         "data_value": 999,
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 75
       },
@@ -1158,7 +1454,9 @@
         "choice_list_name": "art_decision",
         "data_value": 1,
         "display": {
-          "text": "My decision"
+          "title": {
+            "text": "My decision"
+          }
         },
         "_row_num": 76
       },
@@ -1166,7 +1464,9 @@
         "choice_list_name": "art_decision",
         "data_value": 2,
         "display": {
-          "text": "Provider advised to discontinue"
+          "title": {
+            "text": "Provider advised to discontinue"
+          }
         },
         "_row_num": 77
       },
@@ -1174,7 +1474,9 @@
         "choice_list_name": "art_decision",
         "data_value": 3,
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 78
       },
@@ -1182,7 +1484,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": 1,
         "display": {
-          "text": "No time"
+          "title": {
+            "text": "No time"
+          }
         },
         "_row_num": 79
       },
@@ -1190,7 +1494,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": 2,
         "display": {
-          "text": "Does not want to be tested with partner"
+          "title": {
+            "text": "Does not want to be tested with partner"
+          }
         },
         "_row_num": 80
       },
@@ -1198,7 +1504,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": 3,
         "display": {
-          "text": "Does not want to be tested at home"
+          "title": {
+            "text": "Does not want to be tested at home"
+          }
         },
         "_row_num": 81
       },
@@ -1206,7 +1514,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": 4,
         "display": {
-          "text": "Feels he does not need the testing"
+          "title": {
+            "text": "Feels he does not need the testing"
+          }
         },
         "_row_num": 82
       },
@@ -1214,7 +1524,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": 5,
         "display": {
-          "text": "Feels he does not need the education"
+          "title": {
+            "text": "Feels he does not need the education"
+          }
         },
         "_row_num": 83
       },
@@ -1222,7 +1534,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": 6,
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 84
       },
@@ -1230,7 +1544,9 @@
         "choice_list_name": "no_participation_reasons",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 85
       },
@@ -1238,7 +1554,9 @@
         "choice_list_name": "hiv_test_results",
         "data_value": 0,
         "display": {
-          "text": "HIV negative"
+          "title": {
+            "text": "HIV negative"
+          }
         },
         "_row_num": 86
       },
@@ -1246,7 +1564,9 @@
         "choice_list_name": "hiv_test_results",
         "data_value": 1,
         "display": {
-          "text": "HIV positive"
+          "title": {
+            "text": "HIV positive"
+          }
         },
         "_row_num": 87
       },
@@ -1254,7 +1574,9 @@
         "choice_list_name": "acknowledge",
         "data_value": 1,
         "display": {
-          "text": "Continue"
+          "title": {
+            "text": "Continue"
+          }
         },
         "_row_num": 88
       },
@@ -1262,7 +1584,9 @@
         "choice_list_name": "study_participation",
         "data_value": 1,
         "display": {
-          "text": "Wants to participate in full study"
+          "title": {
+            "text": "Wants to participate in full study"
+          }
         },
         "_row_num": 89
       },
@@ -1270,7 +1594,9 @@
         "choice_list_name": "study_participation",
         "data_value": 0,
         "display": {
-          "text": "Does not want to participate"
+          "title": {
+            "text": "Does not want to participate"
+          }
         },
         "_row_num": 90
       },
@@ -1278,7 +1604,9 @@
         "choice_list_name": "blood_draw_options",
         "data_value": 1,
         "display": {
-          "text": "Client accepted testing, blood drawn"
+          "title": {
+            "text": "Client accepted testing, blood drawn"
+          }
         },
         "_row_num": 91
       },
@@ -1286,7 +1614,9 @@
         "choice_list_name": "blood_draw_options",
         "data_value": 0,
         "display": {
-          "text": "Client declined testing, blood not drawn"
+          "title": {
+            "text": "Client declined testing, blood not drawn"
+          }
         },
         "_row_num": 92
       },
@@ -1294,7 +1624,9 @@
         "choice_list_name": "discordant_options",
         "data_value": 1,
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 93
       },
@@ -1302,7 +1634,9 @@
         "choice_list_name": "discordant_options",
         "data_value": 0,
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 94
       },
@@ -1310,7 +1644,9 @@
         "choice_list_name": "discordant_options",
         "data_value": 2,
         "display": {
-          "text": "Unclear"
+          "title": {
+            "text": "Unclear"
+          }
         },
         "_row_num": 95
       },
@@ -1318,7 +1654,9 @@
         "choice_list_name": "prev_hiv_status",
         "data_value": 0,
         "display": {
-          "text": "HIV negative"
+          "title": {
+            "text": "HIV negative"
+          }
         },
         "_row_num": 96
       },
@@ -1326,7 +1664,9 @@
         "choice_list_name": "prev_hiv_status",
         "data_value": 1,
         "display": {
-          "text": "HIV positive"
+          "title": {
+            "text": "HIV positive"
+          }
         },
         "_row_num": 97
       },
@@ -1334,7 +1674,9 @@
         "choice_list_name": "prev_hiv_status",
         "data_value": 2,
         "display": {
-          "text": "Client declined previous testing"
+          "title": {
+            "text": "Client declined previous testing"
+          }
         },
         "_row_num": 98
       },
@@ -1342,7 +1684,9 @@
         "choice_list_name": "prev_hiv_status",
         "data_value": 3,
         "display": {
-          "text": "Client has not been tested for study yet"
+          "title": {
+            "text": "Client has not been tested for study yet"
+          }
         },
         "_row_num": 99
       },
@@ -1350,7 +1694,9 @@
         "choice_list_name": "rapid",
         "data_value": 1,
         "display": {
-          "text": "Client accepted testing, blood drawn"
+          "title": {
+            "text": "Client accepted testing, blood drawn"
+          }
         },
         "_row_num": 100
       },
@@ -1358,7 +1704,9 @@
         "choice_list_name": "rapid",
         "data_value": 2,
         "display": {
-          "text": "Client declined testing, blood not drawn"
+          "title": {
+            "text": "Client declined testing, blood not drawn"
+          }
         },
         "_row_num": 101
       },
@@ -1366,7 +1714,9 @@
         "choice_list_name": "wanted_pregnancy_time",
         "data_value": 1,
         "display": {
-          "text": "Wanted her to become pregnant then"
+          "title": {
+            "text": "Wanted her to become pregnant then"
+          }
         },
         "_row_num": 102
       },
@@ -1374,7 +1724,9 @@
         "choice_list_name": "wanted_pregnancy_time",
         "data_value": 0,
         "display": {
-          "text": "Wanted her to become pregnant later"
+          "title": {
+            "text": "Wanted her to become pregnant later"
+          }
         },
         "_row_num": 103
       },
@@ -1382,7 +1734,9 @@
         "choice_list_name": "wanted_pregnancy_time",
         "data_value": 666,
         "display": {
-          "text": "Did not want any (more) children at all"
+          "title": {
+            "text": "Did not want any (more) children at all"
+          }
         },
         "_row_num": 104
       },
@@ -1390,7 +1744,9 @@
         "choice_list_name": "wanted_pregnancy_time",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 105
       },
@@ -1398,7 +1754,9 @@
         "choice_list_name": "wanted_pregnancy_time",
         "data_value": 999,
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 106
       },
@@ -1406,7 +1764,9 @@
         "choice_list_name": "want_more_children",
         "data_value": 1,
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 108
       },
@@ -1414,7 +1774,9 @@
         "choice_list_name": "want_more_children",
         "data_value": 0,
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 109
       },
@@ -1422,7 +1784,9 @@
         "choice_list_name": "want_more_children",
         "data_value": 666,
         "display": {
-          "text": "Says wife/study partner can’t get pregnant again"
+          "title": {
+            "text": "Says wife/study partner can’t get pregnant again"
+          }
         },
         "_row_num": 110
       },
@@ -1430,7 +1794,9 @@
         "choice_list_name": "want_more_children",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 111
       },
@@ -1438,7 +1804,9 @@
         "choice_list_name": "want_more_children",
         "data_value": 999,
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 112
       },
@@ -1446,7 +1814,9 @@
         "choice_list_name": "wait_another_child",
         "data_value": 1,
         "display": {
-          "text": "Enter months"
+          "title": {
+            "text": "Enter months"
+          }
         },
         "_row_num": 114
       },
@@ -1454,7 +1824,9 @@
         "choice_list_name": "wait_another_child",
         "data_value": 2,
         "display": {
-          "text": "Enter years"
+          "title": {
+            "text": "Enter years"
+          }
         },
         "_row_num": 115
       },
@@ -1462,7 +1834,9 @@
         "choice_list_name": "wait_another_child",
         "data_value": 777,
         "display": {
-          "text": "After marriage (no specific time frame)"
+          "title": {
+            "text": "After marriage (no specific time frame)"
+          }
         },
         "_row_num": 116
       },
@@ -1470,7 +1844,9 @@
         "choice_list_name": "wait_another_child",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 117
       },
@@ -1478,7 +1854,9 @@
         "choice_list_name": "wait_another_child",
         "data_value": 999,
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 118
       },
@@ -1486,7 +1864,9 @@
         "choice_list_name": "partner_wants_children",
         "data_value": 1,
         "display": {
-          "text": "Same number"
+          "title": {
+            "text": "Same number"
+          }
         },
         "_row_num": 120
       },
@@ -1494,7 +1874,9 @@
         "choice_list_name": "partner_wants_children",
         "data_value": 2,
         "display": {
-          "text": "More children"
+          "title": {
+            "text": "More children"
+          }
         },
         "_row_num": 121
       },
@@ -1502,7 +1884,9 @@
         "choice_list_name": "partner_wants_children",
         "data_value": 3,
         "display": {
-          "text": "Fewer children"
+          "title": {
+            "text": "Fewer children"
+          }
         },
         "_row_num": 122
       },
@@ -1510,7 +1894,9 @@
         "choice_list_name": "partner_wants_children",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 123
       },
@@ -1518,7 +1904,9 @@
         "choice_list_name": "partner_wants_children",
         "data_value": 999,
         "display": {
-          "text": "Not sure"
+          "title": {
+            "text": "Not sure"
+          }
         },
         "_row_num": 124
       },
@@ -1526,7 +1914,9 @@
         "choice_list_name": "influences_having_children",
         "data_value": 1,
         "display": {
-          "text": "Mainly respondent"
+          "title": {
+            "text": "Mainly respondent"
+          }
         },
         "_row_num": 126
       },
@@ -1534,7 +1924,9 @@
         "choice_list_name": "influences_having_children",
         "data_value": 2,
         "display": {
-          "text": "Mainly wife/partner"
+          "title": {
+            "text": "Mainly wife/partner"
+          }
         },
         "_row_num": 127
       },
@@ -1542,7 +1934,9 @@
         "choice_list_name": "influences_having_children",
         "data_value": 3,
         "display": {
-          "text": "Both respondent and wife/partner together"
+          "title": {
+            "text": "Both respondent and wife/partner together"
+          }
         },
         "_row_num": 128
       },
@@ -1550,7 +1944,9 @@
         "choice_list_name": "influences_having_children",
         "data_value": 4,
         "display": {
-          "text": "Mainly parents"
+          "title": {
+            "text": "Mainly parents"
+          }
         },
         "_row_num": 129
       },
@@ -1558,7 +1954,9 @@
         "choice_list_name": "influences_having_children",
         "data_value": 5,
         "display": {
-          "text": "Mainly partner’s parents"
+          "title": {
+            "text": "Mainly partner’s parents"
+          }
         },
         "_row_num": 130
       },
@@ -1566,7 +1964,9 @@
         "choice_list_name": "influences_having_children",
         "data_value": 6,
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 131
       },
@@ -1574,7 +1974,9 @@
         "choice_list_name": "influences_having_children",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 132
       },
@@ -1582,7 +1984,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 1,
         "display": {
-          "text": "Female sterilization"
+          "title": {
+            "text": "Female sterilization"
+          }
         },
         "_row_num": 134
       },
@@ -1590,7 +1994,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 2,
         "display": {
-          "text": "Male sterilization"
+          "title": {
+            "text": "Male sterilization"
+          }
         },
         "_row_num": 135
       },
@@ -1598,7 +2004,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 3,
         "display": {
-          "text": "Pill"
+          "title": {
+            "text": "Pill"
+          }
         },
         "_row_num": 136
       },
@@ -1606,7 +2014,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 4,
         "display": {
-          "text": "Injectable"
+          "title": {
+            "text": "Injectable"
+          }
         },
         "_row_num": 137
       },
@@ -1614,7 +2024,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 5,
         "display": {
-          "text": "Implants"
+          "title": {
+            "text": "Implants"
+          }
         },
         "_row_num": 138
       },
@@ -1622,7 +2034,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 6,
         "display": {
-          "text": "IUD"
+          "title": {
+            "text": "IUD"
+          }
         },
         "_row_num": 139
       },
@@ -1630,7 +2044,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 7,
         "display": {
-          "text": "Male condom"
+          "title": {
+            "text": "Male condom"
+          }
         },
         "_row_num": 140
       },
@@ -1638,7 +2054,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 8,
         "display": {
-          "text": "Female condom"
+          "title": {
+            "text": "Female condom"
+          }
         },
         "_row_num": 141
       },
@@ -1646,7 +2064,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 9,
         "display": {
-          "text": "Lactational amenorrhea method"
+          "title": {
+            "text": "Lactational amenorrhea method"
+          }
         },
         "_row_num": 142
       },
@@ -1654,7 +2074,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 10,
         "display": {
-          "text": "Natural, rhythm or calendar method"
+          "title": {
+            "text": "Natural, rhythm or calendar method"
+          }
         },
         "_row_num": 143
       },
@@ -1662,7 +2084,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 11,
         "display": {
-          "text": "Withdrawal (man pulls out penis before end)"
+          "title": {
+            "text": "Withdrawal (man pulls out penis before end)"
+          }
         },
         "_row_num": 144
       },
@@ -1670,7 +2094,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 12,
         "display": {
-          "text": "Emergency contraception"
+          "title": {
+            "text": "Emergency contraception"
+          }
         },
         "_row_num": 145
       },
@@ -1678,7 +2104,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 13,
         "display": {
-          "text": "Herbs or other traditional method"
+          "title": {
+            "text": "Herbs or other traditional method"
+          }
         },
         "_row_num": 146
       },
@@ -1686,7 +2114,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 14,
         "display": {
-          "text": "Abstaining from sex"
+          "title": {
+            "text": "Abstaining from sex"
+          }
         },
         "_row_num": 147
       },
@@ -1694,7 +2124,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 15,
         "display": {
-          "text": "Other"
+          "title": {
+            "text": "Other"
+          }
         },
         "_row_num": 148
       },
@@ -1702,7 +2134,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 16,
         "display": {
-          "text": "None of the above"
+          "title": {
+            "text": "None of the above"
+          }
         },
         "_row_num": 149
       },
@@ -1710,7 +2144,9 @@
         "choice_list_name": "pregnancy_prevention_methods",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 150
       },
@@ -1718,7 +2154,9 @@
         "choice_list_name": "pretest",
         "data_value": 1,
         "display": {
-          "text": "Client accepted testing, blood drawn"
+          "title": {
+            "text": "Client accepted testing, blood drawn"
+          }
         },
         "_row_num": 152
       },
@@ -1726,7 +2164,9 @@
         "choice_list_name": "pretest",
         "data_value": 0,
         "display": {
-          "text": "Client declined testing, blood not drawn"
+          "title": {
+            "text": "Client declined testing, blood not drawn"
+          }
         },
         "_row_num": 153
       },
@@ -1734,7 +2174,9 @@
         "choice_list_name": "discordant",
         "data_value": 1,
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 155
       },
@@ -1742,7 +2184,9 @@
         "choice_list_name": "discordant",
         "data_value": 0,
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 156
       },
@@ -1750,7 +2194,9 @@
         "choice_list_name": "discordant",
         "data_value": 3,
         "display": {
-          "text": "Male HIV status is unknown"
+          "title": {
+            "text": "Male HIV status is unknown"
+          }
         },
         "_row_num": 157
       },
@@ -1758,7 +2204,9 @@
         "choice_list_name": "discordant",
         "data_value": 4,
         "display": {
-          "text": "Female HIV status is unknown"
+          "title": {
+            "text": "Female HIV status is unknown"
+          }
         },
         "_row_num": 158
       },
@@ -1766,7 +2214,9 @@
         "choice_list_name": "date_nr",
         "data_value": 1,
         "display": {
-          "text": "Enter date"
+          "title": {
+            "text": "Enter date"
+          }
         },
         "_row_num": 159
       },
@@ -1774,7 +2224,9 @@
         "choice_list_name": "date_nr",
         "data_value": 888,
         "display": {
-          "text": "Prefer not to respond"
+          "title": {
+            "text": "Prefer not to respond"
+          }
         },
         "_row_num": 160
       }
@@ -1793,7 +2245,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "All Partner Form Fields"
+          "title": {
+            "text": "All Partner Form Fields"
+          }
         },
         "_row_num": 4
       },
@@ -1821,16 +2275,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -1846,7 +2298,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "All Partner Form Fields"
+          "title": {
+            "text": "All Partner Form Fields"
+          }
         },
         "_row_num": 4
       },
@@ -1861,7 +2315,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -1875,7 +2331,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "All Partner Form Fields"
+          "title": {
+            "text": "All Partner Form Fields"
+          }
         },
         "_row_num": 4
       }
@@ -1886,7 +2344,9 @@
           "choice_list_name": "yes_no",
           "data_value": 1,
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 2
         },
@@ -1894,7 +2354,9 @@
           "choice_list_name": "yes_no",
           "data_value": 0,
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 3
         }
@@ -1904,7 +2366,9 @@
           "choice_list_name": "no_response",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 4
         }
@@ -1914,7 +2378,9 @@
           "choice_list_name": "yes_no_nr",
           "data_value": 1,
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 5
         },
@@ -1922,7 +2388,9 @@
           "choice_list_name": "yes_no_nr",
           "data_value": 0,
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 6
         },
@@ -1930,7 +2398,9 @@
           "choice_list_name": "yes_no_nr",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 7
         }
@@ -1940,7 +2410,9 @@
           "choice_list_name": "unknown_nr",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 8
         },
@@ -1948,7 +2420,9 @@
           "choice_list_name": "unknown_nr",
           "data_value": 999,
           "display": {
-            "text": "Don't know"
+            "title": {
+              "text": "Don't know"
+            }
           },
           "_row_num": 9
         }
@@ -1958,7 +2432,9 @@
           "choice_list_name": "study_arm_options",
           "data_value": 1,
           "display": {
-            "text": "HOPE Intervention"
+            "title": {
+              "text": "HOPE Intervention"
+            }
           },
           "_row_num": 10
         },
@@ -1966,7 +2442,9 @@
           "choice_list_name": "study_arm_options",
           "data_value": 2,
           "display": {
-            "text": "6 month follow-up"
+            "title": {
+              "text": "6 month follow-up"
+            }
           },
           "_row_num": 11
         }
@@ -1976,7 +2454,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": 1,
           "display": {
-            "text": "Luo"
+            "title": {
+              "text": "Luo"
+            }
           },
           "_row_num": 12
         },
@@ -1984,7 +2464,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": 2,
           "display": {
-            "text": "Luhya"
+            "title": {
+              "text": "Luhya"
+            }
           },
           "_row_num": 13
         },
@@ -1992,7 +2474,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": 3,
           "display": {
-            "text": "Kalenjin"
+            "title": {
+              "text": "Kalenjin"
+            }
           },
           "_row_num": 14
         },
@@ -2000,7 +2484,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": 4,
           "display": {
-            "text": "Kisii"
+            "title": {
+              "text": "Kisii"
+            }
           },
           "_row_num": 15
         },
@@ -2008,7 +2494,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": 5,
           "display": {
-            "text": "Kuria"
+            "title": {
+              "text": "Kuria"
+            }
           },
           "_row_num": 16
         },
@@ -2016,7 +2504,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": 6,
           "display": {
-            "text": "Nandi"
+            "title": {
+              "text": "Nandi"
+            }
           },
           "_row_num": 17
         },
@@ -2024,7 +2514,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": 7,
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 18
         },
@@ -2032,7 +2524,9 @@
           "choice_list_name": "ethnic_groups",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 19
         }
@@ -2042,7 +2536,9 @@
           "choice_list_name": "religion",
           "data_value": 1,
           "display": {
-            "text": "Anglican"
+            "title": {
+              "text": "Anglican"
+            }
           },
           "_row_num": 20
         },
@@ -2050,7 +2546,9 @@
           "choice_list_name": "religion",
           "data_value": 2,
           "display": {
-            "text": "Catholic"
+            "title": {
+              "text": "Catholic"
+            }
           },
           "_row_num": 21
         },
@@ -2058,7 +2556,9 @@
           "choice_list_name": "religion",
           "data_value": 3,
           "display": {
-            "text": "Pentecostal"
+            "title": {
+              "text": "Pentecostal"
+            }
           },
           "_row_num": 22
         },
@@ -2066,7 +2566,9 @@
           "choice_list_name": "religion",
           "data_value": 4,
           "display": {
-            "text": "Seventh Day Adventist"
+            "title": {
+              "text": "Seventh Day Adventist"
+            }
           },
           "_row_num": 23
         },
@@ -2074,7 +2576,9 @@
           "choice_list_name": "religion",
           "data_value": 5,
           "display": {
-            "text": "African Independent Churches"
+            "title": {
+              "text": "African Independent Churches"
+            }
           },
           "_row_num": 24
         },
@@ -2082,7 +2586,9 @@
           "choice_list_name": "religion",
           "data_value": 6,
           "display": {
-            "text": "African Inland Church"
+            "title": {
+              "text": "African Inland Church"
+            }
           },
           "_row_num": 25
         },
@@ -2090,7 +2596,9 @@
           "choice_list_name": "religion",
           "data_value": 7,
           "display": {
-            "text": "Protestant"
+            "title": {
+              "text": "Protestant"
+            }
           },
           "_row_num": 26
         },
@@ -2098,7 +2606,9 @@
           "choice_list_name": "religion",
           "data_value": 8,
           "display": {
-            "text": "Muslim"
+            "title": {
+              "text": "Muslim"
+            }
           },
           "_row_num": 27
         },
@@ -2106,7 +2616,9 @@
           "choice_list_name": "religion",
           "data_value": 9,
           "display": {
-            "text": "No religion"
+            "title": {
+              "text": "No religion"
+            }
           },
           "_row_num": 28
         },
@@ -2114,7 +2626,9 @@
           "choice_list_name": "religion",
           "data_value": 10,
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 29
         },
@@ -2122,7 +2636,9 @@
           "choice_list_name": "religion",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 30
         }
@@ -2132,7 +2648,9 @@
           "choice_list_name": "employment",
           "data_value": 0,
           "display": {
-            "text": "Not employed"
+            "title": {
+              "text": "Not employed"
+            }
           },
           "_row_num": 31
         },
@@ -2140,7 +2658,9 @@
           "choice_list_name": "employment",
           "data_value": 1,
           "display": {
-            "text": "Casual laborer"
+            "title": {
+              "text": "Casual laborer"
+            }
           },
           "_row_num": 32
         },
@@ -2148,7 +2668,9 @@
           "choice_list_name": "employment",
           "data_value": 2,
           "display": {
-            "text": "Small business"
+            "title": {
+              "text": "Small business"
+            }
           },
           "_row_num": 33
         },
@@ -2156,7 +2678,9 @@
           "choice_list_name": "employment",
           "data_value": 3,
           "display": {
-            "text": "Salaried position"
+            "title": {
+              "text": "Salaried position"
+            }
           },
           "_row_num": 34
         },
@@ -2164,7 +2688,9 @@
           "choice_list_name": "employment",
           "data_value": 4,
           "display": {
-            "text": "Farmer/pastoralist"
+            "title": {
+              "text": "Farmer/pastoralist"
+            }
           },
           "_row_num": 35
         },
@@ -2172,7 +2698,9 @@
           "choice_list_name": "employment",
           "data_value": 5,
           "display": {
-            "text": "Fishing business"
+            "title": {
+              "text": "Fishing business"
+            }
           },
           "_row_num": 36
         },
@@ -2180,7 +2708,9 @@
           "choice_list_name": "employment",
           "data_value": 6,
           "display": {
-            "text": "Pastor/religious leader"
+            "title": {
+              "text": "Pastor/religious leader"
+            }
           },
           "_row_num": 37
         },
@@ -2188,7 +2718,9 @@
           "choice_list_name": "employment",
           "data_value": 7,
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 38
         },
@@ -2196,7 +2728,9 @@
           "choice_list_name": "employment",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 39
         }
@@ -2206,7 +2740,9 @@
           "choice_list_name": "earnings",
           "data_value": 0,
           "display": {
-            "text": "None"
+            "title": {
+              "text": "None"
+            }
           },
           "_row_num": 40
         },
@@ -2214,7 +2750,9 @@
           "choice_list_name": "earnings",
           "data_value": 1,
           "display": {
-            "text": "Less than 1000 Ksh"
+            "title": {
+              "text": "Less than 1000 Ksh"
+            }
           },
           "_row_num": 41
         },
@@ -2222,7 +2760,9 @@
           "choice_list_name": "earnings",
           "data_value": 2,
           "display": {
-            "text": "1000-4999 Ksh"
+            "title": {
+              "text": "1000-4999 Ksh"
+            }
           },
           "_row_num": 42
         },
@@ -2230,7 +2770,9 @@
           "choice_list_name": "earnings",
           "data_value": 3,
           "display": {
-            "text": "5000-9999 Ksh"
+            "title": {
+              "text": "5000-9999 Ksh"
+            }
           },
           "_row_num": 43
         },
@@ -2238,7 +2780,9 @@
           "choice_list_name": "earnings",
           "data_value": 4,
           "display": {
-            "text": "10000 Ksh and above"
+            "title": {
+              "text": "10000 Ksh and above"
+            }
           },
           "_row_num": 44
         },
@@ -2246,7 +2790,9 @@
           "choice_list_name": "earnings",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 45
         }
@@ -2256,7 +2802,9 @@
           "choice_list_name": "education_level_options",
           "data_value": 0,
           "display": {
-            "text": "No formal education"
+            "title": {
+              "text": "No formal education"
+            }
           },
           "_row_num": 46
         },
@@ -2264,7 +2812,9 @@
           "choice_list_name": "education_level_options",
           "data_value": 1,
           "display": {
-            "text": "Lower primary 1-3"
+            "title": {
+              "text": "Lower primary 1-3"
+            }
           },
           "_row_num": 47
         },
@@ -2272,7 +2822,9 @@
           "choice_list_name": "education_level_options",
           "data_value": 2,
           "display": {
-            "text": "Upper primary 4-8"
+            "title": {
+              "text": "Upper primary 4-8"
+            }
           },
           "_row_num": 48
         },
@@ -2280,7 +2832,9 @@
           "choice_list_name": "education_level_options",
           "data_value": 3,
           "display": {
-            "text": "Secondary - not completed"
+            "title": {
+              "text": "Secondary - not completed"
+            }
           },
           "_row_num": 49
         },
@@ -2288,7 +2842,9 @@
           "choice_list_name": "education_level_options",
           "data_value": 4,
           "display": {
-            "text": "Secondary completed"
+            "title": {
+              "text": "Secondary completed"
+            }
           },
           "_row_num": 50
         },
@@ -2296,7 +2852,9 @@
           "choice_list_name": "education_level_options",
           "data_value": 5,
           "display": {
-            "text": "Above secondary"
+            "title": {
+              "text": "Above secondary"
+            }
           },
           "_row_num": 51
         },
@@ -2304,7 +2862,9 @@
           "choice_list_name": "education_level_options",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 52
         }
@@ -2314,7 +2874,9 @@
           "choice_list_name": "relationship_status_options",
           "data_value": 1,
           "display": {
-            "text": "Married, living together"
+            "title": {
+              "text": "Married, living together"
+            }
           },
           "_row_num": 53
         },
@@ -2322,7 +2884,9 @@
           "choice_list_name": "relationship_status_options",
           "data_value": 2,
           "display": {
-            "text": "Married, not living together"
+            "title": {
+              "text": "Married, not living together"
+            }
           },
           "_row_num": 54
         },
@@ -2330,7 +2894,9 @@
           "choice_list_name": "relationship_status_options",
           "data_value": 3,
           "display": {
-            "text": "Not married, living together"
+            "title": {
+              "text": "Not married, living together"
+            }
           },
           "_row_num": 55
         },
@@ -2338,7 +2904,9 @@
           "choice_list_name": "relationship_status_options",
           "data_value": 4,
           "display": {
-            "text": "Not married, not living together"
+            "title": {
+              "text": "Not married, not living together"
+            }
           },
           "_row_num": 56
         }
@@ -2348,7 +2916,9 @@
           "choice_list_name": "circumcision_options",
           "data_value": 1,
           "display": {
-            "text": "As an infant"
+            "title": {
+              "text": "As an infant"
+            }
           },
           "_row_num": 57
         },
@@ -2356,7 +2926,9 @@
           "choice_list_name": "circumcision_options",
           "data_value": 2,
           "display": {
-            "text": "As a child/youth"
+            "title": {
+              "text": "As a child/youth"
+            }
           },
           "_row_num": 58
         },
@@ -2364,7 +2936,9 @@
           "choice_list_name": "circumcision_options",
           "data_value": 3,
           "display": {
-            "text": "As an adult"
+            "title": {
+              "text": "As an adult"
+            }
           },
           "_row_num": 59
         },
@@ -2372,7 +2946,9 @@
           "choice_list_name": "circumcision_options",
           "data_value": 999,
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 60
         }
@@ -2382,7 +2958,9 @@
           "choice_list_name": "hiv_status",
           "data_value": 0,
           "display": {
-            "text": "HIV negative"
+            "title": {
+              "text": "HIV negative"
+            }
           },
           "_row_num": 61
         },
@@ -2390,7 +2968,9 @@
           "choice_list_name": "hiv_status",
           "data_value": 1,
           "display": {
-            "text": "HIV positive"
+            "title": {
+              "text": "HIV positive"
+            }
           },
           "_row_num": 62
         },
@@ -2398,7 +2978,9 @@
           "choice_list_name": "hiv_status",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 63
         },
@@ -2406,7 +2988,9 @@
           "choice_list_name": "hiv_status",
           "data_value": 999,
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 64
         }
@@ -2416,7 +3000,9 @@
           "choice_list_name": "yes_no_ns",
           "data_value": 1,
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 65
         },
@@ -2424,7 +3010,9 @@
           "choice_list_name": "yes_no_ns",
           "data_value": 0,
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 66
         },
@@ -2432,7 +3020,9 @@
           "choice_list_name": "yes_no_ns",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 67
         },
@@ -2440,7 +3030,9 @@
           "choice_list_name": "yes_no_ns",
           "data_value": 999,
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 68
         }
@@ -2450,7 +3042,9 @@
           "choice_list_name": "cd4_test_options",
           "data_value": -777,
           "display": {
-            "text": "Test not done"
+            "title": {
+              "text": "Test not done"
+            }
           },
           "_row_num": 69
         },
@@ -2458,7 +3052,9 @@
           "choice_list_name": "cd4_test_options",
           "data_value": -888,
           "display": {
-            "text": "Did not receive results"
+            "title": {
+              "text": "Did not receive results"
+            }
           },
           "_row_num": 70
         },
@@ -2466,7 +3062,9 @@
           "choice_list_name": "cd4_test_options",
           "data_value": -999,
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 71
         }
@@ -2476,7 +3074,9 @@
           "choice_list_name": "art_dose_options",
           "data_value": 1,
           "display": {
-            "text": "Yes, I missed one or more doses, but I took some medication"
+            "title": {
+              "text": "Yes, I missed one or more doses, but I took some medication"
+            }
           },
           "_row_num": 72
         },
@@ -2484,7 +3084,9 @@
           "choice_list_name": "art_dose_options",
           "data_value": 0,
           "display": {
-            "text": "No, I took all my doses"
+            "title": {
+              "text": "No, I took all my doses"
+            }
           },
           "_row_num": 73
         },
@@ -2492,7 +3094,9 @@
           "choice_list_name": "art_dose_options",
           "data_value": 2,
           "display": {
-            "text": "I did not take any of the medication"
+            "title": {
+              "text": "I did not take any of the medication"
+            }
           },
           "_row_num": 74
         },
@@ -2500,7 +3104,9 @@
           "choice_list_name": "art_dose_options",
           "data_value": 999,
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 75
         }
@@ -2510,7 +3116,9 @@
           "choice_list_name": "art_decision",
           "data_value": 1,
           "display": {
-            "text": "My decision"
+            "title": {
+              "text": "My decision"
+            }
           },
           "_row_num": 76
         },
@@ -2518,7 +3126,9 @@
           "choice_list_name": "art_decision",
           "data_value": 2,
           "display": {
-            "text": "Provider advised to discontinue"
+            "title": {
+              "text": "Provider advised to discontinue"
+            }
           },
           "_row_num": 77
         },
@@ -2526,7 +3136,9 @@
           "choice_list_name": "art_decision",
           "data_value": 3,
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 78
         }
@@ -2536,7 +3148,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": 1,
           "display": {
-            "text": "No time"
+            "title": {
+              "text": "No time"
+            }
           },
           "_row_num": 79
         },
@@ -2544,7 +3158,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": 2,
           "display": {
-            "text": "Does not want to be tested with partner"
+            "title": {
+              "text": "Does not want to be tested with partner"
+            }
           },
           "_row_num": 80
         },
@@ -2552,7 +3168,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": 3,
           "display": {
-            "text": "Does not want to be tested at home"
+            "title": {
+              "text": "Does not want to be tested at home"
+            }
           },
           "_row_num": 81
         },
@@ -2560,7 +3178,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": 4,
           "display": {
-            "text": "Feels he does not need the testing"
+            "title": {
+              "text": "Feels he does not need the testing"
+            }
           },
           "_row_num": 82
         },
@@ -2568,7 +3188,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": 5,
           "display": {
-            "text": "Feels he does not need the education"
+            "title": {
+              "text": "Feels he does not need the education"
+            }
           },
           "_row_num": 83
         },
@@ -2576,7 +3198,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": 6,
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 84
         },
@@ -2584,7 +3208,9 @@
           "choice_list_name": "no_participation_reasons",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 85
         }
@@ -2594,7 +3220,9 @@
           "choice_list_name": "hiv_test_results",
           "data_value": 0,
           "display": {
-            "text": "HIV negative"
+            "title": {
+              "text": "HIV negative"
+            }
           },
           "_row_num": 86
         },
@@ -2602,7 +3230,9 @@
           "choice_list_name": "hiv_test_results",
           "data_value": 1,
           "display": {
-            "text": "HIV positive"
+            "title": {
+              "text": "HIV positive"
+            }
           },
           "_row_num": 87
         }
@@ -2612,7 +3242,9 @@
           "choice_list_name": "acknowledge",
           "data_value": 1,
           "display": {
-            "text": "Continue"
+            "title": {
+              "text": "Continue"
+            }
           },
           "_row_num": 88
         }
@@ -2622,7 +3254,9 @@
           "choice_list_name": "study_participation",
           "data_value": 1,
           "display": {
-            "text": "Wants to participate in full study"
+            "title": {
+              "text": "Wants to participate in full study"
+            }
           },
           "_row_num": 89
         },
@@ -2630,7 +3264,9 @@
           "choice_list_name": "study_participation",
           "data_value": 0,
           "display": {
-            "text": "Does not want to participate"
+            "title": {
+              "text": "Does not want to participate"
+            }
           },
           "_row_num": 90
         }
@@ -2640,7 +3276,9 @@
           "choice_list_name": "blood_draw_options",
           "data_value": 1,
           "display": {
-            "text": "Client accepted testing, blood drawn"
+            "title": {
+              "text": "Client accepted testing, blood drawn"
+            }
           },
           "_row_num": 91
         },
@@ -2648,7 +3286,9 @@
           "choice_list_name": "blood_draw_options",
           "data_value": 0,
           "display": {
-            "text": "Client declined testing, blood not drawn"
+            "title": {
+              "text": "Client declined testing, blood not drawn"
+            }
           },
           "_row_num": 92
         }
@@ -2658,7 +3298,9 @@
           "choice_list_name": "discordant_options",
           "data_value": 1,
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 93
         },
@@ -2666,7 +3308,9 @@
           "choice_list_name": "discordant_options",
           "data_value": 0,
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 94
         },
@@ -2674,7 +3318,9 @@
           "choice_list_name": "discordant_options",
           "data_value": 2,
           "display": {
-            "text": "Unclear"
+            "title": {
+              "text": "Unclear"
+            }
           },
           "_row_num": 95
         }
@@ -2684,7 +3330,9 @@
           "choice_list_name": "prev_hiv_status",
           "data_value": 0,
           "display": {
-            "text": "HIV negative"
+            "title": {
+              "text": "HIV negative"
+            }
           },
           "_row_num": 96
         },
@@ -2692,7 +3340,9 @@
           "choice_list_name": "prev_hiv_status",
           "data_value": 1,
           "display": {
-            "text": "HIV positive"
+            "title": {
+              "text": "HIV positive"
+            }
           },
           "_row_num": 97
         },
@@ -2700,7 +3350,9 @@
           "choice_list_name": "prev_hiv_status",
           "data_value": 2,
           "display": {
-            "text": "Client declined previous testing"
+            "title": {
+              "text": "Client declined previous testing"
+            }
           },
           "_row_num": 98
         },
@@ -2708,7 +3360,9 @@
           "choice_list_name": "prev_hiv_status",
           "data_value": 3,
           "display": {
-            "text": "Client has not been tested for study yet"
+            "title": {
+              "text": "Client has not been tested for study yet"
+            }
           },
           "_row_num": 99
         }
@@ -2718,7 +3372,9 @@
           "choice_list_name": "rapid",
           "data_value": 1,
           "display": {
-            "text": "Client accepted testing, blood drawn"
+            "title": {
+              "text": "Client accepted testing, blood drawn"
+            }
           },
           "_row_num": 100
         },
@@ -2726,7 +3382,9 @@
           "choice_list_name": "rapid",
           "data_value": 2,
           "display": {
-            "text": "Client declined testing, blood not drawn"
+            "title": {
+              "text": "Client declined testing, blood not drawn"
+            }
           },
           "_row_num": 101
         }
@@ -2736,7 +3394,9 @@
           "choice_list_name": "wanted_pregnancy_time",
           "data_value": 1,
           "display": {
-            "text": "Wanted her to become pregnant then"
+            "title": {
+              "text": "Wanted her to become pregnant then"
+            }
           },
           "_row_num": 102
         },
@@ -2744,7 +3404,9 @@
           "choice_list_name": "wanted_pregnancy_time",
           "data_value": 0,
           "display": {
-            "text": "Wanted her to become pregnant later"
+            "title": {
+              "text": "Wanted her to become pregnant later"
+            }
           },
           "_row_num": 103
         },
@@ -2752,7 +3414,9 @@
           "choice_list_name": "wanted_pregnancy_time",
           "data_value": 666,
           "display": {
-            "text": "Did not want any (more) children at all"
+            "title": {
+              "text": "Did not want any (more) children at all"
+            }
           },
           "_row_num": 104
         },
@@ -2760,7 +3424,9 @@
           "choice_list_name": "wanted_pregnancy_time",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 105
         },
@@ -2768,7 +3434,9 @@
           "choice_list_name": "wanted_pregnancy_time",
           "data_value": 999,
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 106
         }
@@ -2778,7 +3446,9 @@
           "choice_list_name": "want_more_children",
           "data_value": 1,
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 108
         },
@@ -2786,7 +3456,9 @@
           "choice_list_name": "want_more_children",
           "data_value": 0,
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 109
         },
@@ -2794,7 +3466,9 @@
           "choice_list_name": "want_more_children",
           "data_value": 666,
           "display": {
-            "text": "Says wife/study partner can’t get pregnant again"
+            "title": {
+              "text": "Says wife/study partner can’t get pregnant again"
+            }
           },
           "_row_num": 110
         },
@@ -2802,7 +3476,9 @@
           "choice_list_name": "want_more_children",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 111
         },
@@ -2810,7 +3486,9 @@
           "choice_list_name": "want_more_children",
           "data_value": 999,
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 112
         }
@@ -2820,7 +3498,9 @@
           "choice_list_name": "wait_another_child",
           "data_value": 1,
           "display": {
-            "text": "Enter months"
+            "title": {
+              "text": "Enter months"
+            }
           },
           "_row_num": 114
         },
@@ -2828,7 +3508,9 @@
           "choice_list_name": "wait_another_child",
           "data_value": 2,
           "display": {
-            "text": "Enter years"
+            "title": {
+              "text": "Enter years"
+            }
           },
           "_row_num": 115
         },
@@ -2836,7 +3518,9 @@
           "choice_list_name": "wait_another_child",
           "data_value": 777,
           "display": {
-            "text": "After marriage (no specific time frame)"
+            "title": {
+              "text": "After marriage (no specific time frame)"
+            }
           },
           "_row_num": 116
         },
@@ -2844,7 +3528,9 @@
           "choice_list_name": "wait_another_child",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 117
         },
@@ -2852,7 +3538,9 @@
           "choice_list_name": "wait_another_child",
           "data_value": 999,
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 118
         }
@@ -2862,7 +3550,9 @@
           "choice_list_name": "partner_wants_children",
           "data_value": 1,
           "display": {
-            "text": "Same number"
+            "title": {
+              "text": "Same number"
+            }
           },
           "_row_num": 120
         },
@@ -2870,7 +3560,9 @@
           "choice_list_name": "partner_wants_children",
           "data_value": 2,
           "display": {
-            "text": "More children"
+            "title": {
+              "text": "More children"
+            }
           },
           "_row_num": 121
         },
@@ -2878,7 +3570,9 @@
           "choice_list_name": "partner_wants_children",
           "data_value": 3,
           "display": {
-            "text": "Fewer children"
+            "title": {
+              "text": "Fewer children"
+            }
           },
           "_row_num": 122
         },
@@ -2886,7 +3580,9 @@
           "choice_list_name": "partner_wants_children",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 123
         },
@@ -2894,7 +3590,9 @@
           "choice_list_name": "partner_wants_children",
           "data_value": 999,
           "display": {
-            "text": "Not sure"
+            "title": {
+              "text": "Not sure"
+            }
           },
           "_row_num": 124
         }
@@ -2904,7 +3602,9 @@
           "choice_list_name": "influences_having_children",
           "data_value": 1,
           "display": {
-            "text": "Mainly respondent"
+            "title": {
+              "text": "Mainly respondent"
+            }
           },
           "_row_num": 126
         },
@@ -2912,7 +3612,9 @@
           "choice_list_name": "influences_having_children",
           "data_value": 2,
           "display": {
-            "text": "Mainly wife/partner"
+            "title": {
+              "text": "Mainly wife/partner"
+            }
           },
           "_row_num": 127
         },
@@ -2920,7 +3622,9 @@
           "choice_list_name": "influences_having_children",
           "data_value": 3,
           "display": {
-            "text": "Both respondent and wife/partner together"
+            "title": {
+              "text": "Both respondent and wife/partner together"
+            }
           },
           "_row_num": 128
         },
@@ -2928,7 +3632,9 @@
           "choice_list_name": "influences_having_children",
           "data_value": 4,
           "display": {
-            "text": "Mainly parents"
+            "title": {
+              "text": "Mainly parents"
+            }
           },
           "_row_num": 129
         },
@@ -2936,7 +3642,9 @@
           "choice_list_name": "influences_having_children",
           "data_value": 5,
           "display": {
-            "text": "Mainly partner’s parents"
+            "title": {
+              "text": "Mainly partner’s parents"
+            }
           },
           "_row_num": 130
         },
@@ -2944,7 +3652,9 @@
           "choice_list_name": "influences_having_children",
           "data_value": 6,
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 131
         },
@@ -2952,7 +3662,9 @@
           "choice_list_name": "influences_having_children",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 132
         }
@@ -2962,7 +3674,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 1,
           "display": {
-            "text": "Female sterilization"
+            "title": {
+              "text": "Female sterilization"
+            }
           },
           "_row_num": 134
         },
@@ -2970,7 +3684,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 2,
           "display": {
-            "text": "Male sterilization"
+            "title": {
+              "text": "Male sterilization"
+            }
           },
           "_row_num": 135
         },
@@ -2978,7 +3694,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 3,
           "display": {
-            "text": "Pill"
+            "title": {
+              "text": "Pill"
+            }
           },
           "_row_num": 136
         },
@@ -2986,7 +3704,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 4,
           "display": {
-            "text": "Injectable"
+            "title": {
+              "text": "Injectable"
+            }
           },
           "_row_num": 137
         },
@@ -2994,7 +3714,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 5,
           "display": {
-            "text": "Implants"
+            "title": {
+              "text": "Implants"
+            }
           },
           "_row_num": 138
         },
@@ -3002,7 +3724,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 6,
           "display": {
-            "text": "IUD"
+            "title": {
+              "text": "IUD"
+            }
           },
           "_row_num": 139
         },
@@ -3010,7 +3734,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 7,
           "display": {
-            "text": "Male condom"
+            "title": {
+              "text": "Male condom"
+            }
           },
           "_row_num": 140
         },
@@ -3018,7 +3744,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 8,
           "display": {
-            "text": "Female condom"
+            "title": {
+              "text": "Female condom"
+            }
           },
           "_row_num": 141
         },
@@ -3026,7 +3754,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 9,
           "display": {
-            "text": "Lactational amenorrhea method"
+            "title": {
+              "text": "Lactational amenorrhea method"
+            }
           },
           "_row_num": 142
         },
@@ -3034,7 +3764,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 10,
           "display": {
-            "text": "Natural, rhythm or calendar method"
+            "title": {
+              "text": "Natural, rhythm or calendar method"
+            }
           },
           "_row_num": 143
         },
@@ -3042,7 +3774,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 11,
           "display": {
-            "text": "Withdrawal (man pulls out penis before end)"
+            "title": {
+              "text": "Withdrawal (man pulls out penis before end)"
+            }
           },
           "_row_num": 144
         },
@@ -3050,7 +3784,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 12,
           "display": {
-            "text": "Emergency contraception"
+            "title": {
+              "text": "Emergency contraception"
+            }
           },
           "_row_num": 145
         },
@@ -3058,7 +3794,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 13,
           "display": {
-            "text": "Herbs or other traditional method"
+            "title": {
+              "text": "Herbs or other traditional method"
+            }
           },
           "_row_num": 146
         },
@@ -3066,7 +3804,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 14,
           "display": {
-            "text": "Abstaining from sex"
+            "title": {
+              "text": "Abstaining from sex"
+            }
           },
           "_row_num": 147
         },
@@ -3074,7 +3814,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 15,
           "display": {
-            "text": "Other"
+            "title": {
+              "text": "Other"
+            }
           },
           "_row_num": 148
         },
@@ -3082,7 +3824,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 16,
           "display": {
-            "text": "None of the above"
+            "title": {
+              "text": "None of the above"
+            }
           },
           "_row_num": 149
         },
@@ -3090,7 +3834,9 @@
           "choice_list_name": "pregnancy_prevention_methods",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 150
         }
@@ -3100,7 +3846,9 @@
           "choice_list_name": "pretest",
           "data_value": 1,
           "display": {
-            "text": "Client accepted testing, blood drawn"
+            "title": {
+              "text": "Client accepted testing, blood drawn"
+            }
           },
           "_row_num": 152
         },
@@ -3108,7 +3856,9 @@
           "choice_list_name": "pretest",
           "data_value": 0,
           "display": {
-            "text": "Client declined testing, blood not drawn"
+            "title": {
+              "text": "Client declined testing, blood not drawn"
+            }
           },
           "_row_num": 153
         }
@@ -3118,7 +3868,9 @@
           "choice_list_name": "discordant",
           "data_value": 1,
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 155
         },
@@ -3126,7 +3878,9 @@
           "choice_list_name": "discordant",
           "data_value": 0,
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 156
         },
@@ -3134,7 +3888,9 @@
           "choice_list_name": "discordant",
           "data_value": 3,
           "display": {
-            "text": "Male HIV status is unknown"
+            "title": {
+              "text": "Male HIV status is unknown"
+            }
           },
           "_row_num": 157
         },
@@ -3142,7 +3898,9 @@
           "choice_list_name": "discordant",
           "data_value": 4,
           "display": {
-            "text": "Female HIV status is unknown"
+            "title": {
+              "text": "Female HIV status is unknown"
+            }
           },
           "_row_num": 158
         }
@@ -3152,7 +3910,9 @@
           "choice_list_name": "date_nr",
           "data_value": 1,
           "display": {
-            "text": "Enter date"
+            "title": {
+              "text": "Enter date"
+            }
           },
           "_row_num": 159
         },
@@ -3160,11 +3920,16 @@
           "choice_list_name": "date_nr",
           "data_value": 888,
           "display": {
-            "text": "Prefer not to respond"
+            "title": {
+              "text": "Prefer not to respond"
+            }
           },
           "_row_num": 160
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {},
     "calculates": {},
@@ -3662,7 +4427,9 @@
             "type": "text",
             "name": "interviewerw_init",
             "display": {
-              "text": "Enter Interviewer Initials"
+              "prompt": {
+                "text": "Enter Interviewer Initials"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -3675,7 +4442,9 @@
             "type": "integer",
             "name": "interviewer_id",
             "display": {
-              "text": "Enter Interviewer ID Number"
+              "prompt": {
+                "text": "Enter Interviewer ID Number"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -3688,7 +4457,9 @@
             "type": "date",
             "name": "date",
             "display": {
-              "text": "Date of Interview"
+              "prompt": {
+                "text": "Date of Interview"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -3701,8 +4472,12 @@
             "type": "integer",
             "name": "client_id",
             "display": {
-              "text": "Enter female partner's Client ID.",
-              "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+              "prompt": {
+                "text": "Enter female partner's Client ID."
+              },
+              "hint": {
+                "text": "5 Digit ID, cannot include 0. \nex: 12345"
+              }
             },
             "required": "true",
             "_row_num": 5,
@@ -3716,7 +4491,9 @@
             "type": "note",
             "name": "study_description",
             "display": {
-              "text": "Interviewer script: The antenatal clinic is participating in a study on home-based partner testing and counseling, in which couples will receive a home visit. In order to know whether you are eligible to participate in the study, I would like to ask you some questions. If you are eligible, I will tell you more about the study so you can decide whether or not you want to participate. If you agree, you will be giving verbal consent for us to ask you these questions and record your answers without recording your name."
+              "prompt": {
+                "text": "Interviewer script: The antenatal clinic is participating in a study on home-based partner testing and counseling, in which couples will receive a home visit. In order to know whether you are eligible to participate in the study, I would like to ask you some questions. If you are eligible, I will tell you more about the study so you can decide whether or not you want to participate. If you agree, you will be giving verbal consent for us to ask you these questions and record your answers without recording your name."
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -3730,7 +4507,9 @@
             "values_list": "yes_no",
             "name": "agree_screening",
             "display": {
-              "text": "Client agreed to be screened for eligibility?"
+              "prompt": {
+                "text": "Client agreed to be screened for eligibility?"
+              }
             },
             "required": "true",
             "_row_num": 7,
@@ -3744,7 +4523,9 @@
             "type": "note",
             "name": "refused_screening",
             "display": {
-              "text": "Thank you for considering being screened for the study. This will in no way affect the care that you, your children, or your partner will receive at the antenatal clinic."
+              "prompt": {
+                "text": "Thank you for considering being screened for the study. This will in no way affect the care that you, your children, or your partner will receive at the antenatal clinic."
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -3757,8 +4538,12 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "How old were you on your last birthday?",
-              "hint": "If younger than 18 years old, client is ineligible to be in the study. Screening will not continue."
+              "prompt": {
+                "text": "How old were you on your last birthday?"
+              },
+              "hint": {
+                "text": "If younger than 18 years old, client is ineligible to be in the study. Screening will not continue."
+              }
             },
             "required": "true",
             "_row_num": 9,
@@ -3773,7 +4558,9 @@
             "values_list": "ethnic_groups",
             "name": "ethnic_group",
             "display": {
-              "text": "What is your ethnic group background? Choose one:"
+              "prompt": {
+                "text": "What is your ethnic group background? Choose one:"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -3786,7 +4573,9 @@
             "type": "text",
             "name": "ethnic_group_other",
             "display": {
-              "text": "Specify other ethnic group background."
+              "prompt": {
+                "text": "Specify other ethnic group background."
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -3800,7 +4589,9 @@
             "values_list": "education_level_options",
             "name": "education_level",
             "display": {
-              "text": "What is the highest level of education you attended? Choose one:"
+              "prompt": {
+                "text": "What is the highest level of education you attended? Choose one:"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -3814,7 +4605,9 @@
             "values_list": "religion",
             "name": "religion",
             "display": {
-              "text": "What is your religious affiliation?"
+              "prompt": {
+                "text": "What is your religious affiliation?"
+              }
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -3827,7 +4620,9 @@
             "type": "text",
             "name": "religion_other",
             "display": {
-              "text": "Specify other religious affiliation."
+              "prompt": {
+                "text": "Specify other religious affiliation."
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -3841,7 +4636,9 @@
             "values_list": "employment",
             "name": "employment",
             "display": {
-              "text": "How would you characterize your employment or occupation? Choose all that apply:"
+              "prompt": {
+                "text": "How would you characterize your employment or occupation? Choose all that apply:"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -3854,7 +4651,9 @@
             "type": "text",
             "name": "employment_other",
             "display": {
-              "text": "Specify other employment."
+              "prompt": {
+                "text": "Specify other employment."
+              }
             },
             "_row_num": 18,
             "__rowNum__": 17,
@@ -3868,9 +4667,13 @@
             "values_list": "yes_no",
             "name": "curr_relationship",
             "display": {
-              "text": "Are you currently in a relationship with the woman who enrolled in the study?"
+              "prompt": {
+                "text": "Are you currently in a relationship with the woman who enrolled in the study?"
+              },
+              "constraint_message": {
+                "text": "Client is ineligible if not currently in a relationship with the woman who enrolled in the study, but continue screening"
+              }
             },
-            "constraint_message": "Client is ineligible if not currently in a relationship with the woman who enrolled in the study, but continue screening",
             "required": "true",
             "_row_num": 19,
             "__rowNum__": 18,
@@ -3883,7 +4686,9 @@
             "type": "integer",
             "name": "living_children",
             "display": {
-              "text": "How many living children do you have currently?"
+              "prompt": {
+                "text": "How many living children do you have currently?"
+              }
             },
             "_row_num": 20,
             "__rowNum__": 19,
@@ -3896,7 +4701,9 @@
             "type": "integer",
             "name": "living_children_enrolled_female",
             "display": {
-              "text": "How many living children do you have with the woman who enrolled in the study?"
+              "prompt": {
+                "text": "How many living children do you have with the woman who enrolled in the study?"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -3910,7 +4717,9 @@
             "values_list": "yes_no_nr",
             "name": "hiv_tested",
             "display": {
-              "text": "Have you been tested for HIV before?"
+              "prompt": {
+                "text": "Have you been tested for HIV before?"
+              }
             },
             "_row_num": 22,
             "__rowNum__": 21,
@@ -3924,7 +4733,9 @@
             "values_list": "hiv_test_results",
             "name": "test_result",
             "display": {
-              "text": "What was the result of your last HIV test?"
+              "prompt": {
+                "text": "What was the result of your last HIV test?"
+              }
             },
             "_row_num": 23,
             "__rowNum__": 22,
@@ -3937,8 +4748,12 @@
             "type": "note",
             "name": "ineligible_list",
             "display": {
-              "text": "Client is INELIGIBLE for the following reasons:",
-              "hint": "If client is eligible for study, review previous questions and responses."
+              "prompt": {
+                "text": "Client is INELIGIBLE for the following reasons:"
+              },
+              "hint": {
+                "text": "If client is eligible for study, review previous questions and responses."
+              }
             },
             "_row_num": 24,
             "__rowNum__": 23,
@@ -3951,7 +4766,9 @@
             "type": "note",
             "name": "list_curr_rel",
             "display": {
-              "text": "- ${_ineligible_curr_relationship}"
+              "prompt": {
+                "text": "- ${_ineligible_curr_relationship}"
+              }
             },
             "_row_num": 25,
             "__rowNum__": 24,
@@ -3965,7 +4782,9 @@
             "values_list": "acknowledge",
             "name": "ineligible_statement",
             "display": {
-              "text": "Say: Thank you for your time in answering these questions. Based on some of the answers you gave, you are ineligible to be a part of the study. This in no way affects the care you will receive here at the antenatal clinic. Can I answer any questions you may have?"
+              "prompt": {
+                "text": "Say: Thank you for your time in answering these questions. Based on some of the answers you gave, you are ineligible to be a part of the study. This in no way affects the care you will receive here at the antenatal clinic. Can I answer any questions you may have?"
+              }
             },
             "_row_num": 26,
             "__rowNum__": 25,
@@ -3978,8 +4797,12 @@
             "type": "note",
             "name": "client_eligible",
             "display": {
-              "text": "Client is ELIGIBLE",
-              "hint": "If client is NOT eligible for study, review previous questions and responses."
+              "prompt": {
+                "text": "Client is ELIGIBLE"
+              },
+              "hint": {
+                "text": "If client is NOT eligible for study, review previous questions and responses."
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -3993,8 +4816,12 @@
             "values_list": "study_participation",
             "name": "client_consent",
             "display": {
-              "text": "Say: Thank you for your time in answering these questions. Based on the answers you gave, you are eligible to be a part of the study. Would you like to participate in the study?",
-              "hint": "Read consent form with participant and go through written consent process."
+              "prompt": {
+                "text": "Say: Thank you for your time in answering these questions. Based on the answers you gave, you are eligible to be a part of the study. Would you like to participate in the study?"
+              },
+              "hint": {
+                "text": "Read consent form with participant and go through written consent process."
+              }
             },
             "_row_num": 28,
             "__rowNum__": 27,
@@ -4008,7 +4835,9 @@
             "values_list": "no_participation_reasons",
             "name": "refusal_reasons",
             "display": {
-              "text": "I understand you do not want to participate in this study. Could you let me know why you would not like to participate? Check all that apply:"
+              "prompt": {
+                "text": "I understand you do not want to participate in this study. Could you let me know why you would not like to participate? Check all that apply:"
+              }
             },
             "_row_num": 29,
             "__rowNum__": 28,
@@ -4021,7 +4850,9 @@
             "type": "text",
             "name": "refusal_reasons_other",
             "display": {
-              "text": "Specify other reason"
+              "prompt": {
+                "text": "Specify other reason"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -4034,7 +4865,9 @@
             "type": "note",
             "name": "refusal_statement",
             "display": {
-              "text": "Say: Thank you for letting me know why you do not want to participate. It is important for us to know why women may feel this way. This will in no way affect the care that you, your children, or your partner will receive at the antenatal clinic."
+              "prompt": {
+                "text": "Say: Thank you for letting me know why you do not want to participate. It is important for us to know why women may feel this way. This will in no way affect the care that you, your children, or your partner will receive at the antenatal clinic."
+              }
             },
             "_row_num": 31,
             "__rowNum__": 30,
@@ -4047,7 +4880,9 @@
             "type": "note",
             "name": "survey_complete",
             "display": {
-              "text": "The screening is now complete, please go to the next page to finalize your responses."
+              "prompt": {
+                "text": "The screening is now complete, please go to the next page to finalize your responses."
+              }
             },
             "_row_num": 32,
             "__rowNum__": 31,
@@ -4060,7 +4895,9 @@
             "type": "text",
             "name": "interviewerw_init",
             "display": {
-              "text": "Enter Interviewer Initials"
+              "prompt": {
+                "text": "Enter Interviewer Initials"
+              }
             },
             "_row_num": 33,
             "__rowNum__": 32,
@@ -4073,7 +4910,9 @@
             "type": "integer",
             "name": "interviewer_id",
             "display": {
-              "text": "Enter Interviewer ID Number"
+              "prompt": {
+                "text": "Enter Interviewer ID Number"
+              }
             },
             "_row_num": 34,
             "__rowNum__": 33,
@@ -4086,7 +4925,9 @@
             "type": "date",
             "name": "date",
             "display": {
-              "text": "Date of Interview"
+              "prompt": {
+                "text": "Date of Interview"
+              }
             },
             "_row_num": 35,
             "__rowNum__": 34,
@@ -4099,8 +4940,12 @@
             "type": "integer",
             "name": "client_id",
             "display": {
-              "text": "Enter female partner's Client ID.",
-              "hint": "5 Digit ID, cannot include 0. \nex: 12345"
+              "prompt": {
+                "text": "Enter female partner's Client ID."
+              },
+              "hint": {
+                "text": "5 Digit ID, cannot include 0. \nex: 12345"
+              }
             },
             "required": "true",
             "_row_num": 36,
@@ -4115,8 +4960,12 @@
             "values_list": "prev_hiv_status",
             "name": "hiv_status",
             "display": {
-              "text": "What is the client’s HIV status from previous study HIV testing?",
-              "hint": "Refer to patient information"
+              "prompt": {
+                "text": "What is the client’s HIV status from previous study HIV testing?"
+              },
+              "hint": {
+                "text": "Refer to patient information"
+              }
             },
             "_row_num": 37,
             "__rowNum__": 36,
@@ -4130,7 +4979,9 @@
             "values_list": "rapid",
             "name": "pretest",
             "display": {
-              "text": "Please do pre-test counseling and draw blood from client for rapid test."
+              "prompt": {
+                "text": "Please do pre-test counseling and draw blood from client for rapid test."
+              }
             },
             "_row_num": 38,
             "__rowNum__": 37,
@@ -4143,7 +4994,9 @@
             "type": "note",
             "name": "script1",
             "display": {
-              "text": "Script 1: I will now ask about your current relationship status."
+              "prompt": {
+                "text": "Script 1: I will now ask about your current relationship status."
+              }
             },
             "_row_num": 39,
             "__rowNum__": 38,
@@ -4157,7 +5010,9 @@
             "values_list": "yes_no",
             "name": "still_relationship",
             "display": {
-              "text": "Are you still in a relationship with the woman who enrolled in this study during pregnancy?"
+              "prompt": {
+                "text": "Are you still in a relationship with the woman who enrolled in this study during pregnancy?"
+              }
             },
             "_row_num": 40,
             "__rowNum__": 39,
@@ -4170,7 +5025,9 @@
             "type": "note",
             "name": "script2",
             "display": {
-              "text": "Script 2 : Now I will ask you questions about the number of children you would like to have."
+              "prompt": {
+                "text": "Script 2 : Now I will ask you questions about the number of children you would like to have."
+              }
             },
             "_row_num": 41,
             "__rowNum__": 40,
@@ -4184,7 +5041,9 @@
             "values_list": "wanted_pregnancy_time",
             "name": "preg_want_children",
             "display": {
-              "text": "At the time your wife/partner became pregnant, did you want her to become pregnant, did you want her to wait until later, or did you not want any (more) children at all?"
+              "prompt": {
+                "text": "At the time your wife/partner became pregnant, did you want her to become pregnant, did you want her to wait until later, or did you not want any (more) children at all?"
+              }
             },
             "_row_num": 42,
             "__rowNum__": 41,
@@ -4198,7 +5057,9 @@
             "values_list": "want_more_children",
             "name": "more_children",
             "display": {
-              "text": "Would you like to have more children?"
+              "prompt": {
+                "text": "Would you like to have more children?"
+              }
             },
             "_row_num": 43,
             "__rowNum__": 42,
@@ -4212,7 +5073,9 @@
             "values_list": "partner_wants_children",
             "name": "partner_want_children",
             "display": {
-              "text": "Do you think that your wife/partner wants the same number of children that you want, or does she want more or fewer than you want?"
+              "prompt": {
+                "text": "Do you think that your wife/partner wants the same number of children that you want, or does she want more or fewer than you want?"
+              }
             },
             "_row_num": 44,
             "__rowNum__": 43,
@@ -4226,8 +5089,12 @@
             "values_list": "influences_having_children",
             "name": "influences",
             "display": {
-              "text": "Who has the most influence on decisions about the timing and number of children you will have?",
-              "hint": "Review options with client and choose one."
+              "prompt": {
+                "text": "Who has the most influence on decisions about the timing and number of children you will have?"
+              },
+              "hint": {
+                "text": "Review options with client and choose one."
+              }
             },
             "_row_num": 45,
             "__rowNum__": 44,
@@ -4240,7 +5107,9 @@
             "type": "text",
             "name": "influences_other",
             "display": {
-              "text": "Specify other influence."
+              "prompt": {
+                "text": "Specify other influence."
+              }
             },
             "_row_num": 46,
             "__rowNum__": 45,
@@ -4253,7 +5122,9 @@
             "type": "note",
             "name": "script3",
             "display": {
-              "text": "Script 3: Now I would like to talk about your HIV test results."
+              "prompt": {
+                "text": "Script 3: Now I would like to talk about your HIV test results."
+              }
             },
             "_row_num": 47,
             "__rowNum__": 46,
@@ -4267,7 +5138,9 @@
             "values_list": "hiv_test_results",
             "name": "test_result",
             "display": {
-              "text": "What was the result of your most recent HIV test?"
+              "prompt": {
+                "text": "What was the result of your most recent HIV test?"
+              }
             },
             "_row_num": 48,
             "__rowNum__": 47,
@@ -4281,7 +5154,9 @@
             "values_list": "yes_no_ns",
             "name": "ccc",
             "display": {
-              "text": "Have you ever enrolled or registered into a HIV comprehensive care clinic (CCC)?"
+              "prompt": {
+                "text": "Have you ever enrolled or registered into a HIV comprehensive care clinic (CCC)?"
+              }
             },
             "_row_num": 49,
             "__rowNum__": 48,
@@ -4295,7 +5170,9 @@
             "values_list": "yes_no_nr",
             "name": "prescr_tmp",
             "display": {
-              "text": "Have you been prescribed TMP-SMX (Cotrimoxazole)?"
+              "prompt": {
+                "text": "Have you been prescribed TMP-SMX (Cotrimoxazole)?"
+              }
             },
             "_row_num": 50,
             "__rowNum__": 49,
@@ -4309,7 +5186,9 @@
             "values_list": "yes_no_nr",
             "name": "curr_tmp",
             "display": {
-              "text": "Are you currently taking TMP-SMX?"
+              "prompt": {
+                "text": "Are you currently taking TMP-SMX?"
+              }
             },
             "_row_num": 51,
             "__rowNum__": 50,
@@ -4323,7 +5202,9 @@
             "values_list": "yes_no_nr",
             "name": "prescr_art",
             "display": {
-              "text": "Have you been prescribed ART to manage your HIV infection?"
+              "prompt": {
+                "text": "Have you been prescribed ART to manage your HIV infection?"
+              }
             },
             "_row_num": 52,
             "__rowNum__": 51,
@@ -4337,7 +5218,9 @@
             "values_list": "yes_no_nr",
             "name": "curr_taking_art",
             "display": {
-              "text": "Are you currently taking the treatment you were prescribed?"
+              "prompt": {
+                "text": "Are you currently taking the treatment you were prescribed?"
+              }
             },
             "_row_num": 53,
             "__rowNum__": 52,
@@ -4350,7 +5233,9 @@
             "type": "note",
             "name": "script4",
             "display": {
-              "text": "Script 4: Thank you for your time in answering these questions."
+              "prompt": {
+                "text": "Script 4: Thank you for your time in answering these questions."
+              }
             },
             "_row_num": 54,
             "__rowNum__": 53,
@@ -4363,8 +5248,12 @@
             "type": "note",
             "name": "hiv_testing_script",
             "display": {
-              "text": "Now we will do the post-test counseling for the HIV test.",
-              "hint": "The interviewer will record the HIV test results and provide post-test counsel for client concerning the results."
+              "prompt": {
+                "text": "Now we will do the post-test counseling for the HIV test."
+              },
+              "hint": {
+                "text": "The interviewer will record the HIV test results and provide post-test counsel for client concerning the results."
+              }
             },
             "_row_num": 55,
             "__rowNum__": 54,
@@ -4378,7 +5267,9 @@
             "values_list": "hiv_status",
             "name": "determine",
             "display": {
-              "text": "HIV – 1st Test Result (Rapid Test—Determine)"
+              "prompt": {
+                "text": "HIV – 1st Test Result (Rapid Test—Determine)"
+              }
             },
             "_row_num": 56,
             "__rowNum__": 55,
@@ -4392,7 +5283,9 @@
             "values_list": "pretest",
             "name": "advise_second",
             "display": {
-              "text": "Please advise client a second test is needed."
+              "prompt": {
+                "text": "Please advise client a second test is needed."
+              }
             },
             "_row_num": 57,
             "__rowNum__": 56,
@@ -4406,7 +5299,9 @@
             "values_list": "hiv_status",
             "name": "unigold",
             "display": {
-              "text": "HIV – 2nd Test Result (Rapid Test—Unigold)"
+              "prompt": {
+                "text": "HIV – 2nd Test Result (Rapid Test—Unigold)"
+              }
             },
             "_row_num": 58,
             "__rowNum__": 57,
@@ -4419,7 +5314,9 @@
             "type": "note",
             "name": "pos",
             "display": {
-              "text": "Client's HIV status is: HIV positive"
+              "prompt": {
+                "text": "Client's HIV status is: HIV positive"
+              }
             },
             "_row_num": 59,
             "__rowNum__": 58,
@@ -4432,7 +5329,9 @@
             "type": "note",
             "name": "neg",
             "display": {
-              "text": "Client's HIV status is: HIV negative"
+              "prompt": {
+                "text": "Client's HIV status is: HIV negative"
+              }
             },
             "_row_num": 60,
             "__rowNum__": 59,
@@ -4445,7 +5344,9 @@
             "type": "note",
             "name": "inconclusive",
             "display": {
-              "text": "Client's HIV status is: Inconclusive, requires ELISA testing"
+              "prompt": {
+                "text": "Client's HIV status is: Inconclusive, requires ELISA testing"
+              }
             },
             "_row_num": 61,
             "__rowNum__": 60,
@@ -4459,8 +5360,12 @@
             "values_list": "yes_no",
             "name": "elisa_blood_drawn",
             "display": {
-              "text": "Was blood drawn from client for ELISA?",
-              "hint": "If instructed to perform ELISA"
+              "prompt": {
+                "text": "Was blood drawn from client for ELISA?"
+              },
+              "hint": {
+                "text": "If instructed to perform ELISA"
+              }
             },
             "_row_num": 62,
             "__rowNum__": 61,
@@ -4474,7 +5379,9 @@
             "values_list": "discordant",
             "name": "discordant",
             "display": {
-              "text": "Is the couple discordant?"
+              "prompt": {
+                "text": "Is the couple discordant?"
+              }
             },
             "_row_num": 63,
             "__rowNum__": 62,
@@ -4488,7 +5395,9 @@
             "values_list": "yes_no",
             "name": "return_disc_retest",
             "display": {
-              "text": "Was a return visit scheduled for discordant re-testing?"
+              "prompt": {
+                "text": "Was a return visit scheduled for discordant re-testing?"
+              }
             },
             "_row_num": 64,
             "__rowNum__": 63,
@@ -4501,7 +5410,9 @@
             "type": "text",
             "name": "comments",
             "display": {
-              "text": "Interviewer comments:"
+              "prompt": {
+                "text": "Interviewer comments:"
+              }
             },
             "_row_num": 65,
             "__rowNum__": 64,
@@ -4514,7 +5425,9 @@
             "type": "note",
             "name": "survey_end",
             "display": {
-              "text": "The screening is now complete, please go to the next page to finalize your responses."
+              "prompt": {
+                "text": "The screening is now complete, please go to the next page to finalize your responses."
+              }
             },
             "_row_num": 66,
             "__rowNum__": 65,
@@ -5019,7 +5932,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "All Partner Form Fields"
+              "title": {
+                "text": "All Partner Form Fields"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -5834,21 +6749,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -5858,6 +6765,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -5865,6 +6796,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -5897,203 +6836,203 @@
         "_aspect": "advise_second",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"pretest\",\"data_value\":1,\"display\":{\"text\":\"Client accepted testing, blood drawn\"},\"_row_num\":152},{\"choice_list_name\":\"pretest\",\"data_value\":0,\"display\":{\"text\":\"Client declined testing, blood not drawn\"},\"_row_num\":153}]"
+        "_value": "[{\"choice_list_name\":\"pretest\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Client accepted testing, blood drawn\"}},\"_row_num\":152},{\"choice_list_name\":\"pretest\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"Client declined testing, blood not drawn\"}},\"_row_num\":153}]"
       },
       {
         "_partition": "Column",
         "_aspect": "agree_screening",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ccc",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no_ns\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":65},{\"choice_list_name\":\"yes_no_ns\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":66},{\"choice_list_name\":\"yes_no_ns\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":67},{\"choice_list_name\":\"yes_no_ns\",\"data_value\":999,\"display\":{\"text\":\"Not sure\"},\"_row_num\":68}]"
+        "_value": "[{\"choice_list_name\":\"yes_no_ns\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":65},{\"choice_list_name\":\"yes_no_ns\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":66},{\"choice_list_name\":\"yes_no_ns\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":67},{\"choice_list_name\":\"yes_no_ns\",\"data_value\":999,\"display\":{\"title\":{\"text\":\"Not sure\"}},\"_row_num\":68}]"
       },
       {
         "_partition": "Column",
         "_aspect": "client_consent",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"study_participation\",\"data_value\":1,\"display\":{\"text\":\"Wants to participate in full study\"},\"_row_num\":89},{\"choice_list_name\":\"study_participation\",\"data_value\":0,\"display\":{\"text\":\"Does not want to participate\"},\"_row_num\":90}]"
+        "_value": "[{\"choice_list_name\":\"study_participation\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Wants to participate in full study\"}},\"_row_num\":89},{\"choice_list_name\":\"study_participation\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"Does not want to participate\"}},\"_row_num\":90}]"
       },
       {
         "_partition": "Column",
         "_aspect": "curr_relationship",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "curr_taking_art",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no_nr\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":5},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":6},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":7}]"
+        "_value": "[{\"choice_list_name\":\"yes_no_nr\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":7}]"
       },
       {
         "_partition": "Column",
         "_aspect": "curr_tmp",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no_nr\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":5},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":6},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":7}]"
+        "_value": "[{\"choice_list_name\":\"yes_no_nr\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":7}]"
       },
       {
         "_partition": "Column",
         "_aspect": "determine",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"hiv_status\",\"data_value\":0,\"display\":{\"text\":\"HIV negative\"},\"_row_num\":61},{\"choice_list_name\":\"hiv_status\",\"data_value\":1,\"display\":{\"text\":\"HIV positive\"},\"_row_num\":62},{\"choice_list_name\":\"hiv_status\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":63},{\"choice_list_name\":\"hiv_status\",\"data_value\":999,\"display\":{\"text\":\"Not sure\"},\"_row_num\":64}]"
+        "_value": "[{\"choice_list_name\":\"hiv_status\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"HIV negative\"}},\"_row_num\":61},{\"choice_list_name\":\"hiv_status\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"HIV positive\"}},\"_row_num\":62},{\"choice_list_name\":\"hiv_status\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":63},{\"choice_list_name\":\"hiv_status\",\"data_value\":999,\"display\":{\"title\":{\"text\":\"Not sure\"}},\"_row_num\":64}]"
       },
       {
         "_partition": "Column",
         "_aspect": "discordant",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"discordant\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":155},{\"choice_list_name\":\"discordant\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":156},{\"choice_list_name\":\"discordant\",\"data_value\":3,\"display\":{\"text\":\"Male HIV status is unknown\"},\"_row_num\":157},{\"choice_list_name\":\"discordant\",\"data_value\":4,\"display\":{\"text\":\"Female HIV status is unknown\"},\"_row_num\":158}]"
+        "_value": "[{\"choice_list_name\":\"discordant\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":155},{\"choice_list_name\":\"discordant\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":156},{\"choice_list_name\":\"discordant\",\"data_value\":3,\"display\":{\"title\":{\"text\":\"Male HIV status is unknown\"}},\"_row_num\":157},{\"choice_list_name\":\"discordant\",\"data_value\":4,\"display\":{\"title\":{\"text\":\"Female HIV status is unknown\"}},\"_row_num\":158}]"
       },
       {
         "_partition": "Column",
         "_aspect": "education_level",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"education_level_options\",\"data_value\":0,\"display\":{\"text\":\"No formal education\"},\"_row_num\":46},{\"choice_list_name\":\"education_level_options\",\"data_value\":1,\"display\":{\"text\":\"Lower primary 1-3\"},\"_row_num\":47},{\"choice_list_name\":\"education_level_options\",\"data_value\":2,\"display\":{\"text\":\"Upper primary 4-8\"},\"_row_num\":48},{\"choice_list_name\":\"education_level_options\",\"data_value\":3,\"display\":{\"text\":\"Secondary - not completed\"},\"_row_num\":49},{\"choice_list_name\":\"education_level_options\",\"data_value\":4,\"display\":{\"text\":\"Secondary completed\"},\"_row_num\":50},{\"choice_list_name\":\"education_level_options\",\"data_value\":5,\"display\":{\"text\":\"Above secondary\"},\"_row_num\":51},{\"choice_list_name\":\"education_level_options\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":52}]"
+        "_value": "[{\"choice_list_name\":\"education_level_options\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No formal education\"}},\"_row_num\":46},{\"choice_list_name\":\"education_level_options\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Lower primary 1-3\"}},\"_row_num\":47},{\"choice_list_name\":\"education_level_options\",\"data_value\":2,\"display\":{\"title\":{\"text\":\"Upper primary 4-8\"}},\"_row_num\":48},{\"choice_list_name\":\"education_level_options\",\"data_value\":3,\"display\":{\"title\":{\"text\":\"Secondary - not completed\"}},\"_row_num\":49},{\"choice_list_name\":\"education_level_options\",\"data_value\":4,\"display\":{\"title\":{\"text\":\"Secondary completed\"}},\"_row_num\":50},{\"choice_list_name\":\"education_level_options\",\"data_value\":5,\"display\":{\"title\":{\"text\":\"Above secondary\"}},\"_row_num\":51},{\"choice_list_name\":\"education_level_options\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":52}]"
       },
       {
         "_partition": "Column",
         "_aspect": "elisa_blood_drawn",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "employment",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"employment\",\"data_value\":0,\"display\":{\"text\":\"Not employed\"},\"_row_num\":31},{\"choice_list_name\":\"employment\",\"data_value\":1,\"display\":{\"text\":\"Casual laborer\"},\"_row_num\":32},{\"choice_list_name\":\"employment\",\"data_value\":2,\"display\":{\"text\":\"Small business\"},\"_row_num\":33},{\"choice_list_name\":\"employment\",\"data_value\":3,\"display\":{\"text\":\"Salaried position\"},\"_row_num\":34},{\"choice_list_name\":\"employment\",\"data_value\":4,\"display\":{\"text\":\"Farmer/pastoralist\"},\"_row_num\":35},{\"choice_list_name\":\"employment\",\"data_value\":5,\"display\":{\"text\":\"Fishing business\"},\"_row_num\":36},{\"choice_list_name\":\"employment\",\"data_value\":6,\"display\":{\"text\":\"Pastor/religious leader\"},\"_row_num\":37},{\"choice_list_name\":\"employment\",\"data_value\":7,\"display\":{\"text\":\"Other\"},\"_row_num\":38},{\"choice_list_name\":\"employment\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":39}]"
+        "_value": "[{\"choice_list_name\":\"employment\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"Not employed\"}},\"_row_num\":31},{\"choice_list_name\":\"employment\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Casual laborer\"}},\"_row_num\":32},{\"choice_list_name\":\"employment\",\"data_value\":2,\"display\":{\"title\":{\"text\":\"Small business\"}},\"_row_num\":33},{\"choice_list_name\":\"employment\",\"data_value\":3,\"display\":{\"title\":{\"text\":\"Salaried position\"}},\"_row_num\":34},{\"choice_list_name\":\"employment\",\"data_value\":4,\"display\":{\"title\":{\"text\":\"Farmer/pastoralist\"}},\"_row_num\":35},{\"choice_list_name\":\"employment\",\"data_value\":5,\"display\":{\"title\":{\"text\":\"Fishing business\"}},\"_row_num\":36},{\"choice_list_name\":\"employment\",\"data_value\":6,\"display\":{\"title\":{\"text\":\"Pastor/religious leader\"}},\"_row_num\":37},{\"choice_list_name\":\"employment\",\"data_value\":7,\"display\":{\"title\":{\"text\":\"Other\"}},\"_row_num\":38},{\"choice_list_name\":\"employment\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":39}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ethnic_group",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"ethnic_groups\",\"data_value\":1,\"display\":{\"text\":\"Luo\"},\"_row_num\":12},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":2,\"display\":{\"text\":\"Luhya\"},\"_row_num\":13},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":3,\"display\":{\"text\":\"Kalenjin\"},\"_row_num\":14},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":4,\"display\":{\"text\":\"Kisii\"},\"_row_num\":15},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":5,\"display\":{\"text\":\"Kuria\"},\"_row_num\":16},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":6,\"display\":{\"text\":\"Nandi\"},\"_row_num\":17},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":7,\"display\":{\"text\":\"Other\"},\"_row_num\":18},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":19}]"
+        "_value": "[{\"choice_list_name\":\"ethnic_groups\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Luo\"}},\"_row_num\":12},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":2,\"display\":{\"title\":{\"text\":\"Luhya\"}},\"_row_num\":13},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":3,\"display\":{\"title\":{\"text\":\"Kalenjin\"}},\"_row_num\":14},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":4,\"display\":{\"title\":{\"text\":\"Kisii\"}},\"_row_num\":15},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":5,\"display\":{\"title\":{\"text\":\"Kuria\"}},\"_row_num\":16},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":6,\"display\":{\"title\":{\"text\":\"Nandi\"}},\"_row_num\":17},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":7,\"display\":{\"title\":{\"text\":\"Other\"}},\"_row_num\":18},{\"choice_list_name\":\"ethnic_groups\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":19}]"
       },
       {
         "_partition": "Column",
         "_aspect": "hiv_status",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"prev_hiv_status\",\"data_value\":0,\"display\":{\"text\":\"HIV negative\"},\"_row_num\":96},{\"choice_list_name\":\"prev_hiv_status\",\"data_value\":1,\"display\":{\"text\":\"HIV positive\"},\"_row_num\":97},{\"choice_list_name\":\"prev_hiv_status\",\"data_value\":2,\"display\":{\"text\":\"Client declined previous testing\"},\"_row_num\":98},{\"choice_list_name\":\"prev_hiv_status\",\"data_value\":3,\"display\":{\"text\":\"Client has not been tested for study yet\"},\"_row_num\":99}]"
+        "_value": "[{\"choice_list_name\":\"prev_hiv_status\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"HIV negative\"}},\"_row_num\":96},{\"choice_list_name\":\"prev_hiv_status\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"HIV positive\"}},\"_row_num\":97},{\"choice_list_name\":\"prev_hiv_status\",\"data_value\":2,\"display\":{\"title\":{\"text\":\"Client declined previous testing\"}},\"_row_num\":98},{\"choice_list_name\":\"prev_hiv_status\",\"data_value\":3,\"display\":{\"title\":{\"text\":\"Client has not been tested for study yet\"}},\"_row_num\":99}]"
       },
       {
         "_partition": "Column",
         "_aspect": "hiv_tested",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no_nr\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":5},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":6},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":7}]"
+        "_value": "[{\"choice_list_name\":\"yes_no_nr\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":7}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ineligible_statement",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"acknowledge\",\"data_value\":1,\"display\":{\"text\":\"Continue\"},\"_row_num\":88}]"
+        "_value": "[{\"choice_list_name\":\"acknowledge\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Continue\"}},\"_row_num\":88}]"
       },
       {
         "_partition": "Column",
         "_aspect": "influences",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"influences_having_children\",\"data_value\":1,\"display\":{\"text\":\"Mainly respondent\"},\"_row_num\":126},{\"choice_list_name\":\"influences_having_children\",\"data_value\":2,\"display\":{\"text\":\"Mainly wife/partner\"},\"_row_num\":127},{\"choice_list_name\":\"influences_having_children\",\"data_value\":3,\"display\":{\"text\":\"Both respondent and wife/partner together\"},\"_row_num\":128},{\"choice_list_name\":\"influences_having_children\",\"data_value\":4,\"display\":{\"text\":\"Mainly parents\"},\"_row_num\":129},{\"choice_list_name\":\"influences_having_children\",\"data_value\":5,\"display\":{\"text\":\"Mainly partner’s parents\"},\"_row_num\":130},{\"choice_list_name\":\"influences_having_children\",\"data_value\":6,\"display\":{\"text\":\"Other\"},\"_row_num\":131},{\"choice_list_name\":\"influences_having_children\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":132}]"
+        "_value": "[{\"choice_list_name\":\"influences_having_children\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Mainly respondent\"}},\"_row_num\":126},{\"choice_list_name\":\"influences_having_children\",\"data_value\":2,\"display\":{\"title\":{\"text\":\"Mainly wife/partner\"}},\"_row_num\":127},{\"choice_list_name\":\"influences_having_children\",\"data_value\":3,\"display\":{\"title\":{\"text\":\"Both respondent and wife/partner together\"}},\"_row_num\":128},{\"choice_list_name\":\"influences_having_children\",\"data_value\":4,\"display\":{\"title\":{\"text\":\"Mainly parents\"}},\"_row_num\":129},{\"choice_list_name\":\"influences_having_children\",\"data_value\":5,\"display\":{\"title\":{\"text\":\"Mainly partner’s parents\"}},\"_row_num\":130},{\"choice_list_name\":\"influences_having_children\",\"data_value\":6,\"display\":{\"title\":{\"text\":\"Other\"}},\"_row_num\":131},{\"choice_list_name\":\"influences_having_children\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":132}]"
       },
       {
         "_partition": "Column",
         "_aspect": "more_children",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"want_more_children\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":108},{\"choice_list_name\":\"want_more_children\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":109},{\"choice_list_name\":\"want_more_children\",\"data_value\":666,\"display\":{\"text\":\"Says wife/study partner can’t get pregnant again\"},\"_row_num\":110},{\"choice_list_name\":\"want_more_children\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":111},{\"choice_list_name\":\"want_more_children\",\"data_value\":999,\"display\":{\"text\":\"Not sure\"},\"_row_num\":112}]"
+        "_value": "[{\"choice_list_name\":\"want_more_children\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":108},{\"choice_list_name\":\"want_more_children\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":109},{\"choice_list_name\":\"want_more_children\",\"data_value\":666,\"display\":{\"title\":{\"text\":\"Says wife/study partner can’t get pregnant again\"}},\"_row_num\":110},{\"choice_list_name\":\"want_more_children\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":111},{\"choice_list_name\":\"want_more_children\",\"data_value\":999,\"display\":{\"title\":{\"text\":\"Not sure\"}},\"_row_num\":112}]"
       },
       {
         "_partition": "Column",
         "_aspect": "partner_want_children",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"partner_wants_children\",\"data_value\":1,\"display\":{\"text\":\"Same number\"},\"_row_num\":120},{\"choice_list_name\":\"partner_wants_children\",\"data_value\":2,\"display\":{\"text\":\"More children\"},\"_row_num\":121},{\"choice_list_name\":\"partner_wants_children\",\"data_value\":3,\"display\":{\"text\":\"Fewer children\"},\"_row_num\":122},{\"choice_list_name\":\"partner_wants_children\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":123},{\"choice_list_name\":\"partner_wants_children\",\"data_value\":999,\"display\":{\"text\":\"Not sure\"},\"_row_num\":124}]"
+        "_value": "[{\"choice_list_name\":\"partner_wants_children\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Same number\"}},\"_row_num\":120},{\"choice_list_name\":\"partner_wants_children\",\"data_value\":2,\"display\":{\"title\":{\"text\":\"More children\"}},\"_row_num\":121},{\"choice_list_name\":\"partner_wants_children\",\"data_value\":3,\"display\":{\"title\":{\"text\":\"Fewer children\"}},\"_row_num\":122},{\"choice_list_name\":\"partner_wants_children\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":123},{\"choice_list_name\":\"partner_wants_children\",\"data_value\":999,\"display\":{\"title\":{\"text\":\"Not sure\"}},\"_row_num\":124}]"
       },
       {
         "_partition": "Column",
         "_aspect": "preg_want_children",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"wanted_pregnancy_time\",\"data_value\":1,\"display\":{\"text\":\"Wanted her to become pregnant then\"},\"_row_num\":102},{\"choice_list_name\":\"wanted_pregnancy_time\",\"data_value\":0,\"display\":{\"text\":\"Wanted her to become pregnant later\"},\"_row_num\":103},{\"choice_list_name\":\"wanted_pregnancy_time\",\"data_value\":666,\"display\":{\"text\":\"Did not want any (more) children at all\"},\"_row_num\":104},{\"choice_list_name\":\"wanted_pregnancy_time\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":105},{\"choice_list_name\":\"wanted_pregnancy_time\",\"data_value\":999,\"display\":{\"text\":\"Not sure\"},\"_row_num\":106}]"
+        "_value": "[{\"choice_list_name\":\"wanted_pregnancy_time\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Wanted her to become pregnant then\"}},\"_row_num\":102},{\"choice_list_name\":\"wanted_pregnancy_time\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"Wanted her to become pregnant later\"}},\"_row_num\":103},{\"choice_list_name\":\"wanted_pregnancy_time\",\"data_value\":666,\"display\":{\"title\":{\"text\":\"Did not want any (more) children at all\"}},\"_row_num\":104},{\"choice_list_name\":\"wanted_pregnancy_time\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":105},{\"choice_list_name\":\"wanted_pregnancy_time\",\"data_value\":999,\"display\":{\"title\":{\"text\":\"Not sure\"}},\"_row_num\":106}]"
       },
       {
         "_partition": "Column",
         "_aspect": "prescr_art",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no_nr\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":5},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":6},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":7}]"
+        "_value": "[{\"choice_list_name\":\"yes_no_nr\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":7}]"
       },
       {
         "_partition": "Column",
         "_aspect": "prescr_tmp",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no_nr\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":5},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":6},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":7}]"
+        "_value": "[{\"choice_list_name\":\"yes_no_nr\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6},{\"choice_list_name\":\"yes_no_nr\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":7}]"
       },
       {
         "_partition": "Column",
         "_aspect": "pretest",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"rapid\",\"data_value\":1,\"display\":{\"text\":\"Client accepted testing, blood drawn\"},\"_row_num\":100},{\"choice_list_name\":\"rapid\",\"data_value\":2,\"display\":{\"text\":\"Client declined testing, blood not drawn\"},\"_row_num\":101}]"
+        "_value": "[{\"choice_list_name\":\"rapid\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Client accepted testing, blood drawn\"}},\"_row_num\":100},{\"choice_list_name\":\"rapid\",\"data_value\":2,\"display\":{\"title\":{\"text\":\"Client declined testing, blood not drawn\"}},\"_row_num\":101}]"
       },
       {
         "_partition": "Column",
         "_aspect": "refusal_reasons",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":1,\"display\":{\"text\":\"No time\"},\"_row_num\":79},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":2,\"display\":{\"text\":\"Does not want to be tested with partner\"},\"_row_num\":80},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":3,\"display\":{\"text\":\"Does not want to be tested at home\"},\"_row_num\":81},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":4,\"display\":{\"text\":\"Feels he does not need the testing\"},\"_row_num\":82},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":5,\"display\":{\"text\":\"Feels he does not need the education\"},\"_row_num\":83},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":6,\"display\":{\"text\":\"Other\"},\"_row_num\":84},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":85}]"
+        "_value": "[{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"No time\"}},\"_row_num\":79},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":2,\"display\":{\"title\":{\"text\":\"Does not want to be tested with partner\"}},\"_row_num\":80},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":3,\"display\":{\"title\":{\"text\":\"Does not want to be tested at home\"}},\"_row_num\":81},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":4,\"display\":{\"title\":{\"text\":\"Feels he does not need the testing\"}},\"_row_num\":82},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":5,\"display\":{\"title\":{\"text\":\"Feels he does not need the education\"}},\"_row_num\":83},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":6,\"display\":{\"title\":{\"text\":\"Other\"}},\"_row_num\":84},{\"choice_list_name\":\"no_participation_reasons\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":85}]"
       },
       {
         "_partition": "Column",
         "_aspect": "religion",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"religion\",\"data_value\":1,\"display\":{\"text\":\"Anglican\"},\"_row_num\":20},{\"choice_list_name\":\"religion\",\"data_value\":2,\"display\":{\"text\":\"Catholic\"},\"_row_num\":21},{\"choice_list_name\":\"religion\",\"data_value\":3,\"display\":{\"text\":\"Pentecostal\"},\"_row_num\":22},{\"choice_list_name\":\"religion\",\"data_value\":4,\"display\":{\"text\":\"Seventh Day Adventist\"},\"_row_num\":23},{\"choice_list_name\":\"religion\",\"data_value\":5,\"display\":{\"text\":\"African Independent Churches\"},\"_row_num\":24},{\"choice_list_name\":\"religion\",\"data_value\":6,\"display\":{\"text\":\"African Inland Church\"},\"_row_num\":25},{\"choice_list_name\":\"religion\",\"data_value\":7,\"display\":{\"text\":\"Protestant\"},\"_row_num\":26},{\"choice_list_name\":\"religion\",\"data_value\":8,\"display\":{\"text\":\"Muslim\"},\"_row_num\":27},{\"choice_list_name\":\"religion\",\"data_value\":9,\"display\":{\"text\":\"No religion\"},\"_row_num\":28},{\"choice_list_name\":\"religion\",\"data_value\":10,\"display\":{\"text\":\"Other\"},\"_row_num\":29},{\"choice_list_name\":\"religion\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"religion\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Anglican\"}},\"_row_num\":20},{\"choice_list_name\":\"religion\",\"data_value\":2,\"display\":{\"title\":{\"text\":\"Catholic\"}},\"_row_num\":21},{\"choice_list_name\":\"religion\",\"data_value\":3,\"display\":{\"title\":{\"text\":\"Pentecostal\"}},\"_row_num\":22},{\"choice_list_name\":\"religion\",\"data_value\":4,\"display\":{\"title\":{\"text\":\"Seventh Day Adventist\"}},\"_row_num\":23},{\"choice_list_name\":\"religion\",\"data_value\":5,\"display\":{\"title\":{\"text\":\"African Independent Churches\"}},\"_row_num\":24},{\"choice_list_name\":\"religion\",\"data_value\":6,\"display\":{\"title\":{\"text\":\"African Inland Church\"}},\"_row_num\":25},{\"choice_list_name\":\"religion\",\"data_value\":7,\"display\":{\"title\":{\"text\":\"Protestant\"}},\"_row_num\":26},{\"choice_list_name\":\"religion\",\"data_value\":8,\"display\":{\"title\":{\"text\":\"Muslim\"}},\"_row_num\":27},{\"choice_list_name\":\"religion\",\"data_value\":9,\"display\":{\"title\":{\"text\":\"No religion\"}},\"_row_num\":28},{\"choice_list_name\":\"religion\",\"data_value\":10,\"display\":{\"title\":{\"text\":\"Other\"}},\"_row_num\":29},{\"choice_list_name\":\"religion\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "return_disc_retest",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "still_relationship",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "test_result",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"hiv_test_results\",\"data_value\":0,\"display\":{\"text\":\"HIV negative\"},\"_row_num\":86},{\"choice_list_name\":\"hiv_test_results\",\"data_value\":1,\"display\":{\"text\":\"HIV positive\"},\"_row_num\":87}]"
+        "_value": "[{\"choice_list_name\":\"hiv_test_results\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"HIV negative\"}},\"_row_num\":86},{\"choice_list_name\":\"hiv_test_results\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"HIV positive\"}},\"_row_num\":87}]"
       },
       {
         "_partition": "Column",
         "_aspect": "unigold",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"hiv_status\",\"data_value\":0,\"display\":{\"text\":\"HIV negative\"},\"_row_num\":61},{\"choice_list_name\":\"hiv_status\",\"data_value\":1,\"display\":{\"text\":\"HIV positive\"},\"_row_num\":62},{\"choice_list_name\":\"hiv_status\",\"data_value\":888,\"display\":{\"text\":\"Prefer not to respond\"},\"_row_num\":63},{\"choice_list_name\":\"hiv_status\",\"data_value\":999,\"display\":{\"text\":\"Not sure\"},\"_row_num\":64}]"
+        "_value": "[{\"choice_list_name\":\"hiv_status\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"HIV negative\"}},\"_row_num\":61},{\"choice_list_name\":\"hiv_status\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"HIV positive\"}},\"_row_num\":62},{\"choice_list_name\":\"hiv_status\",\"data_value\":888,\"display\":{\"title\":{\"text\":\"Prefer not to respond\"}},\"_row_num\":63},{\"choice_list_name\":\"hiv_status\",\"data_value\":999,\"display\":{\"title\":{\"text\":\"Not sure\"}},\"_row_num\":64}]"
       },
       {
         "_partition": "FormType",
@@ -6128,7 +7067,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"All Partner Form Fields\""
+        "_value": "{\"text\":\"All Partner Form Fields\"}"
       }
     ]
   }

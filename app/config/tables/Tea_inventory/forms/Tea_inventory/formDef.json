@@ -5,7 +5,9 @@
         "type": "string",
         "name": "Name",
         "display": {
-          "text": "Enter the name of the tea."
+          "prompt": {
+            "text": "Enter the name of the tea."
+          }
         },
         "required": true,
         "_row_num": 2
@@ -15,7 +17,9 @@
         "values_list": "Tea_type_list",
         "name": "Type_id",
         "display": {
-          "text": "Choose the tea type."
+          "prompt": {
+            "text": "Choose the tea type."
+          }
         },
         "required": true,
         "_row_num": 3
@@ -25,7 +29,9 @@
         "values_list": "yes_no",
         "name": "Bags",
         "display": {
-          "text": "Is {{data.Name}} served with bags?"
+          "prompt": {
+            "text": "Is {{data.Name}} served with bags?"
+          }
         },
         "required": true,
         "_row_num": 4
@@ -35,7 +41,9 @@
         "values_list": "yes_no",
         "name": "Cold",
         "display": {
-          "text": "Is {{data.Name}} served cold?"
+          "prompt": {
+            "text": "Is {{data.Name}} served cold?"
+          }
         },
         "required": true,
         "_row_num": 5
@@ -45,7 +53,9 @@
         "values_list": "yes_no",
         "name": "Hot",
         "display": {
-          "text": "Is {{data.Name}} served hot?"
+          "prompt": {
+            "text": "Is {{data.Name}} served hot?"
+          }
         },
         "required": true,
         "_row_num": 6
@@ -55,7 +65,9 @@
         "values_list": "yes_no",
         "name": "Loose_Leaf",
         "display": {
-          "text": "Is {{data.Name}} loose leaf?"
+          "prompt": {
+            "text": "Is {{data.Name}} loose leaf?"
+          }
         },
         "required": true,
         "_row_num": 7
@@ -64,7 +76,9 @@
         "type": "decimal",
         "name": "Price_8oz",
         "display": {
-          "text": "What is the price of an 8 ounce {{data.Name}}?"
+          "prompt": {
+            "text": "What is the price of an 8 ounce {{data.Name}}?"
+          }
         },
         "required": true,
         "_row_num": 8
@@ -73,7 +87,9 @@
         "type": "decimal",
         "name": "Price_12oz",
         "display": {
-          "text": "What is the price of a 12 ounce {{data.Name}}?"
+          "prompt": {
+            "text": "What is the price of a 12 ounce {{data.Name}}?"
+          }
         },
         "required": true,
         "_row_num": 9
@@ -82,7 +98,9 @@
         "type": "decimal",
         "name": "Price_16oz",
         "display": {
-          "text": "What is the price of a 16 ounce {{data.Name}}?"
+          "prompt": {
+            "text": "What is the price of a 16 ounce {{data.Name}}?"
+          }
         },
         "required": true,
         "_row_num": 10
@@ -92,7 +110,9 @@
         "values_list": "Tea_house_list",
         "name": "House_id",
         "display": {
-          "text": "Select the Tea house where this tea is served"
+          "prompt": {
+            "text": "Select the Tea house where this tea is served"
+          }
         },
         "required": true,
         "_row_num": 11
@@ -112,7 +132,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Inventory"
+          "title": {
+            "text": "Tea Inventory"
+          }
         },
         "_row_num": 4
       }
@@ -123,9 +145,10 @@
         "query_type": "linked_table",
         "linked_form_id": "Tea_types",
         "linked_table_id": "Tea_types",
-        "selection": "_id >= ?",
-        "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "selection": "1=1",
+        "selectionArgs": "[]",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       {
@@ -133,9 +156,10 @@
         "query_type": "linked_table",
         "linked_form_id": "Tea_houses",
         "linked_table_id": "Tea_houses",
-        "selection": "_id >= ?",
-        "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "selection": "1=1",
+        "selectionArgs": "[]",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
       }
     ],
@@ -170,7 +194,9 @@
         "choice_list_name": "yes_no",
         "data_value": "Yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 2
       },
@@ -178,7 +204,9 @@
         "choice_list_name": "yes_no",
         "data_value": "No",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 3
       }
@@ -191,16 +219,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -216,7 +242,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Inventory"
+          "title": {
+            "text": "Tea Inventory"
+          }
         },
         "_row_num": 4
       },
@@ -226,7 +254,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -240,7 +270,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Tea Inventory"
+          "title": {
+            "text": "Tea Inventory"
+          }
         },
         "_row_num": 4
       }
@@ -251,7 +283,9 @@
           "choice_list_name": "yes_no",
           "data_value": "Yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 2
         },
@@ -259,11 +293,16 @@
           "choice_list_name": "yes_no",
           "data_value": "No",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 3
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {
       "Tea_type_list": {
@@ -271,9 +310,10 @@
         "query_type": "linked_table",
         "linked_form_id": "Tea_types",
         "linked_table_id": "Tea_types",
-        "selection": "_id >= ?",
-        "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "selection": "1=1",
+        "selectionArgs": "[]",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       "Tea_house_list": {
@@ -281,9 +321,10 @@
         "query_type": "linked_table",
         "linked_form_id": "Tea_houses",
         "linked_table_id": "Tea_houses",
-        "selection": "_id >= ?",
-        "selectionArgs": "[ '0' ]",
-        "auxillaryHash": "'_id>='+opendatakit.encodeURIValue(0)",
+        "selection": "1=1",
+        "selectionArgs": "[]",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
       }
     },
@@ -410,7 +451,9 @@
             "type": "string",
             "name": "Name",
             "display": {
-              "text": "Enter the name of the tea."
+              "prompt": {
+                "text": "Enter the name of the tea."
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -425,7 +468,9 @@
             "values_list": "Tea_type_list",
             "name": "Type_id",
             "display": {
-              "text": "Choose the tea type."
+              "prompt": {
+                "text": "Choose the tea type."
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -440,7 +485,9 @@
             "values_list": "yes_no",
             "name": "Bags",
             "display": {
-              "text": "Is {{data.Name}} served with bags?"
+              "prompt": {
+                "text": "Is {{data.Name}} served with bags?"
+              }
             },
             "required": true,
             "_row_num": 4,
@@ -455,7 +502,9 @@
             "values_list": "yes_no",
             "name": "Cold",
             "display": {
-              "text": "Is {{data.Name}} served cold?"
+              "prompt": {
+                "text": "Is {{data.Name}} served cold?"
+              }
             },
             "required": true,
             "_row_num": 5,
@@ -470,7 +519,9 @@
             "values_list": "yes_no",
             "name": "Hot",
             "display": {
-              "text": "Is {{data.Name}} served hot?"
+              "prompt": {
+                "text": "Is {{data.Name}} served hot?"
+              }
             },
             "required": true,
             "_row_num": 6,
@@ -485,7 +536,9 @@
             "values_list": "yes_no",
             "name": "Loose_Leaf",
             "display": {
-              "text": "Is {{data.Name}} loose leaf?"
+              "prompt": {
+                "text": "Is {{data.Name}} loose leaf?"
+              }
             },
             "required": true,
             "_row_num": 7,
@@ -499,7 +552,9 @@
             "type": "decimal",
             "name": "Price_8oz",
             "display": {
-              "text": "What is the price of an 8 ounce {{data.Name}}?"
+              "prompt": {
+                "text": "What is the price of an 8 ounce {{data.Name}}?"
+              }
             },
             "required": true,
             "_row_num": 8,
@@ -513,7 +568,9 @@
             "type": "decimal",
             "name": "Price_12oz",
             "display": {
-              "text": "What is the price of a 12 ounce {{data.Name}}?"
+              "prompt": {
+                "text": "What is the price of a 12 ounce {{data.Name}}?"
+              }
             },
             "required": true,
             "_row_num": 9,
@@ -527,7 +584,9 @@
             "type": "decimal",
             "name": "Price_16oz",
             "display": {
-              "text": "What is the price of a 16 ounce {{data.Name}}?"
+              "prompt": {
+                "text": "What is the price of a 16 ounce {{data.Name}}?"
+              }
             },
             "required": true,
             "_row_num": 10,
@@ -542,7 +601,9 @@
             "values_list": "Tea_house_list",
             "name": "House_id",
             "display": {
-              "text": "Select the Tea house where this tea is served"
+              "prompt": {
+                "text": "Select the Tea house where this tea is served"
+              }
             },
             "required": true,
             "_row_num": 11,
@@ -701,7 +762,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Tea Inventory"
+              "title": {
+                "text": "Tea Inventory"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1018,21 +1081,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -1042,6 +1097,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -1049,6 +1128,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1081,28 +1168,28 @@
         "_aspect": "Bags",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "Cold",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "Hot",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "Loose_Leaf",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"Yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"No\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "FormType",
@@ -1137,7 +1224,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Tea Inventory\""
+        "_value": "{\"text\":\"Tea Inventory\"}"
       },
       {
         "_partition": "Table",

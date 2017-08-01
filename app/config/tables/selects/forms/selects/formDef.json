@@ -9,7 +9,9 @@
         "type": "text",
         "name": "user_name",
         "display": {
-          "text": "Please enter your name:"
+          "prompt": {
+            "text": "Please enter your name:"
+          }
         },
         "_row_num": 3
       },
@@ -19,7 +21,9 @@
         "values_list": "regions_csv",
         "name": "region",
         "display": {
-          "text": "Please select your region:"
+          "prompt": {
+            "text": "Please select your region:"
+          }
         },
         "_row_num": 4
       },
@@ -28,7 +32,9 @@
         "values_list": "countries_csv",
         "name": "country_csv",
         "display": {
-          "text": "Please select your country:"
+          "prompt": {
+            "text": "Please select your country:"
+          }
         },
         "choice_filter": "choice_item.region === data('region')",
         "_row_num": 5
@@ -41,16 +47,22 @@
         "type": "geopoint",
         "name": "location",
         "display": {
-          "text": "Capture your location"
+          "prompt": {
+            "text": "Capture your location"
+          },
+          "button_label": {
+            "text": "Record Location"
+          }
         },
-        "buttonLabel": "Record Location",
         "_row_num": 7
       },
       {
         "type": "image",
         "name": "picture",
         "display": {
-          "text": "Take a picture of the bird you observed."
+          "prompt": {
+            "text": "Take a picture of the bird you observed."
+          }
         },
         "_row_num": 8
       },
@@ -64,7 +76,9 @@
         "values_list": "birds",
         "name": "bird",
         "display": {
-          "text": "Which bird did you see?"
+          "prompt": {
+            "text": "Which bird did you see?"
+          }
         },
         "_row_num": 10
       },
@@ -76,7 +90,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Blackbird selected"
+          "prompt": {
+            "text": "Blackbird selected"
+          }
         },
         "hideInContents": true,
         "_row_num": 12
@@ -93,7 +109,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Bluethroat selected"
+          "prompt": {
+            "text": "Bluethroat selected"
+          }
         },
         "hideInContents": true,
         "_row_num": 15
@@ -110,8 +128,10 @@
       {
         "type": "note",
         "display": {
-          "text": "Crow selected",
-          "audio": "media/carrioncrow.mp3"
+          "prompt": {
+            "text": "Crow selected",
+            "audio": "media/carrioncrow.mp3"
+          }
         },
         "hideInContents": true,
         "_row_num": 18
@@ -128,8 +148,10 @@
       {
         "type": "note",
         "display": {
-          "text": "Eagle selected",
-          "audio": "media/goldeneagle.mp3"
+          "prompt": {
+            "text": "Eagle selected",
+            "audio": "media/goldeneagle.mp3"
+          }
         },
         "hideInContents": true,
         "_row_num": 21
@@ -146,7 +168,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Egret selected"
+          "prompt": {
+            "text": "Egret selected"
+          }
         },
         "hideInContents": true,
         "_row_num": 24
@@ -163,8 +187,10 @@
       {
         "type": "note",
         "display": {
-          "text": "Kingfisher selected",
-          "video": "media/kingfisher.3gp"
+          "prompt": {
+            "text": "Kingfisher selected",
+            "video": "media/kingfisher.3gp"
+          }
         },
         "hideInContents": true,
         "_row_num": 27
@@ -181,7 +207,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Gull selected"
+          "prompt": {
+            "text": "Gull selected"
+          }
         },
         "hideInContents": true,
         "_row_num": 30
@@ -198,7 +226,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Hawfinch selected"
+          "prompt": {
+            "text": "Hawfinch selected"
+          }
         },
         "hideInContents": true,
         "_row_num": 33
@@ -215,8 +245,10 @@
       {
         "type": "note",
         "display": {
-          "text": "Robin selected",
-          "audio": "media/european-robin.mp3"
+          "prompt": {
+            "text": "Robin selected",
+            "audio": "media/european-robin.mp3"
+          }
         },
         "hideInContents": true,
         "_row_num": 36
@@ -238,7 +270,9 @@
         "values_list": "colors",
         "name": "color",
         "display": {
-          "text": "What is the main color of the bird?"
+          "prompt": {
+            "text": "What is the main color of the bird?"
+          }
         },
         "_row_num": 40
       },
@@ -247,7 +281,9 @@
         "values_list": "colors",
         "name": "secondaryColor",
         "display": {
-          "text": "What are the secondary and tertiary colors of the bird?"
+          "prompt": {
+            "text": "What are the secondary and tertiary colors of the bird?"
+          }
         },
         "_row_num": 41
       },
@@ -261,7 +297,9 @@
         "type": "acknowledge",
         "name": "confirmTeal",
         "display": {
-          "text": "Teal birds are very unique.  Please confirm that you saw a <span style=\"color:aqua;\">teal</span> bird."
+          "prompt": {
+            "text": "Teal birds are very unique.  Please confirm that you saw a <span style=\"color:aqua;\">teal</span> bird."
+          }
         },
         "hideInContents": true,
         "_row_num": 43
@@ -283,7 +321,9 @@
         },
         "name": "h_select",
         "display": {
-          "text": "Horizontal select example."
+          "prompt": {
+            "text": "Horizontal select example."
+          }
         },
         "_row_num": 46
       },
@@ -293,7 +333,9 @@
         "values_list": "regions_csv",
         "name": "region",
         "display": {
-          "text": "Choose a region:"
+          "prompt": {
+            "text": "Choose a region:"
+          }
         },
         "_row_num": 47
       },
@@ -303,7 +345,9 @@
         "values_list": "countries_csv",
         "name": "country_csv",
         "display": {
-          "text": "Choose a country:"
+          "prompt": {
+            "text": "Choose a country:"
+          }
         },
         "choice_filter": "choice_item.region === data('region')",
         "_row_num": 48
@@ -316,7 +360,9 @@
         "clause": "//",
         "type": "note",
         "display": {
-          "text": "Holidays"
+          "prompt": {
+            "text": "Holidays"
+          }
         },
         "hideInContents": true,
         "_row_num": 50
@@ -327,7 +373,9 @@
         "values_list": "holidays",
         "name": "favoriteHoliday",
         "display": {
-          "text": "What is your favorite holiday?"
+          "prompt": {
+            "text": "What is your favorite holiday?"
+          }
         },
         "_row_num": 51
       },
@@ -337,7 +385,9 @@
         "values_list": "holidays",
         "name": "secondFavoriteHoliday",
         "display": {
-          "text": "What is your second favorite holiday?"
+          "prompt": {
+            "text": "What is your second favorite holiday?"
+          }
         },
         "_row_num": 52
       },
@@ -347,7 +397,9 @@
         "values_list": "holidays",
         "name": "thirdFavoriteHoliday",
         "display": {
-          "text": "What is your third favorite holiday?"
+          "prompt": {
+            "text": "What is your third favorite holiday?"
+          }
         },
         "_row_num": 53
       },
@@ -363,7 +415,9 @@
         "clause": "//",
         "type": "note",
         "display": {
-          "text": "Food"
+          "prompt": {
+            "text": "Food"
+          }
         },
         "hideInContents": true,
         "_row_num": 56
@@ -374,7 +428,9 @@
         "values_list": "foods",
         "name": "breakfastFood",
         "display": {
-          "text": "What types of food do you eat for breakfast?"
+          "prompt": {
+            "text": "What types of food do you eat for breakfast?"
+          }
         },
         "_row_num": 57
       },
@@ -384,7 +440,9 @@
         "values_list": "foods",
         "name": "lunchFood",
         "display": {
-          "text": "What types of food do you eat for lunch?"
+          "prompt": {
+            "text": "What types of food do you eat for lunch?"
+          }
         },
         "_row_num": 58
       },
@@ -394,7 +452,9 @@
         "values_list": "foods",
         "name": "dinnerFood",
         "display": {
-          "text": "What types of food do you eat for dinner?"
+          "prompt": {
+            "text": "What types of food do you eat for dinner?"
+          }
         },
         "_row_num": 59
       },
@@ -409,7 +469,9 @@
       {
         "type": "note",
         "display": {
-          "text": "The following data will be used to generate a graph."
+          "prompt": {
+            "text": "The following data will be used to generate a graph."
+          }
         },
         "hideInContents": true,
         "_row_num": 62
@@ -418,18 +480,26 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "Enter approximate age of bird (in years):",
-          "hint": "Must be less than 20."
+          "prompt": {
+            "text": "Enter approximate age of bird (in years):"
+          },
+          "hint": {
+            "text": "Must be less than 20."
+          },
+          "constraint_message": {
+            "text": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot."
+          }
         },
         "constraint": "data('age') <= 20",
-        "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
         "_row_num": 63
       },
       {
         "type": "decimal",
         "name": "weight",
         "display": {
-          "text": "Enter weight of bird (in oz):"
+          "prompt": {
+            "text": "Enter weight of bird (in oz):"
+          }
         },
         "_row_num": 64
       },
@@ -438,7 +508,9 @@
         "values_list": "sexes",
         "name": "sex",
         "display": {
-          "text": "Enter sex of bird:"
+          "prompt": {
+            "text": "Enter sex of bird:"
+          }
         },
         "_row_num": 65
       },
@@ -455,7 +527,9 @@
         "type": "linegraph",
         "values_list": "male_linegraph_csv",
         "display": {
-          "text": "Male Bird Age vs. Weight Graph"
+          "prompt": {
+            "text": "Male Bird Age vs. Weight Graph"
+          }
         },
         "x_axis_label": "age(yrs)",
         "y_axis_label": "weight(oz)",
@@ -478,7 +552,9 @@
         "type": "linegraph",
         "values_list": "female_linegraph_csv",
         "display": {
-          "text": "Female Bird Age vs. Weight Graph"
+          "prompt": {
+            "text": "Female Bird Age vs. Weight Graph"
+          }
         },
         "x_axis_label": "age(yrs)",
         "y_axis_label": "weight(oz)",
@@ -498,7 +574,9 @@
         "choice_list_name": "birds",
         "data_value": "blackbird",
         "display": {
-          "image": "media/blackbird.png"
+          "title": {
+            "image": "media/blackbird.png"
+          }
         },
         "_row_num": 2
       },
@@ -506,7 +584,9 @@
         "choice_list_name": "birds",
         "data_value": "bluethroat",
         "display": {
-          "image": "media/bluethroat.png"
+          "title": {
+            "image": "media/bluethroat.png"
+          }
         },
         "_row_num": 3
       },
@@ -514,7 +594,9 @@
         "choice_list_name": "birds",
         "data_value": "crow",
         "display": {
-          "image": "media/crow.png"
+          "title": {
+            "image": "media/crow.png"
+          }
         },
         "_row_num": 4
       },
@@ -522,7 +604,9 @@
         "choice_list_name": "birds",
         "data_value": "eagle",
         "display": {
-          "image": "media/eagle.png"
+          "title": {
+            "image": "media/eagle.png"
+          }
         },
         "_row_num": 5
       },
@@ -530,7 +614,9 @@
         "choice_list_name": "birds",
         "data_value": "egret",
         "display": {
-          "image": "media/egret.png"
+          "title": {
+            "image": "media/egret.png"
+          }
         },
         "_row_num": 6
       },
@@ -538,7 +624,9 @@
         "choice_list_name": "birds",
         "data_value": "kingfisher",
         "display": {
-          "image": "media/kingfisher.png"
+          "title": {
+            "image": "media/kingfisher.png"
+          }
         },
         "_row_num": 7
       },
@@ -546,7 +634,9 @@
         "choice_list_name": "birds",
         "data_value": "gull",
         "display": {
-          "image": "media/gull.png"
+          "title": {
+            "image": "media/gull.png"
+          }
         },
         "_row_num": 8
       },
@@ -554,7 +644,9 @@
         "choice_list_name": "birds",
         "data_value": "hawfinch",
         "display": {
-          "image": "media/hawfinch.png"
+          "title": {
+            "image": "media/hawfinch.png"
+          }
         },
         "_row_num": 9
       },
@@ -562,7 +654,9 @@
         "choice_list_name": "birds",
         "data_value": "robin",
         "display": {
-          "image": "media/robin.png"
+          "title": {
+            "image": "media/robin.png"
+          }
         },
         "_row_num": 10
       },
@@ -570,7 +664,9 @@
         "choice_list_name": "yes_no",
         "data_value": "yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 12
       },
@@ -578,7 +674,9 @@
         "choice_list_name": "yes_no",
         "data_value": "no",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 13
       },
@@ -586,7 +684,9 @@
         "choice_list_name": "colors",
         "data_value": "red",
         "display": {
-          "text": "Red"
+          "title": {
+            "text": "Red"
+          }
         },
         "_row_num": 15
       },
@@ -594,7 +694,9 @@
         "choice_list_name": "colors",
         "data_value": "green",
         "display": {
-          "text": "Green"
+          "title": {
+            "text": "Green"
+          }
         },
         "_row_num": 16
       },
@@ -602,7 +704,9 @@
         "choice_list_name": "colors",
         "data_value": "blue",
         "display": {
-          "text": "Blue"
+          "title": {
+            "text": "Blue"
+          }
         },
         "_row_num": 17
       },
@@ -610,7 +714,9 @@
         "choice_list_name": "colors",
         "data_value": "grey",
         "display": {
-          "text": "Grey"
+          "title": {
+            "text": "Grey"
+          }
         },
         "_row_num": 18
       },
@@ -618,7 +724,9 @@
         "choice_list_name": "colors",
         "data_value": "brown",
         "display": {
-          "text": "White"
+          "title": {
+            "text": "White"
+          }
         },
         "_row_num": 19
       },
@@ -626,7 +734,9 @@
         "choice_list_name": "holidays",
         "data_value": "kwanzaa",
         "display": {
-          "text": "Kwanzaa"
+          "title": {
+            "text": "Kwanzaa"
+          }
         },
         "_row_num": 21
       },
@@ -634,7 +744,9 @@
         "choice_list_name": "holidays",
         "data_value": "christmas",
         "display": {
-          "text": "Christmas"
+          "title": {
+            "text": "Christmas"
+          }
         },
         "_row_num": 22
       },
@@ -642,7 +754,9 @@
         "choice_list_name": "holidays",
         "data_value": "hannukah",
         "display": {
-          "text": "Hannukah"
+          "title": {
+            "text": "Hannukah"
+          }
         },
         "_row_num": 23
       },
@@ -650,7 +764,9 @@
         "choice_list_name": "holidays",
         "data_value": "diwali",
         "display": {
-          "text": "Diwali"
+          "title": {
+            "text": "Diwali"
+          }
         },
         "_row_num": 24
       },
@@ -658,7 +774,9 @@
         "choice_list_name": "foods",
         "data_value": "milk",
         "display": {
-          "text": "Milk"
+          "title": {
+            "text": "Milk"
+          }
         },
         "_row_num": 26
       },
@@ -666,7 +784,9 @@
         "choice_list_name": "foods",
         "data_value": "bread",
         "display": {
-          "text": "Bread"
+          "title": {
+            "text": "Bread"
+          }
         },
         "_row_num": 27
       },
@@ -674,7 +794,9 @@
         "choice_list_name": "foods",
         "data_value": "fruit",
         "display": {
-          "text": "Fruit"
+          "title": {
+            "text": "Fruit"
+          }
         },
         "_row_num": 28
       },
@@ -682,7 +804,9 @@
         "choice_list_name": "foods",
         "data_value": "vegetable",
         "display": {
-          "text": "Vegetable"
+          "title": {
+            "text": "Vegetable"
+          }
         },
         "_row_num": 29
       },
@@ -690,7 +814,9 @@
         "choice_list_name": "foods",
         "data_value": "meat",
         "display": {
-          "text": "Meat"
+          "title": {
+            "text": "Meat"
+          }
         },
         "_row_num": 30
       },
@@ -698,7 +824,9 @@
         "choice_list_name": "sexes",
         "data_value": "male",
         "display": {
-          "text": "male"
+          "title": {
+            "text": "male"
+          }
         },
         "_row_num": 32
       },
@@ -706,7 +834,9 @@
         "choice_list_name": "sexes",
         "data_value": "female",
         "display": {
-          "text": "female"
+          "title": {
+            "text": "female"
+          }
         },
         "_row_num": 33
       }
@@ -716,50 +846,43 @@
         "query_name": "countries",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nreturn { data_value : place.name,\n              display : {title: {text: place.name} } };\n}) : []",
         "_row_num": 2
       },
       {
         "query_name": "states",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nreturn { data_value : place.name,\n              display : {title: {text: place.name} } };\n}) : []",
         "_row_num": 3
       },
       {
         "query_name": "regions_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {data_value: region, display: {title: {text: region} } };\n}).value()",
         "_row_num": 4
       },
       {
         "query_name": "countries_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
+        "callback": "_.map(context, function(place){\nreturn { region: place.region, data_value: place.country, display: {title: {text: place.country} } };\n})",
         "_row_num": 5
-      },
-      {
-        "query_name": "linegraph_csv",
-        "query_type": "csv",
-        "uri": "\"linegraph.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 6
       },
       {
         "query_name": "male_linegraph_csv",
         "query_type": "csv",
         "uri": "\"maleLinegraph.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 7
+        "_row_num": 6
       },
       {
         "query_name": "female_linegraph_csv",
         "query_type": "csv",
         "uri": "\"femaleLinegraph.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 8
+        "_row_num": 7
       }
     ],
     "settings": [
@@ -776,7 +899,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Select Examples"
+          "title": {
+            "text": "Select Examples"
+          }
         },
         "_row_num": 4
       }
@@ -789,16 +914,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -814,7 +937,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Select Examples"
+          "title": {
+            "text": "Select Examples"
+          }
         },
         "_row_num": 4
       },
@@ -830,7 +955,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -844,7 +971,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Select Examples"
+          "title": {
+            "text": "Select Examples"
+          }
         },
         "_row_num": 4
       }
@@ -855,7 +984,9 @@
           "choice_list_name": "birds",
           "data_value": "blackbird",
           "display": {
-            "image": "media/blackbird.png"
+            "title": {
+              "image": "media/blackbird.png"
+            }
           },
           "_row_num": 2
         },
@@ -863,7 +994,9 @@
           "choice_list_name": "birds",
           "data_value": "bluethroat",
           "display": {
-            "image": "media/bluethroat.png"
+            "title": {
+              "image": "media/bluethroat.png"
+            }
           },
           "_row_num": 3
         },
@@ -871,7 +1004,9 @@
           "choice_list_name": "birds",
           "data_value": "crow",
           "display": {
-            "image": "media/crow.png"
+            "title": {
+              "image": "media/crow.png"
+            }
           },
           "_row_num": 4
         },
@@ -879,7 +1014,9 @@
           "choice_list_name": "birds",
           "data_value": "eagle",
           "display": {
-            "image": "media/eagle.png"
+            "title": {
+              "image": "media/eagle.png"
+            }
           },
           "_row_num": 5
         },
@@ -887,7 +1024,9 @@
           "choice_list_name": "birds",
           "data_value": "egret",
           "display": {
-            "image": "media/egret.png"
+            "title": {
+              "image": "media/egret.png"
+            }
           },
           "_row_num": 6
         },
@@ -895,7 +1034,9 @@
           "choice_list_name": "birds",
           "data_value": "kingfisher",
           "display": {
-            "image": "media/kingfisher.png"
+            "title": {
+              "image": "media/kingfisher.png"
+            }
           },
           "_row_num": 7
         },
@@ -903,7 +1044,9 @@
           "choice_list_name": "birds",
           "data_value": "gull",
           "display": {
-            "image": "media/gull.png"
+            "title": {
+              "image": "media/gull.png"
+            }
           },
           "_row_num": 8
         },
@@ -911,7 +1054,9 @@
           "choice_list_name": "birds",
           "data_value": "hawfinch",
           "display": {
-            "image": "media/hawfinch.png"
+            "title": {
+              "image": "media/hawfinch.png"
+            }
           },
           "_row_num": 9
         },
@@ -919,7 +1064,9 @@
           "choice_list_name": "birds",
           "data_value": "robin",
           "display": {
-            "image": "media/robin.png"
+            "title": {
+              "image": "media/robin.png"
+            }
           },
           "_row_num": 10
         }
@@ -929,7 +1076,9 @@
           "choice_list_name": "yes_no",
           "data_value": "yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 12
         },
@@ -937,7 +1086,9 @@
           "choice_list_name": "yes_no",
           "data_value": "no",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 13
         }
@@ -947,7 +1098,9 @@
           "choice_list_name": "colors",
           "data_value": "red",
           "display": {
-            "text": "Red"
+            "title": {
+              "text": "Red"
+            }
           },
           "_row_num": 15
         },
@@ -955,7 +1108,9 @@
           "choice_list_name": "colors",
           "data_value": "green",
           "display": {
-            "text": "Green"
+            "title": {
+              "text": "Green"
+            }
           },
           "_row_num": 16
         },
@@ -963,7 +1118,9 @@
           "choice_list_name": "colors",
           "data_value": "blue",
           "display": {
-            "text": "Blue"
+            "title": {
+              "text": "Blue"
+            }
           },
           "_row_num": 17
         },
@@ -971,7 +1128,9 @@
           "choice_list_name": "colors",
           "data_value": "grey",
           "display": {
-            "text": "Grey"
+            "title": {
+              "text": "Grey"
+            }
           },
           "_row_num": 18
         },
@@ -979,7 +1138,9 @@
           "choice_list_name": "colors",
           "data_value": "brown",
           "display": {
-            "text": "White"
+            "title": {
+              "text": "White"
+            }
           },
           "_row_num": 19
         }
@@ -989,7 +1150,9 @@
           "choice_list_name": "holidays",
           "data_value": "kwanzaa",
           "display": {
-            "text": "Kwanzaa"
+            "title": {
+              "text": "Kwanzaa"
+            }
           },
           "_row_num": 21
         },
@@ -997,7 +1160,9 @@
           "choice_list_name": "holidays",
           "data_value": "christmas",
           "display": {
-            "text": "Christmas"
+            "title": {
+              "text": "Christmas"
+            }
           },
           "_row_num": 22
         },
@@ -1005,7 +1170,9 @@
           "choice_list_name": "holidays",
           "data_value": "hannukah",
           "display": {
-            "text": "Hannukah"
+            "title": {
+              "text": "Hannukah"
+            }
           },
           "_row_num": 23
         },
@@ -1013,7 +1180,9 @@
           "choice_list_name": "holidays",
           "data_value": "diwali",
           "display": {
-            "text": "Diwali"
+            "title": {
+              "text": "Diwali"
+            }
           },
           "_row_num": 24
         }
@@ -1023,7 +1192,9 @@
           "choice_list_name": "foods",
           "data_value": "milk",
           "display": {
-            "text": "Milk"
+            "title": {
+              "text": "Milk"
+            }
           },
           "_row_num": 26
         },
@@ -1031,7 +1202,9 @@
           "choice_list_name": "foods",
           "data_value": "bread",
           "display": {
-            "text": "Bread"
+            "title": {
+              "text": "Bread"
+            }
           },
           "_row_num": 27
         },
@@ -1039,7 +1212,9 @@
           "choice_list_name": "foods",
           "data_value": "fruit",
           "display": {
-            "text": "Fruit"
+            "title": {
+              "text": "Fruit"
+            }
           },
           "_row_num": 28
         },
@@ -1047,7 +1222,9 @@
           "choice_list_name": "foods",
           "data_value": "vegetable",
           "display": {
-            "text": "Vegetable"
+            "title": {
+              "text": "Vegetable"
+            }
           },
           "_row_num": 29
         },
@@ -1055,7 +1232,9 @@
           "choice_list_name": "foods",
           "data_value": "meat",
           "display": {
-            "text": "Meat"
+            "title": {
+              "text": "Meat"
+            }
           },
           "_row_num": 30
         }
@@ -1065,7 +1244,9 @@
           "choice_list_name": "sexes",
           "data_value": "male",
           "display": {
-            "text": "male"
+            "title": {
+              "text": "male"
+            }
           },
           "_row_num": 32
         },
@@ -1073,61 +1254,59 @@
           "choice_list_name": "sexes",
           "data_value": "female",
           "display": {
-            "text": "female"
+            "title": {
+              "text": "female"
+            }
           },
           "_row_num": 33
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {
       "countries": {
         "query_name": "countries",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.countries where place='North America'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nreturn { data_value : place.name,\n              display : {title: {text: place.name} } };\n}) : []",
         "_row_num": 2
       },
       "states": {
         "query_name": "states",
         "query_type": "ajax",
         "uri": "\"https://query.yahooapis.com/v1/public/yql?format=json&q=\" +  encodeURIComponent(\"select * from geo.states where place='\" + data('country') + \"'\")",
-        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nplace.label = place.name;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n}) : []",
+        "callback": "context.query.results ? _.map(context.query.results.place, function(place){\nreturn { data_value : place.name,\n              display : {title: {text: place.name} } };\n}) : []",
         "_row_num": 3
       },
       "regions_csv": {
         "query_name": "regions_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {name:region, label:region, data_value:region, display:{text:region}};\n}).value()",
+        "callback": "_.chain(context).pluck('region').uniq().map(function(region){\nreturn {data_value: region, display: {title: {text: region} } };\n}).value()",
         "_row_num": 4
       },
       "countries_csv": {
         "query_name": "countries_csv",
         "query_type": "csv",
         "uri": "\"regions.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.country;\nplace.label = place.country;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
+        "callback": "_.map(context, function(place){\nreturn { region: place.region, data_value: place.country, display: {title: {text: place.country} } };\n})",
         "_row_num": 5
-      },
-      "linegraph_csv": {
-        "query_name": "linegraph_csv",
-        "query_type": "csv",
-        "uri": "\"linegraph.csv\"",
-        "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 6
       },
       "male_linegraph_csv": {
         "query_name": "male_linegraph_csv",
         "query_type": "csv",
         "uri": "\"maleLinegraph.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 7
+        "_row_num": 6
       },
       "female_linegraph_csv": {
         "query_name": "female_linegraph_csv",
         "query_type": "csv",
         "uri": "\"femaleLinegraph.csv\"",
         "callback": "_.map(context, function(place){\nreturn place;\n})",
-        "_row_num": 8
+        "_row_num": 7
       }
     },
     "calculates": {},
@@ -1310,7 +1489,9 @@
             "type": "text",
             "name": "user_name",
             "display": {
-              "text": "Please enter your name:"
+              "prompt": {
+                "text": "Please enter your name:"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1325,7 +1506,9 @@
             "values_list": "regions_csv",
             "name": "region",
             "display": {
-              "text": "Please select your region:"
+              "prompt": {
+                "text": "Please select your region:"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -1339,7 +1522,9 @@
             "values_list": "countries_csv",
             "name": "country_csv",
             "display": {
-              "text": "Please select your country:"
+              "prompt": {
+                "text": "Please select your country:"
+              }
             },
             "choice_filter": "choice_item.region === data('region')",
             "_row_num": 5,
@@ -1353,9 +1538,13 @@
             "type": "geopoint",
             "name": "location",
             "display": {
-              "text": "Capture your location"
+              "prompt": {
+                "text": "Capture your location"
+              },
+              "button_label": {
+                "text": "Record Location"
+              }
             },
-            "buttonLabel": "Record Location",
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
@@ -1367,7 +1556,9 @@
             "type": "image",
             "name": "picture",
             "display": {
-              "text": "Take a picture of the bird you observed."
+              "prompt": {
+                "text": "Take a picture of the bird you observed."
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -1381,7 +1572,9 @@
             "values_list": "birds",
             "name": "bird",
             "display": {
-              "text": "Which bird did you see?"
+              "prompt": {
+                "text": "Which bird did you see?"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -1393,7 +1586,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Blackbird selected"
+              "prompt": {
+                "text": "Blackbird selected"
+              }
             },
             "hideInContents": true,
             "_row_num": 12,
@@ -1406,7 +1601,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Bluethroat selected"
+              "prompt": {
+                "text": "Bluethroat selected"
+              }
             },
             "hideInContents": true,
             "_row_num": 15,
@@ -1419,8 +1616,10 @@
           {
             "type": "note",
             "display": {
-              "text": "Crow selected",
-              "audio": "media/carrioncrow.mp3"
+              "prompt": {
+                "text": "Crow selected",
+                "audio": "media/carrioncrow.mp3"
+              }
             },
             "hideInContents": true,
             "_row_num": 18,
@@ -1433,8 +1632,10 @@
           {
             "type": "note",
             "display": {
-              "text": "Eagle selected",
-              "audio": "media/goldeneagle.mp3"
+              "prompt": {
+                "text": "Eagle selected",
+                "audio": "media/goldeneagle.mp3"
+              }
             },
             "hideInContents": true,
             "_row_num": 21,
@@ -1447,7 +1648,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Egret selected"
+              "prompt": {
+                "text": "Egret selected"
+              }
             },
             "hideInContents": true,
             "_row_num": 24,
@@ -1460,8 +1663,10 @@
           {
             "type": "note",
             "display": {
-              "text": "Kingfisher selected",
-              "video": "media/kingfisher.3gp"
+              "prompt": {
+                "text": "Kingfisher selected",
+                "video": "media/kingfisher.3gp"
+              }
             },
             "hideInContents": true,
             "_row_num": 27,
@@ -1474,7 +1679,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Gull selected"
+              "prompt": {
+                "text": "Gull selected"
+              }
             },
             "hideInContents": true,
             "_row_num": 30,
@@ -1487,7 +1694,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Hawfinch selected"
+              "prompt": {
+                "text": "Hawfinch selected"
+              }
             },
             "hideInContents": true,
             "_row_num": 33,
@@ -1500,8 +1709,10 @@
           {
             "type": "note",
             "display": {
-              "text": "Robin selected",
-              "audio": "media/european-robin.mp3"
+              "prompt": {
+                "text": "Robin selected",
+                "audio": "media/european-robin.mp3"
+              }
             },
             "hideInContents": true,
             "_row_num": 36,
@@ -1516,7 +1727,9 @@
             "values_list": "colors",
             "name": "color",
             "display": {
-              "text": "What is the main color of the bird?"
+              "prompt": {
+                "text": "What is the main color of the bird?"
+              }
             },
             "_row_num": 40,
             "__rowNum__": 39,
@@ -1530,7 +1743,9 @@
             "values_list": "colors",
             "name": "secondaryColor",
             "display": {
-              "text": "What are the secondary and tertiary colors of the bird?"
+              "prompt": {
+                "text": "What are the secondary and tertiary colors of the bird?"
+              }
             },
             "_row_num": 41,
             "__rowNum__": 40,
@@ -1544,7 +1759,9 @@
             "type": "acknowledge",
             "name": "confirmTeal",
             "display": {
-              "text": "Teal birds are very unique.  Please confirm that you saw a <span style=\"color:aqua;\">teal</span> bird."
+              "prompt": {
+                "text": "Teal birds are very unique.  Please confirm that you saw a <span style=\"color:aqua;\">teal</span> bird."
+              }
             },
             "hideInContents": true,
             "_row_num": 43,
@@ -1557,7 +1774,9 @@
           {
             "type": "note",
             "display": {
-              "text": "The following data will be used to generate a graph."
+              "prompt": {
+                "text": "The following data will be used to generate a graph."
+              }
             },
             "hideInContents": true,
             "_row_num": 62,
@@ -1571,11 +1790,17 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "Enter approximate age of bird (in years):",
-              "hint": "Must be less than 20."
+              "prompt": {
+                "text": "Enter approximate age of bird (in years):"
+              },
+              "hint": {
+                "text": "Must be less than 20."
+              },
+              "constraint_message": {
+                "text": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot."
+              }
             },
             "constraint": "data('age') <= 20",
-            "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
             "_row_num": 63,
             "__rowNum__": 62,
             "_token_type": "prompt",
@@ -1587,7 +1812,9 @@
             "type": "decimal",
             "name": "weight",
             "display": {
-              "text": "Enter weight of bird (in oz):"
+              "prompt": {
+                "text": "Enter weight of bird (in oz):"
+              }
             },
             "_row_num": 64,
             "__rowNum__": 63,
@@ -1601,7 +1828,9 @@
             "values_list": "sexes",
             "name": "sex",
             "display": {
-              "text": "Enter sex of bird:"
+              "prompt": {
+                "text": "Enter sex of bird:"
+              }
             },
             "_row_num": 65,
             "__rowNum__": 64,
@@ -1614,7 +1843,9 @@
             "type": "linegraph",
             "values_list": "male_linegraph_csv",
             "display": {
-              "text": "Male Bird Age vs. Weight Graph"
+              "prompt": {
+                "text": "Male Bird Age vs. Weight Graph"
+              }
             },
             "x_axis_label": "age(yrs)",
             "y_axis_label": "weight(oz)",
@@ -1633,7 +1864,9 @@
             "type": "linegraph",
             "values_list": "female_linegraph_csv",
             "display": {
-              "text": "Female Bird Age vs. Weight Graph"
+              "prompt": {
+                "text": "Female Bird Age vs. Weight Graph"
+              }
             },
             "x_axis_label": "age(yrs)",
             "y_axis_label": "weight(oz)",
@@ -1859,7 +2092,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Select Examples"
+              "title": {
+                "text": "Select Examples"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -2329,21 +2564,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -2353,6 +2580,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -2360,6 +2611,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -2392,28 +2651,28 @@
         "_aspect": "bird",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"birds\",\"data_value\":\"blackbird\",\"display\":{\"image\":\"media/blackbird.png\"},\"_row_num\":2},{\"choice_list_name\":\"birds\",\"data_value\":\"bluethroat\",\"display\":{\"image\":\"media/bluethroat.png\"},\"_row_num\":3},{\"choice_list_name\":\"birds\",\"data_value\":\"crow\",\"display\":{\"image\":\"media/crow.png\"},\"_row_num\":4},{\"choice_list_name\":\"birds\",\"data_value\":\"eagle\",\"display\":{\"image\":\"media/eagle.png\"},\"_row_num\":5},{\"choice_list_name\":\"birds\",\"data_value\":\"egret\",\"display\":{\"image\":\"media/egret.png\"},\"_row_num\":6},{\"choice_list_name\":\"birds\",\"data_value\":\"kingfisher\",\"display\":{\"image\":\"media/kingfisher.png\"},\"_row_num\":7},{\"choice_list_name\":\"birds\",\"data_value\":\"gull\",\"display\":{\"image\":\"media/gull.png\"},\"_row_num\":8},{\"choice_list_name\":\"birds\",\"data_value\":\"hawfinch\",\"display\":{\"image\":\"media/hawfinch.png\"},\"_row_num\":9},{\"choice_list_name\":\"birds\",\"data_value\":\"robin\",\"display\":{\"image\":\"media/robin.png\"},\"_row_num\":10}]"
+        "_value": "[{\"choice_list_name\":\"birds\",\"data_value\":\"blackbird\",\"display\":{\"title\":{\"image\":\"media/blackbird.png\"}},\"_row_num\":2},{\"choice_list_name\":\"birds\",\"data_value\":\"bluethroat\",\"display\":{\"title\":{\"image\":\"media/bluethroat.png\"}},\"_row_num\":3},{\"choice_list_name\":\"birds\",\"data_value\":\"crow\",\"display\":{\"title\":{\"image\":\"media/crow.png\"}},\"_row_num\":4},{\"choice_list_name\":\"birds\",\"data_value\":\"eagle\",\"display\":{\"title\":{\"image\":\"media/eagle.png\"}},\"_row_num\":5},{\"choice_list_name\":\"birds\",\"data_value\":\"egret\",\"display\":{\"title\":{\"image\":\"media/egret.png\"}},\"_row_num\":6},{\"choice_list_name\":\"birds\",\"data_value\":\"kingfisher\",\"display\":{\"title\":{\"image\":\"media/kingfisher.png\"}},\"_row_num\":7},{\"choice_list_name\":\"birds\",\"data_value\":\"gull\",\"display\":{\"title\":{\"image\":\"media/gull.png\"}},\"_row_num\":8},{\"choice_list_name\":\"birds\",\"data_value\":\"hawfinch\",\"display\":{\"title\":{\"image\":\"media/hawfinch.png\"}},\"_row_num\":9},{\"choice_list_name\":\"birds\",\"data_value\":\"robin\",\"display\":{\"title\":{\"image\":\"media/robin.png\"}},\"_row_num\":10}]"
       },
       {
         "_partition": "Column",
         "_aspect": "color",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"colors\",\"data_value\":\"red\",\"display\":{\"text\":\"Red\"},\"_row_num\":15},{\"choice_list_name\":\"colors\",\"data_value\":\"green\",\"display\":{\"text\":\"Green\"},\"_row_num\":16},{\"choice_list_name\":\"colors\",\"data_value\":\"blue\",\"display\":{\"text\":\"Blue\"},\"_row_num\":17},{\"choice_list_name\":\"colors\",\"data_value\":\"grey\",\"display\":{\"text\":\"Grey\"},\"_row_num\":18},{\"choice_list_name\":\"colors\",\"data_value\":\"brown\",\"display\":{\"text\":\"White\"},\"_row_num\":19}]"
+        "_value": "[{\"choice_list_name\":\"colors\",\"data_value\":\"red\",\"display\":{\"title\":{\"text\":\"Red\"}},\"_row_num\":15},{\"choice_list_name\":\"colors\",\"data_value\":\"green\",\"display\":{\"title\":{\"text\":\"Green\"}},\"_row_num\":16},{\"choice_list_name\":\"colors\",\"data_value\":\"blue\",\"display\":{\"title\":{\"text\":\"Blue\"}},\"_row_num\":17},{\"choice_list_name\":\"colors\",\"data_value\":\"grey\",\"display\":{\"title\":{\"text\":\"Grey\"}},\"_row_num\":18},{\"choice_list_name\":\"colors\",\"data_value\":\"brown\",\"display\":{\"title\":{\"text\":\"White\"}},\"_row_num\":19}]"
       },
       {
         "_partition": "Column",
         "_aspect": "secondaryColor",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"colors\",\"data_value\":\"red\",\"display\":{\"text\":\"Red\"},\"_row_num\":15},{\"choice_list_name\":\"colors\",\"data_value\":\"green\",\"display\":{\"text\":\"Green\"},\"_row_num\":16},{\"choice_list_name\":\"colors\",\"data_value\":\"blue\",\"display\":{\"text\":\"Blue\"},\"_row_num\":17},{\"choice_list_name\":\"colors\",\"data_value\":\"grey\",\"display\":{\"text\":\"Grey\"},\"_row_num\":18},{\"choice_list_name\":\"colors\",\"data_value\":\"brown\",\"display\":{\"text\":\"White\"},\"_row_num\":19}]"
+        "_value": "[{\"choice_list_name\":\"colors\",\"data_value\":\"red\",\"display\":{\"title\":{\"text\":\"Red\"}},\"_row_num\":15},{\"choice_list_name\":\"colors\",\"data_value\":\"green\",\"display\":{\"title\":{\"text\":\"Green\"}},\"_row_num\":16},{\"choice_list_name\":\"colors\",\"data_value\":\"blue\",\"display\":{\"title\":{\"text\":\"Blue\"}},\"_row_num\":17},{\"choice_list_name\":\"colors\",\"data_value\":\"grey\",\"display\":{\"title\":{\"text\":\"Grey\"}},\"_row_num\":18},{\"choice_list_name\":\"colors\",\"data_value\":\"brown\",\"display\":{\"title\":{\"text\":\"White\"}},\"_row_num\":19}]"
       },
       {
         "_partition": "Column",
         "_aspect": "sex",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"sexes\",\"data_value\":\"male\",\"display\":{\"text\":\"male\"},\"_row_num\":32},{\"choice_list_name\":\"sexes\",\"data_value\":\"female\",\"display\":{\"text\":\"female\"},\"_row_num\":33}]"
+        "_value": "[{\"choice_list_name\":\"sexes\",\"data_value\":\"male\",\"display\":{\"title\":{\"text\":\"male\"}},\"_row_num\":32},{\"choice_list_name\":\"sexes\",\"data_value\":\"female\",\"display\":{\"title\":{\"text\":\"female\"}},\"_row_num\":33}]"
       },
       {
         "_partition": "FormType",
@@ -2441,7 +2700,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Select Examples\""
+        "_value": "{\"text\":\"Select Examples\"}"
       }
     ]
   }

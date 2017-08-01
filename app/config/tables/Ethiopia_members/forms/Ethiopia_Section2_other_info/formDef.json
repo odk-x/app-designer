@@ -8,7 +8,9 @@
       {
         "type": "finalize",
         "display": {
-          "text": "Save Form"
+          "prompt": {
+            "text": "Save Form"
+          }
         },
         "comment": "goes to the finalize screen instead of just automatically finalizing",
         "_row_num": 3
@@ -21,7 +23,9 @@
         "values_list": "relation_to_house_head",
         "name": "relation",
         "display": {
-          "text": "What is {{data.name}}'s relationship to the household head?"
+          "prompt": {
+            "text": "What is {{data.name}}'s relationship to the household head?"
+          }
         },
         "required": true,
         "_row_num": 2
@@ -31,7 +35,9 @@
         "values_list": "gender",
         "name": "gender",
         "display": {
-          "text": "What is {{data.name}}'s sex?"
+          "prompt": {
+            "text": "What is {{data.name}}'s sex?"
+          }
         },
         "required": true,
         "_row_num": 3
@@ -41,12 +47,18 @@
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "What is {{data.name}}'s age?",
-          "hint": "in years"
+          "prompt": {
+            "text": "What is {{data.name}}'s age?"
+          },
+          "hint": {
+            "text": "in years"
+          },
+          "constraint_message": {
+            "text": "Age cannot be negative"
+          }
         },
         "required": true,
         "constraint": "data('age') >= 0",
-        "constraint_message": "Age cannot be negative",
         "_row_num": 4
       },
       {
@@ -60,7 +72,9 @@
         "values_list": "marital_options",
         "name": "marital_status",
         "display": {
-          "text": "Marital status of {{data.name}}."
+          "prompt": {
+            "text": "Marital status of {{data.name}}."
+          }
         },
         "required": "data('age') >= 15",
         "_row_num": 6
@@ -78,11 +92,17 @@
         "type": "integer",
         "name": "months_away",
         "display": {
-          "text": "For how many months during the last 12 months was {{data.name}} away from the household?",
-          "hint": "0 if never away, or less than two weeks."
+          "prompt": {
+            "text": "For how many months during the last 12 months was {{data.name}} away from the household?"
+          },
+          "hint": {
+            "text": "0 if never away, or less than two weeks."
+          },
+          "constraint_message": {
+            "text": "Answer must be between 0 and 12"
+          }
         },
         "constraint": "data('months_away') >= 0 && data('months_away') <= 12",
-        "constraint_message": "Answer must be between 0 and 12",
         "_row_num": 9
       },
       {
@@ -94,7 +114,9 @@
         "values_list": "regions",
         "name": "region_born",
         "display": {
-          "text": "In what region was {{data.name}} born?"
+          "prompt": {
+            "text": "In what region was {{data.name}} born?"
+          }
         },
         "_row_num": 11
       },
@@ -108,7 +130,9 @@
         "values_list": "religions",
         "name": "religion",
         "display": {
-          "text": "What is {{data.name}}'s main religion?"
+          "prompt": {
+            "text": "What is {{data.name}}'s main religion?"
+          }
         },
         "_row_num": 13
       },
@@ -122,7 +146,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "head",
         "display": {
-          "text": "1. Head"
+          "title": {
+            "text": "1. Head"
+          }
         },
         "_row_num": 2
       },
@@ -130,7 +156,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "spouse",
         "display": {
-          "text": "2. Spouse"
+          "title": {
+            "text": "2. Spouse"
+          }
         },
         "_row_num": 3
       },
@@ -138,7 +166,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "son_daughter",
         "display": {
-          "text": "3. Son/Daughter"
+          "title": {
+            "text": "3. Son/Daughter"
+          }
         },
         "_row_num": 4
       },
@@ -146,7 +176,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "grandchild",
         "display": {
-          "text": "4. Grandchild"
+          "title": {
+            "text": "4. Grandchild"
+          }
         },
         "_row_num": 5
       },
@@ -154,7 +186,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "father_mother",
         "display": {
-          "text": "5. Father/Mother"
+          "title": {
+            "text": "5. Father/Mother"
+          }
         },
         "_row_num": 6
       },
@@ -162,7 +196,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "sister_brother",
         "display": {
-          "text": "6. Sister/Brother"
+          "title": {
+            "text": "6. Sister/Brother"
+          }
         },
         "_row_num": 7
       },
@@ -170,7 +206,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "niece_nephew",
         "display": {
-          "text": "7. Niece/Nephew"
+          "title": {
+            "text": "7. Niece/Nephew"
+          }
         },
         "_row_num": 8
       },
@@ -178,7 +216,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "uncle_aunt",
         "display": {
-          "text": "8. Uncle/Aunt"
+          "title": {
+            "text": "8. Uncle/Aunt"
+          }
         },
         "_row_num": 9
       },
@@ -186,7 +226,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "in_law_son_daughter",
         "display": {
-          "text": "9. Son/Daughter in-law"
+          "title": {
+            "text": "9. Son/Daughter in-law"
+          }
         },
         "_row_num": 10
       },
@@ -194,7 +236,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "in_law_father_mother",
         "display": {
-          "text": "10. Father/Mother in-law"
+          "title": {
+            "text": "10. Father/Mother in-law"
+          }
         },
         "_row_num": 11
       },
@@ -202,7 +246,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "in_law_brother_sister",
         "display": {
-          "text": "11. Brother/Sister in-law"
+          "title": {
+            "text": "11. Brother/Sister in-law"
+          }
         },
         "_row_num": 12
       },
@@ -210,7 +256,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "grandparent",
         "display": {
-          "text": "12. Grandparent"
+          "title": {
+            "text": "12. Grandparent"
+          }
         },
         "_row_num": 13
       },
@@ -218,7 +266,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "other_relative",
         "display": {
-          "text": "13. Other relative"
+          "title": {
+            "text": "13. Other relative"
+          }
         },
         "_row_num": 14
       },
@@ -226,7 +276,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "servant",
         "display": {
-          "text": "14. Servant"
+          "title": {
+            "text": "14. Servant"
+          }
         },
         "_row_num": 15
       },
@@ -234,7 +286,9 @@
         "choice_list_name": "relation_to_house_head",
         "data_value": "non_relative",
         "display": {
-          "text": "15. Non-relative"
+          "title": {
+            "text": "15. Non-relative"
+          }
         },
         "_row_num": 16
       },
@@ -242,7 +296,9 @@
         "choice_list_name": "gender",
         "data_value": "male",
         "display": {
-          "text": "1. Male"
+          "title": {
+            "text": "1. Male"
+          }
         },
         "_row_num": 17
       },
@@ -250,7 +306,9 @@
         "choice_list_name": "gender",
         "data_value": "female",
         "display": {
-          "text": "2. Female"
+          "title": {
+            "text": "2. Female"
+          }
         },
         "_row_num": 18
       },
@@ -258,7 +316,9 @@
         "choice_list_name": "marital_options",
         "data_value": "married",
         "display": {
-          "text": "1. Married"
+          "title": {
+            "text": "1. Married"
+          }
         },
         "_row_num": 19
       },
@@ -266,7 +326,9 @@
         "choice_list_name": "marital_options",
         "data_value": "never_married",
         "display": {
-          "text": "2. Never Married"
+          "title": {
+            "text": "2. Never Married"
+          }
         },
         "_row_num": 20
       },
@@ -274,7 +336,9 @@
         "choice_list_name": "marital_options",
         "data_value": "divorced",
         "display": {
-          "text": "3. Divorced"
+          "title": {
+            "text": "3. Divorced"
+          }
         },
         "_row_num": 21
       },
@@ -282,7 +346,9 @@
         "choice_list_name": "marital_options",
         "data_value": "separated",
         "display": {
-          "text": "4. Separated"
+          "title": {
+            "text": "4. Separated"
+          }
         },
         "_row_num": 22
       },
@@ -290,7 +356,9 @@
         "choice_list_name": "marital_options",
         "data_value": "widowed",
         "display": {
-          "text": "5. Widowed"
+          "title": {
+            "text": "5. Widowed"
+          }
         },
         "_row_num": 23
       },
@@ -298,7 +366,9 @@
         "choice_list_name": "regions",
         "data_value": "tigray",
         "display": {
-          "text": "1. Tigray"
+          "title": {
+            "text": "1. Tigray"
+          }
         },
         "_row_num": 24
       },
@@ -306,7 +376,9 @@
         "choice_list_name": "regions",
         "data_value": "afar",
         "display": {
-          "text": "2. Afar"
+          "title": {
+            "text": "2. Afar"
+          }
         },
         "_row_num": 25
       },
@@ -314,7 +386,9 @@
         "choice_list_name": "regions",
         "data_value": "amhara",
         "display": {
-          "text": "3. Amhara"
+          "title": {
+            "text": "3. Amhara"
+          }
         },
         "_row_num": 26
       },
@@ -322,7 +396,9 @@
         "choice_list_name": "regions",
         "data_value": "oromia",
         "display": {
-          "text": "4. Oromia"
+          "title": {
+            "text": "4. Oromia"
+          }
         },
         "_row_num": 27
       },
@@ -330,7 +406,9 @@
         "choice_list_name": "regions",
         "data_value": "benshangul_gumuz",
         "display": {
-          "text": "5. Benshangul Gumuz"
+          "title": {
+            "text": "5. Benshangul Gumuz"
+          }
         },
         "_row_num": 28
       },
@@ -338,7 +416,9 @@
         "choice_list_name": "regions",
         "data_value": "snnp",
         "display": {
-          "text": "6. SNNP"
+          "title": {
+            "text": "6. SNNP"
+          }
         },
         "_row_num": 29
       },
@@ -346,7 +426,9 @@
         "choice_list_name": "regions",
         "data_value": "gambella",
         "display": {
-          "text": "7. Gambella"
+          "title": {
+            "text": "7. Gambella"
+          }
         },
         "_row_num": 30
       },
@@ -354,7 +436,9 @@
         "choice_list_name": "regions",
         "data_value": "harari",
         "display": {
-          "text": "8. Harari"
+          "title": {
+            "text": "8. Harari"
+          }
         },
         "_row_num": 31
       },
@@ -362,7 +446,9 @@
         "choice_list_name": "regions",
         "data_value": "addis_ababa",
         "display": {
-          "text": "9. Addis Ababa"
+          "title": {
+            "text": "9. Addis Ababa"
+          }
         },
         "_row_num": 32
       },
@@ -370,7 +456,9 @@
         "choice_list_name": "regions",
         "data_value": "diredawa",
         "display": {
-          "text": "10. Diredawa"
+          "title": {
+            "text": "10. Diredawa"
+          }
         },
         "_row_num": 33
       },
@@ -378,7 +466,9 @@
         "choice_list_name": "religions",
         "data_value": "orthodox",
         "display": {
-          "text": "1. Orthodox"
+          "title": {
+            "text": "1. Orthodox"
+          }
         },
         "_row_num": 34
       },
@@ -386,7 +476,9 @@
         "choice_list_name": "religions",
         "data_value": "catholic",
         "display": {
-          "text": "2. Catholic"
+          "title": {
+            "text": "2. Catholic"
+          }
         },
         "_row_num": 35
       },
@@ -394,7 +486,9 @@
         "choice_list_name": "religions",
         "data_value": "protestant",
         "display": {
-          "text": "3. Protestant"
+          "title": {
+            "text": "3. Protestant"
+          }
         },
         "_row_num": 36
       },
@@ -402,7 +496,9 @@
         "choice_list_name": "religions",
         "data_value": "muslim",
         "display": {
-          "text": "4. Muslim"
+          "title": {
+            "text": "4. Muslim"
+          }
         },
         "_row_num": 37
       },
@@ -410,7 +506,9 @@
         "choice_list_name": "religions",
         "data_value": "traditional",
         "display": {
-          "text": "5. Traditional"
+          "title": {
+            "text": "5. Traditional"
+          }
         },
         "_row_num": 38
       },
@@ -418,7 +516,9 @@
         "choice_list_name": "religions",
         "data_value": "pagan",
         "display": {
-          "text": "6. Pagan"
+          "title": {
+            "text": "6. Pagan"
+          }
         },
         "_row_num": 39
       }
@@ -437,7 +537,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Section 2"
+          "title": {
+            "text": "Section 2"
+          }
         },
         "_row_num": 4
       },
@@ -789,16 +891,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -814,7 +914,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 2"
+          "title": {
+            "text": "Section 2"
+          }
         },
         "_row_num": 4
       },
@@ -829,7 +931,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -843,7 +947,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Section 2"
+          "title": {
+            "text": "Section 2"
+          }
         },
         "_row_num": 4
       }
@@ -854,7 +960,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "head",
           "display": {
-            "text": "1. Head"
+            "title": {
+              "text": "1. Head"
+            }
           },
           "_row_num": 2
         },
@@ -862,7 +970,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "spouse",
           "display": {
-            "text": "2. Spouse"
+            "title": {
+              "text": "2. Spouse"
+            }
           },
           "_row_num": 3
         },
@@ -870,7 +980,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "son_daughter",
           "display": {
-            "text": "3. Son/Daughter"
+            "title": {
+              "text": "3. Son/Daughter"
+            }
           },
           "_row_num": 4
         },
@@ -878,7 +990,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "grandchild",
           "display": {
-            "text": "4. Grandchild"
+            "title": {
+              "text": "4. Grandchild"
+            }
           },
           "_row_num": 5
         },
@@ -886,7 +1000,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "father_mother",
           "display": {
-            "text": "5. Father/Mother"
+            "title": {
+              "text": "5. Father/Mother"
+            }
           },
           "_row_num": 6
         },
@@ -894,7 +1010,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "sister_brother",
           "display": {
-            "text": "6. Sister/Brother"
+            "title": {
+              "text": "6. Sister/Brother"
+            }
           },
           "_row_num": 7
         },
@@ -902,7 +1020,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "niece_nephew",
           "display": {
-            "text": "7. Niece/Nephew"
+            "title": {
+              "text": "7. Niece/Nephew"
+            }
           },
           "_row_num": 8
         },
@@ -910,7 +1030,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "uncle_aunt",
           "display": {
-            "text": "8. Uncle/Aunt"
+            "title": {
+              "text": "8. Uncle/Aunt"
+            }
           },
           "_row_num": 9
         },
@@ -918,7 +1040,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "in_law_son_daughter",
           "display": {
-            "text": "9. Son/Daughter in-law"
+            "title": {
+              "text": "9. Son/Daughter in-law"
+            }
           },
           "_row_num": 10
         },
@@ -926,7 +1050,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "in_law_father_mother",
           "display": {
-            "text": "10. Father/Mother in-law"
+            "title": {
+              "text": "10. Father/Mother in-law"
+            }
           },
           "_row_num": 11
         },
@@ -934,7 +1060,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "in_law_brother_sister",
           "display": {
-            "text": "11. Brother/Sister in-law"
+            "title": {
+              "text": "11. Brother/Sister in-law"
+            }
           },
           "_row_num": 12
         },
@@ -942,7 +1070,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "grandparent",
           "display": {
-            "text": "12. Grandparent"
+            "title": {
+              "text": "12. Grandparent"
+            }
           },
           "_row_num": 13
         },
@@ -950,7 +1080,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "other_relative",
           "display": {
-            "text": "13. Other relative"
+            "title": {
+              "text": "13. Other relative"
+            }
           },
           "_row_num": 14
         },
@@ -958,7 +1090,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "servant",
           "display": {
-            "text": "14. Servant"
+            "title": {
+              "text": "14. Servant"
+            }
           },
           "_row_num": 15
         },
@@ -966,7 +1100,9 @@
           "choice_list_name": "relation_to_house_head",
           "data_value": "non_relative",
           "display": {
-            "text": "15. Non-relative"
+            "title": {
+              "text": "15. Non-relative"
+            }
           },
           "_row_num": 16
         }
@@ -976,7 +1112,9 @@
           "choice_list_name": "gender",
           "data_value": "male",
           "display": {
-            "text": "1. Male"
+            "title": {
+              "text": "1. Male"
+            }
           },
           "_row_num": 17
         },
@@ -984,7 +1122,9 @@
           "choice_list_name": "gender",
           "data_value": "female",
           "display": {
-            "text": "2. Female"
+            "title": {
+              "text": "2. Female"
+            }
           },
           "_row_num": 18
         }
@@ -994,7 +1134,9 @@
           "choice_list_name": "marital_options",
           "data_value": "married",
           "display": {
-            "text": "1. Married"
+            "title": {
+              "text": "1. Married"
+            }
           },
           "_row_num": 19
         },
@@ -1002,7 +1144,9 @@
           "choice_list_name": "marital_options",
           "data_value": "never_married",
           "display": {
-            "text": "2. Never Married"
+            "title": {
+              "text": "2. Never Married"
+            }
           },
           "_row_num": 20
         },
@@ -1010,7 +1154,9 @@
           "choice_list_name": "marital_options",
           "data_value": "divorced",
           "display": {
-            "text": "3. Divorced"
+            "title": {
+              "text": "3. Divorced"
+            }
           },
           "_row_num": 21
         },
@@ -1018,7 +1164,9 @@
           "choice_list_name": "marital_options",
           "data_value": "separated",
           "display": {
-            "text": "4. Separated"
+            "title": {
+              "text": "4. Separated"
+            }
           },
           "_row_num": 22
         },
@@ -1026,7 +1174,9 @@
           "choice_list_name": "marital_options",
           "data_value": "widowed",
           "display": {
-            "text": "5. Widowed"
+            "title": {
+              "text": "5. Widowed"
+            }
           },
           "_row_num": 23
         }
@@ -1036,7 +1186,9 @@
           "choice_list_name": "regions",
           "data_value": "tigray",
           "display": {
-            "text": "1. Tigray"
+            "title": {
+              "text": "1. Tigray"
+            }
           },
           "_row_num": 24
         },
@@ -1044,7 +1196,9 @@
           "choice_list_name": "regions",
           "data_value": "afar",
           "display": {
-            "text": "2. Afar"
+            "title": {
+              "text": "2. Afar"
+            }
           },
           "_row_num": 25
         },
@@ -1052,7 +1206,9 @@
           "choice_list_name": "regions",
           "data_value": "amhara",
           "display": {
-            "text": "3. Amhara"
+            "title": {
+              "text": "3. Amhara"
+            }
           },
           "_row_num": 26
         },
@@ -1060,7 +1216,9 @@
           "choice_list_name": "regions",
           "data_value": "oromia",
           "display": {
-            "text": "4. Oromia"
+            "title": {
+              "text": "4. Oromia"
+            }
           },
           "_row_num": 27
         },
@@ -1068,7 +1226,9 @@
           "choice_list_name": "regions",
           "data_value": "benshangul_gumuz",
           "display": {
-            "text": "5. Benshangul Gumuz"
+            "title": {
+              "text": "5. Benshangul Gumuz"
+            }
           },
           "_row_num": 28
         },
@@ -1076,7 +1236,9 @@
           "choice_list_name": "regions",
           "data_value": "snnp",
           "display": {
-            "text": "6. SNNP"
+            "title": {
+              "text": "6. SNNP"
+            }
           },
           "_row_num": 29
         },
@@ -1084,7 +1246,9 @@
           "choice_list_name": "regions",
           "data_value": "gambella",
           "display": {
-            "text": "7. Gambella"
+            "title": {
+              "text": "7. Gambella"
+            }
           },
           "_row_num": 30
         },
@@ -1092,7 +1256,9 @@
           "choice_list_name": "regions",
           "data_value": "harari",
           "display": {
-            "text": "8. Harari"
+            "title": {
+              "text": "8. Harari"
+            }
           },
           "_row_num": 31
         },
@@ -1100,7 +1266,9 @@
           "choice_list_name": "regions",
           "data_value": "addis_ababa",
           "display": {
-            "text": "9. Addis Ababa"
+            "title": {
+              "text": "9. Addis Ababa"
+            }
           },
           "_row_num": 32
         },
@@ -1108,7 +1276,9 @@
           "choice_list_name": "regions",
           "data_value": "diredawa",
           "display": {
-            "text": "10. Diredawa"
+            "title": {
+              "text": "10. Diredawa"
+            }
           },
           "_row_num": 33
         }
@@ -1118,7 +1288,9 @@
           "choice_list_name": "religions",
           "data_value": "orthodox",
           "display": {
-            "text": "1. Orthodox"
+            "title": {
+              "text": "1. Orthodox"
+            }
           },
           "_row_num": 34
         },
@@ -1126,7 +1298,9 @@
           "choice_list_name": "religions",
           "data_value": "catholic",
           "display": {
-            "text": "2. Catholic"
+            "title": {
+              "text": "2. Catholic"
+            }
           },
           "_row_num": 35
         },
@@ -1134,7 +1308,9 @@
           "choice_list_name": "religions",
           "data_value": "protestant",
           "display": {
-            "text": "3. Protestant"
+            "title": {
+              "text": "3. Protestant"
+            }
           },
           "_row_num": 36
         },
@@ -1142,7 +1318,9 @@
           "choice_list_name": "religions",
           "data_value": "muslim",
           "display": {
-            "text": "4. Muslim"
+            "title": {
+              "text": "4. Muslim"
+            }
           },
           "_row_num": 37
         },
@@ -1150,7 +1328,9 @@
           "choice_list_name": "religions",
           "data_value": "traditional",
           "display": {
-            "text": "5. Traditional"
+            "title": {
+              "text": "5. Traditional"
+            }
           },
           "_row_num": 38
         },
@@ -1158,7 +1338,9 @@
           "choice_list_name": "religions",
           "data_value": "pagan",
           "display": {
-            "text": "6. Pagan"
+            "title": {
+              "text": "6. Pagan"
+            }
           },
           "_row_num": 39
         }
@@ -1879,14 +2061,18 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Section 2"
+              "title": {
+                "text": "Section 2"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
           {
             "type": "finalize",
             "display": {
-              "text": "Save Form"
+              "prompt": {
+                "text": "Save Form"
+              }
             },
             "comment": "goes to the finalize screen instead of just automatically finalizing",
             "_row_num": 3,
@@ -1989,7 +2175,9 @@
             "values_list": "relation_to_house_head",
             "name": "relation",
             "display": {
-              "text": "What is {{data.name}}'s relationship to the household head?"
+              "prompt": {
+                "text": "What is {{data.name}}'s relationship to the household head?"
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -2004,7 +2192,9 @@
             "values_list": "gender",
             "name": "gender",
             "display": {
-              "text": "What is {{data.name}}'s sex?"
+              "prompt": {
+                "text": "What is {{data.name}}'s sex?"
+              }
             },
             "required": true,
             "_row_num": 3,
@@ -2019,12 +2209,18 @@
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "What is {{data.name}}'s age?",
-              "hint": "in years"
+              "prompt": {
+                "text": "What is {{data.name}}'s age?"
+              },
+              "hint": {
+                "text": "in years"
+              },
+              "constraint_message": {
+                "text": "Age cannot be negative"
+              }
             },
             "required": true,
             "constraint": "data('age') >= 0",
-            "constraint_message": "Age cannot be negative",
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
@@ -2038,7 +2234,9 @@
             "values_list": "marital_options",
             "name": "marital_status",
             "display": {
-              "text": "Marital status of {{data.name}}."
+              "prompt": {
+                "text": "Marital status of {{data.name}}."
+              }
             },
             "required": "data('age') >= 15",
             "_row_num": 6,
@@ -2052,11 +2250,17 @@
             "type": "integer",
             "name": "months_away",
             "display": {
-              "text": "For how many months during the last 12 months was {{data.name}} away from the household?",
-              "hint": "0 if never away, or less than two weeks."
+              "prompt": {
+                "text": "For how many months during the last 12 months was {{data.name}} away from the household?"
+              },
+              "hint": {
+                "text": "0 if never away, or less than two weeks."
+              },
+              "constraint_message": {
+                "text": "Answer must be between 0 and 12"
+              }
             },
             "constraint": "data('months_away') >= 0 && data('months_away') <= 12",
-            "constraint_message": "Answer must be between 0 and 12",
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
@@ -2069,7 +2273,9 @@
             "values_list": "regions",
             "name": "region_born",
             "display": {
-              "text": "In what region was {{data.name}} born?"
+              "prompt": {
+                "text": "In what region was {{data.name}} born?"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -2083,7 +2289,9 @@
             "values_list": "religions",
             "name": "religion",
             "display": {
-              "text": "What is {{data.name}}'s main religion?"
+              "prompt": {
+                "text": "What is {{data.name}}'s main religion?"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -3206,21 +3414,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -3230,6 +3430,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -3237,6 +3461,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",

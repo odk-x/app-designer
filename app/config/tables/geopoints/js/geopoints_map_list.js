@@ -1,28 +1,15 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, odkTables, data */
+/* global odkTables, odkData, odkCommon */
 /* exported display, handleClick */
 'use strict';
 
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/geopoints_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             if (dataObj === undefined || dataObj === null) {
-//                 console.log('Could not load data json for table: geopoints');
-//             }
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 var geoResult = {};
 var tableId = null;
 var clientId = null;
 function handleClick(rowId) {
-    odkTables.openDetailView(
+    odkTables.openDetailView(null,
         tableId,
         rowId,
         'config/tables/geopoints/html/geopoints_detail.html');

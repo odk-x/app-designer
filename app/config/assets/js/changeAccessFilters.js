@@ -1,8 +1,8 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, odkTables, data */
-/*exported display, handleClick, getResults */
+/* global $, odkData, odkCommon */
+/*exported display, handleClick, getResults, showTableData, updateFilterType, updateFilterValue, applyChanges */
 'use strict';
 
 function rolesSuccess(result) {
@@ -172,7 +172,6 @@ function showTableSuccess(result) {
 
     var orderedColumns = chosenTable.getColumns();
     var td;
-    var txt;
 
     // placeholder column for selection checkboxes  
     td = document.createElement('th');

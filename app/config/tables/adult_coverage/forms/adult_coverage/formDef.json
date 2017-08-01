@@ -5,7 +5,7 @@
         "clause": "begin screen",
         "screen": {
           "screen_type": "custom",
-          "templatePath": "../tables/adult_coverage/forms/adult_coverage/VR_adult_coverage.handlebars"
+          "templatePath": "../config/tables/adult_coverage/forms/adult_coverage/VR_adult_coverage.handlebars"
         },
         "_row_num": 2
       },
@@ -13,7 +13,9 @@
         "type": "note",
         "name": "description",
         "display": {
-          "text": "Adult Coverage"
+          "prompt": {
+            "text": "Adult Coverage"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +23,9 @@
         "type": "integer",
         "name": "Dose1_PregnantWoman_HealthCenter",
         "display": {
-          "title": "Dose1_PregnantWoman_HealthCenter"
+          "title": {
+            "text": "Dose1_PregnantWoman_HealthCenter"
+          }
         },
         "_row_num": 4
       },
@@ -30,7 +34,9 @@
         "values_list": "one_choice",
         "name": "PW1_HC_NR_checkbox",
         "display": {
-          "title": "PW1_HC_NR_checkbox"
+          "title": {
+            "text": "PW1_HC_NR_checkbox"
+          }
         },
         "_row_num": 5
       },
@@ -38,7 +44,9 @@
         "type": "integer",
         "name": "Dose1_PregnantWoman_Outreach",
         "display": {
-          "title": "Dose1_PregnantWoman_Outreach"
+          "title": {
+            "text": "Dose1_PregnantWoman_Outreach"
+          }
         },
         "_row_num": 6
       },
@@ -47,7 +55,9 @@
         "values_list": "one_choice",
         "name": "PW1_O_NR_checkbox",
         "display": {
-          "title": "PW1_O_NR_checkbox"
+          "title": {
+            "text": "PW1_O_NR_checkbox"
+          }
         },
         "_row_num": 7
       },
@@ -55,8 +65,12 @@
         "type": "note",
         "name": "Dose1_PregnantWoman_sum",
         "display": {
-          "text": "{{calculates.Dose1_PregnantWoman_sum}}",
-          "title": "Dose1_PregnantWoman_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_PregnantWoman_sum}}"
+          },
+          "title": {
+            "text": "Dose1_PregnantWoman_sum"
+          }
         },
         "_row_num": 8
       },
@@ -64,7 +78,9 @@
         "type": "integer",
         "name": "Dose2_PregnantWoman_HealthCenter",
         "display": {
-          "title": "Dose2_PregnantWoman_HealthCenter"
+          "title": {
+            "text": "Dose2_PregnantWoman_HealthCenter"
+          }
         },
         "_row_num": 9
       },
@@ -73,7 +89,9 @@
         "values_list": "one_choice",
         "name": "PW2_HC_NR_checkbox",
         "display": {
-          "title": "PW2_HC_NR_checkbox"
+          "title": {
+            "text": "PW2_HC_NR_checkbox"
+          }
         },
         "_row_num": 10
       },
@@ -81,7 +99,9 @@
         "type": "integer",
         "name": "Dose2_PregnantWoman_Outreach",
         "display": {
-          "title": "Dose2_PregnantWoman_Outreach"
+          "title": {
+            "text": "Dose2_PregnantWoman_Outreach"
+          }
         },
         "_row_num": 11
       },
@@ -90,7 +110,9 @@
         "values_list": "one_choice",
         "name": "PW2_O_NR_checkbox",
         "display": {
-          "title": "PW2_O_NR_checkbox"
+          "title": {
+            "text": "PW2_O_NR_checkbox"
+          }
         },
         "_row_num": 12
       },
@@ -98,8 +120,12 @@
         "type": "note",
         "name": "Dose2_PregnantWoman_sum",
         "display": {
-          "text": "{{calculates.Dose2_PregnantWoman_sum}}",
-          "title": "Dose2_PregnantWoman_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_PregnantWoman_sum}}"
+          },
+          "title": {
+            "text": "Dose2_PregnantWoman_sum"
+          }
         },
         "_row_num": 13
       },
@@ -107,8 +133,12 @@
         "type": "note",
         "name": "Total_PregnantWoman",
         "display": {
-          "text": "{{calculates.Total_PregnantWoman}}",
-          "title": "Total_PregnantWoman"
+          "prompt": {
+            "text": "{{calculates.Total_PregnantWoman}}"
+          },
+          "title": {
+            "text": "Total_PregnantWoman"
+          }
         },
         "_row_num": 14
       },
@@ -116,7 +146,9 @@
         "type": "integer",
         "name": "Dose1_MIFComm_HealthCenter",
         "display": {
-          "title": "Dose1_MIFComm_HealthCenter"
+          "title": {
+            "text": "Dose1_MIFComm_HealthCenter"
+          }
         },
         "_row_num": 15
       },
@@ -125,7 +157,9 @@
         "values_list": "one_choice",
         "name": "MIFCOMM1_HC_NR_checkbox",
         "display": {
-          "title": "MIFCOMM1_HC_NR_checkbox"
+          "title": {
+            "text": "MIFCOMM1_HC_NR_checkbox"
+          }
         },
         "_row_num": 16
       },
@@ -133,7 +167,9 @@
         "type": "integer",
         "name": "Dose1_MIFComm_Outreach",
         "display": {
-          "title": "Dose1_MIFComm_Outreach"
+          "title": {
+            "text": "Dose1_MIFComm_Outreach"
+          }
         },
         "_row_num": 17
       },
@@ -142,7 +178,9 @@
         "values_list": "one_choice",
         "name": "MIFCOMM1_O_NR_checkbox",
         "display": {
-          "title": "MIFCOMM1_O_NR_checkbox"
+          "title": {
+            "text": "MIFCOMM1_O_NR_checkbox"
+          }
         },
         "_row_num": 18
       },
@@ -150,8 +188,12 @@
         "type": "note",
         "name": "Dose1_MIFComm_sum",
         "display": {
-          "text": "{{calculates.Dose1_MIFComm_sum}}",
-          "title": "Dose1_MIFComm_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_MIFComm_sum}}"
+          },
+          "title": {
+            "text": "Dose1_MIFComm_sum"
+          }
         },
         "_row_num": 19
       },
@@ -159,7 +201,9 @@
         "type": "integer",
         "name": "Dose2_MIFComm_HealthCenter",
         "display": {
-          "title": "Dose2_MIFComm_HealthCenter"
+          "title": {
+            "text": "Dose2_MIFComm_HealthCenter"
+          }
         },
         "_row_num": 20
       },
@@ -168,7 +212,9 @@
         "values_list": "one_choice",
         "name": "MIFCOMM2_HC_NR_checkbox",
         "display": {
-          "title": "MIFCOMM2_HC_NR_checkbox"
+          "title": {
+            "text": "MIFCOMM2_HC_NR_checkbox"
+          }
         },
         "_row_num": 21
       },
@@ -176,7 +222,9 @@
         "type": "integer",
         "name": "Dose2_MIFComm_Outreach",
         "display": {
-          "title": "Dose2_MIFComm_Outreach"
+          "title": {
+            "text": "Dose2_MIFComm_Outreach"
+          }
         },
         "_row_num": 22
       },
@@ -185,7 +233,9 @@
         "values_list": "one_choice",
         "name": "MIFCOMM2_O_NR_checkbox",
         "display": {
-          "title": "MIFCOMM2_O_NR_checkbox"
+          "title": {
+            "text": "MIFCOMM2_O_NR_checkbox"
+          }
         },
         "_row_num": 23
       },
@@ -193,8 +243,12 @@
         "type": "note",
         "name": "Dose2_MIFComm_sum",
         "display": {
-          "text": "{{calculates.Dose2_MIFComm_sum}}",
-          "title": "Dose2_MIFComm_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_MIFComm_sum}}"
+          },
+          "title": {
+            "text": "Dose2_MIFComm_sum"
+          }
         },
         "_row_num": 24
       },
@@ -202,8 +256,12 @@
         "type": "note",
         "name": "Total_MIFComm",
         "display": {
-          "text": "{{calculates.Total_MIFComm}}",
-          "title": "Total_MIFComm"
+          "prompt": {
+            "text": "{{calculates.Total_MIFComm}}"
+          },
+          "title": {
+            "text": "Total_MIFComm"
+          }
         },
         "_row_num": 25
       },
@@ -211,7 +269,9 @@
         "type": "integer",
         "name": "Dose1_MIFStudents_Outreach",
         "display": {
-          "title": "Dose1_MIFStudents_Outreach"
+          "title": {
+            "text": "Dose1_MIFStudents_Outreach"
+          }
         },
         "_row_num": 26
       },
@@ -220,7 +280,9 @@
         "values_list": "one_choice",
         "name": "MIFS1_O_NR_checkbox",
         "display": {
-          "title": "MIFS1_O_NR_checkbox"
+          "title": {
+            "text": "MIFS1_O_NR_checkbox"
+          }
         },
         "_row_num": 27
       },
@@ -228,8 +290,12 @@
         "type": "note",
         "name": "Dose1_MIFStudents_sum",
         "display": {
-          "text": "{{calculates.Dose1_MIFStudents_sum}}",
-          "title": "Dose1_MIFStudents_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_MIFStudents_sum}}"
+          },
+          "title": {
+            "text": "Dose1_MIFStudents_sum"
+          }
         },
         "_row_num": 28
       },
@@ -237,7 +303,9 @@
         "type": "integer",
         "name": "Dose2_MIFStudents_Outreach",
         "display": {
-          "title": "Dose2_MIFStudents_Outreach"
+          "title": {
+            "text": "Dose2_MIFStudents_Outreach"
+          }
         },
         "_row_num": 29
       },
@@ -246,7 +314,9 @@
         "values_list": "one_choice",
         "name": "MIFS2_O_NR_checkbox",
         "display": {
-          "title": "MIFS2_O_NR_checkbox"
+          "title": {
+            "text": "MIFS2_O_NR_checkbox"
+          }
         },
         "_row_num": 30
       },
@@ -254,8 +324,12 @@
         "type": "note",
         "name": "Dose2_MIFStudents_sum",
         "display": {
-          "text": "{{calculates.Dose2_MIFStudents_sum}}",
-          "title": "Dose2_MIFStudents_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_MIFStudents_sum}}"
+          },
+          "title": {
+            "text": "Dose2_MIFStudents_sum"
+          }
         },
         "_row_num": 31
       },
@@ -263,8 +337,12 @@
         "type": "note",
         "name": "Total_MIFStudents",
         "display": {
-          "text": "{{calculates.Total_MIFStudents}}",
-          "title": "Total_MIFStudents"
+          "prompt": {
+            "text": "{{calculates.Total_MIFStudents}}"
+          },
+          "title": {
+            "text": "Total_MIFStudents"
+          }
         },
         "_row_num": 32
       },
@@ -272,7 +350,9 @@
         "type": "integer",
         "name": "Dose1_MIFWorkers_Outreach",
         "display": {
-          "title": "Dose1_MIFWorkers_Outreach"
+          "title": {
+            "text": "Dose1_MIFWorkers_Outreach"
+          }
         },
         "_row_num": 33
       },
@@ -281,7 +361,9 @@
         "values_list": "one_choice",
         "name": "MIFW1_O_NR_checkbox",
         "display": {
-          "title": "MIFW1_O_NR_checkbox"
+          "title": {
+            "text": "MIFW1_O_NR_checkbox"
+          }
         },
         "_row_num": 34
       },
@@ -289,8 +371,12 @@
         "type": "note",
         "name": "Dose1_MIFWorkers_sum",
         "display": {
-          "text": "{{calculates.Dose1_MIFWorkers_sum}}",
-          "title": "Dose1_MIFWorkers_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_MIFWorkers_sum}}"
+          },
+          "title": {
+            "text": "Dose1_MIFWorkers_sum"
+          }
         },
         "_row_num": 35
       },
@@ -298,7 +384,9 @@
         "type": "integer",
         "name": "Dose2_MIFWorkers_Outreach",
         "display": {
-          "title": "Dose2_MIFWorkers_Outreach"
+          "title": {
+            "text": "Dose2_MIFWorkers_Outreach"
+          }
         },
         "_row_num": 36
       },
@@ -307,7 +395,9 @@
         "values_list": "one_choice",
         "name": "MIFW2_O_NR_checkbox",
         "display": {
-          "title": "MIFW2_O_NR_checkbox"
+          "title": {
+            "text": "MIFW2_O_NR_checkbox"
+          }
         },
         "_row_num": 37
       },
@@ -315,8 +405,12 @@
         "type": "note",
         "name": "Dose2_MIFWorkers_sum",
         "display": {
-          "text": "{{calculates.Dose2_MIFWorkers_sum}}",
-          "title": "Dose2_MIFWorkers_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_MIFWorkers_sum}}"
+          },
+          "title": {
+            "text": "Dose2_MIFWorkers_sum"
+          }
         },
         "_row_num": 38
       },
@@ -324,8 +418,12 @@
         "type": "note",
         "name": "Total_MIFWorkers",
         "display": {
-          "text": "{{calculates.Total_MIFWorkers}}",
-          "title": "Total_MIFWorkers"
+          "prompt": {
+            "text": "{{calculates.Total_MIFWorkers}}"
+          },
+          "title": {
+            "text": "Total_MIFWorkers"
+          }
         },
         "_row_num": 39
       },
@@ -333,7 +431,9 @@
         "type": "integer",
         "name": "OpenedVials",
         "display": {
-          "title": "OpenedVials"
+          "title": {
+            "text": "OpenedVials"
+          }
         },
         "_row_num": 40
       },
@@ -342,7 +442,9 @@
         "values_list": "one_choice",
         "name": "OV_NR_checkbox",
         "display": {
-          "title": "OV_NR_checkbox"
+          "title": {
+            "text": "OV_NR_checkbox"
+          }
         },
         "_row_num": 41
       },
@@ -350,7 +452,9 @@
         "type": "integer",
         "name": "Dose1_Students_notMIF_Outreach",
         "display": {
-          "title": "Dose1_Students_notMIF_Outreach"
+          "title": {
+            "text": "Dose1_Students_notMIF_Outreach"
+          }
         },
         "_row_num": 42
       },
@@ -359,7 +463,9 @@
         "values_list": "one_choice",
         "name": "S1_O_NR_checkbox",
         "display": {
-          "title": "S1_O_NR_checkbox"
+          "title": {
+            "text": "S1_O_NR_checkbox"
+          }
         },
         "_row_num": 43
       },
@@ -367,8 +473,12 @@
         "type": "note",
         "name": "Dose1_Students_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose1_Students_notMIF_sum}}",
-          "title": "Dose1_Students_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_Students_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose1_Students_notMIF_sum"
+          }
         },
         "_row_num": 44
       },
@@ -376,7 +486,9 @@
         "type": "integer",
         "name": "Dose2_Students_notMIF_Outreach",
         "display": {
-          "title": "Dose2_Students_notMIF_Outreach"
+          "title": {
+            "text": "Dose2_Students_notMIF_Outreach"
+          }
         },
         "_row_num": 45
       },
@@ -385,7 +497,9 @@
         "values_list": "one_choice",
         "name": "S2_O_NR_checkbox",
         "display": {
-          "title": "S2_O_NR_checkbox"
+          "title": {
+            "text": "S2_O_NR_checkbox"
+          }
         },
         "_row_num": 46
       },
@@ -393,8 +507,12 @@
         "type": "note",
         "name": "Dose2_Students_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose2_Students_notMIF_sum}}",
-          "title": "Dose2_Students_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_Students_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose2_Students_notMIF_sum"
+          }
         },
         "_row_num": 47
       },
@@ -402,8 +520,12 @@
         "type": "note",
         "name": "Total_Students_notMIF",
         "display": {
-          "text": "{{calculates.Total_Students_notMIF}}",
-          "title": "Total_Students_notMIF"
+          "prompt": {
+            "text": "{{calculates.Total_Students_notMIF}}"
+          },
+          "title": {
+            "text": "Total_Students_notMIF"
+          }
         },
         "_row_num": 48
       },
@@ -411,7 +533,9 @@
         "type": "integer",
         "name": "Dose1_Workers_notMIF_Outreach",
         "display": {
-          "title": "Dose1_Workers_notMIF_Outreach"
+          "title": {
+            "text": "Dose1_Workers_notMIF_Outreach"
+          }
         },
         "_row_num": 49
       },
@@ -420,7 +544,9 @@
         "values_list": "one_choice",
         "name": "W1_O_NR_checkbox",
         "display": {
-          "title": "W1_O_NR_checkbox"
+          "title": {
+            "text": "W1_O_NR_checkbox"
+          }
         },
         "_row_num": 50
       },
@@ -428,8 +554,12 @@
         "type": "note",
         "name": "Dose1_Workers_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose1_Workers_notMIF_sum}}",
-          "title": "Dose1_Workers_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_Workers_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose1_Workers_notMIF_sum"
+          }
         },
         "_row_num": 51
       },
@@ -437,7 +567,9 @@
         "type": "integer",
         "name": "Dose2_Workers_notMIF_Outreach",
         "display": {
-          "title": "Dose2_Workers_notMIF_Outreach"
+          "title": {
+            "text": "Dose2_Workers_notMIF_Outreach"
+          }
         },
         "_row_num": 52
       },
@@ -446,7 +578,9 @@
         "values_list": "one_choice",
         "name": "W2_O_NR_checkbox",
         "display": {
-          "title": "W2_O_NR_checkbox"
+          "title": {
+            "text": "W2_O_NR_checkbox"
+          }
         },
         "_row_num": 53
       },
@@ -454,8 +588,12 @@
         "type": "note",
         "name": "Dose2_Workers_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose2_Workers_notMIF_sum}}",
-          "title": "Dose2_Workers_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_Workers_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose2_Workers_notMIF_sum"
+          }
         },
         "_row_num": 54
       },
@@ -463,8 +601,12 @@
         "type": "note",
         "name": "Total_Workers_notMIF",
         "display": {
-          "text": "{{calculates.Total_Workers_notMIF}}",
-          "title": "Total_Workers_notMIF"
+          "prompt": {
+            "text": "{{calculates.Total_Workers_notMIF}}"
+          },
+          "title": {
+            "text": "Total_Workers_notMIF"
+          }
         },
         "_row_num": 55
       },
@@ -472,7 +614,9 @@
         "type": "integer",
         "name": "Dose1_Other_notMIF_HealthCenter",
         "display": {
-          "title": "Dose1_Other_notMIF_HealthCenter"
+          "title": {
+            "text": "Dose1_Other_notMIF_HealthCenter"
+          }
         },
         "_row_num": 56
       },
@@ -481,7 +625,9 @@
         "values_list": "one_choice",
         "name": "O1_HC_NR_checkbox",
         "display": {
-          "title": "O1_HC_NR_checkbox"
+          "title": {
+            "text": "O1_HC_NR_checkbox"
+          }
         },
         "_row_num": 57
       },
@@ -489,7 +635,9 @@
         "type": "integer",
         "name": "Dose1_Other_notMIF_Outreach",
         "display": {
-          "title": "Dose1_Other_notMIF_Outreach"
+          "title": {
+            "text": "Dose1_Other_notMIF_Outreach"
+          }
         },
         "_row_num": 58
       },
@@ -498,7 +646,9 @@
         "values_list": "one_choice",
         "name": "O1_O_NR_checkbox",
         "display": {
-          "title": "O1_O_NR_checkbox"
+          "title": {
+            "text": "O1_O_NR_checkbox"
+          }
         },
         "_row_num": 59
       },
@@ -506,8 +656,12 @@
         "type": "note",
         "name": "Dose1_Other_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose1_Other_notMIF_sum}}",
-          "title": "Dose1_Other_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose1_Other_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose1_Other_notMIF_sum"
+          }
         },
         "_row_num": 60
       },
@@ -515,7 +669,9 @@
         "type": "integer",
         "name": "Dose2_Other_notMIF_HealthCenter",
         "display": {
-          "title": "Dose2_Other_notMIF_HealthCenter"
+          "title": {
+            "text": "Dose2_Other_notMIF_HealthCenter"
+          }
         },
         "_row_num": 61
       },
@@ -524,7 +680,9 @@
         "values_list": "one_choice",
         "name": "O2_HC_NR_checkbox",
         "display": {
-          "title": "O2_HC_NR_checkbox"
+          "title": {
+            "text": "O2_HC_NR_checkbox"
+          }
         },
         "_row_num": 62
       },
@@ -532,7 +690,9 @@
         "type": "integer",
         "name": "Dose2_Other_notMIF_Outreach",
         "display": {
-          "title": "Dose2_Other_notMIF_Outreach"
+          "title": {
+            "text": "Dose2_Other_notMIF_Outreach"
+          }
         },
         "_row_num": 63
       },
@@ -541,7 +701,9 @@
         "values_list": "one_choice",
         "name": "O2_O_NR_checkbox",
         "display": {
-          "title": "O2_O_NR_checkbox"
+          "title": {
+            "text": "O2_O_NR_checkbox"
+          }
         },
         "_row_num": 64
       },
@@ -549,8 +711,12 @@
         "type": "note",
         "name": "Dose2_Other_notMIF_sum",
         "display": {
-          "text": "{{calculates.Dose2_Other_notMIF_sum}}",
-          "title": "Dose2_Other_notMIF_sum"
+          "prompt": {
+            "text": "{{calculates.Dose2_Other_notMIF_sum}}"
+          },
+          "title": {
+            "text": "Dose2_Other_notMIF_sum"
+          }
         },
         "_row_num": 65
       },
@@ -558,8 +724,12 @@
         "type": "note",
         "name": "Total_Other_notMIF",
         "display": {
-          "text": "{{calculates.Total_Other_notMIF}}",
-          "title": "Total_Other_notMIF"
+          "prompt": {
+            "text": "{{calculates.Total_Other_notMIF}}"
+          },
+          "title": {
+            "text": "Total_Other_notMIF"
+          }
         },
         "_row_num": 66
       },
@@ -567,8 +737,12 @@
         "type": "note",
         "name": "Total_Dose1_HealthCenter",
         "display": {
-          "text": "{{calculates.Total_Dose1_HealthCenter}}",
-          "title": "Total_Dose1_HealthCenter"
+          "prompt": {
+            "text": "{{calculates.Total_Dose1_HealthCenter}}"
+          },
+          "title": {
+            "text": "Total_Dose1_HealthCenter"
+          }
         },
         "_row_num": 67
       },
@@ -576,8 +750,12 @@
         "type": "note",
         "name": "Total_Dose1_Outreach",
         "display": {
-          "text": "{{calculates.Total_Dose1_Outreach}}",
-          "title": "Total_Dose1_Outreach"
+          "prompt": {
+            "text": "{{calculates.Total_Dose1_Outreach}}"
+          },
+          "title": {
+            "text": "Total_Dose1_Outreach"
+          }
         },
         "_row_num": 68
       },
@@ -585,8 +763,12 @@
         "type": "note",
         "name": "Total_Dose2_HealthCenter",
         "display": {
-          "text": "{{calculates.Total_Dose2_HealthCenter}}",
-          "title": "Total_Dose2_HealthCenter"
+          "prompt": {
+            "text": "{{calculates.Total_Dose2_HealthCenter}}"
+          },
+          "title": {
+            "text": "Total_Dose2_HealthCenter"
+          }
         },
         "_row_num": 69
       },
@@ -594,8 +776,12 @@
         "type": "note",
         "name": "Total_Dose2_Outreach",
         "display": {
-          "text": "{{calculates.Total_Dose2_Outreach}}",
-          "title": "Total_Dose2_Outreach"
+          "prompt": {
+            "text": "{{calculates.Total_Dose2_Outreach}}"
+          },
+          "title": {
+            "text": "Total_Dose2_Outreach"
+          }
         },
         "_row_num": 70
       },
@@ -603,8 +789,12 @@
         "type": "note",
         "name": "Total_Dose1",
         "display": {
-          "text": "{{calculates.Total_Dose1}}",
-          "title": "Total_Dose1"
+          "prompt": {
+            "text": "{{calculates.Total_Dose1}}"
+          },
+          "title": {
+            "text": "Total_Dose1"
+          }
         },
         "_row_num": 71
       },
@@ -612,8 +802,12 @@
         "type": "note",
         "name": "Total_Dose2",
         "display": {
-          "text": "{{calculates.Total_Dose2}}",
-          "title": "Total_Dose2"
+          "prompt": {
+            "text": "{{calculates.Total_Dose2}}"
+          },
+          "title": {
+            "text": "Total_Dose2"
+          }
         },
         "_row_num": 72
       },
@@ -621,8 +815,12 @@
         "type": "note",
         "name": "Total_Tetanus",
         "display": {
-          "text": "{{calculates.Total_Tetanus}}",
-          "title": "Total_Tetanus"
+          "prompt": {
+            "text": "{{calculates.Total_Tetanus}}"
+          },
+          "title": {
+            "text": "Total_Tetanus"
+          }
         },
         "_row_num": 73
       },
@@ -778,7 +976,9 @@
         "choice_list_name": "yesno",
         "data_value": "yes",
         "display": {
-          "text": "yes"
+          "title": {
+            "text": "yes"
+          }
         },
         "_row_num": 2
       },
@@ -786,7 +986,9 @@
         "choice_list_name": "yesno",
         "data_value": "no",
         "display": {
-          "text": "no"
+          "title": {
+            "text": "no"
+          }
         },
         "_row_num": 3
       },
@@ -794,7 +996,9 @@
         "choice_list_name": "continents",
         "data_value": "NorthAmerica",
         "display": {
-          "text": "North America"
+          "title": {
+            "text": "North America"
+          }
         },
         "_row_num": 4
       },
@@ -802,7 +1006,9 @@
         "choice_list_name": "continents",
         "data_value": "SouthAmerica",
         "display": {
-          "text": "South America"
+          "title": {
+            "text": "South America"
+          }
         },
         "_row_num": 5
       },
@@ -810,7 +1016,9 @@
         "choice_list_name": "continents",
         "data_value": "Europe",
         "display": {
-          "text": "Europe"
+          "title": {
+            "text": "Europe"
+          }
         },
         "_row_num": 6
       },
@@ -818,7 +1026,9 @@
         "choice_list_name": "continents",
         "data_value": "Africa",
         "display": {
-          "text": "Africa"
+          "title": {
+            "text": "Africa"
+          }
         },
         "_row_num": 7
       },
@@ -826,7 +1036,9 @@
         "choice_list_name": "continents",
         "data_value": "Asia",
         "display": {
-          "text": "Asia"
+          "title": {
+            "text": "Asia"
+          }
         },
         "_row_num": 8
       },
@@ -834,7 +1046,9 @@
         "choice_list_name": "continents",
         "data_value": "Australia",
         "display": {
-          "text": "Australia"
+          "title": {
+            "text": "Australia"
+          }
         },
         "_row_num": 9
       },
@@ -842,7 +1056,9 @@
         "choice_list_name": "continents",
         "data_value": "Antarctica",
         "display": {
-          "text": "Antarctica"
+          "title": {
+            "text": "Antarctica"
+          }
         },
         "_row_num": 10
       },
@@ -850,7 +1066,9 @@
         "choice_list_name": "examples",
         "data_value": "error",
         "display": {
-          "text": "error"
+          "title": {
+            "text": "error"
+          }
         },
         "_row_num": 12
       },
@@ -858,7 +1076,9 @@
         "choice_list_name": "examples",
         "data_value": "intents",
         "display": {
-          "text": "intent launching"
+          "title": {
+            "text": "intent launching"
+          }
         },
         "_row_num": 13
       },
@@ -866,7 +1086,9 @@
         "choice_list_name": "examples",
         "data_value": "label_features",
         "display": {
-          "text": "label features"
+          "title": {
+            "text": "label features"
+          }
         },
         "_row_num": 14
       },
@@ -874,7 +1096,9 @@
         "choice_list_name": "examples",
         "data_value": "dynamic_defaults",
         "display": {
-          "text": "computed default values"
+          "title": {
+            "text": "computed default values"
+          }
         },
         "_row_num": 15
       },
@@ -882,7 +1106,9 @@
         "choice_list_name": "examples",
         "data_value": "datetime",
         "display": {
-          "text": "datetime"
+          "title": {
+            "text": "datetime"
+          }
         },
         "_row_num": 16
       },
@@ -890,7 +1116,9 @@
         "choice_list_name": "examples",
         "data_value": "geopoint",
         "display": {
-          "text": "geopoint"
+          "title": {
+            "text": "geopoint"
+          }
         },
         "_row_num": 17
       },
@@ -898,7 +1126,9 @@
         "choice_list_name": "examples",
         "data_value": "media",
         "display": {
-          "text": "media"
+          "title": {
+            "text": "media"
+          }
         },
         "_row_num": 18
       },
@@ -906,7 +1136,9 @@
         "choice_list_name": "examples",
         "data_value": "screen_group",
         "display": {
-          "text": "screen group with select and calculate"
+          "title": {
+            "text": "screen group with select and calculate"
+          }
         },
         "_row_num": 19
       },
@@ -914,7 +1146,9 @@
         "choice_list_name": "examples",
         "data_value": "custom_template",
         "display": {
-          "text": "custom template"
+          "title": {
+            "text": "custom template"
+          }
         },
         "_row_num": 20
       },
@@ -922,7 +1156,9 @@
         "choice_list_name": "examples",
         "data_value": "prompt_link",
         "display": {
-          "text": "prompt linking"
+          "title": {
+            "text": "prompt linking"
+          }
         },
         "_row_num": 21
       },
@@ -930,7 +1166,9 @@
         "choice_list_name": "sexes",
         "data_value": "male",
         "display": {
-          "text": "male"
+          "title": {
+            "text": "male"
+          }
         },
         "_row_num": 23
       },
@@ -938,7 +1176,9 @@
         "choice_list_name": "sexes",
         "data_value": "female",
         "display": {
-          "text": "female"
+          "title": {
+            "text": "female"
+          }
         },
         "_row_num": 24
       },
@@ -946,7 +1186,9 @@
         "choice_list_name": "stores",
         "data_value": "QFC",
         "display": {
-          "text": "QFC"
+          "title": {
+            "text": "QFC"
+          }
         },
         "_row_num": 26
       },
@@ -954,7 +1196,9 @@
         "choice_list_name": "stores",
         "data_value": "Safeway",
         "display": {
-          "text": "Safeway"
+          "title": {
+            "text": "Safeway"
+          }
         },
         "_row_num": 27
       },
@@ -962,7 +1206,9 @@
         "choice_list_name": "stores",
         "data_value": "FredMeyer",
         "display": {
-          "text": "Target"
+          "title": {
+            "text": "Target"
+          }
         },
         "_row_num": 28
       },
@@ -970,7 +1216,9 @@
         "choice_list_name": "one_choice",
         "data_value": "NR",
         "display": {
-          "text": "NR"
+          "title": {
+            "text": "NR"
+          }
         },
         "_row_num": 30
       }
@@ -989,7 +1237,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Adult Coverage"
+          "title": {
+            "text": "Adult Coverage"
+          }
         },
         "_row_num": 4
       },
@@ -1007,16 +1257,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -1032,7 +1280,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Adult Coverage"
+          "title": {
+            "text": "Adult Coverage"
+          }
         },
         "_row_num": 4
       },
@@ -1053,7 +1303,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -1067,7 +1319,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Adult Coverage"
+          "title": {
+            "text": "Adult Coverage"
+          }
         },
         "_row_num": 4
       }
@@ -1078,7 +1332,9 @@
           "choice_list_name": "yesno",
           "data_value": "yes",
           "display": {
-            "text": "yes"
+            "title": {
+              "text": "yes"
+            }
           },
           "_row_num": 2
         },
@@ -1086,7 +1342,9 @@
           "choice_list_name": "yesno",
           "data_value": "no",
           "display": {
-            "text": "no"
+            "title": {
+              "text": "no"
+            }
           },
           "_row_num": 3
         }
@@ -1096,7 +1354,9 @@
           "choice_list_name": "continents",
           "data_value": "NorthAmerica",
           "display": {
-            "text": "North America"
+            "title": {
+              "text": "North America"
+            }
           },
           "_row_num": 4
         },
@@ -1104,7 +1364,9 @@
           "choice_list_name": "continents",
           "data_value": "SouthAmerica",
           "display": {
-            "text": "South America"
+            "title": {
+              "text": "South America"
+            }
           },
           "_row_num": 5
         },
@@ -1112,7 +1374,9 @@
           "choice_list_name": "continents",
           "data_value": "Europe",
           "display": {
-            "text": "Europe"
+            "title": {
+              "text": "Europe"
+            }
           },
           "_row_num": 6
         },
@@ -1120,7 +1384,9 @@
           "choice_list_name": "continents",
           "data_value": "Africa",
           "display": {
-            "text": "Africa"
+            "title": {
+              "text": "Africa"
+            }
           },
           "_row_num": 7
         },
@@ -1128,7 +1394,9 @@
           "choice_list_name": "continents",
           "data_value": "Asia",
           "display": {
-            "text": "Asia"
+            "title": {
+              "text": "Asia"
+            }
           },
           "_row_num": 8
         },
@@ -1136,7 +1404,9 @@
           "choice_list_name": "continents",
           "data_value": "Australia",
           "display": {
-            "text": "Australia"
+            "title": {
+              "text": "Australia"
+            }
           },
           "_row_num": 9
         },
@@ -1144,7 +1414,9 @@
           "choice_list_name": "continents",
           "data_value": "Antarctica",
           "display": {
-            "text": "Antarctica"
+            "title": {
+              "text": "Antarctica"
+            }
           },
           "_row_num": 10
         }
@@ -1154,7 +1426,9 @@
           "choice_list_name": "examples",
           "data_value": "error",
           "display": {
-            "text": "error"
+            "title": {
+              "text": "error"
+            }
           },
           "_row_num": 12
         },
@@ -1162,7 +1436,9 @@
           "choice_list_name": "examples",
           "data_value": "intents",
           "display": {
-            "text": "intent launching"
+            "title": {
+              "text": "intent launching"
+            }
           },
           "_row_num": 13
         },
@@ -1170,7 +1446,9 @@
           "choice_list_name": "examples",
           "data_value": "label_features",
           "display": {
-            "text": "label features"
+            "title": {
+              "text": "label features"
+            }
           },
           "_row_num": 14
         },
@@ -1178,7 +1456,9 @@
           "choice_list_name": "examples",
           "data_value": "dynamic_defaults",
           "display": {
-            "text": "computed default values"
+            "title": {
+              "text": "computed default values"
+            }
           },
           "_row_num": 15
         },
@@ -1186,7 +1466,9 @@
           "choice_list_name": "examples",
           "data_value": "datetime",
           "display": {
-            "text": "datetime"
+            "title": {
+              "text": "datetime"
+            }
           },
           "_row_num": 16
         },
@@ -1194,7 +1476,9 @@
           "choice_list_name": "examples",
           "data_value": "geopoint",
           "display": {
-            "text": "geopoint"
+            "title": {
+              "text": "geopoint"
+            }
           },
           "_row_num": 17
         },
@@ -1202,7 +1486,9 @@
           "choice_list_name": "examples",
           "data_value": "media",
           "display": {
-            "text": "media"
+            "title": {
+              "text": "media"
+            }
           },
           "_row_num": 18
         },
@@ -1210,7 +1496,9 @@
           "choice_list_name": "examples",
           "data_value": "screen_group",
           "display": {
-            "text": "screen group with select and calculate"
+            "title": {
+              "text": "screen group with select and calculate"
+            }
           },
           "_row_num": 19
         },
@@ -1218,7 +1506,9 @@
           "choice_list_name": "examples",
           "data_value": "custom_template",
           "display": {
-            "text": "custom template"
+            "title": {
+              "text": "custom template"
+            }
           },
           "_row_num": 20
         },
@@ -1226,7 +1516,9 @@
           "choice_list_name": "examples",
           "data_value": "prompt_link",
           "display": {
-            "text": "prompt linking"
+            "title": {
+              "text": "prompt linking"
+            }
           },
           "_row_num": 21
         }
@@ -1236,7 +1528,9 @@
           "choice_list_name": "sexes",
           "data_value": "male",
           "display": {
-            "text": "male"
+            "title": {
+              "text": "male"
+            }
           },
           "_row_num": 23
         },
@@ -1244,7 +1538,9 @@
           "choice_list_name": "sexes",
           "data_value": "female",
           "display": {
-            "text": "female"
+            "title": {
+              "text": "female"
+            }
           },
           "_row_num": 24
         }
@@ -1254,7 +1550,9 @@
           "choice_list_name": "stores",
           "data_value": "QFC",
           "display": {
-            "text": "QFC"
+            "title": {
+              "text": "QFC"
+            }
           },
           "_row_num": 26
         },
@@ -1262,7 +1560,9 @@
           "choice_list_name": "stores",
           "data_value": "Safeway",
           "display": {
-            "text": "Safeway"
+            "title": {
+              "text": "Safeway"
+            }
           },
           "_row_num": 27
         },
@@ -1270,7 +1570,9 @@
           "choice_list_name": "stores",
           "data_value": "FredMeyer",
           "display": {
-            "text": "Target"
+            "title": {
+              "text": "Target"
+            }
           },
           "_row_num": 28
         }
@@ -1280,11 +1582,16 @@
           "choice_list_name": "one_choice",
           "data_value": "NR",
           "display": {
-            "text": "NR"
+            "title": {
+              "text": "NR"
+            }
           },
           "_row_num": 30
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {},
     "calculates": {
@@ -1438,7 +1745,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_PregnantWoman_HealthCenter",
+        "displayName": {
+          "text": "Dose1_PregnantWoman_HealthCenter"
+        },
         "elementKey": "Dose1_PregnantWoman_HealthCenter"
       },
       "PW1_HC_NR_checkbox": {
@@ -1453,7 +1762,9 @@
           "type": "string",
           "elementKey": "PW1_HC_NR_checkbox_items"
         },
-        "displayName": "PW1_HC_NR_checkbox",
+        "displayName": {
+          "text": "PW1_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "PW1_HC_NR_checkbox"
       },
@@ -1465,7 +1776,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_PregnantWoman_Outreach",
+        "displayName": {
+          "text": "Dose1_PregnantWoman_Outreach"
+        },
         "elementKey": "Dose1_PregnantWoman_Outreach"
       },
       "PW1_O_NR_checkbox": {
@@ -1480,7 +1793,9 @@
           "type": "string",
           "elementKey": "PW1_O_NR_checkbox_items"
         },
-        "displayName": "PW1_O_NR_checkbox",
+        "displayName": {
+          "text": "PW1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "PW1_O_NR_checkbox"
       },
@@ -1492,7 +1807,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_PregnantWoman_HealthCenter",
+        "displayName": {
+          "text": "Dose2_PregnantWoman_HealthCenter"
+        },
         "elementKey": "Dose2_PregnantWoman_HealthCenter"
       },
       "PW2_HC_NR_checkbox": {
@@ -1507,7 +1824,9 @@
           "type": "string",
           "elementKey": "PW2_HC_NR_checkbox_items"
         },
-        "displayName": "PW2_HC_NR_checkbox",
+        "displayName": {
+          "text": "PW2_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "PW2_HC_NR_checkbox"
       },
@@ -1519,7 +1838,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_PregnantWoman_Outreach",
+        "displayName": {
+          "text": "Dose2_PregnantWoman_Outreach"
+        },
         "elementKey": "Dose2_PregnantWoman_Outreach"
       },
       "PW2_O_NR_checkbox": {
@@ -1534,7 +1855,9 @@
           "type": "string",
           "elementKey": "PW2_O_NR_checkbox_items"
         },
-        "displayName": "PW2_O_NR_checkbox",
+        "displayName": {
+          "text": "PW2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "PW2_O_NR_checkbox"
       },
@@ -1546,7 +1869,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_MIFComm_HealthCenter",
+        "displayName": {
+          "text": "Dose1_MIFComm_HealthCenter"
+        },
         "elementKey": "Dose1_MIFComm_HealthCenter"
       },
       "MIFCOMM1_HC_NR_checkbox": {
@@ -1561,7 +1886,9 @@
           "type": "string",
           "elementKey": "MIFCOMM1_HC_NR_checkbox_items"
         },
-        "displayName": "MIFCOMM1_HC_NR_checkbox",
+        "displayName": {
+          "text": "MIFCOMM1_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFCOMM1_HC_NR_checkbox"
       },
@@ -1573,7 +1900,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_MIFComm_Outreach",
+        "displayName": {
+          "text": "Dose1_MIFComm_Outreach"
+        },
         "elementKey": "Dose1_MIFComm_Outreach"
       },
       "MIFCOMM1_O_NR_checkbox": {
@@ -1588,7 +1917,9 @@
           "type": "string",
           "elementKey": "MIFCOMM1_O_NR_checkbox_items"
         },
-        "displayName": "MIFCOMM1_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFCOMM1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFCOMM1_O_NR_checkbox"
       },
@@ -1600,7 +1931,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_MIFComm_HealthCenter",
+        "displayName": {
+          "text": "Dose2_MIFComm_HealthCenter"
+        },
         "elementKey": "Dose2_MIFComm_HealthCenter"
       },
       "MIFCOMM2_HC_NR_checkbox": {
@@ -1615,7 +1948,9 @@
           "type": "string",
           "elementKey": "MIFCOMM2_HC_NR_checkbox_items"
         },
-        "displayName": "MIFCOMM2_HC_NR_checkbox",
+        "displayName": {
+          "text": "MIFCOMM2_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFCOMM2_HC_NR_checkbox"
       },
@@ -1627,7 +1962,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_MIFComm_Outreach",
+        "displayName": {
+          "text": "Dose2_MIFComm_Outreach"
+        },
         "elementKey": "Dose2_MIFComm_Outreach"
       },
       "MIFCOMM2_O_NR_checkbox": {
@@ -1642,7 +1979,9 @@
           "type": "string",
           "elementKey": "MIFCOMM2_O_NR_checkbox_items"
         },
-        "displayName": "MIFCOMM2_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFCOMM2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFCOMM2_O_NR_checkbox"
       },
@@ -1654,7 +1993,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_MIFStudents_Outreach",
+        "displayName": {
+          "text": "Dose1_MIFStudents_Outreach"
+        },
         "elementKey": "Dose1_MIFStudents_Outreach"
       },
       "MIFS1_O_NR_checkbox": {
@@ -1669,7 +2010,9 @@
           "type": "string",
           "elementKey": "MIFS1_O_NR_checkbox_items"
         },
-        "displayName": "MIFS1_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFS1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFS1_O_NR_checkbox"
       },
@@ -1681,7 +2024,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_MIFStudents_Outreach",
+        "displayName": {
+          "text": "Dose2_MIFStudents_Outreach"
+        },
         "elementKey": "Dose2_MIFStudents_Outreach"
       },
       "MIFS2_O_NR_checkbox": {
@@ -1696,7 +2041,9 @@
           "type": "string",
           "elementKey": "MIFS2_O_NR_checkbox_items"
         },
-        "displayName": "MIFS2_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFS2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFS2_O_NR_checkbox"
       },
@@ -1708,7 +2055,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_MIFWorkers_Outreach",
+        "displayName": {
+          "text": "Dose1_MIFWorkers_Outreach"
+        },
         "elementKey": "Dose1_MIFWorkers_Outreach"
       },
       "MIFW1_O_NR_checkbox": {
@@ -1723,7 +2072,9 @@
           "type": "string",
           "elementKey": "MIFW1_O_NR_checkbox_items"
         },
-        "displayName": "MIFW1_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFW1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFW1_O_NR_checkbox"
       },
@@ -1735,7 +2086,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_MIFWorkers_Outreach",
+        "displayName": {
+          "text": "Dose2_MIFWorkers_Outreach"
+        },
         "elementKey": "Dose2_MIFWorkers_Outreach"
       },
       "MIFW2_O_NR_checkbox": {
@@ -1750,7 +2103,9 @@
           "type": "string",
           "elementKey": "MIFW2_O_NR_checkbox_items"
         },
-        "displayName": "MIFW2_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFW2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFW2_O_NR_checkbox"
       },
@@ -1762,7 +2117,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "OpenedVials",
+        "displayName": {
+          "text": "OpenedVials"
+        },
         "elementKey": "OpenedVials"
       },
       "OV_NR_checkbox": {
@@ -1777,7 +2134,9 @@
           "type": "string",
           "elementKey": "OV_NR_checkbox_items"
         },
-        "displayName": "OV_NR_checkbox",
+        "displayName": {
+          "text": "OV_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "OV_NR_checkbox"
       },
@@ -1789,7 +2148,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_Students_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose1_Students_notMIF_Outreach"
+        },
         "elementKey": "Dose1_Students_notMIF_Outreach"
       },
       "S1_O_NR_checkbox": {
@@ -1804,7 +2165,9 @@
           "type": "string",
           "elementKey": "S1_O_NR_checkbox_items"
         },
-        "displayName": "S1_O_NR_checkbox",
+        "displayName": {
+          "text": "S1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "S1_O_NR_checkbox"
       },
@@ -1816,7 +2179,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_Students_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose2_Students_notMIF_Outreach"
+        },
         "elementKey": "Dose2_Students_notMIF_Outreach"
       },
       "S2_O_NR_checkbox": {
@@ -1831,7 +2196,9 @@
           "type": "string",
           "elementKey": "S2_O_NR_checkbox_items"
         },
-        "displayName": "S2_O_NR_checkbox",
+        "displayName": {
+          "text": "S2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "S2_O_NR_checkbox"
       },
@@ -1843,7 +2210,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_Workers_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose1_Workers_notMIF_Outreach"
+        },
         "elementKey": "Dose1_Workers_notMIF_Outreach"
       },
       "W1_O_NR_checkbox": {
@@ -1858,7 +2227,9 @@
           "type": "string",
           "elementKey": "W1_O_NR_checkbox_items"
         },
-        "displayName": "W1_O_NR_checkbox",
+        "displayName": {
+          "text": "W1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "W1_O_NR_checkbox"
       },
@@ -1870,7 +2241,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_Workers_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose2_Workers_notMIF_Outreach"
+        },
         "elementKey": "Dose2_Workers_notMIF_Outreach"
       },
       "W2_O_NR_checkbox": {
@@ -1885,7 +2258,9 @@
           "type": "string",
           "elementKey": "W2_O_NR_checkbox_items"
         },
-        "displayName": "W2_O_NR_checkbox",
+        "displayName": {
+          "text": "W2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "W2_O_NR_checkbox"
       },
@@ -1897,7 +2272,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_Other_notMIF_HealthCenter",
+        "displayName": {
+          "text": "Dose1_Other_notMIF_HealthCenter"
+        },
         "elementKey": "Dose1_Other_notMIF_HealthCenter"
       },
       "O1_HC_NR_checkbox": {
@@ -1912,7 +2289,9 @@
           "type": "string",
           "elementKey": "O1_HC_NR_checkbox_items"
         },
-        "displayName": "O1_HC_NR_checkbox",
+        "displayName": {
+          "text": "O1_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "O1_HC_NR_checkbox"
       },
@@ -1924,7 +2303,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_Other_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose1_Other_notMIF_Outreach"
+        },
         "elementKey": "Dose1_Other_notMIF_Outreach"
       },
       "O1_O_NR_checkbox": {
@@ -1939,7 +2320,9 @@
           "type": "string",
           "elementKey": "O1_O_NR_checkbox_items"
         },
-        "displayName": "O1_O_NR_checkbox",
+        "displayName": {
+          "text": "O1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "O1_O_NR_checkbox"
       },
@@ -1951,7 +2334,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_Other_notMIF_HealthCenter",
+        "displayName": {
+          "text": "Dose2_Other_notMIF_HealthCenter"
+        },
         "elementKey": "Dose2_Other_notMIF_HealthCenter"
       },
       "O2_HC_NR_checkbox": {
@@ -1966,7 +2351,9 @@
           "type": "string",
           "elementKey": "O2_HC_NR_checkbox_items"
         },
-        "displayName": "O2_HC_NR_checkbox",
+        "displayName": {
+          "text": "O2_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "O2_HC_NR_checkbox"
       },
@@ -1978,7 +2365,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_Other_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose2_Other_notMIF_Outreach"
+        },
         "elementKey": "Dose2_Other_notMIF_Outreach"
       },
       "O2_O_NR_checkbox": {
@@ -1993,7 +2382,9 @@
           "type": "string",
           "elementKey": "O2_O_NR_checkbox_items"
         },
-        "displayName": "O2_O_NR_checkbox",
+        "displayName": {
+          "text": "O2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "O2_O_NR_checkbox"
       }
@@ -2012,7 +2403,9 @@
             "type": "note",
             "name": "description",
             "display": {
-              "text": "Adult Coverage"
+              "prompt": {
+                "text": "Adult Coverage"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -2025,7 +2418,9 @@
             "type": "integer",
             "name": "Dose1_PregnantWoman_HealthCenter",
             "display": {
-              "title": "Dose1_PregnantWoman_HealthCenter"
+              "title": {
+                "text": "Dose1_PregnantWoman_HealthCenter"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -2039,7 +2434,9 @@
             "values_list": "one_choice",
             "name": "PW1_HC_NR_checkbox",
             "display": {
-              "title": "PW1_HC_NR_checkbox"
+              "title": {
+                "text": "PW1_HC_NR_checkbox"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -2052,7 +2449,9 @@
             "type": "integer",
             "name": "Dose1_PregnantWoman_Outreach",
             "display": {
-              "title": "Dose1_PregnantWoman_Outreach"
+              "title": {
+                "text": "Dose1_PregnantWoman_Outreach"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -2066,7 +2465,9 @@
             "values_list": "one_choice",
             "name": "PW1_O_NR_checkbox",
             "display": {
-              "title": "PW1_O_NR_checkbox"
+              "title": {
+                "text": "PW1_O_NR_checkbox"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -2079,8 +2480,12 @@
             "type": "note",
             "name": "Dose1_PregnantWoman_sum",
             "display": {
-              "text": "{{calculates.Dose1_PregnantWoman_sum}}",
-              "title": "Dose1_PregnantWoman_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_PregnantWoman_sum}}"
+              },
+              "title": {
+                "text": "Dose1_PregnantWoman_sum"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -2093,7 +2498,9 @@
             "type": "integer",
             "name": "Dose2_PregnantWoman_HealthCenter",
             "display": {
-              "title": "Dose2_PregnantWoman_HealthCenter"
+              "title": {
+                "text": "Dose2_PregnantWoman_HealthCenter"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -2107,7 +2514,9 @@
             "values_list": "one_choice",
             "name": "PW2_HC_NR_checkbox",
             "display": {
-              "title": "PW2_HC_NR_checkbox"
+              "title": {
+                "text": "PW2_HC_NR_checkbox"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -2120,7 +2529,9 @@
             "type": "integer",
             "name": "Dose2_PregnantWoman_Outreach",
             "display": {
-              "title": "Dose2_PregnantWoman_Outreach"
+              "title": {
+                "text": "Dose2_PregnantWoman_Outreach"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -2134,7 +2545,9 @@
             "values_list": "one_choice",
             "name": "PW2_O_NR_checkbox",
             "display": {
-              "title": "PW2_O_NR_checkbox"
+              "title": {
+                "text": "PW2_O_NR_checkbox"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -2147,8 +2560,12 @@
             "type": "note",
             "name": "Dose2_PregnantWoman_sum",
             "display": {
-              "text": "{{calculates.Dose2_PregnantWoman_sum}}",
-              "title": "Dose2_PregnantWoman_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_PregnantWoman_sum}}"
+              },
+              "title": {
+                "text": "Dose2_PregnantWoman_sum"
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -2161,8 +2578,12 @@
             "type": "note",
             "name": "Total_PregnantWoman",
             "display": {
-              "text": "{{calculates.Total_PregnantWoman}}",
-              "title": "Total_PregnantWoman"
+              "prompt": {
+                "text": "{{calculates.Total_PregnantWoman}}"
+              },
+              "title": {
+                "text": "Total_PregnantWoman"
+              }
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -2175,7 +2596,9 @@
             "type": "integer",
             "name": "Dose1_MIFComm_HealthCenter",
             "display": {
-              "title": "Dose1_MIFComm_HealthCenter"
+              "title": {
+                "text": "Dose1_MIFComm_HealthCenter"
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -2189,7 +2612,9 @@
             "values_list": "one_choice",
             "name": "MIFCOMM1_HC_NR_checkbox",
             "display": {
-              "title": "MIFCOMM1_HC_NR_checkbox"
+              "title": {
+                "text": "MIFCOMM1_HC_NR_checkbox"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -2202,7 +2627,9 @@
             "type": "integer",
             "name": "Dose1_MIFComm_Outreach",
             "display": {
-              "title": "Dose1_MIFComm_Outreach"
+              "title": {
+                "text": "Dose1_MIFComm_Outreach"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -2216,7 +2643,9 @@
             "values_list": "one_choice",
             "name": "MIFCOMM1_O_NR_checkbox",
             "display": {
-              "title": "MIFCOMM1_O_NR_checkbox"
+              "title": {
+                "text": "MIFCOMM1_O_NR_checkbox"
+              }
             },
             "_row_num": 18,
             "__rowNum__": 17,
@@ -2229,8 +2658,12 @@
             "type": "note",
             "name": "Dose1_MIFComm_sum",
             "display": {
-              "text": "{{calculates.Dose1_MIFComm_sum}}",
-              "title": "Dose1_MIFComm_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_MIFComm_sum}}"
+              },
+              "title": {
+                "text": "Dose1_MIFComm_sum"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -2243,7 +2676,9 @@
             "type": "integer",
             "name": "Dose2_MIFComm_HealthCenter",
             "display": {
-              "title": "Dose2_MIFComm_HealthCenter"
+              "title": {
+                "text": "Dose2_MIFComm_HealthCenter"
+              }
             },
             "_row_num": 20,
             "__rowNum__": 19,
@@ -2257,7 +2692,9 @@
             "values_list": "one_choice",
             "name": "MIFCOMM2_HC_NR_checkbox",
             "display": {
-              "title": "MIFCOMM2_HC_NR_checkbox"
+              "title": {
+                "text": "MIFCOMM2_HC_NR_checkbox"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -2270,7 +2707,9 @@
             "type": "integer",
             "name": "Dose2_MIFComm_Outreach",
             "display": {
-              "title": "Dose2_MIFComm_Outreach"
+              "title": {
+                "text": "Dose2_MIFComm_Outreach"
+              }
             },
             "_row_num": 22,
             "__rowNum__": 21,
@@ -2284,7 +2723,9 @@
             "values_list": "one_choice",
             "name": "MIFCOMM2_O_NR_checkbox",
             "display": {
-              "title": "MIFCOMM2_O_NR_checkbox"
+              "title": {
+                "text": "MIFCOMM2_O_NR_checkbox"
+              }
             },
             "_row_num": 23,
             "__rowNum__": 22,
@@ -2297,8 +2738,12 @@
             "type": "note",
             "name": "Dose2_MIFComm_sum",
             "display": {
-              "text": "{{calculates.Dose2_MIFComm_sum}}",
-              "title": "Dose2_MIFComm_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_MIFComm_sum}}"
+              },
+              "title": {
+                "text": "Dose2_MIFComm_sum"
+              }
             },
             "_row_num": 24,
             "__rowNum__": 23,
@@ -2311,8 +2756,12 @@
             "type": "note",
             "name": "Total_MIFComm",
             "display": {
-              "text": "{{calculates.Total_MIFComm}}",
-              "title": "Total_MIFComm"
+              "prompt": {
+                "text": "{{calculates.Total_MIFComm}}"
+              },
+              "title": {
+                "text": "Total_MIFComm"
+              }
             },
             "_row_num": 25,
             "__rowNum__": 24,
@@ -2325,7 +2774,9 @@
             "type": "integer",
             "name": "Dose1_MIFStudents_Outreach",
             "display": {
-              "title": "Dose1_MIFStudents_Outreach"
+              "title": {
+                "text": "Dose1_MIFStudents_Outreach"
+              }
             },
             "_row_num": 26,
             "__rowNum__": 25,
@@ -2339,7 +2790,9 @@
             "values_list": "one_choice",
             "name": "MIFS1_O_NR_checkbox",
             "display": {
-              "title": "MIFS1_O_NR_checkbox"
+              "title": {
+                "text": "MIFS1_O_NR_checkbox"
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -2352,8 +2805,12 @@
             "type": "note",
             "name": "Dose1_MIFStudents_sum",
             "display": {
-              "text": "{{calculates.Dose1_MIFStudents_sum}}",
-              "title": "Dose1_MIFStudents_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_MIFStudents_sum}}"
+              },
+              "title": {
+                "text": "Dose1_MIFStudents_sum"
+              }
             },
             "_row_num": 28,
             "__rowNum__": 27,
@@ -2366,7 +2823,9 @@
             "type": "integer",
             "name": "Dose2_MIFStudents_Outreach",
             "display": {
-              "title": "Dose2_MIFStudents_Outreach"
+              "title": {
+                "text": "Dose2_MIFStudents_Outreach"
+              }
             },
             "_row_num": 29,
             "__rowNum__": 28,
@@ -2380,7 +2839,9 @@
             "values_list": "one_choice",
             "name": "MIFS2_O_NR_checkbox",
             "display": {
-              "title": "MIFS2_O_NR_checkbox"
+              "title": {
+                "text": "MIFS2_O_NR_checkbox"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -2393,8 +2854,12 @@
             "type": "note",
             "name": "Dose2_MIFStudents_sum",
             "display": {
-              "text": "{{calculates.Dose2_MIFStudents_sum}}",
-              "title": "Dose2_MIFStudents_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_MIFStudents_sum}}"
+              },
+              "title": {
+                "text": "Dose2_MIFStudents_sum"
+              }
             },
             "_row_num": 31,
             "__rowNum__": 30,
@@ -2407,8 +2872,12 @@
             "type": "note",
             "name": "Total_MIFStudents",
             "display": {
-              "text": "{{calculates.Total_MIFStudents}}",
-              "title": "Total_MIFStudents"
+              "prompt": {
+                "text": "{{calculates.Total_MIFStudents}}"
+              },
+              "title": {
+                "text": "Total_MIFStudents"
+              }
             },
             "_row_num": 32,
             "__rowNum__": 31,
@@ -2421,7 +2890,9 @@
             "type": "integer",
             "name": "Dose1_MIFWorkers_Outreach",
             "display": {
-              "title": "Dose1_MIFWorkers_Outreach"
+              "title": {
+                "text": "Dose1_MIFWorkers_Outreach"
+              }
             },
             "_row_num": 33,
             "__rowNum__": 32,
@@ -2435,7 +2906,9 @@
             "values_list": "one_choice",
             "name": "MIFW1_O_NR_checkbox",
             "display": {
-              "title": "MIFW1_O_NR_checkbox"
+              "title": {
+                "text": "MIFW1_O_NR_checkbox"
+              }
             },
             "_row_num": 34,
             "__rowNum__": 33,
@@ -2448,8 +2921,12 @@
             "type": "note",
             "name": "Dose1_MIFWorkers_sum",
             "display": {
-              "text": "{{calculates.Dose1_MIFWorkers_sum}}",
-              "title": "Dose1_MIFWorkers_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_MIFWorkers_sum}}"
+              },
+              "title": {
+                "text": "Dose1_MIFWorkers_sum"
+              }
             },
             "_row_num": 35,
             "__rowNum__": 34,
@@ -2462,7 +2939,9 @@
             "type": "integer",
             "name": "Dose2_MIFWorkers_Outreach",
             "display": {
-              "title": "Dose2_MIFWorkers_Outreach"
+              "title": {
+                "text": "Dose2_MIFWorkers_Outreach"
+              }
             },
             "_row_num": 36,
             "__rowNum__": 35,
@@ -2476,7 +2955,9 @@
             "values_list": "one_choice",
             "name": "MIFW2_O_NR_checkbox",
             "display": {
-              "title": "MIFW2_O_NR_checkbox"
+              "title": {
+                "text": "MIFW2_O_NR_checkbox"
+              }
             },
             "_row_num": 37,
             "__rowNum__": 36,
@@ -2489,8 +2970,12 @@
             "type": "note",
             "name": "Dose2_MIFWorkers_sum",
             "display": {
-              "text": "{{calculates.Dose2_MIFWorkers_sum}}",
-              "title": "Dose2_MIFWorkers_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_MIFWorkers_sum}}"
+              },
+              "title": {
+                "text": "Dose2_MIFWorkers_sum"
+              }
             },
             "_row_num": 38,
             "__rowNum__": 37,
@@ -2503,8 +2988,12 @@
             "type": "note",
             "name": "Total_MIFWorkers",
             "display": {
-              "text": "{{calculates.Total_MIFWorkers}}",
-              "title": "Total_MIFWorkers"
+              "prompt": {
+                "text": "{{calculates.Total_MIFWorkers}}"
+              },
+              "title": {
+                "text": "Total_MIFWorkers"
+              }
             },
             "_row_num": 39,
             "__rowNum__": 38,
@@ -2517,7 +3006,9 @@
             "type": "integer",
             "name": "OpenedVials",
             "display": {
-              "title": "OpenedVials"
+              "title": {
+                "text": "OpenedVials"
+              }
             },
             "_row_num": 40,
             "__rowNum__": 39,
@@ -2531,7 +3022,9 @@
             "values_list": "one_choice",
             "name": "OV_NR_checkbox",
             "display": {
-              "title": "OV_NR_checkbox"
+              "title": {
+                "text": "OV_NR_checkbox"
+              }
             },
             "_row_num": 41,
             "__rowNum__": 40,
@@ -2544,7 +3037,9 @@
             "type": "integer",
             "name": "Dose1_Students_notMIF_Outreach",
             "display": {
-              "title": "Dose1_Students_notMIF_Outreach"
+              "title": {
+                "text": "Dose1_Students_notMIF_Outreach"
+              }
             },
             "_row_num": 42,
             "__rowNum__": 41,
@@ -2558,7 +3053,9 @@
             "values_list": "one_choice",
             "name": "S1_O_NR_checkbox",
             "display": {
-              "title": "S1_O_NR_checkbox"
+              "title": {
+                "text": "S1_O_NR_checkbox"
+              }
             },
             "_row_num": 43,
             "__rowNum__": 42,
@@ -2571,8 +3068,12 @@
             "type": "note",
             "name": "Dose1_Students_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose1_Students_notMIF_sum}}",
-              "title": "Dose1_Students_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_Students_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose1_Students_notMIF_sum"
+              }
             },
             "_row_num": 44,
             "__rowNum__": 43,
@@ -2585,7 +3086,9 @@
             "type": "integer",
             "name": "Dose2_Students_notMIF_Outreach",
             "display": {
-              "title": "Dose2_Students_notMIF_Outreach"
+              "title": {
+                "text": "Dose2_Students_notMIF_Outreach"
+              }
             },
             "_row_num": 45,
             "__rowNum__": 44,
@@ -2599,7 +3102,9 @@
             "values_list": "one_choice",
             "name": "S2_O_NR_checkbox",
             "display": {
-              "title": "S2_O_NR_checkbox"
+              "title": {
+                "text": "S2_O_NR_checkbox"
+              }
             },
             "_row_num": 46,
             "__rowNum__": 45,
@@ -2612,8 +3117,12 @@
             "type": "note",
             "name": "Dose2_Students_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose2_Students_notMIF_sum}}",
-              "title": "Dose2_Students_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_Students_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose2_Students_notMIF_sum"
+              }
             },
             "_row_num": 47,
             "__rowNum__": 46,
@@ -2626,8 +3135,12 @@
             "type": "note",
             "name": "Total_Students_notMIF",
             "display": {
-              "text": "{{calculates.Total_Students_notMIF}}",
-              "title": "Total_Students_notMIF"
+              "prompt": {
+                "text": "{{calculates.Total_Students_notMIF}}"
+              },
+              "title": {
+                "text": "Total_Students_notMIF"
+              }
             },
             "_row_num": 48,
             "__rowNum__": 47,
@@ -2640,7 +3153,9 @@
             "type": "integer",
             "name": "Dose1_Workers_notMIF_Outreach",
             "display": {
-              "title": "Dose1_Workers_notMIF_Outreach"
+              "title": {
+                "text": "Dose1_Workers_notMIF_Outreach"
+              }
             },
             "_row_num": 49,
             "__rowNum__": 48,
@@ -2654,7 +3169,9 @@
             "values_list": "one_choice",
             "name": "W1_O_NR_checkbox",
             "display": {
-              "title": "W1_O_NR_checkbox"
+              "title": {
+                "text": "W1_O_NR_checkbox"
+              }
             },
             "_row_num": 50,
             "__rowNum__": 49,
@@ -2667,8 +3184,12 @@
             "type": "note",
             "name": "Dose1_Workers_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose1_Workers_notMIF_sum}}",
-              "title": "Dose1_Workers_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_Workers_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose1_Workers_notMIF_sum"
+              }
             },
             "_row_num": 51,
             "__rowNum__": 50,
@@ -2681,7 +3202,9 @@
             "type": "integer",
             "name": "Dose2_Workers_notMIF_Outreach",
             "display": {
-              "title": "Dose2_Workers_notMIF_Outreach"
+              "title": {
+                "text": "Dose2_Workers_notMIF_Outreach"
+              }
             },
             "_row_num": 52,
             "__rowNum__": 51,
@@ -2695,7 +3218,9 @@
             "values_list": "one_choice",
             "name": "W2_O_NR_checkbox",
             "display": {
-              "title": "W2_O_NR_checkbox"
+              "title": {
+                "text": "W2_O_NR_checkbox"
+              }
             },
             "_row_num": 53,
             "__rowNum__": 52,
@@ -2708,8 +3233,12 @@
             "type": "note",
             "name": "Dose2_Workers_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose2_Workers_notMIF_sum}}",
-              "title": "Dose2_Workers_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_Workers_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose2_Workers_notMIF_sum"
+              }
             },
             "_row_num": 54,
             "__rowNum__": 53,
@@ -2722,8 +3251,12 @@
             "type": "note",
             "name": "Total_Workers_notMIF",
             "display": {
-              "text": "{{calculates.Total_Workers_notMIF}}",
-              "title": "Total_Workers_notMIF"
+              "prompt": {
+                "text": "{{calculates.Total_Workers_notMIF}}"
+              },
+              "title": {
+                "text": "Total_Workers_notMIF"
+              }
             },
             "_row_num": 55,
             "__rowNum__": 54,
@@ -2736,7 +3269,9 @@
             "type": "integer",
             "name": "Dose1_Other_notMIF_HealthCenter",
             "display": {
-              "title": "Dose1_Other_notMIF_HealthCenter"
+              "title": {
+                "text": "Dose1_Other_notMIF_HealthCenter"
+              }
             },
             "_row_num": 56,
             "__rowNum__": 55,
@@ -2750,7 +3285,9 @@
             "values_list": "one_choice",
             "name": "O1_HC_NR_checkbox",
             "display": {
-              "title": "O1_HC_NR_checkbox"
+              "title": {
+                "text": "O1_HC_NR_checkbox"
+              }
             },
             "_row_num": 57,
             "__rowNum__": 56,
@@ -2763,7 +3300,9 @@
             "type": "integer",
             "name": "Dose1_Other_notMIF_Outreach",
             "display": {
-              "title": "Dose1_Other_notMIF_Outreach"
+              "title": {
+                "text": "Dose1_Other_notMIF_Outreach"
+              }
             },
             "_row_num": 58,
             "__rowNum__": 57,
@@ -2777,7 +3316,9 @@
             "values_list": "one_choice",
             "name": "O1_O_NR_checkbox",
             "display": {
-              "title": "O1_O_NR_checkbox"
+              "title": {
+                "text": "O1_O_NR_checkbox"
+              }
             },
             "_row_num": 59,
             "__rowNum__": 58,
@@ -2790,8 +3331,12 @@
             "type": "note",
             "name": "Dose1_Other_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose1_Other_notMIF_sum}}",
-              "title": "Dose1_Other_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose1_Other_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose1_Other_notMIF_sum"
+              }
             },
             "_row_num": 60,
             "__rowNum__": 59,
@@ -2804,7 +3349,9 @@
             "type": "integer",
             "name": "Dose2_Other_notMIF_HealthCenter",
             "display": {
-              "title": "Dose2_Other_notMIF_HealthCenter"
+              "title": {
+                "text": "Dose2_Other_notMIF_HealthCenter"
+              }
             },
             "_row_num": 61,
             "__rowNum__": 60,
@@ -2818,7 +3365,9 @@
             "values_list": "one_choice",
             "name": "O2_HC_NR_checkbox",
             "display": {
-              "title": "O2_HC_NR_checkbox"
+              "title": {
+                "text": "O2_HC_NR_checkbox"
+              }
             },
             "_row_num": 62,
             "__rowNum__": 61,
@@ -2831,7 +3380,9 @@
             "type": "integer",
             "name": "Dose2_Other_notMIF_Outreach",
             "display": {
-              "title": "Dose2_Other_notMIF_Outreach"
+              "title": {
+                "text": "Dose2_Other_notMIF_Outreach"
+              }
             },
             "_row_num": 63,
             "__rowNum__": 62,
@@ -2845,7 +3396,9 @@
             "values_list": "one_choice",
             "name": "O2_O_NR_checkbox",
             "display": {
-              "title": "O2_O_NR_checkbox"
+              "title": {
+                "text": "O2_O_NR_checkbox"
+              }
             },
             "_row_num": 64,
             "__rowNum__": 63,
@@ -2858,8 +3411,12 @@
             "type": "note",
             "name": "Dose2_Other_notMIF_sum",
             "display": {
-              "text": "{{calculates.Dose2_Other_notMIF_sum}}",
-              "title": "Dose2_Other_notMIF_sum"
+              "prompt": {
+                "text": "{{calculates.Dose2_Other_notMIF_sum}}"
+              },
+              "title": {
+                "text": "Dose2_Other_notMIF_sum"
+              }
             },
             "_row_num": 65,
             "__rowNum__": 64,
@@ -2872,8 +3429,12 @@
             "type": "note",
             "name": "Total_Other_notMIF",
             "display": {
-              "text": "{{calculates.Total_Other_notMIF}}",
-              "title": "Total_Other_notMIF"
+              "prompt": {
+                "text": "{{calculates.Total_Other_notMIF}}"
+              },
+              "title": {
+                "text": "Total_Other_notMIF"
+              }
             },
             "_row_num": 66,
             "__rowNum__": 65,
@@ -2886,8 +3447,12 @@
             "type": "note",
             "name": "Total_Dose1_HealthCenter",
             "display": {
-              "text": "{{calculates.Total_Dose1_HealthCenter}}",
-              "title": "Total_Dose1_HealthCenter"
+              "prompt": {
+                "text": "{{calculates.Total_Dose1_HealthCenter}}"
+              },
+              "title": {
+                "text": "Total_Dose1_HealthCenter"
+              }
             },
             "_row_num": 67,
             "__rowNum__": 66,
@@ -2900,8 +3465,12 @@
             "type": "note",
             "name": "Total_Dose1_Outreach",
             "display": {
-              "text": "{{calculates.Total_Dose1_Outreach}}",
-              "title": "Total_Dose1_Outreach"
+              "prompt": {
+                "text": "{{calculates.Total_Dose1_Outreach}}"
+              },
+              "title": {
+                "text": "Total_Dose1_Outreach"
+              }
             },
             "_row_num": 68,
             "__rowNum__": 67,
@@ -2914,8 +3483,12 @@
             "type": "note",
             "name": "Total_Dose2_HealthCenter",
             "display": {
-              "text": "{{calculates.Total_Dose2_HealthCenter}}",
-              "title": "Total_Dose2_HealthCenter"
+              "prompt": {
+                "text": "{{calculates.Total_Dose2_HealthCenter}}"
+              },
+              "title": {
+                "text": "Total_Dose2_HealthCenter"
+              }
             },
             "_row_num": 69,
             "__rowNum__": 68,
@@ -2928,8 +3501,12 @@
             "type": "note",
             "name": "Total_Dose2_Outreach",
             "display": {
-              "text": "{{calculates.Total_Dose2_Outreach}}",
-              "title": "Total_Dose2_Outreach"
+              "prompt": {
+                "text": "{{calculates.Total_Dose2_Outreach}}"
+              },
+              "title": {
+                "text": "Total_Dose2_Outreach"
+              }
             },
             "_row_num": 70,
             "__rowNum__": 69,
@@ -2942,8 +3519,12 @@
             "type": "note",
             "name": "Total_Dose1",
             "display": {
-              "text": "{{calculates.Total_Dose1}}",
-              "title": "Total_Dose1"
+              "prompt": {
+                "text": "{{calculates.Total_Dose1}}"
+              },
+              "title": {
+                "text": "Total_Dose1"
+              }
             },
             "_row_num": 71,
             "__rowNum__": 70,
@@ -2956,8 +3537,12 @@
             "type": "note",
             "name": "Total_Dose2",
             "display": {
-              "text": "{{calculates.Total_Dose2}}",
-              "title": "Total_Dose2"
+              "prompt": {
+                "text": "{{calculates.Total_Dose2}}"
+              },
+              "title": {
+                "text": "Total_Dose2"
+              }
             },
             "_row_num": 72,
             "__rowNum__": 71,
@@ -2970,8 +3555,12 @@
             "type": "note",
             "name": "Total_Tetanus",
             "display": {
-              "text": "{{calculates.Total_Tetanus}}",
-              "title": "Total_Tetanus"
+              "prompt": {
+                "text": "{{calculates.Total_Tetanus}}"
+              },
+              "title": {
+                "text": "Total_Tetanus"
+              }
             },
             "_row_num": 73,
             "__rowNum__": 72,
@@ -2997,7 +3586,7 @@
             "clause": "begin screen",
             "screen": {
               "screen_type": "custom",
-              "templatePath": "../tables/adult_coverage/forms/adult_coverage/VR_adult_coverage.handlebars"
+              "templatePath": "../config/tables/adult_coverage/forms/adult_coverage/VR_adult_coverage.handlebars"
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -3067,7 +3656,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Adult Coverage"
+              "title": {
+                "text": "Adult Coverage"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -3224,7 +3815,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_PregnantWoman_HealthCenter",
+        "displayName": {
+          "text": "Dose1_PregnantWoman_HealthCenter"
+        },
         "elementKey": "Dose1_PregnantWoman_HealthCenter",
         "elementName": "Dose1_PregnantWoman_HealthCenter",
         "elementSet": "data",
@@ -3246,7 +3839,9 @@
           "elementPath": "PW1_HC_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "PW1_HC_NR_checkbox",
+        "displayName": {
+          "text": "PW1_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "PW1_HC_NR_checkbox",
         "elementName": "PW1_HC_NR_checkbox",
@@ -3264,7 +3859,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_PregnantWoman_Outreach",
+        "displayName": {
+          "text": "Dose1_PregnantWoman_Outreach"
+        },
         "elementKey": "Dose1_PregnantWoman_Outreach",
         "elementName": "Dose1_PregnantWoman_Outreach",
         "elementSet": "data",
@@ -3286,7 +3883,9 @@
           "elementPath": "PW1_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "PW1_O_NR_checkbox",
+        "displayName": {
+          "text": "PW1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "PW1_O_NR_checkbox",
         "elementName": "PW1_O_NR_checkbox",
@@ -3304,7 +3903,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_PregnantWoman_HealthCenter",
+        "displayName": {
+          "text": "Dose2_PregnantWoman_HealthCenter"
+        },
         "elementKey": "Dose2_PregnantWoman_HealthCenter",
         "elementName": "Dose2_PregnantWoman_HealthCenter",
         "elementSet": "data",
@@ -3326,7 +3927,9 @@
           "elementPath": "PW2_HC_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "PW2_HC_NR_checkbox",
+        "displayName": {
+          "text": "PW2_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "PW2_HC_NR_checkbox",
         "elementName": "PW2_HC_NR_checkbox",
@@ -3344,7 +3947,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_PregnantWoman_Outreach",
+        "displayName": {
+          "text": "Dose2_PregnantWoman_Outreach"
+        },
         "elementKey": "Dose2_PregnantWoman_Outreach",
         "elementName": "Dose2_PregnantWoman_Outreach",
         "elementSet": "data",
@@ -3366,7 +3971,9 @@
           "elementPath": "PW2_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "PW2_O_NR_checkbox",
+        "displayName": {
+          "text": "PW2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "PW2_O_NR_checkbox",
         "elementName": "PW2_O_NR_checkbox",
@@ -3384,7 +3991,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_MIFComm_HealthCenter",
+        "displayName": {
+          "text": "Dose1_MIFComm_HealthCenter"
+        },
         "elementKey": "Dose1_MIFComm_HealthCenter",
         "elementName": "Dose1_MIFComm_HealthCenter",
         "elementSet": "data",
@@ -3406,7 +4015,9 @@
           "elementPath": "MIFCOMM1_HC_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "MIFCOMM1_HC_NR_checkbox",
+        "displayName": {
+          "text": "MIFCOMM1_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFCOMM1_HC_NR_checkbox",
         "elementName": "MIFCOMM1_HC_NR_checkbox",
@@ -3424,7 +4035,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_MIFComm_Outreach",
+        "displayName": {
+          "text": "Dose1_MIFComm_Outreach"
+        },
         "elementKey": "Dose1_MIFComm_Outreach",
         "elementName": "Dose1_MIFComm_Outreach",
         "elementSet": "data",
@@ -3446,7 +4059,9 @@
           "elementPath": "MIFCOMM1_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "MIFCOMM1_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFCOMM1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFCOMM1_O_NR_checkbox",
         "elementName": "MIFCOMM1_O_NR_checkbox",
@@ -3464,7 +4079,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_MIFComm_HealthCenter",
+        "displayName": {
+          "text": "Dose2_MIFComm_HealthCenter"
+        },
         "elementKey": "Dose2_MIFComm_HealthCenter",
         "elementName": "Dose2_MIFComm_HealthCenter",
         "elementSet": "data",
@@ -3486,7 +4103,9 @@
           "elementPath": "MIFCOMM2_HC_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "MIFCOMM2_HC_NR_checkbox",
+        "displayName": {
+          "text": "MIFCOMM2_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFCOMM2_HC_NR_checkbox",
         "elementName": "MIFCOMM2_HC_NR_checkbox",
@@ -3504,7 +4123,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_MIFComm_Outreach",
+        "displayName": {
+          "text": "Dose2_MIFComm_Outreach"
+        },
         "elementKey": "Dose2_MIFComm_Outreach",
         "elementName": "Dose2_MIFComm_Outreach",
         "elementSet": "data",
@@ -3526,7 +4147,9 @@
           "elementPath": "MIFCOMM2_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "MIFCOMM2_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFCOMM2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFCOMM2_O_NR_checkbox",
         "elementName": "MIFCOMM2_O_NR_checkbox",
@@ -3544,7 +4167,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_MIFStudents_Outreach",
+        "displayName": {
+          "text": "Dose1_MIFStudents_Outreach"
+        },
         "elementKey": "Dose1_MIFStudents_Outreach",
         "elementName": "Dose1_MIFStudents_Outreach",
         "elementSet": "data",
@@ -3566,7 +4191,9 @@
           "elementPath": "MIFS1_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "MIFS1_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFS1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFS1_O_NR_checkbox",
         "elementName": "MIFS1_O_NR_checkbox",
@@ -3584,7 +4211,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_MIFStudents_Outreach",
+        "displayName": {
+          "text": "Dose2_MIFStudents_Outreach"
+        },
         "elementKey": "Dose2_MIFStudents_Outreach",
         "elementName": "Dose2_MIFStudents_Outreach",
         "elementSet": "data",
@@ -3606,7 +4235,9 @@
           "elementPath": "MIFS2_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "MIFS2_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFS2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFS2_O_NR_checkbox",
         "elementName": "MIFS2_O_NR_checkbox",
@@ -3624,7 +4255,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_MIFWorkers_Outreach",
+        "displayName": {
+          "text": "Dose1_MIFWorkers_Outreach"
+        },
         "elementKey": "Dose1_MIFWorkers_Outreach",
         "elementName": "Dose1_MIFWorkers_Outreach",
         "elementSet": "data",
@@ -3646,7 +4279,9 @@
           "elementPath": "MIFW1_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "MIFW1_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFW1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFW1_O_NR_checkbox",
         "elementName": "MIFW1_O_NR_checkbox",
@@ -3664,7 +4299,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_MIFWorkers_Outreach",
+        "displayName": {
+          "text": "Dose2_MIFWorkers_Outreach"
+        },
         "elementKey": "Dose2_MIFWorkers_Outreach",
         "elementName": "Dose2_MIFWorkers_Outreach",
         "elementSet": "data",
@@ -3686,7 +4323,9 @@
           "elementPath": "MIFW2_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "MIFW2_O_NR_checkbox",
+        "displayName": {
+          "text": "MIFW2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "MIFW2_O_NR_checkbox",
         "elementName": "MIFW2_O_NR_checkbox",
@@ -3704,7 +4343,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "OpenedVials",
+        "displayName": {
+          "text": "OpenedVials"
+        },
         "elementKey": "OpenedVials",
         "elementName": "OpenedVials",
         "elementSet": "data",
@@ -3726,7 +4367,9 @@
           "elementPath": "OV_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "OV_NR_checkbox",
+        "displayName": {
+          "text": "OV_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "OV_NR_checkbox",
         "elementName": "OV_NR_checkbox",
@@ -3744,7 +4387,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_Students_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose1_Students_notMIF_Outreach"
+        },
         "elementKey": "Dose1_Students_notMIF_Outreach",
         "elementName": "Dose1_Students_notMIF_Outreach",
         "elementSet": "data",
@@ -3766,7 +4411,9 @@
           "elementPath": "S1_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "S1_O_NR_checkbox",
+        "displayName": {
+          "text": "S1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "S1_O_NR_checkbox",
         "elementName": "S1_O_NR_checkbox",
@@ -3784,7 +4431,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_Students_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose2_Students_notMIF_Outreach"
+        },
         "elementKey": "Dose2_Students_notMIF_Outreach",
         "elementName": "Dose2_Students_notMIF_Outreach",
         "elementSet": "data",
@@ -3806,7 +4455,9 @@
           "elementPath": "S2_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "S2_O_NR_checkbox",
+        "displayName": {
+          "text": "S2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "S2_O_NR_checkbox",
         "elementName": "S2_O_NR_checkbox",
@@ -3824,7 +4475,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_Workers_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose1_Workers_notMIF_Outreach"
+        },
         "elementKey": "Dose1_Workers_notMIF_Outreach",
         "elementName": "Dose1_Workers_notMIF_Outreach",
         "elementSet": "data",
@@ -3846,7 +4499,9 @@
           "elementPath": "W1_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "W1_O_NR_checkbox",
+        "displayName": {
+          "text": "W1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "W1_O_NR_checkbox",
         "elementName": "W1_O_NR_checkbox",
@@ -3864,7 +4519,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_Workers_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose2_Workers_notMIF_Outreach"
+        },
         "elementKey": "Dose2_Workers_notMIF_Outreach",
         "elementName": "Dose2_Workers_notMIF_Outreach",
         "elementSet": "data",
@@ -3886,7 +4543,9 @@
           "elementPath": "W2_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "W2_O_NR_checkbox",
+        "displayName": {
+          "text": "W2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "W2_O_NR_checkbox",
         "elementName": "W2_O_NR_checkbox",
@@ -3904,7 +4563,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_Other_notMIF_HealthCenter",
+        "displayName": {
+          "text": "Dose1_Other_notMIF_HealthCenter"
+        },
         "elementKey": "Dose1_Other_notMIF_HealthCenter",
         "elementName": "Dose1_Other_notMIF_HealthCenter",
         "elementSet": "data",
@@ -3926,7 +4587,9 @@
           "elementPath": "O1_HC_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "O1_HC_NR_checkbox",
+        "displayName": {
+          "text": "O1_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "O1_HC_NR_checkbox",
         "elementName": "O1_HC_NR_checkbox",
@@ -3944,7 +4607,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose1_Other_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose1_Other_notMIF_Outreach"
+        },
         "elementKey": "Dose1_Other_notMIF_Outreach",
         "elementName": "Dose1_Other_notMIF_Outreach",
         "elementSet": "data",
@@ -3966,7 +4631,9 @@
           "elementPath": "O1_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "O1_O_NR_checkbox",
+        "displayName": {
+          "text": "O1_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "O1_O_NR_checkbox",
         "elementName": "O1_O_NR_checkbox",
@@ -3984,7 +4651,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_Other_notMIF_HealthCenter",
+        "displayName": {
+          "text": "Dose2_Other_notMIF_HealthCenter"
+        },
         "elementKey": "Dose2_Other_notMIF_HealthCenter",
         "elementName": "Dose2_Other_notMIF_HealthCenter",
         "elementSet": "data",
@@ -4006,7 +4675,9 @@
           "elementPath": "O2_HC_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "O2_HC_NR_checkbox",
+        "displayName": {
+          "text": "O2_HC_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "O2_HC_NR_checkbox",
         "elementName": "O2_HC_NR_checkbox",
@@ -4024,7 +4695,9 @@
           }
         ],
         "type": "integer",
-        "displayName": "Dose2_Other_notMIF_Outreach",
+        "displayName": {
+          "text": "Dose2_Other_notMIF_Outreach"
+        },
         "elementKey": "Dose2_Other_notMIF_Outreach",
         "elementName": "Dose2_Other_notMIF_Outreach",
         "elementSet": "data",
@@ -4046,7 +4719,9 @@
           "elementPath": "O2_O_NR_checkbox.items",
           "notUnitOfRetention": true
         },
-        "displayName": "O2_O_NR_checkbox",
+        "displayName": {
+          "text": "O2_O_NR_checkbox"
+        },
         "valuesList": "one_choice",
         "elementKey": "O2_O_NR_checkbox",
         "elementName": "O2_O_NR_checkbox",
@@ -4256,21 +4931,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -4280,6 +4947,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -4287,6 +4978,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -4319,441 +5018,441 @@
         "_aspect": "Dose1_MIFComm_HealthCenter",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose1_MIFComm_HealthCenter\""
+        "_value": "{\"text\":\"Dose1_MIFComm_HealthCenter\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose1_MIFComm_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose1_MIFComm_Outreach\""
+        "_value": "{\"text\":\"Dose1_MIFComm_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose1_MIFStudents_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose1_MIFStudents_Outreach\""
+        "_value": "{\"text\":\"Dose1_MIFStudents_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose1_MIFWorkers_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose1_MIFWorkers_Outreach\""
+        "_value": "{\"text\":\"Dose1_MIFWorkers_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose1_Other_notMIF_HealthCenter",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose1_Other_notMIF_HealthCenter\""
+        "_value": "{\"text\":\"Dose1_Other_notMIF_HealthCenter\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose1_Other_notMIF_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose1_Other_notMIF_Outreach\""
+        "_value": "{\"text\":\"Dose1_Other_notMIF_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose1_PregnantWoman_HealthCenter",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose1_PregnantWoman_HealthCenter\""
+        "_value": "{\"text\":\"Dose1_PregnantWoman_HealthCenter\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose1_PregnantWoman_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose1_PregnantWoman_Outreach\""
+        "_value": "{\"text\":\"Dose1_PregnantWoman_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose1_Students_notMIF_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose1_Students_notMIF_Outreach\""
+        "_value": "{\"text\":\"Dose1_Students_notMIF_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose1_Workers_notMIF_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose1_Workers_notMIF_Outreach\""
+        "_value": "{\"text\":\"Dose1_Workers_notMIF_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose2_MIFComm_HealthCenter",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose2_MIFComm_HealthCenter\""
+        "_value": "{\"text\":\"Dose2_MIFComm_HealthCenter\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose2_MIFComm_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose2_MIFComm_Outreach\""
+        "_value": "{\"text\":\"Dose2_MIFComm_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose2_MIFStudents_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose2_MIFStudents_Outreach\""
+        "_value": "{\"text\":\"Dose2_MIFStudents_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose2_MIFWorkers_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose2_MIFWorkers_Outreach\""
+        "_value": "{\"text\":\"Dose2_MIFWorkers_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose2_Other_notMIF_HealthCenter",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose2_Other_notMIF_HealthCenter\""
+        "_value": "{\"text\":\"Dose2_Other_notMIF_HealthCenter\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose2_Other_notMIF_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose2_Other_notMIF_Outreach\""
+        "_value": "{\"text\":\"Dose2_Other_notMIF_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose2_PregnantWoman_HealthCenter",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose2_PregnantWoman_HealthCenter\""
+        "_value": "{\"text\":\"Dose2_PregnantWoman_HealthCenter\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose2_PregnantWoman_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose2_PregnantWoman_Outreach\""
+        "_value": "{\"text\":\"Dose2_PregnantWoman_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose2_Students_notMIF_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose2_Students_notMIF_Outreach\""
+        "_value": "{\"text\":\"Dose2_Students_notMIF_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "Dose2_Workers_notMIF_Outreach",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Dose2_Workers_notMIF_Outreach\""
+        "_value": "{\"text\":\"Dose2_Workers_notMIF_Outreach\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFCOMM1_HC_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFCOMM1_HC_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"MIFCOMM1_HC_NR_checkbox\""
+        "_value": "{\"text\":\"MIFCOMM1_HC_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFCOMM1_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFCOMM1_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"MIFCOMM1_O_NR_checkbox\""
+        "_value": "{\"text\":\"MIFCOMM1_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFCOMM2_HC_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFCOMM2_HC_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"MIFCOMM2_HC_NR_checkbox\""
+        "_value": "{\"text\":\"MIFCOMM2_HC_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFCOMM2_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFCOMM2_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"MIFCOMM2_O_NR_checkbox\""
+        "_value": "{\"text\":\"MIFCOMM2_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFS1_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFS1_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"MIFS1_O_NR_checkbox\""
+        "_value": "{\"text\":\"MIFS1_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFS2_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFS2_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"MIFS2_O_NR_checkbox\""
+        "_value": "{\"text\":\"MIFS2_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFW1_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFW1_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"MIFW1_O_NR_checkbox\""
+        "_value": "{\"text\":\"MIFW1_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFW2_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "MIFW2_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"MIFW2_O_NR_checkbox\""
+        "_value": "{\"text\":\"MIFW2_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "O1_HC_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "O1_HC_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"O1_HC_NR_checkbox\""
+        "_value": "{\"text\":\"O1_HC_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "O1_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "O1_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"O1_O_NR_checkbox\""
+        "_value": "{\"text\":\"O1_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "O2_HC_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "O2_HC_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"O2_HC_NR_checkbox\""
+        "_value": "{\"text\":\"O2_HC_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "O2_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "O2_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"O2_O_NR_checkbox\""
+        "_value": "{\"text\":\"O2_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "OV_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "OV_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"OV_NR_checkbox\""
+        "_value": "{\"text\":\"OV_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "OpenedVials",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"OpenedVials\""
+        "_value": "{\"text\":\"OpenedVials\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "PW1_HC_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "PW1_HC_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"PW1_HC_NR_checkbox\""
+        "_value": "{\"text\":\"PW1_HC_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "PW1_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "PW1_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"PW1_O_NR_checkbox\""
+        "_value": "{\"text\":\"PW1_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "PW2_HC_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "PW2_HC_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"PW2_HC_NR_checkbox\""
+        "_value": "{\"text\":\"PW2_HC_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "PW2_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "PW2_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"PW2_O_NR_checkbox\""
+        "_value": "{\"text\":\"PW2_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "S1_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "S1_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"S1_O_NR_checkbox\""
+        "_value": "{\"text\":\"S1_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "S2_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "S2_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"S2_O_NR_checkbox\""
+        "_value": "{\"text\":\"S2_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "W1_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "W1_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"W1_O_NR_checkbox\""
+        "_value": "{\"text\":\"W1_O_NR_checkbox\"}"
       },
       {
         "_partition": "Column",
         "_aspect": "W2_O_NR_checkbox",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"text\":\"NR\"},\"_row_num\":30}]"
+        "_value": "[{\"choice_list_name\":\"one_choice\",\"data_value\":\"NR\",\"display\":{\"title\":{\"text\":\"NR\"}},\"_row_num\":30}]"
       },
       {
         "_partition": "Column",
         "_aspect": "W2_O_NR_checkbox",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"W2_O_NR_checkbox\""
+        "_value": "{\"text\":\"W2_O_NR_checkbox\"}"
       },
       {
         "_partition": "FormType",
@@ -4781,7 +5480,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Adult Coverage\""
+        "_value": "{\"text\":\"Adult Coverage\"}"
       }
     ]
   }

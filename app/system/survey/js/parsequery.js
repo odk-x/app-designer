@@ -1,4 +1,3 @@
-/* globals odkCommon, odkSurvey */
 /**
  circular dependency upon: controller, builder (set via initialize)
 
@@ -10,6 +9,7 @@
 */
 define(['opendatakit','database','jquery'],
 function(opendatakit,  database,  $) {
+/* globals odkCommon, odkSurveyStateManagement */
 'use strict';
 verifyLoad('parsequery',
     ['opendatakit','database','jquery'],
@@ -58,12 +58,12 @@ return {
             // this will clear the auxillary key-value pairs in the URI.
             // at this point, these initial values will have been applied to the
             // instance's initial values.
-            odkSurvey.clearAuxillaryHash();
+            odkSurveyStateManagement.clearAuxillaryHash();
             // fire the controller to render the first page.
             ctxt.log('D',"parsequery._effectChange.startAtScreenPath. " + (sameInstance ? "sameInstance" : "differentForm and/or differentInstance"),
                         "startAtScreenPath("+screenPath+") refId: " + refId + " ms: " + (+new Date()));
             // set the refId. From this point onward,
-            // changes will be applied within the odkSurvey
+            // changes will be applied within the odkSurveyStateManagement
             opendatakit.setRefId(refId);
             if ( instanceId === null || instanceId === undefined ) {
                 opendatakit.clearCurrentInstanceId();
@@ -73,8 +73,8 @@ return {
             // if we are not starting fresh, we will have
             // something on the stack -- retain it, otherwise
             // reset the stack to the default content.
-            if ( !odkSurvey.hasSectionStack(refId) ) {
-                odkSurvey.clearSectionScreenState(refId);
+            if ( !odkSurveyStateManagement.hasSectionStack(refId) ) {
+                odkSurveyStateManagement.clearSectionScreenState(refId);
             }
             that.controller.startAtScreenPath(ctxt, screenPath);
         }}), model, formId, instanceId, sameInstance, instanceMetadataKeyValueMap);
@@ -243,7 +243,7 @@ return {
 
             if ( formPath !== null &&  formPath !== undefined &&
                  formPath.length > 0 && formPath[formPath.length-1] !== '/' ) {
-                formPath[formPath.length] = '/';
+                formPath = formPath + '/';
             }
         }
 
@@ -255,22 +255,24 @@ return {
         }
 
         if ( refId === null || refId === undefined ) {
-            ctxt.log('I','parsequery._parseParameters.odkSurvey.refId is null -- generating unique value');
+            ctxt.log('I','parsequery._parseParameters.odkSurveyStateManagement.refId is null -- generating unique value');
             refId = opendatakit.genUUID();
         }
 
         // This may fail when embedded
         try {
-            odkSurvey.refId = refId;
+			if ( '_setRefId' in odkSurveyStateManagement ) {
+			  odkSurveyStateManagement._setRefId(refId);
+			}
         } catch(e) {
-            ctxt.log('W','parsequery._parseParameters.odkSurvey.refId assignment failed (ok if embedded)');
+            ctxt.log('W','parsequery._parseParameters.odkSurveyStateManagement.refId assignment failed (ok if embedded)');
         }
-        ctxt.log('D','parsequery._parseParameters.odkSurvey.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
+        ctxt.log('D','parsequery._parseParameters.odkSurveyStateManagement.refId AFTER ASSIGNMENT ', 'refId: ' + refId);
 
         if ( formPath === '../config/assets/framework/forms/framework/' ) {
             // instanceId is always specified and invariant on the framework form.
             instanceId = 'invariant:0';
-            odkSurvey.setInstanceId(refId, instanceId);
+            odkSurveyStateManagement.setInstanceId(refId, instanceId);
         }
 
         var formDef = opendatakit.getCurrentFormDef();

@@ -1,30 +1,16 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, odkTables, data */
+/* global $, odkTables, odkData, odkCommon */
 /*exported display, handleClick, getResults */
 'use strict';
-
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/femaleClients_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             if (dataObj === undefined || dataObj === null) {
-//                 console.log('Could not load data json for table: femaleClients');
-//             }
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 
 var femaleClients = {};
 
 /** Handles clicking on a list item. Applied via a string. */
 function handleClick(index) {
     if (!$.isEmptyObject(femaleClients)) {
-        odkTables.openDetailView(
+        odkTables.openDetailView(null,
             femaleClients.getTableId(),
             index,
             'config/tables/femaleClients/html/femaleClients_detail.html');
@@ -37,7 +23,7 @@ function cbSRSuccess(searchData) {
     if(searchData.getCount() > 0) {
         // open filtered list view if client found
         var rowId = searchData.getRowId(0);
-        odkTables.openTableToListView(
+        odkTables.openTableToListView(null,
                 'femaleClients',
                 '_id = ?',
                 [rowId],
@@ -56,11 +42,6 @@ function cbSRFailure(error) {
 function getResults() {
     var searchText = document.getElementById('search').value;
 
-//     var searchData = odkTables.query(
-//             'femaleClients',
-//             'client_id = ?',
-//             [searchText]);
-
     odkData.query('femaleClients', 'client_id = ?', [searchText], 
         null, null, null, null, null, null, true, cbSRSuccess, cbSRFailure);
 }
@@ -72,7 +53,7 @@ function render() {
     // 'add client' form
     var addClient = document.createElement('p');
     addClient.onclick = function() {
-        odkTables.addRowWithSurvey(
+        odkTables.addRowWithSurvey(null,
                 'femaleClients',
                 'addClient',
                 null,
@@ -85,7 +66,7 @@ function render() {
     /* create button that launches graph display */
     var graphView = document.createElement('p');
     graphView.onclick = function() {
-        odkTables.openTableToListView(
+        odkTables.openTableToListView(null,
                 'femaleClients',
                 null,
                 null,

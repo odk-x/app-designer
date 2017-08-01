@@ -1,42 +1,29 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, control, d3, data */
+/* global $, _, odkData, d3 */
 'use strict';
 
-// Handle the case where we are debugging in chrome.
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/temperatureSensor_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log('Could not load data json for table: temperatureSensor');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
-}
- 
-function display() {
+var resultSet = {};
+var sensorStreamResultSet = {};
+
+function updateContent() {
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
-    $('#SENSOR-ID').text(data.get('sensorid'));
-    $('#sensor-type').text(data.get('sensortype'));
-    $('#msg-type').text(data.get('msgtype'));
+    $('#SENSOR-ID').text(resultSet.get('sensorid'));
+    $('#sensor-type').text(resultSet.get('sensortype'));
+    $('#msg-type').text(resultSet.get('msgtype'));
 
     // Format the time to show on the bottom axis
     var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S").parse;
     var formatTime = d3.time.format("%m-%d %H:%M:%S");
 
     // Get the data to graph from the database
-    var tempData = control.query('temperatureSensor', 'sensorid = ?', [data.get('sensorid')]);
-    var xValues = tempData.getColumnData('timestamp');
-    var yValues = tempData.getColumnData('sample');
+    var xValues = sensorStreamResultSet.getColumnData('timestamp');
+    var yValues = sensorStreamResultSet.getColumnData('sample');
 
     // Map the values so that they can be used by d3
-    var dataI = new Array();
+    var dataI = [];
     for (var i = 0; i < yValues.length; i++) {
         // Parse the date here
         var dateParts = xValues[i].split(".");
@@ -124,7 +111,7 @@ function display() {
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
             .attr("transform", function(d) {
-                return "rotate(-65)" 
+                return "rotate(-65)";
             });  
 
     // Setting up y-axis parameters
@@ -170,4 +157,38 @@ function display() {
     .attr("y", -20)
     .text(legendString);
 }
+
+function sensorStreamCBSuccess(result) {
+
+    sensorStreamResultSet = result;
+	
+	// and update the document with the values for this plot
+	updateContent();
+}
+
+function sensorStreamCBFailure(error) {
+
+	// a real application would perhaps clear the document fiels if there were an error
+    console.log('temperatureSensor_detail query sensorid CB error : ' + error);
+}
+
+function cbSuccess(result) {
+
+    resultSet = result;
+	
+	// get the sensor data for this sensor id
+    odkData.query('temperatureSensor', 'sensorid = ?', [resultSet.get('sensorid')], 
+        null, null, null, null, null, null, true, sensorStreamCBSuccess, sensorStreamCBFailure);
+}
+
+function cbFailure(error) {
+
+	// a real application would perhaps clear the document fiels if there were an error
+    console.log('temperatureSensor_detail getViewData CB error : ' + error);
+}
+
+var display = function() {
+	
+    odkData.getViewData(cbSuccess, cbFailure);
+};
 

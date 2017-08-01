@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <!-- Author: mitchellsundt@gmail.com -->
@@ -121,16 +122,12 @@ function handleSave(e) {
     if (formDefStr === undefined || formDefStr === null) {
       formDefStr = '';
     }
-
-    var uriContent = "data:application/octet-stream," + encodeURIComponent(formDefStr);
-    var downloader = document.createElement("iframe");
-    downloader.style.display = "none";
-    downloader.src = uriContent;
-    document.body.appendChild(downloader);
-
+    var formDefJson = JSON.parse(formDefStr);
+	var formDefFile = "data:application/javascript;charset=utf-8," + formDefStr;
+	downloadFormDefJsonFile(formDefFile, "formDef.json");
+	
     // Generate definition.csv and properties.csv if necessary
-    if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDefStr)) {
-        var formDefJson = JSON.parse(formDefStr);
+    if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDefJson)) {
 
         // Get the dataTableModel
         var dtm = formDefJson.specification.dataTableModel;
@@ -145,6 +142,31 @@ function handleSave(e) {
         propCsv = "data:text/csv;charset=utf-8," + propCsv;
         downloadCsvFile(propCsv, "properties.csv");
     } 
+	
+	if (util.shouldWriteOutDefinitionsJs(formDefJson)) {
+		var tableId = util.getTableIdFromFormDef(formDefJson);
+
+		if ( tableId === 'framework' ) {
+			var trxFilename = 'frameworkDefinitions.js';
+			// Create and write out frameworkDefinitions.js
+			var trxJs = util.createDefinitionsJsFromDataTableModel(tableId, formDefJson);
+			trxJs = "data:application/javascript;charset=utf-8," + trxJs;
+			downloadTrxFile(trxJs, trxFilename);
+			
+			var trxCmnFilename = 'commonDefinitions.js';
+			// Create and write out commonDefinitions.js
+			var trxCmnJs = util.createDefinitionsJsFromDataTableModel(null, formDefJson);
+			trxCmnJs = "data:application/javascript;charset=utf-8," + trxCmnJs;
+			downloadTrxFile(trxCmnJs, trxCmnFilename);
+			
+		} else {
+			var trxFilename = 'tableSpecificDefinitions.js';
+			// Create and write out tableSpecificDefinitions.js
+			var trxJs = util.createDefinitionsJsFromDataTableModel(tableId, formDefJson);
+			trxJs = "data:application/javascript;charset=utf-8," + trxJs;
+			downloadTrxFile(trxJs, trxFilename);
+		}
+	}
 }
 
 /**
@@ -161,7 +183,7 @@ function postFormDef() {
     var tableId = util.getTableIdFromFormDef(formDefJson);
     var formId = util.getFormIdFromFormDef(formDefJson);
     var canWriteFile =
-      formId === util.getFrameworkFormId() ||
+      tableId === util.getFrameworkFormId() ||
       (tableId !== null && formId !== null);
     if (!canWriteFile) {
       console.log('form id or table id could not be found, not posting file.');
@@ -172,10 +194,19 @@ function postFormDef() {
           formId);
     } else {
       var path;
+	  var shouldWriteDefinitionsJs = false;
       var shouldWriteDefAndPropCsv = false;
-      if (formId === util.getFrameworkFormId()) {
+	  if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDefJson)) {
+		shouldWriteDefAndPropCsv = true;
+	  }
+
+	  if (util.shouldWriteOutDefinitionsJs(formDefJson)) {
+		shouldWriteDefinitionsJs = true;
+	  }
+
+      if (tableId === util.getFrameworkFormId()) {
         // a special case for the framework file, which is reserved.
-        path = util.getRelativePathToFrameworkFormDef();
+        path = util.getRelativePathToFrameworkFormDef(formDefJson);
       } else {
         // we're dealing with a formdef that we're assuming must be for a
         // particular table, if we're going to be saving it automatically.
@@ -185,10 +216,6 @@ function postFormDef() {
           '/forms/' +
           formId +
           '/formDef.json';
-
-          if (util.shouldWriteOutDefinitionAndPropertiesCsv(formDef)) {
-            shouldWriteDefAndPropCsv = true;
-          }
       }
       console.log('going to write formDef to: ' + path);
 
@@ -229,11 +256,67 @@ function postFormDef() {
             }
         });
       }
+      if (shouldWriteDefinitionsJs) {
+		var tableId = util.getTableIdFromFormDef(formDefJson);
+		
+		if ( tableId === 'framework' ) {
+			// Create and write out frameworkDefinitions.js
+			var trxPath = util.getRelativePathToFrameworkDefinitionsJs(formDefJson);
+			var trxJs = util.createDefinitionsJsFromDataTableModel(tableId, formDefJson);
+			util.postFile(trxPath, trxJs, function(err, response, body) {
+				if (err || response.statusCode !== 200) {
+					alert(
+					  'Something went wrong! Please save the file manually.');
+				} else {
+					alert('Saved the file to: ' + trxPath);
+				}
+			});
+			// Create and write out commonDefinitions.js
+			var ctrxPath = util.getRelativePathToCommonDefinitionsJs(formDefJson);
+			var trxJs = util.createDefinitionsJsFromDataTableModel(null, formDefJson);
+			util.postFile(ctrxPath, trxJs, function(err, response, body) {
+				if (err || response.statusCode !== 200) {
+					alert(
+					  'Something went wrong! Please save the file manually.');
+				} else {
+					alert('Saved the file to: ' + ctrxPath);
+				}
+			});
+		} else {
+			// Create and write out tableSpecificDefinitions.js
+			var trxPath = 'app/config/tables/' + tableId + '/tableSpecificDefinitions.js';
+			var trxJs = util.createDefinitionsJsFromDataTableModel(tableId, formDefJson);
+			util.postFile(trxPath, trxJs, function(err, response, body) {
+				if (err || response.statusCode !== 200) {
+					alert(
+					  'Something went wrong! Please save the file manually.');
+				} else {
+					alert('Saved the file to: ' + trxPath);
+				}
+			});
+		}
+      }
     }
+}
+
+function downloadFormDefJsonFile (formDefContent, fileName) {
+    var encodedUri = encodeURI(formDefContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", fileName);
+    link.click();
 }
 
 function downloadCsvFile (csvContent, fileName) {
     var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", fileName);
+    link.click();
+}
+
+function downloadTrxFile (trxContent, fileName) {
+    var encodedUri = encodeURI(trxContent);
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", fileName);

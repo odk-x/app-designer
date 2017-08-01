@@ -1,9 +1,12 @@
+'use strict';
+/* global _, d3, odkData, util */
+/* exported display */
+
 /**
  * Responsible for rendering the home screen.
  */
-'use strict';
-/* global odkTables */
-var visitData = {};
+
+ var visitData = {};
 var plotData = {};
 
 function visitCBSuccess(result) {
@@ -71,13 +74,13 @@ function bargraphColAgainstDate(originPlotName, colName, divName, yAxisText) {
         width = paramWidth - margin.left - margin.right,
         height = paramHeight - margin.top - margin.bottom;
 
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+    var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.05);
 
     var y = d3.scale.linear().range([height, 0]);
 
     var xAxis = d3.svg.axis()
         .scale(x)
-        .orient("bottom")
+        .orient("bottom");
 
     var yAxis = d3.svg.axis()
         .scale(y)
@@ -92,7 +95,7 @@ function bargraphColAgainstDate(originPlotName, colName, divName, yAxisText) {
 
         data.push(visit);
     }
-    var data = _.sortBy(data, 'value');
+    data = _.sortBy(data, 'value');
 
     x.domain(data.map(function(d) { return d.plot; }));
     y.domain([0, d3.max(data, function(d) { return d.value; })]);
@@ -133,7 +136,7 @@ function bargraphColAgainstDate(originPlotName, colName, divName, yAxisText) {
         .attr("x", function(d) { return x(d.plot); })
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.value); })
-        .attr("height", function(d) { return height - y(d.value); })
+        .attr("height", function(d) { return height - y(d.value); });
 }
 
 // returns height for the most recent visit of the given plot
@@ -158,7 +161,7 @@ function getRecentVisit(plotId, colName) {
             data.push(visit);
         }
     }
-    var data = _.sortBy(data, 'date');
+    data = _.sortBy(data, 'date');
     data.forEach(function(d) {
         d.date = parseDate(d.date);
         d.value = +d.value;

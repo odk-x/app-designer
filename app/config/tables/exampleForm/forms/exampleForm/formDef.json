@@ -5,8 +5,10 @@
         "type": "integer",
         "name": "default_rating",
         "display": {
-          "text": "Enter an initial rating (1-10) for this survey",
-          "hint": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
+          "prompt": "first_prompt",
+          "hint": {
+            "text": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
+          }
         },
         "model": {
           "isSessionVariable": true
@@ -18,7 +20,9 @@
         "values_list": "examples",
         "name": "examples",
         "display": {
-          "text": "Which examples would you like to see?"
+          "prompt": {
+            "text": "Which examples would you like to see?"
+          }
         },
         "_row_num": 3
       },
@@ -31,7 +35,9 @@
         "type": "barcode",
         "name": "barcode",
         "display": {
-          "text": "Scan a barcode"
+          "prompt": {
+            "text": "Scan a barcode"
+          }
         },
         "_row_num": 5
       },
@@ -39,7 +45,9 @@
         "type": "geopoint",
         "name": "geopoint",
         "display": {
-          "text": "Capture your location"
+          "prompt": {
+            "text": "Capture your location"
+          }
         },
         "_row_num": 6
       },
@@ -47,7 +55,9 @@
         "type": "image",
         "name": "picture",
         "display": {
-          "text": "Take a picture"
+          "prompt": {
+            "text": "Take a picture"
+          }
         },
         "_row_num": 7
       },
@@ -55,7 +65,9 @@
         "type": "audio",
         "name": "recording",
         "display": {
-          "text": "Make a recording"
+          "prompt": {
+            "text": "Make a recording"
+          }
         },
         "_row_num": 8
       },
@@ -71,8 +83,12 @@
       {
         "type": "note",
         "display": {
-          "text": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>",
-          "hint": "So can <b>hints</b>"
+          "prompt": {
+            "text": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>"
+          },
+          "hint": {
+            "text": "So can <b>hints</b>"
+          }
         },
         "hideInContents": true,
         "_row_num": 11
@@ -80,9 +96,11 @@
       {
         "type": "note",
         "display": {
-          "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
-          "audio": "audio/carrioncrow.mp3",
-          "image": "img/dolphin.png"
+          "prompt": {
+            "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
+            "audio": "audio/carrioncrow.mp3",
+            "image": "img/dolphin.png"
+          }
         },
         "hideInContents": true,
         "_row_num": 12
@@ -91,16 +109,24 @@
         "type": "text",
         "name": "name",
         "display": {
-          "text": "Enter your name",
-          "hint": "It will be used in the next question."
+          "prompt": {
+            "text": "Enter your name"
+          },
+          "hint": {
+            "text": "It will be used in the next question."
+          }
         },
         "_row_num": 13
       },
       {
         "type": "note",
         "display": {
-          "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}",
-          "hint": "Handlebars templates allow labels to change depending on the values previously entered."
+          "prompt": {
+            "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}"
+          },
+          "hint": {
+            "text": "Handlebars templates allow labels to change depending on the values previously entered."
+          }
         },
         "hideInContents": true,
         "_row_num": 14
@@ -118,7 +144,9 @@
         "type": "integer",
         "name": "avg_coffee",
         "display": {
-          "text": "On average, how many cups of coffee do you drink in a day?"
+          "prompt": {
+            "text": "On average, how many cups of coffee do you drink in a day?"
+          }
         },
         "_row_num": 17
       },
@@ -145,7 +173,9 @@
         "type": "integer",
         "name": "coffee_today",
         "display": {
-          "text": "How many cups of coffee did you drink today?"
+          "prompt": {
+            "text": "How many cups of coffee did you drink today?"
+          }
         },
         "_row_num": 22
       },
@@ -166,7 +196,9 @@
         "type": "date",
         "name": "born",
         "display": {
-          "text": "When were you born?"
+          "prompt": {
+            "text": "When were you born?"
+          }
         },
         "_row_num": 26
       },
@@ -178,8 +210,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Happy Birthday!",
-          "hint": "This prompt shows how to use dates in fomulas."
+          "prompt": {
+            "text": "Happy Birthday!"
+          },
+          "hint": {
+            "text": "This prompt shows how to use dates in fomulas."
+          }
         },
         "hideInContents": true,
         "_row_num": 28
@@ -192,214 +228,264 @@
         "type": "time",
         "name": "time",
         "display": {
-          "text": "What time do you usually wake up?"
+          "prompt": {
+            "text": "What time do you usually wake up?"
+          }
         },
         "_row_num": 30
+      },
+      {
+        "type": "assign",
+        "name": "datetime",
+        "calculation": "(data('datetime') !== null && data('datetime') !== undefined) ? data('datetime') : new Date()",
+        "_row_num": 31
       },
       {
         "type": "datetime",
         "name": "datetime",
         "display": {
-          "text": "When will you be available for a follow up survey?"
+          "prompt": {
+            "text": "When will you be available for a follow up survey?"
+          }
         },
-        "_row_num": 31
+        "_row_num": 32
       },
       {
         "clause": "end if // demo_datetime",
-        "_row_num": 32
+        "_row_num": 33
       },
       {
         "clause": "if",
         "condition": "selected(data('examples'), 'geopoint')",
-        "_row_num": 33
+        "_row_num": 34
       },
       {
         "type": "geopoint",
         "name": "location",
         "display": {
-          "text": "Record your location:"
+          "prompt": {
+            "text": "Record your location:"
+          }
         },
-        "_row_num": 34
+        "_row_num": 35
       },
       {
         "clause": "end if",
-        "_row_num": 35
+        "_row_num": 36
       },
       {
         "clause": "if // demo_screen_group",
         "condition": "selected(data('examples'), 'screen_group')",
-        "_row_num": 36
+        "_row_num": 37
       },
       {
         "clause": "begin screen",
-        "_row_num": 37
+        "_row_num": 38
       },
       {
         "type": "select_multiple",
         "values_list": "continents",
         "name": "visited_continents",
         "display": {
-          "text": "Which continents have you visited?"
+          "prompt": {
+            "text": "Which continents have you visited?"
+          }
         },
-        "_row_num": 38
+        "_row_num": 39
       },
       {
         "clause": "if",
         "condition": "calculates.ask_about_seattle()",
-        "_row_num": 39
+        "_row_num": 40
       },
       {
         "type": "select_one",
         "values_list": "yesno",
         "name": "visited_seattle",
         "display": {
-          "text": "Have you visited Seattle?"
+          "prompt": {
+            "text": "Have you visited Seattle?"
+          }
         },
-        "_row_num": 40
-      },
-      {
-        "clause": "end if",
         "_row_num": 41
       },
       {
-        "clause": "end screen",
+        "clause": "end if",
         "_row_num": 42
       },
       {
-        "clause": "end if // demo_screen_group",
+        "clause": "end screen",
         "_row_num": 43
+      },
+      {
+        "clause": "end if // demo_screen_group",
+        "_row_num": 44
       },
       {
         "clause": "if",
         "condition": "selected(data('examples'), 'media')",
-        "_row_num": 44
+        "_row_num": 45
       },
       {
         "clause": "begin screen",
-        "_row_num": 45
+        "_row_num": 46
       },
       {
         "type": "audio",
         "name": "audio_test",
         "display": {
-          "text": "Make a recording:"
+          "prompt": {
+            "text": "Make a recording:"
+          }
         },
-        "_row_num": 46
+        "_row_num": 47
       },
       {
         "type": "video",
         "name": "video_test",
         "display": {
-          "text": "Take a video:"
+          "prompt": {
+            "text": "Take a video:"
+          }
         },
-        "_row_num": 47
+        "_row_num": 48
       },
       {
         "type": "image",
         "name": "image_test",
         "display": {
-          "text": "Take a picture:"
+          "prompt": {
+            "text": "Take a picture:"
+          }
         },
-        "_row_num": 48
-      },
-      {
-        "clause": "end screen",
         "_row_num": 49
       },
       {
-        "clause": "end if",
+        "clause": "end screen",
         "_row_num": 50
+      },
+      {
+        "clause": "end if",
+        "_row_num": 51
       },
       {
         "clause": "if",
         "condition": "selected(data('examples'), 'custom_template')",
-        "_row_num": 51
+        "_row_num": 52
       },
       {
         "clause": "begin screen",
-        "_row_num": 52
+        "_row_num": 53
       },
       {
         "type": "note",
         "display": {
-          "text": "The following data will be used to generate a weight for age plot."
+          "prompt": {
+            "text": "The following data will be used to generate a weight for age plot."
+          }
         },
         "hideInContents": true,
-        "_row_num": 53
+        "_row_num": 54
       },
       {
         "type": "integer",
         "name": "age",
         "display": {
-          "text": "Enter age (in years):",
-          "hint": "Must be less than 20."
+          "prompt": {
+            "text": "Enter age (in years):"
+          },
+          "hint": {
+            "text": "Must be less than 20."
+          },
+          "constraint_message": {
+            "text": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot."
+          }
         },
         "constraint": "data('age') <= 20",
-        "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
-        "_row_num": 54
+        "_row_num": 55
       },
       {
         "type": "decimal",
         "name": "weight",
         "display": {
-          "text": "Enter weight (in lbs):"
+          "prompt": {
+            "text": "Enter weight (in lbs):"
+          }
         },
-        "_row_num": 55
+        "_row_num": 56
       },
       {
         "type": "select_one",
         "values_list": "sexes",
         "name": "sex",
         "display": {
-          "text": "Enter sex:"
+          "prompt": {
+            "text": "Enter sex:"
+          }
         },
-        "_row_num": 56
+        "_row_num": 57
       },
       {
         "clause": "end screen",
-        "_row_num": 57
+        "_row_num": 58
       },
       {
         "type": "note",
         "name": "specialTemplateTest",
         "display": {
-          "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
+          "prompt": {
+            "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
+          }
         },
         "templatePath": "ageWeightPlot.handlebars",
         "hideInContents": true,
-        "_row_num": 58
-      },
-      {
-        "clause": "end if",
         "_row_num": 59
       },
       {
-        "clause": "begin screen",
+        "clause": "end if",
         "_row_num": 60
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 61
       },
       {
         "type": "assign",
         "name": "rating",
         "calculation": "((data('rating') == null) ? data('default_rating') : data('rating'))",
-        "_row_num": 61
+        "_row_num": 62
       },
       {
         "type": "integer",
         "name": "rating",
         "display": {
-          "text": "How would you rate this survey?",
-          "hint": "1 is very bad. 10 is very good."
+          "prompt": {
+            "text": "How would you rate this survey?"
+          },
+          "hint": {
+            "text": "1 is very bad. 10 is very good."
+          }
         },
         "inputAttributes": {
           "type": "range",
           "min": 1,
           "max": 10
         },
-        "_row_num": 62
+        "_row_num": 63
       },
       {
         "clause": "end screen",
-        "_row_num": 63
+        "_row_num": 64
+      }
+    ],
+    "table_specific_translations": [
+      {
+        "string_token": "first_prompt",
+        "text": {
+          "default": "Enter an initial rating (1-10) for this survey",
+          "hindi": "HINDI Enter an initial rating (1-10) for this survey"
+        },
+        "_row_num": 2
       }
     ],
     "calculates": [
@@ -414,7 +500,9 @@
         "choice_list_name": "yesno",
         "data_value": "yes",
         "display": {
-          "text": "yes"
+          "title": {
+            "text": "yes"
+          }
         },
         "_row_num": 2
       },
@@ -422,7 +510,9 @@
         "choice_list_name": "yesno",
         "data_value": "no",
         "display": {
-          "text": "no"
+          "title": {
+            "text": "no"
+          }
         },
         "_row_num": 3
       },
@@ -430,7 +520,9 @@
         "choice_list_name": "continents",
         "data_value": "NorthAmerica",
         "display": {
-          "text": "North America"
+          "title": {
+            "text": "North America"
+          }
         },
         "_row_num": 4
       },
@@ -438,7 +530,9 @@
         "choice_list_name": "continents",
         "data_value": "SouthAmerica",
         "display": {
-          "text": "South America"
+          "title": {
+            "text": "South America"
+          }
         },
         "_row_num": 5
       },
@@ -446,7 +540,9 @@
         "choice_list_name": "continents",
         "data_value": "Europe",
         "display": {
-          "text": "Europe"
+          "title": {
+            "text": "Europe"
+          }
         },
         "_row_num": 6
       },
@@ -454,7 +550,9 @@
         "choice_list_name": "continents",
         "data_value": "Africa",
         "display": {
-          "text": "Africa"
+          "title": {
+            "text": "Africa"
+          }
         },
         "_row_num": 7
       },
@@ -462,7 +560,9 @@
         "choice_list_name": "continents",
         "data_value": "Asia",
         "display": {
-          "text": "Asia"
+          "title": {
+            "text": "Asia"
+          }
         },
         "_row_num": 8
       },
@@ -470,7 +570,9 @@
         "choice_list_name": "continents",
         "data_value": "Australia",
         "display": {
-          "text": "Australia"
+          "title": {
+            "text": "Australia"
+          }
         },
         "_row_num": 9
       },
@@ -478,7 +580,9 @@
         "choice_list_name": "continents",
         "data_value": "Antarctica",
         "display": {
-          "text": "Antarctica"
+          "title": {
+            "text": "Antarctica"
+          }
         },
         "_row_num": 10
       },
@@ -486,7 +590,9 @@
         "choice_list_name": "examples",
         "data_value": "intents",
         "display": {
-          "text": "intent launching"
+          "title": {
+            "text": "intent launching"
+          }
         },
         "_row_num": 12
       },
@@ -494,7 +600,9 @@
         "choice_list_name": "examples",
         "data_value": "label_features",
         "display": {
-          "text": "label features"
+          "title": {
+            "text": "label features"
+          }
         },
         "_row_num": 13
       },
@@ -502,7 +610,9 @@
         "choice_list_name": "examples",
         "data_value": "dynamic_defaults",
         "display": {
-          "text": "computed assignment of initial values"
+          "title": {
+            "text": "computed assignment of initial values"
+          }
         },
         "_row_num": 14
       },
@@ -510,7 +620,9 @@
         "choice_list_name": "examples",
         "data_value": "datetime",
         "display": {
-          "text": "datetime"
+          "title": {
+            "text": "datetime"
+          }
         },
         "_row_num": 15
       },
@@ -518,7 +630,9 @@
         "choice_list_name": "examples",
         "data_value": "geopoint",
         "display": {
-          "text": "geopoint"
+          "title": {
+            "text": "geopoint"
+          }
         },
         "_row_num": 16
       },
@@ -526,7 +640,9 @@
         "choice_list_name": "examples",
         "data_value": "media",
         "display": {
-          "text": "media"
+          "title": {
+            "text": "media"
+          }
         },
         "_row_num": 17
       },
@@ -534,7 +650,9 @@
         "choice_list_name": "examples",
         "data_value": "screen_group",
         "display": {
-          "text": "screen group with select and calculate"
+          "title": {
+            "text": "screen group with select and calculate"
+          }
         },
         "_row_num": 18
       },
@@ -542,7 +660,9 @@
         "choice_list_name": "examples",
         "data_value": "custom_template",
         "display": {
-          "text": "custom template"
+          "title": {
+            "text": "custom template"
+          }
         },
         "_row_num": 19
       },
@@ -550,7 +670,9 @@
         "choice_list_name": "sexes",
         "data_value": "male",
         "display": {
-          "text": "male"
+          "title": {
+            "text": "male"
+          }
         },
         "_row_num": 21
       },
@@ -558,9 +680,21 @@
         "choice_list_name": "sexes",
         "data_value": "female",
         "display": {
-          "text": "female"
+          "title": {
+            "text": "female"
+          }
         },
         "_row_num": 22
+      }
+    ],
+    "model": [
+      {
+        "type": "select_multiple",
+        "name": "visited_continents",
+        "default": [
+          "Africa"
+        ],
+        "_row_num": 2
       }
     ],
     "settings": [
@@ -577,9 +711,41 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Example Form"
+          "title": {
+            "text": {
+              "english": "Example Form",
+              "hindi": "hindi exampleform",
+              "default": "Example Form"
+            }
+          }
         },
         "_row_num": 4
+      },
+      {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "English",
+              "hindi": "English (as hindi name)",
+              "default": "English"
+            }
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "setting_name": "hindi",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Hindi",
+              "hindi": "Hindi (as hindi name)",
+              "default": "Hindi"
+            }
+          }
+        },
+        "_row_num": 6
       }
     ]
   },
@@ -590,16 +756,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -615,9 +779,41 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Example Form"
+          "title": {
+            "text": {
+              "english": "Example Form",
+              "hindi": "hindi exampleform",
+              "default": "Example Form"
+            }
+          }
         },
         "_row_num": 4
+      },
+      "english": {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "English",
+              "hindi": "English (as hindi name)",
+              "default": "English"
+            }
+          }
+        },
+        "_row_num": 5
+      },
+      "hindi": {
+        "setting_name": "hindi",
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Hindi",
+              "hindi": "Hindi (as hindi name)",
+              "default": "Hindi"
+            }
+          }
+        },
+        "_row_num": 6
       },
       "form_id": {
         "setting_name": "form_id",
@@ -631,21 +827,47 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": {
+                  "english": "English",
+                  "hindi": "English (as hindi name)",
+                  "default": "English"
+                }
+              }
             },
-            "name": "default"
+            "_row_num": 5,
+            "name": "english"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "english": "Hindi",
+                  "hindi": "Hindi (as hindi name)",
+                  "default": "Hindi"
+                }
+              }
+            },
+            "_row_num": 6,
+            "name": "hindi"
           }
         ]
       },
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 4,
-        "value": "default"
+        "value": "english"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Example Form"
+          "title": {
+            "text": {
+              "english": "Example Form",
+              "hindi": "hindi exampleform",
+              "default": "Example Form"
+            }
+          }
         },
         "_row_num": 4
       }
@@ -656,7 +878,9 @@
           "choice_list_name": "yesno",
           "data_value": "yes",
           "display": {
-            "text": "yes"
+            "title": {
+              "text": "yes"
+            }
           },
           "_row_num": 2
         },
@@ -664,7 +888,9 @@
           "choice_list_name": "yesno",
           "data_value": "no",
           "display": {
-            "text": "no"
+            "title": {
+              "text": "no"
+            }
           },
           "_row_num": 3
         }
@@ -674,7 +900,9 @@
           "choice_list_name": "continents",
           "data_value": "NorthAmerica",
           "display": {
-            "text": "North America"
+            "title": {
+              "text": "North America"
+            }
           },
           "_row_num": 4
         },
@@ -682,7 +910,9 @@
           "choice_list_name": "continents",
           "data_value": "SouthAmerica",
           "display": {
-            "text": "South America"
+            "title": {
+              "text": "South America"
+            }
           },
           "_row_num": 5
         },
@@ -690,7 +920,9 @@
           "choice_list_name": "continents",
           "data_value": "Europe",
           "display": {
-            "text": "Europe"
+            "title": {
+              "text": "Europe"
+            }
           },
           "_row_num": 6
         },
@@ -698,7 +930,9 @@
           "choice_list_name": "continents",
           "data_value": "Africa",
           "display": {
-            "text": "Africa"
+            "title": {
+              "text": "Africa"
+            }
           },
           "_row_num": 7
         },
@@ -706,7 +940,9 @@
           "choice_list_name": "continents",
           "data_value": "Asia",
           "display": {
-            "text": "Asia"
+            "title": {
+              "text": "Asia"
+            }
           },
           "_row_num": 8
         },
@@ -714,7 +950,9 @@
           "choice_list_name": "continents",
           "data_value": "Australia",
           "display": {
-            "text": "Australia"
+            "title": {
+              "text": "Australia"
+            }
           },
           "_row_num": 9
         },
@@ -722,7 +960,9 @@
           "choice_list_name": "continents",
           "data_value": "Antarctica",
           "display": {
-            "text": "Antarctica"
+            "title": {
+              "text": "Antarctica"
+            }
           },
           "_row_num": 10
         }
@@ -732,7 +972,9 @@
           "choice_list_name": "examples",
           "data_value": "intents",
           "display": {
-            "text": "intent launching"
+            "title": {
+              "text": "intent launching"
+            }
           },
           "_row_num": 12
         },
@@ -740,7 +982,9 @@
           "choice_list_name": "examples",
           "data_value": "label_features",
           "display": {
-            "text": "label features"
+            "title": {
+              "text": "label features"
+            }
           },
           "_row_num": 13
         },
@@ -748,7 +992,9 @@
           "choice_list_name": "examples",
           "data_value": "dynamic_defaults",
           "display": {
-            "text": "computed assignment of initial values"
+            "title": {
+              "text": "computed assignment of initial values"
+            }
           },
           "_row_num": 14
         },
@@ -756,7 +1002,9 @@
           "choice_list_name": "examples",
           "data_value": "datetime",
           "display": {
-            "text": "datetime"
+            "title": {
+              "text": "datetime"
+            }
           },
           "_row_num": 15
         },
@@ -764,7 +1012,9 @@
           "choice_list_name": "examples",
           "data_value": "geopoint",
           "display": {
-            "text": "geopoint"
+            "title": {
+              "text": "geopoint"
+            }
           },
           "_row_num": 16
         },
@@ -772,7 +1022,9 @@
           "choice_list_name": "examples",
           "data_value": "media",
           "display": {
-            "text": "media"
+            "title": {
+              "text": "media"
+            }
           },
           "_row_num": 17
         },
@@ -780,7 +1032,9 @@
           "choice_list_name": "examples",
           "data_value": "screen_group",
           "display": {
-            "text": "screen group with select and calculate"
+            "title": {
+              "text": "screen group with select and calculate"
+            }
           },
           "_row_num": 18
         },
@@ -788,7 +1042,9 @@
           "choice_list_name": "examples",
           "data_value": "custom_template",
           "display": {
-            "text": "custom template"
+            "title": {
+              "text": "custom template"
+            }
           },
           "_row_num": 19
         }
@@ -798,7 +1054,9 @@
           "choice_list_name": "sexes",
           "data_value": "male",
           "display": {
-            "text": "male"
+            "title": {
+              "text": "male"
+            }
           },
           "_row_num": 21
         },
@@ -806,11 +1064,25 @@
           "choice_list_name": "sexes",
           "data_value": "female",
           "display": {
-            "text": "female"
+            "title": {
+              "text": "female"
+            }
           },
           "_row_num": 22
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {
+        "first_prompt": {
+          "string_token": "first_prompt",
+          "text": {
+            "default": "Enter an initial rating (1-10) for this survey",
+            "hindi": "HINDI Enter an initial rating (1-10) for this survey"
+          },
+          "_row_num": 2
+        }
+      }
     },
     "queries": {},
     "calculates": {
@@ -821,6 +1093,28 @@
       }
     },
     "model": {
+      "visited_continents": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "visited_continents_items"
+        },
+        "valuesList": "continents",
+        "_defn": [
+          {
+            "_row_num": 39,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "default": [
+          "Africa"
+        ],
+        "elementKey": "visited_continents"
+      },
       "default_rating": {
         "_defn": [
           {
@@ -987,20 +1281,24 @@
         "elementKey": "time"
       },
       "datetime": {
+        "type": "string",
+        "elementType": "dateTime",
         "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          },
           {
             "_row_num": 31,
             "section_name": "survey"
           }
         ],
-        "type": "string",
-        "elementType": "dateTime",
         "elementKey": "datetime"
       },
       "location": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -1026,25 +1324,10 @@
         },
         "elementKey": "location"
       },
-      "visited_continents": {
-        "_defn": [
-          {
-            "_row_num": 38,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "visited_continents_items"
-        },
-        "valuesList": "continents",
-        "elementKey": "visited_continents"
-      },
       "visited_seattle": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 41,
             "section_name": "survey"
           }
         ],
@@ -1055,7 +1338,7 @@
       "audio_test": {
         "_defn": [
           {
-            "_row_num": 46,
+            "_row_num": 47,
             "section_name": "survey"
           }
         ],
@@ -1079,7 +1362,7 @@
       "video_test": {
         "_defn": [
           {
-            "_row_num": 47,
+            "_row_num": 48,
             "section_name": "survey"
           }
         ],
@@ -1103,7 +1386,7 @@
       "image_test": {
         "_defn": [
           {
-            "_row_num": 48,
+            "_row_num": 49,
             "section_name": "survey"
           }
         ],
@@ -1127,7 +1410,7 @@
       "age": {
         "_defn": [
           {
-            "_row_num": 54,
+            "_row_num": 55,
             "section_name": "survey"
           }
         ],
@@ -1137,7 +1420,7 @@
       "weight": {
         "_defn": [
           {
-            "_row_num": 55,
+            "_row_num": 56,
             "section_name": "survey"
           }
         ],
@@ -1147,7 +1430,7 @@
       "sex": {
         "_defn": [
           {
-            "_row_num": 56,
+            "_row_num": 57,
             "section_name": "survey"
           }
         ],
@@ -1158,7 +1441,7 @@
       "rating": {
         "_defn": [
           {
-            "_row_num": 62,
+            "_row_num": 63,
             "section_name": "survey"
           }
         ],
@@ -1180,8 +1463,10 @@
             "type": "integer",
             "name": "default_rating",
             "display": {
-              "text": "Enter an initial rating (1-10) for this survey",
-              "hint": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
+              "prompt": "first_prompt",
+              "hint": {
+                "text": "If the form does not yet have a rating, this will be proposed for the rating value.  This value is not retained in the survey result set and exists only for the duration of this survey session."
+              }
             },
             "model": {
               "isSessionVariable": true
@@ -1198,7 +1483,9 @@
             "values_list": "examples",
             "name": "examples",
             "display": {
-              "text": "Which examples would you like to see?"
+              "prompt": {
+                "text": "Which examples would you like to see?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -1211,7 +1498,9 @@
             "type": "barcode",
             "name": "barcode",
             "display": {
-              "text": "Scan a barcode"
+              "prompt": {
+                "text": "Scan a barcode"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -1224,7 +1513,9 @@
             "type": "geopoint",
             "name": "geopoint",
             "display": {
-              "text": "Capture your location"
+              "prompt": {
+                "text": "Capture your location"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -1237,7 +1528,9 @@
             "type": "image",
             "name": "picture",
             "display": {
-              "text": "Take a picture"
+              "prompt": {
+                "text": "Take a picture"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -1250,7 +1543,9 @@
             "type": "audio",
             "name": "recording",
             "display": {
-              "text": "Make a recording"
+              "prompt": {
+                "text": "Make a recording"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -1262,8 +1557,12 @@
           {
             "type": "note",
             "display": {
-              "text": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>",
-              "hint": "So can <b>hints</b>"
+              "prompt": {
+                "text": "<u>Labels</u> <i>can</i> contain <span style=\"color:red;\">HTML</span>"
+              },
+              "hint": {
+                "text": "So can <b>hints</b>"
+              }
             },
             "hideInContents": true,
             "_row_num": 11,
@@ -1276,9 +1575,11 @@
           {
             "type": "note",
             "display": {
-              "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
-              "audio": "audio/carrioncrow.mp3",
-              "image": "img/dolphin.png"
+              "prompt": {
+                "text": "Labels can contain &lt;img&gt; and &lt;audio&gt; HTML tags, but it is often easier to add media via the image and audio columns.",
+                "audio": "audio/carrioncrow.mp3",
+                "image": "img/dolphin.png"
+              }
             },
             "hideInContents": true,
             "_row_num": 12,
@@ -1292,8 +1593,12 @@
             "type": "text",
             "name": "name",
             "display": {
-              "text": "Enter your name",
-              "hint": "It will be used in the next question."
+              "prompt": {
+                "text": "Enter your name"
+              },
+              "hint": {
+                "text": "It will be used in the next question."
+              }
             },
             "_row_num": 13,
             "__rowNum__": 12,
@@ -1305,8 +1610,12 @@
           {
             "type": "note",
             "display": {
-              "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}",
-              "hint": "Handlebars templates allow labels to change depending on the values previously entered."
+              "prompt": {
+                "text": "<h3>\nThis label uses Handlesbars template features:\n</h3>\n{{#if data.name}}\nHello {{data.name}}!\n{{else}}\nName not entered.\n{{/if}}"
+              },
+              "hint": {
+                "text": "Handlebars templates allow labels to change depending on the values previously entered."
+              }
             },
             "hideInContents": true,
             "_row_num": 14,
@@ -1320,7 +1629,9 @@
             "type": "integer",
             "name": "avg_coffee",
             "display": {
-              "text": "On average, how many cups of coffee do you drink in a day?"
+              "prompt": {
+                "text": "On average, how many cups of coffee do you drink in a day?"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -1333,7 +1644,9 @@
             "type": "integer",
             "name": "coffee_today",
             "display": {
-              "text": "How many cups of coffee did you drink today?"
+              "prompt": {
+                "text": "How many cups of coffee did you drink today?"
+              }
             },
             "_row_num": 22,
             "__rowNum__": 21,
@@ -1346,7 +1659,9 @@
             "type": "date",
             "name": "born",
             "display": {
-              "text": "When were you born?"
+              "prompt": {
+                "text": "When were you born?"
+              }
             },
             "_row_num": 26,
             "__rowNum__": 25,
@@ -1358,8 +1673,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Happy Birthday!",
-              "hint": "This prompt shows how to use dates in fomulas."
+              "prompt": {
+                "text": "Happy Birthday!"
+              },
+              "hint": {
+                "text": "This prompt shows how to use dates in fomulas."
+              }
             },
             "hideInContents": true,
             "_row_num": 28,
@@ -1373,7 +1692,9 @@
             "type": "time",
             "name": "time",
             "display": {
-              "text": "What time do you usually wake up?"
+              "prompt": {
+                "text": "What time do you usually wake up?"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -1386,26 +1707,30 @@
             "type": "datetime",
             "name": "datetime",
             "display": {
-              "text": "When will you be available for a follow up survey?"
+              "prompt": {
+                "text": "When will you be available for a follow up survey?"
+              }
             },
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "prompt",
             "_type": "datetime",
-            "_branch_label_enclosing_screen": "survey/_screen31",
+            "_branch_label_enclosing_screen": "survey/_screen32",
             "promptIdx": 15
           },
           {
             "type": "geopoint",
             "name": "location",
             "display": {
-              "text": "Record your location:"
+              "prompt": {
+                "text": "Record your location:"
+              }
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen34",
+            "_branch_label_enclosing_screen": "survey/_screen35",
             "promptIdx": 16
           },
           {
@@ -1413,13 +1738,15 @@
             "values_list": "continents",
             "name": "visited_continents",
             "display": {
-              "text": "Which continents have you visited?"
+              "prompt": {
+                "text": "Which continents have you visited?"
+              }
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen37",
+            "_branch_label_enclosing_screen": "survey/_screen38",
             "promptIdx": 17
           },
           {
@@ -1427,94 +1754,112 @@
             "values_list": "yesno",
             "name": "visited_seattle",
             "display": {
-              "text": "Have you visited Seattle?"
+              "prompt": {
+                "text": "Have you visited Seattle?"
+              }
             },
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 41,
+            "__rowNum__": 40,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen37",
+            "_branch_label_enclosing_screen": "survey/_screen38",
             "promptIdx": 18
           },
           {
             "type": "audio",
             "name": "audio_test",
             "display": {
-              "text": "Make a recording:"
+              "prompt": {
+                "text": "Make a recording:"
+              }
             },
-            "_row_num": 46,
-            "__rowNum__": 45,
+            "_row_num": 47,
+            "__rowNum__": 46,
             "_token_type": "prompt",
             "_type": "audio",
-            "_branch_label_enclosing_screen": "survey/_screen45",
+            "_branch_label_enclosing_screen": "survey/_screen46",
             "promptIdx": 19
           },
           {
             "type": "video",
             "name": "video_test",
             "display": {
-              "text": "Take a video:"
+              "prompt": {
+                "text": "Take a video:"
+              }
             },
-            "_row_num": 47,
-            "__rowNum__": 46,
+            "_row_num": 48,
+            "__rowNum__": 47,
             "_token_type": "prompt",
             "_type": "video",
-            "_branch_label_enclosing_screen": "survey/_screen45",
+            "_branch_label_enclosing_screen": "survey/_screen46",
             "promptIdx": 20
           },
           {
             "type": "image",
             "name": "image_test",
             "display": {
-              "text": "Take a picture:"
+              "prompt": {
+                "text": "Take a picture:"
+              }
             },
-            "_row_num": 48,
-            "__rowNum__": 47,
+            "_row_num": 49,
+            "__rowNum__": 48,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen45",
+            "_branch_label_enclosing_screen": "survey/_screen46",
             "promptIdx": 21
           },
           {
             "type": "note",
             "display": {
-              "text": "The following data will be used to generate a weight for age plot."
+              "prompt": {
+                "text": "The following data will be used to generate a weight for age plot."
+              }
             },
             "hideInContents": true,
-            "_row_num": 53,
-            "__rowNum__": 52,
+            "_row_num": 54,
+            "__rowNum__": 53,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen52",
+            "_branch_label_enclosing_screen": "survey/_screen53",
             "promptIdx": 22
           },
           {
             "type": "integer",
             "name": "age",
             "display": {
-              "text": "Enter age (in years):",
-              "hint": "Must be less than 20."
+              "prompt": {
+                "text": "Enter age (in years):"
+              },
+              "hint": {
+                "text": "Must be less than 20."
+              },
+              "constraint_message": {
+                "text": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot."
+              }
             },
             "constraint": "data('age') <= 20",
-            "constraint_message": "The growth chart only has data for below 20 years. This age you entered will not fit on the plot.",
-            "_row_num": 54,
-            "__rowNum__": 53,
+            "_row_num": 55,
+            "__rowNum__": 54,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen52",
+            "_branch_label_enclosing_screen": "survey/_screen53",
             "promptIdx": 23
           },
           {
             "type": "decimal",
             "name": "weight",
             "display": {
-              "text": "Enter weight (in lbs):"
+              "prompt": {
+                "text": "Enter weight (in lbs):"
+              }
             },
-            "_row_num": 55,
-            "__rowNum__": 54,
+            "_row_num": 56,
+            "__rowNum__": 55,
             "_token_type": "prompt",
             "_type": "decimal",
-            "_branch_label_enclosing_screen": "survey/_screen52",
+            "_branch_label_enclosing_screen": "survey/_screen53",
             "promptIdx": 24
           },
           {
@@ -1522,55 +1867,63 @@
             "values_list": "sexes",
             "name": "sex",
             "display": {
-              "text": "Enter sex:"
+              "prompt": {
+                "text": "Enter sex:"
+              }
             },
-            "_row_num": 56,
-            "__rowNum__": 55,
+            "_row_num": 57,
+            "__rowNum__": 56,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen52",
+            "_branch_label_enclosing_screen": "survey/_screen53",
             "promptIdx": 25
           },
           {
             "type": "note",
             "name": "specialTemplateTest",
             "display": {
-              "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
+              "prompt": {
+                "text": "This is a custom template that uses D3.js to plot an age and weight on a growth chart:"
+              }
             },
             "templatePath": "ageWeightPlot.handlebars",
             "hideInContents": true,
-            "_row_num": 58,
-            "__rowNum__": 57,
+            "_row_num": 59,
+            "__rowNum__": 58,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen58",
+            "_branch_label_enclosing_screen": "survey/_screen59",
             "promptIdx": 26
           },
           {
             "type": "integer",
             "name": "rating",
             "display": {
-              "text": "How would you rate this survey?",
-              "hint": "1 is very bad. 10 is very good."
+              "prompt": {
+                "text": "How would you rate this survey?"
+              },
+              "hint": {
+                "text": "1 is very bad. 10 is very good."
+              }
             },
             "inputAttributes": {
               "type": "range",
               "min": 1,
               "max": 10
             },
-            "_row_num": 62,
-            "__rowNum__": 61,
+            "_row_num": 63,
+            "__rowNum__": 62,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen60",
+            "_branch_label_enclosing_screen": "survey/_screen61",
             "promptIdx": 27
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 64,
-            "_branch_label_enclosing_screen": "survey/_screen64",
+            "_row_num": 65,
+            "_branch_label_enclosing_screen": "survey/_screen65",
             "promptIdx": 28
           }
         ],
@@ -1765,8 +2118,8 @@
           {
             "clause": "end if // demo_datetime",
             "_token_type": "goto_label",
-            "_branch_label": "_else32",
-            "_row_num": 32,
+            "_branch_label": "_else33",
+            "_row_num": 33,
             "operationIdx": 25
           },
           {
@@ -1811,199 +2164,208 @@
             "operationIdx": 31
           },
           {
+            "type": "assign",
+            "name": "datetime",
+            "calculation": "(data('datetime') !== null && data('datetime') !== undefined) ? data('datetime') : new Date()",
             "_row_num": 31,
+            "__rowNum__": 30,
+            "_token_type": "assign",
+            "operationIdx": 32
+          },
+          {
+            "_row_num": 32,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 32
+            "operationIdx": 33
           },
           {
             "clause": "end if // demo_datetime",
             "_token_type": "goto_label",
-            "_branch_label": "_endif32",
-            "_row_num": 32,
-            "operationIdx": 33
+            "_branch_label": "_endif33",
+            "_row_num": 33,
+            "operationIdx": 34
           },
           {
             "clause": "if",
             "condition": "selected(data('examples'), 'geopoint')",
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "goto_label",
-            "_branch_label": "_then33",
-            "operationIdx": 34
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else35",
-            "_row_num": 35,
+            "_branch_label": "_then34",
             "operationIdx": 35
           },
           {
-            "_row_num": 34,
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else36",
+            "_row_num": 36,
+            "operationIdx": 36
+          },
+          {
+            "_row_num": 35,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 36
+            "operationIdx": 37
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif35",
-            "_row_num": 35,
-            "operationIdx": 37
+            "_branch_label": "_endif36",
+            "_row_num": 36,
+            "operationIdx": 38
           },
           {
             "clause": "if // demo_screen_group",
             "condition": "selected(data('examples'), 'screen_group')",
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "goto_label",
             "_tag_name": "demo_screen_group",
-            "_branch_label": "_then36",
-            "operationIdx": 38
-          },
-          {
-            "clause": "end if // demo_screen_group",
-            "_token_type": "goto_label",
-            "_branch_label": "_else43",
-            "_row_num": 43,
+            "_branch_label": "_then37",
             "operationIdx": 39
           },
           {
+            "clause": "end if // demo_screen_group",
+            "_token_type": "goto_label",
+            "_branch_label": "_else44",
+            "_row_num": 44,
+            "operationIdx": 40
+          },
+          {
             "clause": "begin screen",
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 42,
-              "__rowNum__": 41,
+              "_row_num": 43,
+              "__rowNum__": 42,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\nif (calculates.ask_about_seattle()) {\nactivePromptIndicies.push(18);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 40
+            "operationIdx": 41
           },
           {
             "clause": "end if // demo_screen_group",
             "_token_type": "goto_label",
-            "_branch_label": "_endif43",
-            "_row_num": 43,
-            "operationIdx": 41
+            "_branch_label": "_endif44",
+            "_row_num": 44,
+            "operationIdx": 42
           },
           {
             "clause": "if",
             "condition": "selected(data('examples'), 'media')",
-            "_row_num": 44,
-            "__rowNum__": 43,
+            "_row_num": 45,
+            "__rowNum__": 44,
             "_token_type": "goto_label",
-            "_branch_label": "_then44",
-            "operationIdx": 42
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else50",
-            "_row_num": 50,
+            "_branch_label": "_then45",
             "operationIdx": 43
           },
           {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else51",
+            "_row_num": 51,
+            "operationIdx": 44
+          },
+          {
             "clause": "begin screen",
-            "_row_num": 45,
-            "__rowNum__": 44,
+            "_row_num": 46,
+            "__rowNum__": 45,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 49,
-              "__rowNum__": 48,
+              "_row_num": 50,
+              "__rowNum__": 49,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 44
+            "operationIdx": 45
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif50",
-            "_row_num": 50,
-            "operationIdx": 45
+            "_branch_label": "_endif51",
+            "_row_num": 51,
+            "operationIdx": 46
           },
           {
             "clause": "if",
             "condition": "selected(data('examples'), 'custom_template')",
-            "_row_num": 51,
-            "__rowNum__": 50,
+            "_row_num": 52,
+            "__rowNum__": 51,
             "_token_type": "goto_label",
-            "_branch_label": "_then51",
-            "operationIdx": 46
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else59",
-            "_row_num": 59,
+            "_branch_label": "_then52",
             "operationIdx": 47
           },
           {
-            "clause": "begin screen",
-            "_row_num": 52,
-            "__rowNum__": 51,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 57,
-              "__rowNum__": 56,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else60",
+            "_row_num": 60,
             "operationIdx": 48
           },
           {
-            "_row_num": 58,
+            "clause": "begin screen",
+            "_row_num": 53,
+            "__rowNum__": 52,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 58,
+              "__rowNum__": 57,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 49
+          },
+          {
+            "_row_num": 59,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 49
+            "operationIdx": 50
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif59",
-            "_row_num": 59,
-            "operationIdx": 50
+            "_branch_label": "_endif60",
+            "_row_num": 60,
+            "operationIdx": 51
           },
           {
             "clause": "begin screen",
-            "_row_num": 60,
-            "__rowNum__": 59,
+            "_row_num": 61,
+            "__rowNum__": 60,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 63,
-              "__rowNum__": 62,
+              "_row_num": 64,
+              "__rowNum__": 63,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nassign('rating', ((data('rating') == null) ? data('default_rating') : data('rating')));\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 51
+            "operationIdx": 52
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 64,
-            "operationIdx": 52
+            "_row_num": 65,
+            "operationIdx": 53
           },
           {
-            "_row_num": 64,
+            "_row_num": 65,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 53
+            "operationIdx": 54
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 64,
-            "operationIdx": 54
+            "_row_num": 65,
+            "operationIdx": 55
           }
         ],
         "branch_label_map": {
@@ -2038,29 +2400,29 @@
           "_else29": 31,
           "_endif29": 31,
           "_screen30": 31,
-          "_screen31": 32,
-          "_else32": 34,
-          "_endif32": 34,
-          "_then33": 36,
-          "_screen34": 36,
-          "_else35": 38,
-          "_endif35": 38,
-          "_then36": 40,
-          "_screen37": 40,
-          "_else43": 42,
-          "_endif43": 42,
-          "_then44": 44,
-          "_screen45": 44,
-          "_else50": 46,
-          "_endif50": 46,
-          "_then51": 48,
-          "_screen52": 48,
-          "_screen58": 49,
-          "_else59": 51,
-          "_endif59": 51,
-          "_screen60": 51,
-          "_contents": 53,
-          "_screen64": 53
+          "_screen32": 33,
+          "_else33": 35,
+          "_endif33": 35,
+          "_then34": 37,
+          "_screen35": 37,
+          "_else36": 39,
+          "_endif36": 39,
+          "_then37": 41,
+          "_screen38": 41,
+          "_else44": 43,
+          "_endif44": 43,
+          "_then45": 45,
+          "_screen46": 45,
+          "_else51": 47,
+          "_endif51": 47,
+          "_then52": 49,
+          "_screen53": 49,
+          "_screen59": 50,
+          "_else60": 52,
+          "_endif60": 52,
+          "_screen61": 52,
+          "_contents": 54,
+          "_screen65": 54
         }
       },
       "initial": {
@@ -2091,7 +2453,13 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Example Form"
+              "title": {
+                "text": {
+                  "english": "Example Form",
+                  "hindi": "hindi exampleform",
+                  "default": "Example Form"
+                }
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -2240,6 +2608,38 @@
       }
     },
     "dataTableModel": {
+      "visited_continents": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "visited_continents_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "visited_continents.items",
+          "notUnitOfRetention": true
+        },
+        "valuesList": "continents",
+        "_defn": [
+          {
+            "_row_num": 39,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "default": [
+          "Africa"
+        ],
+        "elementKey": "visited_continents",
+        "elementName": "visited_continents",
+        "elementSet": "data",
+        "elementPath": "visited_continents",
+        "listChildElementKeys": [
+          "visited_continents_items"
+        ]
+      },
       "default_rating": {
         "_defn": [
           {
@@ -2487,14 +2887,18 @@
         "elementPath": "time"
       },
       "datetime": {
+        "type": "string",
+        "elementType": "dateTime",
         "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          },
           {
             "_row_num": 31,
             "section_name": "survey"
           }
         ],
-        "type": "string",
-        "elementType": "dateTime",
         "elementKey": "datetime",
         "elementName": "datetime",
         "elementSet": "data",
@@ -2503,7 +2907,7 @@
       "location": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -2551,35 +2955,10 @@
         ],
         "notUnitOfRetention": true
       },
-      "visited_continents": {
-        "_defn": [
-          {
-            "_row_num": 38,
-            "section_name": "survey"
-          }
-        ],
-        "type": "array",
-        "items": {
-          "type": "string",
-          "elementKey": "visited_continents_items",
-          "elementName": "items",
-          "elementSet": "data",
-          "elementPath": "visited_continents.items",
-          "notUnitOfRetention": true
-        },
-        "valuesList": "continents",
-        "elementKey": "visited_continents",
-        "elementName": "visited_continents",
-        "elementSet": "data",
-        "elementPath": "visited_continents",
-        "listChildElementKeys": [
-          "visited_continents_items"
-        ]
-      },
       "visited_seattle": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 41,
             "section_name": "survey"
           }
         ],
@@ -2593,7 +2972,7 @@
       "audio_test": {
         "_defn": [
           {
-            "_row_num": 46,
+            "_row_num": 47,
             "section_name": "survey"
           }
         ],
@@ -2631,7 +3010,7 @@
       "video_test": {
         "_defn": [
           {
-            "_row_num": 47,
+            "_row_num": 48,
             "section_name": "survey"
           }
         ],
@@ -2669,7 +3048,7 @@
       "image_test": {
         "_defn": [
           {
-            "_row_num": 48,
+            "_row_num": 49,
             "section_name": "survey"
           }
         ],
@@ -2707,7 +3086,7 @@
       "age": {
         "_defn": [
           {
-            "_row_num": 54,
+            "_row_num": 55,
             "section_name": "survey"
           }
         ],
@@ -2720,7 +3099,7 @@
       "weight": {
         "_defn": [
           {
-            "_row_num": 55,
+            "_row_num": 56,
             "section_name": "survey"
           }
         ],
@@ -2733,7 +3112,7 @@
       "sex": {
         "_defn": [
           {
-            "_row_num": 56,
+            "_row_num": 57,
             "section_name": "survey"
           }
         ],
@@ -2747,7 +3126,7 @@
       "rating": {
         "_defn": [
           {
-            "_row_num": 62,
+            "_row_num": 63,
             "section_name": "survey"
           }
         ],
@@ -2756,6 +3135,14 @@
         "elementName": "rating",
         "elementSet": "data",
         "elementPath": "rating"
+      },
+      "visited_continents_items": {
+        "type": "string",
+        "elementKey": "visited_continents_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "visited_continents.items",
+        "notUnitOfRetention": true
       },
       "examples_items": {
         "type": "string",
@@ -2855,14 +3242,6 @@
         "elementSet": "data",
         "elementPath": "location.accuracy"
       },
-      "visited_continents_items": {
-        "type": "string",
-        "elementKey": "visited_continents_items",
-        "elementName": "items",
-        "elementSet": "data",
-        "elementPath": "visited_continents.items",
-        "notUnitOfRetention": true
-      },
       "audio_test_uriFragment": {
         "type": "string",
         "elementType": "rowpath",
@@ -2946,21 +3325,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -2970,6 +3341,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -2977,6 +3372,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -3009,28 +3412,28 @@
         "_aspect": "examples",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"examples\",\"data_value\":\"intents\",\"display\":{\"text\":\"intent launching\"},\"_row_num\":12},{\"choice_list_name\":\"examples\",\"data_value\":\"label_features\",\"display\":{\"text\":\"label features\"},\"_row_num\":13},{\"choice_list_name\":\"examples\",\"data_value\":\"dynamic_defaults\",\"display\":{\"text\":\"computed assignment of initial values\"},\"_row_num\":14},{\"choice_list_name\":\"examples\",\"data_value\":\"datetime\",\"display\":{\"text\":\"datetime\"},\"_row_num\":15},{\"choice_list_name\":\"examples\",\"data_value\":\"geopoint\",\"display\":{\"text\":\"geopoint\"},\"_row_num\":16},{\"choice_list_name\":\"examples\",\"data_value\":\"media\",\"display\":{\"text\":\"media\"},\"_row_num\":17},{\"choice_list_name\":\"examples\",\"data_value\":\"screen_group\",\"display\":{\"text\":\"screen group with select and calculate\"},\"_row_num\":18},{\"choice_list_name\":\"examples\",\"data_value\":\"custom_template\",\"display\":{\"text\":\"custom template\"},\"_row_num\":19}]"
+        "_value": "[{\"choice_list_name\":\"examples\",\"data_value\":\"intents\",\"display\":{\"title\":{\"text\":\"intent launching\"}},\"_row_num\":12},{\"choice_list_name\":\"examples\",\"data_value\":\"label_features\",\"display\":{\"title\":{\"text\":\"label features\"}},\"_row_num\":13},{\"choice_list_name\":\"examples\",\"data_value\":\"dynamic_defaults\",\"display\":{\"title\":{\"text\":\"computed assignment of initial values\"}},\"_row_num\":14},{\"choice_list_name\":\"examples\",\"data_value\":\"datetime\",\"display\":{\"title\":{\"text\":\"datetime\"}},\"_row_num\":15},{\"choice_list_name\":\"examples\",\"data_value\":\"geopoint\",\"display\":{\"title\":{\"text\":\"geopoint\"}},\"_row_num\":16},{\"choice_list_name\":\"examples\",\"data_value\":\"media\",\"display\":{\"title\":{\"text\":\"media\"}},\"_row_num\":17},{\"choice_list_name\":\"examples\",\"data_value\":\"screen_group\",\"display\":{\"title\":{\"text\":\"screen group with select and calculate\"}},\"_row_num\":18},{\"choice_list_name\":\"examples\",\"data_value\":\"custom_template\",\"display\":{\"title\":{\"text\":\"custom template\"}},\"_row_num\":19}]"
       },
       {
         "_partition": "Column",
         "_aspect": "sex",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"sexes\",\"data_value\":\"male\",\"display\":{\"text\":\"male\"},\"_row_num\":21},{\"choice_list_name\":\"sexes\",\"data_value\":\"female\",\"display\":{\"text\":\"female\"},\"_row_num\":22}]"
+        "_value": "[{\"choice_list_name\":\"sexes\",\"data_value\":\"male\",\"display\":{\"title\":{\"text\":\"male\"}},\"_row_num\":21},{\"choice_list_name\":\"sexes\",\"data_value\":\"female\",\"display\":{\"title\":{\"text\":\"female\"}},\"_row_num\":22}]"
       },
       {
         "_partition": "Column",
         "_aspect": "visited_continents",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"continents\",\"data_value\":\"NorthAmerica\",\"display\":{\"text\":\"North America\"},\"_row_num\":4},{\"choice_list_name\":\"continents\",\"data_value\":\"SouthAmerica\",\"display\":{\"text\":\"South America\"},\"_row_num\":5},{\"choice_list_name\":\"continents\",\"data_value\":\"Europe\",\"display\":{\"text\":\"Europe\"},\"_row_num\":6},{\"choice_list_name\":\"continents\",\"data_value\":\"Africa\",\"display\":{\"text\":\"Africa\"},\"_row_num\":7},{\"choice_list_name\":\"continents\",\"data_value\":\"Asia\",\"display\":{\"text\":\"Asia\"},\"_row_num\":8},{\"choice_list_name\":\"continents\",\"data_value\":\"Australia\",\"display\":{\"text\":\"Australia\"},\"_row_num\":9},{\"choice_list_name\":\"continents\",\"data_value\":\"Antarctica\",\"display\":{\"text\":\"Antarctica\"},\"_row_num\":10}]"
+        "_value": "[{\"choice_list_name\":\"continents\",\"data_value\":\"NorthAmerica\",\"display\":{\"title\":{\"text\":\"North America\"}},\"_row_num\":4},{\"choice_list_name\":\"continents\",\"data_value\":\"SouthAmerica\",\"display\":{\"title\":{\"text\":\"South America\"}},\"_row_num\":5},{\"choice_list_name\":\"continents\",\"data_value\":\"Europe\",\"display\":{\"title\":{\"text\":\"Europe\"}},\"_row_num\":6},{\"choice_list_name\":\"continents\",\"data_value\":\"Africa\",\"display\":{\"title\":{\"text\":\"Africa\"}},\"_row_num\":7},{\"choice_list_name\":\"continents\",\"data_value\":\"Asia\",\"display\":{\"title\":{\"text\":\"Asia\"}},\"_row_num\":8},{\"choice_list_name\":\"continents\",\"data_value\":\"Australia\",\"display\":{\"title\":{\"text\":\"Australia\"}},\"_row_num\":9},{\"choice_list_name\":\"continents\",\"data_value\":\"Antarctica\",\"display\":{\"title\":{\"text\":\"Antarctica\"}},\"_row_num\":10}]"
       },
       {
         "_partition": "Column",
         "_aspect": "visited_seattle",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"text\":\"no\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"no\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "FormType",
@@ -3058,7 +3461,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Example Form\""
+        "_value": "{\"text\":{\"english\":\"Example Form\",\"hindi\":\"hindi exampleform\",\"default\":\"Example Form\"}}"
       }
     ]
   }

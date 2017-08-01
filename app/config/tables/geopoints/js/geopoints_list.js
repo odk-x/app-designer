@@ -1,28 +1,15 @@
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, odkTables, data */
+/* global $, odkTables, odkData, odkCommon */
 'use strict';
-
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/geopoints_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             if (dataObj === undefined || dataObj === null) {
-//                 console.log('Could not load data json for table: geopoints');
-//             }
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 
 var geopoints = {};
 
 function handleClick(rowId) {
     if (!$.isEmptyObject(geopoints)) {
         odkTables.openDetailView(
+			null,
             geopoints.getTableId(),
             rowId,
             'config/tables/geopoints/html/geopoints_detail.html');
@@ -53,6 +40,7 @@ function render(result) {
     mapView.innerHTML = 'Map View';
     mapView.onclick = function() {
         odkTables.openTableToMapView(
+				null,
                 'geopoints',
                 'client_id = ?',
                 [clientId],
@@ -63,19 +51,19 @@ function render(result) {
     /* Create item to launch geo point form */
     var waypoint = document.createElement('p');
     waypoint.setAttribute('class', 'launchForm');
-    var jsonMap = {};
+    var elementKeyToValueMap = {};
     // Prepopulate client id
-    jsonMap.client_id = clientId;
+    elementKeyToValueMap.client_id = clientId;
     // Add step every time you launch waypoint form.
-    jsonMap.step = result.getCount() + 1;
-    jsonMap = JSON.stringify(jsonMap);
+    elementKeyToValueMap.step = result.getCount() + 1;
 
     waypoint.onclick = function() {
         odkTables.addRowWithSurvey(
+				null,
                 'geopoints',
                 'geopoints',
                 null,
-                jsonMap);
+                elementKeyToValueMap);
     };
     waypoint.innerHTML = 'Add Waypoint';
     document.getElementById('header').appendChild(waypoint);
@@ -109,15 +97,16 @@ function render(result) {
 
             var transportation = document.createElement('li');
             transportation.setAttribute('class', 'detail');
-            if (result.getData(i, 'transportation_mode') != null) {    
-                if (result.getData(i, 'transportation_mode') != 'Other') {
+			var tm = result.getData(i, 'transportation_mode');
+            if ( tm !== null && tm !== undefined ) {    
+                if (tm != 'Other') {
                     transportation.innerHTML =
                     'Transportation: ' +
-                    result.getData(i, 'transportation_mode');
+                    tm;
                 } else {
                     transportation.innerHTML =
                     'Transportation: ' +
-                    result.getData(i, 'transportation_mode_other')
+                    result.getData(i, 'transportation_mode_other');
                 }
                 item.appendChild(transportation);
             }

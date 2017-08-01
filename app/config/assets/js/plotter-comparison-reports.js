@@ -1,8 +1,10 @@
+/* global $, _, d3, odkData, util */
+/* exported display */
+'use strict';
+
 /**
  * Responsible for rendering the home screen.
  */
-'use strict';
-/* global odkTables */
 var visitData = {};
 var plotData = {};
 var compareTypeDisplay = '';
@@ -66,10 +68,10 @@ function render() {
 
     $('#NAME').text('Plots with ' + compareTypeValDisplay + ' ' + compareTypeDisplay);
 
-    var plotName = null;
+	var i;
     var plotId = null;
     var plotIdArray = [];
-    for (var i = 0; i < visitData.getCount(); i++) {
+    for (i = 0; i < visitData.getCount(); i++) {
         if (visitData.getData(i, compareType) === compareTypeVal) {
             plotId = visitData.getData(i, 'plot_id');
             plotIdArray.push(plotId);
@@ -97,8 +99,8 @@ function render() {
         uniqPlotIdArray.splice(0, 0, originPlotId);
     }
 
-    for (var i = 0; i < uniqPlotIdArray.length; i++) {
-        var highlight = false
+    for (i = 0; i < uniqPlotIdArray.length; i++) {
+        var highlight = false;
         if (fromPlotDetail && i === 0) {
             highlight = true;
         }
@@ -155,7 +157,7 @@ function bargraphColAgainstDate(plotId, colName, divName, yAxisText, highlight) 
     // Parse the date / time
     var parseDate = d3.time.format("%Y-%m-%d").parse;
 
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+    var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.05);
 
     var y = d3.scale.linear().range([height, 0]);
 
@@ -188,7 +190,7 @@ function bargraphColAgainstDate(plotId, colName, divName, yAxisText, highlight) 
         }
     }
 
-    var data = _.sortBy(data, 'date');
+    data = _.sortBy(data, 'date');
     data.forEach(function(d) {
         d.date = parseDate(d.date);
         d.value = +d.value;
@@ -234,5 +236,5 @@ function bargraphColAgainstDate(plotId, colName, divName, yAxisText, highlight) 
         .attr("x", function(d) { return x(d.date); })
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.value); })
-        .attr("height", function(d) { return height - y(d.value); })
+        .attr("height", function(d) { return height - y(d.value); });
 }

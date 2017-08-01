@@ -1,16 +1,5 @@
-/* global $, odkTables */
+/* global $, odkTables, odkData, odkCommon */
 'use strict';
-
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/geotagger_default_location_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 
 var geoListThumbResultSet = {};
 
@@ -33,7 +22,7 @@ function setup() {
 function handleClick(index) {
     var tableId = geoListThumbResultSet.getTableId();
     var rowId = geoListThumbResultSet.getRowId(index);
-    odkTables.openDetailView(tableId, rowId, null);
+    odkTables.openDetailView(null, tableId, rowId, null);
 }
 
 function displayGroup() {

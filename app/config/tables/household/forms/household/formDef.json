@@ -19,7 +19,9 @@
         "choice_list_name": "yesno",
         "data_value": "yes",
         "display": {
-          "text": "yes"
+          "title": {
+            "text": "yes"
+          }
         },
         "_row_num": 2
       },
@@ -27,7 +29,9 @@
         "choice_list_name": "yesno",
         "data_value": "no",
         "display": {
-          "text": "no"
+          "title": {
+            "text": "no"
+          }
         },
         "_row_num": 3
       }
@@ -51,28 +55,36 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Household Survey"
+          "title": {
+            "text": "Household Survey"
+          }
         },
         "_row_num": 5
       },
       {
         "setting_name": "household",
         "display": {
-          "title": "Household"
+          "title": {
+            "text": "Household"
+          }
         },
         "_row_num": 6
       },
       {
         "setting_name": "members",
         "display": {
-          "title": "Household Members"
+          "title": {
+            "text": "Household Members"
+          }
         },
         "_row_num": 7
       },
       {
         "setting_name": "education",
         "display": {
-          "title": "Education"
+          "title": {
+            "text": "Education"
+          }
         },
         "_row_num": 8
       },
@@ -90,7 +102,8 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{household_id: data('household_id')}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       {
@@ -100,7 +113,8 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{household_id: data('household_id')}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
       },
       {
@@ -110,18 +124,9 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{household_id: data('household_id')}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
-      }
-    ],
-    "properties": [
-      {
-        "partition": "Table",
-        "aspect": "default",
-        "key": "colOrder",
-        "type": "object",
-        "value": "[\"household_id\",\"num_rooms\",\"electricity\",\"water\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"owner\",\"youngest\"]",
-        "_row_num": 2
       }
     ],
     "household": [
@@ -129,7 +134,9 @@
         "type": "text",
         "name": "household_id",
         "display": {
-          "text": "Unique barcode ID or locator designation for this household"
+          "prompt": {
+            "text": "Unique barcode ID or locator designation for this household"
+          }
         },
         "required": true,
         "_row_num": 2
@@ -138,7 +145,9 @@
         "type": "integer",
         "name": "num_rooms",
         "display": {
-          "text": "How many rooms does the house contain?"
+          "prompt": {
+            "text": "How many rooms does the house contain?"
+          }
         },
         "_row_num": 3
       },
@@ -147,7 +156,9 @@
         "values_list": "yesno",
         "name": "electricity",
         "display": {
-          "text": "Does the house have electricity?"
+          "prompt": {
+            "text": "Does the house have electricity?"
+          }
         },
         "_row_num": 4
       },
@@ -156,7 +167,9 @@
         "values_list": "yesno",
         "name": "water",
         "display": {
-          "text": "Does the house have running water?"
+          "prompt": {
+            "text": "Does the house have running water?"
+          }
         },
         "_row_num": 5
       },
@@ -164,9 +177,13 @@
         "type": "geopoint",
         "name": "location",
         "display": {
-          "text": "Capture the household location."
+          "prompt": {
+            "text": "Capture the household location."
+          },
+          "button_label": {
+            "text": "Record Location"
+          }
         },
-        "buttonLabel": "Record Location",
         "_row_num": 6
       }
     ],
@@ -174,8 +191,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Household Members Section:",
-          "hint": "This section is used to gather information about all household members."
+          "prompt": {
+            "text": "Household Members Section:"
+          },
+          "hint": {
+            "text": "This section is used to gather information about all household members."
+          }
         },
         "_row_num": 2
       },
@@ -183,17 +204,23 @@
         "type": "linked_table",
         "values_list": "linked_members",
         "display": {
-          "text": "Make a list of all individuals who normally live in this household",
-          "new_instance_text": "Add House Member"
+          "prompt": {
+            "text": "Make a list of all individuals who normally live in this household"
+          },
+          "new_instance_label": {
+            "text": "Add House Member"
+          }
         },
         "_row_num": 3
       },
       {
         "type": "select_one",
         "values_list": "select_linked_data",
-        "name": "owner",
+        "name": "household_owner",
         "display": {
-          "text": "Who is the owner of the household?"
+          "prompt": {
+            "text": "Who is the owner of the household?"
+          }
         },
         "_row_num": 4
       },
@@ -202,7 +229,9 @@
         "values_list": "select_linked_data",
         "name": "youngest",
         "display": {
-          "text": "Who are the two youngest members of the household?"
+          "prompt": {
+            "text": "Who are the two youngest members of the household?"
+          }
         },
         "_row_num": 5
       }
@@ -211,8 +240,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Education:",
-          "hint": "This section is used to gather education information on the relevant household members."
+          "prompt": {
+            "text": "Education:"
+          },
+          "hint": {
+            "text": "This section is used to gather education information on the relevant household members."
+          }
         },
         "_row_num": 2
       },
@@ -220,7 +253,9 @@
         "type": "linked_table",
         "values_list": "linked_members_education",
         "display": {
-          "text": "Questions are asked to members of the household who are at least 5 years old.",
+          "prompt": {
+            "text": "Questions are asked to members of the household who are at least 5 years old."
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -235,16 +270,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -265,28 +298,36 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Household Survey"
+          "title": {
+            "text": "Household Survey"
+          }
         },
         "_row_num": 5
       },
       "household": {
         "setting_name": "household",
         "display": {
-          "title": "Household"
+          "title": {
+            "text": "Household"
+          }
         },
         "_row_num": 6
       },
       "members": {
         "setting_name": "members",
         "display": {
-          "title": "Household Members"
+          "title": {
+            "text": "Household Members"
+          }
         },
         "_row_num": 7
       },
       "education": {
         "setting_name": "education",
         "display": {
-          "title": "Education"
+          "title": {
+            "text": "Education"
+          }
         },
         "_row_num": 8
       },
@@ -301,7 +342,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -315,7 +358,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Household Survey"
+          "title": {
+            "text": "Household Survey"
+          }
         },
         "_row_num": 5
       }
@@ -326,7 +371,9 @@
           "choice_list_name": "yesno",
           "data_value": "yes",
           "display": {
-            "text": "yes"
+            "title": {
+              "text": "yes"
+            }
           },
           "_row_num": 2
         },
@@ -334,11 +381,16 @@
           "choice_list_name": "yesno",
           "data_value": "no",
           "display": {
-            "text": "no"
+            "title": {
+              "text": "no"
+            }
           },
           "_row_num": 3
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {
       "linked_members": {
@@ -348,7 +400,8 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{household_id: data('household_id')}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       "linked_members_education": {
@@ -358,7 +411,8 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{household_id: data('household_id')}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
       },
       "select_linked_data": {
@@ -368,7 +422,8 @@
         "linked_table_id": "household_member",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{household_id: data('household_id')}",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 4
       }
     },
@@ -445,7 +500,7 @@
         },
         "elementKey": "location"
       },
-      "owner": {
+      "household_owner": {
         "_defn": [
           {
             "_row_num": 4,
@@ -454,7 +509,7 @@
         ],
         "type": "string",
         "valuesList": "select_linked_data",
-        "elementKey": "owner"
+        "elementKey": "household_owner"
       },
       "youngest": {
         "_defn": [
@@ -502,7 +557,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Household"
+              "title": {
+                "text": "Household"
+              }
             },
             "_branch_label_enclosing_screen": "household/0"
           },
@@ -515,7 +572,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Household Members"
+              "title": {
+                "text": "Household Members"
+              }
             },
             "_branch_label_enclosing_screen": "members/0"
           },
@@ -528,7 +587,9 @@
             "_type": "_section",
             "promptIdx": 2,
             "display": {
-              "title": "Education"
+              "title": {
+                "text": "Education"
+              }
             },
             "_branch_label_enclosing_screen": "education/0"
           },
@@ -605,7 +666,9 @@
             "type": "text",
             "name": "household_id",
             "display": {
-              "text": "Unique barcode ID or locator designation for this household"
+              "prompt": {
+                "text": "Unique barcode ID or locator designation for this household"
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -619,7 +682,9 @@
             "type": "integer",
             "name": "num_rooms",
             "display": {
-              "text": "How many rooms does the house contain?"
+              "prompt": {
+                "text": "How many rooms does the house contain?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -633,7 +698,9 @@
             "values_list": "yesno",
             "name": "electricity",
             "display": {
-              "text": "Does the house have electricity?"
+              "prompt": {
+                "text": "Does the house have electricity?"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -647,7 +714,9 @@
             "values_list": "yesno",
             "name": "water",
             "display": {
-              "text": "Does the house have running water?"
+              "prompt": {
+                "text": "Does the house have running water?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -660,9 +729,13 @@
             "type": "geopoint",
             "name": "location",
             "display": {
-              "text": "Capture the household location."
+              "prompt": {
+                "text": "Capture the household location."
+              },
+              "button_label": {
+                "text": "Record Location"
+              }
             },
-            "buttonLabel": "Record Location",
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -755,8 +828,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Household Members Section:",
-              "hint": "This section is used to gather information about all household members."
+              "prompt": {
+                "text": "Household Members Section:"
+              },
+              "hint": {
+                "text": "This section is used to gather information about all household members."
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -769,8 +846,12 @@
             "type": "linked_table",
             "values_list": "linked_members",
             "display": {
-              "text": "Make a list of all individuals who normally live in this household",
-              "new_instance_text": "Add House Member"
+              "prompt": {
+                "text": "Make a list of all individuals who normally live in this household"
+              },
+              "new_instance_label": {
+                "text": "Add House Member"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -782,9 +863,11 @@
           {
             "type": "select_one",
             "values_list": "select_linked_data",
-            "name": "owner",
+            "name": "household_owner",
             "display": {
-              "text": "Who is the owner of the household?"
+              "prompt": {
+                "text": "Who is the owner of the household?"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -798,7 +881,9 @@
             "values_list": "select_linked_data",
             "name": "youngest",
             "display": {
-              "text": "Who are the two youngest members of the household?"
+              "prompt": {
+                "text": "Who are the two youngest members of the household?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -883,8 +968,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Education:",
-              "hint": "This section is used to gather education information on the relevant household members."
+              "prompt": {
+                "text": "Education:"
+              },
+              "hint": {
+                "text": "This section is used to gather education information on the relevant household members."
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -897,7 +986,9 @@
             "type": "linked_table",
             "values_list": "linked_members_education",
             "display": {
-              "text": "Questions are asked to members of the household who are at least 5 years old.",
+              "prompt": {
+                "text": "Questions are asked to members of the household who are at least 5 years old."
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -993,7 +1084,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Household Survey"
+              "title": {
+                "text": "Household Survey"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1247,7 +1340,7 @@
         ],
         "notUnitOfRetention": true
       },
-      "owner": {
+      "household_owner": {
         "_defn": [
           {
             "_row_num": 4,
@@ -1256,10 +1349,10 @@
         ],
         "type": "string",
         "valuesList": "select_linked_data",
-        "elementKey": "owner",
-        "elementName": "owner",
+        "elementKey": "household_owner",
+        "elementName": "household_owner",
         "elementSet": "data",
-        "elementPath": "owner"
+        "elementPath": "household_owner"
       },
       "youngest": {
         "_defn": [
@@ -1354,21 +1447,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -1378,6 +1463,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -1385,6 +1494,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1417,14 +1534,14 @@
         "_aspect": "electricity",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"text\":\"no\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"no\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "water",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"text\":\"no\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"no\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "FormType",
@@ -1443,13 +1560,6 @@
       {
         "_partition": "Table",
         "_aspect": "default",
-        "_key": "colOrder",
-        "_type": "object",
-        "_value": "[\"household_id\",\"num_rooms\",\"electricity\",\"water\",\"location_latitude\",\"location_longitude\",\"location_altitude\",\"location_accuracy\",\"owner\",\"youngest\"]"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "default",
         "_key": "defaultViewType",
         "_type": "string",
         "_value": "SPREADSHEET"
@@ -1459,7 +1569,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Household Survey\""
+        "_value": "{\"text\":\"Household Survey\"}"
       }
     ]
   }

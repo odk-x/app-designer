@@ -5,7 +5,9 @@
         "type": "text",
         "name": "OS_FOL_date",
         "display": {
-          "text": "Date of follow"
+          "prompt": {
+            "text": "Date of follow"
+          }
         },
         "_row_num": 2
       },
@@ -13,7 +15,9 @@
         "type": "text",
         "name": "OS_FOL_B_focal_AnimID",
         "display": {
-          "text": "ID of focal chimp"
+          "prompt": {
+            "text": "ID of focal chimp"
+          }
         },
         "_row_num": 3
       },
@@ -21,7 +25,9 @@
         "type": "text",
         "name": "OS_time_begin",
         "display": {
-          "text": "Begin time of encounter"
+          "prompt": {
+            "text": "Begin time of encounter"
+          }
         },
         "_row_num": 4
       },
@@ -29,7 +35,9 @@
         "type": "text",
         "name": "OS_time_end",
         "display": {
-          "text": "End time of encounter"
+          "prompt": {
+            "text": "End time of encounter"
+          }
         },
         "_row_num": 5
       },
@@ -37,7 +45,9 @@
         "type": "text",
         "name": "OS_OSL_local_species_name",
         "display": {
-          "text": "Local species of name of animal(s) encountered"
+          "prompt": {
+            "text": "Local species of name of animal(s) encountered"
+          }
         },
         "_row_num": 6
       },
@@ -45,7 +55,9 @@
         "type": "text",
         "name": "OS_local_species_name_written",
         "display": {
-          "text": "Local species name of animal(s) encountered"
+          "prompt": {
+            "text": "Local species name of animal(s) encountered"
+          }
         },
         "_row_num": 7
       },
@@ -53,7 +65,9 @@
         "type": "integer",
         "name": "OS_duration",
         "display": {
-          "text": "number of minutes that encounter lasted"
+          "prompt": {
+            "text": "number of minutes that encounter lasted"
+          }
         },
         "_row_num": 8
       },
@@ -61,7 +75,9 @@
         "type": "text",
         "name": "OS_comments",
         "display": {
-          "text": "Comments"
+          "prompt": {
+            "text": "Comments"
+          }
         },
         "_row_num": 9
       }
@@ -80,7 +96,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Other Species"
+          "title": {
+            "text": "Other Species"
+          }
         },
         "_row_num": 4
       }
@@ -103,16 +121,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -128,7 +144,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Other Species"
+          "title": {
+            "text": "Other Species"
+          }
         },
         "_row_num": 4
       },
@@ -144,7 +162,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -158,12 +178,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Other Species"
+          "title": {
+            "text": "Other Species"
+          }
         },
         "_row_num": 4
       }
     },
     "choices": {},
+    "table_specific_definitions": {
+      "_tokens": {}
+    },
     "queries": {},
     "calculates": {},
     "model": {
@@ -262,7 +287,9 @@
             "type": "text",
             "name": "OS_FOL_date",
             "display": {
-              "text": "Date of follow"
+              "prompt": {
+                "text": "Date of follow"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -275,7 +302,9 @@
             "type": "text",
             "name": "OS_FOL_B_focal_AnimID",
             "display": {
-              "text": "ID of focal chimp"
+              "prompt": {
+                "text": "ID of focal chimp"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -288,7 +317,9 @@
             "type": "text",
             "name": "OS_time_begin",
             "display": {
-              "text": "Begin time of encounter"
+              "prompt": {
+                "text": "Begin time of encounter"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -301,7 +332,9 @@
             "type": "text",
             "name": "OS_time_end",
             "display": {
-              "text": "End time of encounter"
+              "prompt": {
+                "text": "End time of encounter"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -314,7 +347,9 @@
             "type": "text",
             "name": "OS_OSL_local_species_name",
             "display": {
-              "text": "Local species of name of animal(s) encountered"
+              "prompt": {
+                "text": "Local species of name of animal(s) encountered"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -327,7 +362,9 @@
             "type": "text",
             "name": "OS_local_species_name_written",
             "display": {
-              "text": "Local species name of animal(s) encountered"
+              "prompt": {
+                "text": "Local species name of animal(s) encountered"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -340,7 +377,9 @@
             "type": "integer",
             "name": "OS_duration",
             "display": {
-              "text": "number of minutes that encounter lasted"
+              "prompt": {
+                "text": "number of minutes that encounter lasted"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -353,7 +392,9 @@
             "type": "text",
             "name": "OS_comments",
             "display": {
-              "text": "Comments"
+              "prompt": {
+                "text": "Comments"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -486,7 +527,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Other Species"
+              "title": {
+                "text": "Other Species"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -771,21 +814,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -795,6 +830,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -802,6 +861,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -862,7 +929,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Other Species\""
+        "_value": "{\"text\":\"Other Species\"}"
       }
     ]
   }

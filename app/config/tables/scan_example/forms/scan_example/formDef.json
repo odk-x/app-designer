@@ -15,7 +15,9 @@
         "type": "text",
         "name": "qrcode",
         "display": {
-          "text": "This text is encoded in the QR code."
+          "prompt": {
+            "text": "This text is encoded in the QR code."
+          }
         },
         "_row_num": 4
       },
@@ -37,7 +39,9 @@
         "type": "integer",
         "name": "stay",
         "display": {
-          "text": "Length of Stay (days):"
+          "prompt": {
+            "text": "Length of Stay (days):"
+          }
         },
         "_row_num": 8
       },
@@ -59,7 +63,9 @@
         "type": "text",
         "name": "name",
         "display": {
-          "text": "Name:"
+          "prompt": {
+            "text": "Name:"
+          }
         },
         "_row_num": 12
       },
@@ -81,7 +87,9 @@
         "type": "integer",
         "name": "roomNum",
         "display": {
-          "text": "Room Number:"
+          "prompt": {
+            "text": "Room Number:"
+          }
         },
         "_row_num": 16
       },
@@ -103,7 +111,9 @@
         "type": "text",
         "name": "address",
         "display": {
-          "text": "Home Address:"
+          "prompt": {
+            "text": "Home Address:"
+          }
         },
         "_row_num": 20
       },
@@ -125,7 +135,9 @@
         "type": "select_one",
         "name": "mon_chores",
         "display": {
-          "text": "Monday Chores"
+          "prompt": {
+            "text": "Monday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 24
@@ -148,7 +160,9 @@
         "type": "select_one",
         "name": "tues_chores",
         "display": {
-          "text": "Tuesday Chores"
+          "prompt": {
+            "text": "Tuesday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 28
@@ -171,7 +185,9 @@
         "type": "select_one",
         "name": "wed_chores",
         "display": {
-          "text": "Wed. Chores"
+          "prompt": {
+            "text": "Wed. Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 32
@@ -194,7 +210,9 @@
         "type": "select_one",
         "name": "thurs_chores",
         "display": {
-          "text": "Thursday Chores"
+          "prompt": {
+            "text": "Thursday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 36
@@ -217,7 +235,9 @@
         "type": "select_one",
         "name": "fri_chores",
         "display": {
-          "text": "Friday Chores"
+          "prompt": {
+            "text": "Friday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 40
@@ -240,7 +260,9 @@
         "type": "select_one",
         "name": "sat_chores",
         "display": {
-          "text": "Saturday Chores"
+          "prompt": {
+            "text": "Saturday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 44
@@ -263,7 +285,9 @@
         "type": "select_one",
         "name": "sun_chores",
         "display": {
-          "text": "Sunday Chores"
+          "prompt": {
+            "text": "Sunday Chores"
+          }
         },
         "values_list": "chores",
         "_row_num": 48
@@ -286,7 +310,9 @@
         "type": "text",
         "name": "comments",
         "display": {
-          "text": "Comments:"
+          "prompt": {
+            "text": "Comments:"
+          }
         },
         "_row_num": 52
       },
@@ -300,7 +326,9 @@
         "choice_list_name": "chores",
         "data_value": "dishes",
         "display": {
-          "text": "Wash dishes"
+          "title": {
+            "text": "Wash dishes"
+          }
         },
         "_row_num": 2
       },
@@ -308,7 +336,9 @@
         "choice_list_name": "chores",
         "data_value": "sweep",
         "display": {
-          "text": "Sweep patio"
+          "title": {
+            "text": "Sweep patio"
+          }
         },
         "_row_num": 3
       },
@@ -316,7 +346,9 @@
         "choice_list_name": "chores",
         "data_value": "cook",
         "display": {
-          "text": "Cook dinner"
+          "title": {
+            "text": "Cook dinner"
+          }
         },
         "_row_num": 4
       },
@@ -324,7 +356,9 @@
         "choice_list_name": "chores",
         "data_value": "roomba",
         "display": {
-          "text": "Program roomba"
+          "title": {
+            "text": "Program roomba"
+          }
         },
         "_row_num": 5
       }
@@ -367,7 +401,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "scan_example"
+          "title": {
+            "text": "scan_example"
+          }
         },
         "_row_num": 4
       }
@@ -414,16 +450,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -439,7 +473,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "scan_example"
+          "title": {
+            "text": "scan_example"
+          }
         },
         "_row_num": 4
       },
@@ -455,7 +491,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -469,7 +507,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "scan_example"
+          "title": {
+            "text": "scan_example"
+          }
         },
         "_row_num": 4
       }
@@ -480,7 +520,9 @@
           "choice_list_name": "chores",
           "data_value": "dishes",
           "display": {
-            "text": "Wash dishes"
+            "title": {
+              "text": "Wash dishes"
+            }
           },
           "_row_num": 2
         },
@@ -488,7 +530,9 @@
           "choice_list_name": "chores",
           "data_value": "sweep",
           "display": {
-            "text": "Sweep patio"
+            "title": {
+              "text": "Sweep patio"
+            }
           },
           "_row_num": 3
         },
@@ -496,7 +540,9 @@
           "choice_list_name": "chores",
           "data_value": "cook",
           "display": {
-            "text": "Cook dinner"
+            "title": {
+              "text": "Cook dinner"
+            }
           },
           "_row_num": 4
         },
@@ -504,11 +550,16 @@
           "choice_list_name": "chores",
           "data_value": "roomba",
           "display": {
-            "text": "Program roomba"
+            "title": {
+              "text": "Program roomba"
+            }
           },
           "_row_num": 5
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {},
     "calculates": {},
@@ -1022,7 +1073,9 @@
             "type": "text",
             "name": "qrcode",
             "display": {
-              "text": "This text is encoded in the QR code."
+              "prompt": {
+                "text": "This text is encoded in the QR code."
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -1046,7 +1099,9 @@
             "type": "integer",
             "name": "stay",
             "display": {
-              "text": "Length of Stay (days):"
+              "prompt": {
+                "text": "Length of Stay (days):"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -1070,7 +1125,9 @@
             "type": "text",
             "name": "name",
             "display": {
-              "text": "Name:"
+              "prompt": {
+                "text": "Name:"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -1094,7 +1151,9 @@
             "type": "integer",
             "name": "roomNum",
             "display": {
-              "text": "Room Number:"
+              "prompt": {
+                "text": "Room Number:"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -1118,7 +1177,9 @@
             "type": "text",
             "name": "address",
             "display": {
-              "text": "Home Address:"
+              "prompt": {
+                "text": "Home Address:"
+              }
             },
             "_row_num": 20,
             "__rowNum__": 19,
@@ -1142,7 +1203,9 @@
             "type": "select_one",
             "name": "mon_chores",
             "display": {
-              "text": "Monday Chores"
+              "prompt": {
+                "text": "Monday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 24,
@@ -1167,7 +1230,9 @@
             "type": "select_one",
             "name": "tues_chores",
             "display": {
-              "text": "Tuesday Chores"
+              "prompt": {
+                "text": "Tuesday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 28,
@@ -1192,7 +1257,9 @@
             "type": "select_one",
             "name": "wed_chores",
             "display": {
-              "text": "Wed. Chores"
+              "prompt": {
+                "text": "Wed. Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 32,
@@ -1217,7 +1284,9 @@
             "type": "select_one",
             "name": "thurs_chores",
             "display": {
-              "text": "Thursday Chores"
+              "prompt": {
+                "text": "Thursday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 36,
@@ -1242,7 +1311,9 @@
             "type": "select_one",
             "name": "fri_chores",
             "display": {
-              "text": "Friday Chores"
+              "prompt": {
+                "text": "Friday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 40,
@@ -1267,7 +1338,9 @@
             "type": "select_one",
             "name": "sat_chores",
             "display": {
-              "text": "Saturday Chores"
+              "prompt": {
+                "text": "Saturday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 44,
@@ -1292,7 +1365,9 @@
             "type": "select_one",
             "name": "sun_chores",
             "display": {
-              "text": "Sunday Chores"
+              "prompt": {
+                "text": "Sunday Chores"
+              }
             },
             "values_list": "chores",
             "_row_num": 48,
@@ -1317,7 +1392,9 @@
             "type": "text",
             "name": "comments",
             "display": {
-              "text": "Comments:"
+              "prompt": {
+                "text": "Comments:"
+              }
             },
             "_row_num": 52,
             "__rowNum__": 51,
@@ -1589,7 +1666,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "scan_example"
+              "title": {
+                "text": "scan_example"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -2729,21 +2808,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -2753,6 +2824,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -2760,6 +2855,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -2792,49 +2895,49 @@
         "_aspect": "fri_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "mon_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "sat_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "sun_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "thurs_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "tues_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "wed_chores",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"text\":\"Wash dishes\"},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"text\":\"Sweep patio\"},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"text\":\"Cook dinner\"},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"text\":\"Program roomba\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"chores\",\"data_value\":\"dishes\",\"display\":{\"title\":{\"text\":\"Wash dishes\"}},\"_row_num\":2},{\"choice_list_name\":\"chores\",\"data_value\":\"sweep\",\"display\":{\"title\":{\"text\":\"Sweep patio\"}},\"_row_num\":3},{\"choice_list_name\":\"chores\",\"data_value\":\"cook\",\"display\":{\"title\":{\"text\":\"Cook dinner\"}},\"_row_num\":4},{\"choice_list_name\":\"chores\",\"data_value\":\"roomba\",\"display\":{\"title\":{\"text\":\"Program roomba\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "FormType",
@@ -2876,7 +2979,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"scan_example\""
+        "_value": "{\"text\":\"scan_example\"}"
       },
       {
         "_partition": "Table",

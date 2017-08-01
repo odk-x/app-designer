@@ -1,6 +1,6 @@
+/* global $, odkTables, odkCommon */
+/* exported display */
 "use strict";
-
-var currentTab = 0;
 
 function display() { 
     updateForTab();
@@ -9,7 +9,7 @@ function display() {
             'click',
             function() {
                 // Note we're relying on geotagger's list view to be set.
-                odkTables.openTable(
+                odkTables.openTable(null,
                     'geotagger',
                     null,
                     null);

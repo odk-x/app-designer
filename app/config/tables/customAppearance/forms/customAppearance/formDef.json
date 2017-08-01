@@ -4,7 +4,9 @@
       {
         "type": "note",
         "display": {
-          "text": "This form uses the font-size and theme settings. The font-size setting changes the size of all the text in the form. The theme alters the overall look of the form."
+          "prompt": {
+            "text": "This form uses the font-size and theme settings. The font-size setting changes the size of all the text in the form. The theme alters the overall look of the form."
+          }
         },
         "hideInContents": true,
         "_row_num": 2
@@ -17,7 +19,9 @@
         "type": "text",
         "name": "name",
         "display": {
-          "text": "Enter your name"
+          "prompt": {
+            "text": "Enter your name"
+          }
         },
         "_row_num": 4
       },
@@ -26,7 +30,9 @@
         "values_list": "continents",
         "name": "visited_continents",
         "display": {
-          "text": "Which continents have you visited?"
+          "prompt": {
+            "text": "Which continents have you visited?"
+          }
         },
         "_row_num": 5
       },
@@ -44,7 +50,9 @@
         "values_list": "yesno",
         "name": "visited_seattle",
         "display": {
-          "text": "Have you visited Seattle?"
+          "prompt": {
+            "text": "Have you visited Seattle?"
+          }
         },
         "required": true,
         "_row_num": 8
@@ -56,8 +64,10 @@
       {
         "type": "note",
         "display": {
-          "text": "Additionally, there is a customStyles.css file included in the form directory that alters the background and the way images (like the one above) are displayed.",
-          "image": "dolphin.png"
+          "prompt": {
+            "text": "Additionally, there is a customStyles.css file included in the form directory that alters the background and the way images (like the one above) are displayed.",
+            "image": "dolphin.png"
+          }
         },
         "hideInContents": true,
         "_row_num": 10
@@ -72,8 +82,12 @@
         "type": "integer",
         "name": "rating",
         "display": {
-          "text": "How would you rate this survey?",
-          "hint": "1 is very bad. 10 is very good."
+          "prompt": {
+            "text": "How would you rate this survey?"
+          },
+          "hint": {
+            "text": "1 is very bad. 10 is very good."
+          }
         },
         "inputAttributes": {
           "type": "range",
@@ -88,7 +102,9 @@
         "choice_list_name": "yesno",
         "data_value": "yes",
         "display": {
-          "text": "yes"
+          "title": {
+            "text": "yes"
+          }
         },
         "_row_num": 2
       },
@@ -96,7 +112,9 @@
         "choice_list_name": "yesno",
         "data_value": "no",
         "display": {
-          "text": "no"
+          "title": {
+            "text": "no"
+          }
         },
         "_row_num": 3
       },
@@ -104,7 +122,9 @@
         "choice_list_name": "continents",
         "data_value": "NorthAmerica",
         "display": {
-          "text": "North America"
+          "title": {
+            "text": "North America"
+          }
         },
         "_row_num": 4
       },
@@ -112,7 +132,9 @@
         "choice_list_name": "continents",
         "data_value": "SouthAmerica",
         "display": {
-          "text": "South America"
+          "title": {
+            "text": "South America"
+          }
         },
         "_row_num": 5
       },
@@ -120,7 +142,9 @@
         "choice_list_name": "continents",
         "data_value": "Europe",
         "display": {
-          "text": "Europe"
+          "title": {
+            "text": "Europe"
+          }
         },
         "_row_num": 6
       },
@@ -128,7 +152,9 @@
         "choice_list_name": "continents",
         "data_value": "Africa",
         "display": {
-          "text": "Africa"
+          "title": {
+            "text": "Africa"
+          }
         },
         "_row_num": 7
       },
@@ -136,7 +162,9 @@
         "choice_list_name": "continents",
         "data_value": "Asia",
         "display": {
-          "text": "Asia"
+          "title": {
+            "text": "Asia"
+          }
         },
         "_row_num": 8
       },
@@ -144,7 +172,9 @@
         "choice_list_name": "continents",
         "data_value": "Australia",
         "display": {
-          "text": "Australia"
+          "title": {
+            "text": "Australia"
+          }
         },
         "_row_num": 9
       },
@@ -152,7 +182,9 @@
         "choice_list_name": "continents",
         "data_value": "Antarctica",
         "display": {
-          "text": "Antarctica"
+          "title": {
+            "text": "Antarctica"
+          }
         },
         "_row_num": 10
       }
@@ -171,7 +203,9 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Custom Appearance Form"
+          "title": {
+            "text": "Custom Appearance Form"
+          }
         },
         "_row_num": 4
       },
@@ -194,16 +228,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -219,7 +251,9 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Custom Appearance Form"
+          "title": {
+            "text": "Custom Appearance Form"
+          }
         },
         "_row_num": 4
       },
@@ -245,7 +279,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -259,7 +295,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Custom Appearance Form"
+          "title": {
+            "text": "Custom Appearance Form"
+          }
         },
         "_row_num": 4
       }
@@ -270,7 +308,9 @@
           "choice_list_name": "yesno",
           "data_value": "yes",
           "display": {
-            "text": "yes"
+            "title": {
+              "text": "yes"
+            }
           },
           "_row_num": 2
         },
@@ -278,7 +318,9 @@
           "choice_list_name": "yesno",
           "data_value": "no",
           "display": {
-            "text": "no"
+            "title": {
+              "text": "no"
+            }
           },
           "_row_num": 3
         }
@@ -288,7 +330,9 @@
           "choice_list_name": "continents",
           "data_value": "NorthAmerica",
           "display": {
-            "text": "North America"
+            "title": {
+              "text": "North America"
+            }
           },
           "_row_num": 4
         },
@@ -296,7 +340,9 @@
           "choice_list_name": "continents",
           "data_value": "SouthAmerica",
           "display": {
-            "text": "South America"
+            "title": {
+              "text": "South America"
+            }
           },
           "_row_num": 5
         },
@@ -304,7 +350,9 @@
           "choice_list_name": "continents",
           "data_value": "Europe",
           "display": {
-            "text": "Europe"
+            "title": {
+              "text": "Europe"
+            }
           },
           "_row_num": 6
         },
@@ -312,7 +360,9 @@
           "choice_list_name": "continents",
           "data_value": "Africa",
           "display": {
-            "text": "Africa"
+            "title": {
+              "text": "Africa"
+            }
           },
           "_row_num": 7
         },
@@ -320,7 +370,9 @@
           "choice_list_name": "continents",
           "data_value": "Asia",
           "display": {
-            "text": "Asia"
+            "title": {
+              "text": "Asia"
+            }
           },
           "_row_num": 8
         },
@@ -328,7 +380,9 @@
           "choice_list_name": "continents",
           "data_value": "Australia",
           "display": {
-            "text": "Australia"
+            "title": {
+              "text": "Australia"
+            }
           },
           "_row_num": 9
         },
@@ -336,11 +390,16 @@
           "choice_list_name": "continents",
           "data_value": "Antarctica",
           "display": {
-            "text": "Antarctica"
+            "title": {
+              "text": "Antarctica"
+            }
           },
           "_row_num": 10
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {},
     "calculates": {},
@@ -409,7 +468,9 @@
           {
             "type": "note",
             "display": {
-              "text": "This form uses the font-size and theme settings. The font-size setting changes the size of all the text in the form. The theme alters the overall look of the form."
+              "prompt": {
+                "text": "This form uses the font-size and theme settings. The font-size setting changes the size of all the text in the form. The theme alters the overall look of the form."
+              }
             },
             "hideInContents": true,
             "_row_num": 2,
@@ -423,7 +484,9 @@
             "type": "text",
             "name": "name",
             "display": {
-              "text": "Enter your name"
+              "prompt": {
+                "text": "Enter your name"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -437,7 +500,9 @@
             "values_list": "continents",
             "name": "visited_continents",
             "display": {
-              "text": "Which continents have you visited?"
+              "prompt": {
+                "text": "Which continents have you visited?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -451,7 +516,9 @@
             "values_list": "yesno",
             "name": "visited_seattle",
             "display": {
-              "text": "Have you visited Seattle?"
+              "prompt": {
+                "text": "Have you visited Seattle?"
+              }
             },
             "required": true,
             "_row_num": 8,
@@ -464,8 +531,10 @@
           {
             "type": "note",
             "display": {
-              "text": "Additionally, there is a customStyles.css file included in the form directory that alters the background and the way images (like the one above) are displayed.",
-              "image": "dolphin.png"
+              "prompt": {
+                "text": "Additionally, there is a customStyles.css file included in the form directory that alters the background and the way images (like the one above) are displayed.",
+                "image": "dolphin.png"
+              }
             },
             "hideInContents": true,
             "_row_num": 10,
@@ -479,8 +548,12 @@
             "type": "integer",
             "name": "rating",
             "display": {
-              "text": "How would you rate this survey?",
-              "hint": "1 is very bad. 10 is very good."
+              "prompt": {
+                "text": "How would you rate this survey?"
+              },
+              "hint": {
+                "text": "1 is very bad. 10 is very good."
+              }
             },
             "inputAttributes": {
               "type": "range",
@@ -642,7 +715,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Custom Appearance Form"
+              "title": {
+                "text": "Custom Appearance Form"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -900,21 +975,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -924,6 +991,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -931,6 +1022,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -963,14 +1062,14 @@
         "_aspect": "visited_continents",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"continents\",\"data_value\":\"NorthAmerica\",\"display\":{\"text\":\"North America\"},\"_row_num\":4},{\"choice_list_name\":\"continents\",\"data_value\":\"SouthAmerica\",\"display\":{\"text\":\"South America\"},\"_row_num\":5},{\"choice_list_name\":\"continents\",\"data_value\":\"Europe\",\"display\":{\"text\":\"Europe\"},\"_row_num\":6},{\"choice_list_name\":\"continents\",\"data_value\":\"Africa\",\"display\":{\"text\":\"Africa\"},\"_row_num\":7},{\"choice_list_name\":\"continents\",\"data_value\":\"Asia\",\"display\":{\"text\":\"Asia\"},\"_row_num\":8},{\"choice_list_name\":\"continents\",\"data_value\":\"Australia\",\"display\":{\"text\":\"Australia\"},\"_row_num\":9},{\"choice_list_name\":\"continents\",\"data_value\":\"Antarctica\",\"display\":{\"text\":\"Antarctica\"},\"_row_num\":10}]"
+        "_value": "[{\"choice_list_name\":\"continents\",\"data_value\":\"NorthAmerica\",\"display\":{\"title\":{\"text\":\"North America\"}},\"_row_num\":4},{\"choice_list_name\":\"continents\",\"data_value\":\"SouthAmerica\",\"display\":{\"title\":{\"text\":\"South America\"}},\"_row_num\":5},{\"choice_list_name\":\"continents\",\"data_value\":\"Europe\",\"display\":{\"title\":{\"text\":\"Europe\"}},\"_row_num\":6},{\"choice_list_name\":\"continents\",\"data_value\":\"Africa\",\"display\":{\"title\":{\"text\":\"Africa\"}},\"_row_num\":7},{\"choice_list_name\":\"continents\",\"data_value\":\"Asia\",\"display\":{\"title\":{\"text\":\"Asia\"}},\"_row_num\":8},{\"choice_list_name\":\"continents\",\"data_value\":\"Australia\",\"display\":{\"title\":{\"text\":\"Australia\"}},\"_row_num\":9},{\"choice_list_name\":\"continents\",\"data_value\":\"Antarctica\",\"display\":{\"title\":{\"text\":\"Antarctica\"}},\"_row_num\":10}]"
       },
       {
         "_partition": "Column",
         "_aspect": "visited_seattle",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"text\":\"yes\"},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"text\":\"no\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yesno\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yesno\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"no\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "FormType",
@@ -998,7 +1097,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Custom Appearance Form\""
+        "_value": "{\"text\":\"Custom Appearance Form\"}"
       }
     ]
   }

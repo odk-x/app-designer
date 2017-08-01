@@ -16,26 +16,28 @@ requirejs.config({
     waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon
-        jquery : 'libs/jquery.1.10.2',
-        bootstrap : 'libs/bootstrap-3.1.1-dist/js/bootstrap.min',
+        jquery : 'libs/jquery-3.2.1',
+		jquerymigrate: 'libs/jquery-migrate-3.0.0',
+        bootstrap : 'libs/bootstrap-3.3.7-dist/js/bootstrap.min',
         moment : 'libs/eonasdan/moment',
-        datetimepicker : 'libs/eonasdan/bootstrap-datetimepicker',
+        combodate : 'libs/combodate/js/combodate',
         spinner : 'libs/spinner/waitMe.min',
-        backbone : 'libs/backbone.1.0.0',
-        handlebars : 'libs/handlebars.1.0.0.rc.4',
-        underscore : 'libs/underscore.1.4.4',
+        backbone : 'libs/backbone.1.3.3',
+        handlebars : 'libs/handlebars-v4.0.5',
+        underscore : 'libs/underscore.1.8.3',
         text : 'libs/text.2.0.15',
         //mobiscroll : 'libs/mobiscroll-2.5.4/js/combined.min',
         // directory paths for resources
         img : 'img',
         templates : 'survey/templates',
-        translations : 'js/../../config/assets/framework/translations',
         // top-level objects
         screenTypes : 'survey/js/screenTypes',
         promptTypes : 'survey/js/promptTypes',
         // odkCommon.js -- stub directly loaded
         // odkData.js -- stub directly loaded
         // odkSurvey.js -- stub directly loaded
+        // odkSurveyStateManagement.js -- stub directly loaded
+        // odkTables.js -- stub directly loaded
         // functionality
         screens : 'survey/js/screens',
         prompts : 'survey/js/prompts',
@@ -48,7 +50,7 @@ requirejs.config({
         opendatakit : 'survey/js/opendatakit',
         handlebarsHelpers : 'survey/js/handlebarsHelpers',
         formulaFunctions : 'survey/js/formulaFunctions',
-        jqueryCsv : 'libs/jquery-csv/src/jquery.csv',
+        jqueryCsv : 'libs/jquery.csv-0.8.3',
         XRegExp : 'libs/XRegExp-All-3.0.0-pre-2014-12-24',
         d3 : 'libs/d3-amd/d3',
         mockDbif: 'js/mock/mockDbif',
@@ -65,12 +67,10 @@ requirejs.config({
         'moment': {
             deps: [],
         },
-        // datetimepicker already uses requirejs if it
-        // is available so it doesn't need to be shimmed
-        //'datetimepicker': {
-        //    deps: ['jquery', 'bootstrap', 'moment'],
-        //    exports: '$.fn.datetimepicker'
-        //},
+        'combodate': {
+            deps: ['jquery', 'moment'],
+            exports: '$.fn.combodate'
+        },
         'spinner': {
             deps: ['jquery'],
             exports: '$.fn.waitMe'
@@ -86,7 +86,7 @@ requirejs.config({
         'backbone': {
             //These script dependencies should be loaded before loading
             //backbone.js
-            deps: ['underscore', 'jquery'],
+            deps: ['underscore', 'jquery', 'jquerymigrate'],
             //Once loaded, use the global 'Backbone' as the
             //module value.
             exports: 'Backbone'
@@ -193,13 +193,13 @@ require(['jquery','XRegExp'],
 
             // and launch the framework...
             require([ 'spinner', 'databaseUtils', 'opendatakit', 'database', 'parsequery',
-                            'builder', 'controller', 'd3', 'jqueryCsv', 'datetimepicker'],
+                            'builder', 'controller', 'd3', 'jqueryCsv', 'combodate'],
             function(spinner,   databaseUtils, opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv) {
                 verifyLoad('main.require.framework.loaded',
-                    ['datetimepicker', 'spinner', 'databaseUtils', 'opendatakit', 'database','parsequery',
+                    ['combodate', 'spinner', 'databaseUtils', 'opendatakit', 'database','parsequery',
                             'builder', 'controller', 'd3', 'jqueryCsv'],
-                    [ $.fn.datetimepicker,   spinner,  databaseUtils,  opendatakit,   database,  parsequery,
+                    [ $.fn.combodate,   spinner,  databaseUtils,  opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv]);
 
 

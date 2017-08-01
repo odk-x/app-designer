@@ -3,8 +3,9 @@
  * create closures for callback functions to be invoked once a response is available
  * from the Java side.
  */
+ 
+ (function() {
 'use strict';
-/* jshint unused: vars */
 
 window.odkData = {
     _requestMap: [],
@@ -36,6 +37,15 @@ window.odkData = {
         that.getOdkDataIf().getRoles(req._callbackId);
     },
 
+    getDefaultGroup: function(successCallbackFn, failureCallbackFn) {
+        var that = this;
+        
+        var req = that.queueRequest('getDefaultGroup', successCallbackFn, failureCallbackFn);
+        console.log('getDefaultGroup cbId=' + req._callbackId);
+
+        that.getOdkDataIf().getDefaultGroup(req._callbackId);
+    },
+
     getUsers: function(successCallbackFn, failureCallbackFn) {
         var that = this;
         
@@ -61,22 +71,25 @@ window.odkData = {
 
         var req = that.queueRequest('query', successCallbackFn, failureCallbackFn);
 
-//         var needToIncludeKVS = that.needToIncludeKVSInQuery(tableId);
-//         console.log('odkData: query: Need to include the KVS is ' + needToIncludeKVS);
-
-        // Test always make this false
-        that.getOdkDataIf().query(tableId, whereClause, sqlBindParams, groupBy, 
+		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+		var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+				JSON.stringify(sqlBindParams);
+        that.getOdkDataIf().query(tableId, whereClause, sqlBindParamsJSON, groupBy, 
             having, orderByElementKey, orderByDirection, limit, offset, includeKVS, req._callbackId);
-//             having, orderByElementKey, orderByDirection, limit, offset, false, req._callbackId);
     },
 
     arbitraryQuery: function(tableId, sqlCommand, sqlBindParams, limit, offset, successCallbackFn, failureCallbackFn) {
         var that = this;
         
         var req = that.queueRequest('arbitraryQuery', successCallbackFn, failureCallbackFn);
+        var stringLimit = limit == null ? null : limit.toString();
+        var stringOffset = offset == null ? null : offset.toString();
         console.log('arbitraryQuery cbId=' + req._callbackId);
 
-        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParams, limit, offset, req._callbackId);
+		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+		var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+				JSON.stringify(sqlBindParams);
+        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParamsJSON, stringLimit, stringOffset, req._callbackId);
     },
 
     getRows: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
@@ -95,12 +108,14 @@ window.odkData = {
         that.getOdkDataIf().getMostRecentRow(tableId, rowId, req._callbackId);
     },
 
-	changeAccessFilterOfRow: function(tableId, filterType, filterValue, rowId, successCallbackFn, failureCallbackFn) {
+	changeAccessFilterOfRow: function(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify, 
+        groupPrivileged, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('changeAccessFilterOfRow', successCallbackFn, failureCallbackFn);
 
-    that.getOdkDataIf().changeAccessFilterOfRow(tableId, filterType, filterValue, rowId, req._callbackId);
+    that.getOdkDataIf().changeAccessFilterOfRow(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify,
+        groupPrivileged, rowId, req._callbackId);
     },
 	
     updateRow: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
@@ -207,6 +222,9 @@ window.odkData = {
                 if (errorMsg !== null && errorMsg !== undefined) {
                     console.log('odkData invokeCallbackFn error - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId +
                     ' error: ' + errorMsg);
+                    if (errorMsg.indexOf("org.opendatakit.exception.ActionNotAuthorize") === 0) {
+                        $('body').html("<h1>Access denied</h1>You do have access to perform this action. Please log in or check your credentials."); // TODO: TEMPORARY
+                    }
                     if(trxn._failureCbFn !== null && trxn._failureCbFn !== undefined) {
                         (trxn._failureCbFn)(errorMsg);
                     }
@@ -318,12 +336,8 @@ window.odkData = {
         };
 
         /**
-         * Returns ture if num is a number, else false.
+         * Returns ture if num is an integer, else false.
          */
-        var isNumber = function(num) {
-            return (typeof num === 'number');
-        };
-
         var isInteger = function(i) {
             return (typeof i === 'number' && Math.floor(i) === i);
         };
@@ -360,7 +374,7 @@ window.odkData = {
             // convert the elementPath to a unique elementKey (column name in database)
             // assumes the elementPath is a unit of retention in the database.
             getElementKey:function(elementPath) {
-                var that = this;
+                // var that = this;
                 var hackPath = elementPath.replace(/\./g, "_");
                 return hackPath;
             },
@@ -543,8 +557,10 @@ window.odkData = {
                 var i;
                 var key;
                 for ( key in elementKeyMap ) {
-                    i = elementKeyMap[key];
-                    columns[i] = key;
+					if (elementKeyMap.hasOwnProperty(key)) {
+						i = elementKeyMap[key];
+						columns[i] = key;
+					}
                 }
                 return columns;
             },
@@ -828,6 +844,7 @@ window.odkData = {
             },
 
             getTableDisplayName:function(tableId) {
+                var that = this;
                 var retVal = tableId;
 
                 if (that.resultObj === null || that.resultObj === undefined) {
@@ -858,7 +875,7 @@ window.odkData = {
         
             },
 
-            getIsTableLocked:function(tableId) {
+            getIsTableLocked:function() {
                 var that = this;
                 var retVal = false;
 
@@ -893,6 +910,8 @@ window.odkData = {
 
             getCanCreateRow:function() {
                 var that = this;
+                var retVal = false;
+				
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return retVal;
                 }
@@ -957,6 +976,25 @@ window.odkData = {
                 return that.resultObj.metadata.roles;
             },
 
+            // only valid after call to getDefaultGroup()
+            getDefaultGroup:function() {
+                var that = this;
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return null;
+                }
+
+                if (that.resultObj.metadata.defaultGroup === null || 
+                    that.resultObj.metadata.defaultGroup === undefined) {
+                    return null;
+                }
+
+                return that.resultObj.metadata.defaultGroup;
+            },
+
             // only valid after call to getUsers()
             getUsers:function() {
                 var that = this;
@@ -981,3 +1019,4 @@ window.odkData = {
         return pub;
     }
 };
+ })();

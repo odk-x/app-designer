@@ -33,7 +33,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 9
       },
       {
@@ -43,7 +44,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 10
       },
       {
@@ -53,7 +55,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 11
       },
       {
@@ -64,7 +67,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 12
       },
       {
@@ -74,7 +78,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 13
       },
       {
@@ -84,7 +89,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 14
       },
       {
@@ -94,7 +100,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 15
       },
       {
@@ -104,7 +111,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 16
       },
       {
@@ -114,7 +122,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 17
       },
       {
@@ -124,7 +133,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 18
       },
       {
@@ -134,7 +144,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 19
       },
       {
@@ -144,7 +155,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 20
       },
       {
@@ -154,7 +166,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 21
       },
       {
@@ -164,7 +177,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 22
       },
       {
@@ -174,7 +188,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 23
       },
       {
@@ -184,7 +199,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 24
       },
       {
@@ -194,7 +210,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 25
       }
     ],
@@ -204,7 +221,9 @@
         "type": "text",
         "name": "household_id",
         "display": {
-          "text": "Unique barcode ID or locator designation for this household"
+          "prompt": {
+            "text": "Unique barcode ID or locator designation for this household"
+          }
         },
         "_row_num": 2
       },
@@ -243,7 +262,9 @@
         "choice_list_name": "no_yes",
         "data_value": "no",
         "display": {
-          "text": "No"
+          "title": {
+            "text": "No"
+          }
         },
         "_row_num": 2
       },
@@ -251,7 +272,9 @@
         "choice_list_name": "no_yes",
         "data_value": "yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": "Yes"
+          }
         },
         "_row_num": 3
       },
@@ -259,7 +282,9 @@
         "choice_list_name": "buy_bake",
         "data_value": "buy",
         "display": {
-          "text": "1. Buy"
+          "title": {
+            "text": "1. Buy"
+          }
         },
         "_row_num": 4
       },
@@ -267,7 +292,9 @@
         "choice_list_name": "buy_bake",
         "data_value": "bake",
         "display": {
-          "text": "2. Bake"
+          "title": {
+            "text": "2. Bake"
+          }
         },
         "_row_num": 5
       },
@@ -275,7 +302,9 @@
         "choice_list_name": "languages",
         "data_value": "amharic",
         "display": {
-          "text": "1. Amharic"
+          "title": {
+            "text": "1. Amharic"
+          }
         },
         "_row_num": 6
       },
@@ -283,7 +312,9 @@
         "choice_list_name": "languages",
         "data_value": "english",
         "display": {
-          "text": "2. English"
+          "title": {
+            "text": "2. English"
+          }
         },
         "_row_num": 7
       },
@@ -291,7 +322,9 @@
         "choice_list_name": "languages",
         "data_value": "oromiffa",
         "display": {
-          "text": "3. Oromiffa"
+          "title": {
+            "text": "3. Oromiffa"
+          }
         },
         "_row_num": 8
       },
@@ -299,7 +332,9 @@
         "choice_list_name": "reasons",
         "data_value": "lack_money",
         "display": {
-          "text": "Lack of money"
+          "title": {
+            "text": "Lack of money"
+          }
         },
         "_row_num": 9
       },
@@ -307,7 +342,9 @@
         "choice_list_name": "reasons",
         "data_value": "expensive",
         "display": {
-          "text": "Expensive"
+          "title": {
+            "text": "Expensive"
+          }
         },
         "_row_num": 10
       },
@@ -315,7 +352,9 @@
         "choice_list_name": "reasons",
         "data_value": "too_far",
         "display": {
-          "text": "Too far"
+          "title": {
+            "text": "Too far"
+          }
         },
         "_row_num": 11
       },
@@ -323,7 +362,9 @@
         "choice_list_name": "reasons",
         "data_value": "medicine_belief",
         "display": {
-          "text": "Do not believe in medicine"
+          "title": {
+            "text": "Do not believe in medicine"
+          }
         },
         "_row_num": 12
       },
@@ -331,7 +372,9 @@
         "choice_list_name": "reasons",
         "data_value": "lack_health_pro",
         "display": {
-          "text": "Lack of health professional"
+          "title": {
+            "text": "Lack of health professional"
+          }
         },
         "_row_num": 13
       },
@@ -339,7 +382,9 @@
         "choice_list_name": "reasons",
         "data_value": "poor_quality",
         "display": {
-          "text": "Poor quality/service"
+          "title": {
+            "text": "Poor quality/service"
+          }
         },
         "_row_num": 14
       },
@@ -347,7 +392,9 @@
         "choice_list_name": "reasons",
         "data_value": "no_need",
         "display": {
-          "text": "Did not require medical assistance"
+          "title": {
+            "text": "Did not require medical assistance"
+          }
         },
         "_row_num": 15
       },
@@ -355,7 +402,9 @@
         "choice_list_name": "cooking_injury_types",
         "data_value": "burns",
         "display": {
-          "text": "Burns"
+          "title": {
+            "text": "Burns"
+          }
         },
         "_row_num": 16
       },
@@ -363,7 +412,9 @@
         "choice_list_name": "cooking_injury_types",
         "data_value": "cuts",
         "display": {
-          "text": "Cuts"
+          "title": {
+            "text": "Cuts"
+          }
         },
         "_row_num": 17
       },
@@ -371,7 +422,9 @@
         "choice_list_name": "severity",
         "data_value": "light",
         "display": {
-          "text": "Light (No scar)"
+          "title": {
+            "text": "Light (No scar)"
+          }
         },
         "_row_num": 18
       },
@@ -379,7 +432,9 @@
         "choice_list_name": "severity",
         "data_value": "moderate",
         "display": {
-          "text": "Moderate (moderate scar)"
+          "title": {
+            "text": "Moderate (moderate scar)"
+          }
         },
         "_row_num": 19
       },
@@ -387,7 +442,9 @@
         "choice_list_name": "severity",
         "data_value": "serious",
         "display": {
-          "text": "Serious (larger scar)"
+          "title": {
+            "text": "Serious (larger scar)"
+          }
         },
         "_row_num": 20
       },
@@ -395,7 +452,9 @@
         "choice_list_name": "burn_types",
         "data_value": "fell",
         "display": {
-          "text": "Fell in the fire"
+          "title": {
+            "text": "Fell in the fire"
+          }
         },
         "_row_num": 21
       },
@@ -403,7 +462,9 @@
         "choice_list_name": "burn_types",
         "data_value": "contact",
         "display": {
-          "text": "Contact with stove"
+          "title": {
+            "text": "Contact with stove"
+          }
         },
         "_row_num": 22
       },
@@ -411,7 +472,9 @@
         "choice_list_name": "burn_types",
         "data_value": "object",
         "display": {
-          "text": "Burned with other hot object"
+          "title": {
+            "text": "Burned with other hot object"
+          }
         },
         "_row_num": 23
       },
@@ -419,7 +482,9 @@
         "choice_list_name": "burn_types",
         "data_value": "water",
         "display": {
-          "text": "Container with hot water was spilled"
+          "title": {
+            "text": "Container with hot water was spilled"
+          }
         },
         "_row_num": 24
       }
@@ -443,14 +508,18 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Ethiopia Household Data"
+          "title": {
+            "text": "Ethiopia Household Data"
+          }
         },
         "_row_num": 5
       },
       {
         "setting_name": "section2",
         "display": {
-          "title": "Section 2"
+          "title": {
+            "text": "Section 2"
+          }
         },
         "comments": "When adding more section worksheets, make sure to update their display.title",
         "_row_num": 6
@@ -458,42 +527,54 @@
       {
         "setting_name": "section3",
         "display": {
-          "title": "Section 3"
+          "title": {
+            "text": "Section 3"
+          }
         },
         "_row_num": 7
       },
       {
         "setting_name": "section4",
         "display": {
-          "title": "Section 4"
+          "title": {
+            "text": "Section 4"
+          }
         },
         "_row_num": 8
       },
       {
         "setting_name": "section5",
         "display": {
-          "title": "Section 5"
+          "title": {
+            "text": "Section 5"
+          }
         },
         "_row_num": 9
       },
       {
         "setting_name": "section8",
         "display": {
-          "title": "Section 8"
+          "title": {
+            "text": "Section 8"
+          }
         },
         "_row_num": 10
       },
       {
         "setting_name": "section9",
         "display": {
-          "title": "Section 9"
+          "title": {
+            "text": "Section 9"
+          }
         },
         "_row_num": 11
       },
       {
         "setting_name": "section10",
         "display": {
-          "title": "Section 10"
+          "title": {
+            "text": "Section 10"
+          }
         },
         "_row_num": 12
       },
@@ -507,8 +588,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 2: HOUSEHOLD DEMOGRAPHICS",
-          "hint": "Ask of household head or knowledgeable household member"
+          "prompt": {
+            "text": "Section 2: HOUSEHOLD DEMOGRAPHICS"
+          },
+          "hint": {
+            "text": "Ask of household head or knowledgeable household member"
+          }
         },
         "_row_num": 2
       },
@@ -517,9 +602,15 @@
         "type": "linked_table",
         "values_list": "section2",
         "display": {
-          "text": "Make a list of all individuals who normally live in this household",
-          "hint": "Listing Order: (head, spouse, children not married, children married, other relatives, domestic servant, employed guard, non-relatives)",
-          "new_instance_text": "Add House Member"
+          "prompt": {
+            "text": "Make a list of all individuals who normally live in this household"
+          },
+          "hint": {
+            "text": "Listing Order: (head, spouse, children not married, children married, other relatives, domestic servant, employed guard, non-relatives)"
+          },
+          "new_instance_label": {
+            "text": "Add House Member"
+          }
         },
         "_row_num": 3
       },
@@ -528,7 +619,9 @@
         "type": "linked_table",
         "values_list": "section2_other",
         "display": {
-          "text": "Enter other info for specified person:",
+          "prompt": {
+            "text": "Enter other info for specified person:"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -539,7 +632,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 3: Education"
+          "prompt": {
+            "text": "Section 3: Education"
+          }
         },
         "_row_num": 2
       },
@@ -547,7 +642,9 @@
         "type": "linked_table",
         "values_list": "section3",
         "display": {
-          "text": "Ask for members aged 5 years and above",
+          "prompt": {
+            "text": "Ask for members aged 5 years and above"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -558,7 +655,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 4: Primary Occupation"
+          "prompt": {
+            "text": "Section 4: Primary Occupation"
+          }
         },
         "_row_num": 2
       },
@@ -566,7 +665,9 @@
         "type": "linked_table",
         "values_list": "section4",
         "display": {
-          "text": "Ask all questions to all members of the house",
+          "prompt": {
+            "text": "Ask all questions to all members of the house"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -578,7 +679,9 @@
         "values_list": "roster",
         "name": "primary_cook",
         "display": {
-          "text": "Who is the primary cook for the household?",
+          "prompt": {
+            "text": "Who is the primary cook for the household?"
+          },
           "hide_add_instance": "Only Select One"
         },
         "_row_num": 4
@@ -588,7 +691,9 @@
         "values_list": "roster",
         "name": "qa_cooking_1",
         "display": {
-          "text": "Who is very able to answer questions about cooking for the household?"
+          "prompt": {
+            "text": "Who is very able to answer questions about cooking for the household?"
+          }
         },
         "_row_num": 5
       },
@@ -597,7 +702,9 @@
         "values_list": "roster",
         "name": "qa_cooking_2",
         "display": {
-          "text": "Who is somewhat able to answer questions about cooking for the household?"
+          "prompt": {
+            "text": "Who is somewhat able to answer questions about cooking for the household?"
+          }
         },
         "_row_num": 6
       },
@@ -606,7 +713,9 @@
         "values_list": "roster",
         "name": "qa_food_expense_1",
         "display": {
-          "text": "Who is very able to answer questions about food expenditures?"
+          "prompt": {
+            "text": "Who is very able to answer questions about food expenditures?"
+          }
         },
         "_row_num": 7
       },
@@ -615,7 +724,9 @@
         "values_list": "roster",
         "name": "qa_food_expense_2",
         "display": {
-          "text": "Who is somewhat able to answer questions about food expenditures?"
+          "prompt": {
+            "text": "Who is somewhat able to answer questions about food expenditures?"
+          }
         },
         "_row_num": 8
       },
@@ -624,7 +735,9 @@
         "values_list": "roster",
         "name": "qa_fuel_1",
         "display": {
-          "text": "Who is very able to answer questions about fuel expenditures and collection?"
+          "prompt": {
+            "text": "Who is very able to answer questions about fuel expenditures and collection?"
+          }
         },
         "_row_num": 9
       },
@@ -633,7 +746,9 @@
         "values_list": "roster",
         "name": "qa_fuel_2",
         "display": {
-          "text": "Who is somewhat able to answer questions about fuel expenditures and collection?"
+          "prompt": {
+            "text": "Who is somewhat able to answer questions about fuel expenditures and collection?"
+          }
         },
         "_row_num": 10
       },
@@ -642,7 +757,9 @@
         "values_list": "roster",
         "name": "qa_fuel_purchase",
         "display": {
-          "text": "Who in the household makes any fuel purchases?",
+          "prompt": {
+            "text": "Who in the household makes any fuel purchases?"
+          },
           "hide_add_instance": "If no one makes fuel purchases, leave blank"
         },
         "_row_num": 11
@@ -652,7 +769,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 5: Tobacco Smoke Exposure"
+          "prompt": {
+            "text": "Section 5: Tobacco Smoke Exposure"
+          }
         },
         "_row_num": 2
       },
@@ -661,7 +780,9 @@
         "values_list": "no_yes",
         "name": "ever_smoked",
         "display": {
-          "text": "Has anyone in the household ever smoked?"
+          "prompt": {
+            "text": "Has anyone in the household ever smoked?"
+          }
         },
         "_row_num": 3
       },
@@ -675,7 +796,9 @@
         "values_list": "roster",
         "name": "who_smoked",
         "display": {
-          "text": "Who has ever smoked?"
+          "prompt": {
+            "text": "Who has ever smoked?"
+          }
         },
         "_row_num": 5
       },
@@ -688,7 +811,9 @@
         "values_list": "no_yes",
         "name": "in_room_smoke",
         "display": {
-          "text": "In the past 7 days, has anyone in the household been in the same room with someone smoking tobacco or other substances?"
+          "prompt": {
+            "text": "In the past 7 days, has anyone in the household been in the same room with someone smoking tobacco or other substances?"
+          }
         },
         "_row_num": 7
       },
@@ -702,7 +827,9 @@
         "values_list": "roster",
         "name": "who_in_room",
         "display": {
-          "text": "Who has been in the same room?"
+          "prompt": {
+            "text": "Who has been in the same room?"
+          }
         },
         "_row_num": 9
       },
@@ -724,7 +851,9 @@
         "type": "linked_table",
         "values_list": "section5",
         "display": {
-          "text": "Ask for all house members who were reported as ever smoking",
+          "prompt": {
+            "text": "Ask for all house members who were reported as ever smoking"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -740,8 +869,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 8.2: Time Use and Labor",
-          "hint": "INSTRUCTIONS: Only ask questions if member is 5 years and older (LSMS is 7+). For children under 10 years, ask their caregiver the questions"
+          "prompt": {
+            "text": "Section 8.2: Time Use and Labor"
+          },
+          "hint": {
+            "text": "INSTRUCTIONS: Only ask questions if member is 5 years and older (LSMS is 7+). For children under 10 years, ask their caregiver the questions"
+          }
         },
         "_row_num": 2
       },
@@ -750,7 +883,9 @@
         "values_list": "roster",
         "name": "spent_time_fuel_collection",
         "display": {
-          "text": "Who spent any time in the last 7 days in any fuel collection (excluding purchased fuel) or fuel preparation activities?"
+          "prompt": {
+            "text": "Who spent any time in the last 7 days in any fuel collection (excluding purchased fuel) or fuel preparation activities?"
+          }
         },
         "_row_num": 3
       },
@@ -764,7 +899,9 @@
         "type": "linked_table",
         "values_list": "section8",
         "display": {
-          "text": "Enter information for each person listed as having spent time collecting or preparing fuel in the last 7 days:",
+          "prompt": {
+            "text": "Enter information for each person listed as having spent time collecting or preparing fuel in the last 7 days:"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -776,7 +913,9 @@
         "values_list": "no_yes",
         "name": "fuel_sold",
         "display": {
-          "text": "Was any of the fuel material sold for income?"
+          "prompt": {
+            "text": "Was any of the fuel material sold for income?"
+          }
         },
         "_row_num": 6
       },
@@ -789,8 +928,12 @@
         "type": "integer",
         "name": "fuel_income",
         "display": {
-          "text": "How much was the income from fuel sales for the last 7 days?",
-          "hint": "(ETB)"
+          "prompt": {
+            "text": "How much was the income from fuel sales for the last 7 days?"
+          },
+          "hint": {
+            "text": "(ETB)"
+          }
         },
         "_row_num": 8
       },
@@ -807,7 +950,9 @@
         "values_list": "roster",
         "name": "made_fuel_purchases",
         "display": {
-          "text": "Who made any fuel purchases in the last 7 days?"
+          "prompt": {
+            "text": "Who made any fuel purchases in the last 7 days?"
+          }
         },
         "_row_num": 11
       },
@@ -820,7 +965,9 @@
         "type": "linked_table",
         "values_list": "section8_p2",
         "display": {
-          "text": "Enter information for each person listed as having made fuel purchases in the last 7 days:",
+          "prompt": {
+            "text": "Enter information for each person listed as having made fuel purchases in the last 7 days:"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -836,7 +983,9 @@
         "values_list": "roster",
         "name": "spent_time_transport_wood",
         "display": {
-          "text": "Who spent any time transporting purchased wood?"
+          "prompt": {
+            "text": "Who spent any time transporting purchased wood?"
+          }
         },
         "_row_num": 15
       },
@@ -849,7 +998,9 @@
         "type": "linked_table",
         "values_list": "section8_p3",
         "display": {
-          "text": "Enter information for each person listed as having trasported purchased wood:",
+          "prompt": {
+            "text": "Enter information for each person listed as having trasported purchased wood:"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -865,7 +1016,9 @@
         "values_list": "roster",
         "name": "spent_time_cooking",
         "display": {
-          "text": "Who has spent any time cooking, baking, or preparing food in the last 7 days?"
+          "prompt": {
+            "text": "Who has spent any time cooking, baking, or preparing food in the last 7 days?"
+          }
         },
         "_row_num": 19
       },
@@ -878,7 +1031,9 @@
         "type": "linked_table",
         "values_list": "section8_p4",
         "display": {
-          "text": "Enter information for each person who spent time cooking, baking or preparing food in the last 7 days:",
+          "prompt": {
+            "text": "Enter information for each person who spent time cooking, baking or preparing food in the last 7 days:"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -894,7 +1049,9 @@
         "values_list": "roster",
         "name": "spent_time_collecting_water",
         "display": {
-          "text": "Who in the household spent any time collecting water in the last 7 days?"
+          "prompt": {
+            "text": "Who in the household spent any time collecting water in the last 7 days?"
+          }
         },
         "_row_num": 23
       },
@@ -907,7 +1064,9 @@
         "type": "linked_table",
         "values_list": "section8_p5",
         "display": {
-          "text": "Enter information for each person who collected water in the last 7 days?",
+          "prompt": {
+            "text": "Enter information for each person who collected water in the last 7 days?"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -921,7 +1080,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 8.3"
+          "prompt": {
+            "text": "Section 8.3"
+          }
         },
         "_row_num": 27
       },
@@ -934,7 +1095,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 9.1: Health"
+          "prompt": {
+            "text": "Section 9.1: Health"
+          }
         },
         "_row_num": 2
       },
@@ -943,7 +1106,9 @@
         "values_list": "no_yes",
         "name": "received_medical_care",
         "display": {
-          "text": "Has anyone received medical assistance or consulted health institutions or health practitioners, including traditional healers, during the last 2 months (regardless of whether sick or not)?"
+          "prompt": {
+            "text": "Has anyone received medical assistance or consulted health institutions or health practitioners, including traditional healers, during the last 2 months (regardless of whether sick or not)?"
+          }
         },
         "_row_num": 3
       },
@@ -957,7 +1122,9 @@
         "values_list": "roster",
         "name": "who_received_med_assistance",
         "display": {
-          "text": "Who received medical assistance?"
+          "prompt": {
+            "text": "Who received medical assistance?"
+          }
         },
         "_row_num": 5
       },
@@ -965,7 +1132,9 @@
         "type": "linked_table",
         "values_list": "section91",
         "display": {
-          "text": "Ask for all people listed as having received medical assistance",
+          "prompt": {
+            "text": "Ask for all people listed as having received medical assistance"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -981,7 +1150,9 @@
         "values_list": "reasons",
         "name": "reasons_not",
         "display": {
-          "text": "What was the main reason why not?"
+          "prompt": {
+            "text": "What was the main reason why not?"
+          }
         },
         "_row_num": 8
       },
@@ -994,7 +1165,9 @@
         "values_list": "no_yes",
         "name": "faced_health_problems",
         "display": {
-          "text": "Has anyone in the household faced any health problems in the last 2 months?"
+          "prompt": {
+            "text": "Has anyone in the household faced any health problems in the last 2 months?"
+          }
         },
         "_row_num": 10
       },
@@ -1008,7 +1181,9 @@
         "values_list": "roster",
         "name": "who_faced_health_problems",
         "display": {
-          "text": "Who has faced any health problems in the last 2 months?"
+          "prompt": {
+            "text": "Who has faced any health problems in the last 2 months?"
+          }
         },
         "_row_num": 12
       },
@@ -1016,7 +1191,9 @@
         "type": "linked_table",
         "values_list": "section91_p2",
         "display": {
-          "text": "Ask for all people listed as having faced health problems",
+          "prompt": {
+            "text": "Ask for all people listed as having faced health problems"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -1030,7 +1207,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 9.2: Health"
+          "prompt": {
+            "text": "Section 9.2: Health"
+          }
         },
         "_row_num": 16
       },
@@ -1039,7 +1218,9 @@
         "values_list": "no_yes",
         "name": "cooking_injuries",
         "display": {
-          "text": "In the past 2 months, has anyone in the household sustained any injuries specifically related to cooking, such as burns or cuts?"
+          "prompt": {
+            "text": "In the past 2 months, has anyone in the household sustained any injuries specifically related to cooking, such as burns or cuts?"
+          }
         },
         "_row_num": 17
       },
@@ -1053,7 +1234,9 @@
         "values_list": "cooking_injury_types",
         "name": "cooking_injury_type",
         "display": {
-          "text": "What type of injury?"
+          "prompt": {
+            "text": "What type of injury?"
+          }
         },
         "_row_num": 19
       },
@@ -1062,7 +1245,9 @@
         "values_list": "severity",
         "name": "cooking_injury_severity",
         "display": {
-          "text": "How serious was the injury?"
+          "prompt": {
+            "text": "How serious was the injury?"
+          }
         },
         "_row_num": 20
       },
@@ -1076,7 +1261,9 @@
         "values_list": "burn_types",
         "name": "burn_type",
         "display": {
-          "text": "How did he/she get burned?"
+          "prompt": {
+            "text": "How did he/she get burned?"
+          }
         },
         "_row_num": 22
       },
@@ -1089,7 +1276,9 @@
         "type": "text",
         "name": "stove_type",
         "display": {
-          "text": "Specify the type of stove?"
+          "prompt": {
+            "text": "Specify the type of stove?"
+          }
         },
         "_row_num": 24
       },
@@ -1108,7 +1297,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 9.3 Health"
+          "prompt": {
+            "text": "Section 9.3 Health"
+          }
         },
         "_row_num": 29
       },
@@ -1117,7 +1308,9 @@
         "values_list": "no_yes",
         "name": "fuel_injuries",
         "display": {
-          "text": "In the past 2 months, has anyone in the household sustained any injuries specifically related to fuel collect/preparation?"
+          "prompt": {
+            "text": "In the past 2 months, has anyone in the household sustained any injuries specifically related to fuel collect/preparation?"
+          }
         },
         "_row_num": 30
       },
@@ -1130,7 +1323,9 @@
         "type": "linked_table",
         "values_list": "section93",
         "display": {
-          "text": "Specify injury",
+          "prompt": {
+            "text": "Specify injury"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -1145,8 +1340,12 @@
         "type": "linked_table",
         "values_list": "section93_p2",
         "display": {
-          "text": "For all members who report cooking or being located in the cooking space when the fire is lit.",
-          "hint": "For individuals <10 or who are not present, an adult or caregiver can answer for them",
+          "prompt": {
+            "text": "For all members who report cooking or being located in the cooking space when the fire is lit."
+          },
+          "hint": {
+            "text": "For individuals <10 or who are not present, an adult or caregiver can answer for them"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -1155,7 +1354,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 9.4 Health"
+          "prompt": {
+            "text": "Section 9.4 Health"
+          }
         },
         "_row_num": 35
       },
@@ -1163,7 +1364,9 @@
         "type": "linked_table",
         "values_list": "section94",
         "display": {
-          "text": "Ask house member if present",
+          "prompt": {
+            "text": "Ask house member if present"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -1172,7 +1375,9 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 9.5 Health"
+          "prompt": {
+            "text": "Section 9.5 Health"
+          }
         },
         "_row_num": 37
       },
@@ -1180,7 +1385,9 @@
         "type": "linked_table",
         "values_list": "section95",
         "display": {
-          "text": "Ask house member if present",
+          "prompt": {
+            "text": "Ask house member if present"
+          },
           "hide_add_instance": true,
           "hide_delete_button": true
         },
@@ -1191,8 +1398,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Section 10: Household Questions",
-          "hint": "IDEALLY, THE FOLLOWING QUESTIONS SHOULD BE ANSWERED BY THE “MOST KNOWLEDGEABLE” PERSON. In general, this will probably be the primary cook for the household, but in some cases it may also be the head of household or another person. If this individual is not available, another member indicated as able to answer these questions may be asked."
+          "prompt": {
+            "text": "Section 10: Household Questions"
+          },
+          "hint": {
+            "text": "IDEALLY, THE FOLLOWING QUESTIONS SHOULD BE ANSWERED BY THE “MOST KNOWLEDGEABLE” PERSON. In general, this will probably be the primary cook for the household, but in some cases it may also be the head of household or another person. If this individual is not available, another member indicated as able to answer these questions may be asked."
+          }
         },
         "_row_num": 2
       },
@@ -1201,7 +1412,9 @@
         "values_list": "languages",
         "name": "primary_languages",
         "display": {
-          "text": "What are the primary languages used in the household?"
+          "prompt": {
+            "text": "What are the primary languages used in the household?"
+          }
         },
         "_row_num": 3
       },
@@ -1215,7 +1428,9 @@
         "type": "text",
         "name": "religions_practiced",
         "display": {
-          "text": "What, if any, religions are practiced by members of the household?"
+          "prompt": {
+            "text": "What, if any, religions are practiced by members of the household?"
+          }
         },
         "_row_num": 5
       },
@@ -1229,7 +1444,9 @@
         "values_list": "no_yes",
         "name": "religion_affects_habits",
         "display": {
-          "text": "Does it affect your cooking habits?"
+          "prompt": {
+            "text": "Does it affect your cooking habits?"
+          }
         },
         "_row_num": 7
       },
@@ -1246,7 +1463,9 @@
         "values_list": "no_yes",
         "name": "fasting",
         "display": {
-          "text": "Do members of this household engage in any fasting practices?"
+          "prompt": {
+            "text": "Do members of this household engage in any fasting practices?"
+          }
         },
         "_row_num": 10
       },
@@ -1259,7 +1478,9 @@
         "values_list": "no_yes",
         "name": "injera_eat",
         "display": {
-          "text": "Do members of this household typically eat injera"
+          "prompt": {
+            "text": "Do members of this household typically eat injera"
+          }
         },
         "_row_num": 12
       },
@@ -1273,7 +1494,9 @@
         "values_list": "buy_bake",
         "name": "injera_buy_bake",
         "display": {
-          "text": "Does the household primarily buy or bake injera"
+          "prompt": {
+            "text": "Does the household primarily buy or bake injera"
+          }
         },
         "_row_num": 14
       },
@@ -1290,7 +1513,9 @@
         "values_list": "no_yes",
         "name": "celebrate_holiday",
         "display": {
-          "text": "Has the household celebrated any holidays or special events in the past 7 days?"
+          "prompt": {
+            "text": "Has the household celebrated any holidays or special events in the past 7 days?"
+          }
         },
         "_row_num": 17
       },
@@ -1304,7 +1529,9 @@
         "type": "text",
         "name": "which_holiday",
         "display": {
-          "text": "Which holidays or special events?"
+          "prompt": {
+            "text": "Which holidays or special events?"
+          }
         },
         "_row_num": 19
       },
@@ -1317,7 +1544,9 @@
         "values_list": "no_yes",
         "name": "cooking_commercial",
         "display": {
-          "text": "Does any member of the household engage in cooking for commercial purposes?"
+          "prompt": {
+            "text": "Does any member of the household engage in cooking for commercial purposes?"
+          }
         },
         "_row_num": 21
       },
@@ -1326,7 +1555,9 @@
         "values_list": "no_yes",
         "name": "produce_charcoal",
         "display": {
-          "text": "Does any member of the household produce charcoal?"
+          "prompt": {
+            "text": "Does any member of the household produce charcoal?"
+          }
         },
         "_row_num": 22
       }
@@ -1339,16 +1570,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -1369,14 +1598,18 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Ethiopia Household Data"
+          "title": {
+            "text": "Ethiopia Household Data"
+          }
         },
         "_row_num": 5
       },
       "section2": {
         "setting_name": "section2",
         "display": {
-          "title": "Section 2"
+          "title": {
+            "text": "Section 2"
+          }
         },
         "comments": "When adding more section worksheets, make sure to update their display.title",
         "_row_num": 6
@@ -1384,42 +1617,54 @@
       "section3": {
         "setting_name": "section3",
         "display": {
-          "title": "Section 3"
+          "title": {
+            "text": "Section 3"
+          }
         },
         "_row_num": 7
       },
       "section4": {
         "setting_name": "section4",
         "display": {
-          "title": "Section 4"
+          "title": {
+            "text": "Section 4"
+          }
         },
         "_row_num": 8
       },
       "section5": {
         "setting_name": "section5",
         "display": {
-          "title": "Section 5"
+          "title": {
+            "text": "Section 5"
+          }
         },
         "_row_num": 9
       },
       "section8": {
         "setting_name": "section8",
         "display": {
-          "title": "Section 8"
+          "title": {
+            "text": "Section 8"
+          }
         },
         "_row_num": 10
       },
       "section9": {
         "setting_name": "section9",
         "display": {
-          "title": "Section 9"
+          "title": {
+            "text": "Section 9"
+          }
         },
         "_row_num": 11
       },
       "section10": {
         "setting_name": "section10",
         "display": {
-          "title": "Section 10"
+          "title": {
+            "text": "Section 10"
+          }
         },
         "_row_num": 12
       },
@@ -1434,7 +1679,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -1448,7 +1695,9 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Ethiopia Household Data"
+          "title": {
+            "text": "Ethiopia Household Data"
+          }
         },
         "_row_num": 5
       }
@@ -1459,7 +1708,9 @@
           "choice_list_name": "no_yes",
           "data_value": "no",
           "display": {
-            "text": "No"
+            "title": {
+              "text": "No"
+            }
           },
           "_row_num": 2
         },
@@ -1467,7 +1718,9 @@
           "choice_list_name": "no_yes",
           "data_value": "yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": "Yes"
+            }
           },
           "_row_num": 3
         }
@@ -1477,7 +1730,9 @@
           "choice_list_name": "buy_bake",
           "data_value": "buy",
           "display": {
-            "text": "1. Buy"
+            "title": {
+              "text": "1. Buy"
+            }
           },
           "_row_num": 4
         },
@@ -1485,7 +1740,9 @@
           "choice_list_name": "buy_bake",
           "data_value": "bake",
           "display": {
-            "text": "2. Bake"
+            "title": {
+              "text": "2. Bake"
+            }
           },
           "_row_num": 5
         }
@@ -1495,7 +1752,9 @@
           "choice_list_name": "languages",
           "data_value": "amharic",
           "display": {
-            "text": "1. Amharic"
+            "title": {
+              "text": "1. Amharic"
+            }
           },
           "_row_num": 6
         },
@@ -1503,7 +1762,9 @@
           "choice_list_name": "languages",
           "data_value": "english",
           "display": {
-            "text": "2. English"
+            "title": {
+              "text": "2. English"
+            }
           },
           "_row_num": 7
         },
@@ -1511,7 +1772,9 @@
           "choice_list_name": "languages",
           "data_value": "oromiffa",
           "display": {
-            "text": "3. Oromiffa"
+            "title": {
+              "text": "3. Oromiffa"
+            }
           },
           "_row_num": 8
         }
@@ -1521,7 +1784,9 @@
           "choice_list_name": "reasons",
           "data_value": "lack_money",
           "display": {
-            "text": "Lack of money"
+            "title": {
+              "text": "Lack of money"
+            }
           },
           "_row_num": 9
         },
@@ -1529,7 +1794,9 @@
           "choice_list_name": "reasons",
           "data_value": "expensive",
           "display": {
-            "text": "Expensive"
+            "title": {
+              "text": "Expensive"
+            }
           },
           "_row_num": 10
         },
@@ -1537,7 +1804,9 @@
           "choice_list_name": "reasons",
           "data_value": "too_far",
           "display": {
-            "text": "Too far"
+            "title": {
+              "text": "Too far"
+            }
           },
           "_row_num": 11
         },
@@ -1545,7 +1814,9 @@
           "choice_list_name": "reasons",
           "data_value": "medicine_belief",
           "display": {
-            "text": "Do not believe in medicine"
+            "title": {
+              "text": "Do not believe in medicine"
+            }
           },
           "_row_num": 12
         },
@@ -1553,7 +1824,9 @@
           "choice_list_name": "reasons",
           "data_value": "lack_health_pro",
           "display": {
-            "text": "Lack of health professional"
+            "title": {
+              "text": "Lack of health professional"
+            }
           },
           "_row_num": 13
         },
@@ -1561,7 +1834,9 @@
           "choice_list_name": "reasons",
           "data_value": "poor_quality",
           "display": {
-            "text": "Poor quality/service"
+            "title": {
+              "text": "Poor quality/service"
+            }
           },
           "_row_num": 14
         },
@@ -1569,7 +1844,9 @@
           "choice_list_name": "reasons",
           "data_value": "no_need",
           "display": {
-            "text": "Did not require medical assistance"
+            "title": {
+              "text": "Did not require medical assistance"
+            }
           },
           "_row_num": 15
         }
@@ -1579,7 +1856,9 @@
           "choice_list_name": "cooking_injury_types",
           "data_value": "burns",
           "display": {
-            "text": "Burns"
+            "title": {
+              "text": "Burns"
+            }
           },
           "_row_num": 16
         },
@@ -1587,7 +1866,9 @@
           "choice_list_name": "cooking_injury_types",
           "data_value": "cuts",
           "display": {
-            "text": "Cuts"
+            "title": {
+              "text": "Cuts"
+            }
           },
           "_row_num": 17
         }
@@ -1597,7 +1878,9 @@
           "choice_list_name": "severity",
           "data_value": "light",
           "display": {
-            "text": "Light (No scar)"
+            "title": {
+              "text": "Light (No scar)"
+            }
           },
           "_row_num": 18
         },
@@ -1605,7 +1888,9 @@
           "choice_list_name": "severity",
           "data_value": "moderate",
           "display": {
-            "text": "Moderate (moderate scar)"
+            "title": {
+              "text": "Moderate (moderate scar)"
+            }
           },
           "_row_num": 19
         },
@@ -1613,7 +1898,9 @@
           "choice_list_name": "severity",
           "data_value": "serious",
           "display": {
-            "text": "Serious (larger scar)"
+            "title": {
+              "text": "Serious (larger scar)"
+            }
           },
           "_row_num": 20
         }
@@ -1623,7 +1910,9 @@
           "choice_list_name": "burn_types",
           "data_value": "fell",
           "display": {
-            "text": "Fell in the fire"
+            "title": {
+              "text": "Fell in the fire"
+            }
           },
           "_row_num": 21
         },
@@ -1631,7 +1920,9 @@
           "choice_list_name": "burn_types",
           "data_value": "contact",
           "display": {
-            "text": "Contact with stove"
+            "title": {
+              "text": "Contact with stove"
+            }
           },
           "_row_num": 22
         },
@@ -1639,7 +1930,9 @@
           "choice_list_name": "burn_types",
           "data_value": "object",
           "display": {
-            "text": "Burned with other hot object"
+            "title": {
+              "text": "Burned with other hot object"
+            }
           },
           "_row_num": 23
         },
@@ -1647,11 +1940,16 @@
           "choice_list_name": "burn_types",
           "data_value": "water",
           "display": {
-            "text": "Container with hot water was spilled"
+            "title": {
+              "text": "Container with hot water was spilled"
+            }
           },
           "_row_num": 24
         }
       ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
     },
     "queries": {
       "roster": {
@@ -1662,7 +1960,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 9
       },
       "section2": {
@@ -1672,7 +1971,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 10
       },
       "section2_other": {
@@ -1682,7 +1982,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 11
       },
       "section3": {
@@ -1693,7 +1994,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 12
       },
       "section4": {
@@ -1703,7 +2005,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 13
       },
       "section5": {
@@ -1713,7 +2016,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 14
       },
       "section8": {
@@ -1723,7 +2027,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 15
       },
       "section8_p2": {
@@ -1733,7 +2038,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 16
       },
       "section8_p3": {
@@ -1743,7 +2049,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 17
       },
       "section8_p4": {
@@ -1753,7 +2060,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 18
       },
       "section8_p5": {
@@ -1763,7 +2071,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ? and age >= ?",
         "selectionArgs": "[ data('household_id'), '5' ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 19
       },
       "section91": {
@@ -1773,7 +2082,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 20
       },
       "section91_p2": {
@@ -1783,7 +2093,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 21
       },
       "section93": {
@@ -1793,7 +2104,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 22
       },
       "section93_p2": {
@@ -1803,7 +2115,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 23
       },
       "section94": {
@@ -1813,7 +2126,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 24
       },
       "section95": {
@@ -1823,7 +2137,8 @@
         "linked_table_id": "Ethiopia_members",
         "selection": "household_id = ?",
         "selectionArgs": "[ data('household_id') ]",
-        "auxillaryHash": "'household_id='+opendatakit.encodeURIDataElement('household_id')",
+        "newRowInitialElementKeyToValueMap": "{ household_id : data('household_id') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 25
       }
     },
@@ -2390,7 +2705,9 @@
             "type": "text",
             "name": "household_id",
             "display": {
-              "text": "Unique barcode ID or locator designation for this household"
+              "prompt": {
+                "text": "Unique barcode ID or locator designation for this household"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -2409,7 +2726,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Section 2"
+              "title": {
+                "text": "Section 2"
+              }
             },
             "_branch_label_enclosing_screen": "section2/0"
           },
@@ -2422,7 +2741,9 @@
             "_type": "_section",
             "promptIdx": 2,
             "display": {
-              "title": "Section 3"
+              "title": {
+                "text": "Section 3"
+              }
             },
             "_branch_label_enclosing_screen": "section3/0"
           },
@@ -2435,7 +2756,9 @@
             "_type": "_section",
             "promptIdx": 3,
             "display": {
-              "title": "Section 4"
+              "title": {
+                "text": "Section 4"
+              }
             },
             "_branch_label_enclosing_screen": "section4/0"
           },
@@ -2448,7 +2771,9 @@
             "_type": "_section",
             "promptIdx": 4,
             "display": {
-              "title": "Section 5"
+              "title": {
+                "text": "Section 5"
+              }
             },
             "_branch_label_enclosing_screen": "section5/0"
           },
@@ -2461,7 +2786,9 @@
             "_type": "_section",
             "promptIdx": 5,
             "display": {
-              "title": "Section 8"
+              "title": {
+                "text": "Section 8"
+              }
             },
             "_branch_label_enclosing_screen": "section8/0"
           },
@@ -2474,7 +2801,9 @@
             "_type": "_section",
             "promptIdx": 6,
             "display": {
-              "title": "Section 9"
+              "title": {
+                "text": "Section 9"
+              }
             },
             "_branch_label_enclosing_screen": "section9/0"
           },
@@ -2487,7 +2816,9 @@
             "_type": "_section",
             "promptIdx": 7,
             "display": {
-              "title": "Section 10"
+              "title": {
+                "text": "Section 10"
+              }
             },
             "_branch_label_enclosing_screen": "section10/0"
           },
@@ -2603,8 +2934,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 2: HOUSEHOLD DEMOGRAPHICS",
-              "hint": "Ask of household head or knowledgeable household member"
+              "prompt": {
+                "text": "Section 2: HOUSEHOLD DEMOGRAPHICS"
+              },
+              "hint": {
+                "text": "Ask of household head or knowledgeable household member"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -2618,9 +2953,15 @@
             "type": "linked_table",
             "values_list": "section2",
             "display": {
-              "text": "Make a list of all individuals who normally live in this household",
-              "hint": "Listing Order: (head, spouse, children not married, children married, other relatives, domestic servant, employed guard, non-relatives)",
-              "new_instance_text": "Add House Member"
+              "prompt": {
+                "text": "Make a list of all individuals who normally live in this household"
+              },
+              "hint": {
+                "text": "Listing Order: (head, spouse, children not married, children married, other relatives, domestic servant, employed guard, non-relatives)"
+              },
+              "new_instance_label": {
+                "text": "Add House Member"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -2634,7 +2975,9 @@
             "type": "linked_table",
             "values_list": "section2_other",
             "display": {
-              "text": "Enter other info for specified person:",
+              "prompt": {
+                "text": "Enter other info for specified person:"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -2714,7 +3057,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 3: Education"
+              "prompt": {
+                "text": "Section 3: Education"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -2727,7 +3072,9 @@
             "type": "linked_table",
             "values_list": "section3",
             "display": {
-              "text": "Ask for members aged 5 years and above",
+              "prompt": {
+                "text": "Ask for members aged 5 years and above"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -2800,7 +3147,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 4: Primary Occupation"
+              "prompt": {
+                "text": "Section 4: Primary Occupation"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -2813,7 +3162,9 @@
             "type": "linked_table",
             "values_list": "section4",
             "display": {
-              "text": "Ask all questions to all members of the house",
+              "prompt": {
+                "text": "Ask all questions to all members of the house"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -2830,7 +3181,9 @@
             "values_list": "roster",
             "name": "primary_cook",
             "display": {
-              "text": "Who is the primary cook for the household?",
+              "prompt": {
+                "text": "Who is the primary cook for the household?"
+              },
               "hide_add_instance": "Only Select One"
             },
             "_row_num": 4,
@@ -2845,7 +3198,9 @@
             "values_list": "roster",
             "name": "qa_cooking_1",
             "display": {
-              "text": "Who is very able to answer questions about cooking for the household?"
+              "prompt": {
+                "text": "Who is very able to answer questions about cooking for the household?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -2859,7 +3214,9 @@
             "values_list": "roster",
             "name": "qa_cooking_2",
             "display": {
-              "text": "Who is somewhat able to answer questions about cooking for the household?"
+              "prompt": {
+                "text": "Who is somewhat able to answer questions about cooking for the household?"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -2873,7 +3230,9 @@
             "values_list": "roster",
             "name": "qa_food_expense_1",
             "display": {
-              "text": "Who is very able to answer questions about food expenditures?"
+              "prompt": {
+                "text": "Who is very able to answer questions about food expenditures?"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -2887,7 +3246,9 @@
             "values_list": "roster",
             "name": "qa_food_expense_2",
             "display": {
-              "text": "Who is somewhat able to answer questions about food expenditures?"
+              "prompt": {
+                "text": "Who is somewhat able to answer questions about food expenditures?"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -2901,7 +3262,9 @@
             "values_list": "roster",
             "name": "qa_fuel_1",
             "display": {
-              "text": "Who is very able to answer questions about fuel expenditures and collection?"
+              "prompt": {
+                "text": "Who is very able to answer questions about fuel expenditures and collection?"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -2915,7 +3278,9 @@
             "values_list": "roster",
             "name": "qa_fuel_2",
             "display": {
-              "text": "Who is somewhat able to answer questions about fuel expenditures and collection?"
+              "prompt": {
+                "text": "Who is somewhat able to answer questions about fuel expenditures and collection?"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -2929,7 +3294,9 @@
             "values_list": "roster",
             "name": "qa_fuel_purchase",
             "display": {
-              "text": "Who in the household makes any fuel purchases?",
+              "prompt": {
+                "text": "Who in the household makes any fuel purchases?"
+              },
               "hide_add_instance": "If no one makes fuel purchases, leave blank"
             },
             "_row_num": 11,
@@ -3057,7 +3424,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 5: Tobacco Smoke Exposure"
+              "prompt": {
+                "text": "Section 5: Tobacco Smoke Exposure"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -3071,7 +3440,9 @@
             "values_list": "no_yes",
             "name": "ever_smoked",
             "display": {
-              "text": "Has anyone in the household ever smoked?"
+              "prompt": {
+                "text": "Has anyone in the household ever smoked?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -3085,7 +3456,9 @@
             "values_list": "roster",
             "name": "who_smoked",
             "display": {
-              "text": "Who has ever smoked?"
+              "prompt": {
+                "text": "Who has ever smoked?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -3099,7 +3472,9 @@
             "values_list": "no_yes",
             "name": "in_room_smoke",
             "display": {
-              "text": "In the past 7 days, has anyone in the household been in the same room with someone smoking tobacco or other substances?"
+              "prompt": {
+                "text": "In the past 7 days, has anyone in the household been in the same room with someone smoking tobacco or other substances?"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -3113,7 +3488,9 @@
             "values_list": "roster",
             "name": "who_in_room",
             "display": {
-              "text": "Who has been in the same room?"
+              "prompt": {
+                "text": "Who has been in the same room?"
+              }
             },
             "_row_num": 9,
             "__rowNum__": 8,
@@ -3127,7 +3504,9 @@
             "type": "linked_table",
             "values_list": "section5",
             "display": {
-              "text": "Ask for all house members who were reported as ever smoking",
+              "prompt": {
+                "text": "Ask for all house members who were reported as ever smoking"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -3307,8 +3686,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 8.2: Time Use and Labor",
-              "hint": "INSTRUCTIONS: Only ask questions if member is 5 years and older (LSMS is 7+). For children under 10 years, ask their caregiver the questions"
+              "prompt": {
+                "text": "Section 8.2: Time Use and Labor"
+              },
+              "hint": {
+                "text": "INSTRUCTIONS: Only ask questions if member is 5 years and older (LSMS is 7+). For children under 10 years, ask their caregiver the questions"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -3322,7 +3705,9 @@
             "values_list": "roster",
             "name": "spent_time_fuel_collection",
             "display": {
-              "text": "Who spent any time in the last 7 days in any fuel collection (excluding purchased fuel) or fuel preparation activities?"
+              "prompt": {
+                "text": "Who spent any time in the last 7 days in any fuel collection (excluding purchased fuel) or fuel preparation activities?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -3335,7 +3720,9 @@
             "type": "linked_table",
             "values_list": "section8",
             "display": {
-              "text": "Enter information for each person listed as having spent time collecting or preparing fuel in the last 7 days:",
+              "prompt": {
+                "text": "Enter information for each person listed as having spent time collecting or preparing fuel in the last 7 days:"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -3352,7 +3739,9 @@
             "values_list": "no_yes",
             "name": "fuel_sold",
             "display": {
-              "text": "Was any of the fuel material sold for income?"
+              "prompt": {
+                "text": "Was any of the fuel material sold for income?"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -3365,8 +3754,12 @@
             "type": "integer",
             "name": "fuel_income",
             "display": {
-              "text": "How much was the income from fuel sales for the last 7 days?",
-              "hint": "(ETB)"
+              "prompt": {
+                "text": "How much was the income from fuel sales for the last 7 days?"
+              },
+              "hint": {
+                "text": "(ETB)"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -3380,7 +3773,9 @@
             "values_list": "roster",
             "name": "made_fuel_purchases",
             "display": {
-              "text": "Who made any fuel purchases in the last 7 days?"
+              "prompt": {
+                "text": "Who made any fuel purchases in the last 7 days?"
+              }
             },
             "_row_num": 11,
             "__rowNum__": 10,
@@ -3393,7 +3788,9 @@
             "type": "linked_table",
             "values_list": "section8_p2",
             "display": {
-              "text": "Enter information for each person listed as having made fuel purchases in the last 7 days:",
+              "prompt": {
+                "text": "Enter information for each person listed as having made fuel purchases in the last 7 days:"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -3410,7 +3807,9 @@
             "values_list": "roster",
             "name": "spent_time_transport_wood",
             "display": {
-              "text": "Who spent any time transporting purchased wood?"
+              "prompt": {
+                "text": "Who spent any time transporting purchased wood?"
+              }
             },
             "_row_num": 15,
             "__rowNum__": 14,
@@ -3423,7 +3822,9 @@
             "type": "linked_table",
             "values_list": "section8_p3",
             "display": {
-              "text": "Enter information for each person listed as having trasported purchased wood:",
+              "prompt": {
+                "text": "Enter information for each person listed as having trasported purchased wood:"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -3440,7 +3841,9 @@
             "values_list": "roster",
             "name": "spent_time_cooking",
             "display": {
-              "text": "Who has spent any time cooking, baking, or preparing food in the last 7 days?"
+              "prompt": {
+                "text": "Who has spent any time cooking, baking, or preparing food in the last 7 days?"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -3453,7 +3856,9 @@
             "type": "linked_table",
             "values_list": "section8_p4",
             "display": {
-              "text": "Enter information for each person who spent time cooking, baking or preparing food in the last 7 days:",
+              "prompt": {
+                "text": "Enter information for each person who spent time cooking, baking or preparing food in the last 7 days:"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -3470,7 +3875,9 @@
             "values_list": "roster",
             "name": "spent_time_collecting_water",
             "display": {
-              "text": "Who in the household spent any time collecting water in the last 7 days?"
+              "prompt": {
+                "text": "Who in the household spent any time collecting water in the last 7 days?"
+              }
             },
             "_row_num": 23,
             "__rowNum__": 22,
@@ -3483,7 +3890,9 @@
             "type": "linked_table",
             "values_list": "section8_p5",
             "display": {
-              "text": "Enter information for each person who collected water in the last 7 days?",
+              "prompt": {
+                "text": "Enter information for each person who collected water in the last 7 days?"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -3498,7 +3907,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 8.3"
+              "prompt": {
+                "text": "Section 8.3"
+              }
             },
             "_row_num": 27,
             "__rowNum__": 26,
@@ -3810,7 +4221,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 9.1: Health"
+              "prompt": {
+                "text": "Section 9.1: Health"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -3824,7 +4237,9 @@
             "values_list": "no_yes",
             "name": "received_medical_care",
             "display": {
-              "text": "Has anyone received medical assistance or consulted health institutions or health practitioners, including traditional healers, during the last 2 months (regardless of whether sick or not)?"
+              "prompt": {
+                "text": "Has anyone received medical assistance or consulted health institutions or health practitioners, including traditional healers, during the last 2 months (regardless of whether sick or not)?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -3838,7 +4253,9 @@
             "values_list": "roster",
             "name": "who_received_med_assistance",
             "display": {
-              "text": "Who received medical assistance?"
+              "prompt": {
+                "text": "Who received medical assistance?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -3851,7 +4268,9 @@
             "type": "linked_table",
             "values_list": "section91",
             "display": {
-              "text": "Ask for all people listed as having received medical assistance",
+              "prompt": {
+                "text": "Ask for all people listed as having received medical assistance"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -3868,7 +4287,9 @@
             "values_list": "reasons",
             "name": "reasons_not",
             "display": {
-              "text": "What was the main reason why not?"
+              "prompt": {
+                "text": "What was the main reason why not?"
+              }
             },
             "_row_num": 8,
             "__rowNum__": 7,
@@ -3882,7 +4303,9 @@
             "values_list": "no_yes",
             "name": "faced_health_problems",
             "display": {
-              "text": "Has anyone in the household faced any health problems in the last 2 months?"
+              "prompt": {
+                "text": "Has anyone in the household faced any health problems in the last 2 months?"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -3896,7 +4319,9 @@
             "values_list": "roster",
             "name": "who_faced_health_problems",
             "display": {
-              "text": "Who has faced any health problems in the last 2 months?"
+              "prompt": {
+                "text": "Who has faced any health problems in the last 2 months?"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -3909,7 +4334,9 @@
             "type": "linked_table",
             "values_list": "section91_p2",
             "display": {
-              "text": "Ask for all people listed as having faced health problems",
+              "prompt": {
+                "text": "Ask for all people listed as having faced health problems"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -3924,7 +4351,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 9.2: Health"
+              "prompt": {
+                "text": "Section 9.2: Health"
+              }
             },
             "_row_num": 16,
             "__rowNum__": 15,
@@ -3938,7 +4367,9 @@
             "values_list": "no_yes",
             "name": "cooking_injuries",
             "display": {
-              "text": "In the past 2 months, has anyone in the household sustained any injuries specifically related to cooking, such as burns or cuts?"
+              "prompt": {
+                "text": "In the past 2 months, has anyone in the household sustained any injuries specifically related to cooking, such as burns or cuts?"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -3952,7 +4383,9 @@
             "values_list": "cooking_injury_types",
             "name": "cooking_injury_type",
             "display": {
-              "text": "What type of injury?"
+              "prompt": {
+                "text": "What type of injury?"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -3966,7 +4399,9 @@
             "values_list": "severity",
             "name": "cooking_injury_severity",
             "display": {
-              "text": "How serious was the injury?"
+              "prompt": {
+                "text": "How serious was the injury?"
+              }
             },
             "_row_num": 20,
             "__rowNum__": 19,
@@ -3980,7 +4415,9 @@
             "values_list": "burn_types",
             "name": "burn_type",
             "display": {
-              "text": "How did he/she get burned?"
+              "prompt": {
+                "text": "How did he/she get burned?"
+              }
             },
             "_row_num": 22,
             "__rowNum__": 21,
@@ -3993,7 +4430,9 @@
             "type": "text",
             "name": "stove_type",
             "display": {
-              "text": "Specify the type of stove?"
+              "prompt": {
+                "text": "Specify the type of stove?"
+              }
             },
             "_row_num": 24,
             "__rowNum__": 23,
@@ -4005,7 +4444,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 9.3 Health"
+              "prompt": {
+                "text": "Section 9.3 Health"
+              }
             },
             "_row_num": 29,
             "__rowNum__": 28,
@@ -4019,7 +4460,9 @@
             "values_list": "no_yes",
             "name": "fuel_injuries",
             "display": {
-              "text": "In the past 2 months, has anyone in the household sustained any injuries specifically related to fuel collect/preparation?"
+              "prompt": {
+                "text": "In the past 2 months, has anyone in the household sustained any injuries specifically related to fuel collect/preparation?"
+              }
             },
             "_row_num": 30,
             "__rowNum__": 29,
@@ -4032,7 +4475,9 @@
             "type": "linked_table",
             "values_list": "section93",
             "display": {
-              "text": "Specify injury",
+              "prompt": {
+                "text": "Specify injury"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -4048,8 +4493,12 @@
             "type": "linked_table",
             "values_list": "section93_p2",
             "display": {
-              "text": "For all members who report cooking or being located in the cooking space when the fire is lit.",
-              "hint": "For individuals <10 or who are not present, an adult or caregiver can answer for them",
+              "prompt": {
+                "text": "For all members who report cooking or being located in the cooking space when the fire is lit."
+              },
+              "hint": {
+                "text": "For individuals <10 or who are not present, an adult or caregiver can answer for them"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -4063,7 +4512,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 9.4 Health"
+              "prompt": {
+                "text": "Section 9.4 Health"
+              }
             },
             "_row_num": 35,
             "__rowNum__": 34,
@@ -4076,7 +4527,9 @@
             "type": "linked_table",
             "values_list": "section94",
             "display": {
-              "text": "Ask house member if present",
+              "prompt": {
+                "text": "Ask house member if present"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -4090,7 +4543,9 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 9.5 Health"
+              "prompt": {
+                "text": "Section 9.5 Health"
+              }
             },
             "_row_num": 37,
             "__rowNum__": 36,
@@ -4103,7 +4558,9 @@
             "type": "linked_table",
             "values_list": "section95",
             "display": {
-              "text": "Ask house member if present",
+              "prompt": {
+                "text": "Ask house member if present"
+              },
               "hide_add_instance": true,
               "hide_delete_button": true
             },
@@ -4472,8 +4929,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Section 10: Household Questions",
-              "hint": "IDEALLY, THE FOLLOWING QUESTIONS SHOULD BE ANSWERED BY THE “MOST KNOWLEDGEABLE” PERSON. In general, this will probably be the primary cook for the household, but in some cases it may also be the head of household or another person. If this individual is not available, another member indicated as able to answer these questions may be asked."
+              "prompt": {
+                "text": "Section 10: Household Questions"
+              },
+              "hint": {
+                "text": "IDEALLY, THE FOLLOWING QUESTIONS SHOULD BE ANSWERED BY THE “MOST KNOWLEDGEABLE” PERSON. In general, this will probably be the primary cook for the household, but in some cases it may also be the head of household or another person. If this individual is not available, another member indicated as able to answer these questions may be asked."
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -4487,7 +4948,9 @@
             "values_list": "languages",
             "name": "primary_languages",
             "display": {
-              "text": "What are the primary languages used in the household?"
+              "prompt": {
+                "text": "What are the primary languages used in the household?"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -4501,7 +4964,9 @@
             "type": "text",
             "name": "religions_practiced",
             "display": {
-              "text": "What, if any, religions are practiced by members of the household?"
+              "prompt": {
+                "text": "What, if any, religions are practiced by members of the household?"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -4515,7 +4980,9 @@
             "values_list": "no_yes",
             "name": "religion_affects_habits",
             "display": {
-              "text": "Does it affect your cooking habits?"
+              "prompt": {
+                "text": "Does it affect your cooking habits?"
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -4529,7 +4996,9 @@
             "values_list": "no_yes",
             "name": "fasting",
             "display": {
-              "text": "Do members of this household engage in any fasting practices?"
+              "prompt": {
+                "text": "Do members of this household engage in any fasting practices?"
+              }
             },
             "_row_num": 10,
             "__rowNum__": 9,
@@ -4543,7 +5012,9 @@
             "values_list": "no_yes",
             "name": "injera_eat",
             "display": {
-              "text": "Do members of this household typically eat injera"
+              "prompt": {
+                "text": "Do members of this household typically eat injera"
+              }
             },
             "_row_num": 12,
             "__rowNum__": 11,
@@ -4557,7 +5028,9 @@
             "values_list": "buy_bake",
             "name": "injera_buy_bake",
             "display": {
-              "text": "Does the household primarily buy or bake injera"
+              "prompt": {
+                "text": "Does the household primarily buy or bake injera"
+              }
             },
             "_row_num": 14,
             "__rowNum__": 13,
@@ -4571,7 +5044,9 @@
             "values_list": "no_yes",
             "name": "celebrate_holiday",
             "display": {
-              "text": "Has the household celebrated any holidays or special events in the past 7 days?"
+              "prompt": {
+                "text": "Has the household celebrated any holidays or special events in the past 7 days?"
+              }
             },
             "_row_num": 17,
             "__rowNum__": 16,
@@ -4585,7 +5060,9 @@
             "type": "text",
             "name": "which_holiday",
             "display": {
-              "text": "Which holidays or special events?"
+              "prompt": {
+                "text": "Which holidays or special events?"
+              }
             },
             "_row_num": 19,
             "__rowNum__": 18,
@@ -4599,7 +5076,9 @@
             "values_list": "no_yes",
             "name": "cooking_commercial",
             "display": {
-              "text": "Does any member of the household engage in cooking for commercial purposes?"
+              "prompt": {
+                "text": "Does any member of the household engage in cooking for commercial purposes?"
+              }
             },
             "_row_num": 21,
             "__rowNum__": 20,
@@ -4613,7 +5092,9 @@
             "values_list": "no_yes",
             "name": "produce_charcoal",
             "display": {
-              "text": "Does any member of the household produce charcoal?"
+              "prompt": {
+                "text": "Does any member of the household produce charcoal?"
+              }
             },
             "_row_num": 22,
             "__rowNum__": 21,
@@ -4803,7 +5284,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Ethiopia Household Data"
+              "title": {
+                "text": "Ethiopia Household Data"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -5914,21 +6397,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -5938,6 +6413,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -5945,6 +6444,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -5977,133 +6484,133 @@
         "_aspect": "burn_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"burn_types\",\"data_value\":\"fell\",\"display\":{\"text\":\"Fell in the fire\"},\"_row_num\":21},{\"choice_list_name\":\"burn_types\",\"data_value\":\"contact\",\"display\":{\"text\":\"Contact with stove\"},\"_row_num\":22},{\"choice_list_name\":\"burn_types\",\"data_value\":\"object\",\"display\":{\"text\":\"Burned with other hot object\"},\"_row_num\":23},{\"choice_list_name\":\"burn_types\",\"data_value\":\"water\",\"display\":{\"text\":\"Container with hot water was spilled\"},\"_row_num\":24}]"
+        "_value": "[{\"choice_list_name\":\"burn_types\",\"data_value\":\"fell\",\"display\":{\"title\":{\"text\":\"Fell in the fire\"}},\"_row_num\":21},{\"choice_list_name\":\"burn_types\",\"data_value\":\"contact\",\"display\":{\"title\":{\"text\":\"Contact with stove\"}},\"_row_num\":22},{\"choice_list_name\":\"burn_types\",\"data_value\":\"object\",\"display\":{\"title\":{\"text\":\"Burned with other hot object\"}},\"_row_num\":23},{\"choice_list_name\":\"burn_types\",\"data_value\":\"water\",\"display\":{\"title\":{\"text\":\"Container with hot water was spilled\"}},\"_row_num\":24}]"
       },
       {
         "_partition": "Column",
         "_aspect": "celebrate_holiday",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cooking_commercial",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cooking_injuries",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cooking_injury_severity",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"severity\",\"data_value\":\"light\",\"display\":{\"text\":\"Light (No scar)\"},\"_row_num\":18},{\"choice_list_name\":\"severity\",\"data_value\":\"moderate\",\"display\":{\"text\":\"Moderate (moderate scar)\"},\"_row_num\":19},{\"choice_list_name\":\"severity\",\"data_value\":\"serious\",\"display\":{\"text\":\"Serious (larger scar)\"},\"_row_num\":20}]"
+        "_value": "[{\"choice_list_name\":\"severity\",\"data_value\":\"light\",\"display\":{\"title\":{\"text\":\"Light (No scar)\"}},\"_row_num\":18},{\"choice_list_name\":\"severity\",\"data_value\":\"moderate\",\"display\":{\"title\":{\"text\":\"Moderate (moderate scar)\"}},\"_row_num\":19},{\"choice_list_name\":\"severity\",\"data_value\":\"serious\",\"display\":{\"title\":{\"text\":\"Serious (larger scar)\"}},\"_row_num\":20}]"
       },
       {
         "_partition": "Column",
         "_aspect": "cooking_injury_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"cooking_injury_types\",\"data_value\":\"burns\",\"display\":{\"text\":\"Burns\"},\"_row_num\":16},{\"choice_list_name\":\"cooking_injury_types\",\"data_value\":\"cuts\",\"display\":{\"text\":\"Cuts\"},\"_row_num\":17}]"
+        "_value": "[{\"choice_list_name\":\"cooking_injury_types\",\"data_value\":\"burns\",\"display\":{\"title\":{\"text\":\"Burns\"}},\"_row_num\":16},{\"choice_list_name\":\"cooking_injury_types\",\"data_value\":\"cuts\",\"display\":{\"title\":{\"text\":\"Cuts\"}},\"_row_num\":17}]"
       },
       {
         "_partition": "Column",
         "_aspect": "ever_smoked",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "faced_health_problems",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "fasting",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "fuel_injuries",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "fuel_sold",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "in_room_smoke",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "injera_buy_bake",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"buy_bake\",\"data_value\":\"buy\",\"display\":{\"text\":\"1. Buy\"},\"_row_num\":4},{\"choice_list_name\":\"buy_bake\",\"data_value\":\"bake\",\"display\":{\"text\":\"2. Bake\"},\"_row_num\":5}]"
+        "_value": "[{\"choice_list_name\":\"buy_bake\",\"data_value\":\"buy\",\"display\":{\"title\":{\"text\":\"1. Buy\"}},\"_row_num\":4},{\"choice_list_name\":\"buy_bake\",\"data_value\":\"bake\",\"display\":{\"title\":{\"text\":\"2. Bake\"}},\"_row_num\":5}]"
       },
       {
         "_partition": "Column",
         "_aspect": "injera_eat",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "primary_languages",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"languages\",\"data_value\":\"amharic\",\"display\":{\"text\":\"1. Amharic\"},\"_row_num\":6},{\"choice_list_name\":\"languages\",\"data_value\":\"english\",\"display\":{\"text\":\"2. English\"},\"_row_num\":7},{\"choice_list_name\":\"languages\",\"data_value\":\"oromiffa\",\"display\":{\"text\":\"3. Oromiffa\"},\"_row_num\":8}]"
+        "_value": "[{\"choice_list_name\":\"languages\",\"data_value\":\"amharic\",\"display\":{\"title\":{\"text\":\"1. Amharic\"}},\"_row_num\":6},{\"choice_list_name\":\"languages\",\"data_value\":\"english\",\"display\":{\"title\":{\"text\":\"2. English\"}},\"_row_num\":7},{\"choice_list_name\":\"languages\",\"data_value\":\"oromiffa\",\"display\":{\"title\":{\"text\":\"3. Oromiffa\"}},\"_row_num\":8}]"
       },
       {
         "_partition": "Column",
         "_aspect": "produce_charcoal",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "reasons_not",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_money\",\"display\":{\"text\":\"Lack of money\"},\"_row_num\":9},{\"choice_list_name\":\"reasons\",\"data_value\":\"expensive\",\"display\":{\"text\":\"Expensive\"},\"_row_num\":10},{\"choice_list_name\":\"reasons\",\"data_value\":\"too_far\",\"display\":{\"text\":\"Too far\"},\"_row_num\":11},{\"choice_list_name\":\"reasons\",\"data_value\":\"medicine_belief\",\"display\":{\"text\":\"Do not believe in medicine\"},\"_row_num\":12},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_health_pro\",\"display\":{\"text\":\"Lack of health professional\"},\"_row_num\":13},{\"choice_list_name\":\"reasons\",\"data_value\":\"poor_quality\",\"display\":{\"text\":\"Poor quality/service\"},\"_row_num\":14},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_need\",\"display\":{\"text\":\"Did not require medical assistance\"},\"_row_num\":15}]"
+        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_money\",\"display\":{\"title\":{\"text\":\"Lack of money\"}},\"_row_num\":9},{\"choice_list_name\":\"reasons\",\"data_value\":\"expensive\",\"display\":{\"title\":{\"text\":\"Expensive\"}},\"_row_num\":10},{\"choice_list_name\":\"reasons\",\"data_value\":\"too_far\",\"display\":{\"title\":{\"text\":\"Too far\"}},\"_row_num\":11},{\"choice_list_name\":\"reasons\",\"data_value\":\"medicine_belief\",\"display\":{\"title\":{\"text\":\"Do not believe in medicine\"}},\"_row_num\":12},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_health_pro\",\"display\":{\"title\":{\"text\":\"Lack of health professional\"}},\"_row_num\":13},{\"choice_list_name\":\"reasons\",\"data_value\":\"poor_quality\",\"display\":{\"title\":{\"text\":\"Poor quality/service\"}},\"_row_num\":14},{\"choice_list_name\":\"reasons\",\"data_value\":\"no_need\",\"display\":{\"title\":{\"text\":\"Did not require medical assistance\"}},\"_row_num\":15}]"
       },
       {
         "_partition": "Column",
         "_aspect": "received_medical_care",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "religion_affects_habits",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"no_yes\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":2},{\"choice_list_name\":\"no_yes\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "FormType",
@@ -6131,7 +6638,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Ethiopia Household Data\""
+        "_value": "{\"text\":\"Ethiopia Household Data\"}"
       }
     ]
   }

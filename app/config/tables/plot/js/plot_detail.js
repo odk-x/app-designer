@@ -1,30 +1,12 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, odkTables, d3 */
+/* global _, $, odkTables, odkData, d3 */
 'use strict';
-
-// Handle the case where we are debugging in chrome.
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/plot_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             if (dataObj === undefined || dataObj === null) {
-//                 console.log('Could not load data json for table: plot');
-//             }
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
 
 var plotDetailResultSet = {};
 var visitData = {};
 var plotId;
-var insideQueue = false;
-var htmlFileNameValue = "plot_detail";
-var userActionValue = "launchBarcode";
 
 function visitCBSuccess(result) {
     visitData = result;
@@ -56,7 +38,6 @@ function display() {
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
     
-    var i;
     var plotId = plotDetailResultSet.getRowId(0);
     var maizeType = plotDetailResultSet.get('planting');
 
@@ -65,14 +46,8 @@ function display() {
     $('#lat').text(plotDetailResultSet.get('location.latitude'));
     $('#long').text(plotDetailResultSet.get('location.longitude'));
     $('#crop').text(maizeType);
-    $('#scanned-barcode').text("No value");
 
-// We want to get the count.
-//     var table = odkTables.query(
-//         'visit',
-//         'plot_id = ?',
-//         [plotId]);
-
+	// get the number of visits
     $('#visits').text(visitData.getCount());
     var margin = {top: 20, right: 20, bottom: 100, left: 60},
         width = 400 - margin.left - margin.right,
@@ -81,7 +56,7 @@ function display() {
     // Parse the date / time
     var	parseDate = d3.time.format("%Y-%m-%d").parse;
 
-    var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+    var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.05);
 
     var y = d3.scale.linear().range([height, 0]);
 
@@ -116,6 +91,7 @@ function display() {
         data.push(d);
     }
 
+    data = _.sortBy(data, 'date');
     data.forEach(function(d) {
         d.date = parseDate(d.date);
         d.value = +d.value;
@@ -160,34 +136,20 @@ function display() {
         .attr("y", function(d) { return y(d.value); })
         .attr("height", function(d) { return height - y(d.value); });
 
-    var jsonMap = {};
+    var elementKeyToValueMap = {};
     // Prepopulate plot id
-    jsonMap.plot_id = plotId;
-
-    jsonMap = JSON.stringify(jsonMap);
+    elementKeyToValueMap.plot_id = plotId;
 
     var newVisitButton = $('#new-visit');
     newVisitButton.on(
         'click',
         function() {
             odkTables.addRowWithSurvey(
+				null,
                 'visit',
                 'visit',
                 null,
-                jsonMap);
-        }
-    );
-
-    var launchBarcodeButton = $('#launch-barcode');
-    launchBarcodeButton.on(
-        'click',
-        function() {
-            odkCommon.registerListener(function() {
-                    callBackFn();
-            });
-
-            var dispatchString = JSON.stringify({htmlPath:htmlFileNameValue, userAction:userActionValue});
-            odkCommon.doAction(dispatchString, 'com.google.zxing.client.android.SCAN', null);
+                elementKeyToValueMap);
         }
     );
 
@@ -196,37 +158,10 @@ function display() {
         'click',
         function() {
             var plotIdQueryParam = '?plotId=' + encodeURIComponent(plotId);
-            odkTables.launchHTML('config/assets/plotter-compareType-chooser.html' + plotIdQueryParam);
+            odkTables.launchHTML(null,
+				'config/assets/plotter-compareType-chooser.html' + plotIdQueryParam);
         }
     );
-
-    myTimeoutVal = setTimeout(callBackFn(), 1000);
-}
-var myTimeoutVal = null;
-function callBackFn () {
-    if (insideQueue == true) return;
-    insideQueue = true;
-    var value = odkCommon.viewFirstQueuedAction();
-    if ( value !== null && value !== undefined ) {
-        var action = JSON.parse(value);
-        var dispatchStr = JSON.parse(action.dispatchString);
-
-        console.log("callBackFn: action: " + dispatchStr.userAction + " htmlPath: " + dispatchStr.htmlPath);
-
-        if (dispatchStr.userAction === userActionValue &&
-            dispatchStr.htmlPath === htmlFileNameValue &&
-            action.jsonValue.status === -1) {
-            $('#scanned-barcode').text(action.jsonValue.result.SCAN_RESULT);
-            clearTimeout(myTimeoutVal);
-            odkCommon.removeFirstQueuedAction();
-        } else {
-            myTimeoutVal = setTimeout(callBackFn(), 1000);
-            $('#scanned-barcode').text("No value");
-        }
-    }
-    console.log("callBackFn is called");
-    insideQueue = false;
-
 }          
 
 function setup() {

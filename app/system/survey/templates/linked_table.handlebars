@@ -3,14 +3,14 @@
     {{#unless display.hide_add_instance}}
         <a class="addInstance btn btn-default btn-lg">
             <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-            {{new_instance_text}}
+            {{localizeText display.new_button_label}}
         </a>
     {{/unless}}
     <table class="linked-table">
         <thead>
             <tr class="tableGrid">
                 {{#each columns}}
-                    <th> {{title}}</th>
+                    <th> {{localizeText title}}</th>
                 {{/each}}
             </tr>
         </thead>

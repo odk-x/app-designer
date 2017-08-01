@@ -29,21 +29,27 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Farms Survey"
+          "title": {
+            "text": "Farms Survey"
+          }
         },
         "_row_num": 5
       },
       {
         "setting_name": "farms",
         "display": {
-          "title": "Farms"
+          "title": {
+            "text": "Farms"
+          }
         },
         "_row_num": 6
       },
       {
         "setting_name": "fields",
         "display": {
-          "title": "Fields"
+          "title": {
+            "text": "Fields"
+          }
         },
         "_row_num": 7
       },
@@ -61,21 +67,22 @@
         "linked_table_id": "farm_field",
         "selection": "farm_uuid = ?",
         "selectionArgs": "[ data('farm_uuid') ]",
-        "auxillaryHash": "'farm_uuid='+opendatakit.encodeURIDataElement('farm_uuid')",
+        "newRowInitialElementKeyToValueMap": "{ farm_uuid : data('farm_uuid') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       {
         "query_name": "states_csv",
         "query_type": "csv",
         "uri": "\"cities.csv\"",
-        "callback": "_.chain(context).pluck('state').uniq().map(function(state){\nreturn {name:state, label:state, data_value:state, display:{text:state}};\n}).value()",
+        "callback": "_.chain(context).pluck('state').uniq().map(function(state){\nreturn { data_value: state, display: {title: {text: state}}};\n}).value()",
         "_row_num": 3
       },
       {
         "query_name": "cities_csv",
         "query_type": "csv",
         "uri": "\"cities.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.city;\nplace.label = place.city;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
+        "callback": "_.map(context, function(place){\nreturn { data_value:place.city, state: place.state, display: {title: {text: place.city} } };\n})",
         "_row_num": 4
       }
     ],
@@ -94,7 +101,9 @@
         "type": "text",
         "name": "farm_name",
         "display": {
-          "text": "Enter the name of the farm:"
+          "prompt": {
+            "text": "Enter the name of the farm:"
+          }
         },
         "required": true,
         "_row_num": 2
@@ -109,7 +118,9 @@
         "type": "geopoint",
         "name": "location",
         "display": {
-          "text": "Record the location of farm:"
+          "prompt": {
+            "text": "Record the location of farm:"
+          }
         },
         "_row_num": 4
       },
@@ -117,7 +128,9 @@
         "type": "integer",
         "name": "farm_num_employee",
         "display": {
-          "text": "Enter the number of employee:"
+          "prompt": {
+            "text": "Enter the number of employee:"
+          }
         },
         "_row_num": 5
       },
@@ -125,7 +138,9 @@
         "type": "decimal",
         "name": "farm_revenue",
         "display": {
-          "text": "Enter the revenue for the farm:"
+          "prompt": {
+            "text": "Enter the revenue for the farm:"
+          }
         },
         "_row_num": 6
       }
@@ -134,8 +149,12 @@
       {
         "type": "note",
         "display": {
-          "text": "Farms Fields section:",
-          "hint": "This section is to gather information about fields in the farm"
+          "prompt": {
+            "text": "Farms Fields section:"
+          },
+          "hint": {
+            "text": "This section is to gather information about fields in the farm"
+          }
         },
         "_row_num": 2
       },
@@ -143,8 +162,12 @@
         "type": "linked_table",
         "values_list": "linked_fields",
         "display": {
-          "text": "Record all the fields in this farm",
-          "new_instance_text": "Add Fields"
+          "prompt": {
+            "text": "Record all the fields in this farm"
+          },
+          "new_instance_label": {
+            "text": "Add Fields"
+          }
         },
         "_row_num": 3
       }
@@ -201,16 +224,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "form_id": {
@@ -231,21 +252,27 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Farms Survey"
+          "title": {
+            "text": "Farms Survey"
+          }
         },
         "_row_num": 5
       },
       "farms": {
         "setting_name": "farms",
         "display": {
-          "title": "Farms"
+          "title": {
+            "text": "Farms"
+          }
         },
         "_row_num": 6
       },
       "fields": {
         "setting_name": "fields",
         "display": {
-          "title": "Fields"
+          "title": {
+            "text": "Fields"
+          }
         },
         "_row_num": 7
       },
@@ -260,7 +287,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -274,12 +303,17 @@
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Farms Survey"
+          "title": {
+            "text": "Farms Survey"
+          }
         },
         "_row_num": 5
       }
     },
     "choices": {},
+    "table_specific_definitions": {
+      "_tokens": {}
+    },
     "queries": {
       "linked_fields": {
         "query_name": "linked_fields",
@@ -288,21 +322,22 @@
         "linked_table_id": "farm_field",
         "selection": "farm_uuid = ?",
         "selectionArgs": "[ data('farm_uuid') ]",
-        "auxillaryHash": "'farm_uuid='+opendatakit.encodeURIDataElement('farm_uuid')",
+        "newRowInitialElementKeyToValueMap": "{ farm_uuid : data('farm_uuid') }",
+        "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
       "states_csv": {
         "query_name": "states_csv",
         "query_type": "csv",
         "uri": "\"cities.csv\"",
-        "callback": "_.chain(context).pluck('state').uniq().map(function(state){\nreturn {name:state, label:state, data_value:state, display:{text:state}};\n}).value()",
+        "callback": "_.chain(context).pluck('state').uniq().map(function(state){\nreturn { data_value: state, display: {title: {text: state}}};\n}).value()",
         "_row_num": 3
       },
       "cities_csv": {
         "query_name": "cities_csv",
         "query_type": "csv",
         "uri": "\"cities.csv\"",
-        "callback": "_.map(context, function(place){\nplace.name = place.city;\nplace.label = place.city;\nplace.data_value = place.name;\nplace.display = {text:place.label};\nreturn place;\n})",
+        "callback": "_.map(context, function(place){\nreturn { data_value:place.city, state: place.state, display: {title: {text: place.city} } };\n})",
         "_row_num": 4
       }
     },
@@ -363,7 +398,6 @@
         "elementKey": "farm_city"
       },
       "farm_location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {
@@ -477,7 +511,9 @@
             "_type": "_section",
             "promptIdx": 0,
             "display": {
-              "title": "Farms"
+              "title": {
+                "text": "Farms"
+              }
             },
             "_branch_label_enclosing_screen": "farms/0"
           },
@@ -490,7 +526,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Fields"
+              "title": {
+                "text": "Fields"
+              }
             },
             "_branch_label_enclosing_screen": "fields/0"
           },
@@ -559,7 +597,9 @@
             "type": "text",
             "name": "farm_name",
             "display": {
-              "text": "Enter the name of the farm:"
+              "prompt": {
+                "text": "Enter the name of the farm:"
+              }
             },
             "required": true,
             "_row_num": 2,
@@ -573,7 +613,9 @@
             "type": "geopoint",
             "name": "location",
             "display": {
-              "text": "Record the location of farm:"
+              "prompt": {
+                "text": "Record the location of farm:"
+              }
             },
             "_row_num": 4,
             "__rowNum__": 3,
@@ -586,7 +628,9 @@
             "type": "integer",
             "name": "farm_num_employee",
             "display": {
-              "text": "Enter the number of employee:"
+              "prompt": {
+                "text": "Enter the number of employee:"
+              }
             },
             "_row_num": 5,
             "__rowNum__": 4,
@@ -599,7 +643,9 @@
             "type": "decimal",
             "name": "farm_revenue",
             "display": {
-              "text": "Enter the revenue for the farm:"
+              "prompt": {
+                "text": "Enter the revenue for the farm:"
+              }
             },
             "_row_num": 6,
             "__rowNum__": 5,
@@ -695,8 +741,12 @@
           {
             "type": "note",
             "display": {
-              "text": "Farms Fields section:",
-              "hint": "This section is to gather information about fields in the farm"
+              "prompt": {
+                "text": "Farms Fields section:"
+              },
+              "hint": {
+                "text": "This section is to gather information about fields in the farm"
+              }
             },
             "_row_num": 2,
             "__rowNum__": 1,
@@ -709,8 +759,12 @@
             "type": "linked_table",
             "values_list": "linked_fields",
             "display": {
-              "text": "Record all the fields in this farm",
-              "new_instance_text": "Add Fields"
+              "prompt": {
+                "text": "Record all the fields in this farm"
+              },
+              "new_instance_label": {
+                "text": "Add Fields"
+              }
             },
             "_row_num": 3,
             "__rowNum__": 2,
@@ -803,7 +857,9 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Farms Survey"
+              "title": {
+                "text": "Farms Survey"
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -1013,7 +1069,6 @@
         "elementPath": "farm_city"
       },
       "farm_location": {
-        "name": "geopoint",
         "type": "object",
         "elementType": "geopoint",
         "properties": {
@@ -1237,21 +1292,13 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_conflict_type"
       },
-      "_filter_type": {
+      "_default_access": {
         "type": "string",
         "isNotNullable": false,
-        "elementKey": "_filter_type",
-        "elementName": "_filter_type",
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
         "elementSet": "instanceMetadata",
-        "elementPath": "_filter_type"
-      },
-      "_filter_value": {
-        "type": "string",
-        "isNotNullable": false,
-        "elementKey": "_filter_value",
-        "elementName": "_filter_value",
-        "elementSet": "instanceMetadata",
-        "elementPath": "_filter_value"
+        "elementPath": "_default_access"
       },
       "_form_id": {
         "type": "string",
@@ -1261,6 +1308,30 @@
         "elementSet": "instanceMetadata",
         "elementPath": "_form_id"
       },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
       "_locale": {
         "type": "string",
         "isNotNullable": false,
@@ -1268,6 +1339,14 @@
         "elementName": "_locale",
         "elementSet": "instanceMetadata",
         "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
       },
       "_savepoint_type": {
         "type": "string",
@@ -1328,7 +1407,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Farms Survey\""
+        "_value": "{\"text\":\"Farms Survey\"}"
       }
     ]
   }

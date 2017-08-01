@@ -1,9 +1,10 @@
+/* global $, odkData, util */
+/* exported resumeFn */
+'use strict';
+
 /**
  * This is the file that will be creating the list view.
  */
-/* global $, odkTables */
-'use strict';
-
 var result1;
             
 /** 
@@ -442,37 +443,37 @@ var resumeFn = function(idxStart) {
     var struct = {};
 
     // Geotagger Add Row Test
-    struct['Description'] = 'Test location';
+    struct.Description = 'Test location';
     var rowId = util.genUUID();
     odkData.addRow('geotagger', struct, rowId, cbFnAddRow, cbFnAddRowFail);
     odkData.query('geotagger', null, null, null, null, null, null, null, null, false, cbFnQueryAfterAdd, cbFnQueryFailureAfterAdd);
 
     // Geotagger Update Row Test
-    struct['Description'] = 'Test location 2';
+    struct.Description = 'Test location 2';
     odkData.updateRow('geotagger', struct, rowId, cbFnUpdateRow, cbFnUpdateRowFailure);
     odkData.query('geotagger', null, null, null, null, null, null, null, null, false, cbFnQueryAfterUpdate, cbFnQueryFailureAfterUpdate);
 
     // Geotagger Add Checkpoint Test
-    struct['Description'] = 'Add Checkpoint 1';
+    struct.Description = 'Add Checkpoint 1';
     odkData.addCheckpoint('geotagger', struct, rowId, cbFnAddCheckpt, cbFnAddCheckptFailure);
     odkData.query('geotagger', null, null, null, null, null, null, null, null, false, cbFnQueryAfterAddChkpt, cbFnQueryFailureAfterAddChkpt);
 
     // Geotagger Save Checkpoint As Incomplete Test
-	struct['Description'] = 'SaveAsIncomplete 1';
+	struct.Description = 'SaveAsIncomplete 1';
     odkData.saveCheckpointAsIncomplete('geotagger', struct, rowId, cbFnSaveCheckptInc, cbFnSaveCheckptIncFailure);
     odkData.query('geotagger', null, null, null, null, null, null, null, null, false, cbFnQueryAfterChkptInc, cbFnQueryFailureAfterChkptInc);
 
     // Geotagger Save Checkpoint As Incomplete Test
-    struct['Description'] = 'Add Checkpoint 2';
+    struct.Description = 'Add Checkpoint 2';
     odkData.addCheckpoint('geotagger', struct, rowId, cbFnAddCheckpt2, cbFnAddCheckptFailure2);
     odkData.query('geotagger', null, null, null, null, null, null, null, null, false, cbFnQueryAfterAddChkpt2, cbFnQueryFailureAfterAddChkpt2);
 
-	struct['Description'] = 'SaveAsComplete 1';
+	struct.Description = 'SaveAsComplete 1';
     odkData.saveCheckpointAsComplete('geotagger', struct, rowId, cbFnSaveCheckptCom, cbFnSaveCheckptComFailure);
     odkData.query('geotagger', null, null, null, null, null, null, null, null, false, cbFnQueryAfterChkptCom, cbFnQueryFailureAfterChkptCom);
 
     // Geotagger Delete Last Checkpoint Test
-    struct['Description'] = 'Add Checkpoint 3';
+    struct.Description = 'Add Checkpoint 3';
     odkData.addCheckpoint('geotagger', struct, rowId, cbFnAddCheckpt3, cbFnAddCheckptFailure3);
     odkData.query('geotagger', null, null, null, null, null, null, null, null, false, cbFnQueryAfterAddChkpt3, cbFnQueryFailureAfterAddChkpt3);
 

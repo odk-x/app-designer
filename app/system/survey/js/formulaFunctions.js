@@ -1,36 +1,49 @@
-/* global odkCommon */
 /**
  * Common functions accessible from the user's Javascript eval environment
  * (for use within their formulas).
  */
  //TODO: These functions need unit testing.
-define(['opendatakit','database', 'underscore'],
-function(opendatakit,  database,   _) {
+define(['opendatakit','database','jquery','underscore'],
+function(opendatakit,  database,  $,       _) {
+    /* global odkCommon */
     verifyLoad('formulaFunctions',
-        ['opendatakit','database', 'underscore'],
-        [opendatakit,  database,   _]);
+        ['opendatakit','database','jquery','underscore'],
+        [opendatakit,  database,   $,      _]);
     return {
         //calculates will be set by the builder
         calculates: {},
         opendatakit: opendatakit,
-        localize: function(textOrLangMap, locale) {
+		getCurrentLocale: function() {
             'use strict';
-            if(_.isUndefined(textOrLangMap)) {
-                return 'text_undefined';
-            }
-            if(_.isString(textOrLangMap)) {
-                return textOrLangMap;
-            }
-            if( locale in textOrLangMap ) {
-                return textOrLangMap[locale];
-            } else if( 'default' in textOrLangMap ) {
-                return textOrLangMap['default'];
-            } else {
-                odkCommon.log('E',"Could not localize object. Locale '" + locale +
-                    "' and 'default' missing from " + textOrLangMap);
-                throw new Error("Could not localize object. Locale '" + locale +
-                    "' and 'default' missing from: " + textOrLangMap );
-            }
+			var tableId = opendatakit.getCurrentTableId();
+			var instanceId = opendatakit.getCurrentInstanceId();
+			var locale;
+			if ( instanceId !== undefined && instanceId !== null && tableId !== "framework" ) {
+				locale = database.getInstanceMetaDataValue('_locale');
+			} else {
+				locale = opendatakit.getCachedLocale();
+			}
+			if ( locale === undefined || locale === null ) {
+				locale = opendatakit.getDefaultFormLocaleValue();
+			}
+			return locale;
+		},
+		expandFormDirRelativeUrlPath: function(content) {
+            'use strict';
+			if (!_.isString(content)) {
+				throw Error("formulaFunctions.expandFormDirRelativeUrlPath(content) -- content is not a string: " + JSON.stringify(content));
+			}
+			var formPath = opendatakit.getCurrentFormPath();
+			// if the Url is not prefixed by slash or http prefix, then prefix with form path
+			if ( content.indexOf('/') === 0 || content.indexOf('http:') === 0 || content.indexOf('https:') === 0 ) {
+				return content;
+			} else {
+				return formPath + content;
+			}
+		},
+        localize: function(locale, displayProperty) {
+            'use strict';
+			return window.odkCommon.localizeText(locale, displayProperty);
         },
         selected: function(promptValue, qValue) {
             'use strict';
@@ -92,6 +105,12 @@ function(opendatakit,  database,   _) {
         data: function(valueName) {
             'use strict';
             var datavalue = database.getDataValue(valueName);
+            return datavalue;
+        },
+        //data gets a value by name.
+        metadata: function(valueName) {
+            'use strict';
+            var datavalue = database.getInstanceMetaDataValue(valueName);
             return datavalue;
         },
         /**

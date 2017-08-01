@@ -1,7 +1,7 @@
 /**
  * The file for displaying a detail view.
  */
-/* global $, odkTables */
+/* global $, odkData */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
@@ -40,12 +40,7 @@ function display() {
     // Perform your modification of the HTML page here and call display() in
     // the body of your .html file.
 
-    var plotId = visitDetailResultSet.get('plot_id');
-
-//     var plots = odkTables.query(
-//         'plot',
-//         '_id = ?',
-//         [plotId]);
+    plotId = visitDetailResultSet.get('plot_id');
 
     var plotName = plots.get('plot_name');
 
