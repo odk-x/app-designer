@@ -1,0 +1,91 @@
+body {
+	margin: 0 0 0 0;
+	font-family: Roboto;
+}
+input, button {font-size: 16px;}
+#header {
+	padding: 8px 8px 8px 8px;
+	text-align: center;
+	width: calc(100% - 16px);
+	font-size: 150%;
+	color: navyblue;
+	height: 20%;
+	min-height: 1em;
+}
+#back {float: left}
+#add {float: right}
+#list {
+	padding: 8px 5% 8px 5%;
+}
+.buttons {
+	float: right;
+	display: inline-block;
+	/* test */
+	/*
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	*/
+	height: 100%;
+	vertical-align: middle;
+}
+.li {
+	/*min-height: 36px;*/
+	width: 100%;
+	/*margin-bottom: 10px;*/ /* put some space between the list elements */
+}
+.displays {
+	display: inline-block;
+	float: left;
+}
+.main-display {
+	font-size: 150%;
+}
+.sub-display {
+	/*font-size: 75%;*/ /* a bit small */
+}
+#navigation {
+	padding: 8px 8px 8px 8px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+#next {
+	float: right;
+}
+#prev {
+	float: left;
+}
+#search {
+	text-align: center;
+}
+.status {
+	height: 0px;
+	border-style: none;
+	margin-top: 4px;
+	margin-bottom: 0;
+	border-bottom: 5px solid #38c0f4;
+	border-top: 5px solid #38c0f4;
+}
+.status[data-status="COMPLETE"] {
+	border-top-color: #38c0f4; /* Blue */
+}
+.status[data-status="INCOMPLETE"] {
+	border-top-color: #F7C64A; /* Kournikova */
+}
+.status[data-status="null"] {
+	border-top-color: red;
+}
+.status[data-sync="synced"], .status[data-sync="synced_pending_files"] {
+	border-bottom-color: #38c0f4; /* Blue */
+}
+.status[data-sync="new_row"] {
+	border-bottom-color: #AAC46C; /* Chelsea Cucumber */
+}
+.status[data-sync="null"], .status[data-sync="deleted"], .status[data-sync="in_conflict"] {
+	border-bottom-color: red;
+}
+.status[data-sync="changed"] {
+	border-bottom-color: #F7C64A; /* Kournikova */
+}
+

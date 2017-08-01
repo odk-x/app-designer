@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+	<head>
+		<!--
+		<script src='app/system/js/mock/odkDataIf.js'></script>
+		-->
+		<script type="text/javascript" data-main="../app/system/survey/js/main" src="../app/system/libs/require.2.3.3.js"></script>
+		<script src='../app/system/js/odkData.js'></script>
+		<script src='../app/system/js/odkCommon.js'></script>
+		<script src='../app/config/assets/formgen_common.js'></script>
+		<script src='../app/config/assets/generate_common.js'></script>
+		<script>
+			var columns = [];
+			var metadata = null;
+			var fail = function failure() {
+				alert(Array.prototype.slice.call(arguments, 0).join(", "))
+			}
+			var ol = function ol() {
+				for (var i = 0; i < all_tables.length; i++) {
+					var option = document.createElement("option")
+					option.value = all_tables[i];
+					option.innerText = all_tables[i];
+					//option.innerText = display(localized_tables[all_tables[i]], all_tables[i], window.possible_wrapped, all_tables[i]);
+					document.getElementById("table").appendChild(option)
+				}
+				document.getElementById("table").selectedIndex = 0;
+				document.getElementById("iframe").style.height = document.body.scrollHeight.toString() + "px"
+				var block = function block() {
+					if (typeof(odkData) == "undefined" || typeof(odkDataIf) == "undefined") {
+						setTimeout(block, 100);
+						return;
+					}
+					document.getElementById("iframe"). src='../app/config/assets/table_slave.html'
+					newTable();
+				}
+				setTimeout(block, 0);
+			}
+			var deleting = false;
+			var display_col = "";
+			var sample_data = ["sample data", "sample data 2", "1234", "example of some really long example data", "1901-02-03T04:05:06.7891011"]
+			var resetDatabase = function resetDatabase() {
+				odkData.arbitraryQuery(table, "DELETE FROM " + table, [], 10000, 0, function(d) {
+					deleting = false;
+				}, fail);
+				odkData.arbitraryQuery(table, "SELECT * FROM " + table, [], 0, 0, function(d) {
+					metadata = d.getMetadata();
+					columns = [];
+					for (var i = 0; i < d.getColumns().length; i++) {
+						if (d.getColumns()[i][0] == "_") {
+							continue;
+						}
+						columns = columns.concat(d.getColumns()[i])
+					}
+					getDisplayCol();
+					document.getElementById("display_col").innerHTML = ""
+					for (var i = 0; i < columns.length; i++) {
+						var option = document.createElement("option")
+						option.value = columns[i];
+						option.innerText = displayCol(columns[i], metadata, table, table);
+						document.getElementById("display_col").appendChild(option)
+						if (columns[i] == display_col) {
+							document.getElementById("display_col").selectedIndex = i;
+						}
+					}
+					var running = sample_data.length;
+					//var all_to_set = [display_col]
+					//for (var i = 0; i < display_subcol.length; i++) all_to_set = all_to_set.concat(display_subcol[i][1])
+					var all_to_set = []
+					var do_inserts = function() {
+						for (var i = 0; i < sample_data.length; i++) {
+							var defaults = {};
+							for (var j = 0; j < all_to_set.length; j++) {
+								//defaults[all_to_set[j]] = sample_data[i]
+								defaults[all_to_set[j]] = all_to_set[j]
+							}
+							odkData.addRow(table, defaults, newGuid(), function(d) {
+								running--;
+							}, fail)
+						}
+					}
+					var block = function() {
+						if (deleting) {
+							setTimeout(block, 100);
+							return;
+						}
+						do_inserts()
+						block2();
+					}
+					var block2 = function() {
+						if (running > 0) {
+							setTimeout(block2, 100);
+							return;
+						}
+						update();
+					}
+					block();
+				}, fail);
+			}
+			var table = null;
+			var newTable = function newTable() {
+				table = document.getElementById("table").selectedOptions[0].value;
+				document.getElementById("subcols").innerHTML = ""
+				resetDatabase();
+			}
+			var ifOl = function iframeOnload() {
+				
+			}
+			var getDisplayCol = function getDisplayCol() {
+				display_col = document.getElementById("display_col").selectedOptions[0]
+				if (typeof(display_col) == "undefined") display_col = {"value": ""}
+				display_col = display_col.value
+			}
+			var update = function update() {
+				getDisplayCol();
+				getDisplaySubcols();
+				var iframe = document.getElementById("iframe")
+				iframe.contentWindow.odkDataIf = odkDataIf
+				iframe.contentWindow.odkData = odkData
+				iframe.contentWindow.location.hash = "#" + table
+				iframe.contentWindow.table_id = table
+				iframe.contentWindow.display_col = display_col
+				iframe.contentWindow.display_subcol = display_subcol
+				iframe.contentWindow.update_total_rows(true);
+				var pre = document.getElementById("exported")
+				pre.innerHTML = ""
+				pre.appendChild(document.createTextNode(
+					"table_id = " + JSON.stringify(table) + ";"
+				));
+				pre.appendChild(document.createElement("br"))
+				pre.appendChild(document.createTextNode(
+					"display_col = " + JSON.stringify(display_col) + ";"
+				))
+				pre.appendChild(document.createElement("br"))
+				pre.appendChild(document.createTextNode(
+					"display_subcol = " + JSON.stringify(display_subcol) + ";"
+				));
+			}
+			var display_subcol = []
+			var getDisplaySubcols = function getDisplaySubcols() {
+				display_subcol = []
+				var count = document.getElementById("subcols").children.length;
+				for (var i = 0; i < count; i++) {
+					var elem = document.getElementById("subcols-" + i);
+					var text = elem.getElementsByTagName("input")[0].value
+					var col = elem.getElementsByTagName("select")[0].selectedOptions[0].value
+					col = col == "_null" ? null : col
+					var nl = elem.getElementsByTagName("select")[1].selectedOptions[0].value.toString().toLowerCase() == "false" ? false : true
+					var triplet = [text, col, nl];
+					display_subcol = display_subcol.concat(0)
+					display_subcol[i] = triplet;
+				}
+			}
+			var add = function add() {
+				var div = document.createElement("div")
+				var idx = document.getElementById("subcols").children.length;
+				div.id = "subcols-" + idx;
+				var text = document.createElement("input")
+				text.type = "text";
+				text.setAttribute("data-subcol", idx);
+				text.addEventListener("change", update);
+				text.placeholder = "Text to display before the selected column, if any."
+				var select = document.createElement("select")
+				select.addEventListener("change", update)
+				select.setAttribute("data-subcol", idx);
+				var select2 = document.createElement("select")
+				select2.addEventListener("change", update)
+				select2.setAttribute("data-subcol", idx);
+				var option = document.createElement("option")
+				option.value = "_null";
+				option.innerText = "null";
+				select.appendChild(option)
+				for (var i = 0; i < columns.length; i++) {
+					option = document.createElement("option")
+					option.value = columns[i];
+					option.innerText = displayCol(columns[i], metadata, table, table);
+					select.appendChild(option)
+				}
+				option = document.createElement("option")
+				option.value = true;
+				option.innerText = "true";
+				select2.appendChild(option)
+				option = document.createElement("option")
+				option.value = false;
+				option.innerText = "false";
+				select2.appendChild(option)
+				var remove = document.createElement("button")
+				remove.innerText = "-"
+				remove.addEventListener("click", function() {
+					alert("TODO");
+				});
+				div.appendChild(text);
+				div.appendChild(select);
+				div.appendChild(select2);
+				div.appendChild(remove);
+				document.getElementById("subcols").appendChild(div)
+			}
+		</script>
+		<style>
+			#iframe {
+				width: 70%;
+				top: 0%;
+				bottom: 0%;
+				display: block;
+				position: absolute;
+				left: 0%;
+				background-color: white;
+			}
+			#right {
+				position: absolute;
+				left: 71%;
+				width: 29%;
+				top: 8px;
+			}
+			body {
+				min-height: 100%;
+			}
+			#table, #display_col {
+				min-width: 200px;
+			}
+		</style>
+	</head>
+	<body onLoad='ol();'>
+		<iframe id='iframe' onLoad='ifOl();'></iframe>
+		<div id='right'>
+			Table: 
+			<select id='table' onChange='newTable();'></select>
+			<br />
+			Display Column: 
+			<select id='display_col' onChange='update();'></select>
+			<br />
+			<button id='add' onClick='add();'>+</button>
+			<div id='subcols'></div>
+			<pre id='exported'></pre>
+		</div>
+	</body>
+</html>
