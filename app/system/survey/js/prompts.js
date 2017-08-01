@@ -2027,7 +2027,16 @@ promptTypes.datetime = promptTypes.input_type.extend({
         odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx);
         if ( !that.insideAfterRender ) {
             var formattedDateValue = that.$('input').combodate('getValue', null);
-            var value = new Date(formattedDateValue);
+            var value = null;
+            if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
+                if (that.type === "time") {
+                    var newDate = new Date();
+                    formattedDateValue.year(newDate.getUTCFullYear());
+                    formattedDateValue.month(newDate.getUTCMonth());
+                    formattedDateValue.date(newDate.getUTCDate());
+                }
+                value = new Date(formattedDateValue);
+            }
             
             //
             // we are using a date pop-up.  If an earlier action fails, we should not
@@ -2092,13 +2101,8 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 that.dtp.destroy();
             }
 
-            if (that.showDate && !that.showTime) {
-                that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
-            } else if (!that.showDate && that.showTime) {
-                that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
-            } else {
-                that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
-            }
+            that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
+            
             var inputElement = that.$('input');
             that.dtp = inputElement.data('DateTimePicker');
 
