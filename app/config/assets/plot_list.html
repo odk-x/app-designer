@@ -37,7 +37,6 @@ var display_cols = {"household_member": "name", "femaleClients": "_id", "maleCli
 // List of tables we can add/edit with formgen, if the table isn't found in this list, we'll use survey
 var allowed_tables = ["household_member", "femaleClients", "maleClients", "exampleForm", "Ethiopia_members", "Tea_types", "plot", "Tea_inventory", "geopoints", "datesTest", "selects", "Ethiopia_household", "Tea_houses"]
 // A map of table ids to tokens that can be used to localize their display name
-var localized_tables = {"household_member": {"title": {"text": "Household Members"}}, "femaleClients": {"title": {"text": "Female All Fields"}}, "maleClients": {"title": {"text": "All Partner Form Fields"}}, "exampleForm": {"title": {"text": "Example form"}}, "Ethiopia_members": {"title": {"text": "Roster"}}, "Tea_types": {"title": {"text": "Tea Types"}}, "plot": {"title": {"text": "Plot"}}, "Tea_inventory": {"title": {"text": "Tea Inventory"}}, "geopoints": {"title": {"text": "Home Locator"}}, "datesTest": {"title": {"text": "Dates test"}}, "selects": {"title": {"text": "Select Examples"}}, "visit": {"title": {"text": "Plot Visits"}}, "Ethiopia_household": {"title": {"text": "Ethiopia Household Data"}}, "Tea_houses": {"title": {"text": "Tea Houses"}}};
 var display_col_wrapper = null;
 var clicked = function(table_id, row_id) {
 	odkTables.openDetailView({}, table_id, row_id);
@@ -57,6 +56,9 @@ var customJsSearch = function customJsSearch() {
 	
 }
 
+
+var embedded = false;
+var forMapView = false;
 		</script>
 		<script type="text/javascript" src="generate_table.js"></script>
 	</head>

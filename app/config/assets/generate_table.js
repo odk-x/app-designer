@@ -119,7 +119,9 @@ var ol = function ol() {
 	}
 	// If we fail, harshly warn the user (even though we're not actually bailing out)
 	if (display_col == undefined || display_col == null) {
-		alert(_t("Couldn't guess instance col. Bailing out, you're on your own."));
+		if (!embedded) {
+			alert(_t("Couldn't guess instance col. Bailing out, you're on your own."));
+		}
 		display_col = "_id"; // BAD IDEA
 	}
 	// Try and load the contents of the search box, limit dropdown and offset (i.e. what page we're on) from
@@ -143,17 +145,33 @@ var ol = function ol() {
 		}
 	}
 	document.getElementById("limit").selectedIndex = res;
-	// Make sure we have a table id before continuing, if we don't, try and get it from getViewData
-	// This will slow down page loading by a good second, so just please set it in customJsOl
+	// The rest of this function requires that we have a table id. If we have one, fire off an
+	// asynchronous call to getViewData to try and get the map index, and immediately continue.
+	// If we don't have a table id, we will be forced to wait for getViewData to come back with
+	// a table id before we can start doing our queries.
 	if (table_id.length == 0) {
-		alert(_t("No table id! Please set it in customJsOl or pass it in the url hash"));
+		if (!embedded) {
+			alert(_t("No table id! Please set it in customJsOl or pass it in the url hash"));
+		}
 		odkData.getViewData(function success(d) {
 			table_id = d.getTableId();
+			handleMapIndex(d)
 			olHasTableId();
 		}, function failure(e) {
 			alert(e);
-		}, 0, 0);
+		}, 10000, 0);
 	} else {
+		if (forMapView) {
+			try {
+				odkData.getViewData(function success(d) {
+					handleMapIndex(d);
+				}, function failure(e) {
+					alert(e);
+				}, 10000, 0);
+			} catch (e) {
+				// can only happen in a launchHTML, which means we're not in a map view so it doesn't matter if we can't get the map index
+			}
+		}
 		olHasTableId();
 	}
 }
@@ -427,6 +445,7 @@ var doSearch = function doSearch() {
 			var mainDisplay = document.createElement("div")
 			mainDisplay.classList.add("main-display");
 			var to_display = _tc(d, display_col, d.getData(i, display_col));
+			if (embedded) to_display = display_col
 			if (display_col_wrapper != null) {
 				to_display = display_col_wrapper(d, i, to_display);
 			}
@@ -450,16 +469,20 @@ var doSearch = function doSearch() {
 					subDisplay = document.createElement("div")
 					subDisplay.classList.add("sub-display");
 				}
+				var label_text = display_subcol[j][0]
+				var col = display_subcol[j][1]
+				var value = col == null ? null : d.getData(i, col);
+				if (embedded) value = col == null ? "" : col;
 				if (typeof(display_subcol[j][0]) == "string") {
-					subDisplay.appendChild(document.createTextNode(_tu(display_subcol[j][0])))
-					if (display_subcol[j][1] != null) {
-						subDisplay.appendChild(document.createTextNode(_tc(d, display_subcol[j][1], d.getData(i, display_subcol[j][1]))))
+					subDisplay.appendChild(document.createTextNode(_tu(label_text)))
+					if (col != null) {
+						subDisplay.appendChild(document.createTextNode(_tc(d, col, value)))
 					}
-				} else if (display_subcol[j][0] === true) {
-					subDisplay.appendChild(document.createTextNode(pretty(d.getData(i, display_subcol[j][1]))))
+				} else if (label_text === true) {
+					subDisplay.appendChild(document.createTextNode(pretty(value)))
 				} else {
 					var span = document.createElement("span");
-					span.innerHTML = display_subcol[j][0](subDisplay, d.getData(i, display_subcol[j][1]), d, i);
+					span.innerHTML = display_subcol[j][0](subDisplay, value, d, i);
 					subDisplay.appendChild(span);
 				}
 				if (display_subcol[j][2]) {
@@ -516,11 +539,12 @@ var doSearch = function doSearch() {
 				});
 			})(edit, _delete, i, d);
 			// show edit button only if we can edit the row
-			if (d.getData(i, "_effective_access").indexOf("w") >= 0) {
+			var access = d.getData(i, "_effective_access") || ""
+			if (access.indexOf("w") >= 0) {
 				buttons.appendChild(edit);
 			}
 			// show delete button only if we can delete the row
-			if (d.getData(i, "_effective_access").indexOf("d") >= 0) {
+			if (access.indexOf("d") >= 0) {
 				buttons.appendChild(_delete);
 			}
 			// If we're in a group by view, don't show edit/delete buttons
@@ -531,8 +555,10 @@ var doSearch = function doSearch() {
 			var hr = document.createElement("div")
 			hr.classList.add("status");
 			if (global_group_by == null || global_group_by == "undefined" || global_group_by.trim().length == 0) {
-				hr.setAttribute("data-status", d.getData(i, "_savepoint_type"))
-				hr.setAttribute("data-sync", d.getData(i, "_sync_state")) // no css rules for this one
+				if (!embedded) {
+					hr.setAttribute("data-status", d.getData(i, "_savepoint_type"))
+					hr.setAttribute("data-sync", d.getData(i, "_sync_state")) // no css rules for this one
+				}
 			} else {
 				hr.setAttribute("data-status", "COMPLETE")
 				hr.setAttribute("data-sync", "synced")
@@ -608,6 +634,7 @@ var groupBy = function groupBy() {
 // This is called when the user selects a group by option
 var groupByGo = function groupByGo() {
 	var go = true;
+	if (embedded) go = false;
 	if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
 		go = false;
 	} else {
@@ -619,4 +646,11 @@ var groupByGo = function groupByGo() {
 		odkTables.launchHTML({}, clean_href() + "#" + table_id + "/" + global_group_by);
 		//update_total_rows(true);
 	}
+}
+var handleMapIndex = function handleMapIndex(d) {
+	if (!forMapView) return;
+	var idx = d.getMapIndex();
+	if (idx == -1) return;
+	//alert(idx);
+	clicked(table_id, d.getData(idx, "_id"), d, idx);
 }

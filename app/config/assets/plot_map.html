@@ -51,9 +51,7 @@ var customJsOl = function customJsOl() {
 	display_subcol = [[planting_cb, "planting", false], [", ","plot_size", false], [" hectares", null, true]];
 	table_id = "plot";
 
-		clicked = function clicked(table_id, row_id, d, i) {
-			odkTables.launchHTML(null, "config/assets/plot_data.html#" + d.getData(i, "plot_name"));
-		}
+	forMapView = true;
 
 }
 var customJsSearch = function customJsSearch() {

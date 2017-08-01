@@ -42,7 +42,7 @@ var getMetadataAndThen = function getMetadata(table, callback) {
 // and a menu_path like [1, 1, 0]
 // it will navigate down the chain and return ["By Use", "refrigerators", "utilization"]
 
-var make_submenu = function make_submenu() {
+var make_submenu = function make_submenu(menu_path) {
 	var submenu = menu;
 	for (var i = 0; i < menu_path.length; i++) {
 		submenu = submenu[2][menu_path[i]];
@@ -55,7 +55,7 @@ var make_submenu = function make_submenu() {
 var buttonClick = function doButtonClick(path) {
 	// first get the submenu that the button represents
 	// Don't want to actually change menu_path because if we open a html view or something and then the activity DOESN'T get destroyed and recreated when we return, menu_path will be pointed into a string and the whole thing will get fucked up
-	var submenu = make_submenu()[2][Number(path)];
+	var submenu = make_submenu(menu_path)[2][Number(path)];
 	// _html should launch a page
 	if (submenu[1] == "_html") {
 		odkTables.launchHTML(null, submenu[2]);
@@ -82,7 +82,7 @@ var buttonClick = function doButtonClick(path) {
 var doMenu = function doMenu() {
 	// First clear the existing buttons
 	document.getElementById("list").innerHTML = "";
-	var submenu = make_submenu();
+	var submenu = make_submenu(menu_path);
 	// Set the title of the page
 	document.getElementById("title").innerHTML = _tu(submenu[0]);
 	// len is the number of buttons to put on the screen

@@ -35,7 +35,7 @@ fill: function(elem, min, max, pad) {
 		elem.appendChild(child);
 	}
 },
-pad:  function pad(thing) {
+pad: function pad(thing) {
 	while (thing.length < 2) {
 		thing = "0" + thing;
 	}
@@ -106,7 +106,7 @@ fill: function(elem, min, max, pad) {
 		elem.appendChild(child);
 	}
 },
-pad:  function pad(thing) {
+pad: function pad(thing) {
 	while (thing.length < 2) {
 		thing = "0" + thing;
 	}
@@ -185,7 +185,7 @@ fill: function(elem, min, max, pad) {
 		elem.appendChild(child);
 	}
 },
-pad:  function pad(thing) {
+pad: function pad(thing) {
 	while (thing.length < 2) {
 		thing = "0" + thing;
 	}
@@ -249,4 +249,6 @@ validate: function(elem) {
 }
 },};
 var all_custom_prompt_types = ["time", "datetime", "date"];
+var all_tables = ["household_member", "femaleClients", "maleClients", "exampleForm", "Ethiopia_members", "Tea_types", "plot", "Tea_inventory", "geopoints", "datesTest", "selects", "visit", "Ethiopia_household", "Tea_houses"];
+var localized_tables = {"household_member": {"title": {"text": "Household Members"}}, "femaleClients": {"title": {"text": "Female All Fields"}}, "maleClients": {"title": {"text": "All Partner Form Fields"}}, "exampleForm": {"title": {"text": "Example form"}}, "Ethiopia_members": {"title": {"text": "Roster"}}, "Tea_types": {"title": {"text": "Tea Types"}}, "plot": {"title": {"text": "Plot"}}, "Tea_inventory": {"title": {"text": "Tea Inventory"}}, "geopoints": {"title": {"text": "Home Locator"}}, "datesTest": {"title": {"text": "Dates test"}}, "selects": {"title": {"text": "Select Examples"}}, "visit": {"title": {"text": "Plot Visits"}}, "Ethiopia_household": {"title": {"text": "Ethiopia Household Data"}}, "Tea_houses": {"title": {"text": "Tea Houses"}}};
 var user_translations = {};
