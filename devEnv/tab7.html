@@ -37,19 +37,29 @@
 			var deleting = false;
 			var display_col = "";
 			var sample_data = ["sample data", "sample data 2", "1234", "example of some really long example data", "1901-02-03T04:05:06.7891011"]
-			var resetDatabase = function resetDatabase() {
-				odkData.arbitraryQuery(table, "DELETE FROM " + table, [], 10000, 0, function(d) {
-					deleting = false;
-				}, fail);
-				odkData.arbitraryQuery(table, "SELECT * FROM " + table, [], 0, 0, function(d) {
+			var getColumns = function getColumns(other_table, callback) {
+				if (typeof(columns[other_table]) != "undefined") {
+					callback();
+					return;
+				}
+				columns[other_table] = []
+				odkData.arbitraryQuery(other_table, "SELECT * FROM " + other_table, [], 0, 0, function(d) {
 					metadata = d.getMetadata();
-					columns[table] = []
 					for (var i = 0; i < d.getColumns().length; i++) {
 						if (d.getColumns()[i][0] == "_") {
 							continue;
 						}
-						columns[table] = columns[table].concat(d.getColumns()[i])
+						columns[other_table] = columns[other_table].concat(d.getColumns()[i])
 					}
+					callback();
+				}, fail);
+			}
+			var resetDatabase = function resetDatabase() {
+				deleting = true;
+				odkData.arbitraryQuery(table, "DELETE FROM " + table, [], 10000, 0, function(d) {
+					deleting = false;
+				}, fail);
+				getColumns(table, function() {
 					getDisplayCol();
 					document.getElementById("display_col").innerHTML = ""
 					for (var i = 0; i < columns[table].length; i++) {
@@ -93,16 +103,13 @@
 						update();
 					}
 					block();
-				}, fail);
+				})
 			}
 			var table = null;
 			var newTable = function newTable() {
 				table = document.getElementById("table").selectedOptions[0].value;
 				document.getElementById("subcols").innerHTML = ""
 				resetDatabase();
-			}
-			var ifOl = function iframeOnload() {
-				
 			}
 			var getDisplayCol = function getDisplayCol() {
 				display_col = document.getElementById("display_col").selectedOptions[0]
@@ -113,6 +120,7 @@
 				getDisplayCol();
 				getDisplaySubcols();
 				getGroupBys();
+				getJoins();
 				var iframe = document.getElementById("iframe")
 				iframe.contentWindow.odkDataIf = odkDataIf
 				iframe.contentWindow.odkData = odkData
@@ -141,7 +149,14 @@
 						"allowed_group_bys = " + JSON.stringify(allowed_group_bys) + ";"
 					));
 				}
+				if (global_join.length > 0) {
+					pre.appendChild(document.createElement("br"))
+					pre.appendChild(document.createTextNode(
+						"global_join = " + JSON.stringify(global_join) + ";"
+					));
+				}
 			}
+			var global_join = "";
 			var display_subcol = []
 			var getDisplaySubcols = function getDisplaySubcols() {
 				display_subcol = []
@@ -214,8 +229,121 @@
 				group_bys.id = "group_bys"
 				document.getElementById("right").appendChild(group_bys)
 				redrawGroupBys();
+				var addjoin = document.createElement("button")
+				addjoin.innerText = "Add join"
+				addjoin.addEventListener("click", newjoin)
+				var joins = document.createElement("div")
+				joins.id = "joins"
+				document.getElementById("right").appendChild(addjoin)
+				document.getElementById("right").appendChild(joins)
+				redrawJoins();
 				advanced = true;
 			}
+			var newjoin = function newjoin() {
+				var joins = document.getElementById("joins")
+				var idx = all_joins.length
+				var wrapper = document.createElement("div");
+				wrapper.id = "join-" + idx;
+				wrapper.innerText = "JOIN "
+				var select1 = document.createElement("select")
+				select1.addEventListener("change", function() { redrawJoin(idx); });
+				wrapper.appendChild(select1)
+				wrapper.appendChild(document.createTextNode(" ON " + table))
+				wrapper.appendChild(document.createTextNode("."))
+				var select2 = document.createElement("select")
+				select2.addEventListener("change", update);
+				wrapper.appendChild(select2);
+				wrapper.appendChild(document.createTextNode(" = "))
+				var span = document.createElement("span")
+				span.id = "join-" + idx + "-span"
+				wrapper.appendChild(span)
+				wrapper.appendChild(document.createTextNode("."))
+				var select3 = document.createElement("select")
+				select3.addEventListener("change", update);
+				wrapper.appendChild(select3);
+				var btn = document.createElement("button")
+				btn.innerText = "-"
+				btn.addEventListener("click", function() {
+					alert("TODO")
+				});
+				wrapper.appendChild(btn);
+				joins.appendChild(wrapper)
+				all_joins = all_joins.concat(0);
+				all_joins[idx] = [table, columns[table][0], columns[table][0]];
+				redrawJoin(idx);
+			}
+			var redrawJoin = function redrawJoin(idx) {
+				getJoins();
+				var thing = document.getElementById("join-" + idx)
+				var select1 = thing.getElementsByTagName("select")[0]
+				select1.innerHTML = "";
+				for (var i = 0; i < all_tables.length; i++) {
+					var option = document.createElement("option")
+					option.value = all_tables[i];
+					option.innerText = display(localized_tables[all_tables[i]], all_tables[i], window.possible_wrapped.concat("title"), all_tables[i]);
+					select1.appendChild(option);
+					if (all_joins[idx][0] == all_tables[i]) {
+						select1.selectedIndex = i;
+					}
+				}
+				getJoins();
+				var select2 = thing.getElementsByTagName("select")[1];
+				select2.innerHTML = ""
+				for (var i = 0; i < columns[table].length; i++) {
+					var col = columns[table][i];
+					var option = document.createElement("option")
+					option.value = col;
+					option.innerText = displayCol(col, metadata, table);
+					select2.appendChild(option);
+				}
+
+				var tbl = all_joins[idx][0];
+				document.getElementById("join-" + idx + "-span").innerText = display(localized_tables[tbl], tbl, window.possible_wrapped.concat("title"), tbl);
+				getColumns(tbl, function() {
+					var select = thing.getElementsByTagName("select")[2];
+					select.innerHTML = "";
+					for (var i = 0; i < columns[tbl].length; i++) {
+						var col = columns[tbl][i];
+						var option = document.createElement("option")
+						option.value = col;
+						option.innerText = displayCol(col, metadata, tbl);
+						select.appendChild(option);
+						if (all_joins[idx][2] == col) {
+							select.selectedIndex = i;
+						}
+					}
+				});
+			}
+			var getJoins = function getJoins() {
+				if (!advanced) {
+					all_joins = []
+					return;
+				}
+				all_joins = []
+				var thing = document.getElementById("joins")
+				for (var i = 0; i < thing.children.length; i++) {
+					var join = document.getElementById("join-" + i);
+					all_joins = all_joins.concat(0);
+					var selects = join.getElementsByTagName("select");
+					all_joins[i] = [
+						selects[0].selectedOptions[0] == null ? table : selects[0].selectedOptions[0].value,
+						selects[1].selectedOptions[0] == null ? "" : selects[1].selectedOptions[0].value,
+						selects[2].selectedOptions[0] == null ? "" : selects[2].selectedOptions[0].value
+					]
+				}
+				global_join = []
+				for (var i = 0; i < all_joins.length; i++) {
+					global_join = global_join.concat(all_joins[i][0] + " ON " + table + "." + all_joins[i][1] + " = " + all_joins[i][0] + "." + all_joins[i][2])
+				}
+				global_join = global_join.join(" JOIN ")
+			}
+			var redrawJoins = function redrawJoins() {
+				getJoins();
+				for (var i = 0; i < document.getElementById("joins").children.length; i++) {
+					redrawJoin(i);
+				}
+			}
+			var all_joins = []
 			var advanced = false;
 			var getGroupBys = function getGroupBys() {
 				if (!advanced) return;
@@ -331,8 +459,8 @@
 			body {
 				min-height: 100%;
 			}
-			#table, #display_col {
-				min-width: 200px;
+			select {
+				min-width: 100px;
 			}
 			label {
 				padding-left: 8px;
@@ -340,7 +468,7 @@
 		</style>
 	</head>
 	<body onLoad='ol();'>
-		<iframe id='iframe' onLoad='ifOl();'></iframe>
+		<iframe id='iframe'></iframe>
 		<div id='right'>
 			<button onClick='goAdvanced();' id='goAdvanced'>Go Advanced</button><br />
 			Table: 
