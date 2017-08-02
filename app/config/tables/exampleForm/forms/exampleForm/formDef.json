@@ -6,13 +6,6 @@
         "_row_num": 2
       },
       {
-        "comments": "household id is required, so set a default in case the user never goes there",
-        "type": "assign",
-        "name": "household_id",
-        "calculation": "data('household_id') == null ? row_id == undefined ? '' : row_id : data('household_id')",
-        "_row_num": 3
-      },
-      {
         "type": "select_multiple",
         "values_list": "sections",
         "name": "sections",
@@ -2403,7 +2396,7 @@
               "__rowNum__": 4,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nassign('household_id', data('household_id') == null ? row_id == undefined ? '' : row_id : data('household_id'));\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
