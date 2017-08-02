@@ -145,19 +145,33 @@ var ol = function ol() {
 		}
 	}
 	document.getElementById("limit").selectedIndex = res;
-	// Make sure we have a table id before continuing, if we don't, try and get it from getViewData
-	// This will slow down page loading by a good second, so just please set it in customJsOl
+	// The rest of this function requires that we have a table id. If we have one, fire off an
+	// asynchronous call to getViewData to try and get the map index, and immediately continue.
+	// If we don't have a table id, we will be forced to wait for getViewData to come back with
+	// a table id before we can start doing our queries.
 	if (table_id.length == 0) {
 		if (!embedded) {
 			alert(_t("No table id! Please set it in customJsOl or pass it in the url hash"));
 		}
 		odkData.getViewData(function success(d) {
 			table_id = d.getTableId();
+			handleMapIndex(d)
 			olHasTableId();
 		}, function failure(e) {
 			alert(e);
-		}, 0, 0);
+		}, 10000, 0);
 	} else {
+		if (forMapView) {
+			try {
+				odkData.getViewData(function success(d) {
+					handleMapIndex(d);
+				}, function failure(e) {
+					alert(e);
+				}, 10000, 0);
+			} catch (e) {
+				// can only happen in a launchHTML, which means we're not in a map view so it doesn't matter if we can't get the map index
+			}
+		}
 		olHasTableId();
 	}
 }
@@ -620,7 +634,7 @@ var groupBy = function groupBy() {
 // This is called when the user selects a group by option
 var groupByGo = function groupByGo() {
 	var go = true;
-	if (embedded) go = false;
+	if (embedded) return; // don't navigate away inside app designer
 	if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
 		go = false;
 	} else {
@@ -632,4 +646,11 @@ var groupByGo = function groupByGo() {
 		odkTables.launchHTML({}, clean_href() + "#" + table_id + "/" + global_group_by);
 		//update_total_rows(true);
 	}
+}
+var handleMapIndex = function handleMapIndex(d) {
+	if (!forMapView) return;
+	var idx = d.getMapIndex();
+	if (idx == -1) return;
+	//alert(idx);
+	clicked(table_id, d.getData(idx, "_id"), d, idx);
 }
