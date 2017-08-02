@@ -191,7 +191,7 @@
 				getColsToSelect()
 				for (var i = 0; i < count; i++) {
 					var div = document.getElementById("subcols-" + i);
-					div.getElementsByTagName("input")[0] = display_subcol[i][0];
+					div.getElementsByTagName("input")[0].value = display_subcol[i][0];
 					var select = div.getElementsByTagName("select")[0]
 					select.innerHTML = "";
 					var cols = ["_null"].concat(columns[table]);
