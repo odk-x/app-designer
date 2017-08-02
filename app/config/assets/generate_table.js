@@ -634,7 +634,7 @@ var groupBy = function groupBy() {
 // This is called when the user selects a group by option
 var groupByGo = function groupByGo() {
 	var go = true;
-	if (embedded) go = false;
+	if (embedded) return; // don't navigate away inside app designer
 	if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
 		go = false;
 	} else {

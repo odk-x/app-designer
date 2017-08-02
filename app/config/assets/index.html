@@ -55,63 +55,25 @@ var make_path_from_string = function make_path_from_string(str, incomplete) {
 	return null;
 }
 if (window.location.hash.substr(1).length == 0) {
-	var region_as_role = [];
+	var region_as_role = "";
 	var all_regions = [];
-	var rolesDone = regionsDone = false;
 	var redirect = function redirect() {
-		/*
-		if (!(rolesDone && regionsDone)) return;
-		var region = "";
-		for (var i = 0; i < all_regions.length; i++) {
-			if (region_as_role.toUpperCase() == all_regions[i].toUpperCase()) {
-				region = all_regions[i];
-			}
+		if (region_as_role.length == 0) {
+			// TODO LOCKOUT
+			return;
 		}
-		if (region.length == 0) {
-			menu = [_tu("Error - Admin region ? does not exist or has no health facilities", region_as_role), null, []];
-		}
-		var html = "config/assets/admin_region.html#" + region + ":";
-		window.location.href = "/coldchain/" + html
-		//odkTables.launchHTML(null, html);
-		*/
-		if (region_as_role.length == 0) return;
-		var best = make_path_from_string(region_as_role[0], [])
-		for (var i = 1; i < region_as_role.length; i++) {
-			var path = make_path_from_string(region_as_role[i], []);
-			if (path.length < best.length) {
-				best = path;
-			}
-		}
-		menu_path = best;
+		var path = make_path_from_string(region_as_role, [])
+		menu_path = path;
 		doMenu();
 	}
-	/*
-	odkData.arbitraryQuery("health_facility", "SELECT DISTINCT admin_region FROM health_facility", [], 10000, 0, function(d) {
-		for (var i = 0; i < d.getCount(); i++) {
-			all_regions = all_regions.concat(d.getData(i, "admin_region"));
+	odkData.getDefaultGroup(function(r) {
+		r = r.getDefaultGroup();
+		if (r[i].indexOf("GROUP_REGION_") == 0) {
+			var region = r[i].replace("GROUP_REGION_", "");
+			// replace all occurrences
+			region = region.replace(/_/g, " ");
+			region_as_role = region;
 		}
-		regionsDone = true;
-		redirect();
-	}, function(e) {
-		alert(e);
-	});
-	*/
-	odkData.getRoles(function(r) {
-		r = r.resultObj.metadata.roles
-		// TEMP DEBUG TEST
-		//r = ["GROUP_REGION_SOUTH_WEST", "GROUP_REGION_SOUTH_EAST", "GROUP_REGION_SOUTH"]
-		if (r == null) return;
-		for (var i = 0; i < r.length; i++) {
-			//if (r[i].indexOf("GROUP_ADMIN_REGION_") == 0) {
-			if (r[i].indexOf("GROUP_REGION_") == 0) {
-				//var region = r[i].replace("GROUP_ADMIN_REGION_", "");
-				var region = r[i].replace("GROUP_REGION_", "");
-				// replace all occurrences
-				region = region.replace(/_/g, " ");
-				region_as_role = region_as_role.concat(region);
-			}
-		}
-		rolesDone = true;
 		redirect();
 	});
 }
