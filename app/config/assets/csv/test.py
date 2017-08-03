@@ -1,5 +1,5 @@
 import csv, random, time
-reader = csv.DictReader(open("refrigerators.updated.csv", "r"))
+reader = csv.DictReader(open("refrigerators.csv", "r"))
 possible_notes = ["Nothing to report", "Faulty power supply was replaced", "null", "Seems to be in good condition"]
 lines = ["date_serviced,notes,refrigerator_id,refrigerator_row_id_fake"]
 for line in reader:
