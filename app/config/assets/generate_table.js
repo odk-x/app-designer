@@ -49,6 +49,10 @@ var global_static = false;
 var global_static_args = false;
 var global_human_readable_what = false;
 
+// Used for caching, progressively cache a smaller displays width as the user needs more and more buttons
+// If we get to the bottom and only the "edit" button has ever been shown, then the displays will have a wider width
+// than if we get to the bottom and both the edit and delete buttons have been shown
+var runningButtonsToShow = 0;
 
 // Helper function to add a row with formgen or survey. If the table is in allowed_tables it opens
 // with formgen, otherwise survey
@@ -539,13 +543,16 @@ var doSearch = function doSearch() {
 				});
 			})(edit, _delete, i, d);
 			// show edit button only if we can edit the row
+			var buttonsShown = 0;
 			var access = d.getData(i, "_effective_access") || ""
 			if (access.indexOf("w") >= 0) {
 				buttons.appendChild(edit);
+				buttonsShown++;
 			}
 			// show delete button only if we can delete the row
 			if (access.indexOf("d") >= 0) {
 				buttons.appendChild(_delete);
+				buttonsShown++;
 			}
 			// If we're in a group by view, don't show edit/delete buttons
 			if (!global_group_by) {
@@ -573,7 +580,8 @@ var doSearch = function doSearch() {
 			}
 			li.style.lineHeight = global_line_height;
 			// This makes it so if you click anywhere on the row other than the buttons, it opens a detail view
-			if (global_displays_width == null) {
+			if (global_displays_width == null || buttonsShown > runningButtonsToShow) {
+				runningButtonsToShow = buttonsShown;
 				global_displays_width = (li.clientWidth - buttons.clientWidth - 10).toString() + "px";
 			}
 			displays.style.width = global_displays_width;
