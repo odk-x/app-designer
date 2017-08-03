@@ -46,9 +46,10 @@
 				if (regionDone && typeDone && sourceDone && rolesDone) {
 					var region = document.getElementById("region");
 					var options = region.children;
-					for (var i = 0; i < children.length; i++) {
-						if (children.value.toLowerCase() == region_as_role.toLowerCase()) {
+					for (var i = 0; i < options.length; i++) {
+						if (options[i].value.toLowerCase() == region_as_role.toLowerCase()) {
 							region.selectedIndex = i;
+							region.selectedOptions[0].innerText += _tu(" (locked)")
 							break;
 						}
 					}
@@ -147,8 +148,9 @@
 				}, null); // TODO failure function
 				odkData.getDefaultGroup(function(r) {
 					r = r.getDefaultGroup();
-					if (r[i].indexOf("GROUP_REGION_") == 0) {
-						var region = r[i].replace("GROUP_REGION_", "");
+					if (r == null) document.body.innerHTML = "Access denied"
+					else if (r.indexOf("GROUP_REGION_") == 0) {
+						var region = r.replace("GROUP_REGION_", "");
 						// replace all occurrences
 						region = region.replace(/_/g, " ");
 						region_as_role = region;

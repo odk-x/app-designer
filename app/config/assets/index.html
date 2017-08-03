@@ -68,8 +68,8 @@ if (window.location.hash.substr(1).length == 0) {
 	}
 	odkData.getDefaultGroup(function(r) {
 		r = r.getDefaultGroup();
-		if (r[i].indexOf("GROUP_REGION_") == 0) {
-			var region = r[i].replace("GROUP_REGION_", "");
+		if (r.indexOf("GROUP_REGION_") == 0) {
+			var region = r.replace("GROUP_REGION_", "");
 			// replace all occurrences
 			region = region.replace(/_/g, " ");
 			region_as_role = region;
