@@ -49,8 +49,11 @@ document.getElementById("add").style.display = "none";
 	table_id = "health_facility";
 	allowed_group_bys = ["admin_region", "climate_zone", "delivery_type", "electricity_source", ["facility_ownership", "Ownership"], "facility_type", "storage_type", "solar_suitable_climate", "solar_suitable_site", "vaccine_supply_mode", "vaccine_reserve_stock_requirement"];
 
-	global_which_cols_to_select = "*, (SELECT COUNT(*) FROM refrigerators WHERE facility_row_id = health_facility._id) AS refrigerator_count"
-	display_subcol = [["Facility ID: ", "facility_id", true], ["Refrigerators: ", "refrigerator_count", true]]
+	global_which_cols_to_select = "*"
+	display_subcol = [
+		["Facility ID: ", "facility_id", true],
+		//["Refrigerators: ", "refrigerator_count", true]
+	]
 	document.getElementById("add").style.display = "none";
 
 }

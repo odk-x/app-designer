@@ -83,7 +83,7 @@ list_views = {
 						};
 					} else {
 						cb = function() {
-							odkTables.openTableToMapView(null, "health_facility", where, args, list_views["health_facility"] + "#health_facility/STATIC/SELECT *, (SELECT COUNT(*) FROM refrigerators WHERE facility_row_id = health_facility._id) AS refrigerator_count FROM health_facility WHERE " + where + "/" + JSON.stringify(args) + "/" + hr_text);
+							odkTables.openTableToMapView(null, "health_facility", where, args, list_views["health_facility"] + "#health_facility/STATIC/SELECT * FROM health_facility WHERE " + where + "/" + JSON.stringify(args) + "/" + hr_text);
 						}
 					}
 					menu[2][menu[2].length - 1] = [_tu("View ") + _tc(d, "facility_type", ftype) + (count == 1 ? "" : "s") + " (" + count + ")", "_js", cb]
