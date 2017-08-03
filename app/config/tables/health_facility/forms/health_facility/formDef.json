@@ -1302,7 +1302,7 @@
         "aspect": "default",
         "key": "mapListViewFileName",
         "type": "string",
-        "value": "config/assets/aa_health_facility_list.html",
+        "value": "config/assets/aa_health_facility_map.html",
         "_row_num": 5
       },
       {
@@ -4456,7 +4456,7 @@
         "_aspect": "default",
         "_key": "mapListViewFileName",
         "_type": "string",
-        "_value": "config/assets/aa_health_facility_list.html"
+        "_value": "config/assets/aa_health_facility_map.html"
       },
       {
         "_partition": "TableMapFragment",
