@@ -68,13 +68,20 @@ if (window.location.hash.substr(1).length == 0) {
 	}
 	odkData.getDefaultGroup(function(r) {
 		r = r.getDefaultGroup();
-		if (r.indexOf("GROUP_REGION_") == 0) {
+		if (r == null) {
+			menu = ["Not logged in!", null, [
+				["Log in", "_js", function() {
+					odkCommon.doAction(null, "org.opendatakit.services.sync.actions.activities.SyncActivity", {"extras": {"showLogin": "true"}, "componentPackage": "org.opendatakit.services", "componentActivity": "org.opendatakit.services.sync.actions.activities.SyncActivity"});
+				}]
+			]];
+			doMenu();
+		} else if (r.indexOf("GROUP_REGION_") == 0) {
 			var region = r.replace("GROUP_REGION_", "");
 			// replace all occurrences
 			region = region.replace(/_/g, " ");
 			region_as_role = region;
+			redirect();
 		}
-		redirect();
 	});
 }
 		

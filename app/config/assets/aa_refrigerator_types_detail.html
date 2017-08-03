@@ -158,12 +158,12 @@ allowed_tables = [];
 	colmap = [
 		["manufacturer", build_generic_callback("manufacturer", true)],
 		["power_source", build_generic_callback("power_source", function(i) { return pretty(jsonParse(i).join(", ")); })],
-		["refrigerator_gross_volume", build_generic_callback("refrigerator_gross_volume", " m<sup>3</sup>")],
-		["freezer_gross_volume", build_generic_callback("freezer_gross_volume", " m<sup>3</sup>")],
+		["refrigerator_gross_volume", build_generic_callback("refrigerator_gross_volume", " litres")],
+		["freezer_gross_volume", build_generic_callback("freezer_gross_volume", " litres")],
 		["equipment_type", build_generic_callback("equipment_type", true)],
 		["climate_zone", build_generic_callback("climate_zone", true)],
-		["refrigerator_net_volume", build_generic_callback("refrigerator_net_volume", " m<sup>3</sup>")],
-		["freezer_net_volume", build_generic_callback("freezer_net_volume", " m<sup>3</sup>")],
+		["refrigerator_net_volume", build_generic_callback("refrigerator_net_volume", " litres")],
+		["freezer_net_volume", build_generic_callback("freezer_net_volume", " litres")],
 		["model_id", mid_callback],
 		["catalog_id", build_generic_callback("catalog_id", true)],
 		["refrigerator_picture", function(e,c,d){document.getElementById("inject-refrigerator_picture").appendChild(c)}]
