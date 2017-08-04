@@ -250,7 +250,7 @@ var doSearch = function doSearch() {
 	}
 	odkData.getViewData(function(d) {
 		handleMapIndex(d);
-		document.getElementById("next").disabled = offset >= d.getCount();
+		document.getElementById("next").disabled = d.getCount() < limit;
 		// Cache metadata for use in translating the column names later
 		metadata = d.getMetadata();
 		// NOT CHEKING IF WE HAVE RESULTS OR NOT BECAUSE I HID THE SEARCH STUFF IN THE CSS
