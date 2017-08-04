@@ -64,14 +64,6 @@
         "_row_num": 8
       },
       {
-        "clause": "end screen",
-        "_row_num": 9
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 13
-      },
-      {
         "type": "select_one",
         "values_list": "common_models",
         "name": "models_common",
@@ -2156,7 +2148,7 @@
             "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen13",
+            "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 2
           },
           {
@@ -2182,7 +2174,7 @@
             "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen13",
+            "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 3
           },
           {
@@ -2385,26 +2377,12 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 9,
-              "__rowNum__": 8,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nif (0) {\nactivePromptIndicies.push(0);\n}\nif (data('facility_row_id') == null) {\nactivePromptIndicies.push(1);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 0
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 13,
-            "__rowNum__": 12,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
               "_row_num": 18,
               "__rowNum__": 17,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nif (data('models_common') === 'other') {\nactivePromptIndicies.push(3);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 1
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (0) {\nactivePromptIndicies.push(0);\n}\nif (data('facility_row_id') == null) {\nactivePromptIndicies.push(1);\n}\nactivePromptIndicies.push(2);\nif (data('models_common') === 'other') {\nactivePromptIndicies.push(3);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
           },
           {
             "clause": "begin screen",
@@ -2418,7 +2396,7 @@
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nassign('model_row_id', (function() {if (data('models_common') === 'other') { return data('model_other'); } return data('models_common');})());\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
+            "operationIdx": 1
           },
           {
             "clause": "begin screen",
@@ -2432,13 +2410,13 @@
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 3
+            "operationIdx": 2
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
             "_row_num": 34,
-            "operationIdx": 4
+            "operationIdx": 3
           },
           {
             "_row_num": 34,
@@ -2447,22 +2425,21 @@
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 5
+            "operationIdx": 4
           },
           {
             "_token_type": "resume",
             "clause": "resume",
             "_row_num": 34,
-            "operationIdx": 6
+            "operationIdx": 5
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_screen13": 1,
-          "_screen22": 2,
-          "_screen28": 3,
-          "_contents": 5,
-          "_screen34": 5
+          "_screen22": 1,
+          "_screen28": 2,
+          "_contents": 4,
+          "_screen34": 4
         }
       },
       "initial": {
