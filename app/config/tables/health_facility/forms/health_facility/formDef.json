@@ -1031,7 +1031,7 @@
           "title": {
             "text": {
               "default": "Delivery",
-              "es": "Depósito y Envío"
+              "es": "Envío"
             }
           }
         },
@@ -1044,7 +1044,7 @@
           "title": {
             "text": {
               "default": "Both Depot and Delivery",
-              "es": "Depósito"
+              "es": "Depósito y Envío"
             }
           }
         },
@@ -1957,7 +1957,7 @@
             "title": {
               "text": {
                 "default": "Delivery",
-                "es": "Depósito y Envío"
+                "es": "Envío"
               }
             }
           },
@@ -1970,7 +1970,7 @@
             "title": {
               "text": {
                 "default": "Both Depot and Delivery",
-                "es": "Depósito"
+                "es": "Depósito y Envío"
               }
             }
           },
@@ -4372,7 +4372,7 @@
         "_aspect": "storage_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"storage_types\",\"data_value\":\"depot\",\"display\":{\"title\":{\"text\":{\"default\":\"Depot\",\"es\":\"Depósito\"}}},\"_row_num\":45},{\"choice_list_name\":\"storage_types\",\"data_value\":\"delivery\",\"display\":{\"title\":{\"text\":{\"default\":\"Delivery\",\"es\":\"Depósito y Envío\"}}},\"_row_num\":46},{\"choice_list_name\":\"storage_types\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Depot and Delivery\",\"es\":\"Depósito\"}}},\"_row_num\":47}]"
+        "_value": "[{\"choice_list_name\":\"storage_types\",\"data_value\":\"depot\",\"display\":{\"title\":{\"text\":{\"default\":\"Depot\",\"es\":\"Depósito\"}}},\"_row_num\":45},{\"choice_list_name\":\"storage_types\",\"data_value\":\"delivery\",\"display\":{\"title\":{\"text\":{\"default\":\"Delivery\",\"es\":\"Envío\"}}},\"_row_num\":46},{\"choice_list_name\":\"storage_types\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Depot and Delivery\",\"es\":\"Depósito y Envío\"}}},\"_row_num\":47}]"
       },
       {
         "_partition": "Column",
