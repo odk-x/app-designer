@@ -616,6 +616,6 @@ var formgen_specific_translations = {
 	}},
 	"Selected Marker": {"text": {
 		"default": true,
-		"es": ""
+		"es": "Seleccionado"
 	}}
 }
