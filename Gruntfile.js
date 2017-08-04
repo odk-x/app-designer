@@ -1998,7 +1998,9 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 console.log("Deleting ".concat(folders[i]));
                 grunt.task.run("exec:adbshell:rm -rf ".concat(folders[i]));
             }
+            grunt.task.run("force:on")
             grunt.task.run("exec:adbshell:run-as org.opendatakit.services rm -rf /data/data/org.opendatakit.services/app_" + tablesConfig.appName);
+            grunt.task.run("force:restore")
         });
     grunt.registerTask(
         "adbpull-props",
