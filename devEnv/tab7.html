@@ -11,11 +11,33 @@
 		<script src='../app/config/assets/formgen_common.js'></script>
 		<script src='../app/config/assets/generate_common.js'></script>
 		<script>
+			// Holds the id of the table we're currently editing
+			var table_id = null;
+			// A map from table_id to a list of the user defined columns in that table
 			var columns = {};
+			// Cached metadata object used for localizing column names
 			var metadata = null;
+			// For documentation on these options, see the readme for formgen
+			var display_col = "";
+			var display_subcol = []
+			var allowed_group_bys = null;
+			var global_cols_to_select = "*";
+			var global_join = "";
+			// we store global_cols_to_select as a string so we can give it to the slave iframe, but we can't parse that string so for when the
+			// user is saving/loading configuration, we store/read it out of this.
+			// the format is [["table_a", "column_key_in_table_a", "alias"], ...]
+			// one triplet for each extra column to select
+			var all_cols_to_select = []
+			// again, we can't parse the global_join string, so store it like this
+			// format is [[ /* JOIN */ "table_a", /* ON table_id.*/ "column_in_main_table", /* = table_a.*/ "relevant_column_in_table_a"], ...]
+			var all_joins = [];
+			// holds whether the user has clicked the advanced button or not
+			var advanced = false;
+			// failure function used in all the odkData calls
 			var fail = function failure() {
 				alert(Array.prototype.slice.call(arguments, 0).join(", "))
 			}
+			// Run on page load, ensures we have an odkData and odkDataIf then updates the panel on the right
 			var ol = function ol() {
 				for (var i = 0; i < all_tables.length; i++) {
 					var option = document.createElement("option")
@@ -35,9 +57,7 @@
 				}
 				setTimeout(block, 0);
 			}
-			var deleting = false;
-			var display_col = "";
-			var sample_data = ["sample data", "sample data 2", "1234", "example of some really long example data", "1901-02-03T04:05:06.7891011"]
+			// Will get the columns for the requested table, put them in the global columns mapping then call your callback function
 			var getColumns = function getColumns(other_table, callback) {
 				if (typeof(columns[other_table]) != "undefined") {
 					callback();
@@ -45,6 +65,7 @@
 				}
 				odkData.arbitraryQuery(other_table, "SELECT * FROM " + other_table, [], 0, 0, function(d) {
 					columns[other_table] = []
+					// store off metadata for translation in the callback
 					metadata = d.getMetadata();
 					for (var i = 0; i < d.getColumns().length; i++) {
 						if (d.getColumns()[i][0] == "_") {
@@ -55,30 +76,23 @@
 					callback();
 				}, fail);
 			}
+			// Ensures that we have at least 5 fake rows in the database
 			var resetDatabase = function resetDatabase() {
-				//deleting = true;
-				//odkData.arbitraryQuery(table_id, "DELETE FROM " + table_id, [], 10000, 0, function(d) {
-					//deleting = false;
-				//}, fail);
 				var count = -1;
+				// First, get the number of rows
 				odkData.arbitraryQuery(table_id, "SELECT * FROM " + table_id, [], 10000, 0, function(d) {
-					//count = d.getCount();
 					count = d.resultObj.data.length
 				})
+				// Simultaniously, get the columns in the table
 				getColumns(table_id, function() {
-					//getDisplayCol();
+					// 
 					redrawDisplayCol(false);
-					//var running = sample_data.length;
 					var running = 0;
-					//var all_to_set = [display_col]
-					//for (var i = 0; i < display_subcol.length; i++) all_to_set = all_to_set.concat(display_subcol[i][1])
 					var all_to_set = []
 					var do_inserts = function() {
-						//for (var i = 0; i < sample_data.length; i++) {
 						for (var i = 0; i < 5 - count; i++) {
 							var defaults = {};
 							for (var j = 0; j < all_to_set.length; j++) {
-								//defaults[all_to_set[j]] = sample_data[i]
 								defaults[all_to_set[j]] = all_to_set[j]
 							}
 							running++;
@@ -89,7 +103,6 @@
 					}
 					// wait until we know the number of rows to insert to start doing inserts
 					var block = function() {
-						//if (deleting) {
 						if (count == -1) {
 							setTimeout(block, 100);
 							return;
@@ -108,17 +121,20 @@
 					block();
 				})
 			}
-			var table_id = null;
+			// Removes all the display subcolumns and changes the global table_id variable, called when the user selects
+			// a new table in the list
 			var newTable = function newTable() {
 				table_id = document.getElementById("table_id").selectedOptions[0].value;
 				document.getElementById("subcols").innerHTML = ""
 				resetDatabase();
 			}
+			// Pulls the data off the screen for the main display column
 			var getDisplayCol = function getDisplayCol() {
 				display_col = document.getElementById("display_col").selectedOptions[0]
 				if (typeof(display_col) == "undefined") display_col = {"value": ""}
 				display_col = display_col.value
 			}
+			// First, update all our global variables with the data on the screen, then give those variables to our iframe, and put the configuration in pre, even though pre is hidden right now
 			var update = function update() {
 				getDisplayCol();
 				getDisplaySubcols();
@@ -139,6 +155,7 @@
 				iframe.contentWindow.display_subcol = display_subcol
 				iframe.contentWindow.allowed_group_bys = allowed_group_bys
 				iframe.contentWindow.update_total_rows(true);
+				// Everything down here is just adding the javascript to the screen so the user can copy/paste it out
 				var pre = document.getElementById("exported")
 				pre.innerHTML = ""
 				pre.appendChild(document.createTextNode(
@@ -171,8 +188,7 @@
 					));
 				}
 			}
-			var global_join = "";
-			var display_subcol = []
+			// Finds all the display subcol elements on the screen, takes their value and puts it in the global display_subcol variable
 			var getDisplaySubcols = function getDisplaySubcols() {
 				display_subcol = []
 				var count = document.getElementById("subcols").children.length;
@@ -181,17 +197,19 @@
 					var text = elem.getElementsByTagName("input")[0].value
 					var opt = elem.getElementsByTagName("select")[0].selectedOptions[0] 
 					var col = opt == null ? "" : opt.value
-					col = col == "_null" ? null : col
+					col = col == "empty" ? null : col
 					var nl = elem.getElementsByTagName("select")[1].selectedOptions[0].value.toString().toLowerCase() == "false" ? false : true
 					var triplet = [text, col, nl];
 					display_subcol = display_subcol.concat(0)
 					display_subcol[i] = triplet;
 				}
 			}
+			// Called when we load configuration, will update the elements on the page to match the global display_subcols variable (if first is true, otherwise it will pull the data off the screen first)
 			var redrawDisplaySubcols = function redrawDisplaySubcols(first) {
 				var expected_count = display_subcol.length;
 				var children = document.getElementById("subcols").children;
 				var count = children == null ? 0 : children.length;
+				// add enough display subcol elements to represent the display_subcol variable
 				for (var i = 0; i < expected_count - count; i++) {
 					add(true);
 				}
@@ -199,10 +217,12 @@
 				if (!first) getColsToSelect()
 				for (var i = 0; i < count; i++) {
 					var div = document.getElementById("subcols-" + i);
+					// set the before-text
 					div.getElementsByTagName("input")[0].value = display_subcol[i][0];
 					var select = div.getElementsByTagName("select")[0]
+					// repopulate the options in the dropdown, one for each column with an "empty" option at the beginning
 					select.innerHTML = "";
-					var cols = ["_null"].concat(columns[table_id]);
+					var cols = ["empty"].concat(columns[table_id]);
 					for (var j = 0; j < all_cols_to_select.length; j++) {
 						cols = cols.concat(all_cols_to_select[j][1])
 					}
@@ -212,27 +232,35 @@
 						option.value = col;
 						option.innerText = displayCol(col, metadata, table_id, table_id);
 						select.appendChild(option)
+						// if it's supposed to be selected, select it
 						if (col == display_subcol[i][1]) {
 							select.selectedIndex = j;
 						}
 					}
+					// set the last select to true/false depending on what it's supposed to be
 					div.getElementsByTagName("select")[1].selectedIndex = display_subcol[i][2] ? 0 : 1;
 				}
 			}
+			// Called when we've just set variables fron the eval and need to update the screen to match
 			var load = function load() {
+				// first get tables
 				getColumns(table_id, function() {
-					if (all_joins != []) goAdvanced();
+					// go advanced if we need to, seems broken right now
+					if (all_joins != []) goAdvanced(); // <-- broken on this line, will always go advanced for some reason
 					if (all_cols_to_select != []) goAdvanced();
 					if (allowed_group_bys != null) goAdvanced();
 					redrawDisplayCol(true);
 					redrawDisplaySubcols(true);
 					redrawGroupBys(true);
+					// I've had all kinds of dirty asynchronous problems with this, redrawJoins needs to call getColumns which makes the rest of the function asynchronous, so we have
+					// to block until it's done to redraw cols to select or redrawColsToSelect will change the global variables that redrawJoins depends on
 					redrawJoins(true, function() {
-						// DON'T CALL UPDATE UNTIL THIS IS DONE
+						// Don't call update until this is done
 						redrawColsToSelect(true, update);
 					});
 				});
 			}
+			// Returns the global variables as loadable javascript
 			var save = function save() {
 				update()
 				var pre = document.getElementById("exported")
@@ -243,46 +271,59 @@
 				part += "all_joins = " + print(all_joins) + ";"
 				return part
 			}
+			// Add a new display subcolumn element to the screen
 			var add = function add(first) {
 				var div = document.createElement("div")
 				var idx = document.getElementById("subcols").children.length;
 				div.id = "subcols-" + idx;
+
 				var text = document.createElement("input")
 				text.type = "text";
 				text.setAttribute("data-subcol", idx);
 				text.addEventListener("change", update);
 				text.placeholder = "Text to display before the selected column, if any."
+
+				// Options will be populated in redrawDisplaySubcols
 				var select = document.createElement("select")
 				select.addEventListener("change", update)
 				select.setAttribute("data-subcol", idx);
+
 				var select2 = document.createElement("select")
 				select2.addEventListener("change", update)
 				select2.setAttribute("data-subcol", idx);
 				var option = document.createElement("option")
 				option.value = true;
-				option.innerText = "true";
+				option.innerText = "Break to next line";
 				select2.appendChild(option)
 				option = document.createElement("option")
 				option.value = false;
-				option.innerText = "false";
+				option.innerText = "Continue";
 				select2.appendChild(option)
+
 				var remove = document.createElement("button")
 				remove.innerText = "-"
 				remove.addEventListener("click", function() {
 					alert("TODO");
 				});
+
 				div.appendChild(text);
 				div.appendChild(select);
 				div.appendChild(select2);
 				div.appendChild(remove);
 				document.getElementById("subcols").appendChild(div)
+
+				// Add new display subcol to the array
+				// Seems like this should be wrapped in an `if (!first)`
 				display_subcol = display_subcol.concat(0);
 				display_subcol[display_subcol.length - 1] = ["", "", true]
 				if (!first) redrawDisplaySubcols(false);
 			}
+			// Adds the advanced options to the screen
 			var goAdvanced = function() {
-				if (advanced) return;
+				if (advanced) return; // only run once
+				// remove the button
 				document.getElementById("goAdvanced").outerHTML = ""
+				// Add the list of allowed group bys, empty list that will be populated in redrawGroupBys
 				var allow_group_bys = document.createElement("input")
 				allow_group_bys.type = "checkbox"
 				allow_group_bys.id = "allow_group_bys"
@@ -293,7 +334,10 @@
 				var group_bys = document.createElement("div")
 				group_bys.id = "group_bys"
 				document.getElementById("right").appendChild(group_bys)
+				// Populate list
 				redrawGroupBys(true);
+
+				// Add the add join button and the div that it needs
 				var addjoin = document.createElement("button")
 				addjoin.innerText = "Add join"
 				addjoin.addEventListener("click", function() { newjoin(false); })
@@ -302,14 +346,18 @@
 				document.getElementById("right").appendChild(addjoin)
 				document.getElementById("right").appendChild(joins)
 				//redrawJoins(true);
+
+				// Add the columns to select and draw (populate) it
 				var cols_to_select = document.createElement("div");
 				cols_to_select.id = "cols_to_select"
 				document.getElementById("right").appendChild(cols_to_select);
 				redrawColsToSelect(true);
+
 				advanced = true;
 			}
-			var all_cols_to_select = []
+			// Adds a join option to the screen
 			var newjoin = function newjoin(first) {
+				// called in all the onchange listeners, update cols to select then update
 				var handler = function() {
 					redrawColsToSelect(false);
 					update();
@@ -319,11 +367,12 @@
 				var wrapper = document.createElement("div");
 				wrapper.id = "join-" + idx;
 				wrapper.innerText = "JOIN "
+				// List of tables you can join on, populated in redrawJoins
 				var select1 = document.createElement("select")
 				select1.addEventListener("change", function() { redrawJoin(idx, false); handler(); });
 				wrapper.appendChild(select1)
-				wrapper.appendChild(document.createTextNode(" ON " + table_id))
-				wrapper.appendChild(document.createTextNode("."))
+				wrapper.appendChild(document.createTextNode(" ON " + table_id + "."))
+				// List of columns in this table, populated in redrawJoins
 				var select2 = document.createElement("select")
 				select2.addEventListener("change", handler);
 				wrapper.appendChild(select2);
@@ -332,9 +381,11 @@
 				span.id = "join-" + idx + "-span"
 				wrapper.appendChild(span)
 				wrapper.appendChild(document.createTextNode("."))
+				// List of columns in the join table, populated in redrawJoins
 				var select3 = document.createElement("select")
 				select3.addEventListener("change", handler);
 				wrapper.appendChild(select3);
+				// delete button
 				var btn = document.createElement("button")
 				btn.innerText = "-"
 				btn.addEventListener("click", function() {
@@ -348,9 +399,11 @@
 				}
 				redrawJoin(idx, first);
 			}
+			// redraw a particular join clause on the screen, then execute the callback
 			var redrawJoin = function redrawJoin(idx, first, cb) {
 				if (!first) getJoins();
 				var thing = document.getElementById("join-" + idx)
+				// the list of tables you can join on
 				var select1 = thing.getElementsByTagName("select")[0]
 				select1.innerHTML = "";
 				for (var i = 0; i < all_tables.length; i++) {
@@ -363,6 +416,7 @@
 					}
 				}
 				if (!first) getJoins();
+				// the list of columns in this table
 				var select2 = thing.getElementsByTagName("select")[1];
 				select2.innerHTML = ""
 				for (var i = 0; i < columns[table_id].length; i++) {
@@ -376,6 +430,7 @@
 					}
 				}
 
+				// the list of all the columns in the other table
 				var tbl = all_joins[idx][0];
 				document.getElementById("join-" + idx + "-span").innerText = display(localized_tables[tbl], tbl, window.possible_wrapped.concat("title"), tbl);
 				getColumns(tbl, function() {
@@ -395,6 +450,7 @@
 					if (typeof(cb) != "undefined") cb()
 				});
 			}
+			// pulls the joins off the screen and into the two global variables
 			var getJoins = function getJoins() {
 				if (!advanced) {
 					all_joins = []
@@ -418,6 +474,7 @@
 				}
 				global_join = global_join.join(" JOIN ")
 			}
+			// redraws all joins then executs the callback
 			var redrawJoins = function redrawJoins(first, cb) {
 				if (!first) getJoins();
 				var len = document.getElementById("joins").children.length;
@@ -438,8 +495,7 @@
 				}
 				if (typeof(cb) != "undefined") post();
 			}
-			var all_joins = []
-			var advanced = false;
+			// pulls the group bys off the screen and into the allowed_group_bys argument
 			var getGroupBys = function getGroupBys() {
 				if (!advanced) return;
 				if (!document.getElementById("allow_group_bys").checked) {
@@ -471,6 +527,7 @@
 					}
 				}
 			}
+			// Populates the allowed group bys on the screen, sets checked on the boxes if necessary, etc..
 			var redrawGroupBys = function redrawGroupBys(first) {
 				if (!first) getColsToSelect();
 				var group_bys = document.getElementById("group_bys");
@@ -537,6 +594,7 @@
 					group_bys.appendChild(wrapper)
 				}
 			}
+			// pulls the columns to select off the screen and into its two global variables
 			var getColsToSelect = function getColsToSelect() {
 				if (!advanced) {
 					global_cols_to_select = table_id + ".*"
@@ -555,11 +613,11 @@
 					global_cols_to_select += ", " + all_cols_to_select[i][0] + " AS " + all_cols_to_select[i][1]
 				}
 			}
-			var global_cols_to_select = "*";
+			// redraws the columns that can be selected from the join tables
 			var redrawColsToSelect = function redrawColsToSelect(first, cb) {
 				if (!first) getColsToSelect()
 				var handler = function handler() {
-					// TODO redraw display col too
+					// TODO redraw display col too, the display col is allowed to be from the joined table
 					redrawDisplaySubcols(first);
 					redrawGroupBys(first);
 					update();
@@ -569,9 +627,9 @@
 				div.innerText = table_id + ".*, "
 				if (!first) getJoins()
 				var running = all_joins.length;
+				// allow grouping by all columns in all the tables you've joined as well
 				for (var i = 0; i < all_joins.length; i++) {
 					var tbl = all_joins[i][0];
-					//running++; // BAD IDEA TEMP
 					getColumns(tbl, function() {
 						for (var j = 0; j < columns[tbl].length; j++) {
 							var col = columns[tbl][j];
@@ -615,6 +673,7 @@
 					post();
 				}
 			}
+			// Redraws the display column from the variable, populates the list with all columns in this table and the columns being pulled from other tables
 			var redrawDisplayCol = function redrawDisplayCol(first) {
 				if (!first) getDisplayCol();
 				console.log("DISPLAY COL IS " + display_col)
@@ -634,8 +693,6 @@
 					}
 				}
 			}
-			var allowed_group_bys = null;
-			var global_joins = []
 			var print = function print(thing) {
 				//return JSON.stringify(thing, null, "\t")
 				return JSON.stringify(thing)
@@ -644,7 +701,7 @@
 				prompt("Copy this configuration to somewhere safe.", save())
 			}
 			var userLoad = function() {
-				("global",eval)(prompt("Paste in your saved configuration here"))
+				("global",eval)(prompt("Paste in your saved configuration here. Please make sure you've chosen the right table first!"))
 				load();
 			}
 		</script>
@@ -660,7 +717,8 @@
 			}
 			#right {
 				position: absolute;
-				left: 71%;
+				left: 70%;
+				padding-left: 8px;
 				width: 29%;
 				top: 8px;
 			}
