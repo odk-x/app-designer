@@ -441,6 +441,7 @@ var doSearch = function doSearch() {
 		var idx = d.getMapIndex();
 		if (idx >= offset && idx < offset + limit) {
 			hack(idx - offset, true);
+			global_line_height = null;
 			for (var i = 0; i < d.getCount(); i++) {
 				if (i != d.getMapIndex()) hack(i, false);
 			}
