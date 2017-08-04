@@ -1,1136 +1,1136 @@
-date_serviced,notes,refrigerator_id,refrigerator_row_id_fake
-2017-05-30T00:00:00.000000000,null,R1,null
-2017-04-02T00:00:00.000000000,Seems to be in good condition,R2,null
-2017-02-21T00:00:00.000000000,null,R4,null
-2015-09-13T00:00:00.000000000,Faulty power supply was replaced,R5,null
-2017-03-30T00:00:00.000000000,Faulty power supply was replaced,R6,null
-2017-03-17T00:00:00.000000000,Faulty power supply was replaced,R7,null
-2017-07-28T00:00:00.000000000,null,R8,null
-2017-02-18T00:00:00.000000000,Faulty power supply was replaced,R9,null
-2017-06-08T00:00:00.000000000,null,R11,null
-2017-08-01T00:00:00.000000000,Seems to be in good condition,R12,null
-2017-03-31T00:00:00.000000000,Seems to be in good condition,R13,null
-2017-07-06T00:00:00.000000000,Faulty power supply was replaced,R14,null
-2017-04-04T00:00:00.000000000,Nothing to report,R15,null
-2017-03-15T00:00:00.000000000,Seems to be in good condition,R16,null
-2017-06-21T00:00:00.000000000,Seems to be in good condition,R17,null
-2017-02-05T00:00:00.000000000,Nothing to report,R19,null
-2017-03-23T00:00:00.000000000,Nothing to report,R20,null
-2017-02-09T00:00:00.000000000,null,R22,null
-2017-08-01T00:00:00.000000000,Faulty power supply was replaced,R23,null
-2017-05-18T00:00:00.000000000,null,R24,null
-2017-06-09T00:00:00.000000000,Faulty power supply was replaced,R25,null
-2017-06-08T00:00:00.000000000,null,R26,null
-2017-03-12T00:00:00.000000000,Seems to be in good condition,R27,null
-2017-07-20T00:00:00.000000000,Seems to be in good condition,R28,null
-2017-06-07T00:00:00.000000000,Faulty power supply was replaced,R29,null
-2017-06-13T00:00:00.000000000,null,R31,null
-2017-03-23T00:00:00.000000000,Nothing to report,R33,null
-2017-05-09T00:00:00.000000000,null,R35,null
-2017-07-09T00:00:00.000000000,Faulty power supply was replaced,R36,null
-2017-02-11T00:00:00.000000000,Seems to be in good condition,R37,null
-2017-07-06T00:00:00.000000000,Nothing to report,R38,null
-2017-06-27T00:00:00.000000000,Faulty power supply was replaced,R39,null
-2017-06-06T00:00:00.000000000,Faulty power supply was replaced,R40,null
-2017-06-06T00:00:00.000000000,Faulty power supply was replaced,R41,null
-2017-04-05T00:00:00.000000000,Faulty power supply was replaced,R42,null
-2017-07-15T00:00:00.000000000,null,R43,null
-2016-07-14T00:00:00.000000000,Nothing to report,R44,null
-2017-03-22T00:00:00.000000000,Seems to be in good condition,R45,null
-2017-07-30T00:00:00.000000000,Seems to be in good condition,R47,null
-2017-07-16T00:00:00.000000000,Faulty power supply was replaced,R48,null
-2015-10-01T00:00:00.000000000,Faulty power supply was replaced,R49,null
-2017-03-27T00:00:00.000000000,Seems to be in good condition,R50,null
-2017-05-04T00:00:00.000000000,Seems to be in good condition,R51,null
-2017-02-10T00:00:00.000000000,null,R52,null
-2017-03-06T00:00:00.000000000,Seems to be in good condition,R53,null
-2016-07-26T00:00:00.000000000,Faulty power supply was replaced,R54,null
-2017-07-18T00:00:00.000000000,Seems to be in good condition,R55,null
-2017-04-05T00:00:00.000000000,Nothing to report,R56,null
-2017-06-16T00:00:00.000000000,Seems to be in good condition,R58,null
-2016-06-04T00:00:00.000000000,Faulty power supply was replaced,R60,null
-2017-06-28T00:00:00.000000000,Nothing to report,R61,null
-2016-04-15T00:00:00.000000000,Seems to be in good condition,R62,null
-2017-02-28T00:00:00.000000000,Faulty power supply was replaced,R63,null
-2016-05-14T00:00:00.000000000,Nothing to report,R64,null
-2017-02-28T00:00:00.000000000,Seems to be in good condition,R65,null
-2017-03-30T00:00:00.000000000,Faulty power supply was replaced,R67,null
-2017-05-21T00:00:00.000000000,null,R68,null
-2017-07-07T00:00:00.000000000,null,R69,null
-2017-03-30T00:00:00.000000000,null,R70,null
-2017-07-24T00:00:00.000000000,Faulty power supply was replaced,R71,null
-2017-04-19T00:00:00.000000000,null,R72,null
-2017-06-29T00:00:00.000000000,null,R73,null
-2016-08-07T00:00:00.000000000,Faulty power supply was replaced,R74,null
-2017-05-15T00:00:00.000000000,Nothing to report,R75,null
-2017-06-26T00:00:00.000000000,null,R76,null
-2017-04-10T00:00:00.000000000,Seems to be in good condition,R77,null
-2017-04-22T00:00:00.000000000,Faulty power supply was replaced,R78,null
-2017-07-03T00:00:00.000000000,null,R79,null
-2017-05-08T00:00:00.000000000,Seems to be in good condition,R81,null
-2017-03-11T00:00:00.000000000,Faulty power supply was replaced,R83,null
-2017-02-24T00:00:00.000000000,Nothing to report,R84,null
-2016-06-25T00:00:00.000000000,Seems to be in good condition,R85,null
-2017-02-23T00:00:00.000000000,Nothing to report,R86,null
-2017-07-26T00:00:00.000000000,Faulty power supply was replaced,R87,null
-2017-04-17T00:00:00.000000000,null,R88,null
-2017-03-14T00:00:00.000000000,Seems to be in good condition,R89,null
-2017-05-25T00:00:00.000000000,null,R90,null
-2015-12-20T00:00:00.000000000,Nothing to report,R93,null
-2017-02-10T00:00:00.000000000,Faulty power supply was replaced,R94,null
-2017-04-17T00:00:00.000000000,Seems to be in good condition,R96,null
-2017-03-12T00:00:00.000000000,Seems to be in good condition,R97,null
-2017-05-01T00:00:00.000000000,Faulty power supply was replaced,R99,null
-2017-03-24T00:00:00.000000000,null,R100,null
-2017-05-24T00:00:00.000000000,Faulty power supply was replaced,R101,null
-2017-02-12T00:00:00.000000000,Seems to be in good condition,R103,null
-2017-03-11T00:00:00.000000000,Seems to be in good condition,R104,null
-2017-02-14T00:00:00.000000000,null,R105,null
-2017-04-17T00:00:00.000000000,Faulty power supply was replaced,R106,null
-2017-06-08T00:00:00.000000000,Seems to be in good condition,R108,null
-2017-02-07T00:00:00.000000000,Faulty power supply was replaced,R109,null
-2017-03-25T00:00:00.000000000,Faulty power supply was replaced,R110,null
-2017-06-12T00:00:00.000000000,null,R113,null
-2017-05-08T00:00:00.000000000,Seems to be in good condition,R116,null
-2017-05-25T00:00:00.000000000,Seems to be in good condition,R117,null
-2017-06-29T00:00:00.000000000,Faulty power supply was replaced,R118,null
-2016-10-21T00:00:00.000000000,Seems to be in good condition,R119,null
-2016-02-26T00:00:00.000000000,Nothing to report,R120,null
-2017-02-15T00:00:00.000000000,Faulty power supply was replaced,R121,null
-2017-03-25T00:00:00.000000000,null,R122,null
-2016-08-17T00:00:00.000000000,Seems to be in good condition,R123,null
-2017-01-30T00:00:00.000000000,Seems to be in good condition,R124,null
-2017-02-24T00:00:00.000000000,Faulty power supply was replaced,R125,null
-2017-07-12T00:00:00.000000000,Faulty power supply was replaced,R126,null
-2017-01-17T00:00:00.000000000,Faulty power supply was replaced,R127,null
-2017-03-31T00:00:00.000000000,Seems to be in good condition,R128,null
-2016-03-08T00:00:00.000000000,Nothing to report,R129,null
-2017-03-19T00:00:00.000000000,Seems to be in good condition,R130,null
-2017-06-16T00:00:00.000000000,Seems to be in good condition,R132,null
-2017-07-24T00:00:00.000000000,Seems to be in good condition,R133,null
-2017-02-21T00:00:00.000000000,Nothing to report,R134,null
-2017-02-28T00:00:00.000000000,null,R135,null
-2017-07-31T00:00:00.000000000,Seems to be in good condition,R137,null
-2017-06-25T00:00:00.000000000,null,R138,null
-2017-05-09T00:00:00.000000000,Seems to be in good condition,R140,null
-2017-05-31T00:00:00.000000000,null,R141,null
-2017-03-25T00:00:00.000000000,Nothing to report,R142,null
-2017-03-19T00:00:00.000000000,Nothing to report,R143,null
-2017-07-13T00:00:00.000000000,Nothing to report,R144,null
-2017-06-20T00:00:00.000000000,Seems to be in good condition,R145,null
-2017-05-23T00:00:00.000000000,Nothing to report,R146,null
-2017-04-28T00:00:00.000000000,null,R148,null
-2017-05-23T00:00:00.000000000,null,R150,null
-2017-07-02T00:00:00.000000000,null,R151,null
-2017-06-07T00:00:00.000000000,Faulty power supply was replaced,R152,null
-2017-02-17T00:00:00.000000000,null,R153,null
-2014-10-12T00:00:00.000000000,null,R155,null
-2017-02-18T00:00:00.000000000,Seems to be in good condition,R156,null
-2017-06-30T00:00:00.000000000,null,R157,null
-2017-06-08T00:00:00.000000000,null,R158,null
-2014-12-28T00:00:00.000000000,Nothing to report,R159,null
-2017-02-14T00:00:00.000000000,Nothing to report,R160,null
-2017-07-24T00:00:00.000000000,Seems to be in good condition,R163,null
-2017-06-13T00:00:00.000000000,Seems to be in good condition,R164,null
-2017-07-11T00:00:00.000000000,Seems to be in good condition,R165,null
-2017-04-20T00:00:00.000000000,Nothing to report,R166,null
-2017-02-07T00:00:00.000000000,Nothing to report,R167,null
-2017-07-10T00:00:00.000000000,Nothing to report,R168,null
-2017-02-20T00:00:00.000000000,null,R169,null
-2017-05-08T00:00:00.000000000,Seems to be in good condition,R170,null
-2017-08-01T00:00:00.000000000,Faulty power supply was replaced,R171,null
-2017-04-08T00:00:00.000000000,Seems to be in good condition,R172,null
-2017-04-24T00:00:00.000000000,null,R173,null
-2016-02-04T00:00:00.000000000,Faulty power supply was replaced,R174,null
-2017-05-28T00:00:00.000000000,Faulty power supply was replaced,R175,null
-2017-07-04T00:00:00.000000000,Faulty power supply was replaced,R176,null
-2017-05-05T00:00:00.000000000,null,R177,null
-2017-06-25T00:00:00.000000000,null,R178,null
-2017-02-02T00:00:00.000000000,Nothing to report,R179,null
-2017-04-09T00:00:00.000000000,Seems to be in good condition,R180,null
-2017-06-07T00:00:00.000000000,null,R181,null
-2016-02-06T00:00:00.000000000,Faulty power supply was replaced,R183,null
-2016-03-30T00:00:00.000000000,null,R184,null
-2014-12-09T00:00:00.000000000,null,R186,null
-2017-07-20T00:00:00.000000000,Nothing to report,R187,null
-2017-05-20T00:00:00.000000000,Seems to be in good condition,R189,null
-2016-04-09T00:00:00.000000000,Seems to be in good condition,R190,null
-2017-07-19T00:00:00.000000000,Faulty power supply was replaced,R191,null
-2017-02-18T00:00:00.000000000,Seems to be in good condition,R192,null
-2017-07-03T00:00:00.000000000,null,R193,null
-2017-04-22T00:00:00.000000000,Faulty power supply was replaced,R194,null
-2014-12-01T00:00:00.000000000,Seems to be in good condition,R196,null
-2017-04-12T00:00:00.000000000,Nothing to report,R197,null
-2017-03-16T00:00:00.000000000,Nothing to report,R198,null
-2017-06-06T00:00:00.000000000,null,R199,null
-2017-03-02T00:00:00.000000000,Faulty power supply was replaced,R201,null
-2016-01-15T00:00:00.000000000,Nothing to report,R202,null
-2017-07-29T00:00:00.000000000,null,R204,null
-2017-04-06T00:00:00.000000000,Faulty power supply was replaced,R205,null
-2017-01-06T00:00:00.000000000,Nothing to report,R207,null
-2017-07-30T00:00:00.000000000,Nothing to report,R208,null
-2017-03-24T00:00:00.000000000,Nothing to report,R209,null
-2017-02-21T00:00:00.000000000,null,R210,null
-2017-03-09T00:00:00.000000000,Faulty power supply was replaced,R211,null
-2017-04-15T00:00:00.000000000,Faulty power supply was replaced,R213,null
-2017-05-05T00:00:00.000000000,Seems to be in good condition,R215,null
-2017-04-16T00:00:00.000000000,Nothing to report,R216,null
-2017-03-02T00:00:00.000000000,null,R217,null
-2017-04-24T00:00:00.000000000,null,R219,null
-2017-06-06T00:00:00.000000000,Nothing to report,R222,null
-2017-06-11T00:00:00.000000000,Faulty power supply was replaced,R223,null
-2017-05-27T00:00:00.000000000,Seems to be in good condition,R224,null
-2017-02-23T00:00:00.000000000,Nothing to report,R225,null
-2017-04-21T00:00:00.000000000,null,R226,null
-2017-04-07T00:00:00.000000000,Nothing to report,R227,null
-2017-07-30T00:00:00.000000000,Nothing to report,R228,null
-2017-01-09T00:00:00.000000000,Seems to be in good condition,R229,null
-2017-07-07T00:00:00.000000000,Seems to be in good condition,R230,null
-2017-07-05T00:00:00.000000000,Faulty power supply was replaced,R231,null
-2017-04-08T00:00:00.000000000,Seems to be in good condition,R232,null
-2017-05-25T00:00:00.000000000,Faulty power supply was replaced,R233,null
-2017-07-31T00:00:00.000000000,null,R234,null
-2017-04-02T00:00:00.000000000,Seems to be in good condition,R235,null
-2017-05-03T00:00:00.000000000,Nothing to report,R236,null
-2017-07-13T00:00:00.000000000,null,R237,null
-2017-05-20T00:00:00.000000000,Seems to be in good condition,R238,null
-2017-02-22T00:00:00.000000000,Faulty power supply was replaced,R239,null
-2017-03-13T00:00:00.000000000,Nothing to report,R240,null
-2017-05-20T00:00:00.000000000,Seems to be in good condition,R241,null
-2017-07-13T00:00:00.000000000,Faulty power supply was replaced,R243,null
-2017-05-09T00:00:00.000000000,Nothing to report,R244,null
-2017-03-18T00:00:00.000000000,null,R245,null
-2017-04-18T00:00:00.000000000,null,R248,null
-2017-02-26T00:00:00.000000000,null,R249,null
-2017-06-14T00:00:00.000000000,Nothing to report,R250,null
-2017-05-22T00:00:00.000000000,null,R251,null
-2017-07-04T00:00:00.000000000,Faulty power supply was replaced,R252,null
-2017-05-07T00:00:00.000000000,Seems to be in good condition,R254,null
-2015-05-18T00:00:00.000000000,null,R255,null
-2016-01-06T00:00:00.000000000,Faulty power supply was replaced,R257,null
-2017-07-09T00:00:00.000000000,Seems to be in good condition,R258,null
-2016-03-06T00:00:00.000000000,Faulty power supply was replaced,R259,null
-2017-07-16T00:00:00.000000000,Faulty power supply was replaced,R260,null
-2016-08-30T00:00:00.000000000,Seems to be in good condition,R261,null
-2017-03-29T00:00:00.000000000,null,R262,null
-2017-03-06T00:00:00.000000000,null,R263,null
-2017-07-17T00:00:00.000000000,null,R266,null
-2017-02-10T00:00:00.000000000,Faulty power supply was replaced,R268,null
-2017-07-14T00:00:00.000000000,null,R270,null
-2017-04-02T00:00:00.000000000,Faulty power supply was replaced,R271,null
-2017-04-03T00:00:00.000000000,null,R272,null
-2016-11-22T00:00:00.000000000,Nothing to report,R273,null
-2017-02-28T00:00:00.000000000,Seems to be in good condition,R274,null
-2015-04-16T00:00:00.000000000,null,R275,null
-2017-05-17T00:00:00.000000000,Seems to be in good condition,R276,null
-2017-04-15T00:00:00.000000000,null,R278,null
-2017-07-18T00:00:00.000000000,Nothing to report,R279,null
-2017-03-22T00:00:00.000000000,null,R280,null
-2017-07-09T00:00:00.000000000,Seems to be in good condition,R281,null
-2017-03-16T00:00:00.000000000,Faulty power supply was replaced,R282,null
-2017-02-08T00:00:00.000000000,null,R284,null
-2017-03-10T00:00:00.000000000,Nothing to report,R285,null
-2017-06-28T00:00:00.000000000,null,R286,null
-2017-03-18T00:00:00.000000000,null,R287,null
-2017-07-30T00:00:00.000000000,Faulty power supply was replaced,R288,null
-2015-12-15T00:00:00.000000000,Nothing to report,R289,null
-2017-03-31T00:00:00.000000000,Faulty power supply was replaced,R290,null
-2017-03-26T00:00:00.000000000,Faulty power supply was replaced,R291,null
-2017-06-21T00:00:00.000000000,Faulty power supply was replaced,R292,null
-2017-06-29T00:00:00.000000000,Seems to be in good condition,R293,null
-2017-04-19T00:00:00.000000000,Seems to be in good condition,R294,null
-2017-06-15T00:00:00.000000000,Faulty power supply was replaced,R295,null
-2017-04-25T00:00:00.000000000,Nothing to report,R296,null
-2017-08-02T00:00:00.000000000,Nothing to report,R297,null
-2017-05-19T00:00:00.000000000,Seems to be in good condition,R300,null
-2017-05-18T00:00:00.000000000,null,R302,null
-2017-02-15T00:00:00.000000000,Nothing to report,R303,null
-2017-04-05T00:00:00.000000000,null,R304,null
-2017-04-27T00:00:00.000000000,Seems to be in good condition,R305,null
-2017-06-03T00:00:00.000000000,Seems to be in good condition,R306,null
-2017-02-04T00:00:00.000000000,Nothing to report,R307,null
-2017-05-31T00:00:00.000000000,Seems to be in good condition,R309,null
-2017-06-30T00:00:00.000000000,Seems to be in good condition,R310,null
-2017-02-11T00:00:00.000000000,Faulty power supply was replaced,R311,null
-2015-09-28T00:00:00.000000000,Seems to be in good condition,R312,null
-2017-04-15T00:00:00.000000000,Seems to be in good condition,R313,null
-2017-04-28T00:00:00.000000000,Faulty power supply was replaced,R314,null
-2017-05-20T00:00:00.000000000,Faulty power supply was replaced,R316,null
-2017-07-28T00:00:00.000000000,Faulty power supply was replaced,R318,null
-2017-04-28T00:00:00.000000000,Faulty power supply was replaced,R320,null
-2017-04-04T00:00:00.000000000,Nothing to report,R321,null
-2017-03-14T00:00:00.000000000,Nothing to report,R322,null
-2017-07-07T00:00:00.000000000,Faulty power supply was replaced,R323,null
-2017-03-31T00:00:00.000000000,Seems to be in good condition,R324,null
-2017-05-23T00:00:00.000000000,Faulty power supply was replaced,R325,null
-2017-05-22T00:00:00.000000000,Seems to be in good condition,R326,null
-2016-12-23T00:00:00.000000000,Nothing to report,R328,null
-2017-04-13T00:00:00.000000000,Faulty power supply was replaced,R329,null
-2017-05-23T00:00:00.000000000,Faulty power supply was replaced,R331,null
-2017-04-18T00:00:00.000000000,Seems to be in good condition,R334,null
-2017-02-15T00:00:00.000000000,Faulty power supply was replaced,R335,null
-2017-06-05T00:00:00.000000000,Faulty power supply was replaced,R336,null
-2017-04-18T00:00:00.000000000,Faulty power supply was replaced,R337,null
-2017-06-13T00:00:00.000000000,Seems to be in good condition,R338,null
-2014-11-01T00:00:00.000000000,Faulty power supply was replaced,R339,null
-2017-02-17T00:00:00.000000000,Nothing to report,R340,null
-2017-04-05T00:00:00.000000000,Seems to be in good condition,R341,null
-2017-03-03T00:00:00.000000000,Nothing to report,R342,null
-2017-07-14T00:00:00.000000000,Nothing to report,R343,null
-2017-05-17T00:00:00.000000000,Nothing to report,R344,null
-2017-03-30T00:00:00.000000000,null,R345,null
-2016-02-28T00:00:00.000000000,null,R346,null
-2017-03-01T00:00:00.000000000,Faulty power supply was replaced,R347,null
-2017-06-27T00:00:00.000000000,Faulty power supply was replaced,R348,null
-2017-04-08T00:00:00.000000000,Seems to be in good condition,R349,null
-2017-06-26T00:00:00.000000000,Nothing to report,R351,null
-2017-03-11T00:00:00.000000000,Seems to be in good condition,R352,null
-2017-06-13T00:00:00.000000000,Faulty power supply was replaced,R354,null
-2015-03-31T00:00:00.000000000,Nothing to report,R355,null
-2016-10-13T00:00:00.000000000,Nothing to report,R356,null
-2017-07-24T00:00:00.000000000,Nothing to report,R357,null
-2017-04-12T00:00:00.000000000,Nothing to report,R358,null
-2017-04-19T00:00:00.000000000,Seems to be in good condition,R359,null
-2017-07-13T00:00:00.000000000,Seems to be in good condition,R360,null
-2017-07-10T00:00:00.000000000,Faulty power supply was replaced,R361,null
-2017-02-07T00:00:00.000000000,Faulty power supply was replaced,R363,null
-2017-05-17T00:00:00.000000000,Seems to be in good condition,R365,null
-2017-02-19T00:00:00.000000000,Seems to be in good condition,R366,null
-2017-03-21T00:00:00.000000000,null,R367,null
-2015-06-14T00:00:00.000000000,Faulty power supply was replaced,R368,null
-2017-04-16T00:00:00.000000000,null,R369,null
-2017-04-28T00:00:00.000000000,Faulty power supply was replaced,R371,null
-2017-03-31T00:00:00.000000000,Faulty power supply was replaced,R372,null
-2017-06-24T00:00:00.000000000,Seems to be in good condition,R375,null
-2017-06-07T00:00:00.000000000,null,R376,null
-2017-07-04T00:00:00.000000000,Nothing to report,R377,null
-2017-02-20T00:00:00.000000000,null,R379,null
-2017-03-24T00:00:00.000000000,Faulty power supply was replaced,R380,null
-2016-10-19T00:00:00.000000000,null,R381,null
-2017-03-07T00:00:00.000000000,null,R383,null
-2017-07-17T00:00:00.000000000,Nothing to report,R385,null
-2017-03-07T00:00:00.000000000,Nothing to report,R386,null
-2017-04-20T00:00:00.000000000,Faulty power supply was replaced,R387,null
-2017-03-29T00:00:00.000000000,Faulty power supply was replaced,R388,null
-2017-03-26T00:00:00.000000000,Seems to be in good condition,R389,null
-2017-03-17T00:00:00.000000000,Nothing to report,R390,null
-2017-04-09T00:00:00.000000000,Nothing to report,R391,null
-2017-06-01T00:00:00.000000000,Faulty power supply was replaced,R394,null
-2017-03-04T00:00:00.000000000,Faulty power supply was replaced,R395,null
-2017-04-18T00:00:00.000000000,Seems to be in good condition,R396,null
-2014-10-30T00:00:00.000000000,Nothing to report,R397,null
-2017-03-19T00:00:00.000000000,null,R398,null
-2017-03-30T00:00:00.000000000,Nothing to report,R399,null
-2016-06-11T00:00:00.000000000,Seems to be in good condition,R400,null
-2017-04-01T00:00:00.000000000,Nothing to report,R401,null
-2017-07-02T00:00:00.000000000,Nothing to report,R402,null
-2017-05-13T00:00:00.000000000,Seems to be in good condition,R403,null
-2017-05-20T00:00:00.000000000,null,R406,null
-2017-05-19T00:00:00.000000000,null,R407,null
-2017-02-10T00:00:00.000000000,Faulty power supply was replaced,R408,null
-2017-04-08T00:00:00.000000000,Seems to be in good condition,R409,null
-2015-10-26T00:00:00.000000000,null,R410,null
-2017-03-30T00:00:00.000000000,Nothing to report,R411,null
-2017-06-02T00:00:00.000000000,Nothing to report,R412,null
-2017-06-04T00:00:00.000000000,null,R413,null
-2017-07-29T00:00:00.000000000,null,R415,null
-2017-05-05T00:00:00.000000000,Nothing to report,R416,null
-2017-05-18T00:00:00.000000000,Nothing to report,R417,null
-2017-02-07T00:00:00.000000000,Seems to be in good condition,R418,null
-2017-06-20T00:00:00.000000000,Seems to be in good condition,R419,null
-2017-04-15T00:00:00.000000000,Faulty power supply was replaced,R420,null
-2017-02-08T00:00:00.000000000,null,R421,null
-2017-05-19T00:00:00.000000000,Faulty power supply was replaced,R423,null
-2017-07-05T00:00:00.000000000,Faulty power supply was replaced,R424,null
-2017-05-12T00:00:00.000000000,Faulty power supply was replaced,R425,null
-2017-04-07T00:00:00.000000000,Faulty power supply was replaced,R426,null
-2016-10-05T00:00:00.000000000,null,R427,null
-2017-07-25T00:00:00.000000000,Faulty power supply was replaced,R429,null
-2017-03-27T00:00:00.000000000,Seems to be in good condition,R430,null
-2017-02-18T00:00:00.000000000,Nothing to report,R431,null
-2017-06-01T00:00:00.000000000,Faulty power supply was replaced,R432,null
-2017-04-20T00:00:00.000000000,Faulty power supply was replaced,R433,null
-2017-03-25T00:00:00.000000000,null,R434,null
-2017-07-04T00:00:00.000000000,Seems to be in good condition,R435,null
-2017-05-04T00:00:00.000000000,Faulty power supply was replaced,R436,null
-2017-03-22T00:00:00.000000000,Nothing to report,R437,null
-2017-04-30T00:00:00.000000000,Faulty power supply was replaced,R438,null
-2017-02-07T00:00:00.000000000,null,R439,null
-2017-04-17T00:00:00.000000000,Faulty power supply was replaced,R443,null
-2017-03-21T00:00:00.000000000,Seems to be in good condition,R444,null
-2017-06-18T00:00:00.000000000,Nothing to report,R445,null
-2017-06-05T00:00:00.000000000,Nothing to report,R446,null
-2017-05-21T00:00:00.000000000,Faulty power supply was replaced,R448,null
-2017-07-14T00:00:00.000000000,Faulty power supply was replaced,R449,null
-2017-02-27T00:00:00.000000000,Seems to be in good condition,R450,null
-2014-09-03T00:00:00.000000000,Faulty power supply was replaced,R451,null
-2014-10-10T00:00:00.000000000,null,R452,null
-2017-05-07T00:00:00.000000000,Seems to be in good condition,R453,null
-2017-03-03T00:00:00.000000000,Nothing to report,R454,null
-2017-04-23T00:00:00.000000000,null,R455,null
-2014-09-06T00:00:00.000000000,null,R456,null
-2017-07-19T00:00:00.000000000,Nothing to report,R457,null
-2017-06-07T00:00:00.000000000,null,R459,null
-2017-06-22T00:00:00.000000000,Seems to be in good condition,R460,null
-2015-10-19T00:00:00.000000000,Seems to be in good condition,R461,null
-2017-03-10T00:00:00.000000000,Nothing to report,R464,null
-2017-08-02T00:00:00.000000000,Seems to be in good condition,R465,null
-2017-02-10T00:00:00.000000000,Seems to be in good condition,R467,null
-2017-07-31T00:00:00.000000000,Nothing to report,R468,null
-2017-05-27T00:00:00.000000000,Faulty power supply was replaced,R469,null
-2017-05-19T00:00:00.000000000,Nothing to report,R470,null
-2017-05-03T00:00:00.000000000,null,R471,null
-2017-07-21T00:00:00.000000000,null,R472,null
-2017-06-11T00:00:00.000000000,Faulty power supply was replaced,R473,null
-2017-06-26T00:00:00.000000000,Faulty power supply was replaced,R474,null
-2017-07-14T00:00:00.000000000,null,R475,null
-2017-04-20T00:00:00.000000000,Seems to be in good condition,R476,null
-2017-02-24T00:00:00.000000000,Seems to be in good condition,R477,null
-2017-06-06T00:00:00.000000000,Faulty power supply was replaced,R478,null
-2017-04-20T00:00:00.000000000,Nothing to report,R479,null
-2017-07-17T00:00:00.000000000,Faulty power supply was replaced,R482,null
-2017-07-28T00:00:00.000000000,Faulty power supply was replaced,R483,null
-2016-04-30T00:00:00.000000000,null,R484,null
-2017-03-10T00:00:00.000000000,Seems to be in good condition,R486,null
-2017-02-13T00:00:00.000000000,null,R487,null
-2017-03-07T00:00:00.000000000,null,R489,null
-2015-11-01T00:00:00.000000000,Seems to be in good condition,R490,null
-2017-04-14T00:00:00.000000000,Nothing to report,R492,null
-2017-05-21T00:00:00.000000000,Nothing to report,R493,null
-2016-01-12T00:00:00.000000000,Nothing to report,R494,null
-2017-03-06T00:00:00.000000000,Nothing to report,R495,null
-2017-06-12T00:00:00.000000000,null,R498,null
-2017-04-16T00:00:00.000000000,null,R499,null
-2016-11-24T00:00:00.000000000,Nothing to report,R500,null
-2017-05-29T00:00:00.000000000,Nothing to report,R501,null
-2014-11-15T00:00:00.000000000,null,R503,null
-2017-06-29T00:00:00.000000000,Nothing to report,R504,null
-2017-05-01T00:00:00.000000000,null,R505,null
-2017-06-21T00:00:00.000000000,Seems to be in good condition,R506,null
-2017-06-15T00:00:00.000000000,Faulty power supply was replaced,R507,null
-2016-11-11T00:00:00.000000000,Faulty power supply was replaced,R508,null
-2017-04-13T00:00:00.000000000,Nothing to report,R509,null
-2017-06-27T00:00:00.000000000,Nothing to report,R510,null
-2017-07-09T00:00:00.000000000,Nothing to report,R511,null
-2017-06-16T00:00:00.000000000,null,R512,null
-2017-04-10T00:00:00.000000000,null,R513,null
-2017-07-03T00:00:00.000000000,Seems to be in good condition,R514,null
-2017-05-21T00:00:00.000000000,Faulty power supply was replaced,R516,null
-2017-04-28T00:00:00.000000000,null,R517,null
-2017-06-19T00:00:00.000000000,null,R518,null
-2017-06-07T00:00:00.000000000,Nothing to report,R519,null
-2017-06-21T00:00:00.000000000,null,R520,null
-2014-11-05T00:00:00.000000000,Faulty power supply was replaced,R521,null
-2017-05-08T00:00:00.000000000,Seems to be in good condition,R524,null
-2017-04-13T00:00:00.000000000,Seems to be in good condition,R526,null
-2017-03-08T00:00:00.000000000,Faulty power supply was replaced,R527,null
-2017-03-27T00:00:00.000000000,Nothing to report,R528,null
-2017-02-09T00:00:00.000000000,Faulty power supply was replaced,R530,null
-2017-06-17T00:00:00.000000000,Nothing to report,R533,null
-2015-02-24T00:00:00.000000000,null,R535,null
-2016-09-22T00:00:00.000000000,Faulty power supply was replaced,R536,null
-2017-02-06T00:00:00.000000000,null,R537,null
-2017-07-22T00:00:00.000000000,Nothing to report,R538,null
-2015-06-27T00:00:00.000000000,Seems to be in good condition,R539,null
-2017-02-23T00:00:00.000000000,Faulty power supply was replaced,R541,null
-2017-07-15T00:00:00.000000000,Faulty power supply was replaced,R542,null
-2017-07-21T00:00:00.000000000,Seems to be in good condition,R543,null
-2017-07-21T00:00:00.000000000,null,R545,null
-2017-07-19T00:00:00.000000000,Faulty power supply was replaced,R546,null
-2017-04-14T00:00:00.000000000,Faulty power supply was replaced,R547,null
-2017-04-28T00:00:00.000000000,Seems to be in good condition,R549,null
-2017-03-16T00:00:00.000000000,Seems to be in good condition,R550,null
-2017-06-26T00:00:00.000000000,null,R551,null
-2017-07-12T00:00:00.000000000,Faulty power supply was replaced,R552,null
-2017-07-06T00:00:00.000000000,Faulty power supply was replaced,R553,null
-2017-07-27T00:00:00.000000000,Nothing to report,R554,null
-2017-07-28T00:00:00.000000000,null,R557,null
-2017-05-25T00:00:00.000000000,null,R558,null
-2017-07-17T00:00:00.000000000,Nothing to report,R559,null
-2017-02-07T00:00:00.000000000,Nothing to report,R560,null
-2015-05-26T00:00:00.000000000,null,R561,null
-2017-06-08T00:00:00.000000000,Seems to be in good condition,R562,null
-2017-07-12T00:00:00.000000000,null,R563,null
-2017-03-04T00:00:00.000000000,null,R564,null
-2017-06-22T00:00:00.000000000,null,R565,null
-2017-05-08T00:00:00.000000000,Nothing to report,R566,null
-2017-07-27T00:00:00.000000000,Nothing to report,R568,null
-2017-06-26T00:00:00.000000000,Seems to be in good condition,R569,null
-2017-07-10T00:00:00.000000000,Faulty power supply was replaced,R570,null
-2017-03-27T00:00:00.000000000,Nothing to report,R571,null
-2017-06-09T00:00:00.000000000,Seems to be in good condition,R573,null
-2017-03-20T00:00:00.000000000,Nothing to report,R574,null
-2017-07-04T00:00:00.000000000,Seems to be in good condition,R576,null
-2015-03-30T00:00:00.000000000,Nothing to report,R577,null
-2017-07-13T00:00:00.000000000,Faulty power supply was replaced,R578,null
-2017-07-30T00:00:00.000000000,Seems to be in good condition,R580,null
-2017-04-17T00:00:00.000000000,Seems to be in good condition,R581,null
-2017-06-30T00:00:00.000000000,Nothing to report,R582,null
-2017-04-14T00:00:00.000000000,Faulty power supply was replaced,R583,null
-2017-06-14T00:00:00.000000000,Nothing to report,R585,null
-2017-06-07T00:00:00.000000000,Seems to be in good condition,R586,null
-2017-05-29T00:00:00.000000000,Seems to be in good condition,R587,null
-2017-04-10T00:00:00.000000000,Seems to be in good condition,R589,null
-2017-07-27T00:00:00.000000000,Nothing to report,R590,null
-2017-03-11T00:00:00.000000000,Seems to be in good condition,R591,null
-2015-07-24T00:00:00.000000000,null,R592,null
-2017-05-14T00:00:00.000000000,Nothing to report,R593,null
-2017-03-03T00:00:00.000000000,Nothing to report,R594,null
-2017-03-18T00:00:00.000000000,Nothing to report,R595,null
-2017-05-11T00:00:00.000000000,Nothing to report,R596,null
-2017-04-08T00:00:00.000000000,null,R597,null
-2017-04-30T00:00:00.000000000,null,R598,null
-2017-08-02T00:00:00.000000000,null,R600,null
-2017-05-18T00:00:00.000000000,null,R601,null
-2017-03-16T00:00:00.000000000,Seems to be in good condition,R602,null
-2017-07-20T00:00:00.000000000,Nothing to report,R604,null
-2017-07-05T00:00:00.000000000,Seems to be in good condition,R605,null
-2017-05-24T00:00:00.000000000,Nothing to report,R606,null
-2017-02-03T00:00:00.000000000,null,R607,null
-2017-06-15T00:00:00.000000000,null,R609,null
-2017-06-01T00:00:00.000000000,Nothing to report,R610,null
-2017-06-21T00:00:00.000000000,Faulty power supply was replaced,R611,null
-2016-01-23T00:00:00.000000000,Faulty power supply was replaced,R612,null
-2017-05-02T00:00:00.000000000,Faulty power supply was replaced,R613,null
-2017-07-22T00:00:00.000000000,Seems to be in good condition,R614,null
-2017-03-09T00:00:00.000000000,Faulty power supply was replaced,R615,null
-2015-05-15T00:00:00.000000000,Nothing to report,R616,null
-2017-02-05T00:00:00.000000000,Seems to be in good condition,R617,null
-2017-04-16T00:00:00.000000000,Nothing to report,R618,null
-2017-02-15T00:00:00.000000000,Nothing to report,R619,null
-2017-04-22T00:00:00.000000000,Nothing to report,R620,null
-2017-02-19T00:00:00.000000000,Nothing to report,R621,null
-2017-04-25T00:00:00.000000000,Seems to be in good condition,R623,null
-2017-05-15T00:00:00.000000000,Faulty power supply was replaced,R625,null
-2015-05-30T00:00:00.000000000,Faulty power supply was replaced,R626,null
-2017-07-14T00:00:00.000000000,Seems to be in good condition,R627,null
-2017-06-26T00:00:00.000000000,Seems to be in good condition,R628,null
-2016-02-04T00:00:00.000000000,Seems to be in good condition,R629,null
-2017-03-19T00:00:00.000000000,Nothing to report,R630,null
-2017-08-01T00:00:00.000000000,null,R631,null
-2017-02-12T00:00:00.000000000,Faulty power supply was replaced,R632,null
-2017-06-01T00:00:00.000000000,Nothing to report,R633,null
-2016-11-06T00:00:00.000000000,Faulty power supply was replaced,R635,null
-2017-06-09T00:00:00.000000000,null,R636,null
-2017-05-04T00:00:00.000000000,Seems to be in good condition,R637,null
-2017-04-01T00:00:00.000000000,Nothing to report,R638,null
-2017-05-30T00:00:00.000000000,Nothing to report,R641,null
-2017-02-19T00:00:00.000000000,Nothing to report,R643,null
-2015-11-03T00:00:00.000000000,Nothing to report,R644,null
-2017-06-03T00:00:00.000000000,null,R645,null
-2015-09-29T00:00:00.000000000,Nothing to report,R646,null
-2017-05-15T00:00:00.000000000,Nothing to report,R647,null
-2015-07-16T00:00:00.000000000,Faulty power supply was replaced,R648,null
-2017-02-13T00:00:00.000000000,Nothing to report,R649,null
-2017-02-17T00:00:00.000000000,Faulty power supply was replaced,R650,null
-2016-11-23T00:00:00.000000000,Nothing to report,R651,null
-2017-06-30T00:00:00.000000000,null,R652,null
-2017-06-05T00:00:00.000000000,Seems to be in good condition,R654,null
-2017-07-10T00:00:00.000000000,Faulty power supply was replaced,R655,null
-2017-03-21T00:00:00.000000000,Seems to be in good condition,R656,null
-2017-02-25T00:00:00.000000000,null,R657,null
-2017-05-27T00:00:00.000000000,Faulty power supply was replaced,R660,null
-2017-07-05T00:00:00.000000000,Seems to be in good condition,R661,null
-2017-07-18T00:00:00.000000000,null,R662,null
-2016-09-08T00:00:00.000000000,null,R663,null
-2017-03-15T00:00:00.000000000,null,R664,null
-2017-02-05T00:00:00.000000000,Seems to be in good condition,R665,null
-2017-06-27T00:00:00.000000000,Nothing to report,R666,null
-2015-02-02T00:00:00.000000000,Faulty power supply was replaced,R667,null
-2017-04-18T00:00:00.000000000,Seems to be in good condition,R669,null
-2017-07-23T00:00:00.000000000,Faulty power supply was replaced,R670,null
-2017-06-28T00:00:00.000000000,Nothing to report,R671,null
-2017-04-23T00:00:00.000000000,Faulty power supply was replaced,R673,null
-2014-11-30T00:00:00.000000000,Seems to be in good condition,R675,null
-2014-11-05T00:00:00.000000000,null,R676,null
-2017-04-11T00:00:00.000000000,Nothing to report,R677,null
-2014-09-29T00:00:00.000000000,Faulty power supply was replaced,R678,null
-2017-02-13T00:00:00.000000000,Seems to be in good condition,R679,null
-2017-02-24T00:00:00.000000000,null,R680,null
-2017-04-13T00:00:00.000000000,Seems to be in good condition,R681,null
-2017-07-19T00:00:00.000000000,null,R682,null
-2017-05-27T00:00:00.000000000,Nothing to report,R683,null
-2017-02-22T00:00:00.000000000,Faulty power supply was replaced,R684,null
-2017-03-01T00:00:00.000000000,Faulty power supply was replaced,R685,null
-2017-03-16T00:00:00.000000000,Faulty power supply was replaced,R686,null
-2017-07-13T00:00:00.000000000,Nothing to report,R687,null
-2017-06-30T00:00:00.000000000,Nothing to report,R688,null
-2017-03-31T00:00:00.000000000,Seems to be in good condition,R689,null
-2017-04-23T00:00:00.000000000,Faulty power supply was replaced,R690,null
-2017-06-12T00:00:00.000000000,Faulty power supply was replaced,R691,null
-2017-06-05T00:00:00.000000000,null,R692,null
-2016-12-07T00:00:00.000000000,Seems to be in good condition,R694,null
-2017-07-10T00:00:00.000000000,Seems to be in good condition,R695,null
-2014-12-29T00:00:00.000000000,Seems to be in good condition,R696,null
-2017-03-05T00:00:00.000000000,Nothing to report,R697,null
-2017-06-02T00:00:00.000000000,null,R698,null
-2017-04-10T00:00:00.000000000,null,R700,null
-2017-05-06T00:00:00.000000000,Faulty power supply was replaced,R701,null
-2017-04-13T00:00:00.000000000,Faulty power supply was replaced,R702,null
-2017-06-28T00:00:00.000000000,Seems to be in good condition,R703,null
-2017-06-24T00:00:00.000000000,Seems to be in good condition,R704,null
-2017-03-01T00:00:00.000000000,Nothing to report,R705,null
-2016-07-26T00:00:00.000000000,null,R707,null
-2014-11-13T00:00:00.000000000,null,R708,null
-2017-07-14T00:00:00.000000000,null,R709,null
-2017-07-21T00:00:00.000000000,Faulty power supply was replaced,R710,null
-2017-04-05T00:00:00.000000000,null,R711,null
-2017-07-01T00:00:00.000000000,Seems to be in good condition,R712,null
-2017-05-27T00:00:00.000000000,null,R713,null
-2017-03-30T00:00:00.000000000,Nothing to report,R714,null
-2017-06-02T00:00:00.000000000,null,R715,null
-2017-06-01T00:00:00.000000000,Faulty power supply was replaced,R716,null
-2017-04-29T00:00:00.000000000,Nothing to report,R717,null
-2017-02-14T00:00:00.000000000,Seems to be in good condition,R720,null
-2017-07-15T00:00:00.000000000,Seems to be in good condition,R721,null
-2017-02-15T00:00:00.000000000,Seems to be in good condition,R724,null
-2016-09-16T00:00:00.000000000,Nothing to report,R727,null
-2017-05-21T00:00:00.000000000,Faulty power supply was replaced,R728,null
-2015-06-20T00:00:00.000000000,Nothing to report,R729,null
-2014-10-29T00:00:00.000000000,Nothing to report,R730,null
-2017-06-14T00:00:00.000000000,null,R731,null
-2017-02-06T00:00:00.000000000,Faulty power supply was replaced,R732,null
-2015-10-10T00:00:00.000000000,Faulty power supply was replaced,R733,null
-2017-06-26T00:00:00.000000000,null,R737,null
-2017-07-06T00:00:00.000000000,Faulty power supply was replaced,R738,null
-2017-07-16T00:00:00.000000000,Seems to be in good condition,R739,null
-2017-02-16T00:00:00.000000000,Faulty power supply was replaced,R740,null
-2017-05-25T00:00:00.000000000,Faulty power supply was replaced,R741,null
-2016-04-05T00:00:00.000000000,Seems to be in good condition,R742,null
-2017-01-12T00:00:00.000000000,null,R743,null
-2016-12-01T00:00:00.000000000,Seems to be in good condition,R744,null
-2017-06-26T00:00:00.000000000,Seems to be in good condition,R745,null
-2017-02-20T00:00:00.000000000,Seems to be in good condition,R746,null
-2017-07-09T00:00:00.000000000,Nothing to report,R747,null
-2017-05-30T00:00:00.000000000,Nothing to report,R749,null
-2015-03-29T00:00:00.000000000,Nothing to report,R750,null
-2017-07-12T00:00:00.000000000,null,R752,null
-2017-06-17T00:00:00.000000000,Faulty power supply was replaced,R753,null
-2017-04-26T00:00:00.000000000,null,R754,null
-2017-06-07T00:00:00.000000000,Nothing to report,R755,null
-2017-05-04T00:00:00.000000000,Faulty power supply was replaced,R756,null
-2017-02-17T00:00:00.000000000,Nothing to report,R757,null
-2017-05-15T00:00:00.000000000,Faulty power supply was replaced,R761,null
-2017-04-12T00:00:00.000000000,Seems to be in good condition,R762,null
-2017-07-03T00:00:00.000000000,Faulty power supply was replaced,R765,null
-2017-02-13T00:00:00.000000000,Faulty power supply was replaced,R766,null
-2017-04-09T00:00:00.000000000,Nothing to report,R767,null
-2017-04-09T00:00:00.000000000,Nothing to report,R768,null
-2017-03-27T00:00:00.000000000,Seems to be in good condition,R769,null
-2017-02-17T00:00:00.000000000,null,R770,null
-2017-02-27T00:00:00.000000000,Seems to be in good condition,R771,null
-2017-04-16T00:00:00.000000000,Nothing to report,R773,null
-2017-01-12T00:00:00.000000000,null,R774,null
-2017-03-03T00:00:00.000000000,Nothing to report,R775,null
-2017-05-12T00:00:00.000000000,Seems to be in good condition,R777,null
-2017-07-27T00:00:00.000000000,Seems to be in good condition,R778,null
-2017-03-09T00:00:00.000000000,Nothing to report,R779,null
-2017-02-17T00:00:00.000000000,null,R780,null
-2017-04-26T00:00:00.000000000,null,R781,null
-2016-02-21T00:00:00.000000000,Nothing to report,R782,null
-2017-04-02T00:00:00.000000000,Faulty power supply was replaced,R784,null
-2016-10-04T00:00:00.000000000,Faulty power supply was replaced,R785,null
-2016-03-12T00:00:00.000000000,null,R786,null
-2017-02-11T00:00:00.000000000,null,R787,null
-2017-07-13T00:00:00.000000000,Seems to be in good condition,R789,null
-2015-11-08T00:00:00.000000000,Faulty power supply was replaced,R790,null
-2017-06-30T00:00:00.000000000,Nothing to report,R793,null
-2017-04-21T00:00:00.000000000,Faulty power supply was replaced,R794,null
-2017-03-05T00:00:00.000000000,Nothing to report,R795,null
-2017-06-26T00:00:00.000000000,Seems to be in good condition,R796,null
-2017-03-24T00:00:00.000000000,Nothing to report,R797,null
-2017-02-12T00:00:00.000000000,Seems to be in good condition,R798,null
-2017-06-15T00:00:00.000000000,Seems to be in good condition,R799,null
-2017-02-19T00:00:00.000000000,null,R800,null
-2017-07-04T00:00:00.000000000,null,R801,null
-2017-02-18T00:00:00.000000000,Nothing to report,R802,null
-2017-04-13T00:00:00.000000000,null,R803,null
-2017-06-18T00:00:00.000000000,null,R804,null
-2017-07-24T00:00:00.000000000,null,R806,null
-2017-04-04T00:00:00.000000000,Faulty power supply was replaced,R807,null
-2017-06-17T00:00:00.000000000,Seems to be in good condition,R808,null
-2017-02-21T00:00:00.000000000,Seems to be in good condition,R809,null
-2016-11-27T00:00:00.000000000,null,R810,null
-2017-03-30T00:00:00.000000000,null,R811,null
-2017-06-25T00:00:00.000000000,Nothing to report,R812,null
-2017-08-01T00:00:00.000000000,Faulty power supply was replaced,R813,null
-2017-03-28T00:00:00.000000000,Seems to be in good condition,R814,null
-2017-02-06T00:00:00.000000000,Nothing to report,R815,null
-2017-07-17T00:00:00.000000000,Faulty power supply was replaced,R818,null
-2017-04-13T00:00:00.000000000,Nothing to report,R819,null
-2017-07-24T00:00:00.000000000,null,R820,null
-2017-02-13T00:00:00.000000000,null,R822,null
-2017-05-18T00:00:00.000000000,Faulty power supply was replaced,R823,null
-2017-04-05T00:00:00.000000000,null,R824,null
-2017-06-22T00:00:00.000000000,Seems to be in good condition,R825,null
-2017-07-05T00:00:00.000000000,null,R826,null
-2017-03-13T00:00:00.000000000,Faulty power supply was replaced,R827,null
-2017-05-12T00:00:00.000000000,Seems to be in good condition,R828,null
-2017-05-14T00:00:00.000000000,Faulty power supply was replaced,R829,null
-2017-02-04T00:00:00.000000000,Seems to be in good condition,R831,null
-2017-07-24T00:00:00.000000000,Faulty power supply was replaced,R833,null
-2017-03-16T00:00:00.000000000,Nothing to report,R834,null
-2017-03-01T00:00:00.000000000,Seems to be in good condition,R835,null
-2017-04-18T00:00:00.000000000,Seems to be in good condition,R838,null
-2017-03-10T00:00:00.000000000,Nothing to report,R839,null
-2015-08-05T00:00:00.000000000,Faulty power supply was replaced,R840,null
-2017-05-09T00:00:00.000000000,Seems to be in good condition,R844,null
-2017-06-02T00:00:00.000000000,Nothing to report,R845,null
-2017-07-21T00:00:00.000000000,null,R846,null
-2017-07-28T00:00:00.000000000,Seems to be in good condition,R847,null
-2017-02-17T00:00:00.000000000,null,R848,null
-2017-05-03T00:00:00.000000000,Nothing to report,R849,null
-2015-09-15T00:00:00.000000000,null,R852,null
-2014-10-23T00:00:00.000000000,null,R854,null
-2017-02-04T00:00:00.000000000,Seems to be in good condition,R855,null
-2017-05-17T00:00:00.000000000,null,R856,null
-2017-03-05T00:00:00.000000000,Nothing to report,R857,null
-2017-05-12T00:00:00.000000000,Seems to be in good condition,R858,null
-2016-04-22T00:00:00.000000000,null,R859,null
-2017-04-23T00:00:00.000000000,null,R860,null
-2017-04-04T00:00:00.000000000,Nothing to report,R863,null
-2017-06-28T00:00:00.000000000,Nothing to report,R864,null
-2017-07-05T00:00:00.000000000,Seems to be in good condition,R865,null
-2017-06-24T00:00:00.000000000,Faulty power supply was replaced,R866,null
-2017-07-25T00:00:00.000000000,Faulty power supply was replaced,R867,null
-2017-05-02T00:00:00.000000000,null,R868,null
-2017-07-27T00:00:00.000000000,null,R870,null
-2017-05-25T00:00:00.000000000,Seems to be in good condition,R871,null
-2017-06-19T00:00:00.000000000,Seems to be in good condition,R872,null
-2017-03-28T00:00:00.000000000,null,R873,null
-2017-03-24T00:00:00.000000000,null,R874,null
-2017-03-03T00:00:00.000000000,null,R875,null
-2017-07-22T00:00:00.000000000,null,R876,null
-2017-07-29T00:00:00.000000000,null,R877,null
-2017-06-09T00:00:00.000000000,null,R878,null
-2016-10-15T00:00:00.000000000,Nothing to report,R879,null
-2016-08-17T00:00:00.000000000,null,R881,null
-2017-07-09T00:00:00.000000000,Nothing to report,R882,null
-2017-07-29T00:00:00.000000000,null,R883,null
-2017-04-10T00:00:00.000000000,null,R884,null
-2017-05-16T00:00:00.000000000,Faulty power supply was replaced,R885,null
-2017-03-02T00:00:00.000000000,null,R886,null
-2016-10-07T00:00:00.000000000,Nothing to report,R887,null
-2017-06-20T00:00:00.000000000,Seems to be in good condition,R888,null
-2017-06-27T00:00:00.000000000,Nothing to report,R889,null
-2017-02-24T00:00:00.000000000,Faulty power supply was replaced,R890,null
-2017-07-23T00:00:00.000000000,Nothing to report,R891,null
-2017-07-11T00:00:00.000000000,null,R892,null
-2017-04-24T00:00:00.000000000,Seems to be in good condition,R893,null
-2017-07-05T00:00:00.000000000,Seems to be in good condition,R895,null
-2017-03-25T00:00:00.000000000,Nothing to report,R896,null
-2017-02-18T00:00:00.000000000,Faulty power supply was replaced,R897,null
-2017-05-05T00:00:00.000000000,null,R898,null
-2017-06-10T00:00:00.000000000,Nothing to report,R899,null
-2014-11-14T00:00:00.000000000,null,R900,null
-2017-03-02T00:00:00.000000000,Faulty power supply was replaced,R901,null
-2017-06-11T00:00:00.000000000,Faulty power supply was replaced,R902,null
-2017-07-15T00:00:00.000000000,null,R903,null
-2017-03-12T00:00:00.000000000,Seems to be in good condition,R904,null
-2017-05-15T00:00:00.000000000,Nothing to report,R906,null
-2015-03-12T00:00:00.000000000,Nothing to report,R907,null
-2017-05-01T00:00:00.000000000,Seems to be in good condition,R908,null
-2017-04-17T00:00:00.000000000,Nothing to report,R909,null
-2017-03-31T00:00:00.000000000,Faulty power supply was replaced,R913,null
-2017-05-04T00:00:00.000000000,Faulty power supply was replaced,R914,null
-2017-03-09T00:00:00.000000000,Faulty power supply was replaced,R915,null
-2017-05-08T00:00:00.000000000,Nothing to report,R917,null
-2017-02-06T00:00:00.000000000,Seems to be in good condition,R918,null
-2015-05-08T00:00:00.000000000,Faulty power supply was replaced,R919,null
-2017-04-11T00:00:00.000000000,Seems to be in good condition,R920,null
-2017-02-17T00:00:00.000000000,Nothing to report,R921,null
-2017-02-08T00:00:00.000000000,null,R922,null
-2017-04-04T00:00:00.000000000,null,R925,null
-2017-03-22T00:00:00.000000000,null,R926,null
-2017-03-29T00:00:00.000000000,Nothing to report,R927,null
-2017-04-27T00:00:00.000000000,null,R929,null
-2017-04-21T00:00:00.000000000,null,R930,null
-2017-06-12T00:00:00.000000000,Faulty power supply was replaced,R932,null
-2017-02-04T00:00:00.000000000,Nothing to report,R933,null
-2017-07-19T00:00:00.000000000,Seems to be in good condition,R934,null
-2017-03-31T00:00:00.000000000,Faulty power supply was replaced,R935,null
-2017-03-12T00:00:00.000000000,Seems to be in good condition,R936,null
-2017-03-27T00:00:00.000000000,Nothing to report,R937,null
-2017-04-12T00:00:00.000000000,Faulty power supply was replaced,R938,null
-2017-03-31T00:00:00.000000000,Faulty power supply was replaced,R939,null
-2015-10-26T00:00:00.000000000,Seems to be in good condition,R940,null
-2017-03-04T00:00:00.000000000,null,R942,null
-2017-07-04T00:00:00.000000000,Nothing to report,R944,null
-2017-06-19T00:00:00.000000000,Seems to be in good condition,R945,null
-2017-07-11T00:00:00.000000000,null,R946,null
-2017-06-23T00:00:00.000000000,Seems to be in good condition,R947,null
-2017-04-26T00:00:00.000000000,Faulty power supply was replaced,R948,null
-2015-06-03T00:00:00.000000000,null,R950,null
-2017-05-22T00:00:00.000000000,null,R951,null
-2017-06-30T00:00:00.000000000,Seems to be in good condition,R952,null
-2015-03-26T00:00:00.000000000,Faulty power supply was replaced,R954,null
-2017-07-10T00:00:00.000000000,Nothing to report,R955,null
-2015-11-20T00:00:00.000000000,Nothing to report,R956,null
-2015-06-10T00:00:00.000000000,Faulty power supply was replaced,R957,null
-2017-06-12T00:00:00.000000000,Faulty power supply was replaced,R958,null
-2017-05-22T00:00:00.000000000,Faulty power supply was replaced,R959,null
-2017-06-24T00:00:00.000000000,Nothing to report,R960,null
-2017-05-16T00:00:00.000000000,Seems to be in good condition,R962,null
-2017-02-22T00:00:00.000000000,Seems to be in good condition,R963,null
-2017-05-04T00:00:00.000000000,Faulty power supply was replaced,R964,null
-2017-04-03T00:00:00.000000000,Faulty power supply was replaced,R967,null
-2017-06-24T00:00:00.000000000,null,R968,null
-2017-06-11T00:00:00.000000000,Nothing to report,R969,null
-2016-10-31T00:00:00.000000000,Seems to be in good condition,R970,null
-2017-06-24T00:00:00.000000000,Nothing to report,R971,null
-2017-03-06T00:00:00.000000000,Nothing to report,R972,null
-2017-03-15T00:00:00.000000000,Faulty power supply was replaced,R973,null
-2017-03-25T00:00:00.000000000,Seems to be in good condition,R974,null
-2017-04-03T00:00:00.000000000,Faulty power supply was replaced,R975,null
-2017-05-07T00:00:00.000000000,Faulty power supply was replaced,R976,null
-2017-02-07T00:00:00.000000000,null,R978,null
-2017-06-06T00:00:00.000000000,Faulty power supply was replaced,R981,null
-2017-04-02T00:00:00.000000000,Seems to be in good condition,R982,null
-2017-05-16T00:00:00.000000000,Seems to be in good condition,R983,null
-2017-04-17T00:00:00.000000000,Seems to be in good condition,R985,null
-2017-03-27T00:00:00.000000000,Seems to be in good condition,R986,null
-2017-07-08T00:00:00.000000000,Nothing to report,R987,null
-2017-07-04T00:00:00.000000000,Faulty power supply was replaced,R988,null
-2017-04-21T00:00:00.000000000,Faulty power supply was replaced,R990,null
-2017-05-29T00:00:00.000000000,Nothing to report,R991,null
-2017-05-17T00:00:00.000000000,Seems to be in good condition,R992,null
-2017-06-03T00:00:00.000000000,null,R993,null
-2017-05-23T00:00:00.000000000,Seems to be in good condition,R994,null
-2017-05-07T00:00:00.000000000,Nothing to report,R995,null
-2017-05-26T00:00:00.000000000,Faulty power supply was replaced,R996,null
-2017-05-02T00:00:00.000000000,Faulty power supply was replaced,R998,null
-2017-03-12T00:00:00.000000000,Faulty power supply was replaced,R999,null
-2017-07-27T00:00:00.000000000,Seems to be in good condition,R1000,null
-2017-02-13T00:00:00.000000000,Seems to be in good condition,R1001,null
-2017-05-20T00:00:00.000000000,Faulty power supply was replaced,R1002,null
-2017-07-29T00:00:00.000000000,Seems to be in good condition,R1003,null
-2017-03-17T00:00:00.000000000,null,R1004,null
-2017-04-14T00:00:00.000000000,null,R1005,null
-2017-02-07T00:00:00.000000000,Nothing to report,R1006,null
-2017-03-13T00:00:00.000000000,null,R1007,null
-2017-04-22T00:00:00.000000000,null,R1008,null
-2017-02-23T00:00:00.000000000,Seems to be in good condition,R1009,null
-2017-07-29T00:00:00.000000000,Seems to be in good condition,R1010,null
-2017-07-26T00:00:00.000000000,Nothing to report,R1012,null
-2017-05-15T00:00:00.000000000,Seems to be in good condition,R1013,null
-2016-12-07T00:00:00.000000000,Faulty power supply was replaced,R1014,null
-2015-02-22T00:00:00.000000000,Seems to be in good condition,R1015,null
-2017-07-28T00:00:00.000000000,Seems to be in good condition,R1016,null
-2015-12-29T00:00:00.000000000,Nothing to report,R1017,null
-2017-04-29T00:00:00.000000000,Nothing to report,R1018,null
-2014-09-11T00:00:00.000000000,Nothing to report,R1020,null
-2017-02-13T00:00:00.000000000,Faulty power supply was replaced,R1021,null
-2017-02-28T00:00:00.000000000,Seems to be in good condition,R1022,null
-2017-03-17T00:00:00.000000000,Seems to be in good condition,R1023,null
-2017-07-04T00:00:00.000000000,Nothing to report,R1024,null
-2017-06-23T00:00:00.000000000,Faulty power supply was replaced,R1025,null
-2017-04-15T00:00:00.000000000,null,R1026,null
-2017-05-27T00:00:00.000000000,Seems to be in good condition,R1029,null
-2017-06-24T00:00:00.000000000,null,R1030,null
-2017-02-18T00:00:00.000000000,null,R1031,null
-2017-03-13T00:00:00.000000000,Faulty power supply was replaced,R1032,null
-2017-04-24T00:00:00.000000000,Seems to be in good condition,R1033,null
-2017-06-05T00:00:00.000000000,Seems to be in good condition,R1034,null
-2017-07-09T00:00:00.000000000,null,R1035,null
-2017-06-26T00:00:00.000000000,null,R1037,null
-2017-06-12T00:00:00.000000000,Seems to be in good condition,R1039,null
-2017-07-22T00:00:00.000000000,Nothing to report,R1040,null
-2016-05-29T00:00:00.000000000,Faulty power supply was replaced,R1042,null
-2017-04-22T00:00:00.000000000,Seems to be in good condition,R1043,null
-2017-06-19T00:00:00.000000000,Seems to be in good condition,R1045,null
-2017-06-11T00:00:00.000000000,Seems to be in good condition,R1046,null
-2016-07-10T00:00:00.000000000,Faulty power supply was replaced,R1047,null
-2017-06-19T00:00:00.000000000,Nothing to report,R1048,null
-2017-07-26T00:00:00.000000000,Nothing to report,R1049,null
-2017-05-13T00:00:00.000000000,Nothing to report,R1050,null
-2017-07-22T00:00:00.000000000,Faulty power supply was replaced,R1051,null
-2017-01-21T00:00:00.000000000,Seems to be in good condition,R1052,null
-2017-07-19T00:00:00.000000000,null,R1054,null
-2017-03-19T00:00:00.000000000,Faulty power supply was replaced,R1055,null
-2017-05-17T00:00:00.000000000,Faulty power supply was replaced,R1056,null
-2017-05-17T00:00:00.000000000,Seems to be in good condition,R1058,null
-2017-05-18T00:00:00.000000000,Nothing to report,R1059,null
-2015-07-13T00:00:00.000000000,Faulty power supply was replaced,R1060,null
-2015-09-12T00:00:00.000000000,Nothing to report,R1061,null
-2017-06-05T00:00:00.000000000,Seems to be in good condition,R1066,null
-2017-08-01T00:00:00.000000000,null,R1067,null
-2017-06-28T00:00:00.000000000,Faulty power supply was replaced,R1068,null
-2017-02-08T00:00:00.000000000,Faulty power supply was replaced,R1070,null
-2017-02-24T00:00:00.000000000,null,R1071,null
-2017-04-08T00:00:00.000000000,Faulty power supply was replaced,R1072,null
-2017-03-07T00:00:00.000000000,Seems to be in good condition,R1073,null
-2016-06-09T00:00:00.000000000,Faulty power supply was replaced,R1074,null
-2015-12-30T00:00:00.000000000,null,R1075,null
-2017-04-24T00:00:00.000000000,Seems to be in good condition,R1076,null
-2015-10-28T00:00:00.000000000,Seems to be in good condition,R1078,null
-2017-03-06T00:00:00.000000000,Nothing to report,R1079,null
-2017-06-28T00:00:00.000000000,Nothing to report,R1080,null
-2017-03-22T00:00:00.000000000,Faulty power supply was replaced,R1081,null
-2017-04-01T00:00:00.000000000,null,R1082,null
-2017-03-17T00:00:00.000000000,null,R1083,null
-2017-02-07T00:00:00.000000000,null,R1084,null
-2017-05-04T00:00:00.000000000,Nothing to report,R1085,null
-2017-02-07T00:00:00.000000000,Faulty power supply was replaced,R1086,null
-2017-02-23T00:00:00.000000000,Seems to be in good condition,R1087,null
-2017-07-20T00:00:00.000000000,null,R1088,null
-2017-07-30T00:00:00.000000000,Faulty power supply was replaced,R1090,null
-2017-04-23T00:00:00.000000000,Seems to be in good condition,R1091,null
-2015-06-06T00:00:00.000000000,null,R1094,null
-2017-02-20T00:00:00.000000000,Faulty power supply was replaced,R1095,null
-2017-05-09T00:00:00.000000000,null,R1098,null
-2017-07-01T00:00:00.000000000,null,R1099,null
-2017-03-17T00:00:00.000000000,Faulty power supply was replaced,R1100,null
-2017-04-20T00:00:00.000000000,Faulty power supply was replaced,R1101,null
-2017-04-09T00:00:00.000000000,null,R1102,null
-2017-03-12T00:00:00.000000000,Seems to be in good condition,R1103,null
-2017-05-18T00:00:00.000000000,Faulty power supply was replaced,R1105,null
-2017-06-10T00:00:00.000000000,Seems to be in good condition,R1106,null
-2017-03-26T00:00:00.000000000,Faulty power supply was replaced,R1108,null
-2017-07-02T00:00:00.000000000,null,R1109,null
-2017-03-22T00:00:00.000000000,Faulty power supply was replaced,R1110,null
-2017-03-09T00:00:00.000000000,Faulty power supply was replaced,R1111,null
-2017-02-19T00:00:00.000000000,Seems to be in good condition,R1113,null
-2017-05-24T00:00:00.000000000,Faulty power supply was replaced,R1114,null
-2017-05-20T00:00:00.000000000,Seems to be in good condition,R1115,null
-2017-06-10T00:00:00.000000000,Nothing to report,R1116,null
-2017-03-31T00:00:00.000000000,Nothing to report,R1117,null
-2017-07-08T00:00:00.000000000,Nothing to report,R1120,null
-2017-07-31T00:00:00.000000000,Faulty power supply was replaced,R1121,null
-2017-03-15T00:00:00.000000000,Faulty power supply was replaced,R1122,null
-2017-03-05T00:00:00.000000000,Nothing to report,R1123,null
-2017-05-05T00:00:00.000000000,null,R1124,null
-2016-04-02T00:00:00.000000000,null,R1125,null
-2017-06-15T00:00:00.000000000,Nothing to report,R1126,null
-2017-07-13T00:00:00.000000000,Nothing to report,R1127,null
-2014-08-31T00:00:00.000000000,Nothing to report,R1128,null
-2017-07-08T00:00:00.000000000,Seems to be in good condition,R1130,null
-2017-05-04T00:00:00.000000000,null,R1131,null
-2017-06-20T00:00:00.000000000,Faulty power supply was replaced,R1132,null
-2017-07-13T00:00:00.000000000,Seems to be in good condition,R1133,null
-2017-06-26T00:00:00.000000000,Nothing to report,R1134,null
-2017-05-25T00:00:00.000000000,Seems to be in good condition,R1135,null
-2017-05-04T00:00:00.000000000,Nothing to report,R1136,null
-2017-05-10T00:00:00.000000000,Nothing to report,R1137,null
-2016-05-17T00:00:00.000000000,Seems to be in good condition,R1138,null
-2017-06-20T00:00:00.000000000,Nothing to report,R1139,null
-2017-04-08T00:00:00.000000000,Nothing to report,R1141,null
-2015-10-18T00:00:00.000000000,Nothing to report,R1142,null
-2017-04-21T00:00:00.000000000,Seems to be in good condition,R1144,null
-2017-05-03T00:00:00.000000000,null,R1145,null
-2017-03-27T00:00:00.000000000,Nothing to report,R1147,null
-2017-07-23T00:00:00.000000000,null,R1148,null
-2017-04-05T00:00:00.000000000,Seems to be in good condition,R1149,null
-2017-06-26T00:00:00.000000000,Faulty power supply was replaced,R1150,null
-2017-06-03T00:00:00.000000000,Faulty power supply was replaced,R1151,null
-2017-04-15T00:00:00.000000000,Nothing to report,R1152,null
-2016-12-07T00:00:00.000000000,null,R1153,null
-2017-06-26T00:00:00.000000000,Seems to be in good condition,R1155,null
-2017-04-14T00:00:00.000000000,Seems to be in good condition,R1156,null
-2017-06-08T00:00:00.000000000,null,R1157,null
-2017-02-11T00:00:00.000000000,null,R1158,null
-2017-06-14T00:00:00.000000000,Seems to be in good condition,R1159,null
-2017-03-17T00:00:00.000000000,null,R1161,null
-2017-06-22T00:00:00.000000000,Faulty power supply was replaced,R1163,null
-2017-06-02T00:00:00.000000000,Seems to be in good condition,R1164,null
-2017-05-28T00:00:00.000000000,Seems to be in good condition,R1165,null
-2017-07-13T00:00:00.000000000,Faulty power supply was replaced,R1167,null
-2017-06-23T00:00:00.000000000,Nothing to report,R1169,null
-2017-05-01T00:00:00.000000000,Nothing to report,R1170,null
-2017-08-01T00:00:00.000000000,null,R1171,null
-2017-02-27T00:00:00.000000000,Nothing to report,R1173,null
-2017-03-18T00:00:00.000000000,Seems to be in good condition,R1176,null
-2017-06-09T00:00:00.000000000,Faulty power supply was replaced,R1177,null
-2017-07-24T00:00:00.000000000,Seems to be in good condition,R1178,null
-2017-06-06T00:00:00.000000000,null,R1179,null
-2017-05-31T00:00:00.000000000,null,R1180,null
-2017-07-17T00:00:00.000000000,Faulty power supply was replaced,R1181,null
-2017-06-25T00:00:00.000000000,null,R1182,null
-2017-03-28T00:00:00.000000000,null,R1184,null
-2017-07-12T00:00:00.000000000,Faulty power supply was replaced,R1185,null
-2017-06-14T00:00:00.000000000,Faulty power supply was replaced,R1186,null
-2017-06-13T00:00:00.000000000,null,R1187,null
-2016-11-06T00:00:00.000000000,Faulty power supply was replaced,R1188,null
-2017-04-29T00:00:00.000000000,Nothing to report,R1189,null
-2017-06-30T00:00:00.000000000,Nothing to report,R1190,null
-2014-11-17T00:00:00.000000000,Faulty power supply was replaced,R1191,null
-2017-04-22T00:00:00.000000000,Faulty power supply was replaced,R1192,null
-2017-05-10T00:00:00.000000000,Nothing to report,R1193,null
-2014-10-15T00:00:00.000000000,Faulty power supply was replaced,R1194,null
-2015-10-02T00:00:00.000000000,null,R1195,null
-2017-03-07T00:00:00.000000000,Seems to be in good condition,R1196,null
-2017-04-15T00:00:00.000000000,Seems to be in good condition,R1197,null
-2017-06-04T00:00:00.000000000,null,R1199,null
-2017-03-28T00:00:00.000000000,Faulty power supply was replaced,R1200,null
-2016-08-12T00:00:00.000000000,Faulty power supply was replaced,R1201,null
-2017-02-04T00:00:00.000000000,null,R1202,null
-2017-06-29T00:00:00.000000000,Nothing to report,R1203,null
-2016-10-07T00:00:00.000000000,Faulty power supply was replaced,R1204,null
-2017-02-16T00:00:00.000000000,Seems to be in good condition,R1205,null
-2017-05-21T00:00:00.000000000,Seems to be in good condition,R1206,null
-2015-04-26T00:00:00.000000000,Faulty power supply was replaced,R1207,null
-2017-02-14T00:00:00.000000000,Nothing to report,R1208,null
-2017-04-17T00:00:00.000000000,Faulty power supply was replaced,R1209,null
-2017-06-25T00:00:00.000000000,Seems to be in good condition,R1211,null
-2017-08-01T00:00:00.000000000,Seems to be in good condition,R1212,null
-2017-02-08T00:00:00.000000000,Seems to be in good condition,R1213,null
-2017-05-02T00:00:00.000000000,Faulty power supply was replaced,R1216,null
-2017-03-01T00:00:00.000000000,Faulty power supply was replaced,R1217,null
-2017-04-06T00:00:00.000000000,null,R1219,null
-2016-10-17T00:00:00.000000000,null,R1220,null
-2017-06-18T00:00:00.000000000,Seems to be in good condition,R1221,null
-2017-02-08T00:00:00.000000000,Faulty power supply was replaced,R1222,null
-2014-08-27T00:00:00.000000000,null,R1223,null
-2017-02-14T00:00:00.000000000,Seems to be in good condition,R1224,null
-2017-02-28T00:00:00.000000000,null,R1225,null
-2015-02-02T00:00:00.000000000,Faulty power supply was replaced,R1226,null
-2017-05-08T00:00:00.000000000,Seems to be in good condition,R1227,null
-2017-05-13T00:00:00.000000000,Faulty power supply was replaced,R1228,null
-2015-03-30T00:00:00.000000000,Faulty power supply was replaced,R1229,null
-2017-07-12T00:00:00.000000000,Seems to be in good condition,R1233,null
-2017-06-09T00:00:00.000000000,Seems to be in good condition,R1234,null
-2017-04-07T00:00:00.000000000,Nothing to report,R1235,null
-2017-02-21T00:00:00.000000000,Faulty power supply was replaced,R1237,null
-2017-02-05T00:00:00.000000000,Nothing to report,R1238,null
-2017-03-02T00:00:00.000000000,null,R1240,null
-2017-07-26T00:00:00.000000000,Faulty power supply was replaced,R1241,null
-2017-06-04T00:00:00.000000000,Seems to be in good condition,R1242,null
-2017-06-06T00:00:00.000000000,Nothing to report,R1243,null
-2017-05-18T00:00:00.000000000,Faulty power supply was replaced,R1244,null
-2017-07-22T00:00:00.000000000,Nothing to report,R1245,null
-2017-06-30T00:00:00.000000000,Nothing to report,R1247,null
-2017-04-24T00:00:00.000000000,Nothing to report,R1248,null
-2017-05-26T00:00:00.000000000,Seems to be in good condition,R1249,null
-2017-02-19T00:00:00.000000000,Nothing to report,R1250,null
-2017-07-02T00:00:00.000000000,null,R1252,null
-2017-07-09T00:00:00.000000000,Faulty power supply was replaced,R1253,null
-2017-04-21T00:00:00.000000000,Seems to be in good condition,R1254,null
-2017-07-23T00:00:00.000000000,null,R1256,null
-2016-10-25T00:00:00.000000000,Seems to be in good condition,R1258,null
-2017-06-26T00:00:00.000000000,Seems to be in good condition,R1259,null
-2017-07-10T00:00:00.000000000,Seems to be in good condition,R1261,null
-2017-07-10T00:00:00.000000000,Nothing to report,R1262,null
-2017-05-19T00:00:00.000000000,Faulty power supply was replaced,R1263,null
-2017-05-25T00:00:00.000000000,null,R1266,null
-2017-05-27T00:00:00.000000000,Nothing to report,R1267,null
-2017-04-22T00:00:00.000000000,Faulty power supply was replaced,R1268,null
-2017-05-05T00:00:00.000000000,Nothing to report,R1269,null
-2017-06-08T00:00:00.000000000,Faulty power supply was replaced,R1271,null
-2015-05-30T00:00:00.000000000,Faulty power supply was replaced,R1272,null
-2017-04-11T00:00:00.000000000,Seems to be in good condition,R1273,null
-2014-12-11T00:00:00.000000000,Faulty power supply was replaced,R1274,null
-2017-06-11T00:00:00.000000000,Nothing to report,R1275,null
-2017-06-13T00:00:00.000000000,Nothing to report,R1276,null
-2017-02-06T00:00:00.000000000,Seems to be in good condition,R1277,null
-2017-04-14T00:00:00.000000000,Nothing to report,R1278,null
-2017-03-27T00:00:00.000000000,null,R1279,null
-2017-06-28T00:00:00.000000000,null,R1281,null
-2017-07-28T00:00:00.000000000,Seems to be in good condition,R1282,null
-2017-02-08T00:00:00.000000000,Faulty power supply was replaced,R1284,null
-2017-04-22T00:00:00.000000000,Nothing to report,R1286,null
-2017-07-27T00:00:00.000000000,Nothing to report,R1287,null
-2017-06-06T00:00:00.000000000,null,R1288,null
-2017-03-20T00:00:00.000000000,Seems to be in good condition,R1289,null
-2017-06-26T00:00:00.000000000,null,R1290,null
-2017-02-11T00:00:00.000000000,Seems to be in good condition,R1291,null
-2017-04-12T00:00:00.000000000,Faulty power supply was replaced,R1292,null
-2017-02-10T00:00:00.000000000,Faulty power supply was replaced,R1293,null
-2017-04-07T00:00:00.000000000,Faulty power supply was replaced,R1295,null
-2016-06-05T00:00:00.000000000,Nothing to report,R1296,null
-2017-07-24T00:00:00.000000000,Faulty power supply was replaced,R1297,null
-2014-11-26T00:00:00.000000000,null,R1298,null
-2017-04-30T00:00:00.000000000,Seems to be in good condition,R1299,null
-2017-06-13T00:00:00.000000000,Seems to be in good condition,R1300,null
-2015-01-30T00:00:00.000000000,Nothing to report,R1301,null
-2017-03-30T00:00:00.000000000,Nothing to report,R1302,null
-2017-05-25T00:00:00.000000000,Seems to be in good condition,R1304,null
-2016-03-17T00:00:00.000000000,null,R1305,null
-2017-07-16T00:00:00.000000000,Nothing to report,R1307,null
-2017-07-02T00:00:00.000000000,Faulty power supply was replaced,R1308,null
-2017-02-08T00:00:00.000000000,Faulty power supply was replaced,R1310,null
-2016-05-12T00:00:00.000000000,Seems to be in good condition,R1311,null
-2017-03-04T00:00:00.000000000,Nothing to report,R1312,null
-2017-02-13T00:00:00.000000000,Seems to be in good condition,R1313,null
-2017-02-16T00:00:00.000000000,Nothing to report,R1314,null
-2017-05-20T00:00:00.000000000,Nothing to report,R1315,null
-2017-04-26T00:00:00.000000000,Seems to be in good condition,R1316,null
-2017-03-26T00:00:00.000000000,null,R1317,null
-2017-03-25T00:00:00.000000000,Seems to be in good condition,R1318,null
-2015-11-21T00:00:00.000000000,Nothing to report,R1319,null
-2017-05-31T00:00:00.000000000,null,R1320,null
-2017-06-22T00:00:00.000000000,null,R1321,null
-2017-07-29T00:00:00.000000000,Faulty power supply was replaced,R1322,null
-2017-02-13T00:00:00.000000000,null,R1323,null
-2015-05-10T00:00:00.000000000,Nothing to report,R1324,null
-2017-04-08T00:00:00.000000000,null,R1325,null
-2017-03-06T00:00:00.000000000,Nothing to report,R1326,null
-2016-10-11T00:00:00.000000000,Seems to be in good condition,R1327,null
-2017-04-03T00:00:00.000000000,Nothing to report,R1328,null
-2016-05-30T00:00:00.000000000,Seems to be in good condition,R1330,null
-2017-02-11T00:00:00.000000000,Seems to be in good condition,R1334,null
-2017-03-20T00:00:00.000000000,null,R1335,null
-2017-04-29T00:00:00.000000000,Faulty power supply was replaced,R1336,null
-2017-04-03T00:00:00.000000000,null,R1337,null
-2017-04-07T00:00:00.000000000,Seems to be in good condition,R1339,null
-2017-03-10T00:00:00.000000000,Seems to be in good condition,R1340,null
-2017-02-07T00:00:00.000000000,Seems to be in good condition,R1341,null
-2016-11-10T00:00:00.000000000,Faulty power supply was replaced,R1342,null
-2017-02-25T00:00:00.000000000,null,R1344,null
-2017-07-24T00:00:00.000000000,Nothing to report,R1345,null
-2017-02-27T00:00:00.000000000,null,R1347,null
-2017-03-08T00:00:00.000000000,Nothing to report,R1349,null
-2017-05-31T00:00:00.000000000,null,R1350,null
-2017-03-05T00:00:00.000000000,null,R1351,null
-2017-02-07T00:00:00.000000000,Seems to be in good condition,R1352,null
-2017-07-26T00:00:00.000000000,Seems to be in good condition,R1353,null
-2017-04-05T00:00:00.000000000,Faulty power supply was replaced,R1354,null
-2017-07-04T00:00:00.000000000,null,R1355,null
-2017-04-16T00:00:00.000000000,Nothing to report,R1356,null
-2017-05-20T00:00:00.000000000,null,R1357,null
-2017-03-01T00:00:00.000000000,Faulty power supply was replaced,R1361,null
-2017-07-12T00:00:00.000000000,Faulty power supply was replaced,R1363,null
-2017-07-09T00:00:00.000000000,Seems to be in good condition,R1365,null
-2016-07-13T00:00:00.000000000,null,R1366,null
-2017-06-25T00:00:00.000000000,null,R1367,null
-2015-05-21T00:00:00.000000000,null,R1368,null
-2017-03-01T00:00:00.000000000,Faulty power supply was replaced,R1370,null
-2014-09-24T00:00:00.000000000,Faulty power supply was replaced,R1371,null
-2017-03-07T00:00:00.000000000,null,R1372,null
-2017-01-19T00:00:00.000000000,Nothing to report,R1373,null
-2017-02-14T00:00:00.000000000,Nothing to report,R1374,null
-2016-07-08T00:00:00.000000000,null,R1375,null
-2017-06-10T00:00:00.000000000,Faulty power supply was replaced,R1376,null
-2017-03-27T00:00:00.000000000,Faulty power supply was replaced,R1377,null
-2017-02-06T00:00:00.000000000,Nothing to report,R1378,null
-2017-02-19T00:00:00.000000000,null,R1380,null
-2017-07-07T00:00:00.000000000,Nothing to report,R1381,null
-2017-05-24T00:00:00.000000000,Nothing to report,R1382,null
-2017-02-17T00:00:00.000000000,Nothing to report,R1383,null
-2017-06-30T00:00:00.000000000,Nothing to report,R1384,null
-2017-03-20T00:00:00.000000000,Nothing to report,R1385,null
-2017-02-22T00:00:00.000000000,Seems to be in good condition,R1386,null
-2017-07-12T00:00:00.000000000,Faulty power supply was replaced,R1387,null
-2017-04-07T00:00:00.000000000,Seems to be in good condition,R1390,null
-2017-06-13T00:00:00.000000000,Faulty power supply was replaced,R1392,null
-2017-07-12T00:00:00.000000000,Nothing to report,R1393,null
-2017-03-09T00:00:00.000000000,null,R1394,null
-2017-03-28T00:00:00.000000000,Faulty power supply was replaced,R1395,null
-2017-04-26T00:00:00.000000000,Nothing to report,R1396,null
-2017-05-19T00:00:00.000000000,null,R1397,null
-2017-02-28T00:00:00.000000000,Seems to be in good condition,R1398,null
-2017-05-30T00:00:00.000000000,null,R1400,null
-2017-07-08T00:00:00.000000000,Seems to be in good condition,R1401,null
-2017-02-08T00:00:00.000000000,Nothing to report,R1403,null
-2017-03-17T00:00:00.000000000,null,R1404,null
-2016-01-02T00:00:00.000000000,null,R1405,null
-2017-06-21T00:00:00.000000000,Nothing to report,R1406,null
-2017-05-30T00:00:00.000000000,Seems to be in good condition,R1407,null
-2015-04-25T00:00:00.000000000,Seems to be in good condition,R1408,null
-2017-04-02T00:00:00.000000000,Nothing to report,R1411,null
-2017-06-22T00:00:00.000000000,Nothing to report,R1412,null
-2017-07-01T00:00:00.000000000,Nothing to report,R1413,null
-2017-06-08T00:00:00.000000000,Nothing to report,R1416,null
-2017-05-06T00:00:00.000000000,Nothing to report,R1418,null
-2017-07-14T00:00:00.000000000,Nothing to report,R1419,null
-2017-05-26T00:00:00.000000000,null,R1421,null
-2017-04-18T00:00:00.000000000,Seems to be in good condition,R1422,null
-2017-05-17T00:00:00.000000000,Seems to be in good condition,R1423,null
+date_serviced,notes,refrigerator_id
+2017-05-30T00:00:00.000000000,,R1
+2017-04-02T00:00:00.000000000,Seems to be in good condition,R2
+2017-02-21T00:00:00.000000000,,R4
+2015-09-13T00:00:00.000000000,Faulty power supply was replaced,R5
+2017-03-30T00:00:00.000000000,Faulty power supply was replaced,R6
+2017-03-17T00:00:00.000000000,Faulty power supply was replaced,R7
+2017-07-28T00:00:00.000000000,,R8
+2017-02-18T00:00:00.000000000,Faulty power supply was replaced,R9
+2017-06-08T00:00:00.000000000,,R11
+2017-08-01T00:00:00.000000000,Seems to be in good condition,R12
+2017-03-31T00:00:00.000000000,Seems to be in good condition,R13
+2017-07-06T00:00:00.000000000,Faulty power supply was replaced,R14
+2017-04-04T00:00:00.000000000,Nothing to report,R15
+2017-03-15T00:00:00.000000000,Seems to be in good condition,R16
+2017-06-21T00:00:00.000000000,Seems to be in good condition,R17
+2017-02-05T00:00:00.000000000,Nothing to report,R19
+2017-03-23T00:00:00.000000000,Nothing to report,R20
+2017-02-09T00:00:00.000000000,,R22
+2017-08-01T00:00:00.000000000,Faulty power supply was replaced,R23
+2017-05-18T00:00:00.000000000,,R24
+2017-06-09T00:00:00.000000000,Faulty power supply was replaced,R25
+2017-06-08T00:00:00.000000000,,R26
+2017-03-12T00:00:00.000000000,Seems to be in good condition,R27
+2017-07-20T00:00:00.000000000,Seems to be in good condition,R28
+2017-06-07T00:00:00.000000000,Faulty power supply was replaced,R29
+2017-06-13T00:00:00.000000000,,R31
+2017-03-23T00:00:00.000000000,Nothing to report,R33
+2017-05-09T00:00:00.000000000,,R35
+2017-07-09T00:00:00.000000000,Faulty power supply was replaced,R36
+2017-02-11T00:00:00.000000000,Seems to be in good condition,R37
+2017-07-06T00:00:00.000000000,Nothing to report,R38
+2017-06-27T00:00:00.000000000,Faulty power supply was replaced,R39
+2017-06-06T00:00:00.000000000,Faulty power supply was replaced,R40
+2017-06-06T00:00:00.000000000,Faulty power supply was replaced,R41
+2017-04-05T00:00:00.000000000,Faulty power supply was replaced,R42
+2017-07-15T00:00:00.000000000,,R43
+2016-07-14T00:00:00.000000000,Nothing to report,R44
+2017-03-22T00:00:00.000000000,Seems to be in good condition,R45
+2017-07-30T00:00:00.000000000,Seems to be in good condition,R47
+2017-07-16T00:00:00.000000000,Faulty power supply was replaced,R48
+2015-10-01T00:00:00.000000000,Faulty power supply was replaced,R49
+2017-03-27T00:00:00.000000000,Seems to be in good condition,R50
+2017-05-04T00:00:00.000000000,Seems to be in good condition,R51
+2017-02-10T00:00:00.000000000,,R52
+2017-03-06T00:00:00.000000000,Seems to be in good condition,R53
+2016-07-26T00:00:00.000000000,Faulty power supply was replaced,R54
+2017-07-18T00:00:00.000000000,Seems to be in good condition,R55
+2017-04-05T00:00:00.000000000,Nothing to report,R56
+2017-06-16T00:00:00.000000000,Seems to be in good condition,R58
+2016-06-04T00:00:00.000000000,Faulty power supply was replaced,R60
+2017-06-28T00:00:00.000000000,Nothing to report,R61
+2016-04-15T00:00:00.000000000,Seems to be in good condition,R62
+2017-02-28T00:00:00.000000000,Faulty power supply was replaced,R63
+2016-05-14T00:00:00.000000000,Nothing to report,R64
+2017-02-28T00:00:00.000000000,Seems to be in good condition,R65
+2017-03-30T00:00:00.000000000,Faulty power supply was replaced,R67
+2017-05-21T00:00:00.000000000,,R68
+2017-07-07T00:00:00.000000000,,R69
+2017-03-30T00:00:00.000000000,,R70
+2017-07-24T00:00:00.000000000,Faulty power supply was replaced,R71
+2017-04-19T00:00:00.000000000,,R72
+2017-06-29T00:00:00.000000000,,R73
+2016-08-07T00:00:00.000000000,Faulty power supply was replaced,R74
+2017-05-15T00:00:00.000000000,Nothing to report,R75
+2017-06-26T00:00:00.000000000,,R76
+2017-04-10T00:00:00.000000000,Seems to be in good condition,R77
+2017-04-22T00:00:00.000000000,Faulty power supply was replaced,R78
+2017-07-03T00:00:00.000000000,,R79
+2017-05-08T00:00:00.000000000,Seems to be in good condition,R81
+2017-03-11T00:00:00.000000000,Faulty power supply was replaced,R83
+2017-02-24T00:00:00.000000000,Nothing to report,R84
+2016-06-25T00:00:00.000000000,Seems to be in good condition,R85
+2017-02-23T00:00:00.000000000,Nothing to report,R86
+2017-07-26T00:00:00.000000000,Faulty power supply was replaced,R87
+2017-04-17T00:00:00.000000000,,R88
+2017-03-14T00:00:00.000000000,Seems to be in good condition,R89
+2017-05-25T00:00:00.000000000,,R90
+2015-12-20T00:00:00.000000000,Nothing to report,R93
+2017-02-10T00:00:00.000000000,Faulty power supply was replaced,R94
+2017-04-17T00:00:00.000000000,Seems to be in good condition,R96
+2017-03-12T00:00:00.000000000,Seems to be in good condition,R97
+2017-05-01T00:00:00.000000000,Faulty power supply was replaced,R99
+2017-03-24T00:00:00.000000000,,R100
+2017-05-24T00:00:00.000000000,Faulty power supply was replaced,R101
+2017-02-12T00:00:00.000000000,Seems to be in good condition,R103
+2017-03-11T00:00:00.000000000,Seems to be in good condition,R104
+2017-02-14T00:00:00.000000000,,R105
+2017-04-17T00:00:00.000000000,Faulty power supply was replaced,R106
+2017-06-08T00:00:00.000000000,Seems to be in good condition,R108
+2017-02-07T00:00:00.000000000,Faulty power supply was replaced,R109
+2017-03-25T00:00:00.000000000,Faulty power supply was replaced,R110
+2017-06-12T00:00:00.000000000,,R113
+2017-05-08T00:00:00.000000000,Seems to be in good condition,R116
+2017-05-25T00:00:00.000000000,Seems to be in good condition,R117
+2017-06-29T00:00:00.000000000,Faulty power supply was replaced,R118
+2016-10-21T00:00:00.000000000,Seems to be in good condition,R119
+2016-02-26T00:00:00.000000000,Nothing to report,R120
+2017-02-15T00:00:00.000000000,Faulty power supply was replaced,R121
+2017-03-25T00:00:00.000000000,,R122
+2016-08-17T00:00:00.000000000,Seems to be in good condition,R123
+2017-01-30T00:00:00.000000000,Seems to be in good condition,R124
+2017-02-24T00:00:00.000000000,Faulty power supply was replaced,R125
+2017-07-12T00:00:00.000000000,Faulty power supply was replaced,R126
+2017-01-17T00:00:00.000000000,Faulty power supply was replaced,R127
+2017-03-31T00:00:00.000000000,Seems to be in good condition,R128
+2016-03-08T00:00:00.000000000,Nothing to report,R129
+2017-03-19T00:00:00.000000000,Seems to be in good condition,R130
+2017-06-16T00:00:00.000000000,Seems to be in good condition,R132
+2017-07-24T00:00:00.000000000,Seems to be in good condition,R133
+2017-02-21T00:00:00.000000000,Nothing to report,R134
+2017-02-28T00:00:00.000000000,,R135
+2017-07-31T00:00:00.000000000,Seems to be in good condition,R137
+2017-06-25T00:00:00.000000000,,R138
+2017-05-09T00:00:00.000000000,Seems to be in good condition,R140
+2017-05-31T00:00:00.000000000,,R141
+2017-03-25T00:00:00.000000000,Nothing to report,R142
+2017-03-19T00:00:00.000000000,Nothing to report,R143
+2017-07-13T00:00:00.000000000,Nothing to report,R144
+2017-06-20T00:00:00.000000000,Seems to be in good condition,R145
+2017-05-23T00:00:00.000000000,Nothing to report,R146
+2017-04-28T00:00:00.000000000,,R148
+2017-05-23T00:00:00.000000000,,R150
+2017-07-02T00:00:00.000000000,,R151
+2017-06-07T00:00:00.000000000,Faulty power supply was replaced,R152
+2017-02-17T00:00:00.000000000,,R153
+2014-10-12T00:00:00.000000000,,R155
+2017-02-18T00:00:00.000000000,Seems to be in good condition,R156
+2017-06-30T00:00:00.000000000,,R157
+2017-06-08T00:00:00.000000000,,R158
+2014-12-28T00:00:00.000000000,Nothing to report,R159
+2017-02-14T00:00:00.000000000,Nothing to report,R160
+2017-07-24T00:00:00.000000000,Seems to be in good condition,R163
+2017-06-13T00:00:00.000000000,Seems to be in good condition,R164
+2017-07-11T00:00:00.000000000,Seems to be in good condition,R165
+2017-04-20T00:00:00.000000000,Nothing to report,R166
+2017-02-07T00:00:00.000000000,Nothing to report,R167
+2017-07-10T00:00:00.000000000,Nothing to report,R168
+2017-02-20T00:00:00.000000000,,R169
+2017-05-08T00:00:00.000000000,Seems to be in good condition,R170
+2017-08-01T00:00:00.000000000,Faulty power supply was replaced,R171
+2017-04-08T00:00:00.000000000,Seems to be in good condition,R172
+2017-04-24T00:00:00.000000000,,R173
+2016-02-04T00:00:00.000000000,Faulty power supply was replaced,R174
+2017-05-28T00:00:00.000000000,Faulty power supply was replaced,R175
+2017-07-04T00:00:00.000000000,Faulty power supply was replaced,R176
+2017-05-05T00:00:00.000000000,,R177
+2017-06-25T00:00:00.000000000,,R178
+2017-02-02T00:00:00.000000000,Nothing to report,R179
+2017-04-09T00:00:00.000000000,Seems to be in good condition,R180
+2017-06-07T00:00:00.000000000,,R181
+2016-02-06T00:00:00.000000000,Faulty power supply was replaced,R183
+2016-03-30T00:00:00.000000000,,R184
+2014-12-09T00:00:00.000000000,,R186
+2017-07-20T00:00:00.000000000,Nothing to report,R187
+2017-05-20T00:00:00.000000000,Seems to be in good condition,R189
+2016-04-09T00:00:00.000000000,Seems to be in good condition,R190
+2017-07-19T00:00:00.000000000,Faulty power supply was replaced,R191
+2017-02-18T00:00:00.000000000,Seems to be in good condition,R192
+2017-07-03T00:00:00.000000000,,R193
+2017-04-22T00:00:00.000000000,Faulty power supply was replaced,R194
+2014-12-01T00:00:00.000000000,Seems to be in good condition,R196
+2017-04-12T00:00:00.000000000,Nothing to report,R197
+2017-03-16T00:00:00.000000000,Nothing to report,R198
+2017-06-06T00:00:00.000000000,,R199
+2017-03-02T00:00:00.000000000,Faulty power supply was replaced,R201
+2016-01-15T00:00:00.000000000,Nothing to report,R202
+2017-07-29T00:00:00.000000000,,R204
+2017-04-06T00:00:00.000000000,Faulty power supply was replaced,R205
+2017-01-06T00:00:00.000000000,Nothing to report,R207
+2017-07-30T00:00:00.000000000,Nothing to report,R208
+2017-03-24T00:00:00.000000000,Nothing to report,R209
+2017-02-21T00:00:00.000000000,,R210
+2017-03-09T00:00:00.000000000,Faulty power supply was replaced,R211
+2017-04-15T00:00:00.000000000,Faulty power supply was replaced,R213
+2017-05-05T00:00:00.000000000,Seems to be in good condition,R215
+2017-04-16T00:00:00.000000000,Nothing to report,R216
+2017-03-02T00:00:00.000000000,,R217
+2017-04-24T00:00:00.000000000,,R219
+2017-06-06T00:00:00.000000000,Nothing to report,R222
+2017-06-11T00:00:00.000000000,Faulty power supply was replaced,R223
+2017-05-27T00:00:00.000000000,Seems to be in good condition,R224
+2017-02-23T00:00:00.000000000,Nothing to report,R225
+2017-04-21T00:00:00.000000000,,R226
+2017-04-07T00:00:00.000000000,Nothing to report,R227
+2017-07-30T00:00:00.000000000,Nothing to report,R228
+2017-01-09T00:00:00.000000000,Seems to be in good condition,R229
+2017-07-07T00:00:00.000000000,Seems to be in good condition,R230
+2017-07-05T00:00:00.000000000,Faulty power supply was replaced,R231
+2017-04-08T00:00:00.000000000,Seems to be in good condition,R232
+2017-05-25T00:00:00.000000000,Faulty power supply was replaced,R233
+2017-07-31T00:00:00.000000000,,R234
+2017-04-02T00:00:00.000000000,Seems to be in good condition,R235
+2017-05-03T00:00:00.000000000,Nothing to report,R236
+2017-07-13T00:00:00.000000000,,R237
+2017-05-20T00:00:00.000000000,Seems to be in good condition,R238
+2017-02-22T00:00:00.000000000,Faulty power supply was replaced,R239
+2017-03-13T00:00:00.000000000,Nothing to report,R240
+2017-05-20T00:00:00.000000000,Seems to be in good condition,R241
+2017-07-13T00:00:00.000000000,Faulty power supply was replaced,R243
+2017-05-09T00:00:00.000000000,Nothing to report,R244
+2017-03-18T00:00:00.000000000,,R245
+2017-04-18T00:00:00.000000000,,R248
+2017-02-26T00:00:00.000000000,,R249
+2017-06-14T00:00:00.000000000,Nothing to report,R250
+2017-05-22T00:00:00.000000000,,R251
+2017-07-04T00:00:00.000000000,Faulty power supply was replaced,R252
+2017-05-07T00:00:00.000000000,Seems to be in good condition,R254
+2015-05-18T00:00:00.000000000,,R255
+2016-01-06T00:00:00.000000000,Faulty power supply was replaced,R257
+2017-07-09T00:00:00.000000000,Seems to be in good condition,R258
+2016-03-06T00:00:00.000000000,Faulty power supply was replaced,R259
+2017-07-16T00:00:00.000000000,Faulty power supply was replaced,R260
+2016-08-30T00:00:00.000000000,Seems to be in good condition,R261
+2017-03-29T00:00:00.000000000,,R262
+2017-03-06T00:00:00.000000000,,R263
+2017-07-17T00:00:00.000000000,,R266
+2017-02-10T00:00:00.000000000,Faulty power supply was replaced,R268
+2017-07-14T00:00:00.000000000,,R270
+2017-04-02T00:00:00.000000000,Faulty power supply was replaced,R271
+2017-04-03T00:00:00.000000000,,R272
+2016-11-22T00:00:00.000000000,Nothing to report,R273
+2017-02-28T00:00:00.000000000,Seems to be in good condition,R274
+2015-04-16T00:00:00.000000000,,R275
+2017-05-17T00:00:00.000000000,Seems to be in good condition,R276
+2017-04-15T00:00:00.000000000,,R278
+2017-07-18T00:00:00.000000000,Nothing to report,R279
+2017-03-22T00:00:00.000000000,,R280
+2017-07-09T00:00:00.000000000,Seems to be in good condition,R281
+2017-03-16T00:00:00.000000000,Faulty power supply was replaced,R282
+2017-02-08T00:00:00.000000000,,R284
+2017-03-10T00:00:00.000000000,Nothing to report,R285
+2017-06-28T00:00:00.000000000,,R286
+2017-03-18T00:00:00.000000000,,R287
+2017-07-30T00:00:00.000000000,Faulty power supply was replaced,R288
+2015-12-15T00:00:00.000000000,Nothing to report,R289
+2017-03-31T00:00:00.000000000,Faulty power supply was replaced,R290
+2017-03-26T00:00:00.000000000,Faulty power supply was replaced,R291
+2017-06-21T00:00:00.000000000,Faulty power supply was replaced,R292
+2017-06-29T00:00:00.000000000,Seems to be in good condition,R293
+2017-04-19T00:00:00.000000000,Seems to be in good condition,R294
+2017-06-15T00:00:00.000000000,Faulty power supply was replaced,R295
+2017-04-25T00:00:00.000000000,Nothing to report,R296
+2017-08-02T00:00:00.000000000,Nothing to report,R297
+2017-05-19T00:00:00.000000000,Seems to be in good condition,R300
+2017-05-18T00:00:00.000000000,,R302
+2017-02-15T00:00:00.000000000,Nothing to report,R303
+2017-04-05T00:00:00.000000000,,R304
+2017-04-27T00:00:00.000000000,Seems to be in good condition,R305
+2017-06-03T00:00:00.000000000,Seems to be in good condition,R306
+2017-02-04T00:00:00.000000000,Nothing to report,R307
+2017-05-31T00:00:00.000000000,Seems to be in good condition,R309
+2017-06-30T00:00:00.000000000,Seems to be in good condition,R310
+2017-02-11T00:00:00.000000000,Faulty power supply was replaced,R311
+2015-09-28T00:00:00.000000000,Seems to be in good condition,R312
+2017-04-15T00:00:00.000000000,Seems to be in good condition,R313
+2017-04-28T00:00:00.000000000,Faulty power supply was replaced,R314
+2017-05-20T00:00:00.000000000,Faulty power supply was replaced,R316
+2017-07-28T00:00:00.000000000,Faulty power supply was replaced,R318
+2017-04-28T00:00:00.000000000,Faulty power supply was replaced,R320
+2017-04-04T00:00:00.000000000,Nothing to report,R321
+2017-03-14T00:00:00.000000000,Nothing to report,R322
+2017-07-07T00:00:00.000000000,Faulty power supply was replaced,R323
+2017-03-31T00:00:00.000000000,Seems to be in good condition,R324
+2017-05-23T00:00:00.000000000,Faulty power supply was replaced,R325
+2017-05-22T00:00:00.000000000,Seems to be in good condition,R326
+2016-12-23T00:00:00.000000000,Nothing to report,R328
+2017-04-13T00:00:00.000000000,Faulty power supply was replaced,R329
+2017-05-23T00:00:00.000000000,Faulty power supply was replaced,R331
+2017-04-18T00:00:00.000000000,Seems to be in good condition,R334
+2017-02-15T00:00:00.000000000,Faulty power supply was replaced,R335
+2017-06-05T00:00:00.000000000,Faulty power supply was replaced,R336
+2017-04-18T00:00:00.000000000,Faulty power supply was replaced,R337
+2017-06-13T00:00:00.000000000,Seems to be in good condition,R338
+2014-11-01T00:00:00.000000000,Faulty power supply was replaced,R339
+2017-02-17T00:00:00.000000000,Nothing to report,R340
+2017-04-05T00:00:00.000000000,Seems to be in good condition,R341
+2017-03-03T00:00:00.000000000,Nothing to report,R342
+2017-07-14T00:00:00.000000000,Nothing to report,R343
+2017-05-17T00:00:00.000000000,Nothing to report,R344
+2017-03-30T00:00:00.000000000,,R345
+2016-02-28T00:00:00.000000000,,R346
+2017-03-01T00:00:00.000000000,Faulty power supply was replaced,R347
+2017-06-27T00:00:00.000000000,Faulty power supply was replaced,R348
+2017-04-08T00:00:00.000000000,Seems to be in good condition,R349
+2017-06-26T00:00:00.000000000,Nothing to report,R351
+2017-03-11T00:00:00.000000000,Seems to be in good condition,R352
+2017-06-13T00:00:00.000000000,Faulty power supply was replaced,R354
+2015-03-31T00:00:00.000000000,Nothing to report,R355
+2016-10-13T00:00:00.000000000,Nothing to report,R356
+2017-07-24T00:00:00.000000000,Nothing to report,R357
+2017-04-12T00:00:00.000000000,Nothing to report,R358
+2017-04-19T00:00:00.000000000,Seems to be in good condition,R359
+2017-07-13T00:00:00.000000000,Seems to be in good condition,R360
+2017-07-10T00:00:00.000000000,Faulty power supply was replaced,R361
+2017-02-07T00:00:00.000000000,Faulty power supply was replaced,R363
+2017-05-17T00:00:00.000000000,Seems to be in good condition,R365
+2017-02-19T00:00:00.000000000,Seems to be in good condition,R366
+2017-03-21T00:00:00.000000000,,R367
+2015-06-14T00:00:00.000000000,Faulty power supply was replaced,R368
+2017-04-16T00:00:00.000000000,,R369
+2017-04-28T00:00:00.000000000,Faulty power supply was replaced,R371
+2017-03-31T00:00:00.000000000,Faulty power supply was replaced,R372
+2017-06-24T00:00:00.000000000,Seems to be in good condition,R375
+2017-06-07T00:00:00.000000000,,R376
+2017-07-04T00:00:00.000000000,Nothing to report,R377
+2017-02-20T00:00:00.000000000,,R379
+2017-03-24T00:00:00.000000000,Faulty power supply was replaced,R380
+2016-10-19T00:00:00.000000000,,R381
+2017-03-07T00:00:00.000000000,,R383
+2017-07-17T00:00:00.000000000,Nothing to report,R385
+2017-03-07T00:00:00.000000000,Nothing to report,R386
+2017-04-20T00:00:00.000000000,Faulty power supply was replaced,R387
+2017-03-29T00:00:00.000000000,Faulty power supply was replaced,R388
+2017-03-26T00:00:00.000000000,Seems to be in good condition,R389
+2017-03-17T00:00:00.000000000,Nothing to report,R390
+2017-04-09T00:00:00.000000000,Nothing to report,R391
+2017-06-01T00:00:00.000000000,Faulty power supply was replaced,R394
+2017-03-04T00:00:00.000000000,Faulty power supply was replaced,R395
+2017-04-18T00:00:00.000000000,Seems to be in good condition,R396
+2014-10-30T00:00:00.000000000,Nothing to report,R397
+2017-03-19T00:00:00.000000000,,R398
+2017-03-30T00:00:00.000000000,Nothing to report,R399
+2016-06-11T00:00:00.000000000,Seems to be in good condition,R400
+2017-04-01T00:00:00.000000000,Nothing to report,R401
+2017-07-02T00:00:00.000000000,Nothing to report,R402
+2017-05-13T00:00:00.000000000,Seems to be in good condition,R403
+2017-05-20T00:00:00.000000000,,R406
+2017-05-19T00:00:00.000000000,,R407
+2017-02-10T00:00:00.000000000,Faulty power supply was replaced,R408
+2017-04-08T00:00:00.000000000,Seems to be in good condition,R409
+2015-10-26T00:00:00.000000000,,R410
+2017-03-30T00:00:00.000000000,Nothing to report,R411
+2017-06-02T00:00:00.000000000,Nothing to report,R412
+2017-06-04T00:00:00.000000000,,R413
+2017-07-29T00:00:00.000000000,,R415
+2017-05-05T00:00:00.000000000,Nothing to report,R416
+2017-05-18T00:00:00.000000000,Nothing to report,R417
+2017-02-07T00:00:00.000000000,Seems to be in good condition,R418
+2017-06-20T00:00:00.000000000,Seems to be in good condition,R419
+2017-04-15T00:00:00.000000000,Faulty power supply was replaced,R420
+2017-02-08T00:00:00.000000000,,R421
+2017-05-19T00:00:00.000000000,Faulty power supply was replaced,R423
+2017-07-05T00:00:00.000000000,Faulty power supply was replaced,R424
+2017-05-12T00:00:00.000000000,Faulty power supply was replaced,R425
+2017-04-07T00:00:00.000000000,Faulty power supply was replaced,R426
+2016-10-05T00:00:00.000000000,,R427
+2017-07-25T00:00:00.000000000,Faulty power supply was replaced,R429
+2017-03-27T00:00:00.000000000,Seems to be in good condition,R430
+2017-02-18T00:00:00.000000000,Nothing to report,R431
+2017-06-01T00:00:00.000000000,Faulty power supply was replaced,R432
+2017-04-20T00:00:00.000000000,Faulty power supply was replaced,R433
+2017-03-25T00:00:00.000000000,,R434
+2017-07-04T00:00:00.000000000,Seems to be in good condition,R435
+2017-05-04T00:00:00.000000000,Faulty power supply was replaced,R436
+2017-03-22T00:00:00.000000000,Nothing to report,R437
+2017-04-30T00:00:00.000000000,Faulty power supply was replaced,R438
+2017-02-07T00:00:00.000000000,,R439
+2017-04-17T00:00:00.000000000,Faulty power supply was replaced,R443
+2017-03-21T00:00:00.000000000,Seems to be in good condition,R444
+2017-06-18T00:00:00.000000000,Nothing to report,R445
+2017-06-05T00:00:00.000000000,Nothing to report,R446
+2017-05-21T00:00:00.000000000,Faulty power supply was replaced,R448
+2017-07-14T00:00:00.000000000,Faulty power supply was replaced,R449
+2017-02-27T00:00:00.000000000,Seems to be in good condition,R450
+2014-09-03T00:00:00.000000000,Faulty power supply was replaced,R451
+2014-10-10T00:00:00.000000000,,R452
+2017-05-07T00:00:00.000000000,Seems to be in good condition,R453
+2017-03-03T00:00:00.000000000,Nothing to report,R454
+2017-04-23T00:00:00.000000000,,R455
+2014-09-06T00:00:00.000000000,,R456
+2017-07-19T00:00:00.000000000,Nothing to report,R457
+2017-06-07T00:00:00.000000000,,R459
+2017-06-22T00:00:00.000000000,Seems to be in good condition,R460
+2015-10-19T00:00:00.000000000,Seems to be in good condition,R461
+2017-03-10T00:00:00.000000000,Nothing to report,R464
+2017-08-02T00:00:00.000000000,Seems to be in good condition,R465
+2017-02-10T00:00:00.000000000,Seems to be in good condition,R467
+2017-07-31T00:00:00.000000000,Nothing to report,R468
+2017-05-27T00:00:00.000000000,Faulty power supply was replaced,R469
+2017-05-19T00:00:00.000000000,Nothing to report,R470
+2017-05-03T00:00:00.000000000,,R471
+2017-07-21T00:00:00.000000000,,R472
+2017-06-11T00:00:00.000000000,Faulty power supply was replaced,R473
+2017-06-26T00:00:00.000000000,Faulty power supply was replaced,R474
+2017-07-14T00:00:00.000000000,,R475
+2017-04-20T00:00:00.000000000,Seems to be in good condition,R476
+2017-02-24T00:00:00.000000000,Seems to be in good condition,R477
+2017-06-06T00:00:00.000000000,Faulty power supply was replaced,R478
+2017-04-20T00:00:00.000000000,Nothing to report,R479
+2017-07-17T00:00:00.000000000,Faulty power supply was replaced,R482
+2017-07-28T00:00:00.000000000,Faulty power supply was replaced,R483
+2016-04-30T00:00:00.000000000,,R484
+2017-03-10T00:00:00.000000000,Seems to be in good condition,R486
+2017-02-13T00:00:00.000000000,,R487
+2017-03-07T00:00:00.000000000,,R489
+2015-11-01T00:00:00.000000000,Seems to be in good condition,R490
+2017-04-14T00:00:00.000000000,Nothing to report,R492
+2017-05-21T00:00:00.000000000,Nothing to report,R493
+2016-01-12T00:00:00.000000000,Nothing to report,R494
+2017-03-06T00:00:00.000000000,Nothing to report,R495
+2017-06-12T00:00:00.000000000,,R498
+2017-04-16T00:00:00.000000000,,R499
+2016-11-24T00:00:00.000000000,Nothing to report,R500
+2017-05-29T00:00:00.000000000,Nothing to report,R501
+2014-11-15T00:00:00.000000000,,R503
+2017-06-29T00:00:00.000000000,Nothing to report,R504
+2017-05-01T00:00:00.000000000,,R505
+2017-06-21T00:00:00.000000000,Seems to be in good condition,R506
+2017-06-15T00:00:00.000000000,Faulty power supply was replaced,R507
+2016-11-11T00:00:00.000000000,Faulty power supply was replaced,R508
+2017-04-13T00:00:00.000000000,Nothing to report,R509
+2017-06-27T00:00:00.000000000,Nothing to report,R510
+2017-07-09T00:00:00.000000000,Nothing to report,R511
+2017-06-16T00:00:00.000000000,,R512
+2017-04-10T00:00:00.000000000,,R513
+2017-07-03T00:00:00.000000000,Seems to be in good condition,R514
+2017-05-21T00:00:00.000000000,Faulty power supply was replaced,R516
+2017-04-28T00:00:00.000000000,,R517
+2017-06-19T00:00:00.000000000,,R518
+2017-06-07T00:00:00.000000000,Nothing to report,R519
+2017-06-21T00:00:00.000000000,,R520
+2014-11-05T00:00:00.000000000,Faulty power supply was replaced,R521
+2017-05-08T00:00:00.000000000,Seems to be in good condition,R524
+2017-04-13T00:00:00.000000000,Seems to be in good condition,R526
+2017-03-08T00:00:00.000000000,Faulty power supply was replaced,R527
+2017-03-27T00:00:00.000000000,Nothing to report,R528
+2017-02-09T00:00:00.000000000,Faulty power supply was replaced,R530
+2017-06-17T00:00:00.000000000,Nothing to report,R533
+2015-02-24T00:00:00.000000000,,R535
+2016-09-22T00:00:00.000000000,Faulty power supply was replaced,R536
+2017-02-06T00:00:00.000000000,,R537
+2017-07-22T00:00:00.000000000,Nothing to report,R538
+2015-06-27T00:00:00.000000000,Seems to be in good condition,R539
+2017-02-23T00:00:00.000000000,Faulty power supply was replaced,R541
+2017-07-15T00:00:00.000000000,Faulty power supply was replaced,R542
+2017-07-21T00:00:00.000000000,Seems to be in good condition,R543
+2017-07-21T00:00:00.000000000,,R545
+2017-07-19T00:00:00.000000000,Faulty power supply was replaced,R546
+2017-04-14T00:00:00.000000000,Faulty power supply was replaced,R547
+2017-04-28T00:00:00.000000000,Seems to be in good condition,R549
+2017-03-16T00:00:00.000000000,Seems to be in good condition,R550
+2017-06-26T00:00:00.000000000,,R551
+2017-07-12T00:00:00.000000000,Faulty power supply was replaced,R552
+2017-07-06T00:00:00.000000000,Faulty power supply was replaced,R553
+2017-07-27T00:00:00.000000000,Nothing to report,R554
+2017-07-28T00:00:00.000000000,,R557
+2017-05-25T00:00:00.000000000,,R558
+2017-07-17T00:00:00.000000000,Nothing to report,R559
+2017-02-07T00:00:00.000000000,Nothing to report,R560
+2015-05-26T00:00:00.000000000,,R561
+2017-06-08T00:00:00.000000000,Seems to be in good condition,R562
+2017-07-12T00:00:00.000000000,,R563
+2017-03-04T00:00:00.000000000,,R564
+2017-06-22T00:00:00.000000000,,R565
+2017-05-08T00:00:00.000000000,Nothing to report,R566
+2017-07-27T00:00:00.000000000,Nothing to report,R568
+2017-06-26T00:00:00.000000000,Seems to be in good condition,R569
+2017-07-10T00:00:00.000000000,Faulty power supply was replaced,R570
+2017-03-27T00:00:00.000000000,Nothing to report,R571
+2017-06-09T00:00:00.000000000,Seems to be in good condition,R573
+2017-03-20T00:00:00.000000000,Nothing to report,R574
+2017-07-04T00:00:00.000000000,Seems to be in good condition,R576
+2015-03-30T00:00:00.000000000,Nothing to report,R577
+2017-07-13T00:00:00.000000000,Faulty power supply was replaced,R578
+2017-07-30T00:00:00.000000000,Seems to be in good condition,R580
+2017-04-17T00:00:00.000000000,Seems to be in good condition,R581
+2017-06-30T00:00:00.000000000,Nothing to report,R582
+2017-04-14T00:00:00.000000000,Faulty power supply was replaced,R583
+2017-06-14T00:00:00.000000000,Nothing to report,R585
+2017-06-07T00:00:00.000000000,Seems to be in good condition,R586
+2017-05-29T00:00:00.000000000,Seems to be in good condition,R587
+2017-04-10T00:00:00.000000000,Seems to be in good condition,R589
+2017-07-27T00:00:00.000000000,Nothing to report,R590
+2017-03-11T00:00:00.000000000,Seems to be in good condition,R591
+2015-07-24T00:00:00.000000000,,R592
+2017-05-14T00:00:00.000000000,Nothing to report,R593
+2017-03-03T00:00:00.000000000,Nothing to report,R594
+2017-03-18T00:00:00.000000000,Nothing to report,R595
+2017-05-11T00:00:00.000000000,Nothing to report,R596
+2017-04-08T00:00:00.000000000,,R597
+2017-04-30T00:00:00.000000000,,R598
+2017-08-02T00:00:00.000000000,,R600
+2017-05-18T00:00:00.000000000,,R601
+2017-03-16T00:00:00.000000000,Seems to be in good condition,R602
+2017-07-20T00:00:00.000000000,Nothing to report,R604
+2017-07-05T00:00:00.000000000,Seems to be in good condition,R605
+2017-05-24T00:00:00.000000000,Nothing to report,R606
+2017-02-03T00:00:00.000000000,,R607
+2017-06-15T00:00:00.000000000,,R609
+2017-06-01T00:00:00.000000000,Nothing to report,R610
+2017-06-21T00:00:00.000000000,Faulty power supply was replaced,R611
+2016-01-23T00:00:00.000000000,Faulty power supply was replaced,R612
+2017-05-02T00:00:00.000000000,Faulty power supply was replaced,R613
+2017-07-22T00:00:00.000000000,Seems to be in good condition,R614
+2017-03-09T00:00:00.000000000,Faulty power supply was replaced,R615
+2015-05-15T00:00:00.000000000,Nothing to report,R616
+2017-02-05T00:00:00.000000000,Seems to be in good condition,R617
+2017-04-16T00:00:00.000000000,Nothing to report,R618
+2017-02-15T00:00:00.000000000,Nothing to report,R619
+2017-04-22T00:00:00.000000000,Nothing to report,R620
+2017-02-19T00:00:00.000000000,Nothing to report,R621
+2017-04-25T00:00:00.000000000,Seems to be in good condition,R623
+2017-05-15T00:00:00.000000000,Faulty power supply was replaced,R625
+2015-05-30T00:00:00.000000000,Faulty power supply was replaced,R626
+2017-07-14T00:00:00.000000000,Seems to be in good condition,R627
+2017-06-26T00:00:00.000000000,Seems to be in good condition,R628
+2016-02-04T00:00:00.000000000,Seems to be in good condition,R629
+2017-03-19T00:00:00.000000000,Nothing to report,R630
+2017-08-01T00:00:00.000000000,,R631
+2017-02-12T00:00:00.000000000,Faulty power supply was replaced,R632
+2017-06-01T00:00:00.000000000,Nothing to report,R633
+2016-11-06T00:00:00.000000000,Faulty power supply was replaced,R635
+2017-06-09T00:00:00.000000000,,R636
+2017-05-04T00:00:00.000000000,Seems to be in good condition,R637
+2017-04-01T00:00:00.000000000,Nothing to report,R638
+2017-05-30T00:00:00.000000000,Nothing to report,R641
+2017-02-19T00:00:00.000000000,Nothing to report,R643
+2015-11-03T00:00:00.000000000,Nothing to report,R644
+2017-06-03T00:00:00.000000000,,R645
+2015-09-29T00:00:00.000000000,Nothing to report,R646
+2017-05-15T00:00:00.000000000,Nothing to report,R647
+2015-07-16T00:00:00.000000000,Faulty power supply was replaced,R648
+2017-02-13T00:00:00.000000000,Nothing to report,R649
+2017-02-17T00:00:00.000000000,Faulty power supply was replaced,R650
+2016-11-23T00:00:00.000000000,Nothing to report,R651
+2017-06-30T00:00:00.000000000,,R652
+2017-06-05T00:00:00.000000000,Seems to be in good condition,R654
+2017-07-10T00:00:00.000000000,Faulty power supply was replaced,R655
+2017-03-21T00:00:00.000000000,Seems to be in good condition,R656
+2017-02-25T00:00:00.000000000,,R657
+2017-05-27T00:00:00.000000000,Faulty power supply was replaced,R660
+2017-07-05T00:00:00.000000000,Seems to be in good condition,R661
+2017-07-18T00:00:00.000000000,,R662
+2016-09-08T00:00:00.000000000,,R663
+2017-03-15T00:00:00.000000000,,R664
+2017-02-05T00:00:00.000000000,Seems to be in good condition,R665
+2017-06-27T00:00:00.000000000,Nothing to report,R666
+2015-02-02T00:00:00.000000000,Faulty power supply was replaced,R667
+2017-04-18T00:00:00.000000000,Seems to be in good condition,R669
+2017-07-23T00:00:00.000000000,Faulty power supply was replaced,R670
+2017-06-28T00:00:00.000000000,Nothing to report,R671
+2017-04-23T00:00:00.000000000,Faulty power supply was replaced,R673
+2014-11-30T00:00:00.000000000,Seems to be in good condition,R675
+2014-11-05T00:00:00.000000000,,R676
+2017-04-11T00:00:00.000000000,Nothing to report,R677
+2014-09-29T00:00:00.000000000,Faulty power supply was replaced,R678
+2017-02-13T00:00:00.000000000,Seems to be in good condition,R679
+2017-02-24T00:00:00.000000000,,R680
+2017-04-13T00:00:00.000000000,Seems to be in good condition,R681
+2017-07-19T00:00:00.000000000,,R682
+2017-05-27T00:00:00.000000000,Nothing to report,R683
+2017-02-22T00:00:00.000000000,Faulty power supply was replaced,R684
+2017-03-01T00:00:00.000000000,Faulty power supply was replaced,R685
+2017-03-16T00:00:00.000000000,Faulty power supply was replaced,R686
+2017-07-13T00:00:00.000000000,Nothing to report,R687
+2017-06-30T00:00:00.000000000,Nothing to report,R688
+2017-03-31T00:00:00.000000000,Seems to be in good condition,R689
+2017-04-23T00:00:00.000000000,Faulty power supply was replaced,R690
+2017-06-12T00:00:00.000000000,Faulty power supply was replaced,R691
+2017-06-05T00:00:00.000000000,,R692
+2016-12-07T00:00:00.000000000,Seems to be in good condition,R694
+2017-07-10T00:00:00.000000000,Seems to be in good condition,R695
+2014-12-29T00:00:00.000000000,Seems to be in good condition,R696
+2017-03-05T00:00:00.000000000,Nothing to report,R697
+2017-06-02T00:00:00.000000000,,R698
+2017-04-10T00:00:00.000000000,,R700
+2017-05-06T00:00:00.000000000,Faulty power supply was replaced,R701
+2017-04-13T00:00:00.000000000,Faulty power supply was replaced,R702
+2017-06-28T00:00:00.000000000,Seems to be in good condition,R703
+2017-06-24T00:00:00.000000000,Seems to be in good condition,R704
+2017-03-01T00:00:00.000000000,Nothing to report,R705
+2016-07-26T00:00:00.000000000,,R707
+2014-11-13T00:00:00.000000000,,R708
+2017-07-14T00:00:00.000000000,,R709
+2017-07-21T00:00:00.000000000,Faulty power supply was replaced,R710
+2017-04-05T00:00:00.000000000,,R711
+2017-07-01T00:00:00.000000000,Seems to be in good condition,R712
+2017-05-27T00:00:00.000000000,,R713
+2017-03-30T00:00:00.000000000,Nothing to report,R714
+2017-06-02T00:00:00.000000000,,R715
+2017-06-01T00:00:00.000000000,Faulty power supply was replaced,R716
+2017-04-29T00:00:00.000000000,Nothing to report,R717
+2017-02-14T00:00:00.000000000,Seems to be in good condition,R720
+2017-07-15T00:00:00.000000000,Seems to be in good condition,R721
+2017-02-15T00:00:00.000000000,Seems to be in good condition,R724
+2016-09-16T00:00:00.000000000,Nothing to report,R727
+2017-05-21T00:00:00.000000000,Faulty power supply was replaced,R728
+2015-06-20T00:00:00.000000000,Nothing to report,R729
+2014-10-29T00:00:00.000000000,Nothing to report,R730
+2017-06-14T00:00:00.000000000,,R731
+2017-02-06T00:00:00.000000000,Faulty power supply was replaced,R732
+2015-10-10T00:00:00.000000000,Faulty power supply was replaced,R733
+2017-06-26T00:00:00.000000000,,R737
+2017-07-06T00:00:00.000000000,Faulty power supply was replaced,R738
+2017-07-16T00:00:00.000000000,Seems to be in good condition,R739
+2017-02-16T00:00:00.000000000,Faulty power supply was replaced,R740
+2017-05-25T00:00:00.000000000,Faulty power supply was replaced,R741
+2016-04-05T00:00:00.000000000,Seems to be in good condition,R742
+2017-01-12T00:00:00.000000000,,R743
+2016-12-01T00:00:00.000000000,Seems to be in good condition,R744
+2017-06-26T00:00:00.000000000,Seems to be in good condition,R745
+2017-02-20T00:00:00.000000000,Seems to be in good condition,R746
+2017-07-09T00:00:00.000000000,Nothing to report,R747
+2017-05-30T00:00:00.000000000,Nothing to report,R749
+2015-03-29T00:00:00.000000000,Nothing to report,R750
+2017-07-12T00:00:00.000000000,,R752
+2017-06-17T00:00:00.000000000,Faulty power supply was replaced,R753
+2017-04-26T00:00:00.000000000,,R754
+2017-06-07T00:00:00.000000000,Nothing to report,R755
+2017-05-04T00:00:00.000000000,Faulty power supply was replaced,R756
+2017-02-17T00:00:00.000000000,Nothing to report,R757
+2017-05-15T00:00:00.000000000,Faulty power supply was replaced,R761
+2017-04-12T00:00:00.000000000,Seems to be in good condition,R762
+2017-07-03T00:00:00.000000000,Faulty power supply was replaced,R765
+2017-02-13T00:00:00.000000000,Faulty power supply was replaced,R766
+2017-04-09T00:00:00.000000000,Nothing to report,R767
+2017-04-09T00:00:00.000000000,Nothing to report,R768
+2017-03-27T00:00:00.000000000,Seems to be in good condition,R769
+2017-02-17T00:00:00.000000000,,R770
+2017-02-27T00:00:00.000000000,Seems to be in good condition,R771
+2017-04-16T00:00:00.000000000,Nothing to report,R773
+2017-01-12T00:00:00.000000000,,R774
+2017-03-03T00:00:00.000000000,Nothing to report,R775
+2017-05-12T00:00:00.000000000,Seems to be in good condition,R777
+2017-07-27T00:00:00.000000000,Seems to be in good condition,R778
+2017-03-09T00:00:00.000000000,Nothing to report,R779
+2017-02-17T00:00:00.000000000,,R780
+2017-04-26T00:00:00.000000000,,R781
+2016-02-21T00:00:00.000000000,Nothing to report,R782
+2017-04-02T00:00:00.000000000,Faulty power supply was replaced,R784
+2016-10-04T00:00:00.000000000,Faulty power supply was replaced,R785
+2016-03-12T00:00:00.000000000,,R786
+2017-02-11T00:00:00.000000000,,R787
+2017-07-13T00:00:00.000000000,Seems to be in good condition,R789
+2015-11-08T00:00:00.000000000,Faulty power supply was replaced,R790
+2017-06-30T00:00:00.000000000,Nothing to report,R793
+2017-04-21T00:00:00.000000000,Faulty power supply was replaced,R794
+2017-03-05T00:00:00.000000000,Nothing to report,R795
+2017-06-26T00:00:00.000000000,Seems to be in good condition,R796
+2017-03-24T00:00:00.000000000,Nothing to report,R797
+2017-02-12T00:00:00.000000000,Seems to be in good condition,R798
+2017-06-15T00:00:00.000000000,Seems to be in good condition,R799
+2017-02-19T00:00:00.000000000,,R800
+2017-07-04T00:00:00.000000000,,R801
+2017-02-18T00:00:00.000000000,Nothing to report,R802
+2017-04-13T00:00:00.000000000,,R803
+2017-06-18T00:00:00.000000000,,R804
+2017-07-24T00:00:00.000000000,,R806
+2017-04-04T00:00:00.000000000,Faulty power supply was replaced,R807
+2017-06-17T00:00:00.000000000,Seems to be in good condition,R808
+2017-02-21T00:00:00.000000000,Seems to be in good condition,R809
+2016-11-27T00:00:00.000000000,,R810
+2017-03-30T00:00:00.000000000,,R811
+2017-06-25T00:00:00.000000000,Nothing to report,R812
+2017-08-01T00:00:00.000000000,Faulty power supply was replaced,R813
+2017-03-28T00:00:00.000000000,Seems to be in good condition,R814
+2017-02-06T00:00:00.000000000,Nothing to report,R815
+2017-07-17T00:00:00.000000000,Faulty power supply was replaced,R818
+2017-04-13T00:00:00.000000000,Nothing to report,R819
+2017-07-24T00:00:00.000000000,,R820
+2017-02-13T00:00:00.000000000,,R822
+2017-05-18T00:00:00.000000000,Faulty power supply was replaced,R823
+2017-04-05T00:00:00.000000000,,R824
+2017-06-22T00:00:00.000000000,Seems to be in good condition,R825
+2017-07-05T00:00:00.000000000,,R826
+2017-03-13T00:00:00.000000000,Faulty power supply was replaced,R827
+2017-05-12T00:00:00.000000000,Seems to be in good condition,R828
+2017-05-14T00:00:00.000000000,Faulty power supply was replaced,R829
+2017-02-04T00:00:00.000000000,Seems to be in good condition,R831
+2017-07-24T00:00:00.000000000,Faulty power supply was replaced,R833
+2017-03-16T00:00:00.000000000,Nothing to report,R834
+2017-03-01T00:00:00.000000000,Seems to be in good condition,R835
+2017-04-18T00:00:00.000000000,Seems to be in good condition,R838
+2017-03-10T00:00:00.000000000,Nothing to report,R839
+2015-08-05T00:00:00.000000000,Faulty power supply was replaced,R840
+2017-05-09T00:00:00.000000000,Seems to be in good condition,R844
+2017-06-02T00:00:00.000000000,Nothing to report,R845
+2017-07-21T00:00:00.000000000,,R846
+2017-07-28T00:00:00.000000000,Seems to be in good condition,R847
+2017-02-17T00:00:00.000000000,,R848
+2017-05-03T00:00:00.000000000,Nothing to report,R849
+2015-09-15T00:00:00.000000000,,R852
+2014-10-23T00:00:00.000000000,,R854
+2017-02-04T00:00:00.000000000,Seems to be in good condition,R855
+2017-05-17T00:00:00.000000000,,R856
+2017-03-05T00:00:00.000000000,Nothing to report,R857
+2017-05-12T00:00:00.000000000,Seems to be in good condition,R858
+2016-04-22T00:00:00.000000000,,R859
+2017-04-23T00:00:00.000000000,,R860
+2017-04-04T00:00:00.000000000,Nothing to report,R863
+2017-06-28T00:00:00.000000000,Nothing to report,R864
+2017-07-05T00:00:00.000000000,Seems to be in good condition,R865
+2017-06-24T00:00:00.000000000,Faulty power supply was replaced,R866
+2017-07-25T00:00:00.000000000,Faulty power supply was replaced,R867
+2017-05-02T00:00:00.000000000,,R868
+2017-07-27T00:00:00.000000000,,R870
+2017-05-25T00:00:00.000000000,Seems to be in good condition,R871
+2017-06-19T00:00:00.000000000,Seems to be in good condition,R872
+2017-03-28T00:00:00.000000000,,R873
+2017-03-24T00:00:00.000000000,,R874
+2017-03-03T00:00:00.000000000,,R875
+2017-07-22T00:00:00.000000000,,R876
+2017-07-29T00:00:00.000000000,,R877
+2017-06-09T00:00:00.000000000,,R878
+2016-10-15T00:00:00.000000000,Nothing to report,R879
+2016-08-17T00:00:00.000000000,,R881
+2017-07-09T00:00:00.000000000,Nothing to report,R882
+2017-07-29T00:00:00.000000000,,R883
+2017-04-10T00:00:00.000000000,,R884
+2017-05-16T00:00:00.000000000,Faulty power supply was replaced,R885
+2017-03-02T00:00:00.000000000,,R886
+2016-10-07T00:00:00.000000000,Nothing to report,R887
+2017-06-20T00:00:00.000000000,Seems to be in good condition,R888
+2017-06-27T00:00:00.000000000,Nothing to report,R889
+2017-02-24T00:00:00.000000000,Faulty power supply was replaced,R890
+2017-07-23T00:00:00.000000000,Nothing to report,R891
+2017-07-11T00:00:00.000000000,,R892
+2017-04-24T00:00:00.000000000,Seems to be in good condition,R893
+2017-07-05T00:00:00.000000000,Seems to be in good condition,R895
+2017-03-25T00:00:00.000000000,Nothing to report,R896
+2017-02-18T00:00:00.000000000,Faulty power supply was replaced,R897
+2017-05-05T00:00:00.000000000,,R898
+2017-06-10T00:00:00.000000000,Nothing to report,R899
+2014-11-14T00:00:00.000000000,,R900
+2017-03-02T00:00:00.000000000,Faulty power supply was replaced,R901
+2017-06-11T00:00:00.000000000,Faulty power supply was replaced,R902
+2017-07-15T00:00:00.000000000,,R903
+2017-03-12T00:00:00.000000000,Seems to be in good condition,R904
+2017-05-15T00:00:00.000000000,Nothing to report,R906
+2015-03-12T00:00:00.000000000,Nothing to report,R907
+2017-05-01T00:00:00.000000000,Seems to be in good condition,R908
+2017-04-17T00:00:00.000000000,Nothing to report,R909
+2017-03-31T00:00:00.000000000,Faulty power supply was replaced,R913
+2017-05-04T00:00:00.000000000,Faulty power supply was replaced,R914
+2017-03-09T00:00:00.000000000,Faulty power supply was replaced,R915
+2017-05-08T00:00:00.000000000,Nothing to report,R917
+2017-02-06T00:00:00.000000000,Seems to be in good condition,R918
+2015-05-08T00:00:00.000000000,Faulty power supply was replaced,R919
+2017-04-11T00:00:00.000000000,Seems to be in good condition,R920
+2017-02-17T00:00:00.000000000,Nothing to report,R921
+2017-02-08T00:00:00.000000000,,R922
+2017-04-04T00:00:00.000000000,,R925
+2017-03-22T00:00:00.000000000,,R926
+2017-03-29T00:00:00.000000000,Nothing to report,R927
+2017-04-27T00:00:00.000000000,,R929
+2017-04-21T00:00:00.000000000,,R930
+2017-06-12T00:00:00.000000000,Faulty power supply was replaced,R932
+2017-02-04T00:00:00.000000000,Nothing to report,R933
+2017-07-19T00:00:00.000000000,Seems to be in good condition,R934
+2017-03-31T00:00:00.000000000,Faulty power supply was replaced,R935
+2017-03-12T00:00:00.000000000,Seems to be in good condition,R936
+2017-03-27T00:00:00.000000000,Nothing to report,R937
+2017-04-12T00:00:00.000000000,Faulty power supply was replaced,R938
+2017-03-31T00:00:00.000000000,Faulty power supply was replaced,R939
+2015-10-26T00:00:00.000000000,Seems to be in good condition,R940
+2017-03-04T00:00:00.000000000,,R942
+2017-07-04T00:00:00.000000000,Nothing to report,R944
+2017-06-19T00:00:00.000000000,Seems to be in good condition,R945
+2017-07-11T00:00:00.000000000,,R946
+2017-06-23T00:00:00.000000000,Seems to be in good condition,R947
+2017-04-26T00:00:00.000000000,Faulty power supply was replaced,R948
+2015-06-03T00:00:00.000000000,,R950
+2017-05-22T00:00:00.000000000,,R951
+2017-06-30T00:00:00.000000000,Seems to be in good condition,R952
+2015-03-26T00:00:00.000000000,Faulty power supply was replaced,R954
+2017-07-10T00:00:00.000000000,Nothing to report,R955
+2015-11-20T00:00:00.000000000,Nothing to report,R956
+2015-06-10T00:00:00.000000000,Faulty power supply was replaced,R957
+2017-06-12T00:00:00.000000000,Faulty power supply was replaced,R958
+2017-05-22T00:00:00.000000000,Faulty power supply was replaced,R959
+2017-06-24T00:00:00.000000000,Nothing to report,R960
+2017-05-16T00:00:00.000000000,Seems to be in good condition,R962
+2017-02-22T00:00:00.000000000,Seems to be in good condition,R963
+2017-05-04T00:00:00.000000000,Faulty power supply was replaced,R964
+2017-04-03T00:00:00.000000000,Faulty power supply was replaced,R967
+2017-06-24T00:00:00.000000000,,R968
+2017-06-11T00:00:00.000000000,Nothing to report,R969
+2016-10-31T00:00:00.000000000,Seems to be in good condition,R970
+2017-06-24T00:00:00.000000000,Nothing to report,R971
+2017-03-06T00:00:00.000000000,Nothing to report,R972
+2017-03-15T00:00:00.000000000,Faulty power supply was replaced,R973
+2017-03-25T00:00:00.000000000,Seems to be in good condition,R974
+2017-04-03T00:00:00.000000000,Faulty power supply was replaced,R975
+2017-05-07T00:00:00.000000000,Faulty power supply was replaced,R976
+2017-02-07T00:00:00.000000000,,R978
+2017-06-06T00:00:00.000000000,Faulty power supply was replaced,R981
+2017-04-02T00:00:00.000000000,Seems to be in good condition,R982
+2017-05-16T00:00:00.000000000,Seems to be in good condition,R983
+2017-04-17T00:00:00.000000000,Seems to be in good condition,R985
+2017-03-27T00:00:00.000000000,Seems to be in good condition,R986
+2017-07-08T00:00:00.000000000,Nothing to report,R987
+2017-07-04T00:00:00.000000000,Faulty power supply was replaced,R988
+2017-04-21T00:00:00.000000000,Faulty power supply was replaced,R990
+2017-05-29T00:00:00.000000000,Nothing to report,R991
+2017-05-17T00:00:00.000000000,Seems to be in good condition,R992
+2017-06-03T00:00:00.000000000,,R993
+2017-05-23T00:00:00.000000000,Seems to be in good condition,R994
+2017-05-07T00:00:00.000000000,Nothing to report,R995
+2017-05-26T00:00:00.000000000,Faulty power supply was replaced,R996
+2017-05-02T00:00:00.000000000,Faulty power supply was replaced,R998
+2017-03-12T00:00:00.000000000,Faulty power supply was replaced,R999
+2017-07-27T00:00:00.000000000,Seems to be in good condition,R1000
+2017-02-13T00:00:00.000000000,Seems to be in good condition,R1001
+2017-05-20T00:00:00.000000000,Faulty power supply was replaced,R1002
+2017-07-29T00:00:00.000000000,Seems to be in good condition,R1003
+2017-03-17T00:00:00.000000000,,R1004
+2017-04-14T00:00:00.000000000,,R1005
+2017-02-07T00:00:00.000000000,Nothing to report,R1006
+2017-03-13T00:00:00.000000000,,R1007
+2017-04-22T00:00:00.000000000,,R1008
+2017-02-23T00:00:00.000000000,Seems to be in good condition,R1009
+2017-07-29T00:00:00.000000000,Seems to be in good condition,R1010
+2017-07-26T00:00:00.000000000,Nothing to report,R1012
+2017-05-15T00:00:00.000000000,Seems to be in good condition,R1013
+2016-12-07T00:00:00.000000000,Faulty power supply was replaced,R1014
+2015-02-22T00:00:00.000000000,Seems to be in good condition,R1015
+2017-07-28T00:00:00.000000000,Seems to be in good condition,R1016
+2015-12-29T00:00:00.000000000,Nothing to report,R1017
+2017-04-29T00:00:00.000000000,Nothing to report,R1018
+2014-09-11T00:00:00.000000000,Nothing to report,R1020
+2017-02-13T00:00:00.000000000,Faulty power supply was replaced,R1021
+2017-02-28T00:00:00.000000000,Seems to be in good condition,R1022
+2017-03-17T00:00:00.000000000,Seems to be in good condition,R1023
+2017-07-04T00:00:00.000000000,Nothing to report,R1024
+2017-06-23T00:00:00.000000000,Faulty power supply was replaced,R1025
+2017-04-15T00:00:00.000000000,,R1026
+2017-05-27T00:00:00.000000000,Seems to be in good condition,R1029
+2017-06-24T00:00:00.000000000,,R1030
+2017-02-18T00:00:00.000000000,,R1031
+2017-03-13T00:00:00.000000000,Faulty power supply was replaced,R1032
+2017-04-24T00:00:00.000000000,Seems to be in good condition,R1033
+2017-06-05T00:00:00.000000000,Seems to be in good condition,R1034
+2017-07-09T00:00:00.000000000,,R1035
+2017-06-26T00:00:00.000000000,,R1037
+2017-06-12T00:00:00.000000000,Seems to be in good condition,R1039
+2017-07-22T00:00:00.000000000,Nothing to report,R1040
+2016-05-29T00:00:00.000000000,Faulty power supply was replaced,R1042
+2017-04-22T00:00:00.000000000,Seems to be in good condition,R1043
+2017-06-19T00:00:00.000000000,Seems to be in good condition,R1045
+2017-06-11T00:00:00.000000000,Seems to be in good condition,R1046
+2016-07-10T00:00:00.000000000,Faulty power supply was replaced,R1047
+2017-06-19T00:00:00.000000000,Nothing to report,R1048
+2017-07-26T00:00:00.000000000,Nothing to report,R1049
+2017-05-13T00:00:00.000000000,Nothing to report,R1050
+2017-07-22T00:00:00.000000000,Faulty power supply was replaced,R1051
+2017-01-21T00:00:00.000000000,Seems to be in good condition,R1052
+2017-07-19T00:00:00.000000000,,R1054
+2017-03-19T00:00:00.000000000,Faulty power supply was replaced,R1055
+2017-05-17T00:00:00.000000000,Faulty power supply was replaced,R1056
+2017-05-17T00:00:00.000000000,Seems to be in good condition,R1058
+2017-05-18T00:00:00.000000000,Nothing to report,R1059
+2015-07-13T00:00:00.000000000,Faulty power supply was replaced,R1060
+2015-09-12T00:00:00.000000000,Nothing to report,R1061
+2017-06-05T00:00:00.000000000,Seems to be in good condition,R1066
+2017-08-01T00:00:00.000000000,,R1067
+2017-06-28T00:00:00.000000000,Faulty power supply was replaced,R1068
+2017-02-08T00:00:00.000000000,Faulty power supply was replaced,R1070
+2017-02-24T00:00:00.000000000,,R1071
+2017-04-08T00:00:00.000000000,Faulty power supply was replaced,R1072
+2017-03-07T00:00:00.000000000,Seems to be in good condition,R1073
+2016-06-09T00:00:00.000000000,Faulty power supply was replaced,R1074
+2015-12-30T00:00:00.000000000,,R1075
+2017-04-24T00:00:00.000000000,Seems to be in good condition,R1076
+2015-10-28T00:00:00.000000000,Seems to be in good condition,R1078
+2017-03-06T00:00:00.000000000,Nothing to report,R1079
+2017-06-28T00:00:00.000000000,Nothing to report,R1080
+2017-03-22T00:00:00.000000000,Faulty power supply was replaced,R1081
+2017-04-01T00:00:00.000000000,,R1082
+2017-03-17T00:00:00.000000000,,R1083
+2017-02-07T00:00:00.000000000,,R1084
+2017-05-04T00:00:00.000000000,Nothing to report,R1085
+2017-02-07T00:00:00.000000000,Faulty power supply was replaced,R1086
+2017-02-23T00:00:00.000000000,Seems to be in good condition,R1087
+2017-07-20T00:00:00.000000000,,R1088
+2017-07-30T00:00:00.000000000,Faulty power supply was replaced,R1090
+2017-04-23T00:00:00.000000000,Seems to be in good condition,R1091
+2015-06-06T00:00:00.000000000,,R1094
+2017-02-20T00:00:00.000000000,Faulty power supply was replaced,R1095
+2017-05-09T00:00:00.000000000,,R1098
+2017-07-01T00:00:00.000000000,,R1099
+2017-03-17T00:00:00.000000000,Faulty power supply was replaced,R1100
+2017-04-20T00:00:00.000000000,Faulty power supply was replaced,R1101
+2017-04-09T00:00:00.000000000,,R1102
+2017-03-12T00:00:00.000000000,Seems to be in good condition,R1103
+2017-05-18T00:00:00.000000000,Faulty power supply was replaced,R1105
+2017-06-10T00:00:00.000000000,Seems to be in good condition,R1106
+2017-03-26T00:00:00.000000000,Faulty power supply was replaced,R1108
+2017-07-02T00:00:00.000000000,,R1109
+2017-03-22T00:00:00.000000000,Faulty power supply was replaced,R1110
+2017-03-09T00:00:00.000000000,Faulty power supply was replaced,R1111
+2017-02-19T00:00:00.000000000,Seems to be in good condition,R1113
+2017-05-24T00:00:00.000000000,Faulty power supply was replaced,R1114
+2017-05-20T00:00:00.000000000,Seems to be in good condition,R1115
+2017-06-10T00:00:00.000000000,Nothing to report,R1116
+2017-03-31T00:00:00.000000000,Nothing to report,R1117
+2017-07-08T00:00:00.000000000,Nothing to report,R1120
+2017-07-31T00:00:00.000000000,Faulty power supply was replaced,R1121
+2017-03-15T00:00:00.000000000,Faulty power supply was replaced,R1122
+2017-03-05T00:00:00.000000000,Nothing to report,R1123
+2017-05-05T00:00:00.000000000,,R1124
+2016-04-02T00:00:00.000000000,,R1125
+2017-06-15T00:00:00.000000000,Nothing to report,R1126
+2017-07-13T00:00:00.000000000,Nothing to report,R1127
+2014-08-31T00:00:00.000000000,Nothing to report,R1128
+2017-07-08T00:00:00.000000000,Seems to be in good condition,R1130
+2017-05-04T00:00:00.000000000,,R1131
+2017-06-20T00:00:00.000000000,Faulty power supply was replaced,R1132
+2017-07-13T00:00:00.000000000,Seems to be in good condition,R1133
+2017-06-26T00:00:00.000000000,Nothing to report,R1134
+2017-05-25T00:00:00.000000000,Seems to be in good condition,R1135
+2017-05-04T00:00:00.000000000,Nothing to report,R1136
+2017-05-10T00:00:00.000000000,Nothing to report,R1137
+2016-05-17T00:00:00.000000000,Seems to be in good condition,R1138
+2017-06-20T00:00:00.000000000,Nothing to report,R1139
+2017-04-08T00:00:00.000000000,Nothing to report,R1141
+2015-10-18T00:00:00.000000000,Nothing to report,R1142
+2017-04-21T00:00:00.000000000,Seems to be in good condition,R1144
+2017-05-03T00:00:00.000000000,,R1145
+2017-03-27T00:00:00.000000000,Nothing to report,R1147
+2017-07-23T00:00:00.000000000,,R1148
+2017-04-05T00:00:00.000000000,Seems to be in good condition,R1149
+2017-06-26T00:00:00.000000000,Faulty power supply was replaced,R1150
+2017-06-03T00:00:00.000000000,Faulty power supply was replaced,R1151
+2017-04-15T00:00:00.000000000,Nothing to report,R1152
+2016-12-07T00:00:00.000000000,,R1153
+2017-06-26T00:00:00.000000000,Seems to be in good condition,R1155
+2017-04-14T00:00:00.000000000,Seems to be in good condition,R1156
+2017-06-08T00:00:00.000000000,,R1157
+2017-02-11T00:00:00.000000000,,R1158
+2017-06-14T00:00:00.000000000,Seems to be in good condition,R1159
+2017-03-17T00:00:00.000000000,,R1161
+2017-06-22T00:00:00.000000000,Faulty power supply was replaced,R1163
+2017-06-02T00:00:00.000000000,Seems to be in good condition,R1164
+2017-05-28T00:00:00.000000000,Seems to be in good condition,R1165
+2017-07-13T00:00:00.000000000,Faulty power supply was replaced,R1167
+2017-06-23T00:00:00.000000000,Nothing to report,R1169
+2017-05-01T00:00:00.000000000,Nothing to report,R1170
+2017-08-01T00:00:00.000000000,,R1171
+2017-02-27T00:00:00.000000000,Nothing to report,R1173
+2017-03-18T00:00:00.000000000,Seems to be in good condition,R1176
+2017-06-09T00:00:00.000000000,Faulty power supply was replaced,R1177
+2017-07-24T00:00:00.000000000,Seems to be in good condition,R1178
+2017-06-06T00:00:00.000000000,,R1179
+2017-05-31T00:00:00.000000000,,R1180
+2017-07-17T00:00:00.000000000,Faulty power supply was replaced,R1181
+2017-06-25T00:00:00.000000000,,R1182
+2017-03-28T00:00:00.000000000,,R1184
+2017-07-12T00:00:00.000000000,Faulty power supply was replaced,R1185
+2017-06-14T00:00:00.000000000,Faulty power supply was replaced,R1186
+2017-06-13T00:00:00.000000000,,R1187
+2016-11-06T00:00:00.000000000,Faulty power supply was replaced,R1188
+2017-04-29T00:00:00.000000000,Nothing to report,R1189
+2017-06-30T00:00:00.000000000,Nothing to report,R1190
+2014-11-17T00:00:00.000000000,Faulty power supply was replaced,R1191
+2017-04-22T00:00:00.000000000,Faulty power supply was replaced,R1192
+2017-05-10T00:00:00.000000000,Nothing to report,R1193
+2014-10-15T00:00:00.000000000,Faulty power supply was replaced,R1194
+2015-10-02T00:00:00.000000000,,R1195
+2017-03-07T00:00:00.000000000,Seems to be in good condition,R1196
+2017-04-15T00:00:00.000000000,Seems to be in good condition,R1197
+2017-06-04T00:00:00.000000000,,R1199
+2017-03-28T00:00:00.000000000,Faulty power supply was replaced,R1200
+2016-08-12T00:00:00.000000000,Faulty power supply was replaced,R1201
+2017-02-04T00:00:00.000000000,,R1202
+2017-06-29T00:00:00.000000000,Nothing to report,R1203
+2016-10-07T00:00:00.000000000,Faulty power supply was replaced,R1204
+2017-02-16T00:00:00.000000000,Seems to be in good condition,R1205
+2017-05-21T00:00:00.000000000,Seems to be in good condition,R1206
+2015-04-26T00:00:00.000000000,Faulty power supply was replaced,R1207
+2017-02-14T00:00:00.000000000,Nothing to report,R1208
+2017-04-17T00:00:00.000000000,Faulty power supply was replaced,R1209
+2017-06-25T00:00:00.000000000,Seems to be in good condition,R1211
+2017-08-01T00:00:00.000000000,Seems to be in good condition,R1212
+2017-02-08T00:00:00.000000000,Seems to be in good condition,R1213
+2017-05-02T00:00:00.000000000,Faulty power supply was replaced,R1216
+2017-03-01T00:00:00.000000000,Faulty power supply was replaced,R1217
+2017-04-06T00:00:00.000000000,,R1219
+2016-10-17T00:00:00.000000000,,R1220
+2017-06-18T00:00:00.000000000,Seems to be in good condition,R1221
+2017-02-08T00:00:00.000000000,Faulty power supply was replaced,R1222
+2014-08-27T00:00:00.000000000,,R1223
+2017-02-14T00:00:00.000000000,Seems to be in good condition,R1224
+2017-02-28T00:00:00.000000000,,R1225
+2015-02-02T00:00:00.000000000,Faulty power supply was replaced,R1226
+2017-05-08T00:00:00.000000000,Seems to be in good condition,R1227
+2017-05-13T00:00:00.000000000,Faulty power supply was replaced,R1228
+2015-03-30T00:00:00.000000000,Faulty power supply was replaced,R1229
+2017-07-12T00:00:00.000000000,Seems to be in good condition,R1233
+2017-06-09T00:00:00.000000000,Seems to be in good condition,R1234
+2017-04-07T00:00:00.000000000,Nothing to report,R1235
+2017-02-21T00:00:00.000000000,Faulty power supply was replaced,R1237
+2017-02-05T00:00:00.000000000,Nothing to report,R1238
+2017-03-02T00:00:00.000000000,,R1240
+2017-07-26T00:00:00.000000000,Faulty power supply was replaced,R1241
+2017-06-04T00:00:00.000000000,Seems to be in good condition,R1242
+2017-06-06T00:00:00.000000000,Nothing to report,R1243
+2017-05-18T00:00:00.000000000,Faulty power supply was replaced,R1244
+2017-07-22T00:00:00.000000000,Nothing to report,R1245
+2017-06-30T00:00:00.000000000,Nothing to report,R1247
+2017-04-24T00:00:00.000000000,Nothing to report,R1248
+2017-05-26T00:00:00.000000000,Seems to be in good condition,R1249
+2017-02-19T00:00:00.000000000,Nothing to report,R1250
+2017-07-02T00:00:00.000000000,,R1252
+2017-07-09T00:00:00.000000000,Faulty power supply was replaced,R1253
+2017-04-21T00:00:00.000000000,Seems to be in good condition,R1254
+2017-07-23T00:00:00.000000000,,R1256
+2016-10-25T00:00:00.000000000,Seems to be in good condition,R1258
+2017-06-26T00:00:00.000000000,Seems to be in good condition,R1259
+2017-07-10T00:00:00.000000000,Seems to be in good condition,R1261
+2017-07-10T00:00:00.000000000,Nothing to report,R1262
+2017-05-19T00:00:00.000000000,Faulty power supply was replaced,R1263
+2017-05-25T00:00:00.000000000,,R1266
+2017-05-27T00:00:00.000000000,Nothing to report,R1267
+2017-04-22T00:00:00.000000000,Faulty power supply was replaced,R1268
+2017-05-05T00:00:00.000000000,Nothing to report,R1269
+2017-06-08T00:00:00.000000000,Faulty power supply was replaced,R1271
+2015-05-30T00:00:00.000000000,Faulty power supply was replaced,R1272
+2017-04-11T00:00:00.000000000,Seems to be in good condition,R1273
+2014-12-11T00:00:00.000000000,Faulty power supply was replaced,R1274
+2017-06-11T00:00:00.000000000,Nothing to report,R1275
+2017-06-13T00:00:00.000000000,Nothing to report,R1276
+2017-02-06T00:00:00.000000000,Seems to be in good condition,R1277
+2017-04-14T00:00:00.000000000,Nothing to report,R1278
+2017-03-27T00:00:00.000000000,,R1279
+2017-06-28T00:00:00.000000000,,R1281
+2017-07-28T00:00:00.000000000,Seems to be in good condition,R1282
+2017-02-08T00:00:00.000000000,Faulty power supply was replaced,R1284
+2017-04-22T00:00:00.000000000,Nothing to report,R1286
+2017-07-27T00:00:00.000000000,Nothing to report,R1287
+2017-06-06T00:00:00.000000000,,R1288
+2017-03-20T00:00:00.000000000,Seems to be in good condition,R1289
+2017-06-26T00:00:00.000000000,,R1290
+2017-02-11T00:00:00.000000000,Seems to be in good condition,R1291
+2017-04-12T00:00:00.000000000,Faulty power supply was replaced,R1292
+2017-02-10T00:00:00.000000000,Faulty power supply was replaced,R1293
+2017-04-07T00:00:00.000000000,Faulty power supply was replaced,R1295
+2016-06-05T00:00:00.000000000,Nothing to report,R1296
+2017-07-24T00:00:00.000000000,Faulty power supply was replaced,R1297
+2014-11-26T00:00:00.000000000,,R1298
+2017-04-30T00:00:00.000000000,Seems to be in good condition,R1299
+2017-06-13T00:00:00.000000000,Seems to be in good condition,R1300
+2015-01-30T00:00:00.000000000,Nothing to report,R1301
+2017-03-30T00:00:00.000000000,Nothing to report,R1302
+2017-05-25T00:00:00.000000000,Seems to be in good condition,R1304
+2016-03-17T00:00:00.000000000,,R1305
+2017-07-16T00:00:00.000000000,Nothing to report,R1307
+2017-07-02T00:00:00.000000000,Faulty power supply was replaced,R1308
+2017-02-08T00:00:00.000000000,Faulty power supply was replaced,R1310
+2016-05-12T00:00:00.000000000,Seems to be in good condition,R1311
+2017-03-04T00:00:00.000000000,Nothing to report,R1312
+2017-02-13T00:00:00.000000000,Seems to be in good condition,R1313
+2017-02-16T00:00:00.000000000,Nothing to report,R1314
+2017-05-20T00:00:00.000000000,Nothing to report,R1315
+2017-04-26T00:00:00.000000000,Seems to be in good condition,R1316
+2017-03-26T00:00:00.000000000,,R1317
+2017-03-25T00:00:00.000000000,Seems to be in good condition,R1318
+2015-11-21T00:00:00.000000000,Nothing to report,R1319
+2017-05-31T00:00:00.000000000,,R1320
+2017-06-22T00:00:00.000000000,,R1321
+2017-07-29T00:00:00.000000000,Faulty power supply was replaced,R1322
+2017-02-13T00:00:00.000000000,,R1323
+2015-05-10T00:00:00.000000000,Nothing to report,R1324
+2017-04-08T00:00:00.000000000,,R1325
+2017-03-06T00:00:00.000000000,Nothing to report,R1326
+2016-10-11T00:00:00.000000000,Seems to be in good condition,R1327
+2017-04-03T00:00:00.000000000,Nothing to report,R1328
+2016-05-30T00:00:00.000000000,Seems to be in good condition,R1330
+2017-02-11T00:00:00.000000000,Seems to be in good condition,R1334
+2017-03-20T00:00:00.000000000,,R1335
+2017-04-29T00:00:00.000000000,Faulty power supply was replaced,R1336
+2017-04-03T00:00:00.000000000,,R1337
+2017-04-07T00:00:00.000000000,Seems to be in good condition,R1339
+2017-03-10T00:00:00.000000000,Seems to be in good condition,R1340
+2017-02-07T00:00:00.000000000,Seems to be in good condition,R1341
+2016-11-10T00:00:00.000000000,Faulty power supply was replaced,R1342
+2017-02-25T00:00:00.000000000,,R1344
+2017-07-24T00:00:00.000000000,Nothing to report,R1345
+2017-02-27T00:00:00.000000000,,R1347
+2017-03-08T00:00:00.000000000,Nothing to report,R1349
+2017-05-31T00:00:00.000000000,,R1350
+2017-03-05T00:00:00.000000000,,R1351
+2017-02-07T00:00:00.000000000,Seems to be in good condition,R1352
+2017-07-26T00:00:00.000000000,Seems to be in good condition,R1353
+2017-04-05T00:00:00.000000000,Faulty power supply was replaced,R1354
+2017-07-04T00:00:00.000000000,,R1355
+2017-04-16T00:00:00.000000000,Nothing to report,R1356
+2017-05-20T00:00:00.000000000,,R1357
+2017-03-01T00:00:00.000000000,Faulty power supply was replaced,R1361
+2017-07-12T00:00:00.000000000,Faulty power supply was replaced,R1363
+2017-07-09T00:00:00.000000000,Seems to be in good condition,R1365
+2016-07-13T00:00:00.000000000,,R1366
+2017-06-25T00:00:00.000000000,,R1367
+2015-05-21T00:00:00.000000000,,R1368
+2017-03-01T00:00:00.000000000,Faulty power supply was replaced,R1370
+2014-09-24T00:00:00.000000000,Faulty power supply was replaced,R1371
+2017-03-07T00:00:00.000000000,,R1372
+2017-01-19T00:00:00.000000000,Nothing to report,R1373
+2017-02-14T00:00:00.000000000,Nothing to report,R1374
+2016-07-08T00:00:00.000000000,,R1375
+2017-06-10T00:00:00.000000000,Faulty power supply was replaced,R1376
+2017-03-27T00:00:00.000000000,Faulty power supply was replaced,R1377
+2017-02-06T00:00:00.000000000,Nothing to report,R1378
+2017-02-19T00:00:00.000000000,,R1380
+2017-07-07T00:00:00.000000000,Nothing to report,R1381
+2017-05-24T00:00:00.000000000,Nothing to report,R1382
+2017-02-17T00:00:00.000000000,Nothing to report,R1383
+2017-06-30T00:00:00.000000000,Nothing to report,R1384
+2017-03-20T00:00:00.000000000,Nothing to report,R1385
+2017-02-22T00:00:00.000000000,Seems to be in good condition,R1386
+2017-07-12T00:00:00.000000000,Faulty power supply was replaced,R1387
+2017-04-07T00:00:00.000000000,Seems to be in good condition,R1390
+2017-06-13T00:00:00.000000000,Faulty power supply was replaced,R1392
+2017-07-12T00:00:00.000000000,Nothing to report,R1393
+2017-03-09T00:00:00.000000000,,R1394
+2017-03-28T00:00:00.000000000,Faulty power supply was replaced,R1395
+2017-04-26T00:00:00.000000000,Nothing to report,R1396
+2017-05-19T00:00:00.000000000,,R1397
+2017-02-28T00:00:00.000000000,Seems to be in good condition,R1398
+2017-05-30T00:00:00.000000000,,R1400
+2017-07-08T00:00:00.000000000,Seems to be in good condition,R1401
+2017-02-08T00:00:00.000000000,Nothing to report,R1403
+2017-03-17T00:00:00.000000000,,R1404
+2016-01-02T00:00:00.000000000,,R1405
+2017-06-21T00:00:00.000000000,Nothing to report,R1406
+2017-05-30T00:00:00.000000000,Seems to be in good condition,R1407
+2015-04-25T00:00:00.000000000,Seems to be in good condition,R1408
+2017-04-02T00:00:00.000000000,Nothing to report,R1411
+2017-06-22T00:00:00.000000000,Nothing to report,R1412
+2017-07-01T00:00:00.000000000,Nothing to report,R1413
+2017-06-08T00:00:00.000000000,Nothing to report,R1416
+2017-05-06T00:00:00.000000000,Nothing to report,R1418
+2017-07-14T00:00:00.000000000,Nothing to report,R1419
+2017-05-26T00:00:00.000000000,,R1421
+2017-04-18T00:00:00.000000000,Seems to be in good condition,R1422
+2017-05-17T00:00:00.000000000,Seems to be in good condition,R1423
