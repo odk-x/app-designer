@@ -41,7 +41,7 @@ Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/assets/aa_health_facility_detail.html
 Table,default,displayName,object,"{""text"":{""default"":""Health Facility"",""es"":""Facilidad de Salúd""}}"
 Table,default,listViewFileName,string,config/assets/aa_health_facility_list.html
-Table,default,mapListViewFileName,string,config/assets/aa_health_facility_map.html
+Table,default,mapListViewFileName,string,config/assets/hack_for_hf_map.html
 TableMapFragment,default,keyColorRuleType,string,None
 TableMapFragment,default,keyMapLatCol,string,Location_latitude
 TableMapFragment,default,keyMapLongCol,string,Location_longitude

@@ -34,77 +34,9 @@
         "_row_num": 5
       },
       {
-        "type": "select_one_dropdown",
-        "values_list": "regionLevel1_csv",
-        "name": "regionLevel1",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Level 1 of admin region",
-              "es": "Nievel Uno de Región de Administracion"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Level 1 of admin region",
-              "es": "Nievel Uno de Región de Administracion"
-            }
-          }
-        },
-        "required": 1,
+        "clause": "if",
+        "condition": "data('facility_row_id') == null",
         "_row_num": 6
-      },
-      {
-        "type": "select_one_dropdown",
-        "values_list": "regionLevel2_csv",
-        "name": "regionLevel2",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Level 2 of admin region",
-              "es": "Nievel Dos de Región de Administracion"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Level 2 of admin region",
-              "es": "Nievel Dos de Región de Administracion"
-            }
-          }
-        },
-        "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
-        "required": 1,
-        "_row_num": 7
-      },
-      {
-        "type": "select_one_dropdown",
-        "values_list": "regionLevel3_csv",
-        "name": "adminRegion",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Admin region",
-              "es": "Región de Administracion"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Admin region",
-              "es": "Región de Administracion"
-            }
-          }
-        },
-        "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
-        "required": 1,
-        "_row_num": 8
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 9
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 10
       },
       {
         "type": "select_one_dropdown",
@@ -125,11 +57,15 @@
           }
         },
         "required": 1,
-        "_row_num": 11
+        "_row_num": 7
+      },
+      {
+        "clause": "end if",
+        "_row_num": 8
       },
       {
         "clause": "end screen",
-        "_row_num": 12
+        "_row_num": 9
       },
       {
         "clause": "begin screen",
@@ -1967,61 +1903,10 @@
         },
         "elementKey": "refrigerator_id"
       },
-      "regionLevel1": {
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Level 1 of admin region",
-            "es": "Nievel Uno de Región de Administracion"
-          }
-        },
-        "valuesList": "regionLevel1_csv",
-        "elementKey": "regionLevel1"
-      },
-      "regionLevel2": {
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Level 2 of admin region",
-            "es": "Nievel Dos de Región de Administracion"
-          }
-        },
-        "valuesList": "regionLevel2_csv",
-        "elementKey": "regionLevel2"
-      },
-      "adminRegion": {
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Admin region",
-            "es": "Región de Administracion"
-          }
-        },
-        "valuesList": "regionLevel3_csv",
-        "elementKey": "adminRegion"
-      },
       "facility_row_id": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
@@ -2224,86 +2109,6 @@
           },
           {
             "type": "select_one_dropdown",
-            "values_list": "regionLevel1_csv",
-            "name": "regionLevel1",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Level 1 of admin region",
-                  "es": "Nievel Uno de Región de Administracion"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Level 1 of admin region",
-                  "es": "Nievel Uno de Región de Administracion"
-                }
-              }
-            },
-            "required": 1,
-            "_row_num": 6,
-            "__rowNum__": 5,
-            "_token_type": "prompt",
-            "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen2",
-            "promptIdx": 1
-          },
-          {
-            "type": "select_one_dropdown",
-            "values_list": "regionLevel2_csv",
-            "name": "regionLevel2",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Level 2 of admin region",
-                  "es": "Nievel Dos de Región de Administracion"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Level 2 of admin region",
-                  "es": "Nievel Dos de Región de Administracion"
-                }
-              }
-            },
-            "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
-            "required": 1,
-            "_row_num": 7,
-            "__rowNum__": 6,
-            "_token_type": "prompt",
-            "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen2",
-            "promptIdx": 2
-          },
-          {
-            "type": "select_one_dropdown",
-            "values_list": "regionLevel3_csv",
-            "name": "adminRegion",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Admin region",
-                  "es": "Región de Administracion"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Admin region",
-                  "es": "Región de Administracion"
-                }
-              }
-            },
-            "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
-            "required": 1,
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "prompt",
-            "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen2",
-            "promptIdx": 3
-          },
-          {
-            "type": "select_one_dropdown",
             "values_list": "health_facility_list",
             "name": "facility_row_id",
             "display": {
@@ -2321,12 +2126,12 @@
               }
             },
             "required": 1,
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "prompt",
             "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen10",
-            "promptIdx": 4
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 1
           },
           {
             "type": "select_one",
@@ -2352,7 +2157,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen13",
-            "promptIdx": 5
+            "promptIdx": 2
           },
           {
             "type": "select_one",
@@ -2378,7 +2183,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen13",
-            "promptIdx": 6
+            "promptIdx": 3
           },
           {
             "type": "text",
@@ -2403,7 +2208,7 @@
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 7
+            "promptIdx": 4
           },
           {
             "type": "select_one_integer",
@@ -2428,7 +2233,7 @@
             "_token_type": "prompt",
             "_type": "select_one_integer",
             "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 8
+            "promptIdx": 5
           },
           {
             "type": "select_one",
@@ -2453,7 +2258,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 9
+            "promptIdx": 6
           },
           {
             "type": "select_one",
@@ -2478,7 +2283,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen28",
-            "promptIdx": 10
+            "promptIdx": 7
           },
           {
             "type": "select_one",
@@ -2503,7 +2308,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen28",
-            "promptIdx": 11
+            "promptIdx": 8
           },
           {
             "type": "select_one",
@@ -2528,7 +2333,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen28",
-            "promptIdx": 12
+            "promptIdx": 9
           },
           {
             "type": "select_one",
@@ -2553,7 +2358,7 @@
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen28",
-            "promptIdx": 13
+            "promptIdx": 10
           },
           {
             "_token_type": "prompt",
@@ -2561,7 +2366,7 @@
             "_type": "contents",
             "_row_num": 34,
             "_branch_label_enclosing_screen": "survey/_screen34",
-            "promptIdx": 14
+            "promptIdx": 11
           }
         ],
         "validation_tag_map": {
@@ -2569,10 +2374,7 @@
             1,
             2,
             3,
-            4,
-            5,
-            6,
-            7
+            4
           ]
         },
         "operations": [
@@ -2587,22 +2389,8 @@
               "__rowNum__": 8,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nif (0) {\nactivePromptIndicies.push(0);\n}\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (0) {\nactivePromptIndicies.push(0);\n}\nif (data('facility_row_id') == null) {\nactivePromptIndicies.push(1);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 12,
-              "__rowNum__": 11,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 1
           },
           {
             "clause": "begin screen",
@@ -2615,8 +2403,8 @@
               "__rowNum__": 17,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nif (data('models_common') === 'other') {\nactivePromptIndicies.push(6);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nif (data('models_common') === 'other') {\nactivePromptIndicies.push(3);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
           },
           {
             "clause": "begin screen",
@@ -2629,8 +2417,8 @@
               "__rowNum__": 26,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nassign('model_row_id', (function() {if (data('models_common') === 'other') { return data('model_other'); } return data('models_common');})());\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 3
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('model_row_id', (function() {if (data('models_common') === 'other') { return data('model_other'); } return data('models_common');})());\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
           },
           {
             "clause": "begin screen",
@@ -2643,39 +2431,38 @@
               "__rowNum__": 32,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 3
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
             "_row_num": 34,
-            "operationIdx": 5
+            "operationIdx": 4
           },
           {
             "_row_num": 34,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 6
+            "operationIdx": 5
           },
           {
             "_token_type": "resume",
             "clause": "resume",
             "_row_num": 34,
-            "operationIdx": 7
+            "operationIdx": 6
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_screen10": 1,
-          "_screen13": 2,
-          "_screen22": 3,
-          "_screen28": 4,
-          "_contents": 6,
-          "_screen34": 6
+          "_screen13": 1,
+          "_screen22": 2,
+          "_screen28": 3,
+          "_contents": 5,
+          "_screen34": 5
         }
       },
       "initial": {
@@ -2892,70 +2679,10 @@
         "elementSet": "data",
         "elementPath": "refrigerator_id"
       },
-      "regionLevel1": {
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Level 1 of admin region",
-            "es": "Nievel Uno de Región de Administracion"
-          }
-        },
-        "valuesList": "regionLevel1_csv",
-        "elementKey": "regionLevel1",
-        "elementName": "regionLevel1",
-        "elementSet": "data",
-        "elementPath": "regionLevel1"
-      },
-      "regionLevel2": {
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Level 2 of admin region",
-            "es": "Nievel Dos de Región de Administracion"
-          }
-        },
-        "valuesList": "regionLevel2_csv",
-        "elementKey": "regionLevel2",
-        "elementName": "regionLevel2",
-        "elementSet": "data",
-        "elementPath": "regionLevel2"
-      },
-      "adminRegion": {
-        "_defn": [
-          {
-            "_row_num": 8,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "displayName": {
-          "text": {
-            "default": "Admin region",
-            "es": "Región de Administracion"
-          }
-        },
-        "valuesList": "regionLevel3_csv",
-        "elementKey": "adminRegion",
-        "elementName": "adminRegion",
-        "elementSet": "data",
-        "elementPath": "adminRegion"
-      },
       "facility_row_id": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
@@ -3267,13 +2994,6 @@
     "properties": [
       {
         "_partition": "Column",
-        "_aspect": "adminRegion",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Admin region\",\"es\":\"Región de Administracion\"}}"
-      },
-      {
-        "_partition": "Column",
         "_aspect": "facility_row_id",
         "_key": "displayName",
         "_type": "object",
@@ -3334,20 +3054,6 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Refrigerator ID\",\"es\":\"ID de Frigorífico\"}}"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "regionLevel1",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Level 1 of admin region\",\"es\":\"Nievel Uno de Región de Administracion\"}}"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "regionLevel2",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Level 2 of admin region\",\"es\":\"Nievel Dos de Región de Administracion\"}}"
       },
       {
         "_partition": "Column",
