@@ -532,7 +532,11 @@ var doSearch = function doSearch() {
 					}
 				});
 				_delete.addEventListener("click", function() {
-					if (!confirm(_t("Please confirm deletion of row ") + display_col_wrapper(d.getData(i, display_col)))) {
+					var to_display = d.getData(i, display_col)
+					if (display_col_wrapper != null) {
+						to_display = display_col_wrapper(d, i, to_display);
+					}
+					if (!confirm(_t("Please confirm deletion of row ") + to_display)) {
 						return;
 					}
 					odkData.deleteRow(table_id, null, d.getData(i, "_id"), function(d) {
