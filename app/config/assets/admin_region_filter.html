@@ -77,15 +77,15 @@ list_views = {
 				menu[2] = menu[2].concat(0);
 				(function(val, where, args, count, id) {
 					var cb = null;
-					if (count == 1) {
+					//if (count == 1) {
+						//cb = function() {
+							//odkTables.launchHTML(null, "config/assets/aa_health_facility_detail.html#health_facility/" + id);
+						//};
+					//} else {
 						cb = function() {
-							odkTables.launchHTML(null, "config/assets/aa_health_facility_detail.html#health_facility/" + id);
-						};
-					} else {
-						cb = function() {
-							odkTables.openTableToMapView(null, "health_facility", where, args, list_views["health_facility"] + "#health_facility/STATIC/SELECT * FROM health_facility WHERE " + where + "/" + JSON.stringify(args) + "/" + hr_text);
+							odkTables.openTableToMapView(null, "health_facility", where, args, "config/assets/hack_for_hf_map.html#health_facility/STATIC/SELECT * FROM health_facility WHERE " + where + "/" + JSON.stringify(args) + "/" + hr_text);
 						}
-					}
+					//}
 					menu[2][menu[2].length - 1] = [_tu("View ") + _tc(d, "facility_type", ftype) + (count == 1 ? "" : "s") + " (" + count + ")", "_js", cb]
 				})(val, where, args, count, id);
 			}

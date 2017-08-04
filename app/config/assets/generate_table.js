@@ -423,7 +423,7 @@ var doSearch = function doSearch() {
 			newtext += _t(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, global_where_clause.split(" ")[0], false, metadata, table_id) + _t(" is ") + _tc(d, where_col, global_where_arg);
 		}
 		if (global_human_readable_what) {
-			hrw = _tu(global_human_readable_what);
+			var hrw = _tu(global_human_readable_what);
 			for (var i = 0; i < global_static_args.length; i++) {
 				hrw = hrw.replace("?", global_static_args[i]);
 			}

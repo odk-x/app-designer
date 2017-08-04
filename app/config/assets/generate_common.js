@@ -614,4 +614,8 @@ var formgen_specific_translations = {
 		"default": true,
 		"es": "Finalizando..."
 	}},
+	"Selected Marker": {"text": {
+		"default": true,
+		"es": ""
+	}}
 }

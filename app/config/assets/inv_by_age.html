@@ -40,19 +40,9 @@
 			var regionDone = false;
 			var typeDone = false;
 			var sourceDone = false;
-			var rolesDone = false;
 			var region_as_role = "";
 			var check = function check() {
-				if (regionDone && typeDone && sourceDone && rolesDone) {
-					var region = document.getElementById("region");
-					var options = region.children;
-					for (var i = 0; i < options.length; i++) {
-						if (options[i].value.toLowerCase() == region_as_role.toLowerCase()) {
-							region.selectedIndex = i;
-							region.selectedOptions[0].innerText += _tu(" (locked)")
-							break;
-						}
-					}
+				if (regionDone && typeDone && sourceDone) {
 					var btn = document.getElementById("go");
 					btn.disabled = false;
 					btn.innerText = _tu("Go");
@@ -146,20 +136,6 @@
 					sourceDone = true;
 					check();
 				}, null); // TODO failure function
-				odkData.getDefaultGroup(function(r) {
-					r = r.getDefaultGroup();
-					if (r == null) document.body.innerHTML = "Access denied"
-					else if (r.indexOf("GROUP_REGION_") == 0) {
-						var region = r.replace("GROUP_REGION_", "");
-						// replace all occurrences
-						region = region.replace(/_/g, " ");
-						region_as_role = region;
-					} else if (r == "GROUP_ADMIN") {
-						document.getElementById("region").disabled = false;
-					}
-					rolesDone = true;
-					check();
-				});
 			}
 		</script>
 		<style>
@@ -184,7 +160,7 @@ button:disabled {
 	<body onLoad='ol();'>
 		<div id="title" class="button"></div>
 		<div id='region_label'></div>
-		<select id='region' disabled><option value='none'></option></select>
+		<select id='region'><option value='none'></option></select>
 		<br />
 		<div id='type_label'></div>
 		<select id='type'><option value='none'></option></select>

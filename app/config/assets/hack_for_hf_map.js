@@ -195,7 +195,7 @@ var next = function next() {
 	doSearch();
 }
 // Called when the user clicks the next button. This can make the offset negative but doSearch will correct it
-var prev = function next() {
+var prev = function prev() {
 	offset -= limit;
 	doSearch();
 }
@@ -270,8 +270,10 @@ var doSearch = function doSearch() {
 			newtext += _t(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, global_where_clause.split(" ")[0], false, metadata, table_id) + _t(" is ") + _tc(d, where_col, global_where_arg);
 		}
 		if (global_human_readable_what) {
-			// untested
-			var hrw = _tu.apply(null, global_human_readable_what.concat(global_static_args));
+			var hrw = _tu(global_human_readable_what);
+			for (var i = 0; i < global_static_args.length; i++) {
+				hrw = hrw.replace("?", global_static_args[i]);
+			}
 			newtext += " " + hrw
 		}
 		// we may have been passed html via global_human_readable_what
@@ -286,7 +288,8 @@ var doSearch = function doSearch() {
 		//	  buttons
 		//		  edit
 		//		  delete
-		for (var i = 0; i < d.getCount(); i++) {
+		//for (var i = 0; i < d.getCount(); i++) {
+		var hack = function(i, isSelectedMarker) {
 			var li = document.createElement("div");
 			var displays = document.createElement("span");
 			displays.style.lineHeight = "normal";
@@ -344,6 +347,9 @@ var doSearch = function doSearch() {
 			if (subDisplay != null) {
 				displays.appendChild(subDisplay)
 				addedSubDisplays++;
+			}
+			if (isSelectedMarker) {
+				displays.appendChild(document.createTextNode(_t("Selected Marker")))
 			}
 			li.appendChild(displays);
 			li.classList.add("li");
@@ -432,6 +438,17 @@ var doSearch = function doSearch() {
 			displays.style.width = global_displays_width;
 			list.appendChild(hr);
 		}
+		var idx = d.getMapIndex();
+		if (idx >= offset && idx < offset + limit) {
+			hack(idx - offset, true);
+			for (var i = 0; i < d.getCount(); i++) {
+				if (i != d.getMapIndex()) hack(i, false);
+			}
+		} else {
+			for (var i = 0; i < d.getCount(); i++) {
+				hack(i, false);
+			}
+		}
 		customJsSearch();
 	}, function(d) {
 		alert(_t("Failure! ") + d);
@@ -502,5 +519,12 @@ var groupByGo = function groupByGo() {
 	}
 }
 var handleMapIndex = function handleMapIndex(d) {
-	// do nothing for now, hope that odkData is smart enough to put our selected map index at the top of the list and I don't have to do anything
+	var idx = d.getMapIndex();
+	if (idx == -1) return;
+	if (idx < offset) {
+		prev();
+	}
+	if (idx >= offset + limit) {
+		next();
+	}
 }

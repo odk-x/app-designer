@@ -63,6 +63,7 @@ if (window.location.hash.substr(1).length == 0) {
 			return;
 		}
 		var path = make_path_from_string(region_as_role, [])
+		// TODO CHECK IF path IS NULL, IF IT IS WE COULDN'T FIND THE REGION
 		menu_path = path;
 		doMenu();
 	}
