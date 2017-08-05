@@ -3,8 +3,10 @@ Column,date_serviced,displayName,object,"{""text"":{""default"":""Date Serviced"
 Column,notes,displayName,object,"{""text"":{""default"":""Notes"",""es"":""Notas""}}"
 Column,refrigerator_id,displayName,object,"{""text"":{""default"":""Refrigerator ID"",""es"":""ID de Frigorífico""}}"
 FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,m_logs
+SurveyUtil,default,SurveyUtil.formId,string,wrong_form
 Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/assets/aa_m_logs_detail.html
 Table,default,displayName,object,"{""text"":{""default"":""Maintenance Logs"",""es"":""Registro de Servicio""}}"
 Table,default,listViewFileName,string,config/assets/aa_m_logs_list.html
+Table,security,defaultAccessOnCreation,string,HIDDEN
+Table,security,unverifiedUserCanCreate,boolean,false

@@ -23,8 +23,6 @@ Column,grid_power_availability,displayChoicesList,object,"[{""choice_list_name""
 Column,grid_power_availability,displayName,object,"{""text"":{""default"":""Grid Availability"",""es"":""Disponibilidad del red de energía""}}"
 Column,kerosene_availability,displayChoicesList,object,"[{""choice_list_name"":""fuel_availability"",""data_value"":""available"",""display"":{""title"":{""text"":{""default"":""Available"",""es"":""Disponible""}}},""_row_num"":35},{""choice_list_name"":""fuel_availability"",""data_value"":""irregular"",""display"":{""title"":{""text"":{""default"":""Irregular"",""es"":""Irregular""}}},""_row_num"":36},{""choice_list_name"":""fuel_availability"",""data_value"":""not_available"",""display"":{""title"":{""text"":{""default"":""Not Available"",""es"":""No Disponible""}}},""_row_num"":37},{""choice_list_name"":""fuel_availability"",""data_value"":""unknown"",""display"":{""title"":{""text"":{""default"":""Unknown"",""es"":""Desconocido""}}},""_row_num"":38},{""choice_list_name"":""fuel_availability"",""data_value"":""not_applicable"",""display"":{""title"":{""text"":{""default"":""Not Applicable"",""es"":""No Applicable""}}},""_row_num"":39}]"
 Column,kerosene_availability,displayName,object,"{""text"":{""default"":""Kerosene Availability"",""es"":""Disponibilidad de queroseno""}}"
-Column,regionLevel1,displayName,object,"{""text"":{""default"":""Region Level 1"",""es"":""Nievel uno de region administrativo""}}"
-Column,regionLevel2,displayName,object,"{""text"":{""default"":""Region Level 2"",""es"":""Nievel dos de region administrativo""}}"
 Column,solar_suitable_climate,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":""yes"",""display"":{""title"":{""text"":{""default"":""Yes"",""es"":""Sí""}}},""_row_num"":2},{""choice_list_name"":""yes_no"",""data_value"":""no"",""display"":{""title"":{""text"":{""default"":""No"",""es"":""No""}}},""_row_num"":3}]"
 Column,solar_suitable_climate,displayName,object,"{""text"":{""default"":""Solar Suitable Climate"",""es"":""Clima adecuedo por energía solár""}}"
 Column,solar_suitable_site,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":""yes"",""display"":{""title"":{""text"":{""default"":""Yes"",""es"":""Sí""}}},""_row_num"":2},{""choice_list_name"":""yes_no"",""data_value"":""no"",""display"":{""title"":{""text"":{""default"":""No"",""es"":""No""}}},""_row_num"":3}]"
@@ -36,12 +34,15 @@ Column,vaccine_supply_interval,displayName,object,"{""text"":{""default"":""Supp
 Column,vaccine_supply_mode,displayChoicesList,object,"[{""choice_list_name"":""vaccine_modes"",""data_value"":""delivered"",""display"":{""title"":{""text"":{""default"":""Delivered"",""es"":""Enviado""}}},""_row_num"":54},{""choice_list_name"":""vaccine_modes"",""data_value"":""collected"",""display"":{""title"":{""text"":{""default"":""Collected"",""es"":""Collectado""}}},""_row_num"":55},{""choice_list_name"":""vaccine_modes"",""data_value"":""both"",""display"":{""title"":{""text"":{""default"":""Both Delivered and Collected"",""es"":""Enviado y Collectado""}}},""_row_num"":56},{""choice_list_name"":""vaccine_modes"",""data_value"":""none"",""display"":{""title"":{""text"":{""default"":""None"",""es"":""Ninguno""}}},""_row_num"":57},{""choice_list_name"":""vaccine_modes"",""data_value"":""unknown"",""display"":{""title"":{""text"":{""default"":""Unknown"",""es"":""Desconocido""}}},""_row_num"":58}]"
 Column,vaccine_supply_mode,displayName,object,"{""text"":{""default"":""Supply Mode"",""es"":""Modo de recibir vacunas""}}"
 FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,health_facility
+SurveyUtil,default,SurveyUtil.formId,string,wrong_form
 Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/assets/aa_health_facility_detail.html
 Table,default,displayName,object,"{""text"":{""default"":""Health Facility"",""es"":""Facilidad de Salúd""}}"
 Table,default,listViewFileName,string,config/assets/aa_health_facility_list.html
 Table,default,mapListViewFileName,string,config/assets/hack_for_hf_map.html
+Table,security,defaultAccessOnCreation,string,HIDDEN
+Table,security,locked,boolean,true
+Table,security,unverifiedUserCanCreate,boolean,false
 TableMapFragment,default,keyColorRuleType,string,None
 TableMapFragment,default,keyMapLatCol,string,Location_latitude
 TableMapFragment,default,keyMapLongCol,string,Location_longitude

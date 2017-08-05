@@ -984,6 +984,38 @@
         "type": "string",
         "value": "config/assets/aa_refrigerators_list.html",
         "_row_num": 4
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "unverifiedUserCanCreate",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 5
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "defaultAccessOnCreation",
+        "type": "string",
+        "value": "HIDDEN",
+        "_row_num": 6
+      },
+      {
+        "partition": "FormType",
+        "aspect": "default",
+        "key": "FormType.formType",
+        "type": "string",
+        "value": "SURVEY",
+        "_row_num": 8
+      },
+      {
+        "partition": "SurveyUtil",
+        "aspect": "default",
+        "key": "SurveyUtil.formId",
+        "type": "string",
+        "value": "wrong_form",
+        "_row_num": 9
       }
     ],
     "settings": [
@@ -999,7 +1031,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170724,
+        "value": 20170804,
         "_row_num": 4
       },
       {
@@ -1081,7 +1113,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170724,
+        "value": 20170804,
         "_row_num": 4
       },
       "survey": {
@@ -3107,7 +3139,7 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "refrigerators"
+        "_value": "wrong_form"
       },
       {
         "_partition": "Table",
@@ -3136,6 +3168,20 @@
         "_key": "listViewFileName",
         "_type": "string",
         "_value": "config/assets/aa_refrigerators_list.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "defaultAccessOnCreation",
+        "_type": "string",
+        "_value": "HIDDEN"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "unverifiedUserCanCreate",
+        "_type": "boolean",
+        "_value": "false"
       }
     ]
   }

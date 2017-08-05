@@ -14,8 +14,11 @@ Column,refrigerator_gross_volume,displayName,object,"{""text"":{""default"":""Re
 Column,refrigerator_net_volume,displayName,object,"{""text"":{""default"":""Refrigerator Net Volume"",""es"":""Volumen Neto de Frigorífico""}}"
 Column,refrigerator_picture,displayName,object,"{""text"":{""default"":""Picture"",""es"":""Foto""}}"
 FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,refrigerator_types
+SurveyUtil,default,SurveyUtil.formId,string,wrong_form
 Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/assets/aa_refrigerator_types_detail.html
 Table,default,displayName,object,"{""text"":{""default"":""Refrigerator Types"",""es"":""Modelos de Frigeríficos""}}"
 Table,default,listViewFileName,string,config/assets/aa_refrigerator_types_list.html
+Table,security,defaultAccessOnCreation,string,READ_ONLY
+Table,security,locked,boolean,true
+Table,security,unverifiedUserCanCreate,boolean,false

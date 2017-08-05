@@ -483,6 +483,46 @@
         "type": "string",
         "value": "config/assets/aa_refrigerator_types_list.html",
         "_row_num": 4
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "unverifiedUserCanCreate",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 5
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "defaultAccessOnCreation",
+        "type": "string",
+        "value": "READ_ONLY",
+        "_row_num": 6
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "locked",
+        "type": "boolean",
+        "value": "true",
+        "_row_num": 7
+      },
+      {
+        "partition": "FormType",
+        "aspect": "default",
+        "key": "FormType.formType",
+        "type": "string",
+        "value": "SURVEY",
+        "_row_num": 8
+      },
+      {
+        "partition": "SurveyUtil",
+        "aspect": "default",
+        "key": "SurveyUtil.formId",
+        "type": "string",
+        "value": "wrong_form",
+        "_row_num": 9
       }
     ],
     "settings": [
@@ -520,7 +560,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170719,
+        "value": 20170804,
         "_row_num": 8
       },
       {
@@ -600,7 +640,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170719,
+        "value": 20170804,
         "_row_num": 8
       },
       "english": {
@@ -2160,7 +2200,7 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "refrigerator_types"
+        "_value": "wrong_form"
       },
       {
         "_partition": "Table",
@@ -2189,6 +2229,27 @@
         "_key": "listViewFileName",
         "_type": "string",
         "_value": "config/assets/aa_refrigerator_types_list.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "defaultAccessOnCreation",
+        "_type": "string",
+        "_value": "READ_ONLY"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "locked",
+        "_type": "boolean",
+        "_value": "true"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "unverifiedUserCanCreate",
+        "_type": "boolean",
+        "_value": "false"
       }
     ]
   }
