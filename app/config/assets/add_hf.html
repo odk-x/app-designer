@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="generate_common.js"></script>
+		<script src="formgen_common.js"></script>
+		<script type="text/javascript" src="/coldchain/system/js/odkCommon.js"></script>
+		<script type="text/javascript" src="/coldchain/system/js/odkData.js"></script>
+		<script type="text/javascript" src="/coldchain/system/tables/js/odkTables.js"></script>
+		<link href="generate_index.css" rel="stylesheet" />
+		<script>
+			var go = function go() {
+				var regionLevel1 = document.getElementById("region").selectedOptions[0].getAttribute("data-regionLevel1");
+				var regionLevel2 = document.getElementById("region").selectedOptions[0].value;
+				var group_read_only = "GROUP_REGION_" + regionLevel1.toUpperCase().replace(/ /g, "_");
+				var group_modify = "GROUP_REGION_" + regionLevel2.toUpperCase().replace(/ /g, "_");
+				var defaults = {}
+				defaults["regionLevel1"] = regionLevel1;
+				defaults["regionLevel2"] = regionLevel2;
+				defaults["_group_read_only"] = group_read_only;
+				defaults["_group_modify"] = group_modify;
+				defaults["_group_privileged"] = "GROUP_ADMIN";
+				odkTables.addRowWithSurvey(null, "health_facility", "health_facility", null, defaults);
+			}
+			var save = function save() {
+				var region = document.getElementById("region").selectedOptions[0].value;
+				var type = document.getElementById("type").selectedOptions[0].value;
+				odkCommon.setSessionVariable("add_hf:region", region);
+			}
+			var ol = function ol() {
+				// TODO LOCALIZE!!!
+				document.getElementById("title").innerText = _tu("Add Health Facility");
+				document.getElementById("region_label").innerText = _tu("Select Region");
+				document.getElementById("go").innerText = _tu("Loading...");
+				odkData.arbitraryQuery("health_facility", "SELECT regionLevel1, regionLevel2 FROM health_facility GROUP BY regionLevel2", [], 10000, 0, function success(d) {
+					var sel = document.getElementById("region");
+					sel.addEventListener("blur", save);
+					sel.addEventListener("change", save);
+					for (var i = 0; i < d.getCount(); i++) {
+						var option = document.createElement("option");
+						option.value = d.getData(i, "regionLevel2");
+						option.innerText = _tu(option.value);
+						option.setAttribute("data-regionLevel1", d.getData(i, "regionLevel1"));
+						sel.appendChild(option);
+						if (odkCommon.getSessionVariable("add_hf:region") == option.value) {
+							sel.selectedIndex = i + 1;
+						}
+					}
+					var btn = document.getElementById("go");
+					btn.disabled = false;
+					btn.innerText = _tu("Go!");
+					btn.addEventListener("click", go);
+				}, null); // TODO failure function
+			}
+		</script>
+		<style>
+body {
+	background: url('/coldchain/config/assets/img/hallway.jpg') no-repeat center/cover fixed;
+}
+select {
+	min-width: 50%;
+	background-color: white;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	color: #555;
+	line-height: 1.4;
+	font-size: 20px;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+button:disabled {
+	background-color: grey;
+}
+		</style>
+	</head>
+	<body onLoad='ol();'>
+		<div id="title" class="button"></div>
+		<div id='region_label'></div>
+		<select id='region'></select>
+		<br />
+		<br />
+		<button class="button" disabled id='go'></button>
+	</body>
+</html>

@@ -167,6 +167,10 @@ allowed_tables = [];
 		document.getElementById("add_m_log").disabled = false;
 		document.getElementById("add_m_log").innerText = _tu("Add Maintenance Record");
 		var defaults = {"refrigerator_id": d.getData(0, "refrigerator_id"), "date_serviced": odkCommon.toOdkTimeStampFromDate(new Date())};
+		defaults["_default_access"] = d.getData(0, "_default_access");
+		defaults["_group_read_only"] = d.getData(0, "_group_read_only");
+		defaults["_group_modify"] = d.getData(0, "_group_modify");
+		defaults["_group_privileged"] = d.getData(0, "_group_privileged");
 		document.getElementById("add_m_log").addEventListener("click", function add_m_log() {
 			if (allowed_tables.indexOf("m_logs") >= 0) {
 				var id = newGuid();

@@ -156,6 +156,10 @@ allowed_tables = [];
 			//defaults["regionLevel2"] = d.getData(0, "regionLevel2");
 			//defaults["adminRegion"] = d.getData(0, "admin_region");
 			defaults["refrigerator_id"] = newGuid();
+			defaults["_default_access"] = d.getData(0, "_default_access");
+			defaults["_group_read_only"] = d.getData(0, "_group_read_only");
+			defaults["_group_modify"] = d.getData(0, "_group_modify");
+			defaults["_group_privileged"] = d.getData(0, "_group_privileged");
 			if (allowed_tables.indexOf("refrigerators") >= 0) {
 				var id = newGuid();
 				odkData.addRow("refrigerators", defaults, id, function() {

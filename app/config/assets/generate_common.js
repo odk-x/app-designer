@@ -348,7 +348,7 @@ var formgen_specific_translations = {
 	}},
 	"Unexpected failure": {"text": {
 		"default": true,
-		"es": ""
+		"es": "Errór inesperado"
 	}},
 	"This shouldn't be possible, don't know how to update screen column ": {"text": {
 		"default": true,
