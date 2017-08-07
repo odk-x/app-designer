@@ -41,7 +41,6 @@ Table,default,displayName,object,"{""text"":{""default"":""Health Facility"",""e
 Table,default,listViewFileName,string,config/assets/aa_health_facility_list.html
 Table,default,mapListViewFileName,string,config/assets/hack_for_hf_map.html
 Table,security,defaultAccessOnCreation,string,HIDDEN
-Table,security,locked,boolean,true
 Table,security,unverifiedUserCanCreate,boolean,false
 TableMapFragment,default,keyColorRuleType,string,None
 TableMapFragment,default,keyMapLatCol,string,Location_latitude
