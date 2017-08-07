@@ -618,4 +618,8 @@ var formgen_specific_translations = {
 		"default": true,
 		"es": "Seleccionado"
 	}}
+	"Need at least 6 arguments": {"text": {
+		"default": true,
+		"es": "Se necesita 6 valores para generar una gráfica"
+	}},
 }

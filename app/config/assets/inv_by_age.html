@@ -29,9 +29,9 @@
 				for (var i = 9; i >= 1; i--) {
 					raw += make_part(i, i.toString() + " years")
 				}
-				raw += make_part(0, "This year"); // TODO LOCALIZE
+				raw += make_part(0, "This year");
 				raw += " WHEN year IS NULL THEN 'No records' "
-				raw += " ELSE 'In the future!' END" // TODO LOCALIZE
+				raw += " ELSE 'In the future!' END"
 				return raw
 			}
 			var build = function build() {
@@ -79,7 +79,6 @@
 				odkCommon.setSessionVariable("inv_by_age:source", source);
 			}
 			var ol = function ol() {
-				// TODO LOCALIZE!!!
 				document.getElementById("title").innerText = _tu("Refrigerator Age");
 				document.getElementById("region_label").innerText = _tu("Select Region");
 				document.getElementById("type_label").innerText = _tu("Select Facility Type");
