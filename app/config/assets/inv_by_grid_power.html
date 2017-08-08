@@ -49,8 +49,8 @@
 				document.getElementById("type_label").innerText = _tu("Select Facility Type");
 				document.getElementById("eo_label").innerText = _tu("Only facilities that use grid power");
 				document.getElementById("go").innerText = _tu("Loading...");
-				document.getElementById("region").children[0].innerText = _tu("None");
-				document.getElementById("type").children[0].innerText = _tu("None");
+				document.getElementById("region").children[0].innerText = _tu("Any");
+				document.getElementById("type").children[0].innerText = _tu("Any");
 				odkData.arbitraryQuery("health_facility", "SELECT regionLevel2 FROM health_facility GROUP BY regionLevel2", [], 10000, 0, function success(d) {
 					var sel = document.getElementById("region");
 					sel.addEventListener("blur", save);

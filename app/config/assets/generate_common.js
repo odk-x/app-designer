@@ -616,7 +616,7 @@ var formgen_specific_translations = {
 	}},
 	"Selected Marker": {"text": {
 		"default": true,
-		"es": "Seleccionado"
+		"es": "Marcador Seleccionado"
 	}},
 	"Need at least 6 arguments": {"text": {
 		"default": true,
