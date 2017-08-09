@@ -86,9 +86,6 @@ var update_callback = function update_callback(d) {
 	if (d.getCount() == 0) {
 		ul.innerText = _t("Row not found!");
 	}
-	// pending_media aggregates contentType and uriFragment rows until we have enough information to display them
-	// Right now it depends on the fact that the rows are usually close together in the database
-	var pending_media = {}
 	var temp_colmap = colmap;
 	if (colmap.length == 0) {
 		for (var i = 0; i < d.getColumns().length; i++) {
@@ -104,21 +101,9 @@ var update_callback = function update_callback(d) {
 		// col is the column key, val is the value of that cell in our row
 		var col = found[0];
 		var val = (col === null ? "" : d.getData(0, col));
-		// in the database, you just write the data type "picture" and the column name "some_name", and odk expands
-		// that into two different columns, some_name_uriFragment and some_name_contentType
-		// xlscol will hold "some_name" in the example above
-		var xlscol = (col === null ? "" : col);
-		// If we found a uriFragment or contentType we should check to see if we have both of them yet, this variable notes that
-		var checkMedia = false;
-		var split = xlscol.split("_")
-		// If we have a uriFragment or contentType, store the value and set the checkMedia flag
-		if (["contentType", "uriFragment"].indexOf(split[split.length - 1]) >= 0) {
-			var tail_fragment = split[split.length - 1];
-			xlscol = split.reverse().slice(1).reverse().join("_")
-			pending_media[tail_fragment] = val;
-			checkMedia = true;
-		}
-		// If it's the main column (to be displayed in ibg letters at the top), put it in the header instead
+		// If we found a column that isn't in the database, it might be a picture, so check that
+		var checkMedia = d.getColumns().indexOf(col) < 0;
+		// If it's the main column (to be displayed in big letters at the top), put it in the header instead
 		var li = null;
 		if (col == main_col) {
 			li = document.getElementById("main-col")
@@ -131,10 +116,10 @@ var update_callback = function update_callback(d) {
 		// If it's media, like a picture or video, it'll be a dom element, so this will be set to "element"
 		var is_html = "text";
 		if (checkMedia) {
-			if (typeof(pending_media["contentType"]) == "string" && typeof(pending_media["uriFragment"]) == "string" /* check that they're not null/undefined */) {
+			if (d.getColumns().indexOf(col + "_uriFragment") >= 0 && d.getColumns().indexOf(col + "_contentType") >= 0) {
 				is_html = "element";
-				var type = pending_media["contentType"].split("/")[0];
-				var src = odkCommon.getRowFileAsUrl(table_id, row_id, pending_media["uriFragment"]);
+				var type = d.getData(0, col + "_contentType").split("/")[0];
+				var src = odkCommon.getRowFileAsUrl(table_id, row_id, d.getData(0, col + "_uriFragment"));
 				if (type == "audio" || type == "video") {
 					var elem = document.createElement(type);
 					var source = document.createElement("source");
@@ -146,23 +131,20 @@ var update_callback = function update_callback(d) {
 					elem.src = src;
 					val = elem;
 				} else {
-					alert("unknown content type for column " + xlscol);
+					alert("unknown content type for column " + col);
 				}
-				pending_media = {}
 			} else {
 				continue;
 			}
 		} 
-		//if (col === null) {
-			//li.appendChild(make_li(xlscol, "", _tu(found[1]), "html"));
-		/*} else*/ if (typeof(found[1]) == "string") {
-			li.appendChild(make_li(xlscol, _tu(found[1]), _tc(d, col, val), "html"));
+		if (typeof(found[1]) == "string") {
+			li.appendChild(make_li(col, _tu(found[1]), _tc(d, col, val), "html"));
 		} else if (found[1] === true) {
-			li.appendChild(make_li(xlscol, displayCol(col, metadata, table_id), pretty(_tc(d, col, val)), "text"));
+			li.appendChild(make_li(col, displayCol(col, metadata, table_id), pretty(_tc(d, col, val)), "text"));
 		} else if (found[1] === false) {
-			li.appendChild(make_li(xlscol, displayCol(col, metadata, table_id), _tc(d, col, val), "text"));
+			li.appendChild(make_li(col, displayCol(col, metadata, table_id), _tc(d, col, val), "text"));
 		} else {
-			li.appendChild(make_li(xlscol, "", found[1](li, val, d), "html"));
+			li.appendChild(make_li(col, "", found[1](li, val, d), "html"));
 		}
 		if (col != main_col) {
 			ul.appendChild(li);
