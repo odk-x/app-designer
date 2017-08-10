@@ -186,7 +186,7 @@ var clear_cached_d_and_update = function clear_cached_d_and_update() {
 	update();
 }
 var edit = function() {
-	if (allowed_tables.indexOf(table_id) >= 0){ 
+	if (allowed_tables.indexOf(table_id) >= 0) {
 		odkTables.launchHTML({}, "config/assets/formgen/" + table_id + "#" + row_id);
 	} else {
 		odkTables.editRowWithSurvey({}, table_id, row_id, table_id, null, null);
