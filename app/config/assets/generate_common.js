@@ -348,7 +348,7 @@ var formgen_specific_translations = {
 	}},
 	"Unexpected failure": {"text": {
 		"default": true,
-		"es": ""
+		"es": "Errór inesperado"
 	}},
 	"This shouldn't be possible, don't know how to update screen column ": {"text": {
 		"default": true,
@@ -613,5 +613,13 @@ var formgen_specific_translations = {
 	"Finalizing...": {"text": {
 		"default": true,
 		"es": "Finalizando..."
+	}},
+	"Selected Marker": {"text": {
+		"default": true,
+		"es": "Marcador Seleccionado"
+	}},
+	"Need at least 6 arguments": {"text": {
+		"default": true,
+		"es": "Se necesita 6 valores para generar una gráfica"
 	}},
 }

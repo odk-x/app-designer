@@ -64,7 +64,7 @@ var customJsOl = function customJsOl() {
 	add.addEventListener("click", function() {
 		alert("TODO"); // CACHED_D DOESN'T EXIST THIS IS A LIST VIEW
 		var id = newGuid();
-		odkData.addRow("geopoints", {"client_id": cached_d.getData(0, "client_id", "_id": id)}
+		odkData.addRow("geopoints", {"client_id": cached_d.getData(0, "client_id"), "_id": id})
 		odkTables.launchHTML(null, "config/assets/formgen/geopoints/index.html#" + id);
 	});
 	var map = document.createElement("button");

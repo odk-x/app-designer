@@ -31,8 +31,7 @@ var parseReallyDirtyInt = function parseReallyDirtyInt(val) {
 var ol = function ol() {
 	var split = window.location.hash.substr(1).split("/");
 	if (split.length < 6) {
-		// TODO localize
-		alert("Need at least 6 arguments");
+		alert(_t("Need at least 6 arguments"));
 	}
 	type = split[0];
 	table_id = split[1];

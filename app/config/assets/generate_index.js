@@ -88,7 +88,8 @@ var doMenu = function doMenu() {
 	// len is the number of buttons to put on the screen
 	var len = submenu[2].length;
 	var adjusted_len = len;
-	if (screen.height <= 640) adjusted_len += 4
+	//if (screen.height <= 640) adjusted_len += 4
+	if (window.innerHeight <= 640) adjusted_len += 4
 	for (var i = 0; i < len; i++) {
 		// the triplet that represents the button
 		var triplet = submenu[2][i];

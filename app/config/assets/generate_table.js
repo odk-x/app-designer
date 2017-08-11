@@ -49,6 +49,10 @@ var global_static = false;
 var global_static_args = false;
 var global_human_readable_what = false;
 
+// Used for caching, progressively cache a smaller displays width as the user needs more and more buttons
+// If we get to the bottom and only the "edit" button has ever been shown, then the displays will have a wider width
+// than if we get to the bottom and both the edit and delete buttons have been shown
+var runningButtonsToShow = 0;
 
 // Helper function to add a row with formgen or survey. If the table is in allowed_tables it opens
 // with formgen, otherwise survey
@@ -419,7 +423,7 @@ var doSearch = function doSearch() {
 			newtext += _t(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, global_where_clause.split(" ")[0], false, metadata, table_id) + _t(" is ") + _tc(d, where_col, global_where_arg);
 		}
 		if (global_human_readable_what) {
-			hrw = _tu(global_human_readable_what);
+			var hrw = _tu(global_human_readable_what);
 			for (var i = 0; i < global_static_args.length; i++) {
 				hrw = hrw.replace("?", global_static_args[i]);
 			}
@@ -528,7 +532,11 @@ var doSearch = function doSearch() {
 					}
 				});
 				_delete.addEventListener("click", function() {
-					if (!confirm(_t("Please confirm deletion of row ") + d.getData(i, "_id"))) {
+					var to_display = d.getData(i, display_col)
+					if (display_col_wrapper != null) {
+						to_display = display_col_wrapper(d, i, to_display);
+					}
+					if (!confirm(_t("Please confirm deletion of row ") + to_display)) {
 						return;
 					}
 					odkData.deleteRow(table_id, null, d.getData(i, "_id"), function(d) {
@@ -539,13 +547,16 @@ var doSearch = function doSearch() {
 				});
 			})(edit, _delete, i, d);
 			// show edit button only if we can edit the row
+			var buttonsShown = 0;
 			var access = d.getData(i, "_effective_access") || ""
 			if (access.indexOf("w") >= 0) {
 				buttons.appendChild(edit);
+				buttonsShown++;
 			}
 			// show delete button only if we can delete the row
 			if (access.indexOf("d") >= 0) {
 				buttons.appendChild(_delete);
+				buttonsShown++;
 			}
 			// If we're in a group by view, don't show edit/delete buttons
 			if (!global_group_by) {
@@ -573,7 +584,8 @@ var doSearch = function doSearch() {
 			}
 			li.style.lineHeight = global_line_height;
 			// This makes it so if you click anywhere on the row other than the buttons, it opens a detail view
-			if (global_displays_width == null) {
+			if (global_displays_width == null || buttonsShown > runningButtonsToShow) {
+				runningButtonsToShow = buttonsShown;
 				global_displays_width = (li.clientWidth - buttons.clientWidth - 10).toString() + "px";
 			}
 			displays.style.width = global_displays_width;
@@ -634,7 +646,7 @@ var groupBy = function groupBy() {
 // This is called when the user selects a group by option
 var groupByGo = function groupByGo() {
 	var go = true;
-	if (embedded) go = false;
+	if (embedded) return; // don't navigate away inside app designer
 	if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
 		go = false;
 	} else {
