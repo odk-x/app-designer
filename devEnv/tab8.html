@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+	<head>
+		<script>
+		  var files = [];
+		  var ol = function ol() {
+		    redrawLeft();
+		    redrawRight();
+		  }
+		  var redrawLeft = function redrawLeft() {
+		    var left = document.getElementById("left")
+		    left.innerHTML = ""
+		    for (var i = 0; i < files.length; i++) {
+		      var button = document.createElement("input")
+		      button.type = "radio";
+		      var id = "files-" + i.toString();
+		      button.id = id;
+		      button.name = id;
+		      button.setAttribute("data-filename", files[i][0]);
+		      button.addEventListener("change", saveAndRedrawRight);
+		      var label = document.createElement("label")
+		      label.setAttribute("for", id);
+		      label.innerText = files[i][0];
+		      left.appendChild(button)
+		      left.appendChild(label)
+		      left.appendChild(document.createElement("br"))
+		    }
+		  }
+		  var redrawRight = function redrawRight(file) {
+		    var fields = []
+		    if (file[1] == "table") {
+		      fields = ["HTML", "CSS", "Js On Load", "Js Search", "Js Generic"];
+		    } else if (file[1] == "detail") {
+		      fields = ["HTML", "CSS", "Js On Load", "Js Generic"];
+		    } else if (file[1] == "index") {
+		      fields = ["Js", "CSS"];
+		    } else if (file[1] == "tabs") {
+		      fields = ["Js", "CSS"];
+		    } else if (file[1] == "graph") {
+		      fields = ["CSS", "Js"];
+		    }
+		    var right = document.getElementById("right");
+		    for (var i = 0; i < fields; i++) {
+		      var label = document.createTextNode(fields[i]);
+		      var box = document.createElement("textentry") // TODO
+		    }
+		  }
+		  var getRight = function getRight() {
+		    // TODO
+		  }
+		  var saveAndRedrawRight = function saveAndRedrawRight() {
+		    getRight();
+		    var left = document.getElementById("left")
+		    var elems = left.getElementsByTagName("input")
+		    for (var i = 0; i < elems.length; i++) {
+		      if (elems[i].checked) {
+			for (var j = 0; j < files.length; j++) {
+			  if (files[j][0] == elems[i].getAttribute("data-filename")) {
+			    redrawRight(files[j]);
+			    return;
+			  }
+			}
+		      }
+		    }
+		    alert("Filename not found in left");
+		  }
+		  var addFile = function addFile(filename, type) {
+		    files = files.concat(0)
+		    files[files.length - 1] = [filename, type]
+		    if (type == "table") {
+		      files[files.length - 1] = files[files.length - 1].concat(["", "", "", "", ""]) // customHtml, customCss, customJsOl, customJsSearch, customJsGeneric
+		    }
+		    if (type == "detail") {
+		      files[files.length - 1] = files[files.length - 1].concat(["", "", "", ""]) // customHtml, customCss, customJsOl, customJsGeneric
+		    }
+		    if (type == "index") {
+		      files[files.length - 1] = files[files.length - 1].concat(["", ""]) // customJs, customCss
+		    }
+		    if (type == "tabs") {
+		      files[files.length - 1] = files[files.length - 1].concat(["", ""]) // customJs, customCss
+		    }
+		    if (type == "graph") {
+		      files[files.length - 1] = files[files.length - 1].concat(["", ""]) // customCss, customJs
+		    }
+		  }
+		</script>
+	</head>
+	<body onLoad='ol();'>
+	  <div id="left">
+	  </div>
+	  <div id="right">
+	  </div>
+	</body>
+</html>
+
