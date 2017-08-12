@@ -38,12 +38,13 @@ var make_query = function make_query(search, apply_where, for_total, cols_to_sel
 		join = global_join;
 	}
 	var from = " FROM " + table_id;
+	join = join.length > 0 ? " JOIN " + join : ""
 	if (!apply_where) {
 		from = "";
 		where = null;
+		join = ""
 	}
 	where = where != null ? " WHERE " + where : ""
-	join = join.length > 0 ? " JOIN " + join : ""
 	var raw = "SELECT " + cols_to_select + from + join + where
 	console.log(raw);
 	return [raw, query_args];

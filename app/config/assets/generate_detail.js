@@ -148,7 +148,7 @@ var update_callback = function update_callback(d) {
 		if ("pretty_column" in found && found["pretty_column"] === false) {
 			pretty_col = col;
 		} else {
-			pretty_col = displayCol(col, metadata, table_id);
+			pretty_col = col == null ? "" : displayCol(col, metadata, table_id);
 		}
 		if ("display_name" in found) {
 			pretty_col = found["display_name"];
