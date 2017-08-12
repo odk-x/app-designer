@@ -47,17 +47,17 @@ var customJsOl = function customJsOl() {
 	main_col = "client_id";
 	table_id = "geopoints";
 	colmap = [
-		["client_id", function(e, c, d) { return c }],
-		["transportation_mode", function(e, c, d) {
+		{"column": "client_id", "callback": function(e, c, d) { return c; }},
+		{"column": "transportation_mode", "callback": function(e, c, d) {
 			if (c == null) c = d.getData(0, "transportation_mode_other")
 			return "MODE OF TRANSPORTATION: " + c;
-		}],
-		["description", "DESCRIPTION"],
-		["coordinates_latitude", function(e, c, d) {
+		}},
+		{"column": "description", "display_name": "DESCRIPTION"},
+		{"column": "coordinates_latitude", "callback": function(e, c, d) {
 		 	return "COORDINATES: " + c + " " + d.getData(0, "coordinates_longitude");
-		 }],
-	];
-	var newInstance = function(table, form) {
+		}}
+	]
+	var newinstance = function(table, form) {
 		if (form == table) form = "index";
 		odkTables.launchHTML(null, "config/assets/formgen/" + table + "/" + form + ".html#" + newGuid());
 	};

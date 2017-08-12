@@ -52,10 +52,17 @@ var customJsOl = function customJsOl() {
 		return extras.join(", ");
 	}
 	display_subcol = [["Origin: ", "Origin", true], [extras_cb, "_id", true]];
+
+	display_subcol = [
+		{"column": "Origin", "display_name": "Origin: ", "newline": true},
+		{"column": "_id", "callback": extras_cb, "newline": true}
+	]
 	display_col = "Name";
 	table_id = "Tea_types";
 	allowed_group_bys = [
-		"Origin", "Caffeinated", "Fermented"
+		{"column": "Origin"},
+		{"column": "Caffeinated"},
+		{"column": "Fermented"}
 	]
 
 }

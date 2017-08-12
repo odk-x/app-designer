@@ -45,7 +45,7 @@ var getMetadataAndThen = function getMetadata(table, callback) {
 var make_submenu = function make_submenu(menu_path) {
 	var submenu = menu;
 	for (var i = 0; i < menu_path.length; i++) {
-		submenu = submenu[2][menu_path[i]];
+		submenu = submenu["contents"][menu_path[i]];
 	}
 	return submenu;
 }
@@ -55,19 +55,14 @@ var make_submenu = function make_submenu(menu_path) {
 var buttonClick = function doButtonClick(path) {
 	// first get the submenu that the button represents
 	// Don't want to actually change menu_path because if we open a html view or something and then the activity DOESN'T get destroyed and recreated when we return, menu_path will be pointed into a string and the whole thing will get fucked up
-	var submenu = make_submenu(menu_path)[2][Number(path)];
+	var submenu = make_submenu(menu_path)["contents"][Number(path)];
 	// _html should launch a page
-	if (submenu[1] == "_html") {
-		odkTables.launchHTML(null, submenu[2]);
-	} else if (submenu[1] == "_js") {
-		submenu[2]();
+	if (submenu["type"] == "html") {
+		odkTables.launchHTML(null, submenu["page"]);
+	} else if (submenu["type"] == "js") {
+		submenu["function"]();
 	} else {
-		// if the third thing is a string, it should be appended to the end of a hash for a list view and then launch the list view
-		if (typeof(submenu[2]) == "string") {
-			var listview = list_views[submenu[1]]
-			if (listview == undefined) listview = "config/assets/table.html"
-			odkTables.launchHTML(null, listview + "#" + submenu[1] + "/" + submenu[2]);
-		} else {
+		if (submenu["type"] == "menu") {
 			// otherwise it's a submenu. Construct a new hash with our current menu path and open it
 			menu_path = menu_path.concat(Number(path));
 			var new_hash = "#";
@@ -75,6 +70,18 @@ var buttonClick = function doButtonClick(path) {
 				new_hash += menu_path[i] + "/";
 			}
 			odkTables.launchHTML(null, clean_href() + new_hash);
+		} else {
+			var listview = list_views[submenu["table"]];
+			if (listview == undefined) listview = "config/assets/table.html"
+			if (submenu["type"] == "list_view") {
+				odkTables.launchHTML(null, listview + "#" + submenu["table"]);
+			} else if (submenu["type"] == "group_by") {
+				odkTables.launchHTML(null, listview + "#" + submenu["table"] + "/" + submenu["grouping"]);
+			} else if (submenu["type"] == "collection") {
+				odkTables.launchHTML(null, listview + "#" + submenu["table"] + "/" + submenu["column"] + " = ?/" + submenu["value"]);
+			} else if (submenu["type"] == "static") {
+				odkTables.launchHTML(null, listview + "#" + submenu["table"] + "/STATIC/" + submenu["query"] + "/" + JSON.stringify(submenu["args"]) + "/" + submenu["explanation"]);
+			}
 		}
 	}
 }
@@ -84,27 +91,27 @@ var doMenu = function doMenu() {
 	document.getElementById("list").innerHTML = "";
 	var submenu = make_submenu(menu_path);
 	// Set the title of the page
-	document.getElementById("title").innerHTML = _tu(submenu[0]);
+	document.getElementById("title").innerHTML = _tu(submenu["label"]);
 	// len is the number of buttons to put on the screen
-	var len = submenu[2].length;
+	var len = submenu["contents"].length;
 	var adjusted_len = len;
 	//if (screen.height <= 640) adjusted_len += 4
 	if (window.innerHeight <= 640) adjusted_len += 4
 	for (var i = 0; i < len; i++) {
 		// the triplet that represents the button
-		var triplet = submenu[2][i];
+		var triplet = submenu["contents"][i];
 		var button = document.createElement("button");
 		// If they passed in a literal true for the text, set the text to "By " + the translated column name
-		if (triplet[0] === true) {
+		if (!("label" in triplet)) {
 			button.innerText = _t("Loading...");
 			(function(button, triplet) {
-				getMetadataAndThen(triplet[1], function(this_table_metadata) {
-					button.innerText = _t("By ") + displayCol(triplet[2], this_table_metadata, triplet[1]);
+				getMetadataAndThen(triplet["table"], function(this_table_metadata) {
+					button.innerText = _t("By ") + displayCol(triplet["grouping"], this_table_metadata, triplet["table"]);
 				});
 			})(button, triplet);
 		} else {
 			// Otherwise just set the button text to the text they specified
-			button.innerText = _tu(triplet[0]);
+			button.innerText = _tu(triplet["label"]);
 		}
 		button.classList.add("button");
 		// If we have a lot of buttons, make the buttons smaller

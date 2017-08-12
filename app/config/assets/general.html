@@ -31,12 +31,12 @@ body {
 			odkTables.launchHTML(null, "config/assets/formgen/"+table+"#" + id);
 		}
 	}
-	menu = ["Example Form", null, [
-		["New Instance", "_js", newinstance("exampleForm")],
-		["View Responses", "exampleForm", ""],
-		["Custom prompt types", "_js", newinstance("datesTest")],
-		["ETHIOPIA", "_js", newinstance("Ethiopia_household")]
-	]]
+	menu = {"label": "Example Form", "type": "menu", "contents": [
+		{"label": "New Instance", "type": "js", "function": newinstance("exampleForm")},
+		{"label": "View Responses", "type": "list_view", "table": "exampleForm"},
+		{"label": "Custom prompt types", "type": "js", "function": newinstance("datesTest")},
+		{"label": "ETHIOPIA", "type": "js", "function": newinstance("Ethiopia_household")},
+	]}
 
 			// END CONFIG
 		</script>

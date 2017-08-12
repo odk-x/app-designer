@@ -66,7 +66,12 @@ var customJsOl = function customJsOl() {
 		["age", "AGE"],
 		["randomization", "RANDOMIZATION"]
 	];
-	var newInstance = function(table, form) {
+	colmap = [
+		{"column": "client_id", callback: function(e, c, d) { return c; }},
+		{"column": "age", "display_name": "AGE"},
+		{"column": "randomization", "display_name": "RANDOMIZATION"},
+	];
+	var newinstance = function(table, form) {
 		if (form == table) form = "index";
 		odkTables.launchHTML(null, "config/assets/formgen/" + table + "/" + form + ".html#" + newGuid());
 	};
@@ -92,11 +97,11 @@ var customJsOl = function customJsOl() {
 
 	<button disabled class='title-button'>Client Forms</button>
 		<button onClick='homeLocator();' class='smaller-button'>Home Locator</button>
-		<button onClick='newInstance("femaleClients", "client6Week");' class='smaller-button'>Six Week Follow-Up</button>
-		<button onClick='newInstance("femaleClients", "client6Month");' class='smaller-button'>Six Month Follow-Up</button>
+		<button onClick='newinstance("femaleClients", "client6Week");' class='smaller-button'>Six Week Follow-Up</button>
+		<button onClick='newinstance("femaleClients", "client6Month");' class='smaller-button'>Six Month Follow-Up</button>
 	<button disabled class='title-button'>Partner Forms</button>
-		<button onClick='newInstance("maleClients", "screenPartner");' class='smaller-button'>Partner Screening</button>
-		<button onClick='newInstance("maleClients", "partner6Month");' class='smaller-button'>Six Month Follow-Up</button>
+		<button onClick='newinstance("maleClients", "screenPartner");' class='smaller-button'>Partner Screening</button>
+		<button onClick='newinstance("maleClients", "partner6Month");' class='smaller-button'>Six Month Follow-Up</button>
 
 	</body>
 </html>

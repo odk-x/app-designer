@@ -74,7 +74,7 @@ var customJsOl = function customJsOl() {
 	}
 	global_cols_to_select = "visit.*, plot.plot_name AS plot_name";
 	global_join = "plot ON plot._id = visit.plot_id";
-	display_subcol = [["", "plot_name", true]];
+	display_subcol = [{"column": "plot_name"}];
 	table_id = "visit";
 
 }

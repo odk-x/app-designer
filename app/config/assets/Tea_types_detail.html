@@ -66,6 +66,13 @@ var customJsOl = function customJsOl() {
 		["Caffeinated", check("Caffeinated")],
 		["Fermented", check("Fermented")],
 	]
+	colmap = [
+		{"column": "Name", "callback": function(e, c, d) { return c; }},
+		{"column": "Origin", "callback": br("Origin", "<br /><br />Details:")},
+		{"column": "Caffeinated", "callback": check("Caffeinated")},
+		{"column": "Fermented", "callback": check("Fermented")}
+	]
+
 
 }
 

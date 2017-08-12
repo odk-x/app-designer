@@ -48,7 +48,11 @@ var customJsOl = function customJsOl() {
 		return "Planting " + planting.toLowerCase() + " corn"
 	}
 	display_col = "plot_name";
-	display_subcol = [[planting_cb, "planting", false], [", ","plot_size", false], [" hectares", null, true]];
+	display_subcol = [
+		{"column": "planting", "callback": planting_cb, "newline": false},
+		{"column": "plot_size", "display_name": ", ", "newline": false},
+		{"display_name": " hectares", "newline": true},
+	]
 	table_id = "plot";
 
 	forMapView = true;

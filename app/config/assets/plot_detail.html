@@ -95,16 +95,16 @@ var customJsOl = function customJsOl() {
 	global_which_cols_to_select = "plot.*, COUNT(*) AS num_visits"
 	global_join = "visit ON plot._id = visit.plot_id"
 	colmap = [
-		["plot_name", function(e, c, d) { return c }],
-		["location_latitude", "Latitude: "],
-		["location_longitude", br("Longitude")],
-		["planting", "Crop: "],
-		["num_visits", function(e, c, d) {
+		{"column": "plot_name", "callback": function(e, c, d) { return c; }},
+		{"column": "location_latitude", "display_name": "Latitude: "},
+		{"column": "location_longitude", "callback": br("Longitude")},
+		{"column": "planting", "display_name": "Crop: "},
+		{"column": "num_visits", "callback": function(e, c, d) {
 			num = Number(c);
 			return "<span style=\"color: blue; text-decoration: underline;\" onClick='openVisits(\""+d.getData(0, 'plot_name')+"\")'>" + c + " visit" + (num == 1 ? "" : "s") + "</span>";
-		}],
-		[null, function(e, c, d) { return makeIframe(); }],
-		[null, function(e, c, d) { return makeButtons(); }],
+		}},
+		{"callback": makeIframe},
+		{"callback": makeButtons},
 	]
 	document.getElementById("header").id = "title"
 

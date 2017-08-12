@@ -46,10 +46,20 @@ var customJsOl = function customJsOl() {
 	global_join = "Tea_houses ON Tea_houses._id = Tea_inventory.House_id JOIN Tea_types ON Tea_types._id = Tea_inventory.Type_id"
 	global_which_cols_to_select = "*, Tea_types.Name AS ttName, Tea_houses.Name AS thName, Tea_inventory.Name AS tiName"
 	display_subcol = [["Tea House: ", "thName", true], ["Type: ", "ttName", true]];
+
+	display_subcol = [
+		{"column": "thName", "display_name": "Tea House: ", "newline": true},
+		{"column": "ttName", "display_name": "Type: ", "newline": true}
+	]
 	display_col = "tiName";
 	table_id = "Tea_inventory";
 	allowed_group_bys = [
-		["thName", "House"], ["ttName", "Type"], "Iced", "Hot", "Bags", "Loose_Leaf"
+		{"column": "thName", "display_name": "House"},
+		{"column": "ttName", "display_name": "Type"},
+		{"column": "Iced"},
+		{"column": "Hot"},
+		{"column": "Bags"},
+		{"column": "Loose_Leaf"}
 	]
 
 }

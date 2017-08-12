@@ -31,10 +31,10 @@ body {
 		var id = newGuid();
 		odkTables.launchHTML(null, "config/assets/formgen/selects#" + id);
 	}
-	menu = ["Selects Demo", null, [
-		["New Instance", "_js", newinstance],
-		["View Responses", "selects", ""]
-	]]
+	menu = {"label": "Selects Demo", "type": "menu", "contents": [
+		{"label": "New Instance", "type": "js", "function": function() { newinstance("selects"); }},
+		{"label": "View Responses", "type": "list_view", "table": "selects"},
+	]}
 
 			// END CONFIG
 		</script>

@@ -55,6 +55,10 @@ var customJsOl = function customJsOl() {
 		return "Transportation: " + c;
 	}
 	display_subcol = [["Step: ", "step", true], [transpo, "transportation_mode", true]];
+	display_subcol = [
+		{"column": "step", "display_name": "Step: ", "newline": true},
+		{"column": "transportation_mode", "callback": transpo, "newline": true}
+	]
 	table_id = "geopoints";
 
 	var add = document.createElement("button");

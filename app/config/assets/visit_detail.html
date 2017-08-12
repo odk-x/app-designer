@@ -66,25 +66,25 @@ var customJsOl = function customJsOl() {
 	global_which_cols_to_select = "visit.*, plot.plot_name AS plot_name"
 	global_join = "plot ON plot._id = visit.plot_id"
 	colmap = [
-		["date", function(e, c, d) { return "Visit on " + c.split("T")[0]; }],
-		["plot_name", true],
-		["plant_height", br("Plant height", "cm")],
-		["plant_health", function(e, c, d) {
+		{"column": "date", "callback": function(e, c, d) { return "Visit on " + c.split("T")[0]; }},
+		{"column": "plot_name"},
+		{"column": "plant_height", "callback": br("Plant height", "cm")},
+		{"column": "plant_health", "callback": function(e, c, d) {
 			var retVal = "<b>Plant Health</b>:<br />";
 			retVal += check("Good", function(e, c, d) { return selected(c, "good"); }, "radio")(e, c, d) + "<br />";
 			retVal += check("Fair", function(e, c, d) { return selected(c, "fair"); }, "radio")(e, c, d) + "<br />";
 			retVal += check("Bad", function(e, c, d) { return selected(c, "bad"); }, "radio")(e, c, d);
 			return retVal;
-		}],
-		["soil", function(e, c, d) {
+		}},
+		{"column": "soil", "callback": function(e, c, d) {
 			var retVal = "<b>Soil</b>: <br />";
 			retVal += check("Medium Sand", function(e, c, d) { return selected(c, "medium_sand"); }, "radio")(e, c, d) + "<br />";
 			retVal += check("Fine Sand", function(e, c, d) { return selected(c, "fine_sand"); }, "radio")(e, c, d) + "<br />";
 			retVal += check("Sandy Loam", function(e, c, d) { return selected(c, "sandy_loam"); }, "radio")(e, c, d) + "<br />";
 			retVal += check("Loam", function(e, c, d) { return selected(c, "loam"); }, "radio")(e, c, d);
 			return retVal;
-		}],
-		["pests", function(e, c, d) {
+		}},
+		{"column": "pests", "callback": function(e, c, d) {
 			var retVal = "<b>Pests</b>: <br />"
 			retVal += check("Earworm", function(e, c, d) { return selected(c, "earworm"); })(e, c, d) + "<br />";
 			retVal += check("Stink Bug", function(e, c, d) { return selected(c, "stink_bug"); })(e, c, d) + "<br />";
@@ -92,8 +92,8 @@ var customJsOl = function customJsOl() {
 			retVal += check("Cutworm", function(e, c, d) { return selected(c, "cutworm"); })(e, c, d) + "<br />";
 			retVal += "<h3>Observations: </h3>"
 			return retVal;
-		}],
-		["observations", function(e, c, d) { return c; }],
+		}},
+		{"column": "observations", "callback": function(e, c, d) { return c; }}
 	]
 
 }

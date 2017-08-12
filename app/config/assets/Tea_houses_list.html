@@ -49,10 +49,23 @@ var customJsOl = function customJsOl() {
 	global_join = "Tea_types ON Tea_types._id = Tea_houses.Specialty_Type_id"
 	global_which_cols_to_select = "*, Tea_types.Name AS ttName, Tea_houses.Name AS thName"
 	display_subcol = [["Specialty: ", "ttName", true], ["", "District", false], [", ", "Neighborhood", true]];
+
+	display_subcol = [
+		{"column": "ttName", "display_name": "Specialty: ", "newline": true},
+		{"column": "District", "newline": false},
+		{"column": "Neighborhood", "display_name": ", ", "newline": true}
+	]
 	display_col = "thName";
 	table_id = "Tea_houses";
 	allowed_group_bys = [
-		"District", "Neighborhood", "State", "WiFi", "Hot", "Iced", "State", ["ttName", "Specialty"]
+		{"column": "District"},
+		{"column": "Neighborhood"},
+		{"column": "State"},
+		{"column": "WiFi"},
+		{"column": "Hot"},
+		{"column": "Iced"},
+		{"column": "State"},
+		{"column": "ttName", "display_name": "Specialty"},
 	]
 
 }

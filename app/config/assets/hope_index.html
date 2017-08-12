@@ -65,11 +65,11 @@
 	list_views = {
 		"femaleClients": "config/assets/femaleClients_list.html"
 	}
-	menu = ["Hope Study" + "<br />xlsx not copied over yet, nothing will work", null, [
-		["Screen Female Client", "_js", newinstance("femaleClients", "screenClient")],
-		["Follow Up with Existing Client", "femaleClients", ""],
-		["Send Data", "_js", send]
-	]]
+	menu = {"label": "Hope Study" + "<br />xlsx not copied over yet, nothing will work", "type": "menu", "contents": [
+		{"label": "Screen Female Client", "type": "js", "function": newinstance("femaleClients", "screenClient")},
+		{"label": "Follow Up with Exsting Client", "type": "list_view", "table": "femaleClients"},
+		{"label": "Send Data", "type": "js", "function": send}
+	]};
 
 			// END CONFIG
 		</script>

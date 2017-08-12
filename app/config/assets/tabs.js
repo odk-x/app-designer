@@ -1,7 +1,7 @@
 var idx = 0;
 var loadCallback = function loadCallback() {
-	if (tabs[idx] && tabs[idx][2]) {
-		tabs[idx][2](document.getElementById("iframe"));
+	if (tabs[idx] && "callback" in tabs[idx]) {
+		tabs[idx]["callback"](document.getElementById("iframe"));
 	}
 }
 var ol = function ol() {
@@ -14,7 +14,7 @@ var ol = function ol() {
 	for (var i = 0; i < tabs.length; i++) {
 		var tab = document.createElement("span");
 		tab.classList.add("tab");
-		tab.innerText = _tu(tabs[i][0]);
+		tab.innerText = _tu(tabs[i]["title"]);
 		(function (tab, i) {
 			tab.addEventListener("click", function() {
 				odkCommon.setSessionVariable("idx", i);
@@ -23,7 +23,7 @@ var ol = function ol() {
 		})(tab, i);
 		if (i == idx) {
 			tab.classList.add("tab-selected");
-			iframe.src = tabs[i][1];
+			iframe.src = tabs[i]["file"];
 		}
 		tabs_div.appendChild(tab);
 	}
