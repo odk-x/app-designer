@@ -15,31 +15,7 @@ body {
 }
 
 		</style>
-		<script>
-			var metadata = {};
-			var list_views = {};
-			var menu = ["Empty menu!", null, []];
-			// BEGIN CONFIG
-			
-	list_views = {
-		"exampleForm": "config/assets/example_list.html",
-		"datesTest": "config/assets/table.html"
-	}
-	var newinstance = function newinstance(table) {
-		return function() {
-			var id = newGuid();
-			odkTables.launchHTML(null, "config/assets/formgen/"+table+"#" + id);
-		}
-	}
-	menu = {"label": "Example Form", "type": "menu", "contents": [
-		{"label": "New Instance", "type": "js", "function": newinstance("exampleForm")},
-		{"label": "View Responses", "type": "list_view", "table": "exampleForm"},
-		{"label": "Custom prompt types", "type": "js", "function": newinstance("datesTest")},
-		{"label": "ETHIOPIA", "type": "js", "function": newinstance("Ethiopia_household")},
-	]}
-
-			// END CONFIG
-		</script>
+		<script type="text/javascript" src="userjs/aea35922-4709-8e9b-82e30f443fb8.js"></script>
 		<script src="generate_index.js"></script>
 	</head>
 	<body onLoad='ol();'>

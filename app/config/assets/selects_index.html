@@ -18,26 +18,7 @@ body {
 }
 
 		</style>
-		<script>
-			var metadata = {};
-			var list_views = {};
-			var menu = ["Empty menu!", null, []];
-			// BEGIN CONFIG
-			
-	list_views = {
-		"selects": "config/assets/selects_list.html"
-	}
-	var newinstance = function newinstance() {
-		var id = newGuid();
-		odkTables.launchHTML(null, "config/assets/formgen/selects#" + id);
-	}
-	menu = {"label": "Selects Demo", "type": "menu", "contents": [
-		{"label": "New Instance", "type": "js", "function": function() { newinstance("selects"); }},
-		{"label": "View Responses", "type": "list_view", "table": "selects"},
-	]}
-
-			// END CONFIG
-		</script>
+		<script type="text/javascript" src="userjs/ad566c7b-42f8-a622-c14683cfbc40.js"></script>
 		<script src="generate_index.js"></script>
 	</head>
 	<body onLoad='ol();'>
