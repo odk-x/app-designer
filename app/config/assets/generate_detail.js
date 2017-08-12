@@ -92,14 +92,21 @@ var update_callback = function update_callback(d) {
 			var col = d.getColumns()[i]
 			if (col.substr(0, 1) == "_") continue
 			temp_colmap = temp_colmap.concat(0);
-			temp_colmap[temp_colmap.length - 1] = [col, true];
+			if (col.indexOf("_uriFragment") >= 0) {
+				temp_colmap[temp_colmap.length - 1] = {"column": col.reverse().split("_").slice(1).reverse().join("_")};
+			} else if (col.indexOf("_contentType")) {
+				continue
+			} else {
+				temp_colmap[temp_colmap.length - 1] = {"column": col};
+			}
 		}
 	}
 	for (var i = 0; i < temp_colmap.length; i++) {
 		// holds whether we found this column id in the colmap
 		var found = temp_colmap[i];
 		// col is the column key, val is the value of that cell in our row
-		var col = found[0];
+		var col = found["column"];
+		if (col === undefined) col = null;
 		var val = (col === null ? "" : d.getData(0, col));
 		// If we found a column that isn't in the database, it might be a picture, so check that
 		var checkMedia = d.getColumns().indexOf(col) < 0;
@@ -115,7 +122,7 @@ var update_callback = function update_callback(d) {
 		// However if we're displaying the result of a user-given callback, it might contain html, so we'll put "html" in this variable
 		// If it's media, like a picture or video, it'll be a dom element, so this will be set to "element"
 		var is_html = "text";
-		if (checkMedia) {
+		if (checkMedia && col != null) {
 			if (d.getColumns().indexOf(col + "_uriFragment") >= 0 && d.getColumns().indexOf(col + "_contentType") >= 0) {
 				is_html = "element";
 				var type = d.getData(0, col + "_contentType").split("/")[0];
@@ -136,16 +143,26 @@ var update_callback = function update_callback(d) {
 			} else {
 				continue;
 			}
-		} 
-		if (typeof(found[1]) == "string") {
-			li.appendChild(make_li(col, _tu(found[1]), _tc(d, col, val), "html"));
-		} else if (found[1] === true) {
-			li.appendChild(make_li(col, displayCol(col, metadata, table_id), pretty(_tc(d, col, val)), "text"));
-		} else if (found[1] === false) {
-			li.appendChild(make_li(col, displayCol(col, metadata, table_id), _tc(d, col, val), "text"));
-		} else {
-			li.appendChild(make_li(col, "", found[1](li, val, d), "html"));
 		}
+		var pretty_col;
+		if ("pretty_column" in found && found["pretty_column"] === false) {
+			pretty_col = col;
+		} else {
+			pretty_col = displayCol(col, metadata, table_id);
+		}
+		if ("display_name" in found) {
+			pretty_col = found["display_name"];
+			is_html = "html";
+		}
+		var pretty_value = _tc(d, col, val);
+		if ("pretty_value" in found && found["pretty_value"]) {
+			pretty_value = pretty(pretty_value);
+		}
+		var full = [col, pretty_col, pretty_value, is_html]
+		if ("callback" in found) {
+			full = [col, "", found["callback"](li, val, d), "html"]
+		}
+		li.appendChild(make_li.apply(null, full));
 		if (col != main_col) {
 			ul.appendChild(li);
 		}

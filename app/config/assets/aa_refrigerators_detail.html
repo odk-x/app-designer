@@ -202,21 +202,20 @@ allowed_tables = [];
 	var subquery = "(SELECT date_serviced FROM m_logs WHERE m_logs.refrigerator_id = refrigerators.refrigerator_id AND m_logs._savepoint_type != 'INCOMPLETE' ORDER BY date_serviced DESC LIMIT 1)"
 	global_which_cols_to_select = global_which_cols_to_select.concat(", (CASE WHEN "+subquery+" IS NOT NULL THEN "+subquery+" ELSE 'No Records' END) as date_serviced")
 	colmap = [
-		["facility_name", hf_callback],
-		["year", build_generic_callback("year", true, "Year Installed")],
-		["working_status", build_generic_callback("working_status", true, "Status")],
-		["reason_not_working", build_generic_callback("reason_not_working", true)],
-		["model_row_id", model_callback],
-		["tracking_id", build_generic_callback("tracking_id", false, "Tracking Number")],
-		["voltage_regulator", build_generic_callback("voltage_regulator", true)],
-		//["refrigerator_id", build_generic_callback("refrigerator_id", true)],
-		["date_serviced", build_generic_callback("date_serviced", function(i) {
+		{"column": "facility_name", "callback": hf_callback},
+		{"column": "year", "callback": build_generic_callback("year", true, "Year Installed")},
+		{"column": "working_status", "callback": build_generic_callback("working_status", true, "Status")},
+		{"column": "reason_not_working", "callback": build_generic_callback("reason_not_working", true)},
+		{"column": "model_row_id", "callback": model_callback},
+		{"column": "tracking_id", "callback": build_generic_callback("tracking_id", false, "Tracking Number")},
+		{"column": "voltage_regulator", "callback": build_generic_callback("voltage_regulator", true)},
+		{"column": "date_serviced", "callback": build_generic_callback("date_serviced", function(i) {
 			if (i == "No Records") {
 				return _tu(i);
 			}
 			return i.split("T")[0];
-		}, _tu("Date Serviced"))]
-	];
+		}, _tu("Date Serviced"))}
+	]
 
 }
 

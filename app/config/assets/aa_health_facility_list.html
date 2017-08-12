@@ -47,12 +47,28 @@ document.getElementById("add").style.display = "none";
 
 	display_col = "facility_name"
 	table_id = "health_facility";
-	allowed_group_bys = ["admin_region", "climate_zone", "delivery_type", "electricity_source", ["facility_ownership", "Ownership"], "facility_type", "storage_type", "solar_suitable_climate", "solar_suitable_site", "vaccine_supply_mode", "vaccine_reserve_stock_requirement"];
+	//allowed_group_bys = ["admin_region", "climate_zone", "delivery_type", "electricity_source", ["facility_ownership", "Ownership"], "facility_type", "storage_type", "solar_suitable_climate", "solar_suitable_site", "vaccine_supply_mode", "vaccine_reserve_stock_requirement"];
+	allowed_group_bys = [
+		{"column": "admin_region"},
+		{"column": "climate_zone"},
+		{"column": "delivery_type"},
+		{"column": "electricity_source"},
+		{"column": "facility_ownership", "display_name": "Ownership"},
+		{"column": "facility_type"},
+		{"column": "storage_type"},
+		{"column": "solar_suitable_climate"},
+		{"column": "solar_suitable_site"},
+		{"column": "vaccine_supply_mode"},
+		{"column": "vaccine_reserve_stock_requirement"},
+	]
 
 	global_which_cols_to_select = "*"
-	display_subcol = [
-		["Facility ID: ", "facility_id", true],
+	//display_subcol = [
+		//["Facility ID: ", "facility_id", true],
 		//["Refrigerators: ", "refrigerator_count", true]
+	//]
+	display_subcol = [
+		{"column": "facility_id", "display_name": "Facility ID: ", "newline": true},
 	]
 	document.getElementById("add").style.display = "none";
 

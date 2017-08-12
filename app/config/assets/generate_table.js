@@ -276,9 +276,9 @@ var make_query = function make_query(search, apply_where, for_total, cols_to_sel
 			// if we got no results the first time around, add all the display subcol column ids
 			for (var i = 0; i < display_subcol.length; i++) {
 				// the configurer can set the column name to null to only display the raw text, see README.md
-				if (display_subcol[i][1] == null) continue;
+				if (!("column" in display_subcol[i])) continue;
 				// otherwise add the column to the list of columns to try
-				cols = cols.concat(display_subcol[i][1]);
+				cols = cols.concat(display_subcol[i]["column"]);
 			}
 		}
 		// For each column in cols, put it in the where clause and put search in the bindargs
@@ -420,7 +420,7 @@ var doSearch = function doSearch() {
 		if (global_where_clause != null && global_where_clause != undefined && global_where_clause.trim().length > 0) {
 			var where_col = global_where_clause.split(" ")[0];
 			if (where_col.indexOf(".") >= 0) where_col = where_col.split(".")[1];
-			newtext += _t(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, global_where_clause.split(" ")[0], false, metadata, table_id) + _t(" is ") + _tc(d, where_col, global_where_arg);
+			newtext += _t(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, where_col, false, metadata, table_id) + _t(" is ") + _tc(d, where_col, global_where_arg);
 		}
 		if (global_human_readable_what) {
 			var hrw = _tu(global_human_readable_what);
@@ -473,31 +473,40 @@ var doSearch = function doSearch() {
 					subDisplay = document.createElement("div")
 					subDisplay.classList.add("sub-display");
 				}
-				var label_text = display_subcol[j][0]
-				var col = display_subcol[j][1]
-				var value = col == null ? null : d.getData(i, col);
-				if (embedded) value = col == null ? "" : col;
-				if (typeof(display_subcol[j][0]) == "string") {
-					subDisplay.appendChild(document.createTextNode(_tu(label_text)))
-					if (col != null) {
-						subDisplay.appendChild(document.createTextNode(_tc(d, col, value)))
-					}
-				} else if (label_text === true) {
-					subDisplay.appendChild(document.createTextNode(pretty(value)))
-				} else {
-					var span = document.createElement("span");
-					span.innerHTML = display_subcol[j][0](subDisplay, value, d, i);
-					subDisplay.appendChild(span);
+				var col = null;
+				var value = null;
+				var label_text = "";
+				if ("column" in display_subcol[j]) {
+					col = display_subcol[j]["column"];
+					value = d.getData(i, col);
 				}
-				if (display_subcol[j][2]) {
-					displays.appendChild(subDisplay)
+				if (embedded) value = col == null ? "" : col;
+				if ("callback" in display_subcol[j]) {
+					var span = document.createElement("span");
+					span.innerHTML = display_subcol[j]["callback"](subDisplay, value, d, i);
+					subDisplay.appendChild(span);
+				} else {
+					if ("display_name" in display_subcol[j]) {
+						label_text = display_subcol[j]["display_name"];
+					}
+					subDisplay.appendChild(document.createTextNode(_tu(label_text)));
+				}
+				if (col != null) {
+					if ("pretty_value" in display_subcol[j] && display_subcol[j]["pretty_value"]) {
+						subDisplay.appendChild(document.createTextNode(_tc(d, col, value)));
+					} else if (!("callback" in display_subcol[j])) {
+						subDisplay.appendChild(document.createTextNode(value));
+					}
+				}
+				if (display_subcol[j]["newline"]) {
+					displays.appendChild(subDisplay);
 					addedSubDisplays++;
 					subDisplay = null;
 				}
 			}
 			// if the user forgot to set true for the third position in the last triplet in display_subcol, add it anyways
 			if (subDisplay != null) {
-				displays.appendChild(subDisplay)
+				displays.appendChild(subDisplay);
 				addedSubDisplays++;
 			}
 			li.appendChild(displays);
@@ -616,7 +625,7 @@ var groupBy = function groupBy() {
 		// to get_from_allowed_group_bys in formgen_common
 		for (var i = 0; i < allowed_group_bys.length; i++) {
 			var child = document.createElement("option");
-			child.value = allowed_group_bys[i][0];
+			child.value = allowed_group_bys[i]["column"];
 			child.innerText = _tu(get_from_allowed_group_bys(allowed_group_bys, allowed_group_bys[i][1], allowed_group_bys[i], metadata, table_id));
 			list.appendChild(child);
 			// Not sure if this is important or not

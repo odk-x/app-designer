@@ -55,8 +55,12 @@ document.getElementById("add").style.display = "none";
 		return c.split("T")[0];
 	}
 	display_col = "date_serviced"
-	display_subcol = [["", "refs_tracking_number", true], [notes_cb, "notes", true]];
-	allowed_group_bys = ["manufacturer", "climate_zone", "equipment_type"]
+	//display_subcol = [["", "refs_tracking_number", true], [notes_cb, "notes", true]];
+	display_subcol = [
+		{"column": "refs_tracking_number", "newline": true},
+		{"column": "notes", "callback": notes_cb, "newline": true},
+	]
+	allowed_group_bys = [];
 	table_id = "m_logs";
 	global_join = "refrigerators ON refrigerators.refrigerator_id = m_logs.refrigerator_id"
 	global_which_cols_to_select = "*, refrigerators.refrigerator_id AS refs_refid, refrigerators.tracking_id AS refs_tracking_number"

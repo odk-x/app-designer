@@ -159,17 +159,17 @@ allowed_tables = [];
 		document.getElementById("refrig_with_this_model_count").innerText = d.getData(0, "refrig_with_this_model_count");
 	}
 	colmap = [
-		["manufacturer", build_generic_callback("manufacturer", true)],
-		["power_source", build_generic_callback("power_source", function(i) { return pretty(jsonParse(i).join(", ")); })],
-		["refrigerator_gross_volume", build_generic_callback("refrigerator_gross_volume", " litres")],
-		["freezer_gross_volume", build_generic_callback("freezer_gross_volume", " litres")],
-		["equipment_type", build_generic_callback("equipment_type", true)],
-		["climate_zone", build_generic_callback("climate_zone", true)],
-		["refrigerator_net_volume", build_generic_callback("refrigerator_net_volume", " litres")],
-		["freezer_net_volume", build_generic_callback("freezer_net_volume", " litres")],
-		["model_id", mid_callback],
-		["catalog_id", build_generic_callback("catalog_id", true)],
-		["refrigerator_picture", function(e,c,d){document.getElementById("inject-refrigerator_picture").appendChild(c)}]
+		{"column": "manufacturer", "callback": build_generic_callback("manufacturer", true)},
+		{"column": "power_source", "callback": build_generic_callback("power_source", function(i) { return pretty(jsonParse(i).join(", ")); })},
+		{"column": "refrigerator_gross_volume", "callback": build_generic_callback("refrigerator_gross_volume", " litres")},
+		{"column": "freezer_gross_volume", "callback": build_generic_callback("freezer_gross_volume", " litres")},
+		{"column": "equipment_type", "callback": build_generic_callback("equipment_type", true)},
+		{"column": "climate_zone", "callback": build_generic_callback("climate_zone", true)},
+		{"column": "refrigerator_net_volume", "callback": build_generic_callback("refrigerator_net_volume", " litres")},
+		{"column": "freezer_net_volume", "callback": build_generic_callback("freezer_net_volume", " litres")},
+		{"column": "model_id", "callback": mid_callback},
+		{"column": "catalog_id", "callback": build_generic_callback("catalog_id", true)},
+		{"column": "refrigerator_picture", "callback": function(e,c,d){document.getElementById("inject-refrigerator_picture").appendChild(c)}}
 	]
 
 }
