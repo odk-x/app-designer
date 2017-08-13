@@ -7,6 +7,7 @@ var title = "";
 
 var all_values = [];
 var total_total = 0;
+var global_width = 0;
 var canvas = document.createElement("canvas");
 
 var parseReallyDirtyInt = function parseReallyDirtyInt(val) {
@@ -45,19 +46,37 @@ var ol = function ol() {
 		title = title.replace("?", args[i]);
 	}
 	document.getElementById("title").innerText = title;
-	document.body.insertBefore(canvas, document.getElementById("key"));
+	if (!use_d3) {
+		document.body.insertBefore(canvas, document.getElementById("key"));
+		document.getElementById("d3_wrapper").style.display = "none";
+	}
 	var w = Math.min(document.body.clientHeight - document.getElementById("title").clientHeight, document.body.clientWidth) - 16;
 	canvas.style.marginLeft = "8px";
 	canvas.style.width = w;
 	canvas.style.height = w;
 	canvas.width = w;
 	canvas.height = w;
+	global_width = w;
 	console.log(window.iframeOnly);
 	if (!window.iframeOnly) {
 		odkData.arbitraryQuery(table_id, raw, args, 10000, 0, success, function(e) {
 			alert(e);
 		})
 	}
+}
+var global_sort_function = function global_sort_function(a, b) {
+	var retVal = 0;
+	if (window.sort === true) {
+		retVal = b[1] - a[1];
+	} else if (window.sort === false) {
+		retVal = parseReallyDirtyInt(a[0]) - parseReallyDirtyInt(b[0]);
+	} else {
+		retVal = window.sort(a[1], b[1]);
+	}
+	if (window.reverse) {
+		retVal *= -1
+	}
+	return retVal;
 }
 
 // Needs to be on window because the odkData callback above will never occur if we're inside an iframe.
@@ -79,31 +98,33 @@ window.success = function success(d) {
 		all_values[all_values.length - 1] = [key, val]
 		total_total += Number(val);
 	}
-	all_values.sort(function(a, b) {
-		var retVal = 0;
-		if (window.sort === true) {
-			retVal = b[1] - a[1];
-		} else if (window.sort === false) {
-			retVal = parseReallyDirtyInt(a[0]) - parseReallyDirtyInt(b[0]);
-		} else {
-			retVal = window.sort(a[1], b[1]);
-		}
-		if (window.reverse) {
-			retVal *= -1
-		}
-		return retVal;
-	});
+	all_values.sort(global_sort_function);
 	if (total_total == 0) {
 		document.getElementById("key").innerText = translate_formgen("No results")
 	} else {
-		if (type == "pie") {
-			doPie(d);
-		} else if (type == "line" || type == "scatter") {
-			doLine(d, type == "line");
+		if (!use_d3) {
+			if (type == "pie") {
+				doPie(d);
+			} else if (type == "line" || type == "scatter") {
+				doLine(d, type == "line");
+			} else {
+				doBar(d);
+			}
 		} else {
-			doBar(d);
+			if (type == "pie") {
+				d3Pie(d);
+			} else if (type == "line" || type == "scatter") {
+				d3Line(d, type == "line");
+			} else {
+				d3Bar(d);
+			}
 		}
-		document.getElementById("key").style.marginTop = (canvas.height + 30).toString() + "px";
+		if (use_d3) {
+			document.getElementById("d3_wrapper").style.height = global_width.toString() + "px";
+			document.getElementsByTagName("svg")[0].style.height = global_width.toString() + "px";
+		} else {
+			document.getElementById("key").style.marginTop = (canvas.height + 30).toString() + "px";
+		}
 		document.getElementById("bg").style.height = document.body.clientHeight.toString() + "px";
 	}
 }
