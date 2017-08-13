@@ -14,7 +14,7 @@ var ol = function ol() {
 	for (var i = 0; i < tabs.length; i++) {
 		var tab = document.createElement("span");
 		tab.classList.add("tab");
-		tab.innerText = _tu(tabs[i]["title"]);
+		tab.innerText = translate_user(tabs[i]["title"]);
 		(function (tab, i) {
 			tab.addEventListener("click", function() {
 				odkCommon.setSessionVariable("idx", i);

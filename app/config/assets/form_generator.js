@@ -71,7 +71,7 @@ var screen_data = function screen_data(id, optional_no_alert) {
 	var gsp_result = get_screen_prompt(id);
 	if (!gsp_result[0]) {
 		if (optional_no_alert != true) {
-			alert(_t("Prompt for database column ") + id + _t(" not found on the screen! Will be stored in the database as null!"))
+			alert(translate_formgen("Prompt for database column ") + id + translate_formgen(" not found on the screen! Will be stored in the database as null!"))
 		}
 		return null;
 	}
@@ -299,7 +299,7 @@ var get_choices = function get_choices(which, not_first_time, filter, raw) {
 				return [false]
 			}
 			// Don't know that kind of query
-			return [true, ["ERROR", _t("Unknown query type ") + queries[j].query_type]]
+			return [true, ["ERROR", translate_formgen("Unknown query type ") + queries[j].query_type]]
 		}
 	}
 	// Wasn't in choices or queries, don't know what to do, just leave it as empty
@@ -319,7 +319,7 @@ var do_cross_table_query = function do_cross_table_query(which, query) {
 		try {
 			selectionArgs = eval(query.selectionArgs);
 		} catch (e) {
-			alert(_t("Failed to start cross-table query: ") + e);
+			alert(translate_formgen("Failed to start cross-table query: ") + e);
 			console.log(e);
 			return;
 		}
@@ -354,7 +354,7 @@ var do_cross_table_query = function do_cross_table_query(which, query) {
 		// make update() call get_choices again now that we've added things to the global `choices` list
 		update(0);
 	}, function failure_callback(e) {
-		alert(_t("Unexpected failure") + " " + e);
+		alert(translate_formgen("Unexpected failure") + " " + e);
 	});
 }
 // Helper function called by update, detects if a prompt in the given list of prompts has had choices added to it yet,
@@ -563,7 +563,7 @@ var updateOrInsert = function updateOrInsert() {
 		odkData.updateRow(table_id, temp_row_data, row_id, function(){
 			updateOrInsert_running = false;
 		}, function() {
-			alert(_t("Unexpected failure to save row"));
+			alert(translate_formgen("Unexpected failure to save row"));
 			console.log(arguments);
 		});
 	}
@@ -576,7 +576,7 @@ var updateOrInsert = function updateOrInsert() {
 	odkData.arbitraryQuery(table_id, "UPDATE " + table_id + " SET _savepoint_type = ? WHERE _id = ?;--", [setTo, row_id], 1000, 0, function success_callback(d) {
 		console.log("Set _savepoint_type to "+setTo+" successfully");
 	}, function failure(d) {
-		alert(_t("Error saving row: ") + d);
+		alert(translate_formgen("Error saving row: ") + d);
 	});
 }
 var updateAllSelects = function updateAllSelects(with_filter_only) {
@@ -649,7 +649,7 @@ var update = function update(delta) {
 	checkIfCurrentScreenIsUserBranch(delta);
 	// If we failed to load the data from the database in the first place,
 	if (noop) {
-		var error = _t("An error occurred while loading the page. ");
+		var error = translate_formgen("An error occurred while loading the page. ");
 		if (noop !== true) {
 			error = error.concat(noop);
 		}
@@ -671,7 +671,7 @@ var update = function update(delta) {
 				if (s.type == "geopoint") {
 					// geopoint prompts are actually four seperate prompts, one :dbcol_:suffix for each suffix
 					if (a.jsonValue.status == 0) {
-						alert(_t("Error, location providers are disabled.")) // (or the action was cancelled)
+						alert(translate_formgen("Error, location providers are disabled.")) // (or the action was cancelled)
 					} else {
 						var suffixes = ["latitude", "longitude", "altitude", "accuracy"];
 						// update the screen data for each suffix with the results of the action
@@ -727,7 +727,7 @@ var update = function update(delta) {
 						console.log("No result in result object!");
 					}
 				} else {
-					alert(_t("Unknown type in dispatch struct!"));
+					alert(translate_formgen("Unknown type in dispatch struct!"));
 				}
 			}
 			odkCommon.removeFirstQueuedAction();
@@ -773,7 +773,7 @@ var update = function update(delta) {
 			elems[0].outerHTML = display(text, table_id, window.possible_wrapped, form_id);
 		} catch (e) {
 			console.log(e)
-			elems[0].outerHTML = _t("Error translating ") + JSON.stringify(text);
+			elems[0].outerHTML = translate_formgen("Error translating ") + JSON.stringify(text);
 		}
 	}
 	var elems = document.getElementsByClassName("formgen-specific-translate");
@@ -782,10 +782,10 @@ var update = function update(delta) {
 		var text = elems[0].innerText;
 		try {
 			// YES elems[0] NOT elems[i]
-			elems[0].outerHTML = _t(text);
+			elems[0].outerHTML = translate_formgen(text);
 		} catch (e) {
 			console.log(e)
-			elems[0].outerHTML = _t("Error translating ") + JSON.stringify(text);
+			elems[0].outerHTML = translate_formgen("Error translating ") + JSON.stringify(text);
 		}
 	}
 
@@ -811,7 +811,7 @@ var update = function update(delta) {
 		if (show_add) {
 			if (elem.hasAttribute("data-new_instance_label")) new_instance_label = display(tokens[elem.getAttribute("data-new_instance_label")], table_id, window.possible_wrapped, form_id);
 			var child = document.createElement("button")
-			child.innerText = _tu(new_instance_label);
+			child.innerText = translate_user(new_instance_label);
 			child.addEventListener("click", function() {
 				addOrEdit("add", subtable, subform, Function("return " + defaults)());
 			});
@@ -854,12 +854,12 @@ var update = function update(delta) {
 			var span = document.createElement("div");
 			var id = choices[j][0]
 			var _delete = document.createElement("button");
-			_delete.innerText = _tu("-");
+			_delete.innerText = translate_user("-");
 			var edit = document.createElement("button");
-			edit.innerText = _t("Edit");
+			edit.innerText = translate_formgen("Edit");
 			(function(elem, _delete, edit, id) {
 				_delete.addEventListener("click", function() {
-					if (confirm(_t("Delete row ??", id))) {
+					if (confirm(translate_formgen("Delete row ??", id))) {
 						odkData.deleteRow(subtable, null, id, function(d) {
 							// just re set-up from scratch
 							//elem.innerHTML = ""
@@ -867,7 +867,7 @@ var update = function update(delta) {
 							//update(0);
 							window.location.reload();
 						}, function(e) {
-							alert(_t("Unexpected error deleting row: ") + e);
+							alert(translate_formgen("Unexpected error deleting row: ") + e);
 						});
 					}
 				})
@@ -1017,7 +1017,7 @@ var update = function update(delta) {
 		// Checks if the field is required
 		var required = elems[i].getAttribute("data-required");
 		if (required != null && eval(tokens[required])) {
-			elems[i].placeholder = _t("Required field")
+			elems[i].placeholder = translate_formgen("Required field")
 			var entered = screen_data(col);
 			if (entered == null || entered.length == 0) {
 				this_valid = false;
@@ -1252,13 +1252,13 @@ var finalizeImmediate = blockForDatabase(function finalizeImmediate() {
 		console.log("already finalized, ignoring")
 		return;
 	}
-	document.getElementById("odk-container").innerHTML = _t("Saving...")
+	document.getElementById("odk-container").innerHTML = translate_formgen("Saving...")
 	// Make sure all required fields were provided
 	for (var i = 0; i < requireds.length; i++) {
 		var column = requireds[i][0];
 		var js = requireds[i][1];
 		if ((data(column) == null || data(column) == undefined || (typeof(data(column)) == "string" && data(column).trim().length == 0)) && eval(tokens[js])) {
-			alert(_t("Column ? is required but no value was provided", displayCol(column, global_metadata, table_id, form_id)))
+			alert(translate_formgen("Column ? is required but no value was provided", displayCol(column, global_metadata, table_id, form_id)))
 			gotoImmediate("_" + column);
 			return;
 		}
@@ -1266,7 +1266,7 @@ var finalizeImmediate = blockForDatabase(function finalizeImmediate() {
 	already_finalized = true;
 	odkCommon.setSessionVariable(table_id + ":" + row_id + ":global_screen_idx", 0);
 	// Escape the LIMIT 1
-	document.getElementById("odk-container").innerHTML = _t("Finalizing...")
+	document.getElementById("odk-container").innerHTML = translate_formgen("Finalizing...")
 	odkData.arbitraryQuery(table_id, "UPDATE " + table_id + " SET _savepoint_type = ? WHERE _id = ?;--", ["COMPLETE", row_id], 1000, 0, function success_callback(d) {
 		console.log("Set _savepoint_type to COMPLETE successfully");
 		page_back();
@@ -1284,11 +1284,11 @@ var finalizeImmediate = blockForDatabase(function finalizeImmediate() {
 // Cancels the add and deletes the intermediate row, asks for confirmation if we've already inserted data but if they didn't type anything yet, it doesn't
 var cancel = function cancel() {
 	/*
-	if (confirm(_t("Are you sure? All entered data will be deleted."))) {
+	if (confirm(translate_formgen("Are you sure? All entered data will be deleted."))) {
 		odkData.deleteRow(table_id, null, row_id, function() {
 			page_back();
 		}, function(err) {
-			alert(_t("Unexpected error deleting row: ") + JSON.stringify(err));
+			alert(translate_formgen("Unexpected error deleting row: ") + JSON.stringify(err));
 			page_back();
 		})
 	}
@@ -1301,16 +1301,16 @@ var doAction = function doAction(dStruct, act, intent) {
 	if (result == "OK" || result == "IGNORED") {
 		return;
 	}
-	alert(_t("Error launching ") + act + ": " + result);
+	alert(translate_formgen("Error launching ") + act + ": " + result);
 }
 // Function that runs on page load, sets up some initial choices, gets the row id from the uri, determines if the row
 // we're editing exists or not and sets up opened_for_edit and row_exists based on that, 
 var ol = function onLoad() {
-	document.getElementById("next").innerText = _t("Next");
-	document.getElementById("back").innerText = _t("Back");
-	document.getElementById("finalize").innerText = _t("Finalize");
-	choices = choices.concat({"choice_list_name": "_yesno", "data_value": "false", "display": {"text": _t("no")}});
-	choices = choices.concat({"choice_list_name": "_yesno", "data_value": "true", "display": {"text": _t("yes")}});
+	document.getElementById("next").innerText = translate_formgen("Next");
+	document.getElementById("back").innerText = translate_formgen("Back");
+	document.getElementById("finalize").innerText = translate_formgen("Finalize");
+	choices = choices.concat({"choice_list_name": "_yesno", "data_value": "false", "display": {"text": translate_formgen("no")}});
+	choices = choices.concat({"choice_list_name": "_yesno", "data_value": "true", "display": {"text": translate_formgen("yes")}});
 	// Get the row id from the url, or makes a new id if it can't get it
 	row_id = window.location.hash.substr(1);
 	if (row_id.length == 0) {
@@ -1379,7 +1379,7 @@ var ol = function onLoad() {
 
 var graph_loaded = function graph_loaded(elem, raw, args) {
 	odkData.arbitraryQuery(table_id, raw, args, 10000, 0, elem.contentWindow.success, function failure(e) {
-		alert(_t("Unexpected failure") + " " + e);
+		alert(translate_formgen("Unexpected failure") + " " + e);
 	});
 }
 var all_rules_match = function all_rules_match(rules) {
@@ -1443,9 +1443,9 @@ var gotoImmediate = function gotoImmediate(label) {
 var setCancelButton = function setCancelButton(cancel_or_save_incomplete) {
 	var cancel = document.getElementById('cancel');
 	if (cancel_or_save_incomplete) {
-		cancel.innerText = _t("Cancel")
+		cancel.innerText = translate_formgen("Cancel")
 	} else {
-		cancel.innerText = _t("Save incomplete");
+		cancel.innerText = translate_formgen("Save incomplete");
 	}
 	cancel.disabled = false;
 }
@@ -1467,7 +1467,7 @@ var addOrEdit = blockForDatabase(function addOrEdit(operation, subtable, subform
 		odkData.addRow(subtable, defaults, id, function(d) {
 			addOrEdit("edit", subtable, subform, defaults, id);
 		}, function(e) {
-			alert(_t("Unexpected failure") + " " + e);
+			alert(translate_formgen("Unexpected failure") + " " + e);
 		});
 	} else {
 		if (subform == subtable) subform = "index";

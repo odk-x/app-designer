@@ -91,7 +91,7 @@ var doMenu = function doMenu() {
 	document.getElementById("list").innerHTML = "";
 	var submenu = make_submenu(menu_path);
 	// Set the title of the page
-	document.getElementById("title").innerHTML = _tu(submenu["label"]);
+	document.getElementById("title").innerHTML = translate_user(submenu["label"]);
 	// len is the number of buttons to put on the screen
 	var len = submenu["contents"].length;
 	var adjusted_len = len;
@@ -103,15 +103,15 @@ var doMenu = function doMenu() {
 		var button = document.createElement("button");
 		// If they passed in a literal true for the text, set the text to "By " + the translated column name
 		if (!("label" in triplet)) {
-			button.innerText = _t("Loading...");
+			button.innerText = translate_formgen("Loading...");
 			(function(button, triplet) {
 				getMetadataAndThen(triplet["table"], function(this_table_metadata) {
-					button.innerText = _t("By ") + displayCol(triplet["grouping"], this_table_metadata, triplet["table"]);
+					button.innerText = translate_formgen("By ") + displayCol(triplet["grouping"], this_table_metadata, triplet["table"]);
 				});
 			})(button, triplet);
 		} else {
 			// Otherwise just set the button text to the text they specified
-			button.innerText = _tu(triplet["label"]);
+			button.innerText = translate_user(triplet["label"]);
 		}
 		button.classList.add("button");
 		// If we have a lot of buttons, make the buttons smaller
