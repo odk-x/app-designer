@@ -14,14 +14,14 @@ var customJsOl = function customJsOl() {
 	allowed_tables = [];
 document.getElementById("add").style.display = "none";
 
-	var notes_cb = function notes_cb(e, notes) {
+	var notes_cb = function notes_cb(element, notes) {
 		if (notes == undefined || notes == null) {
 			return "";
 		}
 		return notes;
 	}
-	display_col_wrapper = function display_col_wrapper(d, i, c) {
-		return c.split("T")[0];
+	display_col_wrapper = function display_col_wrapper(data, i, columnValue) {
+		return columnValue.split("T")[0];
 	}
 	display_col = "date_serviced"
 	//display_subcol = [["", "refs_tracking_number", true], [notes_cb, "notes", true]];

@@ -8,10 +8,10 @@ var customJsOl = function customJsOl() {
 	main_col = "refs_tracking_number";
 	colmap = [
 		{"column": 'refs_tracking_number', "display_name": "Tracking Number: "},
-		{"column": 'date_serviced', "callback": function(e, c, d) { return "<b>" + _tu("Date Serviced") + ":</b> " + c.split("T")[0]; }},
-		{"column": 'notes', "callback": function(e, c, d) {
-			if (c == null || c == "null") return "";
-			return "<b>" + _tu("Notes: ") + "</b>" + c;
+		{"column": 'date_serviced', "callback": function(element, columnValue, data) { return "<b>" + _tu("Date Serviced") + ":</b> " + columnValue.split("T")[0]; }},
+		{"column": 'notes', "callback": function(element, columnValue, data) {
+			if (columnValue == null || columnValue == "null") return "";
+			return "<b>" + _tu("Notes: ") + "</b>" + columnValue;
 		}}
 	]
 	global_join = "refrigerators ON refrigerators.refrigerator_id = m_logs.refrigerator_id"

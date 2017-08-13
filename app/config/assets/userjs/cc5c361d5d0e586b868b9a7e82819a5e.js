@@ -14,9 +14,9 @@ var customJsOl = function customJsOl() {
 	allowed_tables = [];
 document.getElementById("add").style.display = "none";
 
-	var makepicture = function makepicture(e, c, d, i) {
-		if (c == null || c == "null") return "No picture available";
-		return "<div class='img-wrapper'><img class='refrig-img' src='" + odkCommon.getRowFileAsUrl(table_id, d.getData(i, "_id"), c) + "' /></div>";
+	var makepicture = function makepicture(element, columnValue, data, i) {
+		if (columnValue == null || columnValue == "null") return "No picture available";
+		return "<div class='img-wrapper'><img class='refrig-img' src='" + odkCommon.getRowFileAsUrl(table_id, data.getData(i, "_id"), columnValue) + "' /></div>";
 	}
 	//display_subcol = [["Manufacturer: ", "manufacturer", true], ["Model ID: ", "model_id", true], [makepicture, "refrigerator_picture_uriFragment", true]];
 	display_subcol = [

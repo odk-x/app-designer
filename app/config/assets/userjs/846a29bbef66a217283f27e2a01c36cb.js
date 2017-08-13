@@ -4,71 +4,71 @@ var display_cols = {"refrigerators": "tracking_id", "health_facility": "facility
 // List of tables to edit with formgen. If a table isn't found in this list, we edit it with survey instead
 var allowed_tables = ["refrigerators", "health_facility", "m_logs", "refrigerator_types"];
 var customJsOl = function customJsOl() {
-	var generic_callback = function generic_callback(e, c, d, which, pretty, optional_col_name) {
+	var generic_callback = function generic_callback(element, columnValue, data, which, pretty, optional_col_name) {
 	if (optional_col_name == null || optional_col_name == undefined || typeof(optional_col_name) != "string") {
-		optional_col_name = displayCol(which, d.getMetadata(), d.getTableId());
+		optional_col_name = displayCol(which, data.getMetadata(), data.getTableId());
 	} else {
 		optional_col_name = _tu(optional_col_name);
 	}
-	wrapper = function(i) { return _tc(d, which, i); };
-	if (pretty) wrapper = function(i) { return window.pretty(_tc(d, which, i.toString())); };
-	if (c == null) c = "null"; // because null.toString() will throw an exception
-	document.getElementById("inject-" + which).innerHTML = "<b>" + optional_col_name + "</b>: " + wrapper(c);
+	wrapper = function(i) { return _tc(data, which, i); };
+	if (pretty) wrapper = function(i) { return window.pretty(_tc(data, which, i.toString())); };
+	if (columnValue == null) columnValue = "null"; // because null.toString() will throw an exception
+	document.getElementById("inject-" + which).innerHTML = "<b>" + optional_col_name + "</b>: " + wrapper(columnValue);
 	document.getElementById("inject-" + which).classList.add("li-inner");
 }
 var build_generic_callback = function build_generic_callback(which, pretty, optional_col_name) {
-	return function _generic_callback_wrapper(e, c, d) {
+	return function _generic_callback_wrapper(element, columnValue, data) {
 		if (typeof(pretty) == "string") {
-			c = c + pretty;
+			columnValue += pretty;
 			pretty = false;
 		}
 		if (typeof(pretty) == "function") {
-			c = pretty(c)
+			columnValue = pretty(columnValue)
 			pretty = false;
 		}
-		return generic_callback(e, c, d, which, pretty, optional_col_name);
+		return generic_callback(element, columnValue, data, which, pretty, optional_col_name);
 	}
 }
 allowed_tables = [];
 
 	document.getElementById("bfi").innerText = _tu("Basic Refrigerator Information")
-	var model_callback = function model_callback(e, c, d) {
+	var model_callback = function model_callback(element, columnValue, data) {
 		var btn = document.getElementById("open_model");
 		btn.innerText = _tu("Model Information");
-		var model = d.getData(0, "catalog_id"); // from join, not actually the model id
-		var model_row_id = d.getData(0, "model_row_id");
+		var model = data.getData(0, "catalog_id"); // from join, not actually the model id
+		var model_row_id = data.getData(0, "model_row_id");
 		btn.disabled = false;
 		btn.addEventListener("click", function() {
 			odkTables.openDetailView(null, "refrigerator_types", model_row_id);
 		});
-		build_generic_callback("model_id", true, _tu("Model ID"))(e, c, d)
+		build_generic_callback("model_id", true, _tu("Model ID"))(element, columnValue, data)
 		return "";
 	}
-	var hf_callback = function hf_callback(e, c, d) {
+	var hf_callback = function hf_callback(element, columnValue, data) {
 		/*
 			var btn = document.getElementById("open_hf");
 			btn.innerText = _tu("Health Facility Information");
-			var hf = d.getData(0, "facility_name"); // from join, not actually the hf id
-			var hf_row_id = d.getData(0, "facility_row_id");
+			var hf = data.getData(0, "facility_name"); // from join, not actually the hf id
+			var hf_row_id = data.getData(0, "facility_row_id");
 			btn.disabled = false;
 			btn.addEventListener("click", function() {
 				odkTables.openDetailView(null, "health_facility", hf_row_id, "config/assets/aa_health_facility_detail.html#health_facility/" + hf_row_id);
 			});
 		*/
-		build_generic_callback("facility_name", true, "Facility")(e, c, d)
+		build_generic_callback("facility_name", true, "Facility")(element, columnValue, data)
 		document.getElementById("add_m_log").disabled = false;
 		document.getElementById("add_m_log").innerText = _tu("Add Maintenance Record");
-		var defaults = {"refrigerator_id": d.getData(0, "refrigerator_id"), "date_serviced": odkCommon.toOdkTimeStampFromDate(new Date())};
-		defaults["_default_access"] = d.getData(0, "_default_access");
-		defaults["_group_read_only"] = d.getData(0, "_group_read_only");
-		defaults["_group_modify"] = d.getData(0, "_group_modify");
-		defaults["_group_privileged"] = d.getData(0, "_group_privileged");
+		var defaults = {"refrigerator_id": data.getData(0, "refrigerator_id"), "date_serviced": odkCommon.toOdkTimeStampFromDate(new Date())};
+		defaults["_default_access"] = data.getData(0, "_default_access");
+		defaults["_group_read_only"] = data.getData(0, "_group_read_only");
+		defaults["_group_modify"] = data.getData(0, "_group_modify");
+		defaults["_group_privileged"] = data.getData(0, "_group_privileged");
 		document.getElementById("add_m_log").addEventListener("click", function add_m_log() {
 			if (allowed_tables.indexOf("m_logs") >= 0) {
 				var id = newGuid();
 				odkData.addRow("m_logs", defaults, id, function() {
 					// Escape the LIMIT 1
-					odkData.arbitraryQuery("m_logs", "UPDATE m_logs SET _savepoint_type = ? WHERE _id = ?;--", ["INCOMPLETE", id], 100, 0, function success(d) {
+					odkData.arbitraryQuery("m_logs", "UPDATE m_logs SET _savepoint_type = ? WHERE _id = ?;--", ["INCOMPLETE", id], 100, 0, function success(data) {
 						odkTables.launchHTML({}, "config/assets/formgen/m_logs#" + id);
 					}, null);
 				});
@@ -79,7 +79,7 @@ allowed_tables = [];
 		document.getElementById("view_m_log").disabled = false;
 		document.getElementById("view_m_log").innerText = _tu("View all maintenance logs")
 		document.getElementById("view_m_log").addEventListener("click", function add_m_log() {
-			odkTables.launchHTML(null, "config/assets/aa_m_logs_list.html#m_log/STATIC/SELECT *, refrigerators.refrigerator_id AS refs_refid, refrigerators.tracking_id AS refs_tracking_number FROM m_logs JOIN refrigerators ON refrigerators.refrigerator_id = m_logs.refrigerator_id WHERE refs_refid = ?/" + JSON.stringify([d.getData(0, "refrigerator_id")]) + "/maintenance records for the selected refrigerator");
+			odkTables.launchHTML(null, "config/assets/aa_m_logs_list.html#m_log/STATIC/SELECT *, refrigerators.refrigerator_id AS refs_refid, refrigerators.tracking_id AS refs_tracking_number FROM m_logs JOIN refrigerators ON refrigerators.refrigerator_id = m_logs.refrigerator_id WHERE refs_refid = ?/" + JSON.stringify([data.getData(0, "refrigerator_id")]) + "/maintenance records for the selected refrigerator");
 		});
 
 		return "";
