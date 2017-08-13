@@ -45,7 +45,7 @@
 				if (regionDone && typeDone && sourceDone) {
 					var btn = document.getElementById("go");
 					btn.disabled = false;
-					btn.innerText = _tu("Go");
+					btn.innerText = translate_user("Go");
 					btn.addEventListener("click", go);
 				}
 			}
@@ -79,14 +79,14 @@
 				odkCommon.setSessionVariable("inv_by_age:source", source);
 			}
 			var ol = function ol() {
-				document.getElementById("title").innerText = _tu("Refrigerator Age");
-				document.getElementById("region_label").innerText = _tu("Select Region");
-				document.getElementById("type_label").innerText = _tu("Select Facility Type");
-				document.getElementById("source_label").innerText = _tu("Select Power Source");
-				document.getElementById("go").innerText = _tu("Loading...");
-				document.getElementById("region").children[0].innerText = _tu("Any");
-				document.getElementById("type").children[0].innerText = _tu("Any");
-				document.getElementById("source").children[0].innerText = _tu("Any");
+				document.getElementById("title").innerText = translate_user("Refrigerator Age");
+				document.getElementById("region_label").innerText = translate_user("Select Region");
+				document.getElementById("type_label").innerText = translate_user("Select Facility Type");
+				document.getElementById("source_label").innerText = translate_user("Select Power Source");
+				document.getElementById("go").innerText = translate_user("Loading...");
+				document.getElementById("region").children[0].innerText = translate_user("Any");
+				document.getElementById("type").children[0].innerText = translate_user("Any");
+				document.getElementById("source").children[0].innerText = translate_user("Any");
 				odkData.arbitraryQuery("health_facility", "SELECT regionLevel2 FROM health_facility GROUP BY regionLevel2", [], 10000, 0, function success(d) {
 					var sel = document.getElementById("region");
 					sel.addEventListener("blur", save);
@@ -94,7 +94,7 @@
 					for (var i = 0; i < d.getCount(); i++) {
 						var option = document.createElement("option");
 						option.value = d.getData(i, "regionLevel2");
-						option.innerText = _tu(option.value);
+						option.innerText = translate_user(option.value);
 						sel.appendChild(option);
 						if (odkCommon.getSessionVariable("inv_by_age:region") == option.value) {
 							sel.selectedIndex = i + 1;
@@ -110,7 +110,7 @@
 					for (var i = 0; i < d.getCount(); i++) {
 						var option = document.createElement("option");
 						option.value = d.getData(i, "facility_type");
-						option.innerText = _tc(d, "facility_type", option.value);
+						option.innerText = translate_choice(d, "facility_type", option.value);
 						sel.appendChild(option);
 						if (odkCommon.getSessionVariable("inv_by_age:type") == option.value) {
 							sel.selectedIndex = i + 1;
@@ -126,7 +126,7 @@
 					for (var i = 0; i < d.getCount(); i++) {
 						var option = document.createElement("option");
 						option.value = d.getData(i, "power_source");
-						option.innerText = _tc(d, "power_source", option.value);
+						option.innerText = translate_choice(d, "power_source", option.value);
 						sel.appendChild(option);
 						if (odkCommon.getSessionVariable("inv_by_age:source") == option.value) {
 							sel.selectedIndex = i + 1;

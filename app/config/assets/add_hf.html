@@ -27,9 +27,9 @@
 				odkCommon.setSessionVariable("add_hf:region", region);
 			}
 			var ol = function ol() {
-				document.getElementById("title").innerText = _tu("Add Health Facility");
-				document.getElementById("region_label").innerText = _tu("Select Region");
-				document.getElementById("go").innerText = _tu("Loading...");
+				document.getElementById("title").innerText = translate_user("Add Health Facility");
+				document.getElementById("region_label").innerText = translate_user("Select Region");
+				document.getElementById("go").innerText = translate_user("Loading...");
 				odkData.arbitraryQuery("health_facility", "SELECT regionLevel1, regionLevel2 FROM health_facility GROUP BY regionLevel2", [], 10000, 0, function success(d) {
 					var sel = document.getElementById("region");
 					sel.addEventListener("blur", save);
@@ -37,7 +37,7 @@
 					for (var i = 0; i < d.getCount(); i++) {
 						var option = document.createElement("option");
 						option.value = d.getData(i, "regionLevel2");
-						option.innerText = _tu(option.value);
+						option.innerText = translate_user(option.value);
 						option.setAttribute("data-regionLevel1", d.getData(i, "regionLevel1"));
 						sel.appendChild(option);
 						if (odkCommon.getSessionVariable("add_hf:region") == option.value) {
@@ -46,7 +46,7 @@
 					}
 					var btn = document.getElementById("go");
 					btn.disabled = false;
-					btn.innerText = _tu("Go!");
+					btn.innerText = translate_user("Go!");
 					btn.addEventListener("click", go);
 				}, null); // TODO failure function
 			}
