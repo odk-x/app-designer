@@ -7,7 +7,7 @@ var preferred_locale = null; // for caching
 // Mocks translation, much faster than actual translation
 window.fake_translate = function fake_translate(thing, optional_table, optional_form) {
 	// Can't translate undefined
-	if (thing === undefined || thing === null) return _t("Error translating ") + thing;
+	if (thing === undefined || thing === null) return translate_formgen("Error translating ") + thing;
 
 	// This will be hit eventually in a recursive call
 	if (typeof(thing) == "string") return thing;
@@ -41,7 +41,7 @@ window.fake_translate = function fake_translate(thing, optional_table, optional_
 	}
 
 	// Otherwise, we have no idea what kind of object this is. Sorry!
-	return _t("Error fake translating ") + JSON.stringify(thing);
+	return translate_formgen("Error fake translating ") + JSON.stringify(thing);
 };
 
 // Helper function for display and fake_translate
@@ -89,7 +89,7 @@ window.display = function display(thing, table, optional_possible_wrapped, form)
 	if (typeof(thing) == "string") return thing;
 	if (typeof(thing) == "undefined") {
 		// A recursive call on an error? What could possibly go wrong!
-		return _t("Can't translate undefined!");
+		return translate_formgen("Can't translate undefined!");
 	}
 	for (var i = 0; i < this_possible_wrapped.length; i++) {
 		if (thing[this_possible_wrapped[i]] !== undefined) {
@@ -248,7 +248,7 @@ var clean_href = function clean_href() {
 	return href;
 }
 
-// Don't use this function, use _t or _tu
+// Don't use this function, use translate_formgen or translate_user
 var __tr = function __tr(s) {
 	console.log("About to translate: " + s);
 	var args = Array.prototype.slice.call(arguments, 1)
@@ -274,21 +274,21 @@ var __tr = function __tr(s) {
 }
 
 // Try and translate something that's formgen specific, alert if we can't
-window._t = function(s) {
+window.translate_formgen = function(s) {
 	var result = __tr.apply(null, arguments);
 	if (result[0] == "ok") return result[1];
-	alert("_t could not translate " + s);
+	alert("translate_formgen could not translate " + s);
 	return s;
 }
 // Try and translate something from the user specific translations, log a message if we can't
-window._tu = function(s) {
+window.translate_user = function(s) {
 	var result = __tr.apply(null, arguments);
 	if (result[0] == "ok") return result[1];
-	console.log("_tu could not translate " + s)
+	console.log("translate_user could not translate " + s)
 	return s;
 }
 // Try and translate a choice, this should be used for anything coming out of the database
-window._tc = function(d, column, text) {
+window.translate_choice = function(d, column, text) {
 	/*
 	if (d.getColumnChoicesList(column) == null) {
 		// not a prompt type that needs choices

@@ -8,10 +8,10 @@ var customJsOl = function customJsOl() {
 	if (optional_col_name == null || optional_col_name == undefined || typeof(optional_col_name) != "string") {
 		optional_col_name = displayCol(which, data.getMetadata(), data.getTableId());
 	} else {
-		optional_col_name = _tu(optional_col_name);
+		optional_col_name = translate_user(optional_col_name);
 	}
-	wrapper = function(i) { return _tc(data, which, i); };
-	if (pretty) wrapper = function(i) { return window.pretty(_tc(data, which, i.toString())); };
+	wrapper = function(i) { return translate_choice(data, which, i); };
+	if (pretty) wrapper = function(i) { return window.pretty(translate_choice(data, which, i.toString())); };
 	if (columnValue == null) columnValue = "null"; // because null.toString() will throw an exception
 	document.getElementById("inject-" + which).innerHTML = "<b>" + optional_col_name + "</b>: " + wrapper(columnValue);
 	document.getElementById("inject-" + which).classList.add("li-inner");
@@ -31,23 +31,23 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
 }
 allowed_tables = [];
 
-	document.getElementById("bfi").innerText = _tu("Basic Refrigerator Information")
+	document.getElementById("bfi").innerText = translate_user("Basic Refrigerator Information")
 	var model_callback = function model_callback(element, columnValue, data) {
 		var btn = document.getElementById("open_model");
-		btn.innerText = _tu("Model Information");
+		btn.innerText = translate_user("Model Information");
 		var model = data.getData(0, "catalog_id"); // from join, not actually the model id
 		var model_row_id = data.getData(0, "model_row_id");
 		btn.disabled = false;
 		btn.addEventListener("click", function() {
 			odkTables.openDetailView(null, "refrigerator_types", model_row_id);
 		});
-		build_generic_callback("model_id", true, _tu("Model ID"))(element, columnValue, data)
+		build_generic_callback("model_id", true, translate_user("Model ID"))(element, columnValue, data)
 		return "";
 	}
 	var hf_callback = function hf_callback(element, columnValue, data) {
 		/*
 			var btn = document.getElementById("open_hf");
-			btn.innerText = _tu("Health Facility Information");
+			btn.innerText = translate_user("Health Facility Information");
 			var hf = data.getData(0, "facility_name"); // from join, not actually the hf id
 			var hf_row_id = data.getData(0, "facility_row_id");
 			btn.disabled = false;
@@ -57,7 +57,7 @@ allowed_tables = [];
 		*/
 		build_generic_callback("facility_name", true, "Facility")(element, columnValue, data)
 		document.getElementById("add_m_log").disabled = false;
-		document.getElementById("add_m_log").innerText = _tu("Add Maintenance Record");
+		document.getElementById("add_m_log").innerText = translate_user("Add Maintenance Record");
 		var defaults = {"refrigerator_id": data.getData(0, "refrigerator_id"), "date_serviced": odkCommon.toOdkTimeStampFromDate(new Date())};
 		defaults["_default_access"] = data.getData(0, "_default_access");
 		defaults["_group_read_only"] = data.getData(0, "_group_read_only");
@@ -77,7 +77,7 @@ allowed_tables = [];
 			}
 		});
 		document.getElementById("view_m_log").disabled = false;
-		document.getElementById("view_m_log").innerText = _tu("View all maintenance logs")
+		document.getElementById("view_m_log").innerText = translate_user("View all maintenance logs")
 		document.getElementById("view_m_log").addEventListener("click", function add_m_log() {
 			odkTables.launchHTML(null, "config/assets/aa_m_logs_list.html#m_log/STATIC/SELECT *, refrigerators.refrigerator_id AS refs_refid, refrigerators.tracking_id AS refs_tracking_number FROM m_logs JOIN refrigerators ON refrigerators.refrigerator_id = m_logs.refrigerator_id WHERE refs_refid = ?/" + JSON.stringify([data.getData(0, "refrigerator_id")]) + "/maintenance records for the selected refrigerator");
 		});
@@ -100,10 +100,10 @@ allowed_tables = [];
 		{"column": "voltage_regulator", "callback": build_generic_callback("voltage_regulator", true)},
 		{"column": "date_serviced", "callback": build_generic_callback("date_serviced", function(i) {
 			if (i == "No Records") {
-				return _tu(i);
+				return translate_user(i);
 			}
 			return i.split("T")[0];
-		}, _tu("Date Serviced"))}
+		}, translate_user("Date Serviced"))}
 	]
 
 }

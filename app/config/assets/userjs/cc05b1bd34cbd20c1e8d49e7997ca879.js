@@ -21,7 +21,7 @@ list_views = {
 	
 	odkData.arbitraryQuery("health_facility", "SELECT admin_region, facility_type, regionLevel2, COUNT(facility_type) as cnt, _id FROM health_facility WHERE UPPER(admin_region) = UPPER(?) OR UPPER(regionLevel2) = UPPER(?) GROUP BY facility_type ORDER BY cnt DESC", [val, val], 100, 0, function(data) {
 		if (data.getCount() == 0) {
-			menu = {"label": _tu("Admin region ") + val + _tu(" has no health facilities!"), "type": "menu", "contents": []};
+			menu = {"label": translate_user("Admin region ") + val + translate_user(" has no health facilities!"), "type": "menu", "contents": []};
 			doMenu();
 		} else {
 			var distinct_admin_regions = 0;
@@ -46,7 +46,7 @@ list_views = {
 				where = "UPPER(regionLevel2) = UPPER(?) AND facility_type = ?";
 				hr_text = "health facilities in the region level 2 ? of the type ?";
 			}
-			menu = {"label": _tu("Filtering ") + val, "type": "menu", "contents": []}
+			menu = {"label": translate_user("Filtering ") + val, "type": "menu", "contents": []}
 
 			for (var i = 0; i < data.getCount(); i++) {
 				var ftype = data.getData(i, "facility_type")
@@ -65,7 +65,7 @@ list_views = {
 							odkTables.openTableToMapView(null, "health_facility", where, args, "config/assets/hack_for_hf_map.html#health_facility/STATIC/SELECT * FROM health_facility WHERE " + where + "/" + JSON.stringify(args) + "/" + hr_text);
 						}
 					//}
-					menu["contents"][menu["contents"].length - 1] = {"label": _tc(data, "facility_type", ftype) + " (" + count + ")", "type": "js", "function": cb}
+					menu["contents"][menu["contents"].length - 1] = {"label": translate_choice(data, "facility_type", ftype) + " (" + count + ")", "type": "js", "function": cb}
 				})(val, where, args, count, id);
 			}
 			doMenu();

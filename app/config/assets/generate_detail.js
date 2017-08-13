@@ -15,9 +15,9 @@ var global_which_cols_to_select = "*"
 // Function called on page load, tries to pull table id and row id from url hash, sets up doAction listener so we'll reload
 // when the user comes back from editing the row
 var ol = function ol() {
-	document.getElementById("back").innerText = _t("Back")
-	document.getElementById("delete").innerText = _t("Delete Row")
-	document.getElementById("edit").innerText = _t("Edit Row")
+	document.getElementById("back").innerText = translate_formgen("Back")
+	document.getElementById("delete").innerText = translate_formgen("Delete Row")
+	document.getElementById("edit").innerText = translate_formgen("Edit Row")
 	var hash = document.location.hash.substr(1);
 	if (hash.length > 0 && hash.indexOf("/") > 0) {
 		table_id = hash.split("/")[0]
@@ -53,11 +53,11 @@ var getWhichColumnAndThen = function getWhichColumnAndThen(callback) {
 }
 // Called when the user clicks the delete row button, asks for a confirmation then calls deleteRow
 var _delete = function _delete() {
-	if (confirm(_t("Please confirm deletion of row ") + row_id)) {
+	if (confirm(translate_formgen("Please confirm deletion of row ") + row_id)) {
 		odkData.deleteRow(table_id, null, row_id, function(d) {
 			odkCommon.closeWindow();
 		}, function(e) {
-			alert(_t("Failed to _delete row - ") + JSON.stringify(e));
+			alert(translate_formgen("Failed to _delete row - ") + JSON.stringify(e));
 		});
 	}
 }
@@ -84,7 +84,7 @@ var update_callback = function update_callback(d) {
 	ul.innerHTML = "";
 	// Handle no row
 	if (d.getCount() == 0) {
-		ul.innerText = _t("Row not found!");
+		ul.innerText = translate_formgen("Row not found!");
 	}
 	var temp_colmap = colmap;
 	if (colmap.length == 0) {
@@ -154,7 +154,7 @@ var update_callback = function update_callback(d) {
 			pretty_col = found["display_name"];
 			is_html = "html";
 		}
-		var pretty_value = _tc(d, col, val);
+		var pretty_value = translate_choice(d, col, val);
 		if ("pretty_value" in found && found["pretty_value"]) {
 			pretty_value = pretty(pretty_value);
 		}
@@ -188,7 +188,7 @@ var make_li = function make_li(column_id, column_text, value_text, is_html) {
 	return wrapper;
 }
 var failure_callback = function failure_callback(e) {
-	alert(_t("Error querying data: ") + e);
+	alert(translate_formgen("Error querying data: ") + e);
 	odkCommon.closeWindow();
 }
 var update = function update() {

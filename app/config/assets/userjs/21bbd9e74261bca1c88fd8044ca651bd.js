@@ -8,10 +8,10 @@ var customJsOl = function customJsOl() {
 	if (optional_col_name == null || optional_col_name == undefined || typeof(optional_col_name) != "string") {
 		optional_col_name = displayCol(which, data.getMetadata(), data.getTableId());
 	} else {
-		optional_col_name = _tu(optional_col_name);
+		optional_col_name = translate_user(optional_col_name);
 	}
-	wrapper = function(i) { return _tc(data, which, i); };
-	if (pretty) wrapper = function(i) { return window.pretty(_tc(data, which, i.toString())); };
+	wrapper = function(i) { return translate_choice(data, which, i); };
+	if (pretty) wrapper = function(i) { return window.pretty(translate_choice(data, which, i.toString())); };
 	if (columnValue == null) columnValue = "null"; // because null.toString() will throw an exception
 	document.getElementById("inject-" + which).innerHTML = "<b>" + optional_col_name + "</b>: " + wrapper(columnValue);
 	document.getElementById("inject-" + which).classList.add("li-inner");
@@ -36,7 +36,7 @@ allowed_tables = [];
 	global_which_cols_to_select = "*, (SELECT COUNT(*) FROM refrigerators WHERE facility_row_id = health_facility._id) as refrig_with_this_hfid_count"
 	var fname_callback = function fname_callback(element, columnValue, data) {
 		generic_callback(element, columnValue, data, "facility_name", true, "Health Facility ID");
-		document.getElementById("refrigerator_inventory").innerHTML = _tu("Refrigerator Inventory (<span id='refrig_with_this_hfid_count'>Loading...</span>)")
+		document.getElementById("refrigerator_inventory").innerHTML = translate_user("Refrigerator Inventory (<span id='refrig_with_this_hfid_count'>Loading...</span>)")
 		document.getElementById("refrigerator_inventory").disabled = false;
 		document.getElementById("refrigerator_inventory").addEventListener("click", function click() {
 			odkTables.launchHTML(null, "config/assets/aa_refrigerators_list.html#refrigerators/health_facility.facility_name = ?/" + data.getData(0, "facility_name"));
@@ -84,10 +84,10 @@ allowed_tables = [];
 		{"column": 'vaccine_reserve_stock_requirement', "callback": build_generic_callback("vaccine_reserve_stock_requirement", true, "Vaccine Reserve Stock Req")},
 		{"column": 'vaccine_supply_mode', "callback": build_generic_callback("vaccine_supply_mode", true)},
 	]
-	document.getElementById("bfi").innerText = _tu("Basic Facility Information");
-	document.getElementById("pi").innerText = _tu("Power Information");
-	document.getElementById("locationi").innerText = _tu("Location Information");
-	document.getElementById("stocki").innerText = _tu("Stock Information");
-	document.getElementById("addref").innerText = _tu("Add Refrigerator");
+	document.getElementById("bfi").innerText = translate_user("Basic Facility Information");
+	document.getElementById("pi").innerText = translate_user("Power Information");
+	document.getElementById("locationi").innerText = translate_user("Location Information");
+	document.getElementById("stocki").innerText = translate_user("Stock Information");
+	document.getElementById("addref").innerText = translate_user("Add Refrigerator");
 
 }

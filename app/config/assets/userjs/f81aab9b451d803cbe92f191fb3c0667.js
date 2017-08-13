@@ -8,10 +8,10 @@ var customJsOl = function customJsOl() {
 	if (optional_col_name == null || optional_col_name == undefined || typeof(optional_col_name) != "string") {
 		optional_col_name = displayCol(which, data.getMetadata(), data.getTableId());
 	} else {
-		optional_col_name = _tu(optional_col_name);
+		optional_col_name = translate_user(optional_col_name);
 	}
-	wrapper = function(i) { return _tc(data, which, i); };
-	if (pretty) wrapper = function(i) { return window.pretty(_tc(data, which, i.toString())); };
+	wrapper = function(i) { return translate_choice(data, which, i); };
+	if (pretty) wrapper = function(i) { return window.pretty(translate_choice(data, which, i.toString())); };
 	if (columnValue == null) columnValue = "null"; // because null.toString() will throw an exception
 	document.getElementById("inject-" + which).innerHTML = "<b>" + optional_col_name + "</b>: " + wrapper(columnValue);
 	document.getElementById("inject-" + which).classList.add("li-inner");
@@ -32,7 +32,7 @@ var build_generic_callback = function build_generic_callback(which, pretty, opti
 allowed_tables = [];
 
 
-	document.getElementById("mi").innerText = _tu("Model Information")
+	document.getElementById("mi").innerText = translate_user("Model Information")
 	document.getElementById("edit").style.display = "none";
 	document.getElementById("delete").style.display = "none";
 
@@ -40,7 +40,7 @@ allowed_tables = [];
 	global_which_cols_to_select = "*, (SELECT COUNT(*) FROM refrigerators WHERE model_row_id = refrigerator_types._id) as refrig_with_this_model_count"
 	var mid_callback = function mid_callback(element, columnValue, data) {
 		generic_callback(element, columnValue, data, "model_id", true);
-		document.getElementById("open_model").innerHTML = _tu("View All ") + columnValue + _tu(" Refrigerators (<span id='refrig_with_this_model_count'>Loading...</span>)")
+		document.getElementById("open_model").innerHTML = translate_user("View All ") + columnValue + translate_user(" Refrigerators (<span id='refrig_with_this_model_count'>Loading...</span>)")
 		document.getElementById("open_model").disabled = false;
 		document.getElementById("open_model").addEventListener("click", function click() {
 			odkTables.launchHTML(null, "config/assets/aa_refrigerators_list.html#refrigerators/model_row_id = ?/" + row_id);

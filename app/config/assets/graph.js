@@ -31,7 +31,7 @@ var parseReallyDirtyInt = function parseReallyDirtyInt(val) {
 var ol = function ol() {
 	var split = window.location.hash.substr(1).split("/");
 	if (split.length < 6) {
-		alert(_t("Need at least 6 arguments"));
+		alert(translate_formgen("Need at least 6 arguments"));
 	}
 	type = split[0];
 	table_id = split[1];
@@ -39,7 +39,7 @@ var ol = function ol() {
 	raw = split[3];
 	args = jsonParse(split[4]);
 	title = split[5];
-	title = _tu(title);
+	title = translate_user(title);
 	console.log(raw);
 	for (var i = 0; i < args.length; i++) {
 		title = title.replace("?", args[i]);
@@ -94,7 +94,7 @@ window.success = function success(d) {
 		return retVal;
 	});
 	if (total_total == 0) {
-		document.getElementById("key").innerText = _t("No results")
+		document.getElementById("key").innerText = translate_formgen("No results")
 	} else {
 		if (type == "pie") {
 			doPie(d);
@@ -171,7 +171,7 @@ var add_key = function add_key(color, val, d, percent, raw_number) {
 	if (val.length == 29 && val[10] == "T") {
 		label_text = val.split("T")[0]
 	} else {
-		label_text = _tu(_tc(d, graph_cols[0], val));
+		label_text = translate_user(translate_choice(d, graph_cols[0], val));
 	}
 	label.appendChild(document.createTextNode(" " + label_text + " - " + (show_value ? (show_value === true ? raw_number : show_value(raw_number, percent)) : pretty_percent(percent))));
 	document.getElementById("key").appendChild(label);

@@ -71,13 +71,13 @@ var add = function() {
 
 // Function run on page load
 var ol = function ol() {
-	document.getElementById("back").innerText = _t("Back");
-	document.getElementById("add").innerText = _t("Add Row");
-	document.getElementById("group-by").innerText = _t("Group by");
-	document.getElementById("group-by-go").innerText = _t("Go");
-	document.getElementById("prev").innerText = _t("Previous Page");
-	document.getElementById("next").innerText = _t("Next Page");
-	document.getElementById("search-button").innerText = _t("Search");
+	document.getElementById("back").innerText = translate_formgen("Back");
+	document.getElementById("add").innerText = translate_formgen("Add Row");
+	document.getElementById("group-by").innerText = translate_formgen("Group by");
+	document.getElementById("group-by-go").innerText = translate_formgen("Go");
+	document.getElementById("prev").innerText = translate_formgen("Previous Page");
+	document.getElementById("next").innerText = translate_formgen("Next Page");
+	document.getElementById("search-button").innerText = translate_formgen("Search");
 	// The sections of the url hash delimited by slashes
 	var sections = document.location.hash.substr(1).split("/");
 	// The first section is always the table id
@@ -106,7 +106,7 @@ var ol = function ol() {
 			global_human_readable_what = sections[4];
 			global_view_type = STATIC;
 		} else {
-			alert(_t("Unknown selector in query hash") + ": " + selector);
+			alert(translate_formgen("Unknown selector in query hash") + ": " + selector);
 		}
 	}
 	var script = document.createElement("script");
@@ -132,7 +132,7 @@ var frameworkLoaded = function frameworkLoaded() {
 	// If we fail, harshly warn the user (even though we're not actually bailing out)
 	if (display_col == undefined || display_col == null) {
 		if (!embedded) {
-			alert(_t("Couldn't guess instance col. Bailing out, you're on your own."));
+			alert(translate_formgen("Couldn't guess instance col. Bailing out, you're on your own."));
 		}
 		display_col = "_id"; // BAD IDEA
 	}
@@ -163,7 +163,7 @@ var frameworkLoaded = function frameworkLoaded() {
 	// a table id before we can start doing our queries.
 	if (table_id.length == 0) {
 		if (!embedded) {
-			alert(_t("No table id! Please set it in customJsOl or pass it in the url hash"));
+			alert(translate_formgen("No table id! Please set it in customJsOl or pass it in the url hash"));
 		}
 		odkData.getViewData(function success(d) {
 			table_id = d.getTableId();
@@ -231,7 +231,7 @@ var update_total_rows = function update_total_rows(force) {
 		doSearch();
 	};
 	var failure = function failure(e) {
-		alert(_t("Unexpected error ") + e);
+		alert(translate_formgen("Unexpected error ") + e);
 	};
 	var first_query = make_query(search, true, false, global_which_cols_to_select)
 	var the_query = make_query(search, false, true, "COUNT(*) AS cnt FROM ("+first_query[0]+")")
@@ -269,7 +269,7 @@ var getCols = function getCols() {
 			}
 			document.getElementById("group-by").disabled = false;
 		}, function failure(e) {
-			alert(_t("Could not get columns: ") + e);
+			alert(translate_formgen("Could not get columns: ") + e);
 		}, 0, 0);
 	}
 }
@@ -311,13 +311,13 @@ var doSearch = function doSearch() {
 		if (d.getCount() == 0) {
 			// try more columns first
 			if (!try_more_cols) {
-				list.innerText = _t("Simple search did not return any results, trying a more advanced search. This might take a minute...");
+				list.innerText = translate_formgen("Simple search did not return any results, trying a more advanced search. This might take a minute...");
 				try_more_cols = true;
 				update_total_rows(true)
 				return;
 			} else {
 				// if that doesn't work
-				list.innerText = _t("No results");
+				list.innerText = translate_formgen("No results");
 				document.getElementById("navigation-text").innerText = ""
 				try_more_cols = false;
 			}
@@ -331,21 +331,21 @@ var doSearch = function doSearch() {
 		// trying to make a computer speak english is hard
 		var rows = ""
 		if (global_view_type == LIST) {
-			rows = _t("rows ");
+			rows = translate_formgen("rows ");
 		}
-		var newtext = _t("Showing ") + rows + (offset + (total_rows == 0 ? 0 : 1)) + "-" + (offset + d.getCount()) + _t(" of ") + display_total;
+		var newtext = translate_formgen("Showing ") + rows + (offset + (total_rows == 0 ? 0 : 1)) + "-" + (offset + d.getCount()) + translate_formgen(" of ") + display_total;
 		// if we have a group by, mention that we're in a group by view
 		if (global_view_type == GROUP_BY) {
-			newtext += _t(" distinct values of ") + get_from_allowed_group_bys(allowed_group_bys, global_group_by, false, metadata, table_id);
+			newtext += translate_formgen(" distinct values of ") + get_from_allowed_group_bys(allowed_group_bys, global_group_by, false, metadata, table_id);
 		}
 		// if we're in a collection, mention that
 		if (global_view_type == COLLECTION) {
 			var where_col = global_where_clause.split(" ")[0];
 			if (where_col.indexOf(".") >= 0) where_col = where_col.split(".")[1];
-			newtext += _t(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, where_col, false, metadata, table_id) + _t(" is ") + _tc(d, where_col, global_where_arg);
+			newtext += translate_formgen(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, where_col, false, metadata, table_id) + translate_formgen(" is ") + translate_choice(d, where_col, global_where_arg);
 		}
 		if (global_view_type == STATIC) {
-			var hrw = _tu(global_human_readable_what);
+			var hrw = translate_user(global_human_readable_what);
 			for (var i = 0; i < global_static_args.length; i++) {
 				hrw = hrw.replace("?", global_static_args[i]);
 			}
@@ -370,7 +370,7 @@ var doSearch = function doSearch() {
 			displays.classList.add("displays");
 			var mainDisplay = document.createElement("div")
 			mainDisplay.classList.add("main-display");
-			var to_display = _tc(d, display_col, d.getData(i, display_col));
+			var to_display = translate_choice(d, display_col, d.getData(i, display_col));
 			if (embedded) to_display = display_col
 			if (display_col_wrapper != null) {
 				to_display = display_col_wrapper(d, i, to_display);
@@ -405,12 +405,12 @@ var doSearch = function doSearch() {
 					subDisplay.appendChild(span);
 				} else if ("display_name" in display_subcol[j]) {
 					var label_text = display_subcol[j]["display_name"];
-					subDisplay.appendChild(document.createTextNode(_tu(label_text)));
+					subDisplay.appendChild(document.createTextNode(translate_user(label_text)));
 				}
 				if (col != null && !("callback" in display_subcol[j])) {
 					// if pretty_value is missing or it's present but set to true, translate and prettify the database value
 					if (!("pretty_value" in display_subcol[j]) || display_subcol[j]["pretty_value"]) {
-						subDisplay.appendChild(document.createTextNode(_tc(d, col, value)));
+						subDisplay.appendChild(document.createTextNode(translate_choice(d, col, value)));
 					} else {
 						subDisplay.appendChild(document.createTextNode(value));
 					}
@@ -432,9 +432,9 @@ var doSearch = function doSearch() {
 			var buttons = document.createElement("div");
 			buttons.classList.add("buttons");
 			var edit = document.createElement("button");
-			edit.innerText = _t("Edit");
+			edit.innerText = translate_formgen("Edit");
 			var _delete = document.createElement("button");
-			_delete.innerText = _t("Delete");
+			_delete.innerText = translate_formgen("Delete");
 			// Add event listeners for the edit and delete buttons, but also one for displays that will
 			// launch a detail view if we're not in a group by view, otherwise add the collection view
 			(function(edit, _delete, i, d) {
@@ -461,13 +461,13 @@ var doSearch = function doSearch() {
 					if (display_col_wrapper != null) {
 						to_display = display_col_wrapper(d, i, to_display);
 					}
-					if (!confirm(_t("Please confirm deletion of row ") + to_display)) {
+					if (!confirm(translate_formgen("Please confirm deletion of row ") + to_display)) {
 						return;
 					}
 					odkData.deleteRow(table_id, null, d.getData(i, "_id"), function(d) {
 						update_total_rows(true);
 					}, function(e) {
-						alert(_t("Failed to _delete row - ") + JSON.stringify(e));
+						alert(translate_formgen("Failed to _delete row - ") + JSON.stringify(e));
 					});
 				});
 			})(edit, _delete, i, d);
@@ -519,7 +519,7 @@ var doSearch = function doSearch() {
 		}
 		customJsSearch();
 	}, function(d) {
-		alert(_t("Failure! ") + d);
+		alert(translate_formgen("Failure! ") + d);
 	});
 }
 // Called when the user clicks the group by button, or on load if we're in a group by view or a collection view
@@ -543,7 +543,7 @@ var groupBy = function groupBy() {
 		for (var i = 0; i < allowed_group_bys.length; i++) {
 			var child = document.createElement("option");
 			child.value = allowed_group_bys[i]["column"];
-			child.innerText = _tu(get_from_allowed_group_bys(allowed_group_bys, allowed_group_bys[i]["column"], allowed_group_bys[i], metadata, table_id));
+			child.innerText = translate_user(get_from_allowed_group_bys(allowed_group_bys, allowed_group_bys[i]["column"], allowed_group_bys[i], metadata, table_id));
 			list.appendChild(child);
 			// Not sure if this is important or not
 			if (global_group_by == cols[i]) {
