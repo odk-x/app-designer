@@ -1,7 +1,21 @@
 <!doctype html>
 <!--
 
+	There's a config in the `example_config` file. Load up tab 8, click "Load" and paste the contents of the
+	entire file into the text box that it gives you. It should load up a demo that will overwrite the "teatime.html" file.
 
+	When you make a list view in the list view designer and hit save, it will give you some javascript. That javascript can be put in the "Js On Load"
+	for a list view in this tab to actually use the list view on a device
+
+	The "Save Build Script" button will generate something that can be put in an "app_specific_appnamehere.py" file in the
+	formgen repo, then run `./build yourappnamehere` (after setting your app designer folder in utils.py), and it will
+	generate the list view that you made (and all of the other files you configured), checking for syntax errors as it goes
+
+	So the challenge here is getting things 
+	- from the list view designer to this tab
+	- then from this tab to a saveable and restorable file (like `example_config`).
+	- and also from this tab to a python file in a formgen submodule
+	- then running ./build in the formgen submodule
 	
 	
 -->
@@ -166,11 +180,12 @@ textarea {
 				redrawLeft();
 			}
 			var userSavePy = function() {
-				give_user("Copy and paste this into your app_specific_yourappnamehere.py file and run ./build yourappnamehere", make_custom_py());
+				give_user("# Copy and paste this into your app_specific_yourappnamehere.py file and run ./build yourappnamehere", make_custom_py());
 			}
 			var userSave = function() {
-				give_user("Copy this to a safe place and enter it when you click Load", "files = " + JSON.stringify(files) + ";");
+				give_user("// Copy this to a safe place and enter it when you click Load", "files = " + JSON.stringify(files) + ";");
 			}
+			// This function won't be needed once I know how to save stuff to the filesystem
 			var give_user = function give_user(a, b) {
 				var text = a + "\n\n\n" + b;
 				var url = "data:text/text;base64," + btoa(text);
