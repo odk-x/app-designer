@@ -146,11 +146,7 @@
 				iframe.contentWindow.odkData = odkData
 				iframe.contentWindow.location.hash = "#" + table_id
 				iframe.contentWindow.table_id = table_id
-				try {
-					iframe.contentWindow.ol();
-				} catch (e) {
-					// this is expected
-				}
+				iframe.contentDocument.getElementById("table_id").innerText = display(localized_tables[table_id], table_id, window.possible_wrapped.concat("title"), table_id)
 				iframe.contentWindow.display_col = display_col
 				iframe.contentWindow.display_subcol = display_subcol
 				iframe.contentWindow.allowed_group_bys = allowed_group_bys
@@ -523,8 +519,13 @@
 						} else {
 							display_input = display_input.value;
 						}
-						allowed_group_bys = allowed_group_bys.concat(0);
-						allowed_group_bys[allowed_group_bys.length - 1] = [col, display_input]
+						var item = {"column": col};
+						if (typeof(display_input) == "string") {
+							item["display_name"] = display_input;
+						} else {
+							item["pretty"] = display_input;
+						}
+						allowed_group_bys = allowed_group_bys.concat(item);
 					}
 				}
 			}
@@ -552,9 +553,13 @@
 						exists = true;
 					} else {
 						for (var j = 0; j < allowed_group_bys.length; j++) {
-							if (allowed_group_bys[j][0] == col) {
+							if (allowed_group_bys[j]["column"] == col) {
 								exists = true;
-								value = allowed_group_bys[j][1];
+								if ("pretty" in allowed_group_bys[j]) {
+									value = allowed_group_bys[j]["pretty"];
+								} else {
+									value = allowed_group_bys[j]["display_name"]
+								}
 								break;
 							}
 						}
