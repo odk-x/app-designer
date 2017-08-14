@@ -21,9 +21,9 @@
 			var display_col = "";
 			var display_subcol = []
 			var allowed_group_bys = null;
-			var global_cols_to_select = "*";
+			var global_which_cols_to_select = "*";
 			var global_join = "";
-			// we store global_cols_to_select as a string so we can give it to the slave iframe, but we can't parse that string so for when the
+			// we store global_which_cols_to_select as a string so we can give it to the slave iframe, but we can't parse that string so for when the
 			// user is saving/loading configuration, we store/read it out of this.
 			// the format is [["table_a", "column_key_in_table_a", "alias"], ...]
 			// one triplet for each extra column to select
@@ -177,10 +177,10 @@
 						"global_join = " + print(global_join) + ";"
 					));
 				}
-				if (global_cols_to_select != "*" && global_cols_to_select != table_id + ".*") {
+				if (global_which_cols_to_select != "*" && global_which_cols_to_select != table_id + ".*") {
 					pre.appendChild(document.createElement("br"))
 					pre.appendChild(document.createTextNode(
-						"global_cols_to_select = " + print(global_cols_to_select) + ";"
+						"global_which_cols_to_select = " + print(global_which_cols_to_select) + ";"
 					));
 				}
 			}
@@ -603,7 +603,7 @@
 			// pulls the columns to select off the screen and into its two global variables
 			var getColsToSelect = function getColsToSelect() {
 				if (!advanced) {
-					global_cols_to_select = table_id + ".*"
+					global_which_cols_to_select = table_id + ".*"
 					all_cols_to_select = [];
 					return;
 				}
@@ -614,9 +614,9 @@
 					all_cols_to_select = all_cols_to_select.concat(0);
 					all_cols_to_select[all_cols_to_select.length - 1] = [elems[i].getAttribute("data-dbcol"), elems[i + 1].value]
 				}
-				global_cols_to_select = table_id + ".*"
+				global_which_cols_to_select = table_id + ".*"
 				for (var i = 0; i < all_cols_to_select.length; i++) {
-					global_cols_to_select += ", " + all_cols_to_select[i][0] + " AS " + all_cols_to_select[i][1]
+					global_which_cols_to_select += ", " + all_cols_to_select[i][0] + " AS " + all_cols_to_select[i][1]
 				}
 			}
 			// redraws the columns that can be selected from the join tables
@@ -704,7 +704,7 @@
 				return JSON.stringify(thing)
 			}
 			var userSave = function() {
-				prompt("Copy this configuration to somewhere safe.", save())
+				prompt("Copy this configuration to somewhere safe, then paste it into the Custom Js On Load section of a List View in the Files tab to use it.", save())
 			}
 			var userLoad = function() {
 				("global",eval)(prompt("Paste in your saved configuration here. Please make sure you've chosen the right table first!"))
