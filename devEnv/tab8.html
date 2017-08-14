@@ -155,9 +155,20 @@ textarea {
 				}
 				return retVal;
 			}
+			var userLoad = function() {
+				("global", eval)(prompt("Please paste in your configuration (it starts with 'files = ')"))
+				redrawLeft();
+			}
+			var userSave = function() {
+				prompt("Put this in your app_specific_yourappnamehere.py file and run ./build yourappnamehere", make_custom_py());
+				prompt("Copy this to a safe place and enter it when you click Load", "files = " + JSON.stringify(files) + ";");
+			}
 		</script>
 	</head>
 	<body onLoad='ol();'>
+		<button id='save' onClick='userSave();'>Save</button>
+		<button id='load' onClick='userLoad();'>Load</button>
+		<br />
 		<input type='text' id='filename' />
 		<select id='type'>
 			<option value='table'>List View</option>
