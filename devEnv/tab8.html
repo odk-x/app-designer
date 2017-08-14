@@ -1,6 +1,11 @@
 <!doctype html>
 <html>
 	<head>
+		<style>
+textarea {
+	min-width: 80%;
+}
+		</style>
 		<script>
 			var files = [];
 			var ol = function ol() {
@@ -50,7 +55,10 @@
 				for (var i = 0; i < fields.length; i++) {
 					var label = document.createTextNode(fields[i]);
 					var box = document.createElement("textarea");
-					box.innerText = file[i + 2];
+					var text_in_box = file[i + 2];
+					box.value = text_in_box;
+					var height = 20 * text_in_box.split("\n").length;
+					box.style.minHeight = height.toString() + "px";
 					box.setAttribute("data-index", i + 2);
 					right.appendChild(label);
 					right.appendChild(document.createElement("br"));
@@ -96,6 +104,10 @@
 				alert("Filename not found in left");
 			}
 			var addFile = function addFile(filename, type) {
+				if (filename.length == 0) {
+					alert("Filename is empty!");
+					return;
+				}
 				for (var i = 0; i < files.length; i++) {
 					if (files[i][0] == filename) {
 						alert("A file with that name already exists");
