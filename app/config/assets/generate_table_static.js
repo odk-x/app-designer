@@ -2,8 +2,10 @@
 // odkData.query.apply(make_query(...)) but we need functionality that's not available in odkData.query, so we just pull
 // random indexes out of its result array whenever we need them and use that to call arbitraryQuery
 var make_query = function make_query(search, apply_where, for_total, cols_to_select) {
-	if (apply_where) {
-		cols_to_select = cols_to_select + " FROM (" + global_static + ")";
+	if (!apply_where) {
+		// SELECT COUNT(*) AS cnt FROM (first_query)
+	} else {
+		cols_to_select = "* FROM (" + global_static + ")";
 	}
 	// bind args
 	var query_args = []

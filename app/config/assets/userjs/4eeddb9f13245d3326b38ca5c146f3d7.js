@@ -31,8 +31,8 @@ document.getElementById("add").style.display = "none";
 	]
 	allowed_group_bys = [];
 	table_id = "m_logs";
-	global_join = "refrigerators ON refrigerators.refrigerator_id = m_logs.refrigerator_id"
-	global_which_cols_to_select = "*, refrigerators.refrigerator_id AS refs_refid, refrigerators.tracking_id AS refs_tracking_number"
+	global_join = "refrigerators ON refrigerators._id = m_logs.refrigerator_id"
+	global_which_cols_to_select = "*, refrigerators.tracking_id AS refs_tracking_number"
 	document.getElementById("add").style.display = "none";
 
 }

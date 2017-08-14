@@ -83,6 +83,12 @@ var d3Bar = function doBar(d) {
 		.attr("height", function(pair) { return (global_width * pair[1] / max); });
 
 }
-var d3Line = function doLine(d, type) {
-	alert("Not supported");
+var d3Line = function d3Line(d, type) {
+	alert("Not supported yet with d3, falling back to native");
+	// TEMP HACK
+	canvas = document.createElement("canvas")
+	document.body.insertBefore(canvas, document.getElementById("key"));
+	document.getElementById("key").style.marginTop = global_width.toString() + "px";
+	doLine(d, type);
+	throw "die"; // don't actually set height
 }

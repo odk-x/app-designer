@@ -214,8 +214,9 @@ var newLimit = function newLimit() {
 	doSearch();
 }
 // Updates the number of total rows that the query could potentially return, so when you see "Showing rows 1-20 of 841", this
-// is the function that calcualted the 841.
+// is the function that calculated the 841.
 // Will run its query then update `total_rows` and call doSearch
+// There is potentially a way to abstracting the logic of updating "navigation-text" to outside doSearch and running both queries simultaneously, but I haven't gotten around to that yet
 var update_total_rows = function update_total_rows(force) {
 	var search = document.getElementById("search-box").value;
 	if (search == cached_search && !force) {
