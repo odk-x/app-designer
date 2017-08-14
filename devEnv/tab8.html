@@ -1,4 +1,10 @@
 <!doctype html>
+<!--
+
+
+	
+	
+-->
 <html>
 	<head>
 		<style>
@@ -150,7 +156,7 @@ textarea {
 					file.slice(2).forEach(function(entry) {
 						retVal += JSON.stringify(entry) + ",";
 					})
-					retVal = retVal.substr(0, retVal.length - 1) // chop off the trailing comma
+					retVal = retVal.substr(0, retVal.length - 1); // chop off the trailing comma
 					retVal += ");\n\n"
 				}
 				return retVal;
@@ -159,13 +165,21 @@ textarea {
 				("global", eval)(prompt("Please paste in your configuration (it starts with 'files = ')"))
 				redrawLeft();
 			}
+			var userSavePy = function() {
+				give_user("Copy and paste this into your app_specific_yourappnamehere.py file and run ./build yourappnamehere", make_custom_py());
+			}
 			var userSave = function() {
-				prompt("Put this in your app_specific_yourappnamehere.py file and run ./build yourappnamehere", make_custom_py());
-				prompt("Copy this to a safe place and enter it when you click Load", "files = " + JSON.stringify(files) + ";");
+				give_user("Copy this to a safe place and enter it when you click Load", "files = " + JSON.stringify(files) + ";");
+			}
+			var give_user = function give_user(a, b) {
+				var text = a + "\n\n\n" + b;
+				var url = "data:text/text;base64," + btoa(text);
+				window.open(url, "", "width=640,height=200")
 			}
 		</script>
 	</head>
 	<body onLoad='ol();'>
+		<button id='savepy' onClick='userSavePy();'>Save Build Script</button>
 		<button id='save' onClick='userSave();'>Save</button>
 		<button id='load' onClick='userLoad();'>Load</button>
 		<br />
