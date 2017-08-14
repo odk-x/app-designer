@@ -49,6 +49,13 @@ var global_static = false;
 var global_static_args = false;
 var global_human_readable_what = false;
 
+var global_view_type = -1;
+var LIST = 0, GROUP_BY = 1, COLLECTION = 2, STATIC = 3;
+
+// Used for caching, progressively cache a smaller displays width as the user needs more and more buttons
+// If we get to the bottom and only the "edit" button has ever been shown, then the displays will have a wider width
+// than if we get to the bottom and both the edit and delete buttons have been shown
+var runningButtonsToShow = 0;
 
 // Helper function to add a row with formgen or survey. If the table is in allowed_tables it opens
 // with formgen, otherwise survey
@@ -64,13 +71,13 @@ var add = function() {
 
 // Function run on page load
 var ol = function ol() {
-	document.getElementById("back").innerText = _t("Back");
-	document.getElementById("add").innerText = _t("Add Row");
-	document.getElementById("group-by").innerText = _t("Group by");
-	document.getElementById("group-by-go").innerText = _t("Go");
-	document.getElementById("prev").innerText = _t("Previous Page");
-	document.getElementById("next").innerText = _t("Next Page");
-	document.getElementById("search-button").innerText = _t("Search");
+	document.getElementById("back").innerText = translate_formgen("Back");
+	document.getElementById("add").innerText = translate_formgen("Add Row");
+	document.getElementById("group-by").innerText = translate_formgen("Group by");
+	document.getElementById("group-by-go").innerText = translate_formgen("Go");
+	document.getElementById("prev").innerText = translate_formgen("Previous Page");
+	document.getElementById("next").innerText = translate_formgen("Next Page");
+	document.getElementById("search-button").innerText = translate_formgen("Search");
 	// The sections of the url hash delimited by slashes
 	var sections = document.location.hash.substr(1).split("/");
 	// The first section is always the table id
@@ -78,24 +85,38 @@ var ol = function ol() {
 	// If we have more than one section, we must either be in a group by view or a collection view
 	if (sections.length == 0) {
 		// let's hope the user configured one
+		global_view_type = LIST;
 	} else if (sections.length == 1) {
 		// we should have a table id now
+		global_view_type = LIST;
 	} else if (sections.length == 2) {
 		global_group_by = sections[1];
+		global_view_type = GROUP_BY;
 	} else if (sections.length == 3) {
 		global_where_clause = sections[1]
+		// Strip off leading . if possible
 		if (global_where_clause && !(global_where_clause.indexOf(".") >= 0)) global_where_clause = table_id + "." + global_where_clause
 		global_where_arg = sections[2]
+		global_view_type = COLLECTION;
 	} else {
 		var selector = sections[1];
 		if (selector == "STATIC") {
 			global_static = sections[2];
 			global_static_args = jsonParse(sections[3]);
 			global_human_readable_what = sections[4];
+			global_view_type = STATIC;
 		} else {
-			alert(_t("Unknown selector in query hash") + ": " + selector);
+			alert(translate_formgen("Unknown selector in query hash") + ": " + selector);
 		}
 	}
+	var script = document.createElement("script");
+	if (global_view_type == LIST) script.src = "generate_table_list.js"
+	if (global_view_type == GROUP_BY) script.src = "generate_table_group_by.js"
+	if (global_view_type == COLLECTION) script.src = "generate_table_collection.js"
+	if (global_view_type == STATIC) script.src = "generate_table_static.js"
+	document.getElementsByTagName("head")[0].appendChild(script);
+}
+var frameworkLoaded = function frameworkLoaded() {
 	// SET THIS
 	display_subcol = [];
 	// SET THIS
@@ -103,15 +124,6 @@ var ol = function ol() {
 	customJsOl();
 	// If there are no columns the user is allowed to group by, disable the group by button
 	if (allowed_group_bys != null && allowed_group_bys.length == 0) document.getElementById("group-by").style.display = "none"
-	// If there are some columns, get them into the standard format, a list of pairs [:column_name, :display_name]
-	// if true is passed (as a boolean, not a string) as the display name, pretty(column_name) is used as the display name
-	if (allowed_group_bys != null && allowed_group_bys.length > 0) {
-		for (var i = 0; i < allowed_group_bys.length; i++) {
-			if (typeof(allowed_group_bys[i]) == "string") {
-				allowed_group_bys[i] = [allowed_group_bys[i], true];
-			}
-		}
-	}
 	// If the user didn't set a display column (the one to show in the big text), then try and pull it
 	// from the table's instance column
 	if (display_col == null) {
@@ -120,7 +132,7 @@ var ol = function ol() {
 	// If we fail, harshly warn the user (even though we're not actually bailing out)
 	if (display_col == undefined || display_col == null) {
 		if (!embedded) {
-			alert(_t("Couldn't guess instance col. Bailing out, you're on your own."));
+			alert(translate_formgen("Couldn't guess instance col. Bailing out, you're on your own."));
 		}
 		display_col = "_id"; // BAD IDEA
 	}
@@ -151,7 +163,7 @@ var ol = function ol() {
 	// a table id before we can start doing our queries.
 	if (table_id.length == 0) {
 		if (!embedded) {
-			alert(_t("No table id! Please set it in customJsOl or pass it in the url hash"));
+			alert(translate_formgen("No table id! Please set it in customJsOl or pass it in the url hash"));
 		}
 		odkData.getViewData(function success(d) {
 			table_id = d.getTableId();
@@ -187,8 +199,8 @@ var olHasTableId = function olHasTableId() {
 			odkCommon.removeFirstQueuedAction();
 		}
 	});
-	if (global_static) {
-		document.getElementById("search").style.display = "none";
+	if (global_view_type == STATIC) {
+		//document.getElementById("search").style.display = "none";
 	}
 	update_total_rows(true);
 }
@@ -219,22 +231,12 @@ var update_total_rows = function update_total_rows(force) {
 		doSearch();
 	};
 	var failure = function failure(e) {
-		alert(_t("Unexpected error ") + e);
+		alert(translate_formgen("Unexpected error ") + e);
 	};
-	// I don't really remember why these are different cases, but having them both use the query currently in the else
-	// clause will cause it to return the wrong number of results in a group by view
-	//var the_query = make_query(search, 10000, 0);
-	if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
-		var first_query = make_query(search, true, false, global_which_cols_to_select)
-		var the_query = make_query(search, false, true, "COUNT(*) AS cnt FROM ("+first_query[0]+")")
-		console.log(the_query[0]);
-		odkData.arbitraryQuery(table_id, the_query[0], the_query[1], 10000, 0, success, failure);
-	} else {
-		var first_query = make_query(search, true, false, global_which_cols_to_select)
-		var the_query = make_query(search, false, true, "COUNT(*) AS cnt FROM ("+first_query[0]+")")
-		console.log(the_query[0]);
-		odkData.arbitraryQuery(table_id, the_query[0], the_query[1], 10000, 0, success, failure);
-	}
+	var first_query = make_query(search, true, false, global_which_cols_to_select)
+	var the_query = make_query(search, false, true, "COUNT(*) AS cnt FROM ("+first_query[0]+")")
+	console.log(the_query[0]);
+	odkData.arbitraryQuery(table_id, the_query[0], first_query[1], 10000, 0, success, failure);
 }
 // Called when the user clicks the next button. This can't make offset too big because doSearch will
 // disable the button before that can happen
@@ -247,83 +249,7 @@ var prev = function next() {
 	offset -= limit;
 	doSearch();
 }
-// Helper function to make the sections of a query. It used to return the arguments to odkData.query so you could call
-// odkData.query.apply(make_query(...)) but we need functionality that's not available in odkData.query, so we just pull
-// random indexes out of its result array whenever we need them and use that to call arbitraryQuery
-var make_query = function make_query(search, apply_where, for_total, cols_to_select) {
-	if (global_static && global_static_args) {
-		if (!for_total) {
-			return [global_static, global_static_args];
-		} else {
-			return ["SELECT " + cols_to_select, global_static_args]
-		}
-	}
-	// bind args
-	var query_args = []
-	// where clause, will be populated
-	var where = null;
-	// If we have a search, 
-	if (search != null && search.length > 0) {
-		// At first, just try searching in the main display column. If we get no results for this,
-		// we'll set try_more_cols and try again. If try_more_cols is set, we'll add an "OR" statement for
-		// each display subcol
-		var cols = [display_col];
-		if (try_more_cols) {
-			// if we got no results the first time around, add all the display subcol column ids
-			for (var i = 0; i < display_subcol.length; i++) {
-				// the configurer can set the column name to null to only display the raw text, see README.md
-				if (display_subcol[i][1] == null) continue;
-				// otherwise add the column to the list of columns to try
-				cols = cols.concat(display_subcol[i][1]);
-			}
-		}
-		// For each column in cols, put it in the where clause and put search in the bindargs
-		where = "("
-		for (var i = 0; i < cols.length; i++) {
-			if (i != 0) {
-				where += " OR "
-			}
-			where += cols[i] + " LIKE ?"
-			query_args = query_args.concat("%" + search + "%");
-		}
-		where += ")"
-	}
-	// If we're in a collection view, apply that
-	if (global_where_clause != undefined && global_where_clause != null) {
-		if (where != null && where.trim() != "") {
-			where += " AND ";
-		}
-		if (where == null) where = "";
-		// TESTING
-		var global_where_clause_temp = global_where_clause
-		if (global_where_clause_temp.indexOf(".") > 0) global_where_clause_temp = global_where_clause_temp.split(".", 2)[1]
 
-		where += global_where_clause_temp;
-		// this is a bit of a hack, if we were passed 'refrigerator_type IS NULL' then don't put anything in the bindargs because
-		// there's no question mark in the clause
-		if (!(global_where_clause.indexOf("IS NULL") > 0)) {
-			query_args = query_args.concat(global_where_arg);
-		}
-	}
-	// If we're in a group by view, apply that. We have to add the table id because people like to group by things from join tables
-	var group_by = null;
-	if (global_group_by != undefined && global_group_by != null) {
-		//group_by = table_id + "." + global_group_by
-		group_by = global_group_by;
-	}
-	join = ""
-	// If we have a global join from the customJsOl configuration, apply that.
-	if (global_join != null && global_join != undefined && global_join.trim().length > 0) {
-		join = global_join;
-	}
-	where = (where && apply_where ? " WHERE " + where : "")
-	group_by = (group_by && apply_where ? " GROUP BY " + group_by : "")
-	join = (join && apply_where ? " JOIN " + join : "")
-	var raw = "SELECT " + cols_to_select + (for_total ? "" : " FROM " + table_id) + join + where + group_by
-	console.log(raw);
-	//return [where, query_args, group_by, null, null, null, limit, offset, false, join, global_which_cols_to_select];
-	return [raw, query_args];
-}
 // Helper function to populate cols with a list of the columns in the table. If no allowed_group_bys was set, we'll use that to
 // populate the list of group by columns. Will only do anything on the first time its run
 var getCols = function getCols() {
@@ -343,7 +269,7 @@ var getCols = function getCols() {
 			}
 			document.getElementById("group-by").disabled = false;
 		}, function failure(e) {
-			alert(_t("Could not get columns: ") + e);
+			alert(translate_formgen("Could not get columns: ") + e);
 		}, 0, 0);
 	}
 }
@@ -365,13 +291,13 @@ var doSearch = function doSearch() {
 	getCols()
 	// If we're in a group by, only show the value we're grouping on
 	// If we're in a collection view or a static view, disable the group by button
-	if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
+	if (global_view_type == GROUP_BY) {
 		document.getElementById("group-by").style.display = "none";
 		display_subcol = [];
 		display_col = global_group_by;
-	} else if (global_where_clause != null && global_where_clause != undefined && global_where_clause.trim().length > 0) {
+	} else if (global_view_type == COLLECTION) {
 		document.getElementById("group-by").style.display = "none";
-	} else if (global_static) {
+	} else if (global_view_type == STATIC) {
 		document.getElementById("group-by").style.display = "none";
 	}
 	// Make a query for the results to put on the page and run it
@@ -385,13 +311,13 @@ var doSearch = function doSearch() {
 		if (d.getCount() == 0) {
 			// try more columns first
 			if (!try_more_cols) {
-				list.innerText = _t("Simple search did not return any results, trying a more advanced search. This might take a minute...");
+				list.innerText = translate_formgen("Simple search did not return any results, trying a more advanced search. This might take a minute...");
 				try_more_cols = true;
 				update_total_rows(true)
 				return;
 			} else {
 				// if that doesn't work
-				list.innerText = _t("No results");
+				list.innerText = translate_formgen("No results");
 				document.getElementById("navigation-text").innerText = ""
 				try_more_cols = false;
 			}
@@ -404,22 +330,22 @@ var doSearch = function doSearch() {
 		var display_total = Number(total_rows);
 		// trying to make a computer speak english is hard
 		var rows = ""
-		if (global_group_by == null && global_where_clause == null && !global_human_readable_what) {
-			rows = _t("rows ");
+		if (global_view_type == LIST) {
+			rows = translate_formgen("rows ");
 		}
-		var newtext = _t("Showing ") + rows + (offset + (total_rows == 0 ? 0 : 1)) + "-" + (offset + d.getCount()) + _t(" of ") + display_total;
+		var newtext = translate_formgen("Showing ") + rows + (offset + (total_rows == 0 ? 0 : 1)) + "-" + (offset + d.getCount()) + translate_formgen(" of ") + display_total;
 		// if we have a group by, mention that we're in a group by view
-		if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
-			newtext += _t(" distinct values of ") + get_from_allowed_group_bys(allowed_group_bys, global_group_by, false, metadata, table_id);
+		if (global_view_type == GROUP_BY) {
+			newtext += translate_formgen(" distinct values of ") + get_from_allowed_group_bys(allowed_group_bys, global_group_by, false, metadata, table_id);
 		}
 		// if we're in a collection, mention that
-		if (global_where_clause != null && global_where_clause != undefined && global_where_clause.trim().length > 0) {
+		if (global_view_type == COLLECTION) {
 			var where_col = global_where_clause.split(" ")[0];
 			if (where_col.indexOf(".") >= 0) where_col = where_col.split(".")[1];
-			newtext += _t(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, global_where_clause.split(" ")[0], false, metadata, table_id) + _t(" is ") + _tc(d, where_col, global_where_arg);
+			newtext += translate_formgen(" rows where ") + get_from_allowed_group_bys(allowed_group_bys, where_col, false, metadata, table_id) + translate_formgen(" is ") + translate_choice(d, where_col, global_where_arg);
 		}
-		if (global_human_readable_what) {
-			hrw = _tu(global_human_readable_what);
+		if (global_view_type == STATIC) {
+			var hrw = translate_user(global_human_readable_what);
 			for (var i = 0; i < global_static_args.length; i++) {
 				hrw = hrw.replace("?", global_static_args[i]);
 			}
@@ -444,56 +370,60 @@ var doSearch = function doSearch() {
 			displays.classList.add("displays");
 			var mainDisplay = document.createElement("div")
 			mainDisplay.classList.add("main-display");
-			var to_display = _tc(d, display_col, d.getData(i, display_col));
+			var to_display = translate_choice(d, display_col, d.getData(i, display_col));
 			if (embedded) to_display = display_col
 			if (display_col_wrapper != null) {
 				to_display = display_col_wrapper(d, i, to_display);
 			}
 			mainDisplay.innerText = to_display;
-			if (global_group_by) mainDisplay.innerText = pretty(mainDisplay.innerText);
+			if (global_view_type == GROUP_BY) mainDisplay.innerText = pretty(mainDisplay.innerText);
 			displays.appendChild(mainDisplay)
 			var subDisplay = null;
 			// we keep this variable for use in poor-man's vertical centering later
 			var addedSubDisplays = 0
 			// This constructs the display subcolumns from display_subcol. Information on how to use display_subcol is in README.md
-			// Basically it's a list of triplets, ["some literal text to display", "some_column_id_to_display_the_value_of", newline]
-			// if newline is true, we skip down to a new sub-display div (and append the last one). Otherwise we continue appending
-			// to the existing div
 			// The user can specify either a literal string to display, or a function that will be passed the value of the column,
 			// what the function returns will be displayed
-			// They can also just specify true to get the value of the column pretty printed and nothing else
-			// They can also give a string in the first position and null in the second position to insert that text and nothing else
-			// the value in the third position is still honored
 			for (var j = 0; j < display_subcol.length; j++) {
+				// keep a running subDisplay until we encounter a "newline": true
 				if (subDisplay == null) {
 					subDisplay = document.createElement("div")
 					subDisplay.classList.add("sub-display");
 				}
-				var label_text = display_subcol[j][0]
-				var col = display_subcol[j][1]
-				var value = col == null ? null : d.getData(i, col);
-				if (embedded) value = col == null ? "" : col;
-				if (typeof(display_subcol[j][0]) == "string") {
-					subDisplay.appendChild(document.createTextNode(_tu(label_text)))
-					if (col != null) {
-						subDisplay.appendChild(document.createTextNode(_tc(d, col, value)))
-					}
-				} else if (label_text === true) {
-					subDisplay.appendChild(document.createTextNode(pretty(value)))
-				} else {
-					var span = document.createElement("span");
-					span.innerHTML = display_subcol[j][0](subDisplay, value, d, i);
-					subDisplay.appendChild(span);
+				var col = null;
+				var value = null;
+				// If they omit the column, we only want to print the display_name or invoke the callback
+				if ("column" in display_subcol[j]) {
+					col = display_subcol[j]["column"];
+					value = d.getData(i, col);
 				}
-				if (display_subcol[j][2]) {
-					displays.appendChild(subDisplay)
+				if (embedded) value = col == null ? "" : col;
+				// Print the display_name first and then the value of the column, or invoke the callback if they gave one
+				if ("callback" in display_subcol[j]) {
+					var span = document.createElement("span");
+					span.innerHTML = display_subcol[j]["callback"](subDisplay, value, d, i);
+					subDisplay.appendChild(span);
+				} else if ("display_name" in display_subcol[j]) {
+					var label_text = display_subcol[j]["display_name"];
+					subDisplay.appendChild(document.createTextNode(translate_user(label_text)));
+				}
+				if (col != null && !("callback" in display_subcol[j])) {
+					// if pretty_value is missing or it's present but set to true, translate and prettify the database value
+					if (!("pretty_value" in display_subcol[j]) || display_subcol[j]["pretty_value"]) {
+						subDisplay.appendChild(document.createTextNode(translate_choice(d, col, value)));
+					} else {
+						subDisplay.appendChild(document.createTextNode(value));
+					}
+				}
+				if (display_subcol[j]["newline"]) {
+					displays.appendChild(subDisplay);
 					addedSubDisplays++;
 					subDisplay = null;
 				}
 			}
 			// if the user forgot to set true for the third position in the last triplet in display_subcol, add it anyways
 			if (subDisplay != null) {
-				displays.appendChild(subDisplay)
+				displays.appendChild(subDisplay);
 				addedSubDisplays++;
 			}
 			li.appendChild(displays);
@@ -502,9 +432,9 @@ var doSearch = function doSearch() {
 			var buttons = document.createElement("div");
 			buttons.classList.add("buttons");
 			var edit = document.createElement("button");
-			edit.innerText = _t("Edit");
+			edit.innerText = translate_formgen("Edit");
 			var _delete = document.createElement("button");
-			_delete.innerText = _t("Delete");
+			_delete.innerText = translate_formgen("Delete");
 			// Add event listeners for the edit and delete buttons, but also one for displays that will
 			// launch a detail view if we're not in a group by view, otherwise add the collection view
 			(function(edit, _delete, i, d) {
@@ -518,8 +448,7 @@ var doSearch = function doSearch() {
 					}
 				});
 				displays.addEventListener("click", function() {
-					console.log(global_group_by);
-					if (global_group_by == null || global_group_by == undefined || global_group_by.trim().length == 0) {
+					if (global_view_type != GROUP_BY) {
 						clicked(table_id, d.getData(i, "_id"), d, i);
 					} else {
 						var global_group_by_temp = global_group_by
@@ -528,37 +457,45 @@ var doSearch = function doSearch() {
 					}
 				});
 				_delete.addEventListener("click", function() {
-					if (!confirm(_t("Please confirm deletion of row ") + d.getData(i, "_id"))) {
+					var to_display = d.getData(i, display_col)
+					if (display_col_wrapper != null) {
+						to_display = display_col_wrapper(d, i, to_display);
+					}
+					if (!confirm(translate_formgen("Please confirm deletion of row ") + to_display)) {
 						return;
 					}
 					odkData.deleteRow(table_id, null, d.getData(i, "_id"), function(d) {
 						update_total_rows(true);
 					}, function(e) {
-						alert(_t("Failed to _delete row - ") + JSON.stringify(e));
+						alert(translate_formgen("Failed to _delete row - ") + JSON.stringify(e));
 					});
 				});
 			})(edit, _delete, i, d);
+			// this is used for styling, if we put more buttons on the screen than in previous rows,
+			// then we should recalculate the width of the .displays to avoid needless overflows
+			var buttonsShown = 0;
 			// show edit button only if we can edit the row
 			var access = d.getData(i, "_effective_access") || ""
 			if (access.indexOf("w") >= 0) {
 				buttons.appendChild(edit);
+				buttonsShown++;
 			}
 			// show delete button only if we can delete the row
 			if (access.indexOf("d") >= 0) {
 				buttons.appendChild(_delete);
+				buttonsShown++;
 			}
 			// If we're in a group by view, don't show edit/delete buttons
-			if (!global_group_by) {
+			if (global_view_type != GROUP_BY) {
 				li.appendChild(buttons)
 			}
 			var hr2 = document.createElement("div")
 			var hr = document.createElement("div")
 			hr.classList.add("status");
-			if (global_group_by == null || global_group_by == "undefined" || global_group_by.trim().length == 0) {
-				if (!embedded) {
-					hr.setAttribute("data-status", d.getData(i, "_savepoint_type"))
-					hr.setAttribute("data-sync", d.getData(i, "_sync_state")) // no css rules for this one
-				}
+			// Always display blue in group by views to avoid confusing yellows/greens/reds
+			if (global_view_type != GROUP_BY && !embedded) {
+				hr.setAttribute("data-status", d.getData(i, "_savepoint_type"))
+				hr.setAttribute("data-sync", d.getData(i, "_sync_state")) // no css rules for this one
 			} else {
 				hr.setAttribute("data-status", "COMPLETE")
 				hr.setAttribute("data-sync", "synced")
@@ -573,7 +510,8 @@ var doSearch = function doSearch() {
 			}
 			li.style.lineHeight = global_line_height;
 			// This makes it so if you click anywhere on the row other than the buttons, it opens a detail view
-			if (global_displays_width == null) {
+			if (global_displays_width == null || buttonsShown > runningButtonsToShow) {
+				runningButtonsToShow = buttonsShown;
 				global_displays_width = (li.clientWidth - buttons.clientWidth - 10).toString() + "px";
 			}
 			displays.style.width = global_displays_width;
@@ -581,7 +519,7 @@ var doSearch = function doSearch() {
 		}
 		customJsSearch();
 	}, function(d) {
-		alert(_t("Failure! ") + d);
+		alert(translate_formgen("Failure! ") + d);
 	});
 }
 // Called when the user clicks the group by button, or on load if we're in a group by view or a collection view
@@ -604,8 +542,8 @@ var groupBy = function groupBy() {
 		// to get_from_allowed_group_bys in formgen_common
 		for (var i = 0; i < allowed_group_bys.length; i++) {
 			var child = document.createElement("option");
-			child.value = allowed_group_bys[i][0];
-			child.innerText = _tu(get_from_allowed_group_bys(allowed_group_bys, allowed_group_bys[i][1], allowed_group_bys[i], metadata, table_id));
+			child.value = allowed_group_bys[i]["column"];
+			child.innerText = translate_user(get_from_allowed_group_bys(allowed_group_bys, allowed_group_bys[i]["column"], allowed_group_bys[i], metadata, table_id));
 			list.appendChild(child);
 			// Not sure if this is important or not
 			if (global_group_by == cols[i]) {
@@ -635,22 +573,17 @@ var groupBy = function groupBy() {
 var groupByGo = function groupByGo() {
 	var go = true;
 	if (embedded) return; // don't navigate away inside app designer
-	if (global_group_by != null && global_group_by != undefined && global_group_by.trim().length > 0) {
-		go = false;
-	} else {
-		var list = document.getElementById("group-by-list");
-		global_group_by = list.selectedOptions[0].value;
+	if (global_view_type == GROUP_BY) {
+		return;
 	}
-	//window.location.hash = "#" + table_id + "/" + global_group_by
-	if (go) {
-		odkTables.launchHTML({}, clean_href() + "#" + table_id + "/" + global_group_by);
-		//update_total_rows(true);
-	}
+	var list = document.getElementById("group-by-list");
+	global_group_by = list.selectedOptions[0].value;
+	odkTables.launchHTML({}, clean_href() + "#" + table_id + "/" + global_group_by);
 }
+// please don't ever need this function
 var handleMapIndex = function handleMapIndex(d) {
 	if (!forMapView) return;
 	var idx = d.getMapIndex();
 	if (idx == -1) return;
-	//alert(idx);
 	clicked(table_id, d.getData(idx, "_id"), d, idx);
 }

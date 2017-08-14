@@ -7,7 +7,7 @@ var preferred_locale = null; // for caching
 // Mocks translation, much faster than actual translation
 window.fake_translate = function fake_translate(thing, optional_table, optional_form) {
 	// Can't translate undefined
-	if (thing === undefined || thing === null) return _t("Error translating ") + thing;
+	if (thing === undefined || thing === null) return translate_formgen("Error translating ") + thing;
 
 	// This will be hit eventually in a recursive call
 	if (typeof(thing) == "string") return thing;
@@ -41,7 +41,7 @@ window.fake_translate = function fake_translate(thing, optional_table, optional_
 	}
 
 	// Otherwise, we have no idea what kind of object this is. Sorry!
-	return _t("Error fake translating ") + JSON.stringify(thing);
+	return translate_formgen("Error fake translating ") + JSON.stringify(thing);
 };
 
 // Helper function for display and fake_translate
@@ -89,7 +89,7 @@ window.display = function display(thing, table, optional_possible_wrapped, form)
 	if (typeof(thing) == "string") return thing;
 	if (typeof(thing) == "undefined") {
 		// A recursive call on an error? What could possibly go wrong!
-		return _t("Can't translate undefined!");
+		return translate_formgen("Can't translate undefined!");
 	}
 	for (var i = 0; i < this_possible_wrapped.length; i++) {
 		if (thing[this_possible_wrapped[i]] !== undefined) {
@@ -215,28 +215,28 @@ window.pretty = function pretty(name) {
 window.get_from_allowed_group_bys = function get_from_allowed_group_bys(allowed_group_bys, colname, optional_pair, metadata, table) {
 	// If we have no allowed_group_bys, always just translate the column name and leave it at that
 	if (!allowed_group_bys) {
-		optional_pair = [colname, true];
+		optional_pair = {"column": colname}
 	}
 	// If we weren't given an entry in allowed_group_bys, try and find the right entry
 	if (!optional_pair) {
 		for (var i = 0; i < allowed_group_bys.length; i++) {
-			if (allowed_group_bys[i][0] == colname) {
+			if (allowed_group_bys[i]["column"] == colname) {
 				optional_pair = allowed_group_bys[i];
 				break;
 			}
 		}
 	}
 	// If we couldn't find it in allowed_group_bys, just translate it normally
-	if (!optional_pair) optional_pair = [colname, true]
+	if (!optional_pair) optional_pair = {"column": colname}
 	// For a full spec see README.md
 	// if the user specified true, translate the column, if they specified false, return the exact column id
 	// otherwise show the string the user specified
-	if (optional_pair[1] === true) {
-		return displayCol(optional_pair[0], metadata, table);
-	} else if (optional_pair[1] === false) {
-		return optional_pair[0];
+	if ("display_name" in optional_pair) {
+		return optional_pair["display_name"];
+	} else if (optional_pair["pretty"] === false) {
+		return optional_pair["column"];
 	} else {
-		return optional_pair[1];
+		return displayCol(optional_pair["column"], metadata, table);
 	}
 }
 // helper function to get the relative path to where we are now. So if window.location.href
@@ -248,7 +248,7 @@ var clean_href = function clean_href() {
 	return href;
 }
 
-// Don't use this function, use _t or _tu
+// Don't use this function, use translate_formgen or translate_user
 var __tr = function __tr(s) {
 	console.log("About to translate: " + s);
 	var args = Array.prototype.slice.call(arguments, 1)
@@ -274,21 +274,21 @@ var __tr = function __tr(s) {
 }
 
 // Try and translate something that's formgen specific, alert if we can't
-window._t = function(s) {
+window.translate_formgen = function(s) {
 	var result = __tr.apply(null, arguments);
 	if (result[0] == "ok") return result[1];
-	alert("_t could not translate " + s);
+	alert("translate_formgen could not translate " + s);
 	return s;
 }
 // Try and translate something from the user specific translations, log a message if we can't
-window._tu = function(s) {
+window.translate_user = function(s) {
 	var result = __tr.apply(null, arguments);
 	if (result[0] == "ok") return result[1];
-	console.log("_tu could not translate " + s)
+	console.log("translate_user could not translate " + s)
 	return s;
 }
 // Try and translate a choice, this should be used for anything coming out of the database
-window._tc = function(d, column, text) {
+window.translate_choice = function(d, column, text) {
 	/*
 	if (d.getColumnChoicesList(column) == null) {
 		// not a prompt type that needs choices
@@ -348,7 +348,7 @@ var formgen_specific_translations = {
 	}},
 	"Unexpected failure": {"text": {
 		"default": true,
-		"es": ""
+		"es": "Errór inesperado"
 	}},
 	"This shouldn't be possible, don't know how to update screen column ": {"text": {
 		"default": true,
@@ -613,5 +613,13 @@ var formgen_specific_translations = {
 	"Finalizing...": {"text": {
 		"default": true,
 		"es": "Finalizando..."
+	}},
+	"Selected Marker": {"text": {
+		"default": true,
+		"es": "Marcador Seleccionado"
+	}},
+	"Need at least 6 arguments": {"text": {
+		"default": true,
+		"es": "Se necesita 6 valores para generar una gráfica"
 	}},
 }

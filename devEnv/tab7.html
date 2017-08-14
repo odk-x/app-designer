@@ -199,9 +199,11 @@
 					var col = opt == null ? "" : opt.value
 					col = col == "empty" ? null : col
 					var nl = elem.getElementsByTagName("select")[1].selectedOptions[0].value.toString().toLowerCase() == "false" ? false : true
-					var triplet = [text, col, nl];
-					display_subcol = display_subcol.concat(0)
-					display_subcol[i] = triplet;
+					var triplet = {"display_name": text, "newline": nl}
+					if (col != null) {
+						triplet["column"] = col;
+					}
+					display_subcol = display_subcol.concat(triplet)
 				}
 			}
 			// Called when we load configuration, will update the elements on the page to match the global display_subcols variable (if first is true, otherwise it will pull the data off the screen first)
@@ -218,7 +220,7 @@
 				for (var i = 0; i < count; i++) {
 					var div = document.getElementById("subcols-" + i);
 					// set the before-text
-					div.getElementsByTagName("input")[0].value = display_subcol[i][0];
+					div.getElementsByTagName("input")[0].value = display_subcol[i]["display_name"];
 					var select = div.getElementsByTagName("select")[0]
 					// repopulate the options in the dropdown, one for each column with an "empty" option at the beginning
 					select.innerHTML = "";
@@ -233,12 +235,12 @@
 						option.innerText = displayCol(col, metadata, table_id, table_id);
 						select.appendChild(option)
 						// if it's supposed to be selected, select it
-						if (col == display_subcol[i][1]) {
+						if (col == display_subcol[i]["column"]) {
 							select.selectedIndex = j;
 						}
 					}
 					// set the last select to true/false depending on what it's supposed to be
-					div.getElementsByTagName("select")[1].selectedIndex = display_subcol[i][2] ? 0 : 1;
+					div.getElementsByTagName("select")[1].selectedIndex = display_subcol[i]["newline"] ? 0 : 1;
 				}
 			}
 			// Called when we've just set variables fron the eval and need to update the screen to match
@@ -314,8 +316,7 @@
 
 				// Add new display subcol to the array
 				// Seems like this should be wrapped in an `if (!first)`
-				display_subcol = display_subcol.concat(0);
-				display_subcol[display_subcol.length - 1] = ["", "", true]
+				display_subcol = display_subcol.concat({"display_name": "", "newline": true});
 				if (!first) redrawDisplaySubcols(false);
 			}
 			// Adds the advanced options to the screen
