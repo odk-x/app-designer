@@ -5,19 +5,24 @@
 			var files = [];
 			var ol = function ol() {
 				redrawLeft();
-				redrawRight();
 			}
 			var redrawLeft = function redrawLeft() {
 				var left = document.getElementById("left")
+				var elems = left.getElementsByTagName("input");
+				var saved = -1;
+				for (var i = 0; i < elems.length; i++) {
+					if (elems[i].checked) saved = i;
+				}
 				left.innerHTML = ""
 				for (var i = 0; i < files.length; i++) {
 					var button = document.createElement("input")
 					button.type = "radio";
 					var id = "files-" + i.toString();
 					button.id = id;
-					button.name = id;
+					button.name = "filelist";
 					button.setAttribute("data-filename", files[i][0]);
 					button.addEventListener("change", saveAndRedrawRight);
+					button.checked = saved == i;
 					var label = document.createElement("label")
 					label.setAttribute("for", id);
 					label.innerText = files[i][0];
@@ -40,13 +45,39 @@
 					fields = ["CSS", "Js"];
 				}
 				var right = document.getElementById("right");
-				for (var i = 0; i < fields; i++) {
+				right.setAttribute("data-filename", file[0]);
+				right.innerHTML = "";
+				for (var i = 0; i < fields.length; i++) {
 					var label = document.createTextNode(fields[i]);
-					var box = document.createElement("textentry") // TODO
+					var box = document.createElement("textarea");
+					box.innerText = file[i + 2];
+					box.setAttribute("data-index", i + 2);
+					right.appendChild(label);
+					right.appendChild(document.createElement("br"));
+					right.appendChild(box);
+					right.appendChild(document.createElement("br"));
 				}
 			}
 			var getRight = function getRight() {
-				// TODO
+				var right = document.getElementById("right");
+				if (!right.hasAttribute("data-filename")) return; // nothing to get
+				var filename = right.getAttribute("data-filename");
+				var found = -1;
+				for (var i = 0; i < files.length; i++) {
+					if (files[i][0] == filename) {
+						found = i;
+						break;
+					}
+				}
+				if (found == -1) {
+					alert("File not found");
+					return;
+				}
+				var fields = right.getElementsByTagName("textarea");
+				for (var i = 0; i < fields.length; i++) {
+					var index = Number(fields[i].getAttribute("data-index"));
+					files[found][index] = fields[i].value;
+				}
 			}
 			var saveAndRedrawRight = function saveAndRedrawRight() {
 				getRight();
@@ -65,27 +96,44 @@
 				alert("Filename not found in left");
 			}
 			var addFile = function addFile(filename, type) {
+				for (var i = 0; i < files.length; i++) {
+					if (files[i][0] == filename) {
+						alert("A file with that name already exists");
+						return;
+					}
+				}
 				files = files.concat(0)
 				files[files.length - 1] = [filename, type]
 				if (type == "table") {
 					files[files.length - 1] = files[files.length - 1].concat(["", "", "", "", ""]) // customHtml, customCss, customJsOl, customJsSearch, customJsGeneric
-				}
-				if (type == "detail") {
+				} else if (type == "detail") {
 					files[files.length - 1] = files[files.length - 1].concat(["", "", "", ""]) // customHtml, customCss, customJsOl, customJsGeneric
-				}
-				if (type == "index") {
+				} else if (type == "index") {
 					files[files.length - 1] = files[files.length - 1].concat(["", ""]) // customJs, customCss
-				}
-				if (type == "tabs") {
+				} else if (type == "tabs") {
 					files[files.length - 1] = files[files.length - 1].concat(["", ""]) // customJs, customCss
-				}
-				if (type == "graph") {
+				} else if (type == "graph") {
 					files[files.length - 1] = files[files.length - 1].concat(["", ""]) // customCss, customJs
+				} else {
+					alert("unknown file type: " + type)
 				}
+				redrawLeft();
+			}
+			var add = function add() {
+				addFile(document.getElementById("filename").value, document.getElementById("type").selectedOptions[0].value)
 			}
 		</script>
 	</head>
 	<body onLoad='ol();'>
+		<input type='text' id='filename' />
+		<select id='type'>
+			<option value='table'>List View</option>
+			<option value='detail'>Detail View</option>
+			<option value='index'>Menu</option>
+			<option value='tabs'>Tabs</option>
+			<option value='graph'>Graph</option>
+		</select>
+		<button onClick="add();">Add file</button>
 		<div id="left">
 		</div>
 		<div id="right">
