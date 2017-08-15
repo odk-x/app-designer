@@ -10,6 +10,7 @@
 		<script src='../app/system/js/odkCommon.js'></script>
 		<script src='../app/config/assets/formgen_common.js'></script>
 		<script src='../app/config/assets/generate_common.js'></script>
+		<script src='constants.js'></script>
 		<script>
 			// Holds the id of the table we're currently editing
 			var table_id = null;
@@ -710,7 +711,6 @@
 					alert("Filename cannot be empty");
 					return;
 				}
-				var USER_CONFIG_LOCATION = "/app/file_manager_config";
 				var request = new XMLHttpRequest();
 				request.onreadystatechange = function() {
 					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
@@ -733,19 +733,6 @@
 			var userLoad = function() {
 				("global",eval)(prompt("Paste in your saved configuration here. Please make sure you've chosen the right table first!"))
 				load();
-			}
-
-
-			var postFile = function postFile(path, data, optional_message) {
-				if (typeof(optional_message) == "undefined") optional_message = "Success";
-				var request = new XMLHttpRequest();
-				request.onreadystatechange = function() {
-					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
-						alert(optional_message);
-					}
-				}
-				request.open("POST", path);
-				request.send(data);
 			}
 
 		</script>

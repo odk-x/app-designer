@@ -4,17 +4,12 @@
 	There's a config in the `app/file_manager_config` file that should load automatically when you load the tab.
 	It should load up a demo that will overwrite the "teatime.html" file.
 
-	When you make a list view in the list view designer and hit save, it will give you some javascript.
-	That javascript can be put in the "Js On Load" for a list view in this tab to actually use the list view on a device
+	When you make a list view in the list view designer and hit save, it will get the files from the server, inject the new file,
+	then save the files object back. When you switch to this tab, it will reload the files.
 
 	The "Save Build Script" button will generate the  "app_specific_appnamehere.py" file in the formgen submodule,
 	formgen repo, then run `grunt generate-formgen-files` to generate the list view that you made (and all of the other
 	files you configured), checking for syntax errors as it goes
-
-	So the challenge here is
-	- getting things from the list view designer to this tab
-	- running ./build in the formgen submodule
-	
 	
 -->
 <html>
@@ -27,11 +22,14 @@ textarea {
 				background-color: white;
 			}
 		</style>
+		<script src='constants.js'></script>
 		<script>
-			var USER_CONFIG_LOCATION = "/app/file_manager_config";
-			var USER_PY_LOCATION = "/formgen/app_specific_default.py" // TODO HARDCODED APP NAME !!!!
 			var files = [];
 			var ol = function ol() {
+				var right = document.getElementById("right");
+				right.innerHTML = "";
+				right.setAttribute("data-filename", "");
+				document.getElementById("left").innerHTML = "Loading..."
 				userLoad(true);
 			}
 			var redrawLeft = function redrawLeft() {
@@ -199,12 +197,12 @@ textarea {
 			var userSavePy = function() {
 				getRight();
 				//give_user("# Copy and paste this into your app_specific_yourappnamehere.py file and run ./build yourappnamehere", make_custom_py());
-				post(USER_PY_LOCATION, make_custom_py(), "Success - Please run `grunt build-formgen-files`")
+				postFile(USER_PY_LOCATION, make_custom_py(), "Success - Please run `grunt build-formgen-files`")
 			}
 			var userSave = function() {
 				getRight();
 				//give_user("// Copy this to a safe place and enter it when you click Load", "files = " + JSON.stringify(files) + ";");
-				post(USER_CONFIG_LOCATION, JSON.stringify(files));
+				postFile(USER_CONFIG_LOCATION, JSON.stringify(files));
 			}
 			var delete_file = function delete_file(name) {
 				if (!confirm("Please confirm deletion of file: " + name)) return;
@@ -224,17 +222,6 @@ textarea {
 			}
 
 
-			var post = function post(path, data, optional_message) {
-				if (typeof(optional_message) == "undefined") optional_message = "Success";
-				var request = new XMLHttpRequest();
-				request.onreadystatechange = function() {
-					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
-						alert(optional_message);
-					}
-				}
-				request.open("POST", path);
-				request.send(data);
-			}
 		</script>
 	</head>
 	<body onLoad='ol();'>
