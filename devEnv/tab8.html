@@ -8,8 +8,10 @@
 	then save the files object back. When you switch to this tab, it will reload the files.
 
 	The "Save Build Script" button will generate the  "app_specific_appnamehere.py" file in the formgen submodule,
-	formgen repo, then run `grunt generate-formgen-files` to generate the list view that you made (and all of the other
+	then run `grunt generate-formgen-files` to generate the list view that you made (and all of the other
 	files you configured), checking for syntax errors as it goes
+
+	It puts the files in app/config/assets so they can be pushed with a `grunt adbpush`
 	
 -->
 <html>
