@@ -4,12 +4,12 @@
 	There's a config in the `app/file_manager_config` file that should load automatically when you load the tab.
 	It should load up a demo that will overwrite the "teatime.html" file.
 
-	When you make a list view in the list view designer and hit save, it will give you some javascript. That javascript can be put in the "Js On Load"
-	for a list view in this tab to actually use the list view on a device
+	When you make a list view in the list view designer and hit save, it will give you some javascript.
+	That javascript can be put in the "Js On Load" for a list view in this tab to actually use the list view on a device
 
-	The "Save Build Script" button will generate something that can be put in an "app_specific_appnamehere.py" file in the
-	formgen repo, then run `./build yourappnamehere` (after setting your app designer folder in utils.py), and it will
-	generate the list view that you made (and all of the other files you configured), checking for syntax errors as it goes
+	The "Save Build Script" button will generate the  "app_specific_appnamehere.py" file in the formgen submodule,
+	formgen repo, then run `grunt generate-formgen-files` to generate the list view that you made (and all of the other
+	files you configured), checking for syntax errors as it goes
 
 	So the challenge here is
 	- getting things from the list view designer to this tab
@@ -43,6 +43,13 @@ textarea {
 				}
 				left.innerHTML = ""
 				for (var i = 0; i < files.length; i++) {
+					var _delete = document.createElement("button");
+					_delete.innerText = "-";
+					(function(name) {
+						_delete.addEventListener("click", function() {
+							delete_file(name);
+						});
+					})(files[i][0])
 					var button = document.createElement("input")
 					button.type = "radio";
 					var id = "files-" + i.toString();
@@ -54,6 +61,7 @@ textarea {
 					var label = document.createElement("label")
 					label.setAttribute("for", id);
 					label.innerText = files[i][0];
+					left.appendChild(_delete)
 					left.appendChild(button)
 					left.appendChild(label)
 					left.appendChild(document.createElement("br"))
@@ -91,7 +99,7 @@ textarea {
 			}
 			var getRight = function getRight() {
 				var right = document.getElementById("right");
-				if (!right.hasAttribute("data-filename")) return; // nothing to get
+				if (!right.hasAttribute("data-filename") || right.getAttribute("data-filename").length == 0) return; // nothing to get
 				var filename = right.getAttribute("data-filename");
 				var found = -1;
 				for (var i = 0; i < files.length; i++) {
@@ -197,6 +205,22 @@ textarea {
 				getRight();
 				//give_user("// Copy this to a safe place and enter it when you click Load", "files = " + JSON.stringify(files) + ";");
 				post(USER_CONFIG_LOCATION, JSON.stringify(files));
+			}
+			var delete_file = function delete_file(name) {
+				if (!confirm("Please confirm deletion of file: " + name)) return;
+				for (var i = 0; i < files.length; i++) {
+					if (files[i][0] == name) {
+						files = files.slice(0, i).concat(files.slice(i + 1));
+						break;
+					}
+				}
+				var right = document.getElementById("right");
+				var current_file_in_right = right.getAttribute("data-filename");
+				if (current_file_in_right == name) {
+					right.innerHTML = "";
+					right.setAttribute("data-filename", "")
+				}
+				redrawLeft();
 			}
 
 

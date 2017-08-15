@@ -704,12 +704,50 @@
 				return JSON.stringify(thing)
 			}
 			var userSave = function() {
-				prompt("Copy this configuration to somewhere safe, then paste it into the Custom Js On Load section of a List View in the Files tab to use it.", save())
+				//prompt("Copy this configuration to somewhere safe, then paste it into the Custom Js On Load section of a List View in the Files tab to use it.", save())
+				var filename = prompt("Please enter the filename of the new file")
+				if (filename.trim() == "") {
+					alert("Filename cannot be empty");
+					return;
+				}
+				var USER_CONFIG_LOCATION = "/app/file_manager_config";
+				var request = new XMLHttpRequest();
+				request.onreadystatechange = function() {
+					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+						var files = JSON.parse(request.responseText)
+						for (var j = 0; j < files.length; j++) {
+							if (files[j][0] == filename) {
+								alert("That file already exists!");
+								return;
+							}
+						}
+						files = files.concat(0)
+						files[files.length - 1] = [filename, "table", "", "", save(), "", ""]
+						postFile(USER_CONFIG_LOCATION, JSON.stringify(files));
+					}
+				}
+				request.open("GET", USER_CONFIG_LOCATION, true);
+				request.send()
+
 			}
 			var userLoad = function() {
 				("global",eval)(prompt("Paste in your saved configuration here. Please make sure you've chosen the right table first!"))
 				load();
 			}
+
+
+			var postFile = function postFile(path, data, optional_message) {
+				if (typeof(optional_message) == "undefined") optional_message = "Success";
+				var request = new XMLHttpRequest();
+				request.onreadystatechange = function() {
+					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+						alert(optional_message);
+					}
+				}
+				request.open("POST", path);
+				request.send(data);
+			}
+
 		</script>
 		<style>
 			#iframe {

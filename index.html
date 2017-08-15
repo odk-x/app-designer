@@ -76,9 +76,9 @@
 	  <iframe class="content-tab" src="devEnv/tab7.html" frameborder="0" ></iframe>
       </div>
     </li>
-    <li>
-      <input type="radio" name="tabs" id="tab8"/><label for="tab8">Files</label>
-	  <iframe class="content-tab" src="devEnv/tab8.html" frameborder="0" ></iframe>
+    <li onClick='document.getElementById("tab8_frame").contentWindow.ol()'>
+      <input type="radio" name="tabs" id="tab8"/><label for="tab8">Generated Files</label>
+	  <iframe class="content-tab" src="devEnv/tab8.html" frameborder="0" id="tab8_frame"></iframe>
       </div>
     </li>
   </ul>
