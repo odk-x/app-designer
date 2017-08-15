@@ -26,21 +26,23 @@ textarea {
 		<script>
 			var files = [];
 			var ol = function ol() {
-				var right = document.getElementById("right");
-				right.innerHTML = "";
-				right.setAttribute("data-filename", "");
+				// Clear the screen and display a loading message (this might be called when you switch tabs, because the list view designer may have added new files).
 				document.getElementById("left").innerHTML = "Loading..."
 				userLoad(true);
 			}
+			// Destroys and recreates the list of files
 			var redrawLeft = function redrawLeft() {
 				var left = document.getElementById("left")
 				var elems = left.getElementsByTagName("input");
+				// save the index of the file that we were working on before we redrew
 				var saved = -1;
 				for (var i = 0; i < elems.length; i++) {
 					if (elems[i].checked) saved = i;
 				}
+				// clear the screen in preparation for redraw
 				left.innerHTML = ""
 				for (var i = 0; i < files.length; i++) {
+					// add a delete button
 					var _delete = document.createElement("button");
 					_delete.innerText = "-";
 					(function(name) {
@@ -48,6 +50,7 @@ textarea {
 							delete_file(name);
 						});
 					})(files[i][0])
+					// add a radio button
 					var button = document.createElement("input")
 					button.type = "radio";
 					var id = "files-" + i.toString();
@@ -56,16 +59,20 @@ textarea {
 					button.setAttribute("data-filename", files[i][0]);
 					button.addEventListener("change", saveAndRedrawRight);
 					button.checked = saved == i;
+					// add a label
 					var label = document.createElement("label")
 					label.setAttribute("for", id);
 					label.innerText = files[i][0];
+					// add them all to the screen
 					left.appendChild(_delete)
 					left.appendChild(button)
 					left.appendChild(label)
 					left.appendChild(document.createElement("br"))
 				}
 			}
+			// Destroys and recreates the snippet editors
 			var redrawRight = function redrawRight(file) {
+				// Which snippets to allocate textareas for, and the order that they're stored in
 				var fields = []
 				if (file[1] == "table") {
 					fields = ["HTML", "CSS", "Js On Load", "Js Search", "Js Generic"];
@@ -80,25 +87,35 @@ textarea {
 				}
 				var right = document.getElementById("right");
 				right.setAttribute("data-filename", file[0]);
+				// Clear the screen in preparation for redraw
 				right.innerHTML = "";
+				right.appendChild(document.createTextNode("Editing file " + file[0] + " of type " + file[1]));
+				right.appendChild(document.createElement("br"));
+				// Add a text area for each field
 				for (var i = 0; i < fields.length; i++) {
 					var label = document.createTextNode(fields[i]);
 					var box = document.createElement("textarea");
-					var text_in_box = file[i + 2];
+					// populate the text in the text area to the value in the `file` object
+					var text_in_box = file[i + 2]; // we add 2 here to skip over the name and type
 					box.value = text_in_box;
-					var height = 20 * text_in_box.split("\n").length;
+					// set a resonable initial height, the user can resize it
+					var height = 20 * text_in_box.split("\n").length; // 20 pixels times for each line
 					box.style.minHeight = height.toString() + "px";
 					box.setAttribute("data-index", i + 2);
+					// put the label and box on the screen
 					right.appendChild(label);
 					right.appendChild(document.createElement("br"));
 					right.appendChild(box);
 					right.appendChild(document.createElement("br"));
 				}
 			}
+			// Pull the data from the snippets into the global files object
 			var getRight = function getRight() {
 				var right = document.getElementById("right");
 				if (!right.hasAttribute("data-filename") || right.getAttribute("data-filename").length == 0) return; // nothing to get
+				// first, get the filename for the file the user is currently editing
 				var filename = right.getAttribute("data-filename");
+				// then, find it in the files object
 				var found = -1;
 				for (var i = 0; i < files.length; i++) {
 					if (files[i][0] == filename) {
@@ -107,32 +124,39 @@ textarea {
 					}
 				}
 				if (found == -1) {
-					alert("File not found");
+					alert("File not found -- This should never happen");
 					return;
 				}
+				// For each snippet, put its value in the files object where it's supposed to be
 				var fields = right.getElementsByTagName("textarea");
 				for (var i = 0; i < fields.length; i++) {
 					var index = Number(fields[i].getAttribute("data-index"));
 					files[found][index] = fields[i].value;
 				}
 			}
+			// Get values from the snippets then redraw with the selected file
 			var saveAndRedrawRight = function saveAndRedrawRight() {
 				getRight();
 				var left = document.getElementById("left")
 				var elems = left.getElementsByTagName("input")
+				// Find the checked filename on the left side
 				for (var i = 0; i < elems.length; i++) {
 					if (elems[i].checked) {
+						// Find that file in the files object
 						for (var j = 0; j < files.length; j++) {
 							if (files[j][0] == elems[i].getAttribute("data-filename")) {
+								// Redraw snippets with that file
 								redrawRight(files[j]);
 								return;
 							}
 						}
 					}
 				}
-				alert("Filename not found in left");
+				alert("Filename not found in list of files");
 			}
+			// Adds a file to the files object
 			var addFile = function addFile(filename, type) {
+				// Prevent the user from shooting themselves in the foot (a third time)
 				if (filename.length == 0) {
 					alert("Filename is empty!");
 					return;
@@ -143,67 +167,84 @@ textarea {
 						return;
 					}
 				}
-				files = files.concat(0)
-				files[files.length - 1] = [filename, type]
+				// Add a file to the files object
+				files = files.concat(0);
+				files[files.length - 1] = [filename, type];
+				// Add that file's fields to the just-added file
 				if (type == "table") {
-					files[files.length - 1] = files[files.length - 1].concat(["", "", "", "", ""]) // customHtml, customCss, customJsOl, customJsSearch, customJsGeneric
+					files[files.length - 1] = files[files.length - 1].concat(["", "", "", "", ""]); // customHtml, customCss, customJsOl, customJsSearch, customJsGeneric
 				} else if (type == "detail") {
-					files[files.length - 1] = files[files.length - 1].concat(["", "", "", ""]) // customHtml, customCss, customJsOl, customJsGeneric
+					files[files.length - 1] = files[files.length - 1].concat(["", "", "", ""]); // customHtml, customCss, customJsOl, customJsGeneric
 				} else if (type == "index") {
-					files[files.length - 1] = files[files.length - 1].concat(["", ""]) // customJs, customCss
+					files[files.length - 1] = files[files.length - 1].concat(["", ""]); // customJs, customCss
 				} else if (type == "tabs") {
-					files[files.length - 1] = files[files.length - 1].concat(["", ""]) // customJs, customCss
+					files[files.length - 1] = files[files.length - 1].concat(["", ""]); // customJs, customCss
 				} else if (type == "graph") {
-					files[files.length - 1] = files[files.length - 1].concat(["", ""]) // customCss, customJs
+					files[files.length - 1] = files[files.length - 1].concat(["", ""]); // customCss, customJs
 				} else {
 					alert("unknown file type: " + type)
 				}
+				// redraw the list of files
 				redrawLeft();
 			}
+			// adds a file using the filename text box and type dropdown
 			var add = function add() {
 				addFile(document.getElementById("filename").value, document.getElementById("type").selectedOptions[0].value)
+				// clear the filename input box
 				document.getElementById("filename").value = ""
 			}
+			// Generates the python file to use to build the app
 			var make_custom_py = function make_custom_py() {
+				// pull snippets from the screen first
 				getRight();
+				// helper script
 				var retVal = "import sys;\n";
 				retVal += "sys.path.append('.');\n";
 				retVal += "import custom_helper;\n";
 				retVal += "helper = custom_helper.helper();\n";
+				// Add each file
 				for (var i = 0; i < files.length; i++) {
 					var file = files[i];
 					retVal += "helper.make_" + file[1] + "(" + JSON.stringify(file[0]) + ","
 					file.slice(2).forEach(function(entry) {
 						retVal += JSON.stringify(entry) + ",";
-					})
+					});
 					retVal = retVal.substr(0, retVal.length - 1); // chop off the trailing comma
 					retVal += ");\n\n"
 				}
 				return retVal;
 			}
+			// Pulls the files object from the filesystem and refreshes the list of files
 			var userLoad = function(viaOl) {
 				//("global", eval)(prompt("Please paste in your configuration (it starts with 'files = ')"))
 				var request = new XMLHttpRequest();
 				request.onreadystatechange = function() {
 					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
 						files = JSON.parse(request.responseText)
+						// Don't display an alert if the load was caused by the onLoad function
 						if (!viaOl) alert("Success")
+						// redraw the list of files
 						redrawLeft();
 					}
 				}
 				request.open("GET", USER_CONFIG_LOCATION, true);
 				request.send()
 			}
+			// called when the user clicks the save build script button
 			var userSavePy = function() {
 				getRight();
 				//give_user("# Copy and paste this into your app_specific_yourappnamehere.py file and run ./build yourappnamehere", make_custom_py());
+				// Generate and save the build script, then display a success message telling the user to run the grunt task
 				postFile(USER_PY_LOCATION, make_custom_py(), "Success - Please run `grunt build-formgen-files`")
 			}
+			// Called when the user clicks the save button, saves the files object to the filesystem
 			var userSave = function() {
 				getRight();
 				//give_user("// Copy this to a safe place and enter it when you click Load", "files = " + JSON.stringify(files) + ";");
 				postFile(USER_CONFIG_LOCATION, JSON.stringify(files));
 			}
+			// Called when the user clicks the minus button on a file
+			// does not actually delete the generated html/js files, just removes them from the editor
 			var delete_file = function delete_file(name) {
 				if (!confirm("Please confirm deletion of file: " + name)) return;
 				for (var i = 0; i < files.length; i++) {
@@ -212,15 +253,16 @@ textarea {
 						break;
 					}
 				}
+				// If the deleted file is the file the user is currently editing, clear the snippets section
 				var right = document.getElementById("right");
 				var current_file_in_right = right.getAttribute("data-filename");
 				if (current_file_in_right == name) {
 					right.innerHTML = "";
 					right.setAttribute("data-filename", "")
 				}
+				// Redraw the list of files
 				redrawLeft();
 			}
-filename
 
 		</script>
 	</head>
