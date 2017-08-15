@@ -191,7 +191,7 @@ textarea {
 			var userSavePy = function() {
 				getRight();
 				//give_user("# Copy and paste this into your app_specific_yourappnamehere.py file and run ./build yourappnamehere", make_custom_py());
-				post(USER_PY_LOCATION, make_custom_py())
+				post(USER_PY_LOCATION, make_custom_py(), "Success - Please run `grunt build-formgen-files`")
 			}
 			var userSave = function() {
 				getRight();
@@ -200,11 +200,12 @@ textarea {
 			}
 
 
-			var post = function post(path, data) {
+			var post = function post(path, data, optional_message) {
+				if (typeof(optional_message) == "undefined") optional_message = "Success";
 				var request = new XMLHttpRequest();
 				request.onreadystatechange = function() {
 					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
-						alert("Success")
+						alert(optional_message);
 					}
 				}
 				request.open("POST", path);

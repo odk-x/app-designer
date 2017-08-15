@@ -182,7 +182,13 @@ module.exports = function (grunt) {
 				cmd: function(str, formDefFile) {
 					return 'node macGenConverter.js ' + str + ' > ' + formDefFile; 
 				}
-			}
+			},
+            formgen: {
+                cmd: function(args) {
+                    return "python3 build " + args;
+                },
+                cwd: "formgen"
+            }
         },
 
         tables: tablesConfig,
@@ -2055,6 +2061,32 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
         "Launch the login and sync screen",
         function() {
             grunt.task.run("exec:adbshell:am start -a android.intent.action.MAIN -n org.opendatakit.services/.sync.actions.activities.SyncActivity --es appName "+tablesConfig.appName+" --es showLogin true");
+        }
+    )
+    grunt.registerTask(
+        "build-formgen-files",
+        "Build formgen files using data saved by the \"Files\" tab in app designer",
+        function() {
+            grunt.task.run("exec:formgen:" + tablesConfig.appName);
+            grunt.task.run("formgen-cleanup");
+        }
+    )
+    grunt.registerTask(
+        "build-formgen-files-quick",
+        "Build formgen files using data saved by the \"Files\" tab in app designer, without running syntax checks",
+        function() {
+            grunt.task.run("exec:formgen:" + tablesConfig.appName + " --no-syntax --quiet");
+            grunt.task.run("formgen-cleanup");
+        }
+    )
+    grunt.registerTask(
+        "formgen-cleanup",
+        "Remove formgen garbage",
+        function() {
+            grunt.file.delete("app/config/assets/formgen/")
+            grunt.file.delete("app/config/assets/form_generator.css")
+            grunt.file.delete("app/config/assets/form_generator.js")
+            grunt.file.delete("app/config/assets/tables.html")
         }
     )
     // https://stackoverflow.com/questions/16612495/continue-certain-tasks-in-grunt-even-if-one-fails
