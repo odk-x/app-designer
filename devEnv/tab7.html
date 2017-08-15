@@ -46,9 +46,13 @@
 					option.innerText = display(localized_tables[all_tables[i]], all_tables[i], window.possible_wrapped.concat("title"), all_tables[i]);
 					document.getElementById("table_id").appendChild(option)
 				}
+				// TODO is this line needed?
 				document.getElementById("table_id").selectedIndex = 0;
+				// make the iframe bigger
 				document.getElementById("iframe").style.height = document.body.scrollHeight.toString() + "px"
 				var block = function block() {
+					// Retry over and over again until we have both odkData and odkDataIf. We have to do
+					// this because requirejs sucks
 					if (typeof(odkData) == "undefined" || typeof(odkDataIf) == "undefined") {
 						setTimeout(block, 100);
 						return;
@@ -64,11 +68,14 @@
 					callback();
 					return;
 				}
+				// we do a select with a limit 0 to get just the metadata
 				odkData.arbitraryQuery(other_table, "SELECT * FROM " + other_table, [], 0, 0, function(d) {
-					columns[other_table] = []
+					// fixes some async problem
+					columns[other_table] = [];
 					// store off metadata for translation in the callback
 					metadata = d.getMetadata();
 					for (var i = 0; i < d.getColumns().length; i++) {
+						// skip columns that start with underscores
 						if (d.getColumns()[i][0] == "_") {
 							continue;
 						}
@@ -79,6 +86,7 @@
 			}
 			// Ensures that we have at least 5 fake rows in the database
 			var resetDatabase = function resetDatabase() {
+				// count is the number of rows *already* in the database
 				var count = -1;
 				// First, get the number of rows
 				odkData.arbitraryQuery(table_id, "SELECT * FROM " + table_id, [], 10000, 0, function(d) {
@@ -86,18 +94,14 @@
 				})
 				// Simultaniously, get the columns in the table
 				getColumns(table_id, function() {
-					// 
+					// I don't remember why this is needed
 					redrawDisplayCol(false);
+					// keep track of how many inserts are running
 					var running = 0;
-					var all_to_set = []
 					var do_inserts = function() {
 						for (var i = 0; i < 5 - count; i++) {
-							var defaults = {};
-							for (var j = 0; j < all_to_set.length; j++) {
-								defaults[all_to_set[j]] = all_to_set[j]
-							}
 							running++;
-							odkData.addRow(table_id, defaults, newGuid(), function(d) {
+							odkData.addRow(table_id, {}, newGuid(), function(d) {
 								running--;
 							}, fail)
 						}
@@ -129,19 +133,25 @@
 				document.getElementById("subcols").innerHTML = ""
 				resetDatabase();
 			}
-			// Pulls the data off the screen for the main display column
+			// Pulls the data off the screen for the main display column and puts it in the display_col variable
 			var getDisplayCol = function getDisplayCol() {
-				display_col = document.getElementById("display_col").selectedOptions[0]
-				if (typeof(display_col) == "undefined") display_col = {"value": ""}
-				display_col = display_col.value
+				display_col_dropdown = document.getElementById("display_col").selectedOptions[0]
+				if (typeof(display_col_dropdown) == "undefined") {
+					display_col = "";
+				} else {
+					display_col = display_col_dropdown.value
+				}
 			}
-			// First, update all our global variables with the data on the screen, then give those variables to our iframe, and put the configuration in pre, even though pre is hidden right now
+			// First, update all our global variables with the data on the screen,
+			// then give those variables to our iframe
 			var update = function update() {
+				// Get everything from the screen
 				getDisplayCol();
 				getDisplaySubcols();
 				getGroupBys();
 				getJoins();
 				getColsToSelect();
+				// Give it ot the iframe and have it redraw
 				var iframe = document.getElementById("iframe")
 				iframe.contentWindow.odkDataIf = odkDataIf
 				iframe.contentWindow.odkData = odkData
@@ -151,8 +161,9 @@
 				iframe.contentWindow.display_col = display_col
 				iframe.contentWindow.display_subcol = display_subcol
 				iframe.contentWindow.allowed_group_bys = allowed_group_bys
-				iframe.contentWindow.update_total_rows(true);
+				iframe.contentWindow.update_total_rows(true); // true means force redraw even though the search box is unchanged
 				// Everything down here is just adding the javascript to the screen so the user can copy/paste it out
+				// except pre is hidden because I added tab8 so the user doesn't have to copy and paste javascript around anymore
 				var pre = document.getElementById("exported")
 				pre.innerHTML = ""
 				pre.appendChild(document.createTextNode(
@@ -186,16 +197,25 @@
 				}
 			}
 			// Finds all the display subcol elements on the screen, takes their value and puts it in the global display_subcol variable
+			// Each display subcol on the screen is a text box that controls `display_name`, followed by a dropdown
+			// that controls `column`, and a true/false dropdown that controls `newline`.
 			var getDisplaySubcols = function getDisplaySubcols() {
-				display_subcol = []
+				// Clear the display_subcol variable because we're about to reset it with the screen value
+				display_subcol = [];
 				var count = document.getElementById("subcols").children.length;
+				// For each display subcol group
 				for (var i = 0; i < count; i++) {
 					var elem = document.getElementById("subcols-" + i);
+					// get the display_name
 					var text = elem.getElementsByTagName("input")[0].value
+					// get the column
 					var opt = elem.getElementsByTagName("select")[0].selectedOptions[0] 
-					var col = opt == null ? "" : opt.value
+					var col = opt == null ? null : opt.value
+					// if the column value is `empty`, then they want no `column` variable set in the object
 					col = col == "empty" ? null : col
+					// get the `newline`
 					var nl = elem.getElementsByTagName("select")[1].selectedOptions[0].value.toString().toLowerCase() == "false" ? false : true
+					// put it in the global display_subcol variable
 					var triplet = {"display_name": text, "newline": nl}
 					if (col != null) {
 						triplet["column"] = col;
@@ -203,7 +223,8 @@
 					display_subcol = display_subcol.concat(triplet)
 				}
 			}
-			// Called when we load configuration, will update the elements on the page to match the global display_subcols variable (if first is true, otherwise it will pull the data off the screen first)
+			// Called when we load configuration, will update the elements on the page to match the
+			// global display_subcols variable (if first is true, otherwise it will pull the data off the screen first)
 			var redrawDisplaySubcols = function redrawDisplaySubcols(first) {
 				var expected_count = display_subcol.length;
 				var children = document.getElementById("subcols").children;
