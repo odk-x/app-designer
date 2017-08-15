@@ -8,12 +8,6 @@
 		"Tea_types": "config/assets/Tea_types_list.html",
 		"Tea_inventory": "config/assets/Tea_inventory_list.html",
 	}
-	var newinstance = function newinstance(table) {
-		return function() {
-			var id = newGuid();
-			odkTables.launchHTML(null, "config/assets/formgen/"+table+"#" + id);
-		}
-	}
 	menu = {"label": "Tea Demo", "type": "menu", "contents": [
 		{"label": "View Tea Houses (try searching for \"Hill\")", "type": "list_view", "table": "Tea_houses"},
 		{"label": "View Tea Houses on a Map", "type": "js", "function": function() { odkTables.openTableToMapView(null, "Tea_Houses", null, null, "config/assets/Tea_houses_list.html"); }},
