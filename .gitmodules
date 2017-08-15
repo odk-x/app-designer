@@ -1,0 +1,4 @@
+[submodule "formgen"]
+	path = formgen
+	url = https://github.com/nilesr/formgen
+	branch = appdesigner-submodule
