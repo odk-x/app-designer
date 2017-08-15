@@ -297,17 +297,20 @@
 				var idx = document.getElementById("subcols").children.length;
 				div.id = "subcols-" + idx;
 
+				// Text box for the display name
 				var text = document.createElement("input")
 				text.type = "text";
 				text.setAttribute("data-subcol", idx);
 				text.addEventListener("change", update);
 				text.placeholder = "Text to display before the selected column, if any."
 
+				// Select for the column
 				// Options will be populated in redrawDisplaySubcols
 				var select = document.createElement("select")
 				select.addEventListener("change", update)
 				select.setAttribute("data-subcol", idx);
 
+				// Select for whether to have a newline or not
 				var select2 = document.createElement("select")
 				select2.addEventListener("change", update)
 				select2.setAttribute("data-subcol", idx);
@@ -320,12 +323,14 @@
 				option.innerText = "Continue";
 				select2.appendChild(option)
 
+				// Delete button, not written yet
 				var remove = document.createElement("button")
 				remove.innerText = "-"
 				remove.addEventListener("click", function() {
 					alert("TODO");
 				});
 
+				// Put it all on the screen
 				div.appendChild(text);
 				div.appendChild(select);
 				div.appendChild(select2);
@@ -333,7 +338,7 @@
 				document.getElementById("subcols").appendChild(div)
 
 				// Add new display subcol to the array
-				// Seems like this should be wrapped in an `if (!first)`
+				// TODO Seems like this should be wrapped in an `if (!first)`
 				display_subcol = display_subcol.concat({"display_name": "", "newline": true});
 				if (!first) redrawDisplaySubcols(false);
 			}
@@ -364,7 +369,6 @@
 				joins.id = "joins"
 				document.getElementById("right").appendChild(addjoin)
 				document.getElementById("right").appendChild(joins)
-				//redrawJoins(true);
 
 				// Add the columns to select and draw (populate) it
 				var cols_to_select = document.createElement("div");
@@ -475,8 +479,10 @@
 					all_joins = []
 					return;
 				}
+				// clear all_joins first
 				all_joins = []
 				var thing = document.getElementById("joins")
+				// Pull all the joins into the array
 				for (var i = 0; i < thing.children.length; i++) {
 					var join = document.getElementById("join-" + i);
 					all_joins = all_joins.concat(0);
@@ -487,10 +493,12 @@
 						selects[2].selectedOptions[0] == null ? "" : selects[2].selectedOptions[0].value
 					]
 				}
+				// Set global_join to an array of all the joins
 				global_join = []
 				for (var i = 0; i < all_joins.length; i++) {
 					global_join = global_join.concat(all_joins[i][0] + " ON " + table_id + "." + all_joins[i][1] + " = " + all_joins[i][0] + "." + all_joins[i][2])
 				}
+				// join the joins with " JOIN ". There should not be a leading "JOIN " -- that is implied
 				global_join = global_join.join(" JOIN ")
 			}
 			// redraws all joins then executs the callback
@@ -501,10 +509,12 @@
 					newjoin(first);
 					len++;
 				}
+				// keep track of how many redraws are still going for the callback post
 				var running = len;
 				for (var i = 0; i < len; i++) {
 					redrawJoin(i, first, function() { running--; });
 				}
+				// wait for all to be done before executing the callback
 				var post = function post() {
 					if (running > 0) {
 						setTimeout(post, 50);
@@ -517,16 +527,21 @@
 			// pulls the group bys off the screen and into the allowed_group_bys argument
 			var getGroupBys = function getGroupBys() {
 				if (!advanced) return;
+				// if no group bys are allowed, set it to an empty string
 				if (!document.getElementById("allow_group_bys").checked) {
 					allowed_group_bys = [];
 					return allow_group_bys;
 				}
+				// Reset allowed group bys so we can add the ones on the screen
 				allowed_group_bys = []
 				var elems = document.getElementsByClassName("group_by")
 				for (var i = 0; i < elems.length; i++) {
 					var elem = elems[i];
+					// If the group by is not enabled (not checked) then don't add anything
 					if (elem.checked) {
+						// Pull the database column
 						var col = elem.getAttribute("data-dbcol")
+						// Pull the display name element. If it's a dropdown, pull the value of the selected option, if it's a text box, just pull its value
 						var display_input = document.getElementById(col + "-display")
 						if (display_input.tagName == "SELECT") {
 							var value = display_input.selectedOptions[0].value
@@ -542,11 +557,13 @@
 							display_input = display_input.value;
 						}
 						var item = {"column": col};
+						// if it's a text box, put in the literal text, otherwise set "pretty" instead of "display_name"
 						if (typeof(display_input) == "string") {
 							item["display_name"] = display_input;
 						} else {
 							item["pretty"] = display_input;
 						}
+						// add the item to the list
 						allowed_group_bys = allowed_group_bys.concat(item);
 					}
 				}
@@ -555,13 +572,17 @@
 			var redrawGroupBys = function redrawGroupBys(first) {
 				if (!first) getColsToSelect();
 				var group_bys = document.getElementById("group_bys");
+				// Reset the screen so we can draw new stuff to it
 				group_bys.innerHTML = ""
+				// Get the list of all columns that the user could display -- the ones in this table and the selected ones from joined tables
 				var cols = columns[table_id]
 				for (var j = 0; j < all_cols_to_select.length; j++) {
 					cols = cols.concat(all_cols_to_select[j][1])
 				}
+				// for each column that the user could group by
 				for (var i = 0; i < cols.length; i++) {
 					var col = cols[i];
+					// make a checkbox that the user can use to enable or disable grouping by this column
 					var box = document.createElement("input")
 					box.type = "checkbox"
 					box.setAttribute("data-dbcol", col);
@@ -569,6 +590,7 @@
 					box.id = col;
 					box.name = col;
 					box.addEventListener("change", update)
+					// Try and find this column in the allowed_group_bys, and see if it exists or not and if it does, pull its "pretty" (true/false) or "display_name" (text)
 					var exists = false;
 					var value = true
 					if (allowed_group_bys == null) {
@@ -586,10 +608,12 @@
 							}
 						}
 					}
+					// if this column was in the list of allowed group bys, check it
 					if (exists) {
 						box.checked = true;
 					}
 					var select;
+					// if pretty was set (as opposed to display_name), then make a dropdown
 					if (value === true || value === false) {
 						select = document.createElement("select");
 						var option = document.createElement("option")
@@ -606,16 +630,20 @@
 						select.appendChild(option)
 						select.selectedIndex = value == true ? 0 : 1;
 					} else {
+						// if display_name was set, then make a textbox instead
 						select = document.createElement("input")
 						select.type = "text"
 						select.value = value;
 					}
+					// Set the id on whichever was used (dropdown or text box)
 					select.id = col + "-display"
 					select.addEventListener("change", update);
+					// Make a label for it
 					var label = document.createElement("label")
 					label.setAttribute("for", col);
 					label.innerText = displayCol(col, metadata, table_id, table_id);
 					var wrapper = document.createElement("div")
+					// Put it all on the screen
 					wrapper.appendChild(box)
 					wrapper.appendChild(select)
 					wrapper.appendChild(label)
@@ -630,12 +658,22 @@
 					return;
 				}
 				var elems = document.getElementById("cols_to_select").getElementsByTagName("input")
+				// Clear all_cols_to_select in preparation for populating it from the screen
 				all_cols_to_select = [];
+				// Iterate through *PAIRS* of elements, first is the checkbox for whether to select the column or not, second is the id for the column
 				for (var i = 0; i < elems.length; i += 2) {
 					if (!elems[i].checked) continue;
+					var id_to_select_as = elems[i + 1].value;
+					// don't let users shoot themselves in the foot
+					if (id_to_select_as.indexOf(" ") >= 0) {
+						alert("Column id for selection from joined table may not contain special characters. Use underscores instead of spaces.");
+						continue;
+					}
+					// add it to all cols to select
 					all_cols_to_select = all_cols_to_select.concat(0);
-					all_cols_to_select[all_cols_to_select.length - 1] = [elems[i].getAttribute("data-dbcol"), elems[i + 1].value]
+					all_cols_to_select[all_cols_to_select.length - 1] = [elems[i].getAttribute("data-dbcol"), id_to_select_as]
 				}
+				// use all cols to select to generate the string global_which_cols_to_select;
 				global_which_cols_to_select = table_id + ".*"
 				for (var i = 0; i < all_cols_to_select.length; i++) {
 					global_which_cols_to_select += ", " + all_cols_to_select[i][0] + " AS " + all_cols_to_select[i][1]
@@ -658,8 +696,11 @@
 				// allow grouping by all columns in all the tables you've joined as well
 				for (var i = 0; i < all_joins.length; i++) {
 					var tbl = all_joins[i][0];
+					// For each column in the joined table
 					getColumns(tbl, function() {
 						for (var j = 0; j < columns[tbl].length; j++) {
+							// add a text check mark for whether to select that column
+							// and a text box for the id of the column to be selected
 							var col = columns[tbl][j];
 							var wrapper = document.createElement("div")
 							var box = document.createElement("input")
@@ -669,8 +710,8 @@
 							box.setAttribute("data-dbcol", tbl + "." + col)
 							var found = false;
 							var value = ""
+							// Try and find it in all_cols_to_select to see if it was previously selected before this function was called
 							for (var k = 0; k < all_cols_to_select.length; k++) {
-								//alert("Checking that " + all_cols_to_select[k][0] + " matches " + tbl + "." + col);
 								if (all_cols_to_select[k][0] == tbl + "." + col) {
 									found = true;
 									value = all_cols_to_select[k][1];
@@ -688,8 +729,9 @@
 							div.appendChild(wrapper);
 						}
 						running--;
-					})
+					});
 				}
+				// Wait until all columns are populated to call the callback
 				if (typeof(cb) != "undefined") {
 					var post = function post() {
 						if (running > 0) {
@@ -704,54 +746,66 @@
 			// Redraws the display column from the variable, populates the list with all columns in this table and the columns being pulled from other tables
 			var redrawDisplayCol = function redrawDisplayCol(first) {
 				if (!first) getDisplayCol();
-				console.log("DISPLAY COL IS " + display_col)
+				// Also allow selecting all columns from join tables
 				var cols = columns[table_id];
 				for (var i = 0; i < all_cols_to_select.length; i++) {
 					cols = cols.concat(all_cols_to_select[i][1]);
 				}
+				// clear the options for repopulation
 				document.getElementById("display_col").innerHTML = ""
+				// for each column
 				for (var i = 0; i < cols.length; i++) {
 					var option = document.createElement("option")
 					option.value = cols[i];
 					option.innerText = displayCol(cols[i], metadata, table_id, table_id);
+					// add the option to the select
 					document.getElementById("display_col").appendChild(option)
-					console.log("Checking " + cols[i] + " against " + display_col)
+					// if this column was the previously selected display_col, then select the added option
 					if (cols[i] == display_col) {
 						document.getElementById("display_col").selectedIndex = i;
 					}
 				}
 			}
+			// used for pretty printing stuff in save()
 			var print = function print(thing) {
 				//return JSON.stringify(thing, null, "\t")
 				return JSON.stringify(thing)
 			}
+			// saves the file to the files object
 			var userSave = function() {
 				//prompt("Copy this configuration to somewhere safe, then paste it into the Custom Js On Load section of a List View in the Files tab to use it.", save())
 				var filename = prompt("Please enter the filename of the new file")
+				// prevent the user from shooting themselves in the foot
 				if (filename.trim() == "") {
 					alert("Filename cannot be empty");
 					return;
 				}
+				// get the list of files
 				var request = new XMLHttpRequest();
 				request.onreadystatechange = function() {
 					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+						// parse the result
 						var files = JSON.parse(request.responseText)
+						// prevent the user from shooting themselves in the foot again
 						for (var j = 0; j < files.length; j++) {
 							if (files[j][0] == filename) {
 								alert("That file already exists!");
 								return;
 							}
 						}
+						// add the new file
 						files = files.concat(0)
 						files[files.length - 1] = [filename, "table", "", "", save(), "", ""]
+						// save the new file, will alert("Success") when done
 						postFile(USER_CONFIG_LOCATION, JSON.stringify(files));
 					}
 				}
 				request.open("GET", USER_CONFIG_LOCATION, true);
 				request.send()
-
 			}
+			// loads the configuration from the user
 			var userLoad = function() {
+				// unfortunately nobody's going to read the second half of this message, we should figure out a way of making that work
 				("global",eval)(prompt("Paste in your saved configuration here. Please make sure you've chosen the right table first!"))
 				load();
 			}
