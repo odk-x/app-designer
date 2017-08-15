@@ -1,8 +1,8 @@
 <!doctype html>
 <!--
 
-	There's a config in the `example_config` file. Load up tab 8, click "Load" and paste the contents of the
-	entire file into the text box that it gives you. It should load up a demo that will overwrite the "teatime.html" file.
+	There's a config in the `app/file_manager_config` file that should load automatically when you load the tab.
+	It should load up a demo that will overwrite the "teatime.html" file.
 
 	When you make a list view in the list view designer and hit save, it will give you some javascript. That javascript can be put in the "Js On Load"
 	for a list view in this tab to actually use the list view on a device
@@ -11,11 +11,9 @@
 	formgen repo, then run `./build yourappnamehere` (after setting your app designer folder in utils.py), and it will
 	generate the list view that you made (and all of the other files you configured), checking for syntax errors as it goes
 
-	So the challenge here is getting things 
-	- from the list view designer to this tab
-	- then from this tab to a saveable and restorable file (like `example_config`).
-	- and also from this tab to a python file in a formgen submodule
-	- then running ./build in the formgen submodule
+	So the challenge here is
+	- getting things from the list view designer to this tab
+	- running ./build in the formgen submodule
 	
 	
 -->
@@ -30,9 +28,10 @@ textarea {
 			}
 		</style>
 		<script>
+			var USER_CONFIG_LOCATION = "/app/file_manager_config";
 			var files = [];
 			var ol = function ol() {
-				redrawLeft();
+				userLoad(true);
 			}
 			var redrawLeft = function redrawLeft() {
 				var left = document.getElementById("left")
@@ -175,33 +174,37 @@ textarea {
 				}
 				return retVal;
 			}
-			var userLoad = function() {
-				("global", eval)(prompt("Please paste in your configuration (it starts with 'files = ')"))
-				redrawLeft();
+			var userLoad = function(viaOl) {
+				//("global", eval)(prompt("Please paste in your configuration (it starts with 'files = ')"))
+				var request = new XMLHttpRequest();
+				request.onreadystatechange = function() {
+					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+						files = JSON.parse(request.responseText)
+						if (!viaOl) alert("Success")
+						redrawLeft();
+					}
+				}
+				request.open("GET", USER_CONFIG_LOCATION, true);
+				request.send()
 			}
 			var userSavePy = function() {
-				give_user("# Copy and paste this into your app_specific_yourappnamehere.py file and run ./build yourappnamehere", make_custom_py());
+				//give_user("# Copy and paste this into your app_specific_yourappnamehere.py file and run ./build yourappnamehere", make_custom_py());
+				post(USER_PY_LOCATION, make_custom_py())
 			}
 			var userSave = function() {
 				//give_user("// Copy this to a safe place and enter it when you click Load", "files = " + JSON.stringify(files) + ";");
-				post("/app/config/assets/.file_manager_config", JSON.stringify(files));
-			}
-			// This function won't be needed once I know how to save stuff to the filesystem
-			var give_user = function give_user(a, b) {
-				var text = a + "\n\n\n" + b;
-				var url = "data:text/text;base64," + btoa(text);
-				window.open(url, "", "width=640,height=200")
+				post(USER_CONFIG_LOCATION, JSON.stringify(files));
 			}
 
 
-			function post(path, data) {
+			var post = function post(path, data) {
 				var request = new XMLHttpRequest();
 				request.onreadystatechange = function() {
 					if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
 						alert("Success")
 					}
 				}
-				request.open("POST", "http://foo.com/submitform.php");
+				request.open("POST", path);
 				request.send(data);
 			}
 		</script>
@@ -209,7 +212,7 @@ textarea {
 	<body onLoad='ol();'>
 		<button id='savepy' onClick='userSavePy();'>Save Build Script</button>
 		<button id='save' onClick='userSave();'>Save</button>
-		<button id='load' onClick='userLoad();'>Load</button>
+		<button id='load' onClick='userLoad(false);'>Load</button>
 		<br />
 		<input type='text' id='filename' />
 		<select id='type'>
