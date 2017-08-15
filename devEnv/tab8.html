@@ -189,10 +189,12 @@ textarea {
 				request.send()
 			}
 			var userSavePy = function() {
+				getRight();
 				//give_user("# Copy and paste this into your app_specific_yourappnamehere.py file and run ./build yourappnamehere", make_custom_py());
 				post(USER_PY_LOCATION, make_custom_py())
 			}
 			var userSave = function() {
+				getRight();
 				//give_user("// Copy this to a safe place and enter it when you click Load", "files = " + JSON.stringify(files) + ";");
 				post(USER_CONFIG_LOCATION, JSON.stringify(files));
 			}
