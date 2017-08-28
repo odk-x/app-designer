@@ -30,7 +30,7 @@ function display() {
     viewRefrigeratorModelsButton.on(
         'click',
         function() {
-            odkTables.openTableToListView(
+            odkTables.openTableToListView(null,
                 'refrigerator_types',
                 null,
                 null,

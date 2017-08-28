@@ -23,6 +23,7 @@ function display() {
         'click',
         function() {
             odkTables.openTableToListView(
+                null, 
                 'refrigerators',
                 null,
                 null,
@@ -35,6 +36,7 @@ function display() {
         'click',
         function() {
             odkTables.openTableToListView(
+                null,
                 'refrigerator_types',
                 null,
                 null,

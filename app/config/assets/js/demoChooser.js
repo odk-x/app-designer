@@ -9,18 +9,12 @@ function display() {
         currentTab = 0;
         updateForTab(currentTab);
     });
-    $('#geoWeatherTab').on('click', function() {
-        currentTab = 1;
-        updateForTab(currentTab);
-    });
 
     $('#launch-button').on(
             'click',
             function() {
                 if (currentTab === 0) {
                     odkTables.launchHTML(null,'config/assets/coldchaindemo.html');
-                } else if (currentTab === 1) {
-                    odkTables.launchHTML(null,'config/assets/rowlevelaccessdemo.html');
                 } else {
                     console.log('trouble, unrecognized tab');
                 }
@@ -40,12 +34,6 @@ function updateForTab(tab) {
         descriptionDiv.text('Cold Chain Management');
         descriptionDiv.attr('class','description-text-white');
         tabItem = $('#coldChainTab');
-    } else if (tab === 1) {
-        // Weather study
-        fileUri = odkCommon.getFileAsUrl('config/assets/img/20160902_sky.JPG');
-        descriptionDiv.text('Weather');
-        descriptionDiv.attr('class','description-text-white');
-        tabItem = $('#geoWeatherTab');
     } else {
         console.log('unrecognized tab index: ' + tab);
     }

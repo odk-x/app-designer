@@ -44,7 +44,7 @@ function display() {
                 selectionArgs.push(facilityRegion);
             }
 
-            odkTables.openTableToMapView('health_facility', selection, selectionArgs, 'config/tables/health_facility/html/hFacility_list.html');
+            odkTables.openTableToMapView(null, 'health_facility', selection, selectionArgs, 'config/tables/health_facility/html/hFacility_list.html');
         }
     );
 }

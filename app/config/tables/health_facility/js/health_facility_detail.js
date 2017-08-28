@@ -23,6 +23,7 @@ function onLinkClick() {
     if (!$.isEmptyObject(healthFacilityResultSet))
     {
         odkTables.openTableToListView(
+          null, 
           'refrigerators',
           'facility_row_id = ?',
           [healthFacilityResultSet.get('_id')],
@@ -34,7 +35,7 @@ function onAddFridgeClick() {
     var jsonMap = {};
     jsonMap.facility_row_id = JSON.stringify(healthFacilityResultSet.getRowId(0));
     jsonMap = JSON.stringify(jsonMap);
-    odkTables.addRowWithSurvey('refrigerators', 'refrigerators', null, jsonMap);
+    odkTables.addRowWithSurvey(null, 'refrigerators', 'refrigerators', null, jsonMap);
 }
 
 function cbSuccess(result) {

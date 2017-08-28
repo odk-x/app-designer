@@ -42,7 +42,7 @@ function display() {
                 selectionArgs.push(searchText);
             }
 
-            odkTables.openTableToListView(tableId, selection, selectionArgs, 'config/tables/health_facility/html/health_facility_list.html');
+            odkTables.openTableToListView(null, tableId, selection, selectionArgs, 'config/tables/health_facility/html/health_facility_list.html');
         }
     );
 }

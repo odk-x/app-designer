@@ -9,18 +9,40 @@
         "type": "text",
         "name": "facility_name",
         "display": {
-          "text": "Enter health facility name"
+          "title": {
+            "text": {
+              "default": "Facility Name",
+              "es": "Nombre de Facilidad"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter health facility name",
+              "es": "Nombre de Facilidad"
+            }
+          }
         },
-        "required": 1,
+        "required": true,
         "_row_num": 3
       },
       {
         "type": "text",
         "name": "facility_id",
         "display": {
-          "text": "Enter health facility ID"
+          "title": {
+            "text": {
+              "default": "Facility ID",
+              "es": "ID de Facilidad"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter health facility ID",
+              "es": "ID de Facilidad"
+            }
+          }
         },
-        "required": 1,
+        "required": true,
         "_row_num": 4
       },
       {
@@ -35,247 +57,449 @@
         "type": "geopoint",
         "name": "Location",
         "display": {
-          "text": "Capture location"
+          "title": {
+            "text": {
+              "default": "Location",
+              "es": "Ubicación"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Capture location",
+              "es": "Ubicación"
+            }
+          }
         },
         "_row_num": 7
-      },
-      {
-        "type": "select_one_dropdown",
-        "values_list": "regionLevel1_csv",
-        "name": "regionLevel1",
-        "display": {
-          "text": "Level 1 of admin region"
-        },
-        "_row_num": 8
-      },
-      {
-        "type": "select_one_dropdown",
-        "values_list": "regionLevel2_csv",
-        "name": "regionLevel2",
-        "display": {
-          "text": "Level 2 of admin region"
-        },
-        "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
-        "_row_num": 9
       },
       {
         "type": "select_one_dropdown",
         "values_list": "regionLevel3_csv",
         "name": "admin_region",
         "display": {
-          "text": "Admin Region"
+          "title": {
+            "text": {
+              "default": "Admin Region",
+              "es": "Region administrativo"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Admin Region",
+              "es": "Region administrativo"
+            }
+          }
         },
         "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
-        "_row_num": 10
+        "required": 1,
+        "_row_num": 8
       },
       {
         "clause": "end screen",
-        "_row_num": 11
+        "_row_num": 9
       },
       {
         "clause": "begin screen",
-        "_row_num": 12
+        "_row_num": 10
       },
       {
         "type": "select_one",
         "values_list": "facility_types",
         "name": "facility_type",
         "display": {
-          "text": "Choose the facility type"
+          "title": {
+            "text": {
+              "default": "Facility Type",
+              "es": "Tipo de facilidad"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Choose the facility type",
+              "es": "Tipo de facilidad"
+            }
+          }
         },
-        "_row_num": 13
+        "_row_num": 11
       },
       {
         "type": "select_one",
         "values_list": "ownership_types",
         "name": "facility_ownership",
         "display": {
-          "text": "Choose the ownership"
+          "title": {
+            "text": {
+              "default": "Facility Ownership",
+              "es": "Tipo de propriedad"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Choose the ownership",
+              "es": "Tipo de propriedad"
+            }
+          }
+        },
+        "_row_num": 12
+      },
+      {
+        "type": "integer",
+        "name": "facility_population",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Facility Population",
+              "es": "Población de facilidad"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter the facility population",
+              "es": "Población de facilidad"
+            }
+          }
+        },
+        "_row_num": 13
+      },
+      {
+        "type": "decimal",
+        "name": "facility_coverage",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Facility Coverage",
+              "es": "Cobertura (porcentaje)"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Percent coverage?",
+              "es": "Cobertura (porcentaje)"
+            }
+          }
         },
         "_row_num": 14
       },
       {
-        "type": "number",
-        "name": "facility_population",
-        "display": {
-          "text": "Enter the facility population"
-        },
+        "clause": "end screen",
         "_row_num": 15
       },
       {
-        "type": "number",
-        "name": "facility_coverage",
-        "display": {
-          "text": "Percent coverage?"
-        },
-        "_row_num": 16
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 17
-      },
-      {
         "clause": "begin screen",
-        "_row_num": 18
+        "_row_num": 16
       },
       {
         "type": "select_one",
         "values_list": "elec_sources",
         "name": "electricity_source",
         "display": {
-          "text": "Choose the electricity source"
+          "title": {
+            "text": {
+              "default": "Electricity Source",
+              "es": "Fuente de energía"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Choose the electricity source",
+              "es": "Fuente de energía"
+            }
+          }
         },
-        "_row_num": 19
+        "_row_num": 17
       },
       {
         "clause": "if",
         "condition": "selected(data('electricity_source'), 'grid')",
-        "_row_num": 20
+        "_row_num": 18
       },
       {
         "type": "select_one",
         "values_list": "grid",
         "name": "grid_power_availability",
         "display": {
-          "text": "Choose the grid availability"
+          "title": {
+            "text": {
+              "default": "Grid Availability",
+              "es": "Disponibilidad del red de energía"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Choose the grid availability",
+              "es": "Disponibilidad del red de energía"
+            }
+          }
         },
-        "_row_num": 21
+        "_row_num": 19
       },
       {
         "clause": "end if",
-        "_row_num": 22
+        "_row_num": 20
       },
       {
         "type": "select_one",
         "values_list": "fuel_availability",
         "name": "gas_availability",
         "display": {
-          "text": "Choose the gas availability"
+          "title": {
+            "text": {
+              "default": "Gas Availability",
+              "es": "Disponibilidad de combustible"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Choose the gas availability",
+              "es": "Disponibilidad de combustible"
+            }
+          }
         },
-        "_row_num": 23
+        "_row_num": 21
       },
       {
         "type": "select_one",
         "values_list": "fuel_availability",
         "name": "kerosene_availability",
         "display": {
-          "text": "Choose the kerosene availability"
+          "title": {
+            "text": {
+              "default": "Kerosene Availability",
+              "es": "Disponibilidad de queroseno"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Choose the kerosene availability",
+              "es": "Disponibilidad de queroseno"
+            }
+          }
         },
-        "_row_num": 24
+        "_row_num": 22
       },
       {
         "clause": "end screen",
-        "_row_num": 25
+        "_row_num": 23
       },
       {
         "clause": "begin screen",
-        "_row_num": 26
+        "_row_num": 24
       },
       {
         "type": "select_one",
         "values_list": "yes_no",
         "name": "solar_suitable_climate",
         "display": {
-          "text": "Is this a solar suitable climate?"
+          "title": {
+            "text": {
+              "default": "Solar Suitable Climate",
+              "es": "Clima adecuedo por energía solár"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Is this a solar suitable climate?",
+              "es": "¿Es la clima adecuedo por energía solár?"
+            }
+          }
         },
-        "_row_num": 27
+        "_row_num": 25
       },
       {
         "type": "select_one",
         "values_list": "yes_no",
         "name": "solar_suitable_site",
         "display": {
-          "text": "Is this a solar suitable site?"
+          "title": {
+            "text": {
+              "default": "Solar Suitable Site",
+              "es": "Facilidad adecuedo por energía solar"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Is this a solar suitable site?",
+              "es": "¿Es la facilidad adecuedo por energía solár?"
+            }
+          }
         },
-        "_row_num": 28
+        "_row_num": 26
       },
       {
         "type": "select_one",
         "values_list": "climate_types",
         "name": "climate_zone",
         "display": {
-          "text": "What is the climate of this location?"
+          "title": {
+            "text": {
+              "default": "Climate Zone",
+              "es": "Clima de ubicación"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "What is the climate of this location?",
+              "es": "Clima de ubicación"
+            }
+          }
         },
-        "_row_num": 29
+        "_row_num": 27
       },
       {
         "clause": "end screen",
-        "_row_num": 30
+        "_row_num": 28
       },
       {
         "clause": "begin screen",
-        "_row_num": 31
+        "_row_num": 29
       },
       {
-        "type": "number",
+        "type": "decimal",
         "name": "distance_to_supply",
         "display": {
-          "text": "What is the distance to the nearest supply point?"
+          "title": {
+            "text": {
+              "default": "Distance to the Closest Supply Point",
+              "es": "Distancia al más proximo punto de reabastecimiento"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "What is the distance to the nearest supply point?",
+              "es": "Distancia al más proximo punto de reabastecimiento"
+            }
+          }
         },
-        "_row_num": 32
+        "_row_num": 30
       },
       {
         "type": "select_one",
         "values_list": "storage_types",
         "name": "storage_type",
         "display": {
-          "text": "Storage type?"
+          "title": {
+            "text": {
+              "default": "Storage Type",
+              "es": "Tipo de almacenamiento"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Storage type?",
+              "es": "Tipo de almacenamiento"
+            }
+          }
         },
-        "_row_num": 33
+        "_row_num": 31
       },
       {
         "type": "select_one",
         "values_list": "delivery_types",
         "name": "delivery_type",
         "display": {
-          "text": "Delivery type?"
+          "title": {
+            "text": {
+              "default": "Delivery Type",
+              "es": "Tipo de envío"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Delivery type?",
+              "es": "Tipo de envío"
+            }
+          }
         },
-        "_row_num": 34
+        "_row_num": 32
       },
       {
         "clause": "end screen",
-        "_row_num": 35
+        "_row_num": 33
       },
       {
         "clause": "begin screen",
-        "_row_num": 36
+        "_row_num": 34
       },
       {
-        "type": "number",
+        "type": "integer",
         "name": "vaccine_supply_interval",
         "display": {
-          "text": "Vaccine Supply Interval?"
+          "title": {
+            "text": {
+              "default": "Supply Interval",
+              "es": "Intervalo de reabastecimiento"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Vaccine Supply Interval?",
+              "es": "Intervalo de reabastecimiento"
+            }
+          }
         },
-        "_row_num": 37
+        "_row_num": 35
       },
       {
-        "type": "number",
+        "type": "integer",
         "name": "vaccine_reserve_stock_requirement",
         "display": {
-          "text": "Vaccine Reserve Stock Requirement?"
+          "title": {
+            "text": {
+              "default": "Minimum Reserve Requirement",
+              "es": "Tamaño Minimo de Reserva"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Vaccine Reserve Stock Requirement?",
+              "es": "Tamaño Minimo de Reserva"
+            }
+          }
         },
-        "_row_num": 38
+        "_row_num": 36
       },
       {
         "type": "select_one",
         "values_list": "vaccine_modes",
         "name": "vaccine_supply_mode",
         "display": {
-          "text": "Vaccine Supply Mode?"
+          "title": {
+            "text": {
+              "default": "Supply Mode",
+              "es": "Modo de recibir vacunas"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Vaccine Supply Mode?",
+              "es": "Modo de recibir vacunas"
+            }
+          }
         },
-        "_row_num": 39
+        "_row_num": 37
       },
       {
         "clause": "end screen",
-        "_row_num": 40
+        "_row_num": 38
       },
       {
         "type": "text",
         "name": "contact_name",
         "display": {
-          "text": "Contact Name?"
+          "title": {
+            "text": {
+              "default": "Contact Name",
+              "es": "Nombre del contacto"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Contact Name?",
+              "es": "Nombre del contacto"
+            }
+          }
         },
-        "_row_num": 41
+        "_row_num": 39
       }
     ],
     "choices": [
@@ -283,7 +507,12 @@
         "choice_list_name": "yes_no",
         "data_value": "yes",
         "display": {
-          "text": "Yes"
+          "title": {
+            "text": {
+              "default": "Yes",
+              "es": "Sí"
+            }
+          }
         },
         "_row_num": 2
       },
@@ -291,7 +520,12 @@
         "choice_list_name": "yes_no",
         "data_value": "no",
         "display": {
-          "text": "No"
+          "title": {
+            "text": {
+              "default": "No",
+              "es": "No"
+            }
+          }
         },
         "_row_num": 3
       },
@@ -299,7 +533,12 @@
         "choice_list_name": "facility_types",
         "data_value": "national_vaccine_store",
         "display": {
-          "text": "National vaccine store"
+          "title": {
+            "text": {
+              "default": "National vaccine store",
+              "es": "Tienda nacional de vacunas"
+            }
+          }
         },
         "_row_num": 5
       },
@@ -307,7 +546,12 @@
         "choice_list_name": "facility_types",
         "data_value": "regional_vaccine_store",
         "display": {
-          "text": "Regional vaccine store"
+          "title": {
+            "text": {
+              "default": "Regional vaccine store",
+              "es": "Tienda regional de vacunas"
+            }
+          }
         },
         "_row_num": 6
       },
@@ -315,7 +559,12 @@
         "choice_list_name": "facility_types",
         "data_value": "district_vaccine_store",
         "display": {
-          "text": "District vaccine store"
+          "title": {
+            "text": {
+              "default": "District vaccine store",
+              "es": "Tienda de vacunas por un distrito"
+            }
+          }
         },
         "_row_num": 7
       },
@@ -323,7 +572,12 @@
         "choice_list_name": "facility_types",
         "data_value": "central_hospital",
         "display": {
-          "text": "Central hospital"
+          "title": {
+            "text": {
+              "default": "Central hospital",
+              "es": "Hospital centrál"
+            }
+          }
         },
         "_row_num": 8
       },
@@ -331,7 +585,12 @@
         "choice_list_name": "facility_types",
         "data_value": "district_hospital",
         "display": {
-          "text": "District hospital"
+          "title": {
+            "text": {
+              "default": "District hospital",
+              "es": "Hospital por un distrito"
+            }
+          }
         },
         "_row_num": 9
       },
@@ -339,7 +598,12 @@
         "choice_list_name": "facility_types",
         "data_value": "rural_hospital",
         "display": {
-          "text": "Rural hospital"
+          "title": {
+            "text": {
+              "default": "Rural hospital",
+              "es": "Hospital rurál"
+            }
+          }
         },
         "_row_num": 10
       },
@@ -347,7 +611,12 @@
         "choice_list_name": "facility_types",
         "data_value": "hospital",
         "display": {
-          "text": "Hospital"
+          "title": {
+            "text": {
+              "default": "Hospital",
+              "es": "Hospital generál"
+            }
+          }
         },
         "_row_num": 11
       },
@@ -355,15 +624,25 @@
         "choice_list_name": "facility_types",
         "data_value": "community_hospital",
         "display": {
-          "text": "Community hospital"
+          "title": {
+            "text": {
+              "default": "Community hospital",
+              "es": "Hospital de comunidad"
+            }
+          }
         },
         "_row_num": 12
       },
       {
         "choice_list_name": "facility_types",
-        "data_value": "health_centre",
+        "data_value": "health_center",
         "display": {
-          "text": "Health centre"
+          "title": {
+            "text": {
+              "default": "Health center",
+              "es": "Centro de salud"
+            }
+          }
         },
         "_row_num": 13
       },
@@ -371,7 +650,12 @@
         "choice_list_name": "facility_types",
         "data_value": "dispensary",
         "display": {
-          "text": "Dispensary"
+          "title": {
+            "text": {
+              "default": "Dispensary",
+              "es": "Dispensario"
+            }
+          }
         },
         "_row_num": 14
       },
@@ -379,7 +663,12 @@
         "choice_list_name": "facility_types",
         "data_value": "health_post",
         "display": {
-          "text": "Health post"
+          "title": {
+            "text": {
+              "default": "Health post",
+              "es": "Campamiento de salud"
+            }
+          }
         },
         "_row_num": 15
       },
@@ -387,7 +676,12 @@
         "choice_list_name": "facility_types",
         "data_value": "maternity",
         "display": {
-          "text": "Maternity"
+          "title": {
+            "text": {
+              "default": "Maternity",
+              "es": "Maternidad"
+            }
+          }
         },
         "_row_num": 16
       },
@@ -395,7 +689,12 @@
         "choice_list_name": "ownership_types",
         "data_value": "public",
         "display": {
-          "text": "Public"
+          "title": {
+            "text": {
+              "default": "Public",
+              "es": "Público"
+            }
+          }
         },
         "_row_num": 18
       },
@@ -403,7 +702,12 @@
         "choice_list_name": "ownership_types",
         "data_value": "private",
         "display": {
-          "text": "Private"
+          "title": {
+            "text": {
+              "default": "Private",
+              "es": "Privado"
+            }
+          }
         },
         "_row_num": 19
       },
@@ -411,7 +715,12 @@
         "choice_list_name": "ownership_types",
         "data_value": "ngo",
         "display": {
-          "text": "NGO"
+          "title": {
+            "text": {
+              "default": "NGO",
+              "es": "ONG"
+            }
+          }
         },
         "_row_num": 20
       },
@@ -419,7 +728,12 @@
         "choice_list_name": "ownership_types",
         "data_value": "faithbased",
         "display": {
-          "text": "Faithbased"
+          "title": {
+            "text": {
+              "default": "Faithbased",
+              "es": "Basado en fé"
+            }
+          }
         },
         "_row_num": 21
       },
@@ -427,7 +741,12 @@
         "choice_list_name": "ownership_types",
         "data_value": "other",
         "display": {
-          "text": "Other"
+          "title": {
+            "text": {
+              "default": "Other",
+              "es": "Otro"
+            }
+          }
         },
         "_row_num": 22
       },
@@ -435,7 +754,12 @@
         "choice_list_name": "elec_sources",
         "data_value": "grid",
         "display": {
-          "text": "Grid"
+          "title": {
+            "text": {
+              "default": "Grid",
+              "es": "Red"
+            }
+          }
         },
         "_row_num": 24
       },
@@ -443,7 +767,12 @@
         "choice_list_name": "elec_sources",
         "data_value": "generator",
         "display": {
-          "text": "Generator"
+          "title": {
+            "text": {
+              "default": "Generator",
+              "es": "Generador"
+            }
+          }
         },
         "_row_num": 25
       },
@@ -451,7 +780,12 @@
         "choice_list_name": "elec_sources",
         "data_value": "both",
         "display": {
-          "text": "Both Grid and Generator"
+          "title": {
+            "text": {
+              "default": "Both Grid and Generator",
+              "es": "Red y generador"
+            }
+          }
         },
         "_row_num": 26
       },
@@ -459,7 +793,12 @@
         "choice_list_name": "elec_sources",
         "data_value": "none",
         "display": {
-          "text": "None"
+          "title": {
+            "text": {
+              "default": "None",
+              "es": "Nada"
+            }
+          }
         },
         "_row_num": 27
       },
@@ -467,7 +806,12 @@
         "choice_list_name": "grid",
         "data_value": "more_than_16",
         "display": {
-          "text": "More than 16"
+          "title": {
+            "text": {
+              "default": "More than 16",
+              "es": "Más que 16"
+            }
+          }
         },
         "_row_num": 29
       },
@@ -475,7 +819,12 @@
         "choice_list_name": "grid",
         "data_value": "8_to_16",
         "display": {
-          "text": "8 to 16"
+          "title": {
+            "text": {
+              "default": "8 to 16",
+              "es": "8 a 16"
+            }
+          }
         },
         "_row_num": 30
       },
@@ -483,7 +832,12 @@
         "choice_list_name": "grid",
         "data_value": "4_to_8",
         "display": {
-          "text": "4 to 8"
+          "title": {
+            "text": {
+              "default": "4 to 8",
+              "es": "4 a 8"
+            }
+          }
         },
         "_row_num": 31
       },
@@ -491,7 +845,12 @@
         "choice_list_name": "grid",
         "data_value": "fewer_than_4",
         "display": {
-          "text": "Fewer than 4"
+          "title": {
+            "text": {
+              "default": "Fewer than 4",
+              "es": "Menos que 4"
+            }
+          }
         },
         "_row_num": 32
       },
@@ -499,7 +858,12 @@
         "choice_list_name": "grid",
         "data_value": "none",
         "display": {
-          "text": "None"
+          "title": {
+            "text": {
+              "default": "None",
+              "es": "Ninguno"
+            }
+          }
         },
         "_row_num": 33
       },
@@ -507,7 +871,12 @@
         "choice_list_name": "fuel_availability",
         "data_value": "available",
         "display": {
-          "text": "Available"
+          "title": {
+            "text": {
+              "default": "Available",
+              "es": "Disponible"
+            }
+          }
         },
         "_row_num": 35
       },
@@ -515,7 +884,12 @@
         "choice_list_name": "fuel_availability",
         "data_value": "irregular",
         "display": {
-          "text": "Irregular"
+          "title": {
+            "text": {
+              "default": "Irregular",
+              "es": "Irregular"
+            }
+          }
         },
         "_row_num": 36
       },
@@ -523,7 +897,12 @@
         "choice_list_name": "fuel_availability",
         "data_value": "not_available",
         "display": {
-          "text": "Not Available"
+          "title": {
+            "text": {
+              "default": "Not Available",
+              "es": "No Disponible"
+            }
+          }
         },
         "_row_num": 37
       },
@@ -531,7 +910,12 @@
         "choice_list_name": "fuel_availability",
         "data_value": "unknown",
         "display": {
-          "text": "Unknown"
+          "title": {
+            "text": {
+              "default": "Unknown",
+              "es": "Desconocido"
+            }
+          }
         },
         "_row_num": 38
       },
@@ -539,7 +923,12 @@
         "choice_list_name": "fuel_availability",
         "data_value": "not_applicable",
         "display": {
-          "text": "Not Applicable"
+          "title": {
+            "text": {
+              "default": "Not Applicable",
+              "es": "No Applicable"
+            }
+          }
         },
         "_row_num": 39
       },
@@ -547,7 +936,12 @@
         "choice_list_name": "climate_types",
         "data_value": "moderate",
         "display": {
-          "text": "Moderate"
+          "title": {
+            "text": {
+              "default": "Moderate",
+              "es": "Moderate"
+            }
+          }
         },
         "_row_num": 41
       },
@@ -555,7 +949,12 @@
         "choice_list_name": "climate_types",
         "data_value": "temperate",
         "display": {
-          "text": "Temperate"
+          "title": {
+            "text": {
+              "default": "Temperate",
+              "es": "Templado"
+            }
+          }
         },
         "_row_num": 42
       },
@@ -563,7 +962,12 @@
         "choice_list_name": "climate_types",
         "data_value": "hot",
         "display": {
-          "text": "Hot"
+          "title": {
+            "text": {
+              "default": "Hot",
+              "es": "Caliente"
+            }
+          }
         },
         "_row_num": 43
       },
@@ -571,7 +975,12 @@
         "choice_list_name": "storage_types",
         "data_value": "depot",
         "display": {
-          "text": "Depot"
+          "title": {
+            "text": {
+              "default": "Depot",
+              "es": "Depósito"
+            }
+          }
         },
         "_row_num": 45
       },
@@ -579,7 +988,12 @@
         "choice_list_name": "storage_types",
         "data_value": "delivery",
         "display": {
-          "text": "Delivery"
+          "title": {
+            "text": {
+              "default": "Delivery",
+              "es": "Envío"
+            }
+          }
         },
         "_row_num": 46
       },
@@ -587,7 +1001,12 @@
         "choice_list_name": "storage_types",
         "data_value": "both",
         "display": {
-          "text": "Both Depot and Delivery"
+          "title": {
+            "text": {
+              "default": "Both Depot and Delivery",
+              "es": "Depósito y Envío"
+            }
+          }
         },
         "_row_num": 47
       },
@@ -595,7 +1014,12 @@
         "choice_list_name": "delivery_types",
         "data_value": "static",
         "display": {
-          "text": "Static"
+          "title": {
+            "text": {
+              "default": "Static",
+              "es": "Estático"
+            }
+          }
         },
         "_row_num": 49
       },
@@ -603,7 +1027,12 @@
         "choice_list_name": "delivery_types",
         "data_value": "outreach",
         "display": {
-          "text": "Outreach"
+          "title": {
+            "text": {
+              "default": "Outreach",
+              "es": "Extensión"
+            }
+          }
         },
         "_row_num": 50
       },
@@ -611,7 +1040,12 @@
         "choice_list_name": "delivery_types",
         "data_value": "both",
         "display": {
-          "text": "Both Static and Outreach"
+          "title": {
+            "text": {
+              "default": "Both Static and Outreach",
+              "es": "Estático y Extensión"
+            }
+          }
         },
         "_row_num": 51
       },
@@ -619,7 +1053,12 @@
         "choice_list_name": "delivery_types",
         "data_value": "none",
         "display": {
-          "text": "None"
+          "title": {
+            "text": {
+              "default": "None",
+              "es": "Nada"
+            }
+          }
         },
         "_row_num": 52
       },
@@ -627,7 +1066,12 @@
         "choice_list_name": "vaccine_modes",
         "data_value": "delivered",
         "display": {
-          "text": "Delivered"
+          "title": {
+            "text": {
+              "default": "Delivered",
+              "es": "Enviado"
+            }
+          }
         },
         "_row_num": 54
       },
@@ -635,7 +1079,12 @@
         "choice_list_name": "vaccine_modes",
         "data_value": "collected",
         "display": {
-          "text": "Collected"
+          "title": {
+            "text": {
+              "default": "Collected",
+              "es": "Collectado"
+            }
+          }
         },
         "_row_num": 55
       },
@@ -643,7 +1092,12 @@
         "choice_list_name": "vaccine_modes",
         "data_value": "both",
         "display": {
-          "text": "Both Delivered and Collected"
+          "title": {
+            "text": {
+              "default": "Both Delivered and Collected",
+              "es": "Enviado y Collectado"
+            }
+          }
         },
         "_row_num": 56
       },
@@ -651,7 +1105,12 @@
         "choice_list_name": "vaccine_modes",
         "data_value": "none",
         "display": {
-          "text": "None"
+          "title": {
+            "text": {
+              "default": "None",
+              "es": "Ninguno"
+            }
+          }
         },
         "_row_num": 57
       },
@@ -659,7 +1118,12 @@
         "choice_list_name": "vaccine_modes",
         "data_value": "unknown",
         "display": {
-          "text": "Unknown"
+          "title": {
+            "text": {
+              "default": "Unknown",
+              "es": "Desconocido"
+            }
+          }
         },
         "_row_num": 58
       }
@@ -678,28 +1142,10 @@
         "_row_num": 2
       },
       {
-        "query_name": "regionLevel1_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{text:regionLevel1}}; }).value()",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 3
-      },
-      {
-        "query_name": "regionLevel2_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {text:place.label}; return place; })",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 4
-      },
-      {
         "query_name": "regionLevel3_csv",
         "query_type": "csv",
         "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
@@ -714,7 +1160,12 @@
       {
         "setting_name": "survey",
         "display": {
-          "title": "Health Facility"
+          "title": {
+            "text": {
+              "default": "Health Facility",
+              "es": "Facilidad de Salúd"
+            }
+          }
         },
         "_row_num": 4
       },
@@ -725,7 +1176,7 @@
       },
       {
         "setting_name": "disableSwipeNavigation",
-        "value": 1,
+        "value": true,
         "_row_num": 6
       },
       {
@@ -735,8 +1186,32 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170713,
+        "value": 20170807,
         "_row_num": 8
+      },
+      {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "English",
+              "es": "Inglés"
+            }
+          }
+        },
+        "_row_num": 9
+      },
+      {
+        "setting_name": "es",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "Spanish",
+              "es": "Español"
+            }
+          }
+        },
+        "_row_num": 10
       }
     ],
     "properties": [
@@ -753,7 +1228,7 @@
         "aspect": "default",
         "key": "detailViewFileName",
         "type": "string",
-        "value": "config/assets/aa_health_facility_detail.html",
+        "value": "config/tables/health_facility/html/health_facility_detail.html",
         "_row_num": 3
       },
       {
@@ -761,7 +1236,7 @@
         "aspect": "default",
         "key": "listViewFileName",
         "type": "string",
-        "value": "config/assets/aa_health_facility_list.html",
+        "value": "config/tables/health_facility/html/health_facility_list.html",
         "_row_num": 4
       },
       {
@@ -795,6 +1270,50 @@
         "type": "string",
         "value": "Location_longitude",
         "_row_num": 8
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "unverifiedUserCanCreate",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 9
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "defaultAccessOnCreation",
+        "type": "string",
+        "value": "HIDDEN",
+        "_row_num": 10
+      },
+      {
+        "partition": "FormType",
+        "aspect": "default",
+        "key": "FormType.formType",
+        "type": "string",
+        "value": "SURVEY",
+        "_row_num": 12
+      },
+      {
+        "partition": "SurveyUtil",
+        "aspect": "default",
+        "key": "SurveyUtil.formId",
+        "type": "string",
+        "value": "wrong_form",
+        "_row_num": 13
+      }
+    ],
+    "model": [
+      {
+        "name": "regionLevel1",
+        "type": "string",
+        "_row_num": 2
+      },
+      {
+        "name": "regionLevel2",
+        "type": "string",
+        "_row_num": 3
       }
     ]
   },
@@ -823,7 +1342,12 @@
       "survey": {
         "setting_name": "survey",
         "display": {
-          "title": "Health Facility"
+          "title": {
+            "text": {
+              "default": "Health Facility",
+              "es": "Facilidad de Salúd"
+            }
+          }
         },
         "_row_num": 4
       },
@@ -834,7 +1358,7 @@
       },
       "disableSwipeNavigation": {
         "setting_name": "disableSwipeNavigation",
-        "value": 1,
+        "value": true,
         "_row_num": 6
       },
       "instance_name": {
@@ -844,13 +1368,49 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170713,
+        "value": 20170807,
         "_row_num": 8
+      },
+      "english": {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "English",
+              "es": "Inglés"
+            }
+          }
+        },
+        "_row_num": 9
+      },
+      "es": {
+        "setting_name": "es",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "Spanish",
+              "es": "Español"
+            }
+          }
+        },
+        "_row_num": 10
       },
       "_locales": {
         "setting_name": "_locales",
         "_row_num": 4,
         "value": [
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "default": "Spanish",
+                  "es": "Español"
+                }
+              }
+            },
+            "_row_num": 10,
+            "name": "es"
+          },
           {
             "display": {
               "locale": {
@@ -864,12 +1424,17 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 4,
-        "value": "default"
+        "value": "es"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
-          "title": "Health Facility"
+          "title": {
+            "text": {
+              "default": "Health Facility",
+              "es": "Facilidad de Salúd"
+            }
+          }
         },
         "_row_num": 4
       }
@@ -880,7 +1445,12 @@
           "choice_list_name": "yes_no",
           "data_value": "yes",
           "display": {
-            "text": "Yes"
+            "title": {
+              "text": {
+                "default": "Yes",
+                "es": "Sí"
+              }
+            }
           },
           "_row_num": 2
         },
@@ -888,7 +1458,12 @@
           "choice_list_name": "yes_no",
           "data_value": "no",
           "display": {
-            "text": "No"
+            "title": {
+              "text": {
+                "default": "No",
+                "es": "No"
+              }
+            }
           },
           "_row_num": 3
         }
@@ -898,7 +1473,12 @@
           "choice_list_name": "facility_types",
           "data_value": "national_vaccine_store",
           "display": {
-            "text": "National vaccine store"
+            "title": {
+              "text": {
+                "default": "National vaccine store",
+                "es": "Tienda nacional de vacunas"
+              }
+            }
           },
           "_row_num": 5
         },
@@ -906,7 +1486,12 @@
           "choice_list_name": "facility_types",
           "data_value": "regional_vaccine_store",
           "display": {
-            "text": "Regional vaccine store"
+            "title": {
+              "text": {
+                "default": "Regional vaccine store",
+                "es": "Tienda regional de vacunas"
+              }
+            }
           },
           "_row_num": 6
         },
@@ -914,7 +1499,12 @@
           "choice_list_name": "facility_types",
           "data_value": "district_vaccine_store",
           "display": {
-            "text": "District vaccine store"
+            "title": {
+              "text": {
+                "default": "District vaccine store",
+                "es": "Tienda de vacunas por un distrito"
+              }
+            }
           },
           "_row_num": 7
         },
@@ -922,7 +1512,12 @@
           "choice_list_name": "facility_types",
           "data_value": "central_hospital",
           "display": {
-            "text": "Central hospital"
+            "title": {
+              "text": {
+                "default": "Central hospital",
+                "es": "Hospital centrál"
+              }
+            }
           },
           "_row_num": 8
         },
@@ -930,7 +1525,12 @@
           "choice_list_name": "facility_types",
           "data_value": "district_hospital",
           "display": {
-            "text": "District hospital"
+            "title": {
+              "text": {
+                "default": "District hospital",
+                "es": "Hospital por un distrito"
+              }
+            }
           },
           "_row_num": 9
         },
@@ -938,7 +1538,12 @@
           "choice_list_name": "facility_types",
           "data_value": "rural_hospital",
           "display": {
-            "text": "Rural hospital"
+            "title": {
+              "text": {
+                "default": "Rural hospital",
+                "es": "Hospital rurál"
+              }
+            }
           },
           "_row_num": 10
         },
@@ -946,7 +1551,12 @@
           "choice_list_name": "facility_types",
           "data_value": "hospital",
           "display": {
-            "text": "Hospital"
+            "title": {
+              "text": {
+                "default": "Hospital",
+                "es": "Hospital generál"
+              }
+            }
           },
           "_row_num": 11
         },
@@ -954,15 +1564,25 @@
           "choice_list_name": "facility_types",
           "data_value": "community_hospital",
           "display": {
-            "text": "Community hospital"
+            "title": {
+              "text": {
+                "default": "Community hospital",
+                "es": "Hospital de comunidad"
+              }
+            }
           },
           "_row_num": 12
         },
         {
           "choice_list_name": "facility_types",
-          "data_value": "health_centre",
+          "data_value": "health_center",
           "display": {
-            "text": "Health centre"
+            "title": {
+              "text": {
+                "default": "Health center",
+                "es": "Centro de salud"
+              }
+            }
           },
           "_row_num": 13
         },
@@ -970,7 +1590,12 @@
           "choice_list_name": "facility_types",
           "data_value": "dispensary",
           "display": {
-            "text": "Dispensary"
+            "title": {
+              "text": {
+                "default": "Dispensary",
+                "es": "Dispensario"
+              }
+            }
           },
           "_row_num": 14
         },
@@ -978,7 +1603,12 @@
           "choice_list_name": "facility_types",
           "data_value": "health_post",
           "display": {
-            "text": "Health post"
+            "title": {
+              "text": {
+                "default": "Health post",
+                "es": "Campamiento de salud"
+              }
+            }
           },
           "_row_num": 15
         },
@@ -986,7 +1616,12 @@
           "choice_list_name": "facility_types",
           "data_value": "maternity",
           "display": {
-            "text": "Maternity"
+            "title": {
+              "text": {
+                "default": "Maternity",
+                "es": "Maternidad"
+              }
+            }
           },
           "_row_num": 16
         }
@@ -996,7 +1631,12 @@
           "choice_list_name": "ownership_types",
           "data_value": "public",
           "display": {
-            "text": "Public"
+            "title": {
+              "text": {
+                "default": "Public",
+                "es": "Público"
+              }
+            }
           },
           "_row_num": 18
         },
@@ -1004,7 +1644,12 @@
           "choice_list_name": "ownership_types",
           "data_value": "private",
           "display": {
-            "text": "Private"
+            "title": {
+              "text": {
+                "default": "Private",
+                "es": "Privado"
+              }
+            }
           },
           "_row_num": 19
         },
@@ -1012,7 +1657,12 @@
           "choice_list_name": "ownership_types",
           "data_value": "ngo",
           "display": {
-            "text": "NGO"
+            "title": {
+              "text": {
+                "default": "NGO",
+                "es": "ONG"
+              }
+            }
           },
           "_row_num": 20
         },
@@ -1020,7 +1670,12 @@
           "choice_list_name": "ownership_types",
           "data_value": "faithbased",
           "display": {
-            "text": "Faithbased"
+            "title": {
+              "text": {
+                "default": "Faithbased",
+                "es": "Basado en fé"
+              }
+            }
           },
           "_row_num": 21
         },
@@ -1028,7 +1683,12 @@
           "choice_list_name": "ownership_types",
           "data_value": "other",
           "display": {
-            "text": "Other"
+            "title": {
+              "text": {
+                "default": "Other",
+                "es": "Otro"
+              }
+            }
           },
           "_row_num": 22
         }
@@ -1038,7 +1698,12 @@
           "choice_list_name": "elec_sources",
           "data_value": "grid",
           "display": {
-            "text": "Grid"
+            "title": {
+              "text": {
+                "default": "Grid",
+                "es": "Red"
+              }
+            }
           },
           "_row_num": 24
         },
@@ -1046,7 +1711,12 @@
           "choice_list_name": "elec_sources",
           "data_value": "generator",
           "display": {
-            "text": "Generator"
+            "title": {
+              "text": {
+                "default": "Generator",
+                "es": "Generador"
+              }
+            }
           },
           "_row_num": 25
         },
@@ -1054,7 +1724,12 @@
           "choice_list_name": "elec_sources",
           "data_value": "both",
           "display": {
-            "text": "Both Grid and Generator"
+            "title": {
+              "text": {
+                "default": "Both Grid and Generator",
+                "es": "Red y generador"
+              }
+            }
           },
           "_row_num": 26
         },
@@ -1062,7 +1737,12 @@
           "choice_list_name": "elec_sources",
           "data_value": "none",
           "display": {
-            "text": "None"
+            "title": {
+              "text": {
+                "default": "None",
+                "es": "Nada"
+              }
+            }
           },
           "_row_num": 27
         }
@@ -1072,7 +1752,12 @@
           "choice_list_name": "grid",
           "data_value": "more_than_16",
           "display": {
-            "text": "More than 16"
+            "title": {
+              "text": {
+                "default": "More than 16",
+                "es": "Más que 16"
+              }
+            }
           },
           "_row_num": 29
         },
@@ -1080,7 +1765,12 @@
           "choice_list_name": "grid",
           "data_value": "8_to_16",
           "display": {
-            "text": "8 to 16"
+            "title": {
+              "text": {
+                "default": "8 to 16",
+                "es": "8 a 16"
+              }
+            }
           },
           "_row_num": 30
         },
@@ -1088,7 +1778,12 @@
           "choice_list_name": "grid",
           "data_value": "4_to_8",
           "display": {
-            "text": "4 to 8"
+            "title": {
+              "text": {
+                "default": "4 to 8",
+                "es": "4 a 8"
+              }
+            }
           },
           "_row_num": 31
         },
@@ -1096,7 +1791,12 @@
           "choice_list_name": "grid",
           "data_value": "fewer_than_4",
           "display": {
-            "text": "Fewer than 4"
+            "title": {
+              "text": {
+                "default": "Fewer than 4",
+                "es": "Menos que 4"
+              }
+            }
           },
           "_row_num": 32
         },
@@ -1104,7 +1804,12 @@
           "choice_list_name": "grid",
           "data_value": "none",
           "display": {
-            "text": "None"
+            "title": {
+              "text": {
+                "default": "None",
+                "es": "Ninguno"
+              }
+            }
           },
           "_row_num": 33
         }
@@ -1114,7 +1819,12 @@
           "choice_list_name": "fuel_availability",
           "data_value": "available",
           "display": {
-            "text": "Available"
+            "title": {
+              "text": {
+                "default": "Available",
+                "es": "Disponible"
+              }
+            }
           },
           "_row_num": 35
         },
@@ -1122,7 +1832,12 @@
           "choice_list_name": "fuel_availability",
           "data_value": "irregular",
           "display": {
-            "text": "Irregular"
+            "title": {
+              "text": {
+                "default": "Irregular",
+                "es": "Irregular"
+              }
+            }
           },
           "_row_num": 36
         },
@@ -1130,7 +1845,12 @@
           "choice_list_name": "fuel_availability",
           "data_value": "not_available",
           "display": {
-            "text": "Not Available"
+            "title": {
+              "text": {
+                "default": "Not Available",
+                "es": "No Disponible"
+              }
+            }
           },
           "_row_num": 37
         },
@@ -1138,7 +1858,12 @@
           "choice_list_name": "fuel_availability",
           "data_value": "unknown",
           "display": {
-            "text": "Unknown"
+            "title": {
+              "text": {
+                "default": "Unknown",
+                "es": "Desconocido"
+              }
+            }
           },
           "_row_num": 38
         },
@@ -1146,7 +1871,12 @@
           "choice_list_name": "fuel_availability",
           "data_value": "not_applicable",
           "display": {
-            "text": "Not Applicable"
+            "title": {
+              "text": {
+                "default": "Not Applicable",
+                "es": "No Applicable"
+              }
+            }
           },
           "_row_num": 39
         }
@@ -1156,7 +1886,12 @@
           "choice_list_name": "climate_types",
           "data_value": "moderate",
           "display": {
-            "text": "Moderate"
+            "title": {
+              "text": {
+                "default": "Moderate",
+                "es": "Moderate"
+              }
+            }
           },
           "_row_num": 41
         },
@@ -1164,7 +1899,12 @@
           "choice_list_name": "climate_types",
           "data_value": "temperate",
           "display": {
-            "text": "Temperate"
+            "title": {
+              "text": {
+                "default": "Temperate",
+                "es": "Templado"
+              }
+            }
           },
           "_row_num": 42
         },
@@ -1172,7 +1912,12 @@
           "choice_list_name": "climate_types",
           "data_value": "hot",
           "display": {
-            "text": "Hot"
+            "title": {
+              "text": {
+                "default": "Hot",
+                "es": "Caliente"
+              }
+            }
           },
           "_row_num": 43
         }
@@ -1182,7 +1927,12 @@
           "choice_list_name": "storage_types",
           "data_value": "depot",
           "display": {
-            "text": "Depot"
+            "title": {
+              "text": {
+                "default": "Depot",
+                "es": "Depósito"
+              }
+            }
           },
           "_row_num": 45
         },
@@ -1190,7 +1940,12 @@
           "choice_list_name": "storage_types",
           "data_value": "delivery",
           "display": {
-            "text": "Delivery"
+            "title": {
+              "text": {
+                "default": "Delivery",
+                "es": "Envío"
+              }
+            }
           },
           "_row_num": 46
         },
@@ -1198,7 +1953,12 @@
           "choice_list_name": "storage_types",
           "data_value": "both",
           "display": {
-            "text": "Both Depot and Delivery"
+            "title": {
+              "text": {
+                "default": "Both Depot and Delivery",
+                "es": "Depósito y Envío"
+              }
+            }
           },
           "_row_num": 47
         }
@@ -1208,7 +1968,12 @@
           "choice_list_name": "delivery_types",
           "data_value": "static",
           "display": {
-            "text": "Static"
+            "title": {
+              "text": {
+                "default": "Static",
+                "es": "Estático"
+              }
+            }
           },
           "_row_num": 49
         },
@@ -1216,7 +1981,12 @@
           "choice_list_name": "delivery_types",
           "data_value": "outreach",
           "display": {
-            "text": "Outreach"
+            "title": {
+              "text": {
+                "default": "Outreach",
+                "es": "Extensión"
+              }
+            }
           },
           "_row_num": 50
         },
@@ -1224,7 +1994,12 @@
           "choice_list_name": "delivery_types",
           "data_value": "both",
           "display": {
-            "text": "Both Static and Outreach"
+            "title": {
+              "text": {
+                "default": "Both Static and Outreach",
+                "es": "Estático y Extensión"
+              }
+            }
           },
           "_row_num": 51
         },
@@ -1232,7 +2007,12 @@
           "choice_list_name": "delivery_types",
           "data_value": "none",
           "display": {
-            "text": "None"
+            "title": {
+              "text": {
+                "default": "None",
+                "es": "Nada"
+              }
+            }
           },
           "_row_num": 52
         }
@@ -1242,7 +2022,12 @@
           "choice_list_name": "vaccine_modes",
           "data_value": "delivered",
           "display": {
-            "text": "Delivered"
+            "title": {
+              "text": {
+                "default": "Delivered",
+                "es": "Enviado"
+              }
+            }
           },
           "_row_num": 54
         },
@@ -1250,7 +2035,12 @@
           "choice_list_name": "vaccine_modes",
           "data_value": "collected",
           "display": {
-            "text": "Collected"
+            "title": {
+              "text": {
+                "default": "Collected",
+                "es": "Collectado"
+              }
+            }
           },
           "_row_num": 55
         },
@@ -1258,7 +2048,12 @@
           "choice_list_name": "vaccine_modes",
           "data_value": "both",
           "display": {
-            "text": "Both Delivered and Collected"
+            "title": {
+              "text": {
+                "default": "Both Delivered and Collected",
+                "es": "Enviado y Collectado"
+              }
+            }
           },
           "_row_num": 56
         },
@@ -1266,7 +2061,12 @@
           "choice_list_name": "vaccine_modes",
           "data_value": "none",
           "display": {
-            "text": "None"
+            "title": {
+              "text": {
+                "default": "None",
+                "es": "Ninguno"
+              }
+            }
           },
           "_row_num": 57
         },
@@ -1274,7 +2074,12 @@
           "choice_list_name": "vaccine_modes",
           "data_value": "unknown",
           "display": {
-            "text": "Unknown"
+            "title": {
+              "text": {
+                "default": "Unknown",
+                "es": "Desconocido"
+              }
+            }
           },
           "_row_num": 58
         }
@@ -1296,29 +2101,11 @@
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
-      "regionLevel1_csv": {
-        "query_name": "regionLevel1_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{text:regionLevel1}}; }).value()",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 3
-      },
-      "regionLevel2_csv": {
-        "query_name": "regionLevel2_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {text:place.label}; return place; })",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 4
-      },
       "regionLevel3_csv": {
         "query_name": "regionLevel3_csv",
         "query_type": "csv",
         "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {text:place.label}; return place; })",
+        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 5
@@ -1326,6 +2113,26 @@
     },
     "calculates": {},
     "model": {
+      "regionLevel1": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "regionLevel1"
+      },
+      "regionLevel2": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "regionLevel2"
+      },
       "facility_name": {
         "_defn": [
           {
@@ -1334,6 +2141,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Facility Name",
+            "es": "Nombre de Facilidad"
+          }
+        },
         "elementKey": "facility_name"
       },
       "facility_id": {
@@ -1344,6 +2157,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Facility ID",
+            "es": "ID de Facilidad"
+          }
+        },
         "elementKey": "facility_id"
       },
       "Location": {
@@ -1373,9 +2192,15 @@
             "elementKey": "Location_accuracy"
           }
         },
+        "displayName": {
+          "text": {
+            "default": "Location",
+            "es": "Ubicación"
+          }
+        },
         "elementKey": "Location"
       },
-      "regionLevel1": {
+      "admin_region": {
         "_defn": [
           {
             "_row_num": 8,
@@ -1383,74 +2208,99 @@
           }
         ],
         "type": "string",
-        "valuesList": "regionLevel1_csv",
-        "elementKey": "regionLevel1"
-      },
-      "regionLevel2": {
-        "_defn": [
-          {
-            "_row_num": 9,
-            "section_name": "survey"
+        "displayName": {
+          "text": {
+            "default": "Admin Region",
+            "es": "Region administrativo"
           }
-        ],
-        "type": "string",
-        "valuesList": "regionLevel2_csv",
-        "elementKey": "regionLevel2"
-      },
-      "admin_region": {
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
+        },
         "valuesList": "regionLevel3_csv",
         "elementKey": "admin_region"
       },
       "facility_type": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 11,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Facility Type",
+            "es": "Tipo de facilidad"
+          }
+        },
         "valuesList": "facility_types",
         "elementKey": "facility_type"
       },
       "facility_ownership": {
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 12,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Facility Ownership",
+            "es": "Tipo de propriedad"
+          }
+        },
         "valuesList": "ownership_types",
         "elementKey": "facility_ownership"
       },
       "facility_population": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Facility Population",
+            "es": "Población de facilidad"
+          }
+        },
         "elementKey": "facility_population"
       },
       "facility_coverage": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
         "type": "number",
+        "displayName": {
+          "text": {
+            "default": "Facility Coverage",
+            "es": "Cobertura (porcentaje)"
+          }
+        },
         "elementKey": "facility_coverage"
       },
       "electricity_source": {
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Electricity Source",
+            "es": "Fuente de energía"
+          }
+        },
+        "valuesList": "elec_sources",
+        "elementKey": "electricity_source"
+      },
+      "grid_power_availability": {
         "_defn": [
           {
             "_row_num": 19,
@@ -1458,10 +2308,16 @@
           }
         ],
         "type": "string",
-        "valuesList": "elec_sources",
-        "elementKey": "electricity_source"
+        "displayName": {
+          "text": {
+            "default": "Grid Availability",
+            "es": "Disponibilidad del red de energía"
+          }
+        },
+        "valuesList": "grid",
+        "elementKey": "grid_power_availability"
       },
-      "grid_power_availability": {
+      "gas_availability": {
         "_defn": [
           {
             "_row_num": 21,
@@ -1469,32 +2325,67 @@
           }
         ],
         "type": "string",
-        "valuesList": "grid",
-        "elementKey": "grid_power_availability"
-      },
-      "gas_availability": {
-        "_defn": [
-          {
-            "_row_num": 23,
-            "section_name": "survey"
+        "displayName": {
+          "text": {
+            "default": "Gas Availability",
+            "es": "Disponibilidad de combustible"
           }
-        ],
-        "type": "string",
+        },
         "valuesList": "fuel_availability",
         "elementKey": "gas_availability"
       },
       "kerosene_availability": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Kerosene Availability",
+            "es": "Disponibilidad de queroseno"
+          }
+        },
         "valuesList": "fuel_availability",
         "elementKey": "kerosene_availability"
       },
       "solar_suitable_climate": {
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Solar Suitable Climate",
+            "es": "Clima adecuedo por energía solár"
+          }
+        },
+        "valuesList": "yes_no",
+        "elementKey": "solar_suitable_climate"
+      },
+      "solar_suitable_site": {
+        "_defn": [
+          {
+            "_row_num": 26,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Solar Suitable Site",
+            "es": "Facilidad adecuedo por energía solar"
+          }
+        },
+        "valuesList": "yes_no",
+        "elementKey": "solar_suitable_site"
+      },
+      "climate_zone": {
         "_defn": [
           {
             "_row_num": 27,
@@ -1502,84 +2393,115 @@
           }
         ],
         "type": "string",
-        "valuesList": "yes_no",
-        "elementKey": "solar_suitable_climate"
-      },
-      "solar_suitable_site": {
-        "_defn": [
-          {
-            "_row_num": 28,
-            "section_name": "survey"
+        "displayName": {
+          "text": {
+            "default": "Climate Zone",
+            "es": "Clima de ubicación"
           }
-        ],
-        "type": "string",
-        "valuesList": "yes_no",
-        "elementKey": "solar_suitable_site"
-      },
-      "climate_zone": {
-        "_defn": [
-          {
-            "_row_num": 29,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
+        },
         "valuesList": "climate_types",
         "elementKey": "climate_zone"
       },
       "distance_to_supply": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
         "type": "number",
+        "displayName": {
+          "text": {
+            "default": "Distance to the Closest Supply Point",
+            "es": "Distancia al más proximo punto de reabastecimiento"
+          }
+        },
         "elementKey": "distance_to_supply"
       },
       "storage_type": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Storage Type",
+            "es": "Tipo de almacenamiento"
+          }
+        },
         "valuesList": "storage_types",
         "elementKey": "storage_type"
       },
       "delivery_type": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Delivery Type",
+            "es": "Tipo de envío"
+          }
+        },
         "valuesList": "delivery_types",
         "elementKey": "delivery_type"
       },
       "vaccine_supply_interval": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Supply Interval",
+            "es": "Intervalo de reabastecimiento"
+          }
+        },
         "elementKey": "vaccine_supply_interval"
       },
       "vaccine_reserve_stock_requirement": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Minimum Reserve Requirement",
+            "es": "Tamaño Minimo de Reserva"
+          }
+        },
         "elementKey": "vaccine_reserve_stock_requirement"
       },
       "vaccine_supply_mode": {
+        "_defn": [
+          {
+            "_row_num": 37,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Supply Mode",
+            "es": "Modo de recibir vacunas"
+          }
+        },
+        "valuesList": "vaccine_modes",
+        "elementKey": "vaccine_supply_mode"
+      },
+      "contact_name": {
         "_defn": [
           {
             "_row_num": 39,
@@ -1587,17 +2509,12 @@
           }
         ],
         "type": "string",
-        "valuesList": "vaccine_modes",
-        "elementKey": "vaccine_supply_mode"
-      },
-      "contact_name": {
-        "_defn": [
-          {
-            "_row_num": 41,
-            "section_name": "survey"
+        "displayName": {
+          "text": {
+            "default": "Contact Name",
+            "es": "Nombre del contacto"
           }
-        ],
-        "type": "string",
+        },
         "elementKey": "contact_name"
       }
     },
@@ -1615,9 +2532,20 @@
             "type": "text",
             "name": "facility_name",
             "display": {
-              "text": "Enter health facility name"
+              "title": {
+                "text": {
+                  "default": "Facility Name",
+                  "es": "Nombre de Facilidad"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter health facility name",
+                  "es": "Nombre de Facilidad"
+                }
+              }
             },
-            "required": 1,
+            "required": true,
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
@@ -1629,9 +2557,20 @@
             "type": "text",
             "name": "facility_id",
             "display": {
-              "text": "Enter health facility ID"
+              "title": {
+                "text": {
+                  "default": "Facility ID",
+                  "es": "ID de Facilidad"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter health facility ID",
+                  "es": "ID de Facilidad"
+                }
+              }
             },
-            "required": 1,
+            "required": true,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
@@ -1643,7 +2582,18 @@
             "type": "geopoint",
             "name": "Location",
             "display": {
-              "text": "Capture location"
+              "title": {
+                "text": {
+                  "default": "Location",
+                  "es": "Ubicación"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Capture location",
+                  "es": "Ubicación"
+                }
+              }
             },
             "_row_num": 7,
             "__rowNum__": 6,
@@ -1654,11 +2604,24 @@
           },
           {
             "type": "select_one_dropdown",
-            "values_list": "regionLevel1_csv",
-            "name": "regionLevel1",
+            "values_list": "regionLevel3_csv",
+            "name": "admin_region",
             "display": {
-              "text": "Level 1 of admin region"
+              "title": {
+                "text": {
+                  "default": "Admin Region",
+                  "es": "Region administrativo"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Admin Region",
+                  "es": "Region administrativo"
+                }
+              }
             },
+            "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
+            "required": 1,
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
@@ -1667,294 +2630,463 @@
             "promptIdx": 3
           },
           {
-            "type": "select_one_dropdown",
-            "values_list": "regionLevel2_csv",
-            "name": "regionLevel2",
-            "display": {
-              "text": "Level 2 of admin region"
-            },
-            "choice_filter": "choice_item.regionLevel1 === data('regionLevel1')",
-            "_row_num": 9,
-            "__rowNum__": 8,
-            "_token_type": "prompt",
-            "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen6",
-            "promptIdx": 4
-          },
-          {
-            "type": "select_one_dropdown",
-            "values_list": "regionLevel3_csv",
-            "name": "admin_region",
-            "display": {
-              "text": "Admin Region"
-            },
-            "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "prompt",
-            "_type": "select_one_dropdown",
-            "_branch_label_enclosing_screen": "survey/_screen6",
-            "promptIdx": 5
-          },
-          {
             "type": "select_one",
             "values_list": "facility_types",
             "name": "facility_type",
             "display": {
-              "text": "Choose the facility type"
+              "title": {
+                "text": {
+                  "default": "Facility Type",
+                  "es": "Tipo de facilidad"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Choose the facility type",
+                  "es": "Tipo de facilidad"
+                }
+              }
             },
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 6
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 4
           },
           {
             "type": "select_one",
             "values_list": "ownership_types",
             "name": "facility_ownership",
             "display": {
-              "text": "Choose the ownership"
+              "title": {
+                "text": {
+                  "default": "Facility Ownership",
+                  "es": "Tipo de propriedad"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Choose the ownership",
+                  "es": "Tipo de propriedad"
+                }
+              }
+            },
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 5
+          },
+          {
+            "type": "integer",
+            "name": "facility_population",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Facility Population",
+                  "es": "Población de facilidad"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter the facility population",
+                  "es": "Población de facilidad"
+                }
+              }
+            },
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 6
+          },
+          {
+            "type": "decimal",
+            "name": "facility_coverage",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Facility Coverage",
+                  "es": "Cobertura (porcentaje)"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Percent coverage?",
+                  "es": "Cobertura (porcentaje)"
+                }
+              }
             },
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen12",
+            "_type": "decimal",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 7
-          },
-          {
-            "type": "number",
-            "name": "facility_population",
-            "display": {
-              "text": "Enter the facility population"
-            },
-            "_row_num": 15,
-            "__rowNum__": 14,
-            "_token_type": "prompt",
-            "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 8
-          },
-          {
-            "type": "number",
-            "name": "facility_coverage",
-            "display": {
-              "text": "Percent coverage?"
-            },
-            "_row_num": 16,
-            "__rowNum__": 15,
-            "_token_type": "prompt",
-            "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen12",
-            "promptIdx": 9
           },
           {
             "type": "select_one",
             "values_list": "elec_sources",
             "name": "electricity_source",
             "display": {
-              "text": "Choose the electricity source"
+              "title": {
+                "text": {
+                  "default": "Electricity Source",
+                  "es": "Fuente de energía"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Choose the electricity source",
+                  "es": "Fuente de energía"
+                }
+              }
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen18",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 8
           },
           {
             "type": "select_one",
             "values_list": "grid",
             "name": "grid_power_availability",
             "display": {
-              "text": "Choose the grid availability"
+              "title": {
+                "text": {
+                  "default": "Grid Availability",
+                  "es": "Disponibilidad del red de energía"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Choose the grid availability",
+                  "es": "Disponibilidad del red de energía"
+                }
+              }
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen18",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 9
           },
           {
             "type": "select_one",
             "values_list": "fuel_availability",
             "name": "gas_availability",
             "display": {
-              "text": "Choose the gas availability"
+              "title": {
+                "text": {
+                  "default": "Gas Availability",
+                  "es": "Disponibilidad de combustible"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Choose the gas availability",
+                  "es": "Disponibilidad de combustible"
+                }
+              }
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen18",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 10
           },
           {
             "type": "select_one",
             "values_list": "fuel_availability",
             "name": "kerosene_availability",
             "display": {
-              "text": "Choose the kerosene availability"
+              "title": {
+                "text": {
+                  "default": "Kerosene Availability",
+                  "es": "Disponibilidad de queroseno"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Choose the kerosene availability",
+                  "es": "Disponibilidad de queroseno"
+                }
+              }
             },
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen18",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 11
           },
           {
             "type": "select_one",
             "values_list": "yes_no",
             "name": "solar_suitable_climate",
             "display": {
-              "text": "Is this a solar suitable climate?"
+              "title": {
+                "text": {
+                  "default": "Solar Suitable Climate",
+                  "es": "Clima adecuedo por energía solár"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Is this a solar suitable climate?",
+                  "es": "¿Es la clima adecuedo por energía solár?"
+                }
+              }
             },
-            "_row_num": 27,
-            "__rowNum__": 26,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 12
           },
           {
             "type": "select_one",
             "values_list": "yes_no",
             "name": "solar_suitable_site",
             "display": {
-              "text": "Is this a solar suitable site?"
+              "title": {
+                "text": {
+                  "default": "Solar Suitable Site",
+                  "es": "Facilidad adecuedo por energía solar"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Is this a solar suitable site?",
+                  "es": "¿Es la facilidad adecuedo por energía solár?"
+                }
+              }
             },
-            "_row_num": 28,
-            "__rowNum__": 27,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 13
           },
           {
             "type": "select_one",
             "values_list": "climate_types",
             "name": "climate_zone",
             "display": {
-              "text": "What is the climate of this location?"
+              "title": {
+                "text": {
+                  "default": "Climate Zone",
+                  "es": "Clima de ubicación"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "What is the climate of this location?",
+                  "es": "Clima de ubicación"
+                }
+              }
             },
-            "_row_num": 29,
-            "__rowNum__": 28,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 14
           },
           {
-            "type": "number",
+            "type": "decimal",
             "name": "distance_to_supply",
             "display": {
-              "text": "What is the distance to the nearest supply point?"
+              "title": {
+                "text": {
+                  "default": "Distance to the Closest Supply Point",
+                  "es": "Distancia al más proximo punto de reabastecimiento"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "What is the distance to the nearest supply point?",
+                  "es": "Distancia al más proximo punto de reabastecimiento"
+                }
+              }
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "prompt",
-            "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 17
+            "_type": "decimal",
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 15
           },
           {
             "type": "select_one",
             "values_list": "storage_types",
             "name": "storage_type",
             "display": {
-              "text": "Storage type?"
+              "title": {
+                "text": {
+                  "default": "Storage Type",
+                  "es": "Tipo de almacenamiento"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Storage type?",
+                  "es": "Tipo de almacenamiento"
+                }
+              }
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 31,
+            "__rowNum__": 30,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 16
           },
           {
             "type": "select_one",
             "values_list": "delivery_types",
             "name": "delivery_type",
             "display": {
-              "text": "Delivery type?"
+              "title": {
+                "text": {
+                  "default": "Delivery Type",
+                  "es": "Tipo de envío"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Delivery type?",
+                  "es": "Tipo de envío"
+                }
+              }
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 17
           },
           {
-            "type": "number",
+            "type": "integer",
             "name": "vaccine_supply_interval",
             "display": {
-              "text": "Vaccine Supply Interval?"
+              "title": {
+                "text": {
+                  "default": "Supply Interval",
+                  "es": "Intervalo de reabastecimiento"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Vaccine Supply Interval?",
+                  "es": "Intervalo de reabastecimiento"
+                }
+              }
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
-            "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 20
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 18
           },
           {
-            "type": "number",
+            "type": "integer",
             "name": "vaccine_reserve_stock_requirement",
             "display": {
-              "text": "Vaccine Reserve Stock Requirement?"
+              "title": {
+                "text": {
+                  "default": "Minimum Reserve Requirement",
+                  "es": "Tamaño Minimo de Reserva"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Vaccine Reserve Stock Requirement?",
+                  "es": "Tamaño Minimo de Reserva"
+                }
+              }
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
-            "_type": "number",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 21
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 19
           },
           {
             "type": "select_one",
             "values_list": "vaccine_modes",
             "name": "vaccine_supply_mode",
             "display": {
-              "text": "Vaccine Supply Mode?"
+              "title": {
+                "text": {
+                  "default": "Supply Mode",
+                  "es": "Modo de recibir vacunas"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Vaccine Supply Mode?",
+                  "es": "Modo de recibir vacunas"
+                }
+              }
             },
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 22
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 20
           },
           {
             "type": "text",
             "name": "contact_name",
             "display": {
-              "text": "Contact Name?"
+              "title": {
+                "text": {
+                  "default": "Contact Name",
+                  "es": "Nombre del contacto"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Contact Name?",
+                  "es": "Nombre del contacto"
+                }
+              }
             },
-            "_row_num": 41,
-            "__rowNum__": 40,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen41",
-            "promptIdx": 23
+            "_branch_label_enclosing_screen": "survey/_screen39",
+            "promptIdx": 21
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 42,
-            "_branch_label_enclosing_screen": "survey/_screen42",
-            "promptIdx": 24
+            "_row_num": 40,
+            "_branch_label_enclosing_screen": "survey/_screen40",
+            "promptIdx": 22
           }
         ],
         "validation_tag_map": {
           "finalize": [
             0,
-            1
+            1,
+            3
           ]
         },
         "operations": [
@@ -1979,99 +3111,99 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 11,
-              "__rowNum__": 10,
+              "_row_num": 9,
+              "__rowNum__": 8,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
             "clause": "begin screen",
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 17,
-              "__rowNum__": 16,
+              "_row_num": 15,
+              "__rowNum__": 14,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
             "clause": "begin screen",
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 25,
-              "__rowNum__": 24,
+              "_row_num": 23,
+              "__rowNum__": 22,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nif (selected(data('electricity_source'), 'grid')) {\nactivePromptIndicies.push(11);\n}\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nif (selected(data('electricity_source'), 'grid')) {\nactivePromptIndicies.push(9);\n}\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
             "clause": "begin screen",
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 30,
-              "__rowNum__": 29,
+              "_row_num": 28,
+              "__rowNum__": 27,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
             "clause": "begin screen",
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 35,
-              "__rowNum__": 34,
+              "_row_num": 33,
+              "__rowNum__": 32,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
           },
           {
             "clause": "begin screen",
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 40,
-              "__rowNum__": 39,
+              "_row_num": 38,
+              "__rowNum__": 37,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 6
           },
           {
-            "_row_num": 41,
+            "_row_num": 39,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 42,
+            "_row_num": 40,
             "operationIdx": 8
           },
           {
-            "_row_num": 42,
+            "_row_num": 40,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
@@ -2080,21 +3212,21 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 42,
+            "_row_num": 40,
             "operationIdx": 10
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen6": 1,
-          "_screen12": 2,
-          "_screen18": 3,
-          "_screen26": 4,
-          "_screen31": 5,
-          "_screen36": 6,
-          "_screen41": 7,
+          "_screen10": 2,
+          "_screen16": 3,
+          "_screen24": 4,
+          "_screen29": 5,
+          "_screen34": 6,
+          "_screen39": 7,
           "_contents": 9,
-          "_screen42": 9
+          "_screen40": 9
         }
       },
       "initial": {
@@ -2125,7 +3257,12 @@
             "_type": "_section",
             "promptIdx": 1,
             "display": {
-              "title": "Health Facility"
+              "title": {
+                "text": {
+                  "default": "Health Facility",
+                  "es": "Facilidad de Salúd"
+                }
+              }
             },
             "_branch_label_enclosing_screen": "survey/0"
           },
@@ -2274,6 +3411,32 @@
       }
     },
     "dataTableModel": {
+      "regionLevel1": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "regionLevel1",
+        "elementName": "regionLevel1",
+        "elementSet": "data",
+        "elementPath": "regionLevel1"
+      },
+      "regionLevel2": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "regionLevel2",
+        "elementName": "regionLevel2",
+        "elementSet": "data",
+        "elementPath": "regionLevel2"
+      },
       "facility_name": {
         "_defn": [
           {
@@ -2282,6 +3445,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Facility Name",
+            "es": "Nombre de Facilidad"
+          }
+        },
         "elementKey": "facility_name",
         "elementName": "facility_name",
         "elementSet": "data",
@@ -2295,6 +3464,12 @@
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Facility ID",
+            "es": "ID de Facilidad"
+          }
+        },
         "elementKey": "facility_id",
         "elementName": "facility_id",
         "elementSet": "data",
@@ -2339,6 +3514,12 @@
             "elementPath": "Location.accuracy"
           }
         },
+        "displayName": {
+          "text": {
+            "default": "Location",
+            "es": "Ubicación"
+          }
+        },
         "elementKey": "Location",
         "elementName": "Location",
         "elementSet": "data",
@@ -2351,7 +3532,7 @@
         ],
         "notUnitOfRetention": true
       },
-      "regionLevel1": {
+      "admin_region": {
         "_defn": [
           {
             "_row_num": 8,
@@ -2359,34 +3540,12 @@
           }
         ],
         "type": "string",
-        "valuesList": "regionLevel1_csv",
-        "elementKey": "regionLevel1",
-        "elementName": "regionLevel1",
-        "elementSet": "data",
-        "elementPath": "regionLevel1"
-      },
-      "regionLevel2": {
-        "_defn": [
-          {
-            "_row_num": 9,
-            "section_name": "survey"
+        "displayName": {
+          "text": {
+            "default": "Admin Region",
+            "es": "Region administrativo"
           }
-        ],
-        "type": "string",
-        "valuesList": "regionLevel2_csv",
-        "elementKey": "regionLevel2",
-        "elementName": "regionLevel2",
-        "elementSet": "data",
-        "elementPath": "regionLevel2"
-      },
-      "admin_region": {
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
+        },
         "valuesList": "regionLevel3_csv",
         "elementKey": "admin_region",
         "elementName": "admin_region",
@@ -2396,11 +3555,17 @@
       "facility_type": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 11,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Facility Type",
+            "es": "Tipo de facilidad"
+          }
+        },
         "valuesList": "facility_types",
         "elementKey": "facility_type",
         "elementName": "facility_type",
@@ -2410,11 +3575,17 @@
       "facility_ownership": {
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 12,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Facility Ownership",
+            "es": "Tipo de propriedad"
+          }
+        },
         "valuesList": "ownership_types",
         "elementKey": "facility_ownership",
         "elementName": "facility_ownership",
@@ -2424,11 +3595,17 @@
       "facility_population": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 13,
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Facility Population",
+            "es": "Población de facilidad"
+          }
+        },
         "elementKey": "facility_population",
         "elementName": "facility_population",
         "elementSet": "data",
@@ -2437,11 +3614,17 @@
       "facility_coverage": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 14,
             "section_name": "survey"
           }
         ],
         "type": "number",
+        "displayName": {
+          "text": {
+            "default": "Facility Coverage",
+            "es": "Cobertura (porcentaje)"
+          }
+        },
         "elementKey": "facility_coverage",
         "elementName": "facility_coverage",
         "elementSet": "data",
@@ -2450,11 +3633,17 @@
       "electricity_source": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 17,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Electricity Source",
+            "es": "Fuente de energía"
+          }
+        },
         "valuesList": "elec_sources",
         "elementKey": "electricity_source",
         "elementName": "electricity_source",
@@ -2464,11 +3653,17 @@
       "grid_power_availability": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Grid Availability",
+            "es": "Disponibilidad del red de energía"
+          }
+        },
         "valuesList": "grid",
         "elementKey": "grid_power_availability",
         "elementName": "grid_power_availability",
@@ -2478,11 +3673,17 @@
       "gas_availability": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Gas Availability",
+            "es": "Disponibilidad de combustible"
+          }
+        },
         "valuesList": "fuel_availability",
         "elementKey": "gas_availability",
         "elementName": "gas_availability",
@@ -2492,11 +3693,17 @@
       "kerosene_availability": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Kerosene Availability",
+            "es": "Disponibilidad de queroseno"
+          }
+        },
         "valuesList": "fuel_availability",
         "elementKey": "kerosene_availability",
         "elementName": "kerosene_availability",
@@ -2506,11 +3713,17 @@
       "solar_suitable_climate": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 25,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Solar Suitable Climate",
+            "es": "Clima adecuedo por energía solár"
+          }
+        },
         "valuesList": "yes_no",
         "elementKey": "solar_suitable_climate",
         "elementName": "solar_suitable_climate",
@@ -2520,11 +3733,17 @@
       "solar_suitable_site": {
         "_defn": [
           {
-            "_row_num": 28,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Solar Suitable Site",
+            "es": "Facilidad adecuedo por energía solar"
+          }
+        },
         "valuesList": "yes_no",
         "elementKey": "solar_suitable_site",
         "elementName": "solar_suitable_site",
@@ -2534,11 +3753,17 @@
       "climate_zone": {
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 27,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Climate Zone",
+            "es": "Clima de ubicación"
+          }
+        },
         "valuesList": "climate_types",
         "elementKey": "climate_zone",
         "elementName": "climate_zone",
@@ -2548,11 +3773,17 @@
       "distance_to_supply": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
         "type": "number",
+        "displayName": {
+          "text": {
+            "default": "Distance to the Closest Supply Point",
+            "es": "Distancia al más proximo punto de reabastecimiento"
+          }
+        },
         "elementKey": "distance_to_supply",
         "elementName": "distance_to_supply",
         "elementSet": "data",
@@ -2561,11 +3792,17 @@
       "storage_type": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 31,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Storage Type",
+            "es": "Tipo de almacenamiento"
+          }
+        },
         "valuesList": "storage_types",
         "elementKey": "storage_type",
         "elementName": "storage_type",
@@ -2575,11 +3812,17 @@
       "delivery_type": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 32,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Delivery Type",
+            "es": "Tipo de envío"
+          }
+        },
         "valuesList": "delivery_types",
         "elementKey": "delivery_type",
         "elementName": "delivery_type",
@@ -2589,11 +3832,17 @@
       "vaccine_supply_interval": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Supply Interval",
+            "es": "Intervalo de reabastecimiento"
+          }
+        },
         "elementKey": "vaccine_supply_interval",
         "elementName": "vaccine_supply_interval",
         "elementSet": "data",
@@ -2602,11 +3851,17 @@
       "vaccine_reserve_stock_requirement": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
-        "type": "number",
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Minimum Reserve Requirement",
+            "es": "Tamaño Minimo de Reserva"
+          }
+        },
         "elementKey": "vaccine_reserve_stock_requirement",
         "elementName": "vaccine_reserve_stock_requirement",
         "elementSet": "data",
@@ -2615,11 +3870,17 @@
       "vaccine_supply_mode": {
         "_defn": [
           {
-            "_row_num": 39,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Supply Mode",
+            "es": "Modo de recibir vacunas"
+          }
+        },
         "valuesList": "vaccine_modes",
         "elementKey": "vaccine_supply_mode",
         "elementName": "vaccine_supply_mode",
@@ -2629,11 +3890,17 @@
       "contact_name": {
         "_defn": [
           {
-            "_row_num": 41,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
         "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Contact Name",
+            "es": "Nombre del contacto"
+          }
+        },
         "elementKey": "contact_name",
         "elementName": "contact_name",
         "elementSet": "data",
@@ -2783,87 +4050,241 @@
     "properties": [
       {
         "_partition": "Column",
+        "_aspect": "Location",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Location\",\"es\":\"Ubicación\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "admin_region",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Admin Region\",\"es\":\"Region administrativo\"}}"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "climate_zone",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"climate_types\",\"data_value\":\"moderate\",\"display\":{\"text\":\"Moderate\"},\"_row_num\":41},{\"choice_list_name\":\"climate_types\",\"data_value\":\"temperate\",\"display\":{\"text\":\"Temperate\"},\"_row_num\":42},{\"choice_list_name\":\"climate_types\",\"data_value\":\"hot\",\"display\":{\"text\":\"Hot\"},\"_row_num\":43}]"
+        "_value": "[{\"choice_list_name\":\"climate_types\",\"data_value\":\"moderate\",\"display\":{\"title\":{\"text\":{\"default\":\"Moderate\",\"es\":\"Moderate\"}}},\"_row_num\":41},{\"choice_list_name\":\"climate_types\",\"data_value\":\"temperate\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperate\",\"es\":\"Templado\"}}},\"_row_num\":42},{\"choice_list_name\":\"climate_types\",\"data_value\":\"hot\",\"display\":{\"title\":{\"text\":{\"default\":\"Hot\",\"es\":\"Caliente\"}}},\"_row_num\":43}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "climate_zone",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Climate Zone\",\"es\":\"Clima de ubicación\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "contact_name",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Contact Name\",\"es\":\"Nombre del contacto\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "delivery_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"delivery_types\",\"data_value\":\"static\",\"display\":{\"text\":\"Static\"},\"_row_num\":49},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"outreach\",\"display\":{\"text\":\"Outreach\"},\"_row_num\":50},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"both\",\"display\":{\"text\":\"Both Static and Outreach\"},\"_row_num\":51},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"none\",\"display\":{\"text\":\"None\"},\"_row_num\":52}]"
+        "_value": "[{\"choice_list_name\":\"delivery_types\",\"data_value\":\"static\",\"display\":{\"title\":{\"text\":{\"default\":\"Static\",\"es\":\"Estático\"}}},\"_row_num\":49},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Outreach\",\"es\":\"Extensión\"}}},\"_row_num\":50},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Static and Outreach\",\"es\":\"Estático y Extensión\"}}},\"_row_num\":51},{\"choice_list_name\":\"delivery_types\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\"}}},\"_row_num\":52}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "delivery_type",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Delivery Type\",\"es\":\"Tipo de envío\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "distance_to_supply",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Distance to the Closest Supply Point\",\"es\":\"Distancia al más proximo punto de reabastecimiento\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "electricity_source",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"elec_sources\",\"data_value\":\"grid\",\"display\":{\"text\":\"Grid\"},\"_row_num\":24},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"generator\",\"display\":{\"text\":\"Generator\"},\"_row_num\":25},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both\",\"display\":{\"text\":\"Both Grid and Generator\"},\"_row_num\":26},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"none\",\"display\":{\"text\":\"None\"},\"_row_num\":27}]"
+        "_value": "[{\"choice_list_name\":\"elec_sources\",\"data_value\":\"grid\",\"display\":{\"title\":{\"text\":{\"default\":\"Grid\",\"es\":\"Red\"}}},\"_row_num\":24},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Generator\",\"es\":\"Generador\"}}},\"_row_num\":25},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Grid and Generator\",\"es\":\"Red y generador\"}}},\"_row_num\":26},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\"}}},\"_row_num\":27}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "electricity_source",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Electricity Source\",\"es\":\"Fuente de energía\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "facility_coverage",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Facility Coverage\",\"es\":\"Cobertura (porcentaje)\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "facility_id",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Facility ID\",\"es\":\"ID de Facilidad\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "facility_name",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Facility Name\",\"es\":\"Nombre de Facilidad\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "facility_ownership",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"ownership_types\",\"data_value\":\"public\",\"display\":{\"text\":\"Public\"},\"_row_num\":18},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"private\",\"display\":{\"text\":\"Private\"},\"_row_num\":19},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"ngo\",\"display\":{\"text\":\"NGO\"},\"_row_num\":20},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"faithbased\",\"display\":{\"text\":\"Faithbased\"},\"_row_num\":21},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"other\",\"display\":{\"text\":\"Other\"},\"_row_num\":22}]"
+        "_value": "[{\"choice_list_name\":\"ownership_types\",\"data_value\":\"public\",\"display\":{\"title\":{\"text\":{\"default\":\"Public\",\"es\":\"Público\"}}},\"_row_num\":18},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"private\",\"display\":{\"title\":{\"text\":{\"default\":\"Private\",\"es\":\"Privado\"}}},\"_row_num\":19},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"ngo\",\"display\":{\"title\":{\"text\":{\"default\":\"NGO\",\"es\":\"ONG\"}}},\"_row_num\":20},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"faithbased\",\"display\":{\"title\":{\"text\":{\"default\":\"Faithbased\",\"es\":\"Basado en fé\"}}},\"_row_num\":21},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":22}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "facility_ownership",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Facility Ownership\",\"es\":\"Tipo de propriedad\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "facility_population",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Facility Population\",\"es\":\"Población de facilidad\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "facility_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"facility_types\",\"data_value\":\"national_vaccine_store\",\"display\":{\"text\":\"National vaccine store\"},\"_row_num\":5},{\"choice_list_name\":\"facility_types\",\"data_value\":\"regional_vaccine_store\",\"display\":{\"text\":\"Regional vaccine store\"},\"_row_num\":6},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_vaccine_store\",\"display\":{\"text\":\"District vaccine store\"},\"_row_num\":7},{\"choice_list_name\":\"facility_types\",\"data_value\":\"central_hospital\",\"display\":{\"text\":\"Central hospital\"},\"_row_num\":8},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_hospital\",\"display\":{\"text\":\"District hospital\"},\"_row_num\":9},{\"choice_list_name\":\"facility_types\",\"data_value\":\"rural_hospital\",\"display\":{\"text\":\"Rural hospital\"},\"_row_num\":10},{\"choice_list_name\":\"facility_types\",\"data_value\":\"hospital\",\"display\":{\"text\":\"Hospital\"},\"_row_num\":11},{\"choice_list_name\":\"facility_types\",\"data_value\":\"community_hospital\",\"display\":{\"text\":\"Community hospital\"},\"_row_num\":12},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_centre\",\"display\":{\"text\":\"Health centre\"},\"_row_num\":13},{\"choice_list_name\":\"facility_types\",\"data_value\":\"dispensary\",\"display\":{\"text\":\"Dispensary\"},\"_row_num\":14},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_post\",\"display\":{\"text\":\"Health post\"},\"_row_num\":15},{\"choice_list_name\":\"facility_types\",\"data_value\":\"maternity\",\"display\":{\"text\":\"Maternity\"},\"_row_num\":16}]"
+        "_value": "[{\"choice_list_name\":\"facility_types\",\"data_value\":\"national_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"National vaccine store\",\"es\":\"Tienda nacional de vacunas\"}}},\"_row_num\":5},{\"choice_list_name\":\"facility_types\",\"data_value\":\"regional_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"Regional vaccine store\",\"es\":\"Tienda regional de vacunas\"}}},\"_row_num\":6},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"District vaccine store\",\"es\":\"Tienda de vacunas por un distrito\"}}},\"_row_num\":7},{\"choice_list_name\":\"facility_types\",\"data_value\":\"central_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Central hospital\",\"es\":\"Hospital centrál\"}}},\"_row_num\":8},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"District hospital\",\"es\":\"Hospital por un distrito\"}}},\"_row_num\":9},{\"choice_list_name\":\"facility_types\",\"data_value\":\"rural_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Rural hospital\",\"es\":\"Hospital rurál\"}}},\"_row_num\":10},{\"choice_list_name\":\"facility_types\",\"data_value\":\"hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Hospital\",\"es\":\"Hospital generál\"}}},\"_row_num\":11},{\"choice_list_name\":\"facility_types\",\"data_value\":\"community_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Community hospital\",\"es\":\"Hospital de comunidad\"}}},\"_row_num\":12},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_center\",\"display\":{\"title\":{\"text\":{\"default\":\"Health center\",\"es\":\"Centro de salud\"}}},\"_row_num\":13},{\"choice_list_name\":\"facility_types\",\"data_value\":\"dispensary\",\"display\":{\"title\":{\"text\":{\"default\":\"Dispensary\",\"es\":\"Dispensario\"}}},\"_row_num\":14},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_post\",\"display\":{\"title\":{\"text\":{\"default\":\"Health post\",\"es\":\"Campamiento de salud\"}}},\"_row_num\":15},{\"choice_list_name\":\"facility_types\",\"data_value\":\"maternity\",\"display\":{\"title\":{\"text\":{\"default\":\"Maternity\",\"es\":\"Maternidad\"}}},\"_row_num\":16}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "facility_type",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Facility Type\",\"es\":\"Tipo de facilidad\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "gas_availability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"available\",\"display\":{\"text\":\"Available\"},\"_row_num\":35},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"irregular\",\"display\":{\"text\":\"Irregular\"},\"_row_num\":36},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_available\",\"display\":{\"text\":\"Not Available\"},\"_row_num\":37},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":38},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_applicable\",\"display\":{\"text\":\"Not Applicable\"},\"_row_num\":39}]"
+        "_value": "[{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"available\",\"display\":{\"title\":{\"text\":{\"default\":\"Available\",\"es\":\"Disponible\"}}},\"_row_num\":35},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"irregular\",\"display\":{\"title\":{\"text\":{\"default\":\"Irregular\",\"es\":\"Irregular\"}}},\"_row_num\":36},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_available\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Available\",\"es\":\"No Disponible\"}}},\"_row_num\":37},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":38},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Applicable\"}}},\"_row_num\":39}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "gas_availability",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Gas Availability\",\"es\":\"Disponibilidad de combustible\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "grid_power_availability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"grid\",\"data_value\":\"more_than_16\",\"display\":{\"text\":\"More than 16\"},\"_row_num\":29},{\"choice_list_name\":\"grid\",\"data_value\":\"8_to_16\",\"display\":{\"text\":\"8 to 16\"},\"_row_num\":30},{\"choice_list_name\":\"grid\",\"data_value\":\"4_to_8\",\"display\":{\"text\":\"4 to 8\"},\"_row_num\":31},{\"choice_list_name\":\"grid\",\"data_value\":\"fewer_than_4\",\"display\":{\"text\":\"Fewer than 4\"},\"_row_num\":32},{\"choice_list_name\":\"grid\",\"data_value\":\"none\",\"display\":{\"text\":\"None\"},\"_row_num\":33}]"
+        "_value": "[{\"choice_list_name\":\"grid\",\"data_value\":\"more_than_16\",\"display\":{\"title\":{\"text\":{\"default\":\"More than 16\",\"es\":\"Más que 16\"}}},\"_row_num\":29},{\"choice_list_name\":\"grid\",\"data_value\":\"8_to_16\",\"display\":{\"title\":{\"text\":{\"default\":\"8 to 16\",\"es\":\"8 a 16\"}}},\"_row_num\":30},{\"choice_list_name\":\"grid\",\"data_value\":\"4_to_8\",\"display\":{\"title\":{\"text\":{\"default\":\"4 to 8\",\"es\":\"4 a 8\"}}},\"_row_num\":31},{\"choice_list_name\":\"grid\",\"data_value\":\"fewer_than_4\",\"display\":{\"title\":{\"text\":{\"default\":\"Fewer than 4\",\"es\":\"Menos que 4\"}}},\"_row_num\":32},{\"choice_list_name\":\"grid\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\"}}},\"_row_num\":33}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "grid_power_availability",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Grid Availability\",\"es\":\"Disponibilidad del red de energía\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "kerosene_availability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"available\",\"display\":{\"text\":\"Available\"},\"_row_num\":35},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"irregular\",\"display\":{\"text\":\"Irregular\"},\"_row_num\":36},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_available\",\"display\":{\"text\":\"Not Available\"},\"_row_num\":37},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":38},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_applicable\",\"display\":{\"text\":\"Not Applicable\"},\"_row_num\":39}]"
+        "_value": "[{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"available\",\"display\":{\"title\":{\"text\":{\"default\":\"Available\",\"es\":\"Disponible\"}}},\"_row_num\":35},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"irregular\",\"display\":{\"title\":{\"text\":{\"default\":\"Irregular\",\"es\":\"Irregular\"}}},\"_row_num\":36},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_available\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Available\",\"es\":\"No Disponible\"}}},\"_row_num\":37},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":38},{\"choice_list_name\":\"fuel_availability\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Applicable\"}}},\"_row_num\":39}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "kerosene_availability",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Kerosene Availability\",\"es\":\"Disponibilidad de queroseno\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "solar_suitable_climate",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "solar_suitable_climate",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Solar Suitable Climate\",\"es\":\"Clima adecuedo por energía solár\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "solar_suitable_site",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"text\":\"Yes\"},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"text\":\"No\"},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "solar_suitable_site",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Solar Suitable Site\",\"es\":\"Facilidad adecuedo por energía solar\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "storage_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"storage_types\",\"data_value\":\"depot\",\"display\":{\"text\":\"Depot\"},\"_row_num\":45},{\"choice_list_name\":\"storage_types\",\"data_value\":\"delivery\",\"display\":{\"text\":\"Delivery\"},\"_row_num\":46},{\"choice_list_name\":\"storage_types\",\"data_value\":\"both\",\"display\":{\"text\":\"Both Depot and Delivery\"},\"_row_num\":47}]"
+        "_value": "[{\"choice_list_name\":\"storage_types\",\"data_value\":\"depot\",\"display\":{\"title\":{\"text\":{\"default\":\"Depot\",\"es\":\"Depósito\"}}},\"_row_num\":45},{\"choice_list_name\":\"storage_types\",\"data_value\":\"delivery\",\"display\":{\"title\":{\"text\":{\"default\":\"Delivery\",\"es\":\"Envío\"}}},\"_row_num\":46},{\"choice_list_name\":\"storage_types\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Depot and Delivery\",\"es\":\"Depósito y Envío\"}}},\"_row_num\":47}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "storage_type",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Storage Type\",\"es\":\"Tipo de almacenamiento\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "vaccine_reserve_stock_requirement",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Minimum Reserve Requirement\",\"es\":\"Tamaño Minimo de Reserva\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "vaccine_supply_interval",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Supply Interval\",\"es\":\"Intervalo de reabastecimiento\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "vaccine_supply_mode",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"delivered\",\"display\":{\"text\":\"Delivered\"},\"_row_num\":54},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"collected\",\"display\":{\"text\":\"Collected\"},\"_row_num\":55},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"both\",\"display\":{\"text\":\"Both Delivered and Collected\"},\"_row_num\":56},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"none\",\"display\":{\"text\":\"None\"},\"_row_num\":57},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"unknown\",\"display\":{\"text\":\"Unknown\"},\"_row_num\":58}]"
+        "_value": "[{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"delivered\",\"display\":{\"title\":{\"text\":{\"default\":\"Delivered\",\"es\":\"Enviado\"}}},\"_row_num\":54},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"collected\",\"display\":{\"title\":{\"text\":{\"default\":\"Collected\",\"es\":\"Collectado\"}}},\"_row_num\":55},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Delivered and Collected\",\"es\":\"Enviado y Collectado\"}}},\"_row_num\":56},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\"}}},\"_row_num\":57},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":58}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "vaccine_supply_mode",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Supply Mode\",\"es\":\"Modo de recibir vacunas\"}}"
       },
       {
         "_partition": "FormType",
@@ -2877,7 +4298,7 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "health_facility"
+        "_value": "wrong_form"
       },
       {
         "_partition": "Table",
@@ -2891,21 +4312,21 @@
         "_aspect": "default",
         "_key": "detailViewFileName",
         "_type": "string",
-        "_value": "config/assets/aa_health_facility_detail.html"
+        "_value": "config/tables/health_facility/html/health_facility_detail.html"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "\"Health Facility\""
+        "_value": "{\"text\":{\"default\":\"Health Facility\",\"es\":\"Facilidad de Salúd\"}}"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "string",
-        "_value": "config/assets/aa_health_facility_list.html"
+        "_value": "config/tables/health_facility/html/health_facility_list.html"
       },
       {
         "_partition": "Table",
@@ -2913,6 +4334,20 @@
         "_key": "mapListViewFileName",
         "_type": "string",
         "_value": "config/tables/health_facility/html/health_facility_list.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "defaultAccessOnCreation",
+        "_type": "string",
+        "_value": "HIDDEN"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "unverifiedUserCanCreate",
+        "_type": "boolean",
+        "_value": "false"
       },
       {
         "_partition": "TableMapFragment",

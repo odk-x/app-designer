@@ -751,16 +751,14 @@
       "constraint": "formula",
       "required": "formula",
       "calculation": "formula",
-      "auxillaryHash": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
       "selectionArgs": "formula",
       "url": "formula",
       "uri": "formula",
       "callback": "formula(context)",
       "choice_filter": "formula(choice_item)",
-      "templatePath": "requirejs_path",
-      "image": "app_path_localized",
-      "audio": "app_path_localized",
-      "video": "app_path_localized"
+      "templatePath": "requirejs_path"
     },
     "settings": {
       "table_id": {
@@ -795,7 +793,9 @@
         "value": [
           {
             "display": {
-              "text": "default"
+              "locale": {
+                "text": "default"
+              }
             },
             "name": "default"
           }
@@ -1043,6 +1043,31 @@
           "_row_num": 29
         }
       ]
+    },
+    "framework_definitions": {
+      "_tokens": {}
+    },
+    "common_definitions": {
+      "_tokens": {},
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 5,
+        "value": [
+          {
+            "display": {
+              "locale": {
+                "text": "default"
+              }
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 5,
+        "value": "default"
+      }
     },
     "queries": {},
     "calculates": {},
@@ -2085,3 +2110,5 @@
     ]
   }
 }
+could not find setting with name: framework_variant
+could not find setting with name: framework_variant

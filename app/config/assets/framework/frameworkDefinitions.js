@@ -1,0 +1,3 @@
+window.odkFrameworkDefinitions = {
+  "_tokens": {}
+}

@@ -91,6 +91,7 @@ function onLinkClick() {
     if (!$.isEmptyObject(refrigeratorTypeResultSet))
     {
         odkTables.openTableToListView(
+          null, 
           'refrigerators',
           'model_row_id = ?',
           [refrigeratorTypeResultSet.get('_id')],

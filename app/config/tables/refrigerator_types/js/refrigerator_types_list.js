@@ -38,6 +38,7 @@ var cbSearchSuccess = function(searchData) {
         // open filtered list view if facility found
         var rowId = searchData.getRowId(0);
         odkTables.openTableToListView(
+                null, 
                 'refrigerator_types',
                 '_id = ?',
                 [rowId],
