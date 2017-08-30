@@ -71,22 +71,25 @@ window.odkData = {
 
         var req = that.queueRequest('query', successCallbackFn, failureCallbackFn);
 
-//         var needToIncludeKVS = that.needToIncludeKVSInQuery(tableId);
-//         console.log('odkData: query: Need to include the KVS is ' + needToIncludeKVS);
-
-        // Test always make this false
-        that.getOdkDataIf().query(tableId, whereClause, sqlBindParams, groupBy, 
+		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+		var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+				JSON.stringify(sqlBindParams);
+        that.getOdkDataIf().query(tableId, whereClause, sqlBindParamsJSON, groupBy, 
             having, orderByElementKey, orderByDirection, limit, offset, includeKVS, req._callbackId);
-//             having, orderByElementKey, orderByDirection, limit, offset, false, req._callbackId);
     },
 
     arbitraryQuery: function(tableId, sqlCommand, sqlBindParams, limit, offset, successCallbackFn, failureCallbackFn) {
         var that = this;
         
         var req = that.queueRequest('arbitraryQuery', successCallbackFn, failureCallbackFn);
+        var stringLimit = limit == null ? null : limit.toString();
+        var stringOffset = offset == null ? null : offset.toString();
         console.log('arbitraryQuery cbId=' + req._callbackId);
 
-        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParams, limit, offset, req._callbackId);
+		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+		var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+				JSON.stringify(sqlBindParams);
+        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParamsJSON, stringLimit, stringOffset, req._callbackId);
     },
 
     getRows: function(tableId, rowId, successCallbackFn, failureCallbackFn) {
@@ -220,7 +223,7 @@ window.odkData = {
                     console.log('odkData invokeCallbackFn error - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId +
                     ' error: ' + errorMsg);
                     if (errorMsg.indexOf("org.opendatakit.exception.ActionNotAuthorize") === 0) {
-                        $('body').html("<h1>Access denied</h1>You do have access to perform this action. Please log in or check your credentials."); // TODO: TEMPORARY
+                        document.body.innerHTML = "<h1>Access denied</h1>You do have access to perform this action. Please log in or check your credentials."; // TODO: TEMPORARY
                     }
                     if(trxn._failureCbFn !== null && trxn._failureCbFn !== undefined) {
                         (trxn._failureCbFn)(errorMsg);

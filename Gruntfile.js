@@ -29,7 +29,7 @@ var postHandler = function(req, res, next) {
 
         var mkdirp = require('mkdirp');
         var fs = require('fs');
-        var Buffer = require('buffer/').Buffer;
+        //var Buffer = require('buffer/').Buffer;
 
         // We don't want the leading /, or else the file system will think
         // we're writing to root, which we don't have permission to. Should
@@ -135,6 +135,8 @@ module.exports = function (grunt) {
         outputDbDir: 'output/db',
         // The directory where csvs are output.
         outputCsvDir: 'output/csv',
+        // The directory where the device.properties and app.properties objects are stored
+        outputPropsDir: 'output/props',
         // The directory where the debug objects are output.
         outputDebugDir: 'output/debug',
         // The db directory path on the phone. %APP% should be replaced by app name
@@ -273,7 +275,13 @@ module.exports = function (grunt) {
     grunt.registerTask(
         'adbpush',
         'Perform all the adbpush tasks',
-        ['adbpush-collect', 'adbpush-default-app']);
+        ["adbpull-props", "remove-folders", 'adbpush-collect', 'adbpush-default-app', "adbpush-props"]);
+
+    grunt.registerTask(
+        'clean',
+        'wipe the device',
+        ["adbpull-props", "remove-folders", "adbpush-props", "setup"]);
+
 
     grunt.registerTask(
         'adbpull-debug',
@@ -483,13 +491,12 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             // name, effectively pushing everything twice.  We also specify that we
             // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
-                {filter: 'isFile',
-                 cwd: 'app' },
-				'.nomedia',
-                '**',
-                '!system/**',
-				'!data/**',
-				'!output/**');
+                { cwd: 'app' },
+                '.nomedia',
+                '*',
+                '!system',
+                '!data',
+                '!output');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -1399,6 +1406,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 			'config/assets/css/plot-list.css',
 			'config/assets/css/plot-detail.css',
 			'config/assets/css/plot-graph.css',
+			'config/assets/css/plot-report.css',
+			'config/assets/css/plot-view.css',
 			'config/assets/css/visit-list.css',
 			'config/assets/css/visit-detail.css',
 			'config/assets/plotter.html',
@@ -2036,4 +2045,100 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 
         });
 
+    grunt.registerTask(
+        "killall",
+        "Force stops survey, tables and services",
+        function killall() {
+            var apps = ["survey", "tables", "services"];
+            for (var i = 0; i < apps.length; i++) {
+                console.log("Force stopping ".concat(apps[i]));
+                grunt.task.run("exec:adbshell:am force-stop org.opendatakit.".concat(apps[i]));
+            }
+        });
+
+    grunt.registerTask(
+        "uninstall",
+        "Uninstalls ODK tools",
+        function remove_folders() {
+            grunt.task.run("remove-folders");
+            var apps = ["core", "services", "survey.android", "survey", "tables"];
+            for (var i = 0; i < apps.length; i++) {
+                console.log("Uninstalling ".concat(apps[i]));
+                grunt.task.run("exec:adbshell:pm uninstall org.opendatakit.".concat(apps[i]));
+            }
+        });
+    grunt.registerTask(
+        "remove-folders",
+        "Removes the opendatakit folders",
+        function remove_folders() {
+            grunt.task.run("killall");
+            var folders = [tablesConfig.deviceMount + "/" + tablesConfig.appName];//, "/sdcard/odk"];
+            for (var i = 0; i < folders.length; i++) {
+                console.log("Deleting ".concat(folders[i]));
+                grunt.task.run("exec:adbshell:rm -rf ".concat(folders[i]));
+            }
+            grunt.task.run("exec:adbshell:run-as org.opendatakit.services rm -rf /data/data/org.opendatakit.services/app_" + tablesConfig.appName);
+        });
+    grunt.registerTask(
+        "adbpull-props",
+        "Copies the properties from the device",
+        function props() {
+            var base = tablesConfig.deviceMount.concat("/", tablesConfig.appName);
+            var destbase = tablesConfig.appDir.concat("/", tablesConfig.outputPropsDir, "/");
+            var files = ["/config/assets/app.properties", "/data/device.properties"];
+            grunt.task.run("force:on")
+            for (var i = 0; i < files.length; i++) {
+                grunt.task.run("exec:adbpull:".concat(base, files[i], ":", destbase, basename(files[i])));
+            }
+            grunt.task.run("adbpull-fixprops")
+            grunt.task.run("force:restore")
+        });
+    grunt.registerTask(
+        "adbpull-fixprops",
+        "Removes init strings from device.properties",
+        function props() {
+            var file = tablesConfig.appDir.concat("/", tablesConfig.outputPropsDir, "/device.properties");
+            var props = grunt.file.read(file).split("\n");
+            for (var i = 0; i < props.length; i++) {
+                if (props[i].indexOf("tool_last_initialization_start_time") >= 0) {
+                    props[i] = "";
+                }
+            }
+            grunt.file.write(file, props.join("\n"));
+        });
+    grunt.registerTask(
+        "adbpush-props",
+        "Copies the properties to the device",
+        function props() {
+            var base = tablesConfig.deviceMount.concat("/", tablesConfig.appName);
+            var destbase = tablesConfig.appDir.concat("/", tablesConfig.outputPropsDir, "/");
+            var files = ["/config/assets/app.properties", "/data/device.properties"];
+            grunt.task.run("force:on")
+            for (var i = 0; i < files.length; i++) {
+                grunt.task.run("exec:adbpush:".concat(destbase, basename(files[i]), ":", base, files[i]));
+            }
+            grunt.task.run("force:restore")
+        });
+    var basename = function basename(path) {
+        var idx = path.lastIndexOf("/");
+        if (path.length != idx + 1) {
+            return path.substr(idx + 1);
+        } else {
+            return basename(path.substr(0, idx))
+        }
+    }
+    grunt.registerTask(
+        "setup",
+        "Launch the login and sync screen",
+        function() {
+            grunt.task.run("exec:adbshell:am start -a android.intent.action.MAIN -n org.opendatakit.services/.sync.actions.activities.SyncActivity --es appName "+tablesConfig.appName+" --es showLogin true");
+        }
+    )
+    // https://stackoverflow.com/questions/16612495/continue-certain-tasks-in-grunt-even-if-one-fails
+    var previous_force_state = grunt.option("force");
+    grunt.registerTask("force",function(set){
+        if (set === "on") grunt.option("force", true);
+        if (set === "off") grunt.option("force", false);
+        if (set === "restore") grunt.option("force", previous_force_state);
+    });
 };

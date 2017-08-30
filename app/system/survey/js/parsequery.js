@@ -243,7 +243,7 @@ return {
 
             if ( formPath !== null &&  formPath !== undefined &&
                  formPath.length > 0 && formPath[formPath.length-1] !== '/' ) {
-                formPath[formPath.length] = '/';
+                formPath = formPath + '/';
             }
         }
 
@@ -261,7 +261,9 @@ return {
 
         // This may fail when embedded
         try {
-            odkSurveyStateManagement.refId = refId;
+			if ( '_setRefId' in odkSurveyStateManagement ) {
+			  odkSurveyStateManagement._setRefId(refId);
+			}
         } catch(e) {
             ctxt.log('W','parsequery._parseParameters.odkSurveyStateManagement.refId assignment failed (ok if embedded)');
         }

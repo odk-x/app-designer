@@ -80,8 +80,12 @@ window.odkTables = {
         console.log('called openTable(). Unclear where to navigate,' +
                 ' so opening list view.');
 				
+		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+		var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null : 
+				JSON.stringify(sqlSelectionArgs);
 		var extrasBundle = { sqlWhereClause: sqlWhereClause, 
-						sqlSelectionArgs: sqlSelectionArgs,
+						// pass as JSON string so we can bind integers, numerics and booleans
+						sqlSelectionArgs: sqlSelectionArgsJSON,
 						// sqlGroupByArgs: 
 						// sqlHavingClause:
 						// sqlOrderByElementKey:
@@ -115,9 +119,13 @@ window.odkTables = {
         if (arguments.length > 5) {
             throw 'openTableToListView()--too many arguments';
         }
-				
+
+        // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+		var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null : 
+				JSON.stringify(sqlSelectionArgs);
 		var extrasBundle = { sqlWhereClause: sqlWhereClause, 
-						sqlSelectionArgs: sqlSelectionArgs,
+						// pass as JSON string so we can bind integers, numerics and booleans
+						sqlSelectionArgs: sqlSelectionArgsJSON,
 						// sqlGroupByArgs: 
 						// sqlHavingClause:
 						// sqlOrderByElementKey:
@@ -155,9 +163,13 @@ window.odkTables = {
         if (arguments.length > 5) {
             throw 'openTableToMapView()--too many arguments';
         }
-				
+
+        // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+		var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null : 
+				JSON.stringify(sqlSelectionArgs);
 		var extrasBundle = { sqlWhereClause: sqlWhereClause, 
-						sqlSelectionArgs: sqlSelectionArgs,
+						// pass as JSON string so we can bind integers, numerics and booleans
+						sqlSelectionArgs: sqlSelectionArgsJSON,
 						// sqlGroupByArgs: 
 						// sqlHavingClause:
 						// sqlOrderByElementKey:
@@ -197,9 +209,13 @@ window.odkTables = {
         if (arguments.length > 4 ) {
             throw 'openTableToSpreadsheetView()--too many arguments';
         }
-				
+
+        // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+		var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null : 
+				JSON.stringify(sqlSelectionArgs);
 		var extrasBundle = { sqlWhereClause: sqlWhereClause, 
-						sqlSelectionArgs: sqlSelectionArgs,
+						// pass as JSON string so we can bind integers, numerics and booleans
+						sqlSelectionArgs: sqlSelectionArgsJSON,
 						// sqlGroupByArgs: 
 						// sqlHavingClause:
 						// sqlOrderByElementKey:
@@ -308,7 +324,11 @@ window.odkTables = {
         throw 'setSubListView()--too many arguments';
       }
 
-      odkTablesIf.setSubListView(tableId, sqlWhereClause, sqlSelectionArgs, relativePath);
+      // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+      var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null : 
+				JSON.stringify(sqlSelectionArgs);
+	  // JSON.stringify the sqlSelectionArgs so we can pass integer, numeric and boolean as-is
+      odkTablesIf.setSubListView(tableId, sqlWhereClause, sqlSelectionArgsJSON, relativePath);
 
     },
 

@@ -508,7 +508,7 @@
         //in this format items in dropdowns are displayed
         template: 'DD / MMM / YYYY   HH : mm',
         //initial value, can be `new Date()`
-        value: new Date(),
+        value: null,
         minYear: 1900,
         maxYear: new Date().getFullYear(),
         yearDescending: true,
