@@ -2,7 +2,7 @@
 <html>
 <!--List View-->
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0;" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <link href="css/changeAccessFilters.css" type="text/css" rel="stylesheet" />
 		<link href="../../system/libs/spinner/waitMe.css"  type="text/css" rel="stylesheet" id="theme" />
         <script type="text/javascript" src="commonDefinitions.js"></script>
@@ -30,17 +30,17 @@
             </select></form></td></tr>
         <tr><td>Select rows to revise:</td></tr>
         <tr><td><div class="scroller"><form action="javascript:void(0);"><div id="table-content-wrapper"></div></form></div></td></tr>
-        <tr><td><label for="filter-type-chooser">Choose <tt>_filter_type</tt></label></td></tr>
+        <tr><td><label for="default-access-chooser">Choose <tt>_default_access</tt></label></td></tr>
         <tr><td><form action="javascript:void(0);">
-            <select id="filter-type-chooser" name="filterType" onchange="updateFilterType();"  class="sel-class">
+            <select id="default-access-chooser" name="defaultAccess" onchange="updateDefaultAccess();"  class="sel-class">
                 <option value="FULL">FULL</option>
                 <option value="MODIFY">MODIFY</option>
                 <option value="READ_ONLY">READ_ONLY</option>
                 <option value="HIDDEN">HIDDEN</option>
             </select></form></td></tr>
-        <tr><td><label for="user-chooser">Choose <tt>_filter_value</tt><br>The "owner" of the row</label></td></tr>
+        <tr><td><label for="user-chooser">Choose <tt>_row_owner</tt><br>The "owner" of the row</label></td></tr>
         <tr><td><form action="javascript:void(0);">
-            <select id="user-chooser" name="filterValue" onchange="updateFilterValue();" class="sel-class"></select></form></td></tr>
+            <select id="user-chooser" name="rowOwner" onchange="updateRowOwner();" class="sel-class"></select></form></td></tr>
 		<tr><td><div class="nbs"></div></td></tr>
         <tr><td><form action="javascript:void(0);"><button type="button" onclick="applyChanges();" class="btn-launch">Apply changes</button></form></td></tr>
         </table>
