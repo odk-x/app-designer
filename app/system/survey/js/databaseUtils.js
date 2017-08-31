@@ -1054,6 +1054,12 @@ return {
 							sessionVariableChanges[f] = changeElement;
 						}
 					}
+				} else {
+					// we will be traversing into the retained 
+					// elements within these composite elements
+					// and processing those. 
+					// Flag the composite as processed.
+					processSet[defElement.elementPath] = true;
 				}
 			}
 		}

@@ -194,9 +194,12 @@ return {
 		return odkCommon.genUUID();
     },
     getSameRefIdHashString:function(formPath, instanceId, screenPath) {
-        var refId = this.getRefId();
+        var that = this;
+        var refId = that.getRefId();
         if ( formPath === undefined || formPath === null ) {
-            formPath = odkCommon.getBaseUrl() + "/";
+            // this is a bad error case -- switch to framework form so we get 'Please wait...' screen
+            odkCommon.log('E','opendatakit:getSameRefIdHashString null or undefined formPath resetting to ' + formPath);
+            return '#formPath=' + encodeURIComponent(odkSurvey.getFormPath('framework','framework'));		
         }
         var qpl =
             '#formPath=' + encodeURIComponent(formPath) +

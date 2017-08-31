@@ -23,6 +23,11 @@ return {
         var that = this;
 
         if ( table_id === 'framework' ) {
+            // TODO: should go away in the future??
+            // This should REMAIN the only place that 
+            //   formDef.specification.dataTableModel
+            //   formDef.specification.properties
+            // are directly referenced. 
             var tlo = {data: {},      // dataTable instance data values
                 instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
                 metadata: {},         // see definition in opendatakit.js
@@ -36,6 +41,7 @@ return {
             tlo.metadata.schemaETag = null;
             tlo.metadata.lastDataETag = null;
             tlo.metadata.lastSyncTime = -1;
+            tlo.metadata.dataTableModel = formDef.specification.dataTableModel;
             tlo.metadata.elementKeyMap = {};
             tlo.metadata.orderedColumns = {};
             tlo.metadata.keyValueStoreList = [];
@@ -62,14 +68,16 @@ return {
                     var tlo = {data: {},      // dataTable instance data values
                         instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
                         metadata: {},         // see definition in opendatakit.js
-                        dataTableModel: formDef.specification.dataTableModel, // inverted and extended formDef.model for representing data store
+                        dataTableModel:{}, // inverted and extended formDef.model for representing data store
                         formDef: formDef,
                         formPath: formPath,
                         instanceId: null,
                         table_id: table_id
                         };
-
-                    tlo.metadata = reqData.metadata;
+                    // save the result object
+                    tlo.resultObject = reqData;
+                    tlo.metadata = reqData.getMetadata();
+                    tlo.dataTableModel = reqData.getMetadata().dataTableModel;
                     ctxt.success(tlo);
                 },
                 function (errorMsg) {
