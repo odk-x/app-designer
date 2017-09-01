@@ -228,6 +228,10 @@
             var items = [], name, i,
                 longNames = this.options.template.indexOf('YYYY') !== -1;
 
+            var year = new Date().getFullYear();
+            var yearName = longNames ? year : ( year + '').substring(2);
+            items[this.options.yearDescending ? 'push' : 'unshift']([year, yearName]);
+
             for(i=this.options.maxYear; i>=this.options.minYear; i--) {
                 name = longNames ? i : (i+'').substring(2);
                 items[this.options.yearDescending ? 'push' : 'unshift']([i, name]);
@@ -509,8 +513,8 @@
         template: 'DD / MMM / YYYY   HH : mm',
         //initial value, can be `new Date()`
         value: null,
-        minYear: 1900,
-        maxYear: new Date().getFullYear(),
+        minYear: new Date().getFullYear() - 100,
+        maxYear: new Date().getFullYear() + 50,
         yearDescending: true,
         minuteStep: 1,
         secondStep: 1,
