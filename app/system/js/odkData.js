@@ -429,7 +429,6 @@ window.odkData = {
                 if (!isString(elementKeyOrPath)) {
                     throw 'getColumnData()--elementKey not a string';
                 }
-
                 var elementKey = that.getElementKey(elementKeyOrPath);
 
                 var colData = [];
@@ -495,7 +494,6 @@ window.odkData = {
                 if (!isString(elementKeyOrPath)) {
                     throw 'getData()--elementKey must be a string';
                 }
-
                 var elementKey = that.getElementKey(elementKeyOrPath);
 
                 var colIndex = that.resultObj.metadata.elementKeyMap[elementKey];
@@ -741,7 +739,7 @@ window.odkData = {
 
             },
 
-            getColumnForegroundColor:function(rowNumber, elementKey) {
+            getColumnForegroundColor:function(rowNumber, elementKeyOrPath) {
                 var that = this;
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return null;
@@ -764,15 +762,16 @@ window.odkData = {
                     throw 'getColumnForegroundColor()--rowNumber must be an integer';
                 }
 
-                if (!isString(elementKey)) {
+                if (!isString(elementKeyOrPath)) {
                     throw 'getColumnForegroundColor()--elementKey must be a string';
                 }
+                var elementKey = that.getElementKey(elementKeyOrPath); 
 
                 if (that.resultObj.metadata.columnColors[elementKey] === null || 
                     that.resultObj.metadata.columnColors[elementKey] === undefined) {
                     return null;
                 }
-
+				
                 var colorArray = that.resultObj.metadata.columnColors[elementKey];
 
                 if (rowNumber >= 0 && rowNumber < that.getCount()) {
@@ -785,7 +784,7 @@ window.odkData = {
                 return null;
             },
 
-            getColumnBackgroundColor:function(rowNumber, elementKey) {
+            getColumnBackgroundColor:function(rowNumber, elementKeyOrPath) {
                 var that = this;
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return null;
@@ -808,9 +807,10 @@ window.odkData = {
                     throw 'getColumnBackgroundColor()--rowNumber must be an integer';
                 }
 
-                if (!isString(elementKey)) {
+                if (!isString(elementKeyOrPath)) {
                     throw 'getColumnBackgroundColor()--elementKey must be a string';
                 }
+                var elementKey = that.getElementKey(elementKeyOrPath); 
 
                 if (that.resultObj.metadata.columnColors[elementKey] === null ||
                     that.resultObj.metadata.columnColors[elementKey] === undefined) {
@@ -846,9 +846,9 @@ window.odkData = {
                 return that.resultObj.metadata.mapIndex;
             },
 
-            getColumnDisplayName:function(elementPath) {
+            getColumnDisplayName:function(elementKeyOrPath) {
                 var that = this;
-                var retVal = elementPath;
+                var retVal = elementKeyOrPath;
 
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return retVal;
@@ -867,11 +867,12 @@ window.odkData = {
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
-                var ref = ref[elementPath];
+                var elementKey = that.getElementKey(elementKeyOrPath); 
+                ref = ref[elementKey]; 
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
-                var ref = ref['displayName'];
+                ref = ref['displayName'];
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
@@ -900,11 +901,11 @@ window.odkData = {
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
-                var ref = ref['default'];
+                ref = ref['default'];
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
-                var ref = ref['displayName'];
+                ref = ref['displayName'];
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
@@ -933,11 +934,11 @@ window.odkData = {
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
-                var ref = ref['security'];
+                ref = ref['security'];
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
-                var ref = ref['locked'];
+                ref = ref['locked'];
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
