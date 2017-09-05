@@ -68,7 +68,7 @@ return {
                     var tlo = {data: {},      // dataTable instance data values
                         instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
                         metadata: {},         // see definition in opendatakit.js
-                        dataTableModel:{}, // inverted and extended formDef.model for representing data store
+                        dataTableModel: formDef.specification.dataTableModel, // inverted and extended formDef.model for representing data store
                         formDef: formDef,
                         formPath: formPath,
                         instanceId: null,
@@ -77,7 +77,9 @@ return {
                     // save the result object
                     tlo.resultObject = reqData;
                     tlo.metadata = reqData.getMetadata();
-                    tlo.dataTableModel = reqData.getMetadata().dataTableModel;
+                    // the dataTableModel returned from the Java side does not have session variables or retain the default values of the columns.
+                    // therefore we should use the one in the form definition.
+                    tlo.metadata.dataTableModel =  formDef.specification.dataTableModel;
                     ctxt.success(tlo);
                 },
                 function (errorMsg) {
