@@ -347,17 +347,17 @@ window.odkData = {
             // holds keyValueList re-imagined as a map.
             kvMap : {},
 
-			_isNotEmptyObject: function(obj) {
-				// !$.isEmptyObject(obj)
-				var name;
-				for ( name in obj ) {
-					if ( obj.hasOwnProperty(name) ) {
-						return true;
-					}
-				}
-				return false;
-			},
-			
+            _isNotEmptyObject: function(obj) {
+                // !$.isEmptyObject(obj)
+                var name;
+                for ( name in obj ) {
+                    if ( obj.hasOwnProperty(name) ) {
+                        return true;
+                    }
+                }
+                return false;
+            },
+            
             /**
              * This function is used to set the 
              * backing data object that all of the 
@@ -369,65 +369,65 @@ window.odkData = {
                 var that = this;
                 
                 that.resultObj = jsonObj;
-				
-				// the dataTableModel returned from the Java layer is roughly a JSON schema and 
-				// does not have all of the persisted elementKey entries at the top level.
-				// i.e., if they are in an object type (which is not persisted), the nested elements 
-				// that are persisted are not elevated up to the top level (they are just in their deeper
-				// nesting within the object). Traverse the dataTableModel searching for the non-retained
-				// elements, and if they are object types, collect their properties, appending them to 
-				// the top-level list and recursively traversing them.
-				var fullDataTableModel = that.resultObj.metadata.dataTableModel;
-				// content to add to the fullDataTableModel
-				var additionalDataTableModel = {};
-				
-				var f;
-				var defElement;
+                
+                // the dataTableModel returned from the Java layer is roughly a JSON schema and 
+                // does not have all of the persisted elementKey entries at the top level.
+                // i.e., if they are in an object type (which is not persisted), the nested elements 
+                // that are persisted are not elevated up to the top level (they are just in their deeper
+                // nesting within the object). Traverse the dataTableModel searching for the non-retained
+                // elements, and if they are object types, collect their properties, appending them to 
+                // the top-level list and recursively traversing them.
+                var fullDataTableModel = that.resultObj.metadata.dataTableModel;
+                // content to add to the fullDataTableModel
+                var additionalDataTableModel = {};
+                
+                var f;
+                var defElement;
 
-				// working model fragment
-				var dataTableModel;
-				// model fragment to process on next pass
-				var remainingDataTableModel = fullDataTableModel;
+                // working model fragment
+                var dataTableModel;
+                // model fragment to process on next pass
+                var remainingDataTableModel = fullDataTableModel;
 
-				// loop through until the model fragment for the next pass 
-				// (i.e., remainingDataTableModel) is empty
-				//
-				while ( that._isNotEmptyObject(remainingDataTableModel) ) {
-					// make the next pass model the working model fragment
-					dataTableModel = remainingDataTableModel;
-					// clear the next pass model
-					remainingDataTableModel = {};
-					// iterate over the working model fragment scanning for 
-					// elements that are not retained.
-					for ( f in dataTableModel ) {
-						if ( dataTableModel.hasOwnProperty(f) ) {
-							defElement = dataTableModel[f];
-							if (defElement.notUnitOfRetention) {
-								// if the element is an object, then accumulate 
-								// its properties into both the additionalDataTableModel
-								// and the remainingDataTableModel. These will be 
-								// processed in the next iteration of this loop.						
-								if ( defElement.type === 'object' ) {
-								  var sf;
-								  var subDefElement;
-								  for ( sf in defElement.properties ) {
-									if ( defElement.properties.hasOwnProperty(sf) ) {
-										subDefElement = defElement.properties[sf];
-										additionalDataTableModel[subDefElement.elementKey] = subDefElement;
-										remainingDataTableModel[subDefElement.elementKey] = subDefElement;
-									}
-								  }
-								}
-							}
-						}
-					}
-				}
-				// copy all the additions into the full model.
-				for ( f in additionalDataTableModel ) {
-					if ( additionalDataTableModel.hasOwnProperty(f) ) {
-					    fullDataTableModel[f] = additionalDataTableModel[f];
-					}
-				}
+                // loop through until the model fragment for the next pass 
+                // (i.e., remainingDataTableModel) is empty
+                //
+                while ( that._isNotEmptyObject(remainingDataTableModel) ) {
+                    // make the next pass model the working model fragment
+                    dataTableModel = remainingDataTableModel;
+                    // clear the next pass model
+                    remainingDataTableModel = {};
+                    // iterate over the working model fragment scanning for 
+                    // elements that are not retained.
+                    for ( f in dataTableModel ) {
+                        if ( dataTableModel.hasOwnProperty(f) ) {
+                            defElement = dataTableModel[f];
+                            if (defElement.notUnitOfRetention) {
+                                // if the element is an object, then accumulate 
+                                // its properties into both the additionalDataTableModel
+                                // and the remainingDataTableModel. These will be 
+                                // processed in the next iteration of this loop.                        
+                                if ( defElement.type === 'object' ) {
+                                  var sf;
+                                  var subDefElement;
+                                  for ( sf in defElement.properties ) {
+                                    if ( defElement.properties.hasOwnProperty(sf) ) {
+                                        subDefElement = defElement.properties[sf];
+                                        additionalDataTableModel[subDefElement.elementKey] = subDefElement;
+                                        remainingDataTableModel[subDefElement.elementKey] = subDefElement;
+                                    }
+                                  }
+                                }
+                            }
+                        }
+                    }
+                }
+                // copy all the additions into the full model.
+                for ( f in additionalDataTableModel ) {
+                    if ( additionalDataTableModel.hasOwnProperty(f) ) {
+                        fullDataTableModel[f] = additionalDataTableModel[f];
+                    }
+                }
 
                 // and build the kvMap
                 if (that.resultObj.metadata.keyValueStoreList === null || 
@@ -841,7 +841,7 @@ window.odkData = {
                     that.resultObj.metadata.columnColors[elementKey] === undefined) {
                     return null;
                 }
-				
+                
                 var colorArray = that.resultObj.metadata.columnColors[elementKey];
 
                 if (rowNumber >= 0 && rowNumber < that.getCount()) {
