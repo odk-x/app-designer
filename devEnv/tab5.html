@@ -12,31 +12,23 @@
 //<![CDATA[
   function resizeIframe(value) {
         var parts = value.substring(1).split('x');
-        var $el = $('#filescreen');
+        var $el = $('#scanFormDesinger');
         $el.width(parseInt(parts[0]));
         $el.height(parseInt(parts[1])+1); // we somehow lose a pixel?
-        var cw = document.getElementById('filescreen').contentWindow;
+        var cw = document.getElementById('scanFormDesinger').contentWindow;
         cw.location.reload();
   }
   function loadPage(value) {
-        var cw = document.getElementById('filescreen').contentWindow;
+        var cw = document.getElementById('scanFormDesinger').contentWindow;
         cw.location = value;
-  }
-  function backbutton() {
-        var cw = document.getElementById('filescreen').contentWindow;
-        cw.history.back();
   }
   //]]>   
   </script>
-  <title>OpenDataKit File Browser</title>
+  <title>Scan Form Designer</title>
 </head>
 
 <body  class="fullembedded">
   <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
-  <div class="backviewport">
-  <span>View and open files that would be pushed to your Android device.</span>
-  <button class="backbutton" name="backbutton" id="backbutton" onclick="backbutton()" type="button">Back Button</button>
-  <iframe id="filescreen" class="bigviewport" src="../app/"/>
-  </div>
+  <iframe id="scanFormDesinger" class="bigviewport" src="../scanFormDesigner/index.html"/>
 </body>
 </html>
