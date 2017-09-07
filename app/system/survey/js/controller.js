@@ -402,7 +402,7 @@ return {
                         path = that.getNextOperationPath(path);
                         break;
                     }
-					/* falls through */
+                    /* falls through */
                 case "back_in_history":
                     // pop the history stack, and render that screen.
                     combo = that.findPreviousScreenAndState(false);
@@ -659,27 +659,27 @@ return {
         /**
          * Display the requested screen.
          */
-		if ( m === undefined || m === null || m.message === undefined || m.message === null ) {
-			that.setScreen( ctxt, op, options );
-		} else {
-			that.setScreen( $.extend({}, ctxt, {
-				success: function() {
-					// add a terminal context to display the pop-up message
-					// -- this will be added after the afterRendering
-					// actions have been taken when the screen is rendered (since the
-					// afterRendering step is invoking ctxt when it is complete.
-					ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
-					ctxt.success();
-				},
-				failure: function(m2) {
-					// add a terminal context to display the pop-up message
-					// -- this will be added after the afterRendering
-					// actions have been taken when the screen is rendered (since the
-					// afterRendering step is invoking ctxt when it is complete.
-					ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
-					ctxt.failure(m2);
-			}}), op, options );
-		}
+        if ( m === undefined || m === null || m.message === undefined || m.message === null ) {
+            that.setScreen( ctxt, op, options );
+        } else {
+            that.setScreen( $.extend({}, ctxt, {
+                success: function() {
+                    // add a terminal context to display the pop-up message
+                    // -- this will be added after the afterRendering
+                    // actions have been taken when the screen is rendered (since the
+                    // afterRendering step is invoking ctxt when it is complete.
+                    ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
+                    ctxt.success();
+                },
+                failure: function(m2) {
+                    // add a terminal context to display the pop-up message
+                    // -- this will be added after the afterRendering
+                    // actions have been taken when the screen is rendered (since the
+                    // afterRendering step is invoking ctxt when it is complete.
+                    ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
+                    ctxt.failure(m2);
+            }}), op, options );
+        }
     },
     _doActionAt:function(ctxt, op, action, popStateOnFailure) {
         var that = this;
@@ -806,26 +806,26 @@ return {
                 } else {
                     // set the screen back to what it was, then report this failure
                     var op = that.getOperation(oldPath);
-					if ( op !== null ) {
-						that._doActionAt($.extend({},ctxt,{
-								success: function() {
-									// add a terminal context to display the pop-up message
-									// -- this will be added after the afterRendering
-									// actions have been taken when the screen is rendered (since the
-									// afterRendering step is invoking ctxt when it is complete.
-									var opPath = that.getCurrentScreenPath();
-									ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
-									ctxt.success();
-								},
-								failure: function(m2) {
-									// add a terminal context to display the pop-up message
-									// -- this will be added after the afterRendering
-									// actions have been taken when the screen is rendered (since the
-									// afterRendering step is invoking ctxt when it is complete.
-									var opPath = that.getCurrentScreenPath();
-									ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
-									ctxt.failure(m2);
-								}}), op, op._token_type, true);
+                    if ( op !== null ) {
+                        that._doActionAt($.extend({},ctxt,{
+                                success: function() {
+                                    // add a terminal context to display the pop-up message
+                                    // -- this will be added after the afterRendering
+                                    // actions have been taken when the screen is rendered (since the
+                                    // afterRendering step is invoking ctxt when it is complete.
+                                    var opPath = that.getCurrentScreenPath();
+                                    ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
+                                    ctxt.success();
+                                },
+                                failure: function(m2) {
+                                    // add a terminal context to display the pop-up message
+                                    // -- this will be added after the afterRendering
+                                    // actions have been taken when the screen is rendered (since the
+                                    // afterRendering step is invoking ctxt when it is complete.
+                                    var opPath = that.getCurrentScreenPath();
+                                    ctxt.setTerminalContext(that._synthesizePopupContext(opPath, m));
+                                    ctxt.failure(m2);
+                                }}), op, op._token_type, true);
                     } else {
                         ctxt.failure(m);
                     }
@@ -1283,29 +1283,29 @@ return {
     },
     setLocale: function(ctxt, locale) {
         var that = this;
-		var tableId = opendatakit.getCurrentTableId();
-		var instanceId = opendatakit.getCurrentInstanceId();
-		if ( instanceId !== undefined && instanceId !== null && tableId !== "framework" ) {
-			// we have an instance in which we can update the locale field with the change
-			database.setInstanceMetaData($.extend({}, ctxt, {success: function() {
-				opendatakit.setCachedLocale(locale);
-				var op = that.getOperation(that.getCurrentScreenPath());
-				if ( op !== null && op._token_type === 'begin_screen' ) {
-							that.setScreen(ctxt, op, {changeLocale: true});
-				} else {
-					ctxt.failure(that.moveFailureMessage);
-				}
-			}}), '_locale', locale);
-		} else {
-			// no instance so we just store it in the cached locale value.
-			opendatakit.setCachedLocale(locale);
-			var op = that.getOperation(that.getCurrentScreenPath());
-			if ( op !== null && op._token_type === 'begin_screen' ) {
-						that.setScreen(ctxt, op, {changeLocale: true});
-			} else {
-				ctxt.failure(that.moveFailureMessage);
-			}
-		}
+        var tableId = opendatakit.getCurrentTableId();
+        var instanceId = opendatakit.getCurrentInstanceId();
+        if ( instanceId !== undefined && instanceId !== null && tableId !== "framework" ) {
+            // we have an instance in which we can update the locale field with the change
+            database.setInstanceMetaData($.extend({}, ctxt, {success: function() {
+                opendatakit.setCachedLocale(locale);
+                var op = that.getOperation(that.getCurrentScreenPath());
+                if ( op !== null && op._token_type === 'begin_screen' ) {
+                            that.setScreen(ctxt, op, {changeLocale: true});
+                } else {
+                    ctxt.failure(that.moveFailureMessage);
+                }
+            }}), '_locale', locale);
+        } else {
+            // no instance so we just store it in the cached locale value.
+            opendatakit.setCachedLocale(locale);
+            var op = that.getOperation(that.getCurrentScreenPath());
+            if ( op !== null && op._token_type === 'begin_screen' ) {
+                        that.setScreen(ctxt, op, {changeLocale: true});
+            } else {
+                ctxt.failure(that.moveFailureMessage);
+            }
+        }
 
     },
     ///////////////////////////////////////////////////////
@@ -1583,7 +1583,14 @@ return {
             }
         }
     },
+    // this is ordinarily a 1-length array of the currently-active
+    // ctxt triggered by an event. If there are multiple events queued,
+    // this array may contain multiple events. 
     outstandingTriggeringContexts: [],
+    // enqueue an event-triggered action onto the outstandingTriggeringContext
+    // queue. If the resulting queue is of length 1, then directly execute this
+    // context. Otherwise, as each ctxt is processed to completion, the next
+    // ctxt in this queue will be processed. 
     enqueueTriggeringContext: function(ctxt) {
         var that = this;
         that.outstandingTriggeringContexts.push(ctxt);
@@ -1594,6 +1601,8 @@ return {
             }, that.delay);
         }
     },
+    // invoked when a ctxt completes to trigger the next ctxt in the 
+    // outstandingTriggeringContexts array.
     dequeueTriggeringContext: function(propagateSuccessState, m) {
         var that = this;
         var lowest;
