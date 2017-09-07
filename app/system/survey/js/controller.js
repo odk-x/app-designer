@@ -1131,66 +1131,133 @@ return {
     delay: 5,
     insideQueue: false,
     insideCallbackCtxt: false,
-    queuedActionAvailableListener: function() {
+    registrationGeneration: 1,
+    clearGeneration: 1,
+    callbackGeneration: -1,
+    queuedActionAvailableListener: function(ctxt, generation) {
         var that = this;
-        if ( this.insideQueue || this.insideCallbackCtxt ) return;
+        if (generation !== that.registrationGeneration) {
+            odkCommon.log('W','controller:queuedActionAvailableListener('+generation+') not current: ' + that.registrationGeneration);
+            // somewhere in the workflow, something will register a listener
+            // and trigger this function with the proper registration generation.
+            // do nothing.
+            ctxt.failure({message: 'registrationGeneration is out-of-date'});
+            return;
+        }
+
+        if ( that.insideQueue || that.insideCallbackCtxt ) {
+            // we should not get in here now that we are using the 
+            // enqueueTriggeringContext() mechanism, which ensures that
+            // only one active event (such as this callback) is actively
+            // being processed at a time.
+            odkCommon.log('E','queuedActionAvailableListener:nestedActiveInvokations');
+            if ( that.callbackGeneration > generation ) {
+                // we are obsolete -- die
+                ctxt.failure({message: 'queuedActionAvailableListener: callbackGeneration is out-of-date'});
+                return;
+            } else if ( that.callbackGeneration === generation ) {
+                // we seem to have two active calls for the same
+                // generation. Since the other one is within the 
+                // critical section, this one should die.
+                ctxt.failure({message: 'queuedActionAvailableListener: redundant active request - suppress'});
+                return;
+            } else {
+                // we are a newer generation and an older generation
+                // processor is alive. Enqueue a new triggering context.
+                var fn = that.createCallbackQueuedActionAvailableListener(generation);
+                (fn)();
+                ctxt.failure({message: 'queuedActionAvailableListener: newer generation handler - re-issued'});
+                return;
+            }
+        }
+        var action;
+        
+        // OK we are the proper generation -- process the action response
         try {
-            this.insideQueue = true;
-            var action = that.viewFirstQueuedAction();
+            that.insideQueue = true;
+            that.callbackGeneration = generation;
+
+            action = that.viewFirstQueuedAction();
             if ( action === null || action === undefined ) {
+                ctxt.success();
                 return;
             }
             that.insideCallbackCtxt = true;
             var baseCtxt = that.newCallbackContext("controller.queuedActionAvailableListener-terminalRetrigger");
+            
             var terminateCtxt = $.extend({},baseCtxt,{success: function() {
+                    if (generation === that.clearGeneration || generation === that.registrationGeneration) {
+                        // if we are no longer the active registration generation
+                        // then leave the action queued. Somewhere in the workflow
+                        // the proper listener will be invoked and acted upon.
+                        that.removeFirstQueuedAction();
+                    }
                     that.insideCallbackCtxt = false;
+                    if (generation === that.registrationGeneration) {
+                        // only if we are the active registration generation
+                        // create and enqueue a new triggering context until we have no more actions queued.
+                        var fn = that.createCallbackQueuedActionAvailableListener(generation);
+                        (fn)();
+                    }
                     baseCtxt.success();
-                    setTimeout(function() {
-                        that.queuedActionAvailableListener();
-                        }, that.delay);
                 }, failure: function(m) {
+                    if (generation === that.clearGeneration || generation === that.registrationGeneration) {
+                        // if we are no longer the active registration generation
+                        // then leave the action queued. Somewhere in the workflow
+                        // the proper listener will be invoked and acted upon.
+                        that.removeFirstQueuedAction();
+                    }
                     that.insideCallbackCtxt = false;
+                    if (generation === that.registrationGeneration) {
+                        // only if we are the active registration generation
+                        // create and enqueue a new triggering context until we have no more actions queued.
+                        var fn = that.createCallbackQueuedActionAvailableListener(generation);
+                        (fn)();
+                    }
                     baseCtxt.failure(m);
-                    setTimeout(function() {
-                        that.queuedActionAvailableListener();
-                        }, that.delay);
                 }});
 
-            var innerCtxt = that.newCallbackContext("controller.queuedActionAvailableListener");
-            var ctxt = $.extend({}, innerCtxt, {success: function() {
-                // TODO: do we want to do this on failure?
-                // on success or failure, remove the queued action
-                that.removeFirstQueuedAction();
-                innerCtxt.success();
-            }, failure: function(m) {
-                // TODO: do we want to do pop up a toast on failure?
-                // on success or failure, remove the queued action
-                that.removeFirstQueuedAction();
-                innerCtxt.failure(m);
-            }});
             ctxt.setTerminalContext(terminateCtxt);
-
-            that.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-                if ( typeof action === 'string' || action instanceof String) {
-                    ctxt.log('I', "controller.queuedActionAvailableListener.changeUrlHash (immediate)", action);
-                    that.changeUrlHash(ctxt,action);
-                } else {
-                    ctxt.log('I', "controller.queuedActionAvailableListener.actionCallback (immediate)", action.action);
-                    that.actionCallback( ctxt, action.dispatchStruct, action.action, action.jsonValue );
-                }
-            }}));
-
         } finally {
-            this.insideQueue = false;
+            that.insideQueue = false;
+        }
+        
+        // and now, directly process the action.
+        // We have released our that.insideQueue flag, but 
+        // have that.insideCallbackCtxt set to true. That
+        // won't be released until the terminalCtxt attached
+        // to this ctxt gets executed.
+        if ( typeof action === 'string' || action instanceof String) {
+            ctxt.log('I', "controller.queuedActionAvailableListener.changeUrlHash (immediate)", action);
+            that.clearGeneration = generation;
+            that.changeUrlHash(ctxt,action);
+        } else {
+            ctxt.log('I', "controller.queuedActionAvailableListener.actionCallback (immediate)", action.action);
+            that.clearGeneration = -1;
+            that.actionCallback( ctxt, action.dispatchStruct, action.action, action.jsonValue );
         }
     },
+    // construct and return a function that will enqueue a context that will invoke the 
+    // the queuedActionAvailableListener with an operable context.
+    createCallbackQueuedActionAvailableListener: function(generation) {
+        var that = this;
+        return function() {
+            var ctxt = that.newCallbackContext("controller.createCallbackQueuedActionAvailableListener.impl");
 
+            that.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
+                that.queuedActionAvailableListener(ctxt, generation);
+            }, failure:function(m) {
+                that.queuedActionAvailableListener(ctxt, generation);
+            }}));
+        };
+    },
     /**
      * This notifies the Java layer that the framework has been loaded and
      * will register a listener for all of the queued actions, if any.
      */
     registerQueuedActionAvailableListener: function(ctxt, refId, m) {
         var that = this;
+        var generation = ++(that.registrationGeneration);
         // Declare a Terminal Context that:
         // (1) registers the activity listener
         //     (this will schedule one queuedActionAvailableListener() callback)
@@ -1202,15 +1269,25 @@ return {
         // coming from the Java layer.
         var baseCtxt = that.newCallbackContext("controller.registerQueuedActionAvailableListener");
         var terminateCtxt = $.extend({},baseCtxt,{success: function() {
-                odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
-                odkSurveyStateManagement.frameworkHasLoaded(refId, true );
+                baseCtxt.log('I', "controller.registerQueuedActionAvailableListener.terminateCtxt success");
+                if (generation === that.registrationGeneration) {
+                    // only alert that the framework is valid if the generation is current
+                    odkSurveyStateManagement.frameworkHasLoaded(refId, true );
+                    var fn = that.createCallbackQueuedActionAvailableListener(generation);
+                    odkCommon.registerListener(fn);
+                    (fn)();
+                }
                 baseCtxt.success();
-				that.queuedActionAvailableListener();
             }, failure: function(m) {
-                odkCommon.registerListener(function() {that.queuedActionAvailableListener();});
-                odkSurveyStateManagement.frameworkHasLoaded(refId, false );
+                baseCtxt.log('I', "controller.registerQueuedActionAvailableListener.terminateCtxt failure");
+                if (generation === that.registrationGeneration) {
+                    // only alert that the framework is valid if the generation is current
+                    odkSurveyStateManagement.frameworkHasLoaded(refId, false );
+                    var fn = that.createCallbackQueuedActionAvailableListener(generation);
+                    odkCommon.registerListener(fn);
+                    (fn)();
+                }
                 baseCtxt.failure(m);
-				that.queuedActionAvailableListener();
             }});
         ctxt.setTerminalContext(terminateCtxt);
         if ( m === undefined || m === null ) {
