@@ -8,19 +8,27 @@
         <link href="css/generate-index.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="libs/jquery.js"></script>
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
-        <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
-        <script type="text/javascript" src="js/menu.js"></script>
+        <script type="text/javascript" src="js/leafRegion.js"></script>
         <script type="text/javascript" src="js/util.js"></script>
     </head>
 
     <body id="main">
-        <div id="header"></div>
+        <div id="wrapper">
+            <h1 id="header1"></h1>
 
-        <div id="description"></div>
+            <br>
+            <button id="view-facilities" class="button">View All Health Facilities</button>
 
-        <div id="buttonsDiv" class="buttonsDivStyle"></div>
+            <button id="filter-facilities" class="button">Filter Health Facilities By Type</button>
 
+            <button id="view-all-refrigerators" class="button">View All Refrigerators</button>
+
+            <button id="view-service-refrigerators" class="button">View All Refrigerators Needing Service In The Last 6 Months</button>
+
+            <button id="view-models" class="button">View Refrigerator Models</button>
+
+        </div>
         <script type="text/javascript">
             $(display);
         </script>

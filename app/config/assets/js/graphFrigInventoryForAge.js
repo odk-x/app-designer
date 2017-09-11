@@ -38,41 +38,11 @@ function healthFacilityCBSuccess(result) {
 
     var powerSource = util.getQueryParameter(util.powerSource);
     if (_.isEmpty(healthFacilityData)) {
-//         if (powerSource !== noOptionSelectString && powerSource !== undefined &&
-//             powerSource !== null) {
-//             if (selection === null) {
-//                 selection = powerSourceQueryString;
-//             } else {
-//                 selection += ' AND ' + powerSourceQueryString;
-//             }
-//
-//             if (selectionArgs === null) {
-//                 selectionArgs = [];
-//             }
-//
-//             selectionArgs.push(powerSource);
-//         }
 
         selection = addQueryParamAndVal(selection, selectionArgs, powerSourceQueryString, powerSource);
         odkData.query('refrigerators', selection, selectionArgs, null, null, null, null, null, null, true,
             frigCBSuccess, frigCBFailure);
     } else {
-//         if (powerSource !== noOptionSelectString && powerSource !== undefined &&
-//             powerSource !== null) {
-//             if (selection === null) {
-//                 selection = powerSourceQueryString;
-//             } else {
-//                 selection += ' AND ' + powerSourceQueryString;
-//             }
-//
-//             if (selectionArgs === null) {
-//                 selectionArgs = [];
-//             }
-//
-//             selectionArgs.push(powerSource);
-//
-//             odkData.arbitraryQuery('refrigerators', selection, selectionArgs, null, null, frigCBSuccess, frigCBFailure);
-//         }
 
         selection = "select * from refrigerators where facility_row_id in (";
         selectionArgs = [];
@@ -83,8 +53,7 @@ function healthFacilityCBSuccess(result) {
 
         selection = selection.substring(0, selection.length - 1);
         selection += ")";
-//         selectionArgs.push('H454');
-//         selectionArgs.push('H455');
+
         selection = addQueryParamAndVal(selection, selectionArgs, powerSourceQueryString, powerSource);
         odkData.arbitraryQuery('refrigerators', selection, selectionArgs, null, null, frigCBSuccess, frigCBFailure);
     }
@@ -191,28 +160,6 @@ function putFrigInAgeBucket(frigYear) {
         return bucket3;
     }
 }
-
-// function initBuckets(data) {
-//     b0 = {}
-//     b0.bucket = bucket0;
-//     b0.value = 0;
-//     data.push(b0);
-//
-//     b1 = {}
-//     b1.bucket = bucket1;
-//     b1.value = 0;
-//     data.push(b1);
-//
-//     b2 = {}
-//     b2.bucket = bucket2;
-//     b2.value = 0;
-//     data.push(b2);
-//
-//     b3 = {}
-//     b3.bucket = bucket3;
-//     b3.value = 0;
-//     data.push(b3);
-// }
 
 function frigHistogramByAge(divName, yAxisText) {
     var paramWidth = 500;

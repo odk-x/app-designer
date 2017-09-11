@@ -44,6 +44,7 @@ function display() {
                 selectionArgs.push(facilityRegion);
             }
 
+SELECT * FROM refrigerators JOIN health_facility ON refrigerators.facility_row_id = health_facility._id JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id WHERE health_facility.admin_region = ?
             odkTables.openTableToMapView(null, 'health_facility', selection, selectionArgs, 'config/tables/health_facility/html/hFacility_list.html');
         }
     );

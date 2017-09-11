@@ -1,7 +1,7 @@
 /**
  * The file for displaying detail views of the Health Facilities table.
  */
-/* global $, odkTables */
+/* global $, odkTables, util, odkData */
 'use strict';
 
 // Handle the case where we are debugging in chrome.
@@ -33,8 +33,13 @@ function onLinkClick() {
 
 function onAddFridgeClick() {
     var jsonMap = {};
-    jsonMap.facility_row_id = JSON.stringify(healthFacilityResultSet.getRowId(0));
-    jsonMap = JSON.stringify(jsonMap);
+    jsonMap.facility_row_id = healthFacilityResultSet.getRowId(0);
+	jsonMap.refrigerator_id = util.genUUID();
+	jsonMap._default_access = healthFacilityResultSet.get('_default_access');
+	jsonMap._group_read_only = healthFacilityResultSet.get('_group_read_only');
+	jsonMap._group_modify = healthFacilityResultSet.get('_group_modify');
+	jsonMap._group_privileged = healthFacilityResultSet.get('_group_privileged');
+    //odkTables.addRowWithSurvey({}, "refrigerators", "refrigerators", null, defaults);
     odkTables.addRowWithSurvey(null, 'refrigerators', 'refrigerators', null, jsonMap);
 }
 
@@ -51,7 +56,7 @@ function cbFailure(error) {
     console.log('health_facility_detail getViewData CB error : ' + error);
 }
 
-var display = function() {
+function display() {
 
     odkData.getViewData(cbSuccess, cbFailure);
 

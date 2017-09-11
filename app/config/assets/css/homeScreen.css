@@ -17,27 +17,15 @@ body {
     font-family: arial;
     margin: 0;
     text-align: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
     background-position: center;
+    position: relative;
 }
 
 div { 
     position: relative; 
 }
-
-/*button {*/
-    /*width: 275px;*/
-    /*height: 70px;*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-    /*margin-top: 10px;*/
-    /*margin-bottom: 20px;*/
-    /*border: 2px solid #DEDEDE;*/
-    /*font-size: 14pt;*/
-    /*text-align: center;*/
-    /*display: block;*/
-/*}*/
 
 .btn-launch {
    width: 80%;
@@ -52,5 +40,11 @@ div {
 h1 {
     border-bottom: 2px solid darkturquoise;
     padding-bottom: 10px;
+    color: #FFFFFF;
+}
+
+.descStyle {
+    padding-bottom: 10 px;
+    font-size: 16px;
     color: #FFFFFF;
 }
