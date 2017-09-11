@@ -23,6 +23,11 @@ return {
         var that = this;
 
         if ( table_id === 'framework' ) {
+            // TODO: should go away in the future??
+            // This should REMAIN the only place that 
+            //   formDef.specification.dataTableModel
+            //   formDef.specification.properties
+            // are directly referenced. 
             var tlo = {data: {},      // dataTable instance data values
                 instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
                 metadata: {},         // see definition in opendatakit.js
@@ -36,6 +41,7 @@ return {
             tlo.metadata.schemaETag = null;
             tlo.metadata.lastDataETag = null;
             tlo.metadata.lastSyncTime = -1;
+            tlo.metadata.dataTableModel = formDef.specification.dataTableModel;
             tlo.metadata.elementKeyMap = {};
             tlo.metadata.orderedColumns = {};
             tlo.metadata.keyValueStoreList = [];
@@ -68,8 +74,12 @@ return {
                         instanceId: null,
                         table_id: table_id
                         };
-
-                    tlo.metadata = reqData.metadata;
+                    // save the result object
+                    tlo.resultObject = reqData;
+                    tlo.metadata = reqData.getMetadata();
+                    // the dataTableModel returned from the Java side does not have session variables or retain the default values of the columns.
+                    // therefore we should use the one in the form definition.
+                    tlo.metadata.dataTableModel =  formDef.specification.dataTableModel;
                     ctxt.success(tlo);
                 },
                 function (errorMsg) {

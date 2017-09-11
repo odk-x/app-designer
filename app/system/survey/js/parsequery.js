@@ -342,12 +342,14 @@ return {
             // and flush any pending doAction callback
             that.controller.registerQueuedActionAvailableListener(ctxt, opendatakit.getRefId());
           }, failure: function(m) {
+            // loading the form failed -- transition to loading the framework form, which will display a 'Please wait...' screen
+            // on the device. Then, if that is what we are showing, display a pop-up on that with "Failed to load page"
             ctxt.log('E','parsequery.changeUrlHash unable to transition to ' + hash, m);
-            if ( hash === '#formPath=' + encodeURIComponent(odkCommon.getBaseUrl() + '/') ) {
+            if ( hash === '#formPath=' + encodeURIComponent(odkSurvey.getFormPath('framework', 'framework')) ) {
                 that.controller.registerQueuedActionAvailableListener(ctxt, opendatakit.getRefId(),
                                                                         m || { message: 'failed to load page'});
             } else {
-                window.location.hash = '#formPath=' + encodeURIComponent(odkCommon.getBaseUrl() + '/');
+                window.location.hash = '#formPath=' + encodeURIComponent(odkSurvey.getFormPath('framework', 'framework'));
                 that.changeUrlHash($.extend({},ctxt,{success:function() { ctxt.failure(m); }}));
             }
           }});

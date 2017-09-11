@@ -1129,14 +1129,16 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
         },
 
         getBaseUrl: function() {
-            return '../system';
+            var that = this;
+            var baseUri = that._computeBaseUri();
+            return baseUri;
         },
         setSessionVariable: function(elementPath, value) {
             var that = this;
             var parts = elementPath.split('.');
             var i;
             var pterm = that._sessionVariables;
-            var term = that._sessionVariables;
+            var term = pterm;
             for ( i = 0 ; i < parts.length ; ++i ) {
                 if ( parts[i] in term ) {
                     pterm = term;
@@ -1196,7 +1198,8 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             var that = this;
             var lat, lng, alt, acc;
 
-			var dispatchStruct = JSON.parse(dispatchStructAsJSONstring);
+			var dispatchStruct = (dispatchStructAsJSONstring !== null &&
+                                  dispatchStructAsJSONstring !== undefined ) ? JSON.parse(dispatchStructAsJSONstring) : null;
             var value;
             that.log("D","odkCommon: DO: doAction(" + dispatchStructAsJSONstring + ", " + action + ", ...)");
             if ( action === 'org.opendatakit.survey.activities.MediaCaptureImageActivity' ) {

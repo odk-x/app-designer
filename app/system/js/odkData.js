@@ -32,7 +32,6 @@ window.odkData = {
         var that = this;
         
         var req = that.queueRequest('getRoles', successCallbackFn, failureCallbackFn);
-        console.log('getRoles cbId=' + req._callbackId);
 
         that.getOdkDataIf().getRoles(req._callbackId);
     },
@@ -41,7 +40,6 @@ window.odkData = {
         var that = this;
         
         var req = that.queueRequest('getDefaultGroup', successCallbackFn, failureCallbackFn);
-        console.log('getDefaultGroup cbId=' + req._callbackId);
 
         that.getOdkDataIf().getDefaultGroup(req._callbackId);
     },
@@ -50,7 +48,6 @@ window.odkData = {
         var that = this;
         
         var req = that.queueRequest('getUsers', successCallbackFn, failureCallbackFn);
-        console.log('getUsers cbId=' + req._callbackId);
 
         that.getOdkDataIf().getUsers(req._callbackId);
     },
@@ -59,7 +56,6 @@ window.odkData = {
         var that = this;
         
         var req = that.queueRequest('getAllTableIds', successCallbackFn, failureCallbackFn);
-        console.log('getAllTableIds cbId=' + req._callbackId);
 
         that.getOdkDataIf().getAllTableIds(req._callbackId);
     },
@@ -71,9 +67,9 @@ window.odkData = {
 
         var req = that.queueRequest('query', successCallbackFn, failureCallbackFn);
 
-		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
-		var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
-				JSON.stringify(sqlBindParams);
+        // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+                JSON.stringify(sqlBindParams);
         that.getOdkDataIf().query(tableId, whereClause, sqlBindParamsJSON, groupBy, 
             having, orderByElementKey, orderByDirection, limit, offset, includeKVS, req._callbackId);
     },
@@ -84,11 +80,10 @@ window.odkData = {
         var req = that.queueRequest('arbitraryQuery', successCallbackFn, failureCallbackFn);
         var stringLimit = limit == null ? null : limit.toString();
         var stringOffset = offset == null ? null : offset.toString();
-        console.log('arbitraryQuery cbId=' + req._callbackId);
 
-		// need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
-		var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
-				JSON.stringify(sqlBindParams);
+        // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+                JSON.stringify(sqlBindParams);
         that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParamsJSON, stringLimit, stringOffset, req._callbackId);
     },
 
@@ -108,22 +103,22 @@ window.odkData = {
         that.getOdkDataIf().getMostRecentRow(tableId, rowId, req._callbackId);
     },
 
-	changeAccessFilterOfRow: function(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify, 
+    changeAccessFilterOfRow: function(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify, 
         groupPrivileged, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('changeAccessFilterOfRow', successCallbackFn, failureCallbackFn);
 
-    that.getOdkDataIf().changeAccessFilterOfRow(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify,
+        that.getOdkDataIf().changeAccessFilterOfRow(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify,
         groupPrivileged, rowId, req._callbackId);
     },
-	
+    
     updateRow: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('updateRow', successCallbackFn, failureCallbackFn);
 
-    that.getOdkDataIf().updateRow(tableId, JSON.stringify(columnNameValueMap), rowId, req._callbackId);
+        that.getOdkDataIf().updateRow(tableId, JSON.stringify(columnNameValueMap), rowId, req._callbackId);
     },
 
     deleteRow: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
@@ -185,7 +180,7 @@ window.odkData = {
     queueRequest: function (type, successCallbackFn, failureCallbackFn) {
         var that = this;
 
-        var cbId = that._callbackId;
+        var cbId = that._callbackId++;
 
         var activeRequest = {
             _callbackId: cbId, 
@@ -194,18 +189,22 @@ window.odkData = {
             _requestType: type
         };
         that._requestMap.push(activeRequest);
-
-        that._callbackId = that._callbackId + 1;
+        
+        var logStr = "";
+        for (var i = 0; i < that._requestMap.length; i++) {
+            logStr = logStr + ", " + that._requestMap[i]._callbackId;
+        }
+        odkCommon.log('D','odkData:queueRequest ' + type + ' cbId: ' + cbId + ' cbIds: ' + logStr.substring(2));
 
         return activeRequest;
     },
 
     invokeCallbackFn: function (jsonResult, cbId) {
-        console.log('odkData: invokeCallbackFn called with cbId ' + cbId);
         var that = this;
         var found = false;
 
         if (cbId === null || cbId === undefined) {
+            odkCommon.log('E','odkData:invokeCallbackFn called with null or undefined cbId');
             return;
         }
 
@@ -265,7 +264,7 @@ window.odkData = {
 //         
 //         if (tableKVSCache === null) {
 //             if (jsonResult.metadata.keyValueStoreList !== null && jsonResult.metadata.keyValueStoreList !== undefined) {
-//                 console.log('odkData: invokeCallbackFn: adding KVS for tableId: ' + jsonResult.metadata.tableId);
+//                 odkCommon.log('D','odkData:invokeCallbackFn: adding KVS for tableId: ' + jsonResult.metadata.tableId);
 //                 tableKVSCache = {};
 //                 tableKVSCache.tableId = jsonResult.metadata.tableId;
 //                 tableKVSCache.keyValueStoreList = jsonResult.metadata.keyValueStoreList; 
@@ -288,7 +287,7 @@ window.odkData = {
 //         for (var i = 0; i < that._tableKVSCacheMap.length; i++) {
 //             if (that._tableKVSCacheMap[i].tableId === tableId) {
 //                 tableKVSMetadata = that._tableKVSCacheMap[i].keyValueStoreList;
-//                 console.log('odkData: getCachedMetadataForTableId: found KVS for tableId: ' + tableId);
+//                 odkCommon.log('D','odkData:getCachedMetadataForTableId: found KVS for tableId: ' + tableId);
 //                 break;
 //             }
 //         }
@@ -309,12 +308,12 @@ window.odkData = {
         var that = this;
         setTimeout(function() {
             var resultJSON = that.getOdkDataIf().getResponseJSON();
-            //console.log('odkData: resultJSON is ' + resultJSON);
+            //odkCommon.log('D','odkData:resultJSON is ' + resultJSON);
 
             var result = JSON.parse(resultJSON);
 
             var callbackFnStr = result.callbackJSON;
-            console.log('odkData: callbackJSON is ' + callbackFnStr);
+            // odkCommon.log('D','odkData:callbackJSON is ' + callbackFnStr);
 
             that.invokeCallbackFn(result, callbackFnStr);
 
@@ -345,7 +344,20 @@ window.odkData = {
         // This is the object that will wrap up the result from an async query.
         var pub = {
             resultObj : null,
+            // holds keyValueList re-imagined as a map.
+            kvMap : {},
 
+            _isNotEmptyObject: function(obj) {
+                // !$.isEmptyObject(obj)
+                var name;
+                for ( name in obj ) {
+                    if ( obj.hasOwnProperty(name) ) {
+                        return true;
+                    }
+                }
+                return false;
+            },
+            
             /**
              * This function is used to set the 
              * backing data object that all of the 
@@ -354,7 +366,99 @@ window.odkData = {
              * jsonObj should be a JSON object.
              */
             setBackingObject:function(jsonObj) {
-                this.resultObj = jsonObj;
+                var that = this;
+                
+                that.resultObj = jsonObj;
+                
+                // the dataTableModel returned from the Java layer is roughly a JSON schema and 
+                // does not have all of the persisted elementKey entries at the top level.
+                // i.e., if they are in an object type (which is not persisted), the nested elements 
+                // that are persisted are not elevated up to the top level (they are just in their deeper
+                // nesting within the object). Traverse the dataTableModel searching for the non-retained
+                // elements, and if they are object types, collect their properties, appending them to 
+                // the top-level list and recursively traversing them.
+                var fullDataTableModel = that.resultObj.metadata.dataTableModel;
+                // content to add to the fullDataTableModel
+                var additionalDataTableModel = {};
+                
+                var f;
+                var defElement;
+
+                // working model fragment
+                var dataTableModel;
+                // model fragment to process on next pass
+                var remainingDataTableModel = fullDataTableModel;
+
+                // loop through until the model fragment for the next pass 
+                // (i.e., remainingDataTableModel) is empty
+                //
+                while ( that._isNotEmptyObject(remainingDataTableModel) ) {
+                    // make the next pass model the working model fragment
+                    dataTableModel = remainingDataTableModel;
+                    // clear the next pass model
+                    remainingDataTableModel = {};
+                    // iterate over the working model fragment scanning for 
+                    // elements that are not retained.
+                    for ( f in dataTableModel ) {
+                        if ( dataTableModel.hasOwnProperty(f) ) {
+                            defElement = dataTableModel[f];
+                            if (defElement.notUnitOfRetention) {
+                                // if the element is an object, then accumulate 
+                                // its properties into both the additionalDataTableModel
+                                // and the remainingDataTableModel. These will be 
+                                // processed in the next iteration of this loop.                        
+                                if ( defElement.type === 'object' ) {
+                                  var sf;
+                                  var subDefElement;
+                                  for ( sf in defElement.properties ) {
+                                    if ( defElement.properties.hasOwnProperty(sf) ) {
+                                        subDefElement = defElement.properties[sf];
+                                        additionalDataTableModel[subDefElement.elementKey] = subDefElement;
+                                        remainingDataTableModel[subDefElement.elementKey] = subDefElement;
+                                    }
+                                  }
+                                }
+                            }
+                        }
+                    }
+                }
+                // copy all the additions into the full model.
+                for ( f in additionalDataTableModel ) {
+                    if ( additionalDataTableModel.hasOwnProperty(f) ) {
+                        fullDataTableModel[f] = additionalDataTableModel[f];
+                    }
+                }
+
+                // and build the kvMap
+                if (that.resultObj.metadata.keyValueStoreList === null || 
+                    that.resultObj.metadata.keyValueStoreList === undefined) {
+                    return;
+                }
+
+                var kvsLen = that.resultObj.metadata.keyValueStoreList.length;
+
+                odkCommon.log('W',"odkData/setBackingObject: processing keyValueStoreList of size " + kvsLen);
+
+                // the keyValueStoreList is not very efficient for accessing values.
+                // Convert this into a Javascript map stored in that.kvMap so we can access it as:
+                //      that.kvMap[partition][aspect][key]
+                // And, for partition === 'Column' && key === 'displayChoicesList', add 
+                // two new synthesized keys:
+                //      _displayChoicesList -- JSON.parse of 'displayChoicesList' value (array)
+                //      _displayChoicesMap -- conversion of this list into a map indexed by data_value.
+                //
+                for (var i = 0; i < kvsLen; i++) {
+                    var kvs = that.resultObj.metadata.keyValueStoreList[i];
+                    if ( !(that.kvMap.hasOwnProperty(kvs.partition)) ) {
+                        that.kvMap[kvs.partition] = {};
+                    }
+                    var partition = that.kvMap[kvs.partition];
+                    if ( !(partition.hasOwnProperty(kvs.aspect)) ) {
+                        partition[kvs.aspect] = {};
+                    }
+                    var aspect = partition[kvs.aspect];
+                    aspect[kvs.key] = kvs;
+                }
             },
 
             // get the number of rows in the result set
@@ -395,7 +499,6 @@ window.odkData = {
                 if (!isString(elementKeyOrPath)) {
                     throw 'getColumnData()--elementKey not a string';
                 }
-
                 var elementKey = that.getElementKey(elementKeyOrPath);
 
                 var colData = [];
@@ -461,7 +564,6 @@ window.odkData = {
                 if (!isString(elementKeyOrPath)) {
                     throw 'getData()--elementKey must be a string';
                 }
-
                 var elementKey = that.getElementKey(elementKeyOrPath);
 
                 var colIndex = that.resultObj.metadata.elementKeyMap[elementKey];
@@ -557,10 +659,10 @@ window.odkData = {
                 var i;
                 var key;
                 for ( key in elementKeyMap ) {
-					if (elementKeyMap.hasOwnProperty(key)) {
-						i = elementKeyMap[key];
-						columns[i] = key;
-					}
+                    if (elementKeyMap.hasOwnProperty(key)) {
+                        i = elementKeyMap[key];
+                        columns[i] = key;
+                    }
                 }
                 return columns;
             },
@@ -707,7 +809,7 @@ window.odkData = {
 
             },
 
-            getColumnForegroundColor:function(rowNumber, elementKey) {
+            getColumnForegroundColor:function(rowNumber, elementKeyOrPath) {
                 var that = this;
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return null;
@@ -730,15 +832,16 @@ window.odkData = {
                     throw 'getColumnForegroundColor()--rowNumber must be an integer';
                 }
 
-                if (!isString(elementKey)) {
+                if (!isString(elementKeyOrPath)) {
                     throw 'getColumnForegroundColor()--elementKey must be a string';
                 }
+                var elementKey = that.getElementKey(elementKeyOrPath); 
 
                 if (that.resultObj.metadata.columnColors[elementKey] === null || 
                     that.resultObj.metadata.columnColors[elementKey] === undefined) {
                     return null;
                 }
-
+                
                 var colorArray = that.resultObj.metadata.columnColors[elementKey];
 
                 if (rowNumber >= 0 && rowNumber < that.getCount()) {
@@ -751,7 +854,7 @@ window.odkData = {
                 return null;
             },
 
-            getColumnBackgroundColor:function(rowNumber, elementKey) {
+            getColumnBackgroundColor:function(rowNumber, elementKeyOrPath) {
                 var that = this;
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return null;
@@ -774,9 +877,10 @@ window.odkData = {
                     throw 'getColumnBackgroundColor()--rowNumber must be an integer';
                 }
 
-                if (!isString(elementKey)) {
+                if (!isString(elementKeyOrPath)) {
                     throw 'getColumnBackgroundColor()--elementKey must be a string';
                 }
+                var elementKey = that.getElementKey(elementKeyOrPath); 
 
                 if (that.resultObj.metadata.columnColors[elementKey] === null ||
                     that.resultObj.metadata.columnColors[elementKey] === undefined) {
@@ -812,9 +916,9 @@ window.odkData = {
                 return that.resultObj.metadata.mapIndex;
             },
 
-            getColumnDisplayName:function(elementPath) {
+            getColumnDisplayName:function(elementKeyOrPath) {
                 var that = this;
-                var retVal = elementPath;
+                var retVal = elementKeyOrPath;
 
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return retVal;
@@ -829,17 +933,20 @@ window.odkData = {
                     return retVal;
                 }
 
-                var kvsLen = that.resultObj.metadata.keyValueStoreList.length;
-
-                for (var i = 0; i < kvsLen; i++) {
-                    var kvs = that.resultObj.metadata.keyValueStoreList[i];
-                    if (kvs.partition === 'Column' &&
-                        kvs.aspect === elementPath && 
-                        kvs.key === 'displayName') {
-                        retVal = kvs.value;
-                    }
+                var ref = that.kvMap['Column'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
                 }
-      
+                var elementKey = that.getElementKey(elementKeyOrPath); 
+                ref = ref[elementKey]; 
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                ref = ref['displayName'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                retVal = ref.value;
                 return retVal;
             },
 
@@ -860,19 +967,20 @@ window.odkData = {
                     return retVal;
                 }
 
-                var kvsLen = that.resultObj.metadata.keyValueStoreList.length;
-
-                for (var i = 0; i < kvsLen; i++) {
-                    var kvs = that.resultObj.metadata.keyValueStoreList[i];
-                    if (kvs.partition === 'Table' &&
-                        kvs.aspect === 'default' && 
-                        kvs.key === 'displayName') {
-                        retVal = kvs.value;
-                    }
+                var ref = that.kvMap['Table'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
                 }
-
+                ref = ref['default'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                ref = ref['displayName'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                retVal = ref.value;
                 return retVal;
-        
             },
 
             getIsTableLocked:function() {
@@ -892,18 +1000,21 @@ window.odkData = {
                     return retVal;
                 }
 
-                var kvsLen = that.resultObj.metadata.keyValueStoreList.length;
-
-                for (var i = 0; i < kvsLen; i++) {
-                    var kvs = that.resultObj.metadata.keyValueStoreList[i];
-                    if (kvs.partition === 'Table' &&
-                        kvs.aspect === 'security' && 
-                        kvs.key === 'locked') {
-                        var v = kvs.value;
-                        if ( v !== null && v !== undefined && (v.toLowerCase() == "true") ) {
-                            retVal = true;
-                        }
-                    }
+                var ref = that.kvMap['Table'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                ref = ref['security'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                ref = ref['locked'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                var v = ref.value;
+                if ( v !== null && v !== undefined && (v.toLowerCase() == "true") ) {
+                     retVal = true;
                 }
                 return retVal;
             },
@@ -911,7 +1022,7 @@ window.odkData = {
             getCanCreateRow:function() {
                 var that = this;
                 var retVal = false;
-				
+                
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return retVal;
                 }

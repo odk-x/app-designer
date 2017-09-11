@@ -69,9 +69,9 @@ window.odkSurvey = {
 		
 		// and add a formPath=... to the front of the hash
 		if ( tableId === 'framework' ) {
-			return "#formPath=" + encodeURIComponent( odkCommon.getBaseUrl() + "/") + hashString;
+			return "#formPath=" + encodeURIComponent( that.getFormPath(tableId, tableId)) + hashString;
 		} else {
-			return "#formPath=" + encodeURIComponent( "../config/tables/" + tableId + "/forms/" + formId + "/") + hashString;
+			return "#formPath=" + encodeURIComponent( that.getFormPath(tableId, formId)) + hashString;
 		}
     },
 	
@@ -160,9 +160,13 @@ window.odkSurvey = {
 
 		var uri = odkCommon.constructSurveyUri(tableId, formId, instanceId, that.initialScreenPath, initialValuesElementKeyToValueMap );
 
-		var hashString = uri.substring(uri.indexOf('#'));
+		var hashString = uri.substring(uri.indexOf('#')+1);
+
+		if ( hashString !== '' ) {
+			hashString = '&' + hashString;
+		}
 		
-		var extrasBundle = { url: platInfo.baseUri + 'system/index.html' + hashString
+		var extrasBundle = { url: platInfo.baseUri + 'system/index.html' + "#formPath=" + encodeURIComponent( that.getFormPath(tableId, formId)) + hashString
 		};
 		
 		var intentArgs = {
