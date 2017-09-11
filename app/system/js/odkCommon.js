@@ -79,29 +79,29 @@ window.odkCommon = {
      *                   odkCommon.removeFirstQueuedAction();
      *               }
      *            });
-	 *
-	 * Users of odkCommon should invoke this listener function 
-	 * once, themselves, after registration, to ensure that any
-	 * queued action is processed. They should do this after all
-	 * initialization is complete.
+     *
+     * Users of odkCommon should invoke this listener function 
+     * once, themselves, after registration, to ensure that any
+     * queued action is processed. They should do this after all
+     * initialization is complete.
      */
     registerListener: function(listener) {
         var that = this;
         that._listener = listener;
-		// NOTE: users should invoke the listener once to ensure that 
-		// any queued actions are processed. This should be done after
-		// all page initialization is complete.
+        // NOTE: users should invoke the listener once to ensure that 
+        // any queued actions are processed. This should be done after
+        // all page initialization is complete.
     },
-	/**
-	 * @return true if there is a listener already registered
-	 */
-	hasListener: function() {
-		var that = this;
-		if ( that._listener !== undefined && that._listener !== null ) {
-			return true;
-		}
-		return false;
-	},
+    /**
+     * @return true if there is a listener already registered
+     */
+    hasListener: function() {
+        var that = this;
+        if ( that._listener !== undefined && that._listener !== null ) {
+            return true;
+        }
+        return false;
+    },
     /**
      * callback from Java side to notify of data available.
      */
@@ -148,241 +148,241 @@ window.odkCommon = {
    
    /**
     * predicate definition copied from underscore library
-	*/
+    */
    isString: function(obj) {
-		return (obj !== undefined) && (obj !== null) && (Object.prototype.toString.call(obj) === "[object String]");
+        return (obj !== undefined) && (obj !== null) && (Object.prototype.toString.call(obj) === "[object String]");
    },
    
    /**
     * Return the content of a display object for the given token.
-	* Note that this might include text, hint, image, etc. that 
-	* are then localizable.
-	*
-	* In general, the resulting object can be customized further
-	* in survey XLSX files by specifying overrides for these fields.
-	*/
+    * Note that this might include text, hint, image, etc. that 
+    * are then localizable.
+    *
+    * In general, the resulting object can be customized further
+    * in survey XLSX files by specifying overrides for these fields.
+    */
    lookupToken:function(stringToken) {
-	  if (stringToken === undefined || stringToken === null) {
-		  return undefined;
-	  }
+      if (stringToken === undefined || stringToken === null) {
+          return undefined;
+      }
       if(!this.isString(stringToken)) {
           return stringToken;
       }
-	  var foundFramework = ('odkFrameworkDefinitions' in window &&
-		   (window.odkFrameworkDefinitions !== undefined) &&
-   	       (window.odkFrameworkDefinitions !== null) &&
-		   stringToken in window.odkFrameworkDefinitions._tokens );
-	  var foundCommon = ('odkCommonDefinitions' in window &&
-		   (window.odkCommonDefinitions !== undefined) &&
-   	       (window.odkCommonDefinitions !== null) &&
-		   stringToken in window.odkCommonDefinitions._tokens );
-	  var foundTableSpecific = ('odkTableSpecificDefinitions' in window &&
-	       (window.odkTableSpecificDefinitions !== undefined) &&
-   	       (window.odkTableSpecificDefinitions !== null) &&
-		   stringToken in window.odkTableSpecificDefinitions._tokens );
-	
-	  var countFound = (foundFramework ? 1 : 0) + (foundCommon ? 1 : 0) + (foundTableSpecific ? 1 : 0);
-	  if ( countFound > 1 ) {
-		  return 'string_token('+stringToken+')--defined-multiple-places';
-	  }
-	  if ( foundTableSpecific ) {
-		// found it in table-specific translations
-		return window.odkTableSpecificDefinitions._tokens[stringToken];
-	  }
-	  if ( foundCommon ) {
-		// found it in common translations
-		return window.odkCommonDefinitions._tokens[stringToken];
-	  }
-	  if ( foundFramework ) {
-		// found it in framework translations
-		return window.odkFrameworkDefinitions._tokens[stringToken];
-	  }
-	  return undefined;
+      var foundFramework = ('odkFrameworkDefinitions' in window &&
+           (window.odkFrameworkDefinitions !== undefined) &&
+           (window.odkFrameworkDefinitions !== null) &&
+           stringToken in window.odkFrameworkDefinitions._tokens );
+      var foundCommon = ('odkCommonDefinitions' in window &&
+           (window.odkCommonDefinitions !== undefined) &&
+           (window.odkCommonDefinitions !== null) &&
+           stringToken in window.odkCommonDefinitions._tokens );
+      var foundTableSpecific = ('odkTableSpecificDefinitions' in window &&
+           (window.odkTableSpecificDefinitions !== undefined) &&
+           (window.odkTableSpecificDefinitions !== null) &&
+           stringToken in window.odkTableSpecificDefinitions._tokens );
+    
+      var countFound = (foundFramework ? 1 : 0) + (foundCommon ? 1 : 0) + (foundTableSpecific ? 1 : 0);
+      if ( countFound > 1 ) {
+          return 'string_token('+stringToken+')--defined-multiple-places';
+      }
+      if ( foundTableSpecific ) {
+        // found it in table-specific translations
+        return window.odkTableSpecificDefinitions._tokens[stringToken];
+      }
+      if ( foundCommon ) {
+        // found it in common translations
+        return window.odkCommonDefinitions._tokens[stringToken];
+      }
+      if ( foundFramework ) {
+        // found it in framework translations
+        return window.odkFrameworkDefinitions._tokens[stringToken];
+      }
+      return undefined;
    },
    i18nFieldNames: [ 'text', 'image', 'audio', 'video' ],
    
    extractLangOnlyLocale: function(locale) {
-	  // Device locale strings are of the form: language + "_" + country
-	  // Allow for generic language translations and for country-specific langauge 
-	  // translations.
-	  var idxUnderscore = locale.indexOf('_');
-	  if ( idxUnderscore > 0) {
-		  return locale.substring(0,idxUnderscore);
-	  }
-	  return null;
+      // Device locale strings are of the form: language + "_" + country
+      // Allow for generic language translations and for country-specific langauge 
+      // translations.
+      var idxUnderscore = locale.indexOf('_');
+      if ( idxUnderscore > 0) {
+          return locale.substring(0,idxUnderscore);
+      }
+      return null;
    },
    
    /**
     * Return the locale that was configured by the user in the Java-side's Device Settings.
-	*/
+    */
    getPreferredLocale: function() {
-	   var pi = this.getPlatformInfo();
-	   var obj = JSON.parse(pi);
-	   return obj.preferredLocale;
+       var pi = this.getPlatformInfo();
+       var obj = JSON.parse(pi);
+       return obj.preferredLocale;
    },
    
    /**
     * Get details about the preferred locale and the Device's locale setting.
-	* And also whether or not the preferred locale (above) is (just) the Device
-	* locale.
-	* Note that the user may have set the preferred locale to be "en_US" and the
-	* device locale may also happen to be "en_US". In this case, usingDeviceLocale
-	* is false. Only if the user chooses to use the device locale (vs. one of the 
-	* locales defined in the common translations) will this be true.
-	*/
+    * And also whether or not the preferred locale (above) is (just) the Device
+    * locale.
+    * Note that the user may have set the preferred locale to be "en_US" and the
+    * device locale may also happen to be "en_US". In this case, usingDeviceLocale
+    * is false. Only if the user chooses to use the device locale (vs. one of the 
+    * locales defined in the common translations) will this be true.
+    */
    getLocaleDetails: function() {
-	   var pi = this.getPlatformInfo();
-	   var obj = JSON.parse(pi);
-	   var info = {
-			preferredLocale: obj.preferredLocale,
-			// true only if user did not override the device locale
-			usingDeviceLocale: obj.usingDeviceLocale,
-			// info about the device locale:
-			isoCountry: obj.isoCountry,
-			displayCountry: obj.displayCountry,
-			isoLanguage: obj.isoLanguage,
-			displayLanguage: obj.displayLanguage };
-			
-	   // and, finally if the device supports it, report the BCP47 tag:
-	   if ( 'bcp47LanguageTag' in obj ) {
-		  info.bcp47LanguageTag = obj.bcp47LanguageTag;
-	   }
-	   return info;
+       var pi = this.getPlatformInfo();
+       var obj = JSON.parse(pi);
+       var info = {
+            preferredLocale: obj.preferredLocale,
+            // true only if user did not override the device locale
+            usingDeviceLocale: obj.usingDeviceLocale,
+            // info about the device locale:
+            isoCountry: obj.isoCountry,
+            displayCountry: obj.displayCountry,
+            isoLanguage: obj.isoLanguage,
+            displayLanguage: obj.displayLanguage };
+            
+       // and, finally if the device supports it, report the BCP47 tag:
+       if ( 'bcp47LanguageTag' in obj ) {
+          info.bcp47LanguageTag = obj.bcp47LanguageTag;
+       }
+       return info;
    },
    
    /**
     * Return true if there is some type of localization for the given i18nToken and locale
-	* OR if there is a 'default' localization value.
-	*
-	* The localization might be a text, image, audio or video element. i.e., the field name
-	* that can be localized is not specified.
+    * OR if there is a 'default' localization value.
+    *
+    * The localization might be a text, image, audio or video element. i.e., the field name
+    * that can be localized is not specified.
     */
    hasLocalization:function(locale, i18nToken) {
-	  var textOrLangMap = this.lookupToken(i18nToken);
-	  if (textOrLangMap === undefined ) {
-		  return false;
-	  }
+      var textOrLangMap = this.lookupToken(i18nToken);
+      if (textOrLangMap === undefined ) {
+          return false;
+      }
       if(this.isString(textOrLangMap)) {
           return true;
       }
-	  
-	  // Device locale strings are of the form: language + "_" + country
-	  // Allow for generic language translations and for country-specific langauge 
-	  // translations.
-	  var langOnlyLocale = this.extractLangOnlyLocale(locale);
-	  
-	  // the keys in the textOrLangMap are one of: text, image, audio, video
-	  // see if any of these have a localization.
-	  for ( var i = 0 ; i < this.i18nFieldNames.length ; ++i ) {
-		var fieldName = this.i18nFieldNames[i];
-		if ( fieldName in textOrLangMap ) {
-		  var textMap = textOrLangMap[fieldName];
-		  if(this.isString(textMap)) {
-			  return true;
-		  } else if( locale in textMap ) {
-			  return true;
-		  } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
-			  return true;
-		  } else if ( 'default' in textMap ) {
-			  return true;
-		  }
-		}
-	  }
-	  return false;
+      
+      // Device locale strings are of the form: language + "_" + country
+      // Allow for generic language translations and for country-specific langauge 
+      // translations.
+      var langOnlyLocale = this.extractLangOnlyLocale(locale);
+      
+      // the keys in the textOrLangMap are one of: text, image, audio, video
+      // see if any of these have a localization.
+      for ( var i = 0 ; i < this.i18nFieldNames.length ; ++i ) {
+        var fieldName = this.i18nFieldNames[i];
+        if ( fieldName in textOrLangMap ) {
+          var textMap = textOrLangMap[fieldName];
+          if(this.isString(textMap)) {
+              return true;
+          } else if( locale in textMap ) {
+              return true;
+          } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
+              return true;
+          } else if ( 'default' in textMap ) {
+              return true;
+          }
+        }
+      }
+      return false;
    },
    
    hasFieldLocalization:function(locale, i18nToken, fieldName) {
-	  var textOrLangMap = this.lookupToken(i18nToken);
-	  if (textOrLangMap === undefined ) {
-		  return false;
-	  }
+      var textOrLangMap = this.lookupToken(i18nToken);
+      if (textOrLangMap === undefined ) {
+          return false;
+      }
       if(this.isString(textOrLangMap)) {
           return true;
       }
-		  
-	  // Device locale strings are of the form: language + "_" + country
-	  // Allow for generic language translations and for country-specific langauge 
-	  // translations.
-	  var langOnlyLocale = this.extractLangOnlyLocale(locale);
+          
+      // Device locale strings are of the form: language + "_" + country
+      // Allow for generic language translations and for country-specific langauge 
+      // translations.
+      var langOnlyLocale = this.extractLangOnlyLocale(locale);
   
-	  if ( fieldName in textOrLangMap ) {
-		  var textMap = textOrLangMap[fieldName];
-		  if(this.isString(textMap)) {
-			  return true;
-		  } else if( locale in textMap ) {
-			  return true;
-		  } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
-			  return true;
-		  } else if ( 'default' in textMap ) {
-			  return true;
-		  }
-	  }
-	  return false;
+      if ( fieldName in textOrLangMap ) {
+          var textMap = textOrLangMap[fieldName];
+          if(this.isString(textMap)) {
+              return true;
+          } else if( locale in textMap ) {
+              return true;
+          } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
+              return true;
+          } else if ( 'default' in textMap ) {
+              return true;
+          }
+      }
+      return false;
    },
    
    localizeTokenField:function(locale, i18nToken, fieldName) {
-	  var textOrLangMap = this.lookupToken(i18nToken);
-	  if (textOrLangMap === undefined ) {
-		  return undefined;
-	  }
+      var textOrLangMap = this.lookupToken(i18nToken);
+      if (textOrLangMap === undefined ) {
+          return undefined;
+      }
       if(this.isString(textOrLangMap)) {
           return textOrLangMap;
       }
-	  if ( !(fieldName in textOrLangMap) ) {
-		  return undefined;
-	  }
-	  var textMap = textOrLangMap[fieldName];
+      if ( !(fieldName in textOrLangMap) ) {
+          return undefined;
+      }
+      var textMap = textOrLangMap[fieldName];
       if(this.isString(textMap)) {
           return textMap;
       }
 
-	  // Device locale strings are of the form: language + "_" + country
-	  // Allow for generic language translations and for country-specific langauge 
-	  // translations.
-	  var langOnlyLocale = this.extractLangOnlyLocale(locale);
+      // Device locale strings are of the form: language + "_" + country
+      // Allow for generic language translations and for country-specific langauge 
+      // translations.
+      var langOnlyLocale = this.extractLangOnlyLocale(locale);
 
       if( locale in textMap ) {
           return textMap[locale];
-	  } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
-		  return textMap[langOnlyLocale];
+      } else if ( langOnlyLocale !== null && langOnlyLocale in textMap ) {
+          return textMap[langOnlyLocale];
       } else if( 'default' in textMap ) {
           return textMap['default'];
       } else {
-		  return undefined;
+          return undefined;
       }
     },
    
     hasTextLocalization:function(locale, i18nToken) {
-	  return this.hasFieldLocalization(locale, i18nToken, 'text');
+      return this.hasFieldLocalization(locale, i18nToken, 'text');
     },
    
     localizeText:function(locale, i18nToken) {
-	  return this.localizeTokenField(locale, i18nToken, 'text');
+      return this.localizeTokenField(locale, i18nToken, 'text');
     },
    
     hasImageLocalization:function(locale, i18nToken) {
-	  return this.hasFieldLocalization(locale, i18nToken, 'image');
+      return this.hasFieldLocalization(locale, i18nToken, 'image');
     },
    
     hasAudioLocalization:function(locale, i18nToken) {
-	  return this.hasFieldLocalization(locale, i18nToken, 'audio');
+      return this.hasFieldLocalization(locale, i18nToken, 'audio');
     },
    
     hasVideoLocalization:function(locale, i18nToken) {
-	  return this.hasFieldLocalization(locale, i18nToken, 'video');
+      return this.hasFieldLocalization(locale, i18nToken, 'video');
     },
 
     localizeUrl:function(locale, i18nToken, fieldName, formPath) {
-	  var content = this.localizeTokenField(locale, i18nToken, fieldName);
-	  if ( content === undefined ) {
-		  return content;
-	  }
-  	  // if the Url is not prefixed by slash or http prefix, then prefix with form path
-	  if ( content.indexOf('/') === 0 || content.indexOf('http:') === 0 || content.indexOf('https:') === 0 ) {
-		return content;
-	  } else {
-		return formPath + content;
- 	  }
+      var content = this.localizeTokenField(locale, i18nToken, fieldName);
+      if ( content === undefined ) {
+          return content;
+      }
+      // if the Url is not prefixed by slash or http prefix, then prefix with form path
+      if ( content.indexOf('/') === 0 || content.indexOf('http:') === 0 || content.indexOf('https:') === 0 ) {
+        return content;
+      } else {
+        return formPath + content;
+      }
     },
 
     /**
@@ -821,12 +821,12 @@ window.odkCommon = {
 
    /**
     * Generate a globally unique id.
-	*/
+    */
    genUUID:function() {
       /*jshint bitwise: false*/
       // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
       var id = "uuid:" + 
-		'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
           // NOTE: the logical OR forces the number into an integer
           var r = Math.random()*16|0;
           // and the logical OR for 'y' values forces the number to be 8, 9, a or b.
@@ -838,30 +838,30 @@ window.odkCommon = {
    },
 
    constructSurveyUri: function(tableId, formId, rowId, screenPath, elementKeyToValueMap ) {
-	   
+       
        if (!this.isString(tableId)) {
            throw 'constructSurveyUri()--tableId not a string';
        }
-	   var theFormId = null;
-	   var theRowId = null;
-	   var theScreenPath = null;
-	   if ( formId !== undefined && formId !== null ) {
-		   theFormId = formId;
-	   }
-	   if ( rowId !== undefined && rowId !== null ) {
-		   theRowId = rowId;
-	   }
-	   if ( screenPath !== undefined && screenPath !== null ) {
-		   theScreenPath = screenPath;
-	   }
-	   
-	   // stringify the key-value map before passing it to Java side...
-	   if ( elementKeyToValueMap === undefined || elementKeyToValueMap === null ) {
-		  return odkCommonIf.constructSurveyUri(tableId, theFormId, theRowId, theScreenPath, null);
-	   } else {
-		  return odkCommonIf.constructSurveyUri(tableId, theFormId, theRowId, theScreenPath, 
-				JSON.stringify(elementKeyToValueMap));
-	   }
+       var theFormId = null;
+       var theRowId = null;
+       var theScreenPath = null;
+       if ( formId !== undefined && formId !== null ) {
+           theFormId = formId;
+       }
+       if ( rowId !== undefined && rowId !== null ) {
+           theRowId = rowId;
+       }
+       if ( screenPath !== undefined && screenPath !== null ) {
+           theScreenPath = screenPath;
+       }
+       
+       // stringify the key-value map before passing it to Java side...
+       if ( elementKeyToValueMap === undefined || elementKeyToValueMap === null ) {
+          return odkCommonIf.constructSurveyUri(tableId, theFormId, theRowId, theScreenPath, null);
+       } else {
+          return odkCommonIf.constructSurveyUri(tableId, theFormId, theRowId, theScreenPath, 
+                JSON.stringify(elementKeyToValueMap));
+       }
    },
    
    /**
@@ -900,53 +900,53 @@ window.odkCommon = {
     *
     * @return one of:
     *          "IGNORE"                -- there is already a pending action
-    *          "JSONException"		   -- something is wrong with the intentObject
+    *          "JSONException"         -- something is wrong with the intentObject
     *          "OK"                    -- request issued
     *          "Application not found" -- could not find app to handle intent
     *
     * If the request has been issued, and the dispatchStruct is not null then 
-	* the javascript will be notified of the availability of a result via the
+    * the javascript will be notified of the availability of a result via the
     * registerListener callback. That callback should fetch the the results via
     *      odkCommon.viewFirstQueuedAction().
     * And they are removed from the queue via
     *      odkCommon.removeFirstQueuedAction();
     */
    doAction: function(dispatchStruct, action, intentObject) {
-	  // stringify the intent object if present
-	  var intentObjectJSONString = null;
-	  if ( intentObject !== null && intentObject !== undefined ) {
-		  intentObjectJSONString = JSON.stringify(intentObject);
-	  }
-	  // and stringify the dispatchStruct if present
-	  if ( dispatchStruct === null || dispatchStruct === undefined ) {
-		// will not notify of completion
-		return odkCommonIf.doAction(null, action, intentObjectJSONString);
-	  } else {
-		return odkCommonIf.doAction(JSON.stringify(dispatchStruct), action, intentObjectJSONString);
-	  }
+      // stringify the intent object if present
+      var intentObjectJSONString = null;
+      if ( intentObject !== null && intentObject !== undefined ) {
+          intentObjectJSONString = JSON.stringify(intentObject);
+      }
+      // and stringify the dispatchStruct if present
+      if ( dispatchStruct === null || dispatchStruct === undefined ) {
+        // will not notify of completion
+        return odkCommonIf.doAction(null, action, intentObjectJSONString);
+      } else {
+        return odkCommonIf.doAction(JSON.stringify(dispatchStruct), action, intentObjectJSONString);
+      }
    },
 
    /**
     *  Terminate the current webkit by calling:
-	*
-    *	activity.setResult(resultCode, intent);
-	*   finish();
-	*
-	*  Where the intent's extras are set to the content of the keyValueBundle
-	*
-	*  resultCode === 0 -- RESULT_CANCELLED
-	*  resultCode === -1  -- RESULT_OK
-	*  any result code >= 1 is user-defined. Unclear the level of support
-	*
-	*  This will log errors but any errors will cause a RESULT_CANCELLED 
-	*  exit. See the logs for what the error was.
+    *
+    *   activity.setResult(resultCode, intent);
+    *   finish();
+    *
+    *  Where the intent's extras are set to the content of the keyValueBundle
+    *
+    *  resultCode === 0 -- RESULT_CANCELLED
+    *  resultCode === -1  -- RESULT_OK
+    *  any result code >= 1 is user-defined. Unclear the level of support
+    *
+    *  This will log errors but any errors will cause a RESULT_CANCELLED 
+    *  exit. See the logs for what the error was.
     */
    closeWindow: function( resultCode, keyValueBundle ) {
-	   if ( keyValueBundle === null || keyValueBundle === undefined ) {
-		  odkCommonIf.closeWindow( "" + resultCode, null );
-	   } else {
-	      odkCommonIf.closeWindow( "" + resultCode, JSON.stringify(keyValueBundle) );
-	   }
+       if ( keyValueBundle === null || keyValueBundle === undefined ) {
+          odkCommonIf.closeWindow( "" + resultCode, null );
+       } else {
+          odkCommonIf.closeWindow( "" + resultCode, JSON.stringify(keyValueBundle) );
+       }
    },
    
    /**
@@ -970,11 +970,11 @@ window.odkCommon = {
     *   "#urlhash"   // if the Java code wants the Javascript to take some action without a reload
     */
    viewFirstQueuedAction: function() {
-	  var retVal = odkCommonIf.viewFirstQueuedAction();
-	  if ( retVal === null || retVal === undefined ) {
-		  return null;
-	  }
-	  return JSON.parse(retVal);
+      var retVal = odkCommonIf.viewFirstQueuedAction();
+      if ( retVal === null || retVal === undefined ) {
+          return null;
+      }
+      return JSON.parse(retVal);
    },
    /**
     * Remove the first queued action.
@@ -1002,14 +1002,14 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 formsUri: "content://org.opendatakit.provider.forms/",
                 activeUser: 'username:badger',
                 logLevel: this._logLevel,
-				preferredLocale: 'en_US',
-				// true only if user did not override the device locale
-				usingDeviceLocale: true,
-				// info about the device locale:
-				isoCountry: 'US',
-				displayCountry: "United States",
-				isoLanguage: 'en',
-				displayLanguage: "English"
+                preferredLocale: 'en_US',
+                // true only if user did not override the device locale
+                usingDeviceLocale: true,
+                // info about the device locale:
+                isoCountry: 'US',
+                displayCountry: "United States",
+                isoLanguage: 'en',
+                displayLanguage: "English"
             };
             // Because the phone returns a String, we too are going to return a
             // string here.
@@ -1021,10 +1021,10 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             var that = this;
             // strip off backslashes
             var cleanedStr = relativePath.replace(/\\/g, '');
-			// approx. attempt to parse the string as a URI. If it succeeds, return it as-is.
-			if ( cleanedStr.startsWith("http://") || cleanedStr.startsWith("https://") ) {
-				return cleanedStr;
-			}
+            // approx. attempt to parse the string as a URI. If it succeeds, return it as-is.
+            if ( cleanedStr.startsWith("http://") || cleanedStr.startsWith("https://") ) {
+                return cleanedStr;
+            }
             var baseUri = that._computeBaseUri();
             var result = baseUri + cleanedStr;
             return result;
@@ -1165,40 +1165,40 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             }
             return term;
         },
-		constructSurveyUri: function(tableId, formId, rowId, screenPath, elementKeyToValueMap ) {
-			var that = this;
-			var pi = JSON.parse(that.getPlatformInfo());
-			var appName = pi.appName;
-			if ( formId === null || formId === undefined ) {
-				formId = "";
-			}
-			var uri = "content://org.opendatakit.provider.forms/" + appName + "/" + tableId + "/" + formId + "/#";
-			var continueChar = "";
-			if ( rowId !== null && rowId !== undefined ) {
-				uri += "instanceId=" + encodeURIComponent(rowId);
-				continueChar = "&";
-			}
-			if ( screenPath !== null && screenPath !== undefined ) {
-				uri += continueChar + "screenPath=" + encodeURIComponent(screenPath);
-				continueChar = "&";
-			}
-			if ( elementKeyToValueMap !== null && elementKeyToValueMap !== undefined ) {
-				var theMap = JSON.parse(elementKeyToValueMap);
-				for ( var key in theMap ) {
-					if ( theMap.hasOwnProperty(key) ) {
-						var value = theMap[key];
-						uri += continueChar + encodeURIComponent(key) + "=" + encodeURIComponent(JSON.stringify(value));
-						continueChar = "&";
-					}
-				}
-			}
-			return uri;
-		},
+        constructSurveyUri: function(tableId, formId, rowId, screenPath, elementKeyToValueMap ) {
+            var that = this;
+            var pi = JSON.parse(that.getPlatformInfo());
+            var appName = pi.appName;
+            if ( formId === null || formId === undefined ) {
+                formId = "";
+            }
+            var uri = "content://org.opendatakit.provider.forms/" + appName + "/" + tableId + "/" + formId + "/#";
+            var continueChar = "";
+            if ( rowId !== null && rowId !== undefined ) {
+                uri += "instanceId=" + encodeURIComponent(rowId);
+                continueChar = "&";
+            }
+            if ( screenPath !== null && screenPath !== undefined ) {
+                uri += continueChar + "screenPath=" + encodeURIComponent(screenPath);
+                continueChar = "&";
+            }
+            if ( elementKeyToValueMap !== null && elementKeyToValueMap !== undefined ) {
+                var theMap = JSON.parse(elementKeyToValueMap);
+                for ( var key in theMap ) {
+                    if ( theMap.hasOwnProperty(key) ) {
+                        var value = theMap[key];
+                        uri += continueChar + encodeURIComponent(key) + "=" + encodeURIComponent(JSON.stringify(value));
+                        continueChar = "&";
+                    }
+                }
+            }
+            return uri;
+        },
         doAction: function(dispatchStructAsJSONstring, action, jsonObj ) {
             var that = this;
             var lat, lng, alt, acc;
 
-			var dispatchStruct = (dispatchStructAsJSONstring !== null &&
+            var dispatchStruct = (dispatchStructAsJSONstring !== null &&
                                   dispatchStructAsJSONstring !== undefined ) ? JSON.parse(dispatchStructAsJSONstring) : null;
             var value;
             that.log("D","odkCommon: DO: doAction(" + dispatchStructAsJSONstring + ", " + action + ", ...)");
@@ -1380,15 +1380,15 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 return "OK";
             }
         },
-		closeWindow: function( resultCode, jsonResult ) {
-			// TODO: return resultCode and result when there is a parent window
-			// stub just closes window and doesn't return value.
-		    if ( window.parent === window ) { 
+        closeWindow: function( resultCode, jsonResult ) {
+            // TODO: return resultCode and result when there is a parent window
+            // stub just closes window and doesn't return value.
+            if ( window.parent === window ) { 
                 window.close(); 
             } else { 
                 window.parent.closeAndPopPage(); 
             } 
-		},
+        },
         /**
          * Return the first queued action without removing it.
          */
