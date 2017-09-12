@@ -7,7 +7,7 @@
  */
 
 define(['underscore', 'XRegExp', 'databaseUtils'],function(_,XRegExp,databaseUtils) {
-/* globals odkCommon, odkSurveyStateManagement */
+/* globals odkCommon, odkSurvey, odkSurveyStateManagement */
 'use strict';
 verifyLoad('opendatakit',
     ['underscore', 'XRegExp', 'databaseUtils'],
@@ -17,7 +17,7 @@ return {
     savepoint_type_complete: 'COMPLETE',
     savepoint_type_incomplete: 'INCOMPLETE',
     baseDir: '',
-	cachedLocale: undefined,
+    cachedLocale: undefined,
     /**
      * Global object that is the container for
      * - formDef
@@ -38,30 +38,16 @@ return {
             instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
             // metadata: from the odkData interface...
             //  {  tableId: TableDefinitionEntry.getTableId(),
+            //     canCreateRow:  true if user is able to create a row
+            //     limit:
+            //     offset:
             //     schemaETag: TableDefinitionEntry.getSchemaETag(),
             //     lastDataETag: TableDefinitionEntry.getLastDataETag(),
             //     lastSyncTime: TableDefinitionEntry.getLastSyncTime(),
             //
-            // NOTE: elementKeyMap is NOT AVAILABLE in Feb 2016 app-designer. Only available on device.
             //     elementKeyMap: { columnElementKey: index-into-row[]-for-column-value },
-            // NOTE: orderedColumns is NOT AVAILABLE in Feb 2016 app-designer. Only available on device.
-            //     orderedColumns: {
-            //                 fieldElementNameA: {
-            //                    type: elementDataType,
-            //                    elementType: elementType, // optional -- if different than type
-            //                    elementKey: fullyQualifiedName, // underscore-concatenated elementName ancestor_..._this path
-            //                    items: {  // only if type == 'array'
-            //                          recursive JSON schema type defn. (type, elementType, ...)
-            //                       },
-            //                    properties: { // only if type == 'object'
-            //                        nestedFieldElementNameA: {
-            //                          recursive JSON Schema type defn. (type, elementType, ...)
-            //                        },
-            //                        nestedFieldElementNameB...
-            //                      }
-            //                   },
-            //                 fieldElementNameB...
-            //              }
+            //     metaDataRev: KVS metaData version for efficient caching in Javascript layer
+            //     dataTableModel: copy in the one from formDef so that default values and session variables are known
             //     keyValueStoreList: [
             //                     //
             //                     // value is one of bool, integer, number or, for all other types (e.g., array, object), a string.
@@ -69,6 +55,8 @@ return {
             //              { partition: xxx, aspect: xxx, key: xxx, type: xxx, value: xxx },
             //              ...
             //          ]
+            //
+            //      kvMap: [partition][aspect][key]
             //
             //   other tools can add additional fields (these are just the common ones)
             //   }
@@ -96,13 +84,13 @@ return {
 
         // Get data table model info for the element_key specified
         for (dbKey in this.mdl.dataTableModel) {
-			if ( this.mdl.dataTableModel.hasOwnProperty(dbKey) ) {
-				def = this.mdl.dataTableModel[dbKey];
-				if (def.elementKey === elementKey) {
-					elementKeyDef = def;
-					break;
-				}
-			}
+            if ( this.mdl.dataTableModel.hasOwnProperty(dbKey) ) {
+                def = this.mdl.dataTableModel[dbKey];
+                if (def.elementKey === elementKey) {
+                    elementKeyDef = def;
+                    break;
+                }
+            }
         }
 
         if (elementKey === null) {
@@ -191,7 +179,7 @@ return {
     },
 
     genUUID:function() {
-		return odkCommon.genUUID();
+        return odkCommon.genUUID();
     },
     getSameRefIdHashString:function(formPath, instanceId, screenPath) {
         var that = this;
@@ -199,7 +187,7 @@ return {
         if ( formPath === undefined || formPath === null ) {
             // this is a bad error case -- switch to framework form so we get 'Please wait...' screen
             odkCommon.log('E','opendatakit:getSameRefIdHashString null or undefined formPath resetting to ' + formPath);
-            return '#formPath=' + encodeURIComponent(odkSurvey.getFormPath('framework','framework'));		
+            return '#formPath=' + encodeURIComponent(odkSurvey.getFormPath('framework','framework'));       
         }
         var qpl =
             '#formPath=' + encodeURIComponent(formPath) +
@@ -293,8 +281,8 @@ return {
         } else {
             var display = ref.display;
             if ( "title" in display ) {
-				var titleEntry = display.title;
-				return titleEntry;
+                var titleEntry = display.title;
+                return titleEntry;
             } else {
                 return "<no title>";
             }
@@ -364,32 +352,32 @@ return {
      changed in rev 210 to use the setting from the Java side's Device Settings menu.
      */
     getDefaultFormLocaleValue:function() {
-		// fetch this from platformInfo -- all forms share the same default locale
-		// and any user-defined locales must be defined in the framework form (so they
-		// can be processed by the Java side in this settings menu).
-		// 
-		// individual forms can still offer different locales independent of this
-		// global setting, and the user can change into and out of any locale as
-		// they see fit, but those changes don't propogate up to the Java layer.
-		//
-		return odkCommon.getPreferredLocale();
+        // fetch this from platformInfo -- all forms share the same default locale
+        // and any user-defined locales must be defined in the framework form (so they
+        // can be processed by the Java side in this settings menu).
+        // 
+        // individual forms can still offer different locales independent of this
+        // global setting, and the user can change into and out of any locale as
+        // they see fit, but those changes don't propogate up to the Java layer.
+        //
+        return odkCommon.getPreferredLocale();
     },
 
     getFormLocalesValue:function() {
         return this.getFormLocales(this.getCurrentFormDef());
     },
-	
-	/**
-	 * cache the locale here so that we preserve the locale when we leave an instance.
-	 */
-	setCachedLocale:function(locale) {
-		this.cachedLocale = locale;
-	},
-	
-	getCachedLocale:function() {
-		return this.cachedLocale;
-	},
-	
+    
+    /**
+     * cache the locale here so that we preserve the locale when we leave an instance.
+     */
+    setCachedLocale:function(locale) {
+        this.cachedLocale = locale;
+    },
+    
+    getCachedLocale:function() {
+        return this.cachedLocale;
+    },
+    
     /**
      * Lower-level function to access a formDef file and parse it.
      * Should not be called from renderers!
