@@ -211,21 +211,6 @@ var odkDataIf = {
 
             var formDef = JSON.parse(jqXHR.responseText);
 
-            // Note that session variables cannot be intermixed with
-            // database variables -- they must be top-level entries.
-            // Remove any from the dataTableModel -- this will be the
-            // orderedColumns structure returned by the Java layer.
-            //
-            def.orderedColumns = {};
-            for ( var f in formDef.specification.dataTableModel ) {
-				if ( formDef.specification.dataTableModel.hasOwnProperty(f) ) {
-					var entry = formDef.specification.dataTableModel[f];
-					if ( !entry.isSessionVariable ) {
-						def.orderedColumns[f] = entry;
-					}
-				}
-            }
-
             // and we need to fold in the admin columns to construct the data table model...
             def.dataTableModel = formDef.specification.dataTableModel;
 
@@ -484,9 +469,8 @@ var odkDataIf = {
                     content.metadata.elementKeyMap = elementNameMap;
 					// TODO: determine the correct value for this
 					content.metadata.canCreateRow = true;
-					content.metadata.dataTableModel = tableDef.dataTableModel;
-                    content.metadata.orderedColumns = tableDef.orderedColumns;
-                    content.metadata.keyValueStoreList = tableDef.keyValueStoreList;
+					content.metadata.cachedMetadata.dataTableModel = tableDef.dataTableModel;
+                    content.metadata.cachedMetadata.keyValueStoreList = tableDef.keyValueStoreList;
                 });
         });
     },
@@ -524,7 +508,7 @@ var odkDataIf = {
     },
 
     query: function(tableId, whereClause, sqlBindParamsJSON, groupBy, having,
-            orderByElementKey, orderByDirection, limit, offset, includeKVS, _callbackId) {
+            orderByElementKey, orderByDirection, limit, offset, includeKVS, metaDataRev, _callbackId) {
         var that = this;
 
 		var sqlBindParams = (sqlBindParamsJSON === null || sqlBindParamsJSON === undefined) ?
@@ -563,7 +547,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    arbitraryQuery: function(tableId, sqlCommand, sqlBindParamsJSON, limit, offset, _callbackId) {
+    arbitraryQuery: function(tableId, sqlCommand, sqlBindParamsJSON, limit, offset, metaDataRev, _callbackId) {
         var that = this;
 
 		// TODO: row filtering
@@ -585,7 +569,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    getRows: function(tableId, rowId, _callbackId) {
+    getRows: function(tableId, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -621,7 +605,7 @@ var odkDataIf = {
         that._constructResponse(ctxt, tableDef, sqlStatement);
     },
 
-    getMostRecentRow: function(tableId, rowId, _callbackId) {
+    getMostRecentRow: function(tableId, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -638,7 +622,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    updateRow: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    updateRow: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -676,7 +660,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    deleteRow: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    deleteRow: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -707,7 +691,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    addRow: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    addRow: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -745,7 +729,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    addCheckpoint: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    addCheckpoint: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -810,7 +794,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    _saveCheckpointAction: function(tableId, changes, rowId, _callbackId) {
+    _saveCheckpointAction: function(tableId, changes, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -890,7 +874,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    saveCheckpointAsIncomplete: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    saveCheckpointAsIncomplete: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var changes = {};
@@ -907,7 +891,7 @@ var odkDataIf = {
         that._saveCheckpointAction(tableId, changes, rowId, _callbackId);
     },
 
-    saveCheckpointAsComplete: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    saveCheckpointAsComplete: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var changes = {};
@@ -924,7 +908,7 @@ var odkDataIf = {
         that._saveCheckpointAction(tableId, changes, rowId, _callbackId);
     },
 
-    deleteAllCheckpoints: function(tableId, rowId, _callbackId) {
+    deleteAllCheckpoints: function(tableId, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -955,7 +939,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    deleteLastCheckpoint: function(tableId, rowId, _callbackId) {
+    deleteLastCheckpoint: function(tableId, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
