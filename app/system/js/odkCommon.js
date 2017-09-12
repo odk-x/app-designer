@@ -91,6 +91,7 @@ window.odkCommon = {
         // NOTE: users should invoke the listener once to ensure that 
         // any queued actions are processed. This should be done after
         // all page initialization is complete.
+        odkCommonIf.frameworkHasLoaded();
     },
     /**
      * @return true if there is a listener already registered
@@ -987,9 +988,22 @@ window.odkCommon = {
 if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
     window.odkCommonIf = {
         _sessionVariables: {},
+        _frameworkHasLoaded: false,
         _queuedActions: [],
         _logLevel: 'D',
         _XRegExp: null,
+        frameworkHasLoaded: function() {
+            var that = this;
+            that._frameworkHasLoaded = true;
+        },
+        _signalCallback: function() {
+            var that = this;
+            if ( that._frameworkHasLoaded ) {
+                setTimeout(function() {
+                odkCommon.signalQueuedActionAvailable();
+              }, 100);
+            }
+        },
         getPlatformInfo : function() {
             var that = this;
             // 9000 b/c that's what grunt is running on. Perhaps should configure
@@ -1016,7 +1030,6 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
             var result = JSON.stringify(platformInfo);
             return result;
         },
-
         getFileAsUrl: function(relativePath) {
             var that = this;
             // strip off backslashes
@@ -1207,9 +1220,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                   JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/venice.jpg",
                                                        contentType: "image/jpg" } } }));
-                setTimeout(function() {
-                    odkCommon.signalQueuedActionAvailable();
-                }, 100);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'org.opendatakit.survey.activities.MediaCaptureVideoActivity' ) {
@@ -1217,9 +1228,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                   JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/bali.3gp",
                                                        contentType: "video/3gp" } } }));
-                setTimeout(function() {
-                    odkCommon.signalQueuedActionAvailable();
-                }, 100);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'org.opendatakit.survey.activities.MediaCaptureAudioActivity' ) {
@@ -1227,9 +1236,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                   JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/raven.wav",
                                                        contentType: "audio/wav" } } }));
-                setTimeout(function() {
-                    odkCommon.signalQueuedActionAvailable();
-                }, 100);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'org.opendatakit.survey.activities.MediaChooseImageActivity' ) {
@@ -1237,9 +1244,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                   JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/venice.jpg",
                                                        contentType: "image/jpg" } } }));
-                setTimeout(function() {
-                    odkCommon.signalQueuedActionAvailable();
-                }, 100);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'org.opendatakit.survey.activities.MediaChooseVideoActivity' ) {
@@ -1247,9 +1252,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                   JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/bali.3gp",
                                                        contentType: "video/3gp" } } }));
-                setTimeout(function() {
-                    odkCommon.signalQueuedActionAvailable();
-                }, 100);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'org.opendatakit.survey.activities.MediaChooseAudioActivity' ) {
@@ -1257,9 +1260,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                   JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { uriFragment: "system/survey/test/raven.wav",
                                                        contentType: "audio/wav" } } }));
-                setTimeout(function() {
-                    odkCommon.signalQueuedActionAvailable();
-                }, 100);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'org.opendatakit.sensors.PULSEOX' ) {
@@ -1268,9 +1269,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                   JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: { pulse: 100,
                                                        ox: oxValue } } }));
-                setTimeout(function() {
-                    odkCommon.signalQueuedActionAvailable();
-                }, 1000);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'change.uw.android.BREATHCOUNT' ) {
@@ -1278,9 +1277,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 that._queuedActions.push(
                   JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: {  value: breathCount } } }));
-                setTimeout(function() {
-                    odkCommon.signalQueuedActionAvailable();
-                }, 1000);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'com.google.zxing.client.android.SCAN' ) {
@@ -1288,9 +1285,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                 that._queuedActions.push(
                   JSON.stringify({ dispatchStruct: dispatchStruct, action: action,
                     jsonValue: { status: -1, result: {  SCAN_RESULT: barcode } } }));
-                setTimeout(function() {
-                    odkCommon.signalQueuedActionAvailable();
-                }, 1000);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'org.opendatakit.survey.activities.GeoPointMapActivity' ) {
@@ -1304,9 +1299,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                                                        longitude: lng,
                                                        altitude: alt,
                                                        accuracy: acc } } }));
-                setTimeout(function() {
-                    odkCommon.signalQueuedActionAvailable();
-                }, 1000);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'org.opendatakit.survey.activities.GeoPointActivity' ) {
@@ -1320,9 +1313,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                                                        longitude: lng,
                                                        altitude: alt,
                                                        accuracy: acc } } }));
-                setTimeout(function() {
-                    odkCommon.signalQueuedActionAvailable();
-                }, 1000);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'org.opendatakit.survey.activities.MainMenuActivity' ) {
@@ -1337,10 +1328,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                     // inside tab1
                     window.parent.pushPageAndOpen(value.extras.url);
                 }
-                setTimeout(function() {
-                    that.log("D","Opened new browser window for Survey content. Close to continue");
-                    odkCommon.signalQueuedActionAvailable();
-                }, 1000);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'org.opendatakit.survey.activities.SplashScreenActivity' ) {
@@ -1355,10 +1343,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                     // inside tab1
                     window.parent.pushPageAndOpen(value.extras.url);
                 }
-                setTimeout(function() {
-                    that.log("D","Opened new browser window for link to another ODK Survey page. Close to continue");
-                    odkCommon.signalQueuedActionAvailable();
-                }, 1000);
+                that._signalCallback();
                 return "OK";
             }
             if ( action === 'android.content.Intent.ACTION_VIEW' ) {
@@ -1373,10 +1358,7 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
                     // inside tab1
                     window.parent.pushPageAndOpen(value.extras.url);
                 }
-                setTimeout(function() {
-                    that.log("D","Opened new browser window for 3rd party content. Close to continue");
-                    odkCommon.signalQueuedActionAvailable();
-                }, 1000);
+                that._signalCallback();
                 return "OK";
             }
         },
