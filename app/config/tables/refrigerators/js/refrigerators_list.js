@@ -190,7 +190,7 @@ var displayGroup = function(idxStart) {
         var catalogID = typeIdMap[refrigeratorsResultSet.getData(i, 'model_row_id')];
         item.attr('rowId', refrigeratorsResultSet.getRowId(i));
         item.attr('class', 'item_space');
-        item.text('Refrigerator ' + refrigeratorsResultSet.getData(i, 'refrigerator_id')
+        item.text('Refrigerator ' + refrigeratorsResultSet.getData(i, 'tracking_id')
             + ' | ' + catalogID);
 
         /* Creates arrow icon (Nothing to edit here) */

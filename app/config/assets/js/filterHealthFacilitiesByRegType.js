@@ -2,10 +2,41 @@
  * Responsible for rendering the home screen.
  */
 'use strict';
-/* global odkTables */
-var noOptionSelectString = "none";
-var regionQueryString = 'regionLevel2 = ?';
-var typeQueryString = 'facility_type = ?';
+/* global odkTables, util */
+
+var adminRegionAndTypeQueryStr = 'admin_region = ? AND facility_type = ?';
+var leafRegionValue = null;
+
+function showFacilityTypeButton(facilityType, facilityTypeCount) {
+    var button = $('<button>');
+    button.attr('class', 'button');
+    var buttonTxt = util.formatDisplayText(facilityType) + ' (' +
+        facilityTypeCount + ')';
+
+    button.text(buttonTxt);
+
+    button.on('click', function () {
+        odkTables.openTableToMapView(null, 'health_facility', 
+            adminRegionAndTypeQueryStr, [leafRegionValue, facilityType], 
+            'config/tables/health_facility/html/hFacility_list.html');
+    });
+    
+    
+    $('#buttonsDiv').append(button);
+}
+
+function successCB(result) {
+    for (var i = 0;  i < result.getCount(); i++) {
+        var facilityType = result.getData(i, 'facility_type');
+        var facilityTypeCount = result.getData(i, 'count(*)');
+
+        showFacilityTypeButton(facilityType, facilityTypeCount);   
+    }
+}
+
+function failCB(error) {
+    console.log('filterHealthFacilitiesByRegType: util.getFacilityTypesByDistrict failed: ' + error);
+}
 
 function display() {
 
@@ -13,39 +44,15 @@ function display() {
     // Set the background to be a picture.
     body.css('background-image', 'url(img/hallway.jpg)');
 
-    var filterFacilitiesButton = $('#filter-facilities-by-region-type');
-    filterFacilitiesButton.on(
-        'click',
-        function() {
-            var selection = null;
-            var selectionArgs = null;
+    var headerDiv = $('#header');
 
-            // Get the value of the type
-            var facilityType = $("#facility_type").val();
-            if (facilityType !== noOptionSelectString) {
-                selection = typeQueryString;
-                selectionArgs = [];
-                selectionArgs.push(facilityType);
-            }
+    var header = $('<h1>');
+    header.attr('id', 'header1');
+    leafRegionValue = util.getQueryParameter(util.leafRegion);
+    if (leafRegionValue !== null) {
+        header.text(leafRegionValue);
+    }
+    headerDiv.append(header);
 
-            // Get the value of the region
-            var facilityRegion = $("#facility_region").val();
-            if (facilityRegion !== noOptionSelectString) {
-                if (selection === null) {
-                    selection = regionQueryString;
-                } else {
-                    selection += ' AND ' + regionQueryString;
-                }
-
-                if (selectionArgs === null) {
-                    selectionArgs = [];
-                }
-
-                selectionArgs.push(facilityRegion);
-            }
-
-SELECT * FROM refrigerators JOIN health_facility ON refrigerators.facility_row_id = health_facility._id JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id WHERE health_facility.admin_region = ?
-            odkTables.openTableToMapView(null, 'health_facility', selection, selectionArgs, 'config/tables/health_facility/html/hFacility_list.html');
-        }
-    );
+    util.getFacilityTypesByDistrict(leafRegionValue, successCB, failCB);
 }

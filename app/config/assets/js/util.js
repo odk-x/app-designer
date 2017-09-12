@@ -10,7 +10,7 @@ util.facilityType = 'facility_type';
 util.regionLevel2 = 'regionLevel2';
 util.powerSource = 'power_source';
 util.region = 'region';
-util.district = 'district';
+util.leafRegion = 'leafRegion';
 util.adminRegions = [
         {'label': 'Central', 'region':'Central', 
             'subRegions': [{'label':'Central East', 'region':'Central East'},
@@ -65,7 +65,6 @@ util.getMenuOptionsHelper = function(key, menuObj) {
 }
 
 util.getFacilityTypesByDistrict = function(district, successCB, failureCB) {
- //function(tableId, sqlCommand, sqlBindParams, limit, offset, successCallbackFn, failureCallbackFn) {
     odkData.arbitraryQuery('health_facility', 
         'SELECT facility_type, count(*) FROM health_facility where admin_region = ? GROUP BY facility_type',
         [district],

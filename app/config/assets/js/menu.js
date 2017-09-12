@@ -1,13 +1,11 @@
 'use strict';
 /* global odkTables, odkCommon, odkData, util */
 
-var districtParamKey = 'district';
-
 function addMenuButton(key, value) {
     var button = $('<button>');
     button.attr('class', 'button');
     button.text(value);
-    if (key === districtParamKey) {
+    if (key === util.leafRegion) {
         button.on('click', function () {
             var queryParams = util.getKeyToAppendToColdChainURL(key, value);
             odkTables.launchHTML(null,'config/assets/leafRegion.html' + queryParams);
@@ -25,7 +23,7 @@ function addMenuButton(key, value) {
 function successCB(result) {
     for (var i = 0; i < result.getCount(); i++) {
         var district = result.getData(i, 'admin_region');
-        addMenuButton(districtParamKey, district);
+        addMenuButton(util.leafRegion, district);
     }
 }
 

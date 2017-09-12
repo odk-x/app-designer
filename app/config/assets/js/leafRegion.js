@@ -13,9 +13,9 @@ function display() {
     body.css('background-image', 'url(img/hallway.jpg)');
 
     var hdr1 = $('#header1');
-    var dist = util.getQueryParameter(util.district);
-    if (dist !== null) {
-        hdr1.text(dist);
+    var leaf = util.getQueryParameter(util.leafRegion);
+    if (leaf !== null) {
+        hdr1.text(leaf);
     }
 
     var viewFacilitiesButton = $('#view-facilities');
@@ -23,7 +23,17 @@ function display() {
         'click',
         function() {
              odkTables.openTableToMapView(null, 'health_facility', 
-                adminRegionQueryStr, [dist], 'config/tables/health_facility/html/hFacility_list.html');
+                adminRegionQueryStr, [leaf], 'config/tables/health_facility/html/hFacility_list.html');
+        }
+    );
+
+    var filterFacilitiesButton = $('#filter-facilities');
+    filterFacilitiesButton.on(
+        'click',
+        function() {
+            var filterQueryParams = util.getKeyToAppendToColdChainURL(util.leafRegion, leaf);
+            odkTables.launchHTML(null, 
+                'config/assets/filterHealthFacilitiesByRegType.html' + filterQueryParams);
         }
     );
 
@@ -31,11 +41,9 @@ function display() {
     viewRefrigeratorsButton.on(
         'click',
         function() {
-            odkTables.openTableToListView(null,
-                'refrigerators',
-                adminRegionQueryStr,
-                [dist],
-                'config/tables/refrigerator_types/html/refrigerator_types_list.html');
+            var frigQueryParams = util.getKeyToAppendToColdChainURL(util.leafRegion, leaf);
+            odkTables.launchHTML(null, 
+                'config/tables/refrigerators/html/refrigerators_list_by_district.html' + frigQueryParams);
         }
     );
 
