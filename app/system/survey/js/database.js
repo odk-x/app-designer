@@ -43,7 +43,6 @@ return {
             tlo.metadata.lastSyncTime = -1;
             tlo.metadata.dataTableModel = formDef.specification.dataTableModel;
             tlo.metadata.elementKeyMap = {};
-            tlo.metadata.orderedColumns = {};
             tlo.metadata.keyValueStoreList = [];
             var entry;
             var kvsEntry;

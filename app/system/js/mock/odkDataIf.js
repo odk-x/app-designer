@@ -211,21 +211,6 @@ var odkDataIf = {
 
             var formDef = JSON.parse(jqXHR.responseText);
 
-            // Note that session variables cannot be intermixed with
-            // database variables -- they must be top-level entries.
-            // Remove any from the dataTableModel -- this will be the
-            // orderedColumns structure returned by the Java layer.
-            //
-            def.orderedColumns = {};
-            for ( var f in formDef.specification.dataTableModel ) {
-				if ( formDef.specification.dataTableModel.hasOwnProperty(f) ) {
-					var entry = formDef.specification.dataTableModel[f];
-					if ( !entry.isSessionVariable ) {
-						def.orderedColumns[f] = entry;
-					}
-				}
-            }
-
             // and we need to fold in the admin columns to construct the data table model...
             def.dataTableModel = formDef.specification.dataTableModel;
 
@@ -465,7 +450,7 @@ var odkDataIf = {
 					if ( $.isEmptyObject(elementNameMap) ) {
 						// fake it -- assume these are in the order they appear in dataTableModel
 						i = 0;
-						for ( var f in tableDef.dataTableModel ) {
+						for ( f in tableDef.dataTableModel ) {
 							if ( tableDef.dataTableModel.hasOwnProperty(f) ) {
 								var entry = tableDef.dataTableModel[f];
 								if ( !entry.isSessionVariable && !entry.notUnitOfRetention ) {
@@ -484,9 +469,67 @@ var odkDataIf = {
                     content.metadata.elementKeyMap = elementNameMap;
 					// TODO: determine the correct value for this
 					content.metadata.canCreateRow = true;
-					content.metadata.dataTableModel = tableDef.dataTableModel;
-                    content.metadata.orderedColumns = tableDef.orderedColumns;
-                    content.metadata.keyValueStoreList = tableDef.keyValueStoreList;
+					// HACK: always use the cached metadata if it is present
+					var metaDataRev = window.odkData._getTableMetadataRevision(tableDef.tableId);
+					if ( metaDataRev === null || metaDataRev === undefined ) {
+						content.metadata.cachedMetadata = {};
+						// this can be any value...
+						metaDataRev = that.eventCount;
+						content.metadata.cachedMetadata.metaDataRev = metaDataRev;
+						
+						// the tableDef.dataTableModel is fully expanded. Create the minimal
+						// model by removing the nested elements from the list. Those are the 
+						// ones with an elementPath !== elementKey.
+						var dataTableModelAdjusted = {};
+						var ddef; 
+						
+						for ( f in tableDef.dataTableModel ) {
+							if ( tableDef.dataTableModel.hasOwnProperty(f) ) {
+								ddef = tableDef.dataTableModel[f];
+								if ( ddef.elementPath === ddef.elementKey ) {
+									dataTableModelAdjusted[f] = ddef;
+								}
+							}
+						}
+						content.metadata.cachedMetadata.dataTableModel = dataTableModelAdjusted;
+						// synthesize the choiceListMap and the choice-compressed keyValueStoreList
+						// the later is the same as the tableDef.keyValueStoreList except that 
+						// any displayChoicesList is collapsed into a property string and the value is moved
+						// into the choiceListMap, referenced by that property string.
+						var choiceNamesMap = {};
+						var kvsListAdjusted = [];
+						var fmatch;
+						var kvs;
+						var kvsNew;
+						for ( i = 0 ; i < tableDef.keyValueStoreList.length ; ++i ) {
+							kvs = tableDef.keyValueStoreList[i];
+							if ( kvs.partition === "Column" && 
+								 kvs.key === "displayChoicesList" && 
+								 kvs.value !== null ) {
+								fmatch = null;
+								for ( f in choiceNamesMap ) {
+									if ( choiceNamesMap.hasOwnProperty(f) ) {
+										ddef = choiceNamesMap[f];
+										if ( ddef === kvs.value ) {
+											fmatch = f;
+											break;
+										}
+									}
+								}
+								if ( fmatch === null ) {
+								    fmatch = 'a_' + i;
+									choiceNamesMap[fmatch] = kvs.value;
+								}
+								kvsNew = $.extend({}, kvs);
+								kvsNew.value = fmatch;
+								kvsListAdjusted.push(kvsNew);
+							} else {
+								kvsListAdjusted.push(kvs);
+							}
+						}
+						content.metadata.cachedMetadata.keyValueStoreList = kvsListAdjusted;
+						content.metadata.cachedMetadata.choiceListMap = choiceNamesMap;
+					}
                 });
         });
     },
@@ -524,7 +567,7 @@ var odkDataIf = {
     },
 
     query: function(tableId, whereClause, sqlBindParamsJSON, groupBy, having,
-            orderByElementKey, orderByDirection, limit, offset, includeKVS, _callbackId) {
+            orderByElementKey, orderByDirection, limit, offset, includeKVS, metaDataRev, _callbackId) {
         var that = this;
 
 		var sqlBindParams = (sqlBindParamsJSON === null || sqlBindParamsJSON === undefined) ?
@@ -563,7 +606,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    arbitraryQuery: function(tableId, sqlCommand, sqlBindParamsJSON, limit, offset, _callbackId) {
+    arbitraryQuery: function(tableId, sqlCommand, sqlBindParamsJSON, limit, offset, metaDataRev, _callbackId) {
         var that = this;
 
 		// TODO: row filtering
@@ -585,7 +628,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    getRows: function(tableId, rowId, _callbackId) {
+    getRows: function(tableId, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -621,7 +664,7 @@ var odkDataIf = {
         that._constructResponse(ctxt, tableDef, sqlStatement);
     },
 
-    getMostRecentRow: function(tableId, rowId, _callbackId) {
+    getMostRecentRow: function(tableId, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -638,7 +681,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    updateRow: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    updateRow: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -676,7 +719,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    deleteRow: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    deleteRow: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -707,7 +750,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    addRow: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    addRow: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -745,7 +788,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    addCheckpoint: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    addCheckpoint: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -810,7 +853,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    _saveCheckpointAction: function(tableId, changes, rowId, _callbackId) {
+    _saveCheckpointAction: function(tableId, changes, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -890,7 +933,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    saveCheckpointAsIncomplete: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    saveCheckpointAsIncomplete: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var changes = {};
@@ -904,10 +947,10 @@ var odkDataIf = {
         delete changes._savepoint_creator; // odkCommon.getActiveUser()
         delete changes._sync_state;
 
-        that._saveCheckpointAction(tableId, changes, rowId, _callbackId);
+        that._saveCheckpointAction(tableId, changes, rowId, metaDataRev, _callbackId);
     },
 
-    saveCheckpointAsComplete: function(tableId, stringifiedJSON, rowId, _callbackId) {
+    saveCheckpointAsComplete: function(tableId, stringifiedJSON, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var changes = {};
@@ -921,10 +964,10 @@ var odkDataIf = {
         delete changes._savepoint_creator; // odkCommon.getActiveUser()
         delete changes._sync_state;
 
-        that._saveCheckpointAction(tableId, changes, rowId, _callbackId);
+        that._saveCheckpointAction(tableId, changes, rowId, metaDataRev, _callbackId);
     },
 
-    deleteAllCheckpoints: function(tableId, rowId, _callbackId) {
+    deleteAllCheckpoints: function(tableId, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
@@ -955,7 +998,7 @@ var odkDataIf = {
         }), tableId);
     },
 
-    deleteLastCheckpoint: function(tableId, rowId, _callbackId) {
+    deleteLastCheckpoint: function(tableId, rowId, metaDataRev, _callbackId) {
         var that = this;
 
         var ctxt = that.newStartContext(_callbackId);
