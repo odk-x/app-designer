@@ -39,7 +39,7 @@ function processPromises(cntResultSet, resultSet) {
         rowCount = 0;
     }
 
-    if (rowCount == 0) {
+    if (rowCount === 0) {
         offset = 0;
     }
 
@@ -70,35 +70,35 @@ function resumeFn(fIdxStart) {
         limit = parseInt($('#limitDropdown option:selected').text());
 
         // Init display
-        var dist = util.getQueryParameter(util.leafRegion);
-        if (dist === null) {
-            console.log('No valid district passed in - nothing to display');
+        var queryParamArg = util.getQueryParameter(util.leafRegion);
+        if (queryParamArg === null) {
+            console.log('No valid query param passed in - nothing to display');
             return;
         }
 
-        $('#header').text(dist);
+        $('#header').text(queryParamArg);
 
         cntQueryToRun = cntDistrictQuery;
         queryToRun = districtQuery;
-        queryToRunParams = [dist];
+        queryToRunParams = [queryParamArg];
     }
 
-    var cntDistrictQueryPromise = new Promise(function(resolve, reject) {
+    var cntQueryPromise = new Promise(function(resolve, reject) {
         odkData.arbitraryQuery(tableId, 
             cntQueryToRun, queryToRunParams, null, null, resolve, reject);
     });
 
-    var districtQueryPromise = new Promise(function(resolve, reject)  {
+    var queryPromise = new Promise(function(resolve, reject)  {
         odkData.arbitraryQuery(tableId, 
             queryToRun, queryToRunParams, limit, offset, resolve, reject);
         
     });
 
-    Promise.all([cntDistrictQueryPromise, districtQueryPromise]).then(function(resultArray) {
+    Promise.all([cntQueryPromise, queryPromise]).then(function(resultArray) {
         processPromises(resultArray[0], resultArray[1]);
 
     }, function(err) {
-        console.log('district promises failed with error: ' +  err);
+        console.log('promises failed with error: ' +  err);
     });
 
     if (idxStart === 0) {
@@ -222,9 +222,9 @@ function newLimit() {
 }
 
 function getSearchResults () {
-    var dist = util.getQueryParameter(util.leafRegion);
-    if (dist === null) {
-        console.log('No valid district passed in - nothing to display');
+    var queryParamArg = util.getQueryParameter(util.leafRegion);
+    if (queryParamArg === null) {
+        console.log('No valid query param passed in - nothing to display');
         return;
     }
 
@@ -235,7 +235,7 @@ function getSearchResults () {
         searchText = '%' + searchText + '%';
         cntQueryToRun = cntDistrictSearchQuery;
         queryToRun = districtSearchQuery;
-        queryToRunParams = [dist, searchText, searchText, searchText, searchText];
+        queryToRunParams = [queryParamArg, searchText, searchText, searchText, searchText];
         offset = 0;
         resumeFn(5);
     }
@@ -243,9 +243,9 @@ function getSearchResults () {
 }
 
 function clearResults() {
-    var dist = util.getQueryParameter(util.leafRegion);
-    if (dist === null) {
-        console.log('No valid district passed in - nothing to display');
+    var queryParamArg = util.getQueryParameter(util.leafRegion);
+    if (queryParamArg === null) {
+        console.log('No valid param passed in - nothing to display');
         return;
     }
 
@@ -256,7 +256,7 @@ function clearResults() {
 
         cntQueryToRun = cntDistrictQuery;
         queryToRun = districtQuery;
-        queryToRunParams = [dist];
+        queryToRunParams = [queryParamArg];
         offset = 0;
         resumeFn(6);  
     }  
