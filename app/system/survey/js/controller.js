@@ -1271,8 +1271,6 @@ return {
         var terminateCtxt = $.extend({},baseCtxt,{success: function() {
                 baseCtxt.log('I', "controller.registerQueuedActionAvailableListener.terminateCtxt success");
                 if (generation === that.registrationGeneration) {
-                    // only alert that the framework is valid if the generation is current
-                    odkSurveyStateManagement.frameworkHasLoaded(refId, true );
                     var fn = that.createCallbackQueuedActionAvailableListener(generation);
                     odkCommon.registerListener(fn);
                     (fn)();
@@ -1281,8 +1279,6 @@ return {
             }, failure: function(m) {
                 baseCtxt.log('I', "controller.registerQueuedActionAvailableListener.terminateCtxt failure");
                 if (generation === that.registrationGeneration) {
-                    // only alert that the framework is valid if the generation is current
-                    odkSurveyStateManagement.frameworkHasLoaded(refId, false );
                     var fn = that.createCallbackQueuedActionAvailableListener(generation);
                     odkCommon.registerListener(fn);
                     (fn)();
