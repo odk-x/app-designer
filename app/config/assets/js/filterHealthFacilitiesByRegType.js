@@ -46,13 +46,10 @@ function display() {
 
     var headerDiv = $('#header');
 
-    var header = $('<h1>');
-    header.attr('id', 'header1');
     leafRegionValue = util.getQueryParameter(util.leafRegion);
     if (leafRegionValue !== null) {
-        header.text(leafRegionValue);
+        headerDiv.text(leafRegionValue);
     }
-    headerDiv.append(header);
 
     util.getFacilityTypesByDistrict(leafRegionValue, successCB, failCB);
 }

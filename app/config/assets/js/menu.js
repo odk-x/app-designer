@@ -1,7 +1,10 @@
 'use strict';
 /* global odkTables, odkCommon, odkData, util */
 
-function addMenuButton(key, value) {
+var adminKey = 'admin';
+var adminValue = 'Administrator Options';
+
+function addMenuButton(key, value, divToAddButtonTo) {
     var button = $('<button>');
     button.attr('class', 'button');
     button.text(value);
@@ -10,20 +13,24 @@ function addMenuButton(key, value) {
             var queryParams = util.getKeyToAppendToColdChainURL(key, value);
             odkTables.launchHTML(null,'config/assets/leafRegion.html' + queryParams);
         });
-    } else {
+    } else if (key === util.region){
         button.on('click', function () {
             var queryParams = util.getKeyToAppendToColdChainURL(key, value);
             odkTables.launchHTML(null,'config/assets/index.html' + queryParams);
         });
+    } else {
+        button.on('click', function () {
+            odkTables.launchHTML(null,'config/assets/coldchaindemo.html');
+        });
     }
     
-    $('#buttonsDiv').append(button);
+    $(divToAddButtonTo).append(button);
 }
 
 function successCB(result) {
     for (var i = 0; i < result.getCount(); i++) {
         var district = result.getData(i, 'admin_region');
-        addMenuButton(util.leafRegion, district);
+        addMenuButton(util.leafRegion, district, '#buttonsDiv');
     }
 }
 
@@ -40,7 +47,7 @@ function showSubregionButtonsAndTitle(jsonRegion) {
         for (var subRegCtr = 0; subRegCtr < subRegions.length; subRegCtr++) {
             var subRegion = subRegions[subRegCtr];
             var subRegionLabel = subRegion.label;
-            addMenuButton(util.region, subRegionLabel);
+            addMenuButton(util.region, subRegionLabel, '#buttonsDiv');
         }
         header.text(jsonRegion.label);
 
@@ -50,7 +57,7 @@ function showSubregionButtonsAndTitle(jsonRegion) {
         for (var regCtr = 0; regCtr < jsonRegion.length; regCtr++) {
             var reg = jsonRegion[regCtr];
             var regLabel = reg.label;
-            addMenuButton(util.region, regLabel);
+            addMenuButton(util.region, regLabel, '#buttonsDiv');
         }
     // There are no more subregions so now we need to get the districts
     } else {
@@ -58,7 +65,6 @@ function showSubregionButtonsAndTitle(jsonRegion) {
         util.getDistrictsByAdminLevel2(jsonRegion.label, successCB, failCB);
     }
 }
-
 
 function showLogin(descTextToDisplay, buttonTextToDisplay) {
     var par = $('<p>');
@@ -124,6 +130,7 @@ function checkDefaultGroupForMenuOptions() {
         } else if (r.indexOf('ROLE_ADMINISTER_TABLES') === 0) {
             regionJSON = util.getMenuOptions(null);
             showSubregionButtonsAndTitle(regionJSON);
+            addMenuButton(adminKey, adminValue, '#buttonsDiv')
         } else {
             showLogin('User Is Not Authorized. Please Log In', 'Log In');
         }

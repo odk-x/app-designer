@@ -13,14 +13,23 @@
     <body>
         <script type="text/javascript" src="../js/refrigerators_list_by_district.js"></script>
 
+        <div id="header" class="paginatedListHeader"></div>
+
         <div id="searchBox">
             <form id="form" action="javascript:getSearchResults();">
                 <input id="search" type="text" name="query" size="10" placeholder="Enter Refrigerator ID..." />
                 <input id="submit" type="submit" value="Search" />
             </form>
             <div class="btnDiv">
-                <div class="prevBtnDiv"><button class="btn" onclick="prevResults()">Prev</button></div>
-                <div class="nextBtnDiv"><button class="btn" onclick="nextResults()">Next</button></div>
+                <div class="prevBtnDiv"><button id="prevButton" class="btn" onclick="prevResults()">Prev</button></div>
+                <select id="limit" class="dropdownLimit" onchange="newLimit();">
+				    <option value="20">20</option>
+				    <option value="50">50</option>
+				    <option value="100">100</option>
+				    <option value="1000">1000</option>
+			    </select>
+                <span id="navigation-text" class="navTextStyle">Showing <span id="navTextOffset"></span>-<span id="navTextLimit"></span> of <span id="navTextCnt"></span></span>
+                <div class="nextBtnDiv"><button id="nextButton"class="btn" onclick="nextResults()">Next</button></div>
             </div>
         </div>
 

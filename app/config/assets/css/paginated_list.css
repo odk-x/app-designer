@@ -14,6 +14,7 @@ body {
 
 h1 {
   margin: 0;
+  text-align: center;
 }
 
 #wrapper {
@@ -81,7 +82,7 @@ ul {
     border-bottom: 2px solid teal;
     margin: auto;
     background-color: lightcyan;
-    padding-top: 15px;
+    padding-top: 1px;
 }
 
 #form {
@@ -130,11 +131,35 @@ ul {
 }
 
 .prevBtnDiv{
-    width: 49.5%;
+    width: 15%;
     float: left;
 }
 
 .nextBtnDiv{
-    width: 49.5%;
+    width: 15%;
     float: right;
+}
+
+.dropdownLimit {
+    background-color: white;
+    padding: 10px;
+    margin: 5px;
+}
+
+.navTextStyle {
+    font-size: 10pt;
+}
+
+.paginatedListHeader {
+    background-color: lightcyan;
+    text-align:center;
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }

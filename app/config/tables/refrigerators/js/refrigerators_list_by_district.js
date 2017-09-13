@@ -8,8 +8,26 @@ var refrigeratorsResultSet = {};
 var typeData = {};
 var typeIdMap = {};
 var idxStart = -1;
-var limit = 10;
+var limit = 20;
 var offset = 0;
+var rowCount = 0;
+
+var districtQuery = 'SELECT * FROM refrigerators ' + 
+    'JOIN health_facility ON refrigerators.facility_row_id = health_facility._id ' +
+    'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id ' +
+    'WHERE health_facility.admin_region = ?';
+
+var districtSearchQuery = 'SELECT * FROM refrigerators ' + 
+    'JOIN health_facility ON refrigerators.facility_row_id = health_facility._id ' +
+    'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id ' +
+    'WHERE (health_facility.admin_region = ? AND (facility_name LIKE ? OR facility_id LIKE ?))';
+
+var cntDistrictQuery = 'SELECT COUNT(*) AS cnt FROM (' +
+    districtQuery + ')';
+
+var cntDistrictSearchQuery = 'SELECT COUNT(*) AS cnt FROM (' +
+    districtSearchQuery + ')';
+
 
 
 /* Called when page loads to display things (Nothing to edit here) */
@@ -20,17 +38,14 @@ function resumeFn(fIdxStart) {
         return;
     }
 
-    odkData.arbitraryQuery('refrigerators', 
-        'SELECT * FROM refrigerators ' + 
-        'JOIN health_facility ON refrigerators.facility_row_id = health_facility._id ' +
-        'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id ' +
-        'WHERE health_facility.admin_region = ?', [dist], limit, offset, cbSuccess, cbFailure);
+     $('#header').text(dist);
 
-        // Query for count
-        //SELECT * FROM refrigerators 
-        //JOIN health_facility ON refrigerators.facility_row_id = health_facility._id JOIN 
-        //refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id 
-        //WHERE health_facility.admin_region = ?
+    // Use promise here
+    odkData.arbitraryQuery('refrigerators', 
+        cntDistrictQuery, [dist], limit, offset, cbCntSuccess, cbCntFailure);
+
+    odkData.arbitraryQuery('refrigerators', 
+        districtQuery, [dist], limit, offset, cbSuccess, cbFailure);
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
@@ -61,6 +76,12 @@ function resumeFn(fIdxStart) {
 
 function displayGroup(idxStart) {
     console.log('display group called. idxStart: ' + idxStart);
+
+    var offsetDisplay = offset + 1;
+    $('#navTextOffset').text(offsetDisplay);
+   
+    var limitVal = (offset + limit > rowCount) ? rowCount : offset + limit;
+    $('#navTextLimit').text(limitVal);
 
     /* Number of rows displayed per 'chunk' - can modify this value */
     for (var i = 0; i < refrigeratorsResultSet.getCount(); i++) {
@@ -99,9 +120,28 @@ function displayGroup(idxStart) {
 
 }
 
+function cbCntSuccess(result) {
+
+    $('#navTextCnt').text(rowCount);
+
+    refrigeratorsResultSet = result;
+
+    if (refrigeratorsResultSet.getCount() > 0) {
+        rowCount = refrigeratorsResultSet.getData(0, 'cnt');
+        $('#navTextCnt').text(rowCount);
+    } 
+}
+
+function cbCntFailure(error) {
+
+    console.log('cbCntFaillure: failed with error: ' + error);
+
+}
+
 function cbSuccess(result) {
 
     refrigeratorsResultSet = result;
+    updateNavButtons();
 
     if (refrigeratorsResultSet.getCount() === 0) {
         console.log('No Refrigerators');
@@ -126,6 +166,20 @@ function clearRows() {
   $('#list').empty();
 }
 
+function updateNavButtons() {
+  if (offset === 0) {
+    $('#prevButton').prop('disabled',true);  
+  } else {
+    $('#prevButton').prop('disabled',false);
+  }
+
+  if (offset + limit > rowCount) {
+    $('#nextButton').prop('disabled',true);  
+  } else {
+     $('#nextButton').prop('disabled',false);  
+  }
+}
+
 /**
  * Chunk the displays for larger tables
  */
@@ -135,11 +189,19 @@ function prevResults() {
     offset = 0;
   }
 
+  updateNavButtons();
+
   clearRows();
   resumeFn(0);
 }
 
 function nextResults() {
+  updateNavButtons();
+
+  if (offset + limit > rowCount) {  
+    return;
+  }
+
   offset += limit;
 
   clearRows();
