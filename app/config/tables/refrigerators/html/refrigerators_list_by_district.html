@@ -17,12 +17,15 @@
 
         <div id="searchBox">
             <form id="form" action="javascript:getSearchResults();">
-                <input id="search" type="text" name="query" size="10" placeholder="Enter Refrigerator ID..." />
+                <input id="search" type="text" name="query" onblur="clearResults()"/>
                 <input id="submit" type="submit" value="Search" />
             </form>
             <div class="btnDiv">
                 <div class="prevBtnDiv"><button id="prevButton" class="btn" onclick="prevResults()">Prev</button></div>
-                <select id="limit" class="dropdownLimit" onchange="newLimit();">
+                <select id="limitDropdown" class="dropdownLimit" onchange="newLimit();">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="10">10</option>
 				    <option value="20">20</option>
 				    <option value="50">50</option>
 				    <option value="100">100</option>
