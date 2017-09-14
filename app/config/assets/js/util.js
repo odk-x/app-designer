@@ -10,7 +10,7 @@ util.facilityType = 'facility_type';
 util.regionLevel2 = 'regionLevel2';
 util.powerSource = 'power_source';
 util.region = 'region';
-util.leafRegion = 'leafRegion';
+util.leafRegion = 'admin_region';
 util.adminRegions = [
         {'label': 'Central', 'region':'Central', 
             'subRegions': [{'label':'Central East', 'region':'Central East'},

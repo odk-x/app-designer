@@ -9,26 +9,36 @@ var offset = 0;
 var rowCount = 0;
 var tableId = 'refrigerators';
 
-var districtQuery = 'SELECT * FROM refrigerators ' + 
+var listQuery = 'SELECT * FROM refrigerators ' + 
     'JOIN health_facility ON refrigerators.facility_row_id = health_facility._id ' +
-    'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id ' +
-    'WHERE health_facility.admin_region = ?';
+    'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id ';
 
-var cntDistrictQuery = 'SELECT COUNT(*) AS cnt FROM (' +
-    districtQuery + ')';
-
-var districtSearchQuery = 'SELECT * FROM refrigerators ' + 
-    'JOIN health_facility ON refrigerators.facility_row_id = health_facility._id ' +
-    'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id ' +
-    'WHERE (health_facility.admin_region = ? AND (facility_name LIKE ? OR facility_id LIKE ? OR ' + 
-    'tracking_id LIKE ? OR refrigerator_id LIKE ?))';
-
-var cntDistrictSearchQuery = 'SELECT COUNT(*) AS cnt FROM (' +
-    districtSearchQuery + ')';
-
+var searchParams = '(facility_name LIKE ? OR facility_id LIKE ? OR tracking_id LIKE ? OR refrigerator_id LIKE ?)';
 var queryToRun = null;
 var queryToRunParams = null;
 var cntQueryToRun = null;
+
+function makeCntQuery(queryToWrap) {
+    if (queryToWrap !== null && queryToWrap !== undefined &&
+        queryToWrap.length > 0) {
+        return 'SELECT COUNT(*) AS cnt FROM (' + queryToWrap + ')';
+    } else  {
+        return null;
+    }
+}
+
+function makeSearchQuery(searchQueryToWrap) {
+    if (searchQueryToWrap !== null && searchQueryToWrap !== undefined &&
+        searchQueryToWrap.length > 0) {
+        if (searchQueryToWrap.indexOf('WHERE') >= 0) {
+            return searchQueryToWrap + ' AND ' + searchParams;
+        } else {
+            return searchQueryToWrap + ' WHERE ' + searchParams;
+        }
+    } else {
+        return null;
+    }
+}
 
 function processPromises(cntResultSet, resultSet) {
     // Set the text for the number of rows
@@ -71,15 +81,17 @@ function resumeFn(fIdxStart) {
         // Init display
         var queryParamArg = util.getQueryParameter(util.leafRegion);
         if (queryParamArg === null) {
-            console.log('No valid query param passed in - nothing to display');
-            return;
+             $('#header').text(util.formatDisplayText(tableId));
+            console.log('No valid query param passed in');
+            queryToRunParams = [];
+        } else {
+             $('#header').text(queryParamArg);
+            listQuery = listQuery + ' WHERE ' + util.leafRegion + ' = ?';
+            queryToRunParams = [queryParamArg];
         }
-
-        $('#header').text(queryParamArg);
-
-        cntQueryToRun = cntDistrictQuery;
-        queryToRun = districtQuery;
-        queryToRunParams = [queryParamArg];
+                    
+        queryToRun = listQuery;
+        cntQueryToRun = makeCntQuery(queryToRun);
     }
 
     var cntQueryPromise = new Promise(function(resolve, reject) {
@@ -274,40 +286,44 @@ function newLimit() {
 }
 
 function getSearchResults () {
-    var queryParamArg = util.getQueryParameter(util.leafRegion);
-    if (queryParamArg === null) {
-        console.log('No valid query param passed in - nothing to display');
-        return;
-    }
 
     var searchText = $('#search').val();
 
     if (searchText !== null && searchText !== undefined &&
         searchText.length !== 0) {
         searchText = '%' + searchText + '%';
-        cntQueryToRun = cntDistrictSearchQuery;
-        queryToRun = districtSearchQuery;
-        queryToRunParams = [queryParamArg, searchText, searchText, searchText, searchText];
+        queryToRun = makeSearchQuery(listQuery);
+        cntQueryToRun = makeCntQuery(queryToRun);
+
+        var queryParamArg = util.getQueryParameter(util.leafRegion);
+        if (queryParamArg !== null) {
+            queryToRunParams = [queryParamArg, searchText, searchText, searchText, searchText];
+        } else {
+            queryToRunParams = [searchText, searchText, searchText, searchText];
+        }
+
         offset = 0;
         resumeFn('searchSelected');
     }
 }
 
 function clearResults() {
-    var queryParamArg = util.getQueryParameter(util.leafRegion);
-    if (queryParamArg === null) {
-        console.log('No valid param passed in - nothing to display');
-        return;
-    }
 
     var searchText = $('#search').val();
 
     if (searchText === null || searchText === undefined ||
         searchText.length === 0) {
 
-        cntQueryToRun = cntDistrictQuery;
-        queryToRun = districtQuery;
-        queryToRunParams = [queryParamArg];
+        var queryParamArg = util.getQueryParameter(util.leafRegion);
+        if (queryParamArg !== null) {
+            queryToRunParams = [queryParamArg];
+        } else {
+            queryToRunParams = [];
+        }
+
+        queryToRun = listQuery;
+        cntQueryToRun = makeCntQuery(queryToRun);
+
         offset = 0;
         resumeFn('undoSearch');  
     }  
