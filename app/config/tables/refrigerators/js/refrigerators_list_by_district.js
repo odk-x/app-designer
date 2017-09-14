@@ -136,10 +136,63 @@ function displayGroup(resultSet) {
             ' | ' + catalogID);
 
         /* Creates arrow icon (Nothing to edit here) */
-        var chevron = $('<img>');
-        chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/white_arrow.png'));
-        chevron.attr('class', 'chevron');
-        item.append(chevron);
+//         var chevron = $('<img>');
+//         chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/white_arrow.png'));
+//         chevron.attr('class', 'chevron');
+//         item.append(chevron);
+
+        // Add delete button if _effective_access has 'd'
+        var access = resultSet.getData(i, '_effective_access');
+        if (access.indexOf('d') !== -1) {
+            var deleteButton = $('<button>');
+            deleteButton.attr('id', 'delButton');
+            deleteButton.attr('class', 'delBtn btn');
+
+            deleteButton.click(function(e) {
+                var jqueryObj = $(e.target);
+                // get closest thing with class item_space, to get row id
+                var containingDiv = jqueryObj.closest('.item_space');
+                var rowId = containingDiv.attr('rowId');
+                console.log('deleteButton clicked with rowId: ' + rowId);
+                e.stopPropagation();
+
+                if (confirm('Are you sure you want to delete row ' + rowId)) {
+                    odkData.deleteRow(tableId, null, rowId, function(d) {
+						resumeFn(7);
+				    }, function(error) {
+                        console.log('Failed to delete row ' +  rowId + ' with error ' + error);
+						alert('Unable to delete row - ' + rowId);
+					});
+                }
+
+            });
+
+            deleteButton.text('Delete');
+            
+            item.append(deleteButton);
+        }
+
+        // Add edit button if _effective_access has 'w'
+        if (access.indexOf('w') !== -1) {
+            var editButton = $('<button>');
+            editButton.attr('id', 'editButton');
+            editButton.attr('class', 'editBtn btn');
+
+            editButton.click(function(e) {
+                var jqueryObj = $(e.target);
+                // get closest thing with class item_space, to get row id
+                var containingDiv = jqueryObj.closest('.item_space');
+                var rowId = containingDiv.attr('rowId');
+                console.log('editButton clicked with rowId: ' + rowId);
+                e.stopPropagation();
+
+                odkTables.editRowWithSurvey(null, tableId, rowId, tableId, null, null);
+            });
+
+            editButton.text('Edit');
+            
+            item.append(editButton);
+        }
 
         var field1 = $('<li>');
         var facilityName = resultSet.getData(i, 'facility_name');
@@ -239,7 +292,6 @@ function getSearchResults () {
         offset = 0;
         resumeFn(5);
     }
-    
 }
 
 function clearResults() {

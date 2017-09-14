@@ -163,3 +163,16 @@ button[disabled]{
   background-color: #cccccc;
   color: #666666;
 }
+
+.delBtn {
+    float: right;
+    width: 13%;
+    margin: 5px;
+}
+
+.editBtn {
+    float: right;
+    width: 10%;
+    margin: 5px;
+}
+
