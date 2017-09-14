@@ -4,7 +4,6 @@
 /* global $, odkCommon, odkData, odkTables, util */
 'use strict';
 
-var idxStart = -1;
 var limit = 20;
 var offset = 0;
 var rowCount = 0;
@@ -61,10 +60,10 @@ function processPromises(cntResultSet, resultSet) {
 }
 
 function resumeFn(fIdxStart) {
-    idxStart = fIdxStart;
-    console.log('resumeFn called. idxStart: ' + idxStart);
 
-    if (idxStart === 0) {
+    console.log('resumeFn called. fIdxStart: ' + fIdxStart);
+
+    if (fIdxStart === 'init') {
         rowCount = 0;
         offset = 0;
         limit = parseInt($('#limitDropdown option:selected').text());
@@ -101,7 +100,7 @@ function resumeFn(fIdxStart) {
         console.log('promises failed with error: ' +  err);
     });
 
-    if (idxStart === 0) {
+    if (fIdxStart === 'init') {
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
@@ -158,7 +157,7 @@ function displayGroup(resultSet) {
 
                 if (confirm('Are you sure you want to delete row ' + rowId)) {
                     odkData.deleteRow(tableId, null, rowId, function(d) {
-						resumeFn(7);
+						resumeFn('rowDeleted');
 				    }, function(error) {
                         console.log('Failed to delete row ' +  rowId + ' with error ' + error);
 						alert('Unable to delete row - ' + rowId);
@@ -228,7 +227,7 @@ function updateNavText() {
 }
 
 function updateNavButtons() {
-  if (offset === 0) {
+  if (offset <= 0) {
     $('#prevButton').prop('disabled',true);  
   } else {
     $('#prevButton').prop('disabled',false);
@@ -250,7 +249,7 @@ function prevResults() {
     updateNavButtons();
 
     clearRows();
-    resumeFn(1);
+    resumeFn('prevButtonClicked');
 }
 
 function nextResults() {
@@ -263,7 +262,7 @@ function nextResults() {
     offset += limit;
 
     clearRows();
-    resumeFn(1);
+    resumeFn('nextButtonClicked');
 }
 
 function newLimit() {
@@ -271,7 +270,7 @@ function newLimit() {
     limit = parseInt($('#limitDropdown option:selected').text());
 
     clearRows();
-    resumeFn(3);
+    resumeFn('limitChanged');
 }
 
 function getSearchResults () {
@@ -290,7 +289,7 @@ function getSearchResults () {
         queryToRun = districtSearchQuery;
         queryToRunParams = [queryParamArg, searchText, searchText, searchText, searchText];
         offset = 0;
-        resumeFn(5);
+        resumeFn('searchSelected');
     }
 }
 
@@ -310,6 +309,6 @@ function clearResults() {
         queryToRun = districtQuery;
         queryToRunParams = [queryParamArg];
         offset = 0;
-        resumeFn(6);  
+        resumeFn('undoSearch');  
     }  
 }
