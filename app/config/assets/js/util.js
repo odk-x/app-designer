@@ -1,4 +1,4 @@
-/* global */
+/* global odkData*/
 /**
  * Various functions that we might need across screens.
  */
@@ -28,7 +28,7 @@ util.adminRegions = [
 */
 util.getMenuOptions = function(key) {
     return util.getMenuOptionsHelper(key, util.adminRegions);
-}
+};
 
 util.getMenuOptionsHelper = function(key, menuObj) {
     var that = this;
@@ -53,7 +53,7 @@ util.getMenuOptionsHelper = function(key, menuObj) {
 
         if (keyToUse.indexOf(regKey) !== -1) {
             if (menuObj[i].hasOwnProperty('subRegions')) {
-                var subReg = that.getMenuOptionsHelper(key, menuObj[i]['subRegions'])
+                var subReg = that.getMenuOptionsHelper(key, menuObj[i]['subRegions']);
                 if (subReg !== null) {
                     return subReg;
                 }
@@ -62,17 +62,28 @@ util.getMenuOptionsHelper = function(key, menuObj) {
     }
 
     return null;
-}
+};
 
 util.getFacilityTypesByDistrict = function(district, successCB, failureCB) {
+    var queryStr = 'SELECT facility_type, count(*) FROM health_facility';
+    var whereStr = ' WHERE admin_region = ?'; 
+    var groupByStr = ' GROUP BY facility_type';
+    var queryParam = [];
+
+    if (district !== null && district !== undefined && district.length > 0) {
+        queryParam = [district];
+        queryStr = queryStr + whereStr;
+    }
+
+    queryStr = queryStr + groupByStr;
     odkData.arbitraryQuery('health_facility', 
-        'SELECT facility_type, count(*) FROM health_facility where admin_region = ? GROUP BY facility_type',
-        [district],
+        queryStr,
+        queryParam,
         null, 
         null,
         successCB,
         failureCB);
-}
+};
 
 util.getDistrictsByAdminLevel2 = function(adminLevel2, successCB, failureCB) {
     odkData.arbitraryQuery('health_facility', 
@@ -82,7 +93,7 @@ util.getDistrictsByAdminLevel2 = function(adminLevel2, successCB, failureCB) {
         null,
         successCB,
         failureCB);
-}
+};
 
 /**
  * Get the query parameter from the url. Note that this is kind of a hacky/lazy
@@ -115,7 +126,6 @@ util.getQueryParameter = function(key) {
  */
 util.getKeyToAppendToColdChainURL = function(key, value) {
 
-    var that = this;
     var first = true;
     var result;
     var adaptProps = {};
@@ -128,7 +138,7 @@ util.getKeyToAppendToColdChainURL = function(key, value) {
             if (first)
             {
                 result = '?' + prop + '=' + encodeURIComponent(adaptProps[prop]);
-                first = false
+                first = false;
             } else {
                 result += '&' + prop + '=' + encodeURIComponent(adaptProps[prop]);
             }
@@ -161,7 +171,7 @@ util.getKeysToAppendToColdChainURL = function(
             if (first)
             {
                 result = '?' + prop + '=' + encodeURIComponent(adaptProps[prop]);
-                first = false
+                first = false;
             } else {
                 result += '&' + prop + '=' + encodeURIComponent(adaptProps[prop]);
             }
@@ -182,8 +192,8 @@ util.genUUID = function() {
 // Formats variable names for display
 util.formatDisplayText = function(txt) {
     var displayText = txt
-        .replace(/_/g, " ")
+        .replace(/_/g, ' ')
         .replace(/\w\S*/g, function(str){return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();});
 
     return displayText;
-}
+};
