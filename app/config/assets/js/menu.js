@@ -130,7 +130,7 @@ function checkDefaultGroupForMenuOptions() {
         } else if (r.indexOf('ROLE_ADMINISTER_TABLES') === 0) {
             regionJSON = util.getMenuOptions(null);
             showSubregionButtonsAndTitle(regionJSON);
-            addMenuButton(adminKey, adminValue, '#buttonsDiv')
+            addMenuButton(adminKey, adminValue, '#buttonsDiv');
         } else {
             showLogin('User Is Not Authorized. Please Log In', 'Log In');
         }

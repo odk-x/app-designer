@@ -4,19 +4,20 @@
 /* global $, odkCommon, odkData, odkTables, util */
 'use strict';
 
-var limit = 20;
-var offset = 0;
-var rowCount = 0;
 var tableId = 'refrigerators';
+var limitKey = tableId + ':limit';
+var offsetKey = tableId + ':offset';
+var rowCountKey = tableId + ':rowCount';
+var queryKey = tableId + ':query';
+var searchKey = tableId + ':search';
+var queryStmt = 'stmt';
+var queryArgs = 'args';
 
 var listQuery = 'SELECT * FROM refrigerators ' + 
     'JOIN health_facility ON refrigerators.facility_row_id = health_facility._id ' +
-    'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id ';
+    'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id';
 
 var searchParams = '(facility_name LIKE ? OR facility_id LIKE ? OR tracking_id LIKE ? OR refrigerator_id LIKE ?)';
-var queryToRun = null;
-var queryToRunParams = null;
-var cntQueryToRun = null;
 
 function makeCntQuery(queryToWrap) {
     if (queryToWrap !== null && queryToWrap !== undefined &&
@@ -41,6 +42,11 @@ function makeSearchQuery(searchQueryToWrap) {
 }
 
 function processPromises(cntResultSet, resultSet) {
+    // Get session variables
+    var rowCount = parseInt(odkCommon.getSessionVariable(rowCountKey));
+    var offset = parseInt(odkCommon.getSessionVariable(offsetKey));    
+    var limit = parseInt(odkCommon.getSessionVariable(limitKey));
+
     // Set the text for the number of rows
     if (cntResultSet.getCount() > 0) {
         rowCount = cntResultSet.getData(0, 'cnt');
@@ -48,13 +54,18 @@ function processPromises(cntResultSet, resultSet) {
         rowCount = 0;
     }
 
+    odkCommon.setSessionVariable(rowCountKey, rowCount);
+
     if (rowCount === 0) {
         offset = 0;
+        odkCommon.setSessionVariable(offsetKey, offset);
     }
 
+    
+
     // Display the results in the list
-    updateNavButtons();
-    updateNavText();
+    updateNavButtons(rowCount, limit, offset);
+    updateNavText(rowCount, limit, offset);
     clearRows();
 
     if (resultSet.getCount() === 0) {
@@ -73,26 +84,80 @@ function resumeFn(fIdxStart) {
 
     console.log('resumeFn called. fIdxStart: ' + fIdxStart);
 
-    if (fIdxStart === 'init') {
-        rowCount = 0;
-        offset = 0;
-        limit = parseInt($('#limitDropdown option:selected').text());
+    // Check if we came back from a rotation
+    // Use the existing session variable values if 
+    // they are supplied otherwise use defaults
+    var searchText = odkCommon.getSessionVariable(searchKey);
+    if (searchText !== null && searchText !== undefined && searchText.length !== 0) {
+        $('#search').val(searchText);
+    } 
 
+    var rowCount = odkCommon.getSessionVariable(rowCountKey);
+    if (rowCount === null || rowCount === undefined) {
+        rowCount = 0;
+        odkCommon.setSessionVariable(rowCountKey, rowCount);
+    } else {
+        rowCount = parseInt(rowCount); 
+    }
+
+    var offset = odkCommon.getSessionVariable(offsetKey);
+    if (offset === null || offset === undefined) {
+        offset = 0;
+        odkCommon.setSessionVariable(offsetKey, offset);
+    } else {
+        offset = parseInt(offset);
+    }
+    
+    var limit = odkCommon.getSessionVariable(limitKey);
+    if (limit === null || limit === undefined) {
+        limit = parseInt($('#limitDropdown option:selected').text());
+        odkCommon.setSessionVariable(limitKey, limit);
+    } else {
+        $('#limitDropdown').val(limit);
+        limit = parseInt(limit);
+    }
+
+    // Append passed in url parameters to base list query if
+    // there are any
+    var queryParamArg = util.getQueryParameter(util.leafRegion);
+    if (queryParamArg === null) {
+        $('#header').text(util.formatDisplayText(tableId));
+        console.log('No valid query param passed in');
+    } else {
+        $('#header').text(queryParamArg);
+        listQuery = listQuery + ' WHERE ' + util.leafRegion + ' = ?';
+    }    
+
+    var queryToRunParts = odkCommon.getSessionVariable(queryKey);
+    var queryToRun = null;
+    var queryToRunParams = null;
+    if (queryToRunParts !== null && queryToRunParts !== undefined) {
+        queryToRunParts = JSON.parse(queryToRunParts);
+        queryToRun = queryToRunParts[queryStmt];
+        queryToRunParams = queryToRunParts[queryArgs];
+    } else {
+        queryToRunParts = {};
+    }
+
+    if (queryToRun === null || queryToRun ===  undefined ||
+        queryToRunParams === null || queryToRunParams === undefined) {
         // Init display
-        var queryParamArg = util.getQueryParameter(util.leafRegion);
+        queryToRunParams = [];
+    
         if (queryParamArg === null) {
-             $('#header').text(util.formatDisplayText(tableId));
-            console.log('No valid query param passed in');
             queryToRunParams = [];
         } else {
-             $('#header').text(queryParamArg);
-            listQuery = listQuery + ' WHERE ' + util.leafRegion + ' = ?';
             queryToRunParams = [queryParamArg];
-        }
-                    
+        }  
+
         queryToRun = listQuery;
-        cntQueryToRun = makeCntQuery(queryToRun);
-    }
+        queryToRunParts[queryStmt] = queryToRun;
+        queryToRunParts[queryArgs] = queryToRunParams;
+        odkCommon.setSessionVariable(queryKey, JSON.stringify(queryToRunParts));
+        console.log('Setting queryKey with ' + JSON.stringify(queryToRunParts));
+    } 
+
+    var cntQueryToRun = makeCntQuery(queryToRun);
 
     var cntQueryPromise = new Promise(function(resolve, reject) {
         odkData.arbitraryQuery(tableId, 
@@ -128,7 +193,6 @@ function resumeFn(fIdxStart) {
                 // we'll pass null as the relative path to use the default file
                 odkTables.openDetailView(null, tableId, rowId, null);
                 console.log('opened detail view');
-
             }
         });
     }
@@ -224,7 +288,7 @@ function clearRows() {
   $('#list').empty();
 }
 
-function updateNavText() {
+function updateNavText(rowCount, limit, offset) {
     $('#navTextCnt').text(rowCount);
     if (rowCount <= 0) {
         $('#navTextOffset').text(0);
@@ -238,7 +302,7 @@ function updateNavText() {
     }
 }
 
-function updateNavButtons() {
+function updateNavButtons(rowCount, limit, offset) {
   if (offset <= 0) {
     $('#prevButton').prop('disabled',true);  
   } else {
@@ -253,19 +317,29 @@ function updateNavButtons() {
 }
 
 function prevResults() {
+    var rowCount = parseInt(odkCommon.getSessionVariable(rowCountKey));
+    var offset = parseInt(odkCommon.getSessionVariable(offsetKey));    
+    var limit = parseInt(odkCommon.getSessionVariable(limitKey));
+
     offset -= limit;
     if (offset < 0) {
         offset = 0;
     }
 
-    updateNavButtons();
+    updateNavButtons(rowCount, limit, offset);
+
+    odkCommon.setSessionVariable(offsetKey, offset);
 
     clearRows();
     resumeFn('prevButtonClicked');
 }
 
 function nextResults() {
-    updateNavButtons();
+    var rowCount = parseInt(odkCommon.getSessionVariable(rowCountKey));
+    var offset = parseInt(odkCommon.getSessionVariable(offsetKey));    
+    var limit = parseInt(odkCommon.getSessionVariable(limitKey));
+
+    updateNavButtons(rowCount, limit, offset);
 
     if (offset + limit >= rowCount) {  
         return;
@@ -273,13 +347,16 @@ function nextResults() {
 
     offset += limit;
 
+    odkCommon.setSessionVariable(offsetKey, offset);
+
     clearRows();
     resumeFn('nextButtonClicked');
 }
 
 function newLimit() {
 
-    limit = parseInt($('#limitDropdown option:selected').text());
+    var limit = parseInt($('#limitDropdown option:selected').text());
+    odkCommon.setSessionVariable(limitKey, limit);
 
     clearRows();
     resumeFn('limitChanged');
@@ -291,9 +368,11 @@ function getSearchResults () {
 
     if (searchText !== null && searchText !== undefined &&
         searchText.length !== 0) {
+        odkCommon.setSessionVariable(searchKey, searchText);
         searchText = '%' + searchText + '%';
-        queryToRun = makeSearchQuery(listQuery);
-        cntQueryToRun = makeCntQuery(queryToRun);
+
+        var queryToRun = makeSearchQuery(listQuery);
+        var queryToRunParams = [];
 
         var queryParamArg = util.getQueryParameter(util.leafRegion);
         if (queryParamArg !== null) {
@@ -302,7 +381,15 @@ function getSearchResults () {
             queryToRunParams = [searchText, searchText, searchText, searchText];
         }
 
-        offset = 0;
+        var offset = 0;
+        odkCommon.setSessionVariable(offsetKey, offset);
+
+        var queryToRunParts = {};
+        queryToRunParts[queryStmt] = queryToRun;
+        queryToRunParts[queryArgs] = queryToRunParams;
+        odkCommon.setSessionVariable(queryKey, JSON.stringify(queryToRunParts));
+        console.log('Setting queryKey with ' + JSON.stringify(queryToRunParts));
+
         resumeFn('searchSelected');
     }
 }
@@ -313,18 +400,24 @@ function clearResults() {
 
     if (searchText === null || searchText === undefined ||
         searchText.length === 0) {
+        odkCommon.setSessionVariable(searchKey, searchText);
 
+        var queryToRunParams = [];
         var queryParamArg = util.getQueryParameter(util.leafRegion);
         if (queryParamArg !== null) {
             queryToRunParams = [queryParamArg];
-        } else {
-            queryToRunParams = [];
-        }
+        } 
 
-        queryToRun = listQuery;
-        cntQueryToRun = makeCntQuery(queryToRun);
+        var queryToRun = listQuery;
 
-        offset = 0;
+        var queryToRunParts = {};
+        queryToRunParts[queryStmt] = queryToRun;
+        queryToRunParts[queryArgs] = queryToRunParams;
+        odkCommon.setSessionVariable(queryKey, JSON.stringify(queryToRunParts));
+        console.log('Setting queryKey with ' + JSON.stringify(queryToRunParts));
+
+        var offset = 0;
+        odkCommon.setSessionVariable(offsetKey, offset);
         resumeFn('undoSearch');  
     }  
 }
