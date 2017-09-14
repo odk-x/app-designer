@@ -117,16 +117,19 @@ function resumeFn(fIdxStart) {
         limit = parseInt(limit);
     }
 
-    // Append passed in url parameters to base list query if
-    // there are any
     var queryParamArg = util.getQueryParameter(util.leafRegion);
-    if (queryParamArg === null) {
-        $('#header').text(util.formatDisplayText(tableId));
-        console.log('No valid query param passed in');
-    } else {
-        $('#header').text(queryParamArg);
-        listQuery = listQuery + ' WHERE ' + util.leafRegion + ' = ?';
-    }    
+
+    if (fIdxStart === 'init') {
+        // Append passed in url parameters to base list query if
+        // there are any
+        if (queryParamArg === null) {
+            $('#header').text(util.formatDisplayText(tableId));
+            console.log('No valid query param passed in');
+        } else {
+            $('#header').text(queryParamArg);
+            listQuery = listQuery + ' WHERE ' + util.leafRegion + ' = ?';
+        }  
+    }  
 
     var queryToRunParts = odkCommon.getSessionVariable(queryKey);
     var queryToRun = null;
@@ -400,7 +403,7 @@ function clearResults() {
 
     if (searchText === null || searchText === undefined ||
         searchText.length === 0) {
-        odkCommon.setSessionVariable(searchKey, searchText);
+        odkCommon.setSessionVariable(searchKey, '');
 
         var queryToRunParams = [];
         var queryParamArg = util.getQueryParameter(util.leafRegion);
