@@ -157,7 +157,6 @@ function resumeFn(fIdxStart) {
         queryToRunParts[queryStmt] = queryToRun;
         queryToRunParts[queryArgs] = queryToRunParams;
         odkCommon.setSessionVariable(queryKey, JSON.stringify(queryToRunParts));
-        console.log('Setting queryKey with ' + JSON.stringify(queryToRunParts));
     } 
 
     var cntQueryToRun = makeCntQuery(queryToRun);
@@ -391,7 +390,6 @@ function getSearchResults () {
         queryToRunParts[queryStmt] = queryToRun;
         queryToRunParts[queryArgs] = queryToRunParams;
         odkCommon.setSessionVariable(queryKey, JSON.stringify(queryToRunParts));
-        console.log('Setting queryKey with ' + JSON.stringify(queryToRunParts));
 
         resumeFn('searchSelected');
     }
@@ -417,7 +415,6 @@ function clearResults() {
         queryToRunParts[queryStmt] = queryToRun;
         queryToRunParts[queryArgs] = queryToRunParams;
         odkCommon.setSessionVariable(queryKey, JSON.stringify(queryToRunParts));
-        console.log('Setting queryKey with ' + JSON.stringify(queryToRunParts));
 
         var offset = 0;
         odkCommon.setSessionVariable(offsetKey, offset);
