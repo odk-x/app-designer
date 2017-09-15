@@ -376,6 +376,10 @@ function getSearchResults () {
         queryToRunParts[queryArgs] = queryToRunParams;
         odkCommon.setSessionVariable(queryKey, JSON.stringify(queryToRunParts));
 
+        // Starting a new query - offset has to be 0
+        offset = 0;
+        odkCommon.setSessionVariable(offsetKey, offset);
+
         resumeFn('searchSelected');
     }
 }
@@ -400,6 +404,10 @@ function clearResults() {
         queryToRunParts[queryStmt] = queryToRun;
         queryToRunParts[queryArgs] = queryToRunParams;
         odkCommon.setSessionVariable(queryKey, JSON.stringify(queryToRunParts));
+
+        // Starting a new query - offset has to be 0
+        offset = 0;
+        odkCommon.setSessionVariable(offsetKey, offset);
 
         resumeFn('undoSearch');  
     }  
