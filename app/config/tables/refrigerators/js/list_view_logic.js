@@ -6,12 +6,12 @@
 'use strict';
 
 window.listViewLogic = {
-    tableId: 'refrigerators',
-    limitKey: 'refrigerators' + ':limit',
-    offsetKey: 'refrigerators' + ':offset',
-    rowCountKey: 'refrigerators' + ':rowCount',
-    queryKey: 'refrigerators' + ':query',
-    searchKey: 'refrigerators' + ':search',
+    tableId: null,
+    limitKey: null,
+    offsetKey: null,
+    rowCountKey: null,
+    queryKey: null,
+    searchKey: null,
     queryStmt: 'stmt',
     queryArgs: 'args',
 
@@ -22,11 +22,9 @@ window.listViewLogic = {
     queryToRun: null,
     queryToRunParams: null,
 
-    listQuery: 'SELECT * FROM refrigerators ' + 
-    'JOIN health_facility ON refrigerators.facility_row_id = health_facility._id ' +
-    'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id',
+    listQuery: null,
 
-    searchParams: '(facility_name LIKE ? OR facility_id LIKE ? OR tracking_id LIKE ? OR refrigerator_id LIKE ?)',
+    searchParams: null,
 
     listElemId: null,
     searchTxtId: null,
@@ -530,6 +528,10 @@ window.listViewLogic = {
             queryToRunParts[that.queryArgs] = that.queryToRunParams;
             odkCommon.setSessionVariable(that.queryKey, JSON.stringify(queryToRunParts));
 
+            // Starting a new query - offset has to be 0
+            that.offset = 0;
+            odkCommon.setSessionVariable(that.offsetKey, that.offset);
+
             that.resumeFn('searchSelected');
         }
     },
@@ -554,6 +556,10 @@ window.listViewLogic = {
             queryToRunParts[that.queryStmt] = that.queryToRun;
             queryToRunParts[that.queryArgs] = that.queryToRunParams;
             odkCommon.setSessionVariable(that.queryKey, JSON.stringify(queryToRunParts));
+
+            // Starting a new query - offset has to be 0
+            that.offset = 0;
+            odkCommon.setSessionVariable(that.offsetKey, that.offset);
 
             that.resumeFn('undoSearch');  
         }  
