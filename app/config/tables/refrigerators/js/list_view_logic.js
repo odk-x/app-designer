@@ -7,6 +7,7 @@
 
 window.listViewLogic = {
     tableId: null,
+    formId: null,
     limitKey: null,
     offsetKey: null,
     rowCountKey: null,
@@ -35,6 +36,14 @@ window.listViewLogic = {
     navTextLimit: null,
     navTextOffset: null,
     navTextCnt: null,
+    showEditAndDelButtons: false,
+
+    hdrLabel: null,
+    hdrColId: null,
+    firstDetLabel: null,
+    firstDetColId: null,
+    secondDetLabel: null,
+    secondDetColId: null,
     
     setTableId: function(tableName) {
         if (tableName === null || tableName === undefined ||
@@ -46,6 +55,7 @@ window.listViewLogic = {
         var that = this;
 
         that.tableId = tableName;
+        that.formId = that.tableId;
         that.limitKey = that.tableId + ':limit';
         that.offsetKey = that.tableId + ':offset';
         that.rowCountKey = that.tableId + ':rowCount';
@@ -168,6 +178,50 @@ window.listViewLogic = {
         that.navTextLimit = txtLimit;
         that.navTextOffset = txtOffset;
         that.navTextCnt = txtCnt;
+    },
+
+    showEditAndDeleteButtons: function(showButtons, formIdToUse){
+        if (showButtons === null || showButtons === undefined) {
+            return;
+        }
+
+        var that = this;
+        if (showButtons === true) {
+            that.showEditAndDelButtons = showButtons;
+            if (formIdToUse !== null || formIdToUse !== undefined) {
+                that.formId = formIdToUse;
+            }
+        }
+    },
+
+    setColIdsToDisplayInList: function(headerLabel, headerColId, 
+            firstDetailLabel, firstDetailColId, secondDetailLabel, secondDetailColId) {
+        var that = this;
+
+        if (headerLabel !== null && headerLabel !== undefined && headerLabel.length !== 0) {
+            that.hdrLabel = headerLabel;
+        }
+
+        if (headerColId !== null && headerColId !== undefined && headerColId.length !== 0) {
+            that.hdrColId = headerColId;
+        }
+
+        if (firstDetailLabel !== null && firstDetailLabel !== undefined && firstDetailLabel.length !== 0) {
+            that.firstDetLabel = firstDetailLabel;
+        }
+
+        if (firstDetailColId !== null && firstDetailColId !== undefined && firstDetailColId.length !== 0) {
+            that.firstDetColId = firstDetailColId;
+        }
+
+        if (secondDetailLabel !== null && secondDetailLabel !== undefined && secondDetailLabel.length !== 0) {
+            that.secondDetLabel = secondDetailLabel;
+        }
+
+        if (secondDetailColId !== null && secondDetailColId !== undefined && secondDetailColId.length !== 0) {
+            that.secondDetColId = secondDetailColId;
+        }
+        
     },
 
     makeCntQuery: function(queryToWrap) {
@@ -342,6 +396,15 @@ window.listViewLogic = {
         }
     },
 
+    createLabel: function(lbl) {
+        var retLbl = '';
+        if (lbl !== null && lbl !== undefined && lbl.length !== 0) {
+            retLbl = lbl + ': ';
+        }
+
+        return retLbl;
+    },
+
     displayGroup: function(resultSet) {
         var that = this;
         /* Number of rows displayed per 'chunk' - can modify this value */
@@ -349,75 +412,85 @@ window.listViewLogic = {
 
             /* Creates the item space */
             var item = $('<li>');
-            var catalogID = resultSet.getData(i, 'catalog_id');
             item.attr('rowId', resultSet.getRowId(i));
             item.attr('class', 'item_space');
-            item.text('Refrigerator ' + resultSet.getData(i, 'tracking_id') +
-                ' | ' + catalogID);
+            item.text(that.createLabel(that.hdrLabel) + resultSet.getData(i, that.hdrColId));
 
-            /* Creates arrow icon (Nothing to edit here) */
-    //         var chevron = $('<img>');
-    //         chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/white_arrow.png'));
-    //         chevron.attr('class', 'chevron');
-    //         item.append(chevron);
+            if (that.firstDetColId !== null && that.firstDetColId !== undefined && that.firstDetColId.length !== 0) {
+                var field1 = $('<li>');
+                field1.attr('class', 'detail');
+                var fDetail = resultSet.getData(i, that.firstDetColId);
+                field1.text(that.createLabel(that.firstDetLabel) + fDetail);
+                item.append(field1);
+            }
 
             // Add delete button if _effective_access has 'd'
-            var access = resultSet.getData(i, '_effective_access');
-            if (access.indexOf('d') !== -1) {
-                var deleteButton = $('<button>');
-                deleteButton.attr('id', 'delButton');
-                deleteButton.attr('class', 'delBtn btn');
+            if (that.showEditAndDelButtons === true) {
+                var access = resultSet.getData(i, '_effective_access');
+                if (access.indexOf('d') !== -1) {
+                    var deleteButton = $('<button>');
+                    deleteButton.attr('id', 'delButton');
+                    deleteButton.attr('class', 'delBtn btn');
 
-                deleteButton.click(function(e) {
-                    var jqueryObj = $(e.target);
-                    // get closest thing with class item_space, to get row id
-                    var containingDiv = jqueryObj.closest('.item_space');
-                    var rowId = containingDiv.attr('rowId');
-                    console.log('deleteButton clicked with rowId: ' + rowId);
-                    e.stopPropagation();
+                    deleteButton.click(function(e) {
+                        var jqueryObj = $(e.target);
+                        // get closest thing with class item_space, to get row id
+                        var containingDiv = jqueryObj.closest('.item_space');
+                        var rowId = containingDiv.attr('rowId');
+                        console.log('deleteButton clicked with rowId: ' + rowId);
+                        e.stopPropagation();
 
-                    if (confirm('Are you sure you want to delete row ' + rowId)) {
-                        odkData.deleteRow(that.tableId, null, rowId, function(d) {
-                            that.resumeFn('rowDeleted');
-                        }, function(error) {
-                            console.log('Failed to delete row ' +  rowId + ' with error ' + error);
-                            alert('Unable to delete row - ' + rowId);
-                        });
-                    }
-                });
+                        if (confirm('Are you sure you want to delete row ' + rowId)) {
+                            odkData.deleteRow(that.tableId, null, rowId, function(d) {
+                                that.resumeFn('rowDeleted');
+                            }, function(error) {
+                                console.log('Failed to delete row ' +  rowId + ' with error ' + error);
+                                alert('Unable to delete row - ' + rowId);
+                            });
+                        }
+                    });
 
-                deleteButton.text('Delete');
+                    deleteButton.text('Delete');
             
-                item.append(deleteButton);
+                    item.append(deleteButton);
+                }
+
+                // Add edit button if _effective_access has 'w'
+                if (access.indexOf('w') !== -1) {
+                    var editButton = $('<button>');
+                    editButton.attr('id', 'editButton');
+                    editButton.attr('class', 'editBtn btn');
+
+                    editButton.click(function(e) {
+                        var jqueryObj = $(e.target);
+                        // get closest thing with class item_space, to get row id
+                        var containingDiv = jqueryObj.closest('.item_space');
+                        var rowId = containingDiv.attr('rowId');
+                        console.log('editButton clicked with rowId: ' + rowId);
+                        e.stopPropagation();
+
+                        odkTables.editRowWithSurvey(null, that.tableId, rowId, that.formId, null, null);
+                    });
+
+                    editButton.text('Edit');
+            
+                    item.append(editButton);
+                }
+            } else {
+                /* Creates arrow icon (Nothing to edit here) */
+                var chevron = $('<img>');
+                chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/white_arrow.png'));
+                chevron.attr('class', 'chevron');
+                item.append(chevron);
             }
 
-            // Add edit button if _effective_access has 'w'
-            if (access.indexOf('w') !== -1) {
-                var editButton = $('<button>');
-                editButton.attr('id', 'editButton');
-                editButton.attr('class', 'editBtn btn');
-
-                editButton.click(function(e) {
-                    var jqueryObj = $(e.target);
-                    // get closest thing with class item_space, to get row id
-                    var containingDiv = jqueryObj.closest('.item_space');
-                    var rowId = containingDiv.attr('rowId');
-                    console.log('editButton clicked with rowId: ' + rowId);
-                    e.stopPropagation();
-
-                    odkTables.editRowWithSurvey(null, that.tableId, rowId, that.tableId, null, null);
-                });
-
-                editButton.text('Edit');
-            
-                item.append(editButton);
+            if (that.secondDetColId !== null && that.secondDetColId !== undefined && that.secondDetColId.length !== 0) {
+                var field2 = $('<li>');
+                var sDetail = resultSet.getData(i, that.secondDetColId);
+                field2.attr('class', 'detail');
+                field2.text(that.createLabel(that.secondDetLabel) + sDetail);
+                item.append(field2);
             }
-
-            var field1 = $('<li>');
-            var facilityName = resultSet.getData(i, 'facility_name');
-            field1.attr('class', 'detail');
-            field1.text('Healthcare Facility: ' + facilityName);
-            item.append(field1);
 
             $(that.listElemId).append(item);
 

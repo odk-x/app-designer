@@ -22,6 +22,9 @@ function resumeFunc(state) {
         listViewLogic.setLimitElement('#limitDropdown');
         listViewLogic.setPrevAndNextButtons('#prevButton', '#nextButton');
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
+        listViewLogic.showEditAndDeleteButtons(true, 'refrigerators');
+        listViewLogic.setColIdsToDisplayInList('Refrigerator', 'tracking_id', 
+            'Catalog Id', 'catalog_id', 'Healthcare Facility', 'facility_name');
     }
 
     listViewLogic.resumeFn(state);
