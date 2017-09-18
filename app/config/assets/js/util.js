@@ -195,6 +195,7 @@ util.getKeyToAppendToColdChainURL = function(key, value) {
 util.getKeysToAppendToColdChainURL = function(
       facilityType,
       regionLevel2,
+      adminRegion,
       powerSource) {
 
     var that = this;
@@ -203,9 +204,21 @@ util.getKeysToAppendToColdChainURL = function(
     var adaptProps = {};
 
     // Initialize the properties object
-    adaptProps[that.facilityType] = facilityType;
-    adaptProps[that.regionLevel2] = regionLevel2;
-    adaptProps[that.powerSource] = powerSource;
+    if (facilityType !== null && facilityType !== undefined && facilityType.length !== 0) {
+        adaptProps[that.facilityType] = facilityType;
+    }
+
+    if (regionLevel2 !== null && regionLevel2 !== undefined && regionLevel2.length !== 0) {
+        adaptProps[that.regionLevel2] = regionLevel2;
+    }
+
+    if (adminRegion !== null && adminRegion !== undefined && adminRegion.length !== 0) {
+        adaptProps[that.leafRegion] = adminRegion;
+    }
+
+    if (powerSource !== null && powerSource !== undefined && powerSource.length !== 0) {
+        adaptProps[that.powerSource] = powerSource;
+    }
 
     for (var prop in adaptProps) {
         if (adaptProps[prop] !== null && adaptProps[prop] !== undefined) {

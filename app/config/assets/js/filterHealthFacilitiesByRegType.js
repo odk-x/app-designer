@@ -24,9 +24,10 @@ function showFacilityTypeButton(facilityType, facilityTypeCount) {
             queryParams = [facilityType, leafRegionValue];
         } 
 
+        var uriParams = util.getKeysToAppendToColdChainURL(facilityType, null, leafRegionValue, null);
         odkTables.openTableToMapView(null, tableId, 
             queryStr, queryParams, 
-            'config/tables/health_facility/html/hFacility_list.html');
+            'config/tables/health_facility/html/hFacility_list.html' + uriParams );
     });
     
     

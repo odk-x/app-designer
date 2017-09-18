@@ -22,8 +22,9 @@ function display() {
     viewFacilitiesButton.on(
         'click',
         function() {
+            var uriParams = util.getKeysToAppendToColdChainURL(null, null, leaf, null);
              odkTables.openTableToMapView(null, 'health_facility', 
-                adminRegionQueryStr, [leaf], 'config/tables/health_facility/html/hFacility_list.html');
+                adminRegionQueryStr, [leaf], 'config/tables/health_facility/html/hFacility_list.html' + uriParams);
         }
     );
 

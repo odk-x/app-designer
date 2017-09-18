@@ -17,7 +17,7 @@ window.listViewLogic = {
     queryArgs: 'args',
 
     rowCount: 0,  
-    limit: 0,
+    limit: -1,
     offset: 0,
 
     queryToRun: null,
@@ -339,7 +339,7 @@ window.listViewLogic = {
                 that.rowCount = 0;
                 odkCommon.setSessionVariable(that.rowCountKey, that.rowCount);
             } else {
-                that.rowCount = parseInt(that.rowCount); 
+                that.rowCount = parseInt(that.rowCount);
             }
 
             that.offset = odkCommon.getSessionVariable(that.offsetKey);
@@ -352,16 +352,26 @@ window.listViewLogic = {
     
             that.limit = odkCommon.getSessionVariable(that.limitKey);
             if (that.limit === null || that.limit === undefined) {
-                var limitSelected = that.limitId + ' option:selected';
-                that.limit = parseInt($(limitSelected).text());
+                if (that.limitId !== null && that.limitId !== undefined && 
+                    that.limitId.length !== 0) {
+                    var limitSelected = that.limitId + ' option:selected';
+                    that.limit = parseInt($(limitSelected).text());
+                }
+
                 odkCommon.setSessionVariable(that.limitKey, that.limit);
             } else {
-                $(that.limitId).val(that.limit);
+                if (that.limitId !== null && that.limitId !== undefined && 
+                    that.limitId.length !== 0) {
+                    $(that.limitId).val(that.limit);
+                }
+ 
                 that.limit = parseInt(that.limit);
             }
 
             // Set header
-            $(that.headerId).text(util.formatDisplayText(that.tableId));
+            if (that.headerId !== null && that.headerId !== undefined && that.headerId.length !== 0) {
+                $(that.headerId).text(util.formatDisplayText(that.tableId));
+            }
 
             var queryToRunParts = odkCommon.getSessionVariable(that.queryKey);
             that.queryToRun = null;
@@ -541,36 +551,67 @@ window.listViewLogic = {
 
     updateNavText: function() {
         var that = this;
-        $(that.navTextCnt).text(that.rowCount);
-        if (that.rowCount <= 0) {
-            $(that.navTextOffset).text(0);
-            $(that.navTextLimit).text(0);
-        } else {
-            var offsetDisplay = that.offset + 1;
-            $(that.navTextOffset).text(offsetDisplay);
 
-            var limitVal = (that.offset + that.limit >= that.rowCount) ? that.rowCount : that.offset + that.limit;
-            $(that.navTextLimit).text(limitVal);
+        if (that.navTextCnt !== null && that.navTextCnt !== undefined &&
+            that.navTextCnt.length !== 0) {
+            $(that.navTextCnt).text(that.rowCount);
+        }
+
+        if (that.rowCount <= 0) {
+
+            if (that.navTextOffset !== null && that.navTextOffset !== undefined &&
+                that.navTextOffset.length !== 0) {
+                $(that.navTextOffset).text(0);
+            }
+
+            if (that.navTextLimit !== null && that.navTextLimit !== undefined &&
+                that.navTextLimit.length !== 0) {
+                $(that.navTextLimit).text(0);
+            }
+        } else {
+            if (that.navTextOffset !== null && that.navTextOffset !== undefined &&
+                that.navTextOffset.length !== 0) {
+                var offsetDisplay = that.offset + 1;
+                $(that.navTextOffset).text(offsetDisplay);
+            }
+
+            if (that.navTextLimit !== null && that.navTextLimit !== undefined &&
+                that.navTextLimit.length !== 0) {
+                var limitVal = (that.offset + that.limit >= that.rowCount) ? that.rowCount : that.offset + that.limit;
+                $(that.navTextLimit).text(limitVal);
+            }
         }
     },
 
     updateNavButtons: function() {
         var that = this;
-        if (that.offset <= 0) {
-            $(that.prevBtnId).prop('disabled',true);  
-        } else {
-            $(that.prevBtnId).prop('disabled',false);
+        if (that.prevBtnId !== null && that.prevBtnId !== undefined &&
+            that.prevBtnId.length !== 0) {
+            if (that.offset <= 0) {
+                $(that.prevBtnId).prop('disabled',true);  
+            } else {
+                $(that.prevBtnId).prop('disabled',false);
+            }
         }
 
-        if (that.offset + that.limit >= that.rowCount) {
-            $(that.nextBtnId).prop('disabled',true);  
-        } else {
-            $(that.nextBtnId).prop('disabled',false);  
+        if (that.nextBtnId !== null && that.nextBtnId !== undefined &&
+            that.nextBtnId.length !== 0) {
+            if (that.offset + that.limit >= that.rowCount) {
+                $(that.nextBtnId).prop('disabled',true);  
+            } else {
+                $(that.nextBtnId).prop('disabled',false);  
+            }
         }
     },
 
     prevResults: function() {
         var that = this;
+
+        if (that.prevBtnId === null && that.prevBtnId === undefined &&
+            that.prevBtnId.length === 0) {
+            return;
+        }
+
         that.offset -= that.limit;
         if (that.offset < 0) {
             that.offset = 0;
@@ -586,6 +627,12 @@ window.listViewLogic = {
 
     nextResults: function() {
         var that = this;
+
+        if (that.nextBtnId === null && that.nextBtnId === undefined &&
+            that.nextBtnId.length === 0) {
+            return;
+        }
+
         that.updateNavButtons();
 
         if (that.offset + that.limit >= that.rowCount) {  
@@ -612,6 +659,10 @@ window.listViewLogic = {
 
     getSearchResults :function() {
         var that = this;
+        if (that.searchTxtId === null || that.searchTxtId === undefined || 
+            that.searchTxtId.length === 0) {
+            return;
+        }
         var searchText = $(that.searchTxtId).val();
 
         if (searchText !== null && searchText !== undefined &&
@@ -646,6 +697,11 @@ window.listViewLogic = {
 
     clearResults: function() {
         var that = this;
+        if (that.searchTxtId === null || that.searchTxtId === undefined || 
+            that.searchTxtId.length === 0) {
+            return;
+        }
+
         var searchText = $(that.searchTxtId).val();
 
         if (searchText === null || searchText === undefined ||

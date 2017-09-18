@@ -23,7 +23,7 @@ function display() {
             // Get the value of the region
             var facilityRegion = $("#facility_region").val();
 
-            var queryParam = util.getKeysToAppendToColdChainURL(facilityType, facilityRegion, null);
+            var queryParam = util.getKeysToAppendToColdChainURL(facilityType, facilityRegion, null, null);
 
             //odkTables.openTableToMapView('health_facility', selection, selectionArgs, 'config/tables/health_facility/html/hFacility_list.html');
             odkTables.launchHTML(null,'config/assets/graphFacilityInventoryForGridPower.html' + queryParam);

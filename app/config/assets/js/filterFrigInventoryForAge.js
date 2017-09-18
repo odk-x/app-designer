@@ -26,7 +26,7 @@ function display() {
             // Get the value of the region
             var powerSource = $("#power_source").val();
 
-            var queryParam = util.getKeysToAppendToColdChainURL(facilityType, facilityRegion, powerSource);
+            var queryParam = util.getKeysToAppendToColdChainURL(facilityType, facilityRegion, null, powerSource);
 
             //odkTables.openTableToMapView('health_facility', selection, selectionArgs, 'config/tables/health_facility/html/hFacility_list.html');
             odkTables.launchHTML(null,'config/assets/graphFrigInventoryForAge.html' + queryParam);
