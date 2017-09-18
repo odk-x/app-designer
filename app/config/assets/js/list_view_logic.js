@@ -447,6 +447,14 @@ window.listViewLogic = {
             item.attr('class', 'item_space');
             item.text(that.createLabel(that.hdrLabel) + resultSet.getData(i, that.hdrColId));
 
+            if (that.showEditAndDelButtons === false)  {
+                /* Creates arrow icon (Nothing to edit here) */
+                var chevron = $('<img>');
+                chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/white_arrow.png'));
+                chevron.attr('class', 'chevron');
+                item.append(chevron);
+            }
+
             if (that.firstDetColId !== null && that.firstDetColId !== undefined && that.firstDetColId.length !== 0) {
                 var field1 = $('<li>');
                 field1.attr('class', 'detail');
@@ -507,13 +515,7 @@ window.listViewLogic = {
             
                     item.append(editButton);
                 }
-            } else {
-                /* Creates arrow icon (Nothing to edit here) */
-                var chevron = $('<img>');
-                chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/white_arrow.png'));
-                chevron.attr('class', 'chevron');
-                item.append(chevron);
-            }
+            } 
 
             if (that.secondDetColId !== null && that.secondDetColId !== undefined && that.secondDetColId.length !== 0) {
                 var field2 = $('<li>');
