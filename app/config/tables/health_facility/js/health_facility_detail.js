@@ -22,12 +22,9 @@ function onLinkClick() {
 
     if (!$.isEmptyObject(healthFacilityResultSet))
     {
-        odkTables.openTableToListView(
-          null, 
-          'refrigerators',
-          'facility_row_id = ?',
-          [healthFacilityResultSet.get('_id')],
-          'config/tables/refrigerators/html/refrigerators_list.html');
+        var rowIdQueryParams = util.getKeyToAppendToColdChainURL(util.facilityRowId, healthFacilityResultSet.get('_id'));
+        odkTables.launchHTML(null, 
+            'config/tables/refrigerators/html/refrigerators_list.html' + rowIdQueryParams);
     }
 }
 

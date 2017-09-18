@@ -11,6 +11,9 @@ util.regionLevel2 = 'regionLevel2';
 util.powerSource = 'power_source';
 util.region = 'region';
 util.leafRegion = 'admin_region';
+util.rowId = '_id';
+util.modelRowId = 'model_row_id';
+util.facilityRowId = 'facility_row_id';
 util.adminRegions = [
         {'label': 'Central', 'region':'Central', 
             'subRegions': [{'label':'Central East', 'region':'Central East'},
@@ -99,6 +102,38 @@ util.getDistrictsByAdminLevel2 = function(adminLevel2, successCB, failureCB) {
  * Get the query parameter from the url. Note that this is kind of a hacky/lazy
  * implementation that will fail if the key string appears more than once, etc.
  */
+util.getAllQueryParameters = function(key) {
+    var href = document.location.search;
+    var startIndex = href.search(key);
+    if (startIndex < 0) {
+        console.log('requested query parameter not found: ' + key);
+        return null;
+    }
+
+    var uriParams = {};
+
+    href = href.substring(1, href.length);
+
+    var keys = href.split('&');
+
+    for (var i = 0; i < keys.length; i++) {
+        var keyStrIdx = keys[i].search('=');
+        if (keyStrIdx <= 0) {
+            continue;
+        } else {
+            var parsedKey = keys[i].substring(0, keyStrIdx);
+            uriParams[parsedKey] = decodeURIComponent(keys[i].substring(keyStrIdx+1, keys[i].length));
+        
+        }
+    }
+
+    return uriParams;
+};
+
+/**
+ * Get the query parameter from the url. Note that this is kind of a hacky/lazy
+ * implementation that will fail if the key string appears more than once, etc.
+ */
 util.getQueryParameter = function(key) {
     var href = document.location.search;
     var startIndex = href.search(key);
@@ -106,18 +141,24 @@ util.getQueryParameter = function(key) {
         console.log('requested query parameter not found: ' + key);
         return null;
     }
-    // Then we want the substring beginning after "key=".
-    var indexOfValue = startIndex + key.length + 1;  // 1 for '='
-    // And now it's possible that we have more than a single url parameter, so
-    // only take as many characters as we need. We'll stop at the first &,
-    // which is what specifies more keys.
-    var fromValueOnwards = href.substring(indexOfValue);
-    var stopAt = fromValueOnwards.search('&');
-    if (stopAt < 0) {
-        return decodeURIComponent(fromValueOnwards);
-    } else {
-        return decodeURIComponent(fromValueOnwards.substring(0, stopAt));
+
+    href = href.substring(1, href.length);
+
+    var keys = href.split('&');
+
+    for (var i = 0; i < keys.length; i++) {
+        var keyStrIdx = keys[i].search('=');
+        if (keyStrIdx <= 0) {
+            continue;
+        } else {
+            var parsedKey = keys[i].substring(0, keyStrIdx);
+            if (parsedKey === key) {
+                return decodeURIComponent(keys[i].substring(keyStrIdx+1, keys[i].length));
+            }
+        }
     }
+
+    return null;
 };
 
 /**

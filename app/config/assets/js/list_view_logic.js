@@ -280,6 +280,49 @@ window.listViewLogic = {
         }
     },
 
+    appendUriParamsToListQuery: function() {
+        var retUriParams = util.getAllQueryParameters();
+
+        if (retUriParams === null || retUriParams === undefined) {
+            return;
+        }
+
+        var uriKeys = Object.keys(retUriParams);
+        var sqlUriParamStmt = '';
+        
+        for (var i = 0; i < uriKeys.length; i++) {
+            var uKey = uriKeys[i];
+
+            if (i === 0) {
+                sqlUriParamStmt = ' WHERE ';
+            }
+            sqlUriParamStmt += uKey + ' = ?';
+            
+            if (i < uriKeys.length - 1) {
+                sqlUriParamStmt += ' AND ';
+            }
+        } 
+        return sqlUriParamStmt;
+    },
+
+    getUriQueryParams: function() {
+        var uriArgs = [];
+        var retUriParams = util.getAllQueryParameters();
+
+        if (retUriParams === null || retUriParams === undefined) {
+            return;
+        }
+
+        var uriKeys = Object.keys(retUriParams);
+        
+        for (var i = 0; i < uriKeys.length; i++) {
+            var uKey = uriKeys[i];
+            uriArgs.push(retUriParams[uKey]);
+        } 
+
+        return uriArgs;
+    },
+
     resumeFn: function(fIdxStart) {
         var that = this;
         console.log('resumeFn called. fIdxStart: ' + fIdxStart);
@@ -317,15 +360,8 @@ window.listViewLogic = {
                 that.limit = parseInt(that.limit);
             }
 
-            var queryParamArg = util.getQueryParameter(util.leafRegion);
-
-            if (queryParamArg === null) {
-                $(that.headerId).text(util.formatDisplayText(that.tableId));
-                console.log('No valid query param passed in');
-            } else {
-                $(that.headerId).text(queryParamArg);
-                that.listQuery = that.listQuery + ' WHERE ' + util.leafRegion + ' = ?';
-            }  
+            // Set header
+            $(that.headerId).text(util.formatDisplayText(that.tableId));
 
             var queryToRunParts = odkCommon.getSessionVariable(that.queryKey);
             that.queryToRun = null;
@@ -341,15 +377,10 @@ window.listViewLogic = {
             if (that.queryToRun === null || that.queryToRun ===  undefined ||
                 that.queryToRunParams === null || that.queryToRunParams === undefined) {
                 // Init display
-                that.queryToRunParams = [];
-    
-                if (queryParamArg === null) {
-                    that.queryToRunParams = [];
-                } else {
-                    that.queryToRunParams = [queryParamArg];
-                }  
+                var addSql = that.appendUriParamsToListQuery();
+                that.queryToRunParams = that.getUriQueryParams();
 
-                that.queryToRun = that.listQuery;
+                that.queryToRun = that.listQuery + addSql;
                 queryToRunParts[that.queryStmt] = that.queryToRun;
                 queryToRunParts[that.queryArgs] = that.queryToRunParams;
                 odkCommon.setSessionVariable(that.queryKey, JSON.stringify(queryToRunParts));
@@ -586,15 +617,17 @@ window.listViewLogic = {
             odkCommon.setSessionVariable(that.searchKey, searchText);
             searchText = '%' + searchText + '%';
 
-            that.queryToRun = that.makeSearchQuery(that.listQuery);
-            that.queryToRunParams = [];
+            var addSql = that.appendUriParamsToListQuery();
+            var queryWithParams = that.listQuery + addSql;
+            that.queryToRun = that.makeSearchQuery(queryWithParams);
+            that.queryToRunParams = that.getUriQueryParams();
 
-            var queryParamArg = util.getQueryParameter(util.leafRegion);
-            if (queryParamArg !== null) {
-                that.queryToRunParams = [queryParamArg, searchText, searchText, searchText, searchText];
-            } else {
-                that.queryToRunParams = [searchText, searchText, searchText, searchText];
-            }
+            // Count the number of ?'s in queryToRun and 
+            // append that to queryToRunParams
+            var searchParamsToAdd = that.searchParams.split('?').length - 1;
+            for (var i = 0; i < searchParamsToAdd; i++) {
+                that.queryToRunParams.push(searchText);
+            } 
 
             var queryToRunParts = {};
             queryToRunParts[that.queryStmt] = that.queryToRun;
@@ -617,13 +650,10 @@ window.listViewLogic = {
             searchText.length === 0) {
             odkCommon.setSessionVariable(that.searchKey, '');
 
-            that.queryToRunParams = [];
-            var queryParamArg = util.getQueryParameter(util.leafRegion);
-            if (queryParamArg !== null) {
-                that.queryToRunParams = [queryParamArg];
-            } 
+            that.queryToRunParams = that.getUriQueryParams();
 
-            that.queryToRun = that.listQuery;
+            var addSql = that.appendUriParamsToListQuery();
+            that.queryToRun = that.listQuery + addSql;
 
             var queryToRunParts = {};
             queryToRunParts[that.queryStmt] = that.queryToRun;

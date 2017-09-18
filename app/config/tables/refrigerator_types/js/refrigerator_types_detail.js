@@ -90,11 +90,9 @@ function onLinkClick() {
 
     if (!$.isEmptyObject(refrigeratorTypeResultSet))
     {
-        odkTables.openTableToListView(
-          null, 
-          'refrigerators',
-          'model_row_id = ?',
-          [refrigeratorTypeResultSet.get('_id')],
-          'config/tables/refrigerators/html/refrigerators_list.html');
+
+        var modelRowIdQueryParams = util.getKeyToAppendToColdChainURL(util.modelRowId, refrigeratorTypeResultSet.get('_id'));
+        odkTables.launchHTML(null, 
+            'config/tables/refrigerators/html/refrigerators_list.html' + modelRowIdQueryParams);
     }
 }

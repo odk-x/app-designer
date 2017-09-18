@@ -43,7 +43,7 @@ function display() {
         function() {
             var frigQueryParams = util.getKeyToAppendToColdChainURL(util.leafRegion, leaf);
             odkTables.launchHTML(null, 
-                'config/tables/refrigerators/html/refrigerators_list_by_district.html' + frigQueryParams);
+                'config/tables/refrigerators/html/refrigerators_list.html' + frigQueryParams);
         }
     );
 
