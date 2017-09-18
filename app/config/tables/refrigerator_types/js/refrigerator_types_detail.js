@@ -32,7 +32,6 @@ function cbFailure(error) {
 
 }
 
-
 function refrigeratorsCBSuccess(invData) {
 
     $('#model_name').text(refrigeratorTypeResultSet.get('model_id'));
@@ -90,7 +89,6 @@ function onLinkClick() {
 
     if (!$.isEmptyObject(refrigeratorTypeResultSet))
     {
-
         var modelRowIdQueryParams = util.getKeyToAppendToColdChainURL(util.modelRowId, refrigeratorTypeResultSet.get('_id'));
         odkTables.launchHTML(null, 
             'config/tables/refrigerators/html/refrigerators_list.html' + modelRowIdQueryParams);
