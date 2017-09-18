@@ -230,6 +230,26 @@
       },
       {
         "type": "select_one",
+        "values_list": "service_priority_list",
+        "name": "maintenance_priority",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Service Requested With Priority",
+              "es": "Servicio solicitado con prioridad"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Choose priority for maintenance if applicable:",
+              "es": "Seleccione la prioridad de mantenimiento si corresponde:"
+            }
+          }
+        },
+        "_row_num": 21
+      },
+      {
+        "type": "select_one",
         "values_list": "yes_no",
         "name": "voltage_regulator",
         "display": {
@@ -246,11 +266,11 @@
             }
           }
         },
-        "_row_num": 21
+        "_row_num": 22
       },
       {
         "clause": "end screen",
-        "_row_num": 22
+        "_row_num": 23
       }
     ],
     "choices": [
@@ -877,6 +897,58 @@
           }
         },
         "_row_num": 57
+      },
+      {
+        "choice_list_name": "service_priority_list",
+        "data_value": "low",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Low",
+              "es": "Bajo"
+            }
+          }
+        },
+        "_row_num": 59
+      },
+      {
+        "choice_list_name": "service_priority_list",
+        "data_value": "medium",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Medium",
+              "es": "Medio"
+            }
+          }
+        },
+        "_row_num": 60
+      },
+      {
+        "choice_list_name": "service_priority_list",
+        "data_value": "high",
+        "display": {
+          "title": {
+            "text": {
+              "default": "High",
+              "es": "Alto"
+            }
+          }
+        },
+        "_row_num": 61
+      },
+      {
+        "choice_list_name": "service_priority_list",
+        "data_value": "not_applicable",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Not Applicable",
+              "es": "No Aplica"
+            }
+          }
+        },
+        "_row_num": 62
       }
     ],
     "queries": [
@@ -1818,6 +1890,60 @@
           },
           "_row_num": 57
         }
+      ],
+      "service_priority_list": [
+        {
+          "choice_list_name": "service_priority_list",
+          "data_value": "low",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Low",
+                "es": "Bajo"
+              }
+            }
+          },
+          "_row_num": 59
+        },
+        {
+          "choice_list_name": "service_priority_list",
+          "data_value": "medium",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Medium",
+                "es": "Medio"
+              }
+            }
+          },
+          "_row_num": 60
+        },
+        {
+          "choice_list_name": "service_priority_list",
+          "data_value": "high",
+          "display": {
+            "title": {
+              "text": {
+                "default": "High",
+                "es": "Alto"
+              }
+            }
+          },
+          "_row_num": 61
+        },
+        {
+          "choice_list_name": "service_priority_list",
+          "data_value": "not_applicable",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Not Applicable",
+                "es": "No Aplica"
+              }
+            }
+          },
+          "_row_num": 62
+        }
       ]
     },
     "table_specific_definitions": {
@@ -2050,10 +2176,27 @@
         "valuesList": "reasons",
         "elementKey": "reason_not_working"
       },
-      "voltage_regulator": {
+      "maintenance_priority": {
         "_defn": [
           {
             "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Service Requested With Priority",
+            "es": "Servicio solicitado con prioridad"
+          }
+        },
+        "valuesList": "service_priority_list",
+        "elementKey": "maintenance_priority"
+      },
+      "voltage_regulator": {
+        "_defn": [
+          {
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -2308,6 +2451,31 @@
           },
           {
             "type": "select_one",
+            "values_list": "service_priority_list",
+            "name": "maintenance_priority",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Service Requested With Priority",
+                  "es": "Servicio solicitado con prioridad"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Choose priority for maintenance if applicable:",
+                  "es": "Seleccione la prioridad de mantenimiento si corresponde:"
+                }
+              }
+            },
+            "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 9
+          },
+          {
+            "type": "select_one",
             "values_list": "yes_no",
             "name": "voltage_regulator",
             "display": {
@@ -2324,20 +2492,20 @@
                 }
               }
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen16",
-            "promptIdx": 9
+            "promptIdx": 10
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 23,
-            "_branch_label_enclosing_screen": "survey/_screen23",
-            "promptIdx": 10
+            "_row_num": 24,
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 11
           }
         ],
         "validation_tag_map": {
@@ -2384,23 +2552,23 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 22,
-              "__rowNum__": 21,
+              "_row_num": 23,
+              "__rowNum__": 22,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 23,
+            "_row_num": 24,
             "operationIdx": 3
           },
           {
-            "_row_num": 23,
+            "_row_num": 24,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
@@ -2409,7 +2577,7 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 23,
+            "_row_num": 24,
             "operationIdx": 5
           }
         ],
@@ -2418,7 +2586,7 @@
           "_screen11": 1,
           "_screen16": 2,
           "_contents": 4,
-          "_screen23": 4
+          "_screen24": 4
         }
       },
       "initial": {
@@ -2808,10 +2976,30 @@
         "elementSet": "data",
         "elementPath": "reason_not_working"
       },
-      "voltage_regulator": {
+      "maintenance_priority": {
         "_defn": [
           {
             "_row_num": 21,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Service Requested With Priority",
+            "es": "Servicio solicitado con prioridad"
+          }
+        },
+        "valuesList": "service_priority_list",
+        "elementKey": "maintenance_priority",
+        "elementName": "maintenance_priority",
+        "elementSet": "data",
+        "elementPath": "maintenance_priority"
+      },
+      "voltage_regulator": {
+        "_defn": [
+          {
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -2948,6 +3136,20 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Health Facility\",\"es\":\"Facilidad de Salúd\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "maintenance_priority",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"low\",\"display\":{\"title\":{\"text\":{\"default\":\"Low\",\"es\":\"Bajo\"}}},\"_row_num\":59},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"medium\",\"display\":{\"title\":{\"text\":{\"default\":\"Medium\",\"es\":\"Medio\"}}},\"_row_num\":60},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"high\",\"display\":{\"title\":{\"text\":{\"default\":\"High\",\"es\":\"Alto\"}}},\"_row_num\":61},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Aplica\"}}},\"_row_num\":62}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "maintenance_priority",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Service Requested With Priority\",\"es\":\"Servicio solicitado con prioridad\"}}"
       },
       {
         "_partition": "Column",

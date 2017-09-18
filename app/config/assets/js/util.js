@@ -13,6 +13,7 @@ util.region = 'region';
 util.leafRegion = 'admin_region';
 util.rowId = '_id';
 util.modelRowId = 'model_row_id';
+util.refrigeratorId = 'refrigerator_id';
 util.facilityRowId = 'facility_row_id';
 util.adminRegions = [
         {'label': 'Central', 'region':'Central', 
@@ -245,9 +246,32 @@ util.genUUID = function() {
 
 // Formats variable names for display
 util.formatDisplayText = function(txt) {
+    if (txt === null || txt === undefined || txt.length === 0) {
+        return null;
+    }
+
+    // In case we have a number
+    txt = '' + txt;
     var displayText = txt
         .replace(/_/g, ' ')
         .replace(/\w\S*/g, function(str){return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();});
 
     return displayText;
 };
+
+util.showIdForDetail = function(idOfElement, colId, resultSet) {
+    if (idOfElement === null || idOfElement === undefined ||
+        idOfElement.length === 0) {
+        return;
+    }
+
+    if (colId === null || colId === undefined ||
+        colId.length === 0) {
+        return;
+    }
+
+    if (util.formatDisplayText(resultSet.get(colId))) {
+        $(idOfElement).text(util.formatDisplayText(resultSet.get(colId)));
+    }
+};
+

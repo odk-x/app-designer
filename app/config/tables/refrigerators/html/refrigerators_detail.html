@@ -20,7 +20,7 @@
         <br>
 
         <div class="detail col-12">
-            <h3>Basic Refrigerator Information</span></h3>
+            <h3>Maintenance Log Information</span></h3>
         </div>
 
         <div class="row">
@@ -29,12 +29,14 @@
                 <p>Year Installed: <span id="install_year"></span></p>
                 <p>Status: <span id="working_status"></span></p>
                 <p>Reason Not Working: <span id="reason_not_working"></span></p>
+                <p>Service Priority: <span id="maintenance_priority"></span></p>
             </div>
 
             <div class="col-6">
                 <p>Model ID: <span id="model_id"></span></p>
                 <p>Refrigerator ID: <span id="refrigerator_id"></span>
                 <p>Voltage Regulator? <span id="voltage_regulator"></span></p>
+                <p>Date Serviced: <span id="date_serviced"></span></p>
             </div>
         </div>
 
@@ -46,12 +48,20 @@
             <h3 href="#" onclick="onLinkClickFacility()">View Facility Information</h3>
         </div>
 
+        <div class="button">
+            <h3 href="#" onclick="onClickAddMntRec()">Add Maintenance Record</h3>
+        </div>
+
+        <div class="button">
+            <h3 href="#" onclick="onClickViewAllMntRecs()">View All Maintenance Records</h3>
+        </div>
+
         <div class="button buttonDelete">
             <h3 href="#" onclick="onLinkClickDelete()">Delete Refrigerator</h3>
         </div>
 
         <script>
-            $(display);
+            $(function() { display(); });
         </script>
     </body>
 </html>
