@@ -352,6 +352,7 @@ window.listViewLogic = {
     
             that.limit = odkCommon.getSessionVariable(that.limitKey);
             if (that.limit === null || that.limit === undefined) {
+                that.limit = -1;
                 if (that.limitId !== null && that.limitId !== undefined && 
                     that.limitId.length !== 0) {
                     var limitSelected = that.limitId + ' option:selected';
