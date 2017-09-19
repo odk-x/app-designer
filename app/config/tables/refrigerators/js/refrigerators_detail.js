@@ -23,7 +23,7 @@ function cbTypeSuccess(result) {
     util.showIdForDetail('#working_status', 'working_status', refrigeratorsResultSet);
     util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsResultSet);
     util.showIdForDetail('#voltage_regulator', 'voltage_regulator', refrigeratorsResultSet);
-    util.showIdForDetail('#service_priority', 'maintenance_priority', refrigeratorsResultSet);
+    util.showIdForDetail('#maintenance_priority', 'maintenance_priority', refrigeratorsResultSet);
 
     // Going to have to do another query for this
     //$('#date_serviced')

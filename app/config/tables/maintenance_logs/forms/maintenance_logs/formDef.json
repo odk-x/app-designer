@@ -132,7 +132,7 @@
       },
       {
         "choice_list_name": "maint_types",
-        "data_value": "retrofit",
+        "data_value": "upgrade",
         "display": {
           "title": {
             "text": {
@@ -447,7 +447,7 @@
         },
         {
           "choice_list_name": "maint_types",
-          "data_value": "retrofit",
+          "data_value": "upgrade",
           "display": {
             "title": {
               "text": {
@@ -1215,7 +1215,7 @@
         "_aspect": "type_of_maintenance",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"maint_types\",\"data_value\":\"repair\",\"display\":{\"title\":{\"text\":{\"default\":\"Repair\",\"es\":\"Reparar\"}}},\"_row_num\":3},{\"choice_list_name\":\"maint_types\",\"data_value\":\"retrofit\",\"display\":{\"title\":{\"text\":{\"default\":\"Upgrade\",\"es\":\"Mejorar\"}}},\"_row_num\":4},{\"choice_list_name\":\"maint_types\",\"data_value\":\"preventative\",\"display\":{\"title\":{\"text\":{\"default\":\"Preventative\",\"es\":\"Preventivo\"}}},\"_row_num\":5},{\"choice_list_name\":\"maint_types\",\"data_value\":\"inspection\",\"display\":{\"title\":{\"text\":{\"default\":\"Inspection\",\"es\":\"Inspección\"}}},\"_row_num\":6},{\"choice_list_name\":\"maint_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":7}]"
+        "_value": "[{\"choice_list_name\":\"maint_types\",\"data_value\":\"repair\",\"display\":{\"title\":{\"text\":{\"default\":\"Repair\",\"es\":\"Reparar\"}}},\"_row_num\":3},{\"choice_list_name\":\"maint_types\",\"data_value\":\"upgrade\",\"display\":{\"title\":{\"text\":{\"default\":\"Upgrade\",\"es\":\"Mejorar\"}}},\"_row_num\":4},{\"choice_list_name\":\"maint_types\",\"data_value\":\"preventative\",\"display\":{\"title\":{\"text\":{\"default\":\"Preventative\",\"es\":\"Preventivo\"}}},\"_row_num\":5},{\"choice_list_name\":\"maint_types\",\"data_value\":\"inspection\",\"display\":{\"title\":{\"text\":{\"default\":\"Inspection\",\"es\":\"Inspección\"}}},\"_row_num\":6},{\"choice_list_name\":\"maint_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":7}]"
       },
       {
         "_partition": "Column",
