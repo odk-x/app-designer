@@ -9,44 +9,65 @@ var locale = odkCommon.getPreferredLocale();
 function display() {
     var type = util.getQueryParameter('type');
     var title = $('#title');
-    var top = document.createElement('button');
-    var middle = null;
-    top.setAttribute('id', 'top');
     if (type == 'registration') {
-        title.text(odkCommon.localizeText(locale, "beneficiary_data_title"));
-        top.innerHTML = odkCommon.localizeText(locale, "active_beneficiaries_title");
-        top.onclick = function() {
+        var activeHouseholds = document.createElement('button');
+
+        title.text(odkCommon.localizeText(locale, "registration_data"));
+        activeHouseholds.innerHTML = odkCommon.localizeText(locale, "active_households");
+        activeHouseholds.onclick = function() {
             odkTables.openTableToListView(
                                       null, 'registration', '(is_active = ? or is_active = ?)', ['TRUE', 'true']
-                                      , 'config/tables/registration/html/registration_list.html?type=delivery');
+                                      , 'config/tables/registration/html/registration_list_hh.html?type=standard');
         }
-        var middle = document.createElement('button');
-        middle.setAttribute('id', 'middle');
-        middle.innerHTML = odkCommon.localizeText(locale, "disabled_beneficiaries_title");
-        middle.onclick = function() {
+
+        var disabledHouseholds = document.createElement('button');
+        disabledHouseholds.innerHTML = odkCommon.localizeText(locale, "disabled_households");
+        disabledHouseholds.onclick = function() {
             odkTables.openTableToListView(
                                       null, 'registration', '(is_active = ? or is_active = ?)', ['FALSE', 'false']
-                                      , 'config/tables/registration/html/registration_list.html?type=delivery');
+                                      , 'config/tables/registration/html/registration_list_hh.html?type=standard');
         }
+
+        var householdSearch = document.createElement('button');
+        householdSearch.innerHTML = odkCommon.localizeText(locale, "search_members");
+        householdSearch.onclick = function() {
+            odkTables.launchHTML(null,
+                                 'config/assets/search.html?type=registrationMember');
+        }
+
+        var individualSearch = document.createElement('button');
+        individualSearch.innerHTML = odkCommon.localizeText(locale, "search_households");
+        individualSearch.onclick = function() {
+            odkTables.launchHTML(null,
+                                 'config/assets/search.html?type=registration');
+        }
+
+        // append buttons
+        document.getElementById('wrapper').appendChild(activeHouseholds);
+        document.getElementById('wrapper').appendChild(disabledHouseholds);
+        document.getElementById('wrapper').appendChild(householdSearch);
+        document.getElementById('wrapper').appendChild(individualSearch);
+
     } else {
+        var deliveries = document.createElement('button');
+
         title.text(odkCommon.localizeText(locale, "delivery_data_title"));
-        top.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
-        top.onclick = function() {
+        deliveries.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
+        deliveries.onclick = function() {
             odkTables.openTableToListView(null, 'deliveries', null, null,
                                  'config/tables/deliveries/html/deliveries_list.html');
         }
-    }
-    document.getElementById('wrapper').appendChild(top);
-    if (middle !== null) {
-        document.getElementById('wrapper').appendChild(middle);
-    }
 
-    var search = document.createElement('button');
-    search.setAttribute('id', 'searcher');
-    search.innerHTML = odkCommon.localizeText(locale, "advanced_search");
-    search.onclick = function() {
-        odkTables.launchHTML(null,
-                             'config/assets/search.html?type=' + type);
+
+        var deliverySearch = document.createElement('button');
+        deliverySearch.innerHTML = odkCommon.localizeText(locale, "advanced_search");
+        deliverySearch.onclick = function() {
+            odkTables.launchHTML(null,
+                                 'config/assets/search.html?type=deliveries');
+        }
+
+        // append buttons
+        document.getElementById('wrapper').appendChild(deliveries);
+        document.getElementById('wrapper').appendChild(deliverySearch);
     }
-    document.getElementById('wrapper').appendChild(search);
 }

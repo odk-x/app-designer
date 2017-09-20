@@ -11,8 +11,11 @@ var type = util.getQueryParameter('type');
 var locale = odkCommon.getPreferredLocale();
 
 function start() {
-    if (type == 'registration') {
+    $('#launch').text(odkCommon.localizeText(locale, "view"));
+    if (type == 'registrationMember') {
         $('#title').text(odkCommon.localizeText(locale, "search_beneficiaries"));
+    } else if (type == 'registration') {
+        $('#title').text(odkCommon.localizeText(locale, "search_households_title"));
     } else {
         $('#title').text(odkCommon.localizeText(locale, "search_deliveries"));
     }
@@ -47,11 +50,17 @@ function search() {
 function successCallbackFn(result) {
     var count = result.getCount();
     var label;
-    if (type == 'registration') {
+    if (type == 'registrationMember') {
         if (count == 1) {
             label = odkCommon.localizeText(locale, "beneficiary");
         } else {
             label = odkCommon.localizeText(locale, "beneficiaries");
+        }
+    } else if (type == 'registration') {
+        if (count == 1) {
+            label = odkCommon.localizeText(locale, "household");
+        } else {
+            label = odkCommon.localizeText(locale, 'households');
         }
     } else {
         if (count == 1) {
@@ -74,8 +83,13 @@ function failureCallbackFn(error) {
 }
 
 function launch() {
-    odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' +
+    if (type === 'registration') {
+        odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' +
+                                  type + '/html/' + type + '_list_hh.html');
+    } else {
+        odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' +
                                   type + '/html/' + type + '_list.html');
+    }
 }
 
 $(window).resize(function() {

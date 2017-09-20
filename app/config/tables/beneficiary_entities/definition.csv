@@ -1,0 +1,7 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+beneficiary_entity_id,beneficiary_entity_id,string,[]
+custom_beneficiary_entity_form_id,custom_beneficiary_entity_form_id,string,[]
+custom_beneficiary_entity_row_id,custom_beneficiary_entity_row_id,string,[]
+date_created,date_created,string,[]
+status,status,string,[]
+status_reason,status_reason,string,[]

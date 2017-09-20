@@ -136,6 +136,16 @@ p {
     text-align: center;
 }
 
+#confirmation {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    font-size: 30px;
+    height: 23vh;
+    width: 100vw;
+    text-align: center;
+}
+
 img {
     position: relative;
     display: inline-block;

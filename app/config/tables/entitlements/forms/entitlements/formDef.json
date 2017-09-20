@@ -34,70 +34,103 @@
     "table_specific_translations": [
       {
         "string_token": "is_override",
-        "text": "Is Override",
+        "text": {
+          "default": "Is Override",
+          "greek": "Η παράκαμψη είναι",
+          "arabic": "متجاوز",
+          "farsi": "لغو شده",
+          "spanish": "Está anulado"
+        },
         "_row_num": 2
       },
       {
         "string_token": "click_to_deliver",
-        "text": "Click To Deliver",
+        "text": {
+          "default": "Click To Deliver",
+          "greek": "Κάντε κλικ για να παραδώσει",
+          "arabic": "اضغط هنا للتسليم",
+          "farsi": "کلیک کنید برای ارائه",
+          "spanish": "Haz click para entregar"
+        },
         "_row_num": 3
       },
       {
         "string_token": "entitlement_details",
-        "text": "Entitlement Details",
+        "text": {
+          "default": "Entitlement Details",
+          "greek": "Λεπτομέρειες σχετικά με τα δικαιώματα",
+          "arabic": "تفاصيل الاستحقاق",
+          "farsi": "اطلاعات استحقاق",
+          "spanish": "Detalles del título"
+        },
         "_row_num": 4
       }
     ],
     "model": [
       {
         "type": "string",
-        "name": "authorization_id",
+        "name": "authorization_description",
         "_row_num": 2
       },
       {
         "type": "string",
-        "name": "beneficiary_code",
+        "name": "authorization_id",
         "_row_num": 3
       },
       {
         "type": "string",
-        "name": "ranges",
+        "name": "authorization_name",
         "_row_num": 4
       },
       {
         "type": "string",
-        "name": "authorization_name",
+        "name": "authorization_type",
         "_row_num": 5
       },
       {
         "type": "string",
-        "name": "item_pack_id",
+        "name": "beneficiary_entity_id",
         "_row_num": 6
       },
       {
         "type": "string",
-        "name": "item_pack_name",
+        "name": "individual_id",
         "_row_num": 7
       },
       {
         "type": "string",
-        "name": "item_description",
+        "name": "is_override",
         "_row_num": 8
       },
       {
         "type": "string",
-        "name": "is_delivered",
+        "name": "item_description",
         "_row_num": 9
       },
       {
         "type": "string",
-        "name": "is_override",
+        "name": "item_pack_id",
         "_row_num": 10
       },
       {
         "type": "string",
-        "name": "assigned_code",
+        "name": "item_pack_name",
         "_row_num": 11
+      },
+      {
+        "type": "string",
+        "name": "status",
+        "_row_num": 12
+      },
+      {
+        "type": "string",
+        "name": "status_reason",
+        "_row_num": 13
+      },
+      {
+        "type": "string",
+        "name": "date_created",
+        "_row_num": 14
       }
     ],
     "survey": [
@@ -229,17 +262,35 @@
       "_tokens": {
         "is_override": {
           "string_token": "is_override",
-          "text": "Is Override",
+          "text": {
+            "default": "Is Override",
+            "greek": "Η παράκαμψη είναι",
+            "arabic": "متجاوز",
+            "farsi": "لغو شده",
+            "spanish": "Está anulado"
+          },
           "_row_num": 2
         },
         "click_to_deliver": {
           "string_token": "click_to_deliver",
-          "text": "Click To Deliver",
+          "text": {
+            "default": "Click To Deliver",
+            "greek": "Κάντε κλικ για να παραδώσει",
+            "arabic": "اضغط هنا للتسليم",
+            "farsi": "کلیک کنید برای ارائه",
+            "spanish": "Haz click para entregar"
+          },
           "_row_num": 3
         },
         "entitlement_details": {
           "string_token": "entitlement_details",
-          "text": "Entitlement Details",
+          "text": {
+            "default": "Entitlement Details",
+            "greek": "Λεπτομέρειες σχετικά με τα δικαιώματα",
+            "arabic": "تفاصيل الاستحقاق",
+            "farsi": "اطلاعات استحقاق",
+            "spanish": "Detalles del título"
+          },
           "_row_num": 4
         }
       }
@@ -247,7 +298,7 @@
     "queries": {},
     "calculates": {},
     "model": {
-      "authorization_id": {
+      "authorization_description": {
         "type": "string",
         "_defn": [
           {
@@ -255,9 +306,9 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "authorization_id"
+        "elementKey": "authorization_description"
       },
-      "beneficiary_code": {
+      "authorization_id": {
         "type": "string",
         "_defn": [
           {
@@ -265,9 +316,9 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "beneficiary_code"
+        "elementKey": "authorization_id"
       },
-      "ranges": {
+      "authorization_name": {
         "type": "string",
         "_defn": [
           {
@@ -275,9 +326,9 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "ranges"
+        "elementKey": "authorization_name"
       },
-      "authorization_name": {
+      "authorization_type": {
         "type": "string",
         "_defn": [
           {
@@ -285,13 +336,53 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "authorization_name"
+        "elementKey": "authorization_type"
+      },
+      "beneficiary_entity_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "beneficiary_entity_id"
+      },
+      "individual_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "individual_id"
+      },
+      "is_override": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "is_override"
+      },
+      "item_description": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_description"
       },
       "item_pack_id": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -301,51 +392,41 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
         "elementKey": "item_pack_name"
       },
-      "item_description": {
+      "status": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
-        "elementKey": "item_description"
+        "elementKey": "status"
       },
-      "is_delivered": {
+      "status_reason": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
-        "elementKey": "is_delivered"
+        "elementKey": "status_reason"
       },
-      "is_override": {
+      "date_created": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
-        "elementKey": "is_override"
-      },
-      "assigned_code": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 11,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "assigned_code"
+        "elementKey": "date_created"
       }
     },
     "section_names": [
@@ -529,11 +610,24 @@
       }
     },
     "dataTableModel": {
-      "authorization_id": {
+      "authorization_description": {
         "type": "string",
         "_defn": [
           {
             "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "authorization_description",
+        "elementName": "authorization_description",
+        "elementSet": "data",
+        "elementPath": "authorization_description"
+      },
+      "authorization_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
             "section_name": "model"
           }
         ],
@@ -542,37 +636,11 @@
         "elementSet": "data",
         "elementPath": "authorization_id"
       },
-      "beneficiary_code": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "beneficiary_code",
-        "elementName": "beneficiary_code",
-        "elementSet": "data",
-        "elementPath": "beneficiary_code"
-      },
-      "ranges": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "ranges",
-        "elementName": "ranges",
-        "elementSet": "data",
-        "elementPath": "ranges"
-      },
       "authorization_name": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -581,11 +649,76 @@
         "elementSet": "data",
         "elementPath": "authorization_name"
       },
-      "item_pack_id": {
+      "authorization_type": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "authorization_type",
+        "elementName": "authorization_type",
+        "elementSet": "data",
+        "elementPath": "authorization_type"
+      },
+      "beneficiary_entity_id": {
         "type": "string",
         "_defn": [
           {
             "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "beneficiary_entity_id",
+        "elementName": "beneficiary_entity_id",
+        "elementSet": "data",
+        "elementPath": "beneficiary_entity_id"
+      },
+      "individual_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "individual_id",
+        "elementName": "individual_id",
+        "elementSet": "data",
+        "elementPath": "individual_id"
+      },
+      "is_override": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "is_override",
+        "elementName": "is_override",
+        "elementSet": "data",
+        "elementPath": "is_override"
+      },
+      "item_description": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_description",
+        "elementName": "item_description",
+        "elementSet": "data",
+        "elementPath": "item_description"
+      },
+      "item_pack_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -598,7 +731,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -607,57 +740,44 @@
         "elementSet": "data",
         "elementPath": "item_pack_name"
       },
-      "item_description": {
+      "status": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
-        "elementKey": "item_description",
-        "elementName": "item_description",
+        "elementKey": "status",
+        "elementName": "status",
         "elementSet": "data",
-        "elementPath": "item_description"
+        "elementPath": "status"
       },
-      "is_delivered": {
+      "status_reason": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
-        "elementKey": "is_delivered",
-        "elementName": "is_delivered",
+        "elementKey": "status_reason",
+        "elementName": "status_reason",
         "elementSet": "data",
-        "elementPath": "is_delivered"
+        "elementPath": "status_reason"
       },
-      "is_override": {
+      "date_created": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
-        "elementKey": "is_override",
-        "elementName": "is_override",
+        "elementKey": "date_created",
+        "elementName": "date_created",
         "elementSet": "data",
-        "elementPath": "is_override"
-      },
-      "assigned_code": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 11,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "assigned_code",
-        "elementName": "assigned_code",
-        "elementSet": "data",
-        "elementPath": "assigned_code"
+        "elementPath": "date_created"
       },
       "_id": {
         "type": "string",
