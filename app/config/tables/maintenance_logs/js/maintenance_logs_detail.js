@@ -14,22 +14,17 @@ function cbFrigSuccess(result) {
 
     $('#refrigerator_id').text(maintenanceLogsResultSet.get('refrigerator_id'));
 
-    util.showIdForDetail('#working_status', 'working_status', refrigeratorsData);
+    util.showIdForDetail('#working_status', 'working_status', refrigeratorsData, true);
 
-    util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsData);
+    util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsData, true);
 
-    // Format the date
-    var dateSer = maintenanceLogsResultSet.get('date_serviced');
-    if (dateSer !== null && dateSer !== undefined) {
-        dateSer = dateSer.indexOf('T') > 0 ? dateSer.substring(0, dateSer.indexOf('T')) : dateSer;
-    } 
-    $('#date_serviced').text(dateSer);
+    util.showIdForDetail('#date_serviced', 'date_serviced', maintenanceLogsResultSet, true);
+    
+    util.showIdForDetail('#maint_type', 'type_of_maintenance', maintenanceLogsResultSet, true);
 
-    util.showIdForDetail('#maint_type', 'type_of_maintenance', maintenanceLogsResultSet);
+    util.showIdForDetail('#spare_parts', 'spare_parts', maintenanceLogsResultSet, true);
 
-    util.showIdForDetail('#spare_parts', 'spare_parts', maintenanceLogsResultSet);
-
-    util.showIdForDetail('#notes', 'notes', maintenanceLogsResultSet);
+    util.showIdForDetail('#notes', 'notes', maintenanceLogsResultSet, false);
     
 }
 

@@ -259,7 +259,16 @@ util.formatDisplayText = function(txt) {
     return displayText;
 };
 
-util.showIdForDetail = function(idOfElement, colId, resultSet) {
+util.formatDate = function(txt) {
+    if (txt === null || txt === undefined || txt.length === 0) {
+        return null;
+    } 
+
+    var dateToUse = txt.indexOf('T') > 0 ? txt.substring(0, txt.indexOf('T')) : txt;
+    return dateToUse;
+};
+
+util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat) {
     if (idOfElement === null || idOfElement === undefined ||
         idOfElement.length === 0) {
         return;
@@ -270,8 +279,28 @@ util.showIdForDetail = function(idOfElement, colId, resultSet) {
         return;
     }
 
-    if (util.formatDisplayText(resultSet.get(colId))) {
-        $(idOfElement).text(util.formatDisplayText(resultSet.get(colId)));
+    // Format for date
+    var meta = resultSet.getMetadata();
+    var elementMetadata = meta.dataTableModel[colId];
+    if (elementMetadata.elementType === 'date') {
+        var dateToUse = resultSet.get(colId);
+        if (dateToUse !== null && dateToUse !== undefined) {
+            if (applyFormat) {
+                dateToUse = util.formatDate(dateToUse);
+            } 
+            $(idOfElement).text(dateToUse);
+        } 
+        return;
     }
+
+    var textToDisplay = resultSet.get(colId);
+    if (textToDisplay !== null && textToDisplay !== undefined && textToDisplay.length !== 0) {
+        if (applyFormat) {
+           textToDisplay = util.formatDisplayText(textToDisplay);
+        }
+ 
+        $(idOfElement).text(textToDisplay);     
+    }
+
 };
 

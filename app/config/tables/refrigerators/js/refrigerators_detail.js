@@ -9,46 +9,51 @@ var typeData = {};
 var facilityData = {};
 
 
-function cbTypeSuccess(result) {
-
-    typeData = result;
+function processFrigPromises(facilityResult, typeResult, logResult) {
+    facilityData = facilityResult;
+    typeData = typeResult;
 
     $('#refrigerator_id').text(refrigeratorsResultSet.get('refrigerator_id'));
 
     $('#facility_name').text(facilityData.get('facility_name'));
     $('#model_id').text(typeData.get('catalog_id'));
 
-    util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsResultSet);
-    util.showIdForDetail('#install_year', 'year', refrigeratorsResultSet);
-    util.showIdForDetail('#working_status', 'working_status', refrigeratorsResultSet);
-    util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsResultSet);
-    util.showIdForDetail('#voltage_regulator', 'voltage_regulator', refrigeratorsResultSet);
-    util.showIdForDetail('#maintenance_priority', 'maintenance_priority', refrigeratorsResultSet);
+    util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsResultSet, false);
+    util.showIdForDetail('#install_year', 'year', refrigeratorsResultSet, false);
+    util.showIdForDetail('#working_status', 'working_status', refrigeratorsResultSet, true);
+    util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsResultSet, true);
+    util.showIdForDetail('#voltage_regulator', 'voltage_regulator', refrigeratorsResultSet, true);
+    util.showIdForDetail('#maintenance_priority', 'maintenance_priority', refrigeratorsResultSet, true);
 
-    // Going to have to do another query for this
-    //$('#date_serviced')
-}
-
-function cbTypeFailure(error) {
-    console.log('cbTypeFailue: query for Type_id failed with message: ' + error);
-}
-
-function cbFacilitySuccess(result) {
-    facilityData = result;
-}
-
-function cbFacilityFailure(error) {
-    console.log('cbFacilityFailure: query for facility_id failed with message: ' + error);
+    util.showIdForDetail('#date_serviced', 'date_serviced', logResult, true);
 }
 
 function cbSuccess(result) {
     refrigeratorsResultSet = result;
 
-    odkData.query('health_facility', '_id = ?', [refrigeratorsResultSet.get('facility_row_id')], 
-        null, null, null, null, null, null, true, cbFacilitySuccess, cbFacilityFailure);
+    var healthFacilityPromise = new Promise(function(resolve, reject) {
+        odkData.query('health_facility', '_id = ?', [refrigeratorsResultSet.get('facility_row_id')], 
+            null, null, null, null, null, null, true, resolve, reject);
+    });
 
-    odkData.query('refrigerator_types', '_id = ?', [refrigeratorsResultSet.get('model_row_id')],
-        null, null, null, null, null, null, true, cbTypeSuccess, cbTypeFailure);
+    var typePromise = new Promise(function(resolve, reject) {
+        odkData.query('refrigerator_types', '_id = ?', [refrigeratorsResultSet.get('model_row_id')],
+            null, null, null, null, null, null, true, resolve, reject);
+    }); 
+
+    var logPromise = new Promise(function(resolve, reject) {
+        var logQuery = 'SELECT * FROM maintenance_logs WHERE maintenance_logs.refrigerator_id = ? ' + 
+            'AND maintenance_logs._savepoint_type != ? ORDER BY date_serviced DESC';
+        var logParams = [refrigeratorsResultSet.get('refrigerator_id'), 'INCOMPLETE'];
+        odkData.arbitraryQuery('maintenance_logs', logQuery, logParams, null, null, resolve, reject);
+    });
+
+    Promise.all([healthFacilityPromise, typePromise, logPromise]).then(function (resultArray) {
+        processFrigPromises(resultArray[0], resultArray[1], resultArray[2]);
+
+    }, function(err) {
+        console.log('promises failed with error: ' + err);
+    });
 }
 
 function cbFailure(error) {
@@ -95,10 +100,8 @@ function onLinkClickDelete() {
             odkData.deleteRow(
                 'refrigerators',
                 null,
-                // check getRowId parameters
                 refrigeratorsResultSet.getRowId(0),
-                cbDeleteSuccess,
-                cbDeleteFailure);           
+                cbDeleteSuccess, cbDeleteFailure);           
         }
     }
 }
