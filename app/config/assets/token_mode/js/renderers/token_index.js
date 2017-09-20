@@ -29,7 +29,7 @@ tokenIndex.display = function() {
     deliver.setAttribute('type', 'reg');
     deliver.innerHTML = "Deliver";
     deliver.onclick = function() {
-        odkTables.launchHTML(null, 'config/assets/token_mode/delivery_options.html');
+        odkTables.launchHTML(null, 'config/assets/token_mode/html/delivery_options.html');
     }
     document.getElementById("wrapper").appendChild(deliver);
 
@@ -38,7 +38,7 @@ tokenIndex.display = function() {
     del.setAttribute('type', 'reg');
     del.innerHTML = 'View Deliveries';
     del.onclick = function() {
-        odkTables.launchHTML(null, 'config/assets/token_mode/view_start.html');
+        odkTables.launchHTML(null, 'config/assets/token_mode/html/view_start.html');
     }
     document.getElementById('wrapper').appendChild(del);
 

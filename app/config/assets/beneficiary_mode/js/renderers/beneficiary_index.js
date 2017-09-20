@@ -25,7 +25,7 @@ beneficiaryIndex.display = function() {
     newClient.setAttribute("id", "register");
     newClient.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/beneficiary_mode/choose_method.html?title='
+                             'config/assets/beneficiary_mode/html/choose_method.html?title='
                              + encodeURIComponent(odkCommon.localizeText(locale,
                                                                          registrationTitleToken))
                              + '&type=registration');
@@ -37,7 +37,7 @@ beneficiaryIndex.display = function() {
     followUp.setAttribute("id", "deliver");
     followUp.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/beneficiary_mode/choose_method.html?title='
+                             'config/assets/beneficiary_mode/html/choose_method.html?title='
                              + encodeURIComponent(odkCommon.localizeText(locale,
                                                                          deliveryTitleToken))
                              +'&type=delivery');
@@ -49,7 +49,7 @@ beneficiaryIndex.display = function() {
     viewData.setAttribute("id", "data");
     viewData.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/beneficiary_mode/data_start.html');
+                             'config/assets/beneficiary_mode/html/data_start.html');
     }
     document.getElementById("wrapper").appendChild(viewData);
 
@@ -68,7 +68,7 @@ beneficiaryIndex.rolesCBSuccess = function(result) {
         override.setAttribute("id", "overrides");
         override.onclick = function() {
             odkTables.launchHTML(null,
-                                 'config/assets/beneficiary_mode/overrides_start.html');
+                                 'config/assets/beneficiary_mode/html/overrides_start.html');
         }
         document.getElementById("wrapper").appendChild(override);
     }

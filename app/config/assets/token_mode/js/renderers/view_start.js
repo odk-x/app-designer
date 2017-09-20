@@ -5,6 +5,6 @@ function display() {
 	});
 
 	$('#search').on('click', function() {
-		odkTables.launchHTML(null, 'config/assets/token_mode/delivery_search.html');
+		odkTables.launchHTML(null, 'config/assets/token_mode/html/delivery_search.html');
 	});
 }

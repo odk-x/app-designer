@@ -13,7 +13,8 @@ var chooseListSessionVariable = "chooseList";
 var savepointSuccess = "COMPLETE";
 
 // Table IDs
-var registrationTable = 'registration';
+var beneficiaryEntityTable = 'beneficiary_entities'
+var individualTable = 'individuals';
 var authorizationTable = 'authorizations';
 
 var myTimeoutVal = null;
@@ -226,11 +227,11 @@ function handleRegistrationCallback(action, dispatchStr) {
     }
 
     if (type === 'delivery') {
-        odkTables.openDetailWithListView(null, registrationTable, instanceId,
+        odkTables.openDetailWithListView(null, beneficiaryEntityTable, instanceId,
                                          'config/tables/registration/html/registration_detail.html?type=' +
                                          encodeURIComponent(type));
     } else if (type === 'registration') {
-        odkTables.openDetailWithListView(null, registrationTable, instanceId,
+        odkTables.openDetailWithListView(null, beneficiaryEntityTable, instanceId,
                                          'config/tables/registration/html/registration_detail_hh.html?type=' +
                                          encodeURIComponent(type));
     }
@@ -270,11 +271,11 @@ function deliveryBCheckCBSuccess(result) {
         // TODO: This should be changed as well - probably don't need if and else 
         // double check that this is the case
         if (type === 'delivery') {
-            odkTables.openDetailWithListView(null, registrationTable, result.getRowId(0),
+            odkTables.openDetailWithListView(null, beneficiaryEntityTable, result.getRowId(0),
                                              'config/tables/registration/html/registration_detail.html?type=' +
                                              encodeURIComponent(type));
         } else {
-            odkTables.openDetailView(null, registrationTable,result.getRowId(0),
+            odkTables.openDetailView(null, beneficiaryEntityTable,result.getRowId(0),
                                      'config/tables/registration/html/registration_detail.html?type=' +
                                      encodeURIComponent(type));
         }
@@ -286,7 +287,7 @@ function deliveryBCheckCBSuccess(result) {
         vals = [code,'TRUE', 'true'];
         odkTables.openTableToListView(
                                       null,
-                                      registrationTable, params, vals
+                                      beneficiaryEntityTable, params, vals
                                       , 'config/tables/registration/html/registration_list.html?type=' + type);
     }
 }
@@ -352,7 +353,7 @@ function registrationVoucherCBSuccess(result) {
         struct['_row_owner'] = user;
 
         var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration});
-        odkTables.addRowWithSurvey(dispatchStruct, registrationTable, 'registration', null, struct);
+        odkTables.addRowWithSurvey(dispatchStruct, beneficiaryEntityTable, 'registration', null, struct);
         
     }, 1000);
 }
@@ -374,7 +375,7 @@ function regOverrideFunction() {
             queriedType = 'TRUE';
             queryCaseType = 'true';
         }
-        odkData.query('registration', 'beneficiary_code = ? and (is_active = ? or is_active = ?)', [code, queriedType, queryCaseType],
+        odkData.query(beneficiaryEntityTable, 'beneficiary_code = ? and (is_active = ? or is_active = ?)', [code, queriedType, queryCaseType],
                       null, null, null, null, null, null, true,
                       regOverrideBenSuccess, regOverrideBenFailure);
     }
@@ -383,15 +384,15 @@ function regOverrideFunction() {
 function regOverrideBenSuccess(result) {
     if (result.getCount() === 1) {
         if (type === 'delivery') {
-            odkTables.openDetailWithListView(null, registrationTable, result.getRowId(0),
+            odkTables.openDetailWithListView(null, beneficiaryEntityTable, result.getRowId(0),
                                              'config/tables/registration/html/registration_detail.html?type=' +
                                              encodeURIComponent(type));
         } else if (type === 'registration') {
-            odkTables.openDetailView(null, registrationTable,result.getRowId(0),
+            odkTables.openDetailView(null, beneficiaryEntityTable,result.getRowId(0),
                                      'config/tables/registration/html/registration_detail_hh.html?type=' +
                                      encodeURIComponent(type));
         } else {
-            odkTables.openDetailView(null, registrationTable,result.getRowId(0),
+            odkTables.openDetailView(null, beneficiaryEntityTable,result.getRowId(0),
                                      'config/tables/registration/html/registration_detail.html?type=' +
                                      encodeURIComponent(type));
         }
@@ -405,7 +406,7 @@ function regOverrideBenSuccess(result) {
             queriedType = 'TRUE';
             queryCaseType = 'true';
         }
-        odkTables.openTableToListView(null, registrationTable,
+        odkTables.openTableToListView(null, beneficiaryEntityTable,
                                       'beneficiary_code = ? and (is_active = ? or is_active = ?)',
                                       [code, queriedType, queryCaseType],
                                       'config/tables/registration/html/registration_list.html?type=' +

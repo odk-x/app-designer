@@ -14,7 +14,7 @@ function display() {
     enable.innerHTML = enableText;
     enable.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/beneficiary_mode/choose_method.html?title='
+                             'config/assets/beneficiary_mode/html/choose_method.html?title='
                              + encodeURIComponent(chooseText)
                              + '&secondary_manual_title='
                              + encodeURIComponent(enableText)
@@ -28,7 +28,7 @@ function display() {
     disable.innerHTML = disableText;
     disable.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/beneficiary_mode/choose_method.html?title='
+                             'config/assets/beneficiary_mode/html/choose_method.html?title='
                              + encodeURIComponent(chooseText)
                              + '&secondary_manual_title='
                              + encodeURIComponent(disableText)
