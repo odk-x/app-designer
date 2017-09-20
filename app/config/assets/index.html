@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <link href="css/delay_render.css" type="text/css" rel="stylesheet"/>
         <link href="css/index.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="commonDefinitions.js"></script>
         <script type="text/javascript" src="libs/jquery-3.2.1.js"></script>
@@ -9,20 +10,23 @@
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
-        <script type="text/javascript" src="js/renderers/viewport_styling.js"></script>
-        <script type="text/javascript" src="js/renderers/index.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
+        <script type="text/javascript" src="beneficiary_mode/js/renderers/beneficiary_index.js"></script>
+        <script type="text/javascript" src="token_mode/js/renderers/token_index.js"></script>
     </head>
 
     <body>
-        <script>document.body.style.display = "none";</script>
         <div id="main">
             <h1 id="title"></h1>
             <div id="wrapper"></div>
             <div id="logo"><img src="img/small_2025.jpg"></div>
         </div>
         <script>
-            $(display);
-            document.body.style.display = "block";
+            if (!true) {
+                $(util.renderPage(tokenIndex.display));
+            } else {
+                $(util.renderPage(beneficiaryIndex.display));
+            }
         </script>
     </body>
 </html>

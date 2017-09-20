@@ -13,7 +13,11 @@ var deliveryTitleToken = 'delivery_title';
 var locale = odkCommon.getPreferredLocale();
 
 // Displays homescreen
-function display() {
+
+var beneficiaryIndex = {};
+
+
+beneficiaryIndex.display = function() {
     $('#title').text(odkCommon.localizeText(locale, titleToken));
 
     var newClient = document.createElement("button");
@@ -21,7 +25,7 @@ function display() {
     newClient.setAttribute("id", "register");
     newClient.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/choose_method.html?title='
+                             'config/assets/beneficiary_mode/choose_method.html?title='
                              + encodeURIComponent(odkCommon.localizeText(locale,
                                                                          registrationTitleToken))
                              + '&type=registration');
@@ -33,7 +37,7 @@ function display() {
     followUp.setAttribute("id", "deliver");
     followUp.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/choose_method.html?title='
+                             'config/assets/beneficiary_mode/choose_method.html?title='
                              + encodeURIComponent(odkCommon.localizeText(locale,
                                                                          deliveryTitleToken))
                              +'&type=delivery');
@@ -45,15 +49,17 @@ function display() {
     viewData.setAttribute("id", "data");
     viewData.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/data_start.html');
+                             'config/assets/beneficiary_mode/data_start.html');
     }
     document.getElementById("wrapper").appendChild(viewData);
 
     // Create a overrides if user is a tables superuser
-    odkData.getRoles(rolesCBSuccess, rolesCBFailure);
+    console.log('requesting roles');
+
+    odkData.getRoles(beneficiaryIndex.rolesCBSuccess, beneficiaryIndex.rolesCBFailure);
 }
 
-function rolesCBSuccess(result) {
+beneficiaryIndex.rolesCBSuccess = function(result) {
     var roles = result.getRoles();
     console.log(roles);
     if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
@@ -62,14 +68,13 @@ function rolesCBSuccess(result) {
         override.setAttribute("id", "overrides");
         override.onclick = function() {
             odkTables.launchHTML(null,
-                                 'config/assets/overrides_start.html');
+                                 'config/assets/beneficiary_mode/overrides_start.html');
         }
         document.getElementById("wrapper").appendChild(override);
     }
-    setVirtualHeights();
 }
 
-function rolesCBFailure(error) {
+ beneficiaryIndex.rolesCBFailure = function(error) {
     console.log('roles failed with error: ' + error);
 }
 

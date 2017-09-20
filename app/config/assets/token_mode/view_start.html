@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <link href="../css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../libs/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../config/assets/js/util.js"></script>
+        <script type="text/javascript" src="js/renderers/view_start.js"></script>
+	</head>
+
+
+	
+	<body onload="display();">
+    	<h2>Deliveries</h2>
+    	<button id="all" type='reg'>View All Deliveries</button>
+    	<button id="search" type='reg'>Search For Specific Deliveries</button>
+        <script>
+            $(util.renderPage(display));
+        </script>
+	</body>

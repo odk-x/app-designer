@@ -9,7 +9,6 @@
         <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
-        <script type="text/javascript" src="../../../assets/js/renderers/viewport_styling.js"></script>
         <script type="text/javascript" src="../../../assets/js/util.js"></script>
 
     </head>
@@ -24,8 +23,7 @@
         <p id='item_pack_id'><span id="inner_item_pack_id"></span></p>
 
         <script>            
-            $(setVirtualHeights);
-            $(display);  // calls the detail display function when ready
+            util.renderPage($(display));
         </script>
     </body>
 </html>

@@ -32,14 +32,14 @@ function display() {
         householdSearch.innerHTML = odkCommon.localizeText(locale, "search_members");
         householdSearch.onclick = function() {
             odkTables.launchHTML(null,
-                                 'config/assets/search.html?type=registrationMember');
+                                 'config/assets/beneficiary_mode/search.html?type=registrationMember');
         }
 
         var individualSearch = document.createElement('button');
         individualSearch.innerHTML = odkCommon.localizeText(locale, "search_households");
         individualSearch.onclick = function() {
             odkTables.launchHTML(null,
-                                 'config/assets/search.html?type=registration');
+                                 'config/assets/beneficiary_mode/search.html?type=registration');
         }
 
         // append buttons
@@ -63,7 +63,7 @@ function display() {
         deliverySearch.innerHTML = odkCommon.localizeText(locale, "advanced_search");
         deliverySearch.onclick = function() {
             odkTables.launchHTML(null,
-                                 'config/assets/search.html?type=deliveries');
+                                 'config/assets/beneficiary_mode/search.html?type=deliveries');
         }
 
         // append buttons

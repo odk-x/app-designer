@@ -12,7 +12,7 @@ function display() {
     benData.innerHTML = odkCommon.localizeText(locale, "view_registration_data");
     benData.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/data_options.html?type=registration');
+                             'config/assets/beneficiary_mode/data_options.html?type=registration');
     }
     document.getElementById("wrapper").appendChild(benData);
 
@@ -21,7 +21,7 @@ function display() {
     delData.innerHTML = odkCommon.localizeText(locale, "view_delivery_data");
     delData.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/data_options.html?type=deliveries');
+                             'config/assets/beneficiary_mode/data_options.html?type=deliveries');
     }
     document.getElementById("wrapper").appendChild(delData);
 }

@@ -128,7 +128,7 @@ util.getKeysToAppendToURL = function(date, time, focalChimp) {
 };
 
 util.genUUID = function() {
-    // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
+    // construct a UUID (from http://sta ckoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
     var id = 'uuid:' + 
     'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random()*16|0, v = (c === 'x') ? r : (r&0x3|0x8);
@@ -136,3 +136,12 @@ util.genUUID = function() {
     });
     return id;
 };
+
+util.renderPage = function(renderFunction) {
+    console.log(renderFunction);
+    renderFunction();
+    $(':button').css({'height' : window.innerHeight * .15 + "px"});
+    $(':button').css({'font-size' : Math.min(window.innerHeight, window.innerWidth) * .07 + "px"});
+    $(':button').css({'margin-bottom' : window.innerHeight * .06 + "px"});
+    document.body.style.display = "block";
+}
