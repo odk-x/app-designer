@@ -22,7 +22,7 @@ function resumeFunc(state) {
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
         listViewLogic.showEditAndDeleteButtons(true);
         listViewLogic.setColIdsToDisplayInList('', 'facility_name', 
-            'Facility ID', 'facility_id');
+            'Facility ID', 'facility_id', 'Facility Type', 'facility_type');
     }
 
     listViewLogic.resumeFn(state);

@@ -22,7 +22,7 @@ function display() {
     viewRefrigeratorsButton.on(
         'click',
         function() {
-            odkTables.launchHTML(null,'config/assets/searchHealthFacilitiesByNameId.html');
+            odkTables.launchHTML(null,'config/tables/health_facility/html/health_facility_list.html');
         }
     );
 
