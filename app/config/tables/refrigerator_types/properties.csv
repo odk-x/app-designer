@@ -16,9 +16,9 @@ Column,refrigerator_picture,displayName,object,"{""text"":{""default"":""Picture
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,wrong_form
 Table,default,defaultViewType,string,LIST
-Table,default,detailViewFileName,string,config/assets/aa_refrigerator_types_detail.html
+Table,default,detailViewFileName,string,config/tables/refrigerator_types/html/refrigerator_types_detail.html
 Table,default,displayName,object,"{""text"":{""default"":""Refrigerator Types"",""es"":""Modelos de Frigeríficos""}}"
-Table,default,listViewFileName,string,config/assets/aa_refrigerator_types_list.html
+Table,default,listViewFileName,string,config/tables/refrigerator_types/html/refrigerator_types_list.html
 Table,security,defaultAccessOnCreation,string,READ_ONLY
 Table,security,locked,boolean,true
 Table,security,unverifiedUserCanCreate,boolean,false

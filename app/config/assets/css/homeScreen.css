@@ -1,0 +1,50 @@
+/* CSS Stylesheet - Homescreen*/
+
+html, body {
+    height: 100%;
+}
+
+#wrapper { 
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+
+.app-title {
+    color: black;
+}
+
+body {
+    font-family: arial;
+    margin: 0;
+    text-align: center;
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+div { 
+    position: relative; 
+}
+
+.btn-launch {
+   width: 80%;
+   max-width: 500px;
+   height: 80px;
+   font-size: 16pt;
+   color: white;
+   margin: 0 auto 35px;
+   background-color: teal;
+}
+
+h1 {
+    border-bottom: 2px solid darkturquoise;
+    padding-bottom: 10px;
+    color: #FFFFFF;
+}
+
+.descStyle {
+    padding-bottom: 10 px;
+    font-size: 16px;
+    color: #FFFFFF;
+}

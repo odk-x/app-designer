@@ -1,0 +1,5 @@
+table_keys=healthFacility, maintenance_logs, refrigeratorTypes, refrigerators
+healthFacility.filename=config/assets/csv/health_facility.csv
+maintenance_logs.filename=config/assets/csv/maintenance_logs.csv
+refrigeratorTypes.filename=config/assets/csv/refrigerator_types.csv
+refrigerators.filename=config/assets/csv/refrigerators.csv

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- TBL_IV_REF Detailed View -->
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../js/refrigerators_detail.js"></script>
+
+        <div class="header col-12">
+            <h1>Refrigerator <span id="tracking_id" class=""></span></h1>
+        </div>
+
+        <br>
+
+        <div class="detail col-12">
+            <h3>Basic Refrigerator Information</span></h3>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <p>Facility: <span id="facility_name"></span></p>
+                <p>Year Installed: <span id="install_year"></span></p>
+                <p>Status: <span id="working_status"></span></p>
+                <p>Reason Not Working: <span id="reason_not_working"></span></p>
+                <p>Service Priority: <span id="maintenance_priority"></span></p>
+            </div>
+
+            <div class="col-6">
+                <p>Model ID: <span id="model_id"></span></p>
+                <p>Refrigerator ID: <span id="refrigerator_id"></span>
+                <p>Voltage Regulator? <span id="voltage_regulator"></span></p>
+                <p>Date Serviced: <span id="date_serviced"></span></p>
+            </div>
+        </div>
+
+        <div class="button">
+            <h3 href="#" onclick="onLinkClickModel()">View Model Information</h3>
+        </div>
+
+        <div class="button">
+            <h3 href="#" onclick="onLinkClickFacility()">View Facility Information</h3>
+        </div>
+
+        <div class="button">
+            <h3 href="#" onclick="onClickAddMntRec()">Add Maintenance Record</h3>
+        </div>
+
+        <div class="button">
+            <h3 href="#" onclick="onClickViewAllMntRecs()">View All Maintenance Records</h3>
+        </div>
+
+        <div id="editFrigBtn" class="button hideButton">
+            <h3 href="#" onclick="onEditFrig()">Edit Refrigerator</h3>
+        </div>
+
+        <div id="delFrigBtn" class="button buttonDelete hideButton">
+            <h3 href="#" onclick="onDeleteFrig()">Delete Refrigerator</h3>
+        </div>
+
+        <script>
+            $(function() { display(); });
+        </script>
+    </body>
+</html>

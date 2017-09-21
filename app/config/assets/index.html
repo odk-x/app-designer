@@ -1,25 +1,28 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<script type="text/javascript" src="/coldchain/system/js/odkCommon.js"></script>
-		<script type="text/javascript" src="/coldchain/system/js/odkData.js"></script>
-		<script type="text/javascript" src="/coldchain/system/tables/js/odkTables.js"></script>
-		<script type="text/javascript" src="formgen_common.js"></script>
-		<script type="text/javascript" src="generate_common.js"></script>
-		<link href="generate_index.css" rel="stylesheet" />
-		<style>
-		
-body {
-	background: url('/coldchain/config/assets/img/hallway.jpg') no-repeat center/cover fixed;
-}
-		</style>
-		<script type="text/javascript" src="/coldchain/config/assets/userjs/index_html.js"></script>
-		<script src="generate_index.js"></script>
-	</head>
-	<body onLoad='ol();'>
-		<div id="title" class="button"></div>
-		<div id="list"></div>
-	</body>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="ratchet/css/ratchet-theme-android.css" type="text/css" rel="stylesheet" />
+        <link href="css/homeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/generate-index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="js/menu.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
+    </head>
+
+    <body id="main">
+        <div id="header"></div>
+
+        <div id="description"></div>
+
+        <div id="buttonsDiv" class="buttonsDivStyle"></div>
+
+        <script type="text/javascript">
+            $(display);
+        </script>
+    </body>
 </html>
-	

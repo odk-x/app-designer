@@ -22,7 +22,7 @@
             }
           }
         },
-        "required": 1,
+        "required": true,
         "_row_num": 3
       },
       {
@@ -42,7 +42,7 @@
             }
           }
         },
-        "required": 1,
+        "required": true,
         "_row_num": 4
       },
       {
@@ -210,7 +210,7 @@
       },
       {
         "clause": "if",
-        "condition": "selected(data('electricity_source'), 'grid')",
+        "condition": "(selected(data('electricity_source'), 'grid') || selected(data('electricity_source'), 'both'))",
         "_row_num": 18
       },
       {
@@ -1176,7 +1176,7 @@
       },
       {
         "setting_name": "disableSwipeNavigation",
-        "value": 1,
+        "value": true,
         "_row_num": 6
       },
       {
@@ -1228,7 +1228,7 @@
         "aspect": "default",
         "key": "detailViewFileName",
         "type": "string",
-        "value": "config/assets/aa_health_facility_detail.html",
+        "value": "config/tables/health_facility/html/health_facility_detail.html",
         "_row_num": 3
       },
       {
@@ -1236,7 +1236,7 @@
         "aspect": "default",
         "key": "listViewFileName",
         "type": "string",
-        "value": "config/assets/aa_health_facility_list.html",
+        "value": "config/tables/health_facility/html/health_facility_list.html",
         "_row_num": 4
       },
       {
@@ -1244,7 +1244,7 @@
         "aspect": "default",
         "key": "mapListViewFileName",
         "type": "string",
-        "value": "config/assets/hack_for_hf_map.html",
+        "value": "config/tables/health_facility/html/hFacility_list.html",
         "_row_num": 5
       },
       {
@@ -1358,7 +1358,7 @@
       },
       "disableSwipeNavigation": {
         "setting_name": "disableSwipeNavigation",
-        "value": 1,
+        "value": true,
         "_row_num": 6
       },
       "instance_name": {
@@ -2545,7 +2545,7 @@
                 }
               }
             },
-            "required": 1,
+            "required": true,
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
@@ -2570,7 +2570,7 @@
                 }
               }
             },
-            "required": 1,
+            "required": true,
             "_row_num": 4,
             "__rowNum__": 3,
             "_token_type": "prompt",
@@ -3143,7 +3143,7 @@
               "__rowNum__": 22,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nif (selected(data('electricity_source'), 'grid')) {\nactivePromptIndicies.push(9);\n}\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nif ((selected(data('electricity_source'), 'grid') || selected(data('electricity_source'), 'both'))) {\nactivePromptIndicies.push(9);\n}\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
@@ -4312,7 +4312,7 @@
         "_aspect": "default",
         "_key": "detailViewFileName",
         "_type": "string",
-        "_value": "config/assets/aa_health_facility_detail.html"
+        "_value": "config/tables/health_facility/html/health_facility_detail.html"
       },
       {
         "_partition": "Table",
@@ -4326,14 +4326,14 @@
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "string",
-        "_value": "config/assets/aa_health_facility_list.html"
+        "_value": "config/tables/health_facility/html/health_facility_list.html"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "mapListViewFileName",
         "_type": "string",
-        "_value": "config/assets/hack_for_hf_map.html"
+        "_value": "config/tables/health_facility/html/hFacility_list.html"
       },
       {
         "_partition": "Table",

@@ -1,0 +1,187 @@
+html {
+  height: 100%;
+  width: 100%;
+  background-color: cadetblue;
+}
+
+body {
+  font-family: arial;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+}
+
+#wrapper {
+  overflow: auto;
+}
+
+li {
+  list-style-type: none;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+ul {
+  padding: 0;
+}
+
+.item_space {
+  margin: 10px 10px 10px 10px;
+  font-size: 25pt;
+  color: #fff;
+  padding: 5px;
+  width: 95%;
+  /*padding: 20px; */
+  padding-top: 8px;
+  padding-bottom: 12px;
+  display: inline-block;
+}
+
+.note {
+  font-size: 25pt;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+}
+
+.item_space:active {
+  background-color: teal;
+}
+
+.detail {
+  font-size: 16pt;
+  color: #fff;
+  font-weight: normal;
+}
+
+.chevron {
+  float: right;
+  padding-right: 15px;
+  padding-top: 15px;
+  margin: 0;
+  height: 40px;
+}
+
+.divider {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: darkslategray;
+  width: 95%;
+  height: 10px;
+}
+
+#searchBox {
+    font-size: 15pt;
+    text-align: center;
+    width: 100%;
+    border-bottom: 2px solid teal;
+    margin: auto;
+    background-color: lightcyan;
+    padding-top: 1px;
+}
+
+#form {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#search {
+    padding: 5px;
+    height: 35px;
+    border: 1px solid darkslategray;
+    width: 250px;
+    margin: auto;
+}
+
+#submit {
+    padding: 5px;
+    border: 1px solid #808080;
+    width: 100px;
+    height: 47px;
+    background-color: darkslategray;
+    color: white;
+    margin: auto;
+}
+
+.btn{
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background: darkslategray;
+    color: white;
+    border: 1px solid transparent;
+}
+
+.btnDiv{
+    display:inline-block;
+    width: 90%;
+    margin: 10px;
+}
+
+.prevBtnDiv{
+    width: 15%;
+    float: left;
+}
+
+.nextBtnDiv{
+    width: 15%;
+    float: right;
+}
+
+.dropdownLimit {
+    background-color: white;
+    padding: 10px;
+    margin: 5px;
+}
+
+.navTextStyle {
+    font-size: 10pt;
+}
+
+.paginatedListHeader {
+    background-color: lightcyan;
+    text-align:center;
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.delBtn {
+    float: right;
+    width: 13%;
+    margin: 5px;
+}
+
+.editBtn {
+    float: right;
+    width: 10%;
+    margin: 5px;
+}
+
+.imgWrapper {
+    max-width: 45%;
+    text-align: center;
+}
+
+.imgWrapperDiv {
+    text-align: center;
+}

@@ -473,7 +473,7 @@
         "aspect": "default",
         "key": "detailViewFileName",
         "type": "string",
-        "value": "config/assets/aa_refrigerator_types_detail.html",
+        "value": "config/tables/refrigerator_types/html/refrigerator_types_detail.html",
         "_row_num": 3
       },
       {
@@ -481,7 +481,7 @@
         "aspect": "default",
         "key": "listViewFileName",
         "type": "string",
-        "value": "config/assets/aa_refrigerator_types_list.html",
+        "value": "config/tables/refrigerator_types/html/refrigerator_types_list.html",
         "_row_num": 4
       },
       {
@@ -550,7 +550,7 @@
       },
       {
         "setting_name": "disableSwipeNavigation",
-        "value": 1,
+        "value": true,
         "_row_num": 6
       },
       {
@@ -630,7 +630,7 @@
       },
       "disableSwipeNavigation": {
         "setting_name": "disableSwipeNavigation",
-        "value": 1,
+        "value": true,
         "_row_num": 6
       },
       "instance_name": {
@@ -2214,7 +2214,7 @@
         "_aspect": "default",
         "_key": "detailViewFileName",
         "_type": "string",
-        "_value": "config/assets/aa_refrigerator_types_detail.html"
+        "_value": "config/tables/refrigerator_types/html/refrigerator_types_detail.html"
       },
       {
         "_partition": "Table",
@@ -2228,7 +2228,7 @@
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "string",
-        "_value": "config/assets/aa_refrigerator_types_list.html"
+        "_value": "config/tables/refrigerator_types/html/refrigerator_types_list.html"
       },
       {
         "_partition": "Table",

@@ -276,7 +276,7 @@ module.exports = function (grunt) {
     grunt.registerTask(
         'adbpush',
         'Perform all the adbpush tasks',
-        ["adbpull-props", "remove-folders", 'adbpush-collect', 'adbpush-default-app', "adbpush-props"]);
+        ['adbpush-default-app']);
 
     grunt.registerTask(
         'clean',
@@ -489,15 +489,16 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we
-            // want everything returned to be relative to 'app' by using 'cwd'.
+            // name, effectively pushing everything twice.  We also specify that we 
+            // want everything returned to be relative to 'app' by using 'cwd'.  
             var dirs = grunt.file.expand(
-                { cwd: 'app' },
-                '.nomedia',
-                '*',
-                '!system',
-                '!data',
-                '!output');
+                {filter: 'isFile',
+                 cwd: 'app' },
+				'.nomedia',
+                '**',
+                '!system/**',
+				'!data/**',
+				'!output/**');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -513,6 +514,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 grunt.task.run('exec:adbpush:' + src + ':' + dest);
             });
         });
+
 
     grunt.registerTask(
         'adbpush-tables',

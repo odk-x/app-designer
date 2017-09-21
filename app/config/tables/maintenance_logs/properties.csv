@@ -1,0 +1,15 @@
+_partition,_aspect,_key,_type,_value
+Column,date_serviced,displayName,object,"{""text"":{""default"":""Date Serviced"",""es"":""Fecha de Servicio""}}"
+Column,notes,displayName,object,"{""text"":{""default"":""Notes"",""es"":""Notas""}}"
+Column,refrigerator_id,displayName,object,"{""text"":{""default"":""Refrigerator ID"",""es"":""ID de Frigorífico""}}"
+Column,spare_parts,displayName,object,"{""text"":{""default"":""Enter spare parts"",""es"":""Entrar piezas de repuesto""}}"
+Column,type_of_maintenance,displayChoicesList,object,"[{""choice_list_name"":""maint_types"",""data_value"":""repair"",""display"":{""title"":{""text"":{""default"":""Repair"",""es"":""Reparar""}}},""_row_num"":3},{""choice_list_name"":""maint_types"",""data_value"":""upgrade"",""display"":{""title"":{""text"":{""default"":""Upgrade"",""es"":""Mejorar""}}},""_row_num"":4},{""choice_list_name"":""maint_types"",""data_value"":""preventative"",""display"":{""title"":{""text"":{""default"":""Preventative"",""es"":""Preventivo""}}},""_row_num"":5},{""choice_list_name"":""maint_types"",""data_value"":""inspection"",""display"":{""title"":{""text"":{""default"":""Inspection"",""es"":""Inspección""}}},""_row_num"":6},{""choice_list_name"":""maint_types"",""data_value"":""other"",""display"":{""title"":{""text"":{""default"":""Other"",""es"":""Otro""}}},""_row_num"":7}]"
+Column,type_of_maintenance,displayName,object,"{""text"":{""default"":""Type of Maintenance Performed"",""es"":""Tipo de mantenimiento realizado""}}"
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,wrong_form
+Table,default,defaultViewType,string,LIST
+Table,default,detailViewFileName,string,config/tables/maintenance_logs/html/maintenance_logs_detail.html
+Table,default,displayName,object,"{""text"":{""default"":""Maintenance Logs"",""es"":""Registro de Servicio""}}"
+Table,default,listViewFileName,string,config/tables/maintenance_logs/html/maintenance_logs_list.html
+Table,security,defaultAccessOnCreation,string,HIDDEN
+Table,security,unverifiedUserCanCreate,boolean,false

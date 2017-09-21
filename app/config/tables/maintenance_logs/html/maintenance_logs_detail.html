@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- TBL_IV_REF Detailed View -->
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../js/maintenance_logs_detail.js"></script>
+
+        <div class="header col-12">
+            <h1>Refrigerator <span id="tracking_id" class=""></span></h1>
+        </div>
+
+        <br>
+
+        <div class="detail col-12">
+            <h3>Maintenance Log Information</span></h3>
+        </div>
+
+
+        <p>Refrigerator ID: <span id="refrigerator_id"></span>
+        <p>Working Status: <span id="working_status"></span></p>
+        <p>Reason Not Working: <span id="reason_not_working"></span></p>
+        <p>Date Serviced: <span id="date_serviced"></span></p>
+        <p>Type of Maintenance: <span id="maint_type"></span></p>
+        <p>Spare Parts: <span id="spare_parts"></span></p>
+        <p>Notes: <span id="notes"></span></p>
+        
+        <div id="editLogBtn" class="button hideButton">
+            <h3 href="#" onclick="onEditLog()">Edit Log</h3>
+        </div>
+
+        <div id="delLogBtn" class="button buttonDelete hideButton">
+            <h3 href="#" onclick="onDeleteLog()">Delete Log</h3>
+        </div>
+
+        <script>
+            $(function() { display(); });
+        </script>
+    </body>
+</html>
