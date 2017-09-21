@@ -295,14 +295,15 @@ window.listViewLogic = {
 
     appendUriParamsToListQuery: function() {
         var that = this;
+        var sqlUriParamStmt = '';
         var retUriParams = util.getAllQueryParameters();
 
-        if (retUriParams === null || retUriParams === undefined) {
-            return;
+        if (retUriParams === null || retUriParams === undefined ||
+            $.isEmptyObject(retUriParams) === true) {
+            return sqlUriParamStmt;
         }
 
         var uriKeys = Object.keys(retUriParams);
-        var sqlUriParamStmt = '';
 
         if (that.listQuery.indexOf('WHERE') < 0) {
             sqlUriParamStmt = ' WHERE ';
