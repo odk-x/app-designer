@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--link href="ratchet/css/ratchet.css" type="text/css" rel="stylesheet" />
+        <link href="ratchet/css/ratchet-theme-android.css" type="text/css" rel="stylesheet" /-->
+        <link href="../../system/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+        <link href="css/homeScreen.css" type="text/css" rel="stylesheet" />
+        <link href="css/filterFacilityScreen.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery.js"></script>
+        <script type="text/javascript" src="../../system/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
+        <script type="text/javascript" src="js/addHealthFacility.js"></script>
+    </head>
+
+    <body id="main">
+        <div id="wrapper">
+            <h1>Add Health Facility</h1>
+            <br>
+            <div class="container">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label" for="facility_region">Select Region:</label>
+                        <select class="form-control" id="facility_region">
+                            <option selected value="North" data-regionlevel1="North">North</option>
+                            <option value="Central West" data-regionlevel1="Central">Central West</option>
+                            <option value="Central East" data-regionlevel1="Central">Central East</option>
+                            <option value="South West" data-regionlevel1="South">South West</option>
+                            <option value="South East" data-regionlevel1="South">South East</option>
+                        </select>
+
+                        <button id="add-facility" type="submit" class="btn btn-launch btn-filter btn-default">Add Facility</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(display);
+        </script>
+    </body>
+</html>

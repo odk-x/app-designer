@@ -38,4 +38,12 @@ function display() {
         }
     );
 
+    var viewRefrigeratorModelsButton = $('#add-facility');
+    viewRefrigeratorModelsButton.on(
+        'click',
+        function() {
+            odkTables.launchHTML(null, 'config/assets/addHealthFacility.html');
+        }
+    );
+
 }
