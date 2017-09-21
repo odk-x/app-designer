@@ -34,7 +34,7 @@ function display() {
         function() {
             var filterQueryParams = util.getKeyToAppendToColdChainURL(util.leafRegion, leaf);
             odkTables.launchHTML(null, 
-                'config/assets/filterHealthFacilitiesByRegType.html' + filterQueryParams);
+                'config/assets/filterHealthFacilitiesByType.html' + filterQueryParams);
         }
     );
 

@@ -44,7 +44,7 @@ function successCB(result) {
 }
 
 function failCB(error) {
-    console.log('filterHealthFacilitiesByRegType: util.getFacilityTypesByDistrict failed: ' + error);
+    console.log('filterHealthFacilitiesByType: util.getFacilityTypesByDistrict failed: ' + error);
 }
 
 function display() {

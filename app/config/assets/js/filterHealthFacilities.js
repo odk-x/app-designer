@@ -10,11 +10,11 @@ function display() {
     // Set the background to be a picture.
     body.css('background-image', 'url(img/hallway.jpg)');
 
-    var viewFacilitiesButton = $('#filter-facilities-by-reg-type');
+    var viewFacilitiesButton = $('#filter-facilities-by-type');
     viewFacilitiesButton.on(
         'click',
         function() {
-            odkTables.launchHTML(null,'config/assets/filterHealthFacilitiesByRegType.html');
+            odkTables.launchHTML(null,'config/assets/filterHealthFacilitiesByType.html');
         }
     );
 
