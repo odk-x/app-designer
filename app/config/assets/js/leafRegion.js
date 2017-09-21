@@ -48,6 +48,16 @@ function display() {
         }
     );
 
+    var viewServiceRefrigeratorsButton = $('#view-service-refrigerators');
+    viewServiceRefrigeratorsButton.on(
+        'click', 
+        function() {
+            var serviceQueryParams = util.getKeyToAppendToColdChainURL(util.leafRegion, leaf);
+            
+            odkTables.launchHTML(null, 
+                'config/tables/refrigerators/html/refrigerators_service_list.html' + serviceQueryParams);
+    });
+
     var viewRefrigeratorModelsButton = $('#view-models');
     viewRefrigeratorModelsButton.on(
         'click',

@@ -4,18 +4,6 @@
 /* global $, odkTables, util, odkData */
 'use strict';
 
-// Handle the case where we are debugging in chrome.
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/health_facility_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
-
 var healthFacilityResultSet = {};
 
 function onLinkClick() {
@@ -36,7 +24,7 @@ function onAddFridgeClick() {
 	jsonMap._group_read_only = healthFacilityResultSet.get('_group_read_only');
 	jsonMap._group_modify = healthFacilityResultSet.get('_group_modify');
 	jsonMap._group_privileged = healthFacilityResultSet.get('_group_privileged');
-    //odkTables.addRowWithSurvey({}, "refrigerators", "refrigerators", null, defaults);
+
     odkTables.addRowWithSurvey(null, 'refrigerators', 'refrigerators', null, jsonMap);
 }
 
@@ -56,7 +44,6 @@ function cbFailure(error) {
 function display() {
 
     odkData.getViewData(cbSuccess, cbFailure);
-
 }
 
 function refrigeratorsCBSuccess(invData) {
@@ -101,7 +88,6 @@ function refrigeratorsCBSuccess(invData) {
     $('#supply_mode').text(util.formatDisplayText(
         healthFacilityResultSet.get('vaccine_supply_mode')));
 
-
     $('#fridge_list').text(invData.getCount());
 
 }
@@ -109,5 +95,4 @@ function refrigeratorsCBSuccess(invData) {
 function refrigeratorsCBFailure(error) {
 
     console.log('health_facility_detail refrigerators query CB error : ' + error);
-
 }

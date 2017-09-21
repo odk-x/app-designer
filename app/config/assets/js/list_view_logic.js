@@ -24,6 +24,7 @@ window.listViewLogic = {
     queryToRunParams: null,
 
     listQuery: null,
+    listQueryParams: null,
 
     searchParams: null,
 
@@ -73,6 +74,18 @@ window.listViewLogic = {
         var that = this;
 
         that.listQuery = queryToUse;
+    },
+
+    setListQueryParams: function(paramsToUse) {
+        if (paramsToUse === null || paramsToUse === undefined ||
+            paramsToUse.length === 0) {
+            console.log('setListQueryParams: invalid list query params');
+            return;
+        }
+
+        var that = this;
+
+        that.listQueryParams = paramsToUse;
     },
 
     setSearchParams: function(searchParamsToUse) {
@@ -281,6 +294,7 @@ window.listViewLogic = {
     },
 
     appendUriParamsToListQuery: function() {
+        var that = this;
         var retUriParams = util.getAllQueryParameters();
 
         if (retUriParams === null || retUriParams === undefined) {
@@ -289,13 +303,16 @@ window.listViewLogic = {
 
         var uriKeys = Object.keys(retUriParams);
         var sqlUriParamStmt = '';
+
+        if (that.listQuery.indexOf('WHERE') < 0) {
+            sqlUriParamStmt = ' WHERE ';
+        } else {
+            sqlUriParamStmt = ' AND ';
+        }
         
         for (var i = 0; i < uriKeys.length; i++) {
             var uKey = uriKeys[i];
 
-            if (i === 0) {
-                sqlUriParamStmt = ' WHERE ';
-            }
             sqlUriParamStmt += uKey + ' = ?';
             
             if (i < uriKeys.length - 1) {
@@ -388,8 +405,13 @@ window.listViewLogic = {
             if (that.queryToRun === null || that.queryToRun ===  undefined ||
                 that.queryToRunParams === null || that.queryToRunParams === undefined) {
                 // Init display
+                that.queryToRunParams = [];
+                if (that.listQueryParams !== null && that.listQueryParams !== undefined &&
+                    that.listQueryParams.length !== 0) {
+                    that.queryToRunParams = that.queryToRunParams.concat(that.listQueryParams);
+                }
                 var addSql = that.appendUriParamsToListQuery();
-                that.queryToRunParams = that.getUriQueryParams();
+                that.queryToRunParams = that.queryToRunParams.concat(that.getUriQueryParams());
 
                 that.queryToRun = that.listQuery + addSql;
                 queryToRunParts[that.queryStmt] = that.queryToRun;

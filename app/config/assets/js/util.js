@@ -15,6 +15,7 @@ util.rowId = '_id';
 util.modelRowId = 'model_row_id';
 util.refrigeratorId = 'refrigerator_id';
 util.facilityRowId = 'facility_row_id';
+util.maintenancePriority = 'maintenance_priority';
 util.adminRegions = [
         {'label': 'Central', 'region':'Central', 
             'subRegions': [{'label':'Central East', 'region':'Central East'},
@@ -166,9 +167,15 @@ util.getQueryParameter = function(key) {
  * Get a string to append to a url that will contain information the date and
  * time. The values can then be retrieved using getQueryParameter.
  */
-util.getKeyToAppendToColdChainURL = function(key, value) {
+util.getKeyToAppendToColdChainURL = function(key, value, shouldBeFirst) {
 
     var first = true;
+    if (shouldBeFirst !== null && shouldBeFirst !== undefined) {
+        if (shouldBeFirst === false) {
+            first = false;
+        }
+    }
+
     var result;
     var adaptProps = {};
 

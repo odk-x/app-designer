@@ -13,18 +13,15 @@ function processFrigPromises(facilityResult, typeResult, logResult) {
     facilityData = facilityResult;
     typeData = typeResult;
 
-    $('#refrigerator_id').text(refrigeratorsResultSet.get('refrigerator_id'));
-
-    $('#facility_name').text(facilityData.get('facility_name'));
-    $('#model_id').text(typeData.get('catalog_id'));
-
+    util.showIdForDetail('#refrigerator_id', 'refrigerator_id', refrigeratorsResultSet, false);
+    util.showIdForDetail('#facility_name', 'facility_name', facilityData, false);
+    util.showIdForDetail('#model_id', 'catalog_id', typeData, false);
     util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsResultSet, false);
     util.showIdForDetail('#install_year', 'year', refrigeratorsResultSet, false);
     util.showIdForDetail('#working_status', 'working_status', refrigeratorsResultSet, true);
     util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsResultSet, true);
     util.showIdForDetail('#voltage_regulator', 'voltage_regulator', refrigeratorsResultSet, true);
     util.showIdForDetail('#maintenance_priority', 'maintenance_priority', refrigeratorsResultSet, true);
-
     util.showIdForDetail('#date_serviced', 'date_serviced', logResult, true);
 }
 

@@ -10,20 +10,13 @@ var refrigeratorsData = {};
 function cbFrigSuccess(result) {
     refrigeratorsData = result;
 
-    $('#tracking_id').text(refrigeratorsData.get('tracking_id'));
-
-    $('#refrigerator_id').text(maintenanceLogsResultSet.get('refrigerator_id'));
-
+    util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsData, false);
+    util.showIdForDetail('#refrigerator_id', 'refrigerator_id', maintenanceLogsResultSet, false);
     util.showIdForDetail('#working_status', 'working_status', refrigeratorsData, true);
-
     util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsData, true);
-
     util.showIdForDetail('#date_serviced', 'date_serviced', maintenanceLogsResultSet, true);
-    
     util.showIdForDetail('#maint_type', 'type_of_maintenance', maintenanceLogsResultSet, true);
-
     util.showIdForDetail('#spare_parts', 'spare_parts', maintenanceLogsResultSet, true);
-
     util.showIdForDetail('#notes', 'notes', maintenanceLogsResultSet, false);
     
 }
