@@ -177,3 +177,11 @@ button[disabled]{
     margin: 5px;
 }
 
+.imgWrapper {
+    max-width: 45%;
+    text-align: center;
+}
+
+.imgWrapperDiv {
+    text-align: center;
+}

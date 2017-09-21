@@ -21,6 +21,7 @@ function resumeFunc(state) {
         listViewLogic.setPrevAndNextButtons('#prevButton', '#nextButton');
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
         listViewLogic.showEditAndDeleteButtons(false);
+        listViewLogic.setImageToDisplayInList('refrigerator_picture_uriFragment');
         listViewLogic.setColIdsToDisplayInList('Catalog ID', 'catalog_id', 
             'Manufacturer', 'manufacturer', 'Model ID', 'model_id');
     }

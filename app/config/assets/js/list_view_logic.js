@@ -29,6 +29,7 @@ window.listViewLogic = {
     searchParams: null,
 
     listElemId: null,
+    imgId: null,
     searchTxtId: null,
     headerId: null,
     limitId: null,
@@ -233,8 +234,14 @@ window.listViewLogic = {
 
         if (secondDetailColId !== null && secondDetailColId !== undefined && secondDetailColId.length !== 0) {
             that.secondDetColId = secondDetailColId;
+        }  
+    },
+
+    setImageToDisplayInList: function(imgIdToUse) {
+        var that = this;
+        if (imgIdToUse !== null && imgIdToUse !== undefined && imgIdToUse.length !== 0) {
+            that.imgId = imgIdToUse;
         }
-        
     },
 
     makeCntQuery: function(queryToWrap) {
@@ -562,6 +569,24 @@ window.listViewLogic = {
                 field2.attr('class', 'detail');
                 field2.text(that.createLabel(that.secondDetLabel) + sDetail);
                 item.append(field2);
+            }
+
+            if (that.imgId !== null && that.imgId !== undefined && that.imgId.length !== 0) {
+                var uriRelative = resultSet.getData(i, that.imgId);
+                var src = '';
+                if (uriRelative !== null  && uriRelative !== '') {
+                    var uriAbsolute = odkCommon.getRowFileAsUrl(that.tableId, resultSet.getRowId(i), uriRelative);
+                    src = uriAbsolute;
+                }
+                
+                var thumbnail = $('<img>');
+                thumbnail.attr('src', src);
+                thumbnail.attr('class', 'imgWrapper');
+
+                var imgDiv = $('<div>');
+                imgDiv.addClass('imgWrapperDiv');
+                imgDiv.append(thumbnail);
+                item.append(imgDiv);
             }
 
             $(that.listElemId).append(item);
