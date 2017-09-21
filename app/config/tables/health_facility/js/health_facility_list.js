@@ -20,7 +20,7 @@ function resumeFunc(state) {
         listViewLogic.setLimitElement('#limitDropdown');
         listViewLogic.setPrevAndNextButtons('#prevButton', '#nextButton');
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
-        listViewLogic.showEditAndDeleteButtons(false);
+        listViewLogic.showEditAndDeleteButtons(true);
         listViewLogic.setColIdsToDisplayInList('', 'facility_name', 
             'Facility ID', 'facility_id');
     }

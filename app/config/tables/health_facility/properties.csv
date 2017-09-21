@@ -39,7 +39,7 @@ Table,default,defaultViewType,string,LIST
 Table,default,detailViewFileName,string,config/tables/health_facility/html/health_facility_detail.html
 Table,default,displayName,object,"{""text"":{""default"":""Health Facility"",""es"":""Facilidad de Salúd""}}"
 Table,default,listViewFileName,string,config/tables/health_facility/html/health_facility_list.html
-Table,default,mapListViewFileName,string,config/tables/health_facility/html/health_facility_list.html
+Table,default,mapListViewFileName,string,config/tables/health_facility/html/hFacility_list.html
 Table,security,defaultAccessOnCreation,string,HIDDEN
 Table,security,unverifiedUserCanCreate,boolean,false
 TableMapFragment,default,keyColorRuleType,string,None

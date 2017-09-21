@@ -278,7 +278,12 @@ window.listViewLogic = {
 
         // Display the results in the list
         that.updateNavButtons();
-        that.updateNavText();
+        
+        // Right now we have a problem with having the count(*)
+        // respect group privileges
+        // This is a hack until I can fix this!
+        var actualResultCount = resultSet.getCount();
+        that.updateNavText(actualResultCount);
         that.clearRows();
 
         if (resultSet.getCount() === 0) {
@@ -573,7 +578,7 @@ window.listViewLogic = {
         $(that.listElemId).empty();
     },
 
-    updateNavText: function() {
+    updateNavText: function(actualResultSetCnt) {
         var that = this;
 
         if (that.navTextCnt !== null && that.navTextCnt !== undefined &&
@@ -601,6 +606,19 @@ window.listViewLogic = {
 
             if (that.navTextLimit !== null && that.navTextLimit !== undefined &&
                 that.navTextLimit.length !== 0) {
+
+                // Hack until group permissions can be respected
+                // We need a special case for when limit > actualResultSet and 
+                // offset + actualResultSet < rowCount - then we need to display something else
+                
+                if (actualResultSetCnt < that.limit) {
+                    var actualCnt = that.offset + actualResultSetCnt;
+                    if (actualCnt < that.rowCount) {
+                        $(that.navTextLimit).text(actualCnt);
+                        return;
+                    }
+                }
+
                 var limitVal = (that.offset + that.limit >= that.rowCount) ? that.rowCount : that.offset + that.limit;
                 $(that.navTextLimit).text(limitVal);
             }
