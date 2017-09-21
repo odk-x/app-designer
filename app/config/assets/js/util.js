@@ -286,6 +286,10 @@ util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat) {
         return;
     }
 
+    if (resultSet.getCount() === 0) {
+        return;
+    }
+
     // Format for date
     var meta = resultSet.getMetadata();
     var elementMetadata = meta.dataTableModel[colId];

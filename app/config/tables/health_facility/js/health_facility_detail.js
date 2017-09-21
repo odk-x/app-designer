@@ -28,9 +28,48 @@ function onAddFridgeClick() {
     odkTables.addRowWithSurvey(null, 'refrigerators', 'refrigerators', null, jsonMap);
 }
 
+function onEditFacility() {
+    if (!$.isEmptyObject(healthFacilityResultSet)) {
+        odkTables.editRowWithSurvey(null, healthFacilityResultSet.getTableId(), healthFacilityResultSet.getRowId(0), 'health_facility', null, null);
+    }
+}
+
+function onDeleteFacility() {
+    if (!$.isEmptyObject(healthFacilityResultSet)) {
+        if (confirm('Are you sure you want to delete this health facility?')) {
+
+            odkData.deleteRow(healthFacilityResultSet.getTableId(),
+                null,
+                healthFacilityResultSet.getRowId(0),
+                cbDeleteSuccess, cbDeleteFailure);           
+        }
+    }
+}
+
+function cbDeleteSuccess() {
+    console.log('health facility deleted successfully');
+}
+
+function cbDeleteFailure(error) {
+
+    console.log('health facility delete failure CB error : ' + error);
+}
+
 function cbSuccess(result) {
 
     healthFacilityResultSet = result;
+
+     var access = healthFacilityResultSet.get('_effective_access');
+
+    if (access.indexOf('w') !== -1) {
+        var editButton = $('#editFacilityBtn');
+        editButton.removeClass('hideButton');
+    }
+
+    if (access.indexOf('d') !== -1) {
+        var deleteButton = $('#delFacilityBtn');
+        deleteButton.removeClass('hideButton');
+    }
 
     odkData.query('refrigerators', 'facility_row_id = ?', [healthFacilityResultSet.get('_id')],
         null, null, null, null, null, null, true, refrigeratorsCBSuccess, refrigeratorsCBFailure);

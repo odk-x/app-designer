@@ -131,3 +131,7 @@ sup {
   display: block;
   margin: auto;
 }
+
+.hideButton {
+    display: none;
+}

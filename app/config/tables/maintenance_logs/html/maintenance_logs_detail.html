@@ -32,7 +32,13 @@
         <p>Spare Parts: <span id="spare_parts"></span></p>
         <p>Notes: <span id="notes"></span></p>
         
+        <div id="editLogBtn" class="button hideButton">
+            <h3 href="#" onclick="onEditLog()">Edit Log</h3>
+        </div>
 
+        <div id="delLogBtn" class="button buttonDelete hideButton">
+            <h3 href="#" onclick="onDeleteLog()">Delete Log</h3>
+        </div>
 
         <script>
             $(function() { display(); });

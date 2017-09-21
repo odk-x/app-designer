@@ -28,6 +28,18 @@ function processFrigPromises(facilityResult, typeResult, logResult) {
 function cbSuccess(result) {
     refrigeratorsResultSet = result;
 
+     var access = refrigeratorsResultSet.get('_effective_access');
+
+    if (access.indexOf('w') !== -1) {
+        var editButton = $('#editFrigBtn');
+        editButton.removeClass('hideButton');
+    }
+
+    if (access.indexOf('d') !== -1) {
+        var deleteButton = $('#delFrigBtn');
+        deleteButton.removeClass('hideButton');
+    }
+
     var healthFacilityPromise = new Promise(function(resolve, reject) {
         odkData.query('health_facility', '_id = ?', [refrigeratorsResultSet.get('facility_row_id')], 
             null, null, null, null, null, null, true, resolve, reject);
@@ -89,7 +101,13 @@ function onLinkClickFacility() {
     }
 }
 
-function onLinkClickDelete() {
+function onEditFrig() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+        odkTables.editRowWithSurvey(null, refrigeratorsResultSet.getTableId(), refrigeratorsResultSet.getRowId(0), 'refrigerators', null, null);
+    }
+}
+
+function onDeleteFrig() {
     if (!$.isEmptyObject(refrigeratorsResultSet)) {
 
         if (confirm('Are you sure you want to delete this refrigerator?')) {

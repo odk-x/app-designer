@@ -21,12 +21,51 @@ function cbFrigSuccess(result) {
     
 }
 
+function onEditLog() {
+    if (!$.isEmptyObject(maintenanceLogsResultSet)) {
+        odkTables.editRowWithSurvey(null, maintenanceLogsResultSet.getTableId(), maintenanceLogsResultSet.getRowId(0), 'maintenance_logs', null, null);
+    }
+}
+
+function cbDeleteSuccess() {
+    console.log('cbDeleteSuccess: successfully deleted row');
+}
+
+function cbDeleteFailure(error) {
+    console.log('cbDeleteFailure: deleteRow failed with message: ' + error);
+}
+
+function onDeleteLog() {
+    if (!$.isEmptyObject(maintenanceLogsResultSet)) {
+
+        if (confirm('Are you sure you want to delete this maintenance log?')) {
+
+            odkData.deleteRow(
+                maintenanceLogsResultSet.getTableId(),
+                null,
+                maintenanceLogsResultSet.getRowId(0),
+                cbDeleteSuccess, cbDeleteFailure);           
+        }
+    }
+}
+
 function cbFrigFailure(error) {
     console.log('cbFrigFailure: query for refrigerators _id failed with message: ' + error);
 }
 
 function cbSuccess(result) {
     maintenanceLogsResultSet = result;
+
+    var access = maintenanceLogsResultSet.get('_effective_access');
+    if (access.indexOf('w') !== -1) {
+        var editButton = $('#editLogBtn');
+        editButton.removeClass('hideButton');
+    }
+
+    if (access.indexOf('d') !== -1) {
+        var deleteButton = $('#delLogBtn');
+        deleteButton.removeClass('hideButton');
+    }
 
     odkData.query('refrigerators', '_id = ?', [maintenanceLogsResultSet.get('refrigerator_id')], 
         null, null, null, null, null, null, true, cbFrigSuccess, cbFrigFailure);
