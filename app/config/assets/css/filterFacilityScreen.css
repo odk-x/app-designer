@@ -1,0 +1,12 @@
+/* CSS Stylesheet - Homescreen*/
+.form-label {
+    font-size: 20px;
+    color: white;
+}
+
+.btn-filter {
+    font-weight: normal;
+    margin-top: 50px;
+    font-family: Helvetica;
+    border: teal;
+}
