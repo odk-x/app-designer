@@ -210,7 +210,7 @@
       },
       {
         "clause": "if",
-        "condition": "selected(data('electricity_source'), 'grid')",
+        "condition": "(selected(data('electricity_source'), 'grid') || selected(data('electricity_source'), 'both'))",
         "_row_num": 18
       },
       {
@@ -3143,7 +3143,7 @@
               "__rowNum__": 22,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nif (selected(data('electricity_source'), 'grid')) {\nactivePromptIndicies.push(9);\n}\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nif ((selected(data('electricity_source'), 'grid') || selected(data('electricity_source'), 'both'))) {\nactivePromptIndicies.push(9);\n}\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
