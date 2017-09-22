@@ -1,7 +1,7 @@
 
 // Displays homescreen
 /*function display() {
-    odkData.query('authorizations', 'is_active = ?', ['true'],  
+    odkData.query(util.authorizationTable, 'is_active = ?', ['true'],  
         null, null, null, null, null, null, true, activateAuthSuccess, activateAuthFailure);
 }
 
@@ -10,7 +10,7 @@ function activateAuthSuccess(result) {
         var struct = {};
         struct.is_active = 'true';
         struct.is_simple = 'true';
-        odkData.addRow('authorizations', struct, 0, renderSuccess, renderFailure);
+        odkData.addRow(util.authorizationTable, struct, 0, renderSuccess, renderFailure);
     } else {
         renderSuccess(null);
     }
@@ -62,7 +62,7 @@ tokenIndex.rolesCBSuccess = function(result) {
             var followThrough = confirm("Are you sure you want to perform an Administrator Reset? \n" + 
                 "All barcodes will be entitled to a distribution if confirmed");
             if (followThrough) {
-                odkData.query('authorizations', 'status = ?', ['active'],
+                odkData.query(util.authorizationTable, 'status = ?', ['active'],
                 null, null, null, null, null, null, true, tokenIndex.resetSuccess, tokenIndex.resetFailure);
             }
         }
@@ -78,12 +78,12 @@ tokenIndex.resetSuccess = function(result) {
     for (var i = 0; i < result.getCount(); i++) {
         var struct = {};
         struct.status = 'disabled';
-        odkData.updateRow('authorizations', struct, result.getRowId(i), tokenIndex.disableSuccess, tokenIndex.disableFailure);
+        odkData.updateRow(util.authorizationTable, struct, result.getRowId(i), tokenIndex.disableSuccess, tokenIndex.disableFailure);
     }
     var struct = {};
     struct.status = 'active';
     struct.type = 'TOKEN';
-    odkData.addRow('authorizations', struct, util.genUUID(), tokenIndex.updateSuccess, tokenIndex.updateFailure);
+    odkData.addRow(util.authorizationTable, struct, util.genUUID(), tokenIndex.updateSuccess, tokenIndex.updateFailure);
 }
 
 tokenIndex.resetFailure = function(error) {

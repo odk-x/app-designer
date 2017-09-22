@@ -28,7 +28,7 @@ var firstLoad = function() {
 };
 
 var resumeFn = function(fIdxStart) {
-  odkData.query('authorizations', null, null, null, null,
+  odkData.query(util.authorizationTable, null, null, null, null,
             null, null, null, null, true, authorizationsCBSuccess,
             authorizationsCBFailure);
   

@@ -6,9 +6,15 @@
 
 var util = {};
 
-util.dateKey = 'follow_date';
-util.timeKey = 'follow_time';
-util.focalChimpKey = 'focal_chimp';
+/**
+ * Red Cross Constants
+ */
+
+util.beneficiaryEntityTable = 'beneficiary_entities';
+util.individualTable = 'individuals';
+util.authorizationTable = 'authorizations';
+util.entitlementTable = 'entitlements';
+util.deliveryTable = 'deliveries';
 
 /**
  * Get the query parameter from the url. Note that this is kind of a hacky/lazy
@@ -33,77 +39,6 @@ util.getQueryParameter = function(key) {
     } else {
         return decodeURIComponent(fromValueOnwards.substring(0, stopAt));
     }
-};
-
-util.formatExistingTimes = function(tableData) {
-
-    var times = [];
-    for (var i = 0; i < tableData.getCount(); i++) {
-        var dataPoint = tableData.getData(i, 'FA_time_start');
-        // now see if we already have this value, in which case we won't add it
-        if (times.indexOf(dataPoint) < 0) {
-            times.push(dataPoint);
-        }
-    }
-
-    return times;
-
-};
-/**
- * Get all the timepoints that exist for a given date and focal chimp.
- * These will create a key that defines a specific point during a follow.
- *
- * Returns an array of times that have been previously recorded.
- */
-util.getExistingTimesForDate = function(date, focalChimpId, cbSuccess, cbFailure) {
-    // So, we're just going to query for all the rows in follow_arrival
-    // matching this date.
-    
-    // Our where clause is just going to be for this date.
-    var whereClause =
-        'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ?';
-    var selectionArgs = [date, focalChimpId];
-
-    window.odkData.query('follow_arrival', whereClause, selectionArgs, 
-        null, null, null, null, true, cbSuccess, cbFailure);
-};
-
-/**
- * Get a query for all the data at the given date and time for the specified
- * focal chimp. Together this specifies a unique time point in a follow.
- */
-util.getTableDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbFailure) {
-    
-    var whereClause =
-        'FA_FOL_date = ? AND FA_FOL_B_focal_AnimID = ? AND FA_time_start = ?';
-    var selectionArgs = [date, focalChimpId, time];
-
-    window.odkData.query('follow_arrival', whereClause, selectionArgs, 
-        null, null, null, null, true, cbSuccess, cbFailure);
-};
-
-util.getFoodDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbFailure) {
-
-    var whereClause =
-        'FB_FOL_date = ? AND FB_FOL_B_AnimID = ? AND FB_begin_feed_time = ?';
-
-    var selectionArgs = [date, focalChimpId, time];
-
-    window.odkData.query('food_bout', whereClause, selectionArgs, 
-        null, null, null, null, true, cbSuccess, cbFailure);
-
-};
-
-util.getSpeciesDataForTimePoint = function(date, time, focalChimpId, cbSuccess, cbFailure) {
-
-    var whereClause =
-        'OS_FOL_date = ? AND OS_FOL_B_focal_AnimID = ? AND OS_time_begin = ?';
-
-    var selectionArgs = [date, focalChimpId, time];
-
-    window.odkData.query('other_species', whereClause, selectionArgs, 
-        null, null, null, null, true, cbSuccess, cbFailure);
-
 };
 
 /**
@@ -145,3 +80,36 @@ util.renderPage = function(renderFunction) {
     $(':button').css({'margin-bottom' : window.innerHeight * .06 + "px"});
     document.body.style.display = "block";
 }
+
+util.setJSONMap = function(JSONMap, key, value) {
+    if (value !== null && value !== undefined) {
+        JSONMap[key] = value;
+    }
+}
+
+/**
+ * Red cross config getters
+ */
+
+util.configPath = '../json/config.json';
+
+util.getRegistrationMode = function() {
+    return 'HOUSEHOLD';
+}
+
+util.getWorkflowMode = function() {
+    return 'REGISTRATION_REQUIRED';
+}
+
+util.getBeneficiaryEntityCustomFormId = function() {
+    return 'custom_beneficiary_entities';
+}
+
+util.getIndividualCustomFormId = function() {
+    return 'custom_individuals';
+}
+
+
+
+
+

@@ -9,15 +9,29 @@ var windowHeight = $(window).innerHeight();
 var search_font;
 var type = util.getQueryParameter('type');
 var locale = odkCommon.getPreferredLocale();
+var singularUnitLabel;
+var pluralUnitLabel;
 
 function start() {
     $('#launch').text(odkCommon.localizeText(locale, "view"));
-    if (type == 'registrationMember') {
-        $('#title').text(odkCommon.localizeText(locale, "search_beneficiaries"));
-    } else if (type == 'registration') {
-        $('#title').text(odkCommon.localizeText(locale, "search_households_title"));
-    } else {
+    if (type == util.individualTable) {
+        $('#title').text(odkCommon.localizeText(locale, "search_individuals"));
+        singularUnitLabel = odkCommon.localizeText(locale, "beneficiary");
+        pluralUnitLabel = odkCommon.localizeText(locale, "beneficiaries");
+    } else if (type == util.beneficiaryEntityTable) {
+        if (util.getRegistrationMode() == 'HOUSEHOLD') {
+            $('#title').text(odkCommon.localizeText(locale, "search_households"));
+            singularUnitLabel = odkCommon.localizeText(locale, "household");
+            pluralUnitLabel = odkCommon.localizeText(locale, 'households');
+        } else {
+            $('#title').text(odkCommon.localizeText(locale, "search_beneficiaries"));
+            singularUnitLabel = odkCommon.localizeText(locale, "individual");
+            pluralUnitLabel = odkCommon.localizeText(locale, 'individuals');
+        }
+    } else if (type == util.deliveryTable) {
         $('#title').text(odkCommon.localizeText(locale, "search_deliveries"));
+        singularUnitLabel = odkCommon.localizeText(locale, "delivery");
+        pluralUnitLabel = odkCommon.localizeText(locale, "deliveries");
     }
     odkData.query(type, null, null, null, null, null, null, null, null, null,
                   populateSuccess, populateFailure);
@@ -40,7 +54,7 @@ function addField(item, index) {
 }
 
 function search() {
-    sqlWhereClause = document.getElementById('field').value +' = ?';
+    sqlWhereClause = document.getElementById('field').value + ' = ?';
     sqlSelectionArgs = document.getElementById('value').value;
     odkData.query(type, sqlWhereClause, [sqlSelectionArgs],
                   null, null, null, null, null, null, null,
@@ -49,27 +63,12 @@ function search() {
 
 function successCallbackFn(result) {
     var count = result.getCount();
-    var label;
-    if (type == 'registrationMember') {
-        if (count == 1) {
-            label = odkCommon.localizeText(locale, "beneficiary");
-        } else {
-            label = odkCommon.localizeText(locale, "beneficiaries");
-        }
-    } else if (type == 'registration') {
-        if (count == 1) {
-            label = odkCommon.localizeText(locale, "household");
-        } else {
-            label = odkCommon.localizeText(locale, 'households');
-        }
+
+    if (count == 1) {
+         $('#search_results').text(count + ' ' + singularUnitLabel + ' ' + odkCommon.localizeText(locale, 'found'));
     } else {
-        if (count == 1) {
-            label = odkCommon.localizeText(locale, "delivery");
-        } else {
-            label = odkCommon.localizeText(locale, "deliveries");
-        }
+         $('#search_results').text(count + ' ' + pluralUnitLabel + ' ' + odkCommon.localizeText(locale, 'found'));
     }
-    $('#search_results').text(count + ' ' + label + ' ' + odkCommon.localizeText(locale, 'found'));
     if (count > 0) {
         $('#launch').show();
     } else {
@@ -82,6 +81,8 @@ function failureCallbackFn(error) {
     $('#launch').hide();
 }
 
+
+// TODO: figure out what's going on with all these different list views
 function launch() {
     if (type === 'registration') {
         odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' +
@@ -89,23 +90,5 @@ function launch() {
     } else {
         odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' +
                                   type + '/html/' + type + '_list.html');
-    }
-}
-
-$(window).resize(function() {
-    helper('search', search_font, 'font-size');
-    windowHeight = $(window).innerHeight();
-
-});
-
-function helper(name, value, attribute) {
-    var viewportHeight = $(window).innerHeight();
-    if (viewportHeight < windowHeight) {
-        console.log('set ' + name + '\'s ' + attribute + ' to ' + value);
-        if (attribute == 'height') {
-            $('#' + name).css({'height':value});
-        } else {
-            $('#' + name).css({'font-size':value});
-        }
     }
 }

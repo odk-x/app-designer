@@ -28,7 +28,7 @@ function display() {
 }
 
 function check () {
-    odkData.query('authorizations', 'is_active = ?', ['true'], null, null,
+    odkData.query(util.authorizationTable, 'is_active = ?', ['true'], null, null,
                 null, null, null, null, true, authCBSuccess, 
                 authCBFailure);
 }
@@ -48,7 +48,7 @@ function authCBSuccess(result) {
         struct.is_active = 'false';
         for (var i = 0; i < result.getCount(); i++) {
             if (i !== maxIndex) {
-                odkData.updateRow('authorizations', struct, i, updateSuccess, updateFailure);
+                odkData.updateRow(util.authorizationTable, struct, i, updateSuccess, updateFailure);
             }
         }*/
         odkData.query('deliveries', 'beneficiary_code = ? and is_delivered = ?', [code, 'true'],  null, null, null, null, null, null, true, deliveredSuccess, deliveredFailure);
@@ -95,16 +95,10 @@ function collision(auths, deliveries) {
     return false;
 }
 
-var setJSONMap = function(JSONMap, key, value) {
-    if (value !== null && value !== undefined) {
-        JSONMap[key] = JSON.stringify(value);
-    }
-}
-
 var getJSONMapValues = function() {
     var jsonMap = {};
-    setJSONMap(jsonMap, 'beneficiary_code', code);
-    setJSONMap(jsonMap, 'authorization_id', id);
+    util.setJSONMap(jsonMap, 'beneficiary_code', code);
+    util.setJSONMap(jsonMap, 'authorization_id', id);
     console.log(id);
     jsonMap = JSON.stringify(jsonMap);    
     return jsonMap;

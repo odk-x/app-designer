@@ -13,9 +13,6 @@ var chooseListSessionVariable = "chooseList";
 var savepointSuccess = "COMPLETE";
 
 // Table IDs
-var beneficiaryEntityTable = 'beneficiary_entities'
-var individualTable = 'individuals';
-var authorizationTable = 'authorizations';
 
 var myTimeoutVal = null;
 var idComponent = "";
@@ -49,7 +46,7 @@ function display() {
         $('#view_details').on('click', function() {
             odkTables.openDetailView(
                                      null,
-                                     authorizationTable,
+                                     util.authorizationTable,
                                      util.getQueryParameter('authorization_id'),
                                      'config/tables/authorizations/html/authorizations_detail.html');
         });
@@ -201,6 +198,8 @@ function handleBarcodeCallback(action, dispatchStr) {
 
 function handleRegistrationCallback(action, dispatchStr) {
 
+    //TODO: differentiate ui based on REGISTRATION_MODE
+
     console.log("Registration action occured");
 
     var result = action.jsonValue.result;
@@ -227,11 +226,11 @@ function handleRegistrationCallback(action, dispatchStr) {
     }
 
     if (type === 'delivery') {
-        odkTables.openDetailWithListView(null, beneficiaryEntityTable, instanceId,
+        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, instanceId,
                                          'config/tables/registration/html/registration_detail.html?type=' +
                                          encodeURIComponent(type));
     } else if (type === 'registration') {
-        odkTables.openDetailWithListView(null, beneficiaryEntityTable, instanceId,
+        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, instanceId,
                                          'config/tables/registration/html/registration_detail_hh.html?type=' +
                                          encodeURIComponent(type));
     }
@@ -257,25 +256,25 @@ function queryChain(passed_code) {
 }
 
 function deliveryFunction() {
-    odkData.query('registration', 'beneficiary_code = ? and (is_active = ? or is_active = ?)', [code, 'TRUE', 'true'], null,
+    odkData.query('registration', 'beneficiary_entity_id = ? and (is_active = ? or is_active = ?)', [code, 'TRUE', 'true'], null,
                            null, null, null, null, null, true, deliveryBCheckCBSuccess, deliveryBCheckCBFailure);
 }
 
 function deliveryBCheckCBSuccess(result) {
     console.log('deliveryBCheckCBSuccess called');
     if (result.getCount() === 0) {
-        odkData.query('registration', 'beneficiary_code = ? and (is_active = ? or is_active = ?)', [code, 'FALSE', 'false'],
+        odkData.query('registration', 'beneficiary_entity_id = ? and (is_active = ? or is_active = ?)', [code, 'FALSE', 'false'],
                           null, null, null, null, null, null, true,
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
     } else if (result.getCount() === 1) {
         // TODO: This should be changed as well - probably don't need if and else 
         // double check that this is the case
         if (type === 'delivery') {
-            odkTables.openDetailWithListView(null, beneficiaryEntityTable, result.getRowId(0),
+            odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),
                                              'config/tables/registration/html/registration_detail.html?type=' +
                                              encodeURIComponent(type));
         } else {
-            odkTables.openDetailView(null, beneficiaryEntityTable,result.getRowId(0),
+            odkTables.openDetailView(null, util.beneficiaryEntityTable,result.getRowId(0),
                                      'config/tables/registration/html/registration_detail.html?type=' +
                                      encodeURIComponent(type));
         }
@@ -283,11 +282,11 @@ function deliveryBCheckCBSuccess(result) {
         var params;
         var vals;
 
-        params = 'beneficiary_code = ? and (is_active = ? or is_active = ?)';
+        params = 'beneficiary_entity_id = ? and (is_active = ? or is_active = ?)';
         vals = [code,'TRUE', 'true'];
         odkTables.openTableToListView(
                                       null,
-                                      beneficiaryEntityTable, params, vals
+                                      util.beneficiaryEntityTable, params, vals
                                       , 'config/tables/registration/html/registration_list.html?type=' + type);
     }
 }
@@ -312,7 +311,7 @@ function deliveryDisabledCBFailure(error) {
 
 function registrationFunction() {
     console.log('registration function path entered');
-        odkData.query('registration', 'beneficiary_code = ?', [code], null, null,
+        odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?', [code], null, null,
                       null, null, null, null, true, registrationBCheckCBSuccess,
                       registrationBCheckCBFailure);
 }
@@ -320,14 +319,14 @@ function registrationFunction() {
 function registrationBCheckCBSuccess(result) {
     console.log('registrationBCheckCBSuccess called with value' + result);
     if (result.getCount() === 0) {
-            odkData.query('entitlements', 'beneficiary_code = ?', [code], null, null,
+            odkData.query(util.entitlementTable, 'beneficiary_entity_id = ?', [code], null, null,
                           null, null, null, null, true, registrationVoucherCBSuccess,
                           registrationVoucherCBFailure);
 
-    } else {
+    } else {ƒ
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
         // Now launch the registration_detail_hh.html
-        odkTables.openDetailWithListView(null, 'registration', result.getRowId(0),'config/tables/registration/html/registration_detail_hh.html');
+        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),'config/tables/registration/html/registration_detail_hh.html');
     }
 }
 
@@ -336,6 +335,10 @@ function registrationBCheckCBFailure(error) {
 }
 
 function registrationVoucherCBSuccess(result) {
+
+    //TODO: if in VOUCHER WORKFLOW_MODE we do not force them to register the beneficiary_entity_id before delivering
+    // in REGISTRATION_REQUIRED we would force them to
+
     var voucherResultSet = result;
     if (voucherResultSet.getCount() === 0) {
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_available"));
@@ -347,13 +350,13 @@ function registrationVoucherCBSuccess(result) {
         var user = odkCommon.getSessionVariable(userKey);
 
         var struct = {};
-        struct['beneficiary_code'] = code;
+        struct['beneficiary_entity_id'] = code;
         struct['_group_modify'] = defaultGroup;
         struct['_default_access'] = 'HIDDEN';
         struct['_row_owner'] = user;
 
         var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration});
-        odkTables.addRowWithSurvey(dispatchStruct, beneficiaryEntityTable, 'registration', null, struct);
+        odkTables.addRowWithSurvey(dispatchStruct, util.beneficiaryEntityTable, util.beneficiaryEntityTable, null, struct);
         
     }, 1000);
 }
@@ -364,10 +367,11 @@ function registrationVoucherCBFailure(error) {
 
 function regOverrideFunction() {
     console.log('entered regoverride path');
-    var queryCaseType;
-    var queriedType;
+
     if (code !== "" && code !== undefined && code !== null) {
         console.log(code);
+        var queryCaseType;
+        var queriedType;
         if (type === 'activate') {
             queriedType = 'FALSE';
             queryCaseType = 'false';
@@ -375,7 +379,7 @@ function regOverrideFunction() {
             queriedType = 'TRUE';
             queryCaseType = 'true';
         }
-        odkData.query(beneficiaryEntityTable, 'beneficiary_code = ? and (is_active = ? or is_active = ?)', [code, queriedType, queryCaseType],
+        odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ? and (is_active = ? or is_active = ?)', [code, queriedType, queryCaseType],
                       null, null, null, null, null, null, true,
                       regOverrideBenSuccess, regOverrideBenFailure);
     }
@@ -383,19 +387,9 @@ function regOverrideFunction() {
 
 function regOverrideBenSuccess(result) {
     if (result.getCount() === 1) {
-        if (type === 'delivery') {
-            odkTables.openDetailWithListView(null, beneficiaryEntityTable, result.getRowId(0),
-                                             'config/tables/registration/html/registration_detail.html?type=' +
-                                             encodeURIComponent(type));
-        } else if (type === 'registration') {
-            odkTables.openDetailView(null, beneficiaryEntityTable,result.getRowId(0),
-                                     'config/tables/registration/html/registration_detail_hh.html?type=' +
-                                     encodeURIComponent(type));
-        } else {
-            odkTables.openDetailView(null, beneficiaryEntityTable,result.getRowId(0),
-                                     'config/tables/registration/html/registration_detail.html?type=' +
-                                     encodeURIComponent(type));
-        }
+        odkTables.openDetailView(null, util.beneficiaryEntityTable,result.getRowId(0),
+                                 'config/tables/registration/html/registration_detail.html?type=' +
+                                 encodeURIComponent(type));
     } else if (result.getCount() > 1) {
         var queriedType;
         var queryCaseType;
@@ -406,8 +400,8 @@ function regOverrideBenSuccess(result) {
             queriedType = 'TRUE';
             queryCaseType = 'true';
         }
-        odkTables.openTableToListView(null, beneficiaryEntityTable,
-                                      'beneficiary_code = ? and (is_active = ? or is_active = ?)',
+        odkTables.openTableToListView(null, util.beneficiaryEntityTable,
+                                      'beneficiary_entity_id = ? and (is_active = ? or is_active = ?)',
                                       [code, queriedType, queryCaseType],
                                       'config/tables/registration/html/registration_list.html?type=' +
                                       encodeURIComponent(type));
@@ -415,7 +409,7 @@ function regOverrideBenSuccess(result) {
         if (type === 'activate') {
             $('#search_results').text(odkCommon.localizeText(locale, "no_disabled_beneficiary"));
         } else {
-            $('#search_results').text(odkCommon.localizeText(locale, "no_active_beneficiary"));
+            $('#search_results').text(odkCommon.localizeText(locale, "no_enabled_beneficiary"));
         }
     }
 }
@@ -427,7 +421,7 @@ function regOverrideBenFailure(error) {
 
 function entOverrideFunction() {
     if (code !== "" && code !== undefined && code !== null) {
-        odkData.query('registration', 'beneficiary_code = ?',
+        odkData.query('registration', 'beneficiary_entity_id = ?',
                       [code],
                       null, null, null, null, null, null, true, benEntOverrideCBSuccess,
                       benEntOverrideCBFailure);
@@ -440,9 +434,9 @@ function benEntOverrideCBSuccess(result) {
     if (result.getCount() != 0) {
         var entDefaultGroup = result.getData(0, '_group_modify');
         odkCommon.setSessionVariable(entDefaultGroupKey, entDefaultGroup);
-        odkData.query('entitlements', 'beneficiary_code = ? and authorization_id = ?',
-                      [code, util.getQueryParameter('authorization_id')], null, null, null, null, null,
-                      null, true, entCheckCBSuccess, entCheckCBFailure);
+        odkData.query(util.authorizationTable, '_id = ?',
+                      [util.getQueryParameter('authorization_id')], null, null, null, null, null,
+                      null, true, restrictOverridesCheckSuccess, restrictOverridesCheckFailure);
     } else {
         $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
     }
@@ -452,9 +446,25 @@ function benEntOverrideCBFailure(error) {
     console.log('failed with error: ' + error);
 }
 
+function restrictOverridesCheckSuccess(result) {
+    var overrideRestriction = result.getData(0, 'restrict_overrides');
+    console.log(overrideRestriction.toUpperCase());
+    if (overrideRestriction.toUpperCase() == 'TRUE') {
+        odkData.query(util.entitlementTable, 'beneficiary_entity_id = ? and authorization_id = ?',
+                      [code, util.getQueryParameter('authorization_id')], null, null, null, null, null,
+                      null, true, entCheckCBSuccess, entCheckCBFailure);
+    } else {
+        createOverrideCBSuccess(result);
+    }
+}
+
+function restrictOverridesCheckFailure(error) {
+    console.log('restrict override failure with error: ' + error);
+}
+
 function entCheckCBSuccess(result) {
     if (result.getCount() === 0) {
-        odkData.query('authorizations', '_id = ?',
+        odkData.query(util.authorizationTable, '_id = ?',
                       [util.getQueryParameter('authorization_id')],
                       null, null, null, null, null, null, true, createOverrideCBSuccess,
                       createOverrideCBFailure);
@@ -474,19 +484,29 @@ function createOverrideCBSuccess(result) {
     var user = odkCommon.getSessionVariable(userKey)
 
     var struct = {};
+individual_id
+
+status
+status_reason
+date_created
+
+//TODO: would individual ID be set here? is that a separate path? (post MVP)
+
     struct['authorization_id'] = result.get('_id');
     struct['authorization_name'] = result.get('authorization_name');
+    struct['authorization_description'] = result.get('authorization_description');
+    struct['authorization_type'] = result.get('authorization_type');
     struct['item_pack_id'] = result.get('item_pack_id');
     struct['item_pack_name'] = result.get('item_pack_name');
     struct['item_description'] = result.get('item_description');
-    struct['ranges'] = result.get('ranges');
-    struct['beneficiary_code'] = code;
-    struct['is_delivered'] = 'false';
+    struct['beneficiary_entity_id'] = code;
     struct['is_override'] = 'true';
+    struct['status'] = 'enabled';
+    //struct['date_created'] = TODO: decide on date format
     struct['_default_access'] = 'HIDDEN'; 
     struct['_row_owner'] = user;
     struct['_group_modify'] = defaultGroup;
-    odkData.addRow('entitlements', struct, util.genUUID(), addDistCBSuccess, addDistCBFailure);
+    odkData.addRow(util.entitlementTable, struct, util.genUUID(), addDistCBSuccess, addDistCBFailure);
 }
 
 function createOverrideCBFailure(error) {
@@ -494,11 +514,9 @@ function createOverrideCBFailure(error) {
 }
 
 var addDistCBSuccess = function(result) {
-    console.log('authorizations_detail addDistCBSuccess');
-
     $('#search_results').text(odkCommon.localizeText(locale, "override_creation_success"));
 };
 
 var addDistCBFailure = function(error) {
-    console.log('authorizations_detail addDistCBFailure: ' + error);
+    console.log('addDistCBFailure: ' + error);
 };

@@ -8,9 +8,6 @@ var compStr = 'COMPLETE';
 var timer;
 var locale = odkCommon.getPreferredLocale();
 var savepointSuccess = "COMPLETE";
-// Table IDs
-var registrationTable = 'registration';
-var authorizationTable = 'authorizations';
 
 
 var display = function() {
@@ -34,7 +31,7 @@ function actionCBFn() {
 
     var dispatchStr = JSON.parse(action.dispatchStruct);
     if (dispatchStr === null || dispatchStr === undefined) {
-        console.log('Error: missing dispatch strct');
+        console.log('Error: missing dispatch struct');
         return;
     }
 
@@ -106,7 +103,7 @@ var cbSuccess = function (result) {
   });
 
   var authorizationPromise = new Promise(function(resolve, reject) {
-    odkData.arbitraryQuery('authorizations',
+    odkData.arbitraryQuery(util.authorizationTable,
       'SELECT delivery_table, delivery_form, ranges FROM authorizations WHERE _id = ?',
        [entitlementsResultSet.get('authorization_id')],
         null, null, resolve, reject);
@@ -133,7 +130,7 @@ var cbSuccess = function (result) {
       'click',
       function() {
         var jsonMap = getJSONMapValues();
-        setJSONMap(jsonMap, 'ranges', ranges);
+        util.setJSONMap(jsonMap, 'ranges', ranges);
 
         if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
           var dispatchStruct = JSON.stringify({actionTypeKey: actionEditDelivery});
@@ -191,28 +188,22 @@ var updateCBFailure = function(error) {
   console.log('updateCBFailure called with error: ' + error);
 }
 
-var setJSONMap = function(JSONMap, key, value) {
-    if (value !== null && value !== undefined) {
-        JSONMap[key] = value;
-    }
-}
-
 var getJSONMapValues = function() {
   console.log(entitlementsResultSet.getColumns());
   var jsonMap = {};
-  setJSONMap(jsonMap, 'beneficiary_code', entitlementsResultSet.get('beneficiary_code'));
-  setJSONMap(jsonMap, 'entitlement_id', entitlementsResultSet.get('_id'));
-  setJSONMap(jsonMap, 'authorization_id', entitlementsResultSet.get('authorization_id'));
-  setJSONMap(jsonMap, 'authorization_name', entitlementsResultSet.get('authorization_name'));
-  setJSONMap(jsonMap, 'item_pack_id', entitlementsResultSet.get('item_pack_id'));
-  setJSONMap(jsonMap, 'item_pack_name', entitlementsResultSet.get('item_pack_name'));
-  setJSONMap(jsonMap, 'item_description', entitlementsResultSet.get('item_description'));
-  setJSONMap(jsonMap, 'is_override', entitlementsResultSet.get('is_override'));
-  setJSONMap(jsonMap, 'assigned_code', entitlementsResultSet.get('assigned_code'));
-  setJSONMap(jsonMap, '_group_modify', entitlementsResultSet.get('_group_modify'));
+  util.setJSONMap(jsonMap, 'beneficiary_code', entitlementsResultSet.get('beneficiary_code'));
+  util.setJSONMap(jsonMap, 'entitlement_id', entitlementsResultSet.get('_id'));
+  util.setJSONMap(jsonMap, 'authorization_id', entitlementsResultSet.get('authorization_id'));
+  util.setJSONMap(jsonMap, 'authorization_name', entitlementsResultSet.get('authorization_name'));
+  util.setJSONMap(jsonMap, 'item_pack_id', entitlementsResultSet.get('item_pack_id'));
+  util.setJSONMap(jsonMap, 'item_pack_name', entitlementsResultSet.get('item_pack_name'));
+  util.setJSONMap(jsonMap, 'item_description', entitlementsResultSet.get('item_description'));
+  util.setJSONMap(jsonMap, 'is_override', entitlementsResultSet.get('is_override'));
+  util.setJSONMap(jsonMap, 'assigned_code', entitlementsResultSet.get('assigned_code'));
+  util.setJSONMap(jsonMap, '_group_modify', entitlementsResultSet.get('_group_modify'));
 
   user = odkCommon.getActiveUser();
-  setJSONMap(jsonMap, '_row_owner', user);
+  util.setJSONMap(jsonMap, '_row_owner', user);
 
   return jsonMap;
 };

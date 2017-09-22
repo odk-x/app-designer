@@ -11,10 +11,6 @@ var locale = odkCommon.getPreferredLocale();
 var savepointSuccess = "COMPLETE";
 
 // Table IDs
-var registrationTable = 'registration';
-var authorizationTable = 'authorizations';
-var entitlementsTable = 'entitlements';
-var defaultDeliveryTable = 'deliveries';
 var defaultDeliveryForm = 'deliveries';
 
 var firstLoad = function() {
@@ -27,7 +23,7 @@ var firstLoad = function() {
 
 var resumeFn = function(fIdxStart) {
     var entitlementsResultSet = null;
-    getViewData().then( function(result) {
+    queryUtil.getViewData().then( function(result) {
         entitlementsResultSet = result;
 
         idxStart = fIdxStart;
@@ -52,8 +48,7 @@ var resumeFn = function(fIdxStart) {
                 odkCommon.log('I', LOG_TAG + 'clicked with rowId: ' + rowId);
                 // make sure we retrieved the rowId
                 if (rowId !== null && rowId !== undefined) {
-                    if (entitlementsResultSet.getData(0, 'is_delivered') === 'true'
-                        || entitlementsResultSet.getData(0, 'is_delivered') === 'TRUE') {
+                    if (util.entitlementIsDelivered(entitlementsResultSet.getRowId(0))) {
                         launchDeliveryDetailView(rowId);
                     } else {
                         prepareToDeliver(rowId);
@@ -75,7 +70,7 @@ var launchDeliveryDetailView = function(entitlement_id) {
     odkCommon.log('I', LOG_TAG + "Launching delivery detail view for entitlement: " + entitlement_id);
 
     var deliveryIdPromise = new Promise(function(resolve, reject) {
-        odkData.query(defaultDeliveryTable, 'entitlement_id = ?', [entitlement_id], null,
+        odkData.query(util.deliveryTable, 'entitlement_id = ?', [entitlement_id], null,
                       null, null, null, null, null, true, resolve, reject);
     });
 
@@ -100,14 +95,14 @@ var prepareToDeliver = function(entitlement_id) {
     var entitlement_row = null;
     var authTableRow = null;
 
-    getEntitlementRow(entitlement_id).then( function(result) {
+    queryUtil.getEntitlementRow(entitlement_id).then( function(result) {
         odkCommon.log('I', LOG_TAG + 'Got entitlement row');
         if (!result || result.getCount === 0) {
             throw ('Failed to retrieve entitlement.');
         }
         entitlement_row = result;
 
-        return getCustomDeliveryForm(entitlement_row.get('authorization_id'));
+        return queryUtil.getCustomDeliveryForm(entitlement_row.get('authorization_id'));
     }).then( function (result) {
         odkCommon.log('I', LOG_TAG + 'Got auth row');
         if (!result || result.getCount() === 0) {
@@ -118,22 +113,15 @@ var prepareToDeliver = function(entitlement_id) {
         odkCommon.log('I', LOG_TAG + 'auth row count: ' + result.getCount())
             authTableRow = result;
 
-        var delivery_table = authTableRow.getData(0, 'delivery_table');
-        var delivery_form = authTableRow.getData(0, 'delivery_form');
-        if (delivery_table === undefined || delivery_table === null || delivery_table === "") {
-            delivery_table = defaultDeliveryTable;
-        }
-        if (delivery_form === undefined || delivery_form === null || delivery_form === "" ) {
-            delivery_form = defaultDeliveryForm;
-        }
+        var custom_delivery_form_id = authTableRow.getData(0, 'custom_delivery_form_id');
 
         // TODO: Check if the custom delivery table ID exists before launching survey
         // Use odkData.getAllTableIds(resolve, reject);
 
-        if (delivery_table === defaultDeliveryTable) {
+        if (custom_delivery_table === undefined || custom_delivery_table === null || custom_delivery_table === "" || custom_delivery_table === util.deliveryTable) {
             performSimpleDelivery(entitlement_id);
         } else {
-            performCustomDelivery(entitlement_row, entitlement_id, delivery_table, delivery_form);
+            performCustomDelivery(entitlement_row, entitlement_id, custom_delivery_table);
         }
 
     }).catch( function(reason) {
@@ -150,10 +138,10 @@ var performSimpleDelivery = function(entitlement_id) {
 
 }
 
-var performCustomDelivery = function(entitlement_row, entitlement_id, delivery_table, delivery_form) {
-    odkCommon.log('I', LOG_TAG + 'Performing custom delivery: ' + delivery_form);
-
-    addDeliveryRow(entitlement_row).then( function(result) {
+var performCustomDelivery = function(entitlement_row, entitlement_id, custom_delivery_table) {
+    odkCommon.log('I', LOG_TAG + 'Performing custom delivery: ' + custom_delivery_table);
+    var custom_delivery_row_id = util.genUIID();
+    queryUtil.addDeliveryRow(entitlement_row, custom_delivery_table, custom_delivery_row_id).then( function(result) {
         odkCommon.log('I', LOG_TAG + 'Added delivery row');
         if (!result || result.getCount === 0) {
             throw ('Failed to add delivery to root table.');
@@ -163,19 +151,19 @@ var performCustomDelivery = function(entitlement_row, entitlement_id, delivery_t
         odkCommon.log('I', LOG_TAG + 'Created new row in root delivery table: ' + root_delivery_row_id);
 
         var jsonMap = {};
-        setJSONMap(jsonMap, 'delivery_id', root_delivery_row_id);
-        setJSONMap(jsonMap, 'entitlement_id', entitlement_id);
+        util.setJSONMap(jsonMap, 'delivery_id', root_delivery_row_id);
+        util.setJSONMap(jsonMap, 'entitlement_id', entitlement_id);
 
         // We also need to add group permission fields
-        setJSONMap(jsonMap, '_group_read_only', entitlement_row.get('_group_modify'));
+        util.setJSONMap(jsonMap, '_group_read_only', entitlement_row.get('_group_modify'));
 
         var user = odkCommon.getActiveUser();
-        setJSONMap(jsonMap, '_row_owner', user);
+        util.setJSONMap(jsonMap, '_row_owner', user);
 
         var dispatchStruct = JSON.stringify({actionTypeKey: actionAddCustomDelivery,
             deliveryId: root_delivery_row_id,
             deliveryTableKey: delivery_table});
-        odkTables.addRowWithSurvey(dispatchStruct, delivery_table, delivery_form, null, jsonMap);
+        odkTables.addRowWithSurvey(dispatchStruct, custom_delivery_table, custom_delivery_table, null, jsonMap);
 
         // Control flow is now handed off to the delivery user interface.
         // When that returns it will trigget actionCBFn, where we will finalize
@@ -218,7 +206,7 @@ var finishCustomDelivery = function(action, dispatchStr) {
     var result = action.jsonValue.result;
 
     odkCommon.log('I', LOG_TAG + "Finishing custom delivery");
-    odkCommon.log('I', LOG_TAG +  ""+result);
+    odkCommon.log('I', LOG_TAG +  "" + result);
 
     var root_delivery_id = dispatchStr['deliveryId'];
     if (root_delivery_id === null || root_delivery_id === undefined) {
@@ -249,7 +237,7 @@ var finishCustomDelivery = function(action, dispatchStr) {
 
     var custom_delivery_row = null;
 
-    getCustomDeliveryRow(custom_delivery_id, custom_delivery_table).then( function(result) {
+    queryUtil.getCustomDeliveryRow(custom_delivery_id, custom_delivery_table).then( function(result) {
         odkCommon.log('I', LOG_TAG +  "Got custom delivery row");
         if (!result || result.getCount === 0) {
             throw ('Failed to retrieve custom delivery row.');
@@ -260,31 +248,24 @@ var finishCustomDelivery = function(action, dispatchStr) {
 
 
         // Check if the delivery succeeded
-        var is_delivered = custom_delivery_row.get('is_delivered');
         var savepoint_type = custom_delivery_row.get('_savepoint_type');
         var entitlement_id = custom_delivery_row.get('entitlement_id');
 
-        dbActions.push(updateEntitlementDeliveryStatus(entitlement_id, is_delivered));
-
-        if ((is_delivered === 'true' || is_delivered === 'TRUE')
-            && savepoint_type === savepointSuccess) {
+        if (savepoint_type === savepointSuccess) {
             odkCommon.log('I', LOG_TAG +  "Delivery succeeded; update rows");
-
-            dbActions.push(updateRootDeliveryStatus(root_delivery_id, is_delivered));
-
         } else {
             odkCommon.log('I', LOG_TAG +  "Delivery is false; delete rows");
-            dbActions.push(deleteRootDeliveryRow(root_delivery_id));
-            dbActions.push(deleteCustomDeliveryRow(custom_delivery_id, custom_delivery_table));
+            dbActions.push(queryUtil.deleteRootDeliveryRow(root_delivery_id));
+            dbActions.push(queryUtil.deleteCustomDeliveryRow(custom_delivery_id, custom_delivery_table));
         }
 
 
         Promise.all(dbActions).then( function(resultArr) {
-            odkCommon.log('I', LOG_TAG +  'Finalized custom delivery row');
+            odkCommon.log('I', LOG_TAG +  'Cleaned up invalid delivery rows');
 
             odkCommon.removeFirstQueuedAction();
         }).catch( function(reason) {
-            odkCommon.log('E', LOG_TAG + 'Failed to finalize custom delivery row: ' + reason);
+            odkCommon.log('E', LOG_TAG + 'Failed to clean up invalid delivery rows: ' + reason);
 
             odkCommon.removeFirstQueuedAction();
         });
@@ -299,7 +280,7 @@ var finishCustomDelivery = function(action, dispatchStr) {
 
 // Convenience because we call this on any kind of error
 var executeDeleteRootDeliveryRow = function(root_delivery_id) {
-    deleteRootDeliveryRow(root_delivery_id).then( function(result) {
+    queryUtil.deleteRootDeliveryRow(root_delivery_id).then( function(result) {
         odkCommon.log('I', LOG_TAG + 'Deleted root delivery row: ' + root_delivery_id);
 
         odkCommon.removeFirstQueuedAction();
@@ -361,101 +342,3 @@ var displayGroup = function(idxStart, entitlementsResultSet) {
         setTimeout(resumeFn, 0, i);
     }
 };
-
-/************************** Utility functions *********************************/
-
-var setJSONMap = function(JSONMap, key, value) {
-    if (value !== null && value !== undefined) {
-        JSONMap[key] = value;
-    }
-}
-
-/************************** Query functions **********************************/
-
-var getViewData = function() {
-    return new Promise(function(resolve, reject) {
-        odkData.getViewData(resolve, reject);
-    });
-}
-
-var getEntitlementRow = function(entitlement_id) {
-    return new Promise(function(resolve, reject) {
-        odkData.getMostRecentRow(entitlementsTable, entitlement_id, resolve, reject);
-    });
-}
-
-var getCustomDeliveryForm = function(auth_id) {
-    return new Promise(function(resolve, reject) {
-        odkData.arbitraryQuery(authorizationTable,
-                               'SELECT delivery_table, delivery_form, ranges'
-                               +' FROM authorizations WHERE _id = ?',
-                               [auth_id], null, null, resolve, reject);
-    });
-
-}
-
-var getRootDeliveryRow = function(delivery_id) {
-    return new Promise(function(resolve, reject) {
-        odkData.getMostRecentRow(defaultDeliveryTable, delivery_id, resolve, reject);
-    });
-}
-var getCustomDeliveryRow = function(custom_delivery_id, custom_delivery_table) {
-    return new Promise(function(resolve, reject) {
-        odkData.getMostRecentRow(custom_delivery_table, custom_delivery_id, resolve, reject);
-    });
-}
-
-var addDeliveryRow = function(entitlement_row) {
-    var jsonMap = {};
-    setJSONMap(jsonMap, 'beneficiary_code', entitlement_row.get('beneficiary_code'));
-    setJSONMap(jsonMap, 'entitlement_id', entitlement_row.get('_id'));
-    setJSONMap(jsonMap, 'authorization_id', entitlement_row.get('authorization_id'));
-    setJSONMap(jsonMap, 'authorization_name', entitlement_row.get('authorization_name'));
-    setJSONMap(jsonMap, 'item_pack_id', entitlement_row.get('item_pack_id'));
-    setJSONMap(jsonMap, 'item_pack_name', entitlement_row.get('item_pack_name'));
-    setJSONMap(jsonMap, 'item_description', entitlement_row.get('item_description'));
-    setJSONMap(jsonMap, 'is_override', entitlement_row.get('is_override'));
-    setJSONMap(jsonMap, 'is_delivered', 'FALSE');
-
-    // Ori & Waylon will fix this
-    //setJSONMap(jsonMap, 'assigned_code', entitlement_row.get('assigned_code'));
-    setJSONMap(jsonMap, '_group_read_only', entitlement_row.get('_group_modify'));
-
-    var user = odkCommon.getActiveUser();
-
-    setJSONMap(jsonMap, '_row_owner', user);
-    return new Promise(function(resolve, reject) {
-        odkData.addRow(defaultDeliveryTable, jsonMap, util.genUUID(), resolve, reject);
-    });
-
-}
-
-var updateEntitlementDeliveryStatus = function (entitlement_id, is_delivered) {
-    var jsonMap = {};
-    setJSONMap(jsonMap, 'is_delivered', is_delivered);
-
-    return new Promise(function(resolve, reject) {
-        odkData.updateRow(entitlementsTable, jsonMap, entitlement_id, resolve, reject);
-    });
-}
-
-var updateRootDeliveryStatus = function(delivery_id, is_delivered) {
-    var jsonMap = {};
-    setJSONMap(jsonMap, 'is_delivered', is_delivered);
-
-    return new Promise(function(resolve, reject) {
-        odkData.updateRow(defaultDeliveryTable, jsonMap, delivery_id, resolve, reject);
-    });
-}
-
-var deleteRootDeliveryRow = function(delivery_id) {
-    return new Promise(function(resolve, reject) {
-        odkData.deleteRow(defaultDeliveryTable, null, delivery_id, resolve, reject);
-    });
-}
-
-var deleteCustomDeliveryRow = function(custom_delivery_id, custom_delivery_table) {
-    return new Promise(function(resolve, reject) {
-        odkData.deleteRow(custom_delivery_table, null, custom_delivery_id, resolve, reject);
-    });
-}

@@ -38,7 +38,7 @@ function callBackFn () {
             action.jsonValue.status === -1) {
         	code = action.jsonValue.result.SCAN_RESULT;
         	clearTimeout(myTimeoutVal);
-            odkData.query('authorizations', 'is_active = ?', ['true'], null, null,
+            odkData.query(util.authorizationTable, 'is_active = ?', ['true'], null, null,
 			            null, null, null, null, true, authCBSuccess, 
 			            authCBFailure);
 
@@ -100,16 +100,10 @@ function collision(auths, deliveries) {
     return false;
 }
 
-var setJSONMap = function(JSONMap, key, value) {
-    if (value !== null && value !== undefined) {
-        JSONMap[key] = JSON.stringify(value);
-    }
-}
-
 var getJSONMapValues = function() {
     var jsonMap = {};
-    setJSONMap(jsonMap, 'beneficiary_code', code);
-    setJSONMap(jsonMap, 'authorization_id', id);
+    util.setJSONMap(jsonMap, 'beneficiary_code', code);
+    util.setJSONMap(jsonMap, 'authorization_id', id);
     console.log(id);
     jsonMap = JSON.stringify(jsonMap);    
     return jsonMap;

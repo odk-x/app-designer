@@ -10,43 +10,58 @@ function display() {
     var type = util.getQueryParameter('type');
     var title = $('#title');
     if (type == 'registration') {
-        var activeHouseholds = document.createElement('button');
 
         title.text(odkCommon.localizeText(locale, "registration_data"));
-        activeHouseholds.innerHTML = odkCommon.localizeText(locale, "active_households");
-        activeHouseholds.onclick = function() {
+
+
+        var enabledBeneficiaryEntities = document.createElement('button');
+
+
+
+        //TODO: send to actual list views
+        enabledBeneficiaryEntities.onclick = function() {
             odkTables.openTableToListView(
-                                      null, 'registration', '(is_active = ? or is_active = ?)', ['TRUE', 'true']
+                                      null, util.beneficiaryEntityTable, '(status = ? or status = ?)', ['ENABLED', 'enabled']
                                       , 'config/tables/registration/html/registration_list_hh.html?type=standard');
         }
 
-        var disabledHouseholds = document.createElement('button');
-        disabledHouseholds.innerHTML = odkCommon.localizeText(locale, "disabled_households");
-        disabledHouseholds.onclick = function() {
+        var disabledBeneficiaryEntities = document.createElement('button');
+        disabledBeneficiaryEntities.onclick = function() {
             odkTables.openTableToListView(
-                                      null, 'registration', '(is_active = ? or is_active = ?)', ['FALSE', 'false']
+                                      null, util.beneficiaryEntityTable, '(status = ? or status = ?)', ['DISABLED', 'disabled']
                                       , 'config/tables/registration/html/registration_list_hh.html?type=standard');
         }
 
-        var householdSearch = document.createElement('button');
-        householdSearch.innerHTML = odkCommon.localizeText(locale, "search_members");
-        householdSearch.onclick = function() {
+        var beneficiaryEntitySearch = document.createElement('button');
+        beneficiaryEntitySearch.onclick = function() {
             odkTables.launchHTML(null,
-                                 'config/assets/beneficiary_mode/html/search.html?type=registrationMember');
+                                 'config/assets/beneficiary_mode/html/search.html?type=' + util.beneficiaryEntityTable);
         }
 
-        var individualSearch = document.createElement('button');
-        individualSearch.innerHTML = odkCommon.localizeText(locale, "search_households");
-        individualSearch.onclick = function() {
-            odkTables.launchHTML(null,
-                                 'config/assets/beneficiary_mode/html/search.html?type=registration');
+        if (util.getRegistrationType() == 'HOUSEHOLD') {
+            enabledBeneficiaryEntities.innerHTML = odkCommon.localizeText(locale, "enabled_households");
+            disabledBeneficiaryEntities.innerHTML = odkCommon.localizeText(locale, "disabled_households");
+            beneficiaryEntitySearch.innerHTML = odkCommon.localizeText(locale, "search_households");
+
+            var individualSearch = document.createElement('button');
+            individualSearch.innerHTML = odkCommon.localizeText(locale, "search_members");
+            individualSearch.onclick = function() {
+                odkTables.launchHTML(null,
+                                     'config/assets/beneficiary_mode/html/search.html?type=' + util.individualTable);
+            }
+            //append individual search button
+            document.getElementById('wrapper').appendChild(individualSearch);
+
+        } else {
+            enabledBeneficiaryEntities.innerHTML = odkCommon.localizeText(locale, "enabled_beneficiaries");
+            disabledBeneficiaryEntities.innerHTML = odkCommon.localizeText(locale, "disabled_beneficiaries");
+            beneficiaryEntitySearch.innerHTML = odkCommon.localizeText(locale, "search_beneficiaries"); 
         }
 
         // append buttons
-        document.getElementById('wrapper').appendChild(activeHouseholds);
-        document.getElementById('wrapper').appendChild(disabledHouseholds);
-        document.getElementById('wrapper').appendChild(householdSearch);
-        document.getElementById('wrapper').appendChild(individualSearch);
+        document.getElementById('wrapper').appendChild(disabledBeneficiaryEntities);
+        document.getElementById('wrapper').appendChild(disabledBeneficiaryEntities);
+        document.getElementById('wrapper').appendChild(beneficiaryEntitySearch);
 
     } else {
         var deliveries = document.createElement('button');
@@ -63,7 +78,7 @@ function display() {
         deliverySearch.innerHTML = odkCommon.localizeText(locale, "advanced_search");
         deliverySearch.onclick = function() {
             odkTables.launchHTML(null,
-                                 'config/assets/beneficiary_mode/html/search.html?type=deliveries');
+                                 'config/assets/beneficiary_mode/html/search.html?type=' + util.deliveryTable);
         }
 
         // append buttons
