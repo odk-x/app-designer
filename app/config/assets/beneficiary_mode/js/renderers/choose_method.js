@@ -248,7 +248,7 @@ function queryChain(passed_code) {
             registrationFunction();
         }
         
-    } else if (type === 'activate' || type === 'disable') {
+    } else if (type === 'enable' || type === 'disable') {
         regOverrideFunction();
     } else if (type === 'ent_override') {
         entOverrideFunction();
@@ -256,14 +256,14 @@ function queryChain(passed_code) {
 }
 
 function deliveryFunction() {
-    odkData.query('registration', 'beneficiary_entity_id = ? and (is_active = ? or is_active = ?)', [code, 'TRUE', 'true'], null,
+    odkData.query('registration', 'beneficiary_entity_id = ? and (status = ? or status = ?)', [code, 'ENABLED', 'enabled'], null,
                            null, null, null, null, null, true, deliveryBCheckCBSuccess, deliveryBCheckCBFailure);
 }
 
 function deliveryBCheckCBSuccess(result) {
     console.log('deliveryBCheckCBSuccess called');
     if (result.getCount() === 0) {
-        odkData.query('registration', 'beneficiary_entity_id = ? and (is_active = ? or is_active = ?)', [code, 'FALSE', 'false'],
+        odkData.query('registration', 'beneficiary_entity_id = ? and (status = ? or status = ?)', [code, 'ENABLED', 'enabled'],
                           null, null, null, null, null, null, true,
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
     } else if (result.getCount() === 1) {
@@ -282,8 +282,8 @@ function deliveryBCheckCBSuccess(result) {
         var params;
         var vals;
 
-        params = 'beneficiary_entity_id = ? and (is_active = ? or is_active = ?)';
-        vals = [code,'TRUE', 'true'];
+        params = 'beneficiary_entity_id = ? and (status = ? or status = ?)';
+        vals = [code,'ENABLED', 'enabled'];
         odkTables.openTableToListView(
                                       null,
                                       util.beneficiaryEntityTable, params, vals
@@ -372,14 +372,14 @@ function regOverrideFunction() {
         console.log(code);
         var queryCaseType;
         var queriedType;
-        if (type === 'activate') {
-            queriedType = 'FALSE';
-            queryCaseType = 'false';
+        if (type === 'enable') {
+            queriedType = 'DISABLED';
+            queryCaseType = 'disabled';
         } else {
-            queriedType = 'TRUE';
-            queryCaseType = 'true';
+            queriedType = 'ENABLED';
+            queryCaseType = 'enabled';
         }
-        odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ? and (is_active = ? or is_active = ?)', [code, queriedType, queryCaseType],
+        odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ? and (status = ? or status = ?)', [code, queriedType, queryCaseType],
                       null, null, null, null, null, null, true,
                       regOverrideBenSuccess, regOverrideBenFailure);
     }
@@ -393,20 +393,20 @@ function regOverrideBenSuccess(result) {
     } else if (result.getCount() > 1) {
         var queriedType;
         var queryCaseType;
-        if (type === 'activate') {
-            queriedType = 'FALSE';
-            queryCaseType = 'false';
+        if (type === 'enable') {
+            queriedType = 'DISABLED';
+            queryCaseType = 'disabled';
         } else {
-            queriedType = 'TRUE';
-            queryCaseType = 'true';
+            queriedType = 'ENABLED';
+            queryCaseType = 'enabled';
         }
         odkTables.openTableToListView(null, util.beneficiaryEntityTable,
-                                      'beneficiary_entity_id = ? and (is_active = ? or is_active = ?)',
+                                      'beneficiary_entity_id = ? and (status = ? or status = ?)',
                                       [code, queriedType, queryCaseType],
                                       'config/tables/registration/html/registration_list.html?type=' +
                                       encodeURIComponent(type));
     } else {
-        if (type === 'activate') {
+        if (type === 'enable') {
             $('#search_results').text(odkCommon.localizeText(locale, "no_disabled_beneficiary"));
         } else {
             $('#search_results').text(odkCommon.localizeText(locale, "no_enabled_beneficiary"));
@@ -484,11 +484,6 @@ function createOverrideCBSuccess(result) {
     var user = odkCommon.getSessionVariable(userKey)
 
     var struct = {};
-individual_id
-
-status
-status_reason
-date_created
 
 //TODO: would individual ID be set here? is that a separate path? (post MVP)
 

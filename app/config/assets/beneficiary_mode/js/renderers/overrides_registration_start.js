@@ -18,7 +18,7 @@ function display() {
                              + encodeURIComponent(chooseText)
                              + '&secondary_manual_title='
                              + encodeURIComponent(enableText)
-                             + '&type=activate');
+                             + '&type=enable');
     }
     document.getElementById("wrapper").appendChild(enable);
 
