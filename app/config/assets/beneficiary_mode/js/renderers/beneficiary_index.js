@@ -55,27 +55,24 @@ beneficiaryIndex.display = function() {
 
     // Create a overrides if user is a tables superuser
     console.log('requesting roles');
-
-    odkData.getRoles(beneficiaryIndex.rolesCBSuccess, beneficiaryIndex.rolesCBFailure);
-}
-
-beneficiaryIndex.rolesCBSuccess = function(result) {
-    var roles = result.getRoles();
-    console.log(roles);
-    if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
-        var override = document.createElement("button");
-        override.innerHTML = odkCommon.localizeText(locale, overrideToken);
-        override.setAttribute("id", "overrides");
-        override.onclick = function() {
-            odkTables.launchHTML(null,
-                                 'config/assets/beneficiary_mode/html/overrides_start.html');
-        }
-        document.getElementById("wrapper").appendChild(override);
-    }
-}
-
- beneficiaryIndex.rolesCBFailure = function(error) {
-    console.log('roles failed with error: ' + error);
+    return new Promise(function(resolve, reject) {
+            odkData.getRoles(resolve, reject);
+        }).then( function(result) {
+            var roles = result.getRoles();
+            console.log(roles);
+            if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
+                var override = document.createElement("button");
+                override.innerHTML = odkCommon.localizeText(locale, overrideToken);
+                override.setAttribute("id", "overrides");
+                override.onclick = function() {
+                    odkTables.launchHTML(null,
+                                         'config/assets/beneficiary_mode/html/overrides_start.html');
+                }
+                document.getElementById("wrapper").appendChild(override);
+            }
+        }).catch( function(reason) {
+            console.log('roles failed with error: ' + error);
+        });
 }
 
 

@@ -81,6 +81,16 @@ util.renderPage = function(renderFunction) {
     document.body.style.display = "block";
 }
 
+util.renderPageAsPromise = function(renderFunction) {
+    console.log(renderFunction);
+    renderFunction().then( function() {
+        $(':button').css({'height' : window.innerHeight * .15 + "px"});
+        $(':button').css({'font-size' : Math.min(window.innerHeight, window.innerWidth) * .07 + "px"});
+        $(':button').css({'margin-bottom' : window.innerHeight * .06 + "px"});
+        document.body.style.display = "block";
+    });
+}
+
 util.setJSONMap = function(JSONMap, key, value) {
     if (value !== null && value !== undefined) {
         JSONMap[key] = value;
