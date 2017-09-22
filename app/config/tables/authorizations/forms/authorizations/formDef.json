@@ -38,33 +38,38 @@
       },
       {
         "type": "string",
-        "name": "report_version",
+        "name": "item_pack_ranges",
         "_row_num": 9
       },
       {
         "type": "string",
-        "name": "restrict_overrides",
+        "name": "report_version",
         "_row_num": 10
       },
       {
         "type": "string",
-        "name": "status",
+        "name": "restrict_overrides",
         "_row_num": 11
       },
       {
         "type": "string",
-        "name": "status_reason",
+        "name": "status",
         "_row_num": 12
       },
       {
         "type": "string",
-        "name": "summary_form_id",
+        "name": "status_reason",
         "_row_num": 13
       },
       {
         "type": "string",
-        "name": "date_created",
+        "name": "summary_form_id",
         "_row_num": 14
+      },
+      {
+        "type": "string",
+        "name": "date_created",
+        "_row_num": 15
       }
     ],
     "table_specific_translations": [
@@ -351,11 +356,21 @@
         ],
         "elementKey": "item_pack_description"
       },
-      "report_version": {
+      "item_pack_ranges": {
         "type": "string",
         "_defn": [
           {
             "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_pack_ranges"
+      },
+      "report_version": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -365,7 +380,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -375,7 +390,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -385,7 +400,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -395,7 +410,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -405,7 +420,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],
@@ -753,11 +768,24 @@
         "elementSet": "data",
         "elementPath": "item_pack_description"
       },
-      "report_version": {
+      "item_pack_ranges": {
         "type": "string",
         "_defn": [
           {
             "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "item_pack_ranges",
+        "elementName": "item_pack_ranges",
+        "elementSet": "data",
+        "elementPath": "item_pack_ranges"
+      },
+      "report_version": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -770,7 +798,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -783,7 +811,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -796,7 +824,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -809,7 +837,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -822,7 +850,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],

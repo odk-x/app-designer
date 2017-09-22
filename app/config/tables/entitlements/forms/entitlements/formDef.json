@@ -119,18 +119,23 @@
       },
       {
         "type": "string",
-        "name": "status",
+        "name": "assigned_item_pack_code",
         "_row_num": 12
       },
       {
         "type": "string",
-        "name": "status_reason",
+        "name": "status",
         "_row_num": 13
       },
       {
         "type": "string",
-        "name": "date_created",
+        "name": "status_reason",
         "_row_num": 14
+      },
+      {
+        "type": "string",
+        "name": "date_created",
+        "_row_num": 15
       }
     ],
     "survey": [
@@ -398,11 +403,21 @@
         ],
         "elementKey": "item_pack_name"
       },
-      "status": {
+      "assigned_item_pack_code": {
         "type": "string",
         "_defn": [
           {
             "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "assigned_item_pack_code"
+      },
+      "status": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -412,7 +427,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -422,7 +437,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],
@@ -740,11 +755,24 @@
         "elementSet": "data",
         "elementPath": "item_pack_name"
       },
-      "status": {
+      "assigned_item_pack_code": {
         "type": "string",
         "_defn": [
           {
             "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "assigned_item_pack_code",
+        "elementName": "assigned_item_pack_code",
+        "elementSet": "data",
+        "elementPath": "assigned_item_pack_code"
+      },
+      "status": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -757,7 +785,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -770,7 +798,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],
