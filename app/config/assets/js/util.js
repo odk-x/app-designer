@@ -15,6 +15,8 @@ util.individualTable = 'individuals';
 util.authorizationTable = 'authorizations';
 util.entitlementTable = 'entitlements';
 util.deliveryTable = 'deliveries';
+util.savepointSuccess = "COMPLETE";
+
 
 /**
  * Get the query parameter from the url. Note that this is kind of a hacky/lazy
@@ -64,7 +66,7 @@ util.getKeysToAppendToURL = function(date, time, focalChimp) {
 
 util.genUUID = function() {
     // construct a UUID (from http://sta ckoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
-    var id = 'uuid:' + 
+    var id = 'uuid:' +
     'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random()*16|0, v = (c === 'x') ? r : (r&0x3|0x8);
         return v.toString(16);

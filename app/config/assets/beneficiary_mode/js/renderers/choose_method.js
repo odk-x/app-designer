@@ -11,6 +11,7 @@ var userActionValue = "launchBarcode";
 var barcodeSessionVariable = "barcodeVal";
 var chooseListSessionVariable = "chooseList";
 var savepointSuccess = "COMPLETE";
+var LOG_TAG = "choose_method.js";
 
 // Table IDs
 
@@ -51,6 +52,7 @@ function display() {
                                      'config/tables/authorizations/html/authorizations_detail.html');
         });
     }
+
     $('#title').text(util.getQueryParameter('title'));
     user = odkCommon.getActiveUser();
     odkCommon.setSessionVariable(userKey, user);
@@ -63,7 +65,7 @@ function display() {
     var rolesPromise = new Promise(function(resolve, reject) {
         odkData.getRoles(resolve, reject);
     });
-    
+
     var defaultGroupPromise = new Promise(function(resolve, reject) {
         odkData.getDefaultGroup(resolve, reject);
     });
@@ -157,8 +159,8 @@ function callBackFn () {
             odkCommon.removeFirstQueuedAction();
             break;
         case actionRegistration:
-            handleRegistrationCallback(action, dispatchStr);
-            odkCommon.removeFirstQueuedAction();
+            // removeFirstQueuedAction handled in finishCustomEntry
+            queryUtil.finishCustomEntry(action, dispatchStr, "beneficiary_entity", util.beneficiaryEntityTable, "rootRowId", "customTableId", LOG_TAG);
             break;
         default:
             console.log("Error: unrecognized action type in callback");
@@ -247,7 +249,7 @@ function queryChain(passed_code) {
         } else {
             registrationFunction();
         }
-        
+
     } else if (type === 'enable' || type === 'disable') {
         regOverrideFunction();
     } else if (type === 'ent_override') {
@@ -267,7 +269,7 @@ function deliveryBCheckCBSuccess(result) {
                           null, null, null, null, null, null, true,
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
     } else if (result.getCount() === 1) {
-        // TODO: This should be changed as well - probably don't need if and else 
+        // TODO: This should be changed as well - probably don't need if and else
         // double check that this is the case
         if (type === 'delivery') {
             odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),
@@ -323,7 +325,7 @@ function registrationBCheckCBSuccess(result) {
                           null, null, null, null, true, registrationVoucherCBSuccess,
                           registrationVoucherCBFailure);
 
-    } else {ƒ
+    } else {
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
         // Now launch the registration_detail_hh.html
         odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),'config/tables/registration/html/registration_detail_hh.html');
@@ -349,15 +351,38 @@ function registrationVoucherCBSuccess(result) {
         var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
         var user = odkCommon.getSessionVariable(userKey);
 
-        var struct = {};
-        struct['beneficiary_entity_id'] = code;
-        struct['_group_modify'] = defaultGroup;
-        struct['_default_access'] = 'HIDDEN';
-        struct['_row_owner'] = user;
-
-        var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration});
-        odkTables.addRowWithSurvey(dispatchStruct, util.beneficiaryEntityTable, util.beneficiaryEntityTable, null, struct);
-        
+        // TODO: verify that custom beneficiary entity table exists
+        var customBEForm = util.getBeneficiaryEntityCustomFormId();
+        if (customBEForm == undefined || customBEForm == null || customBEForm == "") {
+            // should we provide a ui to register without survey?
+            $('#search_results').text("Beneficiary Entity form not defined");
+        }
+        var customRowId = util.genUUID();
+        var rootRowId = util.genUUID();
+        new Promise( function(resolve, reject) {
+            var struct = {};
+            struct['beneficiary_entity_id'] = code;
+            struct['custom_beneficiary_entity_form_id'] = customBEForm;
+            struct['custom_beneficiary_entity_row_id'] = customRowId;
+            struct['status'] = 'ENABLED';
+            struct['status_reason'] = 'standard';
+            struct['_group_modify'] = defaultGroup;
+            struct['_default_access'] = 'HIDDEN';
+            struct['_row_owner'] = user;
+            odkData.addRow(util.beneficiaryEntityTable, struct, rootRowId, resolve, reject);
+        }).then( function(resolve, reject) {
+            var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration});
+            var struct = {};
+            struct['_group_modify'] = defaultGroup;
+            struct['_default_access'] = 'HIDDEN';
+            struct['_row_owner'] = user;
+            odkData.addRow(customBEForm, struct, customRowId, resolve, reject);
+        }).then( function(resolve, reject) {
+            var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration,
+                "rootRowId": rootRowId,
+                "customTableId": customBEForm});
+            odkTables.editRowWithSurvey(dispatchStruct, customBEForm, customRowId, customBEForm, null);
+        });
     }, 1000);
 }
 
@@ -498,7 +523,7 @@ function createOverrideCBSuccess(result) {
     struct['is_override'] = 'true';
     struct['status'] = 'enabled';
     //struct['date_created'] = TODO: decide on date format
-    struct['_default_access'] = 'HIDDEN'; 
+    struct['_default_access'] = 'HIDDEN';
     struct['_row_owner'] = user;
     struct['_group_modify'] = defaultGroup;
     odkData.addRow(util.entitlementTable, struct, util.genUUID(), addDistCBSuccess, addDistCBFailure);

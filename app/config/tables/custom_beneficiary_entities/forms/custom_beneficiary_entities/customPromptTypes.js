@@ -10,7 +10,7 @@ var async_assign = promptTypes.base.extend({
     type: "async_assign",
     debug: false,
     valid: true,
-    templatePath: '../config/tables/registration/forms/registration/templates/async_assign.handlebars',
+    templatePath: '../config/tables/custom_beneficiary_entities/forms/custom_beneficiary_entities/templates/async_assign.handlebars',
     _cachedSelection: null,
     getLinkedTableId: function() {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);

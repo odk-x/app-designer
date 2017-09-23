@@ -104,7 +104,7 @@
       },
       {
         "type": "string",
-        "name": "item_description",
+        "name": "item_pack_description",
         "_row_num": 9
       },
       {
@@ -373,7 +373,7 @@
         ],
         "elementKey": "is_override"
       },
-      "item_description": {
+      "item_pack_description": {
         "type": "string",
         "_defn": [
           {
@@ -381,7 +381,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "item_description"
+        "elementKey": "item_pack_description"
       },
       "item_pack_id": {
         "type": "string",
@@ -716,7 +716,7 @@
         "elementSet": "data",
         "elementPath": "is_override"
       },
-      "item_description": {
+      "item_pack_description": {
         "type": "string",
         "_defn": [
           {
@@ -724,10 +724,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "item_description",
-        "elementName": "item_description",
+        "elementKey": "item_pack_description",
+        "elementName": "item_pack_description",
         "elementSet": "data",
-        "elementPath": "item_description"
+        "elementPath": "item_pack_description"
       },
       "item_pack_id": {
         "type": "string",
