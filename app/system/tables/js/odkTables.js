@@ -332,6 +332,22 @@ window.odkTables = {
 
     },
 
+    setSubListViewArbitraryQuery : function(tableId, sqlCommand, sqlSelectionArgs, relativePath) {
+      this.assertOpenTypes('setSubListView()',
+                           tableId,
+                           sqlCommand,
+                           sqlSelectionArgs,
+                           relativePath);
+      if (arguments.length > 4) {
+        throw 'setSubListViewArbitraryQuery()--too many arguments';
+      }
+
+      // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+      var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null :
+        JSON.stringify(sqlSelectionArgs);
+      odkTablesIf.setSubListViewArbitraryQuery(tableId, sqlCommand, sqlSelectionArgsJSON, relativePath);
+    },
+
     launchHTML : function(dispatchStruct, relativePath) {
         if ( relativePath === null || relativePath === undefined ) {
             throw 'launchHTML()--relativePath is null or not specified';
