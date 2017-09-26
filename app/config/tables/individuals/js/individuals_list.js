@@ -5,7 +5,7 @@
 
 var idxStart = -1;
 var registrationResultSet = {};
-
+var locale = odkCommon.getPreferredLocale();
 
 /**
  * Called when page loads to display things (Nothing to edit here)
@@ -21,7 +21,7 @@ var registrationCBSuccess = function(result) {
 
 var registrationCBFailure = function(error) {
 
-    console.log('registration_list registrationCBFailure: ' + error);
+    console.log('registrationMember_list registrationCBFailure: ' + error);
 };
 
 var firstLoad = function() {
@@ -32,7 +32,6 @@ var firstLoad = function() {
  * Called when page loads to display things (Nothing to edit here)
  */
 var resumeFn = function(fIdxStart) {
-    $.getScript("../../../assets/js/util.js", function(){});
     odkData.getViewData(registrationCBSuccess, registrationCBFailure);
 
     idxStart = fIdxStart;
@@ -57,16 +56,8 @@ var resumeFn = function(fIdxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                var launchType = util.getQueryParameter('type');
-                if (launchType == 'activate' || launchType == 'disable') {
-                    odkTables.openDetailView(null, tableId, rowId,
-                                                     'config/tables/registration/html/registration_detail.html?type='
-                                                     + encodeURIComponent(launchType));
-                } else {
-                    odkTables.openDetailWithListView(null, tableId, rowId,
-                                                     'config/tables/registration/html/registration_detail.html?type='
-                                                     + encodeURIComponent(launchType));
-                }
+                odkTables.openDetailView(null, tableId, rowId,
+                    'config/tables/registrationMember/html/individuals_detail.html');
             }
         });
     }
@@ -102,22 +93,14 @@ var displayGroup = function(idxStart) {
         item.attr('rowId', registrationResultSet.getRowId(i));
         item.attr('class', 'item_space');
         item.attr('id', registrationResultSet.getData(i, '_id'));
-        var beneficiary_code = registrationResultSet.getData(i, 'beneficiary_code');
-        item.text('Beneficiary Code: ' + beneficiary_code);
+        var first_last_name = registrationResultSet.getData(i, 'first_last_name');
+        item.text(odkCommon.localizeText(locale, 'name') + ": " + first_last_name);
 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
         chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
         item.append(chevron);
-
-        /**
-         * Adds other data/details in item space.
-         * Replace COLUMN_NAME with the column whose data you want to display
-         * as an extra detail etc. Duplicate the following block of code for
-         * different details you want to add. You may replace occurrences of
-         * 'field1' with new, specific label that are more meaningful to you
-         */
 
         $('#list').append(item);
 

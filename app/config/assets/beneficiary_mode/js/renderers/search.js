@@ -12,13 +12,13 @@ var locale = odkCommon.getPreferredLocale();
 var singularUnitLabel;
 var pluralUnitLabel;
 
-function start() {
+function display() {
     $('#launch').text(odkCommon.localizeText(locale, "view"));
-    if (type == util.individualTable) {
+    if (type == util.getIndividualCustomFormId()) {
         $('#title').text(odkCommon.localizeText(locale, "search_individuals"));
         singularUnitLabel = odkCommon.localizeText(locale, "beneficiary");
         pluralUnitLabel = odkCommon.localizeText(locale, "beneficiaries");
-    } else if (type == util.beneficiaryEntityTable) {
+    } else if (type == util.getBeneficiaryEntityCustomFormId()) {
         if (util.getRegistrationMode() == 'HOUSEHOLD') {
             $('#title').text(odkCommon.localizeText(locale, "search_households"));
             singularUnitLabel = odkCommon.localizeText(locale, "household");

@@ -7,8 +7,6 @@ date_screened,date_screened,undefined,[]
 delivery_site,delivery_site,string,[]
 disabled_reason,disabled_reason,string,[]
 hh_size,hh_size,integer,[]
-is_active,is_active,undefined,[]
-is_override,is_override,undefined,[]
 location,location,geopoint,"[""location_accuracy"",""location_altitude"",""location_latitude"",""location_longitude""]"
 location_accuracy,accuracy,number,[]
 location_altitude,altitude,number,[]

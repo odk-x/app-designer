@@ -75,7 +75,6 @@ util.genUUID = function() {
 };
 
 util.renderPage = function(renderFunction) {
-    console.log(renderFunction);
     renderFunction();
     $(':button').css({'height' : window.innerHeight * .15 + "px"});
     $(':button').css({'font-size' : Math.min(window.innerHeight, window.innerWidth) * .07 + "px"});
@@ -84,7 +83,6 @@ util.renderPage = function(renderFunction) {
 }
 
 util.renderPageAsPromise = function(renderFunction) {
-    console.log(renderFunction);
     renderFunction().then( function() {
         $(':button').css({'height' : window.innerHeight * .15 + "px"});
         $(':button').css({'font-size' : Math.min(window.innerHeight, window.innerWidth) * .07 + "px"});
@@ -96,6 +94,18 @@ util.renderPageAsPromise = function(renderFunction) {
 util.setJSONMap = function(JSONMap, key, value) {
     if (value !== null && value !== undefined) {
         JSONMap[key] = value;
+    }
+}
+
+util.populateDetailView = function(resultSet, parentDiv, locale, exclusionList) {
+    var columns = resultSet.getColumns();
+    var fieldListDiv = $('#' + parentDiv);
+    for (var i = 0; i < columns.length; i++) {
+        if (!columns[i].startsWith("_") && !exclusionList.includes(columns[i])) {
+            var line = $('<p>').attr('id', columns[i]).appendTo(fieldListDiv);
+            $('<span>').attr('id', 'inner' + columns[i]).text(resultSet.get(columns[i])).appendTo(line);
+            line.prepend(odkCommon.localizeText(locale, columns[i]) + ": ");
+        }
     }
 }
 

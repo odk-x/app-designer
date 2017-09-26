@@ -21,7 +21,7 @@ var registrationCBSuccess = function(result) {
 
 var registrationCBFailure = function(error) {
 
-    console.log('registration_list_hh registrationCBFailure: ' + error);
+    console.log('registration_list registrationCBFailure: ' + error);
 };
 
 var firstLoad = function() {
@@ -58,12 +58,14 @@ var resumeFn = function(fIdxStart) {
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                 var launchType = util.getQueryParameter('type');
-                if (launchType == 'activate' || launchType == 'disable') {
+                if (launchType == 'enable' || launchType == 'disable') {
                     odkTables.openDetailView(null, tableId, rowId,
-                                                     'config/tables/registration/html/registration_detail_hh.html');
+                                                     'config/tables/registration/html/beneficiary_entities_detail.html?type='
+                                                     + encodeURIComponent(launchType));
                 } else {
                     odkTables.openDetailWithListView(null, tableId, rowId,
-                                                     'config/tables/registration/html/registration_detail_hh.html');
+                                                     'config/tables/registration/html/beneficiary_entities_detail.html?type='
+                                                     + encodeURIComponent(launchType));
                 }
             }
         });

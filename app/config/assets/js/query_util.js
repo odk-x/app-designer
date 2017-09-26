@@ -66,9 +66,9 @@ queryUtil.addDeliveryRow = function(entitlement_row, custom_delivery_table, cust
 }
 
 
-
+// returns true if clean up was necessary because it failed
 //(action, dispatchStr, 'delivery', 'deliveryId', deliveryTableKey) params used for delivery call (to be implemented)
-queryUtil.finishCustomEntry = function(action, dispatchStr, label, rootTableId, rootIdDispatchKey, customTableIdDispatchKey, logTag) {
+queryUtil.validateCustomTableEntry = function(action, dispatchStr, label, rootTableId, rootIdDispatchKey, customTableIdDispatchKey, logTag) {
 
     var result = action.jsonValue.result;
 
@@ -78,74 +78,56 @@ queryUtil.finishCustomEntry = function(action, dispatchStr, label, rootTableId, 
     var rootRowId = dispatchStr[rootIdDispatchKey];
     if (rootRowId === null || rootRowId === undefined) {
         odkCommon.log('E', logTag + "Error: no root" + label + "id");
-        odkCommon.removeFirstQueuedAction();
-        return;
+        return false;
     }
 
     if (result === null || result === undefined) {
-        odkCommon.log('E', logTag + "Error: no result object on delivery");
+        odkCommon.log('E', logTag + "Error: no result object on " + label);
         queryUtil.executeDeleteRowCleanup(rootRowId, label, rootTableId);
         // TODO change to generic function
-        return;
+        return false;
     }
 
     var customRowId = result.instanceId;
     if (customRowId === null || customRowId === undefined) {
         odkCommon.log('E', logTag + "Error: no instance ID on " + label);
         queryUtil.executeDeleteRowCleanup(rootRowId, label, rootTableId);
-        return;
+        return false;
     }
+
     odkCommon.log('I', dispatchStr);
     odkCommon.log('I', customTableIdDispatchKey);
     var customTableId = dispatchStr[customTableIdDispatchKey];
     if (customTableId === null || customTableId === undefined) {
         odkCommon.log('E', logTag + "Error: no " + label + " table name");
         queryUtil.executeDeleteRowCleanup(rootRowId, label, rootTableId);
-        return;
+        return false;
     }
 
-    var customRow = null;
+    savepointType = action.jsonValue.result.savepoint_type;
+    console.log(savepointType);
 
-    new Promise(function(resolve, reject) {
-        odkData.getMostRecentRow(customTableId, customRowId, resolve, reject);
-    }).then( function(result) {
-        odkCommon.log('I', logTag +  'Got custom ' + label  + ' row');
-        if (!result || result.getCount === 0) {
-            throw ('Failed to retrieve custom ' + label + ' row.');
-        }
-
-        var customRow = result;
+    if (savepointType === util.savepointSuccess) {
+        odkCommon.log('I', logTag + label + " succeeded");
+        return true;
+    } else {
+        odkCommon.log('I', logTag + label + " is false; delete rows");
         var dbActions = [];
-
-
-        // Check if the entry succeeded
-        var savepointType = customRow.get('_savepoint_type');
-        console.log(savepointType);
-
-        if (savepointType === util.savepointSuccess) {
-            odkCommon.log('I', logTag + label + " succeeded");
-        } else {
-            odkCommon.log('I', logTag + label + " is false; delete rows");
-            dbActions.push(queryUtil.deleteRowPromise(rootTableId, rootRowId));
-            dbActions.push(queryUtil.deleteRowPromise(customRowId, customTableId));
-        }
+        dbActions.push(queryUtil.deleteRowPromise(rootTableId, rootRowId));
+        dbActions.push(queryUtil.deleteRowPromise(customTableId, customRowId));
 
         Promise.all(dbActions).then( function(resultArr) {
             odkCommon.log('I', logTag +  'Cleaned up invalid + ' + label + ' rows');
+            Promise.all(dbActions).then( function(resultArr) {
+                odkCommon.log('I', logTag +  'Cleaned up invalid + ' + label + ' rows');
 
-            odkCommon.removeFirstQueuedAction();
-        }).catch( function(reason) {
-            odkCommon.log('E', logTag + 'Failed to clean up invalid ' + label + ' rows: ' + reason);
+            }).catch( function(reason) {
+                odkCommon.log('E', logTag + 'Failed to clean up invalid ' + label + ' rows: ' + reason);
 
-            odkCommon.removeFirstQueuedAction();
+            });
         });
-
-
-    }).catch( function(reason) {
-        odkCommon.log('E', logTag + 'Failed to finish custom ' + label + ': ' + reason);
-
-        odkCommon.removeFirstQueuedAction();
-    });
+        return false;
+    }
 }
 
 // Convenience because we call this on any kind of error
@@ -195,7 +177,7 @@ queryUtil.deleteCustomBeneficiaryEntityRow = function(custom_beneficiary_entity_
 }
 
 queryUtil.entitlementIsDelivered = function(entitlement_id) {
-    new Promise(function(resolve, reject) {
+    return new Promise(function(resolve, reject) {
         odkData.query(util.deliveryTable, 'entitlement_id = ?',
                       [entitlement_id], null, null, null, null, null,
                       null, true, resolve, reject);
@@ -210,3 +192,46 @@ queryUtil.entitlementIsDelivered = function(entitlement_id) {
             return false;
         });
 }
+
+/*queryUtil.getGroupedEntitlements = function(beneficiaryEntityId) {
+
+
+    odkData.arbitraryQuery(util.entitlementTable, 'SELECT * FROM ' + util.entitlementTable + ' INNER JOIN ' + util.deliveryTable + ' ON ' + util.entitlementTable + '._id=' + util.deliveryTable + '.entitlement_id'
+        [beneficiaryEntityId], null, null, resolve, reject);
+
+
+    var originalEntitlementSet;
+    new Promise( function(resolve, reject) {
+        odkData.query(util.entitlementTable, 'beneficiary_entity_id = ?',
+            [beneficiaryEntityId], null, null, null, null, null,
+            null, true, resolve, reject);
+    }).then( function(result) {
+        console.log(result);
+        originalEntitlementSet = result;
+        var entitlementStatusChecks = [];
+        for (var i = 0; i < result.getCount(); i++) {
+            var entitlementId = result.getRowId(i);
+            entitlementStatusChecks.push(new Promise( function(resolve, reject) {
+                odkData.query(util.deliveryTable, '_id = ?',
+                    [entitlementId], null, null, null, null, null,
+                    null, true, resolve, reject);
+            }));
+        }
+        return entitlementStatusChecks;
+    }).then( function(result) {
+        console.log(result);
+        return Promise.all(result);
+    }).then( function(result) {
+        console.log(result);
+        var pendingEntitlements = [];
+        var deliveredEntitlements = [];
+        for (var i = 0; i < originalEntitlementSet.getCount(); i++) {
+            if (result.getRowIds().contains(originalEntitlementSet.getRowId(i))) {
+                deliveredEntitlements.push(originalEntitlementSet.get(i));
+            } else {
+                deliveredEntitlements.push(originalEntitlementSet.get(i));
+            }
+        }
+        return {"pending" : pendingEntitlements, "delivered" : deliveredEntitlements};
+    });
+}*/

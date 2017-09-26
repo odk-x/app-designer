@@ -660,89 +660,96 @@ window.odkCommonDefinitions = {
       },
       "_row_num": 65
     },
+    "search_individuals": {
+      "string_token": "search_individuals",
+      "text": {
+        "default": "Search for Individuals"
+      },
+      "_row_num": 66
+    },
     "search_individuals_title": {
       "string_token": "search_individuals_title",
       "text": {
         "default": "Individual Advanced Search"
       },
-      "_row_num": 66
+      "_row_num": 67
     },
     "search_households_title": {
       "string_token": "search_households_title",
       "text": {
         "default": "Household Advanced Search"
       },
-      "_row_num": 67
+      "_row_num": 68
     },
     "search_beneficiaries_title": {
       "string_token": "search_beneficiaries_title",
       "text": {
         "default": "Beneficiaries Advanced Search"
       },
-      "_row_num": 68
+      "_row_num": 69
     },
     "delivery_site": {
       "string_token": "delivery_site",
       "text": {
         "default": "Delivery Site"
       },
-      "_row_num": 69
+      "_row_num": 70
     },
     "household_size": {
       "string_token": "household_size",
       "text": {
         "default": "Household Size"
       },
-      "_row_num": 70
+      "_row_num": 71
     },
     "tent_caravan": {
       "string_token": "tent_caravan",
       "text": {
         "default": "Tent/Caravan Code"
       },
-      "_row_num": 71
+      "_row_num": 72
     },
     "email": {
       "string_token": "email",
       "text": {
         "default": "Email"
       },
-      "_row_num": 72
+      "_row_num": 73
     },
     "household_head": {
       "string_token": "household_head",
       "text": {
         "default": "Household Head"
       },
-      "_row_num": 73
+      "_row_num": 74
     },
     "vulnerability": {
       "string_token": "vulnerability",
       "text": {
         "default": "Vulnerability Critieria"
       },
-      "_row_num": 74
+      "_row_num": 75
     },
     "view_registration_data": {
       "string_token": "view_registration_data",
       "text": {
         "default": "View Registration Data"
       },
-      "_row_num": 75
+      "_row_num": 76
     },
     "view": {
       "string_token": "view",
       "text": {
         "default": "View"
       },
-      "_row_num": 76
+      "_row_num": 77
     },
     "select_group": {
       "string_token": "select_group",
       "text": {
         "default": "Please Select Group"
       },
-      "_row_num": 77
+      "_row_num": 78
     }
   },
   "_locales": {

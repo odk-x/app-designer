@@ -3,7 +3,6 @@
     <head>
         <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
         <link href="../css/radio_button.css" type="text/css" rel="stylesheet" />
-        <link href="../css/reg.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
         <script type="text/javascript" src="../tableSpecificDefinitions.js"></script>
         <script type="text/javascript" src="../../../assets/libs/jquery-3.2.1.js"></script>
@@ -12,25 +11,18 @@
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../../assets/js/util.js"></script>
-        <script type="text/javascript" src="../js/registration_detail_hh.js"></script>
+        <script type="text/javascript" src="../js/individuals_detail.js"></script>
     </head>
     <body>
-        <a id="entitle" class="page-link topRight" href="#" aria-label="Ent">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Entitlements</span>
-        </a>
-        <br/>
         <h1 id="title"></h1>
-        <p id="address"><span id="inner_address"></span></p>
-        <p id="telephone"><span id="inner_telephone"></span></p>
-        <p id="mobile_provider"><span id="inner_mobile_provider"></span></p>
-        <p id="delivery_site"><span id="inner_delivery_site"></span></p>
-        <p id="household_size"><span id="inner_household_size"></span></p>
-        <p id="tent_caravan"><span id="inner_tent_caravan"></span></p>
-        <p id="reject"><span id="inner_reject"></span></p>
-
-        <button id="followup" style="display:none"></button>
-        <p><span id="message"></span></p>
+        <p id="id_type"><span id="inner_id_type"></span></p>
+        <p id="id_number"><span id="inner_id_number"></span></p>
+        <p id="gender"><span id="inner_gender"></span></p>
+        <p id="is_hh_head"><span id="inner_is_hh_head"></span></p>
+        <p id="age"><span id="inner_age"></span></p>
+        <p id="email"><span id="inner_email"></span></p>
+        <p id="head_of_household"><span id="inner_head_of_household"></span></p>
+        <p id="vulnerability"><span id="inner_vulnerability"></span></p>
         <script>
           $(display);
         </script>

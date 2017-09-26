@@ -203,79 +203,9 @@ var actionCBFn = function() {
 
 var finishCustomDelivery = function(action, dispatchStr) {
 
-    var result = action.jsonValue.result;
-
-    odkCommon.log('I', LOG_TAG + "Finishing custom delivery");
-    odkCommon.log('I', LOG_TAG +  "" + result);
-
-    var root_delivery_id = dispatchStr['deliveryId'];
-    if (root_delivery_id === null || root_delivery_id === undefined) {
-        odkCommon.log('E', LOG_TAG + "Error: no root delivery id");
-        odkCommon.removeFirstQueuedAction();
-        return;
+    if (queryUtil.validateCustomTableEntry(action, dispatchStr, "delivery", util.deliveryTable, "deliveryId", "deliveryTableKey", LOG_TAG)) {
+        // TODO: check to make sure that there are any entitlements left, otherwise return to previous screen
     }
-
-    if (result === null || result === undefined) {
-        odkCommon.log('E', LOG_TAG + "Error: no result object on delivery");
-        executeDeleteRootDeliveryRow(root_delivery_id);
-        return;
-    }
-
-    var custom_delivery_id = result.instanceId;
-    if (custom_delivery_id === null || custom_delivery_id === undefined) {
-        odkCommon.log('E', LOG_TAG + "Error: no instance ID on delivery");
-        executeDeleteRootDeliveryRow(root_delivery_id);
-        return;
-    }
-
-    var custom_delivery_table = dispatchStr[deliveryTableKey];
-    if (custom_delivery_table === null || custom_delivery_table === undefined) {
-        odkCommon.log('E', LOG_TAG + "Error: no delivery table name");
-        executeDeleteRootDeliveryRow(root_delivery_id);
-        return;
-    }
-
-    var custom_delivery_row = null;
-
-    queryUtil.getCustomDeliveryRow(custom_delivery_id, custom_delivery_table).then( function(result) {
-        odkCommon.log('I', LOG_TAG +  "Got custom delivery row");
-        if (!result || result.getCount === 0) {
-            throw ('Failed to retrieve custom delivery row.');
-        }
-
-        var custom_delivery_row = result;
-        var dbActions = [];
-
-
-        // Check if the delivery succeeded
-        var savepoint_type = custom_delivery_row.get('_savepoint_type');
-        var entitlement_id = custom_delivery_row.get('entitlement_id');
-
-        if (savepoint_type === savepointSuccess) {
-            odkCommon.log('I', LOG_TAG +  "Delivery succeeded; update rows");
-        } else {
-            odkCommon.log('I', LOG_TAG +  "Delivery is false; delete rows");
-            dbActions.push(queryUtil.deleteRootDeliveryRow(root_delivery_id));
-            dbActions.push(queryUtil.deleteCustomDeliveryRow(custom_delivery_id, custom_delivery_table));
-        }
-
-
-        Promise.all(dbActions).then( function(resultArr) {
-            odkCommon.log('I', LOG_TAG +  'Cleaned up invalid delivery rows');
-
-            odkCommon.removeFirstQueuedAction();
-        }).catch( function(reason) {
-            odkCommon.log('E', LOG_TAG + 'Failed to clean up invalid delivery rows: ' + reason);
-
-            odkCommon.removeFirstQueuedAction();
-        });
-
-
-    }).catch( function(reason) {
-        odkCommon.log('E', LOG_TAG + 'Failed to finish custom delivery: ' + reason);
-
-        odkCommon.removeFirstQueuedAction();
-    });
 }
 
 // Convenience because we call this on any kind of error

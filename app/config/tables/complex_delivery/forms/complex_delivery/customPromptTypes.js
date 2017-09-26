@@ -10,7 +10,7 @@ var async_assign = promptTypes.base.extend({
     type: "async_assign",
     debug: false,
     valid: true,
-    templatePath: '../config/tables/registration/forms/registration/templates/async_assign.handlebars',
+    templatePath: '../config/tables/complex_delivery/forms/complex_delivery/templates/async_assign.handlebars',
     _cachedSelection: null,
     getLinkedTableId: function() {
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
@@ -48,9 +48,9 @@ var async_assign = promptTypes.base.extend({
     },
     getFormPath: function() {
         if ( this.getLinkedFormId() === "framework" ) {
-            return '../config/assets/framework/forms/framework/'; 
+            return '../config/assets/framework/forms/framework/';
         } else {
-            return '../config/tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/'; 
+            return '../config/tables/' + this.getLinkedTableId() + '/forms/' + this.getLinkedFormId() + '/';
         }
     },
     convertSelection: function(linkedMdl) {
@@ -85,7 +85,7 @@ var async_assign = promptTypes.base.extend({
                 that._linkedCachedInstanceName = null;
             }
             database.readTableDefinition($.extend({}, ctxt, {success:function(tlo) {
-                ctxt.log('D',"prompts." + that.type + 
+                ctxt.log('D',"prompts." + that.type +
                     'getLinkedMdl.readTableDefinition.success', "px: " + that.promptIdx );
                 that._linkedCachedMdl = tlo;
                 ctxt.success(tlo);
@@ -117,7 +117,7 @@ var async_assign = promptTypes.base.extend({
                 valueList = _.filter(valueList, function(value) {
                     return value !== null && value !== undefined;
                 });
-                
+
                 var aggValue;
                 if ( valueList.length === 0 ) {
                     // set aggValue to null
@@ -154,7 +154,7 @@ var async_assign = promptTypes.base.extend({
                 that.renderContext.type = that.type;
                 that.renderContext.valueList = JSON.stringify(valueList);
                 that.renderContext.aggValue = (aggValue === null) ? "null" : ((aggValue === undefined) ? "undefined" : aggValue);
-                
+
                 ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances.success", "px: " + that.promptIdx + " instanceList: " + instanceList.length);
                 ctxt.success();
             }}), dbTableName, selString, selArgs, displayElementName, null);

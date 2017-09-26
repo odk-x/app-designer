@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <link href="../../../assets/css/detail_with_list.css" type="text/css" rel="stylesheet" />
+        <link href="../css/reg.css" type="text/css" rel="stylesheet" />
+        <link href="../css/radio_button.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
+        <script type="text/javascript" src="../tableSpecificDefinitions.js"></script>
+        <script type="text/javascript" src="../../../assets/libs/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="../../../assets/libs/jquery-migrate-3.0.0.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
+        <script type="text/javascript" src="../js/beneficiary_entities_detail.js"></script>
+    </head>
+    <body>
+        <a id="toggle_workflow" class="page-link topRight" href="#" aria-label="Household">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only"></span>
+        </a>
+        <br/>
+        <h2 id="title"></h2>
+        <div class="switch-field" id="entitlements_switch" style="display:none">
+            <div class="switch-title" id="entitlements_title"></div>
+            <input type="radio" name="entitlements" id="entitlements_pending" checked="true"/>
+            <label for="entitlements_pending" id="pending_txt"></label>
+            <input type="radio" name="entitlements" id="entitlements_delivered"/>
+            <label for="entitlements_delivered" id="delivered_txt"></label>
+        </div>
+        <div id="field_list"></div>
+
+        <br/>
+
+        <button id="followup" style="display:none"></button>
+        <p><span id="message"></span></p>
+        <script>
+          util.renderPageAsPromise(display);
+        </script>
+    </body>
+</html>

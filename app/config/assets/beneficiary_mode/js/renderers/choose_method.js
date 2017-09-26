@@ -159,8 +159,9 @@ function callBackFn () {
             odkCommon.removeFirstQueuedAction();
             break;
         case actionRegistration:
-            // removeFirstQueuedAction handled in finishCustomEntry
-            queryUtil.finishCustomEntry(action, dispatchStr, "beneficiary_entity", util.beneficiaryEntityTable, "rootRowId", "customTableId", LOG_TAG);
+            // removeFirstQueuedAction handled in validateCustomTableEntry
+            handleRegistrationCallback(action, dispatchStr);
+            odkCommon.removeFirstQueuedAction();
             break;
         default:
             console.log("Error: unrecognized action type in callback");
@@ -199,44 +200,13 @@ function handleBarcodeCallback(action, dispatchStr) {
 }
 
 function handleRegistrationCallback(action, dispatchStr) {
-
-    //TODO: differentiate ui based on REGISTRATION_MODE
-
-    console.log("Registration action occured");
-
-    var result = action.jsonValue.result;
-    if (result === null || result === undefined) {
-        console.log("Error: no result object on registration");
-        return;
-    }
-
-    var instanceId = result.instanceId;
-    if (instanceId === null || instanceId === undefined) {
-        console.log("Error: no instance ID on registration");
-        return;
-    }
-
-    var savepointType = result.savepoint_type;
-    if (savepointType === null || savepointType === undefined) {
-        console.log("Error: no savepoint type on registration");
-        return;
-    }
-
-    if (savepointType !== savepointSuccess) {
-        console.log("The row was not saved as complete. Not launching detailview");
-        return;
-    }
-
-    if (type === 'delivery') {
-        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, instanceId,
-                                         'config/tables/registration/html/registration_detail.html?type=' +
-                                         encodeURIComponent(type));
-    } else if (type === 'registration') {
-        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, instanceId,
-                                         'config/tables/registration/html/registration_detail_hh.html?type=' +
-                                         encodeURIComponent(type));
+    if (queryUtil.validateCustomTableEntry(action, dispatchStr, "beneficiary_entity", util.beneficiaryEntityTable, "rootRowId", "customTableId", LOG_TAG)) {
+        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, dispatchStr["rootRowId"],
+                'config/tables/' + util.beneficiaryEntityTable + '/html/beneficiary_entities_detail.html?type=' +
+                encodeURIComponent(type));
     }
 }
+
 
 function queryChain(passed_code) {
     code = passed_code;
@@ -258,38 +228,26 @@ function queryChain(passed_code) {
 }
 
 function deliveryFunction() {
-    odkData.query('registration', 'beneficiary_entity_id = ? and (status = ? or status = ?)', [code, 'ENABLED', 'enabled'], null,
+    odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ? and (status = ? or status = ?)', [code, 'ENABLED', 'enabled'], null,
                            null, null, null, null, null, true, deliveryBCheckCBSuccess, deliveryBCheckCBFailure);
 }
 
 function deliveryBCheckCBSuccess(result) {
     console.log('deliveryBCheckCBSuccess called');
     if (result.getCount() === 0) {
-        odkData.query('registration', 'beneficiary_entity_id = ? and (status = ? or status = ?)', [code, 'ENABLED', 'enabled'],
+        odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ? and (status = ? or status = ?)', [code, 'DISABLED', 'disabled'],
                           null, null, null, null, null, null, true,
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
     } else if (result.getCount() === 1) {
-        // TODO: This should be changed as well - probably don't need if and else
         // double check that this is the case
-        if (type === 'delivery') {
-            odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),
-                                             'config/tables/registration/html/registration_detail.html?type=' +
+        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),
+                                             'config/tables/' + util.beneficiaryEntityTable + '/html/beneficiary_entities_detail.html?type=' +
                                              encodeURIComponent(type));
-        } else {
-            odkTables.openDetailView(null, util.beneficiaryEntityTable,result.getRowId(0),
-                                     'config/tables/registration/html/registration_detail.html?type=' +
-                                     encodeURIComponent(type));
-        }
     } else {
-        var params;
-        var vals;
-
-        params = 'beneficiary_entity_id = ? and (status = ? or status = ?)';
-        vals = [code,'ENABLED', 'enabled'];
         odkTables.openTableToListView(
                                       null,
-                                      util.beneficiaryEntityTable, params, vals
-                                      , 'config/tables/registration/html/registration_list.html?type=' + type);
+                                      util.beneficiaryEntityTable, 'beneficiary_entity_id = ? and (status = ? or status = ?)', [code,'ENABLED', 'enabled'],
+                                      'config/tables/registration/html/beneficiary_entities_list.html?type=' + type);
     }
 }
 
@@ -324,11 +282,9 @@ function registrationBCheckCBSuccess(result) {
             odkData.query(util.entitlementTable, 'beneficiary_entity_id = ?', [code], null, null,
                           null, null, null, null, true, registrationVoucherCBSuccess,
                           registrationVoucherCBFailure);
-
     } else {
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
-        // Now launch the registration_detail_hh.html
-        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),'config/tables/registration/html/registration_detail_hh.html');
+        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),'config/tables/' + util.beneficiaryEntityTable + '/html/beneficiary_entities_detail.html?type=' + type);
     }
 }
 
@@ -413,7 +369,7 @@ function regOverrideFunction() {
 function regOverrideBenSuccess(result) {
     if (result.getCount() === 1) {
         odkTables.openDetailView(null, util.beneficiaryEntityTable,result.getRowId(0),
-                                 'config/tables/registration/html/registration_detail.html?type=' +
+                                 'config/tables/registration/html/beneficiary_entities_detail.html?type=' +
                                  encodeURIComponent(type));
     } else if (result.getCount() > 1) {
         var queriedType;
@@ -428,7 +384,7 @@ function regOverrideBenSuccess(result) {
         odkTables.openTableToListView(null, util.beneficiaryEntityTable,
                                       'beneficiary_entity_id = ? and (status = ? or status = ?)',
                                       [code, queriedType, queryCaseType],
-                                      'config/tables/registration/html/registration_list.html?type=' +
+                                      'config/tables/registration/html/beneficiary_entities_list.html?type=' +
                                       encodeURIComponent(type));
     } else {
         if (type === 'enable') {
