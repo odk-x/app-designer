@@ -4,14 +4,14 @@
 'use strict';
 
 var idxStart = -1;
-var registrationResultSet = {};
+var beneficiaryEntitiesResultSet = {};
 
 
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
 var registrationCBSuccess = function(result) {
-    registrationResultSet = result;
+    beneficiaryEntitiesResultSet = result;
     console.log(result.getCount());
 
     return (function() {
@@ -41,7 +41,7 @@ var resumeFn = function(fIdxStart) {
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
-            var tableId = registrationResultSet.getTableId();
+            var tableId = beneficiaryEntitiesResultSet.getTableId();
             // We set the rowId while as the li id. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
@@ -60,11 +60,11 @@ var resumeFn = function(fIdxStart) {
                 var launchType = util.getQueryParameter('type');
                 if (launchType == 'enable' || launchType == 'disable') {
                     odkTables.openDetailView(null, tableId, rowId,
-                                                     'config/tables/registration/html/beneficiary_entities_detail.html?type='
+                                            'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type='
                                                      + encodeURIComponent(launchType));
                 } else {
                     odkTables.openDetailWithListView(null, tableId, rowId,
-                                                     'config/tables/registration/html/beneficiary_entities_detail.html?type='
+                                                     'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type='
                                                      + encodeURIComponent(launchType));
                 }
             }
@@ -83,7 +83,7 @@ var displayGroup = function(idxStart) {
     console.log('displayGroup called. idxStart: ' + idxStart);
 
     /* If the list comes back empty, inform the user */
-    if (registrationResultSet.getCount() === 0) {
+    if (beneficiaryEntitiesResultSet.getCount() === 0) {
         var errorText = $('#error');
         errorText.show();
         errorText.text('No beneficiaries found'); // TODO: Translate this
@@ -92,18 +92,18 @@ var displayGroup = function(idxStart) {
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
-        if (i >= registrationResultSet.getCount()) {
+        if (i >= beneficiaryEntitiesResultSet.getCount()) {
             break;
         }
         /* Creates the item space */
         // We're going to select the ul and then start adding things to it.
         //var item = $('#list').append('<li>');
         var item = $('<li>');
-        item.attr('rowId', registrationResultSet.getRowId(i));
+        item.attr('rowId', beneficiaryEntitiesResultSet.getRowId(i));
         item.attr('class', 'item_space');
-        item.attr('id', registrationResultSet.getData(i, '_id'));
-        var beneficiary_code = registrationResultSet.getData(i, 'beneficiary_code');
-        item.text('Beneficiary Code: ' + beneficiary_code);
+        item.attr('id', beneficiaryEntitiesResultSet.getData(i, '_id'));
+        var beneficiary_entity_id = beneficiaryEntitiesResultSet.getData(i, 'beneficiary_entity_id');
+        item.text('Beneficiary Entity ID: ' + beneficiary_entity_id);
 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
@@ -127,7 +127,7 @@ var displayGroup = function(idxStart) {
         $('#list').append(borderDiv);
 
     }
-    if (i < registrationResultSet.getCount()) {
+    if (i < beneficiaryEntitiesResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
 };

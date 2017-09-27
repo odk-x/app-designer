@@ -122,8 +122,8 @@ var displayGroup = function(idxStart) {
 
       var field2 = $('<li>');
       field2.attr('class', 'detail');
-      var beneficiary_code = deliveriesResultSet.getData(i, 'beneficiary_code');
-      field2.text(odkCommon.localizeText(odkCommon.getPreferredLocale(), 'beneficiary_code') + ' : ' + beneficiary_code);
+      var beneficiary_entity_id = deliveriesResultSet.getData(i, 'beneficiary_entity_id');
+      field2.text(odkCommon.localizeText(odkCommon.getPreferredLocale(), 'beneficiary_code') + ' : ' + beneficiary_entity_id);
       item.append(field2);
 
 

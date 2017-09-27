@@ -77,7 +77,7 @@
     "model": [
       {
         "type": "string",
-        "name": "beneficiary_entity_id",
+        "name": "beneficiary_entity_row_id",
         "_row_num": 2
       },
       {
@@ -248,7 +248,7 @@
     "queries": {},
     "calculates": {},
     "model": {
-      "beneficiary_entity_id": {
+      "beneficiary_entity_row_id": {
         "type": "string",
         "_defn": [
           {
@@ -256,7 +256,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "beneficiary_entity_id"
+        "elementKey": "beneficiary_entity_row_id"
       },
       "beneficiary_entity_status": {
         "type": "string",
@@ -579,7 +579,7 @@
       }
     },
     "dataTableModel": {
-      "beneficiary_entity_id": {
+      "beneficiary_entity_row_id": {
         "type": "string",
         "_defn": [
           {
@@ -587,10 +587,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "beneficiary_entity_id",
-        "elementName": "beneficiary_entity_id",
+        "elementKey": "beneficiary_entity_row_id",
+        "elementName": "beneficiary_entity_row_id",
         "elementSet": "data",
-        "elementPath": "beneficiary_entity_id"
+        "elementPath": "beneficiary_entity_row_id"
       },
       "beneficiary_entity_status": {
         "type": "string",

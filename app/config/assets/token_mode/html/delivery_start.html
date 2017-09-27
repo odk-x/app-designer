@@ -10,7 +10,7 @@
         <script type="text/javascript" src="../../js/util.js"></script>
         <script type="text/javascript" src="../js/renderers/delivery_start.js"></script>
         <script type="text/javascript">
-		
+
         var insideQueue = false;
 		var htmlFileNameValue = "delivery_start";
 		var userActionValue = "launchBarcode";
@@ -52,7 +52,7 @@
 		        	code = action.jsonValue.result.SCAN_RESULT;
 		        	clearTimeout(myTimeoutVal);
 		            odkData.query(util.authorizationTable, 'is_active = ?', ['true'], null, null,
-					            null, null, null, null, true, authCBSuccess, 
+					            null, null, null, null, true, authCBSuccess,
 					            authCBFailure);
 
 		        } else {
@@ -69,7 +69,7 @@
 		function authCBSuccess(result) {
             activeAuths = result;
             if (result.getCount() > 0) {
-                odkData.query(util.deliveryTable, 'beneficiary_code = ? and is_delivered = ?', [code, 'true'],  null, null, null, null, null, null, true, deliveredSuccess, deliveredFailure);
+                odkData.query(util.deliveryTable, 'beneficiary_entity_id = ? and is_delivered = ?', [code, 'true'],  null, null, null, null, null, null, true, deliveredSuccess, deliveredFailure);
             } else {
                 $('#message').text('There are no currently active authorizations');
             }
@@ -89,7 +89,7 @@
                 $('#launch').on('click', function() {
                     odkTables.addRowWithSurvey(util.deliveryTable, util.deliveryTable, null, getJSONMapValues());
                 });
-            }  
+            }
             odkCommon.removeFirstQueuedAction();
         }
 
@@ -115,10 +115,10 @@
 
         var getJSONMapValues = function() {
             var jsonMap = {};
-            util.setJSONMap(jsonMap, 'beneficiary_code', code);
+            util.setJSONMap(jsonMap, 'beneficiary_entity_id', code);
             util.setJSONMap(jsonMap, 'authorization_id', id);
             console.log(id);
-            jsonMap = JSON.stringify(jsonMap);    
+            jsonMap = JSON.stringify(jsonMap);
             return jsonMap;
         };
 
@@ -126,7 +126,7 @@
 	</head>
 
 
-	
+
 	<body>
     	<h2>Please Scan Barcode</h2>
     	<button id="launch-barcode" type='reg' class="btn btn-launch btn-primary btn-block btn-plotter">Launch Barcode</button>

@@ -15,15 +15,11 @@
     <body>
         <script type="text/javascript" src="../js/authorizations_detail.js"></script>
         <h1 id='title'></h1>
-        <p id='auth_name'><span id="inner_auth_name"></span></p>
-        <p id='auth_id'><span id="inner_auth_id"></span></p>
 
-        <p id='item_pack_name'><span id="inner_item_pack_name"></span></p>
-        <p id='item_pack_description'><span id="inner_item_pack_description"></span></p>
-        <p id='item_pack_id'><span id="inner_item_pack_id"></span></p>
+        <div id="field_list"></div>
 
-        <script>            
-            util.renderPage($(display));
+        <script>
+            $(util.renderPageAsPromise(display));
         </script>
     </body>
 </html>

@@ -13,7 +13,7 @@ function deliver() {
 
     var entitlement_row = null;
 
-    queryUtil.getEntitlementRow(entitlement_id).then( function(result) {
+    dataUtil.getEntitlementRow(entitlement_id).then( function(result) {
         console.log('Got entitlement row');
         if (!result || result.getCount === 0) {
             throw ('Failed to retrieve entitlement.');
@@ -21,7 +21,7 @@ function deliver() {
 
         entitlement_row = result;
 
-        return queryUtil.addDeliveryRow(entitlement_row);
+        return dataUtil.addDeliveryRow(entitlement_row);
     }).then( function (result) {
         console.log('Added delivery row');
         if (!result || result.getCount === 0) {

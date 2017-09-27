@@ -86,9 +86,9 @@ function failureCallbackFn(error) {
 function launch() {
     if (type === 'registration') {
         odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' +
-                                  type + '/html/' + type + '_list_hh.html');
+                                  util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_list.html');
     } else {
         odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' +
-                                  type + '/html/' + type + '_list.html');
+                                  util.deliveryTable + '/html/' + util.deliveryTable  + '_list.html');
     }
 }

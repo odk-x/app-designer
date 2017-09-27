@@ -71,7 +71,6 @@ function display() {
     });
 
     Promise.all([userPromise, rolesPromise, defaultGroupPromise]).then(function(resultArray) {
-        console.log(resultArray.length);
         var users = resultArray[0].getUsers();
         var roles = resultArray[1].getRoles();
         var filteredRoles = _.filter(roles, function(s) {
@@ -81,11 +80,7 @@ function display() {
         odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
 
         superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
-        console.log(superUser);
-        console.log("ROLES: " + roles);
-        console.log("USERS: " + users);
-        console.log("DEFAULT_GROUP: " + defaultGroup);
-        if (superUser && type === 'registration') {
+        if (superUser && type === 'registration' && filteredRoles.length > 0) {
             $('#choose_user').show();
             $('#barcode').prop("disabled", true).addClass('disabled');
             $('#search').prop("disabled", true).addClass('disabled');
@@ -159,7 +154,6 @@ function callBackFn () {
             odkCommon.removeFirstQueuedAction();
             break;
         case actionRegistration:
-            // removeFirstQueuedAction handled in validateCustomTableEntry
             handleRegistrationCallback(action, dispatchStr);
             odkCommon.removeFirstQueuedAction();
             break;
@@ -200,17 +194,18 @@ function handleBarcodeCallback(action, dispatchStr) {
 }
 
 function handleRegistrationCallback(action, dispatchStr) {
-    if (queryUtil.validateCustomTableEntry(action, dispatchStr, "beneficiary_entity", util.beneficiaryEntityTable, "rootRowId", "customTableId", LOG_TAG)) {
-        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, dispatchStr["rootRowId"],
+    dataUtil.validateCustomTableEntry(action, dispatchStr, "beneficiary_entity", util.beneficiaryEntityTable, "rootRowId", "customTableId", LOG_TAG).then( function(result) {
+        if (result) {
+            odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, dispatchStr["rootRowId"],
                 'config/tables/' + util.beneficiaryEntityTable + '/html/beneficiary_entities_detail.html?type=' +
                 encodeURIComponent(type));
-    }
+        }
+    });
 }
 
 
 function queryChain(passed_code) {
     code = passed_code;
-    console.log(code);
     if (type === 'delivery') {
         deliveryFunction();
     } else if (type === 'registration') {
@@ -350,7 +345,6 @@ function regOverrideFunction() {
     console.log('entered regoverride path');
 
     if (code !== "" && code !== undefined && code !== null) {
-        console.log(code);
         var queryCaseType;
         var queriedType;
         if (type === 'enable') {
@@ -369,7 +363,7 @@ function regOverrideFunction() {
 function regOverrideBenSuccess(result) {
     if (result.getCount() === 1) {
         odkTables.openDetailView(null, util.beneficiaryEntityTable,result.getRowId(0),
-                                 'config/tables/registration/html/beneficiary_entities_detail.html?type=' +
+                                 'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
                                  encodeURIComponent(type));
     } else if (result.getCount() > 1) {
         var queriedType;
@@ -384,7 +378,7 @@ function regOverrideBenSuccess(result) {
         odkTables.openTableToListView(null, util.beneficiaryEntityTable,
                                       'beneficiary_entity_id = ? and (status = ? or status = ?)',
                                       [code, queriedType, queryCaseType],
-                                      'config/tables/registration/html/beneficiary_entities_list.html?type=' +
+                                      'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_list.html?type=' +
                                       encodeURIComponent(type));
     } else {
         if (type === 'enable') {
@@ -402,7 +396,8 @@ function regOverrideBenFailure(error) {
 
 function entOverrideFunction() {
     if (code !== "" && code !== undefined && code !== null) {
-        odkData.query('registration', 'beneficiary_entity_id = ?',
+        $('#search_results').text('');
+        odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?',
                       [code],
                       null, null, null, null, null, null, true, benEntOverrideCBSuccess,
                       benEntOverrideCBFailure);
@@ -459,8 +454,6 @@ function entCheckCBFailure(error) {
 }
 
 function createOverrideCBSuccess(result) {
-    $('#search_results').text(odkCommon.localizeText(locale, "eligible_override"));
-
     var defaultGroup = odkCommon.getSessionVariable(entDefaultGroupKey);
     var user = odkCommon.getSessionVariable(userKey)
 
@@ -469,15 +462,15 @@ function createOverrideCBSuccess(result) {
 //TODO: would individual ID be set here? is that a separate path? (post MVP)
 
     struct['authorization_id'] = result.get('_id');
-    struct['authorization_name'] = result.get('authorization_name');
-    struct['authorization_description'] = result.get('authorization_description');
-    struct['authorization_type'] = result.get('authorization_type');
+    struct['authorization_name'] = result.get('name');
+    struct['authorization_description'] = result.get('description');
+    struct['authorization_type'] = result.get('type');
     struct['item_pack_id'] = result.get('item_pack_id');
     struct['item_pack_name'] = result.get('item_pack_name');
     struct['item_description'] = result.get('item_description');
     struct['beneficiary_entity_id'] = code;
-    struct['is_override'] = 'true';
-    struct['status'] = 'enabled';
+    struct['is_override'] = 'TRUE';
+    struct['status'] = 'ENABLED';
     //struct['date_created'] = TODO: decide on date format
     struct['_default_access'] = 'HIDDEN';
     struct['_row_owner'] = user;

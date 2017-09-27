@@ -7,8 +7,6 @@
 var beneficiaryEntityResultSet = {};
 var type = util.getQueryParameter('type');
 var locale = odkCommon.getPreferredLocale();
-var toggleWorkflowButton = $('#toggle_workflow');
-var entitlementSwitchButton = $('#entitlements_switch');
 
 function display() {
     var displayPromise = new Promise( function(resolve, reject) {
@@ -21,7 +19,12 @@ function display() {
         //TODO: add translations entry for each column of all tables
         var exclusionList = ["beneficiary_entity_id"];
         util.populateDetailView(beneficiaryEntityResultSet, "field_list", locale, exclusionList);
-
+        return new Promise(function (resolve, reject) {
+            odkData.query(util.getBeneficiaryEntityCustomFormId(), '_id = ?', [beneficiaryEntityResultSet.get('custom_beneficiary_entity_row_id')],
+                null, null, null, null, null, null, true, resolve, reject);
+        });
+    }).then( function(result) {
+        util.populateDetailView(result, "field_list", locale, []);
         if (type == 'enable' || type == 'disable') {
             var action = $('#followup');
             if (type == 'enable') {
@@ -53,10 +56,12 @@ function display() {
             action.show();
 
         } else if (beneficiaryEntityResultSet.get('status') === 'DISABLED') {
-            $('#inner_reject').text(odkCommon.localizeText(locale, 'disabled_beneficiary_notification'));
+            console.log("entered individual path");
+            $('#toggle_workflow').hide();
+            setToHouseholdView();
         } else if (util.getRegistrationMode() === "INDIVIDUAL") {
             console.log("entered individual path");
-            toggleWorkflowButton.hide();
+            $('#toggle_workflow').hide();
             initEntitlementToggle();
             setToDeliveryView(false);
         } else if (util.getRegistrationMode() === "HOUSEHOLD") {
@@ -71,6 +76,7 @@ function display() {
             }
         }
     });
+
     displayPromise.catch( function(reason) {
         console.log('getViewData failed with message: ' + reason);
     });
@@ -101,68 +107,67 @@ function headCBSuccess(result) {
     $('#inner_head_id').text(result.get('id_number'));
     $('#inner_hh_size').text(beneficiaryEntityResultSet.get('hh_size'));
     $('#inner_caravan_code').text(beneficiaryEntityResultSet.get('tent_caravan'));
- }
+}
 
 function headCBFailure(error) {
     console.log('headCBFailure with error: ' + error);
 }
 
 function setToHouseholdView() {
+    var toggleWorkflowButton = $('#toggle_workflow');
     toggleWorkflowButton.find(".sr-only").text("Entitlements");
     console.log("found button. registering click");
 
-    // TODO: CLICK NOT WORKING
-    toggleWorkflowButton.click(function(e) {
+    toggleWorkflowButton.off('click').on('click', function(e) {
         console.log("preventing default");
         e.preventDefault();
         console.log("setting to delivery view");
         setToDeliveryView(true);
     });
+    $('#entitlements_switch').hide();
     setSublistToHousehold();
-    entitlementSwitchButton.hide();
 }
 
 function setToDeliveryView(includeWorkflowButton) {
-    //TODO: set sublist to pending entitlements
     if (includeWorkflowButton) {
+        var toggleWorkflowButton = $('#toggle_workflow');
         toggleWorkflowButton.find(".sr-only").text("Household");
-        toggleWorkflowButton.click(function(e) {
+        toggleWorkflowButton.off('click').on('click', function(e) {
             console.log("preventing default");
             e.preventDefault();
             console.log("setting to registration view");
             setToHouseholdView();
         });
     }
-
+    $('#entitlements_switch').show();
     if ($('#entitlements_pending').is(':checked')) {
         setSublistToPendingEntitlements();
     } else {
         setSublistToDeliveredEntitlements();
     }
-
-    entitlementSwitchButton.show();
 }
 
 function setSublistToPendingEntitlements() {
+    console.log("setting to pending");
 
     var groupModify = beneficiaryEntityResultSet.get('_group_modify');
 
     //TODO figure this out
     var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' JOIN ' + util.deliveryTable + ' ON ' + util.deliveryTable + '.entitlement_id = ' + util.entitlementTable + '._id';
-    odkTables.setSubListView(util.entitlementTable,
-        'beneficiary_entity_id = ? and (is_delivered = ? or is_delivered = ?)',
-        [beneficiaryEntityResultSet.get('beneficiary_code'), showDelivered, showDeliveredCase],
-        'config/tables/entitlements/html/entitlements_list.html?groupModify=' + encodeURIComponent(groupModify));
 }
 
 function setSublistToDeliveredEntitlements() {
+    console.log("setting to delivered");
+
     var groupModify = beneficiaryEntityResultSet.get('_group_modify');
 
 }
 
 function setSublistToHousehold() {
-    odkTables.setSubListView(util.entitlementTable, 'beneficiary_entity_id = ?',
-        [beneficiaryEntityResultSet.get('beneficiary_code')],
+    console.log("setting to household");
+    console.log(beneficiaryEntityResultSet.get('_id'));
+    odkTables.setSubListView(util.individualTable, 'beneficiary_entity_row_id = ?',
+        [beneficiaryEntityResultSet.get('_id')],
         'config/tables/' + util.individualTable + '/html/individuals_list.html');
 }
 

@@ -27,8 +27,8 @@ div {
 
 button {
     width: 80vw;
-    /*float: none;*/
-    /*margin: auto;*/
+    float: none;
+    margin: auto;
     border-left: 15px solid;
     border-top: none;
     border-right: none;
@@ -62,8 +62,8 @@ span {
   color: darkgray;
 }
 
-h3 { 
-  font-size: 15pt; 
+h3 {
+  font-size: 15pt;
   margin: 2px;
   margin-bottom: 10px;
 }

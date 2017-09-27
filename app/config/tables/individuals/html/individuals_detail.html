@@ -15,16 +15,9 @@
     </head>
     <body>
         <h1 id="title"></h1>
-        <p id="id_type"><span id="inner_id_type"></span></p>
-        <p id="id_number"><span id="inner_id_number"></span></p>
-        <p id="gender"><span id="inner_gender"></span></p>
-        <p id="is_hh_head"><span id="inner_is_hh_head"></span></p>
-        <p id="age"><span id="inner_age"></span></p>
-        <p id="email"><span id="inner_email"></span></p>
-        <p id="head_of_household"><span id="inner_head_of_household"></span></p>
-        <p id="vulnerability"><span id="inner_vulnerability"></span></p>
+        <div id="field_list"></div>
         <script>
-          $(display);
+          $(util.renderPageAsPromise(display));
         </script>
     </body>
 </html>

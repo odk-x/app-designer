@@ -446,8 +446,8 @@
         "linked_form_id": "custom_individuals",
         "linked_table_id": "custom_individuals",
         "selection": "custom_beneficiary_entity_row_id = ?",
-        "selectionArgs": "[ data('custom_beneficiary_entity_row_id')]",
-        "newRowInitialElementKeyToValueMap": "{custom_beneficiary_entity_row_id: data('custom_beneficiary_entity_row_id'), _group_modify: metadata('_group_modify')}",
+        "selectionArgs": "[ metadata('_id')]",
+        "newRowInitialElementKeyToValueMap": "{custom_beneficiary_entity_row_id: metadata('_id'), _group_modify: metadata('_group_modify')}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
@@ -773,8 +773,8 @@
         "linked_form_id": "custom_individuals",
         "linked_table_id": "custom_individuals",
         "selection": "custom_beneficiary_entity_row_id = ?",
-        "selectionArgs": "[ data('custom_beneficiary_entity_row_id')]",
-        "newRowInitialElementKeyToValueMap": "{custom_beneficiary_entity_row_id: data('custom_beneficiary_entity_row_id'), _group_modify: metadata('_group_modify')}",
+        "selectionArgs": "[ metadata('_id')]",
+        "newRowInitialElementKeyToValueMap": "{custom_beneficiary_entity_row_id: metadata('_id'), _group_modify: metadata('_group_modify')}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },

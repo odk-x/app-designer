@@ -31,8 +31,8 @@ var resumeFn = function(fIdxStart) {
   odkData.query(util.authorizationTable, null, null, null, null,
             null, null, null, null, true, authorizationsCBSuccess,
             authorizationsCBFailure);
-  
-  
+
+
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
@@ -53,25 +53,53 @@ var resumeFn = function(fIdxStart) {
             // have set up to have the row id
             var containingDiv = jqueryObject.closest('.item_space');
             var rowId = containingDiv.attr('rowId');
+            var summaryFormId = containingDiv.attr('summaryFormId');
+            var reportVersion = containingDiv.attr('reportVersion');
+            var summaryFormId = containingDiv.attr('summaryFormId');
+            console.log("rowId" + rowId);
+            console.log("summaryFormId" + summaryFormId);
+            console.log("reportVersion" + reportVersion);
+            console.log("summaryFormId" + summaryFormId);
+
             console.log('clicked with rowId: ' + rowId);
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                 var type = util.getQueryParameter('type');
                 if (type == 'override') {
-                  odkTables.launchHTML(null,
-                  'config/assets/choose_method.html?title='
-                  + encodeURIComponent(odkCommon.localizeText(locale, 'choose_method'))
-                  + '&secondary_manual_title='
-                  + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_code'))
-                  + '&type=ent_override&authorization_id=' + rowId);
+                    odkTables.launchHTML(null,
+                        'config/assets/beneficiary_mode/html/choose_method.html?title='
+                        + encodeURIComponent(odkCommon.localizeText(locale, 'choose_method'))
+                        + '&secondary_manual_title='
+                        + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_code'))
+                        + '&type=ent_override&authorization_id=' + rowId);
                 } else {
-                  odkTables.addRowWithSurvey(null, 'distribution_reports',
-                      'distribution_reports', null, 
-                      {'authorization_id' : rowId});
+                    var customReportRowId = util.genUUID();
+                    var addRowPromises = [];
+                    addRowPromises.push(new Promise( function(resolve, reject) {
+                        var jsonMap = {};
+                        util.setJSONMap(jsonMap, "authorization_id", rowId);
+                        util.setJSONMap(jsonMap, "user", odkCommon.getActiveUser());
+                        util.setJSONMap(jsonMap, "report_version", reportVersion);
+                        util.setJSONMap(jsonMap, "summary_form_id", summaryFormId);
+                        util.setJSONMap(jsonMap, "summary_row_id", customReportRowId);
+                        odkData.addRow(util.authorizationReportTable, jsonMap, util.genUUID(), resolve, reject);
+                    }));
+
+                    addRowPromises.push(new Promise( function(resolve, reject) {
+                        console.log(util.getAuthorizationReportCustomFormId());
+                        var jsonMap = {};
+                        util.setJSONMap(jsonMap, "notes", "placeholder");
+                        odkData.addRow(util.getAuthorizationReportCustomFormId(), jsonMap, customReportRowId, resolve, reject);
+                    }));
+
+                    Promise.all(addRowPromises).then( function(resultArr) {
+                        odkTables.editRowWithSurvey(null, util.getAuthorizationReportCustomFormId(),
+                            customReportRowId, util.getAuthorizationReportCustomFormId(), null);
+                    });
                 }
 
-                
+
             }
         });
     }
@@ -96,6 +124,9 @@ var displayGroup = function(idxStart) {
 
       var item = $('<li>');
       item.attr('rowId', authorizationsResultSet.getRowId(i));
+      item.attr('summaryFormId', authorizationsResultSet.getData(i, "summary_form_id"));
+      item.attr('reportVersion', authorizationsResultSet.getData(i, "report_version"));
+      item.attr('summaryFormId', authorizationsResultSet.getData(i, "summary_form_id"));
       item.attr('class', 'item_space');
       var auth_name = authorizationsResultSet.getData(i, 'authorization_name');
       item.text(auth_name);
@@ -111,7 +142,7 @@ var displayGroup = function(idxStart) {
       var itemPack = authorizationsResultSet.getData(i, 'item_pack_name');
       field2.text(itemPack);
       item.append(field2);
-        
+
 
       $('#list').append(item);
 

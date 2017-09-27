@@ -1,17 +1,14 @@
-/**
- * Render registration list
- */
 'use strict';
 
 var idxStart = -1;
-var registrationResultSet = {};
+var individualsResultSet = {};
 var locale = odkCommon.getPreferredLocale();
 
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
 var registrationCBSuccess = function(result) {
-    registrationResultSet = result;
+    individualsResultSet = result;
     console.log(result.getCount());
 
     return (function() {
@@ -40,7 +37,7 @@ var resumeFn = function(fIdxStart) {
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
-            var tableId = registrationResultSet.getTableId();
+            var tableId = individualsResultSet.getTableId();
             // We set the rowId while as the li id. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
@@ -57,7 +54,7 @@ var resumeFn = function(fIdxStart) {
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                 odkTables.openDetailView(null, tableId, rowId,
-                    'config/tables/registrationMember/html/individuals_detail.html');
+                    'config/tables/' + util.individualTable + '/html/' + util.individualTable + '_detail.html');
             }
         });
     }
@@ -74,7 +71,7 @@ var displayGroup = function(idxStart) {
     console.log('displayGroup called. idxStart: ' + idxStart);
 
     /* If the list comes back empty, inform the user */
-    if (registrationResultSet.getCount() === 0) {
+    if (individualsResultSet.getCount() === 0) {
         var errorText = $('#error');
         errorText.show();
         errorText.text('No beneficiaries found'); // TODO: Translate this
@@ -83,17 +80,17 @@ var displayGroup = function(idxStart) {
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
-        if (i >= registrationResultSet.getCount()) {
+        if (i >= individualsResultSet.getCount()) {
             break;
         }
         /* Creates the item space */
         // We're going to select the ul and then start adding things to it.
         //var item = $('#list').append('<li>');
         var item = $('<li>');
-        item.attr('rowId', registrationResultSet.getRowId(i));
+        item.attr('rowId', individualsResultSet.getRowId(i));
         item.attr('class', 'item_space');
-        item.attr('id', registrationResultSet.getData(i, '_id'));
-        var first_last_name = registrationResultSet.getData(i, 'first_last_name');
+        item.attr('id', individualsResultSet.getData(i, '_id'));
+        var first_last_name = individualsResultSet.getData(i, 'first_last_name');
         item.text(odkCommon.localizeText(locale, 'name') + ": " + first_last_name);
 
         /* Creates arrow icon (Nothing to edit here) */
@@ -110,7 +107,7 @@ var displayGroup = function(idxStart) {
         $('#list').append(borderDiv);
 
     }
-    if (i < registrationResultSet.getCount()) {
+    if (i < individualsResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
 };

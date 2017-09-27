@@ -22,14 +22,14 @@ function display() {
         enabledBeneficiaryEntities.onclick = function() {
             odkTables.openTableToListView(
                                       null, util.beneficiaryEntityTable, '(status = ? or status = ?)', ['ENABLED', 'enabled']
-                                      , 'config/tables/registration/html/beneficiary_entities_list.html?type=standard');
+                                      , 'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_list.html?type=delivery');
         }
 
         var disabledBeneficiaryEntities = document.createElement('button');
         disabledBeneficiaryEntities.onclick = function() {
             odkTables.openTableToListView(
                                       null, util.beneficiaryEntityTable, '(status = ? or status = ?)', ['DISABLED', 'disabled']
-                                      , 'config/tables/registration/html/beneficiary_entities_list.html?type=standard');
+                                      , 'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_list.html?type=delivery');
         }
 
         var beneficiaryEntitySearch = document.createElement('button');
