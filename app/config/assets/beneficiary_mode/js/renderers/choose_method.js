@@ -126,7 +126,6 @@ function display() {
 
 function addOption(item) {
     $('#choose_user').append($("<option/>").attr("value", item).text(item));
-
 }
 
 function callBackFn () {
@@ -196,13 +195,57 @@ function handleBarcodeCallback(action, dispatchStr) {
 function handleRegistrationCallback(action, dispatchStr) {
     dataUtil.validateCustomTableEntry(action, dispatchStr, "beneficiary_entity", util.beneficiaryEntityTable, "rootRowId", "customTableId", LOG_TAG).then( function(result) {
         if (result) {
-            odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, dispatchStr["rootRowId"],
-                'config/tables/' + util.beneficiaryEntityTable + '/html/beneficiary_entities_detail.html?type=' +
-                encodeURIComponent(type));
+            var rootRowId = dispatchStr["rootRowId"];
+            if (util.getRegistrationMode() === "HOUSEHOLD") {
+                //TODO: check to see if custom individual rows exist, because we will need to add in the root individual rows now
+                var individualRowsPromise = new Promise( function(resolve, reject) {
+                    odkData.query(util.getIndividualCustomFormId(), 'custom_beneficiary_entity_row_id = ?', [action.jsonValue.result.instanceId],
+                        null, null, null, null, null, null, true, resolve, reject)
+                });
+
+                var rootBERowPromise = new Promise( function(resolve, reject) {
+                    odkData.query(util.beneficiaryEntityTable, '_id = ?', [rootRowId],
+                        null, null, null, null, null, null, true, resolve, reject)
+                });
+                console.log("about to execute two promises");
+                var addRowActions = [];
+                Promise.all([individualRowsPromise, rootBERowPromise]).then( function(resultArr) {
+                    var customIndividualRows = resultArr[0];
+                    var rootBERow = resultArr[1];
+                    console.log(customIndividualRows.getCount());
+                    for (var i = 0; i < customIndividualRows.getCount(); i++) {
+                        var jsonMap = {};
+                        util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
+                        util.setJSONMap(jsonMap, 'beneficiary_entity_row_id', rootRowId);
+                        //util.setJSONMap(jsonMap, 'date_created', );
+                        util.setJSONMap(jsonMap, 'individual_id', rootBERow.get("beneficiary_entity_id"));
+                        util.setJSONMap(jsonMap, 'custom_individual_form_id', util.getIndividualCustomFormId());
+                        util.setJSONMap(jsonMap, 'custom_individual_row_id', customIndividualRows.getRowId(i));
+                        util.setJSONMap(jsonMap, 'status', 'ENABLED');
+
+                        addRowActions.push(new Promise( function(resolve, reject) {
+                            odkData.addRow(util.individualTable, jsonMap, util.genUUID(), resolve, reject);
+                        }));
+                    }
+                    return Promise.all(addRowActions);
+                }).then( function(result) {
+                    if (addRowActions.length > 0) {
+                        console.log("added base individual rows");
+                        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), action.jsonValue.result.instanceId,
+                            'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
+                            encodeURIComponent(type) + '&rootRowId=' + rootRowId);
+                    }
+                }).catch( function(error) {
+                    console.log(error);
+                });
+            } else if (util.getRegistrationMode() === "INDIVIDUAL") {
+                odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), action.jsonValue.result.instanceId,
+                    'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=delivery&rootRowId=' + rootRowId);
+            }
+
         }
     });
 }
-
 
 function queryChain(passed_code) {
     code = passed_code;
@@ -235,9 +278,9 @@ function deliveryBCheckCBSuccess(result) {
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
     } else if (result.getCount() === 1) {
         // double check that this is the case
-        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),
-                                             'config/tables/' + util.beneficiaryEntityTable + '/html/beneficiary_entities_detail.html?type=' +
-                                             encodeURIComponent(type));
+        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
+                                             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
+                                             encodeURIComponent(type) + '&rootRowId=' + result.getRowId(0));
     } else {
         odkTables.openTableToListView(
                                       null,
@@ -279,7 +322,10 @@ function registrationBCheckCBSuccess(result) {
                           registrationVoucherCBFailure);
     } else {
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
-        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),'config/tables/' + util.beneficiaryEntityTable + '/html/beneficiary_entities_detail.html?type=' + type);
+        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
+            'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
+            encodeURIComponent(type) + '&rootRowId=' + result.getRowId(0));
+
     }
 }
 
@@ -322,7 +368,6 @@ function registrationVoucherCBSuccess(result) {
             struct['_row_owner'] = user;
             odkData.addRow(util.beneficiaryEntityTable, struct, rootRowId, resolve, reject);
         }).then( function(resolve, reject) {
-            var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration});
             var struct = {};
             struct['_group_modify'] = defaultGroup;
             struct['_default_access'] = 'HIDDEN';
@@ -362,9 +407,9 @@ function regOverrideFunction() {
 
 function regOverrideBenSuccess(result) {
     if (result.getCount() === 1) {
-        odkTables.openDetailView(null, util.beneficiaryEntityTable,result.getRowId(0),
-                                 'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-                                 encodeURIComponent(type));
+        odkTables.openDetailView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
+            'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
+            encodeURIComponent(type) + '&rootRowId=' + result.getRowId(0));
     } else if (result.getCount() > 1) {
         var queriedType;
         var queryCaseType;

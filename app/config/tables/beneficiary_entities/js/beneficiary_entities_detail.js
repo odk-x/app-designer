@@ -4,27 +4,28 @@
 
 'use strict';
 
-var beneficiaryEntityResultSet = {};
+var customBeneficiaryEntityResultSet = {};
 var type = util.getQueryParameter('type');
+var rootRowId = util.getQueryParameter('rootRowId');
 var locale = odkCommon.getPreferredLocale();
 
 function display() {
     var displayPromise = new Promise( function(resolve, reject) {
         odkData.getViewData(resolve, reject);
     }).then( function(result) {
-        beneficiaryEntityResultSet = result;
-        $('#title').text(beneficiaryEntityResultSet.get('beneficiary_code'));
-        $('#title').prepend(odkCommon.localizeText(locale, 'beneficiary_code') + ": ");
+        customBeneficiaryEntityResultSet = result;
+
 
         //TODO: add translations entry for each column of all tables
-        var exclusionList = ["beneficiary_entity_id"];
-        util.populateDetailView(beneficiaryEntityResultSet, "field_list", locale, exclusionList);
+        var exclusionList = [];
+        util.populateDetailView(customBeneficiaryEntityResultSet, "field_list", locale, exclusionList);
         return new Promise(function (resolve, reject) {
-            odkData.query(util.getBeneficiaryEntityCustomFormId(), '_id = ?', [beneficiaryEntityResultSet.get('custom_beneficiary_entity_row_id')],
+            odkData.query(util.beneficiaryEntityTable, '_id = ?', [rootRowId],
                 null, null, null, null, null, null, true, resolve, reject);
         });
     }).then( function(result) {
-        util.populateDetailView(result, "field_list", locale, []);
+        $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + result.get('beneficiary_entity_id'));
+        util.populateDetailView(result, "field_list", locale, ["beneficiary_entity_id"]);
         if (type == 'enable' || type == 'disable') {
             var action = $('#followup');
             if (type == 'enable') {
@@ -40,11 +41,11 @@ function display() {
                     struct.status = 'DISABLED';
                 }
                 new Promise( function(resolve, reject) {
-                    odkData.updateRow(util.beneficiaryEntityTable, struct, beneficiaryEntityResultSet.getRowId(0),
+                    odkData.updateRow(util.beneficiaryEntityTable, struct, rootRowId,
                         resolve, reject);
                 }).then( function(result) {
                     $("#followup").prop("disabled",true);
-                    if (type == 'activate') {
+                    if (type == 'enable') {
                         $('#message').text('Successfully Enabled!');
                     } else {
                         $('#message').text('Successfully Disabled!');
@@ -55,24 +56,29 @@ function display() {
             });
             action.show();
 
-        } else if (beneficiaryEntityResultSet.get('status') === 'DISABLED') {
-            console.log("entered individual path");
-            $('#toggle_workflow').hide();
-            setToHouseholdView();
+        } else if (result.get('status') === 'DISABLED') {
+
         } else if (util.getRegistrationMode() === "INDIVIDUAL") {
-            console.log("entered individual path");
-            $('#toggle_workflow').hide();
-            initEntitlementToggle();
-            setToDeliveryView(false);
+            if (result.get('status') === 'DISABLED') {
+                // do nothing, this should be called as a detail view without sublist
+            } else {
+                console.log("entered individual path");
+                $('#toggle_workflow').hide();
+                initEntitlementToggle();
+                setToDeliveryView(false);
+            }
         } else if (util.getRegistrationMode() === "HOUSEHOLD") {
-            console.log("entered household path");
-            initEntitlementToggle();
-            if (type === "registration") {
-                console.log("type is registration");
+            if (result.get('status') === 'DISABLED') {
+                $('#toggle_workflow').hide();
                 setToHouseholdView();
-            } else if (type === "delivery") {
-                console.log("type is delivery");
-                setToDeliveryView(true);
+            } else {
+                console.log("entered household path");
+                initEntitlementToggle();
+                if (type === "registration") {
+                    setToHouseholdView();
+                } else if (type === "delivery") {
+                    setToDeliveryView(true);
+                }
             }
         }
     });
@@ -98,28 +104,12 @@ function initEntitlementToggle() {
 }
 
 // TODO: abstract a default individual foreign key value to populate the registration detail view with
-function headCBSuccess(result) {
-    $('#head_of_household').prepend("Head of Household: ");
-    $('#head_id').prepend("Head of Household ID: ");
-    $('#hh_size').prepend("Household Size: ");
-    $('#caravan_code').prepend("Caravan Code: ");
-    $('#inner_head_of_household').text(result.get('first_last_name'));
-    $('#inner_head_id').text(result.get('id_number'));
-    $('#inner_hh_size').text(beneficiaryEntityResultSet.get('hh_size'));
-    $('#inner_caravan_code').text(beneficiaryEntityResultSet.get('tent_caravan'));
-}
-
-function headCBFailure(error) {
-    console.log('headCBFailure with error: ' + error);
-}
 
 function setToHouseholdView() {
     var toggleWorkflowButton = $('#toggle_workflow');
     toggleWorkflowButton.find(".sr-only").text("Entitlements");
-    console.log("found button. registering click");
 
     toggleWorkflowButton.off('click').on('click', function(e) {
-        console.log("preventing default");
         e.preventDefault();
         console.log("setting to delivery view");
         setToDeliveryView(true);
@@ -150,7 +140,7 @@ function setToDeliveryView(includeWorkflowButton) {
 function setSublistToPendingEntitlements() {
     console.log("setting to pending");
 
-    var groupModify = beneficiaryEntityResultSet.get('_group_modify');
+    var groupModify = customBeneficiaryEntityResultSet.get('_group_modify');
 
     //TODO figure this out
     var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' JOIN ' + util.deliveryTable + ' ON ' + util.deliveryTable + '.entitlement_id = ' + util.entitlementTable + '._id';
@@ -159,15 +149,14 @@ function setSublistToPendingEntitlements() {
 function setSublistToDeliveredEntitlements() {
     console.log("setting to delivered");
 
-    var groupModify = beneficiaryEntityResultSet.get('_group_modify');
+    var groupModify = customBeneficiaryEntityResultSet.get('_group_modify');
 
 }
 
 function setSublistToHousehold() {
     console.log("setting to household");
-    console.log(beneficiaryEntityResultSet.get('_id'));
     odkTables.setSubListView(util.individualTable, 'beneficiary_entity_row_id = ?',
-        [beneficiaryEntityResultSet.get('_id')],
+        [rootRowId],
         'config/tables/' + util.individualTable + '/html/individuals_list.html');
 }
 

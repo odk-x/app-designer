@@ -42,7 +42,7 @@ var resumeFn = function(fIdxStart) {
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
             var tableId = beneficiaryEntitiesResultSet.getTableId();
-            // We set the rowId while as the li id. However, we may have
+            // We set the rootRowId while as the li id. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
             // method. First, however, we need to wrap up the target
@@ -52,20 +52,22 @@ var resumeFn = function(fIdxStart) {
             // we want the closest thing with class item_space, which we
             // have set up to have the row id
             var containingDiv = jqueryObject.closest('.item_space');
-            var rowId = containingDiv.attr('rowId');
-            console.log('clicked with rowId: ' + rowId);
-            // make sure we retrieved the rowId
-            if (rowId !== null && rowId !== undefined) {
+            var rootRowId = containingDiv.attr('rootRowId');
+            var customRowId = containingDiv.attr('customRowId');
+            console.log('clicked with rootRowId: ' + rootRowId);
+            // make sure we retrieved the rootRowId
+            if (rootRowId !== null && rootRowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                 var launchType = util.getQueryParameter('type');
                 if (launchType == 'enable' || launchType == 'disable') {
-                    odkTables.openDetailView(null, tableId, rowId,
-                                            'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type='
-                                                     + encodeURIComponent(launchType));
+                    odkTables.openDetail(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
+                        'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
+                        encodeURIComponent(launchType) + '&rootRowId=' + rootRowId);
+
                 } else {
-                    odkTables.openDetailWithListView(null, tableId, rowId,
-                                                     'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type='
-                                                     + encodeURIComponent(launchType));
+                    odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
+                        'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
+                        encodeURIComponent(launchType) + '&rootRowId=' + rootRowId);
                 }
             }
         });
@@ -99,7 +101,8 @@ var displayGroup = function(idxStart) {
         // We're going to select the ul and then start adding things to it.
         //var item = $('#list').append('<li>');
         var item = $('<li>');
-        item.attr('rowId', beneficiaryEntitiesResultSet.getRowId(i));
+        item.attr('rootRowId', beneficiaryEntitiesResultSet.getRowId(i));
+        item.attr('customRowId', beneficiaryEntitiesResultSet.getData(i, "custom_beneficiary_entity_row_id"));
         item.attr('class', 'item_space');
         item.attr('id', beneficiaryEntitiesResultSet.getData(i, '_id'));
         var beneficiary_entity_id = beneficiaryEntitiesResultSet.getData(i, 'beneficiary_entity_id');

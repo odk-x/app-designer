@@ -23,9 +23,9 @@
         </div>
         <script>
             //odkTables.launchHTML(null, "config/assets/test.html");
-            if (!true) {
+            if (util.getWorkflowMode() == "TOKEN") {
                 $(util.renderPage(tokenIndex.display));
-            } else {
+            } else if (util.getWorkflowMode() === "VOUCHER" || util.getWorkflowMode() === "REGISTRATION_REQUIRED") {
                 $(util.renderPageAsPromise(beneficiaryIndex.display));
             }
         </script>

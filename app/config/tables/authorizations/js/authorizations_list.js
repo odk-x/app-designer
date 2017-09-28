@@ -3,6 +3,9 @@
 var idxStart = -1;
 var authorizationsResultSet = {};
 var locale;
+var actionAuthorizationReport = "authorizationReport";
+var actionTypeKey = "actionTypeKey";
+
 
 var authorizationsCBSuccess = function(result) {
     authorizationsResultSet = result;
@@ -25,7 +28,53 @@ var authorizationsCBFailure = function(error) {
 
 var firstLoad = function() {
   resumeFn(0);
+
+    odkCommon.registerListener(function() {
+        callBackFn();
+    });
+
+    // Call the registered callback in case the notification occured before the page finished
+    // loading
+    callBackFn();
 };
+
+function callBackFn () {
+    var action = odkCommon.viewFirstQueuedAction();
+    console.log('callback entered with action: ' + action);
+
+    if (action === null || action === undefined) {
+        // The queue is empty
+        return;
+    }
+
+    var dispatchStr = JSON.parse(action.dispatchStruct);
+    if (dispatchStr === null || dispatchStr === undefined) {
+        console.log('Error: missing dispatch struct');
+        odkCommon.removeFirstQueuedAction();
+        return;
+    }
+
+    var actionType = dispatchStr[actionTypeKey];
+    console.log('callBackFn: actionType: ' + actionType);
+
+    switch (actionType) {
+        case actionAuthorizationReport:
+            handleAuthorizationReportCallback(action, dispatchStr);
+            odkCommon.removeFirstQueuedAction();
+            break;
+        default:
+            console.log("Error: unrecognized action type in callback");
+            odkCommon.removeFirstQueuedAction();
+            break;
+    }
+}
+
+var handleAuthorizationReportCallback = function(action, dispatchStr) {
+    if (dataUtil.validateCustomTableEntry(action, dispatchStr, "authorization report", util.authorizationReportTable, "rowId", "customTableId", "AUTH_REPORT_CALLBACK")) {
+        // TODO: UI changes on successful completion?
+    }
+}
+
 
 var resumeFn = function(fIdxStart) {
   odkData.query(util.authorizationTable, null, null, null, null,
@@ -74,29 +123,44 @@ var resumeFn = function(fIdxStart) {
                         + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_code'))
                         + '&type=ent_override&authorization_id=' + rowId);
                 } else {
-                    var customReportRowId = util.genUUID();
-                    var addRowPromises = [];
-                    addRowPromises.push(new Promise( function(resolve, reject) {
-                        var jsonMap = {};
-                        util.setJSONMap(jsonMap, "authorization_id", rowId);
-                        util.setJSONMap(jsonMap, "user", odkCommon.getActiveUser());
-                        util.setJSONMap(jsonMap, "report_version", reportVersion);
-                        util.setJSONMap(jsonMap, "summary_form_id", summaryFormId);
-                        util.setJSONMap(jsonMap, "summary_row_id", customReportRowId);
-                        odkData.addRow(util.authorizationReportTable, jsonMap, util.genUUID(), resolve, reject);
-                    }));
+                    new Promise( function(resolve, reject) {
+                        odkData.query(util.authorizationReportTable, "report_version = ?", [reportVersion],
+                            null, null, null, null, null, null, true, resolve, reject);
+                    }).then( function (result) {
+                        if (result.getCount() > 0) {
+                            odkData.editRowWithSurvey(null, util.getAuthorizationReportCustomFormId(),
+                                result.get('summary_row_id'), util.getAuthorizationReportCustomFormId(), null);
+                        } else {
+                            var rootRowId = util.genUUID();
+                            var customReportRowId = util.genUUID();
+                            var addRowPromises = [];
+                            addRowPromises.push(new Promise( function(resolve, reject) {
+                                var jsonMap = {};
+                                util.setJSONMap(jsonMap, "authorization_id", rowId);
+                                util.setJSONMap(jsonMap, "user", odkCommon.getActiveUser());
+                                util.setJSONMap(jsonMap, "report_version", reportVersion);
+                                util.setJSONMap(jsonMap, "summary_form_id", summaryFormId);
+                                util.setJSONMap(jsonMap, "summary_row_id", customReportRowId);
+                                odkData.addRow(util.authorizationReportTable, jsonMap, rootRowId, resolve, reject);
+                            }));
 
-                    addRowPromises.push(new Promise( function(resolve, reject) {
-                        console.log(util.getAuthorizationReportCustomFormId());
-                        var jsonMap = {};
-                        util.setJSONMap(jsonMap, "notes", "placeholder");
-                        odkData.addRow(util.getAuthorizationReportCustomFormId(), jsonMap, customReportRowId, resolve, reject);
-                    }));
+                            addRowPromises.push(new Promise( function(resolve, reject) {
+                                console.log(util.getAuthorizationReportCustomFormId());
+                                odkData.addRow(util.getAuthorizationReportCustomFormId(), {}, customReportRowId, resolve, reject);
+                            }));
 
-                    Promise.all(addRowPromises).then( function(resultArr) {
-                        odkTables.editRowWithSurvey(null, util.getAuthorizationReportCustomFormId(),
-                            customReportRowId, util.getAuthorizationReportCustomFormId(), null);
+
+
+                            Promise.all(addRowPromises).then( function(resultArr) {
+                                var dispatchStruct = JSON.stringify({actionTypeKey: actionAuthorizationReport,
+                                    "rowId": rootRowId,
+                                    "customTableId": summaryFormId});
+                                odkTables.editRowWithSurvey(dispatchStruct, util.getAuthorizationReportCustomFormId(),
+                                    customReportRowId, util.getAuthorizationReportCustomFormId(), null);
+                            });
+                        }
                     });
+
                 }
 
 

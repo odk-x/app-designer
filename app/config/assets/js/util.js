@@ -125,7 +125,7 @@ util.getRegistrationMode = function() {
 }
 
 util.getWorkflowMode = function() {
-    return 'REGISTRATION_REQUIRED';
+    return 'TOKEN';
 }
 
 util.getBeneficiaryEntityCustomFormId = function() {
@@ -250,47 +250,7 @@ dataUtil.validateCustomTableEntry = function(action, dispatchStr, label, rootTab
 
     if (savepointType === util.savepointSuccess) {
         odkCommon.log('I', logTag + label + " succeeded");
-        //TODO: check to see if custom individual rows exist, because we will need to add in the root individual rows now
-
-        var individualRowsPromise = new Promise( function(resolve, reject) {
-            odkData.query(util.getIndividualCustomFormId(), 'custom_beneficiary_entity_row_id = ?', [customRowId],
-                null, null, null, null, null, null, true, resolve, reject)
-        });
-
-        var rootBERowPromise = new Promise( function(resolve, reject) {
-            odkData.query(util.beneficiaryEntityTable, '_id = ?', [rootRowId],
-                null, null, null, null, null, null, true, resolve, reject)
-        });
-        console.log("about to execute two promises");
-        var individualReturnPromise = Promise.all([individualRowsPromise, rootBERowPromise]).then( function(resultArr) {
-            var customIndividualRows = resultArr[0];
-            var rootBERow = resultArr[1];
-            var addRowActions = [];
-            console.log(customIndividualRows.getCount());
-            for (var i = 0; i < customIndividualRows.getCount(); i++) {
-                var jsonMap = {};
-                util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
-                util.setJSONMap(jsonMap, 'beneficiary_entity_row_id', rootRowId);
-                //util.setJSONMap(jsonMap, 'date_created', );
-                util.setJSONMap(jsonMap, 'individual_id', rootBERow.get("beneficiary_entity_id"));
-                util.setJSONMap(jsonMap, 'custom_individual_form_id', util.getIndividualCustomFormId());
-                util.setJSONMap(jsonMap, 'custom_individual_row_id', customIndividualRows.getRowId(i));
-                util.setJSONMap(jsonMap, 'status', 'ENABLED');
-
-                addRowActions.push(new Promise( function(resolve, reject) {
-                    odkData.addRow(util.individualTable, jsonMap, util.genUUID(), resolve, reject);
-                }));
-            }
-            return Promise.all(addRowActions).then( function(result) {
-                console.log("added base individual rows");
-            });
-        }).then( function(result) {
-            return true;
-        });
-        individualReturnPromise.catch( function(error) {
-            console.log(error);
-        })
-        return individualReturnPromise;
+        return Promise.resolve(true);
     } else {
         odkCommon.log('I', logTag + label + " is false; delete rows");
         var dbActions = [];
