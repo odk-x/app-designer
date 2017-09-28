@@ -11,15 +11,13 @@
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../js/util.js"></script>
-        <script type="text/javascript" src="../js/renderers/deliver.js"></script>
+        <script type="text/javascript" src="../../js/renderers/overrides_registration_start.js"></script>
     </head>
 
     <body>
-        <div id="main" onload>
-            <h1 id="title">Deliver Items</h1>
-            <button type="reg" id="deliver" onclick="deliver()">Confirm Delivery</button>
-            <br />
-            <span id=confirmation></span>
+        <div id="main">
+            <h1>Registration Override</h1>
+            <div id="wrapper"></div>
         </div>
         <script>
             $(util.renderPage(display));

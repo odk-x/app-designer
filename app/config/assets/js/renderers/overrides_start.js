@@ -13,7 +13,7 @@ function display() {
     override_registration.innerHTML = odkCommon.localizeText(locale, "override_registration");
     override_registration.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/beneficiary_mode/html/overrides_registration_start.html');
+                             'config/assets/html/overrides_registration_start.html');
     };
     document.getElementById("wrapper").appendChild(override_registration);
 

@@ -117,7 +117,7 @@ var resumeFn = function(fIdxStart) {
                 var type = util.getQueryParameter('type');
                 if (type == 'override') {
                     odkTables.launchHTML(null,
-                        'config/assets/beneficiary_mode/html/choose_method.html?title='
+                        'config/assets/html/choose_method.html?title='
                         + encodeURIComponent(odkCommon.localizeText(locale, 'choose_method'))
                         + '&secondary_manual_title='
                         + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_code'))

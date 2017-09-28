@@ -6,6 +6,7 @@
 var actionTypeKey = "actionTypeKey";
 var actionBarcode = 0;
 var actionRegistration = 1;
+var actionTokenDelivery = 2;
 var htmlFileNameValue = "delivery_start";
 var userActionValue = "launchBarcode";
 var barcodeSessionVariable = "barcodeVal";
@@ -156,6 +157,8 @@ function callBackFn () {
             handleRegistrationCallback(action, dispatchStr);
             odkCommon.removeFirstQueuedAction();
             break;
+        case actionTokenDelivery:
+            handleTokenDeliveryCallback(action, dispatchStr);
         default:
             console.log("Error: unrecognized action type in callback");
             odkCommon.removeFirstQueuedAction();
@@ -247,22 +250,58 @@ function handleRegistrationCallback(action, dispatchStr) {
     });
 }
 
+function handleTokenDelivery(action, dispatchStr) {
+    dataUtil.validateCustomTableEntry(action, dispatchStr, "delivery", util.deliveryTable, "rootRowId", "customTableId", LOG_TAG).then( function(result) {
+        if (result) {
+            //any custom UI upon custom delivery success
+        }
+    })
+}
+
 function queryChain(passed_code) {
     code = passed_code;
+    if (util.getRegistrationMode() === "TOKEN") {
+        tokenDeliveryFunction();
+    }
     if (type === 'delivery') {
         deliveryFunction();
     } else if (type === 'registration') {
-        if (code === null || code === undefined || code === "") {
-             $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
-        } else {
             registrationFunction();
-        }
-
     } else if (type === 'enable' || type === 'disable') {
         regOverrideFunction();
     } else if (type === 'ent_override') {
         entOverrideFunction();
     }
+}
+
+function tokenDeliveryFunction() {
+    // Could put this reconciliation function throughout the app
+    dataUtil.reconcileTokenAuthorizations.then( function(result) {
+        return new Promise(function (resolve, reject) {
+            odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', "TOKEN"], null, null,
+                null, null, null, null, true, resolve,
+                reject);
+        });
+    }).then( function(result) {
+            activeAuths = result;
+            if (result.getCount() === 1) {
+                new Promise( function (resolve, reject) {
+                    odkData.query(util.deliveryTable, 'beneficiary_entity_id = ? AND authorization_id = ?', [code, result.getRowId(0)],  null, null,
+                        null, null, null, null, true, resolve, reject);
+                }).then( function(collisions) {
+                    if (collisions.getCount() === 0) {
+
+                    } else {
+                        $('#message').text('This beneficiary entity id has already received the current authorization');
+                    }
+                });
+            } else if (result.getCount() === 0) {
+                $('#message').text('There currently are no active authorizations');
+            } else {
+                //this should never happen
+                $('#message').text('Internal Error: please contact adminstrator');
+            }
+    });
 }
 
 function deliveryFunction() {
@@ -309,9 +348,13 @@ function deliveryDisabledCBFailure(error) {
 
 function registrationFunction() {
     console.log('registration function path entered');
+    if (code === null || code === undefined || code === "") {
+        $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
+    } else {
         odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?', [code], null, null,
-                      null, null, null, null, true, registrationBCheckCBSuccess,
-                      registrationBCheckCBFailure);
+            null, null, null, null, true, registrationBCheckCBSuccess,
+            registrationBCheckCBFailure);
+    }
 }
 
 function registrationBCheckCBSuccess(result) {

@@ -332,6 +332,35 @@ dataUtil.entitlementIsDelivered = function(entitlement_id) {
     });
 }
 
+dataUtil.reconcileTokenAuthorizations = function() {
+    return new Promise( function(resolve, reject) {
+        odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', "TOKEN"], null, null,
+            null, null, null, null, true, resolve,
+            reject);
+    }).then( function(result) {
+        var deactivateActions = [];
+        if (result.getCount() > 1) {
+            var maxIndex = -1;
+            var maxTimestamp = new Date(-8640000000000000);
+            for (var i = 0; i < result.getCount(); i++) {
+                var currTimestamp = odkCommon.toDateFromOdkTimeStamp(result.getData(i, "_savepoint_timestamp"));
+                if (currTimestamp > maxTimestamp) {
+                    currTimestamp = maxTimestamp;
+                    maxIndex = i;
+                }
+            }
+            for (var i = 0; i < result.getCount(); i++) {
+                if (i != maxIndex) {
+                    deactivateActions.push(new Promise( function(resolve, reject) {
+                        odkData.updateRow(util.authorizationTable, {"status" : "INACTIVE"}, result.getRowId(i), resolve, reject);
+                    }));
+                }
+            }
+        }
+        return Promise.all(deactivateActions);
+    });
+}
+
 /*dataUtil.getGroupedEntitlements = function(beneficiaryEntityId) {
 
 

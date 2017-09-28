@@ -1,7 +1,7 @@
 
 // Displays homescreen
 /*function display() {
-    odkData.query(util.authorizationTable, 'is_active = ?', ['true'],  
+    odkData.query(util.authorizationTable, 'is_active = ?', ['true'],
         null, null, null, null, null, null, true, activateAuthSuccess, activateAuthFailure);
 }
 
@@ -29,7 +29,8 @@ tokenIndex.display = function() {
     deliver.setAttribute('type', 'reg');
     deliver.innerHTML = "Deliver";
     deliver.onclick = function() {
-        odkTables.launchHTML(null, 'config/assets/token_mode/html/delivery_options.html');
+        // TODO put correct queryparams
+        odkTables.launchHTML(null, 'config/assets/html/choose_method.html');
     }
     document.getElementById("wrapper").appendChild(deliver);
 
@@ -43,7 +44,7 @@ tokenIndex.display = function() {
     document.getElementById('wrapper').appendChild(del);
 
     // Reset entitlements if user is a tables superuser
-    
+
     odkData.getRoles(tokenIndex.rolesCBSuccess, tokenIndex.rolesCBFailure);
 }
 
@@ -59,7 +60,7 @@ tokenIndex.rolesCBSuccess = function(result) {
         override.setAttribute('type', 'reg');
         override.innerHTML = "Administrator Reset";
         override.onclick = function() {
-            var followThrough = confirm("Are you sure you want to perform an Administrator Reset? \n" + 
+            var followThrough = confirm("Are you sure you want to perform an Administrator Reset? \n" +
                 "All barcodes will be entitled to a distribution if confirmed");
             if (followThrough) {
                 odkData.query(util.authorizationTable, 'status = ?', ['active'],

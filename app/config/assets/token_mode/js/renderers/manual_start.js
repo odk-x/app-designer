@@ -3,7 +3,6 @@ var id = null;
 var finished = false;
 var activeAuths = null;
 var authIndex = 1;
-var activeAuths;
 
 
 function display() {
@@ -18,7 +17,7 @@ function display() {
         document.getElementById('code').style.width = width * .6 + "px";
         document.getElementById('code').style.height = height * .07 + 'px';
     }, 0);
-    
+
     enter.on('click', function() {
         code = $('#code').val();
         if (code !== "") {
@@ -29,7 +28,7 @@ function display() {
 
 function check () {
     odkData.query(util.authorizationTable, 'is_active = ?', ['true'], null, null,
-                null, null, null, null, true, authCBSuccess, 
+                null, null, null, null, true, authCBSuccess,
                 authCBFailure);
 }
 
@@ -71,7 +70,7 @@ function deliveredSuccess(result) {
         $('#launch').on('click', function() {
             odkTables.addRowWithSurvey('deliveries', 'deliveries', null, getJSONMapValues());
         });
-    }  
+    }
     odkCommon.removeFirstQueuedAction();
 }
 
@@ -100,6 +99,6 @@ var getJSONMapValues = function() {
     util.setJSONMap(jsonMap, 'beneficiary_code', code);
     util.setJSONMap(jsonMap, 'authorization_id', id);
     console.log(id);
-    jsonMap = JSON.stringify(jsonMap);    
+    jsonMap = JSON.stringify(jsonMap);
     return jsonMap;
 };
