@@ -93,6 +93,7 @@
         // appName: // automatically supplied for org.opendatakit activities
         tableId: tableId,
         // tableDisplayViewType:
+        queryType: 'SimpleQuery',
         // filename:
       };
 
@@ -133,6 +134,7 @@
         // appName: // automatically supplied for org.opendatakit activities
         tableId: tableId,
         tableDisplayViewType: 'LIST',
+        queryType: 'SimpleQuery',
         // filename:
       };
 
@@ -152,6 +154,52 @@
                                  "org.opendatakit.tables.activities.TableDisplayActivity",
                                  intentArgs );
     },
+
+    openTableToListViewArbitraryQuery : function(dispatchStruct, tableId, sqlCommand,
+                                   sqlSelectionArgs, relativePath) {
+      this.assertOpenTypes('openTableToListViewArbitraryQuery()',
+                           tableId,
+                           sqlCommand,
+                           sqlSelectionArgs,
+                           relativePath);
+      if (arguments.length > 5) {
+        throw 'openTableToListViewArbitraryQuery()--too many arguments';
+      }
+
+      // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+      var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null :
+        JSON.stringify(sqlSelectionArgs);
+      var extrasBundle = { sqlCommand: sqlCommand,
+        // pass as JSON string so we can bind integers, numerics and booleans
+        sqlSelectionArgs: sqlSelectionArgsJSON,
+        // sqlGroupByArgs:
+        // sqlHavingClause:
+        // sqlOrderByElementKey:
+        // sqlOrderByDirection:
+        // appName: // automatically supplied for org.opendatakit activities
+        tableId: tableId,
+        tableDisplayViewType: 'LIST',
+        queryType: 'ArbitraryQuery',
+        // filename:
+      };
+
+      if ( relativePath !== null && relativePath !== undefined ) {
+        extrasBundle.filename = relativePath;
+      }
+
+      var intentArgs = {
+        extras: extrasBundle,
+        // uri:      // set the data field of intent to this
+        // data:     // unless data is supplied -- that takes precedence
+        // type:     // set the intent type to this value
+        // package:  // set the intent package to this value
+      };
+
+      return odkCommon.doAction( dispatchStruct,
+                                 "org.opendatakit.tables.activities.TableDisplayActivity",
+                                 intentArgs );
+    },
+
 
     openTableToMapView : function(dispatchStruct, tableId, sqlWhereClause,
                                   sqlSelectionArgs, relativePath) {
@@ -177,6 +225,7 @@
         // appName: // automatically supplied for org.opendatakit activities
         tableId: tableId,
         tableDisplayViewType: 'MAP',
+        queryType: 'SimpleQuery',
         // filename:
       };
 
@@ -196,6 +245,52 @@
                                  "org.opendatakit.tables.activities.TableDisplayActivity",
                                  intentArgs );
     },
+
+    openTableToMapViewArbitraryQuery : function(dispatchStruct, tableId, sqlCommand,
+                                  sqlSelectionArgs, relativePath) {
+      this.assertOpenTypes('openTableToMapViewArbitraryQuery()',
+                           tableId,
+                           sqlCommand,
+                           sqlSelectionArgs,
+                           relativePath);
+      if (arguments.length > 5) {
+        throw 'openTableToMapViewArbitraryQuery()--too many arguments';
+      }
+
+      // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+      var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null :
+        JSON.stringify(sqlSelectionArgs);
+      var extrasBundle = { sqlCommand: sqlCommand,
+        // pass as JSON string so we can bind integers, numerics and booleans
+        sqlSelectionArgs: sqlSelectionArgsJSON,
+        // sqlGroupByArgs:
+        // sqlHavingClause:
+        // sqlOrderByElementKey:
+        // sqlOrderByDirection:
+        // appName: // automatically supplied for org.opendatakit activities
+        tableId: tableId,
+        tableDisplayViewType: 'MAP',
+        queryType: 'ArbitraryQuery',
+        // filename:
+      };
+
+      if ( relativePath !== null && relativePath !== undefined ) {
+        extrasBundle.filename = relativePath;
+      }
+
+      var intentArgs = {
+        extras: extrasBundle,
+        // uri:      // set the data field of intent to this
+        // data:     // unless data is supplied -- that takes precedence
+        // type:     // set the intent type to this value
+        // package:  // set the intent package to this value
+      };
+
+      return odkCommon.doAction( dispatchStruct,
+                                 "org.opendatakit.tables.activities.TableDisplayActivity",
+                                 intentArgs );
+    },
+
 
     openTableToSpreadsheetView : function(dispatchStruct, tableId, sqlWhereClause,
                                           sqlSelectionArgs) {
@@ -223,6 +318,7 @@
         // appName: // automatically supplied for org.opendatakit activities
         tableId: tableId,
         tableDisplayViewType: 'SPREADSHEET',
+        queryType: 'SimpleQuery',
         // filename:
       };
 
@@ -257,6 +353,7 @@
         tableId: tableId,
         instanceId: rowId,
         tableDisplayViewType: 'DETAIL',
+        queryType: 'SimpleQuery',
         // filename:
       };
 
@@ -277,6 +374,51 @@
                                  intentArgs );
     },
 
+    openDetailViewArbitraryQuery : function(dispatchStruct, tableId, sqlCommand, sqlSelectionArgs, relativePath) {
+      this.assertOpenTypes('openDetailViewArbitraryQuery()',
+                           tableId,
+                           sqlCommand,
+                           sqlSelectionArgs,
+                           relativePath);
+      if (arguments.length > 5) {
+        throw 'openDetailViewArbitraryQuery()--too many arguments';
+      }
+
+      // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+      var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null :
+        JSON.stringify(sqlSelectionArgs);
+      var extrasBundle = { sqlCommand: sqlCommand,
+        // pass as JSON string so we can bind integers, numerics and booleans
+        sqlSelectionArgs: sqlSelectionArgsJSON,
+        // sqlGroupByArgs:
+        // sqlHavingClause:
+        // sqlOrderByElementKey:
+        // sqlOrderByDirection:
+        // appName: // automatically supplied for org.opendatakit activities
+        tableId: tableId,
+        tableDisplayViewType: 'DETAIL',
+        queryType: 'ArbitraryQuery',
+        // filename:
+      };
+
+      if ( relativePath !== null && relativePath !== undefined ) {
+        extrasBundle.filename = relativePath;
+      }
+
+      var intentArgs = {
+        extras: extrasBundle,
+        // uri:      // set the data field of intent to this
+        // data:     // unless data is supplied -- that takes precedence
+        // type:     // set the intent type to this value
+        // package:  // set the intent package to this value
+      };
+
+      return odkCommon.doAction( dispatchStruct,
+                                 "org.opendatakit.tables.activities.TableDisplayActivity",
+                                 intentArgs );
+    },
+
+
     openDetailWithListView : function(dispatchStruct, tableId, rowId, relativePath) {
       if (!this.isString(tableId)) {
         throw 'openDetailWithListView()--tableId not a string';
@@ -293,6 +435,51 @@
         tableId: tableId,
         instanceId: rowId,
         tableDisplayViewType: 'DETAIL_WITH_LIST',
+        queryType: 'SimpleQuery',
+        // filename:
+      };
+
+      if ( relativePath !== null && relativePath !== undefined ) {
+        extrasBundle.filename = relativePath;
+      }
+
+      var intentArgs = {
+        extras: extrasBundle,
+        // uri:      // set the data field of intent to this
+        // data:     // unless data is supplied -- that takes precedence
+        // type:     // set the intent type to this value
+        // package:  // set the intent package to this value
+      };
+
+      return odkCommon.doAction( dispatchStruct,
+                                 "org.opendatakit.tables.activities.TableDisplayActivity",
+                                 intentArgs );
+    },
+
+    openDetailWithListViewArbitraryQuery : function(dispatchStruct, tableId, sqlCommand, sqlSelectionArgs, relativePath) {
+      this.assertOpenTypes('openDetailWithListViewArbitraryQuery()',
+                           tableId,
+                           sqlCommand,
+                           sqlSelectionArgs,
+                           relativePath);
+      if (arguments.length > 5) {
+        throw 'openDetailWithListViewArbitraryQuery()--too many arguments';
+      }
+
+      // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+      var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null :
+        JSON.stringify(sqlSelectionArgs);
+      var extrasBundle = { sqlCommand: sqlCommand,
+        // pass as JSON string so we can bind integers, numerics and booleans
+        sqlSelectionArgs: sqlSelectionArgsJSON,
+        // sqlGroupByArgs:
+        // sqlHavingClause:
+        // sqlOrderByElementKey:
+        // sqlOrderByDirection:
+        // appName: // automatically supplied for org.opendatakit activities
+        tableId: tableId,
+        tableDisplayViewType: 'DETAIL_WITH_LIST',
+        queryType: 'ArbitraryQuery',
         // filename:
       };
 
@@ -333,7 +520,7 @@
     },
 
     setSubListViewArbitraryQuery : function(tableId, sqlCommand, sqlSelectionArgs, relativePath) {
-      this.assertOpenTypes('setSubListView()',
+      this.assertOpenTypes('setSubListViewArbitraryQuery()',
                            tableId,
                            sqlCommand,
                            sqlSelectionArgs,
