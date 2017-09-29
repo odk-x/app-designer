@@ -3417,7 +3417,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         that.setValueDeferredChange(acknowledged);
 
         // Now we will just try to reRender
-        ctxt.log('D',"prompts." + that.type + ".modification: reRender", "px: " + that.promptIdx);
+        odkCommon.log('D',"prompts." + that.type + ".modification: reRender px: " + that.promptIdx);
 
         that.renderContext.choices = [{
             name: "acknowledge",

@@ -565,7 +565,10 @@
       if (!this.isString(tableId)) {
         throw 'editRowWithSurveyDefault()--tableId not a string';
       }
-      if (!this.isString(rowId)) {
+      if ((tableId === 'framework') && rowId !== null) {
+        throw 'editRowWithSurveyDefault()--rowId must be null for framework form';
+      }
+      if ((tableId !== 'framework') && !this.isString(rowId)) {
         throw 'editRowWithSurveyDefault()--rowId not a string';
       }
       var platInfo = JSON.parse(odkCommon.getPlatformInfo());
@@ -597,12 +600,18 @@
       if (!this.isString(tableId)) {
         throw 'editRowWithSurvey()--tableId not a string';
       }
-      if (!this.isString(rowId)) {
+      if ((tableId === 'framework') && rowId !== null) {
+        throw 'editRowWithSurvey()--rowId must be null for framework form';
+      }
+      if ((tableId !== 'framework') && !this.isString(rowId)) {
         throw 'editRowWithSurvey()--rowId not a string';
       }
 
       if ( formId === undefined ) {
         formId = null;
+      }
+      if ((tableId === 'framework') && !((formId === null) || (formId === 'framework'))) {
+        throw 'editRowWithSurvey()--formId must be null or "framework" for framework form';
       }
 
       if ( screenPath === undefined ) {
