@@ -12,23 +12,31 @@
 //<![CDATA[
   function resizeIframe(value) {
         var parts = value.substring(1).split('x');
-        var $el = $('#convertlegacyscreen');
+        var $el = $('#filescreen');
         $el.width(parseInt(parts[0]));
         $el.height(parseInt(parts[1])+1); // we somehow lose a pixel?
-        var cw = document.getElementById('convertlegacyscreen').contentWindow;
+        var cw = document.getElementById('filescreen').contentWindow;
         cw.location.reload();
   }
   function loadPage(value) {
-        var cw = document.getElementById('convertlegacyscreen').contentWindow;
+        var cw = document.getElementById('filescreen').contentWindow;
         cw.location = value;
+  }
+  function backbutton() {
+        var cw = document.getElementById('filescreen').contentWindow;
+        cw.history.back();
   }
   //]]>   
   </script>
-  <title>OpenDataKit Generation of Data Definition for XForms XML Submissions</title>
+  <title>OpenDataKit File Browser</title>
 </head>
 
 <body  class="fullembedded">
   <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
-  <iframe id="convertlegacyscreen" class="bigviewport" src="../convertToLegacy/index.html"/>
+  <div class="backviewport">
+  <span>View and open files that would be pushed to your Android device.</span>
+  <button class="backbutton" name="backbutton" id="backbutton" onclick="backbutton()" type="button">Back Button</button>
+  <iframe id="filescreen" class="bigviewport" src="../app/"/>
+  </div>
 </body>
 </html>

@@ -23,11 +23,11 @@ return {
         var that = this;
 
         if ( table_id === 'framework' ) {
-			// TODO: should go away in the future??
-			// This should REMAIN the only place that 
-			//   formDef.specification.dataTableModel
-			//   formDef.specification.properties
-			// are directly referenced. 
+            // TODO: should go away in the future??
+            // This should REMAIN the only place that 
+            //   formDef.specification.dataTableModel
+            //   formDef.specification.properties
+            // are directly referenced. 
             var tlo = {data: {},      // dataTable instance data values
                 instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
                 metadata: {},         // see definition in opendatakit.js
@@ -41,23 +41,23 @@ return {
             tlo.metadata.schemaETag = null;
             tlo.metadata.lastDataETag = null;
             tlo.metadata.lastSyncTime = -1;
+            tlo.metadata.dataTableModel = formDef.specification.dataTableModel;
             tlo.metadata.elementKeyMap = {};
-            tlo.metadata.orderedColumns = {};
             tlo.metadata.keyValueStoreList = [];
             var entry;
             var kvsEntry;
             var value;
             for ( entry in formDef.specification.properties ) {
-				if ( formDef.specification.properties.hasOwnProperty(entry) ) {
-					kvsEntry = {};
-					kvsEntry.partition = entry._partition;
-					kvsEntry.aspect = entry._aspect;
-					kvsEntry.key = entry._key;
-					kvsEntry.type = entry._type;
-					value = entry._value;
-					kvsEntry.value = databaseUtils.fromKVStoreToElementType(kvsEntry.type, value);
-					tlo.metadata.keyValueStoreList.push(kvsEntry);
-				}
+                if ( formDef.specification.properties.hasOwnProperty(entry) ) {
+                    kvsEntry = {};
+                    kvsEntry.partition = entry._partition;
+                    kvsEntry.aspect = entry._aspect;
+                    kvsEntry.key = entry._key;
+                    kvsEntry.type = entry._type;
+                    value = entry._value;
+                    kvsEntry.value = databaseUtils.fromKVStoreToElementType(kvsEntry.type, value);
+                    tlo.metadata.keyValueStoreList.push(kvsEntry);
+                }
             }
             ctxt.success(tlo);
         } else {
@@ -67,16 +67,18 @@ return {
                     var tlo = {data: {},      // dataTable instance data values
                         instanceMetadata: {}, // dataTable instance Metadata: (_savepoint_timestamp, _savepoint_creator, _savepoint_type, _form_id, _locale)
                         metadata: {},         // see definition in opendatakit.js
-                        dataTableModel:{}, // inverted and extended formDef.model for representing data store
+                        dataTableModel: formDef.specification.dataTableModel, // inverted and extended formDef.model for representing data store
                         formDef: formDef,
                         formPath: formPath,
                         instanceId: null,
                         table_id: table_id
                         };
-					// save the result object
-					tlo.resultObject = reqData;
+                    // save the result object
+                    tlo.resultObject = reqData;
                     tlo.metadata = reqData.getMetadata();
-					tlo.dataTableModel = reqData.getMetadata().dataTableModel
+                    // the dataTableModel returned from the Java side does not have session variables or retain the default values of the columns.
+                    // therefore we should use the one in the form definition.
+                    tlo.metadata.dataTableModel =  formDef.specification.dataTableModel;
                     ctxt.success(tlo);
                 },
                 function (errorMsg) {
@@ -103,17 +105,17 @@ return {
             // these are already in the odkData interface format.
             // we need to parse them back into their representation formats.
             for (dbKey in that.pendingChanges ) {
-				if ( that.pendingChanges.hasOwnProperty(dbKey) ) {
-					// for logging...
-					keys.push(dbKey);
-					// get the type and the change entry
-					jsonType = model.dataTableModel[dbKey];
-					pendingChangeEntry = that.pendingChanges[dbKey];
-					if ( pendingChangeEntry !== undefined && pendingChangeEntry !== null ) {
-						// construct the data-update entry
-						updates[dbKey] = { elementPath: pendingChangeEntry.elementPath, value: pendingChangeEntry.value };
-					}
-				}
+                if ( that.pendingChanges.hasOwnProperty(dbKey) ) {
+                    // for logging...
+                    keys.push(dbKey);
+                    // get the type and the change entry
+                    jsonType = model.dataTableModel[dbKey];
+                    pendingChangeEntry = that.pendingChanges[dbKey];
+                    if ( pendingChangeEntry !== undefined && pendingChangeEntry !== null ) {
+                        // construct the data-update entry
+                        updates[dbKey] = { elementPath: pendingChangeEntry.elementPath, value: pendingChangeEntry.value };
+                    }
+                }
             }
             // apply the updates
             databaseUtils.reconstructModelDataFromElementPathValueUpdates(model, updates);
@@ -144,18 +146,18 @@ return {
 
             // read any session variables into updates
             for ( dbKey in model.dataTableModel ) {
-				if ( model.dataTableModel.hasOwnProperty(dbKey) ) {
-					jsonType = model.dataTableModel[dbKey];
-					if ( databaseUtils.isUnitOfRetention(jsonType) ) {
-						elementPath = jsonType.elementPath;
-						if ( jsonType.isSessionVariable ) {
-							jsValue = odkCommon.getSessionVariable(elementPath );
-							value = (jsValue === null || jsValue === undefined) ? null :
-									databaseUtils.fromSerializationToElementType(jsonType, jsValue, true);
-							updates[dbKey] = { elementPath: elementPath, value: value };
-						}
-					}
-				}
+                if ( model.dataTableModel.hasOwnProperty(dbKey) ) {
+                    jsonType = model.dataTableModel[dbKey];
+                    if ( databaseUtils.isUnitOfRetention(jsonType) ) {
+                        elementPath = jsonType.elementPath;
+                        if ( jsonType.isSessionVariable ) {
+                            jsValue = odkCommon.getSessionVariable(elementPath );
+                            value = (jsValue === null || jsValue === undefined) ? null :
+                                    databaseUtils.fromSerializationToElementType(jsonType, jsValue, true);
+                            updates[dbKey] = { elementPath: elementPath, value: value };
+                        }
+                    }
+                }
             }
 
             // reconstruct the data and instanceMetadata fields.
@@ -177,43 +179,43 @@ return {
         // read data from the row and
         // read any session variables into model.data
         for ( dbKey in model.dataTableModel ) {
-			if ( model.dataTableModel.hasOwnProperty(dbKey) ) {
-				jsonType = model.dataTableModel[dbKey];
-				if ( databaseUtils.isUnitOfRetention(jsonType) ) {
-					elementPath = jsonType.elementPath;
-					if ( jsonType.isSessionVariable ) {
-						jsValue = odkCommon.getSessionVariable(elementPath );
-						value = (jsValue === null || jsValue === undefined) ? null :
-								databaseUtils.fromSerializationToElementType(jsonType, jsValue, true);
-					} else {
-						value = reqData.getData(0, dbKey);
-						// mainly to convert datetime and time values...
-						value = databaseUtils.fromOdkDataInterfaceToElementType(jsonType, value, true);
-					}
-					updates[dbKey] = { elementPath: elementPath, value: value };
-				}
-			}
+            if ( model.dataTableModel.hasOwnProperty(dbKey) ) {
+                jsonType = model.dataTableModel[dbKey];
+                if ( databaseUtils.isUnitOfRetention(jsonType) ) {
+                    elementPath = jsonType.elementPath;
+                    if ( jsonType.isSessionVariable ) {
+                        jsValue = odkCommon.getSessionVariable(elementPath );
+                        value = (jsValue === null || jsValue === undefined) ? null :
+                                databaseUtils.fromSerializationToElementType(jsonType, jsValue, true);
+                    } else {
+                        value = reqData.getData(0, dbKey);
+                        // mainly to convert datetime and time values...
+                        value = databaseUtils.fromOdkDataInterfaceToElementType(jsonType, value, true);
+                    }
+                    updates[dbKey] = { elementPath: elementPath, value: value };
+                }
+            }
         }
 
         // if the pendingChanges are reflected in the updates[].value, then remove them
         var pendingChangeEntry, currentEntry;
         var keysToRemove = [];
         for (dbKey in that.pendingChanges ) {
-			if ( that.pendingChanges.hasOwnProperty(dbKey) ) {
-				jsonType = model.dataTableModel[dbKey];
-				currentEntry = updates[dbKey];
-				pendingChangeEntry = that.pendingChanges[dbKey];
-				if ( currentEntry !== undefined && currentEntry !== null &&
-					 pendingChangeEntry !== undefined && pendingChangeEntry !== null ) {
-					// the value in the values array may not be the correct data type -- force it to be converted
-					value = pendingChangeEntry.value;
-					value = databaseUtils.toOdkDataInterfaceFromElementType(jsonType, value, true);
-					value = databaseUtils.fromOdkDataInterfaceToElementType(jsonType, value, true);
-					if ( JSON.stringify(currentEntry.value) === JSON.stringify(value) ) {
-						keysToRemove.push(dbKey);
-					}
-				}
-			}
+            if ( that.pendingChanges.hasOwnProperty(dbKey) ) {
+                jsonType = model.dataTableModel[dbKey];
+                currentEntry = updates[dbKey];
+                pendingChangeEntry = that.pendingChanges[dbKey];
+                if ( currentEntry !== undefined && currentEntry !== null &&
+                     pendingChangeEntry !== undefined && pendingChangeEntry !== null ) {
+                    // the value in the values array may not be the correct data type -- force it to be converted
+                    value = pendingChangeEntry.value;
+                    value = databaseUtils.toOdkDataInterfaceFromElementType(jsonType, value, true);
+                    value = databaseUtils.fromOdkDataInterfaceToElementType(jsonType, value, true);
+                    if ( JSON.stringify(currentEntry.value) === JSON.stringify(value) ) {
+                        keysToRemove.push(dbKey);
+                    }
+                }
+            }
         }
 
         // do the removal outside the loop so that the for() iterator cannot be affected.
@@ -247,7 +249,7 @@ return {
                 }
             },
             function(errorMsg) {
-				that._process_odkData_error(ctxt, errorMsg);
+                that._process_odkData_error(ctxt, errorMsg);
             });
     },
 
@@ -281,28 +283,28 @@ return {
             // NOTE: setModelDataValueDeferredChange will not accept any data table changes if instanceId is null or undefined
             // apply the model defaults.
             for ( elementPath in model.dataTableModel ) {
-				if ( model.dataTableModel.hasOwnProperty(elementPath) ) {
-					jsonType = model.dataTableModel[elementPath];
-					if ( jsonType['default'] !== undefined && jsonType['default'] !== null ) {
-						// otherwise, use the default for the session variable
-						value = jsonType['default'];
-						databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
-					}
-				}
+                if ( model.dataTableModel.hasOwnProperty(elementPath) ) {
+                    jsonType = model.dataTableModel[elementPath];
+                    if ( jsonType['default'] !== undefined && jsonType['default'] !== null ) {
+                        // otherwise, use the default for the session variable
+                        value = jsonType['default'];
+                        databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
+                    }
+                }
             }
             // NOTE: setModelDataValueDeferredChange will not accept any data table changes if instanceId is null or undefined
             // and now apply any changes from the instanceMetadataKeyValueMap
             // NOTE: this will have been cleared at the top of the method if sameInstance is true.
             for ( elementPath in instanceMetadataKeyValueMap ) {
-				if ( instanceMetadataKeyValueMap.hasOwnProperty(elementPath) ) {
-					if ( instanceMetadataKeyValueMap[elementPath] === null ) {
-						value = null;
-					} else {
-						jsonType = model.dataTableModel[elementPath];
-						value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
-					}
-					databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
-				}
+                if ( instanceMetadataKeyValueMap.hasOwnProperty(elementPath) ) {
+                    if ( instanceMetadataKeyValueMap[elementPath] === null ) {
+                        value = null;
+                    } else {
+                        jsonType = model.dataTableModel[elementPath];
+                        value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
+                    }
+                    databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
+                }
             }
             // and discard the accumulated changes, since those relate to database column values and we don't have an instance.
             // and clear the pending changes set.
@@ -366,22 +368,22 @@ return {
 
                     // apply defaults
                     for ( elementPath in model.dataTableModel ) {
-						if ( model.dataTableModel.hasOwnProperty(elementPath) ) {
-							jsonType = model.dataTableModel[elementPath];
-							if ( jsonType['default'] !== undefined && jsonType['default'] !== null ) {
-								// otherwise, use the default for the session variable
-								databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, jsonType['default'], accumulatedChanges, true);
-							}
-						}
+                        if ( model.dataTableModel.hasOwnProperty(elementPath) ) {
+                            jsonType = model.dataTableModel[elementPath];
+                            if ( jsonType['default'] !== undefined && jsonType['default'] !== null ) {
+                                // otherwise, use the default for the session variable
+                                databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, jsonType['default'], accumulatedChanges, true);
+                            }
+                        }
                     }
                     // and now apply any changes from the instanceMetadataKeyValueMap
                     // NOTE: this will have been cleared at the top of the method if sameInstance is true.
                     for ( elementPath in instanceMetadataKeyValueMap ) {
-						if ( instanceMetadataKeyValueMap.hasOwnProperty(elementPath) ) {
-							jsonType = model.dataTableModel[elementPath];
-							value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
-							databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
-						}
+                        if ( instanceMetadataKeyValueMap.hasOwnProperty(elementPath) ) {
+                            jsonType = model.dataTableModel[elementPath];
+                            value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
+                            databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
+                        }
                     }
 
                     if ( $.isEmptyObject(accumulatedChanges)) {
@@ -403,15 +405,15 @@ return {
                     // and now apply any changes from the instanceMetadataKeyValueMap
                     // NOTE: this will have been cleared at the top of the method if sameInstance is true.
                     for ( elementPath in instanceMetadataKeyValueMap ) {
-						if ( instanceMetadataKeyValueMap.hasOwnProperty(elementPath) ) {
-							if ( instanceMetadataKeyValueMap[elementPath] === null ) {
-								value = null;
-							} else {
-								jsonType = model.dataTableModel[elementPath];
-								value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
-							}
-							databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
-						}
+                        if ( instanceMetadataKeyValueMap.hasOwnProperty(elementPath) ) {
+                            if ( instanceMetadataKeyValueMap[elementPath] === null ) {
+                                value = null;
+                            } else {
+                                jsonType = model.dataTableModel[elementPath];
+                                value = databaseUtils.fromSerializationToElementType(jsonType, instanceMetadataKeyValueMap[elementPath], true);
+                            }
+                            databaseUtils.setModelDataValueDeferredChange( model, formId, instanceId, elementPath, value, accumulatedChanges, true);
+                        }
                     }
 
                     if ( $.isEmptyObject(accumulatedChanges)) {
@@ -423,8 +425,8 @@ return {
                 }
             },
             function(errorMsg) { 
-				ctxt.failure({message: errorMsg}); 
-			});
+                ctxt.failure({message: errorMsg}); 
+            });
     },
 
     ///////////////////////////////////////////////////
@@ -473,19 +475,19 @@ return {
                         savepoint_creator: reqData.getData(rowCntr, '_savepoint_creator'),
                         locale: reqData.getData(rowCntr, '_locale'),
                         form_id: reqData.getData(rowCntr, '_form_id'),
-						default_access: reqData.getData(rowCntr, '_default_access'),
-						row_owner: reqData.getData(rowCntr, '_row_owner'),
-						group_read_only: reqData.getData(rowCntr, '_group_read_only'),
-						group_modify: reqData.getData(rowCntr, '_group_modify'),
-						group_privileged: reqData.getData(rowCntr, '_group_privileged'),
+                        default_access: reqData.getData(rowCntr, '_default_access'),
+                        row_owner: reqData.getData(rowCntr, '_row_owner'),
+                        group_read_only: reqData.getData(rowCntr, '_group_read_only'),
+                        group_modify: reqData.getData(rowCntr, '_group_modify'),
+                        group_privileged: reqData.getData(rowCntr, '_group_privileged'),
                         effective_access: reqData.getData(rowCntr, '_effective_access')
                     });
                 }
                 ctxt.log('D','get_linked_instances.inside', dbTableName + " instanceList: " + instanceList.length);
                 ctxt.success(instanceList);
             }, function(errorMsg) { 
-				ctxt.failure({message: errorMsg}); 
-			});
+                ctxt.failure({message: errorMsg}); 
+            });
     },
 
     save_all_changes:function(ctxt, model, formId, instanceId, asComplete) {
@@ -511,8 +513,8 @@ return {
                     }
                 },
                 function(errorMsg) { 
-					that._process_odkData_error(ctxt, errorMsg);
-				});
+                    that._process_odkData_error(ctxt, errorMsg);
+                });
         } else {
             odkData.saveCheckpointAsIncomplete(model.table_id, simpleMap, instanceId,
                 function(reqData) {
@@ -524,8 +526,8 @@ return {
                     }
                 },
                 function(errorMsg) { 
-					that._process_odkData_error(ctxt, errorMsg);
-				});
+                    that._process_odkData_error(ctxt, errorMsg);
+                });
         }
     },
 
@@ -550,7 +552,7 @@ return {
                     ctxt.success();
                 },
                 function(errorMsg) {
-					that._process_odkData_error(ctxt, errorMsg);
+                    that._process_odkData_error(ctxt, errorMsg);
                 });
     },
 
@@ -570,8 +572,8 @@ return {
                                 }
                             },
                             function(errorMsg) {
-								that._process_odkData_error(ctxt, errorMsg);
-							});
+                                that._process_odkData_error(ctxt, errorMsg);
+                            });
 
     },
 
@@ -588,35 +590,35 @@ return {
                 }
             },
             function(errorMsg) { 
-				ctxt.failure({message: errorMsg}); 
-			});
+                ctxt.failure({message: errorMsg}); 
+            });
     },
 
-	_auth_error: "org.opendatakit.exception.ActionNotAuthorizedException:",
-	_impl_class_qualifier: " ODKDatabaseImplUtils:",
-	
-	_process_odkData_error: function(ctxt, errorMsg) {
-		var that = this;
-		
-		if ( errorMsg.startsWith(that._auth_error) ) {
-			// we cannot make the changes because of an Authorization violation. Clear them!
-			that.pendingChanges = {};
-		}
+    _auth_error: "org.opendatakit.exception.ActionNotAuthorizedException:",
+    _impl_class_qualifier: " ODKDatabaseImplUtils:",
+    
+    _process_odkData_error: function(ctxt, errorMsg) {
+        var that = this;
+        
+        if ( errorMsg.startsWith(that._auth_error) ) {
+            // we cannot make the changes because of an Authorization violation. Clear them!
+            that.pendingChanges = {};
+        }
 
-		var exception = null;
-		var idxColon = errorMsg.indexOf(':');
-		if ( idxColon !== -1 ) {
-			exception = errorMsg.substring(0,idxColon);
-			errorMsg = errorMsg.substring(idxColon+2);
-			var idxUtils = errorMsg.indexOf(that._impl_class_qualifier);
-			if ( idxUtils !== -1 ) {
-				errorMsg = errorMsg.substring(0, idxUtils) + errorMsg.substring(idxUtils + that._impl_class_qualifier.length);
-			}
-		}
-		
-		ctxt.failure({message: errorMsg, exception: exception, rolledBack: true});
-	},
-	
+        var exception = null;
+        var idxColon = errorMsg.indexOf(':');
+        if ( idxColon !== -1 ) {
+            exception = errorMsg.substring(0,idxColon);
+            errorMsg = errorMsg.substring(idxColon+2);
+            var idxUtils = errorMsg.indexOf(that._impl_class_qualifier);
+            if ( idxUtils !== -1 ) {
+                errorMsg = errorMsg.substring(0, idxUtils) + errorMsg.substring(idxUtils + that._impl_class_qualifier.length);
+            }
+        }
+        
+        ctxt.failure({message: errorMsg, exception: exception, rolledBack: true});
+    },
+    
     /**
      * Not expected to be called expect internally
      *
@@ -635,7 +637,7 @@ return {
                 }
             },
             function(errorMsg) {
-				that._process_odkData_error(ctxt, errorMsg);
+                that._process_odkData_error(ctxt, errorMsg);
             });
     },
 
@@ -655,10 +657,10 @@ return {
         var key;
         var jsonType;
         for ( key in accumulatedChanges ) {
-			if ( accumulatedChanges.hasOwnProperty(key) ) {
+            if ( accumulatedChanges.hasOwnProperty(key) ) {
               jsonType = dataTableModel[key];
               simpleMap[key] = databaseUtils.toOdkDataInterfaceFromElementType(jsonType, accumulatedChanges[key].value, true);
-			}
+            }
         }
         // metadata fields other than formId and creator are managed in the service layer.
         // TODO: should current user also be enforced here??
@@ -706,11 +708,11 @@ return {
             ctxt.success();
             return;
         }
-		if ( $.isEmptyObject(that.pendingChanges) ) {
-			ctxt.success();
-			return;
-		}
-		
+        if ( $.isEmptyObject(that.pendingChanges) ) {
+            ctxt.success();
+            return;
+        }
+        
         that._add_checkpoint($.extend({}, ctxt, {
                 failure:function(m) {
                     // a failure happened during writing -- reload state from db
@@ -741,15 +743,15 @@ return {
         var defn;
 
         for ( f in model.dataTableModel ) {
-		  if ( model.dataTableModel.hasOwnProperty(f) ) {
-		    defn = model.dataTableModel[f];
-			if (  defn.elementSet === 'instanceMetadata' &&
-			      ( (defn.elementPath === name) ||
-				   ((defn.elementPath === undefined || defn.elementPath === null) && (f === name)) ) ) {
-			  dbColumnName = f;
-			  break;
-			}
-		  }
+          if ( model.dataTableModel.hasOwnProperty(f) ) {
+            defn = model.dataTableModel[f];
+            if (  defn.elementSet === 'instanceMetadata' &&
+                  ( (defn.elementPath === name) ||
+                   ((defn.elementPath === undefined || defn.elementPath === null) && (f === name)) ) ) {
+              dbColumnName = f;
+              break;
+            }
+          }
         }
         if ( dbColumnName === undefined || dbColumnName === null ) {
           ctxt.log('E','setInstanceMetaData: Unrecognized instance metadata name: ' + name);
@@ -780,7 +782,7 @@ return {
             // overwrite the existing model with this one
             var model = opendatakit.getCurrentModel();
             model.formDef = tlo.formDef;
-			model.resultObject = tlo.resultObject;
+            model.resultObject = tlo.resultObject;
             model.dataTableModel = tlo.dataTableModel;
             model.metadata = tlo.metadata;
             model.instanceMetadata = tlo.instanceMetadata;

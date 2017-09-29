@@ -285,14 +285,6 @@ window.odkSurveyStateManagement = window.odkSurveyStateManagement || {
 
         return null;
     },
-    frameworkHasLoaded: function(refId, outcome) {
-        if (this.enforceRefIdMatch && refId !== this._getRefId()) {
-            odkCommon.log("D","odkSurveyStateManagement: IGNORED: frameworkHasLoaded(" + refId + ", " + outcome + ")");
-            return;
-        }
-        odkCommon.log("E","odkSurveyStateManagement: DO: frameworkHasLoaded(" + refId + ", " + outcome + ")");
-        if ( this.showAlerts ) alert("notify container frameworkHasLoaded " + (outcome ? "SUCCESS" : "FAILURE"));
-    },
     saveAllChangesCompleted: function( refId, instanceId, asComplete ) {
         if (this.enforceRefIdMatch && refId !== this._getRefId()) {
             odkCommon.log("D","odkSurveyStateManagement: IGNORED: saveAllChangesCompleted(" + refId + ", " + instanceId + ", " + asComplete + ")");

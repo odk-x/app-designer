@@ -12,7 +12,7 @@
  * interpretation of the formDef.json for the form).
  */
 requirejs.config({
-    baseUrl: odkCommon.getBaseUrl(),
+    baseUrl: odkCommon.getBaseUrl() + 'system',
     waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon
