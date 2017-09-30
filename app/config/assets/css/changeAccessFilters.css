@@ -24,13 +24,12 @@ select {
 
 .vertscroller {
 	width: 100%;
-	overflow-x: hidden;
 	overflow-y: scroll;
 }
 
 .scroller {
 	width: 100%;
-	height: 20em;
+	height: auto;
 	overflow: scroll;
 	overflow-x: scroll;
 	overflow-y: scroll;
@@ -61,7 +60,8 @@ select {
 }
 
 .nbs {
-	height: 3em;
+	height: 2em;
+	overflow-x: hidden;
 }
 
 .sel-class optgroup {

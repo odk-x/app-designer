@@ -2,7 +2,7 @@
  * This is the file that will be creating the list view.
  */
 /* global $, odkData, odkCommon */
-/*exported display, handleClick, getResults, showTableData, updateFilterType, updateFilterValue, applyChanges */
+/*exported display, handleClick, getResults, showTableData, updateDefaultAccess, updateRowOwner, applyChanges */
 'use strict';
 
 function rolesSuccess(result) {
@@ -234,13 +234,13 @@ function showTableData() {
         showTableSuccess, showTableFailure);
 }
 
-function updateFilterType() {
-    var chosenFilterType = $('#filter-type-chooser').val();
-    $('#filter-type-chooser').blur();
+function updateDefaultAccess() {
+    var chosenDefaultAccess = $('#default-access-chooser').val();
+    $('#default-access-chooser').blur();
 }
 
-function updateFilterValue() {
-    var chosenFilterValue = $('#user-chooser').val();
+function updateRowOwner() {
+    var chosenRowOwner = $('#user-chooser').val();
     $('#user-chooser').blur();
 }
 
@@ -251,13 +251,20 @@ function display() {
 
     //$('#appImage').attr('src', fileUri);
     $('body').css('background-image', 'url(' + fileUri + ')');
+
+    // Clear the table content if there is any
+    $('#table-content-wrapper').empty();
+
+    // Reset the default access 
+    $('#default-access-chooser').prop('selectedIndex',0);
+
     // Make the tab highlighted as active.
     odkData.getRoles(rolesSuccess, rolesFailure);
     odkData.getAllTableIds(allTableIdsSuccess, allTableIdsFailure);
     odkData.getUsers(usersSuccess, usersFailure);
 }
 
-function applyChangesHelper(tableId, filterType, filterValue, rowIds) {
+function applyChangesHelper(tableId, defaultAccess, rowOwner, rowIds) {
     if ( rowIds.length === 0 ) {
         $('body').waitMe('hide');
         // refresh the display
@@ -266,39 +273,34 @@ function applyChangesHelper(tableId, filterType, filterValue, rowIds) {
     }
     var rowId = rowIds.shift();
 	
-	odkData.changeAccessFilterOfRow(tableId, filterType, filterValue, rowId,
+	odkData.changeAccessFilterOfRow(tableId, defaultAccess, rowOwner, null, null, null, rowId,
 		function(result) {
 			console.log('changeAccessFilterOfRow: succeeded for rowId: ' + rowId);
-			applyChangesHelper(tableId, filterType, filterValue, rowIds);
+			applyChangesHelper(tableId, defaultAccess, rowOwner, rowIds);
 		}, function(error) {
 			console.log('changeAccessFilterOfRow: failed with error: ' + error);
-			applyChangesHelper(tableId, filterType, filterValue, rowIds);
+			applyChangesHelper(tableId, defaultAccess, rowOwner, rowIds);
 		});
 }
 
 function applyChanges() {
-    var chosenFilterType = $('#filter-type-chooser').val();
-    var chosenFilterValue = $('#user-chooser').val();
+    var chosenDefaultAccess = $('#default-access-chooser').val();
+    var chosenRowOwner = $('#user-chooser').val();
     var chosenTableId = $('#table-chooser').val();
     var chosenRowIds = $('#table-content-wrapper input[name="chosen"]:checked').map(function() {
         return this.value;
     }).get();
     
-    if ( chosenTableId === null || chosenTableId === undefined || chosenTableId === "not specified" ) {
-        return;
-    }
-    if ( chosenRowIds === null || chosenRowIds === undefined || chosenRowIds.length === 0) {
-        return;
-    }
-    if ( chosenFilterType === null || chosenFilterType === undefined || chosenFilterType === "not specified" ) {
-        return;
-    }
-    if ( chosenFilterValue === null || chosenFilterValue === undefined || chosenFilterValue === "not specified" ) {
+    if (( chosenTableId === null || chosenTableId === undefined || chosenTableId === "not specified" ) ||
+       ( chosenRowIds === null || chosenRowIds === undefined || chosenRowIds.length === 0) ||
+       ( chosenDefaultAccess === null || chosenDefaultAccess === undefined || chosenDefaultAccess === "not specified" ) ||
+       ( chosenRowOwner === null || chosenRowOwner === undefined || chosenRowOwner === "not specified" )) {
+        alert ("You must select a valid table id, row, default access, AND row owner.")
         return;
     }
 	// handle the null value.
-	if ( chosenFilterValue === "is null" ) {
-		chosenFilterValue = null;
+	if ( chosenRowOwner === "is null" ) {
+		chosenRowOwner = null;
 	}
     
     $('body').waitMe({
@@ -311,6 +313,6 @@ function applyChanges() {
     });
 
 	setTimeout(function() {
-		applyChangesHelper(chosenTableId, chosenFilterType, chosenFilterValue, chosenRowIds);
+		applyChangesHelper(chosenTableId, chosenDefaultAccess, chosenRowOwner, chosenRowIds);
 	}, 100);
 }

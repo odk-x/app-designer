@@ -3,6 +3,6 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,geoweather
 Table,default,defaultViewType,string,SPREADSHEET
 Table,default,displayName,object,"{""text"":""Simple Weather Survey""}"
-Table,security,filterTypeOnCreation,string,READ_ONLY
+Table,security,defaultAccessOnCreation,string,READ_ONLY
 Table,security,locked,boolean,false
 Table,security,unverifiedUserCanCreate,boolean,false

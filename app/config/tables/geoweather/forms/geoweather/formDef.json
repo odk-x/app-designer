@@ -111,7 +111,7 @@
       {
         "partition": "Table",
         "aspect": "security",
-        "key": "filterTypeOnCreation",
+        "key": "defaultAccessOnCreation",
         "type": "string",
         "value": "READ_ONLY",
         "_row_num": 3
@@ -1169,7 +1169,7 @@
       {
         "_partition": "Table",
         "_aspect": "security",
-        "_key": "filterTypeOnCreation",
+        "_key": "defaultAccessOnCreation",
         "_type": "string",
         "_value": "READ_ONLY"
       },
