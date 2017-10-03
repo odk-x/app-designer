@@ -578,6 +578,7 @@ window.odkData = {
                 if (!isString(elementKeyOrPath)) {
                     throw 'getColumnData()--elementKey not a string';
                 }
+
                 var elementKey = that.getElementKey(elementKeyOrPath);
 
                 var colData = [];
@@ -643,6 +644,7 @@ window.odkData = {
                 if (!isString(elementKeyOrPath)) {
                     throw 'getData()--elementKey must be a string';
                 }
+
                 var elementKey = that.getElementKey(elementKeyOrPath);
 
                 var colIndex = that.resultObj.metadata.elementKeyMap[elementKey];
