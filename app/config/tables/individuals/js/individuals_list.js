@@ -4,17 +4,6 @@ var idxStart = -1;
 var individualsResultSet = {};
 var locale = odkCommon.getPreferredLocale();
 
-/**
- * Called when page loads to display things (Nothing to edit here)
- */
-var registrationCBSuccess = function(result) {
-    individualsResultSet = result;
-    console.log(result.getCount());
-
-    return (function() {
-        displayGroup(idxStart);
-    }());
-};
 
 var registrationCBFailure = function(error) {
 
@@ -22,14 +11,21 @@ var registrationCBFailure = function(error) {
 };
 
 var firstLoad = function() {
-    resumeFn(0);
+    return resumeFn(0);
 };
 
 /**
  * Called when page loads to display things (Nothing to edit here)
  */
 var resumeFn = function(fIdxStart) {
-    odkData.getViewData(registrationCBSuccess, registrationCBFailure);
+    var renderPromise = new Promise( function(resolve, reject) {
+        odkData.getViewData(resolve, reject);
+    }).then( function(result) {
+        individualsResultSet = result;
+
+        return displayGroup(idxStart);
+    });
+
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
@@ -58,6 +54,8 @@ var resumeFn = function(fIdxStart) {
             }
         });
     }
+
+    return renderPromise;
 };
 
 /**
@@ -77,6 +75,8 @@ var displayGroup = function(idxStart) {
         errorText.text('No beneficiaries found'); // TODO: Translate this
     }
 
+    var dbActions = [];
+
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
@@ -90,8 +90,14 @@ var displayGroup = function(idxStart) {
         item.attr('rowId', individualsResultSet.getRowId(i));
         item.attr('class', 'item_space');
         item.attr('id', individualsResultSet.getData(i, '_id'));
-        var first_last_name = individualsResultSet.getData(i, 'first_last_name');
-        item.text(odkCommon.localizeText(locale, 'name') + ": " + first_last_name);
+        dbActions.push(new Promise( function(resolve, reject) {
+            odkData.query(util.getIndividualCustomFormId(), '_id = ?', [individualsResultSet.getData(i, 'custom_individual_row_id')],
+                null, null, null, null, null, null, true, resolve, reject);
+        }).then( function(customIndividualResult) {
+            var first_last_name = customIndividualResult.getData(0, 'first_last_name');
+            item.text(odkCommon.localizeText(locale, 'name') + ": " + first_last_name);
+        }));
+
 
         /* Creates arrow icon (Nothing to edit here) */
         var chevron = $('<img>');
@@ -107,7 +113,9 @@ var displayGroup = function(idxStart) {
         $('#list').append(borderDiv);
 
     }
+
     if (i < individualsResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
+    return Promise.all(dbActions);
 };

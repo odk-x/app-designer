@@ -196,9 +196,9 @@ function handleBarcodeCallback(action, dispatchStr) {
 }
 
 function handleRegistrationCallback(action, dispatchStr) {
-    dataUtil.validateCustomTableEntry(action, dispatchStr, "beneficiary_entity", util.beneficiaryEntityTable, "rootRowId", "customTableId", LOG_TAG).then( function(result) {
+    dataUtil.validateCustomTableEntry(action, dispatchStr, "beneficiary_entity", util.beneficiaryEntityTable).then( function(result) {
         if (result) {
-            var rootRowId = dispatchStr["rootRowId"];
+            var rootRowId = dispatchStr[util.rootRowIdKey];
             if (util.getRegistrationMode() === "HOUSEHOLD") {
                 //TODO: check to see if custom individual rows exist, because we will need to add in the root individual rows now
                 var individualRowsPromise = new Promise( function(resolve, reject) {
@@ -251,7 +251,7 @@ function handleRegistrationCallback(action, dispatchStr) {
 }
 
 function handleTokenDelivery(action, dispatchStr) {
-    dataUtil.validateCustomTableEntry(action, dispatchStr, "delivery", util.deliveryTable, "rootRowId", "customTableId", LOG_TAG).then( function(result) {
+    dataUtil.validateCustomTableEntry(action, dispatchStr, "delivery", util.deliveryTable).then( function(result) {
         if (result) {
             //any custom UI upon custom delivery success
         }
@@ -260,7 +260,7 @@ function handleTokenDelivery(action, dispatchStr) {
 
 function queryChain(passed_code) {
     code = passed_code;
-    if (util.getRegistrationMode() === "TOKEN") {
+    if (util.getWorkflowMode() === "TOKEN") {
         tokenDeliveryFunction();
     }
     if (type === 'delivery') {
@@ -276,31 +276,44 @@ function queryChain(passed_code) {
 
 function tokenDeliveryFunction() {
     // Could put this reconciliation function throughout the app
-    dataUtil.reconcileTokenAuthorizations.then( function(result) {
+    console.log('entered token delivery function');
+    var activeAuthorization;
+
+    dataUtil.reconcileTokenAuthorizations().then( function(result) {
         return new Promise(function (resolve, reject) {
-            odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', "TOKEN"], null, null,
+            odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', 'TOKEN'], null, null,
                 null, null, null, null, true, resolve,
                 reject);
         });
     }).then( function(result) {
-            activeAuths = result;
-            if (result.getCount() === 1) {
-                new Promise( function (resolve, reject) {
-                    odkData.query(util.deliveryTable, 'beneficiary_entity_id = ? AND authorization_id = ?', [code, result.getRowId(0)],  null, null,
-                        null, null, null, null, true, resolve, reject);
-                }).then( function(collisions) {
-                    if (collisions.getCount() === 0) {
-
-                    } else {
-                        $('#message').text('This beneficiary entity id has already received the current authorization');
-                    }
-                });
-            } else if (result.getCount() === 0) {
-                $('#message').text('There currently are no active authorizations');
+        console.log(result);
+        activeAuthorization = result;
+        if (activeAuthorization.getCount() === 1) {
+            return new Promise( function (resolve, reject) {
+                odkData.query(util.deliveryTable, 'beneficiary_entity_id = ? AND authorization_id = ?', [code, activeAuthorization.getRowId(0)],  null, null,
+                    null, null, null, null, true, resolve, reject);
+            });
+        } else if (activeAuthorization.getCount() === 0) {
+            $('#search_results').text('There currently are no active authorizations');
+            return Promise.reject('There currently are no active authorizations');
+        } else {
+            //this should never happen
+            $('#search_results').text('Internal Error: please contact adminstrator');
+            return Promise.reject('Internal Error: please contact adminstrator');
+        }
+    }).then( function(result) {
+        console.log(result);
+        if (result != null) {
+            if (result.getCount() === 0) {
+                // TODO: figure out best way to associate delivery form with token authorization
+                return dataUtil.triggerTokenDelivery(activeAuthorization.getRowId(0), code, actionAddCustomDelivery);
             } else {
-                //this should never happen
-                $('#message').text('Internal Error: please contact adminstrator');
+                $('#search_results').text('This beneficiary entity id has already received the current authorization');
+                return Promise.reject('This beneficiary entity id has already received the current authorization');
             }
+        }
+    }).catch( function(reason) {
+        console.log('reason');
     });
 }
 
@@ -395,7 +408,7 @@ function registrationVoucherCBSuccess(result) {
         var customBEForm = util.getBeneficiaryEntityCustomFormId();
         if (customBEForm == undefined || customBEForm == null || customBEForm == "") {
             // should we provide a ui to register without survey?
-            $('#search_results').text("Beneficiary Entity form not defined");
+            $('#search_results').text("Beneficiary Entity Form not defined");
         }
         var customRowId = util.genUUID();
         var rootRowId = util.genUUID();
@@ -410,17 +423,8 @@ function registrationVoucherCBSuccess(result) {
             struct['_default_access'] = 'HIDDEN';
             struct['_row_owner'] = user;
             odkData.addRow(util.beneficiaryEntityTable, struct, rootRowId, resolve, reject);
-        }).then( function(resolve, reject) {
-            var struct = {};
-            struct['_group_modify'] = defaultGroup;
-            struct['_default_access'] = 'HIDDEN';
-            struct['_row_owner'] = user;
-            odkData.addRow(customBEForm, struct, customRowId, resolve, reject);
-        }).then( function(resolve, reject) {
-            var dispatchStruct = JSON.stringify({actionTypeKey: actionRegistration,
-                "rootRowId": rootRowId,
-                "customTableId": customBEForm});
-            odkTables.editRowWithSurvey(dispatchStruct, customBEForm, customRowId, customBEForm, null);
+        }).then( function(result) {
+            dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', actionRegistration);
         });
     }, 1000);
 }

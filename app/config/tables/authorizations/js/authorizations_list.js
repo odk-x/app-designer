@@ -70,7 +70,7 @@ function callBackFn () {
 }
 
 var handleAuthorizationReportCallback = function(action, dispatchStr) {
-    if (dataUtil.validateCustomTableEntry(action, dispatchStr, "authorization report", util.authorizationReportTable, "rowId", "customTableId", "AUTH_REPORT_CALLBACK")) {
+    if (dataUtil.validateCustomTableEntry(action, dispatchStr, "authorization report", util.authorizationReportTable)) {
         // TODO: UI changes on successful completion?
     }
 }
@@ -133,8 +133,7 @@ var resumeFn = function(fIdxStart) {
                         } else {
                             var rootRowId = util.genUUID();
                             var customReportRowId = util.genUUID();
-                            var addRowPromises = [];
-                            addRowPromises.push(new Promise( function(resolve, reject) {
+                            new Promise( function(resolve, reject) {
                                 var jsonMap = {};
                                 util.setJSONMap(jsonMap, "authorization_id", rowId);
                                 util.setJSONMap(jsonMap, "user", odkCommon.getActiveUser());
@@ -142,21 +141,8 @@ var resumeFn = function(fIdxStart) {
                                 util.setJSONMap(jsonMap, "summary_form_id", summaryFormId);
                                 util.setJSONMap(jsonMap, "summary_row_id", customReportRowId);
                                 odkData.addRow(util.authorizationReportTable, jsonMap, rootRowId, resolve, reject);
-                            }));
-
-                            addRowPromises.push(new Promise( function(resolve, reject) {
-                                console.log(util.getAuthorizationReportCustomFormId());
-                                odkData.addRow(util.getAuthorizationReportCustomFormId(), {}, customReportRowId, resolve, reject);
-                            }));
-
-
-
-                            Promise.all(addRowPromises).then( function(resultArr) {
-                                var dispatchStruct = JSON.stringify({actionTypeKey: actionAuthorizationReport,
-                                    "rowId": rootRowId,
-                                    "customTableId": summaryFormId});
-                                odkTables.editRowWithSurvey(dispatchStruct, util.getAuthorizationReportCustomFormId(),
-                                    customReportRowId, util.getAuthorizationReportCustomFormId(), null);
+                            }).then( function(result) {
+                                dataUtil.createCustomRowFromBaseEntry(result, "summary_form_id", "summary_row_id", actionAuthorizationReport);
                             });
                         }
                     });

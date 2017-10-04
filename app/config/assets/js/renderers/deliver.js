@@ -8,37 +8,47 @@ function display() {
 }
 
 function deliver() {
-    var entitlement_id = util.getQueryParameter('entitlement_id');
-    console.log("Delivering entitlement: " + entitlement_id);
+    var entitlementId = util.getQueryParameter('entitlement_id');
+    var beneficiaryEntityId = util.getQueryParameter('beneficiary_entity_id');
+    var authorizationId = util.getQueryParameter('authorization_id');
 
-    var entitlement_row = null;
+    if (entitlementId != null) {
+        console.log("Delivering entitlement: " + entitlementId);
 
-    dataUtil.getEntitlementRow(entitlement_id).then( function(result) {
-        console.log('Got entitlement row');
-        if (!result || result.getCount === 0) {
-            throw ('Failed to retrieve entitlement.');
-        }
+        var entitlement_row = null;
 
-        entitlement_row = result;
+        dataUtil.getRow(util.entitlementTable, entitlementId).then( function(result) {
+            console.log('Got entitlement row');
+            if (!result || result.getCount === 0) {
+                throw ('Failed to retrieve entitlement.');
+            }
 
-        return dataUtil.addDeliveryRow(entitlement_row);
-    }).then( function (result) {
-        console.log('Added delivery row');
-        if (!result || result.getCount === 0) {
-            throw ('Failed to add delivery to root table.');
-        }
+            entitlement_row = result;
 
-        var root_delivery_row = result;
-        var root_delivery_row_id = root_delivery_row.get('_id');
+            return dataUtil.addDeliveryRowByEntitlement(entitlement_row, null, null);
+        }).then(_handleRowEntry).catch( function(reason) {
+            console.log('Failed to perform simple delivery: ' + reason);
+        });
 
-        odkCommon.setSessionVariable('clicked', 'true');
+    } else if (beneficiaryEntityId != null && authorizationId != null) {
+        dataUtil.addDeliveryRowWithoutEntitlement(beneficiaryEntityId, authorizationId, null).then(_handleRowEntry).catch( function(reason) {
+            console.log('Failed to perform simple delivery: ' + reason);
+        });
+    }
+}
 
-        $('#deliver').prop('disabled', true);
-        $('#confirmation').text('Delivery Confirmed!');
+function _handleRowEntry(result) {
+    console.log('Added delivery row');
+    if (!result || result.getCount === 0) {
+        throw ('Failed to add delivery to root table.');
+    }
 
-        console.log('Created new row in root delivery table: ' + root_delivery_row_id);
+    var rootDeliveryRowId = result.get('_id');
 
-    }).catch( function(reason) {
-        console.log('Failed to perform simple delivery: ' + reason);
-    });
+    odkCommon.setSessionVariable('clicked', 'true');
+
+    $('#deliver').prop('disabled', true);
+    $('#confirmation').text('Delivery Confirmed!');
+
+    console.log('Created new row in root delivery table: ' + rootDeliveryRowId);
 }

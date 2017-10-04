@@ -8,6 +8,7 @@ var customBeneficiaryEntityResultSet = {};
 var type = util.getQueryParameter('type');
 var rootRowId = util.getQueryParameter('rootRowId');
 var locale = odkCommon.getPreferredLocale();
+var beneficiaryEntityId;
 
 function display() {
     var displayPromise = new Promise( function(resolve, reject) {
@@ -25,6 +26,7 @@ function display() {
         });
     }).then( function(result) {
         $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + result.get('beneficiary_entity_id'));
+        beneficiaryEntityId = result.getData(0, "beneficiary_entity_id");
         util.populateDetailView(result, "field_list", locale, ["beneficiary_entity_id"]);
         if (type == 'enable' || type == 'disable') {
             var action = $('#followup');
@@ -140,16 +142,22 @@ function setToDeliveryView(includeWorkflowButton) {
 function setSublistToPendingEntitlements() {
     console.log("setting to pending");
 
-    var groupModify = customBeneficiaryEntityResultSet.get('_group_modify');
+    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' t1 LEFT JOIN ' +  util.deliveryTable +
+        ' t2 ON t2.entitlement_id = t1._id WHERE t2._id IS NULL AND t1.beneficiary_entity_id = ?';
 
-    //TODO figure this out
-    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' JOIN ' + util.deliveryTable + ' ON ' + util.deliveryTable + '.entitlement_id = ' + util.entitlementTable + '._id';
+    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
+        'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?entitlement_status=' + encodeURIComponent('pending'));
 }
 
 function setSublistToDeliveredEntitlements() {
     console.log("setting to delivered");
 
-    var groupModify = customBeneficiaryEntityResultSet.get('_group_modify');
+    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' t1' +
+        ' JOIN ' + util.deliveryTable + ' t2 ON t2.entitlement_id = t1._id' +
+        ' WHERE t1.beneficiary_entity_id = ?';
+
+    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
+        'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?entitlement_status=' + encodeURIComponent('delivered'));
 
 }
 
@@ -157,7 +165,7 @@ function setSublistToHousehold() {
     console.log("setting to household");
     odkTables.setSubListView(util.individualTable, 'beneficiary_entity_row_id = ?',
         [rootRowId],
-        'config/tables/' + util.individualTable + '/html/individuals_list.html');
+        'config/tables/' + util.individualTable + '/html/' + util.individualTable +'_list.html');
 }
 
 
