@@ -84,7 +84,11 @@ util.actionTypeKey = 'actionTypeKey';
 
 util.rootRowIdKey = 'rootRowId';
 util.customFormIdKey = 'customFormId';
-
+util.additionalCustomFormsObj = {};
+util.additionalCustomFormsObj.dispatchKey = "additionalCustomForms";
+util.additionalCustomFormsObj.formIdKey = "formId";
+util.additionalCustomFormsObj.foreignReferenceKey = "foreignReferenceKey";
+util.additionalCustomFormsObj.valueKey = "value";
 
 
 /************************** Red cross config getters *********************************/
@@ -192,15 +196,16 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
         if (entitlementRow === undefined || entitlementRow.getCount === 0) {
             return Promise.reject('Failed to retrieve entitlement.');
         }
+        console.log(entitlementRow.get('authorization_id'));
         return dataUtil.getRow(util.authorizationTable, entitlementRow.get('authorization_id'));
     }).then(function(authorizationRow) {
-
+        console.log(authorizationRow.getCount());
         if (dataUtil.isCustomDeliveryAuthorization(authorizationRow)) {
 
             var customDeliveryRowId = util.genUUID();
             dataUtil.addDeliveryRowByEntitlement(entitlementRow, authorizationRow.get("custom_delivery_form_id"), customDeliveryRowId)
                 .then( function(rootDeliveryRow) {
-                    dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue);
+                    dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null);
                 }).catch( function(reason) {
                     console.log('Failed to perform custom entitlement delivery: ' + reason);
                 });
@@ -221,7 +226,7 @@ dataUtil.triggerTokenDelivery = function(authorizationId, beneficiaryEntityId, a
             var customDeliveryRowId = util.genUUID();
             dataUtil.addDeliveryRowWithoutEntitlement(beneficiaryEntityId, authorizationRow, customDeliveryRowId)
                 .then( function(rootDeliveryRow) {
-                    dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue);
+                    dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null);
                 }).catch( function(reason) {
                     console.log('Failed to perform custom token delivery: ' + reason);
                 });
@@ -239,9 +244,10 @@ dataUtil.triggerTokenDelivery = function(authorizationId, beneficiaryEntityId, a
  * @param customTableNameKey is the column name in the base table to find the custom form id
  * @param customFormForeignKey is the column in the base table to find what the custom row id should be set to
  * @param actionTypeValue is the actionType to set to the dispatchStruct actionTypeKey for clients to customize handlers for returning from Survey
+ * @param dispatchStruct is an optional parameter which can be used to prepopulate the dispatchStruct with additonal custom values (useful for leveraging the additionalCustomForms schema)
  */
 
-dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, customFormForeignKey, actionTypeValue) {
+dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, customFormForeignKey, actionTypeValue, dispatchStruct) {
     var rootDeliveryRowId = baseEntry.get('_id');
     var customFormId = baseEntry.get(customTableNameKey);
     var customDeliveryRowId = baseEntry.get(customFormForeignKey);
@@ -261,7 +267,9 @@ dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, 
     return new Promise( function(resolve, reject) {
         odkData.addRow(customFormId, jsonMap, customDeliveryRowId, resolve, reject);
     }).then( function(result) {
-        var dispatchStruct = {};
+        if (dispatchStruct === undefined || dispatchStruct === null) {
+            dispatchStruct = {};
+        }
         util.setJSONMap(dispatchStruct, util.actionTypeKey, actionTypeValue);
         util.setJSONMap(dispatchStruct, util.rootRowIdKey, rootDeliveryRowId);
         util.setJSONMap(dispatchStruct, util.customFormIdKey, customFormId);
@@ -271,7 +279,7 @@ dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, 
 
 // extracts and validates whether a given authorization row has a valid customDeliveryFormId
 dataUtil.isCustomDeliveryAuthorization = function(authorizationRow) {
-    if (!authorizationRow || authorizationRow.getCount() === 0) {
+    if (authorizationRow.getCount() === 0) {
         return false;
     } else {
         var customDeliveryFormId = authorizationRow.getData(0, 'custom_delivery_form_id');
@@ -348,7 +356,6 @@ dataUtil.validateCustomTableEntry = function(action, dispatchStr, label, rootFor
     if (result === null || result === undefined) {
         console.log("Error: no result object on " + label);
         dataUtil.deleteRow(rootFormId, rootRowId);
-        // TODO change to generic function
         return Promise.resolve(false);
     }
 
@@ -376,6 +383,25 @@ dataUtil.validateCustomTableEntry = function(action, dispatchStr, label, rootFor
         var dbActions = [];
         dbActions.push(dataUtil.deleteRow(rootFormId, rootRowId));
         dbActions.push(dataUtil.deleteRow(customFormId, customRowId));
+
+        var additionalCustomFormsArr = dispatchStr[util.additionalCustomFormsObj.dispatchKey];
+        if (additionalCustomFormsArr !== null && additionalCustomFormsArr !== undefined) {
+            for (var i = 0; i < additionalCustomFormsArr.length; i++) {
+                var tuple = additionalCustomFormsArr[i];
+                var targetFormId = tuple[util.additionalCustomFormsObj.formIdKey];
+                var targetForeignKey = tuple[util.additionalCustomFormsObj.foreignReferenceKey];
+                var targetValue = tuple[util.additionalCustomFormsObj.valueKey];
+                console.log(targetFormId + ' - ' + targetForeignKey + ' - ' + targetValue);
+                dbActions.push(new Promise( function(resolve, reject) {
+                    odkData.query(targetFormId, targetForeignKey + ' = ?', [targetValue],
+                        null, null, null, null, null, null, false, resolve, reject);
+                }).then( function(result) {
+                    for (var j = 0; j < result.getCount(); j++) {
+                        dataUtil.deleteRow(targetFormId, result.getRowId(j));
+                    }
+                }));
+            }
+        }
 
         return Promise.all(dbActions).then( function(resultArr) {
             console.log('Cleaned up invalid + ' + label + ' rows');

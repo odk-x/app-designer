@@ -200,7 +200,6 @@ function handleRegistrationCallback(action, dispatchStr) {
         if (result) {
             var rootRowId = dispatchStr[util.rootRowIdKey];
             if (util.getRegistrationMode() === "HOUSEHOLD") {
-                //TODO: check to see if custom individual rows exist, because we will need to add in the root individual rows now
                 var individualRowsPromise = new Promise( function(resolve, reject) {
                     odkData.query(util.getIndividualCustomFormId(), 'custom_beneficiary_entity_row_id = ?', [action.jsonValue.result.instanceId],
                         null, null, null, null, null, null, true, resolve, reject)
@@ -424,7 +423,17 @@ function registrationVoucherCBSuccess(result) {
             struct['_row_owner'] = user;
             odkData.addRow(util.beneficiaryEntityTable, struct, rootRowId, resolve, reject);
         }).then( function(result) {
-            dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', actionRegistration);
+            var customDispatchStruct = {};
+            var additionalFormsTupleArr = [];
+
+            var additionalFormTuple = {[util.additionalCustomFormsObj.formIdKey] : util.getIndividualCustomFormId(), [util.additionalCustomFormsObj.foreignReferenceKey] : 'custom_beneficiary_entity_row_id', [util.additionalCustomFormsObj.valueKey] : customRowId};
+            additionalFormsTupleArr.push(additionalFormTuple);
+
+            customDispatchStruct[util.additionalCustomFormsObj.dispatchKey] = additionalFormsTupleArr;
+
+            console.log(customDispatchStruct);
+
+            dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', actionRegistration, customDispatchStruct);
         });
     }, 1000);
 }

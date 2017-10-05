@@ -123,7 +123,7 @@
       },
       {
         "setting_name": "instance_name",
-        "value": "authorization_name",
+        "value": "data('authorization_name)",
         "_row_num": 6
       }
     ],
@@ -142,18 +142,10 @@
       {
         "partition": "Table",
         "aspect": "security",
-        "key": "unverifiedUserCanCreate",
-        "type": "boolean",
-        "value": "false",
-        "_row_num": 2
-      },
-      {
-        "partition": "Table",
-        "aspect": "security",
         "key": "defaultAccessOnCreation",
         "type": "string",
         "value": "READ_ONLY",
-        "_row_num": 3
+        "_row_num": 2
       },
       {
         "partition": "Table",
@@ -161,15 +153,7 @@
         "key": "locked",
         "type": "boolean",
         "value": "true",
-        "_row_num": 4
-      },
-      {
-        "partition": "FormType",
-        "aspect": "default",
-        "key": "FormType.formType",
-        "type": "string",
-        "value": "SURVEY",
-        "_row_num": 5
+        "_row_num": 3
       },
       {
         "partition": "SurveyUtil",
@@ -177,7 +161,7 @@
         "key": "SurveyUtil.formId",
         "type": "string",
         "value": "wrong_form",
-        "_row_num": 6
+        "_row_num": 4
       }
     ]
   },
@@ -224,7 +208,7 @@
       },
       "instance_name": {
         "setting_name": "instance_name",
-        "value": "authorization_name",
+        "value": "data('authorization_name)",
         "_row_num": 6
       },
       "_locales": {
@@ -974,13 +958,6 @@
     },
     "properties": [
       {
-        "_partition": "FormType",
-        "_aspect": "default",
-        "_key": "FormType.formType",
-        "_type": "string",
-        "_value": "SURVEY"
-      },
-      {
         "_partition": "SurveyUtil",
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
@@ -1014,13 +991,6 @@
         "_key": "locked",
         "_type": "boolean",
         "_value": "true"
-      },
-      {
-        "_partition": "Table",
-        "_aspect": "security",
-        "_key": "unverifiedUserCanCreate",
-        "_type": "boolean",
-        "_value": "false"
       }
     ]
   }
