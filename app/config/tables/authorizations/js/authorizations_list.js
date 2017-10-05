@@ -27,7 +27,6 @@ var authorizationsCBFailure = function(error) {
 };
 
 var firstLoad = function() {
-  resumeFn(0);
 
     odkCommon.registerListener(function() {
         callBackFn();
@@ -36,6 +35,7 @@ var firstLoad = function() {
     // Call the registered callback in case the notification occured before the page finished
     // loading
     callBackFn();
+    resumeFn(0);
 };
 
 function callBackFn () {
@@ -63,7 +63,7 @@ function callBackFn () {
             odkCommon.removeFirstQueuedAction();
             break;
         default:
-            console.log("Error: unrecognized action type in callback");
+            console.log("Unrecognized action type in callback");
             odkCommon.removeFirstQueuedAction();
             break;
     }
@@ -77,9 +77,11 @@ var handleAuthorizationReportCallback = function(action, dispatchStr) {
 
 
 var resumeFn = function(fIdxStart) {
-  odkData.query(util.authorizationTable, null, null, null, null,
-            null, null, null, null, true, authorizationsCBSuccess,
-            authorizationsCBFailure);
+    var joinQuery = "SELECT * FROM " + util.authorizationTable + ' t1 LEFT JOIN ' + util.authorizationReportTable + ' t2 ON t1.report_version=t2.report_version AND t1._id=t2.authorization_id';
+    //var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' t1 LEFT JOIN ' +  util.deliveryTable +
+   //     ' t2 ON t2.entitlement_id = t1._id WHERE t2._id IS NULL AND t1.beneficiary_entity_id = ?';
+  odkData.arbitraryQuery(util.authorizationTable, joinQuery, [], null, null,
+            authorizationsCBSuccess, authorizationsCBFailure);
 
 
 
@@ -102,13 +104,11 @@ var resumeFn = function(fIdxStart) {
             // have set up to have the row id
             var containingDiv = jqueryObject.closest('.item_space');
             var rowId = containingDiv.attr('rowId');
-            var summaryFormId = containingDiv.attr('summaryFormId');
             var reportVersion = containingDiv.attr('reportVersion');
             var summaryFormId = containingDiv.attr('summaryFormId');
             console.log("rowId" + rowId);
             console.log("summaryFormId" + summaryFormId);
             console.log("reportVersion" + reportVersion);
-            console.log("summaryFormId" + summaryFormId);
 
             console.log('clicked with rowId: ' + rowId);
             // make sure we retrieved the rowId
@@ -124,7 +124,7 @@ var resumeFn = function(fIdxStart) {
                         + '&type=ent_override&authorization_id=' + rowId);
                 } else {
                     new Promise( function(resolve, reject) {
-                        odkData.query(util.authorizationReportTable, "report_version = ?", [reportVersion],
+                        odkData.query(util.authorizationReportTable, "report_version = ? AND authorization_id = ?", [reportVersion, rowId],
                             null, null, null, null, null, null, true, resolve, reject);
                     }).then( function (result) {
                         if (result.getCount() > 0) {
@@ -166,43 +166,49 @@ var displayGroup = function(idxStart) {
     }
 
     /* Number of rows displayed per 'chunk' - can modify this value */
+    console.log(authorizationsResultSet.getColumns());
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
-      if (i >= authorizationsResultSet.getCount()) {
-        break;
-      }
+        if (i >= authorizationsResultSet.getCount()) {
+            break;
+        }
 
-      var item = $('<li>');
-      item.attr('rowId', authorizationsResultSet.getRowId(i));
-      item.attr('summaryFormId', authorizationsResultSet.getData(i, "summary_form_id"));
-      item.attr('reportVersion', authorizationsResultSet.getData(i, "report_version"));
-      item.attr('summaryFormId', authorizationsResultSet.getData(i, "summary_form_id"));
-      item.attr('class', 'item_space');
-      var auth_name = authorizationsResultSet.getData(i, 'authorization_name');
-      item.text(auth_name);
+        var item = $('<li>');
+        item.attr('rowId', authorizationsResultSet.getRowId(i));
+        item.attr('summaryFormId', authorizationsResultSet.getData(i, "summary_form_id"));
+        item.attr('reportVersion', authorizationsResultSet.getData(i, "report_version"));
+        item.attr('summaryFormId', authorizationsResultSet.getData(i, "summary_form_id"));
+        item.attr('class', 'item_space');
+        var auth_name = authorizationsResultSet.getData(i, 'authorization_name');
+        item.text(auth_name);
 
-      /* Creates arrow icon (Nothing to edit here) */
-      var chevron = $('<img>');
-      chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
-      chevron.attr('class', 'chevron');
-      item.append(chevron);
+        var chevron = $('<img>');
+        chevron.attr('class', 'chevron');
+        //authorization_id is only in the report table, so this is how we tell if there is an entry for this report version
+        if (authorizationsResultSet.getData(i, 'authorization_id') === null) {
+            chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
+        } else {
+            chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/checkmark.png'));
+        }
+        item.append(chevron);
 
-      var field2 = $('<li>');
-      field2.attr('class', 'detail')
-      var itemPack = authorizationsResultSet.getData(i, 'item_pack_name');
-      field2.text(itemPack);
-      item.append(field2);
+        var field2 = $('<li>');
+        field2.attr('class', 'detail')
+        var itemPack = authorizationsResultSet.getData(i, 'item_pack_name');
+        field2.text(itemPack);
+        item.append(field2);
 
 
-      $('#list').append(item);
+        $('#list').append(item);
 
-      // don't append the last one to avoid the fencepost problem
-      var borderDiv = $('<div>');
-      borderDiv.addClass('divider');
-      $('#list').append(borderDiv);
-
+        // don't append the last one to avoid the fencepost problem
+        var borderDiv = $('<div>');
+        borderDiv.addClass('divider');
+        $('#list').append(borderDiv);
     }
+
     if (i < authorizationsResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
+
 };

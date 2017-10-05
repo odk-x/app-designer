@@ -289,11 +289,11 @@ dataUtil.isCustomDeliveryAuthorization = function(authorizationRow) {
 };
 
 
-//TODO: branch on whether to include an individual_id
 //TODO: add date created attribute
 dataUtil.addDeliveryRowByEntitlement = function(entitlementRow, customDeliveryFormId, customDeliveryRowId) {
     var jsonMap = {};
     util.setJSONMap(jsonMap, 'beneficiary_entity_id', entitlementRow.get('beneficiary_entity_id'));
+    util.setJSONMap(jsonMap, 'individual_id', entitlementRow.get('individual_id'));
     util.setJSONMap(jsonMap, 'entitlement_id', entitlementRow.get('_id'));
     util.setJSONMap(jsonMap, 'authorization_id', entitlementRow.get('authorization_id'));
     util.setJSONMap(jsonMap, 'authorization_name', entitlementRow.get('authorization_name'));
@@ -329,9 +329,6 @@ dataUtil.addDeliveryRowWithoutEntitlement = function(beneficiaryEntityId, author
     util.setJSONMap(jsonMap, 'custom_delivery_form_id', authorizationRow.get('custom_delivery_table'));
     util.setJSONMap(jsonMap, 'custom_delivery_row_id', customDeliveryRowId);
     util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
-
-    // Ori & Waylon will fix this :TODO
-    //util.setJSONMap(jsonMap, 'assigned_code', entitlement_row.get('assigned_code'));
 
     return new Promise(function(resolve, reject) {
         odkData.addRow(util.deliveryTable, jsonMap, util.genUUID(), resolve, reject);

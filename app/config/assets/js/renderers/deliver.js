@@ -31,9 +31,12 @@ function deliver() {
         });
 
     } else if (beneficiaryEntityId != null && authorizationId != null) {
-        dataUtil.addDeliveryRowWithoutEntitlement(beneficiaryEntityId, authorizationId, null).then(_handleRowEntry).catch( function(reason) {
+        dataUtil.getRow(util.authorizationTable, authorizationId).then( function(result) {
+            return dataUtil.addDeliveryRowWithoutEntitlement(beneficiaryEntityId, result, null);
+        }).then(_handleRowEntry).catch( function(reason) {
             console.log('Failed to perform simple delivery: ' + reason);
-        });
+        });;
+
     }
 }
 

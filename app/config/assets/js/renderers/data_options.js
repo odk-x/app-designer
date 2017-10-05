@@ -15,10 +15,6 @@ function display() {
 
 
         var enabledBeneficiaryEntities = document.createElement('button');
-
-
-
-        //TODO: send to actual list views
         enabledBeneficiaryEntities.onclick = function() {
             odkTables.openTableToListView(
                                       null, util.beneficiaryEntityTable, '(status = ? or status = ?)', ['ENABLED', 'enabled']

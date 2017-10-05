@@ -244,12 +244,11 @@ function handleRegistrationCallback(action, dispatchStr) {
                 odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), action.jsonValue.result.instanceId,
                     'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=delivery&rootRowId=' + rootRowId);
             }
-
         }
     });
 }
 
-function handleTokenDelivery(action, dispatchStr) {
+function handleTokenDeliveryCallback(action, dispatchStr) {
     dataUtil.validateCustomTableEntry(action, dispatchStr, "delivery", util.deliveryTable).then( function(result) {
         if (result) {
             //any custom UI upon custom delivery success
@@ -261,8 +260,7 @@ function queryChain(passed_code) {
     code = passed_code;
     if (util.getWorkflowMode() === "TOKEN") {
         tokenDeliveryFunction();
-    }
-    if (type === 'delivery') {
+    } else if (type === 'delivery') {
         deliveryFunction();
     } else if (type === 'registration') {
             registrationFunction();
@@ -305,14 +303,13 @@ function tokenDeliveryFunction() {
         if (result != null) {
             if (result.getCount() === 0) {
                 // TODO: figure out best way to associate delivery form with token authorization
-                return dataUtil.triggerTokenDelivery(activeAuthorization.getRowId(0), code, actionAddCustomDelivery);
+                dataUtil.triggerTokenDelivery(activeAuthorization.getRowId(0), code, actionTokenDelivery);
             } else {
                 $('#search_results').text('This beneficiary entity id has already received the current authorization');
-                return Promise.reject('This beneficiary entity id has already received the current authorization');
             }
         }
     }).catch( function(reason) {
-        console.log('reason');
+        console.log(reason);
     });
 }
 

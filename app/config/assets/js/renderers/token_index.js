@@ -12,9 +12,8 @@ tokenIndex.display = function() {
     deliver.setAttribute('type', 'reg');
     deliver.innerHTML = "Deliver";
     deliver.onclick = function() {
-        // TODO put correct queryparams
         odkTables.launchHTML(null, 'config/assets/html/choose_method.html?title=' + encodeURIComponent('Please Enter Beneficiary Entity ID'));
-    }
+    };
     document.getElementById("wrapper").appendChild(deliver);
 
     var del = document.createElement('button');
@@ -22,8 +21,8 @@ tokenIndex.display = function() {
     del.setAttribute('type', 'reg');
     del.innerHTML = 'View Deliveries';
     del.onclick = function() {
-        odkTables.launchHTML(null, 'config/assets/token_mode/html/view_start.html');
-    }
+        odkTables.launchHTML(null, 'config/assets/html/data_options.html?type=deliveries');
+    };
     document.getElementById('wrapper').appendChild(del);
 
     odkCommon.registerListener(function() {

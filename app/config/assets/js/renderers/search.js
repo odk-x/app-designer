@@ -82,7 +82,6 @@ function failureCallbackFn(error) {
 }
 
 
-// TODO: figure out what's going on with all these different list views
 function launch() {
     if (type === 'registration') {
         odkTables.openTableToListView(null, type, sqlWhereClause,[sqlSelectionArgs], 'config/tables/' +
