@@ -7,7 +7,7 @@ var titleToken = "main_title";
 var registrationToken = "registration_path";
 var deliveryToken = "delivery_path";
 var dataToken = "data_path";
-var overrideToken = "override_path";
+var administratorToken = "administrator_path";
 var registrationTitleToken = 'registration_title';
 var deliveryTitleToken = 'delivery_title';
 var locale = odkCommon.getPreferredLocale();
@@ -62,7 +62,7 @@ beneficiaryIndex.display = function() {
             console.log(roles);
             if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
                 var override = document.createElement("button");
-                override.innerHTML = odkCommon.localizeText(locale, overrideToken);
+                override.innerHTML = odkCommon.localizeText(locale, administratorToken);
                 override.setAttribute("id", "overrides");
                 override.onclick = function() {
                     odkTables.launchHTML(null,

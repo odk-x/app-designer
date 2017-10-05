@@ -55,10 +55,10 @@ window.odkCommonDefinitions = {
       },
       "_row_num": 6
     },
-    "override_path": {
-      "string_token": "override_path",
+    "administrator_path": {
+      "string_token": "administrator_path",
       "text": {
-        "default": "Administrator Overrides",
+        "default": "Administrator Options",
         "greek": "Διαχειριστής παρακάμπτει",
         "arabic": "مراقب التجاوزات",
         "farsi": "لغومدیر تنظیمات",
@@ -69,7 +69,7 @@ window.odkCommonDefinitions = {
     "registration_title": {
       "string_token": "registration_title",
       "text": {
-        "default": "Register Beneficiary Code",
+        "default": "Register Beneficiary Entity",
         "greek": "Εγγραφή Κωδικού Δικαιούχου",
         "arabic": "تسجيل رمز المستفيد",
         "farsi": "ثبت نام کد ذینفع",
@@ -80,7 +80,7 @@ window.odkCommonDefinitions = {
     "delivery_title": {
       "string_token": "delivery_title",
       "text": {
-        "default": "Verify Beneficiary Code",
+        "default": "Deliver to Beneficiary Entity",
         "greek": "Επαληθεύστε τον Κωδικό Δικαιούχου",
         "arabic": "تأكيد رمز المستفيد",
         "farsi": "تأیید کد ذینفع",

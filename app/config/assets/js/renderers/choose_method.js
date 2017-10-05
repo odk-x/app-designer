@@ -55,6 +55,8 @@ function display() {
     }
 
     $('#title').text(util.getQueryParameter('title'));
+
+
     user = odkCommon.getActiveUser();
     odkCommon.setSessionVariable(userKey, user);
     console.log("Active User:" + user);
@@ -71,7 +73,7 @@ function display() {
         odkData.getDefaultGroup(resolve, reject);
     });
 
-    Promise.all([userPromise, rolesPromise, defaultGroupPromise]).then(function(resultArray) {
+    return Promise.all([userPromise, rolesPromise, defaultGroupPromise, populateSyncList()]).then(function(resultArray) {
         var users = resultArray[0].getUsers();
         var roles = resultArray[1].getRoles();
         var filteredRoles = _.filter(roles, function(s) {
@@ -112,21 +114,58 @@ function display() {
             console.log("USERS: " + users);
             queryChain($('#code').val());
         });
+
+        odkCommon.registerListener(function() {
+            callBackFn();
+        });
+
+        // Call the registered callback in case the notification occured before the page finished
+        // loading
+        callBackFn();
     }, function(err) {
         console.log('promise failure with error: ' + err);
     });
-
-    odkCommon.registerListener(function() {
-        callBackFn();
-    });
-
-    // Call the registered callback in case the notification occured before the page finished
-    // loading
-    callBackFn();
 }
 
 function addOption(item) {
     $('#choose_user').append($("<option/>").attr("value", item).text(item));
+}
+
+function populateSyncList() {
+    if (util.getWorkflowMode() === 'TOKEN' || type === 'delivery') {
+        console.log('entered delivery sync path');
+        let newRows = $('<h3>');
+        return new Promise( function(resolve, reject) {
+            odkData.query(util.deliveryTable, '_sync_state = ?', ['new_row'],
+                null, null, null, null, null, null, false, resolve, reject);
+        }).then( function(result) {
+            newRows.text('New since last sync: ' + result.getCount());
+            $('#sync_list').append(newRows);
+        });
+    } else if (type === 'registration') {
+        console.log('entered registration sync path');
+        let newRows = $('<h3>');
+        let newRowsPromise = new Promise( function(resolve, reject) {
+            odkData.query(util.beneficiaryEntityTable, '_sync_state = ?', ['new_row'],
+                null, null, null, null, null, null, false, resolve, reject);
+        });
+        let updatedRows = $('<h3>');
+        let updatedRowsPromise = new Promise( function(resolve, reject) {
+            odkData.query(util.beneficiaryEntityTable, '_sync_state = ? OR _sync_state = ?', ['changed', 'in_conflict'],
+                null, null, null, null, null, null, false, resolve, reject);
+        });
+
+        return Promise.all([newRowsPromise, updatedRowsPromise]).then( function(resultArr) {
+            newRows.text('New since last sync: ' + resultArr[0].getCount());
+            updatedRows.text('Updated since last sync: ' + resultArr[1].getCount());
+            $('#sync_list').append(newRows);
+            $('#sync_list').append(updatedRows);
+        });
+    } else {
+        return Promise.resolve(null);
+    }
+
+
 }
 
 function callBackFn () {
@@ -263,7 +302,7 @@ function queryChain(passed_code) {
     } else if (type === 'delivery') {
         deliveryFunction();
     } else if (type === 'registration') {
-            registrationFunction();
+        registrationFunction();
     } else if (type === 'enable' || type === 'disable') {
         regOverrideFunction();
     } else if (type === 'ent_override') {

@@ -1,7 +1,7 @@
 /* CSS Stylesheet - Standard User Homescreen*/
 
 
-#wrapper { 
+#wrapper {
     overflow: auto;
     margin: 0;
     padding: 0;
@@ -16,6 +16,13 @@
     text-align: center;
 }
 
+.spaceless_when_invisible {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 body {
     position: relative;
@@ -91,7 +98,9 @@ button:active {
     font-size: 44px;
     margin-top: 20px;
     margin-bottom: 30px;
+    text-align: center;
     position: relative;
+    color: #5C5C5C;
 }
 
 #launch {
@@ -108,16 +117,6 @@ button:active {
     font-size: 25px;
 }
 
-
-h1 {
-    font-size: 12vmin;
-    margin-top: 4vh;
-    margin-bottom: 6vh;
-    text-align: center;
-    color: #5C5C5C;
-    position: relative;
-}
-
 h2 {
     font-size: 30px;
     margin-top: 20px;
@@ -127,11 +126,19 @@ h2 {
     position: relative;
 }
 
+h3 {
+    color: #5C5C5C;
+    font-size: 15px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    text-align: center;
+    position: relative;
+}
+
 p {
     display: inline-block;
     position: relative;
     margin: 0;
-    height: 23vh;
     width: 100vw;
     text-align: center;
 }

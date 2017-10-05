@@ -136,7 +136,7 @@ util.renderPageAsPromise = function(renderFunction) {
 };
 
 util.setVirtualButtonAttributes = function() {
-    var buttons = $(':button');
+    let buttons = $(':button');
     buttons.css({'height' : window.innerHeight * .15 + "px"});
     buttons.css({'font-size' : Math.min(window.innerHeight, window.innerWidth) * .07 + "px"});
     buttons.css({'margin-bottom' : window.innerHeight * .06 + "px"});
