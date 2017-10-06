@@ -247,6 +247,11 @@ verifyLoad('builder',
                     rowObject._section_name = key;
                     _.each(_.keys(rowObject), function(k) {
                         if ( k in surveyJson.specification.column_types && k !== '_row_num' && k !== '__rowNum') {
+                            // Add the original _screen_block function for dynamic screen rendering
+                            // Only if this operation has _screen_block
+                            if (k === '_screen_block') {
+                                rowObject['_screen_block_orig'] = rowObject[k];
+                            }
                             resolveOneField( rowObject[k], rowObject, k,
                                 surveyJson.specification.column_types[k], key, rowObject._row_num,
                                 k, propertyParsers );

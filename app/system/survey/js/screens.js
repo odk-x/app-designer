@@ -47,6 +47,61 @@ screenTypes.base = Backbone.View.extend({
     getScreenPath: function() {
         return this._section_name + '/' + this._op.operationIdx;
     },
+    havePromptsOnScreenChanged: function(pIdx) {
+        if (this._operation && this._operation._screen_block) {
+            var toBeRenderedActivePromptsIdxs = [];
+            // If assign is used, then the screen has to be rerendered
+            // this is because the renderContext of the prompt within the assign
+            // will not reflect the new value - so we need to rerender 
+            var screenBlockString = String(this._operation._screen_block_orig);
+            if (screenBlockString.indexOf('assign') !== -1) {
+                return true;
+            }
+            toBeRenderedActivePromptsIdxs = this._operation._screen_block();
+
+            if (this.activePrompts.length !== toBeRenderedActivePromptsIdxs.length) {
+                return true;
+            } else {
+                var toBeRenderedActivePrompts = []
+                var i = 0;
+                for (i = 0; i < toBeRenderedActivePromptsIdxs.length; i++) {
+                    if (this.activePrompts[i].promptIdx !== toBeRenderedActivePromptsIdxs[i]) {
+                        // If prompt indices are out of order, redraw
+                        return true;
+                    } else {
+                        // Now we need to check if other prompts on the screen
+                        // need to rerender - if so then do a screen redraw
+                        if (this.activePrompts[i].promptIdx !== pIdx) {
+
+                            // current el of active prompt  
+                            var currEl = this.activePrompts[i].$el
+                            // Get the innerHTML if we can 
+                            var currElString = null;
+                            if (currEl.length > 0) {
+                                currElString = currEl[0].innerHTML;
+                            }
+
+                            // what the el of the prompt will be 
+                            var toBeDrawnEl = this.activePrompts[i].template(this.activePrompts[i].renderContext);
+
+                            // Remove all spaces from both what is and what will be to get a valid comparison
+                            var currElStringNoSpaces = (currElString !== null && currElString !== undefined) ? currElString.replace(/\s/g, '') : null;
+                            var tbdString = (toBeDrawnEl !== null && toBeDrawnEl !== undefined) ? toBeDrawnEl.replace(/\s/g, '') : null;
+                            
+                            // If they are not equal redraw
+                            if (currElStringNoSpaces !== tbdString) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;        
+            }
+        } else {
+            return true;
+        }
+        
+    },
     whenTemplateIsReady: function(ctxt){
         var that = this;
         if(this.template) {
@@ -236,34 +291,6 @@ screenTypes.base = Backbone.View.extend({
         $.each(that.activePrompts, function(idx, prompt){
             prompt.afterRender();
         });
-
-        if (that.$focusPromptTest !== null && that.$focusPromptTest !== undefined)
-        {
-            var focusElementAttr = {'id' : that.$focusPromptTest.attr('id'),
-                                    'value' : that.$focusPromptTest.attr('value'),
-                                    'name' : that.$focusPromptTest.attr('name')};
-
-            var focusElementString = (that.$focusPromptTest.get(0).tagName).toLowerCase();
-            for (var key in focusElementAttr) {
-                if (focusElementAttr[key]) {
-                    focusElementString = focusElementString + "[" + key + "='" + focusElementAttr[key] + "']";
-                    setFocus = true;
-                }
-            }
-
-            if (setFocus === true) {
-                odkCommon.log("D","screens.afterRender: focusElementString = " + focusElementString);
-                $(focusElementString).focus();
-            }
-        }
-
-        if (that.focusScrollPos !== null && that.focusScrollPos !== undefined) {
-            $(window).scrollTop(that.focusScrollPos);
-        }
-
-        if (that.screenOverflowClass && that.horizontalFocusScrollPos !== null && that.horizontalFocusScrollPos !== undefined) {
-            that.$(that.screenOverflowClass).scrollLeft(that.horizontalFocusScrollPos);
-        }
     },
     recursiveUndelegateEvents: function() {
         var that = this;
