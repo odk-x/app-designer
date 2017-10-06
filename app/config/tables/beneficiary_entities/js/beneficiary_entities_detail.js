@@ -27,38 +27,15 @@ function display() {
     }).then( function(result) {
         $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + result.get('beneficiary_entity_id'));
         beneficiaryEntityId = result.getData(0, "beneficiary_entity_id");
-        util.populateDetailView(result, "field_list", locale, ["beneficiary_entity_id"]);
-        if (type == 'enable' || type == 'disable') {
-            var action = $('#followup');
-            if (type == 'enable') {
-                action.text(odkCommon.localizeText(locale, "enable_beneficiary"));
-            } else {
-                action.text(odkCommon.localizeText(locale, "disable_beneficiary"));
-            }
-            action.on('click', function() {
-                var struct = {};
-                if (type == 'enable') {
-                    struct.status = 'ENABLED';
-                } else {
-                    struct.status = 'DISABLED';
-                }
-                new Promise( function(resolve, reject) {
-                    odkData.updateRow(util.beneficiaryEntityTable, struct, rootRowId,
-                        resolve, reject);
-                }).then( function(result) {
-                    $("#followup").prop("disabled",true);
-                    if (type == 'enable') {
-                        $('#message').text('Successfully Enabled!');
-                    } else {
-                        $('#message').text('Successfully Disabled!');
-                    }
-                }).catch( function(reason) {
-                    console.log('Update failure: ' + reason);
-                });
-            });
-            action.show();
+        let exclusionList = ["beneficiary_entity_id"];
+        if (type === 'override_beneficiary_entity_status') {
+            $('#toggle_workflow').hide();
+            initBeneficiaryStatusToggle(result.getData(0, "status"));
+            exclusionList.push('status');
+        }  else if (type === 'override_entitlement_status') {
+            $('#toggle_workflow').hide();
+            setSublistToPendingEntitlements('change_status');
 
-        } else if (result.get('status') === 'DISABLED') {
 
         } else if (util.getRegistrationMode() === "INDIVIDUAL") {
             if (result.get('status') === 'DISABLED') {
@@ -83,6 +60,7 @@ function display() {
                 }
             }
         }
+        util.populateDetailView(result, "field_list", locale, exclusionList);
     });
 
     displayPromise.catch( function(reason) {
@@ -91,16 +69,50 @@ function display() {
     return displayPromise;
 }
 
-function initEntitlementToggle() {
-    $('#entitlements_title').text('Entitlements Listed'); // TODO: localize this
+ function initBeneficiaryStatusToggle(status) {
+     $('#switch-title-id').text('Beneficiary Entity Status'); // TODO: localize this
 
-    $('#pending_txt').text('Pending'); // TODO: Localize this
-    $('#entitlements_pending').click(function() {
-        setSublistToPendingEntitlements();
+     if (status === 'ENABLED') {
+         $('#left').prop('checked', true);
+     } else {
+         $('#right').prop('checked', true);
+     }
+
+     $('#left_txt').text('Enabled'); // TODO: Localize this
+     $('#left').click(function() {
+        changeStatusPromise('ENABLED');
+     });
+
+     $('#right_txt').text('Disabled'); // TODO: Localize this
+     $('#right').click(function() {
+         changeStatusPromise('DISABLED');
+     });
+
+     $('#switch-id').show();
+ }
+
+ function changeStatusPromise(status) {
+     return new Promise( function(resolve, reject) {
+         odkData.updateRow(util.beneficiaryEntityTable, {'status' : status}, rootRowId,
+             resolve, reject);
+     }).then( function(result) {
+         console.log('Update success: ' + result);
+     }).catch( function(reason) {
+         console.log('Update failure: ' + reason);
+     });
+ }
+
+
+function initEntitlementToggle() {
+    $('#switch-title-id').text('Entitlements Listed'); // TODO: localize this
+
+    $('#left_txt').text('Pending'); // TODO: Localize this
+    $('#left').click(function() {
+        setSublistToPendingEntitlements('deliver');
     });
 
-    $('#delivered_txt').text('Delivered'); // TODO: Localize this
-    $('#entitlements_delivered').click(function() {
+    $('#right_txt').text('Delivered'); // TODO: Localize this
+    $('#right').click(function() {
         setSublistToDeliveredEntitlements();
     });
 }
@@ -116,7 +128,7 @@ function setToHouseholdView() {
         console.log("setting to delivery view");
         setToDeliveryView(true);
     });
-    $('#entitlements_switch').hide();
+    $('#switch-field').hide();
     setSublistToHousehold();
 }
 
@@ -131,22 +143,22 @@ function setToDeliveryView(includeWorkflowButton) {
             setToHouseholdView();
         });
     }
-    $('#entitlements_switch').show();
-    if ($('#entitlements_pending').is(':checked')) {
-        setSublistToPendingEntitlements();
+    $('#switch-id').show();
+    if ($('#left').is(':checked')) {
+        setSublistToPendingEntitlements('deliver');
     } else {
         setSublistToDeliveredEntitlements();
     }
 }
 
-function setSublistToPendingEntitlements() {
+function setSublistToPendingEntitlements(action) {
     console.log("setting to pending");
 
     var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' t1 LEFT JOIN ' +  util.deliveryTable +
         ' t2 ON t2.entitlement_id = t1._id WHERE t2._id IS NULL AND t1.beneficiary_entity_id = ?';
 
     odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
-        'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?entitlement_status=' + encodeURIComponent('pending'));
+        'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent(action));
 }
 
 function setSublistToDeliveredEntitlements() {
@@ -157,7 +169,7 @@ function setSublistToDeliveredEntitlements() {
         ' WHERE t1.beneficiary_entity_id = ?';
 
     odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
-        'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?entitlement_status=' + encodeURIComponent('delivered'));
+        'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent('detail'));
 
 }
 

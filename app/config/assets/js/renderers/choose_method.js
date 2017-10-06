@@ -41,7 +41,7 @@ function display() {
 
     var localizedUser = odkCommon.localizeText(locale, "select_group");
     $('#choose_user').hide();
-    if (type !== 'ent_override') {
+    if (type !== 'new_entitlement') {
         $('#view_details').hide();
     } else {
         idComponent = "&authorization_id=" + encodeURIComponent(util.getQueryParameter('authorization_id'));
@@ -303,10 +303,12 @@ function queryChain(passed_code) {
         deliveryFunction();
     } else if (type === 'registration') {
         registrationFunction();
-    } else if (type === 'enable' || type === 'disable') {
-        regOverrideFunction();
-    } else if (type === 'ent_override') {
-        entOverrideFunction();
+    } else if (type === 'override_beneficiary_entity_status') {
+        beneficiaryEntityStatusFunction();
+    } else if (type === 'new_entitlement') {
+        newEntitlementFunction();
+    } else if (type == 'override_entitlement_status') {
+        entitlementStatusFunction();
     }
 }
 
@@ -478,20 +480,11 @@ function registrationVoucherCBFailure(error) {
     console.log('registrationVoucherCBFailure called with error: ' + error);
 }
 
-function regOverrideFunction() {
+function beneficiaryEntityStatusFunction() {
     console.log('entered regoverride path');
 
     if (code !== "" && code !== undefined && code !== null) {
-        var queryCaseType;
-        var queriedType;
-        if (type === 'enable') {
-            queriedType = 'DISABLED';
-            queryCaseType = 'disabled';
-        } else {
-            queriedType = 'ENABLED';
-            queryCaseType = 'enabled';
-        }
-        odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ? and (status = ? or status = ?)', [code, queriedType, queryCaseType],
+        odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?', [code],
                       null, null, null, null, null, null, true,
                       regOverrideBenSuccess, regOverrideBenFailure);
     }
@@ -503,26 +496,13 @@ function regOverrideBenSuccess(result) {
             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
             encodeURIComponent(type) + '&rootRowId=' + result.getRowId(0));
     } else if (result.getCount() > 1) {
-        var queriedType;
-        var queryCaseType;
-        if (type === 'enable') {
-            queriedType = 'DISABLED';
-            queryCaseType = 'disabled';
-        } else {
-            queriedType = 'ENABLED';
-            queryCaseType = 'enabled';
-        }
         odkTables.openTableToListView(null, util.beneficiaryEntityTable,
-                                      'beneficiary_entity_id = ? and (status = ? or status = ?)',
-                                      [code, queriedType, queryCaseType],
+                                      'beneficiary_entity_id = ?',
+                                      [code],
                                       'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_list.html?type=' +
                                       encodeURIComponent(type));
     } else {
-        if (type === 'enable') {
-            $('#search_results').text(odkCommon.localizeText(locale, "no_disabled_beneficiary"));
-        } else {
-            $('#search_results').text(odkCommon.localizeText(locale, "no_enabled_beneficiary"));
-        }
+        $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
     }
 }
 
@@ -531,7 +511,7 @@ function regOverrideBenFailure(error) {
 }
 
 
-function entOverrideFunction() {
+function newEntitlementFunction() {
     if (code !== "" && code !== undefined && code !== null) {
         $('#search_results').text('');
         odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?',
@@ -626,3 +606,18 @@ var addDistCBSuccess = function(result) {
 var addDistCBFailure = function(error) {
     console.log('addDistCBFailure: ' + error);
 };
+
+function entitlementStatusFunction() {
+    new Promise( function(resolve, reject) {
+        odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?',
+            [code], null, null, null, null, null, null, true, resolve, reject)
+    }).then( function(result) {
+        if (result.getCount() === 0) {
+            $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
+        } else {
+            odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
+                'config/tables/beneficiary_entities/html/beneficiary_entities_detail.html?type='
+                + encodeURIComponent(type) + '&rootRowId=' + result.getRowId(0));
+        }
+    });
+}

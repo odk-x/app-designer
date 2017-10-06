@@ -3,6 +3,8 @@
 <!--Chunked List View-->
 <head>
     <link href="../../../assets/css/list.css" type="text/css" rel="stylesheet" />
+    <link href="../../../assets/css/radio_button.css" type="text/css" rel="stylesheet" />
+    <link href="../../../assets/css/reg.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
     <script type="text/javascript" src="../tableSpecificDefinitions.js"></script>
     <script type="text/javascript" src="../../../assets/libs/jquery-3.2.1.js"></script>
@@ -17,6 +19,12 @@
 <p id="error" style="display:none"></p>
 <div id="wrapper">
     <div id="list"></div>
+</div>
+<div class="switch-starter" style="display:none">
+    <input type="radio" class="left" checked="true"/>
+    <label class="left_txt"></label>
+    <input type="radio" class="right"/>
+    <label class="right_txt"></label>
 </div>
 <script>
     $(firstLoad);

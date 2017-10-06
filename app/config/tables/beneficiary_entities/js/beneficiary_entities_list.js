@@ -59,7 +59,7 @@ var resumeFn = function(fIdxStart) {
             if (rootRowId !== null && rootRowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                 var launchType = util.getQueryParameter('type');
-                if (launchType == 'enable' || launchType == 'disable') {
+                if (launchType === 'override_beneficiary_entity_status') {
                     odkTables.openDetail(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
                         'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
                         encodeURIComponent(launchType) + '&rootRowId=' + rootRowId);

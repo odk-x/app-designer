@@ -115,13 +115,11 @@ var resumeFn = function(fIdxStart) {
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                 var type = util.getQueryParameter('type');
-                if (type == 'override') {
+                if (type == 'new_entitlement') {
                     odkTables.launchHTML(null,
                         'config/assets/html/choose_method.html?title='
                         + encodeURIComponent(odkCommon.localizeText(locale, 'choose_method'))
-                        + '&secondary_manual_title='
-                        + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_code'))
-                        + '&type=ent_override&authorization_id=' + rowId);
+                        + '&type=new_entitlement&authorization_id=' + rowId);
                 } else {
                     new Promise( function(resolve, reject) {
                         odkData.query(util.authorizationReportTable, "report_version = ? AND authorization_id = ?", [reportVersion, rowId],

@@ -5,7 +5,6 @@
 
 var locale = odkCommon.getPreferredLocale();
 
-// Displays homescreen
 function display() {
     var chooseText = odkCommon.localizeText(locale, "choose_method");
     var enable = document.createElement("button");

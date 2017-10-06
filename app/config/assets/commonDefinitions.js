@@ -1,5 +1,19 @@
 window.odkCommonDefinitions = {
   "_tokens": {
+    "registration": {
+      "string_token": "registration",
+      "text": {
+        "default": "Registration"
+      },
+      "_row_num": 2
+    },
+    "distribution": {
+      "string_token": "distribution",
+      "text": {
+        "default": "Distribution"
+      },
+      "_row_num": 3
+    },
     "select_user": {
       "string_token": "select_user",
       "text": {
@@ -9,7 +23,7 @@ window.odkCommonDefinitions = {
         "farsi": "لطفا انتخاب کنید کاربر",
         "spanish": "Por favor seleccione usuario"
       },
-      "_row_num": 2
+      "_row_num": 4
     },
     "main_title": {
       "string_token": "main_title",
@@ -20,7 +34,7 @@ window.odkCommonDefinitions = {
         "farsi": "تسکین فاجعه",
         "spanish": "Distribución"
       },
-      "_row_num": 3
+      "_row_num": 5
     },
     "registration_path": {
       "string_token": "registration_path",
@@ -31,7 +45,7 @@ window.odkCommonDefinitions = {
         "farsi": "ثبت",
         "spanish": "Registro"
       },
-      "_row_num": 4
+      "_row_num": 6
     },
     "delivery_path": {
       "string_token": "delivery_path",
@@ -42,7 +56,7 @@ window.odkCommonDefinitions = {
         "farsi": "تحویل",
         "spanish": "Entrega"
       },
-      "_row_num": 5
+      "_row_num": 7
     },
     "data_path": {
       "string_token": "data_path",
@@ -53,7 +67,7 @@ window.odkCommonDefinitions = {
         "farsi": "دیدن اطلاعات",
         "spanish": "Ver información"
       },
-      "_row_num": 6
+      "_row_num": 8
     },
     "administrator_path": {
       "string_token": "administrator_path",
@@ -64,7 +78,7 @@ window.odkCommonDefinitions = {
         "farsi": "لغومدیر تنظیمات",
         "spanish": "Administrador Anulaciones"
       },
-      "_row_num": 7
+      "_row_num": 9
     },
     "registration_title": {
       "string_token": "registration_title",
@@ -75,7 +89,7 @@ window.odkCommonDefinitions = {
         "farsi": "ثبت نام کد ذینفع",
         "spanish": "Registrar código de beneficiario"
       },
-      "_row_num": 8
+      "_row_num": 10
     },
     "delivery_title": {
       "string_token": "delivery_title",
@@ -86,7 +100,7 @@ window.odkCommonDefinitions = {
         "farsi": "تأیید کد ذینفع",
         "spanish": "Verificar código de beneficiario"
       },
-      "_row_num": 9
+      "_row_num": 11
     },
     "disabled_beneficiary_notification": {
       "string_token": "disabled_beneficiary_notification",
@@ -97,7 +111,7 @@ window.odkCommonDefinitions = {
         "farsi": "این ذینفع غیر فعال است",
         "spanish": "Este beneficiario está deshabilitado"
       },
-      "_row_num": 10
+      "_row_num": 12
     },
     "missing_beneficiary_notification": {
       "string_token": "missing_beneficiary_notification",
@@ -108,7 +122,7 @@ window.odkCommonDefinitions = {
         "farsi": "کد اسکن در سیستم یافت نشد",
         "spanish": "Código escaneado no encontrado en el sistema"
       },
-      "_row_num": 11
+      "_row_num": 13
     },
     "barcode_available": {
       "string_token": "barcode_available",
@@ -119,7 +133,7 @@ window.odkCommonDefinitions = {
         "farsi": "بارکد در دسترس",
         "spanish": "Código de barras disponible"
       },
-      "_row_num": 12
+      "_row_num": 14
     },
     "voucher_detected": {
       "string_token": "voucher_detected",
@@ -130,7 +144,7 @@ window.odkCommonDefinitions = {
         "farsi": "کوپن بارکد شناسایی",
         "spanish": "Detectado código de barras del cupón"
       },
-      "_row_num": 13
+      "_row_num": 15
     },
     "barcode_unavailable": {
       "string_token": "barcode_unavailable",
@@ -141,7 +155,7 @@ window.odkCommonDefinitions = {
         "farsi": "بارکد در دسترس",
         "spanish": "Código de barras no disponible"
       },
-      "_row_num": 14
+      "_row_num": 16
     },
     "already_qualifies_override": {
       "string_token": "already_qualifies_override",
@@ -152,7 +166,7 @@ window.odkCommonDefinitions = {
         "farsi": "اسکن ذینفع در حال حاضر برای این توزیع",
         "spanish": "Beneficiario escaneado ya calificado para esta distribución"
       },
-      "_row_num": 15
+      "_row_num": 17
     },
     "eligible_override": {
       "string_token": "eligible_override",
@@ -163,7 +177,7 @@ window.odkCommonDefinitions = {
         "farsi": "لغو ذینفع واجد شرایط",
         "spanish": "Beneficiario apto para anulación"
       },
-      "_row_num": 16
+      "_row_num": 18
     },
     "override_creation_success": {
       "string_token": "override_creation_success",
@@ -174,7 +188,7 @@ window.odkCommonDefinitions = {
         "farsi": "لغوموفق ثبت",
         "spanish": "Anulación creada satisfactoriamente"
       },
-      "_row_num": 17
+      "_row_num": 19
     },
     "view_authorization_details": {
       "string_token": "view_authorization_details",
@@ -185,7 +199,7 @@ window.odkCommonDefinitions = {
         "farsi": "جزئیات نمایش توزیع",
         "spanish": "Ver detalles de la distribución"
       },
-      "_row_num": 18
+      "_row_num": 20
     },
     "scan_barcode": {
       "string_token": "scan_barcode",
@@ -196,7 +210,7 @@ window.odkCommonDefinitions = {
         "farsi": "بارکد اسکن",
         "spanish": "Escanear código de barras"
       },
-      "_row_num": 19
+      "_row_num": 21
     },
     "enter": {
       "string_token": "enter",
@@ -207,7 +221,7 @@ window.odkCommonDefinitions = {
         "farsi": "وارد شدن",
         "spanish": "Indroducir"
       },
-      "_row_num": 20
+      "_row_num": 22
     },
     "no_enabled_beneficiary": {
       "string_token": "no_enabled_beneficiary",
@@ -218,7 +232,7 @@ window.odkCommonDefinitions = {
         "farsi": "فعال بدون بهره  یافت شد",
         "spanish": "Detectado beneficiario no activo"
       },
-      "_row_num": 21
+      "_row_num": 23
     },
     "no_disabled_beneficiary": {
       "string_token": "no_disabled_beneficiary",
@@ -229,7 +243,7 @@ window.odkCommonDefinitions = {
         "farsi": "غیر فعال بدون بهره یافت شد",
         "spanish": "Detectado beneficiario no desactivado"
       },
-      "_row_num": 22
+      "_row_num": 24
     },
     "enter_beneficiary_code": {
       "string_token": "enter_beneficiary_code",
@@ -240,7 +254,7 @@ window.odkCommonDefinitions = {
         "farsi": "لطفا کد ذینفع را وارد کنید",
         "spanish": "Por favor introduce el código del beneficiario"
       },
-      "_row_num": 23
+      "_row_num": 25
     },
     "enabled_beneficiaries_title": {
       "string_token": "enabled_beneficiaries_title",
@@ -251,7 +265,7 @@ window.odkCommonDefinitions = {
         "farsi": "ذینفع فعال",
         "spanish": "Beneficiarios activos"
       },
-      "_row_num": 24
+      "_row_num": 26
     },
     "disabled_beneficiaries_title": {
       "string_token": "disabled_beneficiaries_title",
@@ -262,7 +276,7 @@ window.odkCommonDefinitions = {
         "farsi": "ذینفع غیر فعال",
         "spanish": "Beneficiarios desactivados"
       },
-      "_row_num": 25
+      "_row_num": 27
     },
     "beneficiary_data_title": {
       "string_token": "beneficiary_data_title",
@@ -273,7 +287,7 @@ window.odkCommonDefinitions = {
         "farsi": "اطلاعات ذینفع",
         "spanish": "Datos de beneficiarios"
       },
-      "_row_num": 26
+      "_row_num": 28
     },
     "delivery_data_title": {
       "string_token": "delivery_data_title",
@@ -284,7 +298,7 @@ window.odkCommonDefinitions = {
         "farsi": "اطلاعات تحویل",
         "spanish": "Datos de entrega"
       },
-      "_row_num": 27
+      "_row_num": 29
     },
     "beneficiary_lists": {
       "string_token": "beneficiary_lists",
@@ -295,7 +309,7 @@ window.odkCommonDefinitions = {
         "farsi": "لیست ذینفع",
         "spanish": "Lista de beneficiarios"
       },
-      "_row_num": 28
+      "_row_num": 30
     },
     "view_all_deliveries": {
       "string_token": "view_all_deliveries",
@@ -306,7 +320,7 @@ window.odkCommonDefinitions = {
         "farsi": "مشاهده تحویل",
         "spanish": "Ver todas las entregas"
       },
-      "_row_num": 29
+      "_row_num": 31
     },
     "advanced_search": {
       "string_token": "advanced_search",
@@ -317,7 +331,7 @@ window.odkCommonDefinitions = {
         "farsi": "جستجوی پیشرفته",
         "spanish": "Búsqueda avanzada"
       },
-      "_row_num": 30
+      "_row_num": 32
     },
     "data_categories": {
       "string_token": "data_categories",
@@ -328,7 +342,7 @@ window.odkCommonDefinitions = {
         "farsi": "دسته بندی اطلاعات",
         "spanish": "Categorías de datos"
       },
-      "_row_num": 31
+      "_row_num": 33
     },
     "view_beneficiary_data": {
       "string_token": "view_beneficiary_data",
@@ -339,7 +353,7 @@ window.odkCommonDefinitions = {
         "farsi": "دیدن اطلاعات ذینفع",
         "spanish": "Ver datos del beneficiario"
       },
-      "_row_num": 32
+      "_row_num": 34
     },
     "view_delivery_data": {
       "string_token": "view_delivery_data",
@@ -350,7 +364,7 @@ window.odkCommonDefinitions = {
         "farsi": "دیدن اطلاعات  تحویل",
         "spanish": "Ver datos de entregas"
       },
-      "_row_num": 33
+      "_row_num": 35
     },
     "enable_beneficiary": {
       "string_token": "enable_beneficiary",
@@ -361,7 +375,7 @@ window.odkCommonDefinitions = {
         "farsi": "فعال کردن  ذینفع",
         "spanish": "Habilitar beneficiario"
       },
-      "_row_num": 34
+      "_row_num": 36
     },
     "disable_beneficiary": {
       "string_token": "disable_beneficiary",
@@ -372,7 +386,7 @@ window.odkCommonDefinitions = {
         "farsi": "غیر فعال کردن  ذینفع",
         "spanish": "Deshabilitar beneficiario"
       },
-      "_row_num": 35
+      "_row_num": 37
     },
     "choose_method": {
       "string_token": "choose_method",
@@ -383,18 +397,18 @@ window.odkCommonDefinitions = {
         "farsi": "انتخاب روش",
         "spanish": "Elegir método"
       },
-      "_row_num": 36
+      "_row_num": 38
     },
-    "override_options": {
-      "string_token": "override_options",
+    "administrator_options": {
+      "string_token": "administrator_options",
       "text": {
-        "default": "Override Options",
+        "default": "Administrator Options",
         "greek": "Επιλογές παράκαμψης",
         "arabic": "اختيارات التجاوز",
         "farsi": "لغو گزینه",
         "spanish": "Anular opciones"
       },
-      "_row_num": 37
+      "_row_num": 39
     },
     "override_registration": {
       "string_token": "override_registration",
@@ -405,7 +419,7 @@ window.odkCommonDefinitions = {
         "farsi": "لغوثبت نام",
         "spanish": "Anular registro"
       },
-      "_row_num": 38
+      "_row_num": 40
     },
     "override_entitlement": {
       "string_token": "override_entitlement",
@@ -416,7 +430,7 @@ window.odkCommonDefinitions = {
         "farsi": "لغواستحقاق",
         "spanish": "Anular título"
       },
-      "_row_num": 39
+      "_row_num": 41
     },
     "search_beneficiaries": {
       "string_token": "search_beneficiaries",
@@ -427,7 +441,7 @@ window.odkCommonDefinitions = {
         "farsi": "جستجو برای ذینفع",
         "spanish": "Buscar beneficiarios"
       },
-      "_row_num": 40
+      "_row_num": 42
     },
     "search_deliveries": {
       "string_token": "search_deliveries",
@@ -438,7 +452,7 @@ window.odkCommonDefinitions = {
         "farsi": "جستجو برای تحویل",
         "spanish": "Buscar entregas"
       },
-      "_row_num": 41
+      "_row_num": 43
     },
     "beneficiary": {
       "string_token": "beneficiary",
@@ -449,7 +463,7 @@ window.odkCommonDefinitions = {
         "farsi": "ذینفع",
         "spanish": "Beneficiario/a"
       },
-      "_row_num": 42
+      "_row_num": 44
     },
     "beneficiaries": {
       "string_token": "beneficiaries",
@@ -460,7 +474,7 @@ window.odkCommonDefinitions = {
         "farsi": "ذینفع",
         "spanish": "Beneficiarios/as"
       },
-      "_row_num": 43
+      "_row_num": 45
     },
     "delivery": {
       "string_token": "delivery",
@@ -471,7 +485,7 @@ window.odkCommonDefinitions = {
         "farsi": "تحویل",
         "spanish": "Entrega"
       },
-      "_row_num": 44
+      "_row_num": 46
     },
     "deliveries": {
       "string_token": "deliveries",
@@ -482,7 +496,7 @@ window.odkCommonDefinitions = {
         "farsi": "تحویل",
         "spanish": "Entregas"
       },
-      "_row_num": 45
+      "_row_num": 47
     },
     "found": {
       "string_token": "found",
@@ -493,7 +507,7 @@ window.odkCommonDefinitions = {
         "farsi": "مکتشف",
         "spanish": "Encontrado"
       },
-      "_row_num": 46
+      "_row_num": 48
     },
     "invalid_search": {
       "string_token": "invalid_search",
@@ -504,7 +518,7 @@ window.odkCommonDefinitions = {
         "farsi": "جستجو نامعتبر",
         "spanish": "Búsqueda inválida"
       },
-      "_row_num": 47
+      "_row_num": 49
     },
     "authorization_name": {
       "string_token": "authorization_name",
@@ -515,7 +529,7 @@ window.odkCommonDefinitions = {
         "farsi": "توزیع نام",
         "spanish": "Nombre de la distribución"
       },
-      "_row_num": 48
+      "_row_num": 50
     },
     "authorization_id": {
       "string_token": "authorization_id",
@@ -526,7 +540,7 @@ window.odkCommonDefinitions = {
         "farsi": "شماره توزیع",
         "spanish": "ID de la distribución"
       },
-      "_row_num": 49
+      "_row_num": 51
     },
     "item_pack_name": {
       "string_token": "item_pack_name",
@@ -537,7 +551,7 @@ window.odkCommonDefinitions = {
         "farsi": "نام بسته",
         "spanish": "Nombre del artículo"
       },
-      "_row_num": 50
+      "_row_num": 52
     },
     "item_pack_description": {
       "string_token": "item_pack_description",
@@ -548,7 +562,7 @@ window.odkCommonDefinitions = {
         "farsi": "شرح بسته",
         "spanish": "Descripción del artículo"
       },
-      "_row_num": 51
+      "_row_num": 53
     },
     "item_pack_id": {
       "string_token": "item_pack_id",
@@ -559,7 +573,7 @@ window.odkCommonDefinitions = {
         "farsi": "شماره بسته",
         "spanish": "ID del artículo"
       },
-      "_row_num": 52
+      "_row_num": 54
     },
     "beneficiary_code": {
       "string_token": "beneficiary_code",
@@ -570,7 +584,7 @@ window.odkCommonDefinitions = {
         "farsi": "کد ذینفع",
         "spanish": "Código de beneficiario"
       },
-      "_row_num": 53
+      "_row_num": 55
     },
     "no_authorizations": {
       "string_token": "no_authorizations",
@@ -581,175 +595,189 @@ window.odkCommonDefinitions = {
         "farsi": "بدون توزیع",
         "spanish": "Sin distribuciones"
       },
-      "_row_num": 54
+      "_row_num": 56
     },
     "view_household_data": {
       "string_token": "view_household_data",
       "text": {
         "default": "View Household Data"
       },
-      "_row_num": 55
+      "_row_num": 57
     },
     "enabled_households": {
       "string_token": "enabled_households",
       "text": {
         "default": "Enabled Households"
       },
-      "_row_num": 56
+      "_row_num": 58
     },
     "disabled_households": {
       "string_token": "disabled_households",
       "text": {
         "default": "Disabled Households"
       },
-      "_row_num": 57
+      "_row_num": 59
     },
     "enabled_beneficiaries": {
       "string_token": "enabled_beneficiaries",
       "text": {
         "default": "Enabled Beneficiaries"
       },
-      "_row_num": 58
+      "_row_num": 60
     },
     "disabled_beneficiaries": {
       "string_token": "disabled_beneficiaries",
       "text": {
         "default": "Disabled Beneficiaries"
       },
-      "_row_num": 59
+      "_row_num": 61
     },
     "household": {
       "string_token": "household",
       "text": {
         "default": "household"
       },
-      "_row_num": 60
+      "_row_num": 62
     },
     "households": {
       "string_token": "households",
       "text": {
         "default": "households"
       },
-      "_row_num": 61
+      "_row_num": 63
     },
     "individual": {
       "string_token": "individual",
       "text": {
         "default": "individual"
       },
-      "_row_num": 62
+      "_row_num": 64
     },
     "individuals": {
       "string_token": "individuals",
       "text": {
         "default": "individuals"
       },
-      "_row_num": 63
+      "_row_num": 65
     },
     "registration_data": {
       "string_token": "registration_data",
       "text": {
         "default": "Registration Data"
       },
-      "_row_num": 64
+      "_row_num": 66
     },
     "search_households": {
       "string_token": "search_households",
       "text": {
         "default": "Search for Households"
       },
-      "_row_num": 65
+      "_row_num": 67
     },
     "search_individuals": {
       "string_token": "search_individuals",
       "text": {
         "default": "Search for Individuals"
       },
-      "_row_num": 66
+      "_row_num": 68
     },
     "search_individuals_title": {
       "string_token": "search_individuals_title",
       "text": {
         "default": "Individual Advanced Search"
       },
-      "_row_num": 67
+      "_row_num": 69
     },
     "search_households_title": {
       "string_token": "search_households_title",
       "text": {
         "default": "Household Advanced Search"
       },
-      "_row_num": 68
+      "_row_num": 70
     },
     "search_beneficiaries_title": {
       "string_token": "search_beneficiaries_title",
       "text": {
         "default": "Beneficiaries Advanced Search"
       },
-      "_row_num": 69
+      "_row_num": 71
     },
     "delivery_site": {
       "string_token": "delivery_site",
       "text": {
         "default": "Delivery Site"
       },
-      "_row_num": 70
+      "_row_num": 72
     },
     "household_size": {
       "string_token": "household_size",
       "text": {
         "default": "Household Size"
       },
-      "_row_num": 71
+      "_row_num": 73
     },
     "tent_caravan": {
       "string_token": "tent_caravan",
       "text": {
         "default": "Tent/Caravan Code"
       },
-      "_row_num": 72
+      "_row_num": 74
     },
     "email": {
       "string_token": "email",
       "text": {
         "default": "Email"
       },
-      "_row_num": 73
+      "_row_num": 75
     },
     "household_head": {
       "string_token": "household_head",
       "text": {
         "default": "Household Head"
       },
-      "_row_num": 74
+      "_row_num": 76
     },
     "vulnerability": {
       "string_token": "vulnerability",
       "text": {
         "default": "Vulnerability Critieria"
       },
-      "_row_num": 75
+      "_row_num": 77
     },
     "view_registration_data": {
       "string_token": "view_registration_data",
       "text": {
         "default": "View Registration Data"
       },
-      "_row_num": 76
+      "_row_num": 78
     },
     "view": {
       "string_token": "view",
       "text": {
         "default": "View"
       },
-      "_row_num": 77
+      "_row_num": 79
     },
     "select_group": {
       "string_token": "select_group",
       "text": {
         "default": "Please Select Group"
       },
-      "_row_num": 78
+      "_row_num": 80
+    },
+    "change_entitlement_status": {
+      "string_token": "change_entitlement_status",
+      "text": {
+        "default": "Change Entitlement Status"
+      },
+      "_row_num": 81
+    },
+    "create_new_entitlement": {
+      "string_token": "create_new_entitlement",
+      "text": {
+        "default": "Create New Entitlement"
+      },
+      "_row_num": 82
     }
   },
   "_locales": {

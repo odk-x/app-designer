@@ -2,8 +2,8 @@
 <html>
     <head>
         <link href="../../../assets/css/detail_with_list.css" type="text/css" rel="stylesheet" />
-        <link href="../css/reg.css" type="text/css" rel="stylesheet" />
-        <link href="../css/radio_button.css" type="text/css" rel="stylesheet" />
+        <link href="../../../assets/css/reg.css" type="text/css" rel="stylesheet" />
+        <link href="../../../assets/css/radio_button.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
         <script type="text/javascript" src="../tableSpecificDefinitions.js"></script>
         <script type="text/javascript" src="../../../assets/libs/jquery-3.2.1.js"></script>
@@ -21,19 +21,14 @@
         </a>
         <br/>
         <h2 id="title"></h2>
-        <div class="switch-field" id="entitlements_switch" style="display:none">
-            <div class="switch-title" id="entitlements_title"></div>
-            <input type="radio" name="entitlements" id="entitlements_pending" checked="true"/>
-            <label for="entitlements_pending" id="pending_txt"></label>
-            <input type="radio" name="entitlements" id="entitlements_delivered"/>
-            <label for="entitlements_delivered" id="delivered_txt"></label>
+        <div class="switch-field" id="switch-id" style="display:none">
+            <div class="switch-title" id="switch-title-id"></div>
+            <input type="radio" name="option" id="left"/>
+            <label for="left" id="left_txt"></label>
+            <input type="radio" name="option" id="right"/>
+            <label for="right" id="right_txt"></label>
         </div>
         <div id="field_list"></div>
-
-        <br/>
-
-        <button id="followup" style="display:none"></button>
-        <p><span id="message"></span></p>
         <script>
           $(util.renderPageAsPromise(display));
         </script>
