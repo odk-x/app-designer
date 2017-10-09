@@ -79,7 +79,7 @@ util.entitlementTable = 'entitlements';
 util.deliveryTable = 'deliveries';
 util.authorizationReportTable = 'authorization_reports';
 util.savepointSuccess = "COMPLETE";
-util.configPath = '../json/config.json';
+util.configPath = odkCommon.getBaseUrl() + 'config/assets/config.json';
 util.actionTypeKey = 'actionTypeKey';
 
 util.rootRowIdKey = 'rootRowId';
@@ -93,28 +93,63 @@ util.additionalCustomFormsObj.valueKey = "value";
 
 /************************** Red cross config getters *********************************/
 
+var configSingleton;
+
+async: false
+
+$.ajax({
+    url: util.configPath,
+    success: function( json ) {
+        configSingleton = JSON.parse(json);
+        util.getRegistrationMode = function() {
+            return configSingleton['REGISTRATION_MODE'];
+        };
+
+        util.getWorkflowMode = function() {
+            return configSingleton['WORKFLOW_MODE'];
+        };
+
+        util.getBeneficiaryEntityCustomFormId = function() {
+            return configSingleton['BENEFICIARY_ENTITY_CUSTOM_FORM_ID'];
+        };
+
+        util.getIndividualCustomFormId = function() {
+            return configSingleton['INDIVIDUAL_CUSTOM_FORM_ID'];
+        };
+
+        util.getTokenAuthorizationFormId = function() {
+            return 'authorizations';
+        };
+
+        util.getCustomBeneficiaryRowIdColumn = function() {
+            return configSingleton['CUSTOM_BENEFICIARY_ROW_ID_COLUMN'];
+        };
+    },
+    async: false
+});
+
 util.getRegistrationMode = function() {
-    return 'HOUSEHOLD';
+    return configSingleton['REGISTRATION_MODE'];
 };
 
 util.getWorkflowMode = function() {
-    return 'REGISTRATION_REQUIRED';
+    return configSingleton['WORKFLOW_MODE'];
 };
 
 util.getBeneficiaryEntityCustomFormId = function() {
-    return 'custom_beneficiary_entities';
+    return configSingleton['BENEFICIARY_ENTITY_CUSTOM_FORM_ID'];
 };
 
 util.getIndividualCustomFormId = function() {
-    return 'custom_individuals';
-};
-
-util.getAuthorizationReportCustomFormId = function() {
-    return 'custom_authorization_reports';
+    return configSingleton['INDIVIDUAL_CUSTOM_FORM_ID'];
 };
 
 util.getTokenAuthorizationFormId = function() {
     return 'authorizations';
+};
+
+util.getCustomBeneficiaryRowIdColumn = function() {
+    return configSingleton['CUSTOM_BENEFICIARY_ROW_ID_COLUMN'];
 };
 
 

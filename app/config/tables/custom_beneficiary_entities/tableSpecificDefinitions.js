@@ -2,102 +2,73 @@ window.odkTableSpecificDefinitions = {
   "_tokens": {
     "address": {
       "string_token": "address",
-      "text": {
-        "default": "Address",
-        "greek": "Διεύθυνση",
-        "arabic": "العنوان",
-        "farsi": "نشانی",
-        "spanish": "Dirección"
-      },
+      "text": "Address",
       "_row_num": 2
     },
     "id_number": {
       "string_token": "id_number",
-      "text": {
-        "default": "ID Number",
-        "greek": "Αριθμό ταυτότητας",
-        "arabic": "رقم الهوية",
-        "farsi": "شماره شناسایی",
-        "spanish": "Número de ID"
-      },
+      "text": "ID Number",
       "_row_num": 3
     },
     "city": {
       "string_token": "city",
-      "text": {
-        "default": "City",
-        "greek": "Πόλη",
-        "arabic": "المدينة",
-        "farsi": "شهر",
-        "spanish": "Ciudad"
-      },
+      "text": "City",
       "_row_num": 4
     },
     "telephone": {
       "string_token": "telephone",
-      "text": {
-        "default": "Telephone",
-        "greek": "Τηλέφωνο",
-        "arabic": "رقم التليفون",
-        "farsi": "تلفن",
-        "spanish": "Teléfono"
-      },
+      "text": "Telephone",
       "_row_num": 5
     },
     "mobile_provider": {
       "string_token": "mobile_provider",
-      "text": {
-        "default": "Mobile Provider",
-        "greek": "Παροχέας κινητής τηλεφωνίας",
-        "arabic": "شركة الموبايل",
-        "farsi": "ارائه دهنده تلفن همراه",
-        "spanish": "Proveedor móvil"
-      },
+      "text": "Mobile Provider",
       "_row_num": 6
     },
     "enable_success": {
       "string_token": "enable_success",
-      "text": {
-        "default": "Successfully Enabled!",
-        "greek": "Επιτυχής!",
-        "arabic": "تم تمكينها بنجاح",
-        "farsi": "موفقیت فعال!",
-        "spanish": "Activado satisfactoriamente!"
-      },
+      "text": "Successfully Enabled!",
       "_row_num": 7
     },
     "disable_success": {
       "string_token": "disable_success",
-      "text": {
-        "default": "Successfully Disabled!",
-        "greek": "Επιτυχής Απενεργοποίηση!",
-        "arabic": "تم تعطيلها بنجاح",
-        "farsi": "موفقیت غیر فعال!",
-        "spanish": "Desactivado satisfactoriamente!"
-      },
+      "text": "Successfully Disabled!",
       "_row_num": 8
     },
     "choose_entitlement": {
       "string_token": "choose_entitlement",
-      "text": {
-        "default": "Choose an Entitlement To Deliver",
-        "greek": "Επιλέξτε ένα Δικαίωμα παράδοσης",
-        "arabic": "اختيار اتحقاق للتسليم",
-        "farsi": "انتخاب  به عنوان حق برای ارائه",
-        "spanish": "Elegir un título para distribuir"
-      },
+      "text": "Choose an Entitlement To Deliver",
       "_row_num": 9
     },
     "no_entitlements": {
       "string_token": "no_entitlements",
-      "text": {
-        "default": "No Entitlements to Deliver",
-        "greek": "Δεν υπάρχουν Δικαιώματα παράδοσης",
-        "arabic": "لا استحقاقات للتسليم",
-        "farsi": "تحویل بدون به  حقوق",
-        "spanish": "No hay títulos para entregar"
-      },
+      "text": "No Entitlements to Deliver",
       "_row_num": 10
+    },
+    "delivery_site": {
+      "string_token": "delivery_site",
+      "text": "Delivery Site",
+      "_row_num": 11
+    },
+    "hh_size": {
+      "string_token": "hh_size",
+      "text": "Household Size",
+      "_row_num": 12
+    },
+    "disabled_reason": {
+      "string_token": "disabled_reason",
+      "text": "Disabled Reason",
+      "_row_num": 13
+    },
+    "location": {
+      "string_token": "location",
+      "text": "Location",
+      "_row_num": 14
+    },
+    "tent_caravan": {
+      "string_token": "tent_caravan",
+      "text": "Tent/Caravan Code",
+      "_row_num": 15
     }
   }
 }

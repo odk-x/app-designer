@@ -22,12 +22,13 @@
             <div id="logo"><img src="../img/small_2025.jpg"></div>
         </div>
         <script>
-            //odkTables.launchHTML(null, "config/assets/test.html");
-            if (util.getWorkflowMode() == "TOKEN") {
-                $(util.renderPageAsPromise(tokenIndex.display));
-            } else if (util.getWorkflowMode() === "VOUCHER" || util.getWorkflowMode() === "REGISTRATION_REQUIRED") {
-                $(util.renderPageAsPromise(beneficiaryIndex.display));
-            }
+            $(function() {
+                if (util.getWorkflowMode() === "TOKEN") {
+                    $(util.renderPageAsPromise(tokenIndex.display));
+                } else if (util.getWorkflowMode() === "VOUCHER" || util.getWorkflowMode() === "REGISTRATION_REQUIRED") {
+                    $(util.renderPageAsPromise(beneficiaryIndex.display));
+                }
+            });
         </script>
     </body>
 </html>

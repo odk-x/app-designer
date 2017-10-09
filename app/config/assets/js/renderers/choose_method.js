@@ -240,7 +240,7 @@ function handleRegistrationCallback(action, dispatchStr) {
             var rootRowId = dispatchStr[util.rootRowIdKey];
             if (util.getRegistrationMode() === "HOUSEHOLD") {
                 var individualRowsPromise = new Promise( function(resolve, reject) {
-                    odkData.query(util.getIndividualCustomFormId(), 'custom_beneficiary_entity_row_id = ?', [action.jsonValue.result.instanceId],
+                    odkData.query(util.getIndividualCustomFormId(), util.getCustomBeneficiaryRowIdColumn() + ' = ?', [action.jsonValue.result.instanceId],
                         null, null, null, null, null, null, true, resolve, reject)
                 });
 

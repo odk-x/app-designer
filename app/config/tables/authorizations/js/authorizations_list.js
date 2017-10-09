@@ -126,8 +126,8 @@ var resumeFn = function(fIdxStart) {
                             null, null, null, null, null, null, true, resolve, reject);
                     }).then( function (result) {
                         if (result.getCount() > 0) {
-                            odkTables.editRowWithSurvey(null, util.getAuthorizationReportCustomFormId(),
-                                result.get('summary_row_id'), util.getAuthorizationReportCustomFormId(), null);
+                            odkTables.editRowWithSurvey(null, result.get('summary_form_id'),
+                                result.get('summary_row_id'), result.get('summary_form_id'), null);
                         } else {
                             var rootRowId = util.genUUID();
                             var customReportRowId = util.genUUID();

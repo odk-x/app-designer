@@ -110,7 +110,7 @@ let actionCBFn = function() {
 
     let dispatchStr = JSON.parse(action.dispatchStruct);
     if (dispatchStr === null || dispatchStr === undefined) {
-        console.log('E', LOG_TAG + 'Error: missing dispatch strct');
+        console.log('E', LOG_TAG + 'Error: missing dispatch struct');
         return;
     }
 
@@ -177,7 +177,7 @@ let displayGroup = function(idxStart, entitlementsResultSet) {
             });
 
             toggle.find('.right').attr('id', 'right' + '-' + i).attr('name', i);
-            toggle.find('.left_txt').attr('for', 'right' + '-' + i);
+            toggle.find('.right_txt').attr('for', 'right' + '-' + i);
             toggle.find('.right_txt').text('Disabled');
 
             toggle.find('#right' + '-' + i).click( {"index": i}, function(event) {

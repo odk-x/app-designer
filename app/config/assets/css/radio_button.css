@@ -44,6 +44,7 @@
     cursor: pointer;
 }
 
+
 .switch-field input:checked + label {
   background-color: #A5DC86;
   -webkit-box-shadow: none;
