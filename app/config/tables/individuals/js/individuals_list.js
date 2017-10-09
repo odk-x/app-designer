@@ -90,20 +90,26 @@ var displayGroup = function(idxStart) {
         item.attr('rowId', individualsResultSet.getRowId(i));
         item.attr('class', 'item_space');
         item.attr('id', individualsResultSet.getData(i, '_id'));
-        dbActions.push(new Promise( function(resolve, reject) {
+        if (i === 0) {
+            item.text('Name: ' + 'John Doe');
+        } else {
+            item.text('Name: ' + 'Sue Doe');
+        }
+        //TODO: fix
+        /*dbActions.push(new Promise( function(resolve, reject) {
             odkData.query(util.getIndividualCustomFormId(), '_id = ?', [individualsResultSet.getData(i, 'custom_individual_row_id')],
                 null, null, null, null, null, null, true, resolve, reject);
         }).then( function(customIndividualResult) {
             var first_last_name = customIndividualResult.getData(0, 'first_last_name');
-            item.text(odkCommon.localizeText(locale, 'name') + ": " + first_last_name);
-        }));
+            item.text('Name' + ": " + first_last_name);
+        }));*/
 
 
         /* Creates arrow icon (Nothing to edit here) */
-        var chevron = $('<img>');
+        /*var chevron = $('<img>');
         chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
-        item.append(chevron);
+        item.append(chevron);*/
 
         $('#list').append(item);
 

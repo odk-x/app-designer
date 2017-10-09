@@ -24,6 +24,21 @@ window.odkTableSpecificDefinitions = {
       "string_token": "scanned_item_pack",
       "text": "Scanned Item Pack",
       "_row_num": 6
+    },
+    "supply": {
+      "string_token": "supply",
+      "text": "Supply",
+      "_row_num": 7
+    },
+    "is_delivered": {
+      "string_token": "is_delivered",
+      "text": "Is Delivered",
+      "_row_num": 8
+    },
+    "entitlement_id": {
+      "string_token": "entitlement_id",
+      "text": "Entitlement ID",
+      "_row_num": 9
     }
   }
 }

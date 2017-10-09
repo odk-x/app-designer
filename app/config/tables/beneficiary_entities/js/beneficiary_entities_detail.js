@@ -20,7 +20,7 @@ function display() {
         //TODO: add translations entry for each column of all tables
         var exclusionList = ['consent_signature', 'location_accuracy',
          'location_altitude', 'location_latitude', 'location_longitude',
-          'consent_signature_contentType', 'consent_signature_uriFragment',];
+          'consent_signature_contentType', 'consent_signature_uriFragment'];
         util.populateDetailView(customBeneficiaryEntityResultSet, "field_list", locale, exclusionList);
         console.log(customBeneficiaryEntityResultSet.getColumns());
         return new Promise(function (resolve, reject) {

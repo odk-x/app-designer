@@ -109,10 +109,10 @@ var displayGroup = function(idxStart) {
         item.text('Beneficiary Entity ID: ' + beneficiary_entity_id);
 
         /* Creates arrow icon (Nothing to edit here) */
-        var chevron = $('<img>');
+        /*var chevron = $('<img>');
         chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
-        item.append(chevron);
+        item.append(chevron);*/
 
         /**
          * Adds other data/details in item space.

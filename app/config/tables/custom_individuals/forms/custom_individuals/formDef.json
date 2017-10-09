@@ -37,7 +37,7 @@
             "text": "First name"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 6
       },
       {
@@ -51,7 +51,7 @@
             "text": "Last name"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 7
       },
       {
@@ -77,7 +77,7 @@
           }
         },
         "values_list": "id_types_list",
-        "required": true,
+        "required": 1,
         "_row_num": 11
       },
       {
@@ -88,7 +88,7 @@
             "text": "What is your ID number?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 12
       },
       {
@@ -113,7 +113,7 @@
             "text": "What is your date of birth?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 16
       },
       {
@@ -125,7 +125,7 @@
           }
         },
         "values_list": "genders",
-        "required": true,
+        "required": 1,
         "_row_num": 17
       },
       {
@@ -159,7 +159,7 @@
           }
         },
         "values_list": "yes_no",
-        "required": true,
+        "required": 1,
         "_row_num": 22
       },
       {
@@ -191,7 +191,7 @@
           }
         },
         "values_list": "vulnerability_list",
-        "required": true,
+        "required": 1,
         "_row_num": 26
       },
       {
@@ -206,7 +206,7 @@
             "text": "Take a picture of the beneficiary."
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 28
       }
     ],
@@ -243,34 +243,84 @@
     ],
     "table_specific_translations": [
       {
-        "string_token": "id_number",
-        "text": "ID Number",
+        "string_token": "custom_beneficiary_entity_row_id",
+        "text": "Custom Beneficiary Entity Row ID",
         "_row_num": 2
       },
       {
-        "string_token": "id_type",
-        "text": "ID Type",
+        "string_token": "date_screened",
+        "text": "Date Screened",
         "_row_num": 3
       },
       {
-        "string_token": "gender",
-        "text": "Gender",
+        "string_token": "first_name",
+        "text": "First Name",
         "_row_num": 4
+      },
+      {
+        "string_token": "last_name",
+        "text": "Last Name",
+        "_row_num": 5
+      },
+      {
+        "string_token": "first_last_name",
+        "text": "First and Last Name",
+        "_row_num": 6
+      },
+      {
+        "string_token": "birth_date",
+        "text": "Birth Date",
+        "_row_num": 7
       },
       {
         "string_token": "age",
         "text": "Age",
-        "_row_num": 5
+        "_row_num": 8
+      },
+      {
+        "string_token": "gender",
+        "text": "Gender",
+        "_row_num": 9
+      },
+      {
+        "string_token": "id_type",
+        "text": "ID Type",
+        "_row_num": 10
+      },
+      {
+        "string_token": "id_number",
+        "text": "ID Number",
+        "_row_num": 11
       },
       {
         "string_token": "beneficiary_code",
         "text": "Beneficiary Code",
-        "_row_num": 6
+        "_row_num": 12
       },
       {
-        "string_token": "name",
-        "text": "Name",
-        "_row_num": 7
+        "string_token": "verify_user",
+        "text": "Verify User",
+        "_row_num": 13
+      },
+      {
+        "string_token": "is_head_of_household",
+        "text": "Is Head of Household",
+        "_row_num": 14
+      },
+      {
+        "string_token": "picture",
+        "text": "Picture",
+        "_row_num": 15
+      },
+      {
+        "string_token": "email",
+        "text": "Email",
+        "_row_num": 16
+      },
+      {
+        "string_token": "vulnerability",
+        "text": "Vulnerability",
+        "_row_num": 17
       }
     ],
     "model": [
@@ -332,7 +382,7 @@
       {
         "type": "string",
         "name": "verify_user",
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "_row_num": 13
       },
       {
@@ -855,35 +905,85 @@
     },
     "table_specific_definitions": {
       "_tokens": {
-        "id_number": {
-          "string_token": "id_number",
-          "text": "ID Number",
+        "custom_beneficiary_entity_row_id": {
+          "string_token": "custom_beneficiary_entity_row_id",
+          "text": "Custom Beneficiary Entity Row ID",
           "_row_num": 2
         },
-        "id_type": {
-          "string_token": "id_type",
-          "text": "ID Type",
+        "date_screened": {
+          "string_token": "date_screened",
+          "text": "Date Screened",
           "_row_num": 3
         },
-        "gender": {
-          "string_token": "gender",
-          "text": "Gender",
+        "first_name": {
+          "string_token": "first_name",
+          "text": "First Name",
           "_row_num": 4
+        },
+        "last_name": {
+          "string_token": "last_name",
+          "text": "Last Name",
+          "_row_num": 5
+        },
+        "first_last_name": {
+          "string_token": "first_last_name",
+          "text": "First and Last Name",
+          "_row_num": 6
+        },
+        "birth_date": {
+          "string_token": "birth_date",
+          "text": "Birth Date",
+          "_row_num": 7
         },
         "age": {
           "string_token": "age",
           "text": "Age",
-          "_row_num": 5
+          "_row_num": 8
+        },
+        "gender": {
+          "string_token": "gender",
+          "text": "Gender",
+          "_row_num": 9
+        },
+        "id_type": {
+          "string_token": "id_type",
+          "text": "ID Type",
+          "_row_num": 10
+        },
+        "id_number": {
+          "string_token": "id_number",
+          "text": "ID Number",
+          "_row_num": 11
         },
         "beneficiary_code": {
           "string_token": "beneficiary_code",
           "text": "Beneficiary Code",
-          "_row_num": 6
+          "_row_num": 12
         },
-        "name": {
-          "string_token": "name",
-          "text": "Name",
-          "_row_num": 7
+        "verify_user": {
+          "string_token": "verify_user",
+          "text": "Verify User",
+          "_row_num": 13
+        },
+        "is_head_of_household": {
+          "string_token": "is_head_of_household",
+          "text": "Is Head of Household",
+          "_row_num": 14
+        },
+        "picture": {
+          "string_token": "picture",
+          "text": "Picture",
+          "_row_num": 15
+        },
+        "email": {
+          "string_token": "email",
+          "text": "Email",
+          "_row_num": 16
+        },
+        "vulnerability": {
+          "string_token": "vulnerability",
+          "text": "Vulnerability",
+          "_row_num": 17
         }
       }
     },
@@ -1072,7 +1172,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "verify_user"
       },
       "is_head_of_household": {
@@ -1187,7 +1287,7 @@
                 "text": "First name"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -1206,7 +1306,7 @@
                 "text": "Last name"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
@@ -1223,7 +1323,7 @@
               }
             },
             "values_list": "id_types_list",
-            "required": true,
+            "required": 1,
             "_row_num": 11,
             "__rowNum__": 10,
             "_token_type": "prompt",
@@ -1239,7 +1339,7 @@
                 "text": "What is your ID number?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 12,
             "__rowNum__": 11,
             "_token_type": "prompt",
@@ -1266,7 +1366,7 @@
                 "text": "What is your date of birth?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 16,
             "__rowNum__": 15,
             "_token_type": "prompt",
@@ -1283,7 +1383,7 @@
               }
             },
             "values_list": "genders",
-            "required": true,
+            "required": 1,
             "_row_num": 17,
             "__rowNum__": 16,
             "_token_type": "prompt",
@@ -1314,7 +1414,7 @@
               }
             },
             "values_list": "yes_no",
-            "required": true,
+            "required": 1,
             "_row_num": 22,
             "__rowNum__": 21,
             "_token_type": "prompt",
@@ -1346,7 +1446,7 @@
               }
             },
             "values_list": "vulnerability_list",
-            "required": true,
+            "required": 1,
             "_row_num": 26,
             "__rowNum__": 25,
             "_token_type": "prompt",
@@ -1362,7 +1462,7 @@
                 "text": "Take a picture of the beneficiary."
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 28,
             "__rowNum__": 27,
             "_token_type": "prompt",
@@ -1867,7 +1967,7 @@
             "section_name": "model"
           }
         ],
-        "isSessionVariable": true,
+        "isSessionVariable": 1,
         "elementKey": "verify_user",
         "elementName": "verify_user",
         "elementSet": "data",

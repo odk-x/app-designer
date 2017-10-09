@@ -193,10 +193,10 @@ let displayGroup = function(idxStart, entitlementsResultSet) {
             toggle.show();
             item.append(toggle);
         } else {
-            let chevron = $('<img>');
+            /*let chevron = $('<img>');
             chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
             chevron.attr('class', 'chevron');
-            item.append(chevron);
+            item.append(chevron);*/
         }
 
 

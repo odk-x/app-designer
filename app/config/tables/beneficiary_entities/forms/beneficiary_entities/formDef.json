@@ -5,7 +5,7 @@
         "type": "note",
         "display": {
           "prompt": {
-            "text": "We are not giving volunteers the ability to create or edit authorizations"
+            "text": "Base table should never be filled with survey"
           }
         },
         "_row_num": 2
@@ -74,76 +74,36 @@
         "_row_num": 7
       }
     ],
-    "choices": [
+    "table_specific_translations": [
       {
-        "choice_list_name": "genders",
-        "data_value": "Male",
-        "display": {
-          "title": {
-            "text": "Male"
-          }
-        },
+        "string_token": "beneficiary_entity_id",
+        "text": "Beneficiary Entity ID",
         "_row_num": 2
       },
       {
-        "choice_list_name": "genders",
-        "data_value": "Female",
-        "display": {
-          "title": {
-            "text": "Female"
-          }
-        },
+        "string_token": "date_created",
+        "text": "Date Created",
         "_row_num": 3
       },
       {
-        "choice_list_name": "sites",
-        "data_value": "Ritsona",
-        "display": {
-          "title": {
-            "text": "Ritsona"
-          }
-        },
+        "string_token": "custom_beneficiary_entity_form_id",
+        "text": "Custom Beneficiary Entity Form ID",
+        "_row_num": 4
+      },
+      {
+        "string_token": "custom_beneficiary_entity_row_id",
+        "text": "Custom Beneficiary Entity Row ID",
         "_row_num": 5
       },
       {
-        "choice_list_name": "sites",
-        "data_value": "Skaramagas",
-        "display": {
-          "title": {
-            "text": "Skaramagas"
-          }
-        },
+        "string_token": "status",
+        "text": "Status",
         "_row_num": 6
       },
       {
-        "choice_list_name": "sites",
-        "data_value": "Nea Kavala",
-        "display": {
-          "title": {
-            "text": "Nea Kavala"
-          }
-        },
+        "string_token": "status_reason",
+        "text": "Status Reason",
         "_row_num": 7
-      },
-      {
-        "choice_list_name": "sites",
-        "data_value": "Softex",
-        "display": {
-          "title": {
-            "text": "Softex"
-          }
-        },
-        "_row_num": 8
-      },
-      {
-        "choice_list_name": "sites",
-        "data_value": "Athens",
-        "display": {
-          "title": {
-            "text": "Athens"
-          }
-        },
-        "_row_num": 9
       }
     ],
     "properties": [
@@ -240,84 +200,40 @@
         "_row_num": 5
       }
     },
-    "choices": {
-      "genders": [
-        {
-          "choice_list_name": "genders",
-          "data_value": "Male",
-          "display": {
-            "title": {
-              "text": "Male"
-            }
-          },
+    "choices": {},
+    "table_specific_definitions": {
+      "_tokens": {
+        "beneficiary_entity_id": {
+          "string_token": "beneficiary_entity_id",
+          "text": "Beneficiary Entity ID",
           "_row_num": 2
         },
-        {
-          "choice_list_name": "genders",
-          "data_value": "Female",
-          "display": {
-            "title": {
-              "text": "Female"
-            }
-          },
+        "date_created": {
+          "string_token": "date_created",
+          "text": "Date Created",
           "_row_num": 3
-        }
-      ],
-      "sites": [
-        {
-          "choice_list_name": "sites",
-          "data_value": "Ritsona",
-          "display": {
-            "title": {
-              "text": "Ritsona"
-            }
-          },
+        },
+        "custom_beneficiary_entity_form_id": {
+          "string_token": "custom_beneficiary_entity_form_id",
+          "text": "Custom Beneficiary Entity Form ID",
+          "_row_num": 4
+        },
+        "custom_beneficiary_entity_row_id": {
+          "string_token": "custom_beneficiary_entity_row_id",
+          "text": "Custom Beneficiary Entity Row ID",
           "_row_num": 5
         },
-        {
-          "choice_list_name": "sites",
-          "data_value": "Skaramagas",
-          "display": {
-            "title": {
-              "text": "Skaramagas"
-            }
-          },
+        "status": {
+          "string_token": "status",
+          "text": "Status",
           "_row_num": 6
         },
-        {
-          "choice_list_name": "sites",
-          "data_value": "Nea Kavala",
-          "display": {
-            "title": {
-              "text": "Nea Kavala"
-            }
-          },
+        "status_reason": {
+          "string_token": "status_reason",
+          "text": "Status Reason",
           "_row_num": 7
-        },
-        {
-          "choice_list_name": "sites",
-          "data_value": "Softex",
-          "display": {
-            "title": {
-              "text": "Softex"
-            }
-          },
-          "_row_num": 8
-        },
-        {
-          "choice_list_name": "sites",
-          "data_value": "Athens",
-          "display": {
-            "title": {
-              "text": "Athens"
-            }
-          },
-          "_row_num": 9
         }
-      ]
-    },
-    "table_specific_definitions": {
-      "_tokens": {}
+      }
     },
     "queries": {},
     "calculates": {},
@@ -397,7 +313,7 @@
             "type": "note",
             "display": {
               "prompt": {
-                "text": "We are not giving volunteers the ability to create or edit authorizations"
+                "text": "Base table should never be filled with survey"
               }
             },
             "_row_num": 2,

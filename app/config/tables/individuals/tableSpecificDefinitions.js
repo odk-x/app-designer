@@ -1,34 +1,44 @@
 window.odkTableSpecificDefinitions = {
   "_tokens": {
-    "id_number": {
-      "string_token": "id_number",
-      "text": "ID Number",
+    "beneficiary_entity_row_id": {
+      "string_token": "beneficiary_entity_row_id",
+      "text": "Beneficiary Entity Row ID",
       "_row_num": 2
     },
-    "id_type": {
-      "string_token": "id_type",
-      "text": "ID Type",
+    "beneficiary_entity_status": {
+      "string_token": "beneficiary_entity_status",
+      "text": "Beneficiary Entity Status",
       "_row_num": 3
     },
-    "gender": {
-      "string_token": "gender",
-      "text": "Gender",
+    "date_created": {
+      "string_token": "date_created",
+      "text": "Date Created",
       "_row_num": 4
     },
-    "age": {
-      "string_token": "age",
-      "text": "Age",
+    "individual_id": {
+      "string_token": "individual_id",
+      "text": "Individual ID",
       "_row_num": 5
     },
-    "beneficiary_code": {
-      "string_token": "beneficiary_code",
-      "text": "Beneficiary Code",
+    "custom_individual_form_id": {
+      "string_token": "custom_individual_form_id",
+      "text": "Custom Individual Form ID",
       "_row_num": 6
     },
-    "name": {
-      "string_token": "name",
-      "text": "Name",
+    "custom_individual_row_id": {
+      "string_token": "custom_individual_row_id",
+      "text": "Custom Individual Row ID",
       "_row_num": 7
+    },
+    "status": {
+      "string_token": "status",
+      "text": "Status",
+      "_row_num": 8
+    },
+    "status_reason": {
+      "string_token": "status_reason",
+      "text": "Status Reason",
+      "_row_num": 9
     }
   }
 }

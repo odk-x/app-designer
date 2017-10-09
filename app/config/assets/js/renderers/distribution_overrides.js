@@ -3,7 +3,7 @@
 let locale = odkCommon.getPreferredLocale();
 
 function display() {
-
+    $('#title').text('Distribution Options');
     let newEntitlement = document.createElement("button");
     newEntitlement.setAttribute("id", "authorization");
     newEntitlement.innerHTML = odkCommon.localizeText(locale, "create_new_entitlement");;

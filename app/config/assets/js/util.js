@@ -54,6 +54,12 @@ util.setJSONMap = function(JSONMap, key, value) {
     }
 };
 
+var hardColumns = {'address' : 'Address', 'id_number' : 'ID Number', 'city' : 'City',
+ 'telephone' : 'Telephone Number', 'mobile_provider' : 'Mobile Provider',
+    'delivery_site' : 'Delivery Site', 'hh_size' : 'Household Size',
+'disabled_reason' : 'Disabled Reason', 'location' : 'Location',
+'tent_caravan' : 'Tent/Caravan Code', 'date_screened' : 'Date Screened'};
+
 util.populateDetailView = function(resultSet, parentDiv, locale, exclusionList) {
     if (resultSet.getCount() > 0) {
         var columns = resultSet.getColumns();
@@ -62,7 +68,11 @@ util.populateDetailView = function(resultSet, parentDiv, locale, exclusionList) 
             if (!columns[i].startsWith("_") && !exclusionList.includes(columns[i])) {
                 var line = $('<p>').attr('id', columns[i]).appendTo(fieldListDiv);
                 $('<span>').attr('id', 'inner' + columns[i]).text(resultSet.get(columns[i])).appendTo(line);
-                line.prepend(odkCommon.localizeText(locale, columns[i]) + ": ");
+                if (hardColumns[columns[i]] !== undefined) {
+                    line.prepend(hardColumns[columns[i]] + ": ");
+                } else {
+                    line.prepend(odkCommon.localizeText(locale, columns[i]) + ": ");
+                }
             }
         }
     }
