@@ -291,6 +291,97 @@
                                  intentArgs );
     },
 
+    openTableToNavigateView : function(dispatchStruct, tableId, sqlWhereClause,
+                                       sqlSelectionArgs, defaultRowId, relativePath) {
+      this.assertOpenTypes('openTableToNavigateView()',
+                           tableId,
+                           sqlWhereClause,
+                           sqlSelectionArgs,
+                           relativePath);
+      if (arguments.length > 6) {
+        throw 'openTableToNavigateView()--too many arguments';
+      }
+
+      // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+      var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null :
+        JSON.stringify(sqlSelectionArgs);
+      var extrasBundle = { sqlWhereClause: sqlWhereClause,
+        // pass as JSON string so we can bind integers, numerics and booleans
+        sqlSelectionArgs: sqlSelectionArgsJSON,
+        // sqlGroupByArgs:
+        // sqlHavingClause:
+        // sqlOrderByElementKey:
+        // sqlOrderByDirection:
+        // appName: // automatically supplied for org.opendatakit activities
+        tableId: tableId,
+        defaultRowId: defaultRowId,
+        tableDisplayViewType: 'NAVIGATE',
+        queryType: 'SimpleQuery',
+        // filename:
+      };
+
+      if ( relativePath !== null && relativePath !== undefined ) {
+        extrasBundle.filename = relativePath;
+      }
+
+      var intentArgs = {
+        extras: extrasBundle,
+        // uri:      // set the data field of intent to this
+        // data:     // unless data is supplied -- that takes precedence
+        // type:     // set the intent type to this value
+        // package:  // set the intent package to this value
+      };
+
+      return odkCommon.doAction( dispatchStruct,
+                                 "org.opendatakit.tables.activities.TableDisplayActivity",
+                                 intentArgs );
+    },
+
+    openTableToNavigateViewArbitraryQuery : function(dispatchStruct, tableId, sqlCommand,
+                                  sqlSelectionArgs, defaultRowId, relativePath) {
+      this.assertOpenTypes('openTableToNavigateViewArbitraryQuery()',
+                           tableId,
+                           sqlCommand,
+                           sqlSelectionArgs,
+                           relativePath);
+      if (arguments.length > 6) {
+        throw 'openTableToNavigateViewArbitraryQuery()--too many arguments';
+      }
+
+      // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+      var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null :
+        JSON.stringify(sqlSelectionArgs);
+      var extrasBundle = { sqlCommand: sqlCommand,
+        // pass as JSON string so we can bind integers, numerics and booleans
+        sqlSelectionArgs: sqlSelectionArgsJSON,
+        // sqlGroupByArgs:
+        // sqlHavingClause:
+        // sqlOrderByElementKey:
+        // sqlOrderByDirection:
+        // appName: // automatically supplied for org.opendatakit activities
+        tableId: tableId,
+        defaultRowId: defaultRowId,
+        tableDisplayViewType: 'NAVIGATE',
+        queryType: 'ArbitraryQuery',
+        // filename:
+      };
+
+      if ( relativePath !== null && relativePath !== undefined ) {
+        extrasBundle.filename = relativePath;
+      }
+
+      var intentArgs = {
+        extras: extrasBundle,
+        // uri:      // set the data field of intent to this
+        // data:     // unless data is supplied -- that takes precedence
+        // type:     // set the intent type to this value
+        // package:  // set the intent package to this value
+      };
+
+      return odkCommon.doAction( dispatchStruct,
+                                 "org.opendatakit.tables.activities.TableDisplayActivity",
+                                 intentArgs );
+    },
 
     openTableToSpreadsheetView : function(dispatchStruct, tableId, sqlWhereClause,
                                           sqlSelectionArgs) {
