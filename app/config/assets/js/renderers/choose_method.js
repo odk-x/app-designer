@@ -263,6 +263,7 @@ function handleRegistrationCallback(action, dispatchStr) {
                         util.setJSONMap(jsonMap, 'custom_individual_form_id', util.getIndividualCustomFormId());
                         util.setJSONMap(jsonMap, 'custom_individual_row_id', customIndividualRows.getRowId(i));
                         util.setJSONMap(jsonMap, 'status', 'ENABLED');
+                        util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
 
                         addRowActions.push(new Promise( function(resolve, reject) {
                             odkData.addRow(util.individualTable, jsonMap, util.genUUID(), resolve, reject);
@@ -459,6 +460,7 @@ function registrationVoucherCBSuccess(result) {
             struct['_group_modify'] = defaultGroup;
             struct['_default_access'] = 'HIDDEN';
             struct['_row_owner'] = user;
+            struct['date_created'] = util.getCurrentOdkTimestamp();
             odkData.addRow(util.beneficiaryEntityTable, struct, rootRowId, resolve, reject);
         }).then( function(result) {
             var customDispatchStruct = {};
@@ -592,6 +594,7 @@ function createOverrideCBSuccess(result) {
     struct['_default_access'] = 'HIDDEN';
     struct['_row_owner'] = user;
     struct['_group_modify'] = defaultGroup;
+    struct['date_created'] = odkCommon.getCurrentOdkTimestamp();
     odkData.addRow(util.entitlementTable, struct, util.genUUID(), addDistCBSuccess, addDistCBFailure);
 }
 

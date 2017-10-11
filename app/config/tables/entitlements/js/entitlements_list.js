@@ -171,7 +171,6 @@ let displayGroup = function(idxStart, entitlementsResultSet) {
             toggle.find('.left').attr('id', 'left' + '-' + i).attr('name', i);
             toggle.find('.left_txt').attr('for', 'left' + '-' + i);
             toggle.find('.left_txt').text('Enabled');
-        //TODO: fix
             toggle.find('#left' + '-' + i).click( {"index": i}, function(event) {
                 return changeStatusPromise(entitlementsResultSet.getRowId(event.data.index), 'ENABLED');
             });

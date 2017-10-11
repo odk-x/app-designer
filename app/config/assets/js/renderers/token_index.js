@@ -61,7 +61,11 @@ tokenIndex.display = function() {
                             }));
 
                             dbActions.push(new Promise(function(resolve, reject) {
-                                odkData.addRow(util.authorizationTable, {'status' : 'ACTIVE', 'type' : 'TOKEN'}, util.genUUID(),
+                                let jsonMap = {};
+                                util.setJSONMap(jsonMap, 'status', 'ACTIVE');
+                                util.setJSONMap(jsonMap, 'type', 'TOKEN');
+                                util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
+                                odkData.addRow(util.authorizationTable, jsonMap , util.genUUID(),
                                     resolve, reject);
                             }));
                             return Promise.all(dbActions);
@@ -70,11 +74,11 @@ tokenIndex.display = function() {
                         });
                     }
                 }
-            }
+            };
             document.getElementById("wrapper").appendChild(override);
         }
     });
-}
+};
 
 tokenIndex.callBackFn = function() {
     var action = odkCommon.viewFirstQueuedAction();

@@ -29,7 +29,7 @@ beneficiaryIndex.display = function() {
                              + encodeURIComponent(odkCommon.localizeText(locale,
                                                                          registrationTitleToken))
                              + '&type=registration');
-    }
+    };
     document.getElementById("wrapper").appendChild(newClient);
 
     var followUp = document.createElement("button");
@@ -41,7 +41,7 @@ beneficiaryIndex.display = function() {
                              + encodeURIComponent(odkCommon.localizeText(locale,
                                                                          deliveryTitleToken))
                              +'&type=delivery');
-    }
+    };
     document.getElementById("wrapper").appendChild(followUp);
 
     var viewData = document.createElement("button");
@@ -50,7 +50,7 @@ beneficiaryIndex.display = function() {
     viewData.onclick = function() {
         odkTables.launchHTML(null,
                              'config/assets/html/data_start.html');
-    }
+    };
     document.getElementById("wrapper").appendChild(viewData);
 
     // Create a overrides if user is a tables superuser
@@ -67,12 +67,12 @@ beneficiaryIndex.display = function() {
                 override.onclick = function() {
                     odkTables.launchHTML(null,
                                          'config/assets/html/overrides_start.html');
-                }
+                };
                 document.getElementById("wrapper").appendChild(override);
             }
         }).catch( function(reason) {
             console.log('roles failed with error: ' + error);
         });
-}
+};
 
 

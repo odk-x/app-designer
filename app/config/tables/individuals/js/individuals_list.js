@@ -75,9 +75,8 @@ var displayGroup = function(idxStart) {
         errorText.text('No beneficiaries found'); // TODO: Translate this
     }
 
-    var dbActions = [];
-
     /* Number of rows displayed per 'chunk' - can modify this value */
+    var dbActions = [];
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
         if (i >= individualsResultSet.getCount()) {
@@ -90,20 +89,20 @@ var displayGroup = function(idxStart) {
         item.attr('rowId', individualsResultSet.getRowId(i));
         item.attr('class', 'item_space');
         item.attr('id', individualsResultSet.getData(i, '_id'));
-        if (i === 0) {
-            item.text('Name: ' + 'John Doe');
-        } else {
-            item.text('Name: ' + 'Sue Doe');
-        }
-        //TODO: fix
-        /*dbActions.push(new Promise( function(resolve, reject) {
-            odkData.query(util.getIndividualCustomFormId(), '_id = ?', [individualsResultSet.getData(i, 'custom_individual_row_id')],
-                null, null, null, null, null, null, true, resolve, reject);
-        }).then( function(customIndividualResult) {
-            var first_last_name = customIndividualResult.getData(0, 'first_last_name');
-            item.text('Name' + ": " + first_last_name);
-        }));*/
 
+        setTimeout((function f(htmlItem, index) {
+            dbActions.push(new Promise( function(resolve, reject) {
+                console.log(index);
+                console.log(individualsResultSet.getData(index, 'custom_individual_row_id'));
+                odkData.query(util.getIndividualCustomFormId(), '_id = ?', [individualsResultSet.getData(index, 'custom_individual_row_id')],
+                    null, null, null, null, null, null, true, resolve, reject);
+            }).then( function(customIndividualResult) {
+                let first_last_name = customIndividualResult.getData(0, 'first_last_name');
+                htmlItem.text('Name' + ": " + first_last_name);
+            }));
+        })(item, i), 0);
+
+        //TODO: fix
 
         /* Creates arrow icon (Nothing to edit here) */
         /*var chevron = $('<img>');
@@ -117,8 +116,8 @@ var displayGroup = function(idxStart) {
         var borderDiv = $('<div>');
         borderDiv.addClass('divider');
         $('#list').append(borderDiv);
-
     }
+
 
     if (i < individualsResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);

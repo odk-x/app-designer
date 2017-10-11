@@ -54,6 +54,10 @@ util.setJSONMap = function(JSONMap, key, value) {
     }
 };
 
+util.getCurrentOdkTimestamp = function() {
+    return odkCommon.toOdkTimeStampFromDate(new Date());
+};
+
 var hardColumns = {'address' : 'Address', 'id_number' : 'ID Number', 'city' : 'City',
  'telephone' : 'Telephone Number', 'mobile_provider' : 'Mobile Provider',
     'delivery_site' : 'Delivery Site', 'hh_size' : 'Household Size',
@@ -351,6 +355,7 @@ dataUtil.addDeliveryRowByEntitlement = function(entitlementRow, customDeliveryFo
     util.setJSONMap(jsonMap, 'custom_delivery_form_id', customDeliveryFormId);
     util.setJSONMap(jsonMap, 'custom_delivery_row_id', customDeliveryRowId);
     util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
+    util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
 
     // Ori & Waylon will fix this
     //util.setJSONMap(jsonMap, 'assigned_code', entitlement_row.get('assigned_code'));
@@ -374,6 +379,8 @@ dataUtil.addDeliveryRowWithoutEntitlement = function(beneficiaryEntityId, author
     util.setJSONMap(jsonMap, 'custom_delivery_form_id', authorizationRow.get('custom_delivery_table'));
     util.setJSONMap(jsonMap, 'custom_delivery_row_id', customDeliveryRowId);
     util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
+    util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
+
 
     return new Promise(function(resolve, reject) {
         odkData.addRow(util.deliveryTable, jsonMap, util.genUUID(), resolve, reject);
