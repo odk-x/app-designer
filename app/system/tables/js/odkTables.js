@@ -292,13 +292,8 @@
     },
 
     openTableToNavigateView : function(dispatchStruct, tableId, sqlWhereClause,
-                                       sqlSelectionArgs, defaultRowId, relativePath) {
-      this.assertOpenTypes('openTableToNavigateView()',
-                           tableId,
-                           sqlWhereClause,
-                           sqlSelectionArgs,
-                           relativePath);
-      if (arguments.length > 6) {
+                                       sqlSelectionArgs, defaultRowId) {
+      if (arguments.length > 5) {
         throw 'openTableToNavigateView()--too many arguments';
       }
 
@@ -320,10 +315,6 @@
         // filename:
       };
 
-      if ( relativePath !== null && relativePath !== undefined ) {
-        extrasBundle.filename = relativePath;
-      }
-
       var intentArgs = {
         extras: extrasBundle,
         // uri:      // set the data field of intent to this
@@ -338,13 +329,8 @@
     },
 
     openTableToNavigateViewArbitraryQuery : function(dispatchStruct, tableId, sqlCommand,
-                                  sqlSelectionArgs, defaultRowId, relativePath) {
-      this.assertOpenTypes('openTableToNavigateViewArbitraryQuery()',
-                           tableId,
-                           sqlCommand,
-                           sqlSelectionArgs,
-                           relativePath);
-      if (arguments.length > 6) {
+                                  sqlSelectionArgs, defaultRowId) {
+      if (arguments.length > 5) {
         throw 'openTableToNavigateViewArbitraryQuery()--too many arguments';
       }
 
@@ -365,10 +351,6 @@
         queryType: 'ArbitraryQuery',
         // filename:
       };
-
-      if ( relativePath !== null && relativePath !== undefined ) {
-        extrasBundle.filename = relativePath;
-      }
 
       var intentArgs = {
         extras: extrasBundle,
