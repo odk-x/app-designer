@@ -491,7 +491,7 @@ window.listViewLogic = {
             var item = $('<li>');
             item.attr('rowId', resultSet.getRowId(i));
             item.attr('class', 'item_space');
-            item.text(that.createLabel(that.hdrLabel) + resultSet.getData(i, that.hdrColId));
+            item.text(that.createLabel(that.hdrLabel) + util.formatColIdForDisplay(that.hdrColId, i, resultSet, true));
 
             if (that.showEditAndDelButtons === false)  {
                 /* Creates arrow icon (Nothing to edit here) */
@@ -504,7 +504,7 @@ window.listViewLogic = {
             if (that.firstDetColId !== null && that.firstDetColId !== undefined && that.firstDetColId.length !== 0) {
                 var field1 = $('<li>');
                 field1.attr('class', 'detail');
-                var fDetail = resultSet.getData(i, that.firstDetColId);
+                var fDetail = util.formatColIdForDisplay(that.firstDetColId, i, resultSet, true);
                 field1.text(that.createLabel(that.firstDetLabel) + fDetail);
                 item.append(field1);
             }
@@ -565,7 +565,7 @@ window.listViewLogic = {
 
             if (that.secondDetColId !== null && that.secondDetColId !== undefined && that.secondDetColId.length !== 0) {
                 var field2 = $('<li>');
-                var sDetail = resultSet.getData(i, that.secondDetColId);
+                var sDetail = util.formatColIdForDisplay(that.secondDetColId, i, resultSet, true);
                 field2.attr('class', 'detail');
                 field2.text(that.createLabel(that.secondDetLabel) + sDetail);
                 item.append(field2);
@@ -737,10 +737,16 @@ window.listViewLogic = {
             odkCommon.setSessionVariable(that.searchKey, searchText);
             searchText = '%' + searchText + '%';
 
+            that.queryToRunParams = [];
+            if (that.listQueryParams !== null && that.listQueryParams !== undefined &&
+                that.listQueryParams.length > 0) {
+                that.queryToRunParams = that.queryToRunParams.concat(that.listQueryParams);
+            }
+
             var addSql = that.appendUriParamsToListQuery();
             var queryWithParams = that.listQuery + addSql;
             that.queryToRun = that.makeSearchQuery(queryWithParams);
-            that.queryToRunParams = that.getUriQueryParams();
+            that.queryToRunParams = that.queryToRunParams.concat(that.getUriQueryParams());
 
             // Count the number of ?'s in queryToRun and 
             // append that to queryToRunParams
@@ -775,10 +781,15 @@ window.listViewLogic = {
             searchText.length === 0) {
             odkCommon.setSessionVariable(that.searchKey, '');
 
-            that.queryToRunParams = that.getUriQueryParams();
+            that.queryToRunParams = [];
+            if (that.listQueryParams !== null && that.listQueryParams !== undefined &&
+                that.listQueryParams.length > 0) {
+                that.queryToRunParams = that.queryToRunParams.concat(that.listQueryParams);
+            }
 
             var addSql = that.appendUriParamsToListQuery();
             that.queryToRun = that.listQuery + addSql;
+            that.queryToRunParams = that.queryToRunParams.concat(that.getUriQueryParams());
 
             var queryToRunParts = {};
             queryToRunParts[that.queryStmt] = that.queryToRun;

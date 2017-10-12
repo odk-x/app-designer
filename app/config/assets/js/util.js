@@ -275,6 +275,45 @@ util.formatDate = function(txt) {
     return dateToUse;
 };
 
+util.formatColIdForDisplay = function(colId, index, resultSet, applyFormat) {
+    if (colId === null || colId === undefined ||
+        colId.length === 0) {
+        return;
+    }
+
+    if (resultSet.getCount() <= 0) {
+        return;
+    }
+
+    if (index < 0) {
+        return;
+    }
+
+    // Format for date
+    var meta = resultSet.getMetadata();
+    var elementMetadata = meta.dataTableModel[colId];
+    if (elementMetadata !== undefined && elementMetadata !== null && 
+        elementMetadata.elementType === 'date') {
+        var dateToUse = resultSet.getData(index, colId);
+        if (dateToUse !== null && dateToUse !== undefined) {
+            if (applyFormat) {
+                dateToUse = util.formatDate(dateToUse);
+            } 
+        } 
+        return dateToUse;
+    }
+
+    var textToDisplay = resultSet.getData(index, colId);
+    if (textToDisplay !== null && textToDisplay !== undefined && textToDisplay.length !== 0) {
+        if (applyFormat) {
+           textToDisplay = util.formatDisplayText(textToDisplay);
+        }
+ 
+        return textToDisplay;     
+    }
+
+};
+
 util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat) {
     if (idOfElement === null || idOfElement === undefined ||
         idOfElement.length === 0) {

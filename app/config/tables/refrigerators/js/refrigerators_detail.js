@@ -33,6 +33,9 @@ function cbSuccess(result) {
     if (access.indexOf('w') !== -1) {
         var editButton = $('#editFrigBtn');
         editButton.removeClass('hideButton');
+
+        var editStatusButton = $('#editFrigStatusBtn');
+        editStatusButton.removeClass('hideButton');
     }
 
     if (access.indexOf('d') !== -1) {
@@ -104,6 +107,12 @@ function onLinkClickFacility() {
 function onEditFrig() {
     if (!$.isEmptyObject(refrigeratorsResultSet)) {
         odkTables.editRowWithSurvey(null, refrigeratorsResultSet.getTableId(), refrigeratorsResultSet.getRowId(0), 'refrigerators', null, null);
+    }
+}
+
+function onEditFrigStatus() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+        odkTables.editRowWithSurvey(null, refrigeratorsResultSet.getTableId(), refrigeratorsResultSet.getRowId(0), 'refrigerator_status', null, null);
     }
 }
 

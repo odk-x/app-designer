@@ -900,6 +900,19 @@
       },
       {
         "choice_list_name": "service_priority_list",
+        "data_value": "not_applicable",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Not Applicable",
+              "es": "No Aplica"
+            }
+          }
+        },
+        "_row_num": 59
+      },
+      {
+        "choice_list_name": "service_priority_list",
         "data_value": "low",
         "display": {
           "title": {
@@ -909,7 +922,7 @@
             }
           }
         },
-        "_row_num": 59
+        "_row_num": 60
       },
       {
         "choice_list_name": "service_priority_list",
@@ -922,7 +935,7 @@
             }
           }
         },
-        "_row_num": 60
+        "_row_num": 61
       },
       {
         "choice_list_name": "service_priority_list",
@@ -932,19 +945,6 @@
             "text": {
               "default": "High",
               "es": "Alto"
-            }
-          }
-        },
-        "_row_num": 61
-      },
-      {
-        "choice_list_name": "service_priority_list",
-        "data_value": "not_applicable",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Not Applicable",
-              "es": "No Aplica"
             }
           }
         },
@@ -1894,6 +1894,19 @@
       "service_priority_list": [
         {
           "choice_list_name": "service_priority_list",
+          "data_value": "not_applicable",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Not Applicable",
+                "es": "No Aplica"
+              }
+            }
+          },
+          "_row_num": 59
+        },
+        {
+          "choice_list_name": "service_priority_list",
           "data_value": "low",
           "display": {
             "title": {
@@ -1903,7 +1916,7 @@
               }
             }
           },
-          "_row_num": 59
+          "_row_num": 60
         },
         {
           "choice_list_name": "service_priority_list",
@@ -1916,7 +1929,7 @@
               }
             }
           },
-          "_row_num": 60
+          "_row_num": 61
         },
         {
           "choice_list_name": "service_priority_list",
@@ -1926,19 +1939,6 @@
               "text": {
                 "default": "High",
                 "es": "Alto"
-              }
-            }
-          },
-          "_row_num": 61
-        },
-        {
-          "choice_list_name": "service_priority_list",
-          "data_value": "not_applicable",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Not Applicable",
-                "es": "No Aplica"
               }
             }
           },
@@ -3142,7 +3142,7 @@
         "_aspect": "maintenance_priority",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"low\",\"display\":{\"title\":{\"text\":{\"default\":\"Low\",\"es\":\"Bajo\"}}},\"_row_num\":59},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"medium\",\"display\":{\"title\":{\"text\":{\"default\":\"Medium\",\"es\":\"Medio\"}}},\"_row_num\":60},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"high\",\"display\":{\"title\":{\"text\":{\"default\":\"High\",\"es\":\"Alto\"}}},\"_row_num\":61},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Aplica\"}}},\"_row_num\":62}]"
+        "_value": "[{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Aplica\"}}},\"_row_num\":59},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"low\",\"display\":{\"title\":{\"text\":{\"default\":\"Low\",\"es\":\"Bajo\"}}},\"_row_num\":60},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"medium\",\"display\":{\"title\":{\"text\":{\"default\":\"Medium\",\"es\":\"Medio\"}}},\"_row_num\":61},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"high\",\"display\":{\"title\":{\"text\":{\"default\":\"High\",\"es\":\"Alto\"}}},\"_row_num\":62}]"
       },
       {
         "_partition": "Column",
