@@ -16,7 +16,13 @@ function cbFrigSuccess(result) {
     util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsData, true);
     util.showIdForDetail('#date_serviced', 'date_serviced', maintenanceLogsResultSet, true);
     util.showIdForDetail('#maint_type', 'type_of_maintenance', maintenanceLogsResultSet, true);
-    util.showIdForDetail('#spare_parts', 'spare_parts', maintenanceLogsResultSet, true);
+
+    var spareParts = maintenanceLogsResultSet.get('spare_parts');
+    if (spareParts !== null && spareParts !== undefined) {
+        $('#spare_parts').text(maintenanceLogsResultSet.get('spare_parts'));
+    }
+
+    util.showIdForDetail('#addtl_spare_parts', 'addtl_spare_parts', maintenanceLogsResultSet, true);
     util.showIdForDetail('#notes', 'notes', maintenanceLogsResultSet, false);
     
 }

@@ -204,19 +204,6 @@
       },
       {
         "choice_list_name": "common_spare_parts",
-        "data_value": "burner",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Burner",
-              "es": "Quemador"
-            }
-          }
-        },
-        "_row_num": 12
-      },
-      {
-        "choice_list_name": "common_spare_parts",
         "data_value": "charging_cylinder",
         "display": {
           "title": {
@@ -226,7 +213,7 @@
             }
           }
         },
-        "_row_num": 13
+        "_row_num": 12
       },
       {
         "choice_list_name": "common_spare_parts",
@@ -239,7 +226,7 @@
             }
           }
         },
-        "_row_num": 14
+        "_row_num": 13
       },
       {
         "choice_list_name": "common_spare_parts",
@@ -252,7 +239,7 @@
             }
           }
         },
-        "_row_num": 15
+        "_row_num": 14
       },
       {
         "choice_list_name": "common_spare_parts",
@@ -265,7 +252,7 @@
             }
           }
         },
-        "_row_num": 16
+        "_row_num": 15
       },
       {
         "choice_list_name": "common_spare_parts",
@@ -278,59 +265,7 @@
             }
           }
         },
-        "_row_num": 17
-      },
-      {
-        "choice_list_name": "common_spare_parts",
-        "data_value": "fuse",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Fuse",
-              "es": "Fusible"
-            }
-          }
-        },
-        "_row_num": 18
-      },
-      {
-        "choice_list_name": "common_spare_parts",
-        "data_value": "gas_regulator",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Gas Regulator",
-              "es": "Regulador de Gas"
-            }
-          }
-        },
-        "_row_num": 19
-      },
-      {
-        "choice_list_name": "common_spare_parts",
-        "data_value": "hose",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Hose",
-              "es": "Manguera"
-            }
-          }
-        },
-        "_row_num": 20
-      },
-      {
-        "choice_list_name": "common_spare_parts",
-        "data_value": "leak_detector",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Leak Detector",
-              "es": "Detector de Fugas"
-            }
-          }
-        },
-        "_row_num": 21
+        "_row_num": 16
       },
       {
         "choice_list_name": "common_spare_parts",
@@ -343,20 +278,7 @@
             }
           }
         },
-        "_row_num": 22
-      },
-      {
-        "choice_list_name": "common_spare_parts",
-        "data_value": "refrigerant",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Refrigerant",
-              "es": "Refrigerante"
-            }
-          }
-        },
-        "_row_num": 23
+        "_row_num": 17
       },
       {
         "choice_list_name": "common_spare_parts",
@@ -369,7 +291,7 @@
             }
           }
         },
-        "_row_num": 24
+        "_row_num": 18
       },
       {
         "choice_list_name": "common_spare_parts",
@@ -382,20 +304,7 @@
             }
           }
         },
-        "_row_num": 25
-      },
-      {
-        "choice_list_name": "common_spare_parts",
-        "data_value": "thermocouple",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Thermocouple",
-              "es": "Par Termoeléctrico"
-            }
-          }
-        },
-        "_row_num": 26
+        "_row_num": 19
       },
       {
         "choice_list_name": "common_spare_parts",
@@ -408,33 +317,7 @@
             }
           }
         },
-        "_row_num": 27
-      },
-      {
-        "choice_list_name": "common_spare_parts",
-        "data_value": "thermometer",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Thermometer",
-              "es": "Termómetro"
-            }
-          }
-        },
-        "_row_num": 28
-      },
-      {
-        "choice_list_name": "common_spare_parts",
-        "data_value": "voltage_regulator",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Voltage Regulator",
-              "es": "Regulador de Voltaje"
-            }
-          }
-        },
-        "_row_num": 29
+        "_row_num": 20
       }
     ],
     "queries": [
@@ -755,19 +638,6 @@
       "common_spare_parts": [
         {
           "choice_list_name": "common_spare_parts",
-          "data_value": "burner",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Burner",
-                "es": "Quemador"
-              }
-            }
-          },
-          "_row_num": 12
-        },
-        {
-          "choice_list_name": "common_spare_parts",
           "data_value": "charging_cylinder",
           "display": {
             "title": {
@@ -777,7 +647,7 @@
               }
             }
           },
-          "_row_num": 13
+          "_row_num": 12
         },
         {
           "choice_list_name": "common_spare_parts",
@@ -790,7 +660,7 @@
               }
             }
           },
-          "_row_num": 14
+          "_row_num": 13
         },
         {
           "choice_list_name": "common_spare_parts",
@@ -803,7 +673,7 @@
               }
             }
           },
-          "_row_num": 15
+          "_row_num": 14
         },
         {
           "choice_list_name": "common_spare_parts",
@@ -816,7 +686,7 @@
               }
             }
           },
-          "_row_num": 16
+          "_row_num": 15
         },
         {
           "choice_list_name": "common_spare_parts",
@@ -829,59 +699,7 @@
               }
             }
           },
-          "_row_num": 17
-        },
-        {
-          "choice_list_name": "common_spare_parts",
-          "data_value": "fuse",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Fuse",
-                "es": "Fusible"
-              }
-            }
-          },
-          "_row_num": 18
-        },
-        {
-          "choice_list_name": "common_spare_parts",
-          "data_value": "gas_regulator",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Gas Regulator",
-                "es": "Regulador de Gas"
-              }
-            }
-          },
-          "_row_num": 19
-        },
-        {
-          "choice_list_name": "common_spare_parts",
-          "data_value": "hose",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Hose",
-                "es": "Manguera"
-              }
-            }
-          },
-          "_row_num": 20
-        },
-        {
-          "choice_list_name": "common_spare_parts",
-          "data_value": "leak_detector",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Leak Detector",
-                "es": "Detector de Fugas"
-              }
-            }
-          },
-          "_row_num": 21
+          "_row_num": 16
         },
         {
           "choice_list_name": "common_spare_parts",
@@ -894,20 +712,7 @@
               }
             }
           },
-          "_row_num": 22
-        },
-        {
-          "choice_list_name": "common_spare_parts",
-          "data_value": "refrigerant",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Refrigerant",
-                "es": "Refrigerante"
-              }
-            }
-          },
-          "_row_num": 23
+          "_row_num": 17
         },
         {
           "choice_list_name": "common_spare_parts",
@@ -920,7 +725,7 @@
               }
             }
           },
-          "_row_num": 24
+          "_row_num": 18
         },
         {
           "choice_list_name": "common_spare_parts",
@@ -933,20 +738,7 @@
               }
             }
           },
-          "_row_num": 25
-        },
-        {
-          "choice_list_name": "common_spare_parts",
-          "data_value": "thermocouple",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Thermocouple",
-                "es": "Par Termoeléctrico"
-              }
-            }
-          },
-          "_row_num": 26
+          "_row_num": 19
         },
         {
           "choice_list_name": "common_spare_parts",
@@ -959,33 +751,7 @@
               }
             }
           },
-          "_row_num": 27
-        },
-        {
-          "choice_list_name": "common_spare_parts",
-          "data_value": "thermometer",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Thermometer",
-                "es": "Termómetro"
-              }
-            }
-          },
-          "_row_num": 28
-        },
-        {
-          "choice_list_name": "common_spare_parts",
-          "data_value": "voltage_regulator",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Voltage Regulator",
-                "es": "Regulador de Voltaje"
-              }
-            }
-          },
-          "_row_num": 29
+          "_row_num": 20
         }
       ]
     },
@@ -1790,7 +1556,7 @@
         "_aspect": "spare_parts",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"burner\",\"display\":{\"title\":{\"text\":{\"default\":\"Burner\",\"es\":\"Quemador\"}}},\"_row_num\":12},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"charging_cylinder\",\"display\":{\"title\":{\"text\":{\"default\":\"Charging Cylinder\",\"es\":\"Cilindro de carga\"}}},\"_row_num\":13},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"condenser_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Condenser Fan\",\"es\":\"Ventilador Condensador\"}}},\"_row_num\":14},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"door_gasket\",\"display\":{\"title\":{\"text\":{\"default\":\"Door Gasket\",\"es\":\"La Junta de la Puerta\"}}},\"_row_num\":15},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"electric_compressor\",\"display\":{\"title\":{\"text\":{\"default\":\"Electric Compressor\",\"es\":\"Compresor Eléctrico\"}}},\"_row_num\":16},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"fridge_tag\",\"display\":{\"title\":{\"text\":{\"default\":\"Fridge Tag\",\"es\":\"Etiqueta Frigorífico\"}}},\"_row_num\":17},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"fuse\",\"display\":{\"title\":{\"text\":{\"default\":\"Fuse\",\"es\":\"Fusible\"}}},\"_row_num\":18},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"gas_regulator\",\"display\":{\"title\":{\"text\":{\"default\":\"Gas Regulator\",\"es\":\"Regulador de Gas\"}}},\"_row_num\":19},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"hose\",\"display\":{\"title\":{\"text\":{\"default\":\"Hose\",\"es\":\"Manguera\"}}},\"_row_num\":20},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"leak_detector\",\"display\":{\"title\":{\"text\":{\"default\":\"Leak Detector\",\"es\":\"Detector de Fugas\"}}},\"_row_num\":21},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"relay\",\"display\":{\"title\":{\"text\":{\"default\":\"Relay\",\"es\":\"Relé\"}}},\"_row_num\":22},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"refrigerant\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigerant\",\"es\":\"Refrigerante\"}}},\"_row_num\":23},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"rotary_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Rotary Fan\",\"es\":\"Ventilador Rotatorio\"}}},\"_row_num\":24},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"solar_compressor\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar Compressor\",\"es\":\"Compresor Solar\"}}},\"_row_num\":25},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"thermocouple\",\"display\":{\"title\":{\"text\":{\"default\":\"Thermocouple\",\"es\":\"Par Termoeléctrico\"}}},\"_row_num\":26},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"thermostat\",\"display\":{\"title\":{\"text\":{\"default\":\"Thermostat\",\"es\":\"Termostato\"}}},\"_row_num\":27},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"thermometer\",\"display\":{\"title\":{\"text\":{\"default\":\"Thermometer\",\"es\":\"Termómetro\"}}},\"_row_num\":28},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"voltage_regulator\",\"display\":{\"title\":{\"text\":{\"default\":\"Voltage Regulator\",\"es\":\"Regulador de Voltaje\"}}},\"_row_num\":29}]"
+        "_value": "[{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"charging_cylinder\",\"display\":{\"title\":{\"text\":{\"default\":\"Charging Cylinder\",\"es\":\"Cilindro de carga\"}}},\"_row_num\":12},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"condenser_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Condenser Fan\",\"es\":\"Ventilador Condensador\"}}},\"_row_num\":13},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"door_gasket\",\"display\":{\"title\":{\"text\":{\"default\":\"Door Gasket\",\"es\":\"La Junta de la Puerta\"}}},\"_row_num\":14},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"electric_compressor\",\"display\":{\"title\":{\"text\":{\"default\":\"Electric Compressor\",\"es\":\"Compresor Eléctrico\"}}},\"_row_num\":15},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"fridge_tag\",\"display\":{\"title\":{\"text\":{\"default\":\"Fridge Tag\",\"es\":\"Etiqueta Frigorífico\"}}},\"_row_num\":16},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"relay\",\"display\":{\"title\":{\"text\":{\"default\":\"Relay\",\"es\":\"Relé\"}}},\"_row_num\":17},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"rotary_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Rotary Fan\",\"es\":\"Ventilador Rotatorio\"}}},\"_row_num\":18},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"solar_compressor\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar Compressor\",\"es\":\"Compresor Solar\"}}},\"_row_num\":19},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"thermostat\",\"display\":{\"title\":{\"text\":{\"default\":\"Thermostat\",\"es\":\"Termostato\"}}},\"_row_num\":20}]"
       },
       {
         "_partition": "Column",
