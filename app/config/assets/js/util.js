@@ -311,6 +311,7 @@ util.formatColIdForDisplay = function(colId, index, resultSet, applyFormat) {
  
         return textToDisplay;     
     }
+    return '';
 
 };
 
