@@ -1,0 +1,2 @@
+_id,_form_id,_locale,_savepoint_type,_savepoint_timestamp,_savepoint_creator,show_collect_module,show_select_module,show_navigate_module,good_gps_accuracy_thresholds,moderate_gps_accuracy_thresholds,main_points,additional_points,alternate_points,form_name,password,_row_etag,_default_access,_owner,_group_read_only,_group_modify,_group_privileged
+,,,,,,1,1,1,10,50,20,,,,,,,,,,

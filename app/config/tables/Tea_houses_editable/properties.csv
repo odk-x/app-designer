@@ -1,8 +1,0 @@
-_partition,_aspect,_key,_type,_value
-Column,Hot,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""Yes"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""No"",""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
-Column,Iced,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""Yes"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""No"",""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
-Column,WiFi,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""Yes"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""No"",""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,Tea_houses_editable
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Tea Houses Editable""}"

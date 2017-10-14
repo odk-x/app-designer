@@ -1,0 +1,2 @@
+_id,_form_id,_locale,_savepoint_type,_savepoint_timestamp,_savepoint_creator,comment,date_selected,exclude,head_name,house_number,location_accuracy,location_altitude,location_latitude,location_longitude,place_name,questionnaire_status,random_number,sample_frame,selected,valid,_default_access,_group_modify,_group_privileged,_group_read_only,_row_etag,_row_owner
+,,,,,,Red,,0,Temecula,1,,,33.487007,-117.143784,1,,,,0,1,,,,,,

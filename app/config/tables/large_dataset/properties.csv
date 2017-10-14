@@ -1,7 +1,0 @@
-_partition,_aspect,_key,_type,_value
-Column,type_of_store,displayChoicesList,object,"[{""choice_list_name"":""store_type"",""data_value"":""small"",""display"":{""title"":{""text"":""< 1000 sq ft""}},""_row_num"":2},{""choice_list_name"":""store_type"",""data_value"":""medium"",""display"":{""title"":{""text"":""1000 sq ft - 10,000 sq ft""}},""_row_num"":3},{""choice_list_name"":""store_type"",""data_value"":""large"",""display"":{""title"":{""text"":""> 10,000 sq ft""}},""_row_num"":4},{""choice_list_name"":""store_type"",""data_value"":""online"",""display"":{""title"":{""text"":""Online only""}},""_row_num"":5},{""choice_list_name"":""store_type"",""data_value"":""single_site"",""display"":{""title"":{""text"":""Single Location""}},""_row_num"":6},{""choice_list_name"":""store_type"",""data_value"":""chain_store"",""display"":{""title"":{""text"":""Part of a chain""}},""_row_num"":7},{""choice_list_name"":""store_type"",""data_value"":""in_mall"",""display"":{""title"":{""text"":""Within a Mall""}},""_row_num"":8},{""choice_list_name"":""store_type"",""data_value"":""street_front"",""display"":{""title"":{""text"":""On a street frontage""}},""_row_num"":9}]"
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,large_dataset
-Table,default,defaultViewType,string,LIST
-Table,default,displayName,object,"{""text"":""Large Dataset Timing Test""}"
-Table,default,listViewFileName,string,config/tables/large_dataset/html/large_dataset.html

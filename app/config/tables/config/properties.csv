@@ -1,0 +1,10 @@
+_partition,_aspect,_key,_type,_value
+Column,show_collect_module,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":1,""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yes_no"",""data_value"":0,""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
+Column,show_navigate_module,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":1,""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yes_no"",""data_value"":0,""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
+Column,show_select_module,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":1,""display"":{""title"":{""text"":""Yes""}},""_row_num"":2},{""choice_list_name"":""yes_no"",""data_value"":0,""display"":{""title"":{""text"":""No""}},""_row_num"":3}]"
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,config
+Table,default,colOrder,array,"[""show_collect_module"",""show_select_module"",""show_navigate_module"",""good_gps_accuracy_thresholds"",""moderate_gps_accuracy_thresholds"",""main_points"",""additional_points"",""alternate_points"",""form_name"",""password""]"
+Table,default,defaultViewType,string,LIST
+Table,default,displayName,object,"{""text"":""Config""}"
+Table,default,listViewFileName,configpath,config/tables/census/html/config_list.html

@@ -1,5 +1,0 @@
-_partition,_aspect,_key,_type,_value
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,farm_crop
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Crops""}"

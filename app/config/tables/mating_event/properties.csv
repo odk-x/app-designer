@@ -1,6 +1,0 @@
-_partition,_aspect,_key,_type,_value
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,mating_event
-Table,default,colOrder,array,"[""M_FOL_date"",""M_FOL_B_focal_AnimID"",""M_time"",""M_male"",""M_female"",""M_fem_swelling"",""M_fail_flag"",""M_interference"",""M_comments"",""M_consort_flag"",""M_mate_guard_flag""]"
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Mating Event""}"

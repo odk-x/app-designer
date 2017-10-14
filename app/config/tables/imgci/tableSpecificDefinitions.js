@@ -1,3 +1,0 @@
-window.odkTableSpecificDefinitions = {
-  "_tokens": {}
-}

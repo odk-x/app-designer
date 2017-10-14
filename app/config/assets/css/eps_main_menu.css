@@ -1,0 +1,15 @@
+.btn-module {
+   width: 100%;
+   max-width: 500px;
+   height: 80px;
+   font-size: 12pt;
+   margin: 0 auto 6px;
+}
+
+.panel-body {
+    padding: 6px;
+}
+
+#point-types {
+	margin-bottom: 3px;
+}

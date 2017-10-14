@@ -1,6 +1,0 @@
-_partition,_aspect,_key,_type,_value
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,follow_map_position
-Table,default,colOrder,array,"[""FMP_FOL_date"",""FMP_FOL_B_focal_AnimID"",""FMP_seq_num"",""FMP_xcoord"",""FMP_ycoord"",""FMP_meters_to_next_seq_num"",""FMP_community_id"",""FMP_xcoord_old"",""FMP_ycoord_old""]"
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Follow Map Position""}"

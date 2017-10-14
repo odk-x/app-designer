@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="libs/bootstrap-3.3.7-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+        <link href="css/eps_common.css" type="text/css" rel="stylesheet" />
+        <link href="css/eps_collect.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="commonDefinitions.js"></script>
+        <script type="text/javascript" src="libs/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="libs/jquery-migrate-3.0.0.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="js/epsUtils.js"></script>
+        <script type="text/javascript" src="js/epsConfigLib.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Collect</h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <div class="spinner red_spinner" id="gps_accuracy_spinner"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <label class="glyphicon glyphicon-map-marker"></label>
+                                            </span>
+                                            <label class="form-control" id="gps_accuracy_number">0m</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input id="exclude" type="checkbox">Exclude
+                                            </label>
+                                        </div>
+                                    
+                                    </div>
+                                    <div class="form-group" id="replace_gps_div" style="display:none">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input id="replace_gps" type="checkbox">Replace GPS
+                                            </label>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="form-group">
+                                        <label for="houseNum">House Number</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="number" id="houseNum" placeholder="House Number" >
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary" type="button" id="plus1">+1</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="headName">Head Name</label>
+                                        <input class="form-control" type="text" id="headName" placeholder="Head Name" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="comment">Comment</label>
+                                        <textarea class="form-control" type="text" id="comment" placeholder="Comment"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-block" id="save" type="button">
+                                            Save
+                                        </button>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-success btn-block" id="update-census" type="button" style="display:none">
+                                            Update
+                                        </button>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-danger btn-block" id="cancel" type="button" style="display:none">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="container text-center">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <span class="text-success">Valid</span>
+                                        <br /> 
+                                        <span id="num_valid" class="badge">0</span>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <span class="text-danger">Invalid</span>
+                                        <br />
+                                        <span id="num_invalid" class="badge">0</span>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <span>Excluded</span>
+                                        <br />
+                                        <span id="num_excluded" class="badge">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <table class="table table-striped table-hover table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>Head Name</th>
+                                        <th>House No</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="census-list text-left">
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--<div class="panel-footer">
+                            <nav class="text-center">
+                                <ol class="pagination pagination-sm">
+                                    <li><a href="#" aria-label="previous">&laquo;</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#" aria-label="next">&raquo;</a></li>
+                                </ol>
+                            </nav>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/template" class="census-list-template">
+            <td><span class="badge"></span></td>
+            <td><span class="head_name"><%= head_name %></span></td>
+            <td><span class="house_number"><%= house_number %></span></td>
+            <td>
+                <button class="btn btn-warning edit-census">Edit</button>
+                <input type="hidden" class="exclude" value="<%= exclude %>" />
+                <input type="hidden" class="comment" value="<%= comment %>" />
+            </td>
+        </script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script src="../../system/libs/underscore.1.8.3.js"></script>
+        <script src="../../system/libs/backbone.1.3.3.js"></script>
+        <script type="text/javascript" src="js/eps_collect.js"></script>
+    </body>
+</html>

@@ -1,8 +1,0 @@
-_partition,_aspect,_key,_type,_value
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,geoweather_conditions
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Weather Conditions for Geo-Weather Survey""}"
-Table,security,defaultAccessOnCreation,string,READ_ONLY
-Table,security,locked,boolean,true
-Table,security,unverifiedUserCanCreate,boolean,false

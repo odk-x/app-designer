@@ -1,0 +1,11 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+additional_points,additional_points,string,[]
+alternate_points,alternate_points,string,[]
+form_name,form_name,string,[]
+good_gps_accuracy_thresholds,good_gps_accuracy_thresholds,string,[]
+main_points,main_points,string,[]
+moderate_gps_accuracy_thresholds,moderate_gps_accuracy_thresholds,string,[]
+password,password,string,[]
+show_collect_module,show_collect_module,integer,[]
+show_navigate_module,show_navigate_module,integer,[]
+show_select_module,show_select_module,integer,[]
