@@ -1,8 +1,0 @@
-_partition,_aspect,_key,_type,_value
-Column,Sample,displayName,object,"{""text"":""Sample""}"
-Column,soil_condition,displayChoicesList,object,"[{""choice_list_name"":""soil_type"",""data_value"":""dry"",""display"":{""title"":{""text"":""Dry""}},""_row_num"":2},{""choice_list_name"":""soil_type"",""data_value"":""damp"",""display"":{""title"":{""text"":""Damp""}},""_row_num"":3},{""choice_list_name"":""soil_type"",""data_value"":""moist"",""display"":{""title"":{""text"":""Moist""}},""_row_num"":4},{""choice_list_name"":""soil_type"",""data_value"":""wet"",""display"":{""title"":{""text"":""Wet""}},""_row_num"":5}]"
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,agriculture
-Table,default,colOrder,array,"[""Date_and_Time"",""plot_name"",""soil_condition"",""Sample""]"
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Agriculture""}"

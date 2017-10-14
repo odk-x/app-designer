@@ -1,6 +1,0 @@
-_partition,_aspect,_key,_type,_value
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,groom_bout
-Table,default,colOrder,array,"[""GRM_FOL_date"",""GRM_FOL_B_focal_AnimID"",""GRM_time_begin"",""GRM_B_partner_AnimID"",""GRM_time_end"",""GRM_dur"",""GRM_direction"",""GRM_time_certainty"",""GRM_other_partners""]"
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Groom Bout""}"

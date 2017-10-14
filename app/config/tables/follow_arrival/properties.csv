@@ -1,6 +1,0 @@
-_partition,_aspect,_key,_type,_value
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,follow_arrival
-Table,default,colOrder,array,"[""FA_FOL_date"",""FA_FOL_B_focal_AnimID"",""FA_B_arr_AnimID"",""FA_seq_num"",""FA_type_of_certainty"",""FA_type_of_nesting"",""FA_type_of_cycle"",""FA_time_start"",""FA_time_end"",""FA_duration_of_obs"",""FA_within_five_meters"",""FA_closest_to_focal""]"
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Follow Arrival""}"
