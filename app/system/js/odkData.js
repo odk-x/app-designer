@@ -1,9 +1,9 @@
 /**
- * The that.getOdkDataIf() injected interface will be used in conjunction with this class to 
+ * The that.getOdkDataIf() injected interface will be used in conjunction with this class to
  * create closures for callback functions to be invoked once a response is available
  * from the Java side.
  */
- 
+
  (function() {
 'use strict';
 /* globals odkCommon */
@@ -13,7 +13,7 @@ window.odkData = {
     _transactionId: 0,
     _callbackId: 0,
     _tableMetadataCache: {},
-    
+
     _getTableMetadata: function(tableId) {
         var that = this;
         if ( tableId === null || tableId === undefined ) {
@@ -45,7 +45,7 @@ window.odkData = {
         }
         that._tableMetadataCache[tableId] = metadata;
     },
-    
+
     getOdkDataIf: function() {
         return window.odkDataIf;
     },
@@ -63,7 +63,7 @@ window.odkData = {
 
     getRoles: function(successCallbackFn, failureCallbackFn) {
         var that = this;
-        
+
         var req = that.queueRequest('getRoles', successCallbackFn, failureCallbackFn);
 
         that.getOdkDataIf().getRoles(req._callbackId);
@@ -71,7 +71,7 @@ window.odkData = {
 
     getDefaultGroup: function(successCallbackFn, failureCallbackFn) {
         var that = this;
-        
+
         var req = that.queueRequest('getDefaultGroup', successCallbackFn, failureCallbackFn);
 
         that.getOdkDataIf().getDefaultGroup(req._callbackId);
@@ -79,7 +79,7 @@ window.odkData = {
 
     getUsers: function(successCallbackFn, failureCallbackFn) {
         var that = this;
-        
+
         var req = that.queueRequest('getUsers', successCallbackFn, failureCallbackFn);
 
         that.getOdkDataIf().getUsers(req._callbackId);
@@ -87,14 +87,14 @@ window.odkData = {
 
     getAllTableIds: function(successCallbackFn, failureCallbackFn) {
         var that = this;
-        
+
         var req = that.queueRequest('getAllTableIds', successCallbackFn, failureCallbackFn);
 
         that.getOdkDataIf().getAllTableIds(req._callbackId);
     },
 
     query: function(tableId, whereClause, sqlBindParams, groupBy, having,
-            orderByElementKey, orderByDirection, limit, offset, includeKVS, successCallbackFn, 
+            orderByElementKey, orderByDirection, limit, offset, includeKVS, successCallbackFn,
             failureCallbackFn) {
         var that = this;
 
@@ -103,24 +103,24 @@ window.odkData = {
         var stringOffset = offset == null ? null : offset.toString();
 
         // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
-        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null :
                 JSON.stringify(sqlBindParams);
-        that.getOdkDataIf().query(tableId, whereClause, sqlBindParamsJSON, groupBy, 
-            having, orderByElementKey, orderByDirection, stringLimit, stringOffset, includeKVS, 
+        that.getOdkDataIf().query(tableId, whereClause, sqlBindParamsJSON, groupBy,
+            having, orderByElementKey, orderByDirection, stringLimit, stringOffset, includeKVS,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
     arbitraryQuery: function(tableId, sqlCommand, sqlBindParams, limit, offset, successCallbackFn, failureCallbackFn) {
         var that = this;
-        
+
         var req = that.queueRequest('arbitraryQuery', successCallbackFn, failureCallbackFn);
         var stringLimit = limit == null ? null : limit.toString();
         var stringOffset = offset == null ? null : offset.toString();
 
         // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
-        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null : 
+        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null :
                 JSON.stringify(sqlBindParams);
-        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParamsJSON, stringLimit, stringOffset, 
+        that.getOdkDataIf().arbitraryQuery(tableId, sqlCommand, sqlBindParamsJSON, stringLimit, stringOffset,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
@@ -129,7 +129,7 @@ window.odkData = {
 
         var req = that.queueRequest('getRows', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().getRows(tableId, rowId, 
+        that.getOdkDataIf().getRows(tableId, rowId,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
@@ -138,27 +138,27 @@ window.odkData = {
 
         var req = that.queueRequest('getMostRecentRow', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().getMostRecentRow(tableId, rowId, 
+        that.getOdkDataIf().getMostRecentRow(tableId, rowId,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
-    changeAccessFilterOfRow: function(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify, 
+    changeAccessFilterOfRow: function(tableId, defaultAccess, rowOwner, groupReadOnly, groupModify,
         groupPrivileged, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('changeAccessFilterOfRow', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().changeAccessFilterOfRow(tableId, defaultAccess, rowOwner, 
-            groupReadOnly, groupModify, groupPrivileged, rowId, 
+        that.getOdkDataIf().changeAccessFilterOfRow(tableId, defaultAccess, rowOwner,
+            groupReadOnly, groupModify, groupPrivileged, rowId,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
-    
+
     updateRow: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
         var that = this;
 
         var req = that.queueRequest('updateRow', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().updateRow(tableId, JSON.stringify(columnNameValueMap), rowId, 
+        that.getOdkDataIf().updateRow(tableId, JSON.stringify(columnNameValueMap), rowId,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
@@ -167,7 +167,7 @@ window.odkData = {
 
         var req = that.queueRequest('deleteRow', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().deleteRow(tableId, JSON.stringify(columnNameValueMap), rowId, 
+        that.getOdkDataIf().deleteRow(tableId, JSON.stringify(columnNameValueMap), rowId,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
@@ -176,7 +176,7 @@ window.odkData = {
 
         var req = that.queueRequest('addRow', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().addRow(tableId, JSON.stringify(columnNameValueMap), rowId, 
+        that.getOdkDataIf().addRow(tableId, JSON.stringify(columnNameValueMap), rowId,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
@@ -185,7 +185,7 @@ window.odkData = {
 
         var req = that.queueRequest('addCheckpoint', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().addCheckpoint(tableId, JSON.stringify(columnNameValueMap), rowId, 
+        that.getOdkDataIf().addCheckpoint(tableId, JSON.stringify(columnNameValueMap), rowId,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
@@ -195,7 +195,7 @@ window.odkData = {
         var req = that.queueRequest('saveCheckpointAsIncomplete', successCallbackFn, failureCallbackFn);
 
         that.getOdkDataIf().saveCheckpointAsIncomplete(tableId, JSON.stringify(columnNameValueMap), rowId,
-            that._getTableMetadataRevision(tableId), req._callbackId); 
+            that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
     saveCheckpointAsComplete: function(tableId, columnNameValueMap, rowId, successCallbackFn, failureCallbackFn) {
@@ -203,7 +203,7 @@ window.odkData = {
 
         var req = that.queueRequest('saveCheckpointAsComplete', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().saveCheckpointAsComplete(tableId, JSON.stringify(columnNameValueMap), rowId, 
+        that.getOdkDataIf().saveCheckpointAsComplete(tableId, JSON.stringify(columnNameValueMap), rowId,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
@@ -212,7 +212,7 @@ window.odkData = {
 
         var req = that.queueRequest('deleteLastCheckpoint', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().deleteAllCheckpoints(tableId, rowId, 
+        that.getOdkDataIf().deleteAllCheckpoints(tableId, rowId,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
@@ -221,7 +221,7 @@ window.odkData = {
 
         var req = that.queueRequest('deleteLastCheckpoint', successCallbackFn, failureCallbackFn);
 
-        that.getOdkDataIf().deleteLastCheckpoint(tableId, rowId, 
+        that.getOdkDataIf().deleteLastCheckpoint(tableId, rowId,
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
@@ -231,13 +231,13 @@ window.odkData = {
         var cbId = that._callbackId++;
 
         var activeRequest = {
-            _callbackId: cbId, 
+            _callbackId: cbId,
             _successCbFn: successCallbackFn,
             _failureCbFn: failureCallbackFn,
             _requestType: type
         };
         that._requestMap.push(activeRequest);
-        
+
         var logStr = "";
         for (var i = 0; i < that._requestMap.length; i++) {
             logStr = logStr + ", " + that._requestMap[i]._callbackId;
@@ -270,14 +270,14 @@ window.odkData = {
                     odkCommon.log('E','odkData invokeCallbackFn error - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId +
                     ' error: ' + errorMsg);
                     if (errorMsg.indexOf("org.opendatakit.exception.ActionNotAuthorize") === 0) {
-                        document.body.innerHTML = "<h1>Access denied</h1>You do have access to perform this action. Please log in or check your credentials."; // TODO: TEMPORARY
+                        document.body.innerHTML = "<h1>Access denied</h1>You do NOT have access to perform this action. Please log in or check your credentials."; // TODO: TEMPORARY
                     }
                     if(trxn._failureCbFn !== null && trxn._failureCbFn !== undefined) {
                         (trxn._failureCbFn)(errorMsg);
                     }
                 } else {
                     odkCommon.log('D','odkData invokeCallbackFn success - requestType: ' + trxn._requestType + ' callbackId: ' + trxn._callbackId);
-                    
+
                     // Need to update the cached KVS if we have a query request type
 //                     if (trxn._requestType === 'query') {
 //                         that.updateCachedMetadataForTableId(jsonResult, cbId);
@@ -285,14 +285,14 @@ window.odkData = {
 
                     if (trxn._successCbFn !== null && trxn._successCbFn !== undefined) {
                         var reqData = new that.__getResultData();
-                        reqData.setBackingObject(jsonResult); 
+                        reqData.setBackingObject(jsonResult);
                         (trxn._successCbFn)(reqData);
                     }
                 }
                 found = true;
             }
         }
-        
+
         if (!found) {
             odkCommon.log('E','odkData invokeCallbackFn - no callback found for callbackId: ' + cbId);
         }
@@ -315,9 +315,9 @@ window.odkData = {
     },
 
     //
-    // The code for the data object has 
+    // The code for the data object has
     // been moved here since this is only
-    // accessed here  
+    // accessed here
     //
     __getResultData : function() {
 
@@ -349,11 +349,11 @@ window.odkData = {
                 }
                 return false;
             },
-            
+
             _expandMetadataCache: function(cachedMetadata) {
                 var that = this;
 
-                // working variables for misc. data structure iteration             
+                // working variables for misc. data structure iteration
                 var f;
                 var i;
 
@@ -365,12 +365,12 @@ window.odkData = {
                 var theMap;
                 var choiceObject;
 
-                // the dataTableModel returned from the Java layer is roughly a JSON schema and 
+                // the dataTableModel returned from the Java layer is roughly a JSON schema and
                 // does not have all of the persisted elementKey entries at the top level.
-                // i.e., if they are in an object type (which is not persisted), the nested elements 
+                // i.e., if they are in an object type (which is not persisted), the nested elements
                 // that are persisted are not elevated up to the top level (they are just in their deeper
                 // nesting within the object). Traverse the dataTableModel searching for the non-retained
-                // elements, and if they are object types, collect their properties, appending them to 
+                // elements, and if they are object types, collect their properties, appending them to
                 // the top-level list and recursively traversing them.
                 var fullDataTableModel = cachedMetadata.dataTableModel;
                 // content to add to the fullDataTableModel
@@ -381,7 +381,7 @@ window.odkData = {
                 // model fragment to process on next pass
                 var remainingDataTableModel = fullDataTableModel;
 
-                // loop through until the model fragment for the next pass 
+                // loop through until the model fragment for the next pass
                 // (i.e., remainingDataTableModel) is empty
                 //
                 while ( that._isNotEmptyObject(remainingDataTableModel) ) {
@@ -389,16 +389,16 @@ window.odkData = {
                     dataTableModel = remainingDataTableModel;
                     // clear the next pass model
                     remainingDataTableModel = {};
-                    // iterate over the working model fragment scanning for 
+                    // iterate over the working model fragment scanning for
                     // elements that are not retained.
                     for ( f in dataTableModel ) {
                         if ( dataTableModel.hasOwnProperty(f) ) {
                             defElement = dataTableModel[f];
                             if (defElement.notUnitOfRetention) {
-                                // if the element is an object, then accumulate 
+                                // if the element is an object, then accumulate
                                 // its properties into both the additionalDataTableModel
-                                // and the remainingDataTableModel. These will be 
-                                // processed in the next iteration of this loop.                        
+                                // and the remainingDataTableModel. These will be
+                                // processed in the next iteration of this loop.
                                 if ( defElement.type === 'object' ) {
                                   var sf;
                                   var subDefElement;
@@ -420,7 +420,7 @@ window.odkData = {
                         fullDataTableModel[f] = additionalDataTableModel[f];
                     }
                 }
-                
+
                 cachedMetadata._parsedChoiceListMap = {};
                 cachedMetadata._parsedChoiceListValueMap = {};
                 if ( cachedMetadata.choiceListMap !== null &&
@@ -432,7 +432,7 @@ window.odkData = {
                     //    that identify the choice value and the display translation for that value.
                     //    Store this in _parsedChoiceListMap (choice_list_id => parsed list).
                     // 2. interate over the list producing a map of choice values to choice objects.
-                    //    Store this in _parsedChoiceListValueMap 
+                    //    Store this in _parsedChoiceListValueMap
                     //         (choice_list_id => {map of choice value => choice object}).
                     //
                     for ( f in cachedMetadata.choiceListMap ) {
@@ -455,12 +455,12 @@ window.odkData = {
                 //
                 // If partition === 'Column' && key === 'displayChoicesList' then
                 // add two new keys, '_displayChoicesList' and '_displayChoicesMap'
-                // tying back to the structures maintained in 
+                // tying back to the structures maintained in
                 //    cachedMetadata._parsedChoiceListMap
                 //    cachedMetadata._parsedChoiceListValueMap
                 //
                 cachedMetadata.kvMap = {};
-                if (cachedMetadata.keyValueStoreList === null || 
+                if (cachedMetadata.keyValueStoreList === null ||
                     cachedMetadata.keyValueStoreList === undefined) {
                     return;
                 }
@@ -478,40 +478,40 @@ window.odkData = {
                     }
                     var aspect = partition[kvs.aspect];
                     aspect[kvs.key] = kvs;
-                    // Transform the choice list into a list.  
-                    // Use _displayChoicesList as the key. 
+                    // Transform the choice list into a list.
+                    // Use _displayChoicesList as the key.
                     // Transform the choice list into a map.
-                    // Use _displayChoicesMap as the key.                   
-                    if ( kvs.partition === "Column" && 
-                         kvs.key === "displayChoicesList" && 
-                         kvs.value !== null ) { 
- 
-                        // save the parsed content 
-                        var choiceList = cachedMetadata._parsedChoiceListMap[kvs.value]; 
-                        aspect["_displayChoicesList"] = choiceList; 
- 
-                        // create a map of choiceList data_value to object 
-                        var choiceMap = cachedMetadata._parsedChoiceListValueMap[kvs.value]; 
-                        aspect["_displayChoicesMap"] = choiceMap; 
+                    // Use _displayChoicesMap as the key.
+                    if ( kvs.partition === "Column" &&
+                         kvs.key === "displayChoicesList" &&
+                         kvs.value !== null ) {
+
+                        // save the parsed content
+                        var choiceList = cachedMetadata._parsedChoiceListMap[kvs.value];
+                        aspect["_displayChoicesList"] = choiceList;
+
+                        // create a map of choiceList data_value to object
+                        var choiceMap = cachedMetadata._parsedChoiceListValueMap[kvs.value];
+                        aspect["_displayChoicesMap"] = choiceMap;
                     }
                 }
             },
-            
+
             /**
-             * This function is used to set the 
-             * backing data object that all of the 
+             * This function is used to set the
+             * backing data object that all of the
              * member functions operate on
              *
              * jsonObj should be a JSON object.
              */
             setBackingObject:function(jsonObj) {
                 var that = this;
-                
+
                 that.resultObj = jsonObj;
-                
+
                 var metadataCache;
                 var tableId = that.resultObj.metadata.tableId;
-                
+
                 // update odkData metadata cache if we receive an update
                 if ( that.resultObj.metadata !== null &&
                      that.resultObj.metadata !== undefined &&
@@ -526,7 +526,7 @@ window.odkData = {
                     // and remove the cachedMetadata
                     delete that.resultObj.metadata.cachedMetadata;
                 }
-                
+
                 // fetch the metadata cache
                 metadataCache = window.odkData._getTableMetadata(tableId);
                 if ( metadataCache !== null && metadataCache !== undefined ) {
@@ -589,7 +589,7 @@ window.odkData = {
                 return colData;
             },
 
-            // get the _id (a.k.a. instance id -- a component of the PK) 
+            // get the _id (a.k.a. instance id -- a component of the PK)
             // of a row in the result set.
             getRowId:function(rowNumber) {
                 var that = this;
@@ -608,7 +608,7 @@ window.odkData = {
                 if (!isInteger(rowNumber)) {
                     throw 'getRowId()--index must be an integer';
                 }
-        
+
                 return that.getData(rowNumber, '_id');
             },
 
@@ -628,7 +628,7 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.elementKeyMap === null || 
+                if (that.resultObj.metadata.elementKeyMap === null ||
                     that.resultObj.metadata.elementKeyMap === undefined) {
                     return null;
                 }
@@ -667,7 +667,7 @@ window.odkData = {
 
             //////////////////////////////////////////////////////////////////////////////
             // metadata content passed back for use in interpreting the result set
-            
+
             getTableId:function() {
                 var that = this;
                 if (that.resultObj === null || that.resultObj === undefined) {
@@ -693,7 +693,7 @@ window.odkData = {
                 }
 
                 var retval = that.resultObj.metadata.limit;
-                
+
                 if ( retval === undefined ) {
                     return null;
                 }
@@ -712,13 +712,13 @@ window.odkData = {
                 }
 
                 var retval = that.resultObj.metadata.offset;
-                
+
                 if ( retval === undefined ) {
                     return null;
                 }
                 return retval;
             },
-            
+
             getColumns:function() {
                 var that = this;
                 if (that.resultObj === null || that.resultObj === undefined) {
@@ -729,13 +729,13 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.elementKeyMap === null || 
+                if (that.resultObj.metadata.elementKeyMap === null ||
                     that.resultObj.metadata.elementKeyMap === undefined) {
                     return null;
                 }
 
                 var elementKeyMap = that.resultObj.metadata.elementKeyMap;
-                
+
                 var columns = [];
                 var i;
                 var key;
@@ -758,7 +758,7 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.rowColors === null || 
+                if (that.resultObj.metadata.rowColors === null ||
                     that.resultObj.metadata.rowColors === undefined) {
                     return null;
                 }
@@ -793,7 +793,7 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.rowColors === null || 
+                if (that.resultObj.metadata.rowColors === null ||
                     that.resultObj.metadata.rowColors === undefined) {
                     return null;
                 }
@@ -829,7 +829,7 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.statusColors === null || 
+                if (that.resultObj.metadata.statusColors === null ||
                     that.resultObj.metadata.statusColors === undefined) {
                     return null;
                 }
@@ -864,7 +864,7 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.statusColors === null || 
+                if (that.resultObj.metadata.statusColors === null ||
                     that.resultObj.metadata.statusColors === undefined) {
                     return null;
                 }
@@ -900,7 +900,7 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.columnColors === null || 
+                if (that.resultObj.metadata.columnColors === null ||
                     that.resultObj.metadata.columnColors === undefined) {
                     return null;
                 }
@@ -916,13 +916,13 @@ window.odkData = {
                 if (!isString(elementKeyOrPath)) {
                     throw 'getColumnForegroundColor()--elementKey must be a string';
                 }
-                var elementKey = that.getElementKey(elementKeyOrPath); 
+                var elementKey = that.getElementKey(elementKeyOrPath);
 
-                if (that.resultObj.metadata.columnColors[elementKey] === null || 
+                if (that.resultObj.metadata.columnColors[elementKey] === null ||
                     that.resultObj.metadata.columnColors[elementKey] === undefined) {
                     return null;
                 }
-                
+
                 var colorArray = that.resultObj.metadata.columnColors[elementKey];
 
                 if (rowNumber >= 0 && rowNumber < that.getCount()) {
@@ -945,7 +945,7 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.columnColors === null || 
+                if (that.resultObj.metadata.columnColors === null ||
                     that.resultObj.metadata.columnColors === undefined) {
                     return null;
                 }
@@ -961,7 +961,7 @@ window.odkData = {
                 if (!isString(elementKeyOrPath)) {
                     throw 'getColumnBackgroundColor()--elementKey must be a string';
                 }
-                var elementKey = that.getElementKey(elementKeyOrPath); 
+                var elementKey = that.getElementKey(elementKeyOrPath);
 
                 if (that.resultObj.metadata.columnColors[elementKey] === null ||
                     that.resultObj.metadata.columnColors[elementKey] === undefined) {
@@ -989,7 +989,7 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.mapIndex === null || 
+                if (that.resultObj.metadata.mapIndex === null ||
                     that.resultObj.metadata.mapIndex === undefined) {
                     return null;
                 }
@@ -1009,7 +1009,7 @@ window.odkData = {
                     return retVal;
                 }
 
-                if (that.resultObj.metadata.keyValueStoreList === null || 
+                if (that.resultObj.metadata.keyValueStoreList === null ||
                     that.resultObj.metadata.keyValueStoreList === undefined) {
                     return retVal;
                 }
@@ -1018,8 +1018,8 @@ window.odkData = {
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
-                var elementKey = that.getElementKey(elementKeyOrPath); 
-                ref = ref[elementKey]; 
+                var elementKey = that.getElementKey(elementKeyOrPath);
+                ref = ref[elementKey];
                 if ( ref === null || ref === undefined ) {
                     return retVal;
                 }
@@ -1043,7 +1043,7 @@ window.odkData = {
                     return retVal;
                 }
 
-                if (that.resultObj.metadata.keyValueStoreList === null || 
+                if (that.resultObj.metadata.keyValueStoreList === null ||
                     that.resultObj.metadata.keyValueStoreList === undefined) {
                     return retVal;
                 }
@@ -1103,7 +1103,7 @@ window.odkData = {
             getCanCreateRow:function() {
                 var that = this;
                 var retVal = false;
-                
+
                 if (that.resultObj === null || that.resultObj === undefined) {
                     return retVal;
                 }
@@ -1113,98 +1113,98 @@ window.odkData = {
                 }
 
                 return that.resultObj.metadata.canCreateRow;
-        
+
             },
-            
-            // 
-            // Retrieves the list of choices for the given elementPath 
-            // or null if there is not a list of choices in the table 
-            // properties for this column. This is the already-JSON-parsed 
-            // value. The list order is the order in which these choices 
-            // should be presented in the selection-list. 
-            getColumnChoicesList:function(elementPath) { 
-                var that = this; 
-                var retVal = null; 
- 
-                if (that.resultObj === null || that.resultObj === undefined) { 
-                    return retVal; 
-                } 
- 
-                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) { 
-                    return retVal; 
-                } 
- 
-                if (that.resultObj.metadata.keyValueStoreList === null ||  
-                    that.resultObj.metadata.keyValueStoreList === undefined) { 
-                    return retVal; 
-                } 
- 
-                var ref = that.resultObj.metadata.kvMap['Column']; 
-                if ( ref === null || ref === undefined ) { 
-                    return retVal; 
-                } 
-                var elementKey = that.getElementKey(elementPath); 
-                ref = ref[elementKey]; 
-                if ( ref === null || ref === undefined ) { 
-                    return retVal; 
-                } 
-                // NOTE: this is synthesized within setBackingObject() 
-                ref = ref['_displayChoicesList']; 
-                if ( ref === null || ref === undefined ) { 
-                    return retVal; 
-                } 
-                retVal = ref; 
-                return retVal; 
-            }, 
- 
-            // 
-            // Effectively retrieves the object for the given data_value from  
-            // the displayChoicesList for the given elementPath. Equivalent to  
-            // searching through the '_displayChoicesList' value for the object 
-            // where object.data_value === choiceDataValue. 
-            // 
-            // The caller can then access the .display.title for the  
-            // text translation of this object or any custom property  
-            // associated with this choice data value (via the tableId form). 
-            getColumnChoiceDataValueObject:function(elementPath, choiceDataValue) { 
-                var that = this; 
-                var retVal = null; 
- 
-                if (that.resultObj === null || that.resultObj === undefined) { 
-                    return retVal; 
-                } 
- 
-                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) { 
-                    return retVal; 
-                } 
- 
-                if (that.resultObj.metadata.keyValueStoreList === null ||  
-                    that.resultObj.metadata.keyValueStoreList === undefined) { 
-                    return retVal; 
-                } 
- 
-                var ref = that.resultObj.metadata.kvMap['Column']; 
-                if ( ref === null || ref === undefined ) { 
-                    return retVal; 
-                } 
-                var elementKey = that.getElementKey(elementPath); 
-                ref = ref[elementKey]; 
-                if ( ref === null || ref === undefined ) { 
-                    return retVal; 
-                } 
-                // NOTE: this is synthesized within setBackingObject() 
-                ref = ref['_displayChoicesMap']; 
-                if ( ref === null || ref === undefined ) { 
-                    return retVal; 
-                } 
-                ref = ref[choiceDataValue]; 
-                if ( ref === null || ref === undefined ) { 
-                    return retVal; 
-                } 
-                retVal = ref; 
-                return retVal; 
-            }, 
- 
+
+            //
+            // Retrieves the list of choices for the given elementPath
+            // or null if there is not a list of choices in the table
+            // properties for this column. This is the already-JSON-parsed
+            // value. The list order is the order in which these choices
+            // should be presented in the selection-list.
+            getColumnChoicesList:function(elementPath) {
+                var that = this;
+                var retVal = null;
+
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return retVal;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return retVal;
+                }
+
+                if (that.resultObj.metadata.keyValueStoreList === null ||
+                    that.resultObj.metadata.keyValueStoreList === undefined) {
+                    return retVal;
+                }
+
+                var ref = that.resultObj.metadata.kvMap['Column'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                var elementKey = that.getElementKey(elementPath);
+                ref = ref[elementKey];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                // NOTE: this is synthesized within setBackingObject()
+                ref = ref['_displayChoicesList'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                retVal = ref;
+                return retVal;
+            },
+
+            //
+            // Effectively retrieves the object for the given data_value from
+            // the displayChoicesList for the given elementPath. Equivalent to
+            // searching through the '_displayChoicesList' value for the object
+            // where object.data_value === choiceDataValue.
+            //
+            // The caller can then access the .display.title for the
+            // text translation of this object or any custom property
+            // associated with this choice data value (via the tableId form).
+            getColumnChoiceDataValueObject:function(elementPath, choiceDataValue) {
+                var that = this;
+                var retVal = null;
+
+                if (that.resultObj === null || that.resultObj === undefined) {
+                    return retVal;
+                }
+
+                if (that.resultObj.metadata === null || that.resultObj.metadata === undefined) {
+                    return retVal;
+                }
+
+                if (that.resultObj.metadata.keyValueStoreList === null ||
+                    that.resultObj.metadata.keyValueStoreList === undefined) {
+                    return retVal;
+                }
+
+                var ref = that.resultObj.metadata.kvMap['Column'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                var elementKey = that.getElementKey(elementPath);
+                ref = ref[elementKey];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                // NOTE: this is synthesized within setBackingObject()
+                ref = ref['_displayChoicesMap'];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                ref = ref[choiceDataValue];
+                if ( ref === null || ref === undefined ) {
+                    return retVal;
+                }
+                retVal = ref;
+                return retVal;
+            },
+
             // may need to get the raw metadata content to get access to some of the content.
             getMetadata:function() {
                 var that = this;
@@ -1230,7 +1230,7 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.tableIds === null || 
+                if (that.resultObj.metadata.tableIds === null ||
                     that.resultObj.metadata.tableIds === undefined) {
                     return null;
                 }
@@ -1249,7 +1249,7 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.roles === null || 
+                if (that.resultObj.metadata.roles === null ||
                     that.resultObj.metadata.roles === undefined) {
                     return null;
                 }
@@ -1268,7 +1268,7 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.defaultGroup === null || 
+                if (that.resultObj.metadata.defaultGroup === null ||
                     that.resultObj.metadata.defaultGroup === undefined) {
                     return null;
                 }
@@ -1287,14 +1287,14 @@ window.odkData = {
                     return null;
                 }
 
-                if (that.resultObj.metadata.users === null || 
+                if (that.resultObj.metadata.users === null ||
                     that.resultObj.metadata.users === undefined) {
                     return null;
                 }
 
                 return that.resultObj.metadata.users;
             }
-            
+
         };
 
         return pub;
