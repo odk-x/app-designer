@@ -148,15 +148,18 @@ function handleNavigationResult(action, dispatchStr) {
     console.log(rowId);
     var dispatchStruct = {};
     dispatchStruct[actionTypeKey] = editQuestionnaireAction;
-    
-    odkTables.editRowWithSurvey(JSON.stringify(dispatchStruct), localStorage.getItem('tableId'), rowId, localStorage.getItem('tableId'), null);
+    if(localStorage.getItem('tableId')!==null && localStorage.getItem('tableId')!== undefined && localStorage.getItem('tableId').length>0) {
+      odkTables.editRowWithSurvey(JSON.stringify(dispatchStruct), localStorage.getItem('tableId'), rowId, localStorage.getItem('tableId'), null);
+    } else {
+      alert("Choose a form you want to start in the admin setting.");
+    }
   }
 };
 
 function handleQuestionnaireEditResult(action, dispatchStr) {
   var statusVal = action.jsonValue.status;
   if (statusVal !== -1) {
-    console.log('I', LOG_TAG + 'Navigation was cancelled. No follow to perform');
+    console.log('I', LOG_TAG + 'Questionnaire was cancelled.');
     return;
   }
 
@@ -166,7 +169,7 @@ function handleQuestionnaireEditResult(action, dispatchStr) {
 
   var instanceId = result[instanceIdKey];
   var savepointType = result[savepointTypeKey];
-  if(instanceId != null && savepointType != null) {
+  if(instanceId !== null && instanceId !== undefined && savepointType !== null && savepointType !== undefined) {
     var data = {'questionnaire_status':savepointType};
     odkData.updateRow('census', data, instanceId, null, null);
   }
