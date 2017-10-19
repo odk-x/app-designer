@@ -7,6 +7,10 @@ body {
   padding-left: 4px;
 }
 
+.table {
+	margin-bottom: 0px;
+}
+
 .panel {
   margin-bottom: 4px;
 }

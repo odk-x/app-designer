@@ -104,7 +104,14 @@ var Census = Backbone.Model.extend({
 //Backbone Collection
 
 var Censuses = Backbone.Collection.extend({
-    url: ''
+    url: '',
+    parse : function( response ){
+        this.trigger("collection:updated", { 
+            count : response.count, 
+            total : response.total, 
+            startAt : response.startAt } );
+        return response.records;
+    }
 });
 
 var censuses = new Censuses();
@@ -121,45 +128,50 @@ Backbone.sync = function(method, model, options) {
 };
 
 function syncRead(method,  model, options) {
-    var successFnRead = function( result ) {
-        var allRows = [];
+    var total = 0;
+
+    var successFnData = function( result ) {
+        var records = [];
         for (var row = 0; row < result.getCount(); row++) {
-            var data = {};
-            data['_id']= result.getData(row,"_id");
-            data['place_name']= result.getData(row, "place_name");
-            data['house_number']= result.getData(row,"house_number");
-            data['head_name']= result.getData(row,"head_name");
-            data['comment']= result.getData(row,"comment");
-            data['exclude']=result.getData(row,"exclude");
-            data['valid']=result.getData(row,"valid");
-            data['sample_frame']=result.getData(row,"sample_frame");
-            data['date_selected']=result.getData(row,"date_selected");
-            data['random_number']= result.getData(row,"random_number");
-            data['selected']= result.getData(row,"selected");
-            data['location_accuracy']= result.getData(row,"location_accuracy");
-            data['location_altitude']= result.getData(row,"location_altitude");
-            data['location_latitude']= result.getData(row,"location_latitude");
-            data['location_longitude']= result.getData(row,"location_longitude");
-            data['questionnaire_status']= result.getData(row,"questionnaire_status");
-            allRows.push(data);
+            var census = {};
+            census['_id']= result.getData(row,"_id");
+            census['place_name']= result.getData(row, "place_name");
+            census['house_number']= result.getData(row,"house_number");
+            census['head_name']= result.getData(row,"head_name");
+            census['comment']= result.getData(row,"comment");
+            census['exclude']=result.getData(row,"exclude");
+            census['valid']=result.getData(row,"valid");
+            census['sample_frame']=result.getData(row,"sample_frame");
+            census['date_selected']=result.getData(row,"date_selected");
+            census['random_number']= result.getData(row,"random_number");
+            census['selected']= result.getData(row,"selected");
+            census['location_accuracy']= result.getData(row,"location_accuracy");
+            census['location_altitude']= result.getData(row,"location_altitude");
+            census['location_latitude']= result.getData(row,"location_latitude");
+            census['location_longitude']= result.getData(row,"location_longitude");
+            census['questionnaire_status']= result.getData(row,"questionnaire_status");
+            records.push(census);
         }
 
-        // If it's not a collection, use first value only
-        if(_.isUndefined(model.models)) {
-            allRows = allRows[0] || null;
+        var data = {
+            'count' : options.data.count,
+            'total' : total,
+            'startAt' : options.data.startAt,
+            'records':records
         }
 
         if(options.async === false) {
-            options.success(allRows, 'success', null);
+            options.success(data, 'success', null);
         } else {
             // simulate a normal async network call
             setTimeout(function(){
-                options.success(allRows, 'success', null);
+                options.success(data, 'success', null);
             }, 0);
         } 
     }
 
-    var failureFnRead = function( errorMsg) {
+    var failureFn = function( errorMsg) {
+        console.log(errorMsg);
         if(options.async === false) {
             options.error(null, 'Failed', null);
         } else {
@@ -170,9 +182,15 @@ function syncRead(method,  model, options) {
         } 
     }
 
-    odkData.query('census', 'place_name=?', [localStorage.getItem("place_name_selected")], null, null,
-        null, null, null, null, null, successFnRead,
-        failureFnRead);
+    var successFnCount = function( result ) {
+        if (result.getCount()>0) {
+            total = parseInt(result.getData(0,"total"));
+            odkData.query('census', 'place_name=?', [localStorage.getItem("place_name_selected")], null, null,
+                '_savepoint_timestamp', 'DESC', options.data.count, options.data.startAt, null, successFnData, failureFn);
+        }
+    }
+
+    odkData.arbitraryQuery('census', 'SELECT count(_id) AS total FROM census WHERE place_name=?', [localStorage.getItem("place_name_selected")], null, null, successFnCount, failureFn);
 }
 
 function syncUpdate(method,  model, options) {
@@ -370,6 +388,66 @@ function refreshScreenAfterCancel() {
     $('#replace_gps').prop('checked', false);
 }
 
+// The pagination object holds information about the current 
+// state of the page.
+var pagination = {
+    items_per_page : 5, // how many items per page
+    current_page : 1, // page to start at, first page is 1, not 0
+    display_max: 2, // max number of pages to show in the pagination element
+    total: 0
+}
+
+function updatePagination( details ) {
+    // Calculate pagination attributes
+    var start = details.startAt + 1,
+        end = details.startAt + details.count,
+        total_pages = Math.ceil( details.total / pagination.items_per_page ),
+        current_page = details.startAt / details.count + 1;
+    
+    //track the number of total census in the database for pagination
+    pagination.total = details.total;
+    // Display a "Page 1 of 5" type message on the page
+    $(".pagination-info").text("Records " + start + " - " + Math.min(details.total, end) + " of " + details.total );
+ 
+    // Remove the pagination binding so they don't get called
+    // multiple times after they're redrawn.
+    $(".pagination-boxes").unbind();
+ 
+    // Redraw the jquery pagination boxes
+    $(".pagination-boxes").pagination({
+          total_pages: total_pages,
+          display_max: pagination.display_max,
+          current_page: current_page,
+          callback: function(event, page) {
+            if ( page ){
+                //if the pagination buttons are clicked, then load data from the database
+                pagination.current_page = page;
+                readCensusFromDb();
+            }
+        }
+    }); 
+}
+
+//fetch data from ODK database.
+function readCensusFromDb() {
+    var data = {
+        startAt : ( pagination.current_page - 1) *  pagination.items_per_page,
+        count : pagination.items_per_page 
+    };
+
+    censuses.fetch({
+        data : data,
+        success : function(response) {
+            /*_.each(response.toJSON(), function(item) {
+                console.log('Successfully GOT census with _id: ' + item._id);
+            });*/
+        }, 
+        error: function() {
+            console.log("Failed to get census!");
+        }
+    });
+}
+
 //Backbone View for all censuses
 // The model for this view will be the collection i created above in this file
 // The el is the tbody I created in the index.html
@@ -386,17 +464,6 @@ var CensusesView = Backbone.View.extend({
             }, 30);
         }, this);
         this.model.on('remove', this.render, this);
-        //fetch data from ODK database.
-        this.model.fetch({
-            success : function(response) {
-                _.each(response.toJSON(), function(item) {
-                    console.log('Successfully GOT census with _id: ' + item._id);
-                });
-            }, 
-            error: function() {
-                console.log("Failed to get census!");
-            }
-        });
     },
     render: function() {
         var self = this;
@@ -420,6 +487,7 @@ var CensusesView = Backbone.View.extend({
         return this;
     }
 });
+
 var censusesView = new CensusesView();
 
 function validateData(checkGPS) {
@@ -443,29 +511,42 @@ function save() {
     var exclude = $('#exclude').prop('checked') === true ? 1 : 0;
     var valid = ((accuracy > 0 && accuracy <= EpsConfig.goodGpsAccuracyThresholds) ? 1:0);
     var census = new Census({
-            place_name: localStorage.getItem("place_name_selected"),
-            house_number: $('#houseNum').val(),
-            head_name: $('#headName').val(),
-            comment: $('#comment').val(),
-            exclude: exclude,
-            valid: valid,
-            sample_frame: 0,
-            random_number: 0,
-            selected: 0,
-            location_accuracy: accuracy,
-            location_altitude: altitude,
-            location_latitude: latitude,
-            location_longitude: longitude
-        });
-        
-    censuses.add(census);
-
+        place_name: localStorage.getItem("place_name_selected"),
+        house_number: $('#houseNum').val(),
+        head_name: $('#headName').val(),
+        comment: $('#comment').val(),
+        exclude: exclude,
+        valid: valid,
+        sample_frame: 0,
+        random_number: 0,
+        selected: 0,
+        location_accuracy: accuracy,
+        location_altitude: altitude,
+        location_latitude: latitude,
+        location_longitude: longitude
+    });
+    
     census.save(null, {
 
         success: function(response) {
             console.log('Successfully UPDATED census with _id: ' + response.toJSON()._id);
             alert("Census saved.");
             lastPlusOne();
+
+            if(pagination.current_page !== 1) {
+                //move the pagination to the first page
+                pagination.current_page = 1;
+                readCensusFromDb(); // read census from db
+            } else {
+                if(censuses.length >= pagination.items_per_page) {
+                    censuses.pop();
+                }
+                censuses.unshift(census);
+                censuses.trigger("collection:updated", { 
+                    count : pagination.items_per_page, 
+                    total : pagination.total + 1, 
+                    startAt : 0 } );
+            }
         },
         error: function(response) {
             console.log('Failed to update census!');
@@ -540,6 +621,12 @@ $(document).ready(function() {
         // if the screen is in the update mode, cancel it.
         lastPlusOne()
     });
+
+    readCensusFromDb();
+
+    censuses.on('collection:updated', function(details) {
+            updatePagination( details );
+        }, null);
 });
 
 $(window).on('beforeunload', function(){
