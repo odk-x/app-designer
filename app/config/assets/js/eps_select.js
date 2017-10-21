@@ -10,7 +10,7 @@ var ALTERNATE_POINT = 10;
 var NOT_SELECTED = 0;
 
 function display() {
-    loadConfig();
+    init();
     showShortInfo();
     $('#select').on( 'click',
         function() {
@@ -29,15 +29,10 @@ function display() {
     );
 }
 
-function loadConfig() {
-
-    EpsConfig.init(initSuccess, initFailed);
-}
-
-function initSuccess() {
-    EpsConfig.mainPoints = $.isNumeric( EpsConfig.mainPoints ) ? parseInt(EpsConfig.mainPoints) : 0;
-    EpsConfig.additionalPoints = $.isNumeric( EpsConfig.additionalPoints ) ? parseInt(EpsConfig.additionalPoints) : 0;
-    EpsConfig.alternatePoints = $.isNumeric( EpsConfig.alternatePoints ) ? parseInt(EpsConfig.alternatePoints) : 0;
+function init() {
+    EpsConfig.mainPoints = $.isNumeric( EpsConfig.getMainPoints() ) ? parseInt(EpsConfig.getMainPoints()) : 0;
+    EpsConfig.additionalPoints = $.isNumeric( EpsConfig.getAdditionalPoints() ) ? parseInt(EpsConfig.getAdditionalPoints()) : 0;
+    EpsConfig.alternatePoints = $.isNumeric( EpsConfig.getAlternatePoints() ) ? parseInt(EpsConfig.getAlternatePoints()) : 0;
 
     $('#mainPoints').val(EpsConfig.mainPoints);
     $('#additionalPoints').val(EpsConfig.additionalPoints);
@@ -49,14 +44,6 @@ function initSuccess() {
         $("#additionalPoints").attr('disabled', 'disabled');
         $("#alternatePoints").attr('disabled', 'disabled');
     }
-}
-
-function initFailed() {
-    alert("Initialization failed.");
-}
-
-function samplingPointsFixed() {
-    alert("Sampling points have been fixed in settings.");
 }
 
 function showShortInfo() {
@@ -174,7 +161,6 @@ function markSelected(data, callback) {
 
 function saveResults(data, callback) {
     var row = 0;
-    console.log(data[row]._id);
     var successFn = function( result ) {
         row++;
         if(row < data.length) {

@@ -16,7 +16,8 @@ function display() {
     settingsButton.on(
         'click',
         function() {
-            if(EpsConfig.resultCount > 0 && EpsConfig.password !== null && EpsConfig.password.length !== 0) {
+            // if a setting is imported from csv, empty passwords are records as 'null'
+            if(EpsConfig.getPassword() !== 'null' && EpsConfig.getPassword().length !== 0) {
                 $("#loginModal").modal();
             } else {
                 odkTables.launchHTML(null, 'config/assets/eps_config.html');
@@ -28,7 +29,7 @@ function display() {
     loginButton.on(
         'click',
         function() {
-            if(EpsConfig.password === $('#password').val()) {
+            if(EpsConfig.getPassword() === sha256($('#password').val())) {
                 $("#loginModal").modal('toggle');
                 odkTables.launchHTML(null, 'config/assets/eps_config.html');
             } else {
@@ -41,13 +42,9 @@ function display() {
 }
 
 function loadConfig() {
-    EpsConfig.init(successFn, null);
+    EpsConfig.init(null, null);
 }
 
-function successFn() {
-    localStorage.setItem('tableId', EpsConfig.formName); 
-    console.log(EpsConfig.formName);
-}
 function getPlaceTypes() {
     var successFn = function( result ) {
         for (var row = 0; row < result.getCount(); row++) {

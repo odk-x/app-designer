@@ -35,9 +35,9 @@ function showLocationFound(coords) {
                       .removeClass('red_spinner')
                       .removeClass('black_spinner');
 
-    if(accuracy >0 && accuracy<=EpsConfig.goodGpsAccuracyThresholds) {
+    if(accuracy >0 && accuracy<=EpsConfig.getGoodGpsAccuracyThresholds()) {
         $('#gps_accuracy_spinner').addClass('green_spinner');
-    } else if(accuracy >EpsConfig.goodGpsAccuracyThresholds && accuracy<=EpsConfig.moderateGpsAccuracyThresholds) {
+    } else if(accuracy >EpsConfig.getGoodGpsAccuracyThresholds() && accuracy<=EpsConfig.getModerateGpsAccuracyThresholds()) {
         $('#gps_accuracy_spinner').addClass('orange_spinner');
     } else { 
         $('#gps_accuracy_spinner').addClass('red_spinner');
@@ -322,7 +322,7 @@ var CensusView = Backbone.View.extend({
             this.model.set('exclude', exclude);
             
             if($('#replace_gps').prop('checked')) {
-                var valid = ((accuracy > 0 && accuracy <= EpsConfig.goodGpsAccuracyThresholds) ? 1:0);
+                var valid = ((accuracy > 0 && accuracy <= EpsConfig.getGoodGpsAccuracyThresholds()) ? 1:0);
                 this.model.set('valid', valid);
                 this.model.set('location_accuracy', accuracy);
                 this.model.set('location_altitude', altitude);
@@ -497,7 +497,7 @@ function validateData(checkGPS) {
     } else if($('#headName').val().trim().length === 0){
         alert('Error: Missing required field [Head Name]. Data is not saved.');
         return false;
-    } else if(checkGPS===true && (accuracy===0 || accuracy > EpsConfig.goodGpsAccuracyThresholds)) {
+    } else if(checkGPS===true && (accuracy===0 || accuracy > EpsConfig.getGoodGpsAccuracyThresholds())) {
         if(confirm("Data from GPS is not valid. Continue saving? Accuracy " + accuracy + " m.")) {
             return true;
         } else {
@@ -509,7 +509,7 @@ function validateData(checkGPS) {
 
 function save() {
     var exclude = $('#exclude').prop('checked') === true ? 1 : 0;
-    var valid = ((accuracy > 0 && accuracy <= EpsConfig.goodGpsAccuracyThresholds) ? 1:0);
+    var valid = ((accuracy > 0 && accuracy <= EpsConfig.getGoodGpsAccuracyThresholds()) ? 1:0);
     var census = new Census({
         place_name: localStorage.getItem("place_name_selected"),
         house_number: $('#houseNum').val(),
@@ -594,15 +594,8 @@ function lastPlusOne() {
     generateLastIDPlus1();
 }
 
-function successFnInit() {
-    // check that the user saved empty value in the setting. If so, use 10 and 50 as default values
-    EpsConfig.goodGpsAccuracyThresholds = $.isNumeric( EpsConfig.goodGpsAccuracyThresholds ) ? parseInt(EpsConfig.goodGpsAccuracyThresholds) : 10;
-    EpsConfig.moderateGpsAccuracyThresholds = $.isNumeric( EpsConfig.moderateGpsAccuracyThresholds ) ? parseInt(EpsConfig.moderateGpsAccuracyThresholds) : 50;
-}
-
 $(document).ready(function() {
     setupLocation();
-    EpsConfig.init(successFnInit, null);
     
     $('#save').on('click', function() {
         if(validateData(true)) {

@@ -17,7 +17,7 @@ var editQuestionnaireAction=1;
 
 function display() {
     
-    loadConfig();
+    init();
 
     odkCommon.registerListener(function() {
         actionCBFn();
@@ -76,18 +76,14 @@ function display() {
     );
 }
 
-function loadConfig() {
-    EpsConfig.init(initSuccess, null);
-}
-
-function initSuccess() {
-    if(EpsConfig.showCollectModule === 0) {
+function init() {
+    if(EpsConfig.getShowCollectModule() === 0) {
         $('#collect').hide();
     }
-    if(EpsConfig.showSelectModule === 0) {
+    if(EpsConfig.getShowSelectModule() === 0) {
         $('#select').hide();
     }
-    if(EpsConfig.showNavigateModule === 0) {
+    if(EpsConfig.getShowNavigateModule() === 0) {
         $('.navigate').hide();
     }
 }
@@ -146,10 +142,10 @@ function handleNavigationResult(action, dispatchStr) {
   }
   if(rowId !== null && rowId !== undefined) {
     console.log(rowId);
-    var dispatchStruct = {};
-    dispatchStruct[actionTypeKey] = editQuestionnaireAction;
-    if(localStorage.getItem('tableId')!==null && localStorage.getItem('tableId')!== undefined && localStorage.getItem('tableId').length>0) {
-      odkTables.editRowWithSurvey(JSON.stringify(dispatchStruct), localStorage.getItem('tableId'), rowId, localStorage.getItem('tableId'), null);
+    if(EpsConfig.getFormName().length>0) {
+      var dispatchStruct = {};
+      dispatchStruct[actionTypeKey] = editQuestionnaireAction;
+      odkTables.editRowWithSurvey(JSON.stringify(dispatchStruct), EpsConfig.getFormName(), rowId, EpsConfig.getFormName(), null);
     } else {
       alert("Choose a form you want to start in the admin setting.");
     }
