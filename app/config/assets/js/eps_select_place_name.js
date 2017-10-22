@@ -9,6 +9,7 @@ var place_types = new Array();
 
 //to display the places selected in the main menu hierarchically
 var places_selected = {};
+var LOGIN_DIALOG_KEY = "Dialog_Key";
 
 function display() {
     loadConfig();
@@ -18,6 +19,7 @@ function display() {
         function() {
             // if a setting is imported from csv, empty passwords are records as 'null'
             if(EpsConfig.getPassword() !== 'null' && EpsConfig.getPassword().length !== 0) {
+                odkCommon.setSessionVariable(LOGIN_DIALOG_KEY, "yes");
                 $("#loginModal").modal();
             } else {
                 odkTables.launchHTML(null, 'config/assets/eps_config.html');
@@ -39,6 +41,18 @@ function display() {
     );
 
     getPlaceTypes();
+
+    $('#loginModal').on('hide.bs.modal', function(e) {
+        odkCommon.setSessionVariable(LOGIN_DIALOG_KEY, "no");
+    });
+
+    //maintain login dialog visibility during screen rotation
+    var loginDialogShowing = odkCommon.getSessionVariable(LOGIN_DIALOG_KEY);
+    console.log(loginDialogShowing);
+    if(loginDialogShowing !== null && loginDialogShowing !== undefined 
+        && loginDialogShowing === "yes") {
+        $("#loginModal").modal();
+    }
 }
 
 function loadConfig() {
@@ -100,6 +114,9 @@ function createHierarchy(level,labelName, visible) {
         // this will save what is selected for each place types
         // e.g. places_selected['Region'] = 'Dre Dawa'
         places_selected[place_types[selected_control_level]]=this.options[this.selectedIndex].text;
+        
+        //put the selected value in the session variable to restore it during screen rotation
+        odkCommon.setSessionVariable(this.id, this.value);
     });
 
     div.append(label);
@@ -143,11 +160,14 @@ function populateFirstControl(type) {
         $("#pn_0").append(option);
 
         for (var row = 0; row < result.getCount(); row++) {
-                var option = $("<option>");
-                option.val(result.getData(row,"code"));
-                option.text(result.getData(row,"name"));
-                $("#pn_0").append(option);
-            }
+            var option = $("<option>");
+            option.val(result.getData(row,"code"));
+            option.text(result.getData(row,"name"));
+            $("#pn_0").append(option);
+        }
+        //check if this control has a value in the session variable, if so
+        //restore it's value
+        restoreValue('pn_0');
     }
 
     var failureFn = function( errorMsg) {
@@ -170,12 +190,15 @@ function controlVisibility(type, filter, selected_control_index) {
         $(next_combo_id).append(option);
 
         for (var row = 0; row < result.getCount(); row++) {
-                var option = $("<option>");
-                option.val(result.getData(row,"code"));
-                option.text(result.getData(row,"name"));
-                $(next_combo_id).append(option);
-            }
+            var option = $("<option>");
+            option.val(result.getData(row,"code"));
+            option.text(result.getData(row,"name"));
+            $(next_combo_id).append(option);
+        }
         $(parent_div).show();
+        //check if this control has a value in the session variable, if so
+        //restore it's value
+        restoreValue($(next_combo_id).attr('id'));
     }
 
     var failureFn = function( errorMsg) {
@@ -187,6 +210,13 @@ function controlVisibility(type, filter, selected_control_index) {
         odkData.query('place_name', 'type=? and filter=?', [type, filter], null, null,
             null, null, null, null, null, successFn,
             failureFn);
+    }
+}
+
+function restoreValue(id) {
+    var val = odkCommon.getSessionVariable(id);
+    if(val !== null && val !== undefined && val.length !==0) {
+        $('#'+id).val(val).change();
     }
 }
 
