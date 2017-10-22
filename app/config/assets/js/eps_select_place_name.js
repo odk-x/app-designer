@@ -48,7 +48,6 @@ function display() {
 
     //maintain login dialog visibility during screen rotation
     var loginDialogShowing = odkCommon.getSessionVariable(LOGIN_DIALOG_KEY);
-    console.log(loginDialogShowing);
     if(loginDialogShowing !== null && loginDialogShowing !== undefined 
         && loginDialogShowing === "yes") {
         $("#loginModal").modal();
