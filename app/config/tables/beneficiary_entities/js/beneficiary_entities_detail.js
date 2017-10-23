@@ -159,9 +159,9 @@ function setToDeliveryView(includeWorkflowButton) {
 function setSublistToEnabledPendingEntitlements(action) {
     console.log("setting to pending");
 
-    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' t1 LEFT JOIN ' +  util.deliveryTable +
-        ' t2 ON t2.entitlement_id = t1._id INNER JOIN '  + util.authorizationTable + ' t3 ON t1.authorization_id = t3._id' +
-        ' WHERE t2._id IS NULL AND t1.beneficiary_entity_id = ? AND t1.status = ?';
+    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' ent LEFT JOIN ' +  util.deliveryTable +
+        ' del ON del.entitlement_id = ent._id INNER JOIN '  + util.authorizationTable + ' auth ON ent.authorization_id = auth._id' +
+        ' WHERE del._id IS NULL AND ent.beneficiary_entity_id = ? AND ent.status = ?';
 
     odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId, 'ENABLED'],
         'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent(action));
@@ -170,8 +170,9 @@ function setSublistToEnabledPendingEntitlements(action) {
 function setSublistToAllPendingEntitlements(action) {
     console.log("setting to pending");
 
-    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' t1 LEFT JOIN ' +  util.deliveryTable +
-        ' t2 ON t2.entitlement_id = t1._id WHERE t2._id IS NULL AND t1.beneficiary_entity_id = ?';
+    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' ent LEFT JOIN ' +  util.deliveryTable +
+        ' del ON del.entitlement_id = ent._id INNER JOIN '  + util.authorizationTable + ' auth ON ent.authorization_id = auth._id' +
+        ' WHERE del._id IS NULL AND ent.beneficiary_entity_id = ?';
 
     odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
         'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent(action));
@@ -180,9 +181,8 @@ function setSublistToAllPendingEntitlements(action) {
 function setSublistToDeliveredEntitlements() {
     console.log("setting to delivered");
 
-    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' t1' +
-        ' JOIN ' + util.deliveryTable + ' t2 ON t2.entitlement_id = t1._id' +
-        ' WHERE t1.beneficiary_entity_id = ?';
+    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' ent INNER JOIN ' + util.deliveryTable + ' t2 ON t2.entitlement_id = ent._id' +
+        ' WHERE ent.beneficiary_entity_id = ?';
 
     odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
         'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent('detail'));
