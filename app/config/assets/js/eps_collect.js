@@ -275,7 +275,7 @@ function syncCreate(method,  model, options) {
         } 
     }
 
-    odkData.addRow('census', data, odkCommon.genUUID(), successFnCreate, 
+    odkData.addRow('census', data, util.genUUID(), successFnCreate, 
         failureFnCreate);
 }
 

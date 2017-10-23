@@ -110,7 +110,7 @@
                 config['password'] = sha256(this.password);
             }
             
-            odkData.addRow('config', config, odkCommon.genUUID(), successFnInsert, failureFnInsert);
+            odkData.addRow('config', config, util.genUUID(), successFnInsert, failureFnInsert);
         }
     };
 })();
