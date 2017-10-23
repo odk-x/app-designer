@@ -53,29 +53,41 @@ function display() {
 
             var sqlWhereClause = [];
             var sqlSelectionArgs = [];
-            $.each($("#point-types option:selected"), function() {
-
-                switch($(this).val()) {
-                    case '1':
-                        sqlWhereClause.push('exclude=?');
+            $.each(filterByPointType, function(index,value) {
+                switch(value) {
+                    case '1000'://main
+                    case '100'://additional
+                    case '10'://alternate
+                      sqlWhereClause.push('(selected=? AND (questionnaire_status is null or questionnaire_status =?))');
+                      sqlSelectionArgs.push(value);
+                      sqlSelectionArgs.push('INCOMPLETE');
+                      break;
+                    case '1'://excluded
+                        sqlWhereClause.push('(exclude=? AND (questionnaire_status is null or questionnaire_status =?))');
+                        sqlSelectionArgs.push(value);
+                        sqlSelectionArgs.push('INCOMPLETE');
                         break;
-                    default:
-                        sqlWhereClause.push('selected=?');
+                    case '0'://not selected
+                        sqlWhereClause.push('(selected=? AND exclude=? AND (questionnaire_status is null or questionnaire_status =?))');
+                        sqlSelectionArgs.push('0');
+                        sqlSelectionArgs.push('0');
+                        sqlSelectionArgs.push('INCOMPLETE');
+                        break;
+                    case '-1'://finalized
+                        sqlWhereClause.push('questionnaire_status =?');
+                        sqlSelectionArgs.push('COMPLETE');
+                        break;
                 }
-                sqlSelectionArgs.push($(this).val());
+                
             });
 
-            if(sqlWhereClause.length===0) {
-                $.each([1000,100,10], function(index,val) {
-                    sqlWhereClause.push('selected=?');
-                    sqlSelectionArgs.push(val);
-                });
-            }
+            var sqlWhere = '(' + sqlWhereClause.join(' or ') + ') AND place_name=?';
+            sqlSelectionArgs.push(localStorage.getItem("place_name_selected"));
 
             var dispatchStruct = {};
             dispatchStruct[actionTypeKey] = navigateAction;
             odkTables.openTableToNavigateView(JSON.stringify(dispatchStruct),
-                                    'census', sqlWhereClause.join(' or '), sqlSelectionArgs, null);
+                                    'census', sqlWhere, sqlSelectionArgs, null);
         }
     );
 
@@ -103,8 +115,8 @@ function restoreFilterSelectControl() {
     if(filterByPointType.length === 0) {
       setDefaultPointTypes();
     } else {
-      $.each(filterByPointType, function(i,e) {
-        $('#point-types option[value="'+e+'"]').prop('selected', true);
+      $.each(filterByPointType, function(index,value) {
+        $('#point-types option[value="'+value+'"]').prop('selected', true);
       });
     }
 }
@@ -115,8 +127,8 @@ function setDefaultPointTypes() {
     filterByPointType.push("10");
     odkCommon.setSessionVariable(FILTER_KEY, JSON.stringify(filterByPointType));
   
-    $.each(filterByPointType, function(i,e) {
-      $('#point-types option[value="'+e+'"]').prop('selected', true);
+    $.each(filterByPointType, function(index,value) {
+      $('#point-types option[value="'+value+'"]').prop('selected', true);
     });
 }
 
