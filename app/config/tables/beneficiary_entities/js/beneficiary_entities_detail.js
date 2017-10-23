@@ -154,12 +154,14 @@ function setToDeliveryView(includeWorkflowButton) {
     }
 }
 
+//TODO: join on authorization table so that we do not allow a delivery to an authorization that doesn't exist
+
 function setSublistToEnabledPendingEntitlements(action) {
     console.log("setting to pending");
 
     var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' t1 LEFT JOIN ' +  util.deliveryTable +
-        ' t2 ON t2.entitlement_id = t1._id WHERE t2._id IS NULL AND t1.beneficiary_entity_id = ?' +
-        ' AND t1.status = ?';
+        ' t2 ON t2.entitlement_id = t1._id INNER JOIN '  + util.authorizationTable + ' t3 ON t1.authorization_id = t3._id' +
+        ' WHERE t2._id IS NULL AND t1.beneficiary_entity_id = ? AND t1.status = ?';
 
     odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId, 'ENABLED'],
         'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent(action));
