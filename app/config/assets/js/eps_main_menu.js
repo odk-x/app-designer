@@ -14,6 +14,8 @@ var instanceIdKey = 'instanceId';
 var savepointTypeKey = 'savepoint_type';
 var navigateAction = 0;
 var editQuestionnaireAction=1;
+var filterByPointType = [];
+var FILTER_KEY="filter_by_point_type";
 
 function display() {
     
@@ -25,6 +27,8 @@ function display() {
     actionCBFn();
 
     displayPlacesSelected();
+
+    restoreFilterSelectControl();
 
     var collectButton = $('#collect');
     collectButton.on(
@@ -74,6 +78,42 @@ function display() {
                                     'census', sqlWhereClause.join(' or '), sqlSelectionArgs, null);
         }
     );
+
+    $('#point-types').change(function() {
+        filterByPointType = [];
+        $('#point-types option:selected').each(function() {
+            filterByPointType.push($(this).val());
+        });
+        odkCommon.setSessionVariable(FILTER_KEY, JSON.stringify(filterByPointType));
+
+        // if no value is selected, set Main, Additional and Alternate points
+        if(filterByPointType.length === 0) {
+          setDefaultPointTypes();
+        }
+    });
+}
+
+function restoreFilterSelectControl() {
+    var filter = odkCommon.getSessionVariable(FILTER_KEY);
+    if(filter !== null && filter !== undefined) {
+        filterByPointType = JSON.parse(filter);
+    }
+
+    // if no value is selected in filterByPointType array, select Main, Additional and Alternate points
+    if(filterByPointType.length === 0) {
+      setDefaultPointTypes();
+    }
+}
+
+function setDefaultPointTypes() {
+    filterByPointType.push("1000");
+    filterByPointType.push("100");
+    filterByPointType.push("10");
+    odkCommon.setSessionVariable(FILTER_KEY, JSON.stringify(filterByPointType));
+  
+    $.each(filterByPointType, function(i,e) {
+      $('#point-types option[value="'+e+'"]').prop('selected', true);
+    });
 }
 
 function init() {
