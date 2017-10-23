@@ -514,7 +514,7 @@ function save() {
         place_name: localStorage.getItem("place_name_selected"),
         house_number: $('#houseNum').val(),
         head_name: $('#headName').val(),
-        comment: $('#comment').val(),
+        comment: $('#comment').val().trim().length > 0 ? $('#comment').val().trim():null,
         exclude: exclude,
         valid: valid,
         sample_frame: 0,
