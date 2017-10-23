@@ -182,11 +182,11 @@ let displayGroup = function(idxStart, entitlementsResultSet) {
             toggle.find('#right' + '-' + i).click( {"index": i}, function(event) {
                 return changeStatusPromise(entitlementsResultSet.getRowId(event.data.index), 'DISABLED');
             });
-
+            
             if (entitlementsResultSet.getData(i, 'status') === 'ENABLED') {
-                $('#left').prop('checked', true);
+                toggle.find('.left').attr('checked', true);
             } else {
-                $('#right').prop('checked', true);
+                toggle.find('.right').attr('checked', true);
             }
 
             toggle.show();

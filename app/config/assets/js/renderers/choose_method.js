@@ -136,28 +136,31 @@ function populateSyncList() {
         console.log('entered delivery sync path');
         let newRows = $('<h3>');
         return new Promise( function(resolve, reject) {
-            odkData.query(util.deliveryTable, '_sync_state = ?', ['new_row'],
-                null, null, null, null, null, null, false, resolve, reject);
+            odkData.arbitraryQuery(util.deliveryTable, 'SELECT count(*) AS count FROM ' + 
+                util.deliveryTable + ' WHERE _sync_state = ?', ['new_row'],
+                null, null, resolve, reject);
         }).then( function(result) {
-            newRows.text('New since last sync: ' + result.getCount());
+            newRows.text('New since last sync: ' + result.get('count'));
             $('#sync_list').append(newRows);
         });
     } else if (type === 'registration') {
         console.log('entered registration sync path');
         let newRows = $('<h3>');
         let newRowsPromise = new Promise( function(resolve, reject) {
-            odkData.query(util.beneficiaryEntityTable, '_sync_state = ?', ['new_row'],
-                null, null, null, null, null, null, false, resolve, reject);
+            odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS count FROM ' + 
+                util.beneficiaryEntityTable + ' WHERE _sync_state = ?', ['new_row'],
+                null, null, resolve, reject);
         });
         let updatedRows = $('<h3>');
         let updatedRowsPromise = new Promise( function(resolve, reject) {
-            odkData.query(util.beneficiaryEntityTable, '_sync_state = ? OR _sync_state = ?', ['changed', 'in_conflict'],
-                null, null, null, null, null, null, false, resolve, reject);
+            odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS count FROM ' + 
+                util.beneficiaryEntityTable + ' WHERE _sync_state = ? OR _sync_state = ?',
+                ['changed', 'in_conflict'], null, null, resolve, reject);
         });
 
         return Promise.all([newRowsPromise, updatedRowsPromise]).then( function(resultArr) {
-            newRows.text('New since last sync: ' + resultArr[0].getCount());
-            updatedRows.text('Updated since last sync: ' + resultArr[1].getCount());
+            newRows.text('New since last sync: ' + resultArr[0].get('count'));
+            updatedRows.text('Updated since last sync: ' + resultArr[1].get('count'));
             $('#sync_list').append(newRows);
             $('#sync_list').append(updatedRows);
         });
@@ -594,7 +597,7 @@ function createOverrideCBSuccess(result) {
     struct['_default_access'] = 'HIDDEN';
     struct['_row_owner'] = user;
     struct['_group_modify'] = defaultGroup;
-    struct['date_created'] = odkCommon.getCurrentOdkTimestamp();
+    struct['date_created'] = util.getCurrentOdkTimestamp();
     odkData.addRow(util.entitlementTable, struct, util.genUUID(), addDistCBSuccess, addDistCBFailure);
 }
 

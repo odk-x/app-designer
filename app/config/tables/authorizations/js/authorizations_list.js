@@ -138,7 +138,6 @@ var resumeFn = function(fIdxStart) {
                                 util.setJSONMap(jsonMap, "report_version", reportVersion);
                                 util.setJSONMap(jsonMap, "summary_form_id", summaryFormId);
                                 util.setJSONMap(jsonMap, "summary_row_id", customReportRowId);
-                                util.setJSONMap(json, "date_created", util.getCurrentOdkTimestamp());
                                 odkData.addRow(util.authorizationReportTable, jsonMap, rootRowId, resolve, reject);
                             }).then( function(result) {
                                 dataUtil.createCustomRowFromBaseEntry(result, "summary_form_id", "summary_row_id", actionAuthorizationReport, null);

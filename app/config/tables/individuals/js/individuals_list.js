@@ -92,8 +92,6 @@ var displayGroup = function(idxStart) {
 
         setTimeout((function f(htmlItem, index) {
             dbActions.push(new Promise( function(resolve, reject) {
-                console.log(index);
-                console.log(individualsResultSet.getData(index, 'custom_individual_row_id'));
                 odkData.query(util.getIndividualCustomFormId(), '_id = ?', [individualsResultSet.getData(index, 'custom_individual_row_id')],
                     null, null, null, null, null, null, true, resolve, reject);
             }).then( function(customIndividualResult) {

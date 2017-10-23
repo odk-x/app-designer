@@ -37,7 +37,7 @@ function display() {
             exclusionList.push('status');
         }  else if (type === 'override_entitlement_status') {
             $('#toggle_workflow').hide();
-            setSublistToPendingEntitlements('change_status');
+            setSublistToAllPendingEntitlements('change_status');
 
 
         } else if (util.getRegistrationMode() === "INDIVIDUAL") {
@@ -54,7 +54,6 @@ function display() {
                 $('#toggle_workflow').hide();
                 setToHouseholdView();
             } else {
-                console.log("entered household path");
                 initEntitlementToggle();
                 if (type === "registration") {
                     setToHouseholdView();
@@ -110,8 +109,9 @@ function initEntitlementToggle() {
     $('#switch-title-id').text('Entitlements Listed'); // TODO: localize this
 
     $('#left_txt').text('Pending'); // TODO: Localize this
+    $('#left').prop('checked', true);
     $('#left').click(function() {
-        setSublistToPendingEntitlements('deliver');
+        setSublistToEnabledPendingEntitlements('deliver');
     });
 
     $('#right_txt').text('Delivered'); // TODO: Localize this
@@ -131,7 +131,7 @@ function setToHouseholdView() {
         console.log("setting to delivery view");
         setToDeliveryView(true);
     });
-    $('#switch-field').hide();
+    $('#switch-id').hide();
     setSublistToHousehold();
 }
 
@@ -148,13 +148,24 @@ function setToDeliveryView(includeWorkflowButton) {
     }
     $('#switch-id').show();
     if ($('#left').is(':checked')) {
-        setSublistToPendingEntitlements('deliver');
+        setSublistToEnabledPendingEntitlements('deliver');
     } else {
         setSublistToDeliveredEntitlements();
     }
 }
 
-function setSublistToPendingEntitlements(action) {
+function setSublistToEnabledPendingEntitlements(action) {
+    console.log("setting to pending");
+
+    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' t1 LEFT JOIN ' +  util.deliveryTable +
+        ' t2 ON t2.entitlement_id = t1._id WHERE t2._id IS NULL AND t1.beneficiary_entity_id = ?' +
+        ' AND t1.status = ?';
+
+    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId, 'ENABLED'],
+        'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent(action));
+}
+
+function setSublistToAllPendingEntitlements(action) {
     console.log("setting to pending");
 
     var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' t1 LEFT JOIN ' +  util.deliveryTable +
