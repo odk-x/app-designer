@@ -470,19 +470,11 @@ var CensusesView = Backbone.View.extend({
         var valid=0, invalid =0, exclude=0;
         this.$el.html('');// clear the el
         _.each(this.model.toArray(), function(census) {
-            if(census.attributes.exclude ===1) {
-                exclude++;
-            } else if(census.attributes.valid ===1) {
-                valid++;
-            } else {
-                invalid++;
-            }
-            
             self.$el.append((new CensusView({model: census})).render().el);
         });
-        $('#num_valid').html(valid);
-        $('#num_invalid').html(invalid);
-        $('#num_excluded').html(exclude);
+        getNumOfValidCensus();
+        getNumOfInvalidCensus();
+        getNumOfExcludedCensus();
         
         return this;
     }
@@ -560,6 +552,60 @@ function save() {
 function clearControlValues() {
     $('#headName').val("");
     $('#comment').val("");
+}
+
+function getNumOfValidCensus() {
+    var successFn = function( result ) {
+        if(result.getCount()>0) {
+            $('#num_valid').html(result.getData(0,"num"));
+        } else {
+            $('#num_valid').html('0');
+        }
+    }
+
+    var failureFn = function( errorMsg) {
+        console.log('Failed to read census table');
+        $('#num_valid').html('e');
+    }
+
+    odkData.arbitraryQuery('census', "SELECT count(_id) AS num FROM census WHERE place_name=? AND valid=? and exclude=?", 
+        [localStorage.getItem("place_name_selected"),'1','0'], null, null, successFn, failureFn);
+}
+
+function getNumOfInvalidCensus() {
+    var successFn = function( result ) {
+        if(result.getCount()>0) {
+            $('#num_invalid').html(result.getData(0,"num")); 
+        } else {
+            $('#num_invalid').html('0');
+        }
+    }
+
+    var failureFn = function( errorMsg) {
+        console.log('Failed to read census table');
+        $('#num_invalid').html('e');
+    }
+
+    odkData.arbitraryQuery('census', "SELECT count(_id) AS num FROM census WHERE place_name=? AND valid=? and exclude=?", 
+        [localStorage.getItem("place_name_selected"),'0','0'], null, null, successFn, failureFn);
+}
+
+function getNumOfExcludedCensus() {
+    var successFn = function( result ) {
+        if(result.getCount()>0) {
+            $('#num_excluded').html(result.getData(0,"num")); 
+        } else {
+            $('#num_excluded').html('0');
+        }
+    }
+
+    var failureFn = function( errorMsg) {
+        console.log('Failed to read census table');
+        $('#num_excluded').html('e');
+    }
+
+    odkData.arbitraryQuery('census', "SELECT count(_id) AS num FROM census WHERE place_name=? AND exclude=?", 
+        [localStorage.getItem("place_name_selected"),'1'], null, null, successFn, failureFn);
 }
 
 function generateLastIDPlus1() {
