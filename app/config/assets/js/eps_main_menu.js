@@ -99,9 +99,13 @@ function restoreFilterSelectControl() {
         filterByPointType = JSON.parse(filter);
     }
 
-    // if no value is selected in filterByPointType array, select Main, Additional and Alternate points
+    // if filterByPointType array is empty, select Main, Additional and Alternate points
     if(filterByPointType.length === 0) {
       setDefaultPointTypes();
+    } else {
+      $.each(filterByPointType, function(i,e) {
+        $('#point-types option[value="'+e+'"]').prop('selected', true);
+      });
     }
 }
 
