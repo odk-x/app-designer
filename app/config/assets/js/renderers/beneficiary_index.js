@@ -25,11 +25,16 @@ beneficiaryIndex.display = function() {
     newClient.setAttribute("id", "register");
     newClient.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/html/choose_method.html?title='
-                             + encodeURIComponent(odkCommon.localizeText(locale,
-                                                                         registrationTitleToken))
-                             + '&type=registration');
+                            'config/assets/html/choose_method.html?title='
+                            + encodeURIComponent(odkCommon.localizeText(locale,
+                                                                        registrationTitleToken))
+                            + '&type=registration');
     };
+    if (util.getBeneficiaryEntityCustomFormId()) {
+        newClient.disabled = false;
+    } else {
+        newClient.disabled = true;
+    }
     document.getElementById("wrapper").appendChild(newClient);
 
     var followUp = document.createElement("button");
