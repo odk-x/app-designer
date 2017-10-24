@@ -3,7 +3,6 @@ address,address,string,[]
 consent_signature,consent_signature,mimeUri,"[""consent_signature_contentType"",""consent_signature_uriFragment""]"
 consent_signature_contentType,contentType,mimeType,[]
 consent_signature_uriFragment,uriFragment,rowpath,[]
-date_screened,date_screened,undefined,[]
 delivery_site,delivery_site,string,[]
 disabled_reason,disabled_reason,string,[]
 hh_size,hh_size,integer,[]

@@ -42,17 +42,35 @@ window.odkTableSpecificDefinitions = {
     },
     "item_pack_id": {
       "string_token": "item_pack_id",
-      "text": "Item Pack ID",
+      "text": {
+        "default": "Item Pack ID",
+        "greek": "Αναγνωριστικό πακέτου στοιχείου",
+        "arabic": "رقم الحزمة",
+        "farsi": "شماره بسته",
+        "spanish": "ID del artículo"
+      },
       "_row_num": 10
     },
     "item_pack_name": {
       "string_token": "item_pack_name",
-      "text": "Item Pack Name",
+      "text": {
+        "default": "Item Pack Name",
+        "greek": "Όνομα πακέτου στοιχείου",
+        "arabic": "اسم الحزمة",
+        "farsi": "نام بسته",
+        "spanish": "Nombre del artículo"
+      },
       "_row_num": 11
     },
     "item_description": {
       "string_token": "item_description",
-      "text": "Item Description",
+      "text": {
+        "default": "Item Pack Description",
+        "greek": "Περιγραφή πακέτου στοιχείου",
+        "arabic": "وصف الحزمة",
+        "farsi": "شرح بسته",
+        "spanish": "Descripción del artículo"
+      },
       "_row_num": 12
     },
     "custom_delivery_form_id": {

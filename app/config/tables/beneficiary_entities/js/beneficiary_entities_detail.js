@@ -4,36 +4,20 @@
 
 'use strict';
 
-var customBeneficiaryEntityResultSet = {};
 var type = util.getQueryParameter('type');
-var rootRowId = util.getQueryParameter('rootRowId');
 var locale = odkCommon.getPreferredLocale();
-var beneficiaryEntityId;
+var beneficiaryEntitiesResultSet;
 
 function display() {
     var displayPromise = new Promise( function(resolve, reject) {
         odkData.getViewData(resolve, reject);
     }).then( function(result) {
-        customBeneficiaryEntityResultSet = result;
-
-
-        //TODO: add translations entry for each column of all tables
-        var exclusionList = ['consent_signature', 'location_accuracy',
-         'location_altitude', 'location_latitude', 'location_longitude',
-          'consent_signature_contentType', 'consent_signature_uriFragment'];
-        util.populateDetailView(customBeneficiaryEntityResultSet, "field_list", locale, exclusionList);
-        console.log(customBeneficiaryEntityResultSet.getColumns());
-        return new Promise(function (resolve, reject) {
-            odkData.query(util.beneficiaryEntityTable, '_id = ?', [rootRowId],
-                null, null, null, null, null, null, true, resolve, reject);
-        });
-    }).then( function(result) {
-        $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + result.get('beneficiary_entity_id'));
-        beneficiaryEntityId = result.getData(0, "beneficiary_entity_id");
-        let exclusionList = ["beneficiary_entity_id"];
+        beneficiaryEntitiesResultSet = result;
+        $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + beneficiaryEntitiesResultSet.get('beneficiary_entity_id'));
+        let exclusionList = ['beneficiary_entity_id'];
         if (type === 'override_beneficiary_entity_status') {
             $('#toggle_workflow').hide();
-            initBeneficiaryStatusToggle(result.getData(0, "status"));
+            initBeneficiaryStatusToggle(beneficiaryEntitiesResultSet.getData(0, "status"));
             exclusionList.push('status');
         }  else if (type === 'override_entitlement_status') {
             $('#toggle_workflow').hide();
@@ -41,7 +25,7 @@ function display() {
 
 
         } else if (util.getRegistrationMode() === "INDIVIDUAL") {
-            if (result.get('status') === 'DISABLED') {
+            if (beneficiaryEntitiesResultSet.get('status') === 'DISABLED') {
                 // do nothing, this should be called as a detail view without sublist
             } else {
                 console.log("entered individual path");
@@ -50,7 +34,7 @@ function display() {
                 setToDeliveryView(false);
             }
         } else if (util.getRegistrationMode() === "HOUSEHOLD") {
-            if (result.get('status') === 'DISABLED') {
+            if (beneficiaryEntitiesResultSet.get('status') === 'DISABLED') {
                 $('#toggle_workflow').hide();
                 setToHouseholdView();
             } else {
@@ -62,7 +46,16 @@ function display() {
                 }
             }
         }
-        util.populateDetailView(result, "field_list", locale, exclusionList);
+        util.populateDetailView(beneficiaryEntitiesResultSet, "field_list", locale, exclusionList);
+        return new Promise( function(resolve, reject) {
+            odkData.query(util.getBeneficiaryEntityCustomFormId(), "_id = ?", [beneficiaryEntitiesResultSet.getData(0, 'custom_beneficiary_entity_row_id')],
+                null, null,null, null, null, null, true, resolve, reject);
+        }).then( function(result) {
+            var customExclusionList = ['consent_signature', 'location_accuracy',
+                'location_altitude', 'location_latitude', 'location_longitude',
+                'consent_signature_contentType', 'consent_signature_uriFragment'];
+            util.populateDetailView(result, "field_list", locale, customExclusionList);
+        });
     });
 
     displayPromise.catch( function(reason) {
@@ -95,7 +88,7 @@ function display() {
 
  function changeStatusPromise(status) {
      return new Promise( function(resolve, reject) {
-         odkData.updateRow(util.beneficiaryEntityTable, {'status' : status}, rootRowId,
+         odkData.updateRow(util.beneficiaryEntityTable, {'status' : status}, beneficiaryEntitiesResultSet.getData(0, "_id"),
              resolve, reject);
      }).then( function(result) {
          console.log('Update success: ' + result);
@@ -163,7 +156,7 @@ function setSublistToEnabledPendingEntitlements(action) {
         ' del ON del.entitlement_id = ent._id INNER JOIN '  + util.authorizationTable + ' auth ON ent.authorization_id = auth._id' +
         ' WHERE del._id IS NULL AND ent.beneficiary_entity_id = ? AND ent.status = ?';
 
-    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId, 'ENABLED'],
+    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntitiesResultSet.getData(0, "beneficiary_entity_id"), 'ENABLED'],
         'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent(action));
 }
 
@@ -174,7 +167,7 @@ function setSublistToAllPendingEntitlements(action) {
         ' del ON del.entitlement_id = ent._id INNER JOIN '  + util.authorizationTable + ' auth ON ent.authorization_id = auth._id' +
         ' WHERE del._id IS NULL AND ent.beneficiary_entity_id = ?';
 
-    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
+    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntitiesResultSet.getData(0, "beneficiary_entity_id")],
         'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent(action));
 }
 
@@ -184,7 +177,7 @@ function setSublistToDeliveredEntitlements() {
     var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' ent INNER JOIN ' + util.deliveryTable + ' t2 ON t2.entitlement_id = ent._id' +
         ' WHERE ent.beneficiary_entity_id = ?';
 
-    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
+    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntitiesResultSet.getData(0, "beneficiary_entity_id")],
         'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent('detail'));
 
 }
@@ -192,7 +185,7 @@ function setSublistToDeliveredEntitlements() {
 function setSublistToHousehold() {
     console.log("setting to household");
     odkTables.setSubListView(util.individualTable, 'beneficiary_entity_row_id = ?',
-        [rootRowId],
+        [beneficiaryEntitiesResultSet.getRowId(0)],
         'config/tables/' + util.individualTable + '/html/' + util.individualTable +'_list.html');
 }
 

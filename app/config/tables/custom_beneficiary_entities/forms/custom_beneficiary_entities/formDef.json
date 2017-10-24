@@ -2,14 +2,8 @@
   "xlsx": {
     "survey": [
       {
-        "type": "assign",
-        "name": "date_screened",
-        "calculation": "now().getTime()",
-        "_row_num": 2
-      },
-      {
         "clause": "begin screen",
-        "_row_num": 3
+        "_row_num": 2
       },
       {
         "type": "signature",
@@ -20,15 +14,15 @@
           }
         },
         "required": true,
-        "_row_num": 4
+        "_row_num": 3
       },
       {
         "clause": "end screen",
-        "_row_num": 5
+        "_row_num": 4
       },
       {
         "clause": "begin screen",
-        "_row_num": 6
+        "_row_num": 5
       },
       {
         "type": "string",
@@ -38,7 +32,7 @@
             "text": "What is your mobile phone service provider?"
           }
         },
-        "_row_num": 7
+        "_row_num": 6
       },
       {
         "type": "string",
@@ -54,15 +48,15 @@
         "inputAttributes": {
           "type": "number"
         },
-        "_row_num": 8
+        "_row_num": 7
       },
       {
         "clause": "end screen",
-        "_row_num": 9
+        "_row_num": 8
       },
       {
         "clause": "begin screen",
-        "_row_num": 10
+        "_row_num": 9
       },
       {
         "type": "select_one",
@@ -74,7 +68,7 @@
         },
         "values_list": "sites",
         "required": true,
-        "_row_num": 11
+        "_row_num": 10
       },
       {
         "type": "string",
@@ -91,7 +85,7 @@
           }
         },
         "required": "!data('tent_caravan')",
-        "_row_num": 12
+        "_row_num": 11
       },
       {
         "type": "string",
@@ -105,15 +99,15 @@
           }
         },
         "required": "!data('address')",
-        "_row_num": 13
+        "_row_num": 12
       },
       {
         "clause": "end screen",
-        "_row_num": 14
+        "_row_num": 13
       },
       {
         "clause": "begin screen",
-        "_row_num": 15
+        "_row_num": 14
       },
       {
         "type": "note",
@@ -122,7 +116,7 @@
             "text": "Household Members Section:"
           }
         },
-        "_row_num": 16
+        "_row_num": 15
       },
       {
         "type": "linked_table",
@@ -133,15 +127,15 @@
           }
         },
         "values_list": "reg_members",
-        "_row_num": 17
+        "_row_num": 16
       },
       {
         "clause": "end screen",
-        "_row_num": 18
+        "_row_num": 17
       },
       {
         "clause": "begin screen",
-        "_row_num": 19
+        "_row_num": 18
       },
       {
         "type": "geopoint",
@@ -151,17 +145,17 @@
             "text": "Capture current location"
           }
         },
-        "_row_num": 20
+        "_row_num": 19
       },
       {
         "type": "async_assign_count",
         "name": "hh_size",
         "values_list": "count_members",
-        "_row_num": 21
+        "_row_num": 20
       },
       {
         "clause": "end screen",
-        "_row_num": 22
+        "_row_num": 21
       }
     ],
     "settings": [
@@ -193,106 +187,6 @@
         "setting_name": "instance_name",
         "value": "first_last_name",
         "_row_num": 6
-      }
-    ],
-    "table_specific_translations": [
-      {
-        "string_token": "address",
-        "text": {
-          "default": "Address"
-        },
-        "_row_num": 2
-      },
-      {
-        "string_token": "id_number",
-        "text": {
-          "default": "ID Number"
-        },
-        "_row_num": 3
-      },
-      {
-        "string_token": "city",
-        "text": {
-          "default": "City"
-        },
-        "_row_num": 4
-      },
-      {
-        "string_token": "telephone",
-        "text": {
-          "default": "Telephone"
-        },
-        "_row_num": 5
-      },
-      {
-        "string_token": "mobile_provider",
-        "text": {
-          "default": "Mobile Provider"
-        },
-        "_row_num": 6
-      },
-      {
-        "string_token": "enable_success",
-        "text": {
-          "default": "Successfully Enabled!"
-        },
-        "_row_num": 7
-      },
-      {
-        "string_token": "disable_success",
-        "text": {
-          "default": "Successfully Disabled!"
-        },
-        "_row_num": 8
-      },
-      {
-        "string_token": "choose_entitlement",
-        "text": {
-          "default": "Choose an Entitlement To Deliver"
-        },
-        "_row_num": 9
-      },
-      {
-        "string_token": "no_entitlements",
-        "text": {
-          "default": "No Entitlements to Deliver"
-        },
-        "_row_num": 10
-      },
-      {
-        "string_token": "delivery_site",
-        "text": {
-          "default": "Delivery Site"
-        },
-        "_row_num": 11
-      },
-      {
-        "string_token": "hh_size",
-        "text": {
-          "default": "Household Size"
-        },
-        "_row_num": 12
-      },
-      {
-        "string_token": "disabled_reason",
-        "text": {
-          "default": "Disabled Reason"
-        },
-        "_row_num": 13
-      },
-      {
-        "string_token": "location",
-        "text": {
-          "default": "Location"
-        },
-        "_row_num": 14
-      },
-      {
-        "string_token": "tent_caravan",
-        "text": {
-          "default": "Tent/Caravan Code"
-        },
-        "_row_num": 15
       }
     ],
     "model": [
@@ -663,106 +557,7 @@
       ]
     },
     "table_specific_definitions": {
-      "_tokens": {
-        "address": {
-          "string_token": "address",
-          "text": {
-            "default": "Address"
-          },
-          "_row_num": 2
-        },
-        "id_number": {
-          "string_token": "id_number",
-          "text": {
-            "default": "ID Number"
-          },
-          "_row_num": 3
-        },
-        "city": {
-          "string_token": "city",
-          "text": {
-            "default": "City"
-          },
-          "_row_num": 4
-        },
-        "telephone": {
-          "string_token": "telephone",
-          "text": {
-            "default": "Telephone"
-          },
-          "_row_num": 5
-        },
-        "mobile_provider": {
-          "string_token": "mobile_provider",
-          "text": {
-            "default": "Mobile Provider"
-          },
-          "_row_num": 6
-        },
-        "enable_success": {
-          "string_token": "enable_success",
-          "text": {
-            "default": "Successfully Enabled!"
-          },
-          "_row_num": 7
-        },
-        "disable_success": {
-          "string_token": "disable_success",
-          "text": {
-            "default": "Successfully Disabled!"
-          },
-          "_row_num": 8
-        },
-        "choose_entitlement": {
-          "string_token": "choose_entitlement",
-          "text": {
-            "default": "Choose an Entitlement To Deliver"
-          },
-          "_row_num": 9
-        },
-        "no_entitlements": {
-          "string_token": "no_entitlements",
-          "text": {
-            "default": "No Entitlements to Deliver"
-          },
-          "_row_num": 10
-        },
-        "delivery_site": {
-          "string_token": "delivery_site",
-          "text": {
-            "default": "Delivery Site"
-          },
-          "_row_num": 11
-        },
-        "hh_size": {
-          "string_token": "hh_size",
-          "text": {
-            "default": "Household Size"
-          },
-          "_row_num": 12
-        },
-        "disabled_reason": {
-          "string_token": "disabled_reason",
-          "text": {
-            "default": "Disabled Reason"
-          },
-          "_row_num": 13
-        },
-        "location": {
-          "string_token": "location",
-          "text": {
-            "default": "Location"
-          },
-          "_row_num": 14
-        },
-        "tent_caravan": {
-          "string_token": "tent_caravan",
-          "text": {
-            "default": "Tent/Caravan Code"
-          },
-          "_row_num": 15
-        }
-      }
+      "_tokens": {}
     },
     "queries": {
       "reg_members": {
@@ -795,7 +590,7 @@
         "valuesList": "sites",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -809,7 +604,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
@@ -823,7 +618,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "survey"
           },
           {
@@ -837,7 +632,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "survey"
           },
           {
@@ -853,7 +648,7 @@
         "valuesList": "count_members",
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 20,
             "section_name": "survey"
           },
           {
@@ -896,7 +691,7 @@
         },
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 19,
             "section_name": "survey"
           },
           {
@@ -935,7 +730,7 @@
         },
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 3,
             "section_name": "survey"
           },
           {
@@ -949,7 +744,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -958,15 +753,6 @@
           }
         ],
         "elementKey": "tent_caravan"
-      },
-      "date_screened": {
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          }
-        ],
-        "elementKey": "date_screened"
       }
     },
     "section_names": [
@@ -988,11 +774,11 @@
               }
             },
             "required": true,
-            "_row_num": 4,
-            "__rowNum__": 3,
+            "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "signature",
-            "_branch_label_enclosing_screen": "survey/_screen3",
+            "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
           {
@@ -1003,11 +789,11 @@
                 "text": "What is your mobile phone service provider?"
               }
             },
-            "_row_num": 7,
-            "__rowNum__": 6,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen6",
+            "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 1
           },
           {
@@ -1024,11 +810,11 @@
             "inputAttributes": {
               "type": "number"
             },
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 7,
+            "__rowNum__": 6,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen6",
+            "_branch_label_enclosing_screen": "survey/_screen5",
             "promptIdx": 2
           },
           {
@@ -1041,11 +827,11 @@
             },
             "values_list": "sites",
             "required": true,
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "_row_num": 10,
+            "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 3
           },
           {
@@ -1063,11 +849,11 @@
               }
             },
             "required": "!data('tent_caravan')",
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 4
           },
           {
@@ -1082,11 +868,11 @@
               }
             },
             "required": "!data('address')",
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen10",
+            "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 5
           },
           {
@@ -1096,11 +882,11 @@
                 "text": "Household Members Section:"
               }
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen15",
+            "_branch_label_enclosing_screen": "survey/_screen14",
             "promptIdx": 6
           },
           {
@@ -1112,11 +898,11 @@
               }
             },
             "values_list": "reg_members",
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "prompt",
             "_type": "linked_table",
-            "_branch_label_enclosing_screen": "survey/_screen15",
+            "_branch_label_enclosing_screen": "survey/_screen14",
             "promptIdx": 7
           },
           {
@@ -1127,30 +913,30 @@
                 "text": "Capture current location"
               }
             },
-            "_row_num": 20,
-            "__rowNum__": 19,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
             "_type": "geopoint",
-            "_branch_label_enclosing_screen": "survey/_screen19",
+            "_branch_label_enclosing_screen": "survey/_screen18",
             "promptIdx": 8
           },
           {
             "type": "async_assign_count",
             "name": "hh_size",
             "values_list": "count_members",
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "async_assign_count",
-            "_branch_label_enclosing_screen": "survey/_screen19",
+            "_branch_label_enclosing_screen": "survey/_screen18",
             "promptIdx": 9
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 23,
-            "_branch_label_enclosing_screen": "survey/_screen23",
+            "_row_num": 22,
+            "_branch_label_enclosing_screen": "survey/_screen22",
             "promptIdx": 10
           }
         ],
@@ -1164,114 +950,105 @@
         },
         "operations": [
           {
-            "type": "assign",
-            "name": "date_screened",
-            "calculation": "now().getTime()",
+            "clause": "begin screen",
             "_row_num": 2,
             "__rowNum__": 1,
-            "_token_type": "assign",
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 4,
+              "__rowNum__": 3,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
             "clause": "begin screen",
-            "_row_num": 3,
-            "__rowNum__": 2,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 5,
-              "__rowNum__": 4,
+              "_row_num": 8,
+              "__rowNum__": 7,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
             "clause": "begin screen",
-            "_row_num": 6,
-            "__rowNum__": 5,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 9,
-              "__rowNum__": 8,
+              "_row_num": 13,
+              "__rowNum__": 12,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
             "clause": "begin screen",
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 14,
-              "__rowNum__": 13,
+              "_row_num": 17,
+              "__rowNum__": 16,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
             "clause": "begin screen",
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 18,
-              "__rowNum__": 17,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 19,
-            "__rowNum__": 18,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 22,
-              "__rowNum__": 21,
+              "_row_num": 21,
+              "__rowNum__": 20,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 5
+            "operationIdx": 4
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 23,
-            "operationIdx": 6
+            "_row_num": 22,
+            "operationIdx": 5
           },
           {
-            "_row_num": 23,
+            "_row_num": 22,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 7
+            "operationIdx": 6
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 23,
-            "operationIdx": 8
+            "_row_num": 22,
+            "operationIdx": 7
           }
         ],
         "branch_label_map": {
-          "_screen3": 1,
-          "_screen6": 2,
-          "_screen10": 3,
-          "_screen15": 4,
-          "_screen19": 5,
-          "_contents": 7,
-          "_screen23": 7
+          "_screen2": 0,
+          "_screen5": 1,
+          "_screen9": 2,
+          "_screen14": 3,
+          "_screen18": 4,
+          "_contents": 6,
+          "_screen22": 6
         }
       },
       "initial": {
@@ -1389,7 +1166,7 @@
         "valuesList": "sites",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -1406,7 +1183,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
@@ -1423,7 +1200,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "survey"
           },
           {
@@ -1440,7 +1217,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "survey"
           },
           {
@@ -1459,7 +1236,7 @@
         "valuesList": "count_members",
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 20,
             "section_name": "survey"
           },
           {
@@ -1520,7 +1297,7 @@
         },
         "_defn": [
           {
-            "_row_num": 20,
+            "_row_num": 19,
             "section_name": "survey"
           },
           {
@@ -1578,7 +1355,7 @@
         },
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 3,
             "section_name": "survey"
           },
           {
@@ -1600,7 +1377,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "survey"
           },
           {
@@ -1612,18 +1389,6 @@
         "elementName": "tent_caravan",
         "elementSet": "data",
         "elementPath": "tent_caravan"
-      },
-      "date_screened": {
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          }
-        ],
-        "elementKey": "date_screened",
-        "elementName": "date_screened",
-        "elementSet": "data",
-        "elementPath": "date_screened"
       },
       "location_latitude": {
         "type": "number",

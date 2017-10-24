@@ -520,72 +520,6 @@ window.odkCommonDefinitions = {
       },
       "_row_num": 49
     },
-    "authorization_name": {
-      "string_token": "authorization_name",
-      "text": {
-        "default": "Distribution Name",
-        "greek": "Όνομα διανομής",
-        "arabic": "اسم التوزيع",
-        "farsi": "توزیع نام",
-        "spanish": "Nombre de la distribución"
-      },
-      "_row_num": 50
-    },
-    "authorization_id": {
-      "string_token": "authorization_id",
-      "text": {
-        "default": "Distribution ID",
-        "greek": "Αναγνωριστικό διανομής",
-        "arabic": "رقم التوزيع",
-        "farsi": "شماره توزیع",
-        "spanish": "ID de la distribución"
-      },
-      "_row_num": 51
-    },
-    "item_pack_name": {
-      "string_token": "item_pack_name",
-      "text": {
-        "default": "Item Pack Name",
-        "greek": "Όνομα πακέτου στοιχείου",
-        "arabic": "اسم الحزمة",
-        "farsi": "نام بسته",
-        "spanish": "Nombre del artículo"
-      },
-      "_row_num": 52
-    },
-    "item_pack_description": {
-      "string_token": "item_pack_description",
-      "text": {
-        "default": "Item Pack Description",
-        "greek": "Περιγραφή πακέτου στοιχείου",
-        "arabic": "وصف الحزمة",
-        "farsi": "شرح بسته",
-        "spanish": "Descripción del artículo"
-      },
-      "_row_num": 53
-    },
-    "item_pack_id": {
-      "string_token": "item_pack_id",
-      "text": {
-        "default": "Item Pack ID",
-        "greek": "Αναγνωριστικό πακέτου στοιχείου",
-        "arabic": "رقم الحزمة",
-        "farsi": "شماره بسته",
-        "spanish": "ID del artículo"
-      },
-      "_row_num": 54
-    },
-    "beneficiary_code": {
-      "string_token": "beneficiary_code",
-      "text": {
-        "default": "Beneficiary Code",
-        "greek": "Κωδικός Δικαιούχου",
-        "arabic": "رمز المستفيد",
-        "farsi": "کد ذینفع",
-        "spanish": "Código de beneficiario"
-      },
-      "_row_num": 55
-    },
     "no_authorizations": {
       "string_token": "no_authorizations",
       "text": {
@@ -595,189 +529,175 @@ window.odkCommonDefinitions = {
         "farsi": "بدون توزیع",
         "spanish": "Sin distribuciones"
       },
-      "_row_num": 56
+      "_row_num": 50
     },
     "view_household_data": {
       "string_token": "view_household_data",
       "text": {
         "default": "View Household Data"
       },
-      "_row_num": 57
+      "_row_num": 51
     },
     "enabled_households": {
       "string_token": "enabled_households",
       "text": {
         "default": "Enabled Households"
       },
-      "_row_num": 58
+      "_row_num": 52
     },
     "disabled_households": {
       "string_token": "disabled_households",
       "text": {
         "default": "Disabled Households"
       },
-      "_row_num": 59
+      "_row_num": 53
     },
     "enabled_beneficiaries": {
       "string_token": "enabled_beneficiaries",
       "text": {
         "default": "Enabled Beneficiaries"
       },
-      "_row_num": 60
+      "_row_num": 54
     },
     "disabled_beneficiaries": {
       "string_token": "disabled_beneficiaries",
       "text": {
         "default": "Disabled Beneficiaries"
       },
-      "_row_num": 61
+      "_row_num": 55
     },
     "household": {
       "string_token": "household",
       "text": {
         "default": "household"
       },
-      "_row_num": 62
+      "_row_num": 56
     },
     "households": {
       "string_token": "households",
       "text": {
         "default": "households"
       },
-      "_row_num": 63
+      "_row_num": 57
     },
     "individual": {
       "string_token": "individual",
       "text": {
         "default": "individual"
       },
-      "_row_num": 64
+      "_row_num": 58
     },
     "individuals": {
       "string_token": "individuals",
       "text": {
         "default": "individuals"
       },
-      "_row_num": 65
+      "_row_num": 59
     },
     "registration_data": {
       "string_token": "registration_data",
       "text": {
         "default": "Registration Data"
       },
-      "_row_num": 66
+      "_row_num": 60
     },
     "search_households": {
       "string_token": "search_households",
       "text": {
         "default": "Search for Households"
       },
-      "_row_num": 67
+      "_row_num": 61
     },
     "search_individuals": {
       "string_token": "search_individuals",
       "text": {
         "default": "Search for Individuals"
       },
-      "_row_num": 68
+      "_row_num": 62
     },
     "search_individuals_title": {
       "string_token": "search_individuals_title",
       "text": {
         "default": "Individual Advanced Search"
       },
-      "_row_num": 69
+      "_row_num": 63
     },
     "search_households_title": {
       "string_token": "search_households_title",
       "text": {
         "default": "Household Advanced Search"
       },
-      "_row_num": 70
+      "_row_num": 64
     },
     "search_beneficiaries_title": {
       "string_token": "search_beneficiaries_title",
       "text": {
         "default": "Beneficiaries Advanced Search"
       },
-      "_row_num": 71
-    },
-    "delivery_site": {
-      "string_token": "delivery_site",
-      "text": {
-        "default": "Delivery Site"
-      },
-      "_row_num": 72
-    },
-    "household_size": {
-      "string_token": "household_size",
-      "text": {
-        "default": "Household Size"
-      },
-      "_row_num": 73
-    },
-    "tent_caravan": {
-      "string_token": "tent_caravan",
-      "text": {
-        "default": "Tent/Caravan Code"
-      },
-      "_row_num": 74
-    },
-    "email": {
-      "string_token": "email",
-      "text": {
-        "default": "Email"
-      },
-      "_row_num": 75
-    },
-    "household_head": {
-      "string_token": "household_head",
-      "text": {
-        "default": "Household Head"
-      },
-      "_row_num": 76
-    },
-    "vulnerability": {
-      "string_token": "vulnerability",
-      "text": {
-        "default": "Vulnerability Critieria"
-      },
-      "_row_num": 77
+      "_row_num": 65
     },
     "view_registration_data": {
       "string_token": "view_registration_data",
       "text": {
         "default": "View Registration Data"
       },
-      "_row_num": 78
+      "_row_num": 66
     },
     "view": {
       "string_token": "view",
       "text": {
         "default": "View"
       },
-      "_row_num": 79
+      "_row_num": 67
     },
     "select_group": {
       "string_token": "select_group",
       "text": {
         "default": "Please Select Group"
       },
-      "_row_num": 80
+      "_row_num": 68
     },
     "change_entitlement_status": {
       "string_token": "change_entitlement_status",
       "text": {
         "default": "Change Entitlement Status"
       },
-      "_row_num": 81
+      "_row_num": 69
     },
     "create_new_entitlement": {
       "string_token": "create_new_entitlement",
       "text": {
         "default": "Create New Entitlement"
       },
-      "_row_num": 82
+      "_row_num": 70
+    },
+    "enable_success": {
+      "string_token": "enable_success",
+      "text": {
+        "default": "Successfully Enabled!"
+      },
+      "_row_num": 71
+    },
+    "disable_success": {
+      "string_token": "disable_success",
+      "text": {
+        "default": "Successfully Disabled!"
+      },
+      "_row_num": 72
+    },
+    "choose_entitlement": {
+      "string_token": "choose_entitlement",
+      "text": {
+        "default": "Choose an Entitlement"
+      },
+      "_row_num": 73
+    },
+    "no_entitlements": {
+      "string_token": "no_entitlements",
+      "text": {
+        "default": "No Entitlements to Deliver"
+      },
+      "_row_num": 74
     }
   },
   "_locales": {

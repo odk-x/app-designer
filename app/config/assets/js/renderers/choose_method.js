@@ -136,7 +136,7 @@ function populateSyncList() {
         console.log('entered delivery sync path');
         let newRows = $('<h3>');
         return new Promise( function(resolve, reject) {
-            odkData.arbitraryQuery(util.deliveryTable, 'SELECT count(*) AS count FROM ' + 
+            odkData.arbitraryQuery(util.deliveryTable, 'SELECT count(*) AS count FROM ' +
                 util.deliveryTable + ' WHERE _sync_state = ?', ['new_row'],
                 null, null, resolve, reject);
         }).then( function(result) {
@@ -147,13 +147,13 @@ function populateSyncList() {
         console.log('entered registration sync path');
         let newRows = $('<h3>');
         let newRowsPromise = new Promise( function(resolve, reject) {
-            odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS count FROM ' + 
+            odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS count FROM ' +
                 util.beneficiaryEntityTable + ' WHERE _sync_state = ?', ['new_row'],
                 null, null, resolve, reject);
         });
         let updatedRows = $('<h3>');
         let updatedRowsPromise = new Promise( function(resolve, reject) {
-            odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS count FROM ' + 
+            odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS count FROM ' +
                 util.beneficiaryEntityTable + ' WHERE _sync_state = ? OR _sync_state = ?',
                 ['changed', 'in_conflict'], null, null, resolve, reject);
         });
@@ -276,16 +276,16 @@ function handleRegistrationCallback(action, dispatchStr) {
                 }).then( function(result) {
                     if (addRowActions.length > 0) {
                         console.log("added base individual rows");
-                        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), action.jsonValue.result.instanceId,
+                        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, rootRowId,
                             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-                            encodeURIComponent(type) + '&rootRowId=' + rootRowId);
+                            encodeURIComponent(type));
                     }
                 }).catch( function(error) {
                     console.log(error);
                 });
             } else if (util.getRegistrationMode() === "INDIVIDUAL") {
-                odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), action.jsonValue.result.instanceId,
-                    'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=delivery&rootRowId=' + rootRowId);
+                odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, rootRowId,
+                    'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=delivery');
             }
         }
     });
@@ -371,9 +371,9 @@ function deliveryBCheckCBSuccess(result) {
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
     } else if (result.getCount() === 1) {
         // double check that this is the case
-        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
+        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),
                                              'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-                                             encodeURIComponent(type) + '&rootRowId=' + result.getRowId(0));
+                                             encodeURIComponent(type));
     } else {
         odkTables.openTableToListView(
                                       null,
@@ -419,9 +419,9 @@ function registrationBCheckCBSuccess(result) {
                           registrationVoucherCBFailure);
     } else {
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
-        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
+        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),
             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-            encodeURIComponent(type) + '&rootRowId=' + result.getRowId(0));
+            encodeURIComponent(type));
 
     }
 }
@@ -497,9 +497,9 @@ function beneficiaryEntityStatusFunction() {
 
 function regOverrideBenSuccess(result) {
     if (result.getCount() === 1) {
-        odkTables.openDetailView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
+        odkTables.openDetailView(null, util.beneficiaryEntityTable, result.getRowId(0),
             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-            encodeURIComponent(type) + '&rootRowId=' + result.getRowId(0));
+            encodeURIComponent(type));
     } else if (result.getCount() > 1) {
         odkTables.openTableToListView(null, util.beneficiaryEntityTable,
                                       'beneficiary_entity_id = ?',
@@ -621,9 +621,9 @@ function entitlementStatusFunction() {
         if (result.getCount() === 0) {
             $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
         } else {
-            odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
-                'config/tables/beneficiary_entities/html/beneficiary_entities_detail.html?type='
-                + encodeURIComponent(type) + '&rootRowId=' + result.getRowId(0));
+            odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),
+                'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type='
+                + encodeURIComponent(type));
         }
     });
 }
