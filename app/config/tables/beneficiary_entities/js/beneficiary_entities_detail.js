@@ -4,16 +4,32 @@
 
 'use strict';
 
-var type = util.getQueryParameter('type');
+
 var locale = odkCommon.getPreferredLocale();
 var beneficiaryEntitiesResultSet;
+var beneficiaryEntityId;
+var type;
 
 function display() {
+
+    type = util.getQueryParameter('type');
+    if (type === 'unregistered_voucher') {
+        // If we have an unregistered voucher, there is no view data to show
+        beneficiaryEntityId = util.getQueryParameter('beneficiary_entity_id');
+        $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + beneficiaryEntityId);
+        $('#toggle_workflow').hide();
+        initEntitlementToggle();
+        setToDeliveryView(true);
+
+        return Promise.resolve(null);
+    }
+
     var displayPromise = new Promise( function(resolve, reject) {
         odkData.getViewData(resolve, reject);
     }).then( function(result) {
         beneficiaryEntitiesResultSet = result;
-        $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + beneficiaryEntitiesResultSet.get('beneficiary_entity_id'));
+        beneficiaryEntityId = beneficiaryEntitiesResultSet.get('beneficiary_entity_id');
+        $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + beneficiaryEntityId);
         let exclusionList = ['beneficiary_entity_id'];
         if (type === 'override_beneficiary_entity_status') {
             $('#toggle_workflow').hide();
@@ -156,7 +172,7 @@ function setSublistToEnabledPendingEntitlements(action) {
         ' del ON del.entitlement_id = ent._id INNER JOIN '  + util.authorizationTable + ' auth ON ent.authorization_id = auth._id' +
         ' WHERE del._id IS NULL AND ent.beneficiary_entity_id = ? AND ent.status = ?';
 
-    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntitiesResultSet.getData(0, "beneficiary_entity_id"), 'ENABLED'],
+    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId, 'ENABLED'],
         'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent(action));
 }
 
@@ -167,7 +183,7 @@ function setSublistToAllPendingEntitlements(action) {
         ' del ON del.entitlement_id = ent._id INNER JOIN '  + util.authorizationTable + ' auth ON ent.authorization_id = auth._id' +
         ' WHERE del._id IS NULL AND ent.beneficiary_entity_id = ?';
 
-    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntitiesResultSet.getData(0, "beneficiary_entity_id")],
+    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
         'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent(action));
 }
 
@@ -177,7 +193,7 @@ function setSublistToDeliveredEntitlements() {
     var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' ent INNER JOIN ' + util.deliveryTable + ' t2 ON t2.entitlement_id = ent._id' +
         ' WHERE ent.beneficiary_entity_id = ?';
 
-    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntitiesResultSet.getData(0, "beneficiary_entity_id")],
+    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
         'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent('detail'));
 
 }

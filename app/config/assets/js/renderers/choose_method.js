@@ -391,7 +391,29 @@ function deliveryDisabledCBSuccess(result) {
     if (result.getCount() > 0) {
         $('#search_results').text(odkCommon.localizeText(locale, "disabled_beneficiary_notification"));
     } else {
+      if (util.getWorkflowMode() === 'VOUCHER') {
+        // We are in Voucher mode: check for deliveries for this beneficiary
+        var voucherPromise = new Promise( function(resolve, reject) {
+          odkData.query(util.entitlementTable, 'beneficiary_entity_id = ?', [code], null, null, null, null, null, null, true, resolve, reject);
+        }).then (function(result) {
+          // If there are deliveries for this beneficiary, we still want to give that option
+          if (result.getCount() > 0) {
+            odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), "",
+                                             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=unregistered_voucher' +
+                                             '&beneficiary_entity_id=' + encodeURIComponent(code));
+          } else {
+            $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
+          }
+        });
+
+        voucherPromise.catch(function(reason) {
+          console.log(reason);
+        });
+
+      } else {
+        // We are not in voucher mode and there is no beneficiary, enabled or disabled
         $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
+      }
 
     }
 }
