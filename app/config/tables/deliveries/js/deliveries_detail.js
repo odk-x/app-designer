@@ -9,7 +9,7 @@ function display(result) {
         $('#title').text("Delivery Summary");
 
         util.populateDetailView(result, "field_list", locale, ["custom_delivery_row_id"]);
-        if (result.get("custom_delivery_form_id") != null && result.get("custom_delivery_form_id") != undefined && result.get("custom_delivery_form_id") != "") {
+        if (result.get("custom_delivery_form_id") !== null && result.get("custom_delivery_form_id") !== undefined && result.get("custom_delivery_form_id") !== "") {
             return new Promise( function(resolve, reject) {
                 odkData.query(result.get("custom_delivery_form_id"), '_id = ?', [result.get("custom_delivery_row_id")],
                     null, null, null, null, null, null, true, resolve, reject);

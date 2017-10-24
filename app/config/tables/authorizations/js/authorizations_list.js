@@ -77,13 +77,10 @@ var handleAuthorizationReportCallback = function(action, dispatchStr) {
 
 
 var resumeFn = function(fIdxStart) {
-    var joinQuery = "SELECT * FROM " + util.authorizationTable + ' t1 LEFT JOIN ' + util.authorizationReportTable + ' t2 ON t1.report_version=t2.report_version AND t1._id=t2.authorization_id';
-    //var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' t1 LEFT JOIN ' +  util.deliveryTable +
-   //     ' t2 ON t2.entitlement_id = t1._id WHERE t2._id IS NULL AND t1.beneficiary_entity_id = ?';
+    var joinQuery = "SELECT * FROM " + util.authorizationTable + ' t1 LEFT JOIN ' + util.authorizationReportTable +
+        ' t2 ON t1.report_version=t2.report_version AND t1._id=t2.authorization_id';
   odkData.arbitraryQuery(util.authorizationTable, joinQuery, [], null, null,
             authorizationsCBSuccess, authorizationsCBFailure);
-
-
 
     idxStart = fIdxStart;
     console.log('resumeFn called. idxStart: ' + idxStart);
@@ -115,11 +112,11 @@ var resumeFn = function(fIdxStart) {
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                 var type = util.getQueryParameter('type');
-                if (type == 'new_entitlement') {
+                if (type == 'new_ent') {
                     odkTables.launchHTML(null,
                         'config/assets/html/choose_method.html?title='
-                        + encodeURIComponent(odkCommon.localizeText(locale, 'choose_method'))
-                        + '&type=new_entitlement&authorization_id=' + rowId);
+                        + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_entity_id'))
+                        + '&type=new_ent&authorization_id=' + rowId);
                 } else {
                     new Promise( function(resolve, reject) {
                         odkData.query(util.authorizationReportTable, "report_version = ? AND authorization_id = ?", [reportVersion, rowId],
@@ -156,13 +153,6 @@ var resumeFn = function(fIdxStart) {
 var displayGroup = function(idxStart) {
     console.log('displayGroup called. idxStart: ' + idxStart);
 
-    /* If the list comes back empty, inform the user */
-    if (authorizationsResultSet.getCount() === 0) {
-        var errorText = $('#error');
-        errorText.show();
-        errorText.text('No authorizations found'); // TODO: Translate this
-    }
-
     /* Number of rows displayed per 'chunk' - can modify this value */
     console.log(authorizationsResultSet.getColumns());
     var chunk = 50;
@@ -177,7 +167,7 @@ var displayGroup = function(idxStart) {
         item.attr('reportVersion', authorizationsResultSet.getData(i, "report_version"));
         item.attr('summaryFormId', authorizationsResultSet.getData(i, "summary_form_id"));
         item.attr('class', 'item_space');
-        var auth_name = authorizationsResultSet.getData(i, 'authorization_name');
+        var auth_name = authorizationsResultSet.getData(i, 'name');
         item.text(auth_name);
 
         var chevron = $('<img>');

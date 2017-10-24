@@ -1,6 +1,7 @@
 'use strict';
 
 var display = function() {
+    console.log('rending authorization detail view');
 	var displayPromise = new Promise( function(resolve, reject) {
 	    odkData.getViewData(resolve, reject);
     }).then( function(result) {
@@ -12,7 +13,7 @@ var display = function() {
     });
 
 	displayPromise.catch( function(error) {
-        console.log('dispaly failure with error: ' + error);
+        console.log('display failure with error: ' + error);
     });
 
 	return displayPromise;

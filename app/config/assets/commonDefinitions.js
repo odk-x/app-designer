@@ -193,11 +193,7 @@ window.odkCommonDefinitions = {
     "view_authorization_details": {
       "string_token": "view_authorization_details",
       "text": {
-        "default": "View Distribution Details",
-        "greek": "Προβολή λεπτομερειών διανομής",
-        "arabic": "انظر تفاصيل التوزيع",
-        "farsi": "جزئیات نمایش توزیع",
-        "spanish": "Ver detalles de la distribución"
+        "default": "View Authorization Details"
       },
       "_row_num": 20
     },
@@ -245,14 +241,10 @@ window.odkCommonDefinitions = {
       },
       "_row_num": 24
     },
-    "enter_beneficiary_code": {
-      "string_token": "enter_beneficiary_code",
+    "enter_beneficiary_entity_id": {
+      "string_token": "enter_beneficiary_entity_id",
       "text": {
-        "default": "Please Enter Beneficiary Code",
-        "greek": "Εισαγάγετε τον Κωδικό Δικαιούχου",
-        "arabic": "الرجاء إدخال رمز المستفيد",
-        "farsi": "لطفا کد ذینفع را وارد کنید",
-        "spanish": "Por favor introduce el código del beneficiario"
+        "default": "Enter Beneficiary Entity ID"
       },
       "_row_num": 25
     },
@@ -698,6 +690,20 @@ window.odkCommonDefinitions = {
         "default": "No Entitlements to Deliver"
       },
       "_row_num": 74
+    },
+    "authorization_details": {
+      "string_token": "authorization_details",
+      "text": {
+        "default": "Authorization Details"
+      },
+      "_row_num": 75
+    },
+    "choose_authorization": {
+      "string_token": "choose_authorization",
+      "text": {
+        "default": "Choose Authorization"
+      },
+      "_row_num": 76
     }
   },
   "_locales": {

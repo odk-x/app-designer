@@ -41,7 +41,7 @@ function display() {
 
     var localizedUser = odkCommon.localizeText(locale, "select_group");
     $('#choose_user').hide();
-    if (type !== 'new_entitlement') {
+    if (type !== 'new_ent') {
         $('#view_details').hide();
     } else {
         idComponent = "&authorization_id=" + encodeURIComponent(util.getQueryParameter('authorization_id'));
@@ -50,7 +50,7 @@ function display() {
                                      null,
                                      util.authorizationTable,
                                      util.getQueryParameter('authorization_id'),
-                                     'config/tables/authorizations/html/authorizations_detail.html');
+                                     'config/tables/authorizations/html/' + util.authorizationTable + '_detail.html');
         });
     }
 
@@ -309,9 +309,9 @@ function queryChain(passed_code) {
         registrationFunction();
     } else if (type === 'override_beneficiary_entity_status') {
         beneficiaryEntityStatusFunction();
-    } else if (type === 'new_entitlement') {
+    } else if (type === 'new_ent') {
         newEntitlementFunction();
-    } else if (type == 'override_entitlement_status') {
+    } else if (type == 'override_ent_status') {
         entitlementStatusFunction();
     }
 }
@@ -524,7 +524,7 @@ function newEntitlementFunction() {
                       null, null, null, null, null, null, true, benEntOverrideCBSuccess,
                       benEntOverrideCBFailure);
     } else {
-        $('#search_results').text(odkCommon.localizeText(locale, "enter_beneficiary_code"));
+        $('#search_results').text(odkCommon.localizeText(locale, "enter_beneficiary_entity_id"));
     }
 }
 

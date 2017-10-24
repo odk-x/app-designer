@@ -33,7 +33,7 @@
 
     /**
      * This is a helper method to DRY out the type checking for the open*
-     * methods that take the tableId, sqlWhereClause, sqlSelectionArgs, and
+     * methods that take the tableId, key, value, and
      * relativePath parameters.
      */
     assertOpenTypes: function(fnName, tableId, where, args, path) {
@@ -43,12 +43,12 @@
       if (where !== null &&
           where !== undefined &&
           !this.isString(where)) {
-        throw fnName + '--sqlWhereClause not a string';
+        throw fnName + '--key not a string';
       }
       if (args !== null &&
           args !== undefined &&
           !this.isArray(args)) {
-        throw fnName + '--sqlSelectionArgs not an array';
+        throw fnName + '--value not an array';
       }
       if (path !== null &&
           path !== undefined &&
@@ -67,12 +67,12 @@
       if (sqlWhereClause !== null &&
           sqlWhereClause !== undefined &&
           !this.isString(sqlWhereClause)) {
-        throw 'openTable()--sqlWhereClause not a string';
+        throw 'openTable()--key not a string';
       }
       if (sqlSelectionArgs !== null &&
           sqlSelectionArgs !== undefined &&
           !this.isArray(sqlSelectionArgs)) {
-        throw 'openTable()--sqlSelectionArgs not an array';
+        throw 'openTable()--value not an array';
       }
       if (arguments.length > 4) {
         throw 'openTable()--too many arguments';
@@ -514,7 +514,7 @@
       // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
       var sqlSelectionArgsJSON = (sqlSelectionArgs === null || sqlSelectionArgs === undefined) ? null :
         JSON.stringify(sqlSelectionArgs);
-      // JSON.stringify the sqlSelectionArgs so we can pass integer, numeric and boolean as-is
+      // JSON.stringify the value so we can pass integer, numeric and boolean as-is
       odkTablesIf.setSubListView(tableId, sqlWhereClause, sqlSelectionArgsJSON, relativePath);
 
     },

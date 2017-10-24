@@ -14,7 +14,9 @@ function display() {
     override_registration.innerHTML = odkCommon.localizeText(locale, "registration");
     override_registration.onclick = function() {
         odkTables.launchHTML(null,
-                             'config/assets/html/choose_method.html?title=placeholder&type=override_beneficiary_entity_status');
+                             'config/assets/html/choose_method.html? + ' +
+                             'title=' + odkCommon.localizeText(locale, 'enter_beneficiary_entity_id') +
+                             '&type=override_beneficiary_entity_status');
     };
     document.getElementById("wrapper").appendChild(override_registration);
 

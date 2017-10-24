@@ -19,7 +19,7 @@ function display() {
             $('#toggle_workflow').hide();
             initBeneficiaryStatusToggle(beneficiaryEntitiesResultSet.getData(0, "status"));
             exclusionList.push('status');
-        }  else if (type === 'override_entitlement_status') {
+        }  else if (type === 'override_ent_status') {
             $('#toggle_workflow').hide();
             setSublistToAllPendingEntitlements('change_status');
 
