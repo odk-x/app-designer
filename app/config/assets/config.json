@@ -1,7 +1,0 @@
-{
-    "REGISTRATION_MODE": "HOUSEHOLD",
-    "WORKFLOW_MODE": "TOKEN",
-    "BENEFICIARY_ENTITY_CUSTOM_FORM_ID": "custom_beneficiary_entities",
-    "INDIVIDUAL_CUSTOM_FORM_ID": "custom_individuals",
-    "CUSTOM_BENEFICIARY_ROW_ID_COLUMN": "custom_beneficiary_entity_row_id"
-}
