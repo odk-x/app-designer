@@ -62,8 +62,8 @@ window.odkTableSpecificDefinitions = {
       },
       "_row_num": 11
     },
-    "item_description": {
-      "string_token": "item_description",
+    "item_pack_description": {
+      "string_token": "item_pack_description",
       "text": {
         "default": "Item Pack Description",
         "greek": "Περιγραφή πακέτου στοιχείου",

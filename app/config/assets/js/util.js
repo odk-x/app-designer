@@ -256,28 +256,6 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
 };
 
 /**
- * if there is no delivery form, then launch to simple delivery html page
- * else create the base delivery row and create and launch survey for custom delivery row
- */
-dataUtil.triggerTokenDelivery = function(authorizationId, beneficiaryEntityId, actionTypeValue) {
-    dataUtil.getRow(util.authorizationTable, authorizationId).then( function(authorizationRow) {
-        if (dataUtil.isCustomDeliveryAuthorization(authorizationRow)) {
-            var customDeliveryRowId = util.genUUID();
-            dataUtil.addDeliveryRowWithoutEntitlement(beneficiaryEntityId, authorizationRow, customDeliveryRowId)
-                .then( function(rootDeliveryRow) {
-                    dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null);
-                }).catch( function(reason) {
-                    console.log('Failed to perform custom token delivery: ' + reason);
-                });
-        } else {
-            console.log('Performing simple delivery');
-            odkTables.launchHTML(null, 'config/assets/html/deliver.html?authorization_id=' +
-                encodeURIComponent(authorizationId) + '&beneficiary_entity_id=' + encodeURIComponent(beneficiaryEntityId));
-        }
-    });
-};
-
-/**
  * Generic method to create and launch survey for a custom row based off of a root row
  * @param baseEntry is the base table row
  * @param customTableNameKey is the column name in the base table to find the custom form id

@@ -43,37 +43,7 @@ tokenIndex.display = function() {
             override.setAttribute('type', 'reg');
             override.innerHTML = "Administrator Reset";
             override.onclick = function() {
-                var formId = util.getTokenAuthorizationFormId();
-                if (formId != null && formId != undefined && formId != "") {
-                    var dispatchStruct = JSON.stringify({actionTypeKey: tokenIndex.actionCustomAuthReset});
-                    odkTables.addRowWithSurvey(dispatchStruct, formId, formId, null, {'status' : 'ACTIVE', 'type' : 'TOKEN'});
-                } else {
-                    var followThrough = confirm("Are you sure you want to perform an Administrator Reset? \n" +
-                        "All beneficiary entity IDs will be entitled to a delivery if confirmed");
-                    if (followThrough) {
-                        new Promise( function(resolve, reject) {
-                            odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', 'TOKEN'],
-                                null, null, null, null, null, null, true, resolve, reject);
-                        }).then( function(result) {
-                            var dbActions = [];
-                            dbActions.push(new Promise(function(resolve, reject) {
-                                odkData.updateRow(util.authorizationTable, {'status' : 'INACTIVE'}, result.getRowId(i), resolve, reject);
-                            }));
-
-                            dbActions.push(new Promise(function(resolve, reject) {
-                                let jsonMap = {};
-                                util.setJSONMap(jsonMap, 'status', 'ACTIVE');
-                                util.setJSONMap(jsonMap, 'type', 'TOKEN');
-                                util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
-                                odkData.addRow(util.authorizationTable, jsonMap , util.genUUID(),
-                                    resolve, reject);
-                            }));
-                            return Promise.all(dbActions);
-                        }).then( function(result) {
-                            console.log('successfully updated active authorization without custom form');
-                        });
-                    }
-                }
+                odkTables.launchHTML(null, 'config/assets/html/token_authorization_creator.html');
             };
             document.getElementById("wrapper").appendChild(override);
         }

@@ -4,6 +4,7 @@
 
 'use strict';
 
+var locale = odkCommon.getPreferredLocale()
 var idxStart = -1;
 var deliveriesResultSet = {};
 
@@ -101,9 +102,12 @@ var displayGroup = function(idxStart) {
       var item = $('<li>');
       item.attr('rowId', deliveriesResultSet.getRowId(i));
       item.attr('class', 'item_space');
-      var first_name = deliveriesResultSet.getData(i, 'first_name');
-      var last_name = deliveriesResultSet.getData(i, 'last_name');
-      item.text(deliveriesResultSet.getData(i, 'item_pack_name'));
+
+      if (util.getWorkflowMode() === 'TOKEN') {
+          item.text(odkCommon.localizeText(locale, 'authorization_name') + ' : ' + deliveriesResultSet.getData(i, 'authorization_name'));
+      } else {
+          item.text(odkCommon.localizeText(locale, 'item_pack_name') + ' : ' + deliveriesResultSet.getData(i, 'item_pack_name'));
+      }
 
       /* Creates arrow icon (Nothing to edit here) */
       var chevron = $('<img>');
@@ -123,7 +127,7 @@ var displayGroup = function(idxStart) {
       var field2 = $('<li>');
       field2.attr('class', 'detail');
       var beneficiary_entity_id = deliveriesResultSet.getData(i, 'beneficiary_entity_id');
-      field2.text(odkCommon.localizeText(odkCommon.getPreferredLocale(), 'beneficiary_entity_id') + ' : ' + beneficiary_entity_id);
+      field2.text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ' : ' + beneficiary_entity_id);
       item.append(field2);
 
 

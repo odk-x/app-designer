@@ -347,8 +347,9 @@ function tokenDeliveryFunction() {
         console.log(result);
         if (result != null) {
             if (result.getCount() === 0) {
-                // TODO: figure out best way to associate delivery form with token authorization
-                dataUtil.triggerTokenDelivery(activeAuthorization.getRowId(0), code, actionTokenDelivery);
+                console.log('Performing simple delivery');
+                odkTables.launchHTML(null, 'config/assets/html/deliver.html?authorization_id=' +
+                encodeURIComponent(activeAuthorization.getRowId(0)) + '&beneficiary_entity_id=' + encodeURIComponent(code));
             } else {
                 $('#search_results').text('This beneficiary entity id has already received the current authorization');
             }

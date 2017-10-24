@@ -60,7 +60,7 @@
       },
       {
         "type": "string",
-        "name": "item_description",
+        "name": "item_pack_description",
         "_row_num": 12
       },
       {
@@ -174,7 +174,7 @@
         "_row_num": 11
       },
       {
-        "string_token": "item_description",
+        "string_token": "item_pack_description",
         "text": {
           "default": "Item Pack Description",
           "greek": "Περιγραφή πακέτου στοιχείου",
@@ -367,8 +367,8 @@
           },
           "_row_num": 11
         },
-        "item_description": {
-          "string_token": "item_description",
+        "item_pack_description": {
+          "string_token": "item_pack_description",
           "text": {
             "default": "Item Pack Description",
             "greek": "Περιγραφή πακέτου στοιχείου",
@@ -498,7 +498,7 @@
         ],
         "elementKey": "item_pack_name"
       },
-      "item_description": {
+      "item_pack_description": {
         "type": "string",
         "_defn": [
           {
@@ -506,7 +506,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "item_description"
+        "elementKey": "item_pack_description"
       },
       "custom_delivery_form_id": {
         "type": "string",
@@ -915,7 +915,7 @@
         "elementSet": "data",
         "elementPath": "item_pack_name"
       },
-      "item_description": {
+      "item_pack_description": {
         "type": "string",
         "_defn": [
           {
@@ -923,10 +923,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "item_description",
-        "elementName": "item_description",
+        "elementKey": "item_pack_description",
+        "elementName": "item_pack_description",
         "elementSet": "data",
-        "elementPath": "item_description"
+        "elementPath": "item_pack_description"
       },
       "custom_delivery_form_id": {
         "type": "string",

@@ -704,6 +704,34 @@ window.odkCommonDefinitions = {
         "default": "Choose Authorization"
       },
       "_row_num": 76
+    },
+    "choose_authorization_name": {
+      "string_token": "choose_authorization_name",
+      "text": {
+        "default": "Choose Authorization Name"
+      },
+      "_row_num": 77
+    },
+    "administrator_reset_succeeded": {
+      "string_token": "administrator_reset_succeeded",
+      "text": {
+        "default": "Administrator Reset Succeeded"
+      },
+      "_row_num": 78
+    },
+    "administrator_reset_failed": {
+      "string_token": "administrator_reset_failed",
+      "text": {
+        "default": "Administrator Reset Failed"
+      },
+      "_row_num": 79
+    },
+    "trigger_reset": {
+      "string_token": "trigger_reset",
+      "text": {
+        "default": "Trigger Reset"
+      },
+      "_row_num": 80
     }
   },
   "_locales": {
