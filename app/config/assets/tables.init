@@ -1,7 +1,0 @@
-table_keys=entitlements, authorizations, beneficiary_entities, custom_beneficiary_entities, individuals, custom_individuals
-entitlements.filename=config/assets/csv/entitlements.csv
-authorizations.filename=config/assets/csv/authorizations.csv
-beneficiary_entities.filename=config/assets/csv/beneficiary_entities.csv
-custom_beneficiary_entities.filename=config/assets/csv/custom_beneficiary_entities.csv
-individuals.filename=config/assets/csv/individuals.csv
-custom_individuals.filename=config/assets/csv/custom_individuals.csv

@@ -69,6 +69,11 @@ window.odkTableSpecificDefinitions = {
       "string_token": "date_created",
       "text": "Date Created",
       "_row_num": 15
+    },
+    "for_individual": {
+      "string_token": "for_individual",
+      "text": "Generate Entitlement for Individual or Benefiiciary_Entity",
+      "_row_num": 16
     }
   }
 }

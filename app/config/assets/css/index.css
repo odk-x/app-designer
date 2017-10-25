@@ -50,6 +50,10 @@ button:active {
     background-color: #FFC9C9;
 }
 
+button:disabled {
+    opacity: 0.5;
+}
+
 .disabled {
     opacity: 0.5;
 }

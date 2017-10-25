@@ -70,6 +70,11 @@
         "type": "string",
         "name": "date_created",
         "_row_num": 15
+      },
+      {
+        "type": "string",
+        "name": "for_individual",
+        "_row_num": 16
       }
     ],
     "table_specific_translations": [
@@ -142,6 +147,11 @@
         "string_token": "date_created",
         "text": "Date Created",
         "_row_num": 15
+      },
+      {
+        "string_token": "for_individual",
+        "text": "Generate Entitlement for Individual or Benefiiciary_Entity",
+        "_row_num": 16
       }
     ],
     "settings": [
@@ -360,6 +370,11 @@
           "string_token": "date_created",
           "text": "Date Created",
           "_row_num": 15
+        },
+        "for_individual": {
+          "string_token": "for_individual",
+          "text": "Generate Entitlement for Individual or Benefiiciary_Entity",
+          "_row_num": 16
         }
       }
     },
@@ -505,6 +520,16 @@
           }
         ],
         "elementKey": "date_created"
+      },
+      "for_individual": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "for_individual"
       }
     },
     "section_names": [
@@ -938,6 +963,19 @@
         "elementName": "date_created",
         "elementSet": "data",
         "elementPath": "date_created"
+      },
+      "for_individual": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "for_individual",
+        "elementName": "for_individual",
+        "elementSet": "data",
+        "elementPath": "for_individual"
       },
       "_id": {
         "type": "string",
