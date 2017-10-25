@@ -262,7 +262,6 @@ function handleRegistrationCallback(action, dispatchStr) {
                         util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
                         util.setJSONMap(jsonMap, 'beneficiary_entity_row_id', rootRowId);
                         //util.setJSONMap(jsonMap, 'date_created', );
-                        util.setJSONMap(jsonMap, 'individual_id', rootBERow.get("beneficiary_entity_id"));
                         util.setJSONMap(jsonMap, 'custom_individual_form_id', util.getIndividualCustomFormId());
                         util.setJSONMap(jsonMap, 'custom_individual_row_id', customIndividualRows.getRowId(i));
                         util.setJSONMap(jsonMap, 'status', 'ENABLED');
