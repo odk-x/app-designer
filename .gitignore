@@ -2,3 +2,13 @@ build/
 *.~lock.*
 app/output/props/*
 tempZipDir
+
+# Excel temporary
+~$*.xls*
+
+# Excel Backup File
+*.xlk
+
+# JetBrains
+.idea
+*.iml
