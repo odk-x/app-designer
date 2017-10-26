@@ -9,7 +9,7 @@ function display() {
     newEntitlement.innerHTML = odkCommon.localizeText(locale, "create_new_entitlement");;
     newEntitlement.onclick = function() {
         odkTables.launchHTML(null,
-            'config/tables/authorizations/html/authorizations_list.html?type=new_ent');
+            'config/tables/' + util.authorizationTable + '/html/' + util.authorizationTable + '_list.html?type=new_ent');
     };
     document.getElementById("wrapper").appendChild(newEntitlement);
 
@@ -28,7 +28,7 @@ function display() {
     distributionReport.innerHTML = "Fill Authorization Report";
     distributionReport.onclick = function() {
         odkTables.launchHTML(null,
-                        'config/tables/authorizations/html/authorizations_list.html?type=distribution_report')
+                        'config/tables/' + util.authorizationTable + '/html/' + util.authorizationTable + '_list.html?type=authorization_report');
     };
     document.getElementById("wrapper").appendChild(distributionReport);
 }

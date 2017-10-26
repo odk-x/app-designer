@@ -5,6 +5,7 @@ var authorizationsResultSet = {};
 var locale;
 var actionAuthorizationReport = "authorizationReport";
 var actionTypeKey = "actionTypeKey";
+var type = util.getQueryParameter('type');
 
 
 var authorizationsCBSuccess = function(result) {
@@ -77,8 +78,14 @@ var handleAuthorizationReportCallback = function(action, dispatchStr) {
 
 
 var resumeFn = function(fIdxStart) {
-    var joinQuery = "SELECT * FROM " + util.authorizationTable + ' t1 LEFT JOIN ' + util.authorizationReportTable +
-        ' t2 ON t1.report_version=t2.report_version AND t1._id=t2.authorization_id';
+    var joinQuery;
+    if (type === 'new_ent') {
+        joinQuery = "SELECT * FROM " + util.authorizationTable;
+    } else {
+        joinQuery = "SELECT * FROM " + util.authorizationTable + ' t1 LEFT JOIN ' + util.authorizationReportTable +
+            ' t2 ON t1.report_version=t2.report_version AND t1._id=t2.authorization_id WHERE t1.summary_form_id IS NOT NULL';
+    }
+
   odkData.arbitraryQuery(util.authorizationTable, joinQuery, [], null, null,
             authorizationsCBSuccess, authorizationsCBFailure);
 
@@ -111,8 +118,7 @@ var resumeFn = function(fIdxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                var type = util.getQueryParameter('type');
-                if (type == 'new_ent') {
+                if (type === 'new_ent') {
                     odkTables.launchHTML(null,
                         'config/assets/html/choose_method.html?title='
                         + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_entity_id'))
@@ -173,7 +179,8 @@ var displayGroup = function(idxStart) {
         var chevron = $('<img>');
         chevron.attr('class', 'chevron');
         //authorization_id is only in the report table, so this is how we tell if there is an entry for this report version
-        if (authorizationsResultSet.getData(i, 'authorization_id') === null) {
+        if (type === 'new_ent' || authorizationsResultSet.getData(i, 'authorization_id') === undefined
+            || authorizationsResultSet.getData(i, 'authorization_id') === null ) {
             chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
         } else {
             chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/checkmark.png'));
