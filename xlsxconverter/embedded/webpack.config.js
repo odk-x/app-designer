@@ -23,7 +23,7 @@ module.exports = {
                                     "targets": {"browsers": ["Chrome >= 50", "Firefox >= 50"]}
                                 }
                             ],
-                            "es2015"
+                            "es2015" // TODO: fix this
                         ],
                         plugins: ['lodash']
                     }
@@ -44,6 +44,6 @@ module.exports = {
         fs: "empty" // XLSX compatibility problem, fixed in newer version
     },
     externals: [
-        { "./cptable": "var cptable" } // XLSX compatibility problem, fixed in newer version
+        { "./cptable": "var cptable" } // XLSX library compatibility problem, fixed in newer version
     ]
 };

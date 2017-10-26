@@ -18,9 +18,11 @@ import {
     getFormIdFromFormDef
 } from './lib/devenv-util';
 
-async function convert(xlsxFiles) {
+async function convert(requestId) {
+    let xlsxFiles = await (await fetch(`/xlsx/${requestId}`)).json();
+
     let uploadPromises = xlsxFiles.map(async f => {
-        let base64Xlsx = await fetch(`/xlsx/${f}`);
+        let base64Xlsx = await fetch(`/xlsx/${requestId}/${encodeURIComponent(f)}`);
 
         let jsonXlsx = to_json(XLSX.read(await base64Xlsx.text(), {type: 'base64'}));
         let formDef = processJSONWb(jsonXlsx);
@@ -37,10 +39,10 @@ async function convert(xlsxFiles) {
         form.append('properties.csv', shouldWriteCsv ? createPropCsv(dtm, formDef) : "");
         form.append('tableSpecificDefinitions.js', shouldWriteDefJs(formDef) ? createDefJs(tableId, formDef) : "");
 
-        let params = new URLSearchParams();
-        params.append('xlsx', f);
-        params.append('timestamp', (new URL(document.location)).searchParams.get("timestamp"));
-        return fetch(`/xlsx/${tableId}/${formId}?${params.toString()}`, {
+        // let params = new URLSearchParams();
+        // params.append('requestId', requestId);
+
+        return fetch(`/xlsx/${requestId}/${encodeURIComponent(tableId)}/${encodeURIComponent(formId)}`, {
             method: 'POST',
             body: form
         });
@@ -64,4 +66,4 @@ function to_json(workbook) {
     return result;
 }
 
-convert(files);
+convert(window.location.hash.substring(1));
