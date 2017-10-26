@@ -120,7 +120,7 @@ function display() {
 
         $('#search').on('click', function() {
             let val = $('#code').val();
-            odkCommon.setSessionVariable(barcodeVal, val);
+            odkCommon.setSessionVariable(barcodeSessionVariable, val);
             console.log("USERS: " + users);
             queryChain(val);
         });
