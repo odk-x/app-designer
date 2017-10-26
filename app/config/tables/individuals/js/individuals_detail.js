@@ -5,7 +5,7 @@ function display() {
         odkData.getViewData(resolve, reject);
     }).then( function(result) {
         var locale = odkCommon.getPreferredLocale();
-        util.populateDetailView(result, "field_list", locale, ["beneficiary_entity_row_id", "custom_individual_row_id"]);
+        util.populateDetailView(result, "field_list", locale, ["beneficiary_entity_row_id", "custom_individual_row_id", "beneficiary_entity_status"]);
         return new Promise( function(resolve, reject) {
             odkData.query(util.getIndividualCustomFormId(), '_id = ?', [result.get('custom_individual_row_id')],
                 null, null, null, null, null, null, true, resolve, reject)

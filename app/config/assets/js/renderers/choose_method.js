@@ -76,30 +76,38 @@ function display() {
     return Promise.all([userPromise, rolesPromise, defaultGroupPromise, populateSyncList()]).then(function(resultArray) {
         var users = resultArray[0].getUsers();
         var roles = resultArray[1].getRoles();
-        var filteredRoles = _.filter(roles, function(s) {
+        var filteredRoles = _.filter(roles, function (s) {
             return s.substring(0, 5) === 'GROUP';
         });
-        var defaultGroup = resultArray[2].getDefaultGroup();
-        odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
+        let defaultGroupVal = odkCommon.getSessionVariable(defaultGroupKey);
 
         superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
-        if (superUser && type === 'registration' && filteredRoles.length > 0) {
-            $('#choose_user').show();
-            $('#barcode').prop("disabled", true).addClass('disabled');
-            $('#search').prop("disabled", true).addClass('disabled');
+        if (!superUser) {
+            let defaultGroup = resultArray[2].getDefaultGroup();
+            odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
+        } else {
             filteredRoles.forEach(addOption);
-            $('#choose_user').append($("<option/>").attr("value", localizedUser).attr('selected', true).text(localizedUser));
-            $('#choose_user').on('change', function() {
-                defaultGroup = $('#choose_user').val();
-                odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
-                if ($('#choose_user').val() === localizedUser) {
-                    $('#barcode').prop("disabled", true).addClass('disabled');
-                    $('#search').prop("disabled", true).addClass('disabled');
-                } else {
-                    $('#barcode').prop("disabled", false).removeClass('disabled');
-                    $('#search').prop("disabled", false).removeClass('disabled');
-                }
-            });
+            addOption(localizedUser);
+            $('#choose_user').show();
+            if (defaultGroupVal !== null && defaultGroupVal !== undefined && defaultGroupVal !== "" && filteredRoles.includes(defaultGroupVal)) {
+                $('#choose_user').val(defaultGroupVal);
+            } else if (superUser && type === 'registration' && filteredRoles.length > 0) {
+                $('#choose_user').val(localizedUser);
+                $('#barcode').prop("disabled", true).addClass('disabled');
+                $('#search').prop("disabled", true).addClass('disabled');
+
+                $('#choose_user').on('change', function() {
+                    let defaultGroup = $('#choose_user').val();
+                    odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
+                    if ($('#choose_user').val() === localizedUser) {
+                        $('#barcode').prop("disabled", true).addClass('disabled');
+                        $('#search').prop("disabled", true).addClass('disabled');
+                    } else {
+                        $('#barcode').prop("disabled", false).removeClass('disabled');
+                        $('#search').prop("disabled", false).removeClass('disabled');
+                    }
+                });
+            }
         }
 
         $('#barcode').on('click', function() {
@@ -111,8 +119,10 @@ function display() {
 
 
         $('#search').on('click', function() {
+            let val = $('#code').val();
+            odkCommon.setSessionVariable(barcodeVal, val);
             console.log("USERS: " + users);
-            queryChain($('#code').val());
+            queryChain(val);
         });
 
         odkCommon.registerListener(function() {
