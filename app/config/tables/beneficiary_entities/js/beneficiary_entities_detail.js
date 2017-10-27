@@ -63,15 +63,20 @@ function display() {
             }
         }
         util.populateDetailView(beneficiaryEntitiesResultSet, "field_list", locale, exclusionList);
-        return new Promise( function(resolve, reject) {
-            odkData.query(util.getBeneficiaryEntityCustomFormId(), "_id = ?", [beneficiaryEntitiesResultSet.getData(0, 'custom_beneficiary_entity_row_id')],
-                null, null,null, null, null, null, true, resolve, reject);
-        }).then( function(result) {
-            var customExclusionList = ['consent_signature', 'location_accuracy',
-                'location_altitude', 'location_latitude', 'location_longitude',
-                'consent_signature_contentType', 'consent_signature_uriFragment'];
-            util.populateDetailView(result, "field_list", locale, customExclusionList);
-        });
+
+        if (util.getRegistrationMode() === 'HOUSEHOLD') {
+            return new Promise( function(resolve, reject) {
+                odkData.query(util.getBeneficiaryEntityCustomFormId(), "_id = ?", [beneficiaryEntitiesResultSet.getData(0, 'custom_beneficiary_entity_row_id')],
+                    null, null,null, null, null, null, true, resolve, reject);
+            }).then( function(result) {
+                var customExclusionList = ['consent_signature', 'location_accuracy',
+                    'location_altitude', 'location_latitude', 'location_longitude',
+                    'consent_signature_contentType', 'consent_signature_uriFragment'];
+                util.populateDetailView(result, "field_list", locale, customExclusionList);
+            });
+        } else {
+            return Promise.resolve(null);
+        }
     });
 
     displayPromise.catch( function(reason) {

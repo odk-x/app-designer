@@ -60,6 +60,17 @@
         "_row_num": 9
       },
       {
+        "type": "string",
+        "name": "id_number",
+        "display": {
+          "prompt": {
+            "text": "What is your ID number?"
+          }
+        },
+        "required": true,
+        "_row_num": 10
+      },
+      {
         "type": "select_one",
         "name": "id_type",
         "display": {
@@ -68,17 +79,6 @@
           }
         },
         "values_list": "id_types_list",
-        "required": true,
-        "_row_num": 10
-      },
-      {
-        "type": "string",
-        "name": "id_number",
-        "display": {
-          "prompt": {
-            "text": "What is your ID number?"
-          }
-        },
         "required": true,
         "_row_num": 11
       },
@@ -943,7 +943,7 @@
         "valuesList": "id_types_list",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
@@ -957,7 +957,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {
@@ -1114,6 +1114,22 @@
             "promptIdx": 1
           },
           {
+            "type": "string",
+            "name": "id_number",
+            "display": {
+              "prompt": {
+                "text": "What is your ID number?"
+              }
+            },
+            "required": true,
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 2
+          },
+          {
             "type": "select_one",
             "name": "id_type",
             "display": {
@@ -1123,26 +1139,10 @@
             },
             "values_list": "id_types_list",
             "required": true,
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "prompt",
-            "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen9",
-            "promptIdx": 2
-          },
-          {
-            "type": "string",
-            "name": "id_number",
-            "display": {
-              "prompt": {
-                "text": "What is your ID number?"
-              }
-            },
-            "required": true,
             "_row_num": 11,
             "__rowNum__": 10,
             "_token_type": "prompt",
-            "_type": "string",
+            "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 3
           },
@@ -1698,7 +1698,7 @@
         "valuesList": "id_types_list",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 11,
             "section_name": "survey"
           },
           {
@@ -1715,7 +1715,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "survey"
           },
           {

@@ -85,7 +85,7 @@ function display() {
         if (!superUser) {
             let defaultGroup = resultArray[2].getDefaultGroup();
             odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
-        } else if (util.getWorkflowMode() !== 'TOKEN') {
+        } else if (util.getWorkflowMode() !== 'TOKEN' && type !== 'new_ent') {
             if (filteredRoles.length > 0) {
                 filteredRoles.forEach(addOption);
                 addOption(localizedUser);
