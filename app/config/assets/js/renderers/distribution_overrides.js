@@ -25,7 +25,7 @@ function display() {
 
     let distributionReport = document.createElement("button");
     distributionReport.setAttribute("id", "distribution_report");
-    distributionReport.innerHTML = "Fill Authorization Report";
+    distributionReport.innerHTML = "Fill Distribution Report";
     distributionReport.onclick = function() {
         odkTables.launchHTML(null,
                         'config/tables/' + util.authorizationTable + '/html/' + util.authorizationTable + '_list.html?type=authorization_report');

@@ -15,7 +15,7 @@
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "custom_authorization_reports",
+        "value": "custom_distribution_reports",
         "_row_num": 2
       },
       {
@@ -25,14 +25,14 @@
       },
       {
         "setting_name": "table_id",
-        "value": "custom_authorization_reports",
+        "value": "custom_distribution_reports",
         "_row_num": 4
       },
       {
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Custom Authorization Report"
+            "text": "Custom Distribution Report"
           }
         },
         "_row_num": 5
@@ -83,7 +83,7 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "custom_authorization_reports",
+        "value": "custom_distribution_reports",
         "_row_num": 2
       },
       "form_version": {
@@ -93,14 +93,14 @@
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "custom_authorization_reports",
+        "value": "custom_distribution_reports",
         "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Custom Authorization Report"
+            "text": "Custom Distribution Report"
           }
         },
         "_row_num": 5
@@ -128,7 +128,7 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Custom Authorization Report"
+            "text": "Custom Distribution Report"
           }
         },
         "_row_num": 5
@@ -257,7 +257,7 @@
             "promptIdx": 1,
             "display": {
               "title": {
-                "text": "Custom Authorization Report"
+                "text": "Custom Distribution Report"
               }
             },
             "_branch_label_enclosing_screen": "survey/0"
@@ -550,7 +550,7 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "custom_authorization_reports"
+        "_value": "custom_distribution_reports"
       },
       {
         "_partition": "Table",
@@ -564,7 +564,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"Custom Authorization Report\"}"
+        "_value": "{\"text\":\"Custom Distribution Report\"}"
       },
       {
         "_partition": "Table",
