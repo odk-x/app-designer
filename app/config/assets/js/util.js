@@ -242,9 +242,11 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
         if (dataUtil.isCustomDeliveryAuthorization(authorizationRow)) {
 
             var customDeliveryRowId = util.genUUID();
+            var jsonMap = {};
+            util.setJSONMap(jsonMap, 'assigned_item_pack_code', entitlementRow.get('assigned_item_pack_code'));
             dataUtil.addDeliveryRowByEntitlement(entitlementRow, authorizationRow.get("custom_delivery_form_id"), customDeliveryRowId)
                 .then( function(rootDeliveryRow) {
-                    dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null, "_group_read_only");
+                    dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null, "_group_read_only", jsonMap);
                 }).catch( function(reason) {
                     console.log('Failed to perform custom entitlement delivery: ' + reason);
                 });
@@ -264,15 +266,16 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
  * @param dispatchStruct is an optional parameter which can be used to prepopulate the dispatchStruct with additonal custom values (useful for leveraging the additionalCustomForms schema)
  */
 
-dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, customFormForeignKey, actionTypeValue, dispatchStruct, visibilityColumn) {
+dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, customFormForeignKey, actionTypeValue, dispatchStruct, visibilityColumn, jsonMap) {
     var rootDeliveryRowId = baseEntry.get('_id');
     var customFormId = baseEntry.get(customTableNameKey);
     var customDeliveryRowId = baseEntry.get(customFormForeignKey);
     if (!baseEntry || baseEntry.getCount === 0) {
         throw ('Base table entry is invalid');
     }
-
-    var jsonMap = {};
+    if (jsonMap == null) {
+        jsonMap = {};
+    }
 
     // We also need to add group permission fields
     util.setJSONMap(jsonMap, visibilityColumn, baseEntry.get(visibilityColumn));

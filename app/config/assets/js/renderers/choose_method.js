@@ -85,14 +85,14 @@ function display() {
         if (!superUser) {
             let defaultGroup = resultArray[2].getDefaultGroup();
             odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
-        } else if (util.getWorkflowMode() !== 'TOKEN' && type !== 'new_ent') {
+        } else if (util.getWorkflowMode() !== 'TOKEN' && type === 'registration') {
             if (filteredRoles.length > 0) {
                 filteredRoles.forEach(addOption);
                 addOption(localizedUser);
                 $('#choose_user').show();
                 if (defaultGroupVal !== null && defaultGroupVal !== undefined && defaultGroupVal !== "" && filteredRoles.includes(defaultGroupVal)) {
                     $('#choose_user').val(defaultGroupVal);
-                } else if (superUser && type === 'registration') {
+                } else {
                     $('#choose_user').val(localizedUser);
                     $('#barcode').prop("disabled", true).addClass('disabled');
                     $('#search').prop("disabled", true).addClass('disabled');
@@ -525,7 +525,7 @@ function registrationVoucherCBSuccess(result) {
 
             console.log(customDispatchStruct);
 
-            dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', actionRegistration, customDispatchStruct, "_group_modify");
+            dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', actionRegistration, customDispatchStruct, "_group_modify", null);
         });
     }, 1000);
 }
