@@ -143,7 +143,8 @@ var resumeFn = function(fIdxStart) {
                                 util.setJSONMap(jsonMap, "summary_row_id", customReportRowId);
                                 odkData.addRow(util.authorizationReportTable, jsonMap, rootRowId, resolve, reject);
                             }).then( function(result) {
-                                dataUtil.createCustomRowFromBaseEntry(result, "summary_form_id", "summary_row_id", actionAuthorizationReport, null);
+                                // passing in group read only to not break method
+                                dataUtil.createCustomRowFromBaseEntry(result, "summary_form_id", "summary_row_id", actionAuthorizationReport, null, '_group_read_only');
                             });
                         }
                     });

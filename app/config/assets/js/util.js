@@ -244,7 +244,7 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
             var customDeliveryRowId = util.genUUID();
             dataUtil.addDeliveryRowByEntitlement(entitlementRow, authorizationRow.get("custom_delivery_form_id"), customDeliveryRowId)
                 .then( function(rootDeliveryRow) {
-                    dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null);
+                    dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null, "_group_read_only");
                 }).catch( function(reason) {
                     console.log('Failed to perform custom entitlement delivery: ' + reason);
                 });
@@ -264,7 +264,7 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
  * @param dispatchStruct is an optional parameter which can be used to prepopulate the dispatchStruct with additonal custom values (useful for leveraging the additionalCustomForms schema)
  */
 
-dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, customFormForeignKey, actionTypeValue, dispatchStruct) {
+dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, customFormForeignKey, actionTypeValue, dispatchStruct, visibilityColumn) {
     var rootDeliveryRowId = baseEntry.get('_id');
     var customFormId = baseEntry.get(customTableNameKey);
     var customDeliveryRowId = baseEntry.get(customFormForeignKey);
@@ -275,7 +275,7 @@ dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, 
     var jsonMap = {};
 
     // We also need to add group permission fields
-    util.setJSONMap(jsonMap, '_group_read_only', baseEntry.get('_group_read_only'));
+    util.setJSONMap(jsonMap, visibilityColumn, baseEntry.get(visibilityColumn));
 
     util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
 

@@ -279,6 +279,8 @@ function handleRegistrationCallback(action, dispatchStr) {
                         util.setJSONMap(jsonMap, 'custom_individual_row_id', customIndividualRows.getRowId(i));
                         util.setJSONMap(jsonMap, 'status', 'ENABLED');
                         util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
+                        util.setJSONMap(jsonMap, '_group_modify', odkCommon.getSessionVariable(defaultGroupKey));
+                        util.setJSONMap(jsonMap, '_default_access', 'HIDDEN');
 
                         addRowActions.push(new Promise( function(resolve, reject) {
                             odkData.addRow(util.individualTable, jsonMap, util.genUUID(), resolve, reject);
@@ -301,6 +303,8 @@ function handleRegistrationCallback(action, dispatchStr) {
                 util.setJSONMap(jsonMap, "beneficiary_entity_row_id", rootRowId);
                 util.setJSONMap(jsonMap, "date_created", util.getCurrentOdkTimestamp());
                 util.setJSONMap(jsonMap, "status", 'ENABLED');
+                util.setJSONMap(jsonMap, "_group_modify", odkCommon.getSessionVariable(defaultGroupKey));
+                util.setJSONMap(jsonMap, "_default_access", "HIDDEN");
 
                 new Promise( function(resolve, reject) {
                     odkData.addRow(util.individualTable, jsonMap, util.genUUID(), resolve, reject);
@@ -487,7 +491,7 @@ function registrationVoucherCBSuccess(result) {
         $('#search_results').text(odkCommon.localizeText(locale, "voucher_detected"));
     }
     setTimeout(function() {
-        var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+        let defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
         var user = odkCommon.getSessionVariable(userKey);
 
         // TODO: verify that custom beneficiary entity table exists
@@ -521,7 +525,7 @@ function registrationVoucherCBSuccess(result) {
 
             console.log(customDispatchStruct);
 
-            dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', actionRegistration, customDispatchStruct);
+            dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', actionRegistration, customDispatchStruct, "_group_modify");
         });
     }, 1000);
 }
@@ -641,7 +645,7 @@ function createOverrideCBSuccess(result) {
     //struct['date_created'] = TODO: decide on date format
     struct['_default_access'] = 'HIDDEN';
     struct['_row_owner'] = user;
-    struct['_group_modify'] = defaultGroup;
+    struct['_group_read_only'] = defaultGroup;
     struct['date_created'] = util.getCurrentOdkTimestamp();
     odkData.addRow(util.entitlementTable, struct, util.genUUID(), addDistCBSuccess, addDistCBFailure);
 }
