@@ -86,28 +86,31 @@ function display() {
             let defaultGroup = resultArray[2].getDefaultGroup();
             odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
         } else if (util.getWorkflowMode() !== 'TOKEN') {
-            filteredRoles.forEach(addOption);
-            addOption(localizedUser);
-            $('#choose_user').show();
-            if (defaultGroupVal !== null && defaultGroupVal !== undefined && defaultGroupVal !== "" && filteredRoles.includes(defaultGroupVal)) {
-                $('#choose_user').val(defaultGroupVal);
-            } else if (superUser && type === 'registration' && filteredRoles.length > 0) {
-                $('#choose_user').val(localizedUser);
-                $('#barcode').prop("disabled", true).addClass('disabled');
-                $('#search').prop("disabled", true).addClass('disabled');
+            if (filteredRoles.length > 0) {
+                filteredRoles.forEach(addOption);
+                addOption(localizedUser);
+                $('#choose_user').show();
+                if (defaultGroupVal !== null && defaultGroupVal !== undefined && defaultGroupVal !== "" && filteredRoles.includes(defaultGroupVal)) {
+                    $('#choose_user').val(defaultGroupVal);
+                } else if (superUser && type === 'registration') {
+                    $('#choose_user').val(localizedUser);
+                    $('#barcode').prop("disabled", true).addClass('disabled');
+                    $('#search').prop("disabled", true).addClass('disabled');
 
-                $('#choose_user').on('change', function() {
-                    let defaultGroup = $('#choose_user').val();
-                    odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
-                    if ($('#choose_user').val() === localizedUser) {
-                        $('#barcode').prop("disabled", true).addClass('disabled');
-                        $('#search').prop("disabled", true).addClass('disabled');
-                    } else {
-                        $('#barcode').prop("disabled", false).removeClass('disabled');
-                        $('#search').prop("disabled", false).removeClass('disabled');
-                    }
-                });
+                    $('#choose_user').on('change', function() {
+                        let defaultGroup = $('#choose_user').val();
+                        odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
+                        if ($('#choose_user').val() === localizedUser) {
+                            $('#barcode').prop("disabled", true).addClass('disabled');
+                            $('#search').prop("disabled", true).addClass('disabled');
+                        } else {
+                            $('#barcode').prop("disabled", false).removeClass('disabled');
+                            $('#search').prop("disabled", false).removeClass('disabled');
+                        }
+                    });
+                }
             }
+
         }
 
         $('#barcode').on('click', function() {
@@ -293,8 +296,18 @@ function handleRegistrationCallback(action, dispatchStr) {
                     console.log(error);
                 });
             } else if (util.getRegistrationMode() === "INDIVIDUAL") {
-                odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, rootRowId,
-                    'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=delivery');
+                let jsonMap = {};
+                util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
+                util.setJSONMap(jsonMap, "beneficiary_entity_row_id", rootRowId);
+                util.setJSONMap(jsonMap, "date_created", util.getCurrentOdkTimestamp());
+                util.setJSONMap(jsonMap, "status", 'ENABLED');
+
+                new Promise( function(resolve, reject) {
+                    odkData.addRow(util.individualTable, jsonMap, util.genUUID(), resolve, reject);
+                }).then( function(result) {
+                    odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, rootRowId,
+                        'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=delivery');
+                });
             }
         }
     });
