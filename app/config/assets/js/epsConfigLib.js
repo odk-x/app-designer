@@ -2,7 +2,6 @@
 'use strict';
 /* globals Episample Configuration reader */
     window.EpsConfig = {
-        _id:0,
         showCollectModule:1,
         showSelectModule:0,
         showNavigateModule:1,
@@ -13,24 +12,53 @@
         alternatePoints:0,
         formName:'',
         password:'',
-        configCount:0,
-        resultCount:0,
+        getID: function() {
+            return localStorage.id ? localStorage.id : '';
+        },
+        getShowCollectModule: function() {
+            return localStorage.showCollectModule ? parseInt(localStorage.showCollectModule) : 1;
+        },
+        getShowSelectModule:function() {
+            return localStorage.showSelectModule ? parseInt(localStorage.showSelectModule) : 0;
+        },
+        getShowNavigateModule: function() {
+            return localStorage.showNavigateModule ? parseInt(localStorage.showNavigateModule) : 1;
+        },
+        getGoodGpsAccuracyThresholds: function() {
+            return localStorage.goodGpsAccuracyThresholds ? parseInt(localStorage.goodGpsAccuracyThresholds) : 10;
+        },
+        getModerateGpsAccuracyThresholds: function() {
+            return localStorage.moderateGpsAccuracyThresholds ? parseInt(localStorage.moderateGpsAccuracyThresholds) : 50;
+        },
+        getMainPoints: function() {
+            return localStorage.mainPoints ? parseInt(localStorage.mainPoints) : 0;
+        },
+        getAdditionalPoints: function() {
+            return localStorage.additionalPoints ? parseInt(localStorage.additionalPoints) : 0;
+        },
+        getAlternatePoints: function() {
+            return localStorage.alternatePoints ? parseInt(localStorage.alternatePoints) : 0;
+        },
+        getFormName: function() {
+            return localStorage.formName ? localStorage.formName : '';
+        },
+        getPassword: function() {
+            return localStorage.password ? localStorage.password : '';
+        },
         init: function(successFnInit, failureFnInit) {
-            var self = this;
             var successFnRead = function( result ) {
-                self.resultCount = result.getCount();
-                if(self.resultCount > 0) {
-                    self._id = result.getData(0,"_id");
-                    self.showCollectModule = result.getData(0,"show_collect_module")===1 ? 1 : 0;
-                    self.showSelectModule = result.getData(0,"show_select_module")===1 ? 1 : 0;
-                    self.showNavigateModule = result.getData(0,"show_navigate_module")===1? 1 : 0
-                    self.goodGpsAccuracyThresholds = result.getData(0,"good_gps_accuracy_thresholds");
-                    self.moderateGpsAccuracyThresholds = result.getData(0,"moderate_gps_accuracy_thresholds");
-                    self.mainPoints = result.getData(0,"main_points");
-                    self.additionalPoints = result.getData(0,"additional_points");
-                    self.alternatePoints = result.getData(0,"alternate_points");
-                    self.formName = result.getData(0,"form_name");
-                    self.password = result.getData(0,"password");
+                if(result.getCount() > 0) {
+                    localStorage.id = result.getData(0,"_id");
+                    localStorage.showCollectModule = result.getData(0,"show_collect_module")===1 ? 1 : 0;
+                    localStorage.showSelectModule = result.getData(0,"show_select_module")===1 ? 1 : 0;
+                    localStorage.showNavigateModule = result.getData(0,"show_navigate_module")===1? 1 : 0
+                    localStorage.goodGpsAccuracyThresholds = result.getData(0,"good_gps_accuracy_thresholds");
+                    localStorage.moderateGpsAccuracyThresholds = result.getData(0,"moderate_gps_accuracy_thresholds");
+                    localStorage.mainPoints = result.getData(0,"main_points");
+                    localStorage.additionalPoints = result.getData(0,"additional_points");
+                    localStorage.alternatePoints = result.getData(0,"alternate_points");
+                    localStorage.formName = result.getData(0,"form_name");
+                    localStorage.password = result.getData(0,"password");
                 }
                 if(successFnInit != null) successFnInit();
             }
@@ -40,7 +68,6 @@
                 if(failureFnInit!= null) failureFnInit();
             }
 
-            
             odkData.query('config', null, null, null, null,
                     null, null, null, null, null, successFnRead, failureFnRead);
             
@@ -57,10 +84,13 @@
             config['additional_points']= this.additionalPoints;
             config['alternate_points'] = this.alternatePoints;
             config['form_name'] = this.formName;
-            //encrypt password
-            config['password'] = this.password;
+            
+            if(this.password.length > 0) {
+                //encrypt password
+                config['password'] = sha256(this.password);
+            }
 
-            odkData.updateRow('config', config, this._id, successFnUpdate, failureFnUpdate);
+            odkData.updateRow('config', config, EpsConfig.getID(), successFnUpdate, failureFnUpdate);
         },
 
         insertConfig: function(successFnInsert, failureFnInsert) {
@@ -74,9 +104,13 @@
             config['additional_points']= this.additionalPoints;
             config['alternate_points'] = this.alternatePoints;
             config['form_name'] = this.formName;
-            //encrypt password
-            config['password'] = this.password;
-            odkData.addRow('config', config, EpsUtils.generateUUID(), successFnInsert, failureFnInsert);
+            
+            if(this.password.length > 0) {
+                //encrypt password
+                config['password'] = sha256(this.password);
+            }
+            
+            odkData.addRow('config', config, util.genUUID(), successFnInsert, failureFnInsert);
         }
     };
 })();

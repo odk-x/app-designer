@@ -14,10 +14,12 @@ var instanceIdKey = 'instanceId';
 var savepointTypeKey = 'savepoint_type';
 var navigateAction = 0;
 var editQuestionnaireAction=1;
+var filterByPointType = [];
+var FILTER_KEY="filter_by_point_type";
 
 function display() {
     
-    loadConfig();
+    init();
 
     odkCommon.registerListener(function() {
         actionCBFn();
@@ -25,6 +27,8 @@ function display() {
     actionCBFn();
 
     displayPlacesSelected();
+
+    restoreFilterSelectControl();
 
     var collectButton = $('#collect');
     collectButton.on(
@@ -49,45 +53,93 @@ function display() {
 
             var sqlWhereClause = [];
             var sqlSelectionArgs = [];
-            $.each($("#point-types option:selected"), function() {
-
-                switch($(this).val()) {
-                    case '1':
-                        sqlWhereClause.push('exclude=?');
+            $.each(filterByPointType, function(index,value) {
+                switch(value) {
+                    case '1000'://main
+                    case '100'://additional
+                    case '10'://alternate
+                      sqlWhereClause.push('(selected=? AND (questionnaire_status is null or questionnaire_status =?))');
+                      sqlSelectionArgs.push(value);
+                      sqlSelectionArgs.push('INCOMPLETE');
+                      break;
+                    case '1'://excluded
+                        sqlWhereClause.push('(exclude=? AND (questionnaire_status is null or questionnaire_status =?))');
+                        sqlSelectionArgs.push(value);
+                        sqlSelectionArgs.push('INCOMPLETE');
                         break;
-                    default:
-                        sqlWhereClause.push('selected=?');
+                    case '0'://not selected
+                        sqlWhereClause.push('(selected=? AND exclude=? AND (questionnaire_status is null or questionnaire_status =?))');
+                        sqlSelectionArgs.push('0');
+                        sqlSelectionArgs.push('0');
+                        sqlSelectionArgs.push('INCOMPLETE');
+                        break;
+                    case '-1'://finalized
+                        sqlWhereClause.push('questionnaire_status =?');
+                        sqlSelectionArgs.push('COMPLETE');
+                        break;
                 }
-                sqlSelectionArgs.push($(this).val());
+                
             });
 
-            if(sqlWhereClause.length===0) {
-                $.each([1000,100,10], function(index,val) {
-                    sqlWhereClause.push('selected=?');
-                    sqlSelectionArgs.push(val);
-                });
-            }
+            var sqlWhere = '(' + sqlWhereClause.join(' or ') + ') AND place_name=?';
+            sqlSelectionArgs.push(localStorage.getItem("place_name_selected"));
 
             var dispatchStruct = {};
             dispatchStruct[actionTypeKey] = navigateAction;
             odkTables.openTableToNavigateView(JSON.stringify(dispatchStruct),
-                                    'census', sqlWhereClause.join(' or '), sqlSelectionArgs, null);
+                                    'census', sqlWhere, sqlSelectionArgs, null);
         }
     );
+
+    $('#point-types').change(function() {
+        filterByPointType = [];
+        $('#point-types option:selected').each(function() {
+            filterByPointType.push($(this).val());
+        });
+        odkCommon.setSessionVariable(FILTER_KEY, JSON.stringify(filterByPointType));
+
+        // if no value is selected, set Main, Additional and Alternate points
+        if(filterByPointType.length === 0) {
+          setDefaultPointTypes();
+        }
+    });
 }
 
-function loadConfig() {
-    EpsConfig.init(initSuccess, null);
+function restoreFilterSelectControl() {
+    var filter = odkCommon.getSessionVariable(FILTER_KEY);
+    if(filter !== null && filter !== undefined) {
+        filterByPointType = JSON.parse(filter);
+    }
+
+    // if filterByPointType array is empty, select Main, Additional and Alternate points
+    if(filterByPointType.length === 0) {
+      setDefaultPointTypes();
+    } else {
+      $.each(filterByPointType, function(index,value) {
+        $('#point-types option[value="'+value+'"]').prop('selected', true);
+      });
+    }
 }
 
-function initSuccess() {
-    if(EpsConfig.showCollectModule === 0) {
+function setDefaultPointTypes() {
+    filterByPointType.push("1000");
+    filterByPointType.push("100");
+    filterByPointType.push("10");
+    odkCommon.setSessionVariable(FILTER_KEY, JSON.stringify(filterByPointType));
+  
+    $.each(filterByPointType, function(index,value) {
+      $('#point-types option[value="'+value+'"]').prop('selected', true);
+    });
+}
+
+function init() {
+    if(EpsConfig.getShowCollectModule() === 0) {
         $('#collect').hide();
     }
-    if(EpsConfig.showSelectModule === 0) {
+    if(EpsConfig.getShowSelectModule() === 0) {
         $('#select').hide();
     }
-    if(EpsConfig.showNavigateModule === 0) {
+    if(EpsConfig.getShowNavigateModule() === 0) {
         $('.navigate').hide();
     }
 }
@@ -146,17 +198,20 @@ function handleNavigationResult(action, dispatchStr) {
   }
   if(rowId !== null && rowId !== undefined) {
     console.log(rowId);
-    var dispatchStruct = {};
-    dispatchStruct[actionTypeKey] = editQuestionnaireAction;
-    
-    odkTables.editRowWithSurvey(JSON.stringify(dispatchStruct), localStorage.getItem('tableId'), rowId, localStorage.getItem('tableId'), null);
+    if(EpsConfig.getFormName().length>0) {
+      var dispatchStruct = {};
+      dispatchStruct[actionTypeKey] = editQuestionnaireAction;
+      odkTables.editRowWithSurvey(JSON.stringify(dispatchStruct), EpsConfig.getFormName(), rowId, EpsConfig.getFormName(), null);
+    } else {
+      alert("Choose a form you want to start in the admin setting.");
+    }
   }
 };
 
 function handleQuestionnaireEditResult(action, dispatchStr) {
   var statusVal = action.jsonValue.status;
   if (statusVal !== -1) {
-    console.log('I', LOG_TAG + 'Navigation was cancelled. No follow to perform');
+    console.log('I', LOG_TAG + 'Questionnaire was cancelled.');
     return;
   }
 
@@ -166,7 +221,7 @@ function handleQuestionnaireEditResult(action, dispatchStr) {
 
   var instanceId = result[instanceIdKey];
   var savepointType = result[savepointTypeKey];
-  if(instanceId != null && savepointType != null) {
+  if(instanceId !== null && instanceId !== undefined && savepointType !== null && savepointType !== undefined) {
     var data = {'questionnaire_status':savepointType};
     odkData.updateRow('census', data, instanceId, null, null);
   }

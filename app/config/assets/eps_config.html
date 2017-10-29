@@ -3,14 +3,14 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="libs/bootstrap-3.3.7-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="commonDefinitions.js"></script>
         <script type="text/javascript" src="libs/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="libs/jquery-migrate-3.0.0.js"></script>
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
-        <script type="text/javascript" src="js/epsUtils.js"></script>
+        <script type="text/javascript" src="libs/sha256.js"></script>
         <script type="text/javascript" src="js/epsConfigLib.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
     </head>
 
     <body>
@@ -113,10 +113,10 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a href="#admin_collapse" data-toggle="collapse" data-parent="#accordion">Navigate Module Setting</a>
+                                    <a href="#navigate_collapse" data-toggle="collapse" data-parent="#accordion">Navigate Module Setting</a>
                                 </h4>
                             </div>
-                            <div class="panel-collapse collapse in" id="admin_collapse">
+                            <div class="panel-collapse collapse in" id="navigate_collapse">
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label for="choose_form">Choose Form:</label>

@@ -5,14 +5,14 @@
         <link href="libs/bootstrap-3.3.7-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
         <link href="css/eps_common.css" type="text/css" rel="stylesheet" />
         <link href="css/eps_collect.css" type="text/css" rel="stylesheet" />
-        <script type="text/javascript" src="commonDefinitions.js"></script>
         <script type="text/javascript" src="libs/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="libs/jquery-migrate-3.0.0.js"></script>
+        <script type="text/javascript" src="libs/jquery-bootstrap-pagination.js"></script>
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
-        <script type="text/javascript" src="js/epsUtils.js"></script>
         <script type="text/javascript" src="js/epsConfigLib.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
     </head>
     <body>
         <div class="container">
@@ -130,19 +130,14 @@
                                 </tbody>
                             </table>
                         </div>
-                        <!--<div class="panel-footer">
+                        <div class="panel-footer">
                             <nav class="text-center">
-                                <ol class="pagination pagination-sm">
-                                    <li><a href="#" aria-label="previous">&laquo;</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#" aria-label="next">&raquo;</a></li>
-                                </ol>
+                                <div class="paginator row">
+                                    <div class="pagination-info"> </div>
+                                    <div class="pagination pagination-boxes"></div>
+                                </div>
                             </nav>
-                        </div>-->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -158,7 +153,6 @@
                 <input type="hidden" class="comment" value="<%= comment %>" />
             </td>
         </script>
-        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script src="../../system/libs/underscore.1.8.3.js"></script>
         <script src="../../system/libs/backbone.1.3.3.js"></script>
         <script type="text/javascript" src="js/eps_collect.js"></script>
