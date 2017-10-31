@@ -225,6 +225,90 @@ window.odkData = {
             that._getTableMetadataRevision(tableId), req._callbackId);
     },
 
+    /********** LOCAL TABLE functions **********/
+    createLocalOnlyTableWithColumns: function(tableId, columnNameTypeMap, successCallbackFn, failureCallbackFn) {
+        var that = this;
+
+        var req = that.queueRequest('createLocalOnlyTableWithColumns', successCallbackFn, failureCallbackFn);
+
+        that.getOdkDataIf().createLocalOnlyTableWithColumns(tableId, JSON.stringify(columnNameTypeMap), req._callbackId);
+    },
+
+
+    deleteLocalOnlyTable: function(tableId, successCallbackFn, failureCallbackFn) {
+        var that = this;
+
+        var req = that.queueRequest('deleteLocalOnlyTable', successCallbackFn, failureCallbackFn);
+
+        that.getOdkDataIf().deleteLocalOnlyTable(tableId, req._callbackId);
+    },
+
+
+    insertLocalOnlyRow: function(tableId, columnNameValueMap, successCallbackFn, failureCallbackFn) {
+        var that = this;
+
+        var req = that.queueRequest('insertLocalOnlyRow', successCallbackFn, failureCallbackFn);
+
+        that.getOdkDataIf().insertLocalOnlyRow(tableId, JSON.stringify(columnNameValueMap), req._callbackId);
+    },
+
+    updateLocalOnlyRows: function (tableId, columnNameValueMap, whereClause, sqlBindParams, successCallbackFn,
+        failureCallbackFn) {
+        var that = this;
+
+        var req = that.queueRequest('updateLocalOnlyRows', successCallbackFn, failureCallbackFn);
+
+        // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null :
+            JSON.stringify(sqlBindParams);
+
+        that.getOdkDataIf().updateLocalOnlyRows(tableId, JSON.stringify(columnNameValueMap), whereClause, sqlBindParamsJSON, req._callbackId);
+    },
+
+    deleteLocalOnlyRows: function (tableId, whereClause, sqlBindParams, successCallbackFn, failureCallbackFn) {
+        var that = this;
+
+        var req = that.queueRequest('deleteLocalOnlyRows', successCallbackFn, failureCallbackFn);
+
+        // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null :
+            JSON.stringify(sqlBindParams);
+
+        that.getOdkDataIf().deleteLocalOnlyRows(tableId, whereClause, sqlBindParamsJSON, req._callbackId);
+    },
+
+    simpleQueryLocalOnlyTables: function (tableId, whereClause, sqlBindParams, groupBy, having, orderByElementKey,
+            orderByDirection, limit, offset, successCallbackFn, failureCallbackFn) {
+        var that = this;
+
+        var req = that.queueRequest('simpleQueryLocalOnlyTables', successCallbackFn, failureCallbackFn);
+        var stringLimit = limit == null ? null : limit.toString();
+        var stringOffset = offset == null ? null : offset.toString();
+
+        // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null :
+                JSON.stringify(sqlBindParams);
+        that.getOdkDataIf().simpleQueryLocalOnlyTables(tableId, whereClause, sqlBindParamsJSON, groupBy,
+            having, orderByElementKey, orderByDirection, stringLimit, stringOffset, req._callbackId);
+    },
+
+    arbitrarySqlQueryLocalOnlyTables: function (tableId, sqlCommand, sqlBindParams, limit, offset,
+            successCallbackFn, failureCallbackFn) {
+        var that = this;
+
+        var req = that.queueRequest('arbitrarySqlQueryLocalOnlyTables', successCallbackFn, failureCallbackFn);
+        var stringLimit = limit == null ? null : limit.toString();
+        var stringOffset = offset == null ? null : offset.toString();
+
+        // need to JSON.stringify bind parameters so we can pass integer, numeric and boolean parameters as-is.
+        var sqlBindParamsJSON = (sqlBindParams === null || sqlBindParams === undefined) ? null :
+                JSON.stringify(sqlBindParams);
+        that.getOdkDataIf().arbitrarySqlQueryLocalOnlyTables(tableId, sqlCommand, sqlBindParamsJSON, stringLimit, stringOffset,
+            req._callbackId);
+    },
+
+    /*******************************************/
+
     queueRequest: function (type, successCallbackFn, failureCallbackFn) {
         var that = this;
 
@@ -510,7 +594,11 @@ window.odkData = {
                 that.resultObj = jsonObj;
 
                 var metadataCache;
-                var tableId = that.resultObj.metadata.tableId;
+
+                var tableId = null;
+                if (that.resultObj.metadata !== null && that.resultObj.metadata !== undefined) {
+                    tableId = that.resultObj.metadata.tableId;
+                }
 
                 // update odkData metadata cache if we receive an update
                 if ( that.resultObj.metadata !== null &&
