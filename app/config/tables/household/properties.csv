@@ -1,7 +1,0 @@
-_partition,_aspect,_key,_type,_value
-Column,electricity,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""yes"",""display"":{""title"":{""text"":""yes""}},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""no"",""display"":{""title"":{""text"":""no""}},""_row_num"":3}]"
-Column,water,displayChoicesList,object,"[{""choice_list_name"":""yesno"",""data_value"":""yes"",""display"":{""title"":{""text"":""yes""}},""_row_num"":2},{""choice_list_name"":""yesno"",""data_value"":""no"",""display"":{""title"":{""text"":""no""}},""_row_num"":3}]"
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,household
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Household Survey""}"

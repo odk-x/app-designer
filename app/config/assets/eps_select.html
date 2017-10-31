@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="libs/bootstrap-3.3.7-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+        <link href="css/eps_common.css" type="text/css" rel="stylesheet" />
+        <link href="css/eps_select.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="libs/jquery-migrate-3.0.0.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="js/epsConfigLib.js"></script>
+        <script type="text/javascript" src="libs/async.min.js"></script>
+    </head>
+
+    <body id="main">
+        <div class="container text-left">    
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Select</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="mainPoints">Main Points</label>
+                                <input class="form-control" type="text" id="mainPoints" placeholder="Main Points" >
+                            </div>
+                            <div class="form-group">
+                                <label for="additionalPoints">Additional Points</label>
+                                <input class="form-control" type="text" id="additionalPoints" placeholder="Additional Points" >
+                            </div>
+                            <div class="form-group">
+                                <label for="alternatePoints">Alternate Points</label>
+                                <input class="form-control" type="text" id="alternatePoints" placeholder="Alternate Points" >
+                            </div>
+
+                            <button id="select" class="btn btn-launch btn-primary btn-block">Select</button>
+
+                        </div>
+                        <div class="panel-footer">
+                            <div class="container text-center">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <span>Total</span>
+                                        <br /> 
+                                        <span id="num_total" class="badge">0</span>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <span class="text-success">Valid</span>
+                                        <br />
+                                        <span id="num_valid" class="badge">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Modal please wait -->
+        <div class="modal fade" id="pleaseWait" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            <span class="glyphicon glyphicon-time">
+                            </span>Please Wait
+                         </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-primary
+                            progress-bar-striped active"
+                            style="width: 100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal ends here -->
+        <script type="text/javascript" src="libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/eps_select.js"></script>
+    </body>
+</html>

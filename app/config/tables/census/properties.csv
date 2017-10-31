@@ -1,0 +1,12 @@
+_partition,_aspect,_key,_type,_value
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,census
+Table,default,colOrder,array,"[""place_name"",""house_number"",""head_name"",""comment"",""exclude"",""sample_frame"",""random_number"",""selected"",""location"",""questionnaire_status""]"
+Table,default,defaultViewType,string,MAP
+Table,default,detailViewFileName,configpath,config/tables/census/html/census_list.html
+Table,default,displayName,object,"{""text"":{""default"":""Census"",""amharic"":""ቆጠራ""}}"
+Table,default,listViewFileName,configpath,config/tables/census/html/census_list.html
+Table,default,mapListViewFileName,string,config/tables/census/html/census_list.html
+TableMapFragment,default,keyColorRuleType,string,None
+TableMapFragment,default,keyMapLatCol,string,location_latitude
+TableMapFragment,default,keyMapLongCol,string,location_longitude

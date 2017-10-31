@@ -1,6 +1,0 @@
-_partition,_aspect,_key,_type,_value
-Column,refrigerator_condition,displayChoicesList,object,"[{""choice_list_name"":""conditions"",""data_value"":""Excellent"",""display"":{""title"":{""text"":""Excellent""}},""_row_num"":2},{""choice_list_name"":""conditions"",""data_value"":""Good"",""display"":{""title"":{""text"":""Good""}},""_row_num"":3},{""choice_list_name"":""conditions"",""data_value"":""Fair"",""display"":{""title"":{""text"":""Fair""}},""_row_num"":4},{""choice_list_name"":""conditions"",""data_value"":""Poor"",""display"":{""title"":{""text"":""Poor""}},""_row_num"":5},{""choice_list_name"":""conditions"",""data_value"":""Terrible"",""display"":{""title"":{""text"":""Terrible""}},""_row_num"":6}]"
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,refrigerators
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Initial refrigerator information""}"

@@ -1,4 +1,0 @@
-table_keys=geotagger,geoweather,geoweather_conditions
-geotagger.filename=config/assets/csv/geotagger.updated.csv
-geoweather.filename=config/assets/csv/geoweather.updated.csv
-geoweather_conditions.filename=config/assets/csv/geoweather_conditions.updated.csv

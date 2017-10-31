@@ -1,0 +1,17 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+comment,comment,string,[]
+date_selected,date_selected,date,[]
+exclude,exclude,integer,[]
+head_name,head_name,string,[]
+house_number,house_number,integer,[]
+location,location,geopoint,"[""location_accuracy"",""location_altitude"",""location_latitude"",""location_longitude""]"
+location_accuracy,accuracy,number,[]
+location_altitude,altitude,number,[]
+location_latitude,latitude,number,[]
+location_longitude,longitude,number,[]
+place_name,place_name,integer,[]
+questionnaire_status,questionnaire_status,string,[]
+random_number,random_number,double,[]
+sample_frame,sample_frame,integer,[]
+selected,selected,integer,[]
+valid,valid,integer,[]

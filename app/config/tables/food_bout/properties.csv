@@ -1,6 +1,0 @@
-_partition,_aspect,_key,_type,_value
-FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,food_bout
-Table,default,colOrder,array,"[""FB_FOL_date"",""FB_FOL_B_AnimID"",""FB_begin_feed_time"",""FB_end_feed_time"",""FB_duration"",""FB_FPL_local_food_part"",""FB_FL_local_food_name"",""FB_FPL_local_food_part2"",""FB_FL_local_food_name2"",""FB_local_food_part_written"",""FB_local_food_name_written""]"
-Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Food Bout""}"

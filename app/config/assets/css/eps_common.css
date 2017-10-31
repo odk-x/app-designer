@@ -1,0 +1,16 @@
+body {
+    background-color:#D3DBE9;
+}
+
+.container {
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+.table {
+	margin-bottom: 0px;
+}
+
+.panel {
+  margin-bottom: 4px;
+}
