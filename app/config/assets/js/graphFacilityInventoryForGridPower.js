@@ -22,6 +22,9 @@ function healthFacilityCBFailure(error) {
 }
 
 function display() {
+    var locale = odkCommon.getPreferredLocale();
+    $('#facility-inventory-by-grid-power').text(odkCommon.localizeText(locale, "facility_inventory_by_grid_power"));
+
     // Get the value of the type
     var selection = null;
     var selectionArgs = null;
@@ -74,7 +77,7 @@ function getDataIndex(dataSet, x) {
 }
 
 var getAngle = function (d) {
-    var angle = (180 / Math.PI * (d.startAngle + d.endAngle) / 2 - 90)
+    var angle = (180 / Math.PI * (d.startAngle + d.endAngle) / 2 - 90);
     if (angle > 180 && angle <= 270) {
         angle = angle - 180;
     } else if (angle > 90 && angle <= 180) {

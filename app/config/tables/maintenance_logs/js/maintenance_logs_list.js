@@ -10,6 +10,14 @@ var searchParams = '(maintenance_logs.refrigerator_id LIKE ?)';
 
 function resumeFunc(state) {
     if (state === 'init') {
+        // Translations
+        var locale = odkCommon.getPreferredLocale();
+        $('#showing').text(odkCommon.localizeText(locale, "showing"));
+        $('#of').text(odkCommon.localizeText(locale, "of"));
+        $('#prevButton').text(odkCommon.localizeText(locale, "previous"));
+        $('#nextButton').text(odkCommon.localizeText(locale, "next"));
+        $('#submit').val(odkCommon.localizeText(locale, "search"));
+
         // set the parameters for the list view
         listViewLogic.setTableId('maintenance_logs');
         listViewLogic.setListQuery(listQuery);
@@ -21,8 +29,13 @@ function resumeFunc(state) {
         listViewLogic.setPrevAndNextButtons('#prevButton', '#nextButton');
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
         listViewLogic.showEditAndDeleteButtons(true, 'maintenance_logs');
-        listViewLogic.setColIdsToDisplayInList('Date Serviced', 'date_serviced', 
-            'Refrigerator Id', 'refrigerator_id', 'Notes', 'notes');
+
+        var dateSrvTxt = odkCommon.localizeText(locale, "date_serviced_no_colon");
+        var refIDTxt = odkCommon.localizeText(locale, "refrigerator_id_no_colon");
+        var notesTxt = odkCommon.localizeText(locale, "notes_no_colon");
+
+        listViewLogic.setColIdsToDisplayInList(dateSrvTxt, 'date_serviced', 
+            refIDTxt, 'refrigerator_id', notesTxt, 'notes');
     }
 
     listViewLogic.resumeFn(state);

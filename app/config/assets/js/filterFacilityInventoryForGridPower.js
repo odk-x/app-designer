@@ -13,6 +13,33 @@ function display() {
     // Set the background to be a picture.
     body.css('background-image', 'url(img/hallway.jpg)');
 
+    var locale = odkCommon.getPreferredLocale();
+    $('#facility-inventory-by-grid-power').text(odkCommon.localizeText(locale, "facility_inventory_by_grid_power"));
+
+    $('#select-region').text(odkCommon.localizeText(locale, "select_region"));
+    $('#all-regions').text(odkCommon.localizeText(locale, "all_regions"));
+    $('#north').text(odkCommon.localizeText(locale, "north"));
+    $('#central-west').text(odkCommon.localizeText(locale, "central_west"));
+    $('#central-east').text(odkCommon.localizeText(locale, "central_east"));
+    $('#south-west').text(odkCommon.localizeText(locale, "south_west"));
+    $('#south-east').text(odkCommon.localizeText(locale, "south_east"));
+
+    $('#select-facility-type').text(odkCommon.localizeText(locale, "select_facility_type"));
+    $('#all-types').text(odkCommon.localizeText(locale, "all_types"));  
+    $('#central-hospital').text(odkCommon.localizeText(locale, "select_region"));
+    $('#community-hospital').text(odkCommon.localizeText(locale, "community_hospital"));
+    $('#dispensary').text(odkCommon.localizeText(locale, "dispensary"));
+    $('#district-hospital').text(odkCommon.localizeText(locale, "district_hospital"));
+    $('#district-vaccine-store').text(odkCommon.localizeText(locale, "district_vaccine_store"));
+    $('#health-center').text(odkCommon.localizeText(locale, "health_center"));
+    $('#health-post').text(odkCommon.localizeText(locale, "health_post"));
+    $('#hospital').text(odkCommon.localizeText(locale, "hospital"));
+    $('#national-vaccine-store').text(odkCommon.localizeText(locale, "national_vaccine_store"));
+    $('#regional-vaccine-store').text(odkCommon.localizeText(locale, "regional_vaccine_store"));
+    $('#rural-hospital').text(odkCommon.localizeText(locale, "rural_hospital"));
+
+    $('#filter-facilities-by-region-type').text(odkCommon.localizeText(locale, "filter"));
+
     var filterFacilitiesButton = $('#filter-facilities-by-region-type');
     filterFacilitiesButton.on(
         'click',

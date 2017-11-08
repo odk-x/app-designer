@@ -19,6 +19,8 @@
 var typeNameMap = {};
 var idxStart = -1;
 var healthFacilityResultSet = {};
+var locale = null;
+var facIDTxt = 'Facility ID';
 
 /**
  * Called when page loads to display things (Nothing to edit here)
@@ -57,7 +59,8 @@ var cbFailure = function(error) {
 };
 
 var resumeFn = function(fIdxStart) {
-
+    locale = odkCommon.getPreferredLocale();
+    facIDTxt = odkCommon.localizeText(locale, "facility_id");
     odkData.getViewData(cbSuccess, cbFailure);
 
     idxStart = fIdxStart;
@@ -152,7 +155,7 @@ function addDataForRow(rowNumber) {
 
     var field1 = $('<li>');
     field1.attr('class', 'detail');
-    field1.text('Facility ID: ' + healthFacilityResultSet.getData(rowNumber, 'facility_id'));
+    field1.text(facIDTxt + ': ' + healthFacilityResultSet.getData(rowNumber, 'facility_id'));
     item.append(field1);
 
     $('#list').append(item);

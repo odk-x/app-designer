@@ -17,13 +17,13 @@ util.refrigeratorId = 'refrigerator_id';
 util.facilityRowId = 'facility_row_id';
 util.maintenancePriority = 'maintenance_priority';
 util.adminRegions = [
-        {'label': 'Central', 'region':'Central', 
-            'subRegions': [{'label':'Central East', 'region':'Central East'},
-                           {'label':'Central West', 'region':'Central West'}]},
-        {'label':'North', 'region':'North'},
-        {'label':'South', 'region':'South', 
-            'subRegions':[{'label':'South East', 'region':'South East'},
-                          {'label':'South West', 'region':'South West'}]}
+        {'token':'central', 'label': 'Central', 'region':'Central', 
+            'subRegions': [{'token':'central_east', 'label':'Central East', 'region':'Central East'},
+                           {'token':'central_west', 'label':'Central West', 'region':'Central West'}]},
+        {'token':'north', 'label':'North', 'region':'North'},
+        {'token':'south', 'label':'South', 'region':'South', 
+            'subRegions':[{'token':'south_east', 'label':'South East', 'region':'South East'},
+                          {'token':'south_west', 'label':'South West', 'region':'South West'}]}
     ];
 
 

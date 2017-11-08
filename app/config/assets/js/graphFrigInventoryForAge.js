@@ -7,13 +7,15 @@ var noOptionSelectString = "none";
 var regionQueryString = 'regionLevel2 = ?';
 var typeQueryString = 'facility_type = ?';
 var powerSourceQueryString = 'power_source = ?';
+var numOfFrigsLabel = "Number of Refrigerators";
+var yearsLabel = "years";
 
 var bucket0 = 0;
 var bucket1 = 1;
 var bucket2 = 2;
 var bucket3 = 3;
 
-var bucketLabels = ['0-1 years','2-4 years','5-10 years','10+ years'];
+var bucketLabels = ['0-1','2-4','5-10','10+'];
 
 var healthFacilityData = {};
 var frigData = {};
@@ -47,7 +49,7 @@ function healthFacilityCBSuccess(result) {
         selection = "select * from refrigerators where facility_row_id in (";
         selectionArgs = [];
         for (var i = 0; i < healthFacilityData.getCount(); i++) {
-            selection += "?,"
+            selection += "?,";
             selectionArgs.push(healthFacilityData.getRowId(i));
         }
 
@@ -82,6 +84,11 @@ function healthFacilityCBFailure(error) {
 }
 
 function display() {
+    var locale = odkCommon.getPreferredLocale();
+    $('#refrigerator-inventory-by-age').text(odkCommon.localizeText(locale, "refrigerator_inventory_by_age"));
+    numOfFrigsLabel = odkCommon.localizeText(locale, "number_of_refrigerators");
+    yearsLabel = odkCommon.localizeText(locale, "years");
+
     // Get the value of the type
     var selection = null;
     var selectionArgs = null;
@@ -121,7 +128,7 @@ function render() {
         return;
     }
 
-    frigHistogramByAge('#graph-div-age', 'Number of Refrigerators');
+    frigHistogramByAge('#graph-div-age', numOfFrigsLabel);
 }
 
 function getDataIndex(dataSet, bucket) {
@@ -138,7 +145,7 @@ function getLabelForAgeBucket(bucket) {
     if (Number.isInteger(bucket)) {
         var intBucket = parseInt(bucket);
         if (intBucket >= 0 && intBucket < bucketLabels.length) {
-            return bucketLabels[bucket % (bucketLabels.length)];
+            return bucketLabels[bucket % (bucketLabels.length)] + ' ' + yearsLabel;
         }
     }
 

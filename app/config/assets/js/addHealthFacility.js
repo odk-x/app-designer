@@ -5,10 +5,19 @@
 /* global odkTables */
 
 function display() {
-
     var body = $('#main');
     // Set the background to be a picture.
     body.css('background-image', 'url(img/hallway.jpg)');
+
+    var locale = odkCommon.getPreferredLocale();
+    $('#add-health-facility').text(odkCommon.localizeText(locale, "add_health_facility"));
+    $('#select-region').text(odkCommon.localizeText(locale, "select_region"));
+    $('#north').text(odkCommon.localizeText(locale, "north"));
+    $('#central-west').text(odkCommon.localizeText(locale, "central_west"));
+    $('#central-east').text(odkCommon.localizeText(locale, "central_east"));
+    $('#south-west').text(odkCommon.localizeText(locale, "south_west"));
+    $('#south-east').text(odkCommon.localizeText(locale, "south_east"));
+    $('#add-facility').text(odkCommon.localizeText(locale, "add_facility"));
 
     var addFacilitiesButton = $('#add-facility');
     addFacilitiesButton.on(

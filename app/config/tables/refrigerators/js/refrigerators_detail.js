@@ -81,6 +81,27 @@ function cbDeleteFailure(error) {
 }
 
 function display() {
+    var locale = odkCommon.getPreferredLocale();
+    $('#frig-hdr').text(odkCommon.localizeText(locale, "refrigerator"));
+    $('#basic-frig-info').text(odkCommon.localizeText(locale, "basic_refrigerator_information"));
+    $('#fac').text(odkCommon.localizeText(locale, "facility"));
+    $('#yr-install').text(odkCommon.localizeText(locale, "year_installed"));
+    $('#stat').text(odkCommon.localizeText(locale, "status"));
+    $('#rsn-not-work').text(odkCommon.localizeText(locale, "reason_not_working"));
+    $('#srv-pri').text(odkCommon.localizeText(locale, "service_priority"));
+    $('#mdl-id').text(odkCommon.localizeText(locale, "model_id"));
+    $('#frig-id').text(odkCommon.localizeText(locale, "refrigerator_id"));
+    $('#volt-reg').text(odkCommon.localizeText(locale, "voltage_regulator"));
+    $('#date-srv').text(odkCommon.localizeText(locale, "date_serviced"));
+
+    $('#vw-mdl-info').text(odkCommon.localizeText(locale, "view_model_information"));
+    $('#vw-fac-info').text(odkCommon.localizeText(locale, "view_facility_information"));
+    $('#add-mnt-rec').text(odkCommon.localizeText(locale, "add_maintenance_record"));
+    $('#vw-all-mnt-rec').text(odkCommon.localizeText(locale, "view_all_maintenance_records"));
+    $('#ed-frig-stat').text(odkCommon.localizeText(locale, "edit_refrigerator_status"));
+    $('#ed-frig').text(odkCommon.localizeText(locale, "edit_refrigerator"));
+    $('#del-frig').text(odkCommon.localizeText(locale, "delete_refrigerator"));
+
     odkData.getViewData(cbSuccess, cbFailure);
 }
 

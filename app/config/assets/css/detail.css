@@ -89,6 +89,11 @@ p {
   border-color: teal;*/
 }
 
+.detailHdr {
+  color: black;
+  font-weight: bold;
+}
+
 .main-text {
   color: white;
   text-align: center;

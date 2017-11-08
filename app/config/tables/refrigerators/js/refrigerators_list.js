@@ -12,6 +12,14 @@ var searchParams = '(facility_name LIKE ? OR facility_id LIKE ? OR tracking_id L
 
 function resumeFunc(state) {
     if (state === 'init') {
+        // Translations
+        var locale = odkCommon.getPreferredLocale();
+        $('#showing').text(odkCommon.localizeText(locale, "showing"));
+        $('#of').text(odkCommon.localizeText(locale, "of"));
+        $('#prevButton').text(odkCommon.localizeText(locale, "previous"));
+        $('#nextButton').text(odkCommon.localizeText(locale, "next"));
+        $('#submit').val(odkCommon.localizeText(locale, "search"));
+
         // set the parameters for the list view
         listViewLogic.setTableId('refrigerators');
         listViewLogic.setListQuery(listQuery);
@@ -23,8 +31,13 @@ function resumeFunc(state) {
         listViewLogic.setPrevAndNextButtons('#prevButton', '#nextButton');
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
         listViewLogic.showEditAndDeleteButtons(true, 'refrigerators');
-        listViewLogic.setColIdsToDisplayInList('Refrigerator', 'tracking_id', 
-            'Catalog Id', 'catalog_id', 'Healthcare Facility', 'facility_name');
+
+        var frigTxt = odkCommon.localizeText(locale, "refrigerator");
+        var catIDTxt = odkCommon.localizeText(locale, "catalog_id_no_colon");
+        var hFacTxt = odkCommon.localizeText(locale, "health_facility");
+
+        listViewLogic.setColIdsToDisplayInList(frigTxt, 'tracking_id', 
+            catIDTxt, 'catalog_id', hFacTxt, 'facility_name');
     }
 
     listViewLogic.resumeFn(state);

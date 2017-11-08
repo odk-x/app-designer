@@ -4,6 +4,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
         <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
@@ -14,31 +15,31 @@
         <script type="text/javascript" src="../js/maintenance_logs_detail.js"></script>
 
         <div class="header col-12">
-            <h1>Refrigerator <span id="tracking_id" class=""></span></h1>
+            <h1><span id="frig-hdr">Refrigerator</span> <span id="tracking_id" class=""></span></h1>
         </div>
 
         <br>
 
         <div class="detail col-12">
-            <h3>Maintenance Log Information</span></h3>
+            <h3 id="mnt-log-info">Maintenance Log Information</span></h3>
         </div>
 
 
-        <p>Refrigerator ID: <span id="refrigerator_id"></span>
-        <p>Working Status: <span id="working_status"></span></p>
-        <p>Reason Not Working: <span id="reason_not_working"></span></p>
-        <p>Date Serviced: <span id="date_serviced"></span></p>
-        <p>Type of Maintenance: <span id="maint_type"></span></p>
-        <p>Spare Parts: <span id="spare_parts"></span></p>
-        <p>Additional Spare Parts: <span id="addtl_spare_parts"></span></p>
-        <p>Notes: <span id="notes"></span></p>
+        <p><span class="detailHdr" id="frig-id">Refrigerator ID:</span> <span id="refrigerator_id"></span>
+        <p><span class="detailHdr" id="work-stat">Working Status:</span> <span id="working_status"></span></p>
+        <p><span class="detailHdr" id="reason-not-work">Reason Not Working:</span> <span id="reason_not_working"></span></p>
+        <p><span class="detailHdr" id="date-srv">Date Serviced:</span> <span id="date_serviced"></span></p>
+        <p><span class="detailHdr" id="type-of-mnt">Type of Maintenance:</span> <span id="maint_type"></span></p>
+        <p><span class="detailHdr" id="sp-prt">Spare Parts:</span> <span id="spare_parts"></span></p>
+        <p><span class="detailHdr" id="add-sp-prt">Additional Spare Parts:</span> <span id="addtl_spare_parts"></span></p>
+        <p><span class="detailHdr" id="notes-lbl">Notes:</span> <span id="notes"></span></p>
         
         <div id="editLogBtn" class="button hideButton">
-            <h3 href="#" onclick="onEditLog()">Edit Log</h3>
+            <h3 id="edit-log" href="#" onclick="onEditLog()">Edit Log</h3>
         </div>
 
         <div id="delLogBtn" class="button buttonDelete hideButton">
-            <h3 href="#" onclick="onDeleteLog()">Delete Log</h3>
+            <h3 id="del-log" href="#" onclick="onDeleteLog()">Delete Log</h3>
         </div>
 
         <script>

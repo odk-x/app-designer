@@ -401,7 +401,14 @@ window.listViewLogic = {
 
             // Set header
             if (that.headerId !== null && that.headerId !== undefined && that.headerId.length !== 0) {
-                $(that.headerId).text(util.formatDisplayText(that.tableId));
+                // Localize Header Text
+                var headerText = util.formatDisplayText(that.tableId);
+                var locale = odkCommon.getPreferredLocale();
+                var localeHeaderText = odkCommon.localizeText(locale, that.tableId);
+                if (localeHeaderText !== null && localeHeaderText !== undefined) {
+                    headerText = localeHeaderText;
+                }
+                $(that.headerId).text(headerText);
             }
 
             var queryToRunParts = odkCommon.getSessionVariable(that.queryKey);
@@ -484,6 +491,10 @@ window.listViewLogic = {
 
     displayGroup: function(resultSet) {
         var that = this;
+        var locale = odkCommon.getPreferredLocale();
+        var editTxt = odkCommon.localizeText(locale, "edit");
+        var deleteTxt = odkCommon.localizeText(locale, "delete");
+        var delRowTxt = odkCommon.localizeText(locale, "are_you_sure_you_want_to_delete_row");
         /* Number of rows displayed per 'chunk' - can modify this value */
         for (var i = 0; i < resultSet.getCount(); i++) {
 
@@ -525,7 +536,7 @@ window.listViewLogic = {
                         console.log('deleteButton clicked with rowId: ' + rowId);
                         e.stopPropagation();
 
-                        if (confirm('Are you sure you want to delete row ' + rowId)) {
+                        if (confirm(delRowTxt + ' ' + rowId)) {
                             odkData.deleteRow(that.tableId, null, rowId, function(d) {
                                 that.resumeFn('rowDeleted');
                             }, function(error) {
@@ -535,7 +546,7 @@ window.listViewLogic = {
                         }
                     });
 
-                    deleteButton.text('Delete');
+                    deleteButton.text(deleteTxt);
             
                     item.append(deleteButton);
                 }
@@ -557,7 +568,7 @@ window.listViewLogic = {
                         odkTables.editRowWithSurvey(null, that.tableId, rowId, that.formId, null, null);
                     });
 
-                    editButton.text('Edit');
+                    editButton.text(editTxt);
             
                     item.append(editButton);
                 }

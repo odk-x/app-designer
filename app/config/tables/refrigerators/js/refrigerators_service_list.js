@@ -31,6 +31,14 @@ function addMonths(date, months) {
 
 function resumeFunc(state) {
     if (state === 'init') {
+        // Translations
+        var locale = odkCommon.getPreferredLocale();
+        $('#showing').text(odkCommon.localizeText(locale, "showing"));
+        $('#of').text(odkCommon.localizeText(locale, "of"));
+        $('#prevButton').text(odkCommon.localizeText(locale, "previous"));
+        $('#nextButton').text(odkCommon.localizeText(locale, "next"));
+        $('#submit').val(odkCommon.localizeText(locale, "search"));
+
         // TODO: Find out if we need data dependent query
         // If so, get the current date
         // var date6MonthsAgo = odkCommon.toOdkTimeStampFromDate(addMonths(new Date(), -6));
@@ -48,8 +56,13 @@ function resumeFunc(state) {
         listViewLogic.setPrevAndNextButtons('#prevButton', '#nextButton');
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
         listViewLogic.showEditAndDeleteButtons(true, 'refrigerators');
-        listViewLogic.setColIdsToDisplayInList('Refrigerator', 'tracking_id', 
-            'Catalog Id', 'catalog_id', 'Healthcare Facility', 'facility_name');
+
+        var frigTxt = odkCommon.localizeText(locale, "refrigerator");
+        var catIDTxt = odkCommon.localizeText(locale, "catalog_id_no_colon");
+        var hFacTxt = odkCommon.localizeText(locale, "health_facility");
+
+        listViewLogic.setColIdsToDisplayInList(frigTxt, 'tracking_id', 
+            catIDTxt, 'catalog_id', hFacTxt, 'facility_name');
     }
 
     listViewLogic.resumeFn(state);

@@ -4,6 +4,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
         <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
@@ -20,88 +21,88 @@
         <br>
 
         <div class="detail col-12">
-            <h3>Basic Facility Information<span id="facility_info"></span></h3>
+            <h3 id="basic-facility-information">Basic Facility Information<span id="facility_info"></span></h3>
         </div>
 
         <div class="row">
 
             <div class="col-6">
-                <p>Health Facility ID: <span id="facility_id"></span></p>
-                <p>Facility Type: <span id="facility_type"></span></p>
-                <p>Ownership: <span id="facility_ownership"></span></p>
+                <p><span class="detailHdr" id="health-fac-id">Health Facility ID:</span> <span id="facility_id"></span></p>
+                <p><span class="detailHdr" id="fac-type">Facility Type:</span> <span id="facility_type"></span></p>
+                <p><span class="detailHdr" id="ownership">Ownership:</span> <span id="facility_ownership"></span></p>
             </div>
 
             <div class="col-6">
-                <p>Population: <span id="facility_population"></span></p>
-                <p>Coverage: <span id="facility_coverage"></span></p>
-                <p>Admin Region: <span id="admin_region"></span></p>
+                <p><span class="detailHdr" id="population">Population:</span> <span id="facility_population"></span></p>
+                <p><span class="detailHdr" id="coverage">Coverage:</span> <span id="facility_coverage"></span></p>
+                <p><span class="detailHdr" id="admin-reg">Admin Region:</span> <span id="admin_region"></span></p>
             </div>
         </div>
 
         <div class="detail col-12">
-            <h3>Power Information<span id="power_info"></span></h3>
+            <h3 id="power-information">Power Information<span id="power_info"></span></h3>
         </div>
 
         <div class="row">
             <div class="col-6">
-                <p>Electricity Source: <span id="electricity_source"></span></p>
-                <p>Grid Availability: <span id="grid_availability"></span></p>
-                <p>Gas Availability: <span id="gas_availability"></span></p>
+                <p><span class="detailHdr" id="elec-source">Electricity Source:</span> <span id="electricity_source"></span></p>
+                <p><span class="detailHdr" id="grid-avail">Grid Availability:</span> <span id="grid_availability"></span></p>
+                <p><span class="detailHdr" id="gas-avail">Gas Availability:</span> <span id="gas_availability"></span></p>
             </div>
 
             <div class="col-6">
-                <p>Kerosene Availability: <span id="kerosene_availability"></span></p>
-                <p>Solar Suitable Climate? <span id="solar_suitable_climate"></span></p>
-                <p>Solar Suitable Site? <span id="solar_suitable_site"></span></p>
+                <p><span class="detailHdr" id="kerosene-avail">Kerosene Availability:</span> <span id="kerosene_availability"></span></p>
+                <p><span class="detailHdr" id="solar-suit-clim">Solar Suitable Climate?</span> <span id="solar_suitable_climate"></span></p>
+                <p><span class="detailHdr" id="solar-suit-site">Solar Suitable Site?</span> <span id="solar_suitable_site"></span></p>
             </div>
         </div>
 
         <div class="detail col-12">
-            <h3>Location Information<span id="location_info"></span></h3>
+            <h3 id="loc-info">Location Information<span id="location_info"></span></h3>
         </div>
 
         <div class="row">
             <div class="col-6">
-                <p>Latitude (GPS): <span id="lat"></span></p>
-                <p>Longitude (GPS): <span id="lon"></span></p>
+                <p><span class="detailHdr" id="lat-gps">Latitude (GPS):</span> <span id="lat"></span></p>
+                <p><span class="detailHdr" id="long-gps">Longitude (GPS):</span> <span id="lon"></span></p>
             </div>
 
             <div class="col-6">
-                <p>Climate: <span id="climate"></span></p>
+                <p><span class="detailHdr" id="clim">Climate:</span> <span id="climate"></span></p>
             </div>
         </div>
 
         <div class="detail col-12">
-            <h3>Stock Information<span id="stock_info"></span></h3>
+            <h3 id="stk-info">Stock Information<span id="stock_info"></span></h3>
         </div>
 
         <div class="row">
             <div class="col-6">
-                <p>Distance to Supply Point: <span id="distance_to_supply"></span></p>
-                <p>Vaccine Supply Interval: <span id="supply_interval"></span></p>
+                <p><span class="detailHdr" id="dist-to-sup-pt">Distance to Supply Point:</span> <span id="distance_to_supply"></span></p>
+                <p><span class="detailHdr" id="vac-sup-interval">Vaccine Supply Interval:</span> <span id="supply_interval"></span></p>
             </div>
 
             <div class="col-6">
-                <p>Vaccine Reserve Stock Req: <span id="stock_requirement"></span></p>
-                <p>Vaccine Supply Mode: <span id="supply_mode"></span></p>
+                <p><span class="detailHdr" id="vac-res-stock-req">Vaccine Reserve Stock Req:</span> <span id="stock_requirement"></span></p>
+                <p><span class="detailHdr" id="vac-sup-mode">Vaccine Supply Mode:</span> <span id="supply_mode"></span></p>
             </div>
         </div>
 
         <div class="button">
-            <h3 href="#" onclick="onLinkClick()">Refrigerator Inventory</h3>
+            <h3 id="refrig-inv" href="#" onclick="onLinkClick()">Refrigerator Inventory</h3>
             <h3>(<span id="fridge_list"></span>)</h3>
         </div>
 
         <div class="button">
-            <h3 href="#" onclick="onAddFridgeClick()">Add Refrigerator</h3>
+            <h3 id="add-fridge" href="#" onclick="onAddFridgeClick()">Add Refrigerator</h3>
         </div>
 
         <div id="editFacilityBtn" class="button hideButton">
-            <h3 href="#" onclick="onEditFacility()">Edit Facility</h3>
+            <h3 id="edit-fac" href="#" onclick="onEditFacility()">Edit Facility</h3>
         </div>
 
         <div id="delFacilityBtn" class="button buttonDelete hideButton">
-            <h3 href="#" onclick="onDeleteFacility()">Delete Facility</h3>
+            <h3 id="del-fac" href="#" onclick="onDeleteFacility()">Delete Facility</h3>
         </div>
 
         <script>

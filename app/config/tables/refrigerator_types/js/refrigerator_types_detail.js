@@ -80,6 +80,21 @@ function refrigeratorsCBFailure(error) {
 }
 
 var display = function() {
+    var locale = odkCommon.getPreferredLocale();
+    $('#mdl-hdr').text(odkCommon.localizeText(locale, "model"));
+    $('#cat-id-hdr').text(odkCommon.localizeText(locale, "catalog_id"));
+    $('#mdl-info').text(odkCommon.localizeText(locale, "model_information"));
+    $('#man').text(odkCommon.localizeText(locale, "manufacturer"));
+    $('#pwr-src').text(odkCommon.localizeText(locale, "power_sources"));
+    $('#frig-grs-vol').text(odkCommon.localizeText(locale, "fridge_gross_volume"));
+    $('#frz-grs-vol').text(odkCommon.localizeText(locale, "freezer_gross_volume"));
+    $('#equip-type').text(odkCommon.localizeText(locale, "equipment_type"));
+    $('#clim-zn').text(odkCommon.localizeText(locale, "climate_zone"));
+    $('#frig-net-vol').text(odkCommon.localizeText(locale, "fridge_net_volume"));
+    $('#frz-net-vol').text(odkCommon.localizeText(locale, "freezer_net_volume"));
+
+    $('#vw-all').text(odkCommon.localizeText(locale, "view_all"));
+    $('#frig-txt').text(odkCommon.localizeText(locale, "refrigerators"));
 
     odkData.getViewData(cbSuccess, cbFailure);
 

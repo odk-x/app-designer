@@ -12,7 +12,12 @@ var tableId = 'health_facility';
 function showFacilityTypeButton(facilityType, facilityTypeCount) {
     var button = $('<button>');
     button.attr('class', 'button');
-    var buttonTxt = util.formatDisplayText(facilityType) + ' (' +
+    
+    // Translate facilityType to the appropriate language
+    var locale = odkCommon.getPreferredLocale();
+    var facTxt = odkCommon.localizeText(locale, facilityType);
+
+    var buttonTxt = facTxt + ' (' +
         facilityTypeCount + ')';
 
     button.text(buttonTxt);

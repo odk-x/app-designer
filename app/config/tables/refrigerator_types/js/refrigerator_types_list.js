@@ -10,6 +10,14 @@ var searchParams = '(catalog_id LIKE ? OR manufacturer LIKE ? OR model_id LIKE ?
 
 function resumeFunc(state) {
     if (state === 'init') {
+        // Translations
+        var locale = odkCommon.getPreferredLocale();
+        $('#showing').text(odkCommon.localizeText(locale, "showing"));
+        $('#of').text(odkCommon.localizeText(locale, "of"));
+        $('#prevButton').text(odkCommon.localizeText(locale, "previous"));
+        $('#nextButton').text(odkCommon.localizeText(locale, "next"));
+        $('#submit').val(odkCommon.localizeText(locale, "search"));
+
         // set the parameters for the list view
         listViewLogic.setTableId('refrigerator_types');
         listViewLogic.setListQuery(listQuery);
@@ -22,8 +30,12 @@ function resumeFunc(state) {
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
         listViewLogic.showEditAndDeleteButtons(false);
         listViewLogic.setImageToDisplayInList('refrigerator_picture_uriFragment');
-        listViewLogic.setColIdsToDisplayInList('Catalog ID', 'catalog_id', 
-            'Manufacturer', 'manufacturer', 'Model ID', 'model_id');
+
+        var catalogIDTxt = odkCommon.localizeText(locale, "catalog_id_no_colon");
+        var manTxt = odkCommon.localizeText(locale, "manufacturer_no_colon");
+        var modelIDTxt = odkCommon.localizeText(locale, "model_id_no_colon");
+        listViewLogic.setColIdsToDisplayInList(catalogIDTxt, 'catalog_id', 
+            manTxt, 'manufacturer', modelIDTxt, 'model_id');
     }
 
     listViewLogic.resumeFn(state);

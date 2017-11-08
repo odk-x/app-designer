@@ -10,6 +10,13 @@ function display() {
     // Set the background to be a picture.
     body.css('background-image', 'url(img/hallway.jpg)');
 
+    var locale = odkCommon.getPreferredLocale();
+    $('#admin-opts').text(odkCommon.localizeText(locale, "administrator_options"));
+    $('#view-facilities').text(odkCommon.localizeText(locale, "view_health_facilities"));
+    $('#view-refrigerators').text(odkCommon.localizeText(locale, "view_inventory"));
+    $('#view-models').text(odkCommon.localizeText(locale, "view_refrigerator_models"));
+    $('#add-facility').text(odkCommon.localizeText(locale, "add_health_facility"));
+
     var viewFacilitiesButton = $('#view-facilities');
     viewFacilitiesButton.on(
         'click',
@@ -38,8 +45,8 @@ function display() {
         }
     );
 
-    var viewRefrigeratorModelsButton = $('#add-facility');
-    viewRefrigeratorModelsButton.on(
+    var addFacilityButton = $('#add-facility');
+    addFacilityButton.on(
         'click',
         function() {
             odkTables.launchHTML(null, 'config/assets/addHealthFacility.html');

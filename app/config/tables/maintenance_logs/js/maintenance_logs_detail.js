@@ -82,5 +82,20 @@ function cbFailure(error) {
 }
 
 function display() {
+    var locale = odkCommon.getPreferredLocale();
+    $('#frig-hdr').text(odkCommon.localizeText(locale, "refrigerator"));
+    $('#mnt-log-info').text(odkCommon.localizeText(locale, "maintenance_log_information"));
+    $('#frig-id').text(odkCommon.localizeText(locale, "refrigerator_id"));
+    $('#work-stat').text(odkCommon.localizeText(locale, "working_status"));
+    $('#reason-not-work').text(odkCommon.localizeText(locale, "reason_not_working"));
+    $('#date-srv').text(odkCommon.localizeText(locale, "date_serviced"));
+    $('#type-of-mnt').text(odkCommon.localizeText(locale, "type_of_maintenance"));
+    $('#sp-prt').text(odkCommon.localizeText(locale, "spare_parts"));
+    $('#add-sp-prt').text(odkCommon.localizeText(locale, "additional_spare_parts"));
+    $('#notes-lbl').text(odkCommon.localizeText(locale, "notes"));
+
+    $('#edit-log').text(odkCommon.localizeText(locale, "edit_log"));
+    $('#del-log').text(odkCommon.localizeText(locale, "delete_log"));
+
     odkData.getViewData(cbSuccess, cbFailure);
 }

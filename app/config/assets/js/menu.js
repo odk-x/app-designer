@@ -3,11 +3,12 @@
 
 var adminKey = 'admin';
 var adminValue = 'Administrator Options';
+var locale = null;
 
-function addMenuButton(key, value, divToAddButtonTo) {
+function addMenuButton(key, value, label, divToAddButtonTo) {
     var button = $('<button>');
     button.attr('class', 'button');
-    button.text(value);
+    button.text(label);
     if (key === util.leafRegion) {
         button.on('click', function () {
             var queryParams = util.getKeyToAppendToColdChainURL(key, value);
@@ -30,7 +31,7 @@ function addMenuButton(key, value, divToAddButtonTo) {
 function successCB(result) {
     for (var i = 0; i < result.getCount(); i++) {
         var district = result.getData(i, 'admin_region');
-        addMenuButton(util.leafRegion, district, '#buttonsDiv');
+        addMenuButton(util.leafRegion, district, district, '#buttonsDiv');
     }
 }
 
@@ -47,9 +48,19 @@ function showSubregionButtonsAndTitle(jsonRegion) {
         for (var subRegCtr = 0; subRegCtr < subRegions.length; subRegCtr++) {
             var subRegion = subRegions[subRegCtr];
             var subRegionLabel = subRegion.label;
-            addMenuButton(util.region, subRegionLabel, '#buttonsDiv');
+            var subRegionToken = subRegion.token;
+            var localizeSubRegion = odkCommon.localizeText(locale, subRegionToken);
+            if (localizeSubRegion !== null && localizeSubRegion !== undefined) {
+                subRegionLabel = localizeSubRegion;
+            }
+            addMenuButton(util.region, subRegion.region, subRegionLabel, '#buttonsDiv');
         }
-        header.text(jsonRegion.label);
+        var hdrRegLab = jsonRegion.label;
+        var localizeHdrRegLab = odkCommon.localizeText(locale, jsonRegion.token);
+        if (localizeHdrRegLab !== null && localizeHdrRegLab !== undefined) {
+            hdrRegLab = localizeHdrRegLab;
+        }
+        header.text(hdrRegLab);
 
     // We got the entire array of regions so show first level
     } else if (Array.isArray(jsonRegion)) {
@@ -57,11 +68,21 @@ function showSubregionButtonsAndTitle(jsonRegion) {
         for (var regCtr = 0; regCtr < jsonRegion.length; regCtr++) {
             var reg = jsonRegion[regCtr];
             var regLabel = reg.label;
-            addMenuButton(util.region, regLabel, '#buttonsDiv');
+            var regToken = reg.token;
+            var localizeRegion = odkCommon.localizeText(locale, regToken);
+            if (localizeRegion !== null && localizeRegion !== undefined) {
+                regLabel = localizeRegion;
+            }
+            addMenuButton(util.region, reg.region, regLabel, '#buttonsDiv');
         }
     // There are no more subregions so now we need to get the districts
     } else {
-        header.text(jsonRegion.label);
+        var hdrLab = jsonRegion.label;
+        var localHdr = odkCommon.localizeText(locale, jsonRegion.token);
+        if (localHdr !== null && localHdr !== undefined) {
+            hdrLab = localHdr;
+        }
+        header.text(hdrLab);
         util.getDistrictsByAdminLevel2(jsonRegion.label, successCB, failCB);
     }
 }
@@ -92,7 +113,8 @@ function updateStaticDisplay() {
     var fileUri = odkCommon.getFileAsUrl('config/assets/img/hallway.jpg');
     var header = $('<h1>');
     header.attr('id', 'header1');
-    header.text('Cold Chain Management');
+    var headerTxt = odkCommon.localizeText(locale, "cold_chain_management");
+    header.text(headerTxt);
     headerDiv.append(header);
 
     $('body').css('background-image', 'url(' + fileUri + ')');
@@ -130,14 +152,20 @@ function checkDefaultGroupForMenuOptions() {
         } else if (r.indexOf('ROLE_ADMINISTER_TABLES') === 0) {
             regionJSON = util.getMenuOptions(null);
             showSubregionButtonsAndTitle(regionJSON);
-            addMenuButton(adminKey, adminValue, '#buttonsDiv');
+            var adminTxt = adminValue;
+            var localizeAdminTxt = odkCommon.localizeText(locale, "administrator_options");
+            if (localizeAdminTxt !== null && localizeAdminTxt !== undefined) {
+                adminTxt = localizeAdminTxt;
+            }
+            addMenuButton(adminKey, adminTxt, adminTxt, '#buttonsDiv');
         } else {
             showLogin('User Is Not Authorized. Please Log In', 'Log In');
         }
     });
 }
 
-function display() { 
+function display() {
+    locale = odkCommon.getPreferredLocale(); 
     updateStaticDisplay();
     
     var reg = util.getQueryParameter(util.region);

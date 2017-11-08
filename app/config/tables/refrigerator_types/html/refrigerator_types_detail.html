@@ -4,38 +4,39 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
         <script type="text/javascript" src="../../../assets/libs/jquery.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
-        <script type="text/javascript" src="../../../../system/libs/underscore.1.4.4.js"></script>
+        <script type="text/javascript" src="../../../../system/libs/underscore.1.8.3.js"></script>
         <script type="text/javascript" src="../../../assets/js/util.js"></script>
 
     </head>
     <body onload="display();">
         <script type="text/javascript" src="../js/refrigerator_types_detail.js"></script>
         <div class="header col-12">
-            <h1>Model: <span id="model_name"></span></h1>
-            <h3>Catalog ID: <span id="catalog_id"></span></h3>
+            <h1><span id="mdl-hdr">Model:</span> <span id="model_name"></span></h1>
+            <h3><span id="cat-id-hdr">Catalog ID:</span> <span id="catalog_id"></span></h3>
         </div>
 
         <div class="detail col-12">
-            <h3>Model Information</h3>
+            <h3 id="mdl-info">Model Information</h3>
         </div>
 
         <div class="row">
             <div class="col-6">
-                <p>Manufacturer: <span id="manufacturer"></span></p>
-                <p>Power Sources: <span id="power_sources"></span></p>
-                <p>Fridge Gross Volume: <span id="r_gross_vol"></span><sup>3</sup></p>
-                <p>Freezer Gross Volume: <span id="f_gross_vol"></span><sup>3</sup></p>
+                <p><span class="detailHdr" id="man">Manufacturer:</span> <span id="manufacturer"></span></p>
+                <p><span class="detailHdr" id="pwr-src">Power Sources:</span> <span id="power_sources"></span></p>
+                <p><span class="detailHdr" id="frig-grs-vol">Fridge Gross Volume:</span> <span id="r_gross_vol"></span><sup>3</sup></p>
+                <p><span class="detailHdr" id="frz-grs-vol">Freezer Gross Volume:</span> <span id="f_gross_vol"></span><sup>3</sup></p>
             </div>
 
             <div class="col-6">
-                <p>Equipment Type: <span id="equipment_type"></span></p>
-                <p>Climate Zone: <span id="climate_zone"></span></p>
-                <p>Fridge Net Volume: <span id="r_net_vol"></span><sup>3</sup></p>
-                <p>Freezer Net Volume: <span id="f_net_vol"></span><sup>3</sup></p>
+                <p><span class="detailHdr" id="equip-type">Equipment Type:</span> <span id="equipment_type"></span></p>
+                <p><span class="detailHdr" id="clim-zn">Climate Zone:</span> <span id="climate_zone"></span></p>
+                <p><span class="detailHdr" id="frig-net-vol">Fridge Net Volume:</span> <span id="r_net_vol"></span><sup>3</sup></p>
+                <p><span class="detailHdr" id="frz-net-vol">Freezer Net Volume:</span> <span id="f_net_vol"></span><sup>3</sup></p>
             </div>
         </div>
 
@@ -46,7 +47,7 @@
         <br>
 
         <div class="button">
-            <h3 href="#" onclick="onLinkClick()">View all <span id="catalogID" class="h3"></span> Refrigerators</h3>
+            <h3 href="#" onclick="onLinkClick()"><span id="vw-all">View all</span> <span id="catalogID" class="h3"></span> <span id="frig-txt">Refrigerators</span></h3>
             <h3>(<span id="fridge_list"></span>)</h3>
         </div>   
 

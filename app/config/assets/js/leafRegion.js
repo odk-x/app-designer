@@ -12,6 +12,13 @@ function display() {
     // Set the background to be a picture.
     body.css('background-image', 'url(img/hallway.jpg)');
 
+    var locale = odkCommon.getPreferredLocale();
+    $('#view-facilities').text(odkCommon.localizeText(locale, "view_all_health_facilities"));
+    $('#filter-facilities').text(odkCommon.localizeText(locale, "filter_health_facilities_by_type"));
+    $('#view-all-refrigerators').text(odkCommon.localizeText(locale, "view_all_refrigerators"));
+    $('#view-service-refrigerators').text(odkCommon.localizeText(locale, "view_all_refrigerators_needing_service"));
+    $('#view-models').text(odkCommon.localizeText(locale, "view_refrigerator_models"));
+
     var hdr1 = $('#header1');
     var leaf = util.getQueryParameter(util.leafRegion);
     if (leaf !== null) {

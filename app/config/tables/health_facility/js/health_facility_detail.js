@@ -81,6 +81,38 @@ function cbFailure(error) {
 }
 
 function display() {
+    var locale = odkCommon.getPreferredLocale();
+    $('#basic-facility-information').text(odkCommon.localizeText(locale, "basic_facility_information"));
+    $('#health-fac-id').text(odkCommon.localizeText(locale, "health_facility_id"));
+    $('#fac-type').text(odkCommon.localizeText(locale, "facility_type"));
+    $('#ownership').text(odkCommon.localizeText(locale, "ownership"));
+    $('#population').text(odkCommon.localizeText(locale, "population"));
+    $('#coverage').text(odkCommon.localizeText(locale, "coverage"));
+    $('#admin-reg').text(odkCommon.localizeText(locale, "admin_region"));
+
+    $('#power-information').text(odkCommon.localizeText(locale, "power_information"));
+    $('#elec-source').text(odkCommon.localizeText(locale, "electricity_source"));
+    $('#grid-avail').text(odkCommon.localizeText(locale, "grid_availability"));
+    $('#gas-avail').text(odkCommon.localizeText(locale, "gas_availability"));
+    $('#kerosene-avail').text(odkCommon.localizeText(locale, "kerosene_availability"));
+    $('#solar-suit-clim').text(odkCommon.localizeText(locale, "solar_suitable_climate"));
+    $('#solar-suit-site').text(odkCommon.localizeText(locale, "solar_suitable_site"));
+
+    $('#loc-info').text(odkCommon.localizeText(locale, "location_information"));
+    $('#lat-gps').text(odkCommon.localizeText(locale, "latitude_gps"));
+    $('#long-gps').text(odkCommon.localizeText(locale, "longitude_gps"));
+    $('#clim').text(odkCommon.localizeText(locale, "climate"));
+
+    $('#stk-info').text(odkCommon.localizeText(locale, "stock_information"));
+    $('#dist-to-sup-pt').text(odkCommon.localizeText(locale, "distance_to_supply_point"));
+    $('#vac-sup-interval').text(odkCommon.localizeText(locale, "vaccine_supply_interval"));
+    $('#vac-res-stock-req').text(odkCommon.localizeText(locale, "vaccine_reserve_stock_req"));
+    $('#vac-sup-mode').text(odkCommon.localizeText(locale, "vaccine_supply_mode"));
+
+    $('#refrig-inv').text(odkCommon.localizeText(locale, "refrigerator_inventory"));
+    $('#add-fridge').text(odkCommon.localizeText(locale, "add_refrigerator"));
+    $('#edit-fac').text(odkCommon.localizeText(locale, "edit_facility"));
+    $('#del-fac').text(odkCommon.localizeText(locale, "delete_facility"));
 
     odkData.getViewData(cbSuccess, cbFailure);
 }
