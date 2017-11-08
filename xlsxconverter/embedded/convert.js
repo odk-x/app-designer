@@ -39,10 +39,7 @@ async function convert(requestId) {
         form.append('properties.csv', shouldWriteCsv ? createPropCsv(dtm, formDef) : "");
         form.append('tableSpecificDefinitions.js', shouldWriteDefJs(formDef) ? createDefJs(tableId, formDef) : "");
 
-        // let params = new URLSearchParams();
-        // params.append('requestId', requestId);
-
-        return fetch(`/xlsx/${requestId}/${encodeURIComponent(tableId)}/${encodeURIComponent(formId)}`, {
+        return fetch(`/xlsx/${requestId}/${encodeURIComponent(f)}/${encodeURIComponent(tableId)}/${encodeURIComponent(formId)}`, {
             method: 'POST',
             body: form
         });
