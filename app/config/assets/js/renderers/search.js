@@ -20,17 +20,17 @@ function display() {
 
     let renderPromises = [];
 
-    if (type == util.getIndividualCustomFormId()) {
+    if (type == util.getMemberCustomFormId()) {
 
-        baseTable = util.individualTable;
-        customTable = util.getIndividualCustomFormId();
+        baseTable = util.membersTable;
+        customTable = util.getMemberCustomFormId();
         customForeignKey = 'custom_individual_row_id';
 
         $('#title').text(odkCommon.localizeText(locale, "search_individuals"));
         singularUnitLabel = odkCommon.localizeText(locale, "beneficiary");
         pluralUnitLabel = odkCommon.localizeText(locale, "beneficiaries");
         renderPromises.push(populateSearchItems(type, false));
-        renderPromises.push(populateSearchItems(util.individualTable, true));
+        renderPromises.push(populateSearchItems(util.membersTable, true));
 
     } else if (type == util.getBeneficiaryEntityCustomFormId()) {
 
@@ -128,7 +128,7 @@ function failureCallbackFn(error) {
 
 
 function launch() {
-    if (type === util.getIndividualCustomFormId() || type === util.getBeneficiaryEntityCustomFormId()) {
+    if (type === util.getMemberCustomFormId() || type === util.getBeneficiaryEntityCustomFormId()) {
         let whereClauseTableLabel;
         if (baseTableColumns.includes(key)) {
             whereClauseTableLabel = 'base';

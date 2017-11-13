@@ -256,7 +256,7 @@ function handleRegistrationCallback(action, dispatchStr) {
             var rootRowId = dispatchStr[util.rootRowIdKey];
             if (util.getRegistrationMode() === "HOUSEHOLD") {
                 var individualRowsPromise = new Promise( function(resolve, reject) {
-                    odkData.query(util.getIndividualCustomFormId(), util.getCustomBeneficiaryRowIdColumn() + ' = ?', [action.jsonValue.result.instanceId],
+                    odkData.query(util.getMemberCustomFormId(), util.getCustomBeneficiaryRowIdColumn() + ' = ?', [action.jsonValue.result.instanceId],
                         null, null, null, null, null, null, true, resolve, reject)
                 });
 
@@ -275,7 +275,7 @@ function handleRegistrationCallback(action, dispatchStr) {
                         util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
                         util.setJSONMap(jsonMap, 'beneficiary_entity_row_id', rootRowId);
                         //util.setJSONMap(jsonMap, 'date_created', );
-                        util.setJSONMap(jsonMap, 'custom_individual_form_id', util.getIndividualCustomFormId());
+                        util.setJSONMap(jsonMap, 'custom_individual_form_id', util.getMemberCustomFormId());
                         util.setJSONMap(jsonMap, 'custom_individual_row_id', customIndividualRows.getRowId(i));
                         util.setJSONMap(jsonMap, 'status', 'ENABLED');
                         util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
@@ -283,13 +283,13 @@ function handleRegistrationCallback(action, dispatchStr) {
                         util.setJSONMap(jsonMap, '_default_access', 'HIDDEN');
 
                         addRowActions.push(new Promise( function(resolve, reject) {
-                            odkData.addRow(util.individualTable, jsonMap, util.genUUID(), resolve, reject);
+                            odkData.addRow(util.membersTable, jsonMap, util.genUUID(), resolve, reject);
                         }));
                     }
                     return Promise.all(addRowActions);
                 }).then( function(result) {
                     if (addRowActions.length > 0) {
-                        console.log("added base individual rows");
+                        console.log("added base member rows");
                         odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, rootRowId,
                             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
                             encodeURIComponent(type));
@@ -307,7 +307,7 @@ function handleRegistrationCallback(action, dispatchStr) {
                 util.setJSONMap(jsonMap, "_default_access", "HIDDEN");
 
                 new Promise( function(resolve, reject) {
-                    odkData.addRow(util.individualTable, jsonMap, util.genUUID(), resolve, reject);
+                    odkData.addRow(util.membersTable, jsonMap, util.genUUID(), resolve, reject);
                 }).then( function(result) {
                     odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, rootRowId,
                         'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=delivery');
@@ -518,7 +518,7 @@ function registrationVoucherCBSuccess(result) {
             var customDispatchStruct = {};
             var additionalFormsTupleArr = [];
 
-            var additionalFormTuple = {[util.additionalCustomFormsObj.formIdKey] : util.getIndividualCustomFormId(), [util.additionalCustomFormsObj.foreignReferenceKey] : 'custom_beneficiary_entity_row_id', [util.additionalCustomFormsObj.valueKey] : customRowId};
+            var additionalFormTuple = {[util.additionalCustomFormsObj.formIdKey] : util.getMemberCustomFormId(), [util.additionalCustomFormsObj.foreignReferenceKey] : 'custom_beneficiary_entity_row_id', [util.additionalCustomFormsObj.valueKey] : customRowId};
             additionalFormsTupleArr.push(additionalFormTuple);
 
             customDispatchStruct[util.additionalCustomFormsObj.dispatchKey] = additionalFormsTupleArr;

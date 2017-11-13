@@ -205,9 +205,9 @@ function setSublistToDeliveredEntitlements() {
 
 function setSublistToHousehold() {
     console.log("setting to household");
-    odkTables.setSubListView(util.individualTable, 'beneficiary_entity_row_id = ?',
+    odkTables.setSubListView(util.membersTable, 'beneficiary_entity_row_id = ?',
         [beneficiaryEntitiesResultSet.getRowId(0)],
-        'config/tables/' + util.individualTable + '/html/' + util.individualTable +'_list.html');
+        'config/tables/' + util.membersTable + '/html/' + util.membersTable +'_list.html');
 }
 
 

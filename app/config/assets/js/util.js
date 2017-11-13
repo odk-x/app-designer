@@ -77,7 +77,7 @@ util.populateDetailView = function(resultSet, parentDiv, locale, exclusionList) 
 /************************** Red Cross Constants *********************************/
 
 util.beneficiaryEntityTable = 'beneficiary_entities';
-util.individualTable = 'individuals';
+util.membersTable = 'members';
 util.authorizationTable = 'authorizations';
 util.entitlementTable = 'entitlements';
 util.deliveryTable = 'deliveries';
@@ -117,7 +117,7 @@ $.ajax({
             return configSingleton['BENEFICIARY_ENTITY_CUSTOM_FORM_ID'];
         };
 
-        util.getIndividualCustomFormId = function() {
+        util.getMemberCustomFormId = function() {
             return configSingleton['INDIVIDUAL_CUSTOM_FORM_ID'];
         };
 
@@ -131,31 +131,6 @@ $.ajax({
     },
     async: false
 });
-
-util.getRegistrationMode = function() {
-    return configSingleton['REGISTRATION_MODE'];
-};
-
-util.getWorkflowMode = function() {
-    return configSingleton['WORKFLOW_MODE'];
-};
-
-util.getBeneficiaryEntityCustomFormId = function() {
-    return configSingleton['BENEFICIARY_ENTITY_CUSTOM_FORM_ID'];
-};
-
-util.getIndividualCustomFormId = function() {
-    return configSingleton['INDIVIDUAL_CUSTOM_FORM_ID'];
-};
-
-util.getTokenAuthorizationFormId = function() {
-    return 'authorizations';
-};
-
-util.getCustomBeneficiaryRowIdColumn = function() {
-    return configSingleton['CUSTOM_BENEFICIARY_ROW_ID_COLUMN'];
-};
-
 
 /************************** UI Rendering Util Functions *********************************/
 

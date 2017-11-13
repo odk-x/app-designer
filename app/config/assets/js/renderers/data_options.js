@@ -54,7 +54,7 @@ function display() {
             individualSearch.innerHTML = odkCommon.localizeText(locale, "search_individuals");
             individualSearch.onclick = function() {
                 odkTables.launchHTML(null,
-                    'config/assets/html/search.html?type=' + util.getIndividualCustomFormId());
+                    'config/assets/html/search.html?type=' + util.getMemberCustomFormId());
             }
             //append individual search button
             document.getElementById('wrapper').appendChild(individualSearch);
