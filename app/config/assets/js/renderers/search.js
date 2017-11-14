@@ -24,7 +24,7 @@ function display() {
 
         baseTable = util.membersTable;
         customTable = util.getMemberCustomFormId();
-        customForeignKey = 'custom_individual_row_id';
+        customForeignKey = 'custom_member_row_id';
 
         $('#title').text(odkCommon.localizeText(locale, "search_individuals"));
         singularUnitLabel = odkCommon.localizeText(locale, "beneficiary");

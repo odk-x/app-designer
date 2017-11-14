@@ -11,7 +11,7 @@ function display(result) {
         let exclusionList = [];
         if (util.getWorkflowMode() === 'TOKEN') {
             exclusionList = ['authorization_description', 'authorization_id', 'custom_delivery_form_id',
-                                'custom_delivery_row_id', 'entitlement_id', 'individual_id', 'is_override',
+                                'custom_delivery_row_id', 'entitlement_id', 'member_id', 'is_override',
                                 'item_pack_description', 'item_pack_id', 'item_pack_name'];
         } else {
             exclusionList = ['custom_delivery_row_id'];
