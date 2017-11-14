@@ -25,9 +25,9 @@ window.odkTableSpecificDefinitions = {
       "text": "Beneficiary Entity ID",
       "_row_num": 6
     },
-    "individual_id": {
-      "string_token": "individual_id",
-      "text": "Individual ID",
+    "member_id": {
+      "string_token": "member_id",
+      "text": "Member ID",
       "_row_num": 7
     },
     "entitlement_id": {

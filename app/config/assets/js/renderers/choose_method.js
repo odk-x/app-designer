@@ -267,16 +267,16 @@ function handleRegistrationCallback(action, dispatchStr) {
                 console.log("about to execute two promises");
                 var addRowActions = [];
                 Promise.all([memberRowsPromise, rootBERowPromise]).then( function(resultArr) {
-                    var customIndividualRows = resultArr[0];
+                    var customMemberRows = resultArr[0];
                     var rootBERow = resultArr[1];
-                    console.log(customIndividualRows.getCount());
-                    for (var i = 0; i < customIndividualRows.getCount(); i++) {
+                    console.log(customMemberRows.getCount());
+                    for (var i = 0; i < customMemberRows.getCount(); i++) {
                         var jsonMap = {};
                         util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
                         util.setJSONMap(jsonMap, 'beneficiary_entity_row_id', rootRowId);
                         //util.setJSONMap(jsonMap, 'date_created', );
                         util.setJSONMap(jsonMap, 'custom_member_form_id', util.getMemberCustomFormId());
-                        util.setJSONMap(jsonMap, 'custom_member_row_id', customIndividualRows.getRowId(i));
+                        util.setJSONMap(jsonMap, 'custom_member_row_id', customMemberRows.getRowId(i));
                         util.setJSONMap(jsonMap, 'status', 'ENABLED');
                         util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
                         util.setJSONMap(jsonMap, '_group_modify', odkCommon.getSessionVariable(defaultGroupKey));
@@ -630,7 +630,7 @@ function createOverrideCBSuccess(result) {
 
     var struct = {};
 
-//TODO: would individual ID be set here? is that a separate path? (post MVP)
+//TODO: would member ID be set here? is that a separate path? (post MVP)
 
     struct['authorization_id'] = result.get('_id');
     struct['authorization_name'] = result.get('name');

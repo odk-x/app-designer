@@ -26,7 +26,7 @@ function display() {
         customTable = util.getMemberCustomFormId();
         customForeignKey = 'custom_member_row_id';
 
-        $('#title').text(odkCommon.localizeText(locale, "search_individuals"));
+        $('#title').text(odkCommon.localizeText(locale, "search_members"));
         singularUnitLabel = odkCommon.localizeText(locale, "beneficiary");
         pluralUnitLabel = odkCommon.localizeText(locale, "beneficiaries");
         renderPromises.push(populateSearchItems(type, false));
@@ -44,8 +44,8 @@ function display() {
             pluralUnitLabel = odkCommon.localizeText(locale, 'households');
         } else {
             $('#title').text(odkCommon.localizeText(locale, "search_beneficiaries"));
-            singularUnitLabel = odkCommon.localizeText(locale, "individual");
-            pluralUnitLabel = odkCommon.localizeText(locale, 'individuals');
+            singularUnitLabel = odkCommon.localizeText(locale, "member");
+            pluralUnitLabel = odkCommon.localizeText(locale, 'members');
         }
 
         renderPromises.push(populateSearchItems(type, false));

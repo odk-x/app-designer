@@ -71,7 +71,7 @@ function callBackFn () {
 }
 
 var handleAuthorizationReportCallback = function(action, dispatchStr) {
-    if (dataUtil.validateCustomTableEntry(action, dispatchStr, "authorization report", util.authorizationReportTable)) {
+    if (dataUtil.validateCustomTableEntry(action, dispatchStr, "authorization report", util.distributionReportTable)) {
         // TODO: UI changes on successful completion?
     }
 }
@@ -82,7 +82,7 @@ var resumeFn = function(fIdxStart) {
     if (type === 'new_ent') {
         joinQuery = "SELECT * FROM " + util.authorizationTable;
     } else {
-        joinQuery = "SELECT * FROM " + util.authorizationTable + ' t1 LEFT JOIN ' + util.authorizationReportTable +
+        joinQuery = "SELECT * FROM " + util.authorizationTable + ' t1 LEFT JOIN ' + util.distributionReportTable +
             ' t2 ON t1.report_version=t2.report_version AND t1._id=t2.authorization_id WHERE t1.summary_form_id IS NOT NULL';
     }
 
@@ -125,7 +125,7 @@ var resumeFn = function(fIdxStart) {
                         + '&type=new_ent&authorization_id=' + rowId);
                 } else {
                     new Promise( function(resolve, reject) {
-                        odkData.query(util.authorizationReportTable, "report_version = ? AND authorization_id = ?", [reportVersion, rowId],
+                        odkData.query(util.distributionReportTable, "report_version = ? AND authorization_id = ?", [reportVersion, rowId],
                             null, null, null, null, null, null, true, resolve, reject);
                     }).then( function (result) {
                         if (result.getCount() > 0) {
@@ -141,7 +141,7 @@ var resumeFn = function(fIdxStart) {
                                 util.setJSONMap(jsonMap, "report_version", reportVersion);
                                 util.setJSONMap(jsonMap, "summary_form_id", summaryFormId);
                                 util.setJSONMap(jsonMap, "summary_row_id", customReportRowId);
-                                odkData.addRow(util.authorizationReportTable, jsonMap, rootRowId, resolve, reject);
+                                odkData.addRow(util.distributionReportTable, jsonMap, rootRowId, resolve, reject);
                             }).then( function(result) {
                                 // passing in group read only to not break method
                                 dataUtil.createCustomRowFromBaseEntry(result, "summary_form_id", "summary_row_id", actionAuthorizationReport, null, '_group_read_only', null);

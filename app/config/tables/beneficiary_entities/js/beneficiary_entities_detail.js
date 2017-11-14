@@ -134,7 +134,7 @@ function initEntitlementToggle() {
     });
 }
 
-// TODO: abstract a default individual foreign key value to populate the registration detail view with
+// TODO: abstract a default member foreign key value to populate the registration detail view with
 
 function setToHouseholdView() {
     var toggleWorkflowButton = $('#toggle_workflow');

@@ -59,18 +59,18 @@
         "_row_num": 4
       },
       {
-        "string_token": "individual_id",
-        "text": "Individual ID",
+        "string_token": "member_id",
+        "text": "Member ID",
         "_row_num": 5
       },
       {
-        "string_token": "custom_individual_form_id",
-        "text": "Custom Individual Form ID",
+        "string_token": "custom_member_form_id",
+        "text": "Custom Member Form ID",
         "_row_num": 6
       },
       {
-        "string_token": "custom_individual_row_id",
-        "text": "Custom Individual Row ID",
+        "string_token": "custom_member_row_id",
+        "text": "Custom Member Row ID",
         "_row_num": 7
       },
       {
@@ -182,17 +182,17 @@
       },
       {
         "type": "string",
-        "name": "individual_id",
+        "name": "member_id",
         "_row_num": 5
       },
       {
         "type": "string",
-        "name": "custom_individual_form_id",
+        "name": "custom_member_form_id",
         "_row_num": 6
       },
       {
         "type": "string",
-        "name": "custom_individual_row_id",
+        "name": "custom_member_row_id",
         "_row_num": 7
       },
       {
@@ -318,19 +318,19 @@
           "text": "Date Created",
           "_row_num": 4
         },
-        "individual_id": {
-          "string_token": "individual_id",
-          "text": "Individual ID",
+        "member_id": {
+          "string_token": "member_id",
+          "text": "Member ID",
           "_row_num": 5
         },
-        "custom_individual_form_id": {
-          "string_token": "custom_individual_form_id",
-          "text": "Custom Individual Form ID",
+        "custom_member_form_id": {
+          "string_token": "custom_member_form_id",
+          "text": "Custom Member Form ID",
           "_row_num": 6
         },
-        "custom_individual_row_id": {
-          "string_token": "custom_individual_row_id",
-          "text": "Custom Individual Row ID",
+        "custom_member_row_id": {
+          "string_token": "custom_member_row_id",
+          "text": "Custom Member Row ID",
           "_row_num": 7
         },
         "status": {
@@ -458,7 +458,7 @@
         ],
         "elementKey": "date_created"
       },
-      "individual_id": {
+      "member_id": {
         "type": "string",
         "_defn": [
           {
@@ -466,9 +466,9 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "individual_id"
+        "elementKey": "member_id"
       },
-      "custom_individual_form_id": {
+      "custom_member_form_id": {
         "type": "string",
         "_defn": [
           {
@@ -476,9 +476,9 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "custom_individual_form_id"
+        "elementKey": "custom_member_form_id"
       },
-      "custom_individual_row_id": {
+      "custom_member_row_id": {
         "type": "string",
         "_defn": [
           {
@@ -486,7 +486,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "custom_individual_row_id"
+        "elementKey": "custom_member_row_id"
       },
       "status": {
         "type": "string",
@@ -798,7 +798,7 @@
         "elementSet": "data",
         "elementPath": "date_created"
       },
-      "individual_id": {
+      "member_id": {
         "type": "string",
         "_defn": [
           {
@@ -806,12 +806,12 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "individual_id",
-        "elementName": "individual_id",
+        "elementKey": "member_id",
+        "elementName": "member_id",
         "elementSet": "data",
-        "elementPath": "individual_id"
+        "elementPath": "member_id"
       },
-      "custom_individual_form_id": {
+      "custom_member_form_id": {
         "type": "string",
         "_defn": [
           {
@@ -819,12 +819,12 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "custom_individual_form_id",
-        "elementName": "custom_individual_form_id",
+        "elementKey": "custom_member_form_id",
+        "elementName": "custom_member_form_id",
         "elementSet": "data",
-        "elementPath": "custom_individual_form_id"
+        "elementPath": "custom_member_form_id"
       },
-      "custom_individual_row_id": {
+      "custom_member_row_id": {
         "type": "string",
         "_defn": [
           {
@@ -832,10 +832,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "custom_individual_row_id",
-        "elementName": "custom_individual_row_id",
+        "elementKey": "custom_member_row_id",
+        "elementName": "custom_member_row_id",
         "elementSet": "data",
-        "elementPath": "custom_individual_row_id"
+        "elementPath": "custom_member_row_id"
       },
       "status": {
         "type": "string",

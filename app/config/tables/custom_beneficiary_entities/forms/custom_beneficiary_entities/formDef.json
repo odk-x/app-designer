@@ -123,7 +123,7 @@
         "name": "reg_members",
         "display": {
           "prompt": {
-            "text": "Make a list of all individuals who normally live in this household"
+            "text": "Make a list of all members who normally live in this household"
           }
         },
         "values_list": "reg_members",
@@ -336,8 +336,8 @@
       {
         "query_name": "reg_members",
         "query_type": "linked_table",
-        "linked_form_id": "custom_individuals",
-        "linked_table_id": "custom_individuals",
+        "linked_form_id": "custom_members",
+        "linked_table_id": "custom_members",
         "selection": "custom_beneficiary_entity_row_id = ?",
         "selectionArgs": "[ metadata('_id')]",
         "newRowInitialElementKeyToValueMap": "{custom_beneficiary_entity_row_id: metadata('_id'), _group_modify: metadata('_group_modify')}",
@@ -347,8 +347,8 @@
       {
         "query_name": "count_members",
         "query_type": "linked_table",
-        "linked_form_id": "custom_individuals",
-        "linked_table_id": "custom_individuals",
+        "linked_form_id": "custom_members",
+        "linked_table_id": "custom_members",
         "selection": "custom_beneficiary_entity_row_id = ?",
         "selectionArgs": "[ data('custom_beneficiary_entity_row_id') ]",
         "newRowInitialElementKeyToValueMap": "{}",
@@ -563,8 +563,8 @@
       "reg_members": {
         "query_name": "reg_members",
         "query_type": "linked_table",
-        "linked_form_id": "custom_individuals",
-        "linked_table_id": "custom_individuals",
+        "linked_form_id": "custom_members",
+        "linked_table_id": "custom_members",
         "selection": "custom_beneficiary_entity_row_id = ?",
         "selectionArgs": "[ metadata('_id')]",
         "newRowInitialElementKeyToValueMap": "{custom_beneficiary_entity_row_id: metadata('_id'), _group_modify: metadata('_group_modify')}",
@@ -574,8 +574,8 @@
       "count_members": {
         "query_name": "count_members",
         "query_type": "linked_table",
-        "linked_form_id": "custom_individuals",
-        "linked_table_id": "custom_individuals",
+        "linked_form_id": "custom_members",
+        "linked_table_id": "custom_members",
         "selection": "custom_beneficiary_entity_row_id = ?",
         "selectionArgs": "[ data('custom_beneficiary_entity_row_id') ]",
         "newRowInitialElementKeyToValueMap": "{}",
@@ -894,7 +894,7 @@
             "name": "reg_members",
             "display": {
               "prompt": {
-                "text": "Make a list of all individuals who normally live in this household"
+                "text": "Make a list of all members who normally live in this household"
               }
             },
             "values_list": "reg_members",

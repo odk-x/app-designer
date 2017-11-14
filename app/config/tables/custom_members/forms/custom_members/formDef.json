@@ -501,8 +501,8 @@
       {
         "query_name": "verify_user_query",
         "query_type": "linked_table",
-        "linked_form_id": "custom_individuals",
-        "linked_table_id": "custom_individuals",
+        "linked_form_id": "custom_members",
+        "linked_table_id": "custom_members",
         "selection": "_savepoint_type = ? and first_last_name = ? and id_number = ?",
         "selectionArgs": "['COMPLETE', data('first_last_name'), data('id_number')]",
         "fieldName": "first_last_name",
@@ -814,8 +814,8 @@
       "verify_user_query": {
         "query_name": "verify_user_query",
         "query_type": "linked_table",
-        "linked_form_id": "custom_individuals",
-        "linked_table_id": "custom_individuals",
+        "linked_form_id": "custom_members",
+        "linked_table_id": "custom_members",
         "selection": "_savepoint_type = ? and first_last_name = ? and id_number = ?",
         "selectionArgs": "['COMPLETE', data('first_last_name'), data('id_number')]",
         "fieldName": "first_last_name",

@@ -50,14 +50,14 @@ function display() {
         document.getElementById('wrapper').appendChild(beneficiaryEntitySearch);
 
         if (util.getRegistrationMode() == 'HOUSEHOLD') {
-            var individualSearch = document.createElement('button');
-            individualSearch.innerHTML = odkCommon.localizeText(locale, "search_individuals");
-            individualSearch.onclick = function() {
+            var memberSearch = document.createElement('button');
+            memberSearch.innerHTML = odkCommon.localizeText(locale, "search_members");
+            memberSearch.onclick = function() {
                 odkTables.launchHTML(null,
                     'config/assets/html/search.html?type=' + util.getMemberCustomFormId());
             }
-            //append individual search button
-            document.getElementById('wrapper').appendChild(individualSearch);
+            //append member search button
+            document.getElementById('wrapper').appendChild(memberSearch);
         }
 
     } else {

@@ -81,7 +81,7 @@ util.membersTable = 'members';
 util.authorizationTable = 'authorizations';
 util.entitlementTable = 'entitlements';
 util.deliveryTable = 'deliveries';
-util.authorizationReportTable = 'authorization_reports';
+util.distributionReportTable = 'distribution_reports';
 util.savepointSuccess = "COMPLETE";
 util.configPath = odkCommon.getBaseUrl() + 'config/assets/config.json';
 util.actionTypeKey = 'actionTypeKey';
@@ -118,7 +118,7 @@ $.ajax({
         };
 
         util.getMemberCustomFormId = function() {
-            return configSingleton['INDIVIDUAL_CUSTOM_FORM_ID'];
+            return configSingleton['MEMBER_CUSTOM_FORM_ID'];
         };
 
         util.getTokenAuthorizationFormId = function() {
@@ -288,7 +288,7 @@ dataUtil.isCustomDeliveryAuthorization = function(authorizationRow) {
 dataUtil.addDeliveryRowByEntitlement = function(entitlementRow, customDeliveryFormId, customDeliveryRowId) {
     var jsonMap = {};
     util.setJSONMap(jsonMap, 'beneficiary_entity_id', entitlementRow.get('beneficiary_entity_id'));
-    util.setJSONMap(jsonMap, 'individual_id', entitlementRow.get('individual_id'));
+    util.setJSONMap(jsonMap, 'member_id', entitlementRow.get('member_id'));
     util.setJSONMap(jsonMap, 'entitlement_id', entitlementRow.get('_id'));
     util.setJSONMap(jsonMap, 'authorization_id', entitlementRow.get('authorization_id'));
     util.setJSONMap(jsonMap, 'authorization_name', entitlementRow.get('authorization_name'));

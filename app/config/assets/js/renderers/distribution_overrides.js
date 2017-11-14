@@ -28,7 +28,7 @@ function display() {
     distributionReport.innerHTML = "Fill Distribution Report";
     distributionReport.onclick = function() {
         odkTables.launchHTML(null,
-                        'config/tables/' + util.authorizationTable + '/html/' + util.authorizationTable + '_list.html?type=authorization_report');
+                        'config/tables/' + util.authorizationTable + '/html/' + util.authorizationTable + '_list.html?type=distribution_report');
     };
     document.getElementById("wrapper").appendChild(distributionReport);
 }

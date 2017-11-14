@@ -15,19 +15,19 @@ window.odkTableSpecificDefinitions = {
       "text": "Date Created",
       "_row_num": 4
     },
-    "individual_id": {
-      "string_token": "individual_id",
-      "text": "Individual ID",
+    "member_id": {
+      "string_token": "member_id",
+      "text": "Member ID",
       "_row_num": 5
     },
-    "custom_individual_form_id": {
-      "string_token": "custom_individual_form_id",
-      "text": "Custom Individual Form ID",
+    "custom_member_form_id": {
+      "string_token": "custom_member_form_id",
+      "text": "Custom Member Form ID",
       "_row_num": 6
     },
-    "custom_individual_row_id": {
-      "string_token": "custom_individual_row_id",
-      "text": "Custom Individual Row ID",
+    "custom_member_row_id": {
+      "string_token": "custom_member_row_id",
+      "text": "Custom Member Row ID",
       "_row_num": 7
     },
     "status": {

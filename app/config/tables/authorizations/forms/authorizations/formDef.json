@@ -73,7 +73,7 @@
       },
       {
         "type": "string",
-        "name": "for_individual",
+        "name": "for_member",
         "_row_num": 16
       }
     ],
@@ -149,8 +149,8 @@
         "_row_num": 15
       },
       {
-        "string_token": "for_individual",
-        "text": "Generate Entitlement for Individual or Benefiiciary_Entity",
+        "string_token": "for_member",
+        "text": "Entitlement Generated for Member",
         "_row_num": 16
       }
     ],
@@ -371,9 +371,9 @@
           "text": "Date Created",
           "_row_num": 15
         },
-        "for_individual": {
-          "string_token": "for_individual",
-          "text": "Generate Entitlement for Individual or Benefiiciary_Entity",
+        "for_member": {
+          "string_token": "for_member",
+          "text": "Entitlement Generated for Member",
           "_row_num": 16
         }
       }
@@ -521,7 +521,7 @@
         ],
         "elementKey": "date_created"
       },
-      "for_individual": {
+      "for_member": {
         "type": "string",
         "_defn": [
           {
@@ -529,7 +529,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "for_individual"
+        "elementKey": "for_member"
       }
     },
     "section_names": [
@@ -964,7 +964,7 @@
         "elementSet": "data",
         "elementPath": "date_created"
       },
-      "for_individual": {
+      "for_member": {
         "type": "string",
         "_defn": [
           {
@@ -972,10 +972,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "for_individual",
-        "elementName": "for_individual",
+        "elementKey": "for_member",
+        "elementName": "for_member",
         "elementSet": "data",
-        "elementPath": "for_individual"
+        "elementPath": "for_member"
       },
       "_id": {
         "type": "string",

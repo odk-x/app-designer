@@ -572,17 +572,17 @@ window.odkCommonDefinitions = {
       },
       "_row_num": 57
     },
-    "individual": {
-      "string_token": "individual",
+    "member": {
+      "string_token": "member",
       "text": {
-        "default": "individual"
+        "default": "member"
       },
       "_row_num": 58
     },
-    "individuals": {
-      "string_token": "individuals",
+    "members": {
+      "string_token": "members",
       "text": {
-        "default": "individuals"
+        "default": "members"
       },
       "_row_num": 59
     },
@@ -600,17 +600,17 @@ window.odkCommonDefinitions = {
       },
       "_row_num": 61
     },
-    "search_individuals": {
-      "string_token": "search_individuals",
+    "search_members": {
+      "string_token": "search_members",
       "text": {
-        "default": "Search for Individuals"
+        "default": "Search for Members"
       },
       "_row_num": 62
     },
-    "search_individuals_title": {
-      "string_token": "search_individuals_title",
+    "search_members_title": {
+      "string_token": "search_members_title",
       "text": {
-        "default": "Individual Advanced Search"
+        "default": "Member Advanced Search"
       },
       "_row_num": 63
     },

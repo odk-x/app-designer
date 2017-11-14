@@ -35,7 +35,7 @@
       },
       {
         "type": "string",
-        "name": "individual_id",
+        "name": "member_id",
         "_row_num": 7
       },
       {
@@ -137,8 +137,8 @@
         "_row_num": 6
       },
       {
-        "string_token": "individual_id",
-        "text": "Individual ID",
+        "string_token": "member_id",
+        "text": "Member ID",
         "_row_num": 7
       },
       {
@@ -330,9 +330,9 @@
           "text": "Beneficiary Entity ID",
           "_row_num": 6
         },
-        "individual_id": {
-          "string_token": "individual_id",
-          "text": "Individual ID",
+        "member_id": {
+          "string_token": "member_id",
+          "text": "Member ID",
           "_row_num": 7
         },
         "entitlement_id": {
@@ -448,7 +448,7 @@
         ],
         "elementKey": "beneficiary_entity_id"
       },
-      "individual_id": {
+      "member_id": {
         "type": "string",
         "_defn": [
           {
@@ -456,7 +456,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "individual_id"
+        "elementKey": "member_id"
       },
       "entitlement_id": {
         "type": "string",
@@ -850,7 +850,7 @@
         "elementSet": "data",
         "elementPath": "beneficiary_entity_id"
       },
-      "individual_id": {
+      "member_id": {
         "type": "string",
         "_defn": [
           {
@@ -858,10 +858,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "individual_id",
-        "elementName": "individual_id",
+        "elementKey": "member_id",
+        "elementName": "member_id",
         "elementSet": "data",
-        "elementPath": "individual_id"
+        "elementPath": "member_id"
       },
       "entitlement_id": {
         "type": "string",

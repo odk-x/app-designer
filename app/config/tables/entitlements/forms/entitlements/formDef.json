@@ -94,7 +94,7 @@
       },
       {
         "type": "string",
-        "name": "individual_id",
+        "name": "member_id",
         "_row_num": 7
       },
       {
@@ -353,7 +353,7 @@
         ],
         "elementKey": "beneficiary_entity_id"
       },
-      "individual_id": {
+      "member_id": {
         "type": "string",
         "_defn": [
           {
@@ -361,7 +361,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "individual_id"
+        "elementKey": "member_id"
       },
       "is_override": {
         "type": "string",
@@ -690,7 +690,7 @@
         "elementSet": "data",
         "elementPath": "beneficiary_entity_id"
       },
-      "individual_id": {
+      "member_id": {
         "type": "string",
         "_defn": [
           {
@@ -698,10 +698,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "individual_id",
-        "elementName": "individual_id",
+        "elementKey": "member_id",
+        "elementName": "member_id",
         "elementSet": "data",
-        "elementPath": "individual_id"
+        "elementPath": "member_id"
       },
       "is_override": {
         "type": "string",
