@@ -92,6 +92,11 @@ window.odkTableSpecificDefinitions = {
       "string_token": "assigned_item_pack_code",
       "text": "Assigned Item Pack Barcode",
       "_row_num": 16
+    },
+    "supply": {
+      "string_token": "supply",
+      "text": "Supply",
+      "_row_num": 17
     }
   }
 }

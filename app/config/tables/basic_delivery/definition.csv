@@ -1,5 +1,2 @@
 _element_key,_element_name,_element_type,_list_child_element_keys
-delivery_id,delivery_id,string,[]
-entitlement_id,entitlement_id,string,[]
-is_delivered,is_delivered,string,[]
 supply,supply,string,[]

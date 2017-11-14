@@ -27,36 +27,15 @@
         "_row_num": 4
       },
       {
-        "type": "assign",
-        "name": "is_delivered",
-        "calculation": "\"TRUE\"",
-        "_row_num": 5
-      },
-      {
         "clause": "end screen",
-        "_row_num": 6
+        "_row_num": 5
       }
     ],
     "model": [
       {
         "type": "string",
-        "name": "entitlement_id",
-        "_row_num": 2
-      },
-      {
-        "type": "string",
-        "name": "delivery_id",
-        "_row_num": 3
-      },
-      {
-        "type": "string",
-        "name": "is_delivered",
-        "_row_num": 4
-      },
-      {
-        "type": "string",
         "name": "supply",
-        "_row_num": 5
+        "_row_num": 2
       }
     ],
     "settings": [
@@ -88,48 +67,6 @@
         "setting_name": "instance_name",
         "value": "delivery_id",
         "_row_num": 6
-      }
-    ],
-    "table_specific_translations": [
-      {
-        "string_token": "delivery_id",
-        "text": "Delivery ID",
-        "_row_num": 2
-      },
-      {
-        "string_token": "date_time",
-        "text": "Time of Delivery",
-        "_row_num": 3
-      },
-      {
-        "string_token": "delivery_site",
-        "text": "Delivery Site",
-        "_row_num": 4
-      },
-      {
-        "string_token": "distributor",
-        "text": "Distributor",
-        "_row_num": 5
-      },
-      {
-        "string_token": "scanned_item_pack",
-        "text": "Scanned Item Pack",
-        "_row_num": 6
-      },
-      {
-        "string_token": "supply",
-        "text": "Supply",
-        "_row_num": 7
-      },
-      {
-        "string_token": "is_delivered",
-        "text": "Is Delivered",
-        "_row_num": 8
-      },
-      {
-        "string_token": "entitlement_id",
-        "text": "Entitlement ID",
-        "_row_num": 9
       }
     ],
     "choices": [
@@ -292,82 +229,11 @@
       ]
     },
     "table_specific_definitions": {
-      "_tokens": {
-        "delivery_id": {
-          "string_token": "delivery_id",
-          "text": "Delivery ID",
-          "_row_num": 2
-        },
-        "date_time": {
-          "string_token": "date_time",
-          "text": "Time of Delivery",
-          "_row_num": 3
-        },
-        "delivery_site": {
-          "string_token": "delivery_site",
-          "text": "Delivery Site",
-          "_row_num": 4
-        },
-        "distributor": {
-          "string_token": "distributor",
-          "text": "Distributor",
-          "_row_num": 5
-        },
-        "scanned_item_pack": {
-          "string_token": "scanned_item_pack",
-          "text": "Scanned Item Pack",
-          "_row_num": 6
-        },
-        "supply": {
-          "string_token": "supply",
-          "text": "Supply",
-          "_row_num": 7
-        },
-        "is_delivered": {
-          "string_token": "is_delivered",
-          "text": "Is Delivered",
-          "_row_num": 8
-        },
-        "entitlement_id": {
-          "string_token": "entitlement_id",
-          "text": "Entitlement ID",
-          "_row_num": 9
-        }
-      }
+      "_tokens": {}
     },
     "queries": {},
     "calculates": {},
     "model": {
-      "entitlement_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "entitlement_id"
-      },
-      "delivery_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "delivery_id"
-      },
-      "is_delivered": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "is_delivered"
-      },
       "supply": {
         "type": "string",
         "valuesList": "yes_no",
@@ -377,7 +243,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 5,
+            "_row_num": 2,
             "section_name": "model"
           }
         ],
@@ -429,8 +295,8 @@
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 7,
-            "_branch_label_enclosing_screen": "survey/_screen7",
+            "_row_num": 6,
+            "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 2
           }
         ],
@@ -445,21 +311,21 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 6,
-              "__rowNum__": 5,
+              "_row_num": 5,
+              "__rowNum__": 4,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nassign('is_delivered', \"TRUE\");\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 7,
+            "_row_num": 6,
             "operationIdx": 1
           },
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
@@ -470,14 +336,14 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 7,
+            "_row_num": 6,
             "operationIdx": 3
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_contents": 2,
-          "_screen7": 2
+          "_screen6": 2
         }
       },
       "initial": {
@@ -590,45 +456,6 @@
       }
     },
     "dataTableModel": {
-      "entitlement_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "entitlement_id",
-        "elementName": "entitlement_id",
-        "elementSet": "data",
-        "elementPath": "entitlement_id"
-      },
-      "delivery_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "delivery_id",
-        "elementName": "delivery_id",
-        "elementSet": "data",
-        "elementPath": "delivery_id"
-      },
-      "is_delivered": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "is_delivered",
-        "elementName": "is_delivered",
-        "elementSet": "data",
-        "elementPath": "is_delivered"
-      },
       "supply": {
         "type": "string",
         "valuesList": "yes_no",
@@ -638,7 +465,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 5,
+            "_row_num": 2,
             "section_name": "model"
           }
         ],
