@@ -87,6 +87,11 @@ window.odkTableSpecificDefinitions = {
       "string_token": "date_created",
       "text": "Date Created",
       "_row_num": 15
+    },
+    "assigned_item_pack_code": {
+      "string_token": "assigned_item_pack_code",
+      "text": "Assigned Item Pack Barcode",
+      "_row_num": 16
     }
   }
 }

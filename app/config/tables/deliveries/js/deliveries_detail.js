@@ -23,7 +23,12 @@ function display(result) {
                 odkData.query(result.get("custom_delivery_form_id"), '_id = ?', [result.get("custom_delivery_row_id")],
                     null, null, null, null, null, null, true, resolve, reject);
             }).then( function(result) {
-                util.populateDetailView(result, "field_list", locale, []);
+                if (result.getTableId() === 'ctp_delivery') {
+                    exclusionList = ['receive_signature_contentType', 'receive_signature_uriFragment'];
+                } else {
+                    exclusionList = [];
+                }
+                util.populateDetailView(result, "field_list", locale, exclusionList);
             });
         }
     });
