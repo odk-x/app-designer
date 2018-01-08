@@ -510,7 +510,7 @@
          //in this format value stored in original input
         format: 'DD-MM-YYYY HH:mm',
         //in this format items in dropdowns are displayed
-        template: 'DD / MMM / YYYY   HH : mm',
+        template: 'DD / MM / YYYY   HH : mm',
         //initial value, can be `new Date()`
         value: null,
         minYear: new Date().getFullYear() - 100,
