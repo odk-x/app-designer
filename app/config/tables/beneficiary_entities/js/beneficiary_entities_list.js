@@ -60,14 +60,14 @@ var resumeFn = function(fIdxStart) {
                 // we'll pass null as the relative path to use the default file
                 var launchType = util.getQueryParameter('type');
                 if (launchType === 'override_beneficiary_entity_status') {
-                    odkTables.openDetailView(null, util.beneficiaryEntityTable, rootRowId,
+                    odkTables.openDetailView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
                         'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-                        encodeURIComponent(launchType));
+                        encodeURIComponent(launchType) + '&rootRowId=' + encodeURIComponent(rootRowId));
 
                 } else {
-                    odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, rootRowId,
+                    odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
                         'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-                        encodeURIComponent(launchType));
+                        encodeURIComponent(launchType) + '&rootRowId=' + encodeURIComponent(rootRowId));
                 }
             }
         });

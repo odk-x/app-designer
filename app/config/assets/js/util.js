@@ -65,11 +65,16 @@ util.populateDetailView = function(resultSet, parentDiv, locale, exclusionList) 
         for (var i = 0; i < columns.length; i++) {
             if (!columns[i].startsWith("_") && !exclusionList.includes(columns[i])) {
                 var line = $('<p>').attr('id', columns[i]).appendTo(fieldListDiv);
-                $('<span>').attr('id', 'inner' + columns[i]).text(resultSet.get(columns[i])).appendTo(line);
+                $('<span>').attr('id', 'inner_' + columns[i]).text(resultSet.get(columns[i])).appendTo(line);
                 line.prepend(odkCommon.localizeText(locale, columns[i]) + ": ");
             }
         }
     }
+};
+util.populateDetailViewArbitrary = function(key, value, parentDiv, locale) {
+    var line = $('<p>').attr('id', key).appendTo($('#' + parentDiv));
+    $('<span>').attr('id', 'inner_' + key).text(value).appendTo(line);
+    line.prepend(odkCommon.localizeText(locale, key) + ": ");
 };
 
 
@@ -166,6 +171,19 @@ util.setVirtualButtonAttributes = function() {
  * dataUtil function object provides utility functions which interface with data tables
  */
 var dataUtil = {};
+
+dataUtil.getHouseholdSize = function(foreignRowId) {
+    if (util.getRegistrationMode() != 'HOUSEHOLD') {
+        return null;
+    }
+    return new Promise(function(resolve, reject) {
+        odkData.arbitraryQuery(util.membersTable, 'SELECT count(*) AS size from ' +
+        util.membersTable + ' where beneficiary_entity_row_id = ?',
+            [foreignRowId], null, null, resolve, reject);
+    }).then(function(result) {
+        return result.getData(0, 'size');
+    });
+};
 
 dataUtil.getViewData = function() {
     return new Promise(function(resolve, reject) {

@@ -7,12 +7,17 @@
 
 var locale = odkCommon.getPreferredLocale();
 var beneficiaryEntitiesResultSet;
+var customResultSet;
 var beneficiaryEntityId;
 var type;
+var rootRowId;
 
+// Note that the call to open this detail view will be for the custom beneficiary entity table so that
+// pressing the edit button in the top right will open the appropriate form.
 function display() {
 
     type = util.getQueryParameter('type');
+    rootRowId = util.getQueryParameter('rootRowId');
     if (type === 'unregistered_voucher') {
         // If we have an unregistered voucher, there is no view data to show
         beneficiaryEntityId = util.getQueryParameter('beneficiary_entity_id');
@@ -24,9 +29,15 @@ function display() {
         return Promise.resolve(null);
     }
 
-    var displayPromise = new Promise( function(resolve, reject) {
+    return new Promise( function(resolve, reject) {
         odkData.getViewData(resolve, reject);
     }).then( function(result) {
+        customResultSet = result;
+        return new Promise(function (resolve, reject) {
+            odkData.query(util.beneficiaryEntityTable, "_id = ?", [rootRowId],
+                null, null, null, null, null, null, true, resolve, reject);
+        });
+    }).then(function(result) {
         beneficiaryEntitiesResultSet = result;
         beneficiaryEntityId = beneficiaryEntitiesResultSet.get('beneficiary_entity_id');
         $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + beneficiaryEntityId);
@@ -65,24 +76,21 @@ function display() {
         util.populateDetailView(beneficiaryEntitiesResultSet, "field_list", locale, exclusionList);
 
         if (util.getRegistrationMode() === 'HOUSEHOLD') {
-            return new Promise( function(resolve, reject) {
-                odkData.query(util.getBeneficiaryEntityCustomFormId(), "_id = ?", [beneficiaryEntitiesResultSet.getData(0, 'custom_beneficiary_entity_row_id')],
-                    null, null,null, null, null, null, true, resolve, reject);
-            }).then( function(result) {
-                var customExclusionList = ['consent_signature', 'location_accuracy',
-                    'location_altitude', 'location_latitude', 'location_longitude',
-                    'consent_signature_contentType', 'consent_signature_uriFragment'];
-                util.populateDetailView(result, "field_list", locale, customExclusionList);
-            });
+            var customExclusionList = ['consent_signature', 'location_accuracy',
+                'location_altitude', 'location_latitude', 'location_longitude',
+                'consent_signature_contentType', 'consent_signature_uriFragment', 'hh_size'];
+            util.populateDetailView(customResultSet, "field_list", locale, customExclusionList);
+            return dataUtil.getHouseholdSize(beneficiaryEntitiesResultSet.getRowId(0));
         } else {
             return Promise.resolve(null);
         }
+    }).then( function(result) {
+        if (result != null) {
+            util.populateDetailViewArbitrary('hh_size', result, "field_list", locale);
+        }
+    }).catch( function(reason) {
+        console.log('failed with message: ' + reason);
     });
-
-    displayPromise.catch( function(reason) {
-        console.log('getViewData failed with message: ' + reason);
-    });
-    return displayPromise;
 }
 
  function initBeneficiaryStatusToggle(status) {

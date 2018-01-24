@@ -46,6 +46,7 @@ function display() {
     } else {
         idComponent = "&authorization_id=" + encodeURIComponent(util.getQueryParameter('authorization_id'));
         $('#view_details').on('click', function() {
+            clearSessionVars();
             odkTables.openDetailView(
                                      null,
                                      util.authorizationTable,
@@ -158,25 +159,58 @@ function populateSyncList() {
         });
     } else if (type === 'registration') {
         console.log('entered registration sync path');
-        let newRows = $('<h3>');
-        let newRowsPromise = new Promise( function(resolve, reject) {
+
+        let newBeneficiaryEntities = $('<h3>');
+        let newBeneficiaryEntitiesPromise = new Promise( function(resolve, reject) {
             odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS count FROM ' +
                 util.beneficiaryEntityTable + ' WHERE _sync_state = ?', ['new_row'],
                 null, null, resolve, reject);
         });
-        let updatedRows = $('<h3>');
-        let updatedRowsPromise = new Promise( function(resolve, reject) {
+
+        let updatedBeneficiaryEntities = $('<h3>');
+        let updatedBeneficiaryEntitiesPromise = new Promise( function(resolve, reject) {
             odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS count FROM ' +
                 util.beneficiaryEntityTable + ' WHERE _sync_state = ? OR _sync_state = ?',
                 ['changed', 'in_conflict'], null, null, resolve, reject);
         });
 
-        return Promise.all([newRowsPromise, updatedRowsPromise]).then( function(resultArr) {
-            newRows.text('New since last sync: ' + resultArr[0].get('count'));
-            updatedRows.text('Updated since last sync: ' + resultArr[1].get('count'));
-            $('#sync_list').append(newRows);
-            $('#sync_list').append(updatedRows);
-        });
+        if (util.getRegistrationMode() == 'INDIVIDUAL') {
+            return Promise.all([newBeneficiaryEntitiesPromise, updatedBeneficiaryEntitiesPromise]).then( function(resultArr) {
+                newBeneficiaryEntities.text('New since last sync: ' + resultArr[0].get('count'));
+                updatedBeneficiaryEntities.text('Edited since last sync: ' + resultArr[1].get('count'));
+                $('#sync_list').append(newBeneficiaryEntities);
+                $('#sync_list').append(updatedBeneficiaryEntities);
+            });
+        } else {
+            let newMembers = $('<h3>');
+            let newMembersPromise = new Promise( function(resolve, reject) {
+                odkData.arbitraryQuery(util.membersTable, 'SELECT count(*) AS count FROM ' +
+                    util.membersTable + ' WHERE _sync_state = ?', ['new_row'],
+                    null, null, resolve, reject);
+            });
+
+            let updatedMembers = $('<h3>');
+            let updatedMembersPromise = new Promise( function(resolve, reject) {
+                odkData.arbitraryQuery(util.membersTable, 'SELECT count(*) AS count FROM ' +
+                    util.membersTable + ' WHERE _sync_state = ? OR _sync_state = ?',
+                    ['changed', 'in_conflict'], null, null, resolve, reject);
+            });
+
+            return Promise.all([newBeneficiaryEntitiesPromise,
+                                updatedBeneficiaryEntitiesPromise,
+                                newMembersPromise,
+                                updatedMembersPromise]).then( function(resultArr) {
+                newBeneficiaryEntities.text('New households since last sync: ' + resultArr[0].get('count'));
+                updatedBeneficiaryEntities.text('Edited households since last sync: ' + resultArr[1].get('count'));
+                newMembers.text('New members since last sync: ' + resultArr[2].get('count'));
+                updatedMembers.text('Edited members since last sync: ' + resultArr[3].get('count'));
+                $('#sync_list').append(newBeneficiaryEntities);
+                $('#sync_list').append(newMembers);
+                $('#sync_list').append(updatedBeneficiaryEntities);
+                $('#sync_list').append(updatedMembers);
+            });
+        }
+
     } else {
         return Promise.resolve(null);
     }
@@ -253,6 +287,7 @@ function handleBarcodeCallback(action, dispatchStr) {
 function handleRegistrationCallback(action, dispatchStr) {
     dataUtil.validateCustomTableEntry(action, dispatchStr, "beneficiary_entity", util.beneficiaryEntityTable).then( function(result) {
         if (result) {
+            var customRowId = action.jsonValue.result.instanceId;
             var rootRowId = dispatchStr[util.rootRowIdKey];
             if (util.getRegistrationMode() === "HOUSEHOLD") {
                 var memberRowsPromise = new Promise( function(resolve, reject) {
@@ -290,9 +325,10 @@ function handleRegistrationCallback(action, dispatchStr) {
                 }).then( function(result) {
                     if (addRowActions.length > 0) {
                         console.log("added base member rows");
-                        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, rootRowId,
+                        clearSessionVars();
+                        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
                             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-                            encodeURIComponent(type));
+                            encodeURIComponent(type) + '&rootRowId=' + encodeURIComponent(rootRowId));
                     }
                 }).catch( function(error) {
                     console.log(error);
@@ -309,8 +345,10 @@ function handleRegistrationCallback(action, dispatchStr) {
                 new Promise( function(resolve, reject) {
                     odkData.addRow(util.membersTable, jsonMap, util.genUUID(), resolve, reject);
                 }).then( function(result) {
-                    odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, rootRowId,
-                        'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=delivery');
+                    clearSessionVars();
+                    odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
+                        'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable +
+                        '_detail.html?type=delivery&rootRowId=' + encodeURIComponent(rootRowId));
                 });
             }
         }
@@ -398,10 +436,12 @@ function deliveryBCheckCBSuccess(result) {
                           deliveryDisabledCBSuccess, deliveryDisabledCBFailure);
     } else if (result.getCount() === 1) {
         // double check that this is the case
-        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),
+        clearSessionVars();
+        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
                                              'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-                                             encodeURIComponent(type));
+                                             encodeURIComponent(type) + '&rootRowId=' + encodeURIComponent(result.getRowId(0)));
     } else {
+        clearSessionVars();
         odkTables.openTableToListView(
                                       null,
                                       util.beneficiaryEntityTable, 'beneficiary_entity_id = ? and (status = ? or status = ?)', [code,'ENABLED', 'enabled'],
@@ -422,12 +462,13 @@ function deliveryDisabledCBSuccess(result) {
         // We are in Voucher mode: check for deliveries for this beneficiary
         var voucherPromise = new Promise( function(resolve, reject) {
           odkData.query(util.entitlementTable, 'beneficiary_entity_id = ?', [code], null, null, null, null, null, null, true, resolve, reject);
-        }).then (function(result) {
+        }).then (function(entitlement_result) {
           // If there are deliveries for this beneficiary, we still want to give that option
-          if (result.getCount() > 0) {
-            odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), "",
+          if (entitlement_result.getCount() > 0) {
+              clearSessionVars();
+            odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
                                              'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=unregistered_voucher' +
-                                             '&beneficiary_entity_id=' + encodeURIComponent(code));
+                                             '&beneficiary_entity_id=' + encodeURIComponent(code) + '&rootRowId=' + encodeURIComponent(result.getRowId(0)));
           } else {
             $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
           }
@@ -468,9 +509,10 @@ function registrationBCheckCBSuccess(result) {
                           registrationVoucherCBFailure);
     } else {
         $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
-        odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),
+        clearSessionVars();
+        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-            encodeURIComponent(type));
+            encodeURIComponent(type) + '&rootRowId=' + encodeURIComponent(result.getRowId(0)));
 
     }
 }
@@ -524,7 +566,7 @@ function registrationVoucherCBSuccess(result) {
             customDispatchStruct[util.additionalCustomFormsObj.dispatchKey] = additionalFormsTupleArr;
 
             console.log(customDispatchStruct);
-
+            clearSessionVars();
             dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', actionRegistration, customDispatchStruct, "_group_modify", null);
         });
     }, 1000);
@@ -546,10 +588,12 @@ function beneficiaryEntityStatusFunction() {
 
 function regOverrideBenSuccess(result) {
     if (result.getCount() === 1) {
-        odkTables.openDetailView(null, util.beneficiaryEntityTable, result.getRowId(0),
+        clearSessionVars();
+        odkTables.openDetailView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-            encodeURIComponent(type));
+            encodeURIComponent(type) + '&rootRowId=' + encodeURIComponent(result.getRowId(0)));
     } else if (result.getCount() > 1) {
+        clearSessionVars();
         odkTables.openTableToListView(null, util.beneficiaryEntityTable,
                                       'beneficiary_entity_id = ?',
                                       [code],
@@ -578,7 +622,7 @@ function newEntitlementFunction() {
 }
 
 function benEntOverrideCBSuccess(result) {
-    if (result.getCount() != 0) {
+    if (result.getCount() !== 0) {
         var entDefaultGroup = result.getData(0, '_group_modify');
         odkCommon.setSessionVariable(entDefaultGroupKey, entDefaultGroup);
         odkData.query(util.authorizationTable, '_id = ?',
@@ -596,7 +640,7 @@ function benEntOverrideCBFailure(error) {
 function restrictOverridesCheckSuccess(result) {
     var overrideRestriction = result.getData(0, 'restrict_overrides');
     console.log(overrideRestriction.toUpperCase());
-    if (overrideRestriction.toUpperCase() == 'TRUE') {
+    if (overrideRestriction.toUpperCase() === 'TRUE') {
         odkData.query(util.entitlementTable, 'beneficiary_entity_id = ? and authorization_id = ?',
                       [code, util.getQueryParameter('authorization_id')], null, null, null, null, null,
                       null, true, entCheckCBSuccess, entCheckCBFailure);
@@ -626,7 +670,7 @@ function entCheckCBFailure(error) {
 
 function createOverrideCBSuccess(result) {
     var defaultGroup = odkCommon.getSessionVariable(entDefaultGroupKey);
-    var user = odkCommon.getSessionVariable(userKey)
+    var user = odkCommon.getSessionVariable(userKey);
 
     var struct = {};
 
@@ -670,9 +714,14 @@ function entitlementStatusFunction() {
         if (result.getCount() === 0) {
             $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
         } else {
-            odkTables.openDetailWithListView(null, util.beneficiaryEntityTable, result.getRowId(0),
+            clearSessionVars();
+            odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
                 'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type='
-                + encodeURIComponent(type));
+                + encodeURIComponent(type) + '&rootRowId=' + encodeURIComponent(result.getRowId(0)));
         }
     });
+}
+
+function clearSessionVars() {
+    odkCommon.setSessionVariable(barcodeSessionVariable, null);
 }
