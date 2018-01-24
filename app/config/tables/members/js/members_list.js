@@ -33,7 +33,7 @@ var resumeFn = function(fIdxStart) {
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
-            var tableId = membersResultSet.getTableId();
+            var tableId = util.getMemberCustomFormId();
             // We set the rowId while as the li id. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
@@ -45,16 +45,18 @@ var resumeFn = function(fIdxStart) {
             // have set up to have the row id
             var containingDiv = jqueryObject.closest('.item_space');
             var rowId = containingDiv.attr('rowId');
+            var customRowId = containingDiv.attr('customRowId');
             console.log('clicked with rowId: ' + rowId);
             // make sure we retrieved the rowId
-            if (rowId !== null && rowId !== undefined) {
+            if (rowId !== null && rowId !== undefined &&
+                customRowId !== null && customRowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.openDetailView(null, tableId, rowId,
-                    'config/tables/' + util.membersTable + '/html/' + util.membersTable + '_detail.html');
+                odkTables.openDetailView(null, tableId, customRowId,
+                    'config/tables/' + util.membersTable + '/html/' + util.membersTable + '_detail.html?rootRowId=' +
+                    encodeURIComponent(rowId));
             }
         });
     }
-
     return renderPromise;
 };
 
@@ -87,6 +89,7 @@ var displayGroup = function(idxStart) {
         //var item = $('#list').append('<li>');
         var item = $('<li>');
         item.attr('rowId', membersResultSet.getRowId(i));
+        item.attr('customRowId', membersResultSet.getData(i, 'custom_member_row_id'));
         item.attr('class', 'item_space');
         item.attr('id', membersResultSet.getData(i, '_id'));
 
