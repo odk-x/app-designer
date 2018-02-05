@@ -389,6 +389,27 @@ window.odkFrameworkDefinitions = {
         "default": "Integer value expected"
       },
       "_row_num": 57
+    },
+    "confirm_exit_label": {
+      "string_token": "confirm_exit_label",
+      "text": {
+        "default": "Exit"
+      },
+      "_row_num": 58
+    },
+    "confirm_cancel_label": {
+      "string_token": "confirm_cancel_label",
+      "text": {
+        "default": "Cancel"
+      },
+      "_row_num": 59
+    },
+    "confirm_message": {
+      "string_token": "confirm_message",
+      "text": {
+        "default": "Are you sure you want to exit and lose all changes?"
+      },
+      "_row_num": 60
     }
   }
 }
