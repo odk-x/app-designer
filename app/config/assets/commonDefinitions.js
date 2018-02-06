@@ -732,6 +732,20 @@ window.odkCommonDefinitions = {
         "default": "Trigger Reset"
       },
       "_row_num": 80
+    },
+    "view_authorization_progress": {
+      "string_token": "view_authorization_progress",
+      "text": {
+        "default": "Progress By Authorization"
+      },
+      "_row_num": 81
+    },
+    "view_deliveries": {
+      "string_token": "view_deliveries",
+      "text": {
+        "default": "View Deliveries"
+      },
+      "_row_num": 82
     }
   },
   "_locales": {

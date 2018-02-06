@@ -61,14 +61,21 @@ function display() {
         }
 
     } else {
-        var deliveries = document.createElement('button');
+        var allDeliveries = document.createElement('button');
 
         title.text(odkCommon.localizeText(locale, "delivery_data_title"));
-        deliveries.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
-        deliveries.onclick = function() {
-            odkTables.openTableToListView(null, 'deliveries', null, null,
+        allDeliveries.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
+        allDeliveries.onclick = function() {
+            odkTables.openTableToListView(null, util.deliveryTable, null, null,
                                  'config/tables/deliveries/html/deliveries_list.html');
-        }
+        };
+
+        var byAuth = document.createElement('button');
+        byAuth.innerHTML = odkCommon.localizeText(locale, "view_authorization_progress");
+        byAuth.onclick = function() {
+            odkTables.openTableToListView(null, util.authorizationTable, null, null,
+                                'config/tables/authorizations/html/authorizations_list.html?deliveries');
+        };
 
 
         var deliverySearch = document.createElement('button');
@@ -76,10 +83,11 @@ function display() {
         deliverySearch.onclick = function() {
             odkTables.launchHTML(null,
                                  'config/assets/html/search.html?type=' + util.deliveryTable);
-        }
+        };
 
         // append buttons
-        document.getElementById('wrapper').appendChild(deliveries);
+        document.getElementById('wrapper').appendChild(allDeliveries);
+        document.getElementById('wrapper').appendChild(byAuth);
         document.getElementById('wrapper').appendChild(deliverySearch);
     }
 }

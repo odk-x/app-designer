@@ -79,12 +79,13 @@ var handleAuthorizationReportCallback = function(action, dispatchStr) {
 
 var resumeFn = function(fIdxStart) {
     var joinQuery;
-    if (type === 'new_ent') {
+    if (type === 'new_ent' || type === 'deliveries') {
         joinQuery = "SELECT * FROM " + util.authorizationTable;
     } else {
         joinQuery = "SELECT * FROM " + util.authorizationTable + ' t1 LEFT JOIN ' + util.distributionReportTable +
             ' t2 ON t1.report_version=t2.report_version AND t1._id=t2.authorization_id WHERE t1.summary_form_id IS NOT NULL';
     }
+
 
   odkData.arbitraryQuery(util.authorizationTable, joinQuery, [], null, null,
             authorizationsCBSuccess, authorizationsCBFailure);
@@ -123,7 +124,7 @@ var resumeFn = function(fIdxStart) {
                         'config/assets/html/choose_method.html?title='
                         + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_entity_id'))
                         + '&type=new_ent&authorization_id=' + rowId);
-                } else {
+                } else if (type == 'distribution_report') {
                     new Promise( function(resolve, reject) {
                         odkData.query(util.distributionReportTable, "report_version = ? AND authorization_id = ?", [reportVersion, rowId],
                             null, null, null, null, null, null, true, resolve, reject);
@@ -148,10 +149,10 @@ var resumeFn = function(fIdxStart) {
                             });
                         }
                     });
-
+                } else {
+                    odkTables.openDetailView(null, util.authorizationTable, rowId,
+                        'config/assets/html/progress_summary.html');
                 }
-
-
             }
         });
     }
