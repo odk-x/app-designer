@@ -41,7 +41,6 @@ function display() {
         beneficiaryEntitiesResultSet = result;
         beneficiaryEntityId = beneficiaryEntitiesResultSet.get('beneficiary_entity_id');
         $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + beneficiaryEntityId);
-        let exclusionList = ['beneficiary_entity_id'];
         if (type === 'override_beneficiary_entity_status') {
             $('#toggle_workflow').hide();
             initBeneficiaryStatusToggle(beneficiaryEntitiesResultSet.getData(0, "status"));
@@ -73,21 +72,27 @@ function display() {
                 }
             }
         }
-        util.populateDetailView(beneficiaryEntitiesResultSet, "field_list", locale, exclusionList);
+
 
         if (util.getRegistrationMode() === 'HOUSEHOLD') {
-            var customExclusionList = ['consent_signature', 'location_accuracy',
-                'location_altitude', 'location_latitude', 'location_longitude',
-                'consent_signature_contentType', 'consent_signature_uriFragment', 'hh_size'];
-            util.populateDetailView(customResultSet, "field_list", locale, customExclusionList);
+
             return dataUtil.getHouseholdSize(beneficiaryEntitiesResultSet.getRowId(0));
         } else {
             return Promise.resolve(null);
         }
     }).then( function(result) {
+        let keyValuePairs = {};
         if (result != null) {
-            util.populateDetailViewArbitrary('hh_size', result, "field_list", locale);
+            keyValuePairs['hh_size'] = result;
         }
+
+        let resultSets = [beneficiaryEntitiesResultSet, customResultSet];
+        let exclusionList = ['beneficiary_entity_id', 'consent_signature', 'location_accuracy',
+            'location_altitude', 'location_latitude', 'location_longitude',
+            'consent_signature_contentType', 'consent_signature_uriFragment',
+            'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id'];
+
+        util.populateDetailViewArbitrary(resultSets, keyValuePairs, "field_list", locale, exclusionList);
     }).catch( function(reason) {
         console.log('failed with message: ' + reason);
     });

@@ -14,58 +14,68 @@ var type = util.getQueryParameter('type');
 var locale = odkCommon.getPreferredLocale();
 var singularUnitLabel;
 var pluralUnitLabel;
+var targetTable;
+var options = [];
 
 function display() {
-    $('#launch').text(odkCommon.localizeText(locale, "view"));
+    $('#launch').text(odkCommon.localizeText(locale, 'view'));
 
     let renderPromises = [];
 
-    if (type == util.getMemberCustomFormId()) {
+    if (type === util.getMemberCustomFormId()) {
 
         baseTable = util.membersTable;
         customTable = util.getMemberCustomFormId();
         customForeignKey = 'custom_member_row_id';
 
-        $('#title').text(odkCommon.localizeText(locale, "search_members"));
-        singularUnitLabel = odkCommon.localizeText(locale, "beneficiary");
-        pluralUnitLabel = odkCommon.localizeText(locale, "beneficiaries");
-        renderPromises.push(populateSearchItems(type, false));
-        renderPromises.push(populateSearchItems(util.membersTable, true));
+        $('#title').text(odkCommon.localizeText(locale, 'search_members'));
+        singularUnitLabel = odkCommon.localizeText(locale, 'beneficiary');
+        pluralUnitLabel = odkCommon.localizeText(locale, 'beneficiaries');
+        renderPromises.push(getSearchOptions(type, false));
+        renderPromises.push(getSearchOptions(util.membersTable, true));
 
-    } else if (type == util.getBeneficiaryEntityCustomFormId()) {
+    } else if (type === util.getBeneficiaryEntityCustomFormId()) {
 
         baseTable = util.beneficiaryEntityTable;
         customTable = util.getBeneficiaryEntityCustomFormId();
         customForeignKey = 'custom_beneficiary_entity_row_id';
 
-        if (util.getRegistrationMode() == 'HOUSEHOLD') {
-            $('#title').text(odkCommon.localizeText(locale, "search_households"));
-            singularUnitLabel = odkCommon.localizeText(locale, "household");
+        if (util.getRegistrationMode() === 'HOUSEHOLD') {
+            $('#title').text(odkCommon.localizeText(locale, 'search_households'));
+            singularUnitLabel = odkCommon.localizeText(locale, 'household');
             pluralUnitLabel = odkCommon.localizeText(locale, 'households');
         } else {
-            $('#title').text(odkCommon.localizeText(locale, "search_beneficiaries"));
-            singularUnitLabel = odkCommon.localizeText(locale, "member");
+            $('#title').text(odkCommon.localizeText(locale, 'search_beneficiaries'));
+            singularUnitLabel = odkCommon.localizeText(locale, 'member');
             pluralUnitLabel = odkCommon.localizeText(locale, 'members');
         }
 
-        renderPromises.push(populateSearchItems(type, false));
-        renderPromises.push(populateSearchItems(util.beneficiaryEntityTable, true));
+        renderPromises.push(getSearchOptions(type, false));
+        renderPromises.push(getSearchOptions(util.beneficiaryEntityTable, true));
+        options.push('Household Size');
 
-    } else if (type == util.deliveryTable) {
+    } else if (type === util.deliveryTable) {
         baseTable = util.deliveryTable;
 
-        $('#title').text(odkCommon.localizeText(locale, "search_deliveries"));
+        $('#title').text(odkCommon.localizeText(locale, 'search_deliveries'));
 
-        renderPromises.push(populateSearchItems(type, true));
+        renderPromises.push(getSearchOptions(type, true));
 
-        singularUnitLabel = odkCommon.localizeText(locale, "delivery");
-        pluralUnitLabel = odkCommon.localizeText(locale, "deliveries");
+        singularUnitLabel = odkCommon.localizeText(locale, 'delivery');
+        pluralUnitLabel = odkCommon.localizeText(locale, 'deliveries');
     }
 
-    return Promise.all(renderPromises);
+    return Promise.all(renderPromises)
+        .then(function(results) {
+            options.sort(function(a, b){
+                var alc = a.toLowerCase(), blc = b.toLowerCase();
+                return alc > blc ? 1 : alc < blc ? -1 : 0;
+            });
+            options.forEach(addField);
+        });
 }
 
-function populateSearchItems(tableId, isBaseTable) {
+function getSearchOptions(tableId, isBaseTable) {
     return new Promise( function(resolve, reject) {
         odkData.query(tableId, null, null, null, null, null, null, null, null, null,
             resolve, reject);
@@ -76,13 +86,17 @@ function populateSearchItems(tableId, isBaseTable) {
         } else {
             customTableColumns = columns;
         }
-        columns.forEach(addField);
+        options = options.concat(columns);
     });
 }
 
-function addField(item, index) {
+function addField(item) {
     if (item.charAt(0) !== '_') {
-        $('#field').append($("<option/>").attr("value", item).text(item));
+        let displayText = odkCommon.localizeText(locale, item);
+        if (displayText === undefined || displayText === null) {
+            displayText = item;
+        }
+        $('#field').append($('<option/>').attr('value', item).text(displayText));
     }
 }
 
@@ -91,22 +105,27 @@ function search() {
     key = document.getElementById('field').value;
     value = document.getElementById('value').value;
 
-    let targetTable;
     if (baseTableColumns.includes(key)) {
         targetTable = baseTable;
+        var activeQuery = 'SELECT * FROM ' + targetTable + ' WHERE ' + key + ' = ?';
     } else if (customTableColumns.includes(key)) {
         targetTable = customTable;
+        activeQuery = 'SELECT * FROM ' + targetTable + ' WHERE ' + key + ' = ?';
+    } else if (key === 'Household Size') {
+        targetTable = baseTable;
+        activeQuery = 'SELECT * FROM ' + util.beneficiaryEntityTable + ' ben, '  + util.membersTable +
+            ' mem WHERE ben._id = mem.beneficiary_entity_row_id ' +
+            'GROUP BY ben._id ' +
+            'HAVING count(*) = ?';
     } else {
-        failureCallbackFn(null);
+        searchFailure(null);
         return;
     }
-
-    odkData.query(targetTable, key + ' = ?', [value],
-                  null, null, null, null, null, null, null,
-                  successCallbackFn, failureCallbackFn);
+    odkData.arbitraryQuery(targetTable, activeQuery, [value],
+        null, null, searchSuccess, searchFailure);
 }
 
-function successCallbackFn(result) {
+function searchSuccess(result) {
     var count = result.getCount();
 
     if (count == 1) {
@@ -121,27 +140,39 @@ function successCallbackFn(result) {
     }
 }
 
-function failureCallbackFn(error) {
-    $('#search_results').text(odkCommon.localizeText(locale, "invalid_search"));
+function searchFailure(error) {
+    console.log(error);
+    $('#search_results').text(odkCommon.localizeText(locale, 'invalid_search'));
     $('#launch').hide();
 }
 
-
 function launch() {
     if (type === util.getMemberCustomFormId() || type === util.getBeneficiaryEntityCustomFormId()) {
-        let whereClauseTableLabel;
-        if (baseTableColumns.includes(key)) {
-            whereClauseTableLabel = 'base';
-        } else if (customTableColumns.includes(key)) {
-            whereClauseTableLabel = 'custom';
-        }
+        let joinQuery;
+        if (key == 'Household Size') {
+            joinQuery = 'SELECT * FROM ' + util.beneficiaryEntityTable + ' base, '  + util.membersTable +
+                ' mem INNER JOIN '  + customTable + ' custom ON base.' + customForeignKey +
+                ' = custom._id WHERE base._id = mem.beneficiary_entity_row_id ' +
+                'GROUP BY base._id ' +
+                'HAVING count(*) = ?';
+        } else {
+            let whereClauseTableLabel;
+            if (baseTableColumns.includes(key)) {
+                whereClauseTableLabel = 'base';
+            } else if (customTableColumns.includes(key)) {
+                whereClauseTableLabel = 'custom';
+            }
 
-        let joinQuery = 'SELECT * FROM ' + baseTable + ' base INNER JOIN ' + customTable +
-            ' custom ON base.' + customForeignKey + ' = custom._id WHERE ' + whereClauseTableLabel + '.' + key + ' = ?';
+            joinQuery = 'SELECT * FROM ' + baseTable + ' base INNER JOIN ' + customTable +
+                ' custom ON base.' + customForeignKey + ' = custom._id WHERE ' + whereClauseTableLabel + '.' + key + ' = ?';
+
+        }
 
         let url = 'config/tables/' + baseTable + '/html/' + baseTable + '_list.html';
         if (type === util.getBeneficiaryEntityCustomFormId()) {
             url += '?type=delivery';
+        } else {
+            url += '?type=search';
         }
 
         odkTables.openTableToListViewArbitraryQuery(null, baseTable, joinQuery, [value], url);

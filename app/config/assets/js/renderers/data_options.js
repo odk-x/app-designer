@@ -84,7 +84,6 @@ function display() {
             odkTables.launchHTML(null,
                                  'config/assets/html/search.html?type=' + util.deliveryTable);
         };
-
         // append buttons
         document.getElementById('wrapper').appendChild(allDeliveries);
         document.getElementById('wrapper').appendChild(byAuth);

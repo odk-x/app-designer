@@ -148,14 +148,8 @@
         "_row_num": 19
       },
       {
-        "type": "async_assign_count",
-        "name": "hh_size",
-        "values_list": "count_members",
-        "_row_num": 20
-      },
-      {
         "clause": "end screen",
-        "_row_num": 21
+        "_row_num": 20
       }
     ],
     "settings": [
@@ -211,35 +205,25 @@
         "_row_num": 5
       },
       {
-        "type": "integer",
-        "name": "hh_size",
-        "_row_num": 6
-      },
-      {
-        "type": "string",
-        "name": "disabled_reason",
-        "_row_num": 7
-      },
-      {
         "type": "geopoint",
         "name": "location",
-        "_row_num": 8
+        "_row_num": 6
       },
       {
         "type": "string",
         "name": "verify_user",
         "isSessionVariable": true,
-        "_row_num": 9
+        "_row_num": 7
       },
       {
         "type": "signature",
         "name": "consent_signature",
-        "_row_num": 10
+        "_row_num": 8
       },
       {
         "type": "string",
         "name": "tent_caravan",
-        "_row_num": 11
+        "_row_num": 9
       }
     ],
     "choices": [
@@ -642,32 +626,6 @@
         ],
         "elementKey": "telephone"
       },
-      "hh_size": {
-        "prompt_type_name": "async_assign_count",
-        "type": "integer",
-        "valuesList": "count_members",
-        "_defn": [
-          {
-            "_row_num": 20,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 6,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "hh_size"
-      },
-      "disabled_reason": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "disabled_reason"
-      },
       "location": {
         "type": "object",
         "elementType": "geopoint",
@@ -695,7 +653,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 8,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -705,7 +663,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -734,7 +692,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 10,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -748,7 +706,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 11,
+            "_row_num": 9,
             "section_name": "model"
           }
         ],
@@ -921,23 +879,12 @@
             "promptIdx": 8
           },
           {
-            "type": "async_assign_count",
-            "name": "hh_size",
-            "values_list": "count_members",
-            "_row_num": 20,
-            "__rowNum__": 19,
-            "_token_type": "prompt",
-            "_type": "async_assign_count",
-            "_branch_label_enclosing_screen": "survey/_screen18",
-            "promptIdx": 9
-          },
-          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 22,
-            "_branch_label_enclosing_screen": "survey/_screen22",
-            "promptIdx": 10
+            "_row_num": 21,
+            "_branch_label_enclosing_screen": "survey/_screen21",
+            "promptIdx": 9
           }
         ],
         "validation_tag_map": {
@@ -1012,23 +959,23 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 21,
-              "__rowNum__": 20,
+              "_row_num": 20,
+              "__rowNum__": 19,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 22,
+            "_row_num": 21,
             "operationIdx": 5
           },
           {
-            "_row_num": 22,
+            "_row_num": 21,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
@@ -1037,7 +984,7 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 22,
+            "_row_num": 21,
             "operationIdx": 7
           }
         ],
@@ -1048,7 +995,7 @@
           "_screen14": 3,
           "_screen18": 4,
           "_contents": 6,
-          "_screen22": 6
+          "_screen21": 6
         }
       },
       "initial": {
@@ -1230,38 +1177,6 @@
         "elementSet": "data",
         "elementPath": "telephone"
       },
-      "hh_size": {
-        "prompt_type_name": "async_assign_count",
-        "type": "integer",
-        "valuesList": "count_members",
-        "_defn": [
-          {
-            "_row_num": 20,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 6,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "hh_size",
-        "elementName": "hh_size",
-        "elementSet": "data",
-        "elementPath": "hh_size"
-      },
-      "disabled_reason": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 7,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "disabled_reason",
-        "elementName": "disabled_reason",
-        "elementSet": "data",
-        "elementPath": "disabled_reason"
-      },
       "location": {
         "type": "object",
         "elementType": "geopoint",
@@ -1301,7 +1216,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 8,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -1321,7 +1236,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -1359,7 +1274,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 10,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -1381,7 +1296,7 @@
             "section_name": "survey"
           },
           {
-            "_row_num": 11,
+            "_row_num": 9,
             "section_name": "model"
           }
         ],

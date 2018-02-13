@@ -46,14 +46,29 @@ var resumeFn = function(fIdxStart) {
             var containingDiv = jqueryObject.closest('.item_space');
             var rowId = containingDiv.attr('rowId');
             var customRowId = containingDiv.attr('customRowId');
+            var householdRowId = containingDiv.attr('householdRowId');
             console.log('clicked with rowId: ' + rowId);
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined &&
                 customRowId !== null && customRowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.openDetailView(null, tableId, customRowId,
-                    'config/tables/' + util.membersTable + '/html/' + util.membersTable + '_detail.html?rootRowId=' +
-                    encodeURIComponent(rowId));
+                if (util.getQueryParameter('type') == 'search') {
+                    dataUtil.getRow(util.beneficiaryEntityTable, householdRowId)
+                        .then( function(baseResult) {
+                            if (baseResult.getCount() == 0) {
+                                // populate error message
+                                return;
+                            }
+                            odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(),
+                                baseResult.get('custom_beneficiary_entity_row_id'), 'config/tables/'
+                                + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable +
+                                '_detail.html?type=registration&rootRowId=' + encodeURIComponent(householdRowId));
+                        });
+                } else {
+                    odkTables.openDetailView(null, tableId, customRowId,
+                        'config/tables/' + util.membersTable + '/html/' + util.membersTable + '_detail.html?rootRowId=' +
+                        encodeURIComponent(rowId));
+                }
             }
         });
     }
@@ -92,6 +107,7 @@ var displayGroup = function(idxStart) {
         item.attr('customRowId', membersResultSet.getData(i, 'custom_member_row_id'));
         item.attr('class', 'item_space');
         item.attr('id', membersResultSet.getData(i, '_id'));
+        item.attr('householdRowId', membersResultSet.getData(i, 'beneficiary_entity_row_id'));
 
         setTimeout((function f(htmlItem, index) {
             dbActions.push(new Promise( function(resolve, reject) {

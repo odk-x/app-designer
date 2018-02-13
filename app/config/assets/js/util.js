@@ -71,10 +71,38 @@ util.populateDetailView = function(resultSet, parentDiv, locale, exclusionList) 
         }
     }
 };
-util.populateDetailViewArbitrary = function(key, value, parentDiv, locale) {
+
+// populates detail view with just one key value pair
+util.populateDetailViewKeyValue = function(key, value, parentDiv, locale) {
     var line = $('<p>').attr('id', key).appendTo($('#' + parentDiv));
     $('<span>').attr('id', 'inner_' + key).text(value).appendTo(line);
     line.prepend(odkCommon.localizeText(locale, key) + ": ");
+};
+
+// resultSets: array of odk result sets
+// kvPairs: json of key value pairs
+// parentDiv: html element to add to
+// locale: locale for translations
+util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, locale, exclusionList) {
+    let mergeResult = {};
+
+    resultSets.forEach(function(rs) {
+        rs.getColumns().forEach(function(column) {
+            mergeResult[column] = rs.get(column);
+        });
+    });
+    $.extend(mergeResult, kvPairs);
+
+    let keys = Object.keys(mergeResult).sort();
+
+    let fieldListDiv = $('#' + parentDiv);
+    keys.forEach(function(key) {
+        if (!key.startsWith("_") && !exclusionList.includes(key)) {
+            let line = $('<p>').attr('id', key).appendTo(fieldListDiv);
+            $('<span>').attr('id', 'inner_' + key).text(mergeResult[key]).appendTo(line);
+            line.prepend(odkCommon.localizeText(locale, key) + ": ");
+        }
+    });
 };
 
 

@@ -596,14 +596,14 @@ window.odkCommonDefinitions = {
     "search_households": {
       "string_token": "search_households",
       "text": {
-        "default": "Search for Households"
+        "default": "Search by Household"
       },
       "_row_num": 61
     },
     "search_members": {
       "string_token": "search_members",
       "text": {
-        "default": "Search for Members"
+        "default": "Search by Member"
       },
       "_row_num": 62
     },
@@ -746,6 +746,340 @@ window.odkCommonDefinitions = {
         "default": "View Deliveries"
       },
       "_row_num": 82
+    },
+    "beneficiary_entity_id": {
+      "string_token": "beneficiary_entity_id",
+      "text": {
+        "default": "Beneficiary Entity ID"
+      },
+      "_row_num": 84
+    },
+    "date_created": {
+      "string_token": "date_created",
+      "text": {
+        "default": "Date Created"
+      },
+      "_row_num": 85
+    },
+    "custom_beneficiary_entity_form_id": {
+      "string_token": "custom_beneficiary_entity_form_id",
+      "text": {
+        "default": "Custom Beneficiary Entity Form ID"
+      },
+      "_row_num": 86
+    },
+    "custom_beneficiary_entity_row_id": {
+      "string_token": "custom_beneficiary_entity_row_id",
+      "text": {
+        "default": "Custom Beneficiary Entity Row ID"
+      },
+      "_row_num": 87
+    },
+    "status": {
+      "string_token": "status",
+      "text": {
+        "default": "Status"
+      },
+      "_row_num": 88
+    },
+    "status_reason": {
+      "string_token": "status_reason",
+      "text": {
+        "default": "Status Reason"
+      },
+      "_row_num": 89
+    },
+    "address": {
+      "string_token": "address",
+      "text": {
+        "default": "Address"
+      },
+      "_row_num": 91
+    },
+    "city": {
+      "string_token": "city",
+      "text": {
+        "default": "City"
+      },
+      "_row_num": 92
+    },
+    "telephone": {
+      "string_token": "telephone",
+      "text": {
+        "default": "Telephone"
+      },
+      "_row_num": 93
+    },
+    "mobile_provider": {
+      "string_token": "mobile_provider",
+      "text": {
+        "default": "Mobile Provider"
+      },
+      "_row_num": 94
+    },
+    "delivery_site": {
+      "string_token": "delivery_site",
+      "text": {
+        "default": "Delivery Site"
+      },
+      "_row_num": 95
+    },
+    "disabled_reason": {
+      "string_token": "disabled_reason",
+      "text": {
+        "default": "Disabled Reason"
+      },
+      "_row_num": 96
+    },
+    "location": {
+      "string_token": "location",
+      "text": {
+        "default": "Location"
+      },
+      "_row_num": 97
+    },
+    "tent_caravan": {
+      "string_token": "tent_caravan",
+      "text": {
+        "default": "Tent/Caravan Code"
+      },
+      "_row_num": 99
+    },
+    "authorization_id": {
+      "string_token": "authorization_id",
+      "text": {
+        "default": "Authorization ID"
+      },
+      "_row_num": 100
+    },
+    "authorization_type": {
+      "string_token": "authorization_type",
+      "text": {
+        "default": "Authorization Type"
+      },
+      "_row_num": 101
+    },
+    "authorization_name": {
+      "string_token": "authorization_name",
+      "text": {
+        "default": "Authorization Name"
+      },
+      "_row_num": 102
+    },
+    "authorization_description": {
+      "string_token": "authorization_description",
+      "text": {
+        "default": "Authorization Description"
+      },
+      "_row_num": 103
+    },
+    "member_id": {
+      "string_token": "member_id",
+      "text": {
+        "default": "Member ID"
+      },
+      "_row_num": 104
+    },
+    "entitlement_id": {
+      "string_token": "entitlement_id",
+      "text": {
+        "default": "Entitlement ID"
+      },
+      "_row_num": 105
+    },
+    "is_override": {
+      "string_token": "is_override",
+      "text": {
+        "default": "Is Override"
+      },
+      "_row_num": 106
+    },
+    "item_pack_id": {
+      "string_token": "item_pack_id",
+      "text": {
+        "default": "Item Pack ID",
+        "greek": "Αναγνωριστικό πακέτου στοιχείου",
+        "arabic": "رقم الحزمة",
+        "farsi": "شماره بسته",
+        "spanish": "ID del artículo"
+      },
+      "_row_num": 107
+    },
+    "item_pack_name": {
+      "string_token": "item_pack_name",
+      "text": {
+        "default": "Item Pack Name",
+        "greek": "Όνομα πακέτου στοιχείου",
+        "arabic": "اسم الحزمة",
+        "farsi": "نام بسته",
+        "spanish": "Nombre del artículo"
+      },
+      "_row_num": 108
+    },
+    "item_pack_description": {
+      "string_token": "item_pack_description",
+      "text": {
+        "default": "Item Pack Description",
+        "greek": "Περιγραφή πακέτου στοιχείου",
+        "arabic": "وصف الحزمة",
+        "farsi": "شرح بسته",
+        "spanish": "Descripción del artículo"
+      },
+      "_row_num": 109
+    },
+    "custom_delivery_form_id": {
+      "string_token": "custom_delivery_form_id",
+      "text": {
+        "default": "Custom Delivery Form ID"
+      },
+      "_row_num": 110
+    },
+    "custom_delivery_row_id": {
+      "string_token": "custom_delivery_row_id",
+      "text": {
+        "default": "Custom Delivery Row ID"
+      },
+      "_row_num": 111
+    },
+    "assigned_item_pack_code": {
+      "string_token": "assigned_item_pack_code",
+      "text": {
+        "default": "Assigned Item Pack Barcode"
+      },
+      "_row_num": 112
+    },
+    "beneficiary_entity_row_id": {
+      "string_token": "beneficiary_entity_row_id",
+      "text": {
+        "default": "Beneficiary Entity Row ID"
+      },
+      "_row_num": 114
+    },
+    "custom_member_form_id": {
+      "string_token": "custom_member_form_id",
+      "text": {
+        "default": "Custom Member Form ID"
+      },
+      "_row_num": 115
+    },
+    "custom_member_row_id": {
+      "string_token": "custom_member_row_id",
+      "text": {
+        "default": "Custom Member Row ID"
+      },
+      "_row_num": 116
+    },
+    "date_screened": {
+      "string_token": "date_screened",
+      "text": {
+        "default": "Date Screened"
+      },
+      "_row_num": 117
+    },
+    "first_name": {
+      "string_token": "first_name",
+      "text": {
+        "default": "First Name"
+      },
+      "_row_num": 118
+    },
+    "last_name": {
+      "string_token": "last_name",
+      "text": {
+        "default": "Last Name"
+      },
+      "_row_num": 119
+    },
+    "first_last_name": {
+      "string_token": "first_last_name",
+      "text": {
+        "default": "First and Last Name"
+      },
+      "_row_num": 120
+    },
+    "birth_date": {
+      "string_token": "birth_date",
+      "text": {
+        "default": "Birth Date"
+      },
+      "_row_num": 121
+    },
+    "age": {
+      "string_token": "age",
+      "text": {
+        "default": "Age"
+      },
+      "_row_num": 122
+    },
+    "gender": {
+      "string_token": "gender",
+      "text": {
+        "default": "Gender"
+      },
+      "_row_num": 123
+    },
+    "id_type": {
+      "string_token": "id_type",
+      "text": {
+        "default": "ID Type"
+      },
+      "_row_num": 124
+    },
+    "id_number": {
+      "string_token": "id_number",
+      "text": {
+        "default": "ID Number"
+      },
+      "_row_num": 125
+    },
+    "beneficiary_code": {
+      "string_token": "beneficiary_code",
+      "text": {
+        "default": "Beneficiary Code"
+      },
+      "_row_num": 126
+    },
+    "verify_user": {
+      "string_token": "verify_user",
+      "text": {
+        "default": "Verify User"
+      },
+      "_row_num": 127
+    },
+    "is_head_of_household": {
+      "string_token": "is_head_of_household",
+      "text": {
+        "default": "Is Head of Household"
+      },
+      "_row_num": 128
+    },
+    "picture": {
+      "string_token": "picture",
+      "text": {
+        "default": "Picture"
+      },
+      "_row_num": 129
+    },
+    "email": {
+      "string_token": "email",
+      "text": {
+        "default": "Email"
+      },
+      "_row_num": 130
+    },
+    "vulnerability": {
+      "string_token": "vulnerability",
+      "text": {
+        "default": "Vulnerability"
+      },
+      "_row_num": 131
+    },
+    "hh_size": {
+      "string_token": "hh_size",
+      "text": {
+        "default": "Household Size"
+      },
+      "_row_num": 132
     }
   },
   "_locales": {

@@ -8,7 +8,7 @@ function display() {
 
         let authId = result.getRowId(0);
 
-        $('#title').text("Progress for: " + result.getData(0, "name"));
+        $('#title').text(result.getData(0, "name"));
         $('#view_deliveries').text(odkCommon.localizeText(locale, "view_deliveries"));
         $('#view_deliveries').click(function() {
            odkTables.openTableToListView(null, util.deliveryTable, 'authorization_id = ?',
