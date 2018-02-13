@@ -15,18 +15,15 @@ function(opendatakit,  database,  $,       _) {
         opendatakit: opendatakit,
 		getCurrentLocale: function() {
             'use strict';
-			var tableId = opendatakit.getCurrentTableId();
-			var instanceId = opendatakit.getCurrentInstanceId();
-			var locale;
-			if ( instanceId !== undefined && instanceId !== null && tableId !== "framework" ) {
-				locale = database.getInstanceMetaDataValue('_locale');
-			} else {
-				locale = opendatakit.getCachedLocale();
-			}
-			if ( locale === undefined || locale === null ) {
-				locale = opendatakit.getDefaultFormLocaleValue();
-			}
-			return locale;
+
+            var locale = database.getInstanceMetaDataValue('_locale') || opendatakit.getCachedLocale();
+
+            if (!locale) {
+                locale = opendatakit.getDefaultFormLocaleValue();
+                opendatakit.setCachedLocale(locale);
+            }
+
+            return locale;
 		},
 		expandFormDirRelativeUrlPath: function(content) {
             'use strict';
