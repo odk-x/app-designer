@@ -77,6 +77,37 @@
         "_row_num": 16
       }
     ],
+    "settings": [
+      {
+        "setting_name": "form_id",
+        "value": "authorizations",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20170919,
+        "_row_num": 3
+      },
+      {
+        "setting_name": "table_id",
+        "value": "authorizations",
+        "_row_num": 4
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": "Authorizations"
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "setting_name": "instance_name",
+        "value": "data('authorization_name)",
+        "_row_num": 6
+      }
+    ],
     "table_specific_translations": [
       {
         "string_token": "type",
@@ -152,37 +183,6 @@
         "string_token": "for_member",
         "text": "Entitlement Generated for Member",
         "_row_num": 16
-      }
-    ],
-    "settings": [
-      {
-        "setting_name": "form_id",
-        "value": "authorizations",
-        "_row_num": 2
-      },
-      {
-        "setting_name": "form_version",
-        "value": 20170919,
-        "_row_num": 3
-      },
-      {
-        "setting_name": "table_id",
-        "value": "authorizations",
-        "_row_num": 4
-      },
-      {
-        "setting_name": "survey",
-        "display": {
-          "title": {
-            "text": "Authorizations"
-          }
-        },
-        "_row_num": 5
-      },
-      {
-        "setting_name": "instance_name",
-        "value": "data('authorization_name)",
-        "_row_num": 6
       }
     ],
     "survey": [

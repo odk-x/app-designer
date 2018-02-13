@@ -121,13 +121,6 @@
         "_row_num": 6
       }
     ],
-    "table_specific_translations": [
-      {
-        "string_token": "assigned_item_pack_code",
-        "text": "Assigned Item Pack Barcode",
-        "_row_num": 2
-      }
-    ],
     "choices": [
       {
         "choice_list_name": "yes_no",
@@ -337,13 +330,7 @@
       ]
     },
     "table_specific_definitions": {
-      "_tokens": {
-        "assigned_item_pack_code": {
-          "string_token": "assigned_item_pack_code",
-          "text": "Assigned Item Pack Barcode",
-          "_row_num": 2
-        }
-      }
+      "_tokens": {}
     },
     "queries": {
       "get_barcoderanges": {

@@ -358,7 +358,7 @@ window.odkFrameworkDefinitions = {
     "opening_survey_instance_detail": {
       "string_token": "opening_survey_instance_detail",
       "text": {
-        "default": "{{#if display_field}}\n        <p>You are at the start of instance: </p>\n        <p>\"{{display_field}}\"</p> \n  {{else}}\n        <p>You are at the start of a new instance.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>Last saved:</p> \n            <p>{{last_save_date}}</p>\n        {{/if}}\n        <hr>"
+        "default": "{{#if display_field}}&#10;        <p>You are at the start of instance: </p>&#10;        <p>\"{{display_field}}\"</p> &#10;  {{else}}&#10;        <p>You are at the start of a new instance.</p>&#10;  {{/if}}&#10;        <hr>&#10;        {{#if last_save_date}}&#10;            <p>Last saved:</p> &#10;            <p>{{last_save_date}}</p>&#10;        {{/if}}&#10;        <hr>&#10;"
       },
       "_row_num": 36
     },
@@ -586,6 +586,27 @@ window.odkFrameworkDefinitions = {
         "spanish": "Valor entero esperado"
       },
       "_row_num": 57
+    },
+    "confirm_exit_label": {
+      "string_token": "confirm_exit_label",
+      "text": {
+        "default": "Exit"
+      },
+      "_row_num": 58
+    },
+    "confirm_cancel_label": {
+      "string_token": "confirm_cancel_label",
+      "text": {
+        "default": "Cancel"
+      },
+      "_row_num": 59
+    },
+    "confirm_message": {
+      "string_token": "confirm_message",
+      "text": {
+        "default": "Are you sure you want to exit and lose all changes?"
+      },
+      "_row_num": 60
     }
   }
 }
