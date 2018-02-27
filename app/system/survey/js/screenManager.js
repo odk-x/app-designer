@@ -10,16 +10,16 @@
 */
 /* jshint unused: vars */
 define(['opendatakit','backbone','jquery', 'spinner', 'handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
-    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars', 'handlebarsHelpers'],
+    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars', 'handlebarsHelpers', 'text!templates/confirmExitPopup.handlebars'],
 function(opendatakit,  Backbone,  $,        spinner,   Handlebars,  screenTypes,  screenPopup, confirmationPopup,
-     optionsPopup,                             languagePopup, _hh) {
+     optionsPopup,                             languagePopup, _hh, confirmExitPopup) {
 /* global odkCommon */
 'use strict';
 verifyLoad('screenManager',
     ['opendatakit','backbone','jquery','spinner','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
-    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' , 'handlebarsHelpers'],
+    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' , 'handlebarsHelpers', 'text!templates/confirmExitPopup.handlebars'],
     [opendatakit,  Backbone,  $,        spinner,  Handlebars,  screenTypes,  screenPopup, confirmationPopup,
-     optionsPopup,                             languagePopup, _hh]);
+     optionsPopup,                             languagePopup, _hh, confirmExitPopup]);
 
 return Backbone.View.extend({
     el: "body",
@@ -28,6 +28,7 @@ return Backbone.View.extend({
     confirmationTemplate: Handlebars.compile(confirmationPopup),
     optionsTemplate: Handlebars.compile(optionsPopup),
     languageTemplate: Handlebars.compile(languagePopup),
+    confirmExitTemplate: Handlebars.compile(confirmExitPopup),
     eventTimeStamp: -1,
     pageChangeActionLockout: false, // to control double-swiping...
     renderContext:{},
@@ -38,11 +39,13 @@ return Backbone.View.extend({
         "click .odk-options-btn": "openOptions",
         "click .languageMenu": "openLanguagePopup",
         "click .language": "setLanguage",
-        "click .ignore-changes-and-exit": "ignoreChanges",
+        "click .ignore-changes-and-exit": "confirmExitPopup",
         "click .save-incomplete-and-exit": "saveChanges",
         "click .finalize-and-exit": "finalizeChanges",
         "click .show-contents": "showContents",
         "dragstart img": "disableImageDrag",
+        "click #exit": "ignoreChanges",
+        "click #cancel": "closeConfirmExitPopup",
         "click #ok-btn": "closeScreenPopup",
         "click #yes-btn": "handleConfirmation",
         "click #no-btn": "closeConfirmationPopup"
@@ -440,8 +443,26 @@ return Backbone.View.extend({
 
         evt.preventDefault();
     },
-    ignoreChanges: function(evt) {
+    confirmExitPopup: function(evt) {
+        var that = this;
         $( "#optionsPopup" ).modal( "hide" );
+        var $contentArea = $('#confirmExitPopup');
+        $contentArea.empty().remove();
+        if ( that.activeScreen === null || that.activeScreen === undefined ) {
+            evt.stopPropagation();
+            evt.stopImmediatePropagation();
+            return;
+        }
+        var rc = (that.activeScreen && that.activeScreen._renderContext) ?
+            that.activeScreen._renderContext : that.renderContext;
+            that.activeScreen.$el.append(that.confirmExitTemplate(rc)).trigger('pagecreate');
+        $( "#confirmExitPopup" ).modal();
+    },
+    closeConfirmExitPopup: function(evt) {
+        $( "#confirmExitPopup" ).modal( "hide" );
+    },
+    ignoreChanges: function(evt) {
+        $( "#confirmExitPopup").modal( "hide" );
         evt.stopPropagation();
         evt.stopImmediatePropagation();
         var that = this;

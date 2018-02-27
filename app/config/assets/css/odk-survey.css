@@ -264,7 +264,7 @@ input[type="range"]::-webkit-slider-thumb:before {
 #optionsPopup .btn-group-vertical {
     display: block;
 }
-#confirmationPopup .btn-group-vertical>.btn , #screenPopup .btn-group-vertical>.btn{
+#confirmationPopup .btn-group-vertical>.btn , #screenPopup .btn-group-vertical>.btn {
     background-color: #373737;
     color: white;
     border-color: #1f1f1f;
@@ -272,12 +272,14 @@ input[type="range"]::-webkit-slider-thumb:before {
     padding: 15px;
     opacity:1;
 }
-#languagePopup .btn-group-vertical>.btn , #optionsPopup .btn-group-vertical>.btn{
+#languagePopup .btn-group-vertical>.btn , #optionsPopup .btn-group-vertical>.btn,
+#confirmExitPopup .btn-group-vertical>.btn {
     font-size: 20px;
     padding: 12px;
 }
 #confirmationPopup .modal-dialog, #screenPopup .modal-dialog,
-#optionsPopup .modal-dialog, #languagePopup .modal-dialog {
+#optionsPopup .modal-dialog, #languagePopup .modal-dialog,
+#confirmExitPopup .modal-dialog {
     margin-top: 45px;
 }
 #confirmationPopup .modal-content, #screenPopup .modal-content {

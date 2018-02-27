@@ -1952,7 +1952,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
     usePicker: true,
     insideAfterRender: false,
     timeFormat: "MM/DD/YYYY h:mm A",
-    timeTemplate: "DD / MMM / YYYY  HH : mm",
+    timeTemplate: "YYYY / MM / DD  HH : mm",
     showDate: true,
     showTime: true,
     dtp: null,
@@ -2129,7 +2129,7 @@ promptTypes.date = promptTypes.datetime.extend({
     type: "date",
     showTime: false,
     timeFormat: "MM/DD/YYYY",
-    timeTemplate: "DD / MMM / YYYY"
+    timeTemplate: "YYYY / MM / DD"
 });
 promptTypes.time = promptTypes.datetime.extend({
     type: "time",
