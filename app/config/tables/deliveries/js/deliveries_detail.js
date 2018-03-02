@@ -14,7 +14,8 @@ function display(result) {
                                 'custom_delivery_row_id', 'entitlement_id', 'member_id', 'is_override',
                                 'item_pack_description', 'item_pack_id', 'item_pack_name'];
         } else {
-            exclusionList = ['custom_delivery_row_id'];
+            exclusionList = ['authorization_id', 'custom_delivery_form_id', 'entitlement_id',
+                                'custom_delivery_row_id', 'item_pack_id'];
         }
 
         util.populateDetailView(result, "field_list", locale, exclusionList);

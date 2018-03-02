@@ -9,7 +9,7 @@ var locale = odkCommon.getPreferredLocale();
 function display() {
     var type = util.getQueryParameter('type');
     var title = $('#title');
-    if (type == 'registration') {
+    if (type === 'registration') {
 
         title.text(odkCommon.localizeText(locale, "registration_data"));
 
@@ -61,32 +61,47 @@ function display() {
         }
 
     } else {
-        var allDeliveries = document.createElement('button');
 
-        title.text(odkCommon.localizeText(locale, "delivery_data_title"));
-        allDeliveries.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
-        allDeliveries.onclick = function() {
+        if (util.getWorkflowMode() === 'TOKEN') {
+
+            title.text(odkCommon.localizeText(locale, "delivery_data_title"));
+
+            let allDeliveries = document.createElement('button');
+            allDeliveries.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
+            allDeliveries.onclick = function() {
             odkTables.openTableToListView(null, util.deliveryTable, null, null,
-                                 'config/tables/deliveries/html/deliveries_list.html');
-        };
+                                     'config/tables/deliveries/html/deliveries_list.html');
+            };
 
-        var byAuth = document.createElement('button');
-        byAuth.innerHTML = odkCommon.localizeText(locale, "view_authorization_progress");
-        byAuth.onclick = function() {
-            odkTables.openTableToListView(null, util.authorizationTable, null, null,
-                                'config/tables/authorizations/html/authorizations_list.html?deliveries');
-        };
+            let deliverySearch = document.createElement('button');
+            deliverySearch.innerHTML = odkCommon.localizeText(locale, "advanced_search");
+            deliverySearch.onclick = function () {
+                odkTables.launchHTML(null,
+                    'config/assets/html/search.html?type=' + util.deliveryTable);
+            };
+            // append buttons
+            document.getElementById('wrapper').appendChild(allDeliveries);
+            document.getElementById('wrapper').appendChild(deliverySearch);
+        } else {
+            title.text(odkCommon.localizeText(locale, "delivery_data_title"));
+
+            let byAuth = document.createElement('button');
+            byAuth.innerHTML = odkCommon.localizeText(locale, "view_by_authorization");
+            byAuth.onclick = function () {
+                odkTables.openTableToListView(null, util.authorizationTable, null, null,
+                    'config/tables/authorizations/html/authorizations_list.html?deliveries');
+            };
 
 
-        var deliverySearch = document.createElement('button');
-        deliverySearch.innerHTML = odkCommon.localizeText(locale, "advanced_search");
-        deliverySearch.onclick = function() {
-            odkTables.launchHTML(null,
-                                 'config/assets/html/search.html?type=' + util.deliveryTable);
-        };
-        // append buttons
-        document.getElementById('wrapper').appendChild(allDeliveries);
-        document.getElementById('wrapper').appendChild(byAuth);
-        document.getElementById('wrapper').appendChild(deliverySearch);
+            let deliverySearch = document.createElement('button');
+            deliverySearch.innerHTML = odkCommon.localizeText(locale, "advanced_search");
+            deliverySearch.onclick = function () {
+                odkTables.launchHTML(null,
+                    'config/assets/html/search.html?type=' + util.deliveryTable);
+            };
+            // append buttons
+            document.getElementById('wrapper').appendChild(byAuth);
+            document.getElementById('wrapper').appendChild(deliverySearch);
+        }
     }
 }

@@ -733,10 +733,10 @@ window.odkCommonDefinitions = {
       },
       "_row_num": 80
     },
-    "view_authorization_progress": {
-      "string_token": "view_authorization_progress",
+    "view_by_authorization": {
+      "string_token": "view_by_authorization",
       "text": {
-        "default": "Progress By Authorization"
+        "default": "View By Authorization"
       },
       "_row_num": 81
     },
@@ -1080,6 +1080,55 @@ window.odkCommonDefinitions = {
         "default": "Household Size"
       },
       "_row_num": 132
+    },
+    "name": {
+      "string_token": "name",
+      "text": {
+        "default": "Name"
+      },
+      "_row_num": 134
+    },
+    "type": {
+      "string_token": "type",
+      "text": {
+        "default": "Type"
+      },
+      "_row_num": 135
+    },
+    "item_pack_ranges": {
+      "string_token": "item_pack_ranges",
+      "text": {
+        "default": "Item Pack Ranges"
+      },
+      "_row_num": 136
+    },
+    "report_version": {
+      "string_token": "report_version",
+      "text": {
+        "default": "Report Version"
+      },
+      "_row_num": 137
+    },
+    "restrict_overrides": {
+      "string_token": "restrict_overrides",
+      "text": {
+        "default": "Restrict Overrides"
+      },
+      "_row_num": 138
+    },
+    "summary_form_id": {
+      "string_token": "summary_form_id",
+      "text": {
+        "default": "Summary Form ID"
+      },
+      "_row_num": 139
+    },
+    "for_member": {
+      "string_token": "for_member",
+      "text": {
+        "default": "Entitlement Generated for Member"
+      },
+      "_row_num": 140
     }
   },
   "_locales": {

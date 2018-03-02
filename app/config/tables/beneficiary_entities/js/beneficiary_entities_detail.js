@@ -17,7 +17,6 @@ var rootRowId;
 function display() {
 
     type = util.getQueryParameter('type');
-    rootRowId = util.getQueryParameter('rootRowId');
     if (type === 'unregistered_voucher') {
         // If we have an unregistered voucher, there is no view data to show
         beneficiaryEntityId = util.getQueryParameter('beneficiary_entity_id');
@@ -28,6 +27,7 @@ function display() {
 
         return Promise.resolve(null);
     }
+    rootRowId = util.getQueryParameter('rootRowId');
 
     return new Promise( function(resolve, reject) {
         odkData.getViewData(resolve, reject);

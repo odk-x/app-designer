@@ -60,14 +60,23 @@ util.getCurrentOdkTimestamp = function() {
 
 util.populateDetailView = function(resultSet, parentDiv, locale, exclusionList) {
     if (resultSet.getCount() > 0) {
-        var columns = resultSet.getColumns();
-        var fieldListDiv = $('#' + parentDiv);
-        for (var i = 0; i < columns.length; i++) {
-            if (!columns[i].startsWith("_") && !exclusionList.includes(columns[i])) {
-                var line = $('<p>').attr('id', columns[i]).appendTo(fieldListDiv);
-                $('<span>').attr('id', 'inner_' + columns[i]).text(resultSet.get(columns[i])).appendTo(line);
+        let columns = resultSet.getColumns();
+        let fieldListDiv = $('#' + parentDiv);
+        for (let i = 0; i < columns.length; i++) {
+            if (!exclusionList.includes(columns[i]) && !columns[i].startsWith("_")) {
+                let line = $('<p>').attr('id', columns[i]).appendTo(fieldListDiv);
+                if (columns[i] === 'date_created') {
+                    let dateObj = odkCommon.toDateFromOdkTimeStamp(resultSet.get(columns[i]));
+                    let val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
+                    val += ' ' + dateObj.getHours() + ":" + dateObj.getMinutes();
+                    $('<span>').attr('id', 'inner_' + columns[i]).text(val).appendTo(line);
+                }
+                else {
+                    $('<span>').attr('id', 'inner_' + columns[i]).text(resultSet.get(columns[i])).appendTo(line);
+                }
                 line.prepend(odkCommon.localizeText(locale, columns[i]) + ": ");
             }
+
         }
     }
 };

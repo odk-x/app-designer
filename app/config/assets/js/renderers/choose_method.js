@@ -323,13 +323,17 @@ function handleRegistrationCallback(action, dispatchStr) {
                     }
                     return Promise.all(addRowActions);
                 }).then( function(result) {
+                    clearSessionVars();
                     if (addRowActions.length > 0) {
                         console.log("added base member rows");
-                        clearSessionVars();
-                        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
-                            'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-                            encodeURIComponent(type) + '&rootRowId=' + encodeURIComponent(rootRowId));
+                    } else {
+                        console.log("no members were created");
                     }
+
+                    odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
+                        'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable
+                        + '_detail.html?type=' + encodeURIComponent(type) + '&rootRowId=' + encodeURIComponent(rootRowId));
+
                 }).catch( function(error) {
                     console.log(error);
                 });
@@ -465,10 +469,12 @@ function deliveryDisabledCBSuccess(result) {
         }).then (function(entitlement_result) {
           // If there are deliveries for this beneficiary, we still want to give that option
           if (entitlement_result.getCount() > 0) {
-              clearSessionVars();
-            odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
+              clearSessionVars()
+              // opening an arbitrary row. hacky fix to the fact that you need to send in a row to open detail with list.
+              // in this case the detail view is null because its a voucher
+            odkTables.openDetailWithListView(null, util.authorizationTable, entitlement_result.getData(0, 'authorization_id'),
                                              'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=unregistered_voucher' +
-                                             '&beneficiary_entity_id=' + encodeURIComponent(code) + '&rootRowId=' + encodeURIComponent(result.getRowId(0)));
+                                             '&beneficiary_entity_id=' + encodeURIComponent(code));
           } else {
             $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
           }

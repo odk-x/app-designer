@@ -54,6 +54,7 @@ function display() {
         renderPromises.push(getSearchOptions(util.beneficiaryEntityTable, true));
         options.push('Household Size');
 
+
     } else if (type === util.deliveryTable) {
         baseTable = util.deliveryTable;
 
@@ -112,6 +113,7 @@ function search() {
         targetTable = customTable;
         activeQuery = 'SELECT * FROM ' + targetTable + ' WHERE ' + key + ' = ?';
     } else if (key === 'Household Size') {
+        value = parseInt(value);
         targetTable = baseTable;
         activeQuery = 'SELECT * FROM ' + util.beneficiaryEntityTable + ' ben, '  + util.membersTable +
             ' mem WHERE ben._id = mem.beneficiary_entity_row_id ' +

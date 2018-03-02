@@ -12,7 +12,7 @@ function deliver() {
     var beneficiaryEntityId = util.getQueryParameter('beneficiary_entity_id');
     var authorizationId = util.getQueryParameter('authorization_id');
 
-    if (entitlementId != null) {
+    if (entitlementId !== null) {
         console.log("Delivering entitlement: " + entitlementId);
 
         var entitlement_row = null;
@@ -30,12 +30,12 @@ function deliver() {
             console.log('Failed to perform simple delivery: ' + reason);
         });
 
-    } else if (beneficiaryEntityId != null && authorizationId != null) {
+    } else if (beneficiaryEntityId !== null && authorizationId !== null) {
         dataUtil.getRow(util.authorizationTable, authorizationId).then( function(result) {
             return dataUtil.addDeliveryRowWithoutEntitlement(beneficiaryEntityId, result, null);
         }).then(_handleRowEntry).catch( function(reason) {
             console.log('Failed to perform simple delivery: ' + reason);
-        });;
+        });
 
     }
 }
