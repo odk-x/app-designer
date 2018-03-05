@@ -174,7 +174,7 @@ function populateSyncList() {
                 ['changed', 'in_conflict'], null, null, resolve, reject);
         });
 
-        if (util.getRegistrationMode() == 'INDIVIDUAL') {
+        if (util.getRegistrationMode() === 'INDIVIDUAL') {
             return Promise.all([newBeneficiaryEntitiesPromise, updatedBeneficiaryEntitiesPromise]).then( function(resultArr) {
                 newBeneficiaryEntities.text('New since last sync: ' + resultArr[0].get('count'));
                 updatedBeneficiaryEntities.text('Edited since last sync: ' + resultArr[1].get('count'));
@@ -248,6 +248,8 @@ function callBackFn () {
             break;
         case actionTokenDelivery:
             handleTokenDeliveryCallback(action, dispatchStr);
+            odkCommon.removeFirstQueuedAction();
+            break;
         default:
             console.log("Error: unrecognized action type in callback");
             odkCommon.removeFirstQueuedAction();
@@ -416,6 +418,7 @@ function tokenDeliveryFunction() {
         if (result != null) {
             if (result.getCount() === 0) {
                 console.log('Performing simple delivery');
+                clearSessionVars();
                 odkTables.launchHTML(null, 'config/assets/html/deliver.html?authorization_id=' +
                 encodeURIComponent(activeAuthorization.getRowId(0)) + '&beneficiary_entity_id=' + encodeURIComponent(code));
             } else {
@@ -469,7 +472,7 @@ function deliveryDisabledCBSuccess(result) {
         }).then (function(entitlement_result) {
           // If there are deliveries for this beneficiary, we still want to give that option
           if (entitlement_result.getCount() > 0) {
-              clearSessionVars()
+              clearSessionVars();
               // opening an arbitrary row. hacky fix to the fact that you need to send in a row to open detail with list.
               // in this case the detail view is null because its a voucher
             odkTables.openDetailWithListView(null, util.authorizationTable, entitlement_result.getData(0, 'authorization_id'),

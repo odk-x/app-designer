@@ -31,8 +31,8 @@ function display() {
         $('#title').text(odkCommon.localizeText(locale, 'search_members'));
         singularUnitLabel = odkCommon.localizeText(locale, 'beneficiary');
         pluralUnitLabel = odkCommon.localizeText(locale, 'beneficiaries');
-        renderPromises.push(getSearchOptions(type, false));
-        renderPromises.push(getSearchOptions(util.membersTable, true));
+        renderPromises.push(getSearchOptions(type, false, []));
+        renderPromises.push(getSearchOptions(util.membersTable, true, []));
 
     } else if (type === util.getBeneficiaryEntityCustomFormId()) {
 
@@ -50,17 +50,22 @@ function display() {
             pluralUnitLabel = odkCommon.localizeText(locale, 'members');
         }
 
-        renderPromises.push(getSearchOptions(type, false));
-        renderPromises.push(getSearchOptions(util.beneficiaryEntityTable, true));
+        renderPromises.push(getSearchOptions(type, false, []));
+        renderPromises.push(getSearchOptions(util.beneficiaryEntityTable, true, []));
         options.push('Household Size');
-
 
     } else if (type === util.deliveryTable) {
         baseTable = util.deliveryTable;
 
         $('#title').text(odkCommon.localizeText(locale, 'search_deliveries'));
 
-        renderPromises.push(getSearchOptions(type, true));
+        if (util.getWorkflowMode() === 'TOKEN') {
+            renderPromises.push(getSearchOptions(type, true, ['authorization_description', 'authorization_id',
+             'authorization_type', 'custom_delivery_form_id', 'custom_delivery_row_id', 'entitlement_id', 'is_override',
+              'item_pack_description', 'item_pack_id', 'item_pack_name', 'member_id']));
+        } else {
+            renderPromises.push(getSearchOptions(type, true, []));
+        }
 
         singularUnitLabel = odkCommon.localizeText(locale, 'delivery');
         pluralUnitLabel = odkCommon.localizeText(locale, 'deliveries');
@@ -76,12 +81,15 @@ function display() {
         });
 }
 
-function getSearchOptions(tableId, isBaseTable) {
+function getSearchOptions(tableId, isBaseTable, exclusionList) {
     return new Promise( function(resolve, reject) {
         odkData.query(tableId, null, null, null, null, null, null, null, null, null,
             resolve, reject);
     }).then( function(result) {
-        var columns = result.getColumns();
+        let columns = result.getColumns().filter( function( el ) {
+            return exclusionList.indexOf( el ) < 0;
+        } );
+
         if (isBaseTable) {
             baseTableColumns = columns;
         } else {
