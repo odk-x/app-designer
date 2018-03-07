@@ -2,6 +2,7 @@
 <html>
     <head>
         <link href="../../../assets/css/detail_with_list.css" type="text/css" rel="stylesheet" />
+        <link href="../../../assets/css/delay_render.css" type="text/css" rel="stylesheet" />
         <link href="../../../assets/css/reg.css" type="text/css" rel="stylesheet" />
         <link href="../../../assets/css/radio_button.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
@@ -30,7 +31,7 @@
         </div>
         <div id="field_list"></div>
         <script>
-          $(util.renderPage(display));
+          $(util.renderPageAsPromise(display));
         </script>
     </body>
 </html>

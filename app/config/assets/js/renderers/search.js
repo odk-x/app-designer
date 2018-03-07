@@ -29,8 +29,8 @@ function display() {
         customForeignKey = 'custom_member_row_id';
 
         $('#title').text(odkCommon.localizeText(locale, 'search_members'));
-        singularUnitLabel = odkCommon.localizeText(locale, 'beneficiary');
-        pluralUnitLabel = odkCommon.localizeText(locale, 'beneficiaries');
+        singularUnitLabel = odkCommon.localizeText(locale, 'member');
+        pluralUnitLabel = odkCommon.localizeText(locale, 'members');
         renderPromises.push(getSearchOptions(type, false, []));
         renderPromises.push(getSearchOptions(util.membersTable, true, []));
 
@@ -46,8 +46,8 @@ function display() {
             pluralUnitLabel = odkCommon.localizeText(locale, 'households');
         } else {
             $('#title').text(odkCommon.localizeText(locale, 'search_beneficiaries'));
-            singularUnitLabel = odkCommon.localizeText(locale, 'member');
-            pluralUnitLabel = odkCommon.localizeText(locale, 'members');
+            singularUnitLabel = odkCommon.localizeText(locale, 'beneficiary');
+            pluralUnitLabel = odkCommon.localizeText(locale, 'beneficiaries');
         }
 
         renderPromises.push(getSearchOptions(type, false, []));

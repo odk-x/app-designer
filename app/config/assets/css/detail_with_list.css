@@ -50,8 +50,10 @@ button:active {
 p {
   padding: 0px;
   margin: 0px;
-  color: black;
+  color: #5C5C5C;
   font-size: 16px;
+  font-weight: bold;
+
 }
 
 .main-text {
@@ -59,7 +61,8 @@ p {
 }
 
 span {
-  color: darkgray;
+  color: black;
+  font-weight: normal;
 }
 
 h3 {

@@ -515,7 +515,7 @@ window.odkCommonDefinitions = {
     "no_authorizations": {
       "string_token": "no_authorizations",
       "text": {
-        "default": "No Distributions",
+        "default": "No Authorizations",
         "greek": "Καμία διανομή",
         "arabic": "لا توزيعات",
         "farsi": "بدون توزیع",

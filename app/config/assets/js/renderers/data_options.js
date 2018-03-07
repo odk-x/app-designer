@@ -34,7 +34,7 @@ function display() {
                                  'config/assets/html/search.html?type=' + util.getBeneficiaryEntityCustomFormId());
         }
 
-        if (util.getRegistrationMode() == 'HOUSEHOLD') {
+        if (util.getRegistrationMode() === 'HOUSEHOLD') {
             enabledBeneficiaryEntities.innerHTML = odkCommon.localizeText(locale, "enabled_households");
             disabledBeneficiaryEntities.innerHTML = odkCommon.localizeText(locale, "disabled_households");
             beneficiaryEntitySearch.innerHTML = odkCommon.localizeText(locale, "search_households");
@@ -49,7 +49,7 @@ function display() {
         document.getElementById('wrapper').appendChild(disabledBeneficiaryEntities);
         document.getElementById('wrapper').appendChild(beneficiaryEntitySearch);
 
-        if (util.getRegistrationMode() == 'HOUSEHOLD') {
+        if (util.getRegistrationMode() === 'HOUSEHOLD') {
             var memberSearch = document.createElement('button');
             memberSearch.innerHTML = odkCommon.localizeText(locale, "search_members");
             memberSearch.onclick = function() {
@@ -89,7 +89,7 @@ function display() {
             byAuth.innerHTML = odkCommon.localizeText(locale, "view_by_authorization");
             byAuth.onclick = function () {
                 odkTables.openTableToListView(null, util.authorizationTable, null, null,
-                    'config/tables/authorizations/html/authorizations_list.html?deliveries');
+                    'config/tables/authorizations/html/authorizations_list.html?type=deliveries');
             };
 
 

@@ -541,44 +541,44 @@ function registrationVoucherCBSuccess(result) {
     } else {
         $('#search_results').text(odkCommon.localizeText(locale, "voucher_detected"));
     }
-    setTimeout(function() {
-        let defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
-        var user = odkCommon.getSessionVariable(userKey);
 
-        // TODO: verify that custom beneficiary entity table exists
-        var customBEForm = util.getBeneficiaryEntityCustomFormId();
-        if (customBEForm == undefined || customBEForm == null || customBEForm == "") {
-            // should we provide a ui to register without survey?
-            $('#search_results').text("Beneficiary Entity Form not defined");
-        }
-        var customRowId = util.genUUID();
-        var rootRowId = util.genUUID();
-        new Promise( function(resolve, reject) {
-            var struct = {};
-            struct['beneficiary_entity_id'] = code;
-            struct['custom_beneficiary_entity_form_id'] = customBEForm;
-            struct['custom_beneficiary_entity_row_id'] = customRowId;
-            struct['status'] = 'ENABLED';
-            struct['status_reason'] = 'standard';
-            struct['_group_modify'] = defaultGroup;
-            struct['_default_access'] = 'HIDDEN';
-            struct['_row_owner'] = user;
-            struct['date_created'] = util.getCurrentOdkTimestamp();
-            odkData.addRow(util.beneficiaryEntityTable, struct, rootRowId, resolve, reject);
-        }).then( function(result) {
-            var customDispatchStruct = {};
-            var additionalFormsTupleArr = [];
+    let defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+    var user = odkCommon.getSessionVariable(userKey);
 
-            var additionalFormTuple = {[util.additionalCustomFormsObj.formIdKey] : util.getMemberCustomFormId(), [util.additionalCustomFormsObj.foreignReferenceKey] : 'custom_beneficiary_entity_row_id', [util.additionalCustomFormsObj.valueKey] : customRowId};
-            additionalFormsTupleArr.push(additionalFormTuple);
+    // TODO: verify that custom beneficiary entity table exists
+    var customBEForm = util.getBeneficiaryEntityCustomFormId();
+    if (customBEForm === undefined || customBEForm === null || customBEForm === "") {
+        // should we provide a ui to register without survey?
+        $('#search_results').text("Beneficiary Entity Form not defined");
+        return;
+    }
+    var customRowId = util.genUUID();
+    var rootRowId = util.genUUID();
+    new Promise( function(resolve, reject) {
+        var struct = {};
+        struct['beneficiary_entity_id'] = code;
+        struct['custom_beneficiary_entity_form_id'] = customBEForm;
+        struct['custom_beneficiary_entity_row_id'] = customRowId;
+        struct['status'] = 'ENABLED';
+        struct['status_reason'] = 'standard';
+        struct['_group_modify'] = defaultGroup;
+        struct['_default_access'] = 'HIDDEN';
+        struct['_row_owner'] = user;
+        struct['date_created'] = util.getCurrentOdkTimestamp();
+        odkData.addRow(util.beneficiaryEntityTable, struct, rootRowId, resolve, reject);
+    }).then( function(result) {
+        var customDispatchStruct = {};
+        var additionalFormsTupleArr = [];
 
-            customDispatchStruct[util.additionalCustomFormsObj.dispatchKey] = additionalFormsTupleArr;
+        var additionalFormTuple = {[util.additionalCustomFormsObj.formIdKey] : util.getMemberCustomFormId(), [util.additionalCustomFormsObj.foreignReferenceKey] : 'custom_beneficiary_entity_row_id', [util.additionalCustomFormsObj.valueKey] : customRowId};
+        additionalFormsTupleArr.push(additionalFormTuple);
 
-            console.log(customDispatchStruct);
-            clearSessionVars();
-            dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', actionRegistration, customDispatchStruct, "_group_modify", null);
-        });
-    }, 1000);
+        customDispatchStruct[util.additionalCustomFormsObj.dispatchKey] = additionalFormsTupleArr;
+
+        console.log(customDispatchStruct);
+        clearSessionVars();
+        dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', actionRegistration, customDispatchStruct, "_group_modify", null);
+    });
 }
 
 function registrationVoucherCBFailure(error) {

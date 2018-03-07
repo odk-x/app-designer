@@ -100,7 +100,10 @@ util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, loca
             mergeResult[column] = rs.get(column);
         });
     });
-    $.extend(mergeResult, kvPairs);
+
+    if (kvPairs !== undefined && kvPairs != null) {
+        $.extend(mergeResult, kvPairs);
+    }
 
     let keys = Object.keys(mergeResult).sort();
 
@@ -108,7 +111,18 @@ util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, loca
     keys.forEach(function(key) {
         if (!key.startsWith("_") && !exclusionList.includes(key)) {
             let line = $('<p>').attr('id', key).appendTo(fieldListDiv);
-            $('<span>').attr('id', 'inner_' + key).text(mergeResult[key]).appendTo(line);
+
+            if (key === 'date_created') {
+                let dateObj = odkCommon.toDateFromOdkTimeStamp(mergeResult[key]);
+                let min = dateObj.getMinutes() < 10 ? '0' : '' + dateObj.getMinutes();
+                let val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
+                val += ' ' + dateObj.getHours() + ":" + min;
+                $('<span>').attr('id', 'inner_' + key).text(val).appendTo(line);
+            }
+            else {
+                $('<span>').attr('id', 'inner_' + key).text(mergeResult[key]).appendTo(line);
+            }
+
             line.prepend(odkCommon.localizeText(locale, key) + ": ");
         }
     });
@@ -273,7 +287,10 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
 
             var customDeliveryRowId = util.genUUID();
             var jsonMap = {};
-            util.setJSONMap(jsonMap, 'assigned_item_pack_code', entitlementRow.get('assigned_item_pack_code'));
+            var assigned_code = entitlementRow.get('assigned_item_pack_code');
+            if (assigned_code !== undefined && assigned_code !== null && assigned_code !== "") {
+                util.setJSONMap(jsonMap, 'assigned_item_pack_code', assigned_code);
+            }
             dataUtil.addDeliveryRowByEntitlement(entitlementRow, authorizationRow.get("custom_delivery_form_id"), customDeliveryRowId)
                 .then( function(rootDeliveryRow) {
                     dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null, "_group_read_only", jsonMap);
@@ -351,7 +368,7 @@ dataUtil.addDeliveryRowByEntitlement = function(entitlementRow, customDeliveryFo
     util.setJSONMap(jsonMap, 'authorization_description', entitlementRow.get('authorization_description'));
     util.setJSONMap(jsonMap, 'item_pack_id', entitlementRow.get('item_pack_id'));
     util.setJSONMap(jsonMap, 'item_pack_name', entitlementRow.get('item_pack_name'));
-    util.setJSONMap(jsonMap, 'item_description', entitlementRow.get('item_description'));
+    util.setJSONMap(jsonMap, 'item_pack_description', entitlementRow.get('item_pack_description'));
     util.setJSONMap(jsonMap, 'is_override', entitlementRow.get('is_override'));
     util.setJSONMap(jsonMap, 'custom_delivery_form_id', customDeliveryFormId);
     util.setJSONMap(jsonMap, 'custom_delivery_row_id', customDeliveryRowId);

@@ -11,18 +11,20 @@ body {
   padding: 0;
 }
 
-h1 { 
-  margin: 0; 
-} 
+h1 {
+  margin: 0;
+}
 
 #title {
     font-size: 44px;
     margin-top: 20px;
     margin-bottom: 30px;
+    text-align: center;
     position: relative;
+    color: #5C5C5C;
 }
 
-#wrapper { 
+#wrapper {
   overflow: auto;
 }
 
@@ -60,19 +62,19 @@ ul {
   color: darkgray;
   font-weight: normal;
 }
- 
+
 .chevron {
   float: right;
   padding-right: 15px;
   padding-top: 15px;
-  margin: 0;  
+  margin: 0;
   height: 40px;
 }
 
 .divider {
   margin-left: auto;
   margin-right: auto;
-  background-color: #f47373; 
+  background-color: #f47373;
   width: 95%;
   height: 10px;
 }
