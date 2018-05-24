@@ -62,6 +62,11 @@
         "type": "string",
         "name": "summary_row_id",
         "_row_num": 6
+      },
+      {
+        "type": "string",
+        "name": "date_created",
+        "_row_num": 7
       }
     ],
     "properties": [
@@ -209,6 +214,16 @@
           }
         ],
         "elementKey": "summary_row_id"
+      },
+      "date_created": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "date_created"
       }
     },
     "section_names": [
@@ -504,6 +519,19 @@
         "elementName": "summary_row_id",
         "elementSet": "data",
         "elementPath": "summary_row_id"
+      },
+      "date_created": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "date_created",
+        "elementName": "date_created",
+        "elementSet": "data",
+        "elementPath": "date_created"
       },
       "_id": {
         "type": "string",

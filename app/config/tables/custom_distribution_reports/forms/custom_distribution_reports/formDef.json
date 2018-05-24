@@ -10,6 +10,16 @@
           }
         },
         "_row_num": 2
+      },
+      {
+        "type": "signature",
+        "name": "receive_signature",
+        "display": {
+          "prompt": {
+            "text": "Please sign your name to verify this report."
+          }
+        },
+        "_row_num": 3
       }
     ],
     "settings": [
@@ -20,7 +30,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 5222017,
+        "value": 52418,
         "_row_num": 3
       },
       {
@@ -54,6 +64,11 @@
         "type": "string",
         "name": "notes",
         "_row_num": 2
+      },
+      {
+        "type": "signature",
+        "name": "receive_signature",
+        "_row_num": 3
       }
     ],
     "properties": [
@@ -99,7 +114,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 5222017,
+        "value": 52418,
         "_row_num": 3
       },
       "table_id": {
@@ -165,6 +180,34 @@
           }
         ],
         "elementKey": "notes"
+      },
+      "receive_signature": {
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "receive_signature_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "receive_signature_contentType"
+          }
+        },
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "receive_signature"
       }
     },
     "section_names": [
@@ -193,12 +236,27 @@
             "promptIdx": 0
           },
           {
+            "type": "signature",
+            "name": "receive_signature",
+            "display": {
+              "prompt": {
+                "text": "Please sign your name to verify this report."
+              }
+            },
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "signature",
+            "_branch_label_enclosing_screen": "survey/_screen3",
+            "promptIdx": 1
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 3,
-            "_branch_label_enclosing_screen": "survey/_screen3",
-            "promptIdx": 1
+            "_row_num": 4,
+            "_branch_label_enclosing_screen": "survey/_screen4",
+            "promptIdx": 2
           }
         ],
         "validation_tag_map": {
@@ -212,31 +270,38 @@
             "operationIdx": 0
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 3,
-            "operationIdx": 1
-          },
-          {
             "_row_num": 3,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 4,
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 4,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 2
+            "operationIdx": 3
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 3,
-            "operationIdx": 3
+            "_row_num": 4,
+            "operationIdx": 4
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_contents": 2,
-          "_screen3": 2
+          "_screen3": 1,
+          "_contents": 3,
+          "_screen4": 3
         }
       },
       "initial": {
@@ -365,6 +430,65 @@
         "elementName": "notes",
         "elementSet": "data",
         "elementPath": "notes"
+      },
+      "receive_signature": {
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "receive_signature_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "receive_signature.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "receive_signature_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "receive_signature.contentType"
+          }
+        },
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "receive_signature",
+        "elementName": "receive_signature",
+        "elementSet": "data",
+        "elementPath": "receive_signature",
+        "listChildElementKeys": [
+          "receive_signature_contentType",
+          "receive_signature_uriFragment"
+        ],
+        "notUnitOfRetention": true
+      },
+      "receive_signature_uriFragment": {
+        "type": "string",
+        "elementType": "rowpath",
+        "elementKey": "receive_signature_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "receive_signature.uriFragment"
+      },
+      "receive_signature_contentType": {
+        "type": "string",
+        "elementType": "mimeType",
+        "default": "image/*",
+        "elementKey": "receive_signature_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "receive_signature.contentType"
       },
       "_id": {
         "type": "string",

@@ -1,5 +1,6 @@
 _element_key,_element_name,_element_type,_list_child_element_keys
 authorization_id,authorization_id,string,[]
+date_created,date_created,string,[]
 report_version,report_version,string,[]
 summary_form_id,summary_form_id,string,[]
 summary_row_id,summary_row_id,string,[]
