@@ -2,11 +2,11 @@ var locale = odkCommon.getPreferredLocale();
 
 
 function display() {
-    let displayPromise = new Promise( function(resolve, reject) {
+    var displayPromise = new Promise( function(resolve, reject) {
         odkData.getViewData(resolve, reject);
     }).then( function(result) {
 
-        let authId = result.getRowId(0);
+        var authId = result.getRowId(0);
 
         $('#title').text(result.getData(0, "name"));
         $('#view_deliveries').text(odkCommon.localizeText(locale, "view_deliveries"));
@@ -15,14 +15,14 @@ function display() {
                [authId], 'config/tables/' + util.deliveryTable + "/html/" + util.deliveryTable + '_list.html');
         });
 
-        let promises = [];
+        var promises = [];
 
-        let pendingQuery = 'SELECT count(*) as count FROM ' + util.entitlementTable + ' ent LEFT JOIN ' +  util.deliveryTable +
+        var pendingQuery = 'SELECT count(*) as count FROM ' + util.entitlementTable + ' ent LEFT JOIN ' +  util.deliveryTable +
             ' del ON del.entitlement_id = ent._id WHERE del._id IS NULL AND ent.authorization_id = ?';
 
-        let deliveredQuery = 'SELECT count(*) as count FROM ' + util.deliveryTable + ' del WHERE del.authorization_id = ?';
+        var deliveredQuery = 'SELECT count(*) as count FROM ' + util.deliveryTable + ' del WHERE del.authorization_id = ?';
 
-        let syncQuery = 'SELECT count(*) as count FROM ' + util.deliveryTable + ' WHERE _sync_state = ? AND authorization_id = ?';
+        var syncQuery = 'SELECT count(*) as count FROM ' + util.deliveryTable + ' WHERE _sync_state = ? AND authorization_id = ?';
 
         promises.push(new Promise(function (resolve, reject) {
             odkData.arbitraryQuery(util.entitlementTable, pendingQuery, [authId], null, null, resolve, reject);

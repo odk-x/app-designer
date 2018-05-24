@@ -66,14 +66,14 @@ function display() {
 
             title.text(odkCommon.localizeText(locale, "delivery_data_title"));
 
-            let allDeliveries = document.createElement('button');
+            var allDeliveries = document.createElement('button');
             allDeliveries.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
             allDeliveries.onclick = function() {
             odkTables.openTableToListView(null, util.deliveryTable, null, null,
                                      'config/tables/deliveries/html/deliveries_list.html');
             };
 
-            let deliverySearch = document.createElement('button');
+            var deliverySearch = document.createElement('button');
             deliverySearch.innerHTML = odkCommon.localizeText(locale, "advanced_search");
             deliverySearch.onclick = function () {
                 odkTables.launchHTML(null,
@@ -85,7 +85,7 @@ function display() {
         } else {
             title.text(odkCommon.localizeText(locale, "delivery_data_title"));
 
-            let byAuth = document.createElement('button');
+            var byAuth = document.createElement('button');
             byAuth.innerHTML = odkCommon.localizeText(locale, "view_by_authorization");
             byAuth.onclick = function () {
                 odkTables.openTableToListView(null, util.authorizationTable, null, null,
@@ -93,7 +93,7 @@ function display() {
             };
 
 
-            let deliverySearch = document.createElement('button');
+            var deliverySearch = document.createElement('button');
             deliverySearch.innerHTML = odkCommon.localizeText(locale, "advanced_search");
             deliverySearch.onclick = function () {
                 odkTables.launchHTML(null,

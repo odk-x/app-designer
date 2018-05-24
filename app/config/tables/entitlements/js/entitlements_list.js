@@ -1,16 +1,15 @@
 'use strict';
 
-let LOG_TAG = 'entitlements_list: ';
+var LOG_TAG = 'entitlements_list: ';
 
-let idxStart = -1;
-let actionTypeKey = "actionTypeKey";
-let deliveryTableKey = "deliveryTableKey";
-let actionAddCustomDelivery = 0;
-let locale = odkCommon.getPreferredLocale();
-let action = util.getQueryParameter('action');
+var idxStart = -1;
+var actionTypeKey = "actionTypeKey";
+var actionAddCustomDelivery = 0;
+var locale = odkCommon.getPreferredLocale();
+var action = util.getQueryParameter('action');
 
 
-let firstLoad = function() {
+var firstLoad = function() {
     odkCommon.registerListener(function() {
         actionCBFn();
     });
@@ -18,8 +17,8 @@ let firstLoad = function() {
     resumeFn(0);
 };
 
-let resumeFn = function(fIdxStart) {
-    let entitlementsResultSet = null;
+var resumeFn = function(fIdxStart) {
+    var entitlementsResultSet = null;
     dataUtil.getViewData().then( function(result) {
         entitlementsResultSet = result;
 
@@ -38,11 +37,11 @@ let resumeFn = function(fIdxStart) {
                     // method. First, however, we need to wrap up the target
                     // element in a jquery object.
                     // wrap up the object so we can call closest()
-                    let jqueryObject = $(e.target);
+                    var jqueryObject = $(e.target);
                     // we want the closest thing with class item_space, which we
                     // have set up to have the row id
-                    let containingDiv = jqueryObject.closest('.item_space');
-                    let rowId = containingDiv.attr('rowId');
+                    var containingDiv = jqueryObject.closest('.item_space');
+                    var rowId = containingDiv.attr('rowId');
                     console.log('I', LOG_TAG + 'clicked with rowId: ' + rowId);
                     // make sure we retrieved the rowId
                     if (rowId !== null && rowId !== undefined) {
@@ -80,7 +79,7 @@ let resumeFn = function(fIdxStart) {
 }
 
 
-let launchDeliveryDetailView = function(entitlement_id) {
+var launchDeliveryDetailView = function(entitlement_id) {
     console.log('I', LOG_TAG + "Launching delivery detail view for entitlement: " + entitlement_id);
 
     new Promise(function(resolve, reject) {
@@ -99,8 +98,8 @@ let launchDeliveryDetailView = function(entitlement_id) {
 
 /************************** Action callback workflow *********************************/
 
-let actionCBFn = function() {
-    let action = odkCommon.viewFirstQueuedAction();
+var actionCBFn = function() {
+    var action = odkCommon.viewFirstQueuedAction();
     console.log('E', LOG_TAG + 'callback entered with action: ' + action);
 
     if (action === null || action === undefined) {
@@ -108,13 +107,13 @@ let actionCBFn = function() {
         return;
     }
 
-    let dispatchStr = JSON.parse(action.dispatchStruct);
+    var dispatchStr = JSON.parse(action.dispatchStruct);
     if (dispatchStr === null || dispatchStr === undefined) {
         console.log('E', LOG_TAG + 'Error: missing dispatch struct');
         return;
     }
 
-    let actionType = dispatchStr[actionTypeKey];
+    var actionType = dispatchStr[actionTypeKey];
     switch (actionType) {
         case actionAddCustomDelivery:
             finishCustomDelivery(action, dispatchStr);
@@ -126,7 +125,7 @@ let actionCBFn = function() {
 
 };
 
-let finishCustomDelivery = function(action, dispatchStr) {
+var finishCustomDelivery = function(action, dispatchStr) {
     if (dataUtil.validateCustomTableEntry(action, dispatchStr, "delivery", util.deliveryTable)) {
         // TODO: check to make sure that there are any entitlements left, otherwise return to previous screen
     }
@@ -134,39 +133,39 @@ let finishCustomDelivery = function(action, dispatchStr) {
 
 /************************** UI Rending functions *********************************/
 
-let displayGroup = function(idxStart, entitlementsResultSet) {
+var displayGroup = function(idxStart, entitlementsResultSet) {
     console.log('I', LOG_TAG + 'displayGroup called. idxStart: ' + idxStart);
 
     /* If the list comes back empty, inform the user */
     if (entitlementsResultSet.getCount() === 0) {
-        let errorText = $('#error');
+        var errorText = $('#error');
         errorText.show();
         errorText.text('No entitlements found');
     }
 
     /* Number of rows displayed per 'chunk' - can modify this value */
-    let chunk = 50;
-    let i = idxStart;
+    var chunk = 50;
+    var i = idxStart;
     for (i; i < idxStart + chunk; i++) {
         if (i >= entitlementsResultSet.getCount()) {
             break;
         }
 
-        let item = $('<li>');
+        var item = $('<li>');
         item.attr('rowId', entitlementsResultSet.getRowId(i));
         item.attr('class', 'item_space');
         item.attr('id', entitlementsResultSet.getRowId(i));
-        let auth_name = entitlementsResultSet.getData(i, 'item_pack_name');
+        var auth_name = entitlementsResultSet.getData(i, 'item_pack_name');
         item.text(auth_name);
 
-        let item2 = $('<li>');
+        var item2 = $('<li>');
         item2.attr('class', 'detail');
-        let ipn = entitlementsResultSet.getData(i, 'authorization_name');
+        var ipn = entitlementsResultSet.getData(i, 'authorization_name');
         item2.text(ipn);
         item.append(item2);
 
         if (action === 'change_status') {
-            let toggle = $(".switch-starter").clone();
+            var toggle = $(".switch-starter").clone();
             toggle.attr('class', 'switch-field');
             toggle.find('.left').attr('id', 'left' + '-' + i).attr('name', i);
             toggle.find('.left_txt').attr('for', 'left' + '-' + i);
@@ -182,7 +181,7 @@ let displayGroup = function(idxStart, entitlementsResultSet) {
             toggle.find('#right' + '-' + i).click( {"index": i}, function(event) {
                 return changeStatusPromise(entitlementsResultSet.getRowId(event.data.index), 'DISABLED');
             });
-            
+
             if (entitlementsResultSet.getData(i, 'status') === 'ENABLED') {
                 toggle.find('.left').attr('checked', true);
             } else {
@@ -192,7 +191,7 @@ let displayGroup = function(idxStart, entitlementsResultSet) {
             toggle.show();
             item.append(toggle);
         } else {
-            /*let chevron = $('<img>');
+            /*var chevron = $('<img>');
             chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
             chevron.attr('class', 'chevron');
             item.append(chevron);*/
@@ -202,7 +201,7 @@ let displayGroup = function(idxStart, entitlementsResultSet) {
         $('#list').append(item);
 
         // don't append the last one to avoid the fencepost problem
-        let borderDiv = $('<div>');
+        var borderDiv = $('<div>');
         borderDiv.addClass('divider');
         $('#list').append(borderDiv);
 

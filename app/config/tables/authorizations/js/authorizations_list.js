@@ -142,6 +142,7 @@ var resumeFn = function(fIdxStart) {
                                 util.setJSONMap(jsonMap, "report_version", reportVersion);
                                 util.setJSONMap(jsonMap, "summary_form_id", summaryFormId);
                                 util.setJSONMap(jsonMap, "summary_row_id", customReportRowId);
+                                util.setJSONMap(jsonMap, "date_created", util.getCurrentOdkTimestamp());
                                 odkData.addRow(util.distributionReportTable, jsonMap, rootRowId, resolve, reject);
                             }).then( function(result) {
                                 // passing in group read only to not break method

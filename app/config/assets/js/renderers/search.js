@@ -20,7 +20,7 @@ var options = [];
 function display() {
     $('#launch').text(odkCommon.localizeText(locale, 'view'));
 
-    let renderPromises = [];
+    var renderPromises = [];
 
     if (type === util.getMemberCustomFormId()) {
 
@@ -86,7 +86,7 @@ function getSearchOptions(tableId, isBaseTable, exclusionList) {
         odkData.query(tableId, null, null, null, null, null, null, null, null, null,
             resolve, reject);
     }).then( function(result) {
-        let columns = result.getColumns().filter( function( el ) {
+        var columns = result.getColumns().filter( function( el ) {
             return exclusionList.indexOf( el ) < 0;
         } );
 
@@ -101,7 +101,7 @@ function getSearchOptions(tableId, isBaseTable, exclusionList) {
 
 function addField(item) {
     if (item.charAt(0) !== '_') {
-        let displayText = odkCommon.localizeText(locale, item);
+        var displayText = odkCommon.localizeText(locale, item);
         if (displayText === undefined || displayText === null) {
             displayText = item;
         }
@@ -158,7 +158,7 @@ function searchFailure(error) {
 
 function launch() {
     if (type === util.getMemberCustomFormId() || type === util.getBeneficiaryEntityCustomFormId()) {
-        let joinQuery;
+        var joinQuery;
         if (key == 'Household Size') {
             joinQuery = 'SELECT * FROM ' + util.beneficiaryEntityTable + ' base, '  + util.membersTable +
                 ' mem INNER JOIN '  + customTable + ' custom ON base.' + customForeignKey +
@@ -166,7 +166,7 @@ function launch() {
                 'GROUP BY base._id ' +
                 'HAVING count(*) = ?';
         } else {
-            let whereClauseTableLabel;
+            var whereClauseTableLabel;
             if (baseTableColumns.includes(key)) {
                 whereClauseTableLabel = 'base';
             } else if (customTableColumns.includes(key)) {
@@ -178,7 +178,7 @@ function launch() {
 
         }
 
-        let url = 'config/tables/' + baseTable + '/html/' + baseTable + '_list.html';
+        var url = 'config/tables/' + baseTable + '/html/' + baseTable + '_list.html';
         if (type === util.getBeneficiaryEntityCustomFormId()) {
             url += '?type=delivery';
         } else {

@@ -1,10 +1,10 @@
 'use strict';
 
-let locale = odkCommon.getPreferredLocale();
+var locale = odkCommon.getPreferredLocale();
 
 function display() {
     $('#title').text('Distribution Options');
-    let newEntitlement = document.createElement("button");
+    var newEntitlement = document.createElement("button");
     newEntitlement.setAttribute("id", "authorization");
     newEntitlement.innerHTML = odkCommon.localizeText(locale, "create_new_entitlement");;
     newEntitlement.onclick = function() {
@@ -13,7 +13,7 @@ function display() {
     };
     document.getElementById("wrapper").appendChild(newEntitlement);
 
-    let modifyEntitlement = document.createElement("button");
+    var modifyEntitlement = document.createElement("button");
     modifyEntitlement.setAttribute("id", "authorization");
     modifyEntitlement.innerHTML = odkCommon.localizeText(locale, "change_entitlement_status");;
     modifyEntitlement.onclick = function() {
@@ -23,7 +23,7 @@ function display() {
     document.getElementById("wrapper").appendChild(modifyEntitlement);
 
 
-    let distributionReport = document.createElement("button");
+    var distributionReport = document.createElement("button");
     distributionReport.setAttribute("id", "distribution_report");
     distributionReport.innerHTML = "Fill Distribution Report";
     distributionReport.onclick = function() {

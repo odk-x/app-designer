@@ -114,7 +114,7 @@ var displayGroup = function(idxStart) {
                 odkData.query(util.getMemberCustomFormId(), '_id = ?', [membersResultSet.getData(index, 'custom_member_row_id')],
                     null, null, null, null, null, null, true, resolve, reject);
             }).then( function(customMemberResultSet) {
-                let first_last_name = customMemberResultSet.getData(0, 'first_last_name');
+                var first_last_name = customMemberResultSet.getData(0, 'first_last_name');
                 htmlItem.text('Name' + ": " + first_last_name);
             }));
         })(item, i), 0);

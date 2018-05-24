@@ -80,11 +80,11 @@ function display() {
         var filteredRoles = _.filter(roles, function (s) {
             return s.substring(0, 5) === 'GROUP';
         });
-        let defaultGroupVal = odkCommon.getSessionVariable(defaultGroupKey);
+        var defaultGroupVal = odkCommon.getSessionVariable(defaultGroupKey);
 
         superUser = $.inArray('ROLE_SUPER_USER_TABLES', roles) > -1;
         if (!superUser) {
-            let defaultGroup = resultArray[2].getDefaultGroup();
+            var defaultGroup = resultArray[2].getDefaultGroup();
             odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
         } else if (util.getWorkflowMode() !== 'TOKEN' && type === 'registration') {
             if (filteredRoles.length > 0) {
@@ -99,7 +99,7 @@ function display() {
                     $('#search').prop("disabled", true).addClass('disabled');
 
                     $('#choose_user').on('change', function() {
-                        let defaultGroup = $('#choose_user').val();
+                        var defaultGroup = $('#choose_user').val();
                         odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
                         if ($('#choose_user').val() === localizedUser) {
                             $('#barcode').prop("disabled", true).addClass('disabled');
@@ -123,7 +123,7 @@ function display() {
 
 
         $('#search').on('click', function() {
-            let val = $('#code').val();
+            var val = $('#code').val();
             odkCommon.setSessionVariable(barcodeSessionVariable, val);
             console.log("USERS: " + users);
             queryChain(val);
@@ -148,50 +148,50 @@ function addOption(item) {
 function populateSyncList() {
     if (util.getWorkflowMode() === 'TOKEN' || type === 'delivery') {
         console.log('entered delivery sync path');
-        let newRows = $('<h3>');
+        var newRows = $('<h3>');
         return new Promise( function(resolve, reject) {
-            odkData.arbitraryQuery(util.deliveryTable, 'SELECT count(*) AS count FROM ' +
+            odkData.arbitraryQuery(util.deliveryTable, 'SELECT count(*) AS total FROM ' +
                 util.deliveryTable + ' WHERE _sync_state = ?', ['new_row'],
                 null, null, resolve, reject);
         }).then( function(result) {
-            newRows.text('New since last sync: ' + result.get('count'));
+            newRows.text('New since last sync: ' + result.get('total'));
             $('#sync_list').append(newRows);
         });
     } else if (type === 'registration') {
         console.log('entered registration sync path');
 
-        let newBeneficiaryEntities = $('<h3>');
-        let newBeneficiaryEntitiesPromise = new Promise( function(resolve, reject) {
-            odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS count FROM ' +
+        var newBeneficiaryEntities = $('<h3>');
+        var newBeneficiaryEntitiesPromise = new Promise( function(resolve, reject) {
+            odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS total FROM ' +
                 util.beneficiaryEntityTable + ' WHERE _sync_state = ?', ['new_row'],
                 null, null, resolve, reject);
         });
 
-        let updatedBeneficiaryEntities = $('<h3>');
-        let updatedBeneficiaryEntitiesPromise = new Promise( function(resolve, reject) {
-            odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS count FROM ' +
+        var updatedBeneficiaryEntities = $('<h3>');
+        var updatedBeneficiaryEntitiesPromise = new Promise( function(resolve, reject) {
+            odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS total FROM ' +
                 util.beneficiaryEntityTable + ' WHERE _sync_state = ? OR _sync_state = ?',
                 ['changed', 'in_conflict'], null, null, resolve, reject);
         });
 
         if (util.getRegistrationMode() === 'INDIVIDUAL') {
             return Promise.all([newBeneficiaryEntitiesPromise, updatedBeneficiaryEntitiesPromise]).then( function(resultArr) {
-                newBeneficiaryEntities.text('New since last sync: ' + resultArr[0].get('count'));
-                updatedBeneficiaryEntities.text('Edited since last sync: ' + resultArr[1].get('count'));
+                newBeneficiaryEntities.text('New since last sync: ' + resultArr[0].get('total'));
+                updatedBeneficiaryEntities.text('Edited since last sync: ' + resultArr[1].get('total'));
                 $('#sync_list').append(newBeneficiaryEntities);
                 $('#sync_list').append(updatedBeneficiaryEntities);
             });
         } else {
-            let newMembers = $('<h3>');
-            let newMembersPromise = new Promise( function(resolve, reject) {
-                odkData.arbitraryQuery(util.membersTable, 'SELECT count(*) AS count FROM ' +
+            var newMembers = $('<h3>');
+            var newMembersPromise = new Promise( function(resolve, reject) {
+                odkData.arbitraryQuery(util.membersTable, 'SELECT count(*) AS total FROM ' +
                     util.membersTable + ' WHERE _sync_state = ?', ['new_row'],
                     null, null, resolve, reject);
             });
 
-            let updatedMembers = $('<h3>');
-            let updatedMembersPromise = new Promise( function(resolve, reject) {
-                odkData.arbitraryQuery(util.membersTable, 'SELECT count(*) AS count FROM ' +
+            var updatedMembers = $('<h3>');
+            var updatedMembersPromise = new Promise( function(resolve, reject) {
+                odkData.arbitraryQuery(util.membersTable, 'SELECT count(*) AS total FROM ' +
                     util.membersTable + ' WHERE _sync_state = ? OR _sync_state = ?',
                     ['changed', 'in_conflict'], null, null, resolve, reject);
             });
@@ -200,10 +200,10 @@ function populateSyncList() {
                                 updatedBeneficiaryEntitiesPromise,
                                 newMembersPromise,
                                 updatedMembersPromise]).then( function(resultArr) {
-                newBeneficiaryEntities.text('New households since last sync: ' + resultArr[0].get('count'));
-                updatedBeneficiaryEntities.text('Edited households since last sync: ' + resultArr[1].get('count'));
-                newMembers.text('New members since last sync: ' + resultArr[2].get('count'));
-                updatedMembers.text('Edited members since last sync: ' + resultArr[3].get('count'));
+                newBeneficiaryEntities.text('New households since last sync: ' + resultArr[0].get('total'));
+                updatedBeneficiaryEntities.text('Edited households since last sync: ' + resultArr[1].get('total'));
+                newMembers.text('New members since last sync: ' + resultArr[2].get('total'));
+                updatedMembers.text('Edited members since last sync: ' + resultArr[3].get('total'));
                 $('#sync_list').append(newBeneficiaryEntities);
                 $('#sync_list').append(newMembers);
                 $('#sync_list').append(updatedBeneficiaryEntities);
@@ -340,7 +340,7 @@ function handleRegistrationCallback(action, dispatchStr) {
                     console.log(error);
                 });
             } else if (util.getRegistrationMode() === "INDIVIDUAL") {
-                let jsonMap = {};
+                var jsonMap = {};
                 util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
                 util.setJSONMap(jsonMap, "beneficiary_entity_row_id", rootRowId);
                 util.setJSONMap(jsonMap, "date_created", util.getCurrentOdkTimestamp());
@@ -542,7 +542,7 @@ function registrationVoucherCBSuccess(result) {
         $('#search_results').text(odkCommon.localizeText(locale, "voucher_detected"));
     }
 
-    let defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+    var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
     var user = odkCommon.getSessionVariable(userKey);
 
     // TODO: verify that custom beneficiary entity table exists

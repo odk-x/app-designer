@@ -8,7 +8,7 @@ function display() {
         var locale = odkCommon.getPreferredLocale();
         $('#title').text("Delivery Summary");
 
-        let exclusionList = [];
+        var exclusionList = [];
         if (util.getWorkflowMode() === 'TOKEN') {
             exclusionList = ['authorization_description', 'authorization_id', 'custom_delivery_form_id',
                                 'custom_delivery_row_id', 'entitlement_id', 'member_id', 'is_override',

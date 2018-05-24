@@ -60,14 +60,14 @@ util.getCurrentOdkTimestamp = function() {
 
 util.populateDetailView = function(resultSet, parentDiv, locale, exclusionList) {
     if (resultSet.getCount() > 0) {
-        let columns = resultSet.getColumns();
-        let fieldListDiv = $('#' + parentDiv);
-        for (let i = 0; i < columns.length; i++) {
+        var columns = resultSet.getColumns();
+        var fieldListDiv = $('#' + parentDiv);
+        for (var i = 0; i < columns.length; i++) {
             if (!exclusionList.includes(columns[i]) && !columns[i].startsWith("_")) {
-                let line = $('<p>').attr('id', columns[i]).appendTo(fieldListDiv);
+                var line = $('<p>').attr('id', columns[i]).appendTo(fieldListDiv);
                 if (columns[i] === 'date_created') {
-                    let dateObj = odkCommon.toDateFromOdkTimeStamp(resultSet.get(columns[i]));
-                    let val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
+                    var dateObj = odkCommon.toDateFromOdkTimeStamp(resultSet.get(columns[i]));
+                    var val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
                     val += ' ' + dateObj.getHours() + ":" + dateObj.getMinutes();
                     $('<span>').attr('id', 'inner_' + columns[i]).text(val).appendTo(line);
                 }
@@ -93,7 +93,7 @@ util.populateDetailViewKeyValue = function(key, value, parentDiv, locale) {
 // parentDiv: html element to add to
 // locale: locale for translations
 util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, locale, exclusionList) {
-    let mergeResult = {};
+    var mergeResult = {};
 
     resultSets.forEach(function(rs) {
         rs.getColumns().forEach(function(column) {
@@ -105,17 +105,17 @@ util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, loca
         $.extend(mergeResult, kvPairs);
     }
 
-    let keys = Object.keys(mergeResult).sort();
+    var keys = Object.keys(mergeResult).sort();
 
-    let fieldListDiv = $('#' + parentDiv);
+    var fieldListDiv = $('#' + parentDiv);
     keys.forEach(function(key) {
         if (!key.startsWith("_") && !exclusionList.includes(key)) {
-            let line = $('<p>').attr('id', key).appendTo(fieldListDiv);
+            var line = $('<p>').attr('id', key).appendTo(fieldListDiv);
 
             if (key === 'date_created') {
-                let dateObj = odkCommon.toDateFromOdkTimeStamp(mergeResult[key]);
-                let min = dateObj.getMinutes() < 10 ? '0' : '' + dateObj.getMinutes();
-                let val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
+                var dateObj = odkCommon.toDateFromOdkTimeStamp(mergeResult[key]);
+                var min = dateObj.getMinutes() < 10 ? '0' : '' + dateObj.getMinutes();
+                var val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
                 val += ' ' + dateObj.getHours() + ":" + min;
                 $('<span>').attr('id', 'inner_' + key).text(val).appendTo(line);
             }
@@ -206,7 +206,7 @@ util.renderPageAsPromise = function(renderFunction) {
 };
 
 util.setVirtualButtonAttributes = function() {
-    let buttons = $(':button');
+    var buttons = $(':button');
     buttons.css({'height' : window.innerHeight * .15 + "px"});
     buttons.css({'font-size' : Math.min(window.innerHeight, window.innerWidth) * .07 + "px"});
     buttons.css({'margin-bottom' : window.innerHeight * .06 + "px"});

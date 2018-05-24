@@ -18,15 +18,15 @@ function triggerAuthorizationCreation() {
     }).then( function(result) {
         var dbActions = [];
 
-        for (let i = 0; i < result.getCount(); i++) {
+        for (var i = 0; i < result.getCount(); i++) {
             dbActions.push(new Promise(function(resolve, reject) {
                 odkData.updateRow(util.authorizationTable, {'status' : 'INACTIVE'}, result.getRowId(i), resolve, reject);
             }));
         }
 
         dbActions.push(new Promise(function(resolve, reject) {
-            let jsonMap = {};
-            let authorizationName = $('#code').val();
+            var jsonMap = {};
+            var authorizationName = $('#code').val();
             util.setJSONMap(jsonMap, 'name', authorizationName)
             util.setJSONMap(jsonMap, 'status', 'ACTIVE');
             util.setJSONMap(jsonMap, 'type', 'TOKEN');

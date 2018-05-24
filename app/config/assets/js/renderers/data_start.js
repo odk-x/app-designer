@@ -7,7 +7,7 @@ var locale = odkCommon.getPreferredLocale();
 
 function display() {
     $('#title').text(odkCommon.localizeText(locale, "data_categories"));
-    let benData = document.createElement("button");
+    var benData = document.createElement("button");
     benData.setAttribute("id", "beneficiary");
     benData.innerHTML = odkCommon.localizeText(locale, "view_registration_data");
     benData.onclick = function() {
@@ -16,7 +16,7 @@ function display() {
     };
     document.getElementById("wrapper").appendChild(benData);
 
-    let delData = document.createElement("button");
+    var delData = document.createElement("button");
     delData.setAttribute("id", "delivery");
     delData.innerHTML = odkCommon.localizeText(locale, "view_delivery_data");
     delData.onclick = function() {

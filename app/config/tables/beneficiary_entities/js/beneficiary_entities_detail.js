@@ -81,13 +81,13 @@ function display() {
             return Promise.resolve(null);
         }
     }).then( function(result) {
-        let keyValuePairs = {};
+        var keyValuePairs = {};
         if (result != null) {
             keyValuePairs['hh_size'] = result;
         }
 
-        let resultSets = [beneficiaryEntitiesResultSet, customResultSet];
-        let exclusionList = ['beneficiary_entity_id', 'consent_signature', 'location_accuracy',
+        var resultSets = [beneficiaryEntitiesResultSet, customResultSet];
+        var exclusionList = ['beneficiary_entity_id', 'consent_signature', 'location_accuracy',
             'location_altitude', 'location_latitude', 'location_longitude',
             'consent_signature_contentType', 'consent_signature_uriFragment',
             'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id'];
