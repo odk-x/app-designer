@@ -114,10 +114,12 @@ util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, loca
 
             if (key === 'date_created') {
                 var dateObj = odkCommon.toDateFromOdkTimeStamp(mergeResult[key]);
-                var min = dateObj.getMinutes() < 10 ? '0' : '' + dateObj.getMinutes();
-                var val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
-                val += ' ' + dateObj.getHours() + ":" + min;
-                $('<span>').attr('id', 'inner_' + key).text(val).appendTo(line);
+                if (dateObj !== null && dateObj !== undefined && dateObj !== "") {
+                    var min = dateObj.getMinutes() < 10 ? '0' : '' + dateObj.getMinutes();
+                    var val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
+                    val += ' ' + dateObj.getHours() + ":" + min;
+                    $('<span>').attr('id', 'inner_' + key).text(val).appendTo(line);
+                }
             }
             else {
                 $('<span>').attr('id', 'inner_' + key).text(mergeResult[key]).appendTo(line);
