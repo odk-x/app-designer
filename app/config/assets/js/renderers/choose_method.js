@@ -370,6 +370,10 @@ function handleTokenDeliveryCallback(action, dispatchStr) {
 
 function queryChain(passed_code) {
     code = passed_code;
+    if (code === null || code === undefined || code === "") {
+        util.displayError("Enter a beneficiary entity id");
+        return;
+    }
     if (util.getWorkflowMode() === "TOKEN") {
         tokenDeliveryFunction();
     } else if (type === 'delivery') {
@@ -405,12 +409,12 @@ function tokenDeliveryFunction() {
                     null, null, null, null, true, resolve, reject);
             });
         } else if (activeAuthorization.getCount() === 0) {
-            $('#search_results').text('There currently are no active authorizations');
+            util.displayError('There currently are no active authorizations');
             return Promise.reject('There currently are no active authorizations');
         } else {
             //this should never happen
-            $('#search_results').text('Internal Error: please contact adminstrator');
-            return Promise.reject('Internal Error: please contact adminstrator');
+            util.displayError('Internal Error: please contact administrator');
+            return Promise.reject('Internal Error: please contact administrator');
         }
     }).then( function(result) {
         console.log(result);
@@ -421,7 +425,7 @@ function tokenDeliveryFunction() {
                 odkTables.launchHTML(null, 'config/assets/html/deliver.html?authorization_id=' +
                 encodeURIComponent(activeAuthorization.getRowId(0)) + '&beneficiary_entity_id=' + encodeURIComponent(code));
             } else {
-                $('#search_results').text('This beneficiary entity id has already received the current authorization');
+                util.displayError('This beneficiary entity id has already received the current authorization');
             }
         }
     }).catch( function(reason) {
@@ -462,7 +466,7 @@ function deliveryBCheckCBFailure(error) {
 function deliveryDisabledCBSuccess(result) {
     console.log('disabledCB called');
     if (result.getCount() > 0) {
-        $('#search_results').text(odkCommon.localizeText(locale, "disabled_beneficiary_notification"));
+        util.displayError(odkCommon.localizeText(locale, "disabled_beneficiary_notification"));
     } else {
       if (util.getWorkflowMode() === 'VOUCHER') {
         // We are in Voucher mode: check for deliveries for this beneficiary
@@ -478,7 +482,7 @@ function deliveryDisabledCBSuccess(result) {
                                              'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=unregistered_voucher' +
                                              '&beneficiary_entity_id=' + encodeURIComponent(code));
           } else {
-            $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
+              util.displayError(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
           }
         });
 
@@ -488,7 +492,7 @@ function deliveryDisabledCBSuccess(result) {
 
       } else {
         // We are not in voucher mode and there is no beneficiary, enabled or disabled
-        $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
+          util.displayError(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
       }
 
     }
@@ -500,13 +504,9 @@ function deliveryDisabledCBFailure(error) {
 
 function registrationFunction() {
     console.log('registration function path entered');
-    if (code === null || code === undefined || code === "") {
-        $('#search_results').text("Enter a beneficiary entity id");
-    } else {
-        odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?', [code], null, null,
-            null, null, null, null, true, registrationBCheckCBSuccess,
-            registrationBCheckCBFailure);
-    }
+    odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?', [code], null, null,
+        null, null, null, null, true, registrationBCheckCBSuccess,
+        registrationBCheckCBFailure);
 }
 
 function registrationBCheckCBSuccess(result) {
@@ -516,7 +516,7 @@ function registrationBCheckCBSuccess(result) {
                           null, null, null, null, true, registrationVoucherCBSuccess,
                           registrationVoucherCBFailure);
     } else {
-        $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
+        util.displayError(odkCommon.localizeText(locale, "barcode_unavailable"));
         clearSessionVars();
         odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
@@ -548,7 +548,7 @@ function registrationVoucherCBSuccess(result) {
     var customBEForm = util.getBeneficiaryEntityCustomFormId();
     if (customBEForm === undefined || customBEForm === null || customBEForm === "") {
         // should we provide a ui to register without survey?
-        $('#search_results').text("Beneficiary Entity Form not defined");
+        util.displayError("Beneficiary Entity Custom Form not defined");
         return;
     }
     var customRowId = util.genUUID();
@@ -608,7 +608,7 @@ function regOverrideBenSuccess(result) {
                                       'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_list.html?type=' +
                                       encodeURIComponent(type));
     } else {
-        $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
+        util.displayError(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
     }
 }
 
@@ -625,7 +625,7 @@ function newEntitlementFunction() {
                       null, null, null, null, null, null, true, benEntOverrideCBSuccess,
                       benEntOverrideCBFailure);
     } else {
-        $('#search_results').text(odkCommon.localizeText(locale, "enter_beneficiary_entity_id"));
+        util.displayError(odkCommon.localizeText(locale, "enter_beneficiary_entity_id"));
     }
 }
 
@@ -637,7 +637,7 @@ function benEntOverrideCBSuccess(result) {
                       [util.getQueryParameter('authorization_id')], null, null, null, null, null,
                       null, true, restrictOverridesCheckSuccess, restrictOverridesCheckFailure);
     } else {
-        $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
+        util.displayError(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
     }
 }
 
@@ -668,7 +668,7 @@ function entCheckCBSuccess(result) {
                       null, null, null, null, null, null, true, createOverrideCBSuccess,
                       createOverrideCBFailure);
     } else {
-        $('#search_results').text(odkCommon.localizeText(locale, "already_qualifies_override"));
+        util.displayError(odkCommon.localizeText(locale, "already_qualifies_override"));
     }
 }
 
@@ -720,7 +720,7 @@ function entitlementStatusFunction() {
             [code], null, null, null, null, null, null, true, resolve, reject)
     }).then( function(result) {
         if (result.getCount() === 0) {
-            $('#search_results').text(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
+            util.displayError(odkCommon.localizeText(locale, "missing_beneficiary_notification"));
         } else {
             clearSessionVars();
             odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
