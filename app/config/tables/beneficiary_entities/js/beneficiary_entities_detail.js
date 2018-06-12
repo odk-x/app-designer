@@ -29,10 +29,17 @@ function display() {
     }
     rootRowId = util.getQueryParameter('rootRowId');
 
+    var exclusionList = ['beneficiary_entity_id', 'consent_signature', 'location_accuracy',
+        'location_altitude', 'location_latitude', 'location_longitude',
+        'consent_signature_contentType', 'consent_signature_uriFragment',
+        'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id'];
+
     return new Promise( function(resolve, reject) {
+        // retrieve custom row data
         odkData.getViewData(resolve, reject);
     }).then( function(result) {
         customResultSet = result;
+        // retrieve base row data
         return new Promise(function (resolve, reject) {
             odkData.query(util.beneficiaryEntityTable, "_id = ?", [rootRowId],
                 null, null, null, null, null, null, true, resolve, reject);
@@ -40,22 +47,23 @@ function display() {
     }).then(function(result) {
         beneficiaryEntitiesResultSet = result;
         beneficiaryEntityId = beneficiaryEntitiesResultSet.get('beneficiary_entity_id');
+        // set title as beneficiary entity id
         $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + beneficiaryEntityId);
         if (type === 'override_beneficiary_entity_status') {
+            // administrator changing beneficiary entity status
             $('#toggle_workflow').hide();
             initBeneficiaryStatusToggle(beneficiaryEntitiesResultSet.getData(0, "status"));
             exclusionList.push('status');
         }  else if (type === 'override_ent_status') {
+            // administrator changing entitlement status of beneficiary entity
             $('#toggle_workflow').hide();
             setSublistToAllPendingEntitlements('change_status');
 
-
         } else if (util.getRegistrationMode() === "INDIVIDUAL") {
+            $('#toggle_workflow').hide();
             if (beneficiaryEntitiesResultSet.get('status') === 'DISABLED') {
                 // do nothing, this should be called as a detail view without sublist
             } else {
-                console.log("entered individual path");
-                $('#toggle_workflow').hide();
                 initEntitlementToggle();
                 setToDeliveryView(false);
             }
@@ -87,16 +95,15 @@ function display() {
         }
 
         var resultSets = [beneficiaryEntitiesResultSet, customResultSet];
-        var exclusionList = ['beneficiary_entity_id', 'consent_signature', 'location_accuracy',
-            'location_altitude', 'location_latitude', 'location_longitude',
-            'consent_signature_contentType', 'consent_signature_uriFragment',
-            'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id'];
+
 
         util.populateDetailViewArbitrary(resultSets, keyValuePairs, "field_list", locale, exclusionList);
     }).catch( function(reason) {
         console.log('failed with message: ' + reason);
     });
 }
+
+
 
  function initBeneficiaryStatusToggle(status) {
      $('#switch-title-id').text('Beneficiary Entity Status'); // TODO: localize this
@@ -160,6 +167,10 @@ function setToHouseholdView() {
     });
     $('#switch-id').hide();
     setSublistToHousehold();
+}
+
+function setToIndividualView() {
+
 }
 
 function setToDeliveryView(includeWorkflowButton) {
