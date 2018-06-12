@@ -117,6 +117,7 @@ function display() {
         $('#barcode').on('click', function() {
             var dispatchStruct = JSON.stringify({actionTypeKey: actionBarcode,
                 htmlPath:htmlFileNameValue, userAction:userActionValue});
+
             odkCommon.doAction(dispatchStruct, 'com.google.zxing.client.android.SCAN', null);
         });
         myTimeoutVal = setTimeout(callBackFn(), 1000);
@@ -160,14 +161,14 @@ function populateSyncList() {
     } else if (type === 'registration') {
         console.log('entered registration sync path');
 
-        var newBeneficiaryEntities = $('<h3>');
+        var newMergedEntities = $('<h3>');
         var newBeneficiaryEntitiesPromise = new Promise( function(resolve, reject) {
             odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS total FROM ' +
                 util.beneficiaryEntityTable + ' WHERE _sync_state = ?', ['new_row'],
                 null, null, resolve, reject);
         });
 
-        var updatedBeneficiaryEntities = $('<h3>');
+        var updatedMergedEntities = $('<h3>');
         var updatedBeneficiaryEntitiesPromise = new Promise( function(resolve, reject) {
             odkData.arbitraryQuery(util.beneficiaryEntityTable, 'SELECT count(*) AS total FROM ' +
                 util.beneficiaryEntityTable + ' WHERE _sync_state = ? OR _sync_state = ?',
@@ -176,10 +177,10 @@ function populateSyncList() {
 
         if (util.getRegistrationMode() === 'INDIVIDUAL') {
             return Promise.all([newBeneficiaryEntitiesPromise, updatedBeneficiaryEntitiesPromise]).then( function(resultArr) {
-                newBeneficiaryEntities.text('New since last sync: ' + resultArr[0].get('total'));
-                updatedBeneficiaryEntities.text('Edited since last sync: ' + resultArr[1].get('total'));
-                $('#sync_list').append(newBeneficiaryEntities);
-                $('#sync_list').append(updatedBeneficiaryEntities);
+                newMergedEntities.text('New since last sync: ' + resultArr[0].get('total'));
+                updatedMergedEntities.text('Edited since last sync: ' + resultArr[1].get('total'));
+                $('#sync_list').append(newMergedEntities);
+                $('#sync_list').append(updatedMergedEntities);
             });
         } else {
             var newMembers = $('<h3>');
@@ -200,14 +201,12 @@ function populateSyncList() {
                                 updatedBeneficiaryEntitiesPromise,
                                 newMembersPromise,
                                 updatedMembersPromise]).then( function(resultArr) {
-                newBeneficiaryEntities.text('New households since last sync: ' + resultArr[0].get('total'));
-                updatedBeneficiaryEntities.text('Edited households since last sync: ' + resultArr[1].get('total'));
-                newMembers.text('New members since last sync: ' + resultArr[2].get('total'));
-                updatedMembers.text('Edited members since last sync: ' + resultArr[3].get('total'));
-                $('#sync_list').append(newBeneficiaryEntities);
-                $('#sync_list').append(newMembers);
-                $('#sync_list').append(updatedBeneficiaryEntities);
-                $('#sync_list').append(updatedMembers);
+                newMergedEntities.text('New households [members] since last sync: '
+                    + resultArr[0].get('total') + ' [' + resultArr[1].get('total') + ']');
+                updatedMergedEntities.text('Edited households [members] since last sync: '
+                    + resultArr[1].get('total') + ' [' + resultArr[3].get('total') + ']');
+                $('#sync_list').append(newMergedEntities);
+                $('#sync_list').append(updatedMergedEntities);
             });
         }
 
@@ -502,7 +501,7 @@ function deliveryDisabledCBFailure(error) {
 function registrationFunction() {
     console.log('registration function path entered');
     if (code === null || code === undefined || code === "") {
-        $('#search_results').text(odkCommon.localizeText(locale, "barcode_unavailable"));
+        $('#search_results').text("Enter a beneficiary entity id");
     } else {
         odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?', [code], null, null,
             null, null, null, null, true, registrationBCheckCBSuccess,
