@@ -77,6 +77,11 @@
         "type": "string",
         "name": "date_created",
         "_row_num": 15
+      },
+      {
+        "type": "string",
+        "name": "assigned_item_pack_code",
+        "_row_num": 16
       }
     ],
     "settings": [
@@ -358,6 +363,16 @@
           }
         ],
         "elementKey": "date_created"
+      },
+      "assigned_item_pack_code": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "assigned_item_pack_code"
       }
     },
     "section_names": [
@@ -787,6 +802,19 @@
         "elementName": "date_created",
         "elementSet": "data",
         "elementPath": "date_created"
+      },
+      "assigned_item_pack_code": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "assigned_item_pack_code",
+        "elementName": "assigned_item_pack_code",
+        "elementSet": "data",
+        "elementPath": "assigned_item_pack_code"
       },
       "_id": {
         "type": "string",
