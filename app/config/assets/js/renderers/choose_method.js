@@ -288,16 +288,16 @@ function handleRegistrationCallback(action, dispatchStr) {
             if (util.getRegistrationMode() === "HOUSEHOLD") {
                 dataUtil.selfHealMembers(rootRowId, customRowId)
                     .then( function(result) {
-                    clearSessionVars();
-                    if (result) {
-                        console.log("added base member rows");
-                    } else {
-                        console.log("no members were created");
-                    }
-                    clearSessionVars();
-                    odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
-                        'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable
-                        + '_detail.html?type=' + encodeURIComponent(type));
+                        clearSessionVars();
+                        if (result) {
+                            console.log("added base member rows");
+                        } else {
+                            console.log("no members were created");
+                        }
+                        clearSessionVars();
+                        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
+                            'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable
+                            + '_detail.html?type=' + encodeURIComponent(type));
 
                     }).catch( function(error) {
                         console.log(error);

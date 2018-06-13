@@ -563,18 +563,17 @@ dataUtil.selfHealMembers = function(beneficiaryEntityBaseRowId, beneficiaryEntit
 
         // add base rows
         var customMemberRows = resultArr[0];
-        console.log("adding custom rows: " + customMemberRows.getCount());
+        console.log("adding base rows: " + customMemberRows.getCount());
         for (var i = 0; i < customMemberRows.getCount(); i++) {
             let jsonMap = {};
-            util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
+            util.setJSONMap(jsonMap, '_row_owner', customMemberRows.getData(i, '_row_owner'));
             util.setJSONMap(jsonMap, 'beneficiary_entity_row_id', beneficiaryEntityBaseRowId);
             util.setJSONMap(jsonMap, 'date_created', customMemberRows.getData(i, 'date_created'));
             util.setJSONMap(jsonMap, 'custom_member_form_id', util.getMemberCustomFormId());
             util.setJSONMap(jsonMap, 'custom_member_row_id', customMemberRows.getRowId(i));
             util.setJSONMap(jsonMap, 'status', 'ENABLED');
-            util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
-            util.setJSONMap(jsonMap, '_group_modify', odkCommon.getSessionVariable(defaultGroupKey));
-            util.setJSONMap(jsonMap, '_default_access', 'HIDDEN');
+            util.setJSONMap(jsonMap, '_group_modify', customMemberRows.getData(i, '_group_modify'));
+            util.setJSONMap(jsonMap, '_default_access', customMemberRows.getData(i, '_default_access'));
 
             rowActions.push(new Promise( function(resolve, reject) {
                 odkData.addRow(util.membersTable, jsonMap, util.genUUID(), resolve, reject);
