@@ -6,7 +6,6 @@
 var actionTypeKey = "actionTypeKey";
 var actionBarcode = 0;
 var actionRegistration = 1;
-var actionTokenDelivery = 2;
 var htmlFileNameValue = "delivery_start";
 var userActionValue = "launchBarcode";
 var barcodeSessionVariable = "barcodeVal";
@@ -245,10 +244,6 @@ function callBackFn () {
             handleRegistrationCallback(action, dispatchStr);
             odkCommon.removeFirstQueuedAction();
             break;
-        case actionTokenDelivery:
-            handleTokenDeliveryCallback(action, dispatchStr);
-            odkCommon.removeFirstQueuedAction();
-            break;
         default:
             console.log("Error: unrecognized action type in callback");
             odkCommon.removeFirstQueuedAction();
@@ -291,54 +286,25 @@ function handleRegistrationCallback(action, dispatchStr) {
             var customRowId = action.jsonValue.result.instanceId;
             var rootRowId = dispatchStr[util.rootRowIdKey];
             if (util.getRegistrationMode() === "HOUSEHOLD") {
-                var memberRowsPromise = new Promise( function(resolve, reject) {
-                    odkData.query(util.getMemberCustomFormId(), util.getCustomBeneficiaryRowIdColumn() + ' = ?', [action.jsonValue.result.instanceId],
-                        null, null, null, null, null, null, true, resolve, reject)
-                });
-
-                var rootBERowPromise = new Promise( function(resolve, reject) {
-                    odkData.query(util.beneficiaryEntityTable, '_id = ?', [rootRowId],
-                        null, null, null, null, null, null, true, resolve, reject)
-                });
-                console.log("about to execute two promises");
-                var addRowActions = [];
-                Promise.all([memberRowsPromise, rootBERowPromise]).then( function(resultArr) {
-                    var customMemberRows = resultArr[0];
-                    var rootBERow = resultArr[1];
-                    console.log(customMemberRows.getCount());
-                    for (var i = 0; i < customMemberRows.getCount(); i++) {
-                        var jsonMap = {};
-                        util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
-                        util.setJSONMap(jsonMap, 'beneficiary_entity_row_id', rootRowId);
-                        //util.setJSONMap(jsonMap, 'date_created', );
-                        util.setJSONMap(jsonMap, 'custom_member_form_id', util.getMemberCustomFormId());
-                        util.setJSONMap(jsonMap, 'custom_member_row_id', customMemberRows.getRowId(i));
-                        util.setJSONMap(jsonMap, 'status', 'ENABLED');
-                        util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
-                        util.setJSONMap(jsonMap, '_group_modify', odkCommon.getSessionVariable(defaultGroupKey));
-                        util.setJSONMap(jsonMap, '_default_access', 'HIDDEN');
-
-                        addRowActions.push(new Promise( function(resolve, reject) {
-                            odkData.addRow(util.membersTable, jsonMap, util.genUUID(), resolve, reject);
-                        }));
-                    }
-                    return Promise.all(addRowActions);
-                }).then( function(result) {
+                dataUtil.selfHealMembers(rootRowId, customRowId)
+                    .then( function(result) {
                     clearSessionVars();
-                    if (addRowActions.length > 0) {
+                    if (result) {
                         console.log("added base member rows");
                     } else {
                         console.log("no members were created");
                     }
-
+                    clearSessionVars();
                     odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
                         'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable
-                        + '_detail.html?type=' + encodeURIComponent(type) + '&rootRowId=' + encodeURIComponent(rootRowId));
+                        + '_detail.html?type=' + encodeURIComponent(type));
 
-                }).catch( function(error) {
-                    console.log(error);
-                });
+                    }).catch( function(error) {
+                        console.log(error);
+                    });
             } else if (util.getRegistrationMode() === "INDIVIDUAL") {
+
+                // need to verify why it is necessary to add a base member row when in individual mode
                 var jsonMap = {};
                 util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
                 util.setJSONMap(jsonMap, "beneficiary_entity_row_id", rootRowId);
@@ -353,19 +319,11 @@ function handleRegistrationCallback(action, dispatchStr) {
                     clearSessionVars();
                     odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
                         'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable +
-                        '_detail.html?type=delivery&rootRowId=' + encodeURIComponent(rootRowId));
+                        '_detail.html?type=delivery');
                 });
             }
         }
     });
-}
-
-function handleTokenDeliveryCallback(action, dispatchStr) {
-    dataUtil.validateCustomTableEntry(action, dispatchStr, "delivery", util.deliveryTable).then( function(result) {
-        if (result) {
-            //any custom UI upon custom delivery success
-        }
-    })
 }
 
 function queryChain(passed_code) {
@@ -384,7 +342,7 @@ function queryChain(passed_code) {
         beneficiaryEntityStatusFunction();
     } else if (type === 'new_ent') {
         newEntitlementFunction();
-    } else if (type == 'override_ent_status') {
+    } else if (type === 'override_ent_status') {
         entitlementStatusFunction();
     }
 }

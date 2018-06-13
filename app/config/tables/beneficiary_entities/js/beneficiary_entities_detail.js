@@ -10,7 +10,7 @@ var beneficiaryEntitiesResultSet;
 var customResultSet;
 var beneficiaryEntityId;
 var type;
-var rootRowId;
+var retryLimit = 5;
 
 // Note that the call to open this detail view will be for the custom beneficiary entity table so that
 // pressing the edit button in the top right will open the appropriate form.
@@ -27,7 +27,6 @@ function display() {
 
         return Promise.resolve(null);
     }
-    rootRowId = util.getQueryParameter('rootRowId');
 
     var exclusionList = ['beneficiary_entity_id', 'consent_signature', 'location_accuracy',
         'location_altitude', 'location_latitude', 'location_longitude',
@@ -41,10 +40,13 @@ function display() {
         customResultSet = result;
         // retrieve base row data
         return new Promise(function (resolve, reject) {
-            odkData.query(util.beneficiaryEntityTable, "_id = ?", [rootRowId],
+            odkData.query(util.beneficiaryEntityTable, "custom_beneficiary_entity_row_id = ?", [customResultSet.getRowId(0)],
                 null, null, null, null, null, null, true, resolve, reject);
         });
     }).then(function(result) {
+
+        // populate title, workflow toggles, and sublist
+
         beneficiaryEntitiesResultSet = result;
         beneficiaryEntityId = beneficiaryEntitiesResultSet.get('beneficiary_entity_id');
         // set title as beneficiary entity id
@@ -81,7 +83,6 @@ function display() {
             }
         }
 
-
         if (util.getRegistrationMode() === 'HOUSEHOLD') {
 
             return dataUtil.getHouseholdSize(beneficiaryEntitiesResultSet.getRowId(0));
@@ -89,20 +90,42 @@ function display() {
             return Promise.resolve(null);
         }
     }).then( function(result) {
+
+        // populate detail view of beneficiary entity
+
         var keyValuePairs = {};
         if (result != null) {
             keyValuePairs['hh_size'] = result;
         }
-
         var resultSets = [beneficiaryEntitiesResultSet, customResultSet];
 
-
         util.populateDetailViewArbitrary(resultSets, keyValuePairs, "field_list", locale, exclusionList);
+
     }).catch( function(reason) {
         console.log('failed with message: ' + reason);
+    }).finally( function() {
+        // extracting the url fragment
+        var hash = window.location.hash;
+        var retryCount;
+        if (hash === undefined || hash === null || hash === '') {
+            retryCount = 1;
+        } else {
+            retryCount = parseInt(hash.substring(hash.indexOf('#')), 10);
+        }
+
+        if (retryCount < retryLimit) {
+            dataUtil.selfHealMembers(beneficiaryEntitiesResultSet.getRowId(0), customResultSet.getRowId(0))
+                .then( function(result) {
+                    if (result) {
+                        window.location.hash += "#" + retryCount + 1;
+                        window.location.reload();
+                    }
+                });
+        } else {
+            // TODO: display some error to the user about an inconsistent state for this beneficiary entity
+        }
     });
 }
-
 
 
  function initBeneficiaryStatusToggle(status) {

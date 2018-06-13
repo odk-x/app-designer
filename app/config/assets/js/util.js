@@ -532,6 +532,74 @@ dataUtil.reconcileTokenAuthorizations = function() {
     });
 };
 
+// Promise resolves to true if the database was changed through healing
+dataUtil.selfHealMembers = function(beneficiaryEntityBaseRowId, beneficiaryEntityCustomRowId) {
+
+    var rowActions = [];
+
+    // get all custom member rows from this beneficiary entity which do not have a corresponding base member row
+    var danglingCustomMembers = new Promise( function(resolve, reject) {
+        var getDanglingCustomMembers = "SELECT * FROM " + util.getMemberCustomFormId()
+            + " LEFT JOIN " + util.membersTable +
+            " ON " + util.membersTable + ".custom_member_row_id = " + util.getMemberCustomFormId() + "._id" +
+            " WHERE " + util.getMemberCustomFormId() + ".custom_beneficiary_entity_row_id = ? " +
+            "AND " + util.membersTable + ".custom_member_row_id IS NULL";
+        odkData.arbitraryQuery(util.getMemberCustomFormId(), getDanglingCustomMembers, [beneficiaryEntityCustomRowId], null, null, resolve, reject);
+    });
+
+    // get all base member rows from this beneficiary entity which do not have a corresponding custom member row
+    var danglingBaseMembers = new Promise( function(resolve, reject) {
+        var getDanglingBaseMembers = "SELECT * FROM " + util.membersTable
+            + " LEFT JOIN " + util.getMemberCustomFormId() +
+            " ON " + util.membersTable + ".custom_member_row_id = " + util.getMemberCustomFormId() +  "._id" +
+            " WHERE " + util.membersTable + ".beneficiary_entity_row_id = ? " +
+            "AND "+ util.getMemberCustomFormId() + "._id IS NULL";
+        odkData.arbitraryQuery(util.getMemberCustomFormId(), getDanglingBaseMembers, [beneficiaryEntityBaseRowId], null, null, resolve, reject);
+    });
+
+
+    return Promise.all([danglingCustomMembers, danglingBaseMembers])
+    .then( function(resultArr) {
+
+        // add base rows
+        var customMemberRows = resultArr[0];
+        console.log("adding custom rows: " + customMemberRows.getCount());
+        for (var i = 0; i < customMemberRows.getCount(); i++) {
+            let jsonMap = {};
+            util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
+            util.setJSONMap(jsonMap, 'beneficiary_entity_row_id', beneficiaryEntityBaseRowId);
+            util.setJSONMap(jsonMap, 'date_created', customMemberRows.getData(i, 'date_created'));
+            util.setJSONMap(jsonMap, 'custom_member_form_id', util.getMemberCustomFormId());
+            util.setJSONMap(jsonMap, 'custom_member_row_id', customMemberRows.getRowId(i));
+            util.setJSONMap(jsonMap, 'status', 'ENABLED');
+            util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
+            util.setJSONMap(jsonMap, '_group_modify', odkCommon.getSessionVariable(defaultGroupKey));
+            util.setJSONMap(jsonMap, '_default_access', 'HIDDEN');
+
+            rowActions.push(new Promise( function(resolve, reject) {
+                odkData.addRow(util.membersTable, jsonMap, util.genUUID(), resolve, reject);
+            }));
+        }
+
+
+        // delete base rows
+        var baseMemberRows = resultArr[1];
+        console.log("remove dangling base rows: " + baseMemberRows.getCount());
+        for (var i = 0; i < baseMemberRows.getCount(); i++) {
+            rowActions.push(new Promise( function(resolve, reject) {
+                odkData.deleteRow(util.membersTable, null, baseMemberRows.getRowId(i), resolve, reject);
+            }));
+        }
+        return Promise.all(rowActions);
+    }).then( function(result) {
+        if (rowActions.length === 0) {
+            return Promise.resolve(false);
+        } else {
+            return Promise.resolve(true);
+        }
+    });
+};
+
 /*dataUtil.getGroupedEntitlements = function(beneficiaryEntityId) {
 
 
