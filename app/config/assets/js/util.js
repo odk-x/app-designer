@@ -67,9 +67,12 @@ util.populateDetailView = function(resultSet, parentDiv, locale, exclusionList) 
                 var line = $('<p>').attr('id', columns[i]).appendTo(fieldListDiv);
                 if (columns[i] === 'date_created') {
                     var dateObj = odkCommon.toDateFromOdkTimeStamp(resultSet.get(columns[i]));
-                    var val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
-                    val += ' ' + dateObj.getHours() + ":" + dateObj.getMinutes();
-                    $('<span>').attr('id', 'inner_' + columns[i]).text(val).appendTo(line);
+                    if (dateObj !== null && dateObj !== undefined && dateObj !== "") {
+                        var min = dateObj.getMinutes() < 10 ? '0' : '' + dateObj.getMinutes();
+                        var val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
+                        val += ' ' + dateObj.getHours() + ":" + min;
+                        $('<span>').attr('id', 'inner_' + columns[i]).text(val).appendTo(line);
+                    }
                 }
                 else {
                     $('<span>').attr('id', 'inner_' + columns[i]).text(resultSet.get(columns[i])).appendTo(line);
@@ -129,6 +132,7 @@ util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, loca
         }
     });
 };
+
 
 util.displayError = function(text) {
     alert(text());
