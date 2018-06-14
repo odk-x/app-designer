@@ -406,9 +406,7 @@ dataUtil.addDeliveryRowByEntitlement = function(entitlementRow, customDeliveryFo
     util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
     util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
     util.setJSONMap(jsonMap, '_default_access', entitlementRow.get('_default_access'));
-
-    // Ori & Waylon will fix this
-    //util.setJSONMap(jsonMap, 'assigned_code', entitlement_row.get('assigned_code'));
+    util.setJSONMap(jsonMap, 'assigned_item_pack_code', entitlement_row.get('assigned_item_pack_code'));
     util.setJSONMap(jsonMap, '_group_read_only', entitlementRow.get('_group_read_only'));
 
     return new Promise(function(resolve, reject) {
