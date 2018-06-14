@@ -340,6 +340,8 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
  * @param customFormForeignKey is the column in the base table to find what the custom row id should be set to
  * @param actionTypeValue is the actionType to set to the dispatchStruct actionTypeKey for clients to customize handlers for returning from Survey
  * @param dispatchStruct is an optional parameter which can be used to prepopulate the dispatchStruct with additonal custom values (useful for leveraging the additionalCustomForms schema)
+ * @param visibilityColumn is the column of the group permission we are setting
+ * @param is an optionally pre-populated map of kv pairs to populate the new row with
  */
 
 dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, customFormForeignKey, actionTypeValue, dispatchStruct, visibilityColumn, jsonMap) {
@@ -349,7 +351,7 @@ dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, 
     if (!baseEntry || baseEntry.getCount === 0) {
         throw ('Base table entry is invalid');
     }
-    if (jsonMap == null) {
+    if (jsonMap === null) {
         jsonMap = {};
     }
 
@@ -407,7 +409,7 @@ dataUtil.addDeliveryRowByEntitlement = function(entitlementRow, customDeliveryFo
 
     // Ori & Waylon will fix this
     //util.setJSONMap(jsonMap, 'assigned_code', entitlement_row.get('assigned_code'));
-    util.setJSONMap(jsonMap, '_group_read_only', entitlementRow.get('_group_modify'));
+    util.setJSONMap(jsonMap, '_group_read_only', entitlementRow.get('_group_read_only'));
 
     return new Promise(function(resolve, reject) {
         odkData.addRow(util.deliveryTable, jsonMap, util.genUUID(), resolve, reject);
@@ -509,7 +511,7 @@ dataUtil.validateCustomTableEntry = function(action, dispatchStr, label, rootFor
 
 dataUtil.reconcileTokenAuthorizations = function() {
     return new Promise( function(resolve, reject) {
-        odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', "TOKEN"], null, null,
+        odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', 'TOKEN'], null, null,
             null, null, null, null, true, resolve,
             reject);
     }).then( function(result) {
@@ -572,7 +574,7 @@ dataUtil.selfHealMembers = function(beneficiaryEntityBaseRowId, beneficiaryEntit
             let jsonMap = {};
             util.setJSONMap(jsonMap, '_row_owner', customMemberRows.getData(i, '_row_owner'));
             util.setJSONMap(jsonMap, 'beneficiary_entity_row_id', beneficiaryEntityBaseRowId);
-            util.setJSONMap(jsonMap, 'date_created', customMemberRows.getData(i, 'date_created'));
+            util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
             util.setJSONMap(jsonMap, 'custom_member_form_id', util.getMemberCustomFormId());
             util.setJSONMap(jsonMap, 'custom_member_row_id', customMemberRows.getRowId(i));
             util.setJSONMap(jsonMap, 'status', 'ENABLED');
