@@ -41,9 +41,9 @@ tokenIndex.display = function() {
             var override = document.createElement("button");
             override.setAttribute("id", "override");
             override.setAttribute('type', 'reg');
-            override.innerHTML = "Administrator Reset";
+            override.innerHTML = "Administrator Options";
             override.onclick = function() {
-                odkTables.launchHTML(null, 'config/assets/html/token_authorization_creator.html');
+                odkTables.launchHTML(null, 'config/assets/html/token_overrides.html');
             };
             document.getElementById("wrapper").appendChild(override);
         }

@@ -135,7 +135,7 @@ util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, loca
 
 
 util.displayError = function(text) {
-    alert(text());
+    alert(text);
 };
 
 
@@ -508,11 +508,7 @@ dataUtil.validateCustomTableEntry = function(action, dispatchStr, label, rootFor
 };
 
 dataUtil.reconcileTokenAuthorizations = function() {
-    return new Promise( function(resolve, reject) {
-        odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', 'TOKEN'], null, null,
-            null, null, null, null, true, resolve,
-            reject);
-    }).then( function(result) {
+    return dataUtil.getCurrentTokenAuthorizations().then( function(result) {
         var deactivateActions = [];
         if (result.getCount() > 1) {
             var maxIndex = -1;
@@ -533,6 +529,14 @@ dataUtil.reconcileTokenAuthorizations = function() {
             }
         }
         return Promise.all(deactivateActions);
+    });
+};
+
+dataUtil.getCurrentTokenAuthorizations = function() {
+    return new Promise( function(resolve, reject) {
+        odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', 'TOKEN'], null, null,
+            null, null, null, null, true, resolve,
+            reject);
     });
 };
 

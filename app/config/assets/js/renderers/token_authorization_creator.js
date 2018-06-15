@@ -4,7 +4,7 @@ function display() {
 
     $('#title').text(odkCommon.localizeText(locale, 'choose_authorization_name'));
 
-    $('#trigger').text(odkCommon.localizeText(locale, 'trigger_reset'));
+    $('#trigger').text('Create Authorization');
 
     //$('#code').attr('placeholder', odkCommon.localizeText(locale, ''))
 
@@ -37,8 +37,8 @@ function triggerAuthorizationCreation() {
         return Promise.all(dbActions);
     }).then( function(result) {
         $('#trigger').prop('disabled', true);
-        $('#confirmation').text(odkCommon.localizeText(locale, 'administrator_reset_succeeded'));
+        $('#confirmation').text('Authorization Successfully Created');
     }, function(error) {
-        $('#confirmation').text(odkCommon.localizeText(locale, 'administrator_reset_failed'));
+        $('#confirmation').text('Authorization Creation Failure');
     });
 }
