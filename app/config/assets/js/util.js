@@ -308,28 +308,41 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
         if (entitlementRow === undefined || entitlementRow.getCount === 0) {
             return Promise.reject('Failed to retrieve entitlement.');
         }
-        console.log(entitlementRow.get('authorization_id'));
         return dataUtil.getRow(util.authorizationTable, entitlementRow.get('authorization_id'));
     }).then(function(authorizationRow) {
-        console.log(authorizationRow.getCount());
         if (dataUtil.isCustomDeliveryAuthorization(authorizationRow)) {
+            dataUtil.tableExists(authorizationRow.getData(0, 'custom_delivery_form_id'))
+                .then(function (result) {
+                    if (!result) {
+                        util.displayError('Specified delivery form cannot be found. Unable to deliver.');
+                        return;
+                    }
 
-            var customDeliveryRowId = util.genUUID();
-            var jsonMap = {};
-            var assigned_code = entitlementRow.get('assigned_item_pack_code');
-            if (assigned_code !== undefined && assigned_code !== null && assigned_code !== "") {
-                util.setJSONMap(jsonMap, 'assigned_item_pack_code', assigned_code);
-            }
-            dataUtil.addDeliveryRowByEntitlement(entitlementRow, authorizationRow.get("custom_delivery_form_id"), customDeliveryRowId)
-                .then( function(rootDeliveryRow) {
-                    dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null, "_group_read_only", jsonMap);
-                }).catch( function(reason) {
-                    console.log('Failed to perform custom entitlement delivery: ' + reason);
+                    var customDeliveryRowId = util.genUUID();
+                    var jsonMap = {};
+                    var assigned_code = entitlementRow.get('assigned_item_pack_code');
+                    if (assigned_code !== undefined && assigned_code !== null && assigned_code !== "") {
+                        util.setJSONMap(jsonMap, 'assigned_item_pack_code', assigned_code);
+                    }
+                    dataUtil.addDeliveryRowByEntitlement(entitlementRow, authorizationRow.get("custom_delivery_form_id"), customDeliveryRowId)
+                        .then(function (rootDeliveryRow) {
+                            dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null, "_group_read_only", jsonMap);
+                        }).catch(function (reason) {
+                        console.log('Failed to perform custom entitlement delivery: ' + reason);
+                    });
                 });
         } else {
             console.log('Performing simple delivery');
             odkTables.launchHTML(null, 'config/assets/html/deliver.html?entitlement_id=' +  encodeURIComponent(entitlementRow.getRowId(0)));
         }
+    });
+};
+
+dataUtil.tableExists = function(tableId) {
+    return new Promise( function(resolve, reject) {
+        odkData.getAllTableIds(resolve, reject);
+    }).then( function(result) {
+        return Promise.resolve(result.getAllTableIds().includes(tableId));
     });
 };
 
@@ -406,7 +419,7 @@ dataUtil.addDeliveryRowByEntitlement = function(entitlementRow, customDeliveryFo
     util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
     util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
     util.setJSONMap(jsonMap, '_default_access', entitlementRow.get('_default_access'));
-    util.setJSONMap(jsonMap, 'assigned_item_pack_code', entitlement_row.get('assigned_item_pack_code'));
+    util.setJSONMap(jsonMap, 'assigned_item_pack_code', entitlementRow.get('assigned_item_pack_code'));
     util.setJSONMap(jsonMap, '_group_read_only', entitlementRow.get('_group_read_only'));
 
     return new Promise(function(resolve, reject) {
@@ -640,7 +653,7 @@ dataUtil.selfHealMembers = function(beneficiaryEntityBaseRowId, beneficiaryEntit
         var pendingEntitlements = [];
         var deliveredEntitlements = [];
         for (var i = 0; i < originalEntitlementSet.getCount(); i++) {
-            if (result.getRowIds().contains(originalEntitlementSet.getRowId(i))) {
+            if (result.getRowIds().includes(originalEntitlementSet.getRowId(i))) {
                 deliveredEntitlements.push(originalEntitlementSet.get(i));
             } else {
                 deliveredEntitlements.push(originalEntitlementSet.get(i));
