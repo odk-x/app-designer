@@ -3,3 +3,4 @@ build/
 app/output/props/*
 app/output/db
 tempZipDir
+.idea/*
