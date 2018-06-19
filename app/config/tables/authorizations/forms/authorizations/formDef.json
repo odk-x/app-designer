@@ -48,7 +48,7 @@
       },
       {
         "type": "string",
-        "name": "restrict_overrides",
+        "name": "extra_field_entitlements",
         "_row_num": 11
       },
       {
@@ -318,7 +318,7 @@
         ],
         "elementKey": "report_version"
       },
-      "restrict_overrides": {
+      "extra_field_entitlements": {
         "type": "string",
         "_defn": [
           {
@@ -326,7 +326,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "restrict_overrides"
+        "elementKey": "extra_field_entitlements"
       },
       "status": {
         "type": "string",
@@ -746,7 +746,7 @@
         "elementSet": "data",
         "elementPath": "report_version"
       },
-      "restrict_overrides": {
+      "extra_field_entitlements": {
         "type": "string",
         "_defn": [
           {
@@ -754,10 +754,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "restrict_overrides",
-        "elementName": "restrict_overrides",
+        "elementKey": "extra_field_entitlements",
+        "elementName": "extra_field_entitlements",
         "elementSet": "data",
-        "elementPath": "restrict_overrides"
+        "elementPath": "extra_field_entitlements"
       },
       "status": {
         "type": "string",
