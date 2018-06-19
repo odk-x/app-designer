@@ -576,15 +576,11 @@ function regOverrideBenFailure(error) {
 
 
 function newEntitlementFunction() {
-    if (code !== "" && code !== undefined && code !== null) {
-        $('#search_results').text('');
-        odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?',
-                      [code],
-                      null, null, null, null, null, null, true, benEntOverrideCBSuccess,
-                      benEntOverrideCBFailure);
-    } else {
-        util.displayError(odkCommon.localizeText(locale, "enter_beneficiary_entity_id"));
-    }
+    $('#search_results').text('');
+    odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?',
+                  [code],
+                  null, null, null, null, null, null, true, benEntOverrideCBSuccess,
+                  benEntOverrideCBFailure);
 }
 
 function benEntOverrideCBSuccess(result) {
@@ -604,8 +600,20 @@ function benEntOverrideCBFailure(error) {
 }
 
 function restrictOverridesCheckSuccess(result) {
-    var overrideRestriction = result.getData(0, 'restrict_overrides');
+    var overrideRestriction = result.getData(0, 'extra_field_entitlements').toUpperCase();
     console.log(overrideRestriction.toUpperCase());
+
+    if (overrideRestriction === 'SINGLE') {
+
+    } else if (overrideRestriction === 'MANY') {
+        createOverrideCBSuccess(result);
+    } else {
+        // 'NONE' case, also acts as default
+        // this case should not happen since ONE and MANY cases were the only ones not filtered in the previous authorization list view
+
+
+    }
+
     if (overrideRestriction.toUpperCase() === 'TRUE') {
         odkData.query(util.entitlementTable, 'beneficiary_entity_id = ? and authorization_id = ?',
                       [code, util.getQueryParameter('authorization_id')], null, null, null, null, null,
@@ -620,13 +628,13 @@ function restrictOverridesCheckFailure(error) {
 }
 
 function entCheckCBSuccess(result) {
-    if (result.getCount() === 0) {
-        odkData.query(util.authorizationTable, '_id = ?',
-                      [util.getQueryParameter('authorization_id')],
-                      null, null, null, null, null, null, true, createOverrideCBSuccess,
-                      createOverrideCBFailure);
-    } else {
+    if (result.getCount() > 1 || (result.getCount() === 1 && result.getData(0, 'is_override') === 'TRUE')) {
         util.displayError(odkCommon.localizeText(locale, "already_qualifies_override"));
+    } else {
+        odkData.query(util.authorizationTable, '_id = ?',
+            [util.getQueryParameter('authorization_id')],
+            null, null, null, null, null, null, true, createOverrideCBSuccess,
+            createOverrideCBFailure);
     }
 }
 
@@ -652,7 +660,6 @@ function createOverrideCBSuccess(result) {
     struct['beneficiary_entity_id'] = code;
     struct['is_override'] = 'TRUE';
     struct['status'] = 'ENABLED';
-    //struct['date_created'] = TODO: decide on date format
     struct['_default_access'] = 'HIDDEN';
     struct['_row_owner'] = user;
     struct['_group_read_only'] = defaultGroup;

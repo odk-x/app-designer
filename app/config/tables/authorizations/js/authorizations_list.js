@@ -80,7 +80,7 @@ var handleAuthorizationReportCallback = function(action, dispatchStr) {
 var resumeFn = function(fIdxStart) {
     var joinQuery;
     if (type === 'new_ent' || type === 'deliveries') {
-        joinQuery = "SELECT * FROM " + util.authorizationTable;
+        joinQuery = "SELECT * FROM " + util.authorizationTable + " WHERE extra_field_entitlements == ONE || extra_field_entitlements == MANY" ;
     } else {
         joinQuery = "SELECT * FROM " + util.authorizationTable + ' t1 LEFT JOIN ' + util.distributionReportTable +
             ' t2 ON t1.report_version=t2.report_version AND t1._id=t2.authorization_id WHERE t1.summary_form_id IS NOT NULL';
