@@ -441,6 +441,7 @@ dataUtil.addDeliveryRowWithoutEntitlement = function(beneficiaryEntityId, author
     util.setJSONMap(jsonMap, 'custom_delivery_row_id', customDeliveryRowId);
     util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
     util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
+    util.setJSONMap(jsonMap, 'is_override', 'FALSE');
 
 
     return new Promise(function(resolve, reject) {
