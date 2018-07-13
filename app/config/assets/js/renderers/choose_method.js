@@ -85,7 +85,7 @@ function display() {
         if (!superUser) {
             var defaultGroup = resultArray[2].getDefaultGroup();
             odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
-        } else if (util.getWorkflowMode() !== 'TOKEN' && type === 'registration') {
+        } else if (util.getWorkflowMode() !== util.workflow.none && type === 'registration') {
             if (filteredRoles.length > 0) {
                 filteredRoles.forEach(addOption);
                 addOption(localizedUser);
@@ -146,7 +146,7 @@ function addOption(item) {
 }
 
 function populateSyncList() {
-    if (util.getWorkflowMode() === 'TOKEN' || type === 'delivery') {
+    if (util.getWorkflowMode() === util.workflow.none || type === 'delivery') {
         console.log('entered delivery sync path');
         var newRows = $('<h3>');
         return new Promise( function(resolve, reject) {
@@ -332,7 +332,7 @@ function queryChain(passed_code) {
         util.displayError("Enter a beneficiary entity id");
         return;
     }
-    if (util.getWorkflowMode() === "TOKEN") {
+    if (util.getWorkflowMode() === util.workflow.none) {
         tokenDeliveryFunction();
     } else if (type === 'delivery') {
         deliveryFunction();
@@ -354,7 +354,7 @@ function tokenDeliveryFunction() {
 
     dataUtil.reconcileTokenAuthorizations().then( function(result) {
         return new Promise(function (resolve, reject) {
-            odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', 'TOKEN'], null, null,
+            odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', util.workflow.none], null, null,
                 null, null, null, null, true, resolve,
                 reject);
         });
@@ -426,7 +426,7 @@ function deliveryDisabledCBSuccess(result) {
     if (result.getCount() > 0) {
         util.displayError(odkCommon.localizeText(locale, "disabled_beneficiary_notification"));
     } else {
-      if (util.getWorkflowMode() === 'VOUCHER') {
+      if (util.getWorkflowMode() === util.workflow.optional) {
         // We are in Voucher mode: check for deliveries for this beneficiary
         var voucherPromise = new Promise( function(resolve, reject) {
           odkData.query(util.entitlementTable, 'beneficiary_entity_id = ?', [code], null, null, null, null, null, null, true, resolve, reject);
@@ -435,7 +435,7 @@ function deliveryDisabledCBSuccess(result) {
           if (entitlement_result.getCount() > 0) {
               clearSessionVars();
               // opening an arbitrary row. hacky fix to the fact that you need to send in a row to open detail with list.
-              // in this case the detail view is null because its a voucher
+              // in this case the detail view is null because its an optional er
             odkTables.openDetailWithListView(null, util.authorizationTable, entitlement_result.getData(0, 'authorization_id'),
                                              'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=unregistered_voucher' +
                                              '&beneficiary_entity_id=' + encodeURIComponent(code));
@@ -489,7 +489,7 @@ function registrationBCheckCBFailure(error) {
 
 function registrationVoucherCBSuccess(result) {
 
-    //TODO: if in VOUCHER WORKFLOW_MODE we do not force them to register the beneficiary_entity_id before delivering
+    //TODO: if in OPTIONAL_REGISTRATION WORKFLOW_MODE we do not force them to register the beneficiary_entity_id before delivering
     // in REGISTRATION_REQUIRED we would force them to
 
     var voucherResultSet = result;

@@ -23,9 +23,9 @@
         </div>
         <script>
             $(function() {
-                if (util.getWorkflowMode() === "TOKEN") {
+                if (util.getWorkflowMode() === util.workflow.none) {
                     $(util.renderPageAsPromise(tokenIndex.display));
-                } else if (util.getWorkflowMode() === "VOUCHER" || util.getWorkflowMode() === "REGISTRATION_REQUIRED") {
+                } else if (util.getWorkflowMode() === util.workflow.optional || util.getWorkflowMode() === util.workflow.required) {
                     $(util.renderPageAsPromise(beneficiaryIndex.display));
                 }
             });

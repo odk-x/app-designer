@@ -18,7 +18,7 @@ function display() {
 
     type = util.getQueryParameter('type');
     if (type === 'unregistered_voucher') {
-        // If we have an unregistered voucher, there is no view data to show
+        // If we have an entitlement for an unregistered beneificiary unit id, there is no view data to show
         beneficiaryEntityId = util.getQueryParameter('beneficiary_entity_id');
         $('#title').text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ": " + beneficiaryEntityId);
         $('#toggle_workflow').hide();

@@ -59,7 +59,7 @@ function display() {
 
         $('#title').text(odkCommon.localizeText(locale, 'search_deliveries'));
 
-        if (util.getWorkflowMode() === 'TOKEN') {
+        if (util.getWorkflowMode() === util.workflow.none) {
             renderPromises.push(getSearchOptions(type, true, ['authorization_description', 'authorization_id',
              'authorization_type', 'custom_delivery_form_id', 'custom_delivery_row_id', 'entitlement_id', 'is_override',
               'item_pack_description', 'item_pack_id', 'item_pack_name', 'member_id']));

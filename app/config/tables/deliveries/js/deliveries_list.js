@@ -103,7 +103,7 @@ var displayGroup = function(idxStart) {
       item.attr('rowId', deliveriesResultSet.getRowId(i));
       item.attr('class', 'item_space');
 
-      if (util.getWorkflowMode() === 'TOKEN') {
+      if (util.getWorkflowMode() === util.workflow.none) {
           item.text(odkCommon.localizeText(locale, 'authorization_name') + ' : ' + deliveriesResultSet.getData(i, 'authorization_name'));
       } else {
           item.text(odkCommon.localizeText(locale, 'item_pack_name') + ' : ' + deliveriesResultSet.getData(i, 'item_pack_name'));

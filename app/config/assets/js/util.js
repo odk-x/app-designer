@@ -10,6 +10,17 @@
  */
 var util = {};
 
+/**
+ * util constants
+ */
+
+util.workflow = {};
+util.workflow.none = 'NO_REGISTRATION';
+util.workflow.optional = 'OPTIONAL_REGISTRATION';
+util.workflow.required = 'REQUIRED_REGISTRATION';
+
+
+
 /************************** General Util functions *********************************/
 
 /**
@@ -310,31 +321,36 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
         }
         return dataUtil.getRow(util.authorizationTable, entitlementRow.get('authorization_id'));
     }).then(function(authorizationRow) {
-        if (dataUtil.isCustomDeliveryAuthorization(authorizationRow)) {
-            dataUtil.tableExists(authorizationRow.getData(0, 'custom_delivery_form_id'))
-                .then(function (result) {
-                    if (!result) {
-                        util.displayError('Specified delivery form cannot be found. Unable to deliver.');
-                        return;
-                    }
+        if (authorizationRow !== undefined && authorizationRow !== null && authorizationRow.getCount() !== 0) {
+            if (dataUtil.isCustomDeliveryAuthorization(authorizationRow)) {
+                dataUtil.tableExists(authorizationRow.getData(0, 'custom_delivery_form_id'))
+                    .then(function (result) {
+                        if (!result) {
+                            util.displayError('Specified delivery form cannot be found. Unable to deliver.');
+                            return;
+                        }
 
-                    var customDeliveryRowId = util.genUUID();
-                    var jsonMap = {};
-                    var assigned_code = entitlementRow.get('assigned_item_pack_code');
-                    if (assigned_code !== undefined && assigned_code !== null && assigned_code !== "") {
-                        util.setJSONMap(jsonMap, 'assigned_item_pack_code', assigned_code);
-                    }
-                    dataUtil.addDeliveryRowByEntitlement(entitlementRow, authorizationRow.get("custom_delivery_form_id"), customDeliveryRowId)
-                        .then(function (rootDeliveryRow) {
-                            dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null, "_group_read_only", jsonMap);
-                        }).catch(function (reason) {
-                        console.log('Failed to perform custom entitlement delivery: ' + reason);
+                        var customDeliveryRowId = util.genUUID();
+                        var jsonMap = {};
+                        var assigned_code = entitlementRow.get('assigned_item_pack_code');
+                        if (assigned_code !== undefined && assigned_code !== null && assigned_code !== "") {
+                            util.setJSONMap(jsonMap, 'assigned_item_pack_code', assigned_code);
+                        }
+                        dataUtil.addDeliveryRowByEntitlement(entitlementRow, authorizationRow.get("custom_delivery_form_id"), customDeliveryRowId)
+                            .then(function (rootDeliveryRow) {
+                                dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null, "_group_read_only", jsonMap);
+                            }).catch(function (reason) {
+                            console.log('Failed to perform custom entitlement delivery: ' + reason);
+                        });
                     });
-                });
+            } else {
+                console.log('Performing simple delivery');
+                odkTables.launchHTML(null, 'config/assets/html/deliver.html?entitlement_id=' +  encodeURIComponent(entitlementRow.getRowId(0)));
+            }
         } else {
-            console.log('Performing simple delivery');
-            odkTables.launchHTML(null, 'config/assets/html/deliver.html?entitlement_id=' +  encodeURIComponent(entitlementRow.getRowId(0)));
+            util.displayError("Authorization missing from phone, please contact administrator");
         }
+
     });
 };
 
@@ -548,7 +564,7 @@ dataUtil.reconcileTokenAuthorizations = function() {
 
 dataUtil.getCurrentTokenAuthorizations = function() {
     return new Promise( function(resolve, reject) {
-        odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', 'TOKEN'], null, null,
+        odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', util.workflow.none], null, null,
             null, null, null, null, true, resolve,
             reject);
     });

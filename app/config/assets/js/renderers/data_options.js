@@ -62,7 +62,7 @@ function display() {
 
     } else {
 
-        if (util.getWorkflowMode() === 'TOKEN') {
+        if (util.getWorkflowMode() === util.workflow.none) {
 
             title.text(odkCommon.localizeText(locale, "delivery_data_title"));
 
