@@ -27,9 +27,8 @@ async function convert(requestId) {
         try {
             let jsonXlsx = to_json(XLSX.read(await base64Xlsx.text(), {type: 'base64'}));
             let formDef = processJSONWb(jsonXlsx);
-            formDef.warning = getWarnings() || [];
 
-            return postFormDef(requestId, f, formDef);
+            return postFormDef(requestId, f, formDef, getWarnings() || []);
         } catch (e) {
             return postFormError(requestId, f, e);
         }
@@ -53,7 +52,7 @@ function to_json(workbook) {
     return result;
 }
 
-function postFormDef(requestId, filename, formDef) {
+function postFormDef(requestId, filename, formDef, warnings) {
     let dtm = formDef.specification.dataTableModel;
     let tableId = getTableIdFromFormDef(formDef);
     let formId = getFormIdFromFormDef(formDef);
@@ -64,6 +63,7 @@ function postFormDef(requestId, filename, formDef) {
     form.append('definition.csv', shouldWriteCsv ? createDefCsv(dtm) : "");
     form.append('properties.csv', shouldWriteCsv ? createPropCsv(dtm, formDef) : "");
     form.append('tableSpecificDefinitions.js', shouldWriteDefJs(formDef) ? createDefJs(tableId, formDef) : "");
+    form.append('warnings.json', warnings);
 
     return fetch(`/xlsx/${requestId}/${encodeURIComponent(filename)}/${encodeURIComponent(tableId)}/${encodeURIComponent(formId)}`, {
         method: 'POST',
