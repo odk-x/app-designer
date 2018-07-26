@@ -74,13 +74,13 @@ var handleAuthorizationReportCallback = function(action, dispatchStr) {
     if (dataUtil.validateCustomTableEntry(action, dispatchStr, "authorization report", util.distributionReportTable)) {
         // TODO: UI changes on successful completion?
     }
-}
+};
 
 
 var resumeFn = function(fIdxStart) {
     var joinQuery;
     if (type === 'new_ent' || type === 'deliveries') {
-        joinQuery = "SELECT * FROM " + util.authorizationTable + " WHERE extra_field_entitlements == ONE || extra_field_entitlements == MANY" ;
+        joinQuery = "SELECT * FROM " + util.authorizationTable + " WHERE extra_field_entitlements='ONE' OR extra_field_entitlements='MANY'" ;
     } else {
         joinQuery = "SELECT * FROM " + util.authorizationTable + ' t1 LEFT JOIN ' + util.distributionReportTable +
             ' t2 ON t1.report_version=t2.report_version AND t1._id=t2.authorization_id WHERE t1.summary_form_id IS NOT NULL';
@@ -191,7 +191,7 @@ var displayGroup = function(idxStart) {
         item.append(chevron);
 
         var field2 = $('<li>');
-        field2.attr('class', 'detail')
+        field2.attr('class', 'detail');
         var itemPack = authorizationsResultSet.getData(i, 'item_pack_name');
         field2.text(itemPack);
         item.append(field2);

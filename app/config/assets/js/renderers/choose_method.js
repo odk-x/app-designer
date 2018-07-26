@@ -603,23 +603,17 @@ function restrictOverridesCheckSuccess(result) {
     var overrideRestriction = result.getData(0, 'extra_field_entitlements').toUpperCase();
     console.log(overrideRestriction.toUpperCase());
 
-    if (overrideRestriction === 'SINGLE') {
-
+    if (overrideRestriction === 'ONE') {
+        odkData.query(util.entitlementTable, 'beneficiary_entity_id = ? and authorization_id = ?',
+            [code, util.getQueryParameter('authorization_id')], null, null, null, null, null,
+            null, true, entCheckCBSuccess, entCheckCBFailure);
     } else if (overrideRestriction === 'MANY') {
         createOverrideCBSuccess(result);
     } else {
         // 'NONE' case, also acts as default
         // this case should not happen since ONE and MANY cases were the only ones not filtered in the previous authorization list view
+        return;
 
-
-    }
-
-    if (overrideRestriction.toUpperCase() === 'TRUE') {
-        odkData.query(util.entitlementTable, 'beneficiary_entity_id = ? and authorization_id = ?',
-                      [code, util.getQueryParameter('authorization_id')], null, null, null, null, null,
-                      null, true, entCheckCBSuccess, entCheckCBFailure);
-    } else {
-        createOverrideCBSuccess(result);
     }
 }
 
