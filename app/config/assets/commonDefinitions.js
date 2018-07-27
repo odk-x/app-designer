@@ -1129,6 +1129,20 @@ window.odkCommonDefinitions = {
         "default": "Entitlement Generated for Member"
       },
       "_row_num": 140
+    },
+    "description": {
+      "string_token": "description",
+      "text": {
+        "default": "Description"
+      },
+      "_row_num": 141
+    },
+    "extra_field_entitlements": {
+      "string_token": "extra_field_entitlements",
+      "text": {
+        "default": "Extra Field Entitlements"
+      },
+      "_row_num": 142
     }
   },
   "_locales": {
