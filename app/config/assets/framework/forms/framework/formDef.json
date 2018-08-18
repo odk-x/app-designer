@@ -1227,6 +1227,160 @@
           "default": "Extra Field Entitlements"
         },
         "_row_num": 142
+      },
+      {
+        "string_token": "be_custom_form_undefined",
+        "text": {
+          "default": "Beneficiary Entity custom form not defined"
+        },
+        "_row_num": 143
+      },
+      {
+        "string_token": "fill_field_report",
+        "text": {
+          "default": "Fill Field Report"
+        },
+        "_row_num": 144
+      },
+      {
+        "string_token": "terminate_authorization",
+        "text": {
+          "default": "Terminate Authorization"
+        },
+        "_row_num": 145
+      },
+      {
+        "string_token": "terminate_authorization_success",
+        "text": {
+          "default": "Authorization Successfully Terminated"
+        },
+        "_row_num": 146
+      },
+      {
+        "string_token": "terminate_authorization_failed",
+        "text": {
+          "default": "Authorization Termination Failed"
+        },
+        "_row_num": 147
+      },
+      {
+        "string_token": "create_authorization",
+        "text": {
+          "default": "Create Authorization"
+        },
+        "_row_num": 148
+      },
+      {
+        "string_token": "create_authorization_success",
+        "text": {
+          "default": "Authorization Successfully Created"
+        },
+        "_row_num": 149
+      },
+      {
+        "string_token": "create_authorization_failed",
+        "text": {
+          "default": "Authorization Creation Failed"
+        },
+        "_row_num": 150
+      },
+      {
+        "string_token": "start_new_authorization",
+        "text": {
+          "default": "Start New Authorization"
+        },
+        "_row_num": 151
+      },
+      {
+        "string_token": "pending",
+        "text": {
+          "default": "Pending"
+        },
+        "_row_num": 152
+      },
+      {
+        "string_token": "delivered",
+        "text": {
+          "default": "Delivered"
+        },
+        "_row_num": 153
+      },
+      {
+        "string_token": "delivered_since_sync",
+        "text": {
+          "default": "Delivered since sync"
+        },
+        "_row_num": 154
+      },
+      {
+        "string_token": "new_since_sync",
+        "text": {
+          "default": "New since last sync"
+        },
+        "_row_num": 155
+      },
+      {
+        "string_token": "edited_since_sync",
+        "text": {
+          "default": "Edited since last sync"
+        },
+        "_row_num": 156
+      },
+      {
+        "string_token": "new_hh_mem_since_sync",
+        "text": {
+          "default": "New households [members] since last sync"
+        },
+        "_row_num": 157
+      },
+      {
+        "string_token": "edited_hh_mem_since_sync",
+        "text": {
+          "default": "Edited households [members] since last sync"
+        },
+        "_row_num": 158
+      },
+      {
+        "string_token": "deliver",
+        "text": {
+          "default": "Deliver"
+        },
+        "_row_num": 159
+      },
+      {
+        "string_token": "no_active_authorizations",
+        "text": {
+          "default": "There currently are no active authorizations"
+        },
+        "_row_num": 160
+      },
+      {
+        "string_token": "internal_error",
+        "text": {
+          "default": "Internal Error: please contact administrator"
+        },
+        "_row_num": 161
+      },
+      {
+        "string_token": "beneficiary_already_received",
+        "text": {
+          "default": "This beneficiary entity id has already received the current authorization"
+        },
+        "_row_num": 162
+      },
+      {
+        "string_token": "delivery_confirmed",
+        "text": {
+          "default": "Delivery Confirmed!"
+        },
+        "_row_num": 163
+      },
+      {
+        "string_token": "distribution_options",
+        "text": {
+          "default": "Distribution Options"
+        },
+        "_row_num": 164
       }
     ],
     "settings": [
@@ -4010,6 +4164,160 @@
             "default": "Extra Field Entitlements"
           },
           "_row_num": 142
+        },
+        "be_custom_form_undefined": {
+          "string_token": "be_custom_form_undefined",
+          "text": {
+            "default": "Beneficiary Entity custom form not defined"
+          },
+          "_row_num": 143
+        },
+        "fill_field_report": {
+          "string_token": "fill_field_report",
+          "text": {
+            "default": "Fill Field Report"
+          },
+          "_row_num": 144
+        },
+        "terminate_authorization": {
+          "string_token": "terminate_authorization",
+          "text": {
+            "default": "Terminate Authorization"
+          },
+          "_row_num": 145
+        },
+        "terminate_authorization_success": {
+          "string_token": "terminate_authorization_success",
+          "text": {
+            "default": "Authorization Successfully Terminated"
+          },
+          "_row_num": 146
+        },
+        "terminate_authorization_failed": {
+          "string_token": "terminate_authorization_failed",
+          "text": {
+            "default": "Authorization Termination Failed"
+          },
+          "_row_num": 147
+        },
+        "create_authorization": {
+          "string_token": "create_authorization",
+          "text": {
+            "default": "Create Authorization"
+          },
+          "_row_num": 148
+        },
+        "create_authorization_success": {
+          "string_token": "create_authorization_success",
+          "text": {
+            "default": "Authorization Successfully Created"
+          },
+          "_row_num": 149
+        },
+        "create_authorization_failed": {
+          "string_token": "create_authorization_failed",
+          "text": {
+            "default": "Authorization Creation Failed"
+          },
+          "_row_num": 150
+        },
+        "start_new_authorization": {
+          "string_token": "start_new_authorization",
+          "text": {
+            "default": "Start New Authorization"
+          },
+          "_row_num": 151
+        },
+        "pending": {
+          "string_token": "pending",
+          "text": {
+            "default": "Pending"
+          },
+          "_row_num": 152
+        },
+        "delivered": {
+          "string_token": "delivered",
+          "text": {
+            "default": "Delivered"
+          },
+          "_row_num": 153
+        },
+        "delivered_since_sync": {
+          "string_token": "delivered_since_sync",
+          "text": {
+            "default": "Delivered since sync"
+          },
+          "_row_num": 154
+        },
+        "new_since_sync": {
+          "string_token": "new_since_sync",
+          "text": {
+            "default": "New since last sync"
+          },
+          "_row_num": 155
+        },
+        "edited_since_sync": {
+          "string_token": "edited_since_sync",
+          "text": {
+            "default": "Edited since last sync"
+          },
+          "_row_num": 156
+        },
+        "new_hh_mem_since_sync": {
+          "string_token": "new_hh_mem_since_sync",
+          "text": {
+            "default": "New households [members] since last sync"
+          },
+          "_row_num": 157
+        },
+        "edited_hh_mem_since_sync": {
+          "string_token": "edited_hh_mem_since_sync",
+          "text": {
+            "default": "Edited households [members] since last sync"
+          },
+          "_row_num": 158
+        },
+        "deliver": {
+          "string_token": "deliver",
+          "text": {
+            "default": "Deliver"
+          },
+          "_row_num": 159
+        },
+        "no_active_authorizations": {
+          "string_token": "no_active_authorizations",
+          "text": {
+            "default": "There currently are no active authorizations"
+          },
+          "_row_num": 160
+        },
+        "internal_error": {
+          "string_token": "internal_error",
+          "text": {
+            "default": "Internal Error: please contact administrator"
+          },
+          "_row_num": 161
+        },
+        "beneficiary_already_received": {
+          "string_token": "beneficiary_already_received",
+          "text": {
+            "default": "This beneficiary entity id has already received the current authorization"
+          },
+          "_row_num": 162
+        },
+        "delivery_confirmed": {
+          "string_token": "delivery_confirmed",
+          "text": {
+            "default": "Delivery Confirmed!"
+          },
+          "_row_num": 163
+        },
+        "distribution_options": {
+          "string_token": "distribution_options",
+          "text": {
+            "default": "Distribution Options"
+          },
+          "_row_num": 164
         }
       },
       "_locales": {

@@ -12,7 +12,7 @@ function display() {
         // set to current authorization name
         $('#title').text(currentAuthorization.getData(0, "name"));
 
-        $('#trigger').text("Terminate Authorization");
+        $('#trigger').text(odkCommon.localizeText(locale, 'terminate_authorization'));
 
         $('#trigger').click(triggerAuthorizationTermination);
     });
@@ -30,8 +30,8 @@ function triggerAuthorizationTermination() {
         }
         Promise.all(dbActions).then( function(result) {
             $('#trigger').prop('disabled', true);
-            $('#confirmation').text('Authorization Successfully Terminated');
+            $('#confirmation').text(odkCommon.localizeText(locale, 'terminate_authorization_success'));
         }, function(error) {
-            $('#confirmation').text('Authorization Termination Failed');
+            $('#confirmation').text(odkCommon.localizeText(locale, 'terminate_authorization_failed'));
         });
 }

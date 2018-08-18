@@ -38,9 +38,9 @@ function display() {
 
         return Promise.all(promises);
     }).then( function(result) {
-        $('#pending').text("Pending: " + result[0].get('count'));
-        $('#delivered').text("Delivered: " + result[1].get('count'));
-        $('#since_sync').text("Delivered since sync: " + result[2].get('count'));
+        $('#pending').text(odkCommon.localizeText(locale, 'pending') + ": " + result[0].get('count'));
+        $('#delivered').text(odkCommon.localizeText(locale, 'delivered') + ": " + result[1].get('count'));
+        $('#since_sync').text(odkCommon.localizeText(locale, 'delivered_since_sync') + ": " + result[2].get('count'));
     });
 
     return displayPromise;

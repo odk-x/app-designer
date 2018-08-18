@@ -3,6 +3,8 @@ var tokenIndex = {};
 tokenIndex.actionCustomAuthReset = "actionCustomAuthReset";
 tokenIndex.actionTypeKey = "actionTypeKey";
 
+var locale = odkCommon.getPreferredLocale();
+
 tokenIndex.display = function() {
     dataUtil.reconcileTokenAuthorizations();
     $('#title').text(odkCommon.localizeText(locale, titleToken));
@@ -10,7 +12,7 @@ tokenIndex.display = function() {
     var deliver = document.createElement("button");
     deliver.setAttribute("id", "deliver");
     deliver.setAttribute('type', 'reg');
-    deliver.innerHTML = "Deliver";
+    deliver.innerHTML = odkCommon.localizeText(locale, 'deliver');
     deliver.onclick = function() {
         odkTables.launchHTML(null, 'config/assets/html/choose_method.html?title=' + encodeURIComponent('Please Enter Beneficiary Entity ID'));
     };
@@ -19,7 +21,7 @@ tokenIndex.display = function() {
     var del = document.createElement('button');
     del.setAttribute('id', 'view-deliveries');
     del.setAttribute('type', 'reg');
-    del.innerHTML = 'View Deliveries';
+    del.innerHTML = odkCommon.localizeText('view_deliveries');
     del.onclick = function() {
         odkTables.launchHTML(null, 'config/assets/html/data_options.html?type=deliveries');
     };
@@ -41,7 +43,7 @@ tokenIndex.display = function() {
             var override = document.createElement("button");
             override.setAttribute("id", "override");
             override.setAttribute('type', 'reg');
-            override.innerHTML = "Administrator Options";
+            override.innerHTML = odkCommon.localizeText(locale, 'administrator_path');
             override.onclick = function() {
                 odkTables.launchHTML(null, 'config/assets/html/token_overrides.html');
             };

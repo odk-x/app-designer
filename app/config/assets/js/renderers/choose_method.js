@@ -154,7 +154,7 @@ function populateSyncList() {
                 util.deliveryTable + ' WHERE _sync_state = ?', ['new_row'],
                 null, null, resolve, reject);
         }).then( function(result) {
-            newRows.text('New since last sync: ' + result.get('total'));
+            newRows.text(odkCommon.localizeText(locale, 'new_since_sync') + ': ' + result.get('total'));
             $('#sync_list').append(newRows);
         });
     } else if (type === 'registration') {
@@ -176,8 +176,8 @@ function populateSyncList() {
 
         if (util.getRegistrationMode() === 'INDIVIDUAL') {
             return Promise.all([newBeneficiaryEntitiesPromise, updatedBeneficiaryEntitiesPromise]).then( function(resultArr) {
-                newMergedEntities.text('New since last sync: ' + resultArr[0].get('total'));
-                updatedMergedEntities.text('Edited since last sync: ' + resultArr[1].get('total'));
+                newMergedEntities.text(odkCommon.localizeText(locale, 'new_since_sync') + ': ' + resultArr[0].get('total'));
+                updatedMergedEntities.text(odkCommon.localizeText(locale, 'edited_since_sync') + ': ' + resultArr[1].get('total'));
                 $('#sync_list').append(newMergedEntities);
                 $('#sync_list').append(updatedMergedEntities);
             });
@@ -200,9 +200,9 @@ function populateSyncList() {
                                 updatedBeneficiaryEntitiesPromise,
                                 newMembersPromise,
                                 updatedMembersPromise]).then( function(resultArr) {
-                newMergedEntities.text('New households [members] since last sync: '
+                newMergedEntities.text(odkCommon.localizeText(locale, 'new_hh_mem_since_sync') + ': '
                     + resultArr[0].get('total') + ' [' + resultArr[1].get('total') + ']');
-                updatedMergedEntities.text('Edited households [members] since last sync: '
+                updatedMergedEntities.text(odkCommon.localizeText(locale, 'edited_hh_mem_since_sync') + ': '
                     + resultArr[1].get('total') + ' [' + resultArr[3].get('total') + ']');
                 $('#sync_list').append(newMergedEntities);
                 $('#sync_list').append(updatedMergedEntities);
@@ -329,7 +329,7 @@ function handleRegistrationCallback(action, dispatchStr) {
 function queryChain(passed_code) {
     code = passed_code;
     if (code === null || code === undefined || code === "") {
-        util.displayError("Enter a beneficiary entity id");
+        util.displayError(odkCommon.localizeText(locale, "enter_beneficiary_entity_id"));
         return;
     }
     if (util.getWorkflowMode() === util.workflow.none) {
@@ -367,12 +367,12 @@ function tokenDeliveryFunction() {
                     null, null, null, null, true, resolve, reject);
             });
         } else if (activeAuthorization.getCount() === 0) {
-            util.displayError('There currently are no active authorizations');
-            return Promise.reject('There currently are no active authorizations');
+            util.displayError(odkCommon.localizeText(locale, 'no_active_authorizations'));
+            return Promise.reject(odkCommon.localizeText(locale, 'no_active_authorizations'));
         } else {
             //this should never happen
-            util.displayError('Internal Error: please contact administrator');
-            return Promise.reject('Internal Error: please contact administrator');
+            util.displayError(odkCommon.localizeText(locale, 'internal_error'));
+            return Promise.reject(odkCommon.localizeText(locale, 'internal_error'));
         }
     }).then( function(result) {
         console.log(result);
@@ -383,7 +383,7 @@ function tokenDeliveryFunction() {
                 odkTables.launchHTML(null, 'config/assets/html/deliver.html?authorization_id=' +
                 encodeURIComponent(activeAuthorization.getRowId(0)) + '&beneficiary_entity_id=' + encodeURIComponent(code));
             } else {
-                util.displayError('This beneficiary entity id has already received the current authorization');
+                util.displayError(odkCommon.localizeText(locale, 'beneficiary_already_received'));
             }
         }
     }).catch( function(reason) {
@@ -506,7 +506,7 @@ function registrationVoucherCBSuccess(result) {
     var customBEForm = util.getBeneficiaryEntityCustomFormId();
     if (customBEForm === undefined || customBEForm === null || customBEForm === "") {
         // should we provide a ui to register without survey?
-        util.displayError("Beneficiary Entity Custom Form not defined");
+        util.displayError(odkCommon.localizeText(locale, 'be_custom_form_undefined'));
         return;
     }
     var customRowId = util.genUUID();

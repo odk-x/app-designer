@@ -51,7 +51,7 @@ function _handleRowEntry(result) {
     odkCommon.setSessionVariable('clicked', 'true');
 
     $('#deliver').prop('disabled', true);
-    $('#confirmation').text('Delivery Confirmed!');
+    $('#confirmation').text(odkCommon.localizeText(locale, 'delivery_confirmed'));
 
     console.log('Created new row in root delivery table: ' + rootDeliveryRowId);
 }

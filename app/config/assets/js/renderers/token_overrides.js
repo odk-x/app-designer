@@ -9,7 +9,7 @@ function display() {
             dataUtil.reconcileTokenAuthorizations();
         }
 
-        $('#title').text('Administrator Options');
+        $('#title').text(odkCommon.localizeText(locale, 'administrator_options'));
 
         var terminate = document.createElement("button");
         terminate.setAttribute("id", "terminate");
@@ -26,7 +26,7 @@ function display() {
 
         var create = document.createElement("button");
         create.setAttribute("id", "create");
-        create.innerHTML = "Start New Authorization";
+        create.innerHTML = odkCommon.localizeText(locale, 'start_new_authorization');
         if (numAuthorizations > 0) {
             create.disabled = true;
         }

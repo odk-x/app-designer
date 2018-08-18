@@ -52,7 +52,7 @@ function display() {
 
         renderPromises.push(getSearchOptions(type, false, []));
         renderPromises.push(getSearchOptions(util.beneficiaryEntityTable, true, []));
-        options.push('Household Size');
+        options.push(odkCommon.localizeText(locale, 'hh_size'));
 
     } else if (type === util.deliveryTable) {
         baseTable = util.deliveryTable;
@@ -159,7 +159,7 @@ function searchFailure(error) {
 function launch() {
     if (type === util.getMemberCustomFormId() || type === util.getBeneficiaryEntityCustomFormId()) {
         var joinQuery;
-        if (key == 'Household Size') {
+        if (key === odkCommon.localizeText(locale, 'hh_size')) {
             joinQuery = 'SELECT * FROM ' + util.beneficiaryEntityTable + ' base, '  + util.membersTable +
                 ' mem INNER JOIN '  + customTable + ' custom ON base.' + customForeignKey +
                 ' = custom._id WHERE base._id = mem.beneficiary_entity_row_id ' +
