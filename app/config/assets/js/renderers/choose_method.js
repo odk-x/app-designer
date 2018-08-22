@@ -474,7 +474,7 @@ function registrationBCheckCBSuccess(result) {
                           null, null, null, null, true, registrationVoucherCBSuccess,
                           registrationVoucherCBFailure);
     } else {
-        util.displayError(odkCommon.localizeText(locale, "barcode_unavailable"));
+        util.displayError(odkCommon.localizeText(locale, "id_unavailable"));
         clearSessionVars();
         odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
@@ -494,7 +494,7 @@ function registrationVoucherCBSuccess(result) {
 
     var voucherResultSet = result;
     if (voucherResultSet.getCount() === 0) {
-        $('#search_results').text(odkCommon.localizeText(locale, "barcode_available"));
+        $('#search_results').text(odkCommon.localizeText(locale, "id_available"));
     } else {
         $('#search_results').text(odkCommon.localizeText(locale, "voucher_detected"));
     }
@@ -666,7 +666,7 @@ function createOverrideCBFailure(error) {
 }
 
 var addDistCBSuccess = function(result) {
-    $('#search_results').text(odkCommon.localizeText(locale, "override_creation_success"));
+    $('#search_results').text(odkCommon.localizeText(locale, "entitlement_creation_success"));
 };
 
 var addDistCBFailure = function(error) {

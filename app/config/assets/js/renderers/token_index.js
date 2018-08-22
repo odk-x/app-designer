@@ -1,4 +1,5 @@
 
+var titleToken = "main_title";
 var tokenIndex = {};
 tokenIndex.actionCustomAuthReset = "actionCustomAuthReset";
 tokenIndex.actionTypeKey = "actionTypeKey";
@@ -43,7 +44,7 @@ tokenIndex.display = function() {
             var override = document.createElement("button");
             override.setAttribute("id", "override");
             override.setAttribute('type', 'reg');
-            override.innerHTML = odkCommon.localizeText(locale, 'administrator_path');
+            override.innerHTML = odkCommon.localizeText(locale, 'administrator_options');
             override.onclick = function() {
                 odkTables.launchHTML(null, 'config/assets/html/token_overrides.html');
             };

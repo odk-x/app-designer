@@ -55,16 +55,17 @@ function display() {
             memberSearch.onclick = function() {
                 odkTables.launchHTML(null,
                     'config/assets/html/search.html?type=' + util.getMemberCustomFormId());
-            }
+            };
             //append member search button
             document.getElementById('wrapper').appendChild(memberSearch);
         }
 
     } else {
 
+        title.text(odkCommon.localizeText(locale, "delivery_data"));
+
         if (util.getWorkflowMode() === util.workflow.none) {
 
-            title.text(odkCommon.localizeText(locale, "delivery_data_title"));
 
             var allDeliveries = document.createElement('button');
             allDeliveries.innerHTML = odkCommon.localizeText(locale, "view_all_deliveries");
@@ -83,7 +84,6 @@ function display() {
             document.getElementById('wrapper').appendChild(allDeliveries);
             document.getElementById('wrapper').appendChild(deliverySearch);
         } else {
-            title.text(odkCommon.localizeText(locale, "delivery_data_title"));
 
             var byAuth = document.createElement('button');
             byAuth.innerHTML = odkCommon.localizeText(locale, "view_by_authorization");

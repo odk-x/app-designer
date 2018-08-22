@@ -4,10 +4,10 @@
 'use strict';
 
 var titleToken = "main_title";
-var registrationToken = "registration_path";
-var deliveryToken = "delivery_path";
+var registrationToken = "registration";
+var deliveryToken = "delivery";
 var dataToken = "data_path";
-var administratorToken = "administrator_path";
+var administratorToken = "administrator_options";
 var registrationTitleToken = 'registration_title';
 var deliveryTitleToken = 'delivery_title';
 var locale = odkCommon.getPreferredLocale();
@@ -26,8 +26,7 @@ beneficiaryIndex.display = function() {
     newClient.onclick = function() {
         odkTables.launchHTML(null,
                             'config/assets/html/choose_method.html?title='
-                            + encodeURIComponent(odkCommon.localizeText(locale,
-                                                                        registrationTitleToken))
+                            + encodeURIComponent(odkCommon.localizeText(locale, registrationTitleToken))
                             + '&type=registration');
     };
     if (util.getBeneficiaryEntityCustomFormId()) {
@@ -43,8 +42,7 @@ beneficiaryIndex.display = function() {
     followUp.onclick = function() {
         odkTables.launchHTML(null,
                              'config/assets/html/choose_method.html?title='
-                             + encodeURIComponent(odkCommon.localizeText(locale,
-                                                                         deliveryTitleToken))
+                             + encodeURIComponent(odkCommon.localizeText(locale, deliveryTitleToken))
                              +'&type=delivery');
     };
     document.getElementById("wrapper").appendChild(followUp);
