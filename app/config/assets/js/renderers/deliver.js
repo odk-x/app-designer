@@ -1,6 +1,10 @@
 'use strict';
+var locale = odkCommon.getPreferredLocale();
+
 
 function display() {
+    $('#title').text(odkCommon.localizeText(locale, 'deliver_items'));
+    $('#deliver').text(odkCommon.localizeText(locale, 'confirm_delivery'));
     if (odkCommon.getSessionVariable('clicked') === 'true') {
         $('#deliver').prop('disabled', true);
         $('#confirmation').text('Delivery Confirmed!');

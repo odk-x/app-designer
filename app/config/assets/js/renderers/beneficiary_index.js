@@ -5,7 +5,7 @@
 
 var titleToken = "main_title";
 var registrationToken = "registration";
-var deliveryToken = "delivery";
+var deliveryToken = "delivery_upper_case";
 var dataToken = "data_path";
 var administratorToken = "administrator_options";
 var registrationTitleToken = 'registration_title';

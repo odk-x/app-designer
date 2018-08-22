@@ -19,6 +19,8 @@ var options = [];
 
 function display() {
     $('#launch').text(odkCommon.localizeText(locale, 'view'));
+    $('#search').text(odkCommon.localizeText(locale, 'search'));
+    $('#value').attr('placeholder', odkCommon.localizeText(locale, 'enter_value'));
 
     var renderPromises = [];
 
