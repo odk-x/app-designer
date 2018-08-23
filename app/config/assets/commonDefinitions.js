@@ -328,6 +328,13 @@ window.odkCommonDefinitions = {
       },
       "_row_num": 45
     },
+    "ok": {
+      "string_token": "ok",
+      "text": {
+        "default": "OK"
+      },
+      "_row_num": 46
+    },
     "view_all_deliveries": {
       "string_token": "view_all_deliveries",
       "text": {
@@ -337,126 +344,126 @@ window.odkCommonDefinitions = {
         "farsi": "مشاهده تحویل",
         "spanish": "Ver todas las entregas"
       },
-      "_row_num": 46
+      "_row_num": 47
     },
     "fill_field_report": {
       "string_token": "fill_field_report",
       "text": {
         "default": "Fill Field Report"
       },
-      "_row_num": 47
+      "_row_num": 48
     },
     "deliver": {
       "string_token": "deliver",
       "text": {
         "default": "Deliver"
       },
-      "_row_num": 48
+      "_row_num": 49
     },
     "view": {
       "string_token": "view",
       "text": {
         "default": "View"
       },
-      "_row_num": 49
+      "_row_num": 50
     },
     "change_entitlement_status": {
       "string_token": "change_entitlement_status",
       "text": {
         "default": "Change Entitlement Status"
       },
-      "_row_num": 50
+      "_row_num": 51
     },
     "create_new_entitlement": {
       "string_token": "create_new_entitlement",
       "text": {
         "default": "Create New Entitlement"
       },
-      "_row_num": 51
+      "_row_num": 52
     },
     "choose_authorization": {
       "string_token": "choose_authorization",
       "text": {
         "default": "Choose Authorization"
       },
-      "_row_num": 52
+      "_row_num": 53
     },
     "view_by_authorization": {
       "string_token": "view_by_authorization",
       "text": {
         "default": "View By Authorization"
       },
-      "_row_num": 53
+      "_row_num": 54
     },
     "view_deliveries": {
       "string_token": "view_deliveries",
       "text": {
         "default": "View Deliveries"
       },
-      "_row_num": 54
+      "_row_num": 55
     },
     "select_group": {
       "string_token": "select_group",
       "text": {
         "default": "Please Select Group"
       },
-      "_row_num": 55
+      "_row_num": 56
     },
     "enter_value": {
       "string_token": "enter_value",
       "text": {
         "default": "Enter a value"
       },
-      "_row_num": 56
+      "_row_num": 57
     },
     "deliver_items": {
       "string_token": "deliver_items",
       "text": {
         "default": "Deliver Items"
       },
-      "_row_num": 57
+      "_row_num": 58
     },
     "confirm_delivery": {
       "string_token": "confirm_delivery",
       "text": {
         "default": "Confirm Delivery"
       },
-      "_row_num": 58
+      "_row_num": 59
     },
     "entitlement_creation_success": {
       "string_token": "entitlement_creation_success",
       "text": {
         "default": "Entitlement Successfully Created"
       },
-      "_row_num": 61
+      "_row_num": 62
     },
     "delivery_confirmed": {
       "string_token": "delivery_confirmed",
       "text": {
         "default": "Delivery Confirmed!"
       },
-      "_row_num": 62
+      "_row_num": 63
     },
     "id_available": {
       "string_token": "id_available",
       "text": {
         "default": "ID Available"
       },
-      "_row_num": 65
+      "_row_num": 66
     },
     "voucher_detected": {
       "string_token": "voucher_detected",
       "text": {
         "default": "Voucher Detected"
       },
-      "_row_num": 66
+      "_row_num": 67
     },
     "id_unavailable": {
       "string_token": "id_unavailable",
       "text": {
         "default": "ID Unavailable"
       },
-      "_row_num": 67
+      "_row_num": 68
     },
     "invalid_search": {
       "string_token": "invalid_search",
@@ -467,14 +474,14 @@ window.odkCommonDefinitions = {
         "farsi": "جستجو نامعتبر",
         "spanish": "Búsqueda inválida"
       },
-      "_row_num": 70
+      "_row_num": 71
     },
     "missing_beneficiary_notification": {
       "string_token": "missing_beneficiary_notification",
       "text": {
         "default": "Beneficiary Entity ID not found in system"
       },
-      "_row_num": 71
+      "_row_num": 72
     },
     "already_qualifies_override": {
       "string_token": "already_qualifies_override",
@@ -485,28 +492,28 @@ window.odkCommonDefinitions = {
         "farsi": "اسکن ذینفع در حال حاضر برای این توزیع",
         "spanish": "Beneficiario escaneado ya calificado para esta distribución"
       },
-      "_row_num": 72
+      "_row_num": 73
     },
     "be_custom_form_undefined": {
       "string_token": "be_custom_form_undefined",
       "text": {
         "default": "Beneficiary Entity custom form not defined"
       },
-      "_row_num": 73
+      "_row_num": 74
     },
     "beneficiary_already_received": {
       "string_token": "beneficiary_already_received",
       "text": {
         "default": "This beneficiary entity id has already received the current authorization"
       },
-      "_row_num": 74
+      "_row_num": 75
     },
     "internal_error": {
       "string_token": "internal_error",
       "text": {
         "default": "Internal Error: please contact administrator"
       },
-      "_row_num": 75
+      "_row_num": 76
     },
     "disabled_beneficiary_notification": {
       "string_token": "disabled_beneficiary_notification",
@@ -517,7 +524,7 @@ window.odkCommonDefinitions = {
         "farsi": "این ذینفع غیر فعال است",
         "spanish": "Este beneficiario está deshabilitado"
       },
-      "_row_num": 76
+      "_row_num": 77
     },
     "no_authorizations": {
       "string_token": "no_authorizations",
@@ -528,21 +535,21 @@ window.odkCommonDefinitions = {
         "farsi": "بدون توزیع",
         "spanish": "Sin distribuciones"
       },
-      "_row_num": 77
+      "_row_num": 78
     },
     "enabled_households": {
       "string_token": "enabled_households",
       "text": {
         "default": "Enabled Households"
       },
-      "_row_num": 79
+      "_row_num": 80
     },
     "disabled_households": {
       "string_token": "disabled_households",
       "text": {
         "default": "Disabled Households"
       },
-      "_row_num": 80
+      "_row_num": 81
     },
     "enabled_beneficiaries": {
       "string_token": "enabled_beneficiaries",
@@ -553,7 +560,7 @@ window.odkCommonDefinitions = {
         "farsi": "ذینفع فعال",
         "spanish": "Beneficiarios activos"
       },
-      "_row_num": 81
+      "_row_num": 82
     },
     "disabled_beneficiaries": {
       "string_token": "disabled_beneficiaries",
@@ -564,217 +571,217 @@ window.odkCommonDefinitions = {
         "farsi": "ذینفع غیر فعال",
         "spanish": "Beneficiarios desactivados"
       },
-      "_row_num": 82
+      "_row_num": 83
     },
     "delivered_since_sync": {
       "string_token": "delivered_since_sync",
       "text": {
         "default": "Delivered since sync"
       },
-      "_row_num": 85
+      "_row_num": 86
     },
     "new_since_sync": {
       "string_token": "new_since_sync",
       "text": {
         "default": "New since last sync"
       },
-      "_row_num": 86
+      "_row_num": 87
     },
     "edited_since_sync": {
       "string_token": "edited_since_sync",
       "text": {
         "default": "Edited since last sync"
       },
-      "_row_num": 87
+      "_row_num": 88
     },
     "new_hh_mem_since_sync": {
       "string_token": "new_hh_mem_since_sync",
       "text": {
         "default": "New households [members] since last sync"
       },
-      "_row_num": 88
+      "_row_num": 89
     },
     "edited_hh_mem_since_sync": {
       "string_token": "edited_hh_mem_since_sync",
       "text": {
         "default": "Edited households [members] since last sync"
       },
-      "_row_num": 89
+      "_row_num": 90
     },
     "start_new_authorization": {
       "string_token": "start_new_authorization",
       "text": {
         "default": "Start New Authorization"
       },
-      "_row_num": 92
+      "_row_num": 93
     },
     "create_authorization": {
       "string_token": "create_authorization",
       "text": {
         "default": "Create Authorization"
       },
-      "_row_num": 93
+      "_row_num": 94
     },
     "choose_authorization_name": {
       "string_token": "choose_authorization_name",
       "text": {
         "default": "Choose Authorization Name"
       },
-      "_row_num": 94
+      "_row_num": 95
     },
     "create_authorization_success": {
       "string_token": "create_authorization_success",
       "text": {
         "default": "Authorization Successfully Created"
       },
-      "_row_num": 95
+      "_row_num": 96
     },
     "create_authorization_failed": {
       "string_token": "create_authorization_failed",
       "text": {
         "default": "Authorization Creation Failed"
       },
-      "_row_num": 96
+      "_row_num": 97
     },
     "terminate_authorization": {
       "string_token": "terminate_authorization",
       "text": {
         "default": "Terminate Authorization"
       },
-      "_row_num": 97
+      "_row_num": 98
     },
     "terminate_authorization_success": {
       "string_token": "terminate_authorization_success",
       "text": {
         "default": "Authorization Successfully Terminated"
       },
-      "_row_num": 98
+      "_row_num": 99
     },
     "terminate_authorization_failed": {
       "string_token": "terminate_authorization_failed",
       "text": {
         "default": "Authorization Termination Failed"
       },
-      "_row_num": 99
+      "_row_num": 100
     },
     "no_active_authorizations": {
       "string_token": "no_active_authorizations",
       "text": {
         "default": "There currently are no active authorizations"
       },
-      "_row_num": 100
+      "_row_num": 101
     },
     "beneficiary_entity_id": {
       "string_token": "beneficiary_entity_id",
       "text": {
         "default": "Beneficiary Entity ID"
       },
-      "_row_num": 103
+      "_row_num": 104
     },
     "date_created": {
       "string_token": "date_created",
       "text": {
         "default": "Date Created"
       },
-      "_row_num": 104
+      "_row_num": 105
     },
     "custom_beneficiary_entity_form_id": {
       "string_token": "custom_beneficiary_entity_form_id",
       "text": {
         "default": "Custom Beneficiary Entity Form ID"
       },
-      "_row_num": 105
+      "_row_num": 106
     },
     "custom_beneficiary_entity_row_id": {
       "string_token": "custom_beneficiary_entity_row_id",
       "text": {
         "default": "Custom Beneficiary Entity Row ID"
       },
-      "_row_num": 106
+      "_row_num": 107
     },
     "status": {
       "string_token": "status",
       "text": {
         "default": "Status"
       },
-      "_row_num": 107
+      "_row_num": 108
     },
     "status_reason": {
       "string_token": "status_reason",
       "text": {
         "default": "Status Reason"
       },
-      "_row_num": 108
+      "_row_num": 109
     },
     "beneficiary_entity_row_id": {
       "string_token": "beneficiary_entity_row_id",
       "text": {
         "default": "Beneficiary Entity Row ID"
       },
-      "_row_num": 110
+      "_row_num": 111
     },
     "custom_member_form_id": {
       "string_token": "custom_member_form_id",
       "text": {
         "default": "Custom Member Form ID"
       },
-      "_row_num": 111
+      "_row_num": 112
     },
     "custom_member_row_id": {
       "string_token": "custom_member_row_id",
       "text": {
         "default": "Custom Member Row ID"
       },
-      "_row_num": 112
+      "_row_num": 113
     },
     "member_id": {
       "string_token": "member_id",
       "text": {
         "default": "Member ID"
       },
-      "_row_num": 113
+      "_row_num": 114
     },
     "authorization_id": {
       "string_token": "authorization_id",
       "text": {
         "default": "Authorization ID"
       },
-      "_row_num": 115
+      "_row_num": 116
     },
     "authorization_type": {
       "string_token": "authorization_type",
       "text": {
         "default": "Authorization Type"
       },
-      "_row_num": 116
+      "_row_num": 117
     },
     "authorization_name": {
       "string_token": "authorization_name",
       "text": {
         "default": "Authorization Name"
       },
-      "_row_num": 117
+      "_row_num": 118
     },
     "authorization_description": {
       "string_token": "authorization_description",
       "text": {
         "default": "Authorization Description"
       },
-      "_row_num": 118
+      "_row_num": 119
     },
     "entitlement_id": {
       "string_token": "entitlement_id",
       "text": {
         "default": "Entitlement ID"
       },
-      "_row_num": 119
+      "_row_num": 120
     },
     "is_override": {
       "string_token": "is_override",
       "text": {
         "default": "Is Override"
       },
-      "_row_num": 120
+      "_row_num": 121
     },
     "item_pack_id": {
       "string_token": "item_pack_id",
@@ -785,7 +792,7 @@ window.odkCommonDefinitions = {
         "farsi": "شماره بسته",
         "spanish": "ID del artículo"
       },
-      "_row_num": 121
+      "_row_num": 122
     },
     "item_pack_name": {
       "string_token": "item_pack_name",
@@ -796,7 +803,7 @@ window.odkCommonDefinitions = {
         "farsi": "نام بسته",
         "spanish": "Nombre del artículo"
       },
-      "_row_num": 122
+      "_row_num": 123
     },
     "item_pack_description": {
       "string_token": "item_pack_description",
@@ -807,224 +814,224 @@ window.odkCommonDefinitions = {
         "farsi": "شرح بسته",
         "spanish": "Descripción del artículo"
       },
-      "_row_num": 123
+      "_row_num": 124
     },
     "custom_delivery_form_id": {
       "string_token": "custom_delivery_form_id",
       "text": {
         "default": "Custom Delivery Form ID"
       },
-      "_row_num": 124
+      "_row_num": 125
     },
     "custom_delivery_row_id": {
       "string_token": "custom_delivery_row_id",
       "text": {
         "default": "Custom Delivery Row ID"
       },
-      "_row_num": 125
+      "_row_num": 126
     },
     "assigned_item_pack_code": {
       "string_token": "assigned_item_pack_code",
       "text": {
         "default": "Assigned Item Pack Barcode"
       },
-      "_row_num": 126
+      "_row_num": 127
     },
     "name": {
       "string_token": "name",
       "text": {
         "default": "Name"
       },
-      "_row_num": 128
+      "_row_num": 129
     },
     "type": {
       "string_token": "type",
       "text": {
         "default": "Type"
       },
-      "_row_num": 129
+      "_row_num": 130
     },
     "item_pack_ranges": {
       "string_token": "item_pack_ranges",
       "text": {
         "default": "Item Pack Ranges"
       },
-      "_row_num": 130
+      "_row_num": 131
     },
     "report_version": {
       "string_token": "report_version",
       "text": {
         "default": "Report Version"
       },
-      "_row_num": 131
+      "_row_num": 132
     },
     "restrict_overrides": {
       "string_token": "restrict_overrides",
       "text": {
         "default": "Restrict Overrides"
       },
-      "_row_num": 132
+      "_row_num": 133
     },
     "summary_form_id": {
       "string_token": "summary_form_id",
       "text": {
         "default": "Summary Form ID"
       },
-      "_row_num": 133
+      "_row_num": 134
     },
     "for_member": {
       "string_token": "for_member",
       "text": {
         "default": "Entitlement Generated for Member"
       },
-      "_row_num": 134
+      "_row_num": 135
     },
     "description": {
       "string_token": "description",
       "text": {
         "default": "Description"
       },
-      "_row_num": 135
+      "_row_num": 136
     },
     "extra_field_entitlements": {
       "string_token": "extra_field_entitlements",
       "text": {
         "default": "Extra Field Entitlements"
       },
-      "_row_num": 136
+      "_row_num": 137
     },
     "address": {
       "string_token": "address",
       "text": {
         "default": "Address"
       },
-      "_row_num": 139
+      "_row_num": 140
     },
     "telephone": {
       "string_token": "telephone",
       "text": {
         "default": "Telephone"
       },
-      "_row_num": 140
+      "_row_num": 141
     },
     "mobile_provider": {
       "string_token": "mobile_provider",
       "text": {
         "default": "Mobile Provider"
       },
-      "_row_num": 141
+      "_row_num": 142
     },
     "delivery_site": {
       "string_token": "delivery_site",
       "text": {
         "default": "Delivery Site"
       },
-      "_row_num": 142
+      "_row_num": 143
     },
     "location": {
       "string_token": "location",
       "text": {
         "default": "Location"
       },
-      "_row_num": 143
+      "_row_num": 144
     },
     "tent_caravan": {
       "string_token": "tent_caravan",
       "text": {
         "default": "Tent/Caravan Code"
       },
-      "_row_num": 144
+      "_row_num": 145
     },
     "hh_size": {
       "string_token": "hh_size",
       "text": {
         "default": "Household Size"
       },
-      "_row_num": 145
+      "_row_num": 146
     },
     "first_name": {
       "string_token": "first_name",
       "text": {
         "default": "First Name"
       },
-      "_row_num": 147
+      "_row_num": 148
     },
     "last_name": {
       "string_token": "last_name",
       "text": {
         "default": "Last Name"
       },
-      "_row_num": 148
+      "_row_num": 149
     },
     "first_last_name": {
       "string_token": "first_last_name",
       "text": {
         "default": "First and Last Name"
       },
-      "_row_num": 149
+      "_row_num": 150
     },
     "birth_date": {
       "string_token": "birth_date",
       "text": {
         "default": "Birth Date"
       },
-      "_row_num": 150
+      "_row_num": 151
     },
     "age": {
       "string_token": "age",
       "text": {
         "default": "Age"
       },
-      "_row_num": 151
+      "_row_num": 152
     },
     "gender": {
       "string_token": "gender",
       "text": {
         "default": "Gender"
       },
-      "_row_num": 152
+      "_row_num": 153
     },
     "id_type": {
       "string_token": "id_type",
       "text": {
         "default": "ID Type"
       },
-      "_row_num": 153
+      "_row_num": 154
     },
     "id_number": {
       "string_token": "id_number",
       "text": {
         "default": "ID Number"
       },
-      "_row_num": 154
+      "_row_num": 155
     },
     "is_head_of_household": {
       "string_token": "is_head_of_household",
       "text": {
         "default": "Is Head of Household"
       },
-      "_row_num": 155
+      "_row_num": 156
     },
     "picture": {
       "string_token": "picture",
       "text": {
         "default": "Picture"
       },
-      "_row_num": 156
+      "_row_num": 157
     },
     "email": {
       "string_token": "email",
       "text": {
         "default": "Email"
       },
-      "_row_num": 157
+      "_row_num": 158
     },
     "vulnerability": {
       "string_token": "vulnerability",
       "text": {
         "default": "Vulnerability"
       },
-      "_row_num": 158
+      "_row_num": 159
     }
   },
   "_locales": {

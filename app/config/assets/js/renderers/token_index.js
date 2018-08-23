@@ -22,7 +22,7 @@ tokenIndex.display = function() {
     var del = document.createElement('button');
     del.setAttribute('id', 'view-deliveries');
     del.setAttribute('type', 'reg');
-    del.innerHTML = odkCommon.localizeText('view_deliveries');
+    del.innerHTML = odkCommon.localizeText(locale, 'view_deliveries');
     del.onclick = function() {
         odkTables.launchHTML(null, 'config/assets/html/data_options.html?type=deliveries');
     };

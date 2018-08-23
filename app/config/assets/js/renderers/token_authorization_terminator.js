@@ -3,7 +3,7 @@ var currentAuthorization;
 
 function display() {
 
-    new Promise( function(resolve, reject) {
+    return new Promise( function(resolve, reject) {
         odkData.query(util.authorizationTable, 'status = ? AND type = ?', ['ACTIVE', util.workflow.none],
             null, null, null, null, null, null, true, resolve, reject);
     }).then( function(result) {

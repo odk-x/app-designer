@@ -8,6 +8,10 @@
     text-align: center;
 }
 
+.modal-body {
+    text-align: center;
+}
+
 #logo {
     position: relative;
     /*right: 0;

@@ -145,8 +145,19 @@ util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, loca
 };
 
 
+
+
 util.displayError = function(text) {
-    alert(text);
+
+    bootbox.alert({
+        message: text,
+        buttons: {
+            ok: {
+                label: odkCommon.localizeText(locale, 'ok'),
+                className: 'btn-danger'
+            }
+        }
+    });
 };
 
 
@@ -253,18 +264,13 @@ util.setVirtualButtonAttributes = function() {
 };
 
 
-
-
-
-
-
 /**
  * dataUtil function object provides utility functions which interface with data tables
  */
 var dataUtil = {};
 
 dataUtil.getHouseholdSize = function(foreignRowId) {
-    if (util.getRegistrationMode() != 'HOUSEHOLD') {
+    if (util.getRegistrationMode() !== 'HOUSEHOLD') {
         return null;
     }
     return new Promise(function(resolve, reject) {

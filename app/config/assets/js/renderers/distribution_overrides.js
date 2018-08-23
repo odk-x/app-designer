@@ -25,7 +25,7 @@ function display() {
 
     var distributionReport = document.createElement("button");
     distributionReport.setAttribute("id", "distribution_report");
-    distributionReport.innerHTML = odkCommon.localizeText('fill_field_report');
+    distributionReport.innerHTML = odkCommon.localizeText(locale, 'fill_field_report');
     distributionReport.onclick = function() {
         odkTables.launchHTML(null,
                         'config/tables/' + util.authorizationTable + '/html/' + util.authorizationTable + '_list.html?type=distribution_report');
