@@ -31,6 +31,7 @@ function triggerAuthorizationCreation() {
             util.setJSONMap(jsonMap, 'status', 'ACTIVE');
             util.setJSONMap(jsonMap, 'type', util.workflow.none);
             util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
+            util.setJSONMap(jsonMap, 'extra_field_entitlements', 'NONE');
             odkData.addRow(util.authorizationTable, jsonMap , util.genUUID(),
                 resolve, reject);
         }));
