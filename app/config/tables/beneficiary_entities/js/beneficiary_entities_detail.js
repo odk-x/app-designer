@@ -31,7 +31,7 @@ function display() {
     var exclusionList = ['beneficiary_entity_id', 'consent_signature', 'location_accuracy',
         'location_altitude', 'location_latitude', 'location_longitude',
         'consent_signature_contentType', 'consent_signature_uriFragment',
-        'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id'];
+        'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', 'status_reason'];
 
     return new Promise( function(resolve, reject) {
         // retrieve custom row data

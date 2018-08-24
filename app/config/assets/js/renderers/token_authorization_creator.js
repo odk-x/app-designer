@@ -27,7 +27,7 @@ function triggerAuthorizationCreation() {
         dbActions.push(new Promise(function(resolve, reject) {
             var jsonMap = {};
             var authorizationName = $('#code').val();
-            util.setJSONMap(jsonMap, 'name', authorizationName)
+            util.setJSONMap(jsonMap, 'name', authorizationName);
             util.setJSONMap(jsonMap, 'status', 'ACTIVE');
             util.setJSONMap(jsonMap, 'type', util.workflow.none);
             util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
