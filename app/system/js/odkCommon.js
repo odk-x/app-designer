@@ -307,7 +307,7 @@ window.odkCommon = {
       var langOnlyLocale = this.extractLangOnlyLocale(locale);
   
       if ( fieldName in textOrLangMap ) {
-          var textMap = textOrLangMap[fieldName];
+          var textMap = textOrLangMap[fieldName] || {};
           if(this.isString(textMap)) {
               return true;
           } else if( locale in textMap ) {
