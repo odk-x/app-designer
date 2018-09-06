@@ -10,6 +10,7 @@ window.odkCommonDefinitions = {
             "text": {
               "english": "English",
               "hindi": "English (as hindi name)",
+              "es": "Ingles",
               "default": "English"
             }
           }
@@ -23,12 +24,27 @@ window.odkCommonDefinitions = {
             "text": {
               "english": "Hindi",
               "hindi": "Hindi (as hindi name)",
+              "es": "Hindi",
               "default": "Hindi"
             }
           }
         },
         "_row_num": 8,
         "name": "hindi"
+      },
+      {
+        "display": {
+          "locale": {
+            "text": {
+              "english": "Spanish",
+              "hindi": "Spanish (as hindi name)",
+              "es": "Español",
+              "default": "Spanish"
+            }
+          }
+        },
+        "_row_num": 9,
+        "name": "es"
       }
     ]
   },
