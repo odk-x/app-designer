@@ -1,0 +1,5 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+notes,notes,string,[]
+receive_signature,receive_signature,mimeUri,"[""receive_signature_contentType"",""receive_signature_uriFragment""]"
+receive_signature_contentType,contentType,mimeType,[]
+receive_signature_uriFragment,uriFragment,rowpath,[]

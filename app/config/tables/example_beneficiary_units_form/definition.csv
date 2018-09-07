@@ -1,0 +1,14 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+address,address,string,[]
+consent_signature,consent_signature,mimeUri,"[""consent_signature_contentType"",""consent_signature_uriFragment""]"
+consent_signature_contentType,contentType,mimeType,[]
+consent_signature_uriFragment,uriFragment,rowpath,[]
+delivery_site,delivery_site,string,[]
+location,location,geopoint,"[""location_accuracy"",""location_altitude"",""location_latitude"",""location_longitude""]"
+location_accuracy,accuracy,number,[]
+location_altitude,altitude,number,[]
+location_latitude,latitude,number,[]
+location_longitude,longitude,number,[]
+mobile_provider,mobile_provider,string,[]
+telephone,telephone,string,[]
+tent_caravan,tent_caravan,string,[]
