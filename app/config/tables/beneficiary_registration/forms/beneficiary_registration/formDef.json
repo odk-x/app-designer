@@ -24,6 +24,11 @@
           }
         },
         "_row_num": 5
+      },
+      {
+        "setting_name": "instance_name",
+        "value": "first_last_name",
+        "_row_num": 6
       }
     ],
     "survey": [
@@ -36,7 +41,7 @@
             "text": "Select District"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 2
       },
       {
@@ -48,7 +53,7 @@
             "text": "Select Township/City"
           }
         },
-        "required": true,
+        "required": 1,
         "choice_filter": "choice_item.district === data('district')",
         "_row_num": 3
       },
@@ -61,7 +66,7 @@
             "text": "Select Village/Neighborhood"
           }
         },
-        "required": true,
+        "required": 1,
         "choice_filter": "choice_item.township === data('township')",
         "_row_num": 4
       },
@@ -73,7 +78,7 @@
             "text": "Sub-Village/Sub-Neighbourhood"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 5
       },
       {
@@ -84,7 +89,7 @@
             "text": "Collect the GPS coordinates of the registration site"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 6
       },
       {
@@ -103,10 +108,10 @@
         "name": "consent",
         "display": {
           "prompt": {
-            "text": "Hello, my name is {{data.interviewer}}. I will collect some personal data about the current head of household and the household composition in order to register you in the XXX programme of the RCRC.\n\nDo you have a few minutes ?"
+            "text": "Hello, my name is {{data.interviewer}}. I will collect some personal data about the current head of household and the household composition in order to register you in the XXX programme of the RCRC.&#10;&#10;Do you have a few minutes ?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 8
       },
       {
@@ -140,7 +145,7 @@
             "text": "1. Type of ID"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 12
       },
       {
@@ -151,7 +156,7 @@
             "text": "2. ID Number"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 13
       },
       {
@@ -168,7 +173,7 @@
             "text": "Please type LASTNAME in uppercase only."
           }
         },
-        "required": true,
+        "required": 1,
         "constraint": "/[A-Z ]+/.test(data('lastname')) || data('consent') != 'yes'",
         "_row_num": 14
       },
@@ -188,7 +193,7 @@
             "text": "4. HoHH's firstname(s)"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 17
       },
       {
@@ -200,7 +205,7 @@
             "text": "5. HoHH's gender"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 18
       },
       {
@@ -211,7 +216,7 @@
             "text": "6. Head of household birthdate"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 19
       },
       {
@@ -240,7 +245,7 @@
             "text": "8. Current address"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 23
       },
       {
@@ -257,7 +262,7 @@
             "text": "Please key in exactly the 10 digits of the phone number"
           }
         },
-        "required": true,
+        "required": 1,
         "constraint": "/[0-9\\d ]{10}$/.test(data('mobile_nb'))",
         "_row_num": 24
       },
@@ -269,7 +274,7 @@
             "text": "10. Mobile phone service provider"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 25
       },
       {
@@ -288,7 +293,7 @@
             "text": "11. Number of adult males in HH"
           }
         },
-        "required": true,
+        "required": 1,
         "constraint": "data('count_males')>=0",
         "_row_num": 28
       },
@@ -300,7 +305,7 @@
             "text": "12. Number of adult females in HH"
           }
         },
-        "required": true,
+        "required": 1,
         "constraint": "data('count_females')>=0",
         "_row_num": 29
       },
@@ -312,7 +317,7 @@
             "text": "13. Number of children in HH"
           }
         },
-        "required": true,
+        "required": 1,
         "constraint": "data('count_children')>=0",
         "_row_num": 30
       },
@@ -338,7 +343,7 @@
             "text": "The total number of people in HH is not correct. It should equal the total number of males, females and children"
           }
         },
-        "required": true,
+        "required": 1,
         "constraint": "data('count_people')==data('count_males')+data('count_females')+data('count_children') && data('count_people') >= 1",
         "_row_num": 33
       },
@@ -375,7 +380,7 @@
             "text": "15. How do you consider the damage of your house?"
           }
         },
-        "required": true,
+        "required": 1,
         "_row_num": 38
       },
       {
@@ -392,7 +397,7 @@
             "text": "This cannot exceed the total number of persons of the HH."
           }
         },
-        "required": true,
+        "required": 1,
         "constraint": "data('vulnerability2_chronicle_disease') <= data('count_males')+data('count_females')+data('count_children')",
         "_row_num": 39
       },
@@ -410,7 +415,7 @@
             "text": "This cannot exceed the total number of persons of the HH."
           }
         },
-        "required": true,
+        "required": 1,
         "constraint": "data('vulnerability3_elderly')<=data('count_males')+data('count_females')",
         "_row_num": 40
       },
@@ -428,7 +433,7 @@
             "text": "This cannot exceed the total number of persons of the HH."
           }
         },
-        "required": true,
+        "required": 1,
         "constraint": "data('vulnerability4_disabled')<=data('count_males')+data('count_females')+data('count_children')",
         "_row_num": 41
       },
@@ -450,7 +455,7 @@
             "text": "This cannot exceed the total number of persons of the HH."
           }
         },
-        "required": true,
+        "required": 1,
         "constraint": "data('vulnerability5_injured')<=data('count_males')+data('count_females')+data('count_children')",
         "_row_num": 43
       },
@@ -468,12 +473,19 @@
             "text": "This cannot exceed the total number of persons of the HH minus one."
           }
         },
-        "required": true,
+        "required": 1,
         "constraint": "data('vulnerability6_killed')<=data('count_males')+data('count_females')+data('count_children')-1",
         "_row_num": 44
       },
       {
-        "clause": "end if",
+        "type": "linked_table",
+        "values_list": "reg_members",
+        "name": "reg_members",
+        "display": {
+          "prompt": {
+            "text": "Make a list of all members who normally live in this household"
+          }
+        },
         "_row_num": 45
       },
       {
@@ -481,14 +493,18 @@
         "_row_num": 46
       },
       {
+        "clause": "end if",
+        "_row_num": 47
+      },
+      {
         "type": "acknowledge",
         "name": "thanks",
         "display": {
           "prompt": {
-            "text": "You can now proceed to the printing desk where you will be provided with you RCRC beneficiary card. You will be informed soon about the details of the program.\n\nIn case of distribution,  please come with this RCRC beneficiary card and your {{data.id_type}} in order to verify your identity.\n\nThank you, the registration process has been completed!"
+            "text": "You can now proceed to the printing desk where you will be provided with you RCRC beneficiary card. You will be informed soon about the details of the program.&#10;&#10;In case of distribution,  please come with this RCRC beneficiary card and your {{data.id_type}} in order to verify your identity.&#10;&#10;Thank you, the registration process has been completed!"
           }
         },
-        "_row_num": 47
+        "_row_num": 48
       }
     ],
     "calculates": [
@@ -506,6 +522,19 @@
         "calculation_name": "minus_one",
         "calculation": "(parseInt(data('count_males')) ? parseInt(data('count_males')) : 0) + (parseInt(data('count_females')) ? parseInt(data('count_females')) : 0) + (parseInt(data('count_children')) ? parseInt(data('count_children')) : 0) - 1",
         "_row_num": 4
+      }
+    ],
+    "queries": [
+      {
+        "query_name": "reg_members",
+        "query_type": "linked_table",
+        "linked_form_id": "custom_members",
+        "linked_table_id": "custom_members",
+        "selection": "custom_beneficiary_entity_row_id = ?",
+        "selectionArgs": "[ metadata('_id')]",
+        "newRowInitialElementKeyToValueMap": "{custom_beneficiary_entity_row_id: metadata('_id'), _group_modify: metadata('_group_modify')}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 2
       }
     ],
     "choices": [
@@ -2529,6 +2558,35 @@
         "township": "Township 50",
         "_row_num": 197
       }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "defaultAccessOnCreation",
+        "type": "string",
+        "value": "HIDDEN",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "unverifiedUserCanCreate",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 3
+      }
+    ],
+    "initial": [
+      {
+        "clause": "do section survey",
+        "_row_num": 2
+      },
+      {
+        "clause": "goto _finalize",
+        "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
+        "_row_num": 3
+      }
     ]
   },
   "specification": {
@@ -2571,6 +2629,11 @@
           }
         },
         "_row_num": 5
+      },
+      "instance_name": {
+        "setting_name": "instance_name",
+        "value": "first_last_name",
+        "_row_num": 6
       },
       "_locales": {
         "setting_name": "_locales",
@@ -4644,7 +4707,19 @@
     "table_specific_definitions": {
       "_tokens": {}
     },
-    "queries": {},
+    "queries": {
+      "reg_members": {
+        "query_name": "reg_members",
+        "query_type": "linked_table",
+        "linked_form_id": "custom_members",
+        "linked_table_id": "custom_members",
+        "selection": "custom_beneficiary_entity_row_id = ?",
+        "selectionArgs": "[ metadata('_id')]",
+        "newRowInitialElementKeyToValueMap": "{custom_beneficiary_entity_row_id: metadata('_id'), _group_modify: metadata('_group_modify')}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 2
+      }
+    },
     "calculates": {
       "family_sum": {
         "calculation_name": "family_sum",
@@ -4988,7 +5063,7 @@
       "thanks": {
         "_defn": [
           {
-            "_row_num": 47,
+            "_row_num": 48,
             "section_name": "survey"
           }
         ],
@@ -5015,7 +5090,7 @@
                 "text": "Select District"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
@@ -5032,7 +5107,7 @@
                 "text": "Select Township/City"
               }
             },
-            "required": true,
+            "required": 1,
             "choice_filter": "choice_item.district === data('district')",
             "_row_num": 3,
             "__rowNum__": 2,
@@ -5050,7 +5125,7 @@
                 "text": "Select Village/Neighborhood"
               }
             },
-            "required": true,
+            "required": 1,
             "choice_filter": "choice_item.township === data('township')",
             "_row_num": 4,
             "__rowNum__": 3,
@@ -5067,7 +5142,7 @@
                 "text": "Sub-Village/Sub-Neighbourhood"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
@@ -5083,7 +5158,7 @@
                 "text": "Collect the GPS coordinates of the registration site"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
@@ -5112,10 +5187,10 @@
             "name": "consent",
             "display": {
               "prompt": {
-                "text": "Hello, my name is {{data.interviewer}}. I will collect some personal data about the current head of household and the household composition in order to register you in the XXX programme of the RCRC.\n\nDo you have a few minutes ?"
+                "text": "Hello, my name is {{data.interviewer}}. I will collect some personal data about the current head of household and the household composition in order to register you in the XXX programme of the RCRC.&#10;&#10;Do you have a few minutes ?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
@@ -5150,7 +5225,7 @@
                 "text": "1. Type of ID"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 12,
             "__rowNum__": 11,
             "_token_type": "prompt",
@@ -5166,7 +5241,7 @@
                 "text": "2. ID Number"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 13,
             "__rowNum__": 12,
             "_token_type": "prompt",
@@ -5188,7 +5263,7 @@
                 "text": "Please type LASTNAME in uppercase only."
               }
             },
-            "required": true,
+            "required": 1,
             "constraint": "/[A-Z ]+/.test(data('lastname')) || data('consent') != 'yes'",
             "_row_num": 14,
             "__rowNum__": 13,
@@ -5205,7 +5280,7 @@
                 "text": "4. HoHH's firstname(s)"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 17,
             "__rowNum__": 16,
             "_token_type": "prompt",
@@ -5222,7 +5297,7 @@
                 "text": "5. HoHH's gender"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 18,
             "__rowNum__": 17,
             "_token_type": "prompt",
@@ -5238,7 +5313,7 @@
                 "text": "6. Head of household birthdate"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 19,
             "__rowNum__": 18,
             "_token_type": "prompt",
@@ -5269,7 +5344,7 @@
                 "text": "8. Current address"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 23,
             "__rowNum__": 22,
             "_token_type": "prompt",
@@ -5291,7 +5366,7 @@
                 "text": "Please key in exactly the 10 digits of the phone number"
               }
             },
-            "required": true,
+            "required": 1,
             "constraint": "/[0-9\\d ]{10}$/.test(data('mobile_nb'))",
             "_row_num": 24,
             "__rowNum__": 23,
@@ -5308,7 +5383,7 @@
                 "text": "10. Mobile phone service provider"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 25,
             "__rowNum__": 24,
             "_token_type": "prompt",
@@ -5324,7 +5399,7 @@
                 "text": "11. Number of adult males in HH"
               }
             },
-            "required": true,
+            "required": 1,
             "constraint": "data('count_males')>=0",
             "_row_num": 28,
             "__rowNum__": 27,
@@ -5341,7 +5416,7 @@
                 "text": "12. Number of adult females in HH"
               }
             },
-            "required": true,
+            "required": 1,
             "constraint": "data('count_females')>=0",
             "_row_num": 29,
             "__rowNum__": 28,
@@ -5358,7 +5433,7 @@
                 "text": "13. Number of children in HH"
               }
             },
-            "required": true,
+            "required": 1,
             "constraint": "data('count_children')>=0",
             "_row_num": 30,
             "__rowNum__": 29,
@@ -5381,7 +5456,7 @@
                 "text": "The total number of people in HH is not correct. It should equal the total number of males, females and children"
               }
             },
-            "required": true,
+            "required": 1,
             "constraint": "data('count_people')==data('count_males')+data('count_females')+data('count_children') && data('count_people') >= 1",
             "_row_num": 33,
             "__rowNum__": 32,
@@ -5415,7 +5490,7 @@
                 "text": "15. How do you consider the damage of your house?"
               }
             },
-            "required": true,
+            "required": 1,
             "_row_num": 38,
             "__rowNum__": 37,
             "_token_type": "prompt",
@@ -5437,7 +5512,7 @@
                 "text": "This cannot exceed the total number of persons of the HH."
               }
             },
-            "required": true,
+            "required": 1,
             "constraint": "data('vulnerability2_chronicle_disease') <= data('count_males')+data('count_females')+data('count_children')",
             "_row_num": 39,
             "__rowNum__": 38,
@@ -5460,7 +5535,7 @@
                 "text": "This cannot exceed the total number of persons of the HH."
               }
             },
-            "required": true,
+            "required": 1,
             "constraint": "data('vulnerability3_elderly')<=data('count_males')+data('count_females')",
             "_row_num": 40,
             "__rowNum__": 39,
@@ -5483,7 +5558,7 @@
                 "text": "This cannot exceed the total number of persons of the HH."
               }
             },
-            "required": true,
+            "required": 1,
             "constraint": "data('vulnerability4_disabled')<=data('count_males')+data('count_females')+data('count_children')",
             "_row_num": 41,
             "__rowNum__": 40,
@@ -5506,7 +5581,7 @@
                 "text": "This cannot exceed the total number of persons of the HH."
               }
             },
-            "required": true,
+            "required": 1,
             "constraint": "data('vulnerability5_injured')<=data('count_males')+data('count_females')+data('count_children')",
             "_row_num": 43,
             "__rowNum__": 42,
@@ -5529,7 +5604,7 @@
                 "text": "This cannot exceed the total number of persons of the HH minus one."
               }
             },
-            "required": true,
+            "required": 1,
             "constraint": "data('vulnerability6_killed')<=data('count_males')+data('count_females')+data('count_children')-1",
             "_row_num": 44,
             "__rowNum__": 43,
@@ -5539,27 +5614,43 @@
             "promptIdx": 28
           },
           {
+            "type": "linked_table",
+            "values_list": "reg_members",
+            "name": "reg_members",
+            "display": {
+              "prompt": {
+                "text": "Make a list of all members who normally live in this household"
+              }
+            },
+            "_row_num": 45,
+            "__rowNum__": 44,
+            "_token_type": "prompt",
+            "_type": "linked_table",
+            "_branch_label_enclosing_screen": "survey/_screen45",
+            "promptIdx": 29
+          },
+          {
             "type": "acknowledge",
             "name": "thanks",
             "display": {
               "prompt": {
-                "text": "You can now proceed to the printing desk where you will be provided with you RCRC beneficiary card. You will be informed soon about the details of the program.\n\nIn case of distribution,  please come with this RCRC beneficiary card and your {{data.id_type}} in order to verify your identity.\n\nThank you, the registration process has been completed!"
+                "text": "You can now proceed to the printing desk where you will be provided with you RCRC beneficiary card. You will be informed soon about the details of the program.&#10;&#10;In case of distribution,  please come with this RCRC beneficiary card and your {{data.id_type}} in order to verify your identity.&#10;&#10;Thank you, the registration process has been completed!"
               }
             },
-            "_row_num": 47,
-            "__rowNum__": 46,
+            "_row_num": 48,
+            "__rowNum__": 47,
             "_token_type": "prompt",
             "_type": "acknowledge",
-            "_branch_label_enclosing_screen": "survey/_screen47",
-            "promptIdx": 29
+            "_branch_label_enclosing_screen": "survey/_screen48",
+            "promptIdx": 30
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 48,
-            "_branch_label_enclosing_screen": "survey/_screen48",
-            "promptIdx": 30
+            "_row_num": 49,
+            "_branch_label_enclosing_screen": "survey/_screen49",
+            "promptIdx": 31
           }
         ],
         "validation_tag_map": {
@@ -5646,8 +5737,8 @@
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else46",
-            "_row_num": 46,
+            "_branch_label": "_else47",
+            "_row_num": 47,
             "operationIdx": 8
           },
           {
@@ -5738,8 +5829,8 @@
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else45",
-            "_row_num": 45,
+            "_branch_label": "_else46",
+            "_row_num": 46,
             "operationIdx": 16
           },
           {
@@ -5769,10 +5860,9 @@
             "operationIdx": 19
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif45",
             "_row_num": 45,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 20
           },
           {
@@ -5783,31 +5873,38 @@
             "operationIdx": 21
           },
           {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif47",
             "_row_num": 47,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 22
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 48,
-            "operationIdx": 23
           },
           {
             "_row_num": 48,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(30);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 23
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 49,
+            "operationIdx": 24
+          },
+          {
+            "_row_num": 49,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(31);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 24
+            "operationIdx": 25
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 48,
-            "operationIdx": 25
+            "_row_num": 49,
+            "operationIdx": 26
           }
         ],
         "branch_label_map": {
@@ -5829,13 +5926,14 @@
           "_screen37": 17,
           "_screen43": 18,
           "_screen44": 19,
-          "_else45": 21,
-          "_endif45": 21,
+          "_screen45": 20,
           "_else46": 22,
           "_endif46": 22,
-          "_screen47": 22,
-          "_contents": 24,
-          "_screen48": 24
+          "_else47": 23,
+          "_endif47": 23,
+          "_screen48": 23,
+          "_contents": 25,
+          "_screen49": 25
         }
       },
       "initial": {
@@ -5848,23 +5946,13 @@
         },
         "prompts": [
           {
-            "_row_num": 3,
-            "type": "opening",
-            "display": {
-              "text": "Edit form"
-            },
-            "_token_type": "prompt",
-            "_type": "opening",
-            "_branch_label_enclosing_screen": "initial/_screen3",
-            "promptIdx": 0
-          },
-          {
-            "_row_num": 4,
             "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
             "_token_type": "prompt",
             "_do_section_name": "survey",
             "_type": "_section",
-            "promptIdx": 1,
+            "promptIdx": 0,
             "display": {
               "title": {
                 "text": "beneficiary_registration Form"
@@ -5873,34 +5961,12 @@
             "_branch_label_enclosing_screen": "survey/0"
           },
           {
-            "_row_num": 5,
-            "type": "finalize",
-            "display": {
-              "text": "Save form"
-            },
-            "_token_type": "prompt",
-            "_type": "finalize",
-            "_branch_label_enclosing_screen": "initial/_screen5",
-            "promptIdx": 2
-          },
-          {
-            "_row_num": 7,
-            "type": "instances",
-            "display": {
-              "text": "Saved instances"
-            },
-            "_token_type": "prompt",
-            "_type": "instances",
-            "_branch_label_enclosing_screen": "initial/_screen7",
-            "promptIdx": 3
-          },
-          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 9,
-            "_branch_label_enclosing_screen": "initial/_screen9",
-            "promptIdx": 4
+            "_row_num": 4,
+            "_branch_label_enclosing_screen": "initial/_screen4",
+            "promptIdx": 1
           }
         ],
         "validation_tag_map": {
@@ -5908,111 +5974,74 @@
         },
         "operations": [
           {
+            "clause": "do section survey",
             "_row_num": 2,
-            "clause": "if // start",
-            "condition": "(opendatakit.getCurrentInstanceId() != null)",
-            "_token_type": "goto_label",
-            "_tag_name": "start",
-            "_branch_label": "_then2",
+            "__rowNum__": 1,
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
             "operationIdx": 0
           },
           {
-            "clause": "else // start",
-            "_token_type": "goto_label",
-            "_branch_label": "_else6",
-            "_row_num": 6,
-            "operationIdx": 1
-          },
-          {
+            "clause": "goto _finalize",
+            "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
             "_row_num": 3,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
-          },
-          {
-            "_row_num": 4,
-            "clause": "do section survey",
-            "_token_type": "do_section",
-            "_do_section_name": "survey",
-            "operationIdx": 3
-          },
-          {
-            "_row_num": 5,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "clause": "end if // start",
+            "__rowNum__": 2,
             "_token_type": "goto_label",
-            "_branch_label": "_endif8",
-            "_row_num": 8,
-            "operationIdx": 5
-          },
-          {
-            "_row_num": 7,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
+            "_branch_label": "_finalize",
+            "operationIdx": 1
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 9,
-            "operationIdx": 7
+            "_row_num": 4,
+            "operationIdx": 2
           },
           {
-            "_row_num": 9,
+            "_row_num": 4,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 8
+            "operationIdx": 3
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 9,
-            "operationIdx": 9
+            "_row_num": 4,
+            "operationIdx": 4
           },
           {
             "_token_type": "validate",
             "clause": "validate finalize",
             "_sweep_name": "finalize",
-            "_row_num": 9,
+            "_row_num": 4,
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 10
+            "operationIdx": 5
           },
           {
             "_token_type": "save_and_terminate",
             "clause": "save and terminate",
             "calculation": true,
-            "_row_num": 9,
+            "_row_num": 4,
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 11
+            "operationIdx": 6
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 9,
-            "operationIdx": 12
+            "_row_num": 4,
+            "operationIdx": 7
           }
         ],
         "branch_label_map": {
-          "_then2": 2,
-          "_screen3": 2,
-          "_screen5": 4,
-          "_else6": 6,
-          "_screen7": 6,
-          "_endif8": 7,
-          "_contents": 8,
-          "_screen9": 8,
-          "_finalize": 10
+          "_contents": 3,
+          "_screen4": 3,
+          "_finalize": 5
         }
       }
     },
@@ -6456,7 +6485,7 @@
       "thanks": {
         "_defn": [
           {
-            "_row_num": 47,
+            "_row_num": 48,
             "section_name": "survey"
           }
         ],
@@ -6708,6 +6737,20 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":\"beneficiary_registration Form\"}"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "defaultAccessOnCreation",
+        "_type": "string",
+        "_value": "HIDDEN"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "unverifiedUserCanCreate",
+        "_type": "boolean",
+        "_value": "false"
       }
     ]
   }

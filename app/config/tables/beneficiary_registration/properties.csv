@@ -11,3 +11,5 @@ FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,beneficiary_registration
 Table,default,defaultViewType,string,SPREADSHEET
 Table,default,displayName,object,"{""text"":""beneficiary_registration Form""}"
+Table,security,defaultAccessOnCreation,string,HIDDEN
+Table,security,unverifiedUserCanCreate,boolean,false
