@@ -159,6 +159,10 @@ input[type="range"]::-webkit-slider-thumb:before {
 }
 .odk-options-btn {
     width:100%;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .odk-header-back-btn {
     padding-left: 0;
@@ -172,7 +176,7 @@ input[type="range"]::-webkit-slider-thumb:before {
     padding-left: 15px;
     padding-right: 0;
 }
-.navbar-btn {
+.odk-navbar-btn {
     width:100%;
 }
 
