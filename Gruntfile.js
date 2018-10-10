@@ -250,8 +250,6 @@ module.exports = function (grunt) {
                         // Windows expects chrome.
                         grunt.log.writeln('detected Windows environment');
                         return 'chrome';
-                    } else if (platform.search("linux") >= 0) {
-                        return "xdg-open";
                     } else {
                         // Mac (and maybe others--add as discovered), expects
                         // Google Chrome
@@ -276,7 +274,7 @@ module.exports = function (grunt) {
     grunt.registerTask(
         'adbpush',
         'Perform all the adbpush tasks',
-        ['adbpush-default-app']);
+        ["adbpull-props", "remove-folders", 'adbpush-collect', 'adbpush-default-app', "adbpush-props"]);
 
     grunt.registerTask(
         'clean',
@@ -489,8 +487,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             // The first parameter is an options object where we specify that
             // we only want files--this is important because otherwise when
             // we get directory names adb will push everything in the directory
-            // name, effectively pushing everything twice.  We also specify that we 
-            // want everything returned to be relative to 'app' by using 'cwd'.  
+            // name, effectively pushing everything twice.  We also specify that we
+            // want everything returned to be relative to 'app' by using 'cwd'.
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
@@ -514,7 +512,6 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 grunt.task.run('exec:adbpush:' + src + ':' + dest);
             });
         });
-
 
     grunt.registerTask(
         'adbpush-tables',
@@ -2002,9 +1999,7 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 console.log("Deleting ".concat(folders[i]));
                 grunt.task.run("exec:adbshell:rm -rf ".concat(folders[i]));
             }
-            grunt.task.run("force:on")
-            grunt.task.run("exec:adbshell:run-as org.opendatakit.services rm -rf /data/data/org.opendatakit.services/app_" + tablesConfig.appName);
-            grunt.task.run("force:restore")
+
         });
     grunt.registerTask(
         "adbpull-props",
