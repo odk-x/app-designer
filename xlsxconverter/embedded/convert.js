@@ -1,7 +1,6 @@
 'use strict';
 
 import 'babel-polyfill';
-import 'whatwg-fetch';
 
 import _ from 'lodash';
 import XLSX from 'xlsx';
@@ -18,23 +17,27 @@ import {
     getFormIdFromFormDef
 } from './lib/devenv-util';
 
-async function convert(requestId) {
-    let xlsxFiles = await fetch(`/xlsx/${requestId}`).then(body => body.json());
+export function convert(xlsxBase64) {
+    let xlsx = XLSX.read(xlsxBase64, {type: 'base64'});
+    let xlsxJson = to_json(xlsx);
 
-    let uploadPromises = xlsxFiles.map(async f => {
-        let base64Xlsx = await fetch(`/xlsx/${requestId}/${encodeURIComponent(f)}`);
+    let formDef = processJSONWb(xlsxJson);
+    let warnings = getWarnings() || [];
 
-        try {
-            let jsonXlsx = to_json(XLSX.read(await base64Xlsx.text(), {type: 'base64'}));
-            let formDef = processJSONWb(jsonXlsx);
+    let dtm = formDef.specification.dataTableModel;
+    let tableId = getTableIdFromFormDef(formDef);
+    let formId = getFormIdFromFormDef(formDef);
+    let shouldWriteCsv = shouldWriteDefAndPropCsv(formDef);
 
-            return postFormDef(requestId, f, formDef, getWarnings() || []);
-        } catch (e) {
-            return postFormError(requestId, f, e);
-        }
-    });
-
-    await Promise.all(uploadPromises);
+    return {
+        'formDef.json': JSON.stringify(formDef),
+        'warnings': warnings,
+        'tableId': tableId,
+        'formId': formId,
+        'definition.csv': shouldWriteCsv ? createDefCsv(dtm) : null,
+        'properties.csv': shouldWriteCsv ? createPropCsv(dtm, formDef) : null,
+        'tableSpecificDefinitions.js': shouldWriteDefJs(formDef) ? createDefJs(tableId, formDef) : null
+    }
 }
 
 function to_json(workbook) {
@@ -51,38 +54,3 @@ function to_json(workbook) {
 
     return result;
 }
-
-function postFormDef(requestId, filename, formDef, warnings) {
-    let dtm = formDef.specification.dataTableModel;
-    let tableId = getTableIdFromFormDef(formDef);
-    let formId = getFormIdFromFormDef(formDef);
-    let shouldWriteCsv = shouldWriteDefAndPropCsv(formDef);
-
-    let form = new FormData();
-    form.append('formDef.json', JSON.stringify(formDef));
-    form.append('definition.csv', shouldWriteCsv ? createDefCsv(dtm) : "");
-    form.append('properties.csv', shouldWriteCsv ? createPropCsv(dtm, formDef) : "");
-    form.append('tableSpecificDefinitions.js', shouldWriteDefJs(formDef) ? createDefJs(tableId, formDef) : "");
-    form.append('warnings.json', warnings);
-
-    return fetch(`/xlsx/${requestId}/${encodeURIComponent(filename)}/${encodeURIComponent(tableId)}/${encodeURIComponent(formId)}`, {
-        method: 'POST',
-        body: form
-    });
-}
-
-async function postFormError(requestId, filename, error) {
-    return fetch(`/xlsx/${requestId}/${encodeURIComponent(filename)}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: error.name,
-            message: error.message,
-            file: filename
-        })
-    });
-}
-
-convert(window.location.hash.substring(1));

@@ -2,7 +2,7 @@
   "name": "embeddedxlsxconverter",
   "version": "0.0.0",
   "scripts": {
-    "build": "webpack --optimize-minimize"
+    "build": "webpack"
   },
   "dependencies": {},
   "devDependencies": {
@@ -15,11 +15,10 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-flow": "^6.23.0",
     "browser-request": "^0.3.3",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "lodash-webpack-plugin": "^0.11.5",
     "shx": "^0.2.2",
     "webpack": "^2.5.1",
-    "whatwg-fetch": "^2.0.4",
     "xlsx": "0.7.12"
   }
 }

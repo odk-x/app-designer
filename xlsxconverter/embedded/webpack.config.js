@@ -3,10 +3,13 @@ var path = require('path');
 var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = {
-    entry: ['babel-polyfill', 'whatwg-fetch', './convert.js'],
+    entry: {
+        'converter': ['./lib/devenv-util', './convert.js']
+    },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'out')
+        path: path.resolve(__dirname, 'out'),
+        library: ['XLSXConverter', '[name]']
     },
     module: {
         rules: [
