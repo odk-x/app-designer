@@ -1,0 +1,6 @@
+_partition,_aspect,_key,_type,_value
+SurveyUtil,default,SurveyUtil.formId,string,wrong_form
+Table,default,defaultViewType,string,SPREADSHEET
+Table,default,displayName,object,"{""text"":""Visit Programs""}"
+Table,security,defaultAccessOnCreation,string,HIDDEN
+Table,security,unverifiedUserCanCreate,boolean,false
