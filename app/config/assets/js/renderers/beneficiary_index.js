@@ -10,6 +10,7 @@ var dataToken = "data_path";
 var administratorToken = "administrator_options";
 var registrationTitleToken = 'registration_title';
 var deliveryTitleToken = 'delivery_title';
+var visitToken = 'visit_name';
 var locale = odkCommon.getPreferredLocale();
 
 // Displays homescreen
@@ -46,6 +47,21 @@ beneficiaryIndex.display = function() {
                              +'&type=delivery');
     };
     document.getElementById("wrapper").appendChild(followUp);
+
+    var visitBtn = document.createElement("button");
+    // visitBtn.innerHTML = odkCommon.localizeText(locale, visitToken);
+    visitBtn.innerHTML = "Visit";
+    visitBtn.setAttribute("id", "visit");
+    visitBtn.onclick = function() {
+        odkTables.openTableToListView(
+            null,
+            'visit_programs',
+            null,
+            null,
+            'config/tables/visit_programs/html/visit_programs_list.html'
+        );
+    };
+    document.getElementById("wrapper").appendChild(visitBtn);
 
     var viewData = document.createElement("button");
     viewData.innerHTML = odkCommon.localizeText(locale, dataToken);

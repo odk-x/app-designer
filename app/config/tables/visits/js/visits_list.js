@@ -6,7 +6,7 @@
 
 var locale = odkCommon.getPreferredLocale();
 var idxStart = -1;
-var visitProgramsResultSet = {};
+var visitsResultSet = {};
 
 /**
  * Use chunked list view for larger tables: We want to chunk the displays so
@@ -17,7 +17,7 @@ var visitProgramsResultSet = {};
  * Called when page loads to display things (Nothing to edit here)
  */
 var deliveriesCBSuccess = function(result) {
-    visitProgramsResultSet = result;
+    visitsResultSet = result;
 
     return (function() {
         displayGroup(idxStart);
@@ -26,7 +26,7 @@ var deliveriesCBSuccess = function(result) {
 
 var deliveriesCBFailure = function(error) {
 
-    console.log('visit_programs_list deliveriesCBFailure: ' + error);
+    console.log('visits_list deliveriesCBFailure: ' + error);
 };
 
 var firstLoad = function() {
@@ -47,7 +47,7 @@ var resumeFn = function(fIdxStart) {
         // We're also going to add a click listener on the wrapper ul that will
         // handle all of the clicks on its children.
         $('#list').click(function(e) {
-            var tableId = visitProgramsResultSet.getTableId();
+            var tableId = visitsResultSet.getTableId();
             // We set the rowId while as the li id. However, we may have
             // clicked on the li or anything in the li. Thus we need to get
             // the original li, which we'll do with jQuery's closest()
@@ -62,25 +62,7 @@ var resumeFn = function(fIdxStart) {
             console.log('clicked with rowId: ' + rowId);
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
-                // we'll pass null as the relative path to use the default file
-                odkTables.openTableToListViewArbitraryQuery(
-                    null,
-                    'visits',
-                    'SELECT VB._id, household._id AS customRowId, telephone_number_1, telephone_number_2, first_names, last_names, custom_visit_table_id, custom_visit_form_id\n' +
-                    'FROM (SELECT *\n' +
-                    '      FROM visits\n' +
-                    '             INNER JOIN beneficiary_entities ON visits.beneficiary_unit_id = beneficiary_entities._id\n' +
-                    '      WHERE visits.visit_program_id = ?) AS VB\n' +
-                    '       INNER JOIN household ON custom_beneficiary_entity_row_id = household._id',
-                    [rowId],
-                    'config/tables/visits/html/visits_list.html'
-                );
-
-                // odkTables.openDetailView(
-                //   null,
-                //   tableId,
-                //   rowId,
-                //   'config/tables/visits/html/visits_list.html');
+                odkTables.editRowWithSurvey(null, visitsResultSet.getData(0, 'custom_visit_table_id'), rowId, visitsResultSet.getData(0, 'custom_visit_form_id'), null);
             }
         });
     }
@@ -97,7 +79,7 @@ var displayGroup = function(idxStart) {
     console.log('displayGroup called. idxStart: ' + idxStart);
 
     /* If the list comes back empty, inform the user */
-    if (visitProgramsResultSet.getCount() === 0) {
+    if (visitsResultSet.getCount() === 0) {
         var errorText = $('#error');
         errorText.show();
         errorText.text('No visits found'); // TODO: Translate this
@@ -106,17 +88,17 @@ var displayGroup = function(idxStart) {
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
-      if (i >= visitProgramsResultSet.getCount()) {
+      if (i >= visitsResultSet.getCount()) {
         break;
       }
       /* Creates the item space */
       // We're going to select the ul and then start adding things to it.
       //var item = $('#list').append('<li>');
       var item = $('<li>');
-      item.attr('rowId', visitProgramsResultSet.getRowId(i));
+      item.attr('rowId', visitsResultSet.getData(i, 'customRowId'));
       item.attr('class', 'item_space');
 
-      item.text(visitProgramsResultSet.getData(i, 'name'));
+      item.text(visitsResultSet.getData(i, 'first_names') + ' ' + visitsResultSet.getData(i, 'last_names'));
 
       /* Creates arrow icon (Nothing to edit here) */
       var chevron = $('<img>');
@@ -133,13 +115,15 @@ var displayGroup = function(idxStart) {
        */
 
 
-      // var field2 = $('<li>');
-      // field2.attr('class', 'detail');
-      // var beneficiary_entity_id = visitProgramsResultSet.getData(i, 'beneficiary_entity_id');
-      // field2.text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ' : ' + beneficiary_entity_id);
-      // item.append(field2);
+      var phoneNumber1 = $('<li>');
+      phoneNumber1.attr('class', 'detail');
+      phoneNumber1.text('Phone # 1' + ' : ' + (visitsResultSet.getData(i, 'telephone_number_1') || ''));
+      item.append(phoneNumber1);
 
-
+      var phoneNumber2 = $('<li>');
+      phoneNumber2.attr('class', 'detail');
+      phoneNumber2.text('Phone # 2' + ' : ' + (visitsResultSet.getData(i, 'telephone_number_2') || ''));
+      item.append(phoneNumber2);
 
       $('#list').append(item);
 
@@ -149,7 +133,7 @@ var displayGroup = function(idxStart) {
       $('#list').append(borderDiv);
 
     }
-    if (i < visitProgramsResultSet.getCount()) {
+    if (i < visitsResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
 };
