@@ -75,12 +75,6 @@ var resumeFn = function(fIdxStart) {
                     [rowId],
                     'config/tables/visits/html/visits_list.html'
                 );
-
-                // odkTables.openDetailView(
-                //   null,
-                //   tableId,
-                //   rowId,
-                //   'config/tables/visits/html/visits_list.html');
             }
         });
     }
