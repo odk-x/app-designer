@@ -10,7 +10,7 @@ window.odkCommonDefinitions = {
             "text": {
               "english": "English",
               "hindi": "English (as hindi name)",
-              "es": "Ingles",
+              "es": "Inglés",
               "default": "English"
             }
           }
