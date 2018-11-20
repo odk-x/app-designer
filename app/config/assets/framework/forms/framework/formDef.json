@@ -531,6 +531,24 @@
       {
         "clause": "exit section",
         "_row_num": 88
+      },
+      {
+        "branch_label": "checklist",
+        "_row_num": 89
+      },
+      {
+        "url": "'?' +  odkSurvey.getHashString('checklist','checklist')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
+        },
+        "_row_num": 90
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 91
       }
     ],
     "settings": [
@@ -880,6 +898,16 @@
           }
         },
         "_row_num": 28
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "checklist",
+        "display": {
+          "title": {
+            "text": "Checklist"
+          }
+        },
+        "_row_num": 29
       }
     ],
     "framework_translations": [
@@ -1787,6 +1815,16 @@
             }
           },
           "_row_num": 28
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "checklist",
+          "display": {
+            "title": {
+              "text": "Checklist"
+            }
+          },
+          "_row_num": 29
         }
       ]
     },
@@ -2874,12 +2912,27 @@
             "promptIdx": 28
           },
           {
+            "url": "'?' +  odkSurvey.getHashString('checklist','checklist')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 90,
+            "__rowNum__": 89,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen90",
+            "promptIdx": 29
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 89,
-            "_branch_label_enclosing_screen": "survey/_screen89",
-            "promptIdx": 29
+            "_row_num": 92,
+            "_branch_label_enclosing_screen": "survey/_screen92",
+            "promptIdx": 30
           }
         ],
         "validation_tag_map": {
@@ -3280,25 +3333,38 @@
             "operationIdx": 59
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 89,
+            "_row_num": 90,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 60
           },
           {
-            "_row_num": 89,
+            "clause": "exit section",
+            "_row_num": 91,
+            "__rowNum__": 90,
+            "_token_type": "exit_section",
+            "operationIdx": 61
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 92,
+            "operationIdx": 62
+          },
+          {
+            "_row_num": 92,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(30);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 61
+            "operationIdx": 63
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 89,
-            "operationIdx": 62
+            "_row_num": 92,
+            "operationIdx": 64
           }
         ],
         "branch_label_map": {
@@ -3361,8 +3427,10 @@
           "_screen84": 56,
           "partner6Month": 58,
           "_screen87": 58,
-          "_contents": 61,
-          "_screen89": 61
+          "checklist": 60,
+          "_screen90": 60,
+          "_contents": 63,
+          "_screen92": 63
         }
       }
     },
