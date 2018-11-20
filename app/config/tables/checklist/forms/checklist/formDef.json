@@ -247,6 +247,11 @@
         "_row_num": 32
       },
       {
+        "clause": "if",
+        "condition": "selected(data('is_site_as_per_odp'), 'no')",
+        "_row_num": 33
+      },
+      {
         "type": "text",
         "name": "if_no_justification",
         "display": {
@@ -254,7 +259,11 @@
             "text": "If not, what is the justification for change:"
           }
         },
-        "_row_num": 33
+        "_row_num": 34
+      },
+      {
+        "clause": "end if",
+        "_row_num": 35
       },
       {
         "type": "date",
@@ -264,15 +273,15 @@
             "text": "Installation signoff date:"
           }
         },
-        "_row_num": 34
+        "_row_num": 36
       },
       {
         "clause": "end screen",
-        "_row_num": 35
+        "_row_num": 37
       },
       {
         "clause": "begin screen",
-        "_row_num": 36
+        "_row_num": 38
       },
       {
         "type": "select_one",
@@ -283,7 +292,7 @@
             "text": "Were the boxes opened by the local agent technicians in the presence of Health Facility representatives / authorized person to check the correct and complete delivery of all items based on the packing lists?"
           }
         },
-        "_row_num": 37
+        "_row_num": 39
       },
       {
         "type": "select_one",
@@ -294,7 +303,7 @@
             "text": "Did the equipment have with It, a data plate indicating the model, serial number and vaccine storage capacity?"
           }
         },
-        "_row_num": 38
+        "_row_num": 40
       },
       {
         "type": "image",
@@ -304,7 +313,7 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 39
+        "_row_num": 41
       },
       {
         "type": "select_one",
@@ -315,7 +324,7 @@
             "text": "Was the reception form or way bill signed by the Health Facility authority?"
           }
         },
-        "_row_num": 40
+        "_row_num": 42
       },
       {
         "type": "image",
@@ -325,15 +334,15 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 41
+        "_row_num": 43
       },
       {
         "clause": "end screen",
-        "_row_num": 42
+        "_row_num": 44
       },
       {
         "clause": "begin screen",
-        "_row_num": 43
+        "_row_num": 45
       },
       {
         "type": "select_one",
@@ -344,7 +353,7 @@
             "text": "Is the CCE installed in a horizontal position and stable? Verify with level."
           }
         },
-        "_row_num": 44
+        "_row_num": 46
       },
       {
         "type": "image",
@@ -354,7 +363,7 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 45
+        "_row_num": 47
       },
       {
         "type": "select_one",
@@ -365,7 +374,7 @@
             "text": "Were the immunization staff at the Health Facility available during the installation?"
           }
         },
-        "_row_num": 46
+        "_row_num": 48
       },
       {
         "type": "integer",
@@ -375,15 +384,15 @@
             "text": "How many staff were present during the installation?"
           }
         },
-        "_row_num": 47
+        "_row_num": 49
       },
       {
         "clause": "end screen",
-        "_row_num": 48
+        "_row_num": 50
       },
       {
         "clause": "begin screen",
-        "_row_num": 49
+        "_row_num": 51
       },
       {
         "type": "select_one",
@@ -394,7 +403,12 @@
             "text": "Does the Health Facility have a copy of the Signed Annex E (Installation Checklist)?"
           }
         },
-        "_row_num": 50
+        "_row_num": 52
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('have_copy_of_signed_annex_e'), 'yes')",
+        "_row_num": 53
       },
       {
         "type": "image",
@@ -404,7 +418,11 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 51
+        "_row_num": 54
+      },
+      {
+        "clause": "end if",
+        "_row_num": 55
       },
       {
         "type": "select_one",
@@ -415,7 +433,12 @@
             "text": "Does the Health Facility have a copy of the Functionality Test (from the local service provider)?"
           }
         },
-        "_row_num": 52
+        "_row_num": 56
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('have_copy_of_func_test'), 'yes')",
+        "_row_num": 57
       },
       {
         "type": "image",
@@ -425,15 +448,19 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 53
+        "_row_num": 58
+      },
+      {
+        "clause": "end if",
+        "_row_num": 59
       },
       {
         "clause": "end screen",
-        "_row_num": 54
+        "_row_num": 60
       },
       {
         "clause": "begin screen",
-        "_row_num": 55
+        "_row_num": 61
       },
       {
         "type": "text",
@@ -443,7 +470,7 @@
             "text": "Where is the CCE installed? (name the room in facility)"
           }
         },
-        "_row_num": 56
+        "_row_num": 62
       },
       {
         "type": "integer",
@@ -453,15 +480,15 @@
             "text": "How much time did it take for the installation(hours)?"
           }
         },
-        "_row_num": 57
+        "_row_num": 63
       },
       {
         "clause": "end screen",
-        "_row_num": 58
+        "_row_num": 64
       },
       {
         "clause": "begin screen",
-        "_row_num": 59
+        "_row_num": 65
       },
       {
         "type": "select_one",
@@ -472,7 +499,7 @@
             "text": "Is the CCE equipped with the country standard plug ?"
           }
         },
-        "_row_num": 60
+        "_row_num": 66
       },
       {
         "type": "image",
@@ -482,7 +509,7 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 61
+        "_row_num": 67
       },
       {
         "type": "select_one",
@@ -493,15 +520,15 @@
             "text": "Is the CCE installed according to the manufacturer's installation manual?(verify with Manufacturer Manual)"
           }
         },
-        "_row_num": 62
+        "_row_num": 68
       },
       {
         "clause": "end screen",
-        "_row_num": 63
+        "_row_num": 69
       },
       {
         "clause": "begin screen",
-        "_row_num": 64
+        "_row_num": 70
       },
       {
         "type": "select_one",
@@ -512,7 +539,7 @@
             "text": "Is the voltage regulator installed as per manufacturer instructions ?(verify with stabilizer manual)"
           }
         },
-        "_row_num": 65
+        "_row_num": 71
       },
       {
         "type": "select_one",
@@ -523,7 +550,7 @@
             "text": "Is the voltage regulator functional (eg. are the pilot lights or volt meters functional ?)"
           }
         },
-        "_row_num": 66
+        "_row_num": 72
       },
       {
         "type": "image",
@@ -533,15 +560,15 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 67
+        "_row_num": 73
       },
       {
         "clause": "end screen",
-        "_row_num": 68
+        "_row_num": 74
       },
       {
         "clause": "begin screen",
-        "_row_num": 69
+        "_row_num": 75
       },
       {
         "type": "select_one",
@@ -552,7 +579,7 @@
             "text": "Were the Solar panels installed as planned (pole, ground or roof)?"
           }
         },
-        "_row_num": 70
+        "_row_num": 76
       },
       {
         "type": "select_one",
@@ -563,7 +590,7 @@
             "text": "Are the Solar panels installed as per manufacturer instructions? (Eg. No shadow from trees or nearby buildings)"
           }
         },
-        "_row_num": 71
+        "_row_num": 77
       },
       {
         "type": "image",
@@ -573,15 +600,15 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 72
+        "_row_num": 78
       },
       {
         "clause": "end screen",
-        "_row_num": 73
+        "_row_num": 79
       },
       {
         "clause": "begin screen",
-        "_row_num": 74
+        "_row_num": 80
       },
       {
         "type": "select_one",
@@ -592,7 +619,12 @@
             "text": "Is the material for the support structure, as per the manufacturer instructions?"
           }
         },
-        "_row_num": 75
+        "_row_num": 81
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('support_material_per_instructions'), 'no')",
+        "_row_num": 82
       },
       {
         "type": "text",
@@ -602,15 +634,19 @@
             "text": "If not, specify the type of material used"
           }
         },
-        "_row_num": 76
+        "_row_num": 83
+      },
+      {
+        "clause": "end if",
+        "_row_num": 84
       },
       {
         "clause": "end screen",
-        "_row_num": 77
+        "_row_num": 85
       },
       {
         "clause": "begin screen",
-        "_row_num": 78
+        "_row_num": 86
       },
       {
         "type": "select_one",
@@ -621,7 +657,7 @@
             "text": "Are the panels' orientation and angle as per manufacturer instructions?"
           }
         },
-        "_row_num": 79
+        "_row_num": 87
       },
       {
         "type": "image",
@@ -631,35 +667,35 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 80
+        "_row_num": 88
       },
       {
-        "type": "text",
+        "type": "integer",
         "name": "angle_of_inclination",
         "display": {
           "prompt": {
             "text": "Indicate angle of inclination"
           }
         },
-        "_row_num": 81
+        "_row_num": 89
       },
       {
-        "type": "text",
+        "type": "integer",
         "name": "angle_of_orientation",
         "display": {
           "prompt": {
             "text": "Indicate angle of orientation"
           }
         },
-        "_row_num": 82
+        "_row_num": 90
       },
       {
         "clause": "end screen",
-        "_row_num": 83
+        "_row_num": 91
       },
       {
         "clause": "begin screen",
-        "_row_num": 84
+        "_row_num": 92
       },
       {
         "type": "select_one",
@@ -670,7 +706,7 @@
             "text": "Is the cabling from the panels to the CCE, properly installed / affixed to the wall as per the installation guidelines?"
           }
         },
-        "_row_num": 85
+        "_row_num": 93
       },
       {
         "type": "image",
@@ -680,7 +716,7 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 86
+        "_row_num": 94
       },
       {
         "type": "select_one",
@@ -691,7 +727,7 @@
             "text": "Are the cables protected? (protected with trunking cables etc.)"
           }
         },
-        "_row_num": 87
+        "_row_num": 95
       },
       {
         "type": "image",
@@ -701,15 +737,15 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 88
+        "_row_num": 96
       },
       {
         "clause": "end screen",
-        "_row_num": 89
+        "_row_num": 97
       },
       {
         "clause": "begin screen",
-        "_row_num": 90
+        "_row_num": 98
       },
       {
         "type": "select_one",
@@ -720,7 +756,7 @@
             "text": "Is the lightening arrester / grounding properly installed as per supplier installation instructions?"
           }
         },
-        "_row_num": 91
+        "_row_num": 99
       },
       {
         "type": "image",
@@ -730,7 +766,7 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 92
+        "_row_num": 100
       },
       {
         "type": "select_one",
@@ -741,7 +777,7 @@
             "text": "Has the anti-theft device or mechansim been installed, according to the installation instructions?"
           }
         },
-        "_row_num": 93
+        "_row_num": 101
       },
       {
         "type": "image",
@@ -751,15 +787,15 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 94
+        "_row_num": 102
       },
       {
         "clause": "end screen",
-        "_row_num": 95
+        "_row_num": 103
       },
       {
         "clause": "begin screen",
-        "_row_num": 96
+        "_row_num": 104
       },
       {
         "type": "select_one",
@@ -770,7 +806,7 @@
             "text": "Are the panels easly accessible for the purpose of cleaning?"
           }
         },
-        "_row_num": 97
+        "_row_num": 105
       },
       {
         "type": "image",
@@ -780,7 +816,7 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 98
+        "_row_num": 106
       },
       {
         "type": "select_one",
@@ -791,7 +827,7 @@
             "text": "Is there equipment available for the purpose of cleaning the solar panel ? (such as mop, ladder, etc.)"
           }
         },
-        "_row_num": 99
+        "_row_num": 107
       },
       {
         "type": "select_one",
@@ -802,7 +838,7 @@
             "text": "Is the temperature monitoring device (30 DTR / RTMD/ Both)  provided by the supplier?"
           }
         },
-        "_row_num": 100
+        "_row_num": 108
       },
       {
         "type": "image",
@@ -812,15 +848,15 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 101
+        "_row_num": 109
       },
       {
         "clause": "end screen",
-        "_row_num": 102
+        "_row_num": 110
       },
       {
         "clause": "begin screen",
-        "_row_num": 103
+        "_row_num": 111
       },
       {
         "type": "text",
@@ -830,7 +866,7 @@
             "text": "What type(s) of temperature monitoring device is available (30 DTR / RTMD/ Both)?"
           }
         },
-        "_row_num": 104
+        "_row_num": 112
       },
       {
         "type": "select_one",
@@ -841,7 +877,7 @@
             "text": "Has the installer activated the temperature monitoring device in the case of 30 DTR?"
           }
         },
-        "_row_num": 105
+        "_row_num": 113
       },
       {
         "type": "select_one",
@@ -852,15 +888,15 @@
             "text": "Is the temperature monitoring device functioning correctly?"
           }
         },
-        "_row_num": 106
+        "_row_num": 114
       },
       {
         "clause": "end screen",
-        "_row_num": 107
+        "_row_num": 115
       },
       {
         "clause": "begin screen",
-        "_row_num": 108
+        "_row_num": 116
       },
       {
         "type": "select_one",
@@ -871,7 +907,7 @@
             "text": "Can the user demonstrate the ability to correctly read the temperature recording device, including alarms?"
           }
         },
-        "_row_num": 109
+        "_row_num": 117
       },
       {
         "type": "select_one",
@@ -882,7 +918,12 @@
             "text": "Has there been any alarm recorded during the last 30 days?"
           }
         },
-        "_row_num": 110
+        "_row_num": 118
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('alarm_last_thirty_days'), 'yes')",
+        "_row_num": 119
       },
       {
         "type": "integer",
@@ -892,7 +933,7 @@
             "text": "If so, please indicate, the number of heat alarm(s)"
           }
         },
-        "_row_num": 111
+        "_row_num": 120
       },
       {
         "type": "integer",
@@ -902,15 +943,19 @@
             "text": "If so, please indicate, the number of freeze alarm(s)"
           }
         },
-        "_row_num": 112
+        "_row_num": 121
+      },
+      {
+        "clause": "end if",
+        "_row_num": 122
       },
       {
         "clause": "end screen",
-        "_row_num": 113
+        "_row_num": 123
       },
       {
         "clause": "begin screen",
-        "_row_num": 114
+        "_row_num": 124
       },
       {
         "type": "select_one",
@@ -921,7 +966,7 @@
             "text": "Is the CCE operating correctly as per manufacturer instructions?(e.g. +2 to +8 degrees C, Correct color of indicator lights, smooth compressor sounds etc .)"
           }
         },
-        "_row_num": 115
+        "_row_num": 125
       },
       {
         "type": "image",
@@ -931,15 +976,15 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 116
+        "_row_num": 126
       },
       {
         "clause": "end screen",
-        "_row_num": 117
+        "_row_num": 127
       },
       {
         "clause": "begin screen",
-        "_row_num": 118
+        "_row_num": 128
       },
       {
         "type": "note",
@@ -949,7 +994,7 @@
             "text": "If the CCE is not operating correctly, please answer questions pertaining to 8.2 to indicate which aspects of the CCE are not fuctional:"
           }
         },
-        "_row_num": 119
+        "_row_num": 129
       },
       {
         "type": "note",
@@ -959,7 +1004,7 @@
             "text": "Power related failure( Please choose the applicable one):"
           }
         },
-        "_row_num": 120
+        "_row_num": 130
       },
       {
         "type": "select_one",
@@ -970,7 +1015,7 @@
             "text": "Mains Powered CCE?"
           }
         },
-        "_row_num": 121
+        "_row_num": 131
       },
       {
         "type": "image",
@@ -980,7 +1025,7 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 122
+        "_row_num": 132
       },
       {
         "type": "select_one",
@@ -991,7 +1036,7 @@
             "text": "SDD CCE?"
           }
         },
-        "_row_num": 123
+        "_row_num": 133
       },
       {
         "type": "image",
@@ -1001,7 +1046,7 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 124
+        "_row_num": 134
       },
       {
         "type": "select_one",
@@ -1012,7 +1057,7 @@
             "text": "Faulty component?"
           }
         },
-        "_row_num": 125
+        "_row_num": 135
       },
       {
         "type": "image",
@@ -1022,7 +1067,7 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 126
+        "_row_num": 136
       },
       {
         "type": "select_one",
@@ -1033,7 +1078,7 @@
             "text": "User related failure (Improper usage)?"
           }
         },
-        "_row_num": 127
+        "_row_num": 137
       },
       {
         "type": "image",
@@ -1043,15 +1088,15 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 128
+        "_row_num": 138
       },
       {
         "clause": "end screen",
-        "_row_num": 129
+        "_row_num": 139
       },
       {
         "clause": "begin screen",
-        "_row_num": 130
+        "_row_num": 140
       },
       {
         "type": "select_one",
@@ -1062,7 +1107,12 @@
             "text": "Did the installation technician train the personnel on site?"
           }
         },
-        "_row_num": 131
+        "_row_num": 141
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('tech_train_personnel_on_site'), 'no')",
+        "_row_num": 142
       },
       {
         "type": "text",
@@ -1072,7 +1122,11 @@
             "text": "If not, give reason"
           }
         },
-        "_row_num": 132
+        "_row_num": 143
+      },
+      {
+        "clause": "end if",
+        "_row_num": 144
       },
       {
         "type": "integer",
@@ -1082,7 +1136,7 @@
             "text": "Please specify the number of users trained?"
           }
         },
-        "_row_num": 133
+        "_row_num": 145
       },
       {
         "type": "select_one",
@@ -1093,7 +1147,7 @@
             "text": "Was the training at the Health Facility conducted on the same day as the installation?"
           }
         },
-        "_row_num": 134
+        "_row_num": 146
       },
       {
         "type": "integer",
@@ -1101,108 +1155,6 @@
         "display": {
           "prompt": {
             "text": "Please specify the duration of the training (hours)?"
-          }
-        },
-        "_row_num": 135
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 136
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 137
-      },
-      {
-        "type": "note",
-        "name": "training_note",
-        "display": {
-          "prompt": {
-            "text": "Did the training at Health Facility level include :"
-          }
-        },
-        "_row_num": 138
-      },
-      {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "basic_handling_training",
-        "display": {
-          "prompt": {
-            "text": "a.     Basic handling?"
-          }
-        },
-        "_row_num": 139
-      },
-      {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "user_level_maint_training",
-        "display": {
-          "prompt": {
-            "text": "b.     User level maintenance?"
-          }
-        },
-        "_row_num": 140
-      },
-      {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "temp_monitor_record_training",
-        "display": {
-          "prompt": {
-            "text": "d.     Monitoring and recording of temperature?"
-          }
-        },
-        "_row_num": 141
-      },
-      {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "malfunction_proc_training",
-        "display": {
-          "prompt": {
-            "text": "e.     Procedures to follow in case of malfunction /  breakdown?"
-          }
-        },
-        "_row_num": 142
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 143
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 144
-      },
-      {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "training_materials_provided",
-        "display": {
-          "prompt": {
-            "text": "Was any reference material such as leaflet or presentation provided to the Health Facility staff?"
-          }
-        },
-        "_row_num": 145
-      },
-      {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "user_guideline_on_cover",
-        "display": {
-          "prompt": {
-            "text": "Is a picturial user guideline available on the cover?"
-          }
-        },
-        "_row_num": 146
-      },
-      {
-        "type": "image",
-        "name": "user_guideline_on_cover_image",
-        "display": {
-          "prompt": {
-            "text": "Take picture"
           }
         },
         "_row_num": 147
@@ -1217,13 +1169,115 @@
       },
       {
         "type": "note",
+        "name": "training_note",
+        "display": {
+          "prompt": {
+            "text": "Did the training at Health Facility level include :"
+          }
+        },
+        "_row_num": 150
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "basic_handling_training",
+        "display": {
+          "prompt": {
+            "text": "a.     Basic handling?"
+          }
+        },
+        "_row_num": 151
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "user_level_maint_training",
+        "display": {
+          "prompt": {
+            "text": "b.     User level maintenance?"
+          }
+        },
+        "_row_num": 152
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "temp_monitor_record_training",
+        "display": {
+          "prompt": {
+            "text": "d.     Monitoring and recording of temperature?"
+          }
+        },
+        "_row_num": 153
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "malfunction_proc_training",
+        "display": {
+          "prompt": {
+            "text": "e.     Procedures to follow in case of malfunction /  breakdown?"
+          }
+        },
+        "_row_num": 154
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 155
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 156
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "training_materials_provided",
+        "display": {
+          "prompt": {
+            "text": "Was any reference material such as leaflet or presentation provided to the Health Facility staff?"
+          }
+        },
+        "_row_num": 157
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "user_guideline_on_cover",
+        "display": {
+          "prompt": {
+            "text": "Is a picturial user guideline available on the cover?"
+          }
+        },
+        "_row_num": 158
+      },
+      {
+        "type": "image",
+        "name": "user_guideline_on_cover_image",
+        "display": {
+          "prompt": {
+            "text": "Take picture"
+          }
+        },
+        "_row_num": 159
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 160
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 161
+      },
+      {
+        "type": "note",
         "name": "installer_note",
         "display": {
           "prompt": {
             "text": "Did the installer supply the following manuals:"
           }
         },
-        "_row_num": 150
+        "_row_num": 162
       },
       {
         "type": "select_one",
@@ -1234,7 +1288,7 @@
             "text": "Users Manuel?"
           }
         },
-        "_row_num": 151
+        "_row_num": 163
       },
       {
         "type": "select_one",
@@ -1245,7 +1299,7 @@
             "text": "Maintenance guide?"
           }
         },
-        "_row_num": 152
+        "_row_num": 164
       },
       {
         "type": "select_one",
@@ -1256,7 +1310,7 @@
             "text": "Template to report a malfunction / breakdown?"
           }
         },
-        "_row_num": 153
+        "_row_num": 165
       },
       {
         "type": "image",
@@ -1266,11 +1320,11 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 154
+        "_row_num": 166
       },
       {
         "clause": "end screen",
-        "_row_num": 155
+        "_row_num": 167
       },
       {
         "type": "select_one",
@@ -1281,7 +1335,7 @@
             "text": "Are all manuals available in the agreed UN languages ? (e.g. English, French, Spanish, Arabic etc.)"
           }
         },
-        "_row_num": 156
+        "_row_num": 168
       }
     ],
     "choices": [
@@ -1659,7 +1713,7 @@
       "if_no_justification": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -1669,7 +1723,7 @@
       "install_signoff_date": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -1680,7 +1734,7 @@
       "boxes_opened_by_authorized_person": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -1691,7 +1745,7 @@
       "equipment_had_data_plate": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -1702,7 +1756,7 @@
       "data_plate_image": {
         "_defn": [
           {
-            "_row_num": 39,
+            "_row_num": 41,
             "section_name": "survey"
           }
         ],
@@ -1726,7 +1780,7 @@
       "signed_by_authority": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 42,
             "section_name": "survey"
           }
         ],
@@ -1737,7 +1791,7 @@
       "signed_by_image": {
         "_defn": [
           {
-            "_row_num": 41,
+            "_row_num": 43,
             "section_name": "survey"
           }
         ],
@@ -1761,7 +1815,7 @@
       "is_cce_installed": {
         "_defn": [
           {
-            "_row_num": 44,
+            "_row_num": 46,
             "section_name": "survey"
           }
         ],
@@ -1772,7 +1826,7 @@
       "cce_installed_image": {
         "_defn": [
           {
-            "_row_num": 45,
+            "_row_num": 47,
             "section_name": "survey"
           }
         ],
@@ -1796,7 +1850,7 @@
       "immunization_staff_available": {
         "_defn": [
           {
-            "_row_num": 46,
+            "_row_num": 48,
             "section_name": "survey"
           }
         ],
@@ -1807,7 +1861,7 @@
       "how_many_staff_present": {
         "_defn": [
           {
-            "_row_num": 47,
+            "_row_num": 49,
             "section_name": "survey"
           }
         ],
@@ -1817,7 +1871,7 @@
       "have_copy_of_signed_annex_e": {
         "_defn": [
           {
-            "_row_num": 50,
+            "_row_num": 52,
             "section_name": "survey"
           }
         ],
@@ -1828,7 +1882,7 @@
       "signed_annex_e_image": {
         "_defn": [
           {
-            "_row_num": 51,
+            "_row_num": 54,
             "section_name": "survey"
           }
         ],
@@ -1852,7 +1906,7 @@
       "have_copy_of_func_test": {
         "_defn": [
           {
-            "_row_num": 52,
+            "_row_num": 56,
             "section_name": "survey"
           }
         ],
@@ -1863,7 +1917,7 @@
       "func_test_image": {
         "_defn": [
           {
-            "_row_num": 53,
+            "_row_num": 58,
             "section_name": "survey"
           }
         ],
@@ -1887,7 +1941,7 @@
       "cce_installed_location": {
         "_defn": [
           {
-            "_row_num": 56,
+            "_row_num": 62,
             "section_name": "survey"
           }
         ],
@@ -1897,7 +1951,7 @@
       "installation_duration_hrs": {
         "_defn": [
           {
-            "_row_num": 57,
+            "_row_num": 63,
             "section_name": "survey"
           }
         ],
@@ -1907,7 +1961,7 @@
       "cce_equipped_standard_plug": {
         "_defn": [
           {
-            "_row_num": 60,
+            "_row_num": 66,
             "section_name": "survey"
           }
         ],
@@ -1918,7 +1972,7 @@
       "standard_plug_image": {
         "_defn": [
           {
-            "_row_num": 61,
+            "_row_num": 67,
             "section_name": "survey"
           }
         ],
@@ -1942,7 +1996,7 @@
       "cce_installed_according_to_manual": {
         "_defn": [
           {
-            "_row_num": 62,
+            "_row_num": 68,
             "section_name": "survey"
           }
         ],
@@ -1953,7 +2007,7 @@
       "voltage_regulator_installed_per_inst": {
         "_defn": [
           {
-            "_row_num": 65,
+            "_row_num": 71,
             "section_name": "survey"
           }
         ],
@@ -1964,7 +2018,7 @@
       "voltage_regulator_functional": {
         "_defn": [
           {
-            "_row_num": 66,
+            "_row_num": 72,
             "section_name": "survey"
           }
         ],
@@ -1975,7 +2029,7 @@
       "voltage_regulator_image": {
         "_defn": [
           {
-            "_row_num": 67,
+            "_row_num": 73,
             "section_name": "survey"
           }
         ],
@@ -1999,7 +2053,7 @@
       "solar_panels_installed_as_planned": {
         "_defn": [
           {
-            "_row_num": 70,
+            "_row_num": 76,
             "section_name": "survey"
           }
         ],
@@ -2010,7 +2064,7 @@
       "solar_panels_installed_per_inst": {
         "_defn": [
           {
-            "_row_num": 71,
+            "_row_num": 77,
             "section_name": "survey"
           }
         ],
@@ -2021,7 +2075,7 @@
       "solar_panels_installed_image": {
         "_defn": [
           {
-            "_row_num": 72,
+            "_row_num": 78,
             "section_name": "survey"
           }
         ],
@@ -2045,7 +2099,7 @@
       "support_material_per_instructions": {
         "_defn": [
           {
-            "_row_num": 75,
+            "_row_num": 81,
             "section_name": "survey"
           }
         ],
@@ -2056,7 +2110,7 @@
       "if_not_specify_material_used": {
         "_defn": [
           {
-            "_row_num": 76,
+            "_row_num": 83,
             "section_name": "survey"
           }
         ],
@@ -2066,7 +2120,7 @@
       "panels_orient_per_instr": {
         "_defn": [
           {
-            "_row_num": 79,
+            "_row_num": 87,
             "section_name": "survey"
           }
         ],
@@ -2077,7 +2131,7 @@
       "panels_orient_image": {
         "_defn": [
           {
-            "_row_num": 80,
+            "_row_num": 88,
             "section_name": "survey"
           }
         ],
@@ -2101,27 +2155,27 @@
       "angle_of_inclination": {
         "_defn": [
           {
-            "_row_num": 81,
+            "_row_num": 89,
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "integer",
         "elementKey": "angle_of_inclination"
       },
       "angle_of_orientation": {
         "_defn": [
           {
-            "_row_num": 82,
+            "_row_num": 90,
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "integer",
         "elementKey": "angle_of_orientation"
       },
       "panel_cabling_properly_installed": {
         "_defn": [
           {
-            "_row_num": 85,
+            "_row_num": 93,
             "section_name": "survey"
           }
         ],
@@ -2132,7 +2186,7 @@
       "panel_cabling_image": {
         "_defn": [
           {
-            "_row_num": 86,
+            "_row_num": 94,
             "section_name": "survey"
           }
         ],
@@ -2156,7 +2210,7 @@
       "cables_protected": {
         "_defn": [
           {
-            "_row_num": 87,
+            "_row_num": 95,
             "section_name": "survey"
           }
         ],
@@ -2167,7 +2221,7 @@
       "cables_protected_image": {
         "_defn": [
           {
-            "_row_num": 88,
+            "_row_num": 96,
             "section_name": "survey"
           }
         ],
@@ -2191,7 +2245,7 @@
       "is_grounding_properly_installed": {
         "_defn": [
           {
-            "_row_num": 91,
+            "_row_num": 99,
             "section_name": "survey"
           }
         ],
@@ -2202,7 +2256,7 @@
       "grounding_image": {
         "_defn": [
           {
-            "_row_num": 92,
+            "_row_num": 100,
             "section_name": "survey"
           }
         ],
@@ -2226,7 +2280,7 @@
       "anti_theft_installed_per_inst": {
         "_defn": [
           {
-            "_row_num": 93,
+            "_row_num": 101,
             "section_name": "survey"
           }
         ],
@@ -2237,7 +2291,7 @@
       "anti_theft_image": {
         "_defn": [
           {
-            "_row_num": 94,
+            "_row_num": 102,
             "section_name": "survey"
           }
         ],
@@ -2261,7 +2315,7 @@
       "panels_accesible_for_cleaning": {
         "_defn": [
           {
-            "_row_num": 97,
+            "_row_num": 105,
             "section_name": "survey"
           }
         ],
@@ -2272,7 +2326,7 @@
       "panels_accesible_image": {
         "_defn": [
           {
-            "_row_num": 98,
+            "_row_num": 106,
             "section_name": "survey"
           }
         ],
@@ -2296,7 +2350,7 @@
       "cleaning_equipment_available": {
         "_defn": [
           {
-            "_row_num": 99,
+            "_row_num": 107,
             "section_name": "survey"
           }
         ],
@@ -2307,7 +2361,7 @@
       "temp_monitoring_supplier_provided": {
         "_defn": [
           {
-            "_row_num": 100,
+            "_row_num": 108,
             "section_name": "survey"
           }
         ],
@@ -2318,7 +2372,7 @@
       "temp_monitoring_image": {
         "_defn": [
           {
-            "_row_num": 101,
+            "_row_num": 109,
             "section_name": "survey"
           }
         ],
@@ -2342,7 +2396,7 @@
       "temp_monitoring_type": {
         "_defn": [
           {
-            "_row_num": 104,
+            "_row_num": 112,
             "section_name": "survey"
           }
         ],
@@ -2352,7 +2406,7 @@
       "installer_activated_temp_mon_thirty_days": {
         "_defn": [
           {
-            "_row_num": 105,
+            "_row_num": 113,
             "section_name": "survey"
           }
         ],
@@ -2363,7 +2417,7 @@
       "temp_monitoring_functioning": {
         "_defn": [
           {
-            "_row_num": 106,
+            "_row_num": 114,
             "section_name": "survey"
           }
         ],
@@ -2374,7 +2428,7 @@
       "user_demonstrate_read_temp_dev": {
         "_defn": [
           {
-            "_row_num": 109,
+            "_row_num": 117,
             "section_name": "survey"
           }
         ],
@@ -2385,7 +2439,7 @@
       "alarm_last_thirty_days": {
         "_defn": [
           {
-            "_row_num": 110,
+            "_row_num": 118,
             "section_name": "survey"
           }
         ],
@@ -2396,7 +2450,7 @@
       "if_alarm_heat_number": {
         "_defn": [
           {
-            "_row_num": 111,
+            "_row_num": 120,
             "section_name": "survey"
           }
         ],
@@ -2406,7 +2460,7 @@
       "if_alarm_freeze_number": {
         "_defn": [
           {
-            "_row_num": 112,
+            "_row_num": 121,
             "section_name": "survey"
           }
         ],
@@ -2416,7 +2470,7 @@
       "cce_operating_correctly": {
         "_defn": [
           {
-            "_row_num": 115,
+            "_row_num": 125,
             "section_name": "survey"
           }
         ],
@@ -2427,7 +2481,7 @@
       "cce_operating_image": {
         "_defn": [
           {
-            "_row_num": 116,
+            "_row_num": 126,
             "section_name": "survey"
           }
         ],
@@ -2451,7 +2505,7 @@
       "mains_powered_cce": {
         "_defn": [
           {
-            "_row_num": 121,
+            "_row_num": 131,
             "section_name": "survey"
           }
         ],
@@ -2462,7 +2516,7 @@
       "mains_powered_cce_image": {
         "_defn": [
           {
-            "_row_num": 122,
+            "_row_num": 132,
             "section_name": "survey"
           }
         ],
@@ -2486,7 +2540,7 @@
       "sdd_cce": {
         "_defn": [
           {
-            "_row_num": 123,
+            "_row_num": 133,
             "section_name": "survey"
           }
         ],
@@ -2497,7 +2551,7 @@
       "sdd_cce_image": {
         "_defn": [
           {
-            "_row_num": 124,
+            "_row_num": 134,
             "section_name": "survey"
           }
         ],
@@ -2521,7 +2575,7 @@
       "faulty_component": {
         "_defn": [
           {
-            "_row_num": 125,
+            "_row_num": 135,
             "section_name": "survey"
           }
         ],
@@ -2532,7 +2586,7 @@
       "faulty_component_image": {
         "_defn": [
           {
-            "_row_num": 126,
+            "_row_num": 136,
             "section_name": "survey"
           }
         ],
@@ -2556,7 +2610,7 @@
       "user_related_failure": {
         "_defn": [
           {
-            "_row_num": 127,
+            "_row_num": 137,
             "section_name": "survey"
           }
         ],
@@ -2567,7 +2621,7 @@
       "user_related_failure_image": {
         "_defn": [
           {
-            "_row_num": 128,
+            "_row_num": 138,
             "section_name": "survey"
           }
         ],
@@ -2591,7 +2645,7 @@
       "tech_train_personnel_on_site": {
         "_defn": [
           {
-            "_row_num": 131,
+            "_row_num": 141,
             "section_name": "survey"
           }
         ],
@@ -2602,7 +2656,7 @@
       "no_tech_training_reason": {
         "_defn": [
           {
-            "_row_num": 132,
+            "_row_num": 143,
             "section_name": "survey"
           }
         ],
@@ -2612,7 +2666,7 @@
       "number_of_trained_users": {
         "_defn": [
           {
-            "_row_num": 133,
+            "_row_num": 145,
             "section_name": "survey"
           }
         ],
@@ -2622,7 +2676,7 @@
       "training_on_same_day_as_install": {
         "_defn": [
           {
-            "_row_num": 134,
+            "_row_num": 146,
             "section_name": "survey"
           }
         ],
@@ -2633,7 +2687,7 @@
       "training_duration_hrs": {
         "_defn": [
           {
-            "_row_num": 135,
+            "_row_num": 147,
             "section_name": "survey"
           }
         ],
@@ -2643,7 +2697,7 @@
       "basic_handling_training": {
         "_defn": [
           {
-            "_row_num": 139,
+            "_row_num": 151,
             "section_name": "survey"
           }
         ],
@@ -2654,7 +2708,7 @@
       "user_level_maint_training": {
         "_defn": [
           {
-            "_row_num": 140,
+            "_row_num": 152,
             "section_name": "survey"
           }
         ],
@@ -2665,7 +2719,7 @@
       "temp_monitor_record_training": {
         "_defn": [
           {
-            "_row_num": 141,
+            "_row_num": 153,
             "section_name": "survey"
           }
         ],
@@ -2676,7 +2730,7 @@
       "malfunction_proc_training": {
         "_defn": [
           {
-            "_row_num": 142,
+            "_row_num": 154,
             "section_name": "survey"
           }
         ],
@@ -2687,7 +2741,7 @@
       "training_materials_provided": {
         "_defn": [
           {
-            "_row_num": 145,
+            "_row_num": 157,
             "section_name": "survey"
           }
         ],
@@ -2698,7 +2752,7 @@
       "user_guideline_on_cover": {
         "_defn": [
           {
-            "_row_num": 146,
+            "_row_num": 158,
             "section_name": "survey"
           }
         ],
@@ -2709,7 +2763,7 @@
       "user_guideline_on_cover_image": {
         "_defn": [
           {
-            "_row_num": 147,
+            "_row_num": 159,
             "section_name": "survey"
           }
         ],
@@ -2733,7 +2787,7 @@
       "user_manual_supplied": {
         "_defn": [
           {
-            "_row_num": 151,
+            "_row_num": 163,
             "section_name": "survey"
           }
         ],
@@ -2744,7 +2798,7 @@
       "maint_guide_supplied": {
         "_defn": [
           {
-            "_row_num": 152,
+            "_row_num": 164,
             "section_name": "survey"
           }
         ],
@@ -2755,7 +2809,7 @@
       "malfunction_template_supplied": {
         "_defn": [
           {
-            "_row_num": 153,
+            "_row_num": 165,
             "section_name": "survey"
           }
         ],
@@ -2766,7 +2820,7 @@
       "malfunction_template_supplied_image": {
         "_defn": [
           {
-            "_row_num": 154,
+            "_row_num": 166,
             "section_name": "survey"
           }
         ],
@@ -2790,7 +2844,7 @@
       "manuals_available_in_un_lang": {
         "_defn": [
           {
-            "_row_num": 156,
+            "_row_num": 168,
             "section_name": "survey"
           }
         ],
@@ -3118,8 +3172,8 @@
                 "text": "If not, what is the justification for change:"
               }
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen29",
@@ -3133,8 +3187,8 @@
                 "text": "Installation signoff date:"
               }
             },
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "date",
             "_branch_label_enclosing_screen": "survey/_screen29",
@@ -3149,11 +3203,11 @@
                 "text": "Were the boxes opened by the local agent technicians in the presence of Health Facility representatives / authorized person to check the correct and complete delivery of all items based on the packing lists?"
               }
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 39,
+            "__rowNum__": 38,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_branch_label_enclosing_screen": "survey/_screen38",
             "promptIdx": 22
           },
           {
@@ -3165,11 +3219,11 @@
                 "text": "Did the equipment have with It, a data plate indicating the model, serial number and vaccine storage capacity?"
               }
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 40,
+            "__rowNum__": 39,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_branch_label_enclosing_screen": "survey/_screen38",
             "promptIdx": 23
           },
           {
@@ -3180,11 +3234,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 41,
+            "__rowNum__": 40,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_branch_label_enclosing_screen": "survey/_screen38",
             "promptIdx": 24
           },
           {
@@ -3196,11 +3250,11 @@
                 "text": "Was the reception form or way bill signed by the Health Facility authority?"
               }
             },
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 42,
+            "__rowNum__": 41,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_branch_label_enclosing_screen": "survey/_screen38",
             "promptIdx": 25
           },
           {
@@ -3211,11 +3265,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 41,
-            "__rowNum__": 40,
+            "_row_num": 43,
+            "__rowNum__": 42,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen36",
+            "_branch_label_enclosing_screen": "survey/_screen38",
             "promptIdx": 26
           },
           {
@@ -3227,11 +3281,11 @@
                 "text": "Is the CCE installed in a horizontal position and stable? Verify with level."
               }
             },
-            "_row_num": 44,
-            "__rowNum__": 43,
+            "_row_num": 46,
+            "__rowNum__": 45,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen43",
+            "_branch_label_enclosing_screen": "survey/_screen45",
             "promptIdx": 27
           },
           {
@@ -3242,11 +3296,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 45,
-            "__rowNum__": 44,
+            "_row_num": 47,
+            "__rowNum__": 46,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen43",
+            "_branch_label_enclosing_screen": "survey/_screen45",
             "promptIdx": 28
           },
           {
@@ -3258,11 +3312,11 @@
                 "text": "Were the immunization staff at the Health Facility available during the installation?"
               }
             },
-            "_row_num": 46,
-            "__rowNum__": 45,
+            "_row_num": 48,
+            "__rowNum__": 47,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen43",
+            "_branch_label_enclosing_screen": "survey/_screen45",
             "promptIdx": 29
           },
           {
@@ -3273,11 +3327,11 @@
                 "text": "How many staff were present during the installation?"
               }
             },
-            "_row_num": 47,
-            "__rowNum__": 46,
+            "_row_num": 49,
+            "__rowNum__": 48,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen43",
+            "_branch_label_enclosing_screen": "survey/_screen45",
             "promptIdx": 30
           },
           {
@@ -3289,11 +3343,11 @@
                 "text": "Does the Health Facility have a copy of the Signed Annex E (Installation Checklist)?"
               }
             },
-            "_row_num": 50,
-            "__rowNum__": 49,
+            "_row_num": 52,
+            "__rowNum__": 51,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen49",
+            "_branch_label_enclosing_screen": "survey/_screen51",
             "promptIdx": 31
           },
           {
@@ -3304,11 +3358,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 51,
-            "__rowNum__": 50,
+            "_row_num": 54,
+            "__rowNum__": 53,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen49",
+            "_branch_label_enclosing_screen": "survey/_screen51",
             "promptIdx": 32
           },
           {
@@ -3320,11 +3374,11 @@
                 "text": "Does the Health Facility have a copy of the Functionality Test (from the local service provider)?"
               }
             },
-            "_row_num": 52,
-            "__rowNum__": 51,
+            "_row_num": 56,
+            "__rowNum__": 55,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen49",
+            "_branch_label_enclosing_screen": "survey/_screen51",
             "promptIdx": 33
           },
           {
@@ -3335,11 +3389,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 53,
-            "__rowNum__": 52,
+            "_row_num": 58,
+            "__rowNum__": 57,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen49",
+            "_branch_label_enclosing_screen": "survey/_screen51",
             "promptIdx": 34
           },
           {
@@ -3350,11 +3404,11 @@
                 "text": "Where is the CCE installed? (name the room in facility)"
               }
             },
-            "_row_num": 56,
-            "__rowNum__": 55,
+            "_row_num": 62,
+            "__rowNum__": 61,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen55",
+            "_branch_label_enclosing_screen": "survey/_screen61",
             "promptIdx": 35
           },
           {
@@ -3365,11 +3419,11 @@
                 "text": "How much time did it take for the installation(hours)?"
               }
             },
-            "_row_num": 57,
-            "__rowNum__": 56,
+            "_row_num": 63,
+            "__rowNum__": 62,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen55",
+            "_branch_label_enclosing_screen": "survey/_screen61",
             "promptIdx": 36
           },
           {
@@ -3381,11 +3435,11 @@
                 "text": "Is the CCE equipped with the country standard plug ?"
               }
             },
-            "_row_num": 60,
-            "__rowNum__": 59,
+            "_row_num": 66,
+            "__rowNum__": 65,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen59",
+            "_branch_label_enclosing_screen": "survey/_screen65",
             "promptIdx": 37
           },
           {
@@ -3396,11 +3450,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 61,
-            "__rowNum__": 60,
+            "_row_num": 67,
+            "__rowNum__": 66,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen59",
+            "_branch_label_enclosing_screen": "survey/_screen65",
             "promptIdx": 38
           },
           {
@@ -3412,11 +3466,11 @@
                 "text": "Is the CCE installed according to the manufacturer's installation manual?(verify with Manufacturer Manual)"
               }
             },
-            "_row_num": 62,
-            "__rowNum__": 61,
+            "_row_num": 68,
+            "__rowNum__": 67,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen59",
+            "_branch_label_enclosing_screen": "survey/_screen65",
             "promptIdx": 39
           },
           {
@@ -3428,11 +3482,11 @@
                 "text": "Is the voltage regulator installed as per manufacturer instructions ?(verify with stabilizer manual)"
               }
             },
-            "_row_num": 65,
-            "__rowNum__": 64,
+            "_row_num": 71,
+            "__rowNum__": 70,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen64",
+            "_branch_label_enclosing_screen": "survey/_screen70",
             "promptIdx": 40
           },
           {
@@ -3444,11 +3498,11 @@
                 "text": "Is the voltage regulator functional (eg. are the pilot lights or volt meters functional ?)"
               }
             },
-            "_row_num": 66,
-            "__rowNum__": 65,
+            "_row_num": 72,
+            "__rowNum__": 71,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen64",
+            "_branch_label_enclosing_screen": "survey/_screen70",
             "promptIdx": 41
           },
           {
@@ -3459,11 +3513,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 67,
-            "__rowNum__": 66,
+            "_row_num": 73,
+            "__rowNum__": 72,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen64",
+            "_branch_label_enclosing_screen": "survey/_screen70",
             "promptIdx": 42
           },
           {
@@ -3475,11 +3529,11 @@
                 "text": "Were the Solar panels installed as planned (pole, ground or roof)?"
               }
             },
-            "_row_num": 70,
-            "__rowNum__": 69,
+            "_row_num": 76,
+            "__rowNum__": 75,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen69",
+            "_branch_label_enclosing_screen": "survey/_screen75",
             "promptIdx": 43
           },
           {
@@ -3491,11 +3545,11 @@
                 "text": "Are the Solar panels installed as per manufacturer instructions? (Eg. No shadow from trees or nearby buildings)"
               }
             },
-            "_row_num": 71,
-            "__rowNum__": 70,
+            "_row_num": 77,
+            "__rowNum__": 76,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen69",
+            "_branch_label_enclosing_screen": "survey/_screen75",
             "promptIdx": 44
           },
           {
@@ -3506,11 +3560,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 72,
-            "__rowNum__": 71,
+            "_row_num": 78,
+            "__rowNum__": 77,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen69",
+            "_branch_label_enclosing_screen": "survey/_screen75",
             "promptIdx": 45
           },
           {
@@ -3522,11 +3576,11 @@
                 "text": "Is the material for the support structure, as per the manufacturer instructions?"
               }
             },
-            "_row_num": 75,
-            "__rowNum__": 74,
+            "_row_num": 81,
+            "__rowNum__": 80,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen74",
+            "_branch_label_enclosing_screen": "survey/_screen80",
             "promptIdx": 46
           },
           {
@@ -3537,11 +3591,11 @@
                 "text": "If not, specify the type of material used"
               }
             },
-            "_row_num": 76,
-            "__rowNum__": 75,
+            "_row_num": 83,
+            "__rowNum__": 82,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen74",
+            "_branch_label_enclosing_screen": "survey/_screen80",
             "promptIdx": 47
           },
           {
@@ -3553,11 +3607,11 @@
                 "text": "Are the panels' orientation and angle as per manufacturer instructions?"
               }
             },
-            "_row_num": 79,
-            "__rowNum__": 78,
+            "_row_num": 87,
+            "__rowNum__": 86,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen78",
+            "_branch_label_enclosing_screen": "survey/_screen86",
             "promptIdx": 48
           },
           {
@@ -3568,41 +3622,41 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 80,
-            "__rowNum__": 79,
+            "_row_num": 88,
+            "__rowNum__": 87,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen78",
+            "_branch_label_enclosing_screen": "survey/_screen86",
             "promptIdx": 49
           },
           {
-            "type": "text",
+            "type": "integer",
             "name": "angle_of_inclination",
             "display": {
               "prompt": {
                 "text": "Indicate angle of inclination"
               }
             },
-            "_row_num": 81,
-            "__rowNum__": 80,
+            "_row_num": 89,
+            "__rowNum__": 88,
             "_token_type": "prompt",
-            "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen78",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen86",
             "promptIdx": 50
           },
           {
-            "type": "text",
+            "type": "integer",
             "name": "angle_of_orientation",
             "display": {
               "prompt": {
                 "text": "Indicate angle of orientation"
               }
             },
-            "_row_num": 82,
-            "__rowNum__": 81,
+            "_row_num": 90,
+            "__rowNum__": 89,
             "_token_type": "prompt",
-            "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen78",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen86",
             "promptIdx": 51
           },
           {
@@ -3614,11 +3668,11 @@
                 "text": "Is the cabling from the panels to the CCE, properly installed / affixed to the wall as per the installation guidelines?"
               }
             },
-            "_row_num": 85,
-            "__rowNum__": 84,
+            "_row_num": 93,
+            "__rowNum__": 92,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen84",
+            "_branch_label_enclosing_screen": "survey/_screen92",
             "promptIdx": 52
           },
           {
@@ -3629,11 +3683,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 86,
-            "__rowNum__": 85,
+            "_row_num": 94,
+            "__rowNum__": 93,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen84",
+            "_branch_label_enclosing_screen": "survey/_screen92",
             "promptIdx": 53
           },
           {
@@ -3645,11 +3699,11 @@
                 "text": "Are the cables protected? (protected with trunking cables etc.)"
               }
             },
-            "_row_num": 87,
-            "__rowNum__": 86,
+            "_row_num": 95,
+            "__rowNum__": 94,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen84",
+            "_branch_label_enclosing_screen": "survey/_screen92",
             "promptIdx": 54
           },
           {
@@ -3660,11 +3714,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 88,
-            "__rowNum__": 87,
+            "_row_num": 96,
+            "__rowNum__": 95,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen84",
+            "_branch_label_enclosing_screen": "survey/_screen92",
             "promptIdx": 55
           },
           {
@@ -3676,11 +3730,11 @@
                 "text": "Is the lightening arrester / grounding properly installed as per supplier installation instructions?"
               }
             },
-            "_row_num": 91,
-            "__rowNum__": 90,
+            "_row_num": 99,
+            "__rowNum__": 98,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen90",
+            "_branch_label_enclosing_screen": "survey/_screen98",
             "promptIdx": 56
           },
           {
@@ -3691,11 +3745,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 92,
-            "__rowNum__": 91,
+            "_row_num": 100,
+            "__rowNum__": 99,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen90",
+            "_branch_label_enclosing_screen": "survey/_screen98",
             "promptIdx": 57
           },
           {
@@ -3707,11 +3761,11 @@
                 "text": "Has the anti-theft device or mechansim been installed, according to the installation instructions?"
               }
             },
-            "_row_num": 93,
-            "__rowNum__": 92,
+            "_row_num": 101,
+            "__rowNum__": 100,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen90",
+            "_branch_label_enclosing_screen": "survey/_screen98",
             "promptIdx": 58
           },
           {
@@ -3722,11 +3776,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 94,
-            "__rowNum__": 93,
+            "_row_num": 102,
+            "__rowNum__": 101,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen90",
+            "_branch_label_enclosing_screen": "survey/_screen98",
             "promptIdx": 59
           },
           {
@@ -3738,11 +3792,11 @@
                 "text": "Are the panels easly accessible for the purpose of cleaning?"
               }
             },
-            "_row_num": 97,
-            "__rowNum__": 96,
+            "_row_num": 105,
+            "__rowNum__": 104,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen96",
+            "_branch_label_enclosing_screen": "survey/_screen104",
             "promptIdx": 60
           },
           {
@@ -3753,11 +3807,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 98,
-            "__rowNum__": 97,
+            "_row_num": 106,
+            "__rowNum__": 105,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen96",
+            "_branch_label_enclosing_screen": "survey/_screen104",
             "promptIdx": 61
           },
           {
@@ -3769,11 +3823,11 @@
                 "text": "Is there equipment available for the purpose of cleaning the solar panel ? (such as mop, ladder, etc.)"
               }
             },
-            "_row_num": 99,
-            "__rowNum__": 98,
+            "_row_num": 107,
+            "__rowNum__": 106,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen96",
+            "_branch_label_enclosing_screen": "survey/_screen104",
             "promptIdx": 62
           },
           {
@@ -3785,11 +3839,11 @@
                 "text": "Is the temperature monitoring device (30 DTR / RTMD/ Both)  provided by the supplier?"
               }
             },
-            "_row_num": 100,
-            "__rowNum__": 99,
+            "_row_num": 108,
+            "__rowNum__": 107,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen96",
+            "_branch_label_enclosing_screen": "survey/_screen104",
             "promptIdx": 63
           },
           {
@@ -3800,11 +3854,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 101,
-            "__rowNum__": 100,
+            "_row_num": 109,
+            "__rowNum__": 108,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen96",
+            "_branch_label_enclosing_screen": "survey/_screen104",
             "promptIdx": 64
           },
           {
@@ -3815,11 +3869,11 @@
                 "text": "What type(s) of temperature monitoring device is available (30 DTR / RTMD/ Both)?"
               }
             },
-            "_row_num": 104,
-            "__rowNum__": 103,
+            "_row_num": 112,
+            "__rowNum__": 111,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen103",
+            "_branch_label_enclosing_screen": "survey/_screen111",
             "promptIdx": 65
           },
           {
@@ -3831,11 +3885,11 @@
                 "text": "Has the installer activated the temperature monitoring device in the case of 30 DTR?"
               }
             },
-            "_row_num": 105,
-            "__rowNum__": 104,
+            "_row_num": 113,
+            "__rowNum__": 112,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen103",
+            "_branch_label_enclosing_screen": "survey/_screen111",
             "promptIdx": 66
           },
           {
@@ -3847,11 +3901,11 @@
                 "text": "Is the temperature monitoring device functioning correctly?"
               }
             },
-            "_row_num": 106,
-            "__rowNum__": 105,
+            "_row_num": 114,
+            "__rowNum__": 113,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen103",
+            "_branch_label_enclosing_screen": "survey/_screen111",
             "promptIdx": 67
           },
           {
@@ -3863,11 +3917,11 @@
                 "text": "Can the user demonstrate the ability to correctly read the temperature recording device, including alarms?"
               }
             },
-            "_row_num": 109,
-            "__rowNum__": 108,
+            "_row_num": 117,
+            "__rowNum__": 116,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen108",
+            "_branch_label_enclosing_screen": "survey/_screen116",
             "promptIdx": 68
           },
           {
@@ -3879,11 +3933,11 @@
                 "text": "Has there been any alarm recorded during the last 30 days?"
               }
             },
-            "_row_num": 110,
-            "__rowNum__": 109,
+            "_row_num": 118,
+            "__rowNum__": 117,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen108",
+            "_branch_label_enclosing_screen": "survey/_screen116",
             "promptIdx": 69
           },
           {
@@ -3894,11 +3948,11 @@
                 "text": "If so, please indicate, the number of heat alarm(s)"
               }
             },
-            "_row_num": 111,
-            "__rowNum__": 110,
+            "_row_num": 120,
+            "__rowNum__": 119,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen108",
+            "_branch_label_enclosing_screen": "survey/_screen116",
             "promptIdx": 70
           },
           {
@@ -3909,11 +3963,11 @@
                 "text": "If so, please indicate, the number of freeze alarm(s)"
               }
             },
-            "_row_num": 112,
-            "__rowNum__": 111,
+            "_row_num": 121,
+            "__rowNum__": 120,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen108",
+            "_branch_label_enclosing_screen": "survey/_screen116",
             "promptIdx": 71
           },
           {
@@ -3925,11 +3979,11 @@
                 "text": "Is the CCE operating correctly as per manufacturer instructions?(e.g. +2 to +8 degrees C, Correct color of indicator lights, smooth compressor sounds etc .)"
               }
             },
-            "_row_num": 115,
-            "__rowNum__": 114,
+            "_row_num": 125,
+            "__rowNum__": 124,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen114",
+            "_branch_label_enclosing_screen": "survey/_screen124",
             "promptIdx": 72
           },
           {
@@ -3940,11 +3994,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 116,
-            "__rowNum__": 115,
+            "_row_num": 126,
+            "__rowNum__": 125,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen114",
+            "_branch_label_enclosing_screen": "survey/_screen124",
             "promptIdx": 73
           },
           {
@@ -3955,11 +4009,11 @@
                 "text": "If the CCE is not operating correctly, please answer questions pertaining to 8.2 to indicate which aspects of the CCE are not fuctional:"
               }
             },
-            "_row_num": 119,
-            "__rowNum__": 118,
+            "_row_num": 129,
+            "__rowNum__": 128,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen118",
+            "_branch_label_enclosing_screen": "survey/_screen128",
             "promptIdx": 74
           },
           {
@@ -3970,11 +4024,11 @@
                 "text": "Power related failure( Please choose the applicable one):"
               }
             },
-            "_row_num": 120,
-            "__rowNum__": 119,
+            "_row_num": 130,
+            "__rowNum__": 129,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen118",
+            "_branch_label_enclosing_screen": "survey/_screen128",
             "promptIdx": 75
           },
           {
@@ -3986,11 +4040,11 @@
                 "text": "Mains Powered CCE?"
               }
             },
-            "_row_num": 121,
-            "__rowNum__": 120,
+            "_row_num": 131,
+            "__rowNum__": 130,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen118",
+            "_branch_label_enclosing_screen": "survey/_screen128",
             "promptIdx": 76
           },
           {
@@ -4001,11 +4055,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 122,
-            "__rowNum__": 121,
+            "_row_num": 132,
+            "__rowNum__": 131,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen118",
+            "_branch_label_enclosing_screen": "survey/_screen128",
             "promptIdx": 77
           },
           {
@@ -4017,11 +4071,11 @@
                 "text": "SDD CCE?"
               }
             },
-            "_row_num": 123,
-            "__rowNum__": 122,
+            "_row_num": 133,
+            "__rowNum__": 132,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen118",
+            "_branch_label_enclosing_screen": "survey/_screen128",
             "promptIdx": 78
           },
           {
@@ -4032,11 +4086,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 124,
-            "__rowNum__": 123,
+            "_row_num": 134,
+            "__rowNum__": 133,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen118",
+            "_branch_label_enclosing_screen": "survey/_screen128",
             "promptIdx": 79
           },
           {
@@ -4048,11 +4102,11 @@
                 "text": "Faulty component?"
               }
             },
-            "_row_num": 125,
-            "__rowNum__": 124,
+            "_row_num": 135,
+            "__rowNum__": 134,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen118",
+            "_branch_label_enclosing_screen": "survey/_screen128",
             "promptIdx": 80
           },
           {
@@ -4063,11 +4117,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 126,
-            "__rowNum__": 125,
+            "_row_num": 136,
+            "__rowNum__": 135,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen118",
+            "_branch_label_enclosing_screen": "survey/_screen128",
             "promptIdx": 81
           },
           {
@@ -4079,11 +4133,11 @@
                 "text": "User related failure (Improper usage)?"
               }
             },
-            "_row_num": 127,
-            "__rowNum__": 126,
+            "_row_num": 137,
+            "__rowNum__": 136,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen118",
+            "_branch_label_enclosing_screen": "survey/_screen128",
             "promptIdx": 82
           },
           {
@@ -4094,11 +4148,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 128,
-            "__rowNum__": 127,
+            "_row_num": 138,
+            "__rowNum__": 137,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen118",
+            "_branch_label_enclosing_screen": "survey/_screen128",
             "promptIdx": 83
           },
           {
@@ -4110,11 +4164,11 @@
                 "text": "Did the installation technician train the personnel on site?"
               }
             },
-            "_row_num": 131,
-            "__rowNum__": 130,
+            "_row_num": 141,
+            "__rowNum__": 140,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen130",
+            "_branch_label_enclosing_screen": "survey/_screen140",
             "promptIdx": 84
           },
           {
@@ -4125,11 +4179,11 @@
                 "text": "If not, give reason"
               }
             },
-            "_row_num": 132,
-            "__rowNum__": 131,
+            "_row_num": 143,
+            "__rowNum__": 142,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen130",
+            "_branch_label_enclosing_screen": "survey/_screen140",
             "promptIdx": 85
           },
           {
@@ -4140,11 +4194,11 @@
                 "text": "Please specify the number of users trained?"
               }
             },
-            "_row_num": 133,
-            "__rowNum__": 132,
+            "_row_num": 145,
+            "__rowNum__": 144,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen130",
+            "_branch_label_enclosing_screen": "survey/_screen140",
             "promptIdx": 86
           },
           {
@@ -4156,11 +4210,11 @@
                 "text": "Was the training at the Health Facility conducted on the same day as the installation?"
               }
             },
-            "_row_num": 134,
-            "__rowNum__": 133,
+            "_row_num": 146,
+            "__rowNum__": 145,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen130",
+            "_branch_label_enclosing_screen": "survey/_screen140",
             "promptIdx": 87
           },
           {
@@ -4171,11 +4225,11 @@
                 "text": "Please specify the duration of the training (hours)?"
               }
             },
-            "_row_num": 135,
-            "__rowNum__": 134,
+            "_row_num": 147,
+            "__rowNum__": 146,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen130",
+            "_branch_label_enclosing_screen": "survey/_screen140",
             "promptIdx": 88
           },
           {
@@ -4186,11 +4240,11 @@
                 "text": "Did the training at Health Facility level include :"
               }
             },
-            "_row_num": 138,
-            "__rowNum__": 137,
+            "_row_num": 150,
+            "__rowNum__": 149,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen137",
+            "_branch_label_enclosing_screen": "survey/_screen149",
             "promptIdx": 89
           },
           {
@@ -4202,11 +4256,11 @@
                 "text": "a.     Basic handling?"
               }
             },
-            "_row_num": 139,
-            "__rowNum__": 138,
+            "_row_num": 151,
+            "__rowNum__": 150,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen137",
+            "_branch_label_enclosing_screen": "survey/_screen149",
             "promptIdx": 90
           },
           {
@@ -4218,11 +4272,11 @@
                 "text": "b.     User level maintenance?"
               }
             },
-            "_row_num": 140,
-            "__rowNum__": 139,
+            "_row_num": 152,
+            "__rowNum__": 151,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen137",
+            "_branch_label_enclosing_screen": "survey/_screen149",
             "promptIdx": 91
           },
           {
@@ -4234,11 +4288,11 @@
                 "text": "d.     Monitoring and recording of temperature?"
               }
             },
-            "_row_num": 141,
-            "__rowNum__": 140,
+            "_row_num": 153,
+            "__rowNum__": 152,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen137",
+            "_branch_label_enclosing_screen": "survey/_screen149",
             "promptIdx": 92
           },
           {
@@ -4250,11 +4304,11 @@
                 "text": "e.     Procedures to follow in case of malfunction /  breakdown?"
               }
             },
-            "_row_num": 142,
-            "__rowNum__": 141,
+            "_row_num": 154,
+            "__rowNum__": 153,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen137",
+            "_branch_label_enclosing_screen": "survey/_screen149",
             "promptIdx": 93
           },
           {
@@ -4266,11 +4320,11 @@
                 "text": "Was any reference material such as leaflet or presentation provided to the Health Facility staff?"
               }
             },
-            "_row_num": 145,
-            "__rowNum__": 144,
+            "_row_num": 157,
+            "__rowNum__": 156,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen144",
+            "_branch_label_enclosing_screen": "survey/_screen156",
             "promptIdx": 94
           },
           {
@@ -4282,11 +4336,11 @@
                 "text": "Is a picturial user guideline available on the cover?"
               }
             },
-            "_row_num": 146,
-            "__rowNum__": 145,
+            "_row_num": 158,
+            "__rowNum__": 157,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen144",
+            "_branch_label_enclosing_screen": "survey/_screen156",
             "promptIdx": 95
           },
           {
@@ -4297,11 +4351,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 147,
-            "__rowNum__": 146,
+            "_row_num": 159,
+            "__rowNum__": 158,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen144",
+            "_branch_label_enclosing_screen": "survey/_screen156",
             "promptIdx": 96
           },
           {
@@ -4312,11 +4366,11 @@
                 "text": "Did the installer supply the following manuals:"
               }
             },
-            "_row_num": 150,
-            "__rowNum__": 149,
+            "_row_num": 162,
+            "__rowNum__": 161,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen149",
+            "_branch_label_enclosing_screen": "survey/_screen161",
             "promptIdx": 97
           },
           {
@@ -4328,11 +4382,11 @@
                 "text": "Users Manuel?"
               }
             },
-            "_row_num": 151,
-            "__rowNum__": 150,
+            "_row_num": 163,
+            "__rowNum__": 162,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen149",
+            "_branch_label_enclosing_screen": "survey/_screen161",
             "promptIdx": 98
           },
           {
@@ -4344,11 +4398,11 @@
                 "text": "Maintenance guide?"
               }
             },
-            "_row_num": 152,
-            "__rowNum__": 151,
+            "_row_num": 164,
+            "__rowNum__": 163,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen149",
+            "_branch_label_enclosing_screen": "survey/_screen161",
             "promptIdx": 99
           },
           {
@@ -4360,11 +4414,11 @@
                 "text": "Template to report a malfunction / breakdown?"
               }
             },
-            "_row_num": 153,
-            "__rowNum__": 152,
+            "_row_num": 165,
+            "__rowNum__": 164,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen149",
+            "_branch_label_enclosing_screen": "survey/_screen161",
             "promptIdx": 100
           },
           {
@@ -4375,11 +4429,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 154,
-            "__rowNum__": 153,
+            "_row_num": 166,
+            "__rowNum__": 165,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen149",
+            "_branch_label_enclosing_screen": "survey/_screen161",
             "promptIdx": 101
           },
           {
@@ -4391,19 +4445,19 @@
                 "text": "Are all manuals available in the agreed UN languages ? (e.g. English, French, Spanish, Arabic etc.)"
               }
             },
-            "_row_num": 156,
-            "__rowNum__": 155,
+            "_row_num": 168,
+            "__rowNum__": 167,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen156",
+            "_branch_label_enclosing_screen": "survey/_screen168",
             "promptIdx": 102
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 157,
-            "_branch_label_enclosing_screen": "survey/_screen157",
+            "_row_num": 169,
+            "_branch_label_enclosing_screen": "survey/_screen169",
             "promptIdx": 103
           }
         ],
@@ -4488,22 +4542,22 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 35,
-              "__rowNum__": 34,
+              "_row_num": 37,
+              "__rowNum__": 36,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\nif (selected(data('is_site_as_per_odp'), 'no')) {\nactivePromptIndicies.push(20);\n}\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 5
           },
           {
             "clause": "begin screen",
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 42,
-              "__rowNum__": 41,
+              "_row_num": 44,
+              "__rowNum__": 43,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
@@ -4511,13 +4565,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 43,
-            "__rowNum__": 42,
+            "_row_num": 45,
+            "__rowNum__": 44,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 48,
-              "__rowNum__": 47,
+              "_row_num": 50,
+              "__rowNum__": 49,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\nactivePromptIndicies.push(28);\nactivePromptIndicies.push(29);\nactivePromptIndicies.push(30);\n\nreturn activePromptIndicies;\n}\n",
@@ -4525,27 +4579,27 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 49,
-            "__rowNum__": 48,
+            "_row_num": 51,
+            "__rowNum__": 50,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 54,
-              "__rowNum__": 53,
+              "_row_num": 60,
+              "__rowNum__": 59,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(31);\nactivePromptIndicies.push(32);\nactivePromptIndicies.push(33);\nactivePromptIndicies.push(34);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(31);\nif (selected(data('have_copy_of_signed_annex_e'), 'yes')) {\nactivePromptIndicies.push(32);\n}\nactivePromptIndicies.push(33);\nif (selected(data('have_copy_of_func_test'), 'yes')) {\nactivePromptIndicies.push(34);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 8
           },
           {
             "clause": "begin screen",
-            "_row_num": 55,
-            "__rowNum__": 54,
+            "_row_num": 61,
+            "__rowNum__": 60,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 58,
-              "__rowNum__": 57,
+              "_row_num": 64,
+              "__rowNum__": 63,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(35);\nactivePromptIndicies.push(36);\n\nreturn activePromptIndicies;\n}\n",
@@ -4553,13 +4607,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 59,
-            "__rowNum__": 58,
+            "_row_num": 65,
+            "__rowNum__": 64,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 63,
-              "__rowNum__": 62,
+              "_row_num": 69,
+              "__rowNum__": 68,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(37);\nactivePromptIndicies.push(38);\nactivePromptIndicies.push(39);\n\nreturn activePromptIndicies;\n}\n",
@@ -4567,13 +4621,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 64,
-            "__rowNum__": 63,
+            "_row_num": 70,
+            "__rowNum__": 69,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 68,
-              "__rowNum__": 67,
+              "_row_num": 74,
+              "__rowNum__": 73,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(40);\nactivePromptIndicies.push(41);\nactivePromptIndicies.push(42);\n\nreturn activePromptIndicies;\n}\n",
@@ -4581,13 +4635,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 69,
-            "__rowNum__": 68,
+            "_row_num": 75,
+            "__rowNum__": 74,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 73,
-              "__rowNum__": 72,
+              "_row_num": 79,
+              "__rowNum__": 78,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(43);\nactivePromptIndicies.push(44);\nactivePromptIndicies.push(45);\n\nreturn activePromptIndicies;\n}\n",
@@ -4595,27 +4649,27 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 74,
-            "__rowNum__": 73,
+            "_row_num": 80,
+            "__rowNum__": 79,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 77,
-              "__rowNum__": 76,
+              "_row_num": 85,
+              "__rowNum__": 84,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(46);\nactivePromptIndicies.push(47);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(46);\nif (selected(data('support_material_per_instructions'), 'no')) {\nactivePromptIndicies.push(47);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 13
           },
           {
             "clause": "begin screen",
-            "_row_num": 78,
-            "__rowNum__": 77,
+            "_row_num": 86,
+            "__rowNum__": 85,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 83,
-              "__rowNum__": 82,
+              "_row_num": 91,
+              "__rowNum__": 90,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(48);\nactivePromptIndicies.push(49);\nactivePromptIndicies.push(50);\nactivePromptIndicies.push(51);\n\nreturn activePromptIndicies;\n}\n",
@@ -4623,13 +4677,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 84,
-            "__rowNum__": 83,
+            "_row_num": 92,
+            "__rowNum__": 91,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 89,
-              "__rowNum__": 88,
+              "_row_num": 97,
+              "__rowNum__": 96,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(52);\nactivePromptIndicies.push(53);\nactivePromptIndicies.push(54);\nactivePromptIndicies.push(55);\n\nreturn activePromptIndicies;\n}\n",
@@ -4637,13 +4691,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 90,
-            "__rowNum__": 89,
+            "_row_num": 98,
+            "__rowNum__": 97,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 95,
-              "__rowNum__": 94,
+              "_row_num": 103,
+              "__rowNum__": 102,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(56);\nactivePromptIndicies.push(57);\nactivePromptIndicies.push(58);\nactivePromptIndicies.push(59);\n\nreturn activePromptIndicies;\n}\n",
@@ -4651,13 +4705,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 96,
-            "__rowNum__": 95,
+            "_row_num": 104,
+            "__rowNum__": 103,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 102,
-              "__rowNum__": 101,
+              "_row_num": 110,
+              "__rowNum__": 109,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(60);\nactivePromptIndicies.push(61);\nactivePromptIndicies.push(62);\nactivePromptIndicies.push(63);\nactivePromptIndicies.push(64);\n\nreturn activePromptIndicies;\n}\n",
@@ -4665,13 +4719,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 103,
-            "__rowNum__": 102,
+            "_row_num": 111,
+            "__rowNum__": 110,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 107,
-              "__rowNum__": 106,
+              "_row_num": 115,
+              "__rowNum__": 114,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(65);\nactivePromptIndicies.push(66);\nactivePromptIndicies.push(67);\n\nreturn activePromptIndicies;\n}\n",
@@ -4679,27 +4733,27 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 108,
-            "__rowNum__": 107,
+            "_row_num": 116,
+            "__rowNum__": 115,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 113,
-              "__rowNum__": 112,
+              "_row_num": 123,
+              "__rowNum__": 122,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(68);\nactivePromptIndicies.push(69);\nactivePromptIndicies.push(70);\nactivePromptIndicies.push(71);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(68);\nactivePromptIndicies.push(69);\nif (selected(data('alarm_last_thirty_days'), 'yes')) {\nactivePromptIndicies.push(70);\nactivePromptIndicies.push(71);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 19
           },
           {
             "clause": "begin screen",
-            "_row_num": 114,
-            "__rowNum__": 113,
+            "_row_num": 124,
+            "__rowNum__": 123,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 117,
-              "__rowNum__": 116,
+              "_row_num": 127,
+              "__rowNum__": 126,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(72);\nactivePromptIndicies.push(73);\n\nreturn activePromptIndicies;\n}\n",
@@ -4707,13 +4761,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 118,
-            "__rowNum__": 117,
+            "_row_num": 128,
+            "__rowNum__": 127,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 129,
-              "__rowNum__": 128,
+              "_row_num": 139,
+              "__rowNum__": 138,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(74);\nactivePromptIndicies.push(75);\nactivePromptIndicies.push(76);\nactivePromptIndicies.push(77);\nactivePromptIndicies.push(78);\nactivePromptIndicies.push(79);\nactivePromptIndicies.push(80);\nactivePromptIndicies.push(81);\nactivePromptIndicies.push(82);\nactivePromptIndicies.push(83);\n\nreturn activePromptIndicies;\n}\n",
@@ -4721,36 +4775,8 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 130,
-            "__rowNum__": 129,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 136,
-              "__rowNum__": 135,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(84);\nactivePromptIndicies.push(85);\nactivePromptIndicies.push(86);\nactivePromptIndicies.push(87);\nactivePromptIndicies.push(88);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 22
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 137,
-            "__rowNum__": 136,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 143,
-              "__rowNum__": 142,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(89);\nactivePromptIndicies.push(90);\nactivePromptIndicies.push(91);\nactivePromptIndicies.push(92);\nactivePromptIndicies.push(93);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 23
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 144,
-            "__rowNum__": 143,
+            "_row_num": 140,
+            "__rowNum__": 139,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
@@ -4758,8 +4784,8 @@
               "__rowNum__": 147,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(94);\nactivePromptIndicies.push(95);\nactivePromptIndicies.push(96);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 24
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(84);\nif (selected(data('tech_train_personnel_on_site'), 'no')) {\nactivePromptIndicies.push(85);\n}\nactivePromptIndicies.push(86);\nactivePromptIndicies.push(87);\nactivePromptIndicies.push(88);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 22
           },
           {
             "clause": "begin screen",
@@ -4772,11 +4798,39 @@
               "__rowNum__": 154,
               "_token_type": "end_screen"
             },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(89);\nactivePromptIndicies.push(90);\nactivePromptIndicies.push(91);\nactivePromptIndicies.push(92);\nactivePromptIndicies.push(93);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 23
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 156,
+            "__rowNum__": 155,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 160,
+              "__rowNum__": 159,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(94);\nactivePromptIndicies.push(95);\nactivePromptIndicies.push(96);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 24
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 161,
+            "__rowNum__": 160,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 167,
+              "__rowNum__": 166,
+              "_token_type": "end_screen"
+            },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(97);\nactivePromptIndicies.push(98);\nactivePromptIndicies.push(99);\nactivePromptIndicies.push(100);\nactivePromptIndicies.push(101);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 25
           },
           {
-            "_row_num": 156,
+            "_row_num": 168,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(102);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 26
@@ -4784,11 +4838,11 @@
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 157,
+            "_row_num": 169,
             "operationIdx": 27
           },
           {
-            "_row_num": 157,
+            "_row_num": 169,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(103);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
@@ -4799,7 +4853,7 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 157,
+            "_row_num": 169,
             "operationIdx": 29
           }
         ],
@@ -4810,29 +4864,29 @@
           "_screen20": 3,
           "_screen25": 4,
           "_screen29": 5,
-          "_screen36": 6,
-          "_screen43": 7,
-          "_screen49": 8,
-          "_screen55": 9,
-          "_screen59": 10,
-          "_screen64": 11,
-          "_screen69": 12,
-          "_screen74": 13,
-          "_screen78": 14,
-          "_screen84": 15,
-          "_screen90": 16,
-          "_screen96": 17,
-          "_screen103": 18,
-          "_screen108": 19,
-          "_screen114": 20,
-          "_screen118": 21,
-          "_screen130": 22,
-          "_screen137": 23,
-          "_screen144": 24,
-          "_screen149": 25,
-          "_screen156": 26,
+          "_screen38": 6,
+          "_screen45": 7,
+          "_screen51": 8,
+          "_screen61": 9,
+          "_screen65": 10,
+          "_screen70": 11,
+          "_screen75": 12,
+          "_screen80": 13,
+          "_screen86": 14,
+          "_screen92": 15,
+          "_screen98": 16,
+          "_screen104": 17,
+          "_screen111": 18,
+          "_screen116": 19,
+          "_screen124": 20,
+          "_screen128": 21,
+          "_screen140": 22,
+          "_screen149": 23,
+          "_screen156": 24,
+          "_screen161": 25,
+          "_screen168": 26,
           "_contents": 28,
-          "_screen157": 28
+          "_screen169": 28
         }
       },
       "initial": {
@@ -5319,7 +5373,7 @@
       "if_no_justification": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -5332,7 +5386,7 @@
       "install_signoff_date": {
         "_defn": [
           {
-            "_row_num": 34,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -5346,7 +5400,7 @@
       "boxes_opened_by_authorized_person": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 39,
             "section_name": "survey"
           }
         ],
@@ -5360,7 +5414,7 @@
       "equipment_had_data_plate": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 40,
             "section_name": "survey"
           }
         ],
@@ -5374,7 +5428,7 @@
       "data_plate_image": {
         "_defn": [
           {
-            "_row_num": 39,
+            "_row_num": 41,
             "section_name": "survey"
           }
         ],
@@ -5412,7 +5466,7 @@
       "signed_by_authority": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 42,
             "section_name": "survey"
           }
         ],
@@ -5426,7 +5480,7 @@
       "signed_by_image": {
         "_defn": [
           {
-            "_row_num": 41,
+            "_row_num": 43,
             "section_name": "survey"
           }
         ],
@@ -5464,7 +5518,7 @@
       "is_cce_installed": {
         "_defn": [
           {
-            "_row_num": 44,
+            "_row_num": 46,
             "section_name": "survey"
           }
         ],
@@ -5478,7 +5532,7 @@
       "cce_installed_image": {
         "_defn": [
           {
-            "_row_num": 45,
+            "_row_num": 47,
             "section_name": "survey"
           }
         ],
@@ -5516,7 +5570,7 @@
       "immunization_staff_available": {
         "_defn": [
           {
-            "_row_num": 46,
+            "_row_num": 48,
             "section_name": "survey"
           }
         ],
@@ -5530,7 +5584,7 @@
       "how_many_staff_present": {
         "_defn": [
           {
-            "_row_num": 47,
+            "_row_num": 49,
             "section_name": "survey"
           }
         ],
@@ -5543,7 +5597,7 @@
       "have_copy_of_signed_annex_e": {
         "_defn": [
           {
-            "_row_num": 50,
+            "_row_num": 52,
             "section_name": "survey"
           }
         ],
@@ -5557,7 +5611,7 @@
       "signed_annex_e_image": {
         "_defn": [
           {
-            "_row_num": 51,
+            "_row_num": 54,
             "section_name": "survey"
           }
         ],
@@ -5595,7 +5649,7 @@
       "have_copy_of_func_test": {
         "_defn": [
           {
-            "_row_num": 52,
+            "_row_num": 56,
             "section_name": "survey"
           }
         ],
@@ -5609,7 +5663,7 @@
       "func_test_image": {
         "_defn": [
           {
-            "_row_num": 53,
+            "_row_num": 58,
             "section_name": "survey"
           }
         ],
@@ -5647,7 +5701,7 @@
       "cce_installed_location": {
         "_defn": [
           {
-            "_row_num": 56,
+            "_row_num": 62,
             "section_name": "survey"
           }
         ],
@@ -5660,7 +5714,7 @@
       "installation_duration_hrs": {
         "_defn": [
           {
-            "_row_num": 57,
+            "_row_num": 63,
             "section_name": "survey"
           }
         ],
@@ -5673,7 +5727,7 @@
       "cce_equipped_standard_plug": {
         "_defn": [
           {
-            "_row_num": 60,
+            "_row_num": 66,
             "section_name": "survey"
           }
         ],
@@ -5687,7 +5741,7 @@
       "standard_plug_image": {
         "_defn": [
           {
-            "_row_num": 61,
+            "_row_num": 67,
             "section_name": "survey"
           }
         ],
@@ -5725,7 +5779,7 @@
       "cce_installed_according_to_manual": {
         "_defn": [
           {
-            "_row_num": 62,
+            "_row_num": 68,
             "section_name": "survey"
           }
         ],
@@ -5739,7 +5793,7 @@
       "voltage_regulator_installed_per_inst": {
         "_defn": [
           {
-            "_row_num": 65,
+            "_row_num": 71,
             "section_name": "survey"
           }
         ],
@@ -5753,7 +5807,7 @@
       "voltage_regulator_functional": {
         "_defn": [
           {
-            "_row_num": 66,
+            "_row_num": 72,
             "section_name": "survey"
           }
         ],
@@ -5767,7 +5821,7 @@
       "voltage_regulator_image": {
         "_defn": [
           {
-            "_row_num": 67,
+            "_row_num": 73,
             "section_name": "survey"
           }
         ],
@@ -5805,7 +5859,7 @@
       "solar_panels_installed_as_planned": {
         "_defn": [
           {
-            "_row_num": 70,
+            "_row_num": 76,
             "section_name": "survey"
           }
         ],
@@ -5819,7 +5873,7 @@
       "solar_panels_installed_per_inst": {
         "_defn": [
           {
-            "_row_num": 71,
+            "_row_num": 77,
             "section_name": "survey"
           }
         ],
@@ -5833,7 +5887,7 @@
       "solar_panels_installed_image": {
         "_defn": [
           {
-            "_row_num": 72,
+            "_row_num": 78,
             "section_name": "survey"
           }
         ],
@@ -5871,7 +5925,7 @@
       "support_material_per_instructions": {
         "_defn": [
           {
-            "_row_num": 75,
+            "_row_num": 81,
             "section_name": "survey"
           }
         ],
@@ -5885,7 +5939,7 @@
       "if_not_specify_material_used": {
         "_defn": [
           {
-            "_row_num": 76,
+            "_row_num": 83,
             "section_name": "survey"
           }
         ],
@@ -5898,7 +5952,7 @@
       "panels_orient_per_instr": {
         "_defn": [
           {
-            "_row_num": 79,
+            "_row_num": 87,
             "section_name": "survey"
           }
         ],
@@ -5912,7 +5966,7 @@
       "panels_orient_image": {
         "_defn": [
           {
-            "_row_num": 80,
+            "_row_num": 88,
             "section_name": "survey"
           }
         ],
@@ -5950,11 +6004,11 @@
       "angle_of_inclination": {
         "_defn": [
           {
-            "_row_num": 81,
+            "_row_num": 89,
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "integer",
         "elementKey": "angle_of_inclination",
         "elementName": "angle_of_inclination",
         "elementSet": "data",
@@ -5963,11 +6017,11 @@
       "angle_of_orientation": {
         "_defn": [
           {
-            "_row_num": 82,
+            "_row_num": 90,
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "integer",
         "elementKey": "angle_of_orientation",
         "elementName": "angle_of_orientation",
         "elementSet": "data",
@@ -5976,7 +6030,7 @@
       "panel_cabling_properly_installed": {
         "_defn": [
           {
-            "_row_num": 85,
+            "_row_num": 93,
             "section_name": "survey"
           }
         ],
@@ -5990,7 +6044,7 @@
       "panel_cabling_image": {
         "_defn": [
           {
-            "_row_num": 86,
+            "_row_num": 94,
             "section_name": "survey"
           }
         ],
@@ -6028,7 +6082,7 @@
       "cables_protected": {
         "_defn": [
           {
-            "_row_num": 87,
+            "_row_num": 95,
             "section_name": "survey"
           }
         ],
@@ -6042,7 +6096,7 @@
       "cables_protected_image": {
         "_defn": [
           {
-            "_row_num": 88,
+            "_row_num": 96,
             "section_name": "survey"
           }
         ],
@@ -6080,7 +6134,7 @@
       "is_grounding_properly_installed": {
         "_defn": [
           {
-            "_row_num": 91,
+            "_row_num": 99,
             "section_name": "survey"
           }
         ],
@@ -6094,7 +6148,7 @@
       "grounding_image": {
         "_defn": [
           {
-            "_row_num": 92,
+            "_row_num": 100,
             "section_name": "survey"
           }
         ],
@@ -6132,7 +6186,7 @@
       "anti_theft_installed_per_inst": {
         "_defn": [
           {
-            "_row_num": 93,
+            "_row_num": 101,
             "section_name": "survey"
           }
         ],
@@ -6146,7 +6200,7 @@
       "anti_theft_image": {
         "_defn": [
           {
-            "_row_num": 94,
+            "_row_num": 102,
             "section_name": "survey"
           }
         ],
@@ -6184,7 +6238,7 @@
       "panels_accesible_for_cleaning": {
         "_defn": [
           {
-            "_row_num": 97,
+            "_row_num": 105,
             "section_name": "survey"
           }
         ],
@@ -6198,7 +6252,7 @@
       "panels_accesible_image": {
         "_defn": [
           {
-            "_row_num": 98,
+            "_row_num": 106,
             "section_name": "survey"
           }
         ],
@@ -6236,7 +6290,7 @@
       "cleaning_equipment_available": {
         "_defn": [
           {
-            "_row_num": 99,
+            "_row_num": 107,
             "section_name": "survey"
           }
         ],
@@ -6250,7 +6304,7 @@
       "temp_monitoring_supplier_provided": {
         "_defn": [
           {
-            "_row_num": 100,
+            "_row_num": 108,
             "section_name": "survey"
           }
         ],
@@ -6264,7 +6318,7 @@
       "temp_monitoring_image": {
         "_defn": [
           {
-            "_row_num": 101,
+            "_row_num": 109,
             "section_name": "survey"
           }
         ],
@@ -6302,7 +6356,7 @@
       "temp_monitoring_type": {
         "_defn": [
           {
-            "_row_num": 104,
+            "_row_num": 112,
             "section_name": "survey"
           }
         ],
@@ -6315,7 +6369,7 @@
       "installer_activated_temp_mon_thirty_days": {
         "_defn": [
           {
-            "_row_num": 105,
+            "_row_num": 113,
             "section_name": "survey"
           }
         ],
@@ -6329,7 +6383,7 @@
       "temp_monitoring_functioning": {
         "_defn": [
           {
-            "_row_num": 106,
+            "_row_num": 114,
             "section_name": "survey"
           }
         ],
@@ -6343,7 +6397,7 @@
       "user_demonstrate_read_temp_dev": {
         "_defn": [
           {
-            "_row_num": 109,
+            "_row_num": 117,
             "section_name": "survey"
           }
         ],
@@ -6357,7 +6411,7 @@
       "alarm_last_thirty_days": {
         "_defn": [
           {
-            "_row_num": 110,
+            "_row_num": 118,
             "section_name": "survey"
           }
         ],
@@ -6371,7 +6425,7 @@
       "if_alarm_heat_number": {
         "_defn": [
           {
-            "_row_num": 111,
+            "_row_num": 120,
             "section_name": "survey"
           }
         ],
@@ -6384,7 +6438,7 @@
       "if_alarm_freeze_number": {
         "_defn": [
           {
-            "_row_num": 112,
+            "_row_num": 121,
             "section_name": "survey"
           }
         ],
@@ -6397,7 +6451,7 @@
       "cce_operating_correctly": {
         "_defn": [
           {
-            "_row_num": 115,
+            "_row_num": 125,
             "section_name": "survey"
           }
         ],
@@ -6411,7 +6465,7 @@
       "cce_operating_image": {
         "_defn": [
           {
-            "_row_num": 116,
+            "_row_num": 126,
             "section_name": "survey"
           }
         ],
@@ -6449,7 +6503,7 @@
       "mains_powered_cce": {
         "_defn": [
           {
-            "_row_num": 121,
+            "_row_num": 131,
             "section_name": "survey"
           }
         ],
@@ -6463,7 +6517,7 @@
       "mains_powered_cce_image": {
         "_defn": [
           {
-            "_row_num": 122,
+            "_row_num": 132,
             "section_name": "survey"
           }
         ],
@@ -6501,7 +6555,7 @@
       "sdd_cce": {
         "_defn": [
           {
-            "_row_num": 123,
+            "_row_num": 133,
             "section_name": "survey"
           }
         ],
@@ -6515,7 +6569,7 @@
       "sdd_cce_image": {
         "_defn": [
           {
-            "_row_num": 124,
+            "_row_num": 134,
             "section_name": "survey"
           }
         ],
@@ -6553,7 +6607,7 @@
       "faulty_component": {
         "_defn": [
           {
-            "_row_num": 125,
+            "_row_num": 135,
             "section_name": "survey"
           }
         ],
@@ -6567,7 +6621,7 @@
       "faulty_component_image": {
         "_defn": [
           {
-            "_row_num": 126,
+            "_row_num": 136,
             "section_name": "survey"
           }
         ],
@@ -6605,7 +6659,7 @@
       "user_related_failure": {
         "_defn": [
           {
-            "_row_num": 127,
+            "_row_num": 137,
             "section_name": "survey"
           }
         ],
@@ -6619,7 +6673,7 @@
       "user_related_failure_image": {
         "_defn": [
           {
-            "_row_num": 128,
+            "_row_num": 138,
             "section_name": "survey"
           }
         ],
@@ -6657,7 +6711,7 @@
       "tech_train_personnel_on_site": {
         "_defn": [
           {
-            "_row_num": 131,
+            "_row_num": 141,
             "section_name": "survey"
           }
         ],
@@ -6671,7 +6725,7 @@
       "no_tech_training_reason": {
         "_defn": [
           {
-            "_row_num": 132,
+            "_row_num": 143,
             "section_name": "survey"
           }
         ],
@@ -6684,7 +6738,7 @@
       "number_of_trained_users": {
         "_defn": [
           {
-            "_row_num": 133,
+            "_row_num": 145,
             "section_name": "survey"
           }
         ],
@@ -6697,7 +6751,7 @@
       "training_on_same_day_as_install": {
         "_defn": [
           {
-            "_row_num": 134,
+            "_row_num": 146,
             "section_name": "survey"
           }
         ],
@@ -6711,7 +6765,7 @@
       "training_duration_hrs": {
         "_defn": [
           {
-            "_row_num": 135,
+            "_row_num": 147,
             "section_name": "survey"
           }
         ],
@@ -6724,7 +6778,7 @@
       "basic_handling_training": {
         "_defn": [
           {
-            "_row_num": 139,
+            "_row_num": 151,
             "section_name": "survey"
           }
         ],
@@ -6738,7 +6792,7 @@
       "user_level_maint_training": {
         "_defn": [
           {
-            "_row_num": 140,
+            "_row_num": 152,
             "section_name": "survey"
           }
         ],
@@ -6752,7 +6806,7 @@
       "temp_monitor_record_training": {
         "_defn": [
           {
-            "_row_num": 141,
+            "_row_num": 153,
             "section_name": "survey"
           }
         ],
@@ -6766,7 +6820,7 @@
       "malfunction_proc_training": {
         "_defn": [
           {
-            "_row_num": 142,
+            "_row_num": 154,
             "section_name": "survey"
           }
         ],
@@ -6780,7 +6834,7 @@
       "training_materials_provided": {
         "_defn": [
           {
-            "_row_num": 145,
+            "_row_num": 157,
             "section_name": "survey"
           }
         ],
@@ -6794,7 +6848,7 @@
       "user_guideline_on_cover": {
         "_defn": [
           {
-            "_row_num": 146,
+            "_row_num": 158,
             "section_name": "survey"
           }
         ],
@@ -6808,7 +6862,7 @@
       "user_guideline_on_cover_image": {
         "_defn": [
           {
-            "_row_num": 147,
+            "_row_num": 159,
             "section_name": "survey"
           }
         ],
@@ -6846,7 +6900,7 @@
       "user_manual_supplied": {
         "_defn": [
           {
-            "_row_num": 151,
+            "_row_num": 163,
             "section_name": "survey"
           }
         ],
@@ -6860,7 +6914,7 @@
       "maint_guide_supplied": {
         "_defn": [
           {
-            "_row_num": 152,
+            "_row_num": 164,
             "section_name": "survey"
           }
         ],
@@ -6874,7 +6928,7 @@
       "malfunction_template_supplied": {
         "_defn": [
           {
-            "_row_num": 153,
+            "_row_num": 165,
             "section_name": "survey"
           }
         ],
@@ -6888,7 +6942,7 @@
       "malfunction_template_supplied_image": {
         "_defn": [
           {
-            "_row_num": 154,
+            "_row_num": 166,
             "section_name": "survey"
           }
         ],
@@ -6926,7 +6980,7 @@
       "manuals_available_in_un_lang": {
         "_defn": [
           {
-            "_row_num": 156,
+            "_row_num": 168,
             "section_name": "survey"
           }
         ],

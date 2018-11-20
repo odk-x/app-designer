@@ -1,8 +1,8 @@
 _element_key,_element_name,_element_type,_list_child_element_keys
 address,address,string,[]
 alarm_last_thirty_days,alarm_last_thirty_days,string,[]
-angle_of_inclination,angle_of_inclination,string,[]
-angle_of_orientation,angle_of_orientation,string,[]
+angle_of_inclination,angle_of_inclination,integer,[]
+angle_of_orientation,angle_of_orientation,integer,[]
 anti_theft_image,anti_theft_image,mimeUri,"[""anti_theft_image_contentType"",""anti_theft_image_uriFragment""]"
 anti_theft_image_contentType,contentType,mimeType,[]
 anti_theft_image_uriFragment,uriFragment,rowpath,[]
