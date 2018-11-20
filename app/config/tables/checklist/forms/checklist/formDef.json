@@ -44,7 +44,8 @@
         "_row_num": 7
       },
       {
-        "type": "text",
+        "type": "select_one_dropdown",
+        "values_list": "country_list",
         "name": "country",
         "display": {
           "prompt": {
@@ -54,7 +55,8 @@
         "_row_num": 8
       },
       {
-        "type": "text",
+        "type": "select_one_dropdown",
+        "values_list": "region_list",
         "name": "region",
         "display": {
           "prompt": {
@@ -64,7 +66,8 @@
         "_row_num": 9
       },
       {
-        "type": "text",
+        "type": "select_one_dropdown",
+        "values_list": "district_list",
         "name": "district",
         "display": {
           "prompt": {
@@ -74,7 +77,8 @@
         "_row_num": 10
       },
       {
-        "type": "text",
+        "type": "select_one_dropdown",
+        "values_list": "locality_list",
         "name": "locality",
         "display": {
           "prompt": {
@@ -1012,10 +1016,15 @@
         "name": "mains_powered_cce",
         "display": {
           "prompt": {
-            "text": "Mains Powered CCE?"
+            "text": "Mains Powered CCE? (select dropdown)"
           }
         },
         "_row_num": 131
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('mains_powered_cce'), 'yes')",
+        "_row_num": 132
       },
       {
         "type": "image",
@@ -1025,7 +1034,11 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 132
+        "_row_num": 133
+      },
+      {
+        "clause": "end if",
+        "_row_num": 134
       },
       {
         "type": "select_one",
@@ -1033,10 +1046,15 @@
         "name": "sdd_cce",
         "display": {
           "prompt": {
-            "text": "SDD CCE?"
+            "text": "SDD CCE? (select dropdown)"
           }
         },
-        "_row_num": 133
+        "_row_num": 135
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('sdd_cce'), 'yes')",
+        "_row_num": 136
       },
       {
         "type": "image",
@@ -1046,7 +1064,11 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 134
+        "_row_num": 137
+      },
+      {
+        "clause": "end if",
+        "_row_num": 138
       },
       {
         "type": "select_one",
@@ -1054,10 +1076,15 @@
         "name": "faulty_component",
         "display": {
           "prompt": {
-            "text": "Faulty component?"
+            "text": "Faulty component? (select dropdown)"
           }
         },
-        "_row_num": 135
+        "_row_num": 139
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('faulty_component'), 'yes')",
+        "_row_num": 140
       },
       {
         "type": "image",
@@ -1067,7 +1094,11 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 136
+        "_row_num": 141
+      },
+      {
+        "clause": "end if",
+        "_row_num": 142
       },
       {
         "type": "select_one",
@@ -1075,10 +1106,15 @@
         "name": "user_related_failure",
         "display": {
           "prompt": {
-            "text": "User related failure (Improper usage)?"
+            "text": "User related failure (Improper usage)? (select dropdown)"
           }
         },
-        "_row_num": 137
+        "_row_num": 143
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('user_related_failure'), 'yes')",
+        "_row_num": 144
       },
       {
         "type": "image",
@@ -1088,15 +1124,19 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 138
+        "_row_num": 145
+      },
+      {
+        "clause": "end if",
+        "_row_num": 146
       },
       {
         "clause": "end screen",
-        "_row_num": 139
+        "_row_num": 147
       },
       {
         "clause": "begin screen",
-        "_row_num": 140
+        "_row_num": 148
       },
       {
         "type": "select_one",
@@ -1107,12 +1147,12 @@
             "text": "Did the installation technician train the personnel on site?"
           }
         },
-        "_row_num": 141
+        "_row_num": 149
       },
       {
         "clause": "if",
         "condition": "selected(data('tech_train_personnel_on_site'), 'no')",
-        "_row_num": 142
+        "_row_num": 150
       },
       {
         "type": "text",
@@ -1122,11 +1162,11 @@
             "text": "If not, give reason"
           }
         },
-        "_row_num": 143
+        "_row_num": 151
       },
       {
         "clause": "end if",
-        "_row_num": 144
+        "_row_num": 152
       },
       {
         "type": "integer",
@@ -1136,7 +1176,7 @@
             "text": "Please specify the number of users trained?"
           }
         },
-        "_row_num": 145
+        "_row_num": 153
       },
       {
         "type": "select_one",
@@ -1147,7 +1187,7 @@
             "text": "Was the training at the Health Facility conducted on the same day as the installation?"
           }
         },
-        "_row_num": 146
+        "_row_num": 154
       },
       {
         "type": "integer",
@@ -1157,15 +1197,15 @@
             "text": "Please specify the duration of the training (hours)?"
           }
         },
-        "_row_num": 147
+        "_row_num": 155
       },
       {
         "clause": "end screen",
-        "_row_num": 148
+        "_row_num": 156
       },
       {
         "clause": "begin screen",
-        "_row_num": 149
+        "_row_num": 157
       },
       {
         "type": "note",
@@ -1175,7 +1215,7 @@
             "text": "Did the training at Health Facility level include :"
           }
         },
-        "_row_num": 150
+        "_row_num": 158
       },
       {
         "type": "select_one",
@@ -1186,7 +1226,7 @@
             "text": "a.     Basic handling?"
           }
         },
-        "_row_num": 151
+        "_row_num": 159
       },
       {
         "type": "select_one",
@@ -1197,7 +1237,7 @@
             "text": "b.     User level maintenance?"
           }
         },
-        "_row_num": 152
+        "_row_num": 160
       },
       {
         "type": "select_one",
@@ -1208,7 +1248,7 @@
             "text": "d.     Monitoring and recording of temperature?"
           }
         },
-        "_row_num": 153
+        "_row_num": 161
       },
       {
         "type": "select_one",
@@ -1219,15 +1259,15 @@
             "text": "e.     Procedures to follow in case of malfunction /  breakdown?"
           }
         },
-        "_row_num": 154
+        "_row_num": 162
       },
       {
         "clause": "end screen",
-        "_row_num": 155
+        "_row_num": 163
       },
       {
         "clause": "begin screen",
-        "_row_num": 156
+        "_row_num": 164
       },
       {
         "type": "select_one",
@@ -1238,7 +1278,7 @@
             "text": "Was any reference material such as leaflet or presentation provided to the Health Facility staff?"
           }
         },
-        "_row_num": 157
+        "_row_num": 165
       },
       {
         "type": "select_one",
@@ -1249,7 +1289,12 @@
             "text": "Is a picturial user guideline available on the cover?"
           }
         },
-        "_row_num": 158
+        "_row_num": 166
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('user_guideline_on_cover'), 'yes')",
+        "_row_num": 167
       },
       {
         "type": "image",
@@ -1259,15 +1304,19 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 159
+        "_row_num": 168
+      },
+      {
+        "clause": "end if",
+        "_row_num": 169
       },
       {
         "clause": "end screen",
-        "_row_num": 160
+        "_row_num": 170
       },
       {
         "clause": "begin screen",
-        "_row_num": 161
+        "_row_num": 171
       },
       {
         "type": "note",
@@ -1277,7 +1326,7 @@
             "text": "Did the installer supply the following manuals:"
           }
         },
-        "_row_num": 162
+        "_row_num": 172
       },
       {
         "type": "select_one",
@@ -1288,7 +1337,7 @@
             "text": "Users Manuel?"
           }
         },
-        "_row_num": 163
+        "_row_num": 173
       },
       {
         "type": "select_one",
@@ -1299,7 +1348,7 @@
             "text": "Maintenance guide?"
           }
         },
-        "_row_num": 164
+        "_row_num": 174
       },
       {
         "type": "select_one",
@@ -1310,7 +1359,12 @@
             "text": "Template to report a malfunction / breakdown?"
           }
         },
-        "_row_num": 165
+        "_row_num": 175
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('malfunction_template_supplied'), 'yes')",
+        "_row_num": 176
       },
       {
         "type": "image",
@@ -1320,11 +1374,15 @@
             "text": "Take picture"
           }
         },
-        "_row_num": 166
+        "_row_num": 177
+      },
+      {
+        "clause": "end if",
+        "_row_num": 178
       },
       {
         "clause": "end screen",
-        "_row_num": 167
+        "_row_num": 179
       },
       {
         "type": "select_one",
@@ -1335,7 +1393,7 @@
             "text": "Are all manuals available in the agreed UN languages ? (e.g. English, French, Spanish, Arabic etc.)"
           }
         },
-        "_row_num": 168
+        "_row_num": 180
       }
     ],
     "choices": [
@@ -1358,6 +1416,406 @@
           }
         },
         "_row_num": 3
+      },
+      {
+        "choice_list_name": "country_list",
+        "data_value": "uganda",
+        "display": {
+          "title": {
+            "text": "Uganda"
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "country_list",
+        "data_value": "senegal",
+        "display": {
+          "title": {
+            "text": "Senegal"
+          }
+        },
+        "_row_num": 6
+      },
+      {
+        "choice_list_name": "country_list",
+        "data_value": "solomon_islands",
+        "display": {
+          "title": {
+            "text": "Solomon Islands"
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "choice_list_name": "region_list",
+        "data_value": "central",
+        "display": {
+          "title": {
+            "text": "Central"
+          }
+        },
+        "_row_num": 9
+      },
+      {
+        "choice_list_name": "region_list",
+        "data_value": "eastern",
+        "display": {
+          "title": {
+            "text": "Eastern"
+          }
+        },
+        "_row_num": 10
+      },
+      {
+        "choice_list_name": "region_list",
+        "data_value": "northern",
+        "display": {
+          "title": {
+            "text": "Northern"
+          }
+        },
+        "_row_num": 11
+      },
+      {
+        "choice_list_name": "region_list",
+        "data_value": "western",
+        "display": {
+          "title": {
+            "text": "Western"
+          }
+        },
+        "_row_num": 12
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "buikwe",
+        "display": {
+          "title": {
+            "text": "Buikwe"
+          }
+        },
+        "_row_num": 14
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "bukomansimbi",
+        "display": {
+          "title": {
+            "text": "Bukomansimbi"
+          }
+        },
+        "_row_num": 15
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "butambala",
+        "display": {
+          "title": {
+            "text": "Butambala"
+          }
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "buvuma",
+        "display": {
+          "title": {
+            "text": "Buvuma"
+          }
+        },
+        "_row_num": 17
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "gomba",
+        "display": {
+          "title": {
+            "text": "Gomba"
+          }
+        },
+        "_row_num": 18
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "kalangala",
+        "display": {
+          "title": {
+            "text": "Kalangala"
+          }
+        },
+        "_row_num": 19
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "kalungu",
+        "display": {
+          "title": {
+            "text": "Kalungu"
+          }
+        },
+        "_row_num": 20
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "kampala",
+        "display": {
+          "title": {
+            "text": "Kampala"
+          }
+        },
+        "_row_num": 21
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "kayunga",
+        "display": {
+          "title": {
+            "text": "Kayunga"
+          }
+        },
+        "_row_num": 22
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "kiboga",
+        "display": {
+          "title": {
+            "text": "Kiboga"
+          }
+        },
+        "_row_num": 23
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "kyankwanzi",
+        "display": {
+          "title": {
+            "text": "Kyankwanzi"
+          }
+        },
+        "_row_num": 24
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "luweero",
+        "display": {
+          "title": {
+            "text": "Luweero"
+          }
+        },
+        "_row_num": 25
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "lwengo",
+        "display": {
+          "title": {
+            "text": "Lwengo"
+          }
+        },
+        "_row_num": 26
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "lyantonde",
+        "display": {
+          "title": {
+            "text": "Lyantonde"
+          }
+        },
+        "_row_num": 27
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "masaka",
+        "display": {
+          "title": {
+            "text": "Masaka"
+          }
+        },
+        "_row_num": 28
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "mityana",
+        "display": {
+          "title": {
+            "text": "Mityana"
+          }
+        },
+        "_row_num": 29
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "mpigi",
+        "display": {
+          "title": {
+            "text": "Mpigi"
+          }
+        },
+        "_row_num": 30
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "mubende",
+        "display": {
+          "title": {
+            "text": "Mubende"
+          }
+        },
+        "_row_num": 31
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "mukono",
+        "display": {
+          "title": {
+            "text": "Mukono"
+          }
+        },
+        "_row_num": 32
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "nakaseke",
+        "display": {
+          "title": {
+            "text": "Nakaseke"
+          }
+        },
+        "_row_num": 33
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "nakasongola",
+        "display": {
+          "title": {
+            "text": "Nakasongola"
+          }
+        },
+        "_row_num": 34
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "rakai",
+        "display": {
+          "title": {
+            "text": "Rakai"
+          }
+        },
+        "_row_num": 35
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "ssembabule",
+        "display": {
+          "title": {
+            "text": "Ssembabule"
+          }
+        },
+        "_row_num": 36
+      },
+      {
+        "choice_list_name": "district_list",
+        "data_value": "wakiso",
+        "display": {
+          "title": {
+            "text": "Wakiso"
+          }
+        },
+        "_row_num": 37
+      },
+      {
+        "choice_list_name": "locality_list",
+        "data_value": "kawolo",
+        "display": {
+          "title": {
+            "text": "Kawolo"
+          }
+        },
+        "_row_num": 39
+      },
+      {
+        "choice_list_name": "locality_list",
+        "data_value": "lugazi",
+        "display": {
+          "title": {
+            "text": "Lugazi"
+          }
+        },
+        "_row_num": 40
+      },
+      {
+        "choice_list_name": "locality_list",
+        "data_value": "najja",
+        "display": {
+          "title": {
+            "text": "Najja"
+          }
+        },
+        "_row_num": 41
+      },
+      {
+        "choice_list_name": "locality_list",
+        "data_value": "najjembe",
+        "display": {
+          "title": {
+            "text": "Najjembe"
+          }
+        },
+        "_row_num": 42
+      },
+      {
+        "choice_list_name": "locality_list",
+        "data_value": "njeru",
+        "display": {
+          "title": {
+            "text": "Njeru"
+          }
+        },
+        "_row_num": 43
+      },
+      {
+        "choice_list_name": "locality_list",
+        "data_value": "ngogwe",
+        "display": {
+          "title": {
+            "text": "Ngogwe"
+          }
+        },
+        "_row_num": 44
+      },
+      {
+        "choice_list_name": "locality_list",
+        "data_value": "nyenga",
+        "display": {
+          "title": {
+            "text": "Nyenga"
+          }
+        },
+        "_row_num": 45
+      },
+      {
+        "choice_list_name": "locality_list",
+        "data_value": "nsi-Bukunja",
+        "display": {
+          "title": {
+            "text": "Ssi-Bukunja"
+          }
+        },
+        "_row_num": 46
+      },
+      {
+        "choice_list_name": "locality_list",
+        "data_value": "wakisi",
+        "display": {
+          "title": {
+            "text": "Wakisi"
+          }
+        },
+        "_row_num": 47
       }
     ],
     "settings": [
@@ -1479,6 +1937,414 @@
           },
           "_row_num": 3
         }
+      ],
+      "country_list": [
+        {
+          "choice_list_name": "country_list",
+          "data_value": "uganda",
+          "display": {
+            "title": {
+              "text": "Uganda"
+            }
+          },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "country_list",
+          "data_value": "senegal",
+          "display": {
+            "title": {
+              "text": "Senegal"
+            }
+          },
+          "_row_num": 6
+        },
+        {
+          "choice_list_name": "country_list",
+          "data_value": "solomon_islands",
+          "display": {
+            "title": {
+              "text": "Solomon Islands"
+            }
+          },
+          "_row_num": 7
+        }
+      ],
+      "region_list": [
+        {
+          "choice_list_name": "region_list",
+          "data_value": "central",
+          "display": {
+            "title": {
+              "text": "Central"
+            }
+          },
+          "_row_num": 9
+        },
+        {
+          "choice_list_name": "region_list",
+          "data_value": "eastern",
+          "display": {
+            "title": {
+              "text": "Eastern"
+            }
+          },
+          "_row_num": 10
+        },
+        {
+          "choice_list_name": "region_list",
+          "data_value": "northern",
+          "display": {
+            "title": {
+              "text": "Northern"
+            }
+          },
+          "_row_num": 11
+        },
+        {
+          "choice_list_name": "region_list",
+          "data_value": "western",
+          "display": {
+            "title": {
+              "text": "Western"
+            }
+          },
+          "_row_num": 12
+        }
+      ],
+      "district_list": [
+        {
+          "choice_list_name": "district_list",
+          "data_value": "buikwe",
+          "display": {
+            "title": {
+              "text": "Buikwe"
+            }
+          },
+          "_row_num": 14
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "bukomansimbi",
+          "display": {
+            "title": {
+              "text": "Bukomansimbi"
+            }
+          },
+          "_row_num": 15
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "butambala",
+          "display": {
+            "title": {
+              "text": "Butambala"
+            }
+          },
+          "_row_num": 16
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "buvuma",
+          "display": {
+            "title": {
+              "text": "Buvuma"
+            }
+          },
+          "_row_num": 17
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "gomba",
+          "display": {
+            "title": {
+              "text": "Gomba"
+            }
+          },
+          "_row_num": 18
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "kalangala",
+          "display": {
+            "title": {
+              "text": "Kalangala"
+            }
+          },
+          "_row_num": 19
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "kalungu",
+          "display": {
+            "title": {
+              "text": "Kalungu"
+            }
+          },
+          "_row_num": 20
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "kampala",
+          "display": {
+            "title": {
+              "text": "Kampala"
+            }
+          },
+          "_row_num": 21
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "kayunga",
+          "display": {
+            "title": {
+              "text": "Kayunga"
+            }
+          },
+          "_row_num": 22
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "kiboga",
+          "display": {
+            "title": {
+              "text": "Kiboga"
+            }
+          },
+          "_row_num": 23
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "kyankwanzi",
+          "display": {
+            "title": {
+              "text": "Kyankwanzi"
+            }
+          },
+          "_row_num": 24
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "luweero",
+          "display": {
+            "title": {
+              "text": "Luweero"
+            }
+          },
+          "_row_num": 25
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "lwengo",
+          "display": {
+            "title": {
+              "text": "Lwengo"
+            }
+          },
+          "_row_num": 26
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "lyantonde",
+          "display": {
+            "title": {
+              "text": "Lyantonde"
+            }
+          },
+          "_row_num": 27
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "masaka",
+          "display": {
+            "title": {
+              "text": "Masaka"
+            }
+          },
+          "_row_num": 28
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "mityana",
+          "display": {
+            "title": {
+              "text": "Mityana"
+            }
+          },
+          "_row_num": 29
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "mpigi",
+          "display": {
+            "title": {
+              "text": "Mpigi"
+            }
+          },
+          "_row_num": 30
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "mubende",
+          "display": {
+            "title": {
+              "text": "Mubende"
+            }
+          },
+          "_row_num": 31
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "mukono",
+          "display": {
+            "title": {
+              "text": "Mukono"
+            }
+          },
+          "_row_num": 32
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "nakaseke",
+          "display": {
+            "title": {
+              "text": "Nakaseke"
+            }
+          },
+          "_row_num": 33
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "nakasongola",
+          "display": {
+            "title": {
+              "text": "Nakasongola"
+            }
+          },
+          "_row_num": 34
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "rakai",
+          "display": {
+            "title": {
+              "text": "Rakai"
+            }
+          },
+          "_row_num": 35
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "ssembabule",
+          "display": {
+            "title": {
+              "text": "Ssembabule"
+            }
+          },
+          "_row_num": 36
+        },
+        {
+          "choice_list_name": "district_list",
+          "data_value": "wakiso",
+          "display": {
+            "title": {
+              "text": "Wakiso"
+            }
+          },
+          "_row_num": 37
+        }
+      ],
+      "locality_list": [
+        {
+          "choice_list_name": "locality_list",
+          "data_value": "kawolo",
+          "display": {
+            "title": {
+              "text": "Kawolo"
+            }
+          },
+          "_row_num": 39
+        },
+        {
+          "choice_list_name": "locality_list",
+          "data_value": "lugazi",
+          "display": {
+            "title": {
+              "text": "Lugazi"
+            }
+          },
+          "_row_num": 40
+        },
+        {
+          "choice_list_name": "locality_list",
+          "data_value": "najja",
+          "display": {
+            "title": {
+              "text": "Najja"
+            }
+          },
+          "_row_num": 41
+        },
+        {
+          "choice_list_name": "locality_list",
+          "data_value": "najjembe",
+          "display": {
+            "title": {
+              "text": "Najjembe"
+            }
+          },
+          "_row_num": 42
+        },
+        {
+          "choice_list_name": "locality_list",
+          "data_value": "njeru",
+          "display": {
+            "title": {
+              "text": "Njeru"
+            }
+          },
+          "_row_num": 43
+        },
+        {
+          "choice_list_name": "locality_list",
+          "data_value": "ngogwe",
+          "display": {
+            "title": {
+              "text": "Ngogwe"
+            }
+          },
+          "_row_num": 44
+        },
+        {
+          "choice_list_name": "locality_list",
+          "data_value": "nyenga",
+          "display": {
+            "title": {
+              "text": "Nyenga"
+            }
+          },
+          "_row_num": 45
+        },
+        {
+          "choice_list_name": "locality_list",
+          "data_value": "nsi-Bukunja",
+          "display": {
+            "title": {
+              "text": "Ssi-Bukunja"
+            }
+          },
+          "_row_num": 46
+        },
+        {
+          "choice_list_name": "locality_list",
+          "data_value": "wakisi",
+          "display": {
+            "title": {
+              "text": "Wakisi"
+            }
+          },
+          "_row_num": 47
+        }
       ]
     },
     "table_specific_definitions": {
@@ -1526,6 +2392,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "country_list",
         "elementKey": "country"
       },
       "region": {
@@ -1536,6 +2403,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "region_list",
         "elementKey": "region"
       },
       "district": {
@@ -1546,6 +2414,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "district_list",
         "elementKey": "district"
       },
       "locality": {
@@ -1556,6 +2425,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "locality_list",
         "elementKey": "locality"
       },
       "gps_coordinates": {
@@ -2516,7 +3386,7 @@
       "mains_powered_cce_image": {
         "_defn": [
           {
-            "_row_num": 132,
+            "_row_num": 133,
             "section_name": "survey"
           }
         ],
@@ -2540,7 +3410,7 @@
       "sdd_cce": {
         "_defn": [
           {
-            "_row_num": 133,
+            "_row_num": 135,
             "section_name": "survey"
           }
         ],
@@ -2551,7 +3421,7 @@
       "sdd_cce_image": {
         "_defn": [
           {
-            "_row_num": 134,
+            "_row_num": 137,
             "section_name": "survey"
           }
         ],
@@ -2575,7 +3445,7 @@
       "faulty_component": {
         "_defn": [
           {
-            "_row_num": 135,
+            "_row_num": 139,
             "section_name": "survey"
           }
         ],
@@ -2586,7 +3456,7 @@
       "faulty_component_image": {
         "_defn": [
           {
-            "_row_num": 136,
+            "_row_num": 141,
             "section_name": "survey"
           }
         ],
@@ -2610,7 +3480,7 @@
       "user_related_failure": {
         "_defn": [
           {
-            "_row_num": 137,
+            "_row_num": 143,
             "section_name": "survey"
           }
         ],
@@ -2621,7 +3491,7 @@
       "user_related_failure_image": {
         "_defn": [
           {
-            "_row_num": 138,
+            "_row_num": 145,
             "section_name": "survey"
           }
         ],
@@ -2645,7 +3515,7 @@
       "tech_train_personnel_on_site": {
         "_defn": [
           {
-            "_row_num": 141,
+            "_row_num": 149,
             "section_name": "survey"
           }
         ],
@@ -2656,7 +3526,7 @@
       "no_tech_training_reason": {
         "_defn": [
           {
-            "_row_num": 143,
+            "_row_num": 151,
             "section_name": "survey"
           }
         ],
@@ -2666,7 +3536,7 @@
       "number_of_trained_users": {
         "_defn": [
           {
-            "_row_num": 145,
+            "_row_num": 153,
             "section_name": "survey"
           }
         ],
@@ -2676,7 +3546,7 @@
       "training_on_same_day_as_install": {
         "_defn": [
           {
-            "_row_num": 146,
+            "_row_num": 154,
             "section_name": "survey"
           }
         ],
@@ -2687,7 +3557,7 @@
       "training_duration_hrs": {
         "_defn": [
           {
-            "_row_num": 147,
+            "_row_num": 155,
             "section_name": "survey"
           }
         ],
@@ -2697,7 +3567,7 @@
       "basic_handling_training": {
         "_defn": [
           {
-            "_row_num": 151,
+            "_row_num": 159,
             "section_name": "survey"
           }
         ],
@@ -2708,7 +3578,7 @@
       "user_level_maint_training": {
         "_defn": [
           {
-            "_row_num": 152,
+            "_row_num": 160,
             "section_name": "survey"
           }
         ],
@@ -2719,7 +3589,7 @@
       "temp_monitor_record_training": {
         "_defn": [
           {
-            "_row_num": 153,
+            "_row_num": 161,
             "section_name": "survey"
           }
         ],
@@ -2730,7 +3600,7 @@
       "malfunction_proc_training": {
         "_defn": [
           {
-            "_row_num": 154,
+            "_row_num": 162,
             "section_name": "survey"
           }
         ],
@@ -2741,7 +3611,7 @@
       "training_materials_provided": {
         "_defn": [
           {
-            "_row_num": 157,
+            "_row_num": 165,
             "section_name": "survey"
           }
         ],
@@ -2752,7 +3622,7 @@
       "user_guideline_on_cover": {
         "_defn": [
           {
-            "_row_num": 158,
+            "_row_num": 166,
             "section_name": "survey"
           }
         ],
@@ -2763,7 +3633,7 @@
       "user_guideline_on_cover_image": {
         "_defn": [
           {
-            "_row_num": 159,
+            "_row_num": 168,
             "section_name": "survey"
           }
         ],
@@ -2787,7 +3657,7 @@
       "user_manual_supplied": {
         "_defn": [
           {
-            "_row_num": 163,
+            "_row_num": 173,
             "section_name": "survey"
           }
         ],
@@ -2798,7 +3668,7 @@
       "maint_guide_supplied": {
         "_defn": [
           {
-            "_row_num": 164,
+            "_row_num": 174,
             "section_name": "survey"
           }
         ],
@@ -2809,7 +3679,7 @@
       "malfunction_template_supplied": {
         "_defn": [
           {
-            "_row_num": 165,
+            "_row_num": 175,
             "section_name": "survey"
           }
         ],
@@ -2820,7 +3690,7 @@
       "malfunction_template_supplied_image": {
         "_defn": [
           {
-            "_row_num": 166,
+            "_row_num": 177,
             "section_name": "survey"
           }
         ],
@@ -2844,7 +3714,7 @@
       "manuals_available_in_un_lang": {
         "_defn": [
           {
-            "_row_num": 168,
+            "_row_num": 180,
             "section_name": "survey"
           }
         ],
@@ -2909,7 +3779,8 @@
             "promptIdx": 2
           },
           {
-            "type": "text",
+            "type": "select_one_dropdown",
+            "values_list": "country_list",
             "name": "country",
             "display": {
               "prompt": {
@@ -2919,12 +3790,13 @@
             "_row_num": 8,
             "__rowNum__": 7,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "select_one_dropdown",
             "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 3
           },
           {
-            "type": "text",
+            "type": "select_one_dropdown",
+            "values_list": "region_list",
             "name": "region",
             "display": {
               "prompt": {
@@ -2934,12 +3806,13 @@
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "select_one_dropdown",
             "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 4
           },
           {
-            "type": "text",
+            "type": "select_one_dropdown",
+            "values_list": "district_list",
             "name": "district",
             "display": {
               "prompt": {
@@ -2949,12 +3822,13 @@
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "select_one_dropdown",
             "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 5
           },
           {
-            "type": "text",
+            "type": "select_one_dropdown",
+            "values_list": "locality_list",
             "name": "locality",
             "display": {
               "prompt": {
@@ -2964,7 +3838,7 @@
             "_row_num": 11,
             "__rowNum__": 10,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "select_one_dropdown",
             "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 6
           },
@@ -4037,7 +4911,7 @@
             "name": "mains_powered_cce",
             "display": {
               "prompt": {
-                "text": "Mains Powered CCE?"
+                "text": "Mains Powered CCE? (select dropdown)"
               }
             },
             "_row_num": 131,
@@ -4055,8 +4929,8 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 132,
-            "__rowNum__": 131,
+            "_row_num": 133,
+            "__rowNum__": 132,
             "_token_type": "prompt",
             "_type": "image",
             "_branch_label_enclosing_screen": "survey/_screen128",
@@ -4068,11 +4942,11 @@
             "name": "sdd_cce",
             "display": {
               "prompt": {
-                "text": "SDD CCE?"
+                "text": "SDD CCE? (select dropdown)"
               }
             },
-            "_row_num": 133,
-            "__rowNum__": 132,
+            "_row_num": 135,
+            "__rowNum__": 134,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen128",
@@ -4086,8 +4960,8 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 134,
-            "__rowNum__": 133,
+            "_row_num": 137,
+            "__rowNum__": 136,
             "_token_type": "prompt",
             "_type": "image",
             "_branch_label_enclosing_screen": "survey/_screen128",
@@ -4099,11 +4973,11 @@
             "name": "faulty_component",
             "display": {
               "prompt": {
-                "text": "Faulty component?"
+                "text": "Faulty component? (select dropdown)"
               }
             },
-            "_row_num": 135,
-            "__rowNum__": 134,
+            "_row_num": 139,
+            "__rowNum__": 138,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen128",
@@ -4117,8 +4991,8 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 136,
-            "__rowNum__": 135,
+            "_row_num": 141,
+            "__rowNum__": 140,
             "_token_type": "prompt",
             "_type": "image",
             "_branch_label_enclosing_screen": "survey/_screen128",
@@ -4130,11 +5004,11 @@
             "name": "user_related_failure",
             "display": {
               "prompt": {
-                "text": "User related failure (Improper usage)?"
+                "text": "User related failure (Improper usage)? (select dropdown)"
               }
             },
-            "_row_num": 137,
-            "__rowNum__": 136,
+            "_row_num": 143,
+            "__rowNum__": 142,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen128",
@@ -4148,8 +5022,8 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 138,
-            "__rowNum__": 137,
+            "_row_num": 145,
+            "__rowNum__": 144,
             "_token_type": "prompt",
             "_type": "image",
             "_branch_label_enclosing_screen": "survey/_screen128",
@@ -4164,11 +5038,11 @@
                 "text": "Did the installation technician train the personnel on site?"
               }
             },
-            "_row_num": 141,
-            "__rowNum__": 140,
+            "_row_num": 149,
+            "__rowNum__": 148,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen140",
+            "_branch_label_enclosing_screen": "survey/_screen148",
             "promptIdx": 84
           },
           {
@@ -4179,11 +5053,11 @@
                 "text": "If not, give reason"
               }
             },
-            "_row_num": 143,
-            "__rowNum__": 142,
+            "_row_num": 151,
+            "__rowNum__": 150,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen140",
+            "_branch_label_enclosing_screen": "survey/_screen148",
             "promptIdx": 85
           },
           {
@@ -4194,11 +5068,11 @@
                 "text": "Please specify the number of users trained?"
               }
             },
-            "_row_num": 145,
-            "__rowNum__": 144,
+            "_row_num": 153,
+            "__rowNum__": 152,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen140",
+            "_branch_label_enclosing_screen": "survey/_screen148",
             "promptIdx": 86
           },
           {
@@ -4210,11 +5084,11 @@
                 "text": "Was the training at the Health Facility conducted on the same day as the installation?"
               }
             },
-            "_row_num": 146,
-            "__rowNum__": 145,
+            "_row_num": 154,
+            "__rowNum__": 153,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen140",
+            "_branch_label_enclosing_screen": "survey/_screen148",
             "promptIdx": 87
           },
           {
@@ -4225,11 +5099,11 @@
                 "text": "Please specify the duration of the training (hours)?"
               }
             },
-            "_row_num": 147,
-            "__rowNum__": 146,
+            "_row_num": 155,
+            "__rowNum__": 154,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen140",
+            "_branch_label_enclosing_screen": "survey/_screen148",
             "promptIdx": 88
           },
           {
@@ -4240,11 +5114,11 @@
                 "text": "Did the training at Health Facility level include :"
               }
             },
-            "_row_num": 150,
-            "__rowNum__": 149,
+            "_row_num": 158,
+            "__rowNum__": 157,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen149",
+            "_branch_label_enclosing_screen": "survey/_screen157",
             "promptIdx": 89
           },
           {
@@ -4256,11 +5130,11 @@
                 "text": "a.     Basic handling?"
               }
             },
-            "_row_num": 151,
-            "__rowNum__": 150,
+            "_row_num": 159,
+            "__rowNum__": 158,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen149",
+            "_branch_label_enclosing_screen": "survey/_screen157",
             "promptIdx": 90
           },
           {
@@ -4272,11 +5146,11 @@
                 "text": "b.     User level maintenance?"
               }
             },
-            "_row_num": 152,
-            "__rowNum__": 151,
+            "_row_num": 160,
+            "__rowNum__": 159,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen149",
+            "_branch_label_enclosing_screen": "survey/_screen157",
             "promptIdx": 91
           },
           {
@@ -4288,11 +5162,11 @@
                 "text": "d.     Monitoring and recording of temperature?"
               }
             },
-            "_row_num": 153,
-            "__rowNum__": 152,
+            "_row_num": 161,
+            "__rowNum__": 160,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen149",
+            "_branch_label_enclosing_screen": "survey/_screen157",
             "promptIdx": 92
           },
           {
@@ -4304,11 +5178,11 @@
                 "text": "e.     Procedures to follow in case of malfunction /  breakdown?"
               }
             },
-            "_row_num": 154,
-            "__rowNum__": 153,
+            "_row_num": 162,
+            "__rowNum__": 161,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen149",
+            "_branch_label_enclosing_screen": "survey/_screen157",
             "promptIdx": 93
           },
           {
@@ -4320,11 +5194,11 @@
                 "text": "Was any reference material such as leaflet or presentation provided to the Health Facility staff?"
               }
             },
-            "_row_num": 157,
-            "__rowNum__": 156,
+            "_row_num": 165,
+            "__rowNum__": 164,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen156",
+            "_branch_label_enclosing_screen": "survey/_screen164",
             "promptIdx": 94
           },
           {
@@ -4336,11 +5210,11 @@
                 "text": "Is a picturial user guideline available on the cover?"
               }
             },
-            "_row_num": 158,
-            "__rowNum__": 157,
+            "_row_num": 166,
+            "__rowNum__": 165,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen156",
+            "_branch_label_enclosing_screen": "survey/_screen164",
             "promptIdx": 95
           },
           {
@@ -4351,11 +5225,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 159,
-            "__rowNum__": 158,
+            "_row_num": 168,
+            "__rowNum__": 167,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen156",
+            "_branch_label_enclosing_screen": "survey/_screen164",
             "promptIdx": 96
           },
           {
@@ -4366,11 +5240,11 @@
                 "text": "Did the installer supply the following manuals:"
               }
             },
-            "_row_num": 162,
-            "__rowNum__": 161,
+            "_row_num": 172,
+            "__rowNum__": 171,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen161",
+            "_branch_label_enclosing_screen": "survey/_screen171",
             "promptIdx": 97
           },
           {
@@ -4382,11 +5256,11 @@
                 "text": "Users Manuel?"
               }
             },
-            "_row_num": 163,
-            "__rowNum__": 162,
+            "_row_num": 173,
+            "__rowNum__": 172,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen161",
+            "_branch_label_enclosing_screen": "survey/_screen171",
             "promptIdx": 98
           },
           {
@@ -4398,11 +5272,11 @@
                 "text": "Maintenance guide?"
               }
             },
-            "_row_num": 164,
-            "__rowNum__": 163,
+            "_row_num": 174,
+            "__rowNum__": 173,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen161",
+            "_branch_label_enclosing_screen": "survey/_screen171",
             "promptIdx": 99
           },
           {
@@ -4414,11 +5288,11 @@
                 "text": "Template to report a malfunction / breakdown?"
               }
             },
-            "_row_num": 165,
-            "__rowNum__": 164,
+            "_row_num": 175,
+            "__rowNum__": 174,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen161",
+            "_branch_label_enclosing_screen": "survey/_screen171",
             "promptIdx": 100
           },
           {
@@ -4429,11 +5303,11 @@
                 "text": "Take picture"
               }
             },
-            "_row_num": 166,
-            "__rowNum__": 165,
+            "_row_num": 177,
+            "__rowNum__": 176,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen161",
+            "_branch_label_enclosing_screen": "survey/_screen171",
             "promptIdx": 101
           },
           {
@@ -4445,19 +5319,19 @@
                 "text": "Are all manuals available in the agreed UN languages ? (e.g. English, French, Spanish, Arabic etc.)"
               }
             },
-            "_row_num": 168,
-            "__rowNum__": 167,
+            "_row_num": 180,
+            "__rowNum__": 179,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen168",
+            "_branch_label_enclosing_screen": "survey/_screen180",
             "promptIdx": 102
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 169,
-            "_branch_label_enclosing_screen": "survey/_screen169",
+            "_row_num": 181,
+            "_branch_label_enclosing_screen": "survey/_screen181",
             "promptIdx": 103
           }
         ],
@@ -4766,22 +5640,22 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 139,
-              "__rowNum__": 138,
+              "_row_num": 147,
+              "__rowNum__": 146,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(74);\nactivePromptIndicies.push(75);\nactivePromptIndicies.push(76);\nactivePromptIndicies.push(77);\nactivePromptIndicies.push(78);\nactivePromptIndicies.push(79);\nactivePromptIndicies.push(80);\nactivePromptIndicies.push(81);\nactivePromptIndicies.push(82);\nactivePromptIndicies.push(83);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(74);\nactivePromptIndicies.push(75);\nactivePromptIndicies.push(76);\nif (selected(data('mains_powered_cce'), 'yes')) {\nactivePromptIndicies.push(77);\n}\nactivePromptIndicies.push(78);\nif (selected(data('sdd_cce'), 'yes')) {\nactivePromptIndicies.push(79);\n}\nactivePromptIndicies.push(80);\nif (selected(data('faulty_component'), 'yes')) {\nactivePromptIndicies.push(81);\n}\nactivePromptIndicies.push(82);\nif (selected(data('user_related_failure'), 'yes')) {\nactivePromptIndicies.push(83);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 21
           },
           {
             "clause": "begin screen",
-            "_row_num": 140,
-            "__rowNum__": 139,
+            "_row_num": 148,
+            "__rowNum__": 147,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 148,
-              "__rowNum__": 147,
+              "_row_num": 156,
+              "__rowNum__": 155,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(84);\nif (selected(data('tech_train_personnel_on_site'), 'no')) {\nactivePromptIndicies.push(85);\n}\nactivePromptIndicies.push(86);\nactivePromptIndicies.push(87);\nactivePromptIndicies.push(88);\n\nreturn activePromptIndicies;\n}\n",
@@ -4789,13 +5663,13 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 149,
-            "__rowNum__": 148,
+            "_row_num": 157,
+            "__rowNum__": 156,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 155,
-              "__rowNum__": 154,
+              "_row_num": 163,
+              "__rowNum__": 162,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(89);\nactivePromptIndicies.push(90);\nactivePromptIndicies.push(91);\nactivePromptIndicies.push(92);\nactivePromptIndicies.push(93);\n\nreturn activePromptIndicies;\n}\n",
@@ -4803,34 +5677,34 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 156,
-            "__rowNum__": 155,
+            "_row_num": 164,
+            "__rowNum__": 163,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 160,
-              "__rowNum__": 159,
+              "_row_num": 170,
+              "__rowNum__": 169,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(94);\nactivePromptIndicies.push(95);\nactivePromptIndicies.push(96);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(94);\nactivePromptIndicies.push(95);\nif (selected(data('user_guideline_on_cover'), 'yes')) {\nactivePromptIndicies.push(96);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 24
           },
           {
             "clause": "begin screen",
-            "_row_num": 161,
-            "__rowNum__": 160,
+            "_row_num": 171,
+            "__rowNum__": 170,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 167,
-              "__rowNum__": 166,
+              "_row_num": 179,
+              "__rowNum__": 178,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(97);\nactivePromptIndicies.push(98);\nactivePromptIndicies.push(99);\nactivePromptIndicies.push(100);\nactivePromptIndicies.push(101);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(97);\nactivePromptIndicies.push(98);\nactivePromptIndicies.push(99);\nactivePromptIndicies.push(100);\nif (selected(data('malfunction_template_supplied'), 'yes')) {\nactivePromptIndicies.push(101);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 25
           },
           {
-            "_row_num": 168,
+            "_row_num": 180,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(102);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 26
@@ -4838,11 +5712,11 @@
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 169,
+            "_row_num": 181,
             "operationIdx": 27
           },
           {
-            "_row_num": 169,
+            "_row_num": 181,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(103);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
@@ -4853,7 +5727,7 @@
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 169,
+            "_row_num": 181,
             "operationIdx": 29
           }
         ],
@@ -4880,13 +5754,13 @@
           "_screen116": 19,
           "_screen124": 20,
           "_screen128": 21,
-          "_screen140": 22,
-          "_screen149": 23,
-          "_screen156": 24,
-          "_screen161": 25,
-          "_screen168": 26,
+          "_screen148": 22,
+          "_screen157": 23,
+          "_screen164": 24,
+          "_screen171": 25,
+          "_screen180": 26,
           "_contents": 28,
-          "_screen169": 28
+          "_screen181": 28
         }
       },
       "initial": {
@@ -5116,6 +5990,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "country_list",
         "elementKey": "country",
         "elementName": "country",
         "elementSet": "data",
@@ -5129,6 +6004,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "region_list",
         "elementKey": "region",
         "elementName": "region",
         "elementSet": "data",
@@ -5142,6 +6018,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "district_list",
         "elementKey": "district",
         "elementName": "district",
         "elementSet": "data",
@@ -5155,6 +6032,7 @@
           }
         ],
         "type": "string",
+        "valuesList": "locality_list",
         "elementKey": "locality",
         "elementName": "locality",
         "elementSet": "data",
@@ -6517,7 +7395,7 @@
       "mains_powered_cce_image": {
         "_defn": [
           {
-            "_row_num": 132,
+            "_row_num": 133,
             "section_name": "survey"
           }
         ],
@@ -6555,7 +7433,7 @@
       "sdd_cce": {
         "_defn": [
           {
-            "_row_num": 133,
+            "_row_num": 135,
             "section_name": "survey"
           }
         ],
@@ -6569,7 +7447,7 @@
       "sdd_cce_image": {
         "_defn": [
           {
-            "_row_num": 134,
+            "_row_num": 137,
             "section_name": "survey"
           }
         ],
@@ -6607,7 +7485,7 @@
       "faulty_component": {
         "_defn": [
           {
-            "_row_num": 135,
+            "_row_num": 139,
             "section_name": "survey"
           }
         ],
@@ -6621,7 +7499,7 @@
       "faulty_component_image": {
         "_defn": [
           {
-            "_row_num": 136,
+            "_row_num": 141,
             "section_name": "survey"
           }
         ],
@@ -6659,7 +7537,7 @@
       "user_related_failure": {
         "_defn": [
           {
-            "_row_num": 137,
+            "_row_num": 143,
             "section_name": "survey"
           }
         ],
@@ -6673,7 +7551,7 @@
       "user_related_failure_image": {
         "_defn": [
           {
-            "_row_num": 138,
+            "_row_num": 145,
             "section_name": "survey"
           }
         ],
@@ -6711,7 +7589,7 @@
       "tech_train_personnel_on_site": {
         "_defn": [
           {
-            "_row_num": 141,
+            "_row_num": 149,
             "section_name": "survey"
           }
         ],
@@ -6725,7 +7603,7 @@
       "no_tech_training_reason": {
         "_defn": [
           {
-            "_row_num": 143,
+            "_row_num": 151,
             "section_name": "survey"
           }
         ],
@@ -6738,7 +7616,7 @@
       "number_of_trained_users": {
         "_defn": [
           {
-            "_row_num": 145,
+            "_row_num": 153,
             "section_name": "survey"
           }
         ],
@@ -6751,7 +7629,7 @@
       "training_on_same_day_as_install": {
         "_defn": [
           {
-            "_row_num": 146,
+            "_row_num": 154,
             "section_name": "survey"
           }
         ],
@@ -6765,7 +7643,7 @@
       "training_duration_hrs": {
         "_defn": [
           {
-            "_row_num": 147,
+            "_row_num": 155,
             "section_name": "survey"
           }
         ],
@@ -6778,7 +7656,7 @@
       "basic_handling_training": {
         "_defn": [
           {
-            "_row_num": 151,
+            "_row_num": 159,
             "section_name": "survey"
           }
         ],
@@ -6792,7 +7670,7 @@
       "user_level_maint_training": {
         "_defn": [
           {
-            "_row_num": 152,
+            "_row_num": 160,
             "section_name": "survey"
           }
         ],
@@ -6806,7 +7684,7 @@
       "temp_monitor_record_training": {
         "_defn": [
           {
-            "_row_num": 153,
+            "_row_num": 161,
             "section_name": "survey"
           }
         ],
@@ -6820,7 +7698,7 @@
       "malfunction_proc_training": {
         "_defn": [
           {
-            "_row_num": 154,
+            "_row_num": 162,
             "section_name": "survey"
           }
         ],
@@ -6834,7 +7712,7 @@
       "training_materials_provided": {
         "_defn": [
           {
-            "_row_num": 157,
+            "_row_num": 165,
             "section_name": "survey"
           }
         ],
@@ -6848,7 +7726,7 @@
       "user_guideline_on_cover": {
         "_defn": [
           {
-            "_row_num": 158,
+            "_row_num": 166,
             "section_name": "survey"
           }
         ],
@@ -6862,7 +7740,7 @@
       "user_guideline_on_cover_image": {
         "_defn": [
           {
-            "_row_num": 159,
+            "_row_num": 168,
             "section_name": "survey"
           }
         ],
@@ -6900,7 +7778,7 @@
       "user_manual_supplied": {
         "_defn": [
           {
-            "_row_num": 163,
+            "_row_num": 173,
             "section_name": "survey"
           }
         ],
@@ -6914,7 +7792,7 @@
       "maint_guide_supplied": {
         "_defn": [
           {
-            "_row_num": 164,
+            "_row_num": 174,
             "section_name": "survey"
           }
         ],
@@ -6928,7 +7806,7 @@
       "malfunction_template_supplied": {
         "_defn": [
           {
-            "_row_num": 165,
+            "_row_num": 175,
             "section_name": "survey"
           }
         ],
@@ -6942,7 +7820,7 @@
       "malfunction_template_supplied_image": {
         "_defn": [
           {
-            "_row_num": 166,
+            "_row_num": 177,
             "section_name": "survey"
           }
         ],
@@ -6980,7 +7858,7 @@
       "manuals_available_in_un_lang": {
         "_defn": [
           {
-            "_row_num": 168,
+            "_row_num": 180,
             "section_name": "survey"
           }
         ],
@@ -7572,6 +8450,20 @@
       },
       {
         "_partition": "Column",
+        "_aspect": "country",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"country_list\",\"data_value\":\"uganda\",\"display\":{\"title\":{\"text\":\"Uganda\"}},\"_row_num\":5},{\"choice_list_name\":\"country_list\",\"data_value\":\"senegal\",\"display\":{\"title\":{\"text\":\"Senegal\"}},\"_row_num\":6},{\"choice_list_name\":\"country_list\",\"data_value\":\"solomon_islands\",\"display\":{\"title\":{\"text\":\"Solomon Islands\"}},\"_row_num\":7}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "district",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"district_list\",\"data_value\":\"buikwe\",\"display\":{\"title\":{\"text\":\"Buikwe\"}},\"_row_num\":14},{\"choice_list_name\":\"district_list\",\"data_value\":\"bukomansimbi\",\"display\":{\"title\":{\"text\":\"Bukomansimbi\"}},\"_row_num\":15},{\"choice_list_name\":\"district_list\",\"data_value\":\"butambala\",\"display\":{\"title\":{\"text\":\"Butambala\"}},\"_row_num\":16},{\"choice_list_name\":\"district_list\",\"data_value\":\"buvuma\",\"display\":{\"title\":{\"text\":\"Buvuma\"}},\"_row_num\":17},{\"choice_list_name\":\"district_list\",\"data_value\":\"gomba\",\"display\":{\"title\":{\"text\":\"Gomba\"}},\"_row_num\":18},{\"choice_list_name\":\"district_list\",\"data_value\":\"kalangala\",\"display\":{\"title\":{\"text\":\"Kalangala\"}},\"_row_num\":19},{\"choice_list_name\":\"district_list\",\"data_value\":\"kalungu\",\"display\":{\"title\":{\"text\":\"Kalungu\"}},\"_row_num\":20},{\"choice_list_name\":\"district_list\",\"data_value\":\"kampala\",\"display\":{\"title\":{\"text\":\"Kampala\"}},\"_row_num\":21},{\"choice_list_name\":\"district_list\",\"data_value\":\"kayunga\",\"display\":{\"title\":{\"text\":\"Kayunga\"}},\"_row_num\":22},{\"choice_list_name\":\"district_list\",\"data_value\":\"kiboga\",\"display\":{\"title\":{\"text\":\"Kiboga\"}},\"_row_num\":23},{\"choice_list_name\":\"district_list\",\"data_value\":\"kyankwanzi\",\"display\":{\"title\":{\"text\":\"Kyankwanzi\"}},\"_row_num\":24},{\"choice_list_name\":\"district_list\",\"data_value\":\"luweero\",\"display\":{\"title\":{\"text\":\"Luweero\"}},\"_row_num\":25},{\"choice_list_name\":\"district_list\",\"data_value\":\"lwengo\",\"display\":{\"title\":{\"text\":\"Lwengo\"}},\"_row_num\":26},{\"choice_list_name\":\"district_list\",\"data_value\":\"lyantonde\",\"display\":{\"title\":{\"text\":\"Lyantonde\"}},\"_row_num\":27},{\"choice_list_name\":\"district_list\",\"data_value\":\"masaka\",\"display\":{\"title\":{\"text\":\"Masaka\"}},\"_row_num\":28},{\"choice_list_name\":\"district_list\",\"data_value\":\"mityana\",\"display\":{\"title\":{\"text\":\"Mityana\"}},\"_row_num\":29},{\"choice_list_name\":\"district_list\",\"data_value\":\"mpigi\",\"display\":{\"title\":{\"text\":\"Mpigi\"}},\"_row_num\":30},{\"choice_list_name\":\"district_list\",\"data_value\":\"mubende\",\"display\":{\"title\":{\"text\":\"Mubende\"}},\"_row_num\":31},{\"choice_list_name\":\"district_list\",\"data_value\":\"mukono\",\"display\":{\"title\":{\"text\":\"Mukono\"}},\"_row_num\":32},{\"choice_list_name\":\"district_list\",\"data_value\":\"nakaseke\",\"display\":{\"title\":{\"text\":\"Nakaseke\"}},\"_row_num\":33},{\"choice_list_name\":\"district_list\",\"data_value\":\"nakasongola\",\"display\":{\"title\":{\"text\":\"Nakasongola\"}},\"_row_num\":34},{\"choice_list_name\":\"district_list\",\"data_value\":\"rakai\",\"display\":{\"title\":{\"text\":\"Rakai\"}},\"_row_num\":35},{\"choice_list_name\":\"district_list\",\"data_value\":\"ssembabule\",\"display\":{\"title\":{\"text\":\"Ssembabule\"}},\"_row_num\":36},{\"choice_list_name\":\"district_list\",\"data_value\":\"wakiso\",\"display\":{\"title\":{\"text\":\"Wakiso\"}},\"_row_num\":37}]"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "equipment_had_data_plate",
         "_key": "displayChoicesList",
         "_type": "object",
@@ -7635,6 +8527,13 @@
       },
       {
         "_partition": "Column",
+        "_aspect": "locality",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"locality_list\",\"data_value\":\"kawolo\",\"display\":{\"title\":{\"text\":\"Kawolo\"}},\"_row_num\":39},{\"choice_list_name\":\"locality_list\",\"data_value\":\"lugazi\",\"display\":{\"title\":{\"text\":\"Lugazi\"}},\"_row_num\":40},{\"choice_list_name\":\"locality_list\",\"data_value\":\"najja\",\"display\":{\"title\":{\"text\":\"Najja\"}},\"_row_num\":41},{\"choice_list_name\":\"locality_list\",\"data_value\":\"najjembe\",\"display\":{\"title\":{\"text\":\"Najjembe\"}},\"_row_num\":42},{\"choice_list_name\":\"locality_list\",\"data_value\":\"njeru\",\"display\":{\"title\":{\"text\":\"Njeru\"}},\"_row_num\":43},{\"choice_list_name\":\"locality_list\",\"data_value\":\"ngogwe\",\"display\":{\"title\":{\"text\":\"Ngogwe\"}},\"_row_num\":44},{\"choice_list_name\":\"locality_list\",\"data_value\":\"nyenga\",\"display\":{\"title\":{\"text\":\"Nyenga\"}},\"_row_num\":45},{\"choice_list_name\":\"locality_list\",\"data_value\":\"nsi-Bukunja\",\"display\":{\"title\":{\"text\":\"Ssi-Bukunja\"}},\"_row_num\":46},{\"choice_list_name\":\"locality_list\",\"data_value\":\"wakisi\",\"display\":{\"title\":{\"text\":\"Wakisi\"}},\"_row_num\":47}]"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "mains_powered_cce",
         "_key": "displayChoicesList",
         "_type": "object",
@@ -7688,6 +8587,13 @@
         "_key": "displayChoicesList",
         "_type": "object",
         "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":2},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":3}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "region",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"region_list\",\"data_value\":\"central\",\"display\":{\"title\":{\"text\":\"Central\"}},\"_row_num\":9},{\"choice_list_name\":\"region_list\",\"data_value\":\"eastern\",\"display\":{\"title\":{\"text\":\"Eastern\"}},\"_row_num\":10},{\"choice_list_name\":\"region_list\",\"data_value\":\"northern\",\"display\":{\"title\":{\"text\":\"Northern\"}},\"_row_num\":11},{\"choice_list_name\":\"region_list\",\"data_value\":\"western\",\"display\":{\"title\":{\"text\":\"Western\"}},\"_row_num\":12}]"
       },
       {
         "_partition": "Column",
