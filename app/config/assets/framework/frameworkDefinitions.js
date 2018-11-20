@@ -336,7 +336,7 @@ window.odkFrameworkDefinitions = {
       "string_token": "select_with_other_other_label",
       "text": {
         "default": "Other:",
-        "es": "Otro"
+        "es": "Otro:"
       },
       "_row_num": 44
     },
@@ -377,7 +377,7 @@ window.odkFrameworkDefinitions = {
       "string_token": "instances_last_save_date_label",
       "text": {
         "default": "<p><strong>Last Save Date:</strong></p>",
-        "es": "Última fecha guardada"
+        "es": "<p><strong>Última fecha guardada:</strong></p>"
       },
       "_row_num": 49
     },
@@ -385,7 +385,7 @@ window.odkFrameworkDefinitions = {
       "string_token": "instances_previously_created_instances_label",
       "text": {
         "default": "<p>Previously created instances:</p>",
-        "es": "Instancias creadas previamente"
+        "es": "<p>Instancias creadas previamente:</p>"
       },
       "_row_num": 50
     },
