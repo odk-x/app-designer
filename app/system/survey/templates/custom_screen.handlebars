@@ -1,6 +1,6 @@
 <div class="odk-screen{{#unless disableSwipeNavigation}}{{#if enableNavigation}}{{#if enableForwardNavigation}} swipeForwardEnabled{{/if}}{{#if enableBackNavigation}} swipeBackEnabled{{/if}}{{/if}}{{/unless}}" >
     {{#if showHeader}}
-        <div class="row odk-header container">
+        <div class="row odk-header container navbar-fixed-top">
             <div class="my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
                 <div class="col-xs-6">
                     <button type="button" class="odk-options-btn btn btn-default btn-lg odk-navbar-btn" data-toggle="modal" data-target="#myModal" tabindex="0">
@@ -18,7 +18,11 @@
             </div>
         </div>
     {{/if}}
-    <div class="odk-scroll"><div class="odk-container container">
+
+    <!-- Using navbar-fixed-top or navbar-fixed-bottom requires padding -->
+    <!-- https://getbootstrap.com/docs/3.3/components/#navbar-fixed-top -->
+    <div class="odk-scroll" style="{{#if showHeader}}padding-top: 80px;{{/if}} {{#if showFooter}}padding-bottom: 80px{{/if}}">
+        <div class="odk-container container">
 
 
 {{! YOUR CUSTOM CONTENT BEGINS HERE }}
@@ -45,7 +49,7 @@ to be displayed if "myPromptName" is not visible&lt;div&gt;
 </div></div>
 {{! emit the footer always -- so that we get full-screen content area }}
 {{#if showFooter}} 
-    <div class="row odk-footer container">
+    <div class="row odk-footer container navbar-fixed-bottom">
         <div class="my-breakpoint {{#if hideNavigationButtonText}}my-breakpoint-no-nav-btn-text{{/if}}">
             <div class="col-xs-3 odk-footer-back-btn ">
                 <a class="odk-prev-btn btn btn-default btn-lg odk-navbar-btn {{#unless enableBackNavigation}}disabled{{/unless}}" tabindex="0">
