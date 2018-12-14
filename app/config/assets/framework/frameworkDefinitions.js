@@ -4,9 +4,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "constraint_message",
       "text": {
         "default": "Constraint violated.",
-        "greek": "Παραβιάστηκε ο περιορισμός.",
-        "arabic": "تم انتهاك القيد",
-        "farsi": "محدودیت نقض کرده است",
+        "el": "Παραβιάστηκε ο περιορισμός.",
+        "ar": "تم انتهاك القيد",
+        "fa": "محدودیت نقض کرده است",
         "es": "Restricción incumplida"
       },
       "_row_num": 2
@@ -15,9 +15,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "invalid_value_message",
       "text": {
         "default": "Invalid value.",
-        "greek": "Μη έγκυρη τιμή.",
-        "arabic": "قيمة غير صالحة",
-        "farsi": "مقدار نامعتبر است.",
+        "el": "Μη έγκυρη τιμή.",
+        "ar": "قيمة غير صالحة",
+        "fa": "مقدار نامعتبر است.",
         "es": "Valor no válido."
       },
       "_row_num": 3
@@ -26,9 +26,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "required_message",
       "text": {
         "default": "Required value not provided.",
-        "greek": "Απαιτούμενη τιμή δεν παρέχεται.",
-        "arabic": "القيمة المطلوبة غير متوفرة",
-        "farsi": "مقدار مورد نیاز ارائه نشده است.",
+        "el": "Απαιτούμενη τιμή δεν παρέχεται.",
+        "ar": "القيمة المطلوبة غير متوفرة",
+        "fa": "مقدار مورد نیاز ارائه نشده است.",
         "es": "Dato requerido no proporcionado"
       },
       "_row_num": 4
@@ -37,9 +37,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "required_exception_message",
       "text": {
         "default": "Exception while evaluating required() expression. See console log.",
-        "greek": "Εξαίρεση κατά την αξιολόγηση της απαιτούμενης () έκφρασης. Δείτε το αρχείο καταγραφής κονσόλας.",
-        "arabic": "استثناء أثناء التعبير المطلوب () راجع صفحة التسجيل",
-        "farsi": "استثنا در حالی که ارزیابی های مورد نیاز () بیان است. ورود به سیستم کنسول را مشاهده کنید.",
+        "el": "Εξαίρεση κατά την αξιολόγηση της απαιτούμενης () έκφρασης. Δείτε το αρχείο καταγραφής κονσόλας.",
+        "ar": "استثناء أثناء التعبير المطلوب () راجع صفحة التسجيل",
+        "fa": "استثنا در حالی که ارزیابی های مورد نیاز () بیان است. ورود به سیستم کنسول را مشاهده کنید.",
         "es": "Excepción al evaluar la expresión requerido(). Ver consola de registro"
       },
       "_row_num": 5
@@ -48,9 +48,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "constraint_exception_message",
       "text": {
         "default": "Exception while evaluating constraint() expression. See console log.",
-        "greek": "Εξαίρεση κατά την αξιολόγηση της έκφρασης περιορισμού (). Δείτε το αρχείο καταγραφής κονσόλας.",
-        "arabic": "استثناء أثناء تقييم القيد () راجع إلى صفحة التسجيل",
-        "farsi": "استثنا در حالی که ارزیابی محدودیت () بیان است. ورود به سیستم کنسول را مشاهده کنید.",
+        "el": "Εξαίρεση κατά την αξιολόγηση της έκφρασης περιορισμού (). Δείτε το αρχείο καταγραφής κονσόλας.",
+        "ar": "استثناء أثناء تقييم القيد () راجع إلى صفحة التسجيل",
+        "fa": "استثنا در حالی که ارزیابی محدودیت () بیان است. ورود به سیستم کنسول را مشاهده کنید.",
         "es": "Excepción al evaluar la expresión restricción(). Ver consola de registro"
       },
       "_row_num": 6
@@ -59,9 +59,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "acknLabel",
       "text": {
         "default": "Acknowledge",
-        "greek": "Αναγνωρίζω",
-        "arabic": "إعتراف",
-        "farsi": "تصدیق کردن",
+        "el": "Αναγνωρίζω",
+        "ar": "إعتراف",
+        "fa": "تصدیق کردن",
         "es": "Admitir"
       },
       "_row_num": 7
@@ -70,9 +70,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "back_button_label",
       "text": {
         "default": "Back",
-        "greek": "Πίσω",
-        "arabic": "ارجع",
-        "farsi": "بازگشت",
+        "el": "Πίσω",
+        "ar": "ارجع",
+        "fa": "بازگشت",
         "es": "Atrás"
       },
       "_row_num": 8
@@ -81,9 +81,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "next_button_label",
       "text": {
         "default": "Next",
-        "greek": "Επόμενος",
-        "arabic": "تالي",
-        "farsi": "بعد",
+        "el": "Επόμενος",
+        "ar": "تالي",
+        "fa": "بعد",
         "es": "Siguiente"
       },
       "_row_num": 9
@@ -92,9 +92,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "continue_button_label",
       "text": {
         "default": "Continue",
-        "greek": "Να συνεχίσει",
-        "arabic": "استمر",
-        "farsi": "ادامه دهید",
+        "el": "Να συνεχίσει",
+        "ar": "استمر",
+        "fa": "ادامه دهید",
         "es": "Continuar"
       },
       "_row_num": 10
@@ -103,9 +103,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "select_one_dropdown_label",
       "text": {
         "default": "Choose Option",
-        "greek": "Επιλέξτε Επιλογή",
-        "arabic": "اختار",
-        "farsi": "انتخاب گزینه",
+        "el": "Επιλέξτε Επιλογή",
+        "ar": "اختار",
+        "fa": "انتخاب گزینه",
         "es": "Elige una opción"
       },
       "_row_num": 11
@@ -114,9 +114,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "requiredValueErr",
       "text": {
         "default": "Required value was not provided.",
-        "greek": "Η απαιτούμενη τιμή δεν δόθηκε.",
-        "arabic": "القيمة المطلوبة غير متوفرة",
-        "farsi": "مقدار مورد نیاز ارائه نشده است.",
+        "el": "Η απαιτούμενη τιμή δεν δόθηκε.",
+        "ar": "القيمة المطلوبة غير متوفرة",
+        "fa": "مقدار مورد نیاز ارائه نشده است.",
         "es": "Dato requerido no proporcionado"
       },
       "_row_num": 12
@@ -125,9 +125,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "geopoint_button_label",
       "text": {
         "default": "Record Location",
-        "greek": "Τοποθεσία εγγραφής",
-        "arabic": "سجل الموقع",
-        "farsi": "ضبط محل سکونت",
+        "el": "Τοποθεσία εγγραφής",
+        "ar": "سجل الموقع",
+        "fa": "ضبط محل سکونت",
         "es": "Grabar ubicación"
       },
       "_row_num": 13
@@ -136,9 +136,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "geopoint_latitude_component",
       "text": {
         "default": "Latitude: {{value.latitude}}",
-        "greek": "Γεωγραφικό πλάτος:",
-        "arabic": "خط العرض  {{value.latitude}}",
-        "farsi": "عرض جغرافیایی:  {{value.latitude}}",
+        "el": "Γεωγραφικό πλάτος:",
+        "ar": "خط العرض  {{value.latitude}}",
+        "fa": "عرض جغرافیایی:  {{value.latitude}}",
         "es": "Latitud: {{value.latitude}}"
       },
       "_row_num": 14
@@ -147,9 +147,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "geopoint_longitude_component",
       "text": {
         "default": "Longitude: {{value.longitude}}",
-        "greek": "Γεωγραφικό μήκος:",
-        "arabic": "خط الطول: {{value.longitude}}",
-        "farsi": "عرض جغرافیایی: {{value.longitude}}",
+        "el": "Γεωγραφικό μήκος:",
+        "ar": "خط الطول: {{value.longitude}}",
+        "fa": "عرض جغرافیایی: {{value.longitude}}",
         "es": "Longitud: {{value.longitude}}"
       },
       "_row_num": 15
@@ -158,9 +158,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "geopoint_altitude_component",
       "text": {
         "default": "Altitude: {{value.altitude}}",
-        "greek": "Υψόμετρο:",
-        "arabic": "الارتفاع: {{value.altitude}}",
-        "farsi": "ارتفاع: {{value.altitude}}",
+        "el": "Υψόμετρο:",
+        "ar": "الارتفاع: {{value.altitude}}",
+        "fa": "ارتفاع: {{value.altitude}}",
         "es": "Altitud: {{value.altitude}}"
       },
       "_row_num": 16
@@ -169,9 +169,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "geopoint_accuracy_component",
       "text": {
         "default": "Accuracy: {{value.accuracy}}",
-        "greek": "Ακρίβεια:",
-        "arabic": "الدقة: {{value.accuracy}}",
-        "farsi": "دقت: {{value.accuracy}}",
+        "el": "Ακρίβεια:",
+        "ar": "الدقة: {{value.accuracy}}",
+        "fa": "دقت: {{value.accuracy}}",
         "es": "Precisión: {{value.accuracy}}"
       },
       "_row_num": 17
@@ -180,9 +180,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "waiting_text",
       "text": {
         "default": "Please wait…",
-        "greek": "Παρακαλώ περιμένετε…",
-        "arabic": "الرجاء أن تنتظر",
-        "farsi": "لطفا صبر کنید…",
+        "el": "Παρακαλώ περιμένετε…",
+        "ar": "الرجاء أن تنتظر",
+        "fa": "لطفا صبر کنید…",
         "es": "Por favor, espere…"
       },
       "_row_num": 18
@@ -191,9 +191,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "take_video_button_label",
       "text": {
         "default": "Take Video",
-        "greek": "Βγάλτε βίντεο",
-        "arabic": "سجل الفيديو",
-        "farsi": "ضبط فیلم",
+        "el": "Βγάλτε βίντεο",
+        "ar": "سجل الفيديو",
+        "fa": "ضبط فیلم",
         "es": "Graba un vídeo"
       },
       "_row_num": 19
@@ -202,9 +202,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "choose_video_button_label",
       "text": {
         "default": "Choose Video",
-        "greek": "Επιλέξτε Βίντεο",
-        "arabic": "اختار الفيديو",
-        "farsi": "انتخاب ویدئو",
+        "el": "Επιλέξτε Βίντεο",
+        "ar": "اختار الفيديو",
+        "fa": "انتخاب ویدئو",
         "es": "Elige un vídeo"
       },
       "_row_num": 20
@@ -213,9 +213,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "video_control_not_supported",
       "text": {
         "default": "Video controls are not supported.",
-        "greek": "Τα στοιχεία ελέγχου βίντεο δεν υποστηρίζονται.",
-        "arabic": "ضوابط الفيديو غير معتمدة",
-        "farsi": "کنترل های ویدئویی پشتیبانی نمی شوند.",
+        "el": "Τα στοιχεία ελέγχου βίντεο δεν υποστηρίζονται.",
+        "ar": "ضوابط الفيديو غير معتمدة",
+        "fa": "کنترل های ویدئویی پشتیبانی نمی شوند.",
         "es": "Controles de vídeo no son compatibles."
       },
       "_row_num": 21
@@ -224,9 +224,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "take_audio_button_label",
       "text": {
         "default": "Capture Audio",
-        "greek": "Συλλογή ήχου",
-        "arabic": "سجل الصوت",
-        "farsi": "ضبط صدا",
+        "el": "Συλλογή ήχου",
+        "ar": "سجل الصوت",
+        "fa": "ضبط صدا",
         "es": "Captura audio"
       },
       "_row_num": 22
@@ -235,9 +235,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "choose_audio_button_label",
       "text": {
         "default": "Choose Audio",
-        "greek": "Επιλέξτε Ήχο",
-        "arabic": "اختار الصوت",
-        "farsi": "انتخاب صوتی",
+        "el": "Επιλέξτε Ήχο",
+        "ar": "اختار الصوت",
+        "fa": "انتخاب صوتی",
         "es": "Elige audio"
       },
       "_row_num": 23
@@ -246,9 +246,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "audio_control_not_supported",
       "text": {
         "default": "Audio controls are not supported.",
-        "greek": "Τα στοιχεία ελέγχου ήχου δεν υποστηρίζονται.",
-        "arabic": "ضوابط الصوت غير معتمدة",
-        "farsi": "کنترل های صوتی پشتیبانی نمی شود.",
+        "el": "Τα στοιχεία ελέγχου ήχου δεν υποστηρίζονται.",
+        "ar": "ضوابط الصوت غير معتمدة",
+        "fa": "کنترل های صوتی پشتیبانی نمی شود.",
         "es": "Controles de audio no son compatibles."
       },
       "_row_num": 24
@@ -257,9 +257,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "confirm_action_no_label",
       "text": {
         "default": "NO",
-        "greek": "ΟΧΙ",
-        "arabic": "لا",
-        "farsi": "خیر",
+        "el": "ΟΧΙ",
+        "ar": "لا",
+        "fa": "خیر",
         "es": "NO"
       },
       "_row_num": 25
@@ -268,9 +268,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "confirm_action_yes_label",
       "text": {
         "default": "YES",
-        "greek": "ΝΑΙ",
-        "arabic": "نعم",
-        "farsi": "بله",
+        "el": "ΝΑΙ",
+        "ar": "نعم",
+        "fa": "بله",
         "es": "SI"
       },
       "_row_num": 26
@@ -279,9 +279,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "external_link_button_label",
       "text": {
         "default": "Follow link",
-        "greek": "Ακολουθήστε το σύνδεσμο",
-        "arabic": "ادخل إلى الرابط",
-        "farsi": "دنبال لینک",
+        "el": "Ακολουθήστε το σύνδεσμο",
+        "ar": "ادخل إلى الرابط",
+        "fa": "دنبال لینک",
         "es": "Sigue el enlace"
       },
       "_row_num": 27
@@ -306,9 +306,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "finalize_survey_button_label",
       "text": {
         "default": "Finalize",
-        "greek": "Οριστικοποιώ",
-        "arabic": "الانتهاء",
-        "farsi": "نهایی",
+        "el": "Οριστικοποιώ",
+        "ar": "الانتهاء",
+        "fa": "نهایی",
         "es": "Finalizar"
       },
       "_row_num": 30
@@ -317,9 +317,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "save_as_incomplete_survey_button_label",
       "text": {
         "default": "Incomplete",
-        "greek": "Ατελής",
-        "arabic": "غير كامل",
-        "farsi": "ناقص",
+        "el": "Ατελής",
+        "ar": "غير كامل",
+        "fa": "ناقص",
         "es": "Incompleto"
       },
       "_row_num": 31
@@ -328,9 +328,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "take_image_button_label",
       "text": {
         "default": "Take Photo",
-        "greek": "Βγάλε φωτογραφία",
-        "arabic": "تصوير",
-        "farsi": "عکس گرفتن",
+        "el": "Βγάλε φωτογραφία",
+        "ar": "تصوير",
+        "fa": "عکس گرفتن",
         "es": "Tomé una foto"
       },
       "_row_num": 33
@@ -339,9 +339,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "choose_image_button_label",
       "text": {
         "default": "Choose Image",
-        "greek": "Επιλέξτε Εικόνα",
-        "arabic": "اختار الصورة",
-        "farsi": "انتخاب تصویر",
+        "el": "Επιλέξτε Εικόνα",
+        "ar": "اختار الصورة",
+        "fa": "انتخاب تصویر",
         "es": "Elige una imagen"
       },
       "_row_num": 34
@@ -350,9 +350,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "launch_intent_button_label",
       "text": {
         "default": "Launch Intent",
-        "greek": "Ξεκινήστε την πρόθεση",
-        "arabic": "إطلاق القصد",
-        "farsi": "قصد راه اندازی",
+        "el": "Ξεκινήστε την πρόθεση",
+        "ar": "إطلاق القصد",
+        "fa": "قصد راه اندازی",
         "es": "Lanzamiento de intención"
       },
       "_row_num": 35
@@ -369,9 +369,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "opening_survey_next_button_label",
       "text": {
         "default": "Go to next prompt",
-        "greek": "Μεταβείτε στην επόμενη ερώτηση",
-        "arabic": "اذهب إلى الموجه التالي",
-        "farsi": "برو به موقع بعدی",
+        "el": "Μεταβείτε στην επόμενη ερώτηση",
+        "ar": "اذهب إلى الموجه التالي",
+        "fa": "برو به موقع بعدی",
         "es": "Ir al siguiente"
       },
       "_row_num": 37
@@ -380,9 +380,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "options_popup_language_heading",
       "text": {
         "default": "Language",
-        "greek": "Γλώσσα",
-        "arabic": "اللغة",
-        "farsi": "زبان",
+        "el": "Γλώσσα",
+        "ar": "اللغة",
+        "fa": "زبان",
         "es": "Idioma"
       },
       "_row_num": 38
@@ -391,9 +391,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "options_popup_contents_heading",
       "text": {
         "default": "Contents",
-        "greek": "Περιεχόμενα",
-        "arabic": "المحتويات",
-        "farsi": "فهرست",
+        "el": "Περιεχόμενα",
+        "ar": "المحتويات",
+        "fa": "فهرست",
         "es": "Contenido"
       },
       "_row_num": 39
@@ -402,9 +402,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "options_popup_ignore_changes_heading",
       "text": {
         "default": "Ignore Changes + Exit",
-        "greek": "Αγνόηση αλλαγών + Έξοδος",
-        "arabic": "تجاهل التغييرات + الخروج",
-        "farsi": "نادیده گرفتن تغییرات + خروج",
+        "el": "Αγνόηση αλλαγών + Έξοδος",
+        "ar": "تجاهل التغييرات + الخروج",
+        "fa": "نادیده گرفتن تغییرات + خروج",
         "es": "Ignorar cambios y salir"
       },
       "_row_num": 40
@@ -413,9 +413,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "options_popup_save_changes_heading",
       "text": {
         "default": "Save Changes + Exit",
-        "greek": "Αποθήκευση αλλαγών + Έξοδος",
-        "arabic": "احفظ التغييرات + الخروج",
-        "farsi": "ذخیره تغییرات و خروج",
+        "el": "Αποθήκευση αλλαγών + Έξοδος",
+        "ar": "احفظ التغييرات + الخروج",
+        "fa": "ذخیره تغییرات و خروج",
         "es": "Guardar cambios y salir"
       },
       "_row_num": 41
@@ -424,9 +424,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "options_popup_finalize_changes_heading",
       "text": {
         "default": "Finalize Changes + Exit",
-        "greek": "Ολοκλήρωση αλλαγών + Έξοδος",
-        "arabic": "انتهي التغييرات + الخروج",
-        "farsi": "نهایی تغییرات + خروج",
+        "el": "Ολοκλήρωση αλλαγών + Έξοδος",
+        "ar": "انتهي التغييرات + الخروج",
+        "fa": "نهایی تغییرات + خروج",
         "es": "Finalizar cambios y salir"
       },
       "_row_num": 42
@@ -435,9 +435,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "screen_popup_ok_button_label",
       "text": {
         "default": "OK",
-        "greek": "Εντάξει",
-        "arabic": "أوكي",
-        "farsi": "خوب",
+        "el": "Εντάξει",
+        "ar": "أوكي",
+        "fa": "خوب",
         "es": "Confirmar"
       },
       "_row_num": 43
@@ -446,9 +446,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "select_with_other_other_label",
       "text": {
         "default": "Other:",
-        "greek": "Άλλα:",
-        "arabic": "أخر",
-        "farsi": "دیگر:",
+        "el": "Άλλα:",
+        "ar": "أخر",
+        "fa": "دیگر:",
         "es": "Otro:"
       },
       "_row_num": 44
@@ -457,9 +457,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "select_deselect_label",
       "text": {
         "default": "Deselect",
-        "greek": "Αποεπιλέξτε",
-        "arabic": "إلغاء",
-        "farsi": "از حالت انتخاب خارج",
+        "el": "Αποεπιλέξτε",
+        "ar": "إلغاء",
+        "fa": "از حالت انتخاب خارج",
         "es": "Deseleccioanr"
       },
       "_row_num": 45
@@ -468,9 +468,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "take_signature_button_label",
       "text": {
         "default": "Get Signature",
-        "greek": "Πάρτε Υπογραφή",
-        "arabic": "سجل التوقيع",
-        "farsi": "مطلع امضا",
+        "el": "Πάρτε Υπογραφή",
+        "ar": "سجل التوقيع",
+        "fa": "مطلع امضا",
         "es": "Obtener firma"
       },
       "_row_num": 46
@@ -479,9 +479,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "instances_survey_create_button_label",
       "text": {
         "default": "Create new instance",
-        "greek": "Δημιουργήστε νέα παρουσία",
-        "arabic": "إنشاء حتة جديدة",
-        "farsi": "درست نمونه جدید",
+        "el": "Δημιουργήστε νέα παρουσία",
+        "ar": "إنشاء حتة جديدة",
+        "fa": "درست نمونه جدید",
         "es": "Crear nueva instancia"
       },
       "_row_num": 47
@@ -490,9 +490,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "instances_no_saved_instances_label",
       "text": {
         "default": "No saved instances.",
-        "greek": "Δεν υπάρχουν αποθηκευμένες παρουσίες.",
-        "arabic": "الحتات غير محفوظة",
-        "farsi": "هیچ موردی را نجات داد",
+        "el": "Δεν υπάρχουν αποθηκευμένες παρουσίες.",
+        "ar": "الحتات غير محفوظة",
+        "fa": "هیچ موردی را نجات داد",
         "es": "Instancias no guardadas"
       },
       "_row_num": 48
@@ -501,9 +501,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "instances_last_save_date_label",
       "text": {
         "default": "<p><strong>Last Save Date:</strong></p>",
-        "greek": "Τελευταία ημερομηνία αποθήκευσης:",
-        "arabic": "تاريخ أخر حفظ",
-        "farsi": "تاریخ و زمان آخرین ذخیره تاریخ عضویت:",
+        "el": "Τελευταία ημερομηνία αποθήκευσης:",
+        "ar": "تاريخ أخر حفظ",
+        "fa": "تاریخ و زمان آخرین ذخیره تاریخ عضویت:",
         "es": "<p><strong>Última fecha guardada:</strong></p>"
       },
       "_row_num": 49
@@ -512,9 +512,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "instances_previously_created_instances_label",
       "text": {
         "default": "<p>Previously created instances:</p>",
-        "greek": "Προηγούμενες εμφανίσεις:",
-        "arabic": "الحتات المنشؤة سابقا",
-        "farsi": "پیش از موارد ایجاد شده:",
+        "el": "Προηγούμενες εμφανίσεις:",
+        "ar": "الحتات المنشؤة سابقا",
+        "fa": "پیش از موارد ایجاد شده:",
         "es": "<p>Instancias creadas previamente:</p>"
       },
       "_row_num": 50
@@ -523,9 +523,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "savepoint_type_finalized_text_label",
       "text": {
         "default": "Finalized",
-        "greek": "Ολοκληρώθηκε",
-        "arabic": "المنتهية",
-        "farsi": "نهایی",
+        "el": "Ολοκληρώθηκε",
+        "ar": "المنتهية",
+        "fa": "نهایی",
         "es": "Finalizado"
       },
       "_row_num": 51
@@ -534,9 +534,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "savepoint_type_incomplete_text_label",
       "text": {
         "default": "Incomplete",
-        "greek": "Ατελής",
-        "arabic": "غير كامل",
-        "farsi": "ناقص",
+        "el": "Ατελής",
+        "ar": "غير كامل",
+        "fa": "ناقص",
         "es": "Incompleto"
       },
       "_row_num": 52
@@ -545,9 +545,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "savepoint_type_checkpoint_text_label",
       "text": {
         "default": "Checkpoint",
-        "greek": "Σημείο ελέγχου",
-        "arabic": "نقط التفتيش",
-        "farsi": "پاسگاه",
+        "el": "Σημείο ελέγχου",
+        "ar": "نقط التفتيش",
+        "fa": "پاسگاه",
         "es": "Cambios no guardados"
       },
       "_row_num": 53
@@ -556,9 +556,9 @@ window.odkFrameworkDefinitions = {
       "string_token": "linked_table_new_instance_label",
       "text": {
         "default": "Create new instance",
-        "greek": "Δημιουργήστε νέο παράδειγμα",
-        "arabic": "إنشاء حتة جديدة",
-        "farsi": "درست نمونه جدید",
+        "el": "Δημιουργήστε νέο παράδειγμα",
+        "ar": "إنشاء حتة جديدة",
+        "fa": "درست نمونه جدید",
         "es": "Crear nueva instancia"
       },
       "_row_num": 54
@@ -567,7 +567,7 @@ window.odkFrameworkDefinitions = {
       "string_token": "barcode_button_label",
       "text": {
         "default": "Scan Barcode",
-        "greek": "Scan Barcode",
+        "el": "Scan Barcode",
         "es": "Escanear Código de Barras"
       },
       "_row_num": 55
@@ -576,7 +576,7 @@ window.odkFrameworkDefinitions = {
       "string_token": "invalid_numeric_message",
       "text": {
         "default": "Numeric value expected",
-        "greek": "Αναμενόμενη αριθμητική τιμή",
+        "el": "Αναμενόμενη αριθμητική τιμή",
         "es": "Valor numérico esperado"
       },
       "_row_num": 56
@@ -585,7 +585,7 @@ window.odkFrameworkDefinitions = {
       "string_token": "invalid_integer_message",
       "text": {
         "default": "Integer value expected",
-        "greek": "Αναμενόμενη τιμή ακέραιας",
+        "el": "Αναμενόμενη τιμή ακέραιας",
         "es": "Valor entero esperado"
       },
       "_row_num": 57

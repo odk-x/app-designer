@@ -268,7 +268,7 @@
         "name": "assigned_nb",
         "display": {
           "prompt": {
-            "text": "Assigned envelop/voucher/PIN #:&#10;&#10;data('assigned_item_pack_code ')"
+            "text": "Assigned envelop/voucher/PIN #:&#10;&#10;data('assigned_item_pack_code')"
           }
         },
         "_row_num": 31
@@ -1761,7 +1761,7 @@
             "name": "assigned_nb",
             "display": {
               "prompt": {
-                "text": "Assigned envelop/voucher/PIN #:&#10;&#10;data('assigned_item_pack_code ')"
+                "text": "Assigned envelop/voucher/PIN #:&#10;&#10;data('assigned_item_pack_code')"
               }
             },
             "_row_num": 31,

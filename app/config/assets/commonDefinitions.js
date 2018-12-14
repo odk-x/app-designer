@@ -4,10 +4,10 @@ window.odkCommonDefinitions = {
       "string_token": "main_title",
       "text": {
         "default": "Disaster Relief",
-        "greek": "Ανακούφιση από καταστροφές",
-        "arabic": "توزيع الكوارث",
-        "farsi": "تسکین فاجعه",
-        "spanish": "Ayuda en casos de desastre"
+        "el": "Ανακούφιση από καταστροφές",
+        "ar": "توزيع الكوارث",
+        "fa": "تسکین فاجعه",
+        "es": "Ayuda en casos de desastre"
       },
       "_row_num": 2
     },
@@ -15,10 +15,10 @@ window.odkCommonDefinitions = {
       "string_token": "registration",
       "text": {
         "default": "Registration",
-        "greek": "Εγγραφή",
-        "arabic": "التسجيل",
-        "farsi": "ثبت",
-        "spanish": "Registro"
+        "el": "Εγγραφή",
+        "ar": "التسجيل",
+        "fa": "ثبت",
+        "es": "Registro"
       },
       "_row_num": 3
     },
@@ -26,7 +26,7 @@ window.odkCommonDefinitions = {
       "string_token": "distribution",
       "text": {
         "default": "Distribution",
-        "spanish": "Distribución"
+        "es": "Distribución"
       },
       "_row_num": 4
     },
@@ -34,10 +34,10 @@ window.odkCommonDefinitions = {
       "string_token": "administrator_options",
       "text": {
         "default": "Administrator Options",
-        "greek": "Επιλογές παράκαμψης",
-        "arabic": "اختيارات التجاوز",
-        "farsi": "لغو گزینه",
-        "spanish": "Opciones de administrador"
+        "el": "Επιλογές παράκαμψης",
+        "ar": "اختيارات التجاوز",
+        "fa": "لغو گزینه",
+        "es": "Opciones de administrador"
       },
       "_row_num": 5
     },
@@ -45,7 +45,7 @@ window.odkCommonDefinitions = {
       "string_token": "distribution_options",
       "text": {
         "default": "Distribution Options",
-        "spanish": "Opciones de distribución"
+        "es": "Opciones de distribución"
       },
       "_row_num": 6
     },
@@ -53,7 +53,7 @@ window.odkCommonDefinitions = {
       "string_token": "delivery_upper_case",
       "text": {
         "default": "Delivery",
-        "spanish": "Entrega"
+        "es": "Entrega"
       },
       "_row_num": 7
     },
@@ -61,10 +61,10 @@ window.odkCommonDefinitions = {
       "string_token": "beneficiary",
       "text": {
         "default": "beneficiary",
-        "greek": "δικαιούχος",
-        "arabic": "مستفيد",
-        "farsi": "ذینفع",
-        "spanish": "Beneficiario/a"
+        "el": "δικαιούχος",
+        "ar": "مستفيد",
+        "fa": "ذینفع",
+        "es": "Beneficiario/a"
       },
       "_row_num": 10
     },
@@ -72,10 +72,10 @@ window.odkCommonDefinitions = {
       "string_token": "beneficiaries",
       "text": {
         "default": "beneficiaries",
-        "greek": "Δικαιούχοι",
-        "arabic": "مستفيدين",
-        "farsi": "ذینفع",
-        "spanish": "Beneficiarios/as"
+        "el": "Δικαιούχοι",
+        "ar": "مستفيدين",
+        "fa": "ذینفع",
+        "es": "Beneficiarios/as"
       },
       "_row_num": 11
     },
@@ -83,10 +83,10 @@ window.odkCommonDefinitions = {
       "string_token": "delivery",
       "text": {
         "default": "delivery",
-        "greek": "διανομή",
-        "arabic": "تسليم",
-        "farsi": "تحویل",
-        "spanish": "Entrega"
+        "el": "διανομή",
+        "ar": "تسليم",
+        "fa": "تحویل",
+        "es": "Entrega"
       },
       "_row_num": 12
     },
@@ -94,10 +94,10 @@ window.odkCommonDefinitions = {
       "string_token": "deliveries",
       "text": {
         "default": "deliveries",
-        "greek": "Παραδόσεις",
-        "arabic": "تسليمات",
-        "farsi": "تحویل",
-        "spanish": "Entregas"
+        "el": "Παραδόσεις",
+        "ar": "تسليمات",
+        "fa": "تحویل",
+        "es": "Entregas"
       },
       "_row_num": 13
     },
@@ -105,7 +105,7 @@ window.odkCommonDefinitions = {
       "string_token": "household",
       "text": {
         "default": "household",
-        "spanish": "familia"
+        "es": "familia"
       },
       "_row_num": 14
     },
@@ -113,7 +113,7 @@ window.odkCommonDefinitions = {
       "string_token": "households",
       "text": {
         "default": "households",
-        "spanish": "familias"
+        "es": "familias"
       },
       "_row_num": 15
     },
@@ -121,7 +121,7 @@ window.odkCommonDefinitions = {
       "string_token": "member",
       "text": {
         "default": "member",
-        "spanish": "miembro"
+        "es": "miembro"
       },
       "_row_num": 16
     },
@@ -129,7 +129,7 @@ window.odkCommonDefinitions = {
       "string_token": "members",
       "text": {
         "default": "members",
-        "spanish": "miembros"
+        "es": "miembros"
       },
       "_row_num": 17
     },
@@ -137,10 +137,10 @@ window.odkCommonDefinitions = {
       "string_token": "found",
       "text": {
         "default": "found",
-        "greek": "βρέθηκαν",
-        "arabic": "موجود",
-        "farsi": "مکتشف",
-        "spanish": "Encontrado"
+        "el": "βρέθηκαν",
+        "ar": "موجود",
+        "fa": "مکتشف",
+        "es": "Encontrado"
       },
       "_row_num": 18
     },
@@ -148,7 +148,7 @@ window.odkCommonDefinitions = {
       "string_token": "pending",
       "text": {
         "default": "Pending",
-        "spanish": "Pendiente"
+        "es": "Pendiente"
       },
       "_row_num": 19
     },
@@ -156,7 +156,7 @@ window.odkCommonDefinitions = {
       "string_token": "delivered",
       "text": {
         "default": "Delivered",
-        "spanish": "Entregado"
+        "es": "Entregado"
       },
       "_row_num": 20
     },
@@ -164,10 +164,10 @@ window.odkCommonDefinitions = {
       "string_token": "data_path",
       "text": {
         "default": "View Data",
-        "greek": "Προβολή δεδομένων",
-        "arabic": "راجع المعلومات",
-        "farsi": "دیدن اطلاعات",
-        "spanish": "Ver información"
+        "el": "Προβολή δεδομένων",
+        "ar": "راجع المعلومات",
+        "fa": "دیدن اطلاعات",
+        "es": "Ver información"
       },
       "_row_num": 23
     },
@@ -175,10 +175,10 @@ window.odkCommonDefinitions = {
       "string_token": "data_categories",
       "text": {
         "default": "Data Categories",
-        "greek": "Κατηγορίες δεδομένων",
-        "arabic": "نوعية المعلومات",
-        "farsi": "دسته بندی اطلاعات",
-        "spanish": "Categorías de datos"
+        "el": "Κατηγορίες δεδομένων",
+        "ar": "نوعية المعلومات",
+        "fa": "دسته بندی اطلاعات",
+        "es": "Categorías de datos"
       },
       "_row_num": 24
     },
@@ -186,7 +186,7 @@ window.odkCommonDefinitions = {
       "string_token": "registration_data",
       "text": {
         "default": "Registration Data",
-        "spanish": "Datos de registro"
+        "es": "Datos de registro"
       },
       "_row_num": 25
     },
@@ -194,7 +194,7 @@ window.odkCommonDefinitions = {
       "string_token": "view_registration_data",
       "text": {
         "default": "View Registration Data",
-        "spanish": "Ver datos de registro"
+        "es": "Ver datos de registro"
       },
       "_row_num": 26
     },
@@ -202,10 +202,10 @@ window.odkCommonDefinitions = {
       "string_token": "delivery_data",
       "text": {
         "default": "Delivery Data",
-        "greek": "Δεδομένα παράδοσης",
-        "arabic": "معلومات التسليم",
-        "farsi": "اطلاعات تحویل",
-        "spanish": "Datos de entrega"
+        "el": "Δεδομένα παράδοσης",
+        "ar": "معلومات التسليم",
+        "fa": "اطلاعات تحویل",
+        "es": "Datos de entrega"
       },
       "_row_num": 27
     },
@@ -213,10 +213,10 @@ window.odkCommonDefinitions = {
       "string_token": "view_delivery_data",
       "text": {
         "default": "View Delivery Data",
-        "greek": "Προβολή δεδομένων παράδοσης",
-        "arabic": "انظر معلومات التسليمات",
-        "farsi": "دیدن اطلاعات  تحویل",
-        "spanish": "Ver datos de entregas"
+        "el": "Προβολή δεδομένων παράδοσης",
+        "ar": "انظر معلومات التسليمات",
+        "fa": "دیدن اطلاعات  تحویل",
+        "es": "Ver datos de entregas"
       },
       "_row_num": 28
     },
@@ -224,10 +224,10 @@ window.odkCommonDefinitions = {
       "string_token": "advanced_search",
       "text": {
         "default": "Advanced Search",
-        "greek": "Προχωρημένη Αναζήτηση",
-        "arabic": "البحث المتقدم",
-        "farsi": "جستجوی پیشرفته",
-        "spanish": "Búsqueda avanzada"
+        "el": "Προχωρημένη Αναζήτηση",
+        "ar": "البحث المتقدم",
+        "fa": "جستجوی پیشرفته",
+        "es": "Búsqueda avanzada"
       },
       "_row_num": 31
     },
@@ -235,10 +235,10 @@ window.odkCommonDefinitions = {
       "string_token": "search_beneficiaries",
       "text": {
         "default": "Search for Beneficiaries",
-        "greek": "Αναζήτηση δικαιούχων",
-        "arabic": "ابحث عن مستفيدين",
-        "farsi": "جستجو برای ذینفع",
-        "spanish": "Buscar por beneficiarios"
+        "el": "Αναζήτηση δικαιούχων",
+        "ar": "ابحث عن مستفيدين",
+        "fa": "جستجو برای ذینفع",
+        "es": "Buscar por beneficiarios"
       },
       "_row_num": 32
     },
@@ -246,10 +246,10 @@ window.odkCommonDefinitions = {
       "string_token": "search_deliveries",
       "text": {
         "default": "Search for Deliveries",
-        "greek": "Αναζήτηση για παραδόσεις",
-        "arabic": "ابحث عن تسليمات",
-        "farsi": "جستجو برای تحویل",
-        "spanish": "Buscar por entregas"
+        "el": "Αναζήτηση για παραδόσεις",
+        "ar": "ابحث عن تسليمات",
+        "fa": "جستجو برای تحویل",
+        "es": "Buscar por entregas"
       },
       "_row_num": 33
     },
@@ -257,7 +257,7 @@ window.odkCommonDefinitions = {
       "string_token": "search_households",
       "text": {
         "default": "Search by Household",
-        "spanish": "Búsqueda por familia"
+        "es": "Búsqueda por familia"
       },
       "_row_num": 34
     },
@@ -265,7 +265,7 @@ window.odkCommonDefinitions = {
       "string_token": "search_members",
       "text": {
         "default": "Search by Member",
-        "spanish": "Búsqueda por Miembro"
+        "es": "Búsqueda por Miembro"
       },
       "_row_num": 35
     },
@@ -273,7 +273,7 @@ window.odkCommonDefinitions = {
       "string_token": "search",
       "text": {
         "default": "Search",
-        "spanish": "Buscar"
+        "es": "Buscar"
       },
       "_row_num": 36
     },
@@ -281,10 +281,10 @@ window.odkCommonDefinitions = {
       "string_token": "registration_title",
       "text": {
         "default": "Register Beneficiary Entity",
-        "greek": "Εγγραφή Κωδικού Δικαιούχου",
-        "arabic": "تسجيل رمز المستفيد",
-        "farsi": "ثبت نام کد ذینفع",
-        "spanish": "Registrar código de beneficiario"
+        "el": "Εγγραφή Κωδικού Δικαιούχου",
+        "ar": "تسجيل رمز المستفيد",
+        "fa": "ثبت نام کد ذینفع",
+        "es": "Registrar código de beneficiario"
       },
       "_row_num": 39
     },
@@ -292,10 +292,10 @@ window.odkCommonDefinitions = {
       "string_token": "delivery_title",
       "text": {
         "default": "Deliver to Beneficiary Entity",
-        "greek": "Επαληθεύστε τον Κωδικό Δικαιούχου",
-        "arabic": "تأكيد رمز المستفيد",
-        "farsi": "تأیید کد ذینفع",
-        "spanish": "Verificar código de beneficiario"
+        "el": "Επαληθεύστε τον Κωδικό Δικαιούχου",
+        "ar": "تأكيد رمز المستفيد",
+        "fa": "تأیید کد ذینفع",
+        "es": "Verificar código de beneficiario"
       },
       "_row_num": 40
     },
@@ -303,7 +303,7 @@ window.odkCommonDefinitions = {
       "string_token": "view_authorization_details",
       "text": {
         "default": "View Authorization Details",
-        "spanish": "Ver detalles de autorización"
+        "es": "Ver detalles de autorización"
       },
       "_row_num": 41
     },
@@ -311,7 +311,7 @@ window.odkCommonDefinitions = {
       "string_token": "authorization_details",
       "text": {
         "default": "Authorization Details",
-        "spanish": "Detalles de autorización"
+        "es": "Detalles de autorización"
       },
       "_row_num": 42
     },
@@ -319,10 +319,10 @@ window.odkCommonDefinitions = {
       "string_token": "scan_barcode",
       "text": {
         "default": "Scan Barcode",
-        "greek": "Σάρωση γραμμωτού κώδικα",
-        "arabic": "مسح الباركود",
-        "farsi": "بارکد اسکن",
-        "spanish": "Escanear código de barras"
+        "el": "Σάρωση γραμμωτού κώδικα",
+        "ar": "مسح الباركود",
+        "fa": "بارکد اسکن",
+        "es": "Escanear código de barras"
       },
       "_row_num": 43
     },
@@ -330,10 +330,10 @@ window.odkCommonDefinitions = {
       "string_token": "enter",
       "text": {
         "default": "Enter",
-        "greek": "Εισάγω",
-        "arabic": "تنفيد",
-        "farsi": "وارد شدن",
-        "spanish": "Ingresar"
+        "el": "Εισάγω",
+        "ar": "تنفيد",
+        "fa": "وارد شدن",
+        "es": "Ingresar"
       },
       "_row_num": 44
     },
@@ -341,7 +341,7 @@ window.odkCommonDefinitions = {
       "string_token": "enter_beneficiary_entity_id",
       "text": {
         "default": "Enter Beneficiary Entity ID",
-        "spanish": "Registrar código de beneficiario"
+        "es": "Registrar código de beneficiario"
       },
       "_row_num": 45
     },
@@ -349,7 +349,7 @@ window.odkCommonDefinitions = {
       "string_token": "ok",
       "text": {
         "default": "OK",
-        "spanish": "Confirmar"
+        "es": "Confirmar"
       },
       "_row_num": 46
     },
@@ -357,10 +357,10 @@ window.odkCommonDefinitions = {
       "string_token": "view_all_deliveries",
       "text": {
         "default": "View All Deliveries",
-        "greek": "Προβολή όλων των παραδόσεων",
-        "arabic": "راقب كل التسليمات",
-        "farsi": "مشاهده تحویل",
-        "spanish": "Ver todas las entregas"
+        "el": "Προβολή όλων των παραδόσεων",
+        "ar": "راقب كل التسليمات",
+        "fa": "مشاهده تحویل",
+        "es": "Ver todas las entregas"
       },
       "_row_num": 47
     },
@@ -368,7 +368,7 @@ window.odkCommonDefinitions = {
       "string_token": "fill_field_report",
       "text": {
         "default": "Fill Field Report",
-        "spanish": "Reporte de Campos Completos"
+        "es": "Reporte de Campos Completos"
       },
       "_row_num": 48
     },
@@ -376,7 +376,7 @@ window.odkCommonDefinitions = {
       "string_token": "deliver",
       "text": {
         "default": "Deliver",
-        "spanish": "Entregar"
+        "es": "Entregar"
       },
       "_row_num": 49
     },
@@ -384,7 +384,7 @@ window.odkCommonDefinitions = {
       "string_token": "view",
       "text": {
         "default": "View",
-        "spanish": "Ver"
+        "es": "Ver"
       },
       "_row_num": 50
     },
@@ -392,7 +392,7 @@ window.odkCommonDefinitions = {
       "string_token": "change_entitlement_status",
       "text": {
         "default": "Change Entitlement Status",
-        "spanish": "Cambiar estatus de permisos"
+        "es": "Cambiar estatus de permisos"
       },
       "_row_num": 51
     },
@@ -400,7 +400,7 @@ window.odkCommonDefinitions = {
       "string_token": "create_new_entitlement",
       "text": {
         "default": "Create New Entitlement",
-        "spanish": "Crear Nuevo permiso"
+        "es": "Crear Nuevo permiso"
       },
       "_row_num": 52
     },
@@ -408,7 +408,7 @@ window.odkCommonDefinitions = {
       "string_token": "choose_authorization",
       "text": {
         "default": "Choose Authorization",
-        "spanish": "Seleccionar Autorización"
+        "es": "Seleccionar Autorización"
       },
       "_row_num": 53
     },
@@ -416,7 +416,7 @@ window.odkCommonDefinitions = {
       "string_token": "view_by_authorization",
       "text": {
         "default": "View By Authorization",
-        "spanish": "Vista por autorización"
+        "es": "Vista por autorización"
       },
       "_row_num": 54
     },
@@ -424,7 +424,7 @@ window.odkCommonDefinitions = {
       "string_token": "view_deliveries",
       "text": {
         "default": "View Deliveries",
-        "spanish": "Ver entregas"
+        "es": "Ver entregas"
       },
       "_row_num": 55
     },
@@ -432,7 +432,7 @@ window.odkCommonDefinitions = {
       "string_token": "select_group",
       "text": {
         "default": "Please Select Group",
-        "spanish": "Por favor seleccione el grupo"
+        "es": "Por favor seleccione el grupo"
       },
       "_row_num": 56
     },
@@ -440,7 +440,7 @@ window.odkCommonDefinitions = {
       "string_token": "enter_value",
       "text": {
         "default": "Enter a value",
-        "spanish": "Ingrese un valor"
+        "es": "Ingrese un valor"
       },
       "_row_num": 57
     },
@@ -448,7 +448,7 @@ window.odkCommonDefinitions = {
       "string_token": "deliver_items",
       "text": {
         "default": "Deliver Items",
-        "spanish": "Entregar artículos"
+        "es": "Entregar artículos"
       },
       "_row_num": 58
     },
@@ -456,7 +456,7 @@ window.odkCommonDefinitions = {
       "string_token": "confirm_delivery",
       "text": {
         "default": "Confirm Delivery",
-        "spanish": "Confirmar entrega"
+        "es": "Confirmar entrega"
       },
       "_row_num": 59
     },
@@ -464,7 +464,7 @@ window.odkCommonDefinitions = {
       "string_token": "entitlement_creation_success",
       "text": {
         "default": "Entitlement Successfully Created",
-        "spanish": "Permisos creados satisfactoriamente"
+        "es": "Permisos creados satisfactoriamente"
       },
       "_row_num": 62
     },
@@ -472,7 +472,7 @@ window.odkCommonDefinitions = {
       "string_token": "delivery_confirmed",
       "text": {
         "default": "Delivery Confirmed!",
-        "spanish": "¡Entrega confirmada!"
+        "es": "¡Entrega confirmada!"
       },
       "_row_num": 63
     },
@@ -480,7 +480,7 @@ window.odkCommonDefinitions = {
       "string_token": "id_available",
       "text": {
         "default": "ID Available",
-        "spanish": "Identificación disponible"
+        "es": "Identificación disponible"
       },
       "_row_num": 66
     },
@@ -488,7 +488,7 @@ window.odkCommonDefinitions = {
       "string_token": "voucher_detected",
       "text": {
         "default": "Voucher Detected",
-        "spanish": "Cupón Detectado"
+        "es": "Cupón Detectado"
       },
       "_row_num": 67
     },
@@ -496,7 +496,7 @@ window.odkCommonDefinitions = {
       "string_token": "id_unavailable",
       "text": {
         "default": "ID Unavailable",
-        "spanish": "Identificación no disponible"
+        "es": "Identificación no disponible"
       },
       "_row_num": 68
     },
@@ -504,10 +504,10 @@ window.odkCommonDefinitions = {
       "string_token": "invalid_search",
       "text": {
         "default": "Invalid Search",
-        "greek": "Μη έγκυρη αναζήτηση",
-        "arabic": "البحث غير صحيح",
-        "farsi": "جستجو نامعتبر",
-        "spanish": "Búsqueda inválida"
+        "el": "Μη έγκυρη αναζήτηση",
+        "ar": "البحث غير صحيح",
+        "fa": "جستجو نامعتبر",
+        "es": "Búsqueda inválida"
       },
       "_row_num": 71
     },
@@ -515,7 +515,7 @@ window.odkCommonDefinitions = {
       "string_token": "missing_beneficiary_notification",
       "text": {
         "default": "Beneficiary Entity ID not found in system",
-        "spanish": "Identificación del beneficiario no se encuentran en el sistema"
+        "es": "Identificación del beneficiario no se encuentran en el sistema"
       },
       "_row_num": 72
     },
@@ -523,10 +523,10 @@ window.odkCommonDefinitions = {
       "string_token": "already_qualifies_override",
       "text": {
         "default": "Scanned beneficiary already qualifies for this authorization",
-        "greek": "Ο σαρωμένος δικαιούχος είναι ήδη κατάλληλος για αυτήν τη διανομή",
-        "arabic": "المستفيد متاح للتوزيع",
-        "farsi": "اسکن ذینفع در حال حاضر برای این توزیع",
-        "spanish": "Beneficiario escaneado ya calificado para esta distribución"
+        "el": "Ο σαρωμένος δικαιούχος είναι ήδη κατάλληλος για αυτήν τη διανομή",
+        "ar": "المستفيد متاح للتوزيع",
+        "fa": "اسکن ذینفع در حال حاضر برای این توزیع",
+        "es": "Beneficiario escaneado ya calificado para esta distribución"
       },
       "_row_num": 73
     },
@@ -534,7 +534,7 @@ window.odkCommonDefinitions = {
       "string_token": "be_custom_form_undefined",
       "text": {
         "default": "Beneficiary Entity custom form not defined",
-        "spanish": "Formulario personalizado del beneficiario no definido"
+        "es": "Formulario personalizado del beneficiario no definido"
       },
       "_row_num": 74
     },
@@ -542,7 +542,7 @@ window.odkCommonDefinitions = {
       "string_token": "beneficiary_already_received",
       "text": {
         "default": "This beneficiary entity id has already received the current authorization",
-        "spanish": "Esta identificación de beneficiario ya ha recibió la autorización"
+        "es": "Esta identificación de beneficiario ya ha recibió la autorización"
       },
       "_row_num": 75
     },
@@ -550,7 +550,7 @@ window.odkCommonDefinitions = {
       "string_token": "internal_error",
       "text": {
         "default": "Internal Error: please contact administrator",
-        "spanish": "Error interno: póngase en contacto con administrador"
+        "es": "Error interno: póngase en contacto con administrador"
       },
       "_row_num": 76
     },
@@ -558,10 +558,10 @@ window.odkCommonDefinitions = {
       "string_token": "disabled_beneficiary_notification",
       "text": {
         "default": "This beneficiary is disabled",
-        "greek": "Αυτός ο δικαιούχος είναι απενεργοποιημένος",
-        "arabic": "هذا المستفيد معطل",
-        "farsi": "این ذینفع غیر فعال است",
-        "spanish": "Este beneficiario está deshabilitado"
+        "el": "Αυτός ο δικαιούχος είναι απενεργοποιημένος",
+        "ar": "هذا المستفيد معطل",
+        "fa": "این ذینفع غیر فعال است",
+        "es": "Este beneficiario está deshabilitado"
       },
       "_row_num": 77
     },
@@ -569,10 +569,10 @@ window.odkCommonDefinitions = {
       "string_token": "no_authorizations",
       "text": {
         "default": "No Authorizations",
-        "greek": "Καμία διανομή",
-        "arabic": "لا توزيعات",
-        "farsi": "بدون توزیع",
-        "spanish": "Sin distribuciones"
+        "el": "Καμία διανομή",
+        "ar": "لا توزيعات",
+        "fa": "بدون توزیع",
+        "es": "Sin distribuciones"
       },
       "_row_num": 78
     },
@@ -580,7 +580,7 @@ window.odkCommonDefinitions = {
       "string_token": "enabled_households",
       "text": {
         "default": "Enabled Households",
-        "spanish": "Familias Habilitadas"
+        "es": "Familias Habilitadas"
       },
       "_row_num": 80
     },
@@ -588,7 +588,7 @@ window.odkCommonDefinitions = {
       "string_token": "disabled_households",
       "text": {
         "default": "Disabled Households",
-        "spanish": "Familias deshabilitadas"
+        "es": "Familias deshabilitadas"
       },
       "_row_num": 81
     },
@@ -596,10 +596,10 @@ window.odkCommonDefinitions = {
       "string_token": "enabled_beneficiaries",
       "text": {
         "default": "Enabled Beneficiaries",
-        "greek": "Ενεργοί Δικαιούχοι",
-        "arabic": "المستفيدين النشطين",
-        "farsi": "ذینفع فعال",
-        "spanish": "Beneficiarios habilitados"
+        "el": "Ενεργοί Δικαιούχοι",
+        "ar": "المستفيدين النشطين",
+        "fa": "ذینفع فعال",
+        "es": "Beneficiarios habilitados"
       },
       "_row_num": 82
     },
@@ -607,10 +607,10 @@ window.odkCommonDefinitions = {
       "string_token": "disabled_beneficiaries",
       "text": {
         "default": "Disabled Beneficiaries",
-        "greek": "Οι δικαιούχοι με ειδικές ανάγκες",
-        "arabic": "المستفيدون المعطلين",
-        "farsi": "ذینفع غیر فعال",
-        "spanish": "Beneficiarios desactivados"
+        "el": "Οι δικαιούχοι με ειδικές ανάγκες",
+        "ar": "المستفيدون المعطلين",
+        "fa": "ذینفع غیر فعال",
+        "es": "Beneficiarios desactivados"
       },
       "_row_num": 83
     },
@@ -618,7 +618,7 @@ window.odkCommonDefinitions = {
       "string_token": "delivered_since_sync",
       "text": {
         "default": "Delivered since sync",
-        "spanish": "Entregado desde sincronización"
+        "es": "Entregado desde sincronización"
       },
       "_row_num": 86
     },
@@ -626,7 +626,7 @@ window.odkCommonDefinitions = {
       "string_token": "new_since_sync",
       "text": {
         "default": "New since last sync",
-        "spanish": "Nuevo desde la última sincronización"
+        "es": "Nuevo desde la última sincronización"
       },
       "_row_num": 87
     },
@@ -634,7 +634,7 @@ window.odkCommonDefinitions = {
       "string_token": "edited_since_sync",
       "text": {
         "default": "Edited since last sync",
-        "spanish": "Editado desde la última sincronización"
+        "es": "Editado desde la última sincronización"
       },
       "_row_num": 88
     },
@@ -642,7 +642,7 @@ window.odkCommonDefinitions = {
       "string_token": "new_hh_mem_since_sync",
       "text": {
         "default": "New households [members] since last sync",
-        "spanish": "Nuevas familias [members] desde la última sincronización"
+        "es": "Nuevas familias [members] desde la última sincronización"
       },
       "_row_num": 89
     },
@@ -650,7 +650,7 @@ window.odkCommonDefinitions = {
       "string_token": "edited_hh_mem_since_sync",
       "text": {
         "default": "Edited households [members] since last sync",
-        "spanish": "Familias editadas [members] desde la última sincronización"
+        "es": "Familias editadas [members] desde la última sincronización"
       },
       "_row_num": 90
     },
@@ -658,7 +658,7 @@ window.odkCommonDefinitions = {
       "string_token": "start_new_authorization",
       "text": {
         "default": "Start New Authorization",
-        "spanish": "Iniciar nueva autorización"
+        "es": "Iniciar nueva autorización"
       },
       "_row_num": 93
     },
@@ -666,7 +666,7 @@ window.odkCommonDefinitions = {
       "string_token": "create_authorization",
       "text": {
         "default": "Create Authorization",
-        "spanish": "Crear autorización"
+        "es": "Crear autorización"
       },
       "_row_num": 94
     },
@@ -674,7 +674,7 @@ window.odkCommonDefinitions = {
       "string_token": "choose_authorization_name",
       "text": {
         "default": "Choose Authorization Name",
-        "spanish": "Elegir el nombre de la autorización"
+        "es": "Elegir el nombre de la autorización"
       },
       "_row_num": 95
     },
@@ -682,7 +682,7 @@ window.odkCommonDefinitions = {
       "string_token": "create_authorization_success",
       "text": {
         "default": "Authorization Successfully Created",
-        "spanish": "Autorización creada correctamente"
+        "es": "Autorización creada correctamente"
       },
       "_row_num": 96
     },
@@ -690,7 +690,7 @@ window.odkCommonDefinitions = {
       "string_token": "create_authorization_failed",
       "text": {
         "default": "Authorization Creation Failed",
-        "spanish": "Fallo en la Creación de Autorización"
+        "es": "Fallo en la Creación de Autorización"
       },
       "_row_num": 97
     },
@@ -698,7 +698,7 @@ window.odkCommonDefinitions = {
       "string_token": "terminate_authorization",
       "text": {
         "default": "Terminate Authorization",
-        "spanish": "Cancelar la autorización"
+        "es": "Cancelar la autorización"
       },
       "_row_num": 98
     },
@@ -706,7 +706,7 @@ window.odkCommonDefinitions = {
       "string_token": "terminate_authorization_success",
       "text": {
         "default": "Authorization Successfully Terminated",
-        "spanish": "Autorización Cancelada Correctamente"
+        "es": "Autorización Cancelada Correctamente"
       },
       "_row_num": 99
     },
@@ -714,7 +714,7 @@ window.odkCommonDefinitions = {
       "string_token": "terminate_authorization_failed",
       "text": {
         "default": "Authorization Termination Failed",
-        "spanish": "Fallo en la Cancelación de Autorización"
+        "es": "Fallo en la Cancelación de Autorización"
       },
       "_row_num": 100
     },
@@ -722,7 +722,7 @@ window.odkCommonDefinitions = {
       "string_token": "no_active_authorizations",
       "text": {
         "default": "There currently are no active authorizations",
-        "spanish": "Actualmente no hay autorizaciones activas"
+        "es": "Actualmente no hay autorizaciones activas"
       },
       "_row_num": 101
     },
@@ -730,7 +730,7 @@ window.odkCommonDefinitions = {
       "string_token": "beneficiary_entity_id",
       "text": {
         "default": "Beneficiary Entity ID",
-        "spanish": "Identificación de Beneficiario"
+        "es": "Identificación de Beneficiario"
       },
       "_row_num": 104
     },
@@ -738,7 +738,7 @@ window.odkCommonDefinitions = {
       "string_token": "date_created",
       "text": {
         "default": "Date Created",
-        "spanish": "Fecha de creación"
+        "es": "Fecha de creación"
       },
       "_row_num": 105
     },
@@ -746,7 +746,7 @@ window.odkCommonDefinitions = {
       "string_token": "custom_beneficiary_entity_form_id",
       "text": {
         "default": "Custom Beneficiary Entity Form ID",
-        "spanish": "Formulario de Identificación de beneficiario personalizado"
+        "es": "Formulario de Identificación de beneficiario personalizado"
       },
       "_row_num": 106
     },
@@ -754,7 +754,7 @@ window.odkCommonDefinitions = {
       "string_token": "custom_beneficiary_entity_row_id",
       "text": {
         "default": "Custom Beneficiary Entity Row ID",
-        "spanish": "Fila de Identificación de beneficiario personalizada"
+        "es": "Fila de Identificación de beneficiario personalizada"
       },
       "_row_num": 107
     },
@@ -762,7 +762,7 @@ window.odkCommonDefinitions = {
       "string_token": "status",
       "text": {
         "default": "Status",
-        "spanish": "Estatus"
+        "es": "Estatus"
       },
       "_row_num": 108
     },
@@ -770,7 +770,7 @@ window.odkCommonDefinitions = {
       "string_token": "status_reason",
       "text": {
         "default": "Status Reason",
-        "spanish": "Razón de estado"
+        "es": "Razón de estado"
       },
       "_row_num": 109
     },
@@ -778,7 +778,7 @@ window.odkCommonDefinitions = {
       "string_token": "beneficiary_entity_row_id",
       "text": {
         "default": "Beneficiary Entity Row ID",
-        "spanish": "Identificación de fila de beneficiario"
+        "es": "Identificación de fila de beneficiario"
       },
       "_row_num": 111
     },
@@ -786,7 +786,7 @@ window.odkCommonDefinitions = {
       "string_token": "custom_member_form_id",
       "text": {
         "default": "Custom Member Form ID",
-        "spanish": "Identificación de formulario personalizado de miembro"
+        "es": "Identificación de formulario personalizado de miembro"
       },
       "_row_num": 112
     },
@@ -794,7 +794,7 @@ window.odkCommonDefinitions = {
       "string_token": "custom_member_row_id",
       "text": {
         "default": "Custom Member Row ID",
-        "spanish": "Identificación de Fila de miembro personalizada"
+        "es": "Identificación de Fila de miembro personalizada"
       },
       "_row_num": 113
     },
@@ -802,7 +802,7 @@ window.odkCommonDefinitions = {
       "string_token": "member_id",
       "text": {
         "default": "Member ID",
-        "spanish": "Identificación de Miembro"
+        "es": "Identificación de Miembro"
       },
       "_row_num": 114
     },
@@ -810,7 +810,7 @@ window.odkCommonDefinitions = {
       "string_token": "authorization_id",
       "text": {
         "default": "Authorization ID",
-        "spanish": "Identificación de la autorización"
+        "es": "Identificación de la autorización"
       },
       "_row_num": 116
     },
@@ -818,7 +818,7 @@ window.odkCommonDefinitions = {
       "string_token": "authorization_type",
       "text": {
         "default": "Authorization Type",
-        "spanish": "Tipo de autorización"
+        "es": "Tipo de autorización"
       },
       "_row_num": 117
     },
@@ -826,7 +826,7 @@ window.odkCommonDefinitions = {
       "string_token": "authorization_name",
       "text": {
         "default": "Authorization Name",
-        "spanish": "Nombre de la Autorización"
+        "es": "Nombre de la Autorización"
       },
       "_row_num": 118
     },
@@ -834,7 +834,7 @@ window.odkCommonDefinitions = {
       "string_token": "authorization_description",
       "text": {
         "default": "Authorization Description",
-        "spanish": "Descripción de la autorización"
+        "es": "Descripción de la autorización"
       },
       "_row_num": 119
     },
@@ -842,7 +842,7 @@ window.odkCommonDefinitions = {
       "string_token": "entitlement_id",
       "text": {
         "default": "Entitlement ID",
-        "spanish": "Identificación de Permisos"
+        "es": "Identificación de Permisos"
       },
       "_row_num": 120
     },
@@ -850,7 +850,7 @@ window.odkCommonDefinitions = {
       "string_token": "is_override",
       "text": {
         "default": "Is Override",
-        "spanish": "Está anulado"
+        "es": "Está anulado"
       },
       "_row_num": 121
     },
@@ -858,10 +858,10 @@ window.odkCommonDefinitions = {
       "string_token": "item_pack_id",
       "text": {
         "default": "Item Pack ID",
-        "greek": "Αναγνωριστικό πακέτου στοιχείου",
-        "arabic": "رقم الحزمة",
-        "farsi": "شماره بسته",
-        "spanish": "ID del artículo"
+        "el": "Αναγνωριστικό πακέτου στοιχείου",
+        "ar": "رقم الحزمة",
+        "fa": "شماره بسته",
+        "es": "ID del artículo"
       },
       "_row_num": 122
     },
@@ -869,10 +869,10 @@ window.odkCommonDefinitions = {
       "string_token": "item_pack_name",
       "text": {
         "default": "Item Pack Name",
-        "greek": "Όνομα πακέτου στοιχείου",
-        "arabic": "اسم الحزمة",
-        "farsi": "نام بسته",
-        "spanish": "Nombre del artículo"
+        "el": "Όνομα πακέτου στοιχείου",
+        "ar": "اسم الحزمة",
+        "fa": "نام بسته",
+        "es": "Nombre del artículo"
       },
       "_row_num": 123
     },
@@ -880,10 +880,10 @@ window.odkCommonDefinitions = {
       "string_token": "item_pack_description",
       "text": {
         "default": "Item Pack Description",
-        "greek": "Περιγραφή πακέτου στοιχείου",
-        "arabic": "وصف الحزمة",
-        "farsi": "شرح بسته",
-        "spanish": "Descripción del artículo"
+        "el": "Περιγραφή πακέτου στοιχείου",
+        "ar": "وصف الحزمة",
+        "fa": "شرح بسته",
+        "es": "Descripción del artículo"
       },
       "_row_num": 124
     },
@@ -891,7 +891,7 @@ window.odkCommonDefinitions = {
       "string_token": "custom_delivery_form_id",
       "text": {
         "default": "Custom Delivery Form ID",
-        "spanish": "Identificación de formularios de entrega personalizada"
+        "es": "Identificación de formularios de entrega personalizada"
       },
       "_row_num": 125
     },
@@ -899,7 +899,7 @@ window.odkCommonDefinitions = {
       "string_token": "custom_delivery_row_id",
       "text": {
         "default": "Custom Delivery Row ID",
-        "spanish": "Identificación de la fila de entrega personalizada"
+        "es": "Identificación de la fila de entrega personalizada"
       },
       "_row_num": 126
     },
@@ -907,7 +907,7 @@ window.odkCommonDefinitions = {
       "string_token": "assigned_item_pack_code",
       "text": {
         "default": "Assigned Item Pack Barcode",
-        "spanish": "Código de barras de paquete de artículo asignado"
+        "es": "Código de barras de paquete de artículo asignado"
       },
       "_row_num": 127
     },
@@ -915,7 +915,7 @@ window.odkCommonDefinitions = {
       "string_token": "name",
       "text": {
         "default": "Name",
-        "spanish": "Nombre"
+        "es": "Nombre"
       },
       "_row_num": 129
     },
@@ -923,7 +923,7 @@ window.odkCommonDefinitions = {
       "string_token": "type",
       "text": {
         "default": "Type",
-        "spanish": "Tipo"
+        "es": "Tipo"
       },
       "_row_num": 130
     },
@@ -931,7 +931,7 @@ window.odkCommonDefinitions = {
       "string_token": "item_pack_ranges",
       "text": {
         "default": "Item Pack Ranges",
-        "spanish": "Rangos de paquetes de artículos"
+        "es": "Rangos de paquetes de artículos"
       },
       "_row_num": 131
     },
@@ -939,7 +939,7 @@ window.odkCommonDefinitions = {
       "string_token": "report_version",
       "text": {
         "default": "Report Version",
-        "spanish": "Versión del informe"
+        "es": "Versión del informe"
       },
       "_row_num": 132
     },
@@ -947,7 +947,7 @@ window.odkCommonDefinitions = {
       "string_token": "restrict_overrides",
       "text": {
         "default": "Restrict Overrides",
-        "spanish": "Restringir las anulaciones"
+        "es": "Restringir las anulaciones"
       },
       "_row_num": 133
     },
@@ -955,7 +955,7 @@ window.odkCommonDefinitions = {
       "string_token": "summary_form_id",
       "text": {
         "default": "Summary Form ID",
-        "spanish": "Identificación de formulario Resumen"
+        "es": "Identificación de formulario Resumen"
       },
       "_row_num": 134
     },
@@ -963,7 +963,7 @@ window.odkCommonDefinitions = {
       "string_token": "for_member",
       "text": {
         "default": "Entitlement Generated for Member",
-        "spanish": "Permiso generado para miembros"
+        "es": "Permiso generado para miembros"
       },
       "_row_num": 135
     },
@@ -971,7 +971,7 @@ window.odkCommonDefinitions = {
       "string_token": "description",
       "text": {
         "default": "Description",
-        "spanish": "Descripción"
+        "es": "Descripción"
       },
       "_row_num": 136
     },
@@ -979,7 +979,7 @@ window.odkCommonDefinitions = {
       "string_token": "extra_field_entitlements",
       "text": {
         "default": "Extra Field Entitlements",
-        "spanish": "Campo Adicional de Permisos"
+        "es": "Campo Adicional de Permisos"
       },
       "_row_num": 137
     },
@@ -987,7 +987,7 @@ window.odkCommonDefinitions = {
       "string_token": "address",
       "text": {
         "default": "Address",
-        "spanish": "Dirección"
+        "es": "Dirección"
       },
       "_row_num": 140
     },
@@ -995,7 +995,7 @@ window.odkCommonDefinitions = {
       "string_token": "telephone",
       "text": {
         "default": "Telephone",
-        "spanish": "Teléfono"
+        "es": "Teléfono"
       },
       "_row_num": 141
     },
@@ -1003,7 +1003,7 @@ window.odkCommonDefinitions = {
       "string_token": "mobile_provider",
       "text": {
         "default": "Mobile Provider",
-        "spanish": "Proveedor de telefonía móvil"
+        "es": "Proveedor de telefonía móvil"
       },
       "_row_num": 142
     },
@@ -1011,7 +1011,7 @@ window.odkCommonDefinitions = {
       "string_token": "delivery_site",
       "text": {
         "default": "Delivery Site",
-        "spanish": "Sitio de Entrega"
+        "es": "Sitio de Entrega"
       },
       "_row_num": 143
     },
@@ -1019,7 +1019,7 @@ window.odkCommonDefinitions = {
       "string_token": "location",
       "text": {
         "default": "Location",
-        "spanish": "Ubicación"
+        "es": "Ubicación"
       },
       "_row_num": 144
     },
@@ -1027,7 +1027,7 @@ window.odkCommonDefinitions = {
       "string_token": "tent_caravan",
       "text": {
         "default": "Tent/Caravan Code",
-        "spanish": "Código de tienda/caravana"
+        "es": "Código de tienda/caravana"
       },
       "_row_num": 145
     },
@@ -1035,7 +1035,7 @@ window.odkCommonDefinitions = {
       "string_token": "hh_size",
       "text": {
         "default": "Household Size",
-        "spanish": "Tamaño de la Familia"
+        "es": "Tamaño de la Familia"
       },
       "_row_num": 146
     },
@@ -1043,7 +1043,7 @@ window.odkCommonDefinitions = {
       "string_token": "first_name",
       "text": {
         "default": "First Name",
-        "spanish": "Primer Nombre"
+        "es": "Primer Nombre"
       },
       "_row_num": 148
     },
@@ -1051,7 +1051,7 @@ window.odkCommonDefinitions = {
       "string_token": "last_name",
       "text": {
         "default": "Last Name",
-        "spanish": "Apellidos"
+        "es": "Apellidos"
       },
       "_row_num": 149
     },
@@ -1059,7 +1059,7 @@ window.odkCommonDefinitions = {
       "string_token": "first_last_name",
       "text": {
         "default": "First and Last Name",
-        "spanish": "Nombre y Apellido"
+        "es": "Nombre y Apellido"
       },
       "_row_num": 150
     },
@@ -1067,7 +1067,7 @@ window.odkCommonDefinitions = {
       "string_token": "birth_date",
       "text": {
         "default": "Birth Date",
-        "spanish": "Fecha de nacimiento"
+        "es": "Fecha de nacimiento"
       },
       "_row_num": 151
     },
@@ -1075,7 +1075,7 @@ window.odkCommonDefinitions = {
       "string_token": "age",
       "text": {
         "default": "Age",
-        "spanish": "Edad"
+        "es": "Edad"
       },
       "_row_num": 152
     },
@@ -1083,7 +1083,7 @@ window.odkCommonDefinitions = {
       "string_token": "gender",
       "text": {
         "default": "Gender",
-        "spanish": "Género"
+        "es": "Género"
       },
       "_row_num": 153
     },
@@ -1091,7 +1091,7 @@ window.odkCommonDefinitions = {
       "string_token": "id_type",
       "text": {
         "default": "ID Type",
-        "spanish": "Tipo de Identificación"
+        "es": "Tipo de Identificación"
       },
       "_row_num": 154
     },
@@ -1099,7 +1099,7 @@ window.odkCommonDefinitions = {
       "string_token": "id_number",
       "text": {
         "default": "ID Number",
-        "spanish": "Número de identificación"
+        "es": "Número de identificación"
       },
       "_row_num": 155
     },
@@ -1107,7 +1107,7 @@ window.odkCommonDefinitions = {
       "string_token": "is_head_of_household",
       "text": {
         "default": "Is Head of Household",
-        "spanish": "Es jefe de familia"
+        "es": "Es jefe de familia"
       },
       "_row_num": 156
     },
@@ -1115,7 +1115,7 @@ window.odkCommonDefinitions = {
       "string_token": "picture",
       "text": {
         "default": "Picture",
-        "spanish": "Fotografía"
+        "es": "Fotografía"
       },
       "_row_num": 157
     },
@@ -1123,7 +1123,7 @@ window.odkCommonDefinitions = {
       "string_token": "email",
       "text": {
         "default": "Email",
-        "spanish": "Correo electrónico"
+        "es": "Correo electrónico"
       },
       "_row_num": 158
     },
@@ -1131,7 +1131,7 @@ window.odkCommonDefinitions = {
       "string_token": "vulnerability",
       "text": {
         "default": "Vulnerability",
-        "spanish": "Vulnerabilidad"
+        "es": "Vulnerabilidad"
       },
       "_row_num": 159
     }
@@ -1143,82 +1143,42 @@ window.odkCommonDefinitions = {
       {
         "display": {
           "locale": {
-            "text": {
-              "english": "English",
-              "spanish": "Ingles",
-              "greek": "English",
-              "arabic": "English",
-              "farsi": "English",
-              "default": "English"
-            }
+            "text": "arabic"
           }
         },
-        "_row_num": 7,
-        "name": "english"
-      },
-      {
-        "display": {
-          "locale": {
-            "text": {
-              "english": "Spanish",
-              "spanish": "Espanol",
-              "greek": "Espanol",
-              "arabic": "Spanish",
-              "farsi": "Spanish",
-              "default": "Spanish"
-            }
-          }
-        },
-        "_row_num": 8,
-        "name": "spanish"
-      },
-      {
-        "display": {
-          "locale": {
-            "text": {
-              "english": "Arabic",
-              "spanish": "Arabic",
-              "greek": "Arabic",
-              "arabic": "Arabic",
-              "farsi": "Arabic",
-              "default": "Arabic"
-            }
-          }
-        },
-        "_row_num": 9,
         "name": "arabic"
       },
       {
         "display": {
           "locale": {
-            "text": {
-              "english": "Farsi",
-              "spanish": "Farsi",
-              "greek": "Farsi",
-              "arabic": "Farsi",
-              "farsi": "Farsi",
-              "default": "Farsi"
-            }
+            "text": "english"
           }
         },
-        "_row_num": 10,
+        "name": "english"
+      },
+      {
+        "display": {
+          "locale": {
+            "text": "farsi"
+          }
+        },
         "name": "farsi"
       },
       {
         "display": {
           "locale": {
-            "text": {
-              "english": "Greek",
-              "spanish": "Greek",
-              "greek": "Greek",
-              "arabic": "Greek",
-              "farsi": "Greek",
-              "default": "Greek"
-            }
+            "text": "greek"
           }
         },
-        "_row_num": 11,
         "name": "greek"
+      },
+      {
+        "display": {
+          "locale": {
+            "text": "spanish"
+          }
+        },
+        "name": "spanish"
       }
     ]
   },
