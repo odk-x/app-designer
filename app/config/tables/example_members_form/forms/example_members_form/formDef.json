@@ -198,7 +198,7 @@
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "custom_members",
+        "value": "example_members_form",
         "_row_num": 2
       },
       {
@@ -208,7 +208,7 @@
       },
       {
         "setting_name": "table_id",
-        "value": "custom_members",
+        "value": "example_members_form",
         "_row_num": 4
       },
       {
@@ -568,7 +568,7 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "custom_members",
+        "value": "example_members_form",
         "_row_num": 2
       },
       "form_version": {
@@ -578,7 +578,7 @@
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "custom_members",
+        "value": "example_members_form",
         "_row_num": 4
       },
       "survey": {
@@ -1986,7 +1986,7 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "custom_members"
+        "_value": "example_members_form"
       },
       {
         "_partition": "Table",

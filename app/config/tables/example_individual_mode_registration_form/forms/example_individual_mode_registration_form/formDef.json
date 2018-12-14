@@ -2,50 +2,23 @@
   "xlsx": {
     "survey": [
       {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": "This is a sample individual mode registration form"
+          }
+        },
+        "_row_num": 2
+      },
+      {
         "type": "string",
-        "name": "notes",
+        "name": "first_name",
         "display": {
           "prompt": {
-            "text": "Record any relevant notes on this distribution"
-          }
-        },
-        "_row_num": 2
-      },
-      {
-        "type": "signature",
-        "name": "receive_signature",
-        "display": {
-          "prompt": {
-            "text": "Please sign your name to verify this report."
+            "text": "What is your first name?"
           }
         },
         "_row_num": 3
-      }
-    ],
-    "settings": [
-      {
-        "setting_name": "form_id",
-        "value": "example_field_report_form",
-        "_row_num": 2
-      },
-      {
-        "setting_name": "form_version",
-        "value": 52418,
-        "_row_num": 3
-      },
-      {
-        "setting_name": "table_id",
-        "value": "example_field_report_form",
-        "_row_num": 4
-      },
-      {
-        "setting_name": "survey",
-        "display": {
-          "title": {
-            "text": "Custom Field Report"
-          }
-        },
-        "_row_num": 5
       }
     ],
     "initial": [
@@ -59,16 +32,42 @@
         "_row_num": 3
       }
     ],
-    "model": [
+    "settings": [
       {
-        "type": "string",
-        "name": "notes",
+        "setting_name": "form_id",
+        "value": "example_individual_mode_registration_form",
         "_row_num": 2
       },
       {
-        "type": "signature",
-        "name": "receive_signature",
+        "setting_name": "form_version",
+        "value": 20170919,
         "_row_num": 3
+      },
+      {
+        "setting_name": "table_id",
+        "value": "example_individual_mode_registration_form",
+        "_row_num": 4
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": "Individual mode registration"
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "setting_name": "instance_name",
+        "value": "first_name",
+        "_row_num": 6
+      }
+    ],
+    "model": [
+      {
+        "type": "string",
+        "name": "first_name",
+        "_row_num": 2
       }
     ],
     "properties": [
@@ -109,27 +108,32 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "example_field_report_form",
+        "value": "example_individual_mode_registration_form",
         "_row_num": 2
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 52418,
+        "value": 20170919,
         "_row_num": 3
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "example_field_report_form",
+        "value": "example_individual_mode_registration_form",
         "_row_num": 4
       },
       "survey": {
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Custom Field Report"
+            "text": "Individual mode registration"
           }
         },
         "_row_num": 5
+      },
+      "instance_name": {
+        "setting_name": "instance_name",
+        "value": "first_name",
+        "_row_num": 6
       },
       "_locales": {
         "setting_name": "_locales",
@@ -154,7 +158,7 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Custom Field Report"
+            "text": "Individual mode registration"
           }
         },
         "_row_num": 5
@@ -167,11 +171,11 @@
     "queries": {},
     "calculates": {},
     "model": {
-      "notes": {
+      "first_name": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 2,
+            "_row_num": 3,
             "section_name": "survey"
           },
           {
@@ -179,35 +183,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "notes"
-      },
-      "receive_signature": {
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementType": "rowpath",
-            "elementKey": "receive_signature_uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "elementType": "mimeType",
-            "default": "image/*",
-            "elementKey": "receive_signature_contentType"
-          }
-        },
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "receive_signature"
+        "elementKey": "first_name"
       }
     },
     "section_names": [
@@ -221,32 +197,31 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "string",
-            "name": "notes",
+            "type": "note",
             "display": {
               "prompt": {
-                "text": "Record any relevant notes on this distribution"
+                "text": "This is a sample individual mode registration form"
               }
             },
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "string",
+            "_type": "note",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
           {
-            "type": "signature",
-            "name": "receive_signature",
+            "type": "string",
+            "name": "first_name",
             "display": {
               "prompt": {
-                "text": "Please sign your name to verify this report."
+                "text": "What is your first name?"
               }
             },
             "_row_num": 3,
             "__rowNum__": 2,
             "_token_type": "prompt",
-            "_type": "signature",
+            "_type": "string",
             "_branch_label_enclosing_screen": "survey/_screen3",
             "promptIdx": 1
           },
@@ -323,7 +298,7 @@
             "promptIdx": 0,
             "display": {
               "title": {
-                "text": "Custom Field Report"
+                "text": "Individual mode registration"
               }
             },
             "_branch_label_enclosing_screen": "survey/0"
@@ -414,11 +389,11 @@
       }
     },
     "dataTableModel": {
-      "notes": {
+      "first_name": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 2,
+            "_row_num": 3,
             "section_name": "survey"
           },
           {
@@ -426,69 +401,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "notes",
-        "elementName": "notes",
+        "elementKey": "first_name",
+        "elementName": "first_name",
         "elementSet": "data",
-        "elementPath": "notes"
-      },
-      "receive_signature": {
-        "type": "object",
-        "elementType": "mimeUri",
-        "properties": {
-          "uriFragment": {
-            "type": "string",
-            "elementType": "rowpath",
-            "elementKey": "receive_signature_uriFragment",
-            "elementName": "uriFragment",
-            "elementSet": "data",
-            "elementPath": "receive_signature.uriFragment"
-          },
-          "contentType": {
-            "type": "string",
-            "elementType": "mimeType",
-            "default": "image/*",
-            "elementKey": "receive_signature_contentType",
-            "elementName": "contentType",
-            "elementSet": "data",
-            "elementPath": "receive_signature.contentType"
-          }
-        },
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "survey"
-          },
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "receive_signature",
-        "elementName": "receive_signature",
-        "elementSet": "data",
-        "elementPath": "receive_signature",
-        "listChildElementKeys": [
-          "receive_signature_contentType",
-          "receive_signature_uriFragment"
-        ],
-        "notUnitOfRetention": true
-      },
-      "receive_signature_uriFragment": {
-        "type": "string",
-        "elementType": "rowpath",
-        "elementKey": "receive_signature_uriFragment",
-        "elementName": "uriFragment",
-        "elementSet": "data",
-        "elementPath": "receive_signature.uriFragment"
-      },
-      "receive_signature_contentType": {
-        "type": "string",
-        "elementType": "mimeType",
-        "default": "image/*",
-        "elementKey": "receive_signature_contentType",
-        "elementName": "contentType",
-        "elementSet": "data",
-        "elementPath": "receive_signature.contentType"
+        "elementPath": "first_name"
       },
       "_id": {
         "type": "string",
@@ -616,7 +532,7 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "example_field_report_form"
+        "_value": "example_individual_mode_registration_form"
       },
       {
         "_partition": "Table",
@@ -630,7 +546,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"Custom Field Report\"}"
+        "_value": "{\"text\":\"Individual mode registration\"}"
       },
       {
         "_partition": "Table",

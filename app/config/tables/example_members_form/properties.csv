@@ -4,7 +4,7 @@ Column,id_type,displayChoicesList,object,"[{""choice_list_name"":""id_types_list
 Column,is_head_of_household,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":""TRUE"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":10},{""choice_list_name"":""yes_no"",""data_value"":""FALSE"",""display"":{""title"":{""text"":""No""}},""_row_num"":11}]"
 Column,vulnerability,displayChoicesList,object,"[{""choice_list_name"":""vulnerability_list"",""data_value"":""None"",""display"":{""title"":{""text"":""None""}},""_row_num"":18},{""choice_list_name"":""vulnerability_list"",""data_value"":""Disability"",""display"":{""title"":{""text"":""Disability""}},""_row_num"":19},{""choice_list_name"":""vulnerability_list"",""data_value"":""Unaccompanied minors"",""display"":{""title"":{""text"":""Unaccompanied minors""}},""_row_num"":20},{""choice_list_name"":""vulnerability_list"",""data_value"":""Single-parent family"",""display"":{""title"":{""text"":""Single-parent family""}},""_row_num"":21}]"
 FormType,default,FormType.formType,string,SURVEY
-SurveyUtil,default,SurveyUtil.formId,string,custom_members
+SurveyUtil,default,SurveyUtil.formId,string,example_members_form
 Table,default,defaultViewType,string,SPREADSHEET
 Table,default,displayName,object,"{""text"":""Custom Member""}"
 Table,security,defaultAccessOnCreation,string,HIDDEN
