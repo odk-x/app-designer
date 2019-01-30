@@ -17,6 +17,10 @@ body {
     background:#004756 ! important;
 }
 
+.list-group-item {
+    color: black;
+}
+
 .bootstrap-datetimepicker-widget {
     color: #000000;
 }
