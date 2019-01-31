@@ -556,8 +556,8 @@
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
               "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
@@ -568,28 +568,28 @@
         "_row_num": 5
       },
       {
-        "setting_name": "english",
+        "setting_name": "en",
         "display": {
           "locale": {
             "text": {
-              "english": "English",
-              "hindi": "English (as hindi name)",
-              "es": "Inglés",
-              "default": "English"
+              "en": "English (EN)",
+              "hi": "English (as hindi name) (EN)",
+              "es": "Inglés (EN)",
+              "default": "English (EN)"
             }
           }
         },
         "_row_num": 7
       },
       {
-        "setting_name": "hindi",
+        "setting_name": "hi",
         "display": {
           "locale": {
             "text": {
-              "english": "Hindi",
-              "hindi": "Hindi (as hindi name)",
-              "es": "Hindi",
-              "default": "Hindi"
+              "en": "Hindi (HI)",
+              "hi": "Hindi (as hindi name) (HI)",
+              "es": "Hindi (HI)",
+              "default": "Hindi (HI)"
             }
           }
         },
@@ -600,10 +600,10 @@
         "display": {
           "locale": {
             "text": {
-              "english": "Spanish",
-              "hindi": "Spanish (as hindi name)",
-              "es": "Español",
-              "default": "Spanish"
+              "en": "Spanish (ES)",
+              "hi": "Spanish (as hindi name) (ES)",
+              "es": "Español (ES)",
+              "default": "Spanish (ES)"
             }
           }
         },
@@ -1393,8 +1393,8 @@
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
               "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
@@ -1404,28 +1404,28 @@
         "showContents": false,
         "_row_num": 5
       },
-      "english": {
-        "setting_name": "english",
+      "en": {
+        "setting_name": "en",
         "display": {
           "locale": {
             "text": {
-              "english": "English",
-              "hindi": "English (as hindi name)",
-              "es": "Inglés",
-              "default": "English"
+              "en": "English (EN)",
+              "hindi": "English (as hindi name) (EN)",
+              "es": "Inglés (EN)",
+              "default": "English (EN)"
             }
           }
         },
         "_row_num": 7
       },
-      "hindi": {
-        "setting_name": "hindi",
+      "hi": {
+        "setting_name": "hi",
         "display": {
           "locale": {
             "text": {
-              "english": "Hindi",
-              "hindi": "Hindi (as hindi name)",
-              "es": "Hindi",
+              "en": "Hindi (HI)",
+              "hi": "Hindi (as hindi name) (HI)",
+              "es": "Hindi (HI)",
               "default": "Hindi"
             }
           }
@@ -1437,9 +1437,9 @@
         "display": {
           "locale": {
             "text": {
-              "english": "Spanish",
-              "hindi": "Spanish (as hindi name)",
-              "es": "Español",
+              "en": "Spanish (ES)",
+              "hi": "Spanish (as hindi name)",
+              "es": "Español (ES)",
               "default": "Spanish"
             }
           }
@@ -1454,38 +1454,38 @@
             "display": {
               "locale": {
                 "text": {
-                  "english": "English",
-                  "hindi": "English (as hindi name)",
-                  "es": "Inglés",
-                  "default": "English"
+                  "en": "English (EN)",
+                  "hi": "English (as hindi name) (EN)",
+                  "es": "Inglés (EN)",
+                  "default": "English (EN)"
                 }
               }
             },
             "_row_num": 7,
-            "name": "english"
+            "name": "en"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Hindi",
-                  "hindi": "Hindi (as hindi name)",
-                  "es": "Hindi",
-                  "default": "Hindi"
+                  "en": "Hindi (HI)",
+                  "hi": "Hindi (as hindi name) (HI)",
+                  "es": "Hindi (HI)",
+                  "default": "Hindi (HI)"
                 }
               }
             },
             "_row_num": 8,
-            "name": "hindi"
+            "name": "hi"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Spanish",
-                  "hindi": "Spanish (as hindi name)",
-                  "es": "Español",
-                  "default": "Spanish"
+                  "en": "Spanish (ES)",
+                  "hi": "Spanish (as hindi name) (ES)",
+                  "es": "Español (ES)",
+                  "default": "Spanish (ES)"
                 }
               }
             },
@@ -1497,15 +1497,15 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "english"
+        "value": "en"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
               "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
@@ -2273,37 +2273,37 @@
             "display": {
               "locale": {
                 "text": {
-                  "english": "English",
-                  "hindi": "English (as hindi name)",
-                  "es": "Inglés",
-                  "default": "English"
+                  "en": "English (EN)",
+                  "hindi": "English (as hindi name) (EN)",
+                  "es": "Inglés (EN)",
+                  "default": "English (EN)"
                 }
               }
             },
             "_row_num": 7,
-            "name": "english"
+            "name": "en"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Hindi",
-                  "hindi": "Hindi (as hindi name)",
-                  "es": "Hindi",
-                  "default": "Hindi"
+                  "en": "Hindi (HI)",
+                  "hi": "Hindi (as hindi name) (HI)",
+                  "es": "Hindi (HI)",
+                  "default": "Hindi (HI)"
                 }
               }
             },
             "_row_num": 8,
-            "name": "hindi"
+            "name": "hi"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Spanish",
-                  "hindi": "Spanish (as hindi name)",
-                  "es": "Español",
+                  "en": "Spanish (ES)",
+                  "hi": "Spanish (as hindi name) (ES)",
+                  "es": "Español (ES)",
                   "default": "Spanish"
                 }
               }
@@ -2316,7 +2316,7 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "english"
+        "value": "en"
       }
     },
     "queries": {},
@@ -2347,8 +2347,8 @@
             "display": {
               "title": {
                 "text": {
-                  "english": "Common Javascript Framework",
-                  "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+                  "en": "Common Javascript Framework",
+                  "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
                   "es": "Marco común de Javascript",
                   "default": "Common Javascript Framework"
                 }
@@ -3394,7 +3394,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"hindi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\",\"es\":\"Marco común de Javascript\",\"default\":\"Common Javascript Framework\"}}"
+        "_value": "{\"text\":{\"en\":\"Common Javascript Framework\",\"hi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\",\"es\":\"Marco común de Javascript\",\"default\":\"Common Javascript Framework\"}}"
       }
     ]
   }

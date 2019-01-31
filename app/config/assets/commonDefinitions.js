@@ -8,38 +8,38 @@ window.odkCommonDefinitions = {
         "display": {
           "locale": {
             "text": {
-              "english": "English",
-              "hindi": "English (as hindi name)",
-              "es": "Inglés",
-              "default": "English"
+              "en": "English (EN)",
+              "hi": "English (as hindi name) (EN)",
+              "es": "Inglés (EN)",
+              "default": "English (EN)"
             }
           }
         },
         "_row_num": 7,
-        "name": "english"
+        "name": "en"
       },
       {
         "display": {
           "locale": {
             "text": {
-              "english": "Hindi",
-              "hindi": "Hindi (as hindi name)",
-              "es": "Hindi",
-              "default": "Hindi"
+              "en": "Hindi (HI)",
+              "hi": "Hindi (as hindi name) (HI)",
+              "es": "Hindi (HI)",
+              "default": "Hindi (HI)"
             }
           }
         },
         "_row_num": 8,
-        "name": "hindi"
+        "name": "hi"
       },
       {
         "display": {
           "locale": {
             "text": {
-              "english": "Spanish",
-              "hindi": "Spanish (as hindi name)",
-              "es": "Español",
-              "default": "Spanish"
+              "en": "Spanish (ES)",
+              "hi": "Spanish (as hindi name) (ES)",
+              "es": "Español (ES)",
+              "default": "Spanish (ES)"
             }
           }
         },
@@ -51,6 +51,6 @@ window.odkCommonDefinitions = {
   "_default_locale": {
     "setting_name": "_default_locale",
     "_row_num": 5,
-    "value": "english"
+    "value": "en"
   }
 }
