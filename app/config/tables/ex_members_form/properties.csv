@@ -1,0 +1,11 @@
+_partition,_aspect,_key,_type,_value
+Column,gender,displayChoicesList,object,"[{""choice_list_name"":""genders"",""data_value"":""Male"",""display"":{""title"":{""text"":""Male""}},""_row_num"":2},{""choice_list_name"":""genders"",""data_value"":""Female"",""display"":{""title"":{""text"":""Female""}},""_row_num"":3}]"
+Column,id_type,displayChoicesList,object,"[{""choice_list_name"":""id_types_list"",""data_value"":""Registration Number"",""display"":{""title"":{""text"":""Registration Number""}},""_row_num"":13},{""choice_list_name"":""id_types_list"",""data_value"":""Case Number"",""display"":{""title"":{""text"":""Case Number""}},""_row_num"":14},{""choice_list_name"":""id_types_list"",""data_value"":""Asylum Card"",""display"":{""title"":{""text"":""Asylum Card""}},""_row_num"":15},{""choice_list_name"":""id_types_list"",""data_value"":""Police Notes"",""display"":{""title"":{""text"":""Police Notes""}},""_row_num"":16}]"
+Column,is_head_of_household,displayChoicesList,object,"[{""choice_list_name"":""yes_no"",""data_value"":""TRUE"",""display"":{""title"":{""text"":""Yes""}},""_row_num"":10},{""choice_list_name"":""yes_no"",""data_value"":""FALSE"",""display"":{""title"":{""text"":""No""}},""_row_num"":11}]"
+Column,vulnerability,displayChoicesList,object,"[{""choice_list_name"":""vulnerability_list"",""data_value"":""None"",""display"":{""title"":{""text"":""None""}},""_row_num"":18},{""choice_list_name"":""vulnerability_list"",""data_value"":""Disability"",""display"":{""title"":{""text"":""Disability""}},""_row_num"":19},{""choice_list_name"":""vulnerability_list"",""data_value"":""Unaccompanied minors"",""display"":{""title"":{""text"":""Unaccompanied minors""}},""_row_num"":20},{""choice_list_name"":""vulnerability_list"",""data_value"":""Single-parent family"",""display"":{""title"":{""text"":""Single-parent family""}},""_row_num"":21}]"
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,ex_members_form
+Table,default,defaultViewType,string,SPREADSHEET
+Table,default,displayName,object,"{""text"":""Custom Member""}"
+Table,security,defaultAccessOnCreation,string,HIDDEN
+Table,security,unverifiedUserCanCreate,boolean,false

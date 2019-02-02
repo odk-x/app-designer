@@ -1,0 +1,8 @@
+_partition,_aspect,_key,_type,_value
+Column,delivery_site,displayChoicesList,object,"[{""choice_list_name"":""sites"",""data_value"":""Ritsona"",""display"":{""title"":{""text"":""Ritsona""}},""_row_num"":5},{""choice_list_name"":""sites"",""data_value"":""Skaramagas"",""display"":{""title"":{""text"":""Skaramagas""}},""_row_num"":6},{""choice_list_name"":""sites"",""data_value"":""Nea Kavala"",""display"":{""title"":{""text"":""Nea Kavala""}},""_row_num"":7},{""choice_list_name"":""sites"",""data_value"":""Softex"",""display"":{""title"":{""text"":""Softex""}},""_row_num"":8},{""choice_list_name"":""sites"",""data_value"":""Athens"",""display"":{""title"":{""text"":""Athens""}},""_row_num"":9}]"
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,ex_beneficiary_units_form
+Table,default,defaultViewType,string,SPREADSHEET
+Table,default,displayName,object,"{""text"":""Custom Beneficiary Entities""}"
+Table,security,defaultAccessOnCreation,string,HIDDEN
+Table,security,unverifiedUserCanCreate,boolean,false
