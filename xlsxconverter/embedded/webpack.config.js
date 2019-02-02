@@ -1,6 +1,4 @@
-var path = require('path');
-
-var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const path = require('path');
 
 module.exports = {
     entry: {
@@ -15,33 +13,10 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            [
-                                "env",
-                                {
-                                    "targets": {"browsers": ["Chrome >= 50", "Firefox >= 50"]}
-                                }
-                            ],
-                            "es2015" // TODO: fix this
-                        ],
-                        plugins: ['lodash']
-                    }
-                }
+                exclude: /(node_modules)/
             }
         ]
     },
-    'plugins': [
-        new LodashModuleReplacementPlugin({
-            'collections': true,
-            'paths': true,
-            'cloning': true,
-            'shorthands': true
-        })
-    ],
     devtool: "source-map",
     node: {
         fs: "empty" // XLSX compatibility problem, fixed in newer version

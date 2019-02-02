@@ -20,9 +20,6 @@ import _ from 'lodash';
 // Unicode extensions to standard RegExp...
 import XRegExp from './XRegExp-All-3.0.0-pre-2014-12-24.js';
 
-var XLSXConverter = {};
-(function(XLSXConverter){
-
     // Establish the root object, `window` in the browser, or `global` on the server.
     // var root = this;
     //
@@ -2539,7 +2536,7 @@ var XLSXConverter = {};
 
     ///////////////////////////////////////////////////////////////////////////
 
-    var processJSONWb = function(wbJson){
+    export function processJSONWb(wbJson){
         warnings.clear();
 
         _.each(wbJson, function(sheet, sheetName){
@@ -3233,20 +3230,6 @@ var XLSXConverter = {};
         return { xlsx: wbJson, specification: specification };
     };
 
-    // root.XLSXConverter = {
-    //     processJSONWorkbook : processJSONWb,
-    //     //Returns the warnings from the last workbook processed.
-    //     getWarnings: function(){
-    //         return warnings.toArray();
-    //     }
-    // };
-
-if (typeof exports !== 'undefined') {
-    exports.processJSONWb = processJSONWb;
-    exports.getWarnings = () => warnings.toArray();
+export function getWarnings() {
+    return warnings.toArray();
 }
-XLSXConverter.processJSONWb = processJSONWb;
-XLSXConverter.getWarnings = () => warnings.toArray();
-})(typeof exports !== 'undefined' ? exports : XLSXConverter);
-
-

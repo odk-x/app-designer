@@ -25,7 +25,7 @@ if (typeof XMLHttpRequest !== 'undefined'){
 
 import _ from 'lodash';
 
-exports.rootpath = 'http://localhost:8000';
+export let rootpath = 'http://localhost:8000';
 
 /**
  * Get the path to the framework's formDef.json file. Returns:
@@ -34,7 +34,7 @@ exports.rootpath = 'http://localhost:8000';
  *
  * Includes the file name and does not begin with a slash.
  */
-exports.getRelativePathToFrameworkFormDef = function(formDefJson) {
+export function getRelativePathToFrameworkFormDef(formDefJson) {
 
     var result = 'app/config/assets/framework/forms/framework' +
 		getFrameworkVariantFromFormDef(formDefJson) + '/formDef.json';
@@ -49,7 +49,7 @@ exports.getRelativePathToFrameworkFormDef = function(formDefJson) {
  *
  * Includes the file name and does not begin with a slash.
  */
-exports.getRelativePathToFrameworkDefinitionsJs = function(formDefJson) {
+export function getRelativePathToFrameworkDefinitionsJs(formDefJson) {
 
     var result = 'app/config/assets/framework/frameworkDefinitions' +
 		getFrameworkVariantFromFormDef(formDefJson) + '.js';
@@ -63,7 +63,7 @@ exports.getRelativePathToFrameworkDefinitionsJs = function(formDefJson) {
  *
  * Includes the file name and does not begin with a slash.
  */
-exports.getRelativePathToCommonDefinitionsJs = function(formDefJson) {
+export function getRelativePathToCommonDefinitionsJs(formDefJson) {
 
     var result = 'app/config/assets/commonDefinitions' +
 		getFrameworkVariantFromFormDef(formDefJson) + '.js';
@@ -73,13 +73,13 @@ exports.getRelativePathToCommonDefinitionsJs = function(formDefJson) {
 /**
  * Returns the name of the reserved framework form id.
  */
-var getFrameworkFormId = exports.getFrameworkFormId = function() {
+export function getFrameworkFormId() {
 
     return 'framework';
 
 };
 
-exports.defaultResponseFunction = function(error, response, body) {
+export function defaultResponseFunction(error, response, body) {
 
     if (error) {
         throw error;
@@ -104,7 +104,7 @@ exports.defaultResponseFunction = function(error, response, body) {
  * parameters: error, response, body. If this value isn't passed, the
  * defaultResponseFunction is passed instead.
  */
-exports.postFile = function(path, content, callback) {
+export function postFile(path, content, callback) {
 
     if (callback === undefined) {
         callback = exports.defaultResponseFunction;
@@ -120,7 +120,7 @@ exports.postFile = function(path, content, callback) {
     }
 };
 
-exports.postBase64File = function(path, content, callback) {
+export function postBase64File(path, content, callback) {
 
     if (callback === undefined) {
         callback = exports.defaultResponseFunction;
@@ -139,7 +139,7 @@ exports.postBase64File = function(path, content, callback) {
     }
 };
 
-var getValueOfSetting = function(formDef, settingName) {
+export function getValueOfSetting(formDef, settingName) {
 
     var settings = formDef.specification.settings;
 
@@ -162,7 +162,7 @@ var getValueOfSetting = function(formDef, settingName) {
  * a placeholder until I see if there is a standardized way to do this with the
  * xlsxconverter code.
  */
-var getTableIdFromFormDef = exports.getTableIdFromFormDef = function(formDef) {
+export function getTableIdFromFormDef(formDef) {
 
     var result = getValueOfSetting(formDef, 'table_id');
     return result;
@@ -174,7 +174,7 @@ var getTableIdFromFormDef = exports.getTableIdFromFormDef = function(formDef) {
  * placeholder until I see if there is a standardized way to do this with the
  * xlsxconverter code.
  */
-var getFormIdFromFormDef = exports.getFormIdFromFormDef = function(formDef) {
+export function getFormIdFromFormDef(formDef) {
 
     var result = getValueOfSetting(formDef, 'form_id');
     return result;
@@ -188,7 +188,7 @@ var getFormIdFromFormDef = exports.getFormIdFromFormDef = function(formDef) {
  * and framework form definitions. It is inserted into the filename to differentiate
  * among the independent demos.
  */
-var getFrameworkVariantFromFormDef = exports.getFrameworkVariantFromFormDef = function(formDef) {
+export function getFrameworkVariantFromFormDef(formDef) {
 
     var result = getValueOfSetting(formDef, 'framework_variant');
 	if ( result === undefined || result === null ) {
@@ -201,7 +201,7 @@ var getFrameworkVariantFromFormDef = exports.getFrameworkVariantFromFormDef = fu
 /**
  * Remove empty strings for the XLSXConverter
  */
-exports.removeEmptyStrings =  function(rObjArr){
+export function removeEmptyStrings(rObjArr){
     var outArr = [];
     _.each(rObjArr, function(row){
         var outRow = Object.create(row.__proto__);
@@ -222,7 +222,7 @@ exports.removeEmptyStrings =  function(rObjArr){
  * Determine whether to create defintion.csv and
  * properties.csv for the XLSXConverter
  */
-exports.shouldWriteOutDefinitionAndPropertiesCsv = function(formDefJson) {
+export function shouldWriteOutDefinitionAndPropertiesCsv(formDefJson) {
     var tableId = getTableIdFromFormDef(formDefJson);
     var formId = getFormIdFromFormDef(formDefJson);
 
@@ -245,7 +245,7 @@ exports.shouldWriteOutDefinitionAndPropertiesCsv = function(formDefJson) {
     return false;
 };
 
-exports.shouldWriteOutDefinitionsJs = function(formDefJson) {
+export function shouldWriteOutDefinitionsJs(formDefJson) {
     var tableId = getTableIdFromFormDef(formDefJson);
     var formId = getFormIdFromFormDef(formDefJson);
 
@@ -268,7 +268,7 @@ exports.shouldWriteOutDefinitionsJs = function(formDefJson) {
  *  Create definition.csv from inverted the formDef.json
  * for XLSXConverter processing
  */
-exports.createDefinitionCsvFromDataTableModel = function(dataTableModel) {
+export function createDefinitionCsvFromDataTableModel(dataTableModel) {
     var definitions = [];
     var jsonDefn;
 
@@ -320,7 +320,7 @@ exports.createDefinitionCsvFromDataTableModel = function(dataTableModel) {
  *  Create properties.csv from inverted the formDef.json
  * for XLSXConverter processing
  */
-exports.createPropertiesCsvFromDataTableModel = function(dataTableModel, formDefJson) {
+export function createPropertiesCsvFromDataTableModel(dataTableModel, formDefJson) {
     var properties = formDefJson.specification.properties;
 
     // Now write the properties in CSV format
@@ -341,7 +341,7 @@ exports.createPropertiesCsvFromDataTableModel = function(dataTableModel, formDef
  *  Create ...Definitions.js from the formDef.json
  * for XLSXConverter processing
  */
-exports.createDefinitionsJsFromDataTableModel = function(tableId, formDefJson) {
+export function createDefinitionsJsFromDataTableModel(tableId, formDefJson) {
 	var defJs;
 	var definitions;
 	if ( tableId === undefined || tableId === null ) {
@@ -361,7 +361,7 @@ exports.createDefinitionsJsFromDataTableModel = function(tableId, formDefJson) {
  * Double quote strings if they contain
  * a quote, carriage return, or line feed
  */
-var doubleQuoteString = exports.doubleQuoteString = function(str) {
+export function doubleQuoteString(str) {
     if (str !== null) {
         if (str.length === 0 ||
             str.indexOf("\r") !== -1 ||
