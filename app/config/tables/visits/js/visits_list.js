@@ -98,7 +98,7 @@ var displayGroup = function(idxStart) {
       item.attr('rowId', visitsResultSet.getData(i, 'customRowId'));
       item.attr('class', 'item_space');
 
-      item.text(visitsResultSet.getData(i, 'first_names') + ' ' + visitsResultSet.getData(i, 'last_names'));
+      item.text(visitsResultSet.getData(i, 'first_name'));
 
       /* Creates arrow icon (Nothing to edit here) */
       var chevron = $('<img>');
@@ -113,17 +113,6 @@ var displayGroup = function(idxStart) {
        * different details you want to add. You may replace occurrences of
        * 'field1' with new, specific label that are more meaningful to you
        */
-
-
-      var phoneNumber1 = $('<li>');
-      phoneNumber1.attr('class', 'detail');
-      phoneNumber1.text('Phone # 1' + ' : ' + (visitsResultSet.getData(i, 'telephone_number_1') || ''));
-      item.append(phoneNumber1);
-
-      var phoneNumber2 = $('<li>');
-      phoneNumber2.attr('class', 'detail');
-      phoneNumber2.text('Phone # 2' + ' : ' + (visitsResultSet.getData(i, 'telephone_number_2') || ''));
-      item.append(phoneNumber2);
 
       $('#list').append(item);
 
