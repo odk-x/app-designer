@@ -30,7 +30,7 @@ var deliveriesCBFailure = function(error) {
 };
 
 var firstLoad = function() {
-  resumeFn(0);
+    resumeFn(0);
 };
 
 /**
@@ -63,18 +63,11 @@ var resumeFn = function(fIdxStart) {
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
-                odkTables.openTableToListViewArbitraryQuery(
+                odkTables.openDetailView(
                     null,
-                    'visits',
-                    'SELECT VB._id, household._id AS customRowId, telephone_number_1, telephone_number_2, first_names, last_names, custom_visit_table_id, custom_visit_form_id\n' +
-                    'FROM (SELECT *\n' +
-                    '      FROM visits\n' +
-                    '             INNER JOIN beneficiary_entities ON visits.beneficiary_unit_id = beneficiary_entities._id\n' +
-                    '      WHERE visits.visit_program_id = ?) AS VB\n' +
-                    '       INNER JOIN household ON custom_beneficiary_entity_row_id = household._id',
-                    [rowId],
-                    'config/tables/visits/html/visits_list.html'
-                );
+                    tableId,
+                    rowId,
+                    'config/tables/visit_programs/html/visit_programs_detail.html');
             }
         });
     }
@@ -86,7 +79,7 @@ var resumeFn = function(fIdxStart) {
  * represented as a list item. If you touch a particular list item, it will
  * expand with more details (that you choose to include). Clicking on this
  * expanded portion will take you to the more detailed view.
-*/
+ */
 var displayGroup = function(idxStart) {
     console.log('displayGroup called. idxStart: ' + idxStart);
 
@@ -100,47 +93,47 @@ var displayGroup = function(idxStart) {
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     for (var i = idxStart; i < idxStart + chunk; i++) {
-      if (i >= visitProgramsResultSet.getCount()) {
-        break;
-      }
-      /* Creates the item space */
-      // We're going to select the ul and then start adding things to it.
-      //var item = $('#list').append('<li>');
-      var item = $('<li>');
-      item.attr('rowId', visitProgramsResultSet.getRowId(i));
-      item.attr('class', 'item_space');
+        if (i >= visitProgramsResultSet.getCount()) {
+            break;
+        }
+        /* Creates the item space */
+        // We're going to select the ul and then start adding things to it.
+        //var item = $('#list').append('<li>');
+        var item = $('<li>');
+        item.attr('rowId', visitProgramsResultSet.getRowId(i));
+        item.attr('class', 'item_space');
 
-      item.text(visitProgramsResultSet.getData(i, 'name'));
+        item.text(visitProgramsResultSet.getData(i, 'name'));
 
-      /* Creates arrow icon (Nothing to edit here) */
-      var chevron = $('<img>');
-      chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
-      chevron.attr('class', 'chevron');
-      item.append(chevron);
+        /* Creates arrow icon (Nothing to edit here) */
+        var chevron = $('<img>');
+        chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
+        chevron.attr('class', 'chevron');
+        item.append(chevron);
 
-      /**
-       * Adds other data/details in item space.
-       * Replace COLUMN_NAME with the column whose data you want to display
-       * as an extra detail etc. Duplicate the following block of code for
-       * different details you want to add. You may replace occurrences of
-       * 'field1' with new, specific label that are more meaningful to you
-       */
-
-
-      // var field2 = $('<li>');
-      // field2.attr('class', 'detail');
-      // var beneficiary_entity_id = visitProgramsResultSet.getData(i, 'beneficiary_entity_id');
-      // field2.text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ' : ' + beneficiary_entity_id);
-      // item.append(field2);
+        /**
+         * Adds other data/details in item space.
+         * Replace COLUMN_NAME with the column whose data you want to display
+         * as an extra detail etc. Duplicate the following block of code for
+         * different details you want to add. You may replace occurrences of
+         * 'field1' with new, specific label that are more meaningful to you
+         */
 
 
+        // var field2 = $('<li>');
+        // field2.attr('class', 'detail');
+        // var beneficiary_entity_id = visitProgramsResultSet.getData(i, 'beneficiary_entity_id');
+        // field2.text(odkCommon.localizeText(locale, 'beneficiary_entity_id') + ' : ' + beneficiary_entity_id);
+        // item.append(field2);
 
-      $('#list').append(item);
 
-      // don't append the last one to avoid the fencepost problem
-      var borderDiv = $('<div>');
-      borderDiv.addClass('divider');
-      $('#list').append(borderDiv);
+
+        $('#list').append(item);
+
+        // don't append the last one to avoid the fencepost problem
+        var borderDiv = $('<div>');
+        borderDiv.addClass('divider');
+        $('#list').append(borderDiv);
 
     }
     if (i < visitProgramsResultSet.getCount()) {
