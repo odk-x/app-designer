@@ -6,10 +6,10 @@
   },
   "dependencies": {
     "lodash": "^4.17.11",
-    "xlsx": "0.7.12"
+    "xlsx": "^0.14.1"
   },
   "devDependencies": {
-    "webpack": "^4.29.1",
-    "webpack-cli": "^3.2.1"
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
   }
 }
