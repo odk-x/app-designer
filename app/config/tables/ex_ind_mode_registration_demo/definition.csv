@@ -7,6 +7,5 @@ gender,gender,string,[]
 id_number,id_number,string,[]
 id_type,id_type,string,[]
 last_name,last_name,string,[]
-verify_user,verify_user,undefined,[]
 vulnerability,vulnerability,array,"[""vulnerability_items""]"
 vulnerability_items,items,string,[]

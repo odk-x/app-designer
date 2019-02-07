@@ -2,14 +2,8 @@
   "xlsx": {
     "survey": [
       {
-        "type": "assign",
-        "name": "verify_user",
-        "calculation": "null",
-        "_row_num": 2
-      },
-      {
         "clause": "begin screen",
-        "_row_num": 3
+        "_row_num": 2
       },
       {
         "type": "string",
@@ -23,7 +17,7 @@
           }
         },
         "required": true,
-        "_row_num": 4
+        "_row_num": 3
       },
       {
         "type": "string",
@@ -37,21 +31,21 @@
           }
         },
         "required": true,
+        "_row_num": 4
+      },
+      {
+        "clause": "end screen",
         "_row_num": 5
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 6
       },
       {
         "type": "assign",
         "name": "first_last_name",
         "calculation": "data('first_name') + \" \" + data('last_name')",
-        "_row_num": 6
-      },
-      {
-        "clause": "end screen",
         "_row_num": 7
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 8
       },
       {
         "type": "date",
@@ -62,7 +56,7 @@
           }
         },
         "required": true,
-        "_row_num": 9
+        "_row_num": 8
       },
       {
         "type": "select_one",
@@ -74,21 +68,21 @@
         },
         "values_list": "genders",
         "required": true,
-        "_row_num": 10
+        "_row_num": 9
       },
       {
         "clause": "end screen",
-        "_row_num": 11
+        "_row_num": 10
       },
       {
         "clause": "begin screen",
-        "_row_num": 12
+        "_row_num": 11
       },
       {
         "type": "assign",
         "name": "age",
         "calculation": "calculates.age()",
-        "_row_num": 13
+        "_row_num": 12
       },
       {
         "type": "string",
@@ -99,7 +93,7 @@
           }
         },
         "required": true,
-        "_row_num": 14
+        "_row_num": 13
       },
       {
         "type": "select_one",
@@ -111,15 +105,15 @@
         },
         "values_list": "id_types_list",
         "required": true,
-        "_row_num": 15
+        "_row_num": 14
       },
       {
         "clause": "end screen",
-        "_row_num": 16
+        "_row_num": 15
       },
       {
         "clause": "begin screen",
-        "_row_num": 17
+        "_row_num": 16
       },
       {
         "type": "select_multiple",
@@ -131,11 +125,11 @@
         },
         "values_list": "vulnerability_list",
         "required": true,
-        "_row_num": 18
+        "_row_num": 17
       },
       {
         "clause": "end screen",
-        "_row_num": 19
+        "_row_num": 18
       }
     ],
     "settings": [
@@ -219,7 +213,7 @@
     "choices": [
       {
         "choice_list_name": "genders",
-        "data_value": "Male",
+        "data_value": "male",
         "display": {
           "title": {
             "text": "Male"
@@ -229,7 +223,7 @@
       },
       {
         "choice_list_name": "genders",
-        "data_value": "Female",
+        "data_value": "female",
         "display": {
           "title": {
             "text": "Female"
@@ -238,144 +232,104 @@
         "_row_num": 3
       },
       {
-        "choice_list_name": "sites",
-        "data_value": "a0",
-        "display": {
-          "title": {
-            "text": "Site A"
-          }
-        },
-        "_row_num": 5
-      },
-      {
-        "choice_list_name": "sites",
-        "data_value": "a1",
-        "display": {
-          "title": {
-            "text": "Site B"
-          }
-        },
-        "_row_num": 6
-      },
-      {
-        "choice_list_name": "sites",
-        "data_value": "a2",
-        "display": {
-          "title": {
-            "text": "Site C"
-          }
-        },
-        "_row_num": 7
-      },
-      {
-        "choice_list_name": "sites",
-        "data_value": "a3",
-        "display": {
-          "title": {
-            "text": "Site D"
-          }
-        },
-        "_row_num": 8
-      },
-      {
         "choice_list_name": "yes_no",
-        "data_value": "TRUE",
+        "data_value": "yes",
         "display": {
           "title": {
             "text": "Yes"
           }
         },
-        "_row_num": 10
+        "_row_num": 5
       },
       {
         "choice_list_name": "yes_no",
-        "data_value": "FALSE",
+        "data_value": "no",
         "display": {
           "title": {
             "text": "No"
           }
         },
-        "_row_num": 11
+        "_row_num": 6
       },
       {
         "choice_list_name": "id_types_list",
-        "data_value": "Registration Number",
+        "data_value": "registration_number",
         "display": {
           "title": {
             "text": "Registration Number"
           }
         },
-        "_row_num": 13
+        "_row_num": 8
       },
       {
         "choice_list_name": "id_types_list",
-        "data_value": "Case Number",
+        "data_value": "case_number",
         "display": {
           "title": {
             "text": "Case Number"
           }
         },
-        "_row_num": 14
+        "_row_num": 9
       },
       {
         "choice_list_name": "id_types_list",
-        "data_value": "Asylum Card",
+        "data_value": "asylum _card",
         "display": {
           "title": {
             "text": "Asylum Card"
           }
         },
-        "_row_num": 15
+        "_row_num": 10
       },
       {
         "choice_list_name": "id_types_list",
-        "data_value": "Police Notes",
+        "data_value": "police _notes",
         "display": {
           "title": {
             "text": "Police Notes"
           }
         },
-        "_row_num": 16
+        "_row_num": 11
       },
       {
         "choice_list_name": "vulnerability_list",
-        "data_value": "None",
+        "data_value": "none",
         "display": {
           "title": {
             "text": "None"
           }
         },
-        "_row_num": 18
+        "_row_num": 13
       },
       {
         "choice_list_name": "vulnerability_list",
-        "data_value": "Disability",
+        "data_value": "disability",
         "display": {
           "title": {
             "text": "Disability"
           }
         },
-        "_row_num": 19
+        "_row_num": 14
       },
       {
         "choice_list_name": "vulnerability_list",
-        "data_value": "Unaccompanied minors",
+        "data_value": "unaccompanied_minors",
         "display": {
           "title": {
             "text": "Unaccompanied minors"
           }
         },
-        "_row_num": 20
+        "_row_num": 15
       },
       {
         "choice_list_name": "vulnerability_list",
-        "data_value": "Single-parent family",
+        "data_value": "single_parent_family",
         "display": {
           "title": {
             "text": "Single-parent family"
           }
         },
-        "_row_num": 21
+        "_row_num": 16
       }
     ],
     "calculates": [
@@ -531,7 +485,7 @@
       "genders": [
         {
           "choice_list_name": "genders",
-          "data_value": "Male",
+          "data_value": "male",
           "display": {
             "title": {
               "text": "Male"
@@ -541,7 +495,7 @@
         },
         {
           "choice_list_name": "genders",
-          "data_value": "Female",
+          "data_value": "female",
           "display": {
             "title": {
               "text": "Female"
@@ -550,152 +504,110 @@
           "_row_num": 3
         }
       ],
-      "sites": [
-        {
-          "choice_list_name": "sites",
-          "data_value": "a0",
-          "display": {
-            "title": {
-              "text": "Site A"
-            }
-          },
-          "_row_num": 5
-        },
-        {
-          "choice_list_name": "sites",
-          "data_value": "a1",
-          "display": {
-            "title": {
-              "text": "Site B"
-            }
-          },
-          "_row_num": 6
-        },
-        {
-          "choice_list_name": "sites",
-          "data_value": "a2",
-          "display": {
-            "title": {
-              "text": "Site C"
-            }
-          },
-          "_row_num": 7
-        },
-        {
-          "choice_list_name": "sites",
-          "data_value": "a3",
-          "display": {
-            "title": {
-              "text": "Site D"
-            }
-          },
-          "_row_num": 8
-        }
-      ],
       "yes_no": [
         {
           "choice_list_name": "yes_no",
-          "data_value": "TRUE",
+          "data_value": "yes",
           "display": {
             "title": {
               "text": "Yes"
             }
           },
-          "_row_num": 10
+          "_row_num": 5
         },
         {
           "choice_list_name": "yes_no",
-          "data_value": "FALSE",
+          "data_value": "no",
           "display": {
             "title": {
               "text": "No"
             }
           },
-          "_row_num": 11
+          "_row_num": 6
         }
       ],
       "id_types_list": [
         {
           "choice_list_name": "id_types_list",
-          "data_value": "Registration Number",
+          "data_value": "registration_number",
           "display": {
             "title": {
               "text": "Registration Number"
             }
           },
-          "_row_num": 13
+          "_row_num": 8
         },
         {
           "choice_list_name": "id_types_list",
-          "data_value": "Case Number",
+          "data_value": "case_number",
           "display": {
             "title": {
               "text": "Case Number"
             }
           },
-          "_row_num": 14
+          "_row_num": 9
         },
         {
           "choice_list_name": "id_types_list",
-          "data_value": "Asylum Card",
+          "data_value": "asylum _card",
           "display": {
             "title": {
               "text": "Asylum Card"
             }
           },
-          "_row_num": 15
+          "_row_num": 10
         },
         {
           "choice_list_name": "id_types_list",
-          "data_value": "Police Notes",
+          "data_value": "police _notes",
           "display": {
             "title": {
               "text": "Police Notes"
             }
           },
-          "_row_num": 16
+          "_row_num": 11
         }
       ],
       "vulnerability_list": [
         {
           "choice_list_name": "vulnerability_list",
-          "data_value": "None",
+          "data_value": "none",
           "display": {
             "title": {
               "text": "None"
             }
           },
-          "_row_num": 18
+          "_row_num": 13
         },
         {
           "choice_list_name": "vulnerability_list",
-          "data_value": "Disability",
+          "data_value": "disability",
           "display": {
             "title": {
               "text": "Disability"
             }
           },
-          "_row_num": 19
+          "_row_num": 14
         },
         {
           "choice_list_name": "vulnerability_list",
-          "data_value": "Unaccompanied minors",
+          "data_value": "unaccompanied_minors",
           "display": {
             "title": {
               "text": "Unaccompanied minors"
             }
           },
-          "_row_num": 20
+          "_row_num": 15
         },
         {
           "choice_list_name": "vulnerability_list",
-          "data_value": "Single-parent family",
+          "data_value": "single_parent_family",
           "display": {
             "title": {
               "text": "Single-parent family"
             }
           },
-          "_row_num": 21
+          "_row_num": 16
         }
       ]
     },
@@ -715,7 +627,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 3,
             "section_name": "survey"
           },
           {
@@ -729,7 +641,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 4,
             "section_name": "survey"
           },
           {
@@ -754,7 +666,7 @@
         "elementType": "date",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
@@ -779,7 +691,7 @@
         "valuesList": "genders",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "survey"
           },
           {
@@ -798,7 +710,7 @@
         "valuesList": "vulnerability_list",
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 17,
             "section_name": "survey"
           },
           {
@@ -812,7 +724,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 13,
             "section_name": "survey"
           },
           {
@@ -827,7 +739,7 @@
         "valuesList": "id_types_list",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 14,
             "section_name": "survey"
           },
           {
@@ -836,15 +748,6 @@
           }
         ],
         "elementKey": "id_type"
-      },
-      "verify_user": {
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          }
-        ],
-        "elementKey": "verify_user"
       }
     },
     "section_names": [
@@ -869,11 +772,11 @@
               }
             },
             "required": true,
-            "_row_num": 4,
-            "__rowNum__": 3,
+            "_row_num": 3,
+            "__rowNum__": 2,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen3",
+            "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
           {
@@ -888,11 +791,11 @@
               }
             },
             "required": true,
-            "_row_num": 5,
-            "__rowNum__": 4,
+            "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen3",
+            "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 1
           },
           {
@@ -904,11 +807,11 @@
               }
             },
             "required": true,
-            "_row_num": 9,
-            "__rowNum__": 8,
+            "_row_num": 8,
+            "__rowNum__": 7,
             "_token_type": "prompt",
             "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 2
           },
           {
@@ -921,11 +824,11 @@
             },
             "values_list": "genders",
             "required": true,
-            "_row_num": 10,
-            "__rowNum__": 9,
+            "_row_num": 9,
+            "__rowNum__": 8,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_branch_label_enclosing_screen": "survey/_screen6",
             "promptIdx": 3
           },
           {
@@ -937,11 +840,11 @@
               }
             },
             "required": true,
-            "_row_num": 14,
-            "__rowNum__": 13,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
             "_type": "string",
-            "_branch_label_enclosing_screen": "survey/_screen12",
+            "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 4
           },
           {
@@ -954,11 +857,11 @@
             },
             "values_list": "id_types_list",
             "required": true,
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 14,
+            "__rowNum__": 13,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen12",
+            "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 5
           },
           {
@@ -971,19 +874,19 @@
             },
             "values_list": "vulnerability_list",
             "required": true,
-            "_row_num": 18,
-            "__rowNum__": 17,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "prompt",
             "_type": "select_multiple",
-            "_branch_label_enclosing_screen": "survey/_screen17",
+            "_branch_label_enclosing_screen": "survey/_screen16",
             "promptIdx": 6
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 20,
-            "_branch_label_enclosing_screen": "survey/_screen20",
+            "_row_num": 19,
+            "_branch_label_enclosing_screen": "survey/_screen19",
             "promptIdx": 7
           }
         ],
@@ -1000,99 +903,90 @@
         },
         "operations": [
           {
-            "type": "assign",
-            "name": "verify_user",
-            "calculation": "null",
+            "clause": "begin screen",
             "_row_num": 2,
             "__rowNum__": 1,
-            "_token_type": "assign",
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 5,
+              "__rowNum__": 4,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
             "clause": "begin screen",
-            "_row_num": 3,
-            "__rowNum__": 2,
+            "_row_num": 6,
+            "__rowNum__": 5,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 7,
-              "__rowNum__": 6,
+              "_row_num": 10,
+              "__rowNum__": 9,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nassign('first_last_name', data('first_name') + \" \" + data('last_name'));\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('first_last_name', data('first_name') + \" \" + data('last_name'));\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
             "clause": "begin screen",
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 11,
+            "__rowNum__": 10,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 11,
-              "__rowNum__": 10,
+              "_row_num": 15,
+              "__rowNum__": 14,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('age', calculates.age());\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
             "clause": "begin screen",
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "_row_num": 16,
+            "__rowNum__": 15,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 16,
-              "__rowNum__": 15,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nassign('age', calculates.age());\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 3
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 17,
-            "__rowNum__": 16,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 19,
-              "__rowNum__": 18,
+              "_row_num": 18,
+              "__rowNum__": 17,
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
+            "operationIdx": 3
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 20,
-            "operationIdx": 5
+            "_row_num": 19,
+            "operationIdx": 4
           },
           {
-            "_row_num": 20,
+            "_row_num": 19,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 6
+            "operationIdx": 5
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 20,
-            "operationIdx": 7
+            "_row_num": 19,
+            "operationIdx": 6
           }
         ],
         "branch_label_map": {
-          "_screen3": 1,
-          "_screen8": 2,
-          "_screen12": 3,
-          "_screen17": 4,
-          "_contents": 6,
-          "_screen20": 6
+          "_screen2": 0,
+          "_screen6": 1,
+          "_screen11": 2,
+          "_screen16": 3,
+          "_contents": 5,
+          "_screen19": 5
         }
       },
       "initial": {
@@ -1209,7 +1103,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 3,
             "section_name": "survey"
           },
           {
@@ -1226,7 +1120,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 4,
             "section_name": "survey"
           },
           {
@@ -1257,7 +1151,7 @@
         "elementType": "date",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "survey"
           },
           {
@@ -1288,7 +1182,7 @@
         "valuesList": "genders",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "survey"
           },
           {
@@ -1314,7 +1208,7 @@
         "valuesList": "vulnerability_list",
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 17,
             "section_name": "survey"
           },
           {
@@ -1334,7 +1228,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 13,
             "section_name": "survey"
           },
           {
@@ -1352,7 +1246,7 @@
         "valuesList": "id_types_list",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 14,
             "section_name": "survey"
           },
           {
@@ -1364,18 +1258,6 @@
         "elementName": "id_type",
         "elementSet": "data",
         "elementPath": "id_type"
-      },
-      "verify_user": {
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "survey"
-          }
-        ],
-        "elementKey": "verify_user",
-        "elementName": "verify_user",
-        "elementSet": "data",
-        "elementPath": "verify_user"
       },
       "vulnerability_items": {
         "type": "string",
@@ -1504,21 +1386,21 @@
         "_aspect": "gender",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"genders\",\"data_value\":\"Male\",\"display\":{\"title\":{\"text\":\"Male\"}},\"_row_num\":2},{\"choice_list_name\":\"genders\",\"data_value\":\"Female\",\"display\":{\"title\":{\"text\":\"Female\"}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"genders\",\"data_value\":\"male\",\"display\":{\"title\":{\"text\":\"Male\"}},\"_row_num\":2},{\"choice_list_name\":\"genders\",\"data_value\":\"female\",\"display\":{\"title\":{\"text\":\"Female\"}},\"_row_num\":3}]"
       },
       {
         "_partition": "Column",
         "_aspect": "id_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"id_types_list\",\"data_value\":\"Registration Number\",\"display\":{\"title\":{\"text\":\"Registration Number\"}},\"_row_num\":13},{\"choice_list_name\":\"id_types_list\",\"data_value\":\"Case Number\",\"display\":{\"title\":{\"text\":\"Case Number\"}},\"_row_num\":14},{\"choice_list_name\":\"id_types_list\",\"data_value\":\"Asylum Card\",\"display\":{\"title\":{\"text\":\"Asylum Card\"}},\"_row_num\":15},{\"choice_list_name\":\"id_types_list\",\"data_value\":\"Police Notes\",\"display\":{\"title\":{\"text\":\"Police Notes\"}},\"_row_num\":16}]"
+        "_value": "[{\"choice_list_name\":\"id_types_list\",\"data_value\":\"registration_number\",\"display\":{\"title\":{\"text\":\"Registration Number\"}},\"_row_num\":8},{\"choice_list_name\":\"id_types_list\",\"data_value\":\"case_number\",\"display\":{\"title\":{\"text\":\"Case Number\"}},\"_row_num\":9},{\"choice_list_name\":\"id_types_list\",\"data_value\":\"asylum _card\",\"display\":{\"title\":{\"text\":\"Asylum Card\"}},\"_row_num\":10},{\"choice_list_name\":\"id_types_list\",\"data_value\":\"police _notes\",\"display\":{\"title\":{\"text\":\"Police Notes\"}},\"_row_num\":11}]"
       },
       {
         "_partition": "Column",
         "_aspect": "vulnerability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"vulnerability_list\",\"data_value\":\"None\",\"display\":{\"title\":{\"text\":\"None\"}},\"_row_num\":18},{\"choice_list_name\":\"vulnerability_list\",\"data_value\":\"Disability\",\"display\":{\"title\":{\"text\":\"Disability\"}},\"_row_num\":19},{\"choice_list_name\":\"vulnerability_list\",\"data_value\":\"Unaccompanied minors\",\"display\":{\"title\":{\"text\":\"Unaccompanied minors\"}},\"_row_num\":20},{\"choice_list_name\":\"vulnerability_list\",\"data_value\":\"Single-parent family\",\"display\":{\"title\":{\"text\":\"Single-parent family\"}},\"_row_num\":21}]"
+        "_value": "[{\"choice_list_name\":\"vulnerability_list\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":\"None\"}},\"_row_num\":13},{\"choice_list_name\":\"vulnerability_list\",\"data_value\":\"disability\",\"display\":{\"title\":{\"text\":\"Disability\"}},\"_row_num\":14},{\"choice_list_name\":\"vulnerability_list\",\"data_value\":\"unaccompanied_minors\",\"display\":{\"title\":{\"text\":\"Unaccompanied minors\"}},\"_row_num\":15},{\"choice_list_name\":\"vulnerability_list\",\"data_value\":\"single_parent_family\",\"display\":{\"title\":{\"text\":\"Single-parent family\"}},\"_row_num\":16}]"
       },
       {
         "_partition": "FormType",
