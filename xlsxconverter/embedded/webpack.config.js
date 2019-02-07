@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        'converter': ['./lib/devenv-util', './convert.js']
+        'converter': ['./convert.js']
     },
     output: {
         filename: '[name].js',
@@ -17,11 +17,5 @@ module.exports = {
             }
         ]
     },
-    devtool: "source-map",
-    node: {
-        fs: "empty" // XLSX compatibility problem, fixed in newer version
-    },
-    externals: [
-        { "./cptable": "var cptable" } // XLSX library compatibility problem, fixed in newer version
-    ]
+    devtool: "source-map"
 };
