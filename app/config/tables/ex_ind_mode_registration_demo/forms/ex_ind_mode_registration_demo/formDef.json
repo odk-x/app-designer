@@ -152,7 +152,7 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Custom Individual Form"
+            "text": "Individual"
           }
         },
         "_row_num": 5
@@ -442,7 +442,7 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Custom Individual Form"
+            "text": "Individual"
           }
         },
         "_row_num": 5
@@ -475,7 +475,7 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "Custom Individual Form"
+            "text": "Individual"
           }
         },
         "_row_num": 5
@@ -1008,7 +1008,7 @@
             "promptIdx": 0,
             "display": {
               "title": {
-                "text": "Custom Individual Form"
+                "text": "Individual"
               }
             },
             "_branch_label_enclosing_screen": "survey/0"
@@ -1428,7 +1428,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"Custom Individual Form\"}"
+        "_value": "{\"text\":\"Individual\"}"
       },
       {
         "_partition": "Table",

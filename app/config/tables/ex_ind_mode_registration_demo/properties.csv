@@ -5,6 +5,6 @@ Column,vulnerability,displayChoicesList,object,"[{""choice_list_name"":""vulnera
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,ex_ind_mode_registration_demo
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":""Custom Individual Form""}"
+Table,default,displayName,object,"{""text"":""Individual""}"
 Table,security,defaultAccessOnCreation,string,HIDDEN
 Table,security,unverifiedUserCanCreate,boolean,false
