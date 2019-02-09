@@ -271,8 +271,8 @@ window.odkFrameworkDefinitions = {
     "opening_survey_instance_detail": {
       "string_token": "opening_survey_instance_detail",
       "text": {
-        "default": "{{#if display_field}}\n        <p>You are at the start of instance: </p>\n        <p>\"{{display_field}}\"</p> \n  {{else}}\n        <p>You are at the start of a new instance.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>Last saved:</p> \n            <p>{{last_save_date}}</p>\n        {{/if}}\n        <hr>",
-        "es": "{{#if display_field}}\n        <p>estás en el inicio de la instancia: </p>\n        <p>\"{{display_field}}\"</p> \n  {{else}}\n        <p>estás en el inicio de una nueva instancia.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>guardado por última vez:</p> \n            <p>{{last_save_date}}</p>\n        {{/if}}\n        <hr>"
+        "default": "{{#if display_field}}&#10;        <p>You are at the start of instance: </p>&#10;        <p>\"{{display_field}}\"</p> &#10;  {{else}}&#10;        <p>You are at the start of a new instance.</p>&#10;  {{/if}}&#10;        <hr>&#10;        {{#if last_save_date}}&#10;            <p>Last saved:</p> &#10;            <p>{{last_save_date}}</p>&#10;        {{/if}}&#10;        <hr>&#10;",
+        "es": "&#10;  {{#if display_field}}&#10;        <p>estás en el inicio de la instancia: </p>&#10;        <p>\"{{display_field}}\"</p> &#10;  {{else}}&#10;        <p>estás en el inicio de una nueva instancia.</p>&#10;  {{/if}}&#10;        <hr>&#10;        {{#if last_save_date}}&#10;            <p>guardado por última vez:</p> &#10;            <p>{{last_save_date}}</p>&#10;        {{/if}}&#10;        <hr>&#10;"
       },
       "_row_num": 36
     },

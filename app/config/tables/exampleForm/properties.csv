@@ -6,4 +6,4 @@ Column,visited_seattle,displayChoicesList,object,"[{""choice_list_name"":""yesno
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,exampleForm
 Table,default,defaultViewType,string,SPREADSHEET
-Table,default,displayName,object,"{""text"":{""english"":""Example Form"",""hindi"":""hindi exampleform"",""default"":""Example Form""}}"
+Table,default,displayName,object,"{""text"":{""en"":""Example Form"",""hi"":""hindi exampleform"",""default"":""Example Form""}}"

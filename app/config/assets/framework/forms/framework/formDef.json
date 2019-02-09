@@ -556,24 +556,24 @@
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
               "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
           }
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
-        "showContents": false,
+        "showContents": 0,
         "_row_num": 5
       },
       {
-        "setting_name": "english",
+        "setting_name": "en",
         "display": {
           "locale": {
             "text": {
-              "english": "English",
-              "hindi": "English (as hindi name)",
+              "en": "English",
+              "hi": "अंग्रेज़ी",
               "es": "Inglés",
               "default": "English"
             }
@@ -582,12 +582,12 @@
         "_row_num": 7
       },
       {
-        "setting_name": "hindi",
+        "setting_name": "hi",
         "display": {
           "locale": {
             "text": {
-              "english": "Hindi",
-              "hindi": "Hindi (as hindi name)",
+              "en": "Hindi",
+              "hi": "हिंदी",
               "es": "Hindi",
               "default": "Hindi"
             }
@@ -600,8 +600,8 @@
         "display": {
           "locale": {
             "text": {
-              "english": "Spanish",
-              "hindi": "Spanish (as hindi name)",
+              "en": "Spanish",
+              "hi": "स्पेनिश",
               "es": "Español",
               "default": "Spanish"
             }
@@ -1154,8 +1154,8 @@
       {
         "string_token": "opening_survey_instance_detail",
         "text": {
-          "default": "{{#if display_field}}\n        <p>You are at the start of instance: </p>\n        <p>\"{{display_field}}\"</p> \n  {{else}}\n        <p>You are at the start of a new instance.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>Last saved:</p> \n            <p>{{last_save_date}}</p>\n        {{/if}}\n        <hr>",
-          "es": "{{#if display_field}}\n        <p>estás en el inicio de la instancia: </p>\n        <p>\"{{display_field}}\"</p> \n  {{else}}\n        <p>estás en el inicio de una nueva instancia.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>guardado por última vez:</p> \n            <p>{{last_save_date}}</p>\n        {{/if}}\n        <hr>"
+          "default": "{{#if display_field}}&#10;        <p>You are at the start of instance: </p>&#10;        <p>\"{{display_field}}\"</p> &#10;  {{else}}&#10;        <p>You are at the start of a new instance.</p>&#10;  {{/if}}&#10;        <hr>&#10;        {{#if last_save_date}}&#10;            <p>Last saved:</p> &#10;            <p>{{last_save_date}}</p>&#10;        {{/if}}&#10;        <hr>&#10;",
+          "es": "&#10;  {{#if display_field}}&#10;        <p>estás en el inicio de la instancia: </p>&#10;        <p>\"{{display_field}}\"</p> &#10;  {{else}}&#10;        <p>estás en el inicio de una nueva instancia.</p>&#10;  {{/if}}&#10;        <hr>&#10;        {{#if last_save_date}}&#10;            <p>guardado por última vez:</p> &#10;            <p>{{last_save_date}}</p>&#10;        {{/if}}&#10;        <hr>&#10;"
         },
         "_row_num": 36
       },
@@ -1393,24 +1393,24 @@
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
               "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
           }
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
-        "showContents": false,
+        "showContents": 0,
         "_row_num": 5
       },
-      "english": {
-        "setting_name": "english",
+      "en": {
+        "setting_name": "en",
         "display": {
           "locale": {
             "text": {
-              "english": "English",
-              "hindi": "English (as hindi name)",
+              "en": "English",
+              "hi": "अंग्रेज़ी",
               "es": "Inglés",
               "default": "English"
             }
@@ -1418,13 +1418,13 @@
         },
         "_row_num": 7
       },
-      "hindi": {
-        "setting_name": "hindi",
+      "hi": {
+        "setting_name": "hi",
         "display": {
           "locale": {
             "text": {
-              "english": "Hindi",
-              "hindi": "Hindi (as hindi name)",
+              "en": "Hindi",
+              "hi": "हिंदी",
               "es": "Hindi",
               "default": "Hindi"
             }
@@ -1437,8 +1437,8 @@
         "display": {
           "locale": {
             "text": {
-              "english": "Spanish",
-              "hindi": "Spanish (as hindi name)",
+              "en": "Spanish",
+              "hi": "स्पेनिश",
               "es": "Español",
               "default": "Spanish"
             }
@@ -1454,36 +1454,36 @@
             "display": {
               "locale": {
                 "text": {
-                  "english": "English",
-                  "hindi": "English (as hindi name)",
+                  "en": "English",
+                  "hi": "अंग्रेज़ी",
                   "es": "Inglés",
                   "default": "English"
                 }
               }
             },
             "_row_num": 7,
-            "name": "english"
+            "name": "en"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Hindi",
-                  "hindi": "Hindi (as hindi name)",
+                  "en": "Hindi",
+                  "hi": "हिंदी",
                   "es": "Hindi",
                   "default": "Hindi"
                 }
               }
             },
             "_row_num": 8,
-            "name": "hindi"
+            "name": "hi"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Spanish",
-                  "hindi": "Spanish (as hindi name)",
+                  "en": "Spanish",
+                  "hi": "स्पेनिश",
                   "es": "Español",
                   "default": "Spanish"
                 }
@@ -1497,22 +1497,22 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "english"
+        "value": "en"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
               "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
           }
         },
         "comments": "The title of the 'survey' section (a.k.a. form title)",
-        "showContents": false,
+        "showContents": 0,
         "_row_num": 5
       }
     },
@@ -2063,8 +2063,8 @@
         "opening_survey_instance_detail": {
           "string_token": "opening_survey_instance_detail",
           "text": {
-            "default": "{{#if display_field}}\n        <p>You are at the start of instance: </p>\n        <p>\"{{display_field}}\"</p> \n  {{else}}\n        <p>You are at the start of a new instance.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>Last saved:</p> \n            <p>{{last_save_date}}</p>\n        {{/if}}\n        <hr>",
-            "es": "{{#if display_field}}\n        <p>estás en el inicio de la instancia: </p>\n        <p>\"{{display_field}}\"</p> \n  {{else}}\n        <p>estás en el inicio de una nueva instancia.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>guardado por última vez:</p> \n            <p>{{last_save_date}}</p>\n        {{/if}}\n        <hr>"
+            "default": "{{#if display_field}}&#10;        <p>You are at the start of instance: </p>&#10;        <p>\"{{display_field}}\"</p> &#10;  {{else}}&#10;        <p>You are at the start of a new instance.</p>&#10;  {{/if}}&#10;        <hr>&#10;        {{#if last_save_date}}&#10;            <p>Last saved:</p> &#10;            <p>{{last_save_date}}</p>&#10;        {{/if}}&#10;        <hr>&#10;",
+            "es": "&#10;  {{#if display_field}}&#10;        <p>estás en el inicio de la instancia: </p>&#10;        <p>\"{{display_field}}\"</p> &#10;  {{else}}&#10;        <p>estás en el inicio de una nueva instancia.</p>&#10;  {{/if}}&#10;        <hr>&#10;        {{#if last_save_date}}&#10;            <p>guardado por última vez:</p> &#10;            <p>{{last_save_date}}</p>&#10;        {{/if}}&#10;        <hr>&#10;"
           },
           "_row_num": 36
         },
@@ -2273,36 +2273,36 @@
             "display": {
               "locale": {
                 "text": {
-                  "english": "English",
-                  "hindi": "English (as hindi name)",
+                  "en": "English",
+                  "hi": "अंग्रेज़ी",
                   "es": "Inglés",
                   "default": "English"
                 }
               }
             },
             "_row_num": 7,
-            "name": "english"
+            "name": "en"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Hindi",
-                  "hindi": "Hindi (as hindi name)",
+                  "en": "Hindi",
+                  "hi": "हिंदी",
                   "es": "Hindi",
                   "default": "Hindi"
                 }
               }
             },
             "_row_num": 8,
-            "name": "hindi"
+            "name": "hi"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Spanish",
-                  "hindi": "Spanish (as hindi name)",
+                  "en": "Spanish",
+                  "hi": "स्पेनिश",
                   "es": "Español",
                   "default": "Spanish"
                 }
@@ -2316,7 +2316,7 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "english"
+        "value": "en"
       }
     },
     "queries": {},
@@ -2347,8 +2347,8 @@
             "display": {
               "title": {
                 "text": {
-                  "english": "Common Javascript Framework",
-                  "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+                  "en": "Common Javascript Framework",
+                  "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
                   "es": "Marco común de Javascript",
                   "default": "Common Javascript Framework"
                 }
@@ -3394,7 +3394,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"hindi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\",\"es\":\"Marco común de Javascript\",\"default\":\"Common Javascript Framework\"}}"
+        "_value": "{\"text\":{\"en\":\"Common Javascript Framework\",\"hi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\",\"es\":\"Marco común de Javascript\",\"default\":\"Common Javascript Framework\"}}"
       }
     ]
   }
