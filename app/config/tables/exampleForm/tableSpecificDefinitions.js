@@ -4,7 +4,7 @@ window.odkTableSpecificDefinitions = {
       "string_token": "first_prompt",
       "text": {
         "default": "Enter an initial rating (1-10) for this survey",
-        "hindi": "HINDI Enter an initial rating (1-10) for this survey"
+        "hi": "HINDI Enter an initial rating (1-10) for this survey"
       },
       "_row_num": 2
     }
