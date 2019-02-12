@@ -72,8 +72,8 @@ var resumeFn = function(fIdxStart) {
                     '      FROM visits\n' +
                     '             INNER JOIN beneficiary_entities ON visits.beneficiary_unit_id = beneficiary_entities._id\n' +
                     '      WHERE visits.visit_program_id = ?) AS VB\n' +
-                    '       INNER JOIN ex_individual_mode_registration_form ON\n' +
-                    'custom_beneficiary_entity_row_id=ex_individual_mode_registration_form._id',
+                    '       INNER JOIN ex_ind_mode_registration_demo ON\n' +
+                    'custom_beneficiary_entity_row_id=ex_ind_mode_registration_demo._id',
                     [rowId],
                     'config/tables/visits/html/visits_list.html'
                 );
