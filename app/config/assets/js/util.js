@@ -106,7 +106,7 @@ util.populateDetailViewKeyValue = function(key, value, parentDiv, locale) {
 // kvPairs: json of key value pairs
 // parentDiv: html element to add to
 // locale: locale for translations
-util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, locale, exclusionList) {
+util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, locale, exclusionList, sortList) {
     var mergeResult = {};
 
     resultSets.forEach(function(rs) {
@@ -122,32 +122,47 @@ util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, loca
     var keys = Object.keys(mergeResult).sort();
 
     var fieldListDiv = $('#' + parentDiv);
-    keys.forEach(function(key) {
-        if (!key.startsWith("_") && !exclusionList.includes(key)) {
-            var line = $('<p>').attr('id', key).appendTo(fieldListDiv);
 
-            if (key === 'date_created') {
-                var dateObj = odkCommon.toDateFromOdkTimeStamp(mergeResult[key]);
-                if (dateObj !== null && dateObj !== undefined && dateObj !== "") {
-                    var min = dateObj.getMinutes() < 10 ? '0' : '' + dateObj.getMinutes();
-                    var val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
-                    val += ' ' + dateObj.getHours() + ":" + min;
-                    $('<span>').attr('id', 'inner_' + key).text(val).appendTo(line);
-                }
-            }
-            else {
-                $('<span>').attr('id', 'inner_' + key).text(mergeResult[key]).appendTo(line);
+    if (sortList !== null && sortList !== undefined && sortList.length > 0) {
+        while (sortList.length > 0) {
+            var key = sortList.shift();
+            if (keys.includes(key)) {
+                util.fillDetailViewArbitrary(mergeResult, fieldListDiv, key, locale);
             }
             key = (odkCommon.localizeText(locale, key) !== null && odkCommon.localizeText(locale, key) !== undefined) ?
                 odkCommon.localizeText(locale, key) : key;
 
             line.prepend(key + ": ");
         }
-    });
+    } else {
+        keys.forEach(function(key) {
+            if (!key.startsWith("_") && !exclusionList.includes(key)) {
+                util.fillDetailViewArbitrary(mergeResult, fieldListDiv, key, locale);
+            }
+        });
+
+    }
 };
 
+util.fillDetailViewArbitrary = function(mergeResult, fieldListDiv, key, locale) {
+    var line = $('<p>').attr('id', key).appendTo(fieldListDiv);
 
-
+    if (key === 'date_created') {
+        var dateObj = odkCommon.toDateFromOdkTimeStamp(mergeResult[key]);
+        if (dateObj !== null && dateObj !== undefined && dateObj !== "") {
+            var min = dateObj.getMinutes() < 10 ? '0' : '' + dateObj.getMinutes();
+            var val = dateObj.getFullYear() + '-' + dateObj.getMonth() + '-' + dateObj.getDate();
+            val += ' ' + dateObj.getHours() + ":" + min;
+            $('<span>').attr('id', 'inner_' + key).text(val).appendTo(line);
+        }
+    }
+    else {
+        $('<span>').attr('id', 'inner_' + key).text(mergeResult[key]).appendTo(line);
+    }
+    key = (odkCommon.localizeText(locale, key) !== null && odkCommon.localizeText(locale, key) !== undefined) ?
+        odkCommon.localizeText(locale, key) : key;
+    line.prepend(key + ": ");
+};
 
 util.displayError = function(text) {
 
