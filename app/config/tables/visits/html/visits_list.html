@@ -1,5 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <!--Chunked List View-->
     <head>
         <link href="../../../assets/css/bootstrap.css" type="text/css" rel="stylesheet" />
@@ -15,9 +15,15 @@
     </head>
     <body>
         <script type="text/javascript" src="../js/visits_list.js"></script>
-        <h1 id="title"></h1>
         <p id="error" style="display:none"></p>
         <div id="wrapper">
+            <div class="input-group input-group-lg" style="min-width: 100%; max-width: 100%; padding: 10pt;">
+                <input type="text" id="search-input" class="form-control" placeholder="Search">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" onclick="filterVisits();">Search</button>
+                </span>
+            </div>
+
             <div id="list"></div>
         </div>
         <script>

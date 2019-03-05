@@ -94,6 +94,10 @@ var displayGroup = function(idxStart) {
       /* Creates the item space */
       // We're going to select the ul and then start adding things to it.
       //var item = $('#list').append('<li>');
+      var itemContainer = $('<div>');
+      itemContainer.addClass('list-item');
+      itemContainer.attr('data-rcid', (visitsResultSet.getData(i, 'rcId') || ''));
+
       var item = $('<li>');
       item.attr('rowId', visitsResultSet.getData(i, 'customRowId'));
       item.attr('class', 'item_space');
@@ -105,6 +109,7 @@ var displayGroup = function(idxStart) {
       chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
       chevron.attr('class', 'chevron');
       item.append(chevron);
+      itemContainer.append(item);
 
       /**
        * Adds other data/details in item space.
@@ -114,15 +119,30 @@ var displayGroup = function(idxStart) {
        * 'field1' with new, specific label that are more meaningful to you
        */
 
-      $('#list').append(item);
-
-      // don't append the last one to avoid the fencepost problem
       var borderDiv = $('<div>');
       borderDiv.addClass('divider');
-      $('#list').append(borderDiv);
+      itemContainer.append(borderDiv);
 
+      $('#list').append(itemContainer);
     }
+
     if (i < visitsResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
+};
+
+var filterVisits = function () {
+  var searchStr = document.getElementById("search-input").value.trim();
+
+  var items = document.getElementsByClassName('list-item');
+  for (var i = 0; i < items.length; i++) {
+    var name = items[i].getElementsByClassName('item_space')[0].innerText.trim();
+    var rcId = items[i].dataset.rcid;
+
+    console.log(rcId);
+
+    if (!name.includes(searchStr) && rcId !== searchStr) {
+      items[i].hidden = true;
+    }
+  }
 };
