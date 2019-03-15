@@ -61,9 +61,9 @@ var resumeFn = function(fIdxStart) {
             var rowId = containingDiv.attr('rowId');
             console.log('clicked with rowId: ' + rowId);
             // make sure we retrieved the rowId
-            if (rowId !== null && rowId !== undefined) {
-                odkTables.editRowWithSurvey(null, visitsResultSet.getData(0, 'custom_visit_table_id'), rowId, visitsResultSet.getData(0, 'custom_visit_form_id'), null);
-            }
+
+            // TODO: Clean up erroneous custom_visit_row_ids
+            util.triggerVisit(rowId);
         });
     }
 };
@@ -99,10 +99,10 @@ var displayGroup = function(idxStart) {
       itemContainer.attr('data-rcid', (visitsResultSet.getData(i, 'rcId') || ''));
 
       var item = $('<li>');
-      item.attr('rowId', visitsResultSet.getData(i, 'customRowId'));
+      item.attr('rowId', visitsResultSet.getData(i, '_id'));
       item.attr('class', 'item_space');
 
-      item.text(visitsResultSet.getData(i, 'first_name'));
+      item.text('RC #: ' + (visitsResultSet.getData(i, 'rcId') || ''));
 
       /* Creates arrow icon (Nothing to edit here) */
       var chevron = $('<img>');
@@ -136,12 +136,9 @@ var filterVisits = function () {
 
   var items = document.getElementsByClassName('list-item');
   for (var i = 0; i < items.length; i++) {
-    var name = items[i].getElementsByClassName('item_space')[0].innerText.trim();
     var rcId = items[i].dataset.rcid;
 
-    console.log(rcId);
-
-    if (!name.includes(searchStr) && rcId !== searchStr) {
+    if (rcId !== searchStr) {
       items[i].hidden = true;
     } else {
       items[i].hidden = false;

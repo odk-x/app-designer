@@ -206,6 +206,8 @@ util.authorizationTable = 'authorizations';
 util.entitlementTable = 'entitlements';
 util.deliveryTable = 'deliveries';
 util.distributionReportTable = 'distribution_reports';
+util.visitsTable = "visits";
+util.visitProgramsTable = "visit_programs";
 util.savepointSuccess = "COMPLETE";
 util.configPath = odkCommon.getBaseUrl() + 'config/assets/config.json';
 util.actionTypeKey = 'actionTypeKey';
@@ -330,6 +332,83 @@ dataUtil.entitlementIsDelivered = function(entitlement_id) {
         return false;
     });
 };
+
+util.getBeneficiariesListForVisit = function(visit_prog_id) {
+    var selectFromClause =
+        'SELECT\n' +
+        '  visits._id,\n' +
+        '  visits.custom_visit_row_id AS customVisitRowId,\n' +
+        '  beneficiary_entities.beneficiary_entity_id AS rcId,\n ' +
+        '  visits.custom_visit_table_id AS customVisitTableId,\n' +
+        '  visits.custom_visit_form_id AS customVisitFormId\n' +
+        'FROM visits\n';
+
+    var innerJoinClause =
+        '  INNER JOIN beneficiary_entities ON visits.beneficiary_unit_id = beneficiary_entities._id\n';
+
+    var whereClause = 'WHERE visit_program_id = ?\n';
+
+    var orderByClause = 'ORDER BY rcId ASC';
+
+    var query = selectFromClause + innerJoinClause + whereClause + orderByClause;
+    console.log('visit query: ' + query);
+
+    var selectionArgs = [visit_prog_id];
+
+    odkTables.openTableToListViewArbitraryQuery(
+        null,
+        'visits',
+        query,
+        selectionArgs,
+        'config/tables/visits/html/visits_list.html'
+    );
+}
+
+util.triggerVisit = function(visitId) {
+    var visitRow;
+    var customVisitRowId;
+    return new Promise(function(resolve, reject) {
+        odkData.query(util.visitsTable, '_id = ?', [visitId],
+            null, null, null, null, null, null, true, resolve, reject);
+    }).then(function(result) {
+        visitRow = result;
+        if (visitRow === undefined || visitRow.getCount === 0) {
+            return Promise.reject('Failed to retrieve visit.');
+        }
+
+        customVisitRowId = visitRow.getData(0, 'custom_visit_row_id') ;
+
+        if (customVisitRowId === null || customVisitRowId === undefined) {
+            customVisitRowId = util.genUUID();
+            return new Promise(function(resolve, reject) {
+                var jsonMap = {}
+                jsonMap['custom_visit_row_id'] = customVisitRowId;
+                odkData.updateRow(util.visitsTable, jsonMap, visitId, resolve, reject);
+            });
+        }
+
+        return Promise.resolve(null);
+
+    }).then(function(result) {
+
+        // TODO: Add dispatch struct to clean up
+        // if (dispatchStruct === undefined || dispatchStruct === null) {
+        //     dispatchStruct = {};
+        // }
+        //
+        // dispatchStruct[util.actionTypeKey] = actionTypeValue;
+        // dispatchStruct[util.rootRowIdKey] = rootVisitRowId;
+        // dispatchStruct[util.customForIdKey] = customFormId;
+        // var jsonStruct = JSON.stringify(dispatchStruct)
+
+        odkTables.editRowWithSurvey(null, visitRow.getData(0, 'custom_visit_table_id'), customVisitRowId,
+            visitRow.getData(0, 'custom_visit_form_id'), null);
+    }).catch(function(reason) {
+        console.log('Could not update row in visit table: ' + reason);
+    });
+};
+
+
 
 /**
  * if there is no delivery form, then launch to simple delivery html page

@@ -1,7 +1,7 @@
 {
-    "REGISTRATION_MODE": "HOUSEHOLD",
-    "WORKFLOW_MODE": "NO_REGISTRATION",
-    "BENEFICIARY_ENTITY_CUSTOM_FORM_ID": "custom_beneficiary_entities",
-    "MEMBER_CUSTOM_FORM_ID": "custom_members",
-    "CUSTOM_BENEFICIARY_ROW_ID_COLUMN": "custom_beneficiary_entity_row_id"
+    "REGISTRATION_MODE": "INDIVIDUAL",
+    "WORKFLOW_MODE": "REQUIRED_REGISTRATION",
+    "BENEFICIARY_ENTITY_CUSTOM_FORM_ID": "ex_ind_mode_registration_demo",
+    "MEMBER_CUSTOM_FORM_ID": null,
+    "CUSTOM_BENEFICIARY_ROW_ID_COLUMN": null
 }
