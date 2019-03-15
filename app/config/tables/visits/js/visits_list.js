@@ -143,6 +143,8 @@ var filterVisits = function () {
 
     if (!name.includes(searchStr) && rcId !== searchStr) {
       items[i].hidden = true;
+    } else {
+      items[i].hidden = false;
     }
   }
 };
