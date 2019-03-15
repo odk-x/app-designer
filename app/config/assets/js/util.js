@@ -138,8 +138,10 @@ util.populateDetailViewArbitrary = function(resultSets, kvPairs, parentDiv, loca
             else {
                 $('<span>').attr('id', 'inner_' + key).text(mergeResult[key]).appendTo(line);
             }
+            key = (odkCommon.localizeText(locale, key) !== null && odkCommon.localizeText(locale, key) !== undefined) ?
+                odkCommon.localizeText(locale, key) : key;
 
-            line.prepend(odkCommon.localizeText(locale, key) + ": ");
+            line.prepend(key + ": ");
         }
     });
 };
