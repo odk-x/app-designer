@@ -8,36 +8,36 @@ window.odkCommonDefinitions = {
         "display": {
           "locale": {
             "text": {
-              "english": "English",
-              "hindi": "English (as hindi name)",
+              "en": "English",
+              "hi": "अंग्रेज़ी",
               "es": "Inglés",
               "default": "English"
             }
           }
         },
         "_row_num": 7,
-        "name": "english"
+        "name": "en"
       },
       {
         "display": {
           "locale": {
             "text": {
-              "english": "Hindi",
-              "hindi": "Hindi (as hindi name)",
+              "en": "Hindi",
+              "hi": "हिंदी",
               "es": "Hindi",
               "default": "Hindi"
             }
           }
         },
         "_row_num": 8,
-        "name": "hindi"
+        "name": "hi"
       },
       {
         "display": {
           "locale": {
             "text": {
-              "english": "Spanish",
-              "hindi": "Spanish (as hindi name)",
+              "en": "Spanish",
+              "hi": "स्पेनिश",
               "es": "Español",
               "default": "Spanish"
             }
@@ -51,6 +51,6 @@ window.odkCommonDefinitions = {
   "_default_locale": {
     "setting_name": "_default_locale",
     "_row_num": 5,
-    "value": "english"
+    "value": "en"
   }
 }

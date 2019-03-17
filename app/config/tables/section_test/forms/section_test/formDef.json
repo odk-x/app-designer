@@ -12,7 +12,7 @@
           "prompt": {
             "text": {
               "default": "Choose the section to enter",
-              "hindi": "प्रवेश करने के लिए खंड चुनें"
+              "hi": "प्रवेश करने के लिए खंड चुनें"
             }
           }
         },
@@ -32,7 +32,7 @@
           "prompt": {
             "text": {
               "default": "Section 1 chosen",
-              "hindi": "धारा 1 चुना"
+              "hi": "धारा 1 चुना"
             }
           }
         },
@@ -49,7 +49,7 @@
           "prompt": {
             "text": {
               "default": "Returned from section 1",
-              "hindi": "खंड 1 से लौटे"
+              "hi": "खंड 1 से लौटे"
             }
           }
         },
@@ -70,7 +70,7 @@
           "prompt": {
             "text": {
               "default": "Section 2 chosen",
-              "hindi": "धारा 2 चुना"
+              "hi": "धारा 2 चुना"
             }
           }
         },
@@ -87,7 +87,7 @@
           "prompt": {
             "text": {
               "default": "Returned from section 2",
-              "hindi": "धारा 2 से लौटे"
+              "hi": "धारा 2 से लौटे"
             }
           }
         },
@@ -108,7 +108,7 @@
           "prompt": {
             "text": {
               "default": "Exiting survey",
-              "hindi": "बाहर निकलने सर्वेक्षण"
+              "hi": "बाहर निकलने सर्वेक्षण"
             }
           }
         },
@@ -127,7 +127,7 @@
           "prompt": {
             "text": {
               "default": "Entered Section 1",
-              "hindi": "में प्रवेश किया धारा 1"
+              "hi": "में प्रवेश किया धारा 1"
             }
           }
         },
@@ -141,13 +141,13 @@
           "prompt": {
             "text": {
               "default": "What is your age?",
-              "hindi": "आपकी उम्र क्या है?"
+              "hi": "आपकी उम्र क्या है?"
             }
           },
           "constraint_message": {
             "text": {
               "default": "Age must be greater than 20",
-              "hindi": "20 साल की उम्र से अधिक होना चाहिए"
+              "hi": "20 साल की उम्र से अधिक होना चाहिए"
             }
           }
         },
@@ -163,7 +163,7 @@
           "prompt": {
             "text": {
               "default": "Entered Section 2",
-              "hindi": "में प्रवेश किया धारा 2"
+              "hi": "में प्रवेश किया धारा 2"
             }
           }
         },
@@ -177,13 +177,13 @@
           "prompt": {
             "text": {
               "default": "What is your favorite color?",
-              "hindi": "अपने पसंदीदा रंग क्या है?"
+              "hi": "अपने पसंदीदा रंग क्या है?"
             }
           },
           "constraint_message": {
             "text": {
               "default": "Red is the only correct answer!",
-              "hindi": "लाल ही सही जवाब है!"
+              "hi": "लाल ही सही जवाब है!"
             }
           }
         },
@@ -200,7 +200,7 @@
           "title": {
             "text": {
               "default": "Go to section 1",
-              "hindi": "खंड 1 के लिए जाओ"
+              "hi": "खंड 1 के लिए जाओ"
             }
           }
         },
@@ -213,7 +213,7 @@
           "title": {
             "text": {
               "default": "Go to section 2",
-              "hindi": "धारा 2 के लिए जाओ"
+              "hi": "धारा 2 के लिए जाओ"
             }
           }
         },
@@ -226,7 +226,7 @@
           "title": {
             "text": {
               "default": "Exit Survey",
-              "hindi": "सर्वेक्षण से बाहर निकलें"
+              "hi": "सर्वेक्षण से बाहर निकलें"
             }
           }
         },
@@ -250,7 +250,7 @@
           "title": {
             "text": {
               "default": "Section Test",
-              "hindi": "धारा टेस्ट"
+              "hi": "धारा टेस्ट"
             }
           }
         },
@@ -262,7 +262,7 @@
           "title": {
             "text": {
               "default": "Section 1",
-              "hindi": "धारा 1"
+              "hi": "धारा 1"
             }
           }
         },
@@ -274,7 +274,7 @@
           "title": {
             "text": {
               "default": "Section 2",
-              "hindi": "धारा 2"
+              "hi": "धारा 2"
             }
           }
         },
@@ -286,19 +286,19 @@
           "locale": {
             "text": {
               "default": "English",
-              "hindi": "अंग्रेज़ी"
+              "hi": "अंग्रेज़ी"
             }
           }
         },
         "_row_num": 7
       },
       {
-        "setting_name": "hindi",
+        "setting_name": "hi",
         "display": {
           "locale": {
             "text": {
               "default": "Hindi",
-              "hindi": "हिंदी"
+              "hi": "हिंदी"
             }
           }
         },
@@ -339,7 +339,7 @@
           "title": {
             "text": {
               "default": "Section Test",
-              "hindi": "धारा टेस्ट"
+              "hi": "धारा टेस्ट"
             }
           }
         },
@@ -351,7 +351,7 @@
           "title": {
             "text": {
               "default": "Section 1",
-              "hindi": "धारा 1"
+              "hi": "धारा 1"
             }
           }
         },
@@ -363,7 +363,7 @@
           "title": {
             "text": {
               "default": "Section 2",
-              "hindi": "धारा 2"
+              "hi": "धारा 2"
             }
           }
         },
@@ -375,19 +375,19 @@
           "locale": {
             "text": {
               "default": "English",
-              "hindi": "अंग्रेज़ी"
+              "hi": "अंग्रेज़ी"
             }
           }
         },
         "_row_num": 7
       },
-      "hindi": {
-        "setting_name": "hindi",
+      "hi": {
+        "setting_name": "hi",
         "display": {
           "locale": {
             "text": {
               "default": "Hindi",
-              "hindi": "हिंदी"
+              "hi": "हिंदी"
             }
           }
         },
@@ -408,7 +408,7 @@
               "locale": {
                 "text": {
                   "default": "English",
-                  "hindi": "अंग्रेज़ी"
+                  "hi": "अंग्रेज़ी"
                 }
               }
             },
@@ -420,12 +420,12 @@
               "locale": {
                 "text": {
                   "default": "Hindi",
-                  "hindi": "हिंदी"
+                  "hi": "हिंदी"
                 }
               }
             },
             "_row_num": 8,
-            "name": "hindi"
+            "name": "hi"
           }
         ]
       },
@@ -440,7 +440,7 @@
           "title": {
             "text": {
               "default": "Section Test",
-              "hindi": "धारा टेस्ट"
+              "hi": "धारा टेस्ट"
             }
           }
         },
@@ -456,7 +456,7 @@
             "title": {
               "text": {
                 "default": "Go to section 1",
-                "hindi": "खंड 1 के लिए जाओ"
+                "hi": "खंड 1 के लिए जाओ"
               }
             }
           },
@@ -469,7 +469,7 @@
             "title": {
               "text": {
                 "default": "Go to section 2",
-                "hindi": "धारा 2 के लिए जाओ"
+                "hi": "धारा 2 के लिए जाओ"
               }
             }
           },
@@ -482,7 +482,7 @@
             "title": {
               "text": {
                 "default": "Exit Survey",
-                "hindi": "सर्वेक्षण से बाहर निकलें"
+                "hi": "सर्वेक्षण से बाहर निकलें"
               }
             }
           },
@@ -542,7 +542,7 @@
               "prompt": {
                 "text": {
                   "default": "Choose the section to enter",
-                  "hindi": "प्रवेश करने के लिए खंड चुनें"
+                  "hi": "प्रवेश करने के लिए खंड चुनें"
                 }
               }
             },
@@ -559,7 +559,7 @@
               "prompt": {
                 "text": {
                   "default": "Section 1 chosen",
-                  "hindi": "धारा 1 चुना"
+                  "hi": "धारा 1 चुना"
                 }
               }
             },
@@ -583,7 +583,7 @@
               "title": {
                 "text": {
                   "default": "Section 1",
-                  "hindi": "धारा 1"
+                  "hi": "धारा 1"
                 }
               }
             },
@@ -595,7 +595,7 @@
               "prompt": {
                 "text": {
                   "default": "Returned from section 1",
-                  "hindi": "खंड 1 से लौटे"
+                  "hi": "खंड 1 से लौटे"
                 }
               }
             },
@@ -613,7 +613,7 @@
               "prompt": {
                 "text": {
                   "default": "Section 2 chosen",
-                  "hindi": "धारा 2 चुना"
+                  "hi": "धारा 2 चुना"
                 }
               }
             },
@@ -637,7 +637,7 @@
               "title": {
                 "text": {
                   "default": "Section 2",
-                  "hindi": "धारा 2"
+                  "hi": "धारा 2"
                 }
               }
             },
@@ -649,7 +649,7 @@
               "prompt": {
                 "text": {
                   "default": "Returned from section 2",
-                  "hindi": "धारा 2 से लौटे"
+                  "hi": "धारा 2 से लौटे"
                 }
               }
             },
@@ -667,7 +667,7 @@
               "prompt": {
                 "text": {
                   "default": "Exiting survey",
-                  "hindi": "बाहर निकलने सर्वेक्षण"
+                  "hi": "बाहर निकलने सर्वेक्षण"
                 }
               }
             },
@@ -823,7 +823,7 @@
               "prompt": {
                 "text": {
                   "default": "Entered Section 1",
-                  "hindi": "में प्रवेश किया धारा 1"
+                  "hi": "में प्रवेश किया धारा 1"
                 }
               }
             },
@@ -842,13 +842,13 @@
               "prompt": {
                 "text": {
                   "default": "What is your age?",
-                  "hindi": "आपकी उम्र क्या है?"
+                  "hi": "आपकी उम्र क्या है?"
                 }
               },
               "constraint_message": {
                 "text": {
                   "default": "Age must be greater than 20",
-                  "hindi": "20 साल की उम्र से अधिक होना चाहिए"
+                  "hi": "20 साल की उम्र से अधिक होना चाहिए"
                 }
               }
             },
@@ -928,7 +928,7 @@
               "prompt": {
                 "text": {
                   "default": "Entered Section 2",
-                  "hindi": "में प्रवेश किया धारा 2"
+                  "hi": "में प्रवेश किया धारा 2"
                 }
               }
             },
@@ -947,13 +947,13 @@
               "prompt": {
                 "text": {
                   "default": "What is your favorite color?",
-                  "hindi": "अपने पसंदीदा रंग क्या है?"
+                  "hi": "अपने पसंदीदा रंग क्या है?"
                 }
               },
               "constraint_message": {
                 "text": {
                   "default": "Red is the only correct answer!",
-                  "hindi": "लाल ही सही जवाब है!"
+                  "hi": "लाल ही सही जवाब है!"
                 }
               }
             },
@@ -1055,7 +1055,7 @@
               "title": {
                 "text": {
                   "default": "Section Test",
-                  "hindi": "धारा टेस्ट"
+                  "hi": "धारा टेस्ट"
                 }
               }
             },
@@ -1372,7 +1372,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Section Test\",\"hindi\":\"धारा टेस्ट\"}}"
+        "_value": "{\"text\":{\"default\":\"Section Test\",\"hi\":\"धारा टेस्ट\"}}"
       }
     ]
   }

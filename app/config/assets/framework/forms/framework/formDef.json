@@ -556,8 +556,8 @@
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
               "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
@@ -568,12 +568,12 @@
         "_row_num": 5
       },
       {
-        "setting_name": "english",
+        "setting_name": "en",
         "display": {
           "locale": {
             "text": {
-              "english": "English",
-              "hindi": "English (as hindi name)",
+              "en": "English",
+              "hi": "अंग्रेज़ी",
               "es": "Inglés",
               "default": "English"
             }
@@ -582,12 +582,12 @@
         "_row_num": 7
       },
       {
-        "setting_name": "hindi",
+        "setting_name": "hi",
         "display": {
           "locale": {
             "text": {
-              "english": "Hindi",
-              "hindi": "Hindi (as hindi name)",
+              "en": "Hindi",
+              "hi": "हिंदी",
               "es": "Hindi",
               "default": "Hindi"
             }
@@ -600,8 +600,8 @@
         "display": {
           "locale": {
             "text": {
-              "english": "Spanish",
-              "hindi": "Spanish (as hindi name)",
+              "en": "Spanish",
+              "hi": "स्पेनिश",
               "es": "Español",
               "default": "Spanish"
             }
@@ -1393,8 +1393,8 @@
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
               "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
@@ -1404,13 +1404,13 @@
         "showContents": false,
         "_row_num": 5
       },
-      "english": {
-        "setting_name": "english",
+      "en": {
+        "setting_name": "en",
         "display": {
           "locale": {
             "text": {
-              "english": "English",
-              "hindi": "English (as hindi name)",
+              "en": "English",
+              "hi": "अंग्रेज़ी",
               "es": "Inglés",
               "default": "English"
             }
@@ -1418,13 +1418,13 @@
         },
         "_row_num": 7
       },
-      "hindi": {
-        "setting_name": "hindi",
+      "hi": {
+        "setting_name": "hi",
         "display": {
           "locale": {
             "text": {
-              "english": "Hindi",
-              "hindi": "Hindi (as hindi name)",
+              "en": "Hindi",
+              "hi": "हिंदी",
               "es": "Hindi",
               "default": "Hindi"
             }
@@ -1437,8 +1437,8 @@
         "display": {
           "locale": {
             "text": {
-              "english": "Spanish",
-              "hindi": "Spanish (as hindi name)",
+              "en": "Spanish",
+              "hi": "स्पेनिश",
               "es": "Español",
               "default": "Spanish"
             }
@@ -1454,36 +1454,36 @@
             "display": {
               "locale": {
                 "text": {
-                  "english": "English",
-                  "hindi": "English (as hindi name)",
+                  "en": "English",
+                  "hi": "अंग्रेज़ी",
                   "es": "Inglés",
                   "default": "English"
                 }
               }
             },
             "_row_num": 7,
-            "name": "english"
+            "name": "en"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Hindi",
-                  "hindi": "Hindi (as hindi name)",
+                  "en": "Hindi",
+                  "hi": "हिंदी",
                   "es": "Hindi",
                   "default": "Hindi"
                 }
               }
             },
             "_row_num": 8,
-            "name": "hindi"
+            "name": "hi"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Spanish",
-                  "hindi": "Spanish (as hindi name)",
+                  "en": "Spanish",
+                  "hi": "स्पेनिश",
                   "es": "Español",
                   "default": "Spanish"
                 }
@@ -1497,15 +1497,15 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "english"
+        "value": "en"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
               "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
@@ -2273,36 +2273,36 @@
             "display": {
               "locale": {
                 "text": {
-                  "english": "English",
-                  "hindi": "English (as hindi name)",
+                  "en": "English",
+                  "hi": "अंग्रेज़ी",
                   "es": "Inglés",
                   "default": "English"
                 }
               }
             },
             "_row_num": 7,
-            "name": "english"
+            "name": "en"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Hindi",
-                  "hindi": "Hindi (as hindi name)",
+                  "en": "Hindi",
+                  "hi": "हिंदी",
                   "es": "Hindi",
                   "default": "Hindi"
                 }
               }
             },
             "_row_num": 8,
-            "name": "hindi"
+            "name": "hi"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Spanish",
-                  "hindi": "Spanish (as hindi name)",
+                  "en": "Spanish",
+                  "hi": "स्पेनिश",
                   "es": "Español",
                   "default": "Spanish"
                 }
@@ -2316,7 +2316,7 @@
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "english"
+        "value": "en"
       }
     },
     "queries": {},
@@ -2347,8 +2347,8 @@
             "display": {
               "title": {
                 "text": {
-                  "english": "Common Javascript Framework",
-                  "hindi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+                  "en": "Common Javascript Framework",
+                  "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
                   "es": "Marco común de Javascript",
                   "default": "Common Javascript Framework"
                 }
@@ -3394,10 +3394,8 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"hindi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\",\"es\":\"Marco común de Javascript\",\"default\":\"Common Javascript Framework\"}}"
+        "_value": "{\"text\":{\"en\":\"Common Javascript Framework\",\"hi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\",\"es\":\"Marco común de Javascript\",\"default\":\"Common Javascript Framework\"}}"
       }
     ]
   }
 }
-could not find setting with name: framework_variant
-could not find setting with name: framework_variant
