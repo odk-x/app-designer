@@ -44,7 +44,7 @@ window.odkFrameworkDefinitions = {
       "string_token": "acknLabel",
       "text": {
         "default": "Acknowledge",
-        "hindi": "स्वीकार करना",
+        "hi": "स्वीकार करना",
         "es": "Admitir"
       },
       "_row_num": 7
@@ -53,7 +53,7 @@ window.odkFrameworkDefinitions = {
       "string_token": "back_button_label",
       "text": {
         "default": "Back",
-        "hindi": "लौटना",
+        "hi": "लौटना",
         "es": "Atrás"
       },
       "_row_num": 8
@@ -62,7 +62,7 @@ window.odkFrameworkDefinitions = {
       "string_token": "next_button_label",
       "text": {
         "default": "Next",
-        "hindi": "आगामी",
+        "hi": "आगामी",
         "es": "Siguiente"
       },
       "_row_num": 9
@@ -71,7 +71,7 @@ window.odkFrameworkDefinitions = {
       "string_token": "continue_button_label",
       "text": {
         "default": "Continue",
-        "hindi": "जारी रहना",
+        "hi": "जारी रहना",
         "es": "Continuar"
       },
       "_row_num": 10
@@ -344,7 +344,7 @@ window.odkFrameworkDefinitions = {
       "string_token": "select_deselect_label",
       "text": {
         "default": "Deselect",
-        "hindi": "अचयनित",
+        "hi": "अचयनित",
         "es": "Deseleccioanr"
       },
       "_row_num": 45

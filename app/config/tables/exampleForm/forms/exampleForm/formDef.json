@@ -483,7 +483,7 @@
         "string_token": "first_prompt",
         "text": {
           "default": "Enter an initial rating (1-10) for this survey",
-          "hindi": "HINDI Enter an initial rating (1-10) for this survey"
+          "hi": "HINDI Enter an initial rating (1-10) for this survey"
         },
         "_row_num": 2
       }
@@ -713,8 +713,8 @@
         "display": {
           "title": {
             "text": {
-              "english": "Example Form",
-              "hindi": "hindi exampleform",
+              "en": "Example Form",
+              "hi": "hindi exampleform",
               "default": "Example Form"
             }
           }
@@ -722,12 +722,12 @@
         "_row_num": 4
       },
       {
-        "setting_name": "english",
+        "setting_name": "en",
         "display": {
           "locale": {
             "text": {
-              "english": "English",
-              "hindi": "English (as hindi name)",
+              "en": "English",
+              "hi": "अंग्रेज़ी",
               "default": "English"
             }
           }
@@ -735,12 +735,12 @@
         "_row_num": 5
       },
       {
-        "setting_name": "hindi",
+        "setting_name": "hi",
         "display": {
           "locale": {
             "text": {
-              "english": "Hindi",
-              "hindi": "Hindi (as hindi name)",
+              "en": "Hindi",
+              "hi": "हिंदी",
               "default": "Hindi"
             }
           }
@@ -781,34 +781,34 @@
         "display": {
           "title": {
             "text": {
-              "english": "Example Form",
-              "hindi": "hindi exampleform",
+              "en": "Example Form",
+              "hi": "hindi exampleform",
               "default": "Example Form"
             }
           }
         },
         "_row_num": 4
       },
-      "english": {
-        "setting_name": "english",
+      "en": {
+        "setting_name": "en",
         "display": {
           "locale": {
             "text": {
-              "english": "English",
-              "hindi": "English (as hindi name)",
+              "en": "English",
+              "hi": "अंग्रेज़ी",
               "default": "English"
             }
           }
         },
         "_row_num": 5
       },
-      "hindi": {
-        "setting_name": "hindi",
+      "hi": {
+        "setting_name": "hi",
         "display": {
           "locale": {
             "text": {
-              "english": "Hindi",
-              "hindi": "Hindi (as hindi name)",
+              "en": "Hindi",
+              "hi": "हिंदी",
               "default": "Hindi"
             }
           }
@@ -829,42 +829,42 @@
             "display": {
               "locale": {
                 "text": {
-                  "english": "English",
-                  "hindi": "English (as hindi name)",
+                  "en": "English",
+                  "hi": "अंग्रेज़ी",
                   "default": "English"
                 }
               }
             },
             "_row_num": 5,
-            "name": "english"
+            "name": "en"
           },
           {
             "display": {
               "locale": {
                 "text": {
-                  "english": "Hindi",
-                  "hindi": "Hindi (as hindi name)",
+                  "en": "Hindi",
+                  "hi": "हिंदी",
                   "default": "Hindi"
                 }
               }
             },
             "_row_num": 6,
-            "name": "hindi"
+            "name": "hi"
           }
         ]
       },
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 4,
-        "value": "english"
+        "value": "en"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
           "title": {
             "text": {
-              "english": "Example Form",
-              "hindi": "hindi exampleform",
+              "en": "Example Form",
+              "hi": "hindi exampleform",
               "default": "Example Form"
             }
           }
@@ -1078,7 +1078,7 @@
           "string_token": "first_prompt",
           "text": {
             "default": "Enter an initial rating (1-10) for this survey",
-            "hindi": "HINDI Enter an initial rating (1-10) for this survey"
+            "hi": "HINDI Enter an initial rating (1-10) for this survey"
           },
           "_row_num": 2
         }
@@ -2455,8 +2455,8 @@
             "display": {
               "title": {
                 "text": {
-                  "english": "Example Form",
-                  "hindi": "hindi exampleform",
+                  "en": "Example Form",
+                  "hi": "hindi exampleform",
                   "default": "Example Form"
                 }
               }
@@ -3461,7 +3461,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"english\":\"Example Form\",\"hindi\":\"hindi exampleform\",\"default\":\"Example Form\"}}"
+        "_value": "{\"text\":{\"en\":\"Example Form\",\"hi\":\"hindi exampleform\",\"default\":\"Example Form\"}}"
       }
     ]
   }
