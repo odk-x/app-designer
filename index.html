@@ -15,23 +15,23 @@
         cw.location = value;
   }
   function autoResize(newBaseHeight){
-  var tabBodies = document.getElementsByClassName('content-tab');
-  var maxHeight = 0;
-  for ( var i = 0 ; i < tabBodies.length ; ++i ) {
-    var tabBody = tabBodies[i];
-    var height = tabBody.scrollHeight;
-    if ( maxHeight < height ) {
-      maxHeight = height;
-    }
-  }
-  if ( maxHeight < 1600 ) {
-    maxHeight = 1600;
-  }
+	var tabBodies = document.getElementsByClassName('content-tab');
+	var maxHeight = 0;
+	for ( var i = 0 ; i < tabBodies.length ; ++i ) {
+		var tabBody = tabBodies[i];
+		var height = tabBody.scrollHeight;
+		if ( maxHeight < height ) {
+			maxHeight = height;
+		}
+	}
+	if ( maxHeight < 1600 ) {
+		maxHeight = 1600;
+	}
 
-  if ( newBaseHeight > maxHeight + 3 ) {
-    console.log('resizing from ' + maxHeight + ' to new ' + (newBaseHeight + 3) );
-    $('.content-tab').height(newBaseHeight+3);
-  }
+	if ( newBaseHeight > maxHeight + 3 ) {
+		console.log('resizing from ' + maxHeight + ' to new ' + (newBaseHeight + 3) );
+		$('.content-tab').height(newBaseHeight+3);
+	}
   }
 //]]>   
   </script>
@@ -40,11 +40,11 @@
 
 <body class="absolute">
   <noscript>This page requires javascript and a Chrome or WebKit browser</noscript>
-  <div class="topversion">ODK 2.1.1</div>
+  <div class="topversion">ODK 2.1.2</div>
   <ul class="tabs">
     <li>
       <input type="radio" name="tabs" checked id="tab1"/>
-    <label for="tab1">Preview</label>
+	  <label for="tab1">Preview</label>
         <iframe class="content-tab" src="devEnv/tab1.html" frameborder="0" ></iframe>
     </li>
     <li>
@@ -53,32 +53,27 @@
     </li>
     <li>
       <input type="radio" name="tabs" id="tab3"/><label for="tab3">XLSX Converter</label>
-    <iframe class="content-tab" src="devEnv/tab3.html" frameborder="0" ></iframe>
+	  <iframe class="content-tab" src="devEnv/tab3.html" frameborder="0" ></iframe>
       </div>
     </li>
     <li>
       <input type="radio" name="tabs" id="tab4"/><label for="tab4">File Browser</label>
-    <iframe class="content-tab" src="devEnv/tab4.html" frameborder="0" ></iframe>
+	  <iframe class="content-tab" src="devEnv/tab4.html" frameborder="0" ></iframe>
       </div>
     </li>
     <li>
       <input type="radio" name="tabs" id="tab5"/><label for="tab5">Scan Form Designer</label>
-    <iframe class="content-tab" src="devEnv/tab5.html" frameborder="0" ></iframe>
-      </div>
-    </li>
-    <li>
-      <input type="radio" name="tabs" id="tab6"/><label for="tab6">QR Code Generator</label>
-    <iframe class="content-tab" src="devEnv/tab6.html" frameborder="0" ></iframe>
+	  <iframe class="content-tab" src="devEnv/tab5.html" frameborder="0" ></iframe>
       </div>
     </li>
   </ul>
   <script type="text/javascript">
 //<![CDATA[
     $(function() {
-    if ( !window.openDatabase ) {
-    document.body.innerHTML="<p><font color=\"red\">You must use a Chrome or Safari browser (note: this is tested only on Chrome)</font></p>";
-    }
-  })
+	  if ( !window.openDatabase ) {
+		document.body.innerHTML="<p><font color=\"red\">You must use a Chrome or Safari browser (note: this is tested only on Chrome)</font></p>";
+	  }
+	})
   //]]>   
   </script>
   </body>
