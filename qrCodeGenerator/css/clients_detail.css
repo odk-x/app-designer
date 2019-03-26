@@ -1,0 +1,41 @@
+/* CSS Stylesheet - Detail View*/
+body {
+    color: black;
+}
+
+.content {
+    background-color: #FFFFFF;
+    padding: 5px;
+    width: 90%;
+}
+
+h1 {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+    padding-bottom: 20px;
+    color: #33b5e5;
+}
+
+p {
+    font-size: 15pt;
+}
+
+.info-item {
+    width: 250px;
+    float: left;
+    text-align: left;
+}
+
+.content p {
+    margin: 5px;
+    display: block;
+}
+
+.content span {
+    vertical-align: bottom;
+}
+
+
+
+

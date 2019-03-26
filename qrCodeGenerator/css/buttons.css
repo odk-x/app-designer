@@ -1,0 +1,42 @@
+html {
+  font-family: arial;
+}
+
+a {
+  text-decoration: none;
+}
+
+.content {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+.content div {
+  margin: 5%;
+}
+
+.button {
+  display: inline-block;
+  text-align: center;
+  padding: 20px 20px;
+  color: white;
+  transition: 300ms ease-in-out;
+  box-shadow: 0px 4px 20px #ccc;
+  font-size: 20px;
+  display: block
+   width: 90%;
+   max-width: 500px;
+   margin: 0 auto 35px;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 2px 20px #777;
+}
+
+.blue {
+  background-color: #33b5e5;
+  border-bottom: 3px solid #0099cc;
+}
+

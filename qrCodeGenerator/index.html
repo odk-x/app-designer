@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<style type="text/css">
+/*<![CDATA[*/
+body {
+    background-color: #f5f5f5;
+    margin: 0;
+    font-size: 20px;
+}
+.button-class {
+    margin-top: 10px;
+    padding-left: .5em;
+    font-size: 20px;
+	font-weight: bold;
+}
+#errors p {
+    background-color: pink;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: .5em;
+}
+.panel {
+    background-color: #f5f5f5;
+    padding: 1em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+.field-style {
+	margin-top: 10px;
+    padding-left: .5em;
+    font-size: 20px;
+    width: 80%;
+}
+
+.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+/*]]>*/
+</style>
+        <meta charset="UTF-8">
+        <title></title>
+
+        <script type="text/javascript" src="libs/jquery.1.10.2.js"></script>
+        <script type="text/javascript" src="libs/sjcl-version-0.8/sjcl.js"></script> 
+        <script type="text/javascript" src="libs/davidshimjs-qrcodejs-a714bbe/qrcode.js"></script> 
+        <script type="text/javascript" src="js/index.js"></script>
+    </head>
+
+    <body class="fullembedded" >
+    <div>
+        <div class="panel">
+            <p>Enter the url:</p>
+            <input type="url" class="field-style" id="odk-url"/>
+
+            <p>Enter the username:</p>
+            <input type="text" class="field-style" id="username"/>
+
+            <p>Enter the password:</p>
+            <input type="password" class="field-style" id="password"/>
+
+            <p class="errors" id="qrcode_error"></p>
+        </div>
+        <div class="panel">
+            <button class="button-class" id="gen-qr-code" onclick="makeQRCode()">Generate QR Code</button>
+        </div>
+        <div id="qrcode"  class="centered"></div>
+    </div>
+    </body>
+</html>

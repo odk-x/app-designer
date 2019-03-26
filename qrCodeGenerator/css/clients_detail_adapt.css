@@ -1,0 +1,112 @@
+/* CSS Stylesheet - Detail View*/
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+h1 {
+    margin: 10px;
+}
+
+div.transparent {
+    margin: 15px 2%;
+    background-color: #ffffff;
+}
+
+div.transparent p {
+    margin: 10px 5px;
+    font-weight: bold;
+    color: #000000;
+}
+
+p {
+    font-size: 15pt;
+}
+
+.forms {
+    font-size: 20pt;
+    margin-right: auto;
+    margin-left: auto;
+    width: 70%;
+    max-width: 400px;
+    background-color: #C0C0C0;
+    padding: 2px;
+}
+
+.forms:active {
+    background-color: lightskyblue;
+}
+
+.heading {
+    font-size: 20pt;
+    max-width: 500px;
+    margin: 2px auto;
+    padding: 2px 5px;
+    position: relative;
+    background-color: #C0C0C0;
+}
+
+.detail_container {
+    padding: 2px 10px;
+    background-color: #fafafa;
+}
+
+.selected {
+    background-color: #006699;
+    color: #fff;
+}
+
+.branch {
+    background-color: lightgreen;
+}
+
+h2{
+    font-weight: bold;
+    font-size: 25pt;
+}
+
+.form {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 500px;
+    padding:5px;
+    background-color: #006699;
+    color: white;
+    font-size: 20pt;
+}
+
+button {
+    display: block;
+    background-color: lightgoldenrodyellow;
+    font-size: 25pt;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    max-width: 500px;
+    margin-top: 30px;
+}
+
+#patient_info {
+    border: black solid;
+    font-size: 20pt;
+}
+
+#content {
+    padding-left: 30px;
+}
+
+h3 {
+    font-size: 20pt;
+}
+
+.result {
+    color: darkred;
+    font-weight: bold;
+    font-size: 25pt;
+}
