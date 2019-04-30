@@ -281,6 +281,34 @@ module.exports = function (grunt) {
         'wipe the device',
         ["adbpull-props", "remove-folders", "adbpush-props", "setup"]);
 
+    grunt.registerTask(
+        'wipe-data',
+        'Get rid of the default tables and data included with app-designer',
+        function() {
+            // wiping entire data/tables folder
+            console.log('Wiping folder \"app/data/tables\"')
+            grunt.file.delete('app/data/tables');
+            grunt.file.mkdir('app/data/tables')
+
+            // wiping entire config/tables folder
+            console.log('Wiping folder \"app/config/tables\"')
+            grunt.file.delete('app/config/tables');
+            grunt.file.mkdir('app/config/tables');
+
+            // wiping certain files in config/assets
+            console.log('Wiping files in \"app/config/assets\"')
+            grunt.file.delete('app/config/assets/css');
+            grunt.file.delete('app/config/assets/csv');
+            grunt.file.delete('app/config/assets/img');
+            grunt.file.delete('app/config/assets/js');
+            grunt.file.delete('app/config/assets/libs');
+            grunt.file.delete('app/config/assets/tables.georowlevelaccessdemo.init');
+            grunt.file.delete('app/config/assets/tables.init');
+            grunt.file.delete('app/config/assets/tables.largeDataSet500.init');
+            grunt.file.delete('app/config/assets/tables.largeDataSet3000.init');
+            grunt.file.delete('app/config/assets/tables.rowlevelaccessdemo.init');
+            grunt.file.delete('app/config/assets/tables.simpledemo.init');
+    });
 
     grunt.registerTask(
         'adbpull-debug',
