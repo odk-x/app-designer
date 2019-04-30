@@ -112,7 +112,7 @@ exports.postFile = function(path, content, callback) {
     if (request.post !== undefined) {
         request.post(
             {
-                uri: exports.rootpath + '/' + path,
+                uri: '/' + path,
                 body: content
             },
             callback);
@@ -128,7 +128,7 @@ exports.postBase64File = function(path, content, callback) {
     if (request.post !== undefined) {
         request.post(
             {
-                uri: exports.rootpath + '/' + path,
+                uri: '/' + path,
                 body: content,
                 headers: { 
                     'Content-Type': 'application/octet-stream'
