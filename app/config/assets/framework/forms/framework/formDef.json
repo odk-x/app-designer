@@ -47,11 +47,11 @@
         "_row_num": 7
       },
       {
-        "branch_label": "registration",
+        "branch_label": "agriculture",
         "_row_num": 8
       },
       {
-        "url": "'?' + odkSurvey.getHashString('registration')",
+        "url": "'?' + odkSurvey.getHashString('agriculture')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -65,11 +65,11 @@
         "_row_num": 10
       },
       {
-        "branch_label": "deliveries",
+        "branch_label": "geotagger",
         "_row_num": 11
       },
       {
-        "url": "'?' + odkSurvey.getHashString('deliveries')",
+        "url": "'?' + odkSurvey.getHashString('geotagger')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -81,1143 +81,456 @@
       {
         "clause": "exit section",
         "_row_num": 13
-      }
-    ],
-    "common_translations": [
-      {
-        "string_token": "main_title",
-        "text": {
-          "default": "Disaster Relief",
-          "el": "Ανακούφιση από καταστροφές",
-          "ar": "توزيع الكوارث",
-          "fa": "تسکین فاجعه",
-          "es": "Ayuda en casos de desastre"
-        },
-        "_row_num": 2
       },
       {
-        "string_token": "registration",
-        "text": {
-          "default": "Registration",
-          "el": "Εγγραφή",
-          "ar": "التسجيل",
-          "fa": "ثبت",
-          "es": "Registro"
-        },
-        "_row_num": 3
-      },
-      {
-        "string_token": "distribution",
-        "text": {
-          "default": "Distribution",
-          "es": "Distribución"
-        },
-        "_row_num": 4
-      },
-      {
-        "string_token": "administrator_options",
-        "text": {
-          "default": "Administrator Options",
-          "el": "Επιλογές παράκαμψης",
-          "ar": "اختيارات التجاوز",
-          "fa": "لغو گزینه",
-          "es": "Opciones de administrador"
-        },
-        "_row_num": 5
-      },
-      {
-        "string_token": "distribution_options",
-        "text": {
-          "default": "Distribution Options",
-          "es": "Opciones de distribución"
-        },
-        "_row_num": 6
-      },
-      {
-        "string_token": "delivery_upper_case",
-        "text": {
-          "default": "Delivery",
-          "es": "Entrega"
-        },
-        "_row_num": 7
-      },
-      {
-        "string_token": "beneficiary",
-        "text": {
-          "default": "beneficiary",
-          "el": "δικαιούχος",
-          "ar": "مستفيد",
-          "fa": "ذینفع",
-          "es": "Beneficiario/a"
-        },
-        "_row_num": 10
-      },
-      {
-        "string_token": "beneficiaries",
-        "text": {
-          "default": "beneficiaries",
-          "el": "Δικαιούχοι",
-          "ar": "مستفيدين",
-          "fa": "ذینفع",
-          "es": "Beneficiarios/as"
-        },
-        "_row_num": 11
-      },
-      {
-        "string_token": "delivery",
-        "text": {
-          "default": "delivery",
-          "el": "διανομή",
-          "ar": "تسليم",
-          "fa": "تحویل",
-          "es": "Entrega"
-        },
-        "_row_num": 12
-      },
-      {
-        "string_token": "deliveries",
-        "text": {
-          "default": "deliveries",
-          "el": "Παραδόσεις",
-          "ar": "تسليمات",
-          "fa": "تحویل",
-          "es": "Entregas"
-        },
-        "_row_num": 13
-      },
-      {
-        "string_token": "household",
-        "text": {
-          "default": "household",
-          "es": "familia"
-        },
+        "branch_label": "breathcounter",
         "_row_num": 14
       },
       {
-        "string_token": "households",
-        "text": {
-          "default": "households",
-          "es": "familias"
+        "url": "'?' + odkSurvey.getHashString('breathcounter')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 15
       },
       {
-        "string_token": "member",
-        "text": {
-          "default": "member",
-          "es": "miembro"
-        },
+        "clause": "exit section",
         "_row_num": 16
       },
       {
-        "string_token": "members",
-        "text": {
-          "default": "members",
-          "es": "miembros"
-        },
+        "branch_label": "complex_validate_test",
         "_row_num": 17
       },
       {
-        "string_token": "found",
-        "text": {
-          "default": "found",
-          "el": "βρέθηκαν",
-          "ar": "موجود",
-          "fa": "مکتشف",
-          "es": "Encontrado"
+        "url": "'?' + odkSurvey.getHashString('complex_validate_test')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 18
       },
       {
-        "string_token": "pending",
-        "text": {
-          "default": "Pending",
-          "es": "Pendiente"
-        },
+        "clause": "exit section",
         "_row_num": 19
       },
       {
-        "string_token": "delivered",
-        "text": {
-          "default": "Delivered",
-          "es": "Entregado"
-        },
+        "branch_label": "customAppearance",
         "_row_num": 20
       },
       {
-        "string_token": "data_path",
-        "text": {
-          "default": "View Data",
-          "el": "Προβολή δεδομένων",
-          "ar": "راجع المعلومات",
-          "fa": "دیدن اطلاعات",
-          "es": "Ver información"
+        "url": "'?' + odkSurvey.getHashString('customAppearance')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
+        "_row_num": 21
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 22
+      },
+      {
+        "branch_label": "exampleForm",
         "_row_num": 23
       },
       {
-        "string_token": "data_categories",
-        "text": {
-          "default": "Data Categories",
-          "el": "Κατηγορίες δεδομένων",
-          "ar": "نوعية المعلومات",
-          "fa": "دسته بندی اطلاعات",
-          "es": "Categorías de datos"
+        "url": "'?' + odkSurvey.getHashString('exampleForm')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 24
       },
       {
-        "string_token": "registration_data",
-        "text": {
-          "default": "Registration Data",
-          "es": "Datos de registro"
-        },
+        "clause": "exit section",
         "_row_num": 25
       },
       {
-        "string_token": "view_registration_data",
-        "text": {
-          "default": "View Registration Data",
-          "es": "Ver datos de registro"
-        },
+        "branch_label": "household",
         "_row_num": 26
       },
       {
-        "string_token": "delivery_data",
-        "text": {
-          "default": "Delivery Data",
-          "el": "Δεδομένα παράδοσης",
-          "ar": "معلومات التسليم",
-          "fa": "اطلاعات تحویل",
-          "es": "Datos de entrega"
+        "url": "'?' + odkSurvey.getHashString('household')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 27
       },
       {
-        "string_token": "view_delivery_data",
-        "text": {
-          "default": "View Delivery Data",
-          "el": "Προβολή δεδομένων παράδοσης",
-          "ar": "انظر معلومات التسليمات",
-          "fa": "دیدن اطلاعات  تحویل",
-          "es": "Ver datos de entregas"
-        },
+        "clause": "exit section",
         "_row_num": 28
       },
       {
-        "string_token": "advanced_search",
-        "text": {
-          "default": "Advanced Search",
-          "el": "Προχωρημένη Αναζήτηση",
-          "ar": "البحث المتقدم",
-          "fa": "جستجوی پیشرفته",
-          "es": "Búsqueda avanzada"
+        "branch_label": "imnci_test",
+        "_row_num": 29
+      },
+      {
+        "url": "'?' + odkSurvey.getHashString('imnci','imnci_test')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
+        "_row_num": 30
+      },
+      {
+        "clause": "exit section",
         "_row_num": 31
       },
       {
-        "string_token": "search_beneficiaries",
-        "text": {
-          "default": "Search for Beneficiaries",
-          "el": "Αναζήτηση δικαιούχων",
-          "ar": "ابحث عن مستفيدين",
-          "fa": "جستجو برای ذینفع",
-          "es": "Buscar por beneficiarios"
-        },
+        "branch_label": "refrigerators_init",
         "_row_num": 32
       },
       {
-        "string_token": "search_deliveries",
-        "text": {
-          "default": "Search for Deliveries",
-          "el": "Αναζήτηση για παραδόσεις",
-          "ar": "ابحث عن تسليمات",
-          "fa": "جستجو برای تحویل",
-          "es": "Buscar por entregas"
+        "url": "'?' +  odkSurvey.getHashString('refrigerators','refrigerators_init')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 33
       },
       {
-        "string_token": "search_households",
-        "text": {
-          "default": "Search by Household",
-          "es": "Búsqueda por familia"
-        },
+        "clause": "exit section",
         "_row_num": 34
       },
       {
-        "string_token": "search_members",
-        "text": {
-          "default": "Search by Member",
-          "es": "Búsqueda por Miembro"
-        },
+        "branch_label": "refrigerators_update",
         "_row_num": 35
       },
       {
-        "string_token": "search",
-        "text": {
-          "default": "Search",
-          "es": "Buscar"
+        "url": "'?' +  odkSurvey.getHashString('refrigerators','refrigerators_update')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 36
       },
       {
-        "string_token": "registration_title",
-        "text": {
-          "default": "Register Beneficiary Entity",
-          "el": "Εγγραφή Κωδικού Δικαιούχου",
-          "ar": "تسجيل رمز المستفيد",
-          "fa": "ثبت نام کد ذینفع",
-          "es": "Registrar código de beneficiario"
+        "clause": "exit section",
+        "_row_num": 37
+      },
+      {
+        "branch_label": "section_test",
+        "_row_num": 38
+      },
+      {
+        "url": "'?' +  odkSurvey.getHashString('section_test')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 39
       },
       {
-        "string_token": "delivery_title",
-        "text": {
-          "default": "Deliver to Beneficiary Entity",
-          "el": "Επαληθεύστε τον Κωδικό Δικαιούχου",
-          "ar": "تأكيد رمز المستفيد",
-          "fa": "تأیید کد ذینفع",
-          "es": "Verificar código de beneficiario"
-        },
+        "clause": "exit section",
         "_row_num": 40
       },
       {
-        "string_token": "view_authorization_details",
-        "text": {
-          "default": "View Authorization Details",
-          "es": "Ver detalles de autorización"
-        },
+        "branch_label": "selects",
         "_row_num": 41
       },
       {
-        "string_token": "authorization_details",
-        "text": {
-          "default": "Authorization Details",
-          "es": "Detalles de autorización"
+        "url": "'?' +  odkSurvey.getHashString('selects')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 42
       },
       {
-        "string_token": "scan_barcode",
-        "text": {
-          "default": "Scan Barcode",
-          "el": "Σάρωση γραμμωτού κώδικα",
-          "ar": "مسح الباركود",
-          "fa": "بارکد اسکن",
-          "es": "Escanear código de barras"
-        },
+        "clause": "exit section",
         "_row_num": 43
       },
       {
-        "string_token": "enter",
-        "text": {
-          "default": "Enter",
-          "el": "Εισάγω",
-          "ar": "تنفيد",
-          "fa": "وارد شدن",
-          "es": "Ingresar"
-        },
+        "branch_label": "twoColumn",
         "_row_num": 44
       },
       {
-        "string_token": "enter_beneficiary_entity_id",
-        "text": {
-          "default": "Enter Beneficiary Entity ID",
-          "es": "Registrar código de beneficiario"
+        "url": "'?' +  odkSurvey.getHashString('twoColumn')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 45
       },
       {
-        "string_token": "ok",
-        "text": {
-          "default": "OK",
-          "es": "Confirmar"
-        },
+        "clause": "exit section",
         "_row_num": 46
       },
       {
-        "string_token": "view_all_deliveries",
-        "text": {
-          "default": "View All Deliveries",
-          "el": "Προβολή όλων των παραδόσεων",
-          "ar": "راقب كل التسليمات",
-          "fa": "مشاهده تحویل",
-          "es": "Ver todas las entregas"
-        },
+        "branch_label": "gridScreen",
         "_row_num": 47
       },
       {
-        "string_token": "fill_field_report",
-        "text": {
-          "default": "Fill Field Report",
-          "es": "Reporte de Campos Completos"
+        "url": "'?' +  odkSurvey.getHashString('gridScreen')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 48
       },
       {
-        "string_token": "deliver",
-        "text": {
-          "default": "Deliver",
-          "es": "Entregar"
-        },
+        "clause": "exit section",
         "_row_num": 49
       },
       {
-        "string_token": "view",
-        "text": {
-          "default": "View",
-          "es": "Ver"
-        },
+        "branch_label": "adult_coverage",
         "_row_num": 50
       },
       {
-        "string_token": "change_entitlement_status",
-        "text": {
-          "default": "Change Entitlement Status",
-          "es": "Cambiar estatus de permisos"
+        "url": "'?' +  odkSurvey.getHashString('adult_coverage')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 51
       },
       {
-        "string_token": "create_new_entitlement",
-        "text": {
-          "default": "Create New Entitlement",
-          "es": "Crear Nuevo permiso"
-        },
+        "clause": "exit section",
         "_row_num": 52
       },
       {
-        "string_token": "choose_authorization",
-        "text": {
-          "default": "Choose Authorization",
-          "es": "Seleccionar Autorización"
-        },
+        "branch_label": "child_coverage",
         "_row_num": 53
       },
       {
-        "string_token": "view_by_authorization",
-        "text": {
-          "default": "View By Authorization",
-          "es": "Vista por autorización"
+        "url": "'?' +  odkSurvey.getHashString('child_coverage')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 54
       },
       {
-        "string_token": "view_deliveries",
-        "text": {
-          "default": "View Deliveries",
-          "es": "Ver entregas"
-        },
+        "clause": "exit section",
         "_row_num": 55
       },
       {
-        "string_token": "select_group",
-        "text": {
-          "default": "Please Select Group",
-          "es": "Por favor seleccione el grupo"
-        },
+        "branch_label": "graphExample",
         "_row_num": 56
       },
       {
-        "string_token": "enter_value",
-        "text": {
-          "default": "Enter a value",
-          "es": "Ingrese un valor"
+        "url": "'?' +  odkSurvey.getHashString('graphExample')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 57
       },
       {
-        "string_token": "deliver_items",
-        "text": {
-          "default": "Deliver Items",
-          "es": "Entregar artículos"
-        },
+        "clause": "exit section",
         "_row_num": 58
       },
       {
-        "string_token": "confirm_delivery",
-        "text": {
-          "default": "Confirm Delivery",
-          "es": "Confirmar entrega"
-        },
+        "branch_label": "visit",
         "_row_num": 59
       },
       {
-        "string_token": "entitlement_creation_success",
-        "text": {
-          "default": "Entitlement Successfully Created",
-          "es": "Permisos creados satisfactoriamente"
+        "url": "'?' +  odkSurvey.getHashString('visit')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
+        "_row_num": 60
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 61
+      },
+      {
+        "branch_label": "plot",
         "_row_num": 62
       },
       {
-        "string_token": "delivery_confirmed",
-        "text": {
-          "default": "Delivery Confirmed!",
-          "es": "¡Entrega confirmada!"
+        "url": "'?' +  odkSurvey.getHashString('plot')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 63
       },
       {
-        "string_token": "id_available",
-        "text": {
-          "default": "ID Available",
-          "es": "Identificación disponible"
+        "clause": "exit section",
+        "_row_num": 64
+      },
+      {
+        "branch_label": "geoweather",
+        "_row_num": 65
+      },
+      {
+        "url": "'?' +  odkSurvey.getHashString('geoweather')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 66
       },
       {
-        "string_token": "voucher_detected",
-        "text": {
-          "default": "Voucher Detected",
-          "es": "Cupón Detectado"
-        },
+        "clause": "exit section",
         "_row_num": 67
       },
       {
-        "string_token": "id_unavailable",
-        "text": {
-          "default": "ID Unavailable",
-          "es": "Identificación no disponible"
-        },
+        "branch_label": "send_sms",
         "_row_num": 68
       },
       {
-        "string_token": "invalid_search",
-        "text": {
-          "default": "Invalid Search",
-          "el": "Μη έγκυρη αναζήτηση",
-          "ar": "البحث غير صحيح",
-          "fa": "جستجو نامعتبر",
-          "es": "Búsqueda inválida"
+        "url": "'?' +  odkSurvey.getHashString('send_sms')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
+        "_row_num": 69
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 70
+      },
+      {
+        "branch_label": "eonasdan",
         "_row_num": 71
       },
       {
-        "string_token": "missing_beneficiary_notification",
-        "text": {
-          "default": "Beneficiary Entity ID not found in system",
-          "es": "Identificación del beneficiario no se encuentran en el sistema"
+        "url": "'?' + odkSurvey.getHashString('eonasdan')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 72
       },
       {
-        "string_token": "already_qualifies_override",
-        "text": {
-          "default": "Scanned beneficiary already qualifies for this authorization",
-          "el": "Ο σαρωμένος δικαιούχος είναι ήδη κατάλληλος για αυτήν τη διανομή",
-          "ar": "المستفيد متاح للتوزيع",
-          "fa": "اسکن ذینفع در حال حاضر برای این توزیع",
-          "es": "Beneficiario escaneado ya calificado para esta distribución"
-        },
+        "clause": "exit section",
         "_row_num": 73
       },
       {
-        "string_token": "be_custom_form_undefined",
-        "text": {
-          "default": "Beneficiary Entity custom form not defined",
-          "es": "Formulario personalizado del beneficiario no definido"
-        },
+        "branch_label": "screenClient",
         "_row_num": 74
       },
       {
-        "string_token": "beneficiary_already_received",
-        "text": {
-          "default": "This beneficiary entity id has already received the current authorization",
-          "es": "Esta identificación de beneficiario ya ha recibió la autorización"
+        "url": "'?' +  odkSurvey.getHashString('femaleClients', 'screenClient')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 75
       },
       {
-        "string_token": "internal_error",
-        "text": {
-          "default": "Internal Error: please contact administrator",
-          "es": "Error interno: póngase en contacto con administrador"
-        },
+        "clause": "exit section",
         "_row_num": 76
       },
       {
-        "string_token": "disabled_beneficiary_notification",
-        "text": {
-          "default": "This beneficiary is disabled",
-          "el": "Αυτός ο δικαιούχος είναι απενεργοποιημένος",
-          "ar": "هذا المستفيد معطل",
-          "fa": "این ذینفع غیر فعال است",
-          "es": "Este beneficiario está deshabilitado"
-        },
+        "branch_label": "client6Week",
         "_row_num": 77
       },
       {
-        "string_token": "no_authorizations",
-        "text": {
-          "default": "No Authorizations",
-          "el": "Καμία διανομή",
-          "ar": "لا توزيعات",
-          "fa": "بدون توزیع",
-          "es": "Sin distribuciones"
+        "url": "'?' +  odkSurvey.getHashString('femaleClients','client6Week')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 78
       },
       {
-        "string_token": "enabled_households",
-        "text": {
-          "default": "Enabled Households",
-          "es": "Familias Habilitadas"
-        },
+        "clause": "exit section",
+        "_row_num": 79
+      },
+      {
+        "branch_label": "client6Month",
         "_row_num": 80
       },
       {
-        "string_token": "disabled_households",
-        "text": {
-          "default": "Disabled Households",
-          "es": "Familias deshabilitadas"
+        "url": "'?' +  odkSurvey.getHashString('femaleClients', 'client6Month')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 81
       },
       {
-        "string_token": "enabled_beneficiaries",
-        "text": {
-          "default": "Enabled Beneficiaries",
-          "el": "Ενεργοί Δικαιούχοι",
-          "ar": "المستفيدين النشطين",
-          "fa": "ذینفع فعال",
-          "es": "Beneficiarios habilitados"
-        },
+        "clause": "exit section",
         "_row_num": 82
       },
       {
-        "string_token": "disabled_beneficiaries",
-        "text": {
-          "default": "Disabled Beneficiaries",
-          "el": "Οι δικαιούχοι με ειδικές ανάγκες",
-          "ar": "المستفيدون المعطلين",
-          "fa": "ذینفع غیر فعال",
-          "es": "Beneficiarios desactivados"
-        },
+        "branch_label": "screenPartner",
         "_row_num": 83
       },
       {
-        "string_token": "delivered_since_sync",
-        "text": {
-          "default": "Delivered since sync",
-          "es": "Entregado desde sincronización"
+        "url": "'?' +  odkSurvey.getHashString('maleClients', 'screenPartner')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
+        "_row_num": 84
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 85
+      },
+      {
+        "branch_label": "partner6Month",
         "_row_num": 86
       },
       {
-        "string_token": "new_since_sync",
-        "text": {
-          "default": "New since last sync",
-          "es": "Nuevo desde la última sincronización"
+        "url": "'?' +  odkSurvey.getHashString('maleClients','partner6Month')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
         },
         "_row_num": 87
       },
       {
-        "string_token": "edited_since_sync",
-        "text": {
-          "default": "Edited since last sync",
-          "es": "Editado desde la última sincronización"
-        },
+        "clause": "exit section",
         "_row_num": 88
-      },
-      {
-        "string_token": "new_hh_mem_since_sync",
-        "text": {
-          "default": "New households [members] since last sync",
-          "es": "Nuevas familias [members] desde la última sincronización"
-        },
-        "_row_num": 89
-      },
-      {
-        "string_token": "edited_hh_mem_since_sync",
-        "text": {
-          "default": "Edited households [members] since last sync",
-          "es": "Familias editadas [members] desde la última sincronización"
-        },
-        "_row_num": 90
-      },
-      {
-        "string_token": "start_new_authorization",
-        "text": {
-          "default": "Start New Authorization",
-          "es": "Iniciar nueva autorización"
-        },
-        "_row_num": 93
-      },
-      {
-        "string_token": "create_authorization",
-        "text": {
-          "default": "Create Authorization",
-          "es": "Crear autorización"
-        },
-        "_row_num": 94
-      },
-      {
-        "string_token": "choose_authorization_name",
-        "text": {
-          "default": "Choose Authorization Name",
-          "es": "Elegir el nombre de la autorización"
-        },
-        "_row_num": 95
-      },
-      {
-        "string_token": "create_authorization_success",
-        "text": {
-          "default": "Authorization Successfully Created",
-          "es": "Autorización creada correctamente"
-        },
-        "_row_num": 96
-      },
-      {
-        "string_token": "create_authorization_failed",
-        "text": {
-          "default": "Authorization Creation Failed",
-          "es": "Fallo en la Creación de Autorización"
-        },
-        "_row_num": 97
-      },
-      {
-        "string_token": "terminate_authorization",
-        "text": {
-          "default": "Terminate Authorization",
-          "es": "Cancelar la autorización"
-        },
-        "_row_num": 98
-      },
-      {
-        "string_token": "terminate_authorization_success",
-        "text": {
-          "default": "Authorization Successfully Terminated",
-          "es": "Autorización Cancelada Correctamente"
-        },
-        "_row_num": 99
-      },
-      {
-        "string_token": "terminate_authorization_failed",
-        "text": {
-          "default": "Authorization Termination Failed",
-          "es": "Fallo en la Cancelación de Autorización"
-        },
-        "_row_num": 100
-      },
-      {
-        "string_token": "no_active_authorizations",
-        "text": {
-          "default": "There currently are no active authorizations",
-          "es": "Actualmente no hay autorizaciones activas"
-        },
-        "_row_num": 101
-      },
-      {
-        "string_token": "beneficiary_entity_id",
-        "text": {
-          "default": "Beneficiary Entity ID",
-          "es": "Identificación de Beneficiario"
-        },
-        "_row_num": 104
-      },
-      {
-        "string_token": "date_created",
-        "text": {
-          "default": "Date Created",
-          "es": "Fecha de creación"
-        },
-        "_row_num": 105
-      },
-      {
-        "string_token": "custom_beneficiary_entity_form_id",
-        "text": {
-          "default": "Custom Beneficiary Entity Form ID",
-          "es": "Formulario de Identificación de beneficiario personalizado"
-        },
-        "_row_num": 106
-      },
-      {
-        "string_token": "custom_beneficiary_entity_row_id",
-        "text": {
-          "default": "Custom Beneficiary Entity Row ID",
-          "es": "Fila de Identificación de beneficiario personalizada"
-        },
-        "_row_num": 107
-      },
-      {
-        "string_token": "status",
-        "text": {
-          "default": "Status",
-          "es": "Estatus"
-        },
-        "_row_num": 108
-      },
-      {
-        "string_token": "status_reason",
-        "text": {
-          "default": "Status Reason",
-          "es": "Razón de estado"
-        },
-        "_row_num": 109
-      },
-      {
-        "string_token": "beneficiary_entity_row_id",
-        "text": {
-          "default": "Beneficiary Entity Row ID",
-          "es": "Identificación de fila de beneficiario"
-        },
-        "_row_num": 111
-      },
-      {
-        "string_token": "custom_member_form_id",
-        "text": {
-          "default": "Custom Member Form ID",
-          "es": "Identificación de formulario personalizado de miembro"
-        },
-        "_row_num": 112
-      },
-      {
-        "string_token": "custom_member_row_id",
-        "text": {
-          "default": "Custom Member Row ID",
-          "es": "Identificación de Fila de miembro personalizada"
-        },
-        "_row_num": 113
-      },
-      {
-        "string_token": "member_id",
-        "text": {
-          "default": "Member ID",
-          "es": "Identificación de Miembro"
-        },
-        "_row_num": 114
-      },
-      {
-        "string_token": "authorization_id",
-        "text": {
-          "default": "Authorization ID",
-          "es": "Identificación de la autorización"
-        },
-        "_row_num": 116
-      },
-      {
-        "string_token": "authorization_type",
-        "text": {
-          "default": "Authorization Type",
-          "es": "Tipo de autorización"
-        },
-        "_row_num": 117
-      },
-      {
-        "string_token": "authorization_name",
-        "text": {
-          "default": "Authorization Name",
-          "es": "Nombre de la Autorización"
-        },
-        "_row_num": 118
-      },
-      {
-        "string_token": "authorization_description",
-        "text": {
-          "default": "Authorization Description",
-          "es": "Descripción de la autorización"
-        },
-        "_row_num": 119
-      },
-      {
-        "string_token": "entitlement_id",
-        "text": {
-          "default": "Entitlement ID",
-          "es": "Identificación de Permisos"
-        },
-        "_row_num": 120
-      },
-      {
-        "string_token": "is_override",
-        "text": {
-          "default": "Is Override",
-          "es": "Está anulado"
-        },
-        "_row_num": 121
-      },
-      {
-        "string_token": "item_pack_id",
-        "text": {
-          "default": "Item Pack ID",
-          "el": "Αναγνωριστικό πακέτου στοιχείου",
-          "ar": "رقم الحزمة",
-          "fa": "شماره بسته",
-          "es": "ID del artículo"
-        },
-        "_row_num": 122
-      },
-      {
-        "string_token": "item_pack_name",
-        "text": {
-          "default": "Item Pack Name",
-          "el": "Όνομα πακέτου στοιχείου",
-          "ar": "اسم الحزمة",
-          "fa": "نام بسته",
-          "es": "Nombre del artículo"
-        },
-        "_row_num": 123
-      },
-      {
-        "string_token": "item_pack_description",
-        "text": {
-          "default": "Item Pack Description",
-          "el": "Περιγραφή πακέτου στοιχείου",
-          "ar": "وصف الحزمة",
-          "fa": "شرح بسته",
-          "es": "Descripción del artículo"
-        },
-        "_row_num": 124
-      },
-      {
-        "string_token": "custom_delivery_form_id",
-        "text": {
-          "default": "Custom Delivery Form ID",
-          "es": "Identificación de formularios de entrega personalizada"
-        },
-        "_row_num": 125
-      },
-      {
-        "string_token": "custom_delivery_row_id",
-        "text": {
-          "default": "Custom Delivery Row ID",
-          "es": "Identificación de la fila de entrega personalizada"
-        },
-        "_row_num": 126
-      },
-      {
-        "string_token": "assigned_item_pack_code",
-        "text": {
-          "default": "Assigned Item Pack Barcode",
-          "es": "Código de barras de paquete de artículo asignado"
-        },
-        "_row_num": 127
-      },
-      {
-        "string_token": "name",
-        "text": {
-          "default": "Name",
-          "es": "Nombre"
-        },
-        "_row_num": 129
-      },
-      {
-        "string_token": "type",
-        "text": {
-          "default": "Type",
-          "es": "Tipo"
-        },
-        "_row_num": 130
-      },
-      {
-        "string_token": "item_pack_ranges",
-        "text": {
-          "default": "Item Pack Ranges",
-          "es": "Rangos de paquetes de artículos"
-        },
-        "_row_num": 131
-      },
-      {
-        "string_token": "report_version",
-        "text": {
-          "default": "Report Version",
-          "es": "Versión del informe"
-        },
-        "_row_num": 132
-      },
-      {
-        "string_token": "restrict_overrides",
-        "text": {
-          "default": "Restrict Overrides",
-          "es": "Restringir las anulaciones"
-        },
-        "_row_num": 133
-      },
-      {
-        "string_token": "summary_form_id",
-        "text": {
-          "default": "Summary Form ID",
-          "es": "Identificación de formulario Resumen"
-        },
-        "_row_num": 134
-      },
-      {
-        "string_token": "for_member",
-        "text": {
-          "default": "Entitlement Generated for Member",
-          "es": "Permiso generado para miembros"
-        },
-        "_row_num": 135
-      },
-      {
-        "string_token": "description",
-        "text": {
-          "default": "Description",
-          "es": "Descripción"
-        },
-        "_row_num": 136
-      },
-      {
-        "string_token": "extra_field_entitlements",
-        "text": {
-          "default": "Extra Field Entitlements",
-          "es": "Campo Adicional de Permisos"
-        },
-        "_row_num": 137
-      },
-      {
-        "string_token": "address",
-        "text": {
-          "default": "Address",
-          "es": "Dirección"
-        },
-        "_row_num": 140
-      },
-      {
-        "string_token": "telephone",
-        "text": {
-          "default": "Telephone",
-          "es": "Teléfono"
-        },
-        "_row_num": 141
-      },
-      {
-        "string_token": "mobile_provider",
-        "text": {
-          "default": "Mobile Provider",
-          "es": "Proveedor de telefonía móvil"
-        },
-        "_row_num": 142
-      },
-      {
-        "string_token": "delivery_site",
-        "text": {
-          "default": "Delivery Site",
-          "es": "Sitio de Entrega"
-        },
-        "_row_num": 143
-      },
-      {
-        "string_token": "location",
-        "text": {
-          "default": "Location",
-          "es": "Ubicación"
-        },
-        "_row_num": 144
-      },
-      {
-        "string_token": "tent_caravan",
-        "text": {
-          "default": "Tent/Caravan Code",
-          "es": "Código de tienda/caravana"
-        },
-        "_row_num": 145
-      },
-      {
-        "string_token": "hh_size",
-        "text": {
-          "default": "Household Size",
-          "es": "Tamaño de la Familia"
-        },
-        "_row_num": 146
-      },
-      {
-        "string_token": "first_name",
-        "text": {
-          "default": "First Name",
-          "es": "Primer Nombre"
-        },
-        "_row_num": 148
-      },
-      {
-        "string_token": "last_name",
-        "text": {
-          "default": "Last Name",
-          "es": "Apellidos"
-        },
-        "_row_num": 149
-      },
-      {
-        "string_token": "first_last_name",
-        "text": {
-          "default": "First and Last Name",
-          "es": "Nombre y Apellido"
-        },
-        "_row_num": 150
-      },
-      {
-        "string_token": "birth_date",
-        "text": {
-          "default": "Birth Date",
-          "es": "Fecha de nacimiento"
-        },
-        "_row_num": 151
-      },
-      {
-        "string_token": "age",
-        "text": {
-          "default": "Age",
-          "es": "Edad"
-        },
-        "_row_num": 152
-      },
-      {
-        "string_token": "gender",
-        "text": {
-          "default": "Gender",
-          "es": "Género"
-        },
-        "_row_num": 153
-      },
-      {
-        "string_token": "id_type",
-        "text": {
-          "default": "ID Type",
-          "es": "Tipo de Identificación"
-        },
-        "_row_num": 154
-      },
-      {
-        "string_token": "id_number",
-        "text": {
-          "default": "ID Number",
-          "es": "Número de identificación"
-        },
-        "_row_num": 155
-      },
-      {
-        "string_token": "is_head_of_household",
-        "text": {
-          "default": "Is Head of Household",
-          "es": "Es jefe de familia"
-        },
-        "_row_num": 156
-      },
-      {
-        "string_token": "picture",
-        "text": {
-          "default": "Picture",
-          "es": "Fotografía"
-        },
-        "_row_num": 157
-      },
-      {
-        "string_token": "email",
-        "text": {
-          "default": "Email",
-          "es": "Correo electrónico"
-        },
-        "_row_num": 158
-      },
-      {
-        "string_token": "vulnerability",
-        "text": {
-          "default": "Vulnerability",
-          "es": "Vulnerabilidad"
-        },
-        "_row_num": 159
       }
     ],
     "settings": [
@@ -1243,11 +556,9 @@
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "spanish": "Common Javascript Framework",
-              "greek": "Common Javascript Framework",
-              "arabic": "Common Javascript Framework",
-              "farsi": "Common Javascript Framework",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
           }
@@ -1262,14 +573,27 @@
           "locale": {
             "text": {
               "en": "English",
-              "es": "Ingles",
-              "el": "English",
-              "ar": "English",
-              "fa": "English"
+              "hi": "अंग्रेज़ी",
+              "es": "Inglés",
+              "default": "English"
             }
           }
         },
         "_row_num": 7
+      },
+      {
+        "setting_name": "hi",
+        "display": {
+          "locale": {
+            "text": {
+              "en": "Hindi",
+              "hi": "हिंदी",
+              "es": "Hindi",
+              "default": "Hindi"
+            }
+          }
+        },
+        "_row_num": 8
       },
       {
         "setting_name": "es",
@@ -1277,85 +601,285 @@
           "locale": {
             "text": {
               "en": "Spanish",
-              "es": "Espanol",
-              "el": "Espanol",
-              "ar": "Spanish",
-              "fa": "Spanish"
-            }
-          }
-        },
-        "_row_num": 8
-      },
-      {
-        "setting_name": "ar",
-        "display": {
-          "locale": {
-            "text": {
-              "en": "Arabic",
-              "es": "Arabic",
-              "el": "Arabic",
-              "ar": "Arabic",
-              "fa": "Arabic"
+              "hi": "स्पेनिश",
+              "es": "Español",
+              "default": "Spanish"
             }
           }
         },
         "_row_num": 9
-      },
-      {
-        "setting_name": "fa",
-        "display": {
-          "locale": {
-            "text": {
-              "en": "Farsi",
-              "es": "Farsi",
-              "el": "Farsi",
-              "ar": "Farsi",
-              "fa": "Farsi"
-            }
-          }
-        },
-        "_row_num": 10
-      },
-      {
-        "setting_name": "el",
-        "display": {
-          "locale": {
-            "text": {
-              "en": "Greek",
-              "es": "Greek",
-              "el": "Greek",
-              "ar": "Greek",
-              "fa": "Greek"
-            }
-          }
-        },
-        "_row_num": 11
-      },
-      {
-        "setting_name": "framework_variant",
-        "_row_num": 12
       }
     ],
     "choices": [
       {
         "choice_list_name": "test_forms",
-        "data_value": "registration",
+        "data_value": "geotagger",
         "display": {
           "title": {
-            "text": "Registration"
+            "text": "Geotagger"
           }
         },
         "_row_num": 2
       },
       {
         "choice_list_name": "test_forms",
-        "data_value": "deliveries",
+        "data_value": "breathcounter",
         "display": {
           "title": {
-            "text": "Deliveries"
+            "text": "breathcounter"
           }
         },
         "_row_num": 3
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "complex_validate_test",
+        "display": {
+          "title": {
+            "text": "complex_validate_test"
+          }
+        },
+        "_row_num": 4
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "customAppearance",
+        "display": {
+          "title": {
+            "text": "customAppearance"
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "exampleForm",
+        "display": {
+          "title": {
+            "text": "exampleForm"
+          }
+        },
+        "_row_num": 6
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "household",
+        "display": {
+          "title": {
+            "text": "household"
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "imnci_test",
+        "display": {
+          "title": {
+            "text": "imnci_test"
+          }
+        },
+        "_row_num": 8
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "refrigerators_init",
+        "display": {
+          "title": {
+            "text": "refrigerators_init"
+          }
+        },
+        "_row_num": 9
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "refrigerators_update",
+        "display": {
+          "title": {
+            "text": "refrigerators_update"
+          }
+        },
+        "_row_num": 10
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "section_test",
+        "display": {
+          "title": {
+            "text": "section_test"
+          }
+        },
+        "_row_num": 11
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "selects",
+        "display": {
+          "title": {
+            "text": "selects"
+          }
+        },
+        "_row_num": 12
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "twoColumn",
+        "display": {
+          "title": {
+            "text": "twoColumn"
+          }
+        },
+        "_row_num": 13
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "gridScreen",
+        "display": {
+          "title": {
+            "text": "gridScreen"
+          }
+        },
+        "_row_num": 14
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "child_coverage",
+        "display": {
+          "title": {
+            "text": "Child Coverage Immunizations"
+          }
+        },
+        "_row_num": 15
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "adult_coverage",
+        "display": {
+          "title": {
+            "text": "Adult Coverage Immunizations"
+          }
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "graphExample",
+        "display": {
+          "title": {
+            "text": "Graph Examples"
+          }
+        },
+        "_row_num": 17
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "visit",
+        "display": {
+          "title": {
+            "text": "Visit"
+          }
+        },
+        "_row_num": 18
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "plot",
+        "display": {
+          "title": {
+            "text": "Plot"
+          }
+        },
+        "_row_num": 19
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "agriculture",
+        "display": {
+          "title": {
+            "text": "Agriculture"
+          }
+        },
+        "_row_num": 20
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "geoweather",
+        "display": {
+          "title": {
+            "text": "geoweather"
+          }
+        },
+        "_row_num": 21
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "send_sms",
+        "display": {
+          "title": {
+            "text": "Send SMS"
+          }
+        },
+        "_row_num": 22
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "eonasdan",
+        "display": {
+          "title": {
+            "text": "DateTime Picker"
+          }
+        },
+        "_row_num": 23
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "screenClient",
+        "display": {
+          "title": {
+            "text": "Screen Female Client"
+          }
+        },
+        "_row_num": 24
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "client6Week",
+        "display": {
+          "title": {
+            "text": "Client 6 Week"
+          }
+        },
+        "_row_num": 25
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "client6Month",
+        "display": {
+          "title": {
+            "text": "Client 6 Month"
+          }
+        },
+        "_row_num": 26
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "screenPartner",
+        "display": {
+          "title": {
+            "text": "Screen Partner"
+          }
+        },
+        "_row_num": 27
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "partner6Month",
+        "display": {
+          "title": {
+            "text": "Partner 6 Month"
+          }
+        },
+        "_row_num": 28
       }
     ],
     "framework_translations": [
@@ -1363,9 +887,6 @@
         "string_token": "constraint_message",
         "text": {
           "default": "Constraint violated.",
-          "el": "Παραβιάστηκε ο περιορισμός.",
-          "ar": "تم انتهاك القيد",
-          "fa": "محدودیت نقض کرده است",
           "es": "Restricción incumplida"
         },
         "_row_num": 2
@@ -1374,9 +895,6 @@
         "string_token": "invalid_value_message",
         "text": {
           "default": "Invalid value.",
-          "el": "Μη έγκυρη τιμή.",
-          "ar": "قيمة غير صالحة",
-          "fa": "مقدار نامعتبر است.",
           "es": "Valor no válido."
         },
         "_row_num": 3
@@ -1385,9 +903,6 @@
         "string_token": "required_message",
         "text": {
           "default": "Required value not provided.",
-          "el": "Απαιτούμενη τιμή δεν παρέχεται.",
-          "ar": "القيمة المطلوبة غير متوفرة",
-          "fa": "مقدار مورد نیاز ارائه نشده است.",
           "es": "Dato requerido no proporcionado"
         },
         "_row_num": 4
@@ -1396,9 +911,6 @@
         "string_token": "required_exception_message",
         "text": {
           "default": "Exception while evaluating required() expression. See console log.",
-          "el": "Εξαίρεση κατά την αξιολόγηση της απαιτούμενης () έκφρασης. Δείτε το αρχείο καταγραφής κονσόλας.",
-          "ar": "استثناء أثناء التعبير المطلوب () راجع صفحة التسجيل",
-          "fa": "استثنا در حالی که ارزیابی های مورد نیاز () بیان است. ورود به سیستم کنسول را مشاهده کنید.",
           "es": "Excepción al evaluar la expresión requerido(). Ver consola de registro"
         },
         "_row_num": 5
@@ -1407,9 +919,6 @@
         "string_token": "constraint_exception_message",
         "text": {
           "default": "Exception while evaluating constraint() expression. See console log.",
-          "el": "Εξαίρεση κατά την αξιολόγηση της έκφρασης περιορισμού (). Δείτε το αρχείο καταγραφής κονσόλας.",
-          "ar": "استثناء أثناء تقييم القيد () راجع إلى صفحة التسجيل",
-          "fa": "استثنا در حالی که ارزیابی محدودیت () بیان است. ورود به سیستم کنسول را مشاهده کنید.",
           "es": "Excepción al evaluar la expresión restricción(). Ver consola de registro"
         },
         "_row_num": 6
@@ -1418,9 +927,7 @@
         "string_token": "acknLabel",
         "text": {
           "default": "Acknowledge",
-          "el": "Αναγνωρίζω",
-          "ar": "إعتراف",
-          "fa": "تصدیق کردن",
+          "hi": "स्वीकार करना",
           "es": "Admitir"
         },
         "_row_num": 7
@@ -1429,9 +936,7 @@
         "string_token": "back_button_label",
         "text": {
           "default": "Back",
-          "el": "Πίσω",
-          "ar": "ارجع",
-          "fa": "بازگشت",
+          "hi": "लौटना",
           "es": "Atrás"
         },
         "_row_num": 8
@@ -1440,9 +945,7 @@
         "string_token": "next_button_label",
         "text": {
           "default": "Next",
-          "el": "Επόμενος",
-          "ar": "تالي",
-          "fa": "بعد",
+          "hi": "आगामी",
           "es": "Siguiente"
         },
         "_row_num": 9
@@ -1451,9 +954,7 @@
         "string_token": "continue_button_label",
         "text": {
           "default": "Continue",
-          "el": "Να συνεχίσει",
-          "ar": "استمر",
-          "fa": "ادامه دهید",
+          "hi": "जारी रहना",
           "es": "Continuar"
         },
         "_row_num": 10
@@ -1462,9 +963,6 @@
         "string_token": "select_one_dropdown_label",
         "text": {
           "default": "Choose Option",
-          "el": "Επιλέξτε Επιλογή",
-          "ar": "اختار",
-          "fa": "انتخاب گزینه",
           "es": "Elige una opción"
         },
         "_row_num": 11
@@ -1473,9 +971,6 @@
         "string_token": "requiredValueErr",
         "text": {
           "default": "Required value was not provided.",
-          "el": "Η απαιτούμενη τιμή δεν δόθηκε.",
-          "ar": "القيمة المطلوبة غير متوفرة",
-          "fa": "مقدار مورد نیاز ارائه نشده است.",
           "es": "Dato requerido no proporcionado"
         },
         "_row_num": 12
@@ -1484,9 +979,6 @@
         "string_token": "geopoint_button_label",
         "text": {
           "default": "Record Location",
-          "el": "Τοποθεσία εγγραφής",
-          "ar": "سجل الموقع",
-          "fa": "ضبط محل سکونت",
           "es": "Grabar ubicación"
         },
         "_row_num": 13
@@ -1495,9 +987,6 @@
         "string_token": "geopoint_latitude_component",
         "text": {
           "default": "Latitude: {{value.latitude}}",
-          "el": "Γεωγραφικό πλάτος:",
-          "ar": "خط العرض  {{value.latitude}}",
-          "fa": "عرض جغرافیایی:  {{value.latitude}}",
           "es": "Latitud: {{value.latitude}}"
         },
         "_row_num": 14
@@ -1506,9 +995,6 @@
         "string_token": "geopoint_longitude_component",
         "text": {
           "default": "Longitude: {{value.longitude}}",
-          "el": "Γεωγραφικό μήκος:",
-          "ar": "خط الطول: {{value.longitude}}",
-          "fa": "عرض جغرافیایی: {{value.longitude}}",
           "es": "Longitud: {{value.longitude}}"
         },
         "_row_num": 15
@@ -1517,9 +1003,6 @@
         "string_token": "geopoint_altitude_component",
         "text": {
           "default": "Altitude: {{value.altitude}}",
-          "el": "Υψόμετρο:",
-          "ar": "الارتفاع: {{value.altitude}}",
-          "fa": "ارتفاع: {{value.altitude}}",
           "es": "Altitud: {{value.altitude}}"
         },
         "_row_num": 16
@@ -1528,9 +1011,6 @@
         "string_token": "geopoint_accuracy_component",
         "text": {
           "default": "Accuracy: {{value.accuracy}}",
-          "el": "Ακρίβεια:",
-          "ar": "الدقة: {{value.accuracy}}",
-          "fa": "دقت: {{value.accuracy}}",
           "es": "Precisión: {{value.accuracy}}"
         },
         "_row_num": 17
@@ -1539,9 +1019,6 @@
         "string_token": "waiting_text",
         "text": {
           "default": "Please wait…",
-          "el": "Παρακαλώ περιμένετε…",
-          "ar": "الرجاء أن تنتظر",
-          "fa": "لطفا صبر کنید…",
           "es": "Por favor, espere…"
         },
         "_row_num": 18
@@ -1550,9 +1027,6 @@
         "string_token": "take_video_button_label",
         "text": {
           "default": "Take Video",
-          "el": "Βγάλτε βίντεο",
-          "ar": "سجل الفيديو",
-          "fa": "ضبط فیلم",
           "es": "Graba un vídeo"
         },
         "_row_num": 19
@@ -1561,9 +1035,6 @@
         "string_token": "choose_video_button_label",
         "text": {
           "default": "Choose Video",
-          "el": "Επιλέξτε Βίντεο",
-          "ar": "اختار الفيديو",
-          "fa": "انتخاب ویدئو",
           "es": "Elige un vídeo"
         },
         "_row_num": 20
@@ -1572,9 +1043,6 @@
         "string_token": "video_control_not_supported",
         "text": {
           "default": "Video controls are not supported.",
-          "el": "Τα στοιχεία ελέγχου βίντεο δεν υποστηρίζονται.",
-          "ar": "ضوابط الفيديو غير معتمدة",
-          "fa": "کنترل های ویدئویی پشتیبانی نمی شوند.",
           "es": "Controles de vídeo no son compatibles."
         },
         "_row_num": 21
@@ -1583,9 +1051,6 @@
         "string_token": "take_audio_button_label",
         "text": {
           "default": "Capture Audio",
-          "el": "Συλλογή ήχου",
-          "ar": "سجل الصوت",
-          "fa": "ضبط صدا",
           "es": "Captura audio"
         },
         "_row_num": 22
@@ -1594,9 +1059,6 @@
         "string_token": "choose_audio_button_label",
         "text": {
           "default": "Choose Audio",
-          "el": "Επιλέξτε Ήχο",
-          "ar": "اختار الصوت",
-          "fa": "انتخاب صوتی",
           "es": "Elige audio"
         },
         "_row_num": 23
@@ -1605,9 +1067,6 @@
         "string_token": "audio_control_not_supported",
         "text": {
           "default": "Audio controls are not supported.",
-          "el": "Τα στοιχεία ελέγχου ήχου δεν υποστηρίζονται.",
-          "ar": "ضوابط الصوت غير معتمدة",
-          "fa": "کنترل های صوتی پشتیبانی نمی شود.",
           "es": "Controles de audio no son compatibles."
         },
         "_row_num": 24
@@ -1616,9 +1075,6 @@
         "string_token": "confirm_action_no_label",
         "text": {
           "default": "NO",
-          "el": "ΟΧΙ",
-          "ar": "لا",
-          "fa": "خیر",
           "es": "NO"
         },
         "_row_num": 25
@@ -1627,9 +1083,6 @@
         "string_token": "confirm_action_yes_label",
         "text": {
           "default": "YES",
-          "el": "ΝΑΙ",
-          "ar": "نعم",
-          "fa": "بله",
           "es": "SI"
         },
         "_row_num": 26
@@ -1638,9 +1091,6 @@
         "string_token": "external_link_button_label",
         "text": {
           "default": "Follow link",
-          "el": "Ακολουθήστε το σύνδεσμο",
-          "ar": "ادخل إلى الرابط",
-          "fa": "دنبال لینک",
           "es": "Sigue el enlace"
         },
         "_row_num": 27
@@ -1665,9 +1115,6 @@
         "string_token": "finalize_survey_button_label",
         "text": {
           "default": "Finalize",
-          "el": "Οριστικοποιώ",
-          "ar": "الانتهاء",
-          "fa": "نهایی",
           "es": "Finalizar"
         },
         "_row_num": 30
@@ -1676,9 +1123,6 @@
         "string_token": "save_as_incomplete_survey_button_label",
         "text": {
           "default": "Incomplete",
-          "el": "Ατελής",
-          "ar": "غير كامل",
-          "fa": "ناقص",
           "es": "Incompleto"
         },
         "_row_num": 31
@@ -1687,9 +1131,6 @@
         "string_token": "take_image_button_label",
         "text": {
           "default": "Take Photo",
-          "el": "Βγάλε φωτογραφία",
-          "ar": "تصوير",
-          "fa": "عکس گرفتن",
           "es": "Tomé una foto"
         },
         "_row_num": 33
@@ -1698,9 +1139,6 @@
         "string_token": "choose_image_button_label",
         "text": {
           "default": "Choose Image",
-          "el": "Επιλέξτε Εικόνα",
-          "ar": "اختار الصورة",
-          "fa": "انتخاب تصویر",
           "es": "Elige una imagen"
         },
         "_row_num": 34
@@ -1709,9 +1147,6 @@
         "string_token": "launch_intent_button_label",
         "text": {
           "default": "Launch Intent",
-          "el": "Ξεκινήστε την πρόθεση",
-          "ar": "إطلاق القصد",
-          "fa": "قصد راه اندازی",
           "es": "Lanzamiento de intención"
         },
         "_row_num": 35
@@ -1728,9 +1163,6 @@
         "string_token": "opening_survey_next_button_label",
         "text": {
           "default": "Go to next prompt",
-          "el": "Μεταβείτε στην επόμενη ερώτηση",
-          "ar": "اذهب إلى الموجه التالي",
-          "fa": "برو به موقع بعدی",
           "es": "Ir al siguiente"
         },
         "_row_num": 37
@@ -1739,9 +1171,6 @@
         "string_token": "options_popup_language_heading",
         "text": {
           "default": "Language",
-          "el": "Γλώσσα",
-          "ar": "اللغة",
-          "fa": "زبان",
           "es": "Idioma"
         },
         "_row_num": 38
@@ -1750,9 +1179,6 @@
         "string_token": "options_popup_contents_heading",
         "text": {
           "default": "Contents",
-          "el": "Περιεχόμενα",
-          "ar": "المحتويات",
-          "fa": "فهرست",
           "es": "Contenido"
         },
         "_row_num": 39
@@ -1761,9 +1187,6 @@
         "string_token": "options_popup_ignore_changes_heading",
         "text": {
           "default": "Ignore Changes + Exit",
-          "el": "Αγνόηση αλλαγών + Έξοδος",
-          "ar": "تجاهل التغييرات + الخروج",
-          "fa": "نادیده گرفتن تغییرات + خروج",
           "es": "Ignorar cambios y salir"
         },
         "_row_num": 40
@@ -1772,9 +1195,6 @@
         "string_token": "options_popup_save_changes_heading",
         "text": {
           "default": "Save Changes + Exit",
-          "el": "Αποθήκευση αλλαγών + Έξοδος",
-          "ar": "احفظ التغييرات + الخروج",
-          "fa": "ذخیره تغییرات و خروج",
           "es": "Guardar cambios y salir"
         },
         "_row_num": 41
@@ -1783,9 +1203,6 @@
         "string_token": "options_popup_finalize_changes_heading",
         "text": {
           "default": "Finalize Changes + Exit",
-          "el": "Ολοκλήρωση αλλαγών + Έξοδος",
-          "ar": "انتهي التغييرات + الخروج",
-          "fa": "نهایی تغییرات + خروج",
           "es": "Finalizar cambios y salir"
         },
         "_row_num": 42
@@ -1794,9 +1211,6 @@
         "string_token": "screen_popup_ok_button_label",
         "text": {
           "default": "OK",
-          "el": "Εντάξει",
-          "ar": "أوكي",
-          "fa": "خوب",
           "es": "Confirmar"
         },
         "_row_num": 43
@@ -1805,9 +1219,6 @@
         "string_token": "select_with_other_other_label",
         "text": {
           "default": "Other:",
-          "el": "Άλλα:",
-          "ar": "أخر",
-          "fa": "دیگر:",
           "es": "Otro:"
         },
         "_row_num": 44
@@ -1816,9 +1227,7 @@
         "string_token": "select_deselect_label",
         "text": {
           "default": "Deselect",
-          "el": "Αποεπιλέξτε",
-          "ar": "إلغاء",
-          "fa": "از حالت انتخاب خارج",
+          "hi": "अचयनित",
           "es": "Deseleccioanr"
         },
         "_row_num": 45
@@ -1827,9 +1236,6 @@
         "string_token": "take_signature_button_label",
         "text": {
           "default": "Get Signature",
-          "el": "Πάρτε Υπογραφή",
-          "ar": "سجل التوقيع",
-          "fa": "مطلع امضا",
           "es": "Obtener firma"
         },
         "_row_num": 46
@@ -1838,9 +1244,6 @@
         "string_token": "instances_survey_create_button_label",
         "text": {
           "default": "Create new instance",
-          "el": "Δημιουργήστε νέα παρουσία",
-          "ar": "إنشاء حتة جديدة",
-          "fa": "درست نمونه جدید",
           "es": "Crear nueva instancia"
         },
         "_row_num": 47
@@ -1849,9 +1252,6 @@
         "string_token": "instances_no_saved_instances_label",
         "text": {
           "default": "No saved instances.",
-          "el": "Δεν υπάρχουν αποθηκευμένες παρουσίες.",
-          "ar": "الحتات غير محفوظة",
-          "fa": "هیچ موردی را نجات داد",
           "es": "Instancias no guardadas"
         },
         "_row_num": 48
@@ -1860,9 +1260,6 @@
         "string_token": "instances_last_save_date_label",
         "text": {
           "default": "<p><strong>Last Save Date:</strong></p>",
-          "el": "Τελευταία ημερομηνία αποθήκευσης:",
-          "ar": "تاريخ أخر حفظ",
-          "fa": "تاریخ و زمان آخرین ذخیره تاریخ عضویت:",
           "es": "<p><strong>Última fecha guardada:</strong></p>"
         },
         "_row_num": 49
@@ -1871,9 +1268,6 @@
         "string_token": "instances_previously_created_instances_label",
         "text": {
           "default": "<p>Previously created instances:</p>",
-          "el": "Προηγούμενες εμφανίσεις:",
-          "ar": "الحتات المنشؤة سابقا",
-          "fa": "پیش از موارد ایجاد شده:",
           "es": "<p>Instancias creadas previamente:</p>"
         },
         "_row_num": 50
@@ -1882,9 +1276,6 @@
         "string_token": "savepoint_type_finalized_text_label",
         "text": {
           "default": "Finalized",
-          "el": "Ολοκληρώθηκε",
-          "ar": "المنتهية",
-          "fa": "نهایی",
           "es": "Finalizado"
         },
         "_row_num": 51
@@ -1893,9 +1284,6 @@
         "string_token": "savepoint_type_incomplete_text_label",
         "text": {
           "default": "Incomplete",
-          "el": "Ατελής",
-          "ar": "غير كامل",
-          "fa": "ناقص",
           "es": "Incompleto"
         },
         "_row_num": 52
@@ -1904,9 +1292,6 @@
         "string_token": "savepoint_type_checkpoint_text_label",
         "text": {
           "default": "Checkpoint",
-          "el": "Σημείο ελέγχου",
-          "ar": "نقط التفتيش",
-          "fa": "پاسگاه",
           "es": "Cambios no guardados"
         },
         "_row_num": 53
@@ -1915,9 +1300,6 @@
         "string_token": "linked_table_new_instance_label",
         "text": {
           "default": "Create new instance",
-          "el": "Δημιουργήστε νέο παράδειγμα",
-          "ar": "إنشاء حتة جديدة",
-          "fa": "درست نمونه جدید",
           "es": "Crear nueva instancia"
         },
         "_row_num": 54
@@ -1926,7 +1308,6 @@
         "string_token": "barcode_button_label",
         "text": {
           "default": "Scan Barcode",
-          "el": "Scan Barcode",
           "es": "Escanear Código de Barras"
         },
         "_row_num": 55
@@ -1935,7 +1316,6 @@
         "string_token": "invalid_numeric_message",
         "text": {
           "default": "Numeric value expected",
-          "el": "Αναμενόμενη αριθμητική τιμή",
           "es": "Valor numérico esperado"
         },
         "_row_num": 56
@@ -1944,7 +1324,6 @@
         "string_token": "invalid_integer_message",
         "text": {
           "default": "Integer value expected",
-          "el": "Αναμενόμενη τιμή ακέραιας",
           "es": "Valor entero esperado"
         },
         "_row_num": 57
@@ -2014,11 +1393,9 @@
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "spanish": "Common Javascript Framework",
-              "greek": "Common Javascript Framework",
-              "arabic": "Common Javascript Framework",
-              "farsi": "Common Javascript Framework",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
           }
@@ -2033,14 +1410,27 @@
           "locale": {
             "text": {
               "en": "English",
-              "es": "Ingles",
-              "el": "English",
-              "ar": "English",
-              "fa": "English"
+              "hi": "अंग्रेज़ी",
+              "es": "Inglés",
+              "default": "English"
             }
           }
         },
         "_row_num": 7
+      },
+      "hi": {
+        "setting_name": "hi",
+        "display": {
+          "locale": {
+            "text": {
+              "en": "Hindi",
+              "hi": "हिंदी",
+              "es": "Hindi",
+              "default": "Hindi"
+            }
+          }
+        },
+        "_row_num": 8
       },
       "es": {
         "setting_name": "es",
@@ -2048,63 +1438,13 @@
           "locale": {
             "text": {
               "en": "Spanish",
-              "es": "Espanol",
-              "el": "Espanol",
-              "ar": "Spanish",
-              "fa": "Spanish"
-            }
-          }
-        },
-        "_row_num": 8
-      },
-      "ar": {
-        "setting_name": "ar",
-        "display": {
-          "locale": {
-            "text": {
-              "en": "Arabic",
-              "es": "Arabic",
-              "el": "Arabic",
-              "ar": "Arabic",
-              "fa": "Arabic"
+              "hi": "स्पेनिश",
+              "es": "Español",
+              "default": "Spanish"
             }
           }
         },
         "_row_num": 9
-      },
-      "fa": {
-        "setting_name": "fa",
-        "display": {
-          "locale": {
-            "text": {
-              "en": "Farsi",
-              "es": "Farsi",
-              "el": "Farsi",
-              "ar": "Farsi",
-              "fa": "Farsi"
-            }
-          }
-        },
-        "_row_num": 10
-      },
-      "el": {
-        "setting_name": "el",
-        "display": {
-          "locale": {
-            "text": {
-              "en": "Greek",
-              "es": "Greek",
-              "el": "Greek",
-              "ar": "Greek",
-              "fa": "Greek"
-            }
-          }
-        },
-        "_row_num": 11
-      },
-      "framework_variant": {
-        "setting_name": "framework_variant",
-        "_row_num": 12
       },
       "_locales": {
         "setting_name": "_locales",
@@ -2113,60 +1453,60 @@
           {
             "display": {
               "locale": {
-                "text": "arabic"
+                "text": {
+                  "en": "English",
+                  "hi": "अंग्रेज़ी",
+                  "es": "Inglés",
+                  "default": "English"
+                }
               }
             },
-            "name": "arabic"
+            "_row_num": 7,
+            "name": "en"
           },
           {
             "display": {
               "locale": {
-                "text": "english"
+                "text": {
+                  "en": "Hindi",
+                  "hi": "हिंदी",
+                  "es": "Hindi",
+                  "default": "Hindi"
+                }
               }
             },
-            "name": "english"
+            "_row_num": 8,
+            "name": "hi"
           },
           {
             "display": {
               "locale": {
-                "text": "farsi"
+                "text": {
+                  "en": "Spanish",
+                  "hi": "स्पेनिश",
+                  "es": "Español",
+                  "default": "Spanish"
+                }
               }
             },
-            "name": "farsi"
-          },
-          {
-            "display": {
-              "locale": {
-                "text": "greek"
-              }
-            },
-            "name": "greek"
-          },
-          {
-            "display": {
-              "locale": {
-                "text": "spanish"
-              }
-            },
-            "name": "spanish"
+            "_row_num": 9,
+            "name": "es"
           }
         ]
       },
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "english"
+        "value": "en"
       },
       "initial": {
         "setting_name": "survey",
         "display": {
           "title": {
             "text": {
-              "english": "Common Javascript Framework",
-              "spanish": "Common Javascript Framework",
-              "greek": "Common Javascript Framework",
-              "arabic": "Common Javascript Framework",
-              "farsi": "Common Javascript Framework",
+              "en": "Common Javascript Framework",
+              "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+              "es": "Marco común de Javascript",
               "default": "Common Javascript Framework"
             }
           }
@@ -2180,23 +1520,273 @@
       "test_forms": [
         {
           "choice_list_name": "test_forms",
-          "data_value": "registration",
+          "data_value": "geotagger",
           "display": {
             "title": {
-              "text": "Registration"
+              "text": "Geotagger"
             }
           },
           "_row_num": 2
         },
         {
           "choice_list_name": "test_forms",
-          "data_value": "deliveries",
+          "data_value": "breathcounter",
           "display": {
             "title": {
-              "text": "Deliveries"
+              "text": "breathcounter"
             }
           },
           "_row_num": 3
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "complex_validate_test",
+          "display": {
+            "title": {
+              "text": "complex_validate_test"
+            }
+          },
+          "_row_num": 4
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "customAppearance",
+          "display": {
+            "title": {
+              "text": "customAppearance"
+            }
+          },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "exampleForm",
+          "display": {
+            "title": {
+              "text": "exampleForm"
+            }
+          },
+          "_row_num": 6
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "household",
+          "display": {
+            "title": {
+              "text": "household"
+            }
+          },
+          "_row_num": 7
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "imnci_test",
+          "display": {
+            "title": {
+              "text": "imnci_test"
+            }
+          },
+          "_row_num": 8
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "refrigerators_init",
+          "display": {
+            "title": {
+              "text": "refrigerators_init"
+            }
+          },
+          "_row_num": 9
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "refrigerators_update",
+          "display": {
+            "title": {
+              "text": "refrigerators_update"
+            }
+          },
+          "_row_num": 10
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "section_test",
+          "display": {
+            "title": {
+              "text": "section_test"
+            }
+          },
+          "_row_num": 11
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "selects",
+          "display": {
+            "title": {
+              "text": "selects"
+            }
+          },
+          "_row_num": 12
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "twoColumn",
+          "display": {
+            "title": {
+              "text": "twoColumn"
+            }
+          },
+          "_row_num": 13
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "gridScreen",
+          "display": {
+            "title": {
+              "text": "gridScreen"
+            }
+          },
+          "_row_num": 14
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "child_coverage",
+          "display": {
+            "title": {
+              "text": "Child Coverage Immunizations"
+            }
+          },
+          "_row_num": 15
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "adult_coverage",
+          "display": {
+            "title": {
+              "text": "Adult Coverage Immunizations"
+            }
+          },
+          "_row_num": 16
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "graphExample",
+          "display": {
+            "title": {
+              "text": "Graph Examples"
+            }
+          },
+          "_row_num": 17
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "visit",
+          "display": {
+            "title": {
+              "text": "Visit"
+            }
+          },
+          "_row_num": 18
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "plot",
+          "display": {
+            "title": {
+              "text": "Plot"
+            }
+          },
+          "_row_num": 19
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "agriculture",
+          "display": {
+            "title": {
+              "text": "Agriculture"
+            }
+          },
+          "_row_num": 20
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "geoweather",
+          "display": {
+            "title": {
+              "text": "geoweather"
+            }
+          },
+          "_row_num": 21
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "send_sms",
+          "display": {
+            "title": {
+              "text": "Send SMS"
+            }
+          },
+          "_row_num": 22
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "eonasdan",
+          "display": {
+            "title": {
+              "text": "DateTime Picker"
+            }
+          },
+          "_row_num": 23
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "screenClient",
+          "display": {
+            "title": {
+              "text": "Screen Female Client"
+            }
+          },
+          "_row_num": 24
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "client6Week",
+          "display": {
+            "title": {
+              "text": "Client 6 Week"
+            }
+          },
+          "_row_num": 25
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "client6Month",
+          "display": {
+            "title": {
+              "text": "Client 6 Month"
+            }
+          },
+          "_row_num": 26
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "screenPartner",
+          "display": {
+            "title": {
+              "text": "Screen Partner"
+            }
+          },
+          "_row_num": 27
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "partner6Month",
+          "display": {
+            "title": {
+              "text": "Partner 6 Month"
+            }
+          },
+          "_row_num": 28
         }
       ]
     },
@@ -2206,9 +1796,6 @@
           "string_token": "constraint_message",
           "text": {
             "default": "Constraint violated.",
-            "el": "Παραβιάστηκε ο περιορισμός.",
-            "ar": "تم انتهاك القيد",
-            "fa": "محدودیت نقض کرده است",
             "es": "Restricción incumplida"
           },
           "_row_num": 2
@@ -2217,9 +1804,6 @@
           "string_token": "invalid_value_message",
           "text": {
             "default": "Invalid value.",
-            "el": "Μη έγκυρη τιμή.",
-            "ar": "قيمة غير صالحة",
-            "fa": "مقدار نامعتبر است.",
             "es": "Valor no válido."
           },
           "_row_num": 3
@@ -2228,9 +1812,6 @@
           "string_token": "required_message",
           "text": {
             "default": "Required value not provided.",
-            "el": "Απαιτούμενη τιμή δεν παρέχεται.",
-            "ar": "القيمة المطلوبة غير متوفرة",
-            "fa": "مقدار مورد نیاز ارائه نشده است.",
             "es": "Dato requerido no proporcionado"
           },
           "_row_num": 4
@@ -2239,9 +1820,6 @@
           "string_token": "required_exception_message",
           "text": {
             "default": "Exception while evaluating required() expression. See console log.",
-            "el": "Εξαίρεση κατά την αξιολόγηση της απαιτούμενης () έκφρασης. Δείτε το αρχείο καταγραφής κονσόλας.",
-            "ar": "استثناء أثناء التعبير المطلوب () راجع صفحة التسجيل",
-            "fa": "استثنا در حالی که ارزیابی های مورد نیاز () بیان است. ورود به سیستم کنسول را مشاهده کنید.",
             "es": "Excepción al evaluar la expresión requerido(). Ver consola de registro"
           },
           "_row_num": 5
@@ -2250,9 +1828,6 @@
           "string_token": "constraint_exception_message",
           "text": {
             "default": "Exception while evaluating constraint() expression. See console log.",
-            "el": "Εξαίρεση κατά την αξιολόγηση της έκφρασης περιορισμού (). Δείτε το αρχείο καταγραφής κονσόλας.",
-            "ar": "استثناء أثناء تقييم القيد () راجع إلى صفحة التسجيل",
-            "fa": "استثنا در حالی که ارزیابی محدودیت () بیان است. ورود به سیستم کنسول را مشاهده کنید.",
             "es": "Excepción al evaluar la expresión restricción(). Ver consola de registro"
           },
           "_row_num": 6
@@ -2261,9 +1836,7 @@
           "string_token": "acknLabel",
           "text": {
             "default": "Acknowledge",
-            "el": "Αναγνωρίζω",
-            "ar": "إعتراف",
-            "fa": "تصدیق کردن",
+            "hi": "स्वीकार करना",
             "es": "Admitir"
           },
           "_row_num": 7
@@ -2272,9 +1845,7 @@
           "string_token": "back_button_label",
           "text": {
             "default": "Back",
-            "el": "Πίσω",
-            "ar": "ارجع",
-            "fa": "بازگشت",
+            "hi": "लौटना",
             "es": "Atrás"
           },
           "_row_num": 8
@@ -2283,9 +1854,7 @@
           "string_token": "next_button_label",
           "text": {
             "default": "Next",
-            "el": "Επόμενος",
-            "ar": "تالي",
-            "fa": "بعد",
+            "hi": "आगामी",
             "es": "Siguiente"
           },
           "_row_num": 9
@@ -2294,9 +1863,7 @@
           "string_token": "continue_button_label",
           "text": {
             "default": "Continue",
-            "el": "Να συνεχίσει",
-            "ar": "استمر",
-            "fa": "ادامه دهید",
+            "hi": "जारी रहना",
             "es": "Continuar"
           },
           "_row_num": 10
@@ -2305,9 +1872,6 @@
           "string_token": "select_one_dropdown_label",
           "text": {
             "default": "Choose Option",
-            "el": "Επιλέξτε Επιλογή",
-            "ar": "اختار",
-            "fa": "انتخاب گزینه",
             "es": "Elige una opción"
           },
           "_row_num": 11
@@ -2316,9 +1880,6 @@
           "string_token": "requiredValueErr",
           "text": {
             "default": "Required value was not provided.",
-            "el": "Η απαιτούμενη τιμή δεν δόθηκε.",
-            "ar": "القيمة المطلوبة غير متوفرة",
-            "fa": "مقدار مورد نیاز ارائه نشده است.",
             "es": "Dato requerido no proporcionado"
           },
           "_row_num": 12
@@ -2327,9 +1888,6 @@
           "string_token": "geopoint_button_label",
           "text": {
             "default": "Record Location",
-            "el": "Τοποθεσία εγγραφής",
-            "ar": "سجل الموقع",
-            "fa": "ضبط محل سکونت",
             "es": "Grabar ubicación"
           },
           "_row_num": 13
@@ -2338,9 +1896,6 @@
           "string_token": "geopoint_latitude_component",
           "text": {
             "default": "Latitude: {{value.latitude}}",
-            "el": "Γεωγραφικό πλάτος:",
-            "ar": "خط العرض  {{value.latitude}}",
-            "fa": "عرض جغرافیایی:  {{value.latitude}}",
             "es": "Latitud: {{value.latitude}}"
           },
           "_row_num": 14
@@ -2349,9 +1904,6 @@
           "string_token": "geopoint_longitude_component",
           "text": {
             "default": "Longitude: {{value.longitude}}",
-            "el": "Γεωγραφικό μήκος:",
-            "ar": "خط الطول: {{value.longitude}}",
-            "fa": "عرض جغرافیایی: {{value.longitude}}",
             "es": "Longitud: {{value.longitude}}"
           },
           "_row_num": 15
@@ -2360,9 +1912,6 @@
           "string_token": "geopoint_altitude_component",
           "text": {
             "default": "Altitude: {{value.altitude}}",
-            "el": "Υψόμετρο:",
-            "ar": "الارتفاع: {{value.altitude}}",
-            "fa": "ارتفاع: {{value.altitude}}",
             "es": "Altitud: {{value.altitude}}"
           },
           "_row_num": 16
@@ -2371,9 +1920,6 @@
           "string_token": "geopoint_accuracy_component",
           "text": {
             "default": "Accuracy: {{value.accuracy}}",
-            "el": "Ακρίβεια:",
-            "ar": "الدقة: {{value.accuracy}}",
-            "fa": "دقت: {{value.accuracy}}",
             "es": "Precisión: {{value.accuracy}}"
           },
           "_row_num": 17
@@ -2382,9 +1928,6 @@
           "string_token": "waiting_text",
           "text": {
             "default": "Please wait…",
-            "el": "Παρακαλώ περιμένετε…",
-            "ar": "الرجاء أن تنتظر",
-            "fa": "لطفا صبر کنید…",
             "es": "Por favor, espere…"
           },
           "_row_num": 18
@@ -2393,9 +1936,6 @@
           "string_token": "take_video_button_label",
           "text": {
             "default": "Take Video",
-            "el": "Βγάλτε βίντεο",
-            "ar": "سجل الفيديو",
-            "fa": "ضبط فیلم",
             "es": "Graba un vídeo"
           },
           "_row_num": 19
@@ -2404,9 +1944,6 @@
           "string_token": "choose_video_button_label",
           "text": {
             "default": "Choose Video",
-            "el": "Επιλέξτε Βίντεο",
-            "ar": "اختار الفيديو",
-            "fa": "انتخاب ویدئو",
             "es": "Elige un vídeo"
           },
           "_row_num": 20
@@ -2415,9 +1952,6 @@
           "string_token": "video_control_not_supported",
           "text": {
             "default": "Video controls are not supported.",
-            "el": "Τα στοιχεία ελέγχου βίντεο δεν υποστηρίζονται.",
-            "ar": "ضوابط الفيديو غير معتمدة",
-            "fa": "کنترل های ویدئویی پشتیبانی نمی شوند.",
             "es": "Controles de vídeo no son compatibles."
           },
           "_row_num": 21
@@ -2426,9 +1960,6 @@
           "string_token": "take_audio_button_label",
           "text": {
             "default": "Capture Audio",
-            "el": "Συλλογή ήχου",
-            "ar": "سجل الصوت",
-            "fa": "ضبط صدا",
             "es": "Captura audio"
           },
           "_row_num": 22
@@ -2437,9 +1968,6 @@
           "string_token": "choose_audio_button_label",
           "text": {
             "default": "Choose Audio",
-            "el": "Επιλέξτε Ήχο",
-            "ar": "اختار الصوت",
-            "fa": "انتخاب صوتی",
             "es": "Elige audio"
           },
           "_row_num": 23
@@ -2448,9 +1976,6 @@
           "string_token": "audio_control_not_supported",
           "text": {
             "default": "Audio controls are not supported.",
-            "el": "Τα στοιχεία ελέγχου ήχου δεν υποστηρίζονται.",
-            "ar": "ضوابط الصوت غير معتمدة",
-            "fa": "کنترل های صوتی پشتیبانی نمی شود.",
             "es": "Controles de audio no son compatibles."
           },
           "_row_num": 24
@@ -2459,9 +1984,6 @@
           "string_token": "confirm_action_no_label",
           "text": {
             "default": "NO",
-            "el": "ΟΧΙ",
-            "ar": "لا",
-            "fa": "خیر",
             "es": "NO"
           },
           "_row_num": 25
@@ -2470,9 +1992,6 @@
           "string_token": "confirm_action_yes_label",
           "text": {
             "default": "YES",
-            "el": "ΝΑΙ",
-            "ar": "نعم",
-            "fa": "بله",
             "es": "SI"
           },
           "_row_num": 26
@@ -2481,9 +2000,6 @@
           "string_token": "external_link_button_label",
           "text": {
             "default": "Follow link",
-            "el": "Ακολουθήστε το σύνδεσμο",
-            "ar": "ادخل إلى الرابط",
-            "fa": "دنبال لینک",
             "es": "Sigue el enlace"
           },
           "_row_num": 27
@@ -2508,9 +2024,6 @@
           "string_token": "finalize_survey_button_label",
           "text": {
             "default": "Finalize",
-            "el": "Οριστικοποιώ",
-            "ar": "الانتهاء",
-            "fa": "نهایی",
             "es": "Finalizar"
           },
           "_row_num": 30
@@ -2519,9 +2032,6 @@
           "string_token": "save_as_incomplete_survey_button_label",
           "text": {
             "default": "Incomplete",
-            "el": "Ατελής",
-            "ar": "غير كامل",
-            "fa": "ناقص",
             "es": "Incompleto"
           },
           "_row_num": 31
@@ -2530,9 +2040,6 @@
           "string_token": "take_image_button_label",
           "text": {
             "default": "Take Photo",
-            "el": "Βγάλε φωτογραφία",
-            "ar": "تصوير",
-            "fa": "عکس گرفتن",
             "es": "Tomé una foto"
           },
           "_row_num": 33
@@ -2541,9 +2048,6 @@
           "string_token": "choose_image_button_label",
           "text": {
             "default": "Choose Image",
-            "el": "Επιλέξτε Εικόνα",
-            "ar": "اختار الصورة",
-            "fa": "انتخاب تصویر",
             "es": "Elige una imagen"
           },
           "_row_num": 34
@@ -2552,9 +2056,6 @@
           "string_token": "launch_intent_button_label",
           "text": {
             "default": "Launch Intent",
-            "el": "Ξεκινήστε την πρόθεση",
-            "ar": "إطلاق القصد",
-            "fa": "قصد راه اندازی",
             "es": "Lanzamiento de intención"
           },
           "_row_num": 35
@@ -2571,9 +2072,6 @@
           "string_token": "opening_survey_next_button_label",
           "text": {
             "default": "Go to next prompt",
-            "el": "Μεταβείτε στην επόμενη ερώτηση",
-            "ar": "اذهب إلى الموجه التالي",
-            "fa": "برو به موقع بعدی",
             "es": "Ir al siguiente"
           },
           "_row_num": 37
@@ -2582,9 +2080,6 @@
           "string_token": "options_popup_language_heading",
           "text": {
             "default": "Language",
-            "el": "Γλώσσα",
-            "ar": "اللغة",
-            "fa": "زبان",
             "es": "Idioma"
           },
           "_row_num": 38
@@ -2593,9 +2088,6 @@
           "string_token": "options_popup_contents_heading",
           "text": {
             "default": "Contents",
-            "el": "Περιεχόμενα",
-            "ar": "المحتويات",
-            "fa": "فهرست",
             "es": "Contenido"
           },
           "_row_num": 39
@@ -2604,9 +2096,6 @@
           "string_token": "options_popup_ignore_changes_heading",
           "text": {
             "default": "Ignore Changes + Exit",
-            "el": "Αγνόηση αλλαγών + Έξοδος",
-            "ar": "تجاهل التغييرات + الخروج",
-            "fa": "نادیده گرفتن تغییرات + خروج",
             "es": "Ignorar cambios y salir"
           },
           "_row_num": 40
@@ -2615,9 +2104,6 @@
           "string_token": "options_popup_save_changes_heading",
           "text": {
             "default": "Save Changes + Exit",
-            "el": "Αποθήκευση αλλαγών + Έξοδος",
-            "ar": "احفظ التغييرات + الخروج",
-            "fa": "ذخیره تغییرات و خروج",
             "es": "Guardar cambios y salir"
           },
           "_row_num": 41
@@ -2626,9 +2112,6 @@
           "string_token": "options_popup_finalize_changes_heading",
           "text": {
             "default": "Finalize Changes + Exit",
-            "el": "Ολοκλήρωση αλλαγών + Έξοδος",
-            "ar": "انتهي التغييرات + الخروج",
-            "fa": "نهایی تغییرات + خروج",
             "es": "Finalizar cambios y salir"
           },
           "_row_num": 42
@@ -2637,9 +2120,6 @@
           "string_token": "screen_popup_ok_button_label",
           "text": {
             "default": "OK",
-            "el": "Εντάξει",
-            "ar": "أوكي",
-            "fa": "خوب",
             "es": "Confirmar"
           },
           "_row_num": 43
@@ -2648,9 +2128,6 @@
           "string_token": "select_with_other_other_label",
           "text": {
             "default": "Other:",
-            "el": "Άλλα:",
-            "ar": "أخر",
-            "fa": "دیگر:",
             "es": "Otro:"
           },
           "_row_num": 44
@@ -2659,9 +2136,7 @@
           "string_token": "select_deselect_label",
           "text": {
             "default": "Deselect",
-            "el": "Αποεπιλέξτε",
-            "ar": "إلغاء",
-            "fa": "از حالت انتخاب خارج",
+            "hi": "अचयनित",
             "es": "Deseleccioanr"
           },
           "_row_num": 45
@@ -2670,9 +2145,6 @@
           "string_token": "take_signature_button_label",
           "text": {
             "default": "Get Signature",
-            "el": "Πάρτε Υπογραφή",
-            "ar": "سجل التوقيع",
-            "fa": "مطلع امضا",
             "es": "Obtener firma"
           },
           "_row_num": 46
@@ -2681,9 +2153,6 @@
           "string_token": "instances_survey_create_button_label",
           "text": {
             "default": "Create new instance",
-            "el": "Δημιουργήστε νέα παρουσία",
-            "ar": "إنشاء حتة جديدة",
-            "fa": "درست نمونه جدید",
             "es": "Crear nueva instancia"
           },
           "_row_num": 47
@@ -2692,9 +2161,6 @@
           "string_token": "instances_no_saved_instances_label",
           "text": {
             "default": "No saved instances.",
-            "el": "Δεν υπάρχουν αποθηκευμένες παρουσίες.",
-            "ar": "الحتات غير محفوظة",
-            "fa": "هیچ موردی را نجات داد",
             "es": "Instancias no guardadas"
           },
           "_row_num": 48
@@ -2703,9 +2169,6 @@
           "string_token": "instances_last_save_date_label",
           "text": {
             "default": "<p><strong>Last Save Date:</strong></p>",
-            "el": "Τελευταία ημερομηνία αποθήκευσης:",
-            "ar": "تاريخ أخر حفظ",
-            "fa": "تاریخ و زمان آخرین ذخیره تاریخ عضویت:",
             "es": "<p><strong>Última fecha guardada:</strong></p>"
           },
           "_row_num": 49
@@ -2714,9 +2177,6 @@
           "string_token": "instances_previously_created_instances_label",
           "text": {
             "default": "<p>Previously created instances:</p>",
-            "el": "Προηγούμενες εμφανίσεις:",
-            "ar": "الحتات المنشؤة سابقا",
-            "fa": "پیش از موارد ایجاد شده:",
             "es": "<p>Instancias creadas previamente:</p>"
           },
           "_row_num": 50
@@ -2725,9 +2185,6 @@
           "string_token": "savepoint_type_finalized_text_label",
           "text": {
             "default": "Finalized",
-            "el": "Ολοκληρώθηκε",
-            "ar": "المنتهية",
-            "fa": "نهایی",
             "es": "Finalizado"
           },
           "_row_num": 51
@@ -2736,9 +2193,6 @@
           "string_token": "savepoint_type_incomplete_text_label",
           "text": {
             "default": "Incomplete",
-            "el": "Ατελής",
-            "ar": "غير كامل",
-            "fa": "ناقص",
             "es": "Incompleto"
           },
           "_row_num": 52
@@ -2747,9 +2201,6 @@
           "string_token": "savepoint_type_checkpoint_text_label",
           "text": {
             "default": "Checkpoint",
-            "el": "Σημείο ελέγχου",
-            "ar": "نقط التفتيش",
-            "fa": "پاسگاه",
             "es": "Cambios no guardados"
           },
           "_row_num": 53
@@ -2758,9 +2209,6 @@
           "string_token": "linked_table_new_instance_label",
           "text": {
             "default": "Create new instance",
-            "el": "Δημιουργήστε νέο παράδειγμα",
-            "ar": "إنشاء حتة جديدة",
-            "fa": "درست نمونه جدید",
             "es": "Crear nueva instancia"
           },
           "_row_num": 54
@@ -2769,7 +2217,6 @@
           "string_token": "barcode_button_label",
           "text": {
             "default": "Scan Barcode",
-            "el": "Scan Barcode",
             "es": "Escanear Código de Barras"
           },
           "_row_num": 55
@@ -2778,7 +2225,6 @@
           "string_token": "invalid_numeric_message",
           "text": {
             "default": "Numeric value expected",
-            "el": "Αναμενόμενη αριθμητική τιμή",
             "es": "Valor numérico esperado"
           },
           "_row_num": 56
@@ -2787,7 +2233,6 @@
           "string_token": "invalid_integer_message",
           "text": {
             "default": "Integer value expected",
-            "el": "Αναμενόμενη τιμή ακέραιας",
             "es": "Valor entero esperado"
           },
           "_row_num": 57
@@ -2819,1143 +2264,7 @@
       }
     },
     "common_definitions": {
-      "_tokens": {
-        "main_title": {
-          "string_token": "main_title",
-          "text": {
-            "default": "Disaster Relief",
-            "el": "Ανακούφιση από καταστροφές",
-            "ar": "توزيع الكوارث",
-            "fa": "تسکین فاجعه",
-            "es": "Ayuda en casos de desastre"
-          },
-          "_row_num": 2
-        },
-        "registration": {
-          "string_token": "registration",
-          "text": {
-            "default": "Registration",
-            "el": "Εγγραφή",
-            "ar": "التسجيل",
-            "fa": "ثبت",
-            "es": "Registro"
-          },
-          "_row_num": 3
-        },
-        "distribution": {
-          "string_token": "distribution",
-          "text": {
-            "default": "Distribution",
-            "es": "Distribución"
-          },
-          "_row_num": 4
-        },
-        "administrator_options": {
-          "string_token": "administrator_options",
-          "text": {
-            "default": "Administrator Options",
-            "el": "Επιλογές παράκαμψης",
-            "ar": "اختيارات التجاوز",
-            "fa": "لغو گزینه",
-            "es": "Opciones de administrador"
-          },
-          "_row_num": 5
-        },
-        "distribution_options": {
-          "string_token": "distribution_options",
-          "text": {
-            "default": "Distribution Options",
-            "es": "Opciones de distribución"
-          },
-          "_row_num": 6
-        },
-        "delivery_upper_case": {
-          "string_token": "delivery_upper_case",
-          "text": {
-            "default": "Delivery",
-            "es": "Entrega"
-          },
-          "_row_num": 7
-        },
-        "beneficiary": {
-          "string_token": "beneficiary",
-          "text": {
-            "default": "beneficiary",
-            "el": "δικαιούχος",
-            "ar": "مستفيد",
-            "fa": "ذینفع",
-            "es": "Beneficiario/a"
-          },
-          "_row_num": 10
-        },
-        "beneficiaries": {
-          "string_token": "beneficiaries",
-          "text": {
-            "default": "beneficiaries",
-            "el": "Δικαιούχοι",
-            "ar": "مستفيدين",
-            "fa": "ذینفع",
-            "es": "Beneficiarios/as"
-          },
-          "_row_num": 11
-        },
-        "delivery": {
-          "string_token": "delivery",
-          "text": {
-            "default": "delivery",
-            "el": "διανομή",
-            "ar": "تسليم",
-            "fa": "تحویل",
-            "es": "Entrega"
-          },
-          "_row_num": 12
-        },
-        "deliveries": {
-          "string_token": "deliveries",
-          "text": {
-            "default": "deliveries",
-            "el": "Παραδόσεις",
-            "ar": "تسليمات",
-            "fa": "تحویل",
-            "es": "Entregas"
-          },
-          "_row_num": 13
-        },
-        "household": {
-          "string_token": "household",
-          "text": {
-            "default": "household",
-            "es": "familia"
-          },
-          "_row_num": 14
-        },
-        "households": {
-          "string_token": "households",
-          "text": {
-            "default": "households",
-            "es": "familias"
-          },
-          "_row_num": 15
-        },
-        "member": {
-          "string_token": "member",
-          "text": {
-            "default": "member",
-            "es": "miembro"
-          },
-          "_row_num": 16
-        },
-        "members": {
-          "string_token": "members",
-          "text": {
-            "default": "members",
-            "es": "miembros"
-          },
-          "_row_num": 17
-        },
-        "found": {
-          "string_token": "found",
-          "text": {
-            "default": "found",
-            "el": "βρέθηκαν",
-            "ar": "موجود",
-            "fa": "مکتشف",
-            "es": "Encontrado"
-          },
-          "_row_num": 18
-        },
-        "pending": {
-          "string_token": "pending",
-          "text": {
-            "default": "Pending",
-            "es": "Pendiente"
-          },
-          "_row_num": 19
-        },
-        "delivered": {
-          "string_token": "delivered",
-          "text": {
-            "default": "Delivered",
-            "es": "Entregado"
-          },
-          "_row_num": 20
-        },
-        "data_path": {
-          "string_token": "data_path",
-          "text": {
-            "default": "View Data",
-            "el": "Προβολή δεδομένων",
-            "ar": "راجع المعلومات",
-            "fa": "دیدن اطلاعات",
-            "es": "Ver información"
-          },
-          "_row_num": 23
-        },
-        "data_categories": {
-          "string_token": "data_categories",
-          "text": {
-            "default": "Data Categories",
-            "el": "Κατηγορίες δεδομένων",
-            "ar": "نوعية المعلومات",
-            "fa": "دسته بندی اطلاعات",
-            "es": "Categorías de datos"
-          },
-          "_row_num": 24
-        },
-        "registration_data": {
-          "string_token": "registration_data",
-          "text": {
-            "default": "Registration Data",
-            "es": "Datos de registro"
-          },
-          "_row_num": 25
-        },
-        "view_registration_data": {
-          "string_token": "view_registration_data",
-          "text": {
-            "default": "View Registration Data",
-            "es": "Ver datos de registro"
-          },
-          "_row_num": 26
-        },
-        "delivery_data": {
-          "string_token": "delivery_data",
-          "text": {
-            "default": "Delivery Data",
-            "el": "Δεδομένα παράδοσης",
-            "ar": "معلومات التسليم",
-            "fa": "اطلاعات تحویل",
-            "es": "Datos de entrega"
-          },
-          "_row_num": 27
-        },
-        "view_delivery_data": {
-          "string_token": "view_delivery_data",
-          "text": {
-            "default": "View Delivery Data",
-            "el": "Προβολή δεδομένων παράδοσης",
-            "ar": "انظر معلومات التسليمات",
-            "fa": "دیدن اطلاعات  تحویل",
-            "es": "Ver datos de entregas"
-          },
-          "_row_num": 28
-        },
-        "advanced_search": {
-          "string_token": "advanced_search",
-          "text": {
-            "default": "Advanced Search",
-            "el": "Προχωρημένη Αναζήτηση",
-            "ar": "البحث المتقدم",
-            "fa": "جستجوی پیشرفته",
-            "es": "Búsqueda avanzada"
-          },
-          "_row_num": 31
-        },
-        "search_beneficiaries": {
-          "string_token": "search_beneficiaries",
-          "text": {
-            "default": "Search for Beneficiaries",
-            "el": "Αναζήτηση δικαιούχων",
-            "ar": "ابحث عن مستفيدين",
-            "fa": "جستجو برای ذینفع",
-            "es": "Buscar por beneficiarios"
-          },
-          "_row_num": 32
-        },
-        "search_deliveries": {
-          "string_token": "search_deliveries",
-          "text": {
-            "default": "Search for Deliveries",
-            "el": "Αναζήτηση για παραδόσεις",
-            "ar": "ابحث عن تسليمات",
-            "fa": "جستجو برای تحویل",
-            "es": "Buscar por entregas"
-          },
-          "_row_num": 33
-        },
-        "search_households": {
-          "string_token": "search_households",
-          "text": {
-            "default": "Search by Household",
-            "es": "Búsqueda por familia"
-          },
-          "_row_num": 34
-        },
-        "search_members": {
-          "string_token": "search_members",
-          "text": {
-            "default": "Search by Member",
-            "es": "Búsqueda por Miembro"
-          },
-          "_row_num": 35
-        },
-        "search": {
-          "string_token": "search",
-          "text": {
-            "default": "Search",
-            "es": "Buscar"
-          },
-          "_row_num": 36
-        },
-        "registration_title": {
-          "string_token": "registration_title",
-          "text": {
-            "default": "Register Beneficiary Entity",
-            "el": "Εγγραφή Κωδικού Δικαιούχου",
-            "ar": "تسجيل رمز المستفيد",
-            "fa": "ثبت نام کد ذینفع",
-            "es": "Registrar código de beneficiario"
-          },
-          "_row_num": 39
-        },
-        "delivery_title": {
-          "string_token": "delivery_title",
-          "text": {
-            "default": "Deliver to Beneficiary Entity",
-            "el": "Επαληθεύστε τον Κωδικό Δικαιούχου",
-            "ar": "تأكيد رمز المستفيد",
-            "fa": "تأیید کد ذینفع",
-            "es": "Verificar código de beneficiario"
-          },
-          "_row_num": 40
-        },
-        "view_authorization_details": {
-          "string_token": "view_authorization_details",
-          "text": {
-            "default": "View Authorization Details",
-            "es": "Ver detalles de autorización"
-          },
-          "_row_num": 41
-        },
-        "authorization_details": {
-          "string_token": "authorization_details",
-          "text": {
-            "default": "Authorization Details",
-            "es": "Detalles de autorización"
-          },
-          "_row_num": 42
-        },
-        "scan_barcode": {
-          "string_token": "scan_barcode",
-          "text": {
-            "default": "Scan Barcode",
-            "el": "Σάρωση γραμμωτού κώδικα",
-            "ar": "مسح الباركود",
-            "fa": "بارکد اسکن",
-            "es": "Escanear código de barras"
-          },
-          "_row_num": 43
-        },
-        "enter": {
-          "string_token": "enter",
-          "text": {
-            "default": "Enter",
-            "el": "Εισάγω",
-            "ar": "تنفيد",
-            "fa": "وارد شدن",
-            "es": "Ingresar"
-          },
-          "_row_num": 44
-        },
-        "enter_beneficiary_entity_id": {
-          "string_token": "enter_beneficiary_entity_id",
-          "text": {
-            "default": "Enter Beneficiary Entity ID",
-            "es": "Registrar código de beneficiario"
-          },
-          "_row_num": 45
-        },
-        "ok": {
-          "string_token": "ok",
-          "text": {
-            "default": "OK",
-            "es": "Confirmar"
-          },
-          "_row_num": 46
-        },
-        "view_all_deliveries": {
-          "string_token": "view_all_deliveries",
-          "text": {
-            "default": "View All Deliveries",
-            "el": "Προβολή όλων των παραδόσεων",
-            "ar": "راقب كل التسليمات",
-            "fa": "مشاهده تحویل",
-            "es": "Ver todas las entregas"
-          },
-          "_row_num": 47
-        },
-        "fill_field_report": {
-          "string_token": "fill_field_report",
-          "text": {
-            "default": "Fill Field Report",
-            "es": "Reporte de Campos Completos"
-          },
-          "_row_num": 48
-        },
-        "deliver": {
-          "string_token": "deliver",
-          "text": {
-            "default": "Deliver",
-            "es": "Entregar"
-          },
-          "_row_num": 49
-        },
-        "view": {
-          "string_token": "view",
-          "text": {
-            "default": "View",
-            "es": "Ver"
-          },
-          "_row_num": 50
-        },
-        "change_entitlement_status": {
-          "string_token": "change_entitlement_status",
-          "text": {
-            "default": "Change Entitlement Status",
-            "es": "Cambiar estatus de permisos"
-          },
-          "_row_num": 51
-        },
-        "create_new_entitlement": {
-          "string_token": "create_new_entitlement",
-          "text": {
-            "default": "Create New Entitlement",
-            "es": "Crear Nuevo permiso"
-          },
-          "_row_num": 52
-        },
-        "choose_authorization": {
-          "string_token": "choose_authorization",
-          "text": {
-            "default": "Choose Authorization",
-            "es": "Seleccionar Autorización"
-          },
-          "_row_num": 53
-        },
-        "view_by_authorization": {
-          "string_token": "view_by_authorization",
-          "text": {
-            "default": "View By Authorization",
-            "es": "Vista por autorización"
-          },
-          "_row_num": 54
-        },
-        "view_deliveries": {
-          "string_token": "view_deliveries",
-          "text": {
-            "default": "View Deliveries",
-            "es": "Ver entregas"
-          },
-          "_row_num": 55
-        },
-        "select_group": {
-          "string_token": "select_group",
-          "text": {
-            "default": "Please Select Group",
-            "es": "Por favor seleccione el grupo"
-          },
-          "_row_num": 56
-        },
-        "enter_value": {
-          "string_token": "enter_value",
-          "text": {
-            "default": "Enter a value",
-            "es": "Ingrese un valor"
-          },
-          "_row_num": 57
-        },
-        "deliver_items": {
-          "string_token": "deliver_items",
-          "text": {
-            "default": "Deliver Items",
-            "es": "Entregar artículos"
-          },
-          "_row_num": 58
-        },
-        "confirm_delivery": {
-          "string_token": "confirm_delivery",
-          "text": {
-            "default": "Confirm Delivery",
-            "es": "Confirmar entrega"
-          },
-          "_row_num": 59
-        },
-        "entitlement_creation_success": {
-          "string_token": "entitlement_creation_success",
-          "text": {
-            "default": "Entitlement Successfully Created",
-            "es": "Permisos creados satisfactoriamente"
-          },
-          "_row_num": 62
-        },
-        "delivery_confirmed": {
-          "string_token": "delivery_confirmed",
-          "text": {
-            "default": "Delivery Confirmed!",
-            "es": "¡Entrega confirmada!"
-          },
-          "_row_num": 63
-        },
-        "id_available": {
-          "string_token": "id_available",
-          "text": {
-            "default": "ID Available",
-            "es": "Identificación disponible"
-          },
-          "_row_num": 66
-        },
-        "voucher_detected": {
-          "string_token": "voucher_detected",
-          "text": {
-            "default": "Voucher Detected",
-            "es": "Cupón Detectado"
-          },
-          "_row_num": 67
-        },
-        "id_unavailable": {
-          "string_token": "id_unavailable",
-          "text": {
-            "default": "ID Unavailable",
-            "es": "Identificación no disponible"
-          },
-          "_row_num": 68
-        },
-        "invalid_search": {
-          "string_token": "invalid_search",
-          "text": {
-            "default": "Invalid Search",
-            "el": "Μη έγκυρη αναζήτηση",
-            "ar": "البحث غير صحيح",
-            "fa": "جستجو نامعتبر",
-            "es": "Búsqueda inválida"
-          },
-          "_row_num": 71
-        },
-        "missing_beneficiary_notification": {
-          "string_token": "missing_beneficiary_notification",
-          "text": {
-            "default": "Beneficiary Entity ID not found in system",
-            "es": "Identificación del beneficiario no se encuentran en el sistema"
-          },
-          "_row_num": 72
-        },
-        "already_qualifies_override": {
-          "string_token": "already_qualifies_override",
-          "text": {
-            "default": "Scanned beneficiary already qualifies for this authorization",
-            "el": "Ο σαρωμένος δικαιούχος είναι ήδη κατάλληλος για αυτήν τη διανομή",
-            "ar": "المستفيد متاح للتوزيع",
-            "fa": "اسکن ذینفع در حال حاضر برای این توزیع",
-            "es": "Beneficiario escaneado ya calificado para esta distribución"
-          },
-          "_row_num": 73
-        },
-        "be_custom_form_undefined": {
-          "string_token": "be_custom_form_undefined",
-          "text": {
-            "default": "Beneficiary Entity custom form not defined",
-            "es": "Formulario personalizado del beneficiario no definido"
-          },
-          "_row_num": 74
-        },
-        "beneficiary_already_received": {
-          "string_token": "beneficiary_already_received",
-          "text": {
-            "default": "This beneficiary entity id has already received the current authorization",
-            "es": "Esta identificación de beneficiario ya ha recibió la autorización"
-          },
-          "_row_num": 75
-        },
-        "internal_error": {
-          "string_token": "internal_error",
-          "text": {
-            "default": "Internal Error: please contact administrator",
-            "es": "Error interno: póngase en contacto con administrador"
-          },
-          "_row_num": 76
-        },
-        "disabled_beneficiary_notification": {
-          "string_token": "disabled_beneficiary_notification",
-          "text": {
-            "default": "This beneficiary is disabled",
-            "el": "Αυτός ο δικαιούχος είναι απενεργοποιημένος",
-            "ar": "هذا المستفيد معطل",
-            "fa": "این ذینفع غیر فعال است",
-            "es": "Este beneficiario está deshabilitado"
-          },
-          "_row_num": 77
-        },
-        "no_authorizations": {
-          "string_token": "no_authorizations",
-          "text": {
-            "default": "No Authorizations",
-            "el": "Καμία διανομή",
-            "ar": "لا توزيعات",
-            "fa": "بدون توزیع",
-            "es": "Sin distribuciones"
-          },
-          "_row_num": 78
-        },
-        "enabled_households": {
-          "string_token": "enabled_households",
-          "text": {
-            "default": "Enabled Households",
-            "es": "Familias Habilitadas"
-          },
-          "_row_num": 80
-        },
-        "disabled_households": {
-          "string_token": "disabled_households",
-          "text": {
-            "default": "Disabled Households",
-            "es": "Familias deshabilitadas"
-          },
-          "_row_num": 81
-        },
-        "enabled_beneficiaries": {
-          "string_token": "enabled_beneficiaries",
-          "text": {
-            "default": "Enabled Beneficiaries",
-            "el": "Ενεργοί Δικαιούχοι",
-            "ar": "المستفيدين النشطين",
-            "fa": "ذینفع فعال",
-            "es": "Beneficiarios habilitados"
-          },
-          "_row_num": 82
-        },
-        "disabled_beneficiaries": {
-          "string_token": "disabled_beneficiaries",
-          "text": {
-            "default": "Disabled Beneficiaries",
-            "el": "Οι δικαιούχοι με ειδικές ανάγκες",
-            "ar": "المستفيدون المعطلين",
-            "fa": "ذینفع غیر فعال",
-            "es": "Beneficiarios desactivados"
-          },
-          "_row_num": 83
-        },
-        "delivered_since_sync": {
-          "string_token": "delivered_since_sync",
-          "text": {
-            "default": "Delivered since sync",
-            "es": "Entregado desde sincronización"
-          },
-          "_row_num": 86
-        },
-        "new_since_sync": {
-          "string_token": "new_since_sync",
-          "text": {
-            "default": "New since last sync",
-            "es": "Nuevo desde la última sincronización"
-          },
-          "_row_num": 87
-        },
-        "edited_since_sync": {
-          "string_token": "edited_since_sync",
-          "text": {
-            "default": "Edited since last sync",
-            "es": "Editado desde la última sincronización"
-          },
-          "_row_num": 88
-        },
-        "new_hh_mem_since_sync": {
-          "string_token": "new_hh_mem_since_sync",
-          "text": {
-            "default": "New households [members] since last sync",
-            "es": "Nuevas familias [members] desde la última sincronización"
-          },
-          "_row_num": 89
-        },
-        "edited_hh_mem_since_sync": {
-          "string_token": "edited_hh_mem_since_sync",
-          "text": {
-            "default": "Edited households [members] since last sync",
-            "es": "Familias editadas [members] desde la última sincronización"
-          },
-          "_row_num": 90
-        },
-        "start_new_authorization": {
-          "string_token": "start_new_authorization",
-          "text": {
-            "default": "Start New Authorization",
-            "es": "Iniciar nueva autorización"
-          },
-          "_row_num": 93
-        },
-        "create_authorization": {
-          "string_token": "create_authorization",
-          "text": {
-            "default": "Create Authorization",
-            "es": "Crear autorización"
-          },
-          "_row_num": 94
-        },
-        "choose_authorization_name": {
-          "string_token": "choose_authorization_name",
-          "text": {
-            "default": "Choose Authorization Name",
-            "es": "Elegir el nombre de la autorización"
-          },
-          "_row_num": 95
-        },
-        "create_authorization_success": {
-          "string_token": "create_authorization_success",
-          "text": {
-            "default": "Authorization Successfully Created",
-            "es": "Autorización creada correctamente"
-          },
-          "_row_num": 96
-        },
-        "create_authorization_failed": {
-          "string_token": "create_authorization_failed",
-          "text": {
-            "default": "Authorization Creation Failed",
-            "es": "Fallo en la Creación de Autorización"
-          },
-          "_row_num": 97
-        },
-        "terminate_authorization": {
-          "string_token": "terminate_authorization",
-          "text": {
-            "default": "Terminate Authorization",
-            "es": "Cancelar la autorización"
-          },
-          "_row_num": 98
-        },
-        "terminate_authorization_success": {
-          "string_token": "terminate_authorization_success",
-          "text": {
-            "default": "Authorization Successfully Terminated",
-            "es": "Autorización Cancelada Correctamente"
-          },
-          "_row_num": 99
-        },
-        "terminate_authorization_failed": {
-          "string_token": "terminate_authorization_failed",
-          "text": {
-            "default": "Authorization Termination Failed",
-            "es": "Fallo en la Cancelación de Autorización"
-          },
-          "_row_num": 100
-        },
-        "no_active_authorizations": {
-          "string_token": "no_active_authorizations",
-          "text": {
-            "default": "There currently are no active authorizations",
-            "es": "Actualmente no hay autorizaciones activas"
-          },
-          "_row_num": 101
-        },
-        "beneficiary_entity_id": {
-          "string_token": "beneficiary_entity_id",
-          "text": {
-            "default": "Beneficiary Entity ID",
-            "es": "Identificación de Beneficiario"
-          },
-          "_row_num": 104
-        },
-        "date_created": {
-          "string_token": "date_created",
-          "text": {
-            "default": "Date Created",
-            "es": "Fecha de creación"
-          },
-          "_row_num": 105
-        },
-        "custom_beneficiary_entity_form_id": {
-          "string_token": "custom_beneficiary_entity_form_id",
-          "text": {
-            "default": "Custom Beneficiary Entity Form ID",
-            "es": "Formulario de Identificación de beneficiario personalizado"
-          },
-          "_row_num": 106
-        },
-        "custom_beneficiary_entity_row_id": {
-          "string_token": "custom_beneficiary_entity_row_id",
-          "text": {
-            "default": "Custom Beneficiary Entity Row ID",
-            "es": "Fila de Identificación de beneficiario personalizada"
-          },
-          "_row_num": 107
-        },
-        "status": {
-          "string_token": "status",
-          "text": {
-            "default": "Status",
-            "es": "Estatus"
-          },
-          "_row_num": 108
-        },
-        "status_reason": {
-          "string_token": "status_reason",
-          "text": {
-            "default": "Status Reason",
-            "es": "Razón de estado"
-          },
-          "_row_num": 109
-        },
-        "beneficiary_entity_row_id": {
-          "string_token": "beneficiary_entity_row_id",
-          "text": {
-            "default": "Beneficiary Entity Row ID",
-            "es": "Identificación de fila de beneficiario"
-          },
-          "_row_num": 111
-        },
-        "custom_member_form_id": {
-          "string_token": "custom_member_form_id",
-          "text": {
-            "default": "Custom Member Form ID",
-            "es": "Identificación de formulario personalizado de miembro"
-          },
-          "_row_num": 112
-        },
-        "custom_member_row_id": {
-          "string_token": "custom_member_row_id",
-          "text": {
-            "default": "Custom Member Row ID",
-            "es": "Identificación de Fila de miembro personalizada"
-          },
-          "_row_num": 113
-        },
-        "member_id": {
-          "string_token": "member_id",
-          "text": {
-            "default": "Member ID",
-            "es": "Identificación de Miembro"
-          },
-          "_row_num": 114
-        },
-        "authorization_id": {
-          "string_token": "authorization_id",
-          "text": {
-            "default": "Authorization ID",
-            "es": "Identificación de la autorización"
-          },
-          "_row_num": 116
-        },
-        "authorization_type": {
-          "string_token": "authorization_type",
-          "text": {
-            "default": "Authorization Type",
-            "es": "Tipo de autorización"
-          },
-          "_row_num": 117
-        },
-        "authorization_name": {
-          "string_token": "authorization_name",
-          "text": {
-            "default": "Authorization Name",
-            "es": "Nombre de la Autorización"
-          },
-          "_row_num": 118
-        },
-        "authorization_description": {
-          "string_token": "authorization_description",
-          "text": {
-            "default": "Authorization Description",
-            "es": "Descripción de la autorización"
-          },
-          "_row_num": 119
-        },
-        "entitlement_id": {
-          "string_token": "entitlement_id",
-          "text": {
-            "default": "Entitlement ID",
-            "es": "Identificación de Permisos"
-          },
-          "_row_num": 120
-        },
-        "is_override": {
-          "string_token": "is_override",
-          "text": {
-            "default": "Is Override",
-            "es": "Está anulado"
-          },
-          "_row_num": 121
-        },
-        "item_pack_id": {
-          "string_token": "item_pack_id",
-          "text": {
-            "default": "Item Pack ID",
-            "el": "Αναγνωριστικό πακέτου στοιχείου",
-            "ar": "رقم الحزمة",
-            "fa": "شماره بسته",
-            "es": "ID del artículo"
-          },
-          "_row_num": 122
-        },
-        "item_pack_name": {
-          "string_token": "item_pack_name",
-          "text": {
-            "default": "Item Pack Name",
-            "el": "Όνομα πακέτου στοιχείου",
-            "ar": "اسم الحزمة",
-            "fa": "نام بسته",
-            "es": "Nombre del artículo"
-          },
-          "_row_num": 123
-        },
-        "item_pack_description": {
-          "string_token": "item_pack_description",
-          "text": {
-            "default": "Item Pack Description",
-            "el": "Περιγραφή πακέτου στοιχείου",
-            "ar": "وصف الحزمة",
-            "fa": "شرح بسته",
-            "es": "Descripción del artículo"
-          },
-          "_row_num": 124
-        },
-        "custom_delivery_form_id": {
-          "string_token": "custom_delivery_form_id",
-          "text": {
-            "default": "Custom Delivery Form ID",
-            "es": "Identificación de formularios de entrega personalizada"
-          },
-          "_row_num": 125
-        },
-        "custom_delivery_row_id": {
-          "string_token": "custom_delivery_row_id",
-          "text": {
-            "default": "Custom Delivery Row ID",
-            "es": "Identificación de la fila de entrega personalizada"
-          },
-          "_row_num": 126
-        },
-        "assigned_item_pack_code": {
-          "string_token": "assigned_item_pack_code",
-          "text": {
-            "default": "Assigned Item Pack Barcode",
-            "es": "Código de barras de paquete de artículo asignado"
-          },
-          "_row_num": 127
-        },
-        "name": {
-          "string_token": "name",
-          "text": {
-            "default": "Name",
-            "es": "Nombre"
-          },
-          "_row_num": 129
-        },
-        "type": {
-          "string_token": "type",
-          "text": {
-            "default": "Type",
-            "es": "Tipo"
-          },
-          "_row_num": 130
-        },
-        "item_pack_ranges": {
-          "string_token": "item_pack_ranges",
-          "text": {
-            "default": "Item Pack Ranges",
-            "es": "Rangos de paquetes de artículos"
-          },
-          "_row_num": 131
-        },
-        "report_version": {
-          "string_token": "report_version",
-          "text": {
-            "default": "Report Version",
-            "es": "Versión del informe"
-          },
-          "_row_num": 132
-        },
-        "restrict_overrides": {
-          "string_token": "restrict_overrides",
-          "text": {
-            "default": "Restrict Overrides",
-            "es": "Restringir las anulaciones"
-          },
-          "_row_num": 133
-        },
-        "summary_form_id": {
-          "string_token": "summary_form_id",
-          "text": {
-            "default": "Summary Form ID",
-            "es": "Identificación de formulario Resumen"
-          },
-          "_row_num": 134
-        },
-        "for_member": {
-          "string_token": "for_member",
-          "text": {
-            "default": "Entitlement Generated for Member",
-            "es": "Permiso generado para miembros"
-          },
-          "_row_num": 135
-        },
-        "description": {
-          "string_token": "description",
-          "text": {
-            "default": "Description",
-            "es": "Descripción"
-          },
-          "_row_num": 136
-        },
-        "extra_field_entitlements": {
-          "string_token": "extra_field_entitlements",
-          "text": {
-            "default": "Extra Field Entitlements",
-            "es": "Campo Adicional de Permisos"
-          },
-          "_row_num": 137
-        },
-        "address": {
-          "string_token": "address",
-          "text": {
-            "default": "Address",
-            "es": "Dirección"
-          },
-          "_row_num": 140
-        },
-        "telephone": {
-          "string_token": "telephone",
-          "text": {
-            "default": "Telephone",
-            "es": "Teléfono"
-          },
-          "_row_num": 141
-        },
-        "mobile_provider": {
-          "string_token": "mobile_provider",
-          "text": {
-            "default": "Mobile Provider",
-            "es": "Proveedor de telefonía móvil"
-          },
-          "_row_num": 142
-        },
-        "delivery_site": {
-          "string_token": "delivery_site",
-          "text": {
-            "default": "Delivery Site",
-            "es": "Sitio de Entrega"
-          },
-          "_row_num": 143
-        },
-        "location": {
-          "string_token": "location",
-          "text": {
-            "default": "Location",
-            "es": "Ubicación"
-          },
-          "_row_num": 144
-        },
-        "tent_caravan": {
-          "string_token": "tent_caravan",
-          "text": {
-            "default": "Tent/Caravan Code",
-            "es": "Código de tienda/caravana"
-          },
-          "_row_num": 145
-        },
-        "hh_size": {
-          "string_token": "hh_size",
-          "text": {
-            "default": "Household Size",
-            "es": "Tamaño de la Familia"
-          },
-          "_row_num": 146
-        },
-        "first_name": {
-          "string_token": "first_name",
-          "text": {
-            "default": "First Name",
-            "es": "Primer Nombre"
-          },
-          "_row_num": 148
-        },
-        "last_name": {
-          "string_token": "last_name",
-          "text": {
-            "default": "Last Name",
-            "es": "Apellidos"
-          },
-          "_row_num": 149
-        },
-        "first_last_name": {
-          "string_token": "first_last_name",
-          "text": {
-            "default": "First and Last Name",
-            "es": "Nombre y Apellido"
-          },
-          "_row_num": 150
-        },
-        "birth_date": {
-          "string_token": "birth_date",
-          "text": {
-            "default": "Birth Date",
-            "es": "Fecha de nacimiento"
-          },
-          "_row_num": 151
-        },
-        "age": {
-          "string_token": "age",
-          "text": {
-            "default": "Age",
-            "es": "Edad"
-          },
-          "_row_num": 152
-        },
-        "gender": {
-          "string_token": "gender",
-          "text": {
-            "default": "Gender",
-            "es": "Género"
-          },
-          "_row_num": 153
-        },
-        "id_type": {
-          "string_token": "id_type",
-          "text": {
-            "default": "ID Type",
-            "es": "Tipo de Identificación"
-          },
-          "_row_num": 154
-        },
-        "id_number": {
-          "string_token": "id_number",
-          "text": {
-            "default": "ID Number",
-            "es": "Número de identificación"
-          },
-          "_row_num": 155
-        },
-        "is_head_of_household": {
-          "string_token": "is_head_of_household",
-          "text": {
-            "default": "Is Head of Household",
-            "es": "Es jefe de familia"
-          },
-          "_row_num": 156
-        },
-        "picture": {
-          "string_token": "picture",
-          "text": {
-            "default": "Picture",
-            "es": "Fotografía"
-          },
-          "_row_num": 157
-        },
-        "email": {
-          "string_token": "email",
-          "text": {
-            "default": "Email",
-            "es": "Correo electrónico"
-          },
-          "_row_num": 158
-        },
-        "vulnerability": {
-          "string_token": "vulnerability",
-          "text": {
-            "default": "Vulnerability",
-            "es": "Vulnerabilidad"
-          },
-          "_row_num": 159
-        }
-      },
+      "_tokens": {},
       "_locales": {
         "setting_name": "_locales",
         "_row_num": 5,
@@ -3963,49 +2272,51 @@
           {
             "display": {
               "locale": {
-                "text": "arabic"
+                "text": {
+                  "en": "English",
+                  "hi": "अंग्रेज़ी",
+                  "es": "Inglés",
+                  "default": "English"
+                }
               }
             },
-            "name": "arabic"
+            "_row_num": 7,
+            "name": "en"
           },
           {
             "display": {
               "locale": {
-                "text": "english"
+                "text": {
+                  "en": "Hindi",
+                  "hi": "हिंदी",
+                  "es": "Hindi",
+                  "default": "Hindi"
+                }
               }
             },
-            "name": "english"
+            "_row_num": 8,
+            "name": "hi"
           },
           {
             "display": {
               "locale": {
-                "text": "farsi"
+                "text": {
+                  "en": "Spanish",
+                  "hi": "स्पेनिश",
+                  "es": "Español",
+                  "default": "Spanish"
+                }
               }
             },
-            "name": "farsi"
-          },
-          {
-            "display": {
-              "locale": {
-                "text": "greek"
-              }
-            },
-            "name": "greek"
-          },
-          {
-            "display": {
-              "locale": {
-                "text": "spanish"
-              }
-            },
-            "name": "spanish"
+            "_row_num": 9,
+            "name": "es"
           }
         ]
       },
       "_default_locale": {
         "setting_name": "_default_locale",
         "_row_num": 5,
-        "value": "english"
+        "value": "en"
       }
     },
     "queries": {},
@@ -4036,11 +2347,9 @@
             "display": {
               "title": {
                 "text": {
-                  "english": "Common Javascript Framework",
-                  "spanish": "Common Javascript Framework",
-                  "greek": "Common Javascript Framework",
-                  "arabic": "Common Javascript Framework",
-                  "farsi": "Common Javascript Framework",
+                  "en": "Common Javascript Framework",
+                  "hi": "सामान्य जावास्क्रिप्ट फ़्रेमवर्क",
+                  "es": "Marco común de Javascript",
                   "default": "Common Javascript Framework"
                 }
               }
@@ -4160,7 +2469,7 @@
             "promptIdx": 1
           },
           {
-            "url": "'?' + odkSurvey.getHashString('registration')",
+            "url": "'?' + odkSurvey.getHashString('agriculture')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -4175,7 +2484,7 @@
             "promptIdx": 2
           },
           {
-            "url": "'?' + odkSurvey.getHashString('deliveries')",
+            "url": "'?' + odkSurvey.getHashString('geotagger')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -4190,12 +2499,387 @@
             "promptIdx": 3
           },
           {
+            "url": "'?' + odkSurvey.getHashString('breathcounter')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen15",
+            "promptIdx": 4
+          },
+          {
+            "url": "'?' + odkSurvey.getHashString('complex_validate_test')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 5
+          },
+          {
+            "url": "'?' + odkSurvey.getHashString('customAppearance')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen21",
+            "promptIdx": 6
+          },
+          {
+            "url": "'?' + odkSurvey.getHashString('exampleForm')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 7
+          },
+          {
+            "url": "'?' + odkSurvey.getHashString('household')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 27,
+            "__rowNum__": 26,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen27",
+            "promptIdx": 8
+          },
+          {
+            "url": "'?' + odkSurvey.getHashString('imnci','imnci_test')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 30,
+            "__rowNum__": 29,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 9
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('refrigerators','refrigerators_init')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 33,
+            "__rowNum__": 32,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 10
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('refrigerators','refrigerators_update')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 36,
+            "__rowNum__": 35,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen36",
+            "promptIdx": 11
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('section_test')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 39,
+            "__rowNum__": 38,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen39",
+            "promptIdx": 12
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('selects')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 42,
+            "__rowNum__": 41,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen42",
+            "promptIdx": 13
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('twoColumn')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 45,
+            "__rowNum__": 44,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen45",
+            "promptIdx": 14
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('gridScreen')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 48,
+            "__rowNum__": 47,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen48",
+            "promptIdx": 15
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('adult_coverage')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 51,
+            "__rowNum__": 50,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen51",
+            "promptIdx": 16
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('child_coverage')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 54,
+            "__rowNum__": 53,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen54",
+            "promptIdx": 17
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('graphExample')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 57,
+            "__rowNum__": 56,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen57",
+            "promptIdx": 18
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('visit')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 60,
+            "__rowNum__": 59,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen60",
+            "promptIdx": 19
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('plot')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 63,
+            "__rowNum__": 62,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen63",
+            "promptIdx": 20
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('geoweather')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 66,
+            "__rowNum__": 65,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen66",
+            "promptIdx": 21
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('send_sms')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 69,
+            "__rowNum__": 68,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen69",
+            "promptIdx": 22
+          },
+          {
+            "url": "'?' + odkSurvey.getHashString('eonasdan')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 72,
+            "__rowNum__": 71,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen72",
+            "promptIdx": 23
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('femaleClients', 'screenClient')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 75,
+            "__rowNum__": 74,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen75",
+            "promptIdx": 24
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('femaleClients','client6Week')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 78,
+            "__rowNum__": 77,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen78",
+            "promptIdx": 25
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('femaleClients', 'client6Month')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 81,
+            "__rowNum__": 80,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen81",
+            "promptIdx": 26
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('maleClients', 'screenPartner')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 84,
+            "__rowNum__": 83,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen84",
+            "promptIdx": 27
+          },
+          {
+            "url": "'?' +  odkSurvey.getHashString('maleClients','partner6Month')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 87,
+            "__rowNum__": 86,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen87",
+            "promptIdx": 28
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 14,
-            "_branch_label_enclosing_screen": "survey/_screen14",
-            "promptIdx": 4
+            "_row_num": 89,
+            "_branch_label_enclosing_screen": "survey/_screen89",
+            "promptIdx": 29
           }
         ],
         "validation_tag_map": {
@@ -4271,25 +2955,350 @@
             "operationIdx": 9
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 14,
+            "_row_num": 15,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 10
           },
           {
-            "_row_num": 14,
+            "clause": "exit section",
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "exit_section",
+            "operationIdx": 11
+          },
+          {
+            "_row_num": 18,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 12
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "exit_section",
+            "operationIdx": 13
+          },
+          {
+            "_row_num": 21,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 14
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 22,
+            "__rowNum__": 21,
+            "_token_type": "exit_section",
+            "operationIdx": 15
+          },
+          {
+            "_row_num": 24,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 16
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 25,
+            "__rowNum__": 24,
+            "_token_type": "exit_section",
+            "operationIdx": 17
+          },
+          {
+            "_row_num": 27,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 18
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 28,
+            "__rowNum__": 27,
+            "_token_type": "exit_section",
+            "operationIdx": 19
+          },
+          {
+            "_row_num": 30,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 20
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 31,
+            "__rowNum__": 30,
+            "_token_type": "exit_section",
+            "operationIdx": 21
+          },
+          {
+            "_row_num": 33,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 22
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 34,
+            "__rowNum__": 33,
+            "_token_type": "exit_section",
+            "operationIdx": 23
+          },
+          {
+            "_row_num": 36,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 24
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 37,
+            "__rowNum__": 36,
+            "_token_type": "exit_section",
+            "operationIdx": 25
+          },
+          {
+            "_row_num": 39,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 26
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 40,
+            "__rowNum__": 39,
+            "_token_type": "exit_section",
+            "operationIdx": 27
+          },
+          {
+            "_row_num": 42,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 28
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 43,
+            "__rowNum__": 42,
+            "_token_type": "exit_section",
+            "operationIdx": 29
+          },
+          {
+            "_row_num": 45,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 30
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 46,
+            "__rowNum__": 45,
+            "_token_type": "exit_section",
+            "operationIdx": 31
+          },
+          {
+            "_row_num": 48,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 32
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 49,
+            "__rowNum__": 48,
+            "_token_type": "exit_section",
+            "operationIdx": 33
+          },
+          {
+            "_row_num": 51,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 34
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 52,
+            "__rowNum__": 51,
+            "_token_type": "exit_section",
+            "operationIdx": 35
+          },
+          {
+            "_row_num": 54,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 36
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 55,
+            "__rowNum__": 54,
+            "_token_type": "exit_section",
+            "operationIdx": 37
+          },
+          {
+            "_row_num": 57,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 38
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 58,
+            "__rowNum__": 57,
+            "_token_type": "exit_section",
+            "operationIdx": 39
+          },
+          {
+            "_row_num": 60,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 40
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 61,
+            "__rowNum__": 60,
+            "_token_type": "exit_section",
+            "operationIdx": 41
+          },
+          {
+            "_row_num": 63,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 42
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 64,
+            "__rowNum__": 63,
+            "_token_type": "exit_section",
+            "operationIdx": 43
+          },
+          {
+            "_row_num": 66,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(21);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 44
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 67,
+            "__rowNum__": 66,
+            "_token_type": "exit_section",
+            "operationIdx": 45
+          },
+          {
+            "_row_num": 69,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 46
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 70,
+            "__rowNum__": 69,
+            "_token_type": "exit_section",
+            "operationIdx": 47
+          },
+          {
+            "_row_num": 72,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 48
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 73,
+            "__rowNum__": 72,
+            "_token_type": "exit_section",
+            "operationIdx": 49
+          },
+          {
+            "_row_num": 75,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(24);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 50
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 76,
+            "__rowNum__": 75,
+            "_token_type": "exit_section",
+            "operationIdx": 51
+          },
+          {
+            "_row_num": 78,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 52
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 79,
+            "__rowNum__": 78,
+            "_token_type": "exit_section",
+            "operationIdx": 53
+          },
+          {
+            "_row_num": 81,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 54
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 82,
+            "__rowNum__": 81,
+            "_token_type": "exit_section",
+            "operationIdx": 55
+          },
+          {
+            "_row_num": 84,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 56
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 85,
+            "__rowNum__": 84,
+            "_token_type": "exit_section",
+            "operationIdx": 57
+          },
+          {
+            "_row_num": 87,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 58
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 88,
+            "__rowNum__": 87,
+            "_token_type": "exit_section",
+            "operationIdx": 59
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 89,
+            "operationIdx": 60
+          },
+          {
+            "_row_num": 89,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(29);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 11
+            "operationIdx": 61
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 14,
-            "operationIdx": 12
+            "_row_num": 89,
+            "operationIdx": 62
           }
         ],
         "branch_label_map": {
@@ -4298,12 +3307,62 @@
           "_else4": 4,
           "_screen5": 4,
           "_endif6": 5,
-          "registration": 6,
+          "agriculture": 6,
           "_screen9": 6,
-          "deliveries": 8,
+          "geotagger": 8,
           "_screen12": 8,
-          "_contents": 11,
-          "_screen14": 11
+          "breathcounter": 10,
+          "_screen15": 10,
+          "complex_validate_test": 12,
+          "_screen18": 12,
+          "customAppearance": 14,
+          "_screen21": 14,
+          "exampleForm": 16,
+          "_screen24": 16,
+          "household": 18,
+          "_screen27": 18,
+          "imnci_test": 20,
+          "_screen30": 20,
+          "refrigerators_init": 22,
+          "_screen33": 22,
+          "refrigerators_update": 24,
+          "_screen36": 24,
+          "section_test": 26,
+          "_screen39": 26,
+          "selects": 28,
+          "_screen42": 28,
+          "twoColumn": 30,
+          "_screen45": 30,
+          "gridScreen": 32,
+          "_screen48": 32,
+          "adult_coverage": 34,
+          "_screen51": 34,
+          "child_coverage": 36,
+          "_screen54": 36,
+          "graphExample": 38,
+          "_screen57": 38,
+          "visit": 40,
+          "_screen60": 40,
+          "plot": 42,
+          "_screen63": 42,
+          "geoweather": 44,
+          "_screen66": 44,
+          "send_sms": 46,
+          "_screen69": 46,
+          "eonasdan": 48,
+          "_screen72": 48,
+          "screenClient": 50,
+          "_screen75": 50,
+          "client6Week": 52,
+          "_screen78": 52,
+          "client6Month": 54,
+          "_screen81": 54,
+          "screenPartner": 56,
+          "_screen84": 56,
+          "partner6Month": 58,
+          "_screen87": 58,
+          "_contents": 61,
+          "_screen89": 61
         }
       }
     },
@@ -4335,7 +3394,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"english\":\"Common Javascript Framework\",\"spanish\":\"Common Javascript Framework\",\"greek\":\"Common Javascript Framework\",\"arabic\":\"Common Javascript Framework\",\"farsi\":\"Common Javascript Framework\",\"default\":\"Common Javascript Framework\"}}"
+        "_value": "{\"text\":{\"en\":\"Common Javascript Framework\",\"hi\":\"सामान्य जावास्क्रिप्ट फ़्रेमवर्क\",\"es\":\"Marco común de Javascript\",\"default\":\"Common Javascript Framework\"}}"
       }
     ]
   }

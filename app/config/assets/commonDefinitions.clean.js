@@ -9,8 +9,7 @@ window.odkCommonDefinitions = {
           "locale": {
             "text": {
               "en": "English",
-              "hi": "अंग्रेज़ी",
-              "es": "Inglés",
+              "hi": "अंग्रेज़ी ",
               "default": "English"
             }
           }
@@ -24,27 +23,12 @@ window.odkCommonDefinitions = {
             "text": {
               "en": "Hindi",
               "hi": "हिंदी",
-              "es": "Hindi",
               "default": "Hindi"
             }
           }
         },
         "_row_num": 8,
         "name": "hi"
-      },
-      {
-        "display": {
-          "locale": {
-            "text": {
-              "en": "Spanish",
-              "hi": "स्पेनिश",
-              "es": "Español",
-              "default": "Spanish"
-            }
-          }
-        },
-        "_row_num": 9,
-        "name": "es"
       }
     ]
   },
