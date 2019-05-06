@@ -7,7 +7,8 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'out'),
-        library: ['XLSXConverter', '[name]']
+        library: ['XLSXConverter'],
+        devtoolModuleFilenameTemplate: '[namespace]/[resource-path]'
     },
     module: {
         rules: [
@@ -17,5 +18,5 @@ module.exports = {
             }
         ]
     },
-    devtool: "source-map"
+    devtool: 'source-map'
 };

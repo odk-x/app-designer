@@ -6,9 +6,9 @@ import * as XLSX from 'xlsx';
 import * as XLSXConverter from './lib/XLSXConverter2';
 import * as devenv from './lib/devenv-util';
 
-export function convert(xlsxBase64) {
-    let xlsx = XLSX.read(xlsxBase64, {type: 'base64'});
-    let xlsxJson = to_json(xlsx);
+export async function convert(xlsx) {
+    let parsedXlsx = XLSX.read(xlsx, { type: 'array' });
+    let xlsxJson = to_json(parsedXlsx);
 
     let formDef = XLSXConverter.processJSONWb(xlsxJson);
     let warnings = XLSXConverter.getWarnings() || [];
@@ -19,15 +19,15 @@ export function convert(xlsxBase64) {
     let shouldWriteCsv = devenv.shouldWriteOutDefinitionAndPropertiesCsv(formDef);
 
     return {
-        'formDef.json': JSON.stringify(formDef),
+        'formDef': JSON.stringify(formDef),
         'warnings': warnings,
         'tableId': tableId,
         'formId': formId,
-        'definition.csv': shouldWriteCsv ?
+        'definition': shouldWriteCsv ?
           devenv.createDefinitionCsvFromDataTableModel(dtm) : null,
-        'properties.csv': shouldWriteCsv ?
+        'properties': shouldWriteCsv ?
           devenv.createPropertiesCsvFromDataTableModel(dtm, formDef) : null,
-        'tableSpecificDefinitions.js': devenv.shouldWriteOutDefinitionsJs(formDef) ?
+        'tableSpecificDefinitions': devenv.shouldWriteOutDefinitionsJs(formDef) ?
           devenv.createDefinitionsJsFromDataTableModel(tableId, formDef) : null
     }
 }

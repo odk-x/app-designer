@@ -17,15 +17,7 @@
  */
 'use strict';
 
-if (typeof XMLHttpRequest !== 'undefined'){
-    var request = require('browser-request');
-} else {
-    var request = {};
-}
-
 import _ from 'lodash';
-
-export let rootpath = 'http://localhost:8000';
 
 /**
  * Get the path to the framework's formDef.json file. Returns:
@@ -37,7 +29,6 @@ export let rootpath = 'http://localhost:8000';
 export function getRelativePathToFrameworkFormDef(formDefJson) {
 
     var result = 'app/config/assets/framework/forms/framework' +
-		getFrameworkVariantFromFormDef(formDefJson) + '/formDef.json';
 		getFrameworkVariantFromFormDef(formDefJson) + '/formDef.json';
     return result;
 };
@@ -89,54 +80,6 @@ export function defaultResponseFunction(error, response, body) {
     console.log('response: ' + response);
     console.log('body: ' + body);
 
-};
-
-/**
- * POST a file to the server.
- *
- * path: the absolute path, excluding the location. I.e. if you want a file at
- * 'app/tables/test.html', just pass that--don't include the entire
- * http://localhost:8000/app/tables/test.html etc.
- *
- * content: the content of the file you want to post
- *
- * callback: request's post callback function. Typically takes three
- * parameters: error, response, body. If this value isn't passed, the
- * defaultResponseFunction is passed instead.
- */
-export function postFile(path, content, callback) {
-
-    if (callback === undefined) {
-        callback = exports.defaultResponseFunction;
-    }
-
-    if (request.post !== undefined) {
-        request.post(
-            {
-                uri: exports.rootpath + '/' + path,
-                body: content
-            },
-            callback);
-    }
-};
-
-export function postBase64File(path, content, callback) {
-
-    if (callback === undefined) {
-        callback = exports.defaultResponseFunction;
-    }
-
-    if (request.post !== undefined) {
-        request.post(
-            {
-                uri: exports.rootpath + '/' + path,
-                body: content,
-                headers: {
-                    'Content-Type': 'application/octet-stream'
-                }
-            },
-            callback);
-    }
 };
 
 export function getValueOfSetting(formDef, settingName) {
