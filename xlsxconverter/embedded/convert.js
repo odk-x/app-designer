@@ -1,88 +1,63 @@
 'use strict';
 
-import 'babel-polyfill';
-import 'whatwg-fetch';
+import * as _ from 'lodash';
+import * as XLSX from 'xlsx';
 
-import _ from 'lodash';
-import XLSX from 'xlsx';
+import * as XLSXConverter from './lib/XLSXConverter2';
+import * as devenv from './lib/devenv-util';
 
-import { processJSONWb, getWarnings } from './lib/XLSXConverter2';
-import {
-    removeEmptyStrings,
-    shouldWriteOutDefinitionAndPropertiesCsv as shouldWriteDefAndPropCsv,
-    shouldWriteOutDefinitionsJs as shouldWriteDefJs,
-    createDefinitionCsvFromDataTableModel as createDefCsv,
-    createPropertiesCsvFromDataTableModel as createPropCsv,
-    createDefinitionsJsFromDataTableModel as createDefJs,
-    getTableIdFromFormDef,
-    getFormIdFromFormDef
-} from './lib/devenv-util';
+export async function convert(xlsx) {
+    let parsedXlsx = XLSX.read(xlsx, { type: 'array' });
+    let xlsxJson = to_json(parsedXlsx);
 
-async function convert(requestId) {
-    let xlsxFiles = await fetch(`/xlsx/${requestId}`).then(body => body.json());
+    let formDef = XLSXConverter.processJSONWb(xlsxJson);
+    let warnings = XLSXConverter.getWarnings() || [];
 
-    let uploadPromises = xlsxFiles.map(async f => {
-        let base64Xlsx = await fetch(`/xlsx/${requestId}/${encodeURIComponent(f)}`);
+    let dtm = formDef.specification.dataTableModel;
+    let tableId = devenv.getTableIdFromFormDef(formDef);
+    let formId = devenv.getFormIdFromFormDef(formDef);
+    let shouldWriteCsv = devenv.shouldWriteOutDefinitionAndPropertiesCsv(formDef);
 
-        try {
-            let jsonXlsx = to_json(XLSX.read(await base64Xlsx.text(), {type: 'base64'}));
-            let formDef = processJSONWb(jsonXlsx);
-
-            return postFormDef(requestId, f, formDef, getWarnings() || []);
-        } catch (e) {
-            return postFormError(requestId, f, e);
-        }
-    });
-
-    await Promise.all(uploadPromises);
+    return {
+        'formDef': JSON.stringify(formDef),
+        'warnings': warnings,
+        'tableId': tableId,
+        'formId': formId,
+        'definition': shouldWriteCsv ?
+          devenv.createDefinitionCsvFromDataTableModel(dtm) : null,
+        'properties': shouldWriteCsv ?
+          devenv.createPropertiesCsvFromDataTableModel(dtm, formDef) : null,
+        'tableSpecificDefinitions': devenv.shouldWriteOutDefinitionsJs(formDef) ?
+          devenv.createDefinitionsJsFromDataTableModel(tableId, formDef) : null
+    }
 }
 
 function to_json(workbook) {
     let result = {};
 
     _.each(workbook.SheetNames, function(sheetName) {
-        let rObjArr = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName], {raw: true});
+        let rObjArr = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {raw: true});
 
-        rObjArr = removeEmptyStrings(rObjArr);
-        if(rObjArr.length > 0){
-            result[sheetName] = rObjArr;
+        let outArr = [];
+        _.each(rObjArr, function(row) {
+            let outRow = Object.create({__rowNum__: row.__rowNum__});
+
+            _.each(row, function(value, key) {
+                if(_.isString(value) && value.trim() === "") {
+                    return;
+                }
+                outRow[key] = value;
+            });
+
+            if(_.keys(outRow).length > 0) {
+                outArr.push(outRow);
+            }
+        });
+
+        if(outArr.length > 0){
+            result[sheetName] = outArr;
         }
     });
 
     return result;
 }
-
-function postFormDef(requestId, filename, formDef, warnings) {
-    let dtm = formDef.specification.dataTableModel;
-    let tableId = getTableIdFromFormDef(formDef);
-    let formId = getFormIdFromFormDef(formDef);
-    let shouldWriteCsv = shouldWriteDefAndPropCsv(formDef);
-
-    let form = new FormData();
-    form.append('formDef.json', JSON.stringify(formDef));
-    form.append('definition.csv', shouldWriteCsv ? createDefCsv(dtm) : "");
-    form.append('properties.csv', shouldWriteCsv ? createPropCsv(dtm, formDef) : "");
-    form.append('tableSpecificDefinitions.js', shouldWriteDefJs(formDef) ? createDefJs(tableId, formDef) : "");
-    form.append('warnings.json', warnings);
-
-    return fetch(`/xlsx/${requestId}/${encodeURIComponent(filename)}/${encodeURIComponent(tableId)}/${encodeURIComponent(formId)}`, {
-        method: 'POST',
-        body: form
-    });
-}
-
-async function postFormError(requestId, filename, error) {
-    return fetch(`/xlsx/${requestId}/${encodeURIComponent(filename)}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: error.name,
-            message: error.message,
-            file: filename
-        })
-    });
-}
-
-convert(window.location.hash.substring(1));
