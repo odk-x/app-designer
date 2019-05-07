@@ -57,7 +57,9 @@ requirejs.config({
         mockImpl: 'js/mock/mockImpl',
         mockUtils: 'js/mock/mockUtils',
         mockSchema: 'js/mock/mockSchema',
-        odkDataIf: 'js/mock/odkDataIf'
+        odkDataIf: 'js/mock/odkDataIf',
+        hammer : 'libs/hammer.min',
+        jqueryHammer : 'libs/jquery.hammer'
     },
     shim: {
         'bootstrap': {
@@ -106,6 +108,14 @@ requirejs.config({
         'd3' : {
             deps: [],
             exports: 'd3'
+        },
+        'hammer' : { // to use swipe on pages/
+            deps: [],
+            exports: 'Hammer'
+        },
+        'jqueryHammer' : { //
+            deps: ['jquery', 'hammer'],
+            exports: 'jqueryHammer'
         }
     }
 });

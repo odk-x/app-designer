@@ -47,11 +47,11 @@
         "_row_num": 7
       },
       {
-        "branch_label": "registration",
+        "branch_label": "ex_beneficiary_units_form",
         "_row_num": 8
       },
       {
-        "url": "'?' + odkSurvey.getHashString('registration')",
+        "url": "'?' + odkSurvey.getHashString('ex_beneficiary_units_form')",
         "type": "external_link",
         "display": {
           "prompt": {
@@ -1220,144 +1220,6 @@
         "_row_num": 159
       }
     ],
-    "settings": [
-      {
-        "setting_name": "table_id",
-        "value": "framework",
-        "_row_num": 2
-      },
-      {
-        "setting_name": "form_id",
-        "value": "framework",
-        "comments": "The unique form id.",
-        "_row_num": 3
-      },
-      {
-        "setting_name": "form_version",
-        "value": 20130828,
-        "comments": "The version of this form",
-        "_row_num": 4
-      },
-      {
-        "setting_name": "survey",
-        "display": {
-          "title": {
-            "text": {
-              "english": "Common Javascript Framework",
-              "spanish": "Common Javascript Framework",
-              "greek": "Common Javascript Framework",
-              "arabic": "Common Javascript Framework",
-              "farsi": "Common Javascript Framework",
-              "default": "Common Javascript Framework"
-            }
-          }
-        },
-        "comments": "The title of the 'survey' section (a.k.a. form title)",
-        "showContents": false,
-        "_row_num": 5
-      },
-      {
-        "setting_name": "en",
-        "display": {
-          "locale": {
-            "text": {
-              "en": "English",
-              "es": "Ingles",
-              "el": "English",
-              "ar": "English",
-              "fa": "English"
-            }
-          }
-        },
-        "_row_num": 7
-      },
-      {
-        "setting_name": "es",
-        "display": {
-          "locale": {
-            "text": {
-              "en": "Spanish",
-              "es": "Espanol",
-              "el": "Espanol",
-              "ar": "Spanish",
-              "fa": "Spanish"
-            }
-          }
-        },
-        "_row_num": 8
-      },
-      {
-        "setting_name": "ar",
-        "display": {
-          "locale": {
-            "text": {
-              "en": "Arabic",
-              "es": "Arabic",
-              "el": "Arabic",
-              "ar": "Arabic",
-              "fa": "Arabic"
-            }
-          }
-        },
-        "_row_num": 9
-      },
-      {
-        "setting_name": "fa",
-        "display": {
-          "locale": {
-            "text": {
-              "en": "Farsi",
-              "es": "Farsi",
-              "el": "Farsi",
-              "ar": "Farsi",
-              "fa": "Farsi"
-            }
-          }
-        },
-        "_row_num": 10
-      },
-      {
-        "setting_name": "el",
-        "display": {
-          "locale": {
-            "text": {
-              "en": "Greek",
-              "es": "Greek",
-              "el": "Greek",
-              "ar": "Greek",
-              "fa": "Greek"
-            }
-          }
-        },
-        "_row_num": 11
-      },
-      {
-        "setting_name": "framework_variant",
-        "_row_num": 12
-      }
-    ],
-    "choices": [
-      {
-        "choice_list_name": "test_forms",
-        "data_value": "registration",
-        "display": {
-          "title": {
-            "text": "Registration"
-          }
-        },
-        "_row_num": 2
-      },
-      {
-        "choice_list_name": "test_forms",
-        "data_value": "deliveries",
-        "display": {
-          "title": {
-            "text": "Deliveries"
-          }
-        },
-        "_row_num": 3
-      }
-    ],
     "framework_translations": [
       {
         "string_token": "constraint_message",
@@ -1973,6 +1835,144 @@
         },
         "_row_num": 60
       }
+    ],
+    "settings": [
+      {
+        "setting_name": "table_id",
+        "value": "framework",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "form_id",
+        "value": "framework",
+        "comments": "The unique form id.",
+        "_row_num": 3
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20130828,
+        "comments": "The version of this form",
+        "_row_num": 4
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": {
+              "english": "Common Javascript Framework",
+              "spanish": "Common Javascript Framework",
+              "greek": "Common Javascript Framework",
+              "arabic": "Common Javascript Framework",
+              "farsi": "Common Javascript Framework",
+              "default": "Common Javascript Framework"
+            }
+          }
+        },
+        "comments": "The title of the 'survey' section (a.k.a. form title)",
+        "showContents": false,
+        "_row_num": 5
+      },
+      {
+        "setting_name": "en",
+        "display": {
+          "locale": {
+            "text": {
+              "en": "English",
+              "es": "Ingles",
+              "el": "English",
+              "ar": "English",
+              "fa": "English"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "setting_name": "es",
+        "display": {
+          "locale": {
+            "text": {
+              "en": "Spanish",
+              "es": "Espanol",
+              "el": "Espanol",
+              "ar": "Spanish",
+              "fa": "Spanish"
+            }
+          }
+        },
+        "_row_num": 8
+      },
+      {
+        "setting_name": "ar",
+        "display": {
+          "locale": {
+            "text": {
+              "en": "Arabic",
+              "es": "Arabic",
+              "el": "Arabic",
+              "ar": "Arabic",
+              "fa": "Arabic"
+            }
+          }
+        },
+        "_row_num": 9
+      },
+      {
+        "setting_name": "fa",
+        "display": {
+          "locale": {
+            "text": {
+              "en": "Farsi",
+              "es": "Farsi",
+              "el": "Farsi",
+              "ar": "Farsi",
+              "fa": "Farsi"
+            }
+          }
+        },
+        "_row_num": 10
+      },
+      {
+        "setting_name": "el",
+        "display": {
+          "locale": {
+            "text": {
+              "en": "Greek",
+              "es": "Greek",
+              "el": "Greek",
+              "ar": "Greek",
+              "fa": "Greek"
+            }
+          }
+        },
+        "_row_num": 11
+      },
+      {
+        "setting_name": "framework_variant",
+        "_row_num": 12
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "ex_beneficiary_units_form",
+        "display": {
+          "title": {
+            "text": "Registration"
+          }
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "deliveries",
+        "display": {
+          "title": {
+            "text": "Deliveries"
+          }
+        },
+        "_row_num": 3
+      }
     ]
   },
   "specification": {
@@ -2180,7 +2180,7 @@
       "test_forms": [
         {
           "choice_list_name": "test_forms",
-          "data_value": "registration",
+          "data_value": "ex_beneficiary_units_form",
           "display": {
             "title": {
               "text": "Registration"
@@ -4160,7 +4160,7 @@
             "promptIdx": 1
           },
           {
-            "url": "'?' + odkSurvey.getHashString('registration')",
+            "url": "'?' + odkSurvey.getHashString('ex_beneficiary_units_form')",
             "type": "external_link",
             "display": {
               "prompt": {
@@ -4298,7 +4298,7 @@
           "_else4": 4,
           "_screen5": 4,
           "_endif6": 5,
-          "registration": 6,
+          "ex_beneficiary_units_form": 6,
           "_screen9": 6,
           "deliveries": 8,
           "_screen12": 8,
