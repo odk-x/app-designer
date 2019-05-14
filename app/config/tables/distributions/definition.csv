@@ -1,0 +1,9 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+date_created,date_created,string,[]
+description,description,string,[]
+location_id,location_id,string,[]
+name,name,string,[]
+status,status,string,[]
+status_reason,status_reason,string,[]
+summary_form_id,summary_form_id,string,[]
+summary_version,summary_version,string,[]
