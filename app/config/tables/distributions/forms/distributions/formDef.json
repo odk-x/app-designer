@@ -50,6 +50,11 @@
         "type": "string",
         "name": "summary_form_id",
         "_row_num": 11
+      },
+      {
+        "type": "string",
+        "name": "summary_table_id",
+        "_row_num": 12
       }
     ],
     "settings": [
@@ -302,6 +307,16 @@
           }
         ],
         "elementKey": "summary_form_id"
+      },
+      "summary_table_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "summary_table_id"
       }
     },
     "section_names": [
@@ -683,6 +698,19 @@
         "elementName": "summary_form_id",
         "elementSet": "data",
         "elementPath": "summary_form_id"
+      },
+      "summary_table_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "summary_table_id",
+        "elementName": "summary_table_id",
+        "elementSet": "data",
+        "elementPath": "summary_table_id"
       },
       "_id": {
         "type": "string",
