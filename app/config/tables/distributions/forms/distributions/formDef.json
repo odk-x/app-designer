@@ -33,13 +33,23 @@
       },
       {
         "type": "string",
-        "name": "summary_version",
+        "name": "location_description",
         "_row_num": 8
       },
       {
         "type": "string",
-        "name": "summary_form_id",
+        "name": "location_name",
         "_row_num": 9
+      },
+      {
+        "type": "string",
+        "name": "summary_version",
+        "_row_num": 10
+      },
+      {
+        "type": "string",
+        "name": "summary_form_id",
+        "_row_num": 11
       }
     ],
     "settings": [
@@ -253,11 +263,31 @@
         ],
         "elementKey": "location_id"
       },
-      "summary_version": {
+      "location_description": {
         "type": "string",
         "_defn": [
           {
             "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location_description"
+      },
+      "location_name": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location_name"
+      },
+      "summary_version": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -267,7 +297,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -602,11 +632,37 @@
         "elementSet": "data",
         "elementPath": "location_id"
       },
-      "summary_version": {
+      "location_description": {
         "type": "string",
         "_defn": [
           {
             "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location_description",
+        "elementName": "location_description",
+        "elementSet": "data",
+        "elementPath": "location_description"
+      },
+      "location_name": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location_name",
+        "elementName": "location_name",
+        "elementSet": "data",
+        "elementPath": "location_name"
+      },
+      "summary_version": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -619,7 +675,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
