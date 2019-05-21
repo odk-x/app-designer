@@ -23,7 +23,7 @@ requirejs.config({
         combodate : 'libs/combodate/js/combodate',
         spinner : 'libs/spinner/waitMe.min',
         backbone : 'libs/backbone.1.3.3',
-        handlebars : 'libs/handlebars-v4.0.5',
+        handlebars : 'libs/handlebars-v4.1.2',
         underscore : 'libs/underscore.1.8.3',
         text : 'libs/text.2.0.15',
         //mobiscroll : 'libs/mobiscroll-2.5.4/js/combined.min',
