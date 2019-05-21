@@ -2,6 +2,8 @@ _element_key,_element_name,_element_type,_list_child_element_keys
 custom_delivery_form_id,custom_delivery_form_id,string,[]
 date_created,date_created,string,[]
 description,description,string,[]
+distribution_id,distribution_id,string,[]
+distribution_name,distribution_name,string,[]
 extra_field_entitlements,extra_field_entitlements,string,[]
 for_member,for_member,string,[]
 item_pack_description,item_pack_description,string,[]

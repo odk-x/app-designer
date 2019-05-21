@@ -30,6 +30,21 @@
         "type": "string",
         "name": "for_member",
         "_row_num": 7
+      },
+      {
+        "type": "string",
+        "name": "location_id",
+        "_row_num": 8
+      },
+      {
+        "type": "string",
+        "name": "location_description",
+        "_row_num": 9
+      },
+      {
+        "type": "string",
+        "name": "location_name",
+        "_row_num": 10
       }
     ],
     "settings": [
@@ -242,6 +257,36 @@
           }
         ],
         "elementKey": "for_member"
+      },
+      "location_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location_id"
+      },
+      "location_description": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location_description"
+      },
+      "location_name": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location_name"
       }
     },
     "section_names": [
@@ -571,6 +616,45 @@
         "elementName": "for_member",
         "elementSet": "data",
         "elementPath": "for_member"
+      },
+      "location_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location_id",
+        "elementName": "location_id",
+        "elementSet": "data",
+        "elementPath": "location_id"
+      },
+      "location_description": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location_description",
+        "elementName": "location_description",
+        "elementSet": "data",
+        "elementPath": "location_description"
+      },
+      "location_name": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "location_name",
+        "elementName": "location_name",
+        "elementSet": "data",
+        "elementPath": "location_name"
       },
       "_id": {
         "type": "string",

@@ -75,6 +75,16 @@
         "type": "string",
         "name": "for_member",
         "_row_num": 16
+      },
+      {
+        "type": "string",
+        "name": "distribution_id",
+        "_row_num": 17
+      },
+      {
+        "type": "string",
+        "name": "distribution_name",
+        "_row_num": 18
       }
     ],
     "settings": [
@@ -377,6 +387,26 @@
           }
         ],
         "elementKey": "for_member"
+      },
+      "distribution_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distribution_id"
+      },
+      "distribution_name": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distribution_name"
       }
     },
     "section_names": [
@@ -823,6 +853,32 @@
         "elementName": "for_member",
         "elementSet": "data",
         "elementPath": "for_member"
+      },
+      "distribution_id": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distribution_id",
+        "elementName": "distribution_id",
+        "elementSet": "data",
+        "elementPath": "distribution_id"
+      },
+      "distribution_name": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "distribution_name",
+        "elementName": "distribution_name",
+        "elementSet": "data",
+        "elementPath": "distribution_name"
       },
       "_id": {
         "type": "string",
