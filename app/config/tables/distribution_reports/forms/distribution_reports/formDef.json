@@ -40,7 +40,7 @@
     "model": [
       {
         "type": "string",
-        "name": "authorization_id",
+        "name": "distribution_id",
         "_row_num": 2
       },
       {
@@ -165,7 +165,7 @@
     "queries": {},
     "calculates": {},
     "model": {
-      "authorization_id": {
+      "distribution_id": {
         "type": "string",
         "_defn": [
           {
@@ -173,7 +173,7 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "authorization_id"
+        "elementKey": "distribution_id"
       },
       "user": {
         "type": "string",
@@ -455,7 +455,7 @@
       }
     },
     "dataTableModel": {
-      "authorization_id": {
+      "distribution_id": {
         "type": "string",
         "_defn": [
           {
@@ -463,10 +463,10 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "authorization_id",
-        "elementName": "authorization_id",
+        "elementKey": "distribution_id",
+        "elementName": "distribution_id",
         "elementSet": "data",
-        "elementPath": "authorization_id"
+        "elementPath": "distribution_id"
       },
       "user": {
         "type": "string",
