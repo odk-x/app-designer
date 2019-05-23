@@ -28,7 +28,7 @@ function display() {
     distributionReport.innerHTML = odkCommon.localizeText(locale, 'fill_field_report');
     distributionReport.onclick = function() {
         odkTables.launchHTML(null,
-                        'config/tables/' + util.authorizationTable + '/html/' + util.authorizationTable + '_list.html?type=distribution_report');
+                        'config/tables/' + util.distributionTable + '/html/' + util.distributionTable + '_list_field_report.html');
     };
     document.getElementById("wrapper").appendChild(distributionReport);
 }

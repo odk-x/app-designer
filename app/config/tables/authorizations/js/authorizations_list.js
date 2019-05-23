@@ -3,7 +3,6 @@
 var idxStart = -1;
 var authorizationsResultSet = {};
 var locale;
-var actionAuthorizationReport = "authorizationReport";
 var actionTypeKey = "actionTypeKey";
 var type = util.getQueryParameter('type');
 
@@ -59,22 +58,12 @@ function callBackFn () {
     console.log('callBackFn: actionType: ' + actionType);
 
     switch (actionType) {
-        case actionAuthorizationReport:
-            handleAuthorizationReportCallback(action, dispatchStr);
-            odkCommon.removeFirstQueuedAction();
-            break;
         default:
             console.log("Unrecognized action type in callback");
             odkCommon.removeFirstQueuedAction();
             break;
     }
 }
-
-var handleAuthorizationReportCallback = function(action, dispatchStr) {
-    if (dataUtil.validateCustomTableEntry(action, dispatchStr, "authorization report", util.distributionReportTable)) {
-        // TODO: UI changes on successful completion?
-    }
-};
 
 
 var resumeFn = function(fIdxStart) {
@@ -83,9 +72,6 @@ var resumeFn = function(fIdxStart) {
         joinQuery = "SELECT * FROM " + util.authorizationTable + " WHERE extra_field_entitlements='ONE' OR extra_field_entitlements='MANY'" ;
     } else if (type === 'deliveries') {
         joinQuery = "SELECT * FROM " + util.authorizationTable;
-    } else {
-        joinQuery = "SELECT * FROM " + util.authorizationTable + ' t1 LEFT JOIN ' + util.distributionReportTable +
-            ' t2 ON t1.report_version=t2.report_version AND t1._id=t2.authorization_id WHERE t1.summary_form_id IS NOT NULL';
     }
 
 
@@ -126,32 +112,6 @@ var resumeFn = function(fIdxStart) {
                         'config/assets/html/choose_method.html?title='
                         + encodeURIComponent(odkCommon.localizeText(locale, 'enter_beneficiary_entity_id'))
                         + '&type=new_ent&authorization_id=' + rowId);
-                } else if (type == 'distribution_report') {
-                    new Promise( function(resolve, reject) {
-                        odkData.query(util.distributionReportTable, "report_version = ? AND authorization_id = ?", [reportVersion, rowId],
-                            null, null, null, null, null, null, true, resolve, reject);
-                    }).then( function (result) {
-                        if (result.getCount() > 0) {
-                            odkTables.editRowWithSurvey(null, result.get('summary_form_id'),
-                                result.get('summary_row_id'), result.get('summary_form_id'), null);
-                        } else {
-                            var rootRowId = util.genUUID();
-                            var customReportRowId = util.genUUID();
-                            new Promise( function(resolve, reject) {
-                                var jsonMap = {};
-                                util.setJSONMap(jsonMap, "authorization_id", rowId);
-                                util.setJSONMap(jsonMap, "user", odkCommon.getActiveUser());
-                                util.setJSONMap(jsonMap, "report_version", reportVersion);
-                                util.setJSONMap(jsonMap, "summary_form_id", summaryFormId);
-                                util.setJSONMap(jsonMap, "summary_row_id", customReportRowId);
-                                util.setJSONMap(jsonMap, "date_created", util.getCurrentOdkTimestamp());
-                                odkData.addRow(util.distributionReportTable, jsonMap, rootRowId, resolve, reject);
-                            }).then( function(result) {
-                                // passing in group read only to not break method
-                                dataUtil.createCustomRowFromBaseEntry(result, "summary_form_id", "summary_row_id", actionAuthorizationReport, null, '_group_read_only', null);
-                            });
-                        }
-                    });
                 } else {
                     odkTables.openDetailView(null, util.authorizationTable, rowId,
                         'config/assets/html/progress_summary.html');

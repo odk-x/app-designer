@@ -205,6 +205,7 @@ util.membersTable = 'members';
 util.authorizationTable = 'authorizations';
 util.entitlementTable = 'entitlements';
 util.deliveryTable = 'deliveries';
+util.distributionTable = 'distributions';
 util.distributionReportTable = 'distribution_reports';
 util.visitsTable = "visits";
 util.visitProgramsTable = "visit_programs";
