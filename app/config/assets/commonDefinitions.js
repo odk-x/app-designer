@@ -1134,6 +1134,20 @@ window.odkCommonDefinitions = {
         "es": "Vulnerabilidad"
       },
       "_row_num": 159
+    },
+    "no_distributions": {
+      "string_token": "no_distributions",
+      "text": {
+        "default": "No Distributions"
+      },
+      "_row_num": 160
+    },
+    "choose_distribution": {
+      "string_token": "choose_distribution",
+      "text": {
+        "default": "Choose Distribution"
+      },
+      "_row_num": 161
     }
   },
   "_locales": {
