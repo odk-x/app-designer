@@ -10,7 +10,6 @@ var distCBSuccess = function(result) {
     distResultSet = result;
     locale = odkCommon.getPreferredLocale();
     if (distResultSet.getCount() == 0) {
-        // TODO: Add translations
         $('#title').text(odkCommon.localizeText(locale, 'no_distributions'));
         return null;
     } else {
