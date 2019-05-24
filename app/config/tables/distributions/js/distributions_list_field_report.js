@@ -77,7 +77,8 @@ var handleDistReportCallback = function(action, dispatchStr) {
 
 var resumeFn = function(fIdxStart) {
     var joinQuery = "SELECT * FROM " + util.distributionTable + ' t1 LEFT JOIN ' + util.distributionReportTable +
-            ' t2 ON t1.report_version=t2.report_version AND t1._id=t2.distribution_id WHERE t1.summary_form_id IS NOT NULL';
+        ' t2 ON (t1.summary_version=t2.report_version OR (t1.summary_version IS NULL AND t2.report_version IS NULL)) ' +
+        'AND t1._id=t2.distribution_id WHERE t1.summary_form_id IS NOT NULL';
 
     odkData.arbitraryQuery(util.distributionTable, joinQuery, [], null, null,
         distCBSuccess, distCBFailure);
@@ -95,16 +96,22 @@ var resumeFn = function(fIdxStart) {
             var rowId = containingDiv.attr('rowId');
             var reportVersion = containingDiv.attr('reportVersion');
             var summaryFormId = containingDiv.attr('summaryFormId');
-            console.log("rowId" + rowId);
-            console.log("summaryFormId" + summaryFormId);
-            console.log("reportVersion" + reportVersion);
+            console.log("rowId: " + rowId);
+            console.log("summaryFormId: " + summaryFormId);
+            console.log("reportVersion: " + reportVersion);
 
             console.log('clicked with rowId: ' + rowId);
             // make sure we retrieved the rowId
             if (rowId !== null && rowId !== undefined) {
                 // we'll pass null as the relative path to use the default file
                     new Promise( function(resolve, reject) {
-                        odkData.query(util.distributionReportTable, "report_version = ? AND distribution_id = ?", [reportVersion, rowId],
+                        var sel = "distribution_id = ?";
+                        var selArgs = [rowId];
+                        if (reportVersion !== null && reportVersion !== undefined) {
+                            sel += " AND report_version = ?";
+                            selArgs.push(reportVersion);
+                        }
+                        odkData.query(util.distributionReportTable, sel, selArgs,
                             null, null, null, null, null, null, true, resolve, reject);
                     }).then( function (result) {
                         if (result.getCount() > 0) {
@@ -150,7 +157,6 @@ var displayGroup = function(idxStart) {
         item.attr('rowId', distResultSet.getRowId(i));
         item.attr('summaryFormId', distResultSet.getData(i, "summary_form_id"));
         item.attr('reportVersion', distResultSet.getData(i, "report_version"));
-        item.attr('summaryFormId', distResultSet.getData(i, "summary_form_id"));
         item.attr('class', 'item_space');
         var dist_name = distResultSet.getData(i, 'name');
         item.text(dist_name);
@@ -158,7 +164,9 @@ var displayGroup = function(idxStart) {
         var chevron = $('<img>');
         chevron.attr('class', 'chevron');
         //distribution_id is only in the report table, so this is how we tell if there is an entry for this report version
-        chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/checkmark.png'));
+        if (distResultSet.getData(i, 'distribution_id') !== undefined && distResultSet.getData(i, 'distribution_id') !== null) {
+            chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/checkmark.png'));
+        }
 
         item.append(chevron);
 
