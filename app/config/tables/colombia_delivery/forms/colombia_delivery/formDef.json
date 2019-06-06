@@ -302,7 +302,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 26
       },
       {
@@ -322,7 +322,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 27
       },
       {
@@ -342,7 +342,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 28
       },
       {
@@ -362,7 +362,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 29
       },
       {
@@ -382,7 +382,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 30
       },
       {
@@ -402,7 +402,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 31
       },
       {
@@ -422,7 +422,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 32
       },
       {
@@ -442,7 +442,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 33
       },
       {
@@ -462,7 +462,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 34
       },
       {
@@ -482,7 +482,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 35
       },
       {
@@ -502,7 +502,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 36
       },
       {
@@ -522,7 +522,7 @@
             }
           }
         },
-        "required": true,
+        "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
         "_row_num": 37
       },
       {
@@ -4713,7 +4713,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 26,
             "__rowNum__": 25,
             "_token_type": "prompt",
@@ -4738,7 +4738,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 27,
             "__rowNum__": 26,
             "_token_type": "prompt",
@@ -4763,7 +4763,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 28,
             "__rowNum__": 27,
             "_token_type": "prompt",
@@ -4788,7 +4788,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 29,
             "__rowNum__": 28,
             "_token_type": "prompt",
@@ -4813,7 +4813,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 30,
             "__rowNum__": 29,
             "_token_type": "prompt",
@@ -4838,7 +4838,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 31,
             "__rowNum__": 30,
             "_token_type": "prompt",
@@ -4863,7 +4863,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 32,
             "__rowNum__": 31,
             "_token_type": "prompt",
@@ -4888,7 +4888,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 33,
             "__rowNum__": 32,
             "_token_type": "prompt",
@@ -4913,7 +4913,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 34,
             "__rowNum__": 33,
             "_token_type": "prompt",
@@ -4938,7 +4938,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 35,
             "__rowNum__": 34,
             "_token_type": "prompt",
@@ -4963,7 +4963,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 36,
             "__rowNum__": 35,
             "_token_type": "prompt",
@@ -4988,7 +4988,7 @@
                 }
               }
             },
-            "required": true,
+            "required": "selected(data('products'),'Kit_Higiene_Familiar') || selected(data('products'),'Kit_Mercado_Familiar') || selected(data('products'),'Kit_Cocina_Familiar') || selected(data('products'),'Kit_Vajilla')",
             "_row_num": 37,
             "__rowNum__": 36,
             "_token_type": "prompt",
