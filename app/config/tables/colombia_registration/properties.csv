@@ -1,0 +1,9 @@
+_partition,_aspect,_key,_type,_value
+Column,gender,displayChoicesList,object,"[{""choice_list_name"":""genders"",""data_value"":""male"",""display"":{""title"":{""text"":""Male""}},""_row_num"":2},{""choice_list_name"":""genders"",""data_value"":""female"",""display"":{""title"":{""text"":""Female""}},""_row_num"":3}]"
+Column,id_type,displayChoicesList,object,"[{""choice_list_name"":""id_types_list"",""data_value"":""registration_number"",""display"":{""title"":{""text"":""Registration Number""}},""_row_num"":8},{""choice_list_name"":""id_types_list"",""data_value"":""case_number"",""display"":{""title"":{""text"":""Case Number""}},""_row_num"":9},{""choice_list_name"":""id_types_list"",""data_value"":""asylum _card"",""display"":{""title"":{""text"":""Asylum Card""}},""_row_num"":10},{""choice_list_name"":""id_types_list"",""data_value"":""police _notes"",""display"":{""title"":{""text"":""Police Notes""}},""_row_num"":11}]"
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,colombia_registration
+Table,default,defaultViewType,string,SPREADSHEET
+Table,default,displayName,object,"{""text"":""Registration""}"
+Table,security,defaultAccessOnCreation,string,HIDDEN
+Table,security,unverifiedUserCanCreate,boolean,false
