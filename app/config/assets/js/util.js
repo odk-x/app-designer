@@ -457,6 +457,44 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
     });
 };
 
+dataUtil.triggerAuthorizationDelivery = function(authorizationId, beneficiaryEntityId, actionTypeValue) {
+    dataUtil
+      .getRow(util.authorizationTable, authorizationId)
+      .then(function(authorizationRow) {
+          if (authorizationRow !== undefined && authorizationRow !== null && authorizationRow.getCount() !== 0) {
+              if (dataUtil.isCustomDeliveryAuthorization(authorizationRow)) {
+                  dataUtil.tableExists(authorizationRow.getData(0, 'custom_delivery_form_id'))
+                    .then(function (result) {
+                        if (!result) {
+                            util.displayError('Specified delivery form cannot be found. Unable to deliver.');
+                            return;
+                        }
+
+                        var customDeliveryRowId = util.genUUID();
+                        var jsonMap = {};
+                        dataUtil.addDeliveryRowWithoutEntitlement(beneficiaryEntityId, authorizationRow, customDeliveryRowId)
+                          .then(function (rootDeliveryRow) {
+                              dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null, "_group_read_only", jsonMap);
+                          }).catch(function (reason) {
+                            console.log('Failed to perform custom entitlement delivery: ' + reason);
+                        });
+                    });
+              } else {
+                  console.log('Performing simple delivery');
+                  odkTables.launchHTML(
+                    null,
+                    'config/assets/html/deliver.html' +
+                    '?beneficiary_entity_id=' + encodeURIComponent(beneficiaryEntityId) +
+                    '&authorization_id=' + encodeURIComponent(authorizationId)
+                  );
+              }
+          } else {
+              util.displayError("Authorization missing from phone, please contact administrator");
+          }
+
+      });
+};
+
 dataUtil.tableExists = function(tableId) {
     return new Promise( function(resolve, reject) {
         odkData.getAllTableIds(resolve, reject);
@@ -555,13 +593,12 @@ dataUtil.addDeliveryRowWithoutEntitlement = function(beneficiaryEntityId, author
     util.setJSONMap(jsonMap, 'authorization_description', authorizationRow.get('description'));
     util.setJSONMap(jsonMap, 'item_pack_id', authorizationRow.get('item_pack_id'));
     util.setJSONMap(jsonMap, 'item_pack_name', authorizationRow.get('item_pack_name'));
-    util.setJSONMap(jsonMap, 'item_description', authorizationRow.get('item_description'));
-    util.setJSONMap(jsonMap, 'custom_delivery_form_id', authorizationRow.get('custom_delivery_table'));
+    util.setJSONMap(jsonMap, 'item_pack_description', authorizationRow.get('item_description'));
+    util.setJSONMap(jsonMap, 'is_override', 'FALSE');
+    util.setJSONMap(jsonMap, 'custom_delivery_form_id', authorizationRow.get('custom_delivery_form_id'));
     util.setJSONMap(jsonMap, 'custom_delivery_row_id', customDeliveryRowId);
     util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
     util.setJSONMap(jsonMap, 'date_created', util.getCurrentOdkTimestamp());
-    util.setJSONMap(jsonMap, 'is_override', 'FALSE');
-
 
     return new Promise(function(resolve, reject) {
         odkData.addRow(util.deliveryTable, jsonMap, util.genUUID(), resolve, reject);

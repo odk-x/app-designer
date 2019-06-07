@@ -163,7 +163,7 @@ function display() {
 
 
 function initEntitlementToggle() {
-    $('#switch-title-id').text('Entitlements Listed'); // TODO: localize this
+    $('#switch-title-id').text('Items'); // TODO: localize this
 
     $('#left_txt').text('Pending'); // TODO: Localize this
     $('#left').prop('checked', true);
@@ -220,34 +220,53 @@ function setToDeliveryView(includeWorkflowButton) {
 function setSublistToEnabledPendingEntitlements(action) {
     console.log("setting to pending");
 
-    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' ent LEFT JOIN ' +  util.deliveryTable +
-        ' del ON del.entitlement_id = ent._id INNER JOIN '  + util.authorizationTable + ' auth ON ent.authorization_id = auth._id' +
-        ' WHERE del._id IS NULL AND ent.beneficiary_entity_id = ? AND ent.status = ?';
+    var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
+      ' WHERE ' + util.authorizationTable + '._id NOT IN ' +
+      '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?) ' +
+      'AND ' + util.authorizationTable + '.status = ?';
 
-    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId, 'ENABLED'],
-        'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent(action));
+    odkTables.setSubListViewArbitraryQuery(
+      util.authorizationTable,
+      query,
+      [beneficiaryEntityId, 'ACTIVE'],
+      'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html' +
+      '?action=' + encodeURIComponent(action) +
+      '&beneficiary_entity_id=' + encodeURIComponent(beneficiaryEntityId)
+    );
 }
 
 function setSublistToAllPendingEntitlements(action) {
     console.log("setting to pending");
 
-    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' ent LEFT JOIN ' +  util.deliveryTable +
-        ' del ON del.entitlement_id = ent._id INNER JOIN '  + util.authorizationTable + ' auth ON ent.authorization_id = auth._id' +
-        ' WHERE del._id IS NULL AND ent.beneficiary_entity_id = ?';
+    var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
+      ' WHERE ' + util.authorizationTable + '._id NOT IN ' +
+      '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?)';
 
-    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
-        'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent(action));
+    odkTables.setSubListViewArbitraryQuery(
+      util.authorizationTable,
+      query,
+      [beneficiaryEntityId],
+      'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html' +
+      '?action=' + encodeURIComponent(action) +
+      '&beneficiary_entity_id=' + encodeURIComponent(beneficiaryEntityId)
+    );
 }
 
 function setSublistToDeliveredEntitlements() {
     console.log("setting to delivered");
 
-    var joinQuery = 'SELECT * FROM ' + util.entitlementTable + ' ent INNER JOIN ' + util.deliveryTable + ' t2 ON t2.entitlement_id = ent._id' +
-        ' WHERE ent.beneficiary_entity_id = ?';
+    var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
+      ' WHERE ' + util.authorizationTable + '._id IN ' +
+      '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?)';
 
-    odkTables.setSubListViewArbitraryQuery(util.entitlementTable, joinQuery, [beneficiaryEntityId],
-        'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html?action=' + encodeURIComponent('detail'));
-
+    odkTables.setSubListViewArbitraryQuery(
+      util.authorizationTable,
+      query,
+      [beneficiaryEntityId],
+      'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html' +
+      '?action=detail' +
+      '&beneficiary_entity_id=' + encodeURIComponent(beneficiaryEntityId)
+    );
 }
 
 function setSublistToHousehold() {

@@ -7,7 +7,7 @@ var actionTypeKey = "actionTypeKey";
 var actionAddCustomDelivery = 0;
 var locale = odkCommon.getPreferredLocale();
 var action = util.getQueryParameter('action');
-
+var beneficiaryEntityId = util.getQueryParameter('beneficiary_entity_id');
 
 var firstLoad = function() {
     odkCommon.registerListener(function() {
@@ -46,9 +46,9 @@ var resumeFn = function(fIdxStart) {
                     // make sure we retrieved the rowId
                     if (rowId !== null && rowId !== undefined) {
                         if (action === 'detail') {
-                            launchDeliveryDetailView(rowId);
+                            launchDeliveryDetailView(rowId, beneficiaryEntityId);
                         } else if (action === 'deliver') {
-                            dataUtil.triggerEntitlementDelivery(rowId, actionAddCustomDelivery);
+                            dataUtil.triggerAuthorizationDelivery(rowId, beneficiaryEntityId, actionAddCustomDelivery);
                         }
                     }
                 });
@@ -76,15 +76,27 @@ var resumeFn = function(fIdxStart) {
     }).catch( function(reason) {
         console.log('E', LOG_TAG +  LOG_TAG + "Failed to get view data: " + reason);
     });
-}
+};
 
 
-var launchDeliveryDetailView = function(entitlement_id) {
-    console.log('I', LOG_TAG + "Launching delivery detail view for entitlement: " + entitlement_id);
+var launchDeliveryDetailView = function(authorization_id, beneficiaryEntityId) {
+    console.log('I', LOG_TAG + "Launching delivery detail view for authorization: " + authorization_id);
 
     new Promise(function(resolve, reject) {
-        odkData.query(util.deliveryTable, 'entitlement_id = ?', [entitlement_id], null,
-            null, null, null, null, null, true, resolve, reject);
+        odkData.query(
+          util.deliveryTable,
+          'authorization_id = ? AND beneficiary_entity_id = ?',
+          [authorization_id, beneficiaryEntityId],
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          true,
+          resolve,
+          reject
+        );
     }).then(function(result) {
         if (result.getCount() > 0) {
             odkTables.openDetailView(null, 'deliveries', result.getData(0, "_id"),
@@ -93,7 +105,7 @@ var launchDeliveryDetailView = function(entitlement_id) {
     }).catch(function(reason) {
         console.log('E', LOG_TAG + "Failed to retrieve delivery: " + reason);
     });
-}
+};
 
 
 /************************** Action callback workflow *********************************/
@@ -133,36 +145,30 @@ var finishCustomDelivery = function(action, dispatchStr) {
 
 /************************** UI Rending functions *********************************/
 
-var displayGroup = function(idxStart, entitlementsResultSet) {
+var displayGroup = function(idxStart, authorizationsResultSet) {
     console.log('I', LOG_TAG + 'displayGroup called. idxStart: ' + idxStart);
 
     /* If the list comes back empty, inform the user */
-    if (entitlementsResultSet.getCount() === 0) {
+    if (authorizationsResultSet.getCount() === 0) {
         var errorText = $('#error');
         errorText.show();
-        errorText.text('No entitlements found');
+        errorText.text('No item found');
     }
 
     /* Number of rows displayed per 'chunk' - can modify this value */
     var chunk = 50;
     var i = idxStart;
     for (i; i < idxStart + chunk; i++) {
-        if (i >= entitlementsResultSet.getCount()) {
+        if (i >= authorizationsResultSet.getCount()) {
             break;
         }
 
         var item = $('<li>');
-        item.attr('rowId', entitlementsResultSet.getRowId(i));
+        item.attr('rowId', authorizationsResultSet.getRowId(i));
         item.attr('class', 'item_space');
-        item.attr('id', entitlementsResultSet.getRowId(i));
-        var auth_name = entitlementsResultSet.getData(i, 'item_pack_name');
+        item.attr('id', authorizationsResultSet.getRowId(i));
+        var auth_name = authorizationsResultSet.getData(i, 'item_pack_name');
         item.text(auth_name);
-
-        var item2 = $('<li>');
-        item2.attr('class', 'detail');
-        var ipn = entitlementsResultSet.getData(i, 'authorization_name');
-        item2.text(ipn);
-        item.append(item2);
 
         if (action === 'change_status') {
             var toggle = $(".switch-starter").clone();
@@ -171,7 +177,7 @@ var displayGroup = function(idxStart, entitlementsResultSet) {
             toggle.find('.left_txt').attr('for', 'left' + '-' + i);
             toggle.find('.left_txt').text('Enabled');
             toggle.find('#left' + '-' + i).click( {"index": i}, function(event) {
-                return changeStatusPromise(entitlementsResultSet.getRowId(event.data.index), 'ENABLED');
+                return changeStatusPromise(authorizationsResultSet.getRowId(event.data.index), 'ENABLED');
             });
 
             toggle.find('.right').attr('id', 'right' + '-' + i).attr('name', i);
@@ -179,10 +185,10 @@ var displayGroup = function(idxStart, entitlementsResultSet) {
             toggle.find('.right_txt').text('Disabled');
 
             toggle.find('#right' + '-' + i).click( {"index": i}, function(event) {
-                return changeStatusPromise(entitlementsResultSet.getRowId(event.data.index), 'DISABLED');
+                return changeStatusPromise(authorizationsResultSet.getRowId(event.data.index), 'DISABLED');
             });
 
-            if (entitlementsResultSet.getData(i, 'status') === 'ENABLED') {
+            if (authorizationsResultSet.getData(i, 'status') === 'ENABLED') {
                 toggle.find('.left').attr('checked', true);
             } else {
                 toggle.find('.right').attr('checked', true);
@@ -206,14 +212,14 @@ var displayGroup = function(idxStart, entitlementsResultSet) {
         $('#list').append(borderDiv);
 
     }
-    if (i < entitlementsResultSet.getCount()) {
+    if (i < authorizationsResultSet.getCount()) {
         setTimeout(resumeFn, 0, i);
     }
 };
 
 function changeStatusPromise(id, status) {
     return new Promise( function(resolve, reject) {
-        odkData.updateRow(util.entitlementTable, {'status' : status}, id,
+        odkData.updateRow(util.authorizationTable, {'status' : status}, id,
             resolve, reject);
     }).then( function(result) {
         console.log('Update success: ' + result);
