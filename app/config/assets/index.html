@@ -12,7 +12,6 @@
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="js/util.js"></script>
         <script type="text/javascript" src="js/renderers/beneficiary_index.js"></script>
-        <script type="text/javascript" src="js/renderers/token_index.js"></script>
     </head>
 
     <body>
@@ -24,7 +23,8 @@
         <script>
             $(function() {
                 if (util.getWorkflowMode() === util.workflow.none) {
-                    $(util.renderPageAsPromise(tokenIndex.display));
+                    // Removed for sync performance
+                    // $(util.renderPageAsPromise(tokenIndex.display));
                 } else if (util.getWorkflowMode() === util.workflow.optional || util.getWorkflowMode() === util.workflow.required) {
                     $(util.renderPageAsPromise(beneficiaryIndex.display));
                 }

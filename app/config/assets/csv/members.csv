@@ -1,3 +1,0 @@
-﻿_id,_form_id,_locale,_savepoint_type,_savepoint_timestamp,_savepoint_creator,beneficiary_entity_row_id,beneficiary_entity_status,date_created,member_id,custom_member_form_id,custom_member_row_id,status,status_reason,_default_access,_group_modify,_group_privileged,_group_read_only,_row_etag,_row_owner
-1234,,,,,,1232ew,,,1002,custom_members,1234,ENABLED,,,,,,,
-2345,,,,,,1232ew,,,1003,custom_memberss,2345,ENABLED,,,,,,,
