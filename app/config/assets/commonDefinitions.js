@@ -1148,6 +1148,14 @@ window.odkCommonDefinitions = {
         "default": "Choose Distribution"
       },
       "_row_num": 161
+    },
+    "register": {
+      "string_token": "register",
+      "text": {
+        "default": "Register",
+        "es": "Registrar"
+      },
+      "_row_num": 162
     }
   },
   "_locales": {

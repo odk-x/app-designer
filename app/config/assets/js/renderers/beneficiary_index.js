@@ -37,31 +37,31 @@ beneficiaryIndex.display = function() {
     }
     document.getElementById("wrapper").appendChild(newClient);
 
-    var followUp = document.createElement("button");
-    followUp.innerHTML = odkCommon.localizeText(locale, deliveryToken);
-    followUp.setAttribute("id", "deliver");
-    followUp.onclick = function() {
-        odkTables.launchHTML(null,
-                             'config/assets/html/choose_method.html?title='
-                             + encodeURIComponent(odkCommon.localizeText(locale, deliveryTitleToken))
-                             +'&type=delivery');
-    };
-    document.getElementById("wrapper").appendChild(followUp);
-
-    var visitBtn = document.createElement("button");
-    // visitBtn.innerHTML = odkCommon.localizeText(locale, visitToken);
-    visitBtn.innerHTML = "Visit";
-    visitBtn.setAttribute("id", "visit");
-    visitBtn.onclick = function() {
-        odkTables.openTableToListView(
-            null,
-            'visit_programs',
-            null,
-            null,
-            'config/tables/visit_programs/html/visit_programs_list.html'
-        );
-    };
-    document.getElementById("wrapper").appendChild(visitBtn);
+    // var followUp = document.createElement("button");
+    // followUp.innerHTML = odkCommon.localizeText(locale, deliveryToken);
+    // followUp.setAttribute("id", "deliver");
+    // followUp.onclick = function() {
+    //     odkTables.launchHTML(null,
+    //                          'config/assets/html/choose_method.html?title='
+    //                          + encodeURIComponent(odkCommon.localizeText(locale, deliveryTitleToken))
+    //                          +'&type=delivery');
+    // };
+    // document.getElementById("wrapper").appendChild(followUp);
+    //
+    // var visitBtn = document.createElement("button");
+    // // visitBtn.innerHTML = odkCommon.localizeText(locale, visitToken);
+    // visitBtn.innerHTML = "Visit";
+    // visitBtn.setAttribute("id", "visit");
+    // visitBtn.onclick = function() {
+    //     odkTables.openTableToListView(
+    //         null,
+    //         'visit_programs',
+    //         null,
+    //         null,
+    //         'config/tables/visit_programs/html/visit_programs_list.html'
+    //     );
+    // };
+    // document.getElementById("wrapper").appendChild(visitBtn);
 
     var viewData = document.createElement("button");
     viewData.innerHTML = odkCommon.localizeText(locale, dataToken);

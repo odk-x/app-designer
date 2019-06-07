@@ -124,7 +124,7 @@ function display() {
             var val = $('#code').val();
             odkCommon.setSessionVariable(rcIdSessionVariable, val);
             console.log("USERS: " + users);
-            searchFunction();
+            searchFunction(val);
         });
 
         odkCommon.registerListener(function() {
@@ -140,9 +140,9 @@ function display() {
 }
 
 
-function searchFunction() {
+function searchFunction(val) {
     console.log('search function path entered');
-    odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?', [code], null, null,
+    odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?', [val], null, null,
         null, null, null, null, true, searchCBSuccess,
         searchCBFailure);
 }
