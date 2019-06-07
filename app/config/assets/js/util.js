@@ -507,6 +507,34 @@ dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, 
     });
 };
 
+dataUtil.createCustomRowFromBaseTable = function(rootDeliveryRowId, customFormId, customDeliveryRowId, actionTypeValue,
+                                                 dispatchStruct, defaultGroup, defaultAccess, jsonMap) {
+
+
+    if (jsonMap === null) {
+        jsonMap = {};
+    }
+
+    // We also need to add group permission fields
+    util.setJSONMap(jsonMap, '_group_modify', defaultGroup);
+
+    util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
+
+    util.setJSONMap(jsonMap, '_default_access', 'HIDDEN');
+
+    return new Promise( function(resolve, reject) {
+        odkData.addRow(customFormId, jsonMap, customDeliveryRowId, resolve, reject);
+    }).then( function(result) {
+        if (dispatchStruct === undefined || dispatchStruct === null) {
+            dispatchStruct = {};
+        }
+        util.setJSONMap(dispatchStruct, util.actionTypeKey, actionTypeValue);
+        util.setJSONMap(dispatchStruct, util.rootRowIdKey, rootDeliveryRowId);
+        util.setJSONMap(dispatchStruct, util.customFormIdKey, customFormId);
+        odkTables.editRowWithSurvey(JSON.stringify(dispatchStruct), customFormId, customDeliveryRowId, customFormId, null);
+    });
+};
+
 // extracts and validates whether a given authorization row has a valid customDeliveryFormId
 dataUtil.isCustomDeliveryAuthorization = function(authorizationRow) {
     if (authorizationRow.getCount() === 0) {
@@ -607,7 +635,22 @@ dataUtil.validateCustomTableEntry = function(action, dispatchStr, label, rootFor
 
     if (savepointType === util.savepointSuccess) {
         console.log(label + " succeeded");
-        return Promise.resolve(true);
+
+        // We need to update the base table row with the beneficiary_entity_id/rc_id
+        // that was calculated via the survey form id
+        return new Promise(function(resolve, reject) {
+            odkData.query(customFormId, '_id = ?', [customRowId], null,
+                null, null, null, null, null, true, resolve, reject);
+
+        }).then(function(result) {
+            var jsonMap = {}
+            util.setJSONMap(jsonMap, 'beneficiary_entity_id', result.get('rc_id'));
+             return new Promise(function(resolve, reject) {
+                 odkData.updateRow(rootFormId, jsonMap, rootRowId, resolve, reject);
+             });
+        }).then(function(result) {
+            return Promise.resolve(true);
+        })
     } else {
         console.log(label + " is false; delete rows");
         var dbActions = [];

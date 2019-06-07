@@ -4,11 +4,11 @@
 'use strict';
 
 var actionTypeKey = "actionTypeKey";
-var actionBarcode = 0;
+var actionLaunch = 0;
 var actionRegistration = 1;
 var htmlFileNameValue = "delivery_start";
 var userActionValue = "launchBarcode";
-var barcodeSessionVariable = "barcodeVal";
+var rcIdSessionVariable = "rcIdVal";
 var chooseListSessionVariable = "chooseList";
 var savepointSuccess = "COMPLETE";
 var LOG_TAG = "choose_method.js";
@@ -30,18 +30,18 @@ var entDefaultGroupKey = "entDefaultGroup";
 function display() {
 
     $('#view_details').text(odkCommon.localizeText(locale, "view_authorization_details"));
-    $('#barcode').text(odkCommon.localizeText(locale, "scan_barcode"));
+    $('#launch').text(odkCommon.localizeText(locale, "register"));
     $('#search').text(odkCommon.localizeText(locale, "enter"));
 
-    var barcodeVal = odkCommon.getSessionVariable(barcodeSessionVariable);
-    if (barcodeVal !== null && barcodeVal !== undefined && barcodeVal !== "") {
-        $('#code').val(barcodeVal);
+    var rcIdVal = odkCommon.getSessionVariable(rcIdSessionVariable);
+    if (rcIdVal !== null && rcIdVal !== undefined && rcIdVal !== "") {
+        $('#code').val(rcIdVal);
     }
 
     var localizedUser = odkCommon.localizeText(locale, "select_group");
     $('#choose_user').hide();
     if (type !== 'new_ent') {
-        $('#view_details').hide();
+        $('#view_details').hide()
     } else {
         idComponent = "&authorization_id=" + encodeURIComponent(util.getQueryParameter('authorization_id'));
         $('#view_details').on('click', function() {
@@ -113,33 +113,59 @@ function display() {
 
         }
 
-        $('#barcode').on('click', function() {
-            var dispatchStruct = JSON.stringify({actionTypeKey: actionBarcode,
-                htmlPath:htmlFileNameValue, userAction:userActionValue});
-
-            odkCommon.doAction(dispatchStruct, 'com.google.zxing.client.android.SCAN', null);
+        $('#launch').on('click', function() {
+            // put form registration here - launch Survey here
+            launchFunction();
         });
         myTimeoutVal = setTimeout(callBackFn(), 1000);
 
 
         $('#search').on('click', function() {
             var val = $('#code').val();
-            odkCommon.setSessionVariable(barcodeSessionVariable, val);
+            odkCommon.setSessionVariable(rcIdSessionVariable, val);
             console.log("USERS: " + users);
-            queryChain(val);
+            searchFunction();
         });
 
         odkCommon.registerListener(function() {
             callBackFn();
         });
 
-        // Call the registered callback in case the notification occured before the page finished
+        // Call the registered callback in case the notification occurred before the page finished
         // loading
         callBackFn();
     }, function(err) {
         console.log('promise failure with error: ' + err);
     });
 }
+
+
+function searchFunction() {
+    console.log('search function path entered');
+    odkData.query(util.beneficiaryEntityTable, 'beneficiary_entity_id = ?', [code], null, null,
+        null, null, null, null, true, searchCBSuccess,
+        searchCBFailure);
+}
+
+function searchCBSuccess(result) {
+    console.log('searchCBSuccess called with value' + result);
+    if (result.getCount() === 0) {
+        // util.displayError(odkCommon.localizeText(locale, "id_unavailable"));
+        // TODO: CAL: Localize this text
+        util.displayError("No id found");
+    } else {
+        clearSessionVars();
+        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
+            'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
+            encodeURIComponent(type) + '&rootRowId=' + encodeURIComponent(result.getRowId(0)));
+
+    }
+}
+
+function searchCBFailure(error) {
+    console.log('searchCBFailure called with error: ' + error);
+}
+
 
 function addOption(item) {
     $('#choose_user').append($("<option/>").attr("value", item).text(item));
@@ -236,8 +262,12 @@ function callBackFn () {
     console.log('callBackFn: actionType: ' + actionType);
 
     switch (actionType) {
-        case actionBarcode:
-            handleBarcodeCallback(action, dispatchStr);
+        // case actionBarcode:
+        //     handleBarcodeCallback(action, dispatchStr);
+        //     odkCommon.removeFirstQueuedAction();
+        //     break;
+        case actionLaunch:
+            handleLaunchCallback(action, dispatchStr);
             odkCommon.removeFirstQueuedAction();
             break;
         case actionRegistration:
@@ -278,6 +308,52 @@ function handleBarcodeCallback(action, dispatchStr) {
         odkCommon.setSessionVariable(barcodeSessionVariable, scanned);
         queryChain(action.jsonValue.result.SCAN_RESULT);
     }
+}
+
+function handleLaunchCallback(action, dispatchStr) {
+    dataUtil.validateCustomTableEntry(action, dispatchStr, "beneficiary_entity", util.beneficiaryEntityTable).then( function(result) {
+        if (result) {
+            var customRowId = action.jsonValue.result.instanceId;
+            var rootRowId = dispatchStr[util.rootRowIdKey];
+            if (util.getRegistrationMode() === "HOUSEHOLD") {
+                dataUtil.selfHealMembers(rootRowId, customRowId)
+                    .then( function(result) {
+                        clearSessionVars();
+                        if (result) {
+                            console.log("added base member rows");
+                        } else {
+                            console.log("no members were created");
+                        }
+                        clearSessionVars();
+                        odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
+                            'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable
+                            + '_detail.html?type=' + encodeURIComponent(type));
+
+                    }).catch( function(error) {
+                    console.log(error);
+                });
+            } else if (util.getRegistrationMode() === "INDIVIDUAL") {
+
+                // need to verify why it is necessary to add a base member row when in individual mode
+                var jsonMap = {};
+                util.setJSONMap(jsonMap, '_row_owner', odkCommon.getActiveUser());
+                util.setJSONMap(jsonMap, "beneficiary_entity_row_id", rootRowId);
+                util.setJSONMap(jsonMap, "date_created", util.getCurrentOdkTimestamp());
+                util.setJSONMap(jsonMap, "status", 'ENABLED');
+                util.setJSONMap(jsonMap, "_group_modify", odkCommon.getSessionVariable(defaultGroupKey));
+                util.setJSONMap(jsonMap, "_default_access", "HIDDEN");
+
+                new Promise( function(resolve, reject) {
+                    odkData.addRow(util.membersTable, jsonMap, util.genUUID(), resolve, reject);
+                }).then( function(result) {
+                    clearSessionVars();
+                    odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
+                        'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable +
+                        '_detail.html?type=delivery');
+                });
+            }
+        }
+    });
 }
 
 function handleRegistrationCallback(action, dispatchStr) {
@@ -458,6 +534,59 @@ function deliveryDisabledCBSuccess(result) {
 
 function deliveryDisabledCBFailure(error) {
     console.log('disableCB failed with error: ' + error);
+}
+
+
+function launchFunction() {
+    console.log('launch form called');
+
+    // We force registrations in Colombia in optional registration
+    // but we are using optional registration mode because
+    // we cannot guarantee that people have not already delivered something
+
+    var defaultGroup = odkCommon.getSessionVariable(defaultGroupKey);
+    var user = odkCommon.getSessionVariable(userKey);
+
+    // TODO: verify that custom beneficiary entity table exists
+    var customBEForm = util.getBeneficiaryEntityCustomFormId();
+    if (customBEForm === undefined || customBEForm === null || customBEForm === "") {
+        // should we provide a ui to register without survey?
+        util.displayError(odkCommon.localizeText(locale, 'be_custom_form_undefined'));
+        return;
+    }
+    var customRowId = util.genUUID();
+    var rootRowId = util.genUUID();
+    new Promise(function (resolve, reject) {
+        var struct = {};
+        //struct['beneficiary_entity_id'] = code;
+        struct['custom_beneficiary_entity_form_id'] = customBEForm;
+        struct['custom_beneficiary_entity_row_id'] = customRowId;
+        struct['status'] = 'ENABLED';
+        struct['status_reason'] = 'standard';
+        struct['_group_modify'] = defaultGroup;
+        struct['_default_access'] = 'HIDDEN';
+        struct['_row_owner'] = user;
+        struct['date_created'] = util.getCurrentOdkTimestamp();
+        odkData.addRow(util.beneficiaryEntityTable, struct, rootRowId, resolve, reject);
+    }).then(function (result) {
+        var customDispatchStruct = {};
+        var additionalFormsTupleArr = [];
+
+        var additionalFormTuple = {
+            [util.additionalCustomFormsObj.formIdKey]: util.getMemberCustomFormId(),
+            [util.additionalCustomFormsObj.foreignReferenceKey]: 'custom_beneficiary_entity_row_id',
+            [util.additionalCustomFormsObj.valueKey]: customRowId
+        };
+        additionalFormsTupleArr.push(additionalFormTuple);
+
+        customDispatchStruct[util.additionalCustomFormsObj.dispatchKey] = additionalFormsTupleArr;
+
+        console.log(customDispatchStruct);
+        clearSessionVars();
+        dataUtil.createCustomRowFromBaseTable(rootRowId, customBEForm,
+            customRowId, actionLaunch, customDispatchStruct, defaultGroup, 'HIDDEN', null);
+    });
+
 }
 
 function registrationFunction() {
@@ -690,5 +819,5 @@ function entitlementStatusFunction() {
 }
 
 function clearSessionVars() {
-    odkCommon.setSessionVariable(barcodeSessionVariable, null);
+    odkCommon.setSessionVariable(rcIdSessionVariable, null);
 }
