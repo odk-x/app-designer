@@ -227,7 +227,7 @@ function setSublistToEnabledPendingEntitlements(action) {
     //   'AND ' + util.authorizationTable + '.status = ?';
 
     var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
-      ' WHERE ' + util.authorizationTable + util.authorizationTable + '.status = ?';
+      ' WHERE ' + util.authorizationTable + '.status = ?';
 
     odkTables.setSubListViewArbitraryQuery(
       util.authorizationTable,
@@ -247,8 +247,7 @@ function setSublistToAllPendingEntitlements(action) {
     //   ' WHERE ' + util.authorizationTable + '._id NOT IN ' +
     //   '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?)';
 
-    var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
-      ' WHERE ' + util.authorizationTable;
+    var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable;
 
     odkTables.setSubListViewArbitraryQuery(
       util.authorizationTable,
