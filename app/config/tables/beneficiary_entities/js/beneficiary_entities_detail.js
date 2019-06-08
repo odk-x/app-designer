@@ -220,15 +220,19 @@ function setToDeliveryView(includeWorkflowButton) {
 function setSublistToEnabledPendingEntitlements(action) {
     console.log("setting to pending");
 
+    // TODO: Use this for coloring
+    // var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
+    //   ' WHERE ' + util.authorizationTable + '._id NOT IN ' +
+    //   '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?) ' +
+    //   'AND ' + util.authorizationTable + '.status = ?';
+
     var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
-      ' WHERE ' + util.authorizationTable + '._id NOT IN ' +
-      '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?) ' +
-      'AND ' + util.authorizationTable + '.status = ?';
+      ' WHERE ' + util.authorizationTable + util.authorizationTable + '.status = ?';
 
     odkTables.setSubListViewArbitraryQuery(
       util.authorizationTable,
       query,
-      [beneficiaryEntityId, 'ACTIVE'],
+      ['ACTIVE'],
       'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html' +
       '?action=' + encodeURIComponent(action) +
       '&beneficiary_entity_id=' + encodeURIComponent(beneficiaryEntityId)
@@ -238,14 +242,18 @@ function setSublistToEnabledPendingEntitlements(action) {
 function setSublistToAllPendingEntitlements(action) {
     console.log("setting to pending");
 
+    // For Colombia deployment, everything is valid
+    // var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
+    //   ' WHERE ' + util.authorizationTable + '._id NOT IN ' +
+    //   '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?)';
+
     var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
-      ' WHERE ' + util.authorizationTable + '._id NOT IN ' +
-      '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?)';
+      ' WHERE ' + util.authorizationTable;
 
     odkTables.setSubListViewArbitraryQuery(
       util.authorizationTable,
       query,
-      [beneficiaryEntityId],
+      [],
       'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html' +
       '?action=' + encodeURIComponent(action) +
       '&beneficiary_entity_id=' + encodeURIComponent(beneficiaryEntityId)

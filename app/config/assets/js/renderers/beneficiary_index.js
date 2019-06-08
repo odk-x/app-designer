@@ -79,16 +79,16 @@ beneficiaryIndex.display = function() {
         }).then( function(result) {
             var roles = result.getRoles();
             console.log(roles);
-            if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
-                var override = document.createElement("button");
-                override.innerHTML = odkCommon.localizeText(locale, administratorToken);
-                override.setAttribute("id", "overrides");
-                override.onclick = function() {
-                    odkTables.launchHTML(null,
-                                         'config/assets/html/overrides_start.html');
-                };
-                document.getElementById("wrapper").appendChild(override);
-            }
+            // if ($.inArray('ROLE_SUPER_USER_TABLES', roles) > -1) {
+            //     var override = document.createElement("button");
+            //     override.innerHTML = odkCommon.localizeText(locale, administratorToken);
+            //     override.setAttribute("id", "overrides");
+            //     override.onclick = function() {
+            //         odkTables.launchHTML(null,
+            //                              'config/assets/html/overrides_start.html');
+            //     };
+            //     document.getElementById("wrapper").appendChild(override);
+            // }
         }).catch( function(reason) {
             console.log('roles failed with error: ' + error);
         });
