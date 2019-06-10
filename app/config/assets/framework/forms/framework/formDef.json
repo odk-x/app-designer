@@ -83,7 +83,7 @@
         "_row_num": 13
       },
       {
-        "branch_label": "colombia",
+        "branch_label": "colombia_delivery",
         "_row_num": 14
       },
       {
@@ -99,6 +99,42 @@
       {
         "clause": "exit section",
         "_row_num": 16
+      },
+      {
+        "branch_label": "colombia_registration",
+        "_row_num": 17
+      },
+      {
+        "url": "'?' + odkSurvey.getHashString('colombia_registration')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
+        },
+        "_row_num": 18
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 19
+      },
+      {
+        "branch_label": "colombia_delivery_demo",
+        "_row_num": 20
+      },
+      {
+        "url": "'?' + odkSurvey.getHashString('colombia_delivery_demo')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
+        },
+        "_row_num": 21
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 22
       }
     ],
     "common_translations": [
@@ -2015,13 +2051,33 @@
       },
       {
         "choice_list_name": "test_forms",
-        "data_value": "colombia",
+        "data_value": "colombia_delivery",
+        "display": {
+          "title": {
+            "text": "Simple Colombia Delivery"
+          }
+        },
+        "_row_num": 4
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "colombia_registration",
+        "display": {
+          "title": {
+            "text": "Colombia Registration"
+          }
+        },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "colombia_delivery_demo",
         "display": {
           "title": {
             "text": "Colombia Delivery"
           }
         },
-        "_row_num": 4
+        "_row_num": 6
       }
     ]
   },
@@ -2250,13 +2306,33 @@
         },
         {
           "choice_list_name": "test_forms",
-          "data_value": "colombia",
+          "data_value": "colombia_delivery",
+          "display": {
+            "title": {
+              "text": "Simple Colombia Delivery"
+            }
+          },
+          "_row_num": 4
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "colombia_registration",
+          "display": {
+            "title": {
+              "text": "Colombia Registration"
+            }
+          },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "colombia_delivery_demo",
           "display": {
             "title": {
               "text": "Colombia Delivery"
             }
           },
-          "_row_num": 4
+          "_row_num": 6
         }
       ]
     },
@@ -4287,12 +4363,42 @@
             "promptIdx": 4
           },
           {
+            "url": "'?' + odkSurvey.getHashString('colombia_registration')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen18",
+            "promptIdx": 5
+          },
+          {
+            "url": "'?' + odkSurvey.getHashString('colombia_delivery_demo')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen21",
+            "promptIdx": 6
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 17,
-            "_branch_label_enclosing_screen": "survey/_screen17",
-            "promptIdx": 5
+            "_row_num": 23,
+            "_branch_label_enclosing_screen": "survey/_screen23",
+            "promptIdx": 7
           }
         ],
         "validation_tag_map": {
@@ -4381,25 +4487,51 @@
             "operationIdx": 11
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 17,
+            "_row_num": 18,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 12
           },
           {
-            "_row_num": 17,
+            "clause": "exit section",
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "exit_section",
+            "operationIdx": 13
+          },
+          {
+            "_row_num": 21,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 14
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 22,
+            "__rowNum__": 21,
+            "_token_type": "exit_section",
+            "operationIdx": 15
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 23,
+            "operationIdx": 16
+          },
+          {
+            "_row_num": 23,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 13
+            "operationIdx": 17
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 17,
-            "operationIdx": 14
+            "_row_num": 23,
+            "operationIdx": 18
           }
         ],
         "branch_label_map": {
@@ -4412,10 +4544,14 @@
           "_screen9": 6,
           "deliveries": 8,
           "_screen12": 8,
-          "colombia": 10,
+          "colombia_delivery": 10,
           "_screen15": 10,
-          "_contents": 13,
-          "_screen17": 13
+          "colombia_registration": 12,
+          "_screen18": 12,
+          "colombia_delivery_demo": 14,
+          "_screen21": 14,
+          "_contents": 17,
+          "_screen23": 17
         }
       }
     },

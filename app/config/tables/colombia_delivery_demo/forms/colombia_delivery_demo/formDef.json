@@ -92,12 +92,272 @@
       {
         "clause": "end screen",
         "_row_num": 10
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 11
+      },
+      {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "* NOT counting the group head",
+              "es": "*SIN contar al cabeza de grupo introducido anteriormente"
+            }
+          }
+        },
+        "_row_num": 12
+      },
+      {
+        "type": "integer",
+        "name": "masc_0_5",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Males between the ages of 0 and 5 years:",
+              "es": "Nº Varones de 0 a 5 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 13
+      },
+      {
+        "type": "integer",
+        "name": "masc_6_11",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Males between the ages of 6 and 11 years:",
+              "es": "Nº Varones de 6 a 11 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 14
+      },
+      {
+        "type": "integer",
+        "name": "masc_12_17",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Males between the ages of 12 and 17 years:",
+              "es": "Nº Varones de 12 a 17 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 15
+      },
+      {
+        "type": "integer",
+        "name": "masc_18_29",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Males between the ages of 18 and 29 years:",
+              "es": "Nº Varones de 18 a 29 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 16
+      },
+      {
+        "type": "integer",
+        "name": "masc_30_59",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Males between the ages of 30 and 59 years:",
+              "es": "Nº Varones de 30 a 59 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 17
+      },
+      {
+        "type": "integer",
+        "name": "masc_60",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Males between the ages of 60 years and over:",
+              "es": "Nº Varones de más de 60 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 18
+      },
+      {
+        "type": "integer",
+        "name": "fem_0_5",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Females between the ages of 0 and 5 years:",
+              "es": "Nº Mujeres de 0 a 5 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 19
+      },
+      {
+        "type": "integer",
+        "name": "fem_6_11",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Females between the ages of 6 and 11 years:",
+              "es": "Nº Mujeres de 6 a 11 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 20
+      },
+      {
+        "type": "integer",
+        "name": "fem_12_17",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Females between the ages of 12 and 17 years:",
+              "es": "Nº Mujeres de 12 a 17 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 21
+      },
+      {
+        "type": "integer",
+        "name": "fem_18_29",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Females between the ages of 18 and 29 years:",
+              "es": "Nº Mujeres de 18 a 29 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 22
+      },
+      {
+        "type": "integer",
+        "name": "fem_30_59",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Females between the ages of 30 and 59 years:",
+              "es": "Nº Mujeres de 30 a 59 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 23
+      },
+      {
+        "type": "integer",
+        "name": "fem_60",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Nº Females between the ages of 60 years and over:",
+              "es": "Nº Mujeres de más de 60 años:"
+            }
+          },
+          "required_message": {
+            "text": {
+              "default": "If there are no people in the age range enter 0 (zero)",
+              "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+            }
+          }
+        },
+        "required": true,
+        "_row_num": 24
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 25
       }
     ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "colombia_delivery",
+        "value": "colombia_delivery_demo",
         "_row_num": 2
       },
       {
@@ -107,7 +367,7 @@
       },
       {
         "setting_name": "table_id",
-        "value": "colombia_delivery",
+        "value": "colombia_delivery_demo",
         "_row_num": 4
       },
       {
@@ -115,8 +375,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Simple Delivery Form",
-              "es": "Simple Delivery Form"
+              "default": "Delivery Form",
+              "es": "Delivery Form"
             }
           }
         },
@@ -172,6 +432,66 @@
         "type": "select_one",
         "name": "pam",
         "_row_num": 6
+      },
+      {
+        "type": "integer",
+        "name": "masc_0_5",
+        "_row_num": 7
+      },
+      {
+        "type": "integer",
+        "name": "masc_6_11",
+        "_row_num": 8
+      },
+      {
+        "type": "integer",
+        "name": "masc_12_17",
+        "_row_num": 9
+      },
+      {
+        "type": "integer",
+        "name": "masc_18_29",
+        "_row_num": 10
+      },
+      {
+        "type": "integer",
+        "name": "masc_30_59",
+        "_row_num": 11
+      },
+      {
+        "type": "integer",
+        "name": "masc_60",
+        "_row_num": 12
+      },
+      {
+        "type": "integer",
+        "name": "fem_0_5",
+        "_row_num": 13
+      },
+      {
+        "type": "integer",
+        "name": "fem_6_11",
+        "_row_num": 14
+      },
+      {
+        "type": "integer",
+        "name": "fem_12_17",
+        "_row_num": 15
+      },
+      {
+        "type": "integer",
+        "name": "fem_18_29",
+        "_row_num": 16
+      },
+      {
+        "type": "integer",
+        "name": "fem_30_59",
+        "_row_num": 17
+      },
+      {
+        "type": "integer",
+        "name": "fem_60",
+        "_row_num": 18
       }
     ],
     "choices": [
@@ -1517,9 +1837,14 @@
     ],
     "calculates": [
       {
+        "calculation_name": "age",
+        "calculation": "(function() {var ageDifMs = Date.now() - data('birth_date').getTime();var ageDate = new Date(ageDifMs);var years = Math.abs(ageDate.getUTCFullYear() - 1970);var months = ageDate.getUTCMonth();var days = ageDate.getUTCDate();var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];var daysInCurrYear = 0;for (var i = 0; i < months; i++) {daysInCurrYear += daysOfMonth[i];}daysInCurrYear += days;var age = years + (daysInCurrYear / 365.0);return age;})()",
+        "_row_num": 2
+      },
+      {
         "calculation_name": "rcId",
         "calculation": "(function() {\n  var bDay = data('birth_date');  \n  var idNum = data('id_number');\n  var gender = data('gender');\n  var bPlace = data('birth_place');\n\n  if (idNum.length < 5) {\n    console.log(\"The id number is less than 5 characters.  Cannot calculate rc id correctly!\")\n  }\n\n  var rcId = idNum.charAt(0) + idNum.charAt(2) + idNum.charAt(4);\n\n  // 2 digit month\n  var month = parseInt(bDay.getMonth()) + 1; \n  var monthStr = month < 10 ? '0' + month : '' + month;\n  rcId += monthStr;\n\n  // 2 digit year\n  var year = String(bDay.getFullYear());\n  var yearStr = year.slice(2);\n  rcId += yearStr;\n\n  // 2 digit date\n  var date = parseInt(bDay.getDate());\n  var dateStr = date < 10 ? '0' + date : '' + date;\n  rcId += dateStr;\n\n  // 1 digit gender\n  var genStr = gender === 'female' ? '0' : '1';\n  rcId += genStr;\n\n  // 1 char birthplace\n  rcId += bPlace.slice(0, 1).toUpperCase();\n  return rcId;\n})()",
-        "_row_num": 2
+        "_row_num": 3
       }
     ],
     "properties": [
@@ -1608,7 +1933,7 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "colombia_delivery",
+        "value": "colombia_delivery_demo",
         "_row_num": 2
       },
       "form_version": {
@@ -1618,7 +1943,7 @@
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "colombia_delivery",
+        "value": "colombia_delivery_demo",
         "_row_num": 4
       },
       "survey": {
@@ -1626,8 +1951,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Simple Delivery Form",
-              "es": "Simple Delivery Form"
+              "default": "Delivery Form",
+              "es": "Delivery Form"
             }
           }
         },
@@ -1693,8 +2018,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Simple Delivery Form",
-              "es": "Simple Delivery Form"
+              "default": "Delivery Form",
+              "es": "Delivery Form"
             }
           }
         },
@@ -3055,10 +3380,15 @@
     },
     "queries": {},
     "calculates": {
+      "age": {
+        "calculation_name": "age",
+        "calculation": "(function() {var ageDifMs = Date.now() - data('birth_date').getTime();var ageDate = new Date(ageDifMs);var years = Math.abs(ageDate.getUTCFullYear() - 1970);var months = ageDate.getUTCMonth();var days = ageDate.getUTCDate();var daysOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];var daysInCurrYear = 0;for (var i = 0; i < months; i++) {daysInCurrYear += daysOfMonth[i];}daysInCurrYear += days;var age = years + (daysInCurrYear / 365.0);return age;})()",
+        "_row_num": 2
+      },
       "rcId": {
         "calculation_name": "rcId",
         "calculation": "(function() {\n  var bDay = data('birth_date');  \n  var idNum = data('id_number');\n  var gender = data('gender');\n  var bPlace = data('birth_place');\n\n  if (idNum.length < 5) {\n    console.log(\"The id number is less than 5 characters.  Cannot calculate rc id correctly!\")\n  }\n\n  var rcId = idNum.charAt(0) + idNum.charAt(2) + idNum.charAt(4);\n\n  // 2 digit month\n  var month = parseInt(bDay.getMonth()) + 1; \n  var monthStr = month < 10 ? '0' + month : '' + month;\n  rcId += monthStr;\n\n  // 2 digit year\n  var year = String(bDay.getFullYear());\n  var yearStr = year.slice(2);\n  rcId += yearStr;\n\n  // 2 digit date\n  var date = parseInt(bDay.getDate());\n  var dateStr = date < 10 ? '0' + date : '' + date;\n  rcId += dateStr;\n\n  // 1 digit gender\n  var genStr = gender === 'female' ? '0' : '1';\n  rcId += genStr;\n\n  // 1 char birthplace\n  rcId += bPlace.slice(0, 1).toUpperCase();\n  return rcId;\n})()",
-        "_row_num": 2
+        "_row_num": 3
       }
     },
     "model": {
@@ -3127,6 +3457,174 @@
           }
         ],
         "elementKey": "pam"
+      },
+      "masc_0_5": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_0_5"
+      },
+      "masc_6_11": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_6_11"
+      },
+      "masc_12_17": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_12_17"
+      },
+      "masc_18_29": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_18_29"
+      },
+      "masc_30_59": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_30_59"
+      },
+      "masc_60": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_60"
+      },
+      "fem_0_5": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_0_5"
+      },
+      "fem_6_11": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_6_11"
+      },
+      "fem_12_17": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 15,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_12_17"
+      },
+      "fem_18_29": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_18_29"
+      },
+      "fem_30_59": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 17,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_30_59"
+      },
+      "fem_60": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_60"
       }
     },
     "section_names": [
@@ -3219,19 +3717,348 @@
             "promptIdx": 2
           },
           {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "* NOT counting the group head",
+                  "es": "*SIN contar al cabeza de grupo introducido anteriormente"
+                }
+              }
+            },
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 3
+          },
+          {
+            "type": "integer",
+            "name": "masc_0_5",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Males between the ages of 0 and 5 years:",
+                  "es": "Nº Varones de 0 a 5 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 4
+          },
+          {
+            "type": "integer",
+            "name": "masc_6_11",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Males between the ages of 6 and 11 years:",
+                  "es": "Nº Varones de 6 a 11 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 5
+          },
+          {
+            "type": "integer",
+            "name": "masc_12_17",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Males between the ages of 12 and 17 years:",
+                  "es": "Nº Varones de 12 a 17 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 6
+          },
+          {
+            "type": "integer",
+            "name": "masc_18_29",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Males between the ages of 18 and 29 years:",
+                  "es": "Nº Varones de 18 a 29 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 7
+          },
+          {
+            "type": "integer",
+            "name": "masc_30_59",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Males between the ages of 30 and 59 years:",
+                  "es": "Nº Varones de 30 a 59 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 17,
+            "__rowNum__": 16,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 8
+          },
+          {
+            "type": "integer",
+            "name": "masc_60",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Males between the ages of 60 years and over:",
+                  "es": "Nº Varones de más de 60 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 9
+          },
+          {
+            "type": "integer",
+            "name": "fem_0_5",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Females between the ages of 0 and 5 years:",
+                  "es": "Nº Mujeres de 0 a 5 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 10
+          },
+          {
+            "type": "integer",
+            "name": "fem_6_11",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Females between the ages of 6 and 11 years:",
+                  "es": "Nº Mujeres de 6 a 11 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 20,
+            "__rowNum__": 19,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 11
+          },
+          {
+            "type": "integer",
+            "name": "fem_12_17",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Females between the ages of 12 and 17 years:",
+                  "es": "Nº Mujeres de 12 a 17 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 12
+          },
+          {
+            "type": "integer",
+            "name": "fem_18_29",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Females between the ages of 18 and 29 years:",
+                  "es": "Nº Mujeres de 18 a 29 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 22,
+            "__rowNum__": 21,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 13
+          },
+          {
+            "type": "integer",
+            "name": "fem_30_59",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Females between the ages of 30 and 59 years:",
+                  "es": "Nº Mujeres de 30 a 59 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 14
+          },
+          {
+            "type": "integer",
+            "name": "fem_60",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Nº Females between the ages of 60 years and over:",
+                  "es": "Nº Mujeres de más de 60 años:"
+                }
+              },
+              "required_message": {
+                "text": {
+                  "default": "If there are no people in the age range enter 0 (zero)",
+                  "es": "Si no hay personas de un rango de edad introduzca 0 (cero)"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 15
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 11,
-            "_branch_label_enclosing_screen": "survey/_screen11",
-            "promptIdx": 3
+            "_row_num": 26,
+            "_branch_label_enclosing_screen": "survey/_screen26",
+            "promptIdx": 16
           }
         ],
         "validation_tag_map": {
           "finalize": [
             0,
             1,
-            2
+            2,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
           ]
         },
         "operations": [
@@ -3264,32 +4091,47 @@
             "operationIdx": 1
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
+            "clause": "begin screen",
             "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 25,
+              "__rowNum__": 24,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
-            "_row_num": 11,
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 26,
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 26,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 3
+            "operationIdx": 4
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 11,
-            "operationIdx": 4
+            "_row_num": 26,
+            "operationIdx": 5
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen8": 1,
-          "_contents": 3,
-          "_screen11": 3
+          "_screen11": 2,
+          "_contents": 4,
+          "_screen26": 4
         }
       },
       "initial": {
@@ -3312,8 +4154,8 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Simple Delivery Form",
-                  "es": "Simple Delivery Form"
+                  "default": "Delivery Form",
+                  "es": "Delivery Form"
                 }
               }
             },
@@ -3486,6 +4328,210 @@
         "elementSet": "data",
         "elementPath": "pam"
       },
+      "masc_0_5": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_0_5",
+        "elementName": "masc_0_5",
+        "elementSet": "data",
+        "elementPath": "masc_0_5"
+      },
+      "masc_6_11": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 8,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_6_11",
+        "elementName": "masc_6_11",
+        "elementSet": "data",
+        "elementPath": "masc_6_11"
+      },
+      "masc_12_17": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 15,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 9,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_12_17",
+        "elementName": "masc_12_17",
+        "elementSet": "data",
+        "elementPath": "masc_12_17"
+      },
+      "masc_18_29": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 10,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_18_29",
+        "elementName": "masc_18_29",
+        "elementSet": "data",
+        "elementPath": "masc_18_29"
+      },
+      "masc_30_59": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 17,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 11,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_30_59",
+        "elementName": "masc_30_59",
+        "elementSet": "data",
+        "elementPath": "masc_30_59"
+      },
+      "masc_60": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 18,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 12,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "masc_60",
+        "elementName": "masc_60",
+        "elementSet": "data",
+        "elementPath": "masc_60"
+      },
+      "fem_0_5": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 13,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_0_5",
+        "elementName": "fem_0_5",
+        "elementSet": "data",
+        "elementPath": "fem_0_5"
+      },
+      "fem_6_11": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 20,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 14,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_6_11",
+        "elementName": "fem_6_11",
+        "elementSet": "data",
+        "elementPath": "fem_6_11"
+      },
+      "fem_12_17": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 21,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 15,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_12_17",
+        "elementName": "fem_12_17",
+        "elementSet": "data",
+        "elementPath": "fem_12_17"
+      },
+      "fem_18_29": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 22,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 16,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_18_29",
+        "elementName": "fem_18_29",
+        "elementSet": "data",
+        "elementPath": "fem_18_29"
+      },
+      "fem_30_59": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 17,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_30_59",
+        "elementName": "fem_30_59",
+        "elementSet": "data",
+        "elementPath": "fem_30_59"
+      },
+      "fem_60": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 18,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "fem_60",
+        "elementName": "fem_60",
+        "elementSet": "data",
+        "elementPath": "fem_60"
+      },
       "_id": {
         "type": "string",
         "isNotNullable": true,
@@ -3633,7 +4679,7 @@
         "_aspect": "default",
         "_key": "SurveyUtil.formId",
         "_type": "string",
-        "_value": "colombia_delivery"
+        "_value": "colombia_delivery_demo"
       },
       {
         "_partition": "Table",
@@ -3647,7 +4693,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Simple Delivery Form\",\"es\":\"Simple Delivery Form\"}}"
+        "_value": "{\"text\":{\"default\":\"Delivery Form\",\"es\":\"Delivery Form\"}}"
       },
       {
         "_partition": "Table",
