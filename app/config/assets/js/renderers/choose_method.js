@@ -6,6 +6,7 @@
 var actionTypeKey = "actionTypeKey";
 var actionLaunch = 0;
 var actionRegistration = 1;
+var actionSearchRcId = 2;
 var htmlFileNameValue = "delivery_start";
 var userActionValue = "launchBarcode";
 var rcIdSessionVariable = "rcIdVal";
@@ -25,13 +26,17 @@ var code;
 var userKey = "user";
 var defaultGroupKey = "defaultGroup";
 var entDefaultGroupKey = "entDefaultGroup";
+var searchFormId = 'colombia_search';
+var searchFormKey = 'searchForm';
+var searchRowIdKey = 'searchRowId';
 
 
 function display() {
 
     $('#view_details').text(odkCommon.localizeText(locale, "view_authorization_details"));
     $('#launch').text(odkCommon.localizeText(locale, "register"));
-    $('#search').text(odkCommon.localizeText(locale, "enter"));
+    $('#find').text(odkCommon.localizeText(locale, "search"));
+    $('#enter').text(odkCommon.localizeText(locale, "enter"));
 
     var rcIdVal = odkCommon.getSessionVariable(rcIdSessionVariable);
     if (rcIdVal !== null && rcIdVal !== undefined && rcIdVal !== "") {
@@ -95,17 +100,23 @@ function display() {
                 } else {
                     $('#choose_user').val(localizedUser);
                     $('#barcode').prop("disabled", true).addClass('disabled');
-                    $('#search').prop("disabled", true).addClass('disabled');
+                    $('#enter').prop("disabled", true).addClass('disabled');
+                    $('#launch').prop("disabled", true).addClass('disabled');
+                    $('#find').prop("disabled", true).addClass('disabled');
 
                     $('#choose_user').on('change', function() {
                         var defaultGroup = $('#choose_user').val();
                         odkCommon.setSessionVariable(defaultGroupKey, defaultGroup);
                         if ($('#choose_user').val() === localizedUser) {
                             $('#barcode').prop("disabled", true).addClass('disabled');
-                            $('#search').prop("disabled", true).addClass('disabled');
+                            $('#enter').prop("disabled", true).addClass('disabled');
+                            $('#launch').prop("disabled", true).addClass('disabled');
+                            $('#find').prop("disabled", true).addClass('disabled');
                         } else {
                             $('#barcode').prop("disabled", false).removeClass('disabled');
-                            $('#search').prop("disabled", false).removeClass('disabled');
+                            $('#enter').prop("disabled", false).removeClass('disabled');
+                            $('#launch').prop("disabled", false).removeClass('disabled');
+                            $('#find').prop("disabled", false).removeClass('disabled');
                         }
                     });
                 }
@@ -120,11 +131,15 @@ function display() {
         myTimeoutVal = setTimeout(callBackFn(), 1000);
 
 
-        $('#search').on('click', function() {
+        $('#enter').on('click', function() {
             var val = $('#code').val();
             odkCommon.setSessionVariable(rcIdSessionVariable, val);
             console.log("USERS: " + users);
             searchFunction(val);
+        });
+
+        $('#find').on('click', function() {
+            findFunction();
         });
 
         odkCommon.registerListener(function() {
@@ -139,6 +154,32 @@ function display() {
     });
 }
 
+function findFunction() {
+    let searchRowId = util.genUUID();
+    let searchJsonMap = {};
+
+    // We also need to add group permission fields
+    util.setJSONMap(searchJsonMap, '_row_owner', odkCommon.getActiveUser());
+    util.setJSONMap(searchJsonMap, '_default_access', 'hidden');
+
+    let defGrp = odkCommon.getSessionVariable(defaultGroupKey)
+    util.setJSONMap(searchJsonMap, '_group_modify', defGrp);
+
+    return new Promise( function(resolve, reject) {
+        odkData.addRow(searchFormId, searchJsonMap, searchRowId, resolve, reject);
+    }).then( function(result) {
+        if (!result) {
+            util.displayError('Unable to open Survey to generate unique code (rc_id).');
+            return;
+        }
+        let searchDispatchStruct = {};
+
+        util.setJSONMap(searchDispatchStruct, util.actionTypeKey, actionSearchRcId);
+        util.setJSONMap(searchDispatchStruct, searchRowIdKey, searchRowId);
+        util.setJSONMap(searchDispatchStruct, searchFormKey, searchFormId);
+        odkTables.editRowWithSurvey(JSON.stringify(searchDispatchStruct), searchFormId, searchRowId, searchFormId, null);
+    });
+}
 
 function searchFunction(val) {
     console.log('search function path entered');
@@ -270,6 +311,10 @@ function callBackFn () {
             handleLaunchCallback(action, dispatchStr);
             odkCommon.removeFirstQueuedAction();
             break;
+        case actionSearchRcId:
+            handleSearchRcIdCallback(action, dispatchStr);
+            odkCommon.removeFirstQueuedAction();
+            break;
         case actionRegistration:
             handleRegistrationCallback(action, dispatchStr);
             odkCommon.removeFirstQueuedAction();
@@ -308,6 +353,49 @@ function handleBarcodeCallback(action, dispatchStr) {
         odkCommon.setSessionVariable(barcodeSessionVariable, scanned);
         queryChain(action.jsonValue.result.SCAN_RESULT);
     }
+}
+
+function handleSearchRcIdCallback(action, dispatchStr) {
+
+    console.log("Returned from launching: " + searchFormId);
+
+    let rowId = dispatchStr[searchRowIdKey];
+    if (rowId === null || rowId === undefined) {
+        console.log('Error: no row id for rc_id search');
+        return;
+    }
+
+    let searchForm = dispatchStr[searchFormKey];
+    if (searchForm === null || searchForm === undefined) {
+        console.log('Error: no search form found for rc_id search');
+        return;
+    }
+
+    new Promise( function(resolve, reject) {
+        odkData.arbitraryQuery(searchForm, 'SELECT rc_id FROM ' + searchForm + ' WHERE _id = ?', [rowId], null, null,
+            resolve, reject);
+    }).then( function(result) {
+        if (result.getCount() !== 1) {
+            console.log('Error: rc_id not found for _id: ' + rowId + ' in searchForm: ' + searchForm);
+            return;
+        }
+        odkCommon.setSessionVariable(rcIdSessionVariable, result.getData(0, 'rc_id'));
+        $('#code').val(result.getData(0, 'rc_id'));
+
+        odkData.deleteRow(searchForm, null, rowId, deleteRcIdSuccess, deleteRcIdFailure);
+    }).catch( function(reason) {
+        console.log(reason);
+    });
+}
+
+function deleteRcIdSuccess(result) {
+    console.log('deleteRcIdSuccess called');
+
+    console.log('deleteRcIdSuccess with result count: ' + result.getCount());
+}
+
+function deleteRcIdFailure(error) {
+    console.log('deleteRcIdFailure called with error: ' + error);
 }
 
 function handleLaunchCallback(action, dispatchStr) {
