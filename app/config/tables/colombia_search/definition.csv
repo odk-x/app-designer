@@ -1,0 +1,4 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+birth_date,birth_date,date,[]
+gender,gender,string,[]
+rc_id,rc_id,string,[]

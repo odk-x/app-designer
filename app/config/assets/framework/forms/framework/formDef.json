@@ -135,6 +135,24 @@
       {
         "clause": "exit section",
         "_row_num": 22
+      },
+      {
+        "branch_label": "colombia_search",
+        "_row_num": 23
+      },
+      {
+        "url": "'?' + odkSurvey.getHashString('colombia_search')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
+        },
+        "_row_num": 24
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 25
       }
     ],
     "common_translations": [
@@ -2078,6 +2096,16 @@
           }
         },
         "_row_num": 6
+      },
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "colombia_search",
+        "display": {
+          "title": {
+            "text": "Colombia Search"
+          }
+        },
+        "_row_num": 7
       }
     ]
   },
@@ -2333,6 +2361,16 @@
             }
           },
           "_row_num": 6
+        },
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "colombia_search",
+          "display": {
+            "title": {
+              "text": "Colombia Search"
+            }
+          },
+          "_row_num": 7
         }
       ]
     },
@@ -4393,12 +4431,27 @@
             "promptIdx": 6
           },
           {
+            "url": "'?' + odkSurvey.getHashString('colombia_search')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen24",
+            "promptIdx": 7
+          },
+          {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 23,
-            "_branch_label_enclosing_screen": "survey/_screen23",
-            "promptIdx": 7
+            "_row_num": 26,
+            "_branch_label_enclosing_screen": "survey/_screen26",
+            "promptIdx": 8
           }
         ],
         "validation_tag_map": {
@@ -4513,25 +4566,38 @@
             "operationIdx": 15
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 23,
+            "_row_num": 24,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 16
           },
           {
-            "_row_num": 23,
+            "clause": "exit section",
+            "_row_num": 25,
+            "__rowNum__": 24,
+            "_token_type": "exit_section",
+            "operationIdx": 17
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 26,
+            "operationIdx": 18
+          },
+          {
+            "_row_num": 26,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 17
+            "operationIdx": 19
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 23,
-            "operationIdx": 18
+            "_row_num": 26,
+            "operationIdx": 20
           }
         ],
         "branch_label_map": {
@@ -4550,8 +4616,10 @@
           "_screen18": 12,
           "colombia_delivery_demo": 14,
           "_screen21": 14,
-          "_contents": 17,
-          "_screen23": 17
+          "colombia_search": 16,
+          "_screen24": 16,
+          "_contents": 19,
+          "_screen26": 19
         }
       }
     },
