@@ -48,7 +48,8 @@ var resumeFn = function(fIdxStart) {
                     // make sure we retrieved the rowId
                     if (rowId !== null && rowId !== undefined) {
                         if (action === 'detail') {
-                            launchDeliveryDetailView(rowId, beneficiaryEntityId);
+                            var delId = containingDiv.attr('id');
+                            launchDeliveryDetailView(rowId, beneficiaryEntityId, delId);
                         } else if (action === 'deliver') {
                             dataUtil.triggerAuthorizationDelivery(rowId, beneficiaryEntityId, actionAddCustomDelivery);
                         }
@@ -85,14 +86,14 @@ var resumeFn = function(fIdxStart) {
 };
 
 
-var launchDeliveryDetailView = function(authorization_id, beneficiaryEntityId) {
+var launchDeliveryDetailView = function(authorization_id, beneficiaryEntityId, deliveryId) {
     console.log('I', LOG_TAG + "Launching delivery detail view for authorization: " + authorization_id);
 
     new Promise(function(resolve, reject) {
         odkData.query(
           util.deliveryTable,
-          'authorization_id = ? AND beneficiary_entity_id = ?',
-          [authorization_id, beneficiaryEntityId],
+          'authorization_id = ? AND beneficiary_entity_id = ? AND _id = ?',
+          [authorization_id, beneficiaryEntityId, deliveryId],
           null,
           null,
           null,
@@ -128,6 +129,7 @@ var actionCBFn = function() {
     var dispatchStr = JSON.parse(action.dispatchStruct);
     if (dispatchStr === null || dispatchStr === undefined) {
         console.log('E', LOG_TAG + 'Error: missing dispatch struct');
+        odkCommon.removeFirstQueuedAction();
         return;
     }
 
@@ -135,6 +137,7 @@ var actionCBFn = function() {
     switch (actionType) {
         case actionAddCustomDelivery:
             finishCustomDelivery(action, dispatchStr);
+            odkCommon.removeFirstQueuedAction();
             break;
         default:
             console.log('E', LOG_TAG + "Error: unrecognized action type in callback");
