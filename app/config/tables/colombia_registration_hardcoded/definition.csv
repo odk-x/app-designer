@@ -1,0 +1,8 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+birth_date,birth_date,date,[]
+country_of_intervention,country_of_intervention,string,[]
+department,department,string,[]
+gender,gender,string,[]
+pam,pam,string,[]
+rc_id,rc_id,string,[]
+registration_date,registration_date,date,[]
