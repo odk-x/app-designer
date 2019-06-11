@@ -262,7 +262,7 @@ function setSublistToAllPendingEntitlements(action) {
 function setSublistToDeliveredEntitlements() {
     console.log("setting to delivered");
 
-    var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
+    var query = 'SELECT _id, item_pack_name, status, custom_delivery_form_id FROM ' + util.authorizationTable +
       ' WHERE ' + util.authorizationTable + '._id IN ' +
       '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?)';
 

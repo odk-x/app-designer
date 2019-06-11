@@ -8,6 +8,8 @@ var actionAddCustomDelivery = 0;
 var locale = odkCommon.getPreferredLocale();
 var action = util.getQueryParameter('action');
 var beneficiaryEntityId = util.getQueryParameter('beneficiary_entity_id');
+var deliveriesForBeneficiary = null;
+var mapRowIdToAuthInd = {};
 
 var firstLoad = function() {
     odkCommon.registerListener(function() {
@@ -163,12 +165,16 @@ var displayGroup = function(idxStart, authorizationsResultSet) {
             break;
         }
 
+        mapRowIdToAuthInd[authorizationsResultSet.getRowId(i)] = i;
         var item = $('<li>');
         item.attr('rowId', authorizationsResultSet.getRowId(i));
         item.attr('class', 'item_space');
         item.attr('id', authorizationsResultSet.getRowId(i));
         var auth_name = authorizationsResultSet.getData(i, 'item_pack_name');
         item.text(auth_name);
+
+        var pam = null;
+        var delivered_date = null;
 
         if (action === 'change_status') {
             var toggle = $(".switch-starter").clone();
@@ -196,11 +202,76 @@ var displayGroup = function(idxStart, authorizationsResultSet) {
 
             toggle.show();
             item.append(toggle);
-        } else {
-            /*var chevron = $('<img>');
-            chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
-            chevron.attr('class', 'chevron');
-            item.append(chevron);*/
+        } else if (action === 'deliver') {
+            // TODO: Improve this code!!
+            // Stopgap for Colombia pilot!
+            item.addClass('neverBeenDeliveriedBackground');
+            new Promise(function (resolve, reject) {
+                odkData.query(util.deliveryTable, 'beneficiary_entity_id = ? AND authorization_id = ?',
+                    [beneficiaryEntityId, authorizationsResultSet.getRowId(i)], null, null,
+                    null, null, null, null, true, resolve, reject);
+            }).then( function(result) {
+                console.log(result);
+                if (result.getCount() > 0) {
+                    var elementId = '#' + result.get('authorization_id');
+                    $(elementId).removeClass('neverBeenDeliveriedBackground');
+                    $(elementId).addClass('deliveredBackground');
+                }
+            }).catch( function(reason) {
+                console.log(reason);
+            });
+        } else if (action === 'detail') {
+            // TODO: Improve this code!!
+            // Stopgap for Colombia pilot!
+
+            new Promise(function (resolve, reject) {
+                odkData.query(util.deliveryTable, 'beneficiary_entity_id = ? AND authorization_id = ?',
+                    [beneficiaryEntityId, authorizationsResultSet.getRowId(i)], null, null,
+                    null, null, null, null, true, resolve, reject);
+            }).then( function(result) {
+                console.log(result);
+                if (result && result.getCount() > 0) {
+                    var idx = mapRowIdToAuthInd[result.get('authorization_id')]
+                    var customDeliveryForm = authorizationsResultSet.getData(idx, 'custom_delivery_form_id');
+                    if (customDeliveryForm !== null && customDeliveryForm !== undefined) {
+                        var sqlCmd =
+                            'SELECT \n' +
+                                customDeliveryForm + '._id, \n' +
+                                customDeliveryForm + '.pam, \n' +
+                                customDeliveryForm + '.activity_date, \n' +
+                                util.deliveryTable + '.authorization_id \n' +
+                            'FROM ' + customDeliveryForm + ' \n' +
+                            '  INNER JOIN ' + util.deliveryTable + ' ON '+ util.deliveryTable +
+                                '.custom_delivery_row_id = ' + customDeliveryForm + '._id\n' +
+                            'WHERE ' + util.deliveryTable + '.custom_delivery_row_id = ?';
+
+                        return new Promise(function (resolve, reject) {
+                            odkData.arbitraryQuery(util.deliveryTable, sqlCmd, [result.get('custom_delivery_row_id')], null, null, resolve, reject);
+                        })
+
+                    }
+                } else {
+                    return Promise.resolve(null);
+                }
+
+            }).then(function(result) {
+                if (result && result.getCount() === 1) {
+                    var elementId = '#' + result.get('authorization_id');
+
+                    var field1 = $('<li>');
+                    field1.attr('class', 'detail');
+                    field1.text(result.get('activity_date'));
+                    $(elementId).append(field1);
+
+                    var field2 = $('<li>');
+                    field2.attr('class', 'detail');
+                    field2.text(result.get('pam'));
+                    $(elementId).append(field2);
+                }
+
+            }).catch( function(reason) {
+                console.log(reason);
+            });
         }
 
 

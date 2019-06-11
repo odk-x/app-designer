@@ -78,3 +78,11 @@ ul {
   width: 95%;
   height: 10px;
 }
+
+.neverBeenDeliveriedBackground {
+    background: #5da493;
+}
+
+.deliveredBackground {
+    background: #f0e4e2;
+}
