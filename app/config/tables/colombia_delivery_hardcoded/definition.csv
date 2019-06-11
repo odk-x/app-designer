@@ -1,0 +1,6 @@
+_element_key,_element_name,_element_type,_list_child_element_keys
+activity_date,activity_date,date,[]
+country_of_intervention,country_of_intervention,string,[]
+department,department,string,[]
+donor,donor,string,[]
+pam,pam,string,[]
