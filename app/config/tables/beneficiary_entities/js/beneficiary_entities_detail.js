@@ -262,9 +262,13 @@ function setSublistToAllPendingEntitlements(action) {
 function setSublistToDeliveredEntitlements() {
     console.log("setting to delivered");
 
-    var query = 'SELECT _id, item_pack_name, status, custom_delivery_form_id FROM ' + util.authorizationTable +
-      ' WHERE ' + util.authorizationTable + '._id IN ' +
-      '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?)';
+    var query = 'SELECT ' + util.authorizationTable + '._id AS auth_id, ' + util.authorizationTable + '.item_pack_name, ' +
+        util.authorizationTable + '.status, ' + util.deliveryTable + '._id AS del_id, ' +
+        util.authorizationTable + '.custom_delivery_form_id, ' + util.deliveryTable +'.custom_delivery_row_id ' +
+        'FROM ' + util.deliveryTable + ' ' +
+        'INNER JOIN ' + util.authorizationTable +' ON ' + util.deliveryTable + '.authorization_id = '+
+        util.authorizationTable + '._id ' +
+        'WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?';
 
     odkTables.setSubListViewArbitraryQuery(
       util.authorizationTable,

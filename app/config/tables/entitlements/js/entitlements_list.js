@@ -73,8 +73,12 @@ var resumeFn = function(fIdxStart) {
             }
 
         }
+        if (action === 'detail') {
+            displayGroupDetail(idxStart, result);
+        } else {
+            displayGroup(idxStart, result);
+        }
 
-        displayGroup(idxStart, result);
     }).catch( function(reason) {
         console.log('E', LOG_TAG +  LOG_TAG + "Failed to get view data: " + reason);
     });
@@ -213,62 +217,10 @@ var displayGroup = function(idxStart, authorizationsResultSet) {
             }).then( function(result) {
                 console.log(result);
                 if (result.getCount() > 0) {
-                    var elementId = '#' + result.get('authorization_id');
+                    var elementId = jqSelector(result.get('authorization_id'));
                     $(elementId).removeClass('neverBeenDeliveriedBackground');
                     $(elementId).addClass('deliveredBackground');
                 }
-            }).catch( function(reason) {
-                console.log(reason);
-            });
-        } else if (action === 'detail') {
-            // TODO: Improve this code!!
-            // Stopgap for Colombia pilot!
-
-            new Promise(function (resolve, reject) {
-                odkData.query(util.deliveryTable, 'beneficiary_entity_id = ? AND authorization_id = ?',
-                    [beneficiaryEntityId, authorizationsResultSet.getRowId(i)], null, null,
-                    null, null, null, null, true, resolve, reject);
-            }).then( function(result) {
-                console.log(result);
-                if (result && result.getCount() > 0) {
-                    var idx = mapRowIdToAuthInd[result.get('authorization_id')]
-                    var customDeliveryForm = authorizationsResultSet.getData(idx, 'custom_delivery_form_id');
-                    if (customDeliveryForm !== null && customDeliveryForm !== undefined) {
-                        var sqlCmd =
-                            'SELECT \n' +
-                                customDeliveryForm + '._id, \n' +
-                                customDeliveryForm + '.pam, \n' +
-                                customDeliveryForm + '.activity_date, \n' +
-                                util.deliveryTable + '.authorization_id \n' +
-                            'FROM ' + customDeliveryForm + ' \n' +
-                            '  INNER JOIN ' + util.deliveryTable + ' ON '+ util.deliveryTable +
-                                '.custom_delivery_row_id = ' + customDeliveryForm + '._id\n' +
-                            'WHERE ' + util.deliveryTable + '.custom_delivery_row_id = ?';
-
-                        return new Promise(function (resolve, reject) {
-                            odkData.arbitraryQuery(util.deliveryTable, sqlCmd, [result.get('custom_delivery_row_id')], null, null, resolve, reject);
-                        })
-
-                    }
-                } else {
-                    return Promise.resolve(null);
-                }
-
-            }).then(function(result) {
-                if (result && result.getCount() === 1) {
-                    var elementId = '#' + result.get('authorization_id');
-
-                    var field1 = $('<li>');
-                    field1.attr('class', 'detail');
-                    field1.text(result.get('activity_date'));
-                    $(elementId).append(field1);
-
-                    var field2 = $('<li>');
-                    field2.attr('class', 'detail');
-                    field2.text(result.get('pam'));
-                    $(elementId).append(field2);
-                }
-
             }).catch( function(reason) {
                 console.log(reason);
             });
@@ -288,6 +240,89 @@ var displayGroup = function(idxStart, authorizationsResultSet) {
     }
 };
 
+var displayGroupDetail = function (idxStart, authorizationsDelResultSet) {
+    console.log('I', LOG_TAG + 'displayGroupDetail called. idxStart: ' + idxStart);
+
+    /* If the list comes back empty, inform the user */
+    if (authorizationsDelResultSet.getCount() === 0) {
+        var errorText = $('#error');
+        errorText.show();
+        errorText.text('No item found');
+    }
+
+    /* Number of rows displayed per 'chunk' - can modify this value */
+    var chunk = 50;
+    var i = idxStart;
+    for (i; i < idxStart + chunk; i++) {
+        if (i >= authorizationsDelResultSet.getCount()) {
+            break;
+        }
+
+        var item = $('<li>');
+        item.attr('rowId', authorizationsDelResultSet.getData(i, 'auth_id'));
+        item.attr('class', 'item_space');
+
+        item.attr('id', authorizationsDelResultSet.getData(i, 'del_id'));
+        var auth_name = authorizationsDelResultSet.getData(i, 'item_pack_name');
+        item.text(auth_name);
+
+        var pam = null;
+        var delivered_date = null;
+
+        if (action === 'detail') {
+            // TODO: Improve this code!!
+            // Stopgap for Colombia pilot!
+            var customDeliveryForm = authorizationsDelResultSet.getData(i, 'custom_delivery_form_id');
+            if (customDeliveryForm !== null && customDeliveryForm !== undefined) {
+                var sqlCmd =
+                    'SELECT \n' +
+                    customDeliveryForm + '.pam, \n' +
+                    customDeliveryForm + '.activity_date, \n' +
+                    util.deliveryTable + '.authorization_id, \n' +
+                    util.deliveryTable + '._id \n' +
+                    'FROM ' + customDeliveryForm + ' \n' +
+                    '   INNER JOIN ' + util.deliveryTable + ' ON ' + util.deliveryTable +
+                    '.custom_delivery_row_id = ' + customDeliveryForm + '._id\n' +
+                    'WHERE ' + util.deliveryTable + '.custom_delivery_row_id = ?';
+
+                new Promise(function (resolve, reject) {
+                    odkData.arbitraryQuery(util.deliveryTable, sqlCmd, [authorizationsDelResultSet.getData(i, 'custom_delivery_row_id')], null, null, resolve, reject);
+                }).then(function (result) {
+                    if (result && result.getCount() === 1) {
+                        var elementId = jqSelector(result.get('_id'));
+
+                        var field1 = $('<li>');
+                        field1.attr('class', 'detail');
+                        field1.text(result.get('activity_date'));
+                        $(elementId).append(field1);
+
+                        var field2 = $('<li>');
+                        field2.attr('class', 'detail');
+                        field2.text(result.get('pam'));
+                        $(elementId).append(field2);
+                    }
+
+                }).catch(function (reason) {
+                    console.log(reason);
+                });
+            }
+        }
+
+
+        $('#list').append(item);
+
+        // don't append the last one to avoid the fencepost problem
+        var borderDiv = $('<div>');
+        borderDiv.addClass('divider');
+        $('#list').append(borderDiv);
+
+    }
+    if (i < authorizationsDelResultSet.getCount()) {
+        setTimeout(resumeFn, 0, i);
+    }
+};
+
+
 function changeStatusPromise(id, status) {
     return new Promise( function(resolve, reject) {
         odkData.updateRow(util.authorizationTable, {'status' : status}, id,
@@ -297,4 +332,9 @@ function changeStatusPromise(id, status) {
     }).catch( function(reason) {
         console.log('Update failure: ' + reason);
     });
-}
+};
+
+// Our UUID function uses ':' and jQuery doesn't like it
+function jqSelector( myid ) {
+    return "#" + myid.replace( /(:|\.|\[|\]|,|=|@)/g, "\\$1" );
+};
