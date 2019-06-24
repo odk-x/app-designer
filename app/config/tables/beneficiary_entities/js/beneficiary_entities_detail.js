@@ -220,13 +220,7 @@ function setToDeliveryView(includeWorkflowButton) {
 function setSublistToEnabledPendingEntitlements(action) {
     console.log("setting to pending");
 
-    // TODO: Use this for coloring
-    // var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
-    //   ' WHERE ' + util.authorizationTable + '._id NOT IN ' +
-    //   '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?) ' +
-    //   'AND ' + util.authorizationTable + '.status = ?';
-
-    var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
+    var query = 'SELECT _id, item_pack_name, status, extra_field_entitlements FROM ' + util.authorizationTable +
       ' WHERE ' + util.authorizationTable + '.status = ?';
 
     odkTables.setSubListViewArbitraryQuery(
@@ -242,10 +236,7 @@ function setSublistToEnabledPendingEntitlements(action) {
 function setSublistToAllPendingEntitlements(action) {
     console.log("setting to pending");
 
-    // For Colombia deployment, everything is valid
-    // var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable +
-    //   ' WHERE ' + util.authorizationTable + '._id NOT IN ' +
-    //   '(SELECT ' + util.deliveryTable + '.authorization_id FROM ' + util.deliveryTable + ' WHERE ' + util.deliveryTable + '.beneficiary_entity_id = ?)';
+    // TODO: Currently, this isn't used in Colombia deployment
 
     var query = 'SELECT _id, item_pack_name, status FROM ' + util.authorizationTable;
 

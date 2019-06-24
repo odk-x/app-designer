@@ -10,6 +10,8 @@ var action = util.getQueryParameter('action');
 var beneficiaryEntityId = util.getQueryParameter('beneficiary_entity_id');
 var deliveriesForBeneficiary = null;
 var mapRowIdToAuthInd = {};
+var CAN_BE_DELIVERED = 'canBeDelivered';
+var EXTRA_FIELD_ENTITLEMENTS = 'extraFieldEntitlements';
 
 var firstLoad = function() {
     odkCommon.registerListener(function() {
@@ -51,28 +53,14 @@ var resumeFn = function(fIdxStart) {
                             var delId = containingDiv.attr('id');
                             launchDeliveryDetailView(rowId, beneficiaryEntityId, delId);
                         } else if (action === 'deliver') {
-                            dataUtil.triggerAuthorizationDelivery(rowId, beneficiaryEntityId, actionAddCustomDelivery);
+                            var canDeliver = containingDiv.data(CAN_BE_DELIVERED);
+                            if (canDeliver === true) {
+                                dataUtil.triggerAuthorizationDelivery(rowId, beneficiaryEntityId, actionAddCustomDelivery);
+                            }
                         }
                     }
                 });
-            } else if (action === 'change_status') {
-                /*
-                $('#list').find('#left').click(function() {
-                    changeStatusPromise('ENABLED', entitlementsResultSet.getRowId(i));
-                });
-
-                toggle.find('#right_txt').text('Disabled');
-
-                toggle.find('#right').click(function f(index) {
-                    return changeStatusPromise('DISABLED', entitlementsResultSet.getRowId(index));
-                })(i);
-
-                toggle.show();
-
-                item.append(toggle);
-                */
             }
-
         }
         if (action === 'detail') {
             displayGroupDetail(idxStart, result);
@@ -179,6 +167,7 @@ var displayGroup = function(idxStart, authorizationsResultSet) {
         item.attr('id', authorizationsResultSet.getRowId(i));
         var auth_name = authorizationsResultSet.getData(i, 'item_pack_name');
         item.text(auth_name);
+        var extraEnt = authorizationsResultSet.getData(i, 'extra_field_entitlements');
 
         var pam = null;
         var delivered_date = null;
@@ -213,17 +202,26 @@ var displayGroup = function(idxStart, authorizationsResultSet) {
             // TODO: Improve this code!!
             // Stopgap for Colombia pilot!
             item.addClass('neverBeenDeliveriedBackground');
+            item.data(CAN_BE_DELIVERED, true);
+            item.data(EXTRA_FIELD_ENTITLEMENTS, extraEnt);
             new Promise(function (resolve, reject) {
                 odkData.query(util.deliveryTable, 'beneficiary_entity_id = ? AND authorization_id = ?',
                     [beneficiaryEntityId, authorizationsResultSet.getRowId(i)], null, null,
                     null, null, null, null, true, resolve, reject);
             }).then( function(result) {
                 console.log(result);
+                // Extra field entitlement values - NONE, ONE, MANY
                 if (result.getCount() > 0) {
                     var elementId = jqSelector(result.get('authorization_id'));
                     $(elementId).removeClass('neverBeenDeliveriedBackground');
                     $(elementId).addClass('deliveredBackground');
+                    var extraEntData = $(elementId).data(EXTRA_FIELD_ENTITLEMENTS);
+                    if (extraEntData === 'NONE' ||
+                        (extraEntData === 'ONE' && result.getCount() >= 2)) {
+                        $(elementId).data(CAN_BE_DELIVERED, false);
+                    }
                 }
+
             }).catch( function(reason) {
                 console.log(reason);
             });
@@ -310,7 +308,6 @@ var displayGroupDetail = function (idxStart, authorizationsDelResultSet) {
                 });
             }
         }
-
 
         $('#list').append(item);
 
