@@ -472,6 +472,7 @@ dataUtil.triggerAuthorizationDelivery = function(authorizationId, beneficiaryEnt
 
                         var customDeliveryRowId = util.genUUID();
                         var jsonMap = {};
+                        // CAL: Add dept and PAM to custom delivery form - can we check that the fields exist before hand?
                         dataUtil.addDeliveryRowWithoutEntitlement(beneficiaryEntityId, authorizationRow, customDeliveryRowId)
                           .then(function (rootDeliveryRow) {
                               dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null, "_group_read_only", jsonMap);

@@ -1156,6 +1156,27 @@ window.odkCommonDefinitions = {
         "es": "Registrar"
       },
       "_row_num": 162
+    },
+    "choose_dept": {
+      "string_token": "choose_dept",
+      "text": {
+        "default": "Choose Department"
+      },
+      "_row_num": 164
+    },
+    "choose_pam": {
+      "string_token": "choose_pam",
+      "text": {
+        "default": "Choose PAM"
+      },
+      "_row_num": 165
+    },
+    "continue": {
+      "string_token": "continue",
+      "text": {
+        "default": "Continue"
+      },
+      "_row_num": 166
     }
   },
   "_locales": {

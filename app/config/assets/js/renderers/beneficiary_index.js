@@ -8,7 +8,7 @@ var registrationToken = "registration";
 var deliveryToken = "delivery_upper_case";
 var dataToken = "data_path";
 var administratorToken = "administrator_options";
-var registrationTitleToken = 'registration_title';
+var locationTitleToken = 'location';
 var deliveryTitleToken = 'delivery_title';
 var visitToken = 'visit_name';
 var locale = odkCommon.getPreferredLocale();
@@ -26,8 +26,8 @@ beneficiaryIndex.display = function() {
     newClient.setAttribute("id", "register");
     newClient.onclick = function() {
         odkTables.launchHTML(null,
-                            'config/assets/html/choose_method.html?title='
-                            + encodeURIComponent(odkCommon.localizeText(locale, registrationTitleToken))
+                            'config/assets/html/choose_location.html?title='
+                            + encodeURIComponent(odkCommon.localizeText(locale, locationTitleToken))
                             + '&type=registration');
     };
     if (util.getBeneficiaryEntityCustomFormId()) {

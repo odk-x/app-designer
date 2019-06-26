@@ -30,6 +30,9 @@ var searchFormId = 'colombia_search';
 var searchFormKey = 'searchForm';
 var searchRowIdKey = 'searchRowId';
 
+var dept = util.getQueryParameter('dept');
+var pam = util.getQueryParameter('pam');
+
 
 function display() {
 
@@ -413,6 +416,7 @@ function handleLaunchCallback(action, dispatchStr) {
                             console.log("no members were created");
                         }
                         clearSessionVars();
+                        // TODO: CAL: Add dept and PAM
                         odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
                             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable
                             + '_detail.html?type=' + encodeURIComponent(type));
@@ -435,6 +439,7 @@ function handleLaunchCallback(action, dispatchStr) {
                     odkData.addRow(util.membersTable, jsonMap, util.genUUID(), resolve, reject);
                 }).then( function(result) {
                     clearSessionVars();
+                    // TODO: CAL: Add dept and PAM
                     odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
                         'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable +
                         '_detail.html?type=delivery');
@@ -671,6 +676,7 @@ function launchFunction() {
 
         console.log(customDispatchStruct);
         clearSessionVars();
+        // CAL:  Use jsonMap to pre-populate PAM and department!! Can we check these fields before hand?
         dataUtil.createCustomRowFromBaseTable(rootRowId, customBEForm,
             customRowId, actionLaunch, customDispatchStruct, defaultGroup, 'HIDDEN', null);
     });

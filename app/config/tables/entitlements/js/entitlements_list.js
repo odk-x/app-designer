@@ -55,6 +55,7 @@ var resumeFn = function(fIdxStart) {
                         } else if (action === 'deliver') {
                             var canDeliver = containingDiv.data(CAN_BE_DELIVERED);
                             if (canDeliver === true) {
+                                // CAL: Add dept and PAM
                                 dataUtil.triggerAuthorizationDelivery(rowId, beneficiaryEntityId, actionAddCustomDelivery);
                             }
                         }
