@@ -194,8 +194,6 @@ function searchFunction(val) {
 function searchCBSuccess(result) {
     console.log('searchCBSuccess called with value' + result);
     if (result.getCount() === 0) {
-        // util.displayError(odkCommon.localizeText(locale, "id_unavailable"));
-        // TODO: CAL: Localize this text
         util.displayError(odkCommon.localizeText(locale, 'no_id_found'));
     } else {
         clearSessionVars();
