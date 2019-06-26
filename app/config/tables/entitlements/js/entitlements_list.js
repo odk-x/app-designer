@@ -57,6 +57,8 @@ var resumeFn = function(fIdxStart) {
                             if (canDeliver === true) {
                                 // CAL: Add dept and PAM
                                 dataUtil.triggerAuthorizationDelivery(rowId, beneficiaryEntityId, actionAddCustomDelivery);
+                            } else {
+                                util.displayError(odkCommon.localizeText(locale, 'beneficiary_not_entitled'))
                             }
                         }
                     }

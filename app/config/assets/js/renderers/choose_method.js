@@ -196,7 +196,7 @@ function searchCBSuccess(result) {
     if (result.getCount() === 0) {
         // util.displayError(odkCommon.localizeText(locale, "id_unavailable"));
         // TODO: CAL: Localize this text
-        util.displayError("No id found");
+        util.displayError(odkCommon.localizeText(locale, 'no_id_found'));
     } else {
         clearSessionVars();
         odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),

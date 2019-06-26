@@ -1177,6 +1177,20 @@ window.odkCommonDefinitions = {
         "default": "Continue"
       },
       "_row_num": 166
+    },
+    "beneficiary_not_entitled": {
+      "string_token": "beneficiary_not_entitled",
+      "text": {
+        "default": "Beneficiary is not entitled to any more of these items"
+      },
+      "_row_num": 167
+    },
+    "no_id_found": {
+      "string_token": "no_id_found",
+      "text": {
+        "default": "No id found"
+      },
+      "_row_num": 168
     }
   },
   "_locales": {
