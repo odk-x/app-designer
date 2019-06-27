@@ -30,8 +30,8 @@ var searchFormId = 'colombia_search';
 var searchFormKey = 'searchForm';
 var searchRowIdKey = 'searchRowId';
 
-var dept = util.getQueryParameter('dept');
-var pam = util.getQueryParameter('pam');
+var dept = util.getQueryParameter(util.departmentParam);
+var pam = util.getQueryParameter(util.pamParam);
 
 
 function display() {
@@ -199,7 +199,10 @@ function searchCBSuccess(result) {
         clearSessionVars();
         odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), result.getData(0, 'custom_beneficiary_entity_row_id'),
             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable + '_detail.html?type=' +
-            encodeURIComponent(type) + '&rootRowId=' + encodeURIComponent(result.getRowId(0)));
+            encodeURIComponent(type) + '&rootRowId=' + encodeURIComponent(result.getRowId(0)) +
+            '&' + util.departmentParam + '=' + encodeURIComponent(dept) +
+            '&' + util.pamParam + '=' + encodeURIComponent(pam)
+        );
 
     }
 }
@@ -414,10 +417,11 @@ function handleLaunchCallback(action, dispatchStr) {
                             console.log("no members were created");
                         }
                         clearSessionVars();
-                        // TODO: CAL: Add dept and PAM
                         odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
                             'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable
-                            + '_detail.html?type=' + encodeURIComponent(type));
+                            + '_detail.html?type=' + encodeURIComponent(type)
+                            + '&' + util.departmentParam + '=' + encodeURIComponent(dept)
+                            + '&' + util.pamParam + '=' + encodeURIComponent(pam));
 
                     }).catch( function(error) {
                     console.log(error);
@@ -437,10 +441,11 @@ function handleLaunchCallback(action, dispatchStr) {
                     odkData.addRow(util.membersTable, jsonMap, util.genUUID(), resolve, reject);
                 }).then( function(result) {
                     clearSessionVars();
-                    // TODO: CAL: Add dept and PAM
                     odkTables.openDetailWithListView(null, util.getBeneficiaryEntityCustomFormId(), customRowId,
                         'config/tables/' + util.beneficiaryEntityTable + '/html/' + util.beneficiaryEntityTable +
-                        '_detail.html?type=delivery');
+                        '_detail.html?type=delivery' +
+                        '&' + util.departmentParam + '=' + encodeURIComponent(dept) +
+                        '&' + util.pamParam + '=' + encodeURIComponent(pam));
                 });
             }
         }
@@ -674,9 +679,11 @@ function launchFunction() {
 
         console.log(customDispatchStruct);
         clearSessionVars();
-        // CAL:  Use jsonMap to pre-populate PAM and department!! Can we check these fields before hand?
+        var jsonMap = {};
+        util.setJSONMap(jsonMap, util.departmentParam, dept);
+        util.setJSONMap(jsonMap, util.pamParam, pam);
         dataUtil.createCustomRowFromBaseTable(rootRowId, customBEForm,
-            customRowId, actionLaunch, customDispatchStruct, defaultGroup, 'HIDDEN', null);
+            customRowId, actionLaunch, customDispatchStruct, defaultGroup, 'HIDDEN', jsonMap);
     });
 
 }
@@ -755,7 +762,8 @@ function registrationVoucherCBSuccess(result) {
 
         console.log(customDispatchStruct);
         clearSessionVars();
-        dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id', 'custom_beneficiary_entity_row_id', actionRegistration, customDispatchStruct, "_group_modify", null);
+        dataUtil.createCustomRowFromBaseEntry(result, 'custom_beneficiary_entity_form_id',
+            'custom_beneficiary_entity_row_id', actionRegistration, customDispatchStruct, "_group_modify", null);
     });
 }
 

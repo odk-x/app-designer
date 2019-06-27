@@ -11,6 +11,8 @@ var customResultSet;
 var beneficiaryEntityId;
 var type;
 var retryLimit = 5;
+var dept = util.getQueryParameter(util.departmentParam);
+var pam = util.getQueryParameter(util.pamParam);
 
 // Note that the call to open this detail view will be for the custom beneficiary entity table so that
 // pressing the edit button in the top right will open the appropriate form.
@@ -229,7 +231,9 @@ function setSublistToEnabledPendingEntitlements(action) {
       ['ACTIVE'],
       'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html' +
       '?action=' + encodeURIComponent(action) +
-      '&beneficiary_entity_id=' + encodeURIComponent(beneficiaryEntityId)
+      '&beneficiary_entity_id=' + encodeURIComponent(beneficiaryEntityId) +
+      '&' + util.departmentParam + '=' + encodeURIComponent(dept) +
+      '&' + util.pamParam + '=' + encodeURIComponent(pam)
     );
 }
 
@@ -246,7 +250,9 @@ function setSublistToAllPendingEntitlements(action) {
       [],
       'config/tables/' + util.entitlementTable + '/html/' + util.entitlementTable + '_list.html' +
       '?action=' + encodeURIComponent(action) +
-      '&beneficiary_entity_id=' + encodeURIComponent(beneficiaryEntityId)
+      '&beneficiary_entity_id=' + encodeURIComponent(beneficiaryEntityId) +
+      '&' + util.departmentParam + '=' + encodeURIComponent(dept) +
+      '&' + util.pamParam + '=' + encodeURIComponent(pam)
     );
 }
 

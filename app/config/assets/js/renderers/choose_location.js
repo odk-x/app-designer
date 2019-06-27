@@ -5,8 +5,6 @@
 
 var registrationTitleToken = 'registration_title';
 var locale = odkCommon.getPreferredLocale();
-var deptKey = 'department';
-var pamKey = 'pam';
 var pamUri = odkCommon.getBaseUrl() + 'config/assets/pam.csv';
 var defaultPAMChoice = 'Select PAM';
 var defaultDeptChoice = 'Select Department';
@@ -23,7 +21,9 @@ function display() {
         odkTables.launchHTML(null,
             'config/assets/html/choose_method.html?title='
             + encodeURIComponent(odkCommon.localizeText(locale, registrationTitleToken))
-            + '&type=registration&pam=' + encodeURIComponent(selectPAM) + '&dept=' + encodeURIComponent(selectDept));
+            + '&type=registration'
+            + '&' + util.departmentParam + '=' + encodeURIComponent(selectDept)
+            + '&' + util.pamParam + '=' + encodeURIComponent(selectPAM));
     });
 
     $('#title').text(util.getQueryParameter('title'));
@@ -38,13 +38,13 @@ function display() {
 
     $('#choose_dept').on('change', function() {
         var dept = $('#choose_dept').val();
-        odkCommon.setSessionVariable(deptKey, dept);
+        odkCommon.setSessionVariable(util.departmentParam, dept);
         populatePAMDropdown();
     });
 
     $('#choose_pam').on('change', function() {
         var pam = $('#choose_pam').val();
-        odkCommon.setSessionVariable(pamKey, pam);
+        odkCommon.setSessionVariable(util.pamParam, pam);
         verifyDeptPAM();
     });
 

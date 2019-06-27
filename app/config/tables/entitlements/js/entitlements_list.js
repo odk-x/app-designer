@@ -12,6 +12,8 @@ var deliveriesForBeneficiary = null;
 var mapRowIdToAuthInd = {};
 var CAN_BE_DELIVERED = 'canBeDelivered';
 var EXTRA_FIELD_ENTITLEMENTS = 'extraFieldEntitlements';
+var dept = util.getQueryParameter(util.departmentParam);
+var pam = util.getQueryParameter(util.pamParam);
 
 var firstLoad = function() {
     odkCommon.registerListener(function() {
@@ -55,10 +57,13 @@ var resumeFn = function(fIdxStart) {
                         } else if (action === 'deliver') {
                             var canDeliver = containingDiv.data(CAN_BE_DELIVERED);
                             if (canDeliver === true) {
-                                // CAL: Add dept and PAM
-                                dataUtil.triggerAuthorizationDelivery(rowId, beneficiaryEntityId, actionAddCustomDelivery);
+                                var jsonMap = {};
+                                util.setJSONMap(jsonMap, util.departmentParam, dept);
+                                util.setJSONMap(jsonMap, util.pamParam, pam);
+                                dataUtil.triggerAuthorizationDelivery(rowId, beneficiaryEntityId,
+                                    actionAddCustomDelivery, jsonMap);
                             } else {
-                                util.displayError(odkCommon.localizeText(locale, 'beneficiary_not_entitled'))
+                                util.displayError(odkCommon.localizeText(locale, 'beneficiary_not_entitled'));
                             }
                         }
                     }
@@ -172,9 +177,6 @@ var displayGroup = function(idxStart, authorizationsResultSet) {
         item.text(auth_name);
         var extraEnt = authorizationsResultSet.getData(i, 'extra_field_entitlements');
 
-        var pam = null;
-        var delivered_date = null;
-
         if (action === 'change_status') {
             var toggle = $(".switch-starter").clone();
             toggle.attr('class', 'switch-field');
@@ -269,9 +271,6 @@ var displayGroupDetail = function (idxStart, authorizationsDelResultSet) {
         item.attr('id', authorizationsDelResultSet.getData(i, 'del_id'));
         var auth_name = authorizationsDelResultSet.getData(i, 'item_pack_name');
         item.text(auth_name);
-
-        var pam = null;
-        var delivered_date = null;
 
         if (action === 'detail') {
             // TODO: Improve this code!!

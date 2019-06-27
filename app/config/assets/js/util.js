@@ -221,6 +221,8 @@ util.additionalCustomFormsObj.formIdKey = "formId";
 util.additionalCustomFormsObj.foreignReferenceKey = "foreignReferenceKey";
 util.additionalCustomFormsObj.valueKey = "value";
 
+util.departmentParam = 'department';
+util.pamParam = 'pam';
 
 /************************** Red cross config getters *********************************/
 
@@ -457,7 +459,7 @@ dataUtil.triggerEntitlementDelivery = function(entitlementId, actionTypeValue) {
     });
 };
 
-dataUtil.triggerAuthorizationDelivery = function(authorizationId, beneficiaryEntityId, actionTypeValue) {
+dataUtil.triggerAuthorizationDelivery = function(authorizationId, beneficiaryEntityId, actionTypeValue, customDeliveryJsonMap) {
     dataUtil
       .getRow(util.authorizationTable, authorizationId)
       .then(function(authorizationRow) {
@@ -471,11 +473,11 @@ dataUtil.triggerAuthorizationDelivery = function(authorizationId, beneficiaryEnt
                         }
 
                         var customDeliveryRowId = util.genUUID();
-                        var jsonMap = {};
-                        // CAL: Add dept and PAM to custom delivery form - can we check that the fields exist before hand?
+
                         dataUtil.addDeliveryRowWithoutEntitlement(beneficiaryEntityId, authorizationRow, customDeliveryRowId)
                           .then(function (rootDeliveryRow) {
-                              dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id", "custom_delivery_row_id", actionTypeValue, null, "_group_read_only", jsonMap);
+                              dataUtil.createCustomRowFromBaseEntry(rootDeliveryRow, "custom_delivery_form_id",
+                                  "custom_delivery_row_id", actionTypeValue, null, "_group_read_only", customDeliveryJsonMap);
                           }).catch(function (reason) {
                             console.log('Failed to perform custom entitlement delivery: ' + reason);
                         });
@@ -533,22 +535,40 @@ dataUtil.createCustomRowFromBaseEntry = function(baseEntry, customTableNameKey, 
 
     util.setJSONMap(jsonMap, '_default_access', baseEntry.get('_default_access'));
 
-    return new Promise( function(resolve, reject) {
-        odkData.addRow(customFormId, jsonMap, customDeliveryRowId, resolve, reject);
-    }).then( function(result) {
-        if (dispatchStruct === undefined || dispatchStruct === null) {
-            dispatchStruct = {};
+    return new Promise(function (resolve, reject) {
+        odkData.query(customFormId, null, null, null, null, null, null, 1, null, null, resolve, reject);
+    }).then(function(result) {
+        if (result !== null && result !== undefined) {
+            var customCols = result.getColumns();
+            dataUtil.cleanJsonMap(customCols, jsonMap);
+
+            return new Promise(function (resolve, reject) {
+                odkData.addRow(customFormId, jsonMap, customDeliveryRowId, resolve, reject);
+            }).then(function (result) {
+                if (dispatchStruct === undefined || dispatchStruct === null) {
+                    dispatchStruct = {};
+                }
+                util.setJSONMap(dispatchStruct, util.actionTypeKey, actionTypeValue);
+                util.setJSONMap(dispatchStruct, util.rootRowIdKey, rootDeliveryRowId);
+                util.setJSONMap(dispatchStruct, util.customFormIdKey, customFormId);
+                odkTables.editRowWithSurvey(JSON.stringify(dispatchStruct), customFormId, customDeliveryRowId, customFormId, null);
+            });
         }
-        util.setJSONMap(dispatchStruct, util.actionTypeKey, actionTypeValue);
-        util.setJSONMap(dispatchStruct, util.rootRowIdKey, rootDeliveryRowId);
-        util.setJSONMap(dispatchStruct, util.customFormIdKey, customFormId);
-        odkTables.editRowWithSurvey(JSON.stringify(dispatchStruct), customFormId, customDeliveryRowId, customFormId, null);
     });
+};
+
+dataUtil.cleanJsonMap = function(customCols, jsonMap) {
+    var jsonMapKeys = Object.keys(jsonMap);
+    for (var i = 0; i < jsonMapKeys.length; i++) {
+        if (!customCols.includes(jsonMapKeys[i])) {
+            // Remove the element from the jsonMap that isn't in the customTable
+            delete jsonMap[jsonMapKeys[i]];
+        }
+    }
 };
 
 dataUtil.createCustomRowFromBaseTable = function(rootDeliveryRowId, customFormId, customDeliveryRowId, actionTypeValue,
                                                  dispatchStruct, defaultGroup, defaultAccess, jsonMap) {
-
 
     if (jsonMap === null) {
         jsonMap = {};
@@ -562,16 +582,25 @@ dataUtil.createCustomRowFromBaseTable = function(rootDeliveryRowId, customFormId
     util.setJSONMap(jsonMap, '_default_access', 'HIDDEN');
 
     return new Promise( function(resolve, reject) {
-        odkData.addRow(customFormId, jsonMap, customDeliveryRowId, resolve, reject);
-    }).then( function(result) {
-        if (dispatchStruct === undefined || dispatchStruct === null) {
-            dispatchStruct = {};
+        odkData.query(customFormId, null, null, null, null, null, null, 1, null, null, resolve, reject);
+    }).then(function(result) {
+        if (result !== null && result !== undefined) {
+            var customCols = result.getColumns();
+            dataUtil.cleanJsonMap(customCols, jsonMap);
+
+            return new Promise(function (resolve, reject) {
+                odkData.addRow(customFormId, jsonMap, customDeliveryRowId, resolve, reject);
+            }).then( function(result) {
+                if (dispatchStruct === undefined || dispatchStruct === null) {
+                    dispatchStruct = {};
+                }
+                util.setJSONMap(dispatchStruct, util.actionTypeKey, actionTypeValue);
+                util.setJSONMap(dispatchStruct, util.rootRowIdKey, rootDeliveryRowId);
+                util.setJSONMap(dispatchStruct, util.customFormIdKey, customFormId);
+                odkTables.editRowWithSurvey(JSON.stringify(dispatchStruct), customFormId, customDeliveryRowId, customFormId, null);
+            });
         }
-        util.setJSONMap(dispatchStruct, util.actionTypeKey, actionTypeValue);
-        util.setJSONMap(dispatchStruct, util.rootRowIdKey, rootDeliveryRowId);
-        util.setJSONMap(dispatchStruct, util.customFormIdKey, customFormId);
-        odkTables.editRowWithSurvey(JSON.stringify(dispatchStruct), customFormId, customDeliveryRowId, customFormId, null);
-    });
+    })
 };
 
 // extracts and validates whether a given authorization row has a valid customDeliveryFormId
