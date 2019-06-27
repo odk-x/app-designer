@@ -40,7 +40,7 @@ function display() {
                 + '&' + util.departmentParam + '=' + encodeURIComponent(selectDept)
                 + '&' + util.pamParam + '=' + encodeURIComponent(selectPAM));
         }).catch(function(reason) {
-            var errTxt = 'Error while storing department and pam : ' + reason;
+            var errTxt = odkCommon.localizeText(locale, 'error_while_storing_department_and_PAM') + ': ' + reason;
             util.displayError(errTxt);
             console.log(errTxt);
         });
@@ -57,6 +57,7 @@ function display() {
     });
 
     checkLocalTableForLocationValues();
+
 }
 
 function initialize() {
@@ -87,7 +88,7 @@ function initializeWithValues(deptVal, pamVal) {
             populatePAMDropdown(pamVal, resolve, reject);
         });
     }).catch(function(error) {
-        var errTxt = 'Error while initializing : ' + reason;
+        var errTxt = odkCommon.localizeText(locale, 'error_while_initializing') + ': ' + reason;
         util.displayError(errTxt);
         console.log(errTxt);
     });
@@ -263,7 +264,7 @@ function checkLocalTableForLocationValues() {
         }
 
     }).catch(function (reason) {
-        var errTxt = 'Error while retrieving department and pam from : ' + reason;
+        var errTxt = odkCommon.localizeText(locale, error_while_retrieving_department_and_PAM) + ': ' + reason;
         util.displayError(errTxt);
         console.log(errTxt);
     });

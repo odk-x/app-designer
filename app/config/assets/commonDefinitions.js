@@ -1191,6 +1191,27 @@ window.odkCommonDefinitions = {
         "default": "No id found"
       },
       "_row_num": 168
+    },
+    "error_while_storing_department_and_PAM": {
+      "string_token": "error_while_storing_department_and_PAM",
+      "text": {
+        "default": "Error while storing department and PAM"
+      },
+      "_row_num": 169
+    },
+    "error_while_initializing": {
+      "string_token": "error_while_initializing",
+      "text": {
+        "default": "Error while initializing"
+      },
+      "_row_num": 170
+    },
+    "error_while_retrieving_department_and_PAM": {
+      "string_token": "error_while_retrieving_department_and_PAM",
+      "text": {
+        "default": "Error while retrieving department and PAM"
+      },
+      "_row_num": 171
     }
   },
   "_locales": {
