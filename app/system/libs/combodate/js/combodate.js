@@ -251,9 +251,11 @@
             var items = [], name, i,
                 longNames = this.options.template.indexOf('YYYY') !== -1;
 
-            var year = new Date().getFullYear();
-            var yearName = longNames ? year : ( year + '').substring(2);
-            items[this.options.yearDescending ? 'push' : 'unshift']([year, yearName]);
+    		var year = new Date().getFullYear();
+			if(this.options.maxYear !== year) {
+				var yearName = longNames ? year : ( year + '').substring(2);
+				items[this.options.yearDescending ? 'push' : 'unshift']([year, yearName]); 
+			}
 
             for(i=this.options.maxYear; i>=this.options.minYear; i--) {
                 name = longNames ? i : (i+'').substring(2);
