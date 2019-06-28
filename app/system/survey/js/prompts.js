@@ -2132,8 +2132,8 @@ promptTypes.date = promptTypes.datetime.extend({
     timeTemplate: "YYYY / MM / DD"
 });
 
-promptTypes.birthday = promptTypes.date.extend({
-    type: "birthday",
+promptTypes.birthdate = promptTypes.date.extend({
+    type: "birthdate",
     afterRender: function() {
         var that = this;
         if(that.usePicker){

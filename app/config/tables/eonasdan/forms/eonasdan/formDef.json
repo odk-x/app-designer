@@ -2,7 +2,7 @@
   "xlsx": {
     "survey": [
       {
-        "type": "birthday",
+        "type": "birthdate",
         "name": "example0",
         "display": {
           "prompt": {
@@ -218,7 +218,7 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "birthday",
+            "type": "birthdate",
             "name": "example0",
             "display": {
               "prompt": {
@@ -228,7 +228,7 @@
             "_row_num": 2,
             "__rowNum__": 1,
             "_token_type": "prompt",
-            "_type": "birthday",
+            "_type": "birthdate",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
