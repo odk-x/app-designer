@@ -252,7 +252,7 @@
                 longNames = this.options.template.indexOf('YYYY') !== -1;
 
     		var year = new Date().getFullYear();
-			if(this.options.maxYear !== year) {
+			if(this.options.maxYear !== year && this.options.minYear !== year) {
 				var yearName = longNames ? year : ( year + '').substring(2);
 				items[this.options.yearDescending ? 'push' : 'unshift']([year, yearName]); 
 			}
