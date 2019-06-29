@@ -157,8 +157,10 @@ input[type="range"]::-webkit-slider-thumb:before {
     margin-right:0;
     z-index: 10000;
 }
-.odk-options-btn {
+
+.odk-navbar-btn {
     width:100%;
+    padding: 10px;
 
     text-overflow: ellipsis;
     overflow: hidden;
@@ -168,16 +170,13 @@ input[type="range"]::-webkit-slider-thumb:before {
     padding-left: 0;
     padding-right: 7px;
 }
-.odk-next-btn {
+.odk-header-next-btn, .odk-footer-next-btn {
     padding-left: 0;
     padding-right: 15px;
 }
 .odk-footer-back-btn {
     padding-left: 15px;
     padding-right: 0;
-}
-.odk-navbar-btn {
-    width:100%;
 }
 
 /* form list (user branch) */
