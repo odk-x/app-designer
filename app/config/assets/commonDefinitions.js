@@ -1139,7 +1139,7 @@ window.odkCommonDefinitions = {
       "string_token": "no_distributions",
       "text": {
         "default": "No Distributions",
-        "es": "No Distributions"
+        "es": "Sin Distribuciones"
       },
       "_row_num": 160
     },
@@ -1147,7 +1147,7 @@ window.odkCommonDefinitions = {
       "string_token": "choose_distribution",
       "text": {
         "default": "Choose Distribution",
-        "es": "Choose Distribution"
+        "es": "Elegir Distribución"
       },
       "_row_num": 161
     },
@@ -1155,7 +1155,7 @@ window.odkCommonDefinitions = {
       "string_token": "register",
       "text": {
         "default": "Register",
-        "es": "Register"
+        "es": "Registrar"
       },
       "_row_num": 162
     },
@@ -1163,7 +1163,7 @@ window.odkCommonDefinitions = {
       "string_token": "choose_dept",
       "text": {
         "default": "Choose Department",
-        "es": "Choose Department"
+        "es": "Elegir departamento"
       },
       "_row_num": 164
     },
@@ -1171,7 +1171,7 @@ window.odkCommonDefinitions = {
       "string_token": "choose_pam",
       "text": {
         "default": "Choose PAM",
-        "es": "Choose PAM"
+        "es": "Elija PAM"
       },
       "_row_num": 165
     },
@@ -1179,7 +1179,7 @@ window.odkCommonDefinitions = {
       "string_token": "continue",
       "text": {
         "default": "Continue",
-        "es": "Continue"
+        "es": "Continuar"
       },
       "_row_num": 166
     },
@@ -1187,7 +1187,7 @@ window.odkCommonDefinitions = {
       "string_token": "beneficiary_not_entitled",
       "text": {
         "default": "Beneficiary is not entitled to any more of these items",
-        "es": "Beneficiary is not entitled to any more of these items"
+        "es": "El beneficiario no tiene derecho a más de estos artículos"
       },
       "_row_num": 167
     },
@@ -1195,7 +1195,7 @@ window.odkCommonDefinitions = {
       "string_token": "no_id_found",
       "text": {
         "default": "No id found",
-        "es": "No id found"
+        "es": "No se ha encontrado ninguna identificación"
       },
       "_row_num": 168
     },
@@ -1203,7 +1203,7 @@ window.odkCommonDefinitions = {
       "string_token": "error_while_storing_department_and_PAM",
       "text": {
         "default": "Error while storing department and PAM",
-        "es": "Error while storing department and PAM"
+        "es": "Error al almacenar departamento y PAM"
       },
       "_row_num": 169
     },
@@ -1211,7 +1211,7 @@ window.odkCommonDefinitions = {
       "string_token": "error_while_initializing",
       "text": {
         "default": "Error while initializing",
-        "es": "Error while initializing"
+        "es": "Error durante la inicialización"
       },
       "_row_num": 170
     },
@@ -1219,7 +1219,7 @@ window.odkCommonDefinitions = {
       "string_token": "error_while_retrieving_department_and_PAM",
       "text": {
         "default": "Error while retrieving department and PAM",
-        "es": "Error while retrieving department and PAM"
+        "es": "Error al recuperar el departamento y el PAM"
       },
       "_row_num": 171
     }
