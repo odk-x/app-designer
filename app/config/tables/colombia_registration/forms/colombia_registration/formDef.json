@@ -18,7 +18,7 @@
         "_row_num": 4
       },
       {
-        "type": "date",
+        "type": "birthdate",
         "name": "birth_date",
         "display": {
           "prompt": {
@@ -2578,7 +2578,7 @@
         "reachable_sections": {},
         "prompts": [
           {
-            "type": "date",
+            "type": "birthdate",
             "name": "birth_date",
             "display": {
               "prompt": {
@@ -2592,7 +2592,7 @@
             "_row_num": 5,
             "__rowNum__": 4,
             "_token_type": "prompt",
-            "_type": "date",
+            "_type": "birthdate",
             "_branch_label_enclosing_screen": "survey/_screen4",
             "promptIdx": 0
           },
