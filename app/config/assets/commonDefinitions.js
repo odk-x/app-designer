@@ -1138,14 +1138,16 @@ window.odkCommonDefinitions = {
     "no_distributions": {
       "string_token": "no_distributions",
       "text": {
-        "default": "No Distributions"
+        "default": "No Distributions",
+        "es": "No Distributions"
       },
       "_row_num": 160
     },
     "choose_distribution": {
       "string_token": "choose_distribution",
       "text": {
-        "default": "Choose Distribution"
+        "default": "Choose Distribution",
+        "es": "Choose Distribution"
       },
       "_row_num": 161
     },
@@ -1153,63 +1155,71 @@ window.odkCommonDefinitions = {
       "string_token": "register",
       "text": {
         "default": "Register",
-        "es": "Registrar"
+        "es": "Register"
       },
       "_row_num": 162
     },
     "choose_dept": {
       "string_token": "choose_dept",
       "text": {
-        "default": "Choose Department"
+        "default": "Choose Department",
+        "es": "Choose Department"
       },
       "_row_num": 164
     },
     "choose_pam": {
       "string_token": "choose_pam",
       "text": {
-        "default": "Choose PAM"
+        "default": "Choose PAM",
+        "es": "Choose PAM"
       },
       "_row_num": 165
     },
     "continue": {
       "string_token": "continue",
       "text": {
-        "default": "Continue"
+        "default": "Continue",
+        "es": "Continue"
       },
       "_row_num": 166
     },
     "beneficiary_not_entitled": {
       "string_token": "beneficiary_not_entitled",
       "text": {
-        "default": "Beneficiary is not entitled to any more of these items"
+        "default": "Beneficiary is not entitled to any more of these items",
+        "es": "Beneficiary is not entitled to any more of these items"
       },
       "_row_num": 167
     },
     "no_id_found": {
       "string_token": "no_id_found",
       "text": {
-        "default": "No id found"
+        "default": "No id found",
+        "es": "No id found"
       },
       "_row_num": 168
     },
     "error_while_storing_department_and_PAM": {
       "string_token": "error_while_storing_department_and_PAM",
       "text": {
-        "default": "Error while storing department and PAM"
+        "default": "Error while storing department and PAM",
+        "es": "Error while storing department and PAM"
       },
       "_row_num": 169
     },
     "error_while_initializing": {
       "string_token": "error_while_initializing",
       "text": {
-        "default": "Error while initializing"
+        "default": "Error while initializing",
+        "es": "Error while initializing"
       },
       "_row_num": 170
     },
     "error_while_retrieving_department_and_PAM": {
       "string_token": "error_while_retrieving_department_and_PAM",
       "text": {
-        "default": "Error while retrieving department and PAM"
+        "default": "Error while retrieving department and PAM",
+        "es": "Error while retrieving department and PAM"
       },
       "_row_num": 171
     }
