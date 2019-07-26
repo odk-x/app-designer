@@ -8,33 +8,33 @@ window.odkCommonDefinitions = {
         "display": {
           "locale": {
             "text": {
-              "english": "English",
-              "hindi": "English (as hindi name)",
+              "en": "English",
+              "hi": "अंग्रेज़ी ",
               "default": "English"
             }
           }
         },
         "_row_num": 7,
-        "name": "english"
+        "name": "en"
       },
       {
         "display": {
           "locale": {
             "text": {
-              "english": "Hindi",
-              "hindi": "Hindi (as hindi name)",
+              "en": "Hindi",
+              "hi": "हिंदी",
               "default": "Hindi"
             }
           }
         },
         "_row_num": 8,
-        "name": "hindi"
+        "name": "hi"
       }
     ]
   },
   "_default_locale": {
     "setting_name": "_default_locale",
     "_row_num": 5,
-    "value": "english"
+    "value": "en"
   }
 }

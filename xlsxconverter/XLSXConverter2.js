@@ -427,6 +427,11 @@ var XLSXConverter = {};
             "type": "string",
 			"elementType": "date"
         },
+		"birthdate": {
+			// odk time stamp -- UTC timestamp string with 00:00:00.000 time.
+            "type": "string",
+			"elementType": "date"
+        },
         "time": {
 			// odk time -- LOCAL TIME ZONE hh:mm:ss.sss string
             "type": "string",
