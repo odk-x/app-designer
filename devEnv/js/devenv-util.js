@@ -25,8 +25,6 @@ if (typeof XMLHttpRequest !== 'undefined'){
 
 var _ = require('../libs/underscore.js');
 
-exports.rootpath = 'http://localhost:8000';
-
 /**
  * Get the path to the framework's formDef.json file. Returns:
  *
@@ -130,7 +128,7 @@ exports.postBase64File = function(path, content, callback) {
             {
                 uri: '/' + path,
                 body: content,
-                headers: { 
+                headers: {
                     'Content-Type': 'application/octet-stream'
                 }
             },
@@ -182,7 +180,7 @@ var getFormIdFromFormDef = exports.getFormIdFromFormDef = function(formDef) {
 
 /**
  * Get the framework_variant from the formDef json object and prepend ".". The variant is used
- * within the app-designer to manage the various independent demos that might 
+ * within the app-designer to manage the various independent demos that might
  * otherwise collide in the naming of the common translations, framework translations
  * and framework form definitions. It is inserted into the filename to differentiate
  * among the independent demos.
@@ -207,7 +205,7 @@ exports.removeEmptyStrings =  function(rObjArr){
         _.each(row, function(value, key){
             if(_.isString(value) && value.trim() === "") {
                 return;
-            } 
+            }
             outRow[key] = value;
         });
         if(_.keys(outRow).length > 0) {
@@ -227,7 +225,7 @@ exports.shouldWriteOutDefinitionAndPropertiesCsv = function(formDefJson) {
 
     if (tableId === null || formId === null) {
         return false;
-    } 
+    }
 
     if (formId === getFrameworkFormId()) {
         return false;
@@ -236,7 +234,7 @@ exports.shouldWriteOutDefinitionAndPropertiesCsv = function(formDefJson) {
     if (tableId !== formId) {
         return false;
     }
-    
+
     if (tableId === formId) {
         return true;
     }
@@ -250,12 +248,12 @@ exports.shouldWriteOutDefinitionsJs = function(formDefJson) {
 
     if (tableId === null || formId === null) {
         return false;
-    } 
+    }
 
     if (tableId !== formId) {
         return false;
     }
-    
+
     if (tableId === formId) {
         return true;
     }
@@ -264,7 +262,7 @@ exports.shouldWriteOutDefinitionsJs = function(formDefJson) {
 };
 
 /**
- *  Create definition.csv from inverted the formDef.json 
+ *  Create definition.csv from inverted the formDef.json
  * for XLSXConverter processing
  */
 exports.createDefinitionCsvFromDataTableModel = function(dataTableModel) {
@@ -278,7 +276,7 @@ exports.createDefinitionCsvFromDataTableModel = function(dataTableModel) {
         // the XLSXconverter already handles expanding complex types
         // such as geopoint into their underlying storage representation.
         jsonDefn = dataTableModel[dbColumnName];
-        
+
         if ( jsonDefn.elementSet === 'data' && !jsonDefn.isSessionVariable ) {
             var surveyElementName = jsonDefn.elementName;
 
@@ -289,7 +287,7 @@ exports.createDefinitionCsvFromDataTableModel = function(dataTableModel) {
                 listChildElem = jsonDefn.listChildElementKeys;
                 listChildElem = doubleQuoteString(JSON.stringify(listChildElem));
             }
-        
+
             definitions.push({
                 _element_key: dbColumnName,
                 _element_name: jsonDefn.elementName,
@@ -310,13 +308,13 @@ exports.createDefinitionCsvFromDataTableModel = function(dataTableModel) {
         dataString += colDef._element_type + ",";
         dataString += colDef._list_child_element_keys + "\r\n";
         defCsv += dataString;
-    });  
+    });
 
     return defCsv;
 };
 
 /**
- *  Create properties.csv from inverted the formDef.json 
+ *  Create properties.csv from inverted the formDef.json
  * for XLSXConverter processing
  */
 exports.createPropertiesCsvFromDataTableModel = function(dataTableModel, formDefJson) {
@@ -337,7 +335,7 @@ exports.createPropertiesCsvFromDataTableModel = function(dataTableModel, formDef
 };
 
 /**
- *  Create ...Definitions.js from the formDef.json 
+ *  Create ...Definitions.js from the formDef.json
  * for XLSXConverter processing
  */
 exports.createDefinitionsJsFromDataTableModel = function(tableId, formDefJson) {
@@ -357,7 +355,7 @@ exports.createDefinitionsJsFromDataTableModel = function(tableId, formDefJson) {
 };
 
 /**
- * Double quote strings if they contain 
+ * Double quote strings if they contain
  * a quote, carriage return, or line feed
  */
 var doubleQuoteString = exports.doubleQuoteString = function(str) {
@@ -366,7 +364,7 @@ var doubleQuoteString = exports.doubleQuoteString = function(str) {
             str.indexOf("\r") !== -1 ||
             str.indexOf("\n") !== -1 ||
             str.indexOf("\"") !== -1 ) {
-            
+
             str = str.replace(/"/g, "\"\"");
             str = "\"" + str + "\"";
             return str;
