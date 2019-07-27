@@ -102,6 +102,9 @@ module.exports = function (grunt) {
     // load all grunt tasks
     require('load-grunt-tasks')(grunt);
 
+    // passing in port as input
+    SERVER_PORT = grunt.option('port') || 8000;
+
     // We do not want the default behavior of serving only the app folder.
     // Instead we want to serve the base repo directory, as this will give us
     // access to the test dir as well. Further, if you don't have a homescreen
