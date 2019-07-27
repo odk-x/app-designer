@@ -1223,9 +1223,11 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 				var img_json = images[curr_index];
 				
 				// load the image source
-				var img_data = zip.file("images/" + img_json.img_name);
+                var that = this;
+                zip.file("images/" + img_json.img_name).async("base64").then(function(img_data) {
 				//console.log(img_data);
-				var img_src = "data:image/jpeg;base64," + btoa(img_data.asBinary());
+
+                    var img_src = "data:image/jpeg;base64," + img_data;
                // console.log(img_src);
 				var image = {img_src: img_src, 
 							img_height: img_json.orig_height, 
@@ -1242,7 +1244,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 				// load the image into the dom
 				var $img_container = crop_image(image);	
                  //console.log($img_container);
-				var controller = this;
+                    var controller = that;
 				html2canvas($img_container, {   
 					logging:true,
 					onrendered : function(canvas) {												
@@ -1265,6 +1267,8 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 					}
 					
 				});				
+                })
+
 			}
 		},
 		/**
@@ -1279,27 +1283,35 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 				// base case, there's no additional nextPage subdirectories
 				
 				// load the image tabs
+                var that = this;
 				var imageList = [];
 				var itab_files = zip.folder("image_tabs").file(new RegExp(".*"));
 				for (var i = 0; i < itab_files.length; i++) {
 					var file = itab_files[i];
-					var itab_json = JSON.parse(file.asText());
+					file.async("string").then(function(fileJson) {
+                        var itab_json = JSON.parse(fileJson);
 					imageList.push(itab_json);
-				}				
 				
-				this.set("imageList", imageList);
+                        that.set("imageList", imageList);
+                    })
+				}
 				
 				// unselect the current image tab
-				var currSelectedImageTab = this.get("selectedImageTab");
+                var currSelectedImageTab = that.get("selectedImageTab");
 				if (currSelectedImageTab != null) {
 					Ember.set(currSelectedImageTab, "isActive", false);
 				}
+
 			} else {
 				// recursive case, load the next page
-				var json_file = new RegExp(curr_directory + "page.json");
-				var page_json = JSON.parse(zip.file(json_file)[0].asText());
+				//var json_file = new RegExp(curr_directory + "page.json");
+                var json_file = "page.json";
+
+				var that = this;
+                zip.file(json_file).async("string").then(function(content) {
+                    var page_json = JSON.parse(content);
 				// create a new page
-				this.send("newPage", page_json.doc_info.page_size, true);	
+                    that.send("newPage", page_json.doc_info.page_size, true);
 
 				// maps groups to sets of fields that they contain
 				var field_groups = {};
@@ -1386,7 +1398,9 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 				$(".selected_field").removeClass("selected_field");
 				
 				// load all of the images for the current page
-				this.send("loadImages", page_json.images, 0, curr_directory, zip);										
+                    that.send("loadImages", page_json.images, 0, curr_directory, zip);
+                })
+
 			}																				
 		},
 		/**
@@ -1422,14 +1436,17 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 					the string is in the form: "data:application/x-zip-compressed;base64,..."
 					Where '...' is the actual base64.
 				*/
-				zip.load($("#uploaded_zip").data("zip").split(",")[1], {base64: true});
-		
+				var that = this;
+				var uploadData = $("#uploaded_zip").data("zip").split(",")[1];
+				zip.loadAsync(uploadData, {base64:true}).then(function(content) {
 				// begin loading pages starting from the root directory
 				// of the loaded zip file
-				this.send("loadPage", "", zip);			
+                    that.send("loadPage", "", content);
+                    $("#load_dialog").dialog("close");
+                });
 			}
 			
-			$("#load_dialog").dialog("close");
+
 		},
 		/**
 		*	Saves the document to a zip file.
@@ -1579,7 +1596,7 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 			// reset the current page tab to the first page
 			this.send("selectPageTab", pages[0]);
 			
-			var zip_contents = zip.generate();
+			zip.generateAsync({type:"base64"}).then(function(zip_contents) {
 			var scan_doc_zip = "data:application/zip;base64," + zip_contents;				
 			$("#scan_json_link").attr('href', scan_doc_zip);
 
@@ -1594,6 +1611,8 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
 			}
 			
 			$("#save_dialog").dialog("open");			
+            });
+
 		},
 
 	 
@@ -1991,11 +2010,13 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
                 zip.file("definition.csv", defCsv);
                 zip.file("properties.csv", propCsv);
 
-			    var content = zip.generate({type:"blob"});
+			    var content = zip.generateAsync({type:"blob"}).then(function(content) {
                 saveAs(content, fileName);
 
 				$("#export_dialog").dialog("close");
 				$(".field_group").addClass("unhighlighted_group");
+                });
+
 
 				return;
 			}
@@ -2458,26 +2479,32 @@ ODKScan.FieldsController = Ember.ArrayController.extend({
                		activeWorksheet: 0
                };
 
+               var wb = XLSX.utils.book_new();
+
                // making a worksheet with the content of survey array
-               file.worksheets.push(readTable(survey, "survey"));
+               ws = XLSX.utils.aoa_to_sheet(readTable(survey, "survey"));
+               XLSX.utils.book_append_sheet(wb, ws, "survey");
+
                // if the type is not tally we will have choice sheet
                if(is_not_tally) {
                	// making a worksheet with the content of the choices array
-               	file.worksheets.push(readTable(choices, "choices"));
+                   ws = XLSX.utils.aoa_to_sheet(readTable(choices, "choices"));
+                   XLSX.utils.book_append_sheet(wb, ws, "choices");
                }
 
                // making a worksheet with the content of the model array
-               file.worksheets.push(readTable(model, "model"));
+               ws = XLSX.utils.aoa_to_sheet(readTable(model, "model"));
+               XLSX.utils.book_append_sheet(wb, ws, "model");
 
                // making a worksheet with the content of the setting array
-               file.worksheets.push(readTable(setting, "settings"));
-               console.log(file);
-               // making xlsx file with the above worksheets
-               var xlFile = xlsx(file);
+               ws = XLSX.utils.aoa_to_sheet(readTable(setting, "settings"));
+               XLSX.utils.book_append_sheet(wb, ws, "settings");
 
-               //console.log("test length should be 3: "+survey.length);
-               // returning the xlsx file.
-               return xlFile;
+               var wopts = { bookType:'xlsx', bookSST:false, type:'base64' };
+
+               var wbout = [];
+               wbout["base64"] = XLSX.write(wb, wopts);
+               return wbout;
             }// end if fields
 
         }, //end createXLSX
