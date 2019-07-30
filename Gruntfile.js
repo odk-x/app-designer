@@ -2090,8 +2090,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
     };
 
     grunt.registerTask(
-        'clean',
-        'Remove unnecessry files to make a clean app-designer',
+        'empty',
+        'Remove unnecessary files to make an empty app-designer',
         function() {
 
             deleteTopLevel(grunt, tablesConfig.tablesDir);
