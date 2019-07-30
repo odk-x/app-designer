@@ -120,9 +120,11 @@ module.exports = function (grunt) {
         deviceMount: '/sdcard/opendatakit',
         // The mount point of the device for odk collect forms.
         formMount: '/sdcard/odk/forms',
+        assetsDir: 'app/config/assets',
         // The directory where the 'tables' directory containing the tableId
         // directories lives.
         tablesDir: 'app/config/tables',
+        dataDir: 'app/data',
         // Where the templates for a new tableId folder lives. i.e. if you want
         // to add a table, the contents of this directory would be copied to
         // tablesDir/tableId.
@@ -2066,4 +2068,97 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
         if (set === "off") grunt.option("force", false);
         if (set === "restore") grunt.option("force", previous_force_state);
     });
+
+    function deleteFilesList(grunt, workingDir, toBeDeleted) {
+        toBeDeleted.forEach(function (fileName) {
+            var dirToUse = workingDir;
+            if (!dirToUse.endsWith('/')) {
+                dirToUse = dirToUse + '/';
+            }
+
+            var src = dirToUse + fileName;
+            grunt.log.writeln('deleteTopLevel: deleting ' + src);
+            grunt.file.delete(src, {force: true});
+        });
+    }
+
+    var deleteTopLevel = function(grunt, dirToDelete) {
+        var toBeDeleted = grunt.file.expand(
+            {cwd: dirToDelete },
+            '*');
+        deleteFilesList(grunt, dirToDelete, toBeDeleted);
+    };
+
+    grunt.registerTask(
+        'clean',
+        'Remove unnecessry files to make a clean app-designer',
+        function() {
+
+            deleteTopLevel(grunt, tablesConfig.tablesDir);
+            deleteTopLevel(grunt, tablesConfig.assetsDir + '/csv');
+            deleteTopLevel(grunt, tablesConfig.dataDir);
+            deleteTopLevel(grunt, tablesConfig.appDir + '/' + tablesConfig.outputCsvDir);
+            deleteTopLevel(grunt, tablesConfig.appDir + '/' + tablesConfig.outputDbDir);
+            deleteTopLevel(grunt, tablesConfig.appDir + '/' + tablesConfig.outputDebugDir);
+            deleteTopLevel(grunt, tablesConfig.appDir + '/' + tablesConfig.outputPropsDir);
+
+            var assetFilesToDelete = grunt.file.expand(
+                {filter: 'isFile',
+                    cwd: tablesConfig.assetsDir },
+                '*.*',
+                '!favicon.ico',
+                'css/**',
+                '!css/odk-survey.css',
+                'csv/**',
+                'framework/**',
+                '!**/*.clean.*',
+                '!framework/forms/framework.clean/**',
+                'img/**',
+                '!img/play.png',
+                '!img/form_logo.png',
+                '!img/backup.png',
+                '!img/advance.png',
+                '!img/little_arrow.png',
+                'js/**',
+                '!js/util.js',
+                '!libs/**',
+                '!commonDefinitions.js',
+                '!index.html',
+                '!framework/forms/framework/formDef.json',
+                '!framework/forms/framework/framework.xlsx',
+                '!framework/frameworkDefinitions.js'
+            );
+
+            // Delete unnecessary files
+            deleteFilesList(grunt, tablesConfig.assetsDir, assetFilesToDelete);
+
+            // Find all instances of things with .clean in it
+            var cleanFilesToDelete = grunt.file.expand(
+                { cwd: tablesConfig.assetsDir,
+                    filter: 'isFile'},
+                '**/*.clean.*',
+                '**/*.clean/**'
+            );
+
+            // Copy *.clean files over to the correct directory
+            cleanFilesToDelete.forEach(function(fileName) {
+                var src = tablesConfig.assetsDir + '/' + fileName;
+                var dest = src;
+                var dest = dest.replace(new RegExp('.clean', 'g'), '');
+                grunt.log.writeln('copy ' + src + ' to ' + dest);
+                grunt.file.copy(src, dest);
+            });
+
+            // Delete all of the .clean files now
+            deleteFilesList(grunt, tablesConfig.assetsDir, cleanFilesToDelete);
+
+            // Delete all of the other framework directories
+            var assetsDirToDelete = grunt.file.expand(
+                {cwd: tablesConfig.assetsDir + '/framework/forms'},
+                '*',
+                '*.*',
+                '!framework/**');
+
+            deleteFilesList(grunt, tablesConfig.assetsDir + '/framework/forms', assetsDirToDelete);
+        });
 };
