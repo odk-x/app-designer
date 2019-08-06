@@ -536,7 +536,7 @@
         "x_value": "age",
         "y_value": "weight",
         "legend_text": "male median weight for age",
-        "hideInContents": true,
+        "hideInContents_1": true,
         "_row_num": 68
       },
       {
@@ -561,7 +561,7 @@
         "x_value": "age",
         "y_value": "weight",
         "legend_text": "female median weight for age",
-        "hideInContents": true,
+        "hideInContents_1": true,
         "_row_num": 71
       },
       {
@@ -1852,7 +1852,7 @@
             "x_value": "age",
             "y_value": "weight",
             "legend_text": "male median weight for age",
-            "hideInContents": true,
+            "hideInContents_1": true,
             "_row_num": 68,
             "__rowNum__": 67,
             "_token_type": "prompt",
@@ -1873,7 +1873,7 @@
             "x_value": "age",
             "y_value": "weight",
             "legend_text": "female median weight for age",
-            "hideInContents": true,
+            "hideInContents_1": true,
             "_row_num": 71,
             "__rowNum__": 70,
             "_token_type": "prompt",
