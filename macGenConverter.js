@@ -10,15 +10,33 @@ var XLSX = require('./xlsxconverter/js-xlsx');
 var util = require('./devEnv/js/devenv-util.js');
 
 function to_json(workbook) {
-    var result = {};
-    _.each(workbook.SheetNames, function(sheetName) {
-        var rObjArr = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName],{raw:true});
-        rObjArr = util.removeEmptyStrings(rObjArr);
-        if(rObjArr.length > 0){
-            result[sheetName] =  rObjArr;
-        }
-    });
-    return result;
+	var result = {};
+
+	_.each(workbook.SheetNames, function(sheetName) {
+		var rObjArr = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {raw: true});
+
+		var outArr = [];
+		_.each(rObjArr, function(row) {
+			var outRow = Object.create({__rowNum__: row.__rowNum__});
+
+			_.each(row, function(value, key) {
+				if(_.isString(value) && value.trim() === "") {
+					return;
+				}
+				outRow[key] = value;
+			});
+
+			if(_.keys(outRow).length > 0) {
+				outArr.push(outRow);
+			}
+		});
+
+		if(outArr.length > 0){
+			result[sheetName] = outArr;
+		}
+	});
+
+	return result;
 }
 
 function downloadCsvFile (csvContent, fileName) {
