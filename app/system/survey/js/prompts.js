@@ -2131,6 +2131,28 @@ promptTypes.date = promptTypes.datetime.extend({
     timeFormat: "MM/DD/YYYY",
     timeTemplate: "YYYY / MM / DD"
 });
+
+promptTypes.birthdate = promptTypes.date.extend({
+    type: "birthdate",
+    afterRender: function() {
+        var that = this;
+        if(that.usePicker){
+            that.insideAfterRender = true;
+
+            if (that.dtp !== null && that.dtp !== undefined) {
+                that.dtp.destroy();
+            }
+
+            that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate, maxYear: new Date().getFullYear()});
+            
+            var inputElement = that.$('input');
+            that.dtp = inputElement.data('DateTimePicker');
+
+            that.insideAfterRender = false;
+        }
+    },
+});
+
 promptTypes.time = promptTypes.datetime.extend({
     type: "time",
     showDate: false,
@@ -3421,7 +3443,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
 
         that.renderContext.choices = [{
             name: "acknowledge",
-            display: that.acknLabel.display,
+            display:{"title":{"text": that.acknLabel.text}},
             checked: acknowledged
         }];
 
@@ -3445,7 +3467,7 @@ promptTypes.acknowledge = promptTypes.select.extend({
         }
         that.renderContext.choices = [{
             name: "acknowledge",
-            display: that.acknLabel.display,
+            display:{"title":{"text": that.acknLabel.text}},
             checked: acknowledged
         }];
         ctxt.success();

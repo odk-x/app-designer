@@ -16,14 +16,14 @@ requirejs.config({
     waitSeconds: 45,
     paths: {
         // third-party libraries we depend upon
-        jquery : 'libs/jquery-3.2.1',
+        jquery : 'libs/jquery-3.4.1',
 		jquerymigrate: 'libs/jquery-migrate-3.0.0',
         bootstrap : 'libs/bootstrap-3.3.7-dist/js/bootstrap.min',
         moment : 'libs/eonasdan/moment',
         combodate : 'libs/combodate/js/combodate',
         spinner : 'libs/spinner/waitMe.min',
-        backbone : 'libs/backbone.1.3.3',
-        handlebars : 'libs/handlebars-v4.0.5',
+        backbone : 'libs/backbone-min.1.4.0',
+        handlebars : 'libs/handlebars-v4.1.2',
         underscore : 'libs/underscore.1.8.3',
         text : 'libs/text.2.0.15',
         //mobiscroll : 'libs/mobiscroll-2.5.4/js/combined.min',
@@ -57,7 +57,9 @@ requirejs.config({
         mockImpl: 'js/mock/mockImpl',
         mockUtils: 'js/mock/mockUtils',
         mockSchema: 'js/mock/mockSchema',
-        odkDataIf: 'js/mock/odkDataIf'
+        odkDataIf: 'js/mock/odkDataIf',
+        hammer : 'libs/hammer.min',
+        jqueryHammer : 'libs/jquery.hammer'
     },
     shim: {
         'bootstrap': {
@@ -106,6 +108,14 @@ requirejs.config({
         'd3' : {
             deps: [],
             exports: 'd3'
+        },
+        'hammer' : { // to use swipe on pages/
+            deps: [],
+            exports: 'Hammer'
+        },
+        'jqueryHammer' : { //
+            deps: ['jquery', 'hammer'],
+            exports: 'jqueryHammer'
         }
     }
 });

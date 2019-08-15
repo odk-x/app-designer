@@ -10,16 +10,18 @@
 */
 /* jshint unused: vars */
 define(['opendatakit','backbone','jquery', 'spinner', 'handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
-    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars', 'handlebarsHelpers', 'text!templates/confirmExitPopup.handlebars'],
+    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars', 'handlebarsHelpers', 'text!templates/confirmExitPopup.handlebars', 'hammer',
+        'jqueryHammer'],
 function(opendatakit,  Backbone,  $,        spinner,   Handlebars,  screenTypes,  screenPopup, confirmationPopup,
-     optionsPopup,                             languagePopup, _hh, confirmExitPopup) {
+     optionsPopup,                             languagePopup, _hh, confirmExitPopup, hammer, jqueryHammer) {
 /* global odkCommon */
 'use strict';
 verifyLoad('screenManager',
     ['opendatakit','backbone','jquery','spinner','handlebars','screenTypes','text!templates/screenPopup.handlebars', 'text!templates/confirmationPopup.handlebars',
-    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' , 'handlebarsHelpers', 'text!templates/confirmExitPopup.handlebars'],
+    'text!templates/optionsPopup.handlebars', 'text!templates/languagePopup.handlebars' , 'handlebarsHelpers', 'text!templates/confirmExitPopup.handlebars', 'hammer',
+        'jqueryHammer'],
     [opendatakit,  Backbone,  $,        spinner,  Handlebars,  screenTypes,  screenPopup, confirmationPopup,
-     optionsPopup,                             languagePopup, _hh, confirmExitPopup]);
+     optionsPopup,                             languagePopup, _hh, confirmExitPopup, hammer, jqueryHammer]);
 
 return Backbone.View.extend({
     el: "body",
@@ -48,11 +50,14 @@ return Backbone.View.extend({
         "click #cancel": "closeConfirmExitPopup",
         "click #ok-btn": "closeScreenPopup",
         "click #yes-btn": "handleConfirmation",
-        "click #no-btn": "closeConfirmationPopup"
+        "click #no-btn": "closeConfirmationPopup",
+        "swipeleft body": "gotoNextScreen",
+        "swiperight body": "gotoPreviousScreen"
     },
     initialize: function(options){
         this.controller = options.controller;
         this.$el = $('body');
+        this.$el.hammer();
     },
     cleanUpScreenManager: function(ctxt){
         this.pageChangeActionLockout = false;

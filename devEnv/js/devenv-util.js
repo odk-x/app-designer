@@ -25,8 +25,6 @@ if (typeof XMLHttpRequest !== 'undefined'){
 
 var _ = require('../libs/underscore.js');
 
-exports.rootpath = 'http://localhost:8000';
-
 /**
  * Get the path to the framework's formDef.json file. Returns:
  *
@@ -112,7 +110,7 @@ exports.postFile = function(path, content, callback) {
     if (request.post !== undefined) {
         request.post(
             {
-                uri: exports.rootpath + '/' + path,
+                uri: '/' + path,
                 body: content
             },
             callback);
@@ -128,7 +126,7 @@ exports.postBase64File = function(path, content, callback) {
     if (request.post !== undefined) {
         request.post(
             {
-                uri: exports.rootpath + '/' + path,
+                uri: '/' + path,
                 body: content,
                 headers: { 
                     'Content-Type': 'application/octet-stream'
