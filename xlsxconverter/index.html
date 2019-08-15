@@ -74,8 +74,8 @@ body {
 }
 /*]]>*/
 </style>
-<script type="text/javascript" src="js-xlsx/jszip.js"></script>
-<script type="text/javascript" src="js-xlsx/xlsx.js"></script>
+<script type="text/javascript" src="js-xlsx/dist/shim.min.js"></script>
+<script type="text/javascript" src="js-xlsx/dist/xlsx.full.min.js"></script>
 <script type="text/javascript" src="XRegExp-All-3.0.0-pre-2014-12-24.js"></script>
 <script type="text/javascript" src="underscore.js"></script>
 <script type="text/javascript" src="XLSXConverter2.js"></script>
@@ -85,15 +85,33 @@ body {
 var util = require('devenv-util');
 
 function to_json(workbook) {
-    var result = {};
-    _.each(workbook.SheetNames, function(sheetName) {
-        var rObjArr = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName],{raw:true});
-        rObjArr = util.removeEmptyStrings(rObjArr);
-        if(rObjArr.length > 0){
-            result[sheetName] =  rObjArr;
+  var result = {};
+
+  _.each(workbook.SheetNames, function(sheetName) {
+    var rObjArr = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {raw: true});
+
+    var outArr = [];
+    _.each(rObjArr, function(row) {
+      var outRow = Object.create({__rowNum__: row.__rowNum__});
+
+      _.each(row, function(value, key) {
+        if(_.isString(value) && value.trim() === "") {
+          return;
         }
+        outRow[key] = value;
+      });
+
+      if(_.keys(outRow).length > 0) {
+        outArr.push(outRow);
+      }
     });
-    return result;
+
+    if(outArr.length > 0){
+      result[sheetName] = outArr;
+    }
+  });
+
+  return result;
 }
 
 function clear_output() {
