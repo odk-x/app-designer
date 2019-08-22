@@ -622,9 +622,8 @@ dataUtil.addDeliveryRowByEntitlement = function(entitlementRow, customDeliveryFo
     util.setJSONMap(jsonMap, 'member_id', entitlementRow.get('member_id'));
     util.setJSONMap(jsonMap, 'entitlement_id', entitlementRow.get('_id'));
     util.setJSONMap(jsonMap, 'authorization_id', entitlementRow.get('authorization_id'));
-    util.setJSONMap(jsonMap, 'authorization_name', entitlementRow.get('authorization_name'));
+    util.setJSONMap(jsonMap, 'distribution_name', entitlementRow.get('distribution_name'));
     util.setJSONMap(jsonMap, 'authorization_type', entitlementRow.get('authorization_type'));
-    util.setJSONMap(jsonMap, 'authorization_description', entitlementRow.get('authorization_description'));
     util.setJSONMap(jsonMap, 'item_pack_id', entitlementRow.get('item_pack_id'));
     util.setJSONMap(jsonMap, 'item_pack_name', entitlementRow.get('item_pack_name'));
     util.setJSONMap(jsonMap, 'item_pack_description', entitlementRow.get('item_pack_description'));
@@ -646,9 +645,8 @@ dataUtil.addDeliveryRowWithoutEntitlement = function(beneficiaryEntityId, author
     var jsonMap = {};
     util.setJSONMap(jsonMap, 'beneficiary_entity_id', beneficiaryEntityId);
     util.setJSONMap(jsonMap, 'authorization_id', authorizationRow.get('_id'));
-    util.setJSONMap(jsonMap, 'authorization_name', authorizationRow.get('name'));
+    util.setJSONMap(jsonMap, 'distribution_name', authorizationRow.get('distribution_name'));
     util.setJSONMap(jsonMap, 'authorization_type', authorizationRow.get('type'));
-    util.setJSONMap(jsonMap, 'authorization_description', authorizationRow.get('description'));
     util.setJSONMap(jsonMap, 'item_pack_id', authorizationRow.get('item_pack_id'));
     util.setJSONMap(jsonMap, 'item_pack_name', authorizationRow.get('item_pack_name'));
     util.setJSONMap(jsonMap, 'item_pack_description', authorizationRow.get('item_description'));

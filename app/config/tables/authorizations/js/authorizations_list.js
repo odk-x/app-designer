@@ -97,11 +97,8 @@ var resumeFn = function(fIdxStart) {
             // have set up to have the row id
             var containingDiv = jqueryObject.closest('.item_space');
             var rowId = containingDiv.attr('rowId');
-            var reportVersion = containingDiv.attr('reportVersion');
-            var summaryFormId = containingDiv.attr('summaryFormId');
+
             console.log("rowId" + rowId);
-            console.log("summaryFormId" + summaryFormId);
-            console.log("reportVersion" + reportVersion);
 
             console.log('clicked with rowId: ' + rowId);
             // make sure we retrieved the rowId
@@ -134,12 +131,9 @@ var displayGroup = function(idxStart) {
 
         var item = $('<li>');
         item.attr('rowId', authorizationsResultSet.getRowId(i));
-        item.attr('summaryFormId', authorizationsResultSet.getData(i, "summary_form_id"));
-        item.attr('reportVersion', authorizationsResultSet.getData(i, "report_version"));
-        item.attr('summaryFormId', authorizationsResultSet.getData(i, "summary_form_id"));
         item.attr('class', 'item_space');
-        var auth_name = authorizationsResultSet.getData(i, 'name');
-        item.text(auth_name);
+        var dist_name = authorizationsResultSet.getData(i, 'distribution_name');
+        item.text(dist_name);
 
         var chevron = $('<img>');
         chevron.attr('class', 'chevron');

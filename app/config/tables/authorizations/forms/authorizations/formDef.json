@@ -8,83 +8,63 @@
       },
       {
         "type": "string",
-        "name": "name",
+        "name": "custom_delivery_form_id",
         "_row_num": 3
       },
       {
         "type": "string",
-        "name": "description",
+        "name": "item_pack_id",
         "_row_num": 4
       },
       {
         "type": "string",
-        "name": "custom_delivery_form_id",
+        "name": "item_pack_name",
         "_row_num": 5
       },
       {
         "type": "string",
-        "name": "item_pack_id",
+        "name": "item_pack_description",
         "_row_num": 6
       },
       {
         "type": "string",
-        "name": "item_pack_name",
+        "name": "item_pack_ranges",
         "_row_num": 7
       },
       {
         "type": "string",
-        "name": "item_pack_description",
+        "name": "extra_field_entitlements",
         "_row_num": 8
       },
       {
         "type": "string",
-        "name": "item_pack_ranges",
+        "name": "status",
         "_row_num": 9
       },
       {
         "type": "string",
-        "name": "report_version",
+        "name": "status_reason",
         "_row_num": 10
       },
       {
         "type": "string",
-        "name": "extra_field_entitlements",
+        "name": "date_created",
         "_row_num": 11
       },
       {
         "type": "string",
-        "name": "status",
+        "name": "for_member",
         "_row_num": 12
       },
       {
         "type": "string",
-        "name": "status_reason",
+        "name": "distribution_id",
         "_row_num": 13
       },
       {
         "type": "string",
-        "name": "summary_form_id",
-        "_row_num": 14
-      },
-      {
-        "type": "string",
-        "name": "date_created",
-        "_row_num": 15
-      },
-      {
-        "type": "string",
-        "name": "for_member",
-        "_row_num": 16
-      },
-      {
-        "type": "string",
-        "name": "distribution_id",
-        "_row_num": 17
-      },
-      {
-        "type": "string",
         "name": "distribution_name",
-        "_row_num": 18
+        "_row_num": 14
       }
     ],
     "settings": [
@@ -114,7 +94,7 @@
       },
       {
         "setting_name": "instance_name",
-        "value": "data('authorization_name)",
+        "value": "item_pack_name",
         "_row_num": 6
       }
     ],
@@ -199,7 +179,7 @@
       },
       "instance_name": {
         "setting_name": "instance_name",
-        "value": "data('authorization_name)",
+        "value": "item_pack_name",
         "_row_num": 6
       },
       "_locales": {
@@ -248,31 +228,11 @@
         ],
         "elementKey": "type"
       },
-      "name": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "name"
-      },
-      "description": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "description"
-      },
       "custom_delivery_form_id": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 3,
             "section_name": "model"
           }
         ],
@@ -282,7 +242,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -292,7 +252,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -302,7 +262,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -312,27 +272,17 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
         "elementKey": "item_pack_ranges"
       },
-      "report_version": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "report_version"
-      },
       "extra_field_entitlements": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -342,7 +292,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 9,
             "section_name": "model"
           }
         ],
@@ -352,27 +302,17 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
         "elementKey": "status_reason"
       },
-      "summary_form_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 14,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "summary_form_id"
-      },
       "date_created": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -382,7 +322,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -392,7 +332,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -402,7 +342,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -672,37 +612,11 @@
         "elementSet": "data",
         "elementPath": "type"
       },
-      "name": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "name",
-        "elementName": "name",
-        "elementSet": "data",
-        "elementPath": "name"
-      },
-      "description": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "description",
-        "elementName": "description",
-        "elementSet": "data",
-        "elementPath": "description"
-      },
       "custom_delivery_form_id": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 3,
             "section_name": "model"
           }
         ],
@@ -715,7 +629,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -728,7 +642,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -741,7 +655,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -754,7 +668,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -763,24 +677,11 @@
         "elementSet": "data",
         "elementPath": "item_pack_ranges"
       },
-      "report_version": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 10,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "report_version",
-        "elementName": "report_version",
-        "elementSet": "data",
-        "elementPath": "report_version"
-      },
       "extra_field_entitlements": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -793,7 +694,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 9,
             "section_name": "model"
           }
         ],
@@ -806,7 +707,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -815,24 +716,11 @@
         "elementSet": "data",
         "elementPath": "status_reason"
       },
-      "summary_form_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 14,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "summary_form_id",
-        "elementName": "summary_form_id",
-        "elementSet": "data",
-        "elementPath": "summary_form_id"
-      },
       "date_created": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -845,7 +733,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -858,7 +746,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -871,7 +759,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 18,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],

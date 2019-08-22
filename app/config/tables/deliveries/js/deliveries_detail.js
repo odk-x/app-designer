@@ -10,7 +10,7 @@ function display() {
 
         var exclusionList = [];
         if (util.getWorkflowMode() === util.workflow.none) {
-            exclusionList = ['assigned_item_pack_code', 'authorization_description', 'authorization_id', 'custom_delivery_form_id',
+            exclusionList = ['assigned_item_pack_code', 'authorization_id', 'custom_delivery_form_id',
                                 'custom_delivery_row_id', 'entitlement_id', 'member_id', 'is_override',
                                 'item_pack_description', 'item_pack_id', 'item_pack_name'];
         } else {

@@ -173,8 +173,8 @@ var displayGroup = function(idxStart, authorizationsResultSet) {
         item.attr('rowId', authorizationsResultSet.getRowId(i));
         item.attr('class', 'item_space');
         item.attr('id', authorizationsResultSet.getRowId(i));
-        var auth_name = authorizationsResultSet.getData(i, 'item_pack_name');
-        item.text(auth_name);
+        var itemPackName = authorizationsResultSet.getData(i, 'item_pack_name');
+        item.text(itemPackName);
         var extraEnt = authorizationsResultSet.getData(i, 'extra_field_entitlements');
 
         if (action === 'change_status') {

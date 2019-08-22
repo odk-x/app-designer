@@ -20,68 +20,63 @@
       },
       {
         "type": "string",
-        "name": "authorization_name",
+        "name": "distribution_name",
         "_row_num": 4
       },
       {
         "type": "string",
-        "name": "authorization_description",
+        "name": "beneficiary_entity_id",
         "_row_num": 5
       },
       {
         "type": "string",
-        "name": "beneficiary_entity_id",
+        "name": "member_id",
         "_row_num": 6
       },
       {
         "type": "string",
-        "name": "member_id",
+        "name": "entitlement_id",
         "_row_num": 7
       },
       {
         "type": "string",
-        "name": "entitlement_id",
+        "name": "is_override",
         "_row_num": 8
       },
       {
         "type": "string",
-        "name": "is_override",
+        "name": "item_pack_id",
         "_row_num": 9
       },
       {
         "type": "string",
-        "name": "item_pack_id",
+        "name": "item_pack_name",
         "_row_num": 10
       },
       {
         "type": "string",
-        "name": "item_pack_name",
+        "name": "item_pack_description",
         "_row_num": 11
       },
       {
         "type": "string",
-        "name": "item_pack_description",
+        "name": "custom_delivery_form_id",
         "_row_num": 12
       },
       {
         "type": "string",
-        "name": "custom_delivery_form_id",
+        "name": "custom_delivery_row_id",
         "_row_num": 13
       },
       {
         "type": "string",
-        "name": "custom_delivery_row_id",
+        "name": "date_created",
         "_row_num": 14
       },
       {
         "type": "string",
-        "name": "date_created",
-        "_row_num": 15
-      },
-      {
-        "type": "string",
         "name": "assigned_item_pack_code",
-        "_row_num": 16
+        "_row_num": 15
       }
     ],
     "settings": [
@@ -244,7 +239,7 @@
         ],
         "elementKey": "authorization_type"
       },
-      "authorization_name": {
+      "distribution_name": {
         "type": "string",
         "_defn": [
           {
@@ -252,23 +247,13 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "authorization_name"
-      },
-      "authorization_description": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 5,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "authorization_description"
+        "elementKey": "distribution_name"
       },
       "beneficiary_entity_id": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -278,7 +263,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -288,7 +273,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -298,7 +283,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -308,7 +293,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "model"
           }
         ],
@@ -318,7 +303,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -328,7 +313,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -338,7 +323,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -348,7 +333,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -358,7 +343,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -368,7 +353,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],
@@ -647,7 +632,7 @@
         "elementSet": "data",
         "elementPath": "authorization_type"
       },
-      "authorization_name": {
+      "distribution_name": {
         "type": "string",
         "_defn": [
           {
@@ -655,29 +640,16 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "authorization_name",
-        "elementName": "authorization_name",
+        "elementKey": "distribution_name",
+        "elementName": "distribution_name",
         "elementSet": "data",
-        "elementPath": "authorization_name"
-      },
-      "authorization_description": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 5,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "authorization_description",
-        "elementName": "authorization_description",
-        "elementSet": "data",
-        "elementPath": "authorization_description"
+        "elementPath": "distribution_name"
       },
       "beneficiary_entity_id": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -690,7 +662,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -703,7 +675,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -716,7 +688,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -729,7 +701,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "model"
           }
         ],
@@ -742,7 +714,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -755,7 +727,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -768,7 +740,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -781,7 +753,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -794,7 +766,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -807,7 +779,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 15,
             "section_name": "model"
           }
         ],

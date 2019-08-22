@@ -874,8 +874,7 @@ function createOverrideCBSuccess(result) {
 //TODO: would member ID be set here? is that a separate path? (post MVP)
 
     struct['authorization_id'] = result.get('_id');
-    struct['authorization_name'] = result.get('name');
-    struct['authorization_description'] = result.get('description');
+    struct['distribution_name'] = result.get('distribution_name');
     struct['authorization_type'] = result.get('type');
     struct['item_pack_id'] = result.get('item_pack_id');
     struct['item_pack_name'] = result.get('item_pack_name');

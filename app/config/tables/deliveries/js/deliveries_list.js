@@ -104,7 +104,7 @@ var displayGroup = function(idxStart) {
       item.attr('class', 'item_space');
 
       if (util.getWorkflowMode() === util.workflow.none) {
-          item.text(odkCommon.localizeText(locale, 'authorization_name') + ' : ' + deliveriesResultSet.getData(i, 'authorization_name'));
+          item.text(odkCommon.localizeText(locale, 'distribution_name') + ' : ' + deliveriesResultSet.getData(i, 'distribution_name'));
       } else {
           item.text(odkCommon.localizeText(locale, 'item_pack_name') + ' : ' + deliveriesResultSet.getData(i, 'item_pack_name'));
       }

@@ -27,80 +27,75 @@
       },
       {
         "setting_name": "instance_name",
-        "value": "authorization_name",
+        "value": "distribution_name",
         "_row_num": 6
       }
     ],
     "model": [
       {
         "type": "string",
-        "name": "authorization_description",
+        "name": "authorization_id",
         "_row_num": 2
       },
       {
         "type": "string",
-        "name": "authorization_id",
+        "name": "distribution_name",
         "_row_num": 3
       },
       {
         "type": "string",
-        "name": "authorization_name",
+        "name": "authorization_type",
         "_row_num": 4
       },
       {
         "type": "string",
-        "name": "authorization_type",
+        "name": "beneficiary_entity_id",
         "_row_num": 5
       },
       {
         "type": "string",
-        "name": "beneficiary_entity_id",
+        "name": "member_id",
         "_row_num": 6
       },
       {
         "type": "string",
-        "name": "member_id",
+        "name": "is_override",
         "_row_num": 7
       },
       {
         "type": "string",
-        "name": "is_override",
+        "name": "item_pack_description",
         "_row_num": 8
       },
       {
         "type": "string",
-        "name": "item_pack_description",
+        "name": "item_pack_id",
         "_row_num": 9
       },
       {
         "type": "string",
-        "name": "item_pack_id",
+        "name": "item_pack_name",
         "_row_num": 10
       },
       {
         "type": "string",
-        "name": "item_pack_name",
+        "name": "assigned_item_pack_code",
         "_row_num": 11
       },
       {
         "type": "string",
-        "name": "assigned_item_pack_code",
+        "name": "status",
         "_row_num": 12
       },
       {
         "type": "string",
-        "name": "status",
+        "name": "status_reason",
         "_row_num": 13
       },
       {
         "type": "string",
-        "name": "status_reason",
-        "_row_num": 14
-      },
-      {
-        "type": "string",
         "name": "date_created",
-        "_row_num": 15
+        "_row_num": 14
       }
     ],
     "survey": [
@@ -195,7 +190,7 @@
       },
       "instance_name": {
         "setting_name": "instance_name",
-        "value": "authorization_name",
+        "value": "distribution_name",
         "_row_num": 6
       },
       "_locales": {
@@ -234,7 +229,7 @@
     "queries": {},
     "calculates": {},
     "model": {
-      "authorization_description": {
+      "authorization_id": {
         "type": "string",
         "_defn": [
           {
@@ -242,9 +237,9 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "authorization_description"
+        "elementKey": "authorization_id"
       },
-      "authorization_id": {
+      "distribution_name": {
         "type": "string",
         "_defn": [
           {
@@ -252,23 +247,13 @@
             "section_name": "model"
           }
         ],
-        "elementKey": "authorization_id"
-      },
-      "authorization_name": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 4,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "authorization_name"
+        "elementKey": "distribution_name"
       },
       "authorization_type": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -278,7 +263,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -288,7 +273,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -298,7 +283,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -308,7 +293,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -318,7 +303,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "model"
           }
         ],
@@ -328,7 +313,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -338,7 +323,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -348,7 +333,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -358,7 +343,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -368,7 +353,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
@@ -556,24 +541,11 @@
       }
     },
     "dataTableModel": {
-      "authorization_description": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "authorization_description",
-        "elementName": "authorization_description",
-        "elementSet": "data",
-        "elementPath": "authorization_description"
-      },
       "authorization_id": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 2,
             "section_name": "model"
           }
         ],
@@ -582,24 +554,24 @@
         "elementSet": "data",
         "elementPath": "authorization_id"
       },
-      "authorization_name": {
+      "distribution_name": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 4,
+            "_row_num": 3,
             "section_name": "model"
           }
         ],
-        "elementKey": "authorization_name",
-        "elementName": "authorization_name",
+        "elementKey": "distribution_name",
+        "elementName": "distribution_name",
         "elementSet": "data",
-        "elementPath": "authorization_name"
+        "elementPath": "distribution_name"
       },
       "authorization_type": {
         "type": "string",
         "_defn": [
           {
-            "_row_num": 5,
+            "_row_num": 4,
             "section_name": "model"
           }
         ],
@@ -612,7 +584,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 6,
+            "_row_num": 5,
             "section_name": "model"
           }
         ],
@@ -625,7 +597,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 7,
+            "_row_num": 6,
             "section_name": "model"
           }
         ],
@@ -638,7 +610,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 8,
+            "_row_num": 7,
             "section_name": "model"
           }
         ],
@@ -651,7 +623,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 9,
+            "_row_num": 8,
             "section_name": "model"
           }
         ],
@@ -664,7 +636,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 10,
+            "_row_num": 9,
             "section_name": "model"
           }
         ],
@@ -677,7 +649,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 10,
             "section_name": "model"
           }
         ],
@@ -690,7 +662,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 11,
             "section_name": "model"
           }
         ],
@@ -703,7 +675,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 12,
             "section_name": "model"
           }
         ],
@@ -716,7 +688,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 14,
+            "_row_num": 13,
             "section_name": "model"
           }
         ],
@@ -729,7 +701,7 @@
         "type": "string",
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 14,
             "section_name": "model"
           }
         ],
