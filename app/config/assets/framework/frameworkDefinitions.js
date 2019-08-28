@@ -1415,6 +1415,22 @@ window.odkFrameworkDefinitions = {
         "es": "Suprimir Refrigerador"
       },
       "_row_num": 179
+    },
+    "add_sentinel_survey": {
+      "string_token": "add_sentinel_survey",
+      "text": {
+        "default": "Add Sentinel Survey",
+        "es": "Añadir Encuesta Centinela"
+      },
+      "_row_num": 180
+    },
+    "view_sentinel_survey": {
+      "string_token": "view_sentinel_survey",
+      "text": {
+        "default": "View Sentinel Surveys",
+        "es": "Ver encuestas de Centinela"
+      },
+      "_row_num": 181
     }
   }
 }

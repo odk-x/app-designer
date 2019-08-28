@@ -44,17 +44,17 @@ function cbSuccess(result) {
     }
 
     var healthFacilityPromise = new Promise(function(resolve, reject) {
-        odkData.query('health_facility', '_id = ?', [refrigeratorsResultSet.get('facility_row_id')], 
+        odkData.query('health_facility', '_id = ?', [refrigeratorsResultSet.get('facility_row_id')],
             null, null, null, null, null, null, true, resolve, reject);
     });
 
     var typePromise = new Promise(function(resolve, reject) {
         odkData.query('refrigerator_types', '_id = ?', [refrigeratorsResultSet.get('model_row_id')],
             null, null, null, null, null, null, true, resolve, reject);
-    }); 
+    });
 
     var logPromise = new Promise(function(resolve, reject) {
-        var logQuery = 'SELECT * FROM maintenance_logs WHERE maintenance_logs.refrigerator_id = ? ' + 
+        var logQuery = 'SELECT * FROM maintenance_logs WHERE maintenance_logs.refrigerator_id = ? ' +
             'AND maintenance_logs._savepoint_type != ? ORDER BY date_serviced DESC';
         var logParams = [refrigeratorsResultSet.get('refrigerator_id'), 'INCOMPLETE'];
         odkData.arbitraryQuery('maintenance_logs', logQuery, logParams, null, null, resolve, reject);
@@ -101,6 +101,8 @@ function display() {
     $('#ed-frig-stat').text(odkCommon.localizeText(locale, "edit_refrigerator_status"));
     $('#ed-frig').text(odkCommon.localizeText(locale, "edit_refrigerator"));
     $('#del-frig').text(odkCommon.localizeText(locale, "delete_refrigerator"));
+    $('#add-sent-survey').text(odkCommon.localizeText(locale, "add_sentinel_survey"));
+    $('#vw-sent-survey').text(odkCommon.localizeText(locale, "view_sentinel_survey"))
 
     odkData.getViewData(cbSuccess, cbFailure);
 }
@@ -108,7 +110,7 @@ function display() {
 function onLinkClickModel() {
     if (!$.isEmptyObject(typeData)) {
 
-        odkTables.openDetailView(null, 
+        odkTables.openDetailView(null,
             'refrigerator_types',
             typeData.getRowId(0),
             'config/tables/refrigerator_types/html/refrigerator_types_detail.html');
@@ -118,7 +120,7 @@ function onLinkClickModel() {
 function onLinkClickFacility() {
     if (!$.isEmptyObject(facilityData)) {
 
-        odkTables.openDetailView(null, 
+        odkTables.openDetailView(null,
             'health_facility',
             facilityData.getRowId(0),
             'config/tables/health_facility/html/health_facility_detail.html');
@@ -146,7 +148,7 @@ function onDeleteFrig() {
                 'refrigerators',
                 null,
                 refrigeratorsResultSet.getRowId(0),
-                cbDeleteSuccess, cbDeleteFailure);           
+                cbDeleteSuccess, cbDeleteFailure);
         }
     }
 }
@@ -160,7 +162,7 @@ function onClickAddMntRec() {
 		defaults['_group_modify'] = refrigeratorsResultSet.get('_group_modify');
 		defaults['_group_privileged'] = refrigeratorsResultSet.get('_group_privileged');
 
-        odkTables.addRowWithSurvey(null, 'maintenance_logs', 'maintenance_logs', null, defaults);          
+        odkTables.addRowWithSurvey(null, 'maintenance_logs', 'maintenance_logs', null, defaults);
     }
 }
 
@@ -170,7 +172,31 @@ function onClickViewAllMntRecs() {
         var keyToAppend = 'maintenance_logs.refrigerator_id';
 
         var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('refrigerator_id'));
-        odkTables.launchHTML(null, 
+        odkTables.launchHTML(null,
             'config/tables/maintenance_logs/html/maintenance_logs_list.html' + frigIdQueryParams);
+    }
+}
+
+function onClickSentinelSurvey() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+
+        var defaults = {'refrigerator_id': refrigeratorsResultSet.get('refrigerator_id'), 'date_serviced': odkCommon.toOdkTimeStampFromDate(new Date())};
+        defaults['_default_access'] = refrigeratorsResultSet.get('_default_access');
+        defaults['_group_read_only'] = refrigeratorsResultSet.get('_group_read_only');
+        defaults['_group_modify'] = refrigeratorsResultSet.get('_group_modify');
+        defaults['_group_privileged'] = refrigeratorsResultSet.get('_group_privileged');
+
+        odkTables.addRowWithSurvey(null, 'indicators', 'indicators', null, defaults);
+    }
+}
+
+function onClickViewSentinelSurvey() {
+    if (!$.isEmptyObject(refrigeratorsResultSet)) {
+
+        var keyToAppend = 'indicators.refrigerator_id';
+
+        var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('refrigerator_id'));
+        odkTables.launchHTML(null,
+            'config/tables/indicators/html/indicators_list.html' + frigIdQueryParams);
     }
 }

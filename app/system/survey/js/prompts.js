@@ -1556,7 +1556,7 @@ promptTypes.select_one_integer = promptTypes.select_one.extend({
         that.updateRenderValue(formValue);
 
         // Just dynamically reRender
-        ctxt.log('D',"prompts." + that.type + ".modification: reRender", "px: " + that.promptIdx);
+        odkCommon.log('D',"prompts." + that.type + ".modification: reRender", "px: " + that.promptIdx);
         that.reRender(evt);
     },
     /**
