@@ -11,7 +11,7 @@ function onLinkClick() {
     if (!$.isEmptyObject(healthFacilityResultSet))
     {
         var rowIdQueryParams = util.getKeyToAppendToColdChainURL(util.facilityRowId, healthFacilityResultSet.get('_id'));
-        odkTables.launchHTML(null, 
+        odkTables.launchHTML(null,
             'config/tables/refrigerators/html/refrigerators_list.html' + rowIdQueryParams);
     }
 }
@@ -41,7 +41,7 @@ function onDeleteFacility() {
             odkData.deleteRow(healthFacilityResultSet.getTableId(),
                 null,
                 healthFacilityResultSet.getRowId(0),
-                cbDeleteSuccess, cbDeleteFailure);           
+                cbDeleteSuccess, cbDeleteFailure);
         }
     }
 }
@@ -85,28 +85,24 @@ function display() {
     $('#basic-facility-information').text(odkCommon.localizeText(locale, "basic_facility_information"));
     $('#health-fac-id').text(odkCommon.localizeText(locale, "health_facility_id"));
     $('#fac-type').text(odkCommon.localizeText(locale, "facility_type"));
+    $('#con-name').text(odkCommon.localizeText(locale, "contact_name"));
+    $('#con-ph-num').text(odkCommon.localizeText(locale, "contact_phone_number"));
+    $('#catch-pop').text(odkCommon.localizeText(locale, "catchment_population"));
     $('#ownership').text(odkCommon.localizeText(locale, "ownership"));
-    $('#population').text(odkCommon.localizeText(locale, "population"));
-    $('#coverage').text(odkCommon.localizeText(locale, "coverage"));
     $('#admin-reg').text(odkCommon.localizeText(locale, "admin_region"));
 
     $('#power-information').text(odkCommon.localizeText(locale, "power_information"));
     $('#elec-source').text(odkCommon.localizeText(locale, "electricity_source"));
     $('#grid-avail').text(odkCommon.localizeText(locale, "grid_availability"));
-    $('#gas-avail').text(odkCommon.localizeText(locale, "gas_availability"));
-    $('#kerosene-avail').text(odkCommon.localizeText(locale, "kerosene_availability"));
-    $('#solar-suit-clim').text(odkCommon.localizeText(locale, "solar_suitable_climate"));
-    $('#solar-suit-site').text(odkCommon.localizeText(locale, "solar_suitable_site"));
+    $('#fuel-avail').text(odkCommon.localizeText(locale, "fuel_availability"));
 
     $('#loc-info').text(odkCommon.localizeText(locale, "location_information"));
     $('#lat-gps').text(odkCommon.localizeText(locale, "latitude_gps"));
     $('#long-gps').text(odkCommon.localizeText(locale, "longitude_gps"));
-    $('#clim').text(odkCommon.localizeText(locale, "climate"));
 
     $('#stk-info').text(odkCommon.localizeText(locale, "stock_information"));
     $('#dist-to-sup-pt').text(odkCommon.localizeText(locale, "distance_to_supply_point"));
     $('#vac-sup-interval').text(odkCommon.localizeText(locale, "vaccine_supply_interval"));
-    $('#vac-res-stock-req').text(odkCommon.localizeText(locale, "vaccine_reserve_stock_req"));
     $('#vac-sup-mode').text(odkCommon.localizeText(locale, "vaccine_supply_mode"));
 
     $('#refrig-inv').text(odkCommon.localizeText(locale, "refrigerator_inventory"));
@@ -124,27 +120,20 @@ function refrigeratorsCBSuccess(invData) {
     $('#facility_id').text(healthFacilityResultSet.get('facility_id'));
     $('#facility_type').text(util.formatDisplayText(
         healthFacilityResultSet.get('facility_type')));
+    $('#contact_name').text(healthFacilityResultSet.get('contact_name'));
+    $('#contact_phone_number').text(healthFacilityResultSet.get('contact_phone_number'));
+    $('#catchment_population').text(healthFacilityResultSet.get('catchment_population'));
     $('#facility_ownership').text(util.formatDisplayText(
         healthFacilityResultSet.get('facility_ownership')));
-    $('#facility_population').text(healthFacilityResultSet.get('facility_population'));
-    $('#facility_coverage').text(healthFacilityResultSet.get('facility_coverage') + '%');
     $('#admin_region').text(healthFacilityResultSet.get('admin_region'));
 
     $('#electricity_source').text(util.formatDisplayText(
         healthFacilityResultSet.get('electricity_source')));
     $('#grid_availability').text(util.formatDisplayText(
         healthFacilityResultSet.get('grid_power_availability')));
-    $('#gas_availability').text(util.formatDisplayText(
-        healthFacilityResultSet.get('gas_availability')));
-    $('#kerosene_availability').text(util.formatDisplayText(
-        healthFacilityResultSet.get('kerosene_availability')));
-    $('#solar_suitable_climate').text(util.formatDisplayText(
-        healthFacilityResultSet.get('solar_suitable_climate')));
-    $('#solar_suitable_site').text(util.formatDisplayText(
-        healthFacilityResultSet.get('solar_suitable_site')));
+    $('#fuel_availability').text(util.formatDisplayText(
+        healthFacilityResultSet.get('fuel_availability')));
 
-    $('#climate').text(util.formatDisplayText(
-        healthFacilityResultSet.get('climate_zone')));
     // The latitude and longitude are stored in a single column as GeoPoint.
     // We need to extract the lat/lon from the GeoPoint.
     var lat = healthFacilityResultSet.get('Location.latitude');
@@ -154,8 +143,6 @@ function refrigeratorsCBSuccess(invData) {
 
     $('#distance_to_supply').text(healthFacilityResultSet.get('distance_to_supply') + ' km');
     $('#supply_interval').text(healthFacilityResultSet.get('vaccine_supply_interval'));
-    $('#stock_requirement').text(healthFacilityResultSet.get(
-        'vaccine_reserve_stock_requirement'));
     $('#supply_mode').text(util.formatDisplayText(
         healthFacilityResultSet.get('vaccine_supply_mode')));
 
