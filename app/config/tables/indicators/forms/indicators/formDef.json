@@ -76,7 +76,7 @@
         "name": "heat_alarms",
         "display": {
           "prompt": {
-            "text": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the 1st of the month to the last day of the month?"
+            "text": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the first day of the month to the last day of the month?"
           }
         },
         "_row_num": 9
@@ -86,7 +86,7 @@
         "name": "freeze_alarms",
         "display": {
           "prompt": {
-            "text": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log for the 1st of the month to the last day of the month?"
+            "text": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log from the first day of the month to the last day of the month?"
           }
         },
         "_row_num": 10
@@ -96,7 +96,7 @@
         "name": "heat_alarms_over_48",
         "display": {
           "prompt": {
-            "text": "How many heat alarms with 48 hour or longer duration in the temperature log for the 1st of the month to the last day of the month?"
+            "text": "How many heat alarms with 48 hour or longer duration in the temperature log from the first day of the month to the last day of the month?"
           }
         },
         "_row_num": 11
@@ -118,7 +118,7 @@
         "name": "build_quality",
         "display": {
           "prompt": {
-            "text": "Have there been any issues related to build quality from the 1st of the month to the last day of the month?"
+            "text": "Have there been any issues related to build quality from the first day of the month to the last day of the month?"
           }
         },
         "_row_num": 13
@@ -210,7 +210,7 @@
         "name": "voltage_stabilizer_replaced",
         "display": {
           "prompt": {
-            "text": "Has the voltage regulator been replaced from the 1st of the month to the last day of the month?"
+            "text": "Has the voltage regulator been replaced from the first day of the month to the last day of the month?"
           }
         },
         "_row_num": 27
@@ -1020,7 +1020,7 @@
             "name": "heat_alarms",
             "display": {
               "prompt": {
-                "text": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the 1st of the month to the last day of the month?"
+                "text": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the first day of the month to the last day of the month?"
               }
             },
             "_row_num": 9,
@@ -1035,7 +1035,7 @@
             "name": "freeze_alarms",
             "display": {
               "prompt": {
-                "text": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log for the 1st of the month to the last day of the month?"
+                "text": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log from the first day of the month to the last day of the month?"
               }
             },
             "_row_num": 10,
@@ -1050,7 +1050,7 @@
             "name": "heat_alarms_over_48",
             "display": {
               "prompt": {
-                "text": "How many heat alarms with 48 hour or longer duration in the temperature log for the 1st of the month to the last day of the month?"
+                "text": "How many heat alarms with 48 hour or longer duration in the temperature log from the first day of the month to the last day of the month?"
               }
             },
             "_row_num": 11,
@@ -1082,7 +1082,7 @@
             "name": "build_quality",
             "display": {
               "prompt": {
-                "text": "Have there been any issues related to build quality from the 1st of the month to the last day of the month?"
+                "text": "Have there been any issues related to build quality from the first day of the month to the last day of the month?"
               }
             },
             "_row_num": 13,
@@ -1161,7 +1161,7 @@
             "name": "voltage_stabilizer_replaced",
             "display": {
               "prompt": {
-                "text": "Has the voltage regulator been replaced from the 1st of the month to the last day of the month?"
+                "text": "Has the voltage regulator been replaced from the first day of the month to the last day of the month?"
               }
             },
             "_row_num": 27,
