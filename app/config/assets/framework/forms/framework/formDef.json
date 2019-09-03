@@ -8,13 +8,61 @@
     ],
     "survey": [
       {
+        "clause": "if",
+        "condition": "opendatakit.getPlatformInfo().container == \"Chrome\"",
+        "_row_num": 2
+      },
+      {
+        "type": "user_branch",
+        "values_list": "test_forms",
+        "display": {
+          "prompt": {
+            "text": "Choose a test form (there are many)"
+          }
+        },
+        "_row_num": 3
+      },
+      {
+        "clause": "else",
+        "_row_num": 4
+      },
+      {
         "type": "note",
         "display": {
           "prompt": {
-            "text": "framework"
+            "text": "This is the default form."
+          },
+          "hint": {
+            "text": "Set your url hash to #formPath=[relative path to form directory]/ to change forms."
           }
         },
-        "_row_num": 2
+        "_row_num": 5
+      },
+      {
+        "clause": "end if",
+        "_row_num": 6
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 7
+      },
+      {
+        "branch_label": "indicators",
+        "_row_num": 8
+      },
+      {
+        "url": "'?' + odkSurvey.getHashString('indicators')",
+        "type": "external_link",
+        "display": {
+          "prompt": {
+            "text": "Open form"
+          }
+        },
+        "_row_num": 9
+      },
+      {
+        "clause": "exit section",
+        "_row_num": 10
       }
     ],
     "settings": [
@@ -79,6 +127,18 @@
       {
         "setting_name": "framework_variant",
         "_row_num": 9
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "test_forms",
+        "data_value": "indicators",
+        "display": {
+          "title": {
+            "text": "Indicators"
+          }
+        },
+        "_row_num": 2
       }
     ],
     "framework_translations": [
@@ -2746,7 +2806,20 @@
         "_row_num": 5
       }
     },
-    "choices": {},
+    "choices": {
+      "test_forms": [
+        {
+          "choice_list_name": "test_forms",
+          "data_value": "indicators",
+          "display": {
+            "title": {
+              "text": "Indicators"
+            }
+          },
+          "_row_num": 2
+        }
+      ]
+    },
     "framework_definitions": {
       "_tokens": {
         "constraint_message": {
@@ -5437,26 +5510,59 @@
         "reachable_sections": {},
         "prompts": [
           {
+            "type": "user_branch",
+            "values_list": "test_forms",
+            "display": {
+              "prompt": {
+                "text": "Choose a test form (there are many)"
+              }
+            },
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "prompt",
+            "_type": "user_branch",
+            "_branch_label_enclosing_screen": "survey/_screen3",
+            "promptIdx": 0
+          },
+          {
             "type": "note",
             "display": {
               "prompt": {
-                "text": "framework"
+                "text": "This is the default form."
+              },
+              "hint": {
+                "text": "Set your url hash to #formPath=[relative path to form directory]/ to change forms."
               }
             },
-            "_row_num": 2,
-            "__rowNum__": 1,
+            "_row_num": 5,
+            "__rowNum__": 4,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen2",
-            "promptIdx": 0
+            "_branch_label_enclosing_screen": "survey/_screen5",
+            "promptIdx": 1
+          },
+          {
+            "url": "'?' + odkSurvey.getHashString('indicators')",
+            "type": "external_link",
+            "display": {
+              "prompt": {
+                "text": "Open form"
+              }
+            },
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "prompt",
+            "_type": "external_link",
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 2
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 3,
-            "_branch_label_enclosing_screen": "survey/_screen3",
-            "promptIdx": 1
+            "_row_num": 11,
+            "_branch_label_enclosing_screen": "survey/_screen11",
+            "promptIdx": 3
           }
         ],
         "validation_tag_map": {
@@ -5464,37 +5570,92 @@
         },
         "operations": [
           {
+            "clause": "if",
+            "condition": "opendatakit.getPlatformInfo().container == \"Chrome\"",
             "_row_num": 2,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "__rowNum__": 1,
+            "_token_type": "goto_label",
+            "_branch_label": "_then2",
             "operationIdx": 0
           },
           {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 3,
+            "clause": "else",
+            "_token_type": "goto_label",
+            "_branch_label": "_else4",
+            "_row_num": 4,
             "operationIdx": 1
           },
           {
             "_row_num": 3,
             "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif6",
+            "_row_num": 6,
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 5,
+            "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "exit_section",
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "clause": "exit section",
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "exit_section",
+            "operationIdx": 7
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 11,
+            "operationIdx": 8
+          },
+          {
+            "_row_num": 11,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 2
+            "operationIdx": 9
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 3,
-            "operationIdx": 3
+            "_row_num": 11,
+            "operationIdx": 10
           }
         ],
         "branch_label_map": {
-          "_screen2": 0,
-          "_contents": 2,
-          "_screen3": 2
+          "_then2": 2,
+          "_screen3": 2,
+          "_else4": 4,
+          "_screen5": 4,
+          "_endif6": 5,
+          "indicators": 6,
+          "_screen9": 6,
+          "_contents": 9,
+          "_screen11": 9
         }
       }
     },
