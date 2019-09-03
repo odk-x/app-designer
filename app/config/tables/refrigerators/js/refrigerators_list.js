@@ -4,7 +4,7 @@
 /* global $, odkCommon, odkData, odkTables, util, listViewLogic */
 'use strict';
 
-var listQuery = 'SELECT * FROM refrigerators ' + 
+var listQuery = 'SELECT * FROM refrigerators ' +
     'JOIN health_facility ON refrigerators.facility_row_id = health_facility._id ' +
     'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id';
 
@@ -35,9 +35,10 @@ function resumeFunc(state) {
         var frigTxt = odkCommon.localizeText(locale, "refrigerator");
         var catIDTxt = odkCommon.localizeText(locale, "catalog_id_no_colon");
         var hFacTxt = odkCommon.localizeText(locale, "health_facility");
+        var serNoTxt = odkCommon.localizeText(locale, "serial_number");
 
-        listViewLogic.setColIdsToDisplayInList(frigTxt, 'tracking_id', 
-            catIDTxt, 'catalog_id', hFacTxt, 'facility_name');
+        listViewLogic.setColIdsToDisplayInList(frigTxt, 'tracking_id',
+            catIDTxt, 'catalog_id', hFacTxt, 'facility_name', );
     }
 
     listViewLogic.resumeFn(state);

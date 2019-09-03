@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <!-- beninTeaHouses Detailed View -->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
+        <script type="text/javascript" src="../../../assets/libs/jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
+        <script type="text/javascript" src="../js/health_facility_detail_summary.js"></script>
+    </head>
+    <body>
+
+    <div class="header col-12">
+        <h1><span id="TITLE"></span></h1>
+    </div>
+
+    <br>
+
+    <div class="detail col-12">
+        <h3 id="basic-facility-information">Basic Facility Information<span id="facility_info"></span></h3>
+    </div>
+
+    <div class="row">
+
+        <div class="col-6">
+            <p><span class="detailHdr" id="health-fac-id">Health Facility ID:</span> <span id="facility_id"></span></p>
+            <p><span class="detailHdr" id="fac-type">Facility Type:</span> <span id="facility_type"></span></p>
+            <p><span class="detailHdr" id="con-name">Contact Name:</span> <span id="contact_name"></span></p>
+            <p><span class="detailHdr" id="con-ph-num">Contact Phone Number:</span> <span id="contact_phone_number"></span>
+            </p>
+        </div>
+
+        <div class="col-6">
+            <p><span class="detailHdr" id="catch-pop">Catchment Population:</span> <span id="catchment_population"></span>
+            </p>
+            <p><span class="detailHdr" id="ownership">Ownership:</span> <span id="facility_ownership"></span></p>
+            <p><span class="detailHdr" id="admin-reg">Admin Region:</span> <span id="admin_region"></span></p>
+        </div>
+    </div>
+
+    <div class="detail col-12">
+        <h3 id="power-information">Power Information<span id="power_info"></span></h3>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <p><span class="detailHdr" id="elec-source">Electricity Source:</span> <span id="electricity_source"></span></p>
+            <p><span class="detailHdr" id="grid-avail">Grid Availability:</span> <span id="grid_availability"></span></p>
+        </div>
+
+        <div class="col-6">
+            <p><span class="detailHdr" id="fuel-avail">Fuel Availability:</span> <span id="fuel_availability"></span></p>
+        </div>
+    </div>
+
+    <div class="detail col-12">
+        <h3 id="loc-info">Location Information<span id="location_info"></span></h3>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <p><span class="detailHdr" id="lat-gps">Latitude (GPS):</span> <span id="lat"></span></p>
+        </div>
+
+        <div class="col-6">
+            <p><span class="detailHdr" id="long-gps">Longitude (GPS):</span> <span id="lon"></span></p>
+        </div>
+    </div>
+
+    <div class="detail col-12">
+        <h3 id="stk-info">Stock Information<span id="stock_info"></span></h3>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <p><span class="detailHdr" id="dist-to-sup-pt">Distance to Supply Point:</span> <span
+                id="distance_to_supply"></span></p>
+            <p><span class="detailHdr" id="vac-sup-interval">Vaccine Supply Interval:</span> <span
+                id="supply_interval"></span></p>
+        </div>
+
+        <div class="col-6">
+            <p><span class="detailHdr" id="vac-sup-mode">Vaccine Supply Mode:</span> <span id="supply_mode"></span></p>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            display();
+        });  // calls the detail display function when ready
+    </script>
+    </body>
+</html>
