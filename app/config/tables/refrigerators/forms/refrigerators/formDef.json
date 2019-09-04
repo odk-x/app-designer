@@ -121,8 +121,7 @@
         "_row_num": 13
       },
       {
-        "type": "select_one_integer",
-        "values_list": "years",
+        "type": "integer",
         "name": "year",
         "display": {
           "title": {
@@ -136,8 +135,21 @@
               "default": "Enter the year installed:",
               "es": "Año de instalacion"
             }
+          },
+          "hint": {
+            "text": {
+              "default": "Enter -1 if year is unknown",
+              "es": "Ingrese -1 si el año es desconocido"
+            }
+          },
+          "constraint_message": {
+            "text": {
+              "default": "Year must be between 1950 and the current year or -1 if unknown",
+              "es": "El año debe ser entre 1950 y el año actual o -1 si se desconoce"
+            }
           }
         },
+        "constraint": "calculates.valid_refrigerator_year()",
         "_row_num": 14
       },
       {
@@ -665,240 +677,6 @@
         "_row_num": 38
       },
       {
-        "choice_list_name": "years",
-        "data_value": 2017,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2017,
-              "es": 2017
-            }
-          }
-        },
-        "_row_num": 40
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2016,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2016,
-              "es": 2016
-            }
-          }
-        },
-        "_row_num": 41
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2015,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2015,
-              "es": 2015
-            }
-          }
-        },
-        "_row_num": 42
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2014,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2014,
-              "es": 2014
-            }
-          }
-        },
-        "_row_num": 43
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2013,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2013,
-              "es": 2013
-            }
-          }
-        },
-        "_row_num": 44
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2012,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2012,
-              "es": 2012
-            }
-          }
-        },
-        "_row_num": 45
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2011,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2011,
-              "es": 2011
-            }
-          }
-        },
-        "_row_num": 46
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2010,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2010,
-              "es": 2010
-            }
-          }
-        },
-        "_row_num": 47
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2009,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2009,
-              "es": 2009
-            }
-          }
-        },
-        "_row_num": 48
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2008,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2008,
-              "es": 2008
-            }
-          }
-        },
-        "_row_num": 49
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2007,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2007,
-              "es": 2007
-            }
-          }
-        },
-        "_row_num": 50
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2006,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2006,
-              "es": 2006
-            }
-          }
-        },
-        "_row_num": 51
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2005,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2005,
-              "es": 2005
-            }
-          }
-        },
-        "_row_num": 52
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2004,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2004,
-              "es": 2004
-            }
-          }
-        },
-        "_row_num": 53
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2003,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2003,
-              "es": 2003
-            }
-          }
-        },
-        "_row_num": 54
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2002,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2002,
-              "es": 2002
-            }
-          }
-        },
-        "_row_num": 55
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2001,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2001,
-              "es": 2001
-            }
-          }
-        },
-        "_row_num": 56
-      },
-      {
-        "choice_list_name": "years",
-        "data_value": 2000,
-        "display": {
-          "title": {
-            "text": {
-              "default": 2000,
-              "es": 2000
-            }
-          }
-        },
-        "_row_num": 57
-      },
-      {
         "choice_list_name": "service_priority_list",
         "data_value": "not_applicable",
         "display": {
@@ -909,7 +687,7 @@
             }
           }
         },
-        "_row_num": 59
+        "_row_num": 41
       },
       {
         "choice_list_name": "service_priority_list",
@@ -922,7 +700,7 @@
             }
           }
         },
-        "_row_num": 60
+        "_row_num": 42
       },
       {
         "choice_list_name": "service_priority_list",
@@ -935,7 +713,7 @@
             }
           }
         },
-        "_row_num": 61
+        "_row_num": 43
       },
       {
         "choice_list_name": "service_priority_list",
@@ -948,7 +726,7 @@
             }
           }
         },
-        "_row_num": 62
+        "_row_num": 44
       }
     ],
     "queries": [
@@ -1130,6 +908,13 @@
         "type": "string",
         "name": "refrigerator_id",
         "_row_num": 3
+      }
+    ],
+    "calculates": [
+      {
+        "calculation_name": "valid_refrigerator_year",
+        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year') >= 1950 && data('year') <= currYear) || data('year') === -1\n  \n})()",
+        "_row_num": 2
       }
     ]
   },
@@ -1655,242 +1440,6 @@
           "_row_num": 38
         }
       ],
-      "years": [
-        {
-          "choice_list_name": "years",
-          "data_value": 2017,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2017,
-                "es": 2017
-              }
-            }
-          },
-          "_row_num": 40
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2016,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2016,
-                "es": 2016
-              }
-            }
-          },
-          "_row_num": 41
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2015,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2015,
-                "es": 2015
-              }
-            }
-          },
-          "_row_num": 42
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2014,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2014,
-                "es": 2014
-              }
-            }
-          },
-          "_row_num": 43
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2013,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2013,
-                "es": 2013
-              }
-            }
-          },
-          "_row_num": 44
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2012,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2012,
-                "es": 2012
-              }
-            }
-          },
-          "_row_num": 45
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2011,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2011,
-                "es": 2011
-              }
-            }
-          },
-          "_row_num": 46
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2010,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2010,
-                "es": 2010
-              }
-            }
-          },
-          "_row_num": 47
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2009,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2009,
-                "es": 2009
-              }
-            }
-          },
-          "_row_num": 48
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2008,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2008,
-                "es": 2008
-              }
-            }
-          },
-          "_row_num": 49
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2007,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2007,
-                "es": 2007
-              }
-            }
-          },
-          "_row_num": 50
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2006,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2006,
-                "es": 2006
-              }
-            }
-          },
-          "_row_num": 51
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2005,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2005,
-                "es": 2005
-              }
-            }
-          },
-          "_row_num": 52
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2004,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2004,
-                "es": 2004
-              }
-            }
-          },
-          "_row_num": 53
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2003,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2003,
-                "es": 2003
-              }
-            }
-          },
-          "_row_num": 54
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2002,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2002,
-                "es": 2002
-              }
-            }
-          },
-          "_row_num": 55
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2001,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2001,
-                "es": 2001
-              }
-            }
-          },
-          "_row_num": 56
-        },
-        {
-          "choice_list_name": "years",
-          "data_value": 2000,
-          "display": {
-            "title": {
-              "text": {
-                "default": 2000,
-                "es": 2000
-              }
-            }
-          },
-          "_row_num": 57
-        }
-      ],
       "service_priority_list": [
         {
           "choice_list_name": "service_priority_list",
@@ -1903,7 +1452,7 @@
               }
             }
           },
-          "_row_num": 59
+          "_row_num": 41
         },
         {
           "choice_list_name": "service_priority_list",
@@ -1916,7 +1465,7 @@
               }
             }
           },
-          "_row_num": 60
+          "_row_num": 42
         },
         {
           "choice_list_name": "service_priority_list",
@@ -1929,7 +1478,7 @@
               }
             }
           },
-          "_row_num": 61
+          "_row_num": 43
         },
         {
           "choice_list_name": "service_priority_list",
@@ -1942,7 +1491,7 @@
               }
             }
           },
-          "_row_num": 62
+          "_row_num": 44
         }
       ]
     },
@@ -2002,7 +1551,13 @@
         "_row_num": 6
       }
     },
-    "calculates": {},
+    "calculates": {
+      "valid_refrigerator_year": {
+        "calculation_name": "valid_refrigerator_year",
+        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year') >= 1950 && data('year') <= currYear) || data('year') === -1\n  \n})()",
+        "_row_num": 2
+      }
+    },
     "model": {
       "model_row_id": {
         "type": "string",
@@ -2105,7 +1660,6 @@
             "es": "Año de instalacion"
           }
         },
-        "valuesList": "years",
         "elementKey": "year"
       },
       "power_source": {
@@ -2325,8 +1879,7 @@
             "promptIdx": 3
           },
           {
-            "type": "select_one_integer",
-            "values_list": "years",
+            "type": "integer",
             "name": "year",
             "display": {
               "title": {
@@ -2340,12 +1893,25 @@
                   "default": "Enter the year installed:",
                   "es": "Año de instalacion"
                 }
+              },
+              "hint": {
+                "text": {
+                  "default": "Enter -1 if year is unknown",
+                  "es": "Ingrese -1 si el año es desconocido"
+                }
+              },
+              "constraint_message": {
+                "text": {
+                  "default": "Year must be between 1950 and the current year or -1 if unknown",
+                  "es": "El año debe ser entre 1950 y el año actual o -1 si se desconoce"
+                }
               }
             },
+            "constraint": "calculates.valid_refrigerator_year()",
             "_row_num": 14,
             "__rowNum__": 13,
             "_token_type": "prompt",
-            "_type": "select_one_integer",
+            "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 4
           },
@@ -2513,7 +2079,8 @@
             0,
             1,
             2,
-            3
+            3,
+            4
           ]
         },
         "operations": [
@@ -2890,7 +2457,6 @@
             "es": "Año de instalacion"
           }
         },
-        "valuesList": "years",
         "elementKey": "year",
         "elementName": "year",
         "elementSet": "data",
@@ -3142,7 +2708,7 @@
         "_aspect": "maintenance_priority",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Aplica\"}}},\"_row_num\":59},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"low\",\"display\":{\"title\":{\"text\":{\"default\":\"Low\",\"es\":\"Bajo\"}}},\"_row_num\":60},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"medium\",\"display\":{\"title\":{\"text\":{\"default\":\"Medium\",\"es\":\"Medio\"}}},\"_row_num\":61},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"high\",\"display\":{\"title\":{\"text\":{\"default\":\"High\",\"es\":\"Alto\"}}},\"_row_num\":62}]"
+        "_value": "[{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Aplica\"}}},\"_row_num\":41},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"low\",\"display\":{\"title\":{\"text\":{\"default\":\"Low\",\"es\":\"Bajo\"}}},\"_row_num\":42},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"medium\",\"display\":{\"title\":{\"text\":{\"default\":\"Medium\",\"es\":\"Medio\"}}},\"_row_num\":43},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"high\",\"display\":{\"title\":{\"text\":{\"default\":\"High\",\"es\":\"Alto\"}}},\"_row_num\":44}]"
       },
       {
         "_partition": "Column",
@@ -3248,13 +2814,6 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Working Status\",\"es\":\"Functionando\"}}"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "year",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"years\",\"data_value\":2017,\"display\":{\"title\":{\"text\":{\"default\":2017,\"es\":2017}}},\"_row_num\":40},{\"choice_list_name\":\"years\",\"data_value\":2016,\"display\":{\"title\":{\"text\":{\"default\":2016,\"es\":2016}}},\"_row_num\":41},{\"choice_list_name\":\"years\",\"data_value\":2015,\"display\":{\"title\":{\"text\":{\"default\":2015,\"es\":2015}}},\"_row_num\":42},{\"choice_list_name\":\"years\",\"data_value\":2014,\"display\":{\"title\":{\"text\":{\"default\":2014,\"es\":2014}}},\"_row_num\":43},{\"choice_list_name\":\"years\",\"data_value\":2013,\"display\":{\"title\":{\"text\":{\"default\":2013,\"es\":2013}}},\"_row_num\":44},{\"choice_list_name\":\"years\",\"data_value\":2012,\"display\":{\"title\":{\"text\":{\"default\":2012,\"es\":2012}}},\"_row_num\":45},{\"choice_list_name\":\"years\",\"data_value\":2011,\"display\":{\"title\":{\"text\":{\"default\":2011,\"es\":2011}}},\"_row_num\":46},{\"choice_list_name\":\"years\",\"data_value\":2010,\"display\":{\"title\":{\"text\":{\"default\":2010,\"es\":2010}}},\"_row_num\":47},{\"choice_list_name\":\"years\",\"data_value\":2009,\"display\":{\"title\":{\"text\":{\"default\":2009,\"es\":2009}}},\"_row_num\":48},{\"choice_list_name\":\"years\",\"data_value\":2008,\"display\":{\"title\":{\"text\":{\"default\":2008,\"es\":2008}}},\"_row_num\":49},{\"choice_list_name\":\"years\",\"data_value\":2007,\"display\":{\"title\":{\"text\":{\"default\":2007,\"es\":2007}}},\"_row_num\":50},{\"choice_list_name\":\"years\",\"data_value\":2006,\"display\":{\"title\":{\"text\":{\"default\":2006,\"es\":2006}}},\"_row_num\":51},{\"choice_list_name\":\"years\",\"data_value\":2005,\"display\":{\"title\":{\"text\":{\"default\":2005,\"es\":2005}}},\"_row_num\":52},{\"choice_list_name\":\"years\",\"data_value\":2004,\"display\":{\"title\":{\"text\":{\"default\":2004,\"es\":2004}}},\"_row_num\":53},{\"choice_list_name\":\"years\",\"data_value\":2003,\"display\":{\"title\":{\"text\":{\"default\":2003,\"es\":2003}}},\"_row_num\":54},{\"choice_list_name\":\"years\",\"data_value\":2002,\"display\":{\"title\":{\"text\":{\"default\":2002,\"es\":2002}}},\"_row_num\":55},{\"choice_list_name\":\"years\",\"data_value\":2001,\"display\":{\"title\":{\"text\":{\"default\":2001,\"es\":2001}}},\"_row_num\":56},{\"choice_list_name\":\"years\",\"data_value\":2000,\"display\":{\"title\":{\"text\":{\"default\":2000,\"es\":2000}}},\"_row_num\":57}]"
       },
       {
         "_partition": "Column",
