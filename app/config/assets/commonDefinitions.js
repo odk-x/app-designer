@@ -672,11 +672,11 @@ window.odkCommonDefinitions = {
       },
       "_row_num": 85
     },
-    "working_status": {
-      "string_token": "working_status",
+    "functional_status": {
+      "string_token": "functional_status",
       "text": {
-        "default": "Working Status:",
-        "es": "Estado De Trabajo:"
+        "default": "Functional Status:",
+        "es": "Estado Funcional:"
       },
       "_row_num": 86
     },

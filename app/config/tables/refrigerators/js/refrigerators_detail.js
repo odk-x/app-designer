@@ -18,7 +18,7 @@ function processFrigPromises(facilityResult, typeResult, logResult) {
     util.showIdForDetail('#model_id', 'catalog_id', typeData, false);
     util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsResultSet, false);
     util.showIdForDetail('#install_year', 'year', refrigeratorsResultSet, false);
-    util.showIdForDetail('#working_status', 'working_status', refrigeratorsResultSet, true);
+    util.showIdForDetail('#functional_status', 'functional_status', refrigeratorsResultSet, true);
     util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsResultSet, true);
     util.showIdForDetail('#voltage_regulator', 'voltage_regulator', refrigeratorsResultSet, true);
     util.showIdForDetail('#maintenance_priority', 'maintenance_priority', refrigeratorsResultSet, true);

@@ -12,7 +12,7 @@ function cbFrigSuccess(result) {
 
     util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsData, false);
     util.showIdForDetail('#refrigerator_id', 'refrigerator_id', maintenanceLogsResultSet, false);
-    util.showIdForDetail('#working_status', 'working_status', refrigeratorsData, true);
+    util.showIdForDetail('#functional_status', 'functional_status', refrigeratorsData, true);
     util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsData, true);
     util.showIdForDetail('#date_serviced', 'date_serviced', maintenanceLogsResultSet, true);
     util.showIdForDetail('#maint_type', 'type_of_maintenance', maintenanceLogsResultSet, true);
@@ -86,7 +86,7 @@ function display() {
     $('#frig-hdr').text(odkCommon.localizeText(locale, "refrigerator"));
     $('#mnt-log-info').text(odkCommon.localizeText(locale, "maintenance_log_information"));
     $('#frig-id').text(odkCommon.localizeText(locale, "refrigerator_id"));
-    $('#work-stat').text(odkCommon.localizeText(locale, "working_status"));
+    $('#work-stat').text(odkCommon.localizeText(locale, "functional_status"));
     $('#reason-not-work').text(odkCommon.localizeText(locale, "reason_not_working"));
     $('#date-srv').text(odkCommon.localizeText(locale, "date_serviced"));
     $('#type-of-mnt').text(odkCommon.localizeText(locale, "type_of_maintenance"));

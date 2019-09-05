@@ -28,17 +28,17 @@
       {
         "type": "select_one",
         "values_list": "status",
-        "name": "working_status",
+        "name": "functional_status",
         "display": {
           "title": {
             "text": {
-              "default": "Working Status",
+              "default": "Functional Status",
               "es": "Functionando"
             }
           },
           "prompt": {
             "text": {
-              "default": "Working status:",
+              "default": "Functional status:",
               "es": "¿Functionando?"
             }
           }
@@ -106,29 +106,16 @@
       },
       {
         "choice_list_name": "status",
-        "data_value": "awaiting_repair",
+        "data_value": "not_functioning",
         "display": {
           "title": {
             "text": {
-              "default": "Awaiting Repair",
-              "es": "Esperando Servicio"
+              "default": "Not Functioning",
+              "es": "No Functionando"
             }
           }
         },
         "_row_num": 3
-      },
-      {
-        "choice_list_name": "status",
-        "data_value": "unservicable",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Unservicable",
-              "es": "Irreparable"
-            }
-          }
-        },
-        "_row_num": 4
       },
       {
         "choice_list_name": "reasons",
@@ -141,16 +128,29 @@
             }
           }
         },
+        "_row_num": 5
+      },
+      {
+        "choice_list_name": "reasons",
+        "data_value": "unknown_needs_investigation",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Unknown/Needs Investigation",
+              "es": "Investigación desconocida / de necesidades"
+            }
+          }
+        },
         "_row_num": 6
       },
       {
         "choice_list_name": "reasons",
-        "data_value": "no_finance",
+        "data_value": "lack_of_power",
         "display": {
           "title": {
             "text": {
-              "default": "No Finance",
-              "es": "Sin Dinero"
+              "default": "Lack of Power",
+              "es": "Falta de poder"
             }
           }
         },
@@ -158,12 +158,12 @@
       },
       {
         "choice_list_name": "reasons",
-        "data_value": "no_fuel",
+        "data_value": "awaiting_installation",
         "display": {
           "title": {
             "text": {
-              "default": "No Fuel",
-              "es": "Sin Combustible"
+              "default": "Awaiting Installation",
+              "es": "En espera de instalación"
             }
           }
         },
@@ -171,16 +171,29 @@
       },
       {
         "choice_list_name": "reasons",
-        "data_value": "dead",
+        "data_value": "awaiting_decomissioning",
         "display": {
           "title": {
             "text": {
-              "default": "Dead",
-              "es": "Muerto"
+              "default": "Awaiting Decomissioning",
+              "es": "En espera de desarme"
             }
           }
         },
         "_row_num": 9
+      },
+      {
+        "choice_list_name": "reasons",
+        "data_value": "lack_of_tech_availability",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Lack of Technician Availability",
+              "es": "Falta de disponibilidad de técnicos"
+            }
+          }
+        },
+        "_row_num": 10
       },
       {
         "choice_list_name": "reasons",
@@ -189,11 +202,11 @@
           "title": {
             "text": {
               "default": "Not Applicable",
-              "es": "N/A"
+              "es": "No aplica"
             }
           }
         },
-        "_row_num": 10
+        "_row_num": 11
       },
       {
         "choice_list_name": "current_use",
@@ -206,7 +219,7 @@
             }
           }
         },
-        "_row_num": 12
+        "_row_num": 13
       },
       {
         "choice_list_name": "current_use",
@@ -219,7 +232,7 @@
             }
           }
         },
-        "_row_num": 13
+        "_row_num": 14
       },
       {
         "choice_list_name": "current_use",
@@ -232,7 +245,7 @@
             }
           }
         },
-        "_row_num": 14
+        "_row_num": 15
       },
       {
         "choice_list_name": "service_priority_list",
@@ -245,7 +258,7 @@
             }
           }
         },
-        "_row_num": 16
+        "_row_num": 17
       },
       {
         "choice_list_name": "service_priority_list",
@@ -258,7 +271,7 @@
             }
           }
         },
-        "_row_num": 17
+        "_row_num": 18
       },
       {
         "choice_list_name": "service_priority_list",
@@ -271,7 +284,7 @@
             }
           }
         },
-        "_row_num": 18
+        "_row_num": 19
       },
       {
         "choice_list_name": "service_priority_list",
@@ -284,7 +297,7 @@
             }
           }
         },
-        "_row_num": 19
+        "_row_num": 20
       }
     ],
     "settings": [
@@ -480,29 +493,16 @@
         },
         {
           "choice_list_name": "status",
-          "data_value": "awaiting_repair",
+          "data_value": "not_functioning",
           "display": {
             "title": {
               "text": {
-                "default": "Awaiting Repair",
-                "es": "Esperando Servicio"
+                "default": "Not Functioning",
+                "es": "No Functionando"
               }
             }
           },
           "_row_num": 3
-        },
-        {
-          "choice_list_name": "status",
-          "data_value": "unservicable",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Unservicable",
-                "es": "Irreparable"
-              }
-            }
-          },
-          "_row_num": 4
         }
       ],
       "reasons": [
@@ -517,16 +517,29 @@
               }
             }
           },
+          "_row_num": 5
+        },
+        {
+          "choice_list_name": "reasons",
+          "data_value": "unknown_needs_investigation",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Unknown/Needs Investigation",
+                "es": "Investigación desconocida / de necesidades"
+              }
+            }
+          },
           "_row_num": 6
         },
         {
           "choice_list_name": "reasons",
-          "data_value": "no_finance",
+          "data_value": "lack_of_power",
           "display": {
             "title": {
               "text": {
-                "default": "No Finance",
-                "es": "Sin Dinero"
+                "default": "Lack of Power",
+                "es": "Falta de poder"
               }
             }
           },
@@ -534,12 +547,12 @@
         },
         {
           "choice_list_name": "reasons",
-          "data_value": "no_fuel",
+          "data_value": "awaiting_installation",
           "display": {
             "title": {
               "text": {
-                "default": "No Fuel",
-                "es": "Sin Combustible"
+                "default": "Awaiting Installation",
+                "es": "En espera de instalación"
               }
             }
           },
@@ -547,16 +560,29 @@
         },
         {
           "choice_list_name": "reasons",
-          "data_value": "dead",
+          "data_value": "awaiting_decomissioning",
           "display": {
             "title": {
               "text": {
-                "default": "Dead",
-                "es": "Muerto"
+                "default": "Awaiting Decomissioning",
+                "es": "En espera de desarme"
               }
             }
           },
           "_row_num": 9
+        },
+        {
+          "choice_list_name": "reasons",
+          "data_value": "lack_of_tech_availability",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Lack of Technician Availability",
+                "es": "Falta de disponibilidad de técnicos"
+              }
+            }
+          },
+          "_row_num": 10
         },
         {
           "choice_list_name": "reasons",
@@ -565,11 +591,11 @@
             "title": {
               "text": {
                 "default": "Not Applicable",
-                "es": "N/A"
+                "es": "No aplica"
               }
             }
           },
-          "_row_num": 10
+          "_row_num": 11
         }
       ],
       "current_use": [
@@ -584,7 +610,7 @@
               }
             }
           },
-          "_row_num": 12
+          "_row_num": 13
         },
         {
           "choice_list_name": "current_use",
@@ -597,7 +623,7 @@
               }
             }
           },
-          "_row_num": 13
+          "_row_num": 14
         },
         {
           "choice_list_name": "current_use",
@@ -610,7 +636,7 @@
               }
             }
           },
-          "_row_num": 14
+          "_row_num": 15
         }
       ],
       "service_priority_list": [
@@ -625,7 +651,7 @@
               }
             }
           },
-          "_row_num": 16
+          "_row_num": 17
         },
         {
           "choice_list_name": "service_priority_list",
@@ -638,7 +664,7 @@
               }
             }
           },
-          "_row_num": 17
+          "_row_num": 18
         },
         {
           "choice_list_name": "service_priority_list",
@@ -651,7 +677,7 @@
               }
             }
           },
-          "_row_num": 18
+          "_row_num": 19
         },
         {
           "choice_list_name": "service_priority_list",
@@ -664,7 +690,7 @@
               }
             }
           },
-          "_row_num": 19
+          "_row_num": 20
         }
       ]
     },
@@ -688,7 +714,7 @@
         "valuesList": "current_use",
         "elementKey": "utilization"
       },
-      "working_status": {
+      "functional_status": {
         "_defn": [
           {
             "_row_num": 4,
@@ -698,12 +724,12 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Working Status",
+            "default": "Functional Status",
             "es": "Functionando"
           }
         },
         "valuesList": "status",
-        "elementKey": "working_status"
+        "elementKey": "functional_status"
       },
       "reason_not_working": {
         "_defn": [
@@ -778,17 +804,17 @@
           {
             "type": "select_one",
             "values_list": "status",
-            "name": "working_status",
+            "name": "functional_status",
             "display": {
               "title": {
                 "text": {
-                  "default": "Working Status",
+                  "default": "Functional Status",
                   "es": "Functionando"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Working status:",
+                  "default": "Functional status:",
                   "es": "¿Functionando?"
                 }
               }
@@ -1107,7 +1133,7 @@
         "elementSet": "data",
         "elementPath": "utilization"
       },
-      "working_status": {
+      "functional_status": {
         "_defn": [
           {
             "_row_num": 4,
@@ -1117,15 +1143,15 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Working Status",
+            "default": "Functional Status",
             "es": "Functionando"
           }
         },
         "valuesList": "status",
-        "elementKey": "working_status",
-        "elementName": "working_status",
+        "elementKey": "functional_status",
+        "elementName": "functional_status",
         "elementSet": "data",
-        "elementPath": "working_status"
+        "elementPath": "functional_status"
       },
       "reason_not_working": {
         "_defn": [
