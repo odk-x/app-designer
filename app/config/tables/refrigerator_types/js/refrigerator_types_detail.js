@@ -39,8 +39,9 @@ function refrigeratorsCBSuccess(invData) {
 
     $('#manufacturer').text(refrigeratorTypeResultSet.get('manufacturer'));
 
-    var powerArray = JSON.parse(refrigeratorTypeResultSet.get('power_source'));
-    $('#power_sources').text(util.formatDisplayText(powerArray.join(', ')));
+    // var powerArray = JSON.parse(refrigeratorTypeResultSet.get('power_source'));
+    // $('#power_sources').text(util.formatDisplayText(powerArray.join(', ')));
+    $('#power_sources').text(refrigeratorTypeResultSet.get('power_source'));
 
     $('#r_gross_vol').text(refrigeratorTypeResultSet.get('refrigerator_gross_volume') + ' m');
     $('#f_gross_vol').text(refrigeratorTypeResultSet.get('freezer_gross_volume') + ' m');
