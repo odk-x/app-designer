@@ -1,0 +1,20 @@
+_partition,_aspect,_key,_type,_value
+Column,groupModify,displayName,object,"{""text"":{""default"":""Modify Group"",""es"":""Modify Group""}}"
+Column,groupPrivileged,displayName,object,"{""text"":{""default"":""Privileged Group"",""es"":""Privileged Group""}}"
+Column,groupReadOnly,displayName,object,"{""text"":{""default"":""Read Only Group"",""es"":""Read Only Group""}}"
+Column,levelNumber,displayName,object,"{""text"":{""default"":""Level Number"",""es"":""Numero de nivel""}}"
+Column,location,displayName,object,"{""text"":{""default"":""Location"",""es"":""Ubicación""}}"
+Column,regionLevel1,displayName,object,"{""text"":{""default"":""Region Level 1"",""es"":""Región Nivel 1""}}"
+Column,regionLevel2,displayName,object,"{""text"":{""default"":""Region Level 2"",""es"":""Región Nivel 2""}}"
+Column,regionLevel3,displayName,object,"{""text"":{""default"":""Region Level 3"",""es"":""Región Nivel 3""}}"
+Column,regionLevel4,displayName,object,"{""text"":{""default"":""Region Level 4"",""es"":""Región Nivel 4""}}"
+Column,regionLevel5,displayName,object,"{""text"":{""default"":""Region Level 5"",""es"":""Región Nivel 5""}}"
+FormType,default,FormType.formType,string,SURVEY
+SurveyUtil,default,SurveyUtil.formId,string,wrong_form
+Table,default,defaultViewType,string,LIST
+Table,default,detailViewFileName,string,config/tables/geographic_regions/html/geographic_regions_detail.html
+Table,default,displayName,object,"{""text"":{""default"":""Geographic Regions"",""es"":""Regiones geográficas""}}"
+Table,default,listViewFileName,string,config/tables/geographic_regions/html/geographic_regions_list.html
+Table,security,defaultAccessOnCreation,string,READ_ONLY
+Table,security,locked,boolean,true
+Table,security,unverifiedUserCanCreate,boolean,false
