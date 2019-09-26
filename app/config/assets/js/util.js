@@ -349,7 +349,7 @@ util.getKeyToAppendToColdChainURL = function(key, value, shouldBeFirst) {
                 result = '?' + prop + '=' + encodeURIComponent(adaptProps[prop]);
                 first = false;
             } else {
-                result += '&' + prop + '=' + encodeURIComponent(adaptProps[prop]);
+                result = '&' + prop + '=' + encodeURIComponent(adaptProps[prop]);
             }
         }
     }
