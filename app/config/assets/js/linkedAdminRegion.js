@@ -42,7 +42,7 @@ function display() {
         'click',
         function() {
             var filterQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegion, linkedRegionId);
-            filterQueryParams += filterQueryParams + util.getKeyToAppendToColdChainURL(util.adminRegionName,
+            filterQueryParams = filterQueryParams + util.getKeyToAppendToColdChainURL(util.adminRegionName,
                 linkedRegion, false);
             odkTables.launchHTML(null,
                 'config/assets/filterHealthFacilitiesByType.html' + filterQueryParams);
