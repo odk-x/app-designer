@@ -11,8 +11,8 @@ window.odkCommonDefinitions = {
     "select_region": {
       "string_token": "select_region",
       "text": {
-        "default": "Select Region:",
-        "es": "Seleccione Región:"
+        "default": "Select Region",
+        "es": "Seleccione Región"
       },
       "_row_num": 3
     },

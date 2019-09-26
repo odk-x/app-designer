@@ -15,10 +15,7 @@ async function display() {
     body.css('background-image', 'url(img/hallway.jpg)');
 
     var locale = odkCommon.getPreferredLocale();
-    $('#facility-inventory-by-grid').text(odkCommon.localizeText(locale, "facility_inventory_by_grid_power"));
-
-    $('#select-region').text(odkCommon.localizeText(locale, "select_region"));
-    $('#all-regions').text(odkCommon.localizeText(locale, "all_regions"));
+    $('#refrigerator-inventory-by-age').text(odkCommon.localizeText(locale, "refrigerator_inventory_by_age"));
 
     $('#select-facility-type').text(odkCommon.localizeText(locale, "select_facility_type"));
     $('#all-types').text(odkCommon.localizeText(locale, "all_types"));
@@ -86,7 +83,7 @@ async function display() {
 
             // For all selects after this - clear their options
             for (var regIdx = clickedAdminRegionLevel + 1; regIdx <= maxAdminRegionLevelNumber; regIdx++) {
-                var subAdminRegionId = facility_region_level + i;
+                var subAdminRegionId = facility_region_level + regIdx;
                 var subAdminRegion = $('#' +  subAdminRegionId);
                 subAdminRegion.empty();
 
@@ -95,7 +92,7 @@ async function display() {
                 subAdminRegion.append(subAllRegionOpt);
             }
 
-            var currRegionName = $(changedAdminRegionId + " option:selected" ).text();
+            var currRegionName = $(changedAdminRegionId + " option:selected").text();
             // Get options for subsequent region
             if (clickedAdminRegionLevel + 1 <= maxAdminRegionLevelNumber) {
                 // Set these select options as well
@@ -110,12 +107,13 @@ async function display() {
             }
         })
 
-
         var labelAdminRegion = $('<label>')
         var labelAdminRegionId = select_region_level + i;
         labelAdminRegion.attr('id', labelAdminRegionId);
         labelAdminRegion.attr('class', 'form-label');
         labelAdminRegion.attr('for', selectAdminRegionId);
+        var regionLabel = odkCommon.localizeText(locale, 'select_region') + i + ':';
+        labelAdminRegion.text(regionLabel);
 
         regionDiv.append(labelAdminRegion);
         regionDiv.append(selectAdminRegion);
