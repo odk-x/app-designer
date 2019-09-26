@@ -1,89 +1,72 @@
 'use strict';
 /* global odkTables, odkCommon, odkData, util */
 
-var adminKey = 'admin';
+var adminType = 'admin';
 var adminValue = 'Administrator Options';
 var locale = null;
+var supervisorGroup = 'GROUP_SUPERVISOR';
+var workerGroup = 'GROUP_WORKER';
+var administratorGroup = 'ROLE_ADMINISTER_TABLES';
+var GROUP_REGION_ = 'GROUP_REGION_';
+var maxLevelValue;
+var VIEW_HEALTH_FACILITIES_REFRIGERATORS = 'View Health Facilities/Refrigerators';
+var nextLevel = null;
+var currAdminRegion = null;
+var currAdminRegionId = null;
 
-function addMenuButton(key, value, label, divToAddButtonTo) {
+function addMenuButton(type, label, divToAddButtonTo, currAdminRegion, currAdminRegionId, nextLevel) {
     var button = $('<button>');
     button.attr('class', 'button');
     button.text(label);
-    if (key === util.leafRegion) {
+    if (type === util.linkedAdminRegion) {
         button.on('click', function () {
-            var queryParams = util.getKeyToAppendToColdChainURL(key, value);
-            odkTables.launchHTML(null,'config/assets/leafRegion.html' + queryParams);
+            var urlParams = util.getKeysToAppendToColdChainMenuURL(maxLevelValue, currAdminRegion,
+                currAdminRegionId);
+            odkTables.launchHTML(null, 'config/assets/linkedAdminRegion.html' + urlParams);
         });
-    } else if (key === util.region){
+    } else if (type === util.adminRegion) {
         button.on('click', function () {
-            var queryParams = util.getKeyToAppendToColdChainURL(key, value);
-            odkTables.launchHTML(null,'config/assets/index.html' + queryParams);
+            var urlParams = util.getKeysToAppendToColdChainMenuURL(maxLevelValue, currAdminRegion,
+                currAdminRegionId, nextLevel);
+            odkTables.launchHTML(null, 'config/assets/index.html' + urlParams);
         });
     } else {
+        // Admin options
         button.on('click', function () {
-            odkTables.launchHTML(null,'config/assets/coldchaindemo.html');
+            odkTables.launchHTML(null, 'config/assets/coldchaindemo.html');
         });
     }
-    
+
     $(divToAddButtonTo).append(button);
 }
 
-function successCB(result) {
-    for (var i = 0; i < result.getCount(); i++) {
-        var district = result.getData(i, 'admin_region');
-        addMenuButton(util.leafRegion, district, district, '#buttonsDiv');
-    }
-}
-
-function failCB(error) {
-    console.log('util.getDistrictsByAdminLevel2 failed with message: ' + error);
-}
-
-function showSubregionButtonsAndTitle(jsonRegion) {
+function showRegionButtonsAndTitle(jsonRegions) {
     // There are subregions so show them
     var header = $('#header1');
 
-    if (jsonRegion.hasOwnProperty('subRegions')) {
-        var subRegions = jsonRegion.subRegions;
-        for (var subRegCtr = 0; subRegCtr < subRegions.length; subRegCtr++) {
-            var subRegion = subRegions[subRegCtr];
-            var subRegionLabel = subRegion.label;
-            var subRegionToken = subRegion.token;
-            var localizeSubRegion = odkCommon.localizeText(locale, subRegionToken);
-            if (localizeSubRegion !== null && localizeSubRegion !== undefined) {
-                subRegionLabel = localizeSubRegion;
-            }
-            addMenuButton(util.region, subRegion.region, subRegionLabel, '#buttonsDiv');
+    for (var i = 0; i < jsonRegions.length; i++) {
+        var jsonRegion = jsonRegions[i];
+        var levelVal = jsonRegion['levelNumber'];
+        var regionLevelVal = util.regionLevel + levelVal;
+
+        if (levelVal >= maxLevelValue) {
+            addMenuButton(util.linkedAdminRegion, jsonRegion[regionLevelVal], '#buttonsDiv',
+                jsonRegion[regionLevelVal], jsonRegion['_id']);
+        } else {
+            var nLevelVal = parseInt(levelVal) + 1;
+            addMenuButton(util.adminRegion, jsonRegion[regionLevelVal], '#buttonsDiv',
+                jsonRegion[regionLevelVal], jsonRegion['_id'], nLevelVal);
         }
-        var hdrRegLab = jsonRegion.label;
-        var localizeHdrRegLab = odkCommon.localizeText(locale, jsonRegion.token);
+    }
+
+    if (currAdminRegion !== null && currAdminRegion !== undefined) {
+        var hdrRegLab = currAdminRegion;
+        var hdrRegToken = currAdminRegion.toString().toLowerCase().replace(' ', '_');
+        var localizeHdrRegLab = odkCommon.localizeText(locale, hdrRegToken);
         if (localizeHdrRegLab !== null && localizeHdrRegLab !== undefined) {
             hdrRegLab = localizeHdrRegLab;
         }
         header.text(hdrRegLab);
-
-    // We got the entire array of regions so show first level
-    } else if (Array.isArray(jsonRegion)) {
-        // We are an admin so show all the regions
-        for (var regCtr = 0; regCtr < jsonRegion.length; regCtr++) {
-            var reg = jsonRegion[regCtr];
-            var regLabel = reg.label;
-            var regToken = reg.token;
-            var localizeRegion = odkCommon.localizeText(locale, regToken);
-            if (localizeRegion !== null && localizeRegion !== undefined) {
-                regLabel = localizeRegion;
-            }
-            addMenuButton(util.region, reg.region, regLabel, '#buttonsDiv');
-        }
-    // There are no more subregions so now we need to get the districts
-    } else {
-        var hdrLab = jsonRegion.label;
-        var localHdr = odkCommon.localizeText(locale, jsonRegion.token);
-        if (localHdr !== null && localHdr !== undefined) {
-            hdrLab = localHdr;
-        }
-        header.text(hdrLab);
-        util.getDistrictsByAdminLevel2(jsonRegion.label, successCB, failCB);
     }
 }
 
@@ -97,12 +80,14 @@ function showLogin(descTextToDisplay, buttonTextToDisplay) {
     loginButton.text(buttonTextToDisplay);
     loginButton.attr('class', 'button');
     $('#buttonsDiv').append(loginButton);
-    loginButton.on('click', function() {
-        odkCommon.doAction(null, 
-            'org.opendatakit.services.sync.actions.activities.SyncActivity', 
-            {'extras': {'showLogin': 'true'}, 
-                'componentPackage': 'org.opendatakit.services', 
-                'componentActivity': 'org.opendatakit.services.sync.actions.activities.SyncActivity'});
+    loginButton.on('click', function () {
+        odkCommon.doAction(null,
+            'org.opendatakit.services.sync.actions.activities.SyncActivity',
+            {
+                'extras': {'showLogin': 'true'},
+                'componentPackage': 'org.opendatakit.services',
+                'componentActivity': 'org.opendatakit.services.sync.actions.activities.SyncActivity'
+            });
     });
 }
 
@@ -120,59 +105,98 @@ function updateStaticDisplay() {
     $('body').css('background-image', 'url(' + fileUri + ')');
 }
 
-function checkDefaultGroupForMenuOptions() {
+async function checkDefaultGroupForMenuOptions() {
     // The default group determines what menu to jump to
-    odkData.getDefaultGroup(function(r) {
-        r = r.getDefaultGroup();
-        var regionJSON = null;
+    var getDefaultGroupPromise = new Promise(function (resolve, reject) {
+        return odkData.getDefaultGroup(resolve, reject);
+    });
 
-        if (r === null) {
-            // No default group - login
-            showLogin('No Default Group For This User.  Please Log In With A Different User', 'Log In');
+    var r = await getDefaultGroupPromise;
+    r = r.getDefaultGroup();
+    var regionJSON = null;
+
+    if (r === null) {
+        // No default group - login
+        showLogin('No Default Group For This User.  Please Log In With A Different User', 'Log In');
 
         // default group given
-        } else if (r.indexOf('GROUP_REGION_') === 0) {
-            var region = r.replace('GROUP_REGION_', '');
-            // replace all occurrences
-            var regionAsRole = region.replace(/_/g, ' ');
-            
-            // Get menu options from default group
-            regionJSON = util.getMenuOptions(regionAsRole);
-            
-            // default group matches JSON map of admin hierarchy
-            if (regionJSON !== null) {
-                showSubregionButtonsAndTitle(regionJSON);
+        // Special case if we want to go off of regions
+    } else if (r.indexOf(GROUP_REGION_) === 0) {
+        var region = r.replace(GROUP_REGION_, '');
+        // replace all occurrences
+        var regionAsRole = region.replace(/_/g, ' ');
+
+        // Find region
+        var levelNum = await util.findAdminRegionLevel(regionAsRole);
+        // Increment the level to get the subregions for this region
+        levelNum++;
+
+        // Get menu options from default group
+        regionJSON = await util.getMenuOptions(levelNum, regionAsRole);
+
+        // default group matches JSON map of admin hierarchy
+        if (regionJSON !== null) {
+            showRegionButtonsAndTitle(regionJSON);
 
             // We don't recognize this region
-            } else {
-                showLogin('User Default Group Not Recognized. Please Log In', 'Log In');
-            }
-        
+        } else {
+            showLogin('User Default Group Not Recognized. Please Log In', 'Log In');
+        }
+
         // We have an admin - we would show everything
-        } else if (r.indexOf('ROLE_ADMINISTER_TABLES') === 0) {
-            regionJSON = util.getMenuOptions(null);
-            showSubregionButtonsAndTitle(regionJSON);
+        // Or we have a supervisor or worker - show everything but admin options
+    } else if (r.indexOf(administratorGroup) === 0 ||
+        r.indexOf(supervisorGroup) === 0 || r.indexOf(workerGroup)) {
+        // Start at the beginning
+        regionJSON = await util.getMenuOptions(util.firstLevelNumber);
+        showRegionButtonsAndTitle(regionJSON);
+
+        if (r.indexOf(administratorGroup) === 0) {
             var adminTxt = adminValue;
             var localizeAdminTxt = odkCommon.localizeText(locale, "administrator_options");
             if (localizeAdminTxt !== null && localizeAdminTxt !== undefined) {
                 adminTxt = localizeAdminTxt;
             }
-            addMenuButton(adminKey, adminTxt, adminTxt, '#buttonsDiv');
-        } else {
-            showLogin('User Is Not Authorized. Please Log In', 'Log In');
+            addMenuButton(adminType, adminTxt, '#buttonsDiv');
         }
-    });
+    } else {
+        showLogin('User Is Not Authorized. Please Log In', 'Log In');
+    }
 }
 
-function display() {
-    locale = odkCommon.getPreferredLocale(); 
+async function display() {
+    locale = odkCommon.getPreferredLocale();
     updateStaticDisplay();
-    
-    var reg = util.getQueryParameter(util.region);
-    if (reg === null) {
+
+    var tempMaxLevel = util.getQueryParameter(util.maxLevelNumber);
+    if (tempMaxLevel !== null && tempMaxLevel !== undefined) {
+        maxLevelValue = tempMaxLevel;
+    } else {
+        tempMaxLevel = await util.getMaxLevel();
+        if (tempMaxLevel !== null && tempMaxLevel !== undefined) {
+            maxLevelValue = tempMaxLevel;
+        } else {
+            maxLevelValue = util.maxLevelAppDepth;
+        }
+    }
+
+    nextLevel = util.getQueryParameter(util.nextRegionLevelNumber);
+    currAdminRegion = util.getQueryParameter(util.adminRegion);
+    currAdminRegionId = util.getQueryParameter(util.adminRegionId);
+
+    if (nextLevel > maxLevelValue) { nextLevel = null; }
+
+    if (nextLevel == null) {
         checkDefaultGroupForMenuOptions();
     } else {
-        var regJSON = util.getMenuOptions(reg); 
-        showSubregionButtonsAndTitle(regJSON);  
+        var regJSON = await util.getMenuOptions(nextLevel, currAdminRegion, maxLevelValue);
+        showRegionButtonsAndTitle(regJSON);
+    }
+
+    // Add in the leafRegion button if there are health facilities associated at this level
+    var facilityCnt = await util.getFacilityCountByAdminRegion(currAdminRegionId);
+    if (facilityCnt > 0) {
+        addMenuButton(util.linkedAdminRegion, VIEW_HEALTH_FACILITIES_REFRIGERATORS, '#buttonsDiv', currAdminRegion,
+            currAdminRegionId);
     }
 }

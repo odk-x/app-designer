@@ -20,18 +20,20 @@ function display() {
     $('#view-models').text(odkCommon.localizeText(locale, "view_refrigerator_models"));
 
     var hdr1 = $('#header1');
-    var leaf = util.getQueryParameter(util.leafRegion);
-    if (leaf !== null) {
-        hdr1.text(leaf);
+    var linkedRegion = util.getQueryParameter(util.adminRegion);
+    var linkedRegionId = util.getQueryParameter(util.adminRegionId);
+
+    if (linkedRegion !== null) {
+        hdr1.text(linkedRegion);
     }
 
     var viewFacilitiesButton = $('#view-facilities');
     viewFacilitiesButton.on(
         'click',
         function() {
-            var uriParams = util.getKeysToAppendToColdChainURL(null, null, leaf, null);
-             odkTables.openTableToMapView(null, 'health_facility', 
-                adminRegionQueryStr, [leaf], 'config/tables/health_facility/html/hFacility_list.html' + uriParams);
+            var uriParams = util.getKeyToAppendToColdChainURL(util.adminRegion, linkedRegionId);
+             odkTables.openTableToMapView(null, 'health_facility',
+                adminRegionQueryStr, [linkedRegionId], 'config/tables/health_facility/html/hFacility_list.html' + uriParams);
         }
     );
 
@@ -39,8 +41,10 @@ function display() {
     filterFacilitiesButton.on(
         'click',
         function() {
-            var filterQueryParams = util.getKeyToAppendToColdChainURL(util.leafRegion, leaf);
-            odkTables.launchHTML(null, 
+            var filterQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegion, linkedRegionId);
+            filterQueryParams += filterQueryParams + util.getKeyToAppendToColdChainURL(util.adminRegionName,
+                linkedRegion, false);
+            odkTables.launchHTML(null,
                 'config/assets/filterHealthFacilitiesByType.html' + filterQueryParams);
         }
     );
@@ -49,19 +53,19 @@ function display() {
     viewRefrigeratorsButton.on(
         'click',
         function() {
-            var frigQueryParams = util.getKeyToAppendToColdChainURL(util.leafRegion, leaf);
-            odkTables.launchHTML(null, 
+            var frigQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegion, linkedRegionId);
+            odkTables.launchHTML(null,
                 'config/tables/refrigerators/html/refrigerators_list.html' + frigQueryParams);
         }
     );
 
     var viewServiceRefrigeratorsButton = $('#view-service-refrigerators');
     viewServiceRefrigeratorsButton.on(
-        'click', 
+        'click',
         function() {
-            var serviceQueryParams = util.getKeyToAppendToColdChainURL(util.leafRegion, leaf);
-            
-            odkTables.launchHTML(null, 
+            var serviceQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegion, linkedRegionId);
+
+            odkTables.launchHTML(null,
                 'config/tables/refrigerators/html/refrigerators_service_list.html' + serviceQueryParams);
     });
 

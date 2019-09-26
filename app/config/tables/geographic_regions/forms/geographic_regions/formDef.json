@@ -97,7 +97,7 @@
         "_row_num": 6
       },
       {
-        "type": "text",
+        "type": "integer",
         "name": "levelNumber",
         "display": {
           "title": {
@@ -524,7 +524,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "integer",
         "displayName": {
           "text": {
             "default": "Level Number",
@@ -748,7 +748,7 @@
             "promptIdx": 4
           },
           {
-            "type": "text",
+            "type": "integer",
             "name": "levelNumber",
             "display": {
               "title": {
@@ -767,7 +767,7 @@
             "_row_num": 7,
             "__rowNum__": 6,
             "_token_type": "prompt",
-            "_type": "text",
+            "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen7",
             "promptIdx": 5
           },
@@ -1261,7 +1261,7 @@
             "section_name": "survey"
           }
         ],
-        "type": "string",
+        "type": "integer",
         "displayName": {
           "text": {
             "default": "Level Number",

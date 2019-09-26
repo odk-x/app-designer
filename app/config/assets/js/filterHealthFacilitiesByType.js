@@ -12,7 +12,7 @@ var tableId = 'health_facility';
 function showFacilityTypeButton(facilityType, facilityTypeCount) {
     var button = $('<button>');
     button.attr('class', 'button');
-    
+
     // Translate facilityType to the appropriate language
     var locale = odkCommon.getPreferredLocale();
     var facTxt = odkCommon.localizeText(locale, facilityType);
@@ -27,15 +27,15 @@ function showFacilityTypeButton(facilityType, facilityTypeCount) {
 
         if (leafRegionValue !== null) {
             queryParams = [facilityType, leafRegionValue];
-        } 
+        }
 
         var uriParams = util.getKeysToAppendToColdChainURL(facilityType, null, leafRegionValue, null);
-        odkTables.openTableToMapView(null, tableId, 
-            queryStr, queryParams, 
+        odkTables.openTableToMapView(null, tableId,
+            queryStr, queryParams,
             'config/tables/health_facility/html/hFacility_list.html' + uriParams );
     });
-    
-    
+
+
     $('#buttonsDiv').append(button);
 }
 
@@ -44,12 +44,12 @@ function successCB(result) {
         var facilityType = result.getData(i, 'facility_type');
         var facilityTypeCount = result.getData(i, 'count(*)');
 
-        showFacilityTypeButton(facilityType, facilityTypeCount);   
+        showFacilityTypeButton(facilityType, facilityTypeCount);
     }
 }
 
 function failCB(error) {
-    console.log('filterHealthFacilitiesByType: util.getFacilityTypesByDistrict failed: ' + error);
+    console.log('filterHealthFacilitiesByType: util.getFacilityTypesByAdminRegion failed: ' + error);
 }
 
 function display() {
@@ -60,13 +60,18 @@ function display() {
 
     var headerDiv = $('#header');
 
-    leafRegionValue = util.getQueryParameter(util.leafRegion);
-    if (leafRegionValue !== null) {
-        headerDiv.text(leafRegionValue);
+    leafRegionValue = util.getQueryParameter(util.adminRegion);
+    var leafRegionName = util.getQueryParameter(util.adminRegionName);
+    if (leafRegionValue !== null && leafRegionValue !== undefined) {
+        if (leafRegionName !== null && leafRegionName !== undefined) {
+            headerDiv.text(leafRegionName);
+        } else {
+            headerDiv.text(leafRegionValue);
+        }
         queryStr = queryStr + adminRegionQueryStr;
     } else {
         headerDiv.text(util.formatDisplayText(tableId));
     }
 
-    util.getFacilityTypesByDistrict(leafRegionValue, successCB, failCB);
+    util.getFacilityTypesByAdminRegion(leafRegionValue, successCB, failCB);
 }

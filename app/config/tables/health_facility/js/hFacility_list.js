@@ -4,17 +4,6 @@
 /* global $, odkTables */
 'use strict';
 
-// if (JSON.parse(odkCommon.getPlatformInfo()).container === 'Chrome') {
-//     console.log('Welcome to Tables debugging in Chrome!');
-//     $.ajax({
-//         url: odkCommon.getFileAsUrl('output/debug/health_facility_data.json'),
-//         async: false,  // do it first
-//         success: function(dataObj) {
-//             window.data.setBackingObject(dataObj);
-//         }
-//     });
-// }
-
 // This will map types of refrigerators.
 var typeNameMap = {};
 var idxStart = -1;

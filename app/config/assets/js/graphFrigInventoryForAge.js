@@ -3,8 +3,9 @@
  */
 'use strict';
 /* global odkTables */
+// TODO: Get rid of these duplicate values!!
 var noOptionSelectString = "none";
-var regionQueryString = 'regionLevel2 = ?';
+var regionQueryString = 'admin_region = ?';
 var typeQueryString = 'facility_type = ?';
 var powerSourceQueryString = 'power_source = ?';
 var numOfFrigsLabel = "Number of Refrigerators";
@@ -103,7 +104,7 @@ function display() {
     }
 
     // Get the value of the region
-    var facilityRegion = util.getQueryParameter(util.regionLevel2);
+    var facilityRegion = util.getQueryParameter(util.adminRegion);
     if (facilityRegion !== noOptionSelectString && facilityRegion !== undefined &&
         facilityRegion !== null) {
         if (selection === null) {

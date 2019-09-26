@@ -9,92 +9,252 @@ var util = {};
 util.facilityType = 'facility_type';
 util.regionLevel2 = 'regionLevel2';
 util.powerSource = 'power_source';
-util.region = 'region';
-util.leafRegion = 'admin_region';
+util.regionLevel = 'regionLevel';
+util.nextRegionLevelNumber = 'next_region_level_number';
+util.adminRegionId = 'admin_region_id';
+util.adminRegion = 'admin_region';
+util.adminRegionName = 'admin_region_name';
 util.rowId = '_id';
 util.modelRowId = 'model_row_id';
 util.refrigeratorId = 'refrigerator_id';
 util.facilityRowId = 'facility_row_id';
 util.maintenancePriority = 'maintenance_priority';
-util.adminRegions = [
-        {'token':'central', 'label': 'Central', 'region':'Central', 
-            'subRegions': [{'token':'central_east', 'label':'Central East', 'region':'Central East'},
-                           {'token':'central_west', 'label':'Central West', 'region':'Central West'}]},
-        {'token':'north', 'label':'North', 'region':'North'},
-        {'token':'south', 'label':'South', 'region':'South', 
-            'subRegions':[{'token':'south_east', 'label':'South East', 'region':'South East'},
-                          {'token':'south_west', 'label':'South West', 'region':'South West'}]}
-    ];
+util.maxLevelNumber = 'max_level_number';
+util.linkedAdminRegion = 'linked_admin_region';
+util.firstLevelNumber = 1;
 
+// The maximum possible depth for a geographic hierarchy
+util.maxLevelAppDepth = 5;
+
+util.getMaxLevel = function() {
+    var queryStr = 'SELECT MAX(levelNumber) FROM geographic_regions';
+
+    return new Promise(function(resolve, reject) {
+        odkData.arbitraryQuery('geographic_regions',
+            queryStr,
+            null,
+            null,
+            null,
+            resolve,
+            reject);
+    }).then(function (result) {
+        if (result !== null) {
+            return result.get('MAX(levelNumber)');
+        }
+    }).catch(function(reason) {
+       var error = 'getMaxLevel: Failed with exception ' + reason;
+       console.log(error);
+    });
+
+};
+
+util.findAdminRegionLevel = function(adminRegion) {
+    var queryStr = 'SELECT MIN(levelNumber) from geographic_regions WHERE regionLevel1 = ?' +
+        ' OR regionLevel2 = ? OR regionLevel3 = ? OR regionLevel4 = ? OR regionLevel5 = ?';
+
+    var queryParam = [];
+    var i;
+    for (i = 0; i < util.maxLevelAppDepth; i++) {
+        queryParam.push(adminRegion);
+    }
+
+    return new Promise(function(resolve, reject) {
+        odkData.arbitraryQuery('geographic_regions',
+            queryStr,
+            queryParam,
+            null,
+            null,
+            resolve,
+            reject);
+    }).then(function(result) {
+        if (result !== null) {
+             return result.get('levelNumber');
+        }
+
+    }).catch(function (reason) {
+        var error = 'findAdminRegionLevel: Failed with exception ' + reason;
+        console.log(error);
+    });
+
+};
 
 /**
- * Return the menu options for the key.  If no value
- * is passed in return all of the options.
-*/
-util.getMenuOptions = function(key) {
-    return util.getMenuOptionsHelper(key, util.adminRegions);
-};
+ * Return the menu options promise based on the level number and the corresponding regionLevel.
+ * The user can optionally pass in regionLevels
+ */
+util.getNextAdminRegionsFromCurrAdminRegionPromise = function (nextLevel, currAdminRegion) {
+    var regionLevelVal = util.regionLevel + nextLevel;
+    var queryStr = 'SELECT '+ regionLevelVal +', _id, levelNumber FROM geographic_regions WHERE levelNumber = ?';
+    var queryParam = [nextLevel];
 
-util.getMenuOptionsHelper = function(key, menuObj) {
-    var that = this;
-
-    if (key === null || key === undefined) {
-        return menuObj;
-    }
-
-    if (menuObj === null || menuObj === undefined) {
-        return null;
-    }
-
-    var len = menuObj.length;
-    var keyToUse = key.toUpperCase();
-
-    for (var i = 0; i < len; i++) {
-        var regKey = menuObj[i]['region'].toUpperCase();
-
-        if (regKey === keyToUse) {
-            return menuObj[i];
-        }
-
-        if (keyToUse.indexOf(regKey) !== -1) {
-            if (menuObj[i].hasOwnProperty('subRegions')) {
-                var subReg = that.getMenuOptionsHelper(key, menuObj[i]['subRegions']);
-                if (subReg !== null) {
-                    return subReg;
-                }
-            } 
+    if (currAdminRegion !== undefined && currAdminRegion !== null) {
+        var prevLevel = nextLevel - 1;
+        if (prevLevel > 0) {
+            var prevRegionLevelVal = util.regionLevel + prevLevel;
+            queryStr += ' AND ' + prevRegionLevelVal + '= ?';
+            queryParam.push(currAdminRegion);
         }
     }
 
-    return null;
+    var getNextRegionPromise = new Promise(function(resolve, reject) {
+        odkData.arbitraryQuery('geographic_regions',
+            queryStr,
+            queryParam,
+            null,
+            null,
+            resolve,
+            reject);
+    });
+
+    return getNextRegionPromise;
 };
 
-util.getFacilityTypesByDistrict = function(district, successCB, failureCB) {
+
+
+
+util.getMenuOptions = function (nextLevel, currAdminRegion, maxLevel) {
+
+    var jsonRegions = [];
+
+    return util.getNextAdminRegionsFromCurrAdminRegionPromise(nextLevel, currAdminRegion)
+        .then(function (result) {
+        // If there is only 1 choice, make it
+            // Assuming that this only happens between no more than 2 levels
+        if (result.getCount() === 1 && nextLevel < util.maxLevelAppDepth &&
+            (maxLevel !== null && maxLevel !== undefined && nextLevel <= maxLevel)) {
+            var nextNextLevel = parseInt(nextLevel) + 1;
+            var promiseRegionLevelVal = util.regionLevel + nextLevel;
+            var nextRegion = result.get(promiseRegionLevelVal);
+            return util.getNextAdminRegionsFromCurrAdminRegionPromise(nextNextLevel, nextRegion).then(function (result) {
+                // return jsonObjects
+                jsonRegions = util.processMenuOptions(result);
+                return(jsonRegions);
+            });
+        } else {
+            // return jsonObjects
+            jsonRegions = util.processMenuOptions(result);
+            return(jsonRegions);
+        }
+    }).catch(function (reason) {
+        var error = 'getMenuOptions: Failed with exception ' + reason;
+        console.log(error);
+    });
+
+};
+
+util.processMenuOptions = function(result) {
+    var jsonArray = [];
+    if (result === null || result === undefined) {
+        return jsonArray;
+    }
+
+    for (var i = 0; i < result.getCount(); i++) {
+        var jsonRegion = {};
+        var cols = result.getColumns();
+        for (var j = 0; j < cols.length; j++) {
+            jsonRegion[cols[j]] = result.getData(i, cols[j]);
+        }
+        jsonArray.push(jsonRegion);
+    }
+
+    return jsonArray;
+}
+
+util.getFacilityCountByAdminRegion = function(adminRegionId) {
+    return new Promise(function(resolve, reject) {
+        var queryStr = 'SELECT COUNT(*) FROM health_facility ' +
+            'JOIN geographic_regions ON geographic_regions._id = health_facility.admin_region ' +
+            'WHERE geographic_regions._id = ?';
+        var queryParam = [adminRegionId];
+
+        odkData.arbitraryQuery('geographic_regions',
+            queryStr,
+            queryParam,
+            null,
+            null,
+            resolve, reject);
+
+    }).then(function(result) {
+        if (result !== null && result.getCount() == 1) {
+            resolve(result.get('COUNT(*)'));
+        }
+    }).catch(function (reason) {
+        var error = 'getFacilityCountByAdminRegion: Failed with exception ' + reason;
+        console.log(error);
+    });
+
+}
+
+util.getOneFacilityRow = function() {
+    return new Promise(function(resolve, reject) {
+        var queryStr = 'SELECT * FROM health_facility';
+
+        odkData.arbitraryQuery('health_facility',
+            queryStr,
+            null,
+            1,
+            null,
+            resolve, reject);
+
+    }).then(function(result) {
+        if (result !== null) {
+            return result;
+        }
+    }).catch(function (reason) {
+        var error = 'getOneFacilityRow: Failed with exception ' + reason;
+        console.log(error);
+    });
+
+}
+
+util.getOneRefrigeratorRow = function() {
+    return new Promise(function(resolve, reject) {
+        var queryStr = 'SELECT * FROM refrigerators';
+
+        odkData.arbitraryQuery('refrigerators',
+            queryStr,
+            null,
+            1,
+            null,
+            resolve, reject);
+
+    }).then(function(result) {
+        if (result !== null) {
+            return result;
+        }
+    }).catch(function (reason) {
+        var error = 'getOneRefrigeratorRow: Failed with exception ' + reason;
+        console.log(error);
+    });
+
+}
+
+util.getFacilityTypesByAdminRegion = function(adminRegion, successCB, failureCB) {
     var queryStr = 'SELECT facility_type, count(*) FROM health_facility';
-    var whereStr = ' WHERE admin_region = ?'; 
+    var whereStr = ' WHERE admin_region = ?';
     var groupByStr = ' GROUP BY facility_type';
     var queryParam = [];
 
-    if (district !== null && district !== undefined && district.length > 0) {
-        queryParam = [district];
+    if (adminRegion !== null && adminRegion !== undefined && adminRegion.length > 0) {
+        queryParam = [adminRegion];
         queryStr = queryStr + whereStr;
     }
 
     queryStr = queryStr + groupByStr;
-    odkData.arbitraryQuery('health_facility', 
+    odkData.arbitraryQuery('health_facility',
         queryStr,
         queryParam,
-        null, 
+        null,
         null,
         successCB,
         failureCB);
 };
 
 util.getDistrictsByAdminLevel2 = function(adminLevel2, successCB, failureCB) {
-    odkData.arbitraryQuery('health_facility', 
+    odkData.arbitraryQuery('health_facility',
         'SELECT admin_region FROM health_facility WHERE regionLevel2 = ? GROUP BY admin_region',
         [adminLevel2],
-        null, 
+        null,
         null,
         successCB,
         failureCB);
@@ -125,7 +285,7 @@ util.getAllQueryParameters = function(key) {
         } else {
             var parsedKey = keys[i].substring(0, keyStrIdx);
             uriParams[parsedKey] = decodeURIComponent(keys[i].substring(keyStrIdx+1, keys[i].length));
-        
+
         }
     }
 
@@ -221,7 +381,7 @@ util.getKeysToAppendToColdChainURL = function(
     }
 
     if (adminRegion !== null && adminRegion !== undefined && adminRegion.length !== 0) {
-        adaptProps[that.leafRegion] = adminRegion;
+        adaptProps[that.adminRegion] = adminRegion;
     }
 
     if (powerSource !== null && powerSource !== undefined && powerSource.length !== 0) {
@@ -236,6 +396,52 @@ util.getKeysToAppendToColdChainURL = function(
                 first = false;
             } else {
                 result += '&' + prop + '=' + encodeURIComponent(adaptProps[prop]);
+            }
+        }
+    }
+    return result;
+};
+
+/**
+ * Get a string to append to a url that will contain information the date and
+ * time. The values can then be retrieved using getQueryParameter.
+ */
+util.getKeysToAppendToColdChainMenuURL = function(
+    maxLevel,
+    currAdminRegion,
+    currAdminRegionId,
+    nextLevel) {
+
+    var that = this;
+    var first = true;
+    var result;
+    var urlParams = {};
+
+    // Initialize the properties object
+    if (maxLevel !== null && maxLevel !== undefined && maxLevel.length !== 0) {
+        urlParams[that.maxLevelNumber] = maxLevel;
+    }
+
+    if (nextLevel !== null && nextLevel !== undefined && nextLevel.length !== 0) {
+        urlParams[that.nextRegionLevelNumber] = nextLevel;
+    }
+
+    if (currAdminRegion !== null && currAdminRegion !== undefined && currAdminRegion.length !== 0) {
+        urlParams[that.adminRegion] = currAdminRegion;
+    }
+
+    if (currAdminRegionId !== null && currAdminRegionId !== undefined && currAdminRegionId.length !== 0) {
+        urlParams[that.adminRegionId] = currAdminRegionId;
+    }
+
+    for (var param in urlParams) {
+        if (urlParams[param] !== null && urlParams[param] !== undefined) {
+            if (first)
+            {
+                result = '?' + param + '=' + encodeURIComponent(urlParams[param]);
+                first = false;
+            } else {
+                result += '&' + param + '=' + encodeURIComponent(urlParams[param]);
             }
         }
     }
@@ -269,7 +475,7 @@ util.formatDisplayText = function(txt) {
 util.formatDate = function(txt) {
     if (txt === null || txt === undefined || txt.length === 0) {
         return null;
-    } 
+    }
 
     var dateToUse = txt.indexOf('T') > 0 ? txt.substring(0, txt.indexOf('T')) : txt;
     return dateToUse;
@@ -292,14 +498,14 @@ util.formatColIdForDisplay = function(colId, index, resultSet, applyFormat) {
     // Format for date
     var meta = resultSet.getMetadata();
     var elementMetadata = meta.dataTableModel[colId];
-    if (elementMetadata !== undefined && elementMetadata !== null && 
+    if (elementMetadata !== undefined && elementMetadata !== null &&
         elementMetadata.elementType === 'date') {
         var dateToUse = resultSet.getData(index, colId);
         if (dateToUse !== null && dateToUse !== undefined) {
             if (applyFormat) {
                 dateToUse = util.formatDate(dateToUse);
-            } 
-        } 
+            }
+        }
         return dateToUse;
     }
 
@@ -308,8 +514,8 @@ util.formatColIdForDisplay = function(colId, index, resultSet, applyFormat) {
         if (applyFormat) {
            textToDisplay = util.formatDisplayText(textToDisplay);
         }
- 
-        return textToDisplay;     
+
+        return textToDisplay;
     }
     return '';
 
@@ -338,9 +544,9 @@ util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat) {
         if (dateToUse !== null && dateToUse !== undefined) {
             if (applyFormat) {
                 dateToUse = util.formatDate(dateToUse);
-            } 
+            }
             $(idOfElement).text(dateToUse);
-        } 
+        }
         return;
     }
 
@@ -349,8 +555,8 @@ util.showIdForDetail = function(idOfElement, colId, resultSet, applyFormat) {
         if (applyFormat) {
            textToDisplay = util.formatDisplayText(textToDisplay);
         }
- 
-        $(idOfElement).text(textToDisplay);     
+
+        $(idOfElement).text(textToDisplay);
     }
 
 };

@@ -3,9 +3,6 @@
  */
 'use strict';
 /* global odkTables */
-var noOptionSelectString = "none";
-var regionQueryString = 'regionLevel2 = ?';
-var typeQueryString = 'facility_type = ?';
 
 function display() {
 
@@ -25,7 +22,7 @@ function display() {
     $('#south-east').text(odkCommon.localizeText(locale, "south_east"));
 
     $('#select-facility-type').text(odkCommon.localizeText(locale, "select_facility_type"));
-    $('#all-types').text(odkCommon.localizeText(locale, "all_types"));  
+    $('#all-types').text(odkCommon.localizeText(locale, "all_types"));
     $('#central-hospital').text(odkCommon.localizeText(locale, "select_region"));
     $('#community-hospital').text(odkCommon.localizeText(locale, "community_hospital"));
     $('#dispensary').text(odkCommon.localizeText(locale, "dispensary"));
