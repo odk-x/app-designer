@@ -4,10 +4,14 @@
 'use strict';
 /* global odkTables */
 var noOptionSelectString = "none";
-var regionQueryString = 'regionLevel2 = ?';
 var typeQueryString = 'facility_type = ?';
 var tableId = 'health_facility';
 var healthFacilityData = {};
+
+var graphPowerQueryStr = 'SELECT health_facility.grid_power_availability, COUNT(*) FROM health_facility ' +
+    'JOIN geographic_regions ON health_facility.admin_region = geographic_regions._id';
+
+var graphPowerQueryGroupBy = ' GROUP BY health_facility.grid_power_availability';
 
 function healthFacilityCBSuccess(result) {
     healthFacilityData = result;
@@ -26,37 +30,26 @@ function display() {
     $('#facility-inventory-by-grid-power').text(odkCommon.localizeText(locale, "facility_inventory_by_grid_power"));
 
     // Get the value of the type
-    var selection = null;
-    var selectionArgs = null;
+    var query = graphPowerQueryStr;
+    var queryParams = [];
 
     // Get the value of the type
     var facilityType = util.getQueryParameter(util.facilityType);
-    if (facilityType !== noOptionSelectString && facilityType !== undefined &&
-        facilityType !== null) {
-        selection = typeQueryString;
-        selectionArgs = [];
-        selectionArgs.push(facilityType);
-    }
+    query = util.addSelAndSelArgs(query, queryParams, typeQueryString, facilityType);
 
     // Get the value of the region
-    var facilityRegion = util.getQueryParameter(util.regionLevel2);
-    if (facilityRegion !== noOptionSelectString && facilityRegion !== undefined &&
-        facilityRegion !== null) {
-        if (selection === null) {
-            selection = regionQueryString;
-        } else {
-            selection += ' AND ' + regionQueryString;
-        }
+    var adminLevel = util.getQueryParameter(util.adminRegionLevel);
+    var geographicRegionField = util.regionLevel + adminLevel;
 
-        if (selectionArgs === null) {
-            selectionArgs = [];
-        }
+    // Get the value of the region
+    var adminReg = util.getQueryParameter(util.adminRegion);
+    var geoQueryStr = 'geographic_regions.' + geographicRegionField + ' = ?';
+    query = util.addSelAndSelArgs(query, queryParams, geoQueryStr, adminReg);
 
-        selectionArgs.push(facilityRegion);
-    }
+    query += graphPowerQueryGroupBy;
 
-    odkData.query(tableId, selection, selectionArgs, null, null, null, null, null, null, true,
-        healthFacilityCBSuccess, healthFacilityCBFailure);
+    odkData.arbitraryQuery(tableId, query, queryParams, null, null, healthFacilityCBSuccess,
+        healthFacilityCBFailure);
 }
 
 function render() {
@@ -102,10 +95,10 @@ function displayHealthFacilityGridPower() {
         if (idx === -1) {
             var hFacility = {};
             hFacility.x = healthFacilityData.getData(i, 'grid_power_availability');
-            hFacility.y = 1;
+            hFacility.y = healthFacilityData.getData(i, 'COUNT(*)');
             dataJ.push(hFacility);
         } else {
-            dataJ[idx].y++;
+            dataJ[idx].y += healthFacilityData.getData(i, 'COUNT(*)');
         }
     }
 
