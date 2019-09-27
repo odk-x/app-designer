@@ -10,11 +10,14 @@
         <script type="text/javascript" src="libs/jquery-3.4.1.js"></script>
         <script type="text/javascript" src="commonDefinitions.js"></script>
         <script type="text/javascript" src="../../system/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
-
-        <script type="text/javascript" src="js/filterFacilityInventoryForGridPower.js"></script>
         <script type="text/javascript" src="js/util.js"></script>
+        <script type="text/javascript" src="js/regionDisplayUtil.js"></script>
+        <script type="text/javascript" src="js/healthFacilityTypeUtil.js"></script>
+        <script type="text/javascript" src="js/filterFacilityInventoryForGridPower.js"></script>
+
     </head>
 
     <body id="main">
@@ -24,31 +27,12 @@
             <div class="container">
                 <form>
                     <div class="form-group">
-                        <label id="select-region" class="form-label" for="facility_region">Select Region:</label>
-                        <select class="form-control" id="facility_region">
-                            <option id="all-regions" selected value="none">All Regions</option>
-                            <option id="north" value="North">North</option>
-                            <option id="central-west" value="Central West">Central West</option>
-                            <option id="central-east" value="Central East">Central East</option>
-                            <option id="south-west" value="South West">South West</option>
-                            <option id="south-east" value="South East">South East</option>
-                        </select>
-
                         <label id="select-facility-type" class="form-label" for="facility_type">Select Facility Type:</label>
                         <select class="form-control" id="facility_type">
                             <option id="all-types" selected value="none">All Types</option>
-                            <option id="central-hospital" value="central_hospital">Central Hospital</option>
-                            <option id="community-hospital" value="community_hospital">Community Hospital</option>
-                            <option id="dispensary" value="dispensary">Dispensary</option>
-                            <option id="district-hospital" value="district_hospital">District Hospital</option>
-                            <option id="district-vaccine-store" value="district_vaccine_store">District Vaccine Store</option>
-                            <option id="health-center" value="health_center">Health Center</option>
-                            <option id="health-post" value="health_post">Health Post</option>
-                            <option id="hospital" value="hospital">Hospital</option>
-                            <option id="national-vaccine-store" value="national_vaccine_store">National Vaccine Store</option>
-                            <option id="regional-vaccine-store" value="regional_vaccine_store">Regional Vaccine Store</option>
-                            <option id="rural-hospital" value="rural_hospital">Rural Hospital</option>
                         </select>
+
+                        <div id="regionDiv"></div>
 
                         <button id="filter-facilities-by-region-type" type="submit" class="btn btn-launch btn-filter btn-default">Filter</button>
                     </div>

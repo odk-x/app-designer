@@ -4,7 +4,7 @@
 'use strict';
 /* global odkTables */
 
-function display() {
+async function display() {
 
     var body = $('#main');
     // Set the background to be a picture.
@@ -14,26 +14,17 @@ function display() {
     $('#facility-inventory-by-grid-power').text(odkCommon.localizeText(locale, "facility_inventory_by_grid_power"));
 
     $('#select-region').text(odkCommon.localizeText(locale, "select_region"));
-    $('#all-regions').text(odkCommon.localizeText(locale, "all_regions"));
-    $('#north').text(odkCommon.localizeText(locale, "north"));
-    $('#central-west').text(odkCommon.localizeText(locale, "central_west"));
-    $('#central-east').text(odkCommon.localizeText(locale, "central_east"));
-    $('#south-west').text(odkCommon.localizeText(locale, "south_west"));
-    $('#south-east').text(odkCommon.localizeText(locale, "south_east"));
 
     $('#select-facility-type').text(odkCommon.localizeText(locale, "select_facility_type"));
     $('#all-types').text(odkCommon.localizeText(locale, "all_types"));
-    $('#central-hospital').text(odkCommon.localizeText(locale, "select_region"));
-    $('#community-hospital').text(odkCommon.localizeText(locale, "community_hospital"));
-    $('#dispensary').text(odkCommon.localizeText(locale, "dispensary"));
-    $('#district-hospital').text(odkCommon.localizeText(locale, "district_hospital"));
-    $('#district-vaccine-store').text(odkCommon.localizeText(locale, "district_vaccine_store"));
-    $('#health-center').text(odkCommon.localizeText(locale, "health_center"));
-    $('#health-post').text(odkCommon.localizeText(locale, "health_post"));
-    $('#hospital').text(odkCommon.localizeText(locale, "hospital"));
-    $('#national-vaccine-store').text(odkCommon.localizeText(locale, "national_vaccine_store"));
-    $('#regional-vaccine-store').text(odkCommon.localizeText(locale, "regional_vaccine_store"));
-    $('#rural-hospital').text(odkCommon.localizeText(locale, "rural_hospital"));
+
+    // Get max number of admin regions
+    var maxAdminRegionLevelNumber = await util.getMaxLevel();
+
+    var regionDiv = $('#regionDiv');
+    regionDisplayUtil.appendRegionSelectsToDiv(regionDiv, maxAdminRegionLevelNumber);
+
+    healthFacilityTypeUtil.appendHealthFacilityOptions($('#facility_type'));
 
     $('#filter-facilities-by-region-type').text(odkCommon.localizeText(locale, "filter"));
 
@@ -45,11 +36,12 @@ function display() {
             var facilityType = $("#facility_type").val();
 
             // Get the value of the region
-            var facilityRegion = $("#facility_region").val();
+            var facilityRegionJson = regionDisplayUtil.getLowestAdminRegionInfo(maxAdminRegionLevelNumber);
+            var facilityRegionLevel = facilityRegionJson[util.adminRegionLevel];
+            var facilityRegion = facilityRegionJson[util.adminRegionName];
 
-            var queryParam = util.getKeysToAppendToColdChainURL(facilityType, facilityRegion, null, null);
+            var queryParam = util.getKeysToAppendToColdChainURL(facilityType, facilityRegionLevel, facilityRegion, null);
 
-            //odkTables.openTableToMapView('health_facility', selection, selectionArgs, 'config/tables/health_facility/html/hFacility_list.html');
             odkTables.launchHTML(null,'config/assets/graphFacilityInventoryForGridPower.html' + queryParam);
         }
     );
