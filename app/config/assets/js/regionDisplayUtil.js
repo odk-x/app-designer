@@ -6,6 +6,7 @@
 
 var regionDisplayUtil = {};
 regionDisplayUtil.select_region_level = 'select_region_level';
+regionDisplayUtil.facility_region_level = 'facility_region_level';
 
 regionDisplayUtil.appendRegionSelectsToDiv = async function(regionDiv, maxAdminRegionLevelNumber) {
 
@@ -13,7 +14,7 @@ regionDisplayUtil.appendRegionSelectsToDiv = async function(regionDiv, maxAdminR
     for (var i = util.firstLevelNumber; i <= maxAdminRegionLevelNumber; i++) {
         // Get values relevant for admin regions
         var selectAdminRegion = $('<select>');
-        var selectAdminRegionId = facility_region_level + i;
+        var selectAdminRegionId = regionDisplayUtil.facility_region_level + i;
         selectAdminRegion.attr('id', selectAdminRegionId);
         selectAdminRegion.attr('class', 'form-control');
         selectAdminRegion.attr('data-level', i);
@@ -32,7 +33,7 @@ regionDisplayUtil.appendRegionSelectsToDiv = async function(regionDiv, maxAdminR
 
             // For all selects after this - clear their options
             for (var regIdx = clickedAdminRegionLevel + 1; regIdx <= maxAdminRegionLevelNumber; regIdx++) {
-                var subAdminRegionId = facility_region_level + regIdx;
+                var subAdminRegionId = regionDisplayUtil.facility_region_level + regIdx;
                 var subAdminRegion = $('#' +  subAdminRegionId);
                 subAdminRegion.empty();
 
@@ -49,7 +50,7 @@ regionDisplayUtil.appendRegionSelectsToDiv = async function(regionDiv, maxAdminR
                 .then(function(result) {
                     for (var resIdx = 0; resIdx < result.getCount(); resIdx++) {
                         var filteredRegOpt = regionDisplayUtil.createAdminRegionOption(result, resIdx, clickedAdminRegionLevel + 1);
-                        var nextRegId = '#' + facility_region_level + (clickedAdminRegionLevel + 1);
+                        var nextRegId = '#' + regionDisplayUtil.facility_region_level + (clickedAdminRegionLevel + 1);
                         var nextReg = $(nextRegId);
                         nextReg.append(filteredRegOpt);
                     }
@@ -73,7 +74,7 @@ regionDisplayUtil.appendRegionSelectsToDiv = async function(regionDiv, maxAdminR
     // Set values for first admin region dropdown
     // Other dropdowns will be set only if a value is set for the first one
     // TODO: CLEAN!!
-    var firstRegId = '#' + facility_region_level + util.firstLevelNumber;
+    var firstRegId = '#' + regionDisplayUtil.facility_region_level + util.firstLevelNumber;
     var firstReg = $(firstRegId);
     util.getNextAdminRegionsFromCurrAdminRegionPromise(util.firstLevelNumber)
     .then(function (result) {
@@ -115,7 +116,7 @@ regionDisplayUtil.getLowestAdminRegionInfo = function(maxAdminRegionLevelNumber)
     // This will be the lowest level that is different from none
     var adminRegion = [];
     for (var facIdx = util.firstLevelNumber; facIdx <= maxAdminRegionLevelNumber; facIdx++) {
-        var tempId = '#' + facility_region_level + facIdx;
+        var tempId = '#' + regionDisplayUtil.facility_region_level + facIdx;
         var tempReg = $(tempId).val();
         if (tempReg !== 'none') {
             adminRegion[util.adminRegionId] = $(tempId).attr('id');

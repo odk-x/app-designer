@@ -5,8 +5,6 @@
 /* global odkTables */
 var maxAdminRegionLevelNumber = util.maxLevelAppDepth;
 
-var facility_region_level = 'facility_region_level';
-
 // TODO: Clarify admin_region and admin_region_id
 async function display() {
 
@@ -42,7 +40,6 @@ async function display() {
 
             var queryParam = util.getKeysToAppendToColdChainURL(facilityType, facilityRegionLevel, facilityRegion, powerSource);
 
-            //odkTables.openTableToMapView('health_facility', selection, selectionArgs, 'config/tables/health_facility/html/hFacility_list.html');
             odkTables.launchHTML(null,'config/assets/graphFrigInventoryForAge.html' + queryParam);
         }
     );
