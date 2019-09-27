@@ -13,6 +13,7 @@ util.regionLevel = 'regionLevel';
 util.nextRegionLevelNumber = 'next_region_level_number';
 util.adminRegionId = 'admin_region_id';
 util.adminRegion = 'admin_region';
+util.adminRegionLevel = 'admin_region_level';
 util.adminRegionName = 'admin_region_name';
 util.rowId = '_id';
 util.modelRowId = 'model_row_id';
@@ -362,40 +363,45 @@ util.getKeyToAppendToColdChainURL = function(key, value, shouldBeFirst) {
  */
 util.getKeysToAppendToColdChainURL = function(
       facilityType,
-      regionLevel2,
+      adminRegionLevel,
       adminRegion,
-      powerSource) {
+      powerSource,
+      adminRegionId) {
 
     var that = this;
     var first = true;
     var result;
-    var adaptProps = {};
+    var ccProps = {};
 
     // Initialize the properties object
     if (facilityType !== null && facilityType !== undefined && facilityType.length !== 0) {
-        adaptProps[that.facilityType] = facilityType;
+        ccProps[that.facilityType] = facilityType;
     }
 
-    if (regionLevel2 !== null && regionLevel2 !== undefined && regionLevel2.length !== 0) {
-        adaptProps[that.regionLevel2] = regionLevel2;
+    if (adminRegionLevel !== null && adminRegionLevel !== undefined && adminRegionLevel.length !== 0) {
+        ccProps[that.adminRegionLevel] = adminRegionLevel;
     }
 
     if (adminRegion !== null && adminRegion !== undefined && adminRegion.length !== 0) {
-        adaptProps[that.adminRegion] = adminRegion;
+        ccProps[that.adminRegion] = adminRegion;
     }
 
     if (powerSource !== null && powerSource !== undefined && powerSource.length !== 0) {
-        adaptProps[that.powerSource] = powerSource;
+        ccProps[that.powerSource] = powerSource;
     }
 
-    for (var prop in adaptProps) {
-        if (adaptProps[prop] !== null && adaptProps[prop] !== undefined) {
+    if (adminRegionId !== null && adminRegionId !== undefined && adminRegionId.length !== 0) {
+        ccProps[that.adminRegionId] = adminRegionId;
+    }
+
+    for (var prop in ccProps) {
+        if (ccProps[prop] !== null && ccProps[prop] !== undefined) {
             if (first)
             {
-                result = '?' + prop + '=' + encodeURIComponent(adaptProps[prop]);
+                result = '?' + prop + '=' + encodeURIComponent(ccProps[prop]);
                 first = false;
             } else {
-                result += '&' + prop + '=' + encodeURIComponent(adaptProps[prop]);
+                result += '&' + prop + '=' + encodeURIComponent(ccProps[prop]);
             }
         }
     }

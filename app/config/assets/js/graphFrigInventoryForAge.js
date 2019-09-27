@@ -5,9 +5,8 @@
 /* global odkTables */
 // TODO: Get rid of these duplicate values!!
 var noOptionSelectString = "none";
-var regionQueryString = 'admin_region = ?';
-var typeQueryString = 'facility_type = ?';
-var powerSourceQueryString = 'power_source = ?';
+var typeQueryString = 'health_facility.facility_type = ?';
+var powerSourceQueryString = 'refrigerators.power_source = ?';
 var numOfFrigsLabel = "Number of Refrigerators";
 var yearsLabel = "years";
 
@@ -18,10 +17,16 @@ var bucket3 = 3;
 
 var bucketLabels = ['0-1','2-4','5-10','10+'];
 
-var healthFacilityData = {};
 var frigData = {};
 
-function frigCBSuccess(result) {
+var graphQueryStr = 'SELECT refrigerators.year, COUNT(*) FROM refrigerators JOIN health_facility ON ' +
+    'refrigerators.facility_row_id = health_facility._id JOIN geographic_regions ON ' +
+    'health_facility.admin_region = geographic_regions._id';
+
+var graphQueryGroupBy = ' GROUP BY refrigerators.year';
+
+
+function healthFacilityCBSuccess(result) {
     frigData = result;
 
     return (function() {
@@ -29,44 +34,13 @@ function frigCBSuccess(result) {
     }());
 }
 
-function frigCBFailure(error) {
-    console.log('frigCBFailure: failed with error: ' + error);
-}
-
-function healthFacilityCBSuccess(result) {
-    healthFacilityData = result;
-
-    var selection = null;
-    var selectionArgs = null;
-
-    var powerSource = util.getQueryParameter(util.powerSource);
-    if (_.isEmpty(healthFacilityData)) {
-
-        selection = addQueryParamAndVal(selection, selectionArgs, powerSourceQueryString, powerSource);
-        odkData.query('refrigerators', selection, selectionArgs, null, null, null, null, null, null, true,
-            frigCBSuccess, frigCBFailure);
-    } else {
-
-        selection = "select * from refrigerators where facility_row_id in (";
-        selectionArgs = [];
-        for (var i = 0; i < healthFacilityData.getCount(); i++) {
-            selection += "?,";
-            selectionArgs.push(healthFacilityData.getRowId(i));
-        }
-
-        selection = selection.substring(0, selection.length - 1);
-        selection += ")";
-
-        selection = addQueryParamAndVal(selection, selectionArgs, powerSourceQueryString, powerSource);
-        odkData.arbitraryQuery('refrigerators', selection, selectionArgs, null, null, frigCBSuccess, frigCBFailure);
-    }
-}
-
 function addQueryParamAndVal(sel, selArgs, queryStr, value) {
     if (value !== noOptionSelectString && value !== undefined &&
         value !== null) {
         if (sel === null) {
             sel = queryStr;
+        } else if (sel.indexOf('WHERE') === -1) {
+            sel += ' WHERE ' + queryStr;
         } else {
             sel += ' AND ' + queryStr;
         }
@@ -90,38 +64,28 @@ function display() {
     numOfFrigsLabel = odkCommon.localizeText(locale, "number_of_refrigerators");
     yearsLabel = odkCommon.localizeText(locale, "years");
 
-    // Get the value of the type
-    var selection = null;
-    var selectionArgs = null;
+    var query = graphQueryStr;
+    var queryParams = [];
 
     // Get the value of the type
     var facilityType = util.getQueryParameter(util.facilityType);
-    if (facilityType !== noOptionSelectString && facilityType !== undefined &&
-        facilityType !== null) {
-        selection = typeQueryString;
-        selectionArgs = [];
-        selectionArgs.push(facilityType);
-    }
+    query = addQueryParamAndVal(query, queryParams, typeQueryString, facilityType);
+
+    var powerSrc = util.getQueryParameter(util.powerSource);
+    query = addQueryParamAndVal(query, queryParams, powerSourceQueryString, powerSrc);
+
+    var adminLevel = util.getQueryParameter(util.adminRegionLevel);
+    var geographicRegionField = util.regionLevel + adminLevel;
 
     // Get the value of the region
-    var facilityRegion = util.getQueryParameter(util.adminRegion);
-    if (facilityRegion !== noOptionSelectString && facilityRegion !== undefined &&
-        facilityRegion !== null) {
-        if (selection === null) {
-            selection = regionQueryString;
-        } else {
-            selection += ' AND ' + regionQueryString;
-        }
+    var adminReg = util.getQueryParameter(util.adminRegion);
+    var geoQueryStr = 'geographic_regions.' + geographicRegionField + ' = ?';
+    query = addQueryParamAndVal(query, queryParams, geoQueryStr, adminReg);
 
-        if (selectionArgs === null) {
-            selectionArgs = [];
-        }
+    query += graphQueryGroupBy;
 
-        selectionArgs.push(facilityRegion);
-    }
-
-    odkData.query('health_facility', selection, selectionArgs, null, null, null, null, null, null, true,
-        healthFacilityCBSuccess, healthFacilityCBFailure);
+    odkData.arbitraryQuery('refrigerators', query, queryParams, null, null, healthFacilityCBSuccess,
+        healthFacilityCBFailure);
 }
 
 function render() {
@@ -153,8 +117,9 @@ function getLabelForAgeBucket(bucket) {
     return -1;
 }
 
-function putFrigInAgeBucket(frigYear) {
-    var refYear = 2011;
+function  putFrigInAgeBucket(frigYear) {
+    var d = new Date();
+    var refYear = d.getFullYear();
 
     var refAge = refYear - frigYear;
 
@@ -198,10 +163,10 @@ function frigHistogramByAge(divName, yAxisText) {
         if (idx === -1) {
             var frig = {};
             frig.bucket = putFrigInAgeBucket(frigData.getData(i, 'year'));
-            frig.value = 1;
+            frig.value = parseInt(frigData.getData(i, 'COUNT(*)'));
             dataJ.push(frig);
         } else {
-            dataJ[idx].value++;
+            dataJ[idx].value += parseInt(frigData.getData(i, 'COUNT(*)'));
         }
     }
 

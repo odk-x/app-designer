@@ -15,16 +15,16 @@ function display() {
     $('#frig-inventory-by-age').text(odkCommon.localizeText(locale, "refrigerator_age"));
     $('#facility-inventory-by-grid-power').text(odkCommon.localizeText(locale, "facility_grid_power_available"));
 
-    var viewFacilitiesButton = $('#frig-inventory-by-age');
-    viewFacilitiesButton.on(
+    var viewRefrigeratorsButton = $('#frig-inventory-by-age');
+    viewRefrigeratorsButton.on(
         'click',
         function() {
             odkTables.launchHTML(null,'config/assets/filterFrigInventoryForAge.html');
         }
     );
 
-    var viewRefrigeratorsButton = $('#facility-inventory-by-grid-power');
-    viewRefrigeratorsButton.on(
+    var viewFacilitiesButton = $('#facility-inventory-by-grid-power');
+    viewFacilitiesButton.on(
         'click',
         function() {
             odkTables.launchHTML(null,'config/assets/filterFacilityInventoryForGridPower.html');

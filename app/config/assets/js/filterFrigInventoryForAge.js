@@ -36,11 +36,13 @@ async function display() {
             // Get the value of the region
             // This will be the lowest level that is different from none
             var facilityRegion = null;
+            var facilityRegionLevel = null;
             for (var facIdx = util.firstLevelNumber; facIdx <= maxAdminRegionLevelNumber; facIdx++) {
                 var tempId = '#' + facility_region_level + facIdx;
                 var tempReg = $(tempId).val();
                 if (tempReg !== 'none') {
                    facilityRegion = $(tempId).val();
+                   facilityRegionLevel = facIdx;
                 } else {
                     break;
                 }
@@ -49,7 +51,7 @@ async function display() {
             // Get the value of the region
             var powerSource = $("#power_source").val();
 
-            var queryParam = util.getKeysToAppendToColdChainURL(facilityType, null, facilityRegion, powerSource);
+            var queryParam = util.getKeysToAppendToColdChainURL(facilityType, facilityRegionLevel, facilityRegion, powerSource);
 
             //odkTables.openTableToMapView('health_facility', selection, selectionArgs, 'config/tables/health_facility/html/hFacility_list.html');
             odkTables.launchHTML(null,'config/assets/graphFrigInventoryForAge.html' + queryParam);
@@ -61,7 +63,7 @@ async function display() {
     // Get max number of admin regions
     maxAdminRegionLevelNumber = await util.getMaxLevel();
 
-// Create the necessary dropdowns for region selection
+    // Create the necessary dropdowns for region selection
     for (var i = util.firstLevelNumber; i <= maxAdminRegionLevelNumber; i++) {
         // Get values relevant for admin regions
         var selectAdminRegion = $('<select>');
@@ -105,7 +107,7 @@ async function display() {
                         }
                     });
             }
-        })
+        });
 
         var labelAdminRegion = $('<label>')
         var labelAdminRegionId = select_region_level + i;
@@ -166,12 +168,11 @@ async function display() {
 function createAdminRegionOption(result, resIdx, regionLevel) {
     // Create options from result
     var optAllRegion = $('<option>');
-    var optAllRegionVal = result.getData(resIdx, '_id');
-    var optAllRegionId = optAllRegionVal + (regionLevel);
-    var adminRegionValue = util.regionLevel + (regionLevel);
-    var optAllRegionDisplay = result.getData(resIdx, adminRegionValue);
+    var optAllRegionId = result.getData(resIdx, '_id');
+    var adminRegionLevelVal = util.regionLevel + (regionLevel);
+    var optAllRegionDisplay = result.getData(resIdx, adminRegionLevelVal);
     optAllRegion.attr('id', optAllRegionId);
-    optAllRegion.attr('value', optAllRegionVal);
+    optAllRegion.attr('value', optAllRegionDisplay);
     optAllRegion.text(optAllRegionDisplay);
     return optAllRegion;
 }
