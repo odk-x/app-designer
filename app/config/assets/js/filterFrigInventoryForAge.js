@@ -8,6 +8,7 @@ var maxAdminRegionLevelNumber = util.maxLevelAppDepth;
 var facility_region_level = 'facility_region_level';
 var select_region_level = 'select_region_level';
 
+// TODO: Clarify admin_region and admin_region_id
 async function display() {
 
     var body = $('#main');
@@ -78,6 +79,7 @@ async function display() {
         optAllRegion.attr('selected', true);
         selectAdminRegion.append(optAllRegion);
 
+        // TODO: Would an await be better here?
         selectAdminRegion.on('change', function(evt) {
             console.log(evt.target.value);
             var changedAdminRegionId = '#' + evt.target.id;
@@ -165,6 +167,7 @@ async function display() {
     }
 }
 
+// TODO: Can these 2 functions be combined?
 function createAdminRegionOption(result, resIdx, regionLevel) {
     // Create options from result
     var optAllRegion = $('<option>');
