@@ -34,25 +34,7 @@ function healthFacilityCBSuccess(result) {
     }());
 }
 
-function addQueryParamAndVal(sel, selArgs, queryStr, value) {
-    if (value !== noOptionSelectString && value !== undefined &&
-        value !== null) {
-        if (sel === null) {
-            sel = queryStr;
-        } else if (sel.indexOf('WHERE') === -1) {
-            sel += ' WHERE ' + queryStr;
-        } else {
-            sel += ' AND ' + queryStr;
-        }
 
-        if (selArgs === null) {
-            selArgs = [];
-        }
-
-        selArgs.push(value);
-    }
-    return sel;
-}
 
 function healthFacilityCBFailure(error) {
     console.log('healthFacilityCBFailure: failed with error: ' + error);
@@ -69,10 +51,10 @@ function display() {
 
     // Get the value of the type
     var facilityType = util.getQueryParameter(util.facilityType);
-    query = addQueryParamAndVal(query, queryParams, typeQueryString, facilityType);
+    query = util.addSelAndSelArgs(query, queryParams, typeQueryString, facilityType);
 
     var powerSrc = util.getQueryParameter(util.powerSource);
-    query = addQueryParamAndVal(query, queryParams, powerSourceQueryString, powerSrc);
+    query = util.addSelAndSelArgs(query, queryParams, powerSourceQueryString, powerSrc);
 
     var adminLevel = util.getQueryParameter(util.adminRegionLevel);
     var geographicRegionField = util.regionLevel + adminLevel;
@@ -80,7 +62,7 @@ function display() {
     // Get the value of the region
     var adminReg = util.getQueryParameter(util.adminRegion);
     var geoQueryStr = 'geographic_regions.' + geographicRegionField + ' = ?';
-    query = addQueryParamAndVal(query, queryParams, geoQueryStr, adminReg);
+    query = util.addSelAndSelArgs(query, queryParams, geoQueryStr, adminReg);
 
     query += graphQueryGroupBy;
 

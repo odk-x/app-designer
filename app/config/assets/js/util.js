@@ -261,6 +261,26 @@ util.getDistrictsByAdminLevel2 = function(adminLevel2, successCB, failureCB) {
         failureCB);
 };
 
+util.addSelAndSelArgs = function(sel, selArgs, queryStr, value) {
+    if (value !== noOptionSelectString && value !== undefined &&
+        value !== null) {
+        if (sel === null) {
+            sel = queryStr;
+        } else if (sel.indexOf('WHERE') === -1) {
+            sel += ' WHERE ' + queryStr;
+        } else {
+            sel += ' AND ' + queryStr;
+        }
+
+        if (selArgs === null) {
+            selArgs = [];
+        }
+
+        selArgs.push(value);
+    }
+    return sel;
+}
+
 /**
  * Get the query parameter from the url. Note that this is kind of a hacky/lazy
  * implementation that will fail if the key string appears more than once, etc.
