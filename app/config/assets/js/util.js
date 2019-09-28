@@ -180,7 +180,7 @@ util.getFacilityCountByAdminRegion = function(adminRegionId) {
 
     }).then(function(result) {
         if (result !== null && result.getCount() == 1) {
-            resolve(result.get('COUNT(*)'));
+            return(result.get('COUNT(*)'));
         }
     }).catch(function (reason) {
         var error = 'getFacilityCountByAdminRegion: Failed with exception ' + reason;
