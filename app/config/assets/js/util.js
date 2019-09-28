@@ -23,6 +23,9 @@ util.maintenancePriority = 'maintenance_priority';
 util.maxLevelNumber = 'max_level_number';
 util.linkedAdminRegion = 'linked_admin_region';
 util.firstLevelNumber = 1;
+util.groupReadOnly = 'groupReadOnly';
+util.groupModify = 'groupModify';
+util.groupPrivileged = 'groupPrivileged';
 
 // The maximum possible depth for a geographic hierarchy
 util.maxLevelAppDepth = 5;
@@ -85,7 +88,7 @@ util.findAdminRegionLevel = function(adminRegion) {
  */
 util.getNextAdminRegionsFromCurrAdminRegionPromise = function (nextLevel, currAdminRegion) {
     var regionLevelVal = util.regionLevel + nextLevel;
-    var queryStr = 'SELECT '+ regionLevelVal +', _id, levelNumber FROM geographic_regions WHERE levelNumber = ?';
+    var queryStr = 'SELECT * FROM geographic_regions WHERE levelNumber = ?';
     var queryParam = [nextLevel];
 
     if (currAdminRegion !== undefined && currAdminRegion !== null) {

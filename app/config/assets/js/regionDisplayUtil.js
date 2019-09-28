@@ -94,6 +94,9 @@ regionDisplayUtil.createAdminRegionOption = function(result, resIdx, regionLevel
     var optAllRegionDisplay = result.getData(resIdx, adminRegionLevelVal);
     optAllRegion.attr('id', optAllRegionId);
     optAllRegion.attr('value', optAllRegionDisplay);
+    optAllRegion.attr('data-groupReadOnly', result.getData(resIdx, 'groupReadOnly'));
+    optAllRegion.attr('data-groupModify', result.getData(resIdx, 'groupModify'));
+    optAllRegion.attr('data-groupPrivileged', result.getData(resIdx, 'groupPrivileged'));
     optAllRegion.text(optAllRegionDisplay);
     return optAllRegion;
 };
@@ -114,14 +117,18 @@ regionDisplayUtil.getAllRegionOption = function(level) {
 regionDisplayUtil.getLowestAdminRegionInfo = function(maxAdminRegionLevelNumber) {
     // Get the value of the region
     // This will be the lowest level that is different from none
-    var adminRegion = [];
+    var adminRegion = null;
     for (var facIdx = util.firstLevelNumber; facIdx <= maxAdminRegionLevelNumber; facIdx++) {
         var tempId = '#' + regionDisplayUtil.facility_region_level + facIdx;
         var tempReg = $(tempId).val();
         if (tempReg !== 'none') {
-            adminRegion[util.adminRegionId] = $(tempId).attr('id');
+            adminRegion = {};
+            adminRegion[util.adminRegionId] = $(tempId).children(':selected').attr('id');
             adminRegion[util.adminRegionName] = $(tempId).val();
             adminRegion[util.adminRegionLevel] = facIdx;
+            adminRegion[util.groupReadOnly] = $(tempId).children(':selected').attr('data-groupReadOnly');
+            adminRegion[util.groupModify] = $(tempId).children(':selected').attr('data-groupModify');
+            adminRegion[util.groupPrivileged] = $(tempId).children(':selected').attr('data-groupPrivileged');
         } else {
             break;
         }

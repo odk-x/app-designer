@@ -10,9 +10,11 @@
         <script type="text/javascript" src="commonDefinitions.js"></script>
         <script type="text/javascript" src="libs/jquery-3.4.1.js"></script>
         <script type="text/javascript" src="../../system/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
         <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
         <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
         <script type="text/javascript" src="js/util.js"></script>
+        <script type="text/javascript" src="js/regionDisplayUtil.js"></script>
         <script type="text/javascript" src="js/addHealthFacility.js"></script>
     </head>
 
@@ -23,14 +25,7 @@
             <div class="container">
                 <form>
                     <div class="form-group">
-                        <label id="select-region" class="form-label" for="facility_region">Select Region:</label>
-                        <select class="form-control" id="facility_region">
-                            <option id="north" selected value="North" data-regionlevel1="North">North</option>
-                            <option id="central-west" value="Central West" data-regionlevel1="Central">Central West</option>
-                            <option id="central-east" value="Central East" data-regionlevel1="Central">Central East</option>
-                            <option id="south-west" value="South West" data-regionlevel1="South">South West</option>
-                            <option id="south-east" value="South East" data-regionlevel1="South">South East</option>
-                        </select>
+                        <div id="regionDiv"></div>
 
                         <button id="add-facility" type="submit" class="btn btn-launch btn-filter btn-default">Add Facility</button>
                     </div>
