@@ -74,8 +74,8 @@
       },
       {
         "type": "select_one_dropdown",
-        "values_list": "regionLevel3_csv",
-        "name": "admin_region",
+        "values_list": "admin_region_list",
+        "name": "admin_region_id",
         "display": {
           "title": {
             "text": {
@@ -90,7 +90,6 @@
             }
           }
         },
-        "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
         "required": 1,
         "_row_num": 8
       },
@@ -268,7 +267,7 @@
       {
         "type": "select_one",
         "values_list": "immunization_services",
-        "name": "Immunization_services_offered",
+        "name": "immunization_services_offered",
         "display": {
           "title": {
             "text": {
@@ -1199,19 +1198,21 @@
         "_row_num": 2
       },
       {
-        "query_name": "regionLevel3_csv",
-        "query_type": "csv",
-        "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
+        "query_name": "admin_region_list",
+        "query_type": "linked_table",
+        "linked_form_id": "geographic_regions",
+        "linked_table_id": "geographic_regions",
+        "selection": "1=1",
+        "selectionArgs": "[]",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 5
+        "_row_num": 3
       }
     ],
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "health_facility",
+        "value": "health_facilities",
         "_row_num": 2
       },
       {
@@ -1219,8 +1220,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Health Facility",
-              "es": "Facilidad de Salúd"
+              "default": "Health Facilities",
+              "es": "Facilidades de Salúd"
             }
           }
         },
@@ -1228,7 +1229,7 @@
       },
       {
         "setting_name": "table_id",
-        "value": "health_facility",
+        "value": "health_facilities",
         "_row_num": 5
       },
       {
@@ -1285,7 +1286,7 @@
         "aspect": "default",
         "key": "detailViewFileName",
         "type": "string",
-        "value": "config/tables/health_facility/html/health_facility_detail.html",
+        "value": "config/tables/health_facilities/html/health_facilities_detail.html",
         "_row_num": 3
       },
       {
@@ -1293,7 +1294,7 @@
         "aspect": "default",
         "key": "listViewFileName",
         "type": "string",
-        "value": "config/tables/health_facility/html/health_facility_list.html",
+        "value": "config/tables/health_facilities/html/health_facilities_list.html",
         "_row_num": 4
       },
       {
@@ -1301,7 +1302,7 @@
         "aspect": "default",
         "key": "mapListViewFileName",
         "type": "string",
-        "value": "config/tables/health_facility/html/hFacility_list.html",
+        "value": "config/tables/health_facilities/html/hFacilities_list.html",
         "_row_num": 5
       },
       {
@@ -1360,18 +1361,6 @@
         "value": "wrong_form",
         "_row_num": 13
       }
-    ],
-    "model": [
-      {
-        "name": "regionLevel1",
-        "type": "string",
-        "_row_num": 2
-      },
-      {
-        "name": "regionLevel2",
-        "type": "string",
-        "_row_num": 3
-      }
     ]
   },
   "specification": {
@@ -1393,7 +1382,7 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "health_facility",
+        "value": "health_facilities",
         "_row_num": 2
       },
       "survey": {
@@ -1401,8 +1390,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Health Facility",
-              "es": "Facilidad de Salúd"
+              "default": "Health Facilities",
+              "es": "Facilidades de Salúd"
             }
           }
         },
@@ -1410,7 +1399,7 @@
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "health_facility",
+        "value": "health_facilities",
         "_row_num": 5
       },
       "disableSwipeNavigation": {
@@ -1488,8 +1477,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Health Facility",
-              "es": "Facilidad de Salúd"
+              "default": "Health Facilities",
+              "es": "Facilidades de Salúd"
             }
           }
         },
@@ -2223,38 +2212,20 @@
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 2
       },
-      "regionLevel3_csv": {
-        "query_name": "regionLevel3_csv",
-        "query_type": "csv",
-        "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
+      "admin_region_list": {
+        "query_name": "admin_region_list",
+        "query_type": "linked_table",
+        "linked_form_id": "geographic_regions",
+        "linked_table_id": "geographic_regions",
+        "selection": "1=1",
+        "selectionArgs": "[]",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 5
+        "_row_num": 3
       }
     },
     "calculates": {},
     "model": {
-      "regionLevel1": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "regionLevel1"
-      },
-      "regionLevel2": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "regionLevel2"
-      },
       "facility_name": {
         "_defn": [
           {
@@ -2322,7 +2293,7 @@
         },
         "elementKey": "Location"
       },
-      "admin_region": {
+      "admin_region_id": {
         "_defn": [
           {
             "_row_num": 8,
@@ -2336,8 +2307,8 @@
             "es": "Region administrativo"
           }
         },
-        "valuesList": "regionLevel3_csv",
-        "elementKey": "admin_region"
+        "valuesList": "admin_region_list",
+        "elementKey": "admin_region_id"
       },
       "facility_type": {
         "_defn": [
@@ -2456,7 +2427,7 @@
         },
         "elementKey": "distance_to_supply"
       },
-      "Immunization_services_offered": {
+      "immunization_services_offered": {
         "_defn": [
           {
             "_row_num": 24,
@@ -2471,7 +2442,7 @@
           }
         },
         "valuesList": "immunization_services",
-        "elementKey": "Immunization_services_offered"
+        "elementKey": "immunization_services_offered"
       },
       "vaccine_supply_interval": {
         "_defn": [
@@ -2705,8 +2676,8 @@
           },
           {
             "type": "select_one_dropdown",
-            "values_list": "regionLevel3_csv",
-            "name": "admin_region",
+            "values_list": "admin_region_list",
+            "name": "admin_region_id",
             "display": {
               "title": {
                 "text": {
@@ -2721,7 +2692,6 @@
                 }
               }
             },
-            "choice_filter": "choice_item.regionLevel2 === data('regionLevel2')",
             "required": 1,
             "_row_num": 8,
             "__rowNum__": 7,
@@ -2906,7 +2876,7 @@
           {
             "type": "select_one",
             "values_list": "immunization_services",
-            "name": "Immunization_services_offered",
+            "name": "immunization_services_offered",
             "display": {
               "title": {
                 "text": {
@@ -3354,8 +3324,8 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Health Facility",
-                  "es": "Facilidad de Salúd"
+                  "default": "Health Facilities",
+                  "es": "Facilidades de Salúd"
                 }
               }
             },
@@ -3506,32 +3476,6 @@
       }
     },
     "dataTableModel": {
-      "regionLevel1": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "regionLevel1",
-        "elementName": "regionLevel1",
-        "elementSet": "data",
-        "elementPath": "regionLevel1"
-      },
-      "regionLevel2": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "regionLevel2",
-        "elementName": "regionLevel2",
-        "elementSet": "data",
-        "elementPath": "regionLevel2"
-      },
       "facility_name": {
         "_defn": [
           {
@@ -3627,7 +3571,7 @@
         ],
         "notUnitOfRetention": true
       },
-      "admin_region": {
+      "admin_region_id": {
         "_defn": [
           {
             "_row_num": 8,
@@ -3641,11 +3585,11 @@
             "es": "Region administrativo"
           }
         },
-        "valuesList": "regionLevel3_csv",
-        "elementKey": "admin_region",
-        "elementName": "admin_region",
+        "valuesList": "admin_region_list",
+        "elementKey": "admin_region_id",
+        "elementName": "admin_region_id",
         "elementSet": "data",
-        "elementPath": "admin_region"
+        "elementPath": "admin_region_id"
       },
       "facility_type": {
         "_defn": [
@@ -3785,7 +3729,7 @@
         "elementSet": "data",
         "elementPath": "distance_to_supply"
       },
-      "Immunization_services_offered": {
+      "immunization_services_offered": {
         "_defn": [
           {
             "_row_num": 24,
@@ -3800,10 +3744,10 @@
           }
         },
         "valuesList": "immunization_services",
-        "elementKey": "Immunization_services_offered",
-        "elementName": "Immunization_services_offered",
+        "elementKey": "immunization_services_offered",
+        "elementName": "immunization_services_offered",
         "elementSet": "data",
-        "elementPath": "Immunization_services_offered"
+        "elementPath": "immunization_services_offered"
       },
       "vaccine_supply_interval": {
         "_defn": [
@@ -4121,20 +4065,6 @@
     "properties": [
       {
         "_partition": "Column",
-        "_aspect": "Immunization_services_offered",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"immunization_services\",\"data_value\":\"static\",\"display\":{\"title\":{\"text\":{\"default\":\"Static/Fixed Post\",\"es\":\"Estático/Puesto Fijo\"}}},\"_row_num\":53},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Outreach\",\"es\":\"Extensión\"}}},\"_row_num\":54},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"both_static_and_outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Static and Outreach\",\"es\":\"Estático y Extensión\"}}},\"_row_num\":55},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"storage_only\",\"display\":{\"title\":{\"text\":{\"default\":\"Storage Only\",\"es\":\"Solo almacenamiento\"}}},\"_row_num\":56},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\"}}},\"_row_num\":57}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "Immunization_services_offered",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Immunization Services Offered\",\"es\":\"Tipo de envío\"}}"
-      },
-      {
-        "_partition": "Column",
         "_aspect": "Location",
         "_key": "displayName",
         "_type": "object",
@@ -4142,7 +4072,7 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "admin_region",
+        "_aspect": "admin_region_id",
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Admin Region\",\"es\":\"Region administrativo\"}}"
@@ -4268,6 +4198,20 @@
       },
       {
         "_partition": "Column",
+        "_aspect": "immunization_services_offered",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"immunization_services\",\"data_value\":\"static\",\"display\":{\"title\":{\"text\":{\"default\":\"Static/Fixed Post\",\"es\":\"Estático/Puesto Fijo\"}}},\"_row_num\":53},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Outreach\",\"es\":\"Extensión\"}}},\"_row_num\":54},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"both_static_and_outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Static and Outreach\",\"es\":\"Estático y Extensión\"}}},\"_row_num\":55},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"storage_only\",\"display\":{\"title\":{\"text\":{\"default\":\"Storage Only\",\"es\":\"Solo almacenamiento\"}}},\"_row_num\":56},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\"}}},\"_row_num\":57}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "immunization_services_offered",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Immunization Services Offered\",\"es\":\"Tipo de envío\"}}"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "number_of_cold_boxes",
         "_key": "displayName",
         "_type": "object",
@@ -4341,28 +4285,28 @@
         "_aspect": "default",
         "_key": "detailViewFileName",
         "_type": "string",
-        "_value": "config/tables/health_facility/html/health_facility_detail.html"
+        "_value": "config/tables/health_facilities/html/health_facilities_detail.html"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Health Facility\",\"es\":\"Facilidad de Salúd\"}}"
+        "_value": "{\"text\":{\"default\":\"Health Facilities\",\"es\":\"Facilidades de Salúd\"}}"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "string",
-        "_value": "config/tables/health_facility/html/health_facility_list.html"
+        "_value": "config/tables/health_facilities/html/health_facilities_list.html"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "mapListViewFileName",
         "_type": "string",
-        "_value": "config/tables/health_facility/html/hFacility_list.html"
+        "_value": "config/tables/health_facilities/html/hFacilities_list.html"
       },
       {
         "_partition": "Table",

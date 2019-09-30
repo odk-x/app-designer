@@ -32,10 +32,10 @@ async function display() {
             }
 
             var defaults = {};
-            defaults['admin_region'] = facilityRegionJson[util.adminRegionId];
+            defaults['admin_region_id'] = facilityRegionJson[util.adminRegionId];
             defaults['_group_read_only'] = facilityRegionJson[util.groupReadOnly];
             defaults['_group_modify'] = facilityRegionJson[util.groupModify];
             defaults['_group_privileged'] = facilityRegionJson[util.groupPrivileged];
-            odkTables.addRowWithSurvey(null, 'health_facility', 'health_facility', null, defaults);
+            odkTables.addRowWithSurvey(null, 'health_facilities', 'health_facilities', null, defaults);
         });
 }

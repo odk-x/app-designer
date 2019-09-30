@@ -27,7 +27,7 @@ function display() {
     viewRefrigeratorsButton.on(
         'click',
         function() {
-            odkTables.launchHTML(null,'config/tables/health_facility/html/health_facility_list.html');
+            odkTables.launchHTML(null,'config/tables/health_facilities/html/health_facilities_list.html');
         }
     );
 

@@ -5,13 +5,13 @@
 /* global odkTables */
 var noOptionSelectString = "none";
 var typeQueryString = 'facility_type = ?';
-var tableId = 'health_facility';
+var tableId = 'health_facilities';
 var healthFacilityData = {};
 
-var graphPowerQueryStr = 'SELECT health_facility.grid_power_availability, COUNT(*) FROM health_facility ' +
-    'JOIN geographic_regions ON health_facility.admin_region = geographic_regions._id';
+var graphPowerQueryStr = 'SELECT health_facilities.grid_power_availability, COUNT(*) FROM health_facilities ' +
+    'JOIN geographic_regions ON health_facilities.admin_region_id = geographic_regions._id';
 
-var graphPowerQueryGroupBy = ' GROUP BY health_facility.grid_power_availability';
+var graphPowerQueryGroupBy = ' GROUP BY health_facilities.grid_power_availability';
 
 function healthFacilityCBSuccess(result) {
     healthFacilityData = result;

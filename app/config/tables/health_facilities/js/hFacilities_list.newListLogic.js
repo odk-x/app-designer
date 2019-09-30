@@ -4,7 +4,7 @@
 /* global $, odkCommon, odkData, odkTables, util, listViewLogic */
 'use strict';
 
-var listQuery = 'SELECT * FROM health_facility';
+var listQuery = 'SELECT * FROM health_facilities';
 
 var searchParams = '(facility_id LIKE ? OR facility_name LIKE ?)';
 
@@ -19,13 +19,13 @@ function resumeFunc(state) {
         $('#submit').val(odkCommon.localizeText(locale, "search"));
 
         // set the parameters for the list view
-        listViewLogic.setTableId('health_facility');
+        listViewLogic.setTableId('health_facilities');
         listViewLogic.setListQuery(listQuery);
         listViewLogic.setListElement('#list');
         listViewLogic.showEditAndDeleteButtons(false);
 
         var facIDTxt = odkCommon.localizeText(locale, "facility_id");
-        listViewLogic.setColIdsToDisplayInList('', 'facility_name', 
+        listViewLogic.setColIdsToDisplayInList('', 'facility_name',
             facIDTxt, 'facility_id');
     }
 

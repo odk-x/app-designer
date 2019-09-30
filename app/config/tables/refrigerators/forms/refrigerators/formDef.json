@@ -998,41 +998,13 @@
       {
         "query_name": "health_facility_list",
         "query_type": "linked_table",
-        "linked_form_id": "health_facility",
-        "linked_table_id": "health_facility",
-        "selection": "admin_region = ?",
-        "selectionArgs": "[data('adminRegion')]",
-        "auxillaryHash": "'facility_id>='+opendatakit.encodeURIValue(0)",
+        "linked_form_id": "health_facilities",
+        "linked_table_id": "health_facilities",
+        "selection": "1=1",
+        "selectionArgs": "[]",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
-      },
-      {
-        "query_name": "regionLevel1_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{title: {text:regionLevel1}}}; }).value()",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 4
-      },
-      {
-        "query_name": "regionLevel2_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 5
-      },
-      {
-        "query_name": "regionLevel3_csv",
-        "query_type": "csv",
-        "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 6
       }
     ],
     "properties": [
@@ -1797,41 +1769,13 @@
       "health_facility_list": {
         "query_name": "health_facility_list",
         "query_type": "linked_table",
-        "linked_form_id": "health_facility",
-        "linked_table_id": "health_facility",
-        "selection": "admin_region = ?",
-        "selectionArgs": "[data('adminRegion')]",
-        "auxillaryHash": "'facility_id>='+opendatakit.encodeURIValue(0)",
+        "linked_form_id": "health_facilities",
+        "linked_table_id": "health_facilities",
+        "selection": "1=1",
+        "selectionArgs": "[]",
         "newRowInitialElementKeyToValueMap": "{}",
         "openRowInitialElementKeyToValueMap": "{}",
         "_row_num": 3
-      },
-      "regionLevel1_csv": {
-        "query_name": "regionLevel1_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.chain(context).pluck('regionLevel1').uniq().map(function(regionLevel1){ return {name:regionLevel1, label:regionLevel1, data_value:regionLevel1, display:{title: {text:regionLevel1}}}; }).value()",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 4
-      },
-      "regionLevel2_csv": {
-        "query_name": "regionLevel2_csv",
-        "query_type": "csv",
-        "uri": "\"regions1-2.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel2; place.label = place.regionLevel2; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 5
-      },
-      "regionLevel3_csv": {
-        "query_name": "regionLevel3_csv",
-        "query_type": "csv",
-        "uri": "\"regions2-3.csv\"",
-        "callback": "_.map(context, function(place){ place.name = place.regionLevel3; place.label = place.regionLevel3; place.data_value = place.name; place.display = {title: {text:place.label}}; return place; })",
-        "newRowInitialElementKeyToValueMap": "{}",
-        "openRowInitialElementKeyToValueMap": "{}",
-        "_row_num": 6
       }
     },
     "calculates": {

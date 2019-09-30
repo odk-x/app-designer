@@ -4,25 +4,25 @@
 /* global $, odkCommon, odkData, odkTables, util, listViewLogic */
 'use strict';
 
-// TODO: A query like this would be necessary if we were going to 
+// TODO: A query like this would be necessary if we were going to
 // get refrigerators needing service in a specific timeframe
-// var listQuery = 'SELECT * FROM refrigerators ' + 
-//     'JOIN health_facility ON refrigerators.facility_row_id = health_facility._id ' +
+// var listQuery = 'SELECT * FROM refrigerators ' +
+//     'JOIN health_facilities ON refrigerators.facility_row_id = health_facilities._id ' +
 //     'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id ' +
 //     'JOIN (SELECT refrigerator_id, MAX(date_serviced) AS most_recent_date_serviced ' +
 //     'FROM maintenance_logs GROUP BY refrigerator_id) ' +
-//     'AS recent_log ON refrigerators.refrigerator_id = recent_log.refrigerator_id WHERE ' + 
+//     'AS recent_log ON refrigerators.refrigerator_id = recent_log.refrigerator_id WHERE ' +
 //     '(refrigerators.maintenance_priority = ? OR refrigerators.maintenance_priority = ? OR ' +
 //     'refrigerators.maintenance_priority = ?) AND most_recent_date_serviced > ?';
 
-var listQuery = 'SELECT * FROM refrigerators ' + 
-    'JOIN health_facility ON refrigerators.facility_row_id = health_facility._id ' +
-    'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id WHERE ' + 
+var listQuery = 'SELECT * FROM refrigerators ' +
+    'JOIN health_facilities ON refrigerators.facility_row_id = health_facilities._id ' +
+    'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id WHERE ' +
     '(refrigerators.maintenance_priority = ? OR refrigerators.maintenance_priority = ? OR ' +
     'refrigerators.maintenance_priority = ? OR refrigerators.functional_status = ?)';
 
 var listQueryParams = ['high', 'medium', 'low', 'not_functioning'];
-var searchParams = '(health_facility.facility_name LIKE ? OR health_facility.facility_id LIKE ? OR ' +
+var searchParams = '(health_facilities.facility_name LIKE ? OR health_facilities.facility_id LIKE ? OR ' +
     'refrigerators.tracking_id LIKE ? OR refrigerators.refrigerator_id LIKE ?)';
 
 function addMonths(date, months) {
@@ -62,7 +62,7 @@ function resumeFunc(state) {
         var catIDTxt = odkCommon.localizeText(locale, "catalog_id_no_colon");
         var hFacTxt = odkCommon.localizeText(locale, "health_facility");
 
-        listViewLogic.setColIdsToDisplayInList(frigTxt, 'tracking_id', 
+        listViewLogic.setColIdsToDisplayInList(frigTxt, 'tracking_id',
             catIDTxt, 'catalog_id', hFacTxt, 'facility_name');
     }
 

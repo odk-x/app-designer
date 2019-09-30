@@ -5,7 +5,7 @@
 /* global odkTables */
 // TODO: Get rid of these duplicate values!!
 var noOptionSelectString = "none";
-var typeQueryString = 'health_facility.facility_type = ?';
+var typeQueryString = 'health_facilities.facility_type = ?';
 var powerSourceQueryString = 'refrigerators.power_source = ?';
 var numOfFrigsLabel = "Number of Refrigerators";
 var yearsLabel = "years";
@@ -19,9 +19,9 @@ var bucketLabels = ['0-1','2-4','5-10','10+'];
 
 var frigData = {};
 
-var graphQueryStr = 'SELECT refrigerators.year, COUNT(*) FROM refrigerators JOIN health_facility ON ' +
-    'refrigerators.facility_row_id = health_facility._id JOIN geographic_regions ON ' +
-    'health_facility.admin_region = geographic_regions._id';
+var graphQueryStr = 'SELECT refrigerators.year, COUNT(*) FROM refrigerators JOIN health_facilities ON ' +
+    'refrigerators.facility_row_id = health_facilities._id JOIN geographic_regions ON ' +
+    'health_facilities.admin_region_id = geographic_regions._id';
 
 var graphQueryGroupBy = ' GROUP BY refrigerators.year';
 

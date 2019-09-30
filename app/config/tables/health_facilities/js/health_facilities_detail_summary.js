@@ -16,7 +16,7 @@ function cbSuccess(healthFacilityResultSet) {
     $('#catchment_population').text(healthFacilityResultSet.get('catchment_population'));
     $('#facility_ownership').text(util.formatDisplayText(
         healthFacilityResultSet.get('facility_ownership')));
-    $('#admin_region').text(healthFacilityResultSet.get('admin_region'));
+    $('#admin_region').text(healthFacilityResultSet.get('admin_region_id'));
 
     $('#electricity_source').text(util.formatDisplayText(
         healthFacilityResultSet.get('electricity_source')));
@@ -41,7 +41,7 @@ function cbSuccess(healthFacilityResultSet) {
 
 function cbFailure(error) {
 
-    console.log('health_facility_detail getViewData CB error : ' + error);
+    console.log('health_facilities_detail getViewData CB error : ' + error);
 }
 
 function display() {
@@ -71,7 +71,7 @@ function display() {
 
     var facId = util.getQueryParameter(util.facilityRowId);
 
-    odkData.query('health_facility', '_id = ?', [facId], null, null, null, null, null, null, true,
+    odkData.query('health_facilities', '_id = ?', [facId], null, null, null, null, null, null, true,
         cbSuccess, cbFailure);
     odkData.getViewData(cbSuccess, cbFailure);
 }

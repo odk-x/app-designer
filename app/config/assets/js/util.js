@@ -166,8 +166,8 @@ util.processMenuOptions = function(result) {
 
 util.getFacilityCountByAdminRegion = function(adminRegionId) {
     return new Promise(function(resolve, reject) {
-        var queryStr = 'SELECT COUNT(*) FROM health_facility ' +
-            'JOIN geographic_regions ON geographic_regions._id = health_facility.admin_region ' +
+        var queryStr = 'SELECT COUNT(*) FROM health_facilities ' +
+            'JOIN geographic_regions ON geographic_regions._id = health_facilities.admin_region_id ' +
             'WHERE geographic_regions._id = ?';
         var queryParam = [adminRegionId];
 
@@ -191,9 +191,9 @@ util.getFacilityCountByAdminRegion = function(adminRegionId) {
 
 util.getOneFacilityRow = function() {
     return new Promise(function(resolve, reject) {
-        var queryStr = 'SELECT * FROM health_facility';
+        var queryStr = 'SELECT * FROM health_facilities';
 
-        odkData.arbitraryQuery('health_facility',
+        odkData.arbitraryQuery('health_facilities',
             queryStr,
             null,
             1,
@@ -234,8 +234,8 @@ util.getOneRefrigeratorRow = function() {
 }
 
 util.getFacilityTypesByAdminRegion = function(adminRegion, successCB, failureCB) {
-    var queryStr = 'SELECT facility_type, count(*) FROM health_facility';
-    var whereStr = ' WHERE admin_region = ?';
+    var queryStr = 'SELECT facility_type, count(*) FROM health_facilities';
+    var whereStr = ' WHERE admin_region_id = ?';
     var groupByStr = ' GROUP BY facility_type';
     var queryParam = [];
 
@@ -245,19 +245,9 @@ util.getFacilityTypesByAdminRegion = function(adminRegion, successCB, failureCB)
     }
 
     queryStr = queryStr + groupByStr;
-    odkData.arbitraryQuery('health_facility',
+    odkData.arbitraryQuery('health_facilities',
         queryStr,
         queryParam,
-        null,
-        null,
-        successCB,
-        failureCB);
-};
-
-util.getDistrictsByAdminLevel2 = function(adminLevel2, successCB, failureCB) {
-    odkData.arbitraryQuery('health_facility',
-        'SELECT admin_region FROM health_facility WHERE regionLevel2 = ? GROUP BY admin_region',
-        [adminLevel2],
         null,
         null,
         successCB,

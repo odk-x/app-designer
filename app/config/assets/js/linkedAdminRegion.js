@@ -4,7 +4,7 @@
 'use strict';
 /* global odkTables, util */
 
-var adminRegionQueryStr = 'admin_region = ?';
+var adminRegionQueryStr = 'admin_region_id = ?';
 
 function display() {
 
@@ -31,9 +31,9 @@ function display() {
     viewFacilitiesButton.on(
         'click',
         function() {
-            var uriParams = util.getKeyToAppendToColdChainURL(util.adminRegion, linkedRegionId);
-             odkTables.openTableToMapView(null, 'health_facility',
-                adminRegionQueryStr, [linkedRegionId], 'config/tables/health_facility/html/hFacility_list.html' + uriParams);
+            var uriParams = util.getKeyToAppendToColdChainURL(util.adminRegionId, linkedRegionId);
+             odkTables.openTableToMapView(null, 'health_facilities',
+                adminRegionQueryStr, [linkedRegionId], 'config/tables/health_facilities/html/hFacilities_list.html' + uriParams);
         }
     );
 
@@ -41,7 +41,7 @@ function display() {
     filterFacilitiesButton.on(
         'click',
         function() {
-            var filterQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegion, linkedRegionId);
+            var filterQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegionId, linkedRegionId);
             filterQueryParams = filterQueryParams + util.getKeyToAppendToColdChainURL(util.adminRegionName,
                 linkedRegion, false);
             odkTables.launchHTML(null,
@@ -53,7 +53,7 @@ function display() {
     viewRefrigeratorsButton.on(
         'click',
         function() {
-            var frigQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegion, linkedRegionId);
+            var frigQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegionId, linkedRegionId);
             odkTables.launchHTML(null,
                 'config/tables/refrigerators/html/refrigerators_list.html' + frigQueryParams);
         }
@@ -63,7 +63,7 @@ function display() {
     viewServiceRefrigeratorsButton.on(
         'click',
         function() {
-            var serviceQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegion, linkedRegionId);
+            var serviceQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegionId, linkedRegionId);
 
             odkTables.launchHTML(null,
                 'config/tables/refrigerators/html/refrigerators_service_list.html' + serviceQueryParams);

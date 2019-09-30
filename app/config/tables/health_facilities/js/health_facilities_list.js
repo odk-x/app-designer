@@ -4,7 +4,7 @@
 /* global $, odkCommon, odkData, odkTables, util, listViewLogic */
 'use strict';
 
-var listQuery = 'SELECT * FROM health_facility';
+var listQuery = 'SELECT * FROM health_facilities';
 
 var searchParams = '(facility_id LIKE ? OR facility_name LIKE ?)';
 
@@ -19,7 +19,7 @@ function resumeFunc(state) {
         $('#submit').val(odkCommon.localizeText(locale, "search"));
 
         // set the parameters for the list view
-        listViewLogic.setTableId('health_facility');
+        listViewLogic.setTableId('health_facilities');
         listViewLogic.setListQuery(listQuery);
         listViewLogic.setSearchParams(searchParams);
         listViewLogic.setListElement('#list');
@@ -28,11 +28,11 @@ function resumeFunc(state) {
         listViewLogic.setLimitElement('#limitDropdown');
         listViewLogic.setPrevAndNextButtons('#prevButton', '#nextButton');
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
-        listViewLogic.showEditAndDeleteButtons(true);
+        listViewLogic.showEditAndDeleteButtons(true, 'health_facilities');
 
         var facIDTxt = odkCommon.localizeText(locale, "facility_id");
         var facTypeTxt = odkCommon.localizeText(locale, "facility_type_no_colon");
-        listViewLogic.setColIdsToDisplayInList('', 'facility_name', 
+        listViewLogic.setColIdsToDisplayInList('', 'facility_name',
             facIDTxt, 'facility_id', facTypeTxt, 'facility_type');
     }
 

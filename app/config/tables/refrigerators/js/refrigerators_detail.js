@@ -44,7 +44,7 @@ function cbSuccess(result) {
     }
 
     var healthFacilityPromise = new Promise(function(resolve, reject) {
-        odkData.query('health_facility', '_id = ?', [refrigeratorsResultSet.get('facility_row_id')],
+        odkData.query('health_facilities', '_id = ?', [refrigeratorsResultSet.get('facility_row_id')],
             null, null, null, null, null, null, true, resolve, reject);
     });
 
@@ -121,9 +121,9 @@ function onLinkClickFacility() {
     if (!$.isEmptyObject(facilityData)) {
 
         odkTables.openDetailView(null,
-            'health_facility',
+            'health_facilities',
             facilityData.getRowId(0),
-            'config/tables/health_facility/html/health_facility_detail.html');
+            'config/tables/health_facilities/html/health_facilities_detail.html');
     }
 }
 

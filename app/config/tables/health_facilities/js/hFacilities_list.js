@@ -29,7 +29,7 @@ var refrigeratorTypeCBSuccess = function(result) {
 
 var refrigeratorTypeCBFailure = function(error) {
 
-    console.log('health_facility_list refrigeratorTypeCBFailure: ' + error);
+    console.log('health_facilities_list refrigeratorTypeCBFailure: ' + error);
 };
 
 var cbSuccess = function(result) {
@@ -44,7 +44,7 @@ var cbSuccess = function(result) {
 
 var cbFailure = function(error) {
 
-    console.log('health_facility_list getViewData CB error : ' + error);
+    console.log('health_facilities_list getViewData CB error : ' + error);
 };
 
 var resumeFn = function(fIdxStart) {

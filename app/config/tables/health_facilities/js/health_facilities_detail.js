@@ -11,7 +11,7 @@ function onFacilitySummaryClick() {
     {
         var rowIdQueryParams = util.getKeyToAppendToColdChainURL(util.facilityRowId, healthFacilityResultSet.get('_id'));
         odkTables.launchHTML(null,
-            'config/tables/health_facility/html/health_facility_detail_summary.html' + rowIdQueryParams);
+            'config/tables/health_facilities/html/health_facilities_detail_summary.html' + rowIdQueryParams);
     }
 }
 
@@ -39,7 +39,7 @@ function onAddFridgeClick() {
 
 function onEditFacility() {
     if (!$.isEmptyObject(healthFacilityResultSet)) {
-        odkTables.editRowWithSurvey(null, healthFacilityResultSet.getTableId(), healthFacilityResultSet.getRowId(0), 'health_facility', null, null);
+        odkTables.editRowWithSurvey(null, healthFacilityResultSet.getTableId(), healthFacilityResultSet.getRowId(0), 'health_facilities', null, null);
     }
 }
 
@@ -86,7 +86,7 @@ function cbSuccess(result) {
 
 function cbFailure(error) {
 
-    console.log('health_facility_detail getViewData CB error : ' + error);
+    console.log('health_facilities_detail getViewData CB error : ' + error);
 }
 
 function display() {
@@ -110,5 +110,5 @@ function refrigeratorsCBSuccess(invData) {
 
 function refrigeratorsCBFailure(error) {
 
-    console.log('health_facility_detail refrigerators query CB error : ' + error);
+    console.log('health_facilities_detail refrigerators query CB error : ' + error);
 }

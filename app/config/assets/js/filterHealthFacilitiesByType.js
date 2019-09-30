@@ -5,9 +5,9 @@
 /* global odkTables, util */
 
 var queryStr = 'facility_type = ?';
-var adminRegionQueryStr = ' AND admin_region = ?';
+var adminRegionQueryStr = ' AND admin_region_id = ?';
 var leafRegionValue = null;
-var tableId = 'health_facility';
+var tableId = 'health_facilities';
 
 function showFacilityTypeButton(facilityType, facilityTypeCount) {
     var button = $('<button>');
@@ -32,7 +32,7 @@ function showFacilityTypeButton(facilityType, facilityTypeCount) {
         var uriParams = util.getKeysToAppendToColdChainURL(facilityType, null, leafRegionValue, null);
         odkTables.openTableToMapView(null, tableId,
             queryStr, queryParams,
-            'config/tables/health_facility/html/hFacility_list.html' + uriParams );
+            'config/tables/health_facilities/html/hFacilities_list.html' + uriParams );
     });
 
 
@@ -60,7 +60,7 @@ function display() {
 
     var headerDiv = $('#header');
 
-    leafRegionValue = util.getQueryParameter(util.adminRegion);
+    leafRegionValue = util.getQueryParameter(util.adminRegionId);
     var leafRegionName = util.getQueryParameter(util.adminRegionName);
     if (leafRegionValue !== null && leafRegionValue !== undefined) {
         if (leafRegionName !== null && leafRegionName !== undefined) {
