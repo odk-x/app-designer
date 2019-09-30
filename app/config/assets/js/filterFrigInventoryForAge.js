@@ -32,8 +32,10 @@ async function display() {
             var facilityType = $("#facility_type").val();
 
             var facilityRegionJson = regionDisplayUtil.getLowestAdminRegionInfo(maxAdminRegionLevelNumber);
-            var facilityRegionLevel = facilityRegionJson[util.adminRegionLevel];
-            var facilityRegion = facilityRegionJson[util.adminRegionName];
+            var facilityRegionLevel = (facilityRegionJson != null &&
+                facilityRegionJson[util.adminRegionLevel] != null) ? facilityRegionJson[util.adminRegionLevel] : null;
+            var facilityRegion = (facilityRegionJson != null && facilityRegionJson[util.adminRegionName] != null) ?
+                facilityRegionJson[util.adminRegionName] : null;
 
             // Get the value of the region
             var powerSource = $("#power_source").val();

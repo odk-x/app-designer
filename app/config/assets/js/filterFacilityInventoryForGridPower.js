@@ -37,8 +37,10 @@ async function display() {
 
             // Get the value of the region
             var facilityRegionJson = regionDisplayUtil.getLowestAdminRegionInfo(maxAdminRegionLevelNumber);
-            var facilityRegionLevel = facilityRegionJson[util.adminRegionLevel];
-            var facilityRegion = facilityRegionJson[util.adminRegionName];
+            var facilityRegionLevel = (facilityRegionJson != null && facilityRegionJson[util.adminRegionLevel]) ?
+                facilityRegionJson[util.adminRegionLevel] : null;
+            var facilityRegion = (facilityRegionJson != null && facilityRegionJson[util.adminRegionName]) ?
+                facilityRegionJson[util.adminRegionName] : null;
 
             var queryParam = util.getKeysToAppendToColdChainURL(facilityType, facilityRegionLevel, facilityRegion, null);
 
