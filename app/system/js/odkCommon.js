@@ -765,6 +765,7 @@ window.odkCommon = {
     *
     * @param level - levels are A, D, E, I, S, V, W
     * @param loggingString - actual message to log
+    * @param detail - detail to add to log
     * @return
     */
    log: function(level, loggingString, detail) {
