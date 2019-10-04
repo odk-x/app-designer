@@ -130,32 +130,32 @@ promptTypes.base = Backbone.View.extend({
                 require(['text!'+that.templatePath], function(source) {
                     try {
                         that.template = Handlebars.compile(source);
-                        ctxt.log('D',"prompts."+that.type+"._whenTemplateIsReady.success",
+                        odkCommon.log('D',"prompts."+that.type+"._whenTemplateIsReady.success",
                             " px: " + that.promptIdx);
                         // ensure that require is unwound
                         setTimeout(function() {
-                                ctxt.log('I',"prompts."+that.type+"._whenTemplateIsReady.success.setTimeout",
+                                odkCommon.log('I',"prompts."+that.type+"._whenTemplateIsReady.success.setTimeout",
                                             " px: " + that.promptIdx);
                                 ctxt.success();
                             },
                             0 );
                     } catch (e) {
-                        ctxt.log('E',"prompts."+that.type+"._whenTemplateIsReady.exception",
+                        odkCommon.log('E',"prompts."+that.type+"._whenTemplateIsReady.exception",
                             " px: " + that.promptIdx + " exception: " + e.message + " e: " + String(e));
                         ctxt.failure({message: "Error compiling handlebars template."});
                     }
                 }, function(err) {
-                    ctxt.log('E',"prompts."+that.type+"._whenTemplateIsReady.require.failure " + err.requireType + ' modules: ',
+                    odkCommon.log('E',"prompts."+that.type+"._whenTemplateIsReady.require.failure " + err.requireType + ' modules: ',
                         err.requireModules.toString() + " px: " + that.promptIdx);
                     ctxt.failure({message: "Error loading handlebars template."});
                 });
             } catch (e) {
-                ctxt.log('E',"prompts."+that.type+"._whenTemplateIsReady.require.exception",
+                odkCommon.log('E',"prompts."+that.type+"._whenTemplateIsReady.require.exception",
                     " px: " + that.promptIdx + " exception: " + e.message + " e: " + String(e));
                 ctxt.failure({message: "Error reading handlebars template."});
             }
         } else {
-            ctxt.log('E',"prompts." + that.type + "._whenTemplateIsReady.noTemplate", "px: " + that.promptIdx);
+            odkCommon.log('E',"prompts." + that.type + "._whenTemplateIsReady.noTemplate", "px: " + that.promptIdx);
             ctxt.failure({message: "Configuration error: No handlebars template found!"});
         }
     },
@@ -396,7 +396,7 @@ promptTypes.base = Backbone.View.extend({
                 //This is a passive error because there could just be a problem
                 //with the content provider/network/remote service rather than with
                 //the form.
-                newctxt.log('W',"prompts." + this.type + ".configureRenderContext.error",
+                odkCommon.log('W',"prompts." + this.type + ".configureRenderContext.error",
                             "px: " + this.promptIdx + " Error fetching choices " + e);
                 that.renderContext.passiveError = "Error fetching choices.\n";
                 if(e.statusText) {
@@ -419,12 +419,12 @@ promptTypes.base = Backbone.View.extend({
                         newctxt.success("success");
                     //},
                     //function (err) {
-                    //    newctxt.log('E',"prompts."+that.type+".require.failure " + err.requireType + ' modules: ',
+                    //    odkCommon.log('E',"prompts."+that.type+".require.failure " + err.requireType + ' modules: ',
                     //        err.requireModules.toString() + " px: " + that.promptIdx);
                     //    newctxt.failure({message: "Error fetching choices from csv data."});
                     //});
                 } catch (e) {
-                    newctxt.log('E',"promptType." + that.type, "exception: " + e.message + " e: " + e.toString());
+                    odkCommon.log('E',"promptType." + that.type, "exception: " + e.message + " e: " + e.toString());
                     newctxt.failure({message: "Error reading choices from csv data."});
                 }
             };
@@ -525,12 +525,12 @@ promptTypes.finalize = promptTypes.base.extend({
 
         var ctxt = that.controller.newContext(evt, that.type + ".saveIncomplete");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".saveIncomplete", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".saveIncomplete", "px: " + that.promptIdx);
             that.controller.saveIncomplete($.extend({},ctxt,{success:function() {
                     that.controller.leaveInstance(ctxt);
                 }}));
         }, failure: function(m) {
-            ctxt.log('D',"prompts." + that.type + ".saveIncomplete -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".saveIncomplete -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -541,10 +541,10 @@ promptTypes.finalize = promptTypes.base.extend({
 
         var ctxt = that.controller.newContext(evt, that.type + ".saveFinal");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".saveFinal", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".saveFinal", "px: " + that.promptIdx);
             that.controller.gotoFinalizeAndTerminateAction(ctxt);
         }, failure: function(m) {
-            ctxt.log('D',"prompts." + that.type + ".saveFinal -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".saveFinal -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     }
@@ -588,7 +588,7 @@ promptTypes.instances = promptTypes.base.extend({
     },
     configureRenderContext: function(ctxt) {
         var that = this;
-        ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
+        odkCommon.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
 
         // see if we are supposed to apply a query filter to this...
         var model = opendatakit.getCurrentModel();
@@ -655,10 +655,10 @@ promptTypes.instances = promptTypes.base.extend({
 
         var ctxt = that.controller.newContext(evt, that.type + ".createInstance");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".createInstance", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".createInstance", "px: " + that.promptIdx);
             that.controller.createInstance(ctxt);
         }, failure: function(m) {
-            ctxt.log('D',"prompts." + that.type + ".createInstance -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".createInstance -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -671,10 +671,10 @@ promptTypes.instances = promptTypes.base.extend({
         if ( instanceIdToOpen !== null && instanceIdToOpen !== undefined ) {
             var ctxt = that.controller.newContext(evt, that.type + ".openInstance");
             that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-                ctxt.log('D',"prompts." + that.type + ".openInstance", "px: " + that.promptIdx);
+                odkCommon.log('D',"prompts." + that.type + ".openInstance", "px: " + that.promptIdx);
                 that.controller.openInstance(ctxt, instanceIdToOpen);
             }, failure: function(m) {
-                ctxt.log('D',"prompts." + that.type + ".createInstance -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                odkCommon.log('D',"prompts." + that.type + ".createInstance -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
                 ctxt.failure(m);
             }}));
         }
@@ -698,7 +698,7 @@ promptTypes.instances = promptTypes.base.extend({
         if ( instanceIdToDelete !== null && instanceIdToDelete !== undefined ) {
             var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".deleteInstance");
             that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-                ctxt.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
+                odkCommon.log('D',"prompts." + that.type + ".deleteInstance", "px: " + that.promptIdx);
                 var model = opendatakit.getCurrentModel();
                 // in this case, we are our own 'linked' table.
                 database.delete_checkpoints_and_row($.extend({}, ctxt, {success: function() {
@@ -706,7 +706,7 @@ promptTypes.instances = promptTypes.base.extend({
                     }}),
                 model, instanceIdToDelete);
             }, failure: function(m) {
-                ctxt.log('D',"prompts." + that.type + ".deleteInstance -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                odkCommon.log('D',"prompts." + that.type + ".deleteInstance -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
                 ctxt.failure(m);
             }}));
         }
@@ -734,12 +734,12 @@ promptTypes.contents = promptTypes.base.extend({
         if ( selectedScreenPath !== null ) {
             var ctxt = that.controller.newContext(evt, that.type + ".selectContentsItem");
             that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-                ctxt.log('D',"prompts." + that.type + ".selectContentsItem: gotoScreenPath: " + selectedScreenPath,
+                odkCommon.log('D',"prompts." + that.type + ".selectContentsItem: gotoScreenPath: " + selectedScreenPath,
                     "px: " + that.promptIdx);
                 // TODO: allow user to specify whether or not this is an 'advancing' operation
                 that.controller.gotoScreenPath(ctxt, selectedScreenPath, true);
             }, failure: function(m) {
-                ctxt.log('D',"prompts." + that.type + ".selectContentsItem -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                odkCommon.log('D',"prompts." + that.type + ".selectContentsItem -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
                 ctxt.failure(m);
             }}));
         }
@@ -800,7 +800,7 @@ promptTypes._linked_type = promptTypes.base.extend({
                 that._linkedCachedInstanceName = null;
             }
             database.readTableDefinition($.extend({}, ctxt, {success:function(tlo) {
-                ctxt.log('D',"prompts." + that.type +
+                odkCommon.log('D',"prompts." + that.type +
                     'getlinkedModel.readTableDefinition.success', "px: " + that.promptIdx );
                 that._linkedCachedModel = tlo;
                 ctxt.success(tlo);
@@ -813,16 +813,16 @@ promptTypes._linked_type = promptTypes.base.extend({
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
         }
         return function(ctxt, internalPromptContext, action, jsonObject) {
-            ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
+            odkCommon.log('D',"prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
                 " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
             if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
-                ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
+                odkCommon.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 that.enableButtons();
                 that.reRender(ctxt);
             }
             else {
-                ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome failure returned from intent',
+                odkCommon.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome failure returned from intent',
                     "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
                     internalPromptContext + " action: " + action);
                 that.enableButtons();
@@ -863,7 +863,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
     configureRenderContext: function(ctxt) {
         var that = this;
         var queryDefn = opendatakit.getQueriesDefinition(this.values_list);
-        ctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
+        odkCommon.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
         that.renderContext.new_instance_text = ((that.display.new_instance_text !== null &&
                 that.display.new_instance_text !== undefined) ? that.display.new_instance_text : "New");
         that.getlinkedModel($.extend({},ctxt,{success:function(linkedModel) {
@@ -872,9 +872,9 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
             var selArgs = queryDefn.selectionArgs();
             var ordBy = that.convertOrderBy(linkedModel);
             var displayElementName = that.getLinkedInstanceName();
-            ctxt.log('D',"prompts." + that.type + ".configureRenderContext.before.get_linked_instances", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".configureRenderContext.before.get_linked_instances", "px: " + that.promptIdx);
             database.get_linked_instances($.extend({},ctxt,{success:function(instanceList) {
-                ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances", "px: " + that.promptIdx);
+                odkCommon.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances", "px: " + that.promptIdx);
                 var filteredInstanceList = _.filter(instanceList, function(instance) {
                     return that.choice_filter(instance);
                 });
@@ -907,7 +907,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
 
 
 
-                ctxt.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances.success", "px: " + that.promptIdx + " instanceList: " + instanceList.length);
+                odkCommon.log('D',"prompts." + that.type + ".configureRenderContext.success.get_linked_instances.success", "px: " + that.promptIdx + " instanceList: " + instanceList.length);
                 ctxt.success();
             }}), dbTableName, selString, selArgs, displayElementName, ordBy);
         }}));
@@ -995,7 +995,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
 
         var ctxt = that.controller.newContext(that._cachedEvent, that.type + ".handleConfirmation");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".handleConfirmation", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".handleConfirmation", "px: " + that.promptIdx);
             that.getlinkedModel($.extend({},ctxt,{success:function(linkedModel) {
                 database.delete_checkpoints_and_row($.extend({},ctxt,{success:function() {
                         that.enableButtons();
@@ -1012,7 +1012,7 @@ promptTypes.linked_table = promptTypes._linked_type.extend({
                     }}), linkedModel, instanceId);
             }}));
         }, failure: function(m) {
-            ctxt.log('D',"prompts." + that.type + ".handleConfirmation -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".handleConfirmation -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             that.enableButtons();
             ctxt.failure(m);
         }}));
@@ -1090,16 +1090,16 @@ promptTypes.external_link = promptTypes.base.extend({
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
         }
         return function(ctxt, internalPromptContext, action, jsonObject) {
-            ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
+            odkCommon.log('D',"prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
                 " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
             if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
-                ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
+                odkCommon.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 that.enableButtons();
                 that.reRender(ctxt);
             }
             else {
-                ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome failure returned from intent:',
+                odkCommon.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome failure returned from intent:',
                     "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
                     internalPromptContext + " action: " + action);
                 that.enableButtons();
@@ -1137,12 +1137,12 @@ promptTypes.user_branch = promptTypes.base.extend({
         if ( newPath !== null && newPath !== undefined ) {
             var ctxt = that.controller.newContext(evt, that.type + ".selectBranchItem");
             that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-                ctxt.log('D',"prompts." + that.type + ".selectBranchItem: click gotoScreenPath: " + newPath);
+                odkCommon.log('D',"prompts." + that.type + ".selectBranchItem: click gotoScreenPath: " + newPath);
                 // TODO: allow user to specify whether or not this is an 'advancing' operation
                 that.controller.gotoScreenPath(ctxt,newPath,true);
             },
             failure:function(m) {
-                ctxt.log('D',"prompts." + that.type + ".selectBranchItem -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                odkCommon.log('D',"prompts." + that.type + ".selectBranchItem -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
                 ctxt.failure(m);
             }}));
         }
@@ -1151,7 +1151,7 @@ promptTypes.user_branch = promptTypes.base.extend({
     configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
-            ctxt.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
+            odkCommon.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
                         "px: " + that.promptIdx);
             ctxt.success();
         }});
@@ -1383,7 +1383,7 @@ promptTypes.select = promptTypes._linked_type.extend({
     configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
-            ctxt.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
+            odkCommon.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
                         "px: " + that.promptIdx);
             that.updateRenderValue(that.parseSaveValue(that.getValue()));
             ctxt.success();
@@ -1393,7 +1393,7 @@ promptTypes.select = promptTypes._linked_type.extend({
         }});
 
          var populateChoicesViaQueryUsingLinkedTable = function(query, newctxt){
-            newctxt.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".configureRenderContext", "px: " + that.promptIdx);
             that.getlinkedModel($.extend({},newctxt,{success:function(linkedModel) {
                 var dbTableName = linkedModel.table_id;
                 var selString = that.convertSelection(linkedModel);
@@ -1556,7 +1556,7 @@ promptTypes.select_one_integer = promptTypes.select_one.extend({
         that.updateRenderValue(formValue);
 
         // Just dynamically reRender
-        ctxt.log('D',"prompts." + that.type + ".modification: reRender", "px: " + that.promptIdx);
+        odkCommon.log('D',"prompts." + that.type + ".modification: reRender", "px: " + that.promptIdx);
         that.reRender(evt);
     },
     /**
@@ -1968,11 +1968,11 @@ promptTypes.datetime = promptTypes.input_type.extend({
         if (that.modified === true) {
             var ctxt = that.controller.newContext(evt, that.type + ".loseFocus");
             that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-                ctxt.log('D',"prompts." + that.type + ".loseFocus: reRender", "px: " + that.promptIdx);
+                odkCommon.log('D',"prompts." + that.type + ".loseFocus: reRender", "px: " + that.promptIdx);
                 that.reRender(ctxt);
             },
             failure:function(m) {
-                ctxt.log('D',"prompts." + that.type + ".loseFocus -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                odkCommon.log('D',"prompts." + that.type + ".loseFocus -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
                 ctxt.failure(m);
             }}));
         }
@@ -2042,7 +2042,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 }
                 value = new Date(formattedDateValue);
             }
-            
+
             //
             // we are using a date pop-up.  If an earlier action fails, we should not
             // attempt to apply the state changes of this pop-up. Tolerate the loss
@@ -2092,7 +2092,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 }
             },
             failure:function(m) {
-                ctxt.log('D',"prompts." + that.type + ".modification -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+                odkCommon.log('D',"prompts." + that.type + ".modification -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
                 ctxt.failure(m);
             }}));
         }
@@ -2107,7 +2107,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
             }
 
             that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
-            
+
             var inputElement = that.$('input');
             that.dtp = inputElement.data('DateTimePicker');
 
@@ -2144,7 +2144,7 @@ promptTypes.birthdate = promptTypes.date.extend({
             }
 
             that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate, maxYear: new Date().getFullYear()});
-            
+
             var inputElement = that.$('input');
             that.dtp = inputElement.data('DateTimePicker');
 
@@ -2242,10 +2242,10 @@ promptTypes.media = promptTypes.base.extend({
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
         }
         return function(ctxt, internalPromptContext, action, jsonObject) {
-            ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
+            odkCommon.log('D',"prompts." + that.type + 'getCallback.actionFn', "px: " + that.promptIdx +
                 " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
             if (jsonObject.status === -1 /* Activity.RESULT_OK */ ) {
-                ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
+                odkCommon.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK', "px: " + that.promptIdx +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
                 var uriFragment = (jsonObject.result !== null && jsonObject.result !== undefined) ? jsonObject.result.uriFragment : null;
                 var contentType = (jsonObject.result !== null && jsonObject.result !== undefined) ? jsonObject.result.contentType : null;
@@ -2262,7 +2262,7 @@ promptTypes.media = promptTypes.base.extend({
                 that.reRender(ctxt);
             }
             else {
-                ctxt.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome',
+                odkCommon.log('W',"prompts." + that.type + 'getCallback.actionFn.failureOutcome',
                     "px: " + that.promptIdx +
                     " failure returned from intent" +
                     " promptPath: " + promptPath + " internalPromptContext: " + internalPromptContext + " action: " + action);
@@ -2432,11 +2432,11 @@ promptTypes.launch_intent = promptTypes.base.extend({
             throw new Error("Promptpath does not match: " + promptPath + " vs. " + that.getPromptPath());
         }
         return function(ctxt, internalPromptContext, action, jsonObject) {
-            ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn',
+            odkCommon.log('D',"prompts." + that.type + 'getCallback.actionFn',
                 "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
                 internalPromptContext + " action: " + action);
             if (jsonObject.status === -1 ) { // Activity.RESULT_OK
-                ctxt.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK',
+                odkCommon.log('D',"prompts." + that.type + 'getCallback.actionFn.resultOK',
                     "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
                     internalPromptContext + " action: " + action);
                 if (jsonObject.result !== null && jsonObject.result !== undefined) {
@@ -2445,7 +2445,7 @@ promptTypes.launch_intent = promptTypes.base.extend({
                     that.reRender(ctxt);
                 }
             } else {
-                ctxt.log('E',"prompts." + that.type + 'getCallback.actionFn.failureOutcome',
+                odkCommon.log('E',"prompts." + that.type + 'getCallback.actionFn.failureOutcome',
                     "px: " + that.promptIdx + " promptPath: " + promptPath + " internalPromptContext: " +
                     internalPromptContext + " action: " + action);
                 ctxt.failure({message: "Action canceled."});
@@ -2588,12 +2588,12 @@ promptTypes.bargraph = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_up");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_up: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_up: reRender", "px: " + that.promptIdx);
             that.vHeight = that.vHeight + (that.vHeight * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -2601,12 +2601,12 @@ promptTypes.bargraph = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_down");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_down: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_down: reRender", "px: " + that.promptIdx);
             that.vHeight = that.vHeight - (that.vHeight * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -2614,12 +2614,12 @@ promptTypes.bargraph = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_x_up");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_up: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_up: reRender", "px: " + that.promptIdx);
             that.vWidth = that.vWidth + (that.vWidth * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -2627,19 +2627,19 @@ promptTypes.bargraph = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_down: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_down: reRender", "px: " + that.promptIdx);
             that.vWidth = that.vWidth - (that.vWidth * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
     configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
-            ctxt.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
+            odkCommon.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
                         "px: " + that.promptIdx);
             ctxt.success();
         },
@@ -2783,12 +2783,12 @@ promptTypes.linegraph = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_up");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_up: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_up: reRender", "px: " + that.promptIdx);
             that.vHeight = that.vHeight + (that.vHeight * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -2796,12 +2796,12 @@ promptTypes.linegraph = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_down");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_down: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_down: reRender", "px: " + that.promptIdx);
             that.vHeight = that.vHeight - (that.vHeight * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -2809,12 +2809,12 @@ promptTypes.linegraph = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_x_up");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_up: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_up: reRender", "px: " + that.promptIdx);
             that.vWidth = that.vWidth + (that.vWidth * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -2822,19 +2822,19 @@ promptTypes.linegraph = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_down: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_down: reRender", "px: " + that.promptIdx);
             that.vWidth = that.vWidth - (that.vWidth * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
     configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
-            ctxt.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
+            odkCommon.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
                         "px: " + that.promptIdx);
             ctxt.success();
         },
@@ -3040,14 +3040,14 @@ promptTypes.piechart = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_up");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_up: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_up: reRender", "px: " + that.promptIdx);
             that.vHeight = that.vHeight + (that.vHeight * 0.1);
             that.vWidth = that.vWidth + (that.vWidth * 0.1);
             that.vRadius = that.vRadius * 1.1;
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -3055,21 +3055,21 @@ promptTypes.piechart = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_down");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_down: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_down: reRender", "px: " + that.promptIdx);
             that.vHeight = that.vHeight - (that.vHeight * 0.1);
             that.vWidth = that.vWidth - (that.vWidth * 0.1);
             that.vRadius = that.vRadius * 0.9;
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
     configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
-            ctxt.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
+            odkCommon.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
                         "px: " + that.promptIdx);
             ctxt.success();
         },
@@ -3191,12 +3191,12 @@ promptTypes.scatterplot = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_up");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_up: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_up: reRender", "px: " + that.promptIdx);
             that.vHeight = that.vHeight + (that.vHeight * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -3204,12 +3204,12 @@ promptTypes.scatterplot = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_y_down");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_down: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_down: reRender", "px: " + that.promptIdx);
             that.vHeight = that.vHeight - (that.vHeight * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_y_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_y_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -3217,12 +3217,12 @@ promptTypes.scatterplot = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_x_up");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_up: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_up: reRender", "px: " + that.promptIdx);
             that.vWidth = that.vWidth + (that.vWidth * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_up -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
@@ -3230,19 +3230,19 @@ promptTypes.scatterplot = promptTypes.base.extend({
         var that = this;
         var ctxt = that.controller.newContext(evt, that.type + ".scale_x_down");
         that.controller.enqueueTriggeringContext($.extend({},ctxt,{success:function() {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_down: reRender", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_down: reRender", "px: " + that.promptIdx);
             that.vWidth = that.vWidth - (that.vWidth * 0.2);
             that.reRender(ctxt);
         },
         failure:function(m) {
-            ctxt.log('D',"prompts." + that.type + ".scale_x_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
+            odkCommon.log('D',"prompts." + that.type + ".scale_x_down -- prior event terminated with an error -- aborting!", "px: " + that.promptIdx);
             ctxt.failure(m);
         }}));
     },
     configureRenderContext: function(ctxt) {
         var that = this;
         var newctxt = $.extend({}, ctxt, {success: function(outcome) {
-            ctxt.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
+            odkCommon.log('D',"prompts." + that.type + ".configureRenderContext." + outcome,
                         "px: " + that.promptIdx);
             ctxt.success();
         },
