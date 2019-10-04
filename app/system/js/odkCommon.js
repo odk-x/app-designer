@@ -1,11 +1,11 @@
 /**
  * The odkCommonIf injected interface is used in conjunction with
  * this class to access information about the webkit (e.g., platformInfo)
- * and perform localizations. 
+ * and perform localizations.
  *
  * The Java side can asynchronously inform the JS side of state
  * changing actions. The two actions currently supported are:
- *  (1) results of a doAction() request when dispatchStruct (1st arg) 
+ *  (1) results of a doAction() request when dispatchStruct (1st arg)
  *      is not null.
  *
  *  (2) Java-initiated actions (as #-prefixed strings).
@@ -35,7 +35,7 @@
  *               }
  *            });
  *
- * Users of odkCommon should invoke this listener function 
+ * Users of odkCommon should invoke this listener function
  * once, themselves, after registration, to ensure that any
  * queued action is processed. They should do this after all
  * initialization is complete.
@@ -80,7 +80,7 @@ window.odkCommon = {
      *               }
      *            });
      *
-     * Users of odkCommon should invoke this listener function 
+     * Users of odkCommon should invoke this listener function
      * once, themselves, after registration, to ensure that any
      * queued action is processed. They should do this after all
      * initialization is complete.
@@ -88,7 +88,7 @@ window.odkCommon = {
     registerListener: function(listener) {
         var that = this;
         that._listener = listener;
-        // NOTE: users should invoke the listener once to ensure that 
+        // NOTE: users should invoke the listener once to ensure that
         // any queued actions are processed. This should be done after
         // all page initialization is complete.
         odkCommonIf.frameworkHasLoaded();
@@ -146,17 +146,17 @@ window.odkCommon = {
    getRowFileAsUrl: function(tableId, rowId, rowPathUri) {
       return odkCommonIf.getRowFileAsUrl(tableId, rowId, rowPathUri);
    },
-   
+
    /**
     * predicate definition copied from underscore library
     */
    isString: function(obj) {
         return (obj !== undefined) && (obj !== null) && (Object.prototype.toString.call(obj) === "[object String]");
    },
-   
+
    /**
     * Return the content of a display object for the given token.
-    * Note that this might include text, hint, image, etc. that 
+    * Note that this might include text, hint, image, etc. that
     * are then localizable.
     *
     * In general, the resulting object can be customized further
@@ -181,7 +181,7 @@ window.odkCommon = {
            (window.odkTableSpecificDefinitions !== undefined) &&
            (window.odkTableSpecificDefinitions !== null) &&
            stringToken in window.odkTableSpecificDefinitions._tokens );
-    
+
       var countFound = (foundFramework ? 1 : 0) + (foundCommon ? 1 : 0) + (foundTableSpecific ? 1 : 0);
       if ( countFound > 1 ) {
           return 'string_token('+stringToken+')--defined-multiple-places';
@@ -201,10 +201,10 @@ window.odkCommon = {
       return undefined;
    },
    i18nFieldNames: [ 'text', 'image', 'audio', 'video' ],
-   
+
    extractLangOnlyLocale: function(locale) {
       // Device locale strings are of the form: language + "_" + country
-      // Allow for generic language translations and for country-specific langauge 
+      // Allow for generic language translations and for country-specific langauge
       // translations.
       var idxUnderscore = locale.indexOf('_');
       if ( idxUnderscore > 0) {
@@ -212,7 +212,7 @@ window.odkCommon = {
       }
       return null;
    },
-   
+
    /**
     * Return the locale that was configured by the user in the Java-side's Device Settings.
     */
@@ -221,14 +221,14 @@ window.odkCommon = {
        var obj = JSON.parse(pi);
        return obj.preferredLocale;
    },
-   
+
    /**
     * Get details about the preferred locale and the Device's locale setting.
     * And also whether or not the preferred locale (above) is (just) the Device
     * locale.
     * Note that the user may have set the preferred locale to be "en_US" and the
     * device locale may also happen to be "en_US". In this case, usingDeviceLocale
-    * is false. Only if the user chooses to use the device locale (vs. one of the 
+    * is false. Only if the user chooses to use the device locale (vs. one of the
     * locales defined in the common translations) will this be true.
     */
    getLocaleDetails: function() {
@@ -243,14 +243,14 @@ window.odkCommon = {
             displayCountry: obj.displayCountry,
             isoLanguage: obj.isoLanguage,
             displayLanguage: obj.displayLanguage };
-            
+
        // and, finally if the device supports it, report the BCP47 tag:
        if ( 'bcp47LanguageTag' in obj ) {
           info.bcp47LanguageTag = obj.bcp47LanguageTag;
        }
        return info;
    },
-   
+
    /**
     * Return true if there is some type of localization for the given i18nToken and locale
     * OR if there is a 'default' localization value.
@@ -266,12 +266,12 @@ window.odkCommon = {
       if(this.isString(textOrLangMap)) {
           return true;
       }
-      
+
       // Device locale strings are of the form: language + "_" + country
-      // Allow for generic language translations and for country-specific langauge 
+      // Allow for generic language translations and for country-specific langauge
       // translations.
       var langOnlyLocale = this.extractLangOnlyLocale(locale);
-      
+
       // the keys in the textOrLangMap are one of: text, image, audio, video
       // see if any of these have a localization.
       for ( var i = 0 ; i < this.i18nFieldNames.length ; ++i ) {
@@ -291,7 +291,7 @@ window.odkCommon = {
       }
       return false;
    },
-   
+
    hasFieldLocalization:function(locale, i18nToken, fieldName) {
       var textOrLangMap = this.lookupToken(i18nToken);
       if (textOrLangMap === undefined ) {
@@ -300,12 +300,12 @@ window.odkCommon = {
       if(this.isString(textOrLangMap)) {
           return true;
       }
-          
+
       // Device locale strings are of the form: language + "_" + country
-      // Allow for generic language translations and for country-specific langauge 
+      // Allow for generic language translations and for country-specific langauge
       // translations.
       var langOnlyLocale = this.extractLangOnlyLocale(locale);
-  
+
       if ( fieldName in textOrLangMap ) {
           var textMap = textOrLangMap[fieldName] || {};
           if(this.isString(textMap)) {
@@ -320,7 +320,7 @@ window.odkCommon = {
       }
       return false;
    },
-   
+
    localizeTokenField:function(locale, i18nToken, fieldName) {
       var textOrLangMap = this.lookupToken(i18nToken);
       if (textOrLangMap === undefined ) {
@@ -338,7 +338,7 @@ window.odkCommon = {
       }
 
       // Device locale strings are of the form: language + "_" + country
-      // Allow for generic language translations and for country-specific langauge 
+      // Allow for generic language translations and for country-specific langauge
       // translations.
       var langOnlyLocale = this.extractLangOnlyLocale(locale);
 
@@ -352,23 +352,23 @@ window.odkCommon = {
           return undefined;
       }
     },
-   
+
     hasTextLocalization:function(locale, i18nToken) {
       return this.hasFieldLocalization(locale, i18nToken, 'text');
     },
-   
+
     localizeText:function(locale, i18nToken) {
       return this.localizeTokenField(locale, i18nToken, 'text');
     },
-   
+
     hasImageLocalization:function(locale, i18nToken) {
       return this.hasFieldLocalization(locale, i18nToken, 'image');
     },
-   
+
     hasAudioLocalization:function(locale, i18nToken) {
       return this.hasFieldLocalization(locale, i18nToken, 'audio');
     },
-   
+
     hasVideoLocalization:function(locale, i18nToken) {
       return this.hasFieldLocalization(locale, i18nToken, 'video');
     },
@@ -767,7 +767,8 @@ window.odkCommon = {
     * @param loggingString - actual message to log
     * @return
     */
-   log: function(level, loggingString) {
+   log: function(level, loggingString, detail) {
+      loggingString = loggingString + detail;
       odkCommonIf.log(level, loggingString);
    },
 
@@ -826,7 +827,7 @@ window.odkCommon = {
    genUUID:function() {
       /*jshint bitwise: false*/
       // construct a UUID (from http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript )
-      var id = "uuid:" + 
+      var id = "uuid:" +
         'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
           // NOTE: the logical OR forces the number into an integer
           var r = Math.random()*16|0;
@@ -839,7 +840,7 @@ window.odkCommon = {
    },
 
    constructSurveyUri: function(tableId, formId, rowId, screenPath, elementKeyToValueMap ) {
-       
+
        if (!this.isString(tableId)) {
            throw 'constructSurveyUri()--tableId not a string';
        }
@@ -855,16 +856,16 @@ window.odkCommon = {
        if ( screenPath !== undefined && screenPath !== null ) {
            theScreenPath = screenPath;
        }
-       
+
        // stringify the key-value map before passing it to Java side...
        if ( elementKeyToValueMap === undefined || elementKeyToValueMap === null ) {
           return odkCommonIf.constructSurveyUri(tableId, theFormId, theRowId, theScreenPath, null);
        } else {
-          return odkCommonIf.constructSurveyUri(tableId, theFormId, theRowId, theScreenPath, 
+          return odkCommonIf.constructSurveyUri(tableId, theFormId, theRowId, theScreenPath,
                 JSON.stringify(elementKeyToValueMap));
        }
    },
-   
+
    /**
     * Execute an action (intent call).
     *
@@ -886,7 +887,7 @@ window.odkCommon = {
     *                         "action" : intent.setAction(value)
     *                         "category" : either a single string or a list of strings for intent.addCategory(item)
     *                         "flags" : the integer code for the values to store
-    *                         "componentPackage" : If both package and activity are specified, 
+    *                         "componentPackage" : If both package and activity are specified,
     *                         "componentActivity" : will call intent.setComponent(new ComponentInfo(package, activity))
     *                         "extras" : { key-value map describing extras bundle }
     *                   }
@@ -905,7 +906,7 @@ window.odkCommon = {
     *          "OK"                    -- request issued
     *          "Application not found" -- could not find app to handle intent
     *
-    * If the request has been issued, and the dispatchStruct is not null then 
+    * If the request has been issued, and the dispatchStruct is not null then
     * the javascript will be notified of the availability of a result via the
     * registerListener callback. That callback should fetch the the results via
     *      odkCommon.viewFirstQueuedAction().
@@ -939,7 +940,7 @@ window.odkCommon = {
     *  resultCode === -1  -- RESULT_OK
     *  any result code >= 1 is user-defined. Unclear the level of support
     *
-    *  This will log errors but any errors will cause a RESULT_CANCELLED 
+    *  This will log errors but any errors will cause a RESULT_CANCELLED
     *  exit. See the logs for what the error was.
     */
    closeWindow: function( resultCode, keyValueBundle ) {
@@ -949,7 +950,7 @@ window.odkCommon = {
           odkCommonIf.closeWindow( "" + resultCode, JSON.stringify(keyValueBundle) );
        }
    },
-   
+
    /**
     * @return the oldest queued action outcome.
     *   or Url change. Return null if there are none.
@@ -1365,11 +1366,11 @@ if ( window.odkCommonIf === undefined || window.odkCommonIf === null ) {
         closeWindow: function( resultCode, jsonResult ) {
             // TODO: return resultCode and result when there is a parent window
             // stub just closes window and doesn't return value.
-            if ( window.parent === window ) { 
-                window.close(); 
-            } else { 
-                window.parent.closeAndPopPage(); 
-            } 
+            if ( window.parent === window ) {
+                window.close();
+            } else {
+                window.parent.closeAndPopPage();
+            }
         },
         /**
          * Return the first queued action without removing it.
