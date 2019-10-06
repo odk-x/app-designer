@@ -1095,6 +1095,62 @@ window.odkCommonDefinitions = {
         "es": "¿Seguro que quieres borrar la fila"
       },
       "_row_num": 138
+    },
+    "cold_rooms": {
+      "string_token": "cold_rooms",
+      "text": {
+        "default": "Cold Rooms",
+        "es": "Cuartos Fríos"
+      },
+      "_row_num": 139
+    },
+    "cold_room": {
+      "string_token": "cold_room",
+      "text": {
+        "default": "Cold Room",
+        "es": "Cuarto Frío"
+      },
+      "_row_num": 140
+    },
+    "basic_cold_room_information": {
+      "string_token": "basic_cold_room_information",
+      "text": {
+        "default": "Basic Cold Room Information",
+        "es": "Información Básica Del Cuarto Frio"
+      },
+      "_row_num": 141
+    },
+    "cold_room_id": {
+      "string_token": "cold_room_id",
+      "text": {
+        "default": "Cold Room ID:",
+        "es": "ID Del Cuarto Frio:"
+      },
+      "_row_num": 142
+    },
+    "edit_cold_room_status": {
+      "string_token": "edit_cold_room_status",
+      "text": {
+        "default": "Edit Cold Room Status",
+        "es": "Editar El Estado Del Cuarto Frio"
+      },
+      "_row_num": 143
+    },
+    "edit_cold_room": {
+      "string_token": "edit_cold_room",
+      "text": {
+        "default": "Edit Cold Room",
+        "es": "Editar Cuarto Frio"
+      },
+      "_row_num": 144
+    },
+    "delete_cold_room": {
+      "string_token": "delete_cold_room",
+      "text": {
+        "default": "Delete Cold Room",
+        "es": "Borrar Cuarto Frio"
+      },
+      "_row_num": 145
     }
   },
   "_locales": {

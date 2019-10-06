@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- TBL_IV_REF Detailed View -->
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../../../assets/css/detail.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
+        <script type="text/javascript" src="../../../assets/libs/jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="../../../assets/js/util.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript" src="../js/cold_room_maintenance_logs_detail.js"></script>
+
+        <div class="header col-12">
+            <h1><span id="cold-room-hdr">Cold Room</span> <span id="tracking_id" class=""></span></h1>
+        </div>
+
+        <br>
+
+        <div class="detail col-12">
+            <h3 id="mnt-log-info">Maintenance Log Information</span></h3>
+        </div>
+
+
+        <p><span class="detailHdr" id="cold-room-id">Cold Room ID:</span> <span id="refrigerator_id"></span>
+        <p><span class="detailHdr" id="work-stat">Functional Status:</span> <span id="functional_status"></span></p>
+        <p><span class="detailHdr" id="reason-not-work">Reason Not Working:</span> <span id="reason_not_working"></span></p>
+        <p><span class="detailHdr" id="date-srv">Date Serviced:</span> <span id="date_serviced"></span></p>
+        <p><span class="detailHdr" id="type-of-mnt">Type of Maintenance:</span> <span id="maint_type"></span></p>
+        <p><span class="detailHdr" id="sp-prt">Spare Parts:</span> <span id="spare_parts"></span></p>
+        <p><span class="detailHdr" id="add-sp-prt">Additional Spare Parts:</span> <span id="addtl_spare_parts"></span></p>
+        <p><span class="detailHdr" id="notes-lbl">Notes:</span> <span id="notes"></span></p>
+
+        <div id="editLogBtn" class="button hideButton">
+            <h3 id="edit-log" href="#" onclick="onEditLog()">Edit Log</h3>
+        </div>
+
+        <div id="delLogBtn" class="button buttonDelete hideButton">
+            <h3 id="del-log" href="#" onclick="onDeleteLog()">Delete Log</h3>
+        </div>
+
+        <script>
+            $(function() { display(); });
+        </script>
+    </body>
+</html>

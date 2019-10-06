@@ -69,6 +69,26 @@ function display() {
                 'config/tables/refrigerators/html/refrigerators_service_list.html' + serviceQueryParams);
     });
 
+    var viewColdRoomsButton = $('#view-all-cold-rooms');
+    viewColdRoomsButton.on(
+        'click',
+        function() {
+            var crQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegionId, linkedRegionId);
+            odkTables.launchHTML(null,
+                'config/tables/cold_rooms/html/cold_rooms_list.html' + crQueryParams);
+        }
+    );
+
+    var viewServiceColdRoomsButton = $('#view-service-cold-rooms');
+    viewServiceColdRoomsButton.on(
+        'click',
+        function() {
+            var serviceQueryParams = util.getKeyToAppendToColdChainURL(util.adminRegionId, linkedRegionId);
+
+            odkTables.launchHTML(null,
+                'config/tables/cold_rooms/html/cold_rooms_service_list.html' + serviceQueryParams);
+        });
+
     var viewRefrigeratorModelsButton = $('#view-models');
     viewRefrigeratorModelsButton.on(
         'click',

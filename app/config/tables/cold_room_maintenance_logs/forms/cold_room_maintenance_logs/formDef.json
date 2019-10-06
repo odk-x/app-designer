@@ -1,0 +1,2560 @@
+{
+  "xlsx": {
+    "survey": [
+      {
+        "clause": "begin screen",
+        "_row_num": 2
+      },
+      {
+        "clause": "if",
+        "condition": 0,
+        "_row_num": 3
+      },
+      {
+        "type": "string",
+        "name": "refrigerator_id",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Refrigerator ID",
+              "es": "ID de Frigorífico"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter the ID of the refrigerator",
+              "es": "Por favor entre el ID del frigorífico"
+            }
+          }
+        },
+        "required": 1,
+        "_row_num": 4
+      },
+      {
+        "clause": "end if",
+        "_row_num": 5
+      },
+      {
+        "type": "select_one_with_other",
+        "values_list": "serviced_by_type",
+        "name": "serviced_by",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Serviced By",
+              "es": "Atendido por"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Who performed the service?",
+              "es": "¿Quién realizó el servicio?"
+            }
+          }
+        },
+        "_row_num": 6
+      },
+      {
+        "type": "string",
+        "name": "technician_name",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Technician Name",
+              "es": "Nombre del técnico"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter technician name",
+              "es": "Ingrese el nombre del técnico"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 8
+      },
+      {
+        "type": "image",
+        "name": "maintenance_log_image",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Image",
+              "es": "Imagen"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Take a picture",
+              "es": "Toma una foto"
+            }
+          }
+        },
+        "_row_num": 9
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 10
+      },
+      {
+        "type": "date",
+        "name": "date_serviced",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Date Serviced",
+              "es": "Fecha de Servicio"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter the date of last service",
+              "es": "Fecha  del último servicio"
+            }
+          }
+        },
+        "_row_num": 11
+      },
+      {
+        "type": "date",
+        "name": "next_date_serviced",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Next Date Serviced",
+              "es": "Próxima Fecha de Servicio"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter the next date serviced",
+              "es": "Ingrese la próxima fecha de servicio"
+            }
+          }
+        },
+        "_row_num": 12
+      },
+      {
+        "type": "string",
+        "name": "notes",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Notes",
+              "es": "Notas"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Enter any extra notes",
+              "es": "Notas extras"
+            }
+          }
+        },
+        "_row_num": 13
+      },
+      {
+        "type": "select_one",
+        "values_list": "maint_types",
+        "name": "type_of_maintenance",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Type of Maintenance Performed",
+              "es": "Tipo de mantenimiento realizado"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Select type of maintenance",
+              "es": "Seleccione el tipo de mantenimiento"
+            }
+          }
+        },
+        "_row_num": 14
+      },
+      {
+        "clause": "if",
+        "condition": "data('type_of_maintenance') === 'repair'",
+        "_row_num": 15
+      },
+      {
+        "type": "select_multiple",
+        "values_list": "repair_types",
+        "name": "type_of_repair",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Type of Repair",
+              "es": "Tipo de Reparación"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Select type of repair",
+              "es": "Seleccione tipo de reparación"
+            }
+          }
+        },
+        "_row_num": 16
+      },
+      {
+        "clause": "end if",
+        "_row_num": 17
+      },
+      {
+        "clause": "if",
+        "condition": "data('type_of_maintenance') === 'preventative'",
+        "_row_num": 18
+      },
+      {
+        "type": "select_multiple",
+        "values_list": "preventative_maint_types",
+        "name": "type_of_preventative_maintenance",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Type of Preventative Maintenance",
+              "es": "Tipo de Mantenimiento Preventivo"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Select type of maintenance",
+              "es": "Seleccione tipo de mantenimiento"
+            }
+          }
+        },
+        "_row_num": 19
+      },
+      {
+        "clause": "end if",
+        "_row_num": 20
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 21
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 22
+      },
+      {
+        "type": "select_multiple_inline",
+        "values_list": "common_spare_parts",
+        "name": "spare_parts",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Spare Parts",
+              "es": "Piezas de Repuesto"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Select spare parts",
+              "es": "Seleccione piezas de repuestos"
+            }
+          }
+        },
+        "_row_num": 23
+      },
+      {
+        "type": "string",
+        "name": "addtl_spare_parts",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Enter additional spare parts",
+              "es": "Entrar adicional piezas de repuesto"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Make a list of spare parts",
+              "es": "Haga una lista de repuestos"
+            }
+          }
+        },
+        "_row_num": 24
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 25
+      }
+    ],
+    "choices": [
+      {
+        "choice_list_name": "maint_types",
+        "data_value": "repair",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Repair",
+              "es": "Reparar"
+            }
+          }
+        },
+        "_row_num": 2
+      },
+      {
+        "choice_list_name": "maint_types",
+        "data_value": "preventative",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Preventative",
+              "es": "Preventivo"
+            }
+          }
+        },
+        "_row_num": 3
+      },
+      {
+        "choice_list_name": "maint_types",
+        "data_value": "other",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Other",
+              "es": "Otro"
+            }
+          }
+        },
+        "_row_num": 4
+      },
+      {
+        "choice_list_name": "serviced_by_type",
+        "data_value": "warranty_service_provider",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Warranty/Service Provider",
+              "es": "Garantía / Proveedor de Servicios"
+            }
+          }
+        },
+        "_row_num": 6
+      },
+      {
+        "choice_list_name": "serviced_by_type",
+        "data_value": "cce_technician",
+        "display": {
+          "title": {
+            "text": {
+              "default": "CCE Technician",
+              "es": "CCE Técnico"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "choice_list_name": "serviced_by_type",
+        "data_value": "facility_staff",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Facility Staff",
+              "es": "Personal de las Facilidades"
+            }
+          }
+        },
+        "_row_num": 8
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "charging_cylinder",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Charging Cylinder",
+              "es": "Cilindro de carga"
+            }
+          }
+        },
+        "_row_num": 10
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "condenser_fan",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Condenser Fan",
+              "es": "Ventilador Condensador"
+            }
+          }
+        },
+        "_row_num": 11
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "door_gasket",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Door Gasket",
+              "es": "La Junta de la Puerta"
+            }
+          }
+        },
+        "_row_num": 12
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "electric_compressor",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Electric Compressor",
+              "es": "Compresor Eléctrico"
+            }
+          }
+        },
+        "_row_num": 13
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "fridge_tag",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Fridge Tag",
+              "es": "Etiqueta Frigorífico"
+            }
+          }
+        },
+        "_row_num": 14
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "relay",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Relay",
+              "es": "Relé"
+            }
+          }
+        },
+        "_row_num": 15
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "rotary_fan",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Rotary Fan",
+              "es": "Ventilador Rotatorio"
+            }
+          }
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "solar_compressor",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Solar Compressor",
+              "es": "Compresor Solar"
+            }
+          }
+        },
+        "_row_num": 17
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "thermostat",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Thermostat",
+              "es": "Termostato"
+            }
+          }
+        },
+        "_row_num": 18
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "fridge_dryer",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Fridge Dryer",
+              "es": "Secador de Refrigerador"
+            }
+          }
+        },
+        "_row_num": 19
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "electronic_control_unit",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Electronic Control Unit",
+              "es": "Unidad de Control Electrónico"
+            }
+          }
+        },
+        "_row_num": 20
+      },
+      {
+        "choice_list_name": "common_spare_parts",
+        "data_value": "hinges",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Hinges",
+              "es": "Bisagra"
+            }
+          }
+        },
+        "_row_num": 21
+      },
+      {
+        "choice_list_name": "repair_types",
+        "data_value": "need_data",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Need Data",
+              "es": "Necesita Datos"
+            }
+          }
+        },
+        "_row_num": 23
+      },
+      {
+        "choice_list_name": "preventative_maint_types",
+        "data_value": "clean_solar_panels",
+        "display": {
+          "title": {
+            "text": "Clean solar panels"
+          }
+        },
+        "_row_num": 25
+      },
+      {
+        "choice_list_name": "preventative_maint_types",
+        "data_value": "clean_coils",
+        "display": {
+          "title": {
+            "text": "Clean coils"
+          }
+        },
+        "_row_num": 26
+      },
+      {
+        "choice_list_name": "preventative_maint_types",
+        "data_value": "need_data",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Need Data",
+              "es": "Necesita Datos"
+            }
+          }
+        },
+        "_row_num": 27
+      }
+    ],
+    "queries": [
+      {
+        "query_name": "refrigerator_ids",
+        "query_type": "linked_table",
+        "linked_form_id": "refrigerators",
+        "linked_table_id": "refrigerators",
+        "selection": "_id >= ?",
+        "selectionArgs": "[ '0' ]",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 2
+      }
+    ],
+    "settings": [
+      {
+        "setting_name": "form_id",
+        "value": "maintenance_logs",
+        "_row_num": 2
+      },
+      {
+        "setting_name": "table_id",
+        "value": "maintenance_logs",
+        "_row_num": 3
+      },
+      {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Maintenance Logs",
+              "es": "Registro de Servicio"
+            }
+          }
+        },
+        "_row_num": 4
+      },
+      {
+        "setting_name": "form_version",
+        "value": 20170804,
+        "_row_num": 5
+      },
+      {
+        "setting_name": "instance_name",
+        "value": "date_serviced",
+        "_row_num": 6
+      },
+      {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "English",
+              "es": "Inglés"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      {
+        "setting_name": "es",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "Spanish",
+              "es": "Español"
+            }
+          }
+        },
+        "_row_num": 8
+      }
+    ],
+    "properties": [
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "defaultViewType",
+        "type": "string",
+        "value": "LIST",
+        "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "string",
+        "value": "config/tables/maintenance_logs/html/maintenance_logs_detail.html",
+        "_row_num": 3
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "listViewFileName",
+        "type": "string",
+        "value": "config/tables/maintenance_logs/html/maintenance_logs_list.html",
+        "_row_num": 4
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "unverifiedUserCanCreate",
+        "type": "boolean",
+        "value": "false",
+        "_row_num": 5
+      },
+      {
+        "partition": "Table",
+        "aspect": "security",
+        "key": "defaultAccessOnCreation",
+        "type": "string",
+        "value": "HIDDEN",
+        "_row_num": 6
+      },
+      {
+        "partition": "FormType",
+        "aspect": "default",
+        "key": "FormType.formType",
+        "type": "string",
+        "value": "SURVEY",
+        "_row_num": 7
+      },
+      {
+        "partition": "SurveyUtil",
+        "aspect": "default",
+        "key": "SurveyUtil.formId",
+        "type": "string",
+        "value": "wrong_form",
+        "_row_num": 8
+      }
+    ]
+  },
+  "specification": {
+    "column_types": {
+      "_screen_block": "function",
+      "condition": "formula",
+      "constraint": "formula",
+      "required": "formula",
+      "calculation": "formula",
+      "newRowInitialElementKeyToValueMap": "formula",
+      "openRowInitialElementKeyToValueMap": "formula",
+      "selectionArgs": "formula",
+      "url": "formula",
+      "uri": "formula",
+      "callback": "formula(context)",
+      "choice_filter": "formula(choice_item)",
+      "templatePath": "requirejs_path"
+    },
+    "settings": {
+      "form_id": {
+        "setting_name": "form_id",
+        "value": "maintenance_logs",
+        "_row_num": 2
+      },
+      "table_id": {
+        "setting_name": "table_id",
+        "value": "maintenance_logs",
+        "_row_num": 3
+      },
+      "survey": {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Maintenance Logs",
+              "es": "Registro de Servicio"
+            }
+          }
+        },
+        "_row_num": 4
+      },
+      "form_version": {
+        "setting_name": "form_version",
+        "value": 20170804,
+        "_row_num": 5
+      },
+      "instance_name": {
+        "setting_name": "instance_name",
+        "value": "date_serviced",
+        "_row_num": 6
+      },
+      "english": {
+        "setting_name": "english",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "English",
+              "es": "Inglés"
+            }
+          }
+        },
+        "_row_num": 7
+      },
+      "es": {
+        "setting_name": "es",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "Spanish",
+              "es": "Español"
+            }
+          }
+        },
+        "_row_num": 8
+      },
+      "_locales": {
+        "setting_name": "_locales",
+        "_row_num": 4,
+        "value": [
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "default": "Spanish",
+                  "es": "Español"
+                }
+              }
+            },
+            "_row_num": 8,
+            "name": "es"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": "default"
+              }
+            },
+            "name": "default"
+          }
+        ]
+      },
+      "_default_locale": {
+        "setting_name": "_default_locale",
+        "_row_num": 4,
+        "value": "es"
+      },
+      "initial": {
+        "setting_name": "survey",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Maintenance Logs",
+              "es": "Registro de Servicio"
+            }
+          }
+        },
+        "_row_num": 4
+      }
+    },
+    "choices": {
+      "maint_types": [
+        {
+          "choice_list_name": "maint_types",
+          "data_value": "repair",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Repair",
+                "es": "Reparar"
+              }
+            }
+          },
+          "_row_num": 2
+        },
+        {
+          "choice_list_name": "maint_types",
+          "data_value": "preventative",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Preventative",
+                "es": "Preventivo"
+              }
+            }
+          },
+          "_row_num": 3
+        },
+        {
+          "choice_list_name": "maint_types",
+          "data_value": "other",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Other",
+                "es": "Otro"
+              }
+            }
+          },
+          "_row_num": 4
+        }
+      ],
+      "serviced_by_type": [
+        {
+          "choice_list_name": "serviced_by_type",
+          "data_value": "warranty_service_provider",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Warranty/Service Provider",
+                "es": "Garantía / Proveedor de Servicios"
+              }
+            }
+          },
+          "_row_num": 6
+        },
+        {
+          "choice_list_name": "serviced_by_type",
+          "data_value": "cce_technician",
+          "display": {
+            "title": {
+              "text": {
+                "default": "CCE Technician",
+                "es": "CCE Técnico"
+              }
+            }
+          },
+          "_row_num": 7
+        },
+        {
+          "choice_list_name": "serviced_by_type",
+          "data_value": "facility_staff",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Facility Staff",
+                "es": "Personal de las Facilidades"
+              }
+            }
+          },
+          "_row_num": 8
+        }
+      ],
+      "common_spare_parts": [
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "charging_cylinder",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Charging Cylinder",
+                "es": "Cilindro de carga"
+              }
+            }
+          },
+          "_row_num": 10
+        },
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "condenser_fan",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Condenser Fan",
+                "es": "Ventilador Condensador"
+              }
+            }
+          },
+          "_row_num": 11
+        },
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "door_gasket",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Door Gasket",
+                "es": "La Junta de la Puerta"
+              }
+            }
+          },
+          "_row_num": 12
+        },
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "electric_compressor",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Electric Compressor",
+                "es": "Compresor Eléctrico"
+              }
+            }
+          },
+          "_row_num": 13
+        },
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "fridge_tag",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Fridge Tag",
+                "es": "Etiqueta Frigorífico"
+              }
+            }
+          },
+          "_row_num": 14
+        },
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "relay",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Relay",
+                "es": "Relé"
+              }
+            }
+          },
+          "_row_num": 15
+        },
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "rotary_fan",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Rotary Fan",
+                "es": "Ventilador Rotatorio"
+              }
+            }
+          },
+          "_row_num": 16
+        },
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "solar_compressor",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Solar Compressor",
+                "es": "Compresor Solar"
+              }
+            }
+          },
+          "_row_num": 17
+        },
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "thermostat",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Thermostat",
+                "es": "Termostato"
+              }
+            }
+          },
+          "_row_num": 18
+        },
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "fridge_dryer",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Fridge Dryer",
+                "es": "Secador de Refrigerador"
+              }
+            }
+          },
+          "_row_num": 19
+        },
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "electronic_control_unit",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Electronic Control Unit",
+                "es": "Unidad de Control Electrónico"
+              }
+            }
+          },
+          "_row_num": 20
+        },
+        {
+          "choice_list_name": "common_spare_parts",
+          "data_value": "hinges",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Hinges",
+                "es": "Bisagra"
+              }
+            }
+          },
+          "_row_num": 21
+        }
+      ],
+      "repair_types": [
+        {
+          "choice_list_name": "repair_types",
+          "data_value": "need_data",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Need Data",
+                "es": "Necesita Datos"
+              }
+            }
+          },
+          "_row_num": 23
+        }
+      ],
+      "preventative_maint_types": [
+        {
+          "choice_list_name": "preventative_maint_types",
+          "data_value": "clean_solar_panels",
+          "display": {
+            "title": {
+              "text": "Clean solar panels"
+            }
+          },
+          "_row_num": 25
+        },
+        {
+          "choice_list_name": "preventative_maint_types",
+          "data_value": "clean_coils",
+          "display": {
+            "title": {
+              "text": "Clean coils"
+            }
+          },
+          "_row_num": 26
+        },
+        {
+          "choice_list_name": "preventative_maint_types",
+          "data_value": "need_data",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Need Data",
+                "es": "Necesita Datos"
+              }
+            }
+          },
+          "_row_num": 27
+        }
+      ]
+    },
+    "table_specific_definitions": {
+      "_tokens": {}
+    },
+    "queries": {
+      "refrigerator_ids": {
+        "query_name": "refrigerator_ids",
+        "query_type": "linked_table",
+        "linked_form_id": "refrigerators",
+        "linked_table_id": "refrigerators",
+        "selection": "_id >= ?",
+        "selectionArgs": "[ '0' ]",
+        "newRowInitialElementKeyToValueMap": "{}",
+        "openRowInitialElementKeyToValueMap": "{}",
+        "_row_num": 2
+      }
+    },
+    "calculates": {},
+    "model": {
+      "refrigerator_id": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Refrigerator ID",
+            "es": "ID de Frigorífico"
+          }
+        },
+        "elementKey": "refrigerator_id"
+      },
+      "serviced_by": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Serviced By",
+            "es": "Atendido por"
+          }
+        },
+        "valuesList": "serviced_by_type",
+        "elementKey": "serviced_by"
+      },
+      "technician_name": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Technician Name",
+            "es": "Nombre del técnico"
+          }
+        },
+        "elementKey": "technician_name"
+      },
+      "maintenance_log_image": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "maintenance_log_image_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "maintenance_log_image_contentType"
+          }
+        },
+        "displayName": {
+          "text": {
+            "default": "Image",
+            "es": "Imagen"
+          }
+        },
+        "elementKey": "maintenance_log_image"
+      },
+      "date_serviced": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "date",
+        "displayName": {
+          "text": {
+            "default": "Date Serviced",
+            "es": "Fecha de Servicio"
+          }
+        },
+        "elementKey": "date_serviced"
+      },
+      "next_date_serviced": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "date",
+        "displayName": {
+          "text": {
+            "default": "Next Date Serviced",
+            "es": "Próxima Fecha de Servicio"
+          }
+        },
+        "elementKey": "next_date_serviced"
+      },
+      "notes": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Notes",
+            "es": "Notas"
+          }
+        },
+        "elementKey": "notes"
+      },
+      "type_of_maintenance": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Type of Maintenance Performed",
+            "es": "Tipo de mantenimiento realizado"
+          }
+        },
+        "valuesList": "maint_types",
+        "elementKey": "type_of_maintenance"
+      },
+      "type_of_repair": {
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_repair_items"
+        },
+        "displayName": {
+          "text": {
+            "default": "Type of Repair",
+            "es": "Tipo de Reparación"
+          }
+        },
+        "valuesList": "repair_types",
+        "elementKey": "type_of_repair"
+      },
+      "type_of_preventative_maintenance": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_preventative_maintenance_items"
+        },
+        "displayName": {
+          "text": {
+            "default": "Type of Preventative Maintenance",
+            "es": "Tipo de Mantenimiento Preventivo"
+          }
+        },
+        "valuesList": "preventative_maint_types",
+        "elementKey": "type_of_preventative_maintenance"
+      },
+      "spare_parts": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "spare_parts_items"
+        },
+        "displayName": {
+          "text": {
+            "default": "Spare Parts",
+            "es": "Piezas de Repuesto"
+          }
+        },
+        "valuesList": "common_spare_parts",
+        "elementKey": "spare_parts"
+      },
+      "addtl_spare_parts": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Enter additional spare parts",
+            "es": "Entrar adicional piezas de repuesto"
+          }
+        },
+        "elementKey": "addtl_spare_parts"
+      }
+    },
+    "section_names": [
+      "initial",
+      "survey"
+    ],
+    "sections": {
+      "survey": {
+        "section_name": "survey",
+        "nested_sections": {},
+        "reachable_sections": {},
+        "prompts": [
+          {
+            "type": "string",
+            "name": "refrigerator_id",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Refrigerator ID",
+                  "es": "ID de Frigorífico"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter the ID of the refrigerator",
+                  "es": "Por favor entre el ID del frigorífico"
+                }
+              }
+            },
+            "required": 1,
+            "_row_num": 4,
+            "__rowNum__": 3,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 0
+          },
+          {
+            "type": "select_one_with_other",
+            "values_list": "serviced_by_type",
+            "name": "serviced_by",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Serviced By",
+                  "es": "Atendido por"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Who performed the service?",
+                  "es": "¿Quién realizó el servicio?"
+                }
+              }
+            },
+            "_row_num": 6,
+            "__rowNum__": 5,
+            "_token_type": "prompt",
+            "_type": "select_one_with_other",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 1
+          },
+          {
+            "type": "string",
+            "name": "technician_name",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Technician Name",
+                  "es": "Nombre del técnico"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter technician name",
+                  "es": "Ingrese el nombre del técnico"
+                }
+              }
+            },
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 2
+          },
+          {
+            "type": "image",
+            "name": "maintenance_log_image",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Image",
+                  "es": "Imagen"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Take a picture",
+                  "es": "Toma una foto"
+                }
+              }
+            },
+            "_row_num": 9,
+            "__rowNum__": 8,
+            "_token_type": "prompt",
+            "_type": "image",
+            "_branch_label_enclosing_screen": "survey/_screen9",
+            "promptIdx": 3
+          },
+          {
+            "type": "date",
+            "name": "date_serviced",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Date Serviced",
+                  "es": "Fecha de Servicio"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter the date of last service",
+                  "es": "Fecha  del último servicio"
+                }
+              }
+            },
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "prompt",
+            "_type": "date",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 4
+          },
+          {
+            "type": "date",
+            "name": "next_date_serviced",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Next Date Serviced",
+                  "es": "Próxima Fecha de Servicio"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter the next date serviced",
+                  "es": "Ingrese la próxima fecha de servicio"
+                }
+              }
+            },
+            "_row_num": 12,
+            "__rowNum__": 11,
+            "_token_type": "prompt",
+            "_type": "date",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 5
+          },
+          {
+            "type": "string",
+            "name": "notes",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Notes",
+                  "es": "Notas"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Enter any extra notes",
+                  "es": "Notas extras"
+                }
+              }
+            },
+            "_row_num": 13,
+            "__rowNum__": 12,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 6
+          },
+          {
+            "type": "select_one",
+            "values_list": "maint_types",
+            "name": "type_of_maintenance",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Type of Maintenance Performed",
+                  "es": "Tipo de mantenimiento realizado"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Select type of maintenance",
+                  "es": "Seleccione el tipo de mantenimiento"
+                }
+              }
+            },
+            "_row_num": 14,
+            "__rowNum__": 13,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 7
+          },
+          {
+            "type": "select_multiple",
+            "values_list": "repair_types",
+            "name": "type_of_repair",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Type of Repair",
+                  "es": "Tipo de Reparación"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Select type of repair",
+                  "es": "Seleccione tipo de reparación"
+                }
+              }
+            },
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 8
+          },
+          {
+            "type": "select_multiple",
+            "values_list": "preventative_maint_types",
+            "name": "type_of_preventative_maintenance",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Type of Preventative Maintenance",
+                  "es": "Tipo de Mantenimiento Preventivo"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Select type of maintenance",
+                  "es": "Seleccione tipo de mantenimiento"
+                }
+              }
+            },
+            "_row_num": 19,
+            "__rowNum__": 18,
+            "_token_type": "prompt",
+            "_type": "select_multiple",
+            "_branch_label_enclosing_screen": "survey/_screen10",
+            "promptIdx": 9
+          },
+          {
+            "type": "select_multiple_inline",
+            "values_list": "common_spare_parts",
+            "name": "spare_parts",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Spare Parts",
+                  "es": "Piezas de Repuesto"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Select spare parts",
+                  "es": "Seleccione piezas de repuestos"
+                }
+              }
+            },
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "prompt",
+            "_type": "select_multiple_inline",
+            "_branch_label_enclosing_screen": "survey/_screen22",
+            "promptIdx": 10
+          },
+          {
+            "type": "string",
+            "name": "addtl_spare_parts",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Enter additional spare parts",
+                  "es": "Entrar adicional piezas de repuesto"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Make a list of spare parts",
+                  "es": "Haga una lista de repuestos"
+                }
+              }
+            },
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "prompt",
+            "_type": "string",
+            "_branch_label_enclosing_screen": "survey/_screen22",
+            "promptIdx": 11
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 26,
+            "_branch_label_enclosing_screen": "survey/_screen26",
+            "promptIdx": 12
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": [
+            0
+          ]
+        },
+        "operations": [
+          {
+            "clause": "begin screen",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 8,
+              "__rowNum__": 7,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (0) {\nactivePromptIndicies.push(0);\n}\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 0
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 1
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 10,
+            "__rowNum__": 9,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 21,
+              "__rowNum__": 20,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nif (data('type_of_maintenance') === 'repair') {\nactivePromptIndicies.push(8);\n}\nif (data('type_of_maintenance') === 'preventative') {\nactivePromptIndicies.push(9);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 22,
+            "__rowNum__": 21,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 25,
+              "__rowNum__": 24,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 3
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 26,
+            "operationIdx": 4
+          },
+          {
+            "_row_num": 26,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 5
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 26,
+            "operationIdx": 6
+          }
+        ],
+        "branch_label_map": {
+          "_screen2": 0,
+          "_screen9": 1,
+          "_screen10": 2,
+          "_screen22": 3,
+          "_contents": 5,
+          "_screen26": 5
+        }
+      },
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "_row_num": 3,
+            "type": "opening",
+            "display": {
+              "text": "Edit form"
+            },
+            "_token_type": "prompt",
+            "_type": "opening",
+            "_branch_label_enclosing_screen": "initial/_screen3",
+            "promptIdx": 0
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "prompt",
+            "_do_section_name": "survey",
+            "_type": "_section",
+            "promptIdx": 1,
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Maintenance Logs",
+                  "es": "Registro de Servicio"
+                }
+              }
+            },
+            "_branch_label_enclosing_screen": "survey/0"
+          },
+          {
+            "_row_num": 5,
+            "type": "finalize",
+            "display": {
+              "text": "Save form"
+            },
+            "_token_type": "prompt",
+            "_type": "finalize",
+            "_branch_label_enclosing_screen": "initial/_screen5",
+            "promptIdx": 2
+          },
+          {
+            "_row_num": 7,
+            "type": "instances",
+            "display": {
+              "text": "Saved instances"
+            },
+            "_token_type": "prompt",
+            "_type": "instances",
+            "_branch_label_enclosing_screen": "initial/_screen7",
+            "promptIdx": 3
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 9,
+            "_branch_label_enclosing_screen": "initial/_screen9",
+            "promptIdx": 4
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "_row_num": 2,
+            "clause": "if // start",
+            "condition": "(opendatakit.getCurrentInstanceId() != null)",
+            "_token_type": "goto_label",
+            "_tag_name": "start",
+            "_branch_label": "_then2",
+            "operationIdx": 0
+          },
+          {
+            "clause": "else // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_else6",
+            "_row_num": 6,
+            "operationIdx": 1
+          },
+          {
+            "_row_num": 3,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 4,
+            "clause": "do section survey",
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 3
+          },
+          {
+            "_row_num": 5,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 4
+          },
+          {
+            "clause": "end if // start",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif8",
+            "_row_num": 8,
+            "operationIdx": 5
+          },
+          {
+            "_row_num": 7,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 9,
+            "operationIdx": 7
+          },
+          {
+            "_row_num": 9,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 8
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 9,
+            "operationIdx": 9
+          },
+          {
+            "_token_type": "validate",
+            "clause": "validate finalize",
+            "_sweep_name": "finalize",
+            "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 10
+          },
+          {
+            "_token_type": "save_and_terminate",
+            "clause": "save and terminate",
+            "calculation": true,
+            "_row_num": 9,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 11
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 9,
+            "operationIdx": 12
+          }
+        ],
+        "branch_label_map": {
+          "_then2": 2,
+          "_screen3": 2,
+          "_screen5": 4,
+          "_else6": 6,
+          "_screen7": 6,
+          "_endif8": 7,
+          "_contents": 8,
+          "_screen9": 8,
+          "_finalize": 10
+        }
+      }
+    },
+    "dataTableModel": {
+      "refrigerator_id": {
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Refrigerator ID",
+            "es": "ID de Frigorífico"
+          }
+        },
+        "elementKey": "refrigerator_id",
+        "elementName": "refrigerator_id",
+        "elementSet": "data",
+        "elementPath": "refrigerator_id"
+      },
+      "serviced_by": {
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Serviced By",
+            "es": "Atendido por"
+          }
+        },
+        "valuesList": "serviced_by_type",
+        "elementKey": "serviced_by",
+        "elementName": "serviced_by",
+        "elementSet": "data",
+        "elementPath": "serviced_by"
+      },
+      "technician_name": {
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Technician Name",
+            "es": "Nombre del técnico"
+          }
+        },
+        "elementKey": "technician_name",
+        "elementName": "technician_name",
+        "elementSet": "data",
+        "elementPath": "technician_name"
+      },
+      "maintenance_log_image": {
+        "_defn": [
+          {
+            "_row_num": 9,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "maintenance_log_image_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "maintenance_log_image.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "maintenance_log_image_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "maintenance_log_image.contentType"
+          }
+        },
+        "displayName": {
+          "text": {
+            "default": "Image",
+            "es": "Imagen"
+          }
+        },
+        "elementKey": "maintenance_log_image",
+        "elementName": "maintenance_log_image",
+        "elementSet": "data",
+        "elementPath": "maintenance_log_image",
+        "listChildElementKeys": [
+          "maintenance_log_image_contentType",
+          "maintenance_log_image_uriFragment"
+        ],
+        "notUnitOfRetention": true
+      },
+      "date_serviced": {
+        "_defn": [
+          {
+            "_row_num": 11,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "date",
+        "displayName": {
+          "text": {
+            "default": "Date Serviced",
+            "es": "Fecha de Servicio"
+          }
+        },
+        "elementKey": "date_serviced",
+        "elementName": "date_serviced",
+        "elementSet": "data",
+        "elementPath": "date_serviced"
+      },
+      "next_date_serviced": {
+        "_defn": [
+          {
+            "_row_num": 12,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementType": "date",
+        "displayName": {
+          "text": {
+            "default": "Next Date Serviced",
+            "es": "Próxima Fecha de Servicio"
+          }
+        },
+        "elementKey": "next_date_serviced",
+        "elementName": "next_date_serviced",
+        "elementSet": "data",
+        "elementPath": "next_date_serviced"
+      },
+      "notes": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Notes",
+            "es": "Notas"
+          }
+        },
+        "elementKey": "notes",
+        "elementName": "notes",
+        "elementSet": "data",
+        "elementPath": "notes"
+      },
+      "type_of_maintenance": {
+        "_defn": [
+          {
+            "_row_num": 14,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Type of Maintenance Performed",
+            "es": "Tipo de mantenimiento realizado"
+          }
+        },
+        "valuesList": "maint_types",
+        "elementKey": "type_of_maintenance",
+        "elementName": "type_of_maintenance",
+        "elementSet": "data",
+        "elementPath": "type_of_maintenance"
+      },
+      "type_of_repair": {
+        "_defn": [
+          {
+            "_row_num": 16,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_repair_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "type_of_repair.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": {
+          "text": {
+            "default": "Type of Repair",
+            "es": "Tipo de Reparación"
+          }
+        },
+        "valuesList": "repair_types",
+        "elementKey": "type_of_repair",
+        "elementName": "type_of_repair",
+        "elementSet": "data",
+        "elementPath": "type_of_repair",
+        "listChildElementKeys": [
+          "type_of_repair_items"
+        ]
+      },
+      "type_of_preventative_maintenance": {
+        "_defn": [
+          {
+            "_row_num": 19,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "type_of_preventative_maintenance_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "type_of_preventative_maintenance.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": {
+          "text": {
+            "default": "Type of Preventative Maintenance",
+            "es": "Tipo de Mantenimiento Preventivo"
+          }
+        },
+        "valuesList": "preventative_maint_types",
+        "elementKey": "type_of_preventative_maintenance",
+        "elementName": "type_of_preventative_maintenance",
+        "elementSet": "data",
+        "elementPath": "type_of_preventative_maintenance",
+        "listChildElementKeys": [
+          "type_of_preventative_maintenance_items"
+        ]
+      },
+      "spare_parts": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "array",
+        "items": {
+          "type": "string",
+          "elementKey": "spare_parts_items",
+          "elementName": "items",
+          "elementSet": "data",
+          "elementPath": "spare_parts.items",
+          "notUnitOfRetention": true
+        },
+        "displayName": {
+          "text": {
+            "default": "Spare Parts",
+            "es": "Piezas de Repuesto"
+          }
+        },
+        "valuesList": "common_spare_parts",
+        "elementKey": "spare_parts",
+        "elementName": "spare_parts",
+        "elementSet": "data",
+        "elementPath": "spare_parts",
+        "listChildElementKeys": [
+          "spare_parts_items"
+        ]
+      },
+      "addtl_spare_parts": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "displayName": {
+          "text": {
+            "default": "Enter additional spare parts",
+            "es": "Entrar adicional piezas de repuesto"
+          }
+        },
+        "elementKey": "addtl_spare_parts",
+        "elementName": "addtl_spare_parts",
+        "elementSet": "data",
+        "elementPath": "addtl_spare_parts"
+      },
+      "maintenance_log_image_uriFragment": {
+        "type": "string",
+        "elementType": "rowpath",
+        "elementKey": "maintenance_log_image_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "maintenance_log_image.uriFragment"
+      },
+      "maintenance_log_image_contentType": {
+        "type": "string",
+        "elementType": "mimeType",
+        "default": "image/*",
+        "elementKey": "maintenance_log_image_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "maintenance_log_image.contentType"
+      },
+      "type_of_repair_items": {
+        "type": "string",
+        "elementKey": "type_of_repair_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "type_of_repair.items",
+        "notUnitOfRetention": true
+      },
+      "type_of_preventative_maintenance_items": {
+        "type": "string",
+        "elementKey": "type_of_preventative_maintenance_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "type_of_preventative_maintenance.items",
+        "notUnitOfRetention": true
+      },
+      "spare_parts_items": {
+        "type": "string",
+        "elementKey": "spare_parts_items",
+        "elementName": "items",
+        "elementSet": "data",
+        "elementPath": "spare_parts.items",
+        "notUnitOfRetention": true
+      },
+      "_id": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_id",
+        "elementName": "_id",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_id"
+      },
+      "_row_etag": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_etag",
+        "elementName": "_row_etag",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_etag"
+      },
+      "_sync_state": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_sync_state",
+        "elementName": "_sync_state",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_sync_state"
+      },
+      "_conflict_type": {
+        "type": "integer",
+        "isNotNullable": false,
+        "elementKey": "_conflict_type",
+        "elementName": "_conflict_type",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_conflict_type"
+      },
+      "_default_access": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_default_access",
+        "elementName": "_default_access",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_default_access"
+      },
+      "_form_id": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_form_id",
+        "elementName": "_form_id",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_form_id"
+      },
+      "_group_modify": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_modify",
+        "elementName": "_group_modify",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_modify"
+      },
+      "_group_privileged": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_privileged",
+        "elementName": "_group_privileged",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_privileged"
+      },
+      "_group_read_only": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_group_read_only",
+        "elementName": "_group_read_only",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_group_read_only"
+      },
+      "_locale": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_locale",
+        "elementName": "_locale",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_locale"
+      },
+      "_row_owner": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_row_owner",
+        "elementName": "_row_owner",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_row_owner"
+      },
+      "_savepoint_type": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_savepoint_type",
+        "elementName": "_savepoint_type",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_type"
+      },
+      "_savepoint_timestamp": {
+        "type": "string",
+        "isNotNullable": true,
+        "elementKey": "_savepoint_timestamp",
+        "elementName": "_savepoint_timestamp",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_timestamp"
+      },
+      "_savepoint_creator": {
+        "type": "string",
+        "isNotNullable": false,
+        "elementKey": "_savepoint_creator",
+        "elementName": "_savepoint_creator",
+        "elementSet": "instanceMetadata",
+        "elementPath": "_savepoint_creator"
+      }
+    },
+    "properties": [
+      {
+        "_partition": "Column",
+        "_aspect": "addtl_spare_parts",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Enter additional spare parts\",\"es\":\"Entrar adicional piezas de repuesto\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "date_serviced",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Date Serviced\",\"es\":\"Fecha de Servicio\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "maintenance_log_image",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Image\",\"es\":\"Imagen\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "next_date_serviced",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Next Date Serviced\",\"es\":\"Próxima Fecha de Servicio\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "notes",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Notes\",\"es\":\"Notas\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "refrigerator_id",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Refrigerator ID\",\"es\":\"ID de Frigorífico\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "serviced_by",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"serviced_by_type\",\"data_value\":\"warranty_service_provider\",\"display\":{\"title\":{\"text\":{\"default\":\"Warranty/Service Provider\",\"es\":\"Garantía / Proveedor de Servicios\"}}},\"_row_num\":6},{\"choice_list_name\":\"serviced_by_type\",\"data_value\":\"cce_technician\",\"display\":{\"title\":{\"text\":{\"default\":\"CCE Technician\",\"es\":\"CCE Técnico\"}}},\"_row_num\":7},{\"choice_list_name\":\"serviced_by_type\",\"data_value\":\"facility_staff\",\"display\":{\"title\":{\"text\":{\"default\":\"Facility Staff\",\"es\":\"Personal de las Facilidades\"}}},\"_row_num\":8}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "serviced_by",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Serviced By\",\"es\":\"Atendido por\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "spare_parts",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"charging_cylinder\",\"display\":{\"title\":{\"text\":{\"default\":\"Charging Cylinder\",\"es\":\"Cilindro de carga\"}}},\"_row_num\":10},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"condenser_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Condenser Fan\",\"es\":\"Ventilador Condensador\"}}},\"_row_num\":11},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"door_gasket\",\"display\":{\"title\":{\"text\":{\"default\":\"Door Gasket\",\"es\":\"La Junta de la Puerta\"}}},\"_row_num\":12},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"electric_compressor\",\"display\":{\"title\":{\"text\":{\"default\":\"Electric Compressor\",\"es\":\"Compresor Eléctrico\"}}},\"_row_num\":13},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"fridge_tag\",\"display\":{\"title\":{\"text\":{\"default\":\"Fridge Tag\",\"es\":\"Etiqueta Frigorífico\"}}},\"_row_num\":14},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"relay\",\"display\":{\"title\":{\"text\":{\"default\":\"Relay\",\"es\":\"Relé\"}}},\"_row_num\":15},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"rotary_fan\",\"display\":{\"title\":{\"text\":{\"default\":\"Rotary Fan\",\"es\":\"Ventilador Rotatorio\"}}},\"_row_num\":16},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"solar_compressor\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar Compressor\",\"es\":\"Compresor Solar\"}}},\"_row_num\":17},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"thermostat\",\"display\":{\"title\":{\"text\":{\"default\":\"Thermostat\",\"es\":\"Termostato\"}}},\"_row_num\":18},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"fridge_dryer\",\"display\":{\"title\":{\"text\":{\"default\":\"Fridge Dryer\",\"es\":\"Secador de Refrigerador\"}}},\"_row_num\":19},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"electronic_control_unit\",\"display\":{\"title\":{\"text\":{\"default\":\"Electronic Control Unit\",\"es\":\"Unidad de Control Electrónico\"}}},\"_row_num\":20},{\"choice_list_name\":\"common_spare_parts\",\"data_value\":\"hinges\",\"display\":{\"title\":{\"text\":{\"default\":\"Hinges\",\"es\":\"Bisagra\"}}},\"_row_num\":21}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "spare_parts",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Spare Parts\",\"es\":\"Piezas de Repuesto\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "technician_name",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Technician Name\",\"es\":\"Nombre del técnico\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "type_of_maintenance",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"maint_types\",\"data_value\":\"repair\",\"display\":{\"title\":{\"text\":{\"default\":\"Repair\",\"es\":\"Reparar\"}}},\"_row_num\":2},{\"choice_list_name\":\"maint_types\",\"data_value\":\"preventative\",\"display\":{\"title\":{\"text\":{\"default\":\"Preventative\",\"es\":\"Preventivo\"}}},\"_row_num\":3},{\"choice_list_name\":\"maint_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":4}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "type_of_maintenance",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Type of Maintenance Performed\",\"es\":\"Tipo de mantenimiento realizado\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "type_of_preventative_maintenance",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"clean_solar_panels\",\"display\":{\"title\":{\"text\":\"Clean solar panels\"}},\"_row_num\":25},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"clean_coils\",\"display\":{\"title\":{\"text\":\"Clean coils\"}},\"_row_num\":26},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita Datos\"}}},\"_row_num\":27}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "type_of_preventative_maintenance",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Type of Preventative Maintenance\",\"es\":\"Tipo de Mantenimiento Preventivo\"}}"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "type_of_repair",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"repair_types\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita Datos\"}}},\"_row_num\":23}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "type_of_repair",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Type of Repair\",\"es\":\"Tipo de Reparación\"}}"
+      },
+      {
+        "_partition": "FormType",
+        "_aspect": "default",
+        "_key": "FormType.formType",
+        "_type": "string",
+        "_value": "SURVEY"
+      },
+      {
+        "_partition": "SurveyUtil",
+        "_aspect": "default",
+        "_key": "SurveyUtil.formId",
+        "_type": "string",
+        "_value": "wrong_form"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "defaultViewType",
+        "_type": "string",
+        "_value": "LIST"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "detailViewFileName",
+        "_type": "string",
+        "_value": "config/tables/maintenance_logs/html/maintenance_logs_detail.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Maintenance Logs\",\"es\":\"Registro de Servicio\"}}"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "listViewFileName",
+        "_type": "string",
+        "_value": "config/tables/maintenance_logs/html/maintenance_logs_list.html"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "defaultAccessOnCreation",
+        "_type": "string",
+        "_value": "HIDDEN"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "security",
+        "_key": "unverifiedUserCanCreate",
+        "_type": "boolean",
+        "_value": "false"
+      }
+    ]
+  }
+}
