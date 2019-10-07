@@ -421,19 +421,6 @@
       },
       {
         "choice_list_name": "climate_zones",
-        "data_value": "moderate",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Moderate",
-              "es": "Moderate"
-            }
-          }
-        },
-        "_row_num": 16
-      },
-      {
-        "choice_list_name": "climate_zones",
         "data_value": "temperate",
         "display": {
           "title": {
@@ -443,7 +430,7 @@
             }
           }
         },
-        "_row_num": 17
+        "_row_num": 16
       },
       {
         "choice_list_name": "climate_zones",
@@ -456,7 +443,7 @@
             }
           }
         },
-        "_row_num": 18
+        "_row_num": 17
       }
     ],
     "properties": [
@@ -871,19 +858,6 @@
       "climate_zones": [
         {
           "choice_list_name": "climate_zones",
-          "data_value": "moderate",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Moderate",
-                "es": "Moderate"
-              }
-            }
-          },
-          "_row_num": 16
-        },
-        {
-          "choice_list_name": "climate_zones",
           "data_value": "temperate",
           "display": {
             "title": {
@@ -893,7 +867,7 @@
               }
             }
           },
-          "_row_num": 17
+          "_row_num": 16
         },
         {
           "choice_list_name": "climate_zones",
@@ -906,7 +880,7 @@
               }
             }
           },
-          "_row_num": 18
+          "_row_num": 17
         }
       ]
     },
@@ -2102,7 +2076,7 @@
         "_aspect": "climate_zone",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"climate_zones\",\"data_value\":\"moderate\",\"display\":{\"title\":{\"text\":{\"default\":\"Moderate\",\"es\":\"Moderate\"}}},\"_row_num\":16},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"temperate\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperate\",\"es\":\"Templado\"}}},\"_row_num\":17},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"hot\",\"display\":{\"title\":{\"text\":{\"default\":\"Hot\",\"es\":\"Caliente\"}}},\"_row_num\":18}]"
+        "_value": "[{\"choice_list_name\":\"climate_zones\",\"data_value\":\"temperate\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperate\",\"es\":\"Templado\"}}},\"_row_num\":16},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"hot\",\"display\":{\"title\":{\"text\":{\"default\":\"Hot\",\"es\":\"Caliente\"}}},\"_row_num\":17}]"
       },
       {
         "_partition": "Column",
