@@ -5,15 +5,15 @@
 'use strict';
 
 var crMaintenanceLogsResultSet = {};
-var refrigeratorsData = {};
+var coldRoomData = {};
 
 function cbCRSuccess(result) {
-    refrigeratorsData = result;
+    coldRoomData = result;
 
-    util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsData, false);
-    util.showIdForDetail('#refrigerator_id', 'refrigerator_id', crMaintenanceLogsResultSet, false);
-    util.showIdForDetail('#functional_status', 'functional_status', refrigeratorsData, true);
-    util.showIdForDetail('#reason_not_working', 'reason_not_working', refrigeratorsData, true);
+    util.showIdForDetail('#tracking_id', 'tracking_id', coldRoomData, false);
+    util.showIdForDetail('#cold_room_id', 'cold_room_id', crMaintenanceLogsResultSet, false);
+    util.showIdForDetail('#functional_status', 'functional_status', coldRoomData, true);
+    util.showIdForDetail('#reason_not_working', 'reason_not_working', coldRoomData, true);
     util.showIdForDetail('#date_serviced', 'date_serviced', crMaintenanceLogsResultSet, true);
     util.showIdForDetail('#maint_type', 'type_of_maintenance', crMaintenanceLogsResultSet, true);
 

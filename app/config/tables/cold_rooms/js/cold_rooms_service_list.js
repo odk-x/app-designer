@@ -28,13 +28,8 @@ function resumeFunc(state) {
         $('#nextButton').text(odkCommon.localizeText(locale, "next"));
         $('#submit').val(odkCommon.localizeText(locale, "search"));
 
-        // TODO: Find out if we need data dependent query
-        // If so, get the current date
-        // var date6MonthsAgo = odkCommon.toOdkTimeStampFromDate(addMonths(new Date(), -6));
-        // listQueryParams.push(date6MonthsAgo);
-
         // set the parameters for the list view
-        listViewLogic.setTableId('refrigerators');
+        listViewLogic.setTableId('cold_rooms');
         listViewLogic.setListQuery(listQuery);
         listViewLogic.setListQueryParams(listQueryParams);
         listViewLogic.setSearchParams(searchParams);

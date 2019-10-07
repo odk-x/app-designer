@@ -5,7 +5,7 @@
 'use strict';
 
 var listQuery = 'SELECT * FROM cold_rooms ' +
-    'JOIN health_facilities ON refrigerators.facility_row_id = health_facilities._id';
+    'JOIN health_facilities ON cold_rooms.facility_row_id = health_facilities._id';
 
 var searchParams = '(facility_name LIKE ? OR facility_id LIKE ? OR tracking_id LIKE ? OR cold_room_id LIKE ?)';
 

@@ -91,6 +91,8 @@ util.getNextAdminRegionsFromCurrAdminRegionPromise = function (nextLevel, currAd
     var queryStr = 'SELECT * FROM geographic_regions WHERE levelNumber = ?';
     var queryParam = [nextLevel];
 
+    var orderByStr = ' ORDER BY ' + regionLevelVal + ' ASC';
+
     if (currAdminRegion !== undefined && currAdminRegion !== null) {
         var prevLevel = nextLevel - 1;
         if (prevLevel > 0) {
@@ -99,6 +101,8 @@ util.getNextAdminRegionsFromCurrAdminRegionPromise = function (nextLevel, currAd
             queryParam.push(currAdminRegion);
         }
     }
+
+    queryStr += orderByStr;
 
     var getNextRegionPromise = new Promise(function(resolve, reject) {
         odkData.arbitraryQuery('geographic_regions',

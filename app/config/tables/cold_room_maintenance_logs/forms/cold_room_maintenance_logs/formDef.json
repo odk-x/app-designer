@@ -12,18 +12,18 @@
       },
       {
         "type": "string",
-        "name": "refrigerator_id",
+        "name": "cold_room_id",
         "display": {
           "title": {
             "text": {
-              "default": "Refrigerator ID",
-              "es": "ID de Frigorífico"
+              "default": "Cold Room ID",
+              "es": "ID de Cuarto Frio"
             }
           },
           "prompt": {
             "text": {
-              "default": "Enter the ID of the refrigerator",
-              "es": "Por favor entre el ID del frigorífico"
+              "default": "Enter the ID of the cold room",
+              "es": "Por favor entre el ID del cuarto frio"
             }
           }
         },
@@ -571,10 +571,10 @@
     ],
     "queries": [
       {
-        "query_name": "refrigerator_ids",
+        "query_name": "cold_room_ids",
         "query_type": "linked_table",
-        "linked_form_id": "refrigerators",
-        "linked_table_id": "refrigerators",
+        "linked_form_id": "cold_rooms",
+        "linked_table_id": "cold_rooms",
         "selection": "_id >= ?",
         "selectionArgs": "[ '0' ]",
         "newRowInitialElementKeyToValueMap": "{}",
@@ -585,12 +585,12 @@
     "settings": [
       {
         "setting_name": "form_id",
-        "value": "maintenance_logs",
+        "value": "cold_room_maintenance_logs",
         "_row_num": 2
       },
       {
         "setting_name": "table_id",
-        "value": "maintenance_logs",
+        "value": "cold_room_maintenance_logs",
         "_row_num": 3
       },
       {
@@ -598,8 +598,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Maintenance Logs",
-              "es": "Registro de Servicio"
+              "default": "Cold Room Maintenance Logs",
+              "es": "Registro de Servicio de Cuartos Frios"
             }
           }
         },
@@ -607,7 +607,7 @@
       },
       {
         "setting_name": "form_version",
-        "value": 20170804,
+        "value": 20191005,
         "_row_num": 5
       },
       {
@@ -654,7 +654,7 @@
         "aspect": "default",
         "key": "detailViewFileName",
         "type": "string",
-        "value": "config/tables/maintenance_logs/html/maintenance_logs_detail.html",
+        "value": "config/tables/cold_room_maintenance_logs/html/cold_room_maintenance_logs_detail.html",
         "_row_num": 3
       },
       {
@@ -662,7 +662,7 @@
         "aspect": "default",
         "key": "listViewFileName",
         "type": "string",
-        "value": "config/tables/maintenance_logs/html/maintenance_logs_list.html",
+        "value": "config/tables/cold_room_maintenance_logs/html/cold_room_maintenance_logs_list.html",
         "_row_num": 4
       },
       {
@@ -718,12 +718,12 @@
     "settings": {
       "form_id": {
         "setting_name": "form_id",
-        "value": "maintenance_logs",
+        "value": "cold_room_maintenance_logs",
         "_row_num": 2
       },
       "table_id": {
         "setting_name": "table_id",
-        "value": "maintenance_logs",
+        "value": "cold_room_maintenance_logs",
         "_row_num": 3
       },
       "survey": {
@@ -731,8 +731,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Maintenance Logs",
-              "es": "Registro de Servicio"
+              "default": "Cold Room Maintenance Logs",
+              "es": "Registro de Servicio de Cuartos Frios"
             }
           }
         },
@@ -740,7 +740,7 @@
       },
       "form_version": {
         "setting_name": "form_version",
-        "value": 20170804,
+        "value": 20191005,
         "_row_num": 5
       },
       "instance_name": {
@@ -808,8 +808,8 @@
         "display": {
           "title": {
             "text": {
-              "default": "Maintenance Logs",
-              "es": "Registro de Servicio"
+              "default": "Cold Room Maintenance Logs",
+              "es": "Registro de Servicio de Cuartos Frios"
             }
           }
         },
@@ -1112,11 +1112,11 @@
       "_tokens": {}
     },
     "queries": {
-      "refrigerator_ids": {
-        "query_name": "refrigerator_ids",
+      "cold_room_ids": {
+        "query_name": "cold_room_ids",
         "query_type": "linked_table",
-        "linked_form_id": "refrigerators",
-        "linked_table_id": "refrigerators",
+        "linked_form_id": "cold_rooms",
+        "linked_table_id": "cold_rooms",
         "selection": "_id >= ?",
         "selectionArgs": "[ '0' ]",
         "newRowInitialElementKeyToValueMap": "{}",
@@ -1126,7 +1126,7 @@
     },
     "calculates": {},
     "model": {
-      "refrigerator_id": {
+      "cold_room_id": {
         "_defn": [
           {
             "_row_num": 4,
@@ -1136,11 +1136,11 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Refrigerator ID",
-            "es": "ID de Frigorífico"
+            "default": "Cold Room ID",
+            "es": "ID de Cuarto Frio"
           }
         },
-        "elementKey": "refrigerator_id"
+        "elementKey": "cold_room_id"
       },
       "serviced_by": {
         "_defn": [
@@ -1364,18 +1364,18 @@
         "prompts": [
           {
             "type": "string",
-            "name": "refrigerator_id",
+            "name": "cold_room_id",
             "display": {
               "title": {
                 "text": {
-                  "default": "Refrigerator ID",
-                  "es": "ID de Frigorífico"
+                  "default": "Cold Room ID",
+                  "es": "ID de Cuarto Frio"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Enter the ID of the refrigerator",
-                  "es": "Por favor entre el ID del frigorífico"
+                  "default": "Enter the ID of the cold room",
+                  "es": "Por favor entre el ID del cuarto frio"
                 }
               }
             },
@@ -1780,8 +1780,8 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Maintenance Logs",
-                  "es": "Registro de Servicio"
+                  "default": "Cold Room Maintenance Logs",
+                  "es": "Registro de Servicio de Cuartos Frios"
                 }
               }
             },
@@ -1932,7 +1932,7 @@
       }
     },
     "dataTableModel": {
-      "refrigerator_id": {
+      "cold_room_id": {
         "_defn": [
           {
             "_row_num": 4,
@@ -1942,14 +1942,14 @@
         "type": "string",
         "displayName": {
           "text": {
-            "default": "Refrigerator ID",
-            "es": "ID de Frigorífico"
+            "default": "Cold Room ID",
+            "es": "ID de Cuarto Frio"
           }
         },
-        "elementKey": "refrigerator_id",
-        "elementName": "refrigerator_id",
+        "elementKey": "cold_room_id",
+        "elementName": "cold_room_id",
         "elementSet": "data",
-        "elementPath": "refrigerator_id"
+        "elementPath": "cold_room_id"
       },
       "serviced_by": {
         "_defn": [
@@ -2389,6 +2389,13 @@
       },
       {
         "_partition": "Column",
+        "_aspect": "cold_room_id",
+        "_key": "displayName",
+        "_type": "object",
+        "_value": "{\"text\":{\"default\":\"Cold Room ID\",\"es\":\"ID de Cuarto Frio\"}}"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "date_serviced",
         "_key": "displayName",
         "_type": "object",
@@ -2414,13 +2421,6 @@
         "_key": "displayName",
         "_type": "object",
         "_value": "{\"text\":{\"default\":\"Notes\",\"es\":\"Notas\"}}"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "refrigerator_id",
-        "_key": "displayName",
-        "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Refrigerator ID\",\"es\":\"ID de Frigorífico\"}}"
       },
       {
         "_partition": "Column",
@@ -2525,21 +2525,21 @@
         "_aspect": "default",
         "_key": "detailViewFileName",
         "_type": "string",
-        "_value": "config/tables/maintenance_logs/html/maintenance_logs_detail.html"
+        "_value": "config/tables/cold_room_maintenance_logs/html/cold_room_maintenance_logs_detail.html"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Maintenance Logs\",\"es\":\"Registro de Servicio\"}}"
+        "_value": "{\"text\":{\"default\":\"Cold Room Maintenance Logs\",\"es\":\"Registro de Servicio de Cuartos Frios\"}}"
       },
       {
         "_partition": "Table",
         "_aspect": "default",
         "_key": "listViewFileName",
         "_type": "string",
-        "_value": "config/tables/maintenance_logs/html/maintenance_logs_list.html"
+        "_value": "config/tables/cold_room_maintenance_logs/html/cold_room_maintenance_logs_list.html"
       },
       {
         "_partition": "Table",

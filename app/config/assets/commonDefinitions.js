@@ -1151,6 +1151,22 @@ window.odkCommonDefinitions = {
         "es": "Borrar Cuarto Frio"
       },
       "_row_num": 145
+    },
+    "cold_room_inventory": {
+      "string_token": "cold_room_inventory",
+      "text": {
+        "default": "Cold Room Inventory",
+        "es": "Inventario De Cuarto Frio"
+      },
+      "_row_num": 146
+    },
+    "add_cold_room": {
+      "string_token": "add_cold_room",
+      "text": {
+        "default": "Add Cold Room",
+        "es": "Añadir Cuarto Frio"
+      },
+      "_row_num": 147
     }
   },
   "_locales": {
