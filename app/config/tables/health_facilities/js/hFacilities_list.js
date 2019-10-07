@@ -5,41 +5,18 @@
 'use strict';
 
 // This will map types of refrigerators.
-var typeNameMap = {};
 var idxStart = -1;
 var healthFacilityResultSet = {};
 var locale = null;
 var facIDTxt = 'Facility ID';
 
-/**
- * Called when page loads to display things (Nothing to edit here)
- */
-var refrigeratorTypeCBSuccess = function(result) {
-    var typeData = result;
-
-    for (var typeCntr = 0; typeCntr < typeData.getCount(); typeCntr++) {
-        typeNameMap[typeData.getRowId(typeCntr)] =
-            typeData.getData(typeCntr, 'Name');
-    }
-
-    return (function() {
-        displayGroup(idxStart);
-    }());
-};
-
-var refrigeratorTypeCBFailure = function(error) {
-
-    console.log('health_facilities_list refrigeratorTypeCBFailure: ' + error);
-};
-
 var cbSuccess = function(result) {
 
     healthFacilityResultSet = result;
 
-    if (idxStart === 0) {
-        odkData.query('refrigerator_types', null, null,
-            null, null, null, null, null, null, true, refrigeratorTypeCBSuccess, refrigeratorTypeCBFailure);
-    }
+    return (function() {
+        displayGroup(idxStart);
+    }());
 };
 
 var cbFailure = function(error) {
@@ -153,8 +130,4 @@ function addDataForRow(rowNumber) {
     var borderDiv = $('<div>');
     borderDiv.addClass('divider');
     $('#list').append(borderDiv);
-}
-
-function clearRows() {
-  $('#list').empty();
 }
