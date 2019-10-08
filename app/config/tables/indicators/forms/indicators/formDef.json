@@ -6,6 +6,11 @@
         "_row_num": 2
       },
       {
+        "clause": "if",
+        "condition": "data('refrigerator_id') === null || data('refrigerator_id') === undefined",
+        "_row_num": 3
+      },
+      {
         "type": "string",
         "name": "refrigerator_id",
         "display": {
@@ -23,52 +28,46 @@
           }
         },
         "required": true,
-        "_row_num": 3
-      },
-      {
-        "type": "date",
-        "name": "date_serviced",
-        "display": {
-          "prompt": {
-            "text": {
-              "default": "Date Serviced",
-              "es": "Fecha de Servicio"
-            }
-          },
-          "hint": {
-            "text": {
-              "default": "Enter the date of service",
-              "es": "Fecha de servicio"
-            }
-          }
-        },
         "_row_num": 4
       },
       {
-        "clause": "end screen",
+        "clause": "end if",
         "_row_num": 5
       },
       {
-        "type": "select_one_integer",
-        "values_list": "functional_type",
-        "name": "functional",
+        "type": "note",
         "display": {
           "prompt": {
-            "text": "Is the refrigerator working properly?"
-          },
-          "hint": {
-            "text": "5 or more heat alarms in a month = Non-functional \n1 or more freeze alarms in a month = Non-functional\n1 or more heat alarms with duration of 48 hrs or more = Non-functional"
+            "text": {
+              "default": "Refrigerator ID: {{data.refrigerator_id}}",
+              "es": "ID de Frigorífico: {{data.refrigerator_id}}"
+            }
           }
         },
         "_row_num": 6
       },
       {
-        "clause": "if",
-        "condition": "data('functional') === 0",
+        "type": "birthdate",
+        "name": "reporting_period",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Reporting Period",
+              "es": "Período de información"
+            }
+          },
+          "hint": {
+            "text": {
+              "default": "Enter the date for the reporting period",
+              "es": "Período de información"
+            }
+          }
+        },
+        "required": true,
         "_row_num": 7
       },
       {
-        "clause": "begin screen",
+        "clause": "end screen",
         "_row_num": 8
       },
       {
@@ -79,6 +78,7 @@
             "text": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the first day of the month to the last day of the month?"
           }
         },
+        "required": true,
         "_row_num": 9
       },
       {
@@ -89,7 +89,12 @@
             "text": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log from the first day of the month to the last day of the month?"
           }
         },
+        "required": true,
         "_row_num": 10
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 11
       },
       {
         "type": "integer",
@@ -99,7 +104,27 @@
             "text": "How many heat alarms with 48 hour or longer duration in the temperature log from the first day of the month to the last day of the month?"
           }
         },
-        "_row_num": 11
+        "required": true,
+        "_row_num": 12
+      },
+      {
+        "type": "assign",
+        "name": "alarm_functional_status",
+        "calculation": "calculates.non_functional_calc()",
+        "_row_num": 13
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 14
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 15
+      },
+      {
+        "clause": "if",
+        "condition": "data('alarm_functional_status') === 'non_functional'",
+        "_row_num": 16
       },
       {
         "type": "select_one_with_other",
@@ -110,10 +135,15 @@
             "text": "Why did the refrigerator fail?"
           }
         },
-        "_row_num": 12
+        "required": "data('alarm_functional_status') === 'non_functional'",
+        "_row_num": 17
       },
       {
-        "type": "select_one_integer",
+        "clause": "end if",
+        "_row_num": 18
+      },
+      {
+        "type": "select_one",
         "values_list": "yes_no",
         "name": "build_quality",
         "display": {
@@ -121,12 +151,12 @@
             "text": "Have there been any issues related to build quality from the first day of the month to the last day of the month?"
           }
         },
-        "_row_num": 13
+        "_row_num": 19
       },
       {
         "clause": "if",
-        "condition": "selected(data('build_quality'), 1)",
-        "_row_num": 14
+        "condition": "selected(data('build_quality'), 'yes')",
+        "_row_num": 20
       },
       {
         "type": "select_one_with_other",
@@ -137,7 +167,24 @@
             "text": "If so, why?"
           }
         },
-        "_row_num": 15
+        "_row_num": 21
+      },
+      {
+        "clause": "end if",
+        "_row_num": 22
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 23
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('build_quality'), 'yes')",
+        "_row_num": 24
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 25
       },
       {
         "type": "image",
@@ -147,26 +194,159 @@
             "text": "Please take a picture."
           }
         },
-        "_row_num": 16
-      },
-      {
-        "clause": "end if",
-        "_row_num": 17
+        "_row_num": 26
       },
       {
         "clause": "end screen",
-        "_row_num": 18
+        "_row_num": 27
       },
       {
         "clause": "end if",
-        "_row_num": 19
+        "_row_num": 28
       },
       {
         "clause": "begin screen",
-        "_row_num": 20
+        "_row_num": 29
       },
       {
-        "type": "select_one_integer",
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "build_quality2",
+        "display": {
+          "prompt": {
+            "text": "Was there a second issue related to build quality from the first day of the month to the last day of the month?"
+          }
+        },
+        "_row_num": 30
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('build_quality2'), 'yes')",
+        "_row_num": 31
+      },
+      {
+        "type": "select_one_with_other",
+        "values_list": "build_quality_reason_type",
+        "name": "build_quality_reason2",
+        "display": {
+          "prompt": {
+            "text": "If so, why?"
+          }
+        },
+        "_row_num": 32
+      },
+      {
+        "clause": "end if",
+        "_row_num": 33
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 34
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('build_quality2'), 'yes')",
+        "_row_num": 35
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 36
+      },
+      {
+        "type": "image",
+        "name": "build_quality_image2",
+        "display": {
+          "prompt": {
+            "text": "Please take a picture."
+          }
+        },
+        "_row_num": 37
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 38
+      },
+      {
+        "clause": "end if",
+        "_row_num": 39
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 40
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "build_quality3",
+        "display": {
+          "prompt": {
+            "text": "Was there a third issue related to build quality from the first day of the month to the last day of the month?"
+          }
+        },
+        "_row_num": 41
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('build_quality3'), 'yes')",
+        "_row_num": 42
+      },
+      {
+        "type": "select_one_with_other",
+        "values_list": "build_quality_reason_type",
+        "name": "build_quality_reason3",
+        "display": {
+          "prompt": {
+            "text": "If so, why?"
+          }
+        },
+        "_row_num": 43
+      },
+      {
+        "clause": "end if",
+        "_row_num": 44
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 45
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('build_quality3'), 'yes')",
+        "_row_num": 46
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 47
+      },
+      {
+        "type": "image",
+        "name": "build_quality_image3",
+        "display": {
+          "prompt": {
+            "text": "Please take a picture."
+          }
+        },
+        "_row_num": 48
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 49
+      },
+      {
+        "clause": "end if",
+        "_row_num": 50
+      },
+      {
+        "clause": "if",
+        "condition": "data('voltage_stabilizer_present') !== 'no'",
+        "_row_num": 51
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 52
+      },
+      {
+        "type": "select_one",
         "values_list": "yes_no",
         "name": "voltage_stabilizer_working",
         "display": {
@@ -174,12 +354,12 @@
             "text": "Is the voltage stabilizer working?"
           }
         },
-        "_row_num": 21
+        "_row_num": 53
       },
       {
         "clause": "if",
-        "condition": "data('voltage_stabilizer_working') === 0",
-        "_row_num": 22
+        "condition": "data('voltage_stabilizer_working') === 'no'",
+        "_row_num": 54
       },
       {
         "type": "select_one_with_other",
@@ -190,22 +370,22 @@
             "text": "If no, why not?"
           }
         },
-        "_row_num": 23
+        "_row_num": 55
       },
       {
         "clause": "end if",
-        "_row_num": 24
+        "_row_num": 56
       },
       {
         "clause": "end screen",
-        "_row_num": 25
+        "_row_num": 57
       },
       {
         "clause": "begin screen",
-        "_row_num": 26
+        "_row_num": 58
       },
       {
-        "type": "select_one_integer",
+        "type": "select_one",
         "values_list": "yes_no",
         "name": "voltage_stabilizer_replaced",
         "display": {
@@ -213,12 +393,12 @@
             "text": "Has the voltage regulator been replaced from the first day of the month to the last day of the month?"
           }
         },
-        "_row_num": 27
+        "_row_num": 59
       },
       {
         "clause": "if",
-        "condition": "selected(data('voltage_stabilizer_replaced'), 1)",
-        "_row_num": 28
+        "condition": "selected(data('voltage_stabilizer_replaced'), 'yes')",
+        "_row_num": 60
       },
       {
         "type": "select_one_with_other",
@@ -229,22 +409,31 @@
             "text": "If yes, why?"
           }
         },
-        "_row_num": 29
+        "_row_num": 61
       },
       {
         "clause": "end if",
-        "_row_num": 30
+        "_row_num": 62
       },
       {
         "clause": "end screen",
-        "_row_num": 31
+        "_row_num": 63
+      },
+      {
+        "clause": "end if",
+        "_row_num": 64
+      },
+      {
+        "clause": "if",
+        "condition": "calculates.refrigerator_age() < 4",
+        "_row_num": 65
       },
       {
         "clause": "begin screen",
-        "_row_num": 32
+        "_row_num": 66
       },
       {
-        "type": "select_one_integer",
+        "type": "select_one",
         "values_list": "yes_no",
         "name": "warranty_claim_been_made",
         "display": {
@@ -252,22 +441,22 @@
             "text": "Has a warranty claim been made?"
           }
         },
-        "_row_num": 33
+        "_row_num": 67
       },
       {
         "clause": "if",
-        "condition": "selected(data('warranty_claim_been_made'), 1)",
-        "_row_num": 34
+        "condition": "selected(data('warranty_claim_been_made'), 'yes')",
+        "_row_num": 68
       },
       {
-        "type": "date",
+        "type": "birthdate",
         "name": "warranty_claim_date",
         "display": {
           "prompt": {
             "text": "When was the warranty claim made?"
           }
         },
-        "_row_num": 35
+        "_row_num": 69
       },
       {
         "type": "integer",
@@ -277,21 +466,71 @@
             "text": "How many days elapsed between when the claim was made and when the repair occurred?"
           }
         },
-        "_row_num": 36
+        "_row_num": 70
       },
       {
         "clause": "end if",
-        "_row_num": 37
+        "_row_num": 71
       },
       {
         "clause": "end screen",
-        "_row_num": 38
+        "_row_num": 72
+      },
+      {
+        "clause": "end if",
+        "_row_num": 73
+      }
+    ],
+    "calculates": [
+      {
+        "calculation_name": "non_functional_calc",
+        "calculation": "((data('heat_alarms') >=  5 || data('freeze_alarms') >=  1 || data('heat_alarms_over_48') >=  1) ? 'non_functional' : 'functional')",
+        "_row_num": 2
+      },
+      {
+        "calculation_name": "refrigerator_age",
+        "calculation": "(function() {\nvar frigYear = data('year_installed');\nif (data('year_installed') === null || data('year_installed') === undefined || data('year_installed') === 0) { return 0; }\nvar currYear = new Date().getFullYear();\nvar years = Math.abs(currYear - frigYear);\nreturn years;})()",
+        "_row_num": 3
+      }
+    ],
+    "model": [
+      {
+        "type": "string",
+        "name": "refrigerator_id",
+        "_row_num": 2
+      },
+      {
+        "type": "string",
+        "name": "alarm_functional_status",
+        "_row_num": 3
+      },
+      {
+        "type": "string",
+        "name": "voltage_stabilizer_present",
+        "_row_num": 4
+      },
+      {
+        "type": "integer",
+        "name": "year_installed",
+        "_row_num": 5
+      },
+      {
+        "type": "string",
+        "name": "second_build_quality_issue",
+        "isSessionVariable": true,
+        "_row_num": 6
+      },
+      {
+        "type": "string",
+        "name": "third_build_quality_issue",
+        "isSessionVariable": true,
+        "_row_num": 7
       }
     ],
     "choices": [
       {
         "choice_list_name": "functional_type",
-        "data_value": 1,
+        "data_value": "functional",
         "display": {
           "title": {
             "text": {
@@ -304,7 +543,7 @@
       },
       {
         "choice_list_name": "functional_type",
-        "data_value": 0,
+        "data_value": "non_functional",
         "display": {
           "title": {
             "text": {
@@ -317,7 +556,7 @@
       },
       {
         "choice_list_name": "yes_no",
-        "data_value": 1,
+        "data_value": "yes",
         "display": {
           "title": {
             "text": "Yes"
@@ -327,7 +566,7 @@
       },
       {
         "choice_list_name": "yes_no",
-        "data_value": 0,
+        "data_value": "no",
         "display": {
           "title": {
             "text": "No"
@@ -374,6 +613,45 @@
           }
         },
         "_row_num": 14
+      },
+      {
+        "choice_list_name": "yes_no_na",
+        "data_value": "yes",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Yes",
+              "es": "Si"
+            }
+          }
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "yes_no_na",
+        "data_value": "no",
+        "display": {
+          "title": {
+            "text": {
+              "default": "No",
+              "es": "No"
+            }
+          }
+        },
+        "_row_num": 17
+      },
+      {
+        "choice_list_name": "yes_no_na",
+        "data_value": "n_a",
+        "display": {
+          "title": {
+            "text": {
+              "default": "N/A",
+              "es": "N/A"
+            }
+          }
+        },
+        "_row_num": 18
       }
     ],
     "queries": [
@@ -627,7 +905,7 @@
       "functional_type": [
         {
           "choice_list_name": "functional_type",
-          "data_value": 1,
+          "data_value": "functional",
           "display": {
             "title": {
               "text": {
@@ -640,7 +918,7 @@
         },
         {
           "choice_list_name": "functional_type",
-          "data_value": 0,
+          "data_value": "non_functional",
           "display": {
             "title": {
               "text": {
@@ -655,7 +933,7 @@
       "yes_no": [
         {
           "choice_list_name": "yes_no",
-          "data_value": 1,
+          "data_value": "yes",
           "display": {
             "title": {
               "text": "Yes"
@@ -665,7 +943,7 @@
         },
         {
           "choice_list_name": "yes_no",
-          "data_value": 0,
+          "data_value": "no",
           "display": {
             "title": {
               "text": "No"
@@ -721,6 +999,47 @@
           },
           "_row_num": 14
         }
+      ],
+      "yes_no_na": [
+        {
+          "choice_list_name": "yes_no_na",
+          "data_value": "yes",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Yes",
+                "es": "Si"
+              }
+            }
+          },
+          "_row_num": 16
+        },
+        {
+          "choice_list_name": "yes_no_na",
+          "data_value": "no",
+          "display": {
+            "title": {
+              "text": {
+                "default": "No",
+                "es": "No"
+              }
+            }
+          },
+          "_row_num": 17
+        },
+        {
+          "choice_list_name": "yes_no_na",
+          "data_value": "n_a",
+          "display": {
+            "title": {
+              "text": {
+                "default": "N/A",
+                "es": "N/A"
+              }
+            }
+          },
+          "_row_num": 18
+        }
       ]
     },
     "table_specific_definitions": {
@@ -739,39 +1058,95 @@
         "_row_num": 2
       }
     },
-    "calculates": {},
+    "calculates": {
+      "non_functional_calc": {
+        "calculation_name": "non_functional_calc",
+        "calculation": "((data('heat_alarms') >=  5 || data('freeze_alarms') >=  1 || data('heat_alarms_over_48') >=  1) ? 'non_functional' : 'functional')",
+        "_row_num": 2
+      },
+      "refrigerator_age": {
+        "calculation_name": "refrigerator_age",
+        "calculation": "(function() {\nvar frigYear = data('year_installed');\nif (data('year_installed') === null || data('year_installed') === undefined || data('year_installed') === 0) { return 0; }\nvar currYear = new Date().getFullYear();\nvar years = Math.abs(currYear - frigYear);\nreturn years;})()",
+        "_row_num": 3
+      }
+    },
     "model": {
       "refrigerator_id": {
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "survey"
-          }
-        ],
         "type": "string",
-        "elementKey": "refrigerator_id"
-      },
-      "date_serviced": {
         "_defn": [
           {
             "_row_num": 4,
+            "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "refrigerator_id"
+      },
+      "alarm_functional_status": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "alarm_functional_status"
+      },
+      "voltage_stabilizer_present": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "voltage_stabilizer_present"
+      },
+      "year_installed": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "year_installed"
+      },
+      "second_build_quality_issue": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "second_build_quality_issue"
+      },
+      "third_build_quality_issue": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "third_build_quality_issue"
+      },
+      "reporting_period": {
+        "_defn": [
+          {
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "elementType": "date",
-        "elementKey": "date_serviced"
-      },
-      "functional": {
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "valuesList": "functional_type",
-        "elementKey": "functional"
+        "elementKey": "reporting_period"
       },
       "heat_alarms": {
         "_defn": [
@@ -796,7 +1171,7 @@
       "heat_alarms_over_48": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 12,
             "section_name": "survey"
           }
         ],
@@ -806,7 +1181,7 @@
       "refrigerator_failure": {
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 17,
             "section_name": "survey"
           }
         ],
@@ -817,18 +1192,18 @@
       "build_quality": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "string",
         "valuesList": "yes_no",
         "elementKey": "build_quality"
       },
       "build_quality_reason": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -839,7 +1214,7 @@
       "build_quality_image": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -860,21 +1235,113 @@
         },
         "elementKey": "build_quality_image"
       },
-      "voltage_stabilizer_working": {
+      "build_quality2": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "build_quality2"
+      },
+      "build_quality_reason2": {
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type",
+        "elementKey": "build_quality_reason2"
+      },
+      "build_quality_image2": {
+        "_defn": [
+          {
+            "_row_num": 37,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "build_quality_image2_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "build_quality_image2_contentType"
+          }
+        },
+        "elementKey": "build_quality_image2"
+      },
+      "build_quality3": {
+        "_defn": [
+          {
+            "_row_num": 41,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "build_quality3"
+      },
+      "build_quality_reason3": {
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type",
+        "elementKey": "build_quality_reason3"
+      },
+      "build_quality_image3": {
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "build_quality_image3_uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "build_quality_image3_contentType"
+          }
+        },
+        "elementKey": "build_quality_image3"
+      },
+      "voltage_stabilizer_working": {
+        "_defn": [
+          {
+            "_row_num": 53,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
         "valuesList": "yes_no",
         "elementKey": "voltage_stabilizer_working"
       },
       "voltage_stabilizer_not_working_reason": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 55,
             "section_name": "survey"
           }
         ],
@@ -885,18 +1352,18 @@
       "voltage_stabilizer_replaced": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 59,
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "string",
         "valuesList": "yes_no",
         "elementKey": "voltage_stabilizer_replaced"
       },
       "voltage_stabilizer_replaced_reason": {
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 61,
             "section_name": "survey"
           }
         ],
@@ -907,18 +1374,18 @@
       "warranty_claim_been_made": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 67,
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "string",
         "valuesList": "yes_no",
         "elementKey": "warranty_claim_been_made"
       },
       "warranty_claim_date": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 69,
             "section_name": "survey"
           }
         ],
@@ -929,7 +1396,7 @@
       "days_from_warranty_claim_until_repaired": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 70,
             "section_name": "survey"
           }
         ],
@@ -965,54 +1432,53 @@
               }
             },
             "required": true,
-            "_row_num": 3,
-            "__rowNum__": 2,
+            "_row_num": 4,
+            "__rowNum__": 3,
             "_token_type": "prompt",
             "_type": "string",
             "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 0
           },
           {
-            "type": "date",
-            "name": "date_serviced",
+            "type": "note",
             "display": {
               "prompt": {
                 "text": {
-                  "default": "Date Serviced",
-                  "es": "Fecha de Servicio"
+                  "default": "Refrigerator ID: {{data.refrigerator_id}}",
+                  "es": "ID de Frigorífico: {{data.refrigerator_id}}"
                 }
-              },
-              "hint": {
-                "text": {
-                  "default": "Enter the date of service",
-                  "es": "Fecha de servicio"
-                }
-              }
-            },
-            "_row_num": 4,
-            "__rowNum__": 3,
-            "_token_type": "prompt",
-            "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen2",
-            "promptIdx": 1
-          },
-          {
-            "type": "select_one_integer",
-            "values_list": "functional_type",
-            "name": "functional",
-            "display": {
-              "prompt": {
-                "text": "Is the refrigerator working properly?"
-              },
-              "hint": {
-                "text": "5 or more heat alarms in a month = Non-functional \n1 or more freeze alarms in a month = Non-functional\n1 or more heat alarms with duration of 48 hrs or more = Non-functional"
               }
             },
             "_row_num": 6,
             "__rowNum__": 5,
             "_token_type": "prompt",
-            "_type": "select_one_integer",
-            "_branch_label_enclosing_screen": "survey/_screen6",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen2",
+            "promptIdx": 1
+          },
+          {
+            "type": "birthdate",
+            "name": "reporting_period",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Reporting Period",
+                  "es": "Período de información"
+                }
+              },
+              "hint": {
+                "text": {
+                  "default": "Enter the date for the reporting period",
+                  "es": "Período de información"
+                }
+              }
+            },
+            "required": true,
+            "_row_num": 7,
+            "__rowNum__": 6,
+            "_token_type": "prompt",
+            "_type": "birthdate",
+            "_branch_label_enclosing_screen": "survey/_screen2",
             "promptIdx": 2
           },
           {
@@ -1023,11 +1489,12 @@
                 "text": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the first day of the month to the last day of the month?"
               }
             },
+            "required": true,
             "_row_num": 9,
             "__rowNum__": 8,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_branch_label_enclosing_screen": "survey/_screen9",
             "promptIdx": 3
           },
           {
@@ -1038,11 +1505,12 @@
                 "text": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log from the first day of the month to the last day of the month?"
               }
             },
+            "required": true,
             "_row_num": 10,
             "__rowNum__": 9,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 4
           },
           {
@@ -1053,11 +1521,12 @@
                 "text": "How many heat alarms with 48 hour or longer duration in the temperature log from the first day of the month to the last day of the month?"
               }
             },
-            "_row_num": 11,
-            "__rowNum__": 10,
+            "required": true,
+            "_row_num": 12,
+            "__rowNum__": 11,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_branch_label_enclosing_screen": "survey/_screen11",
             "promptIdx": 5
           },
           {
@@ -1069,15 +1538,16 @@
                 "text": "Why did the refrigerator fail?"
               }
             },
-            "_row_num": 12,
-            "__rowNum__": 11,
+            "required": "data('alarm_functional_status') === 'non_functional'",
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 6
           },
           {
-            "type": "select_one_integer",
+            "type": "select_one",
             "values_list": "yes_no",
             "name": "build_quality",
             "display": {
@@ -1085,11 +1555,11 @@
                 "text": "Have there been any issues related to build quality from the first day of the month to the last day of the month?"
               }
             },
-            "_row_num": 13,
-            "__rowNum__": 12,
+            "_row_num": 19,
+            "__rowNum__": 18,
             "_token_type": "prompt",
-            "_type": "select_one_integer",
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 7
           },
           {
@@ -1101,11 +1571,11 @@
                 "text": "If so, why?"
               }
             },
-            "_row_num": 15,
-            "__rowNum__": 14,
+            "_row_num": 21,
+            "__rowNum__": 20,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 8
           },
           {
@@ -1116,15 +1586,109 @@
                 "text": "Please take a picture."
               }
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 26,
+            "__rowNum__": 25,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen8",
+            "_branch_label_enclosing_screen": "survey/_screen25",
             "promptIdx": 9
           },
           {
-            "type": "select_one_integer",
+            "type": "select_one",
+            "values_list": "yes_no",
+            "name": "build_quality2",
+            "display": {
+              "prompt": {
+                "text": "Was there a second issue related to build quality from the first day of the month to the last day of the month?"
+              }
+            },
+            "_row_num": 30,
+            "__rowNum__": 29,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 10
+          },
+          {
+            "type": "select_one_with_other",
+            "values_list": "build_quality_reason_type",
+            "name": "build_quality_reason2",
+            "display": {
+              "prompt": {
+                "text": "If so, why?"
+              }
+            },
+            "_row_num": 32,
+            "__rowNum__": 31,
+            "_token_type": "prompt",
+            "_type": "select_one_with_other",
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 11
+          },
+          {
+            "type": "image",
+            "name": "build_quality_image2",
+            "display": {
+              "prompt": {
+                "text": "Please take a picture."
+              }
+            },
+            "_row_num": 37,
+            "__rowNum__": 36,
+            "_token_type": "prompt",
+            "_type": "image",
+            "_branch_label_enclosing_screen": "survey/_screen36",
+            "promptIdx": 12
+          },
+          {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "name": "build_quality3",
+            "display": {
+              "prompt": {
+                "text": "Was there a third issue related to build quality from the first day of the month to the last day of the month?"
+              }
+            },
+            "_row_num": 41,
+            "__rowNum__": 40,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen40",
+            "promptIdx": 13
+          },
+          {
+            "type": "select_one_with_other",
+            "values_list": "build_quality_reason_type",
+            "name": "build_quality_reason3",
+            "display": {
+              "prompt": {
+                "text": "If so, why?"
+              }
+            },
+            "_row_num": 43,
+            "__rowNum__": 42,
+            "_token_type": "prompt",
+            "_type": "select_one_with_other",
+            "_branch_label_enclosing_screen": "survey/_screen40",
+            "promptIdx": 14
+          },
+          {
+            "type": "image",
+            "name": "build_quality_image3",
+            "display": {
+              "prompt": {
+                "text": "Please take a picture."
+              }
+            },
+            "_row_num": 48,
+            "__rowNum__": 47,
+            "_token_type": "prompt",
+            "_type": "image",
+            "_branch_label_enclosing_screen": "survey/_screen47",
+            "promptIdx": 15
+          },
+          {
+            "type": "select_one",
             "values_list": "yes_no",
             "name": "voltage_stabilizer_working",
             "display": {
@@ -1132,12 +1696,12 @@
                 "text": "Is the voltage stabilizer working?"
               }
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 53,
+            "__rowNum__": 52,
             "_token_type": "prompt",
-            "_type": "select_one_integer",
-            "_branch_label_enclosing_screen": "survey/_screen20",
-            "promptIdx": 10
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen52",
+            "promptIdx": 16
           },
           {
             "type": "select_one_with_other",
@@ -1148,15 +1712,15 @@
                 "text": "If no, why not?"
               }
             },
-            "_row_num": 23,
-            "__rowNum__": 22,
+            "_row_num": 55,
+            "__rowNum__": 54,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen20",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen52",
+            "promptIdx": 17
           },
           {
-            "type": "select_one_integer",
+            "type": "select_one",
             "values_list": "yes_no",
             "name": "voltage_stabilizer_replaced",
             "display": {
@@ -1164,12 +1728,12 @@
                 "text": "Has the voltage regulator been replaced from the first day of the month to the last day of the month?"
               }
             },
-            "_row_num": 27,
-            "__rowNum__": 26,
+            "_row_num": 59,
+            "__rowNum__": 58,
             "_token_type": "prompt",
-            "_type": "select_one_integer",
-            "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 12
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen58",
+            "promptIdx": 18
           },
           {
             "type": "select_one_with_other",
@@ -1180,15 +1744,15 @@
                 "text": "If yes, why?"
               }
             },
-            "_row_num": 29,
-            "__rowNum__": 28,
+            "_row_num": 61,
+            "__rowNum__": 60,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen26",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen58",
+            "promptIdx": 19
           },
           {
-            "type": "select_one_integer",
+            "type": "select_one",
             "values_list": "yes_no",
             "name": "warranty_claim_been_made",
             "display": {
@@ -1196,27 +1760,27 @@
                 "text": "Has a warranty claim been made?"
               }
             },
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 67,
+            "__rowNum__": 66,
             "_token_type": "prompt",
-            "_type": "select_one_integer",
-            "_branch_label_enclosing_screen": "survey/_screen32",
-            "promptIdx": 14
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen66",
+            "promptIdx": 20
           },
           {
-            "type": "date",
+            "type": "birthdate",
             "name": "warranty_claim_date",
             "display": {
               "prompt": {
                 "text": "When was the warranty claim made?"
               }
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 69,
+            "__rowNum__": 68,
             "_token_type": "prompt",
-            "_type": "date",
-            "_branch_label_enclosing_screen": "survey/_screen32",
-            "promptIdx": 15
+            "_type": "birthdate",
+            "_branch_label_enclosing_screen": "survey/_screen66",
+            "promptIdx": 21
           },
           {
             "type": "integer",
@@ -1226,25 +1790,30 @@
                 "text": "How many days elapsed between when the claim was made and when the repair occurred?"
               }
             },
-            "_row_num": 36,
-            "__rowNum__": 35,
+            "_row_num": 70,
+            "__rowNum__": 69,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen32",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen66",
+            "promptIdx": 22
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 39,
-            "_branch_label_enclosing_screen": "survey/_screen39",
-            "promptIdx": 17
+            "_row_num": 74,
+            "_branch_label_enclosing_screen": "survey/_screen74",
+            "promptIdx": 23
           }
         ],
         "validation_tag_map": {
           "finalize": [
-            0
+            0,
+            2,
+            3,
+            4,
+            5,
+            6
           ]
         },
         "operations": [
@@ -1255,88 +1824,124 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 5,
-              "__rowNum__": 4,
+              "_row_num": 8,
+              "__rowNum__": 7,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (data('refrigerator_id') === null || data('refrigerator_id') === undefined) {\nactivePromptIndicies.push(0);\n}\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
-            "_row_num": 6,
+            "_row_num": 9,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
           },
           {
-            "clause": "if",
-            "condition": "data('functional') === 0",
-            "_row_num": 7,
-            "__rowNum__": 6,
-            "_token_type": "goto_label",
-            "_branch_label": "_then7",
+            "_row_num": 10,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else19",
-            "_row_num": 19,
+            "clause": "begin screen",
+            "_row_num": 11,
+            "__rowNum__": 10,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 14,
+              "__rowNum__": 13,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(5);\nassign('alarm_functional_status', calculates.non_functional_calc());\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
             "clause": "begin screen",
-            "_row_num": 8,
-            "__rowNum__": 7,
+            "_row_num": 15,
+            "__rowNum__": 14,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 18,
-              "__rowNum__": 17,
+              "_row_num": 23,
+              "__rowNum__": 22,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nif (selected(data('build_quality'), 1)) {\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (data('alarm_functional_status') === 'non_functional') {\nactivePromptIndicies.push(6);\n}\nactivePromptIndicies.push(7);\nif (selected(data('build_quality'), 'yes')) {\nactivePromptIndicies.push(8);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('build_quality'), 'yes')",
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "goto_label",
+            "_branch_label": "_then24",
+            "operationIdx": 5
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif19",
-            "_row_num": 19,
-            "operationIdx": 5
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 20,
-            "__rowNum__": 19,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 25,
-              "__rowNum__": 24,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nif (data('voltage_stabilizer_working') === 0) {\nactivePromptIndicies.push(11);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_branch_label": "_else28",
+            "_row_num": 28,
             "operationIdx": 6
           },
           {
             "clause": "begin screen",
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 25,
+            "__rowNum__": 24,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 31,
-              "__rowNum__": 30,
+              "_row_num": 27,
+              "__rowNum__": 26,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\nif (selected(data('voltage_stabilizer_replaced'), 1)) {\nactivePromptIndicies.push(13);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
           },
           {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif28",
+            "_row_num": 28,
+            "operationIdx": 8
+          },
+          {
             "clause": "begin screen",
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 29,
+            "__rowNum__": 28,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 34,
+              "__rowNum__": 33,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nif (selected(data('build_quality2'), 'yes')) {\nactivePromptIndicies.push(11);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 9
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('build_quality2'), 'yes')",
+            "_row_num": 35,
+            "__rowNum__": 34,
+            "_token_type": "goto_label",
+            "_branch_label": "_then35",
+            "operationIdx": 10
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else39",
+            "_row_num": 39,
+            "operationIdx": 11
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
@@ -1344,43 +1949,208 @@
               "__rowNum__": 37,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nif (selected(data('warranty_claim_been_made'), 1)) {\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 8
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 12
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif39",
+            "_row_num": 39,
+            "operationIdx": 13
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 40,
+            "__rowNum__": 39,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 45,
+              "__rowNum__": 44,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\nif (selected(data('build_quality3'), 'yes')) {\nactivePromptIndicies.push(14);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 14
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('build_quality3'), 'yes')",
+            "_row_num": 46,
+            "__rowNum__": 45,
+            "_token_type": "goto_label",
+            "_branch_label": "_then46",
+            "operationIdx": 15
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else50",
+            "_row_num": 50,
+            "operationIdx": 16
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 47,
+            "__rowNum__": 46,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 49,
+              "__rowNum__": 48,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 17
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif50",
+            "_row_num": 50,
+            "operationIdx": 18
+          },
+          {
+            "clause": "if",
+            "condition": "data('voltage_stabilizer_present') !== 'no'",
+            "_row_num": 51,
+            "__rowNum__": 50,
+            "_token_type": "goto_label",
+            "_branch_label": "_then51",
+            "operationIdx": 19
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else64",
+            "_row_num": 64,
+            "operationIdx": 20
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 52,
+            "__rowNum__": 51,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 57,
+              "__rowNum__": 56,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nif (data('voltage_stabilizer_working') === 'no') {\nactivePromptIndicies.push(17);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 21
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 58,
+            "__rowNum__": 57,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 63,
+              "__rowNum__": 62,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\nif (selected(data('voltage_stabilizer_replaced'), 'yes')) {\nactivePromptIndicies.push(19);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 22
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif64",
+            "_row_num": 64,
+            "operationIdx": 23
+          },
+          {
+            "clause": "if",
+            "condition": "calculates.refrigerator_age() < 4",
+            "_row_num": 65,
+            "__rowNum__": 64,
+            "_token_type": "goto_label",
+            "_branch_label": "_then65",
+            "operationIdx": 24
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else73",
+            "_row_num": 73,
+            "operationIdx": 25
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 66,
+            "__rowNum__": 65,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 72,
+              "__rowNum__": 71,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nif (selected(data('warranty_claim_been_made'), 'yes')) {\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 26
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif73",
+            "_row_num": 73,
+            "operationIdx": 27
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 39,
-            "operationIdx": 9
+            "_row_num": 74,
+            "operationIdx": 28
           },
           {
-            "_row_num": 39,
+            "_row_num": 74,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 10
+            "operationIdx": 29
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 39,
-            "operationIdx": 11
+            "_row_num": 74,
+            "operationIdx": 30
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
-          "_screen6": 1,
-          "_then7": 4,
-          "_screen8": 4,
-          "_else19": 6,
-          "_endif19": 6,
-          "_screen20": 6,
-          "_screen26": 7,
-          "_screen32": 8,
-          "_contents": 10,
-          "_screen39": 10
+          "_screen9": 1,
+          "_screen10": 2,
+          "_screen11": 3,
+          "_screen15": 4,
+          "_then24": 7,
+          "_screen25": 7,
+          "_else28": 9,
+          "_endif28": 9,
+          "_screen29": 9,
+          "_then35": 12,
+          "_screen36": 12,
+          "_else39": 14,
+          "_endif39": 14,
+          "_screen40": 14,
+          "_then46": 17,
+          "_screen47": 17,
+          "_else50": 19,
+          "_endif50": 19,
+          "_then51": 21,
+          "_screen52": 21,
+          "_screen58": 22,
+          "_else64": 24,
+          "_endif64": 24,
+          "_then65": 26,
+          "_screen66": 26,
+          "_else73": 28,
+          "_endif73": 28,
+          "_contents": 29,
+          "_screen74": 29
         }
       },
       "initial": {
@@ -1566,45 +2336,102 @@
     },
     "dataTableModel": {
       "refrigerator_id": {
+        "type": "string",
         "_defn": [
           {
-            "_row_num": 3,
+            "_row_num": 4,
             "section_name": "survey"
+          },
+          {
+            "_row_num": 2,
+            "section_name": "model"
           }
         ],
-        "type": "string",
         "elementKey": "refrigerator_id",
         "elementName": "refrigerator_id",
         "elementSet": "data",
         "elementPath": "refrigerator_id"
       },
-      "date_serviced": {
+      "alarm_functional_status": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 3,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "alarm_functional_status",
+        "elementName": "alarm_functional_status",
+        "elementSet": "data",
+        "elementPath": "alarm_functional_status"
+      },
+      "voltage_stabilizer_present": {
+        "type": "string",
         "_defn": [
           {
             "_row_num": 4,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "voltage_stabilizer_present",
+        "elementName": "voltage_stabilizer_present",
+        "elementSet": "data",
+        "elementPath": "voltage_stabilizer_present"
+      },
+      "year_installed": {
+        "type": "integer",
+        "_defn": [
+          {
+            "_row_num": 5,
+            "section_name": "model"
+          }
+        ],
+        "elementKey": "year_installed",
+        "elementName": "year_installed",
+        "elementSet": "data",
+        "elementPath": "year_installed"
+      },
+      "second_build_quality_issue": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 6,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "second_build_quality_issue",
+        "elementName": "second_build_quality_issue",
+        "elementSet": "data",
+        "elementPath": "second_build_quality_issue"
+      },
+      "third_build_quality_issue": {
+        "type": "string",
+        "_defn": [
+          {
+            "_row_num": 7,
+            "section_name": "model"
+          }
+        ],
+        "isSessionVariable": true,
+        "elementKey": "third_build_quality_issue",
+        "elementName": "third_build_quality_issue",
+        "elementSet": "data",
+        "elementPath": "third_build_quality_issue"
+      },
+      "reporting_period": {
+        "_defn": [
+          {
+            "_row_num": 7,
             "section_name": "survey"
           }
         ],
         "type": "string",
         "elementType": "date",
-        "elementKey": "date_serviced",
-        "elementName": "date_serviced",
+        "elementKey": "reporting_period",
+        "elementName": "reporting_period",
         "elementSet": "data",
-        "elementPath": "date_serviced"
-      },
-      "functional": {
-        "_defn": [
-          {
-            "_row_num": 6,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "valuesList": "functional_type",
-        "elementKey": "functional",
-        "elementName": "functional",
-        "elementSet": "data",
-        "elementPath": "functional"
+        "elementPath": "reporting_period"
       },
       "heat_alarms": {
         "_defn": [
@@ -1635,7 +2462,7 @@
       "heat_alarms_over_48": {
         "_defn": [
           {
-            "_row_num": 11,
+            "_row_num": 12,
             "section_name": "survey"
           }
         ],
@@ -1648,7 +2475,7 @@
       "refrigerator_failure": {
         "_defn": [
           {
-            "_row_num": 12,
+            "_row_num": 17,
             "section_name": "survey"
           }
         ],
@@ -1662,11 +2489,11 @@
       "build_quality": {
         "_defn": [
           {
-            "_row_num": 13,
+            "_row_num": 19,
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "string",
         "valuesList": "yes_no",
         "elementKey": "build_quality",
         "elementName": "build_quality",
@@ -1676,7 +2503,7 @@
       "build_quality_reason": {
         "_defn": [
           {
-            "_row_num": 15,
+            "_row_num": 21,
             "section_name": "survey"
           }
         ],
@@ -1690,7 +2517,7 @@
       "build_quality_image": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 26,
             "section_name": "survey"
           }
         ],
@@ -1725,14 +2552,146 @@
         ],
         "notUnitOfRetention": true
       },
-      "voltage_stabilizer_working": {
+      "build_quality2": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "build_quality2",
+        "elementName": "build_quality2",
+        "elementSet": "data",
+        "elementPath": "build_quality2"
+      },
+      "build_quality_reason2": {
+        "_defn": [
+          {
+            "_row_num": 32,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type",
+        "elementKey": "build_quality_reason2",
+        "elementName": "build_quality_reason2",
+        "elementSet": "data",
+        "elementPath": "build_quality_reason2"
+      },
+      "build_quality_image2": {
+        "_defn": [
+          {
+            "_row_num": 37,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "build_quality_image2_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "build_quality_image2.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "build_quality_image2_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "build_quality_image2.contentType"
+          }
+        },
+        "elementKey": "build_quality_image2",
+        "elementName": "build_quality_image2",
+        "elementSet": "data",
+        "elementPath": "build_quality_image2",
+        "listChildElementKeys": [
+          "build_quality_image2_contentType",
+          "build_quality_image2_uriFragment"
+        ],
+        "notUnitOfRetention": true
+      },
+      "build_quality3": {
+        "_defn": [
+          {
+            "_row_num": 41,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "build_quality3",
+        "elementName": "build_quality3",
+        "elementSet": "data",
+        "elementPath": "build_quality3"
+      },
+      "build_quality_reason3": {
+        "_defn": [
+          {
+            "_row_num": 43,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type",
+        "elementKey": "build_quality_reason3",
+        "elementName": "build_quality_reason3",
+        "elementSet": "data",
+        "elementPath": "build_quality_reason3"
+      },
+      "build_quality_image3": {
+        "_defn": [
+          {
+            "_row_num": 48,
+            "section_name": "survey"
+          }
+        ],
+        "type": "object",
+        "elementType": "mimeUri",
+        "properties": {
+          "uriFragment": {
+            "type": "string",
+            "elementType": "rowpath",
+            "elementKey": "build_quality_image3_uriFragment",
+            "elementName": "uriFragment",
+            "elementSet": "data",
+            "elementPath": "build_quality_image3.uriFragment"
+          },
+          "contentType": {
+            "type": "string",
+            "elementType": "mimeType",
+            "default": "image/*",
+            "elementKey": "build_quality_image3_contentType",
+            "elementName": "contentType",
+            "elementSet": "data",
+            "elementPath": "build_quality_image3.contentType"
+          }
+        },
+        "elementKey": "build_quality_image3",
+        "elementName": "build_quality_image3",
+        "elementSet": "data",
+        "elementPath": "build_quality_image3",
+        "listChildElementKeys": [
+          "build_quality_image3_contentType",
+          "build_quality_image3_uriFragment"
+        ],
+        "notUnitOfRetention": true
+      },
+      "voltage_stabilizer_working": {
+        "_defn": [
+          {
+            "_row_num": 53,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
         "valuesList": "yes_no",
         "elementKey": "voltage_stabilizer_working",
         "elementName": "voltage_stabilizer_working",
@@ -1742,7 +2701,7 @@
       "voltage_stabilizer_not_working_reason": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 55,
             "section_name": "survey"
           }
         ],
@@ -1756,11 +2715,11 @@
       "voltage_stabilizer_replaced": {
         "_defn": [
           {
-            "_row_num": 27,
+            "_row_num": 59,
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "string",
         "valuesList": "yes_no",
         "elementKey": "voltage_stabilizer_replaced",
         "elementName": "voltage_stabilizer_replaced",
@@ -1770,7 +2729,7 @@
       "voltage_stabilizer_replaced_reason": {
         "_defn": [
           {
-            "_row_num": 29,
+            "_row_num": 61,
             "section_name": "survey"
           }
         ],
@@ -1784,11 +2743,11 @@
       "warranty_claim_been_made": {
         "_defn": [
           {
-            "_row_num": 33,
+            "_row_num": 67,
             "section_name": "survey"
           }
         ],
-        "type": "integer",
+        "type": "string",
         "valuesList": "yes_no",
         "elementKey": "warranty_claim_been_made",
         "elementName": "warranty_claim_been_made",
@@ -1798,7 +2757,7 @@
       "warranty_claim_date": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 69,
             "section_name": "survey"
           }
         ],
@@ -1812,7 +2771,7 @@
       "days_from_warranty_claim_until_repaired": {
         "_defn": [
           {
-            "_row_num": 36,
+            "_row_num": 70,
             "section_name": "survey"
           }
         ],
@@ -1838,6 +2797,40 @@
         "elementName": "contentType",
         "elementSet": "data",
         "elementPath": "build_quality_image.contentType"
+      },
+      "build_quality_image2_uriFragment": {
+        "type": "string",
+        "elementType": "rowpath",
+        "elementKey": "build_quality_image2_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "build_quality_image2.uriFragment"
+      },
+      "build_quality_image2_contentType": {
+        "type": "string",
+        "elementType": "mimeType",
+        "default": "image/*",
+        "elementKey": "build_quality_image2_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "build_quality_image2.contentType"
+      },
+      "build_quality_image3_uriFragment": {
+        "type": "string",
+        "elementType": "rowpath",
+        "elementKey": "build_quality_image3_uriFragment",
+        "elementName": "uriFragment",
+        "elementSet": "data",
+        "elementPath": "build_quality_image3.uriFragment"
+      },
+      "build_quality_image3_contentType": {
+        "type": "string",
+        "elementType": "mimeType",
+        "default": "image/*",
+        "elementKey": "build_quality_image3_contentType",
+        "elementName": "contentType",
+        "elementSet": "data",
+        "elementPath": "build_quality_image3.contentType"
       },
       "_id": {
         "type": "string",
@@ -1958,7 +2951,21 @@
         "_aspect": "build_quality",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "build_quality2",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "build_quality3",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
@@ -1969,10 +2976,17 @@
       },
       {
         "_partition": "Column",
-        "_aspect": "functional",
+        "_aspect": "build_quality_reason2",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"functional_type\",\"data_value\":1,\"display\":{\"title\":{\"text\":{\"default\":\"Functional\",\"es\":\"Funcional\"}}},\"_row_num\":2},{\"choice_list_name\":\"functional_type\",\"data_value\":0,\"display\":{\"title\":{\"text\":{\"default\":\"Non-functional\",\"es\":\"No Funcional\"}}},\"_row_num\":3}]"
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":\"Need Data\"}},\"_row_num\":10}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "build_quality_reason3",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":\"Need Data\"}},\"_row_num\":10}]"
       },
       {
         "_partition": "Column",
@@ -1993,7 +3007,7 @@
         "_aspect": "voltage_stabilizer_replaced",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
@@ -2007,14 +3021,14 @@
         "_aspect": "voltage_stabilizer_working",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "warranty_claim_been_made",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":0,\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
       },
       {
         "_partition": "FormType",
