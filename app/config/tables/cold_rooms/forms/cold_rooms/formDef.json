@@ -842,7 +842,7 @@
     "calculates": [
       {
         "calculation_name": "valid_refrigerator_year",
-        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year') >= 1950 && data('year') <= currYear) || data('year') === -1\n  \n})()",
+        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year') >= 1950 && data('year') <= currYear) || parseInt(data('year')) === -1\n  \n})()",
         "_row_num": 2
       }
     ]
@@ -1242,7 +1242,7 @@
     "calculates": {
       "valid_refrigerator_year": {
         "calculation_name": "valid_refrigerator_year",
-        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year') >= 1950 && data('year') <= currYear) || data('year') === -1\n  \n})()",
+        "calculation": "(function() {\n  var currDate = new Date();\n  var currYear = currDate.getFullYear();\n  \n  return (data('year') >= 1950 && data('year') <= currYear) || parseInt(data('year')) === -1\n  \n})()",
         "_row_num": 2
       }
     },

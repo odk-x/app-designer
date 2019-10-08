@@ -489,7 +489,7 @@
       },
       {
         "calculation_name": "refrigerator_age",
-        "calculation": "(function() {\nvar frigYear = data('year_installed');\nif (data('year_installed') === null || data('year_installed') === undefined || data('year_installed') === 0) { return 0; }\nvar currYear = new Date().getFullYear();\nvar years = Math.abs(currYear - frigYear);\nreturn years;})()",
+        "calculation": "(function() {\nvar frigYear = data('year_installed');\nif (data('year_installed') === null || data('year_installed') === undefined || data('year_installed') <= 0) { return 0; }\nvar currYear = new Date().getFullYear();\nvar years = Math.abs(currYear - frigYear);\nreturn years;})()",
         "_row_num": 3
       }
     ],
@@ -1066,7 +1066,7 @@
       },
       "refrigerator_age": {
         "calculation_name": "refrigerator_age",
-        "calculation": "(function() {\nvar frigYear = data('year_installed');\nif (data('year_installed') === null || data('year_installed') === undefined || data('year_installed') === 0) { return 0; }\nvar currYear = new Date().getFullYear();\nvar years = Math.abs(currYear - frigYear);\nreturn years;})()",
+        "calculation": "(function() {\nvar frigYear = data('year_installed');\nif (data('year_installed') === null || data('year_installed') === undefined || data('year_installed') <= 0) { return 0; }\nvar currYear = new Date().getFullYear();\nvar years = Math.abs(currYear - frigYear);\nreturn years;})()",
         "_row_num": 3
       }
     },
