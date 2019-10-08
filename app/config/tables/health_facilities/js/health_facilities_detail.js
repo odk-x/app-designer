@@ -28,8 +28,6 @@ function onLinkClick() {
 function onAddFridgeClick() {
     var jsonMap = {};
     jsonMap.facility_row_id = healthFacilityResultSet.getRowId(0);
-    // TODO: Should this use addRow and then edit for _id?
-	jsonMap.refrigerator_id = util.genUUID();
 	jsonMap._default_access = healthFacilityResultSet.get('_default_access');
 	jsonMap._group_read_only = healthFacilityResultSet.get('_group_read_only');
 	jsonMap._group_modify = healthFacilityResultSet.get('_group_modify');
@@ -51,8 +49,6 @@ function onCRInvClick() {
 function onAddCRClick() {
     var jsonMap = {};
     jsonMap.facility_row_id = healthFacilityResultSet.getRowId(0);
-    // TODO: Should this use addRow and then edit for _id?
-    jsonMap.cold_room_id = util.genUUID();
     jsonMap._default_access = healthFacilityResultSet.get('_default_access');
     jsonMap._group_read_only = healthFacilityResultSet.get('_group_read_only');
     jsonMap._group_modify = healthFacilityResultSet.get('_group_modify');

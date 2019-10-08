@@ -49,7 +49,7 @@ function cbSuccess(result) {
     var logPromise = new Promise(function(resolve, reject) {
         var logQuery = 'SELECT * FROM cold_room_maintenance_logs WHERE cold_room_maintenance_logs.cold_room_id = ? ' +
             'AND cold_room_maintenance_logs._savepoint_type != ? ORDER BY date_serviced DESC';
-        var logParams = [coldRoomsResultSet.get('cold_room_id'), 'INCOMPLETE'];
+        var logParams = [coldRoomsResultSet.get('_id'), 'INCOMPLETE'];
         odkData.arbitraryQuery('cold_room_maintenance_logs', logQuery, logParams, null, null, resolve, reject);
     });
 
@@ -136,7 +136,7 @@ function onDeleteCR() {
 function onClickAddMntRec() {
     if (!$.isEmptyObject(coldRoomsResultSet)) {
 
-		var defaults = {'cold_room_id': coldRoomsResultSet.get('cold_room_id'), 'date_serviced': odkCommon.toOdkTimeStampFromDate(new Date())};
+		var defaults = {'cold_room_id': coldRoomsResultSet.get('_id'), 'date_serviced': odkCommon.toOdkTimeStampFromDate(new Date())};
 		defaults['_default_access'] = coldRoomsResultSet.get('_default_access');
 		defaults['_group_read_only'] = coldRoomsResultSet.get('_group_read_only');
 		defaults['_group_modify'] = coldRoomsResultSet.get('_group_modify');
@@ -151,7 +151,7 @@ function onClickViewAllMntRecs() {
 
         var keyToAppend = 'cold_room_maintenance_logs.cold_room_id';
 
-        var crIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, coldRoomsResultSet.get('cold_room_id'));
+        var crIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, coldRoomsResultSet.get('_id'));
         odkTables.launchHTML(null,
             'config/tables/cold_room_maintenance_logs/html/cold_room_maintenance_logs_list.html' + crIdQueryParams);
     }

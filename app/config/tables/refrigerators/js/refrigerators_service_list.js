@@ -8,16 +8,16 @@
 // get refrigerators needing service in a specific timeframe
 // var listQuery = 'SELECT * FROM refrigerators ' +
 //     'JOIN health_facilities ON refrigerators.facility_row_id = health_facilities._id ' +
-//     'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id ' +
-//     'JOIN (SELECT refrigerator_id, MAX(date_serviced) AS most_recent_date_serviced ' +
-//     'FROM maintenance_logs GROUP BY refrigerator_id) ' +
-//     'AS recent_log ON refrigerators.refrigerator_id = recent_log.refrigerator_id WHERE ' +
+//     'LEFT JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id ' +
+//     'JOIN (SELECT _id, MAX(date_serviced) AS most_recent_date_serviced ' +
+//     'FROM maintenance_logs GROUP BY _id) ' +
+//     'AS recent_log ON refrigerators._id = recent_log.refrigerator_id WHERE ' +
 //     '(refrigerators.maintenance_priority = ? OR refrigerators.maintenance_priority = ? OR ' +
 //     'refrigerators.maintenance_priority = ?) AND most_recent_date_serviced > ?';
 
 var listQuery = 'SELECT * FROM refrigerators ' +
     'JOIN health_facilities ON refrigerators.facility_row_id = health_facilities._id ' +
-    'JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id WHERE ' +
+    'LEFT JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id WHERE ' +
     '(refrigerators.maintenance_priority = ? OR refrigerators.maintenance_priority = ? OR ' +
     'refrigerators.maintenance_priority = ? OR refrigerators.functional_status = ?)';
 

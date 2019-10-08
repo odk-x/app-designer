@@ -13,7 +13,7 @@ function processFrigPromises(facilityResult, typeResult, logResult) {
     facilityData = facilityResult;
     typeData = typeResult;
 
-    util.showIdForDetail('#refrigerator_id', 'refrigerator_id', refrigeratorsResultSet, false);
+    util.showIdForDetail('#refrigerator_id', '_id', refrigeratorsResultSet, false);
     util.showIdForDetail('#facility_name', 'facility_name', facilityData, false);
     util.showIdForDetail('#model_id', 'catalog_id', typeData, false);
     util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsResultSet, false);
@@ -56,7 +56,7 @@ function cbSuccess(result) {
     var logPromise = new Promise(function(resolve, reject) {
         var logQuery = 'SELECT * FROM maintenance_logs WHERE maintenance_logs.refrigerator_id = ? ' +
             'AND maintenance_logs._savepoint_type != ? ORDER BY date_serviced DESC';
-        var logParams = [refrigeratorsResultSet.get('refrigerator_id'), 'INCOMPLETE'];
+        var logParams = [refrigeratorsResultSet.get('_id'), 'INCOMPLETE'];
         odkData.arbitraryQuery('maintenance_logs', logQuery, logParams, null, null, resolve, reject);
     });
 
@@ -156,7 +156,7 @@ function onDeleteFrig() {
 function onClickAddMntRec() {
     if (!$.isEmptyObject(refrigeratorsResultSet)) {
 
-		var defaults = {'refrigerator_id': refrigeratorsResultSet.get('refrigerator_id'), 'date_serviced': odkCommon.toOdkTimeStampFromDate(new Date())};
+		var defaults = {'refrigerator_id': refrigeratorsResultSet.get('_id'), 'date_serviced': odkCommon.toOdkTimeStampFromDate(new Date())};
 		defaults['_default_access'] = refrigeratorsResultSet.get('_default_access');
 		defaults['_group_read_only'] = refrigeratorsResultSet.get('_group_read_only');
 		defaults['_group_modify'] = refrigeratorsResultSet.get('_group_modify');
@@ -171,7 +171,7 @@ function onClickViewAllMntRecs() {
 
         var keyToAppend = 'maintenance_logs.refrigerator_id';
 
-        var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('refrigerator_id'));
+        var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('_id'));
         odkTables.launchHTML(null,
             'config/tables/maintenance_logs/html/maintenance_logs_list.html' + frigIdQueryParams);
     }
@@ -180,7 +180,7 @@ function onClickViewAllMntRecs() {
 function onClickSentinelSurvey() {
     if (!$.isEmptyObject(refrigeratorsResultSet)) {
 
-        var defaults = {'refrigerator_id': refrigeratorsResultSet.get('refrigerator_id'),
+        var defaults = {'refrigerator_id': refrigeratorsResultSet.get('_id'),
             'reporting_period': odkCommon.toOdkTimeStampFromDate(new Date())};
         defaults['voltage_stabilizer_present'] = refrigeratorsResultSet.get('voltage_regulator');
         defaults['year_installed'] = refrigeratorsResultSet.get('year');
@@ -198,7 +198,7 @@ function onClickViewSentinelSurvey() {
 
         var keyToAppend = 'indicators.refrigerator_id';
 
-        var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('refrigerator_id'));
+        var frigIdQueryParams = util.getKeyToAppendToColdChainURL(keyToAppend, refrigeratorsResultSet.get('_id'));
         odkTables.launchHTML(null,
             'config/tables/indicators/html/indicators_list.html' + frigIdQueryParams);
     }

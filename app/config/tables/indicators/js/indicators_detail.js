@@ -11,8 +11,8 @@ function cbFrigSuccess(result) {
     refrigeratorsData = result;
 
     util.showIdForDetail('#refrigerator_id', 'refrigerator_id', sentinelSurveyResultSet, false);
-    util.showIdForDetail('#date_serviced', 'date_serviced', sentinelSurveyResultSet, true);
-    util.showIdForDetail('#functional', 'functional', sentinelSurveyResultSet, true);
+    util.showIdForDetail('#reporting_id', 'reporting_period', sentinelSurveyResultSet, true);
+    util.showIdForDetail('#functional', 'alarm_functional_status', sentinelSurveyResultSet, true);
     util.showIdForDetail('#voltage_stabilizer_working', 'voltage_stabilizer_working', sentinelSurveyResultSet, true);
     util.showIdForDetail('#voltage_stabilizer_replaced', 'voltage_stabilizer_replaced', sentinelSurveyResultSet, true);
     util.showIdForDetail('#warranty_claim_been_made', 'warranty_claim_been_made', sentinelSurveyResultSet, true);
@@ -80,6 +80,7 @@ function display() {
     $('#frig-hdr').text(odkCommon.localizeText(locale, "refrigerator"));
     $('#sent-survey-info').text(odkCommon.localizeText(locale, "sentinel_survey_information"));
     $('#frig-id').text(odkCommon.localizeText(locale, "refrigerator_id"));
+    $('#rep-period').text(odkCommon.localizeText(locale, "reporting_period"));
     $('#func').text(odkCommon.localizeText(locale, "functional"));
     $('#volt-stab-work').text(odkCommon.localizeText(locale, "voltage_stabilizer_working"));
     $('#volt-stab-rep').text(odkCommon.localizeText(locale, "voltage_stabilizer_replaced"));

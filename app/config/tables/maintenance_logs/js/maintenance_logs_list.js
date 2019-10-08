@@ -4,7 +4,7 @@
 /* global $, odkCommon, odkData, odkTables, util, listViewLogic */
 'use strict';
 
-var listQuery = 'SELECT * FROM maintenance_logs JOIN refrigerators ON refrigerators.refrigerator_id = maintenance_logs.refrigerator_id';
+var listQuery = 'SELECT * FROM maintenance_logs JOIN refrigerators ON refrigerators._id = maintenance_logs.refrigerator_id';
 
 var searchParams = '(maintenance_logs.refrigerator_id LIKE ?)';
 
@@ -34,7 +34,7 @@ function resumeFunc(state) {
         var refIDTxt = odkCommon.localizeText(locale, "refrigerator_id_no_colon");
         var notesTxt = odkCommon.localizeText(locale, "notes_no_colon");
 
-        listViewLogic.setColIdsToDisplayInList(dateSrvTxt, 'date_serviced', 
+        listViewLogic.setColIdsToDisplayInList(dateSrvTxt, 'date_serviced',
             refIDTxt, 'refrigerator_id', notesTxt, 'notes');
     }
 

@@ -172,6 +172,10 @@
         "_row_num": 15
       },
       {
+        "clause": "end screen",
+        "_row_num": 16
+      },
+      {
         "type": "image",
         "name": "refrigerator_image",
         "display": {
@@ -188,10 +192,6 @@
             }
           }
         },
-        "_row_num": 16
-      },
-      {
-        "clause": "end screen",
         "_row_num": 17
       },
       {
@@ -1908,7 +1908,7 @@
       "refrigerator_image": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 17,
             "section_name": "survey"
           }
         ],
@@ -2350,11 +2350,11 @@
                 }
               }
             },
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 17,
+            "__rowNum__": 16,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen11",
+            "_branch_label_enclosing_screen": "survey/_screen17",
             "promptIdx": 6
           },
           {
@@ -2720,12 +2720,18 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 17,
-              "__rowNum__": 16,
+              "_row_num": 16,
+              "__rowNum__": 15,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nassign('model_row_id', (function() {if (data('models_common') === 'other') { return data('model_other'); } return data('models_common');})());\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nassign('model_row_id', (function() {if (data('models_common') === 'other') { return data('model_other'); } return data('models_common');})());\nactivePromptIndicies.push(3);\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 1
+          },
+          {
+            "_row_num": 17,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 2
           },
           {
             "clause": "begin screen",
@@ -2739,7 +2745,7 @@
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\nif (data('under_warranty') === 'yes') {\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
+            "operationIdx": 3
           },
           {
             "clause": "begin screen",
@@ -2753,7 +2759,7 @@
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 3
+            "operationIdx": 4
           },
           {
             "clause": "begin screen",
@@ -2767,7 +2773,7 @@
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\nif (data('voltage_regulator') === 'yes') {\nactivePromptIndicies.push(16);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
+            "operationIdx": 5
           },
           {
             "clause": "begin screen",
@@ -2781,19 +2787,19 @@
               "_token_type": "end_screen"
             },
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\nif (data('temperature_monitoring_device') === yes) {\nactivePromptIndicies.push(18);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 5
+            "operationIdx": 6
           },
           {
             "_row_num": 47,
             "_token_type": "begin_screen",
             "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
+            "operationIdx": 7
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
             "_row_num": 48,
-            "operationIdx": 7
+            "operationIdx": 8
           },
           {
             "_row_num": 48,
@@ -2802,25 +2808,26 @@
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 8
+            "operationIdx": 9
           },
           {
             "_token_type": "resume",
             "clause": "resume",
             "_row_num": 48,
-            "operationIdx": 9
+            "operationIdx": 10
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen11": 1,
-          "_screen18": 2,
-          "_screen25": 3,
-          "_screen32": 4,
-          "_screen41": 5,
-          "_screen47": 6,
-          "_contents": 8,
-          "_screen48": 8
+          "_screen17": 2,
+          "_screen18": 3,
+          "_screen25": 4,
+          "_screen32": 5,
+          "_screen41": 6,
+          "_screen47": 7,
+          "_contents": 9,
+          "_screen48": 9
         }
       },
       "initial": {
@@ -3151,7 +3158,7 @@
       "refrigerator_image": {
         "_defn": [
           {
-            "_row_num": 16,
+            "_row_num": 17,
             "section_name": "survey"
           }
         ],

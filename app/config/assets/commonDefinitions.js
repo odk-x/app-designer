@@ -1167,6 +1167,22 @@ window.odkCommonDefinitions = {
         "es": "Añadir Cuarto Frio"
       },
       "_row_num": 147
+    },
+    "reporting_period_no_colon": {
+      "string_token": "reporting_period_no_colon",
+      "text": {
+        "default": "Reporting Period",
+        "es": "Período de información"
+      },
+      "_row_num": 148
+    },
+    "reporting_period": {
+      "string_token": "reporting_period",
+      "text": {
+        "default": "Reporting Period:",
+        "es": "Período de información:"
+      },
+      "_row_num": 149
     }
   },
   "_locales": {

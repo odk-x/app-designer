@@ -4,7 +4,7 @@
 /* global $, odkCommon, odkData, odkTables, util, listViewLogic */
 'use strict';
 
-var listQuery = 'SELECT * FROM cold_room_maintenance_logs JOIN cold_rooms ON cold_rooms.cold_room_id = ' +
+var listQuery = 'SELECT * FROM cold_room_maintenance_logs JOIN cold_rooms ON cold_rooms._id = ' +
     'cold_room_maintenance_logs.cold_room_id';
 
 var searchParams = '(cold_room_maintenance_logs.cold_room_id LIKE ?)';

@@ -4,7 +4,7 @@
 /* global $, odkCommon, odkData, odkTables, util, listViewLogic */
 'use strict';
 
-var listQuery = 'SELECT * FROM indicators JOIN refrigerators ON refrigerators.refrigerator_id = indicators.refrigerator_id';
+var listQuery = 'SELECT * FROM indicators JOIN refrigerators ON refrigerators._id = indicators.refrigerator_id';
 
 var searchParams = '(indicators.refrigerator_id LIKE ?)';
 
@@ -30,10 +30,10 @@ function resumeFunc(state) {
         listViewLogic.setNavTextElements('#navTextLimit', '#navTextOffset', '#navTextCnt');
         listViewLogic.showEditAndDeleteButtons(true, 'indicators');
 
-        var dateSrvTxt = odkCommon.localizeText(locale, "date_serviced_no_colon");
+        var dateSrvTxt = odkCommon.localizeText(locale, "reporting_period_no_colon");
         var refIDTxt = odkCommon.localizeText(locale, "refrigerator_id_no_colon");
 
-        listViewLogic.setColIdsToDisplayInList(dateSrvTxt, 'date_serviced',
+        listViewLogic.setColIdsToDisplayInList(dateSrvTxt, 'reporting_period',
             refIDTxt, 'refrigerator_id');
     }
 
