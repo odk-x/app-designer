@@ -33,6 +33,20 @@
 		$('.content-tab').height(newBaseHeight+3);
 	}
   }
+  function switchTab(event, tabId) {
+    var contentTabs = document.getElementsByClassName("content-tab");
+    for (var i = 0; i < contentTabs.length; i++) {
+      contentTabs[i].style.display = "none";
+    }
+
+    var tabLinks = document.getElementsByClassName("tab-link");
+    for (var i = 0; i < tabLinks.length; i++) {
+      tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+    }
+
+    document.getElementById(tabId).style.display = "block";
+    event.currentTarget.className += " active";
+  }
 //]]>   
   </script>
 <title>OpenDataKit Development Environment Homepage</title>
@@ -43,35 +57,32 @@
   <div class="topversion">ODK 2.1.4</div>
   <ul class="tabs">
     <li>
-      <input type="radio" name="tabs" checked id="tab1"/>
-	  <label for="tab1">Preview</label>
-        <iframe class="content-tab" src="devEnv/tab1.html" frameborder="0" ></iframe>
+      <button onclick="switchTab(event, 'tab1')" class="tab-link active">Preview</a>
     </li>
     <li>
-      <input type="radio" name="tabs" id="tab2"/><label for="tab2">Customize</label>
-      <iframe class="content-tab" src="devEnv/tab2.html" frameborder="0" ></iframe>
+      <button onclick="switchTab(event, 'tab2')" class="tab-link">Customize</a>
     </li>
     <li>
-      <input type="radio" name="tabs" id="tab3"/><label for="tab3">XLSX Converter</label>
-	  <iframe class="content-tab" src="devEnv/tab3.html" frameborder="0" ></iframe>
-      </div>
+      <button onclick="switchTab(event, 'tab3')" class="tab-link">XLSX Converter</a>
     </li>
     <li>
-      <input type="radio" name="tabs" id="tab4"/><label for="tab4">File Browser</label>
-	  <iframe class="content-tab" src="devEnv/tab4.html" frameborder="0" ></iframe>
-      </div>
+      <button onclick="switchTab(event, 'tab4')" class="tab-link">File Browser</a>
     </li>
     <li>
-      <input type="radio" name="tabs" id="tab5"/><label for="tab5">Scan Form Designer</label>
-	  <iframe class="content-tab" src="devEnv/tab5.html" frameborder="0" ></iframe>
-      </div>
+      <button onclick="switchTab(event, 'tab5')" class="tab-link">Scan Form Designer</a>
     </li>
     <li>
-      <input type="radio" name="tabs" id="tab6"/><label for="tab6">QR Code Generator</label>
-    <iframe class="content-tab" src="devEnv/tab6.html" frameborder="0" ></iframe>
-      </div>
+      <button onclick="switchTab(event, 'tab6')" class="tab-link">QR Code Generator</a>
     </li>
   </ul>
+  <div class="content">
+    <iframe id="tab1" class="content-tab" src="devEnv/tab1.html" frameborder="0" style="display: block"></iframe>
+    <iframe id="tab2" class="content-tab" src="devEnv/tab2.html" frameborder="0" ></iframe>
+    <iframe id="tab3" class="content-tab" src="devEnv/tab3.html" frameborder="0" ></iframe>
+    <iframe id="tab4" class="content-tab" src="devEnv/tab4.html" frameborder="0" ></iframe>
+    <iframe id="tab5" class="content-tab" src="devEnv/tab5.html" frameborder="0" ></iframe>
+    <iframe id="tab6" class="content-tab" src="devEnv/tab6.html" frameborder="0" ></iframe>
+  </div>
   <script type="text/javascript">
 //<![CDATA[
     $(function() {

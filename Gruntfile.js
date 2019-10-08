@@ -340,7 +340,8 @@ module.exports = function (grunt) {
 						  ( cells[cells.length-1] === cells[cells.length-2] + ".xlsx" ); 
 					},
                  cwd: 'app' },
-				'**/*.xlsx'
+				'**/*.xlsx',
+                '!**/~$*.xlsx'
 				);
 
             // Now run these files through macGenConvert.js
@@ -419,7 +420,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 'system/libs/**',
                 'system/js/**',
                 'system/index.html',
-				'!**/.DS_Store');
+				'!**/.DS_Store',
+                '!**/~$*.xlsx');
 
             var surveyConfigZipFiles = grunt.file.expand(
                 {filter: 'isFile',
@@ -431,7 +433,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 'config/assets/img/backup.png',
                 'config/assets/img/advance.png',
                 'config/assets/css/odk-survey.css',
-				'!**/.DS_Store');
+				'!**/.DS_Store',
+                '!**/~$*.xlsx');
 
             var tablesSystemZipFiles = grunt.file.expand(
                 {filter: 'isFile',
@@ -440,7 +443,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 'system/tables/js/**',
                 'system/libs/**',
                 'system/js/**',
-				'!**/.DS_Store');
+				'!**/.DS_Store',
+                '!**/~$*.xlsx');
 
             var tablesConfigZipFiles = grunt.file.expand(
                 {filter: 'isFile',
@@ -450,7 +454,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 'config/assets/libs/d3-amd/**',
                 'config/assets/commonDefinitions.js',
                 'config/assets/img/little_arrow.png',
-				'!**/.DS_Store');
+				'!**/.DS_Store',
+                '!**/~$*.xlsx');
 
 			zipAllFiles(buildDir + '/survey/systemzip', surveySystemZipFiles, 
 				function(outcome) {
@@ -501,7 +506,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 '**',
                 '!system/**',
 				'!data/**',
-				'!output/**');
+				'!output/**',
+                '!**/~$*.xlsx');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -535,7 +541,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 '**',
                 '!system/**',
 				'!data/**',
-				'!output/**');
+                '!output/**',
+                '!**/~$*.xlsx');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -579,7 +586,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 'system/survey/**',
 				'!data/**',
 				'!output/**',
-                '!config/**');
+                '!config/**',
+                '!**/~$*.xlsx');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -728,7 +736,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
 				'!output/**',
 				'!config/assets/**',
                 '!config/tables/**',
-                'config/tables/scan_example/**');
+                'config/tables/scan_example/**',
+                '!**/~$*.xlsx');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -1490,7 +1499,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
                 '**',
                 '!system/**',
 				'!data/**',
-				'!output/**');
+                '!output/**',
+                '!**/~$*.xlsx');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
@@ -1802,7 +1812,9 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             tableIds.forEach(function(tableId) {
                 var files = grunt.file.expand(
                     tablesConfig.tablesDir + '/' + tableId +
-                    '/' + COLLECT_FORMS + '/*');
+                    '/' + COLLECT_FORMS + '/*',
+                    '!' + tablesConfig.tablesDir + '/' + tableId +
+                    '/' + COLLECT_FORMS + '/~$*.xlsx');
                 files.forEach(function(file) {
                     var src = file;
                     // We basically want to push all the contents under
@@ -1954,7 +1966,8 @@ var zipAllFiles = function( destZipFile, filesList, completionFn ) {
             var dirs = grunt.file.expand(
                 {filter: 'isFile',
                  cwd: 'app' },
-                'system/**');
+                'system/**',
+                '!**/~$*.xlsx');
 
             // Now push these files to the phone.
             dirs.forEach(function(fileName) {
