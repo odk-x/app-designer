@@ -6,7 +6,7 @@
 
 var listQuery = 'SELECT * FROM maintenance_logs JOIN refrigerators ON refrigerators._id = maintenance_logs.refrigerator_id';
 
-var searchParams = '(maintenance_logs.refrigerator_id LIKE ?)';
+var searchParams = '(maintenance_logs.technician_name LIKE ?)';
 
 function resumeFunc(state) {
     if (state === 'init') {

@@ -23,7 +23,7 @@ var listQuery = 'SELECT * FROM refrigerators ' +
 
 var listQueryParams = ['high', 'medium', 'low', 'not_functioning'];
 var searchParams = '(health_facilities.facility_name LIKE ? OR health_facilities.facility_id LIKE ? OR ' +
-    'refrigerators.tracking_id LIKE ? OR refrigerators.refrigerator_id LIKE ?)';
+    'refrigerators.tracking_id LIKE ?)';
 
 function addMonths(date, months) {
     date.setMonth(date.getMonth() + months);

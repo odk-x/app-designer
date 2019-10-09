@@ -1128,11 +1128,6 @@
         "type": "string",
         "name": "model_row_id",
         "_row_num": 2
-      },
-      {
-        "type": "string",
-        "name": "refrigerator_id",
-        "_row_num": 3
       }
     ],
     "calculates": [
@@ -1795,16 +1790,6 @@
           }
         ],
         "elementKey": "model_row_id"
-      },
-      "refrigerator_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_id"
       },
       "facility_row_id": {
         "_defn": [
@@ -3024,19 +3009,6 @@
         "elementName": "model_row_id",
         "elementSet": "data",
         "elementPath": "model_row_id"
-      },
-      "refrigerator_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 3,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "refrigerator_id",
-        "elementName": "refrigerator_id",
-        "elementSet": "data",
-        "elementPath": "refrigerator_id"
       },
       "facility_row_id": {
         "_defn": [

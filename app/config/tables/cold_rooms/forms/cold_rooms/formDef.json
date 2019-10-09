@@ -832,13 +832,6 @@
         "_row_num": 8
       }
     ],
-    "model": [
-      {
-        "type": "string",
-        "name": "cold_room_id",
-        "_row_num": 2
-      }
-    ],
     "calculates": [
       {
         "calculation_name": "valid_refrigerator_year",
@@ -1247,16 +1240,6 @@
       }
     },
     "model": {
-      "cold_room_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "cold_room_id"
-      },
       "facility_row_id": {
         "_defn": [
           {
@@ -2376,19 +2359,6 @@
       }
     },
     "dataTableModel": {
-      "cold_room_id": {
-        "type": "string",
-        "_defn": [
-          {
-            "_row_num": 2,
-            "section_name": "model"
-          }
-        ],
-        "elementKey": "cold_room_id",
-        "elementName": "cold_room_id",
-        "elementSet": "data",
-        "elementPath": "cold_room_id"
-      },
       "facility_row_id": {
         "_defn": [
           {

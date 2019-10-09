@@ -11,7 +11,7 @@ var listQuery = 'SELECT * FROM cold_rooms ' +
 
 var listQueryParams = ['high', 'medium', 'low', 'not_functioning'];
 var searchParams = '(health_facilities.facility_name LIKE ? OR health_facilities.facility_id LIKE ? OR ' +
-    'cold_rooms.tracking_id LIKE ? OR cold_rooms.cold_room_id LIKE ?)';
+    'cold_rooms.tracking_id LIKE ?)';
 
 function addMonths(date, months) {
     date.setMonth(date.getMonth() + months);

@@ -17,7 +17,6 @@ util.adminRegionLevel = 'admin_region_level';
 util.adminRegionName = 'admin_region_name';
 util.rowId = '_id';
 util.modelRowId = 'model_row_id';
-util.refrigeratorId = 'refrigerator_id';
 util.facilityRowId = 'facility_row_id';
 util.maintenancePriority = 'maintenance_priority';
 util.maxLevelNumber = 'max_level_number';

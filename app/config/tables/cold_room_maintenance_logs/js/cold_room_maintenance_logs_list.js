@@ -7,7 +7,7 @@
 var listQuery = 'SELECT * FROM cold_room_maintenance_logs JOIN cold_rooms ON cold_rooms._id = ' +
     'cold_room_maintenance_logs.cold_room_id';
 
-var searchParams = '(cold_room_maintenance_logs.cold_room_id LIKE ?)';
+var searchParams = '(cold_room_maintenance_logs.technician_name LIKE ?)';
 
 function resumeFunc(state) {
     if (state === 'init') {
