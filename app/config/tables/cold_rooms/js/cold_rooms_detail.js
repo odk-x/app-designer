@@ -11,7 +11,7 @@ var facilityData = {};
 function processCRPromises(facilityResult, logResult) {
     facilityData = facilityResult;
 
-    util.showIdForDetail('#cold_room_id', 'cold_room_id', coldRoomsResultSet, false);
+    util.showIdForDetail('#cold_room_id', '_id', coldRoomsResultSet, false);
     util.showIdForDetail('#facility_name', 'facility_name', facilityData, false);
     util.showIdForDetail('#model_id', 'model', coldRoomsResultSet, false);
     util.showIdForDetail('#tracking_id', 'tracking_id', coldRoomsResultSet, false);
