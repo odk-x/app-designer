@@ -146,7 +146,7 @@ async function checkDefaultGroupForMenuOptions() {
         // We have an admin - we would show everything
         // Or we have a supervisor or worker - show everything but admin options
     } else if (r.indexOf(administratorGroup) === 0 ||
-        r.indexOf(supervisorGroup) === 0 || r.indexOf(workerGroup)) {
+        r.indexOf(supervisorGroup) === 0 || r.indexOf(workerGroup) === 0) {
         // Start at the beginning
         regionJSON = await util.getMenuOptions(util.firstLevelNumber);
         showRegionButtonsAndTitle(regionJSON);
