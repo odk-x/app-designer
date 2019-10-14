@@ -14,6 +14,7 @@ function processFrigPromises(facilityResult, typeResult, logResult) {
     typeData = typeResult;
 
     util.showIdForDetail('#refrigerator_id', '_id', refrigeratorsResultSet, false);
+    util.showIdForDetail('#serial_number', 'serial_number', refrigeratorsResultSet, false);
     util.showIdForDetail('#facility_name', 'facility_name', facilityData, false);
     util.showIdForDetail('#model_id', 'catalog_id', typeData, false);
     util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsResultSet, false);
@@ -91,6 +92,7 @@ function display() {
     $('#srv-pri').text(odkCommon.localizeText(locale, "service_priority"));
     $('#mdl-id').text(odkCommon.localizeText(locale, "model_id"));
     $('#frig-id').text(odkCommon.localizeText(locale, "refrigerator_id"));
+    $('#ser-num').text(odkCommon.localizeText(locale, "serial_number"));
     $('#volt-reg').text(odkCommon.localizeText(locale, "voltage_regulator"));
     $('#date-srv').text(odkCommon.localizeText(locale, "date_serviced"));
 

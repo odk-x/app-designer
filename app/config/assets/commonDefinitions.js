@@ -1183,6 +1183,14 @@ window.odkCommonDefinitions = {
         "es": "Período de información:"
       },
       "_row_num": 149
+    },
+    "serial_number": {
+      "string_token": "serial_number",
+      "text": {
+        "default": "Serial Number:",
+        "es": "Número de serie:"
+      },
+      "_row_num": 150
     }
   },
   "_locales": {
