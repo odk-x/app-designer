@@ -36,6 +36,7 @@ async function display() {
             defaults['_group_read_only'] = facilityRegionJson[util.groupReadOnly];
             defaults['_group_modify'] = facilityRegionJson[util.groupModify];
             defaults['_group_privileged'] = facilityRegionJson[util.groupPrivileged];
+            defaults['_default_access'] = util.hiddenDefaultAccess;
             odkTables.addRowWithSurvey(null, 'health_facilities', 'health_facilities', null, defaults);
         });
 }

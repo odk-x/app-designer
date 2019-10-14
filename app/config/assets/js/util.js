@@ -25,6 +25,7 @@ util.firstLevelNumber = 1;
 util.groupReadOnly = 'groupReadOnly';
 util.groupModify = 'groupModify';
 util.groupPrivileged = 'groupPrivileged';
+util.hiddenDefaultAccess = 'HIDDEN';
 
 // The maximum possible depth for a geographic hierarchy
 util.maxLevelAppDepth = 5;
