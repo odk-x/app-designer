@@ -236,12 +236,12 @@
       },
       {
         "choice_list_name": "current_use",
-        "data_value": "in_store_for_allocation",
+        "data_value": "not_installed",
         "display": {
           "title": {
             "text": {
-              "default": "In Store For Allocation",
-              "es": "Almacenado Epsperando asignación"
+              "default": "Not Installed",
+              "es": "No Instalado"
             }
           }
         },
@@ -627,12 +627,12 @@
         },
         {
           "choice_list_name": "current_use",
-          "data_value": "in_store_for_allocation",
+          "data_value": "not_installed",
           "display": {
             "title": {
               "text": {
-                "default": "In Store For Allocation",
-                "es": "Almacenado Epsperando asignación"
+                "default": "Not Installed",
+                "es": "No Instalado"
               }
             }
           },

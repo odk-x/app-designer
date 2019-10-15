@@ -600,12 +600,12 @@
       },
       {
         "choice_list_name": "current_use",
-        "data_value": "in_store_for_allocation",
+        "data_value": "not_installed",
         "display": {
           "title": {
             "text": {
-              "default": "In Store For Allocation",
-              "es": "Almacenado Epsperando asignación"
+              "default": "Not Installed",
+              "es": "No Instalado"
             }
           }
         },
@@ -1108,12 +1108,12 @@
         },
         {
           "choice_list_name": "current_use",
-          "data_value": "in_store_for_allocation",
+          "data_value": "not_installed",
           "display": {
             "title": {
               "text": {
-                "default": "In Store For Allocation",
-                "es": "Almacenado Epsperando asignación"
+                "default": "Not Installed",
+                "es": "No Instalado"
               }
             }
           },
@@ -3030,7 +3030,7 @@
         "_aspect": "utilization",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"current_use\",\"data_value\":\"in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"In Use\",\"es\":\"En Uso\"}}},\"_row_num\":14},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"Not In Use\",\"es\":\"No En Uso\"}}},\"_row_num\":15},{\"choice_list_name\":\"current_use\",\"data_value\":\"in_store_for_allocation\",\"display\":{\"title\":{\"text\":{\"default\":\"In Store For Allocation\",\"es\":\"Almacenado Epsperando asignación\"}}},\"_row_num\":16}]"
+        "_value": "[{\"choice_list_name\":\"current_use\",\"data_value\":\"in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"In Use\",\"es\":\"En Uso\"}}},\"_row_num\":14},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"Not In Use\",\"es\":\"No En Uso\"}}},\"_row_num\":15},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_installed\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Installed\",\"es\":\"No Instalado\"}}},\"_row_num\":16}]"
       },
       {
         "_partition": "Column",
