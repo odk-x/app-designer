@@ -101,7 +101,7 @@
         "_row_num": 10
       },
       {
-        "type": "date",
+        "type": "birthdate",
         "name": "date_serviced",
         "display": {
           "title": {
@@ -3309,7 +3309,7 @@
             "promptIdx": 3
           },
           {
-            "type": "date",
+            "type": "birthdate",
             "name": "date_serviced",
             "display": {
               "title": {
@@ -3328,7 +3328,7 @@
             "_row_num": 11,
             "__rowNum__": 10,
             "_token_type": "prompt",
-            "_type": "date",
+            "_type": "birthdate",
             "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 4
           },
