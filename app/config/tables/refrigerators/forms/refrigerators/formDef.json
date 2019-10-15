@@ -64,7 +64,7 @@
       {
         "type": "assign",
         "name": "model_search_text",
-        "calculation": "data('model_other')",
+        "calculation": "data('model_row_id')",
         "_row_num": 8
       },
       {
@@ -2795,7 +2795,7 @@
               "__rowNum__": 10,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nif (data('facility_row_id') == null) {\nactivePromptIndicies.push(0);\n}\nactivePromptIndicies.push(1);\nif (data('models_common') === 'other') {\nassign('model_search_text', data('model_other'));\nactivePromptIndicies.push(2);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (data('facility_row_id') == null) {\nactivePromptIndicies.push(0);\n}\nactivePromptIndicies.push(1);\nif (data('models_common') === 'other') {\nassign('model_search_text', data('model_row_id'));\nactivePromptIndicies.push(2);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 0
           },
           {
