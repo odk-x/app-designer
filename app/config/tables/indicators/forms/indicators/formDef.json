@@ -127,6 +127,18 @@
         "_row_num": 16
       },
       {
+        "type": "note",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Refrigerator Status: {{data.alarm_functional_status}}",
+              "es": "Estado del refrigerador: {{data.alarm_functional_status}}"
+            }
+          }
+        },
+        "_row_num": 17
+      },
+      {
         "type": "select_one_with_other",
         "values_list": "refrigerator_failure_type",
         "name": "refrigerator_failure",
@@ -136,11 +148,11 @@
           }
         },
         "required": "data('alarm_functional_status') === 'non_functional'",
-        "_row_num": 17
+        "_row_num": 18
       },
       {
         "clause": "end if",
-        "_row_num": 18
+        "_row_num": 19
       },
       {
         "type": "select_one",
@@ -151,12 +163,12 @@
             "text": "Have there been any issues related to build quality from the first day of the month to the last day of the month?"
           }
         },
-        "_row_num": 19
+        "_row_num": 20
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality'), 'yes')",
-        "_row_num": 20
+        "_row_num": 21
       },
       {
         "type": "select_one_with_other",
@@ -167,24 +179,56 @@
             "text": "If so, why?"
           }
         },
-        "_row_num": 21
-      },
-      {
-        "clause": "end if",
         "_row_num": 22
       },
       {
-        "clause": "end screen",
+        "type": "select_one_with_other",
+        "values_list": "build_quality_reason_type_observation",
+        "name": "build_quality_observation",
+        "display": {
+          "prompt": {
+            "text": "What condition was observed related to the failure?"
+          }
+        },
         "_row_num": 23
+      },
+      {
+        "type": "select_one",
+        "values_list": "build_quality_reason_type_location",
+        "name": "build_quality_location",
+        "display": {
+          "prompt": {
+            "text": "Where was the failure observed?"
+          }
+        },
+        "_row_num": 24
+      },
+      {
+        "type": "text",
+        "name": "build_quality_component",
+        "display": {
+          "prompt": {
+            "text": "Please enter the component that failed, and why if known."
+          }
+        },
+        "_row_num": 25
+      },
+      {
+        "clause": "end if",
+        "_row_num": 26
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 27
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality'), 'yes')",
-        "_row_num": 24
+        "_row_num": 28
       },
       {
         "clause": "begin screen",
-        "_row_num": 25
+        "_row_num": 29
       },
       {
         "type": "image",
@@ -194,19 +238,24 @@
             "text": "Please take a picture."
           }
         },
-        "_row_num": 26
+        "_row_num": 30
       },
       {
         "clause": "end screen",
-        "_row_num": 27
+        "_row_num": 31
       },
       {
         "clause": "end if",
-        "_row_num": 28
+        "_row_num": 32
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('build_quality'), 'yes')",
+        "_row_num": 33
       },
       {
         "clause": "begin screen",
-        "_row_num": 29
+        "_row_num": 34
       },
       {
         "type": "select_one",
@@ -217,12 +266,12 @@
             "text": "Was there a second issue related to build quality from the first day of the month to the last day of the month?"
           }
         },
-        "_row_num": 30
+        "_row_num": 35
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality2'), 'yes')",
-        "_row_num": 31
+        "_row_num": 36
       },
       {
         "type": "select_one_with_other",
@@ -233,24 +282,60 @@
             "text": "If so, why?"
           }
         },
-        "_row_num": 32
+        "_row_num": 37
+      },
+      {
+        "type": "select_one_with_other",
+        "values_list": "build_quality_reason_type_observation",
+        "name": "build_quality_observation2",
+        "display": {
+          "prompt": {
+            "text": "What condition was observed related to the second failure?"
+          }
+        },
+        "_row_num": 38
+      },
+      {
+        "type": "select_one",
+        "values_list": "build_quality_reason_type_location",
+        "name": "build_quality_location2",
+        "display": {
+          "prompt": {
+            "text": "Where was the second failure observed?"
+          }
+        },
+        "_row_num": 39
+      },
+      {
+        "type": "text",
+        "name": "build_quality_component2",
+        "display": {
+          "prompt": {
+            "text": "Please enter the second component that failed, and why if known."
+          }
+        },
+        "_row_num": 40
       },
       {
         "clause": "end if",
-        "_row_num": 33
+        "_row_num": 41
       },
       {
         "clause": "end screen",
-        "_row_num": 34
+        "_row_num": 42
+      },
+      {
+        "clause": "end if",
+        "_row_num": 43
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality2'), 'yes')",
-        "_row_num": 35
+        "_row_num": 44
       },
       {
         "clause": "begin screen",
-        "_row_num": 36
+        "_row_num": 45
       },
       {
         "type": "image",
@@ -260,19 +345,24 @@
             "text": "Please take a picture."
           }
         },
-        "_row_num": 37
+        "_row_num": 46
       },
       {
         "clause": "end screen",
-        "_row_num": 38
+        "_row_num": 47
       },
       {
         "clause": "end if",
-        "_row_num": 39
+        "_row_num": 48
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('build_quality2'), 'yes')",
+        "_row_num": 49
       },
       {
         "clause": "begin screen",
-        "_row_num": 40
+        "_row_num": 50
       },
       {
         "type": "select_one",
@@ -283,12 +373,12 @@
             "text": "Was there a third issue related to build quality from the first day of the month to the last day of the month?"
           }
         },
-        "_row_num": 41
+        "_row_num": 51
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality3'), 'yes')",
-        "_row_num": 42
+        "_row_num": 52
       },
       {
         "type": "select_one_with_other",
@@ -299,24 +389,60 @@
             "text": "If so, why?"
           }
         },
-        "_row_num": 43
+        "_row_num": 53
+      },
+      {
+        "type": "select_one_with_other",
+        "values_list": "build_quality_reason_type_observation",
+        "name": "build_quality_observation3",
+        "display": {
+          "prompt": {
+            "text": "What condition was observed related to the third failure?"
+          }
+        },
+        "_row_num": 54
+      },
+      {
+        "type": "select_one",
+        "values_list": "build_quality_reason_type_location",
+        "name": "build_quality_location3",
+        "display": {
+          "prompt": {
+            "text": "Where was the third failure observed?"
+          }
+        },
+        "_row_num": 55
+      },
+      {
+        "type": "text",
+        "name": "build_quality_component3",
+        "display": {
+          "prompt": {
+            "text": "Please enter the third component that failed, and why if known."
+          }
+        },
+        "_row_num": 56
       },
       {
         "clause": "end if",
-        "_row_num": 44
+        "_row_num": 57
       },
       {
         "clause": "end screen",
-        "_row_num": 45
+        "_row_num": 58
+      },
+      {
+        "clause": "end if",
+        "_row_num": 59
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality3'), 'yes')",
-        "_row_num": 46
+        "_row_num": 60
       },
       {
         "clause": "begin screen",
-        "_row_num": 47
+        "_row_num": 61
       },
       {
         "type": "image",
@@ -326,93 +452,6 @@
             "text": "Please take a picture."
           }
         },
-        "_row_num": 48
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 49
-      },
-      {
-        "clause": "end if",
-        "_row_num": 50
-      },
-      {
-        "clause": "if",
-        "condition": "data('voltage_stabilizer_present') !== 'no'",
-        "_row_num": 51
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 52
-      },
-      {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "voltage_stabilizer_working",
-        "display": {
-          "prompt": {
-            "text": "Is the voltage stabilizer working?"
-          }
-        },
-        "_row_num": 53
-      },
-      {
-        "clause": "if",
-        "condition": "data('voltage_stabilizer_working') === 'no'",
-        "_row_num": 54
-      },
-      {
-        "type": "select_one_with_other",
-        "values_list": "voltage_stabilizer_not_working_reason_type",
-        "name": "voltage_stabilizer_not_working_reason",
-        "display": {
-          "prompt": {
-            "text": "If no, why not?"
-          }
-        },
-        "_row_num": 55
-      },
-      {
-        "clause": "end if",
-        "_row_num": 56
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 57
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 58
-      },
-      {
-        "type": "select_one",
-        "values_list": "yes_no",
-        "name": "voltage_stabilizer_replaced",
-        "display": {
-          "prompt": {
-            "text": "Has the voltage regulator been replaced from the first day of the month to the last day of the month?"
-          }
-        },
-        "_row_num": 59
-      },
-      {
-        "clause": "if",
-        "condition": "selected(data('voltage_stabilizer_replaced'), 'yes')",
-        "_row_num": 60
-      },
-      {
-        "type": "select_one_with_other",
-        "values_list": "voltage_stabilizer_replaced_reason_type",
-        "name": "voltage_stabilizer_replaced_reason",
-        "display": {
-          "prompt": {
-            "text": "If yes, why?"
-          }
-        },
-        "_row_num": 61
-      },
-      {
-        "clause": "end if",
         "_row_num": 62
       },
       {
@@ -425,12 +464,99 @@
       },
       {
         "clause": "if",
-        "condition": "calculates.refrigerator_age() < 4",
+        "condition": "data('voltage_stabilizer_present') !== 'no'",
         "_row_num": 65
       },
       {
         "clause": "begin screen",
         "_row_num": 66
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "voltage_stabilizer_working",
+        "display": {
+          "prompt": {
+            "text": "Is the voltage stabilizer working?"
+          }
+        },
+        "_row_num": 67
+      },
+      {
+        "clause": "if",
+        "condition": "data('voltage_stabilizer_working') === 'no'",
+        "_row_num": 68
+      },
+      {
+        "type": "select_one_with_other",
+        "values_list": "voltage_stabilizer_not_working_reason_type",
+        "name": "voltage_stabilizer_not_working_reason",
+        "display": {
+          "prompt": {
+            "text": "If no, why not?"
+          }
+        },
+        "_row_num": 69
+      },
+      {
+        "clause": "end if",
+        "_row_num": 70
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 71
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 72
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "voltage_stabilizer_replaced",
+        "display": {
+          "prompt": {
+            "text": "Has the voltage regulator been replaced from the first day of the month to the last day of the month?"
+          }
+        },
+        "_row_num": 73
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('voltage_stabilizer_replaced'), 'yes')",
+        "_row_num": 74
+      },
+      {
+        "type": "select_one_with_other",
+        "values_list": "voltage_stabilizer_replaced_reason_type",
+        "name": "voltage_stabilizer_replaced_reason",
+        "display": {
+          "prompt": {
+            "text": "If yes, why?"
+          }
+        },
+        "_row_num": 75
+      },
+      {
+        "clause": "end if",
+        "_row_num": 76
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 77
+      },
+      {
+        "clause": "end if",
+        "_row_num": 78
+      },
+      {
+        "clause": "if",
+        "condition": "calculates.refrigerator_age() < 4",
+        "_row_num": 79
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 80
       },
       {
         "type": "select_one",
@@ -441,12 +567,12 @@
             "text": "Has a warranty claim been made?"
           }
         },
-        "_row_num": 67
+        "_row_num": 81
       },
       {
         "clause": "if",
         "condition": "selected(data('warranty_claim_been_made'), 'yes')",
-        "_row_num": 68
+        "_row_num": 82
       },
       {
         "type": "birthdate",
@@ -456,7 +582,7 @@
             "text": "When was the warranty claim made?"
           }
         },
-        "_row_num": 69
+        "_row_num": 83
       },
       {
         "type": "integer",
@@ -466,19 +592,19 @@
             "text": "How many days elapsed between when the claim was made and when the repair occurred?"
           }
         },
-        "_row_num": 70
+        "_row_num": 84
       },
       {
         "clause": "end if",
-        "_row_num": 71
+        "_row_num": 85
       },
       {
         "clause": "end screen",
-        "_row_num": 72
+        "_row_num": 86
       },
       {
         "clause": "end if",
-        "_row_num": 73
+        "_row_num": 87
       }
     ],
     "calculates": [
@@ -559,7 +685,10 @@
         "data_value": "yes",
         "display": {
           "title": {
-            "text": "Yes"
+            "text": {
+              "default": "Yes",
+              "es": "Si"
+            }
           }
         },
         "_row_num": 5
@@ -569,7 +698,10 @@
         "data_value": "no",
         "display": {
           "title": {
-            "text": "No"
+            "text": {
+              "default": "No",
+              "es": "No"
+            }
           }
         },
         "_row_num": 6
@@ -579,7 +711,10 @@
         "data_value": "need_data",
         "display": {
           "title": {
-            "text": "Need Data"
+            "text": {
+              "default": "Need Data",
+              "es": "Necesita datos"
+            }
           }
         },
         "_row_num": 8
@@ -589,7 +724,10 @@
         "data_value": "need_data",
         "display": {
           "title": {
-            "text": "Need Data"
+            "text": {
+              "default": "Need Data",
+              "es": "Necesita datos"
+            }
           }
         },
         "_row_num": 10
@@ -599,7 +737,10 @@
         "data_value": "need_data",
         "display": {
           "title": {
-            "text": "Need Data"
+            "text": {
+              "default": "Need Data",
+              "es": "Necesita datos"
+            }
           }
         },
         "_row_num": 12
@@ -609,7 +750,10 @@
         "data_value": "need_data",
         "display": {
           "title": {
-            "text": "Need Data"
+            "text": {
+              "default": "Need Data",
+              "es": "Necesita datos"
+            }
           }
         },
         "_row_num": 14
@@ -652,6 +796,175 @@
           }
         },
         "_row_num": 18
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_observation",
+        "data_value": "broken",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Broken",
+              "es": "Roto"
+            }
+          }
+        },
+        "_row_num": 20
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_observation",
+        "data_value": "burnt",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Burnt",
+              "es": "Quemado"
+            }
+          }
+        },
+        "_row_num": 21
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_observation",
+        "data_value": "corrosion",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Corrosion",
+              "es": "Corrosión"
+            }
+          }
+        },
+        "_row_num": 22
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_observation",
+        "data_value": "deteriorating",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Deteriorating",
+              "es": "Deterioro"
+            }
+          }
+        },
+        "_row_num": 23
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_observation",
+        "data_value": "leaking",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Leaking",
+              "es": "Fugas"
+            }
+          }
+        },
+        "_row_num": 24
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_observation",
+        "data_value": "missing",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Missing",
+              "es": "Desaparecido"
+            }
+          }
+        },
+        "_row_num": 25
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_observation",
+        "data_value": "noisy",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Noisy",
+              "es": "Ruidoso"
+            }
+          }
+        },
+        "_row_num": 26
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_location",
+        "data_value": "appliance_exterior",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Appliance (exterior)",
+              "es": "Aparato (exterior)"
+            }
+          }
+        },
+        "_row_num": 29
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_location",
+        "data_value": "accessory_ems",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Accessory (EMS)",
+              "es": "Accesorio (EMS)"
+            }
+          }
+        },
+        "_row_num": 30
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_location",
+        "data_value": "solar_mechanical",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Solar (mechanical)",
+              "es": "Solar (mecánica)"
+            }
+          }
+        },
+        "_row_num": 31
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_location",
+        "data_value": "solar_electrical",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Solar (electrical)",
+              "es": "Solar (eléctrico)"
+            }
+          }
+        },
+        "_row_num": 32
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_location",
+        "data_value": "appliance_interior",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Appliance (interior)",
+              "es": "Aparato (interior)"
+            }
+          }
+        },
+        "_row_num": 33
+      },
+      {
+        "choice_list_name": "build_quality_reason_type_location",
+        "data_value": "not_determined",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Not Determined",
+              "es": "No determinado"
+            }
+          }
+        },
+        "_row_num": 34
       }
     ],
     "queries": [
@@ -936,7 +1249,10 @@
           "data_value": "yes",
           "display": {
             "title": {
-              "text": "Yes"
+              "text": {
+                "default": "Yes",
+                "es": "Si"
+              }
             }
           },
           "_row_num": 5
@@ -946,7 +1262,10 @@
           "data_value": "no",
           "display": {
             "title": {
-              "text": "No"
+              "text": {
+                "default": "No",
+                "es": "No"
+              }
             }
           },
           "_row_num": 6
@@ -958,7 +1277,10 @@
           "data_value": "need_data",
           "display": {
             "title": {
-              "text": "Need Data"
+              "text": {
+                "default": "Need Data",
+                "es": "Necesita datos"
+              }
             }
           },
           "_row_num": 8
@@ -970,7 +1292,10 @@
           "data_value": "need_data",
           "display": {
             "title": {
-              "text": "Need Data"
+              "text": {
+                "default": "Need Data",
+                "es": "Necesita datos"
+              }
             }
           },
           "_row_num": 10
@@ -982,7 +1307,10 @@
           "data_value": "need_data",
           "display": {
             "title": {
-              "text": "Need Data"
+              "text": {
+                "default": "Need Data",
+                "es": "Necesita datos"
+              }
             }
           },
           "_row_num": 12
@@ -994,7 +1322,10 @@
           "data_value": "need_data",
           "display": {
             "title": {
-              "text": "Need Data"
+              "text": {
+                "default": "Need Data",
+                "es": "Necesita datos"
+              }
             }
           },
           "_row_num": 14
@@ -1039,6 +1370,179 @@
             }
           },
           "_row_num": 18
+        }
+      ],
+      "build_quality_reason_type_observation": [
+        {
+          "choice_list_name": "build_quality_reason_type_observation",
+          "data_value": "broken",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Broken",
+                "es": "Roto"
+              }
+            }
+          },
+          "_row_num": 20
+        },
+        {
+          "choice_list_name": "build_quality_reason_type_observation",
+          "data_value": "burnt",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Burnt",
+                "es": "Quemado"
+              }
+            }
+          },
+          "_row_num": 21
+        },
+        {
+          "choice_list_name": "build_quality_reason_type_observation",
+          "data_value": "corrosion",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Corrosion",
+                "es": "Corrosión"
+              }
+            }
+          },
+          "_row_num": 22
+        },
+        {
+          "choice_list_name": "build_quality_reason_type_observation",
+          "data_value": "deteriorating",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Deteriorating",
+                "es": "Deterioro"
+              }
+            }
+          },
+          "_row_num": 23
+        },
+        {
+          "choice_list_name": "build_quality_reason_type_observation",
+          "data_value": "leaking",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Leaking",
+                "es": "Fugas"
+              }
+            }
+          },
+          "_row_num": 24
+        },
+        {
+          "choice_list_name": "build_quality_reason_type_observation",
+          "data_value": "missing",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Missing",
+                "es": "Desaparecido"
+              }
+            }
+          },
+          "_row_num": 25
+        },
+        {
+          "choice_list_name": "build_quality_reason_type_observation",
+          "data_value": "noisy",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Noisy",
+                "es": "Ruidoso"
+              }
+            }
+          },
+          "_row_num": 26
+        }
+      ],
+      "build_quality_reason_type_location": [
+        {
+          "choice_list_name": "build_quality_reason_type_location",
+          "data_value": "appliance_exterior",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Appliance (exterior)",
+                "es": "Aparato (exterior)"
+              }
+            }
+          },
+          "_row_num": 29
+        },
+        {
+          "choice_list_name": "build_quality_reason_type_location",
+          "data_value": "accessory_ems",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Accessory (EMS)",
+                "es": "Accesorio (EMS)"
+              }
+            }
+          },
+          "_row_num": 30
+        },
+        {
+          "choice_list_name": "build_quality_reason_type_location",
+          "data_value": "solar_mechanical",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Solar (mechanical)",
+                "es": "Solar (mecánica)"
+              }
+            }
+          },
+          "_row_num": 31
+        },
+        {
+          "choice_list_name": "build_quality_reason_type_location",
+          "data_value": "solar_electrical",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Solar (electrical)",
+                "es": "Solar (eléctrico)"
+              }
+            }
+          },
+          "_row_num": 32
+        },
+        {
+          "choice_list_name": "build_quality_reason_type_location",
+          "data_value": "appliance_interior",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Appliance (interior)",
+                "es": "Aparato (interior)"
+              }
+            }
+          },
+          "_row_num": 33
+        },
+        {
+          "choice_list_name": "build_quality_reason_type_location",
+          "data_value": "not_determined",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Not Determined",
+                "es": "No determinado"
+              }
+            }
+          },
+          "_row_num": 34
         }
       ]
     },
@@ -1181,7 +1685,7 @@
       "refrigerator_failure": {
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 18,
             "section_name": "survey"
           }
         ],
@@ -1192,7 +1696,7 @@
       "build_quality": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -1203,7 +1707,7 @@
       "build_quality_reason": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -1211,10 +1715,42 @@
         "valuesList": "build_quality_reason_type",
         "elementKey": "build_quality_reason"
       },
+      "build_quality_observation": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_observation",
+        "elementKey": "build_quality_observation"
+      },
+      "build_quality_location": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_location",
+        "elementKey": "build_quality_location"
+      },
+      "build_quality_component": {
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "build_quality_component"
+      },
       "build_quality_image": {
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -1238,7 +1774,7 @@
       "build_quality2": {
         "_defn": [
           {
-            "_row_num": 30,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -1249,7 +1785,7 @@
       "build_quality_reason2": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -1257,10 +1793,42 @@
         "valuesList": "build_quality_reason_type",
         "elementKey": "build_quality_reason2"
       },
+      "build_quality_observation2": {
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_observation",
+        "elementKey": "build_quality_observation2"
+      },
+      "build_quality_location2": {
+        "_defn": [
+          {
+            "_row_num": 39,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_location",
+        "elementKey": "build_quality_location2"
+      },
+      "build_quality_component2": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "build_quality_component2"
+      },
       "build_quality_image2": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 46,
             "section_name": "survey"
           }
         ],
@@ -1284,7 +1852,7 @@
       "build_quality3": {
         "_defn": [
           {
-            "_row_num": 41,
+            "_row_num": 51,
             "section_name": "survey"
           }
         ],
@@ -1295,7 +1863,7 @@
       "build_quality_reason3": {
         "_defn": [
           {
-            "_row_num": 43,
+            "_row_num": 53,
             "section_name": "survey"
           }
         ],
@@ -1303,10 +1871,42 @@
         "valuesList": "build_quality_reason_type",
         "elementKey": "build_quality_reason3"
       },
+      "build_quality_observation3": {
+        "_defn": [
+          {
+            "_row_num": 54,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_observation",
+        "elementKey": "build_quality_observation3"
+      },
+      "build_quality_location3": {
+        "_defn": [
+          {
+            "_row_num": 55,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_location",
+        "elementKey": "build_quality_location3"
+      },
+      "build_quality_component3": {
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "build_quality_component3"
+      },
       "build_quality_image3": {
         "_defn": [
           {
-            "_row_num": 48,
+            "_row_num": 62,
             "section_name": "survey"
           }
         ],
@@ -1330,7 +1930,7 @@
       "voltage_stabilizer_working": {
         "_defn": [
           {
-            "_row_num": 53,
+            "_row_num": 67,
             "section_name": "survey"
           }
         ],
@@ -1341,7 +1941,7 @@
       "voltage_stabilizer_not_working_reason": {
         "_defn": [
           {
-            "_row_num": 55,
+            "_row_num": 69,
             "section_name": "survey"
           }
         ],
@@ -1352,7 +1952,7 @@
       "voltage_stabilizer_replaced": {
         "_defn": [
           {
-            "_row_num": 59,
+            "_row_num": 73,
             "section_name": "survey"
           }
         ],
@@ -1363,7 +1963,7 @@
       "voltage_stabilizer_replaced_reason": {
         "_defn": [
           {
-            "_row_num": 61,
+            "_row_num": 75,
             "section_name": "survey"
           }
         ],
@@ -1374,7 +1974,7 @@
       "warranty_claim_been_made": {
         "_defn": [
           {
-            "_row_num": 67,
+            "_row_num": 81,
             "section_name": "survey"
           }
         ],
@@ -1385,7 +1985,7 @@
       "warranty_claim_date": {
         "_defn": [
           {
-            "_row_num": 69,
+            "_row_num": 83,
             "section_name": "survey"
           }
         ],
@@ -1396,7 +1996,7 @@
       "days_from_warranty_claim_until_repaired": {
         "_defn": [
           {
-            "_row_num": 70,
+            "_row_num": 84,
             "section_name": "survey"
           }
         ],
@@ -1530,6 +2130,23 @@
             "promptIdx": 5
           },
           {
+            "type": "note",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Refrigerator Status: {{data.alarm_functional_status}}",
+                  "es": "Estado del refrigerador: {{data.alarm_functional_status}}"
+                }
+              }
+            },
+            "_row_num": 17,
+            "__rowNum__": 16,
+            "_token_type": "prompt",
+            "_type": "note",
+            "_branch_label_enclosing_screen": "survey/_screen15",
+            "promptIdx": 6
+          },
+          {
             "type": "select_one_with_other",
             "values_list": "refrigerator_failure_type",
             "name": "refrigerator_failure",
@@ -1539,12 +2156,12 @@
               }
             },
             "required": "data('alarm_functional_status') === 'non_functional'",
-            "_row_num": 17,
-            "__rowNum__": 16,
+            "_row_num": 18,
+            "__rowNum__": 17,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
             "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 6
+            "promptIdx": 7
           },
           {
             "type": "select_one",
@@ -1555,12 +2172,12 @@
                 "text": "Have there been any issues related to build quality from the first day of the month to the last day of the month?"
               }
             },
-            "_row_num": 19,
-            "__rowNum__": 18,
+            "_row_num": 20,
+            "__rowNum__": 19,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 7
+            "promptIdx": 8
           },
           {
             "type": "select_one_with_other",
@@ -1571,12 +2188,59 @@
                 "text": "If so, why?"
               }
             },
-            "_row_num": 21,
-            "__rowNum__": 20,
+            "_row_num": 22,
+            "__rowNum__": 21,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
             "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 8
+            "promptIdx": 9
+          },
+          {
+            "type": "select_one_with_other",
+            "values_list": "build_quality_reason_type_observation",
+            "name": "build_quality_observation",
+            "display": {
+              "prompt": {
+                "text": "What condition was observed related to the failure?"
+              }
+            },
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "prompt",
+            "_type": "select_one_with_other",
+            "_branch_label_enclosing_screen": "survey/_screen15",
+            "promptIdx": 10
+          },
+          {
+            "type": "select_one",
+            "values_list": "build_quality_reason_type_location",
+            "name": "build_quality_location",
+            "display": {
+              "prompt": {
+                "text": "Where was the failure observed?"
+              }
+            },
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen15",
+            "promptIdx": 11
+          },
+          {
+            "type": "text",
+            "name": "build_quality_component",
+            "display": {
+              "prompt": {
+                "text": "Please enter the component that failed, and why if known."
+              }
+            },
+            "_row_num": 25,
+            "__rowNum__": 24,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen15",
+            "promptIdx": 12
           },
           {
             "type": "image",
@@ -1586,12 +2250,12 @@
                 "text": "Please take a picture."
               }
             },
-            "_row_num": 26,
-            "__rowNum__": 25,
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen25",
-            "promptIdx": 9
+            "_branch_label_enclosing_screen": "survey/_screen29",
+            "promptIdx": 13
           },
           {
             "type": "select_one",
@@ -1602,12 +2266,12 @@
                 "text": "Was there a second issue related to build quality from the first day of the month to the last day of the month?"
               }
             },
-            "_row_num": 30,
-            "__rowNum__": 29,
+            "_row_num": 35,
+            "__rowNum__": 34,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen29",
-            "promptIdx": 10
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 14
           },
           {
             "type": "select_one_with_other",
@@ -1618,12 +2282,59 @@
                 "text": "If so, why?"
               }
             },
-            "_row_num": 32,
-            "__rowNum__": 31,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen29",
-            "promptIdx": 11
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 15
+          },
+          {
+            "type": "select_one_with_other",
+            "values_list": "build_quality_reason_type_observation",
+            "name": "build_quality_observation2",
+            "display": {
+              "prompt": {
+                "text": "What condition was observed related to the second failure?"
+              }
+            },
+            "_row_num": 38,
+            "__rowNum__": 37,
+            "_token_type": "prompt",
+            "_type": "select_one_with_other",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 16
+          },
+          {
+            "type": "select_one",
+            "values_list": "build_quality_reason_type_location",
+            "name": "build_quality_location2",
+            "display": {
+              "prompt": {
+                "text": "Where was the second failure observed?"
+              }
+            },
+            "_row_num": 39,
+            "__rowNum__": 38,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 17
+          },
+          {
+            "type": "text",
+            "name": "build_quality_component2",
+            "display": {
+              "prompt": {
+                "text": "Please enter the second component that failed, and why if known."
+              }
+            },
+            "_row_num": 40,
+            "__rowNum__": 39,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen34",
+            "promptIdx": 18
           },
           {
             "type": "image",
@@ -1633,12 +2344,12 @@
                 "text": "Please take a picture."
               }
             },
-            "_row_num": 37,
-            "__rowNum__": 36,
+            "_row_num": 46,
+            "__rowNum__": 45,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen36",
-            "promptIdx": 12
+            "_branch_label_enclosing_screen": "survey/_screen45",
+            "promptIdx": 19
           },
           {
             "type": "select_one",
@@ -1649,12 +2360,12 @@
                 "text": "Was there a third issue related to build quality from the first day of the month to the last day of the month?"
               }
             },
-            "_row_num": 41,
-            "__rowNum__": 40,
+            "_row_num": 51,
+            "__rowNum__": 50,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen40",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen50",
+            "promptIdx": 20
           },
           {
             "type": "select_one_with_other",
@@ -1665,12 +2376,59 @@
                 "text": "If so, why?"
               }
             },
-            "_row_num": 43,
-            "__rowNum__": 42,
+            "_row_num": 53,
+            "__rowNum__": 52,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen40",
-            "promptIdx": 14
+            "_branch_label_enclosing_screen": "survey/_screen50",
+            "promptIdx": 21
+          },
+          {
+            "type": "select_one_with_other",
+            "values_list": "build_quality_reason_type_observation",
+            "name": "build_quality_observation3",
+            "display": {
+              "prompt": {
+                "text": "What condition was observed related to the third failure?"
+              }
+            },
+            "_row_num": 54,
+            "__rowNum__": 53,
+            "_token_type": "prompt",
+            "_type": "select_one_with_other",
+            "_branch_label_enclosing_screen": "survey/_screen50",
+            "promptIdx": 22
+          },
+          {
+            "type": "select_one",
+            "values_list": "build_quality_reason_type_location",
+            "name": "build_quality_location3",
+            "display": {
+              "prompt": {
+                "text": "Where was the third failure observed?"
+              }
+            },
+            "_row_num": 55,
+            "__rowNum__": 54,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen50",
+            "promptIdx": 23
+          },
+          {
+            "type": "text",
+            "name": "build_quality_component3",
+            "display": {
+              "prompt": {
+                "text": "Please enter the third component that failed, and why if known."
+              }
+            },
+            "_row_num": 56,
+            "__rowNum__": 55,
+            "_token_type": "prompt",
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen50",
+            "promptIdx": 24
           },
           {
             "type": "image",
@@ -1680,12 +2438,12 @@
                 "text": "Please take a picture."
               }
             },
-            "_row_num": 48,
-            "__rowNum__": 47,
+            "_row_num": 62,
+            "__rowNum__": 61,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen47",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen61",
+            "promptIdx": 25
           },
           {
             "type": "select_one",
@@ -1696,12 +2454,12 @@
                 "text": "Is the voltage stabilizer working?"
               }
             },
-            "_row_num": 53,
-            "__rowNum__": 52,
+            "_row_num": 67,
+            "__rowNum__": 66,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen52",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen66",
+            "promptIdx": 26
           },
           {
             "type": "select_one_with_other",
@@ -1712,12 +2470,12 @@
                 "text": "If no, why not?"
               }
             },
-            "_row_num": 55,
-            "__rowNum__": 54,
+            "_row_num": 69,
+            "__rowNum__": 68,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen52",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen66",
+            "promptIdx": 27
           },
           {
             "type": "select_one",
@@ -1728,12 +2486,12 @@
                 "text": "Has the voltage regulator been replaced from the first day of the month to the last day of the month?"
               }
             },
-            "_row_num": 59,
-            "__rowNum__": 58,
+            "_row_num": 73,
+            "__rowNum__": 72,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen58",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen72",
+            "promptIdx": 28
           },
           {
             "type": "select_one_with_other",
@@ -1744,12 +2502,12 @@
                 "text": "If yes, why?"
               }
             },
-            "_row_num": 61,
-            "__rowNum__": 60,
+            "_row_num": 75,
+            "__rowNum__": 74,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen58",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen72",
+            "promptIdx": 29
           },
           {
             "type": "select_one",
@@ -1760,12 +2518,12 @@
                 "text": "Has a warranty claim been made?"
               }
             },
-            "_row_num": 67,
-            "__rowNum__": 66,
+            "_row_num": 81,
+            "__rowNum__": 80,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen66",
-            "promptIdx": 20
+            "_branch_label_enclosing_screen": "survey/_screen80",
+            "promptIdx": 30
           },
           {
             "type": "birthdate",
@@ -1775,12 +2533,12 @@
                 "text": "When was the warranty claim made?"
               }
             },
-            "_row_num": 69,
-            "__rowNum__": 68,
+            "_row_num": 83,
+            "__rowNum__": 82,
             "_token_type": "prompt",
             "_type": "birthdate",
-            "_branch_label_enclosing_screen": "survey/_screen66",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "survey/_screen80",
+            "promptIdx": 31
           },
           {
             "type": "integer",
@@ -1790,20 +2548,20 @@
                 "text": "How many days elapsed between when the claim was made and when the repair occurred?"
               }
             },
-            "_row_num": 70,
-            "__rowNum__": 69,
+            "_row_num": 84,
+            "__rowNum__": 83,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen66",
-            "promptIdx": 22
+            "_branch_label_enclosing_screen": "survey/_screen80",
+            "promptIdx": 32
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 74,
-            "_branch_label_enclosing_screen": "survey/_screen74",
-            "promptIdx": 23
+            "_row_num": 88,
+            "_branch_label_enclosing_screen": "survey/_screen88",
+            "promptIdx": 33
           }
         ],
         "validation_tag_map": {
@@ -1813,7 +2571,7 @@
             3,
             4,
             5,
-            6
+            7
           ]
         },
         "operations": [
@@ -1864,49 +2622,28 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 23,
-              "__rowNum__": 22,
+              "_row_num": 27,
+              "__rowNum__": 26,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nif (data('alarm_functional_status') === 'non_functional') {\nactivePromptIndicies.push(6);\n}\nactivePromptIndicies.push(7);\nif (selected(data('build_quality'), 'yes')) {\nactivePromptIndicies.push(8);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (data('alarm_functional_status') === 'non_functional') {\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n}\nactivePromptIndicies.push(8);\nif (selected(data('build_quality'), 'yes')) {\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
             "clause": "if",
             "condition": "selected(data('build_quality'), 'yes')",
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "goto_label",
-            "_branch_label": "_then24",
+            "_branch_label": "_then28",
             "operationIdx": 5
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else28",
-            "_row_num": 28,
+            "_branch_label": "_else32",
+            "_row_num": 32,
             "operationIdx": 6
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 25,
-            "__rowNum__": 24,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 27,
-              "__rowNum__": 26,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 7
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif28",
-            "_row_num": 28,
-            "operationIdx": 8
           },
           {
             "clause": "begin screen",
@@ -1915,135 +2652,151 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 34,
-              "__rowNum__": 33,
+              "_row_num": 31,
+              "__rowNum__": 30,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(10);\nif (selected(data('build_quality2'), 'yes')) {\nactivePromptIndicies.push(11);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 7
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif32",
+            "_row_num": 32,
+            "operationIdx": 8
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('build_quality'), 'yes')",
+            "_row_num": 33,
+            "__rowNum__": 32,
+            "_token_type": "goto_label",
+            "_branch_label": "_then33",
             "operationIdx": 9
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else43",
+            "_row_num": 43,
+            "operationIdx": 10
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 34,
+            "__rowNum__": 33,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 42,
+              "__rowNum__": 41,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nif (selected(data('build_quality2'), 'yes')) {\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 11
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif43",
+            "_row_num": 43,
+            "operationIdx": 12
           },
           {
             "clause": "if",
             "condition": "selected(data('build_quality2'), 'yes')",
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 44,
+            "__rowNum__": 43,
             "_token_type": "goto_label",
-            "_branch_label": "_then35",
-            "operationIdx": 10
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_else39",
-            "_row_num": 39,
-            "operationIdx": 11
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 36,
-            "__rowNum__": 35,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 38,
-              "__rowNum__": 37,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 12
-          },
-          {
-            "clause": "end if",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif39",
-            "_row_num": 39,
+            "_branch_label": "_then44",
             "operationIdx": 13
           },
           {
-            "clause": "begin screen",
-            "_row_num": 40,
-            "__rowNum__": 39,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 45,
-              "__rowNum__": 44,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\nif (selected(data('build_quality3'), 'yes')) {\nactivePromptIndicies.push(14);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else48",
+            "_row_num": 48,
             "operationIdx": 14
           },
           {
-            "clause": "if",
-            "condition": "selected(data('build_quality3'), 'yes')",
-            "_row_num": 46,
-            "__rowNum__": 45,
-            "_token_type": "goto_label",
-            "_branch_label": "_then46",
+            "clause": "begin screen",
+            "_row_num": 45,
+            "__rowNum__": 44,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 47,
+              "__rowNum__": 46,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 15
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else50",
-            "_row_num": 50,
+            "_branch_label": "_endif48",
+            "_row_num": 48,
             "operationIdx": 16
           },
           {
-            "clause": "begin screen",
-            "_row_num": 47,
-            "__rowNum__": 46,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 49,
-              "__rowNum__": 48,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(15);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "if",
+            "condition": "selected(data('build_quality2'), 'yes')",
+            "_row_num": 49,
+            "__rowNum__": 48,
+            "_token_type": "goto_label",
+            "_branch_label": "_then49",
             "operationIdx": 17
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif50",
-            "_row_num": 50,
+            "_branch_label": "_else59",
+            "_row_num": 59,
             "operationIdx": 18
           },
           {
-            "clause": "if",
-            "condition": "data('voltage_stabilizer_present') !== 'no'",
-            "_row_num": 51,
-            "__rowNum__": 50,
-            "_token_type": "goto_label",
-            "_branch_label": "_then51",
+            "clause": "begin screen",
+            "_row_num": 50,
+            "__rowNum__": 49,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 58,
+              "__rowNum__": 57,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nif (selected(data('build_quality3'), 'yes')) {\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 19
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif59",
+            "_row_num": 59,
+            "operationIdx": 20
+          },
+          {
+            "clause": "if",
+            "condition": "selected(data('build_quality3'), 'yes')",
+            "_row_num": 60,
+            "__rowNum__": 59,
+            "_token_type": "goto_label",
+            "_branch_label": "_then60",
+            "operationIdx": 21
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
             "_branch_label": "_else64",
             "_row_num": 64,
-            "operationIdx": 20
+            "operationIdx": 22
           },
           {
             "clause": "begin screen",
-            "_row_num": 52,
-            "__rowNum__": 51,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 57,
-              "__rowNum__": 56,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(16);\nif (data('voltage_stabilizer_working') === 'no') {\nactivePromptIndicies.push(17);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 21
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 58,
-            "__rowNum__": 57,
+            "_row_num": 61,
+            "__rowNum__": 60,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
@@ -2051,31 +2804,31 @@
               "__rowNum__": 62,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\nif (selected(data('voltage_stabilizer_replaced'), 'yes')) {\nactivePromptIndicies.push(19);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 22
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 23
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
             "_branch_label": "_endif64",
             "_row_num": 64,
-            "operationIdx": 23
+            "operationIdx": 24
           },
           {
             "clause": "if",
-            "condition": "calculates.refrigerator_age() < 4",
+            "condition": "data('voltage_stabilizer_present') !== 'no'",
             "_row_num": 65,
             "__rowNum__": 64,
             "_token_type": "goto_label",
             "_branch_label": "_then65",
-            "operationIdx": 24
+            "operationIdx": 25
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else73",
-            "_row_num": 73,
-            "operationIdx": 25
+            "_branch_label": "_else78",
+            "_row_num": 78,
+            "operationIdx": 26
           },
           {
             "clause": "begin screen",
@@ -2084,40 +2837,91 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 72,
-              "__rowNum__": 71,
+              "_row_num": 71,
+              "__rowNum__": 70,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nif (selected(data('warranty_claim_been_made'), 'yes')) {\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\n}\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 26
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\nif (data('voltage_stabilizer_working') === 'no') {\nactivePromptIndicies.push(27);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 27
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 72,
+            "__rowNum__": 71,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 77,
+              "__rowNum__": 76,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\nif (selected(data('voltage_stabilizer_replaced'), 'yes')) {\nactivePromptIndicies.push(29);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 28
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif73",
-            "_row_num": 73,
-            "operationIdx": 27
+            "_branch_label": "_endif78",
+            "_row_num": 78,
+            "operationIdx": 29
+          },
+          {
+            "clause": "if",
+            "condition": "calculates.refrigerator_age() < 4",
+            "_row_num": 79,
+            "__rowNum__": 78,
+            "_token_type": "goto_label",
+            "_branch_label": "_then79",
+            "operationIdx": 30
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_else87",
+            "_row_num": 87,
+            "operationIdx": 31
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 80,
+            "__rowNum__": 79,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 86,
+              "__rowNum__": 85,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(30);\nif (selected(data('warranty_claim_been_made'), 'yes')) {\nactivePromptIndicies.push(31);\nactivePromptIndicies.push(32);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 32
+          },
+          {
+            "clause": "end if",
+            "_token_type": "goto_label",
+            "_branch_label": "_endif87",
+            "_row_num": 87,
+            "operationIdx": 33
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 74,
-            "operationIdx": 28
+            "_row_num": 88,
+            "operationIdx": 34
           },
           {
-            "_row_num": 74,
+            "_row_num": 88,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(33);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 29
+            "operationIdx": 35
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 74,
-            "operationIdx": 30
+            "_row_num": 88,
+            "operationIdx": 36
           }
         ],
         "branch_label_map": {
@@ -2126,31 +2930,37 @@
           "_screen10": 2,
           "_screen11": 3,
           "_screen15": 4,
-          "_then24": 7,
-          "_screen25": 7,
-          "_else28": 9,
-          "_endif28": 9,
-          "_screen29": 9,
-          "_then35": 12,
-          "_screen36": 12,
-          "_else39": 14,
-          "_endif39": 14,
-          "_screen40": 14,
-          "_then46": 17,
-          "_screen47": 17,
-          "_else50": 19,
-          "_endif50": 19,
-          "_then51": 21,
-          "_screen52": 21,
-          "_screen58": 22,
-          "_else64": 24,
-          "_endif64": 24,
-          "_then65": 26,
-          "_screen66": 26,
-          "_else73": 28,
-          "_endif73": 28,
-          "_contents": 29,
-          "_screen74": 29
+          "_then28": 7,
+          "_screen29": 7,
+          "_else32": 9,
+          "_endif32": 9,
+          "_then33": 11,
+          "_screen34": 11,
+          "_else43": 13,
+          "_endif43": 13,
+          "_then44": 15,
+          "_screen45": 15,
+          "_else48": 17,
+          "_endif48": 17,
+          "_then49": 19,
+          "_screen50": 19,
+          "_else59": 21,
+          "_endif59": 21,
+          "_then60": 23,
+          "_screen61": 23,
+          "_else64": 25,
+          "_endif64": 25,
+          "_then65": 27,
+          "_screen66": 27,
+          "_screen72": 28,
+          "_else78": 30,
+          "_endif78": 30,
+          "_then79": 32,
+          "_screen80": 32,
+          "_else87": 34,
+          "_endif87": 34,
+          "_contents": 35,
+          "_screen88": 35
         }
       },
       "initial": {
@@ -2475,7 +3285,7 @@
       "refrigerator_failure": {
         "_defn": [
           {
-            "_row_num": 17,
+            "_row_num": 18,
             "section_name": "survey"
           }
         ],
@@ -2489,7 +3299,7 @@
       "build_quality": {
         "_defn": [
           {
-            "_row_num": 19,
+            "_row_num": 20,
             "section_name": "survey"
           }
         ],
@@ -2503,7 +3313,7 @@
       "build_quality_reason": {
         "_defn": [
           {
-            "_row_num": 21,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -2514,10 +3324,51 @@
         "elementSet": "data",
         "elementPath": "build_quality_reason"
       },
+      "build_quality_observation": {
+        "_defn": [
+          {
+            "_row_num": 23,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_observation",
+        "elementKey": "build_quality_observation",
+        "elementName": "build_quality_observation",
+        "elementSet": "data",
+        "elementPath": "build_quality_observation"
+      },
+      "build_quality_location": {
+        "_defn": [
+          {
+            "_row_num": 24,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_location",
+        "elementKey": "build_quality_location",
+        "elementName": "build_quality_location",
+        "elementSet": "data",
+        "elementPath": "build_quality_location"
+      },
+      "build_quality_component": {
+        "_defn": [
+          {
+            "_row_num": 25,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "build_quality_component",
+        "elementName": "build_quality_component",
+        "elementSet": "data",
+        "elementPath": "build_quality_component"
+      },
       "build_quality_image": {
         "_defn": [
           {
-            "_row_num": 26,
+            "_row_num": 30,
             "section_name": "survey"
           }
         ],
@@ -2555,7 +3406,7 @@
       "build_quality2": {
         "_defn": [
           {
-            "_row_num": 30,
+            "_row_num": 35,
             "section_name": "survey"
           }
         ],
@@ -2569,7 +3420,7 @@
       "build_quality_reason2": {
         "_defn": [
           {
-            "_row_num": 32,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -2580,10 +3431,51 @@
         "elementSet": "data",
         "elementPath": "build_quality_reason2"
       },
+      "build_quality_observation2": {
+        "_defn": [
+          {
+            "_row_num": 38,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_observation",
+        "elementKey": "build_quality_observation2",
+        "elementName": "build_quality_observation2",
+        "elementSet": "data",
+        "elementPath": "build_quality_observation2"
+      },
+      "build_quality_location2": {
+        "_defn": [
+          {
+            "_row_num": 39,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_location",
+        "elementKey": "build_quality_location2",
+        "elementName": "build_quality_location2",
+        "elementSet": "data",
+        "elementPath": "build_quality_location2"
+      },
+      "build_quality_component2": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "build_quality_component2",
+        "elementName": "build_quality_component2",
+        "elementSet": "data",
+        "elementPath": "build_quality_component2"
+      },
       "build_quality_image2": {
         "_defn": [
           {
-            "_row_num": 37,
+            "_row_num": 46,
             "section_name": "survey"
           }
         ],
@@ -2621,7 +3513,7 @@
       "build_quality3": {
         "_defn": [
           {
-            "_row_num": 41,
+            "_row_num": 51,
             "section_name": "survey"
           }
         ],
@@ -2635,7 +3527,7 @@
       "build_quality_reason3": {
         "_defn": [
           {
-            "_row_num": 43,
+            "_row_num": 53,
             "section_name": "survey"
           }
         ],
@@ -2646,10 +3538,51 @@
         "elementSet": "data",
         "elementPath": "build_quality_reason3"
       },
+      "build_quality_observation3": {
+        "_defn": [
+          {
+            "_row_num": 54,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_observation",
+        "elementKey": "build_quality_observation3",
+        "elementName": "build_quality_observation3",
+        "elementSet": "data",
+        "elementPath": "build_quality_observation3"
+      },
+      "build_quality_location3": {
+        "_defn": [
+          {
+            "_row_num": 55,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "build_quality_reason_type_location",
+        "elementKey": "build_quality_location3",
+        "elementName": "build_quality_location3",
+        "elementSet": "data",
+        "elementPath": "build_quality_location3"
+      },
+      "build_quality_component3": {
+        "_defn": [
+          {
+            "_row_num": 56,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "elementKey": "build_quality_component3",
+        "elementName": "build_quality_component3",
+        "elementSet": "data",
+        "elementPath": "build_quality_component3"
+      },
       "build_quality_image3": {
         "_defn": [
           {
-            "_row_num": 48,
+            "_row_num": 62,
             "section_name": "survey"
           }
         ],
@@ -2687,7 +3620,7 @@
       "voltage_stabilizer_working": {
         "_defn": [
           {
-            "_row_num": 53,
+            "_row_num": 67,
             "section_name": "survey"
           }
         ],
@@ -2701,7 +3634,7 @@
       "voltage_stabilizer_not_working_reason": {
         "_defn": [
           {
-            "_row_num": 55,
+            "_row_num": 69,
             "section_name": "survey"
           }
         ],
@@ -2715,7 +3648,7 @@
       "voltage_stabilizer_replaced": {
         "_defn": [
           {
-            "_row_num": 59,
+            "_row_num": 73,
             "section_name": "survey"
           }
         ],
@@ -2729,7 +3662,7 @@
       "voltage_stabilizer_replaced_reason": {
         "_defn": [
           {
-            "_row_num": 61,
+            "_row_num": 75,
             "section_name": "survey"
           }
         ],
@@ -2743,7 +3676,7 @@
       "warranty_claim_been_made": {
         "_defn": [
           {
-            "_row_num": 67,
+            "_row_num": 81,
             "section_name": "survey"
           }
         ],
@@ -2757,7 +3690,7 @@
       "warranty_claim_date": {
         "_defn": [
           {
-            "_row_num": 69,
+            "_row_num": 83,
             "section_name": "survey"
           }
         ],
@@ -2771,7 +3704,7 @@
       "days_from_warranty_claim_until_repaired": {
         "_defn": [
           {
-            "_row_num": 70,
+            "_row_num": 84,
             "section_name": "survey"
           }
         ],
@@ -2951,84 +3884,126 @@
         "_aspect": "build_quality",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality2",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality3",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "build_quality_location",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_exterior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (exterior)\",\"es\":\"Aparato (exterior)\"}}},\"_row_num\":29},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"accessory_ems\",\"display\":{\"title\":{\"text\":{\"default\":\"Accessory (EMS)\",\"es\":\"Accesorio (EMS)\"}}},\"_row_num\":30},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_mechanical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (mechanical)\",\"es\":\"Solar (mecánica)\"}}},\"_row_num\":31},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_electrical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (electrical)\",\"es\":\"Solar (eléctrico)\"}}},\"_row_num\":32},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_interior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (interior)\",\"es\":\"Aparato (interior)\"}}},\"_row_num\":33},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"not_determined\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Determined\",\"es\":\"No determinado\"}}},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "build_quality_location2",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_exterior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (exterior)\",\"es\":\"Aparato (exterior)\"}}},\"_row_num\":29},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"accessory_ems\",\"display\":{\"title\":{\"text\":{\"default\":\"Accessory (EMS)\",\"es\":\"Accesorio (EMS)\"}}},\"_row_num\":30},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_mechanical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (mechanical)\",\"es\":\"Solar (mecánica)\"}}},\"_row_num\":31},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_electrical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (electrical)\",\"es\":\"Solar (eléctrico)\"}}},\"_row_num\":32},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_interior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (interior)\",\"es\":\"Aparato (interior)\"}}},\"_row_num\":33},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"not_determined\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Determined\",\"es\":\"No determinado\"}}},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "build_quality_location3",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_exterior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (exterior)\",\"es\":\"Aparato (exterior)\"}}},\"_row_num\":29},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"accessory_ems\",\"display\":{\"title\":{\"text\":{\"default\":\"Accessory (EMS)\",\"es\":\"Accesorio (EMS)\"}}},\"_row_num\":30},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_mechanical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (mechanical)\",\"es\":\"Solar (mecánica)\"}}},\"_row_num\":31},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_electrical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (electrical)\",\"es\":\"Solar (eléctrico)\"}}},\"_row_num\":32},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_interior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (interior)\",\"es\":\"Aparato (interior)\"}}},\"_row_num\":33},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"not_determined\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Determined\",\"es\":\"No determinado\"}}},\"_row_num\":34}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "build_quality_observation",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"broken\",\"display\":{\"title\":{\"text\":{\"default\":\"Broken\",\"es\":\"Roto\"}}},\"_row_num\":20},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"burnt\",\"display\":{\"title\":{\"text\":{\"default\":\"Burnt\",\"es\":\"Quemado\"}}},\"_row_num\":21},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"corrosion\",\"display\":{\"title\":{\"text\":{\"default\":\"Corrosion\",\"es\":\"Corrosión\"}}},\"_row_num\":22},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"deteriorating\",\"display\":{\"title\":{\"text\":{\"default\":\"Deteriorating\",\"es\":\"Deterioro\"}}},\"_row_num\":23},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"leaking\",\"display\":{\"title\":{\"text\":{\"default\":\"Leaking\",\"es\":\"Fugas\"}}},\"_row_num\":24},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"missing\",\"display\":{\"title\":{\"text\":{\"default\":\"Missing\",\"es\":\"Desaparecido\"}}},\"_row_num\":25},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"noisy\",\"display\":{\"title\":{\"text\":{\"default\":\"Noisy\",\"es\":\"Ruidoso\"}}},\"_row_num\":26}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "build_quality_observation2",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"broken\",\"display\":{\"title\":{\"text\":{\"default\":\"Broken\",\"es\":\"Roto\"}}},\"_row_num\":20},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"burnt\",\"display\":{\"title\":{\"text\":{\"default\":\"Burnt\",\"es\":\"Quemado\"}}},\"_row_num\":21},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"corrosion\",\"display\":{\"title\":{\"text\":{\"default\":\"Corrosion\",\"es\":\"Corrosión\"}}},\"_row_num\":22},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"deteriorating\",\"display\":{\"title\":{\"text\":{\"default\":\"Deteriorating\",\"es\":\"Deterioro\"}}},\"_row_num\":23},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"leaking\",\"display\":{\"title\":{\"text\":{\"default\":\"Leaking\",\"es\":\"Fugas\"}}},\"_row_num\":24},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"missing\",\"display\":{\"title\":{\"text\":{\"default\":\"Missing\",\"es\":\"Desaparecido\"}}},\"_row_num\":25},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"noisy\",\"display\":{\"title\":{\"text\":{\"default\":\"Noisy\",\"es\":\"Ruidoso\"}}},\"_row_num\":26}]"
+      },
+      {
+        "_partition": "Column",
+        "_aspect": "build_quality_observation3",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"broken\",\"display\":{\"title\":{\"text\":{\"default\":\"Broken\",\"es\":\"Roto\"}}},\"_row_num\":20},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"burnt\",\"display\":{\"title\":{\"text\":{\"default\":\"Burnt\",\"es\":\"Quemado\"}}},\"_row_num\":21},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"corrosion\",\"display\":{\"title\":{\"text\":{\"default\":\"Corrosion\",\"es\":\"Corrosión\"}}},\"_row_num\":22},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"deteriorating\",\"display\":{\"title\":{\"text\":{\"default\":\"Deteriorating\",\"es\":\"Deterioro\"}}},\"_row_num\":23},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"leaking\",\"display\":{\"title\":{\"text\":{\"default\":\"Leaking\",\"es\":\"Fugas\"}}},\"_row_num\":24},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"missing\",\"display\":{\"title\":{\"text\":{\"default\":\"Missing\",\"es\":\"Desaparecido\"}}},\"_row_num\":25},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"noisy\",\"display\":{\"title\":{\"text\":{\"default\":\"Noisy\",\"es\":\"Ruidoso\"}}},\"_row_num\":26}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality_reason",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":\"Need Data\"}},\"_row_num\":10}]"
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":10}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality_reason2",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":\"Need Data\"}},\"_row_num\":10}]"
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":10}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality_reason3",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":\"Need Data\"}},\"_row_num\":10}]"
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":10}]"
       },
       {
         "_partition": "Column",
         "_aspect": "refrigerator_failure",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"refrigerator_failure_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":\"Need Data\"}},\"_row_num\":8}]"
+        "_value": "[{\"choice_list_name\":\"refrigerator_failure_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":8}]"
       },
       {
         "_partition": "Column",
         "_aspect": "voltage_stabilizer_not_working_reason",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"voltage_stabilizer_not_working_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":\"Need Data\"}},\"_row_num\":12}]"
+        "_value": "[{\"choice_list_name\":\"voltage_stabilizer_not_working_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":12}]"
       },
       {
         "_partition": "Column",
         "_aspect": "voltage_stabilizer_replaced",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "voltage_stabilizer_replaced_reason",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"voltage_stabilizer_replaced_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":\"Need Data\"}},\"_row_num\":14}]"
+        "_value": "[{\"choice_list_name\":\"voltage_stabilizer_replaced_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":14}]"
       },
       {
         "_partition": "Column",
         "_aspect": "voltage_stabilizer_working",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "warranty_claim_been_made",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":\"Yes\"}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":\"No\"}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "FormType",
