@@ -35,7 +35,7 @@ function resumeFunc(state) {
         listViewLogic.showEditAndDeleteButtons(true, 'cold_rooms');
 
         var coldRoomTxt = odkCommon.localizeText(locale, "cold_room");
-        var modelTxt = odkCommon.localizeText(locale, "model");
+        var modelTxt = odkCommon.localizeText(locale, "model_no_colon");
         var hFacTxt = odkCommon.localizeText(locale, "health_facility");
 
         listViewLogic.setColIdsToDisplayInList(coldRoomTxt, 'tracking_id',
