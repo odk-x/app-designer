@@ -56,8 +56,9 @@ function cbSuccess(result) {
 
     var logPromise = new Promise(function(resolve, reject) {
         var logQuery = 'SELECT * FROM maintenance_logs WHERE maintenance_logs.refrigerator_id = ? ' +
-            'AND maintenance_logs._savepoint_type != ? ORDER BY date_serviced DESC';
-        var logParams = [refrigeratorsResultSet.get('_id'), 'INCOMPLETE'];
+            'AND maintenance_logs._savepoint_type != ? AND maintenance_logs._sync_state != ? ' +
+            'ORDER BY date_serviced DESC';
+        var logParams = [refrigeratorsResultSet.get('_id'), 'INCOMPLETE', util.deletedSyncState];
         odkData.arbitraryQuery('maintenance_logs', logQuery, logParams, null, null, resolve, reject);
     });
 

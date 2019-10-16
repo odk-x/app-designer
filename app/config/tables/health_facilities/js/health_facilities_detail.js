@@ -101,14 +101,16 @@ function cbSuccess(result) {
     }
 
     var refrigeratorCountPromise = new Promise(function(resolve, reject) {
-        var frigCntQuery = 'SELECT COUNT(*) AS refrigerator_cnt FROM refrigerators WHERE refrigerators.facility_row_id = ?';
-        var frigCntParams = [healthFacilityResultSet.get('_id')];
+        var frigCntQuery = 'SELECT COUNT(*) AS refrigerator_cnt FROM refrigerators ' +
+            'WHERE refrigerators.facility_row_id = ? AND refrigerators._sync_state != ?';
+        var frigCntParams = [healthFacilityResultSet.get('_id'), util.deletedSyncState];
         odkData.arbitraryQuery('refrigerators', frigCntQuery, frigCntParams, null, null, resolve, reject);
     });
 
     var coldRoomCountPromise = new Promise(function(resolve, reject) {
-        var crCntQuery = 'SELECT COUNT(*) AS cold_room_cnt FROM cold_rooms WHERE cold_rooms.facility_row_id = ?';
-        var crCntParams = [healthFacilityResultSet.get('_id')];
+        var crCntQuery = 'SELECT COUNT(*) AS cold_room_cnt FROM cold_rooms ' +
+            'WHERE cold_rooms.facility_row_id = ? AND cold_rooms._sync_state != ?';
+        var crCntParams = [healthFacilityResultSet.get('_id'), util.deletedSyncState];
         odkData.arbitraryQuery('cold_rooms', crCntQuery, crCntParams, null, null, resolve, reject);
     });
 

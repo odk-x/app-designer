@@ -6,8 +6,10 @@
 
 var listQuery = 'SELECT * FROM refrigerators ' +
     'JOIN health_facilities ON refrigerators.facility_row_id = health_facilities._id ' +
-    'LEFT JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id';
+    'LEFT JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id ' +
+    'WHERE refrigerators._sync_state != ?';
 
+var listQueryParams = [util.deletedSyncState];
 var searchParams = '(facility_name LIKE ? OR facility_id LIKE ? OR tracking_id LIKE ?)';
 
 function resumeFunc(state) {
@@ -23,6 +25,7 @@ function resumeFunc(state) {
         // set the parameters for the list view
         listViewLogic.setTableId('refrigerators');
         listViewLogic.setListQuery(listQuery);
+        listViewLogic.setListQueryParams(listQueryParams);
         listViewLogic.setSearchParams(searchParams);
         listViewLogic.setListElement('#list');
         listViewLogic.setSearchTextElement('#search');

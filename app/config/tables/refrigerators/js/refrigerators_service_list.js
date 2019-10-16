@@ -18,10 +18,11 @@
 var listQuery = 'SELECT * FROM refrigerators ' +
     'JOIN health_facilities ON refrigerators.facility_row_id = health_facilities._id ' +
     'LEFT JOIN refrigerator_types ON refrigerators.model_row_id = refrigerator_types._id WHERE ' +
+    '(refrigerators._sync_state != ?) AND ' +
     '(refrigerators.maintenance_priority = ? OR refrigerators.maintenance_priority = ? OR ' +
     'refrigerators.maintenance_priority = ? OR refrigerators.functional_status = ?)';
 
-var listQueryParams = ['high', 'medium', 'low', 'not_functioning'];
+var listQueryParams = [util.deletedSyncState, 'high', 'medium', 'low', 'not_functioning'];
 var searchParams = '(health_facilities.facility_name LIKE ? OR health_facilities.facility_id LIKE ? OR ' +
     'refrigerators.tracking_id LIKE ?)';
 

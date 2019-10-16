@@ -6,10 +6,11 @@
 
 var listQuery = 'SELECT * FROM cold_rooms ' +
     'JOIN health_facilities ON cold_rooms.facility_row_id = health_facilities._id WHERE ' +
+    '(cold_rooms._sync_state != ?) AND ' +
     '(cold_rooms.maintenance_priority = ? OR cold_rooms.maintenance_priority = ? OR ' +
     'cold_rooms.maintenance_priority = ? OR cold_rooms.functional_status = ?)';
 
-var listQueryParams = ['high', 'medium', 'low', 'not_functioning'];
+var listQueryParams = [util.deletedSyncState, 'high', 'medium', 'low', 'not_functioning'];
 var searchParams = '(health_facilities.facility_name LIKE ? OR health_facilities.facility_id LIKE ? OR ' +
     'cold_rooms.tracking_id LIKE ?)';
 

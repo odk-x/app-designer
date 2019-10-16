@@ -48,8 +48,9 @@ function cbSuccess(result) {
 
     var logPromise = new Promise(function(resolve, reject) {
         var logQuery = 'SELECT * FROM cold_room_maintenance_logs WHERE cold_room_maintenance_logs.cold_room_id = ? ' +
-            'AND cold_room_maintenance_logs._savepoint_type != ? ORDER BY date_serviced DESC';
-        var logParams = [coldRoomsResultSet.get('_id'), 'INCOMPLETE'];
+            'AND cold_room_maintenance_logs._savepoint_type != ? AND cold_room_maintenance_logs._sync_state != ? ' +
+            'ORDER BY date_serviced DESC';
+        var logParams = [coldRoomsResultSet.get('_id'), 'INCOMPLETE', util.deletedSyncState];
         odkData.arbitraryQuery('cold_room_maintenance_logs', logQuery, logParams, null, null, resolve, reject);
     });
 

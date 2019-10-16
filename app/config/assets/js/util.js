@@ -26,17 +26,18 @@ util.groupReadOnly = 'groupReadOnly';
 util.groupModify = 'groupModify';
 util.groupPrivileged = 'groupPrivileged';
 util.hiddenDefaultAccess = 'HIDDEN';
+util.deletedSyncState = 'deleted';
 
 // The maximum possible depth for a geographic hierarchy
 util.maxLevelAppDepth = 5;
 
 util.getMaxLevel = function() {
-    var queryStr = 'SELECT MAX(levelNumber) FROM geographic_regions';
+    var queryStr = 'SELECT MAX(levelNumber) FROM geographic_regions WHERE _sync_state != ?';
 
     return new Promise(function(resolve, reject) {
         odkData.arbitraryQuery('geographic_regions',
             queryStr,
-            null,
+            [util.deletedSyncState],
             null,
             null,
             resolve,
@@ -53,10 +54,11 @@ util.getMaxLevel = function() {
 };
 
 util.findAdminRegionLevel = function(adminRegion) {
-    var queryStr = 'SELECT MIN(levelNumber) from geographic_regions WHERE regionLevel1 = ?' +
-        ' OR regionLevel2 = ? OR regionLevel3 = ? OR regionLevel4 = ? OR regionLevel5 = ?';
+    var queryStr = 'SELECT MIN(levelNumber) from geographic_regions ' +
+        'WHERE _sync_state != ? AND ' +
+        '(regionLevel1 = ? OR regionLevel2 = ? OR regionLevel3 = ? OR regionLevel4 = ? OR regionLevel5 = ?)';
 
-    var queryParam = [];
+    var queryParam = [util.deletedSyncState];
     var i;
     for (i = 0; i < util.maxLevelAppDepth; i++) {
         queryParam.push(adminRegion);
@@ -88,8 +90,8 @@ util.findAdminRegionLevel = function(adminRegion) {
  */
 util.getNextAdminRegionsFromCurrAdminRegionPromise = function (nextLevel, currAdminRegion) {
     var regionLevelVal = util.regionLevel + nextLevel;
-    var queryStr = 'SELECT * FROM geographic_regions WHERE levelNumber = ?';
-    var queryParam = [nextLevel];
+    var queryStr = 'SELECT * FROM geographic_regions WHERE _sync_state != ? AND levelNumber = ?';
+    var queryParam = [util.deletedSyncState, nextLevel];
 
     var orderByStr = ' ORDER BY ' + regionLevelVal + ' ASC';
 
@@ -172,8 +174,8 @@ util.getFacilityCountByAdminRegion = function(adminRegionId) {
     return new Promise(function(resolve, reject) {
         var queryStr = 'SELECT COUNT(*) FROM health_facilities ' +
             'JOIN geographic_regions ON geographic_regions._id = health_facilities.admin_region_id ' +
-            'WHERE geographic_regions._id = ?';
-        var queryParam = [adminRegionId];
+            'WHERE health_facilities._sync_state != ? AND geographic_regions._id = ?';
+        var queryParam = [util.deletedSyncState, adminRegionId];
 
         odkData.arbitraryQuery('geographic_regions',
             queryStr,
@@ -238,14 +240,14 @@ util.getOneRefrigeratorRow = function() {
 }
 
 util.getFacilityTypesByAdminRegion = function(adminRegion, successCB, failureCB) {
-    var queryStr = 'SELECT facility_type, count(*) FROM health_facilities';
-    var whereStr = ' WHERE admin_region_id = ?';
+    var queryStr = 'SELECT facility_type, count(*) FROM health_facilities WHERE _sync_state != ?';
+    var andAdminRegionIdStr = ' AND admin_region_id = ?';
     var groupByStr = ' GROUP BY facility_type';
-    var queryParam = [];
+    var queryParam = [util.deletedSyncState];
 
     if (adminRegion !== null && adminRegion !== undefined && adminRegion.length > 0) {
-        queryParam = [adminRegion];
-        queryStr = queryStr + whereStr;
+        queryParam.push(adminRegion);
+        queryStr = queryStr + andAdminRegionIdStr;
     }
 
     queryStr = queryStr + groupByStr;

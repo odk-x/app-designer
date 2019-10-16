@@ -5,8 +5,9 @@
 'use strict';
 
 var listQuery = 'SELECT * FROM cold_room_maintenance_logs JOIN cold_rooms ON cold_rooms._id = ' +
-    'cold_room_maintenance_logs.cold_room_id';
+    'cold_room_maintenance_logs.cold_room_id WHERE cold_room_maintenance_logs._sync_state != ?';
 
+var listQueryParams = [util.deletedSyncState];
 var searchParams = '(cold_room_maintenance_logs.technician_name LIKE ?)';
 
 function resumeFunc(state) {
@@ -22,6 +23,7 @@ function resumeFunc(state) {
         // set the parameters for the list view
         listViewLogic.setTableId('cold_room_maintenance_logs');
         listViewLogic.setListQuery(listQuery);
+        listViewLogic.setListQueryParams(listQueryParams);
         listViewLogic.setSearchParams(searchParams);
         listViewLogic.setListElement('#list');
         listViewLogic.setSearchTextElement('#search');

@@ -4,8 +4,11 @@
 /* global $, odkCommon, odkData, odkTables, util, listViewLogic */
 'use strict';
 
-var listQuery = 'SELECT * FROM maintenance_logs JOIN refrigerators ON refrigerators._id = maintenance_logs.refrigerator_id';
+var listQuery = 'SELECT * FROM maintenance_logs ' +
+    'JOIN refrigerators ON refrigerators._id = maintenance_logs.refrigerator_id ' +
+    'WHERE maintenance_logs._sync_state != ?';
 
+var listQueryParams = [util.deletedSyncState];
 var searchParams = '(maintenance_logs.technician_name LIKE ?)';
 
 function resumeFunc(state) {
@@ -21,6 +24,7 @@ function resumeFunc(state) {
         // set the parameters for the list view
         listViewLogic.setTableId('maintenance_logs');
         listViewLogic.setListQuery(listQuery);
+        listViewLogic.setListQueryParams(listQueryParams);
         listViewLogic.setSearchParams(searchParams);
         listViewLogic.setListElement('#list');
         listViewLogic.setSearchTextElement('#search');

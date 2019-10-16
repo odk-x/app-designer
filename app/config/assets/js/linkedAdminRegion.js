@@ -4,7 +4,7 @@
 'use strict';
 /* global odkTables, util */
 
-var adminRegionQueryStr = 'admin_region_id = ?';
+var adminRegionQueryStr = 'admin_region_id = ? AND _sync_state != ?';
 
 function display() {
 
@@ -33,7 +33,8 @@ function display() {
         function() {
             var uriParams = util.getKeyToAppendToColdChainURL(util.adminRegionId, linkedRegionId);
              odkTables.openTableToMapView(null, 'health_facilities',
-                adminRegionQueryStr, [linkedRegionId], 'config/tables/health_facilities/html/hFacilities_list.html' + uriParams);
+                adminRegionQueryStr, [linkedRegionId, util.deletedSyncState],
+                 'config/tables/health_facilities/html/hFacilities_list.html' + uriParams);
         }
     );
 
@@ -95,8 +96,8 @@ function display() {
         function() {
             odkTables.openTableToListView(null,
                 'refrigerator_types',
-                null,
-                null,
+                '_sync_state != ?',
+                [util.deletedSyncState],
                 'config/tables/refrigerator_types/html/refrigerator_types_list.html');
         }
     );

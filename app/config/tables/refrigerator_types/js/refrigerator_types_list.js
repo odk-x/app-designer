@@ -4,7 +4,8 @@
 /* global $, odkCommon, odkData, odkTables, util, listViewLogic */
 'use strict';
 
-var listQuery = 'SELECT * FROM refrigerator_types';
+var listQuery = 'SELECT * FROM refrigerator_types WHERE _sync_state != ?';
+var listQueryParams = [util.deletedSyncState];
 
 var searchParams = '(catalog_id LIKE ? OR manufacturer LIKE ? OR model_id LIKE ?)';
 
@@ -21,6 +22,7 @@ function resumeFunc(state) {
         // set the parameters for the list view
         listViewLogic.setTableId('refrigerator_types');
         listViewLogic.setListQuery(listQuery);
+        listViewLogic.setListQueryParams(listQueryParams);
         listViewLogic.setSearchParams(searchParams);
         listViewLogic.setListElement('#list');
         listViewLogic.setSearchTextElement('#search');
@@ -34,7 +36,7 @@ function resumeFunc(state) {
         var catalogIDTxt = odkCommon.localizeText(locale, "catalog_id_no_colon");
         var manTxt = odkCommon.localizeText(locale, "manufacturer_no_colon");
         var modelIDTxt = odkCommon.localizeText(locale, "model_id_no_colon");
-        listViewLogic.setColIdsToDisplayInList(catalogIDTxt, 'catalog_id', 
+        listViewLogic.setColIdsToDisplayInList(catalogIDTxt, 'catalog_id',
             manTxt, 'manufacturer', modelIDTxt, 'model_id');
     }
 

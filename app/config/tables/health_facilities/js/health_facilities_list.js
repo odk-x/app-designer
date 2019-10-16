@@ -4,8 +4,9 @@
 /* global $, odkCommon, odkData, odkTables, util, listViewLogic */
 'use strict';
 
-var listQuery = 'SELECT * FROM health_facilities';
+var listQuery = 'SELECT * FROM health_facilities WHERE _sync_state != ?';
 
+var listQueryParams = [util.deletedSyncState];
 var searchParams = '(facility_id LIKE ? OR facility_name LIKE ?)';
 
 function resumeFunc(state) {
@@ -21,6 +22,7 @@ function resumeFunc(state) {
         // set the parameters for the list view
         listViewLogic.setTableId('health_facilities');
         listViewLogic.setListQuery(listQuery);
+        listViewLogic.setListQueryParams(listQueryParams);
         listViewLogic.setSearchParams(searchParams);
         listViewLogic.setListElement('#list');
         listViewLogic.setSearchTextElement('#search');

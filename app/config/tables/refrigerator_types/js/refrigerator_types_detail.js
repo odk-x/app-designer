@@ -21,7 +21,8 @@ function cbSuccess(result) {
 
     refrigeratorTypeResultSet = result;
 
-    odkData.query('refrigerators', 'model_row_id = ?', [refrigeratorTypeResultSet.get('_id')],
+    odkData.query('refrigerators', 'model_row_id = ? AND _sync_state != ?',
+        [refrigeratorTypeResultSet.get('_id'), util.deletedSyncState],
         null, null, null, null, null, null, true, refrigeratorsCBSuccess, refrigeratorsCBFailure);
 
 }
