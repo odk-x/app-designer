@@ -110,8 +110,8 @@ h1 {
   color: white;
 }
 
-h3 { 
-  font-size: 15pt; 
+h3 {
+  font-size: 15pt;
   margin: 2px;
   text-align: center;
   font-weight: normal;
@@ -139,4 +139,8 @@ sup {
 
 .hideButton {
     display: none;
+}
+
+.overflowWrap {
+    overflow-wrap: break-word;
 }

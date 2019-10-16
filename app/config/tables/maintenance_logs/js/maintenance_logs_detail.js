@@ -17,14 +17,24 @@ function cbFrigSuccess(result) {
     util.showIdForDetail('#date_serviced', 'date_serviced', maintenanceLogsResultSet, true);
     util.showIdForDetail('#maint_type', 'type_of_maintenance', maintenanceLogsResultSet, true);
 
-    var spareParts = maintenanceLogsResultSet.get('spare_parts');
-    if (spareParts !== null && spareParts !== undefined) {
-        $('#spare_parts').text(maintenanceLogsResultSet.get('spare_parts'));
-    }
+    showIdArrayForDetail('#spare_parts_electrical', maintenanceLogsResultSet, 'spare_parts_electrical');
+    showIdArrayForDetail('#spare_parts_hardware', maintenanceLogsResultSet, 'spare_parts_hardware');
+    showIdArrayForDetail('#spare_parts_monitoring', maintenanceLogsResultSet, 'spare_parts_monitoring');
+    showIdArrayForDetail('#spare_parts_power', maintenanceLogsResultSet, 'spare_parts_power');
+    showIdArrayForDetail('#spare_parts_refrigeration', maintenanceLogsResultSet, 'spare_parts_refrigeration');
+    showIdArrayForDetail('#spare_parts_solar', maintenanceLogsResultSet, 'spare_parts_solar');
 
     util.showIdForDetail('#addtl_spare_parts', 'addtl_spare_parts', maintenanceLogsResultSet, true);
     util.showIdForDetail('#notes', 'notes', maintenanceLogsResultSet, false);
-    
+
+}
+
+function showIdArrayForDetail(htmlElementId, resultSet, elementKey) {
+    var elementValue = resultSet.get(elementKey)
+
+    if (elementValue !== null && elementValue !== undefined) {
+        $(htmlElementId).text(elementValue);
+    }
 }
 
 function onEditLog() {
@@ -50,7 +60,7 @@ function onDeleteLog() {
                 maintenanceLogsResultSet.getTableId(),
                 null,
                 maintenanceLogsResultSet.getRowId(0),
-                cbDeleteSuccess, cbDeleteFailure);           
+                cbDeleteSuccess, cbDeleteFailure);
         }
     }
 }
@@ -73,7 +83,7 @@ function cbSuccess(result) {
         deleteButton.removeClass('hideButton');
     }
 
-    odkData.query('refrigerators', '_id = ?', [maintenanceLogsResultSet.get('refrigerator_id')], 
+    odkData.query('refrigerators', '_id = ?', [maintenanceLogsResultSet.get('refrigerator_id')],
         null, null, null, null, null, null, true, cbFrigSuccess, cbFrigFailure);
 }
 
@@ -90,9 +100,15 @@ function display() {
     $('#reason-not-work').text(odkCommon.localizeText(locale, "reason_not_working"));
     $('#date-srv').text(odkCommon.localizeText(locale, "date_serviced"));
     $('#type-of-mnt').text(odkCommon.localizeText(locale, "type_of_maintenance"));
-    $('#sp-prt').text(odkCommon.localizeText(locale, "spare_parts"));
     $('#add-sp-prt').text(odkCommon.localizeText(locale, "additional_spare_parts"));
     $('#notes-lbl').text(odkCommon.localizeText(locale, "notes"));
+
+    $('#sp-prt-elec').text(odkCommon.localizeText(locale, "spare_parts_electrical"));
+    $('#sp-prt-hard').text(odkCommon.localizeText(locale, "spare_parts_hardware"));
+    $('#sp-prt-mon').text(odkCommon.localizeText(locale, "spare_parts_monitoring"));
+    $('#sp-prt-pow').text(odkCommon.localizeText(locale, "spare_parts_power"));
+    $('#sp-prt-ref').text(odkCommon.localizeText(locale, "spare_parts_refrigeration"));
+    $('#sp-prt-sol').text(odkCommon.localizeText(locale, "spare_parts_solar"));
 
     $('#edit-log').text(odkCommon.localizeText(locale, "edit_log"));
     $('#del-log').text(odkCommon.localizeText(locale, "delete_log"));

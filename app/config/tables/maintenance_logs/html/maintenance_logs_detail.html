@@ -24,15 +24,27 @@
             <h3 id="mnt-log-info">Maintenance Log Information</span></h3>
         </div>
 
-
         <p><span class="detailHdr" id="frig-id">Refrigerator ID:</span> <span id="refrigerator_id"></span>
         <p><span class="detailHdr" id="work-stat">Functional Status:</span> <span id="functional_status"></span></p>
-        <p><span class="detailHdr" id="reason-not-work">Reason Not Working:</span> <span id="reason_not_working"></span></p>
+        <p><span class="detailHdr" id="reason-not-work">Reason Not Working:</span>
+            <span id="reason_not_working"></span></p>
         <p><span class="detailHdr" id="date-srv">Date Serviced:</span> <span id="date_serviced"></span></p>
         <p><span class="detailHdr" id="type-of-mnt">Type of Maintenance:</span> <span id="maint_type"></span></p>
-        <p><span class="detailHdr" id="sp-prt">Spare Parts:</span> <span id="spare_parts"></span></p>
-        <p><span class="detailHdr" id="add-sp-prt">Additional Spare Parts:</span> <span id="addtl_spare_parts"></span></p>
-        <p><span class="detailHdr" id="notes-lbl">Notes:</span> <span id="notes"></span></p>
+        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-elec">Spare Parts (Electrical):</span>
+            <span id="spare_parts_electrical"></span></p>
+        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-hard">Spare Parts (Hardware):</span>
+            <span id="spare_parts_hardware"></span></p>
+        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-mon">Spare Parts (Monitoring):</span>
+            <span id="spare_parts_monitoring"></span></p>
+        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-pow">Spare Parts (Power):</span>
+            <span id="spare_parts_power"></span></p>
+        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-ref">Spare Parts (Refrigeration):</span>
+            <span id="spare_parts_refrigeration"></span></p>
+        <p class="overflowWrap"><span class="detailHdr" id="sp-prt-sol">Spare Parts (Solar):</span>
+            <span id="spare_parts_solar"></span></p>
+        <p class="overflowWrap"><span class="detailHdr" id="add-sp-prt">Additional Spare Parts:</span>
+            <span id="addtl_spare_parts"></span></p>
+        <p class="overflowWrap"><span class="detailHdr" id="notes-lbl">Notes:</span> <span id="notes"></span></p>
 
         <div id="editLogBtn" class="button hideButton">
             <h3 id="edit-log" href="#" onclick="onEditLog()">Edit Log</h3>

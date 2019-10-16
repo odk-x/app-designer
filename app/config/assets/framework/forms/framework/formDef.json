@@ -2823,6 +2823,54 @@
           "es": "Número de serie:"
         },
         "_row_num": 150
+      },
+      {
+        "string_token": "spare_parts_electrical",
+        "text": {
+          "default": "Spare Parts (Electrical):",
+          "es": "Piezas De Repuesto (Eléctrico):"
+        },
+        "_row_num": 151
+      },
+      {
+        "string_token": "spare_parts_hardware",
+        "text": {
+          "default": "Spare Parts (Hardware):",
+          "es": "Piezas De Repuesto (Hardware):"
+        },
+        "_row_num": 152
+      },
+      {
+        "string_token": "spare_parts_monitoring",
+        "text": {
+          "default": "Spare Parts (Monitoring):",
+          "es": "Piezas De Repuesto (Vigilancia):"
+        },
+        "_row_num": 153
+      },
+      {
+        "string_token": "spare_parts_power",
+        "text": {
+          "default": "Spare Parts (Power):",
+          "es": "Piezas De Repuesto (Energía):"
+        },
+        "_row_num": 154
+      },
+      {
+        "string_token": "spare_parts_refrigeration",
+        "text": {
+          "default": "Spare Parts (Refrigeration):",
+          "es": "Piezas De Repuesto (Refrigeración):"
+        },
+        "_row_num": 155
+      },
+      {
+        "string_token": "spare_parts_solar",
+        "text": {
+          "default": "Spare Parts (Solar):",
+          "es": "Piezas De Repuesto (Solar):"
+        },
+        "_row_num": 156
       }
     ]
   },
@@ -5621,6 +5669,54 @@
             "es": "Número de serie:"
           },
           "_row_num": 150
+        },
+        "spare_parts_electrical": {
+          "string_token": "spare_parts_electrical",
+          "text": {
+            "default": "Spare Parts (Electrical):",
+            "es": "Piezas De Repuesto (Eléctrico):"
+          },
+          "_row_num": 151
+        },
+        "spare_parts_hardware": {
+          "string_token": "spare_parts_hardware",
+          "text": {
+            "default": "Spare Parts (Hardware):",
+            "es": "Piezas De Repuesto (Hardware):"
+          },
+          "_row_num": 152
+        },
+        "spare_parts_monitoring": {
+          "string_token": "spare_parts_monitoring",
+          "text": {
+            "default": "Spare Parts (Monitoring):",
+            "es": "Piezas De Repuesto (Vigilancia):"
+          },
+          "_row_num": 153
+        },
+        "spare_parts_power": {
+          "string_token": "spare_parts_power",
+          "text": {
+            "default": "Spare Parts (Power):",
+            "es": "Piezas De Repuesto (Energía):"
+          },
+          "_row_num": 154
+        },
+        "spare_parts_refrigeration": {
+          "string_token": "spare_parts_refrigeration",
+          "text": {
+            "default": "Spare Parts (Refrigeration):",
+            "es": "Piezas De Repuesto (Refrigeración):"
+          },
+          "_row_num": 155
+        },
+        "spare_parts_solar": {
+          "string_token": "spare_parts_solar",
+          "text": {
+            "default": "Spare Parts (Solar):",
+            "es": "Piezas De Repuesto (Solar):"
+          },
+          "_row_num": 156
         }
       },
       "_locales": {
