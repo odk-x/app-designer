@@ -1239,6 +1239,38 @@ window.odkCommonDefinitions = {
         "es": "Piezas De Repuesto (Solar):"
       },
       "_row_num": 156
+    },
+    "hours_per_day": {
+      "string_token": "hours_per_day",
+      "text": {
+        "default": "hrs/day",
+        "es": "hrs/día"
+      },
+      "_row_num": 157
+    },
+    "weeks": {
+      "string_token": "weeks",
+      "text": {
+        "default": "weeks",
+        "es": "semanas"
+      },
+      "_row_num": 158
+    },
+    "km": {
+      "string_token": "km",
+      "text": {
+        "default": "km",
+        "es": "km"
+      },
+      "_row_num": 159
+    },
+    "liters_unit": {
+      "string_token": "liters_unit",
+      "text": {
+        "default": "L",
+        "es": "L"
+      },
+      "_row_num": 160
     }
   },
   "_locales": {

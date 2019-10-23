@@ -28,12 +28,13 @@ function cbSuccess(result) {
 }
 
 function cbFailure(error) {
-    
+
     console.log('cbFailure: failed with error: ' + error);
 
 }
 
 function refrigeratorsCBSuccess(invData) {
+    var locale = odkCommon.getPreferredLocale();
 
     $('#model_name').text(refrigeratorTypeResultSet.get('model_id'));
     $('#catalog_id').text(refrigeratorTypeResultSet.get('catalog_id'));
@@ -44,15 +45,21 @@ function refrigeratorsCBSuccess(invData) {
     // $('#power_sources').text(util.formatDisplayText(powerArray.join(', ')));
     $('#power_sources').text(refrigeratorTypeResultSet.get('power_source'));
 
-    $('#r_gross_vol').text(refrigeratorTypeResultSet.get('refrigerator_gross_volume') + ' m');
-    $('#f_gross_vol').text(refrigeratorTypeResultSet.get('freezer_gross_volume') + ' m');
+    $('#r_gross_vol').text(refrigeratorTypeResultSet.get('refrigerator_gross_volume') + ' ' +
+        odkCommon.localizeText(locale, "liters_unit"));
+
+    $('#f_gross_vol').text(refrigeratorTypeResultSet.get('freezer_gross_volume') + ' ' +
+        odkCommon.localizeText(locale, "liters_unit"));
 
     $('#equipment_type').text(util.formatDisplayText(
         refrigeratorTypeResultSet.get('equipment_type')));
     $('#climate_zone').text(util.formatDisplayText(
         refrigeratorTypeResultSet.get('climate_zone')));
-    $('#r_net_vol').text(refrigeratorTypeResultSet.get('refrigerator_net_volume') + ' m');
-    $('#f_net_vol').text(refrigeratorTypeResultSet.get('freezer_net_volume') + ' m');
+
+    $('#r_net_vol').text(refrigeratorTypeResultSet.get('refrigerator_net_volume') + ' ' +
+        odkCommon.localizeText(locale, "liters_unit"));
+    $('#f_net_vol').text(refrigeratorTypeResultSet.get('freezer_net_volume') + ' ' +
+        odkCommon.localizeText(locale, "liters_unit"));
 
     var uriRelative = refrigeratorTypeResultSet.get('refrigerator_picture_uriFragment');
     var src = '';
@@ -107,7 +114,7 @@ function onLinkClick() {
     if (!$.isEmptyObject(refrigeratorTypeResultSet))
     {
         var modelRowIdQueryParams = util.getKeyToAppendToColdChainURL(util.modelRowId, refrigeratorTypeResultSet.get('_id'));
-        odkTables.launchHTML(null, 
+        odkTables.launchHTML(null,
             'config/tables/refrigerators/html/refrigerators_list.html' + modelRowIdQueryParams);
     }
 }
