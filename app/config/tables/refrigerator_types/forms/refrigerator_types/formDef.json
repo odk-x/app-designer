@@ -107,8 +107,8 @@
           },
           "hint": {
             "text": {
-              "default": "(cubic meters)",
-              "es": "(metro cúbico)"
+              "default": "(liters)",
+              "es": "(litros)"
             }
           }
         },
@@ -132,8 +132,8 @@
           },
           "hint": {
             "text": {
-              "default": "(cubic meters)",
-              "es": "(metro cúbico)"
+              "default": "(liters)",
+              "es": "(litros)"
             }
           }
         },
@@ -157,8 +157,8 @@
           },
           "hint": {
             "text": {
-              "default": "(cubic meters)",
-              "es": "(metro cúbico)"
+              "default": "(liters)",
+              "es": "(litros)"
             }
           }
         },
@@ -182,8 +182,8 @@
           },
           "hint": {
             "text": {
-              "default": "(cubic meters)",
-              "es": "(metro cúbico)"
+              "default": "(liters)",
+              "es": "(litros)"
             }
           }
         },
@@ -1212,8 +1212,8 @@
               },
               "hint": {
                 "text": {
-                  "default": "(cubic meters)",
-                  "es": "(metro cúbico)"
+                  "default": "(liters)",
+                  "es": "(litros)"
                 }
               }
             },
@@ -1242,8 +1242,8 @@
               },
               "hint": {
                 "text": {
-                  "default": "(cubic meters)",
-                  "es": "(metro cúbico)"
+                  "default": "(liters)",
+                  "es": "(litros)"
                 }
               }
             },
@@ -1272,8 +1272,8 @@
               },
               "hint": {
                 "text": {
-                  "default": "(cubic meters)",
-                  "es": "(metro cúbico)"
+                  "default": "(liters)",
+                  "es": "(litros)"
                 }
               }
             },
@@ -1302,8 +1302,8 @@
               },
               "hint": {
                 "text": {
-                  "default": "(cubic meters)",
-                  "es": "(metro cúbico)"
+                  "default": "(liters)",
+                  "es": "(litros)"
                 }
               }
             },

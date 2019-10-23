@@ -213,6 +213,12 @@
               "default": "Enter the storage temperature:",
               "es": "Ingrese la temperatura de almacenamiento:"
             }
+          },
+          "hint": {
+            "text": {
+              "default": "(degrees Celsius)",
+              "es": "(grados Celsius)"
+            }
           }
         },
         "_row_num": 17
@@ -232,6 +238,12 @@
               "default": "Enter the net volume:",
               "es": "Ingrese el volumen neto:"
             }
+          },
+          "hint": {
+            "text": {
+              "default": "(cubic meters)",
+              "es": "(metros cúbicos)"
+            }
           }
         },
         "_row_num": 18
@@ -250,6 +262,12 @@
             "text": {
               "default": "Enter the dimensions:",
               "es": "Ingrese las dimensiones:"
+            }
+          },
+          "hint": {
+            "text": {
+              "default": "(meters)",
+              "es": "(metros)"
             }
           }
         },
@@ -1801,6 +1819,12 @@
                   "default": "Enter the storage temperature:",
                   "es": "Ingrese la temperatura de almacenamiento:"
                 }
+              },
+              "hint": {
+                "text": {
+                  "default": "(degrees Celsius)",
+                  "es": "(grados Celsius)"
+                }
               }
             },
             "_row_num": 17,
@@ -1825,6 +1849,12 @@
                   "default": "Enter the net volume:",
                   "es": "Ingrese el volumen neto:"
                 }
+              },
+              "hint": {
+                "text": {
+                  "default": "(cubic meters)",
+                  "es": "(metros cúbicos)"
+                }
               }
             },
             "_row_num": 18,
@@ -1848,6 +1878,12 @@
                 "text": {
                   "default": "Enter the dimensions:",
                   "es": "Ingrese las dimensiones:"
+                }
+              },
+              "hint": {
+                "text": {
+                  "default": "(meters)",
+                  "es": "(metros)"
                 }
               }
             },

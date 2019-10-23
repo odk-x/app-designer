@@ -190,7 +190,7 @@
       },
       {
         "clause": "if",
-        "condition": "(selected(data('electricity_source'), 'grid') || selected(data('electricity_source'), 'both'))",
+        "condition": "(selected(data('electricity_source'), 'grid') || selected(data('electricity_source'), 'both_grid_and_generator') || selected(data('electricity_source'), 'both_grid_and_solar'))",
         "_row_num": 17
       },
       {
@@ -208,6 +208,12 @@
             "text": {
               "default": "Choose the grid availability",
               "es": "Disponibilidad del red de energía"
+            }
+          },
+          "hint": {
+            "text": {
+              "default": "(hours per day)",
+              "es": "(horas por día)"
             }
           }
         },
@@ -259,6 +265,12 @@
             "text": {
               "default": "What is the distance to the nearest supply point?",
               "es": "Distancia al más proximo punto de reabastecimiento?"
+            }
+          },
+          "hint": {
+            "text": {
+              "default": "(kilometers)",
+              "es": "(kilómetros)"
             }
           }
         },
@@ -2841,6 +2853,12 @@
                   "default": "Choose the grid availability",
                   "es": "Disponibilidad del red de energía"
                 }
+              },
+              "hint": {
+                "text": {
+                  "default": "(hours per day)",
+                  "es": "(horas por día)"
+                }
               }
             },
             "_row_num": 18,
@@ -2889,6 +2907,12 @@
                 "text": {
                   "default": "What is the distance to the nearest supply point?",
                   "es": "Distancia al más proximo punto de reabastecimiento?"
+                }
+              },
+              "hint": {
+                "text": {
+                  "default": "(kilometers)",
+                  "es": "(kilómetros)"
                 }
               }
             },
@@ -3211,7 +3235,7 @@
               "__rowNum__": 20,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\nif ((selected(data('electricity_source'), 'grid') || selected(data('electricity_source'), 'both'))) {\nactivePromptIndicies.push(8);\n}\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(7);\nif ((selected(data('electricity_source'), 'grid') || selected(data('electricity_source'), 'both_grid_and_generator') || selected(data('electricity_source'), 'both_grid_and_solar'))) {\nactivePromptIndicies.push(8);\n}\nactivePromptIndicies.push(9);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 3
           },
           {
