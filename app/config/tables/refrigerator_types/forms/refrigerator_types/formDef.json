@@ -420,6 +420,45 @@
         "_row_num": 14
       },
       {
+        "choice_list_name": "equipment_types",
+        "data_value": "refrigerator",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Refrigerator",
+              "es": "Frigorífico"
+            }
+          }
+        },
+        "_row_num": 15
+      },
+      {
+        "choice_list_name": "equipment_types",
+        "data_value": "freezer",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Freezer",
+              "es": "Congelador"
+            }
+          }
+        },
+        "_row_num": 16
+      },
+      {
+        "choice_list_name": "equipment_types",
+        "data_value": "refrigerator_freezer",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Refrigerator/Freezer",
+              "es": "Frigorífico/Congelador"
+            }
+          }
+        },
+        "_row_num": 17
+      },
+      {
         "choice_list_name": "climate_zones",
         "data_value": "temperate",
         "display": {
@@ -430,7 +469,7 @@
             }
           }
         },
-        "_row_num": 16
+        "_row_num": 19
       },
       {
         "choice_list_name": "climate_zones",
@@ -443,7 +482,7 @@
             }
           }
         },
-        "_row_num": 17
+        "_row_num": 20
       }
     ],
     "properties": [
@@ -853,6 +892,45 @@
             }
           },
           "_row_num": 14
+        },
+        {
+          "choice_list_name": "equipment_types",
+          "data_value": "refrigerator",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Refrigerator",
+                "es": "Frigorífico"
+              }
+            }
+          },
+          "_row_num": 15
+        },
+        {
+          "choice_list_name": "equipment_types",
+          "data_value": "freezer",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Freezer",
+                "es": "Congelador"
+              }
+            }
+          },
+          "_row_num": 16
+        },
+        {
+          "choice_list_name": "equipment_types",
+          "data_value": "refrigerator_freezer",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Refrigerator/Freezer",
+                "es": "Frigorífico/Congelador"
+              }
+            }
+          },
+          "_row_num": 17
         }
       ],
       "climate_zones": [
@@ -867,7 +945,7 @@
               }
             }
           },
-          "_row_num": 16
+          "_row_num": 19
         },
         {
           "choice_list_name": "climate_zones",
@@ -880,7 +958,7 @@
               }
             }
           },
-          "_row_num": 17
+          "_row_num": 20
         }
       ]
     },
@@ -2076,7 +2154,7 @@
         "_aspect": "climate_zone",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"climate_zones\",\"data_value\":\"temperate\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperate\",\"es\":\"Templado\"}}},\"_row_num\":16},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"hot\",\"display\":{\"title\":{\"text\":{\"default\":\"Hot\",\"es\":\"Caliente\"}}},\"_row_num\":17}]"
+        "_value": "[{\"choice_list_name\":\"climate_zones\",\"data_value\":\"temperate\",\"display\":{\"title\":{\"text\":{\"default\":\"Temperate\",\"es\":\"Templado\"}}},\"_row_num\":19},{\"choice_list_name\":\"climate_zones\",\"data_value\":\"hot\",\"display\":{\"title\":{\"text\":{\"default\":\"Hot\",\"es\":\"Caliente\"}}},\"_row_num\":20}]"
       },
       {
         "_partition": "Column",
@@ -2090,7 +2168,7 @@
         "_aspect": "equipment_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Chest Refrigerator\",\"es\":\"Frigorífico de baúl\"}}},\"_row_num\":8},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_freezer\",\"display\":{\"title\":{\"text\":{\"default\":\"Chest Freezer\",\"es\":\"Congelador de baúl\"}}},\"_row_num\":9},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"upright_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Upright Refrigerator\",\"es\":\"Frigorífico fijo\"}}},\"_row_num\":10},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_pack_freezer\",\"display\":{\"title\":{\"text\":{\"default\":\"Ice Pack Freezer\",\"es\":\"Congelador de bloque de hielo\"}}},\"_row_num\":11},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_lined_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Ice Lined Refrigerator\",\"es\":\"Congelador lineado con hielo\"}}},\"_row_num\":12},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_photovoltaic_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar Photovoltaic Refrigerator\",\"es\":\"Frigorífico de solár\"}}},\"_row_num\":13},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_thermal_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar Thermal Refrigerator\",\"es\":\"Frigorífico termal\"}}},\"_row_num\":14}]"
+        "_value": "[{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Chest Refrigerator\",\"es\":\"Frigorífico de baúl\"}}},\"_row_num\":8},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"chest_freezer\",\"display\":{\"title\":{\"text\":{\"default\":\"Chest Freezer\",\"es\":\"Congelador de baúl\"}}},\"_row_num\":9},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"upright_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Upright Refrigerator\",\"es\":\"Frigorífico fijo\"}}},\"_row_num\":10},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_pack_freezer\",\"display\":{\"title\":{\"text\":{\"default\":\"Ice Pack Freezer\",\"es\":\"Congelador de bloque de hielo\"}}},\"_row_num\":11},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"ice_lined_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Ice Lined Refrigerator\",\"es\":\"Congelador lineado con hielo\"}}},\"_row_num\":12},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_photovoltaic_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar Photovoltaic Refrigerator\",\"es\":\"Frigorífico de solár\"}}},\"_row_num\":13},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"solar_thermal_refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar Thermal Refrigerator\",\"es\":\"Frigorífico termal\"}}},\"_row_num\":14},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"refrigerator\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigerator\",\"es\":\"Frigorífico\"}}},\"_row_num\":15},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"freezer\",\"display\":{\"title\":{\"text\":{\"default\":\"Freezer\",\"es\":\"Congelador\"}}},\"_row_num\":16},{\"choice_list_name\":\"equipment_types\",\"data_value\":\"refrigerator_freezer\",\"display\":{\"title\":{\"text\":{\"default\":\"Refrigerator/Freezer\",\"es\":\"Frigorífico/Congelador\"}}},\"_row_num\":17}]"
       },
       {
         "_partition": "Column",
