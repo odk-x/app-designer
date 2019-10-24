@@ -422,45 +422,18 @@
         "display": {
           "title": {
             "text": {
-              "default": "Number of cold boxes at facility",
-              "es": "Número de cajas frías en la facilidad"
+              "default": "Total number of cold boxes at facility",
+              "es": "Número total de cajas frías en la facilidad"
             }
           },
           "prompt": {
             "text": {
-              "default": "Number of cold boxes at facility?",
-              "es": "Número de cajas frías en la facilidad?"
+              "default": "Total number of cold boxes at facility?",
+              "es": "Número total de cajas frías en la facilidad?"
             }
           }
         },
         "_row_num": 36
-      },
-      {
-        "type": "integer",
-        "name": "number_of_vaccine_carriers",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Number of vaccine carriers at facility",
-              "es": "Número de portadores de vacunas en la facilidad"
-            }
-          },
-          "prompt": {
-            "text": {
-              "default": "Number of vaccine carriers at facility?",
-              "es": "Número de portadores de vacunas en la facilidad?"
-            }
-          }
-        },
-        "_row_num": 37
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 38
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 39
       },
       {
         "type": "integer",
@@ -476,6 +449,33 @@
             "text": {
               "default": "Number of freeze safe cold boxes at facility?",
               "es": "Número de cajas frías a congelación segura en la facilidad?"
+            }
+          }
+        },
+        "_row_num": 37
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 38
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 39
+      },
+      {
+        "type": "integer",
+        "name": "number_of_vaccine_carriers",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Total number of vaccine carriers at facility",
+              "es": "Número total de portadores de vacunas en la facilidad"
+            }
+          },
+          "prompt": {
+            "text": {
+              "default": "Total number of vaccine carriers at facility?",
+              "es": "Número total de portadores de vacunas en la facilidad?"
             }
           }
         },
@@ -2573,32 +2573,16 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Number of cold boxes at facility",
-            "es": "Número de cajas frías en la facilidad"
+            "default": "Total number of cold boxes at facility",
+            "es": "Número total de cajas frías en la facilidad"
           }
         },
         "elementKey": "number_of_cold_boxes"
       },
-      "number_of_vaccine_carriers": {
-        "_defn": [
-          {
-            "_row_num": 37,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "displayName": {
-          "text": {
-            "default": "Number of vaccine carriers at facility",
-            "es": "Número de portadores de vacunas en la facilidad"
-          }
-        },
-        "elementKey": "number_of_vaccine_carriers"
-      },
       "number_of_fs_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -2610,6 +2594,22 @@
           }
         },
         "elementKey": "number_of_fs_cold_boxes"
+      },
+      "number_of_vaccine_carriers": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Total number of vaccine carriers at facility",
+            "es": "Número total de portadores de vacunas en la facilidad"
+          }
+        },
+        "elementKey": "number_of_vaccine_carriers"
       },
       "number_of_fs_vaccine_carriers": {
         "_defn": [
@@ -3075,14 +3075,14 @@
             "display": {
               "title": {
                 "text": {
-                  "default": "Number of cold boxes at facility",
-                  "es": "Número de cajas frías en la facilidad"
+                  "default": "Total number of cold boxes at facility",
+                  "es": "Número total de cajas frías en la facilidad"
                 }
               },
               "prompt": {
                 "text": {
-                  "default": "Number of cold boxes at facility?",
-                  "es": "Número de cajas frías en la facilidad?"
+                  "default": "Total number of cold boxes at facility?",
+                  "es": "Número total de cajas frías en la facilidad?"
                 }
               }
             },
@@ -3092,30 +3092,6 @@
             "_type": "integer",
             "_branch_label_enclosing_screen": "survey/_screen35",
             "promptIdx": 17
-          },
-          {
-            "type": "integer",
-            "name": "number_of_vaccine_carriers",
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Number of vaccine carriers at facility",
-                  "es": "Número de portadores de vacunas en la facilidad"
-                }
-              },
-              "prompt": {
-                "text": {
-                  "default": "Number of vaccine carriers at facility?",
-                  "es": "Número de portadores de vacunas en la facilidad?"
-                }
-              }
-            },
-            "_row_num": 37,
-            "__rowNum__": 36,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen35",
-            "promptIdx": 18
           },
           {
             "type": "integer",
@@ -3131,6 +3107,30 @@
                 "text": {
                   "default": "Number of freeze safe cold boxes at facility?",
                   "es": "Número de cajas frías a congelación segura en la facilidad?"
+                }
+              }
+            },
+            "_row_num": 37,
+            "__rowNum__": 36,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen35",
+            "promptIdx": 18
+          },
+          {
+            "type": "integer",
+            "name": "number_of_vaccine_carriers",
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Total number of vaccine carriers at facility",
+                  "es": "Número total de portadores de vacunas en la facilidad"
+                }
+              },
+              "prompt": {
+                "text": {
+                  "default": "Total number of vaccine carriers at facility?",
+                  "es": "Número total de portadores de vacunas en la facilidad?"
                 }
               }
             },
@@ -3905,8 +3905,8 @@
         "type": "integer",
         "displayName": {
           "text": {
-            "default": "Number of cold boxes at facility",
-            "es": "Número de cajas frías en la facilidad"
+            "default": "Total number of cold boxes at facility",
+            "es": "Número total de cajas frías en la facilidad"
           }
         },
         "elementKey": "number_of_cold_boxes",
@@ -3914,29 +3914,10 @@
         "elementSet": "data",
         "elementPath": "number_of_cold_boxes"
       },
-      "number_of_vaccine_carriers": {
-        "_defn": [
-          {
-            "_row_num": 37,
-            "section_name": "survey"
-          }
-        ],
-        "type": "integer",
-        "displayName": {
-          "text": {
-            "default": "Number of vaccine carriers at facility",
-            "es": "Número de portadores de vacunas en la facilidad"
-          }
-        },
-        "elementKey": "number_of_vaccine_carriers",
-        "elementName": "number_of_vaccine_carriers",
-        "elementSet": "data",
-        "elementPath": "number_of_vaccine_carriers"
-      },
       "number_of_fs_cold_boxes": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -3951,6 +3932,25 @@
         "elementName": "number_of_fs_cold_boxes",
         "elementSet": "data",
         "elementPath": "number_of_fs_cold_boxes"
+      },
+      "number_of_vaccine_carriers": {
+        "_defn": [
+          {
+            "_row_num": 40,
+            "section_name": "survey"
+          }
+        ],
+        "type": "integer",
+        "displayName": {
+          "text": {
+            "default": "Total number of vaccine carriers at facility",
+            "es": "Número total de portadores de vacunas en la facilidad"
+          }
+        },
+        "elementKey": "number_of_vaccine_carriers",
+        "elementName": "number_of_vaccine_carriers",
+        "elementSet": "data",
+        "elementPath": "number_of_vaccine_carriers"
       },
       "number_of_fs_vaccine_carriers": {
         "_defn": [
@@ -4265,7 +4265,7 @@
         "_aspect": "number_of_cold_boxes",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Number of cold boxes at facility\",\"es\":\"Número de cajas frías en la facilidad\"}}"
+        "_value": "{\"text\":{\"default\":\"Total number of cold boxes at facility\",\"es\":\"Número total de cajas frías en la facilidad\"}}"
       },
       {
         "_partition": "Column",
@@ -4286,7 +4286,7 @@
         "_aspect": "number_of_vaccine_carriers",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Number of vaccine carriers at facility\",\"es\":\"Número de portadores de vacunas en la facilidad\"}}"
+        "_value": "{\"text\":{\"default\":\"Total number of vaccine carriers at facility\",\"es\":\"Número total de portadores de vacunas en la facilidad\"}}"
       },
       {
         "_partition": "Column",
