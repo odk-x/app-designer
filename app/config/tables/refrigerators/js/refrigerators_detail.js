@@ -16,6 +16,7 @@ function processFrigPromises(facilityResult, typeResult, logResult) {
     util.showIdForDetail('#refrigerator_id', '_id', refrigeratorsResultSet, false);
     util.showIdForDetail('#serial_number', 'serial_number', refrigeratorsResultSet, false);
     util.showIdForDetail('#facility_name', 'facility_name', facilityData, false);
+    util.showIdForDetail('#manufacturer_id', 'manufacturer', typeData, false);
     util.showIdForDetail('#model_id', 'model_id', typeData, false);
     util.showIdForDetail('#catalog_id', 'catalog_id', typeData, false);
     util.showIdForDetail('#tracking_id', 'tracking_id', refrigeratorsResultSet, false);
@@ -92,6 +93,7 @@ function display() {
     $('#stat').text(odkCommon.localizeText(locale, "status"));
     $('#rsn-not-work').text(odkCommon.localizeText(locale, "reason_not_working"));
     $('#srv-pri').text(odkCommon.localizeText(locale, "service_priority"));
+    $('#manu-id').text(odkCommon.localizeText(locale, "manufacturer"));
     $('#mdl-id').text(odkCommon.localizeText(locale, "model_id"));
     $('#cat-id').text(odkCommon.localizeText(locale, "catalog_id"));
     $('#frig-id').text(odkCommon.localizeText(locale, "refrigerator_id"));
