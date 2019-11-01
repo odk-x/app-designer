@@ -4,7 +4,7 @@ html, body {
     height: 100%;
 }
 
-#wrapper { 
+#wrapper {
     margin: 10px 0 0 0;
     padding: 0;
 }
@@ -23,8 +23,8 @@ body {
     position: relative;
 }
 
-div { 
-    position: relative; 
+div {
+    position: relative;
 }
 
 .btn-launch {
@@ -37,9 +37,12 @@ div {
    background-color: teal;
 }
 
-h1 {
+.hdr-divider {
     border-bottom: 2px solid darkturquoise;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+h1 {
     color: #FFFFFF;
 }
 

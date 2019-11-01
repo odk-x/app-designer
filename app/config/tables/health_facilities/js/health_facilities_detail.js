@@ -143,9 +143,20 @@ function display() {
     odkData.getViewData(cbSuccess, cbFailure);
 }
 
-function refrigeratorsCBSuccess(frigCntResultSet, crCntResultSet) {
+async function refrigeratorsCBSuccess(frigCntResultSet, crCntResultSet) {
 
     $('#TITLE').text(healthFacilityResultSet.get('facility_name'));
+
+    // Get the breadcrumb
+    var linkedRegionId = healthFacilityResultSet.get('admin_region_id');
+    if (linkedRegionId !== null && linkedRegionId !== undefined) {
+        var locale = odkCommon.getPreferredLocale();
+        var breadcrumbName = await util.getBreadcrumbRegionName(locale, linkedRegionId);
+        if (breadcrumbName !== null && breadcrumbName !== undefined) {
+            var bcHdr = $('#breadcrumbHeader');
+            bcHdr.text(breadcrumbName);
+        }
+    }
 
     if (frigCntResultSet.getCount() > 0) {
         $('#fridge_list').text(frigCntResultSet.getData(0, 'refrigerator_cnt'));

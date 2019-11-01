@@ -6,7 +6,7 @@
 
 var adminRegionQueryStr = 'admin_region_id = ? AND _sync_state != ?';
 
-function display() {
+async function display() {
 
     var body = $('#main');
     // Set the background to be a picture.
@@ -19,13 +19,29 @@ function display() {
     $('#view-service-refrigerators').text(odkCommon.localizeText(locale, "view_all_refrigerators_needing_service"));
     $('#view-models').text(odkCommon.localizeText(locale, "view_refrigerator_models"));
 
-    var hdr1 = $('#header1');
+    var hdrDiv = $('#navHeader');
+    var hdr1 = $('<h1>');
+    hdr1.attr('id', 'header1');
+    hdrDiv.append(hdr1);
+
     var linkedRegion = util.getQueryParameter(util.adminRegion);
     var linkedRegionId = util.getQueryParameter(util.adminRegionId);
 
     if (linkedRegion !== null) {
         hdr1.text(linkedRegion);
     }
+
+    // Get the breadcrumb
+    if (linkedRegionId !== null && linkedRegionId !== undefined) {
+        var breadcrumbName = await util.getBreadcrumbRegionName(locale, linkedRegionId, linkedRegion);
+        if (breadcrumbName !== null && breadcrumbName !== undefined) {
+            var bcHdr = $('<h4>');
+            bcHdr.attr('id', 'breadcrumbHeader');
+            bcHdr.text(breadcrumbName);
+            hdrDiv.append(bcHdr);
+        }
+    }
+
 
     var viewFacilitiesButton = $('#view-facilities');
     viewFacilitiesButton.on(

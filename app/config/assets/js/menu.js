@@ -40,10 +40,8 @@ function addMenuButton(type, label, divToAddButtonTo, currAdminRegion, currAdmin
     $(divToAddButtonTo).append(button);
 }
 
-function showRegionButtonsAndTitle(jsonRegions) {
+async function showRegionButtonsAndTitle(jsonRegions) {
     // There are subregions so show them
-    var header = $('#header1');
-
     for (var i = 0; i < jsonRegions.length; i++) {
         var jsonRegion = jsonRegions[i];
         var levelVal = jsonRegion['levelNumber'];
@@ -66,7 +64,21 @@ function showRegionButtonsAndTitle(jsonRegions) {
         if (localizeHdrRegLab !== null && localizeHdrRegLab !== undefined) {
             hdrRegLab = localizeHdrRegLab;
         }
+
+        var header = $('#header1');
         header.text(hdrRegLab);
+
+        if (currAdminRegionId !== null && currAdminRegionId !== undefined) {
+            var currAdminRegionName = await util.getGeographicRegionName(currAdminRegionId);
+            if (currAdminRegionName !== null && currAdminRegionName !== undefined) {
+                var translatedRegionName = util.translateAdminRegionName(locale, currAdminRegionName);
+                if (translatedRegionName !== null && translatedRegionName !== undefined &&
+                    translatedRegionName !== currAdminRegion && translatedRegionName.indexOf(util.separator) !== -1) {
+                    var breadcrumbHeader = $('#breadcrumbHeader');
+                    breadcrumbHeader.text(util.translateAdminRegionName(locale, currAdminRegionName));
+                }
+            }
+        }
     }
 }
 
@@ -92,7 +104,7 @@ function showLogin(descTextToDisplay, buttonTextToDisplay) {
 }
 
 function updateStaticDisplay() {
-    var headerDiv = $('#header');
+    var headerDiv = $('#navHeader');
 
     // Cold Chain Demo
     var fileUri = odkCommon.getFileAsUrl('config/assets/img/hallway.jpg');
@@ -101,6 +113,10 @@ function updateStaticDisplay() {
     var headerTxt = odkCommon.localizeText(locale, "cold_chain_management");
     header.text(headerTxt);
     headerDiv.append(header);
+
+    var breadcrumbHeader = $('<h4>');
+    breadcrumbHeader.attr('id', 'breadcrumbHeader');
+    headerDiv.append(breadcrumbHeader);
 
     $('body').css('background-image', 'url(' + fileUri + ')');
 }

@@ -27,6 +27,45 @@ util.groupModify = 'groupModify';
 util.groupPrivileged = 'groupPrivileged';
 util.hiddenDefaultAccess = 'HIDDEN';
 util.deletedSyncState = 'deleted';
+util.separator = '/';
+
+util.translateAdminRegionName = function(locale, regionName) {
+    if (regionName === null || regionName === undefined) {
+        return null;
+    }
+
+    var parts = regionName.split(util.separator);
+
+    if (parts === null || parts === undefined) {
+        return util.translateAdminRegionName(locale, regionName);
+    }
+
+    var translatedRegionName = '';
+    for (var i = 0; i < parts.length; i++) {
+        translatedRegionName += util.translateAdminRegionNameHelper(locale, parts[i]);
+
+        if (i < parts.length - 1) {
+            translatedRegionName += util.separator;
+        }
+    }
+
+    return translatedRegionName;
+
+};
+
+util.translateAdminRegionNameHelper = function(locale, regionName) {
+    var translatedRegionName = '';
+    var regionToken = regionName.toString().toLowerCase().replace(' ', '_');
+    var translatedRegion = odkCommon.localizeText(locale, regionToken);
+
+    if (translatedRegion !== null && translatedRegion !== undefined) {
+        translatedRegionName = translatedRegion;
+    } else {
+        translatedRegionName = regionName;
+    }
+
+    return translatedRegionName;
+};
 
 // The maximum possible depth for a geographic hierarchy
 util.maxLevelAppDepth = 5;
@@ -119,9 +158,6 @@ util.getNextAdminRegionsFromCurrAdminRegionPromise = function (nextLevel, currAd
     return getNextRegionPromise;
 };
 
-
-
-
 util.getMenuOptions = function (nextLevel, currAdminRegion, maxLevel) {
 
     var jsonRegions = [];
@@ -168,7 +204,41 @@ util.processMenuOptions = function(result) {
     }
 
     return jsonArray;
-}
+};
+
+util.getBreadcrumbRegionName = async function(locale, adminRegionId, currAdminRegion) {
+    var currAdminRegionName = await util.getGeographicRegionName(adminRegionId);
+    if (currAdminRegionName !== null && currAdminRegionName !== undefined) {
+        var translatedRegionName = util.translateAdminRegionName(locale, currAdminRegionName);
+        if (translatedRegionName !== null && translatedRegionName !== undefined &&
+            translatedRegionName !== currAdminRegion && translatedRegionName.indexOf(util.separator) !== -1) {
+            return translatedRegionName;
+        }
+    }
+    return null;
+};
+
+util.getGeographicRegionName = function(adminRegionId) {
+    return new Promise(function(resolve, reject) {
+        var queryStr = 'SELECT regionName FROM geographic_regions WHERE _id = ?';
+        var queryParam = [adminRegionId];
+
+        odkData.arbitraryQuery('geographic_regions',
+            queryStr,
+            queryParam,
+            null,
+            null,
+            resolve, reject);
+    }).then(function(result) {
+        if (result !== null && result.getCount() == 1) {
+            return result.get('regionName');
+        }
+    }).catch(function(reason) {
+        var error = 'getGeographicRegionName: Failed with exception ' + reason;
+        console.log(error);
+    });
+
+};
 
 util.getFacilityCountByAdminRegion = function(adminRegionId) {
     return new Promise(function(resolve, reject) {
@@ -186,14 +256,14 @@ util.getFacilityCountByAdminRegion = function(adminRegionId) {
 
     }).then(function(result) {
         if (result !== null && result.getCount() == 1) {
-            return(result.get('COUNT(*)'));
+            return result.get('COUNT(*)');
         }
     }).catch(function (reason) {
         var error = 'getFacilityCountByAdminRegion: Failed with exception ' + reason;
         console.log(error);
     });
 
-}
+};
 
 util.getOneFacilityRow = function() {
     return new Promise(function(resolve, reject) {
@@ -215,7 +285,7 @@ util.getOneFacilityRow = function() {
         console.log(error);
     });
 
-}
+};
 
 util.getOneRefrigeratorRow = function() {
     return new Promise(function(resolve, reject) {
@@ -237,7 +307,7 @@ util.getOneRefrigeratorRow = function() {
         console.log(error);
     });
 
-}
+};
 
 util.getFacilityTypesByAdminRegion = function(adminRegion, successCB, failureCB) {
     var queryStr = 'SELECT facility_type, count(*) FROM health_facilities WHERE _sync_state != ?';
@@ -278,7 +348,7 @@ util.addSelAndSelArgs = function(sel, selArgs, queryStr, value) {
         selArgs.push(value);
     }
     return sel;
-}
+};
 
 /**
  * Get the query parameter from the url. Note that this is kind of a hacky/lazy

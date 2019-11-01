@@ -4,7 +4,7 @@
 /* global $, odkTables, util, odkData */
 'use strict';
 
-function cbSuccess(healthFacilityResultSet) {
+async function cbSuccess(healthFacilityResultSet) {
     var locale = odkCommon.getPreferredLocale();
 
     $('#TITLE').text(healthFacilityResultSet.get('facility_name'));
@@ -15,7 +15,18 @@ function cbSuccess(healthFacilityResultSet) {
     $('#contact_phone_number').text(healthFacilityResultSet.get('contact_phone_number'));
     $('#catchment_population').text(healthFacilityResultSet.get('catchment_population'));
     $('#facility_ownership').text(util.formatDisplayText(healthFacilityResultSet.get('facility_ownership')));
-    $('#admin_region').text(healthFacilityResultSet.get('admin_region_id'));
+
+    var linkedRegionId = healthFacilityResultSet.get('admin_region_id');
+    $('#admin_region').text(linkedRegionId);
+
+    // Get the breadcrumb
+    if (linkedRegionId !== null && linkedRegionId !== undefined) {
+        var breadcrumbName = await util.getBreadcrumbRegionName(locale, linkedRegionId);
+        if (breadcrumbName !== null && breadcrumbName !== undefined) {
+            var bcHdr = $('#breadcrumbHeader');
+            bcHdr.text(breadcrumbName);
+        }
+    }
 
     $('#electricity_source').text(util.formatDisplayText(healthFacilityResultSet.get('electricity_source')));
 
