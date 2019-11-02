@@ -36,7 +36,7 @@ function resumeFunc(state) {
 
         var coldRoomTxt = odkCommon.localizeText(locale, "cold_room");
         var modelTxt = odkCommon.localizeText(locale, "model_no_colon");
-        var hFacTxt = odkCommon.localizeText(locale, "health_facility");
+        var hFacTxt = odkCommon.localizeText(locale, "facility_no_colon");
 
         listViewLogic.setColIdsToDisplayInList(coldRoomTxt, 'tracking_id',
             modelTxt, 'model', hFacTxt, 'facility_name', );

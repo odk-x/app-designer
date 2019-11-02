@@ -1271,6 +1271,14 @@ window.odkCommonDefinitions = {
         "es": "L"
       },
       "_row_num": 160
+    },
+    "facility_no_colon": {
+      "string_token": "facility_no_colon",
+      "text": {
+        "default": "Facility",
+        "es": "Institucion"
+      },
+      "_row_num": 161
     }
   },
   "_locales": {

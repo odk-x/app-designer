@@ -37,7 +37,7 @@ function resumeFunc(state) {
 
         var frigTxt = odkCommon.localizeText(locale, "refrigerator");
         var catIDTxt = odkCommon.localizeText(locale, "catalog_id_no_colon");
-        var hFacTxt = odkCommon.localizeText(locale, "health_facility");
+        var hFacTxt = odkCommon.localizeText(locale, "facility_no_colon");
         var serNoTxt = odkCommon.localizeText(locale, "serial_number");
 
         listViewLogic.setColIdsToDisplayInList(frigTxt, 'tracking_id',
