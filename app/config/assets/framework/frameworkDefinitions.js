@@ -4,7 +4,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "constraint_message",
       "text": {
         "default": "Constraint violated.",
-        "es": "Restricción inválido"
+        "es": "Restricción inválido",
+        "fr": "Violation d'une contrainte."
       },
       "_row_num": 2
     },
@@ -12,7 +13,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "invalid_value_message",
       "text": {
         "default": "Invalid value.",
-        "es": "Dato inválido"
+        "es": "Dato inválido",
+        "fr": "Valeur invalide."
       },
       "_row_num": 3
     },
@@ -20,7 +22,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "required_message",
       "text": {
         "default": "Required value not provided.",
-        "es": "Dato requirido no encontrado"
+        "es": "Dato requirido no encontrado",
+        "fr": "Valeur requise non fournie."
       },
       "_row_num": 4
     },
@@ -28,7 +31,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "required_exception_message",
       "text": {
         "default": "Exception while evaluating required() expression. See console log.",
-        "es": "Error al evaluar expresión required()"
+        "es": "Error al evaluar expresión required()",
+        "fr": "Exception pendant l'évaluation de l'expression required(). Voir le log de la console."
       },
       "_row_num": 5
     },
@@ -36,7 +40,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "constraint_exception_message",
       "text": {
         "default": "Exception while evaluating constraint() expression. See console log.",
-        "es": "Error al evaluar expresión constraint()"
+        "es": "Error al evaluar expresión constraint()",
+        "fr": "Exception pendant l'évaluation de l'expression constraint(). Voir le log de la console."
       },
       "_row_num": 6
     },
@@ -44,7 +49,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "acknLabel",
       "text": {
         "default": "Acknowledge",
-        "es": "Aceptar"
+        "es": "Aceptar",
+        "fr": "Accepter"
       },
       "_row_num": 7
     },
@@ -52,7 +58,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "back_button_label",
       "text": {
         "default": "Back",
-        "es": "Retraso"
+        "es": "Retraso",
+        "fr": "Précédent"
       },
       "_row_num": 8
     },
@@ -60,7 +67,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "next_button_label",
       "text": {
         "default": "Next",
-        "es": "Siguiente"
+        "es": "Siguiente",
+        "fr": "Suivant"
       },
       "_row_num": 9
     },
@@ -68,7 +76,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "continue_button_label",
       "text": {
         "default": "Continue",
-        "es": "Continuar"
+        "es": "Continuar",
+        "fr": "Suite"
       },
       "_row_num": 10
     },
@@ -76,7 +85,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "select_one_dropdown_label",
       "text": {
         "default": "Choose Option",
-        "es": "Eligir Opción"
+        "es": "Eligir Opción",
+        "fr": "Choisir une option"
       },
       "_row_num": 11
     },
@@ -84,7 +94,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "requiredValueErr",
       "text": {
         "default": "Required value was not provided.",
-        "es": "Dato requirido no encontrado"
+        "es": "Dato requirido no encontrado",
+        "fr": "La valeur requise n'a pas été fournie."
       },
       "_row_num": 12
     },
@@ -92,7 +103,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "geopoint_button_label",
       "text": {
         "default": "Record Location",
-        "es": "Grabar Ubicación"
+        "es": "Grabar Ubicación",
+        "fr": "Enregistrer la localisation"
       },
       "_row_num": 13
     },
@@ -100,7 +112,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "geopoint_latitude_component",
       "text": {
         "default": "Latitude: {{value.latitude}}",
-        "es": "Latitud: {{value.latitude}}"
+        "es": "Latitud: {{value.latitude}}",
+        "fr": "Latitude : {{value.latitude}}"
       },
       "_row_num": 14
     },
@@ -108,7 +121,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "geopoint_longitude_component",
       "text": {
         "default": "Longitude: {{value.longitude}}",
-        "es": "Longitud: {{value.longitude}}"
+        "es": "Longitud: {{value.longitude}}",
+        "fr": "Longitude : {{value.longitude}}"
       },
       "_row_num": 15
     },
@@ -116,7 +130,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "geopoint_altitude_component",
       "text": {
         "default": "Altitude: {{value.altitude}}",
-        "es": "Altura: {{value.altitude}}"
+        "es": "Altura: {{value.altitude}}",
+        "fr": "Altitude : {{value.altitude}}"
       },
       "_row_num": 16
     },
@@ -124,7 +139,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "geopoint_accuracy_component",
       "text": {
         "default": "Accuracy: {{value.accuracy}}",
-        "es": "Exactitud: {{value.accuracy}}"
+        "es": "Exactitud: {{value.accuracy}}",
+        "fr": "Exactitude : {{value.accuracy}}"
       },
       "_row_num": 17
     },
@@ -132,7 +148,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "waiting_text",
       "text": {
         "default": "Please wait…",
-        "es": "Cargando…"
+        "es": "Cargando…",
+        "fr": "Patientez…"
       },
       "_row_num": 18
     },
@@ -140,7 +157,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "take_video_button_label",
       "text": {
         "default": "Take Video",
-        "es": "Grabar Video"
+        "es": "Grabar Video",
+        "fr": "Tourner une vidéo…"
       },
       "_row_num": 19
     },
@@ -148,7 +166,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "choose_video_button_label",
       "text": {
         "default": "Choose Video",
-        "es": "Eligir Video"
+        "es": "Eligir Video",
+        "fr": "Choisir une vidéo"
       },
       "_row_num": 20
     },
@@ -156,7 +175,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "video_control_not_supported",
       "text": {
         "default": "Video controls are not supported.",
-        "es": "No se puede controlar el video"
+        "es": "No se puede controlar el video",
+        "fr": "Contrôles vidéo non supportés."
       },
       "_row_num": 21
     },
@@ -164,7 +184,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "take_audio_button_label",
       "text": {
         "default": "Capture Audio",
-        "es": "Grabar Audio"
+        "es": "Grabar Audio",
+        "fr": "Enregistrer un son."
       },
       "_row_num": 22
     },
@@ -172,7 +193,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "choose_audio_button_label",
       "text": {
         "default": "Choose Audio",
-        "es": "Eligir Audio"
+        "es": "Eligir Audio",
+        "fr": "Choisir un son."
       },
       "_row_num": 23
     },
@@ -180,7 +202,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "audio_control_not_supported",
       "text": {
         "default": "Audio controls are not supported.",
-        "es": "No se puede controlar el audio"
+        "es": "No se puede controlar el audio",
+        "fr": "Contrôles audio non supportés"
       },
       "_row_num": 24
     },
@@ -188,7 +211,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "confirm_action_no_label",
       "text": {
         "default": "NO",
-        "es": "No se puede controlar el audio"
+        "es": "No se puede controlar el audio",
+        "fr": "NON"
       },
       "_row_num": 25
     },
@@ -196,7 +220,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "confirm_action_yes_label",
       "text": {
         "default": "YES",
-        "es": "Sí"
+        "es": "Sí",
+        "fr": "OUI"
       },
       "_row_num": 26
     },
@@ -204,7 +229,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "external_link_button_label",
       "text": {
         "default": "Follow link",
-        "es": "Seguir enlance"
+        "es": "Seguir enlance",
+        "fr": "Suivre le lien"
       },
       "_row_num": 27
     },
@@ -212,7 +238,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "survey_form_identification",
       "text": {
         "default": "<div><center>ODK Survey</center><hr></div><div><p>Form name: {{localizeText form_title}}</p>{{#if form_version}}<p>Form version: {{form_version}}</p>{{/if}}<hr></div>",
-        "es": "<div><center>ODK Estudio</center><hr></div><div><p>Nombre: {{localizeText form_title}}</p>{{#if form_version}}<p>Revisión: {{form_version}}</p>{{/if}}<hr></div>"
+        "es": "<div><center>ODK Estudio</center><hr></div><div><p>Nombre: {{localizeText form_title}}</p>{{#if form_version}}<p>Revisión: {{form_version}}</p>{{/if}}<hr></div>",
+        "fr": "<div><center>Enquête ODK</center><hr></div><div><p>Nom du formulaire : {{localizeText form_title}}</p>{{#if form_version}}<p>Version du formulaire : {{form_version}}</p>{{/if}}<hr></div>"
       },
       "_row_num": 28
     },
@@ -228,7 +255,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "finalize_survey_button_label",
       "text": {
         "default": "Finalize",
-        "es": "Finalizar"
+        "es": "Finalizar",
+        "fr": "Finaliser"
       },
       "_row_num": 30
     },
@@ -236,7 +264,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "save_as_incomplete_survey_button_label",
       "text": {
         "default": "Incomplete",
-        "es": "No completado"
+        "es": "No completado",
+        "fr": "Incomplet"
       },
       "_row_num": 31
     },
@@ -244,7 +273,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "take_image_button_label",
       "text": {
         "default": "Take Photo",
-        "es": "Grabar Foto"
+        "es": "Grabar Foto",
+        "fr": "Prendre une photo"
       },
       "_row_num": 33
     },
@@ -252,7 +282,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "choose_image_button_label",
       "text": {
         "default": "Choose Image",
-        "es": "Eligir Foto"
+        "es": "Eligir Foto",
+        "fr": "Choisir une image"
       },
       "_row_num": 34
     },
@@ -260,7 +291,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "launch_intent_button_label",
       "text": {
         "default": "Launch Intent",
-        "es": "Lanzar Intento"
+        "es": "Lanzar Intento",
+        "fr": "Lancer un Intent"
       },
       "_row_num": 35
     },
@@ -268,7 +300,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "opening_survey_instance_detail",
       "text": {
         "default": "{{#if display_field}}\n        <p>You are at the start of instance: </p>\n        <p>\"{{display_field}}\"</p> \n  {{else}}\n        <p>You are at the start of a new instance.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>Last saved:</p> \n            <p>{{last_save_date}}</p>\n        {{/if}}\n        <hr>",
-        "es": "{{#if display_field}}\n        <p>Estás en el empezando del caso \"{{display_field}}\"</p> \n  {{else}}\n        <p>Estás haciendo un caso nuevo.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>Guardado {{last_save_date}}</p>\n        {{/if}}\n        <hr>"
+        "es": "{{#if display_field}}\n        <p>Estás en el empezando del caso \"{{display_field}}\"</p> \n  {{else}}\n        <p>Estás haciendo un caso nuevo.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>Guardado {{last_save_date}}</p>\n        {{/if}}\n        <hr>",
+        "fr": "{{#if display_field}}\n        <p>Vous êtes au début de l'instance : </p>\n        <p>\"{{display_field}}\"</p> \n  {{else}}\n        <p>Vous êtes au début d'une nouvelle instance.</p>\n  {{/if}}\n        <hr>\n        {{#if last_save_date}}\n            <p>Dernier enregistrement :</p> \n            <p>{{last_save_date}}</p>\n        {{/if}}\n        <hr>"
       },
       "_row_num": 36
     },
@@ -276,7 +309,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "opening_survey_next_button_label",
       "text": {
         "default": "Go to next prompt",
-        "es": "¡Adelante!"
+        "es": "¡Adelante!",
+        "fr": "Aller à la l'invite de commande suivante"
       },
       "_row_num": 37
     },
@@ -284,7 +318,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "options_popup_language_heading",
       "text": {
         "default": "Language",
-        "es": "Idioma"
+        "es": "Idioma",
+        "fr": "Langue"
       },
       "_row_num": 38
     },
@@ -292,7 +327,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "options_popup_contents_heading",
       "text": {
         "default": "Contents",
-        "es": "Sumario"
+        "es": "Sumario",
+        "fr": "Table des matières"
       },
       "_row_num": 39
     },
@@ -300,7 +336,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "options_popup_ignore_changes_heading",
       "text": {
         "default": "Ignore Changes + Exit",
-        "es": "Ignorar cambios y salir"
+        "es": "Ignorar cambios y salir",
+        "fr": "Ignorer les modifications et quitter"
       },
       "_row_num": 40
     },
@@ -308,7 +345,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "options_popup_save_changes_heading",
       "text": {
         "default": "Save Changes + Exit",
-        "es": "Guardar cambios y salir"
+        "es": "Guardar cambios y salir",
+        "fr": "Enregistrer les modifications et quitter"
       },
       "_row_num": 41
     },
@@ -316,7 +354,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "options_popup_finalize_changes_heading",
       "text": {
         "default": "Finalize Changes + Exit",
-        "es": "Finalizar cambios y salir"
+        "es": "Finalizar cambios y salir",
+        "fr": "Finaliser les modifications et quitter"
       },
       "_row_num": 42
     },
@@ -324,7 +363,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "screen_popup_ok_button_label",
       "text": {
         "default": "OK",
-        "es": "OK"
+        "es": "OK",
+        "fr": "OK"
       },
       "_row_num": 43
     },
@@ -332,7 +372,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "select_with_other_other_label",
       "text": {
         "default": "Other:",
-        "es": "Otro:"
+        "es": "Otro:",
+        "fr": "Autres :"
       },
       "_row_num": 44
     },
@@ -340,7 +381,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "select_deselect_label",
       "text": {
         "default": "Deselect",
-        "es": "Deselegir"
+        "es": "Deselegir",
+        "fr": "Désélectionner"
       },
       "_row_num": 45
     },
@@ -348,7 +390,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "take_signature_button_label",
       "text": {
         "default": "Get Signature",
-        "es": "Grabar Firma"
+        "es": "Grabar Firma",
+        "fr": "Obtenir la signature"
       },
       "_row_num": 46
     },
@@ -356,7 +399,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "instances_survey_create_button_label",
       "text": {
         "default": "Create new instance",
-        "es": "Hacer Caso Nuevo"
+        "es": "Hacer Caso Nuevo",
+        "fr": "Créer une nouvelle instance"
       },
       "_row_num": 47
     },
@@ -364,7 +408,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "instances_no_saved_instances_label",
       "text": {
         "default": "No saved instances.",
-        "es": "Sin Casos Guardados"
+        "es": "Sin Casos Guardados",
+        "fr": "Aucune instance enregistrée."
       },
       "_row_num": 48
     },
@@ -372,7 +417,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "instances_last_save_date_label",
       "text": {
         "default": "<p><strong>Last Save Date:</strong></p>",
-        "es": "<p><strong>Guardado:</strong></p>"
+        "es": "<p><strong>Guardado:</strong></p>",
+        "fr": "<p><strong>Date du dernier enregistrement :</strong></p>"
       },
       "_row_num": 49
     },
@@ -380,7 +426,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "instances_previously_created_instances_label",
       "text": {
         "default": "<p>Previously created instances:</p>",
-        "es": "<p>Guardados previos:</p>"
+        "es": "<p>Guardados previos:</p>",
+        "fr": "<p>Instances crées précédemment :</p>"
       },
       "_row_num": 50
     },
@@ -388,7 +435,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "savepoint_type_finalized_text_label",
       "text": {
         "default": "Finalized",
-        "es": "Finalizado"
+        "es": "Finalizado",
+        "fr": "Finalisé"
       },
       "_row_num": 51
     },
@@ -396,7 +444,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "savepoint_type_incomplete_text_label",
       "text": {
         "default": "Incomplete",
-        "es": "No completado"
+        "es": "No completado",
+        "fr": "Incomplet"
       },
       "_row_num": 52
     },
@@ -404,7 +453,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "savepoint_type_checkpoint_text_label",
       "text": {
         "default": "Checkpoint",
-        "es": "Guardado en parte"
+        "es": "Guardado en parte",
+        "fr": "Checkpoint"
       },
       "_row_num": 53
     },
@@ -412,7 +462,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "linked_table_new_instance_label",
       "text": {
         "default": "Create new instance",
-        "es": "Hacer Caso Nuevo"
+        "es": "Hacer Caso Nuevo",
+        "fr": "Créer une nouvelle instance"
       },
       "_row_num": 54
     },
@@ -420,7 +471,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "barcode_button_label",
       "text": {
         "default": "Scan Barcode",
-        "es": "Grabar códingo de barras"
+        "es": "Grabar códingo de barras",
+        "fr": "Scanner un code-barres"
       },
       "_row_num": 55
     },
@@ -428,7 +480,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "invalid_numeric_message",
       "text": {
         "default": "Numeric value expected",
-        "es": "Dato numérico esperado"
+        "es": "Dato numérico esperado",
+        "fr": "Valeur numérique attendue"
       },
       "_row_num": 56
     },
@@ -436,7 +489,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "invalid_integer_message",
       "text": {
         "default": "Integer value expected",
-        "es": "Número entero esperado"
+        "es": "Número entero esperado",
+        "fr": "Entier relatif attendu"
       },
       "_row_num": 57
     },
@@ -444,7 +498,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "confirm_exit_label",
       "text": {
         "default": "Exit",
-        "es": "Salida"
+        "es": "Salida",
+        "fr": "Quitter"
       },
       "_row_num": 58
     },
@@ -452,7 +507,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "confirm_cancel_label",
       "text": {
         "default": "Cancel",
-        "es": "Cancelar"
+        "es": "Cancelar",
+        "fr": "Annuler"
       },
       "_row_num": 59
     },
@@ -460,7 +516,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "confirm_message",
       "text": {
         "default": "Are you sure you want to exit and lose all changes?",
-        "es": "¿Estás seguro de que quieres salir y perder todos los cambios?"
+        "es": "¿Estás seguro de que quieres salir y perder todos los cambios?",
+        "fr": "Êtes-vous sûr de vouloir quitter et perdre tous les changements ?"
       },
       "_row_num": 60
     },
@@ -468,7 +525,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "are_you_sure_you_want_to_delete_row",
       "text": {
         "default": "Are you sure you want to delete row",
-        "es": "¿Estás seguro de que quieres eliminar la fila?"
+        "es": "¿Estás seguro de que quieres eliminar la fila?",
+        "fr": "Êtes-vous sûr de vouloir supprimer le rang ?"
       },
       "_row_num": 61
     },
@@ -476,7 +534,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "edit",
       "text": {
         "default": "Edit",
-        "es": "Editar"
+        "es": "Editar",
+        "fr": "Modifier"
       },
       "_row_num": 62
     },
@@ -484,7 +543,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "delete",
       "text": {
         "default": "Delete",
-        "es": "Suprimir"
+        "es": "Suprimir",
+        "fr": "Supprimer"
       },
       "_row_num": 63
     },
@@ -492,7 +552,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "add_health_facility",
       "text": {
         "default": "Add Health Facility",
-        "es": "Añadir Instituciones De Salud"
+        "es": "Añadir Instituciones De Salud",
+        "fr": "Ajouter un établissement de santé"
       },
       "_row_num": 64
     },
@@ -500,7 +561,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "select_region",
       "text": {
         "default": "Select Region:",
-        "es": "Seleccione Región:"
+        "es": "Seleccione Región:",
+        "fr": "Sélectionner une région :"
       },
       "_row_num": 65
     },
@@ -508,7 +570,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "north",
       "text": {
         "default": "North",
-        "es": "Norte"
+        "es": "Norte",
+        "fr": "Nord"
       },
       "_row_num": 66
     },
@@ -516,7 +579,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "central_west",
       "text": {
         "default": "Central West",
-        "es": "Centro Oeste"
+        "es": "Centro Oeste",
+        "fr": "Centre-Ouest"
       },
       "_row_num": 67
     },
@@ -524,7 +588,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "central_east",
       "text": {
         "default": "Central East",
-        "es": "Centro Este"
+        "es": "Centro Este",
+        "fr": "Centre-Est"
       },
       "_row_num": 68
     },
@@ -532,7 +597,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "south_west",
       "text": {
         "default": "South West",
-        "es": "Suroeste"
+        "es": "Suroeste",
+        "fr": "Sud-Ouest"
       },
       "_row_num": 69
     },
@@ -540,7 +606,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "south_east",
       "text": {
         "default": "South East",
-        "es": "Sureste"
+        "es": "Sureste",
+        "fr": "Sud-Est"
       },
       "_row_num": 70
     },
@@ -548,7 +615,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "add_facility",
       "text": {
         "default": "Add Facility",
-        "es": "Añadir Institucion"
+        "es": "Añadir Institucion",
+        "fr": "Ajouter un établissement"
       },
       "_row_num": 71
     },
@@ -556,7 +624,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "administrator_options",
       "text": {
         "default": "Administrator Options",
-        "es": "Opciones De Administrador"
+        "es": "Opciones De Administrador",
+        "fr": "Options de l'administrateur"
       },
       "_row_num": 72
     },
@@ -564,7 +633,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_health_facilities",
       "text": {
         "default": "View Health Facilities",
-        "es": "Ver Instalaciones De Salud"
+        "es": "Ver Instalaciones De Salud",
+        "fr": "Voir les établissements de santé"
       },
       "_row_num": 73
     },
@@ -572,7 +642,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_inventory",
       "text": {
         "default": "View Inventory",
-        "es": "Ver Inventario"
+        "es": "Ver Inventario",
+        "fr": "Voir l'inventaire"
       },
       "_row_num": 74
     },
@@ -580,7 +651,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_refrigerator_models",
       "text": {
         "default": "View Refrigerator Models",
-        "es": "Ver Modelos De Refrigerador"
+        "es": "Ver Modelos De Refrigerador",
+        "fr": "Voir les modèles de réfrigérateur"
       },
       "_row_num": 75
     },
@@ -588,7 +660,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "all_regions",
       "text": {
         "default": "All Regions",
-        "es": "Todas Las Regiones"
+        "es": "Todas Las Regiones",
+        "fr": "Toutes les régions"
       },
       "_row_num": 76
     },
@@ -596,7 +669,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "select_facility_type",
       "text": {
         "default": "Select FacilityType:",
-        "es": "Seleccione El Tipo De Facilidad:"
+        "es": "Seleccione El Tipo De Facilidad:",
+        "fr": "Sélectionner un type d'établissement :"
       },
       "_row_num": 77
     },
@@ -604,7 +678,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "all_types",
       "text": {
         "default": "All Types",
-        "es": "Todos Los Tipos"
+        "es": "Todos Los Tipos",
+        "fr": "Tous les types"
       },
       "_row_num": 78
     },
@@ -612,7 +687,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "central_hospital",
       "text": {
         "default": "Central Hospital",
-        "es": "Hospital Central"
+        "es": "Hospital Central",
+        "fr": "Hôpital central"
       },
       "_row_num": 79
     },
@@ -620,7 +696,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "community_hospital",
       "text": {
         "default": "Community Hospital",
-        "es": "Hospital Comunitario"
+        "es": "Hospital Comunitario",
+        "fr": "Hôpital communautaire"
       },
       "_row_num": 80
     },
@@ -628,7 +705,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "dispensary",
       "text": {
         "default": "Dispensary",
-        "es": "Dispensario"
+        "es": "Dispensario",
+        "fr": "Dispensaire"
       },
       "_row_num": 81
     },
@@ -636,7 +714,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "district_hospital",
       "text": {
         "default": "District Hospital",
-        "es": "Hospital Del Distrito"
+        "es": "Hospital Del Distrito",
+        "fr": "Hôpital de district"
       },
       "_row_num": 82
     },
@@ -644,7 +723,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "district_vaccine_store",
       "text": {
         "default": "District Vaccine Store",
-        "es": "Tienda De Vacunas Del Distrito"
+        "es": "Tienda De Vacunas Del Distrito",
+        "fr": "Entrepôt de vaccins de district"
       },
       "_row_num": 83
     },
@@ -652,7 +732,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "health_center",
       "text": {
         "default": "Health Center",
-        "es": "Centro De Salud"
+        "es": "Centro De Salud",
+        "fr": "Centre de santé"
       },
       "_row_num": 84
     },
@@ -660,7 +741,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "health_post",
       "text": {
         "default": "Health Post",
-        "es": "Factoría De Salud"
+        "es": "Factoría De Salud",
+        "fr": "Poste de santé"
       },
       "_row_num": 85
     },
@@ -668,7 +750,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "hospital",
       "text": {
         "default": "Hospital",
-        "es": "Hospital"
+        "es": "Hospital",
+        "fr": "Hôpital"
       },
       "_row_num": 86
     },
@@ -676,7 +759,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "national_vaccine_store",
       "text": {
         "default": "National Vaccine Store",
-        "es": "Tienda Nacional De Vacunas"
+        "es": "Tienda Nacional De Vacunas",
+        "fr": "Entrepôt national de vaccins"
       },
       "_row_num": 87
     },
@@ -684,7 +768,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "regional_vaccine_store",
       "text": {
         "default": "Regional Vaccine Store",
-        "es": "Tienda Regional De Vacunas"
+        "es": "Tienda Regional De Vacunas",
+        "fr": "Entrepôt régional de vaccins"
       },
       "_row_num": 88
     },
@@ -692,7 +777,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "rural_hospital",
       "text": {
         "default": "Rural Hospital",
-        "es": "Hospital rural"
+        "es": "Hospital rural",
+        "fr": "Hôpital rural"
       },
       "_row_num": 89
     },
@@ -700,7 +786,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "filter",
       "text": {
         "default": "Filter",
-        "es": "Filtrar"
+        "es": "Filtrar",
+        "fr": "Filtrer"
       },
       "_row_num": 90
     },
@@ -708,7 +795,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "facility_inventory_by_grid_power",
       "text": {
         "default": "Facility Inventory By Grid Power",
-        "es": "Inventario De La Instalación Por Red Eléctrica"
+        "es": "Inventario De La Instalación Por Red Eléctrica",
+        "fr": "Inventaire des établissements selon le réseau d'électricité"
       },
       "_row_num": 91
     },
@@ -716,7 +804,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "select_power_source",
       "text": {
         "default": "Select Power Source:",
-        "es": "Seleccionar Fuente De Energía:"
+        "es": "Seleccionar Fuente De Energía:",
+        "fr": "Sélectionner une source d'énergie :"
       },
       "_row_num": 92
     },
@@ -724,7 +813,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "all_power_sources",
       "text": {
         "default": "All Power Sources",
-        "es": "Todas Las Fuentes De Energía"
+        "es": "Todas Las Fuentes De Energía",
+        "fr": "Toutes les sources d'énergie"
       },
       "_row_num": 93
     },
@@ -732,7 +822,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "electriciy",
       "text": {
         "default": "Electricity",
-        "es": "Electricidad"
+        "es": "Electricidad",
+        "fr": "Électricité"
       },
       "_row_num": 94
     },
@@ -740,7 +831,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "gas",
       "text": {
         "default": "Gas",
-        "es": "Gas"
+        "es": "Gas",
+        "fr": "Gaz"
       },
       "_row_num": 95
     },
@@ -748,7 +840,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "kerosene",
       "text": {
         "default": "Kerosene",
-        "es": "Queroseno"
+        "es": "Queroseno",
+        "fr": "Kérosène"
       },
       "_row_num": 96
     },
@@ -756,7 +849,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "solar",
       "text": {
         "default": "Solar",
-        "es": "Solar"
+        "es": "Solar",
+        "fr": "Énergie solaire"
       },
       "_row_num": 97
     },
@@ -764,7 +858,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "unknown",
       "text": {
         "default": "Unknown",
-        "es": "Desconocido"
+        "es": "Desconocido",
+        "fr": "Source inconnue"
       },
       "_row_num": 98
     },
@@ -772,7 +867,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "health_facilities",
       "text": {
         "default": "Health Facilities",
-        "es": "Instituciones De Salud"
+        "es": "Instituciones De Salud",
+        "fr": "Établissements de santé"
       },
       "_row_num": 99
     },
@@ -780,7 +876,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "filter_by_type",
       "text": {
         "default": "Filter By Type",
-        "es": "Filtrar Por Tipo"
+        "es": "Filtrar Por Tipo",
+        "fr": "Filtrer par type"
       },
       "_row_num": 100
     },
@@ -788,7 +885,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "search_by_name_id",
       "text": {
         "default": "Search By Name/ID",
-        "es": "Búsqueda Por Nombre/ID"
+        "es": "Búsqueda Por Nombre/ID",
+        "fr": "Rechercher par nom/ID"
       },
       "_row_num": 101
     },
@@ -796,7 +894,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "inventory",
       "text": {
         "default": "Inventory",
-        "es": "Inventario"
+        "es": "Inventario",
+        "fr": "Inventaire"
       },
       "_row_num": 102
     },
@@ -804,7 +903,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "refrigerator_age",
       "text": {
         "default": "Refrigerator Age",
-        "es": "Edad Del Refrigerador"
+        "es": "Edad Del Refrigerador",
+        "fr": "Ancienneté du réfrigérateur"
       },
       "_row_num": 103
     },
@@ -812,7 +912,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "facility_grid_power_available",
       "text": {
         "default": "Facility Grid Power Available",
-        "es": "Facilidad Red Eléctrica Disponibilidad"
+        "es": "Facilidad Red Eléctrica Disponibilidad",
+        "fr": "Électricité disponible dans l'établissement"
       },
       "_row_num": 104
     },
@@ -820,7 +921,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "refrigerator_inventory_by_age",
       "text": {
         "default": "Refrigerator Inventory By Age",
-        "es": "Inventario De Refrigerador Por Edad"
+        "es": "Inventario De Refrigerador Por Edad",
+        "fr": "Inventaire des réfrigérateurs selon l'ancienneté"
       },
       "_row_num": 105
     },
@@ -828,7 +930,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_refrigerator_inventory",
       "text": {
         "default": "View Refrigerator Inventory",
-        "es": "Ver El Inventario Del Refrigerador"
+        "es": "Ver El Inventario Del Refrigerador",
+        "fr": "Voir l'inventaire des réfrigérateurs"
       },
       "_row_num": 106
     },
@@ -836,7 +939,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_all_health_facilities",
       "text": {
         "default": "View All Health Facilities",
-        "es": "Ver Todas Las Instituciones De Salud"
+        "es": "Ver Todas Las Instituciones De Salud",
+        "fr": "Voir tous les établissements de santé"
       },
       "_row_num": 107
     },
@@ -844,7 +948,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "filter_health_facilities_by_type",
       "text": {
         "default": "Filter Health Facilities By Type",
-        "es": "Filtrar Instituciones De Salud Por Tipo"
+        "es": "Filtrar Instituciones De Salud Por Tipo",
+        "fr": "Filtrer les établissements de santé par type"
       },
       "_row_num": 108
     },
@@ -852,7 +957,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_all_refrigerators",
       "text": {
         "default": "View All Refrigerators",
-        "es": "Ver Todos Los Refrigeradores"
+        "es": "Ver Todos Los Refrigeradores",
+        "fr": "Voir tous les réfrigérateurs"
       },
       "_row_num": 109
     },
@@ -860,7 +966,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_all_refrigerators_needing_service",
       "text": {
         "default": "View All Refrigerators Needing Service",
-        "es": "Ver Todos Los Refrigeradores Que Necesitan Servicio"
+        "es": "Ver Todos Los Refrigeradores Que Necesitan Servicio",
+        "fr": "Voir tous les réfrigérateurs pour lesquels une maintenance est nécessaire"
       },
       "_row_num": 110
     },
@@ -868,7 +975,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "basic_facility_information",
       "text": {
         "default": "Basic Facility Information",
-        "es": "Información Básica De La Institucion"
+        "es": "Información Básica De La Institucion",
+        "fr": "Informations de base sur l'établissement"
       },
       "_row_num": 111
     },
@@ -876,7 +984,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "health_facility_id",
       "text": {
         "default": "Health Facility ID:",
-        "es": "ID Del Institucion De Salud:"
+        "es": "ID Del Institucion De Salud:",
+        "fr": "ID de l'établissement de santé :"
       },
       "_row_num": 112
     },
@@ -884,7 +993,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "facility_type",
       "text": {
         "default": "Facility Type:",
-        "es": "Tipo De Facilidad:"
+        "es": "Tipo De Facilidad:",
+        "fr": "Type d'établissement"
       },
       "_row_num": 113
     },
@@ -892,7 +1002,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "ownership",
       "text": {
         "default": "Ownership:",
-        "es": "Propiedad:"
+        "es": "Propiedad:",
+        "fr": "Propriétaire :"
       },
       "_row_num": 114
     },
@@ -900,7 +1011,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "population",
       "text": {
         "default": "Population:",
-        "es": "Población:"
+        "es": "Población:",
+        "fr": "Population :"
       },
       "_row_num": 115
     },
@@ -908,7 +1020,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "coverage",
       "text": {
         "default": "Coverage:",
-        "es": "Cobertura:"
+        "es": "Cobertura:",
+        "fr": "Couverture :"
       },
       "_row_num": 116
     },
@@ -916,7 +1029,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "admin_region",
       "text": {
         "default": "Admin Region:",
-        "es": "Región Admin:"
+        "es": "Región Admin:",
+        "fr": "Région administrative :"
       },
       "_row_num": 117
     },
@@ -924,7 +1038,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "power_information",
       "text": {
         "default": "Power Information",
-        "es": "Información De Energía"
+        "es": "Información De Energía",
+        "fr": "Informations sur l'énergie"
       },
       "_row_num": 118
     },
@@ -932,7 +1047,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "electricity_source",
       "text": {
         "default": "Electricity Source:",
-        "es": "Fuente De Electricidad:"
+        "es": "Fuente De Electricidad:",
+        "fr": "Source d'électricité :"
       },
       "_row_num": 119
     },
@@ -940,7 +1056,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "grid_availability",
       "text": {
         "default": "Grid Availability:",
-        "es": "Red Disponibilidad:"
+        "es": "Red Disponibilidad:",
+        "fr": "Électricité disponible :"
       },
       "_row_num": 120
     },
@@ -948,7 +1065,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "gas_availability",
       "text": {
         "default": "Gas Availability:",
-        "es": "Gas Disponibilidad:"
+        "es": "Gas Disponibilidad:",
+        "fr": "Gaz disponible :"
       },
       "_row_num": 121
     },
@@ -956,7 +1074,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "kerosene_availability",
       "text": {
         "default": "Kerosene Availability:",
-        "es": "Queroseno Disponibilidad:"
+        "es": "Queroseno Disponibilidad:",
+        "fr": "Kérosène disponible :"
       },
       "_row_num": 122
     },
@@ -964,7 +1083,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "solar_suitable_climate",
       "text": {
         "default": "Solar Suitable Climate?",
-        "es": "¿Clima Solar Adecuado?"
+        "es": "¿Clima Solar Adecuado?",
+        "fr": "L'ensoleillement est-il suffisant ?"
       },
       "_row_num": 123
     },
@@ -972,7 +1092,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "solar_suitable_site",
       "text": {
         "default": "Solar Suitable Site?",
-        "es": "¿Sitio Solar Adecuado?"
+        "es": "¿Sitio Solar Adecuado?",
+        "fr": "L'endroit est-il assez ensoleillé ?"
       },
       "_row_num": 124
     },
@@ -980,7 +1101,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "location_information",
       "text": {
         "default": "Location Information",
-        "es": "Información De Localización"
+        "es": "Información De Localización",
+        "fr": "Informations sur la localisation"
       },
       "_row_num": 125
     },
@@ -988,7 +1110,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "latitude_gps",
       "text": {
         "default": "Latitude (GPS)",
-        "es": "Latitud (GPS)"
+        "es": "Latitud (GPS)",
+        "fr": "Latitude (GPS) :"
       },
       "_row_num": 126
     },
@@ -996,7 +1119,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "longitude",
       "text": {
         "default": "Longitude (GPS)",
-        "es": "Longitud (GPS)"
+        "es": "Longitud (GPS)",
+        "fr": "Longitude (GPS) :"
       },
       "_row_num": 127
     },
@@ -1004,7 +1128,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "climate",
       "text": {
         "default": "Climate:",
-        "es": "Clima:"
+        "es": "Clima:",
+        "fr": "Climat :"
       },
       "_row_num": 128
     },
@@ -1012,7 +1137,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "stock_information",
       "text": {
         "default": "Stock Information",
-        "es": "Información De Provisión"
+        "es": "Información De Provisión",
+        "fr": "Informations sur les stocks"
       },
       "_row_num": 129
     },
@@ -1020,7 +1146,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "distance_to_supply_point",
       "text": {
         "default": "Distance To Supply Point:",
-        "es": "Distancia Al Punto De Suministro:"
+        "es": "Distancia Al Punto De Suministro:",
+        "fr": "Distance par rapport au lieu d'approvisionnement :"
       },
       "_row_num": 130
     },
@@ -1028,7 +1155,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "vaccine_supply_interval",
       "text": {
         "default": "Vaccine Supply Interval:",
-        "es": "Intervalo De Suministro De Vacunas:"
+        "es": "Intervalo De Suministro De Vacunas:",
+        "fr": "Intervalle entre chaque approvisionnement en vaccins :"
       },
       "_row_num": 131
     },
@@ -1036,7 +1164,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "vaccine_reserve_stock_req",
       "text": {
         "default": "Vaccine Reserve Stock Req:",
-        "es": "Reserva De Vacunas Stock Req:"
+        "es": "Reserva De Vacunas Stock Req:",
+        "fr": "Réserve de vaccins nécessaire :"
       },
       "_row_num": 132
     },
@@ -1044,7 +1173,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "vaccine_supply_mode",
       "text": {
         "default": "Vaccine Supply Mode:",
-        "es": "Modo De Suministro De Vacunas:"
+        "es": "Modo De Suministro De Vacunas:",
+        "fr": "Mode d'approvisionnement en vaccins :"
       },
       "_row_num": 133
     },
@@ -1052,7 +1182,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "refrigerator_inventory",
       "text": {
         "default": "Refrigerator Inventory",
-        "es": "Inventario De Refrigerador"
+        "es": "Inventario De Refrigerador",
+        "fr": "Inventaire des réfrigérateurs"
       },
       "_row_num": 134
     },
@@ -1060,7 +1191,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "add_refrigerator",
       "text": {
         "default": "Add Refrigerator",
-        "es": "Añadir Refrigerador"
+        "es": "Añadir Refrigerador",
+        "fr": "Ajouter un réfrigérateur"
       },
       "_row_num": 135
     },
@@ -1068,7 +1200,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "edit_facility",
       "text": {
         "default": "Edit Facility",
-        "es": "Editar Facilidad"
+        "es": "Editar Facilidad",
+        "fr": "Modifier l'établissement"
       },
       "_row_num": 136
     },
@@ -1076,7 +1209,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "delete_facility",
       "text": {
         "default": "Delete Facility",
-        "es": "Suprimir Facilidad"
+        "es": "Suprimir Facilidad",
+        "fr": "Supprimer l'établissement"
       },
       "_row_num": 137
     },
@@ -1084,7 +1218,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "search",
       "text": {
         "default": "Search",
-        "es": "Buscar"
+        "es": "Buscar",
+        "fr": "Rechercher"
       },
       "_row_num": 138
     },
@@ -1092,7 +1227,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "previous",
       "text": {
         "default": "Prev",
-        "es": "Previo"
+        "es": "Previo",
+        "fr": "Précédent"
       },
       "_row_num": 139
     },
@@ -1100,7 +1236,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "next",
       "text": {
         "default": "Next",
-        "es": "Siguiente"
+        "es": "Siguiente",
+        "fr": "Suivant"
       },
       "_row_num": 140
     },
@@ -1108,7 +1245,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "showing",
       "text": {
         "default": "Showing",
-        "es": "Demostración"
+        "es": "Demostración",
+        "fr": "Affichage"
       },
       "_row_num": 141
     },
@@ -1116,7 +1254,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "of",
       "text": {
         "default": "Of",
-        "es": "De"
+        "es": "De",
+        "fr": "du"
       },
       "_row_num": 142
     },
@@ -1124,7 +1263,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "refrigerator",
       "text": {
         "default": "Refrigerator",
-        "es": "Refrigerador"
+        "es": "Refrigerador",
+        "fr": "réfrigérateur"
       },
       "_row_num": 143
     },
@@ -1132,7 +1272,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "maintenance_log_information",
       "text": {
         "default": "Maintenance Log Information",
-        "es": "Información De Registro De Mantenimiento"
+        "es": "Información De Registro De Mantenimiento",
+        "fr": "Informations sur la maintenance"
       },
       "_row_num": 144
     },
@@ -1140,7 +1281,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "refrigerator_id",
       "text": {
         "default": "Refrigerator ID:",
-        "es": "ID Del Refrigerador:"
+        "es": "ID Del Refrigerador:",
+        "fr": "ID du réfrigérateur"
       },
       "_row_num": 145
     },
@@ -1148,7 +1290,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "functional_status",
       "text": {
         "default": "Functional Status:",
-        "es": "Estado Funcional:"
+        "es": "Estado Funcional:",
+        "fr": "État de fonctionnement :"
       },
       "_row_num": 146
     },
@@ -1156,7 +1299,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "reason_not_working",
       "text": {
         "default": "Reason Not Working:",
-        "es": "Motivo Que No Funciona:"
+        "es": "Motivo Que No Funciona:",
+        "fr": "Raison de la panne :"
       },
       "_row_num": 147
     },
@@ -1164,7 +1308,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "date_serviced",
       "text": {
         "default": "Date Serviced:",
-        "es": "Fecha De Servicio:"
+        "es": "Fecha De Servicio:",
+        "fr": "Date de la maintenance :"
       },
       "_row_num": 148
     },
@@ -1172,7 +1317,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "type_of_maintenance",
       "text": {
         "default": "Type of Maintenance:",
-        "es": "Tipo De Mantenimiento:"
+        "es": "Tipo De Mantenimiento:",
+        "fr": "Type de maintenance :"
       },
       "_row_num": 149
     },
@@ -1180,7 +1326,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "spare_parts",
       "text": {
         "default": "Spare Parts:",
-        "es": "Piezas De Repuesto:"
+        "es": "Piezas De Repuesto:",
+        "fr": "Pièces détachées :"
       },
       "_row_num": 150
     },
@@ -1188,7 +1335,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "additional_spare_parts",
       "text": {
         "default": "Additional Spare Parts:",
-        "es": "Repuestos Adicionales:"
+        "es": "Repuestos Adicionales:",
+        "fr": "Pièces détachées supplémentaires"
       },
       "_row_num": 151
     },
@@ -1196,7 +1344,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "notes",
       "text": {
         "default": "Notes:",
-        "es": "Notas:"
+        "es": "Notas:",
+        "fr": "Notes :"
       },
       "_row_num": 152
     },
@@ -1204,7 +1353,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "model",
       "text": {
         "default": "Model:",
-        "es": "Modelo:"
+        "es": "Modelo:",
+        "fr": "Modèle :"
       },
       "_row_num": 153
     },
@@ -1212,7 +1362,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "catalog_id",
       "text": {
         "default": "Catalog ID:",
-        "es": "ID Del Catálogo:"
+        "es": "ID Del Catálogo:",
+        "fr": "ID du catalogue :"
       },
       "_row_num": 154
     },
@@ -1220,7 +1371,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "model_information",
       "text": {
         "default": "Model Information",
-        "es": "Información Del Modelo"
+        "es": "Información Del Modelo",
+        "fr": "Informations sur le modèle"
       },
       "_row_num": 155
     },
@@ -1228,7 +1380,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "manufacturer",
       "text": {
         "default": "Manufacturer:",
-        "es": "Fabricante:"
+        "es": "Fabricante:",
+        "fr": "Fabricant :"
       },
       "_row_num": 156
     },
@@ -1236,7 +1389,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "power_sources",
       "text": {
         "default": "Power Sources:",
-        "es": "Fuentes De Energía:"
+        "es": "Fuentes De Energía:",
+        "fr": "Sources d'énergie :"
       },
       "_row_num": 157
     },
@@ -1244,7 +1398,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "fridge_gross_volume",
       "text": {
         "default": "Fridge Gross Volume:",
-        "es": "Volumen Total Del Frig:"
+        "es": "Volumen Total Del Frig:",
+        "fr": "Volume brut du réfrigérateur :"
       },
       "_row_num": 158
     },
@@ -1252,7 +1407,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "freezer_gross_volume",
       "text": {
         "default": "Freezer Gross Volume:",
-        "es": "Volumen Total Del Congelador:"
+        "es": "Volumen Total Del Congelador:",
+        "fr": "Volume brut du congélateur :"
       },
       "_row_num": 159
     },
@@ -1260,7 +1416,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "equipment_type",
       "text": {
         "default": "Equipment Type:",
-        "es": "Tipo De Equipo:"
+        "es": "Tipo De Equipo:",
+        "fr": "Type de matériel :"
       },
       "_row_num": 160
     },
@@ -1268,7 +1425,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "climate_zone",
       "text": {
         "default": "Climate Zone:",
-        "es": "Zona Climática:"
+        "es": "Zona Climática:",
+        "fr": "Zone climatique :"
       },
       "_row_num": 161
     },
@@ -1276,7 +1434,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "fridge_net_volume",
       "text": {
         "default": "Fridge Net Volume:",
-        "es": "Volumen Neto Del Frig:"
+        "es": "Volumen Neto Del Frig:",
+        "fr": "Volume net du réfrigérateur :"
       },
       "_row_num": 162
     },
@@ -1284,7 +1443,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "freezer_net_volume",
       "text": {
         "default": "Freezer Net Volume:",
-        "es": "Volumen Neto Del Congelador:"
+        "es": "Volumen Neto Del Congelador:",
+        "fr": "Volume net du congélateur :"
       },
       "_row_num": 163
     },
@@ -1292,7 +1452,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_all",
       "text": {
         "default": "View all",
-        "es": "Ver todo"
+        "es": "Ver todo",
+        "fr": "Voir tout"
       },
       "_row_num": 164
     },
@@ -1300,7 +1461,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "refrigerators",
       "text": {
         "default": "Refrigerators",
-        "es": "Refrigeradores"
+        "es": "Refrigeradores",
+        "fr": "Réfrigérateurs"
       },
       "_row_num": 165
     },
@@ -1308,7 +1470,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "basic_refrigerator_information",
       "text": {
         "default": "Basic Refrigerator Information",
-        "es": "Información Básica Del Refrigerador"
+        "es": "Información Básica Del Refrigerador",
+        "fr": "Informations de base sur le réfrigérateur"
       },
       "_row_num": 166
     },
@@ -1316,7 +1479,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "facility",
       "text": {
         "default": "Facility:",
-        "es": "Facilidad:"
+        "es": "Facilidad:",
+        "fr": "Établissement :"
       },
       "_row_num": 167
     },
@@ -1324,7 +1488,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "year_installed",
       "text": {
         "default": "Year Installed:",
-        "es": "Año Instalado:"
+        "es": "Año Instalado:",
+        "fr": "Année d'installation :"
       },
       "_row_num": 168
     },
@@ -1332,7 +1497,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "status",
       "text": {
         "default": "Status:",
-        "es": "Estado:"
+        "es": "Estado:",
+        "fr": "État :"
       },
       "_row_num": 169
     },
@@ -1340,7 +1506,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "service_priority",
       "text": {
         "default": "Service Priority:",
-        "es": "Prioridad De Servicio:"
+        "es": "Prioridad De Servicio:",
+        "fr": "Priorité de la maintenance :"
       },
       "_row_num": 170
     },
@@ -1348,7 +1515,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "model_id",
       "text": {
         "default": "Model ID:",
-        "es": "ID Del Modelo:"
+        "es": "ID Del Modelo:",
+        "fr": "ID du modèle :"
       },
       "_row_num": 171
     },
@@ -1356,7 +1524,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "voltage_regulator",
       "text": {
         "default": "Voltage Regulator?",
-        "es": "¿Regulador De Voltaje?"
+        "es": "¿Regulador De Voltaje?",
+        "fr": "Régulateur de tension ?"
       },
       "_row_num": 172
     },
@@ -1364,7 +1533,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_model_information",
       "text": {
         "default": "View Model Information",
-        "es": "Ver Información Del Modelo"
+        "es": "Ver Información Del Modelo",
+        "fr": "Voir les informations sur le modèle"
       },
       "_row_num": 173
     },
@@ -1372,7 +1542,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_facility_information",
       "text": {
         "default": "View Facility Information",
-        "es": "Ver Información De La Facilidad"
+        "es": "Ver Información De La Facilidad",
+        "fr": "Voir les informations sur l'établissement"
       },
       "_row_num": 174
     },
@@ -1380,7 +1551,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "add_maintenance_record",
       "text": {
         "default": "Add Maintenance Record",
-        "es": "Agregar Registro De Mantenimiento"
+        "es": "Agregar Registro De Mantenimiento",
+        "fr": "Ajouter une fiche de maintenance"
       },
       "_row_num": 175
     },
@@ -1388,7 +1560,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_all_maintenance_records",
       "text": {
         "default": "View All Maintenance Records",
-        "es": "Ver Todos Los Registros De Mantenimiento"
+        "es": "Ver Todos Los Registros De Mantenimiento",
+        "fr": "Voir toutes les fiches de maintenance"
       },
       "_row_num": 176
     },
@@ -1396,7 +1569,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "edit_refrigerator_status",
       "text": {
         "default": "Edit Refrigerator Status",
-        "es": "Editar El Estado Del Refrigerador"
+        "es": "Editar El Estado Del Refrigerador",
+        "fr": "Modifier l'état du réfrigérateur"
       },
       "_row_num": 177
     },
@@ -1404,7 +1578,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "edit_refrigerator",
       "text": {
         "default": "Edit Refrigerator",
-        "es": "Editar Refrigerador"
+        "es": "Editar Refrigerador",
+        "fr": "Modifier le réfrigérateur"
       },
       "_row_num": 178
     },
@@ -1412,7 +1587,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "delete_refrigerator",
       "text": {
         "default": "Delete Refrigerator",
-        "es": "Suprimir Refrigerador"
+        "es": "Suprimir Refrigerador",
+        "fr": "Supprimer le réfrigérateur"
       },
       "_row_num": 179
     },
@@ -1420,7 +1596,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "add_sentinel_survey",
       "text": {
         "default": "Add Sentinel Survey",
-        "es": "Añadir Encuesta Centinela"
+        "es": "Añadir Encuesta Centinela",
+        "fr": "Nombre de réfrigérateurs"
       },
       "_row_num": 180
     },
@@ -1428,7 +1605,8 @@ window.odkFrameworkDefinitions = {
       "string_token": "view_sentinel_survey",
       "text": {
         "default": "View Sentinel Surveys",
-        "es": "Ver encuestas de Centinela"
+        "es": "Ver encuestas de Centinela",
+        "fr": "Voir les enquêtes sentinelles"
       },
       "_row_num": 181
     }

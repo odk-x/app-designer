@@ -12,13 +12,15 @@
           "title": {
             "text": {
               "default": "Facility Name",
-              "es": "Nombre de Facilidad"
+              "es": "Nombre de Facilidad",
+              "fr": "Nom de l'établissement"
             }
           },
           "prompt": {
             "text": {
               "default": "Enter health facility name",
-              "es": "Nombre de Facilidad"
+              "es": "Nombre de Facilidad",
+              "fr": "Entrer le nom de l'établissement de santé"
             }
           }
         },
@@ -32,13 +34,15 @@
           "title": {
             "text": {
               "default": "Facility ID",
-              "es": "ID de Facilidad"
+              "es": "ID de Facilidad",
+              "fr": "ID de l'établissement"
             }
           },
           "prompt": {
             "text": {
               "default": "Enter health facility ID",
-              "es": "ID de Facilidad"
+              "es": "ID de Facilidad",
+              "fr": "Entrer l'ID de l'établissement de santé"
             }
           }
         },
@@ -60,13 +64,15 @@
           "title": {
             "text": {
               "default": "Location",
-              "es": "Ubicación"
+              "es": "Ubicación",
+              "fr": "Localisation"
             }
           },
           "prompt": {
             "text": {
               "default": "Capture location",
-              "es": "Ubicación"
+              "es": "Ubicación",
+              "fr": "Localisation"
             }
           }
         },
@@ -80,13 +86,15 @@
           "title": {
             "text": {
               "default": "Admin Region",
-              "es": "Region administrativo"
+              "es": "Region administrativo",
+              "fr": "Région administrative"
             }
           },
           "prompt": {
             "text": {
               "default": "Admin Region",
-              "es": "Region administrativo"
+              "es": "Region administrativo",
+              "fr": "Région administrative"
             }
           }
         },
@@ -109,13 +117,15 @@
           "title": {
             "text": {
               "default": "Facility Type",
-              "es": "Tipo de facilidad"
+              "es": "Tipo de facilidad",
+              "fr": "Type d'établissement"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose the facility type",
-              "es": "Tipo de facilidad"
+              "es": "Tipo de facilidad",
+              "fr": "Choisir le type d'établissement"
             }
           }
         },
@@ -129,13 +139,15 @@
           "title": {
             "text": {
               "default": "Facility Ownership",
-              "es": "Tipo de propriedad"
+              "es": "Tipo de propriedad",
+              "fr": "Propriétaire de l'établissement"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose the ownership",
-              "es": "Tipo de propriedad"
+              "es": "Tipo de propriedad",
+              "fr": "Choisir le propriétaire"
             }
           }
         },
@@ -148,13 +160,15 @@
           "title": {
             "text": {
               "default": "Catchment Population",
-              "es": "Captación de facilidad"
+              "es": "Captación de facilidad",
+              "fr": "Population desservie"
             }
           },
           "prompt": {
             "text": {
               "default": "Enter the catchment population",
-              "es": "Captación de facilidad"
+              "es": "Captación de facilidad",
+              "fr": "Entrer la population desservie"
             }
           }
         },
@@ -176,13 +190,15 @@
           "title": {
             "text": {
               "default": "Electricity Source",
-              "es": "Fuente de energía"
+              "es": "Fuente de energía",
+              "fr": "Source d'électricité"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose the electricity source",
-              "es": "Fuente de energía"
+              "es": "Fuente de energía",
+              "fr": "Choisir la source d'électricité"
             }
           }
         },
@@ -201,13 +217,15 @@
           "title": {
             "text": {
               "default": "Grid Availability",
-              "es": "Disponibilidad del red de energía"
+              "es": "Disponibilidad del red de energía",
+              "fr": "Électricité disponible"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose the grid availability",
-              "es": "Disponibilidad del red de energía"
+              "es": "Disponibilidad del red de energía",
+              "fr": "Indiquer si l'électricité est disponible"
             }
           },
           "hint": {
@@ -231,13 +249,15 @@
           "title": {
             "text": {
               "default": "Fuel Availability",
-              "es": "Disponibilidad de combustible"
+              "es": "Disponibilidad de combustible",
+              "fr": "Carburant disponible"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose the fuel availability",
-              "es": "Disponibilidad de combustible"
+              "es": "Disponibilidad de combustible",
+              "fr": "Indiquer si le carburant est disponible"
             }
           }
         },
@@ -258,13 +278,15 @@
           "title": {
             "text": {
               "default": "Distance to the Closest Supply Point",
-              "es": "Distancia al más proximo punto de reabastecimiento"
+              "es": "Distancia al más proximo punto de reabastecimiento",
+              "fr": "Distance par rapport au lieu d'approvisionnement le plus proche"
             }
           },
           "prompt": {
             "text": {
               "default": "What is the distance to the nearest supply point?",
-              "es": "Distancia al más proximo punto de reabastecimiento?"
+              "es": "Distancia al más proximo punto de reabastecimiento?",
+              "fr": "À quelle distance se trouve le lieu d'approvisionnement le plus proche ?"
             }
           },
           "hint": {
@@ -284,13 +306,15 @@
           "title": {
             "text": {
               "default": "Immunization Services Offered",
-              "es": "Tipo de envío"
+              "es": "Tipo de envío",
+              "fr": "Services de vaccination proposés"
             }
           },
           "prompt": {
             "text": {
               "default": "Delivery type?",
-              "es": "Tipo de envío?"
+              "es": "Tipo de envío?",
+              "fr": "Mode de livraison"
             }
           }
         },
@@ -311,13 +335,15 @@
           "title": {
             "text": {
               "default": "Supply Interval",
-              "es": "Intervalo de reabastecimiento"
+              "es": "Intervalo de reabastecimiento",
+              "fr": "Intervalle entre chaque approvisionnement"
             }
           },
           "prompt": {
             "text": {
               "default": "Vaccine Supply Interval (# of weeks between supply)?",
-              "es": "Intervalo de reabastecimiento (# de semanas entre el suministro)?"
+              "es": "Intervalo de reabastecimiento (# de semanas entre el suministro)?",
+              "fr": "Intervalle (nombre de semaines) entre chaque approvisionnement en vaccins"
             }
           }
         },
@@ -331,13 +357,15 @@
           "title": {
             "text": {
               "default": "Supply Mode",
-              "es": "Modo de recibir vacunas"
+              "es": "Modo de recibir vacunas",
+              "fr": "Mode d'approvisionnement"
             }
           },
           "prompt": {
             "text": {
               "default": "Vaccine Supply Mode?",
-              "es": "Modo de recibir vacunas?"
+              "es": "Modo de recibir vacunas?",
+              "fr": "Mode d'approvisionnement en vaccins"
             }
           }
         },
@@ -358,13 +386,15 @@
           "title": {
             "text": {
               "default": "Contact Name",
-              "es": "Nombre del contacto"
+              "es": "Nombre del contacto",
+              "fr": "Nom de la personne à contacter"
             }
           },
           "prompt": {
             "text": {
               "default": "Contact Name?",
-              "es": "Nombre del contacto?"
+              "es": "Nombre del contacto?",
+              "fr": "Nom de la personne à contacter"
             }
           }
         },
@@ -377,13 +407,15 @@
           "title": {
             "text": {
               "default": "Contact Title",
-              "es": "Título del contacto"
+              "es": "Título del contacto",
+              "fr": "Titre de la personne à contacter"
             }
           },
           "prompt": {
             "text": {
               "default": "Contact Title?",
-              "es": "Título del contacto?"
+              "es": "Título del contacto?",
+              "fr": "Titre de la personne à contacter"
             }
           }
         },
@@ -396,13 +428,15 @@
           "title": {
             "text": {
               "default": "Contact Phone Number",
-              "es": "Teléfono de contacto"
+              "es": "Teléfono de contacto",
+              "fr": "Numéro de téléphone de la personne à contacter"
             }
           },
           "prompt": {
             "text": {
               "default": "Contact Phone Number",
-              "es": "Teléfono de contacto?"
+              "es": "Teléfono de contacto?",
+              "fr": "Numéro de téléphone de la personne à contacter"
             }
           }
         },
@@ -423,13 +457,15 @@
           "title": {
             "text": {
               "default": "Total number of cold boxes at facility",
-              "es": "Número total de cajas frías en la facilidad"
+              "es": "Número total de cajas frías en la facilidad",
+              "fr": "Nombre de glacières dans l'établissement"
             }
           },
           "prompt": {
             "text": {
               "default": "Total number of cold boxes at facility?",
-              "es": "Número total de cajas frías en la facilidad?"
+              "es": "Número total de cajas frías en la facilidad?",
+              "fr": "Nombre de glacières dans l'établissement"
             }
           }
         },
@@ -442,13 +478,15 @@
           "title": {
             "text": {
               "default": "Number of freeze safe cold boxes at facility",
-              "es": "Número de cajas frías a congelación segura en la facilidad"
+              "es": "Número de cajas frías a congelación segura en la facilidad",
+              "fr": "Nombre de glacières pour congélation sûre dans l'établissement"
             }
           },
           "prompt": {
             "text": {
               "default": "Number of freeze safe cold boxes at facility?",
-              "es": "Número de cajas frías a congelación segura en la facilidad?"
+              "es": "Número de cajas frías a congelación segura en la facilidad?",
+              "fr": "Nombre de glacières pour congélation sûre dans l'établissement"
             }
           }
         },
@@ -469,13 +507,15 @@
           "title": {
             "text": {
               "default": "Total number of vaccine carriers at facility",
-              "es": "Número total de portadores de vacunas en la facilidad"
+              "es": "Número total de portadores de vacunas en la facilidad",
+              "fr": "Nombre de porte-vaccins dans l'établissement"
             }
           },
           "prompt": {
             "text": {
               "default": "Total number of vaccine carriers at facility?",
-              "es": "Número total de portadores de vacunas en la facilidad?"
+              "es": "Número total de portadores de vacunas en la facilidad?",
+              "fr": "Nombre de porte-vaccins dans l'établissement"
             }
           }
         },
@@ -488,13 +528,15 @@
           "title": {
             "text": {
               "default": "Number of freeze safe vaccine carriers at facility",
-              "es": "Número de portadores de vacunas a congelación segura en la facilidad"
+              "es": "Número de portadores de vacunas a congelación segura en la facilidad",
+              "fr": "Nombre de porte-vaccins pour congélation sûre dans l'établissement"
             }
           },
           "prompt": {
             "text": {
               "default": "Number of freeze safe vaccine carriers at facility?",
-              "es": "Número de portadores de vacunas a congelación segura en la facilidad?"
+              "es": "Número de portadores de vacunas a congelación segura en la facilidad?",
+              "fr": "Nombre de porte-vaccins pour congélation sûre dans l'établissement"
             }
           }
         },
@@ -513,7 +555,8 @@
           "title": {
             "text": {
               "default": "Yes",
-              "es": "Sí"
+              "es": "Sí",
+              "fr": "Oui"
             }
           }
         },
@@ -526,7 +569,8 @@
           "title": {
             "text": {
               "default": "No",
-              "es": "No"
+              "es": "No",
+              "fr": "Non"
             }
           }
         },
@@ -539,7 +583,8 @@
           "title": {
             "text": {
               "default": "National vaccine store",
-              "es": "Tienda nacional de vacunas"
+              "es": "Tienda nacional de vacunas",
+              "fr": "Entrepôt national de vaccins"
             }
           }
         },
@@ -552,7 +597,8 @@
           "title": {
             "text": {
               "default": "Regional vaccine store",
-              "es": "Tienda regional de vacunas"
+              "es": "Tienda regional de vacunas",
+              "fr": "Entrepôt régional de vaccins"
             }
           }
         },
@@ -565,7 +611,8 @@
           "title": {
             "text": {
               "default": "District vaccine store",
-              "es": "Tienda de vacunas por un distrito"
+              "es": "Tienda de vacunas por un distrito",
+              "fr": "Entrepôt de vaccins de district"
             }
           }
         },
@@ -578,7 +625,8 @@
           "title": {
             "text": {
               "default": "Central hospital",
-              "es": "Hospital centrál"
+              "es": "Hospital centrál",
+              "fr": "Hôpital central"
             }
           }
         },
@@ -591,7 +639,8 @@
           "title": {
             "text": {
               "default": "District hospital",
-              "es": "Hospital por un distrito"
+              "es": "Hospital por un distrito",
+              "fr": "Hôpital de district"
             }
           }
         },
@@ -604,7 +653,8 @@
           "title": {
             "text": {
               "default": "Rural hospital",
-              "es": "Hospital rurál"
+              "es": "Hospital rurál",
+              "fr": "Hôpital rural"
             }
           }
         },
@@ -617,7 +667,8 @@
           "title": {
             "text": {
               "default": "Hospital",
-              "es": "Hospital generál"
+              "es": "Hospital generál",
+              "fr": "Hôpital"
             }
           }
         },
@@ -630,7 +681,8 @@
           "title": {
             "text": {
               "default": "Community hospital",
-              "es": "Hospital de comunidad"
+              "es": "Hospital de comunidad",
+              "fr": "Hôpital communautaire"
             }
           }
         },
@@ -643,7 +695,8 @@
           "title": {
             "text": {
               "default": "Health center",
-              "es": "Centro de salud"
+              "es": "Centro de salud",
+              "fr": "Centre de santé"
             }
           }
         },
@@ -656,7 +709,8 @@
           "title": {
             "text": {
               "default": "Dispensary",
-              "es": "Dispensario"
+              "es": "Dispensario",
+              "fr": "Dispensaire"
             }
           }
         },
@@ -669,7 +723,8 @@
           "title": {
             "text": {
               "default": "Health Station",
-              "es": "Estación de salud"
+              "es": "Estación de salud",
+              "fr": "Station de santé"
             }
           }
         },
@@ -682,7 +737,8 @@
           "title": {
             "text": {
               "default": "Health post",
-              "es": "Campamiento de salud"
+              "es": "Campamiento de salud",
+              "fr": "Poste de santé"
             }
           }
         },
@@ -695,7 +751,8 @@
           "title": {
             "text": {
               "default": "Maternity",
-              "es": "Maternidad"
+              "es": "Maternidad",
+              "fr": "Maternité"
             }
           }
         },
@@ -721,7 +778,8 @@
           "title": {
             "text": {
               "default": "Public",
-              "es": "Público"
+              "es": "Público",
+              "fr": "Public"
             }
           }
         },
@@ -734,7 +792,8 @@
           "title": {
             "text": {
               "default": "Private",
-              "es": "Privado"
+              "es": "Privado",
+              "fr": "Privé"
             }
           }
         },
@@ -747,7 +806,8 @@
           "title": {
             "text": {
               "default": "NGO",
-              "es": "ONG"
+              "es": "ONG",
+              "fr": "ONG"
             }
           }
         },
@@ -760,7 +820,8 @@
           "title": {
             "text": {
               "default": "Faithbased",
-              "es": "Basado en fé"
+              "es": "Basado en fé",
+              "fr": "Confessionnel"
             }
           }
         },
@@ -773,7 +834,8 @@
           "title": {
             "text": {
               "default": "Other",
-              "es": "Otro"
+              "es": "Otro",
+              "fr": "Autre"
             }
           }
         },
@@ -786,7 +848,8 @@
           "title": {
             "text": {
               "default": "Grid",
-              "es": "Red"
+              "es": "Red",
+              "fr": "Électricité"
             }
           }
         },
@@ -799,7 +862,8 @@
           "title": {
             "text": {
               "default": "Solar",
-              "es": "Solar"
+              "es": "Solar",
+              "fr": "Énergie solaire"
             }
           }
         },
@@ -812,7 +876,8 @@
           "title": {
             "text": {
               "default": "Generator",
-              "es": "Generador"
+              "es": "Generador",
+              "fr": "Groupe électrogène"
             }
           }
         },
@@ -825,7 +890,8 @@
           "title": {
             "text": {
               "default": "Both Grid and Generator",
-              "es": "Red y generador"
+              "es": "Red y generador",
+              "fr": "Électricité et groupe électrogène"
             }
           }
         },
@@ -838,7 +904,8 @@
           "title": {
             "text": {
               "default": "Both Grid and Solar",
-              "es": "Red y solar"
+              "es": "Red y solar",
+              "fr": "Électricité et énergie solaire"
             }
           }
         },
@@ -851,7 +918,8 @@
           "title": {
             "text": {
               "default": "Both Generator and Solar",
-              "es": "Generador y solar"
+              "es": "Generador y solar",
+              "fr": "Groupe électrogène et énergie solaire"
             }
           }
         },
@@ -864,7 +932,8 @@
           "title": {
             "text": {
               "default": "None",
-              "es": "Nada"
+              "es": "Nada",
+              "fr": "Aucune source d'énergie"
             }
           }
         },
@@ -877,7 +946,8 @@
           "title": {
             "text": {
               "default": "More than 16",
-              "es": "Más que 16"
+              "es": "Más que 16",
+              "fr": "Plus de 16"
             }
           }
         },
@@ -890,7 +960,8 @@
           "title": {
             "text": {
               "default": "8 to 16",
-              "es": "8 a 16"
+              "es": "8 a 16",
+              "fr": "8 à 16"
             }
           }
         },
@@ -903,7 +974,8 @@
           "title": {
             "text": {
               "default": "4 to 8",
-              "es": "4 a 8"
+              "es": "4 a 8",
+              "fr": "4 à 8"
             }
           }
         },
@@ -916,7 +988,8 @@
           "title": {
             "text": {
               "default": "Fewer than 4",
-              "es": "Menos que 4"
+              "es": "Menos que 4",
+              "fr": "Moins de 4"
             }
           }
         },
@@ -929,7 +1002,8 @@
           "title": {
             "text": {
               "default": "None",
-              "es": "Ninguno"
+              "es": "Ninguno",
+              "fr": "Aucun"
             }
           }
         },
@@ -942,7 +1016,8 @@
           "title": {
             "text": {
               "default": "Available",
-              "es": "Disponible"
+              "es": "Disponible",
+              "fr": "Disponible"
             }
           }
         },
@@ -955,7 +1030,8 @@
           "title": {
             "text": {
               "default": "Irregular",
-              "es": "Irregular"
+              "es": "Irregular",
+              "fr": "Disponible de façon irrégulière"
             }
           }
         },
@@ -968,7 +1044,8 @@
           "title": {
             "text": {
               "default": "Not Available",
-              "es": "No Disponible"
+              "es": "No Disponible",
+              "fr": "Non disponible"
             }
           }
         },
@@ -981,7 +1058,8 @@
           "title": {
             "text": {
               "default": "Unknown",
-              "es": "Desconocido"
+              "es": "Desconocido",
+              "fr": "Ne sais pas"
             }
           }
         },
@@ -994,7 +1072,8 @@
           "title": {
             "text": {
               "default": "Not Applicable",
-              "es": "No Applicable"
+              "es": "No Applicable",
+              "fr": "Sans objet"
             }
           }
         },
@@ -1007,7 +1086,8 @@
           "title": {
             "text": {
               "default": "Moderate",
-              "es": "Moderate"
+              "es": "Moderate",
+              "fr": "Modéré"
             }
           }
         },
@@ -1020,7 +1100,8 @@
           "title": {
             "text": {
               "default": "Temperate",
-              "es": "Templado"
+              "es": "Templado",
+              "fr": "Tempéré"
             }
           }
         },
@@ -1033,7 +1114,8 @@
           "title": {
             "text": {
               "default": "Hot",
-              "es": "Caliente"
+              "es": "Caliente",
+              "fr": "Chaud"
             }
           }
         },
@@ -1046,7 +1128,8 @@
           "title": {
             "text": {
               "default": "Depot",
-              "es": "Depósito"
+              "es": "Depósito",
+              "fr": "Dépôt"
             }
           }
         },
@@ -1059,7 +1142,8 @@
           "title": {
             "text": {
               "default": "Delivery",
-              "es": "Envío"
+              "es": "Envío",
+              "fr": "Livraison"
             }
           }
         },
@@ -1072,7 +1156,8 @@
           "title": {
             "text": {
               "default": "Both Depot and Delivery",
-              "es": "Depósito y Envío"
+              "es": "Depósito y Envío",
+              "fr": "Dépôt et livraison"
             }
           }
         },
@@ -1085,7 +1170,8 @@
           "title": {
             "text": {
               "default": "Static/Fixed Post",
-              "es": "Estático/Puesto Fijo"
+              "es": "Estático/Puesto Fijo",
+              "fr": "Poste fixe"
             }
           }
         },
@@ -1098,7 +1184,8 @@
           "title": {
             "text": {
               "default": "Outreach",
-              "es": "Extensión"
+              "es": "Extensión",
+              "fr": "Ambulant"
             }
           }
         },
@@ -1111,7 +1198,8 @@
           "title": {
             "text": {
               "default": "Both Static and Outreach",
-              "es": "Estático y Extensión"
+              "es": "Estático y Extensión",
+              "fr": "Fixe et ambulant"
             }
           }
         },
@@ -1124,7 +1212,8 @@
           "title": {
             "text": {
               "default": "Storage Only",
-              "es": "Solo almacenamiento"
+              "es": "Solo almacenamiento",
+              "fr": "Stockage uniquement"
             }
           }
         },
@@ -1137,7 +1226,8 @@
           "title": {
             "text": {
               "default": "None",
-              "es": "Nada"
+              "es": "Nada",
+              "fr": "Aucun"
             }
           }
         },
@@ -1150,7 +1240,8 @@
           "title": {
             "text": {
               "default": "Delivered",
-              "es": "Enviado"
+              "es": "Enviado",
+              "fr": "Livré"
             }
           }
         },
@@ -1163,7 +1254,8 @@
           "title": {
             "text": {
               "default": "Collected",
-              "es": "Collectado"
+              "es": "Collectado",
+              "fr": "Collecté"
             }
           }
         },
@@ -1176,7 +1268,8 @@
           "title": {
             "text": {
               "default": "Both Delivered and Collected",
-              "es": "Enviado y Collectado"
+              "es": "Enviado y Collectado",
+              "fr": "Livré et collecté"
             }
           }
         },
@@ -1189,7 +1282,8 @@
           "title": {
             "text": {
               "default": "None",
-              "es": "Ninguno"
+              "es": "Ninguno",
+              "fr": "Aucun"
             }
           }
         },
@@ -1202,7 +1296,8 @@
           "title": {
             "text": {
               "default": "Unknown",
-              "es": "Desconocido"
+              "es": "Desconocido",
+              "fr": "Ne sais pas"
             }
           }
         },
@@ -1246,7 +1341,8 @@
           "title": {
             "text": {
               "default": "Health Facilities",
-              "es": "Facilidades de Salúd"
+              "es": "Facilidades de Salúd",
+              "fr": "Établissement de santé"
             }
           }
         },
@@ -1278,7 +1374,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -1290,11 +1387,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 10
+      },
+      {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Français"
+            }
+          }
+        },
+        "_row_num": 11
       }
     ],
     "properties": [
@@ -1416,7 +1527,8 @@
           "title": {
             "text": {
               "default": "Health Facilities",
-              "es": "Facilidades de Salúd"
+              "es": "Facilidades de Salúd",
+              "fr": "Établissement de santé"
             }
           }
         },
@@ -1448,7 +1560,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -1460,11 +1573,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 10
+      },
+      "fr": {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Français"
+            }
+          }
+        },
+        "_row_num": 11
       },
       "_locales": {
         "setting_name": "_locales",
@@ -1475,12 +1602,26 @@
               "locale": {
                 "text": {
                   "default": "Spanish",
-                  "es": "Español"
+                  "es": "Español",
+                  "fr": "Espagnol"
                 }
               }
             },
             "_row_num": 10,
             "name": "es"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "default": "French",
+                  "es": "Francés",
+                  "fr": "Français"
+                }
+              }
+            },
+            "_row_num": 11,
+            "name": "fr"
           },
           {
             "display": {
@@ -1503,7 +1644,8 @@
           "title": {
             "text": {
               "default": "Health Facilities",
-              "es": "Facilidades de Salúd"
+              "es": "Facilidades de Salúd",
+              "fr": "Établissement de santé"
             }
           }
         },
@@ -1519,7 +1661,8 @@
             "title": {
               "text": {
                 "default": "Yes",
-                "es": "Sí"
+                "es": "Sí",
+                "fr": "Oui"
               }
             }
           },
@@ -1532,7 +1675,8 @@
             "title": {
               "text": {
                 "default": "No",
-                "es": "No"
+                "es": "No",
+                "fr": "Non"
               }
             }
           },
@@ -1547,7 +1691,8 @@
             "title": {
               "text": {
                 "default": "National vaccine store",
-                "es": "Tienda nacional de vacunas"
+                "es": "Tienda nacional de vacunas",
+                "fr": "Entrepôt national de vaccins"
               }
             }
           },
@@ -1560,7 +1705,8 @@
             "title": {
               "text": {
                 "default": "Regional vaccine store",
-                "es": "Tienda regional de vacunas"
+                "es": "Tienda regional de vacunas",
+                "fr": "Entrepôt régional de vaccins"
               }
             }
           },
@@ -1573,7 +1719,8 @@
             "title": {
               "text": {
                 "default": "District vaccine store",
-                "es": "Tienda de vacunas por un distrito"
+                "es": "Tienda de vacunas por un distrito",
+                "fr": "Entrepôt de vaccins de district"
               }
             }
           },
@@ -1586,7 +1733,8 @@
             "title": {
               "text": {
                 "default": "Central hospital",
-                "es": "Hospital centrál"
+                "es": "Hospital centrál",
+                "fr": "Hôpital central"
               }
             }
           },
@@ -1599,7 +1747,8 @@
             "title": {
               "text": {
                 "default": "District hospital",
-                "es": "Hospital por un distrito"
+                "es": "Hospital por un distrito",
+                "fr": "Hôpital de district"
               }
             }
           },
@@ -1612,7 +1761,8 @@
             "title": {
               "text": {
                 "default": "Rural hospital",
-                "es": "Hospital rurál"
+                "es": "Hospital rurál",
+                "fr": "Hôpital rural"
               }
             }
           },
@@ -1625,7 +1775,8 @@
             "title": {
               "text": {
                 "default": "Hospital",
-                "es": "Hospital generál"
+                "es": "Hospital generál",
+                "fr": "Hôpital"
               }
             }
           },
@@ -1638,7 +1789,8 @@
             "title": {
               "text": {
                 "default": "Community hospital",
-                "es": "Hospital de comunidad"
+                "es": "Hospital de comunidad",
+                "fr": "Hôpital communautaire"
               }
             }
           },
@@ -1651,7 +1803,8 @@
             "title": {
               "text": {
                 "default": "Health center",
-                "es": "Centro de salud"
+                "es": "Centro de salud",
+                "fr": "Centre de santé"
               }
             }
           },
@@ -1664,7 +1817,8 @@
             "title": {
               "text": {
                 "default": "Dispensary",
-                "es": "Dispensario"
+                "es": "Dispensario",
+                "fr": "Dispensaire"
               }
             }
           },
@@ -1677,7 +1831,8 @@
             "title": {
               "text": {
                 "default": "Health Station",
-                "es": "Estación de salud"
+                "es": "Estación de salud",
+                "fr": "Station de santé"
               }
             }
           },
@@ -1690,7 +1845,8 @@
             "title": {
               "text": {
                 "default": "Health post",
-                "es": "Campamiento de salud"
+                "es": "Campamiento de salud",
+                "fr": "Poste de santé"
               }
             }
           },
@@ -1703,7 +1859,8 @@
             "title": {
               "text": {
                 "default": "Maternity",
-                "es": "Maternidad"
+                "es": "Maternidad",
+                "fr": "Maternité"
               }
             }
           },
@@ -1731,7 +1888,8 @@
             "title": {
               "text": {
                 "default": "Public",
-                "es": "Público"
+                "es": "Público",
+                "fr": "Public"
               }
             }
           },
@@ -1744,7 +1902,8 @@
             "title": {
               "text": {
                 "default": "Private",
-                "es": "Privado"
+                "es": "Privado",
+                "fr": "Privé"
               }
             }
           },
@@ -1757,7 +1916,8 @@
             "title": {
               "text": {
                 "default": "NGO",
-                "es": "ONG"
+                "es": "ONG",
+                "fr": "ONG"
               }
             }
           },
@@ -1770,7 +1930,8 @@
             "title": {
               "text": {
                 "default": "Faithbased",
-                "es": "Basado en fé"
+                "es": "Basado en fé",
+                "fr": "Confessionnel"
               }
             }
           },
@@ -1783,7 +1944,8 @@
             "title": {
               "text": {
                 "default": "Other",
-                "es": "Otro"
+                "es": "Otro",
+                "fr": "Autre"
               }
             }
           },
@@ -1798,7 +1960,8 @@
             "title": {
               "text": {
                 "default": "Grid",
-                "es": "Red"
+                "es": "Red",
+                "fr": "Électricité"
               }
             }
           },
@@ -1811,7 +1974,8 @@
             "title": {
               "text": {
                 "default": "Solar",
-                "es": "Solar"
+                "es": "Solar",
+                "fr": "Énergie solaire"
               }
             }
           },
@@ -1824,7 +1988,8 @@
             "title": {
               "text": {
                 "default": "Generator",
-                "es": "Generador"
+                "es": "Generador",
+                "fr": "Groupe électrogène"
               }
             }
           },
@@ -1837,7 +2002,8 @@
             "title": {
               "text": {
                 "default": "Both Grid and Generator",
-                "es": "Red y generador"
+                "es": "Red y generador",
+                "fr": "Électricité et groupe électrogène"
               }
             }
           },
@@ -1850,7 +2016,8 @@
             "title": {
               "text": {
                 "default": "Both Grid and Solar",
-                "es": "Red y solar"
+                "es": "Red y solar",
+                "fr": "Électricité et énergie solaire"
               }
             }
           },
@@ -1863,7 +2030,8 @@
             "title": {
               "text": {
                 "default": "Both Generator and Solar",
-                "es": "Generador y solar"
+                "es": "Generador y solar",
+                "fr": "Groupe électrogène et énergie solaire"
               }
             }
           },
@@ -1876,7 +2044,8 @@
             "title": {
               "text": {
                 "default": "None",
-                "es": "Nada"
+                "es": "Nada",
+                "fr": "Aucune source d'énergie"
               }
             }
           },
@@ -1891,7 +2060,8 @@
             "title": {
               "text": {
                 "default": "More than 16",
-                "es": "Más que 16"
+                "es": "Más que 16",
+                "fr": "Plus de 16"
               }
             }
           },
@@ -1904,7 +2074,8 @@
             "title": {
               "text": {
                 "default": "8 to 16",
-                "es": "8 a 16"
+                "es": "8 a 16",
+                "fr": "8 à 16"
               }
             }
           },
@@ -1917,7 +2088,8 @@
             "title": {
               "text": {
                 "default": "4 to 8",
-                "es": "4 a 8"
+                "es": "4 a 8",
+                "fr": "4 à 8"
               }
             }
           },
@@ -1930,7 +2102,8 @@
             "title": {
               "text": {
                 "default": "Fewer than 4",
-                "es": "Menos que 4"
+                "es": "Menos que 4",
+                "fr": "Moins de 4"
               }
             }
           },
@@ -1943,7 +2116,8 @@
             "title": {
               "text": {
                 "default": "None",
-                "es": "Ninguno"
+                "es": "Ninguno",
+                "fr": "Aucun"
               }
             }
           },
@@ -1958,7 +2132,8 @@
             "title": {
               "text": {
                 "default": "Available",
-                "es": "Disponible"
+                "es": "Disponible",
+                "fr": "Disponible"
               }
             }
           },
@@ -1971,7 +2146,8 @@
             "title": {
               "text": {
                 "default": "Irregular",
-                "es": "Irregular"
+                "es": "Irregular",
+                "fr": "Disponible de façon irrégulière"
               }
             }
           },
@@ -1984,7 +2160,8 @@
             "title": {
               "text": {
                 "default": "Not Available",
-                "es": "No Disponible"
+                "es": "No Disponible",
+                "fr": "Non disponible"
               }
             }
           },
@@ -1997,7 +2174,8 @@
             "title": {
               "text": {
                 "default": "Unknown",
-                "es": "Desconocido"
+                "es": "Desconocido",
+                "fr": "Ne sais pas"
               }
             }
           },
@@ -2010,7 +2188,8 @@
             "title": {
               "text": {
                 "default": "Not Applicable",
-                "es": "No Applicable"
+                "es": "No Applicable",
+                "fr": "Sans objet"
               }
             }
           },
@@ -2025,7 +2204,8 @@
             "title": {
               "text": {
                 "default": "Moderate",
-                "es": "Moderate"
+                "es": "Moderate",
+                "fr": "Modéré"
               }
             }
           },
@@ -2038,7 +2218,8 @@
             "title": {
               "text": {
                 "default": "Temperate",
-                "es": "Templado"
+                "es": "Templado",
+                "fr": "Tempéré"
               }
             }
           },
@@ -2051,7 +2232,8 @@
             "title": {
               "text": {
                 "default": "Hot",
-                "es": "Caliente"
+                "es": "Caliente",
+                "fr": "Chaud"
               }
             }
           },
@@ -2066,7 +2248,8 @@
             "title": {
               "text": {
                 "default": "Depot",
-                "es": "Depósito"
+                "es": "Depósito",
+                "fr": "Dépôt"
               }
             }
           },
@@ -2079,7 +2262,8 @@
             "title": {
               "text": {
                 "default": "Delivery",
-                "es": "Envío"
+                "es": "Envío",
+                "fr": "Livraison"
               }
             }
           },
@@ -2092,7 +2276,8 @@
             "title": {
               "text": {
                 "default": "Both Depot and Delivery",
-                "es": "Depósito y Envío"
+                "es": "Depósito y Envío",
+                "fr": "Dépôt et livraison"
               }
             }
           },
@@ -2107,7 +2292,8 @@
             "title": {
               "text": {
                 "default": "Static/Fixed Post",
-                "es": "Estático/Puesto Fijo"
+                "es": "Estático/Puesto Fijo",
+                "fr": "Poste fixe"
               }
             }
           },
@@ -2120,7 +2306,8 @@
             "title": {
               "text": {
                 "default": "Outreach",
-                "es": "Extensión"
+                "es": "Extensión",
+                "fr": "Ambulant"
               }
             }
           },
@@ -2133,7 +2320,8 @@
             "title": {
               "text": {
                 "default": "Both Static and Outreach",
-                "es": "Estático y Extensión"
+                "es": "Estático y Extensión",
+                "fr": "Fixe et ambulant"
               }
             }
           },
@@ -2146,7 +2334,8 @@
             "title": {
               "text": {
                 "default": "Storage Only",
-                "es": "Solo almacenamiento"
+                "es": "Solo almacenamiento",
+                "fr": "Stockage uniquement"
               }
             }
           },
@@ -2159,7 +2348,8 @@
             "title": {
               "text": {
                 "default": "None",
-                "es": "Nada"
+                "es": "Nada",
+                "fr": "Aucun"
               }
             }
           },
@@ -2174,7 +2364,8 @@
             "title": {
               "text": {
                 "default": "Delivered",
-                "es": "Enviado"
+                "es": "Enviado",
+                "fr": "Livré"
               }
             }
           },
@@ -2187,7 +2378,8 @@
             "title": {
               "text": {
                 "default": "Collected",
-                "es": "Collectado"
+                "es": "Collectado",
+                "fr": "Collecté"
               }
             }
           },
@@ -2200,7 +2392,8 @@
             "title": {
               "text": {
                 "default": "Both Delivered and Collected",
-                "es": "Enviado y Collectado"
+                "es": "Enviado y Collectado",
+                "fr": "Livré et collecté"
               }
             }
           },
@@ -2213,7 +2406,8 @@
             "title": {
               "text": {
                 "default": "None",
-                "es": "Ninguno"
+                "es": "Ninguno",
+                "fr": "Aucun"
               }
             }
           },
@@ -2226,7 +2420,8 @@
             "title": {
               "text": {
                 "default": "Unknown",
-                "es": "Desconocido"
+                "es": "Desconocido",
+                "fr": "Ne sais pas"
               }
             }
           },
@@ -2275,7 +2470,8 @@
         "displayName": {
           "text": {
             "default": "Facility Name",
-            "es": "Nombre de Facilidad"
+            "es": "Nombre de Facilidad",
+            "fr": "Nom de l'établissement"
           }
         },
         "elementKey": "facility_name"
@@ -2291,7 +2487,8 @@
         "displayName": {
           "text": {
             "default": "Facility ID",
-            "es": "ID de Facilidad"
+            "es": "ID de Facilidad",
+            "fr": "ID de l'établissement"
           }
         },
         "elementKey": "facility_id"
@@ -2326,7 +2523,8 @@
         "displayName": {
           "text": {
             "default": "Location",
-            "es": "Ubicación"
+            "es": "Ubicación",
+            "fr": "Localisation"
           }
         },
         "elementKey": "Location"
@@ -2342,7 +2540,8 @@
         "displayName": {
           "text": {
             "default": "Admin Region",
-            "es": "Region administrativo"
+            "es": "Region administrativo",
+            "fr": "Région administrative"
           }
         },
         "valuesList": "admin_region_list",
@@ -2359,7 +2558,8 @@
         "displayName": {
           "text": {
             "default": "Facility Type",
-            "es": "Tipo de facilidad"
+            "es": "Tipo de facilidad",
+            "fr": "Type d'établissement"
           }
         },
         "valuesList": "facility_types",
@@ -2376,7 +2576,8 @@
         "displayName": {
           "text": {
             "default": "Facility Ownership",
-            "es": "Tipo de propriedad"
+            "es": "Tipo de propriedad",
+            "fr": "Propriétaire de l'établissement"
           }
         },
         "valuesList": "ownership_types",
@@ -2393,7 +2594,8 @@
         "displayName": {
           "text": {
             "default": "Catchment Population",
-            "es": "Captación de facilidad"
+            "es": "Captación de facilidad",
+            "fr": "Population desservie"
           }
         },
         "elementKey": "catchment_population"
@@ -2409,7 +2611,8 @@
         "displayName": {
           "text": {
             "default": "Electricity Source",
-            "es": "Fuente de energía"
+            "es": "Fuente de energía",
+            "fr": "Source d'électricité"
           }
         },
         "valuesList": "elec_sources",
@@ -2426,7 +2629,8 @@
         "displayName": {
           "text": {
             "default": "Grid Availability",
-            "es": "Disponibilidad del red de energía"
+            "es": "Disponibilidad del red de energía",
+            "fr": "Électricité disponible"
           }
         },
         "valuesList": "grid",
@@ -2443,7 +2647,8 @@
         "displayName": {
           "text": {
             "default": "Fuel Availability",
-            "es": "Disponibilidad de combustible"
+            "es": "Disponibilidad de combustible",
+            "fr": "Carburant disponible"
           }
         },
         "valuesList": "fuel_availability_types",
@@ -2460,7 +2665,8 @@
         "displayName": {
           "text": {
             "default": "Distance to the Closest Supply Point",
-            "es": "Distancia al más proximo punto de reabastecimiento"
+            "es": "Distancia al más proximo punto de reabastecimiento",
+            "fr": "Distance par rapport au lieu d'approvisionnement le plus proche"
           }
         },
         "elementKey": "distance_to_supply"
@@ -2476,7 +2682,8 @@
         "displayName": {
           "text": {
             "default": "Immunization Services Offered",
-            "es": "Tipo de envío"
+            "es": "Tipo de envío",
+            "fr": "Services de vaccination proposés"
           }
         },
         "valuesList": "immunization_services",
@@ -2493,7 +2700,8 @@
         "displayName": {
           "text": {
             "default": "Supply Interval",
-            "es": "Intervalo de reabastecimiento"
+            "es": "Intervalo de reabastecimiento",
+            "fr": "Intervalle entre chaque approvisionnement"
           }
         },
         "elementKey": "vaccine_supply_interval"
@@ -2509,7 +2717,8 @@
         "displayName": {
           "text": {
             "default": "Supply Mode",
-            "es": "Modo de recibir vacunas"
+            "es": "Modo de recibir vacunas",
+            "fr": "Mode d'approvisionnement"
           }
         },
         "valuesList": "vaccine_modes",
@@ -2526,7 +2735,8 @@
         "displayName": {
           "text": {
             "default": "Contact Name",
-            "es": "Nombre del contacto"
+            "es": "Nombre del contacto",
+            "fr": "Nom de la personne à contacter"
           }
         },
         "elementKey": "contact_name"
@@ -2542,7 +2752,8 @@
         "displayName": {
           "text": {
             "default": "Contact Title",
-            "es": "Título del contacto"
+            "es": "Título del contacto",
+            "fr": "Titre de la personne à contacter"
           }
         },
         "elementKey": "contact_title"
@@ -2558,7 +2769,8 @@
         "displayName": {
           "text": {
             "default": "Contact Phone Number",
-            "es": "Teléfono de contacto"
+            "es": "Teléfono de contacto",
+            "fr": "Numéro de téléphone de la personne à contacter"
           }
         },
         "elementKey": "contact_phone_number"
@@ -2574,7 +2786,8 @@
         "displayName": {
           "text": {
             "default": "Total number of cold boxes at facility",
-            "es": "Número total de cajas frías en la facilidad"
+            "es": "Número total de cajas frías en la facilidad",
+            "fr": "Nombre de glacières dans l'établissement"
           }
         },
         "elementKey": "number_of_cold_boxes"
@@ -2590,7 +2803,8 @@
         "displayName": {
           "text": {
             "default": "Number of freeze safe cold boxes at facility",
-            "es": "Número de cajas frías a congelación segura en la facilidad"
+            "es": "Número de cajas frías a congelación segura en la facilidad",
+            "fr": "Nombre de glacières pour congélation sûre dans l'établissement"
           }
         },
         "elementKey": "number_of_fs_cold_boxes"
@@ -2606,7 +2820,8 @@
         "displayName": {
           "text": {
             "default": "Total number of vaccine carriers at facility",
-            "es": "Número total de portadores de vacunas en la facilidad"
+            "es": "Número total de portadores de vacunas en la facilidad",
+            "fr": "Nombre de porte-vaccins dans l'établissement"
           }
         },
         "elementKey": "number_of_vaccine_carriers"
@@ -2622,7 +2837,8 @@
         "displayName": {
           "text": {
             "default": "Number of freeze safe vaccine carriers at facility",
-            "es": "Número de portadores de vacunas a congelación segura en la facilidad"
+            "es": "Número de portadores de vacunas a congelación segura en la facilidad",
+            "fr": "Nombre de porte-vaccins pour congélation sûre dans l'établissement"
           }
         },
         "elementKey": "number_of_fs_vaccine_carriers"
@@ -2645,13 +2861,15 @@
               "title": {
                 "text": {
                   "default": "Facility Name",
-                  "es": "Nombre de Facilidad"
+                  "es": "Nombre de Facilidad",
+                  "fr": "Nom de l'établissement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Enter health facility name",
-                  "es": "Nombre de Facilidad"
+                  "es": "Nombre de Facilidad",
+                  "fr": "Entrer le nom de l'établissement de santé"
                 }
               }
             },
@@ -2670,13 +2888,15 @@
               "title": {
                 "text": {
                   "default": "Facility ID",
-                  "es": "ID de Facilidad"
+                  "es": "ID de Facilidad",
+                  "fr": "ID de l'établissement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Enter health facility ID",
-                  "es": "ID de Facilidad"
+                  "es": "ID de Facilidad",
+                  "fr": "Entrer l'ID de l'établissement de santé"
                 }
               }
             },
@@ -2695,13 +2915,15 @@
               "title": {
                 "text": {
                   "default": "Location",
-                  "es": "Ubicación"
+                  "es": "Ubicación",
+                  "fr": "Localisation"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Capture location",
-                  "es": "Ubicación"
+                  "es": "Ubicación",
+                  "fr": "Localisation"
                 }
               }
             },
@@ -2720,13 +2942,15 @@
               "title": {
                 "text": {
                   "default": "Admin Region",
-                  "es": "Region administrativo"
+                  "es": "Region administrativo",
+                  "fr": "Région administrative"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Admin Region",
-                  "es": "Region administrativo"
+                  "es": "Region administrativo",
+                  "fr": "Région administrative"
                 }
               }
             },
@@ -2746,13 +2970,15 @@
               "title": {
                 "text": {
                   "default": "Facility Type",
-                  "es": "Tipo de facilidad"
+                  "es": "Tipo de facilidad",
+                  "fr": "Type d'établissement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose the facility type",
-                  "es": "Tipo de facilidad"
+                  "es": "Tipo de facilidad",
+                  "fr": "Choisir le type d'établissement"
                 }
               }
             },
@@ -2771,13 +2997,15 @@
               "title": {
                 "text": {
                   "default": "Facility Ownership",
-                  "es": "Tipo de propriedad"
+                  "es": "Tipo de propriedad",
+                  "fr": "Propriétaire de l'établissement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose the ownership",
-                  "es": "Tipo de propriedad"
+                  "es": "Tipo de propriedad",
+                  "fr": "Choisir le propriétaire"
                 }
               }
             },
@@ -2795,13 +3023,15 @@
               "title": {
                 "text": {
                   "default": "Catchment Population",
-                  "es": "Captación de facilidad"
+                  "es": "Captación de facilidad",
+                  "fr": "Population desservie"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Enter the catchment population",
-                  "es": "Captación de facilidad"
+                  "es": "Captación de facilidad",
+                  "fr": "Entrer la population desservie"
                 }
               }
             },
@@ -2820,13 +3050,15 @@
               "title": {
                 "text": {
                   "default": "Electricity Source",
-                  "es": "Fuente de energía"
+                  "es": "Fuente de energía",
+                  "fr": "Source d'électricité"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose the electricity source",
-                  "es": "Fuente de energía"
+                  "es": "Fuente de energía",
+                  "fr": "Choisir la source d'électricité"
                 }
               }
             },
@@ -2845,13 +3077,15 @@
               "title": {
                 "text": {
                   "default": "Grid Availability",
-                  "es": "Disponibilidad del red de energía"
+                  "es": "Disponibilidad del red de energía",
+                  "fr": "Électricité disponible"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose the grid availability",
-                  "es": "Disponibilidad del red de energía"
+                  "es": "Disponibilidad del red de energía",
+                  "fr": "Indiquer si l'électricité est disponible"
                 }
               },
               "hint": {
@@ -2876,13 +3110,15 @@
               "title": {
                 "text": {
                   "default": "Fuel Availability",
-                  "es": "Disponibilidad de combustible"
+                  "es": "Disponibilidad de combustible",
+                  "fr": "Carburant disponible"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose the fuel availability",
-                  "es": "Disponibilidad de combustible"
+                  "es": "Disponibilidad de combustible",
+                  "fr": "Indiquer si le carburant est disponible"
                 }
               }
             },
@@ -2900,13 +3136,15 @@
               "title": {
                 "text": {
                   "default": "Distance to the Closest Supply Point",
-                  "es": "Distancia al más proximo punto de reabastecimiento"
+                  "es": "Distancia al más proximo punto de reabastecimiento",
+                  "fr": "Distance par rapport au lieu d'approvisionnement le plus proche"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "What is the distance to the nearest supply point?",
-                  "es": "Distancia al más proximo punto de reabastecimiento?"
+                  "es": "Distancia al más proximo punto de reabastecimiento?",
+                  "fr": "À quelle distance se trouve le lieu d'approvisionnement le plus proche ?"
                 }
               },
               "hint": {
@@ -2931,13 +3169,15 @@
               "title": {
                 "text": {
                   "default": "Immunization Services Offered",
-                  "es": "Tipo de envío"
+                  "es": "Tipo de envío",
+                  "fr": "Services de vaccination proposés"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Delivery type?",
-                  "es": "Tipo de envío?"
+                  "es": "Tipo de envío?",
+                  "fr": "Mode de livraison"
                 }
               }
             },
@@ -2955,13 +3195,15 @@
               "title": {
                 "text": {
                   "default": "Supply Interval",
-                  "es": "Intervalo de reabastecimiento"
+                  "es": "Intervalo de reabastecimiento",
+                  "fr": "Intervalle entre chaque approvisionnement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Vaccine Supply Interval (# of weeks between supply)?",
-                  "es": "Intervalo de reabastecimiento (# de semanas entre el suministro)?"
+                  "es": "Intervalo de reabastecimiento (# de semanas entre el suministro)?",
+                  "fr": "Intervalle (nombre de semaines) entre chaque approvisionnement en vaccins"
                 }
               }
             },
@@ -2980,13 +3222,15 @@
               "title": {
                 "text": {
                   "default": "Supply Mode",
-                  "es": "Modo de recibir vacunas"
+                  "es": "Modo de recibir vacunas",
+                  "fr": "Mode d'approvisionnement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Vaccine Supply Mode?",
-                  "es": "Modo de recibir vacunas?"
+                  "es": "Modo de recibir vacunas?",
+                  "fr": "Mode d'approvisionnement en vaccins"
                 }
               }
             },
@@ -3004,13 +3248,15 @@
               "title": {
                 "text": {
                   "default": "Contact Name",
-                  "es": "Nombre del contacto"
+                  "es": "Nombre del contacto",
+                  "fr": "Nom de la personne à contacter"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Contact Name?",
-                  "es": "Nombre del contacto?"
+                  "es": "Nombre del contacto?",
+                  "fr": "Nom de la personne à contacter"
                 }
               }
             },
@@ -3028,13 +3274,15 @@
               "title": {
                 "text": {
                   "default": "Contact Title",
-                  "es": "Título del contacto"
+                  "es": "Título del contacto",
+                  "fr": "Titre de la personne à contacter"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Contact Title?",
-                  "es": "Título del contacto?"
+                  "es": "Título del contacto?",
+                  "fr": "Titre de la personne à contacter"
                 }
               }
             },
@@ -3052,13 +3300,15 @@
               "title": {
                 "text": {
                   "default": "Contact Phone Number",
-                  "es": "Teléfono de contacto"
+                  "es": "Teléfono de contacto",
+                  "fr": "Numéro de téléphone de la personne à contacter"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Contact Phone Number",
-                  "es": "Teléfono de contacto?"
+                  "es": "Teléfono de contacto?",
+                  "fr": "Numéro de téléphone de la personne à contacter"
                 }
               }
             },
@@ -3076,13 +3326,15 @@
               "title": {
                 "text": {
                   "default": "Total number of cold boxes at facility",
-                  "es": "Número total de cajas frías en la facilidad"
+                  "es": "Número total de cajas frías en la facilidad",
+                  "fr": "Nombre de glacières dans l'établissement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Total number of cold boxes at facility?",
-                  "es": "Número total de cajas frías en la facilidad?"
+                  "es": "Número total de cajas frías en la facilidad?",
+                  "fr": "Nombre de glacières dans l'établissement"
                 }
               }
             },
@@ -3100,13 +3352,15 @@
               "title": {
                 "text": {
                   "default": "Number of freeze safe cold boxes at facility",
-                  "es": "Número de cajas frías a congelación segura en la facilidad"
+                  "es": "Número de cajas frías a congelación segura en la facilidad",
+                  "fr": "Nombre de glacières pour congélation sûre dans l'établissement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Number of freeze safe cold boxes at facility?",
-                  "es": "Número de cajas frías a congelación segura en la facilidad?"
+                  "es": "Número de cajas frías a congelación segura en la facilidad?",
+                  "fr": "Nombre de glacières pour congélation sûre dans l'établissement"
                 }
               }
             },
@@ -3124,13 +3378,15 @@
               "title": {
                 "text": {
                   "default": "Total number of vaccine carriers at facility",
-                  "es": "Número total de portadores de vacunas en la facilidad"
+                  "es": "Número total de portadores de vacunas en la facilidad",
+                  "fr": "Nombre de porte-vaccins dans l'établissement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Total number of vaccine carriers at facility?",
-                  "es": "Número total de portadores de vacunas en la facilidad?"
+                  "es": "Número total de portadores de vacunas en la facilidad?",
+                  "fr": "Nombre de porte-vaccins dans l'établissement"
                 }
               }
             },
@@ -3148,13 +3404,15 @@
               "title": {
                 "text": {
                   "default": "Number of freeze safe vaccine carriers at facility",
-                  "es": "Número de portadores de vacunas a congelación segura en la facilidad"
+                  "es": "Número de portadores de vacunas a congelación segura en la facilidad",
+                  "fr": "Nombre de porte-vaccins pour congélation sûre dans l'établissement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Number of freeze safe vaccine carriers at facility?",
-                  "es": "Número de portadores de vacunas a congelación segura en la facilidad?"
+                  "es": "Número de portadores de vacunas a congelación segura en la facilidad?",
+                  "fr": "Nombre de porte-vaccins pour congélation sûre dans l'établissement"
                 }
               }
             },
@@ -3375,7 +3633,8 @@
               "title": {
                 "text": {
                   "default": "Health Facilities",
-                  "es": "Facilidades de Salúd"
+                  "es": "Facilidades de Salúd",
+                  "fr": "Établissement de santé"
                 }
               }
             },
@@ -3537,7 +3796,8 @@
         "displayName": {
           "text": {
             "default": "Facility Name",
-            "es": "Nombre de Facilidad"
+            "es": "Nombre de Facilidad",
+            "fr": "Nom de l'établissement"
           }
         },
         "elementKey": "facility_name",
@@ -3556,7 +3816,8 @@
         "displayName": {
           "text": {
             "default": "Facility ID",
-            "es": "ID de Facilidad"
+            "es": "ID de Facilidad",
+            "fr": "ID de l'établissement"
           }
         },
         "elementKey": "facility_id",
@@ -3606,7 +3867,8 @@
         "displayName": {
           "text": {
             "default": "Location",
-            "es": "Ubicación"
+            "es": "Ubicación",
+            "fr": "Localisation"
           }
         },
         "elementKey": "Location",
@@ -3632,7 +3894,8 @@
         "displayName": {
           "text": {
             "default": "Admin Region",
-            "es": "Region administrativo"
+            "es": "Region administrativo",
+            "fr": "Région administrative"
           }
         },
         "valuesList": "admin_region_list",
@@ -3652,7 +3915,8 @@
         "displayName": {
           "text": {
             "default": "Facility Type",
-            "es": "Tipo de facilidad"
+            "es": "Tipo de facilidad",
+            "fr": "Type d'établissement"
           }
         },
         "valuesList": "facility_types",
@@ -3672,7 +3936,8 @@
         "displayName": {
           "text": {
             "default": "Facility Ownership",
-            "es": "Tipo de propriedad"
+            "es": "Tipo de propriedad",
+            "fr": "Propriétaire de l'établissement"
           }
         },
         "valuesList": "ownership_types",
@@ -3692,7 +3957,8 @@
         "displayName": {
           "text": {
             "default": "Catchment Population",
-            "es": "Captación de facilidad"
+            "es": "Captación de facilidad",
+            "fr": "Population desservie"
           }
         },
         "elementKey": "catchment_population",
@@ -3711,7 +3977,8 @@
         "displayName": {
           "text": {
             "default": "Electricity Source",
-            "es": "Fuente de energía"
+            "es": "Fuente de energía",
+            "fr": "Source d'électricité"
           }
         },
         "valuesList": "elec_sources",
@@ -3731,7 +3998,8 @@
         "displayName": {
           "text": {
             "default": "Grid Availability",
-            "es": "Disponibilidad del red de energía"
+            "es": "Disponibilidad del red de energía",
+            "fr": "Électricité disponible"
           }
         },
         "valuesList": "grid",
@@ -3751,7 +4019,8 @@
         "displayName": {
           "text": {
             "default": "Fuel Availability",
-            "es": "Disponibilidad de combustible"
+            "es": "Disponibilidad de combustible",
+            "fr": "Carburant disponible"
           }
         },
         "valuesList": "fuel_availability_types",
@@ -3771,7 +4040,8 @@
         "displayName": {
           "text": {
             "default": "Distance to the Closest Supply Point",
-            "es": "Distancia al más proximo punto de reabastecimiento"
+            "es": "Distancia al más proximo punto de reabastecimiento",
+            "fr": "Distance par rapport au lieu d'approvisionnement le plus proche"
           }
         },
         "elementKey": "distance_to_supply",
@@ -3790,7 +4060,8 @@
         "displayName": {
           "text": {
             "default": "Immunization Services Offered",
-            "es": "Tipo de envío"
+            "es": "Tipo de envío",
+            "fr": "Services de vaccination proposés"
           }
         },
         "valuesList": "immunization_services",
@@ -3810,7 +4081,8 @@
         "displayName": {
           "text": {
             "default": "Supply Interval",
-            "es": "Intervalo de reabastecimiento"
+            "es": "Intervalo de reabastecimiento",
+            "fr": "Intervalle entre chaque approvisionnement"
           }
         },
         "elementKey": "vaccine_supply_interval",
@@ -3829,7 +4101,8 @@
         "displayName": {
           "text": {
             "default": "Supply Mode",
-            "es": "Modo de recibir vacunas"
+            "es": "Modo de recibir vacunas",
+            "fr": "Mode d'approvisionnement"
           }
         },
         "valuesList": "vaccine_modes",
@@ -3849,7 +4122,8 @@
         "displayName": {
           "text": {
             "default": "Contact Name",
-            "es": "Nombre del contacto"
+            "es": "Nombre del contacto",
+            "fr": "Nom de la personne à contacter"
           }
         },
         "elementKey": "contact_name",
@@ -3868,7 +4142,8 @@
         "displayName": {
           "text": {
             "default": "Contact Title",
-            "es": "Título del contacto"
+            "es": "Título del contacto",
+            "fr": "Titre de la personne à contacter"
           }
         },
         "elementKey": "contact_title",
@@ -3887,7 +4162,8 @@
         "displayName": {
           "text": {
             "default": "Contact Phone Number",
-            "es": "Teléfono de contacto"
+            "es": "Teléfono de contacto",
+            "fr": "Numéro de téléphone de la personne à contacter"
           }
         },
         "elementKey": "contact_phone_number",
@@ -3906,7 +4182,8 @@
         "displayName": {
           "text": {
             "default": "Total number of cold boxes at facility",
-            "es": "Número total de cajas frías en la facilidad"
+            "es": "Número total de cajas frías en la facilidad",
+            "fr": "Nombre de glacières dans l'établissement"
           }
         },
         "elementKey": "number_of_cold_boxes",
@@ -3925,7 +4202,8 @@
         "displayName": {
           "text": {
             "default": "Number of freeze safe cold boxes at facility",
-            "es": "Número de cajas frías a congelación segura en la facilidad"
+            "es": "Número de cajas frías a congelación segura en la facilidad",
+            "fr": "Nombre de glacières pour congélation sûre dans l'établissement"
           }
         },
         "elementKey": "number_of_fs_cold_boxes",
@@ -3944,7 +4222,8 @@
         "displayName": {
           "text": {
             "default": "Total number of vaccine carriers at facility",
-            "es": "Número total de portadores de vacunas en la facilidad"
+            "es": "Número total de portadores de vacunas en la facilidad",
+            "fr": "Nombre de porte-vaccins dans l'établissement"
           }
         },
         "elementKey": "number_of_vaccine_carriers",
@@ -3963,7 +4242,8 @@
         "displayName": {
           "text": {
             "default": "Number of freeze safe vaccine carriers at facility",
-            "es": "Número de portadores de vacunas a congelación segura en la facilidad"
+            "es": "Número de portadores de vacunas a congelación segura en la facilidad",
+            "fr": "Nombre de porte-vaccins pour congélation sûre dans l'établissement"
           }
         },
         "elementKey": "number_of_fs_vaccine_carriers",
@@ -4118,196 +4398,196 @@
         "_aspect": "Location",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Location\",\"es\":\"Ubicación\"}}"
+        "_value": "{\"text\":{\"default\":\"Location\",\"es\":\"Ubicación\",\"fr\":\"Localisation\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "admin_region_id",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Admin Region\",\"es\":\"Region administrativo\"}}"
+        "_value": "{\"text\":{\"default\":\"Admin Region\",\"es\":\"Region administrativo\",\"fr\":\"Région administrative\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "catchment_population",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Catchment Population\",\"es\":\"Captación de facilidad\"}}"
+        "_value": "{\"text\":{\"default\":\"Catchment Population\",\"es\":\"Captación de facilidad\",\"fr\":\"Population desservie\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "contact_name",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Contact Name\",\"es\":\"Nombre del contacto\"}}"
+        "_value": "{\"text\":{\"default\":\"Contact Name\",\"es\":\"Nombre del contacto\",\"fr\":\"Nom de la personne à contacter\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "contact_phone_number",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Contact Phone Number\",\"es\":\"Teléfono de contacto\"}}"
+        "_value": "{\"text\":{\"default\":\"Contact Phone Number\",\"es\":\"Teléfono de contacto\",\"fr\":\"Numéro de téléphone de la personne à contacter\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "contact_title",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Contact Title\",\"es\":\"Título del contacto\"}}"
+        "_value": "{\"text\":{\"default\":\"Contact Title\",\"es\":\"Título del contacto\",\"fr\":\"Titre de la personne à contacter\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "distance_to_supply",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Distance to the Closest Supply Point\",\"es\":\"Distancia al más proximo punto de reabastecimiento\"}}"
+        "_value": "{\"text\":{\"default\":\"Distance to the Closest Supply Point\",\"es\":\"Distancia al más proximo punto de reabastecimiento\",\"fr\":\"Distance par rapport au lieu d'approvisionnement le plus proche\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "electricity_source",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"elec_sources\",\"data_value\":\"grid\",\"display\":{\"title\":{\"text\":{\"default\":\"Grid\",\"es\":\"Red\"}}},\"_row_num\":26},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solar\"}}},\"_row_num\":27},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Generator\",\"es\":\"Generador\"}}},\"_row_num\":28},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_grid_and_generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Grid and Generator\",\"es\":\"Red y generador\"}}},\"_row_num\":29},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_grid_and_solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Grid and Solar\",\"es\":\"Red y solar\"}}},\"_row_num\":30},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_solar_and_generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Generator and Solar\",\"es\":\"Generador y solar\"}}},\"_row_num\":31},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\"}}},\"_row_num\":32}]"
+        "_value": "[{\"choice_list_name\":\"elec_sources\",\"data_value\":\"grid\",\"display\":{\"title\":{\"text\":{\"default\":\"Grid\",\"es\":\"Red\",\"fr\":\"Électricité\"}}},\"_row_num\":26},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solar\",\"fr\":\"Énergie solaire\"}}},\"_row_num\":27},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Generator\",\"es\":\"Generador\",\"fr\":\"Groupe électrogène\"}}},\"_row_num\":28},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_grid_and_generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Grid and Generator\",\"es\":\"Red y generador\",\"fr\":\"Électricité et groupe électrogène\"}}},\"_row_num\":29},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_grid_and_solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Grid and Solar\",\"es\":\"Red y solar\",\"fr\":\"Électricité et énergie solaire\"}}},\"_row_num\":30},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"both_solar_and_generator\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Generator and Solar\",\"es\":\"Generador y solar\",\"fr\":\"Groupe électrogène et énergie solaire\"}}},\"_row_num\":31},{\"choice_list_name\":\"elec_sources\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\",\"fr\":\"Aucune source d'énergie\"}}},\"_row_num\":32}]"
       },
       {
         "_partition": "Column",
         "_aspect": "electricity_source",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Electricity Source\",\"es\":\"Fuente de energía\"}}"
+        "_value": "{\"text\":{\"default\":\"Electricity Source\",\"es\":\"Fuente de energía\",\"fr\":\"Source d'électricité\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "facility_id",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Facility ID\",\"es\":\"ID de Facilidad\"}}"
+        "_value": "{\"text\":{\"default\":\"Facility ID\",\"es\":\"ID de Facilidad\",\"fr\":\"ID de l'établissement\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "facility_name",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Facility Name\",\"es\":\"Nombre de Facilidad\"}}"
+        "_value": "{\"text\":{\"default\":\"Facility Name\",\"es\":\"Nombre de Facilidad\",\"fr\":\"Nom de l'établissement\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "facility_ownership",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"ownership_types\",\"data_value\":\"public\",\"display\":{\"title\":{\"text\":{\"default\":\"Public\",\"es\":\"Público\"}}},\"_row_num\":20},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"private\",\"display\":{\"title\":{\"text\":{\"default\":\"Private\",\"es\":\"Privado\"}}},\"_row_num\":21},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"ngo\",\"display\":{\"title\":{\"text\":{\"default\":\"NGO\",\"es\":\"ONG\"}}},\"_row_num\":22},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"faithbased\",\"display\":{\"title\":{\"text\":{\"default\":\"Faithbased\",\"es\":\"Basado en fé\"}}},\"_row_num\":23},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":24}]"
+        "_value": "[{\"choice_list_name\":\"ownership_types\",\"data_value\":\"public\",\"display\":{\"title\":{\"text\":{\"default\":\"Public\",\"es\":\"Público\",\"fr\":\"Public\"}}},\"_row_num\":20},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"private\",\"display\":{\"title\":{\"text\":{\"default\":\"Private\",\"es\":\"Privado\",\"fr\":\"Privé\"}}},\"_row_num\":21},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"ngo\",\"display\":{\"title\":{\"text\":{\"default\":\"NGO\",\"es\":\"ONG\",\"fr\":\"ONG\"}}},\"_row_num\":22},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"faithbased\",\"display\":{\"title\":{\"text\":{\"default\":\"Faithbased\",\"es\":\"Basado en fé\",\"fr\":\"Confessionnel\"}}},\"_row_num\":23},{\"choice_list_name\":\"ownership_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\",\"fr\":\"Autre\"}}},\"_row_num\":24}]"
       },
       {
         "_partition": "Column",
         "_aspect": "facility_ownership",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Facility Ownership\",\"es\":\"Tipo de propriedad\"}}"
+        "_value": "{\"text\":{\"default\":\"Facility Ownership\",\"es\":\"Tipo de propriedad\",\"fr\":\"Propriétaire de l'établissement\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "facility_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"facility_types\",\"data_value\":\"national_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"National vaccine store\",\"es\":\"Tienda nacional de vacunas\"}}},\"_row_num\":5},{\"choice_list_name\":\"facility_types\",\"data_value\":\"regional_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"Regional vaccine store\",\"es\":\"Tienda regional de vacunas\"}}},\"_row_num\":6},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"District vaccine store\",\"es\":\"Tienda de vacunas por un distrito\"}}},\"_row_num\":7},{\"choice_list_name\":\"facility_types\",\"data_value\":\"central_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Central hospital\",\"es\":\"Hospital centrál\"}}},\"_row_num\":8},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"District hospital\",\"es\":\"Hospital por un distrito\"}}},\"_row_num\":9},{\"choice_list_name\":\"facility_types\",\"data_value\":\"rural_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Rural hospital\",\"es\":\"Hospital rurál\"}}},\"_row_num\":10},{\"choice_list_name\":\"facility_types\",\"data_value\":\"hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Hospital\",\"es\":\"Hospital generál\"}}},\"_row_num\":11},{\"choice_list_name\":\"facility_types\",\"data_value\":\"community_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Community hospital\",\"es\":\"Hospital de comunidad\"}}},\"_row_num\":12},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_center\",\"display\":{\"title\":{\"text\":{\"default\":\"Health center\",\"es\":\"Centro de salud\"}}},\"_row_num\":13},{\"choice_list_name\":\"facility_types\",\"data_value\":\"dispensary\",\"display\":{\"title\":{\"text\":{\"default\":\"Dispensary\",\"es\":\"Dispensario\"}}},\"_row_num\":14},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_station\",\"display\":{\"title\":{\"text\":{\"default\":\"Health Station\",\"es\":\"Estación de salud\"}}},\"_row_num\":15},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_post\",\"display\":{\"title\":{\"text\":{\"default\":\"Health post\",\"es\":\"Campamiento de salud\"}}},\"_row_num\":16},{\"choice_list_name\":\"facility_types\",\"data_value\":\"maternity\",\"display\":{\"title\":{\"text\":{\"default\":\"Maternity\",\"es\":\"Maternidad\"}}},\"_row_num\":17},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_facility\",\"display\":{\"title\":{\"text\":{\"default\":\"Health Facility\",\"es\":\"Facilidad de Salúd\"}}},\"_row_num\":18}]"
+        "_value": "[{\"choice_list_name\":\"facility_types\",\"data_value\":\"national_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"National vaccine store\",\"es\":\"Tienda nacional de vacunas\",\"fr\":\"Entrepôt national de vaccins\"}}},\"_row_num\":5},{\"choice_list_name\":\"facility_types\",\"data_value\":\"regional_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"Regional vaccine store\",\"es\":\"Tienda regional de vacunas\",\"fr\":\"Entrepôt régional de vaccins\"}}},\"_row_num\":6},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_vaccine_store\",\"display\":{\"title\":{\"text\":{\"default\":\"District vaccine store\",\"es\":\"Tienda de vacunas por un distrito\",\"fr\":\"Entrepôt de vaccins de district\"}}},\"_row_num\":7},{\"choice_list_name\":\"facility_types\",\"data_value\":\"central_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Central hospital\",\"es\":\"Hospital centrál\",\"fr\":\"Hôpital central\"}}},\"_row_num\":8},{\"choice_list_name\":\"facility_types\",\"data_value\":\"district_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"District hospital\",\"es\":\"Hospital por un distrito\",\"fr\":\"Hôpital de district\"}}},\"_row_num\":9},{\"choice_list_name\":\"facility_types\",\"data_value\":\"rural_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Rural hospital\",\"es\":\"Hospital rurál\",\"fr\":\"Hôpital rural\"}}},\"_row_num\":10},{\"choice_list_name\":\"facility_types\",\"data_value\":\"hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Hospital\",\"es\":\"Hospital generál\",\"fr\":\"Hôpital\"}}},\"_row_num\":11},{\"choice_list_name\":\"facility_types\",\"data_value\":\"community_hospital\",\"display\":{\"title\":{\"text\":{\"default\":\"Community hospital\",\"es\":\"Hospital de comunidad\",\"fr\":\"Hôpital communautaire\"}}},\"_row_num\":12},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_center\",\"display\":{\"title\":{\"text\":{\"default\":\"Health center\",\"es\":\"Centro de salud\",\"fr\":\"Centre de santé\"}}},\"_row_num\":13},{\"choice_list_name\":\"facility_types\",\"data_value\":\"dispensary\",\"display\":{\"title\":{\"text\":{\"default\":\"Dispensary\",\"es\":\"Dispensario\",\"fr\":\"Dispensaire\"}}},\"_row_num\":14},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_station\",\"display\":{\"title\":{\"text\":{\"default\":\"Health Station\",\"es\":\"Estación de salud\",\"fr\":\"Station de santé\"}}},\"_row_num\":15},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_post\",\"display\":{\"title\":{\"text\":{\"default\":\"Health post\",\"es\":\"Campamiento de salud\",\"fr\":\"Poste de santé\"}}},\"_row_num\":16},{\"choice_list_name\":\"facility_types\",\"data_value\":\"maternity\",\"display\":{\"title\":{\"text\":{\"default\":\"Maternity\",\"es\":\"Maternidad\",\"fr\":\"Maternité\"}}},\"_row_num\":17},{\"choice_list_name\":\"facility_types\",\"data_value\":\"health_facility\",\"display\":{\"title\":{\"text\":{\"default\":\"Health Facility\",\"es\":\"Facilidad de Salúd\"}}},\"_row_num\":18}]"
       },
       {
         "_partition": "Column",
         "_aspect": "facility_type",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Facility Type\",\"es\":\"Tipo de facilidad\"}}"
+        "_value": "{\"text\":{\"default\":\"Facility Type\",\"es\":\"Tipo de facilidad\",\"fr\":\"Type d'établissement\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "fuel_availability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"available\",\"display\":{\"title\":{\"text\":{\"default\":\"Available\",\"es\":\"Disponible\"}}},\"_row_num\":40},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"irregular\",\"display\":{\"title\":{\"text\":{\"default\":\"Irregular\",\"es\":\"Irregular\"}}},\"_row_num\":41},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"not_available\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Available\",\"es\":\"No Disponible\"}}},\"_row_num\":42},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":43},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Applicable\"}}},\"_row_num\":44}]"
+        "_value": "[{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"available\",\"display\":{\"title\":{\"text\":{\"default\":\"Available\",\"es\":\"Disponible\",\"fr\":\"Disponible\"}}},\"_row_num\":40},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"irregular\",\"display\":{\"title\":{\"text\":{\"default\":\"Irregular\",\"es\":\"Irregular\",\"fr\":\"Disponible de façon irrégulière\"}}},\"_row_num\":41},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"not_available\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Available\",\"es\":\"No Disponible\",\"fr\":\"Non disponible\"}}},\"_row_num\":42},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\",\"fr\":\"Ne sais pas\"}}},\"_row_num\":43},{\"choice_list_name\":\"fuel_availability_types\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Applicable\",\"fr\":\"Sans objet\"}}},\"_row_num\":44}]"
       },
       {
         "_partition": "Column",
         "_aspect": "fuel_availability",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Fuel Availability\",\"es\":\"Disponibilidad de combustible\"}}"
+        "_value": "{\"text\":{\"default\":\"Fuel Availability\",\"es\":\"Disponibilidad de combustible\",\"fr\":\"Carburant disponible\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "grid_power_availability",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"grid\",\"data_value\":\"more_than_16\",\"display\":{\"title\":{\"text\":{\"default\":\"More than 16\",\"es\":\"Más que 16\"}}},\"_row_num\":34},{\"choice_list_name\":\"grid\",\"data_value\":\"8_to_16\",\"display\":{\"title\":{\"text\":{\"default\":\"8 to 16\",\"es\":\"8 a 16\"}}},\"_row_num\":35},{\"choice_list_name\":\"grid\",\"data_value\":\"4_to_8\",\"display\":{\"title\":{\"text\":{\"default\":\"4 to 8\",\"es\":\"4 a 8\"}}},\"_row_num\":36},{\"choice_list_name\":\"grid\",\"data_value\":\"fewer_than_4\",\"display\":{\"title\":{\"text\":{\"default\":\"Fewer than 4\",\"es\":\"Menos que 4\"}}},\"_row_num\":37},{\"choice_list_name\":\"grid\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\"}}},\"_row_num\":38}]"
+        "_value": "[{\"choice_list_name\":\"grid\",\"data_value\":\"more_than_16\",\"display\":{\"title\":{\"text\":{\"default\":\"More than 16\",\"es\":\"Más que 16\",\"fr\":\"Plus de 16\"}}},\"_row_num\":34},{\"choice_list_name\":\"grid\",\"data_value\":\"8_to_16\",\"display\":{\"title\":{\"text\":{\"default\":\"8 to 16\",\"es\":\"8 a 16\",\"fr\":\"8 à 16\"}}},\"_row_num\":35},{\"choice_list_name\":\"grid\",\"data_value\":\"4_to_8\",\"display\":{\"title\":{\"text\":{\"default\":\"4 to 8\",\"es\":\"4 a 8\",\"fr\":\"4 à 8\"}}},\"_row_num\":36},{\"choice_list_name\":\"grid\",\"data_value\":\"fewer_than_4\",\"display\":{\"title\":{\"text\":{\"default\":\"Fewer than 4\",\"es\":\"Menos que 4\",\"fr\":\"Moins de 4\"}}},\"_row_num\":37},{\"choice_list_name\":\"grid\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\",\"fr\":\"Aucun\"}}},\"_row_num\":38}]"
       },
       {
         "_partition": "Column",
         "_aspect": "grid_power_availability",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Grid Availability\",\"es\":\"Disponibilidad del red de energía\"}}"
+        "_value": "{\"text\":{\"default\":\"Grid Availability\",\"es\":\"Disponibilidad del red de energía\",\"fr\":\"Électricité disponible\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "immunization_services_offered",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"immunization_services\",\"data_value\":\"static\",\"display\":{\"title\":{\"text\":{\"default\":\"Static/Fixed Post\",\"es\":\"Estático/Puesto Fijo\"}}},\"_row_num\":54},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Outreach\",\"es\":\"Extensión\"}}},\"_row_num\":55},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"both_static_and_outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Static and Outreach\",\"es\":\"Estático y Extensión\"}}},\"_row_num\":56},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"storage_only\",\"display\":{\"title\":{\"text\":{\"default\":\"Storage Only\",\"es\":\"Solo almacenamiento\"}}},\"_row_num\":57},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\"}}},\"_row_num\":58}]"
+        "_value": "[{\"choice_list_name\":\"immunization_services\",\"data_value\":\"static\",\"display\":{\"title\":{\"text\":{\"default\":\"Static/Fixed Post\",\"es\":\"Estático/Puesto Fijo\",\"fr\":\"Poste fixe\"}}},\"_row_num\":54},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Outreach\",\"es\":\"Extensión\",\"fr\":\"Ambulant\"}}},\"_row_num\":55},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"both_static_and_outreach\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Static and Outreach\",\"es\":\"Estático y Extensión\",\"fr\":\"Fixe et ambulant\"}}},\"_row_num\":56},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"storage_only\",\"display\":{\"title\":{\"text\":{\"default\":\"Storage Only\",\"es\":\"Solo almacenamiento\",\"fr\":\"Stockage uniquement\"}}},\"_row_num\":57},{\"choice_list_name\":\"immunization_services\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Nada\",\"fr\":\"Aucun\"}}},\"_row_num\":58}]"
       },
       {
         "_partition": "Column",
         "_aspect": "immunization_services_offered",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Immunization Services Offered\",\"es\":\"Tipo de envío\"}}"
+        "_value": "{\"text\":{\"default\":\"Immunization Services Offered\",\"es\":\"Tipo de envío\",\"fr\":\"Services de vaccination proposés\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "number_of_cold_boxes",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Total number of cold boxes at facility\",\"es\":\"Número total de cajas frías en la facilidad\"}}"
+        "_value": "{\"text\":{\"default\":\"Total number of cold boxes at facility\",\"es\":\"Número total de cajas frías en la facilidad\",\"fr\":\"Nombre de glacières dans l'établissement\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "number_of_fs_cold_boxes",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Number of freeze safe cold boxes at facility\",\"es\":\"Número de cajas frías a congelación segura en la facilidad\"}}"
+        "_value": "{\"text\":{\"default\":\"Number of freeze safe cold boxes at facility\",\"es\":\"Número de cajas frías a congelación segura en la facilidad\",\"fr\":\"Nombre de glacières pour congélation sûre dans l'établissement\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "number_of_fs_vaccine_carriers",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Number of freeze safe vaccine carriers at facility\",\"es\":\"Número de portadores de vacunas a congelación segura en la facilidad\"}}"
+        "_value": "{\"text\":{\"default\":\"Number of freeze safe vaccine carriers at facility\",\"es\":\"Número de portadores de vacunas a congelación segura en la facilidad\",\"fr\":\"Nombre de porte-vaccins pour congélation sûre dans l'établissement\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "number_of_vaccine_carriers",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Total number of vaccine carriers at facility\",\"es\":\"Número total de portadores de vacunas en la facilidad\"}}"
+        "_value": "{\"text\":{\"default\":\"Total number of vaccine carriers at facility\",\"es\":\"Número total de portadores de vacunas en la facilidad\",\"fr\":\"Nombre de porte-vaccins dans l'établissement\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "vaccine_supply_interval",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Supply Interval\",\"es\":\"Intervalo de reabastecimiento\"}}"
+        "_value": "{\"text\":{\"default\":\"Supply Interval\",\"es\":\"Intervalo de reabastecimiento\",\"fr\":\"Intervalle entre chaque approvisionnement\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "vaccine_supply_mode",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"delivered\",\"display\":{\"title\":{\"text\":{\"default\":\"Delivered\",\"es\":\"Enviado\"}}},\"_row_num\":60},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"collected\",\"display\":{\"title\":{\"text\":{\"default\":\"Collected\",\"es\":\"Collectado\"}}},\"_row_num\":61},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Delivered and Collected\",\"es\":\"Enviado y Collectado\"}}},\"_row_num\":62},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\"}}},\"_row_num\":63},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":64}]"
+        "_value": "[{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"delivered\",\"display\":{\"title\":{\"text\":{\"default\":\"Delivered\",\"es\":\"Enviado\",\"fr\":\"Livré\"}}},\"_row_num\":60},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"collected\",\"display\":{\"title\":{\"text\":{\"default\":\"Collected\",\"es\":\"Collectado\",\"fr\":\"Collecté\"}}},\"_row_num\":61},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"both\",\"display\":{\"title\":{\"text\":{\"default\":\"Both Delivered and Collected\",\"es\":\"Enviado y Collectado\",\"fr\":\"Livré et collecté\"}}},\"_row_num\":62},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"none\",\"display\":{\"title\":{\"text\":{\"default\":\"None\",\"es\":\"Ninguno\",\"fr\":\"Aucun\"}}},\"_row_num\":63},{\"choice_list_name\":\"vaccine_modes\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\",\"fr\":\"Ne sais pas\"}}},\"_row_num\":64}]"
       },
       {
         "_partition": "Column",
         "_aspect": "vaccine_supply_mode",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Supply Mode\",\"es\":\"Modo de recibir vacunas\"}}"
+        "_value": "{\"text\":{\"default\":\"Supply Mode\",\"es\":\"Modo de recibir vacunas\",\"fr\":\"Mode d'approvisionnement\"}}"
       },
       {
         "_partition": "FormType",
@@ -4342,7 +4622,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Health Facilities\",\"es\":\"Facilidades de Salúd\"}}"
+        "_value": "{\"text\":{\"default\":\"Health Facilities\",\"es\":\"Facilidades de Salúd\",\"fr\":\"Établissement de santé\"}}"
       },
       {
         "_partition": "Table",

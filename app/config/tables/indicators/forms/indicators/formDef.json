@@ -17,7 +17,8 @@
           "prompt": {
             "text": {
               "default": "Refrigerator ID",
-              "es": "ID de Frigorífico"
+              "es": "ID de Frigorífico",
+              "fr": "ID de réfrigérateur"
             }
           },
           "hint": {
@@ -40,7 +41,8 @@
           "prompt": {
             "text": {
               "default": "Refrigerator ID: {{data.refrigerator_id}}",
-              "es": "ID de Frigorífico: {{data.refrigerator_id}}"
+              "es": "ID de Frigorífico: {{data.refrigerator_id}}",
+              "fr": "ID de réfrigérateur : {{data.refrigerator_id}}"
             }
           }
         },
@@ -53,7 +55,8 @@
           "prompt": {
             "text": {
               "default": "Reporting Period",
-              "es": "Período de información"
+              "es": "Período de información",
+              "fr": "période considérée"
             }
           },
           "hint": {
@@ -75,7 +78,10 @@
         "name": "heat_alarms",
         "display": {
           "prompt": {
-            "text": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the first day of the month to the last day of the month?"
+            "text": {
+              "default": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the first day of the month to the last day of the month?",
+              "fr": "Combien d'alarmes de haute température (supérieure à 8°C et ayant durée 10 heures) enregistré dans le releve de température du mois dernier?"
+            }
           }
         },
         "required": true,
@@ -86,7 +92,10 @@
         "name": "freeze_alarms",
         "display": {
           "prompt": {
-            "text": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log from the first day of the month to the last day of the month?"
+            "text": {
+              "default": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log from the first day of the month to the last day of the month?",
+              "fr": "Combien d'alarmes de basse température (-0,5°C ayant dur au moins 1 heure) apparaissent/enregistrées dans le releve de température du mois dernier?"
+            }
           }
         },
         "required": true,
@@ -101,7 +110,10 @@
         "name": "heat_alarms_over_48",
         "display": {
           "prompt": {
-            "text": "How many heat alarms with 48 hour or longer duration in the temperature log from the first day of the month to the last day of the month?"
+            "text": {
+              "default": "How many heat alarms with 48 hour or longer duration in the temperature log from the first day of the month to the last day of the month?",
+              "fr": "Combien d'alarmes de haute température d'une durée de 48h ou plus apparaissent dans le releve de température du mois dernier ?"
+            }
           }
         },
         "required": true,
@@ -132,19 +144,22 @@
           "prompt": {
             "text": {
               "default": "Refrigerator Status: {{data.alarm_functional_status}}",
-              "es": "Estado del refrigerador: {{data.alarm_functional_status}}"
+              "es": "Estado del refrigerador: {{data.alarm_functional_status}}",
+              "fr": "Etat de fonctionnalité: {{data.alarm_functional_status}}"
             }
           }
         },
         "_row_num": 17
       },
       {
-        "type": "select_one_with_other",
-        "values_list": "refrigerator_failure_type",
+        "type": "text",
         "name": "refrigerator_failure",
         "display": {
           "prompt": {
-            "text": "Why did the refrigerator fail?"
+            "text": {
+              "default": "Why did the refrigerator fail?",
+              "fr": "Pourquoi le réfrigérateur est-t-il tombe en panne?"
+            }
           }
         },
         "required": "data('alarm_functional_status') === 'non_functional'",
@@ -160,7 +175,10 @@
         "name": "build_quality",
         "display": {
           "prompt": {
-            "text": "Have there been any issues related to build quality from the first day of the month to the last day of the month?"
+            "text": {
+              "default": "Have there been any issues related to build quality from the first day of the month to the last day of the month?",
+              "fr": "Y at-il eu des problèmes liés à la qualité de la fabrication (ou Défaut de fabrication) au cours du dernier mois?"
+            }
           }
         },
         "_row_num": 20
@@ -172,25 +190,17 @@
       },
       {
         "type": "select_one_with_other",
-        "values_list": "build_quality_reason_type",
-        "name": "build_quality_reason",
-        "display": {
-          "prompt": {
-            "text": "If so, why?"
-          }
-        },
-        "_row_num": 22
-      },
-      {
-        "type": "select_one_with_other",
         "values_list": "build_quality_reason_type_observation",
         "name": "build_quality_observation",
         "display": {
           "prompt": {
-            "text": "What condition was observed related to the failure?"
+            "text": {
+              "default": "If yes, what condition was observed related to the issue?",
+              "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+            }
           }
         },
-        "_row_num": 23
+        "_row_num": 22
       },
       {
         "type": "select_one",
@@ -198,64 +208,73 @@
         "name": "build_quality_location",
         "display": {
           "prompt": {
-            "text": "Where was the failure observed?"
+            "text": {
+              "default": "Where was the issue observed?",
+              "fr": "Où le problème a-t-il été observé?"
+            }
           }
         },
-        "_row_num": 24
+        "_row_num": 23
       },
       {
         "type": "text",
         "name": "build_quality_component",
         "display": {
           "prompt": {
-            "text": "Please enter the component that failed, and why if known."
+            "text": {
+              "default": "Please enter the component that failed",
+              "fr": "Veuillez entrer le composant qui a échoué"
+            }
           }
         },
-        "_row_num": 25
+        "_row_num": 24
       },
       {
         "clause": "end if",
-        "_row_num": 26
+        "_row_num": 25
       },
       {
         "clause": "end screen",
-        "_row_num": 27
+        "_row_num": 26
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality'), 'yes')",
-        "_row_num": 28
+        "_row_num": 27
       },
       {
         "clause": "begin screen",
-        "_row_num": 29
+        "_row_num": 28
       },
       {
         "type": "image",
         "name": "build_quality_image",
         "display": {
           "prompt": {
-            "text": "Please take a picture."
+            "text": {
+              "default": "Please take a picture.",
+              "fr": "S'il vous plaît prendre une photo"
+            }
           }
         },
-        "_row_num": 30
+        "_row_num": 29
       },
       {
         "clause": "end screen",
-        "_row_num": 31
+        "_row_num": 30
       },
       {
         "clause": "end if",
-        "_row_num": 32
+        "_row_num": 31
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality'), 'yes')",
-        "_row_num": 33
+        "_row_num": 32
       },
       {
         "clause": "begin screen",
-        "_row_num": 34
+        "_row_num": 33
       },
       {
         "type": "select_one",
@@ -263,26 +282,18 @@
         "name": "build_quality2",
         "display": {
           "prompt": {
-            "text": "Was there a second issue related to build quality from the first day of the month to the last day of the month?"
+            "text": {
+              "default": "Was there a second issue related to build quality from the first day of the month to the last day of the month?",
+              "fr": "Y at-il un deuxième problème lié à la qualité de la fabrication (ou Défaut de fabrication) au cours du dernier mois?"
+            }
           }
         },
-        "_row_num": 35
+        "_row_num": 34
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality2'), 'yes')",
-        "_row_num": 36
-      },
-      {
-        "type": "select_one_with_other",
-        "values_list": "build_quality_reason_type",
-        "name": "build_quality_reason2",
-        "display": {
-          "prompt": {
-            "text": "If so, why?"
-          }
-        },
-        "_row_num": 37
+        "_row_num": 35
       },
       {
         "type": "select_one_with_other",
@@ -290,10 +301,13 @@
         "name": "build_quality_observation2",
         "display": {
           "prompt": {
-            "text": "What condition was observed related to the second failure?"
+            "text": {
+              "default": "If yes, what condition was observed related to the second failure?",
+              "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+            }
           }
         },
-        "_row_num": 38
+        "_row_num": 36
       },
       {
         "type": "select_one",
@@ -301,19 +315,33 @@
         "name": "build_quality_location2",
         "display": {
           "prompt": {
-            "text": "Where was the second failure observed?"
+            "text": {
+              "default": "Where was the second failure observed?",
+              "fr": "Où le problème a-t-il été observé?"
+            }
           }
         },
-        "_row_num": 39
+        "_row_num": 37
       },
       {
         "type": "text",
         "name": "build_quality_component2",
         "display": {
           "prompt": {
-            "text": "Please enter the second component that failed, and why if known."
+            "text": {
+              "default": "Please enter the second component that failed",
+              "fr": "Veuillez entrer le composant qui a échoué"
+            }
           }
         },
+        "_row_num": 38
+      },
+      {
+        "clause": "end if",
+        "_row_num": 39
+      },
+      {
+        "clause": "end screen",
         "_row_num": 40
       },
       {
@@ -321,48 +349,43 @@
         "_row_num": 41
       },
       {
-        "clause": "end screen",
+        "clause": "if",
+        "condition": "selected(data('build_quality2'), 'yes')",
         "_row_num": 42
       },
       {
-        "clause": "end if",
-        "_row_num": 43
-      },
-      {
-        "clause": "if",
-        "condition": "selected(data('build_quality2'), 'yes')",
-        "_row_num": 44
-      },
-      {
         "clause": "begin screen",
-        "_row_num": 45
+        "_row_num": 43
       },
       {
         "type": "image",
         "name": "build_quality_image2",
         "display": {
           "prompt": {
-            "text": "Please take a picture."
+            "text": {
+              "default": "Please take a picture.",
+              "fr": "S'il vous plaît prendre une photo"
+            }
           }
         },
-        "_row_num": 46
+        "_row_num": 44
       },
       {
         "clause": "end screen",
-        "_row_num": 47
+        "_row_num": 45
       },
       {
         "clause": "end if",
-        "_row_num": 48
+        "_row_num": 46
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality2'), 'yes')",
-        "_row_num": 49
+        "_row_num": 47
       },
       {
         "clause": "begin screen",
-        "_row_num": 50
+        "_row_num": 48
       },
       {
         "type": "select_one",
@@ -370,26 +393,18 @@
         "name": "build_quality3",
         "display": {
           "prompt": {
-            "text": "Was there a third issue related to build quality from the first day of the month to the last day of the month?"
+            "text": {
+              "default": "Was there a third issue related to build quality from the first day of the month to the last day of the month?",
+              "fr": "Y at-il un troisème problème lié à la qualité de la fabrication (ou Défaut de fabrication) au cours du dernier mois?"
+            }
           }
         },
-        "_row_num": 51
+        "_row_num": 49
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality3'), 'yes')",
-        "_row_num": 52
-      },
-      {
-        "type": "select_one_with_other",
-        "values_list": "build_quality_reason_type",
-        "name": "build_quality_reason3",
-        "display": {
-          "prompt": {
-            "text": "If so, why?"
-          }
-        },
-        "_row_num": 53
+        "_row_num": 50
       },
       {
         "type": "select_one_with_other",
@@ -397,10 +412,13 @@
         "name": "build_quality_observation3",
         "display": {
           "prompt": {
-            "text": "What condition was observed related to the third failure?"
+            "text": {
+              "default": "If yes, what condition was observed related to the third failure?",
+              "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+            }
           }
         },
-        "_row_num": 54
+        "_row_num": 51
       },
       {
         "type": "select_one",
@@ -408,68 +426,77 @@
         "name": "build_quality_location3",
         "display": {
           "prompt": {
-            "text": "Where was the third failure observed?"
+            "text": {
+              "default": "Where was the third failure observed?",
+              "fr": "Où le problème a-t-il été observé?"
+            }
           }
         },
-        "_row_num": 55
+        "_row_num": 52
       },
       {
         "type": "text",
         "name": "build_quality_component3",
         "display": {
           "prompt": {
-            "text": "Please enter the third component that failed, and why if known."
+            "text": {
+              "default": "Please enter the third component that failed",
+              "fr": "Veuillez entrer le composant qui a échoué"
+            }
           }
         },
-        "_row_num": 56
+        "_row_num": 53
       },
       {
         "clause": "end if",
-        "_row_num": 57
+        "_row_num": 54
       },
       {
         "clause": "end screen",
-        "_row_num": 58
+        "_row_num": 55
       },
       {
         "clause": "end if",
-        "_row_num": 59
+        "_row_num": 56
       },
       {
         "clause": "if",
         "condition": "selected(data('build_quality3'), 'yes')",
-        "_row_num": 60
+        "_row_num": 57
       },
       {
         "clause": "begin screen",
-        "_row_num": 61
+        "_row_num": 58
       },
       {
         "type": "image",
         "name": "build_quality_image3",
         "display": {
           "prompt": {
-            "text": "Please take a picture."
+            "text": {
+              "default": "Please take a picture.",
+              "fr": "S'il vous plaît prendre une photo"
+            }
           }
         },
-        "_row_num": 62
+        "_row_num": 59
       },
       {
         "clause": "end screen",
-        "_row_num": 63
+        "_row_num": 60
       },
       {
         "clause": "end if",
-        "_row_num": 64
+        "_row_num": 61
       },
       {
         "clause": "if",
         "condition": "data('voltage_stabilizer_present') !== 'no'",
-        "_row_num": 65
+        "_row_num": 62
       },
       {
         "clause": "begin screen",
-        "_row_num": 66
+        "_row_num": 63
       },
       {
         "type": "select_one",
@@ -477,38 +504,43 @@
         "name": "voltage_stabilizer_working",
         "display": {
           "prompt": {
-            "text": "Is the voltage stabilizer working?"
+            "text": {
+              "default": "Is the voltage stabilizer working?",
+              "fr": "Le stabilisateur de tension fonctionne-t-il?"
+            }
           }
         },
-        "_row_num": 67
+        "_row_num": 64
       },
       {
         "clause": "if",
         "condition": "data('voltage_stabilizer_working') === 'no'",
-        "_row_num": 68
+        "_row_num": 65
       },
       {
-        "type": "select_one_with_other",
-        "values_list": "voltage_stabilizer_not_working_reason_type",
+        "type": "text",
         "name": "voltage_stabilizer_not_working_reason",
         "display": {
           "prompt": {
-            "text": "If no, why not?"
+            "text": {
+              "default": "If no, why not?",
+              "fr": "Si non, quel est le problème?"
+            }
           }
         },
-        "_row_num": 69
+        "_row_num": 66
       },
       {
         "clause": "end if",
-        "_row_num": 70
+        "_row_num": 67
       },
       {
         "clause": "end screen",
-        "_row_num": 71
+        "_row_num": 68
       },
       {
         "clause": "begin screen",
-        "_row_num": 72
+        "_row_num": 69
       },
       {
         "type": "select_one",
@@ -516,47 +548,52 @@
         "name": "voltage_stabilizer_replaced",
         "display": {
           "prompt": {
-            "text": "Has the voltage regulator been replaced from the first day of the month to the last day of the month?"
+            "text": {
+              "default": "Has the voltage regulator been replaced from the first day of the month to the last day of the month?",
+              "fr": "Le stabilisateur de tension a-t-il été remplacé le mois dernier?"
+            }
           }
         },
-        "_row_num": 73
+        "_row_num": 70
       },
       {
         "clause": "if",
         "condition": "selected(data('voltage_stabilizer_replaced'), 'yes')",
-        "_row_num": 74
+        "_row_num": 71
       },
       {
-        "type": "select_one_with_other",
-        "values_list": "voltage_stabilizer_replaced_reason_type",
+        "type": "text",
         "name": "voltage_stabilizer_replaced_reason",
         "display": {
           "prompt": {
-            "text": "If yes, why?"
+            "text": {
+              "default": "If yes, why?",
+              "fr": "Si, oui, pourquoi?"
+            }
           }
         },
-        "_row_num": 75
+        "_row_num": 72
       },
       {
         "clause": "end if",
-        "_row_num": 76
+        "_row_num": 73
       },
       {
         "clause": "end screen",
-        "_row_num": 77
+        "_row_num": 74
       },
       {
         "clause": "end if",
-        "_row_num": 78
+        "_row_num": 75
       },
       {
         "clause": "if",
         "condition": "calculates.refrigerator_age() < 4",
-        "_row_num": 79
+        "_row_num": 76
       },
       {
         "clause": "begin screen",
-        "_row_num": 80
+        "_row_num": 77
       },
       {
         "type": "select_one",
@@ -564,34 +601,66 @@
         "name": "warranty_claim_been_made",
         "display": {
           "prompt": {
-            "text": "Has a warranty claim been made?"
+            "text": {
+              "default": "Has a warranty claim been made?",
+              "fr": "Une demande de garantie a-t-elle été faite?"
+            }
           }
         },
-        "_row_num": 81
+        "_row_num": 78
       },
       {
         "clause": "if",
         "condition": "selected(data('warranty_claim_been_made'), 'yes')",
-        "_row_num": 82
+        "_row_num": 79
       },
       {
         "type": "birthdate",
         "name": "warranty_claim_date",
         "display": {
           "prompt": {
-            "text": "When was the warranty claim made?"
+            "text": {
+              "default": "When was the warranty claim made?",
+              "fr": "Quand la demande de garantie a-t-elle été faite?"
+            }
           }
         },
-        "_row_num": 83
+        "_row_num": 80
+      },
+      {
+        "type": "select_one",
+        "values_list": "yes_no",
+        "name": "repair_occurred",
+        "display": {
+          "prompt": {
+            "text": {
+              "default": "Has the repair occurred?",
+              "fr": "La réparation a-t-elle eu lieu?"
+            }
+          }
+        },
+        "_row_num": 81
+      },
+      {
+        "clause": "if",
+        "condition": "selected(data('repair_occurred'), 'yes')",
+        "_row_num": 82
       },
       {
         "type": "integer",
         "name": "days_from_warranty_claim_until_repaired",
         "display": {
           "prompt": {
-            "text": "How many days elapsed between when the claim was made and when the repair occurred?"
+            "text": {
+              "default": "How many days elapsed between when the claim was made and when the repair occurred?",
+              "fr": "Combien de jours se sont écoulés entre le moment où la demande de garantie a été faite et le moment où la réparation a eu lieu?"
+            }
           }
         },
+        "_row_num": 83
+      },
+      {
+        "clause": "end if",
         "_row_num": 84
       },
       {
@@ -661,7 +730,8 @@
           "title": {
             "text": {
               "default": "Functional",
-              "es": "Funcional"
+              "es": "Funcional",
+              "fr": "Fonctionnel"
             }
           }
         },
@@ -674,7 +744,8 @@
           "title": {
             "text": {
               "default": "Non-functional",
-              "es": "No Funcional"
+              "es": "No Funcional",
+              "fr": "Non-functionnel"
             }
           }
         },
@@ -687,7 +758,8 @@
           "title": {
             "text": {
               "default": "Yes",
-              "es": "Si"
+              "es": "Si",
+              "fr": "Oui"
             }
           }
         },
@@ -700,7 +772,8 @@
           "title": {
             "text": {
               "default": "No",
-              "es": "No"
+              "es": "No",
+              "fr": "Non"
             }
           }
         },
@@ -713,24 +786,12 @@
           "title": {
             "text": {
               "default": "Need Data",
-              "es": "Necesita datos"
+              "es": "Necesita datos",
+              "fr": "Besoin de données"
             }
           }
         },
         "_row_num": 8
-      },
-      {
-        "choice_list_name": "build_quality_reason_type",
-        "data_value": "need_data",
-        "display": {
-          "title": {
-            "text": {
-              "default": "Need Data",
-              "es": "Necesita datos"
-            }
-          }
-        },
-        "_row_num": 10
       },
       {
         "choice_list_name": "voltage_stabilizer_not_working_reason_type",
@@ -739,11 +800,12 @@
           "title": {
             "text": {
               "default": "Need Data",
-              "es": "Necesita datos"
+              "es": "Necesita datos",
+              "fr": "Besoin de données"
             }
           }
         },
-        "_row_num": 12
+        "_row_num": 10
       },
       {
         "choice_list_name": "voltage_stabilizer_replaced_reason_type",
@@ -752,11 +814,12 @@
           "title": {
             "text": {
               "default": "Need Data",
-              "es": "Necesita datos"
+              "es": "Necesita datos",
+              "fr": "Besoin de données"
             }
           }
         },
-        "_row_num": 14
+        "_row_num": 12
       },
       {
         "choice_list_name": "yes_no_na",
@@ -765,11 +828,12 @@
           "title": {
             "text": {
               "default": "Yes",
-              "es": "Si"
+              "es": "Si",
+              "fr": "Oui"
             }
           }
         },
-        "_row_num": 16
+        "_row_num": 14
       },
       {
         "choice_list_name": "yes_no_na",
@@ -778,11 +842,12 @@
           "title": {
             "text": {
               "default": "No",
-              "es": "No"
+              "es": "No",
+              "fr": "Non"
             }
           }
         },
-        "_row_num": 17
+        "_row_num": 15
       },
       {
         "choice_list_name": "yes_no_na",
@@ -791,11 +856,12 @@
           "title": {
             "text": {
               "default": "N/A",
-              "es": "N/A"
+              "es": "N/A",
+              "fr": "N/A"
             }
           }
         },
-        "_row_num": 18
+        "_row_num": 16
       },
       {
         "choice_list_name": "build_quality_reason_type_observation",
@@ -804,11 +870,12 @@
           "title": {
             "text": {
               "default": "Broken",
-              "es": "Roto"
+              "es": "Roto",
+              "fr": "Cassé"
             }
           }
         },
-        "_row_num": 20
+        "_row_num": 18
       },
       {
         "choice_list_name": "build_quality_reason_type_observation",
@@ -817,11 +884,12 @@
           "title": {
             "text": {
               "default": "Burnt",
-              "es": "Quemado"
+              "es": "Quemado",
+              "fr": "Brûlé"
             }
           }
         },
-        "_row_num": 21
+        "_row_num": 19
       },
       {
         "choice_list_name": "build_quality_reason_type_observation",
@@ -830,11 +898,12 @@
           "title": {
             "text": {
               "default": "Corrosion",
-              "es": "Corrosión"
+              "es": "Corrosión",
+              "fr": "Corrosion"
             }
           }
         },
-        "_row_num": 22
+        "_row_num": 20
       },
       {
         "choice_list_name": "build_quality_reason_type_observation",
@@ -843,11 +912,12 @@
           "title": {
             "text": {
               "default": "Deteriorating",
-              "es": "Deterioro"
+              "es": "Deterioro",
+              "fr": "Détérioration"
             }
           }
         },
-        "_row_num": 23
+        "_row_num": 21
       },
       {
         "choice_list_name": "build_quality_reason_type_observation",
@@ -856,11 +926,12 @@
           "title": {
             "text": {
               "default": "Leaking",
-              "es": "Fugas"
+              "es": "Fugas",
+              "fr": "Qui fuit"
             }
           }
         },
-        "_row_num": 24
+        "_row_num": 22
       },
       {
         "choice_list_name": "build_quality_reason_type_observation",
@@ -869,11 +940,12 @@
           "title": {
             "text": {
               "default": "Missing",
-              "es": "Desaparecido"
+              "es": "Desaparecido",
+              "fr": "Manquant"
             }
           }
         },
-        "_row_num": 25
+        "_row_num": 23
       },
       {
         "choice_list_name": "build_quality_reason_type_observation",
@@ -882,11 +954,12 @@
           "title": {
             "text": {
               "default": "Noisy",
-              "es": "Ruidoso"
+              "es": "Ruidoso",
+              "fr": "Bruyant"
             }
           }
         },
-        "_row_num": 26
+        "_row_num": 24
       },
       {
         "choice_list_name": "build_quality_reason_type_location",
@@ -895,11 +968,12 @@
           "title": {
             "text": {
               "default": "Appliance (exterior)",
-              "es": "Aparato (exterior)"
+              "es": "Aparato (exterior)",
+              "fr": "Appareil (extérieur)"
             }
           }
         },
-        "_row_num": 29
+        "_row_num": 27
       },
       {
         "choice_list_name": "build_quality_reason_type_location",
@@ -908,11 +982,12 @@
           "title": {
             "text": {
               "default": "Accessory (EMS)",
-              "es": "Accesorio (EMS)"
+              "es": "Accesorio (EMS)",
+              "fr": "Accessoire (EMS)"
             }
           }
         },
-        "_row_num": 30
+        "_row_num": 28
       },
       {
         "choice_list_name": "build_quality_reason_type_location",
@@ -921,11 +996,12 @@
           "title": {
             "text": {
               "default": "Solar (mechanical)",
-              "es": "Solar (mecánica)"
+              "es": "Solar (mecánica)",
+              "fr": "Solaire (mécanique)"
             }
           }
         },
-        "_row_num": 31
+        "_row_num": 29
       },
       {
         "choice_list_name": "build_quality_reason_type_location",
@@ -934,11 +1010,12 @@
           "title": {
             "text": {
               "default": "Solar (electrical)",
-              "es": "Solar (eléctrico)"
+              "es": "Solar (eléctrico)",
+              "fr": "Solaire (electrique)"
             }
           }
         },
-        "_row_num": 32
+        "_row_num": 30
       },
       {
         "choice_list_name": "build_quality_reason_type_location",
@@ -947,11 +1024,12 @@
           "title": {
             "text": {
               "default": "Appliance (interior)",
-              "es": "Aparato (interior)"
+              "es": "Aparato (interior)",
+              "fr": "Appareil (intérieur)"
             }
           }
         },
-        "_row_num": 33
+        "_row_num": 31
       },
       {
         "choice_list_name": "build_quality_reason_type_location",
@@ -960,11 +1038,38 @@
           "title": {
             "text": {
               "default": "Not Determined",
-              "es": "No determinado"
+              "es": "No determinado",
+              "fr": "Non déterminé"
+            }
+          }
+        },
+        "_row_num": 32
+      },
+      {
+        "choice_list_name": "repair_occurred_option",
+        "data_value": "not_yet_repaired",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Not Yet Repaired",
+              "fr": "Pas encore réparé"
             }
           }
         },
         "_row_num": 34
+      },
+      {
+        "choice_list_name": "repair_occurred_option",
+        "data_value": "repaired",
+        "display": {
+          "title": {
+            "text": {
+              "default": "Repaired",
+              "fr": "Réparé"
+            }
+          }
+        },
+        "_row_num": 35
       }
     ],
     "queries": [
@@ -997,7 +1102,8 @@
           "title": {
             "text": {
               "default": "Indicators",
-              "es": "Indicadores"
+              "es": "Indicadores",
+              "fr": "Indicateurs"
             }
           }
         },
@@ -1019,7 +1125,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -1031,11 +1138,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Français"
+            }
+          }
+        },
+        "_row_num": 9
       }
     ],
     "properties": [
@@ -1130,7 +1251,8 @@
           "title": {
             "text": {
               "default": "Indicators",
-              "es": "Indicadores"
+              "es": "Indicadores",
+              "fr": "Indicateurs"
             }
           }
         },
@@ -1152,7 +1274,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -1164,11 +1287,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      "fr": {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Français"
+            }
+          }
+        },
+        "_row_num": 9
       },
       "_locales": {
         "setting_name": "_locales",
@@ -1179,12 +1316,26 @@
               "locale": {
                 "text": {
                   "default": "Spanish",
-                  "es": "Español"
+                  "es": "Español",
+                  "fr": "Espagnol"
                 }
               }
             },
             "_row_num": 8,
             "name": "es"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "default": "French",
+                  "es": "Francés",
+                  "fr": "Français"
+                }
+              }
+            },
+            "_row_num": 9,
+            "name": "fr"
           },
           {
             "display": {
@@ -1207,7 +1358,8 @@
           "title": {
             "text": {
               "default": "Indicators",
-              "es": "Indicadores"
+              "es": "Indicadores",
+              "fr": "Indicateurs"
             }
           }
         },
@@ -1223,7 +1375,8 @@
             "title": {
               "text": {
                 "default": "Functional",
-                "es": "Funcional"
+                "es": "Funcional",
+                "fr": "Fonctionnel"
               }
             }
           },
@@ -1236,7 +1389,8 @@
             "title": {
               "text": {
                 "default": "Non-functional",
-                "es": "No Funcional"
+                "es": "No Funcional",
+                "fr": "Non-functionnel"
               }
             }
           },
@@ -1251,7 +1405,8 @@
             "title": {
               "text": {
                 "default": "Yes",
-                "es": "Si"
+                "es": "Si",
+                "fr": "Oui"
               }
             }
           },
@@ -1264,7 +1419,8 @@
             "title": {
               "text": {
                 "default": "No",
-                "es": "No"
+                "es": "No",
+                "fr": "Non"
               }
             }
           },
@@ -1279,26 +1435,12 @@
             "title": {
               "text": {
                 "default": "Need Data",
-                "es": "Necesita datos"
+                "es": "Necesita datos",
+                "fr": "Besoin de données"
               }
             }
           },
           "_row_num": 8
-        }
-      ],
-      "build_quality_reason_type": [
-        {
-          "choice_list_name": "build_quality_reason_type",
-          "data_value": "need_data",
-          "display": {
-            "title": {
-              "text": {
-                "default": "Need Data",
-                "es": "Necesita datos"
-              }
-            }
-          },
-          "_row_num": 10
         }
       ],
       "voltage_stabilizer_not_working_reason_type": [
@@ -1309,11 +1451,12 @@
             "title": {
               "text": {
                 "default": "Need Data",
-                "es": "Necesita datos"
+                "es": "Necesita datos",
+                "fr": "Besoin de données"
               }
             }
           },
-          "_row_num": 12
+          "_row_num": 10
         }
       ],
       "voltage_stabilizer_replaced_reason_type": [
@@ -1324,11 +1467,12 @@
             "title": {
               "text": {
                 "default": "Need Data",
-                "es": "Necesita datos"
+                "es": "Necesita datos",
+                "fr": "Besoin de données"
               }
             }
           },
-          "_row_num": 14
+          "_row_num": 12
         }
       ],
       "yes_no_na": [
@@ -1339,11 +1483,12 @@
             "title": {
               "text": {
                 "default": "Yes",
-                "es": "Si"
+                "es": "Si",
+                "fr": "Oui"
               }
             }
           },
-          "_row_num": 16
+          "_row_num": 14
         },
         {
           "choice_list_name": "yes_no_na",
@@ -1352,11 +1497,12 @@
             "title": {
               "text": {
                 "default": "No",
-                "es": "No"
+                "es": "No",
+                "fr": "Non"
               }
             }
           },
-          "_row_num": 17
+          "_row_num": 15
         },
         {
           "choice_list_name": "yes_no_na",
@@ -1365,11 +1511,12 @@
             "title": {
               "text": {
                 "default": "N/A",
-                "es": "N/A"
+                "es": "N/A",
+                "fr": "N/A"
               }
             }
           },
-          "_row_num": 18
+          "_row_num": 16
         }
       ],
       "build_quality_reason_type_observation": [
@@ -1380,11 +1527,12 @@
             "title": {
               "text": {
                 "default": "Broken",
-                "es": "Roto"
+                "es": "Roto",
+                "fr": "Cassé"
               }
             }
           },
-          "_row_num": 20
+          "_row_num": 18
         },
         {
           "choice_list_name": "build_quality_reason_type_observation",
@@ -1393,11 +1541,12 @@
             "title": {
               "text": {
                 "default": "Burnt",
-                "es": "Quemado"
+                "es": "Quemado",
+                "fr": "Brûlé"
               }
             }
           },
-          "_row_num": 21
+          "_row_num": 19
         },
         {
           "choice_list_name": "build_quality_reason_type_observation",
@@ -1406,11 +1555,12 @@
             "title": {
               "text": {
                 "default": "Corrosion",
-                "es": "Corrosión"
+                "es": "Corrosión",
+                "fr": "Corrosion"
               }
             }
           },
-          "_row_num": 22
+          "_row_num": 20
         },
         {
           "choice_list_name": "build_quality_reason_type_observation",
@@ -1419,11 +1569,12 @@
             "title": {
               "text": {
                 "default": "Deteriorating",
-                "es": "Deterioro"
+                "es": "Deterioro",
+                "fr": "Détérioration"
               }
             }
           },
-          "_row_num": 23
+          "_row_num": 21
         },
         {
           "choice_list_name": "build_quality_reason_type_observation",
@@ -1432,11 +1583,12 @@
             "title": {
               "text": {
                 "default": "Leaking",
-                "es": "Fugas"
+                "es": "Fugas",
+                "fr": "Qui fuit"
               }
             }
           },
-          "_row_num": 24
+          "_row_num": 22
         },
         {
           "choice_list_name": "build_quality_reason_type_observation",
@@ -1445,11 +1597,12 @@
             "title": {
               "text": {
                 "default": "Missing",
-                "es": "Desaparecido"
+                "es": "Desaparecido",
+                "fr": "Manquant"
               }
             }
           },
-          "_row_num": 25
+          "_row_num": 23
         },
         {
           "choice_list_name": "build_quality_reason_type_observation",
@@ -1458,11 +1611,12 @@
             "title": {
               "text": {
                 "default": "Noisy",
-                "es": "Ruidoso"
+                "es": "Ruidoso",
+                "fr": "Bruyant"
               }
             }
           },
-          "_row_num": 26
+          "_row_num": 24
         }
       ],
       "build_quality_reason_type_location": [
@@ -1473,11 +1627,12 @@
             "title": {
               "text": {
                 "default": "Appliance (exterior)",
-                "es": "Aparato (exterior)"
+                "es": "Aparato (exterior)",
+                "fr": "Appareil (extérieur)"
               }
             }
           },
-          "_row_num": 29
+          "_row_num": 27
         },
         {
           "choice_list_name": "build_quality_reason_type_location",
@@ -1486,11 +1641,12 @@
             "title": {
               "text": {
                 "default": "Accessory (EMS)",
-                "es": "Accesorio (EMS)"
+                "es": "Accesorio (EMS)",
+                "fr": "Accessoire (EMS)"
               }
             }
           },
-          "_row_num": 30
+          "_row_num": 28
         },
         {
           "choice_list_name": "build_quality_reason_type_location",
@@ -1499,11 +1655,12 @@
             "title": {
               "text": {
                 "default": "Solar (mechanical)",
-                "es": "Solar (mecánica)"
+                "es": "Solar (mecánica)",
+                "fr": "Solaire (mécanique)"
               }
             }
           },
-          "_row_num": 31
+          "_row_num": 29
         },
         {
           "choice_list_name": "build_quality_reason_type_location",
@@ -1512,11 +1669,12 @@
             "title": {
               "text": {
                 "default": "Solar (electrical)",
-                "es": "Solar (eléctrico)"
+                "es": "Solar (eléctrico)",
+                "fr": "Solaire (electrique)"
               }
             }
           },
-          "_row_num": 32
+          "_row_num": 30
         },
         {
           "choice_list_name": "build_quality_reason_type_location",
@@ -1525,11 +1683,12 @@
             "title": {
               "text": {
                 "default": "Appliance (interior)",
-                "es": "Aparato (interior)"
+                "es": "Aparato (interior)",
+                "fr": "Appareil (intérieur)"
               }
             }
           },
-          "_row_num": 33
+          "_row_num": 31
         },
         {
           "choice_list_name": "build_quality_reason_type_location",
@@ -1538,11 +1697,40 @@
             "title": {
               "text": {
                 "default": "Not Determined",
-                "es": "No determinado"
+                "es": "No determinado",
+                "fr": "Non déterminé"
+              }
+            }
+          },
+          "_row_num": 32
+        }
+      ],
+      "repair_occurred_option": [
+        {
+          "choice_list_name": "repair_occurred_option",
+          "data_value": "not_yet_repaired",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Not Yet Repaired",
+                "fr": "Pas encore réparé"
               }
             }
           },
           "_row_num": 34
+        },
+        {
+          "choice_list_name": "repair_occurred_option",
+          "data_value": "repaired",
+          "display": {
+            "title": {
+              "text": {
+                "default": "Repaired",
+                "fr": "Réparé"
+              }
+            }
+          },
+          "_row_num": 35
         }
       ]
     },
@@ -1690,7 +1878,6 @@
           }
         ],
         "type": "string",
-        "valuesList": "refrigerator_failure_type",
         "elementKey": "refrigerator_failure"
       },
       "build_quality": {
@@ -1704,21 +1891,10 @@
         "valuesList": "yes_no",
         "elementKey": "build_quality"
       },
-      "build_quality_reason": {
-        "_defn": [
-          {
-            "_row_num": 22,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "build_quality_reason_type",
-        "elementKey": "build_quality_reason"
-      },
       "build_quality_observation": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -1729,7 +1905,7 @@
       "build_quality_location": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -1740,7 +1916,7 @@
       "build_quality_component": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
@@ -1750,7 +1926,7 @@
       "build_quality_image": {
         "_defn": [
           {
-            "_row_num": 30,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
@@ -1774,7 +1950,7 @@
       "build_quality2": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -1782,21 +1958,10 @@
         "valuesList": "yes_no",
         "elementKey": "build_quality2"
       },
-      "build_quality_reason2": {
-        "_defn": [
-          {
-            "_row_num": 37,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "build_quality_reason_type",
-        "elementKey": "build_quality_reason2"
-      },
       "build_quality_observation2": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -1807,7 +1972,7 @@
       "build_quality_location2": {
         "_defn": [
           {
-            "_row_num": 39,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -1818,7 +1983,7 @@
       "build_quality_component2": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -1828,7 +1993,7 @@
       "build_quality_image2": {
         "_defn": [
           {
-            "_row_num": 46,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
@@ -1852,7 +2017,7 @@
       "build_quality3": {
         "_defn": [
           {
-            "_row_num": 51,
+            "_row_num": 49,
             "section_name": "survey"
           }
         ],
@@ -1860,21 +2025,10 @@
         "valuesList": "yes_no",
         "elementKey": "build_quality3"
       },
-      "build_quality_reason3": {
-        "_defn": [
-          {
-            "_row_num": 53,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "build_quality_reason_type",
-        "elementKey": "build_quality_reason3"
-      },
       "build_quality_observation3": {
         "_defn": [
           {
-            "_row_num": 54,
+            "_row_num": 51,
             "section_name": "survey"
           }
         ],
@@ -1885,7 +2039,7 @@
       "build_quality_location3": {
         "_defn": [
           {
-            "_row_num": 55,
+            "_row_num": 52,
             "section_name": "survey"
           }
         ],
@@ -1896,7 +2050,7 @@
       "build_quality_component3": {
         "_defn": [
           {
-            "_row_num": 56,
+            "_row_num": 53,
             "section_name": "survey"
           }
         ],
@@ -1906,7 +2060,7 @@
       "build_quality_image3": {
         "_defn": [
           {
-            "_row_num": 62,
+            "_row_num": 59,
             "section_name": "survey"
           }
         ],
@@ -1930,7 +2084,7 @@
       "voltage_stabilizer_working": {
         "_defn": [
           {
-            "_row_num": 67,
+            "_row_num": 64,
             "section_name": "survey"
           }
         ],
@@ -1941,18 +2095,17 @@
       "voltage_stabilizer_not_working_reason": {
         "_defn": [
           {
-            "_row_num": 69,
+            "_row_num": 66,
             "section_name": "survey"
           }
         ],
         "type": "string",
-        "valuesList": "voltage_stabilizer_not_working_reason_type",
         "elementKey": "voltage_stabilizer_not_working_reason"
       },
       "voltage_stabilizer_replaced": {
         "_defn": [
           {
-            "_row_num": 73,
+            "_row_num": 70,
             "section_name": "survey"
           }
         ],
@@ -1963,18 +2116,17 @@
       "voltage_stabilizer_replaced_reason": {
         "_defn": [
           {
-            "_row_num": 75,
+            "_row_num": 72,
             "section_name": "survey"
           }
         ],
         "type": "string",
-        "valuesList": "voltage_stabilizer_replaced_reason_type",
         "elementKey": "voltage_stabilizer_replaced_reason"
       },
       "warranty_claim_been_made": {
         "_defn": [
           {
-            "_row_num": 81,
+            "_row_num": 78,
             "section_name": "survey"
           }
         ],
@@ -1985,7 +2137,7 @@
       "warranty_claim_date": {
         "_defn": [
           {
-            "_row_num": 83,
+            "_row_num": 80,
             "section_name": "survey"
           }
         ],
@@ -1993,10 +2145,21 @@
         "elementType": "date",
         "elementKey": "warranty_claim_date"
       },
+      "repair_occurred": {
+        "_defn": [
+          {
+            "_row_num": 81,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "repair_occurred"
+      },
       "days_from_warranty_claim_until_repaired": {
         "_defn": [
           {
-            "_row_num": 84,
+            "_row_num": 83,
             "section_name": "survey"
           }
         ],
@@ -2021,7 +2184,8 @@
               "prompt": {
                 "text": {
                   "default": "Refrigerator ID",
-                  "es": "ID de Frigorífico"
+                  "es": "ID de Frigorífico",
+                  "fr": "ID de réfrigérateur"
                 }
               },
               "hint": {
@@ -2045,7 +2209,8 @@
               "prompt": {
                 "text": {
                   "default": "Refrigerator ID: {{data.refrigerator_id}}",
-                  "es": "ID de Frigorífico: {{data.refrigerator_id}}"
+                  "es": "ID de Frigorífico: {{data.refrigerator_id}}",
+                  "fr": "ID de réfrigérateur : {{data.refrigerator_id}}"
                 }
               }
             },
@@ -2063,7 +2228,8 @@
               "prompt": {
                 "text": {
                   "default": "Reporting Period",
-                  "es": "Período de información"
+                  "es": "Período de información",
+                  "fr": "période considérée"
                 }
               },
               "hint": {
@@ -2086,7 +2252,10 @@
             "name": "heat_alarms",
             "display": {
               "prompt": {
-                "text": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the first day of the month to the last day of the month?"
+                "text": {
+                  "default": "How many heat alarms with over 10 hour duration above 8°C show in the termperature log from the first day of the month to the last day of the month?",
+                  "fr": "Combien d'alarmes de haute température (supérieure à 8°C et ayant durée 10 heures) enregistré dans le releve de température du mois dernier?"
+                }
               }
             },
             "required": true,
@@ -2102,7 +2271,10 @@
             "name": "freeze_alarms",
             "display": {
               "prompt": {
-                "text": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log from the first day of the month to the last day of the month?"
+                "text": {
+                  "default": "How many freeze alarms with over 1 hour duration below -0.5°C show in the temperature log from the first day of the month to the last day of the month?",
+                  "fr": "Combien d'alarmes de basse température (-0,5°C ayant dur au moins 1 heure) apparaissent/enregistrées dans le releve de température du mois dernier?"
+                }
               }
             },
             "required": true,
@@ -2118,7 +2290,10 @@
             "name": "heat_alarms_over_48",
             "display": {
               "prompt": {
-                "text": "How many heat alarms with 48 hour or longer duration in the temperature log from the first day of the month to the last day of the month?"
+                "text": {
+                  "default": "How many heat alarms with 48 hour or longer duration in the temperature log from the first day of the month to the last day of the month?",
+                  "fr": "Combien d'alarmes de haute température d'une durée de 48h ou plus apparaissent dans le releve de température du mois dernier ?"
+                }
               }
             },
             "required": true,
@@ -2135,7 +2310,8 @@
               "prompt": {
                 "text": {
                   "default": "Refrigerator Status: {{data.alarm_functional_status}}",
-                  "es": "Estado del refrigerador: {{data.alarm_functional_status}}"
+                  "es": "Estado del refrigerador: {{data.alarm_functional_status}}",
+                  "fr": "Etat de fonctionnalité: {{data.alarm_functional_status}}"
                 }
               }
             },
@@ -2147,19 +2323,21 @@
             "promptIdx": 6
           },
           {
-            "type": "select_one_with_other",
-            "values_list": "refrigerator_failure_type",
+            "type": "text",
             "name": "refrigerator_failure",
             "display": {
               "prompt": {
-                "text": "Why did the refrigerator fail?"
+                "text": {
+                  "default": "Why did the refrigerator fail?",
+                  "fr": "Pourquoi le réfrigérateur est-t-il tombe en panne?"
+                }
               }
             },
             "required": "data('alarm_functional_status') === 'non_functional'",
             "_row_num": 18,
             "__rowNum__": 17,
             "_token_type": "prompt",
-            "_type": "select_one_with_other",
+            "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen15",
             "promptIdx": 7
           },
@@ -2169,7 +2347,10 @@
             "name": "build_quality",
             "display": {
               "prompt": {
-                "text": "Have there been any issues related to build quality from the first day of the month to the last day of the month?"
+                "text": {
+                  "default": "Have there been any issues related to build quality from the first day of the month to the last day of the month?",
+                  "fr": "Y at-il eu des problèmes liés à la qualité de la fabrication (ou Défaut de fabrication) au cours du dernier mois?"
+                }
               }
             },
             "_row_num": 20,
@@ -2181,11 +2362,14 @@
           },
           {
             "type": "select_one_with_other",
-            "values_list": "build_quality_reason_type",
-            "name": "build_quality_reason",
+            "values_list": "build_quality_reason_type_observation",
+            "name": "build_quality_observation",
             "display": {
               "prompt": {
-                "text": "If so, why?"
+                "text": {
+                  "default": "If yes, what condition was observed related to the issue?",
+                  "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+                }
               }
             },
             "_row_num": 22,
@@ -2196,66 +2380,59 @@
             "promptIdx": 9
           },
           {
-            "type": "select_one_with_other",
-            "values_list": "build_quality_reason_type_observation",
-            "name": "build_quality_observation",
-            "display": {
-              "prompt": {
-                "text": "What condition was observed related to the failure?"
-              }
-            },
-            "_row_num": 23,
-            "__rowNum__": 22,
-            "_token_type": "prompt",
-            "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 10
-          },
-          {
             "type": "select_one",
             "values_list": "build_quality_reason_type_location",
             "name": "build_quality_location",
             "display": {
               "prompt": {
-                "text": "Where was the failure observed?"
+                "text": {
+                  "default": "Where was the issue observed?",
+                  "fr": "Où le problème a-t-il été observé?"
+                }
               }
             },
-            "_row_num": 24,
-            "__rowNum__": 23,
+            "_row_num": 23,
+            "__rowNum__": 22,
             "_token_type": "prompt",
             "_type": "select_one",
             "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 11
+            "promptIdx": 10
           },
           {
             "type": "text",
             "name": "build_quality_component",
             "display": {
               "prompt": {
-                "text": "Please enter the component that failed, and why if known."
+                "text": {
+                  "default": "Please enter the component that failed",
+                  "fr": "Veuillez entrer le composant qui a échoué"
+                }
               }
             },
-            "_row_num": 25,
-            "__rowNum__": 24,
+            "_row_num": 24,
+            "__rowNum__": 23,
             "_token_type": "prompt",
             "_type": "text",
             "_branch_label_enclosing_screen": "survey/_screen15",
-            "promptIdx": 12
+            "promptIdx": 11
           },
           {
             "type": "image",
             "name": "build_quality_image",
             "display": {
               "prompt": {
-                "text": "Please take a picture."
+                "text": {
+                  "default": "Please take a picture.",
+                  "fr": "S'il vous plaît prendre une photo"
+                }
               }
             },
-            "_row_num": 30,
-            "__rowNum__": 29,
+            "_row_num": 29,
+            "__rowNum__": 28,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen29",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen28",
+            "promptIdx": 12
           },
           {
             "type": "select_one",
@@ -2263,31 +2440,18 @@
             "name": "build_quality2",
             "display": {
               "prompt": {
-                "text": "Was there a second issue related to build quality from the first day of the month to the last day of the month?"
+                "text": {
+                  "default": "Was there a second issue related to build quality from the first day of the month to the last day of the month?",
+                  "fr": "Y at-il un deuxième problème lié à la qualité de la fabrication (ou Défaut de fabrication) au cours du dernier mois?"
+                }
               }
             },
-            "_row_num": 35,
-            "__rowNum__": 34,
+            "_row_num": 34,
+            "__rowNum__": 33,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen34",
-            "promptIdx": 14
-          },
-          {
-            "type": "select_one_with_other",
-            "values_list": "build_quality_reason_type",
-            "name": "build_quality_reason2",
-            "display": {
-              "prompt": {
-                "text": "If so, why?"
-              }
-            },
-            "_row_num": 37,
-            "__rowNum__": 36,
-            "_token_type": "prompt",
-            "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen34",
-            "promptIdx": 15
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 13
           },
           {
             "type": "select_one_with_other",
@@ -2295,15 +2459,18 @@
             "name": "build_quality_observation2",
             "display": {
               "prompt": {
-                "text": "What condition was observed related to the second failure?"
+                "text": {
+                  "default": "If yes, what condition was observed related to the second failure?",
+                  "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+                }
               }
             },
-            "_row_num": 38,
-            "__rowNum__": 37,
+            "_row_num": 36,
+            "__rowNum__": 35,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen34",
-            "promptIdx": 16
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 14
           },
           {
             "type": "select_one",
@@ -2311,45 +2478,54 @@
             "name": "build_quality_location2",
             "display": {
               "prompt": {
-                "text": "Where was the second failure observed?"
+                "text": {
+                  "default": "Where was the second failure observed?",
+                  "fr": "Où le problème a-t-il été observé?"
+                }
               }
             },
-            "_row_num": 39,
-            "__rowNum__": 38,
+            "_row_num": 37,
+            "__rowNum__": 36,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen34",
-            "promptIdx": 17
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 15
           },
           {
             "type": "text",
             "name": "build_quality_component2",
             "display": {
               "prompt": {
-                "text": "Please enter the second component that failed, and why if known."
+                "text": {
+                  "default": "Please enter the second component that failed",
+                  "fr": "Veuillez entrer le composant qui a échoué"
+                }
               }
             },
-            "_row_num": 40,
-            "__rowNum__": 39,
+            "_row_num": 38,
+            "__rowNum__": 37,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen34",
-            "promptIdx": 18
+            "_branch_label_enclosing_screen": "survey/_screen33",
+            "promptIdx": 16
           },
           {
             "type": "image",
             "name": "build_quality_image2",
             "display": {
               "prompt": {
-                "text": "Please take a picture."
+                "text": {
+                  "default": "Please take a picture.",
+                  "fr": "S'il vous plaît prendre une photo"
+                }
               }
             },
-            "_row_num": 46,
-            "__rowNum__": 45,
+            "_row_num": 44,
+            "__rowNum__": 43,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen45",
-            "promptIdx": 19
+            "_branch_label_enclosing_screen": "survey/_screen43",
+            "promptIdx": 17
           },
           {
             "type": "select_one",
@@ -2357,31 +2533,18 @@
             "name": "build_quality3",
             "display": {
               "prompt": {
-                "text": "Was there a third issue related to build quality from the first day of the month to the last day of the month?"
+                "text": {
+                  "default": "Was there a third issue related to build quality from the first day of the month to the last day of the month?",
+                  "fr": "Y at-il un troisème problème lié à la qualité de la fabrication (ou Défaut de fabrication) au cours du dernier mois?"
+                }
               }
             },
-            "_row_num": 51,
-            "__rowNum__": 50,
+            "_row_num": 49,
+            "__rowNum__": 48,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen50",
-            "promptIdx": 20
-          },
-          {
-            "type": "select_one_with_other",
-            "values_list": "build_quality_reason_type",
-            "name": "build_quality_reason3",
-            "display": {
-              "prompt": {
-                "text": "If so, why?"
-              }
-            },
-            "_row_num": 53,
-            "__rowNum__": 52,
-            "_token_type": "prompt",
-            "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen50",
-            "promptIdx": 21
+            "_branch_label_enclosing_screen": "survey/_screen48",
+            "promptIdx": 18
           },
           {
             "type": "select_one_with_other",
@@ -2389,15 +2552,18 @@
             "name": "build_quality_observation3",
             "display": {
               "prompt": {
-                "text": "What condition was observed related to the third failure?"
+                "text": {
+                  "default": "If yes, what condition was observed related to the third failure?",
+                  "fr": "Si oui, quelle condition a été observée liée à la défaillance?"
+                }
               }
             },
-            "_row_num": 54,
-            "__rowNum__": 53,
+            "_row_num": 51,
+            "__rowNum__": 50,
             "_token_type": "prompt",
             "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen50",
-            "promptIdx": 22
+            "_branch_label_enclosing_screen": "survey/_screen48",
+            "promptIdx": 19
           },
           {
             "type": "select_one",
@@ -2405,45 +2571,54 @@
             "name": "build_quality_location3",
             "display": {
               "prompt": {
-                "text": "Where was the third failure observed?"
+                "text": {
+                  "default": "Where was the third failure observed?",
+                  "fr": "Où le problème a-t-il été observé?"
+                }
               }
             },
-            "_row_num": 55,
-            "__rowNum__": 54,
+            "_row_num": 52,
+            "__rowNum__": 51,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen50",
-            "promptIdx": 23
+            "_branch_label_enclosing_screen": "survey/_screen48",
+            "promptIdx": 20
           },
           {
             "type": "text",
             "name": "build_quality_component3",
             "display": {
               "prompt": {
-                "text": "Please enter the third component that failed, and why if known."
+                "text": {
+                  "default": "Please enter the third component that failed",
+                  "fr": "Veuillez entrer le composant qui a échoué"
+                }
               }
             },
-            "_row_num": 56,
-            "__rowNum__": 55,
+            "_row_num": 53,
+            "__rowNum__": 52,
             "_token_type": "prompt",
             "_type": "text",
-            "_branch_label_enclosing_screen": "survey/_screen50",
-            "promptIdx": 24
+            "_branch_label_enclosing_screen": "survey/_screen48",
+            "promptIdx": 21
           },
           {
             "type": "image",
             "name": "build_quality_image3",
             "display": {
               "prompt": {
-                "text": "Please take a picture."
+                "text": {
+                  "default": "Please take a picture.",
+                  "fr": "S'il vous plaît prendre une photo"
+                }
               }
             },
-            "_row_num": 62,
-            "__rowNum__": 61,
+            "_row_num": 59,
+            "__rowNum__": 58,
             "_token_type": "prompt",
             "_type": "image",
-            "_branch_label_enclosing_screen": "survey/_screen61",
-            "promptIdx": 25
+            "_branch_label_enclosing_screen": "survey/_screen58",
+            "promptIdx": 22
           },
           {
             "type": "select_one",
@@ -2451,31 +2626,36 @@
             "name": "voltage_stabilizer_working",
             "display": {
               "prompt": {
-                "text": "Is the voltage stabilizer working?"
+                "text": {
+                  "default": "Is the voltage stabilizer working?",
+                  "fr": "Le stabilisateur de tension fonctionne-t-il?"
+                }
               }
             },
-            "_row_num": 67,
-            "__rowNum__": 66,
+            "_row_num": 64,
+            "__rowNum__": 63,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen66",
-            "promptIdx": 26
+            "_branch_label_enclosing_screen": "survey/_screen63",
+            "promptIdx": 23
           },
           {
-            "type": "select_one_with_other",
-            "values_list": "voltage_stabilizer_not_working_reason_type",
+            "type": "text",
             "name": "voltage_stabilizer_not_working_reason",
             "display": {
               "prompt": {
-                "text": "If no, why not?"
+                "text": {
+                  "default": "If no, why not?",
+                  "fr": "Si non, quel est le problème?"
+                }
               }
             },
-            "_row_num": 69,
-            "__rowNum__": 68,
+            "_row_num": 66,
+            "__rowNum__": 65,
             "_token_type": "prompt",
-            "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen66",
-            "promptIdx": 27
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen63",
+            "promptIdx": 24
           },
           {
             "type": "select_one",
@@ -2483,31 +2663,36 @@
             "name": "voltage_stabilizer_replaced",
             "display": {
               "prompt": {
-                "text": "Has the voltage regulator been replaced from the first day of the month to the last day of the month?"
+                "text": {
+                  "default": "Has the voltage regulator been replaced from the first day of the month to the last day of the month?",
+                  "fr": "Le stabilisateur de tension a-t-il été remplacé le mois dernier?"
+                }
               }
             },
-            "_row_num": 73,
-            "__rowNum__": 72,
+            "_row_num": 70,
+            "__rowNum__": 69,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen72",
-            "promptIdx": 28
+            "_branch_label_enclosing_screen": "survey/_screen69",
+            "promptIdx": 25
           },
           {
-            "type": "select_one_with_other",
-            "values_list": "voltage_stabilizer_replaced_reason_type",
+            "type": "text",
             "name": "voltage_stabilizer_replaced_reason",
             "display": {
               "prompt": {
-                "text": "If yes, why?"
+                "text": {
+                  "default": "If yes, why?",
+                  "fr": "Si, oui, pourquoi?"
+                }
               }
             },
-            "_row_num": 75,
-            "__rowNum__": 74,
+            "_row_num": 72,
+            "__rowNum__": 71,
             "_token_type": "prompt",
-            "_type": "select_one_with_other",
-            "_branch_label_enclosing_screen": "survey/_screen72",
-            "promptIdx": 29
+            "_type": "text",
+            "_branch_label_enclosing_screen": "survey/_screen69",
+            "promptIdx": 26
           },
           {
             "type": "select_one",
@@ -2515,45 +2700,73 @@
             "name": "warranty_claim_been_made",
             "display": {
               "prompt": {
-                "text": "Has a warranty claim been made?"
+                "text": {
+                  "default": "Has a warranty claim been made?",
+                  "fr": "Une demande de garantie a-t-elle été faite?"
+                }
               }
             },
-            "_row_num": 81,
-            "__rowNum__": 80,
+            "_row_num": 78,
+            "__rowNum__": 77,
             "_token_type": "prompt",
             "_type": "select_one",
-            "_branch_label_enclosing_screen": "survey/_screen80",
-            "promptIdx": 30
+            "_branch_label_enclosing_screen": "survey/_screen77",
+            "promptIdx": 27
           },
           {
             "type": "birthdate",
             "name": "warranty_claim_date",
             "display": {
               "prompt": {
-                "text": "When was the warranty claim made?"
+                "text": {
+                  "default": "When was the warranty claim made?",
+                  "fr": "Quand la demande de garantie a-t-elle été faite?"
+                }
               }
             },
-            "_row_num": 83,
-            "__rowNum__": 82,
+            "_row_num": 80,
+            "__rowNum__": 79,
             "_token_type": "prompt",
             "_type": "birthdate",
-            "_branch_label_enclosing_screen": "survey/_screen80",
-            "promptIdx": 31
+            "_branch_label_enclosing_screen": "survey/_screen77",
+            "promptIdx": 28
+          },
+          {
+            "type": "select_one",
+            "values_list": "yes_no",
+            "name": "repair_occurred",
+            "display": {
+              "prompt": {
+                "text": {
+                  "default": "Has the repair occurred?",
+                  "fr": "La réparation a-t-elle eu lieu?"
+                }
+              }
+            },
+            "_row_num": 81,
+            "__rowNum__": 80,
+            "_token_type": "prompt",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen77",
+            "promptIdx": 29
           },
           {
             "type": "integer",
             "name": "days_from_warranty_claim_until_repaired",
             "display": {
               "prompt": {
-                "text": "How many days elapsed between when the claim was made and when the repair occurred?"
+                "text": {
+                  "default": "How many days elapsed between when the claim was made and when the repair occurred?",
+                  "fr": "Combien de jours se sont écoulés entre le moment où la demande de garantie a été faite et le moment où la réparation a eu lieu?"
+                }
               }
             },
-            "_row_num": 84,
-            "__rowNum__": 83,
+            "_row_num": 83,
+            "__rowNum__": 82,
             "_token_type": "prompt",
             "_type": "integer",
-            "_branch_label_enclosing_screen": "survey/_screen80",
-            "promptIdx": 32
+            "_branch_label_enclosing_screen": "survey/_screen77",
+            "promptIdx": 30
           },
           {
             "_token_type": "prompt",
@@ -2561,7 +2774,7 @@
             "_type": "contents",
             "_row_num": 88,
             "_branch_label_enclosing_screen": "survey/_screen88",
-            "promptIdx": 33
+            "promptIdx": 31
           }
         ],
         "validation_tag_map": {
@@ -2622,256 +2835,256 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 27,
-              "__rowNum__": 26,
+              "_row_num": 26,
+              "__rowNum__": 25,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nif (data('alarm_functional_status') === 'non_functional') {\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n}\nactivePromptIndicies.push(8);\nif (selected(data('build_quality'), 'yes')) {\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nif (data('alarm_functional_status') === 'non_functional') {\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n}\nactivePromptIndicies.push(8);\nif (selected(data('build_quality'), 'yes')) {\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
             "clause": "if",
             "condition": "selected(data('build_quality'), 'yes')",
-            "_row_num": 28,
-            "__rowNum__": 27,
+            "_row_num": 27,
+            "__rowNum__": 26,
             "_token_type": "goto_label",
-            "_branch_label": "_then28",
+            "_branch_label": "_then27",
             "operationIdx": 5
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else32",
-            "_row_num": 32,
+            "_branch_label": "_else31",
+            "_row_num": 31,
             "operationIdx": 6
           },
           {
             "clause": "begin screen",
-            "_row_num": 29,
-            "__rowNum__": 28,
+            "_row_num": 28,
+            "__rowNum__": 27,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 31,
-              "__rowNum__": 30,
+              "_row_num": 30,
+              "__rowNum__": 29,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 7
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif32",
-            "_row_num": 32,
+            "_branch_label": "_endif31",
+            "_row_num": 31,
             "operationIdx": 8
           },
           {
             "clause": "if",
             "condition": "selected(data('build_quality'), 'yes')",
-            "_row_num": 33,
-            "__rowNum__": 32,
+            "_row_num": 32,
+            "__rowNum__": 31,
             "_token_type": "goto_label",
-            "_branch_label": "_then33",
+            "_branch_label": "_then32",
             "operationIdx": 9
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else43",
-            "_row_num": 43,
+            "_branch_label": "_else41",
+            "_row_num": 41,
             "operationIdx": 10
           },
           {
             "clause": "begin screen",
-            "_row_num": 34,
-            "__rowNum__": 33,
+            "_row_num": 33,
+            "__rowNum__": 32,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 42,
-              "__rowNum__": 41,
+              "_row_num": 40,
+              "__rowNum__": 39,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\nif (selected(data('build_quality2'), 'yes')) {\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\nif (selected(data('build_quality2'), 'yes')) {\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 11
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif43",
-            "_row_num": 43,
+            "_branch_label": "_endif41",
+            "_row_num": 41,
             "operationIdx": 12
           },
           {
             "clause": "if",
             "condition": "selected(data('build_quality2'), 'yes')",
-            "_row_num": 44,
-            "__rowNum__": 43,
+            "_row_num": 42,
+            "__rowNum__": 41,
             "_token_type": "goto_label",
-            "_branch_label": "_then44",
+            "_branch_label": "_then42",
             "operationIdx": 13
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else48",
-            "_row_num": 48,
+            "_branch_label": "_else46",
+            "_row_num": 46,
             "operationIdx": 14
           },
           {
             "clause": "begin screen",
-            "_row_num": 45,
-            "__rowNum__": 44,
+            "_row_num": 43,
+            "__rowNum__": 42,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 47,
-              "__rowNum__": 46,
+              "_row_num": 45,
+              "__rowNum__": 44,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(17);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 15
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif48",
-            "_row_num": 48,
+            "_branch_label": "_endif46",
+            "_row_num": 46,
             "operationIdx": 16
           },
           {
             "clause": "if",
             "condition": "selected(data('build_quality2'), 'yes')",
-            "_row_num": 49,
-            "__rowNum__": 48,
+            "_row_num": 47,
+            "__rowNum__": 46,
             "_token_type": "goto_label",
-            "_branch_label": "_then49",
+            "_branch_label": "_then47",
             "operationIdx": 17
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else59",
-            "_row_num": 59,
+            "_branch_label": "_else56",
+            "_row_num": 56,
             "operationIdx": 18
           },
           {
             "clause": "begin screen",
-            "_row_num": 50,
-            "__rowNum__": 49,
+            "_row_num": 48,
+            "__rowNum__": 47,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 58,
-              "__rowNum__": 57,
+              "_row_num": 55,
+              "__rowNum__": 54,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nif (selected(data('build_quality3'), 'yes')) {\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(18);\nif (selected(data('build_quality3'), 'yes')) {\nactivePromptIndicies.push(19);\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 19
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif59",
-            "_row_num": 59,
+            "_branch_label": "_endif56",
+            "_row_num": 56,
             "operationIdx": 20
           },
           {
             "clause": "if",
             "condition": "selected(data('build_quality3'), 'yes')",
-            "_row_num": 60,
-            "__rowNum__": 59,
+            "_row_num": 57,
+            "__rowNum__": 56,
             "_token_type": "goto_label",
-            "_branch_label": "_then60",
+            "_branch_label": "_then57",
             "operationIdx": 21
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else64",
-            "_row_num": 64,
+            "_branch_label": "_else61",
+            "_row_num": 61,
             "operationIdx": 22
           },
           {
             "clause": "begin screen",
-            "_row_num": 61,
-            "__rowNum__": 60,
+            "_row_num": 58,
+            "__rowNum__": 57,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 63,
-              "__rowNum__": 62,
+              "_row_num": 60,
+              "__rowNum__": 59,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(22);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 23
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif64",
-            "_row_num": 64,
+            "_branch_label": "_endif61",
+            "_row_num": 61,
             "operationIdx": 24
           },
           {
             "clause": "if",
             "condition": "data('voltage_stabilizer_present') !== 'no'",
-            "_row_num": 65,
-            "__rowNum__": 64,
+            "_row_num": 62,
+            "__rowNum__": 61,
             "_token_type": "goto_label",
-            "_branch_label": "_then65",
+            "_branch_label": "_then62",
             "operationIdx": 25
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_else78",
-            "_row_num": 78,
+            "_branch_label": "_else75",
+            "_row_num": 75,
             "operationIdx": 26
           },
           {
             "clause": "begin screen",
-            "_row_num": 66,
-            "__rowNum__": 65,
+            "_row_num": 63,
+            "__rowNum__": 62,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 71,
-              "__rowNum__": 70,
+              "_row_num": 68,
+              "__rowNum__": 67,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(26);\nif (data('voltage_stabilizer_working') === 'no') {\nactivePromptIndicies.push(27);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(23);\nif (data('voltage_stabilizer_working') === 'no') {\nactivePromptIndicies.push(24);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 27
           },
           {
             "clause": "begin screen",
-            "_row_num": 72,
-            "__rowNum__": 71,
+            "_row_num": 69,
+            "__rowNum__": 68,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 77,
-              "__rowNum__": 76,
+              "_row_num": 74,
+              "__rowNum__": 73,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\nif (selected(data('voltage_stabilizer_replaced'), 'yes')) {\nactivePromptIndicies.push(29);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(25);\nif (selected(data('voltage_stabilizer_replaced'), 'yes')) {\nactivePromptIndicies.push(26);\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 28
           },
           {
             "clause": "end if",
             "_token_type": "goto_label",
-            "_branch_label": "_endif78",
-            "_row_num": 78,
+            "_branch_label": "_endif75",
+            "_row_num": 75,
             "operationIdx": 29
           },
           {
             "clause": "if",
             "condition": "calculates.refrigerator_age() < 4",
-            "_row_num": 79,
-            "__rowNum__": 78,
+            "_row_num": 76,
+            "__rowNum__": 75,
             "_token_type": "goto_label",
-            "_branch_label": "_then79",
+            "_branch_label": "_then76",
             "operationIdx": 30
           },
           {
@@ -2883,8 +3096,8 @@
           },
           {
             "clause": "begin screen",
-            "_row_num": 80,
-            "__rowNum__": 79,
+            "_row_num": 77,
+            "__rowNum__": 76,
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
@@ -2892,7 +3105,7 @@
               "__rowNum__": 85,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(30);\nif (selected(data('warranty_claim_been_made'), 'yes')) {\nactivePromptIndicies.push(31);\nactivePromptIndicies.push(32);\n}\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(27);\nif (selected(data('warranty_claim_been_made'), 'yes')) {\nactivePromptIndicies.push(28);\nactivePromptIndicies.push(29);\nif (selected(data('repair_occurred'), 'yes')) {\nactivePromptIndicies.push(30);\n}\n}\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 32
           },
           {
@@ -2911,7 +3124,7 @@
           {
             "_row_num": 88,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(33);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(31);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
@@ -2930,33 +3143,33 @@
           "_screen10": 2,
           "_screen11": 3,
           "_screen15": 4,
-          "_then28": 7,
-          "_screen29": 7,
-          "_else32": 9,
-          "_endif32": 9,
-          "_then33": 11,
-          "_screen34": 11,
-          "_else43": 13,
-          "_endif43": 13,
-          "_then44": 15,
-          "_screen45": 15,
-          "_else48": 17,
-          "_endif48": 17,
-          "_then49": 19,
-          "_screen50": 19,
-          "_else59": 21,
-          "_endif59": 21,
-          "_then60": 23,
-          "_screen61": 23,
-          "_else64": 25,
-          "_endif64": 25,
-          "_then65": 27,
-          "_screen66": 27,
-          "_screen72": 28,
-          "_else78": 30,
-          "_endif78": 30,
-          "_then79": 32,
-          "_screen80": 32,
+          "_then27": 7,
+          "_screen28": 7,
+          "_else31": 9,
+          "_endif31": 9,
+          "_then32": 11,
+          "_screen33": 11,
+          "_else41": 13,
+          "_endif41": 13,
+          "_then42": 15,
+          "_screen43": 15,
+          "_else46": 17,
+          "_endif46": 17,
+          "_then47": 19,
+          "_screen48": 19,
+          "_else56": 21,
+          "_endif56": 21,
+          "_then57": 23,
+          "_screen58": 23,
+          "_else61": 25,
+          "_endif61": 25,
+          "_then62": 27,
+          "_screen63": 27,
+          "_screen69": 28,
+          "_else75": 30,
+          "_endif75": 30,
+          "_then76": 32,
+          "_screen77": 32,
           "_else87": 34,
           "_endif87": 34,
           "_contents": 35,
@@ -2994,7 +3207,8 @@
               "title": {
                 "text": {
                   "default": "Indicators",
-                  "es": "Indicadores"
+                  "es": "Indicadores",
+                  "fr": "Indicateurs"
                 }
               }
             },
@@ -3290,7 +3504,6 @@
           }
         ],
         "type": "string",
-        "valuesList": "refrigerator_failure_type",
         "elementKey": "refrigerator_failure",
         "elementName": "refrigerator_failure",
         "elementSet": "data",
@@ -3310,24 +3523,10 @@
         "elementSet": "data",
         "elementPath": "build_quality"
       },
-      "build_quality_reason": {
-        "_defn": [
-          {
-            "_row_num": 22,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "build_quality_reason_type",
-        "elementKey": "build_quality_reason",
-        "elementName": "build_quality_reason",
-        "elementSet": "data",
-        "elementPath": "build_quality_reason"
-      },
       "build_quality_observation": {
         "_defn": [
           {
-            "_row_num": 23,
+            "_row_num": 22,
             "section_name": "survey"
           }
         ],
@@ -3341,7 +3540,7 @@
       "build_quality_location": {
         "_defn": [
           {
-            "_row_num": 24,
+            "_row_num": 23,
             "section_name": "survey"
           }
         ],
@@ -3355,7 +3554,7 @@
       "build_quality_component": {
         "_defn": [
           {
-            "_row_num": 25,
+            "_row_num": 24,
             "section_name": "survey"
           }
         ],
@@ -3368,7 +3567,7 @@
       "build_quality_image": {
         "_defn": [
           {
-            "_row_num": 30,
+            "_row_num": 29,
             "section_name": "survey"
           }
         ],
@@ -3406,7 +3605,7 @@
       "build_quality2": {
         "_defn": [
           {
-            "_row_num": 35,
+            "_row_num": 34,
             "section_name": "survey"
           }
         ],
@@ -3417,24 +3616,10 @@
         "elementSet": "data",
         "elementPath": "build_quality2"
       },
-      "build_quality_reason2": {
-        "_defn": [
-          {
-            "_row_num": 37,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "build_quality_reason_type",
-        "elementKey": "build_quality_reason2",
-        "elementName": "build_quality_reason2",
-        "elementSet": "data",
-        "elementPath": "build_quality_reason2"
-      },
       "build_quality_observation2": {
         "_defn": [
           {
-            "_row_num": 38,
+            "_row_num": 36,
             "section_name": "survey"
           }
         ],
@@ -3448,7 +3633,7 @@
       "build_quality_location2": {
         "_defn": [
           {
-            "_row_num": 39,
+            "_row_num": 37,
             "section_name": "survey"
           }
         ],
@@ -3462,7 +3647,7 @@
       "build_quality_component2": {
         "_defn": [
           {
-            "_row_num": 40,
+            "_row_num": 38,
             "section_name": "survey"
           }
         ],
@@ -3475,7 +3660,7 @@
       "build_quality_image2": {
         "_defn": [
           {
-            "_row_num": 46,
+            "_row_num": 44,
             "section_name": "survey"
           }
         ],
@@ -3513,7 +3698,7 @@
       "build_quality3": {
         "_defn": [
           {
-            "_row_num": 51,
+            "_row_num": 49,
             "section_name": "survey"
           }
         ],
@@ -3524,24 +3709,10 @@
         "elementSet": "data",
         "elementPath": "build_quality3"
       },
-      "build_quality_reason3": {
-        "_defn": [
-          {
-            "_row_num": 53,
-            "section_name": "survey"
-          }
-        ],
-        "type": "string",
-        "valuesList": "build_quality_reason_type",
-        "elementKey": "build_quality_reason3",
-        "elementName": "build_quality_reason3",
-        "elementSet": "data",
-        "elementPath": "build_quality_reason3"
-      },
       "build_quality_observation3": {
         "_defn": [
           {
-            "_row_num": 54,
+            "_row_num": 51,
             "section_name": "survey"
           }
         ],
@@ -3555,7 +3726,7 @@
       "build_quality_location3": {
         "_defn": [
           {
-            "_row_num": 55,
+            "_row_num": 52,
             "section_name": "survey"
           }
         ],
@@ -3569,7 +3740,7 @@
       "build_quality_component3": {
         "_defn": [
           {
-            "_row_num": 56,
+            "_row_num": 53,
             "section_name": "survey"
           }
         ],
@@ -3582,7 +3753,7 @@
       "build_quality_image3": {
         "_defn": [
           {
-            "_row_num": 62,
+            "_row_num": 59,
             "section_name": "survey"
           }
         ],
@@ -3620,7 +3791,7 @@
       "voltage_stabilizer_working": {
         "_defn": [
           {
-            "_row_num": 67,
+            "_row_num": 64,
             "section_name": "survey"
           }
         ],
@@ -3634,12 +3805,11 @@
       "voltage_stabilizer_not_working_reason": {
         "_defn": [
           {
-            "_row_num": 69,
+            "_row_num": 66,
             "section_name": "survey"
           }
         ],
         "type": "string",
-        "valuesList": "voltage_stabilizer_not_working_reason_type",
         "elementKey": "voltage_stabilizer_not_working_reason",
         "elementName": "voltage_stabilizer_not_working_reason",
         "elementSet": "data",
@@ -3648,7 +3818,7 @@
       "voltage_stabilizer_replaced": {
         "_defn": [
           {
-            "_row_num": 73,
+            "_row_num": 70,
             "section_name": "survey"
           }
         ],
@@ -3662,12 +3832,11 @@
       "voltage_stabilizer_replaced_reason": {
         "_defn": [
           {
-            "_row_num": 75,
+            "_row_num": 72,
             "section_name": "survey"
           }
         ],
         "type": "string",
-        "valuesList": "voltage_stabilizer_replaced_reason_type",
         "elementKey": "voltage_stabilizer_replaced_reason",
         "elementName": "voltage_stabilizer_replaced_reason",
         "elementSet": "data",
@@ -3676,7 +3845,7 @@
       "warranty_claim_been_made": {
         "_defn": [
           {
-            "_row_num": 81,
+            "_row_num": 78,
             "section_name": "survey"
           }
         ],
@@ -3690,7 +3859,7 @@
       "warranty_claim_date": {
         "_defn": [
           {
-            "_row_num": 83,
+            "_row_num": 80,
             "section_name": "survey"
           }
         ],
@@ -3701,10 +3870,24 @@
         "elementSet": "data",
         "elementPath": "warranty_claim_date"
       },
+      "repair_occurred": {
+        "_defn": [
+          {
+            "_row_num": 81,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "yes_no",
+        "elementKey": "repair_occurred",
+        "elementName": "repair_occurred",
+        "elementSet": "data",
+        "elementPath": "repair_occurred"
+      },
       "days_from_warranty_claim_until_repaired": {
         "_defn": [
           {
-            "_row_num": 84,
+            "_row_num": 83,
             "section_name": "survey"
           }
         ],
@@ -3884,126 +4067,91 @@
         "_aspect": "build_quality",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\",\"fr\":\"Oui\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality2",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\",\"fr\":\"Oui\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality3",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\",\"fr\":\"Oui\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality_location",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_exterior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (exterior)\",\"es\":\"Aparato (exterior)\"}}},\"_row_num\":29},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"accessory_ems\",\"display\":{\"title\":{\"text\":{\"default\":\"Accessory (EMS)\",\"es\":\"Accesorio (EMS)\"}}},\"_row_num\":30},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_mechanical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (mechanical)\",\"es\":\"Solar (mecánica)\"}}},\"_row_num\":31},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_electrical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (electrical)\",\"es\":\"Solar (eléctrico)\"}}},\"_row_num\":32},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_interior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (interior)\",\"es\":\"Aparato (interior)\"}}},\"_row_num\":33},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"not_determined\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Determined\",\"es\":\"No determinado\"}}},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_exterior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (exterior)\",\"es\":\"Aparato (exterior)\",\"fr\":\"Appareil (extérieur)\"}}},\"_row_num\":27},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"accessory_ems\",\"display\":{\"title\":{\"text\":{\"default\":\"Accessory (EMS)\",\"es\":\"Accesorio (EMS)\",\"fr\":\"Accessoire (EMS)\"}}},\"_row_num\":28},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_mechanical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (mechanical)\",\"es\":\"Solar (mecánica)\",\"fr\":\"Solaire (mécanique)\"}}},\"_row_num\":29},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_electrical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (electrical)\",\"es\":\"Solar (eléctrico)\",\"fr\":\"Solaire (electrique)\"}}},\"_row_num\":30},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_interior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (interior)\",\"es\":\"Aparato (interior)\",\"fr\":\"Appareil (intérieur)\"}}},\"_row_num\":31},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"not_determined\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Determined\",\"es\":\"No determinado\",\"fr\":\"Non déterminé\"}}},\"_row_num\":32}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality_location2",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_exterior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (exterior)\",\"es\":\"Aparato (exterior)\"}}},\"_row_num\":29},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"accessory_ems\",\"display\":{\"title\":{\"text\":{\"default\":\"Accessory (EMS)\",\"es\":\"Accesorio (EMS)\"}}},\"_row_num\":30},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_mechanical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (mechanical)\",\"es\":\"Solar (mecánica)\"}}},\"_row_num\":31},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_electrical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (electrical)\",\"es\":\"Solar (eléctrico)\"}}},\"_row_num\":32},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_interior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (interior)\",\"es\":\"Aparato (interior)\"}}},\"_row_num\":33},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"not_determined\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Determined\",\"es\":\"No determinado\"}}},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_exterior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (exterior)\",\"es\":\"Aparato (exterior)\",\"fr\":\"Appareil (extérieur)\"}}},\"_row_num\":27},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"accessory_ems\",\"display\":{\"title\":{\"text\":{\"default\":\"Accessory (EMS)\",\"es\":\"Accesorio (EMS)\",\"fr\":\"Accessoire (EMS)\"}}},\"_row_num\":28},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_mechanical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (mechanical)\",\"es\":\"Solar (mecánica)\",\"fr\":\"Solaire (mécanique)\"}}},\"_row_num\":29},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_electrical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (electrical)\",\"es\":\"Solar (eléctrico)\",\"fr\":\"Solaire (electrique)\"}}},\"_row_num\":30},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_interior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (interior)\",\"es\":\"Aparato (interior)\",\"fr\":\"Appareil (intérieur)\"}}},\"_row_num\":31},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"not_determined\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Determined\",\"es\":\"No determinado\",\"fr\":\"Non déterminé\"}}},\"_row_num\":32}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality_location3",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_exterior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (exterior)\",\"es\":\"Aparato (exterior)\"}}},\"_row_num\":29},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"accessory_ems\",\"display\":{\"title\":{\"text\":{\"default\":\"Accessory (EMS)\",\"es\":\"Accesorio (EMS)\"}}},\"_row_num\":30},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_mechanical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (mechanical)\",\"es\":\"Solar (mecánica)\"}}},\"_row_num\":31},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_electrical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (electrical)\",\"es\":\"Solar (eléctrico)\"}}},\"_row_num\":32},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_interior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (interior)\",\"es\":\"Aparato (interior)\"}}},\"_row_num\":33},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"not_determined\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Determined\",\"es\":\"No determinado\"}}},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_exterior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (exterior)\",\"es\":\"Aparato (exterior)\",\"fr\":\"Appareil (extérieur)\"}}},\"_row_num\":27},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"accessory_ems\",\"display\":{\"title\":{\"text\":{\"default\":\"Accessory (EMS)\",\"es\":\"Accesorio (EMS)\",\"fr\":\"Accessoire (EMS)\"}}},\"_row_num\":28},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_mechanical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (mechanical)\",\"es\":\"Solar (mecánica)\",\"fr\":\"Solaire (mécanique)\"}}},\"_row_num\":29},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"solar_electrical\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar (electrical)\",\"es\":\"Solar (eléctrico)\",\"fr\":\"Solaire (electrique)\"}}},\"_row_num\":30},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"appliance_interior\",\"display\":{\"title\":{\"text\":{\"default\":\"Appliance (interior)\",\"es\":\"Aparato (interior)\",\"fr\":\"Appareil (intérieur)\"}}},\"_row_num\":31},{\"choice_list_name\":\"build_quality_reason_type_location\",\"data_value\":\"not_determined\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Determined\",\"es\":\"No determinado\",\"fr\":\"Non déterminé\"}}},\"_row_num\":32}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality_observation",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"broken\",\"display\":{\"title\":{\"text\":{\"default\":\"Broken\",\"es\":\"Roto\"}}},\"_row_num\":20},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"burnt\",\"display\":{\"title\":{\"text\":{\"default\":\"Burnt\",\"es\":\"Quemado\"}}},\"_row_num\":21},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"corrosion\",\"display\":{\"title\":{\"text\":{\"default\":\"Corrosion\",\"es\":\"Corrosión\"}}},\"_row_num\":22},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"deteriorating\",\"display\":{\"title\":{\"text\":{\"default\":\"Deteriorating\",\"es\":\"Deterioro\"}}},\"_row_num\":23},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"leaking\",\"display\":{\"title\":{\"text\":{\"default\":\"Leaking\",\"es\":\"Fugas\"}}},\"_row_num\":24},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"missing\",\"display\":{\"title\":{\"text\":{\"default\":\"Missing\",\"es\":\"Desaparecido\"}}},\"_row_num\":25},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"noisy\",\"display\":{\"title\":{\"text\":{\"default\":\"Noisy\",\"es\":\"Ruidoso\"}}},\"_row_num\":26}]"
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"broken\",\"display\":{\"title\":{\"text\":{\"default\":\"Broken\",\"es\":\"Roto\",\"fr\":\"Cassé\"}}},\"_row_num\":18},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"burnt\",\"display\":{\"title\":{\"text\":{\"default\":\"Burnt\",\"es\":\"Quemado\",\"fr\":\"Brûlé\"}}},\"_row_num\":19},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"corrosion\",\"display\":{\"title\":{\"text\":{\"default\":\"Corrosion\",\"es\":\"Corrosión\",\"fr\":\"Corrosion\"}}},\"_row_num\":20},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"deteriorating\",\"display\":{\"title\":{\"text\":{\"default\":\"Deteriorating\",\"es\":\"Deterioro\",\"fr\":\"Détérioration\"}}},\"_row_num\":21},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"leaking\",\"display\":{\"title\":{\"text\":{\"default\":\"Leaking\",\"es\":\"Fugas\",\"fr\":\"Qui fuit\"}}},\"_row_num\":22},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"missing\",\"display\":{\"title\":{\"text\":{\"default\":\"Missing\",\"es\":\"Desaparecido\",\"fr\":\"Manquant\"}}},\"_row_num\":23},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"noisy\",\"display\":{\"title\":{\"text\":{\"default\":\"Noisy\",\"es\":\"Ruidoso\",\"fr\":\"Bruyant\"}}},\"_row_num\":24}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality_observation2",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"broken\",\"display\":{\"title\":{\"text\":{\"default\":\"Broken\",\"es\":\"Roto\"}}},\"_row_num\":20},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"burnt\",\"display\":{\"title\":{\"text\":{\"default\":\"Burnt\",\"es\":\"Quemado\"}}},\"_row_num\":21},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"corrosion\",\"display\":{\"title\":{\"text\":{\"default\":\"Corrosion\",\"es\":\"Corrosión\"}}},\"_row_num\":22},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"deteriorating\",\"display\":{\"title\":{\"text\":{\"default\":\"Deteriorating\",\"es\":\"Deterioro\"}}},\"_row_num\":23},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"leaking\",\"display\":{\"title\":{\"text\":{\"default\":\"Leaking\",\"es\":\"Fugas\"}}},\"_row_num\":24},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"missing\",\"display\":{\"title\":{\"text\":{\"default\":\"Missing\",\"es\":\"Desaparecido\"}}},\"_row_num\":25},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"noisy\",\"display\":{\"title\":{\"text\":{\"default\":\"Noisy\",\"es\":\"Ruidoso\"}}},\"_row_num\":26}]"
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"broken\",\"display\":{\"title\":{\"text\":{\"default\":\"Broken\",\"es\":\"Roto\",\"fr\":\"Cassé\"}}},\"_row_num\":18},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"burnt\",\"display\":{\"title\":{\"text\":{\"default\":\"Burnt\",\"es\":\"Quemado\",\"fr\":\"Brûlé\"}}},\"_row_num\":19},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"corrosion\",\"display\":{\"title\":{\"text\":{\"default\":\"Corrosion\",\"es\":\"Corrosión\",\"fr\":\"Corrosion\"}}},\"_row_num\":20},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"deteriorating\",\"display\":{\"title\":{\"text\":{\"default\":\"Deteriorating\",\"es\":\"Deterioro\",\"fr\":\"Détérioration\"}}},\"_row_num\":21},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"leaking\",\"display\":{\"title\":{\"text\":{\"default\":\"Leaking\",\"es\":\"Fugas\",\"fr\":\"Qui fuit\"}}},\"_row_num\":22},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"missing\",\"display\":{\"title\":{\"text\":{\"default\":\"Missing\",\"es\":\"Desaparecido\",\"fr\":\"Manquant\"}}},\"_row_num\":23},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"noisy\",\"display\":{\"title\":{\"text\":{\"default\":\"Noisy\",\"es\":\"Ruidoso\",\"fr\":\"Bruyant\"}}},\"_row_num\":24}]"
       },
       {
         "_partition": "Column",
         "_aspect": "build_quality_observation3",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"broken\",\"display\":{\"title\":{\"text\":{\"default\":\"Broken\",\"es\":\"Roto\"}}},\"_row_num\":20},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"burnt\",\"display\":{\"title\":{\"text\":{\"default\":\"Burnt\",\"es\":\"Quemado\"}}},\"_row_num\":21},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"corrosion\",\"display\":{\"title\":{\"text\":{\"default\":\"Corrosion\",\"es\":\"Corrosión\"}}},\"_row_num\":22},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"deteriorating\",\"display\":{\"title\":{\"text\":{\"default\":\"Deteriorating\",\"es\":\"Deterioro\"}}},\"_row_num\":23},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"leaking\",\"display\":{\"title\":{\"text\":{\"default\":\"Leaking\",\"es\":\"Fugas\"}}},\"_row_num\":24},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"missing\",\"display\":{\"title\":{\"text\":{\"default\":\"Missing\",\"es\":\"Desaparecido\"}}},\"_row_num\":25},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"noisy\",\"display\":{\"title\":{\"text\":{\"default\":\"Noisy\",\"es\":\"Ruidoso\"}}},\"_row_num\":26}]"
+        "_value": "[{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"broken\",\"display\":{\"title\":{\"text\":{\"default\":\"Broken\",\"es\":\"Roto\",\"fr\":\"Cassé\"}}},\"_row_num\":18},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"burnt\",\"display\":{\"title\":{\"text\":{\"default\":\"Burnt\",\"es\":\"Quemado\",\"fr\":\"Brûlé\"}}},\"_row_num\":19},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"corrosion\",\"display\":{\"title\":{\"text\":{\"default\":\"Corrosion\",\"es\":\"Corrosión\",\"fr\":\"Corrosion\"}}},\"_row_num\":20},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"deteriorating\",\"display\":{\"title\":{\"text\":{\"default\":\"Deteriorating\",\"es\":\"Deterioro\",\"fr\":\"Détérioration\"}}},\"_row_num\":21},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"leaking\",\"display\":{\"title\":{\"text\":{\"default\":\"Leaking\",\"es\":\"Fugas\",\"fr\":\"Qui fuit\"}}},\"_row_num\":22},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"missing\",\"display\":{\"title\":{\"text\":{\"default\":\"Missing\",\"es\":\"Desaparecido\",\"fr\":\"Manquant\"}}},\"_row_num\":23},{\"choice_list_name\":\"build_quality_reason_type_observation\",\"data_value\":\"noisy\",\"display\":{\"title\":{\"text\":{\"default\":\"Noisy\",\"es\":\"Ruidoso\",\"fr\":\"Bruyant\"}}},\"_row_num\":24}]"
       },
       {
         "_partition": "Column",
-        "_aspect": "build_quality_reason",
+        "_aspect": "repair_occurred",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":10}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "build_quality_reason2",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":10}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "build_quality_reason3",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"build_quality_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":10}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "refrigerator_failure",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"refrigerator_failure_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":8}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "voltage_stabilizer_not_working_reason",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"voltage_stabilizer_not_working_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":12}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\",\"fr\":\"Oui\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "voltage_stabilizer_replaced",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
-      },
-      {
-        "_partition": "Column",
-        "_aspect": "voltage_stabilizer_replaced_reason",
-        "_key": "displayChoicesList",
-        "_type": "object",
-        "_value": "[{\"choice_list_name\":\"voltage_stabilizer_replaced_reason_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":14}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\",\"fr\":\"Oui\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "voltage_stabilizer_working",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\",\"fr\":\"Oui\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "warranty_claim_been_made",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Si\",\"fr\":\"Oui\"}}},\"_row_num\":5},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "FormType",
@@ -4038,7 +4186,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Indicators\",\"es\":\"Indicadores\"}}"
+        "_value": "{\"text\":{\"default\":\"Indicators\",\"es\":\"Indicadores\",\"fr\":\"Indicateurs\"}}"
       },
       {
         "_partition": "Table",

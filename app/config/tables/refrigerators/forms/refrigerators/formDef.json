@@ -18,13 +18,15 @@
           "title": {
             "text": {
               "default": "Health Facility",
-              "es": "Facilidad de Salúd"
+              "es": "Facilidad de Salúd",
+              "fr": "Établissement de santé"
             }
           },
           "prompt": {
             "text": {
               "default": "Health Facility",
-              "es": "Facilidad de Salúd"
+              "es": "Facilidad de Salúd",
+              "fr": "Établissement de santé"
             }
           }
         },
@@ -43,13 +45,15 @@
           "title": {
             "text": {
               "default": "Model",
-              "es": "Modelo"
+              "es": "Modelo",
+              "fr": "Modèle"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose the refrigerator model:",
-              "es": "Modelo"
+              "es": "Modelo",
+              "fr": "Choisir le modèle de réfrigérateur"
             }
           }
         },
@@ -115,13 +119,15 @@
           "title": {
             "text": {
               "default": "Model",
-              "es": "Modelo"
+              "es": "Modelo",
+              "fr": "Modèle"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose the refrigerator model:",
-              "es": "Modelo"
+              "es": "Modelo",
+              "fr": "Choisir le modèle de réfrigérateur :"
             }
           }
         },
@@ -153,13 +159,15 @@
           "title": {
             "text": {
               "default": "Tracking ID",
-              "es": "Número de seguimiento"
+              "es": "Número de seguimiento",
+              "fr": "ID de suivi"
             }
           },
           "prompt": {
             "text": {
               "default": "Enter the tracking ID:",
-              "es": "Número de seguimiento"
+              "es": "Número de seguimiento",
+              "fr": "Entrer l'ID de suivi :"
             }
           }
         },
@@ -173,13 +181,15 @@
           "title": {
             "text": {
               "default": "Serial Number",
-              "es": "Número de serie"
+              "es": "Número de serie",
+              "fr": "Numéro de série"
             }
           },
           "prompt": {
             "text": {
               "default": "Enter the serial number:",
-              "es": "Ingrese el número de serie"
+              "es": "Ingrese el número de serie",
+              "fr": "Entrer le numéro de série :"
             }
           }
         },
@@ -192,13 +202,15 @@
           "title": {
             "text": {
               "default": "Year Installed",
-              "es": "Año de instalacion"
+              "es": "Año de instalacion",
+              "fr": "Année d'installation"
             }
           },
           "prompt": {
             "text": {
               "default": "Enter the year installed:",
-              "es": "Año de instalacion"
+              "es": "Año de instalacion",
+              "fr": "Entrer l'année d'installation :"
             }
           },
           "hint": {
@@ -228,13 +240,15 @@
           "title": {
             "text": {
               "default": "Refrigerator Image",
-              "es": "Imagen del refrigerador"
+              "es": "Imagen del refrigerador",
+              "fr": "Image du réfrigérateur"
             }
           },
           "prompt": {
             "text": {
               "default": "Take a picture of the refrigerator:",
-              "es": "Tome una foto del refrigerador"
+              "es": "Tome una foto del refrigerador",
+              "fr": "Prendre une photo du réfrigérateur :"
             }
           }
         },
@@ -252,13 +266,15 @@
           "title": {
             "text": {
               "default": "Under Warranty",
-              "es": "Bajo garantía"
+              "es": "Bajo garantía",
+              "fr": "Sous garantie"
             }
           },
           "prompt": {
             "text": {
               "default": "Under warranty?",
-              "es": "Bajo garantía?"
+              "es": "Bajo garantía?",
+              "fr": "Sous garantie ?"
             }
           }
         },
@@ -276,13 +292,15 @@
           "title": {
             "text": {
               "default": "Warranty Service Provider Name",
-              "es": "Nombre del proveedor de servicios de garantía"
+              "es": "Nombre del proveedor de servicios de garantía",
+              "fr": "Nom du prestataire de services dans le cadre de la garantie"
             }
           },
           "prompt": {
             "text": {
               "default": "Enter warranty service provider name:",
-              "es": "Ingrese el nombre del proveedor de servicios de garantía"
+              "es": "Ingrese el nombre del proveedor de servicios de garantía",
+              "fr": "Entrer le nom du prestataire de services dans le cadre de la garantie :"
             }
           }
         },
@@ -295,13 +313,15 @@
           "title": {
             "text": {
               "default": "Warranty Service Provider Contact",
-              "es": "Contacto del proveedor de servicios de garantía"
+              "es": "Contacto del proveedor de servicios de garantía",
+              "fr": "Coordonnées du prestataire de services dans le cadre de la garantie"
             }
           },
           "prompt": {
             "text": {
               "default": "Enter warranty service provider contact:",
-              "es": "Ingrese al contacto del proveedor de servicios de garantía"
+              "es": "Ingrese al contacto del proveedor de servicios de garantía",
+              "fr": "Entrer les coordonnées du prestataire de services dans le cadre de la garantie :"
             }
           }
         },
@@ -327,13 +347,15 @@
           "title": {
             "text": {
               "default": "Power Source",
-              "es": "Fuente de Poder"
+              "es": "Fuente de Poder",
+              "fr": "Source d'énergie"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose the power source:",
-              "es": "Fuente de Poder"
+              "es": "Fuente de Poder",
+              "fr": "Choisir la source d'énergie :"
             }
           }
         },
@@ -347,13 +369,15 @@
           "title": {
             "text": {
               "default": "In Use",
-              "es": "En uso"
+              "es": "En uso",
+              "fr": "En service"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose the current use status:",
-              "es": "¿En uso?"
+              "es": "¿En uso?",
+              "fr": "Indiquer si l'appareil est en service :"
             }
           }
         },
@@ -367,13 +391,15 @@
           "title": {
             "text": {
               "default": "Functional Status",
-              "es": "Functionando"
+              "es": "Functionando",
+              "fr": "État de fonctionnement"
             }
           },
           "prompt": {
             "text": {
               "default": "Functional status:",
-              "es": "¿Functionando?"
+              "es": "¿Functionando?",
+              "fr": "État de fonctionnement :"
             }
           }
         },
@@ -387,13 +413,15 @@
           "title": {
             "text": {
               "default": "Reason Not Working",
-              "es": "Razon por no functionar"
+              "es": "Razon por no functionar",
+              "fr": "Raison de la panne"
             }
           },
           "prompt": {
             "text": {
               "default": "Reason not working:",
-              "es": "Razon por no functionar"
+              "es": "Razon por no functionar",
+              "fr": "Raison de la panne :"
             }
           }
         },
@@ -407,13 +435,15 @@
           "title": {
             "text": {
               "default": "Service Requested With Priority",
-              "es": "Servicio solicitado con prioridad"
+              "es": "Servicio solicitado con prioridad",
+              "fr": "Maintenance à effectuer en priorité"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose priority for maintenance if applicable:",
-              "es": "Seleccione la prioridad de mantenimiento si corresponde:"
+              "es": "Seleccione la prioridad de mantenimiento si corresponde:",
+              "fr": "Indiquer si la maintenance est prioritaire, le cas échéant :"
             }
           }
         },
@@ -435,13 +465,15 @@
           "title": {
             "text": {
               "default": "Voltage Regulator",
-              "es": "Regulador de voltaje"
+              "es": "Regulador de voltaje",
+              "fr": "Régulateur de tension"
             }
           },
           "prompt": {
             "text": {
               "default": "Voltage regulator?",
-              "es": "¿Tiene regulador de voltaje?"
+              "es": "¿Tiene regulador de voltaje?",
+              "fr": "Régulateur de tension ?"
             }
           }
         },
@@ -460,13 +492,15 @@
           "title": {
             "text": {
               "default": "Voltage Regulator Functional",
-              "es": "Regulador de voltaje funcional"
+              "es": "Regulador de voltaje funcional",
+              "fr": "Régulateur de tension en état de marche"
             }
           },
           "prompt": {
             "text": {
               "default": "Is voltage regulator functional?",
-              "es": "¿Funciona el regulador de voltaje?"
+              "es": "¿Funciona el regulador de voltaje?",
+              "fr": "Le régulateur de tension est-il en état de marche ?"
             }
           }
         },
@@ -492,13 +526,15 @@
           "title": {
             "text": {
               "default": "Temperature Monitoring Device",
-              "es": "Dispositivo de monitoreo de temperatura"
+              "es": "Dispositivo de monitoreo de temperatura",
+              "fr": "Dispositif de contrôle de la température"
             }
           },
           "prompt": {
             "text": {
               "default": "Is there a temperature monitoring device in the unit?",
-              "es": "¿Hay un dispositivo de monitoreo de temperatura en la unidad?"
+              "es": "¿Hay un dispositivo de monitoreo de temperatura en la unidad?",
+              "fr": "L'appareil est-il muni d'un dispositif de contrôle de la température ?"
             }
           }
         },
@@ -517,13 +553,15 @@
           "title": {
             "text": {
               "default": "Temperature Monitoring Device Type",
-              "es": "Tipo de dispositivo de monitoreo de temperatura"
+              "es": "Tipo de dispositivo de monitoreo de temperatura",
+              "fr": "Type de dispositif de contrôle de la température"
             }
           },
           "prompt": {
             "text": {
               "default": "What type of temperature monitoring device is in use?",
-              "es": "¿Qué tipo de dispositivo de monitoreo de temperatura está en uso?"
+              "es": "¿Qué tipo de dispositivo de monitoreo de temperatura está en uso?",
+              "fr": "Quel est le type de dispositif de contrôle de la température utilisé ?"
             }
           }
         },
@@ -545,13 +583,15 @@
           "title": {
             "text": {
               "default": "Solar Energy Harvesting",
-              "es": "Cosecha de energía solar"
+              "es": "Cosecha de energía solar",
+              "fr": "Récupération de l'énergie solaire"
             }
           },
           "prompt": {
             "text": {
               "default": "Is solar harvesting used?",
-              "es": "¿Se utiliza la cosecha solar?"
+              "es": "¿Se utiliza la cosecha solar?",
+              "fr": "L'énergie solaire est-elle récupérée ?"
             }
           }
         },
@@ -566,7 +606,8 @@
           "title": {
             "text": {
               "default": "Electricity",
-              "es": "Electricidad"
+              "es": "Electricidad",
+              "fr": "Électricité"
             }
           }
         },
@@ -579,7 +620,8 @@
           "title": {
             "text": {
               "default": "Gas",
-              "es": "Combustible"
+              "es": "Combustible",
+              "fr": "Gaz"
             }
           }
         },
@@ -592,7 +634,8 @@
           "title": {
             "text": {
               "default": "Kerosene",
-              "es": "Queroseno"
+              "es": "Queroseno",
+              "fr": "Kérosène"
             }
           }
         },
@@ -605,7 +648,8 @@
           "title": {
             "text": {
               "default": "Solar",
-              "es": "Solár"
+              "es": "Solár",
+              "fr": "Énergie solaire"
             }
           }
         },
@@ -618,7 +662,8 @@
           "title": {
             "text": {
               "default": "Unknown",
-              "es": "Desconocido"
+              "es": "Desconocido",
+              "fr": "Source d'énergie inconnue"
             }
           }
         },
@@ -631,7 +676,8 @@
           "title": {
             "text": {
               "default": "Functioning",
-              "es": "Functionando"
+              "es": "Functionando",
+              "fr": "Fonctionne"
             }
           }
         },
@@ -644,7 +690,8 @@
           "title": {
             "text": {
               "default": "Not Functioning",
-              "es": "No Functionando"
+              "es": "No Functionando",
+              "fr": "Ne fonctionne pas"
             }
           }
         },
@@ -657,7 +704,8 @@
           "title": {
             "text": {
               "default": "Needs Spare Parts",
-              "es": "Necesita Partes"
+              "es": "Necesita Partes",
+              "fr": "Pièces détachées nécessaires"
             }
           }
         },
@@ -670,7 +718,8 @@
           "title": {
             "text": {
               "default": "Unknown/Needs Investigation",
-              "es": "Investigación desconocida / de necesidades"
+              "es": "Investigación desconocida / de necesidades",
+              "fr": "Ne sais pas/Étude nécessaire"
             }
           }
         },
@@ -683,7 +732,8 @@
           "title": {
             "text": {
               "default": "Lack of Power",
-              "es": "Falta de poder"
+              "es": "Falta de poder",
+              "fr": "Absence d'énergie"
             }
           }
         },
@@ -696,7 +746,8 @@
           "title": {
             "text": {
               "default": "Awaiting Installation",
-              "es": "En espera de instalación"
+              "es": "En espera de instalación",
+              "fr": "En attente d'installation"
             }
           }
         },
@@ -709,7 +760,8 @@
           "title": {
             "text": {
               "default": "Awaiting Decomissioning",
-              "es": "En espera de desarme"
+              "es": "En espera de desarme",
+              "fr": "En attente de mise hors service"
             }
           }
         },
@@ -722,7 +774,8 @@
           "title": {
             "text": {
               "default": "Lack of Technician Availability",
-              "es": "Falta de disponibilidad de técnicos"
+              "es": "Falta de disponibilidad de técnicos",
+              "fr": "Technicien non disponible"
             }
           }
         },
@@ -735,7 +788,8 @@
           "title": {
             "text": {
               "default": "Not Applicable",
-              "es": "No aplica"
+              "es": "No aplica",
+              "fr": "Sans objet"
             }
           }
         },
@@ -748,7 +802,8 @@
           "title": {
             "text": {
               "default": "In Use",
-              "es": "En Uso"
+              "es": "En Uso",
+              "fr": "En service"
             }
           }
         },
@@ -761,7 +816,8 @@
           "title": {
             "text": {
               "default": "Not In Use",
-              "es": "No En Uso"
+              "es": "No En Uso",
+              "fr": "Hors service"
             }
           }
         },
@@ -774,7 +830,8 @@
           "title": {
             "text": {
               "default": "Not Installed",
-              "es": "No Instalado"
+              "es": "No Instalado",
+              "fr": "Entreposé dans l'attente d'une destination"
             }
           }
         },
@@ -787,7 +844,8 @@
           "title": {
             "text": {
               "default": "Yes",
-              "es": "Sí"
+              "es": "Sí",
+              "fr": "Oui"
             }
           }
         },
@@ -800,7 +858,8 @@
           "title": {
             "text": {
               "default": "No",
-              "es": "No"
+              "es": "No",
+              "fr": "Non"
             }
           }
         },
@@ -813,7 +872,8 @@
           "title": {
             "text": {
               "default": "Unknown",
-              "es": "Desconocido"
+              "es": "Desconocido",
+              "fr": "Ne sais pas"
             }
           }
         },
@@ -826,7 +886,8 @@
           "title": {
             "text": {
               "default": "V 170 GE",
-              "es": "V 170 GE"
+              "es": "V 170 GE",
+              "fr": "V 170 GE"
             }
           }
         },
@@ -839,7 +900,8 @@
           "title": {
             "text": {
               "default": "GBC-340",
-              "es": "GBC-340"
+              "es": "GBC-340",
+              "fr": "GBC-340"
             }
           }
         },
@@ -852,7 +914,8 @@
           "title": {
             "text": {
               "default": "V 170 EK",
-              "es": "V 170 EK"
+              "es": "V 170 EK",
+              "fr": "V 170 EK"
             }
           }
         },
@@ -865,7 +928,8 @@
           "title": {
             "text": {
               "default": "MK304",
-              "es": "MK304"
+              "es": "MK304",
+              "fr": "MK304"
             }
           }
         },
@@ -878,7 +942,8 @@
           "title": {
             "text": {
               "default": "RCW 50 EK",
-              "es": "RCW 50 EK"
+              "es": "RCW 50 EK",
+              "fr": "RCW 50 EK"
             }
           }
         },
@@ -904,7 +969,8 @@
           "title": {
             "text": {
               "default": "Not Applicable",
-              "es": "No Aplica"
+              "es": "No Aplica",
+              "fr": "Sans objet"
             }
           }
         },
@@ -917,7 +983,8 @@
           "title": {
             "text": {
               "default": "Low",
-              "es": "Bajo"
+              "es": "Bajo",
+              "fr": "Faible"
             }
           }
         },
@@ -930,7 +997,8 @@
           "title": {
             "text": {
               "default": "Medium",
-              "es": "Medio"
+              "es": "Medio",
+              "fr": "Moyen"
             }
           }
         },
@@ -943,7 +1011,8 @@
           "title": {
             "text": {
               "default": "High",
-              "es": "Alto"
+              "es": "Alto",
+              "fr": "Élevé"
             }
           }
         },
@@ -956,7 +1025,8 @@
           "title": {
             "text": {
               "default": "Yes",
-              "es": "Sí"
+              "es": "Sí",
+              "fr": "Oui"
             }
           }
         },
@@ -969,7 +1039,8 @@
           "title": {
             "text": {
               "default": "No",
-              "es": "No"
+              "es": "No",
+              "fr": "Non"
             }
           }
         },
@@ -982,7 +1053,8 @@
           "title": {
             "text": {
               "default": "Yes",
-              "es": "Sí"
+              "es": "Sí",
+              "fr": "Oui"
             }
           }
         },
@@ -995,7 +1067,8 @@
           "title": {
             "text": {
               "default": "No",
-              "es": "No"
+              "es": "No",
+              "fr": "Non"
             }
           }
         },
@@ -1008,7 +1081,8 @@
           "title": {
             "text": {
               "default": "N/A",
-              "es": "N/A"
+              "es": "N/A",
+              "fr": "s. o."
             }
           }
         },
@@ -1021,7 +1095,8 @@
           "title": {
             "text": {
               "default": "Need Data",
-              "es": "Necesita datos"
+              "es": "Necesita datos",
+              "fr": "Données nécessaires"
             }
           }
         },
@@ -1132,7 +1207,8 @@
           "title": {
             "text": {
               "default": "Refrigerators",
-              "es": "Frigoríficos"
+              "es": "Frigoríficos",
+              "fr": "Réfrigérateurs"
             }
           }
         },
@@ -1149,7 +1225,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -1161,11 +1238,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Francais"
+            }
+          }
+        },
+        "_row_num": 9
       }
     ],
     "model": [
@@ -1227,7 +1318,8 @@
           "title": {
             "text": {
               "default": "Refrigerators",
-              "es": "Frigoríficos"
+              "es": "Frigoríficos",
+              "fr": "Réfrigérateurs"
             }
           }
         },
@@ -1244,7 +1336,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -1256,11 +1349,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      "fr": {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Francais"
+            }
+          }
+        },
+        "_row_num": 9
       },
       "_locales": {
         "setting_name": "_locales",
@@ -1271,12 +1378,26 @@
               "locale": {
                 "text": {
                   "default": "Spanish",
-                  "es": "Español"
+                  "es": "Español",
+                  "fr": "Espagnol"
                 }
               }
             },
             "_row_num": 8,
             "name": "es"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "default": "French",
+                  "es": "Francés",
+                  "fr": "Francais"
+                }
+              }
+            },
+            "_row_num": 9,
+            "name": "fr"
           },
           {
             "display": {
@@ -1299,7 +1420,8 @@
           "title": {
             "text": {
               "default": "Refrigerators",
-              "es": "Frigoríficos"
+              "es": "Frigoríficos",
+              "fr": "Réfrigérateurs"
             }
           }
         },
@@ -1315,7 +1437,8 @@
             "title": {
               "text": {
                 "default": "Electricity",
-                "es": "Electricidad"
+                "es": "Electricidad",
+                "fr": "Électricité"
               }
             }
           },
@@ -1328,7 +1451,8 @@
             "title": {
               "text": {
                 "default": "Gas",
-                "es": "Combustible"
+                "es": "Combustible",
+                "fr": "Gaz"
               }
             }
           },
@@ -1341,7 +1465,8 @@
             "title": {
               "text": {
                 "default": "Kerosene",
-                "es": "Queroseno"
+                "es": "Queroseno",
+                "fr": "Kérosène"
               }
             }
           },
@@ -1354,7 +1479,8 @@
             "title": {
               "text": {
                 "default": "Solar",
-                "es": "Solár"
+                "es": "Solár",
+                "fr": "Énergie solaire"
               }
             }
           },
@@ -1367,7 +1493,8 @@
             "title": {
               "text": {
                 "default": "Unknown",
-                "es": "Desconocido"
+                "es": "Desconocido",
+                "fr": "Source d'énergie inconnue"
               }
             }
           },
@@ -1382,7 +1509,8 @@
             "title": {
               "text": {
                 "default": "Functioning",
-                "es": "Functionando"
+                "es": "Functionando",
+                "fr": "Fonctionne"
               }
             }
           },
@@ -1395,7 +1523,8 @@
             "title": {
               "text": {
                 "default": "Not Functioning",
-                "es": "No Functionando"
+                "es": "No Functionando",
+                "fr": "Ne fonctionne pas"
               }
             }
           },
@@ -1410,7 +1539,8 @@
             "title": {
               "text": {
                 "default": "Needs Spare Parts",
-                "es": "Necesita Partes"
+                "es": "Necesita Partes",
+                "fr": "Pièces détachées nécessaires"
               }
             }
           },
@@ -1423,7 +1553,8 @@
             "title": {
               "text": {
                 "default": "Unknown/Needs Investigation",
-                "es": "Investigación desconocida / de necesidades"
+                "es": "Investigación desconocida / de necesidades",
+                "fr": "Ne sais pas/Étude nécessaire"
               }
             }
           },
@@ -1436,7 +1567,8 @@
             "title": {
               "text": {
                 "default": "Lack of Power",
-                "es": "Falta de poder"
+                "es": "Falta de poder",
+                "fr": "Absence d'énergie"
               }
             }
           },
@@ -1449,7 +1581,8 @@
             "title": {
               "text": {
                 "default": "Awaiting Installation",
-                "es": "En espera de instalación"
+                "es": "En espera de instalación",
+                "fr": "En attente d'installation"
               }
             }
           },
@@ -1462,7 +1595,8 @@
             "title": {
               "text": {
                 "default": "Awaiting Decomissioning",
-                "es": "En espera de desarme"
+                "es": "En espera de desarme",
+                "fr": "En attente de mise hors service"
               }
             }
           },
@@ -1475,7 +1609,8 @@
             "title": {
               "text": {
                 "default": "Lack of Technician Availability",
-                "es": "Falta de disponibilidad de técnicos"
+                "es": "Falta de disponibilidad de técnicos",
+                "fr": "Technicien non disponible"
               }
             }
           },
@@ -1488,7 +1623,8 @@
             "title": {
               "text": {
                 "default": "Not Applicable",
-                "es": "No aplica"
+                "es": "No aplica",
+                "fr": "Sans objet"
               }
             }
           },
@@ -1503,7 +1639,8 @@
             "title": {
               "text": {
                 "default": "In Use",
-                "es": "En Uso"
+                "es": "En Uso",
+                "fr": "En service"
               }
             }
           },
@@ -1516,7 +1653,8 @@
             "title": {
               "text": {
                 "default": "Not In Use",
-                "es": "No En Uso"
+                "es": "No En Uso",
+                "fr": "Hors service"
               }
             }
           },
@@ -1529,7 +1667,8 @@
             "title": {
               "text": {
                 "default": "Not Installed",
-                "es": "No Instalado"
+                "es": "No Instalado",
+                "fr": "Entreposé dans l'attente d'une destination"
               }
             }
           },
@@ -1544,7 +1683,8 @@
             "title": {
               "text": {
                 "default": "Yes",
-                "es": "Sí"
+                "es": "Sí",
+                "fr": "Oui"
               }
             }
           },
@@ -1557,7 +1697,8 @@
             "title": {
               "text": {
                 "default": "No",
-                "es": "No"
+                "es": "No",
+                "fr": "Non"
               }
             }
           },
@@ -1570,7 +1711,8 @@
             "title": {
               "text": {
                 "default": "Unknown",
-                "es": "Desconocido"
+                "es": "Desconocido",
+                "fr": "Ne sais pas"
               }
             }
           },
@@ -1585,7 +1727,8 @@
             "title": {
               "text": {
                 "default": "V 170 GE",
-                "es": "V 170 GE"
+                "es": "V 170 GE",
+                "fr": "V 170 GE"
               }
             }
           },
@@ -1598,7 +1741,8 @@
             "title": {
               "text": {
                 "default": "GBC-340",
-                "es": "GBC-340"
+                "es": "GBC-340",
+                "fr": "GBC-340"
               }
             }
           },
@@ -1611,7 +1755,8 @@
             "title": {
               "text": {
                 "default": "V 170 EK",
-                "es": "V 170 EK"
+                "es": "V 170 EK",
+                "fr": "V 170 EK"
               }
             }
           },
@@ -1624,7 +1769,8 @@
             "title": {
               "text": {
                 "default": "MK304",
-                "es": "MK304"
+                "es": "MK304",
+                "fr": "MK304"
               }
             }
           },
@@ -1637,7 +1783,8 @@
             "title": {
               "text": {
                 "default": "RCW 50 EK",
-                "es": "RCW 50 EK"
+                "es": "RCW 50 EK",
+                "fr": "RCW 50 EK"
               }
             }
           },
@@ -1665,7 +1812,8 @@
             "title": {
               "text": {
                 "default": "Not Applicable",
-                "es": "No Aplica"
+                "es": "No Aplica",
+                "fr": "Sans objet"
               }
             }
           },
@@ -1678,7 +1826,8 @@
             "title": {
               "text": {
                 "default": "Low",
-                "es": "Bajo"
+                "es": "Bajo",
+                "fr": "Faible"
               }
             }
           },
@@ -1691,7 +1840,8 @@
             "title": {
               "text": {
                 "default": "Medium",
-                "es": "Medio"
+                "es": "Medio",
+                "fr": "Moyen"
               }
             }
           },
@@ -1704,7 +1854,8 @@
             "title": {
               "text": {
                 "default": "High",
-                "es": "Alto"
+                "es": "Alto",
+                "fr": "Élevé"
               }
             }
           },
@@ -1719,7 +1870,8 @@
             "title": {
               "text": {
                 "default": "Yes",
-                "es": "Sí"
+                "es": "Sí",
+                "fr": "Oui"
               }
             }
           },
@@ -1732,7 +1884,8 @@
             "title": {
               "text": {
                 "default": "No",
-                "es": "No"
+                "es": "No",
+                "fr": "Non"
               }
             }
           },
@@ -1747,7 +1900,8 @@
             "title": {
               "text": {
                 "default": "Yes",
-                "es": "Sí"
+                "es": "Sí",
+                "fr": "Oui"
               }
             }
           },
@@ -1760,7 +1914,8 @@
             "title": {
               "text": {
                 "default": "No",
-                "es": "No"
+                "es": "No",
+                "fr": "Non"
               }
             }
           },
@@ -1773,7 +1928,8 @@
             "title": {
               "text": {
                 "default": "N/A",
-                "es": "N/A"
+                "es": "N/A",
+                "fr": "s. o."
               }
             }
           },
@@ -1788,7 +1944,8 @@
             "title": {
               "text": {
                 "default": "Need Data",
-                "es": "Necesita datos"
+                "es": "Necesita datos",
+                "fr": "Données nécessaires"
               }
             }
           },
@@ -1873,7 +2030,8 @@
         "displayName": {
           "text": {
             "default": "Health Facility",
-            "es": "Facilidad de Salúd"
+            "es": "Facilidad de Salúd",
+            "fr": "Établissement de santé"
           }
         },
         "valuesList": "health_facility_list",
@@ -1890,7 +2048,8 @@
         "displayName": {
           "text": {
             "default": "Model",
-            "es": "Modelo"
+            "es": "Modelo",
+            "fr": "Modèle"
           }
         },
         "valuesList": "common_models",
@@ -1907,7 +2066,8 @@
         "displayName": {
           "text": {
             "default": "Model",
-            "es": "Modelo"
+            "es": "Modelo",
+            "fr": "Modèle"
           }
         },
         "valuesList": "refrigerator_model_list",
@@ -1924,7 +2084,8 @@
         "displayName": {
           "text": {
             "default": "Tracking ID",
-            "es": "Número de seguimiento"
+            "es": "Número de seguimiento",
+            "fr": "ID de suivi"
           }
         },
         "elementKey": "tracking_id"
@@ -1940,7 +2101,8 @@
         "displayName": {
           "text": {
             "default": "Serial Number",
-            "es": "Número de serie"
+            "es": "Número de serie",
+            "fr": "Numéro de série"
           }
         },
         "elementKey": "serial_number"
@@ -1956,7 +2118,8 @@
         "displayName": {
           "text": {
             "default": "Year Installed",
-            "es": "Año de instalacion"
+            "es": "Año de instalacion",
+            "fr": "Année d'installation"
           }
         },
         "elementKey": "year"
@@ -1986,7 +2149,8 @@
         "displayName": {
           "text": {
             "default": "Refrigerator Image",
-            "es": "Imagen del refrigerador"
+            "es": "Imagen del refrigerador",
+            "fr": "Image du réfrigérateur"
           }
         },
         "elementKey": "refrigerator_image"
@@ -2002,7 +2166,8 @@
         "displayName": {
           "text": {
             "default": "Under Warranty",
-            "es": "Bajo garantía"
+            "es": "Bajo garantía",
+            "fr": "Sous garantie"
           }
         },
         "valuesList": "yes_no_unknown",
@@ -2019,7 +2184,8 @@
         "displayName": {
           "text": {
             "default": "Warranty Service Provider Name",
-            "es": "Nombre del proveedor de servicios de garantía"
+            "es": "Nombre del proveedor de servicios de garantía",
+            "fr": "Nom du prestataire de services dans le cadre de la garantie"
           }
         },
         "elementKey": "warranty_service_provider_name"
@@ -2035,7 +2201,8 @@
         "displayName": {
           "text": {
             "default": "Warranty Service Provider Contact",
-            "es": "Contacto del proveedor de servicios de garantía"
+            "es": "Contacto del proveedor de servicios de garantía",
+            "fr": "Coordonnées du prestataire de services dans le cadre de la garantie"
           }
         },
         "elementKey": "warranty_service_provider_contact"
@@ -2051,7 +2218,8 @@
         "displayName": {
           "text": {
             "default": "Power Source",
-            "es": "Fuente de Poder"
+            "es": "Fuente de Poder",
+            "fr": "Source d'énergie"
           }
         },
         "valuesList": "power",
@@ -2068,7 +2236,8 @@
         "displayName": {
           "text": {
             "default": "In Use",
-            "es": "En uso"
+            "es": "En uso",
+            "fr": "En service"
           }
         },
         "valuesList": "current_use",
@@ -2085,7 +2254,8 @@
         "displayName": {
           "text": {
             "default": "Functional Status",
-            "es": "Functionando"
+            "es": "Functionando",
+            "fr": "État de fonctionnement"
           }
         },
         "valuesList": "status",
@@ -2102,7 +2272,8 @@
         "displayName": {
           "text": {
             "default": "Reason Not Working",
-            "es": "Razon por no functionar"
+            "es": "Razon por no functionar",
+            "fr": "Raison de la panne"
           }
         },
         "valuesList": "reasons",
@@ -2119,7 +2290,8 @@
         "displayName": {
           "text": {
             "default": "Service Requested With Priority",
-            "es": "Servicio solicitado con prioridad"
+            "es": "Servicio solicitado con prioridad",
+            "fr": "Maintenance à effectuer en priorité"
           }
         },
         "valuesList": "service_priority_list",
@@ -2136,7 +2308,8 @@
         "displayName": {
           "text": {
             "default": "Voltage Regulator",
-            "es": "Regulador de voltaje"
+            "es": "Regulador de voltaje",
+            "fr": "Régulateur de tension"
           }
         },
         "valuesList": "yes_no_na",
@@ -2153,7 +2326,8 @@
         "displayName": {
           "text": {
             "default": "Voltage Regulator Functional",
-            "es": "Regulador de voltaje funcional"
+            "es": "Regulador de voltaje funcional",
+            "fr": "Régulateur de tension en état de marche"
           }
         },
         "valuesList": "status",
@@ -2170,7 +2344,8 @@
         "displayName": {
           "text": {
             "default": "Temperature Monitoring Device",
-            "es": "Dispositivo de monitoreo de temperatura"
+            "es": "Dispositivo de monitoreo de temperatura",
+            "fr": "Dispositif de contrôle de la température"
           }
         },
         "valuesList": "yes_no",
@@ -2191,7 +2366,8 @@
         "displayName": {
           "text": {
             "default": "Temperature Monitoring Device Type",
-            "es": "Tipo de dispositivo de monitoreo de temperatura"
+            "es": "Tipo de dispositivo de monitoreo de temperatura",
+            "fr": "Type de dispositif de contrôle de la température"
           }
         },
         "valuesList": "tmd_type",
@@ -2208,7 +2384,8 @@
         "displayName": {
           "text": {
             "default": "Solar Energy Harvesting",
-            "es": "Cosecha de energía solar"
+            "es": "Cosecha de energía solar",
+            "fr": "Récupération de l'énergie solaire"
           }
         },
         "valuesList": "yes_no",
@@ -2233,13 +2410,15 @@
               "title": {
                 "text": {
                   "default": "Health Facility",
-                  "es": "Facilidad de Salúd"
+                  "es": "Facilidad de Salúd",
+                  "fr": "Établissement de santé"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Health Facility",
-                  "es": "Facilidad de Salúd"
+                  "es": "Facilidad de Salúd",
+                  "fr": "Établissement de santé"
                 }
               }
             },
@@ -2259,13 +2438,15 @@
               "title": {
                 "text": {
                   "default": "Model",
-                  "es": "Modelo"
+                  "es": "Modelo",
+                  "fr": "Modèle"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose the refrigerator model:",
-                  "es": "Modelo"
+                  "es": "Modelo",
+                  "fr": "Choisir le modèle de réfrigérateur"
                 }
               }
             },
@@ -2313,13 +2494,15 @@
               "title": {
                 "text": {
                   "default": "Model",
-                  "es": "Modelo"
+                  "es": "Modelo",
+                  "fr": "Modèle"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose the refrigerator model:",
-                  "es": "Modelo"
+                  "es": "Modelo",
+                  "fr": "Choisir le modèle de réfrigérateur :"
                 }
               }
             },
@@ -2338,13 +2521,15 @@
               "title": {
                 "text": {
                   "default": "Tracking ID",
-                  "es": "Número de seguimiento"
+                  "es": "Número de seguimiento",
+                  "fr": "ID de suivi"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Enter the tracking ID:",
-                  "es": "Número de seguimiento"
+                  "es": "Número de seguimiento",
+                  "fr": "Entrer l'ID de suivi :"
                 }
               }
             },
@@ -2363,13 +2548,15 @@
               "title": {
                 "text": {
                   "default": "Serial Number",
-                  "es": "Número de serie"
+                  "es": "Número de serie",
+                  "fr": "Numéro de série"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Enter the serial number:",
-                  "es": "Ingrese el número de serie"
+                  "es": "Ingrese el número de serie",
+                  "fr": "Entrer le numéro de série :"
                 }
               }
             },
@@ -2387,13 +2574,15 @@
               "title": {
                 "text": {
                   "default": "Year Installed",
-                  "es": "Año de instalacion"
+                  "es": "Año de instalacion",
+                  "fr": "Année d'installation"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Enter the year installed:",
-                  "es": "Año de instalacion"
+                  "es": "Año de instalacion",
+                  "fr": "Entrer l'année d'installation :"
                 }
               },
               "hint": {
@@ -2424,13 +2613,15 @@
               "title": {
                 "text": {
                   "default": "Refrigerator Image",
-                  "es": "Imagen del refrigerador"
+                  "es": "Imagen del refrigerador",
+                  "fr": "Image du réfrigérateur"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Take a picture of the refrigerator:",
-                  "es": "Tome una foto del refrigerador"
+                  "es": "Tome una foto del refrigerador",
+                  "fr": "Prendre une photo du réfrigérateur :"
                 }
               }
             },
@@ -2449,13 +2640,15 @@
               "title": {
                 "text": {
                   "default": "Under Warranty",
-                  "es": "Bajo garantía"
+                  "es": "Bajo garantía",
+                  "fr": "Sous garantie"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Under warranty?",
-                  "es": "Bajo garantía?"
+                  "es": "Bajo garantía?",
+                  "fr": "Sous garantie ?"
                 }
               }
             },
@@ -2473,13 +2666,15 @@
               "title": {
                 "text": {
                   "default": "Warranty Service Provider Name",
-                  "es": "Nombre del proveedor de servicios de garantía"
+                  "es": "Nombre del proveedor de servicios de garantía",
+                  "fr": "Nom du prestataire de services dans le cadre de la garantie"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Enter warranty service provider name:",
-                  "es": "Ingrese el nombre del proveedor de servicios de garantía"
+                  "es": "Ingrese el nombre del proveedor de servicios de garantía",
+                  "fr": "Entrer le nom du prestataire de services dans le cadre de la garantie :"
                 }
               }
             },
@@ -2497,13 +2692,15 @@
               "title": {
                 "text": {
                   "default": "Warranty Service Provider Contact",
-                  "es": "Contacto del proveedor de servicios de garantía"
+                  "es": "Contacto del proveedor de servicios de garantía",
+                  "fr": "Coordonnées du prestataire de services dans le cadre de la garantie"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Enter warranty service provider contact:",
-                  "es": "Ingrese al contacto del proveedor de servicios de garantía"
+                  "es": "Ingrese al contacto del proveedor de servicios de garantía",
+                  "fr": "Entrer les coordonnées du prestataire de services dans le cadre de la garantie :"
                 }
               }
             },
@@ -2522,13 +2719,15 @@
               "title": {
                 "text": {
                   "default": "Power Source",
-                  "es": "Fuente de Poder"
+                  "es": "Fuente de Poder",
+                  "fr": "Source d'énergie"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose the power source:",
-                  "es": "Fuente de Poder"
+                  "es": "Fuente de Poder",
+                  "fr": "Choisir la source d'énergie :"
                 }
               }
             },
@@ -2547,13 +2746,15 @@
               "title": {
                 "text": {
                   "default": "In Use",
-                  "es": "En uso"
+                  "es": "En uso",
+                  "fr": "En service"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose the current use status:",
-                  "es": "¿En uso?"
+                  "es": "¿En uso?",
+                  "fr": "Indiquer si l'appareil est en service :"
                 }
               }
             },
@@ -2572,13 +2773,15 @@
               "title": {
                 "text": {
                   "default": "Functional Status",
-                  "es": "Functionando"
+                  "es": "Functionando",
+                  "fr": "État de fonctionnement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Functional status:",
-                  "es": "¿Functionando?"
+                  "es": "¿Functionando?",
+                  "fr": "État de fonctionnement :"
                 }
               }
             },
@@ -2597,13 +2800,15 @@
               "title": {
                 "text": {
                   "default": "Reason Not Working",
-                  "es": "Razon por no functionar"
+                  "es": "Razon por no functionar",
+                  "fr": "Raison de la panne"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Reason not working:",
-                  "es": "Razon por no functionar"
+                  "es": "Razon por no functionar",
+                  "fr": "Raison de la panne :"
                 }
               }
             },
@@ -2622,13 +2827,15 @@
               "title": {
                 "text": {
                   "default": "Service Requested With Priority",
-                  "es": "Servicio solicitado con prioridad"
+                  "es": "Servicio solicitado con prioridad",
+                  "fr": "Maintenance à effectuer en priorité"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose priority for maintenance if applicable:",
-                  "es": "Seleccione la prioridad de mantenimiento si corresponde:"
+                  "es": "Seleccione la prioridad de mantenimiento si corresponde:",
+                  "fr": "Indiquer si la maintenance est prioritaire, le cas échéant :"
                 }
               }
             },
@@ -2647,13 +2854,15 @@
               "title": {
                 "text": {
                   "default": "Voltage Regulator",
-                  "es": "Regulador de voltaje"
+                  "es": "Regulador de voltaje",
+                  "fr": "Régulateur de tension"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Voltage regulator?",
-                  "es": "¿Tiene regulador de voltaje?"
+                  "es": "¿Tiene regulador de voltaje?",
+                  "fr": "Régulateur de tension ?"
                 }
               }
             },
@@ -2672,13 +2881,15 @@
               "title": {
                 "text": {
                   "default": "Voltage Regulator Functional",
-                  "es": "Regulador de voltaje funcional"
+                  "es": "Regulador de voltaje funcional",
+                  "fr": "Régulateur de tension en état de marche"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Is voltage regulator functional?",
-                  "es": "¿Funciona el regulador de voltaje?"
+                  "es": "¿Funciona el regulador de voltaje?",
+                  "fr": "Le régulateur de tension est-il en état de marche ?"
                 }
               }
             },
@@ -2697,13 +2908,15 @@
               "title": {
                 "text": {
                   "default": "Temperature Monitoring Device",
-                  "es": "Dispositivo de monitoreo de temperatura"
+                  "es": "Dispositivo de monitoreo de temperatura",
+                  "fr": "Dispositif de contrôle de la température"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Is there a temperature monitoring device in the unit?",
-                  "es": "¿Hay un dispositivo de monitoreo de temperatura en la unidad?"
+                  "es": "¿Hay un dispositivo de monitoreo de temperatura en la unidad?",
+                  "fr": "L'appareil est-il muni d'un dispositif de contrôle de la température ?"
                 }
               }
             },
@@ -2722,13 +2935,15 @@
               "title": {
                 "text": {
                   "default": "Temperature Monitoring Device Type",
-                  "es": "Tipo de dispositivo de monitoreo de temperatura"
+                  "es": "Tipo de dispositivo de monitoreo de temperatura",
+                  "fr": "Type de dispositif de contrôle de la température"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "What type of temperature monitoring device is in use?",
-                  "es": "¿Qué tipo de dispositivo de monitoreo de temperatura está en uso?"
+                  "es": "¿Qué tipo de dispositivo de monitoreo de temperatura está en uso?",
+                  "fr": "Quel est le type de dispositif de contrôle de la température utilisé ?"
                 }
               }
             },
@@ -2747,13 +2962,15 @@
               "title": {
                 "text": {
                   "default": "Solar Energy Harvesting",
-                  "es": "Cosecha de energía solar"
+                  "es": "Cosecha de energía solar",
+                  "fr": "Récupération de l'énergie solaire"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Is solar harvesting used?",
-                  "es": "¿Se utiliza la cosecha solar?"
+                  "es": "¿Se utiliza la cosecha solar?",
+                  "fr": "L'énergie solaire est-elle récupérée ?"
                 }
               }
             },
@@ -2987,7 +3204,8 @@
               "title": {
                 "text": {
                   "default": "Refrigerators",
-                  "es": "Frigoríficos"
+                  "es": "Frigoríficos",
+                  "fr": "Réfrigérateurs"
                 }
               }
             },
@@ -3186,7 +3404,8 @@
         "displayName": {
           "text": {
             "default": "Health Facility",
-            "es": "Facilidad de Salúd"
+            "es": "Facilidad de Salúd",
+            "fr": "Établissement de santé"
           }
         },
         "valuesList": "health_facility_list",
@@ -3206,7 +3425,8 @@
         "displayName": {
           "text": {
             "default": "Model",
-            "es": "Modelo"
+            "es": "Modelo",
+            "fr": "Modèle"
           }
         },
         "valuesList": "common_models",
@@ -3226,7 +3446,8 @@
         "displayName": {
           "text": {
             "default": "Model",
-            "es": "Modelo"
+            "es": "Modelo",
+            "fr": "Modèle"
           }
         },
         "valuesList": "refrigerator_model_list",
@@ -3246,7 +3467,8 @@
         "displayName": {
           "text": {
             "default": "Tracking ID",
-            "es": "Número de seguimiento"
+            "es": "Número de seguimiento",
+            "fr": "ID de suivi"
           }
         },
         "elementKey": "tracking_id",
@@ -3265,7 +3487,8 @@
         "displayName": {
           "text": {
             "default": "Serial Number",
-            "es": "Número de serie"
+            "es": "Número de serie",
+            "fr": "Numéro de série"
           }
         },
         "elementKey": "serial_number",
@@ -3284,7 +3507,8 @@
         "displayName": {
           "text": {
             "default": "Year Installed",
-            "es": "Año de instalacion"
+            "es": "Año de instalacion",
+            "fr": "Année d'installation"
           }
         },
         "elementKey": "year",
@@ -3323,7 +3547,8 @@
         "displayName": {
           "text": {
             "default": "Refrigerator Image",
-            "es": "Imagen del refrigerador"
+            "es": "Imagen del refrigerador",
+            "fr": "Image du réfrigérateur"
           }
         },
         "elementKey": "refrigerator_image",
@@ -3347,7 +3572,8 @@
         "displayName": {
           "text": {
             "default": "Under Warranty",
-            "es": "Bajo garantía"
+            "es": "Bajo garantía",
+            "fr": "Sous garantie"
           }
         },
         "valuesList": "yes_no_unknown",
@@ -3367,7 +3593,8 @@
         "displayName": {
           "text": {
             "default": "Warranty Service Provider Name",
-            "es": "Nombre del proveedor de servicios de garantía"
+            "es": "Nombre del proveedor de servicios de garantía",
+            "fr": "Nom du prestataire de services dans le cadre de la garantie"
           }
         },
         "elementKey": "warranty_service_provider_name",
@@ -3386,7 +3613,8 @@
         "displayName": {
           "text": {
             "default": "Warranty Service Provider Contact",
-            "es": "Contacto del proveedor de servicios de garantía"
+            "es": "Contacto del proveedor de servicios de garantía",
+            "fr": "Coordonnées du prestataire de services dans le cadre de la garantie"
           }
         },
         "elementKey": "warranty_service_provider_contact",
@@ -3405,7 +3633,8 @@
         "displayName": {
           "text": {
             "default": "Power Source",
-            "es": "Fuente de Poder"
+            "es": "Fuente de Poder",
+            "fr": "Source d'énergie"
           }
         },
         "valuesList": "power",
@@ -3425,7 +3654,8 @@
         "displayName": {
           "text": {
             "default": "In Use",
-            "es": "En uso"
+            "es": "En uso",
+            "fr": "En service"
           }
         },
         "valuesList": "current_use",
@@ -3445,7 +3675,8 @@
         "displayName": {
           "text": {
             "default": "Functional Status",
-            "es": "Functionando"
+            "es": "Functionando",
+            "fr": "État de fonctionnement"
           }
         },
         "valuesList": "status",
@@ -3465,7 +3696,8 @@
         "displayName": {
           "text": {
             "default": "Reason Not Working",
-            "es": "Razon por no functionar"
+            "es": "Razon por no functionar",
+            "fr": "Raison de la panne"
           }
         },
         "valuesList": "reasons",
@@ -3485,7 +3717,8 @@
         "displayName": {
           "text": {
             "default": "Service Requested With Priority",
-            "es": "Servicio solicitado con prioridad"
+            "es": "Servicio solicitado con prioridad",
+            "fr": "Maintenance à effectuer en priorité"
           }
         },
         "valuesList": "service_priority_list",
@@ -3505,7 +3738,8 @@
         "displayName": {
           "text": {
             "default": "Voltage Regulator",
-            "es": "Regulador de voltaje"
+            "es": "Regulador de voltaje",
+            "fr": "Régulateur de tension"
           }
         },
         "valuesList": "yes_no_na",
@@ -3525,7 +3759,8 @@
         "displayName": {
           "text": {
             "default": "Voltage Regulator Functional",
-            "es": "Regulador de voltaje funcional"
+            "es": "Regulador de voltaje funcional",
+            "fr": "Régulateur de tension en état de marche"
           }
         },
         "valuesList": "status",
@@ -3545,7 +3780,8 @@
         "displayName": {
           "text": {
             "default": "Temperature Monitoring Device",
-            "es": "Dispositivo de monitoreo de temperatura"
+            "es": "Dispositivo de monitoreo de temperatura",
+            "fr": "Dispositif de contrôle de la température"
           }
         },
         "valuesList": "yes_no",
@@ -3573,7 +3809,8 @@
         "displayName": {
           "text": {
             "default": "Temperature Monitoring Device Type",
-            "es": "Tipo de dispositivo de monitoreo de temperatura"
+            "es": "Tipo de dispositivo de monitoreo de temperatura",
+            "fr": "Type de dispositif de contrôle de la température"
           }
         },
         "valuesList": "tmd_type",
@@ -3596,7 +3833,8 @@
         "displayName": {
           "text": {
             "default": "Solar Energy Harvesting",
-            "es": "Cosecha de energía solar"
+            "es": "Cosecha de energía solar",
+            "fr": "Récupération de l'énergie solaire"
           }
         },
         "valuesList": "yes_no",
@@ -3749,224 +3987,224 @@
         "_aspect": "facility_row_id",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Health Facility\",\"es\":\"Facilidad de Salúd\"}}"
+        "_value": "{\"text\":{\"default\":\"Health Facility\",\"es\":\"Facilidad de Salúd\",\"fr\":\"Établissement de santé\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "functional_status",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\"}}},\"_row_num\":8},{\"choice_list_name\":\"status\",\"data_value\":\"not_functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Functioning\",\"es\":\"No Functionando\"}}},\"_row_num\":9}]"
+        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\",\"fr\":\"Fonctionne\"}}},\"_row_num\":8},{\"choice_list_name\":\"status\",\"data_value\":\"not_functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Functioning\",\"es\":\"No Functionando\",\"fr\":\"Ne fonctionne pas\"}}},\"_row_num\":9}]"
       },
       {
         "_partition": "Column",
         "_aspect": "functional_status",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Functional Status\",\"es\":\"Functionando\"}}"
+        "_value": "{\"text\":{\"default\":\"Functional Status\",\"es\":\"Functionando\",\"fr\":\"État de fonctionnement\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "maintenance_priority",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Aplica\"}}},\"_row_num\":37},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"low\",\"display\":{\"title\":{\"text\":{\"default\":\"Low\",\"es\":\"Bajo\"}}},\"_row_num\":38},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"medium\",\"display\":{\"title\":{\"text\":{\"default\":\"Medium\",\"es\":\"Medio\"}}},\"_row_num\":39},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"high\",\"display\":{\"title\":{\"text\":{\"default\":\"High\",\"es\":\"Alto\"}}},\"_row_num\":40}]"
+        "_value": "[{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No Aplica\",\"fr\":\"Sans objet\"}}},\"_row_num\":37},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"low\",\"display\":{\"title\":{\"text\":{\"default\":\"Low\",\"es\":\"Bajo\",\"fr\":\"Faible\"}}},\"_row_num\":38},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"medium\",\"display\":{\"title\":{\"text\":{\"default\":\"Medium\",\"es\":\"Medio\",\"fr\":\"Moyen\"}}},\"_row_num\":39},{\"choice_list_name\":\"service_priority_list\",\"data_value\":\"high\",\"display\":{\"title\":{\"text\":{\"default\":\"High\",\"es\":\"Alto\",\"fr\":\"Élevé\"}}},\"_row_num\":40}]"
       },
       {
         "_partition": "Column",
         "_aspect": "maintenance_priority",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Service Requested With Priority\",\"es\":\"Servicio solicitado con prioridad\"}}"
+        "_value": "{\"text\":{\"default\":\"Service Requested With Priority\",\"es\":\"Servicio solicitado con prioridad\",\"fr\":\"Maintenance à effectuer en priorité\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "model_other",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Model\",\"es\":\"Modelo\"}}"
+        "_value": "{\"text\":{\"default\":\"Model\",\"es\":\"Modelo\",\"fr\":\"Modèle\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "models_common",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"common_models\",\"data_value\":\"M51\",\"display\":{\"title\":{\"text\":{\"default\":\"V 170 GE\",\"es\":\"V 170 GE\"}}},\"_row_num\":29},{\"choice_list_name\":\"common_models\",\"data_value\":\"M19\",\"display\":{\"title\":{\"text\":{\"default\":\"GBC-340\",\"es\":\"GBC-340\"}}},\"_row_num\":30},{\"choice_list_name\":\"common_models\",\"data_value\":\"M52\",\"display\":{\"title\":{\"text\":{\"default\":\"V 170 EK\",\"es\":\"V 170 EK\"}}},\"_row_num\":31},{\"choice_list_name\":\"common_models\",\"data_value\":\"M11\",\"display\":{\"title\":{\"text\":{\"default\":\"MK304\",\"es\":\"MK304\"}}},\"_row_num\":32},{\"choice_list_name\":\"common_models\",\"data_value\":\"M58\",\"display\":{\"title\":{\"text\":{\"default\":\"RCW 50 EK\",\"es\":\"RCW 50 EK\"}}},\"_row_num\":33},{\"choice_list_name\":\"common_models\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":34}]"
+        "_value": "[{\"choice_list_name\":\"common_models\",\"data_value\":\"M51\",\"display\":{\"title\":{\"text\":{\"default\":\"V 170 GE\",\"es\":\"V 170 GE\",\"fr\":\"V 170 GE\"}}},\"_row_num\":29},{\"choice_list_name\":\"common_models\",\"data_value\":\"M19\",\"display\":{\"title\":{\"text\":{\"default\":\"GBC-340\",\"es\":\"GBC-340\",\"fr\":\"GBC-340\"}}},\"_row_num\":30},{\"choice_list_name\":\"common_models\",\"data_value\":\"M52\",\"display\":{\"title\":{\"text\":{\"default\":\"V 170 EK\",\"es\":\"V 170 EK\",\"fr\":\"V 170 EK\"}}},\"_row_num\":31},{\"choice_list_name\":\"common_models\",\"data_value\":\"M11\",\"display\":{\"title\":{\"text\":{\"default\":\"MK304\",\"es\":\"MK304\",\"fr\":\"MK304\"}}},\"_row_num\":32},{\"choice_list_name\":\"common_models\",\"data_value\":\"M58\",\"display\":{\"title\":{\"text\":{\"default\":\"RCW 50 EK\",\"es\":\"RCW 50 EK\",\"fr\":\"RCW 50 EK\"}}},\"_row_num\":33},{\"choice_list_name\":\"common_models\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":34}]"
       },
       {
         "_partition": "Column",
         "_aspect": "models_common",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Model\",\"es\":\"Modelo\"}}"
+        "_value": "{\"text\":{\"default\":\"Model\",\"es\":\"Modelo\",\"fr\":\"Modèle\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "power_source",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"power\",\"data_value\":\"electricity\",\"display\":{\"title\":{\"text\":{\"default\":\"Electricity\",\"es\":\"Electricidad\"}}},\"_row_num\":2},{\"choice_list_name\":\"power\",\"data_value\":\"gas\",\"display\":{\"title\":{\"text\":{\"default\":\"Gas\",\"es\":\"Combustible\"}}},\"_row_num\":3},{\"choice_list_name\":\"power\",\"data_value\":\"kerosene\",\"display\":{\"title\":{\"text\":{\"default\":\"Kerosene\",\"es\":\"Queroseno\"}}},\"_row_num\":4},{\"choice_list_name\":\"power\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solár\"}}},\"_row_num\":5},{\"choice_list_name\":\"power\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":6}]"
+        "_value": "[{\"choice_list_name\":\"power\",\"data_value\":\"electricity\",\"display\":{\"title\":{\"text\":{\"default\":\"Electricity\",\"es\":\"Electricidad\",\"fr\":\"Électricité\"}}},\"_row_num\":2},{\"choice_list_name\":\"power\",\"data_value\":\"gas\",\"display\":{\"title\":{\"text\":{\"default\":\"Gas\",\"es\":\"Combustible\",\"fr\":\"Gaz\"}}},\"_row_num\":3},{\"choice_list_name\":\"power\",\"data_value\":\"kerosene\",\"display\":{\"title\":{\"text\":{\"default\":\"Kerosene\",\"es\":\"Queroseno\",\"fr\":\"Kérosène\"}}},\"_row_num\":4},{\"choice_list_name\":\"power\",\"data_value\":\"solar\",\"display\":{\"title\":{\"text\":{\"default\":\"Solar\",\"es\":\"Solár\",\"fr\":\"Énergie solaire\"}}},\"_row_num\":5},{\"choice_list_name\":\"power\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\",\"fr\":\"Source d'énergie inconnue\"}}},\"_row_num\":6}]"
       },
       {
         "_partition": "Column",
         "_aspect": "power_source",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Power Source\",\"es\":\"Fuente de Poder\"}}"
+        "_value": "{\"text\":{\"default\":\"Power Source\",\"es\":\"Fuente de Poder\",\"fr\":\"Source d'énergie\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "reason_not_working",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"needs_spare_parts\",\"display\":{\"title\":{\"text\":{\"default\":\"Needs Spare Parts\",\"es\":\"Necesita Partes\"}}},\"_row_num\":11},{\"choice_list_name\":\"reasons\",\"data_value\":\"unknown_needs_investigation\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown/Needs Investigation\",\"es\":\"Investigación desconocida / de necesidades\"}}},\"_row_num\":12},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_of_power\",\"display\":{\"title\":{\"text\":{\"default\":\"Lack of Power\",\"es\":\"Falta de poder\"}}},\"_row_num\":13},{\"choice_list_name\":\"reasons\",\"data_value\":\"awaiting_installation\",\"display\":{\"title\":{\"text\":{\"default\":\"Awaiting Installation\",\"es\":\"En espera de instalación\"}}},\"_row_num\":14},{\"choice_list_name\":\"reasons\",\"data_value\":\"awaiting_decomissioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Awaiting Decomissioning\",\"es\":\"En espera de desarme\"}}},\"_row_num\":15},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_of_tech_availability\",\"display\":{\"title\":{\"text\":{\"default\":\"Lack of Technician Availability\",\"es\":\"Falta de disponibilidad de técnicos\"}}},\"_row_num\":16},{\"choice_list_name\":\"reasons\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No aplica\"}}},\"_row_num\":17}]"
+        "_value": "[{\"choice_list_name\":\"reasons\",\"data_value\":\"needs_spare_parts\",\"display\":{\"title\":{\"text\":{\"default\":\"Needs Spare Parts\",\"es\":\"Necesita Partes\",\"fr\":\"Pièces détachées nécessaires\"}}},\"_row_num\":11},{\"choice_list_name\":\"reasons\",\"data_value\":\"unknown_needs_investigation\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown/Needs Investigation\",\"es\":\"Investigación desconocida / de necesidades\",\"fr\":\"Ne sais pas/Étude nécessaire\"}}},\"_row_num\":12},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_of_power\",\"display\":{\"title\":{\"text\":{\"default\":\"Lack of Power\",\"es\":\"Falta de poder\",\"fr\":\"Absence d'énergie\"}}},\"_row_num\":13},{\"choice_list_name\":\"reasons\",\"data_value\":\"awaiting_installation\",\"display\":{\"title\":{\"text\":{\"default\":\"Awaiting Installation\",\"es\":\"En espera de instalación\",\"fr\":\"En attente d'installation\"}}},\"_row_num\":14},{\"choice_list_name\":\"reasons\",\"data_value\":\"awaiting_decomissioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Awaiting Decomissioning\",\"es\":\"En espera de desarme\",\"fr\":\"En attente de mise hors service\"}}},\"_row_num\":15},{\"choice_list_name\":\"reasons\",\"data_value\":\"lack_of_tech_availability\",\"display\":{\"title\":{\"text\":{\"default\":\"Lack of Technician Availability\",\"es\":\"Falta de disponibilidad de técnicos\",\"fr\":\"Technicien non disponible\"}}},\"_row_num\":16},{\"choice_list_name\":\"reasons\",\"data_value\":\"not_applicable\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Applicable\",\"es\":\"No aplica\",\"fr\":\"Sans objet\"}}},\"_row_num\":17}]"
       },
       {
         "_partition": "Column",
         "_aspect": "reason_not_working",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Reason Not Working\",\"es\":\"Razon por no functionar\"}}"
+        "_value": "{\"text\":{\"default\":\"Reason Not Working\",\"es\":\"Razon por no functionar\",\"fr\":\"Raison de la panne\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "refrigerator_image",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Refrigerator Image\",\"es\":\"Imagen del refrigerador\"}}"
+        "_value": "{\"text\":{\"default\":\"Refrigerator Image\",\"es\":\"Imagen del refrigerador\",\"fr\":\"Image du réfrigérateur\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "serial_number",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Serial Number\",\"es\":\"Número de serie\"}}"
+        "_value": "{\"text\":{\"default\":\"Serial Number\",\"es\":\"Número de serie\",\"fr\":\"Numéro de série\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "solar_energy_harvesting",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":42},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":43}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\",\"fr\":\"Oui\"}}},\"_row_num\":42},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":43}]"
       },
       {
         "_partition": "Column",
         "_aspect": "solar_energy_harvesting",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Solar Energy Harvesting\",\"es\":\"Cosecha de energía solar\"}}"
+        "_value": "{\"text\":{\"default\":\"Solar Energy Harvesting\",\"es\":\"Cosecha de energía solar\",\"fr\":\"Récupération de l'énergie solaire\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "temperature_monitoring_device",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":42},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":43}]"
+        "_value": "[{\"choice_list_name\":\"yes_no\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\",\"fr\":\"Oui\"}}},\"_row_num\":42},{\"choice_list_name\":\"yes_no\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":43}]"
       },
       {
         "_partition": "Column",
         "_aspect": "temperature_monitoring_device",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Temperature Monitoring Device\",\"es\":\"Dispositivo de monitoreo de temperatura\"}}"
+        "_value": "{\"text\":{\"default\":\"Temperature Monitoring Device\",\"es\":\"Dispositivo de monitoreo de temperatura\",\"fr\":\"Dispositif de contrôle de la température\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "temperature_monitoring_device_type",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"tmd_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\"}}},\"_row_num\":50}]"
+        "_value": "[{\"choice_list_name\":\"tmd_type\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita datos\",\"fr\":\"Données nécessaires\"}}},\"_row_num\":50}]"
       },
       {
         "_partition": "Column",
         "_aspect": "temperature_monitoring_device_type",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Temperature Monitoring Device Type\",\"es\":\"Tipo de dispositivo de monitoreo de temperatura\"}}"
+        "_value": "{\"text\":{\"default\":\"Temperature Monitoring Device Type\",\"es\":\"Tipo de dispositivo de monitoreo de temperatura\",\"fr\":\"Type de dispositif de contrôle de la température\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "tracking_id",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Tracking ID\",\"es\":\"Número de seguimiento\"}}"
+        "_value": "{\"text\":{\"default\":\"Tracking ID\",\"es\":\"Número de seguimiento\",\"fr\":\"ID de suivi\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "under_warranty",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":24},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":25},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\"}}},\"_row_num\":26}]"
+        "_value": "[{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\",\"fr\":\"Oui\"}}},\"_row_num\":24},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":25},{\"choice_list_name\":\"yes_no_unknown\",\"data_value\":\"unknown\",\"display\":{\"title\":{\"text\":{\"default\":\"Unknown\",\"es\":\"Desconocido\",\"fr\":\"Ne sais pas\"}}},\"_row_num\":26}]"
       },
       {
         "_partition": "Column",
         "_aspect": "under_warranty",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Under Warranty\",\"es\":\"Bajo garantía\"}}"
+        "_value": "{\"text\":{\"default\":\"Under Warranty\",\"es\":\"Bajo garantía\",\"fr\":\"Sous garantie\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "utilization",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"current_use\",\"data_value\":\"in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"In Use\",\"es\":\"En Uso\"}}},\"_row_num\":20},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"Not In Use\",\"es\":\"No En Uso\"}}},\"_row_num\":21},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_installed\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Installed\",\"es\":\"No Instalado\"}}},\"_row_num\":22}]"
+        "_value": "[{\"choice_list_name\":\"current_use\",\"data_value\":\"in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"In Use\",\"es\":\"En Uso\",\"fr\":\"En service\"}}},\"_row_num\":20},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_in_use\",\"display\":{\"title\":{\"text\":{\"default\":\"Not In Use\",\"es\":\"No En Uso\",\"fr\":\"Hors service\"}}},\"_row_num\":21},{\"choice_list_name\":\"current_use\",\"data_value\":\"not_installed\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Installed\",\"es\":\"No Instalado\",\"fr\":\"Entreposé dans l'attente d'une destination\"}}},\"_row_num\":22}]"
       },
       {
         "_partition": "Column",
         "_aspect": "utilization",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"In Use\",\"es\":\"En uso\"}}"
+        "_value": "{\"text\":{\"default\":\"In Use\",\"es\":\"En uso\",\"fr\":\"En service\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "voltage_regulator",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"yes_no_na\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\"}}},\"_row_num\":45},{\"choice_list_name\":\"yes_no_na\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\"}}},\"_row_num\":46},{\"choice_list_name\":\"yes_no_na\",\"data_value\":\"na\",\"display\":{\"title\":{\"text\":{\"default\":\"N/A\",\"es\":\"N/A\"}}},\"_row_num\":47}]"
+        "_value": "[{\"choice_list_name\":\"yes_no_na\",\"data_value\":\"yes\",\"display\":{\"title\":{\"text\":{\"default\":\"Yes\",\"es\":\"Sí\",\"fr\":\"Oui\"}}},\"_row_num\":45},{\"choice_list_name\":\"yes_no_na\",\"data_value\":\"no\",\"display\":{\"title\":{\"text\":{\"default\":\"No\",\"es\":\"No\",\"fr\":\"Non\"}}},\"_row_num\":46},{\"choice_list_name\":\"yes_no_na\",\"data_value\":\"na\",\"display\":{\"title\":{\"text\":{\"default\":\"N/A\",\"es\":\"N/A\",\"fr\":\"s. o.\"}}},\"_row_num\":47}]"
       },
       {
         "_partition": "Column",
         "_aspect": "voltage_regulator",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Voltage Regulator\",\"es\":\"Regulador de voltaje\"}}"
+        "_value": "{\"text\":{\"default\":\"Voltage Regulator\",\"es\":\"Regulador de voltaje\",\"fr\":\"Régulateur de tension\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "voltage_regulator_functional_status",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\"}}},\"_row_num\":8},{\"choice_list_name\":\"status\",\"data_value\":\"not_functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Functioning\",\"es\":\"No Functionando\"}}},\"_row_num\":9}]"
+        "_value": "[{\"choice_list_name\":\"status\",\"data_value\":\"functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Functioning\",\"es\":\"Functionando\",\"fr\":\"Fonctionne\"}}},\"_row_num\":8},{\"choice_list_name\":\"status\",\"data_value\":\"not_functioning\",\"display\":{\"title\":{\"text\":{\"default\":\"Not Functioning\",\"es\":\"No Functionando\",\"fr\":\"Ne fonctionne pas\"}}},\"_row_num\":9}]"
       },
       {
         "_partition": "Column",
         "_aspect": "voltage_regulator_functional_status",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Voltage Regulator Functional\",\"es\":\"Regulador de voltaje funcional\"}}"
+        "_value": "{\"text\":{\"default\":\"Voltage Regulator Functional\",\"es\":\"Regulador de voltaje funcional\",\"fr\":\"Régulateur de tension en état de marche\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "warranty_service_provider_contact",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Warranty Service Provider Contact\",\"es\":\"Contacto del proveedor de servicios de garantía\"}}"
+        "_value": "{\"text\":{\"default\":\"Warranty Service Provider Contact\",\"es\":\"Contacto del proveedor de servicios de garantía\",\"fr\":\"Coordonnées du prestataire de services dans le cadre de la garantie\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "warranty_service_provider_name",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Warranty Service Provider Name\",\"es\":\"Nombre del proveedor de servicios de garantía\"}}"
+        "_value": "{\"text\":{\"default\":\"Warranty Service Provider Name\",\"es\":\"Nombre del proveedor de servicios de garantía\",\"fr\":\"Nom du prestataire de services dans le cadre de la garantie\"}}"
       },
       {
         "_partition": "Column",
         "_aspect": "year",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Year Installed\",\"es\":\"Año de instalacion\"}}"
+        "_value": "{\"text\":{\"default\":\"Year Installed\",\"es\":\"Año de instalacion\",\"fr\":\"Année d'installation\"}}"
       },
       {
         "_partition": "FormType",
@@ -4001,7 +4239,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Refrigerators\",\"es\":\"Frigoríficos\"}}"
+        "_value": "{\"text\":{\"default\":\"Refrigerators\",\"es\":\"Frigoríficos\",\"fr\":\"Réfrigérateurs\"}}"
       },
       {
         "_partition": "Table",

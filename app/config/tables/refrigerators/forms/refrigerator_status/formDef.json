@@ -13,13 +13,15 @@
           "title": {
             "text": {
               "default": "In Use",
-              "es": "En uso"
+              "es": "En uso",
+              "fr": "En service"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose the current use status:",
-              "es": "¿En uso?"
+              "es": "¿En uso?",
+              "fr": "Choisir l'état actuel de fonctionnement :"
             }
           }
         },
@@ -33,13 +35,15 @@
           "title": {
             "text": {
               "default": "Functional Status",
-              "es": "Functionando"
+              "es": "Functionando",
+              "fr": "État de fonctionnement"
             }
           },
           "prompt": {
             "text": {
               "default": "Functional status:",
-              "es": "¿Functionando?"
+              "es": "¿Functionando?",
+              "fr": "État de fonctionnement :"
             }
           }
         },
@@ -53,13 +57,15 @@
           "title": {
             "text": {
               "default": "Reason Not Working",
-              "es": "Razon por no functionar"
+              "es": "Razon por no functionar",
+              "fr": "Raison de la panne"
             }
           },
           "prompt": {
             "text": {
               "default": "Reason not working:",
-              "es": "Razon por no functionar"
+              "es": "Razon por no functionar",
+              "fr": "Raison de la panne :"
             }
           }
         },
@@ -73,13 +79,15 @@
           "title": {
             "text": {
               "default": "Service Requested With Priority",
-              "es": "Servicio solicitado con prioridad"
+              "es": "Servicio solicitado con prioridad",
+              "fr": "Maintenance prioritaire"
             }
           },
           "prompt": {
             "text": {
               "default": "Choose priority for maintenance if applicable:",
-              "es": "Seleccione la prioridad de mantenimiento si corresponde:"
+              "es": "Seleccione la prioridad de mantenimiento si corresponde:",
+              "fr": "Choisir la maintenance prioritaire, le cas échéant :"
             }
           }
         },
@@ -98,7 +106,8 @@
           "title": {
             "text": {
               "default": "Functioning",
-              "es": "Functionando"
+              "es": "Functionando",
+              "fr": "Fonctionne"
             }
           }
         },
@@ -111,7 +120,8 @@
           "title": {
             "text": {
               "default": "Not Functioning",
-              "es": "No Functionando"
+              "es": "No Functionando",
+              "fr": "Ne fonctionne pas"
             }
           }
         },
@@ -124,7 +134,8 @@
           "title": {
             "text": {
               "default": "Needs Spare Parts",
-              "es": "Necesita Partes"
+              "es": "Necesita Partes",
+              "fr": "Pièces détachées nécessaires"
             }
           }
         },
@@ -137,7 +148,8 @@
           "title": {
             "text": {
               "default": "Unknown/Needs Investigation",
-              "es": "Investigación desconocida / de necesidades"
+              "es": "Investigación desconocida / de necesidades",
+              "fr": "Ne sais pas/Étude nécessaire"
             }
           }
         },
@@ -150,7 +162,8 @@
           "title": {
             "text": {
               "default": "Lack of Power",
-              "es": "Falta de poder"
+              "es": "Falta de poder",
+              "fr": "Absence d'énergie"
             }
           }
         },
@@ -163,7 +176,8 @@
           "title": {
             "text": {
               "default": "Awaiting Installation",
-              "es": "En espera de instalación"
+              "es": "En espera de instalación",
+              "fr": "Installation en attente"
             }
           }
         },
@@ -176,7 +190,8 @@
           "title": {
             "text": {
               "default": "Awaiting Decomissioning",
-              "es": "En espera de desarme"
+              "es": "En espera de desarme",
+              "fr": "Mise hors service en attente"
             }
           }
         },
@@ -189,7 +204,8 @@
           "title": {
             "text": {
               "default": "Lack of Technician Availability",
-              "es": "Falta de disponibilidad de técnicos"
+              "es": "Falta de disponibilidad de técnicos",
+              "fr": "Technicien non disponible"
             }
           }
         },
@@ -202,7 +218,8 @@
           "title": {
             "text": {
               "default": "Not Applicable",
-              "es": "No aplica"
+              "es": "No aplica",
+              "fr": "Sans objet"
             }
           }
         },
@@ -215,7 +232,8 @@
           "title": {
             "text": {
               "default": "In Use",
-              "es": "En Uso"
+              "es": "En Uso",
+              "fr": "En service"
             }
           }
         },
@@ -228,7 +246,8 @@
           "title": {
             "text": {
               "default": "Not In Use",
-              "es": "No En Uso"
+              "es": "No En Uso",
+              "fr": "Pas en service"
             }
           }
         },
@@ -241,7 +260,8 @@
           "title": {
             "text": {
               "default": "Not Installed",
-              "es": "No Instalado"
+              "es": "No Instalado",
+              "fr": "Entreposé dans l'attente d'une destination"
             }
           }
         },
@@ -254,7 +274,8 @@
           "title": {
             "text": {
               "default": "Not Applicable",
-              "es": "No Aplica"
+              "es": "No Aplica",
+              "fr": "Sans objet"
             }
           }
         },
@@ -267,7 +288,8 @@
           "title": {
             "text": {
               "default": "Low",
-              "es": "Bajo"
+              "es": "Bajo",
+              "fr": "Faible"
             }
           }
         },
@@ -280,7 +302,8 @@
           "title": {
             "text": {
               "default": "Medium",
-              "es": "Medio"
+              "es": "Medio",
+              "fr": "Moyen"
             }
           }
         },
@@ -293,7 +316,8 @@
           "title": {
             "text": {
               "default": "High",
-              "es": "Alto"
+              "es": "Alto",
+              "fr": "Élevé"
             }
           }
         },
@@ -322,7 +346,8 @@
           "title": {
             "text": {
               "default": "Refrigerator Status",
-              "es": "Estado del Refrigerador"
+              "es": "Estado del Refrigerador",
+              "fr": "État du réfrigérateur"
             }
           }
         },
@@ -339,7 +364,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -351,11 +377,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Francais"
+            }
+          }
+        },
+        "_row_num": 9
       }
     ]
   },
@@ -397,7 +437,8 @@
           "title": {
             "text": {
               "default": "Refrigerator Status",
-              "es": "Estado del Refrigerador"
+              "es": "Estado del Refrigerador",
+              "fr": "État du réfrigérateur"
             }
           }
         },
@@ -414,7 +455,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -426,11 +468,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      "fr": {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Francais"
+            }
+          }
+        },
+        "_row_num": 9
       },
       "_locales": {
         "setting_name": "_locales",
@@ -441,12 +497,26 @@
               "locale": {
                 "text": {
                   "default": "Spanish",
-                  "es": "Español"
+                  "es": "Español",
+                  "fr": "Espagnol"
                 }
               }
             },
             "_row_num": 8,
             "name": "es"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "default": "French",
+                  "es": "Francés",
+                  "fr": "Francais"
+                }
+              }
+            },
+            "_row_num": 9,
+            "name": "fr"
           },
           {
             "display": {
@@ -469,7 +539,8 @@
           "title": {
             "text": {
               "default": "Refrigerator Status",
-              "es": "Estado del Refrigerador"
+              "es": "Estado del Refrigerador",
+              "fr": "État du réfrigérateur"
             }
           }
         },
@@ -485,7 +556,8 @@
             "title": {
               "text": {
                 "default": "Functioning",
-                "es": "Functionando"
+                "es": "Functionando",
+                "fr": "Fonctionne"
               }
             }
           },
@@ -498,7 +570,8 @@
             "title": {
               "text": {
                 "default": "Not Functioning",
-                "es": "No Functionando"
+                "es": "No Functionando",
+                "fr": "Ne fonctionne pas"
               }
             }
           },
@@ -513,7 +586,8 @@
             "title": {
               "text": {
                 "default": "Needs Spare Parts",
-                "es": "Necesita Partes"
+                "es": "Necesita Partes",
+                "fr": "Pièces détachées nécessaires"
               }
             }
           },
@@ -526,7 +600,8 @@
             "title": {
               "text": {
                 "default": "Unknown/Needs Investigation",
-                "es": "Investigación desconocida / de necesidades"
+                "es": "Investigación desconocida / de necesidades",
+                "fr": "Ne sais pas/Étude nécessaire"
               }
             }
           },
@@ -539,7 +614,8 @@
             "title": {
               "text": {
                 "default": "Lack of Power",
-                "es": "Falta de poder"
+                "es": "Falta de poder",
+                "fr": "Absence d'énergie"
               }
             }
           },
@@ -552,7 +628,8 @@
             "title": {
               "text": {
                 "default": "Awaiting Installation",
-                "es": "En espera de instalación"
+                "es": "En espera de instalación",
+                "fr": "Installation en attente"
               }
             }
           },
@@ -565,7 +642,8 @@
             "title": {
               "text": {
                 "default": "Awaiting Decomissioning",
-                "es": "En espera de desarme"
+                "es": "En espera de desarme",
+                "fr": "Mise hors service en attente"
               }
             }
           },
@@ -578,7 +656,8 @@
             "title": {
               "text": {
                 "default": "Lack of Technician Availability",
-                "es": "Falta de disponibilidad de técnicos"
+                "es": "Falta de disponibilidad de técnicos",
+                "fr": "Technicien non disponible"
               }
             }
           },
@@ -591,7 +670,8 @@
             "title": {
               "text": {
                 "default": "Not Applicable",
-                "es": "No aplica"
+                "es": "No aplica",
+                "fr": "Sans objet"
               }
             }
           },
@@ -606,7 +686,8 @@
             "title": {
               "text": {
                 "default": "In Use",
-                "es": "En Uso"
+                "es": "En Uso",
+                "fr": "En service"
               }
             }
           },
@@ -619,7 +700,8 @@
             "title": {
               "text": {
                 "default": "Not In Use",
-                "es": "No En Uso"
+                "es": "No En Uso",
+                "fr": "Pas en service"
               }
             }
           },
@@ -632,7 +714,8 @@
             "title": {
               "text": {
                 "default": "Not Installed",
-                "es": "No Instalado"
+                "es": "No Instalado",
+                "fr": "Entreposé dans l'attente d'une destination"
               }
             }
           },
@@ -647,7 +730,8 @@
             "title": {
               "text": {
                 "default": "Not Applicable",
-                "es": "No Aplica"
+                "es": "No Aplica",
+                "fr": "Sans objet"
               }
             }
           },
@@ -660,7 +744,8 @@
             "title": {
               "text": {
                 "default": "Low",
-                "es": "Bajo"
+                "es": "Bajo",
+                "fr": "Faible"
               }
             }
           },
@@ -673,7 +758,8 @@
             "title": {
               "text": {
                 "default": "Medium",
-                "es": "Medio"
+                "es": "Medio",
+                "fr": "Moyen"
               }
             }
           },
@@ -686,7 +772,8 @@
             "title": {
               "text": {
                 "default": "High",
-                "es": "Alto"
+                "es": "Alto",
+                "fr": "Élevé"
               }
             }
           },
@@ -708,7 +795,8 @@
         "displayName": {
           "text": {
             "default": "In Use",
-            "es": "En uso"
+            "es": "En uso",
+            "fr": "En service"
           }
         },
         "valuesList": "current_use",
@@ -725,7 +813,8 @@
         "displayName": {
           "text": {
             "default": "Functional Status",
-            "es": "Functionando"
+            "es": "Functionando",
+            "fr": "État de fonctionnement"
           }
         },
         "valuesList": "status",
@@ -742,7 +831,8 @@
         "displayName": {
           "text": {
             "default": "Reason Not Working",
-            "es": "Razon por no functionar"
+            "es": "Razon por no functionar",
+            "fr": "Raison de la panne"
           }
         },
         "valuesList": "reasons",
@@ -759,7 +849,8 @@
         "displayName": {
           "text": {
             "default": "Service Requested With Priority",
-            "es": "Servicio solicitado con prioridad"
+            "es": "Servicio solicitado con prioridad",
+            "fr": "Maintenance prioritaire"
           }
         },
         "valuesList": "service_priority_list",
@@ -784,13 +875,15 @@
               "title": {
                 "text": {
                   "default": "In Use",
-                  "es": "En uso"
+                  "es": "En uso",
+                  "fr": "En service"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose the current use status:",
-                  "es": "¿En uso?"
+                  "es": "¿En uso?",
+                  "fr": "Choisir l'état actuel de fonctionnement :"
                 }
               }
             },
@@ -809,13 +902,15 @@
               "title": {
                 "text": {
                   "default": "Functional Status",
-                  "es": "Functionando"
+                  "es": "Functionando",
+                  "fr": "État de fonctionnement"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Functional status:",
-                  "es": "¿Functionando?"
+                  "es": "¿Functionando?",
+                  "fr": "État de fonctionnement :"
                 }
               }
             },
@@ -834,13 +929,15 @@
               "title": {
                 "text": {
                   "default": "Reason Not Working",
-                  "es": "Razon por no functionar"
+                  "es": "Razon por no functionar",
+                  "fr": "Raison de la panne"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Reason not working:",
-                  "es": "Razon por no functionar"
+                  "es": "Razon por no functionar",
+                  "fr": "Raison de la panne :"
                 }
               }
             },
@@ -859,13 +956,15 @@
               "title": {
                 "text": {
                   "default": "Service Requested With Priority",
-                  "es": "Servicio solicitado con prioridad"
+                  "es": "Servicio solicitado con prioridad",
+                  "fr": "Maintenance prioritaire"
                 }
               },
               "prompt": {
                 "text": {
                   "default": "Choose priority for maintenance if applicable:",
-                  "es": "Seleccione la prioridad de mantenimiento si corresponde:"
+                  "es": "Seleccione la prioridad de mantenimiento si corresponde:",
+                  "fr": "Choisir la maintenance prioritaire, le cas échéant :"
                 }
               }
             },
@@ -962,7 +1061,8 @@
               "title": {
                 "text": {
                   "default": "Refrigerator Status",
-                  "es": "Estado del Refrigerador"
+                  "es": "Estado del Refrigerador",
+                  "fr": "État du réfrigérateur"
                 }
               }
             },
@@ -1124,7 +1224,8 @@
         "displayName": {
           "text": {
             "default": "In Use",
-            "es": "En uso"
+            "es": "En uso",
+            "fr": "En service"
           }
         },
         "valuesList": "current_use",
@@ -1144,7 +1245,8 @@
         "displayName": {
           "text": {
             "default": "Functional Status",
-            "es": "Functionando"
+            "es": "Functionando",
+            "fr": "État de fonctionnement"
           }
         },
         "valuesList": "status",
@@ -1164,7 +1266,8 @@
         "displayName": {
           "text": {
             "default": "Reason Not Working",
-            "es": "Razon por no functionar"
+            "es": "Razon por no functionar",
+            "fr": "Raison de la panne"
           }
         },
         "valuesList": "reasons",
@@ -1184,7 +1287,8 @@
         "displayName": {
           "text": {
             "default": "Service Requested With Priority",
-            "es": "Servicio solicitado con prioridad"
+            "es": "Servicio solicitado con prioridad",
+            "fr": "Maintenance prioritaire"
           }
         },
         "valuesList": "service_priority_list",

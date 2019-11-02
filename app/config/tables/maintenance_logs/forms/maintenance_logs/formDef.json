@@ -23,7 +23,8 @@
           "prompt": {
             "text": {
               "default": "Enter the ID of the refrigerator",
-              "es": "Por favor entre el ID del frigorífico"
+              "es": "Por favor entre el ID del frigorífico",
+              "fr": "Entrer l'ID du réfrigérateur"
             }
           }
         },
@@ -48,7 +49,8 @@
           "prompt": {
             "text": {
               "default": "Who performed the service?",
-              "es": "¿Quién realizó el servicio?"
+              "es": "¿Quién realizó el servicio?",
+              "fr": "Qui a effectué la maintenance ?"
             }
           }
         },
@@ -67,7 +69,8 @@
           "prompt": {
             "text": {
               "default": "Enter technician name",
-              "es": "Ingrese el nombre del técnico"
+              "es": "Ingrese el nombre del técnico",
+              "fr": "Entrer le nom du technicien"
             }
           }
         },
@@ -90,7 +93,8 @@
           "prompt": {
             "text": {
               "default": "Take a picture",
-              "es": "Toma una foto"
+              "es": "Toma una foto",
+              "fr": "Prendre une photo"
             }
           }
         },
@@ -113,7 +117,8 @@
           "prompt": {
             "text": {
               "default": "Enter the date of last service",
-              "es": "Fecha  del último servicio"
+              "es": "Fecha  del último servicio",
+              "fr": "Entrer la date de la dernière maintenance"
             }
           }
         },
@@ -132,7 +137,8 @@
           "prompt": {
             "text": {
               "default": "Enter the next date serviced",
-              "es": "Ingrese la próxima fecha de servicio"
+              "es": "Ingrese la próxima fecha de servicio",
+              "fr": "Entrer la date de la prochaine maintenance"
             }
           }
         },
@@ -151,7 +157,8 @@
           "prompt": {
             "text": {
               "default": "Enter any extra notes",
-              "es": "Notas extras"
+              "es": "Notas extras",
+              "fr": "Entrer éventuellement des notes supplémentaires"
             }
           }
         },
@@ -171,7 +178,8 @@
           "prompt": {
             "text": {
               "default": "Select type of maintenance",
-              "es": "Seleccione el tipo de mantenimiento"
+              "es": "Seleccione el tipo de mantenimiento",
+              "fr": "Sélectionner le type de maintenance"
             }
           }
         },
@@ -196,7 +204,8 @@
           "prompt": {
             "text": {
               "default": "Select type of repair",
-              "es": "Seleccione tipo de reparación"
+              "es": "Seleccione tipo de reparación",
+              "fr": "Sélectionner le type de réparation"
             }
           }
         },
@@ -225,7 +234,8 @@
           "prompt": {
             "text": {
               "default": "Select type of maintenance",
-              "es": "Seleccione tipo de mantenimiento"
+              "es": "Seleccione tipo de mantenimiento",
+              "fr": "Sélectionner le type de maintenance"
             }
           }
         },
@@ -257,7 +267,8 @@
           "prompt": {
             "text": {
               "default": "Select spare part category",
-              "es": "Seleccione la categoría de repuestos"
+              "es": "Seleccione la categoría de repuestos",
+              "fr": "Sélectionner des pièces détachées"
             }
           }
         },
@@ -450,7 +461,8 @@
           "prompt": {
             "text": {
               "default": "Make a list of spare parts",
-              "es": "Haga una lista de repuestos"
+              "es": "Haga una lista de repuestos",
+              "fr": "Faire une liste des pièces détachées"
             }
           }
         },
@@ -469,7 +481,8 @@
           "title": {
             "text": {
               "default": "Repair",
-              "es": "Reparar"
+              "es": "Reparar",
+              "fr": "Réparation"
             }
           }
         },
@@ -482,7 +495,8 @@
           "title": {
             "text": {
               "default": "Preventative",
-              "es": "Preventivo"
+              "es": "Preventivo",
+              "fr": "Maintenance préventive"
             }
           }
         },
@@ -495,7 +509,8 @@
           "title": {
             "text": {
               "default": "Other",
-              "es": "Otro"
+              "es": "Otro",
+              "fr": "Autre"
             }
           }
         },
@@ -508,7 +523,8 @@
           "title": {
             "text": {
               "default": "Warranty/Service Provider",
-              "es": "Garantía / Proveedor de Servicios"
+              "es": "Garantía / Proveedor de Servicios",
+              "fr": "Garantie/prestataire de services"
             }
           }
         },
@@ -521,7 +537,8 @@
           "title": {
             "text": {
               "default": "CCE Technician",
-              "es": "CCE Técnico"
+              "es": "CCE Técnico",
+              "fr": "Technicien CCE"
             }
           }
         },
@@ -534,7 +551,8 @@
           "title": {
             "text": {
               "default": "Facility Staff",
-              "es": "Personal de las Facilidades"
+              "es": "Personal de las Facilidades",
+              "fr": "Personnel de l'établissement"
             }
           }
         },
@@ -547,7 +565,8 @@
           "title": {
             "text": {
               "default": "Charging Cylinder",
-              "es": "Cilindro de carga"
+              "es": "Cilindro de carga",
+              "fr": "Réservoir de fluide frigorigène"
             }
           }
         },
@@ -560,7 +579,8 @@
           "title": {
             "text": {
               "default": "Condenser Fan",
-              "es": "Ventilador Condensador"
+              "es": "Ventilador Condensador",
+              "fr": "Ventilateur de condenseur"
             }
           }
         },
@@ -573,7 +593,8 @@
           "title": {
             "text": {
               "default": "Door Gasket",
-              "es": "La Junta de la Puerta"
+              "es": "La Junta de la Puerta",
+              "fr": "Joint d'étanchéité de porte"
             }
           }
         },
@@ -586,7 +607,8 @@
           "title": {
             "text": {
               "default": "Electric Compressor",
-              "es": "Compresor Eléctrico"
+              "es": "Compresor Eléctrico",
+              "fr": "Compresseur électrique"
             }
           }
         },
@@ -599,7 +621,8 @@
           "title": {
             "text": {
               "default": "Fridge Tag",
-              "es": "Etiqueta Frigorífico"
+              "es": "Etiqueta Frigorífico",
+              "fr": "Enregistreur de température pour réfrigérateur"
             }
           }
         },
@@ -612,7 +635,8 @@
           "title": {
             "text": {
               "default": "Relay",
-              "es": "Relé"
+              "es": "Relé",
+              "fr": "Relais"
             }
           }
         },
@@ -625,7 +649,8 @@
           "title": {
             "text": {
               "default": "Rotary Fan",
-              "es": "Ventilador Rotatorio"
+              "es": "Ventilador Rotatorio",
+              "fr": "Extracteur d'air rotatif"
             }
           }
         },
@@ -638,7 +663,8 @@
           "title": {
             "text": {
               "default": "Solar Compressor",
-              "es": "Compresor Solar"
+              "es": "Compresor Solar",
+              "fr": "Compresseur à énergie solaire"
             }
           }
         },
@@ -651,7 +677,8 @@
           "title": {
             "text": {
               "default": "Thermostat",
-              "es": "Termostato"
+              "es": "Termostato",
+              "fr": "Thermostat"
             }
           }
         },
@@ -664,7 +691,8 @@
           "title": {
             "text": {
               "default": "Fridge Dryer",
-              "es": "Secador de Refrigerador"
+              "es": "Secador de Refrigerador",
+              "fr": "Séchoir pour réfrigérateur"
             }
           }
         },
@@ -677,7 +705,8 @@
           "title": {
             "text": {
               "default": "Electronic Control Unit",
-              "es": "Unidad de Control Electrónico"
+              "es": "Unidad de Control Electrónico",
+              "fr": "Unité de commande électronique"
             }
           }
         },
@@ -690,7 +719,8 @@
           "title": {
             "text": {
               "default": "Hinges",
-              "es": "Bisagra"
+              "es": "Bisagra",
+              "fr": "Charnières"
             }
           }
         },
@@ -703,7 +733,8 @@
           "title": {
             "text": {
               "default": "Need Data",
-              "es": "Necesita Datos"
+              "es": "Necesita Datos",
+              "fr": "Données nécessaires"
             }
           }
         },
@@ -714,7 +745,10 @@
         "data_value": "clean_solar_panels",
         "display": {
           "title": {
-            "text": "Clean solar panels"
+            "text": {
+              "default": "Clean solar panels",
+              "fr": "Panneaux solaires propres"
+            }
           }
         },
         "_row_num": 25
@@ -724,7 +758,10 @@
         "data_value": "clean_coils",
         "display": {
           "title": {
-            "text": "Clean coils"
+            "text": {
+              "default": "Clean coils",
+              "fr": "Serpentins propres"
+            }
           }
         },
         "_row_num": 26
@@ -736,7 +773,8 @@
           "title": {
             "text": {
               "default": "Need Data",
-              "es": "Necesita Datos"
+              "es": "Necesita Datos",
+              "fr": "Données nécessaires"
             }
           }
         },
@@ -1540,7 +1578,8 @@
           "title": {
             "text": {
               "default": "Maintenance Logs",
-              "es": "Registro de Servicio"
+              "es": "Registro de Servicio",
+              "fr": "Registres de maintenance"
             }
           }
         },
@@ -1562,7 +1601,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -1574,11 +1614,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Francais"
+            }
+          }
+        },
+        "_row_num": 9
       }
     ],
     "properties": [
@@ -1673,7 +1727,8 @@
           "title": {
             "text": {
               "default": "Maintenance Logs",
-              "es": "Registro de Servicio"
+              "es": "Registro de Servicio",
+              "fr": "Registres de maintenance"
             }
           }
         },
@@ -1695,7 +1750,8 @@
           "locale": {
             "text": {
               "default": "English",
-              "es": "Inglés"
+              "es": "Inglés",
+              "fr": "Anglais"
             }
           }
         },
@@ -1707,11 +1763,25 @@
           "locale": {
             "text": {
               "default": "Spanish",
-              "es": "Español"
+              "es": "Español",
+              "fr": "Espagnol"
             }
           }
         },
         "_row_num": 8
+      },
+      "fr": {
+        "setting_name": "fr",
+        "display": {
+          "locale": {
+            "text": {
+              "default": "French",
+              "es": "Francés",
+              "fr": "Francais"
+            }
+          }
+        },
+        "_row_num": 9
       },
       "_locales": {
         "setting_name": "_locales",
@@ -1722,12 +1792,26 @@
               "locale": {
                 "text": {
                   "default": "Spanish",
-                  "es": "Español"
+                  "es": "Español",
+                  "fr": "Espagnol"
                 }
               }
             },
             "_row_num": 8,
             "name": "es"
+          },
+          {
+            "display": {
+              "locale": {
+                "text": {
+                  "default": "French",
+                  "es": "Francés",
+                  "fr": "Francais"
+                }
+              }
+            },
+            "_row_num": 9,
+            "name": "fr"
           },
           {
             "display": {
@@ -1750,7 +1834,8 @@
           "title": {
             "text": {
               "default": "Maintenance Logs",
-              "es": "Registro de Servicio"
+              "es": "Registro de Servicio",
+              "fr": "Registres de maintenance"
             }
           }
         },
@@ -1766,7 +1851,8 @@
             "title": {
               "text": {
                 "default": "Repair",
-                "es": "Reparar"
+                "es": "Reparar",
+                "fr": "Réparation"
               }
             }
           },
@@ -1779,7 +1865,8 @@
             "title": {
               "text": {
                 "default": "Preventative",
-                "es": "Preventivo"
+                "es": "Preventivo",
+                "fr": "Maintenance préventive"
               }
             }
           },
@@ -1792,7 +1879,8 @@
             "title": {
               "text": {
                 "default": "Other",
-                "es": "Otro"
+                "es": "Otro",
+                "fr": "Autre"
               }
             }
           },
@@ -1807,7 +1895,8 @@
             "title": {
               "text": {
                 "default": "Warranty/Service Provider",
-                "es": "Garantía / Proveedor de Servicios"
+                "es": "Garantía / Proveedor de Servicios",
+                "fr": "Garantie/prestataire de services"
               }
             }
           },
@@ -1820,7 +1909,8 @@
             "title": {
               "text": {
                 "default": "CCE Technician",
-                "es": "CCE Técnico"
+                "es": "CCE Técnico",
+                "fr": "Technicien CCE"
               }
             }
           },
@@ -1833,7 +1923,8 @@
             "title": {
               "text": {
                 "default": "Facility Staff",
-                "es": "Personal de las Facilidades"
+                "es": "Personal de las Facilidades",
+                "fr": "Personnel de l'établissement"
               }
             }
           },
@@ -1848,7 +1939,8 @@
             "title": {
               "text": {
                 "default": "Charging Cylinder",
-                "es": "Cilindro de carga"
+                "es": "Cilindro de carga",
+                "fr": "Réservoir de fluide frigorigène"
               }
             }
           },
@@ -1861,7 +1953,8 @@
             "title": {
               "text": {
                 "default": "Condenser Fan",
-                "es": "Ventilador Condensador"
+                "es": "Ventilador Condensador",
+                "fr": "Ventilateur de condenseur"
               }
             }
           },
@@ -1874,7 +1967,8 @@
             "title": {
               "text": {
                 "default": "Door Gasket",
-                "es": "La Junta de la Puerta"
+                "es": "La Junta de la Puerta",
+                "fr": "Joint d'étanchéité de porte"
               }
             }
           },
@@ -1887,7 +1981,8 @@
             "title": {
               "text": {
                 "default": "Electric Compressor",
-                "es": "Compresor Eléctrico"
+                "es": "Compresor Eléctrico",
+                "fr": "Compresseur électrique"
               }
             }
           },
@@ -1900,7 +1995,8 @@
             "title": {
               "text": {
                 "default": "Fridge Tag",
-                "es": "Etiqueta Frigorífico"
+                "es": "Etiqueta Frigorífico",
+                "fr": "Enregistreur de température pour réfrigérateur"
               }
             }
           },
@@ -1913,7 +2009,8 @@
             "title": {
               "text": {
                 "default": "Relay",
-                "es": "Relé"
+                "es": "Relé",
+                "fr": "Relais"
               }
             }
           },
@@ -1926,7 +2023,8 @@
             "title": {
               "text": {
                 "default": "Rotary Fan",
-                "es": "Ventilador Rotatorio"
+                "es": "Ventilador Rotatorio",
+                "fr": "Extracteur d'air rotatif"
               }
             }
           },
@@ -1939,7 +2037,8 @@
             "title": {
               "text": {
                 "default": "Solar Compressor",
-                "es": "Compresor Solar"
+                "es": "Compresor Solar",
+                "fr": "Compresseur à énergie solaire"
               }
             }
           },
@@ -1952,7 +2051,8 @@
             "title": {
               "text": {
                 "default": "Thermostat",
-                "es": "Termostato"
+                "es": "Termostato",
+                "fr": "Thermostat"
               }
             }
           },
@@ -1965,7 +2065,8 @@
             "title": {
               "text": {
                 "default": "Fridge Dryer",
-                "es": "Secador de Refrigerador"
+                "es": "Secador de Refrigerador",
+                "fr": "Séchoir pour réfrigérateur"
               }
             }
           },
@@ -1978,7 +2079,8 @@
             "title": {
               "text": {
                 "default": "Electronic Control Unit",
-                "es": "Unidad de Control Electrónico"
+                "es": "Unidad de Control Electrónico",
+                "fr": "Unité de commande électronique"
               }
             }
           },
@@ -1991,7 +2093,8 @@
             "title": {
               "text": {
                 "default": "Hinges",
-                "es": "Bisagra"
+                "es": "Bisagra",
+                "fr": "Charnières"
               }
             }
           },
@@ -2006,7 +2109,8 @@
             "title": {
               "text": {
                 "default": "Need Data",
-                "es": "Necesita Datos"
+                "es": "Necesita Datos",
+                "fr": "Données nécessaires"
               }
             }
           },
@@ -2019,7 +2123,10 @@
           "data_value": "clean_solar_panels",
           "display": {
             "title": {
-              "text": "Clean solar panels"
+              "text": {
+                "default": "Clean solar panels",
+                "fr": "Panneaux solaires propres"
+              }
             }
           },
           "_row_num": 25
@@ -2029,7 +2136,10 @@
           "data_value": "clean_coils",
           "display": {
             "title": {
-              "text": "Clean coils"
+              "text": {
+                "default": "Clean coils",
+                "fr": "Serpentins propres"
+              }
             }
           },
           "_row_num": 26
@@ -2041,7 +2151,8 @@
             "title": {
               "text": {
                 "default": "Need Data",
-                "es": "Necesita Datos"
+                "es": "Necesita Datos",
+                "fr": "Données nécessaires"
               }
             }
           },
@@ -3223,7 +3334,8 @@
               "prompt": {
                 "text": {
                   "default": "Enter the ID of the refrigerator",
-                  "es": "Por favor entre el ID del frigorífico"
+                  "es": "Por favor entre el ID del frigorífico",
+                  "fr": "Entrer l'ID du réfrigérateur"
                 }
               }
             },
@@ -3249,7 +3361,8 @@
               "prompt": {
                 "text": {
                   "default": "Who performed the service?",
-                  "es": "¿Quién realizó el servicio?"
+                  "es": "¿Quién realizó el servicio?",
+                  "fr": "Qui a effectué la maintenance ?"
                 }
               }
             },
@@ -3273,7 +3386,8 @@
               "prompt": {
                 "text": {
                   "default": "Enter technician name",
-                  "es": "Ingrese el nombre del técnico"
+                  "es": "Ingrese el nombre del técnico",
+                  "fr": "Entrer le nom du technicien"
                 }
               }
             },
@@ -3297,7 +3411,8 @@
               "prompt": {
                 "text": {
                   "default": "Take a picture",
-                  "es": "Toma una foto"
+                  "es": "Toma una foto",
+                  "fr": "Prendre une photo"
                 }
               }
             },
@@ -3321,7 +3436,8 @@
               "prompt": {
                 "text": {
                   "default": "Enter the date of last service",
-                  "es": "Fecha  del último servicio"
+                  "es": "Fecha  del último servicio",
+                  "fr": "Entrer la date de la dernière maintenance"
                 }
               }
             },
@@ -3345,7 +3461,8 @@
               "prompt": {
                 "text": {
                   "default": "Enter the next date serviced",
-                  "es": "Ingrese la próxima fecha de servicio"
+                  "es": "Ingrese la próxima fecha de servicio",
+                  "fr": "Entrer la date de la prochaine maintenance"
                 }
               }
             },
@@ -3369,7 +3486,8 @@
               "prompt": {
                 "text": {
                   "default": "Enter any extra notes",
-                  "es": "Notas extras"
+                  "es": "Notas extras",
+                  "fr": "Entrer éventuellement des notes supplémentaires"
                 }
               }
             },
@@ -3394,7 +3512,8 @@
               "prompt": {
                 "text": {
                   "default": "Select type of maintenance",
-                  "es": "Seleccione el tipo de mantenimiento"
+                  "es": "Seleccione el tipo de mantenimiento",
+                  "fr": "Sélectionner le type de maintenance"
                 }
               }
             },
@@ -3419,7 +3538,8 @@
               "prompt": {
                 "text": {
                   "default": "Select type of repair",
-                  "es": "Seleccione tipo de reparación"
+                  "es": "Seleccione tipo de reparación",
+                  "fr": "Sélectionner le type de réparation"
                 }
               }
             },
@@ -3444,7 +3564,8 @@
               "prompt": {
                 "text": {
                   "default": "Select type of maintenance",
-                  "es": "Seleccione tipo de mantenimiento"
+                  "es": "Seleccione tipo de mantenimiento",
+                  "fr": "Sélectionner le type de maintenance"
                 }
               }
             },
@@ -3469,7 +3590,8 @@
               "prompt": {
                 "text": {
                   "default": "Select spare part category",
-                  "es": "Seleccione la categoría de repuestos"
+                  "es": "Seleccione la categoría de repuestos",
+                  "fr": "Sélectionner des pièces détachées"
                 }
               }
             },
@@ -3643,7 +3765,8 @@
               "prompt": {
                 "text": {
                   "default": "Make a list of spare parts",
-                  "es": "Haga una lista de repuestos"
+                  "es": "Haga una lista de repuestos",
+                  "fr": "Faire une liste des pièces détachées"
                 }
               }
             },
@@ -3779,7 +3902,8 @@
               "title": {
                 "text": {
                   "default": "Maintenance Logs",
-                  "es": "Registro de Servicio"
+                  "es": "Registro de Servicio",
+                  "fr": "Registres de maintenance"
                 }
               }
             },
@@ -4659,7 +4783,7 @@
         "_aspect": "serviced_by",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"serviced_by_type\",\"data_value\":\"warranty_service_provider\",\"display\":{\"title\":{\"text\":{\"default\":\"Warranty/Service Provider\",\"es\":\"Garantía / Proveedor de Servicios\"}}},\"_row_num\":6},{\"choice_list_name\":\"serviced_by_type\",\"data_value\":\"cce_technician\",\"display\":{\"title\":{\"text\":{\"default\":\"CCE Technician\",\"es\":\"CCE Técnico\"}}},\"_row_num\":7},{\"choice_list_name\":\"serviced_by_type\",\"data_value\":\"facility_staff\",\"display\":{\"title\":{\"text\":{\"default\":\"Facility Staff\",\"es\":\"Personal de las Facilidades\"}}},\"_row_num\":8}]"
+        "_value": "[{\"choice_list_name\":\"serviced_by_type\",\"data_value\":\"warranty_service_provider\",\"display\":{\"title\":{\"text\":{\"default\":\"Warranty/Service Provider\",\"es\":\"Garantía / Proveedor de Servicios\",\"fr\":\"Garantie/prestataire de services\"}}},\"_row_num\":6},{\"choice_list_name\":\"serviced_by_type\",\"data_value\":\"cce_technician\",\"display\":{\"title\":{\"text\":{\"default\":\"CCE Technician\",\"es\":\"CCE Técnico\",\"fr\":\"Technicien CCE\"}}},\"_row_num\":7},{\"choice_list_name\":\"serviced_by_type\",\"data_value\":\"facility_staff\",\"display\":{\"title\":{\"text\":{\"default\":\"Facility Staff\",\"es\":\"Personal de las Facilidades\",\"fr\":\"Personnel de l'établissement\"}}},\"_row_num\":8}]"
       },
       {
         "_partition": "Column",
@@ -4778,7 +4902,7 @@
         "_aspect": "type_of_maintenance",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"maint_types\",\"data_value\":\"repair\",\"display\":{\"title\":{\"text\":{\"default\":\"Repair\",\"es\":\"Reparar\"}}},\"_row_num\":2},{\"choice_list_name\":\"maint_types\",\"data_value\":\"preventative\",\"display\":{\"title\":{\"text\":{\"default\":\"Preventative\",\"es\":\"Preventivo\"}}},\"_row_num\":3},{\"choice_list_name\":\"maint_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\"}}},\"_row_num\":4}]"
+        "_value": "[{\"choice_list_name\":\"maint_types\",\"data_value\":\"repair\",\"display\":{\"title\":{\"text\":{\"default\":\"Repair\",\"es\":\"Reparar\",\"fr\":\"Réparation\"}}},\"_row_num\":2},{\"choice_list_name\":\"maint_types\",\"data_value\":\"preventative\",\"display\":{\"title\":{\"text\":{\"default\":\"Preventative\",\"es\":\"Preventivo\",\"fr\":\"Maintenance préventive\"}}},\"_row_num\":3},{\"choice_list_name\":\"maint_types\",\"data_value\":\"other\",\"display\":{\"title\":{\"text\":{\"default\":\"Other\",\"es\":\"Otro\",\"fr\":\"Autre\"}}},\"_row_num\":4}]"
       },
       {
         "_partition": "Column",
@@ -4792,7 +4916,7 @@
         "_aspect": "type_of_preventative_maintenance",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"clean_solar_panels\",\"display\":{\"title\":{\"text\":\"Clean solar panels\"}},\"_row_num\":25},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"clean_coils\",\"display\":{\"title\":{\"text\":\"Clean coils\"}},\"_row_num\":26},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita Datos\"}}},\"_row_num\":27}]"
+        "_value": "[{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"clean_solar_panels\",\"display\":{\"title\":{\"text\":{\"default\":\"Clean solar panels\",\"fr\":\"Panneaux solaires propres\"}}},\"_row_num\":25},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"clean_coils\",\"display\":{\"title\":{\"text\":{\"default\":\"Clean coils\",\"fr\":\"Serpentins propres\"}}},\"_row_num\":26},{\"choice_list_name\":\"preventative_maint_types\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita Datos\",\"fr\":\"Données nécessaires\"}}},\"_row_num\":27}]"
       },
       {
         "_partition": "Column",
@@ -4806,7 +4930,7 @@
         "_aspect": "type_of_repair",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"repair_types\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita Datos\"}}},\"_row_num\":23}]"
+        "_value": "[{\"choice_list_name\":\"repair_types\",\"data_value\":\"need_data\",\"display\":{\"title\":{\"text\":{\"default\":\"Need Data\",\"es\":\"Necesita Datos\",\"fr\":\"Données nécessaires\"}}},\"_row_num\":23}]"
       },
       {
         "_partition": "Column",
@@ -4848,7 +4972,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":{\"default\":\"Maintenance Logs\",\"es\":\"Registro de Servicio\"}}"
+        "_value": "{\"text\":{\"default\":\"Maintenance Logs\",\"es\":\"Registro de Servicio\",\"fr\":\"Registres de maintenance\"}}"
       },
       {
         "_partition": "Table",
