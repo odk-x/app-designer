@@ -3,3 +3,4 @@ build/
 app/output/props/*
 tempZipDir
 .idea/*
+node_modules
