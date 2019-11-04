@@ -2143,7 +2143,7 @@ promptTypes.birthdate = promptTypes.date.extend({
                 that.dtp.destroy();
             }
 
-            that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate, maxYear: new Date().getFullYear()});
+            that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate, maxYear: new Date().getFullYear(), hideCurrentMonth: true, hideCurrentDay: true });
 
             var inputElement = that.$('input');
             that.dtp = inputElement.data('DateTimePicker');
