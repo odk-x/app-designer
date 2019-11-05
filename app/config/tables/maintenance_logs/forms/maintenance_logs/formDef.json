@@ -1,5 +1,16 @@
 {
   "xlsx": {
+    "initial": [
+      {
+        "clause": "do section survey",
+        "_row_num": 2
+      },
+      {
+        "clause": "goto _finalize",
+        "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
+        "_row_num": 3
+      }
+    ],
     "survey": [
       {
         "clause": "begin screen",
@@ -3316,6 +3327,118 @@
       "survey"
     ],
     "sections": {
+      "initial": {
+        "section_name": "initial",
+        "nested_sections": {
+          "survey": true
+        },
+        "reachable_sections": {
+          "survey": true
+        },
+        "prompts": [
+          {
+            "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "prompt",
+            "_do_section_name": "survey",
+            "_type": "_section",
+            "promptIdx": 0,
+            "display": {
+              "title": {
+                "text": {
+                  "default": "Maintenance Logs",
+                  "es": "Registro de Servicio",
+                  "fr": "Registres de maintenance"
+                }
+              }
+            },
+            "_branch_label_enclosing_screen": "survey/0"
+          },
+          {
+            "_token_type": "prompt",
+            "type": "contents",
+            "_type": "contents",
+            "_row_num": 4,
+            "_branch_label_enclosing_screen": "initial/_screen4",
+            "promptIdx": 1
+          }
+        ],
+        "validation_tag_map": {
+          "finalize": []
+        },
+        "operations": [
+          {
+            "clause": "do section survey",
+            "_row_num": 2,
+            "__rowNum__": 1,
+            "_token_type": "do_section",
+            "_do_section_name": "survey",
+            "operationIdx": 0
+          },
+          {
+            "clause": "goto _finalize",
+            "comments": "skips the finalize screen where the user chooses to save as incomplete or finalized and instead saves as finalized",
+            "_row_num": 3,
+            "__rowNum__": 2,
+            "_token_type": "goto_label",
+            "_branch_label": "_finalize",
+            "operationIdx": 1
+          },
+          {
+            "_token_type": "exit_section",
+            "clause": "exit section",
+            "_row_num": 4,
+            "operationIdx": 2
+          },
+          {
+            "_row_num": 4,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(1);\n\nreturn activePromptIndicies;\n}\n",
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 3
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 4,
+            "operationIdx": 4
+          },
+          {
+            "_token_type": "validate",
+            "clause": "validate finalize",
+            "_sweep_name": "finalize",
+            "_row_num": 4,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 5
+          },
+          {
+            "_token_type": "save_and_terminate",
+            "clause": "save and terminate",
+            "calculation": true,
+            "_row_num": 4,
+            "screen": {
+              "hideInBackHistory": true
+            },
+            "operationIdx": 6
+          },
+          {
+            "_token_type": "resume",
+            "clause": "resume",
+            "_row_num": 4,
+            "operationIdx": 7
+          }
+        ],
+        "branch_label_map": {
+          "_contents": 3,
+          "_screen4": 3,
+          "_finalize": 5
+        }
+      },
       "survey": {
         "section_name": "survey",
         "nested_sections": {},
@@ -3869,187 +3992,6 @@
           "_screen22": 3,
           "_contents": 5,
           "_screen44": 5
-        }
-      },
-      "initial": {
-        "section_name": "initial",
-        "nested_sections": {
-          "survey": true
-        },
-        "reachable_sections": {
-          "survey": true
-        },
-        "prompts": [
-          {
-            "_row_num": 3,
-            "type": "opening",
-            "display": {
-              "text": "Edit form"
-            },
-            "_token_type": "prompt",
-            "_type": "opening",
-            "_branch_label_enclosing_screen": "initial/_screen3",
-            "promptIdx": 0
-          },
-          {
-            "_row_num": 4,
-            "clause": "do section survey",
-            "_token_type": "prompt",
-            "_do_section_name": "survey",
-            "_type": "_section",
-            "promptIdx": 1,
-            "display": {
-              "title": {
-                "text": {
-                  "default": "Maintenance Logs",
-                  "es": "Registro de Servicio",
-                  "fr": "Registres de maintenance"
-                }
-              }
-            },
-            "_branch_label_enclosing_screen": "survey/0"
-          },
-          {
-            "_row_num": 5,
-            "type": "finalize",
-            "display": {
-              "text": "Save form"
-            },
-            "_token_type": "prompt",
-            "_type": "finalize",
-            "_branch_label_enclosing_screen": "initial/_screen5",
-            "promptIdx": 2
-          },
-          {
-            "_row_num": 7,
-            "type": "instances",
-            "display": {
-              "text": "Saved instances"
-            },
-            "_token_type": "prompt",
-            "_type": "instances",
-            "_branch_label_enclosing_screen": "initial/_screen7",
-            "promptIdx": 3
-          },
-          {
-            "_token_type": "prompt",
-            "type": "contents",
-            "_type": "contents",
-            "_row_num": 9,
-            "_branch_label_enclosing_screen": "initial/_screen9",
-            "promptIdx": 4
-          }
-        ],
-        "validation_tag_map": {
-          "finalize": []
-        },
-        "operations": [
-          {
-            "_row_num": 2,
-            "clause": "if // start",
-            "condition": "(opendatakit.getCurrentInstanceId() != null)",
-            "_token_type": "goto_label",
-            "_tag_name": "start",
-            "_branch_label": "_then2",
-            "operationIdx": 0
-          },
-          {
-            "clause": "else // start",
-            "_token_type": "goto_label",
-            "_branch_label": "_else6",
-            "_row_num": 6,
-            "operationIdx": 1
-          },
-          {
-            "_row_num": 3,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
-          },
-          {
-            "_row_num": 4,
-            "clause": "do section survey",
-            "_token_type": "do_section",
-            "_do_section_name": "survey",
-            "operationIdx": 3
-          },
-          {
-            "_row_num": 5,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(2);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 4
-          },
-          {
-            "clause": "end if // start",
-            "_token_type": "goto_label",
-            "_branch_label": "_endif8",
-            "_row_num": 8,
-            "operationIdx": 5
-          },
-          {
-            "_row_num": 7,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 6
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 9,
-            "operationIdx": 7
-          },
-          {
-            "_row_num": 9,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\n\nreturn activePromptIndicies;\n}\n",
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 8
-          },
-          {
-            "_token_type": "resume",
-            "clause": "resume",
-            "_row_num": 9,
-            "operationIdx": 9
-          },
-          {
-            "_token_type": "validate",
-            "clause": "validate finalize",
-            "_sweep_name": "finalize",
-            "_row_num": 9,
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 10
-          },
-          {
-            "_token_type": "save_and_terminate",
-            "clause": "save and terminate",
-            "calculation": true,
-            "_row_num": 9,
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 11
-          },
-          {
-            "_token_type": "resume",
-            "clause": "resume",
-            "_row_num": 9,
-            "operationIdx": 12
-          }
-        ],
-        "branch_label_map": {
-          "_then2": 2,
-          "_screen3": 2,
-          "_screen5": 4,
-          "_else6": 6,
-          "_screen7": 6,
-          "_endif8": 7,
-          "_contents": 8,
-          "_screen9": 8,
-          "_finalize": 10
         }
       }
     },
